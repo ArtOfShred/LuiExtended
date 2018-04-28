@@ -1,2199 +1,2304 @@
-------------------------------------
--- LuiExtended.lua -----------------
-------------------------------------
-
-ZO_CreateStringId("SI_LUIE_ERROR_FONT",                                 "LUI Extended: There was a problem with selecting required font. Falling back to default.")
-ZO_CreateStringId("SI_LUIE_ERROR_SOUND",                                "LUI Extended: There was a problem with selecting required sound. Falling back to default.")
-
-------------------------------------
--- bindings.xml --------------------
-------------------------------------
-
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_BANKER",                "Summon Banker")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_MERCHANT",              "Summon Merchant")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_FENCE",                 "Summon Fence")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_READY_CHECK",           "Initiate Ready Check")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_HOME",                  "Teleport to Primary Home")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_REGROUP",               "Regroup (Disband & Reform)")
-
-------------------------------------
--- SlashCommands.lua ---------------
-------------------------------------
-
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE",                   "Queueing for <<1>>...")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG",               "You cannot queue for a campaign while in a battleground.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED",      "The campaign name you entered is not your home or guest campaign.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME",           "You must enter the name of your home or guest campaign to queue into.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN",    "The campaign name you entered is not a valid.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME",             "You must enter the account or character name of a player to add to friends.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME",      "You must enter the account or online character name of a player to remove from friends.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG",                "You have invited \"|cFEFEFE<<1>>|r\" to be your friend.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK",           "You have invited |cFEFEFE<<1>>|r to be your friend.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA",           "You cannot teleport to your home while in Cyrodiil.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG",            "You cannot teleport to your home while in a battleground.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT",     "You cannot teleport to your home while in combat.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME",        "You don't have a primary home set.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG",          "Teleporting to primary home...")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG",                "You cannot disband the group while in a battleground.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY",      "You cannot disband an LFG group.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOGROUP",           "You do not have a group to disband.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOTLEADER",         "You must be the group leader to disband a group.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE",      "That player is already ignored.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME",             "You must enter the account or character name of a player to add to ignored.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE",      "You must enter the account name of a player to remove from ignored.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOGROUP",              "You must be in a group to attempt to remove a party member.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_LFG",                  "You must vote to kick a party member while in an LFG group.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_SELF",                 "You cannot initiate a vote to kick yourself from the group.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME",               "You must enter the name of a party member to remove.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV",  "You must enter a valid guild number followed by an account or character name to invite to a guild.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK", "You must enter a valid guild number followed by an account or online character name to remove from a guild.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE",   "You must enter a valid guild number to leave.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME",          "Could not find target player to remove from the group.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME_GUILD",    "Could not find target player to remove from the guild.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG",                "You cannot initiate a regroup while in a battleground.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY",       "You cannot initiate a regroup while in an LFG group.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP",          "You must be in a group to initiate a regroup.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER",         "You must be the group leader to initiate a regroup.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING",           "A regroup is currently pending, please wait for the current regroup to finish before attempting another.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG",             "Reinviting group members...")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG",        "Invited → |cFFFFFF<<1>>|r")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG",                "Group saved! Disbanding...")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG",        "No party members were online or eligible for regroup. Group was not disbanded.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG",       "Group saved! <<1>> group <<2[member/members]>> <<3[was/were]>> offline, they will not be reinvited.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME",              "You must enter the name of a player to trade with.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK",       "You must be in an LFG group to initiate a vote to remove a party member.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME",           "You must enter the account or character name of a party member to initiate a vote to remove.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG",               "You cannot initiate a vote to remove a party member in a battleground.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA",             "You cannot summon an assistant in Cyrodiil.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG",              "You cannot summon an assistant in a Battleground.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED",     "You have not unlocked <<1>>.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP",       "You must be in a group to initiate a ready check.")
-
-------------------------------------
--- InfoPanel.lua -------------------
-------------------------------------
-
-ZO_CreateStringId("SI_LUIE_PNL_FEEDNOW",                                "Feed Now")
-ZO_CreateStringId("SI_LUIE_PNL_MAXED",                                  "Maxed")
-
-------------------------------------
--- SpellCastBuffs.lua --------------
-------------------------------------
-
-ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS",                "Player Buffs")
-ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS",              "Player Debuffs")
-ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS",      "Player Long Term Effects")
-ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS",                "Target Buffs")
-ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS",              "Target Debuffs")
-ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS",             "Prominent Buffs")
-ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS",           "Prominent Debuffs")
-
-------------------------------------
--- ChatAnnouncements.lua -----------
-------------------------------------
-
--- Currency
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_GOLD",                           " <<1[Gold/Gold]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_ALLIANCE_POINT",                 " <<1[Alliance Point/Alliance Points]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_TELVAR_STONE",                   " <<1[Tel Var Stone/Tel Var Stones]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_WRIT_VOUCHER",                   " <<1[Writ Voucher/Writ Vouchers]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_TRANSMUTE_CRYSTAL",              " <<1[Transmute Crystal/Transmute Crystals]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_CROWN",                          " <<1[Crown/Crowns]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_CROWN_GEM",                      " <<1[Crown Gem/Crown Gems]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS",                  " <<1[Outfit Change Token/Outfit Change Tokens]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
-
--- Duel
-ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_ACCEPTED",                    "Duel challenge accepted.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_CANCELED",                    "Duel challenge canceled.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_DECLINED",                    "Duel challenge declined.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON1",                 "|cFEFEFE<<1>>|r is not available to duel.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON2",                 GetString(SI_DUELINVITEFAILREASON2))
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON3",                 GetString(SI_DUELINVITEFAILREASON3))
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON4",                 "|cFEFEFE<<1>>|r is not available to duel because they are too far away.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON5",                 "You cannot challenge another player to duel while you have challenged |cFEFEFE<<1>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON6",                 "You cannot challenge another player to duel while responding to a duel challenge from |cFEFEFE<<1>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON7",                 "You cannot challenge another player to duel while you are already dueling |cFEFEFE<<1>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON8",                 "|cFEFEFE<<1>>|r is not available to duel because they have challenged someone else to a duel.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON9",                 "|cFEFEFE<<1>>|r is not available to duel because they are considering another duel challenge.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON10",                "|cFEFEFE<<1>>|r is not available to duel because they are dueling another player.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON11",                GetString(SI_DUELINVITEFAILREASON11))
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON12",                "|cFEFEFE<<1>>|r is not available to duel because they are dead.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON13",                GetString(SI_DUELINVITEFAILREASON13))
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON14",                "|cFEFEFE<<1>>|r is not available to duel because they are swimming.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON15",                GetString(SI_DUELINVITEFAILREASON15))
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON16",                "|cFEFEFE<<1>>|r is not available to duel because they are in combat.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON17",                GetString(SI_DUELINVITEFAILREASON17))
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON18",                "|cFEFEFE<<1>>|r is not available to duel because they are crafting.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON19",                GetString(SI_DUELINVITEFAILREASON19))
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON20",                "You cannot challenge a player to duel who has recently declined your duel challenge.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON21",                GetString(SI_DUELINVITEFAILREASON21))
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON22",                GetString(SI_DUELINVITEFAILREASON22))
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_PLAYER",                      "Challenge to Duel")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_RECEIVED",                    "|cFEFEFE<<1>>|r has challenged you to a duel.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_SENT",                        "You have challenged |cFEFEFE<<1>>|r to a duel.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_NEAR_BOUNDARY_CSA",                  "You are close to the edge of the duel area!")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_SELF_RESULT0",                       "You forfeited the duel!")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_SELF_RESULT1",                       "You won the duel!")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_RESULT0",                            "|cFEFEFE<<1>>|r forfeited the duel!")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_RESULT1",                            "|cFEFEFE<<1>>|r won the duel!")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_STARTED",                            "Duel started!")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_STARTED_WITH_ICON",                  "<<1>> Duel started!")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_STATE1",                             "You are currently waiting for a duel challenge response from |cFEFEFE<<1>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_STATE2",                             "You are currently considering a duel challenge from |cFEFEFE<<1>>|r.")
-
--- Achievements
-ZO_CreateStringId("SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG",                "Achievement Updated")
-
--- Experience
-ZO_CreateStringId("SI_LUIE_CHAMPION_POINT_TYPE",                        "<<1>><<2>> <<3>> <<1[Point/Points]>>")
-ZO_CreateStringId("SI_LUIE_CA_EXPERIENCE_MESSAGE",                      "You earn %s.")
-ZO_CreateStringId("SI_LUIE_CA_EXPERIENCE_NAME",                         "experience <<1[point/points]>>")
-ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_CP",                         "Champion Level Achieved!") -- TODO: Unused
-ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_XP",                         "You have reached")
-
--- Collectibles
-ZO_CreateStringId("SI_LUIE_CA_COLLECTIBLE",                             "Collection Updated")
-
--- Lorebooks
-ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_BOOK",                           "Book Discovered")
-ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_ADDED_CSA",                      "<<1>> added to <<2>>")
-ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_ADDED_CA",                       "added to") -- Have to add this extra string for CA, if we try to colorize the whole string with the link, it also colorizes our custom link type.
-
--- Social (Friends/Ignored)
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_ADDED",                    "|cFEFEFE<<1>>|r added to friends.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_REMOVED",                  "|cFEFEFE<<1>>|r removed from friends.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST",         "|cFEFEFE<<1>>|r wants to be your friend.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF",                 "|cFEFEFE<<1>>|r has logged off.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON",                  "|cFEFEFE<<1>>|r has logged on.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF",       "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON",        "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED",               "|cFEFEFE<<1>>|r added to ignored.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED",             "|cFEFEFE<<1>>|r removed from ignored.")
-ZO_CreateStringId("SI_LUIE_CA_PLAYER_TO_PLAYER_ALREADY_FRIEND",         "You are already friends with |cFEFEFE<<1>>|r.") -- TODO: Unused - This should have a content though?
-
--- Group (Basic)
-ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_MENU",                       "You have invited |cFEFEFE<<1>>|r to join your group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_NONAME",                     "You must enter the account or character name of a player to invite to group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE0",                    "Could not find a player named \"|cFEFEFE<<1>>|r\" to invite.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE1",                    "|cFEFEFE<<1>>|r accepted your group invitation.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE2",                    "|cFEFEFE<<1>>|r declined your group invitation.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE3",                    "|cFEFEFE<<1>>|r is ignoring you. You cannot extend a group invitation.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE4",                    "|cFEFEFE<<1>>|r already has a pending group invite.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE5",                    "|cFEFEFE<<1>>|r is already in a group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE6",                    GetString(SI_GROUPINVITERESPONSE6))
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE7",                    GetString(SI_GROUPINVITERESPONSE7))
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE8",                    "You must be the group leader to extend a group invitation.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE9",                    "|cFEFEFE<<1>>|r is a member of another alliance.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE10",                   "You have invited \"|cFEFEFE<<1>>|r\" to join your group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE11",                   GetString(SI_GROUPINVITERESPONSE11))
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE12",                   GetString(SI_GROUPINVITERESPONSE12))
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE13",                   "Unable to join |cFEFEFE<<1>>|r. The group is full.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE14",                   "Unable to join |cFEFEFE<<1>>|r. You are already in a group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE15",                   "|cFEFEFE<<1>>|r is currently in a battleground.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_LEADERKICK_ERROR",                  "You must be the group leader to remove a player from the group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE",              "|cFEFEFE<<1>>|r wants to share the quest, <<2>>, with you.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P",          "|cFEFEFE<<1>>|r wants to share the quest, |cFEFEFE<<2>>|r, with you.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_MESSAGE",                    "|cFEFEFE<<1>>|r has invited you to join a group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_LEADER_CHANGED",                    "|cFEFEFE<<1>>|r is now the group leader!")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF",               "You are now the group leader!")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_DISBAND_MSG",                "The group has been disbanded.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_JOIN",                       "|cFEFEFE<<1>>|r has joined the group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF",                  "You have joined a group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_KICKED",                     "|cFEFEFE<<1>>|r has been removed from the group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF",                 "You have left the group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_QUIT_LFG",                          "You are no longer in an LFG group.")
-ZO_CreateStringId("SI_LUIE_GROUPLEAVEREASON0",                          "|cFEFEFE<<1>>|r has left the group.")
-ZO_CreateStringId("SI_LUIE_GROUPLEAVEREASON1",                          "|cFEFEFE<<1>>|r has been removed from the group.")
-ZO_CreateStringId("SI_LUIE_GROUPLEAVEREASON2",                          "|cFEFEFE<<1>>|r has disbanded the group.")
-ZO_CreateStringId("SI_LUIE_GROUPLEAVEREASON4",                          "|cFEFEFE<<1>>|r has left the battleground.")
-ZO_CreateStringId("SI_LUIE_GROUPDISBANDLEADER",                         "You have disbanded the group.")
-
--- Group (LFG)
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED",            "You have joined an LFG group for |cFEFEFE<<1>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL",               "A vote to kick |cFEFEFE<<1>>|r from the group has failed.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED",             "A vote to kick |cFEFEFE<<1>>|r from the group has passed.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_START",              "A vote to kick |cFEFEFE<<1>>|r from the group has started.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_QUEUE_END",                   "You are no longer queued in the group finder.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_QUEUE_START",                 "You are now queued in the group finder.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY",        "Your |cFEFEFE<<1>>|r is ready.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE",   "Your |cFEFEFE<<1>>|r is ready. Your role: |cFEFEFE<<2>> <<3>>|r")
-
--- Group (Raid)
-ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_STARTED",                     "Started: <<1>>")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_FAILED",                      "Failed: <<1>>")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_COMPLETED_LARGE",             "Completed: <<1>>")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_SCORETALLY",                  "Final Score <<1>> Total Time <<2>> Vitality Bonus <<3>> <<4>>")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED",            "<<1>> Vitality Bonus Decreased")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED",               "<<1>> <<2>> Points Rewarded")
-
--- Ignore Error Messages
-ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_TRADE",                         "You cannot trade with a player you are ignoring.")
-ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_GROUP",                         "You cannot extend a group invitation to a player you are ignoring.")
-ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_DUEL",                          "You cannot challenge a player you are ignoring to a duel.")
-ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_FRIEND",                        "You cannot add a player you are ignoring as a friend.")
-ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_WHISPER",                       "You cannot whisper a player you are ignoring.")
-ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_GUILD",                         "You cannot extend a guild invitation to a player you are ignoring.")
-
--- Invitation Notifications
-ZO_CreateStringId("SI_LUIE_NOTIFICATION_GROUP_INVITE",                  "Group invitation")
-ZO_CreateStringId("SI_LUIE_NOTIFICATION_SHARE_QUEST_INVITE",            "Shared quest")
-ZO_CreateStringId("SI_LUIE_NOTIFICATION_FRIEND_INVITE",                 "Friend invitation")
-ZO_CreateStringId("SI_LUIE_NOTIFICATION_GUILD_INVITE",                  "Guild invitation")
-
--- Guild
-ZO_CreateStringId("SI_LUIE_CA_GUILD_HERALDRY_UPDATE",                   "The heraldry for <<1>> has changed.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_RANKS_UPDATE",                      "Changes to ranks for <<1>> saved.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_UPDATE",                       "Changes to the rank <<1>> for <<2>> saved.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_MOTD_CHANGED",                      "The message of the day for <<1>> has changed.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_DESCRIPTION_CHANGED",               "The description for <<1>> has changed.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST",            "|cFEFEFE<<1>>|r has invited you to join <<2>>.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_INVITE_MESSAGE",                    "|cFEFEFE<<3>>|r has invited you to join <<X:1>> |cFEFEFE<<2>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_JOIN_SELF",                         "You have joined <<1>>.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_LEAVE_SELF",                        "You have left <<1>>.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_CHANGED",                      "|cFEFEFE<<1>>|r's rank in <<2>> has been changed to <<3>>.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_CHANGED_SELF",                 "You have been <<1>> to <<2>> in <<3>>.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_DOWN",                         "demoted")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_UP",                           "promoted")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_ROSTER_ADDED",                      "|cFEFEFE<<1>>|r has joined <<2>>.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE",            "You have invited \"|cFEFEFE<<1>>|r\" to join <<2>>.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_ROSTER_LEFT",                       "|cFEFEFE<<1>>|r has left <<2>>.")
-ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG",    "Bounty and stolen items confiscated!")
-ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_MSG",                 "Bounty confiscated!")
-ZO_CreateStringId("SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER",           "Danger! Sentry nearby!")
-ZO_CreateStringId("SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS",       "Danger! You are arousing suspicion!")
-ZO_CreateStringId("SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE",             "You are no longer disguised")
-ZO_CreateStringId("SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED",        "You are now disguised")
-
--- Lockpick
-ZO_CreateStringId("SI_LUIE_CA_LOCKPICK_FAILED",                         "Lockpick failed!")
-ZO_CreateStringId("SI_LUIE_CA_LOCKPICK_SUCCESS",                        "Lockpick successful!")
-
--- Mail
-ZO_CreateStringId("SI_LUIE_CA_MAIL_DELETED_MSG",                        "Mail deleted!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED",                           "Mail received.")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_COD",                       "COD payment sent!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT",                               "Mail sent!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_COD",                           "COD sent!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE",                 "You must set the Cash on Delivery amount.")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENDMAILRESULT2",                    "Unknown player.") -- Fixing missing periods on default strings
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENDMAILRESULT3",                    "Recipient's Inbox is full.") -- Fixing missing periods on default strings
-
--- Pledge of Mara
-ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0",                "|cFEFEFE<<1>>|r is too busy to pledge with.")
-ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1",                "You can't join in the Ritual of Mara with a player who is dead.")
-ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT2",                "Beginning Ritual of Mara with |cFEFEFE<<1>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3",                "You have been joined with |cFEFEFE<<1>>|r in the Ritual of Mara.")
-ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT4",                "|cFEFEFE<<1>>|r has declined the Ritual of Mara request")
-ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT5",                GetString(SI_PLEDGEOFMARARESULT5))
-ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT6",                "|cFEFEFE<<1>>|r is not eligible for the Ritual of Mara.")
-ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT7",                "You are too far away from |cFEFEFE<<1>>|r to perform the Ritual of Mara.")
-
--- Currency Messages
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LOOT",                   "You loot %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE",                "You receive %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STEAL",                  "You steal %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET",             "You pickpocket %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE",             "A guard confiscates %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_EARN",                   "You earn %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_SPEND",                  "You spend %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LOST",                   "You lose %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_BOUNTY",                 "You pay off your bounty of %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_REPAIR",                 "You pay %s in repairs.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TRADER",                 "You purchase an item from the guild trader for %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LISTING",                "Listing fee of %s charged.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN",                "You receive %s from %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME",        "You receive %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT",               "You trade %s to %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME",       "You trade %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN",                 "You receive mail with %s from %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME",         "You receive mail with %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT",                "You mail %s to %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME",        "You mail %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILCOD",                "You send a COD payment of %s to %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_POSTAGE",                "You pay %s in postage.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSIT",                "You deposit %s in your bank.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE",         "You deposit %s in storage.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITGUILD",           "You deposit %s in the guild bank.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE",        "You withdraw %s from storage.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAW",               "You withdraw %s from your bank.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAWGUILD",          "You withdraw %s from the guild bank.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_WAYSHRINE",              "Wayshrine fee of %s charged.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_UNSTUCK",                "Unstuck fee of %s charged.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STABLE",                 "You purchase %s for %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STORAGE",                "You purchase %s for %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_ATTRIBUTES",             "You make a donation of %s to redistribute your Attribute Points.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CHAMPION",               "You pay a fee of %s to redistribute your Champion Points.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_SKILLS",                 "You make a donation of %s to redistribute your Skill Points.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MORPHS",                 "You make a donation of %s to redistribute your Skill Morphs.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CAMPAIGN",               "You spend %s to reset your home campaign.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_BUY",                    "You purchase %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_BUY_VALUE",              "You purchase %s for %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_BUYBACK",                "You buyback %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_BUYBACK_VALUE",          "You buyback %s for %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_SELL",                   "You sell %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_SELL_VALUE",             "You sell %s for %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_FENCE_VALUE",            "You fence %s for %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_FENCE",                  "You fence %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDER_VALUE",          "You launder %s for %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDER",                "You launder %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_USE",                    "You use %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CRAFT",                  "You craft %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_EXTRACT",                "You extract %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_UPGRADE",                "You upgrade %s to %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_UPGRADE_FAIL",           "You fail to upgrade %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_REFINE",                 "You refine %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DECONSTRUCT",            "You deconstruct %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_RESEARCH",               "You research %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DESTROY",                "You destroy %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LOCKPICK",               "Your %s breaks.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_REMOVE",                 "Removed %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_GROUP",                  "%s loots %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP",         "You equip %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE",        "You unequip %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY",       "Your %s is destroyed.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NOTIFY_CHAMPION",                "Champion Points redistributed")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES",              "Attribute Points reset")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS",                  "Skill Points reset")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NOTIFY_MORPHS",                  "Skill Morphs reset")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_HERALDRY",               "You spend %s from your guild bank to update your %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NAME_HERALDRY",                  "Guild Heraldry")
-
--- Currency Total Messages
-ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TOTAL",                      "New Total:")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD",              "Total Gold: %s")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP",                "Total AP: %s")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV",                "Total TV: %s")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV",                "Total Vouchers: %s")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTRANSMUTE",         "Total Crystals: %s")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS",            "Total Crowns: %s")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS",              "Total Gems: %s")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS",      "Total Tokens: %s")
-
--- Storage
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE1",                     "Riding Speed Upgrade")
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE2",                     "Riding Capacity Upgrade")
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE3",                     "Riding Stamina Upgrade")
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAG_UPGRADE",                     "Your inventory capacity has increased.")
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_BANK_UPGRADE",                    "Your bank capacity has increased.")
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAGTYPE1",                        "Backpack Upgrade")
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAGTYPE2",                        "Bank Space Upgrade")
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_LEARN",                           "You learn %s.")
-
--- Skill
-ZO_CreateStringId("SI_LUIE_CA_SKILL_LINE_ADDED",                        "Skill line gained: <<1>><<2>>")
-ZO_CreateStringId("SI_LUIE_CA_ABILITY_RANK_UP",                         "<<1>> increased to Rank <<R:2>>")
-ZO_CreateStringId("SI_LUIE_CA_SKILL_GUILD_MSG",                         "You earn %s.")
-ZO_CreateStringId("SI_LUIE_CA_SKILL_GUILD_REPUTATION",                  "<<1[reputation/reputation]>>")
-ZO_CreateStringId("SI_LUIE_CA_SKILL_GUILD_ALERT",                       "Your <<1>> reputation has increased.")
-
--- Quests
-ZO_CreateStringId("SI_LUIE_CA_QUEST_ABANDONED",                         "Abandoned: <<1>>")
-ZO_CreateStringId("SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON",               "Abandoned: <<1>> <<2>>")
-ZO_CreateStringId("SI_LUIE_CA_QUEST_DISCOVER",                          "Discovered: <<1>>")
-ZO_CreateStringId("SI_LUIE_CA_QUEST_ACCEPT",                            "Started: ")
-ZO_CreateStringId("SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON",                  "Started: <<1>> <<2>>")
-ZO_CreateStringId("SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON",                "Completed: <<1>> <<2>>")
-ZO_CreateStringId("SI_LUIE_CA_QUEST_LOG_FULL",                          "Your quest log is full.") -- TODO: Unused
-
--- Trade
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT0",                      GetString(SI_TRADEACTIONRESULT0))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT1",                      "|cFEFEFE<<1>>|r is ignoring you. You cannot initiate a trade.")
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT2",                      GetString(SI_TRADEACTIONRESULT2))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT3",                      GetString(SI_TRADEACTIONRESULT3))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT4",                      GetString(SI_TRADEACTIONRESULT4))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT5",                      GetString(SI_TRADEACTIONRESULT5))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT6",                      GetString(SI_TRADEACTIONRESULT6))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT8",                      GetString(SI_TRADEACTIONRESULT8))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT9",                      GetString(SI_TRADEACTIONRESULT9))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT12",                     GetString(SI_TRADEACTIONRESULT12))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT13",                     GetString(SI_TRADEACTIONRESULT13))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT14",                     GetString(SI_TRADEACTIONRESULT14))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT41",                     GetString(SI_TRADEACTIONRESULT41))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT42",                     GetString(SI_TRADEACTIONRESULT42))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT43",                     GetString(SI_TRADEACTIONRESULT43))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT44",                     GetString(SI_TRADEACTIONRESULT44))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT45",                     GetString(SI_TRADEACTIONRESULT45))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT46",                     GetString(SI_TRADEACTIONRESULT46))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT62",                     GetString(SI_TRADEACTIONRESULT62))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT63",                     GetString(SI_TRADEACTIONRESULT63))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT64",                     GetString(SI_TRADEACTIONRESULT64))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT65",                     "You are already trading|cFEFEFE<<1>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT66",                     GetString(SI_TRADEACTIONRESULT66))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT80",                     GetString(SI_TRADEACTIONRESULT80))
-
--- Trade Invite Messages
-ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invitation accepted.")
-ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_DECLINED",                   "Trade invitation declined.")
-ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CANCELED",                   "Trade invitation canceled.")
-ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CONFIRM",                    "You have invited |cFEFEFE<<1>>|r to trade.")
-ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MESSAGE",                    "|cFEFEFE<<1>>|r has invited you to trade.")
-
--- EVENT_DISPLAY_ANNOUNCEMENT: Entering/Leaving Group Area
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D",       "Entering Group Area.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D",       "Leaving Group Area.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C",       "Entering Group Area")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C",       "Leaving Group Area")
-
--- EVENT_DISPLAY_ANNOUNCEMENT: Craglorn Buffs
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR",        "Spell Resistance Increased")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR_CA",     "Spell Resistance Increased!")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR",        "Physical Resistance Increased")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR_CA",     "Physical Resistance Increased!")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI",        "Power Increased")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI_CA",     "Power Increased!")
-
--- EVENT_DISPLAY_ANNOUNCEMENT: Maelstrom Arena
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM",          "Maelstrom Arena")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA",       "Maelstrom Arena: ")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE1",          "Vale of the Surreal")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE2",          "Seht's Balcony")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE3",          "Drome of Toxic Shock")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE4",          "Seht's Flywheel")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE5",          "Rink of Frozen Blood")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE6",          "Spiral Shadows")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE7",          "Vault of Umbrage")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8",          "Igneous Cistern")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9",          "Theater of Despair")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1",          "Round 1")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1_CA",       "Round 1!")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2",          "Round 2")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2_CA",       "Round 2!")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3",          "Round 3")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3_CA",       "Round 3!")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4",          "Round 4")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4_CA",       "Round 4!")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5",          "Round 5")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA",       "Round 5!")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF",          "Final Round")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA",       "Final Round!")
-
--- EVENT_DISPLAY_ANNOUNCEMENT: Dragonstar Arena
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA",                "Dragonstar Arena")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA",             "Dragonstar Arena: ")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC",           "The arena will begin in 30 seconds!")
-
--- EVENT_DISPLAY_ANNOUNCEMENT: Imperial City Sewer Zones
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_PREFIX",    "Entered: ")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE1",          "Entered: Battle Gates")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_1",      "Battle Gates")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE2",          "Entered: Nocere Oblitus")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_2",      "Nocere Oblitus")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE3",          "Entered: Bloodworks")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_3",      "Bloodworks")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE4",          "Entered: Wavering Veil")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_4",      "Wavering Veil")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE5",          "Entered: Training Grounds")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_5",      "Training Grounds")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE6",          "Entered: Lost Tombs")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_6",      "Lost Tombs")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE7",          "Entered: The Hatchery")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_7",      "The Hatchery")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8",          "Entered: Weavers Nest")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8_EDIT",     "Entered: Weaver\'s Nest")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_8",      "Weaver's Nest")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE9",          "Entered: Buried Artifact")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_9",      "Buried Artifact")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE10",         "Entered: Betrayer\'s Catacombs")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_10",     "Betrayer\'s Catacombs")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE11",         "Entered: Feeding Pits")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_11",     "Feeding Pits")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE12",         "Entered: Alessian Tombs")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_12",     "Alessian Tombs")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC1",           "Gati has discovered a new route to the realms of Oblivion.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC2",           "The cruel wards of Zamachar nurture only the strongest foes.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC3",           "A clan of vampiric Orcs lurk in the shadows.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC4",           "The barriers between Mundus and Oblivion grow thin.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC5",           "The merciless Hzu-Hakan trains his savage Clannfear.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC6",           "The corpse of long-dead Emperor Leovic has been found.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC7",           "General Kryozote oversees the breeding of vile creatures.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC8",           "The Weaver ensnares anyone foolish enough to enter her web.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC9",           "Xivkyn lord Wadracki searches for a long forgotten power.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC10",          "Xivkyn lord Ebral rallies his army of the undead.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC11",          "General Nazenaechar makes use of fallen Imperial citizens.")
-ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC12",          "Restless spirits of the dead are driven by forces unseen.")
-
-------------------------------------
--- CombatText.lua ------------------
-------------------------------------
-
-ZO_CreateStringId("SI_LUIE_CT_COMBAT_IN_DEFAULT",                       "Entered Combat")
-ZO_CreateStringId("SI_LUIE_CT_COMBAT_OUT_DEFAULT",                      "Left Combat")
-ZO_CreateStringId("SI_LUIE_CT_CLEANSE_DEFAULT",                         "CLEANSE")
-ZO_CreateStringId("SI_LUIE_CT_BLOCK_DEFAULT",                           "BLOCK")
-ZO_CreateStringId("SI_LUIE_CT_BLOCKSTAGGER_DEFAULT",                    "*BLOCK*")
-ZO_CreateStringId("SI_LUIE_CT_DODGE_DEFAULT",                           "DODGE")
-ZO_CreateStringId("SI_LUIE_CT_AVOID_DEFAULT",                           "AVOID")
-ZO_CreateStringId("SI_LUIE_CT_INTERRUPT_DEFAULT",                       "INTERRUPT")
-ZO_CreateStringId("SI_LUIE_CT_EXPLOIT_DEFAULT",                         "EXPLOIT")
-ZO_CreateStringId("SI_LUIE_CT_EXECUTE_DEFAULT",                         "EXECUTE")
-ZO_CreateStringId("SI_LUIE_CT_POWER_DEFAULT",                           "")
-ZO_CreateStringId("SI_LUIE_CT_DESTROY_DEFAULT",                         "DESTROY")
-ZO_CreateStringId("SI_LUIE_CT_MISS_DEFAULT",                            "Missed %t")
-ZO_CreateStringId("SI_LUIE_CT_IMMUNE_DEFAULT",                          "Immune %t")
-ZO_CreateStringId("SI_LUIE_CT_PARRIED_DEFAULT",                         "Parried %t")
-ZO_CreateStringId("SI_LUIE_CT_REFLECTED_DEFAULT",                       "Reflected %t")
-ZO_CreateStringId("SI_LUIE_CT_DODGED_DEFAULT",                          "Dodged %t")
-ZO_CreateStringId("SI_LUIE_CT_INTERRUPTED_DEFAULT",                     "Interrupted")
-ZO_CreateStringId("SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT",               " incoming! ")
-ZO_CreateStringId("SI_LUIE_CT_MITIGATION_FORMAT_POWER",                 "%t %i on %n!")
-ZO_CreateStringId("SI_LUIE_CT_MITIGATION_FORMAT_DESTROY",               "%t %i")
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- BASE SETTINGS -- LAM --
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-ZO_CreateStringId("SI_LUIE_LAM_COMPATIBILITY_WARNING",                  "Disable this option if you are having compatibility issues with other addons.")
-ZO_CreateStringId("SI_LUIE_LAM_FONT",                                   "Font")
-ZO_CreateStringId("SI_LUIE_LAM_FONT_SIZE",                              "Font Size")
-ZO_CreateStringId("SI_LUIE_LAM_FONT_STYLE",                             "Font Style")
-ZO_CreateStringId("SI_LUIE_LAM_RELOADUI",                               "Reload UI")
-ZO_CreateStringId("SI_LUIE_LAM_RELOADUI_BUTTON",                        "This will reload the UI.")
-ZO_CreateStringId("SI_LUIE_LAM_RELOADUI_WARNING",                       "Will need to reload the UI.")
-ZO_CreateStringId("SI_LUIE_LAM_RESETPOSITION",                          "Reset Position")
-ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR",                    "Hide Experience/Skill Progress Bar Pop-up")
-ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP",                 "When gaining experience from Quests, POI Discovery, Boss Kills, or Skill Line updates, the XP bar will no longer popup. Useful if you have a custom UI element in that corner of the screen and don't want it to be overlapped.")
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- LAM MODULE ON/OFF --
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-ZO_CreateStringId("SI_LUIE_LAM_CHANGELOG",                              "Display Changelog")
-ZO_CreateStringId("SI_LUIE_LAM_CHANGELOG_TP",                           "Display a list of changes from the previous version of LUIE.")
-ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG",                             "Disable Startup Message")
-ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG_TP",                          "This setting will disable the startup message.")
-ZO_CreateStringId("SI_LUIE_LAM_UF",                                     "Unit Frames")
-ZO_CreateStringId("SI_LUIE_LAM_CA",                                     "Chat Announce")
-ZO_CreateStringId("SI_LUIE_LAM_CI",                                     "Combat Info")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS",                              "Slash Commands")
-ZO_CreateStringId("SI_LUIE_LAM_CI_DESCRIPTION",                         "Allows display of ultimate value on bars, effect tracker on bars, as well as cooldown tracking for quick slot items and GCD display for action bars.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFFS_DESCRIPTION",                      "Enables buff and debuff display for effects on the player and target. Also has options for various other enhancements.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFFSDEBUFFS",                           "Buffs & Debuffs")
-ZO_CreateStringId("SI_LUIE_LAM_MODULEHEADER",                           "Module Settings")
-ZO_CreateStringId("SI_LUIE_LAM_MISCHEADER",                             "Miscellaneous Settings")
-ZO_CreateStringId("SI_LUIE_LAM_SVPROFILE_HEADER",                       "Character Profile Settings")
-ZO_CreateStringId("SI_LUIE_LAM_SVPROFILE_DESCRIPTION",                  "By default LuiExtended uses account wide settings. You can toggle on character specific settings below. Profiles can be copied between characters, and you can reset the current character or overall account settings below. Note that account wide settings are preserved if you toggle back from using individual character profiles.")
-ZO_CreateStringId("SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE",               "Enable Character Specific Settings")
-ZO_CreateStringId("SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE_TP",            "Switch from using account wide settings to using specific character settings.")
-ZO_CreateStringId("SI_LUIE_LAM_SVPROFILE_PROFILECOPY",                  "Copy Character Profile")
-ZO_CreateStringId("SI_LUIE_LAM_SVPROFILE_PROFILECOPY_TP",               "Select another character or account wide settings to copy from.")
-ZO_CreateStringId("SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON",            "Copy Profile")
-ZO_CreateStringId("SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON_TP",         "Copy the profile selected above to your current character or account wide settings.")
-ZO_CreateStringId("SI_LUIE_LAM_SVPROFILE_RESETCHAR",                    "Reset Current Character")
-ZO_CreateStringId("SI_LUIE_LAM_SVPROFILE_RESETCHAR_TP",                 "Reset current character profile settings.")
-ZO_CreateStringId("SI_LUIE_LAM_SVPROFILE_RESETACCOUNT",                 "Reset Account Wide")
-ZO_CreateStringId("SI_LUIE_LAM_SVPROFILE_RESETACCOUNT_TP",              "Reset account wide profile settings. Note that this will not delete or modify individual character settings.")
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- SLASH COMMANDS -- LAM --
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_ENABLE",                       "Slash Commands Module")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_DESCRIPTION",                  "Add custom /slash commands to perform various basic functionality such as kicking members from group, inviting players to guild, or adding friends.")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER",                        "Slash Commands")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL",                "General Commands")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_TRADE",                        "Enable ( '/trade' ) Trade")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_TRADE_TP",                     "'/trade' 'name' Invites a player to trade with you.")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_HOME",                         "Enable ( '/home' ) Port to Primary Home")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_HOME_TP",                      "'/home' Ports the user to their primary home.")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_CAMPAIGN",                     "Enable ( '/campaign' ) Campaign Queue")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_CAMPAIGN_TP",                  "'/campaign' 'name' Queue for the entered campaign name if it is your Home or Guest campaign.")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_GROUP",                  "Group Commands")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REGROUP",                      "Enable ( '/regroup' ) Regroup Function")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REGROUP_TP",                   "'/regroup' Saves your current party configuration, disbands the group and reinvites them after 5 seconds.")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_LEAVE",                        "Enable ( '/leave' ) Leave Group")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_LEAVE_TP",                     "'/leave' Leaves the current group.\n\t\t\t\t\tAlternate options: '/leavegroup'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_DISBAND",                      "Enable ( '/disband' ) Disband Group")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_DISBAND_TP",                   "'/disband' Disbands the current group if you are group leader.")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_KICK",                         "Enable ( '/kick' ) Remove from Group")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_KICK_TP",                      "'/kick' 'name' Kicks a member from the current group if you are group leader.\n\t\t\t\t\tNote: Does not replace the /kick emote.\n\t\t\t\t\tAlternate options: '/remove', '/groupkick', '/groupremove'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_VOTEKICK",                     "Enable ( '/votekick') Vote to Kick")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_VOTEKICK_TP",                  "/votekick' 'name' Initiates a vote to kick a member from your current LFG group.\n\t\t\t\t\tAlternate options: '/voteremove'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_GUILD",                  "Guild Commands")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_GUILDINVITE",                  "Enable ( '/guildinvite' ) Invite to Guild")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_GUILDINVITE_TP",               "'/guildinvite' '#' 'name' Invites a player to one of your guilds based on their order in your Guild Menu.\n\t\t\t\t\tAlternate options: /'ginvite'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_GUILDKICK",                    "Enable ( '/guildkick' ) Kick from Guild")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_GUILDKICK_TP",                 "'/guildkick' '#' 'name' Kicks a player from one of your guilds if you have permissions to do so.\n\t\t\t\t\tAlternate options: '/gkick'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_GUILDQUIT",                    "Enable ( '/guildquit' ) Leave Guild")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_GUILDQUIT_TP",                 "'/guildquit' '#' Leave one of your guilds based on their order in your Guild Menu.\n\t\t\t\t\tAlternate options: '/gquit', '/guildleave', '/gleave'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL",                 "Social Commands")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FRIEND",                       "Enable ( '/friend' ) Add Friend")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FRIEND_TP",                    "'/friend' 'name' Invite a player to be friends.\n\t\t\t\t\tAlternate options: '/addfriend'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_IGNORE",                       "Enable ( '/ignore' ) Add Ignored")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_IGNORE_TP",                    "'/ignore' 'name' Add a player to ignored.\n\t\t\t\t\t\tAlternate options: '/addignore'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND",                 "Enable ( '/removefriend' ) Remove Friend")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND_TP",              "'/unfriend' 'name' Remove a player from friends.\n\t\t\t\t\tAlternate options: '/removefriend'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE",                 "Enable ( /'removeignore' ) Remove Ignored")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE_TP",              "'/unignore' 'name' Remove a player from ignored.\n\t\t\t\t\tAlternate options: '/removeignore'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_BANKER",                       "Enable ( '/banker' ) Banker")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_BANKER_TP",                    "'/banker' Summon <<1>> (If unlocked).\n\t\t\t\t\tAlternate options: '/bank'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_MERCHANT",                     "Enable ( '/merchant' ) Merchant")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP",                  "'/merchant' Summon <<1>> (If unlocked).\n\t\t\t\t\tAlternate options: '/sell', '/vendor'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE",                        "Enable ( '/fence' ) Fence")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE_TP",                     "'/fence' Summon <<1>> (If unlocked).\n\t\t\t\t\tAlternate options: '/smuggler'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_READYCHECK",                   "Enable ( '/ready' ) Ready Check")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP",                "Send a 'ready check' dialog to all group members.")
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- BUFFS & DEBUFFS -- LAM --
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK",                "Buffs & Debuffs Module")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HEADER_POSITION",                   "Position and Display Options")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HARDLOCK",                          "Hard-Lock Position to Unit Frames")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HARDLOCK_TP",                       "Hard-Lock position of buff frames to health bar of unit frames (default or custom).")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HARDLOCK_WARNING",                  "Will need to reload the UI.\nWhen this position is locked, you will not be able to buff frames.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW",                      "Unlock Buffs Window")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TP",                   "Unlock to drag buff icon frames. This will not unlock frames that are locked to the unit frames.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_RESETPOSITION_TP",                  "This will reset position of all buff icon containers to the default position.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF",                    "Hide PLAYER Buffs")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF_TP",                 "Prevents your buffs from displaying.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF",                  "Hide PLAYER Debuffs")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF_TP",               "Prevents your debuffs from displaying.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDETARGETBUFF",                    "Hide TARGET Buffs")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDETARGETBUFF_TP",                 "Prevents buffs on your target from displaying.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF",                  "Hide TARGET Debuffs")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF_TP",               "Prevents debuffs on your target from displaying.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF",              "Hide GROUND Buffs and Debuffs")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TP",           "Prevents ground targeted effects from displaying.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS",                   "Display Extra Buffs")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS_TP",                "Display extra icons for some buffs with major/minor auras that normally do not have tracking. This feature is intended to add extra icons for abilities such as Green Dragon Blood so they can be added to prominent auras and tracked.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_CONSOLIDATE",                       "Consolidate Major/Minor Auras")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_CONSOLIDATE_TP",                    "Consolidate major/minor auras for abilities with multiple effects into one icon: Dragon Blood, Hurricane, Combat Prayer, Restoring Focus, etc... \nNote: Enabling this will show extra icons for abilities such as Dragon Blood to allow tracking.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_EXTEND_EXTRA",                      "Extend Settings to Single Aura Effects")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_EXTEND_EXTRA_TP",                   "Enabling this will extend the settings for Extra or Consolidated Buffs to effects with only a single Major/Minor effect such as Blur, Shuffle, Molten Weapons.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_REDUCE",                            "Hide Duplicates in Paired Auras")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_REDUCE_TP",                         "Some abilities have multiple effects with the same duration, for example: Burning Talons applies an equivalent duration DoT & Snare effect. Enabling this will hide one of these icons for this ability and others like it, reducing the amount of pollution in the buff/debuff containers.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_ICON_HEADER",                       "Icon Options")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_ICONSIZE",                          "Buff Icon Size")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_ICONSIZE_TP",                       "Choose the size for buff icons.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL",               "Display Remaining Time Label")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL_TP",            "Show text label with number of seconds left until the buff expires.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LABEL_POSITION_TP",                 "Adjust the vertical position of the buff countdown label.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_FONT_TP",                           "Choose the font to use for the buff countdown label.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_FONTSIZE_TP",                       "Choose the font size for the buff countdown label.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_FONTSTYLE_TP",                      "Choose the font style for the buff countdown label.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LABELCOLOR_TP",                     "Set the color of text label to be the same as icon border or keep it white.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS",               "Show Second Fractions")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP",            "Format remaining text labels as \"12.3\" or keep only seconds \"12\".")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HORIZONTICONALIGN",                 "Horizontal Alignment Method")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HORIZONTICONALIGN_TP",              "Horizontal alignment of buff and debuff icons within container area.")
--- ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON",            "Vertical Icons Alignment")
--- ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON_TP",         "Vertical alignment of buff and debuff icons within container area.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_DESCENDINGSORT",                    "Sort Direction")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_DESCENDINGSORT_TP",                 "Choose the direction in which buff icons are sorted.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_GLOWICONBORDER",                    "Display Glowing Border")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_GLOWICONBORDER_TP",                 "Display a context colored glow border around each buff or debuff icon.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWBORDERCOOLDOWN",                "Display Radial Countdown Border")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWBORDERCOOLDOWN_TP",             "Display a context colored radial countdown border as the buff or debuff progresses in duration.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_FADEEXPIREICON",                    "Fade Out Expiring Icons")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_FADEEXPIREICON_TP",                 "When a buff/debuff is about to expire, make the icon transparent.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_HEADER",                   "Long-Term Effects")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_SELF",                     "Show Long-term Effects for Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_SELF_TP",                  "Show Player icons for effects with duration greater then 2 minutes.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_TARGET",                   "Show Long-term Effects for Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_TARGET_TP",                "Show Long-term Effects for Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL",                  "Use separate control for Player effects")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL_TP",               "Move Player effects icons for long-term effects into independent separate control.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER",                "Container orientation")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER_TP",             "Change orientation of long-term effects to Horizontal or Vertical tiling method.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VERT",                     "Vertical Long Term Buffs Alignment")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VERT_TP",                  "Alignment of buff and debuff icons within the long term buff container when set to vertical orientation.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_HORIZ",                    "Horizontal Long Term Buffs Alignment")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_HORIZ_TP",                 "Alignment of buff and debuff icons within the long term buff container when set to horizontal orientation.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_REVERSE_ORDER",                     "Reverse Long Term Buff Sort Order")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_REVERSE_ORDER_TP",                  "When enabled, the sort direction selected under Icon Options will be reversed for the long term buff container.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_FILTER_LONG_HEADER",                "Long-Term Effect Filters")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT",                "Show Icon for Active Assistant (Player only)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT_TP",             "Set whether the active assitants will display an icon on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE",                 "Show Icon for Equipped Diguise (Player only)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE_TP",              "Set whether the equipped disguises will display an icon on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_MOUNT",                    "Show Icon for Active Mount (Player only)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TP",                 "Set whether the active mounts will display an icon on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_PET",                      "Show Icon for Active Vanity Pet (Player only)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_PET_TP",                   "Set whether the active vanity pets will display an icon on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER",             "Show Mundus Boons on Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER_TP",          "Set whether Mundus Stone boons are shown on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET",             "Show Mundus Boons on Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET_TP",          "Set whether Mundus Stone boons are shown on target.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER",          "Show Vampirism Stage on Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER_TP",       "Set whether to show the Vampirism stage buff on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET",          "Show Vampirism Stage on Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET_TP",       "Set whether to show the Vampirism stage buff on target.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER",              "Show Lycanthrophy on Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER_TP",           "Set whether to show the Lycanthrophy buff on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_LYCANTARGET",              "Show Lycanthrophy on Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_LYCANTARGET_TP",           "Set whether to show the Lycanthrophy buff on target.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER",             "Show Vamp/Lycan Disease on Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER_TP",          "Set whether to show the vampirism and lycanthropy precursor disease buffs on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET",             "Show Vamp/Lycan Disease on Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET_TP",          "Set whether to show vampirism and lycanthropy precursor disease buffs on target.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_BITEPLAYER",               "Show Vamp/Lycan Bite Timer on Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_BITEPLAYER_TP",            "Set whether to show the bite cooldown timers for vampirism/lycanthrophy on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_BITETARGET",               "Show Vamp/Lycan Bite Timer on Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_BITETARGET_TP",            "Set whether to show the bite cooldown timers for vampirism/lycanthrophy on target.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER",            "Show Battle Spirit on Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER_TP",         "Set whether the battle spirit buff will display on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET",            "Show Battle Spirit on Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET_TP",         "Set whether the battle spirit buff will display on target.\nNote: This setting only applies in Cyrodiil.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER",               "Show Cyrodiil Bonuses on Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER_TP",            "Set whether buffs provided during Cyrodiil AvA are shown on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET",               "Show Cyrodiil Bonuses on Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET_TP",            "Set whether buffs provided during Cyrodiil AvA are shown on target.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER",            "Show ESO Plus Member on Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER_TP",         "Set whether the ESO Plus Member buff is displayed on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET",            "Show ESO Plus Member on Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET_TP",         "Set whether the ESO Plus Member buff is displayed on target.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER",        "Show Soul Summons ICD on Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER_TP",     "Set whether to show Soul Summons internal cooldown buff on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET",        "Show Soul Summons ICD on Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET_TP",     "Set whether to show Soul Summons internal cooldown buff on target.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER",             "Show Item Set ICDs on Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP",          "Set whether to show the iternal cooldown buff from the Phoenix, Eternal Warrior, and Immortal Warrior sets on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_SETICDTARGET",             "Show Item Set ICDs on Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_SETICDTARGET_TP",          "Set whether to show the iternal cooldown buff from the Phoenix, Eternal Warrior, and Immortal Warrior sets on target.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_FOODPLAYER",               "Show Food & Drink Buffs on Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_FOODPLAYER_TP",            "Set whether to show food & drink buffs on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_FOODTARGET",               "Show Food & Drink Buffs on Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_FOODTARGET_TP",            "Set whether to show food & drink buffs on target.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER",         "Show Experience Boost Buffs on Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER_TP",      "Set whether to show experience boost buffs on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET",         "Show Experience Boost Buffs on Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET_TP",      "Set whether to show experience boost buffs on target.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_HEADER",                       "Short-Term Effect Filters")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP",                   "Show Gallop (Player only)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP_TP",                "Display special buff icon when player is mounted and galloping.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT",                   "Show Sprint (Player only)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT_TP",                "Display special buff icon when player is sprinting.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWREZZ",                     "Show Resurrection Immunity (Player only)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWREZZ_TP",                  "Display special buff icon when player is immune to damage and effects during resurrection.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWRECALL",                   "Show Recall Cooldown (Player only)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWRECALL_TP",                "Display special buff icon when player has accumulated a wayshrine recall cost penalty.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER",              "Show Block - Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER_TP",           "Display special buff icon when player is holding block.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET",              "Show Block - Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET_TP",           "Display special buff icon when target is holding block.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER",            "Show Stealth - Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER_TP",         "Display special buff icon when player is hidden or in stealth.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET",            "Show Stealth - Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET_TP",         "Display special buff icon when target is hidden or in stealth.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER",       "Show Disguised - Player")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER_TP",    "Display special buff icon when player is in a relevant area and is actively disguised from enemies.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET",       "Show Disguised - Target")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET_TP",    "Display special buff icon when target is in a relevant area and is actively disguised from enemies.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_HEADER",                       "Prominent Buffs & Debuffs")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DESCRIPTION",                  "This whitelist allows you to display important buffs and debuffs in separate containers with the addition of a label and progress bar.\n\nEligible Effects: Buffs on Player, Debuffs on Target, Ground Targeted Effects\n\nYou can add buffs and debuffs to EITHER container. For example if you'd like to track the duration of Hurricane with your other dots, you can add Hurricane to the Prominent Debuffs list.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_LABEL",						"Display Ability Name Label")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_LABEL_TP",						"Toggle the display of a label next to prominent auras with the Ability Name.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTFACE",						"Label Font Face")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTFACE_TP",					"Choose the font face for the prominent auras Ability Name label.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTSTYLE",					"Label Font Style")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTSTYLE_TP",					"Choose the font style for the prominent auras Ability Name label.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTSIZE",						"Label Font Size")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTSIZE_TP",					"Choose the font size for the prominent auras Ability Name label.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR",					"Display Progress Bar")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TP",				"Toggle the display of a progress bar next to prominent auras.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE",			"Progress Bar Texture")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE_TP",		"Choose a texture to use for the prominent aura progress bar.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORBUFF1",					"Buff Gradient Color (Start)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORBUFF1_TP",				"Choose the start gradient color for the progress bar for prominent buffs.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORBUFF2",					"Buff Gradient Color (End)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORBUFF2_TP",				"Choose the end gradient color for the progress bar for prominent buffs.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1",					"Debuff Gradient Color (Start)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1_TP",				"Choose the start gradient color for the progress bar for prominent debuffs.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2",					"Debuff Gradient Color (End)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2_TP",				"Choose the end gradient color for the progress bar for prominent debuffs.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFFALIGNMENT",				"Prominent Buff Alignment")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFFALIGNMENT_TP",				"Select whether buffs anchor from the top, bottom, or center of the prominent aura containers.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFFALIGNMENT",				"Prominent Debuff Alignment")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFFALIGNMENT_TP",			"Select whether debuffs anchor from the top, bottom, or center of the prominent aura containers.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFFREVERSESORT",				"Reverse Sort Order for Prominent Buffs")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFFREVERSESORT_TP",			"Enable to toggle the ascending/descending direction of buff sorting for prominent buff container.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFFREVERSESORT",			"Reverse Sort Order for Prominent Debuffs")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFFREVERSESORT_TP",			"Enable to toggle the ascending/descending direction of buff sorting for prominent debuff container.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION",			"Label & Progress Bar Orientation (Buffs)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION_TP",		"Choose whether to display the Ability Name Label and Progress bar to the left or right of prominent buffs.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION",			"Label & Progress Bar Orientation (Debuffs)")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION_TP",		"Choose whether to display the Ability Name Label and Progress bar to the left or right of prominent debuffs.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT",			"Add prominent buffs or debuffs by entering an AbilityId or AbilityName into the input field and pressing enter. Remove prominent buffs or debuffs, by clicking the AbilityId or AbilityName from the dropdown list.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST",                 "Add Prominent Buff")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST_TP",              "Add an abilityId or abilityName to the Prominent Buffs list.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFF_REMLIST",                 "Remove Prominent Buff")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFF_REMLIST_TP",              "Remove an abilityId or abilityName from the Prominent Buffs list.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST",               "Add Prominent Debuff")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST_TP",            "Add an abilityId or abilityName to the Prominent Debuffs list.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST",               "Remove Prominent Debuff")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST_TP",            "Remove an abilityId or abilityName from the Prominent Debuffs list.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_HEADER",                  "Buff & Debuff Blacklisting")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT",			    "Add buffs or debuffs to the Blacklist by entering an AbilityId or AbilityName into the input field and pressing enter. Remove buffs or debuffs from the Blacklist, by clicking the AbilityId or AbilityName from the dropdown list.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST",                 "Add Buff or Debuff to Blacklist")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP",              "Add an abilityId or abilityName to the aura blacklist.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST",                 "Remove Buff or Debuff from Blacklist")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP",              "Remove an abilityId or abilityName from the aura blacklist.")
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- CHAT ANNOUNCEMENTS -- LAM --
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
--- Base Settings
-ZO_CreateStringId("SI_LUIE_LAM_CA_ENABLE",                              "Chat Announcements Module")
-ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat Announcements Options")
-ZO_CreateStringId("SI_LUIE_LAM_CA_DESCRIPTION",                         "Displays announcements in chat for various events - with many customizable settings.")
-
--- Chat Message Settings
-ZO_CreateStringId("SI_LUIE_LAM_CA_CHATHEADER",                          "Chat Message Settings")
-ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD",                   "Player Name Display Method")
-ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP",                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CHATTAB",                             "\t\t\t\t\tDisplay Chat Announcements in Chat Tab <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CHATTAB_TP",                          "Display Notifications & Chat Announcements in Chat Tab <<1>>.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CHATTABSYSTEMALL",                    "Display System Messages in ALL Tabs")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CHATTABSYSTEMALL_TP",                 "When enabled: System Messages, Social Notifications (Group, Guild, Friends & Ignored List, Trade & Duels), Slash Command Notifications and Error Messages will display in all chat tabs.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER",            "Character/Account Name Brackets")
-ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER_TP",         "Choose whether or not to display [ ] brackets around character and account names.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM",                 "Item Link Brackets")
-ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM_TP",              "Choose whether or not to display [ ] brackets around item links.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_LOREBOOK",             "Lorebook Brackets")
-ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_LOREBOOK_TP",          "Choose whether or not to display [ ] brackets around lorebooks.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE",          "Collectible Brackets")
-ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE_TP",       "Choose whether or not to display [ ] brackets around collectibles.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT",          "Achievement Brackets")
-ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT_TP",       "Choose whether or not to display [ ] brackets around achievements.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CHATMETHOD",                          "Choose Chat Message Display Method")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CHATMETHOD_TP",                       "Choose whether to print chat messages to all tabs or print to individual tabs.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CHATBYPASS",                          "Enable pChat Message Saving")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CHATBYPASS_TP",                       "Enabling this will prevent LUIE from adding timestamps to messages and allow pChat or other chat addons to handle chat messages. When using pChat, these messages can be saved and restored on reload.\nNote: This option is only available for messages printed to all tabs as pChat does not yet support messages sent to specific tabs.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_TIMESTAMP",                           "Include Timestamp")
-ZO_CreateStringId("SI_LUIE_LAM_CA_TIMESTAMPFORMAT",                     "Timestamp Format")
-ZO_CreateStringId("SI_LUIE_LAM_CA_TIMESTAMPFORMAT_TP",                  "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds")
-ZO_CreateStringId("SI_LUIE_LAM_CA_TIMESTAMPCOLOR",                      "Timestamp Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_TIMESTAMPCOLOR_TP",                   "Color to use for Timestamp.\nDefault: 143/143/143")
-ZO_CreateStringId("SI_LUIE_LAM_CA_TIMESTAMP_TP",                        "Prepend printed text with current time label. This will apply to any messages sent by LUIE & System Messages but not player chat messages. Default color and format matches pChat.")
-
--- Shared Menu Strings
-ZO_CreateStringId("SI_LUIE_LAM_CA_SHARED_CA",                           "a Chat Announcement")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SHARED_CA_SHORT",                     "CA")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SHARED_CSA",                          "a Center Screen Announcement")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SHARED_CSA_SHORT",                    "CSA")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SHARED_ALERT",                        "an Alert")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SHARED_ALERT_SHORT",                  "Alert")
-
--- Currency Menu
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HEADER",                     "Currency Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWICONS",                  "Display Currency Icons")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWICONS_TP",               "Display an icon for the relative type of currency when a notification is printed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT",              "Use Context Color for Loot & Currency Gain/Loss")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT_TP",           "Color the currency/loot message depending on whether currency/loot was gained or lost.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_COLOR",                      "Currency/Loot Message Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_COLORDOWN",                  "Currency/Loot Loss Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_COLORUP",                    "Currency/Loot Gain Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLD",                       "Display Gold Changes") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLD_TP",                    "Print a context sensitive notification to chat when gold is gained or lost.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDCOLOR",                  "Gold Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDNAME",                   "Gold Name") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDNAME_TP",                "Name to display for Gold.\nDefault: <<1[Gold/Gold]>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL",                  "Display Total Gold Suffix")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_TP",               "Append the total amount of Gold after change is displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_MSG",              "Total Gold Syntax")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_MSG_TP",           "Choose the syntax for the Total Gold message.\nDefault: Total Gold: %s")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTHRESHOLD",              "Gold (Loot) - Filter Threshold")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTHRESHOLD_TP",           "Gold looted below this value will not be displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTHROTTLE",               "Combine gold looted from multiple sources")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTHROTTLE_TP",            "When toggled on, gold looted from a group of bodies will combine into one value instead of showing individual values.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHLIST",             "Hide Guild Trader Listing Fee")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHLIST_TP",          "Toggle this option to hide the display of the fee charged when listing items on a Guild Trader.\nThis is a useful if you are using an addon like Awesome Guild Store.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT",            "Hide Guild Trader Purchases")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP",         "Toggle this option to hide the display of gold spent on Guild Trader purchases.\nThis is a useful if you are using an addon like Awesome Guild Store.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAP",                     "Display Alliance Point Changes")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAP_TP",                  "Print a context sensitive notification to chat when Alliance Points are earned or spent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPCOLOR",                "Alliance Points Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME",                 "Alliance Points Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME_TP",              "Name to display for Alliance Points.\nDefault: <<1[Alliance Point/Alliance Points]>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL",                "Display Total Alliance Points Suffix")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL_TP",             "Append the total amount of Alliance Points after change is displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_APTOTAL_MSG",                "Total Alliance Points Syntax")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_APTOTAL_MSG_TP",             "Choose the syntax for the Total Alliance Points message.\nDefault: Total AP: %s")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD",            "Alliance Points - Filter Threshold")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD_TP",         "Alliance Points gained below this value will not be displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE",             "Alliance Points - Throttle")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE_TP",          "Setting this option higher than 0 will throttle the display of Alliance Points earned by X milliseconds.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTV",                     "Display Tel Var Stone Changes")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTV_TP",                  "Print a context sensitive notification to chat when Tel Var Stones are gained or lost.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVCOLOR",                "Tel Var Stones Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME",                 "Tel Var Stones Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME_TP",              "Name to display for Tel Var Stones.\nDefault: <<1[Tel Var Stone/Tel Var Stones]>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL",                "Display Total Tel Var Stones Suffix")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL_TP",             "Append the total amount of Tel Var Stones after change is displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TVTOTAL_MSG",                "Total Tel Var Stones Syntax")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TVTOTAL_MSG_TP",             "Choose the syntax for the Total Tel Var Stones message.\nDefault: Total TV: %s")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD",            "Tel Var Stones - Filter Threshold")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD_TP",         "Tel Var Stones looted below this value will not be displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE",             "Tel Var Stones - Throttle")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE_TP",          "Setting this option higher than 0 will throttle the display of Tel Var Stones looted by X milliseconds.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER",                "Display Writ Voucher Changes")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER_TP",             "Print a context sensitive notification to chat when Writ Vouchers are rewarded or spent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR",           "Writ Vouchers Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME",            "Writ Vouchers Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TP",         "Name to display for Writ Vouchers.\nDefault: <<1[Writ Voucher/Writ Vouchers]>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL",           "Display Total Writ Vouchers Suffix")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TP",        "Show total amount of Writ Vouchers after change is displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG",                "Total Writ Vouchers Syntax")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG_TP",             "Choose the syntax for the Total Writ Vouchers message.\nDefault: Total Vouchers: %s")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTE",              "Display Transmute Crystal Changes")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTE_TP",           "Print a context sensitive notification to chat when Transmute Crystals are rewarded or spent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTECOLOR",         "Transmute Crystals Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME",          "Transmute Crystals Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME_TP",       "Name to display for Transmute Crystals.\nDefault: <<1[Transmute Crystal/Transmute Crystals]>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL",         "Display Total Transmute Crystals Suffix")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL_TP",      "Show total amount of Transmute Crystals after change is displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG",         "Total Transmute Crystals Syntax")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG_TP",      "Choose the syntax for the Total Transmute Crystals message.\nDefault: Total Crystals: %s")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS",                 "Display Crown Changes")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS_TP",              "Print a context sensitive notification to chat when Crowns are rewarded or spent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSCOLOR",            "Crowns Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME",             "Crowns Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME_TP",          "Name to display for Crowns.\nDefault: <<1[Crown/Crowns]>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL",            "Display Total Crowns Suffix")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL_TP",         "Show total amount of Crowns after change is displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG",            "Total Crowns Syntax")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG_TP",         "Choose the syntax for the Total Crowns message.\nDefault: Total Crowns: %s")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMS",              "Display Crown Gem Changes")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMS_TP",           "Print a context sensitive notification to chat when Crown Gems are rewarded or spent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSCOLOR",         "Crown Gems Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME",          "Crown Gems Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME_TP",       "Name to display for Crown Gems.\nDefault: <<1[Crown Gem/Crown Gems]>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL",         "Display Total Crown Gems Suffix")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL_TP",      "Show total amount of Crown Gems after change is displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG",         "Total Crown Gems Syntax")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG_TP",      "Choose the syntax for the Total Crown Gems message.\nDefault: Total Gems: %s")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS",                 "Display Outfit Style Token Changes")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS_TP",              "Print a context sensitive notification to chat when Outfit Style Tokens are rewarded or spent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSCOLOR",            "Outfit Style Tokens Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME",             "Outfit Style Tokens Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME_TP",          "Name to display for Outfit Style Tokens.\nDefault: <<1[Outfit Style Token/Outfit Style Tokens]>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL",            "Display Total Outfit Style Tokens Suffix")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL_TP",         "Show total amount of Outfit Style Tokens after change is displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG",            "Total Outfit Style Tokens Syntax")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG_TP",         "Choose the syntax for the Total Outfit Style Tokens message.\nDefault: Total Tokens: %s")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CONTEXT_MENU",               "Shared Currency/Loot Options")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CONTEXT_HEADER",             "Context Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RECEIVE",            "Receive")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RECEIVE_TP",         "Default: You receive %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOOT",               "Loot")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOOT_TP",            "Default: You loot %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EARN",               "Earn")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EARN_TP",            "Default: You earn %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SPEND",              "Spend")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SPEND_TP",           "Default: You spend %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOST",               "Lose")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOST_TP",            "Default: You lose %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STEAL",              "Steal")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STEAL_TP",           "Default: You steal %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PICKPOCKET",         "Pickpocket")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PICKPOCKET_TP",      "Default: You pickpocket %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BOUNTY",             "Bounty - Paid")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BOUNTY_TP",          "Default: You pay off your bounty of %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONFISCATE",         "Bounty - Confiscated")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONFISCATE_TP",      "Default: A guard confiscates %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REPAIR",             "Repair")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REPAIR_TP",          "Default: You pay %s in repairs.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADER",             "Guild Trader - Purchase")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADER_TP",          "Default: You purchase an item from the guild trader for %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING",            "Guild Trader - Listing Fee")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING_TP",         "Default: Listing fee of %s charged.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN",            "Trade (Incoming)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_TP",         "Default: You receive %s from %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME",    "Trade (Incoming) - No Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME_TP", "This message only displays if there is an error resolving the trading player name.\nDefault: You receive %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT",           "Trade (Outgoing)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_TP",        "Default: You trade %s to %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME",   "Trade (Outgoing) - No Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME_TP","This message only displays if there is an error resolving the trading player name.\nDefault: You trade %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN",             "Mail (Incoming)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_TP",          "Default: You receive mail with %s from %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME",     "Mail (Incoming) - No Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME_TP",  "This message only displays if there is an error resolving the mail sender name.\nDefault: You receive mail with %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT",            "Mail (Outgoing)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_TP",         "Default: You mail %s to %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME",    "Mail (Outgoing) - No Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME_TP", "This message only displays if there is an error resolving the mail recipient name.\nDefault: You mail %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILCOD",            "Mail - COD Payment")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILCOD_TP",         "Default: You send a COD payment of %s to %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_POSTAGE",            "Mail - Postage")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_POSTAGE_TP",         "Default: You pay %s in postage.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSIT",            "Bank - Deposit")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSIT_TP",         "Default: You deposit %s in your bank.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAW",           "Bank - Withdraw")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAW_TP",        "Default: You withdraw %s from your bank.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD",       "Guild Bank - Deposit")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD_TP",    "Default: You deposit %s in the guild bank.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE",     "Chest Storage - Deposit")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE_TP",  "Default: You deposit %s in storage.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE",    "Chest Storage - Withdraw")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE_TP", "Default: You withdraw %s from storage.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD",      "Guild Bank - Withdraw")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD_TP",   "Default: You withdraw %s from the guild bank.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE",          "Wayshrine Fee")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE_TP",       "Default: Wayshrine fee of %s charged.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UNSTUCK",            "Unstuck Fee")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UNSTUCK_TP",         "Default: Unstuck fee of %s charged.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STABLE",             "Riding Upgrade")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STABLE_TP",          "Default: You purchase %s for %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STORAGE",            "Storage Upgrade")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STORAGE_TP",         "Default: You purchase %s for %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_ATTRIBUTES",         "Respec - Attributes")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_ATTRIBUTES_TP",      "Default: You make a donation of %s to redistribute your Attribute Points.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CHAMPION",           "Respec - Champion Points")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CHAMPION_TP",        "Default: You pay a fee of %s to redistribute your Champion Points.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MORPHS",             "Respec - Skill Morphs")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MORPHS_TP",          "Default: You make a donation of %s to redistribute your Skill Morphs.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SKILLS",             "Respec - Skill Points")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SKILLS_TP",          "Default: You make a donation of %s to redistribute your Skill Points.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN",           "Cyrodiil - Reset Home Campaign")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN_TP",        "Default: You spend %s to reset your home campaign.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY",                "Buy (No Value)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY_TP",             "Default: You purchase %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY_VALUE",          "Buy")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY_VALUE_TP",       "Default: You purchase %s for %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK",            "Buyback (No Value)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_TP",         "Default: You buyback %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_VALUE",      "Buyback")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_VALUE_TP",   "Default: You buyback %s for %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL",               "Sell (No Value)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_TP",            "Default: You sell %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE",         "Sell")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE_TP",      "Default: You sell %s for %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE",        "Fence")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE_TP",     "Default: You fence %s for %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE",              "Fence (No Value)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_TP",           "Default: You fence %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE",      "Launder")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE_TP",   "Default: You launder %s for %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER",            "Launder (No Value)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_TP",         "Default: You launder %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USE",                "Crafting - Use")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USE_TP",             "Default: You use %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CRAFT",              "Crafting - Craft")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CRAFT_TP",           "Default: You craft %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXTRACT",            "Crafting - Extract")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXTRACT_TP",         "Default: You extract %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE",            "Crafting - Upgrade (Success)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_TP",         "Default: You upgrade %s to %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL",       "Crafting - Upgrade (Failure)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL_TP",    "Default: You fail to upgrade %.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REFINE",             "Crafting - Refine")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REFINE_TP",          "Default: You refine %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT",        "Crafting - Deconstruct")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT_TP",     "Default: You deconstruct %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RESEARCH",           "Crafting - Research")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RESEARCH_TP",        "Default: You research %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY",            "Destroyed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY_TP",         "Default: You destroy %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK",           "Lockpick Broken")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK_TP",        "Default: Your %s breaks.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE",             "Quest Item - Removed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE_TP",          "Default: Removed %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP",              "Group Member Loot")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP_TP",           "Default: %s loots %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP",     "Disguise - Equipped")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP_TP",  "Default: You equip %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE",    "Disguise - Removed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE_TP", "Default: You unequip %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY",   "Disguise - Destroyed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY_TP","Default: Your %s is destroyed.")
-
--- LOOT MENU
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HEADER",                         "Loot Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWICONS",                      "Display Item Icons")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWICONS_TP",                   "Display an icon for items logged.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWARMORTYPE",                  "Display Item Armor Type")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWARMORTYPE_TP",               "Display the armor type of relevant items logged.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWITEMSTYLE",                  "Display Item Style")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWITEMSTYLE_TP",               "Display the style of relevant items logged.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWITEMTRAIT",                  "Display Item Trait")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWITEMTRAIT_TP",               "Display the trait of relevant items logged.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_TOTAL",                          "Display Total Items Suffix")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_TOTAL_TP",                       "Append the total count of an item after an item is logged.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_TOTALSTRING",                    "Total Items Syntax")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_TOTALSTRING_TP",                 "Choose the syntax for the Total Items message.\nDefault: New Total:")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWITEMS",                      "Display Items - Looted")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWITEMS_TP",                   "Print a message to chat when items are looted from corpses, containers, pickpocketing, and quest rewards.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE",                    "Display ONLY Notable Loot")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE_TP",                 "Only display notable items looted (Any set items, any purple+ items, any blue+ special items).")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWGRPLOOT",                    "Display Group Members Notable Loot")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWGRPLOOT_TP",                 "Also display the notable loot group members receive (Any set items, any purple+ items, any blue+ special items).")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS",              "Hide Annoying Notable Items")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS_TP",           "Don't display annoying notable items looted (Laurels, Malachite Shards, Undaunted Plunder, Mercenary Motif Pages, etc...).")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS_WARNING",      "This prevents chat spam in large groups.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HIDETRASH",                      "Hide Trash Quality Items")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HIDETRASH_TP",                   "Don't display trash quality items looted.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LootConfiscateD",                "Display Item Loss - Confiscated Items")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LootConfiscateD_TP",             "Display a message when items are confiscated by a guard.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED",              "Display Item Loss - Destroyed Items")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED_TP",           "Display a message when an item is destroyed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK",               "Display Item Loss - Lockpick Break")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK_TP",            "Display a message when a lockpick is broken from attempting to pick or forcing a lock open.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWVENDOR",                     "Display Items - Vendor Transactions")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWVENDOR_TP",                  "Print a message to chat when items are purchased or sold at a vendor.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWQUESTADD",                   "Display Quest Items Looted")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWQUESTADD_TP",                "Display a message when a quest item is looted or received.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWQUESTREM",                   "Display Quest Items Removed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWQUESTREM_TP",                "Display a message when a quest item is used or removed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE",                   "Merge Currency & Loot Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE_TP",                "Combine the individual item purchase message and currency change message into one line.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS",              "Display Total Items on Transactions")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS_TP",           "Toggle the display of the total count of items on a vendor transaction.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY",           "Display Total Currency on Transactions")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY_TP",        "Toggle the display of the total currency on a vendor transaction.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWBANK",                       "Display Items - Banking & Storage")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWBANK_TP",                    "Print a message to chat when items are deposited or withdrawn from a bank or guild bank.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCRAFT",                      "Display Items - Crafting")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_TP",                   "Print a message to chat when items are received, lost, or upgraded from crafting.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS",            "Display Materials Used")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS_TP",         "Toggle the display of materials used by crafting.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWMAIL",                       "Display Items - Mail")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWMAIL_TP",                    "Print a message to chat when items are received or sent in the mail.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWTRADE",                      "Display Items - Trade")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWTRADE_TP",                   "Print a message to chat when items are received or lost in a trade.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWDISGUISE",               "Show Disguise equip/unequip message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWDISGUISE_TP",            "Print a message to chat when a disguise is equipped or unequipped.")
-
--- Experience Menu
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER",                          "Experience/Skill Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_ENLIGHTENED",              "Enlightenment")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_ENLIGHTENED",                     "Display Enlightenment - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_ENLIGHTENED_TP",                  "Display <<1>> when you are enlightened or no longer enlightened.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_LEVELUP",                  "Level Up")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LEVELUP",                         "Display Level Up - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LEVELUP_TP",                      "Display <<1>> when you level up or earn a Champion Point.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LEVELUP_CSAEXPAND",               "Display Expanded Level Up CSA")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LEVELUP_CSAEXPAND_TP",            "Adds subtext to the Center Screen Announcement for level up that displays the level attained.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLUPICON",                       "Display Level Icon on Level Up")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLUPICON_TP",                    "Toggle the display of the normal level/champion point icon when you level up or earn a Champion point.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT",               "Color Level by Context")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT_TP",            "Colors the current level text to match the current level or champion point context color.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_LEVELUP_COLOR",            "Level Up Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_RESPEC",                   "Respec Notifications")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_RESPEC",                          "Display Respec Notification - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_RESPEC_TP",                       "Display <<1>> when you redistribute Champion Points and when you relearn attributes, skill points, or morphs.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_EXPERIENCEGAIN",           "Experience Points")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN",                     "Display Experience Gain")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN_TP",                  "Print a message to chat when Experience Points are earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWEXPICON",                     "Display Experience Icon")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWEXPICON_TP",                  "Toggle the display of the Experience Points icon.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_MESSAGE",                         "Experience Gain Message Format")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_MESSAGE_TP",                      "Message format for experience gain.\nDefault: You earn %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_NAME",                            "Experience Points Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_NAME_TP",                         "Name to use for Experience Points.\nDefault: experience <<1[point/points]>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_COLORMESSAGE",             "Experience Gain Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_COLORNAME",                "Experience Points Name Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME",              "Context Name for Experience Gain")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME_TP",           "This option is intended to offer contrast from currency and loot messages since experience gain is not context sensitive.\nDefault: \"[Earned]\"")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME",              "Display Name for Experience Gain")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME_TP",           "Name to post in chat when experience is earned.\nDefault: \"XP\"")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS",                    "Hide Experience from Kills")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS_TP",                 "Toggle this option on to only report experience gain in chat from non-combat sources.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD",                "Combat Experience Gain - Filter Threshold")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD_TP",             "Experience Points earned from kills below this value will not be displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT",             "Combat Experience Gain - Throttle")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TP",          "Setting this option higher than 0 allows you to throttle Experience Points earned by X milliseconds.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_SKILL_POINTS",             "Skill Points")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATED",                  "Display Skill Points Earned - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP",               "Display <<1>>> when a Skill Point is earned from leveling up, quests, or skyshards.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_COLOR1",                   "Skyshard Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_COLOR2",                   "Skill Points Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX",            "Skyshard Absorbed Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX_TP",         "When a Skyshard is absorbed this prefix message will be displayed.\nDefault: Skyshard Absorbed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_PARTIALBRACKET",           "Skyshard Separator Bracket")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_PARTIALBRACKET_TP",        "When a Skyshard is absorbed this bracket will encompass the prefix message when skill points (or partial skill points) are earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL",           "Display Partial Skill Points")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL_TP",        "Display \"Pieces Collected x/3\" when a Skyshard is absorbed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_SKILL_LINES",              "Skill Lines")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED",                 "Display Skill Line Unlocked - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED_TP",              "Display <<1>> when a Skill Line is unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS",                 "Display Skill Line Progression - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS_TP",              "Display <<1>> when a Skill Line levels up.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_ABILITY",                  "Display Ability Progression - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_ABILITY_TP",               "Display <<1>> when an Ability levels up.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_ICON",                     "Display Skill Line Icon")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_ICON_TP",                  "Display the relevant icon for unlocked Skill Lines.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_COLOR",                    "Skill/Ability Progression Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_GUILDREP",                 "Guild Reputation")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_ICON",                       "Display Guild Icon")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_ICON_TP",                    "Display the relevant guild icon when Guild Reputation is earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGECOLOR",               "Guild Reputation Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGEFORMAT",              "Guild Reputation Message Format")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGEFORMAT_TP",           "Message format for Guild Reputation earned.\nDefault: You earn %s")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGENAME",                "Guild Reputation Points Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGENAME_TP",             "Name to use for Guild Reputation.\nDefault: <<1[reputation/reputation]>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_FG",                         "Display Fighters Guild Reputation")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_FG_TP",                      "Display Guild Reputation earned with the Fighters Guild.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_FG_COLOR",                   "Fighters Guild Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_THRESHOLD",                  "Fighters Guild - Filter Threshold")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_THRESHOLD_TP",               "Fighters Guild Reputation earned from kills below this value will not be displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_THROTTLE",                   "Fighters Guild - Throttle")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_THROTTLE_TP",                "Setting this option higher than 0 allows you to throttle Fighters Guild Reputation earned by X milliseconds.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MG",                         "Display Mages Guild Reputation")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MG_TP",                      "Display Guild Reputation earned with the Mages Guild.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MG_COLOR",                   "Mages Guild Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_UD",                         "Display Undaunted Reputation")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_UD_TP",                      "Display Guild Reputation earned with the Undaunted.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_UD_COLOR",                   "Undaunted Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_TG",                         "Display Thieves Guild Reputation")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_TG_TP",                      "Display Guild Reputation earned with the Thieves Guild.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_TG_COLOR",                   "Thieves Guild Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_DB",                         "Display Dark Brotherhood Reputation")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_DB_TP",                      "Display Guild Reputation earned with the Dark Brotherhood Guild.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_DB_COLOR",                   "Dark Brotherhood Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_ALERT",                      "Display Guild Reputation Alert")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_ALERT_TP",                   "When enabled, display a basic alert for any Guilds that are selected above indicating reputation has increased. ")
-
--- Collectibles/Lorebooks Menu
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_HEADER",                  "Collectible/Lorebooks Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COL_HEADER",              "Collectibles")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE",                  "Display Collectible Unlocked - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP",               "Display <<1>> when a  Collectible is unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ICON",                    "Display Collectible Icon")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ICON_TP",                 "Display an icon for the relevant Collectible unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE",               "Collectible Prefix Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_TWO",               "Collectible Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX",           "Collectible Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX_TP",        "Enter the prefix message that will display before the Collectible unlocked.\nDefault: Collection Updated")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET",                 "Collectible Prefix Bracket")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET_TP",              "This bracket will encompass the prefix message when a Collectible is unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY",                "Display Collectible Category")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY_TP",             "Append the Collectible unlocked message with the category it was added to.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_LORE_HEADER",             "Lorebooks")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ENABLE",                     "Display Lorebook Discovery - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP",                  "Display <<1>> when a Lorebook is discovered.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLLECTION",                 "Display Lore Collection Complete - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP",              "Display <<1>> when a collection of Lorebooks is complete.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ICON",                       "Display Lorebook Icon")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ICON_TP",                    "Display an icon for the relevant Lorebook unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR1",                     "Lorebook Prefix Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR2",                     "Lorebook Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX1",                    "Lorebook Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX1_TP",                 "Enter the prefix message displayed when a Lorebook is discovered.\nDefault: Lorebook Discovered")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX2",                    "Book Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX2_TP",                 "Enter the prefix message displayed when a book is discovered.\nDefault: Book Discovered")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION",          "Lore Collection Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION_TP",       "Enter the prefix message that will display before completed Lore Collection notifications.\nDefault: Collection Completed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET",           "Lorebook Prefix Bracket")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP",        "This bracket will encompass the prefix message when a Lorebook is unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY",                   "Display Collection Category")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_TP",                "Display the relevant category of a Lorebook unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE",                 "Display Books without Eidetic Memory")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP",              "Display standard books unlocked even without Eidetic Memory unlocked.")
-
--- Achievements Menu
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_HEADER",                      "Achievements Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_UPDATE",                      "Display Achievement Update - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP",                   "Display <<1>> when progress is made toward the completion of an Achievement.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETE",                    "Display Achievement Completion - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP",                 "Display <<1>> when an Achievement is unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO",                  "Display Detailed Achievement Info")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO_TP",               "Displays each subcategory required for Achievement completion and progress in each subcategory.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLORPROGRESS",               "Color Achievement Progress")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLORPROGRESS_TP",            "Enables color change for Achievement progress based off completion.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE",                    "Progress Step Size %")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE_TP",                 "Display Achievement update information every #% to completion. Setting this value to 0 will print Achievement information on every update event.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT",             "Display % on Achievement Completion")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT_TP",          "Adds a (100%) indicator to achievement completion messages to match progress syntax.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ICON",                        "Display Achievement Icon")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ICON_TP",                     "Display the relevant icon for an Achievement on progress or completion.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLOR1",                      "Achievement Prefix Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLOR2",                      "Achievement Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_PROGMSG",                     "Achievement Progress Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_PROGMSG_TP",                  "Prefix for Achievement progress messages.\nDefault: Achievement Updated")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG",                 "Achievement Completion Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG_TP",              "Prefix for Achievement completion messages.\nDefault: Achievement Unlocked")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_SHOWCATEGORY",                "Display Achievement Category")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_SHOWCATEGORY_TP",             "Display the primary category of an Achievement.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_SHOWSUBCATEGORY",             "Display Achievement Subcategory")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_SHOWSUBCATEGORY_TP",          "Display the subcategory of an Achievement.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_BRACKET",                     "Achievement Prefix Bracket")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_BRACKET_TP",                  "This bracket will encompass the prefix message when an Achievement is updated or unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET",             "Achievement Category Bracket")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET_TP",          "This bracket will encompass the category and subcategory when an Achievement is updated or unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_HEADER",             "Tracking Options")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORY",                    "Track \'<<1>>\' Achievements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP",                 "Enables tracking for Achievements in the <<1>> category.")
-
--- Quest Menu
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_HEADER",                        "Quest/POI Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE",                "Display Shared Quests - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP",             "Display <<1>> when another player shares a quest with you.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY",            "Display Location Discovery - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP",         "Display <<1>> when a location on the map is discovered.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY",                  "Display Imperial City Area Messages - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP",               "Display <<1>> when entering a new area of the Imperial City Sewers.\nNote: This option uses POI Name Color from Quest/POI Announcements.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION",                "Display Imperial City Area Description")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP",             "Display the description text when entering a new area of the Imperial City Sewers.\nNote: This option uses the POI Description Color from Quest/POI Announcements.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE",                 "Display POI Objective - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP",              "Display <<1>> when a quest is accepted with an associated map POI.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_COMPLETE",                  "Display POI Complete - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP",               "Display <<1>> when a quest is completed with an associated map POI.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_ACCEPT",                        "Display Quest Accepted - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_ACCEPT_TP",                     "Display <<1>> when a quest is accepted.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COMPLETE",                      "Display Quest Completed - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COMPLETE_TP",                   "Display <<1>> when a quest is completed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_ABANDON",                       "Display Quest Abandoned - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_ABANDON_TP",                    "Display <<1>> when a quest is abandoned.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE",             "Display Quest Objective Failure - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP",          "Display <<1>> when a quest failure state is triggered.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE",              "Display Quest Objective Updates - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP",           "Display <<1>> when a new quest objective is added.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE",            "Display Quest Objective Completion - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP",         "Display <<1>> when a quest objective is completed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON",                 "Display Quest Difficulty Icon")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON_TP",              "Display an icon relevant to the difficulty and type of quest.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG",                 "Display Detailed Quest Description")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG_TP",              "When toggled on, accepting a quest will display the Journal Entry details of the quest.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG",        "Display Detailed POI Description")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP",     "When toggled on, accepting/completing a quest with an associated map POI will display the full description.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR1",                        "POI Name Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR2",                        "POI Description Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR3",                        "Quest Name Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR4",                        "Quest Description Color") -- TODO: Add Tooltip with finalized color value
-
--- Social Menu
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_HEADER",                       "Social/Guild Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_FRIENDS_HEADER",               "Friends/Ignored List")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_FRIENDS",                      "Display Friends/Ignored Requests - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_FRIENDS_TP",                   "Display <<1>> for friend invites, Friends list changes, and Ignored list changes.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF",                "Display Friends List Log On/Off - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP",             "Display <<1>> when a player on your Friends list logs on or off.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_HEADER",                 "Guild Notifications")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD",                        "Display Guild Invite/Leave/Join - <<1>> ")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_TP",                     "Display <<1>> for Guild invitations and Join/Leave notifications.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK",                   "Display Guild Rank Changes - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK_TP",                "Display <<1>> for Guild Rank changes. Options are determined by the dropdown menu below.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS",            "Guild Rank Display Options")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS_TP",         "Choose the method in which Guild Rank changes will be reported.\nDefault: Self Only")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN",                  "Display Guild Administration - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP",               "Display <<1>> when the Guild MOTD or Background Information is updated, rank data is updated, or Heraldry is updated.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS",                  "Display Guild Icons")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS_TP",               "Displays the faction or Guild Rank icon for guild messages.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR",                  "Guild Name Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE",         "Use Alliance Colors for Guild Names")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE_TP",      "Use the relevant alliance color for guild names, icons, and ranks in guild messages.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_TRADE_HEADER",                 "Trade Notifications")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_TRADE",                        "Display Trade Notifications - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_TRADE_TP",                     "Display <<1>> for trade invitations, cancelation, and success.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUEL_HEADER",                  "Duel Notifications")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUEL",                         "Display Duel Challenges - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUEL_TP",                      "Display <<1>> for duel challenges and declined challenges.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELSTART",                    "Display Duel Start Notification - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TP",                 "Display <<1>> when a duel begins.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TPCSA",              "Display <<1>> when a duel begins. Center Screen Announcement also displays a countdown")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION",             "Duel Start Notification Format (CA/Alert Only)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION_TP",          "Choose the format for the message that is displayed when the countdown ends and the duel is started.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE",                 "Display Duel End Notification - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP",              "Display <<1>> when a duel ends.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY",                 "Display Duel Boundary Warning - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP",              "Display <<1>> when you are close to the Duel Boundary.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_MARA_HEADER",                  "Pledge of Mara Notifications")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA",                           "Display Pledge of Mara - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA_TP",                        "Display <<1>> for Pledge of Mara events.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA_ALERT",                     "Only Display Alert on Failure")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA_ALERT_TP",                  "When enabled, an Alert will only be displayed if the Pledge of Mara fails. This emulates the behavior of the default UI settings.")
-
--- Group Menu
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_HEADER",                        "Group/LFG/Trial Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_BASE_HEADER",                   "Group Notifications")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_BASE",                          "Display Group Notifications - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_BASE_TP",                       "Display <<1>> for group invites and group composition changes.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFG_HEADER",                    "LFG Notifications")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGREADY",                      "Display LFG Ready Notifications - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGREADY_TP",                   "Display <<1>> when an LFG group is formed or activity is joined.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGQUEUE",                      "Display LFG Queue Status - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGQUEUE_TP",                   "Display <<1>> when entering or exiting the queue for an LFG activity.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGVOTE",                       "Display LFG Vote/Ready Check - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP",                    "Display <<1>> for group votes and ready checks.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE",                   "Display LFG Activity Completed - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP",                "Display <<1>> when a Group Finder activity is completed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_HEADER",                   "Raid Notifications")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BASE",                     "Display Raid Status Notifications - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP",                  "Display <<1>> when a Trial is started, failed, or completed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_SCORE",                    "Display Score Updates - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP",                 "Display <<1>> when your score in a Trial changes.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE",                "Display New Best Score - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP",             "Display <<1>> when a new high score is achieved on trial completion.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_REVIVE",                   "Display Vitality Bonus Loss - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP",                "Display <<1>> when Vitality Bonus is decreased.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_DISPLAY_HEADER",                      "Display Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_DISPLAY_DESCRIPTION",                 "Display Announcements are various messages displayed under certain conditions, these range from broad to very specific categories, and thus fall under their own section for Announcements.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA",                    "Display DSA/Maelstrom Arena Stage - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP",                 "Display <<1>> when a new stage begins in Dragonstar or Maelstrom Arena.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND",              "Display Maelstrom Arena Round - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP",           "Display <<1>> when a new round begins in Maelstrom Arena.")
-
--- Display Announcements
-ZO_CreateStringId("SI_LUIE_LAM_CA_DISPLAY_CRAGLORN",                    "Display Craglorn Buffs - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP",                 "Display <<1>> when you gain a buff from completing a World Boss event in Craglorn.")
-
--- Misc Menu
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_GROUPAREA",                      "Display Entering/Leaving Group Area - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_GROUPAREA_TP",                   "Display <<1>> when entering or leaving a Group Area.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_HEADER",                         "Miscellaneous Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK",                   "Display Lockpicking Notifications - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP",                "Display <<1>> on successful or failed lockpick attempts as well as when you attempt to pick a lock and it's impossible or you have no lock picks.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL",                       "Display Mail Notifications - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP",                    "Display <<1>> when mail is accepted, deleted, or sent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWJUSTICE",                    "Display Justice Notifications - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP",                 "Display <<1>> when items or gold are confiscated by a guard.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG",                    "Display Bag/Bank Space Upgrade - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP",                 "Display <<1>> when bag or bank space upgrades are purchased ingame or through the crown store.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_COLOR",              "Bag/Bank Space Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING",                     "Display Riding Skill Upgrade - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP",                  "Display <<1>> when riding upgrades are purchased or Crown Riding Skill books are used.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR",               "Riding Skill Message Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR_BOOK",          "Riding Skill (Crown Lesson) Message Color") -- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE",               "Display Disguise Status - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP",            "Display <<1>> when entering or exiting a relevant area and becoming disguised or revealed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT",          "Display Detection Warning - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP",       "Display <<1>> when near a sentry or performing suspicious activity while disguised.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR",     "Detection Warning CSA Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR_TP",  "Change the color of the Center Screen Announcement displayed when near a sentry or performing suspicious activity while disguised.")
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- COMBAT INFO -- LAM --
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER",                              "Combat Info Options")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWCOMBATINFO",                      "Combat Info Module")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHARED_FONT_TP",                      "Choose the font to use for the countdown label.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP",                  "Choose the font size for the countdown label.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP",                 "Choose the font style for the countdown label.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHARED_POSITION",                     "Label Vertical Position")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHARED_POSITION_TP",                  "Adjust the vertical position of the countdown label.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER_GCD",                          "Global Cooldown Options")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_SHOW",                            "Display Global Cooldown (High CPU Usage)")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_SHOW_TP",                         "Dislay an animation on ability bar slots while on the global cooldown.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_SHOW_WARN",                       "This component can cause performance issues on some machines! If you experience FPS drops this is the first thing to disable.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_QUICK",                           "Display GCD for Potions")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_QUICK_TP",                        "Also display the global cooldown animation on the quickslot for potions and items that are not subject to the global cooldown.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_FLASH",                           "Display Ready Flash")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_FLASH_TP",                        "Display a flash animation on each ability slot on the bar when the global cooldown is finished.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_DESAT",                           "Desaturate Icons")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_DESAT_TP",                        "Desaturate ability icons while on the global cooldown.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_COLOR",                           "Color Slot Label # Red")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_COLOR_TP",                        "While on global cooldown, colorize the ability button numeric labels red.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_ANIMATION",                       "GCD Animation Method")
-ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_ANIMATION_TP",                    "Choose the animation type for tracking the global cooldown.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER_ULTIMATE",                     "Ultimate Tracking Options")
-ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_SHOW_VAL",                   "Display Ultimate Value")
-ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_SHOW_VAL_TP",                "Display ultimate value above the ultimate ability slot.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_SHOW_PCT",                   "Display Ultimate Percentage")
-ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_SHOW_PCT_TP",                "Display Ultimate percentage percentage toward completion")
-ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL",                   "Hide Label When Full")
-ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL_TP",                "Remove percentage label from ultimate slot when ability becomes ready.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_TEXTURE",                    "Display Ultimate Generation Texture")
-ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_TEXTURE_TP",                 "Display special texture under ultimate ability slot when in-combat ultimate generation is detected.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER_BAR",                          "Bar Ability Highlight Options")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_EFFECT",                          "Highlight Active Effects")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_EFFECT_TP",                       "Highlights currently active buffs on the ability bar for their active duration.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROC",                            "Highlight Active Procs")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROC_TP",                         "Highlights an ability that is in a procced state on the ability bar.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROCSOUND",                       "Play Sound on Ability Proc")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROCSOUND_TP",                    "Play a sound notifcation when an ability procs.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE",                 "Proc Sound")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE_TP",              "Choose the sound to play when an ability procs.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_SECONDARY",                       "Highlight Active Secondary Effects")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_SECONDARY_TP",                    "Highlights an ability when secondary type effects are active. Examples: Honor the Dead magicka restore buff, Major Savagery from Biting Jabs.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_ULTIMATE",                        "Highlight Active Ultimate Effects")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_ULTIMATE_TP",                     "Highlights currently active ultimate abilities on the ability bar for their active duration. This will hide the percentage label for the duration of the effect when enabled.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_LABEL",                           "Display Countdown Label")
-ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_LABEL_TP",                        "Display a countdown timer for any highlighted ability.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER_POTION",                       "Quickslot Cooldown Timer Options")
-ZO_CreateStringId("SI_LUIE_LAM_CI_POTION",                              "Display Quickslot Cooldown Timer")
-ZO_CreateStringId("SI_LUIE_LAM_CI_POTION_TP",                           "Display a cooldown timer for potions and other quickslot items.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_POTION_COLOR",                        "Color Label")
-ZO_CreateStringId("SI_LUIE_LAM_CI_POTION_COLOR_TP",                     "Color the quickslot cooldown timer label based off the remaining duration.")
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- INFO PANEL -- LAM --
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-ZO_CreateStringId("SI_LUIE_LAM_PNL",                                    "Info Panel")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_ENABLE",                             "Info Panel Module")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_DESCRIPTION",                        "Displays a panel with potentially useful information on it such as Latency, Time, FPS, Durability and Weapon Charge, etc...")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_DISABLECOLORSRO",                    "Disable colours on read-only values")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_DISABLECOLORSRO_TP",                 "Disable value-dependent colour of the information label for items that you don't have direct control: Currently this includes FPS and Latency labels.")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_ELEMENTS_HEADER",                    "Info Panel elements")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_HEADER",                             "Info Panel Options")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_RESETPOSITION_TP",                   "This will reset position of Info Panel into screen top right corner.")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_SHOWARMORDURABILITY",                "Show Armour Durability")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_SHOWBAGSPACE",                       "Show Bags Space")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_SHOWCLOCK",                          "Show Clock")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_SHOWEAPONCHARGES",                   "Show Weapons Charges")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_SHOWFPS",                            "Show FPS")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_SHOWLATENCY",                        "Show Latency")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_SHOWMOUNTTIMER",                     "Show Mount Feed Timer |c00FFFF*|r")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_SHOWMOUNTTIMER_TP",                  "(*) Once you have trained your mount to maximum level this field will be automatically hidden for current character.")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_SHOWSOULGEMS",                       "Show Soul Gems")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_UNLOCKPANEL",                        "Unlock panel")
-ZO_CreateStringId("SI_LUIE_LAM_PNL_UNLOCKPANEL_TP",                     "Allow mouse dragging for Info Panel.")
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- UNITFRAMES -- LAM --
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
--- Base Options
-ZO_CreateStringId("SI_LUIE_LAM_UF_ENABLE",                              "Unit Frames Module")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DESCRIPTION",                         "This allows display of textual attributes information over default UI controls. It also creates custom frames for player and target.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHORTNUMBERS",                        "Shorten Numbers on Bars")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHORTNUMBERS_TP",                     "Replace large numbers like 12,345 with 12.3k on all bars and labels related to unit frames.")
-
--- Shared Options
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_LABEL",                        "Label Format")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_LABEL_TP",                     "Format label for custom attribute bar.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_LABEL_LEFT",                   "Label Format (Left)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_LABEL_LEFT_TP",                "Format first label for custom attribute bar.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT",                  "Label Format (Right)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT_TP",               "Format second label for custom attribute bar.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_PT",                           "Player/Target")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_GROUP",                        "Group")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_RAID",                         "Raid")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_BOSS",                         "Boss")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_ARMOR",                        "<<1>> - Display Armor Change Overlay")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_ARMOR_TP",                     "Display additional icon on unit health bar when unit has its armor affected. Also displays cracked texture over health bar when armor is decreased.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_POWER",                        "<<1>> - Display Power Change Overlay")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_POWER_TP",                     "Display an animated texture overlay when weapon/spell power is increased or decreased.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_REGEN",                        "<<1>> - Display HoT / DoT Overlay")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_REGEN_TP",                     "Display an animated arrow overlay when regeneration is increased or decreased.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY",            "Group/Raid Transparency (Shared Setting)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY_TP",         "Change the transparency of custom group and raid unit frames.")
-
--- Default Unit Frames Options
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_HEADER",                      "Default Unit Frames")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_PLAYER",                      "Default PLAYER Frame")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_TARGET",                      "Default TARGET Frame")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_GROUPSMALL",                  "Default GROUP Frame")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_REPOSIT",                     "Reposition Default Player Frames")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_REPOSIT_TP",                  "Change position of the default player frames to be in a compacted pyramid layout in the bottom center of the screen.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_VERT",                        "Adjust Player Frames Vertical Position")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_VERT_TP",                     "Adjust the vertical position of the default player frames.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_OOCTRANS",                    "Transparency - Out-of-Combat")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_OOCTRANS_TP",                 "Change the transparency of default unit frames when out of combat. Default UI setting is hidden (0).")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_INCTRANS",                    "Transparency - In-Combat")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_INCTRANS_TP",                 "Change the transparency of default unit frames when engaged in combat. Default UI setting is fully visible (100).")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_LABEL",                       "Label Format")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_LABEL_TP",                    "Format of the label text for default unit frames.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_FONT_TP",                     "Choose the font to use for labels on the default unit frames bars.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_FONT_SIZE_TP",                "Choose the font size for labels on the default unit frames bars.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_FONT_STYLE_TP",               "Choose the font style for labels on the default unit frames bars.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_LABEL_COLOR",                 "Label Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_TARGET_COLOR_REACTION",               "Color Target Name by Reaction")
-ZO_CreateStringId("SI_LUIE_LAM_UF_TARGET_COLOR_REACTION_TP",            "Change the color of the Targets name label according to unit reaction.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_TARGET_ICON_CLASS",                   "Display Target Class Icon")
-ZO_CreateStringId("SI_LUIE_LAM_UF_TARGET_ICON_CLASS_TP",                "Display class icon for target player.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_TARGET_ICON_GFI",                     "Display Target Friend/Guild/Ignored Icon")
-ZO_CreateStringId("SI_LUIE_LAM_UF_TARGET_ICON_GFI_TP",                  "Display icon for target player if this player is your friend, in one of your guilds, or ignored.")
-
--- Custom Unit Frames Options
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_HEADER",                      "Custom Unit Frames")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_UNLOCK",                      "Unlock Custom Frames")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TP",                   "Allow mouse dragging for all custom unit frames. When frames are unlocked, the target frame is not being hidden and may display outdated information.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT",                  "Reset position")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT_TP",               "This will reset the position of Custom Frames to the default.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_FONT_TP",                     "Choose the font to use for custom unit frames.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_LABELS",            "Font Size (Label)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_LABELS_TP",         "Choose the font size for unit name, caption, etc: everything not on bars.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_BARS",              "Font Size (Bar)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_BARS_TP",           "Choose the font size for bar labels on custom unit frames.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_FONT_STYLE_TP",               "Choose the font style to use for custom unit frames.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_TEXTURE",                     "Texture")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_TEXTURE_TP",                  "Texture to use on custom frames.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE",             "Use Separate Shield Bar")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_TP",          "Enable this option to change the shield bar on Player, Target, and Small Group custom frames to be independent and not overlayed with Health Bar.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT",      "Separate Shield Bar Height")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT_TP",   "Choose the height for the shield bar.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY",              "Use Full Height Shield Bar")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY_TP",           "When Shield bar is NOT separate, use full-sized shield bar on top of health bar for Player, Target, and Small Group custom frames instead of default half-height overlay bar.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_ALPHA",                "Set Shield Transparency (Overlay)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_ALPHA_TP",             "Set the transparency of the shield bar when the overlay option is enabled.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS",              "Use Smooth Bar Transition")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS_TP",           "Use smooth transition on all bars when value get changed. Disabling this option could improve performance a little.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_CHAMPION",                    "Champion Point Display Method")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_CHAMPION_TP",                 "Choose whether the actual value of champion points is shown or values above the current maximum attainable cap are displayed.")
-
--- Custom Unit Frame Color Options
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_HEADER",                "Custom Unit Frame Color Options")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALTH",                "Health Bar Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_SHIELD",                "Shield Bar Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_MAGICKA",               "Magicka Bar Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_STAMINA",               "Stamina Bar Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_DPS",                   "DPS Role Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALER",                "Healer Role Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_TANK",                  "Tank Role Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_DK",                    "Dragonknight Class Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_NB",                    "Nightblade Class Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_SORC",                  "Sorcerer Class Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_TEMP",                  "Templar Class Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_WARD",                  "Warden Class Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER",         "Reaction Color - Player")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_FRIENDLY",       "Reaction Color - Friendly")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE",        "Reaction Color - Hostile")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_NEUTRAL",        "Reaction Color - Neutral")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_GUARD",          "Reaction Color - Guard")
-
--- Player/Target Frames
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_HEADER",                    "Custom Unit Frames (Player & Target)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER",            "Additional Player Frame Display Options")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER",             "Enable Custom PLAYER Frame")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER_TP",          "Create custom player unit frames.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET",             "Enable Custom TARGET Frame")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET_TP",          "Create custom target unit frames.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_WIDTH",              "Player - Bar Width")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_HIGHT",           "Player - Health Bar Height")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_HIGHT",          "Player - Magicka Bar Height")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_HIGHT",         "Player - Stamina Bar Height")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL",        "Hide Magicka Bar Label")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP",     "Hide the attribute values label on the Player Magicka Bar.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR",          "Completely Hide Magicka Bar")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP",       "Completely hide the Player Magicka Bar.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL",       "Hide Stamina Bar Label")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL_TP",    "Hide the attribute values label on the Player Stamina Bar.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR",         "Completely Hide Stamina Bar")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP",      "Completely hide the Player Stamina Bar.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_OOCPACITY",          "Player - Transparency - Out-of-Combat")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_OOCPACITY_TP",       "Change the transparency of custom player unit frames when out of combat.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_ICPACITY",           "Player - Transparency - In-Combat")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_ICPACITY_TP",        "Change the transparency of custom player unit frames when engaged in combat.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_PLAYER",              "Player - Hide Anchored Buffs Out-of-Combat")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_PLAYER_TP",           "When out of combat, hide the buff & debuff frame if they are anchored to the player/target bars.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD",             "Player Frame Display Method")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_TP",          "Choose the layout for custom player frames. This will reset your custom frame positions, and the Horizontal and Pyramid options will relocate the player and target frames to center screen.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_WARN",        "This will reset your custom Player & Target frame positions!")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST",            "Stamina Bar Horizontal Position")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST_TP",         "Adjust the horizontal position of the stamina bar. If you wish to relocate all frames, unlock the custom frames and move them instead.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST",             "Stamina Bar Vertical Position")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST_TP",          "Adjust the vertical position of the stamina bar. If you wish to relocate all frames, unlock the custom frames and move them instead.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST",            "Magicka Bar Horizontal Position")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST_TP",         "Adjust the horizontal position of the magicka bar. If you wish to relocate all frames, unlock the custom frames and move them instead.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST",             "Magicka Bar Vertical Position")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST_TP",          "Adjust the vertical position of the magicka bar. If you wish to relocate all frames, unlock the custom frames and move them instead.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING",            "Player - Spacing Between Bars")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING_TP",         "Adjust the vertical spacing between player frame bars.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_NAMESELF",           "Player - Display Your Name")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_NAMESELF_TP",        "Display your character name and level on the player frame.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_MOUNTSIEGEWWBAR",           "Player - Display Mount/Siege/Werewolf Bar")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_MOUNTSIEGEWWBAR_TP",        "Display a bar to track mount stamina, siege weapon health, and remaining werewolf timer.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_XPCPBAR",                   "Player - Display XP/Champion XP Bar")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_XPCPBAR_TP",                "Display a bar to track player experience gain.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR",              "Color Champion XP Bar by Point Type")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR_TP",           "Set the color of the of Champion XP bar to be dependent on the type of Champion Point being earned.")
-
-ZO_CreateStringId("SI_LUIE_LAM_UF_LOWRESOURCE_HEALTH",                  "Player - Low Health % Threshold")
-ZO_CreateStringId("SI_LUIE_LAM_UF_LOWRESOURCE_HEALTH_TP",               "Determines the threshold of health to color the player health label text red.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_LOWRESOURCE_MAGICKA",                 "Player - Low Magicka % Threshold")
-ZO_CreateStringId("SI_LUIE_LAM_UF_LOWRESOURCE_MAGICKA_TP",              "Determines the threshold of magicka to color the player magicka label text red.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_LOWRESOURCE_STAMINA",                 "Player - Low Stamina % Threshold")
-ZO_CreateStringId("SI_LUIE_LAM_UF_LOWRESOURCE_STAMINA_TP",              "Determines the threshold of stamina to color the player stamina label text red.")
-
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_WIDTH",              "Target - Bar Width")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_HEIGHT",             "Target - Bar Height")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY",          "Target - Transparency - Out-of-Combat")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY_TP",       "Change the transparency of custom target unit frames when out of combat.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY",           "Target - Transparency - In-Combat")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY_TP",        "Change the transparency of custom target unit frames when engaged in combat.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_BUFFS_TARGET",              "Target - Hide Anchored Buffs Out-of-Combat")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_BUFFS_TARGET_TP",           "When out of combat, hide the buff & debuff frame if they are anchored to the player/target bars.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET",           "Target - Use Reaction Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET_TP",        "Color the target frame by reaction instead of using the health bar color.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL",         "Target - Display Class Label")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL_TP",      "Display text label with target class name on target frame together with class icon.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD",              "Target - Execute Health % Threshold")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD_TP",           "Determines the threshold of health to color the target label text red, as well as display the skull execute texture if enabled.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_EXETEXTURE",                "Target - Display Skull Execute Texture")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_EXETEXTURE_TP",             "Display Skull texture next to custom target frame for low-health target that should be executed.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TITLE",                     "Target - Display Title")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TITLE_TP",                  "Display the Title of a target player or NPC.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANK",                      "Target - Display AVA Rank Name")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANK_TP",                   "Display the AVA Rank Name of a target player.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANKICON",                  "Target - Display AVA Rank Number & Icon")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANKICON_TP",               "Display the AVA Rank Number & Icon of a player target.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY",       "Target - Rank/Title Priority")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY_TP",    "Choose whether to prioritize the display of the AVA Rank Name or Title on players.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT",           "Treat Missing Power as In-Combat")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT_TP",        "When any resource pool is used change the frames to use the in combat opacity value as if engaged in combat.")
-
--- Group Frames
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESG_HEADER",                     "Custom Unit Frames (Group)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE",           "Enable Custom GROUP Frames")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE_TP",        "Create custom group unit frames.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESG_WIDTH",                      "Group Bar Width")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESG_HEIGHT",                     "Group Bar Height")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESG_SPACING",                    "Spacing Between Group Bars")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESG_INCPLAYER",                  "Include Player in Group Frame")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESG_INCPLAYER_TP",               "Include the player in the list of group frames.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESG_ROLEICON",                   "Show Role Icon on Group Frames")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESG_ROLEICON_TP",                "This will show the selected player role on group frames.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE",         "Color Custom Group Frames by Role")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE_TP",      "Colors the custom group frame bars based off role.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS",        "Color Custom Group Frames by Class")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS_TP",     "Colors the custom group frame bars based off class.")
-
--- Raid Frames
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_HEADER",                     "Custom Unit Frames (Raid)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE",           "Enable Custom RAID Frames")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE_TP",        "Create custom raid unit frames. If custom group frames are unused, then this raid frame will also be used for small groups.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_WIDTH",                      "Raid Bar Width")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_HEIGHT",                     "Raid Bar Height")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_LAYOUT",                     "Raid Frame Layout")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_LAYOUT_TP",                  "Select layout of raid frame in format 'columns*rows'.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_SPACER",                     "Add Spacer for Every 4 Members")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_SPACER_TP",                  "Add a small spacer between raid members frames to visualize default group splitting.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP",                   "Raid Name Clip Location")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP_TP",                "Due to the inability to detect the length of the hit point value, you can use this setting to manually change where the name is clipped on raid frames in order to prevent overlap.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_ROLEICON",                   "Class/Role Icon Format")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_ROLEICON_TP",                "Choose the method for displaying class or role icons on the raid frames.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE",         "Color Custom Raid Frames by Role")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE_TP",      "Colors the custom raid frame bars based off role.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS",        "Color Custom Raid Frames by Class")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS_TP",     "Colors the custom raid frame bars based off class.")
-
--- Boss Frames
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESB_HEADER",                     "Custom Unit Frames (Boss)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE",           "Enable Custom BOSS Frames")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE_TP",        "Create custom boss unit frames. This will track the health of up to 6 bosses in dungeons encounters.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESB_WIDTH",                      "Boss Bar Width")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESB_HEIGHT",                     "Boss Bar Height")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESB_OPACITYOOC",                 "Boss Bar Transparency - Out-of-Combat")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESB_OPACITYOOC_TP",              "Change the transparency of custom boss unit frames when out of combat.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESB_OPACITYIC",                  "Boss Bar Transparency - In-Combat")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESB_OPACITYIC_TP",               "Change the transparency of custom boss unit frames when engaged in combat.")
-
-
--- PVP Frames
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPVP_HEADER",                   "Custom Unit Frames (PvP Target Frame)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME",              "Enable PvP Target Frame")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_TP",           "Create additional custom target unit frames. This will track health of hostile pvp players only. It also by default has larger size, less information and is positioned in the center of the screen.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_WIDTH",        "PvP Target Bars Width")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_HEIGHT",       "PvP Target Bar Height")
-
--- Common Options
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_HEADER",                       "Common Options")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER",           "Player Name Display Method (Player)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER_TP",        "Determines the method used to display your name on the player frame.\nDefault: Character Name")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET",           "Player Name Display Method (Target)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET_TP",        "Determines the method used to display other player names on target unit frames.\nDefault: Character Name")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID",        "Player Name Display Method (Group/Raid)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP",     "Determines the method used to display other player names on group and raid unit frames.\nDefault: Character Name")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_CAPTIONCOLOR",                 "Default Caption Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NPCFONTCOLOR",                 "Friendly NPC Font Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_PLAYERFONTCOLOR",              "Friendly Player Font Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_HOSTILEFONTCOLOR",             "Hostile Font Color")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_RETICLECOLOR",                 "Apply Same Settings to Reticle")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_RETICLECOLOR_TP",              "Change the color of the reticle according to unit reaction.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT",         "Interactible Reticle Color")
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- COMBAT TEXT -- LAM --
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
--- Base Options
-ZO_CreateStringId("SI_LUIE_LAM_CT",                                     "Combat Text")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHOWCOMBATTEXT",                      "Combat Text Module")
-ZO_CreateStringId("SI_LUIE_LAM_CT_DESCRIPTION",                         "Display Combat Cloud combat text, with damage/healing values, and various alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_UNLOCK",                              "Unlock")
-ZO_CreateStringId("SI_LUIE_LAM_CT_UNLOCK_TP",                           "Unlock the panels to move them.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_IC_ONLY",                             "In Combat Only")
-ZO_CreateStringId("SI_LUIE_LAM_CT_IC_ONLY_TP",                          "Only display incoming and outgoing numbers when in combat.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_TRANSPARENCY",                        "Set Transparency")
-ZO_CreateStringId("SI_LUIE_LAM_CT_TRANSPARENCY_TP",                     "Set an alpha value for combat text.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ABBREVIATE",                          "Shorten Numbers")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ABBREVIATE_TP",                       "Replace large numbers like 12345 with 12.3k on all combat text labels.")
-
--- CT (Shared)
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DAMAGE",                       "Damage")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DAMAGE_CRITICAL",              "Damage (Critical)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_HEALING",                      "Healing")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_HEALING_CRITICAL",             "Healing (Critical)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DOT",                          "Damage over Time")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DOT_CRITICAL",                 "Damage over Time (Critical)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_HOT",                          "Healing over Time")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_HOT_CRITICAL",                 "Healing over Time (Critical)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_GAIN_LOSS",                    "Resource Gain/Drain")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ENERGIZE",                     "Resource Gain")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE",            "Ultimate Gain")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DRAIN",                        "Resource Drain")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_MITIGATION",                   "Mitigation")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_MISS",                         "Missed")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_IMMUNE",                       "Immune")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_PARRIED",                      "Parried")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_REFLECTED",                    "Reflected")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD",                "Damage Shielded")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DODGED",                       "Dodged")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_BLOCKED",                      "Blocked")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_INTERRUPTED",                  "Interrupted")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_CROWD_CONTROL",                "Crowd Control")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DISORIENTED",                  "Disoriented")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_FEARED",                       "Feared")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_OFF_BALANCE",                  "Off-Balance")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_SILENCED",                     "Silenced")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_STUNNED",                      "Stunned")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_COMBAT_STATE",                 "Combat State")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_COMBAT_IN",                    "In Combat")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_COMBAT_OUT",                   "Out of Combat")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT",                        "Active Combat Alerts")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK",                  "Block")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK_S",                "Block (Stagger)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_DODGE",                  "Dodge")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_AVOID",                  "Avoid")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT",              "Interrupt")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE",                "Cleanse")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT",                "Off-Balance Exploit")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE",                "Execute")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_POWER",                  "Important Enemy Buffs (Power/Enrage)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY",                "Destroy (Priority Target)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_POINTS",                       "Experience, Champion, and Alliance Points")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE",              "Alliance Points")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE",            "Experience Points")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION",              "Champion Experience")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_RESOURCE",                     "Resources")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_LOW_HEALTH",                   "Low Health")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA",                  "Low Magicka")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_LOW_STAMINA",                  "Low Stamina")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY",               "Ultimate Ready")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_POTION_READY",                 "Potion Ready")
-
--- CT (Incoming)
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_HEADER",                     "Toggle Options (Incoming)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DAMAGE_HEAL_HEADER",         "Incoming Damage & Healing")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_MITIGATION",                 "Incoming Mitigation")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_CROWD_CONTROL",              "Incoming Crowd Control")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DAMAGE_TP",                  "Show incoming direct damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DOT_TP",                     "Show incoming damage over time.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_HEALING_TP",                 "Show incoming direct healing.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_HOT_TP",                     "Show incoming healing over time.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_ENERGIZE_TP",                "Show incoming magicka/stamina gain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_ENERGIZE_ULTIMATE_TP",       "Show incoming ultimate gain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DRAIN_TP",                   "Show incoming magicka/stamina loss.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_MISS_TP",                    "Show incoming attacks that miss.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_IMMUNE_TP",                  "Show incoming attacks that you are immune to.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_PARRIED_TP",                 "Show incoming attacks that are parried.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_REFLECTED_TP",               "Show incoming attacks that are reflected.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DAMAGE_SHIELD_TP",           "Show incoming damage absorbed by a shield.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DODGED_TP",                  "Show incoming dodged attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_BLOCKED_TP",                 "Show incoming blocked attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_INTERRUPTED_TP",             "Show when you are interrupted by an enemy.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DISORIENTED_TP",             "Show when you are disoriented.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_FEARED_TP",                  "Show when you are feared.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_OFF_BALANCE_TP",             "Show when you are off-balance.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_SILENCED_TP",                "Show when you are silenced.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_STUNNED_TP",                 "Show when you are stunned.")
-
--- CT (Outgoing)
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_HEADER",                     "Toggle Options (Outgoing)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DAMAGE_HEAL_HEADER",         "Outgoing Damage & Healing")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_MITIGATION",                 "Outgoing Mitigation")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_CROWD_CONTROL",              "Outgoing Crowd Control")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DAMAGE_TP",                  "Show outgoing direct damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DOT_TP",                     "Show outgoing damage over time.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_HEALING_TP",                 "Show outgoing direct healing.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_HOT_TP",                     "Show outgoing healing over time.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_TP",                "Show outgoing magicka/stamina gain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_ULTIMATE_TP",       "Show outgoing ultimate gain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DRAIN_TP",                   "Show outgoing magicka/stamina drain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_MISS_TP",                    "Show outgoing attacks that you miss.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_IMMUNE_TP",                  "Show outgoing attacks that the enemy is immune to.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_PARRIED_TP",                 "Show outgoing attacks that are parried.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_REFLECTED_TP",               "Show outgoing attacks that are reflected.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DAMAGE_SHIELD_TP",           "Show outgoing damage absorbed by a shield.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DODGED_TP",                  "Show outgoing attacks that are dodged.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_BLOCKED_TP",                 "Show outgoing attacks that are blocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_INTERRUPTED_TP",             "Show when you interrupt an enemy.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DISORIENTED_TP",             "Show when you disorient an enemy.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_FEARED_TP",                  "Show when you fear an enemy.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_OFF_BALANCE_TP",             "Show when you set an enemy off-balance.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP",                "Show when you silence an enemy.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP",                 "Show when you stun an enemy.")
-
--- CT (Notifications)
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION",                        "Toggle Options (Notifications)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE",           "Combat State")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERTS",                 "Active Combat Alerts")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERTS_DESC",            "Set Active Combat Tips to Always Show in the Interface options to display Alerts correctly.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POINTS",                 "Points")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RESOURCES",              "Resources")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP",           "Display a notification when engaging in combat.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_OUT_TP",          "Display a notification when exiting combat.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION",             "Display Advanced Notifications for Attacks")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP",          "Display advanced notifications for attacks that can be blocked, dodged, avoided, or interrupted.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION", "\t\t\t\t\tUse the following formatting characters to modify the mitigation alerts:\n\t\t\t\t\t%n Source Name\n\t\t\t\t\t%t Ability Name\n\t\t\t\t\t%i - Ability Icon")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD",      "Alert Method")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP",   "Choose whether to display mitigation alerts as a single line or in multiple lines. If using the single line option notifications will be colored based on the most effective form of mitigation.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE",        "Don't Display Mitigation Suggestions")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP",     "When using single line alerts - enabling this option will hide the BLOCK/DODGE/AVOID/INTERRUPT etc alerts and only display the incoming ability.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT",      "Mitigation Alert Format")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP",   "Choose the format to display mitigation alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P",    "Important Buff Alert Format")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P_TP", "Choose the format to display for important buffs cast by nearby hostile targets.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D",    "Priority Target Alert Format")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D_TP", "Choose the format to display when a priority hostile target is detected nearby.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX",                 "Add Suffix for Direct Attacks")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP",              "Add the following suffix onto the message for attacks that are DIRECTLY targeting you. This will not display for static area of effect attacks or enemy healing abilites. Add a leading & trailing blank space here.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_AURA",                   "Display Alerts for Nearby NPC Events")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_AURA_TP",                "Many abilities that don't directly target the player can't be detected to provide a warning (such as a nearby NPC casting a healing ability). This option allows the Alert component to also detect auras and provide more information. However this can result in alerts being displayed for NPCs that are out of range of the player. Note that these events will still always be displayed in Dungeons.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK3",                  "Display Alerts for Normal NPC Abilities")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK3_TP",               "Enable to display alerts for abilites used by standard NPCs.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK2",                  "Display Alerts for Elite/Quest NPC Abilities")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK2_TP",               "Enable to display alerts for abilites specific to Elite or Quest NPCs. Examples include the NPC variant of Dragonknight Standard and Soul Tether.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK1",                  "Display Alerts for Boss/Trial NPC Abilities")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK1_TP",               "Enable to display alerts specific to boss and trial NPCs.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON",                "ALWAYS Display Alerts in Dungeons")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON_TP",             "Enable to always display alerts if you are in a dungeon. This option is ideal if you don't want to see normal NPC abilities outside of dungeons, but you want to be aware of significantly scaled up variants cast by NPC's inside a dungeon or trial.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_CLEANSE_TP",       "Show an alert when a damage over time effect can be cleansed.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_BLOCK_TP",         "Show an alert for incoming attacks that can be mitigated by blocking.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXPLOIT_TP",       "Show an alert when a target is off-balance.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_INTERRUPT_TP",     "Show an alert when you can interrupt an enemy ability.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DODGE_TP",         "Show an alert for incoming attacks that can be mitigated by dodging.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_AVOID_TP",         "Show an alert for incoming attacks that should be mitigating by avoidance.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXECUTE_TP",       "Show an alert when a target is in execute range.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP",         "Show an alert when a nearby hostile NPC casts an important buff (significant power buffs like enrages).")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP",       "Show an alert when a nearby enemy target appears that is a priority target to destroy (spawns that reduce damage done/taken, or apply invulnerabilty).")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD",      "Execute Threshold")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD_TP",   "The threshold at which the execute alert will trigger.\nDefault: 20%")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY",      "Execute Frequency")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY_TP",   "The frequency between execute alerts triggered for the same target.\nDefault: 8")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS",            "Hide Ingame Tips")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS_TP",         "Hide the default Active Combat Tips window.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP",     "Show Alliance Points earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP",   "Show Experience Points earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP",     "Show Champion Experience earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_LOW_HEALTH_TP",          "Show a warning when Health is below the desired threshold.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_LOW_MAGICKA_TP",         "Show a warning when Magicka is below the desired threshold.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_LOW_STAMINA_TP",         "Show a warning when Stamina is below the desired threshold.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ULTIMATE_READY_TP",      "Show a notification when your ultimate ability is available for use.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POTION_READY_TP",        "Show a notification when a potion comes off cooldown.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND",          "Play Warning Sound")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND_TP",       "Play a sound when resources fall below the desired threshold.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH",         "Warning Threshold (Health)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH_TP",      "Threshold for Low Health warning.\nDefault: 35%")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA",        "Warning Threshold (Magicka)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA_TP",     "Threshold for Low Magicka warning.\nDefault: 35%")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA",        "Warning Threshold (Stamina)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA_TP",     "Threshold for Low Stamina warning.\nDefault: 35%")
-
--- CT (Font)
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_HEADER",                         "Font Format Options")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_FACE",                           "Font Face")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_FACE_TP",                        "Choose a font face.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_OUTLINE",                        "Font Outline")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_OUTLINE_TP",                     "Choose a font outline.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_TEST",                           "Test Font")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_TEST_TP",                        "Generate a test combat event to test the chosen font.")
-
--- CT (Font Combat)
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_HEADER",                  "Font Size (Combat)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_TP",               "Font size for direct damage.\nDefault: 32")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_CRITICAL_TP",      "Font size for direct critical damage.\nDefault: 32")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_TP",              "Font size for direct healing.\nDefault: 32")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_CRITICAL_TP",     "Font size for direct critical healing.\nDefault: 32")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_DOT_TP",                  "Font size for damage over time.\nDefault: 26")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_DOT_CRITICAL_TP",         "Font size for critical damage over time.\nDefault: 26")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_HOT_TP",                  "Font size for healing over time.\nDefault: 26")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_HOT_CRITICAL_TP",         "Font size for critical healing over time.\nDefault: 26")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_GAIN_LOSS_TP",            "Font size for resource gain and drain.\nDefault: 32")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP",           "Font size for mitigated damage.\nDefault: 32")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP",        "Font size for crowd control warnings.\nDefault: 32")
-
--- CT (Font Notifications)
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_NOTIFICATION_HEADER",            "Font Size (Notifications)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP",   "Font size of message displayed when entering or exiting combat.\nDefault: 24")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_NOTIFICATION_ALERT_TP",          "Font size of active combat alerts.\nDefault: 32")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP",         "Font size of points earned\nDefault: 24")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP",       "Font size of resource warnings.\nDefault: 32")
-
--- CT (Color Options)
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_HEADER",                 "Color Options (Combat)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_HEALING_HEADER",  "Damage & Healing")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_MITIGATION_HEADER",      "Mitigation")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_CROWD_CONTROL_HEADER",   "Crowd Control")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE",            "None")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE_TP",         "Set a color for damage with no type.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC",         "Generic")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC_TP",      "Set a color for Generic damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL",        "Physical")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL_TP",     "Set a color for Physical damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE",            "Fire")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE_TP",         "Set a color for Fire damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK",           "Shock")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK_TP",        "Set a color for Shock damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION",        "Oblivion")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION_TP",     "Set a color for Oblivion damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD",            "Cold")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD_TP",         "Set a color for Cold damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH",           "Earth")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH_TP",        "Set a color for Earth damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC",           "Magic")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC_TP",        "Set a color for Magic damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN",           "Drown")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN_TP",        "Set a color for Drowning damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE",         "Disease")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE_TP",      "Set a color for Disease damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON",          "Poison")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON_TP",       "Set a color for Poison damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_TP",             "Set a color for all healing.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA",       "Resource Gain (Magicka)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA_TP",    "Set a color for magicka gain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA",       "Resource Gain (Stamina)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA_TP",    "Set a color for stamina gain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE",      "Resource Gain (Ultimate)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE_TP",   "Set a color for ultimate gain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA",          "Resource Drain (Magicka)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA_TP",       "Set a color for magicka drain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA",          "Resource Drain (Stamina)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA_TP",       "Set a color for stamina drain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE",        "Override Critical Damage")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE_TP",     "Use a set color for all critical damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR",      "Critical Damage Color")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR_TP",   "Set a color for critical damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE",       "Override Critical Healing")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE_TP",    "Use a set color for all critical healing.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR",     "Critical Healing Color")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR_TP",  "Set a color for critical damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE",      "Override Incoming Damage")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE_TP",   "Use a set color for all incoming damage (overrides critical damage as well).")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR",         "Incoming Damage Color")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR_TP",      "Set a color for incoming damage.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_MISS_TP",                "Set a color for missed attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_IMMUNE_TP",              "Set a color for immunity to attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_PARRIED_TP",             "Set a color for parried attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_REFLETCED_TP",           "Set a color for reflected attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHIELD_TP",       "Set a color for damage absorbed by a shield.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DODGED_TP",              "Set a color for dodged attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_BLOCKED_TP",             "Set a color for blocked attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INTERRUPTED_TP",         "Set a color for interrupted attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DISORIENTED_TP",         "Set a color for notifications displayed when Disoriented.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_FEARED_TP",              "Set a color for notifications displayed when Feared.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_OFF_BALANCE_TP",         "Set a color for notifications displayed when Off-Balance.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_SILENCED_TP",            "Set a color for notifications displayed when Silenced.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_STUNNED_TP",             "Set a color for notifications displayed when Stunned.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_HEADER",           "Color Options (Notifications)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_HEADER",    "Combat State")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALERT_HEADER",     "Active Combat Alerts")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POINT_HEADER",     "Points")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_RESOURCE_HEADER",  "Resources")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP",     "Set a color for notifications when engaging in combat.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP",    "Set a color for notifications when exiting combat.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CLEANSE_TP",       "Set a color for cleanse alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP",         "Set a color for block alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPLOIT_TP",       "Set a color for exploit alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP",     "Set a color for interrupt alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP",         "Set a color for dodge alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP",         "Set a color for avoidance alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP",       "Set a color for execute alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP",         "Set a color for important buff alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP",       "Set a color for priority target alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALLIANCE_TP",      "Set a color for Alliance Points earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPERIENCE_TP",    "Set a color for Experience Points earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CHAMPION_TP",      "Set a color for Champion Experience earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_HEALTH_TP",    "Set a color for Low Health warnings.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_MAGICKA_TP",   "Set a color for Low Magicka warnings.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP",   "Set a color for Low Stamina warnings.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP",      "Set a color for notifications when your ultimate ability is available for use.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POTION_TP",        "Set a color for notifications when a potion comes off cooldown.")
-
--- CT (Format Options)
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_DESCRIPTION",                  "Allows to change the text output. Write any text you want or enter a variable for special outputs\n %t Ability name, localized name\n %a Amount, value\n %r Power type, resource")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HEADER",                "Format Options (Combat)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_HEALING_HEADER", "Damage & Healing")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_MITIGATION_HEADER",     "Mitigation")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_CROWD_CONTROL_HEADER",  "Crowd Control")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_TP",             "Text format for direct damage numbers.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_CRITICAL_TP",    "Text format for direct critical damage numbers.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_TP",            "Text format for direct healing numbers.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_CRITICAL_TP",   "Text format for direct critical healing numbers.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_TP",                "Text format for damage over time numbers.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_CRITICAL_TP",       "Text format for critical damage over time numbers.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_TP",                "Text format for healing over time numbers.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_CRITICAL_TP",       "Text format for critical healing over time numbers.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_TP",           "Text format for magicka/stamina gain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_ULTIMATE_TP",  "Text format for ultimate gain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DRAIN_TP",              "Text format for magicka/stamina drain.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_MISS_TP",               "Text format for missed attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_IMMUNE_TP",             "Text format for immunity to attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_PARRIED_TP",            "Text format for parried attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_REFLECTED_TP",          "Text format for reflected attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_SHIELD_TP",      "Text format for damage absorbed by a shield.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DODGED_TP",             "Text format for dodged attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_BLOCKED_TP",            "Text format for blocked attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_INTERRUPTED_TP",        "Text format for interrupted attacks.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DISORIENTED_TP",        "Text format for notifications when Disoriented.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_FEARED_TP",             "Text format for notifications when Feared.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_OFF_BALANCE_TP",        "Text format for notifications when set Off-Balance.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_SILENCED_TP",           "Text format for notifications when Silenced.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_STUNNED_TP",            "Text format for notifications when Stunned.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_HEADER",          "Format Options (Notifications)")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_STATE_HEADER",          "Combat State")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_ALERT_HEADER",                 "Active Combat Alerts")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_POINTS_HEADER",                "Points")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_RESOURCES_HEADER",             "Resources")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_IN_TP",    "Text format for notifications when engaging in combat.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_OUT_TP",   "Text format for notifications when exiting combat.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CLEANSE_TP",      "Text format for cleanse alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_TP",        "Text format for block alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_S_TP",      "Text format for block alerts when an enemy will be staggered.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPLOIT_TP",      "Text format for exploit alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_INTERRUPT_TP",    "Text format for interrupt alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DODGE_TP",        "Text format for dodge alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_AVOID_TP",        "Text format for avoidance alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXECUTE_TP",      "Text format for execute alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POWER_TP",        "Text format for important buff alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DESTROY_TP",      "Text format for priority target alerts.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ALLIANCE_TP",     "Text format for Alliance Points earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPERIENCE_TP",   "Text format for Experience Points earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CHAMPION_TP",     "Text format for Champion Experience earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP",     "Text format for warnings when low on resources.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ULTIMATE_TP",     "Text format for notifcations when your ultimate ability is available for use.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POTION_TP",       "Text format for notifcations when your potion comes off cooldown.")
-
--- CT (Animation Options)
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_HEADER",                    "Animation Options")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_TYPE",                      "Animation Type")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_TYPE_TP",                   "Select the animation type to use.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT",             "Outgoing Direction")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT_TP",          "Set the movement direction for outgoing text.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN",              "Incoming Direction")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN_TP",           "Set the movement direction for incoming text.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_ICON_OUT",                  "Outgoing Icon Position")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_ICON_OUT_TP",               "Set the icon position for outgoing text.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_ICON_IN",                   "Incoming Icon Position")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_ICON_IN_TP",                "Set the icon position for incoming text.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_TEST",                      "Test Animation")
-ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_TEST_TP",                   "Test the animation of incoming & outgoing text.")
-
--- CT (Throttle Options)
-ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_HEADER",                     "Throttle Options")
-ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_DESCRIPTION",                "Accumulates multiple hits into one. Use the slider to adjust the time frame in milliseconds. Critical hits are not throttled unless the relevant option below is enabled.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_DAMAGE_TP",                  "Set the throttle duration in ms for damage numbers.\nDefault: 200 ms")
-ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_HEALING_TP",                 "Set the throttle duration in ms for healing numbers.\nDefault: 200 ms")
-ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_DOT_TP",                     "Set the throttle duration in ms for damage over time numbers.\nDefault: 200 ms")
-ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_HOT_TP",                     "Set the throttle duration in ms for healing over time numbers.\nDefault: 200 ms")
-ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_CRITICAL",                   "Throttle Critical Hits")
-ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_CRITICAL_TP",                "Enable throttle for critical hits.")
-ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_TRAILER",                    "Show Throttle Trailer")
-ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP",                 "Enable Throttle Trailer.")
+local strings = {
+    ------------------------------------
+    -- LuiExtended.lua -----------------
+    ------------------------------------
+
+    SI_LUIE_ERROR_FONT =                                 "LUI Extended: There was a problem with selecting required font. Falling back to default.",
+    SI_LUIE_ERROR_SOUND =                                "LUI Extended: There was a problem with selecting required sound. Falling back to default.",
+
+    ------------------------------------
+    -- bindings.xml --------------------
+    ------------------------------------
+
+    SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Summon Banker",
+    SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Summon Merchant",
+    SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Summon Fence",
+    SI_BINDING_NAME_LUIE_COMMAND_READY_CHECK =           "Initiate Ready Check",
+    SI_BINDING_NAME_LUIE_COMMAND_HOME =                  "Teleport to Primary Home",
+    SI_BINDING_NAME_LUIE_COMMAND_REGROUP =               "Regroup (Disband & Reform)",
+
+    ------------------------------------
+    -- SlashCommands.lua ---------------
+    ------------------------------------
+
+    SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE =                   "Queueing for <<1>>...",
+    SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG =               "You cannot queue for a campaign while in a battleground.",
+    SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED =      "The campaign name you entered is not your home or guest campaign.",
+    SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME =           "You must enter the name of your home or guest campaign to queue into.",
+    SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN =    "The campaign name you entered is not a valid.",
+    SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME =             "You must enter the account or character name of a player to add to friends.",
+    SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME =      "You must enter the account or online character name of a player to remove from friends.",
+    SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG =                "You have invited \"|cFEFEFE<<1>>|r\" to be your friend.",
+    SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK =           "You have invited |cFEFEFE<<1>>|r to be your friend.",
+    SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA =           "You cannot teleport to your home while in Cyrodiil.",
+    SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG =            "You cannot teleport to your home while in a battleground.",
+    SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT =     "You cannot teleport to your home while in combat.",
+    SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME =        "You don't have a primary home set.",
+    SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG =          "Teleporting to primary home...",
+    SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG =                "You cannot disband the group while in a battleground.",
+    SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY =      "You cannot disband an LFG group.",
+    SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOGROUP =           "You do not have a group to disband.",
+    SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOTLEADER =         "You must be the group leader to disband a group.",
+    SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE =      "That player is already ignored.",
+    SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME =             "You must enter the account or character name of a player to add to ignored.",
+    SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE =      "You must enter the account name of a player to remove from ignored.",
+    SI_LUIE_SLASHCMDS_KICK_FAILED_NOGROUP =              "You must be in a group to attempt to remove a party member.",
+    SI_LUIE_SLASHCMDS_KICK_FAILED_LFG =                  "You must vote to kick a party member while in an LFG group.",
+    SI_LUIE_SLASHCMDS_KICK_FAILED_SELF =                 "You cannot initiate a vote to kick yourself from the group.",
+    SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME =               "You must enter the name of a party member to remove.",
+    SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV =  "You must enter a valid guild number followed by an account or character name to invite to a guild.",
+    SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK = "You must enter a valid guild number followed by an account or online character name to remove from a guild.",
+    SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE =   "You must enter a valid guild number to leave.",
+    SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME =          "Could not find target player to remove from the group.",
+    SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME_GUILD =    "Could not find target player to remove from the guild.",
+    SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG =                "You cannot initiate a regroup while in a battleground.",
+    SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY =       "You cannot initiate a regroup while in an LFG group.",
+    SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP =          "You must be in a group to initiate a regroup.",
+    SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER =         "You must be the group leader to initiate a regroup.",
+    SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING =           "A regroup is currently pending, please wait for the current regroup to finish before attempting another.",
+    SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG =             "Reinviting group members...",
+    SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG =        "Invited → |cFFFFFF<<1>>|r",
+    SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG =                "Group saved! Disbanding...",
+    SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG =        "No party members were online or eligible for regroup. Group was not disbanded.",
+    SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG =       "Group saved! <<1>> group <<2[member/members]>> <<3[was/were]>> offline, they will not be reinvited.",
+    SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME =              "You must enter the name of a player to trade with.",
+    SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK =       "You must be in an LFG group to initiate a vote to remove a party member.",
+    SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME =           "You must enter the account or character name of a party member to initiate a vote to remove.",
+    SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG =               "You cannot initiate a vote to remove a party member in a battleground.",
+    SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA =             "You cannot summon an assistant in Cyrodiil.",
+    SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG =              "You cannot summon an assistant in a Battleground.",
+    SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED =     "You have not unlocked <<1>>.",
+    SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP =       "You must be in a group to initiate a ready check.",
+
+    ------------------------------------
+    -- InfoPanel.lua -------------------
+    ------------------------------------
+
+    SI_LUIE_PNL_FEEDNOW =                                "Feed Now",
+    SI_LUIE_PNL_MAXED =                                  "Maxed",
+
+    ------------------------------------
+    -- SpellCastBuffs.lua --------------
+    ------------------------------------
+
+    SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS =                "Player Buffs",
+    SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS =              "Player Debuffs",
+    SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS =      "Player Long Term Effects",
+    SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS =                "Target Buffs",
+    SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS =              "Target Debuffs",
+    SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS =             "Prominent Buffs",
+    SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS =           "Prominent Debuffs",
+
+    ------------------------------------
+    -- ChatAnnouncements.lua -----------
+    ------------------------------------
+
+    -- Currency
+    SI_LUIE_CA_CURRENCY_GOLD =                           " <<1[Gold/Gold]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    SI_LUIE_CA_CURRENCY_ALLIANCE_POINT =                 " <<1[Alliance Point/Alliance Points]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    SI_LUIE_CA_CURRENCY_TELVAR_STONE =                   " <<1[Tel Var Stone/Tel Var Stones]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    SI_LUIE_CA_CURRENCY_WRIT_VOUCHER =                   " <<1[Writ Voucher/Writ Vouchers]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    SI_LUIE_CA_CURRENCY_TRANSMUTE_CRYSTAL =              " <<1[Transmute Crystal/Transmute Crystals]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    SI_LUIE_CA_CURRENCY_CROWN =                          " <<1[Crown/Crowns]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    SI_LUIE_CA_CURRENCY_CROWN_GEM =                      " <<1[Crown Gem/Crown Gems]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS =                  " <<1[Outfit Change Token/Outfit Change Tokens]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+
+    -- Duel
+    SI_LUIE_CA_DEBUG_MSG_CURRENCY =                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!",
+    SI_LUIE_CA_DUEL_INVITE_ACCEPTED =                    "Duel challenge accepted.",
+    SI_LUIE_CA_DUEL_INVITE_CANCELED =                    "Duel challenge canceled.",
+    SI_LUIE_CA_DUEL_INVITE_DECLINED =                    "Duel challenge declined.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON1 =                 "|cFEFEFE<<1>>|r is not available to duel.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON2 =                 GetString(SI_DUELINVITEFAILREASON2),
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON3 =                 GetString(SI_DUELINVITEFAILREASON3),
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON4 =                 "|cFEFEFE<<1>>|r is not available to duel because they are too far away.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON5 =                 "You cannot challenge another player to duel while you have challenged |cFEFEFE<<1>>|r.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON6 =                 "You cannot challenge another player to duel while responding to a duel challenge from |cFEFEFE<<1>>|r.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON7 =                 "You cannot challenge another player to duel while you are already dueling |cFEFEFE<<1>>|r.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON8 =                 "|cFEFEFE<<1>>|r is not available to duel because they have challenged someone else to a duel.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON9 =                 "|cFEFEFE<<1>>|r is not available to duel because they are considering another duel challenge.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON10 =                "|cFEFEFE<<1>>|r is not available to duel because they are dueling another player.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON11 =                GetString(SI_DUELINVITEFAILREASON11),
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON12 =                "|cFEFEFE<<1>>|r is not available to duel because they are dead.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON13 =                GetString(SI_DUELINVITEFAILREASON13),
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON14 =                "|cFEFEFE<<1>>|r is not available to duel because they are swimming.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON15 =                GetString(SI_DUELINVITEFAILREASON15),
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON16 =                "|cFEFEFE<<1>>|r is not available to duel because they are in combat.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON17 =                GetString(SI_DUELINVITEFAILREASON17),
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON18 =                "|cFEFEFE<<1>>|r is not available to duel because they are crafting.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON19 =                GetString(SI_DUELINVITEFAILREASON19),
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON20 =                "You cannot challenge a player to duel who has recently declined your duel challenge.",
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON21 =                GetString(SI_DUELINVITEFAILREASON21),
+    SI_LUIE_CA_DUEL_INVITE_FAILREASON22 =                GetString(SI_DUELINVITEFAILREASON22),
+    SI_LUIE_CA_DUEL_INVITE_PLAYER =                      "Challenge to Duel",
+    SI_LUIE_CA_DUEL_INVITE_RECEIVED =                    "|cFEFEFE<<1>>|r has challenged you to a duel.",
+    SI_LUIE_CA_DUEL_INVITE_SENT =                        "You have challenged |cFEFEFE<<1>>|r to a duel.",
+    SI_LUIE_CA_DUEL_NEAR_BOUNDARY_CSA =                  "You are close to the edge of the duel area!",
+    SI_LUIE_CA_DUEL_SELF_RESULT0 =                       "You forfeited the duel!",
+    SI_LUIE_CA_DUEL_SELF_RESULT1 =                       "You won the duel!",
+    SI_LUIE_CA_DUEL_RESULT0 =                            "|cFEFEFE<<1>>|r forfeited the duel!",
+    SI_LUIE_CA_DUEL_RESULT1 =                            "|cFEFEFE<<1>>|r won the duel!",
+    SI_LUIE_CA_DUEL_STARTED =                            "Duel started!",
+    SI_LUIE_CA_DUEL_STARTED_WITH_ICON =                  "<<1>> Duel started!",
+    SI_LUIE_CA_DUEL_STATE1 =                             "You are currently waiting for a duel challenge response from |cFEFEFE<<1>>|r.",
+    SI_LUIE_CA_DUEL_STATE2 =                             "You are currently considering a duel challenge from |cFEFEFE<<1>>|r.",
+
+    -- Achievements
+    SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG =                "Achievement Updated",
+
+    -- Experience
+    SI_LUIE_CHAMPION_POINT_TYPE =                        "<<1>><<2>> <<3>> <<1[Point/Points]>>",
+    SI_LUIE_CA_EXPERIENCE_MESSAGE =                      "You earn %s.",
+    SI_LUIE_CA_EXPERIENCE_NAME =                         "experience <<1[point/points]>>",
+    SI_LUIE_CA_LVL_ANNOUNCE_CP =                         "Champion Level Achieved!", -- TODO: Unused
+    SI_LUIE_CA_LVL_ANNOUNCE_XP =                         "You have reached",
+
+    -- Collectibles
+    SI_LUIE_CA_COLLECTIBLE =                             "Collection Updated",
+
+    -- Lorebooks
+    SI_LUIE_CA_LOREBOOK_BOOK =                           "Book Discovered",
+    SI_LUIE_CA_LOREBOOK_ADDED_CSA =                      "<<1>> added to <<2>>",
+    SI_LUIE_CA_LOREBOOK_ADDED_CA =                       "added to", -- Have to add this extra string for CA, if we try to colorize the whole string with the link, it also colorizes our custom link type.
+
+    -- Social (Friends/Ignored)
+    SI_LUIE_CA_FRIENDS_FRIEND_ADDED =                    "|cFEFEFE<<1>>|r added to friends.",
+    SI_LUIE_CA_FRIENDS_FRIEND_REMOVED =                  "|cFEFEFE<<1>>|r removed from friends.",
+    SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST =         "|cFEFEFE<<1>>|r wants to be your friend.",
+    SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF =                 "|cFEFEFE<<1>>|r has logged off.",
+    SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON =                  "|cFEFEFE<<1>>|r has logged on.",
+    SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF =       "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.",
+    SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON =        "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.",
+    SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED =               "|cFEFEFE<<1>>|r added to ignored.",
+    SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED =             "|cFEFEFE<<1>>|r removed from ignored.",
+    SI_LUIE_CA_PLAYER_TO_PLAYER_ALREADY_FRIEND =         "You are already friends with |cFEFEFE<<1>>|r.", -- TODO: Unused - This should have a content though?
+
+    -- Group (Basic)
+    SI_LUIE_CA_GROUP_INVITE_MENU =                       "You have invited |cFEFEFE<<1>>|r to join your group.",
+    SI_LUIE_CA_GROUP_INVITE_NONAME =                     "You must enter the account or character name of a player to invite to group.",
+    SI_LUIE_CA_GROUPINVITERESPONSE0 =                    "Could not find a player named \"|cFEFEFE<<1>>|r\" to invite.",
+    SI_LUIE_CA_GROUPINVITERESPONSE1 =                    "|cFEFEFE<<1>>|r accepted your group invitation.",
+    SI_LUIE_CA_GROUPINVITERESPONSE2 =                    "|cFEFEFE<<1>>|r declined your group invitation.",
+    SI_LUIE_CA_GROUPINVITERESPONSE3 =                    "|cFEFEFE<<1>>|r is ignoring you. You cannot extend a group invitation.",
+    SI_LUIE_CA_GROUPINVITERESPONSE4 =                    "|cFEFEFE<<1>>|r already has a pending group invite.",
+    SI_LUIE_CA_GROUPINVITERESPONSE5 =                    "|cFEFEFE<<1>>|r is already in a group.",
+    SI_LUIE_CA_GROUPINVITERESPONSE6 =                    GetString(SI_GROUPINVITERESPONSE6),
+    SI_LUIE_CA_GROUPINVITERESPONSE7 =                    GetString(SI_GROUPINVITERESPONSE7),
+    SI_LUIE_CA_GROUPINVITERESPONSE8 =                    "You must be the group leader to extend a group invitation.",
+    SI_LUIE_CA_GROUPINVITERESPONSE9 =                    "|cFEFEFE<<1>>|r is a member of another alliance.",
+    SI_LUIE_CA_GROUPINVITERESPONSE10 =                   "You have invited \"|cFEFEFE<<1>>|r\" to join your group.",
+    SI_LUIE_CA_GROUPINVITERESPONSE11 =                   GetString(SI_GROUPINVITERESPONSE11),
+    SI_LUIE_CA_GROUPINVITERESPONSE12 =                   GetString(SI_GROUPINVITERESPONSE12),
+    SI_LUIE_CA_GROUPINVITERESPONSE13 =                   "Unable to join |cFEFEFE<<1>>|r. The group is full.",
+    SI_LUIE_CA_GROUPINVITERESPONSE14 =                   "Unable to join |cFEFEFE<<1>>|r. You are already in a group.",
+    SI_LUIE_CA_GROUPINVITERESPONSE15 =                   "|cFEFEFE<<1>>|r is currently in a battleground.",
+    SI_LUIE_CA_GROUP_LEADERKICK_ERROR =                  "You must be the group leader to remove a player from the group.",
+    SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE =              "|cFEFEFE<<1>>|r wants to share the quest, <<2>>, with you.",
+    SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P =          "|cFEFEFE<<1>>|r wants to share the quest, |cFEFEFE<<2>>|r, with you.",
+    SI_LUIE_CA_GROUP_INVITE_MESSAGE =                    "|cFEFEFE<<1>>|r has invited you to join a group.",
+    SI_LUIE_CA_GROUP_LEADER_CHANGED =                    "|cFEFEFE<<1>>|r is now the group leader!",
+    SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF =               "You are now the group leader!",
+    SI_LUIE_CA_GROUP_MEMBER_DISBAND_MSG =                "The group has been disbanded.",
+    SI_LUIE_CA_GROUP_MEMBER_JOIN =                       "|cFEFEFE<<1>>|r has joined the group.",
+    SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF =                  "You have joined a group.",
+    SI_LUIE_CA_GROUP_MEMBER_KICKED =                     "|cFEFEFE<<1>>|r has been removed from the group.",
+    SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF =                 "You have left the group.",
+    SI_LUIE_CA_GROUP_QUIT_LFG =                          "You are no longer in an LFG group.",
+    SI_LUIE_GROUPLEAVEREASON0 =                          "|cFEFEFE<<1>>|r has left the group.",
+    SI_LUIE_GROUPLEAVEREASON1 =                          "|cFEFEFE<<1>>|r has been removed from the group.",
+    SI_LUIE_GROUPLEAVEREASON2 =                          "|cFEFEFE<<1>>|r has disbanded the group.",
+    SI_LUIE_GROUPLEAVEREASON4 =                          "|cFEFEFE<<1>>|r has left the battleground.",
+    SI_LUIE_GROUPDISBANDLEADER =                         "You have disbanded the group.",
+
+    -- Group (LFG)
+    SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED =            "You have joined an LFG group for |cFEFEFE<<1>>|r.",
+    SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL =               "A vote to kick |cFEFEFE<<1>>|r from the group has failed.",
+    SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED =             "A vote to kick |cFEFEFE<<1>>|r from the group has passed.",
+    SI_LUIE_CA_GROUPFINDER_VOTEKICK_START =              "A vote to kick |cFEFEFE<<1>>|r from the group has started.",
+    SI_LUIE_CA_GROUPFINDER_QUEUE_END =                   "You are no longer queued in the group finder.",
+    SI_LUIE_CA_GROUPFINDER_QUEUE_START =                 "You are now queued in the group finder.",
+    SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY =        "Your |cFEFEFE<<1>>|r is ready.",
+    SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE =   "Your |cFEFEFE<<1>>|r is ready. Your role: |cFEFEFE<<2>> <<3>>|r",
+
+    -- Group (Raid)
+    SI_LUIE_CA_GROUP_TRIAL_STARTED =                     "Started: <<1>>",
+    SI_LUIE_CA_GROUP_TRIAL_FAILED =                      "Failed: <<1>>",
+    SI_LUIE_CA_GROUP_TRIAL_COMPLETED_LARGE =             "Completed: <<1>>",
+    SI_LUIE_CA_GROUP_TRIAL_SCORETALLY =                  "Final Score <<1>> Total Time <<2>> Vitality Bonus <<3>> <<4>>",
+    SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED =            "<<1>> Vitality Bonus Decreased",
+    SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED =               "<<1>> <<2>> Points Rewarded",
+
+    -- Ignore Error Messages
+    SI_LUIE_IGNORE_ERROR_TRADE =                         "You cannot trade with a player you are ignoring.",
+    SI_LUIE_IGNORE_ERROR_GROUP =                         "You cannot extend a group invitation to a player you are ignoring.",
+    SI_LUIE_IGNORE_ERROR_DUEL =                          "You cannot challenge a player you are ignoring to a duel.",
+    SI_LUIE_IGNORE_ERROR_FRIEND =                        "You cannot add a player you are ignoring as a friend.",
+    SI_LUIE_IGNORE_ERROR_WHISPER =                       "You cannot whisper a player you are ignoring.",
+    SI_LUIE_IGNORE_ERROR_GUILD =                         "You cannot extend a guild invitation to a player you are ignoring.",
+
+    -- Invitation Notifications
+    SI_LUIE_NOTIFICATION_GROUP_INVITE =                  "Group invitation",
+    SI_LUIE_NOTIFICATION_SHARE_QUEST_INVITE =            "Shared quest",
+    SI_LUIE_NOTIFICATION_FRIEND_INVITE =                 "Friend invitation",
+    SI_LUIE_NOTIFICATION_GUILD_INVITE =                  "Guild invitation",
+
+    -- Guild
+    SI_LUIE_CA_GUILD_HERALDRY_UPDATE =                   "The heraldry for <<1>> has changed.",
+    SI_LUIE_CA_GUILD_RANKS_UPDATE =                      "Changes to ranks for <<1>> saved.",
+    SI_LUIE_CA_GUILD_RANK_UPDATE =                       "Changes to the rank <<1>> for <<2>> saved.",
+    SI_LUIE_CA_GUILD_MOTD_CHANGED =                      "The message of the day for <<1>> has changed.",
+    SI_LUIE_CA_GUILD_DESCRIPTION_CHANGED =               "The description for <<1>> has changed.",
+    SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST =            "|cFEFEFE<<1>>|r has invited you to join <<2>>.",
+    SI_LUIE_CA_GUILD_INVITE_MESSAGE =                    "|cFEFEFE<<3>>|r has invited you to join <<X:1>> |cFEFEFE<<2>>|r.",
+    SI_LUIE_CA_GUILD_JOIN_SELF =                         "You have joined <<1>>.",
+    SI_LUIE_CA_GUILD_LEAVE_SELF =                        "You have left <<1>>.",
+    SI_LUIE_CA_GUILD_RANK_CHANGED =                      "|cFEFEFE<<1>>|r's rank in <<2>> has been changed to <<3>>.",
+    SI_LUIE_CA_GUILD_RANK_CHANGED_SELF =                 "You have been <<1>> to <<2>> in <<3>>.",
+    SI_LUIE_CA_GUILD_RANK_DOWN =                         "demoted",
+    SI_LUIE_CA_GUILD_RANK_UP =                           "promoted",
+    SI_LUIE_CA_GUILD_ROSTER_ADDED =                      "|cFEFEFE<<1>>|r has joined <<2>>.",
+    SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE =            "You have invited \"|cFEFEFE<<1>>|r\" to join <<2>>.",
+    SI_LUIE_CA_GUILD_ROSTER_LEFT =                       "|cFEFEFE<<1>>|r has left <<2>>.",
+    SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG =    "Bounty and stolen items confiscated!",
+    SI_LUIE_CA_JUSTICE_CONFISCATED_MSG =                 "Bounty confiscated!",
+    SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER =           "Danger! Sentry nearby!",
+    SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS =       "Danger! You are arousing suspicion!",
+    SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE =             "You are no longer disguised",
+    SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED =        "You are now disguised",
+
+    -- Lockpick
+    SI_LUIE_CA_LOCKPICK_FAILED =                         "Lockpick failed!",
+    SI_LUIE_CA_LOCKPICK_SUCCESS =                        "Lockpick successful!",
+
+    -- Mail
+    SI_LUIE_CA_MAIL_DELETED_MSG =                        "Mail deleted!",
+    SI_LUIE_CA_MAIL_RECEIVED =                           "Mail received.",
+    SI_LUIE_CA_MAIL_RECEIVED_COD =                       "COD payment sent!",
+    SI_LUIE_CA_MAIL_SENT =                               "Mail sent!",
+    SI_LUIE_CA_MAIL_SENT_COD =                           "COD sent!",
+    SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE =                 "You must set the Cash on Delivery amount.",
+    SI_LUIE_CA_MAIL_SENDMAILRESULT2 =                    "Unknown player.", -- Fixing missing periods on default strings
+    SI_LUIE_CA_MAIL_SENDMAILRESULT3 =                    "Recipient's Inbox is full.", -- Fixing missing periods on default strings
+
+    -- Pledge of Mara
+    SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0 =                "|cFEFEFE<<1>>|r is too busy to pledge with.",
+    SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1 =                "You can't join in the Ritual of Mara with a player who is dead.",
+    SI_LUIE_CA_MARA_PLEDGEOFMARARESULT2 =                "Beginning Ritual of Mara with |cFEFEFE<<1>>|r.",
+    SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3 =                "You have been joined with |cFEFEFE<<1>>|r in the Ritual of Mara.",
+    SI_LUIE_CA_MARA_PLEDGEOFMARARESULT4 =                "|cFEFEFE<<1>>|r has declined the Ritual of Mara request",
+    SI_LUIE_CA_MARA_PLEDGEOFMARARESULT5 =                GetString(SI_PLEDGEOFMARARESULT5),
+    SI_LUIE_CA_MARA_PLEDGEOFMARARESULT6 =                "|cFEFEFE<<1>>|r is not eligible for the Ritual of Mara.",
+    SI_LUIE_CA_MARA_PLEDGEOFMARARESULT7 =                "You are too far away from |cFEFEFE<<1>>|r to perform the Ritual of Mara.",
+
+    -- Currency Messages
+    SI_LUIE_CA_CURRENCY_MESSAGE_LOOT =                   "You loot %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE =                "You receive %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_STEAL =                  "You steal %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET =             "You pickpocket %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE =             "A guard confiscates %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_EARN =                   "You earn %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_SPEND =                  "You spend %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_LOST =                   "You lose %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_BOUNTY =                 "You pay off your bounty of %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_REPAIR =                 "You pay %s in repairs.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TRADER =                 "You purchase an item from the guild trader for %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_LISTING =                "Listing fee of %s charged.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN =                "You receive %s from %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME =        "You receive %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT =               "You trade %s to %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME =       "You trade %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN =                 "You receive mail with %s from %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME =         "You receive mail with %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT =                "You mail %s to %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME =        "You mail %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_MAILCOD =                "You send a COD payment of %s to %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_POSTAGE =                "You pay %s in postage.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSIT =                "You deposit %s in your bank.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE =         "You deposit %s in storage.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITGUILD =           "You deposit %s in the guild bank.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE =        "You withdraw %s from storage.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAW =               "You withdraw %s from your bank.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAWGUILD =          "You withdraw %s from the guild bank.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_WAYSHRINE =              "Wayshrine fee of %s charged.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_UNSTUCK =                "Unstuck fee of %s charged.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_STABLE =                 "You purchase %s for %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_STORAGE =                "You purchase %s for %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_ATTRIBUTES =             "You make a donation of %s to redistribute your Attribute Points.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_CHAMPION =               "You pay a fee of %s to redistribute your Champion Points.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_SKILLS =                 "You make a donation of %s to redistribute your Skill Points.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_MORPHS =                 "You make a donation of %s to redistribute your Skill Morphs.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_CAMPAIGN =               "You spend %s to reset your home campaign.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_BUY =                    "You purchase %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_BUY_VALUE =              "You purchase %s for %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_BUYBACK =                "You buyback %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_BUYBACK_VALUE =          "You buyback %s for %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_SELL =                   "You sell %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_SELL_VALUE =             "You sell %s for %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_FENCE_VALUE =            "You fence %s for %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_FENCE =                  "You fence %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDER_VALUE =          "You launder %s for %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDER =                "You launder %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_USE =                    "You use %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_CRAFT =                  "You craft %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_EXTRACT =                "You extract %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_UPGRADE =                "You upgrade %s to %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_UPGRADE_FAIL =           "You fail to upgrade %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_REFINE =                 "You refine %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_DECONSTRUCT =            "You deconstruct %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_RESEARCH =               "You research %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_DESTROY =                "You destroy %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_LOCKPICK =               "Your %s breaks.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_REMOVE =                 "Removed %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_GROUP =                  "%s loots %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP =         "You equip %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE =        "You unequip %s.",
+    SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY =       "Your %s is destroyed.",
+    SI_LUIE_CA_CURRENCY_NOTIFY_CHAMPION =                "Champion Points redistributed",
+    SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES =              "Attribute Points reset",
+    SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS =                  "Skill Points reset",
+    SI_LUIE_CA_CURRENCY_NOTIFY_MORPHS =                  "Skill Morphs reset",
+    SI_LUIE_CA_CURRENCY_MESSAGE_HERALDRY =               "You spend %s from your guild bank to update your %s.",
+    SI_LUIE_CA_CURRENCY_NAME_HERALDRY =                  "Guild Heraldry",
+
+    -- Currency Total Messages
+    SI_LUIE_CA_LOOT_MESSAGE_TOTAL =                      "New Total:",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD =              "Total Gold: %s",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP =                "Total AP: %s",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV =                "Total TV: %s",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV =                "Total Vouchers: %s",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTRANSMUTE =         "Total Crystals: %s",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS =            "Total Crowns: %s",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS =              "Total Gems: %s",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS =      "Total Tokens: %s",
+
+    -- Storage
+    SI_LUIE_CA_STORAGE_RIDINGTYPE1 =                     "Riding Speed Upgrade",
+    SI_LUIE_CA_STORAGE_RIDINGTYPE2 =                     "Riding Capacity Upgrade",
+    SI_LUIE_CA_STORAGE_RIDINGTYPE3 =                     "Riding Stamina Upgrade",
+    SI_LUIE_CA_STORAGE_BAG_UPGRADE =                     "Your inventory capacity has increased.",
+    SI_LUIE_CA_STORAGE_BANK_UPGRADE =                    "Your bank capacity has increased.",
+    SI_LUIE_CA_STORAGE_BAGTYPE1 =                        "Backpack Upgrade",
+    SI_LUIE_CA_STORAGE_BAGTYPE2 =                        "Bank Space Upgrade",
+    SI_LUIE_CA_STORAGE_LEARN =                           "You learn %s.",
+
+    -- Skill
+    SI_LUIE_CA_SKILL_LINE_ADDED =                        "Skill line gained: <<1>><<2>>",
+    SI_LUIE_CA_ABILITY_RANK_UP =                         "<<1>> increased to Rank <<R:2>>",
+    SI_LUIE_CA_SKILL_GUILD_MSG =                         "You earn %s.",
+    SI_LUIE_CA_SKILL_GUILD_REPUTATION =                  "<<1[reputation/reputation]>>",
+    SI_LUIE_CA_SKILL_GUILD_ALERT =                       "Your <<1>> reputation has increased.",
+
+    -- Quests
+    SI_LUIE_CA_QUEST_ABANDONED =                         "Abandoned: <<1>>",
+    SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON =               "Abandoned: <<1>> <<2>>",
+    SI_LUIE_CA_QUEST_DISCOVER =                          "Discovered: <<1>>",
+    SI_LUIE_CA_QUEST_ACCEPT =                            "Started: ",
+    SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON =                  "Started: <<1>> <<2>>",
+    SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON =                "Completed: <<1>> <<2>>",
+    SI_LUIE_CA_QUEST_LOG_FULL =                          "Your quest log is full.", -- TODO: Unused
+
+    -- Trade
+    SI_LUIE_CA_TRADEACTIONRESULT0 =                      GetString(SI_TRADEACTIONRESULT0),
+    SI_LUIE_CA_TRADEACTIONRESULT1 =                      "|cFEFEFE<<1>>|r is ignoring you. You cannot initiate a trade.",
+    SI_LUIE_CA_TRADEACTIONRESULT2 =                      GetString(SI_TRADEACTIONRESULT2),
+    SI_LUIE_CA_TRADEACTIONRESULT3 =                      GetString(SI_TRADEACTIONRESULT3),
+    SI_LUIE_CA_TRADEACTIONRESULT4 =                      GetString(SI_TRADEACTIONRESULT4),
+    SI_LUIE_CA_TRADEACTIONRESULT5 =                      GetString(SI_TRADEACTIONRESULT5),
+    SI_LUIE_CA_TRADEACTIONRESULT6 =                      GetString(SI_TRADEACTIONRESULT6),
+    SI_LUIE_CA_TRADEACTIONRESULT8 =                      GetString(SI_TRADEACTIONRESULT8),
+    SI_LUIE_CA_TRADEACTIONRESULT9 =                      GetString(SI_TRADEACTIONRESULT9),
+    SI_LUIE_CA_TRADEACTIONRESULT12 =                     GetString(SI_TRADEACTIONRESULT12),
+    SI_LUIE_CA_TRADEACTIONRESULT13 =                     GetString(SI_TRADEACTIONRESULT13),
+    SI_LUIE_CA_TRADEACTIONRESULT14 =                     GetString(SI_TRADEACTIONRESULT14),
+    SI_LUIE_CA_TRADEACTIONRESULT41 =                     GetString(SI_TRADEACTIONRESULT41),
+    SI_LUIE_CA_TRADEACTIONRESULT42 =                     GetString(SI_TRADEACTIONRESULT42),
+    SI_LUIE_CA_TRADEACTIONRESULT43 =                     GetString(SI_TRADEACTIONRESULT43),
+    SI_LUIE_CA_TRADEACTIONRESULT44 =                     GetString(SI_TRADEACTIONRESULT44),
+    SI_LUIE_CA_TRADEACTIONRESULT45 =                     GetString(SI_TRADEACTIONRESULT45),
+    SI_LUIE_CA_TRADEACTIONRESULT46 =                     GetString(SI_TRADEACTIONRESULT46),
+    SI_LUIE_CA_TRADEACTIONRESULT62 =                     GetString(SI_TRADEACTIONRESULT62),
+    SI_LUIE_CA_TRADEACTIONRESULT63 =                     GetString(SI_TRADEACTIONRESULT63),
+    SI_LUIE_CA_TRADEACTIONRESULT64 =                     GetString(SI_TRADEACTIONRESULT64),
+    SI_LUIE_CA_TRADEACTIONRESULT65 =                     "You are already trading|cFEFEFE<<1>>|r.",
+    SI_LUIE_CA_TRADEACTIONRESULT66 =                     GetString(SI_TRADEACTIONRESULT66),
+    SI_LUIE_CA_TRADEACTIONRESULT80 =                     GetString(SI_TRADEACTIONRESULT80),
+
+    -- Trade Invite Messages
+    SI_LUIE_CA_TRADE_INVITE_ACCEPTED =                   "Trade invitation accepted.",
+    SI_LUIE_CA_TRADE_INVITE_DECLINED =                   "Trade invitation declined.",
+    SI_LUIE_CA_TRADE_INVITE_CANCELED =                   "Trade invitation canceled.",
+    SI_LUIE_CA_TRADE_INVITE_CONFIRM =                    "You have invited |cFEFEFE<<1>>|r to trade.",
+    SI_LUIE_CA_TRADE_INVITE_MESSAGE =                    "|cFEFEFE<<1>>|r has invited you to trade.",
+
+    -- EVENT_DISPLAY_ANNOUNCEMENT: Entering/Leaving Group Area
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D =       "Entering Group Area.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D =       "Leaving Group Area.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C =       "Entering Group Area",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C =       "Leaving Group Area",
+
+    -- EVENT_DISPLAY_ANNOUNCEMENT: Craglorn Buffs
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR =        "Spell Resistance Increased",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR_CA =     "Spell Resistance Increased!",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR =        "Physical Resistance Increased",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR_CA =     "Physical Resistance Increased!",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI =        "Power Increased",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI_CA =     "Power Increased!",
+
+    -- EVENT_DISPLAY_ANNOUNCEMENT: Maelstrom Arena
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM =          "Maelstrom Arena",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA =       "Maelstrom Arena: ",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE1 =          "Vale of the Surreal",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE2 =          "Seht's Balcony",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE3 =          "Drome of Toxic Shock",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE4 =          "Seht's Flywheel",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE5 =          "Rink of Frozen Blood",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE6 =          "Spiral Shadows",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE7 =          "Vault of Umbrage",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8 =          "Igneous Cistern",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9 =          "Theater of Despair",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1 =          "Round 1",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1_CA =       "Round 1!",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2 =          "Round 2",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2_CA =       "Round 2!",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3 =          "Round 3",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3_CA =       "Round 3!",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4 =          "Round 4",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4_CA =       "Round 4!",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5 =          "Round 5",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA =       "Round 5!",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF =          "Final Round",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA =       "Final Round!",
+
+    -- EVENT_DISPLAY_ANNOUNCEMENT: Dragonstar Arena
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA =                "Dragonstar Arena",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA =             "Dragonstar Arena: ",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC =           "The arena will begin in 30 seconds!",
+
+    -- EVENT_DISPLAY_ANNOUNCEMENT: Imperial City Sewer Zones
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_PREFIX =    "Entered: ",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE1 =          "Entered: Battle Gates",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_1 =      "Battle Gates",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE2 =          "Entered: Nocere Oblitus",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_2 =      "Nocere Oblitus",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE3 =          "Entered: Bloodworks",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_3 =      "Bloodworks",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE4 =          "Entered: Wavering Veil",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_4 =      "Wavering Veil",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE5 =          "Entered: Training Grounds",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_5 =      "Training Grounds",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE6 =          "Entered: Lost Tombs",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_6 =      "Lost Tombs",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE7 =          "Entered: The Hatchery",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_7 =      "The Hatchery",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8 =          "Entered: Weavers Nest",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8_EDIT =     "Entered: Weaver\'s Nest",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_8 =      "Weaver's Nest",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE9 =          "Entered: Buried Artifact",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_9 =      "Buried Artifact",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE10 =         "Entered: Betrayer\'s Catacombs",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_10 =     "Betrayer\'s Catacombs",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE11 =         "Entered: Feeding Pits",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_11 =     "Feeding Pits",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE12 =         "Entered: Alessian Tombs",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_12 =     "Alessian Tombs",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC1 =           "Gati has discovered a new route to the realms of Oblivion.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC2 =           "The cruel wards of Zamachar nurture only the strongest foes.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC3 =           "A clan of vampiric Orcs lurk in the shadows.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC4 =           "The barriers between Mundus and Oblivion grow thin.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC5 =           "The merciless Hzu-Hakan trains his savage Clannfear.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC6 =           "The corpse of long-dead Emperor Leovic has been found.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC7 =           "General Kryozote oversees the breeding of vile creatures.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC8 =           "The Weaver ensnares anyone foolish enough to enter her web.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC9 =           "Xivkyn lord Wadracki searches for a long forgotten power.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC10 =          "Xivkyn lord Ebral rallies his army of the undead.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC11 =          "General Nazenaechar makes use of fallen Imperial citizens.",
+    SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC12 =          "Restless spirits of the dead are driven by forces unseen.",
+
+    ------------------------------------
+    -- CombatText.lua ------------------
+    ------------------------------------
+
+    SI_LUIE_CT_COMBAT_IN_DEFAULT =                       "Entered Combat",
+    SI_LUIE_CT_COMBAT_OUT_DEFAULT =                      "Left Combat",
+    SI_LUIE_CT_CLEANSE_DEFAULT =                         "CLEANSE",
+    SI_LUIE_CT_BLOCK_DEFAULT =                           "BLOCK",
+    SI_LUIE_CT_BLOCKSTAGGER_DEFAULT =                    "*BLOCK*",
+    SI_LUIE_CT_DODGE_DEFAULT =                           "DODGE",
+    SI_LUIE_CT_AVOID_DEFAULT =                           "AVOID",
+    SI_LUIE_CT_INTERRUPT_DEFAULT =                       "INTERRUPT",
+    SI_LUIE_CT_EXPLOIT_DEFAULT =                         "EXPLOIT",
+    SI_LUIE_CT_EXECUTE_DEFAULT =                         "EXECUTE",
+    SI_LUIE_CT_POWER_DEFAULT =                           "",
+    SI_LUIE_CT_DESTROY_DEFAULT =                         "DESTROY",
+    SI_LUIE_CT_MISS_DEFAULT =                            "Missed %t",
+    SI_LUIE_CT_IMMUNE_DEFAULT =                          "Immune %t",
+    SI_LUIE_CT_PARRIED_DEFAULT =                         "Parried %t",
+    SI_LUIE_CT_REFLECTED_DEFAULT =                       "Reflected %t",
+    SI_LUIE_CT_DODGED_DEFAULT =                          "Dodged %t",
+    SI_LUIE_CT_INTERRUPTED_DEFAULT =                     "Interrupted",
+    SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT =               " incoming! ",
+    SI_LUIE_CT_MITIGATION_FORMAT_POWER =                 "%t %i on %n!",
+    SI_LUIE_CT_MITIGATION_FORMAT_DESTROY =               "%t %i",
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    -- BASE SETTINGS -- LAM --
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    SI_LUIE_LAM_COMPATIBILITY_WARNING =                  "Disable this option if you are having compatibility issues with other addons.",
+    SI_LUIE_LAM_FONT =                                   "Font",
+    SI_LUIE_LAM_FONT_SIZE =                              "Font Size",
+    SI_LUIE_LAM_FONT_STYLE =                             "Font Style",
+    SI_LUIE_LAM_RELOADUI =                               "Reload UI",
+    SI_LUIE_LAM_RELOADUI_BUTTON =                        "This will reload the UI.",
+    SI_LUIE_LAM_RELOADUI_WARNING =                       "Will need to reload the UI.",
+    SI_LUIE_LAM_RESETPOSITION =                          "Reset Position",
+    SI_LUIE_LAM_HIDE_EXPERIENCE_BAR =                    "Hide Experience/Skill Progress Bar Pop-up",
+    SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP =                 "When gaining experience from Quests, POI Discovery, Boss Kills, or Skill Line updates, the XP bar will no longer popup. Useful if you have a custom UI element in that corner of the screen and don't want it to be overlapped.",
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    -- LAM MODULE ON/OFF --
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    SI_LUIE_LAM_CHANGELOG =                              "Display Changelog",
+    SI_LUIE_LAM_CHANGELOG_TP =                           "Display a list of changes from the previous version of LUIE.",
+    SI_LUIE_LAM_STARTUPMSG =                             "Disable Startup Message",
+    SI_LUIE_LAM_STARTUPMSG_TP =                          "This setting will disable the startup message.",
+    SI_LUIE_LAM_UF =                                     "Unit Frames",
+    SI_LUIE_LAM_CA =                                     "Chat Announce",
+    SI_LUIE_LAM_CI =                                     "Combat Info",
+    SI_LUIE_LAM_SLASHCMDS =                              "Slash Commands",
+    SI_LUIE_LAM_CI_DESCRIPTION =                         "Allows display of ultimate value on bars, effect tracker on bars, as well as cooldown tracking for quick slot items and GCD display for action bars.",
+    SI_LUIE_LAM_BUFFS_DESCRIPTION =                      "Enables buff and debuff display for effects on the player and target. Also has options for various other enhancements.",
+    SI_LUIE_LAM_BUFFSDEBUFFS =                           "Buffs & Debuffs",
+    SI_LUIE_LAM_MODULEHEADER =                           "Module Settings",
+    SI_LUIE_LAM_MISCHEADER =                             "Miscellaneous Settings",
+    SI_LUIE_LAM_SVPROFILE_HEADER =                       "Character Profile Settings",
+    SI_LUIE_LAM_SVPROFILE_DESCRIPTION =                  "By default LuiExtended uses account wide settings. You can toggle on character specific settings below. Profiles can be copied between characters, and you can reset the current character or overall account settings below. Note that account wide settings are preserved if you toggle back from using individual character profiles.",
+    SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE =               "Enable Character Specific Settings",
+    SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE_TP =            "Switch from using account wide settings to using specific character settings.",
+    SI_LUIE_LAM_SVPROFILE_PROFILECOPY =                  "Copy Character Profile",
+    SI_LUIE_LAM_SVPROFILE_PROFILECOPY_TP =               "Select another character or account wide settings to copy from.",
+    SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON =            "Copy Profile",
+    SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON_TP =         "Copy the profile selected above to your current character or account wide settings.",
+    SI_LUIE_LAM_SVPROFILE_RESETCHAR =                    "Reset Current Character",
+    SI_LUIE_LAM_SVPROFILE_RESETCHAR_TP =                 "Reset current character profile settings.",
+    SI_LUIE_LAM_SVPROFILE_RESETACCOUNT =                 "Reset Account Wide",
+    SI_LUIE_LAM_SVPROFILE_RESETACCOUNT_TP =              "Reset account wide profile settings. Note that this will not delete or modify individual character settings.",
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    -- SLASH COMMANDS -- LAM --
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    SI_LUIE_LAM_SLASHCMDS_ENABLE =                       "Slash Commands Module",
+    SI_LUIE_LAM_SLASHCMDS_DESCRIPTION =                  "Add custom /slash commands to perform various basic functionality such as kicking members from group, inviting players to guild, or adding friends.",
+    SI_LUIE_LAM_SLASHCMDSHEADER =                        "Slash Commands",
+    SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL =                "General Commands",
+    SI_LUIE_LAM_SLASHCMDS_TRADE =                        "Enable ( '/trade' ) Trade",
+    SI_LUIE_LAM_SLASHCMDS_TRADE_TP =                     "'/trade' 'name' Invites a player to trade with you.",
+    SI_LUIE_LAM_SLASHCMDS_HOME =                         "Enable ( '/home' ) Port to Primary Home",
+    SI_LUIE_LAM_SLASHCMDS_HOME_TP =                      "'/home' Ports the user to their primary home.",
+    SI_LUIE_LAM_SLASHCMDS_CAMPAIGN =                     "Enable ( '/campaign' ) Campaign Queue",
+    SI_LUIE_LAM_SLASHCMDS_CAMPAIGN_TP =                  "'/campaign' 'name' Queue for the entered campaign name if it is your Home or Guest campaign.",
+    SI_LUIE_LAM_SLASHCMDSHEADER_GROUP =                  "Group Commands",
+    SI_LUIE_LAM_SLASHCMDS_REGROUP =                      "Enable ( '/regroup' ) Regroup Function",
+    SI_LUIE_LAM_SLASHCMDS_REGROUP_TP =                   "'/regroup' Saves your current party configuration, disbands the group and reinvites them after 5 seconds.",
+    SI_LUIE_LAM_SLASHCMDS_LEAVE =                        "Enable ( '/leave' ) Leave Group",
+    SI_LUIE_LAM_SLASHCMDS_LEAVE_TP =                     "'/leave' Leaves the current group.\n\t\t\t\t\tAlternate options: '/leavegroup'",
+    SI_LUIE_LAM_SLASHCMDS_DISBAND =                      "Enable ( '/disband' ) Disband Group",
+    SI_LUIE_LAM_SLASHCMDS_DISBAND_TP =                   "'/disband' Disbands the current group if you are group leader.",
+    SI_LUIE_LAM_SLASHCMDS_KICK =                         "Enable ( '/kick' ) Remove from Group",
+    SI_LUIE_LAM_SLASHCMDS_KICK_TP =                      "'/kick' 'name' Kicks a member from the current group if you are group leader.\n\t\t\t\t\tNote: Does not replace the /kick emote.\n\t\t\t\t\tAlternate options: '/remove', '/groupkick', '/groupremove'",
+    SI_LUIE_LAM_SLASHCMDS_VOTEKICK =                     "Enable ( '/votekick') Vote to Kick",
+    SI_LUIE_LAM_SLASHCMDS_VOTEKICK_TP =                  "/votekick' 'name' Initiates a vote to kick a member from your current LFG group.\n\t\t\t\t\tAlternate options: '/voteremove'",
+    SI_LUIE_LAM_SLASHCMDSHEADER_GUILD =                  "Guild Commands",
+    SI_LUIE_LAM_SLASHCMDS_GUILDINVITE =                  "Enable ( '/guildinvite' ) Invite to Guild",
+    SI_LUIE_LAM_SLASHCMDS_GUILDINVITE_TP =               "'/guildinvite' '#' 'name' Invites a player to one of your guilds based on their order in your Guild Menu.\n\t\t\t\t\tAlternate options: /'ginvite'",
+    SI_LUIE_LAM_SLASHCMDS_GUILDKICK =                    "Enable ( '/guildkick' ) Kick from Guild",
+    SI_LUIE_LAM_SLASHCMDS_GUILDKICK_TP =                 "'/guildkick' '#' 'name' Kicks a player from one of your guilds if you have permissions to do so.\n\t\t\t\t\tAlternate options: '/gkick'",
+    SI_LUIE_LAM_SLASHCMDS_GUILDQUIT =                    "Enable ( '/guildquit' ) Leave Guild",
+    SI_LUIE_LAM_SLASHCMDS_GUILDQUIT_TP =                 "'/guildquit' '#' Leave one of your guilds based on their order in your Guild Menu.\n\t\t\t\t\tAlternate options: '/gquit', '/guildleave', '/gleave'",
+    SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL =                 "Social Commands",
+    SI_LUIE_LAM_SLASHCMDS_FRIEND =                       "Enable ( '/friend' ) Add Friend",
+    SI_LUIE_LAM_SLASHCMDS_FRIEND_TP =                    "'/friend' 'name' Invite a player to be friends.\n\t\t\t\t\tAlternate options: '/addfriend'",
+    SI_LUIE_LAM_SLASHCMDS_IGNORE =                       "Enable ( '/ignore' ) Add Ignored",
+    SI_LUIE_LAM_SLASHCMDS_IGNORE_TP =                    "'/ignore' 'name' Add a player to ignored.\n\t\t\t\t\t\tAlternate options: '/addignore'",
+    SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND =                 "Enable ( '/removefriend' ) Remove Friend",
+    SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND_TP =              "'/unfriend' 'name' Remove a player from friends.\n\t\t\t\t\tAlternate options: '/removefriend'",
+    SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE =                 "Enable ( /'removeignore' ) Remove Ignored",
+    SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE_TP =              "'/unignore' 'name' Remove a player from ignored.\n\t\t\t\t\tAlternate options: '/removeignore'",
+    SI_LUIE_LAM_SLASHCMDS_BANKER =                       "Enable ( '/banker' ) Banker",
+    SI_LUIE_LAM_SLASHCMDS_BANKER_TP =                    "'/banker' Summon <<1>> (If unlocked).\n\t\t\t\t\tAlternate options: '/bank'",
+    SI_LUIE_LAM_SLASHCMDS_MERCHANT =                     "Enable ( '/merchant' ) Merchant",
+    SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP =                  "'/merchant' Summon <<1>> (If unlocked).\n\t\t\t\t\tAlternate options: '/sell', '/vendor'",
+    SI_LUIE_LAM_SLASHCMDS_FENCE =                        "Enable ( '/fence' ) Fence",
+    SI_LUIE_LAM_SLASHCMDS_FENCE_TP =                     "'/fence' Summon <<1>> (If unlocked).\n\t\t\t\t\tAlternate options: '/smuggler'",
+    SI_LUIE_LAM_SLASHCMDS_READYCHECK =                   "Enable ( '/ready' ) Ready Check",
+    SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP =                "Send a 'ready check' dialog to all group members.",
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    -- BUFFS & DEBUFFS -- LAM --
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK =                "Buffs & Debuffs Module",
+    SI_LUIE_LAM_BUFF_HEADER_POSITION =                   "Position and Display Options",
+    SI_LUIE_LAM_BUFF_HARDLOCK =                          "Hard-Lock Position to Unit Frames",
+    SI_LUIE_LAM_BUFF_HARDLOCK_TP =                       "Hard-Lock position of buff frames to health bar of unit frames (default or custom).",
+    SI_LUIE_LAM_BUFF_HARDLOCK_WARNING =                  "Will need to reload the UI.\nWhen this position is locked, you will not be able to buff frames.",
+    SI_LUIE_LAM_BUFF_UNLOCKWINDOW =                      "Unlock Buffs Window",
+    SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TP =                   "Unlock to drag buff icon frames. This will not unlock frames that are locked to the unit frames.",
+    SI_LUIE_LAM_BUFF_RESETPOSITION_TP =                  "This will reset position of all buff icon containers to the default position.",
+    SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF =                    "Hide PLAYER Buffs",
+    SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF_TP =                 "Prevents your buffs from displaying.",
+    SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF =                  "Hide PLAYER Debuffs",
+    SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF_TP =               "Prevents your debuffs from displaying.",
+    SI_LUIE_LAM_BUFF_HIDETARGETBUFF =                    "Hide TARGET Buffs",
+    SI_LUIE_LAM_BUFF_HIDETARGETBUFF_TP =                 "Prevents buffs on your target from displaying.",
+    SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF =                  "Hide TARGET Debuffs",
+    SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF_TP =               "Prevents debuffs on your target from displaying.",
+    SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF =              "Hide GROUND Buffs and Debuffs",
+    SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TP =           "Prevents ground targeted effects from displaying.",
+    SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS =                   "Display Extra Buffs",
+    SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS_TP =                "Display extra icons for some buffs with major/minor auras that normally do not have tracking. This feature is intended to add extra icons for abilities such as Green Dragon Blood so they can be added to prominent auras and tracked.",
+    SI_LUIE_LAM_BUFF_CONSOLIDATE =                       "Consolidate Major/Minor Auras",
+    SI_LUIE_LAM_BUFF_CONSOLIDATE_TP =                    "Consolidate major/minor auras for abilities with multiple effects into one icon: Dragon Blood, Hurricane, Combat Prayer, Restoring Focus, etc... \nNote: Enabling this will show extra icons for abilities such as Dragon Blood to allow tracking.",
+    SI_LUIE_LAM_BUFF_EXTEND_EXTRA =                      "Extend Settings to Single Aura Effects",
+    SI_LUIE_LAM_BUFF_EXTEND_EXTRA_TP =                   "Enabling this will extend the settings for Extra or Consolidated Buffs to effects with only a single Major/Minor effect such as Blur, Shuffle, Molten Weapons.",
+    SI_LUIE_LAM_BUFF_REDUCE =                            "Hide Duplicates in Paired Auras",
+    SI_LUIE_LAM_BUFF_REDUCE_TP =                         "Some abilities have multiple effects with the same duration, for example: Burning Talons applies an equivalent duration DoT & Snare effect. Enabling this will hide one of these icons for this ability and others like it, reducing the amount of pollution in the buff/debuff containers.",
+    SI_LUIE_LAM_BUFF_ICON_HEADER =                       "Icon Options",
+    SI_LUIE_LAM_BUFF_ICONSIZE =                          "Buff Icon Size",
+    SI_LUIE_LAM_BUFF_ICONSIZE_TP =                       "Choose the size for buff icons.",
+    SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL =               "Display Remaining Time Label",
+    SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL_TP =            "Show text label with number of seconds left until the buff expires.",
+    SI_LUIE_LAM_BUFF_LABEL_POSITION_TP =                 "Adjust the vertical position of the buff countdown label.",
+    SI_LUIE_LAM_BUFF_FONT_TP =                           "Choose the font to use for the buff countdown label.",
+    SI_LUIE_LAM_BUFF_FONTSIZE_TP =                       "Choose the font size for the buff countdown label.",
+    SI_LUIE_LAM_BUFF_FONTSTYLE_TP =                      "Choose the font style for the buff countdown label.",
+    SI_LUIE_LAM_BUFF_LABELCOLOR_TP =                     "Set the color of text label to be the same as icon border or keep it white.",
+    SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS =               "Show Second Fractions",
+    SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP =            "Format remaining text labels as \"12.3\" or keep only seconds \"12\".",
+    SI_LUIE_LAM_BUFF_HORIZONTICONALIGN =                 "Horizontal Alignment Method",
+    SI_LUIE_LAM_BUFF_HORIZONTICONALIGN_TP =              "Horizontal alignment of buff and debuff icons within container area.",
+    -- SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON =            "Vertical Icons Alignment",
+    -- SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON_TP =         "Vertical alignment of buff and debuff icons within container area.",
+    SI_LUIE_LAM_BUFF_DESCENDINGSORT =                    "Sort Direction",
+    SI_LUIE_LAM_BUFF_DESCENDINGSORT_TP =                 "Choose the direction in which buff icons are sorted.",
+    SI_LUIE_LAM_BUFF_GLOWICONBORDER =                    "Display Glowing Border",
+    SI_LUIE_LAM_BUFF_GLOWICONBORDER_TP =                 "Display a context colored glow border around each buff or debuff icon.",
+    SI_LUIE_LAM_BUFF_SHOWBORDERCOOLDOWN =                "Display Radial Countdown Border",
+    SI_LUIE_LAM_BUFF_SHOWBORDERCOOLDOWN_TP =             "Display a context colored radial countdown border as the buff or debuff progresses in duration.",
+    SI_LUIE_LAM_BUFF_FADEEXPIREICON =                    "Fade Out Expiring Icons",
+    SI_LUIE_LAM_BUFF_FADEEXPIREICON_TP =                 "When a buff/debuff is about to expire, make the icon transparent.",
+    SI_LUIE_LAM_BUFF_LONGTERM_HEADER =                   "Long-Term Effects",
+    SI_LUIE_LAM_BUFF_LONGTERM_SELF =                     "Show Long-term Effects for Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_SELF_TP =                  "Show Player icons for effects with duration greater then 2 minutes.",
+    SI_LUIE_LAM_BUFF_LONGTERM_TARGET =                   "Show Long-term Effects for Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_TARGET_TP =                "Show Long-term Effects for Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL =                  "Use separate control for Player effects",
+    SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL_TP =               "Move Player effects icons for long-term effects into independent separate control.",
+    SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER =                "Container orientation",
+    SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER_TP =             "Change orientation of long-term effects to Horizontal or Vertical tiling method.",
+    SI_LUIE_LAM_BUFF_LONGTERM_VERT =                     "Vertical Long Term Buffs Alignment",
+    SI_LUIE_LAM_BUFF_LONGTERM_VERT_TP =                  "Alignment of buff and debuff icons within the long term buff container when set to vertical orientation.",
+    SI_LUIE_LAM_BUFF_LONGTERM_HORIZ =                    "Horizontal Long Term Buffs Alignment",
+    SI_LUIE_LAM_BUFF_LONGTERM_HORIZ_TP =                 "Alignment of buff and debuff icons within the long term buff container when set to horizontal orientation.",
+    SI_LUIE_LAM_BUFF_REVERSE_ORDER =                     "Reverse Long Term Buff Sort Order",
+    SI_LUIE_LAM_BUFF_REVERSE_ORDER_TP =                  "When enabled, the sort direction selected under Icon Options will be reversed for the long term buff container.",
+    SI_LUIE_LAM_BUFF_FILTER_LONG_HEADER =                "Long-Term Effect Filters",
+    SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT =                "Show Icon for Active Assistant (Player only)",
+    SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT_TP =             "Set whether the active assitants will display an icon on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE =                 "Show Icon for Equipped Diguise (Player only)",
+    SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE_TP =              "Set whether the equipped disguises will display an icon on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_MOUNT =                    "Show Icon for Active Mount (Player only)",
+    SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TP =                 "Set whether the active mounts will display an icon on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_PET =                      "Show Icon for Active Vanity Pet (Player only)",
+    SI_LUIE_LAM_BUFF_LONGTERM_PET_TP =                   "Set whether the active vanity pets will display an icon on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER =             "Show Mundus Boons on Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER_TP =          "Set whether Mundus Stone boons are shown on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET =             "Show Mundus Boons on Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET_TP =          "Set whether Mundus Stone boons are shown on target.",
+    SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER =          "Show Vampirism Stage on Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER_TP =       "Set whether to show the Vampirism stage buff on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET =          "Show Vampirism Stage on Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET_TP =       "Set whether to show the Vampirism stage buff on target.",
+    SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER =              "Show Lycanthrophy on Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER_TP =           "Set whether to show the Lycanthrophy buff on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_LYCANTARGET =              "Show Lycanthrophy on Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_LYCANTARGET_TP =           "Set whether to show the Lycanthrophy buff on target.",
+    SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER =             "Show Vamp/Lycan Disease on Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER_TP =          "Set whether to show the vampirism and lycanthropy precursor disease buffs on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET =             "Show Vamp/Lycan Disease on Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET_TP =          "Set whether to show vampirism and lycanthropy precursor disease buffs on target.",
+    SI_LUIE_LAM_BUFF_LONGTERM_BITEPLAYER =               "Show Vamp/Lycan Bite Timer on Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_BITEPLAYER_TP =            "Set whether to show the bite cooldown timers for vampirism/lycanthrophy on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_BITETARGET =               "Show Vamp/Lycan Bite Timer on Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_BITETARGET_TP =            "Set whether to show the bite cooldown timers for vampirism/lycanthrophy on target.",
+    SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER =            "Show Battle Spirit on Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER_TP =         "Set whether the battle spirit buff will display on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET =            "Show Battle Spirit on Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET_TP =         "Set whether the battle spirit buff will display on target.\nNote: This setting only applies in Cyrodiil.",
+    SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER =               "Show Cyrodiil Bonuses on Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER_TP =            "Set whether buffs provided during Cyrodiil AvA are shown on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET =               "Show Cyrodiil Bonuses on Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET_TP =            "Set whether buffs provided during Cyrodiil AvA are shown on target.",
+    SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER =            "Show ESO Plus Member on Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER_TP =         "Set whether the ESO Plus Member buff is displayed on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET =            "Show ESO Plus Member on Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET_TP =         "Set whether the ESO Plus Member buff is displayed on target.",
+    SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER =        "Show Soul Summons ICD on Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER_TP =     "Set whether to show Soul Summons internal cooldown buff on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET =        "Show Soul Summons ICD on Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET_TP =     "Set whether to show Soul Summons internal cooldown buff on target.",
+    SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER =             "Show Item Set ICDs on Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP =          "Set whether to show the iternal cooldown buff from the Phoenix, Eternal Warrior, and Immortal Warrior sets on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_SETICDTARGET =             "Show Item Set ICDs on Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_SETICDTARGET_TP =          "Set whether to show the iternal cooldown buff from the Phoenix, Eternal Warrior, and Immortal Warrior sets on target.",
+    SI_LUIE_LAM_BUFF_LONGTERM_FOODPLAYER =               "Show Food & Drink Buffs on Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_FOODPLAYER_TP =            "Set whether to show food & drink buffs on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_FOODTARGET =               "Show Food & Drink Buffs on Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_FOODTARGET_TP =            "Set whether to show food & drink buffs on target.",
+    SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER =         "Show Experience Boost Buffs on Player",
+    SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER_TP =      "Set whether to show experience boost buffs on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET =         "Show Experience Boost Buffs on Target",
+    SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET_TP =      "Set whether to show experience boost buffs on target.",
+    SI_LUIE_LAM_BUFF_MISC_HEADER =                       "Short-Term Effect Filters",
+    SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP =                   "Show Gallop (Player only)",
+    SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP_TP =                "Display special buff icon when player is mounted and galloping.",
+    SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT =                   "Show Sprint (Player only)",
+    SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT_TP =                "Display special buff icon when player is sprinting.",
+    SI_LUIE_LAM_BUFF_MISC_SHOWREZZ =                     "Show Resurrection Immunity (Player only)",
+    SI_LUIE_LAM_BUFF_MISC_SHOWREZZ_TP =                  "Display special buff icon when player is immune to damage and effects during resurrection.",
+    SI_LUIE_LAM_BUFF_MISC_SHOWRECALL =                   "Show Recall Cooldown (Player only)",
+    SI_LUIE_LAM_BUFF_MISC_SHOWRECALL_TP =                "Display special buff icon when player has accumulated a wayshrine recall cost penalty.",
+    SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER =              "Show Block - Player",
+    SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER_TP =           "Display special buff icon when player is holding block.",
+    SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET =              "Show Block - Target",
+    SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET_TP =           "Display special buff icon when target is holding block.",
+    SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER =            "Show Stealth - Player",
+    SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER_TP =         "Display special buff icon when player is hidden or in stealth.",
+    SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET =            "Show Stealth - Target",
+    SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET_TP =         "Display special buff icon when target is hidden or in stealth.",
+    SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER =       "Show Disguised - Player",
+    SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER_TP =    "Display special buff icon when player is in a relevant area and is actively disguised from enemies.",
+    SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET =       "Show Disguised - Target",
+    SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET_TP =    "Display special buff icon when target is in a relevant area and is actively disguised from enemies.",
+    SI_LUIE_LAM_BUFF_PROM_HEADER =                       "Prominent Buffs & Debuffs",
+    SI_LUIE_LAM_BUFF_PROM_DESCRIPTION =                  "This whitelist allows you to display important buffs and debuffs in separate containers with the addition of a label and progress bar.\n\nEligible Effects: Buffs on Player, Debuffs on Target, Ground Targeted Effects\n\nYou can add buffs and debuffs to EITHER container. For example if you'd like to track the duration of Hurricane with your other dots, you can add Hurricane to the Prominent Debuffs list.",
+    SI_LUIE_LAM_BUFF_PROM_LABEL =                        "Display Ability Name Label",
+    SI_LUIE_LAM_BUFF_PROM_LABEL_TP =                     "Toggle the display of a label next to prominent auras with the Ability Name.",
+    SI_LUIE_LAM_BUFF_PROM_FONTFACE =                     "Label Font Face",
+    SI_LUIE_LAM_BUFF_PROM_FONTFACE_TP =                  "Choose the font face for the prominent auras Ability Name label.",
+    SI_LUIE_LAM_BUFF_PROM_FONTSTYLE =                    "Label Font Style",
+    SI_LUIE_LAM_BUFF_PROM_FONTSTYLE_TP =                 "Choose the font style for the prominent auras Ability Name label.",
+    SI_LUIE_LAM_BUFF_PROM_FONTSIZE =                     "Label Font Size",
+    SI_LUIE_LAM_BUFF_PROM_FONTSIZE_TP =                  "Choose the font size for the prominent auras Ability Name label.",
+    SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR =                  "Display Progress Bar",
+    SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TP =               "Toggle the display of a progress bar next to prominent auras.",
+    SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE =          "Progress Bar Texture",
+    SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE_TP =       "Choose a texture to use for the prominent aura progress bar.",
+    SI_LUIE_LAM_BUFF_PROM_COLORBUFF1 =                   "Buff Gradient Color (Start)",
+    SI_LUIE_LAM_BUFF_PROM_COLORBUFF1_TP =                "Choose the start gradient color for the progress bar for prominent buffs.",
+    SI_LUIE_LAM_BUFF_PROM_COLORBUFF2 =                   "Buff Gradient Color (End)",
+    SI_LUIE_LAM_BUFF_PROM_COLORBUFF2_TP =                "Choose the end gradient color for the progress bar for prominent buffs.",
+    SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1 =                 "Debuff Gradient Color (Start)",
+    SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1_TP =              "Choose the start gradient color for the progress bar for prominent debuffs.",
+    SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2 =                 "Debuff Gradient Color (End)",
+    SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2_TP =              "Choose the end gradient color for the progress bar for prominent debuffs.",
+    SI_LUIE_LAM_BUFF_PROM_BUFFALIGNMENT =                "Prominent Buff Alignment",
+    SI_LUIE_LAM_BUFF_PROM_BUFFALIGNMENT_TP =             "Select whether buffs anchor from the top, bottom, or center of the prominent aura containers.",
+    SI_LUIE_LAM_BUFF_PROM_DEBUFFALIGNMENT =              "Prominent Debuff Alignment",
+    SI_LUIE_LAM_BUFF_PROM_DEBUFFALIGNMENT_TP =           "Select whether debuffs anchor from the top, bottom, or center of the prominent aura containers.",
+    SI_LUIE_LAM_BUFF_PROM_BUFFREVERSESORT =              "Reverse Sort Order for Prominent Buffs",
+    SI_LUIE_LAM_BUFF_PROM_BUFFREVERSESORT_TP =           "Enable to toggle the ascending/descending direction of buff sorting for prominent buff container.",
+    SI_LUIE_LAM_BUFF_PROM_DEBUFFREVERSESORT =            "Reverse Sort Order for Prominent Debuffs",
+    SI_LUIE_LAM_BUFF_PROM_DEBUFFREVERSESORT_TP =         "Enable to toggle the ascending/descending direction of buff sorting for prominent debuff container.",
+    SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION =           "Label & Progress Bar Orientation (Buffs)",
+    SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION_TP =        "Choose whether to display the Ability Name Label and Progress bar to the left or right of prominent buffs.",
+    SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION =         "Label & Progress Bar Orientation (Debuffs)",
+    SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION_TP =      "Choose whether to display the Ability Name Label and Progress bar to the left or right of prominent debuffs.",
+    SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT =            "Add prominent buffs or debuffs by entering an AbilityId or AbilityName into the input field and pressing enter. Remove prominent buffs or debuffs, by clicking the AbilityId or AbilityName from the dropdown list.",
+    SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST =                 "Add Prominent Buff",
+    SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST_TP =              "Add an abilityId or abilityName to the Prominent Buffs list.",
+    SI_LUIE_LAM_BUFF_PROM_BUFF_REMLIST =                 "Remove Prominent Buff",
+    SI_LUIE_LAM_BUFF_PROM_BUFF_REMLIST_TP =              "Remove an abilityId or abilityName from the Prominent Buffs list.",
+    SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST =               "Add Prominent Debuff",
+    SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST_TP =            "Add an abilityId or abilityName to the Prominent Debuffs list.",
+    SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST =               "Remove Prominent Debuff",
+    SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST_TP =            "Remove an abilityId or abilityName from the Prominent Debuffs list.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_HEADER =                  "Buff & Debuff Blacklisting",
+    SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT =                "Add buffs or debuffs to the Blacklist by entering an AbilityId or AbilityName into the input field and pressing enter. Remove buffs or debuffs from the Blacklist, by clicking the AbilityId or AbilityName from the dropdown list.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST =                 "Add Buff or Debuff to Blacklist",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP =              "Add an abilityId or abilityName to the aura blacklist.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST =                 "Remove Buff or Debuff from Blacklist",
+    SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP =              "Remove an abilityId or abilityName from the aura blacklist.",
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    -- CHAT ANNOUNCEMENTS -- LAM --
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    -- Base Settings
+    SI_LUIE_LAM_CA_ENABLE =                              "Chat Announcements Module",
+    SI_LUIE_LAM_CA_HEADER =                              "Chat Announcements Options",
+    SI_LUIE_LAM_CA_DESCRIPTION =                         "Displays announcements in chat for various events - with many customizable settings.",
+
+    -- Chat Message Settings
+    SI_LUIE_LAM_CA_CHATHEADER =                          "Chat Message Settings",
+    SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD =                   "Player Name Display Method",
+    SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP =                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name",
+    SI_LUIE_LAM_CA_CHATTAB =                             "\t\t\t\t\tDisplay Chat Announcements in Chat Tab <<1>>",
+    SI_LUIE_LAM_CA_CHATTAB_TP =                          "Display Notifications & Chat Announcements in Chat Tab <<1>>.",
+    SI_LUIE_LAM_CA_CHATTABSYSTEMALL =                    "Display System Messages in ALL Tabs",
+    SI_LUIE_LAM_CA_CHATTABSYSTEMALL_TP =                 "When enabled: System Messages, Social Notifications (Group, Guild, Friends & Ignored List, Trade & Duels), Slash Command Notifications and Error Messages will display in all chat tabs.",
+    SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER =            "Character/Account Name Brackets",
+    SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER_TP =         "Choose whether or not to display [ ] brackets around character and account names.",
+    SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM =                 "Item Link Brackets",
+    SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM_TP =              "Choose whether or not to display [ ] brackets around item links.",
+    SI_LUIE_LAM_CA_BRACKET_OPTION_LOREBOOK =             "Lorebook Brackets",
+    SI_LUIE_LAM_CA_BRACKET_OPTION_LOREBOOK_TP =          "Choose whether or not to display [ ] brackets around lorebooks.",
+    SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE =          "Collectible Brackets",
+    SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE_TP =       "Choose whether or not to display [ ] brackets around collectibles.",
+    SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT =          "Achievement Brackets",
+    SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT_TP =       "Choose whether or not to display [ ] brackets around achievements.",
+    SI_LUIE_LAM_CA_CHATMETHOD =                          "Choose Chat Message Display Method",
+    SI_LUIE_LAM_CA_CHATMETHOD_TP =                       "Choose whether to print chat messages to all tabs or print to individual tabs.",
+    SI_LUIE_LAM_CA_CHATBYPASS =                          "Enable pChat Message Saving",
+    SI_LUIE_LAM_CA_CHATBYPASS_TP =                       "Enabling this will prevent LUIE from adding timestamps to messages and allow pChat or other chat addons to handle chat messages. When using pChat, these messages can be saved and restored on reload.\nNote: This option is only available for messages printed to all tabs as pChat does not yet support messages sent to specific tabs.",
+    SI_LUIE_LAM_CA_TIMESTAMP =                           "Include Timestamp",
+    SI_LUIE_LAM_CA_TIMESTAMPFORMAT =                     "Timestamp Format",
+    SI_LUIE_LAM_CA_TIMESTAMPFORMAT_TP =                  "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds",
+    SI_LUIE_LAM_CA_TIMESTAMPCOLOR =                      "Timestamp Color",
+    SI_LUIE_LAM_CA_TIMESTAMPCOLOR_TP =                   "Color to use for Timestamp.\nDefault: 143/143/143",
+    SI_LUIE_LAM_CA_TIMESTAMP_TP =                        "Prepend printed text with current time label. This will apply to any messages sent by LUIE & System Messages but not player chat messages. Default color and format matches pChat.",
+
+    -- Shared Menu Strings
+    SI_LUIE_LAM_CA_SHARED_CA =                           "a Chat Announcement",
+    SI_LUIE_LAM_CA_SHARED_CA_SHORT =                     "CA",
+    SI_LUIE_LAM_CA_SHARED_CSA =                          "a Center Screen Announcement",
+    SI_LUIE_LAM_CA_SHARED_CSA_SHORT =                    "CSA",
+    SI_LUIE_LAM_CA_SHARED_ALERT =                        "an Alert",
+    SI_LUIE_LAM_CA_SHARED_ALERT_SHORT =                  "Alert",
+
+    -- Currency Menu
+    SI_LUIE_LAM_CA_CURRENCY_HEADER =                     "Currency Announcements",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWICONS =                  "Display Currency Icons",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWICONS_TP =               "Display an icon for the relative type of currency when a notification is printed.",
+    SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT =              "Use Context Color for Loot & Currency Gain/Loss",
+    SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT_TP =           "Color the currency/loot message depending on whether currency/loot was gained or lost.",
+    SI_LUIE_LAM_CA_CURRENCY_COLOR =                      "Currency/Loot Message Color",
+    SI_LUIE_LAM_CA_CURRENCY_COLORDOWN =                  "Currency/Loot Loss Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_COLORUP =                    "Currency/Loot Gain Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_GOLD =                       "Display Gold Changes", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_GOLD_TP =                    "Print a context sensitive notification to chat when gold is gained or lost.",
+    SI_LUIE_LAM_CA_CURRENCY_GOLDCOLOR =                  "Gold Color",
+    SI_LUIE_LAM_CA_CURRENCY_GOLDNAME =                   "Gold Name", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_GOLDNAME_TP =                "Name to display for Gold.\nDefault: <<1[Gold/Gold]>>",
+    SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL =                  "Display Total Gold Suffix",
+    SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_TP =               "Append the total amount of Gold after change is displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_MSG =              "Total Gold Syntax",
+    SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_MSG_TP =           "Choose the syntax for the Total Gold message.\nDefault: Total Gold: %s",
+    SI_LUIE_LAM_CA_CURRENCY_GOLDTHRESHOLD =              "Gold (Loot) - Filter Threshold",
+    SI_LUIE_LAM_CA_CURRENCY_GOLDTHRESHOLD_TP =           "Gold looted below this value will not be displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_GOLDTHROTTLE =               "Combine gold looted from multiple sources",
+    SI_LUIE_LAM_CA_CURRENCY_GOLDTHROTTLE_TP =            "When toggled on, gold looted from a group of bodies will combine into one value instead of showing individual values.",
+    SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHLIST =             "Hide Guild Trader Listing Fee",
+    SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHLIST_TP =          "Toggle this option to hide the display of the fee charged when listing items on a Guild Trader.\nThis is a useful if you are using an addon like Awesome Guild Store.",
+    SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT =            "Hide Guild Trader Purchases",
+    SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP =         "Toggle this option to hide the display of gold spent on Guild Trader purchases.\nThis is a useful if you are using an addon like Awesome Guild Store.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWAP =                     "Display Alliance Point Changes",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWAP_TP =                  "Print a context sensitive notification to chat when Alliance Points are earned or spent.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWAPCOLOR =                "Alliance Points Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME =                 "Alliance Points Name",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME_TP =              "Name to display for Alliance Points.\nDefault: <<1[Alliance Point/Alliance Points]>>",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL =                "Display Total Alliance Points Suffix",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL_TP =             "Append the total amount of Alliance Points after change is displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_APTOTAL_MSG =                "Total Alliance Points Syntax",
+    SI_LUIE_LAM_CA_CURRENCY_APTOTAL_MSG_TP =             "Choose the syntax for the Total Alliance Points message.\nDefault: Total AP: %s",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD =            "Alliance Points - Filter Threshold",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD_TP =         "Alliance Points gained below this value will not be displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE =             "Alliance Points - Throttle",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE_TP =          "Setting this option higher than 0 will throttle the display of Alliance Points earned by X milliseconds.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTV =                     "Display Tel Var Stone Changes",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTV_TP =                  "Print a context sensitive notification to chat when Tel Var Stones are gained or lost.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTVCOLOR =                "Tel Var Stones Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME =                 "Tel Var Stones Name",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME_TP =              "Name to display for Tel Var Stones.\nDefault: <<1[Tel Var Stone/Tel Var Stones]>>",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL =                "Display Total Tel Var Stones Suffix",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL_TP =             "Append the total amount of Tel Var Stones after change is displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_TVTOTAL_MSG =                "Total Tel Var Stones Syntax",
+    SI_LUIE_LAM_CA_CURRENCY_TVTOTAL_MSG_TP =             "Choose the syntax for the Total Tel Var Stones message.\nDefault: Total TV: %s",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD =            "Tel Var Stones - Filter Threshold",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD_TP =         "Tel Var Stones looted below this value will not be displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE =             "Tel Var Stones - Throttle",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE_TP =          "Setting this option higher than 0 will throttle the display of Tel Var Stones looted by X milliseconds.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER =                "Display Writ Voucher Changes",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER_TP =             "Print a context sensitive notification to chat when Writ Vouchers are rewarded or spent.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR =           "Writ Vouchers Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME =            "Writ Vouchers Name",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TP =         "Name to display for Writ Vouchers.\nDefault: <<1[Writ Voucher/Writ Vouchers]>>",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL =           "Display Total Writ Vouchers Suffix",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TP =        "Show total amount of Writ Vouchers after change is displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG =                "Total Writ Vouchers Syntax",
+    SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG_TP =             "Choose the syntax for the Total Writ Vouchers message.\nDefault: Total Vouchers: %s",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTE =              "Display Transmute Crystal Changes",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTE_TP =           "Print a context sensitive notification to chat when Transmute Crystals are rewarded or spent.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTECOLOR =         "Transmute Crystals Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME =          "Transmute Crystals Name",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME_TP =       "Name to display for Transmute Crystals.\nDefault: <<1[Transmute Crystal/Transmute Crystals]>>",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL =         "Display Total Transmute Crystals Suffix",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL_TP =      "Show total amount of Transmute Crystals after change is displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG =         "Total Transmute Crystals Syntax",
+    SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG_TP =      "Choose the syntax for the Total Transmute Crystals message.\nDefault: Total Crystals: %s",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS =                 "Display Crown Changes",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS_TP =              "Print a context sensitive notification to chat when Crowns are rewarded or spent.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSCOLOR =            "Crowns Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME =             "Crowns Name",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME_TP =          "Name to display for Crowns.\nDefault: <<1[Crown/Crowns]>>",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL =            "Display Total Crowns Suffix",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL_TP =         "Show total amount of Crowns after change is displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG =            "Total Crowns Syntax",
+    SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG_TP =         "Choose the syntax for the Total Crowns message.\nDefault: Total Crowns: %s",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMS =              "Display Crown Gem Changes",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMS_TP =           "Print a context sensitive notification to chat when Crown Gems are rewarded or spent.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSCOLOR =         "Crown Gems Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME =          "Crown Gems Name",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME_TP =       "Name to display for Crown Gems.\nDefault: <<1[Crown Gem/Crown Gems]>>",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL =         "Display Total Crown Gems Suffix",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL_TP =      "Show total amount of Crown Gems after change is displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG =         "Total Crown Gems Syntax",
+    SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG_TP =      "Choose the syntax for the Total Crown Gems message.\nDefault: Total Gems: %s",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS =                 "Display Outfit Style Token Changes",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS_TP =              "Print a context sensitive notification to chat when Outfit Style Tokens are rewarded or spent.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSCOLOR =            "Outfit Style Tokens Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME =             "Outfit Style Tokens Name",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME_TP =          "Name to display for Outfit Style Tokens.\nDefault: <<1[Outfit Style Token/Outfit Style Tokens]>>",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL =            "Display Total Outfit Style Tokens Suffix",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL_TP =         "Show total amount of Outfit Style Tokens after change is displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG =            "Total Outfit Style Tokens Syntax",
+    SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG_TP =         "Choose the syntax for the Total Outfit Style Tokens message.\nDefault: Total Tokens: %s",
+    SI_LUIE_LAM_CA_CURRENCY_CONTEXT_MENU =               "Shared Currency/Loot Options",
+    SI_LUIE_LAM_CA_CURRENCY_CONTEXT_HEADER =             "Context Messages",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RECEIVE =            "Receive",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RECEIVE_TP =         "Default: You receive %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOOT =               "Loot",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOOT_TP =            "Default: You loot %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EARN =               "Earn",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EARN_TP =            "Default: You earn %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SPEND =              "Spend",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SPEND_TP =           "Default: You spend %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOST =               "Lose",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOST_TP =            "Default: You lose %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STEAL =              "Steal",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STEAL_TP =           "Default: You steal %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PICKPOCKET =         "Pickpocket",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PICKPOCKET_TP =      "Default: You pickpocket %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BOUNTY =             "Bounty - Paid",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BOUNTY_TP =          "Default: You pay off your bounty of %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONFISCATE =         "Bounty - Confiscated",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONFISCATE_TP =      "Default: A guard confiscates %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REPAIR =             "Repair",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REPAIR_TP =          "Default: You pay %s in repairs.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADER =             "Guild Trader - Purchase",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADER_TP =          "Default: You purchase an item from the guild trader for %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING =            "Guild Trader - Listing Fee",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING_TP =         "Default: Listing fee of %s charged.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN =            "Trade (Incoming)",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_TP =         "Default: You receive %s from %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME =    "Trade (Incoming) - No Name",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME_TP = "This message only displays if there is an error resolving the trading player name.\nDefault: You receive %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT =           "Trade (Outgoing)",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_TP =        "Default: You trade %s to %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME =   "Trade (Outgoing) - No Name",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME_TP ="This message only displays if there is an error resolving the trading player name.\nDefault: You trade %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN =             "Mail (Incoming)",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_TP =          "Default: You receive mail with %s from %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME =     "Mail (Incoming) - No Name",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME_TP =  "This message only displays if there is an error resolving the mail sender name.\nDefault: You receive mail with %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT =            "Mail (Outgoing)",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_TP =         "Default: You mail %s to %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME =    "Mail (Outgoing) - No Name",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME_TP = "This message only displays if there is an error resolving the mail recipient name.\nDefault: You mail %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILCOD =            "Mail - COD Payment",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILCOD_TP =         "Default: You send a COD payment of %s to %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_POSTAGE =            "Mail - Postage",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_POSTAGE_TP =         "Default: You pay %s in postage.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSIT =            "Bank - Deposit",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSIT_TP =         "Default: You deposit %s in your bank.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAW =           "Bank - Withdraw",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAW_TP =        "Default: You withdraw %s from your bank.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD =       "Guild Bank - Deposit",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD_TP =    "Default: You deposit %s in the guild bank.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE =     "Chest Storage - Deposit",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE_TP =  "Default: You deposit %s in storage.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE =    "Chest Storage - Withdraw",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE_TP = "Default: You withdraw %s from storage.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD =      "Guild Bank - Withdraw",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD_TP =   "Default: You withdraw %s from the guild bank.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE =          "Wayshrine Fee",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE_TP =       "Default: Wayshrine fee of %s charged.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UNSTUCK =            "Unstuck Fee",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UNSTUCK_TP =         "Default: Unstuck fee of %s charged.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STABLE =             "Riding Upgrade",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STABLE_TP =          "Default: You purchase %s for %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STORAGE =            "Storage Upgrade",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STORAGE_TP =         "Default: You purchase %s for %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_ATTRIBUTES =         "Respec - Attributes",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_ATTRIBUTES_TP =      "Default: You make a donation of %s to redistribute your Attribute Points.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CHAMPION =           "Respec - Champion Points",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CHAMPION_TP =        "Default: You pay a fee of %s to redistribute your Champion Points.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MORPHS =             "Respec - Skill Morphs",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MORPHS_TP =          "Default: You make a donation of %s to redistribute your Skill Morphs.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SKILLS =             "Respec - Skill Points",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SKILLS_TP =          "Default: You make a donation of %s to redistribute your Skill Points.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN =           "Cyrodiil - Reset Home Campaign",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN_TP =        "Default: You spend %s to reset your home campaign.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY =                "Buy (No Value)",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY_TP =             "Default: You purchase %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY_VALUE =          "Buy",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY_VALUE_TP =       "Default: You purchase %s for %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK =            "Buyback (No Value)",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_TP =         "Default: You buyback %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_VALUE =      "Buyback",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_VALUE_TP =   "Default: You buyback %s for %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL =               "Sell (No Value)",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_TP =            "Default: You sell %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE =         "Sell",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE_TP =      "Default: You sell %s for %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE =        "Fence",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE_TP =     "Default: You fence %s for %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE =              "Fence (No Value)",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_TP =           "Default: You fence %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE =      "Launder",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE_TP =   "Default: You launder %s for %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER =            "Launder (No Value)",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_TP =         "Default: You launder %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USE =                "Crafting - Use",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USE_TP =             "Default: You use %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CRAFT =              "Crafting - Craft",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CRAFT_TP =           "Default: You craft %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXTRACT =            "Crafting - Extract",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXTRACT_TP =         "Default: You extract %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE =            "Crafting - Upgrade (Success)",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_TP =         "Default: You upgrade %s to %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL =       "Crafting - Upgrade (Failure)",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL_TP =    "Default: You fail to upgrade %.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REFINE =             "Crafting - Refine",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REFINE_TP =          "Default: You refine %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT =        "Crafting - Deconstruct",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT_TP =     "Default: You deconstruct %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RESEARCH =           "Crafting - Research",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RESEARCH_TP =        "Default: You research %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY =            "Destroyed",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY_TP =         "Default: You destroy %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK =           "Lockpick Broken",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK_TP =        "Default: Your %s breaks.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE =             "Quest Item - Removed",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE_TP =          "Default: Removed %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP =              "Group Member Loot",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP_TP =           "Default: %s loots %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP =     "Disguise - Equipped",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP_TP =  "Default: You equip %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE =    "Disguise - Removed",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE_TP = "Default: You unequip %s.",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY =   "Disguise - Destroyed",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY_TP ="Default: Your %s is destroyed.",
+
+    -- LOOT MENU
+    SI_LUIE_LAM_CA_LOOT_HEADER =                         "Loot Announcements",
+    SI_LUIE_LAM_CA_LOOT_SHOWICONS =                      "Display Item Icons",
+    SI_LUIE_LAM_CA_LOOT_SHOWICONS_TP =                   "Display an icon for items logged.",
+    SI_LUIE_LAM_CA_LOOT_SHOWARMORTYPE =                  "Display Item Armor Type",
+    SI_LUIE_LAM_CA_LOOT_SHOWARMORTYPE_TP =               "Display the armor type of relevant items logged.",
+    SI_LUIE_LAM_CA_LOOT_SHOWITEMSTYLE =                  "Display Item Style",
+    SI_LUIE_LAM_CA_LOOT_SHOWITEMSTYLE_TP =               "Display the style of relevant items logged.",
+    SI_LUIE_LAM_CA_LOOT_SHOWITEMTRAIT =                  "Display Item Trait",
+    SI_LUIE_LAM_CA_LOOT_SHOWITEMTRAIT_TP =               "Display the trait of relevant items logged.",
+    SI_LUIE_LAM_CA_LOOT_TOTAL =                          "Display Total Items Suffix",
+    SI_LUIE_LAM_CA_LOOT_TOTAL_TP =                       "Append the total count of an item after an item is logged.",
+    SI_LUIE_LAM_CA_LOOT_TOTALSTRING =                    "Total Items Syntax",
+    SI_LUIE_LAM_CA_LOOT_TOTALSTRING_TP =                 "Choose the syntax for the Total Items message.\nDefault: New Total:",
+    SI_LUIE_LAM_CA_LOOT_SHOWITEMS =                      "Display Items - Looted",
+    SI_LUIE_LAM_CA_LOOT_SHOWITEMS_TP =                   "Print a message to chat when items are looted from corpses, containers, pickpocketing, and quest rewards.",
+    SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE =                    "Display ONLY Notable Loot",
+    SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE_TP =                 "Only display notable items looted (Any set items, any purple+ items, any blue+ special items).",
+    SI_LUIE_LAM_CA_LOOT_SHOWGRPLOOT =                    "Display Group Members Notable Loot",
+    SI_LUIE_LAM_CA_LOOT_SHOWGRPLOOT_TP =                 "Also display the notable loot group members receive (Any set items, any purple+ items, any blue+ special items).",
+    SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS =              "Hide Annoying Notable Items",
+    SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS_TP =           "Don't display annoying notable items looted (Laurels, Malachite Shards, Undaunted Plunder, Mercenary Motif Pages, etc...).",
+    SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS_WARNING =      "This prevents chat spam in large groups.",
+    SI_LUIE_LAM_CA_LOOT_HIDETRASH =                      "Hide Trash Quality Items",
+    SI_LUIE_LAM_CA_LOOT_HIDETRASH_TP =                   "Don't display trash quality items looted.",
+    SI_LUIE_LAM_CA_LOOT_LootConfiscateD =                "Display Item Loss - Confiscated Items",
+    SI_LUIE_LAM_CA_LOOT_LootConfiscateD_TP =             "Display a message when items are confiscated by a guard.",
+    SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED =              "Display Item Loss - Destroyed Items",
+    SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED_TP =           "Display a message when an item is destroyed.",
+    SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK =               "Display Item Loss - Lockpick Break",
+    SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK_TP =            "Display a message when a lockpick is broken from attempting to pick or forcing a lock open.",
+    SI_LUIE_LAM_CA_LOOT_SHOWVENDOR =                     "Display Items - Vendor Transactions",
+    SI_LUIE_LAM_CA_LOOT_SHOWVENDOR_TP =                  "Print a message to chat when items are purchased or sold at a vendor.",
+    SI_LUIE_LAM_CA_LOOT_SHOWQUESTADD =                   "Display Quest Items Looted",
+    SI_LUIE_LAM_CA_LOOT_SHOWQUESTADD_TP =                "Display a message when a quest item is looted or received.",
+    SI_LUIE_LAM_CA_LOOT_SHOWQUESTREM =                   "Display Quest Items Removed",
+    SI_LUIE_LAM_CA_LOOT_SHOWQUESTREM_TP =                "Display a message when a quest item is used or removed.",
+    SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE =                   "Merge Currency & Loot Messages",
+    SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE_TP =                "Combine the individual item purchase message and currency change message into one line.",
+    SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS =              "Display Total Items on Transactions",
+    SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS_TP =           "Toggle the display of the total count of items on a vendor transaction.",
+    SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY =           "Display Total Currency on Transactions",
+    SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY_TP =        "Toggle the display of the total currency on a vendor transaction.",
+    SI_LUIE_LAM_CA_LOOT_SHOWBANK =                       "Display Items - Banking & Storage",
+    SI_LUIE_LAM_CA_LOOT_SHOWBANK_TP =                    "Print a message to chat when items are deposited or withdrawn from a bank or guild bank.",
+    SI_LUIE_LAM_CA_LOOT_SHOWCRAFT =                      "Display Items - Crafting",
+    SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_TP =                   "Print a message to chat when items are received, lost, or upgraded from crafting.",
+    SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS =            "Display Materials Used",
+    SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS_TP =         "Toggle the display of materials used by crafting.",
+    SI_LUIE_LAM_CA_LOOT_SHOWMAIL =                       "Display Items - Mail",
+    SI_LUIE_LAM_CA_LOOT_SHOWMAIL_TP =                    "Print a message to chat when items are received or sent in the mail.",
+    SI_LUIE_LAM_CA_LOOT_SHOWTRADE =                      "Display Items - Trade",
+    SI_LUIE_LAM_CA_LOOT_SHOWTRADE_TP =                   "Print a message to chat when items are received or lost in a trade.",
+    SI_LUIE_LAM_CA_LOOT_LOOTSHOWDISGUISE =               "Show Disguise equip/unequip message",
+    SI_LUIE_LAM_CA_LOOT_LOOTSHOWDISGUISE_TP =            "Print a message to chat when a disguise is equipped or unequipped.",
+
+    -- Experience Menu
+    SI_LUIE_LAM_CA_EXP_HEADER =                          "Experience/Skill Announcements",
+    SI_LUIE_LAM_CA_EXP_HEADER_ENLIGHTENED =              "Enlightenment",
+    SI_LUIE_LAM_CA_EXP_ENLIGHTENED =                     "Display Enlightenment - <<1>>",
+    SI_LUIE_LAM_CA_EXP_ENLIGHTENED_TP =                  "Display <<1>> when you are enlightened or no longer enlightened.",
+    SI_LUIE_LAM_CA_EXP_HEADER_LEVELUP =                  "Level Up",
+    SI_LUIE_LAM_CA_EXP_LEVELUP =                         "Display Level Up - <<1>>",
+    SI_LUIE_LAM_CA_EXP_LEVELUP_TP =                      "Display <<1>> when you level up or earn a Champion Point.",
+    SI_LUIE_LAM_CA_EXP_LEVELUP_CSAEXPAND =               "Display Expanded Level Up CSA",
+    SI_LUIE_LAM_CA_EXP_LEVELUP_CSAEXPAND_TP =            "Adds subtext to the Center Screen Announcement for level up that displays the level attained.",
+    SI_LUIE_LAM_CA_EXP_LVLUPICON =                       "Display Level Icon on Level Up",
+    SI_LUIE_LAM_CA_EXP_LVLUPICON_TP =                    "Toggle the display of the normal level/champion point icon when you level up or earn a Champion point.",
+    SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT =               "Color Level by Context",
+    SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT_TP =            "Colors the current level text to match the current level or champion point context color.",
+    SI_LUIE_LAM_CA_EXPERIENCE_LEVELUP_COLOR =            "Level Up Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_EXP_HEADER_RESPEC =                   "Respec Notifications",
+    SI_LUIE_LAM_CA_EXP_RESPEC =                          "Display Respec Notification - <<1>>",
+    SI_LUIE_LAM_CA_EXP_RESPEC_TP =                       "Display <<1>> when you redistribute Champion Points and when you relearn attributes, skill points, or morphs.",
+    SI_LUIE_LAM_CA_EXP_HEADER_EXPERIENCEGAIN =           "Experience Points",
+    SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN =                     "Display Experience Gain",
+    SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN_TP =                  "Print a message to chat when Experience Points are earned.",
+    SI_LUIE_LAM_CA_EXP_SHOWEXPICON =                     "Display Experience Icon",
+    SI_LUIE_LAM_CA_EXP_SHOWEXPICON_TP =                  "Toggle the display of the Experience Points icon.",
+    SI_LUIE_LAM_CA_EXP_MESSAGE =                         "Experience Gain Message Format",
+    SI_LUIE_LAM_CA_EXP_MESSAGE_TP =                      "Message format for experience gain.\nDefault: You earn %s.",
+    SI_LUIE_LAM_CA_EXP_NAME =                            "Experience Points Name",
+    SI_LUIE_LAM_CA_EXP_NAME_TP =                         "Name to use for Experience Points.\nDefault: experience <<1[point/points]>>",
+    SI_LUIE_LAM_CA_EXPERIENCE_COLORMESSAGE =             "Experience Gain Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_EXPERIENCE_COLORNAME =                "Experience Points Name Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME =              "Context Name for Experience Gain",
+    SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME_TP =           "This option is intended to offer contrast from currency and loot messages since experience gain is not context sensitive.\nDefault: \"[Earned]\"",
+    SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME =              "Display Name for Experience Gain",
+    SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME_TP =           "Name to post in chat when experience is earned.\nDefault: \"XP\"",
+    SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS =                    "Hide Experience from Kills",
+    SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS_TP =                 "Toggle this option on to only report experience gain in chat from non-combat sources.",
+    SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD =                "Combat Experience Gain - Filter Threshold",
+    SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD_TP =             "Experience Points earned from kills below this value will not be displayed.",
+    SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT =             "Combat Experience Gain - Throttle",
+    SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TP =          "Setting this option higher than 0 allows you to throttle Experience Points earned by X milliseconds.",
+    SI_LUIE_LAM_CA_EXP_HEADER_SKILL_POINTS =             "Skill Points",
+    SI_LUIE_LAM_CA_SKILLPOINT_UPDATED =                  "Display Skill Points Earned - <<1>>",
+    SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP =               "Display <<1>>> when a Skill Point is earned from leveling up, quests, or skyshards.",
+    SI_LUIE_LAM_CA_SKILLPOINT_COLOR1 =                   "Skyshard Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_SKILLPOINT_COLOR2 =                   "Skill Points Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX =            "Skyshard Absorbed Message",
+    SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX_TP =         "When a Skyshard is absorbed this prefix message will be displayed.\nDefault: Skyshard Absorbed",
+    SI_LUIE_LAM_CA_SKILLPOINT_PARTIALBRACKET =           "Skyshard Separator Bracket",
+    SI_LUIE_LAM_CA_SKILLPOINT_PARTIALBRACKET_TP =        "When a Skyshard is absorbed this bracket will encompass the prefix message when skill points (or partial skill points) are earned.",
+    SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL =           "Display Partial Skill Points",
+    SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL_TP =        "Display \"Pieces Collected x/3\" when a Skyshard is absorbed.",
+    SI_LUIE_LAM_CA_EXP_HEADER_SKILL_LINES =              "Skill Lines",
+    SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED =                 "Display Skill Line Unlocked - <<1>>",
+    SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED_TP =              "Display <<1>> when a Skill Line is unlocked.",
+    SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS =                 "Display Skill Line Progression - <<1>>",
+    SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS_TP =              "Display <<1>> when a Skill Line levels up.",
+    SI_LUIE_LAM_CA_SKILL_LINE_ABILITY =                  "Display Ability Progression - <<1>>",
+    SI_LUIE_LAM_CA_SKILL_LINE_ABILITY_TP =               "Display <<1>> when an Ability levels up.",
+    SI_LUIE_LAM_CA_SKILL_LINE_ICON =                     "Display Skill Line Icon",
+    SI_LUIE_LAM_CA_SKILL_LINE_ICON_TP =                  "Display the relevant icon for unlocked Skill Lines.",
+    SI_LUIE_LAM_CA_SKILL_LINE_COLOR =                    "Skill/Ability Progression Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_EXP_HEADER_GUILDREP =                 "Guild Reputation",
+    SI_LUIE_LAM_CA_GUILDREP_ICON =                       "Display Guild Icon",
+    SI_LUIE_LAM_CA_GUILDREP_ICON_TP =                    "Display the relevant guild icon when Guild Reputation is earned.",
+    SI_LUIE_LAM_CA_GUILDREP_MESSAGECOLOR =               "Guild Reputation Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_GUILDREP_MESSAGEFORMAT =              "Guild Reputation Message Format",
+    SI_LUIE_LAM_CA_GUILDREP_MESSAGEFORMAT_TP =           "Message format for Guild Reputation earned.\nDefault: You earn %s",
+    SI_LUIE_LAM_CA_GUILDREP_MESSAGENAME =                "Guild Reputation Points Name",
+    SI_LUIE_LAM_CA_GUILDREP_MESSAGENAME_TP =             "Name to use for Guild Reputation.\nDefault: <<1[reputation/reputation]>>",
+    SI_LUIE_LAM_CA_GUILDREP_FG =                         "Display Fighters Guild Reputation",
+    SI_LUIE_LAM_CA_GUILDREP_FG_TP =                      "Display Guild Reputation earned with the Fighters Guild.",
+    SI_LUIE_LAM_CA_GUILDREP_FG_COLOR =                   "Fighters Guild Color",
+    SI_LUIE_LAM_CA_GUILDREP_THRESHOLD =                  "Fighters Guild - Filter Threshold",
+    SI_LUIE_LAM_CA_GUILDREP_THRESHOLD_TP =               "Fighters Guild Reputation earned from kills below this value will not be displayed.",
+    SI_LUIE_LAM_CA_GUILDREP_THROTTLE =                   "Fighters Guild - Throttle",
+    SI_LUIE_LAM_CA_GUILDREP_THROTTLE_TP =                "Setting this option higher than 0 allows you to throttle Fighters Guild Reputation earned by X milliseconds.",
+    SI_LUIE_LAM_CA_GUILDREP_MG =                         "Display Mages Guild Reputation",
+    SI_LUIE_LAM_CA_GUILDREP_MG_TP =                      "Display Guild Reputation earned with the Mages Guild.",
+    SI_LUIE_LAM_CA_GUILDREP_MG_COLOR =                   "Mages Guild Color",
+    SI_LUIE_LAM_CA_GUILDREP_UD =                         "Display Undaunted Reputation",
+    SI_LUIE_LAM_CA_GUILDREP_UD_TP =                      "Display Guild Reputation earned with the Undaunted.",
+    SI_LUIE_LAM_CA_GUILDREP_UD_COLOR =                   "Undaunted Color",
+    SI_LUIE_LAM_CA_GUILDREP_TG =                         "Display Thieves Guild Reputation",
+    SI_LUIE_LAM_CA_GUILDREP_TG_TP =                      "Display Guild Reputation earned with the Thieves Guild.",
+    SI_LUIE_LAM_CA_GUILDREP_TG_COLOR =                   "Thieves Guild Color",
+    SI_LUIE_LAM_CA_GUILDREP_DB =                         "Display Dark Brotherhood Reputation",
+    SI_LUIE_LAM_CA_GUILDREP_DB_TP =                      "Display Guild Reputation earned with the Dark Brotherhood Guild.",
+    SI_LUIE_LAM_CA_GUILDREP_DB_COLOR =                   "Dark Brotherhood Color",
+    SI_LUIE_LAM_CA_GUILDREP_ALERT =                      "Display Guild Reputation Alert",
+    SI_LUIE_LAM_CA_GUILDREP_ALERT_TP =                   "When enabled, display a basic alert for any Guilds that are selected above indicating reputation has increased. ",
+
+    -- Collectibles/Lorebooks Menu
+    SI_LUIE_LAM_CA_COLLECTIBLE_HEADER =                  "Collectible/Lorebooks Announcements",
+    SI_LUIE_LAM_CA_COLLECTIBLE_COL_HEADER =              "Collectibles",
+    SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE =                  "Display Collectible Unlocked - <<1>>",
+    SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP =               "Display <<1>> when a  Collectible is unlocked.",
+    SI_LUIE_LAM_CA_COLLECTIBLE_ICON =                    "Display Collectible Icon",
+    SI_LUIE_LAM_CA_COLLECTIBLE_ICON_TP =                 "Display an icon for the relevant Collectible unlocked.",
+    SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE =               "Collectible Prefix Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_TWO =               "Collectible Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX =           "Collectible Prefix Message",
+    SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX_TP =        "Enter the prefix message that will display before the Collectible unlocked.\nDefault: Collection Updated",
+    SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET =                 "Collectible Prefix Bracket",
+    SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET_TP =              "This bracket will encompass the prefix message when a Collectible is unlocked.",
+    SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY =                "Display Collectible Category",
+    SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY_TP =             "Append the Collectible unlocked message with the category it was added to.",
+    SI_LUIE_LAM_CA_COLLECTIBLE_LORE_HEADER =             "Lorebooks",
+    SI_LUIE_LAM_CA_LOREBOOK_ENABLE =                     "Display Lorebook Discovery - <<1>>",
+    SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP =                  "Display <<1>> when a Lorebook is discovered.",
+    SI_LUIE_LAM_CA_LOREBOOK_COLLECTION =                 "Display Lore Collection Complete - <<1>>",
+    SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP =              "Display <<1>> when a collection of Lorebooks is complete.",
+    SI_LUIE_LAM_CA_LOREBOOK_ICON =                       "Display Lorebook Icon",
+    SI_LUIE_LAM_CA_LOREBOOK_ICON_TP =                    "Display an icon for the relevant Lorebook unlocked.",
+    SI_LUIE_LAM_CA_LOREBOOK_COLOR1 =                     "Lorebook Prefix Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_LOREBOOK_COLOR2 =                     "Lorebook Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_LOREBOOK_PREFIX1 =                    "Lorebook Prefix Message",
+    SI_LUIE_LAM_CA_LOREBOOK_PREFIX1_TP =                 "Enter the prefix message displayed when a Lorebook is discovered.\nDefault: Lorebook Discovered",
+    SI_LUIE_LAM_CA_LOREBOOK_PREFIX2 =                    "Book Prefix Message",
+    SI_LUIE_LAM_CA_LOREBOOK_PREFIX2_TP =                 "Enter the prefix message displayed when a book is discovered.\nDefault: Book Discovered",
+    SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION =          "Lore Collection Prefix Message",
+    SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION_TP =       "Enter the prefix message that will display before completed Lore Collection notifications.\nDefault: Collection Completed",
+    SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET =           "Lorebook Prefix Bracket",
+    SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP =        "This bracket will encompass the prefix message when a Lorebook is unlocked.",
+    SI_LUIE_LAM_CA_LOREBOOK_CATEGORY =                   "Display Collection Category",
+    SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_TP =                "Display the relevant category of a Lorebook unlocked.",
+    SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE =                 "Display Books without Eidetic Memory",
+    SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP =              "Display standard books unlocked even without Eidetic Memory unlocked.",
+
+    -- Achievements Menu
+    SI_LUIE_LAM_CA_ACHIEVE_HEADER =                      "Achievements Announcements",
+    SI_LUIE_LAM_CA_ACHIEVE_UPDATE =                      "Display Achievement Update - <<1>>",
+    SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP =                   "Display <<1>> when progress is made toward the completion of an Achievement.",
+    SI_LUIE_LAM_CA_ACHIEVE_COMPLETE =                    "Display Achievement Completion - <<1>>",
+    SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP =                 "Display <<1>> when an Achievement is unlocked.",
+    SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO =                  "Display Detailed Achievement Info",
+    SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO_TP =               "Displays each subcategory required for Achievement completion and progress in each subcategory.",
+    SI_LUIE_LAM_CA_ACHIEVE_COLORPROGRESS =               "Color Achievement Progress",
+    SI_LUIE_LAM_CA_ACHIEVE_COLORPROGRESS_TP =            "Enables color change for Achievement progress based off completion.",
+    SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE =                    "Progress Step Size %",
+    SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE_TP =                 "Display Achievement update information every #% to completion. Setting this value to 0 will print Achievement information on every update event.",
+    SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT =             "Display % on Achievement Completion",
+    SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT_TP =          "Adds a (100%) indicator to achievement completion messages to match progress syntax.",
+    SI_LUIE_LAM_CA_ACHIEVE_ICON =                        "Display Achievement Icon",
+    SI_LUIE_LAM_CA_ACHIEVE_ICON_TP =                     "Display the relevant icon for an Achievement on progress or completion.",
+    SI_LUIE_LAM_CA_ACHIEVE_COLOR1 =                      "Achievement Prefix Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_ACHIEVE_COLOR2 =                      "Achievement Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_ACHIEVE_PROGMSG =                     "Achievement Progress Prefix Message",
+    SI_LUIE_LAM_CA_ACHIEVE_PROGMSG_TP =                  "Prefix for Achievement progress messages.\nDefault: Achievement Updated",
+    SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG =                 "Achievement Completion Prefix Message",
+    SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG_TP =              "Prefix for Achievement completion messages.\nDefault: Achievement Unlocked",
+    SI_LUIE_LAM_CA_ACHIEVE_SHOWCATEGORY =                "Display Achievement Category",
+    SI_LUIE_LAM_CA_ACHIEVE_SHOWCATEGORY_TP =             "Display the primary category of an Achievement.",
+    SI_LUIE_LAM_CA_ACHIEVE_SHOWSUBCATEGORY =             "Display Achievement Subcategory",
+    SI_LUIE_LAM_CA_ACHIEVE_SHOWSUBCATEGORY_TP =          "Display the subcategory of an Achievement.",
+    SI_LUIE_LAM_CA_ACHIEVE_BRACKET =                     "Achievement Prefix Bracket",
+    SI_LUIE_LAM_CA_ACHIEVE_BRACKET_TP =                  "This bracket will encompass the prefix message when an Achievement is updated or unlocked.",
+    SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET =             "Achievement Category Bracket",
+    SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET_TP =          "This bracket will encompass the category and subcategory when an Achievement is updated or unlocked.",
+    SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_HEADER =             "Tracking Options",
+    SI_LUIE_LAM_CA_ACHIEVE_CATEGORY =                    "Track \'<<1>>\' Achievements",
+    SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP =                 "Enables tracking for Achievements in the <<1>> category.",
+
+    -- Quest Menu
+    SI_LUIE_LAM_CA_QUEST_HEADER =                        "Quest/POI Announcements",
+    SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE =                "Display Shared Quests - <<1>>",
+    SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP =             "Display <<1>> when another player shares a quest with you.",
+    SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY =            "Display Location Discovery - <<1>>",
+    SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP =         "Display <<1>> when a location on the map is discovered.",
+    SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY =                  "Display Imperial City Area Messages - <<1>>",
+    SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP =               "Display <<1>> when entering a new area of the Imperial City Sewers.\nNote: This option uses POI Name Color from Quest/POI Announcements.",
+    SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION =                "Display Imperial City Area Description",
+    SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP =             "Display the description text when entering a new area of the Imperial City Sewers.\nNote: This option uses the POI Description Color from Quest/POI Announcements.",
+    SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE =                 "Display POI Objective - <<1>>",
+    SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP =              "Display <<1>> when a quest is accepted with an associated map POI.",
+    SI_LUIE_LAM_CA_QUEST_POI_COMPLETE =                  "Display POI Complete - <<1>>",
+    SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP =               "Display <<1>> when a quest is completed with an associated map POI.",
+    SI_LUIE_LAM_CA_QUEST_ACCEPT =                        "Display Quest Accepted - <<1>>",
+    SI_LUIE_LAM_CA_QUEST_ACCEPT_TP =                     "Display <<1>> when a quest is accepted.",
+    SI_LUIE_LAM_CA_QUEST_COMPLETE =                      "Display Quest Completed - <<1>>",
+    SI_LUIE_LAM_CA_QUEST_COMPLETE_TP =                   "Display <<1>> when a quest is completed.",
+    SI_LUIE_LAM_CA_QUEST_ABANDON =                       "Display Quest Abandoned - <<1>>",
+    SI_LUIE_LAM_CA_QUEST_ABANDON_TP =                    "Display <<1>> when a quest is abandoned.",
+    SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE =             "Display Quest Objective Failure - <<1>>",
+    SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP =          "Display <<1>> when a quest failure state is triggered.",
+    SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE =              "Display Quest Objective Updates - <<1>>",
+    SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP =           "Display <<1>> when a new quest objective is added.",
+    SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE =            "Display Quest Objective Completion - <<1>>",
+    SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP =         "Display <<1>> when a quest objective is completed.",
+    SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON =                 "Display Quest Difficulty Icon",
+    SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON_TP =              "Display an icon relevant to the difficulty and type of quest.",
+    SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG =                 "Display Detailed Quest Description",
+    SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG_TP =              "When toggled on, accepting a quest will display the Journal Entry details of the quest.",
+    SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG =        "Display Detailed POI Description",
+    SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP =     "When toggled on, accepting/completing a quest with an associated map POI will display the full description.",
+    SI_LUIE_LAM_CA_QUEST_COLOR1 =                        "POI Name Color",
+    SI_LUIE_LAM_CA_QUEST_COLOR2 =                        "POI Description Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_QUEST_COLOR3 =                        "Quest Name Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_QUEST_COLOR4 =                        "Quest Description Color", -- TODO: Add Tooltip with finalized color value
+
+    -- Social Menu
+    SI_LUIE_LAM_CA_SOCIAL_HEADER =                       "Social/Guild Announcements",
+    SI_LUIE_LAM_CA_SOCIAL_FRIENDS_HEADER =               "Friends/Ignored List",
+    SI_LUIE_LAM_CA_SOCIAL_FRIENDS =                      "Display Friends/Ignored Requests - <<1>>",
+    SI_LUIE_LAM_CA_SOCIAL_FRIENDS_TP =                   "Display <<1>> for friend invites, Friends list changes, and Ignored list changes.",
+    SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF =                "Display Friends List Log On/Off - <<1>>",
+    SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP =             "Display <<1>> when a player on your Friends list logs on or off.",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_HEADER =                 "Guild Notifications",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD =                        "Display Guild Invite/Leave/Join - <<1>> ",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_TP =                     "Display <<1>> for Guild invitations and Join/Leave notifications.",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK =                   "Display Guild Rank Changes - <<1>>",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK_TP =                "Display <<1>> for Guild Rank changes. Options are determined by the dropdown menu below.",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS =            "Guild Rank Display Options",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS_TP =         "Choose the method in which Guild Rank changes will be reported.\nDefault: Self Only",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN =                  "Display Guild Administration - <<1>>",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP =               "Display <<1>> when the Guild MOTD or Background Information is updated, rank data is updated, or Heraldry is updated.",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS =                  "Display Guild Icons",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS_TP =               "Displays the faction or Guild Rank icon for guild messages.",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR =                  "Guild Name Color",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE =         "Use Alliance Colors for Guild Names",
+    SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE_TP =      "Use the relevant alliance color for guild names, icons, and ranks in guild messages.",
+    SI_LUIE_LAM_CA_SOCIAL_TRADE_HEADER =                 "Trade Notifications",
+    SI_LUIE_LAM_CA_SOCIAL_TRADE =                        "Display Trade Notifications - <<1>>",
+    SI_LUIE_LAM_CA_SOCIAL_TRADE_TP =                     "Display <<1>> for trade invitations, cancelation, and success.",
+    SI_LUIE_LAM_CA_SOCIAL_DUEL_HEADER =                  "Duel Notifications",
+    SI_LUIE_LAM_CA_SOCIAL_DUEL =                         "Display Duel Challenges - <<1>>",
+    SI_LUIE_LAM_CA_SOCIAL_DUEL_TP =                      "Display <<1>> for duel challenges and declined challenges.",
+    SI_LUIE_LAM_CA_SOCIAL_DUELSTART =                    "Display Duel Start Notification - <<1>>",
+    SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TP =                 "Display <<1>> when a duel begins.",
+    SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TPCSA =              "Display <<1>> when a duel begins. Center Screen Announcement also displays a countdown",
+    SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION =             "Duel Start Notification Format (CA/Alert Only)",
+    SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION_TP =          "Choose the format for the message that is displayed when the countdown ends and the duel is started.",
+    SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE =                 "Display Duel End Notification - <<1>>",
+    SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP =              "Display <<1>> when a duel ends.",
+    SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY =                 "Display Duel Boundary Warning - <<1>>",
+    SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP =              "Display <<1>> when you are close to the Duel Boundary.",
+    SI_LUIE_LAM_CA_SOCIAL_MARA_HEADER =                  "Pledge of Mara Notifications",
+    SI_LUIE_LAM_CA_MISC_MARA =                           "Display Pledge of Mara - <<1>>",
+    SI_LUIE_LAM_CA_MISC_MARA_TP =                        "Display <<1>> for Pledge of Mara events.",
+    SI_LUIE_LAM_CA_MISC_MARA_ALERT =                     "Only Display Alert on Failure",
+    SI_LUIE_LAM_CA_MISC_MARA_ALERT_TP =                  "When enabled, an Alert will only be displayed if the Pledge of Mara fails. This emulates the behavior of the default UI settings.",
+
+    -- Group Menu
+    SI_LUIE_LAM_CA_GROUP_HEADER =                        "Group/LFG/Trial Announcements",
+    SI_LUIE_LAM_CA_GROUP_BASE_HEADER =                   "Group Notifications",
+    SI_LUIE_LAM_CA_GROUP_BASE =                          "Display Group Notifications - <<1>>",
+    SI_LUIE_LAM_CA_GROUP_BASE_TP =                       "Display <<1>> for group invites and group composition changes.",
+    SI_LUIE_LAM_CA_GROUP_LFG_HEADER =                    "LFG Notifications",
+    SI_LUIE_LAM_CA_GROUP_LFGREADY =                      "Display LFG Ready Notifications - <<1>>",
+    SI_LUIE_LAM_CA_GROUP_LFGREADY_TP =                   "Display <<1>> when an LFG group is formed or activity is joined.",
+    SI_LUIE_LAM_CA_GROUP_LFGQUEUE =                      "Display LFG Queue Status - <<1>>",
+    SI_LUIE_LAM_CA_GROUP_LFGQUEUE_TP =                   "Display <<1>> when entering or exiting the queue for an LFG activity.",
+    SI_LUIE_LAM_CA_GROUP_LFGVOTE =                       "Display LFG Vote/Ready Check - <<1>>",
+    SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP =                    "Display <<1>> for group votes and ready checks.",
+    SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE =                   "Display LFG Activity Completed - <<1>>",
+    SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP =                "Display <<1>> when a Group Finder activity is completed.",
+    SI_LUIE_LAM_CA_GROUP_RAID_HEADER =                   "Raid Notifications",
+    SI_LUIE_LAM_CA_GROUP_RAID_BASE =                     "Display Raid Status Notifications - <<1>>",
+    SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP =                  "Display <<1>> when a Trial is started, failed, or completed.",
+    SI_LUIE_LAM_CA_GROUP_RAID_SCORE =                    "Display Score Updates - <<1>>",
+    SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP =                 "Display <<1>> when your score in a Trial changes.",
+    SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE =                "Display New Best Score - <<1>>",
+    SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP =             "Display <<1>> when a new high score is achieved on trial completion.",
+    SI_LUIE_LAM_CA_GROUP_RAID_REVIVE =                   "Display Vitality Bonus Loss - <<1>>",
+    SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP =                "Display <<1>> when Vitality Bonus is decreased.",
+    SI_LUIE_LAM_CA_DISPLAY_HEADER =                      "Display Announcements",
+    SI_LUIE_LAM_CA_DISPLAY_DESCRIPTION =                 "Display Announcements are various messages displayed under certain conditions, these range from broad to very specific categories, and thus fall under their own section for Announcements.",
+    SI_LUIE_LAM_CA_GROUP_RAID_ARENA =                    "Display DSA/Maelstrom Arena Stage - <<1>>",
+    SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP =                 "Display <<1>> when a new stage begins in Dragonstar or Maelstrom Arena.",
+    SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND =              "Display Maelstrom Arena Round - <<1>>",
+    SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP =           "Display <<1>> when a new round begins in Maelstrom Arena.",
+
+    -- Display Announcements
+    SI_LUIE_LAM_CA_DISPLAY_CRAGLORN =                    "Display Craglorn Buffs - <<1>>",
+    SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP =                 "Display <<1>> when you gain a buff from completing a World Boss event in Craglorn.",
+
+    -- Misc Menu
+    SI_LUIE_LAM_CA_MISC_GROUPAREA =                      "Display Entering/Leaving Group Area - <<1>>",
+    SI_LUIE_LAM_CA_MISC_GROUPAREA_TP =                   "Display <<1>> when entering or leaving a Group Area.",
+    SI_LUIE_LAM_CA_MISC_HEADER =                         "Miscellaneous Announcements",
+    SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK =                   "Display Lockpicking Notifications - <<1>>",
+    SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP =                "Display <<1>> on successful or failed lockpick attempts as well as when you attempt to pick a lock and it's impossible or you have no lock picks.",
+    SI_LUIE_LAM_CA_MISC_SHOWMAIL =                       "Display Mail Notifications - <<1>>",
+    SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP =                    "Display <<1>> when mail is accepted, deleted, or sent.",
+    SI_LUIE_LAM_CA_MISC_SHOWJUSTICE =                    "Display Justice Notifications - <<1>>",
+    SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP =                 "Display <<1>> when items or gold are confiscated by a guard.",
+    SI_LUIE_LAM_CA_MISC_SHOWBANKBAG =                    "Display Bag/Bank Space Upgrade - <<1>>",
+    SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP =                 "Display <<1>> when bag or bank space upgrades are purchased ingame or through the crown store.",
+    SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_COLOR =              "Bag/Bank Space Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_MISC_SHOWRIDING =                     "Display Riding Skill Upgrade - <<1>>",
+    SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP =                  "Display <<1>> when riding upgrades are purchased or Crown Riding Skill books are used.",
+    SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR =               "Riding Skill Message Color",
+    SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR_BOOK =          "Riding Skill (Crown Lesson) Message Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE =               "Display Disguise Status - <<1>>",
+    SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP =            "Display <<1>> when entering or exiting a relevant area and becoming disguised or revealed.",
+    SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT =          "Display Detection Warning - <<1>>",
+    SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP =       "Display <<1>> when near a sentry or performing suspicious activity while disguised.",
+    SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR =     "Detection Warning CSA Color",
+    SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR_TP =  "Change the color of the Center Screen Announcement displayed when near a sentry or performing suspicious activity while disguised.",
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    -- COMBAT INFO -- LAM --
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    SI_LUIE_LAM_CI_HEADER =                              "Combat Info Options",
+    SI_LUIE_LAM_CI_SHOWCOMBATINFO =                      "Combat Info Module",
+    SI_LUIE_LAM_CI_SHARED_FONT_TP =                      "Choose the font to use for the countdown label.",
+    SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP =                  "Choose the font size for the countdown label.",
+    SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP =                 "Choose the font style for the countdown label.",
+    SI_LUIE_LAM_CI_SHARED_POSITION =                     "Label Vertical Position",
+    SI_LUIE_LAM_CI_SHARED_POSITION_TP =                  "Adjust the vertical position of the countdown label.",
+    SI_LUIE_LAM_CI_HEADER_GCD =                          "Global Cooldown Options",
+    SI_LUIE_LAM_CI_GCD_SHOW =                            "Display Global Cooldown (High CPU Usage)",
+    SI_LUIE_LAM_CI_GCD_SHOW_TP =                         "Dislay an animation on ability bar slots while on the global cooldown.",
+    SI_LUIE_LAM_CI_GCD_SHOW_WARN =                       "This component can cause performance issues on some machines! If you experience FPS drops this is the first thing to disable.",
+    SI_LUIE_LAM_CI_GCD_QUICK =                           "Display GCD for Potions",
+    SI_LUIE_LAM_CI_GCD_QUICK_TP =                        "Also display the global cooldown animation on the quickslot for potions and items that are not subject to the global cooldown.",
+    SI_LUIE_LAM_CI_GCD_FLASH =                           "Display Ready Flash",
+    SI_LUIE_LAM_CI_GCD_FLASH_TP =                        "Display a flash animation on each ability slot on the bar when the global cooldown is finished.",
+    SI_LUIE_LAM_CI_GCD_DESAT =                           "Desaturate Icons",
+    SI_LUIE_LAM_CI_GCD_DESAT_TP =                        "Desaturate ability icons while on the global cooldown.",
+    SI_LUIE_LAM_CI_GCD_COLOR =                           "Color Slot Label # Red",
+    SI_LUIE_LAM_CI_GCD_COLOR_TP =                        "While on global cooldown, colorize the ability button numeric labels red.",
+    SI_LUIE_LAM_CI_GCD_ANIMATION =                       "GCD Animation Method",
+    SI_LUIE_LAM_CI_GCD_ANIMATION_TP =                    "Choose the animation type for tracking the global cooldown.",
+    SI_LUIE_LAM_CI_HEADER_ULTIMATE =                     "Ultimate Tracking Options",
+    SI_LUIE_LAM_CI_ULTIMATE_SHOW_VAL =                   "Display Ultimate Value",
+    SI_LUIE_LAM_CI_ULTIMATE_SHOW_VAL_TP =                "Display ultimate value above the ultimate ability slot.",
+    SI_LUIE_LAM_CI_ULTIMATE_SHOW_PCT =                   "Display Ultimate Percentage",
+    SI_LUIE_LAM_CI_ULTIMATE_SHOW_PCT_TP =                "Display Ultimate percentage percentage toward completion",
+    SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL =                   "Hide Label When Full",
+    SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL_TP =                "Remove percentage label from ultimate slot when ability becomes ready.",
+    SI_LUIE_LAM_CI_ULTIMATE_TEXTURE =                    "Display Ultimate Generation Texture",
+    SI_LUIE_LAM_CI_ULTIMATE_TEXTURE_TP =                 "Display special texture under ultimate ability slot when in-combat ultimate generation is detected.",
+    SI_LUIE_LAM_CI_HEADER_BAR =                          "Bar Ability Highlight Options",
+    SI_LUIE_LAM_CI_BAR_EFFECT =                          "Highlight Active Effects",
+    SI_LUIE_LAM_CI_BAR_EFFECT_TP =                       "Highlights currently active buffs on the ability bar for their active duration.",
+    SI_LUIE_LAM_CI_BAR_PROC =                            "Highlight Active Procs",
+    SI_LUIE_LAM_CI_BAR_PROC_TP =                         "Highlights an ability that is in a procced state on the ability bar.",
+    SI_LUIE_LAM_CI_BAR_PROCSOUND =                       "Play Sound on Ability Proc",
+    SI_LUIE_LAM_CI_BAR_PROCSOUND_TP =                    "Play a sound notifcation when an ability procs.",
+    SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE =                 "Proc Sound",
+    SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE_TP =              "Choose the sound to play when an ability procs.",
+    SI_LUIE_LAM_CI_BAR_SECONDARY =                       "Highlight Active Secondary Effects",
+    SI_LUIE_LAM_CI_BAR_SECONDARY_TP =                    "Highlights an ability when secondary type effects are active. Examples: Honor the Dead magicka restore buff, Major Savagery from Biting Jabs.",
+    SI_LUIE_LAM_CI_BAR_ULTIMATE =                        "Highlight Active Ultimate Effects",
+    SI_LUIE_LAM_CI_BAR_ULTIMATE_TP =                     "Highlights currently active ultimate abilities on the ability bar for their active duration. This will hide the percentage label for the duration of the effect when enabled.",
+    SI_LUIE_LAM_CI_BAR_LABEL =                           "Display Countdown Label",
+    SI_LUIE_LAM_CI_BAR_LABEL_TP =                        "Display a countdown timer for any highlighted ability.",
+    SI_LUIE_LAM_CI_HEADER_POTION =                       "Quickslot Cooldown Timer Options",
+    SI_LUIE_LAM_CI_POTION =                              "Display Quickslot Cooldown Timer",
+    SI_LUIE_LAM_CI_POTION_TP =                           "Display a cooldown timer for potions and other quickslot items.",
+    SI_LUIE_LAM_CI_POTION_COLOR =                        "Color Label",
+    SI_LUIE_LAM_CI_POTION_COLOR_TP =                     "Color the quickslot cooldown timer label based off the remaining duration.",
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    -- INFO PANEL -- LAM --
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    SI_LUIE_LAM_PNL =                                    "Info Panel",
+    SI_LUIE_LAM_PNL_ENABLE =                             "Info Panel Module",
+    SI_LUIE_LAM_PNL_DESCRIPTION =                        "Displays a panel with potentially useful information on it such as Latency, Time, FPS, Durability and Weapon Charge, etc...",
+    SI_LUIE_LAM_PNL_DISABLECOLORSRO =                    "Disable colours on read-only values",
+    SI_LUIE_LAM_PNL_DISABLECOLORSRO_TP =                 "Disable value-dependent colour of the information label for items that you don't have direct control: Currently this includes FPS and Latency labels.",
+    SI_LUIE_LAM_PNL_ELEMENTS_HEADER =                    "Info Panel elements",
+    SI_LUIE_LAM_PNL_HEADER =                             "Info Panel Options",
+    SI_LUIE_LAM_PNL_RESETPOSITION_TP =                   "This will reset position of Info Panel into screen top right corner.",
+    SI_LUIE_LAM_PNL_SHOWARMORDURABILITY =                "Show Armour Durability",
+    SI_LUIE_LAM_PNL_SHOWBAGSPACE =                       "Show Bags Space",
+    SI_LUIE_LAM_PNL_SHOWCLOCK =                          "Show Clock",
+    SI_LUIE_LAM_PNL_SHOWEAPONCHARGES =                   "Show Weapons Charges",
+    SI_LUIE_LAM_PNL_SHOWFPS =                            "Show FPS",
+    SI_LUIE_LAM_PNL_SHOWLATENCY =                        "Show Latency",
+    SI_LUIE_LAM_PNL_SHOWMOUNTTIMER =                     "Show Mount Feed Timer |c00FFFF*|r",
+    SI_LUIE_LAM_PNL_SHOWMOUNTTIMER_TP =                  "(*) Once you have trained your mount to maximum level this field will be automatically hidden for current character.",
+    SI_LUIE_LAM_PNL_SHOWSOULGEMS =                       "Show Soul Gems",
+    SI_LUIE_LAM_PNL_UNLOCKPANEL =                        "Unlock panel",
+    SI_LUIE_LAM_PNL_UNLOCKPANEL_TP =                     "Allow mouse dragging for Info Panel.",
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    -- UNITFRAMES -- LAM --
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    -- Base Options
+    SI_LUIE_LAM_UF_ENABLE =                              "Unit Frames Module",
+    SI_LUIE_LAM_UF_DESCRIPTION =                         "This allows display of textual attributes information over default UI controls. It also creates custom frames for player and target.",
+    SI_LUIE_LAM_UF_SHORTNUMBERS =                        "Shorten Numbers on Bars",
+    SI_LUIE_LAM_UF_SHORTNUMBERS_TP =                     "Replace large numbers like 12,345 with 12.3k on all bars and labels related to unit frames.",
+
+    -- Shared Options
+    SI_LUIE_LAM_UF_SHARED_LABEL =                        "Label Format",
+    SI_LUIE_LAM_UF_SHARED_LABEL_TP =                     "Format label for custom attribute bar.",
+    SI_LUIE_LAM_UF_SHARED_LABEL_LEFT =                   "Label Format (Left)",
+    SI_LUIE_LAM_UF_SHARED_LABEL_LEFT_TP =                "Format first label for custom attribute bar.",
+    SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT =                  "Label Format (Right)",
+    SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT_TP =               "Format second label for custom attribute bar.",
+    SI_LUIE_LAM_UF_SHARED_PT =                           "Player/Target",
+    SI_LUIE_LAM_UF_SHARED_GROUP =                        "Group",
+    SI_LUIE_LAM_UF_SHARED_RAID =                         "Raid",
+    SI_LUIE_LAM_UF_SHARED_BOSS =                         "Boss",
+    SI_LUIE_LAM_UF_SHARED_ARMOR =                        "<<1>> - Display Armor Change Overlay",
+    SI_LUIE_LAM_UF_SHARED_ARMOR_TP =                     "Display additional icon on unit health bar when unit has its armor affected. Also displays cracked texture over health bar when armor is decreased.",
+    SI_LUIE_LAM_UF_SHARED_POWER =                        "<<1>> - Display Power Change Overlay",
+    SI_LUIE_LAM_UF_SHARED_POWER_TP =                     "Display an animated texture overlay when weapon/spell power is increased or decreased.",
+    SI_LUIE_LAM_UF_SHARED_REGEN =                        "<<1>> - Display HoT / DoT Overlay",
+    SI_LUIE_LAM_UF_SHARED_REGEN_TP =                     "Display an animated arrow overlay when regeneration is increased or decreased.",
+    SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY =            "Group/Raid Transparency (Shared Setting)",
+    SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY_TP =         "Change the transparency of custom group and raid unit frames.",
+
+    -- Default Unit Frames Options
+    SI_LUIE_LAM_UF_DFRAMES_HEADER =                      "Default Unit Frames",
+    SI_LUIE_LAM_UF_DFRAMES_PLAYER =                      "Default PLAYER Frame",
+    SI_LUIE_LAM_UF_DFRAMES_TARGET =                      "Default TARGET Frame",
+    SI_LUIE_LAM_UF_DFRAMES_GROUPSMALL =                  "Default GROUP Frame",
+    SI_LUIE_LAM_UF_DFRAMES_REPOSIT =                     "Reposition Default Player Frames",
+    SI_LUIE_LAM_UF_DFRAMES_REPOSIT_TP =                  "Change position of the default player frames to be in a compacted pyramid layout in the bottom center of the screen.",
+    SI_LUIE_LAM_UF_DFRAMES_VERT =                        "Adjust Player Frames Vertical Position",
+    SI_LUIE_LAM_UF_DFRAMES_VERT_TP =                     "Adjust the vertical position of the default player frames.",
+    SI_LUIE_LAM_UF_DFRAMES_OOCTRANS =                    "Transparency - Out-of-Combat",
+    SI_LUIE_LAM_UF_DFRAMES_OOCTRANS_TP =                 "Change the transparency of default unit frames when out of combat. Default UI setting is hidden (0).",
+    SI_LUIE_LAM_UF_DFRAMES_INCTRANS =                    "Transparency - In-Combat",
+    SI_LUIE_LAM_UF_DFRAMES_INCTRANS_TP =                 "Change the transparency of default unit frames when engaged in combat. Default UI setting is fully visible (100).",
+    SI_LUIE_LAM_UF_DFRAMES_LABEL =                       "Label Format",
+    SI_LUIE_LAM_UF_DFRAMES_LABEL_TP =                    "Format of the label text for default unit frames.",
+    SI_LUIE_LAM_UF_DFRAMES_FONT_TP =                     "Choose the font to use for labels on the default unit frames bars.",
+    SI_LUIE_LAM_UF_DFRAMES_FONT_SIZE_TP =                "Choose the font size for labels on the default unit frames bars.",
+    SI_LUIE_LAM_UF_DFRAMES_FONT_STYLE_TP =               "Choose the font style for labels on the default unit frames bars.",
+    SI_LUIE_LAM_UF_DFRAMES_LABEL_COLOR =                 "Label Color",
+    SI_LUIE_LAM_UF_TARGET_COLOR_REACTION =               "Color Target Name by Reaction",
+    SI_LUIE_LAM_UF_TARGET_COLOR_REACTION_TP =            "Change the color of the Targets name label according to unit reaction.",
+    SI_LUIE_LAM_UF_TARGET_ICON_CLASS =                   "Display Target Class Icon",
+    SI_LUIE_LAM_UF_TARGET_ICON_CLASS_TP =                "Display class icon for target player.",
+    SI_LUIE_LAM_UF_TARGET_ICON_GFI =                     "Display Target Friend/Guild/Ignored Icon",
+    SI_LUIE_LAM_UF_TARGET_ICON_GFI_TP =                  "Display icon for target player if this player is your friend, in one of your guilds, or ignored.",
+
+    -- Custom Unit Frames Options
+    SI_LUIE_LAM_UF_CFRAMES_HEADER =                      "Custom Unit Frames",
+    SI_LUIE_LAM_UF_CFRAMES_UNLOCK =                      "Unlock Custom Frames",
+    SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TP =                   "Allow mouse dragging for all custom unit frames. When frames are unlocked, the target frame is not being hidden and may display outdated information.",
+    SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT =                  "Reset position",
+    SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT_TP =               "This will reset the position of Custom Frames to the default.",
+    SI_LUIE_LAM_UF_CFRAMES_FONT_TP =                     "Choose the font to use for custom unit frames.",
+    SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_LABELS =            "Font Size (Label)",
+    SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_LABELS_TP =         "Choose the font size for unit name, caption, etc: everything not on bars.",
+    SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_BARS =              "Font Size (Bar)",
+    SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_BARS_TP =           "Choose the font size for bar labels on custom unit frames.",
+    SI_LUIE_LAM_UF_CFRAMES_FONT_STYLE_TP =               "Choose the font style to use for custom unit frames.",
+    SI_LUIE_LAM_UF_CFRAMES_TEXTURE =                     "Texture",
+    SI_LUIE_LAM_UF_CFRAMES_TEXTURE_TP =                  "Texture to use on custom frames.",
+    SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE =             "Use Separate Shield Bar",
+    SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_TP =          "Enable this option to change the shield bar on Player, Target, and Small Group custom frames to be independent and not overlayed with Health Bar.",
+    SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT =      "Separate Shield Bar Height",
+    SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT_TP =   "Choose the height for the shield bar.",
+    SI_LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY =              "Use Full Height Shield Bar",
+    SI_LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY_TP =           "When Shield bar is NOT separate, use full-sized shield bar on top of health bar for Player, Target, and Small Group custom frames instead of default half-height overlay bar.",
+    SI_LUIE_LAM_UF_CFRAMES_SHIELD_ALPHA =                "Set Shield Transparency (Overlay)",
+    SI_LUIE_LAM_UF_CFRAMES_SHIELD_ALPHA_TP =             "Set the transparency of the shield bar when the overlay option is enabled.",
+    SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS =              "Use Smooth Bar Transition",
+    SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS_TP =           "Use smooth transition on all bars when value get changed. Disabling this option could improve performance a little.",
+    SI_LUIE_LAM_UF_CFRAMES_CHAMPION =                    "Champion Point Display Method",
+    SI_LUIE_LAM_UF_CFRAMES_CHAMPION_TP =                 "Choose whether the actual value of champion points is shown or values above the current maximum attainable cap are displayed.",
+
+    -- Custom Unit Frame Color Options
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_HEADER =                "Custom Unit Frame Color Options",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALTH =                "Health Bar Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_SHIELD =                "Shield Bar Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_MAGICKA =               "Magicka Bar Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_STAMINA =               "Stamina Bar Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_DPS =                   "DPS Role Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALER =                "Healer Role Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_TANK =                  "Tank Role Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_DK =                    "Dragonknight Class Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_NB =                    "Nightblade Class Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_SORC =                  "Sorcerer Class Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_TEMP =                  "Templar Class Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_WARD =                  "Warden Class Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER =         "Reaction Color - Player",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_FRIENDLY =       "Reaction Color - Friendly",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE =        "Reaction Color - Hostile",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_NEUTRAL =        "Reaction Color - Neutral",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_GUARD =          "Reaction Color - Guard",
+
+    -- Player/Target Frames
+    SI_LUIE_LAM_UF_CFRAMESPT_HEADER =                    "Custom Unit Frames (Player & Target)",
+    SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER =            "Additional Player Frame Display Options",
+    SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER =             "Enable Custom PLAYER Frame",
+    SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER_TP =          "Create custom player unit frames.",
+    SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET =             "Enable Custom TARGET Frame",
+    SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET_TP =          "Create custom target unit frames.",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_WIDTH =              "Player - Bar Width",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_HIGHT =           "Player - Health Bar Height",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_HIGHT =          "Player - Magicka Bar Height",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_HIGHT =         "Player - Stamina Bar Height",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL =        "Hide Magicka Bar Label",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP =     "Hide the attribute values label on the Player Magicka Bar.",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR =          "Completely Hide Magicka Bar",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP =       "Completely hide the Player Magicka Bar.",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL =       "Hide Stamina Bar Label",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL_TP =    "Hide the attribute values label on the Player Stamina Bar.",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR =         "Completely Hide Stamina Bar",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP =      "Completely hide the Player Stamina Bar.",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_OOCPACITY =          "Player - Transparency - Out-of-Combat",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_OOCPACITY_TP =       "Change the transparency of custom player unit frames when out of combat.",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_ICPACITY =           "Player - Transparency - In-Combat",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_ICPACITY_TP =        "Change the transparency of custom player unit frames when engaged in combat.",
+    SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_PLAYER =              "Player - Hide Anchored Buffs Out-of-Combat",
+    SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_PLAYER_TP =           "When out of combat, hide the buff & debuff frame if they are anchored to the player/target bars.",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD =             "Player Frame Display Method",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_TP =          "Choose the layout for custom player frames. This will reset your custom frame positions, and the Horizontal and Pyramid options will relocate the player and target frames to center screen.",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_WARN =        "This will reset your custom Player & Target frame positions!",
+    SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST =            "Stamina Bar Horizontal Position",
+    SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST_TP =         "Adjust the horizontal position of the stamina bar. If you wish to relocate all frames, unlock the custom frames and move them instead.",
+    SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST =             "Stamina Bar Vertical Position",
+    SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST_TP =          "Adjust the vertical position of the stamina bar. If you wish to relocate all frames, unlock the custom frames and move them instead.",
+    SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST =            "Magicka Bar Horizontal Position",
+    SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST_TP =         "Adjust the horizontal position of the magicka bar. If you wish to relocate all frames, unlock the custom frames and move them instead.",
+    SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST =             "Magicka Bar Vertical Position",
+    SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST_TP =          "Adjust the vertical position of the magicka bar. If you wish to relocate all frames, unlock the custom frames and move them instead.",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING =            "Player - Spacing Between Bars",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING_TP =         "Adjust the vertical spacing between player frame bars.",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_NAMESELF =           "Player - Display Your Name",
+    SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_NAMESELF_TP =        "Display your character name and level on the player frame.",
+    SI_LUIE_LAM_UF_CFRAMESPT_MOUNTSIEGEWWBAR =           "Player - Display Mount/Siege/Werewolf Bar",
+    SI_LUIE_LAM_UF_CFRAMESPT_MOUNTSIEGEWWBAR_TP =        "Display a bar to track mount stamina, siege weapon health, and remaining werewolf timer.",
+    SI_LUIE_LAM_UF_CFRAMESPT_XPCPBAR =                   "Player - Display XP/Champion XP Bar",
+    SI_LUIE_LAM_UF_CFRAMESPT_XPCPBAR_TP =                "Display a bar to track player experience gain.",
+    SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR =              "Color Champion XP Bar by Point Type",
+    SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR_TP =           "Set the color of the of Champion XP bar to be dependent on the type of Champion Point being earned.",
+
+    SI_LUIE_LAM_UF_LOWRESOURCE_HEALTH =                  "Player - Low Health % Threshold",
+    SI_LUIE_LAM_UF_LOWRESOURCE_HEALTH_TP =               "Determines the threshold of health to color the player health label text red.",
+    SI_LUIE_LAM_UF_LOWRESOURCE_MAGICKA =                 "Player - Low Magicka % Threshold",
+    SI_LUIE_LAM_UF_LOWRESOURCE_MAGICKA_TP =              "Determines the threshold of magicka to color the player magicka label text red.",
+    SI_LUIE_LAM_UF_LOWRESOURCE_STAMINA =                 "Player - Low Stamina % Threshold",
+    SI_LUIE_LAM_UF_LOWRESOURCE_STAMINA_TP =              "Determines the threshold of stamina to color the player stamina label text red.",
+
+    SI_LUIE_LAM_UF_CFRAMESPT_TARGET_WIDTH =              "Target - Bar Width",
+    SI_LUIE_LAM_UF_CFRAMESPT_TARGET_HEIGHT =             "Target - Bar Height",
+    SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY =          "Target - Transparency - Out-of-Combat",
+    SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY_TP =       "Change the transparency of custom target unit frames when out of combat.",
+    SI_LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY =           "Target - Transparency - In-Combat",
+    SI_LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY_TP =        "Change the transparency of custom target unit frames when engaged in combat.",
+    SI_LUIE_LAM_UF_CFRAMESPT_BUFFS_TARGET =              "Target - Hide Anchored Buffs Out-of-Combat",
+    SI_LUIE_LAM_UF_CFRAMESPT_BUFFS_TARGET_TP =           "When out of combat, hide the buff & debuff frame if they are anchored to the player/target bars.",
+    SI_LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET =           "Target - Use Reaction Color",
+    SI_LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET_TP =        "Color the target frame by reaction instead of using the health bar color.",
+    SI_LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL =         "Target - Display Class Label",
+    SI_LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL_TP =      "Display text label with target class name on target frame together with class icon.",
+    SI_LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD =              "Target - Execute Health % Threshold",
+    SI_LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD_TP =           "Determines the threshold of health to color the target label text red, as well as display the skull execute texture if enabled.",
+    SI_LUIE_LAM_UF_CFRAMESPT_EXETEXTURE =                "Target - Display Skull Execute Texture",
+    SI_LUIE_LAM_UF_CFRAMESPT_EXETEXTURE_TP =             "Display Skull texture next to custom target frame for low-health target that should be executed.",
+    SI_LUIE_LAM_UF_CFRAMESPT_TITLE =                     "Target - Display Title",
+    SI_LUIE_LAM_UF_CFRAMESPT_TITLE_TP =                  "Display the Title of a target player or NPC.",
+    SI_LUIE_LAM_UF_CFRAMESPT_RANK =                      "Target - Display AVA Rank Name",
+    SI_LUIE_LAM_UF_CFRAMESPT_RANK_TP =                   "Display the AVA Rank Name of a target player.",
+    SI_LUIE_LAM_UF_CFRAMESPT_RANKICON =                  "Target - Display AVA Rank Number & Icon",
+    SI_LUIE_LAM_UF_CFRAMESPT_RANKICON_TP =               "Display the AVA Rank Number & Icon of a player target.",
+    SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY =       "Target - Rank/Title Priority",
+    SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY_TP =    "Choose whether to prioritize the display of the AVA Rank Name or Title on players.",
+    SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT =           "Treat Missing Power as In-Combat",
+    SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT_TP =        "When any resource pool is used change the frames to use the in combat opacity value as if engaged in combat.",
+
+    -- Group Frames
+    SI_LUIE_LAM_UF_CFRAMESG_HEADER =                     "Custom Unit Frames (Group)",
+    SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE =           "Enable Custom GROUP Frames",
+    SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE_TP =        "Create custom group unit frames.",
+    SI_LUIE_LAM_UF_CFRAMESG_WIDTH =                      "Group Bar Width",
+    SI_LUIE_LAM_UF_CFRAMESG_HEIGHT =                     "Group Bar Height",
+    SI_LUIE_LAM_UF_CFRAMESG_SPACING =                    "Spacing Between Group Bars",
+    SI_LUIE_LAM_UF_CFRAMESG_INCPLAYER =                  "Include Player in Group Frame",
+    SI_LUIE_LAM_UF_CFRAMESG_INCPLAYER_TP =               "Include the player in the list of group frames.",
+    SI_LUIE_LAM_UF_CFRAMESG_ROLEICON =                   "Show Role Icon on Group Frames",
+    SI_LUIE_LAM_UF_CFRAMESG_ROLEICON_TP =                "This will show the selected player role on group frames.",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE =         "Color Custom Group Frames by Role",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE_TP =      "Colors the custom group frame bars based off role.",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS =        "Color Custom Group Frames by Class",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS_TP =     "Colors the custom group frame bars based off class.",
+
+    -- Raid Frames
+    SI_LUIE_LAM_UF_CFRAMESR_HEADER =                     "Custom Unit Frames (Raid)",
+    SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE =           "Enable Custom RAID Frames",
+    SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE_TP =        "Create custom raid unit frames. If custom group frames are unused, then this raid frame will also be used for small groups.",
+    SI_LUIE_LAM_UF_CFRAMESR_WIDTH =                      "Raid Bar Width",
+    SI_LUIE_LAM_UF_CFRAMESR_HEIGHT =                     "Raid Bar Height",
+    SI_LUIE_LAM_UF_CFRAMESR_LAYOUT =                     "Raid Frame Layout",
+    SI_LUIE_LAM_UF_CFRAMESR_LAYOUT_TP =                  "Select layout of raid frame in format 'columns*rows'.",
+    SI_LUIE_LAM_UF_CFRAMESR_SPACER =                     "Add Spacer for Every 4 Members",
+    SI_LUIE_LAM_UF_CFRAMESR_SPACER_TP =                  "Add a small spacer between raid members frames to visualize default group splitting.",
+    SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP =                   "Raid Name Clip Location",
+    SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP_TP =                "Due to the inability to detect the length of the hit point value, you can use this setting to manually change where the name is clipped on raid frames in order to prevent overlap.",
+    SI_LUIE_LAM_UF_CFRAMESR_ROLEICON =                   "Class/Role Icon Format",
+    SI_LUIE_LAM_UF_CFRAMESR_ROLEICON_TP =                "Choose the method for displaying class or role icons on the raid frames.",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE =         "Color Custom Raid Frames by Role",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE_TP =      "Colors the custom raid frame bars based off role.",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS =        "Color Custom Raid Frames by Class",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS_TP =     "Colors the custom raid frame bars based off class.",
+
+    -- Boss Frames
+    SI_LUIE_LAM_UF_CFRAMESB_HEADER =                     "Custom Unit Frames (Boss)",
+    SI_LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE =           "Enable Custom BOSS Frames",
+    SI_LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE_TP =        "Create custom boss unit frames. This will track the health of up to 6 bosses in dungeons encounters.",
+    SI_LUIE_LAM_UF_CFRAMESB_WIDTH =                      "Boss Bar Width",
+    SI_LUIE_LAM_UF_CFRAMESB_HEIGHT =                     "Boss Bar Height",
+    SI_LUIE_LAM_UF_CFRAMESB_OPACITYOOC =                 "Boss Bar Transparency - Out-of-Combat",
+    SI_LUIE_LAM_UF_CFRAMESB_OPACITYOOC_TP =              "Change the transparency of custom boss unit frames when out of combat.",
+    SI_LUIE_LAM_UF_CFRAMESB_OPACITYIC =                  "Boss Bar Transparency - In-Combat",
+    SI_LUIE_LAM_UF_CFRAMESB_OPACITYIC_TP =               "Change the transparency of custom boss unit frames when engaged in combat.",
+
+
+    -- PVP Frames
+    SI_LUIE_LAM_UF_CFRAMESPVP_HEADER =                   "Custom Unit Frames (PvP Target Frame)",
+    SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME =              "Enable PvP Target Frame",
+    SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_TP =           "Create additional custom target unit frames. This will track health of hostile pvp players only. It also by default has larger size, less information and is positioned in the center of the screen.",
+    SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_WIDTH =        "PvP Target Bars Width",
+    SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_HEIGHT =       "PvP Target Bar Height",
+
+    -- Common Options
+    SI_LUIE_LAM_UF_COMMON_HEADER =                       "Common Options",
+    SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER =           "Player Name Display Method (Player)",
+    SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER_TP =        "Determines the method used to display your name on the player frame.\nDefault: Character Name",
+    SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET =           "Player Name Display Method (Target)",
+    SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET_TP =        "Determines the method used to display other player names on target unit frames.\nDefault: Character Name",
+    SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID =        "Player Name Display Method (Group/Raid)",
+    SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP =     "Determines the method used to display other player names on group and raid unit frames.\nDefault: Character Name",
+    SI_LUIE_LAM_UF_COMMON_CAPTIONCOLOR =                 "Default Caption Color",
+    SI_LUIE_LAM_UF_COMMON_NPCFONTCOLOR =                 "Friendly NPC Font Color",
+    SI_LUIE_LAM_UF_COMMON_PLAYERFONTCOLOR =              "Friendly Player Font Color",
+    SI_LUIE_LAM_UF_COMMON_HOSTILEFONTCOLOR =             "Hostile Font Color",
+    SI_LUIE_LAM_UF_COMMON_RETICLECOLOR =                 "Apply Same Settings to Reticle",
+    SI_LUIE_LAM_UF_COMMON_RETICLECOLOR_TP =              "Change the color of the reticle according to unit reaction.",
+    SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT =         "Interactible Reticle Color",
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    -- COMBAT TEXT -- LAM --
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    -- Base Options
+    SI_LUIE_LAM_CT =                                     "Combat Text",
+    SI_LUIE_LAM_CT_SHOWCOMBATTEXT =                      "Combat Text Module",
+    SI_LUIE_LAM_CT_DESCRIPTION =                         "Display Combat Cloud combat text, with damage/healing values, and various alerts.",
+    SI_LUIE_LAM_CT_UNLOCK =                              "Unlock",
+    SI_LUIE_LAM_CT_UNLOCK_TP =                           "Unlock the panels to move them.",
+    SI_LUIE_LAM_CT_IC_ONLY =                             "In Combat Only",
+    SI_LUIE_LAM_CT_IC_ONLY_TP =                          "Only display incoming and outgoing numbers when in combat.",
+    SI_LUIE_LAM_CT_TRANSPARENCY =                        "Set Transparency",
+    SI_LUIE_LAM_CT_TRANSPARENCY_TP =                     "Set an alpha value for combat text.",
+    SI_LUIE_LAM_CT_ABBREVIATE =                          "Shorten Numbers",
+    SI_LUIE_LAM_CT_ABBREVIATE_TP =                       "Replace large numbers like 12345 with 12.3k on all combat text labels.",
+
+    -- CT (Shared)
+    SI_LUIE_LAM_CT_SHARED_DAMAGE =                       "Damage",
+    SI_LUIE_LAM_CT_SHARED_DAMAGE_CRITICAL =              "Damage (Critical)",
+    SI_LUIE_LAM_CT_SHARED_HEALING =                      "Healing",
+    SI_LUIE_LAM_CT_SHARED_HEALING_CRITICAL =             "Healing (Critical)",
+    SI_LUIE_LAM_CT_SHARED_DOT =                          "Damage over Time",
+    SI_LUIE_LAM_CT_SHARED_DOT_CRITICAL =                 "Damage over Time (Critical)",
+    SI_LUIE_LAM_CT_SHARED_HOT =                          "Healing over Time",
+    SI_LUIE_LAM_CT_SHARED_HOT_CRITICAL =                 "Healing over Time (Critical)",
+    SI_LUIE_LAM_CT_SHARED_GAIN_LOSS =                    "Resource Gain/Drain",
+    SI_LUIE_LAM_CT_SHARED_ENERGIZE =                     "Resource Gain",
+    SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE =            "Ultimate Gain",
+    SI_LUIE_LAM_CT_SHARED_DRAIN =                        "Resource Drain",
+    SI_LUIE_LAM_CT_SHARED_MITIGATION =                   "Mitigation",
+    SI_LUIE_LAM_CT_SHARED_MISS =                         "Missed",
+    SI_LUIE_LAM_CT_SHARED_IMMUNE =                       "Immune",
+    SI_LUIE_LAM_CT_SHARED_PARRIED =                      "Parried",
+    SI_LUIE_LAM_CT_SHARED_REFLECTED =                    "Reflected",
+    SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD =                "Damage Shielded",
+    SI_LUIE_LAM_CT_SHARED_DODGED =                       "Dodged",
+    SI_LUIE_LAM_CT_SHARED_BLOCKED =                      "Blocked",
+    SI_LUIE_LAM_CT_SHARED_INTERRUPTED =                  "Interrupted",
+    SI_LUIE_LAM_CT_SHARED_CROWD_CONTROL =                "Crowd Control",
+    SI_LUIE_LAM_CT_SHARED_DISORIENTED =                  "Disoriented",
+    SI_LUIE_LAM_CT_SHARED_FEARED =                       "Feared",
+    SI_LUIE_LAM_CT_SHARED_OFF_BALANCE =                  "Off-Balance",
+    SI_LUIE_LAM_CT_SHARED_SILENCED =                     "Silenced",
+    SI_LUIE_LAM_CT_SHARED_STUNNED =                      "Stunned",
+    SI_LUIE_LAM_CT_SHARED_COMBAT_STATE =                 "Combat State",
+    SI_LUIE_LAM_CT_SHARED_COMBAT_IN =                    "In Combat",
+    SI_LUIE_LAM_CT_SHARED_COMBAT_OUT =                   "Out of Combat",
+    SI_LUIE_LAM_CT_SHARED_ALERT =                        "Active Combat Alerts",
+    SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK =                  "Block",
+    SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK_S =                "Block (Stagger)",
+    SI_LUIE_LAM_CT_SHARED_ALERT_DODGE =                  "Dodge",
+    SI_LUIE_LAM_CT_SHARED_ALERT_AVOID =                  "Avoid",
+    SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT =              "Interrupt",
+    SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE =                "Cleanse",
+    SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT =                "Off-Balance Exploit",
+    SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE =                "Execute",
+    SI_LUIE_LAM_CT_SHARED_ALERT_POWER =                  "Important Enemy Buffs (Power/Enrage)",
+    SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY =                "Destroy (Priority Target)",
+    SI_LUIE_LAM_CT_SHARED_POINTS =                       "Experience, Champion, and Alliance Points",
+    SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE =              "Alliance Points",
+    SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE =            "Experience Points",
+    SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION =              "Champion Experience",
+    SI_LUIE_LAM_CT_SHARED_RESOURCE =                     "Resources",
+    SI_LUIE_LAM_CT_SHARED_LOW_HEALTH =                   "Low Health",
+    SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA =                  "Low Magicka",
+    SI_LUIE_LAM_CT_SHARED_LOW_STAMINA =                  "Low Stamina",
+    SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY =               "Ultimate Ready",
+    SI_LUIE_LAM_CT_SHARED_POTION_READY =                 "Potion Ready",
+
+    -- CT (Incoming)
+    SI_LUIE_LAM_CT_INCOMING_HEADER =                     "Toggle Options (Incoming)",
+    SI_LUIE_LAM_CT_INCOMING_DAMAGE_HEAL_HEADER =         "Incoming Damage & Healing",
+    SI_LUIE_LAM_CT_INCOMING_MITIGATION =                 "Incoming Mitigation",
+    SI_LUIE_LAM_CT_INCOMING_CROWD_CONTROL =              "Incoming Crowd Control",
+    SI_LUIE_LAM_CT_INCOMING_DAMAGE_TP =                  "Show incoming direct damage.",
+    SI_LUIE_LAM_CT_INCOMING_DOT_TP =                     "Show incoming damage over time.",
+    SI_LUIE_LAM_CT_INCOMING_HEALING_TP =                 "Show incoming direct healing.",
+    SI_LUIE_LAM_CT_INCOMING_HOT_TP =                     "Show incoming healing over time.",
+    SI_LUIE_LAM_CT_INCOMING_ENERGIZE_TP =                "Show incoming magicka/stamina gain.",
+    SI_LUIE_LAM_CT_INCOMING_ENERGIZE_ULTIMATE_TP =       "Show incoming ultimate gain.",
+    SI_LUIE_LAM_CT_INCOMING_DRAIN_TP =                   "Show incoming magicka/stamina loss.",
+    SI_LUIE_LAM_CT_INCOMING_MISS_TP =                    "Show incoming attacks that miss.",
+    SI_LUIE_LAM_CT_INCOMING_IMMUNE_TP =                  "Show incoming attacks that you are immune to.",
+    SI_LUIE_LAM_CT_INCOMING_PARRIED_TP =                 "Show incoming attacks that are parried.",
+    SI_LUIE_LAM_CT_INCOMING_REFLECTED_TP =               "Show incoming attacks that are reflected.",
+    SI_LUIE_LAM_CT_INCOMING_DAMAGE_SHIELD_TP =           "Show incoming damage absorbed by a shield.",
+    SI_LUIE_LAM_CT_INCOMING_DODGED_TP =                  "Show incoming dodged attacks.",
+    SI_LUIE_LAM_CT_INCOMING_BLOCKED_TP =                 "Show incoming blocked attacks.",
+    SI_LUIE_LAM_CT_INCOMING_INTERRUPTED_TP =             "Show when you are interrupted by an enemy.",
+    SI_LUIE_LAM_CT_INCOMING_DISORIENTED_TP =             "Show when you are disoriented.",
+    SI_LUIE_LAM_CT_INCOMING_FEARED_TP =                  "Show when you are feared.",
+    SI_LUIE_LAM_CT_INCOMING_OFF_BALANCE_TP =             "Show when you are off-balance.",
+    SI_LUIE_LAM_CT_INCOMING_SILENCED_TP =                "Show when you are silenced.",
+    SI_LUIE_LAM_CT_INCOMING_STUNNED_TP =                 "Show when you are stunned.",
+
+    -- CT (Outgoing)
+    SI_LUIE_LAM_CT_OUTGOING_HEADER =                     "Toggle Options (Outgoing)",
+    SI_LUIE_LAM_CT_OUTGOING_DAMAGE_HEAL_HEADER =         "Outgoing Damage & Healing",
+    SI_LUIE_LAM_CT_OUTGOING_MITIGATION =                 "Outgoing Mitigation",
+    SI_LUIE_LAM_CT_OUTGOING_CROWD_CONTROL =              "Outgoing Crowd Control",
+    SI_LUIE_LAM_CT_OUTGOING_DAMAGE_TP =                  "Show outgoing direct damage.",
+    SI_LUIE_LAM_CT_OUTGOING_DOT_TP =                     "Show outgoing damage over time.",
+    SI_LUIE_LAM_CT_OUTGOING_HEALING_TP =                 "Show outgoing direct healing.",
+    SI_LUIE_LAM_CT_OUTGOING_HOT_TP =                     "Show outgoing healing over time.",
+    SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_TP =                "Show outgoing magicka/stamina gain.",
+    SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_ULTIMATE_TP =       "Show outgoing ultimate gain.",
+    SI_LUIE_LAM_CT_OUTGOING_DRAIN_TP =                   "Show outgoing magicka/stamina drain.",
+    SI_LUIE_LAM_CT_OUTGOING_MISS_TP =                    "Show outgoing attacks that you miss.",
+    SI_LUIE_LAM_CT_OUTGOING_IMMUNE_TP =                  "Show outgoing attacks that the enemy is immune to.",
+    SI_LUIE_LAM_CT_OUTGOING_PARRIED_TP =                 "Show outgoing attacks that are parried.",
+    SI_LUIE_LAM_CT_OUTGOING_REFLECTED_TP =               "Show outgoing attacks that are reflected.",
+    SI_LUIE_LAM_CT_OUTGOING_DAMAGE_SHIELD_TP =           "Show outgoing damage absorbed by a shield.",
+    SI_LUIE_LAM_CT_OUTGOING_DODGED_TP =                  "Show outgoing attacks that are dodged.",
+    SI_LUIE_LAM_CT_OUTGOING_BLOCKED_TP =                 "Show outgoing attacks that are blocked.",
+    SI_LUIE_LAM_CT_OUTGOING_INTERRUPTED_TP =             "Show when you interrupt an enemy.",
+    SI_LUIE_LAM_CT_OUTGOING_DISORIENTED_TP =             "Show when you disorient an enemy.",
+    SI_LUIE_LAM_CT_OUTGOING_FEARED_TP =                  "Show when you fear an enemy.",
+    SI_LUIE_LAM_CT_OUTGOING_OFF_BALANCE_TP =             "Show when you set an enemy off-balance.",
+    SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP =                "Show when you silence an enemy.",
+    SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP =                 "Show when you stun an enemy.",
+
+    -- CT (Notifications)
+    SI_LUIE_LAM_CT_NOTIFICATION =                        "Toggle Options (Notifications)",
+    SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE =           "Combat State",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERTS =                 "Active Combat Alerts",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERTS_DESC =            "Set Active Combat Tips to Always Show in the Interface options to display Alerts correctly.",
+    SI_LUIE_LAM_CT_NOTIFICATION_POINTS =                 "Points",
+    SI_LUIE_LAM_CT_NOTIFICATION_RESOURCES =              "Resources",
+    SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP =           "Display a notification when engaging in combat.",
+    SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_OUT_TP =          "Display a notification when exiting combat.",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION =             "Display Advanced Notifications for Attacks",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP =          "Display advanced notifications for attacks that can be blocked, dodged, avoided, or interrupted.",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION = "\t\t\t\t\tUse the following formatting characters to modify the mitigation alerts:\n\t\t\t\t\t%n Source Name\n\t\t\t\t\t%t Ability Name\n\t\t\t\t\t%i - Ability Icon",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD =      "Alert Method",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP =   "Choose whether to display mitigation alerts as a single line or in multiple lines. If using the single line option notifications will be colored based on the most effective form of mitigation.",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE =        "Don't Display Mitigation Suggestions",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP =     "When using single line alerts - enabling this option will hide the BLOCK/DODGE/AVOID/INTERRUPT etc alerts and only display the incoming ability.",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT =      "Mitigation Alert Format",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP =   "Choose the format to display mitigation alerts.",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P =    "Important Buff Alert Format",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P_TP = "Choose the format to display for important buffs cast by nearby hostile targets.",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D =    "Priority Target Alert Format",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D_TP = "Choose the format to display when a priority hostile target is detected nearby.",
+    SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX =                 "Add Suffix for Direct Attacks",
+    SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP =              "Add the following suffix onto the message for attacks that are DIRECTLY targeting you. This will not display for static area of effect attacks or enemy healing abilites. Add a leading & trailing blank space here.",
+    SI_LUIE_LAM_CT_NOTIFICATION_AURA =                   "Display Alerts for Nearby NPC Events",
+    SI_LUIE_LAM_CT_NOTIFICATION_AURA_TP =                "Many abilities that don't directly target the player can't be detected to provide a warning (such as a nearby NPC casting a healing ability). This option allows the Alert component to also detect auras and provide more information. However this can result in alerts being displayed for NPCs that are out of range of the player. Note that these events will still always be displayed in Dungeons.",
+    SI_LUIE_LAM_CT_NOTIFICATION_RANK3 =                  "Display Alerts for Normal NPC Abilities",
+    SI_LUIE_LAM_CT_NOTIFICATION_RANK3_TP =               "Enable to display alerts for abilites used by standard NPCs.",
+    SI_LUIE_LAM_CT_NOTIFICATION_RANK2 =                  "Display Alerts for Elite/Quest NPC Abilities",
+    SI_LUIE_LAM_CT_NOTIFICATION_RANK2_TP =               "Enable to display alerts for abilites specific to Elite or Quest NPCs. Examples include the NPC variant of Dragonknight Standard and Soul Tether.",
+    SI_LUIE_LAM_CT_NOTIFICATION_RANK1 =                  "Display Alerts for Boss/Trial NPC Abilities",
+    SI_LUIE_LAM_CT_NOTIFICATION_RANK1_TP =               "Enable to display alerts specific to boss and trial NPCs.",
+    SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON =                "ALWAYS Display Alerts in Dungeons",
+    SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON_TP =             "Enable to always display alerts if you are in a dungeon. This option is ideal if you don't want to see normal NPC abilities outside of dungeons, but you want to be aware of significantly scaled up variants cast by NPC's inside a dungeon or trial.",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_CLEANSE_TP =       "Show an alert when a damage over time effect can be cleansed.",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_BLOCK_TP =         "Show an alert for incoming attacks that can be mitigated by blocking.",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXPLOIT_TP =       "Show an alert when a target is off-balance.",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_INTERRUPT_TP =     "Show an alert when you can interrupt an enemy ability.",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DODGE_TP =         "Show an alert for incoming attacks that can be mitigated by dodging.",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_AVOID_TP =         "Show an alert for incoming attacks that should be mitigating by avoidance.",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXECUTE_TP =       "Show an alert when a target is in execute range.",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP =         "Show an alert when a nearby hostile NPC casts an important buff (significant power buffs like enrages).",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP =       "Show an alert when a nearby enemy target appears that is a priority target to destroy (spawns that reduce damage done/taken, or apply invulnerabilty).",
+    SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD =      "Execute Threshold",
+    SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD_TP =   "The threshold at which the execute alert will trigger.\nDefault: 20%",
+    SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY =      "Execute Frequency",
+    SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY_TP =   "The frequency between execute alerts triggered for the same target.\nDefault: 8",
+    SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS =            "Hide Ingame Tips",
+    SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS_TP =         "Hide the default Active Combat Tips window.",
+    SI_LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP =     "Show Alliance Points earned.",
+    SI_LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP =   "Show Experience Points earned.",
+    SI_LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP =     "Show Champion Experience earned.",
+    SI_LUIE_LAM_CT_NOTIFICATION_LOW_HEALTH_TP =          "Show a warning when Health is below the desired threshold.",
+    SI_LUIE_LAM_CT_NOTIFICATION_LOW_MAGICKA_TP =         "Show a warning when Magicka is below the desired threshold.",
+    SI_LUIE_LAM_CT_NOTIFICATION_LOW_STAMINA_TP =         "Show a warning when Stamina is below the desired threshold.",
+    SI_LUIE_LAM_CT_NOTIFICATION_ULTIMATE_READY_TP =      "Show a notification when your ultimate ability is available for use.",
+    SI_LUIE_LAM_CT_NOTIFICATION_POTION_READY_TP =        "Show a notification when a potion comes off cooldown.",
+    SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND =          "Play Warning Sound",
+    SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND_TP =       "Play a sound when resources fall below the desired threshold.",
+    SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH =         "Warning Threshold (Health)",
+    SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH_TP =      "Threshold for Low Health warning.\nDefault: 35%",
+    SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA =        "Warning Threshold (Magicka)",
+    SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA_TP =     "Threshold for Low Magicka warning.\nDefault: 35%",
+    SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA =        "Warning Threshold (Stamina)",
+    SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA_TP =     "Threshold for Low Stamina warning.\nDefault: 35%",
+
+    -- CT (Font)
+    SI_LUIE_LAM_CT_FONT_HEADER =                         "Font Format Options",
+    SI_LUIE_LAM_CT_FONT_FACE =                           "Font Face",
+    SI_LUIE_LAM_CT_FONT_FACE_TP =                        "Choose a font face.",
+    SI_LUIE_LAM_CT_FONT_OUTLINE =                        "Font Outline",
+    SI_LUIE_LAM_CT_FONT_OUTLINE_TP =                     "Choose a font outline.",
+    SI_LUIE_LAM_CT_FONT_TEST =                           "Test Font",
+    SI_LUIE_LAM_CT_FONT_TEST_TP =                        "Generate a test combat event to test the chosen font.",
+
+    -- CT (Font Combat)
+    SI_LUIE_LAM_CT_FONT_COMBAT_HEADER =                  "Font Size (Combat)",
+    SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_TP =               "Font size for direct damage.\nDefault: 32",
+    SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_CRITICAL_TP =      "Font size for direct critical damage.\nDefault: 32",
+    SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_TP =              "Font size for direct healing.\nDefault: 32",
+    SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_CRITICAL_TP =     "Font size for direct critical healing.\nDefault: 32",
+    SI_LUIE_LAM_CT_FONT_COMBAT_DOT_TP =                  "Font size for damage over time.\nDefault: 26",
+    SI_LUIE_LAM_CT_FONT_COMBAT_DOT_CRITICAL_TP =         "Font size for critical damage over time.\nDefault: 26",
+    SI_LUIE_LAM_CT_FONT_COMBAT_HOT_TP =                  "Font size for healing over time.\nDefault: 26",
+    SI_LUIE_LAM_CT_FONT_COMBAT_HOT_CRITICAL_TP =         "Font size for critical healing over time.\nDefault: 26",
+    SI_LUIE_LAM_CT_FONT_COMBAT_GAIN_LOSS_TP =            "Font size for resource gain and drain.\nDefault: 32",
+    SI_LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP =           "Font size for mitigated damage.\nDefault: 32",
+    SI_LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP =        "Font size for crowd control warnings.\nDefault: 32",
+
+    -- CT (Font Notifications)
+    SI_LUIE_LAM_CT_FONT_NOTIFICATION_HEADER =            "Font Size (Notifications)",
+    SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP =   "Font size of message displayed when entering or exiting combat.\nDefault: 24",
+    SI_LUIE_LAM_CT_FONT_NOTIFICATION_ALERT_TP =          "Font size of active combat alerts.\nDefault: 32",
+    SI_LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP =         "Font size of points earned\nDefault: 24",
+    SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP =       "Font size of resource warnings.\nDefault: 32",
+
+    -- CT (Color Options)
+    SI_LUIE_LAM_CT_COLOR_COMBAT_HEADER =                 "Color Options (Combat)",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_HEALING_HEADER =  "Damage & Healing",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_MITIGATION_HEADER =      "Mitigation",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_CROWD_CONTROL_HEADER =   "Crowd Control",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE =            "None",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE_TP =         "Set a color for damage with no type.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC =         "Generic",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC_TP =      "Set a color for Generic damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL =        "Physical",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL_TP =     "Set a color for Physical damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE =            "Fire",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE_TP =         "Set a color for Fire damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK =           "Shock",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK_TP =        "Set a color for Shock damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION =        "Oblivion",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION_TP =     "Set a color for Oblivion damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD =            "Cold",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD_TP =         "Set a color for Cold damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH =           "Earth",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH_TP =        "Set a color for Earth damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC =           "Magic",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC_TP =        "Set a color for Magic damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN =           "Drown",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN_TP =        "Set a color for Drowning damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE =         "Disease",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE_TP =      "Set a color for Disease damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON =          "Poison",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON_TP =       "Set a color for Poison damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_TP =             "Set a color for all healing.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA =       "Resource Gain (Magicka)",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA_TP =    "Set a color for magicka gain.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA =       "Resource Gain (Stamina)",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA_TP =    "Set a color for stamina gain.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE =      "Resource Gain (Ultimate)",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE_TP =   "Set a color for ultimate gain.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA =          "Resource Drain (Magicka)",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA_TP =       "Set a color for magicka drain.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA =          "Resource Drain (Stamina)",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA_TP =       "Set a color for stamina drain.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE =        "Override Critical Damage",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE_TP =     "Use a set color for all critical damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR =      "Critical Damage Color",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR_TP =   "Set a color for critical damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE =       "Override Critical Healing",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE_TP =    "Use a set color for all critical healing.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR =     "Critical Healing Color",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR_TP =  "Set a color for critical damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE =      "Override Incoming Damage",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE_TP =   "Use a set color for all incoming damage (overrides critical damage as well).",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR =         "Incoming Damage Color",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR_TP =      "Set a color for incoming damage.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_MISS_TP =                "Set a color for missed attacks.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_IMMUNE_TP =              "Set a color for immunity to attacks.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_PARRIED_TP =             "Set a color for parried attacks.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_REFLETCED_TP =           "Set a color for reflected attacks.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHIELD_TP =       "Set a color for damage absorbed by a shield.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DODGED_TP =              "Set a color for dodged attacks.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_BLOCKED_TP =             "Set a color for blocked attacks.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_INTERRUPTED_TP =         "Set a color for interrupted attacks.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_DISORIENTED_TP =         "Set a color for notifications displayed when Disoriented.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_FEARED_TP =              "Set a color for notifications displayed when Feared.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_OFF_BALANCE_TP =         "Set a color for notifications displayed when Off-Balance.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_SILENCED_TP =            "Set a color for notifications displayed when Silenced.",
+    SI_LUIE_LAM_CT_COLOR_COMBAT_STUNNED_TP =             "Set a color for notifications displayed when Stunned.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_HEADER =           "Color Options (Notifications)",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_HEADER =    "Combat State",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALERT_HEADER =     "Active Combat Alerts",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POINT_HEADER =     "Points",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_RESOURCE_HEADER =  "Resources",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP =     "Set a color for notifications when engaging in combat.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP =    "Set a color for notifications when exiting combat.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CLEANSE_TP =       "Set a color for cleanse alerts.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP =         "Set a color for block alerts.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPLOIT_TP =       "Set a color for exploit alerts.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP =     "Set a color for interrupt alerts.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP =         "Set a color for dodge alerts.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP =         "Set a color for avoidance alerts.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP =       "Set a color for execute alerts.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP =         "Set a color for important buff alerts.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP =       "Set a color for priority target alerts.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALLIANCE_TP =      "Set a color for Alliance Points earned.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPERIENCE_TP =    "Set a color for Experience Points earned.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CHAMPION_TP =      "Set a color for Champion Experience earned.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_HEALTH_TP =    "Set a color for Low Health warnings.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_MAGICKA_TP =   "Set a color for Low Magicka warnings.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP =   "Set a color for Low Stamina warnings.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP =      "Set a color for notifications when your ultimate ability is available for use.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POTION_TP =        "Set a color for notifications when a potion comes off cooldown.",
+
+    -- CT (Format Options)
+    SI_LUIE_LAM_CT_FORMAT_DESCRIPTION =                  "Allows to change the text output. Write any text you want or enter a variable for special outputs\n %t Ability name, localized name\n %a Amount, value\n %r Power type, resource",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_HEADER =                "Format Options (Combat)",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_HEALING_HEADER = "Damage & Healing",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_MITIGATION_HEADER =     "Mitigation",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_CROWD_CONTROL_HEADER =  "Crowd Control",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_TP =             "Text format for direct damage numbers.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_CRITICAL_TP =    "Text format for direct critical damage numbers.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_TP =            "Text format for direct healing numbers.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_CRITICAL_TP =   "Text format for direct critical healing numbers.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_TP =                "Text format for damage over time numbers.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_CRITICAL_TP =       "Text format for critical damage over time numbers.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_TP =                "Text format for healing over time numbers.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_CRITICAL_TP =       "Text format for critical healing over time numbers.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_TP =           "Text format for magicka/stamina gain.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_ULTIMATE_TP =  "Text format for ultimate gain.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_DRAIN_TP =              "Text format for magicka/stamina drain.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_MISS_TP =               "Text format for missed attacks.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_IMMUNE_TP =             "Text format for immunity to attacks.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_PARRIED_TP =            "Text format for parried attacks.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_REFLECTED_TP =          "Text format for reflected attacks.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_SHIELD_TP =      "Text format for damage absorbed by a shield.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_DODGED_TP =             "Text format for dodged attacks.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_BLOCKED_TP =            "Text format for blocked attacks.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_INTERRUPTED_TP =        "Text format for interrupted attacks.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_DISORIENTED_TP =        "Text format for notifications when Disoriented.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_FEARED_TP =             "Text format for notifications when Feared.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_OFF_BALANCE_TP =        "Text format for notifications when set Off-Balance.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_SILENCED_TP =           "Text format for notifications when Silenced.",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_STUNNED_TP =            "Text format for notifications when Stunned.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_HEADER =          "Format Options (Notifications)",
+    SI_LUIE_LAM_CT_FORMAT_COMBAT_STATE_HEADER =          "Combat State",
+    SI_LUIE_LAM_CT_FORMAT_ALERT_HEADER =                 "Active Combat Alerts",
+    SI_LUIE_LAM_CT_FORMAT_POINTS_HEADER =                "Points",
+    SI_LUIE_LAM_CT_FORMAT_RESOURCES_HEADER =             "Resources",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_IN_TP =    "Text format for notifications when engaging in combat.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_OUT_TP =   "Text format for notifications when exiting combat.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CLEANSE_TP =      "Text format for cleanse alerts.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_TP =        "Text format for block alerts.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_S_TP =      "Text format for block alerts when an enemy will be staggered.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPLOIT_TP =      "Text format for exploit alerts.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_INTERRUPT_TP =    "Text format for interrupt alerts.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DODGE_TP =        "Text format for dodge alerts.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_AVOID_TP =        "Text format for avoidance alerts.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXECUTE_TP =      "Text format for execute alerts.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POWER_TP =        "Text format for important buff alerts.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DESTROY_TP =      "Text format for priority target alerts.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ALLIANCE_TP =     "Text format for Alliance Points earned.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPERIENCE_TP =   "Text format for Experience Points earned.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CHAMPION_TP =     "Text format for Champion Experience earned.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP =     "Text format for warnings when low on resources.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ULTIMATE_TP =     "Text format for notifcations when your ultimate ability is available for use.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POTION_TP =       "Text format for notifcations when your potion comes off cooldown.",
+
+    -- CT (Animation Options)
+    SI_LUIE_LAM_CT_ANIMATION_HEADER =                    "Animation Options",
+    SI_LUIE_LAM_CT_ANIMATION_TYPE =                      "Animation Type",
+    SI_LUIE_LAM_CT_ANIMATION_TYPE_TP =                   "Select the animation type to use.",
+    SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT =             "Outgoing Direction",
+    SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT_TP =          "Set the movement direction for outgoing text.",
+    SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN =              "Incoming Direction",
+    SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN_TP =           "Set the movement direction for incoming text.",
+    SI_LUIE_LAM_CT_ANIMATION_ICON_OUT =                  "Outgoing Icon Position",
+    SI_LUIE_LAM_CT_ANIMATION_ICON_OUT_TP =               "Set the icon position for outgoing text.",
+    SI_LUIE_LAM_CT_ANIMATION_ICON_IN =                   "Incoming Icon Position",
+    SI_LUIE_LAM_CT_ANIMATION_ICON_IN_TP =                "Set the icon position for incoming text.",
+    SI_LUIE_LAM_CT_ANIMATION_TEST =                      "Test Animation",
+    SI_LUIE_LAM_CT_ANIMATION_TEST_TP =                   "Test the animation of incoming & outgoing text.",
+
+    -- CT (Throttle Options)
+    SI_LUIE_LAM_CT_THROTTLE_HEADER =                     "Throttle Options",
+    SI_LUIE_LAM_CT_THROTTLE_DESCRIPTION =                "Accumulates multiple hits into one. Use the slider to adjust the time frame in milliseconds. Critical hits are not throttled unless the relevant option below is enabled.",
+    SI_LUIE_LAM_CT_THROTTLE_DAMAGE_TP =                  "Set the throttle duration in ms for damage numbers.\nDefault: 200 ms",
+    SI_LUIE_LAM_CT_THROTTLE_HEALING_TP =                 "Set the throttle duration in ms for healing numbers.\nDefault: 200 ms",
+    SI_LUIE_LAM_CT_THROTTLE_DOT_TP =                     "Set the throttle duration in ms for damage over time numbers.\nDefault: 200 ms",
+    SI_LUIE_LAM_CT_THROTTLE_HOT_TP =                     "Set the throttle duration in ms for healing over time numbers.\nDefault: 200 ms",
+    SI_LUIE_LAM_CT_THROTTLE_CRITICAL =                   "Throttle Critical Hits",
+    SI_LUIE_LAM_CT_THROTTLE_CRITICAL_TP =                "Enable throttle for critical hits.",
+    SI_LUIE_LAM_CT_THROTTLE_TRAILER =                    "Show Throttle Trailer",
+    SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP =                 "Enable Throttle Trailer.",
+
+    -- ---------------------------------------------------
+    -- ABILITY NAME OVERRIDE LOCALIZATION ----------------
+    -- ---------------------------------------------------
+
+    --SI_LUIE_SKILL_SKILLNAME =                          "",
+    SI_LUIE_SKILL_RECALL_PENALTY =                       "Recall Penalty",
+    SI_LUIE_SKILL_VANITY_PET =                           "Vanity Pet",
+    SI_LUIE_SKILL_MOUNTED =                              "Mounted",
+    SI_LUIE_SKILL_RESURRECTION_IMMUNITY =                "Resurrection Immunity",
+    SI_LUIE_SKILL_CROUCH_STUN =                          "Crouch Stun",
+    SI_LUIE_SKILL_FALL_DAMAGE =                          "Fall Damage",
+    SI_LUIE_SKILL_ABSORBING_SKYSHARD =                   "Absorbing Skyshard",
+    SI_LUIE_SKILL_RECEIVING_BOON =                       "Receiving Boon",
+    SI_LUIE_SKILL_MOUNT_SPRINT =                         "Gallop",
+    SI_LUIE_SKILL_BLOCK_STUN =                           "Block Stun",
+    SI_LUIE_SKILL_AYLEID_WELL =                          "Ayleid Well",
+    SI_LUIE_SKILL_ANCHOR_DROP =                          "Anchor Drop",
+    SI_LUIE_SKILL_VENGEANCE_CHARGE =                     "Vengeance Charge",
+    SI_LUIE_SKILL_GLYPH_CRUSHING =                       "Crushing Enchantment",
+    SI_LUIE_SKILL_GLYPH_DECREASE_HEALTH =                "Decrease Health",
+    SI_LUIE_SKILL_GLYPH_HARDENING =                      "Hardening Enchantment",
+    SI_LUIE_SKILL_GLYPH_WEAKENING =                      "Weakening Enchantment",
+    SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE =                  "Weapon Damage Enchantment",
+    SI_LUIE_SKILL_POISON_STEALTH_DRAIN =                 "Stealth-Draining Poison",
+    SI_LUIE_SKILL_POISON_CONSPICUOUS =                   "Conspicuous Poison",
+    SI_LUIE_SKILL_FOOD_ORZORGA_POCKET =                  "Orzorga\'s Tripe Trifle Pocket",
+    SI_LUIE_SKILL_FOOD_ORZORGA_PIE =                     "Orzorga\'s Blood Price Pie",
+    SI_LUIE_SKILL_FOOD_ORZORGA_HAUNCH =                  "Orzorga\'s Smoked Bear Haunch",
+    SI_LUIE_SKILL_FOOD_SNACK_SKEWER =                    "Crisp and Crunchy Pumpkin Snack Skewer",
+    SI_LUIE_SKILL_FOOD_FROSTED_BRAINS =                  "Frosted Brains",
+    SI_LUIE_SKILL_FOOD_MUD_BALL =                        "Jagga-Drenched \"Mud Ball\"",
+    SI_LUIE_SKILL_FOOD_LAVA_FOOT =                       "Lava Foot Soup-and-Saltrice",
+    SI_LUIE_SKILL_FOOD_CROWN_CRATE_FOOD =                "Crown Crate Fortifying Meal",
+    SI_LUIE_SKILL_FOOD_CROWN_FOOD =                      "Crown Fortifying Meal",
+    SI_LUIE_SKILL_FOOD_CROWN_STEW =                      "Crown Combat Mystic\'s Stew",
+    SI_LUIE_SKILL_FOOD_CROWN_RAGOUT =                    "Crown Vigorous Ragout",
+    SI_LUIE_SKILL_DRINK_INCREASE =                       "Increase",
+    SI_LUIE_SKILL_DRINK_ORZORGA_FROTHGAR =               "Orzorga\'s Red Frothgar",
+    SI_LUIE_SKILL_DRINK_PEELED_EYEBALLS =                "Bowl of \"Peeled Eyeballs\"",
+    SI_LUIE_SKILL_DRINK_GHASTLY_EYE_BOWL =               "Ghastly Eye Bowl",
+    SI_LUIE_SKILL_DRINK_WARNING_FIRE =                   "Bergama Warning Fire",
+    SI_LUIE_SKILL_DRINK_BETNIKH_ALE =                    "Betnikh Twice-Spiked Ale",
+    SI_LUIE_SKILL_DRINK_FISH_EYE =                       "Hissmir Fish-Eye Rye",
+    SI_LUIE_SKILL_DRINK_GLOW_WINE =                      "Snow Bear Glow-Wine",
+    SI_LUIE_SKILL_DRINK_CROWN_CRATE_DRINK =              "Crown Crate Refreshing Drink",
+    SI_LUIE_SKILL_DRINK_CROWN_DRINK =                    "Crown Refreshing Drink",
+    SI_LUIE_SKILL_DRINK_CROWN_LIQUEUR =                  "Crown Stout Magic Liqueur",
+    SI_LUIE_SKILL_DRINK_CROWN_TINCTURE =                 "Crown Vigorous Tincture",
+    SI_LUIE_SKILL_EXPERIENCE_PSIJIC_AMBROSIA =           "Psijic Ambrosia",
+    SI_LUIE_SKILL_EXPERIENCE_AETHERIAL_AMBROSIA =        "Aetherial Ambrosia",
+    SI_LUIE_SKILL_EXPERIENCE_MYTHIC_AMBROSIA =           "Mythic Aetherial Ambrosia",
+    SI_LUIE_SKILL_EXPERIENCE_CROWN_SCROLL =              "Crown Experience Scroll",
+    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_1 =      "Crown Crate Experience Scroll",
+    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2 =      "Major Crown Crate Experience Scroll",
+    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3 =      "Grand Crown Crate Experience Scroll",
+    SI_LUIE_SKILL_CONSUMABLE_FESTIVAL_MINTS =            "High Hrothgar Festival Mints",
+    SI_LUIE_SKILL_CONSUMABLE_SAILORS_GROG =              "Sailor\'s Warning Festival Grog",
+    SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT =             "Mystery Meat",
+    SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME =            "Bogdan the Nightflame",
+    SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK =                 "Lord Warden Dusk",
+    SI_LUIE_SKILL_SET_MALUBETH_THE_SCOURGER =            "Malubeth the Scourger",
+    SI_LUIE_SKILL_SET_TROLL_KING =                       "Troll King",
+    SI_LUIE_SKILL_SET_REDISTRIBUTION =                   "Redistribution",
+    SI_LUIE_SKILL_SET_ICE_FURNACE =                      "Ice Furnace",
+    SI_LUIE_SKILL_SET_COOLDOWN =                         "Cooldown", -- Used as suffix for certain abilities internal cooldown
+    SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE =              "Monk\'s Disguise",
+    SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND =              "Heavy Attack (Main Hand)",
+    SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND =               "Heavy Attack (Off Hand)",
+    SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA =       "Noxiphilic Sanguivoria",
+    SI_LUIE_SKILL_BOND_WITH_NATURE =                     "Bond with Nature",
+    SI_LUIE_SKILL_BLESSING_OF_RESTORATION =              "Blessing of Restoration",
+    SI_LUIE_SKILL_VULNERABILITY =                        "Vulnerability",
+    SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST =               "Tormentor Damage Boost",
+
+    -- NPC Skills
+    SI_LUIE_SKILL_SHIELD_RUSH =                          "Shield Rush",
+    SI_LUIE_SKILL_BLITZ =                                "Blitz",
+    SI_LUIE_SKILL_BARRELING_CHARGE =                     "Barreling Charge",
+    SI_LUIE_SKILL_ZOOM =                                 "Zoom",
+    SI_LUIE_SKILL_PLOW =                                 "Plow",
+    SI_LUIE_SKILL_ICE_BARRIER_CHILL =                    "Ice Barrier Chill",
+    SI_LUIE_SKILL_DEFENSIVE_WARD =                       "Defensive Ward",
+    SI_LUIE_SKILL_GREAT_CLEAVE =                         "Great Cleave",
+    SI_LUIE_SKILL_INSPIRE =                              "Inspire",
+    SI_LUIE_SKILL_HIDE_IN_SHADOWS =                      "Hide in Shadows",
+    SI_LUIE_SKILL_SHADOWY_BARRIER =                      "Shadowy Barrier",
+    SI_LUIE_SKILL_MIGHTY_CHARGE =                        "Mighty Charge",
+    SI_LUIE_SKILL_DETECTION =                            "Detection",
+    SI_LUIE_SKILL_IMPROVED_SHOCK_TORRENT =               "Improved Shock Torrent",
+    SI_LUIE_SKILL_SIEGE_BARRIER =                        "Siege Barrier",
+    SI_LUIE_SKILL_PUNCTURING_CHAINS =                    "Puncturing Chains",
+    SI_LUIE_SKILL_IMPROVED_VOLLEY =                      "Improved Volley",
+    SI_LUIE_SKILL_FIRE_TORRENT =                         "Fire Torrent",
+    SI_LUIE_SKILL_RIP_AND_TEAR =                         "Rip and Tear",
+    SI_LUIE_SKILL_LEECHING_BITE =                        "Leeching Bite",
+    SI_LUIE_SKILL_ZAP_PULSE =                            "Zap Pulse",
+    SI_LUIE_SKILL_FETCHERFLY_COLONY =                    "Fetcherfly Colony",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME =               "Empower Atronach: Flame",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST =               "Empower Atronach: Frost",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM =               "Empower Atronach: Storm",
+    SI_LUIE_SKILL_LIGHTNING_PULSE =                      "Lightning Pulse",
+    SI_LUIE_SKILL_COLOSSAL_STOMP =                       "Colossal Stomp",
+}
 
 -- TODO: Switch to StringId's
 CombatTextLocalization = {
@@ -2209,105 +2314,8 @@ CombatTextLocalization = {
     },
 }
 
--- ---------------------------------------------------
--- ABILITY NAME OVERRIDE LOCALIZATION ----------------
--- ---------------------------------------------------
-
---ZO_CreateStringId("SI_LUIE_SKILL_SKILLNAME",                          "")
-ZO_CreateStringId("SI_LUIE_SKILL_RECALL_PENALTY",                       "Recall Penalty")
-ZO_CreateStringId("SI_LUIE_SKILL_VANITY_PET",                           "Vanity Pet")
-ZO_CreateStringId("SI_LUIE_SKILL_MOUNTED",                              "Mounted")
-ZO_CreateStringId("SI_LUIE_SKILL_RESURRECTION_IMMUNITY",                "Resurrection Immunity")
-ZO_CreateStringId("SI_LUIE_SKILL_CROUCH_STUN",                          "Crouch Stun")
-ZO_CreateStringId("SI_LUIE_SKILL_FALL_DAMAGE",                          "Fall Damage")
-ZO_CreateStringId("SI_LUIE_SKILL_ABSORBING_SKYSHARD",                   "Absorbing Skyshard")
-ZO_CreateStringId("SI_LUIE_SKILL_RECEIVING_BOON",                       "Receiving Boon")
-ZO_CreateStringId("SI_LUIE_SKILL_MOUNT_SPRINT",                         "Gallop")
-ZO_CreateStringId("SI_LUIE_SKILL_BLOCK_STUN",                           "Block Stun")
-ZO_CreateStringId("SI_LUIE_SKILL_AYLEID_WELL",                          "Ayleid Well")
-ZO_CreateStringId("SI_LUIE_SKILL_ANCHOR_DROP",                          "Anchor Drop")
-ZO_CreateStringId("SI_LUIE_SKILL_VENGEANCE_CHARGE",                     "Vengeance Charge")
-ZO_CreateStringId("SI_LUIE_SKILL_GLYPH_CRUSHING",                       "Crushing Enchantment")
-ZO_CreateStringId("SI_LUIE_SKILL_GLYPH_DECREASE_HEALTH",                "Decrease Health")
-ZO_CreateStringId("SI_LUIE_SKILL_GLYPH_HARDENING",                      "Hardening Enchantment")
-ZO_CreateStringId("SI_LUIE_SKILL_GLYPH_WEAKENING",                      "Weakening Enchantment")
-ZO_CreateStringId("SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE",                  "Weapon Damage Enchantment")
-ZO_CreateStringId("SI_LUIE_SKILL_POISON_STEALTH_DRAIN",                 "Stealth-Draining Poison")
-ZO_CreateStringId("SI_LUIE_SKILL_POISON_CONSPICUOUS",                   "Conspicuous Poison")
-ZO_CreateStringId("SI_LUIE_SKILL_FOOD_ORZORGA_POCKET",                  "Orzorga\'s Tripe Trifle Pocket")
-ZO_CreateStringId("SI_LUIE_SKILL_FOOD_ORZORGA_PIE",                     "Orzorga\'s Blood Price Pie")
-ZO_CreateStringId("SI_LUIE_SKILL_FOOD_ORZORGA_HAUNCH",                  "Orzorga\'s Smoked Bear Haunch")
-ZO_CreateStringId("SI_LUIE_SKILL_FOOD_SNACK_SKEWER",                    "Crisp and Crunchy Pumpkin Snack Skewer")
-ZO_CreateStringId("SI_LUIE_SKILL_FOOD_FROSTED_BRAINS",                  "Frosted Brains")
-ZO_CreateStringId("SI_LUIE_SKILL_FOOD_MUD_BALL",                        "Jagga-Drenched \"Mud Ball\"")
-ZO_CreateStringId("SI_LUIE_SKILL_FOOD_LAVA_FOOT",                       "Lava Foot Soup-and-Saltrice")
-ZO_CreateStringId("SI_LUIE_SKILL_FOOD_CROWN_CRATE_FOOD",                "Crown Crate Fortifying Meal")
-ZO_CreateStringId("SI_LUIE_SKILL_FOOD_CROWN_FOOD",                      "Crown Fortifying Meal")
-ZO_CreateStringId("SI_LUIE_SKILL_FOOD_CROWN_STEW",                      "Crown Combat Mystic\'s Stew")
-ZO_CreateStringId("SI_LUIE_SKILL_FOOD_CROWN_RAGOUT",                    "Crown Vigorous Ragout")
-ZO_CreateStringId("SI_LUIE_SKILL_DRINK_INCREASE",                       "Increase")
-ZO_CreateStringId("SI_LUIE_SKILL_DRINK_ORZORGA_FROTHGAR",               "Orzorga\'s Red Frothgar")
-ZO_CreateStringId("SI_LUIE_SKILL_DRINK_PEELED_EYEBALLS",                "Bowl of \"Peeled Eyeballs\"")
-ZO_CreateStringId("SI_LUIE_SKILL_DRINK_GHASTLY_EYE_BOWL",               "Ghastly Eye Bowl")
-ZO_CreateStringId("SI_LUIE_SKILL_DRINK_WARNING_FIRE",                   "Bergama Warning Fire")
-ZO_CreateStringId("SI_LUIE_SKILL_DRINK_BETNIKH_ALE",                    "Betnikh Twice-Spiked Ale")
-ZO_CreateStringId("SI_LUIE_SKILL_DRINK_FISH_EYE",                       "Hissmir Fish-Eye Rye")
-ZO_CreateStringId("SI_LUIE_SKILL_DRINK_GLOW_WINE",                      "Snow Bear Glow-Wine")
-ZO_CreateStringId("SI_LUIE_SKILL_DRINK_CROWN_CRATE_DRINK",              "Crown Crate Refreshing Drink")
-ZO_CreateStringId("SI_LUIE_SKILL_DRINK_CROWN_DRINK",                    "Crown Refreshing Drink")
-ZO_CreateStringId("SI_LUIE_SKILL_DRINK_CROWN_LIQUEUR",                  "Crown Stout Magic Liqueur")
-ZO_CreateStringId("SI_LUIE_SKILL_DRINK_CROWN_TINCTURE",                 "Crown Vigorous Tincture")
-ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_PSIJIC_AMBROSIA",           "Psijic Ambrosia")
-ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_AETHERIAL_AMBROSIA",        "Aetherial Ambrosia")
-ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_MYTHIC_AMBROSIA",           "Mythic Aetherial Ambrosia")
-ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_CROWN_SCROLL",              "Crown Experience Scroll")
-ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_1",      "Crown Crate Experience Scroll")
-ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2",      "Major Crown Crate Experience Scroll")
-ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3",      "Grand Crown Crate Experience Scroll")
-ZO_CreateStringId("SI_LUIE_SKILL_CONSUMABLE_FESTIVAL_MINTS",            "High Hrothgar Festival Mints")
-ZO_CreateStringId("SI_LUIE_SKILL_CONSUMABLE_SAILORS_GROG",              "Sailor\'s Warning Festival Grog")
-ZO_CreateStringId("SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT",             "Mystery Meat")
-ZO_CreateStringId("SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME",            "Bogdan the Nightflame")
-ZO_CreateStringId("SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK",                 "Lord Warden Dusk")
-ZO_CreateStringId("SI_LUIE_SKILL_SET_MALUBETH_THE_SCOURGER",            "Malubeth the Scourger")
-ZO_CreateStringId("SI_LUIE_SKILL_SET_TROLL_KING",                       "Troll King")
-ZO_CreateStringId("SI_LUIE_SKILL_SET_REDISTRIBUTION",                   "Redistribution")
-ZO_CreateStringId("SI_LUIE_SKILL_SET_ICE_FURNACE",                      "Ice Furnace")
-ZO_CreateStringId("SI_LUIE_SKILL_SET_COOLDOWN",                         "Cooldown") -- Used as suffix for certain abilities internal cooldown
-ZO_CreateStringId("SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE",              "Monk\'s Disguise")
-ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND",              "Heavy Attack (Main Hand)")
-ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND",               "Heavy Attack (Off Hand)")
-ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA",       "Noxiphilic Sanguivoria")
-ZO_CreateStringId("SI_LUIE_SKILL_BOND_WITH_NATURE",                     "Bond with Nature")
-ZO_CreateStringId("SI_LUIE_SKILL_BLESSING_OF_RESTORATION",              "Blessing of Restoration")
-ZO_CreateStringId("SI_LUIE_SKILL_VULNERABILITY",                        "Vulnerability")
-ZO_CreateStringId("SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST",               "Tormentor Damage Boost")
-
--- NPC Skills
-ZO_CreateStringId("SI_LUIE_SKILL_SHIELD_RUSH",                          "Shield Rush")
-ZO_CreateStringId("SI_LUIE_SKILL_BLITZ",                                "Blitz")
-ZO_CreateStringId("SI_LUIE_SKILL_BARRELING_CHARGE",                     "Barreling Charge")
-ZO_CreateStringId("SI_LUIE_SKILL_ZOOM",                                 "Zoom")
-ZO_CreateStringId("SI_LUIE_SKILL_PLOW",                                 "Plow")
-ZO_CreateStringId("SI_LUIE_SKILL_ICE_BARRIER_CHILL",                    "Ice Barrier Chill")
-ZO_CreateStringId("SI_LUIE_SKILL_DEFENSIVE_WARD",                       "Defensive Ward")
-ZO_CreateStringId("SI_LUIE_SKILL_GREAT_CLEAVE",                         "Great Cleave")
-ZO_CreateStringId("SI_LUIE_SKILL_INSPIRE",                              "Inspire")
-ZO_CreateStringId("SI_LUIE_SKILL_HIDE_IN_SHADOWS",                      "Hide in Shadows")
-ZO_CreateStringId("SI_LUIE_SKILL_SHADOWY_BARRIER",                      "Shadowy Barrier")
-ZO_CreateStringId("SI_LUIE_SKILL_MIGHTY_CHARGE",                        "Mighty Charge")
-ZO_CreateStringId("SI_LUIE_SKILL_DETECTION",                            "Detection")
-ZO_CreateStringId("SI_LUIE_SKILL_IMPROVED_SHOCK_TORRENT",               "Improved Shock Torrent")
-ZO_CreateStringId("SI_LUIE_SKILL_SIEGE_BARRIER",                        "Siege Barrier")
-ZO_CreateStringId("SI_LUIE_SKILL_PUNCTURING_CHAINS",                    "Puncturing Chains")
-ZO_CreateStringId("SI_LUIE_SKILL_IMPROVED_VOLLEY",                      "Improved Volley")
-ZO_CreateStringId("SI_LUIE_SKILL_FIRE_TORRENT",                         "Fire Torrent")
-ZO_CreateStringId("SI_LUIE_SKILL_RIP_AND_TEAR",                         "Rip and Tear")
-ZO_CreateStringId("SI_LUIE_SKILL_LEECHING_BITE",                        "Leeching Bite")
-ZO_CreateStringId("SI_LUIE_SKILL_ZAP_PULSE",                            "Zap Pulse")
-ZO_CreateStringId("SI_LUIE_SKILL_FETCHERFLY_COLONY",                    "Fetcherfly Colony")
-ZO_CreateStringId("SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME",               "Empower Atronach: Flame")
-ZO_CreateStringId("SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST",               "Empower Atronach: Frost")
-ZO_CreateStringId("SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM",               "Empower Atronach: Storm")
-ZO_CreateStringId("SI_LUIE_SKILL_LIGHTNING_PULSE",                      "Lightning Pulse")
-ZO_CreateStringId("SI_LUIE_SKILL_COLOSSAL_STOMP",                       "Colossal Stomp")
+local pairs = pairs
+for stringId, stringValue in pairs(strings) do
+    ZO_CreateStringId(stringId, stringValue)
+    SafeAddVersion(stringId, 1)
+end
