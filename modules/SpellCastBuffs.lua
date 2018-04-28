@@ -120,8 +120,9 @@ SCB.D = {
     HideTargetBuffs                  = false,
     HideTargetDebuffs                = false,
     HideGroundEffects                = false,
-    AddExtraBuffs                    = true,
-    Consolidate                      = false,
+    ExtraBuffs                       = false,
+    ExtraConsolidate                 = false,
+    ExtraExpanded                    = false,
     ShowDebugCombat                  = false,
     ShowDebugEffect                  = false,
     ShowDebugFilter                  = false,
@@ -183,6 +184,7 @@ local g_horizSortInvert = false
 -- Some optimization
 local abilityRouting = { "player1", "player2", "ground" }
 local g_currentDisguise = GetItemId(0, 10) or 0
+local g_grimFocusCount = 0
 
 -- Double check that the slot is actually eligible for use
 local function HasFailure( slotIndex )
@@ -249,12 +251,7 @@ end
 local Effects = {
     --["Imperial Prison Item Set"]    = { 6.0, false, false, nil},
 
-    -- Dragonknight
-    [A.Skill_Dragonknight_Standard]   = { false, false, true, nil }, -- ACCURATE
-    [A.Skill_Shifting_Standard]     = { false, false, true, nil }, -- ACCURATE
-    [A.Skill_Standard_of_Might]     = { true, false, true, nil }, -- ACCURATE
-
-    -- NEEDS TO BE RESORTED STILL:
+    --[[
 
     -----------------------------------
     -- WEAPON SKILLS
@@ -264,58 +261,6 @@ local Effects = {
     [A.Skill_Volley]                = { false, false, true, 2 },
     [A.Skill_Scorched_Earth]        = { false, false, true, 2 },
     [A.Skill_Arrow_Barrage]         = { false, false, true, 2 },
-
-    -----------------------------------
-    -- SORCERER
-    -----------------------------------
-
-    -- Dark Magic
-    [A.Skill_Negate_Magic]          = { false, false, true, nil },
-    [A.Skill_Absorption_Field]      = { true , false, true, nil },  -- Values here are completely accurate
-    [A.Skill_Suppression_Field]     = { false , false, true, nil },
-
-    [A.Skill_Daedric_Mines]         = { false, false, 36, 3.5 },
-    [A.Skill_Daedric_Minefield]     = { false, false, 36, 3.5 },    -- Doesn't account for not having +20% duration passives, otherwise decently accurate
-    [A.Skill_Daedric_Tomb]          = { false, false, 36, 0.5 },    -- Decent timer otherwise
-
-    -- Daedric Summoning
-    [A.Skill_Summon_Storm_Atronach]   = { false, false, true, 0.8 },  -- Values here are completely accurate
-    [A.Skill_Greater_Storm_Atronach]  = { false, false, true, 0.8 },  -- Don't absolutely have to have this, player already gets a buff on them, but this gives us more feedback
-    [A.Skill_Summon_Charged_Atronach] = { false, false, true, 0.8 },
-
-    -- Storm Calling
-    [A.Skill_Lightning_Splash]      = { false, false, true, nil },
-    [A.Skill_Liquid_Lightning]      = { false, false, true, nil },
-    [A.Skill_Lightning_Flood]       = { false, false, true, nil },
-
-    -----------------------------------
-    -- DRAGONKNIGHT
-    -----------------------------------
-
-    -- Draonic Power
-    -- Could add inhale here eventually, gonna need to do it with a fake aura however (2.5 sec duration timer before it explodes)
-
-    -- Earthen Heart
-    [A.Skill_Ash_Cloud]             = { false, false, true, nil },
-    [A.Skill_Cinder_Storm]          = { false, false, true, nil },
-    [A.Skill_Eruption]              = { false, false, true, nil },
-
-    -- Draconic Power
-
-    -----------------------------------
-    -- NIGHTBLADE
-    -----------------------------------
-
-    -- Shadow
-    [A.Skill_Consuming_Darkness]        = { false, false, true, nil },
-    [A.Skill_Bolstering_Darkness]       = { false, false, true, nil },
-    [A.Skill_Veil_of_Blades]            = { false, false, true, nil },
-    [A.Skill_Path_of_Darkness]          = { false, false, true, nil },
-    [A.Skill_Refreshing_Path]           = { false, false, true, nil },
-    [A.Skill_Twisting_Path]             = { false, false, true, nil },
-    [A.Skill_Summon_Shade]              = { true, false, false, nil },
-    [A.Skill_Dark_Shades]               = { true, false, false, nil },
-    [A.Skill_Shadow_Image]              = { true, false, false, nil },
 
     -----------------------------------
     -- GUILDS
@@ -353,7 +298,7 @@ local Effects = {
     [A.Skill_Razor_Caltrops]        = { false, false, true, nil },
 
     --AVA Support
-    --Possibly add Siege shield here/remove active effect
+    --Possibly add Siege shield here/remove active effect ]]--
 }
 
 -- Initialization
@@ -615,6 +560,8 @@ function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGr
     -- Don't display if this aura is already added to the filter
     if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then return end
 
+    local iconFormatted = iconFormat(GetAbilityIcon(abilityId), 16, 16)
+
     local source = strformat("<<t:1>>", sourceName)
     local target = strformat("<<t:1>>", targetName)
     local ability = strformat("<<t:1>>", abilityName)
@@ -640,7 +587,7 @@ function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGr
         target = "NIL"
     end
 
-    d("["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. result)
+    d(iconFormatted .. " ["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. result)
 end
 
 -- Debug Display for Effect Events
@@ -648,6 +595,8 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then
         return
     end
+
+    local iconFormatted = iconFormat(GetAbilityIcon(abilityId), 16, 16)
 
     unitName = strformat("<<t:1>>", unitName)
     if unitName == LUIE.PlayerNameFormatted then
@@ -662,18 +611,18 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     end
 
     if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide then
-        d("|c00E200[" ..abilityId .. "] " .. effectName.. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] ".. unitName .. "|r")
+        d(iconFormatted .. "|c00E200 [" ..abilityId .. "] " .. effectName.. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] ".. unitName .. "|r")
         return
     end
 
     local duration = (endTime - beginTime) * 1000
 
     if changeType == 1 then
-        d("|c00E200Gained:|r [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
+        d("|c00E200Gained:|r " .. iconFormatted .. " [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     elseif changeType == 2 then
-        d("|c00E200Faded:|r [" .. abilityId .. "] " .. effectName .. ": [Tag] " .. unitName)
+        d("|c00E200Faded:|r " .. iconFormatted .. " [" .. abilityId .. "] " .. effectName .. ": [Tag] " .. unitName)
     else
-        d("|c00E200Refreshed:|r (" .. changeType .. ") [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
+        d("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     end
 end
 
@@ -1630,6 +1579,41 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     effectName = strformat("<<C:1>>", effectName)
     local unbreakable = 0
 
+    -- Grim Focus Stack counter
+    if E.IsGrimFocus[abilityId] or E.IsGrimFocusOverride[abilityId] then
+        local context
+        if unitTag == "player" then
+            context = { g_effectsList.player1, g_effectsList.promb_player, g_effectsList.promd_player }
+        else
+            context = { g_effectsList.reticleover1 }
+        end
+
+        -- Set stack count when Grim Focus counter changes
+        if E.IsGrimFocus[abilityId] then
+            for _, effectsList in pairs(context) do
+                for k, v in pairs(effectsList) do
+                    if E.IsGrimFocusOverride[v.id] then
+                        if changeType == EFFECT_RESULT_FADED then
+                            v.stack = 0
+                        else
+                            v.stack = stackCount
+                        end
+                    end
+                end
+            end
+        end
+
+        -- Set stack count when Grim Focus duration buff changes
+        if E.IsGrimFocusOverride[abilityId] then
+            for i = 1, GetNumBuffs(unitTag) do
+                local _, _, _, _, stack, _, _, _, _, _, abilityId = GetUnitBuffInfo(unitTag, i)
+                if E.IsGrimFocus[abilityId] then
+                    stackCount = stack
+                end
+            end
+        end
+    end
+
     if E.EffectOverride[abilityId] then
         if E.EffectOverride[abilityId].hide == true then return end
         if E.EffectOverride[abilityId].hideReduce == true and SCB.SV.HideReduce then return end
@@ -1703,13 +1687,13 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     -- Where the new icon will go into
     local context = unitTag .. effectType
 
-	if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
+	if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) and not E.EffectNoProminent[abilityId] then
 		if context == "player1" then
             context = "promd_player"
         elseif context == "reticleover2" or abilityId == 102771 then
             context = "promd_target"
         end
-	elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
+	elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) and not E.EffectNoProminent[abilityId] then
 		if context == "player1" then
             context = "promb_player"
         elseif context == "reticleover2" or abilityId == 102771 then
@@ -1781,22 +1765,27 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     end
                 end
 
-                if ( SCB.SV.AddExtraBuffs ) or ( E.EffectCreateSkillAura[abilityId].consolidate and SCB.SV.Consolidate ) or ( E.EffectCreateSkillAura[abilityId].alwaysShow ) then
-                    g_effectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].name ] = {
-                        target=unitTag, type=effectType,
-                        id = "Fake", name=E.EffectCreateSkillAura[abilityId].name, icon=E.EffectCreateSkillAura[abilityId].icon,
-                        dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                        forced=forcedType,
-                        restart=true, iconNum=0,
-                        stack = stackCount,
-                        unbreakable=unbreakable
-                    }
+                if ( SCB.SV.ExtraBuffs ) or ( E.EffectCreateSkillAura[abilityId].consolidate and SCB.SV.ExtraConsolidate ) or ( E.EffectCreateSkillAura[abilityId].alwaysShow ) then
+                    if ( not E.EffectCreateSkillAura[abilityId].extendedDisplay ) or (E.EffectCreateSkillAura[abilityId].extendedDisplay and SCB.SV.ExtraExpanded) then
+                        g_effectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].name ] = {
+                            target=unitTag, type=effectType,
+                            id = "Fake", name=E.EffectCreateSkillAura[abilityId].name, icon=E.EffectCreateSkillAura[abilityId].icon,
+                            dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                            forced=forcedType,
+                            restart=true, iconNum=0,
+                            stack = stackCount,
+                            unbreakable=unbreakable
+                        }
+                    end
                 end
             end
         end
 
-        if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].consolidate and SCB.SV.Consolidate then
-            return
+        -- If consolidate is enabled then hide the consolidated ability
+        if E.EffectOverride[abilityId] and SCB.SV.ExtraConsolidate then
+            if E.EffectOverride[abilityId].consolidate or ( E.EffectOverride[abilityId].consolidateExtra and SCB.SV.ExtraExpanded ) then
+                return
+            end
         end
         -- If this effect doesn't properly display stacks - then add them.
         if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].displayStacks then
@@ -2055,31 +2044,38 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         return
     end
 
-    if not (E.IsGroundMine[abilityName] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId]) then
+    if not (E.IsGroundMineAura[abilityId] or E.IsGroundMineDamage[abilityId] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId]) then
         return
     end
 
     -- Try to remove effect like Ground Runes and Traps (we check this before we filter for other result types)
     if E.IsGroundMineDamage[abilityId] and IsResultDamage[result] and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER or targetType == COMBAT_UNIT_TYPE_GROUP) then
-        for k, v in pairs(g_effectsList.ground) do
-            -- Check if we have a buff up a mine, if we do also compare the names to make sure they are equivalent. This prevents removing Daedric Mines with Rearming Trap for example.
-            if v.abilityId == E.IsGroundMineAura[abilityId] and v.name == abilityName then
-                if v.stack then
-                    if v.stack == 0 then
-                        g_effectsList.ground[ k ] = nil
-                    else
-                        -- Decrement stack counter
-                        v.stack = v.stack - 1
-                        -- Remove if all stacks are removed
+
+        for _, effectsList in pairs( {g_effectsList.ground, g_effectsList.promb_ground, g_effectsList.promd_ground} ) do
+            for k, v in pairs(effectsList) do
+                -- Check if we have a buff up a mine, if we do also compare the names to make sure they are equivalent. This prevents removing Daedric Mines with Rearming Trap for example.
+                if v.abilityId == E.IsGroundMineAura[abilityId] and v.name == abilityName then
+                    if v.stack then
                         if v.stack == 0 then
                             g_effectsList.ground[ k ] = nil
-                        end
-                        -- For rearming trap, once the initial damage triggers - reset the duration of the aura for the 2nd trap to be 37.5 seconds.
-                        if abilityName == A.Skill_Rearming_Trap and v.stack == 1 then
-                            local currentTime = GetGameTimeMilliseconds()
-                            v.dur = 37500
-                            v.starts = currentTime
-                            v.ends = currentTime + 37500
+                            g_effectsList.promb_ground[ k ] = nil
+                            g_effectsList.promd_ground[ k ] = nil
+                        else
+                            -- Decrement stack counter
+                            v.stack = v.stack - 1
+                            -- Remove if all stacks are removed
+                            if v.stack == 0 then
+                                g_effectsList.ground[ k ] = nil
+                                g_effectsList.promb_ground[ k ] = nil
+                                g_effectsList.promd_ground[ k ] = nil
+                            end
+                            -- For rearming trap, once the initial damage triggers - reset the duration of the aura for the 2nd trap to be 37.5 seconds.
+                            if abilityName == A.Skill_Rearming_Trap and v.stack == 1 then
+                                local currentTime = GetGameTimeMilliseconds()
+                                v.dur = 37500
+                                v.starts = currentTime
+                                v.ends = currentTime + 37500
+                            end
                         end
                     end
                 end
@@ -2797,7 +2793,6 @@ function SCB.updateIcons( currentTime, sortedList, container )
             buff:SetHidden(false)
             if not remain then
                 buff.label:SetText( E.IsToggle[effect.name] and "T" or nil )
-                -- buff.label:SetText( E.IsToggle[effect.name] and "T" or E.IsVampStage(effect) and (E.IsVampStage(effect)) or nil ) -- Deprecated
             end
 
             if buff.abilityId and effect.id then

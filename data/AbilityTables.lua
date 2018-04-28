@@ -16,7 +16,7 @@ A.Skill_Major_Vitality              = 61275
 A.Skill_Minor_Magickasteal          = 40114
 A.Skill_Minor_Sorcery               = 62799
 A.Skill_Minor_Brutality             = 61798
-A.Skill_Off_Balance                 = 2727
+A.Skill_Off_Balance                 = 14062
 A.Skill_Off_Balace_Immunity         = 102771
 
 -- ---------------------------------------------------
@@ -61,7 +61,6 @@ A.Skill_Heavy_Attack_Werewolf       = 32480 -- Heavy Attack Werewolf
 A.Skill_Heavy_Attack_Shock          = 18396 -- Heavy Attack (Shock)
 A.Skill_Heavy_Attack_Main_Hand      = GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND)
 A.Skill_Heavy_Attack_Off_Hand       = GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND)
-A.SKill_Heavy_Attack_Shock_Pulse    = GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_SHOCK_PULSE)
 
 -- ---------------------------------------------------
 -- COMSUMABLES & ITEMS -------------------------------
@@ -244,10 +243,8 @@ A.Champion_Riposte                  = 60230
 -- ---------------------------------------------------
 
 -- Sorcerer
+A.Passive_Persistence               = 31378
 A.Passive_Rebate                    = 31398
-
--- Nightblade
-A.Passive_Nightblade                = 36560
 
 -- Templar
 A.Passive_Light_Weaver              = 31760
@@ -261,7 +258,6 @@ A.Passive_Natures_Gift              = 93054
 A.Passive_Heavy_Weapons             = 29375
 A.Passive_Follow_Up                 = 29389
 A.Passive_Twin_Blade_and_Blunt      = 30893
-A.Passive_Tri_Focus_Shock           = GetString(SI_LUIE_SKILL_PASSIVE_TRI_FOCUS_SHOCK)
 A.Passive_Destruction_Expert        = 30965
 A.Passive_Soul_Summons              = 39269
 
@@ -279,26 +275,80 @@ A.Passive_Red_Diamond               = 36155
 -- Dragonknight
 
 A.Skill_Power_Lash                  = 20824
-
-A.Skill_Shackle                     = 32905
+A.Skill_Fiery_Grip                  = 20492
+A.Skill_Fiery_Breath                = 20917
+A.Skill_Inferno                     = 28967
+A.Skill_Flames_of_Oblivion          = 32853
+A.Skill_Cauterize                   = 32881
 A.Skill_Standard_of_Might           = 32947
-
+A.Skill_Shackle                     = 32905
 A.Skill_Spiked_Armor                = 20319
-A.Skill_Hardened_Armor              = 20328
-A.Skill_Volatile_Armor              = 20323
-
-
-A.Skill_Dragon_Blood                = 29004 -- TODO: Move + check if best ID to use later
-A.Skill_Fiery_Grip                  = 20492 -- TODO: Move + check if best ID to use later
-A.Skill_Stonefist                   = 29032 -- TODO: Move + check if best ID to use later
-A.Skill_Fiery_Breath                = 20917 -- TODO: Move + check if best ID to use later
+A.Skill_Dragon_Blood                = 29004
+A.Skill_Green_Dragon_Blood          = 32744
+A.Skill_Coagulating_Blood           = 32722
+A.Skill_Inhale                      = 31837
+A.Skill_Stonefist                   = 29032
+A.Skill_Stone_Giant                 = 31816
+A.Skill_Molten_Weapons              = 29043
+A.Skill_Igneous_Weapons             = 31874
+A.Skill_Shattering_Rocks            = 32678
 
 -- Nightblade
-A.Skill_Siphoning_Strikes           = 33319 -- TODO: Check if this is the best ID to use later
+A.Skill_Blur                        = 33375
+A.Skill_Mirage                      = 35414
+A.Skill_Double_Take                 = 35419
+A.Skill_Piercing_Mark               = 36968
+A.Skill_Assassins_Will              = 61907
+A.Skill_Assassins_Scourge           = 61932
+A.Skill_Vulnerability               = GetString(SI_LUIE_SKILL_VULNERABILITY)
+A.Skill_Death_Stroke                = 33398
+A.Skill_Incapacitating_Strike       = 36508
+A.Skill_Soul_Harvest                = 36514
+A.Skill_Refreshing_Path             = 36028
+A.Skill_Aspect_of_Terror            = 25352
+A.Skill_Manifestation_of_Terror     = 37475
+A.Skill_Corrode                     = 89010
+A.Skill_Dark_Shade                  = 35434
+A.Skill_Shadow_Image                = 35441
+A.Skill_Crippling_Grasp             = 36957
+A.Skill_Siphoning_Strikes           = 33319
+A.Skill_Drain_Power                 = 33316
+A.Skill_Power_Extraction            = 36901
+A.Skill_Sap_Essence                 = 36891
+A.Skill_Soul_Tether                 = 35460
 
 -- Sorcerer
-A.Skill_Crystal_Shard               = 43714 -- TODO: Check if this is the best ID to use later
-A.Skill_Crystal_Blast               = 46331 -- TODO: Check if this is the best ID to use later
+A.Skill_Crystal_Shard               = 43714
+A.Skill_Crystal_Blast               = 46331
+A.Skill_Crystal_Fragments           = 46324
+A.Skill_Rune_Cage                   = 24578
+A.Skill_Dark_Exchange               = 24584
+A.Skill_Dark_Deal                   = 24595
+A.Skill_Dark_Conversion             = 24589
+A.Skill_Daedric_Tomb                = 24842
+A.Skill_Daedric_Minefield           = 24834
+A.Skill_Unstable_Familiar           = 23304
+A.Skill_Unstable_Clannfear          = 23319
+A.Skill_Volatile_Familiar           = 23316
+A.Skill_Familiar_Damage_Pulse       = 108844
+A.Skill_Summon_Winged_Twilight      = 24613
+A.Skill_Summon_Twilight_Tormentor   = 24636
+A.Skill_Summon_Twilight_Matriarch   = 24639
+A.Skill_Winged_Twilight_Restore     = 108845
+A.Skill_Tormentor_Damage_Boost      = GetString(SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST)
+A.Skill_Twilight_Matriarch_Restore  = 77369
+A.Skill_Bound_Aegis                 = 24163
+A.Skill_Atronach_Zap                = 23428
+A.Skill_Greater_Storm_Atronach      = 23492
+A.Skill_Summon_Charged_Atronach     = 23495
+A.Skill_Mages_Fury                  = 18718
+A.Skill_Mages_Wrath                 = 19123
+A.Skill_Endless_Fury                = 19109
+A.Skill_Critical_Surge              = 23678
+A.Skill_Overload                    = 24785
+A.Skill_Power_Overload              = 24806
+A.Skill_Energy_Overload             = 24804
+A.Skill_Overload_Heavy_Attack       = 24794
 
 -- Templar
 A.Skill_Puncturing_Sweep            = 26797
@@ -309,7 +359,6 @@ A.Skill_Crescent_Sweep              = 22139
 A.Skill_Purifying_Light             = 21765
 A.Skill_Unstable_Core               = 22004
 A.Skill_Radiant_Glory               = 63044
-A.Skill_Radiant_Oppression          = 63046
 A.Skill_Solar_Disturbance           = 21758
 
 A.Skill_Restoring_Aura              = 26209
@@ -318,7 +367,6 @@ A.Skill_Cleansing_Ritual            = 22265
 A.Skill_Rune_Focus                  = 22234
 A.Skill_Channeled_Focus             = 22240
 A.Skill_Restoring_Focus             = 22237
-
 A.Skill_Rite_Of_Passage             = 22223
 A.Skill_Remembrance                 = 22229
 A.Skill_Practiced_Incantation       = 22226
@@ -334,7 +382,6 @@ A.Skill_Feral_Guardian              = 85982 -- TODO: Check if this is the best I
 A.Skill_Blessing_of_Protection      = 37243
 A.Skill_Blessing_of_Restoration     = GetString(SI_LUIE_SKILL_BLESSING_OF_RESTORATION)
 A.Skill_Combat_Prayer               = 40094
-A.Skill_Healing_Ward                = 40126
 A.Skill_Force_Siphon                = 31531
 A.Skill_Siphon_Spirit               = 40109
 A.Skill_Quick_Siphon                = 40116
@@ -344,19 +391,20 @@ A.Skill_Crushing_Shock              = 46348
 --A.Skill_Wall_of_Frost             = 28849
 --A.Skill_Unstable_Wall_of_Frost    = 39067
 --A.Skill_Blockade_of_Frost         = 39028
+A.Skill_Frozen                      = 68719
 A.Skill_Flame_Touch                 = 29073
 A.Skill_Frost_Touch                 = 29078
-A.Skill_Frozen                      = 68719
 A.Skill_Flame_Clench                = 38985
 A.Skill_Shock_Clench                = 38993
 A.Skill_Frost_Clench                = 38989
+
 A.Skill_Flame_Reach                 = 38944
-A.Skill_Frost_Reach                 = 38970
 A.Skill_Shock_Reach                 = 38978
+A.Skill_Frost_Reach                 = 38970
+
 A.Skill_Weakness_to_Elements        = 29173
 A.Skill_Elemental_Susceptibility    = 39089
 A.Skill_Elemental_Drain             = 39095
-A.Skill_Shock_Pulsar                = 89844
 
 -- One Hand & Shield
 A.Skill_Shield_Charge               = 28719 -- TODO: Check is best ID to use
@@ -581,51 +629,6 @@ A.Skill_Snipe                    = 28882
 A.Skill_Focused_Aim              = 38687
 A.Skill_Lethal_Arrow             = 38685
 
--- DESTRUCTION STAFF --------
-A.Skill_Destructive_Touch        = 29091
-A.Skill_Shock_Touch              = 40970
-A.Skill_Flame_Touch              = 40965
-A.Skill_Destructive_Clench       = 38984
-A.Skill_Shock_Clench             = 41016
-A.Skill_Flame_Clench             = 38985
-A.Skill_Destructive_Reach        = 38937
-A.Skill_Shock_Reach              = 38978
-
-A.Skill_Flame_Reach              = 38944
-A.Skill_Wall_of_Elements         = 28858
-A.Skill_Wall_of_Fire             = 28807
-A.Skill_Wall_of_Storms           = 28854
-A.Skill_Wall_of_Cinders          = 50228
-A.Skill_Unstable_Wall_of_Elements = 39052
-A.Skill_Unstable_Wall_of_Fire    = 39053
-A.Skill_Unstable_Wall_of_Storms  = 39073
-A.Skill_Unstable_Wall_of_Cinders = 50240
-A.Skill_Elemental_Blockade       = 39011
-A.Skill_Blockade_of_Fire         = 39012
-A.Skill_Blockade_of_Storms       = 39018
-A.Skill_Blockade_of_Cinders      = 50236
-A.Skill_Elemental_Ring           = 39143
-A.Skill_Fire_Ring                = 39145
-A.Skill_Frost_Ring               = 39146
-A.Skill_Shock_Ring               = 39147
-A.Skill_Pulsar                   = 39161
-A.Skill_Fiery_Pulsar             = 39162
-A.Skill_Icy_Pulsar               = 39163
-A.Skill_Electric_Pulsar          = 39167
-A.Skill_Wall_of_Fire             = 41659 -- Unmorphed Wall of Element Variations
-A.Skill_Wall_Of_Storms           = 41668 -- Unmorphed Wall of Element Variations
-A.Skill_Wall_of_Frost            = 41663 -- Unmorphed Wall of Element Variations
-
--- RESTORATION STAFF --------
-A.Skill_Grand_Healing            = 28385
-A.Skill_Healing_Springs          = 40060
-A.Skill_Illustrious_Healing      = 40058
-A.Skill_Regeneration             = 28536
-A.Skill_Mutagen                  = 40079
-A.Skill_Rapid_Regeneration       = 40076
-A.Skill_Steadfast_Ward           = 31639
-A.Skill_Ward_Ally                = 40130
-
 -- ---------------------------------------------------
 -- ARMOUR --------------------------------------------
 -- ---------------------------------------------------
@@ -648,16 +651,6 @@ A.Skill_Unstoppable              = 39197
 -- ---------------------------------------------------
 -- GUILDS --------------------------------------------
 -- ---------------------------------------------------
-
--- FIGHTERS GUILD -----------
-A.Skill_Dawnbreaker              = 35713
-A.Skill_Dawnbreaker_of_Smiting   = 40158
-A.Skill_Flawless_Dawnbreaker     = 40161
-A.Skill_Silver_Bolts             = 35721
-A.Skill_Silver_Shards            = 40300
-A.Skill_Expert_Hunter            = 35762
-A.Skill_Evil_Hunter              = 40194
-A.Skill_Camouflaged_Hunter       = 40195
 
 -- MAGES GUILD --------------
 A.Skill_Meteor                   = 16536
@@ -752,172 +745,6 @@ A.Skill_Siege_Weapon_Shield      = 40229
 A.Skill_Purge                    = 38571
 A.Skill_Cleanse                  = 40234
 A.Skill_Efficient_Purge          = 40232
--- ADD GUARD
--- ADD FLARE
-
--- ---------------------------------------------------
--- CLASS: DRAGONKNIGHT -------------------------------
--- ---------------------------------------------------
-
--- ARDENT FLAME -------------
-A.Skill_Dragonknight_Standard    = 28988
-A.Skill_Shifting_Standard        = 32958
-A.Skill_Shift_Standard           = 32963
-A.Skill_Unrelenting_Chains       = 20499
-A.Skill_Searing_Strike           = 20657
-A.Skill_Venmous_Claw             = 20668
-A.Skill_Burning_Embers           = 20660
-A.Skill_Noxious_Breath           = 20944
-A.Skill_Engulfing_Flames         = 20930
-A.Skill_Inferno                  = 25954
-A.Skill_Flames_Of_Oblivion       = 32853
-A.Skill_Cauterize                = 32881
-
--- DRACONIC POWER -----------
-A.Skill_Ferocious_Leap           = 32715
-A.Skill_Dark_Talons              = 20245
-A.Skill_Burning_Talons           = 20252
-A.Skill_Choking_Talons           = 20251
-A.Skill_Green_Dragon_Blood       = 32744
-A.Skill_Coagulating_Blood        = 32722
-A.Skill_Reflective_Scale         = 21007
-A.Skill_Reflective_Plate         = 21014
-A.Skill_Dragon_Fire_Scale        = 21017
-A.Skill_Inhale                   = 31837
-A.Skill_Deep_Breath              = 18021
-A.Skill_Draw_Essence             = 32785
-
--- EARTHEN HEART ------------
-A.Skill_Magma_Armor              = 15957
-A.Skill_Magma_Shell              = 17874
-A.Skill_Corrosive_Armor          = 17878
-A.Skill_Obsidian_Shard           = 31820
-A.Skill_Stone_Giant              = 31816
-A.Skill_Obsidian_Shield          = 29071
-A.Skill_Fragmented_Shield        = 32673
-A.Skill_Igneous_Shield           = 29224
-A.Skill_Petrify                  = 29037
-A.Skill_Fossilize                = 32685
-A.Skill_Shattering_Rocks         = 32678
-A.Skill_Ash_Cloud                = 29059
-A.Skill_Cinder_Storm             = 20779
-A.Skill_Eruption                 = 32710
-
--- ---------------------------------------------------
--- CLASS: SORCERER -----------------------------------
--- ---------------------------------------------------
-
--- DAEDRIC SUMMONING --------
-A.Skill_Summon_Storm_Atronach    = 23634
-A.Skill_Greater_Storm_Atronach   = 23492
-A.Skill_Summon_Charged_Atronach  = 23495
-A.Effect_Atronach                = 23659
-A.Effect_Atronach_Zap            = 23428
-A.Skill_Daedric_Curse            = 24326
-A.Skill_Daedric_Prey             = 63210 -- 24328
-A.Skill_Velocious_Curse          = 24330
-A.Skill_Conjured_Ward            = 28418
-A.Skill_Empowered_Ward           = 29482
-A.Skill_Hardened_Ward            = 29489
-
--- DARK MAGIC ---------------
-A.Skill_Negate_Magic             = 27706
-A.Skill_Absorption_Field         = 28348
-A.Skill_Suppression_Field        = 28341
-A.Skill_Crystal_Fragments        = 46324
-A.Skill_Encase                   = 28025
-A.Skill_Restraining_Prison       = 28311
-A.Skill_Shattering_Prison        = 28308
-A.Skill_Rune_Prison              = 24371
-A.Skill_Rune_Cage                = 24578
-A.Skill_Defensive_Rune           = 24574
-A.Skill_Dark_Exchange            = 24584
-A.Effect_Dark_Exchange_Heal      = 24587
-A.Skill_Dark_Conversion          = 24589
-A.Skill_Dark_Deal                = 24595
-A.Skill_Daedric_Mines            = 24828
-A.Skill_Daedric_Minefield        = 24834
-A.Skill_Daedric_Tomb             = 24842
-
--- STORM CALLING ------------
-A.Skill_Mages_Fury               = 18718
-A.Skill_Endless_Fury             = 19109
-A.Skill_Mages_Wrath              = 19123
-A.Skill_Lightning_Form           = 23210
-A.Skill_Boundless_Storm          = 23213
-A.Skill_Thundering_Presence      = 23231
-A.Skill_Lightning_Splash         = 23182
-A.Skill_Liquid_Lightning         = 23200
-A.Skill_Lightning_Flood          = 23205
-A.Skill_Surge                    = 23670
-A.Effect_Surge_Heal              = 23682
-A.Skill_Critical_Surge           = 23678
-A.Skill_Power_Surge              = 23674
-A.Skill_Bolt_Escape              = 23234
-A.Skill_Ball_of_Lightning        = 23277
-A.Skill_Streak                   = 23236
-A.Skill_Yesss                    = 30432
-A.Skill_Bound_Armor              = 30445
-
--- ---------------------------------------------------
--- CLASS: NIGHTBLADE ---------------------------------
--- ---------------------------------------------------
-
--- ASSASSINATION ------------
-A.Skill_Teleport_Strike          = 18342
-A.Skill_Ambush                   = 25484
-A.Skill_Lotus_Fan                = 25493
-A.Skill_Blur                     = 33375
-A.Skill_Double_Take              = 35419
-A.Skill_Mirage                   = 35414
-A.Skill_Mark_Target              = 33357
-A.Skill_Piercing_Mark            = 36968
-A.Skill_Reapers_Mark             = 36967
-A.Skill_Grim_Focus               = 61902
-A.Skill_Relentless_Focus         = 61927
-A.Skill_Merciless_Resolve        = 61919
-A.Skill_Death_Stroke             = 33398
-A.Skill_Incapacitating_Strike    = 36508
-A.Skill_Soul_Harvest             = 36514
-
--- SHADOW -------------------
-A.Skill_Consuming_Darkness       = 25411
-A.Skill_Bolstering_Darkness      = 36493
-A.Skill_Veil_of_Blades           = 36485
-A.Skill_Shadow_Cloak             = 25375
-A.Skill_Shadowy_Disguise         = 25380
-A.Skill_Dark_Cloak               = 25377
-A.Skill_Veiled_Strike            = 25255
-A.Skill_Concealed_Weapon         = 25267
-A.Skill_Surprise_Attack          = 25260
-A.Skill_Path_of_Darkness         = 33195
-A.Skill_Refreshing_Path          = 36028
-A.Skill_Twisting_Path            = 36049
-A.Skill_Aspect_of_Terror         = 25352
-A.Skill_Mass_Hysteria            = 37470
-A.Skill_Manifestation_of_Terror  = 37475
-A.Skill_Summon_Shade             = 33211
-A.Skill_Dark_Shades              = 35434
-A.Skill_Shadow_Image             = 35441
-
--- SIPHONING ----------------
-A.Skill_Soul_Shred               = 25091
-A.Skill_Soul_Siphon              = 35508
-A.Skill_Soul_Tether              = 35460
-A.Skill_Strife                   = 33291
-A.Skill_Funnel_Health            = 34838
-A.Skill_Swallow_Soul             = 34835
-A.Skill_Agony                    = 33308
-A.Skill_Malefic_Wreath           = 34727
-A.Skill_Prolonged_Suffering      = 34721
-A.Skill_Cripple                  = 33326
-A.Skill_Crippling_Grasp          = 36957
-A.Skill_Debilitate               = 36943
-A.Skill_Siphoning_Strikes        = 37977
-A.Skill_Siphoning_Attacks        = 38050
-A.Skill_Drain_Power              = 33316
-A.Skill_Power_Extraction         = 36901
-A.Skill_Sap_Essence              = 36891
 
 -- ---------------------------------------------------
 -- CLASS: TEMPLAR ------------------------------------
@@ -962,21 +789,10 @@ A.Skill_Purifying_Ritual         = 22259
 -- TOGGLED EFFECTS -----------------------------------
 -- ---------------------------------------------------
 
-A.Toggled_Unstable_Familiar         = 23304 -- Summon Unstable Familiar (Sorcerer)
-A.Toggled_Unstable_Clannfear        = 23319 -- Summon Unstable Clannfear (Sorcerer)
-A.Toggled_Volatile_Familiar         = 23316 -- Summon Volatile Familiar (Sorcerer)
-A.Toggled_Summon_Winged_Twilight    = 24613 -- Summon Winged Twilight (Sorcerer)
-A.Toggled_Summon_Twilight_Tormentor = 24636 -- Summon Twilight Tormentor (Sorcerer)
-A.Toggled_Summon_Twilight_Matriarch = 24639 -- Summon Twilight Matriarch (Sorcerer)
-A.Toggled_Bound_Armor               = 24158 -- Bound Armor (Sorcerer)
-A.Toggled_Bound_Armaments           = 24165 -- Bound Armaments (Sorcerer)
-A.Toggled_Bound_Aegis               = 24163 -- Bound Aegis (Sorcerer)
-A.Toggled_Overload                  = 24785 -- Overload (Sorcerer)
-A.Toggled_Energy_Overload           = 24804 -- Energy Overload (Sorcerer)
-A.Toggled_Power_Overload            = 24806 -- Power Overload (Sorcerer)
-A.Toggled_Guard                     = 63318 -- Guard (Support)
-A.Toggled_Mystic_Guard              = 63335 -- Mystic Guard (Support)
-A.Toggled_Stalwart_Guard            = 63351 -- Stalwart Guard (Support)
+-- TODO: Don't delete - move later
+A.Skill_Guard                     = 63318 -- Guard (Support)
+A.Skill_Mystic_Guard              = 63335 -- Mystic Guard (Support)
+A.Skill_Stalwart_Guard            = 63351 -- Stalwart Guard (Support)
 
 -- ---------------------------------------------------
 -- DAMAGE SHIELDS ------------------------------------
@@ -1033,9 +849,6 @@ A.VampLycan_Sanies_Lupinus          = 31068
 -- ---------------------------------------------------
 
 A.Trigger_Might_of_the_Guild        = 43561
-A.Trigger_Crystal_Fragments_Proc    = 46327 --64159
-A.Trigger_Assassins_Will            = 61907
-A.Trigger_Assassins_Scourge         = 61932
 
 -- ---------------------------------------------------
 -- MUNDUS STONES -------------------------------------
@@ -1060,35 +873,11 @@ A.Boon_Tower                        = 13985
 -- ---------------------------------------------------
 
 A.Passive_SoulSummons               = 39269
---A.Passive_Intercept               = 23284
 A.Passive_SoulSiphoner              = 36603
-
-
--- ---------------------------------------------------
--- EQUIPMENT SETS EFFECTS ----------------------------
--- ---------------------------------------------------
-
---A.Equip_Torugs_Pact                 = 32759
---A.Equip_Hist_Bark                   = 32781
---A.Equip_Master                      = 61851
---A.Equip_Phoenix                     = 68933
---A.Equip_Para_Bellum                 = 71193
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------
 -- ---------------------------------------------------
-
-A.Skill_Overload_Light_Attack       = 24792
-A.Skill_Overload_Heavy_Attack       = 24794
-A.Skill_Familiar_Melee              = 27850
-A.Skill_Zap                         = 8429
-A.Skill_Kick                        = 4125
-A.Effect_Burning                    = 1339
-A.Effect_Explosion                  = 8041
-A.Effect_Poisoned                   = 776
-A.Effect_Diseased                   = 21925
-A.Effect_Bleeding                   = 8398
-A.Effect_Armor_Shatter              = 75071
 
 -- Sanctum Ophidia
 A.Effect_Magicka_Bomb               = 59036

@@ -1,4 +1,4 @@
-# Lui Extended [![GitHub license](https://img.shields.io/github/license/ArtOfShred/LuiExtended.svg)](https://github.com/ArtOfShred/LuiExtended/blob/master/LICENSE)
+# Lui Extended [![Current Release](https://img.shields.io/github/release/ArtOfShred/LuiExtended.svg)](https://github.com/ArtOfShred/LuiExtended/releases) [![GitHub license](https://img.shields.io/github/license/ArtOfShred/LuiExtended.svg)](https://github.com/ArtOfShred/LuiExtended/blob/master/LICENSE)
 
 LUI Extended is an addon that adds multiple custom components including
 - **Unit Frames** - Custom Unitframes for Player/Target, Group, Raid, and Bosses. Color group and raid frames by Class or Role, track power changes, armor changes, and dots with animations on the frame.

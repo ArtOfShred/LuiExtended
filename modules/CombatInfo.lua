@@ -41,7 +41,7 @@ CI.D = {
     ProcEnableSound                  = true,
     ProcSoundName                    = "Death Recap Killing Blow",
     ShowToggled                      = true,
-    ShowToggledUltimate              = false,
+    ShowToggledUltimate              = true,
     ShowToggledSecondary             = false,
     BarShowLabel                     = true,
     BarLabelPosition                 = -20,
@@ -78,7 +78,7 @@ local g_pendingGroundAbility = nil
 local g_barFont
 local g_potionFont
 local g_ultimateFont
-local g_g_ProcSound
+local g_ProcSound
 local g_barOverrideCI        = {} -- Table for storing abilityId's from E.BarHighlightOverride that should show as an aura (Created on initialization)
 local g_barFakeAura          = {} -- Table for storing abilityId's that only display a fakeaura (Created on initialization)
 local g_barDurationOverride  = {} -- Table for storing abilitiyId's that ignore ending event (Created on initialization)
@@ -104,18 +104,6 @@ local uiUltimate = {
     },
     FadeTime = 0,
     NotFull = false,
-}
-
-local IsAbilityProc = {
-    [A.Skill_Tighten]               = true,
-    [A.Skill_Power_Lash]            = true,
-    [A.Trigger_Assassins_Will]      = true,
-    [A.Trigger_Assassins_Scourge]   = true,
-    --[L.Trigger_Deadly_Throw]      = true,
-}
-
-local HasAbilityProc = {
-    [A.Skill_Crystal_Fragments]     = 46327, -- Trigger_Crystal_Fragments_Passive
 }
 
 local CooldownMethod = {
@@ -313,33 +301,17 @@ function CI.GetAbilityDuration(abilityId)
     return duration
 end
 
--- Clear and then (maybe) re-register event listeners for Combat/Power/Slot Updates
-function CI.RegisterCombatInfo()
-    eventManager:RegisterForUpdate(moduleName, 100, CI.OnUpdate )
-    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CI.OnPlayerActivated )
+function CI.UpdateBarHighlightTables()
 
-    eventManager:UnregisterForEvent(moduleName, EVENT_COMBAT_EVENT )
-    eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE )
-    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE )
-    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED )
-    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
-    if CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
-        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
-        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
-        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_BLOCKED_DAMAGE)
-        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)
-        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, CI.OnPowerUpdatePlayer)
-        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player" )
+    local counter = 0
+    for abilityId, _ in pairs (g_barOverrideCI) do
+        counter = counter + 1
+        local eventName = (moduleName .. "LUIE_CI_CombatEventBar" .. counter)
+        eventManager:UnregisterForEvent(eventName, EVENT_COMBAT_EVENT, CI.OnCombatEventBar)
     end
-    if CI.SV.ShowTriggered or CI.SV.ShowToggled or CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE, CI.OnSlotsFullUpdate)
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, CI.OnSlotUpdated)
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED, CI.OnSlotAbilityUsed)
-    end
+
     if CI.SV.ShowTriggered or CI.SV.ShowToggled then
-        eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
-        eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.OnEffectChanged)
-        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, CI.InventoryItemUsed)
+        LUIE.Effects.BarHighlightRefresh()
 
         -- Grab any aura's from the list that have on EVENT_COMBAT_EVENT AURA support
         for abilityId, value in pairs (E.BarHighlightOverride) do
@@ -380,6 +352,39 @@ function CI.RegisterCombatInfo()
             -- Register filter for specific abilityId's in table only, and filter for source = player, no errors
             eventManager:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false )
         end
+    end
+end
+
+-- Clear and then (maybe) re-register event listeners for Combat/Power/Slot Updates
+function CI.RegisterCombatInfo()
+    eventManager:RegisterForUpdate(moduleName, 100, CI.OnUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CI.OnPlayerActivated )
+
+    eventManager:UnregisterForEvent(moduleName, EVENT_COMBAT_EVENT )
+    eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE )
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE )
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED )
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
+    if CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
+        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
+        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
+        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_BLOCKED_DAMAGE)
+        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)
+        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, CI.OnPowerUpdatePlayer)
+        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player" )
+    end
+    if CI.SV.ShowTriggered or CI.SV.ShowToggled or CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE, CI.OnSlotsFullUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, CI.OnSlotUpdated)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED, CI.OnSlotAbilityUsed)
+    end
+    if CI.SV.ShowTriggered or CI.SV.ShowToggled then
+        eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
+        eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.OnEffectChanged)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, CI.InventoryItemUsed)
+
+        -- Setup bar highlight
+        CI.UpdateBarHighlightTables()
     end
 end
 
@@ -827,8 +832,8 @@ function CI.OnSlotUpdated(eventCode, slotNum)
     }
 
     -- Check if currently this ability is in proc state
-    local proc = HasAbilityProc[abilityName]
-    if IsAbilityProc[abilityName] then
+    local proc = E.HasAbilityProc[abilityName]
+    if E.IsAbilityProc[abilityName] then
         if CI.SV.ShowTriggered then
             CI.PlayProcAnimations(slotNum)
         end

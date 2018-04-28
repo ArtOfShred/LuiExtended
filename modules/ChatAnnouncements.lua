@@ -6331,7 +6331,7 @@ function CA.HookFunction()
     ZO_PreHook(alertHandlers, EVENT_TRADE_SUCCEEDED, TradeSucceededAlert)
     ZO_PreHook(alertHandlers, EVENT_MAIL_SEND_FAILED, MailSendFailedAlert)
 
-    local csaHandlers = ZO_CenterScreenAnnounce_GetHandlers()
+    local csaHandlers = ZO_CenterScreenAnnounce_GetCallbackHandlers()
 
     local chatHandlers = ZO_ChatSystem_GetEventHandlers()
 

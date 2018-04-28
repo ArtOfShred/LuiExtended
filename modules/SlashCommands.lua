@@ -931,6 +931,31 @@ function LUIE.SlashReadyCheck()
     ZO_SendReadyCheck()
 end
 
+-- Temporary Development function
+function LUIE.SlashConsolidate()
+    local consolidate = LUIE.SpellCastBuffs.SV.ExtraConsolidate
+    if consolidate == true then
+        LUIE.SpellCastBuffs.SV.ExtraConsolidate = false
+        d("OFF - Consolidate")
+    elseif consolidate == false then
+        LUIE.SpellCastBuffs.SV.ExtraConsolidate = true
+        d("ON - Consolidate")
+    end
+    LUIE.SpellCastBuffs.ReloadEffects()
+end
+
+function LUIE.SlashExtraExpanded()
+    local extra = LUIE.SpellCastBuffs.SV.ExtraExpanded
+    if extra == true then
+        LUIE.SpellCastBuffs.SV.ExtraExpanded = false
+        d("OFF - Expanded Extra Buffs")
+    elseif extra == false then
+        LUIE.SpellCastBuffs.SV.ExtraExpanded = true
+        d("ON - Expanded Extra Buffs")
+    end
+    LUIE.SpellCastBuffs.ReloadEffects()
+end
+
 function SC.RegisterSlashCommands()
     -- Clear commands list
     SLASH_COMMANDS["/home"]         = nil
@@ -972,7 +997,12 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/fence"]        = nil
     SLASH_COMMANDS["/ready"]        = nil
     SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck
+
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
+
+    -- TEMPORARY DEVELOPMENT
+    SLASH_COMMANDS["/ct"]           = LUIE.SlashConsolidate
+    SLASH_COMMANDS["/ce"]           = LUIE.SlashExtraExpanded
 
     -- Add commands based off menu options
     if SC.SV.SlashHome then
