@@ -145,7 +145,7 @@ local strings = {
     SI_LUIE_CA_PLAYER_TO_PLAYER_ALREADY_FRIEND =         "Вы уже в друзьях с игроком |cFEFEFE<<1>>|r.", -- TODO: Unused - This should have a content though?
     SI_LUIE_CA_GROUP_INVITE_MENU =                       "Вы пригласили игрока |cFEFEFE<<1>>|r в вашу группу.",
     SI_LUIE_CA_GROUP_INVITE_NONAME =                     "Вы должны ввести аккаунт или имя персонажа, чтобы пригласить его в группу.",
-    SI_LUIE_CA_GROUPINVITERESPONSE0 =                    "Не удаётся найти игрока по имени \"|cFEFEFE<<1>>|r\ = чтобы пригласить.",
+    SI_LUIE_CA_GROUPINVITERESPONSE0 =                    "Не удаётся найти игрока по имени \"|cFEFEFE<<1>>|r\" чтобы пригласить.",
     SI_LUIE_CA_GROUPINVITERESPONSE1 =                    "|cFEFEFE<<1>>|r принял ваше приглашение в группу.",
     SI_LUIE_CA_GROUPINVITERESPONSE2 =                    "|cFEFEFE<<1>>|r отклонил ваше приглашение в группу.",
     SI_LUIE_CA_GROUPINVITERESPONSE3 =                    "|cFEFEFE<<1>>|r игнорирует вас. Вы не можете послать ему приглашение.",
