@@ -3267,7 +3267,7 @@ function UF.DefaultFramesApplyFont(unitTag)
     -- First try selecting font face
     local fontName = LUIE.Fonts[UF.SV.DefaultFontFace]
     if not fontName or fontName == "" then
-        d("LUIE_CustomFrames: There was a problem with selecting required font. Falling back to game default.")
+        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
         fontName = "$(BOLD_FONT)"
     end
 
