@@ -46,7 +46,6 @@ E.IsToggle = {
 }
 
 E.IsAbilityProc = {
-    [A.Skill_Tighten]             = true,
     [A.Skill_Power_Lash]          = true,
     [A.Skill_Assassins_Will]      = true,
     [A.Skill_Assassins_Scourge]   = true,
@@ -914,7 +913,9 @@ E.BarHighlightOverride = {
     -- Fighters Guild --------
     ---------------------------
 
-    [40342] = { newId = 40345 }, -- Tighten (Silver Leash - Rank 1)
+    [35721] = { newId = 35736 }, -- Silver Bolts
+    [40300] = { newId = 40302 }, -- Silver Shards
+    [40336] = { newId = 40340 }, -- Silver Leash
 
     [35750] = { newId = 68595, showFakeAura = true }, -- Trap Beast (Trap Beast - Rank 1)
     [40382] = { newId = 68632, showFakeAura = true }, -- Rearming Trap (Rearming Trap - Rank 1)
@@ -1035,9 +1036,6 @@ E.BarNameOverride = {
     -- Nightblade
     [A.Skill_Assassins_Will] = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', -- Assassin's Will (Grim Focus + Merciless Resolve)
     [A.Skill_Assassins_Scourge] = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', -- Assassin's Scourge (Grim Focus + Merciless Resolve)
-
-    -- Fighters Guild
-    [A.Skill_Tighten] = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds', -- Tighten (Silver Leash)
 
 }
 
@@ -3119,19 +3117,19 @@ E.EffectOverride = {
     -- FIGHTERS GUILD ACTIVE ABILITIES ----------------------------
     ----------------------------------------------------------------
 
-    [40340] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds', name = A.Skill_Silver_Leash }, -- Silver Bolts (Silver Leash - Rank 1)
-    [42102] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds', unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Silver Leash (Silver Leash - Rank 1)
-    [40342] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds' }, -- Tighten (Silver Leash - Rank 1)
-    [40344] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds' }, -- Tighten (Silver Leash - Rank 1)
+    [40340] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds' }, -- Silver Leash (Silver Leash - Rank 1)
+    [109354] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds' }, -- Silver Leash (Silver Leash - Rank 1)
 
     [80271] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Circle of Protection - Rank 1)
     [35739] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Circle of Protection - Rank 1)
-
     [80276] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Turn Undead - Rank 1)
     [40185] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Turn Undead - Rank 1)
-
     [80284] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Ring of Preservation - Rank 1)
     [40171] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Ring of Preservation - Rank 1)
+
+    [80307] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Expert Hunter (Expert Hunter)
+    [80381] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Evil Hunter (Evil Hunter)
+    [80338] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Camouflaged Hunter (Camouflaged Hunter)
 
     [35753] = { hideReduce = true }, -- Trap Beast (Trap Beast - Rank 1)
 
@@ -5604,11 +5602,6 @@ E.FakeExternalDebuffs = {
     -- Destruction Staff
     [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
 
-    -- Fighters Guild
-    [35756] = { icon = 'esoui/art/icons/ability_fightersguild_004.dds', name = A.Skill_Trap_Beast, duration = 6000 }, -- Trap Beast (Trap Beast - Rank 1)
-    [40385] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40375] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap, duration = 6000 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
-
     -- Item Sets
     [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 0 }, -- Bahraha's Curse
 
@@ -5817,11 +5810,6 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
 
     -- Destruction Staff
     [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
-
-    -- Fighters Guild
-    [35756] = { icon = 'esoui/art/icons/ability_fightersguild_004.dds', name = A.Skill_Trap_Beast, duration = 6000 }, -- Trap Beast (Trap Beast - Rank 1)
-    [40385] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40375] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap, duration = 6000 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
 
     -- Dragonknight (Flame Lash)
     [70745] = {icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Power_Lash, duration = 2000}, -- Off-Balance Exploit (Flame Lash - Rank 1)

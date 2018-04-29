@@ -426,11 +426,10 @@ A.Skill_Bombard                     = 38705 -- TODO: Check is best ID to use
 -- ---------------------------------------------------
 
 -- Fighters Guild
-A.Skill_Silver_Leash                = 40336
-A.Skill_Tighten                     = 40342
 A.Skill_Circle_of_Protection        = 35737
 A.Skill_Turn_Undead                 = 40181
 A.Skill_Ring_of_Preservation        = 40169
+A.Skill_Revealed                    = 11717
 A.Skill_Trap_Beast                  = 35750
 A.Skill_Rearming_Trap               = 40382
 A.Skill_Lightweight_Beast_Trap      = 40372
