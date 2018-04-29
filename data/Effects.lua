@@ -605,6 +605,20 @@ E.EffectCreateSkillAura = {
 
 	[88606] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 1)
 
+    -- Armor
+    [63015] = { icon = 'esoui/art/icons/ability_armor_002.dds', name = A.Skill_Evasion, consolidate = true, extendedDisplay = true }, -- Major Evasion --> Evasion
+    [63019] = { icon = 'esoui/art/icons/ability_armor_002_a.dds', name = A.Skill_Shuffle, consolidate = true, extendedDisplay = true }, -- Major Evasion --> Shuffle
+    [63030] = { icon = 'esoui/art/icons/ability_armor_002_b.dds', name = A.Skill_Elude, consolidate = true, extendedDisplay = true }, -- Major Evasion --> Elude
+
+    [63084] = { icon = 'esoui/art/icons/ability_armor_001.dds' , name = A.Skill_Immovable, consolidate = true }, -- Major Resolve --> Immovable
+    [63085] = { icon = 'esoui/art/icons/ability_armor_001.dds' , name = A.Skill_Immovable, consolidate = true }, -- Major Ward --> Immovable
+
+    [63134] = { icon = 'esoui/art/icons/ability_armor_001_a.dds' , name = A.Skill_Immovable_Brute, consolidate = true }, -- Major Resolve --> Immovable Brute
+    [63135] = { icon = 'esoui/art/icons/ability_armor_001_a.dds' , name = A.Skill_Immovable_Brute, consolidate = true }, -- Major Ward --> Immovable Brute
+
+    [63119] = { icon = 'esoui/art/icons/ability_armor_001_b.dds' , name = A.Skill_Unstoppable, consolidate = true }, -- Major Resolve --> Unstoppable
+    [63120] = { icon = 'esoui/art/icons/ability_armor_001_b.dds' , name = A.Skill_Unstoppable, consolidate = true }, -- Major Ward --> Unstoppable
+
 	-- Fighters Guild
 	[80271] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance --> Circle of Protection
 	[35739] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection --> Circle of Protection
@@ -687,9 +701,9 @@ E.BarHighlightOverride = {
     [20252] = { newId = 31898 }, -- Burning Talons
     [20251] = { newId = 20528 }, -- Choking Talons
 
-    [29004] = { newId = 29011, showFakeAura = true, noRemove = true }, -- Dragon Blood --> Major Fortitude
-    [32744] = { newId = 32748, showFakeAura = true, noRemove = true }, -- Green Dragon Blood --> Major Fortitude
-    [32722] = { newId = 91674, showFakeAura = true, noRemove = true }, -- Coagulating Blood -> Major Fortitude
+    [29004] = { showFakeAura = true, noRemove = true }, -- Dragon Blood
+    [32744] = { showFakeAura = true, noRemove = true }, -- Green Dragon Blood
+    [32722] = { showFakeAura = true, noRemove = true }, -- Coagulating Blood
 
     [31837] = { newId = 31841, showFakeAura = true }, -- Inhale
     [32792] = { newId = 32796, showFakeAura = true }, -- Deep Breath
@@ -907,23 +921,16 @@ E.BarHighlightOverride = {
     [40116] = { newId = 88606 }, -- Quick Siphon (Quick Siphon - Rank 1)
 
     ---------------------------
-    -- Medium Armor -----------
+    -- Armor ------------------
     ---------------------------
 
-    [29556] = { newId = 63015, showFakeAura = true, noRemove = true }, -- Evasion (Evasion - Rank 1)
-    [41124] = { newId = 63016, showFakeAura = true, noRemove = true }, -- Evasion (Evasion - Rank 2)
-    [41125] = { newId = 63017, showFakeAura = true, noRemove = true }, -- Evasion (Evasion - Rank 3)
-    [41126] = { newId = 63018, showFakeAura = true, noRemove = true }, -- Evasion (Evasion - Rank 4)
+    [29556] = { newId = 63015, showFakeAura = true, noRemove = true }, -- Evasion --> Major Evasion
+    [39195] = { newId = 63019, showFakeAura = true, noRemove = true }, -- Shuffle  --> Major Evasion
+    [39192] = { newId = 63030, showFakeAura = true, noRemove = true }, -- Elude --> Major Evasion
 
-    [39195] = { newId = 63019, showFakeAura = true, noRemove = true }, -- Shuffle (Shuffle - Rank 1)
-    [41127] = { newId = 63023, showFakeAura = true, noRemove = true }, -- Shuffle (Shuffle - Rank 2)
-    [41129] = { newId = 63026, showFakeAura = true, noRemove = true }, -- Shuffle (Shuffle - Rank 3)
-    [41131] = { newId = 63028, showFakeAura = true, noRemove = true }, -- Shuffle (Shuffle - Rank 4)
-
-    [39192] = { newId = 63030, showFakeAura = true, noRemove = true }, -- Major Evasion (Elude - Rank 1)
-    [41133] = { newId = 63036, showFakeAura = true, noRemove = true }, -- Major Evasion (Elude - Rank 2)
-    [41135] = { newId = 63040, showFakeAura = true, noRemove = true }, -- Major Evasion (Elude - Rank 3)
-    [41137] = { newId = 63042, showFakeAura = true, noRemove = true }, -- Major Evasion (Elude - Rank 4)
+    [29552] = { showFakeAura = true, noRemove = true }, -- Immovable
+    [39205] = { showFakeAura = true, noRemove = true }, -- Immovable Brute
+    [39197] = { showFakeAura = true, noRemove = true }, -- Unstoppable
 
     ---------------------------
     -- Fighters Guild --------
@@ -2961,11 +2968,14 @@ E.EffectOverride = {
 
     [23673] = { consolidate = true }, -- Major Brutality (Surge)
     [64492] = { icon = 'esoui/art/icons/ability_sorcerer_surge.dds' }, -- Surge (Surge)
+    [96453] = { icon = 'esoui/art/icons/ability_sorcerer_surge.dds' }, -- Surge (Surge)
     [62062] = { consolidate = true }, -- Major Sorcery (Power Surge)
     [62060] = { consolidate = true }, -- Major Brutality (Power Surge)
     [64500] = { icon = 'esoui/art/icons/ability_sorcerer_power_surge.dds' }, -- Power Surge (Power Surge)
+    [96457] = { icon = 'esoui/art/icons/ability_sorcerer_power_surge.dds' }, -- Power Surge (Power Surge)
     [62147] = { consolidate = true }, -- Major Brutality (Critical Surge)
     [23682] = { icon = 'esoui/art/icons/ability_sorcerer_critical_surge.dds', name = A.Skill_Critical_Surge }, -- Surge Heal (Critical Surge)
+    [96461] = { icon = 'esoui/art/icons/ability_sorcerer_critical_surge.dds', name = A.Skill_Critical_Surge }, -- Surge Heal (Critical Surge)
 
     [51392] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Bolt Escape Fatigue
     [23283] = { hide = true }, -- Summoned Ball of Lightning (Ball of Lightning)
@@ -3115,21 +3125,6 @@ E.EffectOverride = {
     [22228] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds' }, -- Practiced Incantation (Practiced Incantation - Rank 1)
 
     ----------------------------------------------------------------
-    -- ARMOR ACTIVE ABILITIES --------------------------------------
-    ----------------------------------------------------------------
-
-    [39196] = { noDuplicate = true }, -- Shuffle (Shuffle - Rank 1)
-
-    [64581] = { hide = true }, -- Shuffle (Shuffle - Rank 2)
-    [63022] = { noDuplicate = true }, -- Shuffle (Shuffle - Rank 2)
-
-    [64582] = { hide = true }, -- Shuffle (Shuffle - Rank 3)
-    [63025] = { noDuplicate = true }, -- Shuffle (Shuffle - Rank 3)
-
-    [64583] = { hide = true }, -- Shuffle (Shuffle - Rank 4)
-    [63027] = { noDuplicate = true }, -- Shuffle (Shuffle - Rank 4)
-
-    ----------------------------------------------------------------
     -- FIGHTERS GUILD ACTIVE ABILITIES ----------------------------
     ----------------------------------------------------------------
 
@@ -3273,7 +3268,6 @@ E.EffectOverride = {
     [45483] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = A.Passive_Twin_Blade_and_Blunt }, -- Twin Blade and Blunt Bleed (Rank 2)
 
     -- Bow
-
     [30930] = { icon = 'LuiExtended/media/icons/abilities/passive_bow_accuracy.dds' }, -- Accuracy (Accuracy - Rank 1)
     [45492] = { icon = 'LuiExtended/media/icons/abilities/passive_bow_accuracy.dds' }, -- Accuracy (Accuracy - Rank 2)
 
@@ -3319,6 +3313,8 @@ E.EffectOverride = {
     ----------------------------------------------------------------
     -- PLAYER ACTIVES WEAPONS --------------------------------------
     ----------------------------------------------------------------
+
+    -- TODO: CLEAR THIS
 
     -- 1H + Shield
     [28305] = { name = 'Low Slash' }, -- Low Slash Snare (Low Slash - Rank 1)
@@ -3440,7 +3436,7 @@ E.EffectOverride = {
     [40117] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Quick Siphon - Rank 1)
 
     ----------------------------------------------------------------
-    -- PLAYER PASSIVES ARMOR ---------------------------------------
+    -- ARMOR PASSIVES ----------------------------------------------
     ----------------------------------------------------------------
 
     -- Light Armor
@@ -3459,6 +3455,27 @@ E.EffectOverride = {
     [58431] = { icon = 'LuiExtended/media/icons/abilities/ability_armor_constitution.dds' }, -- Constitution (Constitution - Rank 2)
     [29773] = { icon = 'esoui/art/icons/passive_armor_014.dds' }, -- Revitalize (Revitalize - Rank 1)
     [45528] = { icon = 'esoui/art/icons/passive_armor_014.dds' }, -- Revitalize (Revitalize - Rank 2)
+
+    ----------------------------------------------------------------
+    -- ARMOR ACTIVES -----------------------------------------------
+    ----------------------------------------------------------------
+
+    -- LIGHT ARMOR
+    [39188] = { hide = true }, -- Dampen Magic (Dampen Magic)
+
+    -- MEDIUM ARMOR
+    [63015] = { consolidateExtra = true }, -- Major Evasion (Evasion)
+    [63019] = { consolidateExtra = true }, -- Major Evasion (Shuffle)
+    [39196] = { noDuplicate = true }, -- Shuffle (Shuffle)
+    [63030] = { consolidateExtra = true }, -- Major Evasion (Elude)
+
+    -- HEAVY ARMOR
+    [63084] = { consolidate = true }, -- Major Resolve (Immovable)
+    [63085] = { consolidate = true }, -- Major Ward (Immovable)
+    [63134] = { consolidate = true }, -- Major Resolve (Immovable Brute)
+    [63135] = { consolidate = true }, -- Major Ward (Immovable Brute)
+    [63119] = { consolidate = true }, -- Major Resolve (Unstoppable)
+    [63120] = { consolidate = true }, -- Major Ward (Unstoppable)
 
     ----------------------------------------------------------------
     -- PLAYER PASSIVES WORLD ---------------------------------------

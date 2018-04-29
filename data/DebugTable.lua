@@ -3210,15 +3210,18 @@ debugAuras = {
             [23670] = true, -- Surge (Surge)
             [23673] = true, -- Major Brutality (Surge)
             [64492] = true, -- Surge (Surge)
+            [96453] = true, -- Surge (Surge)
 
             [23674] = true, -- Power Surge (Power Surge)
             [62062] = true, -- Major Sorcery (Power Surge)
             [62060] = true, -- Major Brutality (Power Surge)
             [64500] = true, -- Power Surge (Power Surge)
+            [96457] = true, -- Power Surge (Power Surge)
 
             [23678] = true, -- Critical Surge (Critical Surge)
             [62147] = true, -- Major Brutality (Critical Surge)
             [23682] = true, -- Surge Heal (Critical Surge)
+            [96461] = true, -- Surge Heal (Critical Surge)
 
             [51392] = true, -- Bolt Escape Fatigue (Bolt Escape - All Morphs)
             [23234] = true, -- Bolt Escape (Bolt Escape)
@@ -4361,43 +4364,95 @@ debugAuras = {
             [85154] = true, -- Major Force (Light's Champion - Rank 1)
             [85155] = true, -- Major Protection (Light's Champion - Rank 1)
 
-            -- ARMOR (ACTIVE SKILLS)
+            --------------------------
+            -- ARMOR PASSIVES
+            --------------------------
+
+            -- LIGHT ARMOR
+            [29639] = true, -- Evocation (Rank 1)
+            [45548] = true, -- Evocation (Rank 2)
+            [45549] = true, -- Evocation (Rank 3)
+            [29665] = true, -- Recovery (Rank 1)
+            [45557] = true, -- Recovery (Rank 2)
+            [29663] = true, -- Spell Warding (Rank 1)
+            [45559] = true, -- Spell Warding (Rank 2)
+            [29668] = true, -- Prodigy (Rank 1)
+            [45561] = true, -- Prodigy (Rank 2)
+            [29667] = true, -- Concentration (Rank 1)
+            [45562] = true, -- Concentration (Rank 2)
+
+            -- MEDIUM ARMOR
+            [29743] = true, -- Dexterity (Rank 1)
+            [45563] = true, -- Dexterity (Rank 2)
+            [45564] = true, -- Dexterity (Rank 3)
+            [29687] = true, -- Wind Walker (Rank 1)
+            [45565] = true, -- Wind Walker (Rank 2)
+            [29738] = true, -- Improved Sneak (Rank 1)
+            [45567] = true, -- Improved Sneak (Rank 2)
+            [29686] = true, -- Agility (Rank 1)
+            [45572] = true, -- Agility (Rank 2)
+            [29742] = true, -- Athletics (Rank 1)
+            [45574] = true, -- Athletics (Rank 2)
+
+            -- HEAVY ARMOR
+            [29825] = true, -- Resolve (Rank 1)
+            [45531] = true, -- Resolve (Rank 2)
+            [45533] = true, -- Resolve (Rank 3)
+            [29769] = true, -- Constitution (Rank 1)
+            [58428] = true, -- Constitution
+            [58503] = true, -- Constitution
+            [45526] = true, -- Constitution (Rank 2)
+            [58430] = true, -- Constitution
+            [58431] = true, -- Constitution
+            [29804] = true, -- Juggernaught (Rank 1)
+            [45546] = true, -- Juggernaught (Rank 2)
+            [29773] = true, -- Revitalize (Rank 1)
+            [45528] = true, -- Revitalize (Rank 2)
+            [29791] = true, -- Rapid Mending (Rank 1)
+            [45529] = true, -- Rapid Mending (Rank 2)
+
+            --------------------------
+            -- ARMOR ACTIVES
+            --------------------------
+
+            -- LIGHT ARMOR
+            [29338] = true, -- Annulment (Annulment)
+
+            [39188] = true, -- Dampen Magic (Dampen Magic)
+            [39186] = true, -- Dampen Magic (Dampen Magic)
+
+            [66881] = true, -- Harness Magicka Bonus (Harness Magicka)
+            [39182] = true, -- Harness Magicka (Harness Magicka)
+            [39184] = true, -- Harness Magicka (Harness Magicka)
+            [60968] = true, -- Harness Magicka Counter (Harness Magicka)
+
+            -- MEDIUM ARMOR
             [29556] = true, -- Evasion (Evasion - Rank 1)
             [63015] = true, -- Major Evasion (Evasion - Rank 1)
-            [41124] = true, -- Evasion (Evasion - Rank 2)
-            [63016] = true, -- Major Evasion (Evasion - Rank 2)
-            [41125] = true, -- Evasion (Evasion - Rank 3)
-            [63017] = true, -- Major Evasion (Evasion - Rank 3)
-            [41126] = true, -- Evasion (Evasion - Rank 4)
-            [63018] = true, -- Major Evasion (Evasion - Rank 4)
 
             [39195] = true, -- Shuffle (Shuffle - Rank 1)
             [63019] = true, -- Major Evasion (Shuffle - Rank 1)
             [39196] = true, -- Shuffle (Shuffle - Rank 1)
 
-            [41127] = true, -- Shuffle (Shuffle - Rank 2)
-            [63023] = true, -- Major Evasion (Shuffle - Rank 2)
-            [64581] = true, -- Shuffle (Shuffle - Rank 2)
-            [63022] = true, -- Shuffle (Shuffle - Rank 2)
-
-            [41129] = true, -- Shuffle (Shuffle - Rank 3)
-            [63026] = true, -- Major Evasion (Shuffle - Rank 3)
-            [64582] = true, -- Shuffle (Shuffle - Rank 3)
-            [63025] = true, -- Shuffle (Shuffle - Rank 3)
-
-            [41131] = true, -- Shuffle (Shuffle - Rank 4)
-            [63028] = true, -- Major Evasion (Shuffle - Rank 4)
-            [64583] = true, -- Shuffle (Shuffle - Rank 4)
-            [63027] = true, -- Shuffle (Shuffle - Rank 4)
-
             [39192] = true, -- Elude (Elude - Rank 1)
             [63030] = true, -- Major Evasion (Elude - Rank 1)
-            [41133] = true, -- Elude (Elude - Rank 2)
-            [63036] = true, -- Major Evasion (Elude - Rank 2)
-            [41135] = true, -- Elude (Elude - Rank 3)
-            [63040] = true, -- Major Evasion (Elude - Rank 3)
-            [41137] = true, -- Elude (Elude - Rank 4)
-            [63042] = true, -- Major Evasion (Elude - Rank 4)
+
+            -- HEAVY ARMOR
+            [29552] = true, -- Immovable (Immovable)
+            [29553] = true, -- Immovable (Immovable)
+            [63084] = true, -- Major Resolve (Immovable)
+            [63085] = true, -- Major Ward (Immovable)
+
+            [63080] = true, -- Immovable Brute (Immovable Brute)
+            [39205] = true, -- Immovable Brute (Immovable Brute)
+            [63133] = true, -- Immovable Brute (Immovable Brute)
+            [63134] = true, -- Major Resolve (Immovable Brute)
+            [63135] = true, -- Major Ward (Immovable Brute)
+
+            [39197] = true, -- Unstoppable (Unstoppable)
+            [63118] = true, -- Unstoppable (Unstoppable)
+            [63119] = true, -- Major Resolve (Unstoppable)
+            [63120] = true, -- Major Ward (Unstoppable)
 
             -------------------------------
             -- WEAPON ACTIVES
@@ -4600,49 +4655,6 @@ debugAuras = {
             [40158] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
             [40160] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
             [62314] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
-
-            -- LIGHT ARMOR
-            [29639] = true, -- Evocation (Rank 1)
-            [45548] = true, -- Evocation (Rank 2)
-            [45549] = true, -- Evocation (Rank 3)
-            [29665] = true, -- Recovery (Rank 1)
-            [45557] = true, -- Recovery (Rank 2)
-            [29663] = true, -- Spell Warding (Rank 1)
-            [45559] = true, -- Spell Warding (Rank 2)
-            [29668] = true, -- Prodigy (Rank 1)
-            [45561] = true, -- Prodigy (Rank 2)
-            [29667] = true, -- Concentration (Rank 1)
-            [45562] = true, -- Concentration (Rank 2)
-
-            -- MEDIUM ARMOR
-            [29743] = true, -- Dexterity (Rank 1)
-            [45563] = true, -- Dexterity (Rank 2)
-            [45564] = true, -- Dexterity (Rank 3)
-            [29687] = true, -- Wind Walker (Rank 1)
-            [45565] = true, -- Wind Walker (Rank 2)
-            [29738] = true, -- Improved Sneak (Rank 1)
-            [45567] = true, -- Improved Sneak (Rank 2)
-            [29686] = true, -- Agility (Rank 1)
-            [45572] = true, -- Agility (Rank 2)
-            [29742] = true, -- Athletics (Rank 1)
-            [45574] = true, -- Athletics (Rank 2)
-
-            -- HEAVY ARMOR
-            [29825] = true, -- Resolve (Rank 1)
-            [45531] = true, -- Resolve (Rank 2)
-            [45533] = true, -- Resolve (Rank 3)
-            [29769] = true, -- Constitution (Rank 1)
-            [58428] = true, -- Constitution
-            [58503] = true, -- Constitution
-            [45526] = true, -- Constitution (Rank 2)
-            [58430] = true, -- Constitution
-            [58431] = true, -- Constitution
-            [29804] = true, -- Juggernaught (Rank 1)
-            [45546] = true, -- Juggernaught (Rank 2)
-            [29773] = true, -- Revitalize (Rank 1)
-            [45528] = true, -- Revitalize (Rank 2)
-            [29791] = true, -- Rapid Mending (Rank 1)
-            [45529] = true, -- Rapid Mending (Rank 2)
 
             -- LEGERDEMAIN
             [63799] = true, -- Improved Hiding (Rank 1)

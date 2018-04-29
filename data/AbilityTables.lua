@@ -429,6 +429,18 @@ A.Skill_Twin_Slashes                = 28379 -- TODO: Check is best ID to use
 A.Skill_Bombard                     = 38705 -- TODO: Check is best ID to use
 
 -- ---------------------------------------------------
+-- ARMOR SKILLS --------------------------------------
+-- ---------------------------------------------------
+
+A.Skill_Evasion                  = 29556
+A.Skill_Shuffle                  = 39195
+A.Skill_Elude                    = 39192
+
+A.Skill_Immovable                = 29552
+A.Skill_Immovable_Brute          = 39205
+A.Skill_Unstoppable              = 39197
+
+-- ---------------------------------------------------
 -- GUILD SKILLS --------------------------------------
 -- ---------------------------------------------------
 
@@ -631,25 +643,6 @@ A.Skill_Acid_Spray               = 38701
 A.Skill_Snipe                    = 28882
 A.Skill_Focused_Aim              = 38687
 A.Skill_Lethal_Arrow             = 38685
-
--- ---------------------------------------------------
--- ARMOUR --------------------------------------------
--- ---------------------------------------------------
-
--- LIGHT ARMOUR -------------
-A.Skill_Annulment                = 29338
-A.Skill_Dampen_Magic             = 39186
-A.Skill_Harness_Magicka          = 39182
-
--- MEDIUM ARMOUR ------------
-A.Skill_Evasion                  = 29556
-A.Skill_Elude                    = 39192
-A.Skill_Shuffle                  = 39195
-
--- HEAVY ARMOUR -------------
-A.Skill_Immovable                = 29552
-A.Skill_Immovable_Brute          = 39205
-A.Skill_Unstoppable              = 39197
 
 -- ---------------------------------------------------
 -- GUILDS --------------------------------------------
