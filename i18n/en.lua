@@ -1,15 +1,9 @@
 local strings = {
-    ------------------------------------
-    -- LuiExtended.lua -----------------
-    ------------------------------------
-
+    -- LuiExtended.lua
     SI_LUIE_ERROR_FONT =                                 "LUI Extended: There was a problem with selecting required font. Falling back to default.",
     SI_LUIE_ERROR_SOUND =                                "LUI Extended: There was a problem with selecting required sound. Falling back to default.",
 
-    ------------------------------------
-    -- bindings.xml --------------------
-    ------------------------------------
-
+    -- bindings.xml
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Summon Banker",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Summon Merchant",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Summon Fence",
@@ -17,10 +11,7 @@ local strings = {
     SI_BINDING_NAME_LUIE_COMMAND_HOME =                  "Teleport to Primary Home",
     SI_BINDING_NAME_LUIE_COMMAND_REGROUP =               "Regroup (Disband & Reform)",
 
-    ------------------------------------
-    -- SlashCommands.lua ---------------
-    ------------------------------------
-
+    -- SlashCommands.lua
     SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE =                   "Queueing for <<1>>...",
     SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG =               "You cannot queue for a campaign while in a battleground.",
     SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED =      "The campaign name you entered is not your home or guest campaign.",
@@ -70,17 +61,11 @@ local strings = {
     SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED =     "You have not unlocked <<1>>.",
     SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP =       "You must be in a group to initiate a ready check.",
 
-    ------------------------------------
-    -- InfoPanel.lua -------------------
-    ------------------------------------
-
+    -- InfoPanel.lua
     SI_LUIE_PNL_FEEDNOW =                                "Feed Now",
     SI_LUIE_PNL_MAXED =                                  "Maxed",
 
-    ------------------------------------
-    -- SpellCastBuffs.lua --------------
-    ------------------------------------
-
+    -- SpellCastBuffs.lua
     SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS =                "Player Buffs",
     SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS =              "Player Debuffs",
     SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS =      "Player Long Term Effects",
@@ -89,11 +74,7 @@ local strings = {
     SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS =             "Prominent Buffs",
     SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS =           "Prominent Debuffs",
 
-    ------------------------------------
-    -- ChatAnnouncements.lua -----------
-    ------------------------------------
-
-    -- Currency
+    -- ChatAnnouncements.lua
     SI_LUIE_CA_CURRENCY_GOLD =                           " <<1[Gold/Gold]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_ALLIANCE_POINT =                 " <<1[Alliance Point/Alliance Points]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_TELVAR_STONE =                   " <<1[Tel Var Stone/Tel Var Stones]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
@@ -102,8 +83,6 @@ local strings = {
     SI_LUIE_CA_CURRENCY_CROWN =                          " <<1[Crown/Crowns]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_CROWN_GEM =                      " <<1[Crown Gem/Crown Gems]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS =                  " <<1[Outfit Change Token/Outfit Change Tokens]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
-
-    -- Duel
     SI_LUIE_CA_DEBUG_MSG_CURRENCY =                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!",
     SI_LUIE_CA_DUEL_INVITE_ACCEPTED =                    "Duel challenge accepted.",
     SI_LUIE_CA_DUEL_INVITE_CANCELED =                    "Duel challenge canceled.",
@@ -142,26 +121,16 @@ local strings = {
     SI_LUIE_CA_DUEL_STARTED_WITH_ICON =                  "<<1>> Duel started!",
     SI_LUIE_CA_DUEL_STATE1 =                             "You are currently waiting for a duel challenge response from |cFEFEFE<<1>>|r.",
     SI_LUIE_CA_DUEL_STATE2 =                             "You are currently considering a duel challenge from |cFEFEFE<<1>>|r.",
-
-    -- Achievements
     SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG =                "Achievement Updated",
-
-    -- Experience
     SI_LUIE_CHAMPION_POINT_TYPE =                        "<<1>><<2>> <<3>> <<1[Point/Points]>>",
     SI_LUIE_CA_EXPERIENCE_MESSAGE =                      "You earn %s.",
     SI_LUIE_CA_EXPERIENCE_NAME =                         "experience <<1[point/points]>>",
     SI_LUIE_CA_LVL_ANNOUNCE_CP =                         "Champion Level Achieved!", -- TODO: Unused
     SI_LUIE_CA_LVL_ANNOUNCE_XP =                         "You have reached",
-
-    -- Collectibles
     SI_LUIE_CA_COLLECTIBLE =                             "Collection Updated",
-
-    -- Lorebooks
     SI_LUIE_CA_LOREBOOK_BOOK =                           "Book Discovered",
     SI_LUIE_CA_LOREBOOK_ADDED_CSA =                      "<<1>> added to <<2>>",
     SI_LUIE_CA_LOREBOOK_ADDED_CA =                       "added to", -- Have to add this extra string for CA, if we try to colorize the whole string with the link, it also colorizes our custom link type.
-
-    -- Social (Friends/Ignored)
     SI_LUIE_CA_FRIENDS_FRIEND_ADDED =                    "|cFEFEFE<<1>>|r added to friends.",
     SI_LUIE_CA_FRIENDS_FRIEND_REMOVED =                  "|cFEFEFE<<1>>|r removed from friends.",
     SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST =         "|cFEFEFE<<1>>|r wants to be your friend.",
@@ -172,8 +141,6 @@ local strings = {
     SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED =               "|cFEFEFE<<1>>|r added to ignored.",
     SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED =             "|cFEFEFE<<1>>|r removed from ignored.",
     SI_LUIE_CA_PLAYER_TO_PLAYER_ALREADY_FRIEND =         "You are already friends with |cFEFEFE<<1>>|r.", -- TODO: Unused - This should have a content though?
-
-    -- Group (Basic)
     SI_LUIE_CA_GROUP_INVITE_MENU =                       "You have invited |cFEFEFE<<1>>|r to join your group.",
     SI_LUIE_CA_GROUP_INVITE_NONAME =                     "You must enter the account or character name of a player to invite to group.",
     SI_LUIE_CA_GROUPINVITERESPONSE0 =                    "Could not find a player named \"|cFEFEFE<<1>>|r\" to invite.",
@@ -209,8 +176,6 @@ local strings = {
     SI_LUIE_GROUPLEAVEREASON2 =                          "|cFEFEFE<<1>>|r has disbanded the group.",
     SI_LUIE_GROUPLEAVEREASON4 =                          "|cFEFEFE<<1>>|r has left the battleground.",
     SI_LUIE_GROUPDISBANDLEADER =                         "You have disbanded the group.",
-
-    -- Group (LFG)
     SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED =            "You have joined an LFG group for |cFEFEFE<<1>>|r.",
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL =               "A vote to kick |cFEFEFE<<1>>|r from the group has failed.",
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED =             "A vote to kick |cFEFEFE<<1>>|r from the group has passed.",
@@ -219,30 +184,22 @@ local strings = {
     SI_LUIE_CA_GROUPFINDER_QUEUE_START =                 "You are now queued in the group finder.",
     SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY =        "Your |cFEFEFE<<1>>|r is ready.",
     SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE =   "Your |cFEFEFE<<1>>|r is ready. Your role: |cFEFEFE<<2>> <<3>>|r",
-
-    -- Group (Raid)
     SI_LUIE_CA_GROUP_TRIAL_STARTED =                     "Started: <<1>>",
     SI_LUIE_CA_GROUP_TRIAL_FAILED =                      "Failed: <<1>>",
     SI_LUIE_CA_GROUP_TRIAL_COMPLETED_LARGE =             "Completed: <<1>>",
     SI_LUIE_CA_GROUP_TRIAL_SCORETALLY =                  "Final Score <<1>> Total Time <<2>> Vitality Bonus <<3>> <<4>>",
     SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED =            "<<1>> Vitality Bonus Decreased",
     SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED =               "<<1>> <<2>> Points Rewarded",
-
-    -- Ignore Error Messages
     SI_LUIE_IGNORE_ERROR_TRADE =                         "You cannot trade with a player you are ignoring.",
     SI_LUIE_IGNORE_ERROR_GROUP =                         "You cannot extend a group invitation to a player you are ignoring.",
     SI_LUIE_IGNORE_ERROR_DUEL =                          "You cannot challenge a player you are ignoring to a duel.",
     SI_LUIE_IGNORE_ERROR_FRIEND =                        "You cannot add a player you are ignoring as a friend.",
     SI_LUIE_IGNORE_ERROR_WHISPER =                       "You cannot whisper a player you are ignoring.",
     SI_LUIE_IGNORE_ERROR_GUILD =                         "You cannot extend a guild invitation to a player you are ignoring.",
-
-    -- Invitation Notifications
     SI_LUIE_NOTIFICATION_GROUP_INVITE =                  "Group invitation",
     SI_LUIE_NOTIFICATION_SHARE_QUEST_INVITE =            "Shared quest",
     SI_LUIE_NOTIFICATION_FRIEND_INVITE =                 "Friend invitation",
     SI_LUIE_NOTIFICATION_GUILD_INVITE =                  "Guild invitation",
-
-    -- Guild
     SI_LUIE_CA_GUILD_HERALDRY_UPDATE =                   "The heraldry for <<1>> has changed.",
     SI_LUIE_CA_GUILD_RANKS_UPDATE =                      "Changes to ranks for <<1>> saved.",
     SI_LUIE_CA_GUILD_RANK_UPDATE =                       "Changes to the rank <<1>> for <<2>> saved.",
@@ -265,12 +222,8 @@ local strings = {
     SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS =       "Danger! You are arousing suspicion!",
     SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE =             "You are no longer disguised",
     SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED =        "You are now disguised",
-
-    -- Lockpick
     SI_LUIE_CA_LOCKPICK_FAILED =                         "Lockpick failed!",
     SI_LUIE_CA_LOCKPICK_SUCCESS =                        "Lockpick successful!",
-
-    -- Mail
     SI_LUIE_CA_MAIL_DELETED_MSG =                        "Mail deleted!",
     SI_LUIE_CA_MAIL_RECEIVED =                           "Mail received.",
     SI_LUIE_CA_MAIL_RECEIVED_COD =                       "COD payment sent!",
@@ -279,8 +232,6 @@ local strings = {
     SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE =                 "You must set the Cash on Delivery amount.",
     SI_LUIE_CA_MAIL_SENDMAILRESULT2 =                    "Unknown player.", -- Fixing missing periods on default strings
     SI_LUIE_CA_MAIL_SENDMAILRESULT3 =                    "Recipient's Inbox is full.", -- Fixing missing periods on default strings
-
-    -- Pledge of Mara
     SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0 =                "|cFEFEFE<<1>>|r is too busy to pledge with.",
     SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1 =                "You can't join in the Ritual of Mara with a player who is dead.",
     SI_LUIE_CA_MARA_PLEDGEOFMARARESULT2 =                "Beginning Ritual of Mara with |cFEFEFE<<1>>|r.",
@@ -289,8 +240,6 @@ local strings = {
     SI_LUIE_CA_MARA_PLEDGEOFMARARESULT5 =                GetString(SI_PLEDGEOFMARARESULT5),
     SI_LUIE_CA_MARA_PLEDGEOFMARARESULT6 =                "|cFEFEFE<<1>>|r is not eligible for the Ritual of Mara.",
     SI_LUIE_CA_MARA_PLEDGEOFMARARESULT7 =                "You are too far away from |cFEFEFE<<1>>|r to perform the Ritual of Mara.",
-
-    -- Currency Messages
     SI_LUIE_CA_CURRENCY_MESSAGE_LOOT =                   "You loot %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE =                "You receive %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_STEAL =                  "You steal %s.",
@@ -359,8 +308,6 @@ local strings = {
     SI_LUIE_CA_CURRENCY_NOTIFY_MORPHS =                  "Skill Morphs reset",
     SI_LUIE_CA_CURRENCY_MESSAGE_HERALDRY =               "You spend %s from your guild bank to update your %s.",
     SI_LUIE_CA_CURRENCY_NAME_HERALDRY =                  "Guild Heraldry",
-
-    -- Currency Total Messages
     SI_LUIE_CA_LOOT_MESSAGE_TOTAL =                      "New Total:",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD =              "Total Gold: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP =                "Total AP: %s",
@@ -370,8 +317,6 @@ local strings = {
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS =            "Total Crowns: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS =              "Total Gems: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS =      "Total Tokens: %s",
-
-    -- Storage
     SI_LUIE_CA_STORAGE_RIDINGTYPE1 =                     "Riding Speed Upgrade",
     SI_LUIE_CA_STORAGE_RIDINGTYPE2 =                     "Riding Capacity Upgrade",
     SI_LUIE_CA_STORAGE_RIDINGTYPE3 =                     "Riding Stamina Upgrade",
@@ -380,15 +325,11 @@ local strings = {
     SI_LUIE_CA_STORAGE_BAGTYPE1 =                        "Backpack Upgrade",
     SI_LUIE_CA_STORAGE_BAGTYPE2 =                        "Bank Space Upgrade",
     SI_LUIE_CA_STORAGE_LEARN =                           "You learn %s.",
-
-    -- Skill
     SI_LUIE_CA_SKILL_LINE_ADDED =                        "Skill line gained: <<1>><<2>>",
     SI_LUIE_CA_ABILITY_RANK_UP =                         "<<1>> increased to Rank <<R:2>>",
     SI_LUIE_CA_SKILL_GUILD_MSG =                         "You earn %s.",
     SI_LUIE_CA_SKILL_GUILD_REPUTATION =                  "<<1[reputation/reputation]>>",
     SI_LUIE_CA_SKILL_GUILD_ALERT =                       "Your <<1>> reputation has increased.",
-
-    -- Quests
     SI_LUIE_CA_QUEST_ABANDONED =                         "Abandoned: <<1>>",
     SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON =               "Abandoned: <<1>> <<2>>",
     SI_LUIE_CA_QUEST_DISCOVER =                          "Discovered: <<1>>",
@@ -396,8 +337,6 @@ local strings = {
     SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON =                  "Started: <<1>> <<2>>",
     SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON =                "Completed: <<1>> <<2>>",
     SI_LUIE_CA_QUEST_LOG_FULL =                          "Your quest log is full.", -- TODO: Unused
-
-    -- Trade
     SI_LUIE_CA_TRADEACTIONRESULT0 =                      GetString(SI_TRADEACTIONRESULT0),
     SI_LUIE_CA_TRADEACTIONRESULT1 =                      "|cFEFEFE<<1>>|r is ignoring you. You cannot initiate a trade.",
     SI_LUIE_CA_TRADEACTIONRESULT2 =                      GetString(SI_TRADEACTIONRESULT2),
@@ -422,29 +361,21 @@ local strings = {
     SI_LUIE_CA_TRADEACTIONRESULT65 =                     "You are already trading|cFEFEFE<<1>>|r.",
     SI_LUIE_CA_TRADEACTIONRESULT66 =                     GetString(SI_TRADEACTIONRESULT66),
     SI_LUIE_CA_TRADEACTIONRESULT80 =                     GetString(SI_TRADEACTIONRESULT80),
-
-    -- Trade Invite Messages
     SI_LUIE_CA_TRADE_INVITE_ACCEPTED =                   "Trade invitation accepted.",
     SI_LUIE_CA_TRADE_INVITE_DECLINED =                   "Trade invitation declined.",
     SI_LUIE_CA_TRADE_INVITE_CANCELED =                   "Trade invitation canceled.",
     SI_LUIE_CA_TRADE_INVITE_CONFIRM =                    "You have invited |cFEFEFE<<1>>|r to trade.",
     SI_LUIE_CA_TRADE_INVITE_MESSAGE =                    "|cFEFEFE<<1>>|r has invited you to trade.",
-
-    -- EVENT_DISPLAY_ANNOUNCEMENT: Entering/Leaving Group Area
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D =       "Entering Group Area.",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D =       "Leaving Group Area.",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C =       "Entering Group Area",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C =       "Leaving Group Area",
-
-    -- EVENT_DISPLAY_ANNOUNCEMENT: Craglorn Buffs
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR =        "Spell Resistance Increased",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR_CA =     "Spell Resistance Increased!",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR =        "Physical Resistance Increased",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR_CA =     "Physical Resistance Increased!",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI =        "Power Increased",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI_CA =     "Power Increased!",
-
-    -- EVENT_DISPLAY_ANNOUNCEMENT: Maelstrom Arena
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM =          "Maelstrom Arena",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA =       "Maelstrom Arena: ",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE1 =          "Vale of the Surreal",
@@ -468,13 +399,9 @@ local strings = {
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA =       "Round 5!",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF =          "Final Round",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA =       "Final Round!",
-
-    -- EVENT_DISPLAY_ANNOUNCEMENT: Dragonstar Arena
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA =                "Dragonstar Arena",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA =             "Dragonstar Arena: ",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC =           "The arena will begin in 30 seconds!",
-
-    -- EVENT_DISPLAY_ANNOUNCEMENT: Imperial City Sewer Zones
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_PREFIX =    "Entered: ",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE1 =          "Entered: Battle Gates",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_1 =      "Battle Gates",
@@ -514,10 +441,7 @@ local strings = {
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC11 =          "General Nazenaechar makes use of fallen Imperial citizens.",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC12 =          "Restless spirits of the dead are driven by forces unseen.",
 
-    ------------------------------------
-    -- CombatText.lua ------------------
-    ------------------------------------
-
+    -- CombatText.lua
     SI_LUIE_CT_COMBAT_IN_DEFAULT =                       "Entered Combat",
     SI_LUIE_CT_COMBAT_OUT_DEFAULT =                      "Left Combat",
     SI_LUIE_CT_CLEANSE_DEFAULT =                         "CLEANSE",
@@ -540,12 +464,7 @@ local strings = {
     SI_LUIE_CT_MITIGATION_FORMAT_POWER =                 "%t %i on %n!",
     SI_LUIE_CT_MITIGATION_FORMAT_DESTROY =               "%t %i",
 
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- BASE SETTINGS -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    -- LuiExtendedMenu.lua
     SI_LUIE_LAM_COMPATIBILITY_WARNING =                  "Disable this option if you are having compatibility issues with other addons.",
     SI_LUIE_LAM_FONT =                                   "Font",
     SI_LUIE_LAM_FONT_SIZE =                              "Font Size",
@@ -556,26 +475,10 @@ local strings = {
     SI_LUIE_LAM_RESETPOSITION =                          "Reset Position",
     SI_LUIE_LAM_HIDE_EXPERIENCE_BAR =                    "Hide Experience/Skill Progress Bar Pop-up",
     SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP =                 "When gaining experience from Quests, POI Discovery, Boss Kills, or Skill Line updates, the XP bar will no longer popup. Useful if you have a custom UI element in that corner of the screen and don't want it to be overlapped.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- LAM MODULE ON/OFF --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
     SI_LUIE_LAM_CHANGELOG =                              "Display Changelog",
     SI_LUIE_LAM_CHANGELOG_TP =                           "Display a list of changes from the previous version of LUIE.",
     SI_LUIE_LAM_STARTUPMSG =                             "Disable Startup Message",
     SI_LUIE_LAM_STARTUPMSG_TP =                          "This setting will disable the startup message.",
-    SI_LUIE_LAM_UF =                                     "Unit Frames",
-    SI_LUIE_LAM_CA =                                     "Chat Announce",
-    SI_LUIE_LAM_CI =                                     "Combat Info",
-    SI_LUIE_LAM_SLASHCMDS =                              "Slash Commands",
-    SI_LUIE_LAM_CI_DESCRIPTION =                         "Allows display of ultimate value on bars, effect tracker on bars, as well as cooldown tracking for quick slot items and GCD display for action bars.",
-    SI_LUIE_LAM_BUFFS_DESCRIPTION =                      "Enables buff and debuff display for effects on the player and target. Also has options for various other enhancements.",
-    SI_LUIE_LAM_BUFFSDEBUFFS =                           "Buffs & Debuffs",
-    SI_LUIE_LAM_MODULEHEADER =                           "Module Settings",
-    SI_LUIE_LAM_MISCHEADER =                             "Miscellaneous Settings",
     SI_LUIE_LAM_SVPROFILE_HEADER =                       "Character Profile Settings",
     SI_LUIE_LAM_SVPROFILE_DESCRIPTION =                  "By default LuiExtended uses account wide settings. You can toggle on character specific settings below. Profiles can be copied between characters, and you can reset the current character or overall account settings below. Note that account wide settings are preserved if you toggle back from using individual character profiles.",
     SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE =               "Enable Character Specific Settings",
@@ -588,13 +491,17 @@ local strings = {
     SI_LUIE_LAM_SVPROFILE_RESETCHAR_TP =                 "Reset current character profile settings.",
     SI_LUIE_LAM_SVPROFILE_RESETACCOUNT =                 "Reset Account Wide",
     SI_LUIE_LAM_SVPROFILE_RESETACCOUNT_TP =              "Reset account wide profile settings. Note that this will not delete or modify individual character settings.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- SLASH COMMANDS -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    -- Modules
+    SI_LUIE_LAM_UF =                                     "Unit Frames",
+    SI_LUIE_LAM_CA =                                     "Chat Announce",
+    SI_LUIE_LAM_CI =                                     "Combat Info",
+    SI_LUIE_LAM_SLASHCMDS =                              "Slash Commands",
+    SI_LUIE_LAM_CI_DESCRIPTION =                         "Allows display of ultimate value on bars, effect tracker on bars, as well as cooldown tracking for quick slot items and GCD display for action bars.",
+    SI_LUIE_LAM_BUFFS_DESCRIPTION =                      "Enables buff and debuff display for effects on the player and target. Also has options for various other enhancements.",
+    SI_LUIE_LAM_BUFFSDEBUFFS =                           "Buffs & Debuffs",
+    SI_LUIE_LAM_MODULEHEADER =                           "Module Settings",
+    SI_LUIE_LAM_MISCHEADER =                             "Miscellaneous Settings",
+    -- Module: Slash Commands
     SI_LUIE_LAM_SLASHCMDS_ENABLE =                       "Slash Commands Module",
     SI_LUIE_LAM_SLASHCMDS_DESCRIPTION =                  "Add custom /slash commands to perform various basic functionality such as kicking members from group, inviting players to guild, or adding friends.",
     SI_LUIE_LAM_SLASHCMDSHEADER =                        "Slash Commands",
@@ -640,13 +547,7 @@ local strings = {
     SI_LUIE_LAM_SLASHCMDS_FENCE_TP =                     "'/fence' Summon <<1>> (If unlocked).\n\t\t\t\t\tAlternate options: '/smuggler'",
     SI_LUIE_LAM_SLASHCMDS_READYCHECK =                   "Enable ( '/ready' ) Ready Check",
     SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP =                "Send a 'ready check' dialog to all group members.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- BUFFS & DEBUFFS -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    -- Module: Buffs & Debuffs
     SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK =                "Buffs & Debuffs Module",
     SI_LUIE_LAM_BUFF_HEADER_POSITION =                   "Position and Display Options",
     SI_LUIE_LAM_BUFF_HARDLOCK =                          "Hard-Lock Position to Unit Frames",
@@ -687,8 +588,8 @@ local strings = {
     SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP =            "Format remaining text labels as \"12.3\" or keep only seconds \"12\".",
     SI_LUIE_LAM_BUFF_HORIZONTICONALIGN =                 "Horizontal Alignment Method",
     SI_LUIE_LAM_BUFF_HORIZONTICONALIGN_TP =              "Horizontal alignment of buff and debuff icons within container area.",
-    -- SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON =            "Vertical Icons Alignment",
-    -- SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON_TP =         "Vertical alignment of buff and debuff icons within container area.",
+    --SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON =          "Vertical Icons Alignment",
+    --SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON_TP =       "Vertical alignment of buff and debuff icons within container area.",
     SI_LUIE_LAM_BUFF_DESCENDINGSORT =                    "Sort Direction",
     SI_LUIE_LAM_BUFF_DESCENDINGSORT_TP =                 "Choose the direction in which buff icons are sorted.",
     SI_LUIE_LAM_BUFF_GLOWICONBORDER =                    "Display Glowing Border",
@@ -839,19 +740,10 @@ local strings = {
     SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP =              "Add an abilityId or abilityName to the aura blacklist.",
     SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST =                 "Remove Buff or Debuff from Blacklist",
     SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP =              "Remove an abilityId or abilityName from the aura blacklist.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- CHAT ANNOUNCEMENTS -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    -- Base Settings
+    -- Module: Chat Announcements
     SI_LUIE_LAM_CA_ENABLE =                              "Chat Announcements Module",
     SI_LUIE_LAM_CA_HEADER =                              "Chat Announcements Options",
     SI_LUIE_LAM_CA_DESCRIPTION =                         "Displays announcements in chat for various events - with many customizable settings.",
-
-    -- Chat Message Settings
     SI_LUIE_LAM_CA_CHATHEADER =                          "Chat Message Settings",
     SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD =                   "Player Name Display Method",
     SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP =                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name",
@@ -879,16 +771,12 @@ local strings = {
     SI_LUIE_LAM_CA_TIMESTAMPCOLOR =                      "Timestamp Color",
     SI_LUIE_LAM_CA_TIMESTAMPCOLOR_TP =                   "Color to use for Timestamp.\nDefault: 143/143/143",
     SI_LUIE_LAM_CA_TIMESTAMP_TP =                        "Prepend printed text with current time label. This will apply to any messages sent by LUIE & System Messages but not player chat messages. Default color and format matches pChat.",
-
-    -- Shared Menu Strings
     SI_LUIE_LAM_CA_SHARED_CA =                           "a Chat Announcement",
     SI_LUIE_LAM_CA_SHARED_CA_SHORT =                     "CA",
     SI_LUIE_LAM_CA_SHARED_CSA =                          "a Center Screen Announcement",
     SI_LUIE_LAM_CA_SHARED_CSA_SHORT =                    "CSA",
     SI_LUIE_LAM_CA_SHARED_ALERT =                        "an Alert",
     SI_LUIE_LAM_CA_SHARED_ALERT_SHORT =                  "Alert",
-
-    -- Currency Menu
     SI_LUIE_LAM_CA_CURRENCY_HEADER =                     "Currency Announcements",
     SI_LUIE_LAM_CA_CURRENCY_SHOWICONS =                  "Display Currency Icons",
     SI_LUIE_LAM_CA_CURRENCY_SHOWICONS_TP =               "Display an icon for the relative type of currency when a notification is printed.",
@@ -1111,8 +999,6 @@ local strings = {
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE_TP = "Default: You unequip %s.",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY =   "Disguise - Destroyed",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY_TP ="Default: Your %s is destroyed.",
-
-    -- LOOT MENU
     SI_LUIE_LAM_CA_LOOT_HEADER =                         "Loot Announcements",
     SI_LUIE_LAM_CA_LOOT_SHOWICONS =                      "Display Item Icons",
     SI_LUIE_LAM_CA_LOOT_SHOWICONS_TP =                   "Display an icon for items logged.",
@@ -1167,8 +1053,6 @@ local strings = {
     SI_LUIE_LAM_CA_LOOT_SHOWTRADE_TP =                   "Print a message to chat when items are received or lost in a trade.",
     SI_LUIE_LAM_CA_LOOT_LOOTSHOWDISGUISE =               "Show Disguise equip/unequip message",
     SI_LUIE_LAM_CA_LOOT_LOOTSHOWDISGUISE_TP =            "Print a message to chat when a disguise is equipped or unequipped.",
-
-    -- Experience Menu
     SI_LUIE_LAM_CA_EXP_HEADER =                          "Experience/Skill Announcements",
     SI_LUIE_LAM_CA_EXP_HEADER_ENLIGHTENED =              "Enlightenment",
     SI_LUIE_LAM_CA_EXP_ENLIGHTENED =                     "Display Enlightenment - <<1>>",
@@ -1257,8 +1141,6 @@ local strings = {
     SI_LUIE_LAM_CA_GUILDREP_DB_COLOR =                   "Dark Brotherhood Color",
     SI_LUIE_LAM_CA_GUILDREP_ALERT =                      "Display Guild Reputation Alert",
     SI_LUIE_LAM_CA_GUILDREP_ALERT_TP =                   "When enabled, display a basic alert for any Guilds that are selected above indicating reputation has increased. ",
-
-    -- Collectibles/Lorebooks Menu
     SI_LUIE_LAM_CA_COLLECTIBLE_HEADER =                  "Collectible/Lorebooks Announcements",
     SI_LUIE_LAM_CA_COLLECTIBLE_COL_HEADER =              "Collectibles",
     SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE =                  "Display Collectible Unlocked - <<1>>",
@@ -1294,8 +1176,6 @@ local strings = {
     SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_TP =                "Display the relevant category of a Lorebook unlocked.",
     SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE =                 "Display Books without Eidetic Memory",
     SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP =              "Display standard books unlocked even without Eidetic Memory unlocked.",
-
-    -- Achievements Menu
     SI_LUIE_LAM_CA_ACHIEVE_HEADER =                      "Achievements Announcements",
     SI_LUIE_LAM_CA_ACHIEVE_UPDATE =                      "Display Achievement Update - <<1>>",
     SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP =                   "Display <<1>> when progress is made toward the completion of an Achievement.",
@@ -1328,8 +1208,6 @@ local strings = {
     SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_HEADER =             "Tracking Options",
     SI_LUIE_LAM_CA_ACHIEVE_CATEGORY =                    "Track \'<<1>>\' Achievements",
     SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP =                 "Enables tracking for Achievements in the <<1>> category.",
-
-    -- Quest Menu
     SI_LUIE_LAM_CA_QUEST_HEADER =                        "Quest/POI Announcements",
     SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE =                "Display Shared Quests - <<1>>",
     SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP =             "Display <<1>> when another player shares a quest with you.",
@@ -1365,8 +1243,6 @@ local strings = {
     SI_LUIE_LAM_CA_QUEST_COLOR2 =                        "POI Description Color", -- TODO: Add Tooltip with finalized color value
     SI_LUIE_LAM_CA_QUEST_COLOR3 =                        "Quest Name Color", -- TODO: Add Tooltip with finalized color value
     SI_LUIE_LAM_CA_QUEST_COLOR4 =                        "Quest Description Color", -- TODO: Add Tooltip with finalized color value
-
-    -- Social Menu
     SI_LUIE_LAM_CA_SOCIAL_HEADER =                       "Social/Guild Announcements",
     SI_LUIE_LAM_CA_SOCIAL_FRIENDS_HEADER =               "Friends/Ignored List",
     SI_LUIE_LAM_CA_SOCIAL_FRIENDS =                      "Display Friends/Ignored Requests - <<1>>",
@@ -1407,8 +1283,6 @@ local strings = {
     SI_LUIE_LAM_CA_MISC_MARA_TP =                        "Display <<1>> for Pledge of Mara events.",
     SI_LUIE_LAM_CA_MISC_MARA_ALERT =                     "Only Display Alert on Failure",
     SI_LUIE_LAM_CA_MISC_MARA_ALERT_TP =                  "When enabled, an Alert will only be displayed if the Pledge of Mara fails. This emulates the behavior of the default UI settings.",
-
-    -- Group Menu
     SI_LUIE_LAM_CA_GROUP_HEADER =                        "Group/LFG/Trial Announcements",
     SI_LUIE_LAM_CA_GROUP_BASE_HEADER =                   "Group Notifications",
     SI_LUIE_LAM_CA_GROUP_BASE =                          "Display Group Notifications - <<1>>",
@@ -1437,12 +1311,8 @@ local strings = {
     SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP =                 "Display <<1>> when a new stage begins in Dragonstar or Maelstrom Arena.",
     SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND =              "Display Maelstrom Arena Round - <<1>>",
     SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP =           "Display <<1>> when a new round begins in Maelstrom Arena.",
-
-    -- Display Announcements
     SI_LUIE_LAM_CA_DISPLAY_CRAGLORN =                    "Display Craglorn Buffs - <<1>>",
     SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP =                 "Display <<1>> when you gain a buff from completing a World Boss event in Craglorn.",
-
-    -- Misc Menu
     SI_LUIE_LAM_CA_MISC_GROUPAREA =                      "Display Entering/Leaving Group Area - <<1>>",
     SI_LUIE_LAM_CA_MISC_GROUPAREA_TP =                   "Display <<1>> when entering or leaving a Group Area.",
     SI_LUIE_LAM_CA_MISC_HEADER =                         "Miscellaneous Announcements",
@@ -1465,13 +1335,7 @@ local strings = {
     SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP =       "Display <<1>> when near a sentry or performing suspicious activity while disguised.",
     SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR =     "Detection Warning CSA Color",
     SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR_TP =  "Change the color of the Center Screen Announcement displayed when near a sentry or performing suspicious activity while disguised.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- COMBAT INFO -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    -- Module: Combat Info
     SI_LUIE_LAM_CI_HEADER =                              "Combat Info Options",
     SI_LUIE_LAM_CI_SHOWCOMBATINFO =                      "Combat Info Module",
     SI_LUIE_LAM_CI_SHARED_FONT_TP =                      "Choose the font to use for the countdown label.",
@@ -1522,13 +1386,7 @@ local strings = {
     SI_LUIE_LAM_CI_POTION_TP =                           "Display a cooldown timer for potions and other quickslot items.",
     SI_LUIE_LAM_CI_POTION_COLOR =                        "Color Label",
     SI_LUIE_LAM_CI_POTION_COLOR_TP =                     "Color the quickslot cooldown timer label based off the remaining duration.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- INFO PANEL -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    -- Module: Info Panel
     SI_LUIE_LAM_PNL =                                    "Info Panel",
     SI_LUIE_LAM_PNL_ENABLE =                             "Info Panel Module",
     SI_LUIE_LAM_PNL_DESCRIPTION =                        "Displays a panel with potentially useful information on it such as Latency, Time, FPS, Durability and Weapon Charge, etc...",
@@ -1548,20 +1406,11 @@ local strings = {
     SI_LUIE_LAM_PNL_SHOWSOULGEMS =                       "Show Soul Gems",
     SI_LUIE_LAM_PNL_UNLOCKPANEL =                        "Unlock panel",
     SI_LUIE_LAM_PNL_UNLOCKPANEL_TP =                     "Allow mouse dragging for Info Panel.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- UNITFRAMES -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    -- Base Options
+    -- Module: Unitframes
     SI_LUIE_LAM_UF_ENABLE =                              "Unit Frames Module",
     SI_LUIE_LAM_UF_DESCRIPTION =                         "This allows display of textual attributes information over default UI controls. It also creates custom frames for player and target.",
     SI_LUIE_LAM_UF_SHORTNUMBERS =                        "Shorten Numbers on Bars",
     SI_LUIE_LAM_UF_SHORTNUMBERS_TP =                     "Replace large numbers like 12,345 with 12.3k on all bars and labels related to unit frames.",
-
-    -- Shared Options
     SI_LUIE_LAM_UF_SHARED_LABEL =                        "Label Format",
     SI_LUIE_LAM_UF_SHARED_LABEL_TP =                     "Format label for custom attribute bar.",
     SI_LUIE_LAM_UF_SHARED_LABEL_LEFT =                   "Label Format (Left)",
@@ -1580,8 +1429,6 @@ local strings = {
     SI_LUIE_LAM_UF_SHARED_REGEN_TP =                     "Display an animated arrow overlay when regeneration is increased or decreased.",
     SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY =            "Group/Raid Transparency (Shared Setting)",
     SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY_TP =         "Change the transparency of custom group and raid unit frames.",
-
-    -- Default Unit Frames Options
     SI_LUIE_LAM_UF_DFRAMES_HEADER =                      "Default Unit Frames",
     SI_LUIE_LAM_UF_DFRAMES_PLAYER =                      "Default PLAYER Frame",
     SI_LUIE_LAM_UF_DFRAMES_TARGET =                      "Default TARGET Frame",
@@ -1606,8 +1453,6 @@ local strings = {
     SI_LUIE_LAM_UF_TARGET_ICON_CLASS_TP =                "Display class icon for target player.",
     SI_LUIE_LAM_UF_TARGET_ICON_GFI =                     "Display Target Friend/Guild/Ignored Icon",
     SI_LUIE_LAM_UF_TARGET_ICON_GFI_TP =                  "Display icon for target player if this player is your friend, in one of your guilds, or ignored.",
-
-    -- Custom Unit Frames Options
     SI_LUIE_LAM_UF_CFRAMES_HEADER =                      "Custom Unit Frames",
     SI_LUIE_LAM_UF_CFRAMES_UNLOCK =                      "Unlock Custom Frames",
     SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TP =                   "Allow mouse dragging for all custom unit frames. When frames are unlocked, the target frame is not being hidden and may display outdated information.",
@@ -1633,8 +1478,6 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS_TP =           "Use smooth transition on all bars when value get changed. Disabling this option could improve performance a little.",
     SI_LUIE_LAM_UF_CFRAMES_CHAMPION =                    "Champion Point Display Method",
     SI_LUIE_LAM_UF_CFRAMES_CHAMPION_TP =                 "Choose whether the actual value of champion points is shown or values above the current maximum attainable cap are displayed.",
-
-    -- Custom Unit Frame Color Options
     SI_LUIE_LAM_UF_CFRAMES_COLOR_HEADER =                "Custom Unit Frame Color Options",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALTH =                "Health Bar Color",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_SHIELD =                "Shield Bar Color",
@@ -1653,8 +1496,6 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE =        "Reaction Color - Hostile",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_NEUTRAL =        "Reaction Color - Neutral",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_GUARD =          "Reaction Color - Guard",
-
-    -- Player/Target Frames
     SI_LUIE_LAM_UF_CFRAMESPT_HEADER =                    "Custom Unit Frames (Player & Target)",
     SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER =            "Additional Player Frame Display Options",
     SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER =             "Enable Custom PLAYER Frame",
@@ -1700,14 +1541,12 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMESPT_XPCPBAR_TP =                "Display a bar to track player experience gain.",
     SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR =              "Color Champion XP Bar by Point Type",
     SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR_TP =           "Set the color of the of Champion XP bar to be dependent on the type of Champion Point being earned.",
-
     SI_LUIE_LAM_UF_LOWRESOURCE_HEALTH =                  "Player - Low Health % Threshold",
     SI_LUIE_LAM_UF_LOWRESOURCE_HEALTH_TP =               "Determines the threshold of health to color the player health label text red.",
     SI_LUIE_LAM_UF_LOWRESOURCE_MAGICKA =                 "Player - Low Magicka % Threshold",
     SI_LUIE_LAM_UF_LOWRESOURCE_MAGICKA_TP =              "Determines the threshold of magicka to color the player magicka label text red.",
     SI_LUIE_LAM_UF_LOWRESOURCE_STAMINA =                 "Player - Low Stamina % Threshold",
     SI_LUIE_LAM_UF_LOWRESOURCE_STAMINA_TP =              "Determines the threshold of stamina to color the player stamina label text red.",
-
     SI_LUIE_LAM_UF_CFRAMESPT_TARGET_WIDTH =              "Target - Bar Width",
     SI_LUIE_LAM_UF_CFRAMESPT_TARGET_HEIGHT =             "Target - Bar Height",
     SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY =          "Target - Transparency - Out-of-Combat",
@@ -1734,8 +1573,6 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY_TP =    "Choose whether to prioritize the display of the AVA Rank Name or Title on players.",
     SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT =           "Treat Missing Power as In-Combat",
     SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT_TP =        "When any resource pool is used change the frames to use the in combat opacity value as if engaged in combat.",
-
-    -- Group Frames
     SI_LUIE_LAM_UF_CFRAMESG_HEADER =                     "Custom Unit Frames (Group)",
     SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE =           "Enable Custom GROUP Frames",
     SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE_TP =        "Create custom group unit frames.",
@@ -1750,8 +1587,6 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE_TP =      "Colors the custom group frame bars based off role.",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS =        "Color Custom Group Frames by Class",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS_TP =     "Colors the custom group frame bars based off class.",
-
-    -- Raid Frames
     SI_LUIE_LAM_UF_CFRAMESR_HEADER =                     "Custom Unit Frames (Raid)",
     SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE =           "Enable Custom RAID Frames",
     SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE_TP =        "Create custom raid unit frames. If custom group frames are unused, then this raid frame will also be used for small groups.",
@@ -1769,8 +1604,6 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE_TP =      "Colors the custom raid frame bars based off role.",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS =        "Color Custom Raid Frames by Class",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS_TP =     "Colors the custom raid frame bars based off class.",
-
-    -- Boss Frames
     SI_LUIE_LAM_UF_CFRAMESB_HEADER =                     "Custom Unit Frames (Boss)",
     SI_LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE =           "Enable Custom BOSS Frames",
     SI_LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE_TP =        "Create custom boss unit frames. This will track the health of up to 6 bosses in dungeons encounters.",
@@ -1780,16 +1613,11 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMESB_OPACITYOOC_TP =              "Change the transparency of custom boss unit frames when out of combat.",
     SI_LUIE_LAM_UF_CFRAMESB_OPACITYIC =                  "Boss Bar Transparency - In-Combat",
     SI_LUIE_LAM_UF_CFRAMESB_OPACITYIC_TP =               "Change the transparency of custom boss unit frames when engaged in combat.",
-
-
-    -- PVP Frames
     SI_LUIE_LAM_UF_CFRAMESPVP_HEADER =                   "Custom Unit Frames (PvP Target Frame)",
     SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME =              "Enable PvP Target Frame",
     SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_TP =           "Create additional custom target unit frames. This will track health of hostile pvp players only. It also by default has larger size, less information and is positioned in the center of the screen.",
     SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_WIDTH =        "PvP Target Bars Width",
     SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_HEIGHT =       "PvP Target Bar Height",
-
-    -- Common Options
     SI_LUIE_LAM_UF_COMMON_HEADER =                       "Common Options",
     SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER =           "Player Name Display Method (Player)",
     SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER_TP =        "Determines the method used to display your name on the player frame.\nDefault: Character Name",
@@ -1804,14 +1632,7 @@ local strings = {
     SI_LUIE_LAM_UF_COMMON_RETICLECOLOR =                 "Apply Same Settings to Reticle",
     SI_LUIE_LAM_UF_COMMON_RETICLECOLOR_TP =              "Change the color of the reticle according to unit reaction.",
     SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT =         "Interactible Reticle Color",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- COMBAT TEXT -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    -- Base Options
+    -- Module: Combat Text
     SI_LUIE_LAM_CT =                                     "Combat Text",
     SI_LUIE_LAM_CT_SHOWCOMBATTEXT =                      "Combat Text Module",
     SI_LUIE_LAM_CT_DESCRIPTION =                         "Display Combat Cloud combat text, with damage/healing values, and various alerts.",
@@ -1823,8 +1644,6 @@ local strings = {
     SI_LUIE_LAM_CT_TRANSPARENCY_TP =                     "Set an alpha value for combat text.",
     SI_LUIE_LAM_CT_ABBREVIATE =                          "Shorten Numbers",
     SI_LUIE_LAM_CT_ABBREVIATE_TP =                       "Replace large numbers like 12345 with 12.3k on all combat text labels.",
-
-    -- CT (Shared)
     SI_LUIE_LAM_CT_SHARED_DAMAGE =                       "Damage",
     SI_LUIE_LAM_CT_SHARED_DAMAGE_CRITICAL =              "Damage (Critical)",
     SI_LUIE_LAM_CT_SHARED_HEALING =                      "Healing",
@@ -1876,8 +1695,6 @@ local strings = {
     SI_LUIE_LAM_CT_SHARED_LOW_STAMINA =                  "Low Stamina",
     SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY =               "Ultimate Ready",
     SI_LUIE_LAM_CT_SHARED_POTION_READY =                 "Potion Ready",
-
-    -- CT (Incoming)
     SI_LUIE_LAM_CT_INCOMING_HEADER =                     "Toggle Options (Incoming)",
     SI_LUIE_LAM_CT_INCOMING_DAMAGE_HEAL_HEADER =         "Incoming Damage & Healing",
     SI_LUIE_LAM_CT_INCOMING_MITIGATION =                 "Incoming Mitigation",
@@ -1902,8 +1719,6 @@ local strings = {
     SI_LUIE_LAM_CT_INCOMING_OFF_BALANCE_TP =             "Show when you are off-balance.",
     SI_LUIE_LAM_CT_INCOMING_SILENCED_TP =                "Show when you are silenced.",
     SI_LUIE_LAM_CT_INCOMING_STUNNED_TP =                 "Show when you are stunned.",
-
-    -- CT (Outgoing)
     SI_LUIE_LAM_CT_OUTGOING_HEADER =                     "Toggle Options (Outgoing)",
     SI_LUIE_LAM_CT_OUTGOING_DAMAGE_HEAL_HEADER =         "Outgoing Damage & Healing",
     SI_LUIE_LAM_CT_OUTGOING_MITIGATION =                 "Outgoing Mitigation",
@@ -1928,8 +1743,6 @@ local strings = {
     SI_LUIE_LAM_CT_OUTGOING_OFF_BALANCE_TP =             "Show when you set an enemy off-balance.",
     SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP =                "Show when you silence an enemy.",
     SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP =                 "Show when you stun an enemy.",
-
-    -- CT (Notifications)
     SI_LUIE_LAM_CT_NOTIFICATION =                        "Toggle Options (Notifications)",
     SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE =           "Combat State",
     SI_LUIE_LAM_CT_NOTIFICATION_ALERTS =                 "Active Combat Alerts",
@@ -1994,8 +1807,6 @@ local strings = {
     SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA_TP =     "Threshold for Low Magicka warning.\nDefault: 35%",
     SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA =        "Warning Threshold (Stamina)",
     SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA_TP =     "Threshold for Low Stamina warning.\nDefault: 35%",
-
-    -- CT (Font)
     SI_LUIE_LAM_CT_FONT_HEADER =                         "Font Format Options",
     SI_LUIE_LAM_CT_FONT_FACE =                           "Font Face",
     SI_LUIE_LAM_CT_FONT_FACE_TP =                        "Choose a font face.",
@@ -2003,8 +1814,6 @@ local strings = {
     SI_LUIE_LAM_CT_FONT_OUTLINE_TP =                     "Choose a font outline.",
     SI_LUIE_LAM_CT_FONT_TEST =                           "Test Font",
     SI_LUIE_LAM_CT_FONT_TEST_TP =                        "Generate a test combat event to test the chosen font.",
-
-    -- CT (Font Combat)
     SI_LUIE_LAM_CT_FONT_COMBAT_HEADER =                  "Font Size (Combat)",
     SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_TP =               "Font size for direct damage.\nDefault: 32",
     SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_CRITICAL_TP =      "Font size for direct critical damage.\nDefault: 32",
@@ -2017,15 +1826,11 @@ local strings = {
     SI_LUIE_LAM_CT_FONT_COMBAT_GAIN_LOSS_TP =            "Font size for resource gain and drain.\nDefault: 32",
     SI_LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP =           "Font size for mitigated damage.\nDefault: 32",
     SI_LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP =        "Font size for crowd control warnings.\nDefault: 32",
-
-    -- CT (Font Notifications)
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_HEADER =            "Font Size (Notifications)",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP =   "Font size of message displayed when entering or exiting combat.\nDefault: 24",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_ALERT_TP =          "Font size of active combat alerts.\nDefault: 32",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP =         "Font size of points earned\nDefault: 24",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP =       "Font size of resource warnings.\nDefault: 32",
-
-    -- CT (Color Options)
     SI_LUIE_LAM_CT_COLOR_COMBAT_HEADER =                 "Color Options (Combat)",
     SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_HEALING_HEADER =  "Damage & Healing",
     SI_LUIE_LAM_CT_COLOR_COMBAT_MITIGATION_HEADER =      "Mitigation",
@@ -2114,8 +1919,6 @@ local strings = {
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP =   "Set a color for Low Stamina warnings.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP =      "Set a color for notifications when your ultimate ability is available for use.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POTION_TP =        "Set a color for notifications when a potion comes off cooldown.",
-
-    -- CT (Format Options)
     SI_LUIE_LAM_CT_FORMAT_DESCRIPTION =                  "Allows to change the text output. Write any text you want or enter a variable for special outputs\n %t Ability name, localized name\n %a Amount, value\n %r Power type, resource",
     SI_LUIE_LAM_CT_FORMAT_COMBAT_HEADER =                "Format Options (Combat)",
     SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_HEALING_HEADER = "Damage & Healing",
@@ -2168,8 +1971,6 @@ local strings = {
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP =     "Text format for warnings when low on resources.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ULTIMATE_TP =     "Text format for notifcations when your ultimate ability is available for use.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POTION_TP =       "Text format for notifcations when your potion comes off cooldown.",
-
-    -- CT (Animation Options)
     SI_LUIE_LAM_CT_ANIMATION_HEADER =                    "Animation Options",
     SI_LUIE_LAM_CT_ANIMATION_TYPE =                      "Animation Type",
     SI_LUIE_LAM_CT_ANIMATION_TYPE_TP =                   "Select the animation type to use.",
@@ -2183,8 +1984,6 @@ local strings = {
     SI_LUIE_LAM_CT_ANIMATION_ICON_IN_TP =                "Set the icon position for incoming text.",
     SI_LUIE_LAM_CT_ANIMATION_TEST =                      "Test Animation",
     SI_LUIE_LAM_CT_ANIMATION_TEST_TP =                   "Test the animation of incoming & outgoing text.",
-
-    -- CT (Throttle Options)
     SI_LUIE_LAM_CT_THROTTLE_HEADER =                     "Throttle Options",
     SI_LUIE_LAM_CT_THROTTLE_DESCRIPTION =                "Accumulates multiple hits into one. Use the slider to adjust the time frame in milliseconds. Critical hits are not throttled unless the relevant option below is enabled.",
     SI_LUIE_LAM_CT_THROTTLE_DAMAGE_TP =                  "Set the throttle duration in ms for damage numbers.\nDefault: 200 ms",
@@ -2196,11 +1995,7 @@ local strings = {
     SI_LUIE_LAM_CT_THROTTLE_TRAILER =                    "Show Throttle Trailer",
     SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP =                 "Enable Throttle Trailer.",
 
-    -- ---------------------------------------------------
-    -- ABILITY NAME OVERRIDE LOCALIZATION ----------------
-    -- ---------------------------------------------------
-
-    --SI_LUIE_SKILL_SKILLNAME =                          "",
+    -- Ability name override localization
     SI_LUIE_SKILL_RECALL_PENALTY =                       "Recall Penalty",
     SI_LUIE_SKILL_VANITY_PET =                           "Vanity Pet",
     SI_LUIE_SKILL_MOUNTED =                              "Mounted",
