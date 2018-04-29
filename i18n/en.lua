@@ -62,7 +62,7 @@ local strings = {
     SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP =       "You must be in a group to initiate a ready check.",
 
     -- InfoPanel.lua
-    SI_LUIE_PNL_FEEDNOW =                                "Feed Now",
+    SI_LUIE_PNL_TRAINNOW =                               "Train Now",
     SI_LUIE_PNL_MAXED =                                  "Maxed",
 
     -- SpellCastBuffs.lua

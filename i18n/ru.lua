@@ -64,7 +64,7 @@ local strings = {
     SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP =       "Вы должны быть в группе,чтобы запустить проверку готовности.",
 
     -- InfoPanel.lua
-    SI_LUIE_PNL_FEEDNOW =                                "Покормить",
+    SI_LUIE_PNL_TRAINNOW =                               "Покормить",
     SI_LUIE_PNL_MAXED =                                  "Макс.",
 
     -- SpellCastBuffs.lua
