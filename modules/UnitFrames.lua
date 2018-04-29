@@ -754,7 +754,7 @@ local function CreateCustomFrames()
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function(self)
         eventManager:RegisterForUpdate( moduleName .. "previewMove", 200, function()
-            self.preview.anchorLabel:SetText(strfmt("%d, %d", self:GetLeft(), self:GetTop()))
+            self.preview.anchorLabel:SetText(strformat("<<1$f>>, <<2$f>>", self:GetLeft(), self:GetTop()))
         end)
     end
     -- Callback used to save new position of frames
@@ -2908,7 +2908,7 @@ function UF.CustomFramesSetPositions()
             local anchors = ( savedPos ~= nil and #savedPos == 2 ) and { TOPLEFT, TOPLEFT, savedPos[1], savedPos[2] } or default_anchors[unitTag]
             UF.CustomFrames[unitTag].tlw:ClearAnchors()
             UF.CustomFrames[unitTag].tlw:SetAnchor( anchors[1], GuiRoot, anchors[2], anchors[3], anchors[4] )
-            UF.CustomFrames[unitTag].tlw.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and strfmt("%d, %d", savedPos[1], savedPos[2]) or "default" )
+            UF.CustomFrames[unitTag].tlw.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and strformat("<<1$f>>, <<2$f>>", savedPos[1], savedPos[2]) or "default" )
         end
     end
 end
@@ -3279,7 +3279,7 @@ function UF.DefaultFramesApplyFont(unitTag)
             local unitFrame = g_DefaultFrames[unitTag]
             for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
                 if unitFrame[powerType] then
-                    unitFrame[powerType].label:SetFont( strfmt( "%s|%d|%s", fontName, fontSize, fontStyle ) )
+                    unitFrame[powerType].label:SetFont( strformat( "<<1>>|<<2$f>>|<<3>>", fontName, fontSize, fontStyle ) )
                 end
             end
         end
@@ -3335,7 +3335,7 @@ function UF.CustomFramesApplyFont()
     local sizeCaption = ( UF.SV.CustomFontOther and UF.SV.CustomFontOther > 0 ) and UF.SV.CustomFontOther or 16
     local sizeBars = ( UF.SV.CustomFontBars and UF.SV.CustomFontBars > 0 ) and UF.SV.CustomFontBars or 14
 
-    local __mkFont = function(size) return strfmt( "%s|%d|%s", fontName, size, fontStyle ) end
+    local __mkFont = function(size) return strformat( "<<1>>|<<2$f>>|<<3>>", fontName, size, fontStyle ) end
 
     -- After fonts is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget" } ) do
