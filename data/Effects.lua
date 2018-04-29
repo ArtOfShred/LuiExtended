@@ -606,14 +606,14 @@ E.EffectCreateSkillAura = {
 	[88606] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 1)
 
 	-- Fighters Guild
-	[80271] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 1)
-	[35739] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 1)
+	[80271] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance --> Circle of Protection
+	[35739] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection --> Circle of Protection
+	[80276] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance --> Turn Undead
+	[40185] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection --> Turn Undead
+	[80284] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Endurance --> Ring of Preservation
+	[40171] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Protection --> Ring of Preservation
 
-	[80276] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 1)
-	[40185] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 1)
-
-	[80284] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 1)
-	[40171] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 1)
+    [64509] = { icon = 'esoui/art/icons/ability_fightersguild_002.dds', name = A.Skill_Expert_Hunter, consolidate = true, extendedDisplay = true, removeOnEnd = true }, -- Major Savagery --> Expert Hunter
 
 	-- NPC's
 	-- Always Show = show regardless of menu setting
@@ -690,6 +690,10 @@ E.BarHighlightOverride = {
     [29004] = { newId = 29011, showFakeAura = true, noRemove = true }, -- Dragon Blood --> Major Fortitude
     [32744] = { newId = 32748, showFakeAura = true, noRemove = true }, -- Green Dragon Blood --> Major Fortitude
     [32722] = { newId = 91674, showFakeAura = true, noRemove = true }, -- Coagulating Blood -> Major Fortitude
+
+    [31837] = { newId = 31841, showFakeAura = true }, -- Inhale
+    [32792] = { newId = 32796, showFakeAura = true }, -- Deep Breath
+    [32785] = { newId = 32788, showFakeAura = true }, -- Draw Essence
 
     [32715] = { newId = 61814 }, -- Ferocious Leap
 
@@ -851,6 +855,18 @@ E.BarHighlightOverride = {
     [22223] = { showFakeAura = true }, -- Rite of Passage
     [22229] = { showFakeAura = true }, -- Remembrance
     [22226] = { showFakeAura = true }, -- Practiced Incantation
+
+    ---------------------------
+    -- Two Handed -------------
+    ---------------------------
+
+    [20919] = { newId = 31059 }, -- Cleave --> Cleave Bleed
+    [38745] = { newId = 38747 }, -- Carve --> Carve Bleed
+    [38754] = { newId = 38759 }, -- Brawler --> Brawler Bleed
+
+    [83216] = { newId = 83217 }, -- Berserker Strike
+    [83229] = { newId = 83230 }, -- Onslaught
+    [83238] = { newId = 83239 }, -- Berserker Rage
 
     ---------------------------
     -- Destruction Staff ------
@@ -3127,6 +3143,8 @@ E.EffectOverride = {
     [80284] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Ring of Preservation - Rank 1)
     [40171] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Ring of Preservation - Rank 1)
 
+    [64509] = { consolidateExtra = true }, -- Major Savagery
+
     [80307] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Expert Hunter (Expert Hunter)
     [80381] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Evil Hunter (Evil Hunter)
     [80338] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Camouflaged Hunter (Camouflaged Hunter)
@@ -3222,7 +3240,7 @@ E.EffectOverride = {
     [29388] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_balanced_blade.dds' }, -- Balanced Blade (Rank 1)
     [45443] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_balanced_blade.dds' }, -- Balanced Blade (Rank 2)
     [29389] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_follow_up.dds' }, -- Follow Up (Follow Up - Rank 1)
-    [60860] = { icon = 'esoui/art/icons/ability_warrior_018.dds', name = A.Passive_Follow_Up }, -- Bonus Damage (Follow Up - Rank 1)
+    [60860] = { icon = 'esoui/art/icons/ability_warrior_018.dds' }, -- Bonus Damage (Follow Up - Rank 1)
     [45446] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_follow_up.dds' }, -- Follow Up (Follow Up - Rank 2)
     [60888] = { icon = 'esoui/art/icons/ability_warrior_018.dds', name = A.Passive_Follow_Up }, -- Bonus Damage (Follow Up - Rank 2)
     [29392] = { icon = 'LuiExtended/media/icons/abilities/ability_2handed_battle_rush.dds' }, -- Battle Rush (Battle Rush - Rank 1)
@@ -3319,6 +3337,29 @@ E.EffectOverride = {
     [38841] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', name = 'Rending Slashes' }, -- Rending Slashes Bleed (Rending Slashes - Rank 1)
 
     [38848] = { icon = 'esoui/art/icons/ability_dualwield_001_b.dds', name = 'Blood Craze' }, -- Blood Craze Bleed (Blood Craze - Rank 1)
+
+    -----------------------------------------
+    -- TWO HANDED ACTIVES -------------------
+    -----------------------------------------
+
+    [38818] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds' }, -- Dizzying Swing (Dizzying Swing)
+
+    [31059] = { icon = 'esoui/art/icons/ability_2handed_002.dds', name = A.Skill_Cleave }, -- Cleave Bleed (Cleave)
+    [38747] = { icon = 'esoui/art/icons/ability_2handed_002_a.dds', name = A.Skill_Carve }, -- Carve Bleed (Carve)
+    [38759] = { icon = 'esoui/art/icons/ability_2handed_002_b.dds', name = A.Skill_Brawler }, -- Brawler Bleed (Brawler)
+
+    [38827] = { icon = 'esoui/art/icons/ability_2handed_004_b.dds' }, -- Reverse Slice (Reverse Slice)
+
+    [61670] = { consolidateExtra = true }, -- Major Brutality (Momentum)
+    [28299] = { icon = 'esoui/art/icons/ability_2handed_005.dds' }, -- Momentum (Momentum)
+
+    [62387] = { consolidateExtra = true }, -- Major Brutality (Forward Momentum)
+    [62385] = { icon = 'esoui/art/icons/ability_2handed_005_a.dds', name = A.Skill_Forward_Momentum }, -- Momentum (Forward Momentum)
+
+    [62415] = { consolidateExtra = true }, -- Major Brutality (Rally)
+    [38805] = { icon = 'esoui/art/icons/ability_2handed_005_b.dds' }, -- Rally (Rally)
+
+    [83346] = { icon = 'esoui/art/icons/ability_2handed_006_a.dds' }, -- Onslaught (Onslaught)
 
     -----------------------------------------
     -- DESTRUCTION STAFF ACTIVES ------------
@@ -5752,6 +5793,10 @@ E.FakePlayerBuffs = {
 
     -- Dragonknight
     [32956] = { icon = 'esoui/art/icons/ability_dragonknight_006_b.dds', name = A.Skill_Standard_of_Might, duration = 0 }, -- Standard of Might (Standard of Might - Rank 1)
+
+    [31841] = { icon = 'esoui/art/icons/ability_dragonknight_012.dds', name = A.Skill_Inhale, duration = 2500 }, -- Inhale
+    [32796] = { icon = 'esoui/art/icons/ability_dragonknight_012_a.dds', name = A.Skill_Deep_Breath, duration = 2500 }, -- Deep Breath
+    [32788] = { icon = 'esoui/art/icons/ability_dragonknight_012_b.dds', name = A.Skill_Draw_Essence, duration = 2500 }, -- Draw Essence
 
     -- Templar
     [22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 1)

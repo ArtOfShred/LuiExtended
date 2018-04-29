@@ -287,6 +287,8 @@ A.Skill_Dragon_Blood                = 29004
 A.Skill_Green_Dragon_Blood          = 32744
 A.Skill_Coagulating_Blood           = 32722
 A.Skill_Inhale                      = 31837
+A.Skill_Deep_Breath                 = 32792
+A.Skill_Draw_Essence                = 32785
 A.Skill_Stonefist                   = 29032
 A.Skill_Stone_Giant                 = 31816
 A.Skill_Molten_Weapons              = 29043
@@ -310,6 +312,7 @@ A.Skill_Manifestation_of_Terror     = 37475
 A.Skill_Corrode                     = 89010
 A.Skill_Dark_Shade                  = 35434
 A.Skill_Shadow_Image                = 35441
+A.Skill_Swallow_Soul                = 34835
 A.Skill_Crippling_Grasp             = 36957
 A.Skill_Siphoning_Strikes           = 33319
 A.Skill_Drain_Power                 = 33316
@@ -411,9 +414,13 @@ A.Skill_Shield_Charge               = 28719 -- TODO: Check is best ID to use
 A.Skill_Power_Bash                  = 28365 -- TODO: Check is best ID to use
 
 -- Two-Handed
-A.Skill_Uppercut                    = 28279 -- TODO: Check is best ID to use
-A.Skill_Dizzying_Swing              = 38814 -- TODO: Check is best ID to use
-A.Skill_Stampede                    = 21055 -- TODO: Check is best ID to use
+A.Skill_Dizzying_Swing              = 38814
+A.Skill_Stampede                    = 38788
+A.Skill_Cleave                      = 20919
+A.Skill_Carve                       = 38745
+A.Skill_Brawler                     = 38754
+
+A.Skill_Forward_Momentum            = 38794
 
 -- Dual Wield
 A.Skill_Twin_Slashes                = 28379 -- TODO: Check is best ID to use
@@ -429,6 +436,7 @@ A.Skill_Bombard                     = 38705 -- TODO: Check is best ID to use
 A.Skill_Circle_of_Protection        = 35737
 A.Skill_Turn_Undead                 = 40181
 A.Skill_Ring_of_Preservation        = 40169
+A.Skill_Expert_Hunter               = 35762
 A.Skill_Revealed                    = 11717
 A.Skill_Trap_Beast                  = 35750
 A.Skill_Rearming_Trap               = 40382
@@ -574,12 +582,8 @@ A.Skill_Assault                     = 4304 -- Ice Wraith
 -- ---------------------------------------------------
 
 -- TWO HANDED ---------------
-A.Skill_Cleave                   = 20919
-A.Skill_Brawler                  = 38754
-A.Skill_Carve                    = 38745
 A.Skill_Wrecking_Blow            = 38807
 A.Skill_Momentum                 = 28297
-A.Skill_Forward_Momentum         = 38794
 A.Skill_Rally                    = 38802
 
 -- ONE HANDED AND SHIELD ----

@@ -3811,7 +3811,10 @@ debugAuras = {
             [18431] = true, -- Heavy Attack
             [60772] = true, -- Heavy Attack (Unarmed)
 
-            -- TWO HANDED
+            --------------------------
+            -- TWO HANDED PASSIVES
+            --------------------------
+
             [16037] = true, -- Light Attack
             [16041] = true, -- Heavy Attack (2H)
             [17162] = true, -- Heavy Attack
@@ -3820,10 +3823,10 @@ debugAuras = {
             [60757] = true, -- Heavy Attack (2H)
 
             [29387] = true, -- Forceful (Rank 1)
-            [61022] = true, -- Strife Saved Damage
+            [61022] = true, -- Forceful
             [30821] = true, -- Forceful
             [45444] = true, -- Forceful (Rank 2)
-            [61023] = true, -- Strife Saved Damage
+            [61023] = true, -- Forceful
             [45445] = true, -- Forceful
 
             [29375] = true, -- Heavy Weapons (Rank 1)
@@ -3843,6 +3846,84 @@ debugAuras = {
             [29392] = true, -- Battle Rush
             [45448] = true, -- Battle Rush (Rank 2)
             [45450] = true, -- Battle Rush
+
+            --------------------------
+            -- TWO HANDED ACTIVES
+            --------------------------
+
+            [28279] = true, -- Uppercut (Uppercut)
+
+            [38814] = true, -- Dizzying Swing (Dizzying Swing)
+            [38818] = true, -- Dizzying Swing (Dizzying Swing)
+            [38816] = true, -- Dizzying Swing (Dizzying Swing)
+
+            [38807] = true, -- Wrecking Blow (Wrecking Blow)
+
+            [28448] = true, -- Critical Charge (Critical Charge)
+            [28450] = true, -- Critical Strike (Critical Charge)
+            [28449] = true, -- Critical Charge (Critical Charge)
+
+            [38788] = true, -- Stampede (Stampede)
+            [38789] = true, -- Critical Strike (Stampede)
+            [38792] = true, -- Stampede (Stampede)
+            [38791] = true, -- Stampede (Stampede)
+
+            [38778] = true, -- Critical Rush (Critical Rush)
+            [38781] = true, -- Critical Strike (Critical Rush)
+            [38783] = true, -- Damage Bonus (Critical Rush)
+            [38782] = true, -- Critical Rush (Critical Rush)
+
+            [20919] = true, -- Cleave (Cleave)
+            [31059] = true, -- Cleave Bleed (Cleave)
+
+            [38745] = true, -- Carve (Carve)
+            [38747] = true, -- Carve Bleed (Carve)
+            [38746] = true, -- Minor Heroism (Carve)
+
+            [38754] = true, -- Brawler (Brawler)
+            [38759] = true, -- Brawler Bleed (Brawler)
+            [38773] = true, -- Brawler (Brawler)
+            [38774] = true, -- Brawler (Brawler)
+            [38763] = true, -- Brawler (Brawler)
+
+            [28302] = true, -- Reverse Slash (Reverse Slash)
+
+            [38823] = true, -- Reverse Slice (Reverse Slice)
+            [38826] = true, -- Reverse Slice (Reverse Slice)
+            [38827] = true, -- Reverse Slice (Reverse Slice)
+
+            [38819] = true, -- Executioner (Executioner)
+
+            [28297] = true, -- Momentum (Momentum)
+            [61670] = true, -- Major Brutality (Momentum)
+            [28299] = true, -- Momentum (Momentum)
+
+            [38794] = true, -- Forward Momentum (Forward Momentum)
+            [62387] = true, -- Major Brutality (Forward Momentum)
+            [38797] = true, -- Forward Momentum (Forward Momentum)
+            [62385] = true, -- Momentum (Forward Momentum)
+
+            [38802] = true, -- Rally (Rally)
+            [62415] = true, -- Major Brutality (Rally)
+            [60894] = true, -- Heal Buffer (Rally)
+            [60895] = true, -- Heal Buff (Rally)
+            [38803] = true, -- Rally (Rally)
+            [38805] = true, -- Rally (Rally)
+
+            [83216] = true, -- Berserker Strike (Berserker Strike)
+            [83217] = true, -- Berserker Strike (Berserker Strike)
+            [83221] = true, -- Berserker Strike (Berserker Strike)
+
+            [83345] = true, -- Onslaught Passive (Onslaught)
+            [83346] = true, -- Onslaught (Onslaught)
+            [83229] = true, -- Onslaught (Onslaught)
+            [83230] = true, -- Onslaught (Onslaught)
+            [83231] = true, -- Onslaught (Onslaught)
+
+            [83238] = true, -- Berserker Rage (Berserker Rage)
+            [83239] = true, -- Berserker Rage (Berserker Rage)
+            [83240] = true, -- Berserker Rage (Berserker Rage)
+            [83241] = true, -- Berserker Rage (Berserker Rage)
 
             -- ONE HAND AND SHIELD
             [15435] = true, -- Light Attack
@@ -4412,7 +4493,6 @@ debugAuras = {
             [38848] = true, -- Blood Craze Bleed (Blood Craze - Rank 1)
             [38852] = true, -- Blood Craze (Blood Craze - Rank 1)
 
-
             ------------------------------
             -- FIGHTERS GUILD PASSIVES
             -------------------------------
@@ -4520,8 +4600,6 @@ debugAuras = {
             [40158] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
             [40160] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
             [62314] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
-
-            [28279] = true, -- Remove when done with FG, blacklisting Uppercut for now so I can kill things.
 
             -- LIGHT ARMOR
             [29639] = true, -- Evocation (Rank 1)
