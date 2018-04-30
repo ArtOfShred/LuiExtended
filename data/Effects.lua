@@ -431,6 +431,16 @@ E.EffectGroundDisplay = {
     [22237] = { buff = true, debuff = false, ground = false }, -- Restoring Focus (Restoring Focus)
 
     ---------------------------
+    -- Bow --------------------
+    ---------------------------
+
+    [28876] = { buff = false, debuff = false, ground = true }, -- Volley (Volley)
+    [38689] = { buff = false, debuff = false, ground = true }, -- Endless Hail (Endless Hail)
+    [38695] = { buff = false, debuff = false, ground = true }, -- Arrow Barrage (Arrow Barrage)
+
+    [85458] = { buff = false, debuff = false, ground = true }, -- Ballista (Ballista)
+
+    ---------------------------
     -- Destruction Staff ------
     ---------------------------
 
@@ -891,6 +901,23 @@ E.BarHighlightOverride = {
     ---------------------------
 
     [38685] = { newId = 38686, showFakeAura = true, secondary = true }, -- Lethal Arrow --> Major Defile
+
+    [38687] = { newId = 38699 }, -- Focused Aim
+
+    [28879] = { newId = 28887 }, -- Scatter Shot
+    [38672] = { newId = 38674 }, -- Magnum Shot
+    [38669] = { newId = 38670 }, -- Draining Shot
+
+    [31271] = { newId = 31272 }, -- Arrow Spray
+    [38705] = { newId = 38707 }, -- Bombard
+    [38701] = { newId = 38703 }, -- Acid Spray
+
+    [28869] = { newId = 44540 }, -- Poison Arrow
+    [38645] = { newId = 44545 }, -- Venom Arrow
+    [38660] = { newId = 44549 }, -- Poison Injection
+
+    [85257] = { newId = 85261 }, -- Toxic Barrage
+    [85451] = { newId = 85458 }, -- Ballista
 
     ---------------------------
     -- Destruction Staff ------
@@ -3289,9 +3316,7 @@ E.EffectOverride = {
     [45497] = { icon = 'esoui/art/icons/ability_weapon_024.dds' }, -- Hawk Eye (Hawk Eye - Rank 2)
     [78855] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_hawk_eye.dds' }, -- Hawk Eye (Hawk Eye - Rank 2)
     [30923] = { icon = 'LuiExtended/media/icons/abilities/passive_bow_hasty_retreat.dds' }, -- Hasty Retreat (Hasty Retreat - Rank 1)
-    [98489] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Hasty Retreat - Rank 1)
     [45498] = { icon = 'LuiExtended/media/icons/abilities/passive_bow_hasty_retreat.dds' }, -- Hasty Retreat (Hasty Retreat - Rank 2)
-    [98490] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Hasty Retreat - Rank 2)
 
     -- Destruction Staff
     [30948] = { icon = 'LuiExtended/media/icons/abilities/passive_destructionstaff_tri_focus.dds' }, -- Tri Focus (Tri Focus - Rank 1)
@@ -3364,6 +3389,28 @@ E.EffectOverride = {
 
     [62529] = { name = A.Skill_Quick_Cloak }, -- Blade Cloak (Quick Cloak)
     [62547] = { name = A.Skill_Deadly_Cloak }, -- Blade Cloak (Deadly Cloak)
+
+    -----------------------------------------
+    -- BOW ACTIVES --------------------------
+    -----------------------------------------
+
+    [38698] = { hide = true }, -- Focused Aim (Focused Aim)
+    [38688] = { consolidateExtra = true }, -- Minor Fracture (Focused Aim)
+
+    [28888] = { icon = 'esoui/art/icons/ability_bow_004.dds' }, -- Scatter Shot (Scatter Shot)
+
+    [38676] = { icon = 'esoui/art/icons/ability_bow_004_b.dds', name = A.Skill_Magnum_Shot }, -- Scatter Shot (Magnum Shot)
+    [38675] = { icon = 'esoui/art/icons/ability_bow_004_b.dds', name = A.Skill_Magnum_Shot }, -- Scatter Shot (Magnum Shot)
+    [38674] = { name = A.Skill_Magnum_Shot }, -- Scatter Shot (Magnum Shot)
+
+    [38671] = { icon = 'esoui/art/icons/ability_bow_004_a.dds' }, -- Draining Shot (Draining Shot)
+    [80764] = { name = A.Skill_Draining_Shot }, -- Draining Shot Heal (Draining Shot)
+
+    [38702] = { hideReduce = true }, -- Acid Spray (Acid Spray)
+
+    [38648] = { icon = '' }, -- Poison Arrow (Venom Arrow)
+    [38649] = { icon = 'esoui/art/icons/ability_bow_002_a.dds', name = A.Skill_Venom_Arrow }, -- Poison Arrow (Venom Arrow)
+    [38650] = { name = A.Skill_Venom_Arrow }, -- Poison Arrow (Venom Arrow)
 
     -----------------------------------------
     -- DESTRUCTION STAFF ACTIVES ------------
@@ -5896,8 +5943,11 @@ E.FakeStagger = {
     -- Player Basic
     [42514] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', name = A.Innate_Hard_Dismount, duration = 2000}, -- Hard Dismount (Player knocked off horse)
 
+    -- Bow
+    [38649] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Poison Arrow (Venom Arrow)
+
     -- Destruction Staff
-    [48009] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Stagger (Crushing Shock - Rank 1)
+    [48009] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Stagger (Crushing Shock)
 
     -- On Player
     [2874] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Staggered (Generic Stagger applied to player by many different NPC abilities)

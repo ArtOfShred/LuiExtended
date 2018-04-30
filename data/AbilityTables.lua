@@ -433,7 +433,10 @@ A.Skill_Quick_Cloak                 = 38901
 A.Skill_Deadly_Cloak                = 38906
 
 -- Bow
-A.Skill_Bombard                     = 38705 -- TODO: Check is best ID to use
+A.Skill_Magnum_Shot                 = 38672
+A.Skill_Draining_Shot               = 38669
+A.Skill_Bombard                     = 38705
+A.Skill_Venom_Arrow                 = 38645
 
 -- ---------------------------------------------------
 -- ARMOR SKILLS --------------------------------------
@@ -595,48 +598,6 @@ A.Skill_Assault                     = 4304 -- Ice Wraith
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-
--- ---------------------------------------------------
--- WEAPONS -------------------------------------------
--- ---------------------------------------------------
-
--- TWO HANDED ---------------
-A.Skill_Wrecking_Blow            = 38807
-A.Skill_Momentum                 = 28297
-A.Skill_Rally                    = 38802
-
--- ONE HANDED AND SHIELD ----
-A.Skill_Puncture                 = 28306
-A.Skill_Pierce_Armor             = 38250
-A.Skill_Ransack                  = 38256
-A.Skill_Absorb_Magic             = 41380
-A.Skill_Defensive_Stance         = 38312
-A.Skill_Defensive_Posture        = 41351
-A.Skill_Power_Slam               = 38452
-A.Skill_Reverberating_Bash       = 38455
-
--- DUAL WEILD ---------------
-A.Skill_Rapid_Strikes            = 38857
-A.Skill_Whirling_Blades          = 38891
-A.Skill_Hidden_Blade             = 21157
-A.Skill_Flying_Blade             = 38910
-A.Skill_Shrouded_Daggers         = 38914
-
--- BOW ----------------------
-A.Skill_Poison_Arrow             = 28869
-A.Skill_Poison_Injection         = 38660
-A.Skill_Venom_Arrow              = 38645
-A.Skill_Volley                   = 28876
-A.Skill_Scorched_Earth           = 38689
-A.Skill_Arrow_Barrage            = 38695
-A.Skill_Scatter_Shot             = 28879
-A.Skill_Draining_Shot            = 38669
-A.Skill_Magnum_Shot              = 38672
-A.Skill_Arrow_Spray              = 31271
-A.Skill_Acid_Spray               = 38701
-A.Skill_Snipe                    = 28882
-A.Skill_Focused_Aim              = 38687
-A.Skill_Lethal_Arrow             = 38685
 
 -- ---------------------------------------------------
 -- GUILDS --------------------------------------------

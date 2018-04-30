@@ -3688,115 +3688,10 @@ debugAuras = {
             -- WARDEN ACTIVES
             --------------------------
 
-            -- Dive
-            [85995] = true, -- Dive (Dive - Rank 1)
-            [85996] = true, -- Dive (Dive - Rank 2)
-            [85997] = true, -- Dive (Dive - Rank 3)
-            [85998] = true, -- Dive (Dive - Rank 4)
-
-            -- Cutting Dive
-            [85999] = true, -- Cutting Dive  (Cutting Dive - Rank 1)
-
-            -- Scorch
-            [86009] = true, -- Scorch (Scorch - Rank 1)
-            [94412] = true, -- Gore (Scorch - Rank 1)
-            [94409] = true, -- Gore (Scorch - Rank 1)
-            [94410] = true, -- Gore (Scorch - Rank 1)
-            [94411] = true, -- Sorch (Scorch - Rank 1)
-            [86012] = true, -- Scorch (Scorch - Rank 2)
-            [94416] = true, -- Gore (Scorch - Rank 2)
-            [94413] = true, -- Gore (Scorch - Rank 2)
-            [94414] = true, -- Gore (Scorch - Rank 2)
-            [94415] = true, -- Sorch (Scorch - Rank 2)
-            [86013] = true, -- Scorch (Scorch - Rank 3)
-            [94420] = true, -- Gore (Scorch - Rank 3)
-            [94417] = true, -- Gore (Scorch - Rank 3)
-            [94418] = true, -- Gore (Scorch - Rank 3)
-            [94419] = true, -- Sorch (Scorch - Rank 3)
-            [93593] = true, -- Scorch (Scorch - Rank 4)
-            [93594] = true, -- Gore (Scorch - Rank 4)
-            [93634] = true, -- Gore (Scorch - Rank 4)
-            [93596] = true, -- Gore (Scorch - Rank 4)
-            [93595] = true, -- Sorch (Scorch - Rank 4)
-
-            -- Fungal Growth
-            [85536] = true, -- Fungal Growth (Fungal Growth - Rank 1)
-            [93769] = true, -- Fungal Growth (Fungal Growth - Rank 2)
-            [93770] = true, -- Fungal Growth (Fungal Growth - Rank 3)
-            [93771] = true, -- Fungal Growth (Fungal Growth - Rank 4)
-
-            -- Enchanted Growth
-            [85862] = true, -- Enchanted Growth (Enchanted Growth - Rank 1)
-            [86300] = true, -- Minor Intellect (Enchanted Growth - Rank 1)
-            [87019] = true, -- Minor Endurance (Enchanted Growth - Rank 1)
-
-            -- Healing Seed
-            [85572] = true, -- Healing Seed (All Ranks)
-            [85577] = true, -- Healing Seed Synergy (All Ranks)
-
-            [85578] = true, -- Healing Seed (Healing Seed - Rank 1)
-            [85585] = true, -- Healing Seed Dummy (Healing Seed - Rank 1)
-            [85584] = true, -- Healing Seed Synergy Tick (Healing Seed - Rank 1)
-            [85582] = true, -- Healing Seed Heal (Healing Seed - Rank 1)
-            [85583] = true, -- Healing Seed Synergy (Healing Seed - Rank 1)
-            [93802] = true, -- Healing Seed (Healing Seed - Rank 2)
-            [93812] = true, -- Healing Seed Dummy (Healing Seed - Rank 2)
-            [93814] = true, -- Healing Seed Synergy Tick (Healing Seed - Rank 2)
-            [93811] = true, -- Healing Seed Heal (Healing Seed - Rank 2)
-            [93813] = true, -- Healing Seed Synergy (Healing Seed - Rank 2)
-            [93803] = true, -- Healing Seed (Healing Seed - Rank 3)
-            [93816] = true, -- Healing Seed Dummy (Healing Seed - Rank 3)
-            [93818] = true, -- Healing Seed Synergy Tick (Healing Seed - Rank 3)
-            [93815] = true, -- Healing Seed Heal (Healing Seed - Rank 3)
-            [93817] = true, -- Healing Seed Synergy (Healing Seed - Rank 3)
-            [93804] = true, -- Healing Seed (Healing Seed - Rank 4)
-            [93820] = true, -- Healing Seed Dummy (Healing Seed - Rank 4)
-            [93822] = true, -- Healing Seed Synergy Tick (Healing Seed - Rank 4)
-            [93819] = true, -- Healing Seed Heal (Healing Seed - Rank 4)
-            [93821] = true, -- Healing Seed Synergy (Healing Seed - Rank 4)
-
-            -- Frost Cloak
-            [86122] = true, -- Frost Cloak (Frost Cloak - Rank 1)
-            [86224] = true, -- Major Resolve (Frost Cloak - Rank 1)
-            [86225] = true, -- Major Ward (Frost Cloak - Rank 1)
-            [86123] = true, -- Frost Cloak (Frost Cloak - Rank 2)
-            [94014] = true, -- Major Resolve (Frost Cloak - Rank 2)
-            [94015] = true, -- Major Ward (Frost Cloak - Rank 2)
-            [86124] = true, -- Frost Cloak (Frost Cloak - Rank 3)
-            [94016] = true, -- Major Resolve (Frost Cloak - Rank 3)
-            [94017] = true, -- Major Ward (Frost Cloak - Rank 3)
-            [86125] = true, -- Frost Cloak (Frost Cloak - Rank 4)
-            [94012] = true, -- Major Resolve (Frost Cloak - Rank 4)
-            [94013] = true, -- Major Ward (Frost Cloak - Rank 4)
-
-            -- Expansive Frost Cloak
-            [86126] = true, -- Expansive Frost Cloak (Expansive Frost Cloak - Rank 1)
-            [88758] = true, -- Major Resolve (Expansive Frost Cloak - Rank 1)
-            [88759] = true, -- Major Ward (Expansive Frost Cloak - Rank 1)
-
-            -- Impaling Shards
-            [88920] = true, -- Impaling Shards Dummy (Impaling Shards - Rank 1)
-            [86161] = true, -- Impaling Shards (Impaling Shards - Rank 1)
-            [88783] = true, -- Impaling Shards (Impaling Shards - Rank 1)
-            [86238] = true, -- Impaling Shards (Impaling Shards - Rank 1)
-            [86162] = true, -- Impaling Shards Dummy (Impaling Shards - Rank 2)
-            [94066] = true, -- Impaling Shards (Impaling Shards - Rank 2)
-            [94067] = true, -- Impaling Shards (Impaling Shards - Rank 2)
-            [94065] = true, -- Impaling Shards (Impaling Shards - Rank 2)
-            [86163] = true, -- Impaling Shards Dummy (Impaling Shards - Rank 3)
-            [94069] = true, -- Impaling Shards (Impaling Shards - Rank 3)
-            [94070] = true, -- Impaling Shards (Impaling Shards - Rank 3)
-            [94068] = true, -- Impaling Shards (Impaling Shards - Rank 3)
-            [86164] = true, -- Impaling Shards Dummy (Impaling Shards - Rank 4)
-            [94072] = true, -- Impaling Shards (Impaling Shards - Rank 4)
-            [94073] = true, -- Impaling Shards (Impaling Shards - Rank 4)
-            [94071] = true, -- Impaling Shards (Impaling Shards - Rank 4)
-
-            ---------------------
-            -- WEAPON SKILL LINES
-            ---------------------
-
+            --------------------------
             -- UNARMED
+            --------------------------
+
             [23604] = true, -- Light Attack
             [18429] = true, -- Heavy Attack (Unarmed)
             [18430] = true, -- Heavy Attack
@@ -4157,7 +4052,6 @@ debugAuras = {
             [30942] = true, -- Ranger (Rank 1)
             [45493] = true, -- Ranger (Rank 2)
 
-
             [30936] = true, -- Hawk Eye (Rank 1)
             [78854] = true, -- Hawk Eye
             [45497] = true, -- Hawk Eye (Rank 2)
@@ -4177,13 +4071,75 @@ debugAuras = {
             [38685] = true, -- Lethal Arrow (Lethal Arrow)
             [38686] = true, -- Major Defile (Lethal Arrow)
 
+            [38687] = true, -- Focused Aim (Focused Aim)
+            [38699] = true, -- Focused Aim (Focused Aim)
+            [38698] = true, -- Focused Aim (Focused Aim)
+            [38688] = true, -- Minor Fracture (Focused Aim)
 
+            [28876] = true, -- Volley (Volley)
+            [38424] = true, -- Summon Shade (Volley)
+            [28877] = true, -- Volley (Volley)
 
+            [38689] = true, -- Endless Hail (Endless Hail)
+            [38691] = true, -- Summon Shade (Endless Hail)
+            [38690] = true, -- Endless Hail (Endless Hail)
 
+            [38695] = true, -- Arrow Barrage (Arrow Barrage)
+            [38697] = true, -- Summon Shade (Arrow Barrage)
+            [38696] = true, -- Arrow Barrage (Arrow Barrage)
 
+            [28879] = true, -- Scatter Shot (Scatter Shot)
+            [28888] = true, -- Scatter Shot (Scatter Shot)
+            [28887] = true, -- Scatter Shot (Scatter Shot)
+
+            [38672] = true, -- Magnum Shot (Magnum Shot)
+            [38676] = true, -- Scatter Shot (Magnum Shot)
+            [38675] = true, -- Scatter Shot (Magnum Shot)
+            [38674] = true, -- Scatter Shot (Magnum Shot)
+
+            [38669] = true, -- Draining Shot (Draining Shot)
+            [38671] = true, -- Draining Shot (Draining Shot)
+            [38670] = true, -- Draining Shot (Draining Shot)
+            [80767] = true, -- Draining Shot (Draining Shot)
+            [80764] = true, -- Draining Shot Heal (Draining Shot)
+
+            [31271] = true, -- Arrow Spray (Arrow Spray)
+            [38722] = true, -- Arrow Spray (Arrow Spray)
+            [31272] = true, -- Arrow Spray (Arrow Spray)
+
+            [38705] = true, -- Bombard (Bombard)
+            [38723] = true, -- Bombard (Bombard)
+            [38707] = true, -- Bombard (Bombard)
+            [38706] = true, -- Bombard (Bombard)
+
+            [38701] = true, -- Acid Spray (Acid Spray)
+            [38724] = true, -- Acid Spray (Acid Spray)
+            [38702] = true, -- Acid Spray (Acid Spray)
+            [38703] = true, -- Acid Spray (Acid Spray)
+
+            [28869] = true, -- Poison Arrow (Poison Arrow)
+            [44540] = true, -- Poison Arrow (Poison Arrow)
+
+            [38645] = true, -- Venom Arrow (Venom Arrow)
+            [44545] = true, -- Venom Arrow (Venom Arrow)
+            [38648] = true, -- Poison Arrow (Venom Arrow)
+            [38649] = true, -- Poison Arrow (Venom Arrow)
+            [38650] = true, -- Poison Arrow (Venom Arrow)
+
+            [38660] = true, -- Poison Injection (Poison Injection)
+            [44549] = true, -- Poison Injection (Poison Injection)
+
+            [55131] = true, -- Rapid Fire (Rapid Fire - All Morphs)
             [83465] = true, -- Rapid Fire (Rapid Fire)
-            --[55131] = true, -- Rapid Fire (Rapid Fire)
             [86563] = true, -- Rapid Fire (Rapid Fire)
+
+            [85257] = true, -- Toxic Barrage (Toxic Barrage)
+            [85260] = true, -- Toxic Barrage (Toxic Barrage)
+            [85261] = true, -- Toxic Barrage (Toxic Barrage)
+
+            [85451] = true, -- Ballista (Ballista)
+            [85458] = true, -- Ballista (Ballista)
+            [85462] = true, -- Ballista (Ballista)
 
             --------------------------
             -- DESTRUCTION STAFF PASSIVES
