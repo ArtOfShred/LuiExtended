@@ -3929,21 +3929,20 @@ debugAuras = {
             [15829] = true, -- Heavy Attack
             [60759] = true, -- Heavy Attack (Shield)
 
+            [29420] = true, -- Fortress (Rank 1)
+            [45471] = true, -- Fortress (Rank 2)
 
-            --[29420] = true, -- Fortress (Rank 1)
-            --[45471] = true, -- Fortress (Rank 2)
+            [29397] = true, -- Sword and Board (Rank 1)
+            [45452] = true, -- Sword and Board (Rank 2)
 
-            --[29397] = true, -- Sword and Board (Rank 1)
-            --[45452] = true, -- Sword and Board (Rank 2)
+            [29415] = true, -- Deadly Bash (Rank 1)
+            [45469] = true, -- Deadly Bash (Rank 2)
 
-            --[29415] = true, -- Deadly Bash (Rank 1)
-            --[45469] = true, -- Deadly Bash (Rank 2)
+            [29399] = true, -- Deflect Bolts (Rank 1)
+            [45472] = true, -- Deflect Bolts (Rank 2)
 
-            --[29399] = true, -- Deflect Bolts (Rank 1)
-            --[45472] = true, -- Deflect Bolts (Rank 2)
-
-            --[29422] = true, -- Battlefield Mobility (Rank 1)
-            --[45473] = true, -- Battlefield Mobility (Rank 2)
+            [29422] = true, -- Battlefield Mobility (Rank 1)
+            [45473] = true, -- Battlefield Mobility (Rank 2)
 
             --------------------------
             -- ONE HAND AND SHIELD ACTIVES
@@ -4016,7 +4015,10 @@ debugAuras = {
 
             [83310] = true, -- Shield Discipline (Shield Discipline)
 
-            -- Dual Wield
+            --------------------------
+            -- DUAL WIELD PASSIVES
+            --------------------------
+
             [16499] = true, -- Light Attack
             [16420] = true, -- Heavy Attack (Dual Wield)
             [17170] = true, -- Heavy Attack
@@ -4043,6 +4045,97 @@ debugAuras = {
             [30894] = true, -- Twin Blade and Blunt Bleed
             [45482] = true, -- Twin Blade and Blunt (Rank 2)
             [45483] = true, -- Twin Blade and Blunt Bleed
+
+            --------------------------
+            -- DUAL WIELD ACTIVES
+            --------------------------
+
+            [28607] = true, -- Flurry (Flurry)
+            [81355] = true, -- Flurry (Flurry)
+            [29227] = true, -- Flurry (Flurry)
+
+            [38857] = true, -- Rapid Strikes (Rapid Strikes)
+            [38860] = true, -- Rapid Strikes (Rapid Strikes)
+            [81368] = true, -- Rapid Strikes (Rapid Strikes)
+            [38859] = true, -- Rapid Strikes (Rapid Strikes)
+
+            [38846] = true, -- Bloodthirst (Bloodthirst)
+            [81378] = true, -- Bloodthirst (Bloodthirst)
+            [81380] = true, -- Bloodthirst (Bloodthirst)
+            [81379] = true, -- Bloodthirst (Bloodthirst)
+            [38853] = true, -- Bloodthirst (Bloodthirst)
+            [81381] = true, -- Bloodthirst (Bloodthirst)
+
+            [28379] = true, -- Twin Slashes (Twin Slashes)
+            [35312] = true, -- Twin Slashes (Twin Slashes)
+            [29293] = true, -- Twin Slashes Bleed (Twin Slashes)
+
+            [38839] = true, -- Rending Slashes (Rending Slashes)
+            [38840] = true, -- Rending Slashes (Rending Slashes)
+            [38841] = true, -- Rending Slashes Bleed (Rending Slashes)
+            [38842] = true, -- Rending Slashes (Rending Slashes)
+
+            [38845] = true, -- Blood Craze (Blood Craze)
+            [38847] = true, -- Blood Craze (Blood Craze)
+            [38848] = true, -- Blood Craze Bleed (Blood Craze)
+            [38852] = true, -- Blood Craze (Blood Craze)
+
+            [28591] = true, -- Whirlwind (Whirlwind)
+            [39620] = true, -- Whirlwind (Whirlwind)
+
+            [38891] = true, -- Whirling Blades (Whirling Blades)
+            [68801] = true, -- Major Endurance (Whirling Blades)
+            [39666] = true, -- Whirlwind (Whirling Blades)
+
+            [38861] = true, -- Steel Tornado (Steel Tornado)
+            [39665] = true, -- Whirlwind (Steel Tornado)
+
+            [64746] = true, -- Blade Cloak AoE Fx (Blade Cloak)
+            [28613] = true, -- Blade Cloak (Blade Cloak)
+            [62522] = true, -- Blade Cloak (Blade Cloak)
+
+            [38901] = true, -- Quick Cloak (Quick Cloak)
+            [62531] = true, -- Major Expedition (Quick Cloak)
+            [62529] = true, -- Blade Cloak (Quick Cloak)
+
+            [38906] = true, -- Deadly Cloak (Deadly Cloak)
+            [62547] = true, -- Blade Cloak (Deadly Cloak)
+
+            [21157] = true, -- Hidden Blade (Hidden Blade)
+            [68807] = true, -- Major Brutality (Hidden Blade)
+            [28378] = true, -- Hidden Blade (Hidden Blade)
+
+            [38914] = true, -- Shrouded Daggers (Shrouded Daggers)
+            [68859] = true, -- Major Brutality (Shrouded Daggers)
+            [68858] = true, -- Hit Dummy (Shrouded Daggers)
+            [68861] = true, -- Shrouded Daggers (Shrouded Daggers)
+            [68860] = true, -- Bounce 1 (Shrouded Daggers)
+            [68862] = true, -- Shrouded Daggers (Shrouded Daggers)
+            [68863] = true, -- Bounce 2 (Shrouded Daggers)
+            [68864] = true, -- Shrouded Daggers (Shrouded Daggers)
+
+            [38910] = true, -- Flying Blade (Flying Blade)
+            [68814] = true, -- Major Brutality (Flying Blade)
+            [38912] = true, -- Flying Blade (Flying Blade)
+
+            [83600] = true, -- Lacerate (Lacerate)
+            [85156] = true, -- Lacerate (Lacerate)
+            [85159] = true, -- Lacerate (Lacerate)
+            [85170] = true, -- Lacerate (Lacerate)
+            [85171] = true, -- Lacerate (Lacerate)
+
+            [85187] = true, -- Rend (Rend)
+            [85192] = true, -- Rend (Rend)
+            [85193] = true, -- Rend (Rend)
+            [85191] = true, -- Rend (Rend)
+            [85190] = true, -- Rend (Rend)
+
+            [85179] = true, -- Thrive in Chaos (Thrive in Chaos)
+            [85182] = true, -- Thrive in Chaos (Thrive in Chaos)
+            [85183] = true, -- Thrive in Chaos (Thrive in Chaos)
+            [85184] = true, -- Thrive in Chaos (Thrive in Chaos)
+            [85181] = true, -- Thrive in Chaos (Thrive in Chaos)
+            [85180] = true, -- Thrive in Chaos (Thrive in Chaos)
 
             -- BOW
             [16688] = true, -- Light Attack

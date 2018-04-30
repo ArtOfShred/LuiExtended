@@ -869,6 +869,24 @@ E.BarHighlightOverride = {
     [38452] = { newId = 80625 }, -- Power Slam
 
     ---------------------------
+    -- Dual Wield -------------
+    ---------------------------
+
+    [28379] = { newId = 29293 }, -- Twin Slashes --> Twin Slashes Bleed
+    [38839] = { newId = 38841 }, -- Rending Slashes --> Rending Slashes Bleed
+    [38845] = { newId = 38852 }, -- Blood Craze
+
+    [38891] = { newId = 68801, showFakeAura = true, noRemove = true, secondary = true }, -- Whirling Blades --> Major Endurance
+
+    [21157] = { newId = 68807, showFakeAura = true, noRemove = true }, -- Hidden Blade --> Major Brutality
+    [38914] = { newId = 68859, showFakeAura = true, noRemove = true }, -- Shrouded Daggers --> Major Brutality
+    [38910] = { newId = 68814, showFakeAura = true, noRemove = true }, -- Flying Blade --> Major Brutality
+
+    [83600] = { newId = 85156 }, -- Lacerate
+    [85187] = { newId = 85192 }, -- Rend
+    [85179] = { newId = 85182 }, -- Thrive in Chaos
+
+    ---------------------------
     -- Destruction Staff ------
     ---------------------------
 
@@ -3329,6 +3347,17 @@ E.EffectOverride = {
     [38266] = { name = A.Skill_Heroic_Slash }, -- Heroic Slash Snare (Heroic Slash)
     [38398] = { icon = 'esoui/art/icons/ability_1handed_004_b.dds' }, -- Absorb Magic (Absorb Magic)
     [38407] = { name = A.Skill_Invasion }, -- Invasion (Invasion)
+
+    -----------------------------------------
+    -- DUAL WIELD ACTIVES -------------------
+    -----------------------------------------
+
+    [29293] = { icon = 'esoui/art/icons/ability_dualwield_001.dds', name = A.Skill_Twin_Slashes }, -- Twin Slashes Bleed (Twin Slashes)
+    [38841] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', name = A.Skill_Rending_Slashes }, -- Rending Slashes Bleed (Rending Slashes)
+    [38848] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', name = A.Skill_Blood_Craze }, -- Blood Craze Bleed (Blood Craze)
+
+    [62529] = { name = A.Skill_Quick_Cloak }, -- Blade Cloak (Quick Cloak)
+    [62547] = { name = A.Skill_Deadly_Cloak }, -- Blade Cloak (Deadly Cloak)
 
     -----------------------------------------
     -- DESTRUCTION STAFF ACTIVES ------------

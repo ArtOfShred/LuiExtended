@@ -426,7 +426,11 @@ A.Skill_Invasion                    = 38405
 A.Skill_Power_Bash                  = 28365
 
 -- Dual Wield
-A.Skill_Twin_Slashes                = 28379 -- TODO: Check is best ID to use
+A.Skill_Twin_Slashes                = 28379
+A.Skill_Rending_Slashes             = 38839
+A.Skill_Blood_Craze                 = 38845
+A.Skill_Quick_Cloak                 = 38901
+A.Skill_Deadly_Cloak                = 38906
 
 -- Bow
 A.Skill_Bombard                     = 38705 -- TODO: Check is best ID to use
@@ -612,16 +616,8 @@ A.Skill_Power_Slam               = 38452
 A.Skill_Reverberating_Bash       = 38455
 
 -- DUAL WEILD ---------------
-A.Effect_Twin_Slashes_Bleed      = 29293
-A.Skill_Blood_Craze              = 38845
-A.Effect_Blood_Craze_Bleed       = 38848
-A.Skill_Rending_Slashes          = 38839
-A.Effect_Rending_Slashes_Bleed   = 38841
 A.Skill_Rapid_Strikes            = 38857
 A.Skill_Whirling_Blades          = 38891
-A.Skill_Blade_Cloak              = 28613
-A.Skill_Quick_Cloak              = 38901
-A.Skill_Deadly_Cloak             = 38906
 A.Skill_Hidden_Blade             = 21157
 A.Skill_Flying_Blade             = 38910
 A.Skill_Shrouded_Daggers         = 38914
