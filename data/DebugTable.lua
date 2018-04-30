@@ -3792,16 +3792,6 @@ debugAuras = {
             [94073] = true, -- Impaling Shards (Impaling Shards - Rank 4)
             [94071] = true, -- Impaling Shards (Impaling Shards - Rank 4)
 
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-
             ---------------------
             -- WEAPON SKILL LINES
             ---------------------
@@ -3928,7 +3918,10 @@ debugAuras = {
             [83240] = true, -- Berserker Rage (Berserker Rage)
             [83241] = true, -- Berserker Rage (Berserker Rage)
 
-            -- ONE HAND AND SHIELD
+            --------------------------
+            -- ONE HAND AND SHIELD PASSIVES
+            --------------------------
+
             [15435] = true, -- Light Attack
             [15279] = true, -- Heavy Attack (1H)
             [15282] = true, -- Heavy Attack
@@ -3937,28 +3930,91 @@ debugAuras = {
             [60759] = true, -- Heavy Attack (Shield)
 
 
-            [29420] = true, -- Fortress (Rank 1)
-            [45471] = true, -- Fortress (Rank 2)
+            --[29420] = true, -- Fortress (Rank 1)
+            --[45471] = true, -- Fortress (Rank 2)
 
-            [29397] = true, -- Sword and Board (Rank 1)
-            [45452] = true, -- Sword and Board (Rank 2)
+            --[29397] = true, -- Sword and Board (Rank 1)
+            --[45452] = true, -- Sword and Board (Rank 2)
 
-            [29415] = true, -- Deadly Bash (Rank 1)
-            [45469] = true, -- Deadly Bash (Rank 2)
+            --[29415] = true, -- Deadly Bash (Rank 1)
+            --[45469] = true, -- Deadly Bash (Rank 2)
 
-            [29399] = true, -- Deflect Bolts (Rank 1)
-            [45472] = true, -- Deflect Bolts (Rank 2)
+            --[29399] = true, -- Deflect Bolts (Rank 1)
+            --[45472] = true, -- Deflect Bolts (Rank 2)
 
-            [29422] = true, -- Battlefield Mobility (Rank 1)
-            [45473] = true, -- Battlefield Mobility (Rank 2)
+            --[29422] = true, -- Battlefield Mobility (Rank 1)
+            --[45473] = true, -- Battlefield Mobility (Rank 2)
 
+            --------------------------
+            -- ONE HAND AND SHIELD ACTIVES
+            --------------------------
 
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
+            [28306] =  true, -- Puncture (Puncture)
+            [28307] =  true, -- Major Fracture (Puncture)
+
+            [38256] = true, -- Ransack (Ransack)
+            [62474] = true, -- Major Fracture (Ransack)
+            [62475] = true, -- Minor Resolve (Ransack)
+
+            [38250] = true, -- Pierce Armor (Pierce Armor)
+            [62484] = true, -- Major Fracture (Pierce Armor)
+            [62485] = true, -- Major Breach (Pierce Armor)
+
+            [28304] = true, -- Low Slash (Low Slash)
+            [29308] = true, -- Minor Maim (Low Slash)
+            [28305] = true, -- Low Slash Snare (Low Slash)
+
+            [38268] = true, -- Deep Slash (Deep Slash)
+            [62495] = true, -- Minor Maim (Deep Slash)
+            [38271] = true, -- Deep Slash (Deep Slash)
+            [60921] = true, -- Deep Slash (Deep Slash)
+
+            [38264] = true, -- Heroic Slash (Heroic Slash)
+            [62504] = true, -- Minor Maim (Heroic Slash)
+            [38266] = true, -- Heroic Slash Snare (Heroic Slash)
+            [62505] = true, -- Minor Heroism (Heroic Slash)
+
+            [28728] = true, -- Defensive Posture (Defensive Posture - All Morphs)
+            [28727] = true, -- Defensive Posture (Defensive Posture)
+
+            [38312] = true, -- Defensive Stance (Defensive Stance)
+            [38316] = true, -- Defensive Stance (Defensive Stance)
+            [38315] = true, -- Defensive Stance (Defensive Stance)
+
+            [38317] = true, -- Absorb Magic (Absorb Magic)
+            [38398] = true, -- Absorb Magic (Absorb Magic)
+
+            [28719] = true, -- Shield Charge (Shield Charge)
+            [28721] = true, -- Shield Charge (Shield Charge)
+            [28720] = true, -- Shield Charge (Shield Charge)
+
+            [38401] = true, -- Shielded Assault (Shielded Assault)
+            [38404] = true, -- Shielded Assault (Shielded Assault)
+            [38402] = true, -- Shielded Assault (Shielded Assault)
+            [38403] = true, -- Shielded Assault (Shielded Assault)
+
+            [38405] = true, -- Invasion (Invasion)
+            [38408] = true, -- Invasion (Invasion)
+            [38406] = true, -- Invasion (Invasion)
+            [38407] = true, -- Invasion Stun (Invasion)
+
+            [28365] = true, -- Power Bash (Power Bash)
+            [83433] = true, -- Power Bash (Power Bash)
+
+            [38455] = true, -- Reverberating Bash (Reverberating Bash)
+            [83446] = true, -- Reverberating Bash (Reverberating Bash)
+            [38838] = true, -- Major Defile (Reverberating Bash)
+
+            [80624] = true, -- Power Slam (Power Slam)
+            [80625] = true, -- Power Slam (Power Slam)
+            [38452] = true, -- Power Slam (Power Slam)
+
+            [83272] = true, -- Shield Wall (Shield Wall)
+
+            [83292] = true, -- Spell Wall (Spell Wall)
+            [83301] = true, -- Spell Wall (Spell Wall)
+
+            [83310] = true, -- Shield Discipline (Shield Discipline)
 
             -- Dual Wield
             [16499] = true, -- Light Attack
@@ -4453,100 +4509,6 @@ debugAuras = {
             [63118] = true, -- Unstoppable (Unstoppable)
             [63119] = true, -- Major Resolve (Unstoppable)
             [63120] = true, -- Major Ward (Unstoppable)
-
-            -------------------------------
-            -- WEAPON ACTIVES
-            -------------------------------
-
-            -- 1H + Shield
-            [28306] = true, -- Puncture (Puncture - Rank 1)
-            [28307] = true, -- Major Fracture (Puncture - Rank 1)
-            [41473] = true, -- Puncture (Puncture - Rank 2)
-            [62470] = true, -- Major Fracture (Puncture - Rank 2)
-            [41475] = true, -- Puncture (Puncture - Rank 3)
-            [62471] = true, -- Major Fracture (Puncture - Rank 3)
-            [41477] = true, -- Puncture (Puncture - Rank 4)
-            [62473] = true, -- Major Fracture (Puncture - Rank 4)
-
-            [38256] = true, -- Ransack (Ransack - Rank 1)
-            [62474] = true, -- Major Fracture (Ransack - Rank 1)
-            [62475] = true, -- Minor Resolve (Ransack - Rank 1)
-
-            [38250] = true, -- Pierce Armor (Pierce Armor - Rank 1)
-            [62484] = true, -- Major Fracture (Pierce Armor - Rank 1)
-            [62485] = true, -- Major Breach (Pierce Armor - Rank 1)
-
-            [28304] = true, -- Low Slash (Low Slash - Rank 1)
-            [28305] = true, -- Low Slash Snare (Low Slash - Rank 1)
-            [29308] = true, -- Minor Main (Low Slash - Rank 1)
-            [41387] = true, -- Low Slash (Low Slash - Rank 2)
-            [41389] = true, -- Low Slash Snare (Low Slash - Rank 2)
-            [62492] = true, -- Minor Main (Low Slash - Rank 2)
-            [41391] = true, -- Low Slash (Low Slash - Rank 3)
-            [41393] = true, -- Low Slash Snare (Low Slash - Rank 3)
-            [62493] = true, -- Minor Main (Low Slash - Rank 3)
-            [41394] = true, -- Low Slash (Low Slash - Rank 4)
-            [41396] = true, -- Low Slash Snare (Low Slash - Rank 4)
-            [62494] = true, -- Minor Main (Low Slash - Rank 4)
-
-            [38268] = true, -- Deep Slash (Deep Slash - Rank 1)
-            [60921] = true, -- Deep Slash (Deep Slash - Rank 1)
-            [38271] = true, -- Deep Slash (Deep Slash - Rank 1)
-            [62495] = true, -- Minor Maim (Deep Slash - Rank 1)
-
-            [38264] = true, -- Heroic Slash (Heroic Slash - Rank 1)
-            [38266] = true, -- Heroic Slash Snare (Heroic Slash - Rank 1)
-            [62504] = true, -- Minor Maim (Heroic Slash - Rank 1)
-            [62505] = true, -- Minor Heroism (Heroic Slash - Rank 1)
-
-            -- DW
-            [28607] = true, -- Flurry (Flurry - Rank 1)
-            [81355] = true, -- Flurry (Flurry - Rank 1)
-            [29227] = true, -- Flurry (Flurry - Rank 1)
-            [40578] = true, -- Flurry (Flurry - Rank 2)
-            [81364] = true, -- Flurry (Flurry - Rank 2)
-            [40579] = true, -- Flurry (Flurry - Rank 2)
-            [40580] = true, -- Flurry (Flurry - Rank 3)
-            [81365] = true, -- Flurry (Flurry - Rank 3)
-            [40581] = true, -- Flurry (Flurry - Rank 3)
-            [40582] = true, -- Flurry (Flurry - Rank 4)
-            [81367] = true, -- Flurry (Flurry - Rank 4)
-            [40583] = true, -- Flurry (Flurry - Rank 4)
-
-            [38857] = true, -- Rapid Strikes (Rapid Strikes - Rank 1)
-            [38860] = true, -- Rapid Strikes (Rapid Strikes - Rank 1)
-            [81368] = true, -- Rapid Strikes (Rapid Strikes - Rank 1)
-            [38859] = true, -- Rapid Strikes (Rapid Strikes - Rank 1)
-
-            [38846] = true, -- Bloodthirst (Bloodthirst - Rank 1)
-            [81378] = true, -- Bloodthirst (Bloodthirst - Rank 1)
-            [81380] = true, -- Bloodthirst (Bloodthirst - Rank 1)
-            [81379] = true, -- Bloodthirst (Bloodthirst - Rank 1)
-            [81381] = true, -- Bloodthirst (Bloodthirst - Rank 1)
-            [38853] = true, -- Bloodthirst (Bloodthirst - Rank 1)
-
-            [28379] = true, -- Twin Slashes (Twin Slashes - Rank 1)
-            [35312] = true, -- Twin Slashes (Twin Slashes - Rank 1)
-            [29293] = true, -- Twin Slashes Bleed (Twin Slashes - Rank 1)
-            [40658] = true, -- Twin Slashes (Twin Slashes - Rank 2)
-            [40659] = true, -- Twin Slashes (Twin Slashes - Rank 2)
-            [40660] = true, -- Twin Slashes Bleed (Twin Slashes - Rank 2)
-            [40661] = true, -- Twin Slashes (Twin Slashes - Rank 3)
-            [40662] = true, -- Twin Slashes (Twin Slashes - Rank 3)
-            [40663] = true, -- Twin Slashes Bleed (Twin Slashes - Rank 3)
-            [40664] = true, -- Twin Slashes (Twin Slashes - Rank 4)
-            [40665] = true, -- Twin Slashes (Twin Slashes - Rank 4)
-            [40666] = true, -- Twin Slashes Bleed (Twin Slashes - Rank 4)
-
-            [38839] = true, -- Rending Slashes (Rending Slashes - Rank 1)
-            [38840] = true, -- Rending Slashes (Rending Slashes - Rank 1)
-            [38841] = true, -- Rending Slashes Bleed (Rending Slashes - Rank 1)
-            [38842] = true, -- Rending Slashes (Rending Slashes - Rank 1)
-
-            [38845] = true, -- Blood Craze (Blood Craze - Rank 1)
-            [38847] = true, -- Blood Craze (Blood Craze - Rank 1)
-            [38848] = true, -- Blood Craze Bleed (Blood Craze - Rank 1)
-            [38852] = true, -- Blood Craze (Blood Craze - Rank 1)
 
             ------------------------------
             -- FIGHTERS GUILD PASSIVES

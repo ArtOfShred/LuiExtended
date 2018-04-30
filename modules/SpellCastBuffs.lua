@@ -1617,7 +1617,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     if E.EffectOverride[abilityId] then
         if E.EffectOverride[abilityId].hide == true then return end
         if E.EffectOverride[abilityId].hideReduce == true and SCB.SV.HideReduce then return end
-        iconName = E.EffectOverride[abilityId].icon or E.AbilityIcon[effectName or ""] or iconName
+        iconName = E.EffectOverride[abilityId].icon or iconName
         effectName = E.EffectOverride[abilityId].name or effectName
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
 		stackCount = E.EffectOverride[abilityId].stack or stackCount
@@ -1646,7 +1646,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             if E.EffectOverrideByName[abilityId][unitName].hide then
                 return
             end
-            iconName = E.EffectOverrideByName[abilityId][unitName].icon or E.AbilityIcon[effectName or ""] or iconName
+            iconName = E.EffectOverrideByName[abilityId][unitName].icon or iconName
             effectName = E.EffectOverrideByName[abilityId][unitName].name or effectName
         end
     end

@@ -409,18 +409,21 @@ A.Skill_Weakness_to_Elements        = 29173
 A.Skill_Elemental_Susceptibility    = 39089
 A.Skill_Elemental_Drain             = 39095
 
--- One Hand & Shield
-A.Skill_Shield_Charge               = 28719 -- TODO: Check is best ID to use
-A.Skill_Power_Bash                  = 28365 -- TODO: Check is best ID to use
-
 -- Two-Handed
 A.Skill_Dizzying_Swing              = 38814
 A.Skill_Stampede                    = 38788
 A.Skill_Cleave                      = 20919
 A.Skill_Carve                       = 38745
 A.Skill_Brawler                     = 38754
-
 A.Skill_Forward_Momentum            = 38794
+
+-- One Hand & Shield
+A.Skill_Pierce_Armor                = 38250
+A.Skill_Low_Slash                   = 28304
+A.Skill_Heroic_Slash                = 38264
+A.Skill_Shield_Charge               = 28719
+A.Skill_Invasion                    = 38405
+A.Skill_Power_Bash                  = 28365
 
 -- Dual Wield
 A.Skill_Twin_Slashes                = 28379 -- TODO: Check is best ID to use
@@ -602,14 +605,9 @@ A.Skill_Rally                    = 38802
 A.Skill_Puncture                 = 28306
 A.Skill_Pierce_Armor             = 38250
 A.Skill_Ransack                  = 38256
-A.Skill_Low_Slash                = 28304
-A.Skill_Crippling_Slash          = 38264
-A.Skill_Deep_Slash               = 38268
 A.Skill_Absorb_Magic             = 41380
 A.Skill_Defensive_Stance         = 38312
 A.Skill_Defensive_Posture        = 41351
-A.Skill_Invasion                 = 38405
-A.Skill_Shielded_Assault         = 38401
 A.Skill_Power_Slam               = 38452
 A.Skill_Reverberating_Bash       = 38455
 

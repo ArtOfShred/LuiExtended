@@ -272,45 +272,7 @@ E.IsGroundMineDamage = {
 	[40376] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
 }
 
--- Taunts -- TODO: Unused
-E.IsTaunt = {
-    [A.Skill_Puncture]      = true,
-    [A.Skill_Pierce_Armor]  = true,
-    [A.Skill_Ransack]       = true,
-    [A.Skill_Inner_Fire]    = true,
-    [A.Skill_Inner_Rage]    = true,
-    [A.Skill_Inner_Beast]   = true,
-}
-
--- TODO: Likely to be deprecated
--- Abilities icons that has to be override the API value returned by GetAbilityIcon(abilityId)
--- List only contains English names. Other languages will use game provided icons
-E.AbilityIcon = {
-    --[[
-    -- Currencies icons
-    ['Money']                           = '/EsoUI/Art/Icons/Item_Generic_CoinBag.dds',
-    ['Alliance Points']                 = '/EsoUI/Art/Icons/Icon_AlliancePoints.dds',
-    ['TelVar Stones']                   = '/EsoUI/Art/Icons/Icon_TelVarStone.dds',
-    -- Fix Cleave Bleed Icons
-    ['Cleave Bleed']                    = 'esoui/art/icons/ability_2handed_002.dds',
-    ['Carve Bleed']                     = 'esoui/art/icons/ability_2handed_002_a.dds',
-    ['Brawler Bleed']                   = 'esoui/art/icons/ability_2handed_002_b.dds',
-    -- Fix Twin Slashes Bleed Icons
-    ['Twin Slashes Bleed']              = 'esoui/art/icons/ability_dualwield_001.dds',
-    ['Rending Slashes Bleed']           = 'esoui/art/icons/ability_dualwield_001_a.dds',
-    ['Blood Craze Bleed']               = 'esoui/art/icons/ability_dualwield_001_b.dds',
-    ['Feed']                            = '/esoui/art/icons/ability_vampire_002.dds', -- EN,FR
-    [A.Effect_Magicka_Bomb]            = '/esoui/art/icons/death_recap_magic_ranged.dds', -- EN
-    [A.Effect_Surge_Heal]               = '/esoui/art/icons/ability_sorcerer_critical_surge.dds',
-    [A.Effect_Dark_Exchange_Heal]       = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
-    [A.Skill_Dark_Exchange]             = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
-    ['Blood Magic']                     = '/esoui/art/icons/ability_mage_026.dds', -- EN, ?
-    [A.Skill_Quick_Siphon]              = '/esoui/art/icons/ability_restorationstaff_005_b.dds',
-    ]]--
-}
-
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY ID
--- TODO: Make sure to add all Synergy effects here
 E.DebuffDisplayOverrideId = {
     -- Basic (Shared)
     [2727] = true, -- Off-Balance (Generic)
@@ -579,6 +541,10 @@ E.EffectCreateSkillAura = {
 	[44835] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Ward (Restoring Focus - Rank 1)
 	[37027] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 1)
 	[77056] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Protection (Restoring Focus - Rank 1)
+
+    -- One Hand and Shield
+    [62484] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds', name = A.Skill_Pierce_Armor, consolidate = true }, -- Major Fracture --> Pierce Armor
+    [62485] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds', name = A.Skill_Pierce_Armor, consolidate = true }, -- Major Breach --> Pierce Armor
 
 	-- Destruction Staff
 	[53881] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach --> Weakness to Elements
@@ -881,6 +847,26 @@ E.BarHighlightOverride = {
     [83216] = { newId = 83217 }, -- Berserker Strike
     [83229] = { newId = 83230 }, -- Onslaught
     [83238] = { newId = 83239 }, -- Berserker Rage
+
+    ---------------------------
+    -- One Hand and Shield ----
+    ---------------------------
+
+    [28306] = { newId = 28307, showFakeAura = true }, -- Puncture --> Major Fracture
+    [38256] = { newId = 62474, showFakeAura = true }, -- Ransack --> Major Fracture
+    [38250] = { newId = 62484, showFakeAura = true }, -- Pierce Armor --> Major Fracture
+
+    [28304] = { newId = 29308, showFakeAura = true }, -- Low Slash --> Minor Maim
+    [38268] = { newId = 62495, showFakeAura = true }, -- Deep Slash --> Minor Maim
+    [38264] = { newId = 62504, showFakeAura = true }, -- Heroic Slash --> Minor Maim
+
+    [28719] = { newId = 28720 }, -- Shield Charge
+    [38401] = { newId = 38404 }, -- Shielded Assault
+    [38405] = { newId = 38407 }, -- Invasion
+
+    [28365] = { newId = 83433 }, -- Power Bash
+    [38455] = { newId = 38838, showFakeAura = true }, -- Reverberating Bash --> Major Defile
+    [38452] = { newId = 80625 }, -- Power Slam
 
     ---------------------------
     -- Destruction Staff ------
@@ -1234,21 +1220,11 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [32755] = true, -- Nikulas' Heavy Armor (of Nikulas)
 
     ----------------------------
-    -- Passives
-    ----------------------------
-
-    -- Templar
-    [80195] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rune Focus
-    [80230] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Cleansing Ritual
-    [80261] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rite of Passage
-
-    ----------------------------
     -- Nightblade
     ----------------------------
 
     [25375] = true, -- Shadow Cloak (Shadow Cloak)
     [25380] = true, -- Shadowy Disguise (Shadowy Disguise)
-
     [25412] = true, -- Consuming Darkness (Consuming Darkness)
     [36495] = true, -- Bolstering Darkness (Bolstering Darkness)
     [36487] = true, -- Veil of Blades (Veil of Blades)
@@ -1260,7 +1236,6 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [21007] = true, -- Reflective Scale
     [21014] = true, -- Reflective Plate
     [21017] = true, -- Dragon Fire Scale
-
     [29126] = true, -- Ash Cloud
     [20780] = true, -- Cinder Storm
     [32712] = true, -- Eruption
@@ -1270,7 +1245,6 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     ----------------------------
 
     [26098] = true, -- Zap Snare (Summon Storm Atronach - All Morphs)
-
     [47147] = true, -- Negate Magic
     [47159] = true, -- Suppression Field
     [47167] = true, -- Absorption Field
@@ -1279,8 +1253,23 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     -- Templar
     ----------------------------
 
+    -- Passives
+    [80195] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rune Focus
+    [80230] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Cleansing Ritual
+    [80261] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rite of Passage
+
+    -- Actives
     [24307] = true, -- Solar Disturbance Snare (Solar Disturbance - Rank 1)
     [37009] = true, -- Channeled Focus (Channeled Focus - Rank 1)
+
+    ----------------------------
+    -- One Hand and Shield
+    ----------------------------
+
+    [28727] = true, -- Defensive Posture (Defensive Posture)
+    [38312] = true, -- Defensive Stance (Defensive Stance)
+
+    [83301] = true, -- Spell Wall (Spell Wall)
 
     ----------------------------
     -- Destruction Staff
@@ -1288,11 +1277,8 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
 
     [68719] = true, -- Frozen (Wall of Elements - All Ranks)
     [62928] = true, -- Wall of Frost (Wall of Elements - Rank 1)
-
     [39068] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1)
-
     [62948] = true, -- Blockade of Frost (Elemental Blockade - Rank 1)
-
     [104825] = true, -- Icy Rage (Elemental Rage - All Ranks)
 
     -- Human NPC
@@ -3310,30 +3296,6 @@ E.EffectOverride = {
     [30981] = { icon = 'LuiExtended/media/icons/abilities/passive_restorationstaff_restoration_master.dds' }, -- Restoration Master
     [45524] = { icon = 'LuiExtended/media/icons/abilities/passive_restorationstaff_restoration_master.dds' }, -- Restoration Master
 
-    ----------------------------------------------------------------
-    -- PLAYER ACTIVES WEAPONS --------------------------------------
-    ----------------------------------------------------------------
-
-    -- TODO: CLEAR THIS
-
-    -- 1H + Shield
-    [28305] = { name = 'Low Slash' }, -- Low Slash Snare (Low Slash - Rank 1)
-    [41389] = { name = 'Low Slash' }, -- Low Slash Snare (Low Slash - Rank 2)
-    [41393] = { name = 'Low Slash' }, -- Low Slash Snare (Low Slash - Rank 3)
-    [41396] = { name = 'Low Slash' }, -- Low Slash Snare (Low Slash - Rank 4)
-
-    [38266] = { name = 'Heroic Slash' }, -- Heroic Slash Snare (Heroic Slash - Rank 1)
-
-    -- Dual Wield
-    [29293] = { icon = 'esoui/art/icons/ability_dualwield_001.dds', name = 'Twin Slashes' }, -- Twin Slashes Bleed (Twin Slashes - Rank 1)
-    [40660] = { icon = 'esoui/art/icons/ability_dualwield_001.dds', name = 'Twin Slashes' }, -- Twin Slashes Bleed (Twin Slashes - Rank 2)
-    [40663] = { icon = 'esoui/art/icons/ability_dualwield_001.dds', name = 'Twin Slashes' }, -- Twin Slashes Bleed (Twin Slashes - Rank 3)
-    [40666] = { icon = 'esoui/art/icons/ability_dualwield_001.dds', name = 'Twin Slashes' }, -- Twin Slashes Bleed (Twin Slashes - Rank 4)
-
-    [38841] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', name = 'Rending Slashes' }, -- Rending Slashes Bleed (Rending Slashes - Rank 1)
-
-    [38848] = { icon = 'esoui/art/icons/ability_dualwield_001_b.dds', name = 'Blood Craze' }, -- Blood Craze Bleed (Blood Craze - Rank 1)
-
     -----------------------------------------
     -- TWO HANDED ACTIVES -------------------
     -----------------------------------------
@@ -3356,6 +3318,17 @@ E.EffectOverride = {
     [38805] = { icon = 'esoui/art/icons/ability_2handed_005_b.dds' }, -- Rally (Rally)
 
     [83346] = { icon = 'esoui/art/icons/ability_2handed_006_a.dds' }, -- Onslaught (Onslaught)
+
+    -----------------------------------------
+    -- ONE HAND AND SHIELD ACTIVES ----------
+    -----------------------------------------
+
+    [62484] = { consolidate = true }, -- Major Fracture (Pierce Armor)
+    [62485] = { consolidate = true }, -- Major Breach (Pierce Armor)
+    [28305] = { name = A.Skill_Low_Slash }, -- Low Slash Snare (Low Slash)
+    [38266] = { name = A.Skill_Heroic_Slash }, -- Heroic Slash Snare (Heroic Slash)
+    [38398] = { icon = 'esoui/art/icons/ability_1handed_004_b.dds' }, -- Absorb Magic (Absorb Magic)
+    [38407] = { name = A.Skill_Invasion }, -- Invasion (Invasion)
 
     -----------------------------------------
     -- DESTRUCTION STAFF ACTIVES ------------
@@ -5894,7 +5867,7 @@ E.FakeStagger = {
     -- On Player
     [2874] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Staggered (Generic Stagger applied to player by many different NPC abilities)
     [29402] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Power Bash (Stagger when hit with Power Bash)
-    [29765] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Uber Attack (Player staggers self by hitting Blocking NPC with Heavy Attack) -- TODO: Double check this for some reason
+    [29765] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Uber Attack (Player staggers self by hitting Blocking NPC with Heavy Attack)
     [68971] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Staggered (Echatere - Shockwave)
     [12426] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Raven Storm (Hagraven)
     [32698] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Staggered (Lurcher - Pulverize)
