@@ -1,6 +1,6 @@
 ﻿## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, psypanda, SpellBuilder
-## Version: 5.4 Summerset PTS Only
+## Version: 5.5 Summerset PTS Only
 ## APIVersion: 100023
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
 ## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibMediaProvider-1.0 LibMsgWin-1.0
@@ -36,70 +36,76 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ; THE SOFTWARE.
 
-libs\LibStub\LibStub.lua
-libs\LibMediaProvider-1.0\LibMediaProvider-1.0.lua
-libs\LibMsgWin-1.0\LibMsgWin-1.0.lua
+; see http://www.esoui.com/downloads/info44-LibStub.html
+libs/LibStub/LibStub.lua
 
-libs\LibAddonMenu-2.0\LibAddonMenu-2.0.lua
-libs\LibAddonMenu-2.0\controls\panel.lua
-libs\LibAddonMenu-2.0\controls\submenu.lua
-libs\LibAddonMenu-2.0\controls\button.lua
-libs\LibAddonMenu-2.0\controls\checkbox.lua
-libs\LibAddonMenu-2.0\controls\colorpicker.lua
-libs\LibAddonMenu-2.0\controls\custom.lua
-libs\LibAddonMenu-2.0\controls\description.lua
-libs\LibAddonMenu-2.0\controls\dropdown.lua
-libs\LibAddonMenu-2.0\controls\editbox.lua
-libs\LibAddonMenu-2.0\controls\header.lua
-libs\LibAddonMenu-2.0\controls\slider.lua
-libs\LibAddonMenu-2.0\controls\texture.lua
-libs\LibAddonMenu-2.0\controls\iconpicker.lua
-libs\LibAddonMenu-2.0\controls\divider.lua
+; see http://www.esoui.com/downloads/info56-LibMediaProvider.html
+libs/LibMediaProvider-1.0/LibMediaProvider-1.0.lua
+
+; see http://www.esoui.com/downloads/info802-LibMsgWin.html
+libs/LibMsgWin-1.0/LibMsgWin-1.0.lua
+
+; see http://www.esoui.com/downloads/info7-LibAddonMenu.html
+libs/LibAddonMenu-2.0/LibAddonMenu-2.0.lua
+libs/LibAddonMenu-2.0/controls/panel.lua
+libs/LibAddonMenu-2.0/controls/submenu.lua
+libs/LibAddonMenu-2.0/controls/button.lua
+libs/LibAddonMenu-2.0/controls/checkbox.lua
+libs/LibAddonMenu-2.0/controls/colorpicker.lua
+libs/LibAddonMenu-2.0/controls/custom.lua
+libs/LibAddonMenu-2.0/controls/description.lua
+libs/LibAddonMenu-2.0/controls/dropdown.lua
+libs/LibAddonMenu-2.0/controls/editbox.lua
+libs/LibAddonMenu-2.0/controls/header.lua
+libs/LibAddonMenu-2.0/controls/slider.lua
+libs/LibAddonMenu-2.0/controls/texture.lua
+libs/LibAddonMenu-2.0/controls/iconpicker.lua
+libs/LibAddonMenu-2.0/controls/divider.lua
 
 LuiExtended.lua
 LuiExtendedUI.lua
 LuiExtendedMenu.lua
 LuiExtendedWelcome.lua
 
-xml\bindings.xml
-xml\CombatText.xml
+xml/bindings.xml
+xml/CombatText.xml
 
-i18n\en.lua
-i18n\$(language).lua
+i18n/en.lua
+i18n/$(language).lua
 
-data\AbilityTables.lua
-data\Effects.lua
-data\CombatTextConstants.lua
-data\AlertTable.lua
-data\DebugTable.lua
+data/AbilityTables.lua
+data/Effects.lua
+data/CombatTextConstants.lua
+data/AlertTable.lua
+data/DebugTable.lua
 
-modules\ChatAnnouncements.lua
-modules\CombatInfo.lua
-modules\DamageMeter.lua
-modules\InfoPanel.lua
-modules\UnitFrames.lua
-modules\SpellCastBuffs.lua
-modules\CombatText.lua
-modules\SlashCommands.lua
+modules/ChatAnnouncements.lua
+modules/CombatInfo.lua
+modules/DamageMeter.lua
+modules/InfoPanel.lua
+modules/UnitFrames.lua
+modules/SpellCastBuffs.lua
+modules/CombatText.lua
+modules/SlashCommands.lua
 
-modules\CombatText\Animation.lua
-modules\CombatText\Pool.lua
-modules\CombatText\PoolManager.lua
-modules\CombatText\EventListeners\_Base.lua
-modules\CombatText\EventListeners\Alerts.lua
-modules\CombatText\EventListeners\Combat.lua
-modules\CombatText\EventListeners\Points_Alliance.lua
-modules\CombatText\EventListeners\Points_Experience.lua
-modules\CombatText\EventListeners\Points_Champion.lua
-modules\CombatText\EventListeners\Resources_Potion.lua
-modules\CombatText\EventListeners\Resources_Power.lua
-modules\CombatText\EventListeners\Resources_Ultimate.lua
-modules\CombatText\EventViewers\_Base.lua
-modules\CombatText\EventViewers\Combat_Cloud.lua
-modules\CombatText\EventViewers\Combat_Hybrid.lua
-modules\CombatText\EventViewers\Combat_Ellipse.lua
-modules\CombatText\EventViewers\Combat_Scroll.lua
-modules\CombatText\EventViewers\Alerts.lua
-modules\CombatText\EventViewers\CrowdControl.lua
-modules\CombatText\EventViewers\Points.lua
-modules\CombatText\EventViewers\Resources.lua
+modules/CombatText/Animation.lua
+modules/CombatText/Pool.lua
+modules/CombatText/PoolManager.lua
+modules/CombatText/EventListeners/_Base.lua
+modules/CombatText/EventListeners/Alerts.lua
+modules/CombatText/EventListeners/Combat.lua
+modules/CombatText/EventListeners/Points_Alliance.lua
+modules/CombatText/EventListeners/Points_Experience.lua
+modules/CombatText/EventListeners/Points_Champion.lua
+modules/CombatText/EventListeners/Resources_Potion.lua
+modules/CombatText/EventListeners/Resources_Power.lua
+modules/CombatText/EventListeners/Resources_Ultimate.lua
+modules/CombatText/EventViewers/_Base.lua
+modules/CombatText/EventViewers/Combat_Cloud.lua
+modules/CombatText/EventViewers/Combat_Hybrid.lua
+modules/CombatText/EventViewers/Combat_Ellipse.lua
+modules/CombatText/EventViewers/Combat_Scroll.lua
+modules/CombatText/EventViewers/Alerts.lua
+modules/CombatText/EventViewers/CrowdControl.lua
+modules/CombatText/EventViewers/Points.lua
+modules/CombatText/EventViewers/Resources.lua

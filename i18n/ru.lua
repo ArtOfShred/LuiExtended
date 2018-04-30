@@ -1,17 +1,11 @@
 -- Translation by KiriX
 
 local strings = {
-    ------------------------------------
-    -- LuiExtended.lua -----------------
-    ------------------------------------
-
+    -- LuiExtended.lua
     SI_LUIE_ERROR_FONT =                                 "LUI Extended: Возникла проблема с выбором шрифта. Возвращение к настройкам по умолчанию.",
     SI_LUIE_ERROR_SOUND =                                "LUI Extended: Возникла проблема с выбором звука. Возвращение к настройкам по умолчанию.",
 
-    ------------------------------------
-    -- bindings.xml --------------------
-    ------------------------------------
-
+    -- bindings.xml
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Призвать Банкира",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Призвать Торговца",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Призвать Воровку",
@@ -19,10 +13,7 @@ local strings = {
     SI_BINDING_NAME_LUIE_COMMAND_HOME =                  "Переместиться в основной дом",
     SI_BINDING_NAME_LUIE_COMMAND_REGROUP =               "Перегруппироваться (Распустить & Собраться)",
 
-    ------------------------------------
-    -- SlashCommands.lua ---------------
-    ------------------------------------
-
+    -- SlashCommands.lua
     SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE =                   "В очереди в кампанию <<1>>...",
     SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG =               "Вы не вставь в очередь в кампанию, находясь на Поле сражения.",
     SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED =      "Введённой вами название кампании не является названием вашей домашней или гостевой кампании.",
@@ -72,17 +63,11 @@ local strings = {
     SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED =     "У вас не открыт <<1>>.",
     SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP =       "Вы должны быть в группе,чтобы запустить проверку готовности.",
 
-    ------------------------------------
-    -- InfoPanel.lua -------------------
-    ------------------------------------
-
-    SI_LUIE_PNL_FEEDNOW =                                "Покормить",
+    -- InfoPanel.lua
+    SI_LUIE_PNL_TRAINNOW =                               "Покормить",
     SI_LUIE_PNL_MAXED =                                  "Макс.",
 
-    ------------------------------------
-    -- SpellCastBuffs.lua --------------
-    ------------------------------------
-
+    -- SpellCastBuffs.lua
     SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS =                "Баффы игрока",
     SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS =              "Дебаффы игрока",
     SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS =      "Длительные эффекты игрока",
@@ -91,11 +76,7 @@ local strings = {
     SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS =             "Особые баффы",
     SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS =           "Особые дебаффы",
 
-    ------------------------------------
-    -- ChatAnnouncements.lua -----------
-    ------------------------------------
-
-    -- Currency
+    -- ChatAnnouncements.lua
     SI_LUIE_CA_CURRENCY_GOLD =                           " <<1[Золотой/Золота]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_ALLIANCE_POINT =                 " <<1[Очко Альянса/Очков Альянса]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_TELVAR_STONE =                   " <<1[Камень Тель-Вар/Камней Тель-Вар]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
@@ -104,8 +85,6 @@ local strings = {
     SI_LUIE_CA_CURRENCY_CROWN =                          " <<1[Крона/Кроны]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_CROWN_GEM =                      " <<1[Кронный самоцвет/Кронных самоцветов]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS =                  " <<1[Outfit Change Token/Outfit Change Tokens]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
-
-    -- Duel
     SI_LUIE_CA_DEBUG_MSG_CURRENCY =                      "Сработало переключение валюты по причине <<1>> - Пожалуйста, сообщите об этом в комментарии в теме LUI Extended на ESOUI.com, описав события, при которых возникло данное сообщение. Спасибо!",
     SI_LUIE_CA_DUEL_INVITE_ACCEPTED =                    "Вызов на дуэль принят.",
     SI_LUIE_CA_DUEL_INVITE_CANCELED =                    "Вызов на дуэль отменён.",
@@ -144,26 +123,16 @@ local strings = {
     SI_LUIE_CA_DUEL_STARTED_WITH_ICON =                  "<<1>> Дуэль началась!",
     SI_LUIE_CA_DUEL_STATE1 =                             "Вы ожидаете ответа на вызов на дуэль от игрока |cFEFEFE<<1>>|r.",
     SI_LUIE_CA_DUEL_STATE2 =                             "Вы должны ответить на вызов на дуэль от игрока |cFEFEFE<<1>>|r.",
-
-    -- Achievements
     SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG =                "Достижение обновлено",
-
-    -- Experience
     SI_LUIE_CHAMPION_POINT_TYPE =                        "<<1>><<2>> <<3>> <<1[Очко/Очков]>>",
     SI_LUIE_CA_EXPERIENCE_MESSAGE =                      "Вы получили %s.",
     SI_LUIE_CA_EXPERIENCE_NAME =                         "<<1[очко/очков]>> опыта",
     SI_LUIE_CA_LVL_ANNOUNCE_CP =                         "Получено Очко чемпиона!",
     SI_LUIE_CA_LVL_ANNOUNCE_XP =                         "Вы достигли",
-
-    -- Collectibles
     SI_LUIE_CA_COLLECTIBLE =                             "Коллекция обновлена",
-
-    -- Lorebooks
     SI_LUIE_CA_LOREBOOK_BOOK =                           "Книга открыта",
     SI_LUIE_CA_LOREBOOK_ADDED_CSA =                      "<<1>> добавлена в <<2>>",
     SI_LUIE_CA_LOREBOOK_ADDED_CA =                       "добавлена в", -- Have to add this extra string for CA, if we try to colorize the whole string with the link, it also colorizes our custom link type.
-
-    -- Social (Friends/Ignored)
     SI_LUIE_CA_FRIENDS_FRIEND_ADDED =                    "<<1>> добавлен в друзья.",
     SI_LUIE_CA_FRIENDS_FRIEND_REMOVED =                  "<<1>> убран из друзей.",
     SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST =         "<<1>> хочет быть вашим другом.",
@@ -174,11 +143,9 @@ local strings = {
     SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED =               "|cFEFEFE<<1>>|r добавлен в список игнорирования.",
     SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED =             "|cFEFEFE<<1>>|r убран из списка игнорирования.",
     SI_LUIE_CA_PLAYER_TO_PLAYER_ALREADY_FRIEND =         "Вы уже в друзьях с игроком |cFEFEFE<<1>>|r.", -- TODO: Unused - This should have a content though?
-
-    -- Group (Basic)
     SI_LUIE_CA_GROUP_INVITE_MENU =                       "Вы пригласили игрока |cFEFEFE<<1>>|r в вашу группу.",
     SI_LUIE_CA_GROUP_INVITE_NONAME =                     "Вы должны ввести аккаунт или имя персонажа, чтобы пригласить его в группу.",
-    SI_LUIE_CA_GROUPINVITERESPONSE0 =                    "Не удаётся найти игрока по имени \"|cFEFEFE<<1>>|r\ = чтобы пригласить.",
+    SI_LUIE_CA_GROUPINVITERESPONSE0 =                    "Не удаётся найти игрока по имени \"|cFEFEFE<<1>>|r\" чтобы пригласить.",
     SI_LUIE_CA_GROUPINVITERESPONSE1 =                    "|cFEFEFE<<1>>|r принял ваше приглашение в группу.",
     SI_LUIE_CA_GROUPINVITERESPONSE2 =                    "|cFEFEFE<<1>>|r отклонил ваше приглашение в группу.",
     SI_LUIE_CA_GROUPINVITERESPONSE3 =                    "|cFEFEFE<<1>>|r игнорирует вас. Вы не можете послать ему приглашение.",
@@ -211,8 +178,6 @@ local strings = {
     SI_LUIE_GROUPLEAVEREASON2 =                          "|cFEFEFE<<1>>|r распустил группу.",
     SI_LUIE_GROUPLEAVEREASON4 =                          "|cFEFEFE<<1>>|r покинул Поле сражения.",
     SI_LUIE_GROUPDISBANDLEADER =                         "Вы распустили группу.",
-
-    -- Group (LFG)
     SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED =            "Вы присоединились к LFG-группе для прохождения |cFEFEFE<<1>>|r.",
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL =               "Голосование за изгнание |cFEFEFE<<1>>|r из группы не состоялось.",
     SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED =             "Голосование за изгнание |cFEFEFE<<1>>|r из группы состоялось.",
@@ -221,30 +186,22 @@ local strings = {
     SI_LUIE_CA_GROUPFINDER_QUEUE_START =                 "Вы встали в очередь на поиск группы.",
     SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY =        "|cFEFEFE<<1>>|r готово.",
     SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE =   "|cFEFEFE<<1>>|r готово. Ваша роль: |cFEFEFE<<2>> <<3>>|r",
-
-    -- Group (Raid)
     SI_LUIE_CA_GROUP_TRIAL_STARTED =                     "Начато: <<1>>",
     SI_LUIE_CA_GROUP_TRIAL_FAILED =                      "Провалено: <<1>>",
     SI_LUIE_CA_GROUP_TRIAL_COMPLETED_LARGE =             "Завершено: <<1>>",
     SI_LUIE_CA_GROUP_TRIAL_SCORETALLY =                  "Конечные очки <<1>> Всего времени <<2>> Бонус живучести <<3>> <<4>>",
     SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED =            "<<1>> Бонус живучести снижен",
     SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED =               "<<1>> <<2>> Очков получено",
-
-    -- Ignore Error Messages
     SI_LUIE_IGNORE_ERROR_TRADE =                         "Вы не можете торговать с игроком, которого вы игнорируете.",
     SI_LUIE_IGNORE_ERROR_GROUP =                         "Вы не можете пригласить в группу игрока, которого вы игнорируете.",
     SI_LUIE_IGNORE_ERROR_DUEL =                          "Вы не можете вызвать на дуэль игрока, которого вы игнорируете.",
     SI_LUIE_IGNORE_ERROR_FRIEND =                        "Вы не можете добавить в друзья игрока, которого вы игнорируете.",
     SI_LUIE_IGNORE_ERROR_WHISPER =                       "Вы не можете шепнуть игроку, которого вы игнорируете.",
     SI_LUIE_IGNORE_ERROR_GUILD =                         "Вы не можете отправить приглашение в гильдию игроку, которого вы игнорируете.",
-
-    -- Invitation Notifications
     SI_LUIE_NOTIFICATION_GROUP_INVITE =                  "Приглашение в группу",
     SI_LUIE_NOTIFICATION_SHARE_QUEST_INVITE =            "Предложение задания",
     SI_LUIE_NOTIFICATION_FRIEND_INVITE =                 "Приглашение в друзья",
     SI_LUIE_NOTIFICATION_GUILD_INVITE =                  "Приглашение в гильдию",
-
-    -- Guild
     SI_LUIE_CA_GUILD_HERALDRY_UPDATE =                   "Геральдика гильдии <<1>> изменена.",
     SI_LUIE_CA_GUILD_RANKS_UPDATE =                      "Изменения рангов гильдии <<1>> сохранены.",
     SI_LUIE_CA_GUILD_RANK_UPDATE =                       "Изменение ранга <<1>> гильдии <<2>> сохранено.",
@@ -267,12 +224,8 @@ local strings = {
     SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS =       "Опасность! Вы вызываете подозрения!",
     SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE =             "Вы больше не замаскированы",
     SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED =        "Вы замаскированы",
-
-    -- Lockpick
     SI_LUIE_CA_LOCKPICK_FAILED =                         "Взлом провален!",
     SI_LUIE_CA_LOCKPICK_SUCCESS =                        "Взлом удался!",
-
-    -- Mail
     SI_LUIE_CA_MAIL_DELETED_MSG =                        "Письмо удалено!",
     SI_LUIE_CA_MAIL_RECEIVED =                           "Получено письмо.",
     SI_LUIE_CA_MAIL_RECEIVED_COD =                       "Оплата наложного платежа отправлена!",
@@ -281,8 +234,6 @@ local strings = {
     SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE =                 "Вы должны указать сумму наложного платежа.",
     SI_LUIE_CA_MAIL_SENDMAILRESULT2 =                    "Неизвестный игрок.", -- Fixing missing periods on default strings
     SI_LUIE_CA_MAIL_SENDMAILRESULT3 =                    "Почтовый ящик получателя заполнен.", -- Fixing missing periods on default strings
-
-    -- Pledge of Mara
     SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0 =                "|cFEFEFE<<1>>|r слишком занят, чтобы принять обет.",
     SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1 =                "|cFEFEFE<<1>>|r вы не можете использовать Обет Мары, пока игрок мёртв.",
     SI_LUIE_CA_MARA_PLEDGEOFMARARESULT2 =                "Начинается Ритуал Мары с игроком |cFEFEFE<<1>>|r.",
@@ -291,8 +242,6 @@ local strings = {
     SI_LUIE_CA_MARA_PLEDGEOFMARARESULT5 =                GetString(SI_PLEDGEOFMARARESULT5),
     SI_LUIE_CA_MARA_PLEDGEOFMARARESULT6 =                "|cFEFEFE<<1>>|r не имеет права на проведение Ритуала Мары.",
     SI_LUIE_CA_MARA_PLEDGEOFMARARESULT7 =                "Вы слишком далеко от игрока |cFEFEFE<<1>>|r для проведения Ритуала Мары.",
-
-    -- Currency Messages
     SI_LUIE_CA_CURRENCY_MESSAGE_LOOT =                   "Вы добыли %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE =                "Вы получили %s.",
     SI_LUIE_CA_CURRENCY_MESSAGE_STEAL =                  "Вы украли %s.",
@@ -361,8 +310,6 @@ local strings = {
     SI_LUIE_CA_CURRENCY_NOTIFY_MORPHS =                  "Морфы сброшены",
     SI_LUIE_CA_CURRENCY_MESSAGE_HERALDRY =               "Вы потратили %s из вашего гильдейского банка на обновление %s.",
     SI_LUIE_CA_CURRENCY_NAME_HERALDRY =                  "Гильдейская геральдика",
-
-    -- Currency Total Messages
     SI_LUIE_CA_LOOT_MESSAGE_TOTAL =                      "Теперь всего:",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD =              "Всего золота: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP =                "Всего AP: %s",
@@ -372,8 +319,6 @@ local strings = {
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS =            "Всего крон: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS =              "Всего самоцветов: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS =      "Всего токенов: %s",
-
-    -- Storage
     SI_LUIE_CA_STORAGE_RIDINGTYPE1 =                     "Скорость верховой езды увеличена",
     SI_LUIE_CA_STORAGE_RIDINGTYPE2 =                     "Переносимый вес езд. животного увеличен",
     SI_LUIE_CA_STORAGE_RIDINGTYPE3 =                     "Запас сил езд. животного увеличен",
@@ -382,15 +327,11 @@ local strings = {
     SI_LUIE_CA_STORAGE_BAGTYPE1 =                        "Инвентарь увеличен",
     SI_LUIE_CA_STORAGE_BAGTYPE2 =                        "Банк увеличен",
     SI_LUIE_CA_STORAGE_LEARN =                           "Вы изучили %s.",
-
-    -- Skill
     SI_LUIE_CA_SKILL_LINE_ADDED =                        "Ветка навыков получила: <<1>><<2>>",
     SI_LUIE_CA_ABILITY_RANK_UP =                         "<<1>> повысилась до ранга <<R:2>>",
     SI_LUIE_CA_SKILL_GUILD_MSG =                         "Вы получили %s.",
     SI_LUIE_CA_SKILL_GUILD_REPUTATION =                  "<<1[репутации/репутации]>>",
     SI_LUIE_CA_SKILL_GUILD_ALERT =                       "Ваша репутация в <<1>> повысилась.",
-
-    -- Quests
     SI_LUIE_CA_QUEST_ABANDONED =                         "Отменено: <<1>>",
     SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON =               "Отменено: <<1>> <<2>>",
     SI_LUIE_CA_QUEST_DISCOVER =                          "Открыто: <<1>>",
@@ -398,8 +339,6 @@ local strings = {
     SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON =                  "Начато: <<1>> <<2>>",
     SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON =                "Завершено: <<1>> <<2>>",
     SI_LUIE_CA_QUEST_LOG_FULL =                          "Ваш журнал заданий заполнен.", -- TODO: Unused
-
-    -- Trade
     SI_LUIE_CA_TRADEACTIONRESULT0 =                      GetString(SI_TRADEACTIONRESULT0),
     SI_LUIE_CA_TRADEACTIONRESULT1 =                      "|cFEFEFE<<1>>|r игнорирует вас. Вы не можете начать торговлю.",
     SI_LUIE_CA_TRADEACTIONRESULT2 =                      GetString(SI_TRADEACTIONRESULT2),
@@ -424,29 +363,21 @@ local strings = {
     SI_LUIE_CA_TRADEACTIONRESULT65 =                     "Вы уже торгуете |cFEFEFE<<1>>|r.",
     SI_LUIE_CA_TRADEACTIONRESULT66 =                     GetString(SI_TRADEACTIONRESULT66),
     SI_LUIE_CA_TRADEACTIONRESULT80 =                     GetString(SI_TRADEACTIONRESULT80),
-
-    -- Trade Invite Messages
     SI_LUIE_CA_TRADE_INVITE_ACCEPTED =                   "Предложение торговли принято.",
     SI_LUIE_CA_TRADE_INVITE_DECLINED =                   "Предложение торговли отклонено.",
     SI_LUIE_CA_TRADE_INVITE_CANCELED =                   "Предложение торговли отменено.",
     SI_LUIE_CA_TRADE_INVITE_CONFIRM =                    "Вы предложили обмен игроку |cFEFEFE<<1>>|r.",
     SI_LUIE_CA_TRADE_INVITE_MESSAGE =                    "|cFEFEFE<<1>>|r предлагает вам обмен.",
-
-    -- EVENT_DISPLAY_ANNOUNCEMENT: Entering/Leaving Group Area
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D =       "Вы входите в групповую область.",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D =       "Вы покидаете в групповую область.",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C =       "Вы входите в групповую область",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C =       "Вы покидаете в групповую область",
-
-    -- EVENT_DISPLAY_ANNOUNCEMENT: Craglorn Buffs
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR =        "Магическая сопротивляемость увеличена",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR_CA =     "Магическая сопротивляемость увеличена!",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR =        "Физическая сопротивляемость увеличена",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR_CA =     "Физическая сопротивляемость увеличена!",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI =        "Сила увеличена",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI_CA =     "Сила увеличена!",
-
-    -- EVENT_DISPLAY_ANNOUNCEMENT: Maelstrom Arena
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM =          "Вихревая Арена",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA =       "Вихревая Арена: ",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE1 =          "Сюрреалистическая долина",
@@ -470,13 +401,9 @@ local strings = {
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA =       "Раунд 5!",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF =          "Последний раунд",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA =       "Последний раунд!",
-
-    -- EVENT_DISPLAY_ANNOUNCEMENT: Dragonstar Arena
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA =                "Арена Драгонстара",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA =             "Арена Драгонстара: ",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC =           "Арена начнётся через 30 секунд!",
-
-    -- EVENT_DISPLAY_ANNOUNCEMENT: Imperial City Sewer Zones
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_PREFIX =    "Вход: ",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE1 =          "Вход: Battle Gates",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_1 =      "Battle Gates",
@@ -516,10 +443,7 @@ local strings = {
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC11 =          "Генерал Назенечар использует павших жителей Имперского города.",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC12 =          "Беспокойные духи мёртвых движимы силами невидимых.",
 
-    ------------------------------------
-    -- CombatText.lua ------------------
-    ------------------------------------
-
+    -- CombatText.lua
     SI_LUIE_CT_COMBAT_IN_DEFAULT =                       "В бою",
     SI_LUIE_CT_COMBAT_OUT_DEFAULT =                      "Выход из боя",
     SI_LUIE_CT_CLEANSE_DEFAULT =                         "ОЧИСТИСЬ",
@@ -542,12 +466,7 @@ local strings = {
     SI_LUIE_CT_MITIGATION_FORMAT_POWER =                 "%t %i на %n!",
     SI_LUIE_CT_MITIGATION_FORMAT_DESTROY =               "%t %i",
 
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- BASE SETTINGS -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    -- LuiExtendedMenu.lua
     SI_LUIE_LAM_COMPATIBILITY_WARNING =                  "Отключите эту настройку, если у вас наблюдаются проблемы совместимости с другими аддонами.",
     SI_LUIE_LAM_FONT =                                   "Шрифт",
     SI_LUIE_LAM_FONT_SIZE =                              "Размер шрифта",
@@ -558,26 +477,10 @@ local strings = {
     SI_LUIE_LAM_RESETPOSITION =                          "Сбросить положение",
     SI_LUIE_LAM_HIDE_EXPERIENCE_BAR =                    "Скрыть появление полоски Опыта/Навыков",
     SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP =                 "При получении опыта за выполнение заданий, открытие POI, убийство боссов или при прокачке линейки навыков, полоска заполнения больше не будет появляться. Полезно, если у вас в этом углу (верхний левый) экрана есть какие-то элементы аддонов и вы не хотите, чтобы он перекрывался этой полоской.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- LAM MODULE ON/OFF --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
     SI_LUIE_LAM_CHANGELOG =                              "Показать изменения",
     SI_LUIE_LAM_CHANGELOG_TP =                           "Показывает список изменений по сравнению с предыдущей версией LUIE.",
     SI_LUIE_LAM_STARTUPMSG =                             "Отключить стартовое сообщение",
     SI_LUIE_LAM_STARTUPMSG_TP =                          "Эта настройка отключает стартовое сообщение.",
-    SI_LUIE_LAM_UF =                                     "Фреймы",
-    SI_LUIE_LAM_CA =                                     "Оповещения в чат",
-    SI_LUIE_LAM_CI =                                     "Инфо боя",
-    SI_LUIE_LAM_SLASHCMDS =                              "Команды чата",
-    SI_LUIE_LAM_CI_DESCRIPTION =                         "Позволяет показывать значение абсолютной способности на панели, отслеживать эффекты и кулдауны предметов в быстром слоте и отображать ГКД для способностей на панели.",
-    SI_LUIE_LAM_BUFFS_DESCRIPTION =                      "Включает отображение баффов и дебаффов игрока и цели. Также имеет различные настройки.",
-    SI_LUIE_LAM_BUFFSDEBUFFS =                           "Баффы & Дебаффы",
-    SI_LUIE_LAM_MODULEHEADER =                           "Настройки модулей",
-    SI_LUIE_LAM_MISCHEADER =                             "Прочие настройки",
     SI_LUIE_LAM_SVPROFILE_HEADER =                       "Настройки профиля",
     SI_LUIE_LAM_SVPROFILE_DESCRIPTION =                  "По умолчанию в LuiExtended используется настройка на весь аккаунт. Вы можете переключиться на индивидуальные настройки для каждого персонажа. Профили могут копироваться между персонажами, вы можете сбросить настройки текущего персонажа или перезаписать настройки аккаунта ниже. Помните, что будут использоваться настройки на аккаунт, если вы вновь переключитесь с индивидуальных настроек персонажа на общие.",
     SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE =               "Индивидуальные настройки",
@@ -590,13 +493,17 @@ local strings = {
     SI_LUIE_LAM_SVPROFILE_RESETCHAR_TP =                 "Сбросить настройки профиля текущего персонажа.",
     SI_LUIE_LAM_SVPROFILE_RESETACCOUNT =                 "Сбросить общие настройки",
     SI_LUIE_LAM_SVPROFILE_RESETACCOUNT_TP =              "Сбрасывает общие настройки аккаунта. Помните, что это никак не затронет индивидуальные настройки персонажа.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- SLASH COMMANDS -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    -- Modules
+    SI_LUIE_LAM_UF =                                     "Фреймы",
+    SI_LUIE_LAM_CA =                                     "Оповещения в чат",
+    SI_LUIE_LAM_CI =                                     "Инфо боя",
+    SI_LUIE_LAM_SLASHCMDS =                              "Команды чата",
+    SI_LUIE_LAM_CI_DESCRIPTION =                         "Позволяет показывать значение абсолютной способности на панели, отслеживать эффекты и кулдауны предметов в быстром слоте и отображать ГКД для способностей на панели.",
+    SI_LUIE_LAM_BUFFS_DESCRIPTION =                      "Включает отображение баффов и дебаффов игрока и цели. Также имеет различные настройки.",
+    SI_LUIE_LAM_BUFFSDEBUFFS =                           "Баффы & Дебаффы",
+    SI_LUIE_LAM_MODULEHEADER =                           "Настройки модулей",
+    SI_LUIE_LAM_MISCHEADER =                             "Прочие настройки",
+    -- Module: Slash Commands
     SI_LUIE_LAM_SLASHCMDS_ENABLE =                       "Команды чата",
     SI_LUIE_LAM_SLASHCMDS_DESCRIPTION =                  "Добавляет собственные команды чата (/slash) для осуществления различных базовых функций, таких как исключение игрока из группы, приглашение игрока в гильдию или добавление в друзья.",
     SI_LUIE_LAM_SLASHCMDSHEADER =                        "Команды чата",
@@ -642,13 +549,7 @@ local strings = {
     SI_LUIE_LAM_SLASHCMDS_FENCE_TP =                     "'/fence' Призывает <<1>> (Если разблокировано).\n\t\t\t\t\tАльтернативный вариант: '/smuggler'",
     SI_LUIE_LAM_SLASHCMDS_READYCHECK =                   "( '/ready' ) Проверка готовности",
     SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP =                "Отправляет запрос готовности каждому члену группы.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- BUFFS & DEBUFFS -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    -- Module: Buffs & Debuffs
     SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK =                "Включить модуль Баффов & Дебаффов",
     SI_LUIE_LAM_BUFF_HEADER_POSITION =                   "Настройки положения и отображения",
     SI_LUIE_LAM_BUFF_HARDLOCK =                          "Привязать положение к Фреймам",
@@ -689,8 +590,8 @@ local strings = {
     SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP =            "Формат текста оставшегося времени \"12.3\" или оставить просто в секундах \"12\".",
     SI_LUIE_LAM_BUFF_HORIZONTICONALIGN =                 "Горизонтальное положение значков",
     SI_LUIE_LAM_BUFF_HORIZONTICONALIGN_TP =              "Горизонтальное положение значков баффов и дебаффов в контейнере.",
-    -- SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON =            "Vertical Icons Alignment",
-    -- SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON_TP =         "Vertical alignment of buff and debuff icons within container area.",
+    --SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON =          "Vertical Icons Alignment",
+    --SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON_TP =       "Vertical alignment of buff and debuff icons within container area.",
     SI_LUIE_LAM_BUFF_DESCENDINGSORT =                    "Сортировка по убыванию",
     SI_LUIE_LAM_BUFF_DESCENDINGSORT_TP =                 "Выберите направление, в котором будут сортироваться значки баффов.",
     SI_LUIE_LAM_BUFF_GLOWICONBORDER =                    "Светящиеся края значка",
@@ -841,19 +742,10 @@ local strings = {
     SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP =              "Добавляет abilityId или abilityName в чёрный список аур.",
     SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST =                 "Убрать Бафф/Дебафф из чёрного списка",
     SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP =              "Убирает abilityId или abilityName в чёрного списка аур.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- CHAT ANNOUNCEMENTS -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    -- Base Settings
+    -- Module: Chat Announcements
     SI_LUIE_LAM_CA_ENABLE =                              "Модуль Оповещения чата",
     SI_LUIE_LAM_CA_HEADER =                              "Настройки Оповещений в чат",
     SI_LUIE_LAM_CA_DESCRIPTION =                         "Выводит в чат оповещения о различных событиях - есть множество различных настроек.",
-
-    -- Chat Message Settings
     SI_LUIE_LAM_CA_CHATHEADER =                          "Настройки сообщений в чат",
     SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD =                   "Отображение имени игрока",
     SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP =                "Определяет способ отображения имени игрока в оповещениях чата.\nПо умолчанию: Имя персонажа",
@@ -881,16 +773,12 @@ local strings = {
     SI_LUIE_LAM_CA_TIMESTAMPCOLOR =                      "Цвет метки",
     SI_LUIE_LAM_CA_TIMESTAMPCOLOR_TP =                   "Цвет для метки времени.\nПо умолчанию: 143/143/143",
     SI_LUIE_LAM_CA_TIMESTAMP_TP =                        "Добавляет к выводимому тексту метку времени. Применяется ко всем сообщениям, отправляемым LUIE & Системным сообщениям, но не к сообщениям игроков. Формат и цвет по умолчанию соответствует pChat.",
-
-    -- Shared Menu Strings
     SI_LUIE_LAM_CA_SHARED_CA =                           "Оповещения чата",
     SI_LUIE_LAM_CA_SHARED_CA_SHORT =                     "CA",
     SI_LUIE_LAM_CA_SHARED_CSA =                          "Оповещения на экране",
     SI_LUIE_LAM_CA_SHARED_CSA_SHORT =                    "CSA",
     SI_LUIE_LAM_CA_SHARED_ALERT =                        "Предупреждение",
     SI_LUIE_LAM_CA_SHARED_ALERT_SHORT =                  "Пред.",
-
-    -- Currency Menu
     SI_LUIE_LAM_CA_CURRENCY_HEADER =                     "Оповещения о Валютах",
     SI_LUIE_LAM_CA_CURRENCY_SHOWICONS =                  "Значок валюты",
     SI_LUIE_LAM_CA_CURRENCY_SHOWICONS_TP =               "Отображает значок соответствующей валюты при выводе оповещений о её изменениях.",
@@ -1113,8 +1001,6 @@ local strings = {
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE_TP = "По умолчанию: Вы снимаете %s.",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY =   "Маскировка - Уничтожена",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY_TP ="По умолчанию: Ваша маскировка %s уничтожена.",
-
-    -- LOOT MENU
     SI_LUIE_LAM_CA_LOOT_HEADER =                         "Сообщения о добыче",
     SI_LUIE_LAM_CA_LOOT_SHOWICONS =                      "Значок предмета",
     SI_LUIE_LAM_CA_LOOT_SHOWICONS_TP =                   "Показывает значок полученного предмета.",
@@ -1169,8 +1055,6 @@ local strings = {
     SI_LUIE_LAM_CA_LOOT_SHOWTRADE_TP =                   "Показывает предметы полученные или потерянные при обмене.",
     SI_LUIE_LAM_CA_LOOT_LOOTSHOWDISGUISE =               "Сообщения и маскировке",
     SI_LUIE_LAM_CA_LOOT_LOOTSHOWDISGUISE_TP =            "Показывает сообщение, когда надеваете, снимаете или теряете маскировку.",
-
-    -- Experience Menu
     SI_LUIE_LAM_CA_EXP_HEADER =                          "Оповещения об Опыте",
     SI_LUIE_LAM_CA_EXP_HEADER_ENLIGHTENED =              "Просвещение",
     SI_LUIE_LAM_CA_EXP_ENLIGHTENED =                     "Просвещение",
@@ -1259,8 +1143,6 @@ local strings = {
     SI_LUIE_LAM_CA_GUILDREP_DB_COLOR =                   "Цвет Тёмного братства",
     SI_LUIE_LAM_CA_GUILDREP_ALERT =                      "Предупреждение о репутации",
     SI_LUIE_LAM_CA_GUILDREP_ALERT_TP =                   "Если включено, показывает базовое предупреждение для всех выбранных выше гильдий при повышении из репутации. ",
-
-    -- Collectibles/Lorebooks Menu
     SI_LUIE_LAM_CA_COLLECTIBLE_HEADER =                  "Оповещение Коллекций/Книг знаний",
     SI_LUIE_LAM_CA_COLLECTIBLE_COL_HEADER =              "Коллекции",
     SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE =                  "Открытие коллекции - <<1>>",
@@ -1296,8 +1178,6 @@ local strings = {
     SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_TP =                "Отображает соответствующую категорию обнаруженной Книги знаний.",
     SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE =                 "Книги без Эйдетической памяти",
     SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP =              "Показывать обнаружение книг даже если не открыта Эйдетическая память.",
-
-    -- Achievements Menu
     SI_LUIE_LAM_CA_ACHIEVE_HEADER =                      "Оповещение Достижений",
     SI_LUIE_LAM_CA_ACHIEVE_UPDATE =                      "Обновление Достижений - <<1>>",
     SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP =                   "Показывает <<1>> когда происходит прогресс вы выполнении Достижения.",
@@ -1330,8 +1210,6 @@ local strings = {
     SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_HEADER =             "Настройки отслеживания",
     SI_LUIE_LAM_CA_ACHIEVE_CATEGORY =                    "Отслеживать Достижения \'<<1>>\'",
     SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP =                 "Включает отслеживание Достижений в категории <<1>>.",
-
-    -- Quest Menu
     SI_LUIE_LAM_CA_QUEST_HEADER =                        "Оповещения заданий/POI",
     SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE =                "Поделиться заданием",
     SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP =             "Выводит оповещение в чат, когда другой игрок делится с вами заданием.",
@@ -1367,8 +1245,6 @@ local strings = {
     SI_LUIE_LAM_CA_QUEST_COLOR2 =                        "Цвет описания POI", -- TODO: Add Tooltip with finalized color value
     SI_LUIE_LAM_CA_QUEST_COLOR3 =                        "Цвет названия задания", -- TODO: Add Tooltip with finalized color value
     SI_LUIE_LAM_CA_QUEST_COLOR4 =                        "Цвет описания задания", -- TODO: Add Tooltip with finalized color value
-
-    -- Social Menu
     SI_LUIE_LAM_CA_SOCIAL_HEADER =                       "Социальные/Гильдейские оповещения",
     SI_LUIE_LAM_CA_SOCIAL_FRIENDS_HEADER =               "Друзья/Список игнорирования",
     SI_LUIE_LAM_CA_SOCIAL_FRIENDS =                      "Запросы в друзья и список игнорирования - <<1>>",
@@ -1409,8 +1285,6 @@ local strings = {
     SI_LUIE_LAM_CA_MISC_MARA_TP =                        "Показывает <<1>> для событий Обета Мары.",
     SI_LUIE_LAM_CA_MISC_MARA_ALERT =                     "Только при ошибках",
     SI_LUIE_LAM_CA_MISC_MARA_ALERT_TP =                  "Если включено, предупреждения будут выводиться только при ошибках во время Обета Мары. Симулирует обычное поведение UI.",
-
-    -- Group Menu
     SI_LUIE_LAM_CA_GROUP_HEADER =                        "Оповещения группы/LFG/Испытаний",
     SI_LUIE_LAM_CA_GROUP_BASE_HEADER =                   "Групповые оповещения",
     SI_LUIE_LAM_CA_GROUP_BASE =                          "Групповые оповещения - <<1>>",
@@ -1439,12 +1313,8 @@ local strings = {
     SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP =                 "Показывает <<1>> когда начинается новый уровень Драгонстарской или Вихревой арены.",
     SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND =              "Раунды Вихревой арены - <<1>>",
     SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP =           "Показывает <<1>> когда начинается новый раунд Вихревой арены.",
-
-    -- Display Announcements
     SI_LUIE_LAM_CA_DISPLAY_CRAGLORN =                    "Баффы Краглорна - <<1>>",
     SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP =                 "Показывает <<1>> когда вы получаете бафф за завершение мировых событий Краглорна.",
-
-    -- Misc Menu
     SI_LUIE_LAM_CA_MISC_GROUPAREA =                      "Вход/Выход из групповой области - <<1>>",
     SI_LUIE_LAM_CA_MISC_GROUPAREA_TP =                   "Показывает <<1>> при входе или выходе из групповой области.",
     SI_LUIE_LAM_CA_MISC_HEADER =                         "Прочие оповещения",
@@ -1467,13 +1337,7 @@ local strings = {
     SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP =       "Показывает <<1>> когда вас почти обнаружили или ваша маскировка почти разоблачена.",
     SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR =     "Цвет предупреждения CSA",
     SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR_TP =  "Изменяет цвет предупреждения CSA (Предупреждение посреди экрана), показываемого, когда вас почти обнаружили или ваша маскировка почти разоблачена.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- COMBAT INFO -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    -- Module: Combat Info
     SI_LUIE_LAM_CI_HEADER =                              "Настройки инфо о бое",
     SI_LUIE_LAM_CI_SHOWCOMBATINFO =                      "Инфо о бое",
     SI_LUIE_LAM_CI_SHARED_FONT_TP =                      "Выберите шрифт надписи отсчёта.",
@@ -1524,13 +1388,7 @@ local strings = {
     SI_LUIE_LAM_CI_POTION_TP =                           "Показывает таймер отсчёта (куладуна) для зелий и прочих предметов в слоте быстрого доступа.",
     SI_LUIE_LAM_CI_POTION_COLOR =                        "Цвет надписи",
     SI_LUIE_LAM_CI_POTION_COLOR_TP =                     "Цвет таймера отсчёта слота быстрого доступа на основе оставшегося времени.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- INFO PANEL -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    -- Module: Info Panel
     SI_LUIE_LAM_PNL =                                    "Инфо-панель",
     SI_LUIE_LAM_PNL_ENABLE =                             "Модуль Инфо-панели",
     SI_LUIE_LAM_PNL_DESCRIPTION =                        "Показывает панель с потенциально полезной информацией, такой как задержка, Время, FPS, прочность брони и заряд оружия и прочее...",
@@ -1550,20 +1408,11 @@ local strings = {
     SI_LUIE_LAM_PNL_SHOWSOULGEMS =                       "Камни душ",
     SI_LUIE_LAM_PNL_UNLOCKPANEL =                        "Разблокировать панель",
     SI_LUIE_LAM_PNL_UNLOCKPANEL_TP =                     "Позволяет мышью перемещать Инфо-панель.",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- UNITFRAMES -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    -- Base Options
+    -- Module: Unitframes
     SI_LUIE_LAM_UF_ENABLE =                              "Модуль фреймов",
     SI_LUIE_LAM_UF_DESCRIPTION =                         "Позволяет отображать текстовую информацию поверх стандартных фреймов, а также позволяет включить настраиваемые фреймы игрока и цели.",
     SI_LUIE_LAM_UF_SHORTNUMBERS =                        "Краткие цифры на всех барах",
     SI_LUIE_LAM_UF_SHORTNUMBERS_TP =                     "Заменяет большие цифры, такие как 12345 сокращением 12.3k на всех барах фреймов юнитов.",
-
-    -- Shared Options
     SI_LUIE_LAM_UF_SHARED_LABEL =                        "Формат надписи",
     SI_LUIE_LAM_UF_SHARED_LABEL_TP =                     "Формат надписи для кастомных полосок характеристик.",
     SI_LUIE_LAM_UF_SHARED_LABEL_LEFT =                   "Формат надписи (Слева)",
@@ -1582,8 +1431,6 @@ local strings = {
     SI_LUIE_LAM_UF_SHARED_REGEN_TP =                     "Показывает анимированные стрелки когда восстановление увеличено или снижено.",
     SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY =            "Прозрачность Группы/Рейда (Общая настройка)",
     SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY_TP =         "Изменяет прозрачность кастомных фреймов группы и рейда.",
-
-    -- Default Unit Frames Options
     SI_LUIE_LAM_UF_DFRAMES_HEADER =                      "Стандартные Фрейм юнитов",
     SI_LUIE_LAM_UF_DFRAMES_PLAYER =                      "Стандартный фрейм ИГРОКА",
     SI_LUIE_LAM_UF_DFRAMES_TARGET =                      "Стандартный фрейм ЦЕЛИ",
@@ -1608,8 +1455,6 @@ local strings = {
     SI_LUIE_LAM_UF_TARGET_ICON_CLASS_TP =                "Отображает значок класса цели-игрока.",
     SI_LUIE_LAM_UF_TARGET_ICON_GFI =                     "Значок игнора/друга/гильдии",
     SI_LUIE_LAM_UF_TARGET_ICON_GFI_TP =                  "Отображает значок для уели игрока, указывающую на его статус: игнорируется, друг, согильдеец.",
-
-    -- Custom Unit Frames Options
     SI_LUIE_LAM_UF_CFRAMES_HEADER =                      "Настраиваемые фреймы юнитов",
     SI_LUIE_LAM_UF_CFRAMES_UNLOCK =                      "Разблокировать фреймы",
     SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TP =                   "Позволяет мышью перетаскивать все настриваемые фреймы юнитов. Когда фреймы разблокированы, фрейм цели не будет скрыт и может отображать устаревшую информацию.",
@@ -1635,8 +1480,6 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS_TP =           "Используется плавное изменение заполнение полоски при изменении значения. Отключение этой настройки может немного повысить производительность.",
     SI_LUIE_LAM_UF_CFRAMES_CHAMPION =                    "Очки чемпиона",
     SI_LUIE_LAM_UF_CFRAMES_CHAMPION_TP =                 "Выберите, показывать текущий кап очков чемпиона или реальное количество набранных очков чемпиона, если их набрано больше капа.",
-
-    -- Custom Unit Frame Color Options
     SI_LUIE_LAM_UF_CFRAMES_COLOR_HEADER =                "Настройка цветов кастомных фреймов юнитов",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALTH =                "Цвет полоски ЗДОРОВЬЯ",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_SHIELD =                "Цвет полоски ЩИТА",
@@ -1655,8 +1498,6 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE =        "Цвет реакции - Враждебный",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_NEUTRAL =        "Цвет реакции - Нейтральный",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_GUARD =          "Цвет реакции - Стража",
-
-    -- Player/Target Frames
     SI_LUIE_LAM_UF_CFRAMESPT_HEADER =                    "Настраиваемые фреймы юнитов (Игрок, Цель)",
     SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER =            "Дополнительные настройки фреймов Игрока",
     SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER =             "Фрейм ИГРОКА",
@@ -1702,14 +1543,12 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMESPT_XPCPBAR_TP =                "Показывает полоску для отслеживания опыта, получаемого игроком.",
     SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR =              "Цвет Чемпионского опыта",
     SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR_TP =           "Задаёт цвет полоски опыта в соответствии с типом набираемого Чемпионского очка.",
-
     SI_LUIE_LAM_UF_LOWRESOURCE_HEALTH =                  "Игрок - Мало Здоровья % Порог",
     SI_LUIE_LAM_UF_LOWRESOURCE_HEALTH_TP =               "Задаёт порог, по достижению которого текст на полоске здоровья игрока станет красными.",
     SI_LUIE_LAM_UF_LOWRESOURCE_MAGICKA =                 "Игрок - Мало Магии % Порог",
     SI_LUIE_LAM_UF_LOWRESOURCE_MAGICKA_TP =              "Задаёт порог, по достижению которого текст на полоске магии игрока станет красными.",
     SI_LUIE_LAM_UF_LOWRESOURCE_STAMINA =                 "Игрок - Мало Запаса Сил % Порог",
     SI_LUIE_LAM_UF_LOWRESOURCE_STAMINA_TP =              "Задаёт порог, по достижению которого текст на полоске запаса сил игрока станет красными.",
-
     SI_LUIE_LAM_UF_CFRAMESPT_TARGET_WIDTH =              "Длина полоски Цели",
     SI_LUIE_LAM_UF_CFRAMESPT_TARGET_HEIGHT =             "Высота полоски Цели",
     SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY =          "Цель - Прозрачность - Вне боя",
@@ -1736,8 +1575,6 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY_TP =    "Выберите, что отображать в приоритете: AVA-звание или титул игрока.",
     SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT =           "Неполные ресурсы - как в бою",
     SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT_TP =        "Когда ресурсы не полные, фрейм будет использовать прозрачность, заданную для ситуации в бою.",
-
-    -- Group Frames
     SI_LUIE_LAM_UF_CFRAMESG_HEADER =                     "Настраиваемые фреймы (Группа)",
     SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE =           "Фреймы ГРУППЫ",
     SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE_TP =        "Создаётся настраиваемый фрейм Группы.",
@@ -1752,8 +1589,6 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE_TP =      "Цвета настраиваемого фрейма группы на основе роли.",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS =        "Цвета фреймов группы по классам",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS_TP =     "Цвет кастомных фреймов группы будет основываться на классе.",
-
-    -- Raid Frames
     SI_LUIE_LAM_UF_CFRAMESR_HEADER =                     "Настраиваемые фреймы (Рейд)",
     SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE =           "Фреймы РЕЙДА",
     SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE_TP =        "Создаётся настраиваемый фрейм Рейда. Если включены настраиваемые фреймы ГРУППЫ, тогда эти фреймы рейда будут также использоваться и для малых групп.",
@@ -1771,8 +1606,6 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE_TP =      "Цвета настраиваемого фрейма рейда на основе роли.",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS =        "Цвета фреймов рейда по классам",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS_TP =     "Цвет кастомных фреймов рейда будет основываться на классе.",
-
-    -- Boss Frames
     SI_LUIE_LAM_UF_CFRAMESB_HEADER =                     "Настраиваемый фрейм (Босс)",
     SI_LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE =           "Фрейм Босса",
     SI_LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE_TP =        "Создаётся настраиваемый фрейм Босса. Возможно отслеживать здоровье до 6 боссов в Подземельях.",
@@ -1782,16 +1615,11 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMESB_OPACITYOOC_TP =              "Изменяет прозрачность кастомного фрейма босса, когда игрок вне боя.",
     SI_LUIE_LAM_UF_CFRAMESB_OPACITYIC =                  "Прозрачность полоски босса - В бою",
     SI_LUIE_LAM_UF_CFRAMESB_OPACITYIC_TP =               "Изменяет прозрачность кастомного фрейма босса, когда игрок в бою.",
-
-
-    -- PVP Frames
     SI_LUIE_LAM_UF_CFRAMESPVP_HEADER =                   "Настраиваемый фрейм (PvP-цели)",
     SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME =              "Фрейм PvP-цели",
     SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_TP =           "Создаётся дополнительный настраиваемый фрейм цели в PvP. Это позволяет отслеживать здоровье целей только вражеских игроков. Он также имеет больший размер, меньше информации и располагается в центр экрана.",
     SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_WIDTH =        "Длина полоски PvP-цели",
     SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_HEIGHT =       "Высота полоски PvP-цели",
-
-    -- Common Options
     SI_LUIE_LAM_UF_COMMON_HEADER =                       "Прочие настройки",
     SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER =           "Имя игрока (Игрок)",
     SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER_TP =        "Определяет способ отображения вашего имени на фрейме игрока.\nПо умолчанию: Имя персонажа",
@@ -1806,14 +1634,7 @@ local strings = {
     SI_LUIE_LAM_UF_COMMON_RETICLECOLOR =                 "Применить к прицелу",
     SI_LUIE_LAM_UF_COMMON_RETICLECOLOR_TP =              "Изменяет цвет прицела в соответствии с враждебностью цели.",
     SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT =         "Цвет прицела интерактивных объектов",
-
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    -- COMBAT TEXT -- LAM --
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    -- Base Options
+    -- Module: Combat Text
     SI_LUIE_LAM_CT =                                     "Текст боя",
     SI_LUIE_LAM_CT_SHOWCOMBATTEXT =                      "Включает текст боя (Combat Cloud)",
     SI_LUIE_LAM_CT_DESCRIPTION =                         "Показывает текст боя как Combat Cloud, значение урона/исцеления и различные предупреждения.",
@@ -1825,8 +1646,6 @@ local strings = {
     SI_LUIE_LAM_CT_TRANSPARENCY_TP =                     "Задаёт прозрачность для текста боя.",
     SI_LUIE_LAM_CT_ABBREVIATE =                          "Короткие цифры",
     SI_LUIE_LAM_CT_ABBREVIATE_TP =                       "Заменяет длинные цифры, такие как 12345, на короткие (12.3k) во всех текстах боя.",
-
-    -- CT (Shared)
     SI_LUIE_LAM_CT_SHARED_DAMAGE =                       "Урон",
     SI_LUIE_LAM_CT_SHARED_DAMAGE_CRITICAL =              "Урон (Критический)",
     SI_LUIE_LAM_CT_SHARED_HEALING =                      "Исцеление",
@@ -1878,8 +1697,6 @@ local strings = {
     SI_LUIE_LAM_CT_SHARED_LOW_STAMINA =                  "Мало запаса сил",
     SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY =               "Ульта готова",
     SI_LUIE_LAM_CT_SHARED_POTION_READY =                 "Зелье готов",
-
-    -- CT (Incoming)
     SI_LUIE_LAM_CT_INCOMING_HEADER =                     "Настройки (Входящее)",
     SI_LUIE_LAM_CT_INCOMING_DAMAGE_HEAL_HEADER =         "Входящий Урон & Исцеление",
     SI_LUIE_LAM_CT_INCOMING_MITIGATION =                 "Входящее поглощение",
@@ -1904,8 +1721,6 @@ local strings = {
     SI_LUIE_LAM_CT_INCOMING_OFF_BALANCE_TP =             "Показать когда вы выведены из равновесия.",
     SI_LUIE_LAM_CT_INCOMING_SILENCED_TP =                "Показать когда вы обезмолвлены.",
     SI_LUIE_LAM_CT_INCOMING_STUNNED_TP =                 "Показать когда вы оглушены.",
-
-    -- CT (Outgoing)
     SI_LUIE_LAM_CT_OUTGOING_HEADER =                     "Настройки (Исходящее)",
     SI_LUIE_LAM_CT_OUTGOING_DAMAGE_HEAL_HEADER =         "Исходящий Урон & Исцеление",
     SI_LUIE_LAM_CT_OUTGOING_MITIGATION =                 "Исходящее поглощение",
@@ -1930,8 +1745,6 @@ local strings = {
     SI_LUIE_LAM_CT_OUTGOING_OFF_BALANCE_TP =             "Показать когда вы вывели цель из равновесия.",
     SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP =                "Показать когда вы обезмолвили цель.",
     SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP =                 "Показать когда вы оглушили цель.",
-
-    -- CT (Notifications)
     SI_LUIE_LAM_CT_NOTIFICATION =                        "Настройки (Оповещения)",
     SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE =           "Статус боя",
     SI_LUIE_LAM_CT_NOTIFICATION_ALERTS =                 "Боевые подсказки",
@@ -1996,8 +1809,6 @@ local strings = {
     SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA_TP =     "Порог для предупреждения о низком уровне Магии.\nПо умолчанию: 35%",
     SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA =        "Порог Запаса Сил",
     SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA_TP =     "Порог для предупреждения о низком уровне Запаса Сил.\nПо умолчанию: 35%",
-
-    -- CT (Font)
     SI_LUIE_LAM_CT_FONT_HEADER =                         "Настройки формата шрифта",
     SI_LUIE_LAM_CT_FONT_FACE =                           "Вид шрифта",
     SI_LUIE_LAM_CT_FONT_FACE_TP =                        "Выберите вид шрифта.",
@@ -2005,8 +1816,6 @@ local strings = {
     SI_LUIE_LAM_CT_FONT_OUTLINE_TP =                     "Выберите контур шрифта.",
     SI_LUIE_LAM_CT_FONT_TEST =                           "Проверка шрифта",
     SI_LUIE_LAM_CT_FONT_TEST_TP =                        "Генерирует проверочное боевое событие для проверки выбранного шрифта.",
-
-    -- CT (Font Combat)
     SI_LUIE_LAM_CT_FONT_COMBAT_HEADER =                  "Размер шрифта (Бой)",
     SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_TP =               "Размер шрифта прямого урона.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_CRITICAL_TP =      "Размер шрифта прямого критического урона.\nПо умолчанию: 32",
@@ -2019,15 +1828,11 @@ local strings = {
     SI_LUIE_LAM_CT_FONT_COMBAT_GAIN_LOSS_TP =            "Размер шрифта восполнения и потери ресурсов.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP =           "Размер шрифта поглощённого урон.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP =        "Размер шрифта контроля.\nПо умолчанию: 32",
-
-    -- CT (Font Notifications)
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_HEADER =            "Размер шрифта (Оповещения)",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP =   "Размер шрифта оповещений о входе в бой или выходе из него.\nПо умолчанию: 24",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_ALERT_TP =          "Размер шрифта активных боевых подсказок.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP =         "Размер шрифта получения очков\nПо умолчанию: 24",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP =       "Размер шрифта предупреждений о ресурсах.\nПо умолчанию: 32",
-
-    -- CT (Color Options)
     SI_LUIE_LAM_CT_COLOR_COMBAT_HEADER =                 "Настройки цвета (Бой)",
     SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_HEALING_HEADER =  "Урон & Исцеление",
     SI_LUIE_LAM_CT_COLOR_COMBAT_MITIGATION_HEADER =      "Поглощение",
@@ -2116,8 +1921,6 @@ local strings = {
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP =   "Задаёт цвет для предупреждении о низком Запасе Сил.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP =      "Задаёт цвет для предупреждении о возможности применить свою абсолютную способность.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POTION_TP =        "Задаёт цвет для предупреждении о возможности повторно использовать зелье.",
-
-    -- CT (Format Options)
     SI_LUIE_LAM_CT_FORMAT_DESCRIPTION =                  "Позволяет вам изменить выводимый текст. Напишите текст, который вы хотите видеть или введите специальные переменные для вывода\n %t - Название способности, локализованное название\n %a - Значение\n %r - Тип силы, ресурса",
     SI_LUIE_LAM_CT_FORMAT_COMBAT_HEADER =                "Настройки формата (Бой)",
     SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_HEALING_HEADER = "Урон & Исцеление",
@@ -2170,8 +1973,6 @@ local strings = {
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP =     "Формат текста для предупреждении о низком запасе ресурсов.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ULTIMATE_TP =     "Формат текста для предупреждении о возможности применить свою абсолютную способность.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POTION_TP =       "Формат текста для предупреждении о возможности повторно использовать зелье.",
-
-    -- CT (Animation Options)
     SI_LUIE_LAM_CT_ANIMATION_HEADER =                    "Настройки Анимации",
     SI_LUIE_LAM_CT_ANIMATION_TYPE =                      "Тип Анимации",
     SI_LUIE_LAM_CT_ANIMATION_TYPE_TP =                   "Выберите предпочитаемый тип анимации.",
@@ -2185,8 +1986,6 @@ local strings = {
     SI_LUIE_LAM_CT_ANIMATION_ICON_IN_TP =                "Задаёт положение значка в тексте для входящих событий.",
     SI_LUIE_LAM_CT_ANIMATION_TEST =                      "Проверка Анимации",
     SI_LUIE_LAM_CT_ANIMATION_TEST_TP =                   "Запускает проверку анимации текста входящих и исходящих эффектов.",
-
-    -- CT (Throttle Options)
     SI_LUIE_LAM_CT_THROTTLE_HEADER =                     "Настройки суммирования",
     SI_LUIE_LAM_CT_THROTTLE_DESCRIPTION =                "Суммирует множество ударов в один. Используйте ползунок, чтобы задать временной период для суммирования в миллисекундах. Критические удары не суммируются, если не включена соответствующая настройка ниже.",
     SI_LUIE_LAM_CT_THROTTLE_DAMAGE_TP =                  "Задаёт период времени в мс для суммирование цифр урона.\nПо умолчанию: 200 мс",
@@ -2198,11 +1997,7 @@ local strings = {
     SI_LUIE_LAM_CT_THROTTLE_TRAILER =                    "Show Throttle Trailer",
     SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP =                 "Enable Throttle Trailer.",
 
-    -- ---------------------------------------------------
-    -- ABILITY NAME OVERRIDE LOCALIZATION ----------------
-    -- ---------------------------------------------------
-
-    --SI_LUIE_SKILL_SKILLNAME =                          "",
+    -- Ability name override localization
     SI_LUIE_SKILL_RECALL_PENALTY =                       "Recall Penalty",
     SI_LUIE_SKILL_VANITY_PET =                           "Vanity Pet",
     SI_LUIE_SKILL_MOUNTED =                              "Mounted",
