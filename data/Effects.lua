@@ -887,6 +887,12 @@ E.BarHighlightOverride = {
     [85179] = { newId = 85182 }, -- Thrive in Chaos
 
     ---------------------------
+    -- Bow --------------------
+    ---------------------------
+
+    [38685] = { newId = 38686, showFakeAura = true, secondary = true }, -- Lethal Arrow --> Major Defile
+
+    ---------------------------
     -- Destruction Staff ------
     ---------------------------
 

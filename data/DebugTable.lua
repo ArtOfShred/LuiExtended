@@ -4137,7 +4137,10 @@ debugAuras = {
             [85181] = true, -- Thrive in Chaos (Thrive in Chaos)
             [85180] = true, -- Thrive in Chaos (Thrive in Chaos)
 
-            -- BOW
+            --------------------------
+            -- BOW PASSIVES
+            --------------------------
+
             [16688] = true, -- Light Attack
             [16691] = true, -- Heavy Attack (Bow)
             [17174] = true, -- Heavy Attack
@@ -4165,6 +4168,22 @@ debugAuras = {
             [45498] = true, -- Hasty Retreat (Rank 2)
             [98490] = true, -- Major Expedition
 
+            --------------------------
+            -- BOW ACTIVES
+            --------------------------
+
+            [28882] = true, -- Snipe (Snipe)
+
+            [38685] = true, -- Lethal Arrow (Lethal Arrow)
+            [38686] = true, -- Major Defile (Lethal Arrow)
+
+
+
+
+
+            [83465] = true, -- Rapid Fire (Rapid Fire)
+            --[55131] = true, -- Rapid Fire (Rapid Fire)
+            [86563] = true, -- Rapid Fire (Rapid Fire)
 
             --------------------------
             -- DESTRUCTION STAFF PASSIVES
