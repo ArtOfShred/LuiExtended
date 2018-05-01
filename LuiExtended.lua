@@ -301,7 +301,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Hook support for other addons (Icon)
     LUIE.GetAbilityIcon = GetAbilityIcon -- Used only for PTS testing
-    local zos_GetAbilityIcon = GetAbilityIcon
+    zos_GetAbilityIcon = GetAbilityIcon
     GetAbilityIcon = function(abilityId)
         local icon = zos_GetAbilityIcon(abilityId)
         if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
@@ -312,7 +312,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Hook support for other addons (Name)
     LUIE.GetAbilityName = GetAbilityName -- Used only for PTS testing
-    local zos_GetAbilityName = GetAbilityName
+    zos_GetAbilityName = GetAbilityName
     GetAbilityName = function(abilityId)
         local abilityName = zos_GetAbilityName(abilityId)
         if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
@@ -323,7 +323,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Hook support for other addons (Artificial effect ids)
     LUIE.GetArtificialEffectInfo = GetArtificialEffectInfo -- Used only for PTS testing
-    local zos_GetArtificialEffectInfo = GetArtificialEffectInfo
+    zos_GetArtificialEffectInfo = GetArtificialEffectInfo
     GetArtificialEffectInfo = function(artificialEffectId)
         local displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding = zos_GetArtificialEffectInfo(artificialEffectId)
         if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon then

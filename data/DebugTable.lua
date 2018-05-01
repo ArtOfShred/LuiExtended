@@ -2081,6 +2081,8 @@ debugAuras = {
             [61737] = true, -- Empower
             --[41952] = true, -- Generic Fear Snare
             [55080] = true, -- Pet Hidden
+            [28301] = true, -- Ability CC Immunity
+            [38117] = true, -- CC Immunity
 
             -- TAUNT EFFECTS
             [38254] = true, -- Taunt
@@ -5601,55 +5603,31 @@ debugAuras = {
 
             ---------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-            [00000] = true,
-            [00000] = true,
-            [00000] = true,
-            [00000] = true,
-
-
-
-
             -- GENERIC NPC COMBAT EVENTS
             [20542] = true, -- Prioritize Hit
             [38433] = true, -- Prioritize Hit
             [20546] = true, -- Prioritize Hit
+            [94793] = true, -- Prioritize Hit
             [37360] = true, -- No Light Attacks
-            [15160] = true, -- Finesse Clear Cooldown
+            [15160] = true, -- Monster Heavy Attack
             [31373] = true, -- Modify Shared CD Ability
             [46858] = true, -- Second Wind
-            [94793] = true, -- Prioritize Hit
 
             -- SHARED NPC PASSIVES
             [67950] = true, -- CC Immunity Plus -- Various NPC's
             [33097] = true, -- Scary Immunities -- Various NPC's
             [44176] = true, -- Flying Immunities -- Various NPC's
             [13739] = true, -- Backstabber -- Various NPC's
-            [71904] = true, -- Increased Speed -- Dire Wolf / Sentinel
-
+            [71904] = true, -- Increased Speed -- Dire Wolf + Sentinel
             [73768] = true, -- GEN 5 Hits -- Various NPC's
             [73769] = true, -- GEN 5 Hits -- Various NPC's
             [73772] = true, -- GEN 5 Hits -- Various NPC's
-
             [79147] = true, -- GEN 3 Hits -- Various NPC's
             [79148] = true, -- GEN 3 Hits -- Various NPC's
             [79149] = true, -- GEN 3 Hits -- Various NPC's
-
             [73916] = true, -- GEN 2 Hits -- Various NPC's
             [73917] = true, -- GEN 2 Hits -- Various NPC's
             [73919] = true, -- GEN 2 Hits -- Various NPC's
-
             [88283] = true, -- No Call Ally (is Ally) -- Summoner NPCs
             [88289] = true, -- No Call Ally (Failed) -- Summoner NPCs
             [89175] = true, -- No Call Ally 1:1 Ally Tracker -- Summoner NPCs
@@ -5657,25 +5635,32 @@ debugAuras = {
             [89177] = true, -- No Call Ally -- Summoner NPCs
 
             -- SHARED NPC ACTIVE EVENTS
-            [8239] = true, -- Hamstrung
+            [8239] = true, -- Hamstrung -- Various NPC's
             [10845] = true, -- Run Away! -- Humanoid NPC's
             [31813] = true, -- Run Away! -- Humanoid NPC's
-            [82703] = true, -- Run Away! -- Humanoid NPC's
-            [18386] = true, -- Run Away! -- Creatures
-            [14249] = true, -- Surround -- Mostly Animals
-
-            -- SHARED MISC
-            [28301] = true, -- Ability CC Immunity
-            [38117] = true, -- CC Immunity
+            --[82703] = true, -- Run Away! -- Humanoid NPC's
+            [18386] = true, -- Run Away! -- NPC (Mostly Creatures)
+            [14249] = true, -- Surround -- NPC (Mostly Animals)
 
             -- CRITTER EVENTS
-
+            [28890] = true, -- OnDeathFear -- Critter
+            [2581] = true, -- Flee -- Critter
             [79544] = true, -- Mischievous Dodge -- Nixad
             [79600] = true, -- Mischievous Dodge -- Nixad
             [79555] = true, -- Mischievous Dodge -- Nixad
             [79601] = true, -- Mischievous Dodge -- Nixad
             [79602] = true, -- Mischievous Dodge -- Nixad
 
+            -- MONSTER FIGHT ABILITIES
+            [9363] = true, -- Generic 1 Dmg Monster No Push -- Monster Fight
+            [9364] = true, -- Monster Fight Immunities -- Monster Fight
+            [40165] = true, -- Scene Choreo Brace -- Monster Fight
+            [40190] = true, -- Roll Dodge -- Monster Fight
+            [40193] = true, -- Roll Dodge -- Monster Fight
+            [45611] = true, -- On Me -- Monster Fight
+            [40120] = true, -- Quick Strike -- Monster Fight
+            [40203] = true, -- Heavy Attack -- Monster Fight
+            [44364] = true, -- Off-Balance Exploit -- Monster Fight
 
             ---------------------------------
             -- FRIENDLY NPC EVENTS
@@ -5695,6 +5680,7 @@ debugAuras = {
             -- JUSTICE NPCS
             ---------------------------------
 
+            [63424] = true, -- JUST Guard Awarness (Guard)
             [63903] = true, -- Guard Hit by CC
             [63153] = true, -- Guard Immunities
             [63154] = true, -- Guard Immunities
@@ -5725,7 +5711,7 @@ debugAuras = {
             [64134] = true, -- JUST Guard Evade
             [64150] = true, -- JUST Death Timer
 
-            [64152] = true, -- JUST Unlock Death Bolts
+            --[64152] = true, -- JUST Unlock Death Bolts
 
             --[63086] = true, -- Guard Charge
             --[63258] = true, -- Guard Charge
@@ -5761,15 +5747,13 @@ debugAuras = {
             [78766] = true, -- Confusion
             [78772] = true, -- Confusion
             [78771] = true, -- Confusion
-            --[78675] = true, -- Confusion
+            --[78765] = true, -- Confusion
 
             --[78743] = true, -- Flare
             --[78789] = true, -- Flare
             --[78750] = true, -- Revealed
             --[78746] = true, -- Flare
             --[78744] = true, -- Flare
-
-            --[63424] = true, -- JUST Guard Awarness (Guard)
 
             [75613] = true, -- Shadowcloak Immunity (Mage Guard)
             --[77921] = true, -- Clairvoyance Tutorial (Mage Guard)
@@ -5812,15 +5796,15 @@ debugAuras = {
 
             [77452] = true, -- Shadow Cloak Immunity (Basic Justice NPC)
             [78012] = true, -- Quick Strike (Basic Justice NPC)
-
+            [48321] = true, -- CON_Bamf Out (Basic Justice NPC)
             [62472] = true, -- Stab (Justice Rogue)
             [62506] = true, -- Thrown Dagger (Justice Rogue)
-
             [62408] = true, -- Bound Weapon (Justice Mage)
             [62409] = true, -- Fiery Wind (Justice Mage)
             [62502] = true, -- Fiery Wind (Justice Mage)
             [62407] = true, -- Fiery Touch (Justice Mage)
             [63828] = true, -- Fiery Touch (Justice Mage)
+            [61984] = true, -- Invisibility Potion (Justice Mage)
 
             [78265] = true, -- Alarm (Estate Marshal - DB)
             [80539] = true, -- Alarm (Estate Marshal - DB)
@@ -6995,6 +6979,14 @@ debugAuras = {
             [74794] = true, -- Staggered -- Harvester
             [11083] = true, -- The Feast -- Harvester
             [26110] = true, -- The Feast -- Harvester
+            [67206] = true, -- Summon Target
+            [67200] = true, -- Summon Projectile
+            [67212] = true, -- Summon Target
+            [67213] = true, -- Summon Projectile
+            [67220] = true, -- Summon Target
+            [67221] = true, -- Summon Projectile
+            [67230] = true, -- Summon Target
+            [67231] = true, -- Summon Projectile
             [26017] = true, -- Creeping Doom -- Harvester
             [26018] = true, -- Creeping Doom -- Harvester
             [88070] = true, -- Creeping Doom -- Harvester

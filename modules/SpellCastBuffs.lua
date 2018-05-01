@@ -1784,15 +1784,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
-    -- If block is not toggled to be displayed for player, don't show icon for it. Want to show it for targets regardless.
-    if abilityType == ABILITY_TYPE_BLOCK and unitTag == "player" and not SCB.SV.ShowBlockPlayer then
-        return
-    end
-
-    if abilityType == ABILITY_TYPE_BLOCK and unitTag == "reticleover" and not SCB.SV.ShowBlockTarget then
-        return
-    end
-
     -- Hide effects if chosen in the options menu
     if hidePlayerEffects[abilityId] and unitTag == "player" then
         return
@@ -1985,8 +1976,15 @@ local IsResultDamage = {
 
  -- Combat Event (Target = Player)
 function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-    if not (E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId]) then
+    if not (E.IsGroundMineAura[abilityId] or E.IsGroundMineDamage[abilityId] or E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId]) then
         return
+    end
+
+    -- TODO: Temp removal for budding seeds, maybe do something else with this in the future
+    if abilityId == 85925 and sourceType == COMBAT_UNIT_TYPE_PLAYER then
+        g_effectsList.player1[85840] = nil
+        g_effectsList.promb_player[85840] = nil
+        g_effectsList.promd_player[85840] = nil
     end
 
     -- If the action result isn't a starting/ending event then we ignore it.
@@ -2170,6 +2168,13 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 
     if not (E.IsGroundMineAura[abilityId] or E.IsGroundMineDamage[abilityId] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId]) then
         return
+    end
+
+    -- TODO: Temp removal for budding seeds, maybe do something else with this in the future
+    if abilityId == 85925 and sourceType == COMBAT_UNIT_TYPE_PLAYER then
+        g_effectsList.player1[85840] = nil
+        g_effectsList.promb_player[85840] = nil
+        g_effectsList.promd_player[85840] = nil
     end
 
     -- Try to remove effect like Ground Runes and Traps (we check this before we filter for other result types)
@@ -2705,6 +2710,9 @@ local function buffSort(x, y)
     end
 end
 
+--local g_updateMineCounter = 0
+--local g_mineList = { }
+
 -- Runs OnUpdate - 100 ms buffer
 function SCB.OnUpdate(currentTime)
     -- local currentTime = GetGameTimeMilliseconds()
@@ -2772,6 +2780,47 @@ function SCB.OnUpdate(currentTime)
             SCB.updateBar( currentTime, buffsSorted[container], container )
         end
     end
+
+    -- TODO: Possibly implement some kind of mine counter thing for abilities like Frozen Gate & the Eternal Hunt set
+    --[[g_updateMineCounter = g_updateMineCounter+1
+    if g_updateMineCounter == 10 then
+        g_updateMineCounter = 0
+
+        for mine, data in pairs(g_mineList) do
+            if data.time < currentTime then
+                if g_mineDestroyCounter[data.abilityId] > 1 then
+                    mine = nil
+                    return
+                else
+                    -- Remove one stack of the mine
+                    for _, effectsList in pairs( {g_effectsList.ground, g_effectsList.promb_ground, g_effectsList.promd_ground} ) do
+                        for k, v in pairs(effectsList) do
+                            -- Check if we have a buff up a mine, if we do also compare the names to make sure they are equivalent. This prevents removing Daedric Mines with Rearming Trap for example.
+                            if v.abilityId == data.abilityId then
+                                if v.stack then
+                                    if v.stack == 0 then
+                                        g_effectsList.ground[ k ] = nil
+                                        g_effectsList.promb_ground[ k ] = nil
+                                        g_effectsList.promd_ground[ k ] = nil
+                                    else
+                                        -- Decrement stack counter
+                                        v.stack = v.stack - 1
+                                        -- Remove if all stacks are removed
+                                        if v.stack == 0 then
+                                            g_effectsList.ground[ k ] = nil
+                                            g_effectsList.promb_ground[ k ] = nil
+                                            g_effectsList.promd_ground[ k ] = nil
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end]]--
+
 end
 
 function SCB.updateBar( currentTime, sortedList, container )
@@ -3317,9 +3366,16 @@ function SCB.UpdateContextHideList()
         end
     end
 
-    -- TODO:
-    -- Add block here
-    -- Add food here?
-    -- if SCB.SV.ShowBlockPlayer then -- Currently we use ability_type to hide/show this, maybe add here later when I can determine NPC block abilities
-    -- if SCB.SV.ShowBlockTarget then
+    if not SCB.SV.ShowBlockPlayer then
+        for k, v in pairs(E.IsBlock) do
+            hidePlayerEffects[k] = v
+        end
+    end
+
+    if not SCB.SV.ShowBlockTarget then
+        for k, v in pairs(E.IsBlock) do
+            hideTargetEffects[k] = v
+        end
+    end
+
 end

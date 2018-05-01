@@ -222,6 +222,12 @@ E.IsExperienceBuff = {
     -- TODO: MISSING JESTER XP BOOST
 }
 
+E.IsBlock = {
+    [14890] = true, -- Block
+    [29761] = true, -- Brace
+    [40165] = true, -- Scene Choreo Brace
+}
+
 E.IsGrimFocus = {
 
     [61905] = true, -- Grim Focus
@@ -244,8 +250,6 @@ E.IsGroundMineAura = {
 	-- Sets
 	[75930] = true, -- Deadric Mines (Eternal Hunt)
 
-    -- Nightblade
-
     -- Sorcerer
     [24830] = true, -- Daedric Mines (Daedric Mines)
     [24847] = true, -- Daedric Mines (Daedric Tomb)
@@ -255,27 +259,27 @@ E.IsGroundMineAura = {
 	[35750] = true, -- Trap Beast (Trap Beast - Rank 1)
 	[40382] = true, -- Rearming Trap (Rearming Trap - Rank 1)
 	[40372] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+
 }
 
 E.IsGroundMineDamage = {
 
 	-- Sets
-	[75929] = true, -- Eternal Hunt
-
-    -- Nightblade
+	[75929] = true, -- Eternal Hunt (Eternal Hunt)
 
     -- Sorcerer
     [24829] = true, -- Daedric Mines (Daedric Mines)
     [24843] = true, -- Daedric Tomb (Daedric Tomb)
     [25161] = true, -- Daedric Minefield (Daedric Minefield)
 
+    -- Warden
+    [85925] = true, -- Budding Seeds Heal (Budding Seeds)
+
 	-- Fighters Guild
-	[35754] = true, -- Trap Beast (Trap Beast - Rank 1)
-
-	[40389] = true, -- Rearming Trap (Rank 1)
-	[40392] = true, -- Rearming Trap (Rank 1)
-
-	[40376] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+	[35754] = true, -- Trap Beast (Trap Beast)
+	[40389] = true, -- Rearming Trap (Rearming Trap)
+	[40392] = true, -- Rearming Trap (Rearming Trap)
+	[40376] = true, -- Lightweight Beast Trap (Lightweight Beast Trap)
 }
 
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY ID
@@ -2306,7 +2310,7 @@ E.EffectOverride = {
 
     [32834] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds' }, -- Sanctuary (of Sanctuary)
 
-    [66902] = { icon = 'LuiExtended/media/icons/abilities/ability_set_spell_power_cure.dds' }, -- Spell Power Cure
+    [66902] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds' }, -- Spell Power Cure
 
     [67098] = { icon = 'LuiExtended/media/icons/abilities/ability_set_combat_physician.dds' }, -- Combat Physician (of the Combat Physician)
 
@@ -2639,6 +2643,8 @@ E.EffectOverride = {
     [16593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds' }, -- Melee Snare
     [48532] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', hide = true }, -- Charge Snare
     [55080] = { hide = true }, -- Pet Hidden
+    [28301] = { hide = true }, -- Ability CC Immunity (Trigger to apply 38117 on player)
+    [38117] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds' }, -- CC Immunity
 
     -- Taunt Effects
     [38254] = { icon = 'esoui/art/icons/ability_warrior_010.dds' }, -- Taunt
@@ -4168,6 +4174,7 @@ E.EffectOverride = {
     [62502] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_flames.dds' }, -- Fiery Wind (Justice Mage)
     [62407] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds', hide = true }, -- Fiery Touch (Justice Mage)
     [63828] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds' }, -- Fiery Touch (Justice Mage)
+    [61984] = { hide = true }, -- Invisibility Potion (Justice Mage)
 
     [78265] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_alarm.dds', hide = true }, -- Alarm (Estate Marshal - DB)
     [78266] = { hide = true }, -- Alarm (Estate Marshal - DB)
@@ -4196,11 +4203,9 @@ E.EffectOverride = {
     [33097] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity }, -- Scary Immunities
     [44176] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_flying_immunities.dds' }, -- Flying Immunities
     [13739] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_backstabber.dds' }, -- Backstabber
-
-    [67950] = { hide = true }, -- CC Immunity Plus
-    [88283] = { hide = true }, -- No Call Ally (is Ally)
-    [88289] = { hide = true }, -- No Call Ally (Failed)
-    [89175] = { hide = true }, -- No Call Ally 1:1 Ally Tracker
+    [73768] = { hide = true }, -- GEN 5 Hits
+    [79147] = { hide = true }, -- GEN 3 Hits
+    [73916] = { hide = true }, -- GEN 2 Hits
 
     -- FRIENDLY NPC's
     [42905] = { name = 'Recovering' }, -- Recover
@@ -4208,22 +4213,20 @@ E.EffectOverride = {
     -- SHARED NPC ACTIVE EVENTS
     [8239] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hamstrung.dds', name = A.Skill_Hamstring }, -- Hamstrung
 
-    -- SHARED NPC MISC
-    [38117] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds' }, -- CC Immunity
-    [28301] = { hide = true }, -- Ability CC Immunity (Trigger to apply 38117 on player)
-
     -- Standard NPC ABILITIES
     [2874] = { name = A.Innate_Stagger }, -- Staggered (Generic Stagger applied to player by many different NPC abilities)
 
-    -- Criter Events
+    -- CRITTER EVENTS
     [79544] = { hide = true }, -- Mischievous Dodge (Nixad)
+    [79555] = { hide = true }, -- Mischievous Dodge (Nixad)
+
+    [40165] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = A.Innate_Block, duration = 0 }, -- Scene Choreo Brace (Monster Fight)
 
     -- FRIENDLY NPC's
     [42905] = { icon = 'esoui/art/icons/ability_debuff_stun.dds' }, -- Recover
     [42937] = { hide = true }, -- TargetPriorityException
 
     -- HUMAN NPC ABILITIES
-    [31813] = { hide = true }, -- Run Away! (NPC runs away from player - Shows as buff on NPC)
     [18386] = { hide = true }, -- Run Away! (Used by various creatures)
 
     [10618] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Shared Human NPC)
@@ -4355,7 +4358,6 @@ E.EffectOverride = {
     [89057] = { hide = true }, -- Burdening Eye (Spirit Mage)
     [89042] = { hide = true }, -- Burdening Eye (Spirit Mage)
     [14477] = { hide = true }, -- Burdening (Spirit Mage)
-    [73768] = { hide = true }, -- GEN 5 Hits (Pointless to display)
     [35149] = { hide = true }, -- Burdening Eye (Spirit Mage)
 
     [37150] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds' }, -- Flare (Battlemage)
@@ -4996,7 +4998,6 @@ E.EffectOverride = {
     [26017] = { hide = true }, -- Creeping Doom (The Feast)
     [26018] = { hide = true }, -- Creeping Doom (The Feast)
     [88070] = { hide = true }, -- Creeping Doom (The Feast)
-    [73916] = { hide = true }, -- GEN 2 Hits (Pointless passive applied on the Feast)
 
     [8204] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_strike.dds' }, -- Strike (Ogrim)
     [8205] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_regeneration.dds' }, -- Regeneration (Ogrim)
@@ -5164,7 +5165,6 @@ E.EffectOverride = {
     [27463] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamawarrior_excavation.dds' }, -- Excavation -- Kwama Warrior
     [49192] = { hide = true }, -- Excavation (Kwama Scrib Summoned) (30 sec passive applied that doesn't have any effect)
     [18567] = { hide = true }, -- Excavation (Kwama Scrib Summoned) (30 sec passive applied that doesn't have any effect)
-    [79147] = { hide = true }, -- GEN 3 Hits (Kwama Scrib Summoned)
 
     [6127] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_bite.dds' }, -- Bite (Shalk)
     [5260] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_fiery_breath.dds', name = A.Skill_Fiery_Breath }, -- Fiery Breath (Shalk)
