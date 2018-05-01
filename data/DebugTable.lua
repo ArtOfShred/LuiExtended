@@ -2705,7 +2705,7 @@ debugAuras = {
             [76638] = true, -- Mass Hysteria (Manifestation of Terror)
 
             --[65269] = true, -- Shade Initialize (Summon Shade - All Morphs)
-            --[62197] = true, -- Pet Crit Chance (Summon Shade - All Morphs)
+            [62197] = true, -- Pet Crit Chance (Summon Shade - All Morphs)
             --[85086] = true, -- Boss (Summon Shade - All Morphs)
             --[85087] = true, -- Boss (Summon Shade - All Morphs)
 
@@ -3001,8 +3001,8 @@ debugAuras = {
 
             --[27287] = true, -- Birth Unstable Familiar (Summon Unstable Familiar - All Ranks)
             --[29536] = true, -- Familiar Set Target (Summon Unstable Familiar - All Ranks)
-            --[43958] = true, -- Pet AoE Resistance (Summon Unstable Familiar - All Ranks)
-            --[70116] = true, -- Pet PvP Damage Reduction (Summon Unstable Familiar - All Ranks)
+            [43958] = true, -- Pet AoE Resistance (Summon Unstable Familiar - All Ranks)
+            [70116] = true, -- Pet PvP Damage Reduction (Summon Unstable Familiar - All Ranks)
             --[43963] = true, -- Pet Bonus Threat (Summon Unstable Familiar - All Ranks)
             --[62197] = true, -- Pet Crit Chance (Summon Unstable Familiar - All Ranks)
             --[27850] = true, -- Familiar Melee (Summon Unstable Familiar + Summon Volatile Familiar)
@@ -3664,9 +3664,11 @@ debugAuras = {
             [85878] = true, -- Nature's Gift (Rank 1)
             [88483] = true, -- Nature's Give
             [93054] = true, -- Nature's Gift
+            [96451] = true, -- Nature's Gift Cooldown
             [85879] = true, -- Nature's Gift (Rank 2)
             [93072] = true, -- Nature's Give
             [93073] = true, -- Nature's Gift
+            [96452] = true, -- Nature's Gift Cooldown
             [85876] = true, -- Emerald Moss (Rank 1)
             [85877] = true, -- Emerald Moss (Rank 2)
             [85880] = true, -- Maturation (Rank 1)
@@ -3687,6 +3689,310 @@ debugAuras = {
             --------------------------
             -- WARDEN ACTIVES
             --------------------------
+
+            [85995] = true, -- Dive (Dive)
+
+            [85999] = true, -- Cutting Dive (Cutting Dive)
+
+            [87663] = true, -- Screaming Cliff Racer (Screaming Cliff Racer)
+            [86003] = true, -- Screaming Cliff Racer (Screaming Cliff Racer)
+
+            [86009] = true, -- Scorch (Scorch)
+            [94412] = true, -- Scorch (Scorch)
+            [94409] = true, -- Scorch (Scorch)
+            [94410] = true, -- Scorch (Scorch)
+            [94411] = true, -- Scorch (Scorch)
+
+            [86019] = true, -- Subterranean Assault (Subterranean Assault)
+            [94440] = true, -- Subterranean Assault (Subterranean Assault)
+            [94441] = true, -- Subterranean Assault (Subterranean Assault)
+            [94442] = true, -- Subterranean Assault (Subterranean Assault)
+            [94445] = true, -- Subterranean Assault (Subterranean Assault)
+            [94444] = true, -- Major Fracture (Subterranean Assault)
+
+            [86015] = true, -- Deep Fissure (Deep Fissure)
+            [94421] = true, -- Deep Fissure (Deep Fissure)
+            [94422] = true, -- Deep Fissure (Deep Fissure)
+            [94423] = true, -- Deep Fissure (Deep Fissure)
+            [94424] = true, -- Deep Fissure (Deep Fissure)
+            [108951] = true, -- Major Breach (Deep Fissure)
+
+            [86023] = true, -- Swarm (Swarm)
+            [101703] = true, -- Swarm (Swarm)
+
+            [86027] = true, -- Fetcher Infection (Fetcher Infection)
+            [91416] = true, -- Fetcher Infection Bonus Damage (Fetcher Infection)
+            [101904] = true, -- Fetcher Infection (Fetcher Infection)
+            [87687] = true, -- Bonus Damage Fetcher Infection (Fetcher Infection)
+
+            [95130] = true, -- Growing Swarm (Growing Swarm)
+            [86031] = true, -- Growing Swarm (Growing Swarm)
+            [101944] = true, -- Growing Swarm (Growing Swarm)
+            [89289] = true, -- Growing Swarm (Growing Swarm)
+            [101948] = true, -- Growing Swarm (Growing Swarm)
+
+            [89103] = true, -- Betty Netch Summon (Betty Netch - All Morphs)
+            [87875] = true, -- Betty Netch (Betty Netch + Blue Betty)
+            [87876] = true, -- Betty Netch (Betty Netch + Blue Betty)
+            [86050] = true, -- Betty Netch (Betty Netch)
+            [87929] = true, -- Major Sorcery (Betty Netch)
+            [86106] = true, -- Betty Netch (Betty Netch)
+
+            [86054] = true, -- Blue Betty (Blue Betty)
+            [89107] = true, -- Major Sorcery (Blue Betty)
+            [89106] = true, -- Blue Betty (Blue Betty)
+
+            [86058] = true, -- Bull Netch (Bull Netch)
+            [89110] = true, -- Major Brutality (Bull Netch)
+            [95125] = true, -- Major Sorcery (Bull Netch)
+            [89109] = true, -- Bull Netch (Bull Netch)
+            [86103] = true, -- Bull Netch (Bull Netch)
+            [91475] = true, -- Restore Remover (Bull Netch)
+
+            [86037] = true, -- Falcon's Swiftness (Falcon's Swiftness)
+            [86267] = true, -- Major Expedition (Falcon's Swiftness)
+            [86268] = true, -- Major Endurance (Falcon's Swiftness)
+
+            [86041] = true, -- Deceptive Predator (Deceptive Predator)
+            [89076] = true, -- Major Expedition (Deceptive Predator)
+            [89077] = true, -- Major Endurance (Deceptive Predator)
+            [87861] = true, -- Minor Evasion (Deceptive Predator)
+
+            [86045] = true, -- Bird of Prey (Bird of Prey)
+            [89078] = true, -- Major Expedition (Bird of Prey)
+            [89079] = true, -- Major Endurance (Bird of Prey)
+            [87864] = true, -- Minor Berserk (Bird of Prey)
+
+            [89363] = true, -- Feral Guardian Summon (Feral Guardian - All Morphs)
+            [90826] = true, -- Pet PvP Damage Reduction(Feral Guardian - All Morphs)
+            [93134] = true, -- Guardian's Wrath Trigger (Feral Guardian + Eternal Guardian)
+            [101438] = true, -- Bear Immunity (Feral Guardian - All Morphs)
+
+            [85982] = true, -- Feral Guardian (Feral Guardian)
+            [86074] = true, -- Feral Guardian (Feral Guardian)
+            [89135] = true, -- Swipe (Feral Guardian)
+            [89128] = true, -- Crushing Swipe (Feral Guardian)
+            [89129] = true, -- Crushing Swipe (Feral Guardian)
+            [90284] = true, -- Guardian's Wrath (Feral Guardian)
+            [93144] = true, -- Guardian's Wrath Trigger (Feral Guardian)
+            [91974] = true, -- Guardian's Wrath (Feral Guardian)
+
+            [85986] = true, -- Eternal Guardian (Eternal Guardian)
+            [89166] = true, -- Eternal Guardian (Eternal Guardian)
+            [105924] = true, -- Guardian's Wrath Trigger (Eternal Guardian)
+            [105906] = true, -- Swipe (Eternal Guardian)
+            [105907] = true, -- Crushing Swipe (Eternal Guardian)
+            [105908] = true, -- Crushing Swipe (Eternal Guardian)
+            [94625] = true, -- Guardian's Wrath (Eternal Guardian)
+            [94626] = true, -- Guardian's Wrath Trigger (Eternal Guardian)
+            [105921] = true, -- Guardian's Wrath (Eternal Guardian)
+            [89180] = true, -- Eternal Guardian Respawn Timer (Eternal Guardian)
+            [107588] = true, -- Eternal Guardian Cast Speed (Eternal Guardian)
+            [95108] = true, -- Eternal Guardian Respawn Timer (Eternal Guardian)
+
+            [85990] = true, -- Wild Guardian (Wild Guardian)
+            [89207] = true, -- Wild Guardian (Wild Guardian)
+            [95104] = true, -- Guardian's Savagery Trigger (Wild Guardian)
+            [89219] = true, -- Swipe (Wild Guardian)
+            [89220] = true, -- Crushing Swipe (Wild Guardian)
+            [92666] = true, -- Crushing Swipe (Wild Guardian)
+            [92163] = true, -- Guardian's Savagery (Wild Guardian)
+            [93233] = true, -- Guardian's Savagery Trigger (Wild Guardian)
+            [92160] = true, -- Guardian's Savagery (Wild Guardian)
+
+            [85536] = true, -- Fungal Growth (Fungal Growth)
+
+            [85862] = true, -- Enchanted Growth (Enchanted Growth)
+            [86300] = true, -- Minor Intellect (Enchanted Growth)
+            [87019] = true, -- Minor Endurance (Enchanted Growth)
+
+            [85863] = true, -- Soothing Spores (Soothing Spores)
+            [87938] = true, -- Soothing Spores Healing Bonus (Soothing Spores)
+
+            [108826] = true, -- Synergy Damage Bonus (Healing Seed - Harvest Synergy)
+            [85572] = true, -- Harvest (Healing Seed - Harvest Synergy)
+            [85577] = true, -- Harvest (Healing Seed - Harvest Synergy)
+            [85578] = true, -- Healing Seed (Healing Seed)
+            [85585] = true, -- Healing Seed Dummy (Healing Seed)
+            [85584] = true, -- Healing Seed Synergy Tick (Healing Seed)
+            [85583] = true, -- Harvest (Healing Seed)
+            [85582] = true, -- Healing Seed Heal (Healing Seed)
+
+            [85840] = true, -- Budding Seeds (Budding Seeds)
+            [85842] = true, -- Budding Seeds Dummy (Budding Seeds)
+            [85844] = true, -- Budding Seeds Synergy (Budding Seeds)
+            [85843] = true, -- Harvest (Budding Seeds)
+            [85841] = true, -- Budding Seeds Heal (Budding Seeds)
+            [85922] = true, -- Budding Seeds (Budding Seeds)
+            [85925] = true, -- Budding Seeds Heal (Budding Seeds)
+
+            [85845] = true, -- Corrupting Pollen (Corrupting Pollen)
+            [85847] = true, -- Corrupting Pollen Dummy (Corrupting Pollen)
+            [85849] = true, -- Corrupting Pollen Synergy Tick (Corrupting Pollen)
+            [85848] = true, -- Harvest (Corrupting Pollen)
+            [85846] = true, -- Corrupting Pollen Heal (Corrupting Pollen)
+            [85944] = true, -- Major Defile (Corrupting Pollen)
+
+            [85552] = true, -- Living Vines (Living Vines)
+            [85559] = true, -- Living Vines Heal (Living Vines)
+
+            [85850] = true, -- Leeching Vines (Leeching Vines)
+            [88712] = true, -- Leeching Vines (Leeching Vines)
+            [86307] = true, -- Minor Lifesteal (Leeching Vines)
+            [86306] = true, -- Minor Lifesteal (Leeching Vines)
+
+            [85851] = true, -- Living Trellis (Living Trellis)
+            [88721] = true, -- Living Trellis Heal (Living Trellis)
+            [88723] = true, -- Living Trellis Heal Burst (Living Trellis)
+
+            [85564] = true, -- Nature's Grasp (Nature's Grasp)
+            [90266] = true, -- Nature's Grasp (Nature's Grasp)
+            [108943] = true, -- Nature's Grasp Ultimate Restor (Nature's Grasp)
+
+            [85859] = true, -- Bursting Vines (Bursting Vines)
+            [88739] = true, -- Bursting Vines (Bursting Vines)
+            [108947] = true, -- Bursting Vines Ultimate Rest (Bursting Vines)
+
+            [85539] = true, -- Lotus Flower (Lotus Flower)
+            [85550] = true, -- Lotus Flower (Lotus Flower)
+            [94558] = true, -- Lotus Flower (Lotus Flower)
+
+            [85854] = true, -- Green Lotus (Green Lotus)
+            [87061] = true, -- Major Savagery (Green Lotus)
+            [87058] = true, -- Green Lotus (Green Lotus)
+            [94571] = true, -- Green Lotus (Green Lotus)
+
+            [85855] = true, -- Lotus Blossom (Lotus Blossom)
+            [86303] = true, -- Major Prophecy (Lotus Blossom)
+            [88695] = true, -- Lotus Blossom Heal (Lotus Blossom)
+            [94590] = true, -- Lotus Blossom Heal (Lotus Blossom)
+
+            [85858] = true, -- Nature's Embrace (Nature's Embrace)
+            [88726] = true, -- Nature's Embrace (Nature's Embrace)
+            [87074] = true, -- Nature's Embrace (Nature's Embrace)
+            [108945] = true, -- Nature's Embrace Ultimate Rest (Nature's Embrace)
+
+            [85532] = true, -- Secluded Grove (Secluded Grove)
+            [85533] = true, -- Secluded Grove Instant Heal (Secluded Grove)
+            [85534] = true, -- Secluded GroveTick Heal (Secluded Grove)
+
+            [85804] = true, -- Enchanted Forest (Enchanted Forest)
+            [88748] = true, -- Enchanted Forest Burst (Enchanted Forest)
+            [86357] = true, -- Enchanted Forest Ultimate Rest (Enchanted Forest)
+            [88747] = true, -- Enchanted Forest (Enchanted Forest)
+
+            [85807] = true, -- Healing Thicket (Healing Thicket)
+            [88750] = true, -- Healing Thicket Instant Heal (Healing Thicket)
+            [91819] = true, -- Healing Thicket (Healing Thicket)
+
+            [86122] = true, -- Frost Cloak (Frost Cloak)
+            [86224] = true, -- Major Resolve (Frost Cloak)
+            [86225] = true, -- Major Ward (Frost Cloak)
+
+            [86126] = true, -- Expansive Frost Cloak (Expansive Frost Cloak)
+            [88758] = true, -- Major Resolve (Expansive Frost Cloak)
+            [88759] = true, -- Major Ward (Expansive Frost Cloak)
+
+            [86130] = true, -- Ice Fortress (Ice Fortress)
+            [88761] = true, -- Major Resolve (Ice Fortress)
+            [88762] = true, -- Major Ward (Ice Fortress)
+            [87194] = true, -- Minor Protection (Ice Fortress)
+
+            [86161] = true, -- Impaling Shards (Impaling Shards)
+            [88920] = true, -- Impaling Shards Dummy (Impaling Shards)
+            [88783] = true, -- Impaling Shards (Impaling Shards)
+            [86238] = true, -- Impaling Shards (Impaling Shards)
+
+            [86165] = true, -- Gripping Shards (Gripping Shards)
+            [88993] = true, -- Impaling Shards Dummy (Gripping Shards)
+            [87443] = true, -- Gripping Shards (Gripping Shards)
+            [88791] = true, -- Gripping Shards (Gripping Shards)
+            [87448] = true, -- Gripping Shards (Gripping Shards)
+
+            [86169] = true, -- Winter's Revenge (Winter's Revenge)
+            [88994] = true, -- Impaling Shards Dummy (Winter's Revenge)
+            [88802] = true, -- Winter's Revenge (Winter's Revenge)
+            [88801] = true, -- Winter's Revenge (Winter's Revenge)
+
+            [86148] = true, -- Arctic Wind (Arctic Wind)
+            [90833] = true, -- Arctic Wind (Arctic Wind)
+
+            [86152] = true, -- Polar Wind (Polar Wind)
+            [90835] = true, -- Polar Wind (Polar Wind)
+            [88776] = true, -- Polar Wind (Polar Wind)
+
+            [86156] = true, -- Arctic Blast (Arctic Blast)
+            [90834] = true, -- Arctic Blast (Arctic Blast)
+            [105334] = true, -- Arctic Blast (Arctic Blast)
+            [105336] = true, -- Arctic Blast (Arctic Blast)
+            [87256] = true, -- Arctic Blast (Arctic Blast)
+
+            [86135] = true, -- Crystallized Shield (Crystallized Shield)
+            [92068] = true, -- Crystalized Shield (Crystallized Shield)
+            [87227] = true, -- Crystallized Shield (Crystallized Shield)
+            [87224] = true, -- Combat Restore Crystalized Shi (Crystallized Shield)
+            [87226] = true, -- Crystalized Shield Remover (Crystallized Shield)
+
+            [86139] = true, -- Crystallized Slab (Crystallized Slab)
+            [92168] = true, -- Crystalized Slab (Crystallized Slab)
+            [88769] = true, -- Crystalized Slab Stack Counter (Crystallized Slab)
+            [88766] = true, -- Crystalized Slab Restore (Crystallized Slab)
+            [88768] = true, -- Crystalized Slab Remover (Crystallized Slab)
+            [93175] = true, -- Crystallized Slab (Crystallized Slab)
+
+            [86143] = true, -- Shimmering Shield (Shimmering Shield)
+            [92170] = true, -- Shimmering Shield (Shimmering Shield)
+            [88774] = true, -- Shimmering Shield Stack Count (Shimmering Shield)
+            [88771] = true, -- Shimmering Shield Restore (Shimmering Shield)
+            [87234] = true, -- Major Herosim (Shimmering Shield)
+            [88773] = true, -- Shimmering Shield Remover (Shimmering Shield)
+
+            [86175] = true, -- Frozen Gate (Frozen Gate)
+            [86256] = true, -- Frozen Gate Dummy (Frozen Gate)
+            [86264] = true, -- Frozen Gate Move Position (Frozen Gate)
+            [108948] = true, -- Frozen Gate (Frozen Gate)
+            [89812] = true, -- Frozen Gate Root (Frozen Gate)
+            [87560] = true, -- Frozen Gate Root (Frozen Gate)
+
+            [86179] = true, -- Frozen Device (Frozen Device)
+            [92031] = true, -- Frozen Gate Dummy (Frozen Device)
+            [92032] = true, -- Frozen Gate Move Position (Frozen Device)
+            [108949] = true, -- Frozen Device (Frozen Device)
+            [92038] = true, -- Frozen Gate Root (Frozen Device)
+            [92039] = true, -- Frozen Gate Root (Frozen Device)
+            [92041] = true, -- Minor Maim (Frozen Device)
+
+            [88887] = true, -- Icy Escape Move Position (Frozen Retreat - Icy Escape Synergy
+            [88892] = true, -- Icy Escape Cooldown (Frozen Retreat - Icy Escape Synergy
+            [103321] = true, -- Major Expedition (Frozen Retreat - Icy Escape Synergy
+
+            [86183] = true, -- Frozen Retreat (Frozen Retreat)
+            [92052] = true, -- Frozen Retreat Dummy (Frozen Retreat)
+            [92062] = true, -- Frozen Retreat Synergy Tick (Frozen Retreat)
+            [92053] = true, -- Frozen Retreat Move Position (Frozen Retreat)
+            [108950] = true, -- Frozen Retreat (Frozen Retreat)
+            [92058] = true, -- Frozen Retreat Root (Frozen Retreat)
+            [92060] = true, -- Frozen Retreat Root (Frozen Retreat)
+            [92061] = true, -- Frozen Retreat Synergy Tick (Frozen Retreat)
+
+            [86109] = true, -- Sleet Storm (Sleet Storm)
+            [86249] = true, -- Major Protection (Sleet Storm)
+            [86247] = true, -- Sleet Storm (Sleet Storm)
+            [86250] = true, -- Sleet Storm (Sleet Storm)
+
+            [87542] = true, -- Northern Storm (Northern Storm)
+            [86113] = true, -- Northern Storm (Northern Storm)
+            [88859] = true, -- Major Protection (Northern Storm)
+            [88860] = true, -- Northern Storm (Northern Storm)
+            [88858] = true, -- Northern Storm (Northern Storm)
+
+            [86117] = true, -- Permafrost (Permafrost)
+            [88862] = true, -- Major Protection (Permafrost)
+            [92969] = true, -- FX Dummy (Permafrost)
+            [88863] = true, -- Permafrost (Permafrost)
+            [88861] = true, -- Permafrost (Permafrost)
+            [90942] = true, -- Permafrost Stack Counter (Permafrost)
+            [90943] = true, -- Permafrost (Permafrost)
 
             --------------------------
             -- UNARMED

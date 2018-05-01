@@ -24,16 +24,22 @@ E.IsToggle = {
     [A.Innate_Sprint]                       = true, -- Sprint (Innate)
     [A.Innate_Gallop]                       = true, -- Mount Sprint (Generic) (Innate) -- NOTE: Renamed to Gallop
 
-    -- Class Abilities
-    [A.Skill_Unstable_Familiar]             = true, -- Summon Unstable Familiar (Sorcerer)
-    [A.Skill_Unstable_Clannfear]            = true, -- Summon Unstable Clannfear (Sorcerer)
-    [A.Skill_Volatile_Familiar]             = true, -- Summon Volatile Familiar (Sorcerer)
-    [A.Skill_Summon_Winged_Twilight]        = true, -- Summon Winged Twilight (Sorcerer)
-    [A.Skill_Summon_Twilight_Tormentor]     = true, -- Summon Twilight Tormentor (Sorcerer)
-    [A.Skill_Summon_Twilight_Matriarch]     = true, -- Summon Twilight Matriarch (Sorcerer)
-    [A.Skill_Overload]                      = true, -- Overload (Sorcerer)
-    [A.Skill_Energy_Overload]               = true, -- Energy Overload (Sorcerer)
-    [A.Skill_Power_Overload]                = true, -- Power Overload (Sorcerer)
+    -- Sorcerer
+    [A.Skill_Unstable_Familiar]             = true, -- Summon Unstable Familiar
+    [A.Skill_Unstable_Clannfear]            = true, -- Summon Unstable Clannfear
+    [A.Skill_Volatile_Familiar]             = true, -- Summon Volatile Familiar
+    [A.Skill_Summon_Winged_Twilight]        = true, -- Summon Winged Twilight
+    [A.Skill_Summon_Twilight_Tormentor]     = true, -- Summon Twilight Tormentor
+    [A.Skill_Summon_Twilight_Matriarch]     = true, -- Summon Twilight Matriarch
+    [A.Skill_Overload]                      = true, -- Overload
+    [A.Skill_Energy_Overload]               = true, -- Energy Overload
+    [A.Skill_Power_Overload]                = true, -- Power Overload
+
+    -- Warden
+    [A.Skill_Feral_Guardian]                = true, -- Feral Guardian
+    [A.Skill_Eternal_Guardian]              = true, -- Eternal Guardian
+    [A.Skill_Wild_Guardian]                 = true, -- Wild Guardian
+
     -- TODO: Haven't gone over these yet
     [A.Skill_Guard]                         = true, -- Guard (Support)
     [A.Skill_Mystic_Guard]                  = true, -- Mystic Guard (Support)
@@ -299,6 +305,11 @@ E.DebuffDisplayOverrideId = {
     [31562] = true, -- Supernova (Nova Synergy)
     [34443] = true, -- Gravity Crush (Solar Prison Synergy)
 
+    -- Warden
+    [87560] = true, -- Frozen Gate Root (Frozen Gate)
+    [92039] = true, -- Frozen Gate Root (Frozen Device)
+    [92060] = true, -- Frozen Retreat Root (Frozen Retreat)
+
     -- Human NPC's
     [88281] = true, -- Call Ally (Pet Ranger)
     [89017] = true, -- Dark Shade (Dreadweaver)
@@ -430,6 +441,24 @@ E.EffectGroundDisplay = {
     [22240] = { buff = true, debuff = false, ground = false }, -- Channeled Focus (Channeled Focus)
     [22237] = { buff = true, debuff = false, ground = false }, -- Restoring Focus (Restoring Focus)
 
+    -- Warden Actives
+
+    [86161] = { buff = false, debuff = false, ground = true }, -- Impaling Shards (Impaling Shards)
+    [86165] = { buff = false, debuff = false, ground = true }, -- Gripping Shards (Gripping Shards)
+    [86169] = { buff = false, debuff = false, ground = true }, -- Winter's Revenge (Winter's Revenge)
+
+    [85578] = { buff = true, debuff = false, ground = false }, -- Healing Seed (Healing Seed)
+    [85840] = { buff = true, debuff = false, ground = false }, -- Budding Seeds (Budding Seeds)
+    [85845] = { buff = true, debuff = false, ground = false }, -- Corrupting Pollen (Corrupting Pollen)
+
+    [85532] = { buff = true, debuff = false, ground = false }, -- Secluded Grove (Secluded Grove)
+    [85804] = { buff = true, debuff = false, ground = false }, -- Enchanted Forest (Enchanted Forest)
+    [85807] = { buff = true, debuff = false, ground = false }, -- Healing Thicket (Healing Thicket)
+
+    [86175] = { buff = false, debuff = false, ground = true }, -- Frozen Gate (Frozen Gate)
+    [86179] = { buff = false, debuff = false, ground = true }, -- Frozen Device (Frozen Device)
+    [86183] = { buff = false, debuff = false, ground = true }, -- Frozen Retreat (Frozen Retreat)
+
     ---------------------------
     -- Bow --------------------
     ---------------------------
@@ -551,6 +580,28 @@ E.EffectCreateSkillAura = {
 	[44835] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Ward (Restoring Focus - Rank 1)
 	[37027] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 1)
 	[77056] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Protection (Restoring Focus - Rank 1)
+
+    -- Warden
+    [86267] = { icon = 'esoui/art/icons/ability_warden_016.dds', name = A.Skill_Falcons_Swiftness, consolidate = true }, -- Major Expedition --> Falcon's Swiftness
+    [86268] = { icon = 'esoui/art/icons/ability_warden_016.dds', name = A.Skill_Falcons_Swiftness, consolidate = true }, -- Major Endurance --> Falcon's Swiftness
+    [89076] = { icon = 'esoui/art/icons/ability_warden_016_b.dds', name = A.Skill_Deceptive_Predator, consolidate = true }, -- Major Expedition --> Deceptive Predator
+    [89077] = { icon = 'esoui/art/icons/ability_warden_016_b.dds', name = A.Skill_Deceptive_Predator, consolidate = true }, -- Major Endurance --> Deceptive Predator
+    [87861] = { icon = 'esoui/art/icons/ability_warden_016_b.dds', name = A.Skill_Deceptive_Predator, consolidate = true }, -- Minor Evasion --> Deceptive Predator
+    [89078] = { icon = 'esoui/art/icons/ability_warden_016_a.dds', name = A.Skill_Bird_of_Prey, consolidate = true }, -- Major Expedition --> Bird of Prey
+    [89079] = { icon = 'esoui/art/icons/ability_warden_016_a.dds', name = A.Skill_Bird_of_Prey, consolidate = true }, -- Major Endurance --> Bird of Prey
+    [87864] = { icon = 'esoui/art/icons/ability_warden_016_a.dds', name = A.Skill_Bird_of_Prey, consolidate = true }, -- Minor Berserk --> Bird of Prey
+
+    [86300] = { icon = 'esoui/art/icons/ability_warden_008_b.dds', name = A.Skill_Enchanted_Growth, consolidate = true }, -- Minor Intellect (Enchanted Growth)
+    [87019] = { icon = 'esoui/art/icons/ability_warden_008_b.dds', name = A.Skill_Enchanted_Growth, consolidate = true }, -- Minor Endurance (Enchanted Growth)
+
+
+    [86224] = { icon = 'esoui/art/icons/ability_warden_001.dds', name = A.Skill_Frost_Cloak, consolidate = true }, -- Major Resolve --> Frost Cloak
+    [86225] = { icon = 'esoui/art/icons/ability_warden_001.dds', name = A.Skill_Frost_Cloak, consolidate = true }, -- Major Ward --> Frost Cloak
+    [88758] = { icon = 'esoui/art/icons/ability_warden_001_a.dds', name = A.Skill_Expansive_Frost_Cloak, consolidate = true }, -- Major Resolve --> Expansive Frost Cloak
+    [88759] = { icon = 'esoui/art/icons/ability_warden_001_a.dds', name = A.Skill_Expansive_Frost_Cloak, consolidate = true }, -- Major Ward --> Expansive Frost Cloak
+    [88761] = { icon = 'esoui/art/icons/ability_warden_001_b.dds', name = A.Skill_Ice_Fortress, consolidate = true }, -- Major Resolve --> Ice Fortress
+    [88762] = { icon = 'esoui/art/icons/ability_warden_001_b.dds', name = A.Skill_Ice_Fortress, consolidate = true }, -- Major Ward --> Ice Fortress
+    [87194] = { icon = 'esoui/art/icons/ability_warden_001_b.dds', name = A.Skill_Ice_Fortress, consolidate = true }, -- Minor Protection --> Ice Fortress
 
     -- One Hand and Shield
     [62484] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds', name = A.Skill_Pierce_Armor, consolidate = true }, -- Major Fracture --> Pierce Armor
@@ -845,6 +896,37 @@ E.BarHighlightOverride = {
     [22223] = { showFakeAura = true }, -- Rite of Passage
     [22229] = { showFakeAura = true }, -- Remembrance
     [22226] = { showFakeAura = true }, -- Practiced Incantation
+
+    ---------------------------
+    -- Warden -----------------
+    ---------------------------
+
+    -- Animal Companions
+    [86023] = { newId = 101703 }, -- Swarm
+    [86027] = { newId = 101904 }, -- Fetcher Infection
+    [86031] = { newId = 101944 }, -- Growing Swarm
+
+    [86037] = { showFakeAura = true, noRemove = true }, -- Falcon's Swiftness
+    [86041] = { showFakeAura = true, noRemove = true }, -- Deceptive Predator
+    [86045] = { showFakeAura = true, noRemove = true }, -- Bird of Prey
+
+    -- Green Balance
+    [85682] = { newId = 86300, showFakeAura = true, noRemove = true }, -- Enchanted Growth --> Minor Intellect
+
+    [85840] = { newId = 85842 }, -- Budding Seeds --> Budding Seeds Dummy
+    [85922] = { newId = 85844 }, -- Budding Seeds --> Budding Seeds Synergy
+
+    [85564] = { newId = 90266 }, -- Nature's Grasp
+    [85858] = { newId = 87074 }, -- Nature's Embrace
+
+    -- Winter's Embrace
+    [86122] = { newId = 86224, showFakeAura = true, noRemove = true }, -- Frost Cloak --> Major Resolve
+    [86126] = { newId = 88758, showFakeAura = true, noRemove = true }, -- Expansive Frost Cloak --> Major Resolve
+    [86130] = { newId = 88761, showFakeAura = true, noRemove = true }, -- Ice Fortress --> Major Resolve
+
+    [86148] = { newId = 90833 }, -- Arctic Wind
+    [86152] = { newId = 90835 }, -- Polar Wind
+    [86156] = { newId = 90834 }, -- Arctic Blast
 
     ---------------------------
     -- Two Handed -------------
@@ -1312,6 +1394,21 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     -- Actives
     [24307] = true, -- Solar Disturbance Snare (Solar Disturbance - Rank 1)
     [37009] = true, -- Channeled Focus (Channeled Focus - Rank 1)
+
+    ----------------------------
+    -- Warden
+    ----------------------------
+
+    [87876] = true, -- Betty Netch (Betty Netch)
+    [91475] = true, -- Restore Remover (Bull Netch)
+
+    [86238] = true, -- Impaling Shards (Impaling Shards)
+    [87448] = true, -- Gripping Shards (Gripping Shards)
+    [88801] = true, -- Winter's Revenge (Gripping Shards)
+
+    [86250] = true, -- Sleet Storm (Sleet Storm)
+    [88858] = true, -- Northern Storm (Northern Storm)
+    [88861] = true, -- Permafrost (Permafrost)
 
     ----------------------------
     -- One Hand and Shield
@@ -3162,33 +3259,6 @@ E.EffectOverride = {
     [22228] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds' }, -- Practiced Incantation (Practiced Incantation - Rank 1)
 
     ----------------------------------------------------------------
-    -- FIGHTERS GUILD ACTIVE ABILITIES ----------------------------
-    ----------------------------------------------------------------
-
-    [40340] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds' }, -- Silver Leash (Silver Leash - Rank 1)
-    [109354] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds' }, -- Silver Leash (Silver Leash - Rank 1)
-
-    [80271] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Circle of Protection - Rank 1)
-    [35739] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Circle of Protection - Rank 1)
-    [80276] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Turn Undead - Rank 1)
-    [40185] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Turn Undead - Rank 1)
-    [80284] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Ring of Preservation - Rank 1)
-    [40171] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Ring of Preservation - Rank 1)
-
-    [64509] = { consolidateExtra = true }, -- Major Savagery
-
-    [80307] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Expert Hunter (Expert Hunter)
-    [80381] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Evil Hunter (Evil Hunter)
-    [80338] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Camouflaged Hunter (Camouflaged Hunter)
-
-    [35753] = { hideReduce = true }, -- Trap Beast (Trap Beast - Rank 1)
-
-    [40384] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40391] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 1)
-
-    [40374] = { hideReduce = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
-
-    ----------------------------------------------------------------
     -- WARDEN PASSIVE ABILITIES ------------------------------------
     ----------------------------------------------------------------
 
@@ -3208,6 +3278,123 @@ E.EffectOverride = {
 
     [88492] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds' }, -- Minor Toughness (Maturation - Rank 1)
     [88509] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds' }, -- Minor Toughness (Maturation - Rank 2)
+
+    ----------------------------------------------------------------
+    -- WARDEN ACTIVE ABILITIES ------------------------------------
+    ----------------------------------------------------------------
+
+    -- Animal Companions
+    [94424] = { icon = 'esoui/art/icons/ability_warden_015_a.dds' }, -- Deep Fissure (Deep Fissure)
+
+    [91416] = { forcedContainer = 'short' }, -- Fetcher Infection Bonus Damage (Fetcher Infection)
+
+    [87929] = { consolidateExtra = true }, -- Major Sorcery (Betty Netch)
+    [87876] = { icon = 'esoui/art/icons/ability_warden_017_a.dds' }, -- Betty Netch (Betty Netch)
+    [89107] = { consolidateExtra = true }, -- Major Sorcery (Blue Betty)
+
+    [89110] = { consolidate = true }, -- Major Brutality (Bull Netch)
+    [95125] = { consolidate = true }, -- Major Sorcery (Bull Netch)
+    [91475] = { icon = 'esoui/art/icons/ability_warden_017_b.dds', name = A.Skill_Bull_Netch }, -- Bull Netch (Bull Netch)
+
+    [86267] = { consolidate = true }, -- Major Expedition (Falcon's Swiftness)
+    [86268] = { consolidate = true }, -- Major Endurance (Falcon's Swiftness)
+
+    [89076] = { consolidate = true }, -- Major Expedition (Deceptive Predator)
+    [89077] = { consolidate = true }, -- Major Endurance (Deceptive Predator)
+    [87861] = { consolidate = true }, -- Minor Evasion (Deceptive Predator)
+
+    [89078] = { consolidate = true }, -- Major Expedition (Bird of Prey)
+    [89079] = { consolidate = true }, -- Major Endurance (Bird of Prey)
+    [87864] = { consolidate = true }, -- Minor Berserk (Bird of Prey)
+
+    [101438] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity }, -- Bear Immunity (Feral Guardian - All Morphs)
+
+    [89135] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_swipe.dds', name = A.Skill_Bite }, -- Swipe (Feral Guardian)
+    [89128] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Feral Guardian)
+    [89129] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Feral Guardian)
+    [90284] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Guardian's Wrath (Feral Guardian)
+    [93144] = { hide = true }, -- Guardian's Wrath Trigger (Feral Guardian)
+
+    [105906] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_swipe.dds', name = A.Skill_Bite }, -- Swipe (Eternal Guardian)
+    [105907] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Eternal Guardian)
+    [105908] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Eternal Guardian)
+    [94625] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Guardian's Wrath (Eternal Guardian)
+    [94626] = { hide = true }, -- Guardian's Wrath Trigger (Eternal Guardian)
+    [89180] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_eternal_guardian_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Eternal_Guardian, A.Set_Cooldown) }, -- Eternal Guardian Respawn Timer (Eternal Guardian)
+    [107588] = { hide = true}, -- Eternal Guardian Cast Speed (Eternal Guardian)
+
+    [89219] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_swipe.dds', name = A.Skill_Bite }, -- Swipe (Wild Guardian)
+    [89220] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Wild Guardian)
+    [92666] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Wild Guardian)
+    [92163] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Guardian's Savagery (Wild Guardian)
+    [93233] = { hide = true }, -- Guardian's Savagery Trigger (Wild Guardian)
+
+    -- Green Balance
+    [86300] = { consolidate = true }, -- Minor Intellect (Enchanted Growth)
+    [87019] = { consolidate = true }, -- Minor Endurance (Enchanted Growth)
+
+    [108826] = { hide = true }, -- Synergy Damage Bonus (Healing Seed - Harvest Synergy)
+    [85582] = { name = A.Skill_Healing_Seed }, -- Healing Seed Heal (Healing Seed)
+
+    [85841] = { name = A.Skill_Budding_Seeds }, -- Budding Seeds (Budding Seeds)
+    [85925] = { name = A.Skill_Budding_Seeds }, -- Budding Seeds (Budding Seeds)
+    [85846] = { name = A.Skill_Corrupting_Pollen }, -- Corrupting Pollen Heal (Corrupting Pollen)
+
+    [85559] = { name = A.Skill_Living_Vines }, -- Living Vines Heal (Living Vines)
+    [88721] = { name = A.Skill_Living_Trellis }, -- Living Trellis Heal (Living Trellis)
+    [88723] = { icon = 'esoui/art/icons/ability_warden_010_b.dds', name = A.Skill_Living_Trellis }, -- Living Trellis Heal Burst (Living Trellis)
+
+    [87061] = { consolidateExtra = true }, -- Major Savagery (Green Lotus)
+    [86303] = { consolidateExtra = true }, -- Major Prophecy (Lotus Blossom)
+    [88695] = { name = A.Skill_Lotus_Blossom }, -- Lotus Blossom Heal (Lotus Blossom)
+    [94590] = { icon = 'esoui/art/icons/ability_warden_009_b.dds', name = A.Skill_Lotus_Blossom }, -- Lotus Blossom Heal (Lotus Blossom)
+
+    [108943] = { icon = 'esoui/art/icons/ability_warden_011.dds', name = A.Skill_Natures_Grasp }, -- Nature's Grasp Ultimate Restor (Nature's Grasp)
+    [108947] = { icon = 'esoui/art/icons/ability_warden_011_a.dds', name = A.Skill_Bursting_Vines }, -- Bursting Vines Ultimate Rest (Bursting Vines)
+    [108945] = { icon = 'esoui/art/icons/ability_warden_011_b.dds', name = A.Skill_Natures_Embrace }, -- Nature's Embrace Ultimate Rest (Nature's Embrace)
+
+    [85533] = { name = A.Skill_Secluded_Grove }, -- Secluded Grove Instant Heal (Secluded Grove)
+    [85534] = { name = A.Skill_Secluded_Grove }, -- Secluded GroveTick Heal (Secluded Grove)
+    [88748] = { name = A.Skill_Enchanted_Forest }, -- Enchanted Forest Burst (Enchanted Forest)
+    [86357] = { icon = 'esoui/art/icons/ability_warden_012_a.dds', name = A.Skill_Enchanted_Forest }, -- Enchanted Forest Ultimate Rest (Enchanted Forest)
+    [88750] = { name = A.Skill_Healing_Thicket }, -- Healing Thicket Instant Heal (Healing Thicket)
+
+    -- Winter's Embrace
+    [86224] = { consolidate = true }, -- Major Resolve (Frost Cloak)
+    [86225] = { consolidate = true }, -- Major Ward (Frost Cloak)
+
+    [88758] = { consolidate = true }, -- Major Resolve (Expansive Frost Cloak)
+    [88759] = { consolidate = true }, -- Major Ward (Expansive Frost Cloak)
+
+    [88761] = { consolidate = true }, -- Major Resolve (Ice Fortress)
+    [88762] = { consolidate = true }, -- Major Ward (Ice Fortress)
+    [87194] = { consolidate = true }, -- Minor Protection (Ice Fortress)
+
+    [87443] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_root_frost.dds', name = A.Skill_Frozen }, -- Gripping Shards (Gripping Shards)
+
+    [92068] = { icon = 'esoui/art/icons/ability_warden_002.dds', name = A.Skill_Crystallized_Shield }, -- Crystalized Shield (Crystallized Shield)
+    [87224] = { icon = 'esoui/art/icons/ability_warden_002.dds', name = A.Skill_Crystallized_Shield }, -- Combat Restore Crystalized Shi (Crystallized Shield)
+
+    [92168] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = A.Skill_Crystallized_Slab }, -- Crystalized Slab (Crystallized Slab)
+    [88766] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = A.Skill_Crystallized_Slab }, -- Crystalized Slab Restore (Crystallized Slab)
+    [93175] = { hide = true }, -- Crystallized Slab (Crystallized Slab)
+
+    [92170] = { icon = 'esoui/art/icons/ability_warden_002_b.dds' }, -- Shimmering Shield (Shimmering Shield)
+    [88771] = { icon = 'esoui/art/icons/ability_warden_002_b.dds', name = A.Skill_Shimmering_Shield }, -- Shimmering Shield Restore (Shimmering Shield)
+
+    [87560] = { name = A.Skill_Frozen_Gate }, -- Frozen Gate Root (Frozen Gate)
+    [92039] = { name = A.Skill_Frozen_Device }, -- Frozen Gate Root (Frozen Device)
+    [92060] = { name = A.Skill_Frozen_Retreat }, -- Frozen Retreat Root (Frozen Retreat)
+
+    [86249] = { forcedContainer = 'short' }, -- Major Protection (Sleet Storm)
+    [86250] = { duration = 0 }, -- Sleet Storm (Sleet Storm)
+
+    [88859] = { forcedContainer = 'short' }, -- Major Protection (Northern Storm)
+    [88858] = { duration = 0 }, -- Northern Storm (Northern Storm)
+
+    [88862] = { duration = 0, forcedContainer = 'short' }, -- Major Protection (Permafrost)
+    [88861] = { duration = 0 }, -- Permafrost (Permafrost)
+    [90943] = { icon = 'esoui/art/icons/ability_warden_006_b.dds' }, -- Permafrost (Permafrost)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
@@ -3591,21 +3778,9 @@ E.EffectOverride = {
 
 
     ----------------------------------------------------------------
-    -- PLAYER PASSIVES GUILDS --------------------------------------
+    -- FIGHTERS GUILD PASSIVES -------------------------------------
     ----------------------------------------------------------------
 
-    -- Dark Brotherhood
-    [76325] = { icon = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds' }, -- Blade of Woe
-    [79623] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 1) (Blade of Woe Kill)
-    [79624] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 2) (Blade of Woe Kill)
-    [79625] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 3) (Blade of Woe Kill)
-    [79877] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 4) (Blade of Woe Kill)
-    [80392] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 1) (Normal Kill)
-    [80394] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 2) (Normal Kill)
-    [80396] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 3) (Normal Kill)
-    [80398] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 4) (Normal Kill)
-
-    -- Fighters Guild
     [29062] = { icon = 'LuiExtended/media/icons/abilities/passive_fightersguild_intimidating_presence.dds' },
 
     [35803] = { icon = 'LuiExtended/media/icons/abilities/passive_fightersguild_slayer.dds' },
@@ -3622,6 +3797,44 @@ E.EffectOverride = {
     [40393] = { icon = 'LuiExtended/media/icons/abilities/passive_fightersguild_skilled_tracker.dds' },
 
     [35804] = { icon = 'LuiExtended/media/icons/abilities/passive_fightersguild_bounty_hunter.dds' },
+
+    ----------------------------------------------------------------
+    -- FIGHTERS GUILD ACTIVE ABILITIES -----------------------------
+    ----------------------------------------------------------------
+
+    [40340] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds' }, -- Silver Leash (Silver Leash - Rank 1)
+    [109354] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds' }, -- Silver Leash (Silver Leash - Rank 1)
+
+    [80271] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Circle of Protection - Rank 1)
+    [35739] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Circle of Protection - Rank 1)
+    [80276] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Turn Undead - Rank 1)
+    [40185] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Turn Undead - Rank 1)
+    [80284] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Ring of Preservation - Rank 1)
+    [40171] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Ring of Preservation - Rank 1)
+
+    [64509] = { consolidateExtra = true }, -- Major Savagery
+
+    [80307] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Expert Hunter (Expert Hunter)
+    [80381] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Evil Hunter (Evil Hunter)
+    [80338] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Camouflaged Hunter (Camouflaged Hunter)
+
+    [35753] = { hideReduce = true }, -- Trap Beast (Trap Beast - Rank 1)
+
+    [40384] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 1)
+    [40391] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 1)
+
+    [40374] = { hideReduce = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+
+    -- Dark Brotherhood
+    [76325] = { icon = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds' }, -- Blade of Woe
+    [79623] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 1) (Blade of Woe Kill)
+    [79624] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 2) (Blade of Woe Kill)
+    [79625] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 3) (Blade of Woe Kill)
+    [79877] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 4) (Blade of Woe Kill)
+    [80392] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 1) (Normal Kill)
+    [80394] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 2) (Normal Kill)
+    [80396] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 3) (Normal Kill)
+    [80398] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 4) (Normal Kill)
 
     -- Mages Guild
     [29061] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_persuasive_will.dds' }, -- Persuasive Will

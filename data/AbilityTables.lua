@@ -2,6 +2,7 @@
 -- AbilityTables namespace
 local A = {}
 
+-- TODO - need to add all major/minor effects here
 -- ---------------------------------------------------
 -- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------
 -- ---------------------------------------------------
@@ -358,12 +359,10 @@ A.Skill_Puncturing_Sweep            = 26797
 A.Skill_Aurora_Javelin              = 26800
 A.Skill_Empowering_Sweep            = 22144
 A.Skill_Crescent_Sweep              = 22139
-
 A.Skill_Purifying_Light             = 21765
 A.Skill_Unstable_Core               = 22004
 A.Skill_Radiant_Glory               = 63044
 A.Skill_Solar_Disturbance           = 21758
-
 A.Skill_Restoring_Aura              = 26209
 A.Skill_Repentance                  = 26821
 A.Skill_Cleansing_Ritual            = 22265
@@ -375,7 +374,37 @@ A.Skill_Remembrance                 = 22229
 A.Skill_Practiced_Incantation       = 22226
 
 -- Warden
-A.Skill_Feral_Guardian              = 85982 -- TODO: Check if this is the best ID to use later
+A.Skill_Bull_Netch                  = 86058
+A.Skill_Falcons_Swiftness           = 86037
+A.Skill_Deceptive_Predator          = 86041
+A.Skill_Bird_of_Prey                = 86045
+A.Skill_Feral_Guardian              = 85982
+A.Skill_Eternal_Guardian            = 85986
+A.Skill_Wild_Guardian               = 85990
+A.Skill_Enchanted_Growth            = 85862
+A.Skill_Healing_Seed                = 85578
+A.Skill_Budding_Seeds               = 85840
+A.Skill_Corrupting_Pollen           = 85845
+A.Skill_Living_Vines                = 85552
+A.Skill_Living_Trellis              = 85851
+A.Skill_Lotus_Blossom               = 85855
+A.Skill_Natures_Grasp               = 85564
+A.Skill_Bursting_Vines              = 85859
+A.Skill_Natures_Embrace             = 85858
+
+A.Skill_Secluded_Grove              = 85532
+A.Skill_Enchanted_Forest            = 85804
+A.Skill_Healing_Thicket             = 85807
+
+A.Skill_Frost_Cloak                 = 86122
+A.Skill_Expansive_Frost_Cloak       = 86126
+A.Skill_Ice_Fortress                = 86130
+A.Skill_Crystallized_Shield         = 86135
+A.Skill_Crystallized_Slab           = 86139
+A.Skill_Shimmering_Shield           = 86143
+A.Skill_Frozen_Gate                 = 86175
+A.Skill_Frozen_Device               = 86179
+A.Skill_Frozen_Retreat              = 86183
 
 -- ---------------------------------------------------
 -- WEAPON SKILLS -------------------------------------
@@ -391,9 +420,6 @@ A.Skill_Quick_Siphon                = 40116
 
 -- Destruction Staff
 A.Skill_Crushing_Shock              = 46348
---A.Skill_Wall_of_Frost             = 28849
---A.Skill_Unstable_Wall_of_Frost    = 39067
---A.Skill_Blockade_of_Frost         = 39028
 A.Skill_Frozen                      = 68719
 A.Skill_Flame_Touch                 = 29073
 A.Skill_Frost_Touch                 = 29078
@@ -599,10 +625,6 @@ A.Skill_Assault                     = 4304 -- Ice Wraith
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- ---------------------------------------------------
--- GUILDS --------------------------------------------
--- ---------------------------------------------------
-
 -- MAGES GUILD --------------
 A.Skill_Meteor                   = 16536
 A.Skill_Ice_Comet                = 40489
@@ -698,45 +720,6 @@ A.Skill_Cleanse                  = 40234
 A.Skill_Efficient_Purge          = 40232
 
 -- ---------------------------------------------------
--- CLASS: TEMPLAR ------------------------------------
--- ---------------------------------------------------
-
--- AEDRIC SPEAR -------------
-A.Skill_Radial_Sweep             = 22138
-A.Skill_Biting_Jabs              = 26792
-A.Skill_Binding_Javelin          = 26804
-A.Skill_Focused_Charge           = 22149
-A.Skill_Explosive_Charge         = 22161
-A.Skill_Toppling_Charge          = 15540
-A.Skill_Spear_Shards             = 26188
-A.Skill_Luminous_Shards          = 26858
-A.Skill_Blazing_Spear            = 26869
-A.Skill_Sun_Shield               = 22178
-A.Skill_Radiant_Ward             = 22182
-A.Skill_Blazing_Shield           = 22180
-
--- DAWNS WRATH --------------
-A.Skill_Nova                     = 21976
-A.Skill_Solar_Prison             = 21755
-A.Skill_Sun_Fire                 = 21726
-A.Skill_Vampires_Bane            = 21729
-A.Skill_Reflective_Light         = 21732
-A.Skill_Solar_Flare              = 22057
-A.Skill_Dark_Flare               = 22110
-A.Skill_Solar_Barrage            = 22095
-A.Skill_Backlash                 = 21761
-A.Skill_Power_of_the_Light       = 21763
-A.Skill_Eclipse                  = 21776
-A.Skill_Total_Dark               = 22006
-A.Skill_Radiant_Destruction      = 63029
-
--- RESTORING LIGHT ----------
-A.Skill_Honor_The_Dead           = 22253
-A.Skill_Lingering_Ritual         = 22314
-A.Skill_Extended_Ritual          = 22262
-A.Skill_Purifying_Ritual         = 22259
-
--- ---------------------------------------------------
 -- TOGGLED EFFECTS -----------------------------------
 -- ---------------------------------------------------
 
@@ -744,87 +727,6 @@ A.Skill_Purifying_Ritual         = 22259
 A.Skill_Guard                     = 63318 -- Guard (Support)
 A.Skill_Mystic_Guard              = 63335 -- Mystic Guard (Support)
 A.Skill_Stalwart_Guard            = 63351 -- Stalwart Guard (Support)
-
--- ---------------------------------------------------
--- DAMAGE SHIELDS ------------------------------------
--- ---------------------------------------------------
-
-A.DamageShield_Shielded_Assault     = 38401
-A.DamageShield_Brawler              = 38754
-A.DamageShield_Steadfast_Ward       = 41310
-A.DamageShield_Ward_Ally            = 40130
-A.DamageShield_Healing_Ward         = 40126
-A.DamageShield_Annulment            = 29338
-A.DamageShield_Dampen_Magic         = 39186
-A.DamageShield_Harness_Magicka      = 39182
-A.DamageShield_Bone_Shield          = 39369
-A.DamageShield_Bone_Surge           = 42176
-A.DamageShield_Spiked_Bone_Shield   = 42138
-A.DamageShield_Barrier              = 38573
-A.DamageShield_Replenishing_Barrier = 40239
-A.DamageShield_Reviving_Barrier     = 40237
-A.DamageShield_Siege_Shield         = 38570
-A.DamageShield_Propelling_Shield    = 40226
-A.DamageShield_Siege_Weapon_Shield  = 40229
-A.DamageShield_Hardened_Armor       = 20328
-A.DamageShield_Obsidian_Shield      = 29071
-A.DamageShield_Fragmented_Shield    = 32673
-A.DamageShield_Igneous_Shield       = 29224
-A.DamageShield_Conjured_Ward        = 28418
-A.DamageShield_Empowered_Ward       = 29482
-A.DamageShield_Hardened_Ward        = 29489
-A.DamageShield_Sun_Shield           = 22178
-A.DamageShield_Radiant_Ward         = 22182
-A.DamageShield_Blazing_Shield       = 22180
-
--- ---------------------------------------------------
--- VAMP & LYCAN EFFECTS ------------------------------
--- ---------------------------------------------------
-
-A.VampLycan_Feed                    = 33152
-A.VampLycan_Fed_on_ally             = 40359
-A.VampLycan_Bit_an_ally             = 40525
-A.VampLycan_Dark_Stalker            = 33090
-A.VampLycan_Supernatural_Recovery   = 33095
-A.VampLycan_Stage_1_Vampirism       = 35771
-A.VampLycan_Stage_2_Vampirism       = 35776
-A.VampLycan_Stage_3_Vampirism       = 35783
-A.VampLycan_Stage_4_Vampirism       = 35792
-A.VampLycan_Vampirism               = 40360
-A.VampLycan_Lycanthropy             = 35658
-A.VampLycan_Call_of_the_Pack        = 14271
-A.VampLycan_Sanies_Lupinus          = 31068
-
--- ---------------------------------------------------
--- TRIGGERED EFFECTS ---------------------------------
--- ---------------------------------------------------
-
-A.Trigger_Might_of_the_Guild        = 43561
-
--- ---------------------------------------------------
--- MUNDUS STONES -------------------------------------
--- ---------------------------------------------------
-
-A.Boon_Warrior                      = 13940
-A.Boon_Mage                         = 13943
-A.Boon_Serpent                      = 13974
-A.Boon_Thief                        = 13975
-A.Boon_Lady                         = 13976
-A.Boon_Steed                        = 13977
-A.Boon_Lord                         = 13978
-A.Boon_Apprentice                   = 13979
-A.Boon_Ritual                       = 13980
-A.Boon_Lover                        = 13981
-A.Boon_Atronach                     = 13982
-A.Boon_Shadow                       = 13984
-A.Boon_Tower                        = 13985
-
--- ---------------------------------------------------
--- PASSIVE COMPARE -----------------------------------
--- ---------------------------------------------------
-
-A.Passive_SoulSummons               = 39269
-A.Passive_SoulSiphoner              = 36603
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------
