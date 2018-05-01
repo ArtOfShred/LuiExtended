@@ -33,6 +33,8 @@ LUIE.AlertTable = {
 
     [52471] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, refire = 2000 }, -- Nullify (Estate Spellbreaker) (DB DLC)
 
+    [73229] = { power = true, priority = 2, auradetect = true, ignoreRefresh = true, refire = 500 }, -- Hurried Ward (Guard - DB Mage)
+
     --------------------------------------------------
     -- STANDARD NPC'S --------------------------------
     --------------------------------------------------

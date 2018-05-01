@@ -742,21 +742,6 @@ debugAuras = {
             [95134] = true, -- Concussion (Shock Status Effect)
 
             -------------------------------------
-            -- VULNERABILITY PROCS --
-            -------------------------------------
-
-            [68448] = true, -- Explosion (Fire Vulnerability Proc)
-            [21480] = true, -- Explosion (Fire Vulnerability Proc)
-            [68463] = true, -- Venom (Poison Vulnerability Proc)
-            [68464] = true, -- Venom (Poison Vulnerability Proc)
-            [68462] = true, -- Pestilence (Disease Vulnerability Proc)
-            [68461] = true, -- Pestilence (Disease Vulnerability Proc)
-            [68451] = true, -- Disintegration (Lightning Vulnerability Proc)
-            [68455] = true, -- Disintegration (Lightning Vulnerability Proc)
-            [68458] = true, -- Deep Freeze (Frost Vulnerability Proc)
-            [68457] = true, -- Deep Freeze (Frost Vulnerability Proc)
-
-            -------------------------------------
             -- EQUIPMENT --
             -------------------------------------
 
@@ -838,6 +823,7 @@ debugAuras = {
             [61381] = true, -- Imperial Prison Item Set
 
             [81068] = true, -- Chokethorn
+            --[25458] = true, -- Init Self Stun
             [81069] = true, -- Chokethorn
             [81077] = true, -- Chokethorn
 
@@ -1071,7 +1057,7 @@ debugAuras = {
             [32804] = true, -- Eyes of Mara (the Eyes of Mara)
 
             [29113] = true, -- Night Mother's Gaze (the Night Mother's Gaze)
-            [34386] = true, -- Night Mother's Gaze (the Night Mother's Gaze)
+            [34386] = true, -- Major Fracture (the Night Mother's Gaze)
 
             [29108] = true, -- Night's Silence (the Night's Silence)
 
@@ -1445,9 +1431,10 @@ debugAuras = {
 
             [85622] = true, -- Sword Dancer (Sword Dancer's)
 
-            [60059] = true, -- Sunderflame
-            [60060] = true, -- Sunderflame
-            [60416] = true, -- Sunderflame
+            [60059] = true, -- Sunderflame (Sunderflame)
+            [60060] = true, -- Sunderflame (Sunderflame)
+            [60416] = true, -- Minor Fracture (Sunderflame)
+            [108825] = true, -- Minor Breach (Sunderflame)
 
             [32780] = true, -- Crusader (of the Crusader)
             [49220] = true, -- Extra dodge (of the Crusader)
@@ -2115,6 +2102,12 @@ debugAuras = {
             --[2727] = true, -- Off-Balance
             [21263] = true, -- Ayleid Health Bonus
 
+            -- PET EFFECTS
+            [28609] = true, -- Dummy Target Setter
+            [43958] = true, -- Pet AoE Resistance
+            [70116] = true, -- Pet PvP Damage Reduction
+            [62197] = true, -- Pet Crit Chance
+
             --------------------------
             -- WORLD EVENTS
             --------------------------
@@ -2706,7 +2699,7 @@ debugAuras = {
             [76632] = true, -- Manifestation of Terror (Manifestation of Terror)
             [76638] = true, -- Mass Hysteria (Manifestation of Terror)
 
-            --[65269] = true, -- Shade Initialize (Summon Shade - All Morphs)
+            [65269] = true, -- Shade Initialize (Summon Shade - All Morphs)
             [62197] = true, -- Pet Crit Chance (Summon Shade - All Morphs)
             --[85086] = true, -- Boss (Summon Shade - All Morphs)
             --[85087] = true, -- Boss (Summon Shade - All Morphs)
@@ -3001,13 +2994,10 @@ debugAuras = {
             [47167] = true, -- Absorption Field (Absorption Field)
             [80405] = true, -- Absorption Field (Absorption Field)
 
-            --[27287] = true, -- Birth Unstable Familiar (Summon Unstable Familiar - All Ranks)
-            --[29536] = true, -- Familiar Set Target (Summon Unstable Familiar - All Ranks)
-            [43958] = true, -- Pet AoE Resistance (Summon Unstable Familiar - All Ranks)
-            [70116] = true, -- Pet PvP Damage Reduction (Summon Unstable Familiar - All Ranks)
-            --[43963] = true, -- Pet Bonus Threat (Summon Unstable Familiar - All Ranks)
-            --[62197] = true, -- Pet Crit Chance (Summon Unstable Familiar - All Ranks)
-            --[27850] = true, -- Familiar Melee (Summon Unstable Familiar + Summon Volatile Familiar)
+            [27287] = true, -- Birth Unstable Familiar (Summon Unstable Familiar - All Ranks)
+            [29536] = true, -- Familiar Set Target (Summon Unstable Familiar - All Ranks)
+            [43963] = true, -- Pet Bonus Threat (Summon Unstable Familiar - All Ranks)
+            [27850] = true, -- Familiar Melee (Summon Unstable Familiar + Summon Volatile Familiar)
 
             [23304] = true, -- Summon Unstable Familiar (Summon Unstable Familiar)
             [23617] = true, -- Unstable Familiar (Summon Unstable Familiar)
@@ -3694,6 +3684,7 @@ debugAuras = {
 
             [85995] = true, -- Dive (Dive)
 
+            [88515] = true, -- Bond With Nature Trigger (Cutting Dive - All Morphs)
             [85999] = true, -- Cutting Dive (Cutting Dive)
 
             [87663] = true, -- Screaming Cliff Racer (Screaming Cliff Racer)
@@ -5312,9 +5303,6 @@ debugAuras = {
             [35993] = true, -- Spellcharge (Rank 1)
             [45273] = true, -- Spellcharge (Rank 2)
             [45274] = true, -- Spellcharge (Rank 3)
-            --[35995] = true, -- Gift of Magnus (Rank 1) (Duplicate: Same as Breton)
-            --[45259] = true, -- Gift of Magnus (Rank 2) (Duplicate: Same as Breton)
-            --[45260] = true, -- Gift of Magnus (Rank 3) (Duplicate: Same as Breton)
             [35998] = true, -- Elemental Talent (Rank 1)
             [45275] = true, -- Elemental Talent (Rank 2)
             [45276] = true, -- Elemental Talent (Rank 3)
@@ -5336,9 +5324,6 @@ debugAuras = {
             [70386] = true, -- Nimble (Rank 1)
             [70388] = true, -- Nimble (Rank 2)
             [70390] = true, -- Nimble (Rank 3)
-            --[36022] = true, -- Stealthy (Rank 1) (Duplicate: Same as Bosmer)
-            --[45295] = true, -- Stealthy (Rank 2) (Duplicate: Same as Bosmer)
-            --[45296] = true, -- Stealthy (Rank 3) (Duplicate: Same as Bosmer)
             [36067] = true, -- Carnage (Rank 1)
             [45299] = true, -- Carnage (Rank 2)
             [45301] = true, -- Carnage (Rank 3)
@@ -5396,9 +5381,6 @@ debugAuras = {
             [50903] = true, -- Tough (Rank 1)
             [50906] = true, -- Tough (Rank 2)
             [50907] = true, -- Tough (Rank 3)
-            --[36153] = true, -- Conditioning (Rank 1) (Duplicate: Same as Redguard)
-            --[45279] = true, -- Conditioning (Rank 2) (Duplicate: Same as Redguard)
-            --[45280] = true, -- Conditioning (Rank 3) (Duplicate: Same as Redguard)
             [36155] = true, -- Red Diamond (Rank 1)
             [36214] = true, -- Red Diamond
             [45291] = true, -- Red Diamond (Rank 2)
@@ -5812,12 +5794,13 @@ debugAuras = {
             [78266] = true, -- Alarm (Estate Marshal - DB)
 
             [52471] = true, -- Nullify (Estate Spellbreaker - DB)
+            [52473] = true, -- Nullify (Estate Spellbreaker - DB)
             [52474] = true, -- Nullify (Estate Spellbreaker - DB)
             [66669] = true, -- Nullify (Estate Spellbreaker - DB)
 
             [73226] = true, -- Hurried Ward (Mage Guard - DB)
-            [73229] = true, -- Hurried Ward (Mage Guard - DB)
             [73230] = true, -- Hurried Ward (Mage Guard - DB)
+            [73229] = true, -- Hurried Ward (Mage Guard - DB)
 
             -- Traps & Interactables
             [62230] = true, -- Coldharbour Flames
@@ -7622,7 +7605,7 @@ debugAuras = {
             [53774] = true, -- Frost Bolt -- Ogre Shaman
             [65469] = true, -- Frost Bolt -- Ogre Shaman
             [65470] = true, -- Frost Bolt -- Ogre Shaman
-            --[82685] = true, -- CC (Crown Control) Shared Cool -- Ogre Shaman
+            --[82685] = true, -- CC (Crowd Control) Shared Cool -- Ogre Shaman
             [53142] = true, -- Ice Pillar -- Ogre Shaman
             [54414] = true, -- Ice Pillar Initialize -- Ogre Shaman
             [34385] = true, -- Generic AOE -- Ogre Shaman

@@ -91,11 +91,6 @@ A.Proc_Chill                        = 21481
 A.Proc_Chilled                      = 7145
 A.Proc_Poisoned                     = 21929
 A.Proc_Concussion                   = 21487
-A.Proc_Explosion                    = 21128
-A.Proc_Venom                        = 21930
-A.Proc_Pestilence                   = 21928
-A.Proc_Disintegration               = 21493
-A.Proc_Deep_Freeze                  = 21483
 
 -- POTIONS
 A.Potion_Invisiblity                = 3668

@@ -218,7 +218,7 @@ E.IsExperienceBuff = {
     [84369] = true, -- Witchmother's Brew
     [86075] = true, -- Breda's Magnificent Mead
     [91449] = true, -- Breda's Magnificent Mead
-    [92332] = true, -- Pelinal's Ferocity
+    [92232] = true, -- Pelinal's Ferocity
     -- TODO: MISSING JESTER XP BOOST
 }
 
@@ -289,9 +289,7 @@ E.DebuffDisplayOverrideId = {
     [102771] = true, -- Off Balance Immunity
 
     -- Player (Sets)
-    [34386] = true, -- Night Mother's Gaze
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
-    [60416] = true, -- Sunderflame
     [75753] = true, -- Line Breaker (of Alkosh)
     [93001] = true, -- Mad Tinkerer (Stun from Fabricant)
 
@@ -1996,21 +1994,6 @@ E.EffectOverride = {
     [68359] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds' }, -- Minor Vulnerability (Shock Status Effect)
 
     ----------------------------------------------------------------
-    -- VULNERABILITY PROCS -----------------------------------------
-    ----------------------------------------------------------------
-
-    [68448] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_explosion.dds' }, -- Explosion (Fire Vulnerability Proc)
-    [21480] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_explosion.dds' }, -- Explosion (Fire Vulnerability Proc)
-    [68463] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_venom.dds' }, -- Venom (Poison Vulnerability Proc)
-    [68464] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_venom.dds' }, -- Venom (Poison Vulnerability Proc)
-    [68462] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_pestilence.dds' }, -- Pestilence (Disease Vulnerability Proc)
-    [68461] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_pestilence.dds' }, -- Pestilence (Disease Vulnerability Proc)
-    [68451] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds' }, -- Disintegration (Lightning Vulnerability Proc)
-    [68455] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds', name = A.Proc_Disintegration }, -- Disintegration (Lightning Vulnerability Proc)
-    [68458] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds' }, -- Deep Freeze (Frost Vulnerability Proc)
-    [68457] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds' }, -- Deep Freeze (Frost Vulnerability Proc)
-
-    ----------------------------------------------------------------
     -- EQUIPMENT ---------------------------------------------------
     ----------------------------------------------------------------
 
@@ -2168,8 +2151,6 @@ E.EffectOverride = {
 
     [61851] = { hide = true }, -- Armor Master
     [61870] = { icon = 'esoui/art/icons/ava_siege_hookpoint_005.dds' }, -- Armor Master
-
-    [34386] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Night Mother's Gaze
 
     [61781] = { icon = 'LuiExtended/media/icons/abilities/ability_set_nobles_conquest.dds' }, -- Noble's Conquest
     [61782] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Minor Vulnerability (Noble's Conquest)
@@ -2344,7 +2325,6 @@ E.EffectOverride = {
     [67141] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_melee.dds'}, -- Sheer Venom
 
     [60060] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sunderflame.dds' }, -- Sunderflame
-    [60416] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sunderflame.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Sunderflame
 
     [85635] = { icon = 'LuiExtended/media/icons/abilities/ability_set_spelunker.dds' }, -- Spelunker (Spelunker's)
 
@@ -4180,6 +4160,7 @@ E.EffectOverride = {
     [78266] = { hide = true }, -- Alarm (Estate Marshal - DB)
 
     [52471] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_nullify.dds', hide = true }, -- Nullify (Estate Spellbreaker - DB)
+    [52473] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_nullify.dds' }, -- Nullify (Estate Spellbreaker - DB)
     [52474] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_nullify.dds' }, -- Nullify (Estate Spellbreaker - DB)
     [66669] = { hide = true }, -- Nullify (Estate Spellbreaker - DB)
 
@@ -5511,7 +5492,7 @@ E.EffectOverride = {
     [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds' }, -- Focused Healing (The Prophet)
     [48346] = { hide = true }, -- Minor Wound (The Prophet)
 
-    [63522] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds', name = A.Skill_Stomp }, -- Bone Saw (Bone Colossus)
+    [63522] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds', name = A.Skill_Stomp }, -- Bone Saw (Child of Bones)
 
     [61646] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_incapacitating_terror.dds', duration = 0}, -- Incapacitating Terror
     [64074] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_incapacitating_terror.dds'}, -- Incapacitating Terror
@@ -6126,11 +6107,6 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
 
     [86309] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun, duration = 3000}, -- Stun (Player blocks NPC charged attack)
     [86312] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun, duration = 3000}, -- Stun (Player blocks Ogrim Body Slam)
-    [21480] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_explosion.dds', name = A.Proc_Explosion, duration = 3000}, -- Explosion (Fire Vulnerability Proc)
-    [68464] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_venom.dds', name = A.Proc_Venom, duration = 3000}, -- Venom (Poison Vulnerability Proc)
-    [68461] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_pestilence.dds', name = A.Proc_Pestilence, duration = 3000}, -- Pestilence (Disease Vulnerability Proc)
-    [68455] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds', name = A.Proc_Disintegration, duration = 3000}, -- Disintegration (Lightning Vulnerability Proc)
-    [68457] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds', name = A.Proc_Deep_Freeze, duration = 3000}, -- Deep Freeze (Frost Vulnerability Proc)
 
     -- Dragonknight
     [70742]  = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', name = A.Skill_Power_Lash, duration = 2000 }, -- Off-Balance Exploit (Flame Lash - Rank 1)
