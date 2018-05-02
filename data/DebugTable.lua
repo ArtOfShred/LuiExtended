@@ -1774,7 +1774,6 @@ debugAuras = {
             [47356] = true, -- Blessing of the Potentates (of the Potentates)
 
             -- Rewards for the Worthy Sets
-
             [76946] = true, -- Fasalla's Guile (of Fasalla's Guile)
             [76947] = true, -- Fasalla's Guile (of Fasalla's Guile)
 
@@ -1792,6 +1791,33 @@ debugAuras = {
             [76937] = true, -- Vicious Death (of Vicious Death)
             [82987] = true, -- Vicious Death (of Vicious Death)
             --[76938] = true, -- Vicious Death (of Vicious Death)
+
+            -- Maelstrom Arena Sets
+            [71248] = true, -- Elemental Succession (of Succession)
+            [71311] = true, -- Stack Counter (of Succession)
+            [71264] = true, -- Fire Ascendant (of Succession)
+            [71265] = true, -- Lightning Ascendant (of Succession)
+            [71266] = true, -- Frost Ascendant (of Succession)
+
+            [71180] = true, -- Glorious Defender (of Glory)
+            [71188] = true, -- Glorious Defense (of Glory)
+            [71186] = true, -- Dodge Trigger (of Glory)
+
+            [71603] = true, -- Hunt Leader (of the Hunt)
+            [71604] = true, -- Mark of the Hunt Leader (of the Hunt)
+            [71605] = true, -- Hunt Leader (of the Hunt)
+            [74106] = true, -- Hunt Leader (of the Hunt)
+
+            [71191] = true, -- Para Bellum (Para Bellum)
+            [71194] = true, -- Para Bellum Timer (Para Bellum)
+            [71193] = true, -- Para Bellum Shield (Para Bellum)
+
+            -- Dragonstar Arena Sets
+            [29103] = true, -- Archer's Mind (of the Archer's Mind)
+            [57167] = true, -- Archer's Mind (of the Archer's Mind)
+            [32806] = true, -- Robes of Destruction Mastery (of Destruction Mastery)
+            [29114] = true, -- Footman's Fortune (of the Footman)
+            [29096] = true, -- Minor Mending (of the Healer)
 
             -- DISGUISES
 
@@ -2070,6 +2096,7 @@ debugAuras = {
             [55080] = true, -- Pet Hidden
             [28301] = true, -- Ability CC Immunity
             [38117] = true, -- CC Immunity
+            [2874] = true, -- Staggered
 
             -- TAUNT EFFECTS
             [38254] = true, -- Taunt
@@ -2099,7 +2126,7 @@ debugAuras = {
             [20303] = true, -- Remove Sprint
             [38519] = true, -- Hiding
             [85701] = true, -- Dueling Flag
-            --[2727] = true, -- Off-Balance
+            [2727] = true, -- Off-Balance
             [21263] = true, -- Ayleid Health Bonus
 
             -- PET EFFECTS
@@ -5781,6 +5808,7 @@ debugAuras = {
             [48321] = true, -- CON_Bamf Out (Basic Justice NPC)
             [62472] = true, -- Stab (Justice Rogue)
             [62506] = true, -- Thrown Dagger (Justice Rogue)
+            [78013] = true, -- Quick Shot (Justice Archer)
             [62408] = true, -- Bound Weapon (Justice Mage)
             [62409] = true, -- Fiery Wind (Justice Mage)
             [62502] = true, -- Fiery Wind (Justice Mage)
@@ -5839,6 +5867,7 @@ debugAuras = {
             [10648] = true, -- Throw Oil -- Synergies (Footsoldier)
             [11039] = true, -- Spread Out Sound -- Synergies (Footsoldier)
             [10824] = true, -- Oil Up -- Synergies (Footsoldier)
+            [11016] = true, -- Throw Oil -- Synergies (Footsoldier)
             [10650] = true, -- Oil Drenched -- Synergies (Footsoldier)
             [12439] = true, -- Burning Arrow -- Synergies (Archer)
             --[70413] = true, -- Burning Arrow (STILL TESTING)
@@ -5874,7 +5903,7 @@ debugAuras = {
             [29757] = true, -- Remove block -- Guard
             [29766] = true, -- Blocked Stack -- Guard
             [29765] = true, -- Uber Attack -- Guard
-            [29767] = true, -- Uber Attack -- Guard
+            [84346] = true, -- Uber Attack -- Guard
 
             [34917] = true, -- Low Slash -- Brute
             [34919] = true, -- Low Slash -- Brute
@@ -6160,6 +6189,7 @@ debugAuras = {
             [67114] = true, -- Retaliation -- Winterborn Warrior (DLC)
             [69157] = true, -- Retaliation -- Winterborn Warrior (DLC)
             [69153] = true, -- Retaliation -- Winterborn Warrior (DLC)
+            [69167] = true, -- Retaliation -- Winterborn Warrior (DLC)
             [1347] = true, -- Off-Balance -- Winterborn Warrior (DLC)
             [14883] = true, -- Off-Balance -- Winterborn Warrior (DLC)
             [4508] = true, -- Off-Balance -- Winterborn Warrior (DLC)
