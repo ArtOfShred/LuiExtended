@@ -2095,6 +2095,7 @@ local strings = {
     SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM =               "Empower Atronach: Storm",
     SI_LUIE_SKILL_LIGHTNING_PULSE =                      "Lightning Pulse",
     SI_LUIE_SKILL_COLOSSAL_STOMP =                       "Colossal Stomp",
+    SI_LUIE_SKILL_DUST_CLOUD =                           "Dust Cloud",
 }
 
 -- TODO: Switch to StringId's

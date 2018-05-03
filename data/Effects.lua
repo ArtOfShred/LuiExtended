@@ -375,6 +375,7 @@ E.EffectGroundDisplay = {
     -- Crafted Sets
     [75930] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', name = A.Set_Eternal_Hunt, buff = false, debuff = false, ground = true, stack = 1 }, -- Daedric Mines (Eternal Hunt)
     [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', buff = true, debuff = false, ground = false }, -- Morkuldin (Morkuldin)
+    [106784] = { name = A.Set_Dust_Cloud, buff = false, debuff = false, ground = true }, -- Dustcloud (Adept Rider's)
 
     -- Overland Sets
     [75691] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', buff = false, debuff = false, ground = true }, -- Bahraha's Curse
@@ -385,6 +386,13 @@ E.EffectGroundDisplay = {
     [97908] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', buff = true, debuff = false, ground = true }, -- Hagraven's Garden (Hagraven's)
     [67205] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', buff = false, debuff = false, ground = true }, -- Leeching Plate (of Leeching)
     [84354] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Hand of Mephala (of Mephala's Hand)
+
+    -- Trial Sets
+    [107141] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vestment_of_olirime.dds', name = A.Set_Vestment_of_Olorime, buff = true, debuff = false, ground = false }, -- Vestment of Olirime (Olirime's)
+    [109084] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vestment_of_olirime.dds', name = A.Set_Vestment_of_Olorime, buff = true, debuff = false, ground = false }, -- Ideal Vestment of Olirime (Olirime's Perfect)
+
+    [107095] = { icon = 'LuiExtended/media/icons/abilities/ability_set_mantle_of_siroria.dds', buff = true, debuff = false, ground = false, }, -- Mantle of Siroria (Siroria's)
+    [109081] = { icon = 'LuiExtended/media/icons/abilities/ability_set_mantle_of_siroria.dds', name = A.Set_Mantle_of_Siroria, buff = true, debuff = false, ground = false, }, -- Ideal Mantle of Siroria (Perfect Siroria's)
 
     ---------------------------
     -- Class Abilities --------
@@ -657,6 +665,9 @@ E.EffectCreateSkillAura = {
 	[40171] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Protection --> Ring of Preservation
 
     [64509] = { icon = 'esoui/art/icons/ability_fightersguild_002.dds', name = A.Skill_Expert_Hunter, consolidate = true, extendedDisplay = true, removeOnEnd = true }, -- Major Savagery --> Expert Hunter
+
+    -- SETS
+    [106867] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds', name = A.Set_Grace_of_Gloom, alwaysShow = true }, -- Major Evasion --> Grace of Gloom
 
 	-- NPC's
 	-- Always Show = show regardless of menu setting
@@ -2171,6 +2182,14 @@ E.EffectOverride = {
 
     [49236] = { icon = 'LuiExtended/media/icons/abilities/ability_set_whitestrake.dds' }, -- Whitestake's Retribution (Whitestrake's)
 
+    [106776] = { forcedContainer = 'short' }, -- Major Evasion (Adept Rider's)
+    [106790] = { forcedContainer = 'short' }, -- Major Evasion (Adept Rider's)
+    [106783] = { name = A.Set_Dust_Cloud }, -- Dustcloud Damage (Adept Rider's)
+
+    [106804] = { icon = 'esoui/art/icons/achievement_thievesguild_006.dds', name = A.Set_Nocturnals_Favor }, -- Nocturnal's Heal (Nocturnal's Favor)
+
+    [106798] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sloads_semblance.dds' }, -- Sload's Semblance (Sload's)
+
     -- Overland Sets (Light)
 
     [75707] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds' }, -- Bahraha's Curse
@@ -2269,6 +2288,8 @@ E.EffectOverride = {
 
     [92762] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds' }, -- Minor Toughness (Warrior-Poet's)
 
+    [106868] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds' }, -- Grace of Gloom (Gloom-Graced)
+
     -- Dungeon Sets (Light)
 
     [61459] = { icon = 'LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds' }, -- Burning Spellweave
@@ -2345,7 +2366,7 @@ E.EffectOverride = {
 
     [84350] = { icon = 'esoui/art/icons/achievement_update11_dungeons_035.dds' }, -- Widowmaker
 
-    -- Dungeon Sets (Heavy
+    -- Dungeon Sets (Heavy)
 
     [102023] = { icon = 'LuiExtended/media/icons/abilities/ability_set_curse_of_doylemish.dds' }, -- Curse of Doylemish
 
@@ -2441,6 +2462,19 @@ E.EffectOverride = {
     [93120] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds' }, -- Major Slayer (Master Architect)
     [93442] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds' }, -- Major Slayer (War Machine)
 
+    -- Trial Sets (Cloudrest)
+    [109994] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds' }, -- Major Courage (Olirime's)
+    [110020] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds' }, -- Major Courage (Olirime's Perfect)
+
+    [110118] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sirorias_boon.dds' }, -- Siroria's Boon (Siroria's)
+    [110142] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sirorias_boon.dds' }, -- Siroria's Boon (Perfect Siroria's)
+
+    [107206] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds' }, -- Arms of Relequen (Perfect Relequen's)
+    [107203] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds' }, -- Arms of Relequen (Perfect Relequen's)
+
+    [109087] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = A.Set_Arms_of_Relequen }, -- Ideal Arms of Relequen (Relequen's)
+    [109086] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = A.Set_Arms_of_Relequen }, -- Ideal Arms of Relequen (Relequen's)
+
     -- Battleground Sets
     [93104] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_oblivion.dds' }, -- Knight Slayer
 
@@ -2515,6 +2549,9 @@ E.EffectOverride = {
     [71264] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_melee_alt.dds' }, -- Fire Ascendant (of Succession)
     [71265] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee_alt.dds' }, -- Lightning Ascendant (of Succession)
     [71266] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cold_melee_alt.dds' }, -- Frost Ascendant (of Succession)
+
+    [73296] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winterborn.dds', name = A.Set_Winterborn, duration = 0, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Winterborn Snare (Winterborn)
+    [71646] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winterborn.dds' }, -- Winterborn (Winterborn)
 
     [71188] = { icon = 'esoui/art/icons/ability_rogue_019.dds', name = A.Set_Glorious_Defender }, -- Glorious Defense (of Glory)
 

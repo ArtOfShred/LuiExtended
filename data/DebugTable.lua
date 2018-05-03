@@ -1098,6 +1098,18 @@ debugAuras = {
             [29109] = true, -- Whitestrake's Retribution (Whitestrake's)
             [49236] = true, -- Whitestrake's Retribution (Whitestrake's)
 
+            [106775] = true, -- Adept Rider (Adept Rider's)
+            [106776] = true, -- Major Evasion (Adept Rider's)
+            [106790] = true, -- Major Evasion (Adept Rider's)
+            [106784] = true, -- Dustcloud (Adept Rider's)
+            [106783] = true, -- Dustcloud Damage (Adept Rider's)
+
+            [106803] = true, -- Nocturnal's Favor (Nocturnal's Favored)
+            [106804] = true, -- Nocturnal's Heal (Nocturnal's Favored)
+
+            [106797] = true, -- Sload's Semblance (Sload's)
+            [106798] = true, -- Sload's Semblance (Sload's)
+
             -- Overland Sets (All Types)
             [85541] = true, -- Armor of the Trainee (of the Trainee)
 
@@ -1173,6 +1185,8 @@ debugAuras = {
             [93003] = true, -- Mad Tinkerer (Mad Tinkerer's)
             [92998] = true, -- Mad Tinkerer (Mad Tinkerer's)
 
+            [106805] = true, -- Wisdom of Vanus (Vanus's)
+            [106806] = true, -- Major Mending (Vanus's)
 
             -- Overland Sets (Medium)
 
@@ -1244,6 +1258,10 @@ debugAuras = {
             [18993] = true, -- Witchman Armor (Witchman's)
             [85818] = true, -- Witchman Armor (Witchman's)
 
+            [106858] = true, -- Gryphon's Ferocity (Gryphon's)
+            [106860] = true, -- Minor Expedition (Gryphon's)
+            [106861] = true, -- Minor Force (Gryphon's)
+
             -- Overland Sets (Heavy)
 
             [32815] = true, -- Meridia's Blessed Armor (Blessed)
@@ -1305,6 +1323,10 @@ debugAuras = {
             [33497] = true, -- Thunderbug's Carapace (Thunderbug's)
 
             [92762] = true, -- Minor Toughness (Warrior-Poet's)
+
+            [106865] = true, -- Grace of Gloom (Gloom-Graced)
+            [106867] = true, -- Major Evasion (Gloom-Graced)
+            [106868] = true, -- Grace of Gloom (Gloom-Graced)
 
             -- Dungeon Sets (Light)
 
@@ -1638,6 +1660,38 @@ debugAuras = {
             [93441] = true, -- War Machine (War Machine)
             [93442] = true, -- Major Slayer (War Machine)
 
+            -- Trial Sets (Cloudrest)
+
+            [107117] = true, -- Vestment of Olirime (Olirime's)
+            [107141] = true, -- Vestment of Olirime (Olirime's)
+            [109994] = true, -- Major Courage (Olirime's)
+
+            [109082] = true, -- Ideal Vestment of Olorime (Olirime's Perfect)
+            [109084] = true, -- Ideal Vestment of Olorime (Olirime's Perfect)
+            [110020] = true, -- Major Courage (Olirime's Perfect)
+
+            [107093] = true, -- Mantle of Siroria (Siroria's)
+            [107095] = true, -- Mantle of Siroria (Siroria's)
+            [110118] = true, -- Siroria's Boon (Siroria's)
+
+            [109079] = true, -- Ideal Mantle of Siroria (Perfect Siroria's)
+            [109081] = true, -- Ideal Mantle of Siroria (Perfect Siroria's)
+            [110142] = true, -- Siroria's Boon (Siroria's)
+
+            [107202] = true, -- Arms of Relequen (Relequen's)
+            [107206] = true, -- Arms of Relequen (Relequen's)
+            [107203] = true, -- Arms of Relequen (Relequen's)
+
+            [109085] = true, -- Ideal Arms of Relequen (Perfect Relequen's)
+            [109087] = true, -- Ideal Arms of Relequen (Perfect Relequen's)
+            [109086] = true, -- Ideal Arms of Relequen (Perfect Relequen's)
+
+            [107268] = true, -- Aegis of Galenwe (Galenwe's)
+            [109976] = true, -- Empower (Galenwe's)
+
+            [109088] = true, -- Ideal Aegis of Galenwe (Galenwe's)
+            [109989] = true, -- Empower (Galenwe's)
+
             -- Battleground Sets
             [92908] = true, -- Major Expedition (Coward's Gear)
             [92909] = true, -- Major Protection (Coward's Gear)
@@ -1799,18 +1853,23 @@ debugAuras = {
             [71265] = true, -- Lightning Ascendant (of Succession)
             [71266] = true, -- Frost Ascendant (of Succession)
 
-            [71180] = true, -- Glorious Defender (of Glory)
-            [71188] = true, -- Glorious Defense (of Glory)
-            [71186] = true, -- Dodge Trigger (of Glory)
+            [71644] = true, -- Winterborn (Winterborn)
+            [71647] = true, -- Winterborn (Winterborn)
+            [73296] = true, -- Winterborn Snare (Winterborn)
+            [71646] = true, -- Winterborn (Winterborn)
 
             [71603] = true, -- Hunt Leader (of the Hunt)
             [71604] = true, -- Mark of the Hunt Leader (of the Hunt)
             [71605] = true, -- Hunt Leader (of the Hunt)
             [74106] = true, -- Hunt Leader (of the Hunt)
-
             [71191] = true, -- Para Bellum (Para Bellum)
             [71194] = true, -- Para Bellum Timer (Para Bellum)
             [71193] = true, -- Para Bellum Shield (Para Bellum)
+
+            [71180] = true, -- Glorious Defender (of Glory)
+            [71188] = true, -- Glorious Defense (of Glory)
+            [71186] = true, -- Dodge Trigger (of Glory)
+            [71101] = true, -- Permafrost (of Permafrost)
 
             -- Dragonstar Arena Sets
             [29103] = true, -- Archer's Mind (of the Archer's Mind)

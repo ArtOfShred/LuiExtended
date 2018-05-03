@@ -226,6 +226,13 @@ A.Set_Cooldown                      = GetString(SI_LUIE_SKILL_SET_COOLDOWN)
 A.Set_Eternal_Hunt                  = 75927
 A.Set_Glorious_Defender             = 71180
 A.Set_Para_Bellum                   = 71191
+A.Set_Winterborn                    = 71644
+A.Set_Grace_of_Gloom                = 106865
+A.Set_Dust_Cloud                    = GetString(SI_LUIE_SKILL_DUST_CLOUD)
+A.Set_Nocturnals_Favor              = 106803
+A.Set_Vestment_of_Olorime           = 107117
+A.Set_Mantle_of_Siroria             = 107093
+A.Set_Arms_of_Relequen              = 107202
 
 A.Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
 
