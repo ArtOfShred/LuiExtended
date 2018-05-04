@@ -5223,6 +5223,73 @@ debugAuras = {
             [63473] = true, -- Shooting Star (Shooting Star)
             [63471] = true, -- Shooting Star (Shooting Star)
 
+            ------------------------------
+            -- PSIJIC ORDER PASSIVES
+            ------------------------------
+
+            [103793] = true, -- See the Unseen (See the Unseen - Rank 1)
+
+            [103809] = true, -- Clairvoyance (Clairvoyance - Rank 1)
+            [103811] = true, -- Clairvoyance (Clairvoyance - Rank 2)
+
+            [103819] = true, -- Spell Orb (Spell Orb - Rank 1)
+            [103820] = true, -- Spell Orb
+            [103827] = true, -- Spell Orb
+            [103828] = true, -- Spell Orb
+            [103878] = true, -- Spell Orb (Spell Orb - Rank 2)
+            [103879] = true, -- Spell Orb
+            [103880] = true, -- Spell Orb
+            [103881] = true, -- Spell Orb
+
+            [103888] = true, -- Concentrated Barrier (Concentrated Barrier - Rank 1)
+            [103923] = true, -- Concentrated Barrier
+            [103942] = true, -- Concentrated Barrier
+            [104313] = true, -- Concentrated Barrier
+
+            [103964] = true, -- Concentrated Barrier (Concentrated Barrier - Rank 2)
+            [103966] = true, -- Concentrated Barrier
+            [103968] = true, -- Concentrated Barrier
+            [104338] = true, -- Concentrated Barrier
+
+            [103972] = true, -- Deliberation (Deliberation - Rank 1)
+
+            ------------------------------
+            -- PSIJIC ORDER ACTIVE ABILITIES
+            ------------------------------
+
+            [103488] = true, -- Time Stop (Time Stop)
+            [109176] = true, -- Time Stop (Time Stop)
+            [103538] = true, -- Time Stop (Time Stop)
+            [104007] = true, -- Time Stop (Time Stop)
+            [104009] = true, -- Time Stop (Time Stop)
+            [104050] = true, -- Time Stop (Time Stop)
+
+            [104059] = true, -- Borrowed Time (Borrowed Time)
+            [109178] = true, -- Borrowed Time (Borrowed Time)
+            [104071] = true, -- Borrowed Time (Borrowed Time)
+            [104072] = true, -- Borrowed Time (Borrowed Time)
+            [104073] = true, -- Borrowed Time (Borrowed Time)
+            [104075] = true, -- Borrowed Time (Borrowed Time)
+            [104078] = true, -- Borrowed Time (Borrowed Time)
+
+            [103483] = true, -- Imbue Weapon (Imbue Weapon)
+            [103485] = true, -- Imbue Weapon (Imbue Weapon)
+
+            [103571] = true, -- Elemental Weapon (Elemental Weapon)
+            [103572] = true, -- Elemental Weapon (Elemental Weapon)
+
+            [103503] = true, -- Accelerate (Accelerate)
+            [103520] = true, -- Major Expedition (Accelerate)
+            [103521] = true, -- Minor Force (Accelerate)
+
+            [103706] = true, -- Channeled Acceleration (Channeled Acceleration)
+            [103707] = true, -- Major Expedition (Channeled Acceleration)
+            [103708] = true, -- Minor Force (Channeled Acceleration)
+
+            [103543] = true, -- Mend Wounds (Mend Wounds)
+            [107583] = true, -- Mend Wounds (Mend Wounds)
+            [107579] = true, -- Mend Wounds (Mend Wounds)
+
             -- LEGERDEMAIN
             [63799] = true, -- Improved Hiding (Rank 1)
             [63800] = true, -- Improved Hiding (Rank 2)

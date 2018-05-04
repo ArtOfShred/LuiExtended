@@ -741,8 +741,13 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
 
     local duration = (endTime - beginTime) * 1000
 
+    local refreshOnly = ""
+    if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].refreshOnly then
+        refreshOnly = " |c00E200(Hidden)|r "
+    end
+
     if changeType == 1 then
-        d("|c00E200Gained:|r " .. iconFormatted .. " [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
+        d("|c00E200Gained:|r " .. refreshOnly .. iconFormatted .. " [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     elseif changeType == 2 then
         d("|c00E200Faded:|r " .. iconFormatted .. " [" .. abilityId .. "] " .. effectName .. ": [Tag] " .. unitName)
     else

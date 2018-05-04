@@ -40,6 +40,9 @@ E.IsToggle = {
     [A.Skill_Eternal_Guardian]              = true, -- Eternal Guardian
     [A.Skill_Wild_Guardian]                 = true, -- Wild Guardian
 
+    -- Psijic Order
+    [A.Skill_Concentrated_Barrier]          = true, -- Concentrated Barrier
+
     -- TODO: Haven't gone over these yet
     [A.Skill_Guard]                         = true, -- Guard (Support)
     [A.Skill_Mystic_Guard]                  = true, -- Mystic Guard (Support)
@@ -719,6 +722,9 @@ E.EffectCreateSkillAura = {
             E.BarHighlightOverride[26792] = { duration = 8000, showFakeAura = true, secondary = true, noRemove = true } -- Biting Jabs --> Major Savagery
             E.BarHighlightOverride[22229] = { newId = 22233, showFakeAura = true, secondary = true, noRemove = true } -- Remembrance --> Major Protection
 
+            -- Restoration Staff
+            E.BarHighlightOverride[85132] = { newId = 85154, showFakeAura = true, secondary = true, noRemove = true } -- Light's Champion --> Major Force
+
             -- Mages Guild
             E.BarHighlightOverride[28567] = { newId = 63223, showFakeAura = true, secondary = true, noRemove = true } -- Entropy --> Major Sorcery
             E.BarHighlightOverride[40457] = { newId = 63227, showFakeAura = true, secondary = true, noRemove = true } -- Degeneration --> Major Sorcery
@@ -735,6 +741,9 @@ E.EffectCreateSkillAura = {
             -- Templar
             E.BarHighlightOverride[26792] = { newId = 76912, duration = 2000, showFakeAura = true, noRemove = true } -- Biting Jabs
             E.BarHighlightOverride[22229] = { showFakeAura = true } -- Remembrance (Remembrance - Rank 1)
+
+            -- Restoration Staff
+            E.BarHighlightOverride[85132] = nil -- Light's Champion
 
             -- Mages Guild
             E.BarHighlightOverride[28567] = nil -- Entropy
@@ -1130,6 +1139,16 @@ E.BarHighlightOverride = {
     [40489] = { newId = 63456 }, -- Ice Comet
     [40493] = { newId = 63473 }, -- Shooting Star
 
+    ---------------------------
+    -- Psijic Order -----------
+    ---------------------------
+
+    [103488] = { newId = 104050 }, -- Time Stop
+    [104059] = { newId = 104078 }, -- Borrowed Time
+
+    [103503] = { newId = 103521, showFakeAura = true, noRemove = true }, -- Accelerate --> Minor Force
+    [103706] = { newId = 103708, showFakeAura = true, noRemove = true }, -- Channeled Acceleration --> Minor Force
+
 }
 
 E.DisguiseIcons = {
@@ -1491,6 +1510,18 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [39068] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1)
     [62948] = true, -- Blockade of Frost (Elemental Blockade - Rank 1)
     [104825] = true, -- Icy Rage (Elemental Rage - All Ranks)
+
+    ----------------------------
+    -- Psijic Order
+    ----------------------------
+
+    [103538] = true, -- Time Stop (Time Stop)
+    [104007] = true, -- Time Stop (Time Stop)
+    [104009] = true, -- Time Stop (Time Stop)
+
+    [104071] = true, -- Borrowed Time (Borrowed Time)
+    [104072] = true, -- Borrowed Time (Borrowed Time)
+    [104073] = true, -- Borrowed Time (Borrowed Time)
 
     -- Human NPC
     [10648] = true, -- Throw Oil (Synergy)
@@ -3974,6 +4005,29 @@ E.EffectOverride = {
 
     [63472] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds' }, -- Shooting Star (Shooting Star)
     [40495] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds' }, -- Shooting Star (Shooting Star)
+
+    ----------------------------------------------------------------
+    -- PSIJIC ORDER PASSIVES ---------------------------------------
+    ----------------------------------------------------------------
+
+    [103820] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds' }, -- Spell Orb (Spell Orb - Rank 1)
+    [103827] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds', hide = true }, -- Spell Orb (Spell Orb - Rank 1)
+    [103828] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds', hide = true }, -- Spell Orb (Spell Orb - Rank 1)
+    [103879] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds' }, -- Spell Orb (Spell Orb - Rank 2)
+    [103880] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds', hide = true }, -- Spell Orb (Spell Orb - Rank 2)
+    [103881] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds', hide = true }, -- Spell Orb (Spell Orb - Rank 2)
+
+    [103923] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_concentrated_barrier.dds', forcedContainer = 'short' }, -- Concentrated Barrier (Concentrated Barrier - Rank 1)
+    [103966] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_concentrated_barrier.dds', forcedContainer = 'short' }, -- Concentrated Barrier (Concentrated Barrier - Rank 2)
+
+    ----------------------------------------------------------------
+    -- PSIJIC ORDER ACTIVE ABILITIES -------------------------------
+    ----------------------------------------------------------------
+
+    [104075] = { hideReduce = true }, -- Borrowed Time (Borrowed Time)
+
+    [107583] = { refreshOnly = true }, -- Mend Wounds (Mend Wounds)
+    [107579] = { duration = 0, forcedContainer = 'short' }, -- Mend Wounds (Mend Wounds)
 
     -- Undaunted
     [55584] = { icon = 'LuiExtended/media/icons/abilities/passive_undaunted_undaunted_command.dds' }, -- Undaunted Command (Undaunted Command - Rank 1)
