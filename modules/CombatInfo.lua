@@ -303,6 +303,18 @@ end
 
 function CI.UpdateBarHighlightTables()
 
+    local g_uiProcAnimation      = {}
+    local g_uiCustomToggle       = {}
+    local g_actionBar            = {}
+    local g_triggeredSlots       = {}
+    local g_triggeredSlotsRemain = {}
+    local g_toggledSlots         = {}
+    local g_toggledSlotsRemain   = {}
+    local g_barOverrideCI        = {}
+    local g_barFakeAura          = {}
+    local g_barDurationOverride  = {}
+    local g_barNoRemove          = {}
+
     local counter = 0
     for abilityId, _ in pairs (g_barOverrideCI) do
         counter = counter + 1

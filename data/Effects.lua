@@ -47,7 +47,7 @@ E.IsToggle = {
 
     -- NPC Abilities
     [A.Skill_Siphoning_Strikes]             = true, -- Siphoning Strikes (Nightblade) -- For 0 duration NPC ability only
-    [A.Skill_Magelight]                     = true, -- Magelight (Soulbrander) -- For 0 duration NPC ability only
+    --[A.Skill_Magelight]                     = true, -- Magelight (Soulbrander) -- For 0 duration NPC ability only -- TODO: Find a way to fix this, we don't want it to show for consolidated player aura
     [A.Skill_Bound_Aegis]                   = true, -- Bound Aegis (Cyrodiil Mage) -- For 0 duration NPC ability only
 }
 
@@ -244,7 +244,6 @@ E.IsGrimFocusOverride = {
 
 }
 
--- TODO: Add Mines - Fire/Scaling/Volcanic Rune
 E.IsGroundMineAura = {
 
 	-- Sets
@@ -259,6 +258,11 @@ E.IsGroundMineAura = {
 	[35750] = true, -- Trap Beast (Trap Beast - Rank 1)
 	[40382] = true, -- Rearming Trap (Rearming Trap - Rank 1)
 	[40372] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+
+    -- Mages Guild
+    [31632] = true, -- Fire Rune (Fire Rune)
+    [40470] = true, -- Volcanic Rune (Volcanic Rune)
+    [40465] = true, -- Scalding Rune (Scalding Rune)
 
 }
 
@@ -280,6 +284,12 @@ E.IsGroundMineDamage = {
 	[40389] = true, -- Rearming Trap (Rearming Trap)
 	[40392] = true, -- Rearming Trap (Rearming Trap)
 	[40376] = true, -- Lightweight Beast Trap (Lightweight Beast Trap)
+
+    -- Mages Guild
+    [31635] = true, -- Fire Rune (Fire Rune)
+    [40473] = true, -- Volcanic Rune (Volcanic Rune)
+    [40469] = true, -- Scalding Rune (Scalding Rune)
+
 }
 
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY ID
@@ -512,7 +522,7 @@ E.EffectGroundDisplay = {
     [40060] = { buff = true, debuff = false, ground = false }, -- Healing Springs (Healing Springs - Rank 1)
 
     ---------------------------
-    -- Fighters Guild --------
+    -- Fighters Guild ---------
     ---------------------------
 
     [35737] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 1)
@@ -520,10 +530,20 @@ E.EffectGroundDisplay = {
     [40169] = { buff = true, debuff = false, ground = false }, -- Ring of Preservation (Ring of Preservation - Rank 1)
 
     [35750] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Trap Beast (Trap Beast - Rank 1)
-
     [40382] = { buff = false, debuff = false, ground = true, stack = 2 }, -- Rearming Trap (Rearming Trap - Rank 1)
-
     [40372] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+
+    ---------------------------
+    -- Mages Guild ------------
+    ---------------------------
+
+    [31632] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Fire Rune (Fire Rune)
+    [40470] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Volcanic Rune (Volcanic Rune)
+    [40465] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Scalding Rune (Scalding Rune)
+
+    [63430] = { icon = 'esoui/art/icons/ability_mageguild_005.dds', buff = false, debuff = false, ground = true }, -- Meteor (Meteor)
+    [63456] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', buff = false, debuff = false, ground = true }, -- Ice Comet (Ice Comet)
+    [63473] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds', buff = false, debuff = false, ground = true }, -- Shooting Star (Shooting Star)
 
 }
 
@@ -666,6 +686,14 @@ E.EffectCreateSkillAura = {
 
     [64509] = { icon = 'esoui/art/icons/ability_fightersguild_002.dds', name = A.Skill_Expert_Hunter, consolidate = true, extendedDisplay = true, removeOnEnd = true }, -- Major Savagery --> Expert Hunter
 
+    -- Mages Guild
+    [77928] = { icon = 'esoui/art/icons/ability_mageguild_002.dds', name = A.Skill_Magelight, consolidate = true, extendedDisplay = true, removeOnEnd = true }, -- Major Prophecy --> Magelight
+    [77945] = { icon = 'esoui/art/icons/ability_mageguild_002_b.dds', name = A.Skill_Inner_Light, consolidate = true, extendedDisplay = true, removeOnEnd = true }, -- Major Prophecy --> Inner Light
+    [77958] = { icon = 'esoui/art/icons/ability_mageguild_002_a.dds', name = A.Skill_Radiant_Magelight, consolidate = true, extendedDisplay = true, removeOnEnd = true }, -- Major Prophecy --> Radiant Magelight
+
+    [40443] = { icon = 'esoui/art/icons/ability_mageguild_003_b.dds', name = A.Skill_Balance, consolidate = true }, -- Balance --> Major Ward
+    [80160] = { icon = 'esoui/art/icons/ability_mageguild_003_b.dds', name = A.Skill_Balance, consolidate = true }, -- Balance --> Major Resolve
+
     -- SETS
     [106867] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds', name = A.Set_Grace_of_Gloom, alwaysShow = true }, -- Major Evasion --> Grace of Gloom
 
@@ -690,6 +718,11 @@ E.EffectCreateSkillAura = {
             -- Templar
             E.BarHighlightOverride[26792] = { duration = 8000, showFakeAura = true, secondary = true, noRemove = true } -- Biting Jabs --> Major Savagery
             E.BarHighlightOverride[22229] = { newId = 22233, showFakeAura = true, secondary = true, noRemove = true } -- Remembrance --> Major Protection
+
+            -- Mages Guild
+            E.BarHighlightOverride[28567] = { newId = 63223, showFakeAura = true, secondary = true, noRemove = true } -- Entropy --> Major Sorcery
+            E.BarHighlightOverride[40457] = { newId = 63227, showFakeAura = true, secondary = true, noRemove = true } -- Degeneration --> Major Sorcery
+            E.BarHighlightOverride[40452] = { newId = 63231, showFakeAura = true, secondary = true, noRemove = true } -- Structured Entropy --> Major Sorcery
         else
             -- Dragonknight
             E.BarHighlightOverride[31816] = { newId = 31817} -- Stone Giant
@@ -702,6 +735,11 @@ E.EffectCreateSkillAura = {
             -- Templar
             E.BarHighlightOverride[26792] = { newId = 76912, duration = 2000, showFakeAura = true, noRemove = true } -- Biting Jabs
             E.BarHighlightOverride[22229] = { showFakeAura = true } -- Remembrance (Remembrance - Rank 1)
+
+            -- Mages Guild
+            E.BarHighlightOverride[28567] = nil -- Entropy
+            E.BarHighlightOverride[40457] = nil -- Degeneration
+            E.BarHighlightOverride[40452] = nil -- Structured Entropy
         end
 
     end
@@ -1080,6 +1118,18 @@ E.BarHighlightOverride = {
     [40161] = { newId = 62310 }, -- Flawless Dawnbreaker (Flawless Dawnbreaker - Rank 1)
     [40158] = { newId = 62314 }, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
 
+    ---------------------------
+    -- Mages Guild ------------
+    ---------------------------
+
+    [31642] = { newId = 48131, secondary = true }, -- Equilibrium
+    [40445] = { newId = 40449, showFakeAura = true }, -- Spell Symmetry (Spell Symmetry)
+    [40441] = { newId = 40443, showFakeAura = true, noRemove = true }, -- Balance --> Major Ward
+
+    [16536] = { newId = 63430 }, -- Meteor
+    [40489] = { newId = 63456 }, -- Ice Comet
+    [40493] = { newId = 63473 }, -- Shooting Star
+
 }
 
 E.DisguiseIcons = {
@@ -1121,9 +1171,9 @@ E.DisguiseIcons = {
 }
 
 E.AssistantIcons = {
-    ['Nuzhimeh the Merchant']       = 'LuiExtended/media/icons/abilities/ability_innate_assistant_nuzhimeh.dds',
-    ['Pirharri the Smuggler']       = 'LuiExtended/media/icons/abilities/ability_innate_assistant_pirharri.dds',
-    ['Tythis Andromo, the Banker']  = 'LuiExtended/media/icons/abilities/ability_innate_assistant_tythis.dds',
+    [GetCollectibleName(301)] = 'LuiExtended/media/icons/abilities/ability_innate_assistant_nuzhimeh.dds',
+    [GetCollectibleName(300)] = 'LuiExtended/media/icons/abilities/ability_innate_assistant_pirharri.dds',
+    [GetCollectibleName(267)] = 'LuiExtended/media/icons/abilities/ability_innate_assistant_tythis.dds',
 }
 
 E.AddNameAura = {
@@ -1181,7 +1231,7 @@ E.AddNameAura = {
 E.SynergyNameOverride = {
 
     ['Tonal Inverter'] = 'LuiExtended/media/icons/abilities/ability_quest_tonal_inverter.dds', -- Tonal Inverter (Divine Intervention)
-    ['Blade of Woe'] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds', -- Blade of Woe (Dark Brotherhood)
+    [A.Skill_Blade_of_Woe] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds', -- Blade of Woe (Dark Brotherhood)
 }
 
 E.BarNameOverride = {
@@ -3813,6 +3863,19 @@ E.EffectOverride = {
     [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Bloodmoon, A.Set_Cooldown) }, -- Bit an Ally (Blood Moon)
     [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds' }, -- Sanies Lupinus (Blood Moon)
 
+    ----------------------------------------------------------------
+    -- DARK BROTHERHOOD PASSIVES -----------------------------------
+    ----------------------------------------------------------------
+
+    [76325] = { icon = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds' }, -- Blade of Woe
+    [79623] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 1) (Blade of Woe Kill)
+    [79624] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 2) (Blade of Woe Kill)
+    [79625] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 3) (Blade of Woe Kill)
+    [79877] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 4) (Blade of Woe Kill)
+    [80392] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 1) (Normal Kill)
+    [80394] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 2) (Normal Kill)
+    [80396] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 3) (Normal Kill)
+    [80398] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 4) (Normal Kill)
 
 
     ----------------------------------------------------------------
@@ -3863,32 +3926,54 @@ E.EffectOverride = {
 
     [40374] = { hideReduce = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
 
-    -- Dark Brotherhood
-    [76325] = { icon = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds' }, -- Blade of Woe
-    [79623] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 1) (Blade of Woe Kill)
-    [79624] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 2) (Blade of Woe Kill)
-    [79625] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 3) (Blade of Woe Kill)
-    [79877] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 4) (Blade of Woe Kill)
-    [80392] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 1) (Normal Kill)
-    [80394] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 2) (Normal Kill)
-    [80396] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 3) (Normal Kill)
-    [80398] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 4) (Normal Kill)
+    ----------------------------------------------------------------
+    -- MAGES GUILD PASSIVES ----------------------------------------
+    ----------------------------------------------------------------
 
-    -- Mages Guild
     [29061] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_persuasive_will.dds' }, -- Persuasive Will
 
-    [40436] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_mage_adept.dds' },
-    [45601] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_mage_adept.dds' },
+    [40436] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_mage_adept.dds' }, -- Mage Adept (Rank 1)
+    [45601] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_mage_adept.dds' }, -- Mage Adept (Rank 2)
 
-    [40437] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_everlasting_magic.dds' },
-    [45602] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_everlasting_magic.dds' },
+    [40437] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_everlasting_magic.dds' }, -- Everlasting Magic (Rank 1)
+    [45602] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_everlasting_magic.dds' }, -- Everlasting Magic (Rank 2)
 
-    [40438] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_magicka_controller.dds' },
-    [45603] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_magicka_controller.dds' },
+    [40438] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_magicka_controller.dds' }, -- Magicka Controller (Rank 1)
+    [45603] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_magicka_controller.dds' }, -- Magicka Controller (Rank 2)
 
-    [43561] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_might_of_the_guild.dds' },
-    [45607] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_might_of_the_guild.dds' },
+    [43561] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_might_of_the_guild.dds' }, -- Might of the Guild (Rank 1)
+    [45607] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_might_of_the_guild.dds' }, -- Might of the Guild (Rank 2)
 
+    ----------------------------------------------------------------
+    -- MAGES GUILD ACTIVE ABILITIES --------------------------------
+    ----------------------------------------------------------------
+
+    [77928] = { consolidateExtra = true }, -- Major Prophecy (Magelight)
+    [31079] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Magelight (Magelight)
+    [77945] = { consolidateExtra = true }, -- Major Prophecy (Radiant Magelight)
+    [40480] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Inner Light (Inner Light)
+    [77958] = { consolidateExtra = true }, -- Major Prophecy (Radiant Magelight)
+    [40484] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Radiant Magelight (Radiant Magelight)
+
+    [31633] = { hide = true }, -- Fire Rune (Fire Rune)
+    [40477] = { icon = 'esoui/art/icons/ability_mageguild_001_a.dds', hide = true }, -- Volcanic Rune (Volcanic Rune)
+    [40472] = { hide = true}, -- Volcanic Rune (Volcanic Rune)
+    [40467] = { hide = true}, -- Scalding Rune (Scalding Rune)
+
+    [48131] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Equilibrium (Equilibrium)
+    [48136] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Spell Symmetry (Spell Symmetry)
+
+    [40443] = { consolidate = true }, -- Major Ward (Balance)
+    [80160] = { consolidate = true }, -- Major Resolve (Balance)
+    [48141] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Balance (Balance)
+
+    [16538] = { icon = 'esoui/art/icons/ability_mageguild_005.dds', name = A.Skill_Meteor }, -- Meteor Knockback (Meteor)
+    [63457] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds' }, -- Ice Comet (Ice Comet)
+    [63455] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', name = A.Skill_Ice_Comet }, -- Ice Comet Knockback (Ice Comet)
+    [63454] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds' }, -- Ice Comet (Ice Comet)
+
+    [63472] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds' }, -- Shooting Star (Shooting Star)
+    [40495] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds' }, -- Shooting Star (Shooting Star)
 
     -- Undaunted
     [55584] = { icon = 'LuiExtended/media/icons/abilities/passive_undaunted_undaunted_command.dds' }, -- Undaunted Command (Undaunted Command - Rank 1)
@@ -6121,6 +6206,9 @@ E.FakePlayerBuffs = {
     [22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 1)
     [22229] = { icon = 'esoui/art/icons/ability_templar_remembrance.dds', name = A.Skill_Remembrance, duration = 4000 }, -- Remembrance (Remembrance - Rank 1)
     [22226] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation - Rank 1)
+
+    -- Mages Guild
+    [40449] = { icon = 'esoui/art/icons/ability_mageguild_003_a.dds', name = A.Skill_Spell_Symmetry, duration = 5000 }, -- Spell Symmetry (Spell Symmetry)
 
     -- Seasonal Quests (New Life Festival)
     [84125] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)

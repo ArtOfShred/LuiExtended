@@ -2484,7 +2484,7 @@ debugAuras = {
             [32787] = true, -- Draw Essence (Draw Essence)
             [32789] = true, -- Draw Essence (Draw Essence)
 
-            [18032] = true, -- Stun (Dragon Leap)
+            --[18032] = true, -- Stun (Dragon Leap)
             [48744] = true, -- CC Immunity (Dragon Leap)
             [29012] = true, -- Dragon Leap (Dragon Leap)
             [29014] = true, -- Dragon Leap (Dragon Leap)
@@ -4963,9 +4963,47 @@ debugAuras = {
             [63119] = true, -- Major Resolve (Unstoppable)
             [63120] = true, -- Major Ward (Unstoppable)
 
+
+            ------------------------------
+            -- DARK BROTHERHOOD PASSIVES
+            -------------------------------
+
+            [78219] = true, -- Blade of Woe (Rank 1)
+            [76325] = true, -- Blade of Woe
+            [77101] = true, -- Blade of Woe
+            [77102] = true, -- Blade of Woe Snare
+            [81101] = true, -- Assassins League Style Item Gi
+            [81118] = true, -- Assassins League Style Item FX
+            [81604] = true, -- Self Reveal
+
+            [77392] = true, -- Scales of Pitiless Justice (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [77394] = true, -- Scales of Pitiless Justice II (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [77395] = true, -- Scales of Pitiless Justice III (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [79865] = true, -- Scales of Pitiless Justice IV (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
+
+            [77397] = true, -- Padomaic Sprint (Rank 1)
+            [79623] = true, -- Major Expedition (Blade of Woe Kill)
+            [80392] = true, -- Major Expedition (Normal Kill)
+            [77398] = true, -- Padomaic Sprint II (Rank 2)
+            [79624] = true, -- Major Expedition (Blade of Woe Kill)
+            [80394] = true, -- Major Expedition (Normal Kill)
+            [77399] = true, -- Padomaic Sprint III (Rank 3)
+            [79625] = true, -- Major Expedition (Blade of Woe Kill)
+            [80396] = true, -- Major Expedition (Normal Kill)
+            [79868] = true, -- Padomaic Sprint IV (Rank 4)
+            [79877] = true, -- Major Expedition (Blade of Woe Kill)
+            [80398] = true, -- Major Expedition (Normal Kill)
+
+            [77396] = true, -- Shadowy Supplier (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+
+            [77400] = true, -- Shadow Rider (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+
+            [77401] = true, -- Spectral Assassin (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [80636] = true, -- Spectral Assassin
+
             ------------------------------
             -- FIGHTERS GUILD PASSIVES
-            -------------------------------
+            ------------------------------
 
             [29062] = true, -- Intimidating Presence (Rank 1)
 
@@ -5070,6 +5108,120 @@ debugAuras = {
             [40158] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
             [40160] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
             [62314] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
+
+            ------------------------------
+            -- MAGES GUILD PASSIVES
+            ------------------------------
+
+            [29061] = true, -- Persuasive Will (Rank 1)
+
+            [40436] = true, -- Mage Adept (Rank 1)
+            [45601] = true, -- Mage Adept (Rank 2)
+
+            [40437] = true, -- Everlasting Magic (Rank 1)
+            [45602] = true, -- Everlasting Magic (Rank 2)
+
+            [40438] = true, -- Magicka Controller (Rank 1)
+            [45603] = true, -- Magicka Controller (Rank 2)
+
+            [43561] = true, -- Might of the Guild (Rank 1)
+            [65507] = true, -- Empower
+            [45607] = true, -- Might of the Guild (Rank 2)
+            [65541] = true, -- Empower
+
+            ------------------------------
+            -- MAGES GUILD ACTIVES
+            ------------------------------
+
+            [77928] = true, -- Major Prophecy (Magelight)
+            [30920] = true, -- Magelight (Magelight)
+            [31079] = true, -- Magelight (Magelight)
+
+            [77945] = true, -- Major Prophecy (Inner Light)
+            [40478] = true, -- Inner Light (Inner Light)
+            [40480] = true, -- Inner Light (Inner Light)
+
+            [77958] = true, -- Major Prophecy (Radiant Magelight)
+            [77960] = true, -- Radiant Magelight (Radiant Magelight)
+            [40483] = true, -- Radiant Magelight (Radiant Magelight)
+            [40484] = true, -- Radiant Magelight (Radiant Magelight)
+
+            [28567] = true, -- Entropy (Entropy)
+            [28569] = true, -- Entropy (Entropy)
+            [63223] = true, -- Major Sorcery (Entropy)
+            [40451] = true, -- Entropy (Entropy)
+
+            [40457] = true, -- Degeneration (Degeneration)
+            [40460] = true, -- Degeneration (Degeneration)
+            [63227] = true, -- Major Sorcery (Degeneration)
+            [40458] = true, -- Degeneration (Degeneration)
+            [40464] = true, -- Degeneration (Degeneration)
+
+            [40453] = true, -- Structured Entropy Passive (Structured Entropy)
+            [40452] = true, -- Structured Entropy (Structured Entropy)
+            [40456] = true, -- Structured Entropy (Structured Entropy)
+            [63231] = true, -- Major Sorcery (Structured Entropy)
+            [40454] = true, -- Structured Entropy (Structured Entropy)
+
+            [31637] = true, -- Only 1 Fire Rune (Fire Rune - All Ranks)
+            [31632] = true, -- Fire Rune (Fire Rune)
+            [40648] = true, -- Fire Rune (Fire Rune)
+            [40974] = true, -- Fire Rune (Fire Rune)
+            [31635] = true, -- Fire Rune (Fire Rune)
+            [31633] = true, -- Fire Rune (Fire Rune)
+
+            [40470] = true, -- Volcanic Rune (Volcanic Rune)
+            [40693] = true, -- Volcanic Rune (Volcanic Rune)
+            [41008] = true, -- Volcanic Rune (Volcanic Rune)
+            [40473] = true, -- Volcanic Rune (Volcanic Rune)
+            [40477] = true, -- Volcanic Rune (Volcanic Rune)
+            [40476] = true, -- Volcanic Rune (Volcanic Rune)
+            [40472] = true, -- Volcanic Rune (Volcanic Rune)
+
+            [40465] = true, -- Scalding Rune (Scalding Rune)
+            [40692] = true, -- Scalding Rune (Scalding Rune)
+            [40994] = true, -- Scalding Rune (Scalding Rune)
+            [40469] = true, -- Scalding Rune (Scalding Rune)
+            [40468] = true, -- Scalding Rune (Scalding Rune)
+            [40467] = true, -- Scalding Rune (Scalding Rune)
+
+            [31642] = true, -- Equilibrium (Equilibrium)
+            [31644] = true, -- Equilibrium (Equilibrium)
+            [48131] = true, -- Equilibrium (Equilibrium)
+            [97279] = true, -- Equilibrium (Equilibrium)
+
+            [40445] = true, -- Spell Symmetry (Spell Symmetry)
+            [40446] = true, -- Spell Symmetry (Spell Symmetry)
+            [40449] = true, -- Spell Symmetry (Spell Symmetry)
+            [48136] = true, -- Spell Symmetry (Spell Symmetry)
+            [97293] = true, -- Equilibrium (Equilibrium)
+
+            [40441] = true, -- Balance (Balance)
+            [40442] = true, -- Balance (Balance)
+            [40443] = true, -- Major Ward (Balance)
+            [80160] = true, -- Major Resolve (Balance)
+            [48141] = true, -- Balance (Balance)
+            [97297] = true, -- Equilibrium (Equilibrium)
+
+            [16536] = true, -- Meteor (Meteor)
+            [63430] = true, -- Meteor (Meteor)
+            [17912] = true, -- Meteor (Meteor)
+            [16538] = true, -- Meteor Knockback (Meteor)
+            [63429] = true, -- Meteor (Meteor)
+
+            [40489] = true, -- Ice Comet (Ice Comet)
+            [63456] = true, -- Ice Comet (Ice Comet)
+            [63457] = true, -- Ice Comet (Ice Comet)
+            [40492] = true, -- Ice Comet (Ice Comet)
+            [63455] = true, -- Ice Comet Knockback (Ice Comet)
+            [63454] = true, -- Ice Comet (Ice Comet)
+
+            [40493] = true, -- Shooting Star (Shooting Star)
+            [63474] = true, -- Shooting Star (Shooting Star)
+            [63472] = true, -- Shooting Star (Shooting Star)
+            [40495] = true, -- Shooting Star (Shooting Star)
+            [63473] = true, -- Shooting Star (Shooting Star)
+            [63471] = true, -- Shooting Star (Shooting Star)
 
             -- LEGERDEMAIN
             [63799] = true, -- Improved Hiding (Rank 1)
@@ -5218,57 +5370,6 @@ debugAuras = {
             [80283] = true, -- Call of the Pack
             [46137] = true, -- Call of the Pack (Rank 2)
             [80282] = true, -- Call of the Pack
-
-            -- DARK BROTHERHOOD
-            [78219] = true, -- Blade of Woe (Rank 1)
-            [76325] = true, -- Blade of Woe
-            [77101] = true, -- Blade of Woe
-            [77102] = true, -- Blade of Woe Snare
-            [81101] = true, -- Assassins League Style Item Gi
-            [81118] = true, -- Assassins League Style Item FX
-            [81604] = true, -- Self Reveal
-
-            [77392] = true, -- Scales of Pitiless Justice (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [77394] = true, -- Scales of Pitiless Justice II (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [77395] = true, -- Scales of Pitiless Justice III (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [79865] = true, -- Scales of Pitiless Justice IV (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
-
-            [77397] = true, -- Padomaic Sprint (Rank 1)
-            [79623] = true, -- Major Expedition (Blade of Woe Kill)
-            [80392] = true, -- Major Expedition (Normal Kill)
-            [77398] = true, -- Padomaic Sprint II (Rank 2)
-            [79624] = true, -- Major Expedition (Blade of Woe Kill)
-            [80394] = true, -- Major Expedition (Normal Kill)
-            [77399] = true, -- Padomaic Sprint III (Rank 3)
-            [79625] = true, -- Major Expedition (Blade of Woe Kill)
-            [80396] = true, -- Major Expedition (Normal Kill)
-            [79868] = true, -- Padomaic Sprint IV (Rank 4)
-            [79877] = true, -- Major Expedition (Blade of Woe Kill)
-            [80398] = true, -- Major Expedition (Normal Kill)
-
-            [77396] = true, -- Shadowy Supplier (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
-
-            [77400] = true, -- Shadow Rider (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
-
-            [77401] = true, -- Spectral Assassin (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [80636] = true, -- Spectral Assassin
-
-            -- MAGES GUILD
-            [29061] = true, -- Persuasive Will (Rank 1)
-
-            [40436] = true, -- Mage Adept (Rank 1)
-            [45601] = true, -- Mage Adept (Rank 2)
-
-            [40437] = true, -- Everlasting Magic (Rank 1)
-            [45602] = true, -- Everlasting Magic (Rank 2)
-
-            [40438] = true, -- Magicka Controller (Rank 1)
-            [45603] = true, -- Magicka Controller (Rank 2)
-
-            [43561] = true, -- Might of the Guild (Rank 1)
-            [65507] = true, -- Empower
-            [45607] = true, -- Might of the Guild (Rank 2)
-            [65541] = true, -- Empower
 
             -- THIEVES GUILD
             [74580] = true, -- Finders Keepers (Rank 1)

@@ -484,6 +484,9 @@ A.Skill_Unstoppable              = 39197
 -- GUILD SKILLS --------------------------------------
 -- ---------------------------------------------------
 
+-- Dark Brotherhood
+A.Skill_Blade_of_Woe                = 78219
+
 -- Fighters Guild
 A.Skill_Circle_of_Protection        = 35737
 A.Skill_Turn_Undead                 = 40181
@@ -495,7 +498,13 @@ A.Skill_Rearming_Trap               = 40382
 A.Skill_Lightweight_Beast_Trap      = 40372
 
 -- Mages Guild
-A.Skill_Magelight                   = 30920 -- TODO: Check is best ID to use
+A.Skill_Magelight                   = 30920
+A.Skill_Inner_Light                 = 40478
+A.Skill_Radiant_Magelight           = 40483
+A.Skill_Spell_Symmetry              = 40445
+A.Skill_Balance                     = 40441
+A.Skill_Meteor                      = 16536
+A.Skill_Ice_Comet                   = 40489
 
 -- ---------------------------------------------------
 -- ALLIANCE WAR --------------------------------------
@@ -630,11 +639,6 @@ A.Skill_Assault                     = 4304 -- Ice Wraith
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- MAGES GUILD --------------
-A.Skill_Meteor                   = 16536
-A.Skill_Ice_Comet                = 40489
-A.Skill_Shooting_Star            = 40493
-A.Skill_Inner_Light              = 40478
-A.Skill_Radiant_Magelight        = 40483
 A.Skill_Entropy                  = 28567
 A.Skill_Degeneration             = 40457
 A.Skill_Structured_Entropy       = 40452
@@ -642,8 +646,6 @@ A.Skill_Fire_Rune                = 31632
 A.Skill_Scalding_Rune            = 40465
 A.Skill_Volcanic_Rune            = 40470
 A.Skill_Equilibrium              = 48135
-A.Skill_Spell_Symmetry           = 40445
-A.Skill_Balance                  = 48144
 
 -- UNDAUNTED ----------------
 A.Skill_Trapping_Webs            = 39425
