@@ -4029,6 +4029,12 @@ E.EffectOverride = {
     [107583] = { refreshOnly = true }, -- Mend Wounds (Mend Wounds)
     [107579] = { duration = 0, forcedContainer = 'short' }, -- Mend Wounds (Mend Wounds)
 
+    [107632] = { forcedContainer = 'short' }, -- Major Resolve (Mend Spirit)
+    [107631] = { forcedContainer = 'short' }, -- Major Ward (Mend Spirit)
+
+    [103752] = { forcedContainer = 'short' }, -- Major Resolve (Mend Spirit)
+    [103751] = { forcedContainer = 'short' }, -- Major Ward (Mend Spirit)
+
     -- Undaunted
     [55584] = { icon = 'LuiExtended/media/icons/abilities/passive_undaunted_undaunted_command.dds' }, -- Undaunted Command (Undaunted Command - Rank 1)
     [55606] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_undaunted_command.dds' }, -- Undaunted Command (Undaunted Command - Rank 1)

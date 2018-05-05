@@ -5290,6 +5290,14 @@ debugAuras = {
             [107583] = true, -- Mend Wounds (Mend Wounds)
             [107579] = true, -- Mend Wounds (Mend Wounds)
 
+            [103747] = true, -- Mend Spirit (Mend Spirit)
+
+            [107632] = true, -- Major Resolve (Mend Spirit)
+            [107631] = true, -- Major Ward (Mend Spirit)
+
+            [103752] = true, -- Major Resolve (Mend Spirit)
+            [103751] = true, -- Major Ward (Mend Spirit)
+
             -- LEGERDEMAIN
             [63799] = true, -- Improved Hiding (Rank 1)
             [63800] = true, -- Improved Hiding (Rank 2)
