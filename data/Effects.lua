@@ -640,6 +640,11 @@ E.EffectCreateSkillAura = {
     [62484] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds', name = A.Skill_Pierce_Armor, consolidate = true }, -- Major Fracture --> Pierce Armor
     [62485] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds', name = A.Skill_Pierce_Armor, consolidate = true }, -- Major Breach --> Pierce Armor
 
+    -- Dual Wield
+    [68807] = { icon = 'esoui/art/icons/ability_dualwield_003.dds', name = A.Skill_Hidden_Blade, consolidate = true, extendedDisplay = true }, -- Major Brutality (Hidden Blade)
+    [68859] = { icon = 'esoui/art/icons/ability_dualwield_003_b.dds', name = A.Skill_Shrouded_Daggers, consolidate = true, extendedDisplay = true }, -- Major Brutality (Shrouded Daggers)
+    [68814] = { icon = 'esoui/art/icons/ability_dualwield_003_a.dds', name = A.Skill_Flying_Blade, consolidate = true, extendedDisplay = true }, -- Major Brutality (Flying Blade)
+
 	-- Destruction Staff
 	[53881] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach --> Weakness to Elements
 
@@ -696,6 +701,12 @@ E.EffectCreateSkillAura = {
 
     [40443] = { icon = 'esoui/art/icons/ability_mageguild_003_b.dds', name = A.Skill_Balance, consolidate = true }, -- Balance --> Major Ward
     [80160] = { icon = 'esoui/art/icons/ability_mageguild_003_b.dds', name = A.Skill_Balance, consolidate = true }, -- Balance --> Major Resolve
+
+    -- Psijic Order
+
+    [103521] = { icon = 'esoui/art/icons/ability_psijic_005.dds', name = A.Skill_Accelerate, consolidate = true, extendedDisplay = true }, -- Minor Force --> Accelerate
+    [103708] = { icon = 'esoui/art/icons/ability_psijic_005_a.dds', name = A.Skill_Channeled_Acceleration, consolidate = true, extendedDisplay = true }, -- Minor Force --> Channeled Acceleration
+    [103712] = { icon = 'esoui/art/icons/ability_psijic_005_b.dds', name = A.Skill_Race_Against_Time, consolidate = true, extendedDisplay = true }, -- Minor Force --> Race Against Time
 
     -- SETS
     [106867] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds', name = A.Set_Grace_of_Gloom, alwaysShow = true }, -- Major Evasion --> Grace of Gloom
@@ -3703,6 +3714,10 @@ E.EffectOverride = {
     [62529] = { name = A.Skill_Quick_Cloak }, -- Blade Cloak (Quick Cloak)
     [62547] = { name = A.Skill_Deadly_Cloak }, -- Blade Cloak (Deadly Cloak)
 
+    [68807] = { consolidateExtra = true }, -- Major Brutality (Hidden Blade)
+    [68859] = { consolidateExtra = true }, -- Major Brutality (Shrouded Daggers)
+    [68814] = { consolidateExtra = true }, -- Major Brutality (Flying Blade)
+
     -----------------------------------------
     -- BOW ACTIVES --------------------------
     -----------------------------------------
@@ -4031,6 +4046,10 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     [104075] = { hideReduce = true }, -- Borrowed Time (Borrowed Time)
+
+    [103521] = { consolidateExtra = true }, -- Minor Force (Accelerate)
+    [103708] = { consolidateExtra = true }, -- Minor Force (Channeled Acceleration)
+    [103712] = { consolidateExtra = true }, -- Minor Force (Race Against Time)
 
     [107583] = { refreshOnly = true }, -- Mend Wounds (Mend Wounds)
     [107579] = { duration = 0, forcedContainer = 'short' }, -- Mend Wounds (Mend Wounds)

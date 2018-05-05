@@ -461,6 +461,9 @@ A.Skill_Rending_Slashes             = 38839
 A.Skill_Blood_Craze                 = 38845
 A.Skill_Quick_Cloak                 = 38901
 A.Skill_Deadly_Cloak                = 38906
+A.Skill_Hidden_Blade                = 21157
+A.Skill_Shrouded_Daggers            = 38914
+A.Skill_Flying_Blade                = 38910
 
 -- Bow
 A.Skill_Magnum_Shot                 = 38672
@@ -508,6 +511,9 @@ A.Skill_Ice_Comet                   = 40489
 
 -- Psijic Order
 A.Skill_Concentrated_Barrier        = 103888
+A.Skill_Accelerate                  = 103503
+A.Skill_Channeled_Acceleration      = 103706
+A.Skill_Race_Against_Time           = 103710
 A.Skill_Symbiosis                   = 103755
 
 -- ---------------------------------------------------
