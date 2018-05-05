@@ -4963,6 +4963,165 @@ debugAuras = {
             [63119] = true, -- Major Resolve (Unstoppable)
             [63120] = true, -- Major Ward (Unstoppable)
 
+            ------------------------------
+            -- LEGERDEMAIN PASSIVES
+            ------------------------------
+
+            [63799] = true, -- Improved Hiding (Rank 1)
+            [63800] = true, -- Improved Hiding (Rank 2)
+            [63801] = true, -- Improved Hiding (Rank 3)
+            [63802] = true, -- Improved Hiding (Rank 4)
+
+            [63803] = true, -- Light Fingers (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [63804] = true, -- Light Fingers (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [63805] = true, -- Light Fingers (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [63806] = true, -- Light Fingers (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
+
+            [63807] = true, -- Trafficker (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [63808] = true, -- Trafficker (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [63809] = true, -- Trafficker (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [63810] = true, -- Trafficker (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
+
+            [63811] = true, -- Locksmith (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [63812] = true, -- Locksmith (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [63813] = true, -- Locksmith (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [63814] = true, -- Locksmith (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
+
+            [63815] = true, -- Kickback (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [63816] = true, -- Kickback (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [63817] = true, -- Kickback (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [63818] = true, -- Kickback (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
+
+            ------------------------------
+            -- SOUL MAGIC PASSIVES
+            ------------------------------
+
+            [39266] = true, -- Soul Shatter (Rank 1)
+            [39267] = true, -- Soul Shatter
+            [39268] = true, -- Soul Shatter
+            [45583] = true, -- Soul Shatter (Rank 2)
+            [45584] = true, -- Soul Shatter
+            [45585] = true, -- Soul Shatter
+
+            [39269] = true, -- Soul Summons (Rank 1)
+            [45590] = true, -- Soul Summons (Rank 2)
+            [43752] = true, -- Soul Summons
+
+            [39263] = true, -- Soul Lock (Rank 1)
+            [39264] = true, -- Soul Trap
+            [45580] = true, -- Soul Lock (Rank 2)
+            [45582] = true, -- Soul Trap
+
+            ------------------------------
+            -- VAMPIRE PASSIVES
+            ------------------------------
+
+            [35770] = true, -- Vampirism Base
+            [44767] = true, -- Sense Fed Upon
+            [80225] = true, -- Timer Reducer
+            [35771] = true, -- Stage 1 Vampirism
+            [38414] = true, -- Stage 1 Vampirism
+            [35776] = true, -- Stage 2 Vampirism
+            [35774] = true, -- Stage 2 Vampirism
+            [38415] = true, -- Stage 2 Vampirism
+            [35783] = true, -- Stage 3 Vampirism
+            [35784] = true, -- Stage 3 Vampirism
+            [35785] = true, -- Stage 3 Vampirism
+            [38416] = true, -- Stage 3 Vampirism
+            [35792] = true, -- Stage 4 Vampirism
+            [35790] = true, -- Stage 4 Vampirism
+            [35791] = true, -- Stage 4 Vampirism
+            [38417] = true, -- Stage 4 Vampirism
+
+            [33152] = true, -- Feed
+            [33177] = true, -- Feed
+            [33175] = true, -- Feed
+            [32901] = true, -- Essenece Drained
+
+            [42054] = true, -- Savage Feeding (Rank 1)
+            [33182] = true, -- Uber Attack
+            [33183] = true, -- Off-Balance Self
+            [46045] = true, -- Savage Feeding (Rank 2)
+            [46047] = true, -- Uber Attack
+            [46046] = true, -- Off-Balance Self
+
+            [33095] = true, -- Supernatural Recovery (Rank 1)
+            [46041] = true, -- Supernatural Recovery (Rank 2)
+
+
+            [33091] = true, -- Blood Ritual (Rank 1)
+            -- ================================================================================= THESE NEED CHECKED LATER
+            [40349] = true, -- Feed
+            [40351] = true, -- Feed
+            [40350] = true, -- Feed
+            [40353] = true, -- Uber Attack
+            [40359] = true, -- Fed on ally
+            --[40355] = true, -- Ally Feed
+            [40360] = true, -- Vampirism
+            -- ================================================================================= THESE NEED CHECKED LATER
+
+            [33096] = true, -- Undeath (Rank 1)
+            [46040] = true, -- Undeath (Rank 2)
+
+            [33093] = true, -- Unnatural Resistance (Rank 1)
+
+            [33090] = true, -- Dark Stalker (Rank 1)
+
+
+            ------------------------------
+            -- WEREWOLF PASSIVES
+            ------------------------------
+
+            [35658] = true, -- Lycanthrophy
+            -- ROOM HERE FOR LUPINUS
+            [39033] = true, -- Begin Werewolf
+            [39035] = true, -- Werewolf
+            [39023] = true, -- Charge Werewolf
+            [39025] = true, -- Charge Werewolf
+            [39038] = true, -- Werewolf Effects
+            [39043] = true, -- TransformBonus Movement
+            [39051] = true, -- Kill Trigger
+            [48497] = true, -- Sense Fed Upon
+
+            [39477] = true, -- De-Werewolf
+            [39478] = true, -- Remove Sprint
+            [80194] = true, -- Remove Pets
+
+            [32464] = true, -- Light Attack
+            [89146] = true, -- Werewolf Bleed
+            [32477] = true, -- Heavy Attack (Were)
+            [32479] = true, -- Heavy Attack
+            [32478] = true, -- Heavy Attack Damage Bonus
+            [32480] = true, -- Heavy Attack Werewolf
+            [32494] = true, -- Heavy Attack
+            [60773] = true, -- Stamina Return
+            [40544] = true, -- Keep Corpse
+            [40545] = true, -- Keep Corpse
+
+            [32636] = true, -- Pursuit (Rank 1)
+            [46142] = true, -- Pursuit (Rank 2)
+
+            [32634] = true, -- Devour (Rank 1)
+            [39050] = true, -- Devour Passive
+            [33208] = true, -- Devour
+            [33209] = true, -- Devour
+            [37233] = true, -- Devour
+            [48496] = true, -- Devour
+
+            [32637] = true, -- Blood Rage (Rank 1)
+            [33470] = true, -- Blood Rage
+            [46135] = true, -- Blood Rage (Rank 2)
+            [46136] = true, -- Blood Rage
+
+            [32639] = true, -- Bloodmoon (Rank 1)
+
+            [32638] = true, -- Savage Strength (Rank 1)
+            [46139] = true, -- Savage Strength (Rank 2)
+
+            [32641] = true, -- Call of the Pack (Rank 1)
+            [80283] = true, -- Call of the Pack
+            [46137] = true, -- Call of the Pack (Rank 2)
+            [80282] = true, -- Call of the Pack
 
             ------------------------------
             -- DARK BROTHERHOOD PASSIVES
@@ -5264,6 +5423,15 @@ debugAuras = {
             [104009] = true, -- Time Stop (Time Stop)
             [104050] = true, -- Time Stop (Time Stop)
 
+            [104079] = true, -- Time Freeze (Time Freeze)
+            [104122] = true, -- Time Freeze (Time Freeze)
+            [109179] = true, -- Time Freeze (Time Freeze)
+            [104080] = true, -- Time Freeze (Time Freeze)
+            [104081] = true, -- Time Freeze (Time Freeze)
+            [104082] = true, -- Time Freeze (Time Freeze)
+            [104083] = true, -- Time Freeze (Time Freeze)
+            [104085] = true, -- Time Freeze (Time Freeze)
+
             [104059] = true, -- Borrowed Time (Borrowed Time)
             [109178] = true, -- Borrowed Time (Borrowed Time)
             [104071] = true, -- Borrowed Time (Borrowed Time)
@@ -5278,6 +5446,10 @@ debugAuras = {
             [103571] = true, -- Elemental Weapon (Elemental Weapon)
             [103572] = true, -- Elemental Weapon (Elemental Weapon)
 
+            [103623] = true, -- Crushing Weapon (Crushing Weapon)
+            [103626] = true, -- Crushing Weapon (Crushing Weapon)
+            [103628] = true, -- Crushing Weapon (Crushing Weapon)
+
             [103503] = true, -- Accelerate (Accelerate)
             [103520] = true, -- Major Expedition (Accelerate)
             [103521] = true, -- Minor Force (Accelerate)
@@ -5286,167 +5458,61 @@ debugAuras = {
             [103707] = true, -- Major Expedition (Channeled Acceleration)
             [103708] = true, -- Minor Force (Channeled Acceleration)
 
+            [103710] = true, -- Race Against Time (Race Against Time)
+            [103711] = true, -- Major Expedition (Race Against Time)
+            [103712] = true, -- Minor Force (Race Against Time)
+            [103720] = true, -- Race Against Time (Race Against Time)
+
             [103543] = true, -- Mend Wounds (Mend Wounds)
             [107583] = true, -- Mend Wounds (Mend Wounds)
             [107579] = true, -- Mend Wounds (Mend Wounds)
 
             [103747] = true, -- Mend Spirit (Mend Spirit)
-
+            [107629] = true, -- Mend Spirit (Mend Spirit)
             [107632] = true, -- Major Resolve (Mend Spirit)
             [107631] = true, -- Major Ward (Mend Spirit)
-
+            [107630] = true, -- Mend Spirit (Mend Spirit)
             [103752] = true, -- Major Resolve (Mend Spirit)
             [103751] = true, -- Major Ward (Mend Spirit)
 
-            -- LEGERDEMAIN
-            [63799] = true, -- Improved Hiding (Rank 1)
-            [63800] = true, -- Improved Hiding (Rank 2)
-            [63801] = true, -- Improved Hiding (Rank 3)
-            [63802] = true, -- Improved Hiding (Rank 4)
+            [103755] = true, -- Symbiosis (Symbiosis)
+            [107636] = true, -- Symbiosis (Symbiosis)
+            [107637] = true, -- Symbiosis (Symbiosis)
+            [107638] = true, -- Symbiosis (Symbiosis)
 
-            [63803] = true, -- Light Fingers (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [63804] = true, -- Light Fingers (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [63805] = true, -- Light Fingers (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [63806] = true, -- Light Fingers (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103492] = true, -- Meditate (Meditate)
+            [103493] = true, -- Snare (Meditate)
+            [103499] = true, -- Meditate (Meditate)
+            [103500] = true, -- Meditate (Meditate)
+            [103501] = true, -- Meditate (Meditate)
 
-            [63807] = true, -- Trafficker (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [63808] = true, -- Trafficker (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [63809] = true, -- Trafficker (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [63810] = true, -- Trafficker (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103652] = true, -- Deep Thoughts (Deep Thoughts)
+            [103653] = true, -- Deep Thoughts (Deep Thoughts)
+            [103654] = true, -- Deep Thoughts (Deep Thoughts)
+            [103655] = true, -- Deep Thoughts (Deep Thoughts)
+            [103656] = true, -- Deep Thoughts (Deep Thoughts)
 
-            [63811] = true, -- Locksmith (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [63812] = true, -- Locksmith (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [63813] = true, -- Locksmith (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [63814] = true, -- Locksmith (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103665] = true, -- Introspection (Introspection)
+            [103666] = true, -- Introspection (Introspection)
+            [103667] = true, -- Introspection (Introspection)
+            [103668] = true, -- Introspection (Introspection)
+            [103669] = true, -- Introspection (Introspection)
+            [103670] = true, -- Introspection (Introspection)
 
-            [63815] = true, -- Kickback (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [63816] = true, -- Kickback (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [63817] = true, -- Kickback (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
-            [63818] = true, -- Kickback (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103478] = true, -- Undo (Undo)
+            [108609] = true, -- Undo (Undo)
 
-            -- SOUL MAGIC
-            [39266] = true, -- Soul Shatter (Rank 1)
-            [39267] = true, -- Soul Shatter
-            [39268] = true, -- Soul Shatter
-            [45583] = true, -- Soul Shatter (Rank 2)
-            [45584] = true, -- Soul Shatter
-            [45585] = true, -- Soul Shatter
+            [103557] = true, -- Precognition (Precognition)
+            [108621] = true, -- Precognition (Precognition)
 
-            [39269] = true, -- Soul Summons (Rank 1)
-            [45590] = true, -- Soul Summons (Rank 2)
-            [43752] = true, -- Soul Summons
+            [103570] = true, -- Minor Protection (Temporal Guard)
+            [103564] = true, -- Temporal Guard (Temporal Guard)
+            [108641] = true, -- Temporal Guard (Temporal Guard)
 
-            [39263] = true, -- Soul Lock (Rank 1)
-            [39264] = true, -- Soul Trap
-            [45580] = true, -- Soul Lock (Rank 2)
-            [45582] = true, -- Soul Trap
+            ------------------------------
+            -- THIEVES GUILD PASSIVES
+            ------------------------------
 
-            -- VAMPIRE
-            [35770] = true, -- Vampirism Base
-            [44767] = true, -- Sense Fed Upon
-            [80225] = true, -- Timer Reducer
-            [35771] = true, -- Stage 1 Vampirism
-            [38414] = true, -- Stage 1 Vampirism
-            [35776] = true, -- Stage 2 Vampirism
-            [35774] = true, -- Stage 2 Vampirism
-            [38415] = true, -- Stage 2 Vampirism
-            [35783] = true, -- Stage 3 Vampirism
-            [35784] = true, -- Stage 3 Vampirism
-            [35785] = true, -- Stage 3 Vampirism
-            [38416] = true, -- Stage 3 Vampirism
-            [35792] = true, -- Stage 4 Vampirism
-            [35790] = true, -- Stage 4 Vampirism
-            [35791] = true, -- Stage 4 Vampirism
-            [38417] = true, -- Stage 4 Vampirism
-
-            [33152] = true, -- Feed
-            [33177] = true, -- Feed
-            [33175] = true, -- Feed
-            [32901] = true, -- Essenece Drained
-
-            [42054] = true, -- Savage Feeding (Rank 1)
-            [33182] = true, -- Uber Attack
-            [33183] = true, -- Off-Balance Self
-            [46045] = true, -- Savage Feeding (Rank 2)
-            [46047] = true, -- Uber Attack
-            [46046] = true, -- Off-Balance Self
-
-            [33095] = true, -- Supernatural Recovery (Rank 1)
-            [46041] = true, -- Supernatural Recovery (Rank 2)
-
-
-            [33091] = true, -- Blood Ritual (Rank 1)
-            -- ================================================================================= THESE NEED CHECKED LATER
-            [40349] = true, -- Feed
-            [40351] = true, -- Feed
-            [40350] = true, -- Feed
-            [40353] = true, -- Uber Attack
-            [40359] = true, -- Fed on ally
-            --[40355] = true, -- Ally Feed
-            [40360] = true, -- Vampirism
-            -- ================================================================================= THESE NEED CHECKED LATER
-
-            [33096] = true, -- Undeath (Rank 1)
-            [46040] = true, -- Undeath (Rank 2)
-
-            [33093] = true, -- Unnatural Resistance (Rank 1)
-
-            [33090] = true, -- Dark Stalker (Rank 1)
-
-
-            -- WEREWOLF
-            [35658] = true, -- Lycanthrophy
-            -- ROOM HERE FOR LUPINUS
-            [39033] = true, -- Begin Werewolf
-            [39035] = true, -- Werewolf
-            [39023] = true, -- Charge Werewolf
-            [39025] = true, -- Charge Werewolf
-            [39038] = true, -- Werewolf Effects
-            [39043] = true, -- TransformBonus Movement
-            [39051] = true, -- Kill Trigger
-            [48497] = true, -- Sense Fed Upon
-
-            [39477] = true, -- De-Werewolf
-            [39478] = true, -- Remove Sprint
-            [80194] = true, -- Remove Pets
-
-            [32464] = true, -- Light Attack
-            [89146] = true, -- Werewolf Bleed
-            [32477] = true, -- Heavy Attack (Were)
-            [32479] = true, -- Heavy Attack
-            [32478] = true, -- Heavy Attack Damage Bonus
-            [32480] = true, -- Heavy Attack Werewolf
-            [32494] = true, -- Heavy Attack
-            [60773] = true, -- Stamina Return
-            [40544] = true, -- Keep Corpse
-            [40545] = true, -- Keep Corpse
-
-            [32636] = true, -- Pursuit (Rank 1)
-            [46142] = true, -- Pursuit (Rank 2)
-
-            [32634] = true, -- Devour (Rank 1)
-            [39050] = true, -- Devour Passive
-            [33208] = true, -- Devour
-            [33209] = true, -- Devour
-            [37233] = true, -- Devour
-            [48496] = true, -- Devour
-
-            [32637] = true, -- Blood Rage (Rank 1)
-            [33470] = true, -- Blood Rage
-            [46135] = true, -- Blood Rage (Rank 2)
-            [46136] = true, -- Blood Rage
-
-            [32639] = true, -- Bloodmoon (Rank 1)
-
-            [32638] = true, -- Savage Strength (Rank 1)
-            [46139] = true, -- Savage Strength (Rank 2)
-
-            [32641] = true, -- Call of the Pack (Rank 1)
-            [80283] = true, -- Call of the Pack
-            [46137] = true, -- Call of the Pack (Rank 2)
-            [80282] = true, -- Call of the Pack
-
-            -- THIEVES GUILD
             [74580] = true, -- Finders Keepers (Rank 1)
 
             [76454] = true, -- Swiftly Forgotten (Rank 1)
@@ -5467,7 +5533,10 @@ debugAuras = {
 
             [76453] = true, -- Veil of Shadows (Rank 1)
 
-            -- UNDAUNTED
+            ------------------------------
+            -- UNDAUNTED PASSIVES
+            ------------------------------
+
             [55584] = true, -- Undaunted Command (Rank 1)
             [55606] = true, -- Undaunted Command
             [55607] = true, -- Undaunted Command Magicka Rest
@@ -5479,19 +5548,6 @@ debugAuras = {
 
             [55366] = true, -- Undaunted Mettle (Rank 1)
             [55386] = true, -- Undaunted Mettle (Rank 2)
-
-
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
 
             ---------------------------------------------
             -- AVA PASSIVES  ----------------------------

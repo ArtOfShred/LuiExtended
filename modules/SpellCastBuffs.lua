@@ -2370,8 +2370,18 @@ end
 function SCB.OnDeath(eventCode, unitTag, isDead)
     -- Wipe buffs
     if isDead then
-        for effectType = 1, 2 do
-            g_effectsList[ unitTag .. effectType ] = {}
+        if unitTag == "player" then
+            g_effectsList.player1 = {}
+            g_effectsList.player2 = {}
+            g_effectsList.ground = {}
+            g_effectsList.promb_ground = {}
+            g_effectsList.promd_ground = {}
+            g_effectsList.promb_player = {}
+            g_effectsList.promd_player = {}
+        else
+            for effectType = 1, 2 do
+                g_effectsList[ unitTag .. effectType ] = {}
+            end
         end
     end
 end

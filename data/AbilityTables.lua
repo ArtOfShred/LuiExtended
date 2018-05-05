@@ -508,6 +508,7 @@ A.Skill_Ice_Comet                   = 40489
 
 -- Psijic Order
 A.Skill_Concentrated_Barrier        = 103888
+A.Skill_Symbiosis                   = 103755
 
 -- ---------------------------------------------------
 -- ALLIANCE WAR --------------------------------------

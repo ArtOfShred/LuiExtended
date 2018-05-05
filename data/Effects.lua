@@ -1145,9 +1145,11 @@ E.BarHighlightOverride = {
 
     [103488] = { newId = 104050 }, -- Time Stop
     [104059] = { newId = 104078 }, -- Borrowed Time
+    [104079] = { newId = 104085 }, -- Time Freeze
 
     [103503] = { newId = 103521, showFakeAura = true, noRemove = true }, -- Accelerate --> Minor Force
     [103706] = { newId = 103708, showFakeAura = true, noRemove = true }, -- Channeled Acceleration --> Minor Force
+    [103710] = { newId = 103712, showFakeAura = true, noRemove = true }, -- Race Against Time --> Minor Force
 
 }
 
@@ -1522,6 +1524,11 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [104071] = true, -- Borrowed Time (Borrowed Time)
     [104072] = true, -- Borrowed Time (Borrowed Time)
     [104073] = true, -- Borrowed Time (Borrowed Time)
+
+    [104080] = true, -- Time Freeze (Time Freeze)
+    [104081] = true, -- Time Freeze (Time Freeze)
+    [104082] = true, -- Time Freeze (Time Freeze)
+    [104083] = true, -- Time Freeze (Time Freeze)
 
     -- Human NPC
     [10648] = true, -- Throw Oil (Synergy)
@@ -3879,7 +3886,6 @@ E.EffectOverride = {
     [40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = A.Passive_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
 
     -- Werewolf
-
     [33208] = { hide = true }, -- Devour (Devour - Rank 1)
 
     [35658] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_lycanthrophy.dds' }, -- Lycanthrophy
@@ -4029,13 +4035,32 @@ E.EffectOverride = {
     [107583] = { refreshOnly = true }, -- Mend Wounds (Mend Wounds)
     [107579] = { duration = 0, forcedContainer = 'short' }, -- Mend Wounds (Mend Wounds)
 
+    [107629] = { refreshOnly = true }, -- Mend Spirit (Mend Spirit)
     [107632] = { forcedContainer = 'short' }, -- Major Resolve (Mend Spirit)
     [107631] = { forcedContainer = 'short' }, -- Major Ward (Mend Spirit)
-
+    [107630] = { duration = 0, forcedContainer = 'short' }, -- Mend Spirit (Mend Spirit)
     [103752] = { forcedContainer = 'short' }, -- Major Resolve (Mend Spirit)
     [103751] = { forcedContainer = 'short' }, -- Major Ward (Mend Spirit)
 
-    -- Undaunted
+    [107636] = { refreshOnly = true }, -- Symbiosis (Symbiosis)
+    [107637] = { name = A.Skill_Symbiosis, duration = 0, forcedContainer = 'short' }, -- Symbiosis HA (Symbiosis)
+
+    [103492] = { forcedContainer = 'short' }, -- Meditate (Meditate)
+    [103500] = { icon = 'esoui/art/icons/ability_psijic_004.dds' }, -- Meditate (Meditate)
+    [103501] = { icon = 'esoui/art/icons/ability_psijic_004.dds' }, -- Meditate (Meditate)
+
+    [103652] = { forcedContainer = 'short' }, -- Deep Thoughts (Deep Thoughts)
+    [103655] = { icon = 'esoui/art/icons/ability_psijic_004_a.dds' }, -- Deep Thoughts (Deep Thoughts)
+    [103656] = { icon = 'esoui/art/icons/ability_psijic_004_a.dds' }, -- Deep Thoughts (Deep Thoughts)
+
+    [103665] = { forcedContainer = 'short' }, -- Introspection (Introspection)
+    [103668] = { icon = 'esoui/art/icons/ability_psijic_004_b.dds' }, -- Introspection (Introspection)
+    [103669] = { icon = 'esoui/art/icons/ability_psijic_004_b.dds' }, -- Introspection (Introspection)
+
+    ----------------------------------------------------------------
+    -- UNDAUNTED PASSIVES ---------------------------------------
+    ----------------------------------------------------------------
+
     [55584] = { icon = 'LuiExtended/media/icons/abilities/passive_undaunted_undaunted_command.dds' }, -- Undaunted Command (Undaunted Command - Rank 1)
     [55606] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_undaunted_command.dds' }, -- Undaunted Command (Undaunted Command - Rank 1)
     [55607] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_undaunted_command.dds', name = A.Passive_Undaunted_Command }, -- Undaunted Command Magicka Rest (Undaunted Command - Rank 1)
