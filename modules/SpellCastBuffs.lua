@@ -2610,12 +2610,12 @@ function SCB.MenuPreview(ability)
 	local effects = ability.effects
 	if ( effects ~= nil) then
 		local routing = { }
-		routing[1] = { "player1" },
-		routing[2] = { "reticleover1" },
-		routing[3] = { "promb_player" },
-		routing[4] = { "player2" },
-		routing[5] = { "reticleover2" },
-		routing[6] = { "promd_player" },
+		routing[1] = { "player1" }
+		routing[2] = { "reticleover1" }
+		routing[3] = { "promb_player" }
+		routing[4] = { "player2" }
+		routing[5] = { "reticleover2" }
+		routing[6] = { "promd_player" }
 		
 		local abilityId = 999000
 		local icon = ""
