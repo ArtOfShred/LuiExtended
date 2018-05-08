@@ -162,8 +162,7 @@ local g_playerActive = false
 local g_playerDead   = false
 local g_playerResurectStage = nil
 
--- Font to be used on icons
--- "ZoFontWindowSubtitle" or ours:
+-- Font to be used on icons "ZoFontWindowSubtitle" or ours:
 --local g_buffsFont = "/LuiExtended/media/fonts/fontin_sans_r.otf|16|outline"
 --local g_buffsFont = "$(MEDIUM_FONT)|17|outline"
 local g_buffsFont
@@ -185,25 +184,25 @@ local g_grimFocusCount = 0
 
 -- Double check that the slot is actually eligible for use
 local function HasFailure( slotIndex )
-    if ( HasCostFailure( slotIndex ) ) then
+    if HasCostFailure(slotIndex) then
         return true
-    elseif ( HasRequirementFailure( slotIndex ) ) then
+    elseif HasRequirementFailure(slotIndex) then
         return true
-    elseif ( HasWeaponSlotFailure( slotIndex ) ) then
+    elseif HasWeaponSlotFailure(slotIndex) then
         return true
-    elseif ( HasTargetFailure( slotIndex ) ) then
+    elseif HasTargetFailure(slotIndex) then
         return true
-    elseif ( HasRangeFailure( slotIndex ) ) then
+    elseif HasRangeFailure(slotIndex) then
         return true
-    elseif ( HasStatusEffectFailure( slotIndex )  ) then
+    elseif HasStatusEffectFailure(slotIndex) then
         return true
-    elseif ( HasFallingFailure( slotIndex ) ) then
+    elseif HasFallingFailure(slotIndex) then
         return true
-    elseif ( HasSwimmingFailure( slotIndex ) ) then
+    elseif HasSwimmingFailure(slotIndex) then
         return true
-    elseif ( HasMountedFailure( slotIndex ) ) then
+    elseif HasMountedFailure(slotIndex) then
         return true
-    elseif ( HasReincarnatingFailure( slotIndex ) ) then
+    elseif HasReincarnatingFailure(slotIndex) then
         return true
     end
     return false
@@ -731,16 +730,16 @@ function SCB.AddToCustomList(list, input)
             local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(icon .. " [" .. id .. "] " .. name .. " added to " .. listRef, true)
+            printToChat(strformat("<<1>> [<<2>>] <<3>> added to <<4>>", icon, id, name, listRef), true)
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat("Could not add [" .. input .. "] to " .. listRef .. " That abilityId does not exist.", true)
+            printToChat(strformat("Could not add [<<1>>] to <<2>>. That abiilityId does not exist.", input, listRef), true)
         end
     else
         if input ~= "" then
             list[input] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(input .. " added to " .. listRef, true)
+            printToChat(strformat("<<1>> added to <<2>>", input, listRef), true)
         end
     end
     SCB.Reset()
@@ -755,16 +754,16 @@ function SCB.RemoveFromCustomList(list, input)
             local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(icon .. " [" .. id .. "] " .. name .. " removed from " .. listRef, true)
+            printToChat(strformat("<<1>> [<<2>>] <<3>> removed from <<4>>", icon, id, name, listRef), true)
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat("Could not remove [" .. input .. "] to " .. listRef .. " That abilityId does not exist.", true)
+            printToChat(strformat("Could not remove [<<1>>] to <<2>>. That abilityId does not exist.", input, listRef), true)
         end
     else
         if input ~= "" then
             list[input] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(input .. " removed from " .. listRef, true)
+            printToChat(strformat("<<1>> removed from <<2>>", input, listRef), true)
         end
     end
     SCB.Reset()
@@ -780,33 +779,32 @@ local function SetWerewolfIcon()
 end
 
 function SCB.WerewolfState(eventCode, werewolf, onActivation)
-
 	if werewolf then
 		for i = 1, 4 do
 			name, _, discovered, skillLineId = GetSkillLineInfo(SKILL_TYPE_WORLD, i)
 			if skillLineId == 50 and unlocked then
-					g_werewolfCounter = g_werewolfCounter + 1
-					if g_werewolfCounter == 3 or onActivation then
-						-- Pull specific morph info
-						SetWerewolfIcon()
-						local currentPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
-						local duration = ( currentPower / 27 )
-						-- Round up by 1 from any decimal number
-						local durationFormatted = mathfloor(duration + 0.999) * 1000
-						local currentTime = GetGameTimeMilliseconds()
-						local endTime = currentTime + durationFormatted
-						g_effectsList.player1["Werewolf Indicator"] = {
-							target="player", type=1,
-							id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-							dur=0, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
-							forced = "short",
-							restart=true, iconNum=0, overrideDur = 38000
-						}
+				g_werewolfCounter = g_werewolfCounter + 1
+				if g_werewolfCounter == 3 or onActivation then
+					-- Pull specific morph info
+					SetWerewolfIcon()
+					local currentPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
+					local duration = ( currentPower / 27 )
+					-- Round up by 1 from any decimal number
+					local durationFormatted = mathfloor(duration + 0.999) * 1000
+					local currentTime = GetGameTimeMilliseconds()
+					local endTime = currentTime + durationFormatted
+					g_effectsList.player1["Werewolf Indicator"] = {
+						target="player", type=1,
+						id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
+						dur=0, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
+						forced = "short",
+						restart=true, iconNum=0, overrideDur = 38000
+					}
 
-						eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SCB.OnPowerUpdate)
-						eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
-						g_werewolfCounter = 0
-					end
+					eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SCB.OnPowerUpdate)
+					eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
+					g_werewolfCounter = 0
+				end
 				return
 			end
 		end
@@ -826,11 +824,9 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
         eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
         g_werewolfCounter = 0
     end
-
 end
 
 function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
-
     local currentPower = powerValue
     local duration = ( currentPower / 27 )
     -- Round up by 1 from any decimal number
@@ -848,7 +844,6 @@ function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue
     else
         g_effectsList.player1["Werewolf Indicator"] = nil
     end
-
 end
 
 function SCB.DuelStart()
@@ -913,7 +908,6 @@ end
 function SCB.MountStatus(eventCode, mounted)
     -- Remove icon first
     g_effectsList.player1["Mount"] = nil
-
     if mounted and not SCB.SV.IgnoreMount then
         g_effectsList.player1["Mount"] = {
             target="player", type=1,
@@ -932,7 +926,7 @@ function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
 end
 
 function SCB.CollectibleBuff()
-    -- PETS
+    -- Pets
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SCB.SV.IgnorePet and not IsPlayerInAvAWorld() then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
         g_effectsList.player1["PetType"] = {
@@ -946,13 +940,11 @@ function SCB.CollectibleBuff()
         g_effectsList.player1["PetType"] = nil
     end
 
-    -- ASSISTANTS
+    -- Assistants
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 and not SCB.SV.IgnoreAssistant and not IsPlayerInAvAWorld() then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
         local CollectibleName = GetCollectibleName(Collectible)
-
         local iconAssistant = E.AssistantIcons[CollectibleName] ~= nil and E.AssistantIcons[CollectibleName] or ''
-
         g_effectsList.player1["AssistantType"] = {
             target="player", type=1,
             name=CollectibleName, icon=iconAssistant,
@@ -997,7 +989,7 @@ function SCB.SetIconsAlignment( value )
     end
 end
 
-function SCB.SetIconsAlignmentProminentBuff ( value )
+function SCB.SetIconsAlignmentProminentBuff( value )
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.ProminentBuffAlignment
     end
@@ -1019,7 +1011,7 @@ function SCB.SetIconsAlignmentProminentBuff ( value )
     end
 end
 
-function SCB.SetIconsAlignmentProminentDebuff ( value )
+function SCB.SetIconsAlignmentProminentDebuff( value )
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.ProminentDebuffAlignment
     end
@@ -1683,7 +1675,6 @@ end
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
-
         -- Create fake ground aura
         if E.EffectGroundDisplay[abilityId] then
             if changeType ~= EFFECT_RESULT_FADED then
@@ -1784,8 +1775,12 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
 
     if E.EffectOverride[abilityId] then
-        if E.EffectOverride[abilityId].hide == true then return end
-        if E.EffectOverride[abilityId].hideReduce == true and SCB.SV.HideReduce then return end
+        if E.EffectOverride[abilityId].hide == true then
+            return
+        end
+        if E.EffectOverride[abilityId].hideReduce == true and SCB.SV.HideReduce then
+            return
+        end
         iconName = E.EffectOverride[abilityId].icon or iconName
         effectName = E.EffectOverride[abilityId].name or effectName
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
@@ -1820,7 +1815,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
-    if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then return end
+    if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then
+        return
+    end
 
     -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
     if unitTag ~= "player" then
@@ -2224,7 +2221,6 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 
     -- Try to remove effect like Ground Runes and Traps (we check this before we filter for other result types)
     if E.IsGroundMineDamage[abilityId] and IsResultDamage[result] and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER or targetType == COMBAT_UNIT_TYPE_GROUP) then
-
         for _, effectsList in pairs( {g_effectsList.ground, g_effectsList.promb_ground, g_effectsList.promd_ground} ) do
             for k, v in pairs(effectsList) do
                 -- Check if we have a buff up a mine, if we do also compare the names to make sure they are equivalent. This prevents removing Daedric Mines with Rearming Trap for example.
@@ -2814,7 +2810,6 @@ function SCB.updateBar( currentTime, sortedList, container )
             end
         end
     end
-
 end
 
 function SCB.updateIcons( currentTime, sortedList, container )
@@ -2964,7 +2959,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
         end
         if effect.restart and buff.cd ~= nil then
             -- Modify abilities with forced maximum durations.
-			if effect.overrideDur then 
+			if effect.overrideDur then
 				effect.dur = effect.overrideDur
 			end
             if remain == nil or effect.dur == nil or effect.dur == 0 then
@@ -3079,7 +3074,6 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
 end
 
 function SCB.OnPlayerActivated(eventCode)
-
     g_playerActive = true
     g_playerResurectStage = nil
 
@@ -3226,7 +3220,6 @@ function SCB.UpdateContextHideList()
             hidePlayerEffects[k] = v
         end
     end
-
     if SCB.SV.IgnoreMundusTarget then
         for k, v in pairs(E.IsBoon) do
             hideTargetEffects[k] = v
@@ -3308,7 +3301,6 @@ function SCB.UpdateContextHideList()
             hideTargetEffects[k] = v
         end
     end
-
     if SCB.SV.IgnoreFoodPlayer then
         for k, v in pairs(E.IsFoodBuff) do
             hidePlayerEffects[k] = v
@@ -3319,7 +3311,6 @@ function SCB.UpdateContextHideList()
             hideTargetEffects[k] = v
         end
     end
-
     if SCB.SV.IgnoreExperiencePlayer then
         for k, v in pairs(E.IsExperienceBuff) do
             hidePlayerEffects[k] = v
@@ -3330,17 +3321,14 @@ function SCB.UpdateContextHideList()
             hideTargetEffects[k] = v
         end
     end
-
     if not SCB.SV.ShowBlockPlayer then
         for k, v in pairs(E.IsBlock) do
             hidePlayerEffects[k] = v
         end
     end
-
     if not SCB.SV.ShowBlockTarget then
         for k, v in pairs(E.IsBlock) do
             hideTargetEffects[k] = v
         end
     end
-
 end
