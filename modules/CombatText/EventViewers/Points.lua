@@ -73,6 +73,8 @@ function CTV:OnEvent(pointType, value)
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activePoints = self.activePoints - 1
-        if (self.activePoints == 0) then self.locationOffset = 0 end
+        if (self.activePoints == 0) then
+            self.locationOffset = 0
+        end
     end, animation:GetDuration())
 end

@@ -1,6 +1,6 @@
 LUIE.CombatTextEventViewer = ZO_Object:Subclass()
-
 local CTV = LUIE.CombatTextEventViewer
+
 local C = LUIE.CombatTextConstants
 local strfmt = string.format
 local callbackManager = CALLBACK_MANAGER
@@ -101,9 +101,9 @@ function CTV:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical,
         textFormat = S.formats.healingcritical
         fontSize = S.fontSizes.healingcritical
         if S.toggles.criticalHealingOverride then
-                textColor = S.colors.criticalHealingOverride
+            textColor = S.colors.criticalHealingOverride
         else
-                textColor = S.colors.healing
+            textColor = S.colors.healing
         end
     elseif (isEnergize) then
         fontSize = S.fontSizes.gainLoss
@@ -143,9 +143,9 @@ function CTV:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical,
         textFormat = S.formats.hotcritical
         fontSize = S.fontSizes.hotcritical
         if S.toggles.criticalHealingOverride then
-                textColor = S.colors.criticalHealingOverride
+            textColor = S.colors.criticalHealingOverride
         else
-                textColor = S.colors.healing
+            textColor = S.colors.healing
         end
     end
 

@@ -36,17 +36,17 @@ local hidePlayerEffects = { }
 local hideTargetEffects = { }
 
 local windowTitles = {
-    playerb     		= GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
-    playerd     		= GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
-    player1     		= GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
-    player2     		= GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
-    player_long 		= GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS),
-    targetb     		= GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
-    targetd     		= GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
-    target1     		= GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
-    target2     		= GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
-	prominentbuffs		= GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS),
-	prominentdebuffs	= GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS),
+    playerb             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
+    playerd             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
+    player1             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
+    player2             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
+    player_long         = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS),
+    targetb             = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
+    targetd             = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
+    target1             = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
+    target2             = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
+    prominentbuffs      = GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS),
+    prominentdebuffs    = GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS),
 }
 
 SCB.Enabled = false
@@ -138,10 +138,10 @@ SCB.D = {
     ProminentProgressBuffC2          = { 0, .4, 0 },
     ProminentProgressDebuffC1        = { 1, 0, 0 },
     ProminentProgressDebuffC2        = { .4, 0, 0 },
-	ProminentBuffAlignment		     = "Bottom",
-	ProminentDebuffAlignment		 = "Bottom",
-	ProminentBuffReverseSort		 = false,
-	ProminentDebuffReverseSort 		 = false,
+    ProminentBuffAlignment           = "Bottom",
+    ProminentDebuffAlignment         = "Bottom",
+    ProminentBuffReverseSort         = false,
+    ProminentDebuffReverseSort       = false,
     ProminentBuffLabelDirection      = "Left",
     ProminentDebuffLabelDirection    = "Right",
     PromBuffTable                    = {},
@@ -162,8 +162,7 @@ local g_playerActive = false
 local g_playerDead   = false
 local g_playerResurectStage = nil
 
--- Font to be used on icons
--- "ZoFontWindowSubtitle" or ours:
+-- Font to be used on icons "ZoFontWindowSubtitle" or ours:
 --local g_buffsFont = "/LuiExtended/media/fonts/fontin_sans_r.otf|16|outline"
 --local g_buffsFont = "$(MEDIUM_FONT)|17|outline"
 local g_buffsFont
@@ -185,25 +184,25 @@ local g_grimFocusCount = 0
 
 -- Double check that the slot is actually eligible for use
 local function HasFailure( slotIndex )
-    if ( HasCostFailure( slotIndex ) ) then
+    if HasCostFailure(slotIndex) then
         return true
-    elseif ( HasRequirementFailure( slotIndex ) ) then
+    elseif HasRequirementFailure(slotIndex) then
         return true
-    elseif ( HasWeaponSlotFailure( slotIndex ) ) then
+    elseif HasWeaponSlotFailure(slotIndex) then
         return true
-    elseif ( HasTargetFailure( slotIndex ) ) then
+    elseif HasTargetFailure(slotIndex) then
         return true
-    elseif ( HasRangeFailure( slotIndex ) ) then
+    elseif HasRangeFailure(slotIndex) then
         return true
-    elseif ( HasStatusEffectFailure( slotIndex )  ) then
+    elseif HasStatusEffectFailure(slotIndex) then
         return true
-    elseif ( HasFallingFailure( slotIndex ) ) then
+    elseif HasFallingFailure(slotIndex) then
         return true
-    elseif ( HasSwimmingFailure( slotIndex ) ) then
+    elseif HasSwimmingFailure(slotIndex) then
         return true
-    elseif ( HasMountedFailure( slotIndex ) ) then
+    elseif HasMountedFailure(slotIndex) then
         return true
-    elseif ( HasReincarnatingFailure( slotIndex ) ) then
+    elseif HasReincarnatingFailure(slotIndex) then
         return true
     end
     return false
@@ -357,37 +356,37 @@ function SCB.Initialize( enabled )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment2 )
     end
 
-	-- Setup Prominent Buffs
-	uiTlw.prominentbuffs = UI.TopLevel( nil, nil )
-	uiTlw.prominentbuffs:SetHandler( "OnMoveStop", function(self)
-			SCB.SV.prominentbOffsetX = self:GetLeft()
-			SCB.SV.prominentbOffsetY = self:GetTop()
-		end )
-	uiTlw.prominentdebuffs = UI.TopLevel( nil, nil )
-	uiTlw.prominentdebuffs:SetHandler( "OnMoveStop", function(self)
-			SCB.SV.prominentdOffsetX = self:GetLeft()
-			SCB.SV.prominentdOffsetY = self:GetTop()
-		end )
+    -- Setup Prominent Buffs
+    uiTlw.prominentbuffs = UI.TopLevel( nil, nil )
+    uiTlw.prominentbuffs:SetHandler( "OnMoveStop", function(self)
+            SCB.SV.prominentbOffsetX = self:GetLeft()
+            SCB.SV.prominentbOffsetY = self:GetTop()
+        end )
+    uiTlw.prominentdebuffs = UI.TopLevel( nil, nil )
+    uiTlw.prominentdebuffs:SetHandler( "OnMoveStop", function(self)
+            SCB.SV.prominentdOffsetX = self:GetLeft()
+            SCB.SV.prominentdOffsetY = self:GetTop()
+        end )
 
-	uiTlw.prominentbuffs.alignVertical = true
-	uiTlw.prominentdebuffs.alignVertical = true
+    uiTlw.prominentbuffs.alignVertical = true
+    uiTlw.prominentdebuffs.alignVertical = true
 
-	containerRouting.promb_ground = "prominentbuffs"
-	containerRouting.promb_target = "prominentbuffs"
-	containerRouting.promb_player = "prominentbuffs"
-	containerRouting.promd_ground = "prominentdebuffs"
-	containerRouting.promd_target = "prominentdebuffs"
-	containerRouting.promd_player = "prominentdebuffs"
+    containerRouting.promb_ground = "prominentbuffs"
+    containerRouting.promb_target = "prominentbuffs"
+    containerRouting.promb_player = "prominentbuffs"
+    containerRouting.promd_ground = "prominentdebuffs"
+    containerRouting.promd_target = "prominentdebuffs"
+    containerRouting.promd_player = "prominentdebuffs"
 
-	local fragmentP1 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentbuffs, 0, 0)
-	local fragmentP2 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentdebuffs, 0, 0)
+    local fragmentP1 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentbuffs, 0, 0)
+    local fragmentP2 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentdebuffs, 0, 0)
 
-	sceneManager:GetScene("hud"):AddFragment( fragmentP1 )
-	sceneManager:GetScene("hud"):AddFragment( fragmentP2 )
-	sceneManager:GetScene("hudui"):AddFragment( fragmentP1 )
-	sceneManager:GetScene("hudui"):AddFragment( fragmentP2 )
-	sceneManager:GetScene("siegeBar"):AddFragment( fragmentP1 )
-	sceneManager:GetScene("siegeBar"):AddFragment( fragmentP2 )
+    sceneManager:GetScene("hud"):AddFragment( fragmentP1 )
+    sceneManager:GetScene("hud"):AddFragment( fragmentP2 )
+    sceneManager:GetScene("hudui"):AddFragment( fragmentP1 )
+    sceneManager:GetScene("hudui"):AddFragment( fragmentP2 )
+    sceneManager:GetScene("siegeBar"):AddFragment( fragmentP1 )
+    sceneManager:GetScene("siegeBar"):AddFragment( fragmentP2 )
 
     -- Separate container for players long buffs
     if true then
@@ -525,122 +524,122 @@ end
 -- For debug function - convert result reason codes to string value
 local resultTable = {
 
-	[2080] = "ON CD",
-	[2120] = "ABSORB",
-	[2040] = "BAD TARGET",
-	[3180] = "STANDARD ALREADY EXISTS",
-	[3160] = "STANDARD LIMIT",
-	[3200] = "STANDARD NO PERMISSION",
-	[3170] = "STANDARD MISMATCH",
-	[3190] = "STANDARD TOO CLOSE",
-	[3210] = "STANDARDS DISABLED",
-	[2210] = "BEGIN CHAN",
-	[2200] = "BEGIN",
-	[2360] = "BLADETURN",
-	[2151] = "BLOCK DMG",
-	[2150] = "BLOCK",
-	[2030] = "BUSY",
-	[2290] = "CAN'T USE",
-	[2330] = "OUT OF LOS",
-	[3410] = "CAN'T SWAP",
-	[2060] = "CASTER DEAD",
-	[2] = "CRIT",
-	[32] = "CRIT HEAL",
-	[2460] = "SHIELD",
-	[1] = "DMG",
-	[2190] = "DEFEND",
-	[2262] = "DIED XP",
-	[2260] = "DIED",
-	[2430] = "DISARMED",
-	[2340] = "DISORIENT",
-	[2140] = "DODGE",
-	[1073741826] = "DOT CRIT",
-	[1073741825] = "DOT",
-	[2250] = "FADED",
-	[2245] = "GAINED DUR",
-	[2240] = "GAINED",
-	[2310] = "FAILED REQ",
-	[3100] = "FAILED SEIGE REQ",
-	[2110] = "FAILED",
-	[2420] = "FALL DMG",
-	[2500] = "FALLING",
-	[2320] = "FEAR",
-	[3230] = "CAMP EXISTS",
-	[3240] = "CAMP NO PERMISSION",
-	[3220] = "CAMP TABARD MISMATCH",
-	[3080] = "GRAVEYARD DISALLOWED IN INSTANCE",
-	[3030] = "GRAVEYARD TOO CLOSE",
-	[16] = "HEAL",
-	[1073741856] = "HOT CRIT",
-	[1073741840] = "HOT",
-	[2000] = "IMMUNE",
-	[2510] = "IN AIR",
-	[2300] = "IN COMBAT",
-	[2610] = "IN ENEMY KEEP",
-	[2613] = "IN ENEMY OUTPOST",
-	[2612] = "IN ENEMY RESOURCE",
-	[2611] = "IN ENEMY TOWN",
-	[3440] = "IN HIDEYHOLE",
-	[2090] = "OUT OF RESOURCE",
-	[2410] = "INTERCEPT",
-	[2230] = "INTERRUPT",
-	[2810] = "INVALID FIXTURE",
-	[3420] = "INVALID JUSTICE TARGET",
-	[2800] = "INVALID TERRAIN",
-	[-1] = "INVALID",
-	[3130] = "KILLED BY SUBZONE",
-	[2265] = "KB",
-	[2475] = "KNOCKBCK",
-	[2400] = "LEVITATE",
-	[2392] = "LINKED CAST",
-	[3140] = "MERC LIMIT",
-	[2180] = "MISS",
-	[3040] = "NO EMPTY SOUL GEM",
-	[3060] = "NO FILLED SOUL GEM",
-	[3150] = "MOBILE GRAVEYARD LIMIT",
-	[3070] = "MOUNTED",
-	[2630] = "MUST BE IN OWN KEEP",
-	[2700] = "NO LOACATION",
-	[2910] = "NO RAM TARGET WITHIN RANGE",
-	[3400] = "NO WEP SWAP",
-	[3050] = "NOT ENOUGH SPACE SOUL GEM",
-	[3430] = "NOT ENOUGH SPACE",
-	[3090] = "NOT ENOUG SPACE SIEGE",
-	[2640] = "TOO CLOSE",
-	[2440] = "OFF BALANCE",
-	[2390] = "PACIFY",
-	[2130] = "PARRY",
-	[2170] = "PART RESIST",
-	[64] = "-POWER",
-	[128] = "+POWER",
-	[4] = "PRECISE DAMAGE",
-	[2350] = "QUEUED",
-	[3120] = "ALL TARGETS DESTROYED",
-	[3110] = "ALL TARGETS OCCUPIED",
-	[2520] = "RECALL",
-	[2111] = "REFLECT",
-	[3020] = "REINCARNATE",
-	[2160] = "RESIST",
-	[2490] = "RESURRECT",
-	[2480] = "ROOT",
-	[2620] = "SIEGE LIMIT",
-	[2605] = "SIEGE NOT ALLOWED IN ZONE",
-	[2600] = "SIEGE TOO CLOSE",
-	[2010] = "SILENCE",
-	[2025] = "SNARE",
-	[3000] = "SPRINT",
-	[2470] = "STAGGER",
-	[2020] = "STUN",
-	[3010] = "SWIMMING",
-	[2050] = "TARGET DEAD",
-	[2070] = "TARGET NOT IN VIEW",
-	[2391] = "TARGET NOT PVP FLAGGED",
-	[2100] = "TARGET OUT OF RANGE",
-	[2370] = "TARGET TOO CLOSE",
-	[2900] = "UNEVEN TERRAIN",
-	[2450] = "WEAPON SWAP",
-	[8] = "WRECKING DAMAGE",
-	[2380 ] = "WRONG WEAPON",
+    [2080] = "ON CD",
+    [2120] = "ABSORB",
+    [2040] = "BAD TARGET",
+    [3180] = "STANDARD ALREADY EXISTS",
+    [3160] = "STANDARD LIMIT",
+    [3200] = "STANDARD NO PERMISSION",
+    [3170] = "STANDARD MISMATCH",
+    [3190] = "STANDARD TOO CLOSE",
+    [3210] = "STANDARDS DISABLED",
+    [2210] = "BEGIN CHAN",
+    [2200] = "BEGIN",
+    [2360] = "BLADETURN",
+    [2151] = "BLOCK DMG",
+    [2150] = "BLOCK",
+    [2030] = "BUSY",
+    [2290] = "CAN'T USE",
+    [2330] = "OUT OF LOS",
+    [3410] = "CAN'T SWAP",
+    [2060] = "CASTER DEAD",
+    [2] = "CRIT",
+    [32] = "CRIT HEAL",
+    [2460] = "SHIELD",
+    [1] = "DMG",
+    [2190] = "DEFEND",
+    [2262] = "DIED XP",
+    [2260] = "DIED",
+    [2430] = "DISARMED",
+    [2340] = "DISORIENT",
+    [2140] = "DODGE",
+    [1073741826] = "DOT CRIT",
+    [1073741825] = "DOT",
+    [2250] = "FADED",
+    [2245] = "GAINED DUR",
+    [2240] = "GAINED",
+    [2310] = "FAILED REQ",
+    [3100] = "FAILED SEIGE REQ",
+    [2110] = "FAILED",
+    [2420] = "FALL DMG",
+    [2500] = "FALLING",
+    [2320] = "FEAR",
+    [3230] = "CAMP EXISTS",
+    [3240] = "CAMP NO PERMISSION",
+    [3220] = "CAMP TABARD MISMATCH",
+    [3080] = "GRAVEYARD DISALLOWED IN INSTANCE",
+    [3030] = "GRAVEYARD TOO CLOSE",
+    [16] = "HEAL",
+    [1073741856] = "HOT CRIT",
+    [1073741840] = "HOT",
+    [2000] = "IMMUNE",
+    [2510] = "IN AIR",
+    [2300] = "IN COMBAT",
+    [2610] = "IN ENEMY KEEP",
+    [2613] = "IN ENEMY OUTPOST",
+    [2612] = "IN ENEMY RESOURCE",
+    [2611] = "IN ENEMY TOWN",
+    [3440] = "IN HIDEYHOLE",
+    [2090] = "OUT OF RESOURCE",
+    [2410] = "INTERCEPT",
+    [2230] = "INTERRUPT",
+    [2810] = "INVALID FIXTURE",
+    [3420] = "INVALID JUSTICE TARGET",
+    [2800] = "INVALID TERRAIN",
+    [-1] = "INVALID",
+    [3130] = "KILLED BY SUBZONE",
+    [2265] = "KB",
+    [2475] = "KNOCKBCK",
+    [2400] = "LEVITATE",
+    [2392] = "LINKED CAST",
+    [3140] = "MERC LIMIT",
+    [2180] = "MISS",
+    [3040] = "NO EMPTY SOUL GEM",
+    [3060] = "NO FILLED SOUL GEM",
+    [3150] = "MOBILE GRAVEYARD LIMIT",
+    [3070] = "MOUNTED",
+    [2630] = "MUST BE IN OWN KEEP",
+    [2700] = "NO LOACATION",
+    [2910] = "NO RAM TARGET WITHIN RANGE",
+    [3400] = "NO WEP SWAP",
+    [3050] = "NOT ENOUGH SPACE SOUL GEM",
+    [3430] = "NOT ENOUGH SPACE",
+    [3090] = "NOT ENOUG SPACE SIEGE",
+    [2640] = "TOO CLOSE",
+    [2440] = "OFF BALANCE",
+    [2390] = "PACIFY",
+    [2130] = "PARRY",
+    [2170] = "PART RESIST",
+    [64] = "-POWER",
+    [128] = "+POWER",
+    [4] = "PRECISE DAMAGE",
+    [2350] = "QUEUED",
+    [3120] = "ALL TARGETS DESTROYED",
+    [3110] = "ALL TARGETS OCCUPIED",
+    [2520] = "RECALL",
+    [2111] = "REFLECT",
+    [3020] = "REINCARNATE",
+    [2160] = "RESIST",
+    [2490] = "RESURRECT",
+    [2480] = "ROOT",
+    [2620] = "SIEGE LIMIT",
+    [2605] = "SIEGE NOT ALLOWED IN ZONE",
+    [2600] = "SIEGE TOO CLOSE",
+    [2010] = "SILENCE",
+    [2025] = "SNARE",
+    [3000] = "SPRINT",
+    [2470] = "STAGGER",
+    [2020] = "STUN",
+    [3010] = "SWIMMING",
+    [2050] = "TARGET DEAD",
+    [2070] = "TARGET NOT IN VIEW",
+    [2391] = "TARGET NOT PVP FLAGGED",
+    [2100] = "TARGET OUT OF RANGE",
+    [2370] = "TARGET TOO CLOSE",
+    [2900] = "UNEVEN TERRAIN",
+    [2450] = "WEAPON SWAP",
+    [8] = "WRECKING DAMAGE",
+    [2380 ] = "WRONG WEAPON",
 
 }
 
@@ -731,16 +730,16 @@ function SCB.AddToCustomList(list, input)
             local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(icon .. " [" .. id .. "] " .. name .. " added to " .. listRef, true)
+            printToChat(strformat("<<1>> [<<2>>] <<3>> added to <<4>>", icon, id, name, listRef), true)
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat("Could not add [" .. input .. "] to " .. listRef .. " That abilityId does not exist.", true)
+            printToChat(strformat("Could not add [<<1>>] to <<2>>. That abiilityId does not exist.", input, listRef), true)
         end
     else
         if input ~= "" then
             list[input] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(input .. " added to " .. listRef, true)
+            printToChat(strformat("<<1>> added to <<2>>", input, listRef), true)
         end
     end
     SCB.Reset()
@@ -755,16 +754,16 @@ function SCB.RemoveFromCustomList(list, input)
             local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(icon .. " [" .. id .. "] " .. name .. " removed from " .. listRef, true)
+            printToChat(strformat("<<1>> [<<2>>] <<3>> removed from <<4>>", icon, id, name, listRef), true)
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat("Could not remove [" .. input .. "] to " .. listRef .. " That abilityId does not exist.", true)
+            printToChat(strformat("Could not remove [<<1>>] to <<2>>. That abilityId does not exist.", input, listRef), true)
         end
     else
         if input ~= "" then
             list[input] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(input .. " removed from " .. listRef, true)
+            printToChat(strformat("<<1>> removed from <<2>>", input, listRef), true)
         end
     end
     SCB.Reset()
@@ -780,57 +779,54 @@ local function SetWerewolfIcon()
 end
 
 function SCB.WerewolfState(eventCode, werewolf, onActivation)
+    if werewolf then
+        for i = 1, 4 do
+            name, _, discovered, skillLineId = GetSkillLineInfo(SKILL_TYPE_WORLD, i)
+            if skillLineId == 50 and unlocked then
+                g_werewolfCounter = g_werewolfCounter + 1
+                if g_werewolfCounter == 3 or onActivation then
+                    -- Pull specific morph info
+                    SetWerewolfIcon()
+                    local currentPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
+                    local duration = ( currentPower / 27 )
+                    -- Round up by 1 from any decimal number
+                    local durationFormatted = mathfloor(duration + 0.999) * 1000
+                    local currentTime = GetGameTimeMilliseconds()
+                    local endTime = currentTime + durationFormatted
+                    g_effectsList.player1["Werewolf Indicator"] = {
+                        target="player", type=1,
+                        id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
+                        dur=0, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
+                        forced = "short",
+                        restart=true, iconNum=0, overrideDur = 38000
+                    }
 
-	if werewolf then
-		for i = 1, 4 do
-			name, _, discovered, skillLineId = GetSkillLineInfo(SKILL_TYPE_WORLD, i)
-			if skillLineId == 50 and unlocked then
-					g_werewolfCounter = g_werewolfCounter + 1
-					if g_werewolfCounter == 3 or onActivation then
-						-- Pull specific morph info
-						SetWerewolfIcon()
-						local currentPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
-						local duration = ( currentPower / 27 )
-						-- Round up by 1 from any decimal number
-						local durationFormatted = mathfloor(duration + 0.999) * 1000
-						local currentTime = GetGameTimeMilliseconds()
-						local endTime = currentTime + durationFormatted
-						g_effectsList.player1["Werewolf Indicator"] = {
-							target="player", type=1,
-							id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-							dur=0, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
-							forced = "short",
-							restart=true, iconNum=0, overrideDur = 38000
-						}
+                    eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SCB.OnPowerUpdate)
+                    eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
+                    g_werewolfCounter = 0
+                end
+                return
+            end
+        end
 
-						eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SCB.OnPowerUpdate)
-						eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
-						g_werewolfCounter = 0
-					end
-				return
-			end
-		end
-
-		-- If we didn't return from the above statement this must be quest based werewolf transformation - so just display an unlimited duration passive as the counter.
-		SetWerewolfIcon()
+        -- If we didn't return from the above statement this must be quest based werewolf transformation - so just display an unlimited duration passive as the counter.
+        SetWerewolfIcon()
         g_effectsList.player1["Werewolf Indicator"] = {
-			type=1,
+            type=1,
             id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
             forced = "short",
             restart=true, iconNum=0
         }
-		g_werewolfCounter = 0
+        g_werewolfCounter = 0
     else
         g_effectsList.player1["Werewolf Indicator"] = nil
         eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
         g_werewolfCounter = 0
     end
-
 end
 
 function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
-
     local currentPower = powerValue
     local duration = ( currentPower / 27 )
     -- Round up by 1 from any decimal number
@@ -848,7 +844,6 @@ function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue
     else
         g_effectsList.player1["Werewolf Indicator"] = nil
     end
-
 end
 
 function SCB.DuelStart()
@@ -913,7 +908,6 @@ end
 function SCB.MountStatus(eventCode, mounted)
     -- Remove icon first
     g_effectsList.player1["Mount"] = nil
-
     if mounted and not SCB.SV.IgnoreMount then
         g_effectsList.player1["Mount"] = {
             target="player", type=1,
@@ -932,7 +926,7 @@ function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
 end
 
 function SCB.CollectibleBuff()
-    -- PETS
+    -- Pets
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SCB.SV.IgnorePet and not IsPlayerInAvAWorld() then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
         g_effectsList.player1["PetType"] = {
@@ -946,13 +940,11 @@ function SCB.CollectibleBuff()
         g_effectsList.player1["PetType"] = nil
     end
 
-    -- ASSISTANTS
+    -- Assistants
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 and not SCB.SV.IgnoreAssistant and not IsPlayerInAvAWorld() then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
         local CollectibleName = GetCollectibleName(Collectible)
-
         local iconAssistant = E.AssistantIcons[CollectibleName] ~= nil and E.AssistantIcons[CollectibleName] or ''
-
         g_effectsList.player1["AssistantType"] = {
             target="player", type=1,
             name=CollectibleName, icon=iconAssistant,
@@ -997,7 +989,7 @@ function SCB.SetIconsAlignment( value )
     end
 end
 
-function SCB.SetIconsAlignmentProminentBuff ( value )
+function SCB.SetIconsAlignmentProminentBuff( value )
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.ProminentBuffAlignment
     end
@@ -1019,7 +1011,7 @@ function SCB.SetIconsAlignmentProminentBuff ( value )
     end
 end
 
-function SCB.SetIconsAlignmentProminentDebuff ( value )
+function SCB.SetIconsAlignmentProminentDebuff( value )
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.ProminentDebuffAlignment
     end
@@ -1130,10 +1122,10 @@ function SCB.ResetTlwPosition()
     SCB.SV.playerVOffsetY = nil
     SCB.SV.playerHOffsetX = nil
     SCB.SV.playerHOffsetY = nil
-	SCB.SV.prominentbOffsetX = nil
-	SCB.SV.prominentbOffsetY = nil
-	SCB.SV.prominentdOffsetX = nil
-	SCB.SV.prominentdOffsetY = nil
+    SCB.SV.prominentbOffsetX = nil
+    SCB.SV.prominentbOffsetY = nil
+    SCB.SV.prominentdOffsetX = nil
+    SCB.SV.prominentdOffsetY = nil
     SCB.SetTlwPosition()
 end
 
@@ -1196,24 +1188,24 @@ function SCB.SetTlwPosition()
         end
     end
 
-	-- Setup Prominent Buffs Position
-	if uiTlw.prominentbuffs then
-		uiTlw.prominentbuffs:ClearAnchors()
-		if SCB.SV.prominentbOffsetX ~= nil and SCB.SV.prominentbOffsetY ~= nil then
-			uiTlw.prominentbuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SCB.SV.prominentbOffsetX, SCB.SV.prominentbOffsetY )
-		else
-			uiTlw.prominentbuffs:SetAnchor( CENTER, GuiRoot, CENTER, -340, -100 )
-		end
-	end
+    -- Setup Prominent Buffs Position
+    if uiTlw.prominentbuffs then
+        uiTlw.prominentbuffs:ClearAnchors()
+        if SCB.SV.prominentbOffsetX ~= nil and SCB.SV.prominentbOffsetY ~= nil then
+            uiTlw.prominentbuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SCB.SV.prominentbOffsetX, SCB.SV.prominentbOffsetY )
+        else
+            uiTlw.prominentbuffs:SetAnchor( CENTER, GuiRoot, CENTER, -340, -100 )
+        end
+    end
 
-	if uiTlw.prominentdebuffs then
-		uiTlw.prominentdebuffs:ClearAnchors()
-		if SCB.SV.prominentdOffsetX ~= nil and SCB.SV.prominentdOffsetY ~= nil then
-			uiTlw.prominentdebuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SCB.SV.prominentdOffsetX, SCB.SV.prominentdOffsetY )
-		else
-			uiTlw.prominentdebuffs:SetAnchor( CENTER, GuiRoot, CENTER, 340, -100 )
-		end
-	end
+    if uiTlw.prominentdebuffs then
+        uiTlw.prominentdebuffs:ClearAnchors()
+        if SCB.SV.prominentdOffsetX ~= nil and SCB.SV.prominentdOffsetY ~= nil then
+            uiTlw.prominentdebuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SCB.SV.prominentdOffsetX, SCB.SV.prominentdOffsetY )
+        else
+            uiTlw.prominentdebuffs:SetAnchor( CENTER, GuiRoot, CENTER, 340, -100 )
+        end
+    end
 end
 
 -- Unlock windows for moving. Called from Settings Menu.
@@ -1243,12 +1235,12 @@ function SCB.SetMovingState(state)
         uiTlw.player_long:SetMouseEnabled( state )
         uiTlw.player_long:SetMovable( state )
     end
-	if uiTlw.prominentbuffs then
-		uiTlw.prominentbuffs:SetMouseEnabled( state )
+    if uiTlw.prominentbuffs then
+        uiTlw.prominentbuffs:SetMouseEnabled( state )
         uiTlw.prominentbuffs:SetMovable( state )
     end
-	if uiTlw.prominentdebuffs then
-		uiTlw.prominentdebuffs:SetMouseEnabled( state )
+    if uiTlw.prominentdebuffs then
+        uiTlw.prominentdebuffs:SetMouseEnabled( state )
         uiTlw.prominentdebuffs:SetMovable( state )
     end
 
@@ -1326,11 +1318,11 @@ function SCB.Reset()
         end
     end
 
-	-- Prominent buffs & debuffs
-	if uiTlw.prominentbuffs then
-		uiTlw.prominentbuffs:SetDimensions( SCB.SV.IconSize + 6, 400 )
-		uiTlw.prominentdebuffs:SetDimensions( SCB.SV.IconSize + 6, 400 )
-	end
+    -- Prominent buffs & debuffs
+    if uiTlw.prominentbuffs then
+        uiTlw.prominentbuffs:SetDimensions( SCB.SV.IconSize + 6, 400 )
+        uiTlw.prominentdebuffs:SetDimensions( SCB.SV.IconSize + 6, 400 )
+    end
 
     -- Reset alignment and sort
     SCB.SetIconsAlignment( SCB.SV.Alignment )
@@ -1548,7 +1540,7 @@ function SCB.CreateSingleIcon(container, AnchorItem, effectType)
         buff.cd:SetDrawLayer(DL_BACKGROUND)
     end
 
-	if container == "prominentbuffs" then
+    if container == "prominentbuffs" then
         buff.effectType = effectType
         buff.name = UI.Label( buff, nil, nil, nil, g_prominentFont, nil, false )
         buff.bar = {
@@ -1559,7 +1551,7 @@ function SCB.CreateSingleIcon(container, AnchorItem, effectType)
         buff.bar.backdrop:SetDrawLayer(DL_BACKDROP)
         buff.bar.backdrop:SetDrawLevel(1)
         buff.bar.bar:SetMinMax(0, 1)
-	end
+    end
 
     if container == "prominentdebuffs" then
         buff.effectType = effectType
@@ -1635,13 +1627,13 @@ function SCB.ApplyFont()
     local fontSize = ( SCB.SV.BuffFontSize and SCB.SV.BuffFontSize > 0 ) and SCB.SV.BuffFontSize or 17
     g_buffsFont = fontName .. "|" .. fontSize .. "|" .. fontStyle
 
-	-- Font Setup for Prominent Buffs & Debuffs
-	local prominentName = LUIE.Fonts[SCB.SV.ProminentLabelFontFace]
-	if not fontName or fontName == "" then
+    -- Font Setup for Prominent Buffs & Debuffs
+    local prominentName = LUIE.Fonts[SCB.SV.ProminentLabelFontFace]
+    if not fontName or fontName == "" then
         printToChat(GetString(SI_LUIE_ERROR_FONT), true)
         fontName = "$(MEDIUM_FONT)"
     end
-	local prominentStyle = ( SCB.SV.ProminentLabelFontStyle and SCB.SV.ProminentLabelFontStyle ~= "" ) and SCB.SV.ProminentLabelFontStyle or "outline"
+    local prominentStyle = ( SCB.SV.ProminentLabelFontStyle and SCB.SV.ProminentLabelFontStyle ~= "" ) and SCB.SV.ProminentLabelFontStyle or "outline"
     local prominentSize = ( SCB.SV.ProminentLabelFontSize and SCB.SV.ProminentLabelFontSize > 0 ) and SCB.SV.ProminentLabelFontSize or 17
     g_prominentFont = prominentName .. "|" .. prominentSize .. "|" .. prominentStyle
 
@@ -1653,12 +1645,12 @@ function SCB.ApplyFont()
     for _, container in pairs(containerRouting) do
         if needs_reset[container] then
             for i = 1, #uiTlw[container].icons do
-				-- Set label font
+                -- Set label font
                 uiTlw[container].icons[i].label:SetFont(g_buffsFont)
-				-- Set prominent buff label font
-				if uiTlw[container].icons[i].name then
-					uiTlw[container].icons[i].name:SetFont(g_prominentFont)
-				end
+                -- Set prominent buff label font
+                if uiTlw[container].icons[i].name then
+                    uiTlw[container].icons[i].name:SetFont(g_prominentFont)
+                end
             end
         end
         needs_reset[container] = false
@@ -1683,7 +1675,6 @@ end
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
-
         -- Create fake ground aura
         if E.EffectGroundDisplay[abilityId] then
             if changeType ~= EFFECT_RESULT_FADED then
@@ -1715,7 +1706,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                             restart=true, iconNum=0,
                             unbreakable=0,
                             stack = stackCount
-						}
+                        }
                     end
                 end
             end
@@ -1784,12 +1775,16 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
 
     if E.EffectOverride[abilityId] then
-        if E.EffectOverride[abilityId].hide == true then return end
-        if E.EffectOverride[abilityId].hideReduce == true and SCB.SV.HideReduce then return end
+        if E.EffectOverride[abilityId].hide == true then
+            return
+        end
+        if E.EffectOverride[abilityId].hideReduce == true and SCB.SV.HideReduce then
+            return
+        end
         iconName = E.EffectOverride[abilityId].icon or iconName
         effectName = E.EffectOverride[abilityId].name or effectName
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
-		stackCount = E.EffectOverride[abilityId].stack or stackCount
+        stackCount = E.EffectOverride[abilityId].stack or stackCount
         -- Destroy other effects of the same type if we don't want to show duplicates at all.
         if E.EffectOverride[abilityId].noDuplicate then
             for context, effectsList in pairs( g_effectsList ) do
@@ -1820,7 +1815,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
-    if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then return end
+    if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then
+        return
+    end
 
     -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
     if unitTag ~= "player" then
@@ -1847,19 +1844,19 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     -- Where the new icon will go into
     local context = unitTag .. effectType
 
-	if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) and not E.EffectNoProminent[abilityId] then
-		if context == "player1" then
+    if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) and not E.EffectNoProminent[abilityId] then
+        if context == "player1" then
             context = "promd_player"
         elseif context == "reticleover2" or abilityId == 102771 then
             context = "promd_target"
         end
-	elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) and not E.EffectNoProminent[abilityId] then
-		if context == "player1" then
+    elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) and not E.EffectNoProminent[abilityId] then
+        if context == "player1" then
             context = "promb_player"
         elseif context == "reticleover2" or abilityId == 102771 then
             context = "promb_target"
         end
-	end
+    end
 
     -- Exit here if there is no container to hold this effect
     if not containerRouting[context] then
@@ -2074,13 +2071,13 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local target = strformat("<<t:1>>",targetName)
         if source ~= "" and target == LUIE.PlayerNameFormatted then
             g_effectsList.player1[ abilityId ] = {
-				type=1,
-				id=abilityId, name=effectName, icon=iconName,
-				dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-				forced = "short",
-				restart=true, iconNum=0,
-				unbreakable=unbreakable
-			}
+                type=1,
+                id=abilityId, name=effectName, icon=iconName,
+                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                forced = "short",
+                restart=true, iconNum=0,
+                unbreakable=unbreakable
+            }
         end
     end
 
@@ -2121,14 +2118,14 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local target = strformat("<<t:1>>",targetName)
         if source ~= "" and target == LUIE.PlayerNameFormatted then
             g_effectsList.player2[ abilityId ] = {
-				type=BUFF_EFFECT_TYPE_DEBUFF,
-				id=abilityId, name=effectName, icon=iconName,
-				dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-				forced = "short",
-				restart=true, iconNum=0,
-				internalStack = internalStack,
-				unbreakable=unbreakable
-			}
+                type=BUFF_EFFECT_TYPE_DEBUFF,
+                id=abilityId, name=effectName, icon=iconName,
+                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                forced = "short",
+                restart=true, iconNum=0,
+                internalStack = internalStack,
+                unbreakable=unbreakable
+            }
         end
     end
 
@@ -2157,23 +2154,23 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             -- If the "buff" is flagged as a debuff, then display it here instead
             if E.FakePlayerBuffs[abilityId].debuff == true then
                 g_effectsList.player2[ abilityId ] = {
-					type=BUFF_EFFECT_TYPE_DEBUFF,
-					id=abilityId, name=effectName, icon=iconName,
-					dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-					forced = "short",
-					restart=true, iconNum=0,
-					unbreakable=unbreakable
-				}
+                    type=BUFF_EFFECT_TYPE_DEBUFF,
+                    id=abilityId, name=effectName, icon=iconName,
+                    dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                    forced = "short",
+                    restart=true, iconNum=0,
+                    unbreakable=unbreakable
+                }
             -- Otherwise, display as a normal buff
             else
                 g_effectsList.player1[ abilityId ] = {
-					type=1,
-					id=abilityId, name=effectName, icon=iconName,
-					dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-					forced = "short",
-					restart=true, iconNum=0,
-					unbreakable=unbreakable
-				}
+                    type=1,
+                    id=abilityId, name=effectName, icon=iconName,
+                    dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                    forced = "short",
+                    restart=true, iconNum=0,
+                    unbreakable=unbreakable
+                }
             end
         end
     end
@@ -2194,13 +2191,13 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local unitName = strformat("<<t:1>>", GetUnitName("reticleover") )
         if source ~= "" and target == LUIE.PlayerNameFormatted then
             g_effectsList.player2[ abilityId ] = {
-				type=BUFF_EFFECT_TYPE_DEBUFF,
-				id=abilityId, name=effectName, icon=iconName,
-				dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-				forced = "short",
-				restart=true, iconNum=0,
-				unbreakable=unbreakable
-			}
+                type=BUFF_EFFECT_TYPE_DEBUFF,
+                id=abilityId, name=effectName, icon=iconName,
+                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                forced = "short",
+                restart=true, iconNum=0,
+                unbreakable=unbreakable
+            }
         end
     end
 end
@@ -2224,7 +2221,6 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 
     -- Try to remove effect like Ground Runes and Traps (we check this before we filter for other result types)
     if E.IsGroundMineDamage[abilityId] and IsResultDamage[result] and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER or targetType == COMBAT_UNIT_TYPE_GROUP) then
-
         for _, effectsList in pairs( {g_effectsList.ground, g_effectsList.promb_ground, g_effectsList.promd_ground} ) do
             for k, v in pairs(effectsList) do
                 -- Check if we have a buff up a mine, if we do also compare the names to make sure they are equivalent. This prevents removing Daedric Mines with Rearming Trap for example.
@@ -2303,13 +2299,13 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                 return
             end
             g_effectsList.reticleover1[ abilityId ] = {
-				type=effectType,
-				id=abilityId, name=effectName, icon=iconName,
-				dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-				forced = "short",
-				restart=true, iconNum=0,
-				unbreakable=unbreakable
-			}
+                type=effectType,
+                id=abilityId, name=effectName, icon=iconName,
+                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                forced = "short",
+                restart=true, iconNum=0,
+                unbreakable=unbreakable
+            }
         end
     end
 
@@ -2339,24 +2335,24 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
             end
             if unitName == target then
                 g_effectsList.ground[ abilityId ] = {
-					type=effectType,
-					id=abilityId, name=effectName, icon=iconName,
-					dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-					forced = "short",
-					restart=true, iconNum=0,
-					unbreakable=unbreakable,
-					savedName = strformat(SI_UNIT_NAME, targetName)
-				}
+                    type=effectType,
+                    id=abilityId, name=effectName, icon=iconName,
+                    dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                    forced = "short",
+                    restart=true, iconNum=0,
+                    unbreakable=unbreakable,
+                    savedName = strformat(SI_UNIT_NAME, targetName)
+                }
             else
                 g_effectsList.saved[ abilityId ] = {
-					type=effectType,
-					id=abilityId, name=effectName, icon=iconName,
-					dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-					forced = "short",
-					restart=true, iconNum=0,
-					unbreakable=unbreakable,
-					savedName = strformat(SI_UNIT_NAME, targetName)
-				}
+                    type=effectType,
+                    id=abilityId, name=effectName, icon=iconName,
+                    dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                    forced = "short",
+                    restart=true, iconNum=0,
+                    unbreakable=unbreakable,
+                    savedName = strformat(SI_UNIT_NAME, targetName)
+                }
             end
         end
     end
@@ -2381,24 +2377,24 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
             end
             if unitName == target then
                 g_effectsList.ground[ abilityId ] = {
-					type=BUFF_EFFECT_TYPE_DEBUFF,
-					id=abilityId, name=effectName, icon=iconName,
-					dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-					forced = "short",
-					restart=true, iconNum=0,
-					unbreakable=unbreakable,
-					savedName = strformat(SI_UNIT_NAME, targetName)
-				}
+                    type=BUFF_EFFECT_TYPE_DEBUFF,
+                    id=abilityId, name=effectName, icon=iconName,
+                    dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                    forced = "short",
+                    restart=true, iconNum=0,
+                    unbreakable=unbreakable,
+                    savedName = strformat(SI_UNIT_NAME, targetName)
+                }
             else
                 g_effectsList.saved[ abilityId ] = {
-					type=BUFF_EFFECT_TYPE_DEBUFF,
-					id=abilityId, name=effectName, icon=iconName,
-					dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-					forced = "short",
-					restart=true, iconNum=0,
-					unbreakable=unbreakable,
-					savedName = strformat(SI_UNIT_NAME, targetName)
-				}
+                    type=BUFF_EFFECT_TYPE_DEBUFF,
+                    id=abilityId, name=effectName, icon=iconName,
+                    dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                    forced = "short",
+                    restart=true, iconNum=0,
+                    unbreakable=unbreakable,
+                    savedName = strformat(SI_UNIT_NAME, targetName)
+                }
             end
         end
     end
@@ -2473,12 +2469,12 @@ function SCB.ReloadEffects(unitTag)
         if E.AddNameAura[unitName] and GetUnitReaction(unitTag) == UNIT_REACTION_HOSTILE and not IsUnitDead(unitTag) and IsUnitInCombat(unitTag) then
             for k, v in ipairs(E.AddNameAura[unitName]) do
                 g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
-					type=1,
-					id = "Fake", name= v.name, icon= v.icon,
-					dur=0, starts=1, ends=nil,
-					forced = "short",
-					restart=true, iconNum=0
-				}
+                    type=1,
+                    id = "Fake", name= v.name, icon= v.icon,
+                    dur=0, starts=1, ends=nil,
+                    forced = "short",
+                    restart=true, iconNum=0
+                }
             end
         end
     end
@@ -2495,8 +2491,8 @@ function SCB.ReloadEffects(unitTag)
                 forced = "long",
                 restart=true, iconNum=0,
                 unbreakable=1,
-				overrideDur = 600000
-			}
+                overrideDur = 600000
+            }
         end
     end
 
@@ -2536,11 +2532,11 @@ function SCB.ReloadEffects(unitTag)
         if not SCB.SV.IgnoreBattleSpiritTarget then
             if ( ( IsInAvAZone() or IsActiveWorldBattleground() ) and IsUnitPlayer("reticleover") ) or GetUnitName(unitTag) == g_currentDuelTarget then
                 g_effectsList.reticleover1[ "Battle Spirit" ] = {
-					target ="player", type=1,
-					id="Fake", name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
-					dur=0, starts=1, ends=nil,
-					forced = "short",
-					restart=true, iconNum=0
+                    target ="player", type=1,
+                    id="Fake", name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
+                    dur=0, starts=1, ends=nil,
+                    forced = "short",
+                    restart=true, iconNum=0
                 }
             end
         end
@@ -2598,12 +2594,12 @@ function SCB.PlayerCombatState(eventCode, inCombat)
         if E.AddNameAura[unitName] and GetUnitReaction('reticleover') == UNIT_REACTION_HOSTILE and not IsUnitDead('reticleover') and IsUnitInCombat('reticleover') then
             for k, v in ipairs(E.AddNameAura[unitName]) do
                 g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
-					type=1,
-					id="Fake", name= v.name, icon= v.icon,
-					dur=0, starts=1, ends=nil,
-					forced = "short",
-					restart=true, iconNum=0
-				}
+                    type=1,
+                    id="Fake", name= v.name, icon= v.icon,
+                    dur=0, starts=1, ends=nil,
+                    forced = "short",
+                    restart=true, iconNum=0
+                }
             end
         end
     end
@@ -2814,7 +2810,6 @@ function SCB.updateBar( currentTime, sortedList, container )
             end
         end
     end
-
 end
 
 function SCB.updateIcons( currentTime, sortedList, container )
@@ -2841,7 +2836,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
         end
     elseif (container == "prominentbuffs") and SCB.SV.ProminentBuffReverseSort then
             istart, iend, istep = iconsNum, 1, -1
-	elseif (container == "prominentdebuffs") and SCB.SV.ProminentDebuffReverseSort then
+    elseif (container == "prominentdebuffs") and SCB.SV.ProminentDebuffReverseSort then
             istart, iend, istep = iconsNum, 1, -1
     else
         if g_horizSortInvert and not uiTlw[container].alignVertical then
@@ -2880,7 +2875,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
 
         -- Calculate remaining time
         local remain = ( effect.ends ~= nil ) and ( effect.ends - currentTime ) or nil
-		local name = ( effect.name ~= nil) and effect.name or nil
+        local name = ( effect.name ~= nil) and effect.name or nil
 
         local buff = uiTlw[container].icons[index]
 
@@ -2933,9 +2928,9 @@ function SCB.updateIcons( currentTime, sortedList, container )
                 buff.abilityId:SetText(effect.id)
             end
 
-			if buff.name then
-				buff.name:SetText(effect.name)
-			end
+            if buff.name then
+                buff.name:SetText(effect.name)
+            end
 
         end
 
@@ -2964,9 +2959,9 @@ function SCB.updateIcons( currentTime, sortedList, container )
         end
         if effect.restart and buff.cd ~= nil then
             -- Modify abilities with forced maximum durations.
-			if effect.overrideDur then 
-				effect.dur = effect.overrideDur
-			end
+            if effect.overrideDur then
+                effect.dur = effect.overrideDur
+            end
             if remain == nil or effect.dur == nil or effect.dur == 0 then
                 buff.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false )
             else
@@ -3079,7 +3074,6 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
 end
 
 function SCB.OnPlayerActivated(eventCode)
-
     g_playerActive = true
     g_playerResurectStage = nil
 
@@ -3226,7 +3220,6 @@ function SCB.UpdateContextHideList()
             hidePlayerEffects[k] = v
         end
     end
-
     if SCB.SV.IgnoreMundusTarget then
         for k, v in pairs(E.IsBoon) do
             hideTargetEffects[k] = v
@@ -3308,7 +3301,6 @@ function SCB.UpdateContextHideList()
             hideTargetEffects[k] = v
         end
     end
-
     if SCB.SV.IgnoreFoodPlayer then
         for k, v in pairs(E.IsFoodBuff) do
             hidePlayerEffects[k] = v
@@ -3319,7 +3311,6 @@ function SCB.UpdateContextHideList()
             hideTargetEffects[k] = v
         end
     end
-
     if SCB.SV.IgnoreExperiencePlayer then
         for k, v in pairs(E.IsExperienceBuff) do
             hidePlayerEffects[k] = v
@@ -3330,17 +3321,14 @@ function SCB.UpdateContextHideList()
             hideTargetEffects[k] = v
         end
     end
-
     if not SCB.SV.ShowBlockPlayer then
         for k, v in pairs(E.IsBlock) do
             hidePlayerEffects[k] = v
         end
     end
-
     if not SCB.SV.ShowBlockTarget then
         for k, v in pairs(E.IsBlock) do
             hideTargetEffects[k] = v
         end
     end
-
 end

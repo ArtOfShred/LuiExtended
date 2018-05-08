@@ -1,8 +1,8 @@
 LUIE.CombatTextResourcesUltimateEventListener = LUIE.CombatTextEventListener:Subclass()
 local CTL = LUIE.CombatTextResourcesUltimateEventListener
+
 local C = LUIE.CombatTextConstants
 local GetSlotAbilityCost = GetSlotAbilityCost
-
 
 function CTL:New()
     local obj = LUIE.CombatTextEventListener:New()

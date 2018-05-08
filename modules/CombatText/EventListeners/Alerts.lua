@@ -1,5 +1,6 @@
 LUIE.CombatTextAlertEventListener = LUIE.CombatTextEventListener:Subclass()
 local CTL = LUIE.CombatTextAlertEventListener
+
 local C = LUIE.CombatTextConstants
 local callLater = zo_callLater
 local exploitRefireDelay = false

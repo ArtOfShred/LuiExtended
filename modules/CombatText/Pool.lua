@@ -1,9 +1,11 @@
 LUIE.CombatTextPool = ZO_ObjectPool:Subclass()
+
 local CTP = LUIE.CombatTextPool
 
 local fastSlow = ZO_GenerateCubicBezierEase(.3, .9, .7, 1)
 local slowFast = ZO_GenerateCubicBezierEase(.63, .1, .83, .69)
 local even = ZO_GenerateCubicBezierEase(.63, 1.2, .83, 1)
+
 local easeOutIn = function(progress)
     progress = progress < 0.5 and progress * 2 or (1 - progress) * 2
     return zo_sqrt(1 - ((1 - progress) ^ 2))

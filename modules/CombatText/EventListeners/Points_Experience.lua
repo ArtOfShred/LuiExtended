@@ -23,9 +23,7 @@ end
 
 function CTL:OnEvent(unit, currentXp, maxXp)
     if LUIE.CombatText.SV.toggles.showPointsExperience then
-
         self.isChampion = IsUnitChampion('player')
-
         if (self.isChampion) then
             local earned = GetPlayerChampionPointsEarned()
             if earned < 3600 then

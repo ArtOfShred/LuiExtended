@@ -85,6 +85,8 @@ function CTV:OnEvent(crowdControlType, combatType)
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activeCrowdControls[combatType] = self.activeCrowdControls[combatType] - 1
-        if (self.activeCrowdControls[combatType] == 0) then self.locationOffset[combatType] = 0 end
+        if (self.activeCrowdControls[combatType] == 0) then
+            self.locationOffset[combatType] = 0
+        end
     end, animation:GetDuration())
 end

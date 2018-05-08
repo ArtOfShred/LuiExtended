@@ -81,13 +81,12 @@ data/DebugTable.lua
 
 modules/ChatAnnouncements.lua
 modules/CombatInfo.lua
-modules/DamageMeter.lua
 modules/InfoPanel.lua
 modules/UnitFrames.lua
 modules/SpellCastBuffs.lua
-modules/CombatText.lua
 modules/SlashCommands.lua
 
+modules/CombatText/CombatText.lua
 modules/CombatText/Animation.lua
 modules/CombatText/Pool.lua
 modules/CombatText/PoolManager.lua
