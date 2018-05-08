@@ -2605,6 +2605,40 @@ function SCB.PlayerCombatState(eventCode, inCombat)
     end
 end
 
+function SCB.MenuPreview(ability)
+	local currentTime = GetGameTimeMiliseconds()
+	local effects = ability.effects
+	if ( effects ~= nil) then
+		local routing = { }
+		routing[1] = { "player1" },
+		routing[2] = { "reticleover1" },
+		routing[3] = { "promb_player" },
+		routing[4] = { "player2" },
+		routing[5] = { "reticleover2" },
+		routing[6] = { "promd_player" },
+		
+		local abilityId = 999000
+		local icon = ""
+			
+		for i = 1, 6 do
+			local context = routing[i]
+			local type = i < 4 and 1 or 2
+			local name = ("Test Effect: " .. i )
+			g_effectsList[context][ abilityId ] = {
+				target=context, type=type,
+				id=abilityId, name=effectName, icon=iconName,
+				dur = effects[i],
+                starts = currentTime + effects[4],
+                ends = currentTime + effects[4] + effects[i],
+				forced=nil,
+				restart=true, iconNum=0,
+			}
+			abilityId = abilityId + 1
+		end
+	end
+end
+		
+
 -- Process new ability buff effects
 function SCB.NewEffects( ability )
     -- Get the time
@@ -3199,12 +3233,13 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
     elseif g_playerResurectStage == 3 and duration == 350 and SCB.SV.ShowResurrectionImmunity then
         -- We got correct sequence, so let us create a buff and reset the g_playerResurectStage
         g_playerResurectStage = nil
-        SCB.NewEffects( {
-            id = "Fake",
-            name = A.Innate_Resurrection_Immunity,
-            icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds',
-            effects = {10000, 0, 0, 0}
-        } )
+		local currentTime = GetGameTimeMilliseconds()
+		g_effectsList["player1"][ "Resurrection Immunity" ] = {
+			target="player", type=1,
+			id="Fake", name = A.Innate_Resurrection_Immunity, icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds',
+			dur = 10000, starts= currentTime, ends = currentTime + 10000,
+			restart=true, iconNum=0,
+		}
     else
         -- This event does not seem to have anything to do with player self-resurrection
         g_playerResurectStage = nil
