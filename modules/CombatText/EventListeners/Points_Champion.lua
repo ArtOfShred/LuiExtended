@@ -18,7 +18,6 @@ end
 
 function CTL:OnEvent(unit, currentPoints, maxPoints, reason)
     if (LUIE.CombatText.SV.toggles.showPointsChampion and not self.hasMaxCP) then
-
         local currentVR = GetUnitChampionPoints('player')
 
         -- Calculate gained CP
@@ -43,6 +42,5 @@ function CTL:OnEvent(unit, currentPoints, maxPoints, reason)
                 self.timeoutActive = false
             end, 500)
         end
-
     end
 end

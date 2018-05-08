@@ -62,8 +62,12 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
 
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
-    if (hits > 1 and S.toggles.showThrottleTrailer) then value = strfmt('%d (%d)', value, hits) end
-    if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then textColor = S.colors.incomingDamageOverride end
+    if (hits > 1 and S.toggles.showThrottleTrailer) then
+        value = strfmt('%d (%d)', value, hits)
+    end
+    if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then
+        textColor = S.colors.incomingDamageOverride
+    end
 
     self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name or abilityName, value = value, powerType = powerType, damageType = damageType }))
     self:ControlLayout(control, abilityId, combatType, sourceName)
@@ -90,7 +94,11 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     elseif (isDamage or isHealing or isEnergize or isDrain or isDamageShield or isBlocked) then offsetX = mathrandom(-radiusW, radiusW) end
 
     if (point == TOP) then
-        if (self.lastControl[combatType] == nil) then offsetY = -25 else offsetY = mathmax(-25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
+        if (self.lastControl[combatType] == nil) then
+            offsetY = -25
+        else
+            offsetY = mathmax(-25, select(6, self.lastControl[combatType]:GetAnchor(0)))
+        end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
         if (offsetY < 75 and self:IsOverlapping(control, self.activeControls[combatType])) then
@@ -99,7 +107,11 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
             control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
         end
     else
-        if (self.lastControl[combatType] == nil) then offsetY = 25 else offsetY = mathmin(25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
+        if (self.lastControl[combatType] == nil) then
+            offsetY = 25
+        else
+            offsetY = mathmin(25, select(6, self.lastControl[combatType]:GetAnchor(0)))
+        end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
         if (offsetY > -75 and self:IsOverlapping(control, self.activeControls[combatType])) then
@@ -114,7 +126,9 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
 
     -- Animation setup
     local animationPoolType = poolTypes.ANIMATION_SCROLL
-    if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then animationPoolType = poolTypes.ANIMATION_SCROLL_CRITICAL end
+    if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then
+        animationPoolType = poolTypes.ANIMATION_SCROLL_CRITICAL
+    end
 
     local animation, animationPoolKey = self.poolManager:GetPoolObject(animationPoolType)
 
@@ -130,6 +144,8 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activeControls[combatType][control:GetName()] = nil
-        if (self.lastControl[combatType] == control) then self.lastControl[combatType] = nil end
+        if (self.lastControl[combatType] == control) then
+            self.lastControl[combatType] = nil
+        end
     end, animation:GetDuration())
 end

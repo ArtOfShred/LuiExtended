@@ -1,4 +1,5 @@
 LUIE.CombatTextAnimation = ZO_Object:Subclass()
+
 local CTA = LUIE.CombatTextAnimation
 
 local ANIMATION_MANAGER = ANIMATION_MANAGER
@@ -44,7 +45,9 @@ function CTA:Alpha(stepName, startAlpha, endAlpha, duration, delay, easingFunc)
     step:SetAlphaValues(startAlpha, endAlpha)
     step:SetDuration(duration)
     step:SetEasingFunction(easingFunc or linearEase)
-    if (stepName ~= nil and stepName ~= '') then self.namedSteps[stepName] = step end
+    if (stepName ~= nil and stepName ~= '') then
+        self.namedSteps[stepName] = step
+    end
     return step
 end
 
@@ -53,7 +56,9 @@ function CTA:Scale(stepName, startScale, endScale, duration, delay, easingFunc)
     step:SetScaleValues(startScale, endScale)
     step:SetDuration(duration)
     step:SetEasingFunction(easingFunc or linearEase)
-    if (stepName ~= nil and stepName ~= '') then self.namedSteps[stepName] = step end
+    if (stepName ~= nil and stepName ~= '') then
+        self.namedSteps[stepName] = step
+    end
     return step
 end
 
@@ -62,7 +67,9 @@ function CTA:Move(stepName, offsetX, offsetY, duration, delay, easingFunc)
     step:SetTranslateDeltas(offsetX, offsetY)
     step:SetDuration(duration)
     step:SetEasingFunction(easingFunc or linearEase)
-    if (stepName ~= nil and stepName ~= '') then self.namedSteps[stepName] = step end
+    if (stepName ~= nil and stepName ~= '') then
+        self.namedSteps[stepName] = step
+    end
     return step
 end
 

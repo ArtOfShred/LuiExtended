@@ -1,5 +1,6 @@
 LUIE.CombatTextCombatEventListener = LUIE.CombatTextEventListener:Subclass()
 local CTL = LUIE.CombatTextCombatEventListener
+
 local C = LUIE.CombatTextConstants
 local AlertT = LUIE.AlertTable
 local AbbreviateNumber = LUIE.AbbreviateNumber
@@ -36,9 +37,9 @@ function CTL:New()
 end
 
 function CTL:OnPlayerActivated()
-
-    if IsUnitInCombat("player") then isWarned.combat = true end
-
+    if IsUnitInCombat("player") then
+        isWarned.combat = true
+    end
 end
 
 function CTL:EffectChanged(...)
@@ -47,10 +48,11 @@ function CTL:EffectChanged(...)
     local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
 
     if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and AlertT[abilityId] and AlertT[abilityId].auradetect and not refireDelay[abilityId] then
-
         effectName = zo_strformat("<<C:1>>", effectName)
 
-        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then effectName = LUIE.Effects.EffectOverride[abilityId].name end
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
+            effectName = LUIE.Effects.EffectOverride[abilityId].name
+        end
 
         if changeType == EFFECT_RESULT_FADED then return end
 
@@ -67,7 +69,6 @@ function CTL:EffectChanged(...)
         end
 
         if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].power or AlertT[abilityId].destroy then
-
             -- Filter by priority
             if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
                 if AlertT[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
@@ -479,7 +480,6 @@ function CTL:OnCombatOut(...)
 end
 
 function CTL:OnCombatAlert(...)
-
     local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId = ...
 
     local S = LUIE.CombatText.SV
@@ -490,7 +490,9 @@ function CTL:OnCombatAlert(...)
     -- NEW ALERTS
     if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and not refireDelay[abilityId] then
         if (resultType == ACTION_RESULT_BEGIN or resultType == ACTION_RESULT_BEGIN_CHANNEL or AlertT[abilityId].skipcheck) and not refireDelay[abilityId] then
-            if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then abilityName = LUIE.Effects.EffectOverride[abilityId].name end
+            if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
+                abilityName = LUIE.Effects.EffectOverride[abilityId].name
+            end
             local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
 
             if resultType == ACTION_RESULT_EFFECT_FADED then return end
@@ -507,7 +509,6 @@ function CTL:OnCombatAlert(...)
             end
 
             if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].power or AlertT[abilityId].destroy then
-
                 -- Filter by priority
                 if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
                     if AlertT[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
@@ -581,7 +582,6 @@ function CTL:OnCombatAlert(...)
             end
         end
     end
-
 end
 
 ---------------------------------------------------------------------------------------------------------------------------------------

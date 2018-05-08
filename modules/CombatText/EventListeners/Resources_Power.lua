@@ -1,5 +1,6 @@
 LUIE.CombatTextResourcesPowerEventListener = LUIE.CombatTextEventListener:Subclass()
 local CTL = LUIE.CombatTextResourcesPowerEventListener
+
 local pairs = pairs
 
 function CTL:New()

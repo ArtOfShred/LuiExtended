@@ -1,5 +1,6 @@
 LUIE.CombatTextResourcesPotionEventListener = LUIE.CombatTextEventListener:Subclass()
 local CTL = LUIE.CombatTextResourcesPotionEventListener
+
 local inCooldown = false
 
 function CTL:New()
@@ -18,7 +19,9 @@ function CTL:PotionCooldown()
         local isInCooldown = duration > 0
 
         if isInCooldown then
-            if inCooldown == false and duration > 5000 then inCooldown = true end
+            if inCooldown == false and duration > 5000 then
+                inCooldown = true
+            end
         else
             if inCooldown == true then
                 local C = LUIE.CombatTextConstants
