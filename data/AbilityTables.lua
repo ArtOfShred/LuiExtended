@@ -475,13 +475,29 @@ A.Skill_Venom_Arrow                 = 38645
 -- ARMOR SKILLS --------------------------------------
 -- ---------------------------------------------------
 
-A.Skill_Evasion                  = 29556
-A.Skill_Shuffle                  = 39195
-A.Skill_Elude                    = 39192
+A.Skill_Evasion                     = 29556
+A.Skill_Shuffle                     = 39195
+A.Skill_Elude                       = 39192
 
-A.Skill_Immovable                = 29552
-A.Skill_Immovable_Brute          = 39205
-A.Skill_Unstoppable              = 39197
+A.Skill_Immovable                   = 29552
+A.Skill_Immovable_Brute             = 39205
+A.Skill_Unstoppable                 = 39197
+
+-- ---------------------------------------------------
+-- WEREWOLF SKILLS -----------------------------------
+-- ---------------------------------------------------
+
+A.Skill_Werewolf_Bleed              = 89146
+A.Skill_Devour                      = 32634
+A.Skill_Rousing_Roar                = 39114
+A.Skill_Piercing_Howl               = 58405
+A.Skill_Feeding_Frenzy              = 58775
+A.Skill_Howl_of_Despair             = 58742
+A.Skill_Howl_of_Agony               = 58798
+A.Skill_Infectious_Claws            = 58855
+A.Skill_Claws_of_Anguish            = 58864
+A.Skill_Claws_of_Life               = 58879
+A.Skill_Werewolf_Fear               = 39045
 
 -- ---------------------------------------------------
 -- GUILD SKILLS --------------------------------------
@@ -511,9 +527,14 @@ A.Skill_Ice_Comet                   = 40489
 
 -- Psijic Order
 A.Skill_Concentrated_Barrier        = 103888
+A.Skill_Imbue_Weapon                = 103483
+A.Skill_Elemental_Weapon            = 103571
+A.Skill_Crushing_Weapon             = 103623
 A.Skill_Accelerate                  = 103503
 A.Skill_Channeled_Acceleration      = 103706
 A.Skill_Race_Against_Time           = 103710
+A.Skill_Mend_Spirit                 = 103747
+A.Skill_Mend_Wounds                 = 103543
 A.Skill_Symbiosis                   = 103755
 
 -- ---------------------------------------------------

@@ -536,6 +536,9 @@ function SCB.Initialize( enabled )
 
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE, SCB.PlayerCombatState)
 
+    -- Werewolf
+    eventManager:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED, SCB.WerewolfState)
+
     -- Always show debug effects on development account
     if GetDisplayName() == "@ArtOfShredLegacy" then
         SCB.SV.ShowDebugCombat = true
@@ -801,6 +804,92 @@ function SCB.RemoveFromCustomList(list, input)
         end
     end
     SCB.Reset()
+end
+
+local g_werewolfName = ""
+local g_werewolfIcon = ""
+local g_werewolfCounter = 0
+
+local function SetWerewolfIcon()
+    local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
+    g_werewolfName, g_werewolfIcon = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
+end
+
+function SCB.WerewolfState(eventCode, werewolf, onActivation)
+
+    for i = 1, 4 do
+        name, _, discovered, skillLineId = GetSkillLineInfo(SKILL_TYPE_WORLD, i)
+        if skillLineId == 50 and unlocked then
+            if werewolf then
+                g_werewolfCounter = g_werewolfCounter + 1
+                if g_werewolfCounter == 3 or onActivation then
+                    -- Pull specific morph info
+                    SetWerewolfIcon()
+                    local currentPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
+                    local duration = ( currentPower / 27 )
+                    -- Round up by 1 from any decimal number
+                    local durationFormatted = mathfloor(duration + 0.999) * 1000
+                    local currentTime = GetGameTimeMilliseconds()
+                    local endTime = currentTime + durationFormatted
+                    g_effectsList.player1["Werewolf Indicator"] = {
+                        target="player", type=1,
+                        id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
+                        dur=0, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
+                        forced = "short",
+                        restart=true, iconNum=0, werewolf = true
+                    }
+
+                    eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SCB.OnPowerUpdate)
+                    eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
+                    g_werewolfCounter = 0
+                end
+            else
+                g_effectsList.player1["Werewolf Indicator"] = nil
+                eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
+                g_werewolfCounter = 0
+            end
+            d(werewolf)
+            return
+        end
+    end
+
+    if werewolf then
+        SetWerewolfIcon()
+        g_effectsList.player1["Werewolf Indicator"] = {
+            target="player", type=1,
+            id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
+            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            forced = "short",
+            restart=true, iconNum=0, werewolf = true
+        }
+    else
+        g_effectsList.player1["Werewolf Indicator"] = nil
+        eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
+        g_werewolfCounter = 0
+    end
+
+end
+
+function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
+
+    local currentPower = powerValue
+    local duration = ( currentPower / 27 )
+    -- Round up by 1 from any decimal number
+    local durationFormatted = mathfloor(duration + 0.999) * 1000
+    local currentTime = GetGameTimeMilliseconds()
+    local endTime = currentTime + durationFormatted
+    if currentPower > 0 then
+        g_effectsList.player1["Werewolf Indicator"] = {
+            target="player", type=1,
+            id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
+            dur=0, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
+            forced = "short",
+            restart=true, iconNum=0, werewolf = true
+        }
+    else
+        g_effectsList.player1["Werewolf Indicator"] = nil
+    end
+
 end
 
 function SCB.DuelStart()
@@ -2430,7 +2519,7 @@ function SCB.ReloadEffects(unitTag)
     if not SCB.SV.HideTargetBuffs then
         local unitName = GetUnitName(unitTag)
         -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
-        if E.AddNameAura[unitName] and GetUnitReaction(unitTag) == UNIT_REACTION_HOSTILE and not (IsUnitDead(unitTag) and unitTag == "player") and IsUnitInCombat(unitTag) then
+        if E.AddNameAura[unitName] and GetUnitReaction(unitTag) == UNIT_REACTION_HOSTILE and not IsUnitDead(unitTag) and IsUnitInCombat(unitTag) then
             for k, v in ipairs(E.AddNameAura[unitName]) do
                 g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
 					type=1,
@@ -3019,6 +3108,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
         if effect.restart and buff.cd ~= nil then
             -- Modify recall cooldown to always display as if the full CD was 10 minutes.
             if effect.name == A.Innate_Recall_Penalty then effect.dur = 600000 end
+            if effect.werewolf then effect.dur = 38000 end
             if remain == nil or effect.dur == nil or effect.dur == 0 then
                 buff.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false )
             else
@@ -3155,6 +3245,10 @@ function SCB.OnPlayerActivated(eventCode)
     if duelState == 3 and not SCB.SV.IgnoreBattleSpiritTarget then
         g_currentDuelTarget = strformat(SI_UNIT_NAME, characterName)
         SCB.ReloadEffects("reticleover")
+    end
+
+    if IsWerewolf() then
+        SCB.WerewolfState(nil, true, true)
     end
 
     if SCB.SV.DisguiseStatePlayer then

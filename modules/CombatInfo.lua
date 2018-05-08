@@ -828,10 +828,16 @@ function CI.OnSlotUpdated(eventCode, slotNum)
         return
     end
 
-    if E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].newId then
-        ability_id = E.BarHighlightOverride[ability_id].newId
+    if E.BarHighlightOverride[ability_id] then
+        if E.BarHighlightOverride[ability_id].hide then
+            return
+        end
+        if E.BarHighlightOverride[ability_id].newId then
+            ability_id = E.BarHighlightOverride[ability_id].newId
+        end
     end
     local abilityName = E.EffectOverride[ability_id] and E.EffectOverride[ability_id].name or GetAbilityName(ability_id) -- GetSlotName(slotNum)
+    --local _, _, channel = GetAbilityCastInfo(ability_id)
     local duration = CI.GetAbilityDuration(ability_id)
 
     g_actionBar[slotNum] = {

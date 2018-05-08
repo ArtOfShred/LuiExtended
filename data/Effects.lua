@@ -43,6 +43,10 @@ E.IsToggle = {
     -- Psijic Order
     [A.Skill_Concentrated_Barrier]          = true, -- Concentrated Barrier
 
+    [A.Skill_Mend_Spirit]                   = true, -- Mend Spirit
+    [A.Skill_Mend_Wounds]                   = true, -- Mend Wounds
+    [A.Skill_Symbiosis]                     = true, -- Symbiosis
+
     -- TODO: Haven't gone over these yet
     [A.Skill_Guard]                         = true, -- Guard (Support)
     [A.Skill_Mystic_Guard]                  = true, -- Mystic Guard (Support)
@@ -324,6 +328,10 @@ E.DebuffDisplayOverrideId = {
     [87560] = true, -- Frozen Gate Root (Frozen Gate)
     [92039] = true, -- Frozen Gate Root (Frozen Device)
     [92060] = true, -- Frozen Retreat Root (Frozen Retreat)
+
+    -- Werewolf
+    [39122] = true, -- Off Balance (Ferocious Roar)
+    [39123] = true, -- Ferocious Roar (Ferocious Roar)
 
     -- Human NPC's
     [88281] = true, -- Call Ally (Pet Ranger)
@@ -684,6 +692,9 @@ E.EffectCreateSkillAura = {
     [63119] = { icon = 'esoui/art/icons/ability_armor_001_b.dds' , name = A.Skill_Unstoppable, consolidate = true }, -- Major Resolve --> Unstoppable
     [63120] = { icon = 'esoui/art/icons/ability_armor_001_b.dds' , name = A.Skill_Unstoppable, consolidate = true }, -- Major Ward --> Unstoppable
 
+    -- Werewolf
+    [39124] = { icon = 'esoui/art/icons/ability_werewolf_003_a.dds', name = A.Skill_Rousing_Roar, consolidate = true, extendedDisplay = true }, -- Major Brutality --> Rousing Roar
+
 	-- Fighters Guild
 	[80271] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance --> Circle of Protection
 	[35739] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection --> Circle of Protection
@@ -736,6 +747,10 @@ E.EffectCreateSkillAura = {
             -- Restoration Staff
             E.BarHighlightOverride[85132] = { newId = 85154, showFakeAura = true, secondary = true, noRemove = true } -- Light's Champion --> Major Force
 
+            -- Werewolf
+            E.BarHighlightOverride[32633] = { newId = 45821, secondary = true } -- Roar --> Off Balance
+            E.BarHighlightOverride[39113] = { newId = 45834, secondary = true } -- Ferocious Roar --> Off Balance
+
             -- Mages Guild
             E.BarHighlightOverride[28567] = { newId = 63223, showFakeAura = true, secondary = true, noRemove = true } -- Entropy --> Major Sorcery
             E.BarHighlightOverride[40457] = { newId = 63227, showFakeAura = true, secondary = true, noRemove = true } -- Degeneration --> Major Sorcery
@@ -752,6 +767,10 @@ E.EffectCreateSkillAura = {
             -- Templar
             E.BarHighlightOverride[26792] = { newId = 76912, duration = 2000, showFakeAura = true, noRemove = true } -- Biting Jabs
             E.BarHighlightOverride[22229] = { showFakeAura = true } -- Remembrance (Remembrance - Rank 1)
+
+            -- Werewolf
+            E.BarHighlightOverride[32633] = { newId = 45823 } -- Roar
+            E.BarHighlightOverride[39113] = { newId = 45836 } -- Ferocious Roar
 
             -- Restoration Staff
             E.BarHighlightOverride[85132] = nil -- Light's Champion
@@ -1123,7 +1142,30 @@ E.BarHighlightOverride = {
     [39197] = { showFakeAura = true, noRemove = true }, -- Unstoppable
 
     ---------------------------
-    -- Fighters Guild --------
+    -- Werewolf ---------------
+    ---------------------------
+
+    [32632] = { newId = 38425 }, -- Pounce
+    [39105] = { newId = 39108 }, -- Brutal Pounce
+    [39104] = { newId = 39106 }, -- Feral Pounce
+
+    [58317] = { newId = 58318 }, -- Hircine's Rage
+    [58325] = { newId = 58327 }, -- Hircine's Fortitude
+
+    [32633] = { newId = 45823 }, -- Roar
+    [39113] = { newId = 45836 }, -- Ferocious Roar
+    [39114] = { newId = 39124, showFakeAura = true, noRemove = true }, -- Rousing Roar --> Major Brutality
+
+    [58405] = { newId = 58406 }, -- Piercing Howl --> Piercing Howl Stun
+    [58742] = { newId = 58743 }, -- Howl of Despair --> Howl of Despair Stun
+    [58798] = { newId = 58800 }, -- Howl of Agony --> Piercing Howl Stun
+
+    [58855] = { newId = 58856 }, -- Infectious Claws --> Infection
+    [58864] = { newId = 58865 }, -- Claws of Anguish --> Infection
+    [58879] = { newId = 58880 }, -- Claws of Life --> Infection
+
+    ---------------------------
+    -- Fighters Guild ---------
     ---------------------------
 
     [35721] = { newId = 35736 }, -- Silver Bolts
@@ -1161,6 +1203,10 @@ E.BarHighlightOverride = {
     [103503] = { newId = 103521, showFakeAura = true, noRemove = true }, -- Accelerate --> Minor Force
     [103706] = { newId = 103708, showFakeAura = true, noRemove = true }, -- Channeled Acceleration --> Minor Force
     [103710] = { newId = 103712, showFakeAura = true, noRemove = true }, -- Race Against Time --> Minor Force
+
+    [103543] = { hide = true }, -- Mend Wounds
+    [103747] = { hide = true }, -- Mend Spirit
+    [103755] = { hide = true }, -- Symbiosis
 
 }
 
@@ -1264,6 +1310,8 @@ E.SynergyNameOverride = {
 
     ['Tonal Inverter'] = 'LuiExtended/media/icons/abilities/ability_quest_tonal_inverter.dds', -- Tonal Inverter (Divine Intervention)
     [A.Skill_Blade_of_Woe] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds', -- Blade of Woe (Dark Brotherhood)
+    [A.Skill_Devour] = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', -- Devour (Werewolf)
+    [A.Skill_Feeding_Frenzy] = 'esoui/art/icons/ability_werewolf_005_b.dds', -- Feeding Frenzy (Werewolf)
 }
 
 E.BarNameOverride = {
@@ -3178,7 +3226,7 @@ E.EffectOverride = {
     [108843] = { name = A.Skill_Familiar_Damage_Pulse }, -- Volatile Familiar (Summon Unstable Familiar)
     [29528] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_claw.dds', name = A.Skill_Headbutt }, -- Claw (Summon Unstable Clannfear)
     [29529] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_tail_spike.dds' }, -- Tail Spike (Summon Unstable Clannfear)
-    [62201] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_taunt.dds', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Taunt (Summon Unstable Clannfear)
+    [62201] = { icon = 'esoui/art/icons/ability_warrior_010.dds', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Taunt (Summon Unstable Clannfear)
     [77187] = { name = A.Skill_Familiar_Damage_Pulse }, -- Volatile Familiar Damage Pulsi (Summon Volatile Familiar)
     [88933] = { name = A.Skill_Familiar_Damage_Pulse }, -- Volatile Familiar (Summon Volatile Familiar)
 
@@ -3366,7 +3414,7 @@ E.EffectOverride = {
     [26809] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Radiant Aura)
     [88486] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Radiant Aura)
 
-    [34366] = { hide = true }, -- Repentance (Repentance - Rank 1)
+    [34366] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Repentance (Repentance - Rank 1)
     [26823] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds', name = A.Skill_Repentance }, -- Repentance Magicka Restore (Repentance - Rank 1)
     [26824] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds', name = A.Skill_Repentance }, -- Repentance Heal (Repentance - Rank 1)
 
@@ -3861,10 +3909,9 @@ E.EffectOverride = {
     [63120] = { consolidate = true }, -- Major Ward (Unstoppable)
 
     ----------------------------------------------------------------
-    -- PLAYER PASSIVES WORLD ---------------------------------------
+    -- SOUL MAGIC PASSIVES -----------------------------------------
     ----------------------------------------------------------------
 
-    -- Soul Magic
     [39266] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_shatter.dds' }, -- Soul Shatter (Soul Shatter - Rank 1)
     [39267] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_shatter.dds' }, -- Soul Shatter (Soul Shatter - Rank 1)
     [39268] = { hide = true }, -- Soul Shatter (Soul Shatter - Rank 1)
@@ -3880,6 +3927,18 @@ E.EffectOverride = {
     [39264] = { hide = true }, -- Soul Trap (Soul Lock - Rank 1)
     [45580] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_lock.dds' }, -- Soul Lock
     [45582] = { hide = true }, -- Soul Trap (Soul Lock - Rank 2)
+
+    ----------------------------------------------------------------
+    -- SOUL MAGIC ACTIVES ------------------------------------------
+    ----------------------------------------------------------------
+
+    [26769] = { hide = true}, -- Soul Trap (Soul Trap)
+    [40329] = { hide = true}, -- Soul Splitting Trap (Soul Splitting Trap)
+    [40319] = { hide = true}, -- Consuming Trap (Consuming Trap)
+
+    [40323] = { icon = 'esoui/art/icons/ability_otherclass_001_b.dds' }, -- Consuming Trap (Consuming Trap)
+    [40321] = { icon = 'esoui/art/icons/ability_otherclass_001_b.dds' }, -- Consuming Trap (Consuming Trap)
+    [40326] = { icon = 'esoui/art/icons/ability_otherclass_001_b.dds' }, -- Consuming Trap (Consuming Trap)
 
     -- Vampire
     [35771] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_1.dds', stack = 1 }, -- Stage 1 Vampirism (Vampire General)
@@ -3900,20 +3959,66 @@ E.EffectOverride = {
     [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Blood_Ritual, A.Set_Cooldown) }, -- Fed on Ally (Blood Ritual)
     [40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = A.Passive_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
 
-    -- Werewolf
-    [33208] = { hide = true }, -- Devour (Devour - Rank 1)
+    ----------------------------------------------------------------
+    -- WEREWOLF PASSIVES -------------------------------------------
+    ----------------------------------------------------------------
 
     [35658] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_lycanthrophy.dds' }, -- Lycanthrophy
+    [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds' }, -- Sanies Lupinus (from player Bite)
+
     [32464] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Light Attack
     [89146] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds' }, -- Werewolf Bleed
+    [32477] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Were)
     [32479] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
     [32480] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack Werewolf
     [32494] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Heavy Attack
     [60773] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackrestore.dds', name = A.Skill_Heavy_Attack }, -- Stamina Return
+
+    [33208] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Devour (Devour - Rank 1)
     [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour - Rank 1)
 
     [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Bloodmoon, A.Set_Cooldown) }, -- Bit an Ally (Blood Moon)
-    [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds' }, -- Sanies Lupinus (Blood Moon)
+
+    ----------------------------------------------------------------
+    -- WEREWOLF ACTIVES --------------------------------------------
+    ----------------------------------------------------------------
+
+    [39124] = { consolidateExtra = true }, -- Major Brutality (Rousing Roar)
+
+    [58406] = { name = A.Skill_Piercing_Howl }, -- Piercing Howl Stun (Piercing Howl)
+    [58775] = { icon = 'esoui/art/icons/ability_werewolf_005_b.dds' }, -- Feeding Frenzy (Howl of Despair - Feeding Frenzy Synergy)
+    [58743] = { name = A.Skill_Howl_of_Despair }, -- Howl of Despair Stun (Howl of Despair)
+    [58744] = { hide = true }, -- Howl of Despair Synergy (Howl of Despair)
+    [58800] = { name = A.Skill_Howl_of_Agony }, -- Piercing Howl Stun (Howl of Agony)
+
+    [58856] = { name = A.Skill_Infectious_Claws }, -- Infection (Infectious Claws)
+    [58865] = { name = A.Skill_Claws_of_Anguish }, -- Infection (Claws of Anguish)
+    [58880] = { name = A.Skill_Claws_of_Life }, -- Infection (Claws of Life)
+
+    [39040] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Werewolf Transformation - All Morphs)
+
+    [80180] = { hide = true }, -- Birth Direwolf (Pack Leader)
+    [80184] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge.dds' }, -- Lunge (Pack Leader)
+    [80186] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge.dds' }, -- Lunge (Pack Leader)
+    [80187] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_nip.dds' }, -- Nip (Pack Leader)
+    [80188] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_nip.dds' }, -- Nip (Pack Leader)
+    [80189] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
+    [80190] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
+
+    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', name = A.Skill_Werewolf_Bleed }, -- Werewolf Berserker Bleed (Werewolf Bleed)
+
+    ----------------------------------------------------------------
+    -- WEREWOLF QUEST ABILITIES ------------------------------------
+    ----------------------------------------------------------------
+
+    [55885] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Light Attack
+    [55886] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Were)
+    [55888] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
+    [55891] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack Werewolf
+    [55890] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Heavy Attack
+
+    [40124] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Devour
+    [40125] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour
 
     ----------------------------------------------------------------
     -- DARK BROTHERHOOD PASSIVES -----------------------------------
@@ -4046,6 +4151,11 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     [104075] = { hideReduce = true }, -- Borrowed Time (Borrowed Time)
+
+    [110420] = { icon = 'esoui/art/icons/ability_psijic_003.dds', name = A.Skill_Imbue_Weapon }, -- Imbue Weapon Restore (Imbue Weapon)
+    [110421] = { icon = 'esoui/art/icons/ability_psijic_003_a.dds', name = A.Skill_Elemental_Weapon }, -- Elemental Weapon Restore (Elemental Weapon)
+    [110422] = { icon = 'esoui/art/icons/ability_psijic_003_b.dds', name = A.Skill_Crushing_Weapon }, -- Crushing Weapon Restore ( Crushing Weapon)
+
 
     [103521] = { consolidateExtra = true }, -- Minor Force (Accelerate)
     [103708] = { consolidateExtra = true }, -- Minor Force (Channeled Acceleration)
@@ -4485,6 +4595,7 @@ E.EffectOverride = {
     [29757] = { hide = true }, -- Remove block (Guard)
     [29766] = { hide = true }, -- Blocked Stack (Guard)
     [29765] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun, hide = true }, -- Uber Attack (Guard)
+    [29767] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun }, -- Uber Attack (Guard)
     [84346] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun }, -- Uber Attack (Guard)
 
     [48542] = { icon = 'esoui/art/icons/ability_warrior_011.dds', name = A.Skill_Shield_Rush, hide = true }, -- Focused Charge (Brute)
@@ -5458,7 +5569,6 @@ E.EffectOverride = {
     [32698] = { name = A.Innate_Stagger }, -- Staggered (Lurcher - Pulverize)
     [5349] = { name = A.Innate_Stagger, hide = true }, -- Staggered (Ogre - Shockwave)
     [38554] = { name = 'Crushing Limbs' }, -- Stun (Lurcher)
-    [6150] = { name = A.Skill_Shockwave }, -- Ogre (Off Balance)
     [17703] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_flameray.dds' }, -- Flame Ray (Imp Fire Beam)
     [8884] = { icon = 'esoui/art/icons/ability_mage_016.dds' }, -- Zap (Imp Lightning Beam)
     [24985] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds' }, -- Intimidating Roar (Ogre)
@@ -6151,6 +6261,10 @@ E.FakeExternalDebuffs = {
     -- Destruction Staff
     [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
 
+    -- Werewolf
+    [39045] = { icon = 'esoui/art/icons/ability_werewolf_001_b.dds', name = A.Skill_Werewolf_Fear, duration = 3200 }, -- Werewolf Fear (Werewolf Transformation - All Morphs)
+    [39040] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance, duration = 5000 }, -- Off-Balance Self (Werewolf Transformation - All Morphs)
+
     -- Item Sets
     [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 0 }, -- Bahraha's Curse
 
@@ -6364,6 +6478,10 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
 
     -- Dragonknight (Flame Lash)
     [70745] = {icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Power_Lash, duration = 2000}, -- Off-Balance Exploit (Flame Lash - Rank 1)
+
+    -- Werewolf
+    [39045] = { icon = 'esoui/art/icons/ability_werewolf_001_b.dds', name = A.Skill_Werewolf_Fear, duration = 3200 }, -- Werewolf Fear (Werewolf Transformation - All Morphs)
+    [39040] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance, duration = 5000 }, -- Off-Balance Self (Werewolf Transformation - All Morphs)
 
     -- Item Sets
     [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 1000 }, -- Bahraha's Curse
