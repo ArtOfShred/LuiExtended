@@ -81,7 +81,6 @@ data/DebugTable.lua
 
 modules/ChatAnnouncements.lua
 modules/CombatInfo.lua
-modules/DamageMeter.lua
 modules/InfoPanel.lua
 modules/UnitFrames.lua
 modules/SpellCastBuffs.lua
