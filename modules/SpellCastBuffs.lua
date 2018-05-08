@@ -154,11 +154,8 @@ local uiTlw                  = {} -- GUI
 local containerRouting       = {}
 
 -- Abilities and buffs
-local g_actionBar            = {}  -- TODO: Remove once new ground target effect function is fully implemented.
-local g_lastCast             = 0 -- TODO: Remove once new ground target effect function is fully implemented.
 local g_currentDuelTarget    = nil
 local g_effectsList          = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {}, saved = {}, promb_ground = {}, promb_target = {}, promb_player = {}, promd_ground = {}, promd_target = {}, promd_player = {} }
-local g_pendingGroundAbility = nil
 
 -- Self resurrection tracking
 local g_playerActive = false
@@ -241,36 +238,8 @@ local function EaseInOutQuad(t, b, c, d)
 end
 ]]--
 
---[[----------------------------------------------------------
-    ACTIVE BUFF EFFECTS
-    * Get a custom buff/debuff effect when the player casts a spell
-    * Effects are listed as [name] = { self buff , self debuff , target debuff , cast time }
-    * Of the cast time us "true" instead of number, the value will be read from API
---]]----------------------------------------------------------
-
 local Effects = {
     --["Imperial Prison Item Set"]    = { 6.0, false, false, nil},
-
-    --[[
-
-    -----------------------------------
-    -- WEAPON SKILLS
-    -----------------------------------
-
-    -- Bow
-    [A.Skill_Volley]                = { false, false, true, 2 },
-    [A.Skill_Scorched_Earth]        = { false, false, true, 2 },
-    [A.Skill_Arrow_Barrage]         = { false, false, true, 2 },
-
-    -----------------------------------
-    -- GUILDS
-    -----------------------------------
-
-    -- Mages Guild
-    [A.Skill_Meteor]                = { false, false, 11.8, 0 },
-    [A.Skill_Ice_Comet]             = { false, false, 11.8, 0 },    -- Might need some work on timer
-    [A.Skill_Shooting_Star]         = { false, false, 11.8, 0 },
-    -- Need to add Fire Rune here
 
     -- Undaunted
     [A.Skill_Trapping_Webs]         = { false, false, true, nil },
@@ -285,8 +254,6 @@ local Effects = {
     [A.Skill_Bat_Swarm]             = { false, false, 5.5, 0.1 },
     [A.Skill_Clouding_Swarm]        = { false, false, 5.5, 0.1 }, -- These values are perfect. Also note, this isn't needed as this shows as a buff on the player as well.
     [A.Skill_Devouring_Swarm]       = { false, false, 5.5, 0.1 },
-
-    -- Werewolf
 
     -----------------------------------
     -- AVA
@@ -486,9 +453,6 @@ function SCB.Initialize( enabled )
     eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED,    SCB.OnReticleTargetChanged )
 
     -- Buff Events
-    eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE,  SCB.OnSlotsFullUpdate )
-    eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED,       SCB.OnSlotUpdated )
-    eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED,  SCB.OnSlotAbilityUsed )
     eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
 
     eventManager:RegisterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, SCB.OnCombatEventIn )
@@ -737,7 +701,7 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
         cmxHIDE = ""
     end
 
-    if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide then
+    if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].hide then
         d(iconFormatted .. "|c00E200 [" ..abilityId .. "] " .. effectName.. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] ".. unitName .. "|r")
         return
     end
@@ -745,7 +709,7 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     local duration = (endTime - beginTime) * 1000
 
     local refreshOnly = ""
-    if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].refreshOnly then
+    if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].refreshOnly then
         refreshOnly = " |c00E200(Hidden)|r "
     end
 
@@ -817,51 +781,46 @@ end
 
 function SCB.WerewolfState(eventCode, werewolf, onActivation)
 
-    for i = 1, 4 do
-        name, _, discovered, skillLineId = GetSkillLineInfo(SKILL_TYPE_WORLD, i)
-        if skillLineId == 50 and unlocked then
-            if werewolf then
-                g_werewolfCounter = g_werewolfCounter + 1
-                if g_werewolfCounter == 3 or onActivation then
-                    -- Pull specific morph info
-                    SetWerewolfIcon()
-                    local currentPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
-                    local duration = ( currentPower / 27 )
-                    -- Round up by 1 from any decimal number
-                    local durationFormatted = mathfloor(duration + 0.999) * 1000
-                    local currentTime = GetGameTimeMilliseconds()
-                    local endTime = currentTime + durationFormatted
-                    g_effectsList.player1["Werewolf Indicator"] = {
-                        target="player", type=1,
-                        id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-                        dur=0, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
-                        forced = "short",
-                        restart=true, iconNum=0, werewolf = true
-                    }
+	if werewolf then
+		for i = 1, 4 do
+			name, _, discovered, skillLineId = GetSkillLineInfo(SKILL_TYPE_WORLD, i)
+			if skillLineId == 50 and unlocked then
+					g_werewolfCounter = g_werewolfCounter + 1
+					if g_werewolfCounter == 3 or onActivation then
+						-- Pull specific morph info
+						SetWerewolfIcon()
+						local currentPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
+						local duration = ( currentPower / 27 )
+						-- Round up by 1 from any decimal number
+						local durationFormatted = mathfloor(duration + 0.999) * 1000
+						local currentTime = GetGameTimeMilliseconds()
+						local endTime = currentTime + durationFormatted
+						g_effectsList.player1["Werewolf Indicator"] = {
+							target="player", type=1,
+							id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
+							dur=0, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
+							forced = "short",
+							restart=true, iconNum=0, overrideDur = 38000
+						}
 
-                    eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SCB.OnPowerUpdate)
-                    eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
-                    g_werewolfCounter = 0
-                end
-            else
-                g_effectsList.player1["Werewolf Indicator"] = nil
-                eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
-                g_werewolfCounter = 0
-            end
-            d(werewolf)
-            return
-        end
-    end
+						eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SCB.OnPowerUpdate)
+						eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
+						g_werewolfCounter = 0
+					end
+				return
+			end
+		end
 
-    if werewolf then
-        SetWerewolfIcon()
+		-- If we didn't return from the above statement this must be quest based werewolf transformation - so just display an unlimited duration passive as the counter.
+		SetWerewolfIcon()
         g_effectsList.player1["Werewolf Indicator"] = {
-            target="player", type=1,
+			type=1,
             id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
             forced = "short",
-            restart=true, iconNum=0, werewolf = true
+            restart=true, iconNum=0
         }
+		g_werewolfCounter = 0
     else
         g_effectsList.player1["Werewolf Indicator"] = nil
         eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
@@ -1724,14 +1683,6 @@ end
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
-        if g_pendingGroundAbility and g_pendingGroundAbility.id == abilityId and changeType == EFFECT_RESULT_GAINED then
-            -- Cast ability
-            if not SCB.SV.HideGroundEffects then
-                SCB.NewEffects( g_pendingGroundAbility )
-            end
-            -- Clear the ground target queue
-            g_pendingGroundAbility = nil
-        end
 
         -- Create fake ground aura
         if E.EffectGroundDisplay[abilityId] then
@@ -2543,7 +2494,8 @@ function SCB.ReloadEffects(unitTag)
                 dur=recallRemain, starts=currentTime, ends=currentTime+recallRemain,
                 forced = "long",
                 restart=true, iconNum=0,
-                unbreakable=1
+                unbreakable=1,
+				overrideDur = 600000
 			}
         end
     end
@@ -2700,101 +2652,6 @@ function SCB.NewEffects( ability )
                 end
             end
         end
-    end
-end
-
--- Called from EVENT_ACTION_SLOT_ABILITY_USED listener
--- Check for whether a spell is being cast
-function SCB.OnSlotAbilityUsed(eventCode, slotNum)
-    -- Clear stored ground-target ability
-    g_pendingGroundAbility = nil
-
-    -- Get the used ability
-    local currentTime = GetGameTimeMilliseconds()
-    local ability = g_actionBar[slotNum]
-
-    if ability then -- Only proceed if this button is being watched
-        -- Get the time
-        -- Avoid failure and button mashing
-        if not HasFailure( slotNum ) and ( currentTime > g_lastCast + 250 ) then
-            -- Don't process effects immediately for ground-target spells
-            if ability.ground then
-                g_pendingGroundAbility = ability
-
-            else
-                -- Run all routines associated with selected ability
-                if not SCB.SV.HideGroundEffects then
-                    SCB.NewEffects( ability )
-                end
-                -- Flag the last cast time
-                g_lastCast = currentTime
-            end
-        end
-    end
-end
-
--- Called from EVENT_ACTION_SLOT_UPDATED listener
-function SCB.OnSlotUpdated(eventCode, slotNum)
-    --d( strfmt("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum) ) )
-    -- Look only for action bar slots
-    if slotNum < 3 or slotNum > 8 then
-        return
-    end
-
-    -- Bail out if slot is not used
-    if not IsSlotUsed(slotNum) then
-        g_actionBar[slotNum] = nil
-        return
-    end
-
-    -- Get the slotted ability ID
-    local ability_id = GetSlotBoundId(slotNum)
-    -- Get additional ability information
-    local abilityName = E.EffectOverride[ability_id] and E.EffectOverride[ability_id].name or GetAbilityName(ability_id) -- GetSlotName(slotNum)
-    -- Localization ^^ here. We will use English name from here onwards.
-    local abilityCost, mechanicType = GetSlotAbilityCost(slotNum)
-    -- Get API information for this ability
-    local channeled, castTime, channelTime = GetAbilityCastInfo(ability_id)
-    local duration = GetAbilityDuration(ability_id)
-
-    local effects = nil
-
-    if Effects[ abilityName ] then
-        effects = {}
-        for i = 1, 4 do
-            if not Effects[ abilityName  ][i] or Effects[ abilityName  ][i] == 0 then
-                effects[i] = 0
-            elseif Effects[ abilityName  ][i] == true then
-                effects[i] = (i < 4) and duration or castTime
-            else
-                effects[i] = Effects[ abilityName ][i] * 1000
-            end
-        end
-    end
-
-    g_actionBar[slotNum] = {
-        id      = ability_id,
-        name    = abilityName,
-        type    = mechanicType,
-        cost    = abilityCost,
-        icon    = GetSlotTexture(slotNum),
-        ground  = ( GetAbilityTargetDescription(ability_id) == "Ground" ),
-        effects = effects,
-        duration = duration,
-        slotNum = slotNum
-    }
-end
-
-function SCB.OnSlotsFullUpdate(eventCode, isHotbarSwap)
-    -- If the event was triggered by a weapon swap we need to clear ground-target stored ability
-    if isHotbarSwap then
-        g_pendingGroundAbility = nil
-    end
-
-    -- Update action bar skills
-    g_actionBar = {}
-    for i = 3, 8 do
-        SCB.OnSlotUpdated(eventCode, i)
     end
 end
 
@@ -3106,9 +2963,10 @@ function SCB.updateIcons( currentTime, sortedList, container )
             end
         end
         if effect.restart and buff.cd ~= nil then
-            -- Modify recall cooldown to always display as if the full CD was 10 minutes.
-            if effect.name == A.Innate_Recall_Penalty then effect.dur = 600000 end
-            if effect.werewolf then effect.dur = 38000 end
+            -- Modify abilities with forced maximum durations.
+			if effect.overrideDur then 
+				effect.dur = effect.overrideDur
+			end
             if remain == nil or effect.dur == nil or effect.dur == 0 then
                 buff.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false )
             else
@@ -3221,8 +3079,6 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
 end
 
 function SCB.OnPlayerActivated(eventCode)
-    -- Write current Action Bar and quick slot state
-    SCB.OnSlotsFullUpdate(eventCode)
 
     g_playerActive = true
     g_playerResurectStage = nil
