@@ -919,10 +919,6 @@ E.BarHighlightOverride = {
 
     [77140] = { newId = 88937 }, -- Summon Twilight Tormentor --> Twilight Tormentor
 
-    [24158] = { noRemove = true }, -- Bound Armor
-    [24165] = { noRemove = true }, -- Bound Armaments
-    [24163] = { noRemove = true }, -- Bound Aegis
-
     [23634] = { newId = 80459 }, -- Summon Storm Atronach
     [23492] = { newId = 80463 }, -- Greater Storm Atronach
     [23495] = { newId = 80468 }, -- Summon Charged Atronach

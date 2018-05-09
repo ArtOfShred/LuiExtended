@@ -2184,6 +2184,7 @@ debugAuras = {
             [22706] = true, -- Remove Sprint
             [20303] = true, -- Remove Sprint
             [38519] = true, -- Hiding
+            [39046] = true, -- Add Guild Rep
             [85701] = true, -- Dueling Flag
             [2727] = true, -- Off-Balance
             [21263] = true, -- Ayleid Health Bonus
@@ -5281,6 +5282,10 @@ debugAuras = {
             [40125] = true, -- Devour
 
             [41057] = true, -- Begin Werewolf
+
+            [73124] = true, -- Stun
+            [73126] = true, -- Werewolf Appearance
+            [73181] = true, -- Werewolf Appearance
 
             ------------------------------
             -- DARK BROTHERHOOD PASSIVES
