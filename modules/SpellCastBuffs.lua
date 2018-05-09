@@ -163,7 +163,7 @@ local g_playerDead   = false
 local g_playerResurectStage = nil
 
 -- Font to be used on icons "ZoFontWindowSubtitle" or ours:
---local g_buffsFont = "/LuiExtended/media/fonts/fontin_sans_r.otf|16|outline"
+--local g_buffsFont = "/LuiExtended/media/fonts/Fontin/fontin_sans_r.otf|16|outline"
 --local g_buffsFont = "$(MEDIUM_FONT)|17|outline"
 local g_buffsFont
 local g_prominentFont
