@@ -345,7 +345,7 @@ CA.D = {
         SkillGuildColorUD               = { .58, .75, 0, 1},
         SkillGuildColorTG               = { .29, .27, .42, 1},
         SkillGuildColorDB               = { .70, 0, .19, 1},
-		SkillGuildColorPO				= { 1, 1, 1, 1 },
+		SkillGuildColorPO				= { .5, 1, 1, 1 },
 
         SkillGuildThrottle              = 0,
         SkillGuildThreshold             = 0,
@@ -5252,7 +5252,7 @@ local GUILD_SKILL_ICONS =
     [55] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",
     [117] = "esoui/art/icons/mapkey/mapkey_thievesguild.dds",
     [118] = "esoui/art/icons/mapkey/mapkey_darkbrotherhood.dds",
-	[130] = "esoui/art/icons/rep_psijic_64.dds",
+	[130] = "LuiExtended/media/unitframes/mapkey_psijicorder.dds",
 }
 
 -- Alert Prehooks
