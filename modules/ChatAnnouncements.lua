@@ -335,6 +335,7 @@ CA.D = {
         SkillGuildUndaunted             = true,
         SkillGuildThieves               = true,
         SkillGuildDarkBrotherhood       = true,
+		SkillGuildPsijicOrder			= true,
         SkillGuildIcon                  = true,
         SkillGuildMsg                   = GetString(SI_LUIE_CA_SKILL_GUILD_MSG),
         SkillGuildRepName               = GetString(SI_LUIE_CA_SKILL_GUILD_REPUTATION),
@@ -344,6 +345,7 @@ CA.D = {
         SkillGuildColorUD               = { .58, .75, 0, 1},
         SkillGuildColorTG               = { .29, .27, .42, 1},
         SkillGuildColorDB               = { .70, 0, .19, 1},
+		SkillGuildColorPO				= { 1, 1, 1, 1 },
 
         SkillGuildThrottle              = 0,
         SkillGuildThreshold             = 0,
@@ -881,6 +883,7 @@ function CA.RegisterColorEvents()
     SkillGuildColorizeUD = colorDef:New(unpack(CA.SV.Skills.SkillGuildColorUD)):ToHex()
     SkillGuildColorizeTG = colorDef:New(unpack(CA.SV.Skills.SkillGuildColorTG)):ToHex()
     SkillGuildColorizeDB = colorDef:New(unpack(CA.SV.Skills.SkillGuildColorDB)):ToHex()
+    SkillGuildColorizePO = colorDef:New(unpack(CA.SV.Skills.SkillGuildColorPO)):ToHex()
     QuestColorLocNameColorize = colorDef:New(unpack(CA.SV.Quests.QuestColorLocName)):ToHex()
     QuestColorLocDescriptionColorize = colorDef:New(unpack(CA.SV.Quests.QuestColorLocDescription)):ToHex()
     QuestColorQuestNameColorize = colorDef:New(unpack(CA.SV.Quests.QuestColorName))
@@ -5249,6 +5252,7 @@ local GUILD_SKILL_ICONS =
     [55] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",
     [117] = "esoui/art/icons/mapkey/mapkey_thievesguild.dds",
     [118] = "esoui/art/icons/mapkey/mapkey_darkbrotherhood.dds",
+	[130] = "esoui/art/icons/rep_psijic_64.dds",
 }
 
 -- Alert Prehooks
@@ -9715,6 +9719,8 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
            return
         elseif lineId == 118 and not CA.SV.Skills.SkillGuildDarkBrotherhood then
            return
+	    elseif lineId == 130 and not CA.SV.Skills.SkillGuildPsijicOrder then
+			return
         end
 
         local change = currentXP - previousXP
@@ -9753,7 +9759,7 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
             end
         end
 
-        if lineId == 55 or lineId == 117 or lineId == 118 then
+        if lineId == 55 or lineId == 117 or lineId == 118 or lineId == 130 then
             -- Other guilds are usually either a quest reward or achievement reward
             priority = "EXPERIENCE LEVEL"
         end
@@ -9769,6 +9775,7 @@ function CA.PrintGuildRep(change, lineName, lineId, priority)
         [55] = SkillGuildColorizeUD,
         [117] = SkillGuildColorizeTG,
         [118] = SkillGuildColorizeDB,
+		[130] = SkillGuildColorizePO,
     }
 
     local icon = iconFormatInheritColor(GUILD_SKILL_ICONS[lineId], 16, 16)

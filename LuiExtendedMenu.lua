@@ -4967,6 +4967,29 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Skills.SkillGuildDarkBrotherhood) end,
                 default = {r=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorDB[1], g=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorDB[2], b=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorDB[3]}
             },
+			
+			{
+                -- Skill Psijic Order
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CA_GUILDREP_PO),
+                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_PO_TP),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.Skills.SkillGuildPsijicOrder end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.Skills.SkillGuildPsijicOrder = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = LUIE.ChatAnnouncements.D.Skills.SkillGuildPsijicOrder,
+            },
+            {
+                -- Guild Skill Point Color PO
+                type = "colorpicker",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_PO_COLOR)),
+                getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Skills.SkillGuildColorPO) end,
+                setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Skills.SkillGuildColorPO = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                width = "full",
+                disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Skills.SkillGuildDarkBrotherhood) end,
+                default = {r=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorPO[1], g=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorPO[2], b=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorPO[3]}
+            },
+			
             {
                 -- Skill Guild Alert
                 type = "checkbox",
