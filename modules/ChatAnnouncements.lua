@@ -6331,7 +6331,8 @@ function CA.HookFunction()
     ZO_PreHook(alertHandlers, EVENT_TRADE_SUCCEEDED, TradeSucceededAlert)
     ZO_PreHook(alertHandlers, EVENT_MAIL_SEND_FAILED, MailSendFailedAlert)
 
-    local csaHandlers = ZO_CenterScreenAnnounce_GetCallbackHandlers()
+    local csaHandlers = ZO_CenterScreenAnnounce_GetEventHandlers()
+    local csaCallbackHandlers = ZO_CenterScreenAnnounce_GetCallbackHandlers()
 
     local chatHandlers = ZO_ChatSystem_GetEventHandlers()
 
@@ -6749,7 +6750,7 @@ function CA.HookFunction()
 
     end
 
-    csaHandlers[EVENT_COLLECTIBLE_UPDATED] = {
+    csaCallbackHandlers[EVENT_COLLECTIBLE_UPDATED] = {
         callbackManager = ZO_COLLECTIBLE_DATA_MANAGER,
         callbackRegistration = "OnCollectibleUpdated",
         callbackFunction = function(collectibleId, justUnlocked)
@@ -6811,7 +6812,7 @@ function CA.HookFunction()
         end
     }
 
-    csaHandlers[EVENT_COLLECTIBLES_UPDATED] = {
+    csaCallbackHandlers[EVENT_COLLECTIBLES_UPDATED] = {
         callbackManager = ZO_COLLECTIBLE_DATA_MANAGER,
         callbackRegistration = "OnCollectionUpdated",
         callbackFunction = function(numJustUnlocked)

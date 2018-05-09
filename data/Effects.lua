@@ -1313,6 +1313,7 @@ E.SynergyNameOverride = {
 
     ['Tonal Inverter'] = 'LuiExtended/media/icons/abilities/ability_quest_tonal_inverter.dds', -- Tonal Inverter (Divine Intervention)
     [A.Skill_Blade_of_Woe] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds', -- Blade of Woe (Dark Brotherhood)
+    [A.Skill_Feed] = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', -- Feed (Vampire)
     [A.Skill_Devour] = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', -- Devour (Werewolf)
     [A.Skill_Feeding_Frenzy] = 'esoui/art/icons/ability_werewolf_005_b.dds', -- Feeding Frenzy (Werewolf)
 }
@@ -3952,8 +3953,9 @@ E.EffectOverride = {
     [35783] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_3.dds', stack = 3 }, -- Stage 3 Vampirism (Vampire General)
     [35792] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', stack = 4 }, -- Stage 4 Vampirism (Vampire General)
 
-    [33175] = { icon = 'esoui/art/icons/ability_vampire_002.dds', unbreakable = 1 }, -- Feed (Vampire - Feed)
-    [33177] = { icon = 'esoui/art/icons/ability_vampire_002.dds' }, -- Feed
+    [33152] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed
+    [33177] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed
+    [33175] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', unbreakable = 1 }, -- Feed (Vampire - Feed)
 
     [33182] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Savage_Feeding }, -- Uber Attack (Savage Feeding - Rank 1)
     [33183] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Savage Feeding - Rank 1)
@@ -5642,8 +5644,8 @@ E.EffectOverride = {
     [50183] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_consuming_energy.dds' }, -- Consuming Energy (Spellfiend)
     [52398] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_consuming_energy.dds' }, -- Consuming Energy (Spellfiend)
 
-    [68735] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampiric_drain.dds' }, -- Vampiric Drain (Vampire)
-    [68750] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampiric_drain.dds', hide = true }, -- Vampiric Drain (Vampire)
+    [68735] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Vampiric Drain (Vampire)
+    [68750] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', hide = true }, -- Vampiric Drain (Vampire)
     [68765] = { hide = true }, -- Vampiric Drain (Vampire)
     [68771] = { hide = true }, -- Vampiric Drain (Vampire)
     [68772] = { hide = true }, -- Vampiric Drain (Vampire)
@@ -6434,7 +6436,7 @@ E.FakePlayerBuffs = {
     [22226] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation - Rank 1)
 
     -- Vampire
-    [33175] = { icon = 'esoui/art/icons/ability_vampire_002.dds', name = A.Skill_Feed, duration = 6300 }, -- Feed (Vampire - Feed)
+    [33175] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 6300 }, -- Feed (Vampire - Feed)
 
     -- Mages Guild
     [40449] = { icon = 'esoui/art/icons/ability_mageguild_003_a.dds', name = A.Skill_Spell_Symmetry, duration = 5000 }, -- Spell Symmetry (Spell Symmetry)
