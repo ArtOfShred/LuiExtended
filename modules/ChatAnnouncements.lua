@@ -63,7 +63,14 @@ CA.D = {
         AchievementCategory9          = true,
         AchievementCategory10         = true,
         AchievementCategory11         = true,
-        --AchievementCategory12       = true,
+        AchievementCategory12         = true,
+        AchievementCategory13         = true,
+        AchievementCategory14         = true,
+        AchievementCategory15         = true,
+        AchievementCategory16         = true,
+        AchievementCategory17         = true,
+        AchievementCategory18         = true,
+        AchievementCategory19         = true,
         AchievementProgressMsg        = GetString(SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG),
         AchievementCompleteMsg        = GetString(SI_ACHIEVEMENT_AWARDED_CENTER_SCREEN),
         AchievementColorProgress      = true,
@@ -1105,7 +1112,7 @@ end
 
 function CA.RegisterDisguiseEvents()
     eventManager:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
-    if CA.SV.Notify.Disguise then
+    if CA.SV.Notify.DisguiseCA or CA.SV.Notify.DisguiseCSA or CA.SV.Notify.DisguiseAlert or CA.SV.Notify.DisguiseWarnCA or CA.SV.Notify.DisguiseWarnCSA or CA.SV.Notify.DisguiseWarnAlert then
         eventManager:RegisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
         eventManager:AddFilterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
         g_currentDisguise = GetItemId(0, 10) or 0 -- Get the currently equipped disguise itemId if any
@@ -4986,7 +4993,10 @@ end
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
     if disguiseState == DISGUISE_STATE_DANGER then
         if CA.SV.Notify.DisguiseWarnCA then
-            printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))
+			local message = GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER)
+			g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
+			g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+			eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Notify.DisguiseWarnCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_MAJOR_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED)
@@ -5005,7 +5015,10 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
 
     if disguiseState == DISGUISE_STATE_SUSPICIOUS then
         if CA.SV.Notify.DisguiseWarnCA then
-            printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))
+			local message = GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)
+			g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
+			g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+			eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Notify.DisguiseWarnCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_MAJOR_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED)
@@ -5029,7 +5042,9 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
     if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
         local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)
         if CA.SV.Notify.DisguiseCA then
-            printToChat(message)
+			g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
+			g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+			eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Notify.DisguiseAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -5046,7 +5061,9 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
         g_currentDisguise = GetItemId(0, 10) or 0
         local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)
         if CA.SV.Notify.DisguiseCA then
-            printToChat(message)
+			g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
+			g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+			eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Notify.DisguiseAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -5075,7 +5092,7 @@ function CA.OnPlayerActivated(eventCode, initial)
         g_tradeTarget = ZO_SELECTED_TEXT:Colorize(strformat(SI_UNIT_NAME, tradeName))
     end
 
-    if CA.SV.Notify.Disguise then
+    if CA.SV.Notify.DisguiseCA or CA.SV.Notify.DisguiseCSA or CA.SV.Notify.DisguiseAlert or CA.SV.Notify.DisguiseWarnCA or CA.SV.Notify.DisguiseWarnCSA or CA.SV.Notify.DisguiseWarnAlert then
         if g_disguiseState == 0 then
             g_disguiseState = GetUnitDisguiseState("player")
             if g_disguiseState == 0 then
@@ -5085,7 +5102,9 @@ function CA.OnPlayerActivated(eventCode, initial)
                 g_currentDisguise = GetItemId(0, 10) or 0
                 local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)
                 if CA.SV.Notify.DisguiseCA then
-                    printToChat(message)
+					g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
+					g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+					eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
                 if CA.SV.Notify.DisguiseAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -5103,7 +5122,9 @@ function CA.OnPlayerActivated(eventCode, initial)
             if g_disguiseState == 0 then
                 local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)
                 if CA.SV.Notify.DisguiseCA then
-                    printToChat(message)
+					g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
+					g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+					eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
                 if CA.SV.Notify.DisguiseAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -6750,108 +6771,96 @@ function CA.HookFunction()
 
     end
 
-    csaCallbackHandlers[EVENT_COLLECTIBLE_UPDATED] = {
-        callbackManager = ZO_COLLECTIBLE_DATA_MANAGER,
-        callbackRegistration = "OnCollectibleUpdated",
-        callbackFunction = function(collectibleId, justUnlocked)
-            if not justUnlocked then
-                return
-            end
+	local function CollectibleUnlockedHook(collectibleId, lockStateChange)
+		if lockStateChange == ZO_COLLECTIBLE_LOCK_STATE_CHANGE.UNLOCKED then
+			local collectibleData = ZO_COLLECTIBLE_DATA_MANAGER:GetCollectibleDataById(collectibleId)
+			if not collectibleData:IsPlaceholder() then
 
-            local stringPrefix = CA.SV.Collectibles.CollectiblePrefix
-            local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
+				local stringPrefix = CA.SV.Collectibles.CollectiblePrefix
+				local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
 
-            local collectibleName, _, iconFile = GetCollectibleInfo(collectibleId)
-            local isPlaceholder = IsCollectiblePlaceholder(collectibleId)
-            if not isPlaceholder then
+				local collectibleName = collectibleData:GetName()
+				local icon = collectibleData:GetIcon()
+				local categoryData = collectibleData:GetCategoryData()
+				local categoryName = categoryData:GetName()
 
-                local categoryIndex, subcategoryIndex = GetCategoryInfoFromCollectibleId(collectibleId)
+				if CA.SV.Collectibles.CollectibleCA then
+					local link = GetCollectibleLink(collectibleId, linkBrackets[CA.SV.BracketOptionCollectible])
+					local formattedIcon = CA.SV.Collectibles.CollectibleIcon and strfmt("|t16:16:%s|t ", icon) or ""
 
-                local categoryName = GetCollectibleCategoryInfo(categoryIndex)
-                local subcategoryName = subcategoryIndex and GetCollectibleSubCategoryInfo(categoryIndex, subcategoryIndex) or nil
-                local displayedCategory = subcategoryName and subcategoryName or categoryName
+					local string1
+					if stringPrefix ~= "" then
+						string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[CA.SV.Collectibles.CollectibleBracket]))
+					else
+						string1 = ""
+					end
+					local string2
+					if CA.SV.Collectibles.CollectibleCategory then
+						string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, categoryName) .. ".")
+					else
+						string2 = link
+					end
+					finalString = strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2)
+					g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
+					g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+					eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+				end
 
-                if CA.SV.Collectibles.CollectibleCA then
-                    local link = GetCollectibleLink(collectibleId, linkBrackets[CA.SV.BracketOptionCollectible])
-                    local formattedIcon = CA.SV.Collectibles.CollectibleIcon and strfmt("|t16:16:%s|t ", iconFile) or ""
+				-- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
+				local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
+				if CA.SV.Collectibles.CollectibleCSA then
+					messageParams:SetText(csaPrefix, strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryName))
+					messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
+					messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SINGLE_COLLECTIBLE_UPDATED)
+					CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+				end
 
-                    local string1
-                    if stringPrefix ~= "" then
-                        string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[CA.SV.Collectibles.CollectibleBracket]))
-                    else
-                        string1 = ""
-                    end
-                    local string2
-                    if CA.SV.Collectibles.CollectibleCategory then
-                        string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, displayedCategory) .. ".")
-                    else
-                        string2 = link
-                    end
-                    finalString = strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2)
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
-                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-                end
+				if CA.SV.Collectibles.CollectibleAlert then
+					local text = strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryName .. ".")
+					callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
+				end
 
-                -- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
-                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
-                if CA.SV.Collectibles.CollectibleCSA then
-                    messageParams:SetText(csaPrefix, strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory))
-                    messageParams:SetIconData(iconFile, "EsoUI/Art/Achievements/achievements_iconBG.dds")
-                    messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SINGLE_COLLECTIBLE_UPDATED)
-                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-                end
+			end
+		end
+		return true
+	end
 
-                if CA.SV.Collectibles.CollectibleAlert then
-                    local text = strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory .. ".")
-                    callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
-                end
+	local function CollectiblesUnlockedHook(numJustUnlocked)
+		if numJustUnlocked > 0 then
 
-            end
-            return messageParams
-        end
-    }
+			local stringPrefix = CA.SV.Collectibles.CollectiblePrefix
+			local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
 
-    csaCallbackHandlers[EVENT_COLLECTIBLES_UPDATED] = {
-        callbackManager = ZO_COLLECTIBLE_DATA_MANAGER,
-        callbackRegistration = "OnCollectionUpdated",
-        callbackFunction = function(numJustUnlocked)
-            if numJustUnlocked > 0 then
+			if CA.SV.Collectibles.CollectibleCA then
+				local string1
+				if stringPrefix ~= "" then
+					string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[CA.SV.Collectibles.CollectibleBracket]))
+				else
+					string1 = ""
+				end
+				local string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. ".")
+				finalString = strformat("<<1>><<2>>", string1, string2)
+				g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
+				g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+				eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+			end
 
-                local stringPrefix = CA.SV.Collectibles.CollectiblePrefix
-                local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
+			-- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
+			local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
+			if CA.SV.Collectibles.CollectibleCSA then
+				messageParams:SetText(csaPrefix, strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked))
+				messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COLLECTIBLES_UPDATED)
+				CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+			end
 
-                if CA.SV.Collectibles.CollectibleCA then
-                    local string1
-                    if stringPrefix ~= "" then
-                        string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[CA.SV.Collectibles.CollectibleBracket]))
-                    else
-                        string1 = ""
-                    end
-                    local string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. ".")
-                    finalString = strformat("<<1>><<2>>", string1, string2)
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
-                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-                end
+			if CA.SV.Collectibles.CollectibleAlert then
+				local text = strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. "."
+				callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
+			end
 
-                -- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
-                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
-                if CA.SV.Collectibles.CollectibleCSA then
-                    messageParams:SetText(csaPrefix, strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked))
-                    messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COLLECTIBLES_UPDATED)
-                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-                end
-
-                if CA.SV.Collectibles.CollectibleAlert then
-                    local text = strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. "."
-                    callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
-                end
-
-            end
-            return messageParams
-        end
-    }
+		end
+		return true
+	end
 
     local function QuestAddedHook(journalIndex, questName, objectiveName)
 
@@ -8540,8 +8549,8 @@ function CA.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementHook)
     ZO_PreHook(csaHandlers, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, InventoryBagCapacityHook)
     ZO_PreHook(csaHandlers, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, InventoryBankCapacityHook)
-    --ZO_PreHook(csaHandlers, EVENT_COLLECTIBLE_UPDATED, CollectibleUnlockedHook)
-    --ZO_PreHook(csaHandlers, EVENT_COLLECTIBLES_UPDATED, CollectiblesUnlockedHook)
+    ZO_PreHook(csaCallbackHandlers[1], "callbackFunction", CollectibleUnlockedHook)
+    ZO_PreHook(csaCallbackHandlers[2], "callbackFunction", CollectiblesUnlockedHook)
     ZO_PreHook(csaHandlers, EVENT_CHAMPION_LEVEL_ACHIEVED, ChampionLevelAchievedHook)
     ZO_PreHook(csaHandlers, EVENT_CHAMPION_POINT_GAINED, ChampionPointGainedHook)
     ZO_PreHook(csaHandlers, EVENT_DUEL_NEAR_BOUNDARY, DuelNearBoundaryHook)
