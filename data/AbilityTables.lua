@@ -788,6 +788,7 @@ A.Effect_Curse_Duration             = 25000
 
 
 -- Replace ability IDs with names
+local pairs = pairs
 for k, v in pairs(A) do
     if type(v) == "number" then
         A[k] = GetAbilityName(v)
