@@ -1,7 +1,5 @@
 LUIE.CombatTextConstants = {
----------------------------------------------------------------------------------------------------------------------------------------
-    --//DAMAGE & HEALING//--
----------------------------------------------------------------------------------------------------------------------------------------
+    -- Damage & Healing
     isDamage = {
         [ACTION_RESULT_DAMAGE]              = true,
         [ACTION_RESULT_FALL_DAMAGE]         = true,
@@ -47,9 +45,7 @@ LUIE.CombatTextConstants = {
         [DAMAGE_TYPE_DISEASE]               = true,
         [DAMAGE_TYPE_POISON]                = true,
     },
----------------------------------------------------------------------------------------------------------------------------------------
-    --//MITIGATION//--
----------------------------------------------------------------------------------------------------------------------------------------
+    -- Mitigation
     mitigationType                          = { "Single Line", "Multiple Lines" },
     isMiss = {
         [ACTION_RESULT_MISS]                = true,
@@ -75,10 +71,8 @@ LUIE.CombatTextConstants = {
     isInterrupted = {
         [ACTION_RESULT_INTERRUPT]           = true,
     },
----------------------------------------------------------------------------------------------------------------------------------------
-    --//CROWD CONTROL//--
----------------------------------------------------------------------------------------------------------------------------------------
---WHAT IS ACTION RESULT FOR SNARE AND IMMOBILIZE?? ROOTED DOES NOT WORK
+    -- Crowd Control
+    -- WHAT IS ACTION RESULT FOR SNARE AND IMMOBILIZE?? ROOTED DOES NOT WORK
     isDisoriented = {
         [ACTION_RESULT_DISORIENTED]         = true,
     },
@@ -94,16 +88,12 @@ LUIE.CombatTextConstants = {
     isStunned = {
         [ACTION_RESULT_STUNNED]             = true,
     },
----------------------------------------------------------------------------------------------------------------------------------------
-    --//PLAYER CHECKS//--
----------------------------------------------------------------------------------------------------------------------------------------
+    -- Player Checks
     isPlayer = {
         [COMBAT_UNIT_TYPE_PLAYER]           = true,
         [COMBAT_UNIT_TYPE_PLAYER_PET]       = true,
     },
----------------------------------------------------------------------------------------------------------------------------------------
-    --//EVENT TYPES//--
----------------------------------------------------------------------------------------------------------------------------------------
+    -- Event Types
     eventType = {
         ALERT                       = "LUIE_CombatText_EVENT_ALERT",
         COMBAT                      = "LUIE_CombatText_EVENT_COMBAT",
@@ -166,9 +156,7 @@ LUIE.CombatTextConstants = {
         ANIMATION_RESOURCE          = "LUIE_CombatText_POOL_TYPE_ANIMATION_RESOURCE",
     },
 
----------------------------------------------------------------------------------------------------------------------------------------
-    --//ANIMATION & FONTS//--
----------------------------------------------------------------------------------------------------------------------------------------
+    -- Animation & Fonts
     outlineType                     = { "none", "outline", "thin-outline", "thick-outline", "shadow", "soft-shadow-thin", "soft-shadow-thick" },
     animationType                   = { "cloud", "hybrid", "scroll", "ellipse" },
     directionType                   = { "up", "down" },
