@@ -3943,24 +3943,29 @@ E.EffectOverride = {
     [40321] = { icon = 'esoui/art/icons/ability_otherclass_001_b.dds' }, -- Consuming Trap (Consuming Trap)
     [40326] = { icon = 'esoui/art/icons/ability_otherclass_001_b.dds' }, -- Consuming Trap (Consuming Trap)
 
-    -- Vampire
+    ----------------------------------------------------------------
+    -- VAMPIRE PASSIVES --------------------------------------------
+    ----------------------------------------------------------------
+
     [35771] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_1.dds', stack = 1 }, -- Stage 1 Vampirism (Vampire General)
     [35776] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_2.dds', stack = 2 }, -- Stage 2 Vampirism (Vampire General)
     [35783] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_3.dds', stack = 3 }, -- Stage 3 Vampirism (Vampire General)
     [35792] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', stack = 4 }, -- Stage 4 Vampirism (Vampire General)
+
+    [33175] = { icon = 'esoui/art/icons/ability_vampire_002.dds', unbreakable = 1 }, -- Feed (Vampire - Feed)
     [33177] = { icon = 'esoui/art/icons/ability_vampire_002.dds' }, -- Feed
 
     [33182] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Savage_Feeding }, -- Uber Attack (Savage Feeding - Rank 1)
-    [33183] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Savage Feeding - Rank 1)
+    [33183] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Savage Feeding - Rank 1)
     [46047] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Savage_Feeding }, -- Uber Attack (Savage Feeding - Rank 2)
-    [46046] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Savage Feeding - Rank 2)
+    [46046] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Savage Feeding - Rank 2)
 
-    [40349] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = A.Passive_Blood_Ritual }, -- Feed (Blood Ritual - Rank 1)
-    [40351] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = A.Passive_Blood_Ritual }, -- Feed (Blood Ritual - Rank 1)
-    [40353] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Blood_Ritual }, -- Uber Attack (Blood Ritual - Rank 1)
+    --[40349] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = A.Passive_Blood_Ritual }, -- Feed (Blood Ritual - Rank 1)
+    --[40351] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = A.Passive_Blood_Ritual }, -- Feed (Blood Ritual - Rank 1)
+    --[40353] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Blood_Ritual }, -- Uber Attack (Blood Ritual - Rank 1)
 
-    [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Blood_Ritual, A.Set_Cooldown) }, -- Fed on Ally (Blood Ritual)
-    [40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = A.Passive_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
+    --[40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Blood_Ritual, A.Set_Cooldown) }, -- Fed on Ally (Blood Ritual)
+    --[40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = A.Passive_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
 
     ----------------------------------------------------------------
     -- WEREWOLF PASSIVES -------------------------------------------
@@ -6390,13 +6395,13 @@ E.FakePlayerBuffs = {
     [97273] = { icon = 'LuiExtended/media/icons/mementos/memento_crows_calling.dds', name = A.Memento_Crows_Calling, duration = 9000 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
     [97274] = { icon = 'LuiExtended/media/icons/mementos/memento_swarm_of_crows.dds', name = A.Memento_Swarm_of_Crows, duration = 180000 }, -- Swarm of Crows (Swarm of Crows)
 
-    [99318] = { icon = 'LuiExtended/media/icons/mementos/memento_fiery_orb.dds', name = A.Memento_Fiery_Orb, unbreakable = 1, duration = 9000 }, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
-    [99319] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_pixie.dds', name = A.Memento_Flame_Pixie, unbreakable = 1, duration = 8000 }, -- Flame Crate Memento 2 (Flame Pixie)
-    [99320] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_eruption.dds', name = A.Memento_Flame_Eruption, unbreakable = 1, duration = 2000 }, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
+    [99318] = { icon = 'LuiExtended/media/icons/mementos/memento_fiery_orb.dds', name = A.Memento_Fiery_Orb, duration = 9000 }, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
+    [99319] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_pixie.dds', name = A.Memento_Flame_Pixie, duration = 8000 }, -- Flame Crate Memento 2 (Flame Pixie)
+    [99320] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_eruption.dds', name = A.Memento_Flame_Eruption, duration = 2000 }, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
 
-    [101874] = { icon = 'LuiExtended/media/icons/mementos/memento_scalecaller_frost_shard.dds', name = A.Memento_Frost_Shard, unbreakable = 1, duration = 10000 }, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
-    [101877] = { icon = 'LuiExtended/media/icons/mementos/memento_scalecaller_rune_of_levitation.dds', name = A.Memento_Rune_of_Levitation, unbreakable = 1, duration = 9000 }, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
-    [101872] = { icon = 'LuiExtended/media/icons/mementos/memento_bone_dragon_summons_focus.dds', name = A.Memento_Dragon_Summons_Focus, unbreakable = 1, duration = 5000 }, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
+    [101874] = { icon = 'LuiExtended/media/icons/mementos/memento_scalecaller_frost_shard.dds', name = A.Memento_Frost_Shard, duration = 10000 }, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
+    [101877] = { icon = 'LuiExtended/media/icons/mementos/memento_scalecaller_rune_of_levitation.dds', name = A.Memento_Rune_of_Levitation, duration = 9000 }, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
+    [101872] = { icon = 'LuiExtended/media/icons/mementos/memento_bone_dragon_summons_focus.dds', name = A.Memento_Dragon_Summons_Focus, duration = 5000 }, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
 
     -- Set Items
     [59573] = { icon = 'esoui/art/icons/ability_buff_major_vitality.dds', name = A.Skill_Major_Vitality, duration = 510 }, -- Major Vitality (Malubeth)
@@ -6427,6 +6432,9 @@ E.FakePlayerBuffs = {
     [22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 1)
     [22229] = { icon = 'esoui/art/icons/ability_templar_remembrance.dds', name = A.Skill_Remembrance, duration = 4000 }, -- Remembrance (Remembrance - Rank 1)
     [22226] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation - Rank 1)
+
+    -- Vampire
+    [33175] = { icon = 'esoui/art/icons/ability_vampire_002.dds', name = A.Skill_Feed, duration = 6300 }, -- Feed (Vampire - Feed)
 
     -- Mages Guild
     [40449] = { icon = 'esoui/art/icons/ability_mageguild_003_a.dds', name = A.Skill_Spell_Symmetry, duration = 5000 }, -- Spell Symmetry (Spell Symmetry)

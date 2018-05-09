@@ -5079,13 +5079,13 @@ debugAuras = {
 
             [33091] = true, -- Blood Ritual (Rank 1)
             -- ================================================================================= THESE NEED CHECKED LATER
-            [40349] = true, -- Feed
-            [40351] = true, -- Feed
-            [40350] = true, -- Feed
-            [40353] = true, -- Uber Attack
-            [40359] = true, -- Fed on ally
+            --[40349] = true, -- Feed
+            --[40351] = true, -- Feed
+            --[40350] = true, -- Feed
+            --[40353] = true, -- Uber Attack
+            --[40359] = true, -- Fed on ally
             --[40355] = true, -- Ally Feed
-            [40360] = true, -- Vampirism
+            --[40360] = true, -- Vampirism
             -- ================================================================================= THESE NEED CHECKED LATER
 
             [33096] = true, -- Undeath (Rank 1)
@@ -5094,7 +5094,6 @@ debugAuras = {
             [33093] = true, -- Unnatural Resistance (Rank 1)
 
             [33090] = true, -- Dark Stalker (Rank 1)
-
 
             ------------------------------
             -- WEREWOLF PASSIVES
@@ -6180,8 +6179,8 @@ debugAuras = {
 
             --[64152] = true, -- JUST Unlock Death Bolts
 
-            --[63086] = true, -- Guard Charge
-            --[63258] = true, -- Guard Charge
+            [63086] = true, -- Guard Charge
+            [63258] = true, -- Guard Charge
 
             [64139] = true, -- Piercing Bolt
             [64267] = true, -- Focused Shot
