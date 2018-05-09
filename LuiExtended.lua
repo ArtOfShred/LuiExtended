@@ -83,6 +83,7 @@ LUIE.Fonts = {
     ["Talisman"]                = [[/LuiExtended/media/fonts/Talisman/talisman.ttf]],
     ["Transformers"]            = [[/LuiExtended/media/fonts/Transformers/transformers.ttf]],
     ["Yellowjacket"]            = [[/LuiExtended/media/fonts/Yellowjacket/yellowjacket.ttf]],
+    ["ProFontWindows"]          = [[/LuiExtended/media/fonts/ProFontWindows/ProFontWindows.ttf]],
 }
 
 LUIE.Sounds = {
