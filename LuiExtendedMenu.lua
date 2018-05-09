@@ -2128,6 +2128,19 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ShowRecall,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
+
+            {
+                -- Show Werewolf Timer Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWWEREWOLF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWWEREWOLF_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowWerewolf end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowWerewolf = value LUIE.SpellCastBuffs.RegisterWerewolfEvents() LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ShowWerewolf,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+
             {
                 -- Show Block Player Icon
                 type = "checkbox",

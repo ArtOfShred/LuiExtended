@@ -28,10 +28,6 @@ local iconFormat    = zo_iconFormat
 
 local moduleName    = LUIE.name .. "_SpellCastBuffs"
 
-local testEffectPrefix  = "Test Effect: "
-local testEffectIds     = { 999900, 999901, 999902, 999903, 999904 }
-local testEffectList    = { 22, 44, 55, 300, 1800000 }
-
 local hidePlayerEffects = { }
 local hideTargetEffects = { }
 
@@ -115,6 +111,7 @@ SCB.D = {
     ShowGallop                       = true,
     ShowResurrectionImmunity         = true,
     ShowRecall                       = true,
+    ShowWerewolf                     = true,
     HidePlayerBuffs                  = false,
     HidePlayerDebuffs                = false,
     HideTargetBuffs                  = false,
@@ -160,7 +157,7 @@ local g_effectsList          = { player1 = {}, player2 = {}, reticleover1 = {}, 
 -- Self resurrection tracking
 local g_playerActive = false
 local g_playerDead   = false
-local g_playerResurectStage = nil
+local g_playerResurrectStage = nil
 
 -- Font to be used on icons "ZoFontWindowSubtitle" or ours:
 --local g_buffsFont = "/LuiExtended/media/fonts/fontin_sans_r.otf|16|outline"
@@ -499,8 +496,7 @@ function SCB.Initialize( enabled )
 
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE, SCB.PlayerCombatState)
 
-    -- Werewolf
-    eventManager:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED, SCB.WerewolfState)
+    SCB.RegisterWerewolfEvents()
 
     -- Always show debug effects on development account
     if GetDisplayName() == "@ArtOfShredLegacy" then
@@ -508,6 +504,18 @@ function SCB.Initialize( enabled )
         SCB.SV.ShowDebugEffect = true
     end
     SCB.RegisterDebugEvents()
+end
+
+function SCB.RegisterWerewolfEvents()
+    eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
+    eventManager:UnregisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
+    if SCB.SV.ShowWerewolf then
+        eventManager:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED, SCB.WerewolfState)
+        if IsWerewolf() then
+            SCB.WerewolfState(nil, true, true)
+        end
+    end
 end
 
 function SCB.RegisterDebugEvents()
@@ -772,6 +780,7 @@ end
 local g_werewolfName = ""
 local g_werewolfIcon = ""
 local g_werewolfCounter = 0
+local g_werewolfQuest = 0
 
 local function SetWerewolfIcon()
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
@@ -782,7 +791,7 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
     if werewolf then
         for i = 1, 4 do
             name, _, discovered, skillLineId = GetSkillLineInfo(SKILL_TYPE_WORLD, i)
-            if skillLineId == 50 and unlocked then
+            if skillLineId == 50 and discovered then
                 g_werewolfCounter = g_werewolfCounter + 1
                 if g_werewolfCounter == 3 or onActivation then
                     -- Pull specific morph info
@@ -804,29 +813,64 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
                     eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SCB.OnPowerUpdate)
                     eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
                     g_werewolfCounter = 0
+                    eventManager:RegisterForUpdate(moduleName .. "WerewolfTicker", 1100, SCB.PowerTrailer)
                 end
                 return
             end
         end
 
+        g_werewolfQuest = g_werewolfQuest + 1
         -- If we didn't return from the above statement this must be quest based werewolf transformation - so just display an unlimited duration passive as the counter.
         SetWerewolfIcon()
-        g_effectsList.player1["Werewolf Indicator"] = {
-            type=1,
-            id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-            forced = "short",
-            restart=true, iconNum=0
-        }
-        g_werewolfCounter = 0
+        if g_werewolfQuest == 2 or onActivation then
+            g_effectsList.player1["Werewolf Indicator"] = {
+                type=1,
+                id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "short",
+                restart=true, iconNum=0
+            }
+            g_werewolfCounter = 0
+        end
     else
         g_effectsList.player1["Werewolf Indicator"] = nil
         eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
+        eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0
+        -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
+        callLater(function() g_werewolfQuest = 0 end, 5000)
     end
 end
 
+function SCB.PowerTrailer()
+
+    g_effectsList.player1["Werewolf Indicator"] = {
+        type=1,
+        id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
+        dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+        forced = "short",
+        restart=true, iconNum=0
+    }
+    eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
+
+end
+
+g_lastWerewolfPower = 0
+
 function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
+
+    if g_lastWerewolfPower > powerValue then
+        eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
+    end
+
+    -- Ignore gain from Blood Rage when hit while devouring
+    if g_effectsList.player1["Werewolf Indicator"] and g_effectsList.player1["Werewolf Indicator"].ends == nil then
+        if (powerValue == g_lastWerewolfPower + 99) then
+            return
+        end
+    end
+    g_lastWerewolfPower = powerValue
+
     local currentPower = powerValue
     local duration = ( currentPower / 27 )
     -- Round up by 1 from any decimal number
@@ -839,11 +883,12 @@ function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue
             id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
             dur=0, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
             forced = "short",
-            restart=true, iconNum=0, werewolf = true
+            restart=true, iconNum=0, overrideDur = 38000
         }
     else
         g_effectsList.player1["Werewolf Indicator"] = nil
     end
+    eventManager:RegisterForUpdate(moduleName .. "WerewolfTicker", 1100, SCB.PowerTrailer)
 end
 
 function SCB.DuelStart()
@@ -1032,7 +1077,6 @@ function SCB.SetIconsAlignmentProminentDebuff( value )
         end
     end
 end
-
 
 function SCB.SetIconsAlignmentLongVert( value )
     -- Check correctness of argument value
@@ -1250,26 +1294,11 @@ function SCB.SetMovingState(state)
     end
 
     -- Now create or remove test-effects icons
-    for i = 1, #testEffectList do
-        if state then
-            SCB.CreatePreviewIcon( testEffectIds[i], testEffectList[i] )
-        else
-            local abilityId = testEffectIds[i]
-            g_effectsList.player1[abilityId] = nil
-            g_effectsList.player2[abilityId] = nil
-            g_effectsList.ground[abilityId] = nil
-        end
+    if state then
+        SCB.MenuPreview()
+    else
+        SCB.Reset()
     end
-end
-
--- Create preview icon for buff or debuff.
-function SCB.CreatePreviewIcon( id, duration )
-    SCB.NewEffects( {
-        id = id,
-        name = testEffectPrefix .. duration,
-        icon = "/esoui/art/icons/icon_missing.dds",
-        effects = { duration*1000, duration*1000+5, duration*1000, 0 }
-    } )
 end
 
 function SCB.Reset()
@@ -1660,18 +1689,6 @@ end
 --[[
  * Runs on the EVENT_EFFECT_CHANGED listener.
  * This handler fires every long-term effect added or removed:
- *   integer changeType,
- *   integer effectSlot,
- *   string effectName,
- *   string unitTag,
- *   number beginTime,
- *   number endTime,
- *   integer stackCount,
- *   string iconName,
- *   string buffType,
- *   integer effectType,
- *   integer abilityType,
- *   integer statusEffectType
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
@@ -1998,7 +2015,6 @@ function SCB.ArtificialEffectUpdate(eventCode, effectId)
 end
 
 -- List of all damage results for analysis in following function
- -- This also includes SHIELDED result that is not included in CI module
 local IsResultDamage = {
     [ACTION_RESULT_DAMAGE]              = true,
     [ACTION_RESULT_BLOCKED_DAMAGE]      = true,
@@ -2208,7 +2224,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         return
     end
 
-    if not (E.IsGroundMineAura[abilityId] or E.IsGroundMineDamage[abilityId] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId]) then
+    if not (E.IsGroundMineAura[abilityId] or E.IsGroundMineDamage[abilityId] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId] or abilityId == 33208) then
         return
     end
 
@@ -2217,6 +2233,19 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         g_effectsList.player1[85840] = nil
         g_effectsList.promb_player[85840] = nil
         g_effectsList.promd_player[85840] = nil
+    end
+
+    -- TODO: Temp set werewolf indicator to unlimited on Devour cast
+    if SCB.SV.ShowWerewolf then
+        if abilityId == 33208 and sourceType == COMBAT_UNIT_TYPE_PLAYER and result == ACTION_RESULT_BEGIN then
+            g_effectsList.player1["Werewolf Indicator"] = {
+            type=1,
+            id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
+            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            forced = "short",
+            restart=true, iconNum=0
+            }
+        end
     end
 
     -- Try to remove effect like Ground Runes and Traps (we check this before we filter for other result types)
@@ -2443,14 +2472,13 @@ function SCB.ReloadEffects(unitTag)
     -- If unitTag was not provided, consider it as Player
     local unitTag = unitTag or "player"
 
-    -- clear existing
+    -- Clear Existing
     g_effectsList[unitTag .. 1] = {}
     g_effectsList[unitTag .. 2] = {}
     g_effectsList["promb_target"] = {}
     g_effectsList["promd_target"] = {}
 
     -- Fill it again
-    --d( "refresh" )
     for i = 1, GetNumBuffs(unitTag) do
         local unitName = GetRawUnitName(unitTag)
         local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
@@ -2460,13 +2488,15 @@ function SCB.ReloadEffects(unitTag)
         else
             castByPlayer = 5
         end
-        SCB.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
+        if not (IsUnitDead(unitTag) and E.EffectHideWhenDead[abilityId]) then
+            SCB.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
+        end
     end
 
     if not SCB.SV.HideTargetBuffs then
         local unitName = GetUnitName(unitTag)
         -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
-        if E.AddNameAura[unitName] and GetUnitReaction(unitTag) == UNIT_REACTION_HOSTILE and not IsUnitDead(unitTag) and IsUnitInCombat(unitTag) then
+        if E.AddNameAura[unitName] and GetUnitReaction(unitTag) == UNIT_REACTION_HOSTILE and IsUnitInCombat(unitTag) and not IsUnitPlayer(unitTag) and not IsUnitDead(unitTag) then
             for k, v in ipairs(E.AddNameAura[unitName]) do
                 g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
                     type=1,
@@ -2591,7 +2621,7 @@ function SCB.PlayerCombatState(eventCode, inCombat)
         if unitName == nil or unitName == "" then return end
 
         -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
-        if E.AddNameAura[unitName] and GetUnitReaction('reticleover') == UNIT_REACTION_HOSTILE and not IsUnitDead('reticleover') and IsUnitInCombat('reticleover') then
+        if E.AddNameAura[unitName] and GetUnitReaction('reticleover') == UNIT_REACTION_HOSTILE and IsUnitInCombat('reticleover') and not IsUnitPlayer('reticleover') and not IsUnitDead('reticleover') then
             for k, v in ipairs(E.AddNameAura[unitName]) do
                 g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
                     type=1,
@@ -2605,82 +2635,30 @@ function SCB.PlayerCombatState(eventCode, inCombat)
     end
 end
 
-function SCB.MenuPreview(ability)
-	local currentTime = GetGameTimeMiliseconds()
-	local effects = ability.effects
-	if ( effects ~= nil) then
-		local routing = { }
-		routing[1] = { "player1" }
-		routing[2] = { "reticleover1" }
-		routing[3] = { "promb_player" }
-		routing[4] = { "player2" }
-		routing[5] = { "reticleover2" }
-		routing[6] = { "promd_player" }
-		
-		local abilityId = 999000
-		local icon = ""
-			
-		for i = 1, 6 do
-			local context = routing[i]
-			local type = i < 4 and 1 or 2
-			local name = ("Test Effect: " .. i )
-			g_effectsList[context][ abilityId ] = {
-				target=context, type=type,
-				id=abilityId, name=effectName, icon=iconName,
-				dur = effects[i],
-                starts = currentTime + effects[4],
-                ends = currentTime + effects[4] + effects[i],
-				forced=nil,
-				restart=true, iconNum=0,
-			}
-			abilityId = abilityId + 1
-		end
-	end
-end
-		
+-- Called by menu to preview icon positions. Simply iterates through all containers other than player_long and adds dummy test buffs into them.
+function SCB.MenuPreview()
+	local currentTime = GetGameTimeMilliseconds()
+    local routing = { "player1", "reticleover1", "promb_player", "player2", "reticleover2", "promd_player" }
+    local testEffectDurationList = { 22, 44, 55, 300, 1800000 }
+    local abilityId = 999000
+    local icon = "/esoui/art/icons/icon_missing.dds"
 
--- Process new ability buff effects
-function SCB.NewEffects( ability )
-    -- Get the time
-    local currentTime = GetGameTimeMilliseconds()
-    -- Try manually tracked effects first
-    local effects = ability.effects
-    if ( effects ~= nil ) then
-        local groundType = { }
-            groundType[1] = { context = "player1", promB = "promb_player", promD = "promd_player", type = 1 }
-            groundType[2] = { context = "player2", promB = "promb_target", promD = "promd_target", type = BUFF_EFFECT_TYPE_DEBUFF }
-            groundType[3] = { context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
-
-        for i = 1, 3 do
-            local effectContext
-            if (SCB.SV.PromDebuffTable[ability.id] or SCB.SV.PromDebuffTable[ability.name]) then
-                effectContext = groundType[i].promD
-            elseif (SCB.SV.PromBuffTable[ability.id] or SCB.SV.PromBuffTable[ability.name]) then
-                effectContext = groundType[i].promB
-            else
-                effectContext = groundType[i].context
-            end
-
-            if effects[i] and effects[i] > 0 then
-                -- Update or create new effect
-                if g_effectsList[effectContext][ability.id] ~= nil then
-                    g_effectsList[effectContext][ability.id].ends = currentTime + effects[4] + effects[i]
-                    g_effectsList[effectContext][ability.id].restart = true
-                else
-                    g_effectsList[effectContext][ability.id] = {
-                        target  = effectContext,
-                        id      = ability.id,
-                        type    = ( i == 1 ) and 1 or 2,
-                        name    = ability.name,
-                        icon    = ability.icon,
-                        dur     = effects[i],
-                        starts  = currentTime + effects[4],
-                        ends    = currentTime + effects[4] + effects[i],
-                        restart = true,
-                        iconNum = 0
-                    }
-                end
-            end
+    for i = 1, 5 do
+        for c = 1, 6 do
+            local context = routing[c]
+            local type = c < 4 and 1 or 2
+            local name = ("Test Effect: " .. i )
+            local duration = testEffectDurationList[i]
+            g_effectsList[context][ abilityId ] = {
+                target = context, type=type,
+                id="Fake", name=name, icon=icon,
+                dur = duration * 1000,
+                starts = currentTime,
+                ends = currentTime + (duration * 1000),
+                forced="short",
+                restart=true, iconNum=0,
+            }
+            abilityId = abilityId + 1
         end
     end
 end
@@ -3109,7 +3087,7 @@ end
 
 function SCB.OnPlayerActivated(eventCode)
     g_playerActive = true
-    g_playerResurectStage = nil
+    g_playerResurrectStage = nil
 
     if not SCB.SV.IgnoreMount and IsMounted() then
         callLater(function() SCB.MountStatus(eventCode, true) end , 50)
@@ -3131,7 +3109,7 @@ function SCB.OnPlayerActivated(eventCode)
         SCB.ReloadEffects("reticleover")
     end
 
-    if IsWerewolf() then
+    if SCB.SV.ShowWerewolf and IsWerewolf() then
         SCB.WerewolfState(nil, true, true)
     end
 
@@ -3188,15 +3166,12 @@ end
 
 function SCB.OnPlayerDeactivated(eventCode)
     g_playerActive = false
-    g_playerResurectStage = nil
+    g_playerResurrectStage = nil
 end
 
 function SCB.OnPlayerAlive(eventCode)
-    --[[-- If player clicks "Resurrect at Wayshrine", then player is first deactivated,
-    then he is transferred to new position,
-    then he becomes alive -->>-- this event
-    then player is activated again.
-    Thus to register resurrection we need to work in this function if player is already active. --]]--
+    --[[-- If player clicks "Resurrect at Wayshrine", then player is first deactivated, then he is transferred to new position, then he becomes alive (this event) then player is activated again.
+    To register resurrection we need to work in this function if player is already active. --]]--
     if not g_playerActive or not g_playerDead then
         return
     end
@@ -3206,13 +3181,11 @@ function SCB.OnPlayerAlive(eventCode)
     -- This is a good place to reload player buffs, as they were wiped on death
     SCB.ReloadEffects( "player" )
 
-    -- now let start sequence to determine how the player become alive
-    g_playerResurectStage = 1
+    -- Start Resurrection Sequence
+    g_playerResurrectStage = 1
     --[[If it was self resurrection, then there will be 4 EVENT_VIBRATION:
-    First - 600ms, second - 0ms to switch first one off
-    Third - 350ms, fourth - 0ms to switch third one off.
-    So now we'll listen in the vibration event and progress g_playerResurectStage with first 2 events.
-    And then on correct third event we'll create a buff. --]]
+    First - 600ms, Second - 0ms to switch first one off, Third - 350ms, Fourth - 0ms to switch third one off.
+    So now we'll listen in the vibration event and progress g_playerResurrectStage with first 2 events and then on correct third event we'll create a buff. --]]
 end
 
 function SCB.OnPlayerDead(eventCode)
@@ -3223,16 +3196,16 @@ function SCB.OnPlayerDead(eventCode)
 end
 
 function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTriggerMotor, rightTriggerMotor)
-    if not g_playerResurectStage then
+    if not g_playerResurrectStage then
         return
     end
-    if g_playerResurectStage == 1 and duration == 600 then
-        g_playerResurectStage = 2
-    elseif g_playerResurectStage == 2 and duration == 0 then
-        g_playerResurectStage = 3
-    elseif g_playerResurectStage == 3 and duration == 350 and SCB.SV.ShowResurrectionImmunity then
-        -- We got correct sequence, so let us create a buff and reset the g_playerResurectStage
-        g_playerResurectStage = nil
+    if g_playerResurrectStage == 1 and duration == 600 then
+        g_playerResurrectStage = 2
+    elseif g_playerResurrectStage == 2 and duration == 0 then
+        g_playerResurrectStage = 3
+    elseif g_playerResurrectStage == 3 and duration == 350 and SCB.SV.ShowResurrectionImmunity then
+        -- We got correct sequence, so let us create a buff and reset the g_playerResurrectStage
+        g_playerResurrectStage = nil
 		local currentTime = GetGameTimeMilliseconds()
 		g_effectsList["player1"][ "Resurrection Immunity" ] = {
 			target="player", type=1,
@@ -3242,10 +3215,11 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
 		}
     else
         -- This event does not seem to have anything to do with player self-resurrection
-        g_playerResurectStage = nil
+        g_playerResurrectStage = nil
     end
 end
 
+-- Called from the menu and on initialize to build the table of hidden effects.
 function SCB.UpdateContextHideList()
     hidePlayerEffects = { }
     hideTargetEffects = { }

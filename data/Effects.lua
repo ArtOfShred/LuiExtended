@@ -347,6 +347,13 @@ E.DebuffDisplayOverrideId = {
     [61372] = true, -- Infectious Swarm (Necrotic Hoarvor)
 }
 
+E.EffectHideWhenDead = {
+
+    [33097] = true, -- Scary Immunities (Various NPC's)
+    [44176] = true, -- Flying Immunities (Various NPC's)
+
+}
+
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY NAME
 -- TODO: LOCALIZE THIS
 E.DebuffDisplayOverrideName = {
