@@ -1145,6 +1145,16 @@ E.BarHighlightOverride = {
     [39197] = { showFakeAura = true, noRemove = true }, -- Unstoppable
 
     ---------------------------
+    -- Vampire ----------------
+    ---------------------------
+
+    [32893] = { newId = 68883 }, -- Drain Essence
+    [38949] = { newId = 68892 }, -- Invigorating Drain
+    [38956] = { newId = 81493 }, -- Accelerating Drain
+
+    [88158] = { newId = 38932 }, -- Materialize --> Clouding Swarm
+
+    ---------------------------
     -- Werewolf ---------------
     ---------------------------
 
@@ -1575,6 +1585,13 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [39068] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1)
     [62948] = true, -- Blockade of Frost (Elemental Blockade - Rank 1)
     [104825] = true, -- Icy Rage (Elemental Rage - All Ranks)
+
+    ----------------------------
+    -- Vampire Quest
+    ----------------------------
+
+    [39728] = true, -- VampInit_TheaterFeed
+    [39509] = true, -- VampInit_PC Becomes a Vampire
 
     ----------------------------
     -- Psijic Order
@@ -3948,6 +3965,7 @@ E.EffectOverride = {
     -- VAMPIRE PASSIVES --------------------------------------------
     ----------------------------------------------------------------
 
+    [40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = A.Passive_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
     [35771] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_1.dds', stack = 1 }, -- Stage 1 Vampirism (Vampire General)
     [35776] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_2.dds', stack = 2 }, -- Stage 2 Vampirism (Vampire General)
     [35783] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_3.dds', stack = 3 }, -- Stage 3 Vampirism (Vampire General)
@@ -3962,12 +3980,27 @@ E.EffectOverride = {
     [46047] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Savage_Feeding }, -- Uber Attack (Savage Feeding - Rank 2)
     [46046] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Savage Feeding - Rank 2)
 
-    --[40349] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = A.Passive_Blood_Ritual }, -- Feed (Blood Ritual - Rank 1)
-    --[40351] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = A.Passive_Blood_Ritual }, -- Feed (Blood Ritual - Rank 1)
-    --[40353] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Blood_Ritual }, -- Uber Attack (Blood Ritual - Rank 1)
+    [40349] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, duration = .95 }, -- Feed (Blood Ritual - Rank 1)
+    [40351] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed (Blood Ritual - Rank 1)
+    [40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', unbreakable = 1 }, -- Feed (Blood Ritual - Rank 1)
+    [40353] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed }, -- Uber Attack (Blood Ritual - Rank 1)
+    [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Blood_Ritual, A.Set_Cooldown) }, -- Fed on ally (Blood Ritual)
 
-    --[40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Blood_Ritual, A.Set_Cooldown) }, -- Fed on Ally (Blood Ritual)
-    --[40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = A.Passive_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
+    ----------------------------------------------------------------
+    -- VAMPIRE QUEST ---------------------------------------------
+    ----------------------------------------------------------------
+
+    [42821] = { hide = true }, -- VampInt_LamaeFirstFeed
+    [44676] = { hide = true }, -- SELF SNARE
+
+    [44222] = { hide = true }, -- VampireInitiation_Lamae
+    [39422] = { hide = true }, -- Mist Form
+
+    [56684] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike
+
+    [39692] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = -5.2 }, -- Feed
+    [39698] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed
+    [39693] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', unbreakable = 1 }, -- Feed
 
     ----------------------------------------------------------------
     -- WEREWOLF PASSIVES -------------------------------------------
@@ -6436,6 +6469,7 @@ E.FakePlayerBuffs = {
     [22226] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation - Rank 1)
 
     -- Vampire
+    [40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 5300 }, -- Feed (Blood Ritual - Rank 1)
     [33175] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 6300 }, -- Feed (Vampire - Feed)
 
     -- Mages Guild

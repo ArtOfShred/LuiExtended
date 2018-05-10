@@ -2188,6 +2188,8 @@ debugAuras = {
             [85701] = true, -- Dueling Flag
             [2727] = true, -- Off-Balance
             [21263] = true, -- Ayleid Health Bonus
+            [45819] = true, -- Remove Werevamp
+            --[51064] = true, -- Weakness
 
             -- PET EFFECTS
             [28609] = true, -- Dummy Target Setter
@@ -5045,6 +5047,7 @@ debugAuras = {
             ------------------------------
 
             [35770] = true, -- Vampirism Base
+            [40360] = true, -- Vampirism
             [44767] = true, -- Sense Fed Upon
             [80225] = true, -- Timer Reducer
             [35771] = true, -- Stage 1 Vampirism
@@ -5078,15 +5081,12 @@ debugAuras = {
 
 
             [33091] = true, -- Blood Ritual (Rank 1)
-            -- ================================================================================= THESE NEED CHECKED LATER
-            --[40349] = true, -- Feed
-            --[40351] = true, -- Feed
-            --[40350] = true, -- Feed
-            --[40353] = true, -- Uber Attack
-            --[40359] = true, -- Fed on ally
-            --[40355] = true, -- Ally Feed
-            --[40360] = true, -- Vampirism
-            -- ================================================================================= THESE NEED CHECKED LATER
+            [40355] = true, -- Ally Feed
+            [40349] = true, -- Feed
+            [40351] = true, -- Feed
+            [40350] = true, -- Feed
+            [40353] = true, -- Uber Attack
+            [40359] = true, -- Fed on ally
 
             [33096] = true, -- Undeath (Rank 1)
             [46040] = true, -- Undeath (Rank 2)
@@ -5094,6 +5094,79 @@ debugAuras = {
             [33093] = true, -- Unnatural Resistance (Rank 1)
 
             [33090] = true, -- Dark Stalker (Rank 1)
+
+            ------------------------------
+            -- VAMPIRE ACTIVES
+            ------------------------------
+
+            [80226] = true, -- Reduce Stage Timer (Drain Essence - All Morphs)
+            [32893] = true, -- Drain Essence (Drain Essence)
+            [68883] = true, -- Drain Essence (Drain Essence)
+            [81464] = true, -- Drain Essence (Drain Essence)
+            [68884] = true, -- Drain Essence (Drain Essence)
+
+            [38949] = true, -- Invigorating Drain (Invigorating Drain)
+            [68892] = true, -- Invigorating Drain (Invigorating Drain)
+            [81474] = true, -- Invigorating Drain (Invigorating Drain)
+            [81475] = true, -- Invigorating Drain (Invigorating Drain)
+            [38954] = true, -- Invigorating Drain (Invigorating Drain)
+
+            [38956] = true, -- Accelerating Drain (Accelerating Drain)
+            [81493] = true, -- Accelerating Drain (Accelerating Drain)
+            [81491] = true, -- Accelerating Drain (Accelerating Drain)
+            [81492] = true, -- Accelerating Drain (Accelerating Drain)
+            [63558] = true, -- Minor Expedition (Accelerating Drain)
+
+            [32986] = true, -- Mist Form (Mist Form)
+
+            [38963] = true, -- Elusive Mist (Elusive Mist)
+            [38967] = true, -- Major Expedition (Elusive Mist)
+
+            [38965] = true, -- Baleful Mist (Baleful Mist)
+            [38968] = true, -- Baleful Mist (Baleful Mist)
+
+            [32624] = true, -- Bat Swarm (Bat Swarm)
+            [32625] = true, -- Bat Swarm (Bat Swarm)
+
+            [38932] = true, -- Clouding Swarm (Clouding Swarm)
+            [38935] = true, -- Clouding Swarm (Clouding Swarm)
+            [88158] = true, -- Materialize (Clouding Swarm)
+            [88163] = true, -- Materialize (Clouding Swarm)
+
+            [38931] = true, -- Devouring Swarm (Devouring Swarm)
+            [38934] = true, -- Devouring Swarm (Devouring Swarm)
+            [38936] = true, -- Devouring Swarm (Devouring Swarm)
+
+            ------------------------------
+            -- VAMPIRE QUEST
+            ------------------------------
+
+            [44670] = true, -- Vamp Theater Head Grab Stun
+            [42821] = true, -- VampInit_LamaeFirstFeed
+            [44676] = true, -- SELF SNARE
+            [39507] = true, -- VampInitStun_Profane
+            [39505] = true, -- VampInit_FeedTarget
+
+            [44222] = true, -- VampireInitiation_Lamae
+            [39653] = true, -- VampInitStun_Submit
+            [7488] = true, -- CON-
+            [39506] = true, -- Devour
+            [39518] = true, -- VampInitStun
+            [39728] = true, -- VampInit_TheaterFeed
+            [39422] = true, -- Mist Form
+            [39509] = true, -- VampInit_PC Becomes a Vampire
+            [44134] = true, -- Vampire Abilities
+
+            [39689] = true, -- Vampirism Base
+            [56684] = true, -- Quick Strike
+
+            [39692] = true, -- Feed
+            [39698] = true, -- Feed
+            [39693] = true, -- Feed
+
+            [40499] = true, -- Rite of the Scion
+
+            [72946] = true, -- Stun
 
             ------------------------------
             -- WEREWOLF PASSIVES

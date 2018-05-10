@@ -3728,6 +3728,28 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageConfiscate,
             },
             {
+                -- Loot Message (Spend)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SPEND),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SPEND_TP),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageSpend,
+            },
+            {
+                -- Loot Message (Pay)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PAY),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PAY_TP),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessagePay end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessagePay = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessagePay,
+            },
+            {
                 -- Loot Message (TradeIn)
                 type = "editbox",
                 name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN),
@@ -4967,7 +4989,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Skills.SkillGuildDarkBrotherhood) end,
                 default = {r=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorDB[1], g=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorDB[2], b=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorDB[3]}
             },
-			
 			{
                 -- Skill Psijic Order
                 type = "checkbox",
@@ -4989,7 +5010,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Skills.SkillGuildDarkBrotherhood) end,
                 default = {r=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorPO[1], g=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorPO[2], b=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorPO[3]}
             },
-			
             {
                 -- Skill Guild Alert
                 type = "checkbox",

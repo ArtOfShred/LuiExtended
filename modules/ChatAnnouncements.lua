@@ -451,6 +451,7 @@ CA.D = {
         CurrencyMessagePickpocket       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET),
         CurrencyMessageReceive          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE),
         CurrencyMessageSpend            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SPEND),
+        CurrencyMessagePay              = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PAY),
         CurrencyMessageTradeIn          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN),
         CurrencyMessageTradeInNoName    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
         CurrencyMessageTradeOut         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT),
@@ -2101,8 +2102,11 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
     elseif reason == 9 then
         messageChange = CA.SV.ContextMessages.CurrencyMessageStorage
         type = "LUIE_CURRENCY_BANK"
-    -- Spend - NPC Conversation (5), Edit Guild Heraldry (49), Buy Guild Tabard (50)
-    elseif reason == 5 or reason == 49 or reason == 50 then
+    -- Spend - NPC Conversation (5)
+    elseif reason == 5 then
+        messageChange = CA.SV.ContextMessages.CurrencyMessagePay
+    -- Edit Guild Heraldry (49), Buy Guild Tabard (50)
+    elseif reason == 49 or reason == 50 then
         messageChange = CA.SV.ContextMessages.CurrencyMessageSpend
     -- Battleground (12)
     elseif reason == 12 and UpOrDown < 0 then
