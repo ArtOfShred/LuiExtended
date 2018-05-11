@@ -18,44 +18,47 @@ E.IsWeaponAttack = {
 -- List of toggle abilities
 E.IsToggle = {
     -- Innate
-    [A.Innate_Hidden]                       = true, -- Hidden (Innate)
-    [A.Innate_Disguised]                    = true, -- Disguised (Innate)
-    [A.Innate_Block]                        = true, -- Block (Innate)
-    [A.Innate_Sprint]                       = true, -- Sprint (Innate)
-    [A.Innate_Gallop]                       = true, -- Mount Sprint (Generic) (Innate) -- NOTE: Renamed to Gallop
+    [A.Innate_Hidden] = true, -- Hidden (Innate)
+    [A.Innate_Disguised] = true, -- Disguised (Innate)
+    [14890] = true, -- Block (Player)
+    [40165] = true, -- Scene Choreo Brace (Monster Fight))
+    [29761] = true, -- Brace (Guard)
+    [973] = true, -- Sprint (Innate)
+    [33439] = true, -- Mount Sprint (Generic)
 
     -- Sorcerer
-    [A.Skill_Unstable_Familiar]             = true, -- Summon Unstable Familiar
-    [A.Skill_Unstable_Clannfear]            = true, -- Summon Unstable Clannfear
-    [A.Skill_Volatile_Familiar]             = true, -- Summon Volatile Familiar
-    [A.Skill_Summon_Winged_Twilight]        = true, -- Summon Winged Twilight
-    [A.Skill_Summon_Twilight_Tormentor]     = true, -- Summon Twilight Tormentor
-    [A.Skill_Summon_Twilight_Matriarch]     = true, -- Summon Twilight Matriarch
-    [A.Skill_Overload]                      = true, -- Overload
-    [A.Skill_Energy_Overload]               = true, -- Energy Overload
-    [A.Skill_Power_Overload]                = true, -- Power Overload
+    [23304] = true, -- Summon Unstable Familiar
+    [23319] = true, -- Summon Unstable Clannfear
+    [23316] = true, -- Summon Volatile Familiar
+    [24613] = true, -- Summon Winged Twilight
+    [24636] = true, -- Summon Twilight Tormentor
+    [24639] = true, -- Summon Twilight Matriarch
+    [24785] = true, -- Overload
+    [24806] = true, -- Energy Overload
+    [24804] = true, -- Power Overload
 
     -- Warden
-    [A.Skill_Feral_Guardian]                = true, -- Feral Guardian
-    [A.Skill_Eternal_Guardian]              = true, -- Eternal Guardian
-    [A.Skill_Wild_Guardian]                 = true, -- Wild Guardian
+    [85982] = true, -- Feral Guardian
+    [85986] = true, -- Eternal Guardian
+    [85990] = true, -- Wild Guardian
 
     -- Psijic Order
-    [A.Skill_Concentrated_Barrier]          = true, -- Concentrated Barrier
+    [103923] = true, -- Concentrated Barrier
+    [103966] = true, -- Concentrated Barrie
+    [103543] = true, -- Mend Wounds
+    [103747] = true, -- Mend Spirit
+    [103755] = true, -- Symbiosis
 
-    [A.Skill_Mend_Spirit]                   = true, -- Mend Spirit
-    [A.Skill_Mend_Wounds]                   = true, -- Mend Wounds
-    [A.Skill_Symbiosis]                     = true, -- Symbiosis
-
-    -- TODO: Haven't gone over these yet
-    [A.Skill_Guard]                         = true, -- Guard (Support)
-    [A.Skill_Mystic_Guard]                  = true, -- Mystic Guard (Support)
-    [A.Skill_Stalwart_Guard]                = true, -- Stalwart Guard (Support)
+    -- Support
+    [80923] = true, -- Guard (Guard)
+    [80947] = true, -- Mystic Guard (Mystic Guard)
+    [64080] = true, -- Minor Vitality (Mystic Guard)
+    [80983] = true, -- Stalwart Guard (Stalwart Guard)
+    [80986] = true, -- Minor Force (Stalwart Guard)
 
     -- NPC Abilities
-    [A.Skill_Siphoning_Strikes]             = true, -- Siphoning Strikes (Nightblade) -- For 0 duration NPC ability only
-    --[A.Skill_Magelight]                     = true, -- Magelight (Soulbrander) -- For 0 duration NPC ability only -- TODO: Find a way to fix this, we don't want it to show for consolidated player aura
-    [A.Skill_Bound_Aegis]                   = true, -- Bound Aegis (Cyrodiil Mage) -- For 0 duration NPC ability only
+    [53462] = true, -- Siphoning Strikes (Nightblade)
+    [44258] = true, -- Magelight (Soulbrander)
 }
 
 E.IsAbilityProc = {
@@ -563,6 +566,36 @@ E.EffectGroundDisplay = {
     [63456] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', buff = false, debuff = false, ground = true }, -- Ice Comet (Ice Comet)
     [63473] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds', buff = false, debuff = false, ground = true }, -- Shooting Star (Shooting Star)
 
+    ---------------------------
+    -- Undaunted --------------
+    ---------------------------
+
+    [39489] = { buff = true, debuff = false, ground = false }, -- Blood Altar (Blood Altar)
+    [41967] = { buff = true, debuff = false, ground = false }, -- Sanguine Altar (Sanguine Altar)
+    [41958] = { buff = true, debuff = false, ground = false }, -- Overflowing Altar (Overflowing Altar)
+
+    [39425] = { buff = false, debuff = false, ground = true }, -- Trapping Webs (Trapping Webs)
+    [41990] = { buff = false, debuff = false, ground = true }, -- Shadow Silk (Shadow Silk)
+    [42012] = { buff = false, debuff = false, ground = true }, -- Tangling Webs (Tangling Webs)
+
+    ---------------------------
+    -- Assault ----------------
+    ---------------------------
+
+    [38549] = { icon = 'esoui/art/icons/ability_ava_001.dds', buff = false, debuff = false, ground = true }, -- Caltrops (Caltrops)
+    [40265] = { icon = 'esoui/art/icons/ability_ava_001_a.dds', buff = false, debuff = false, ground = true }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+    [40251] = { icon = 'esoui/art/icons/ability_ava_001_b.dds', name = A.Skill_Razor_Caltrops, buff = false, debuff = false, ground = true }, -- Caltrops (Razor Caltrops)
+
+    ---------------------------
+    -- Support ----------------
+    ---------------------------
+
+    [38570] = { buff = true, debuff = false, ground = false }, -- Siege Shield (Siege Shield)
+    [40229] = { buff = true, debuff = false, ground = false }, -- Siege Weapon Shield (Siege Weapon Shield)
+    [40226] = { buff = true, debuff = false, ground = false }, -- Propelling Shield (Propelling Shield)
+
+    [61522] = { name = A.Skill_Lingering_Flare, buff = false, debuff = false, ground = true }, -- Nova (Lingering Flare)
+
 }
 
 -- This will create an effect on the player or target when X skill is detected as active. SCB creates the buff by the name listed here, this way if 3 or 4 effects all need to display for 1 ability, it will only show the one aura.
@@ -725,6 +758,17 @@ E.EffectCreateSkillAura = {
     [103521] = { icon = 'esoui/art/icons/ability_psijic_005.dds', name = A.Skill_Accelerate, consolidate = true, extendedDisplay = true }, -- Minor Force --> Accelerate
     [103708] = { icon = 'esoui/art/icons/ability_psijic_005_a.dds', name = A.Skill_Channeled_Acceleration, consolidate = true, extendedDisplay = true }, -- Minor Force --> Channeled Acceleration
     [103712] = { icon = 'esoui/art/icons/ability_psijic_005_b.dds', name = A.Skill_Race_Against_Time, consolidate = true, extendedDisplay = true }, -- Minor Force --> Race Against Time
+
+    -- Assault
+
+    [101161] = { icon = 'esoui/art/icons/ability_ava_002.dds', name = A.Skill_Rapid_Maneuver, consolidate = true, removeOnEnd = true }, -- Major Expedition (Rapid Maneuver)
+    [57472] = { icon = 'esoui/art/icons/ability_ava_002.dds', name = A.Skill_Rapid_Maneuver, consolidate = true, removeOnEnd = true }, -- Major Gallop (Rapid Maneuver)
+
+    [101169] = { icon = 'esoui/art/icons/ability_ava_002_a.dds', name = A.Skill_Retreating_Maneuver, consolidate = true, removeOnEnd = true }, -- Major Expedition (Retreating Maneuver)
+    [57477] = { icon = 'esoui/art/icons/ability_ava_002_a.dds', name = A.Skill_Retreating_Maneuver, consolidate = true, removeOnEnd = true }, -- Major Gallop (Retreating Maneuver)
+
+    [101178] = { icon = 'esoui/art/icons/ability_ava_002_b.dds', name = A.Skill_Charging_Maneuver, consolidate = true, removeOnEnd = true }, -- Major Expedition (Charging Maneuver)
+    [57481] = { icon = 'esoui/art/icons/ability_ava_002_b.dds', name = A.Skill_Charging_Maneuver, consolidate = true, removeOnEnd = true }, -- Major Gallop (Charging Maneuver)
 
     -- SETS
     [106867] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds', name = A.Set_Grace_of_Gloom, alwaysShow = true }, -- Major Evasion --> Grace of Gloom
@@ -1221,6 +1265,49 @@ E.BarHighlightOverride = {
     [103747] = { hide = true }, -- Mend Spirit
     [103755] = { hide = true }, -- Symbiosis
 
+    ---------------------------
+    -- Undaunted --------------
+    ---------------------------
+
+    [39475] = { newId = 41942, showFakeAura = true }, -- Inner Fire
+    [42056] = { newId = 42059, showFakeAura = true }, -- Inner Rage
+    [42060] = { newId = 42062, showFakeAura = true }, -- Inner Beast
+
+    [39298] = { hide = true }, -- Necrotic Orb
+    [42028] = { hide = true }, -- Mystic Orb
+    [42038] = { hide = true }, -- Energy Orb
+
+    ---------------------------
+    -- Assault ----------------
+    ---------------------------
+
+    [38566] = { newId = 57472 }, -- Rapid Maneuver --> Major Gallop
+    [40211] = { newId = 57477 }, -- Retreating Maneuver --> Major Gallop
+    [40215] = { newId = 57481 }, -- Charging Maneuver --> Major Gallop
+
+    [61503] = { newId = 61504 }, -- Vigor
+    [61505] = { newId = 61506 }, -- Echoing Vigor
+    [61507] = { newId = 61509 }, -- Resolving Vigor
+
+    [33376] = { newId = 38549 }, -- Caltrops
+    [40255] = { newId = 40265 }, -- Anti-Cavalry Caltrops
+    [40242] = { newId = 40251 }, -- Razor Caltrops --> Caltrops
+
+    [38563] = { newId = 38564 }, -- War Horn
+    [40223] = { newId = 40224 }, -- Aggressive Horn
+    [40220] = { newId = 40221 }, -- Sturdy Horn
+
+    ---------------------------
+    -- Support ----------------
+    ---------------------------
+
+    [38571] = { newId = 38572 }, -- Purge
+    [40232] = { newId = 40233 }, -- Efficient Purge --> Purge
+
+    [61489] = { newId = 61496 }, -- Revealing Flare
+    [61519] = { newId = 61522 }, -- Lingering Flare --> Nova
+    [61524] = { newId = 61528 }, -- Scorching Flare
+
 }
 
 E.DisguiseIcons = {
@@ -1323,6 +1410,8 @@ E.SynergyNameOverride = {
 
     ['Tonal Inverter'] = 'LuiExtended/media/icons/abilities/ability_quest_tonal_inverter.dds', -- Tonal Inverter (Divine Intervention)
     [A.Skill_Blade_of_Woe] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds', -- Blade of Woe (Dark Brotherhood)
+    [A.Skill_Black_Widows] = 'esoui/art/icons/ability_undaunted_003_a.dds', -- Black Widows (Undaunted)
+    [A.Skill_Arachnophobia] = 'esoui/art/icons/ability_undaunted_003_b.dds', -- Arachnophobia (Undaunted)
     [A.Skill_Feed] = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', -- Feed (Vampire)
     [A.Skill_Devour] = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', -- Devour (Werewolf)
     [A.Skill_Feeding_Frenzy] = 'esoui/art/icons/ability_werewolf_005_b.dds', -- Feeding Frenzy (Werewolf)
@@ -1609,6 +1698,20 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [104081] = true, -- Time Freeze (Time Freeze)
     [104082] = true, -- Time Freeze (Time Freeze)
     [104083] = true, -- Time Freeze (Time Freeze)
+
+    ----------------------------
+    -- Undaunted
+    ----------------------------
+
+    [80079] = true, -- Trapping Webs (Trapping Webs)
+    [80108] = true, -- Shadow Silk (Shadow Silk)
+    [80130] = true, -- Tangling Webs (Tangling Webs)
+
+    ----------------------------
+    -- Assault
+    ----------------------------
+
+    [64118] = true, -- Hindered (Caltrops)
 
     -- Human NPC
     [10648] = true, -- Throw Oil (Synergy)
@@ -4230,7 +4333,7 @@ E.EffectOverride = {
     [103669] = { icon = 'esoui/art/icons/ability_psijic_004_b.dds' }, -- Introspection (Introspection)
 
     ----------------------------------------------------------------
-    -- UNDAUNTED PASSIVES ---------------------------------------
+    -- UNDAUNTED PASSIVES ------------------------------------------
     ----------------------------------------------------------------
 
     [55584] = { icon = 'LuiExtended/media/icons/abilities/passive_undaunted_undaunted_command.dds' }, -- Undaunted Command (Undaunted Command - Rank 1)
@@ -4246,11 +4349,58 @@ E.EffectOverride = {
     [55386] = { icon = 'LuiExtended/media/icons/abilities/passive_undaunted_undaunted_mettle.dds' }, -- Undaunted Mettle (Undaunted Mettle - Rank 2)
 
     ----------------------------------------------------------------
-    -- PLAYER PASSIVES ALLIANCE WAR --------------------------------
+    -- UNDAUNTED ACTIVES -------------------------------------------
+    ----------------------------------------------------------------
+
+    [108782] = { hide = true }, -- Blood Funnel (Blood Altar - Blood Funnel Synergy)
+    [80021] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Blood Altar)
+    [39501] = { icon = 'esoui/art/icons/ability_undaunted_001.dds' }, -- Blood Funnel (Blood Altar - Blood Funnel Synergy)
+
+    [108787] = { hide = true }, -- Blood Feast (Overflowing Altar - Blood Feast Synergy)
+    [41964] = { icon = 'esoui/art/icons/ability_undaunted_001_a.dds' }, -- Blood Feast (Overflowing Altar)
+
+    [108788] = { hide = true }, -- Synergy Damage Bonus (Trapping Webs - Spawn Broodlings Synergy)
+    [39430] = { icon = 'esoui/art/icons/ability_undaunted_003.dds' }, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
+    [39432] = { icon = 'esoui/art/icons/ability_undaunted_003.dds' }, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
+    [77245] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_bite.dds' }, -- Bite (Trapping Webs - Spawn Broodlings Synergy)
+    [80079] = { duration = 0 }, -- Trapping Webs (Trapping Webs)
+
+    [108791] = { hide = true }, -- Synergy Damage Bonus (Shadow Silk - Black Widows Synergy)
+    [41994] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Black Widows (Shadow Silk - Black Widows Synergy)
+    [41998] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', name = A.Skill_Black_Widows }, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
+    [41999] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', name = A.Skill_Black_Widows }, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
+    [42000] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_undaunted_black_widow_poison.dds' }, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
+    [42007] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_black_widow_poison.dds' }, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
+
+    [80108] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', duration = 0 }, -- Shadow Silk (Shadow Silk)
+    [80107] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Shadow Silk (Shadow Silk)
+
+    [108792] = { hide = true }, -- Synergy Damage Bonus (Tangling Webs - Arachnophobia Synergy)
+    [42016] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+    [42023] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+
+    [80130] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds', duration = 0 }, --  Tangling Webs (Tangling Webs)
+    [80129] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, --  Tangling Webs (Tangling Webs)
+
+    [108793] = { hide = true }, -- Synergy Damage Bonus (Inner Fire - Radiate Synergy)
+
+    [108794] = { hide = true }, -- Synergy Damage Bonus (Bone Shield - Bone Wall Synergy)
+    [108797] = { hide = true }, -- Synergy Damage Bonus (Bone Surge - Spinal Surge Synergy)
+
+    [108799] = { hide = true }, -- Synergy Damage Bonus (Necrotic Orb - Combustion Synergy)
+    [85432] = { icon = 'esoui/art/icons/ability_undaunted_004.dds' }, -- Combustion (Necrotic Orb - Combustion Synergy)
+
+    [108802] = { hide = true }, -- Synergy Damage Bonus (Energy Orb - Healing Combustion Synergy)
+    [95041] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds', name = A.Skill_Healing_Combustion }, -- Combustion (Energy Orb - Healing Combustion Synergy)
+    [95042] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds', name = A.Skill_Healing_Combustion }, -- Combustion (Energy Orb - Healing Combustion Synergy)
+    [63511] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds', name = A.Skill_Healing_Combustion }, -- Combustion (Energy Orb - Healing Combustion Synergy)
+
+    ----------------------------------------------------------------
+    -- ASSAULT PASSIVES --------------------------------------------
     ----------------------------------------------------------------
 
     [39248] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_continuous_attack.dds' }, -- Continuous Attack (Continuous Attack - Rank 1)
-    [39249] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_continuous_attack.dds' }, -- Continuous Attack (Continuous Attack - Rank 1)
+    [39249] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_continuous_attack.dds' }, -- Continuous Attack (Continuous Attack - Rank 1)
     [45614] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_continuous_attack.dds' }, -- Continuous Attack (Continuous Attack - Rank 2)
     [45617] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_continuous_attack.dds' }, -- Continuous Attack (Continuous Attack - Rank 2)
 
@@ -4262,6 +4412,36 @@ E.EffectOverride = {
     [45619] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_combat_frenzy.dds' }, -- Combat Frenzy (Combat Frenzy - Rank 2)
     [45620] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_combat_frenzy.dds' }, -- Combat Frenzy (Combat Frenzy - Rank 2)
 
+    ----------------------------------------------------------------
+    -- ASSAULT ACTIVES ---------------------------------------------
+    ----------------------------------------------------------------
+
+    [101161] = { consolidate = true }, -- Major Expedition (Rapid Maneuver)
+    [57472] = { consolidate = true }, -- Major Gallop (Rapid Maneuver)
+
+    [101169] = { consolidate = true }, -- Major Expedition (Retreating Maneuver)
+    [57477] = { consolidate = true }, -- Major Gallop (Retreating Maneuver)
+
+    [101178] = { consolidate = true }, -- Major Expedition (Charging Maneuver)
+    [57481] = { consolidate = true }, -- Major Gallop (Charging Maneuver)
+
+    [64118] = { name = A.Skill_Caltrops, duration = 0 }, -- Hindered (Caltrops - All Morphs)
+    [40253] = { name = A.Skill_Razor_Caltrops }, -- Hindered (Razor Caltrops)
+
+    [66482] = { hide = true }, -- Magicka Detonation (Magicka Detonation)
+    [66491] = { hide = true }, -- Magicka Detonation (Inevitable Detonation)
+    [66499] = { hide = true }, -- Magicka Detonation (Proximity Detonation)
+
+    [63523] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds', consolidate = true }, -- Minor Toughness (War Horn)
+    [63527] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds', consolidate = true }, -- Minor Toughness (Aggressive Horn)
+    [40222] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds', consolidate = true }, -- Minor Toughness (Sturdy Horn)
+    [63532] = { consolidate = true }, -- Minor Resolve (Sturdy Horn)
+    [63571] = { consolidate = true }, -- Minor Ward (Sturdy Horn)
+
+    ----------------------------------------------------------------
+    -- SUPPORT PASSIVES --------------------------------------------
+    ----------------------------------------------------------------
+
     [39255] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_magicka_aid.dds' }, -- Magicka Aid
     [45622] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_magicka_aid.dds' }, -- Magicka Aid
 
@@ -4270,6 +4450,41 @@ E.EffectOverride = {
 
     [39261] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_battle_resurrection.dds' }, -- Battle Resurrection
     [45625] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_battle_resurrection.dds' }, -- Battle Resurrection
+
+    ----------------------------------------------------------------
+    -- SUPPORT ACTIVES ---------------------------------------------
+    ----------------------------------------------------------------
+
+    [39844] = { duration = 0, forcedContainer = 'short' }, -- Siege Shield (Siege Shield)
+    [40231] = { duration = 0, forcedContainer = 'short' }, -- Siege Weapon Shield (Siege Weapon Shield)
+    [40227] = { duration = 0, forcedContainer = 'short' }, -- Propelling Shield (Siege Weapon Shield)
+
+    [40237] = { hideReduce = true }, -- Reviving Barrier (Reviving Barrier)
+    [40238] = { name = A.Skill_Reviving_Barrier }, -- Reviving Barrier Heal (Reviving Barrier)
+
+    [40240] = { icon = 'esoui/art/icons/ability_ava_006_a.dds' }, -- Replenishing Barrier (Replenishing Barrier)
+    [40241] = { icon = 'esoui/art/icons/ability_ava_006_a.dds' }, -- Replenishing Barrier (Replenishing Barrier)
+
+    [40233] = { name = A.Skill_Efficient_Purge }, -- Purge (Efficient Purge)
+    [40235] = { hide = true }, -- Cleanse (Cleanse)
+
+    [61511] = { duration = 0, forcedContainer = 'short' }, -- Guard (Guard)
+    [80923] = { duration = 0 }, -- Guard (Guard)
+
+    [61536] = { duration = 0, forcedContainer = 'short' }, -- Mystic Guard (Mystic Guard)
+    [80947] = { duration = 0 }, -- Mystic Guard (Mystic Guard)
+    [80953] = { duration = 0, forcedContainer = 'short', consolidate = true }, -- Minor Vitality (Mystic Guard)
+    [64080] = { duration = 0, consolidate = true }, -- Minor Vitality (Mystic Guard)
+    [80945] = { icon = 'esoui/art/icons/ability_ava_mystic_guard.dds' }, -- Mystic Guard (Mystic Guard)
+
+    [61529] = { duration = 0, forcedContainer = 'short' }, -- Stalwart Guard (Stalwart Guard)
+    [80983] = { duration = 0 }, -- Stalwart Guard (Stalwart Guard)
+    [80984] = { duration = 0, forcedContainer = 'short', consolidate = true }, -- Minor Force (Stalwart Guard)
+    [80986] = { duration = 0, consolidate = true }, -- Minor Force (Stalwart Guard)
+    [80981] = { icon = 'esoui/art/icons/ability_ava_stalwart_guard.dds' }, -- Stalwart Guard (Stalwart Guard)
+
+    [61528] = { name = A.Skill_Scorching_Flare }, -- Scorching Flare Reveal (Scorching Flare)
+    [61552] = { hideReduce = true }, -- Scorching Flare (Scorching Flare)
 
     ----------------------------------------------------------------
     -- PLAYER PASSIVES RACIAL --------------------------------------
@@ -4939,6 +5154,7 @@ E.EffectOverride = {
     [46336] = { name = A.Skill_Crystal_Shard }, -- Crystal Shard Stun (Cyrodiil Mage T1)
     [21629] = { icon = 'esoui/art/icons/ability_mage_008.dds' }, -- Mage's Lifesteal (Cyrodiil Mage T1)
 
+    [46711] = { hide = true }, -- Bound Aegis (Cyrodiil Mage T2)
     [46726] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_torrent.dds', name = A.Skill_Improved_Shock_Torrent, hide = true }, -- Shock Torrent (Cyrodiil Mage T2)
     [46730] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_torrent.dds', name = A.Skill_Improved_Shock_Torrent }, -- Shock Torrent (Cyrodiil Mage T2)
     [46819] = { icon = 'esoui/art/icons/ability_mage_068.dds', name = A.Skill_Lasting_Storm }, -- Storm Damage (Cyrodiil Mage T2)

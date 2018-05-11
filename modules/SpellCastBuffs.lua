@@ -234,36 +234,6 @@ local function EaseInOutQuad(t, b, c, d)
 end
 ]]--
 
-local Effects = {
-    --["Imperial Prison Item Set"]    = { 6.0, false, false, nil},
-
-    -- Undaunted
-    [A.Skill_Trapping_Webs]         = { false, false, true, nil },
-    [A.Skill_Shadow_Silk]           = { false, false, true, nil },
-    [A.Skill_Tangling_Webs]         = { false, false, true, nil },
-
-    -----------------------------------
-    -- WORLD
-    -----------------------------------
-
-    -- Vampire
-    [A.Skill_Bat_Swarm]             = { false, false, 5.5, 0.1 },
-    [A.Skill_Clouding_Swarm]        = { false, false, 5.5, 0.1 }, -- These values are perfect. Also note, this isn't needed as this shows as a buff on the player as well.
-    [A.Skill_Devouring_Swarm]       = { false, false, 5.5, 0.1 },
-
-    -----------------------------------
-    -- AVA
-    -----------------------------------
-
-    -- AVA Assault
-    [A.Skill_Caltrops]              = { false, false, true, nil },
-    [A.Skill_Anti_Cavalry_Caltrops] = { false, false, true, nil },
-    [A.Skill_Razor_Caltrops]        = { false, false, true, nil },
-
-    --AVA Support
-    --Possibly add Siege shield here/remove active effect ]]--
-}
-
 -- Initialization
 function SCB.Initialize( enabled )
     -- Load settings
@@ -941,7 +911,7 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
             local icon = E.DisguiseIcons[g_currentDisguise].icon
             g_effectsList.player1["DisguiseType"] = {
                 target="player", type=1,
-                name=name, icon=icon,
+                id ="Fake", name=name, icon=icon,
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "long",
                 restart=true, iconNum=0
@@ -2576,7 +2546,7 @@ function SCB.ReloadEffects(unitTag)
             if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
                 g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                     type=1,
-                    id="Fake", name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                    id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                     dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                     forced = "short",
                     restart=true, iconNum=0
@@ -2584,7 +2554,7 @@ function SCB.ReloadEffects(unitTag)
             elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
                 g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                     type=1,
-                    id="Fake", name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
+                    id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
                     dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                     forced = "short",
                     restart=true, iconNum=0
@@ -2602,7 +2572,7 @@ function SCB.ReloadEffects(unitTag)
                 -- Trigger a buff
                 g_effectsList.reticleover1[ A.Innate_Disguised ] = {
                     type=1,
-                    id="Fake", name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+                    id=A.Innate_Disguised, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                     dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                     forced = "short",
                     restart=true, iconNum=0
@@ -2933,7 +2903,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
             buff:SetAlpha(1)
             buff:SetHidden(false)
             if not remain then
-                buff.label:SetText( E.IsToggle[effect.name] and "T" or nil )
+                buff.label:SetText( E.IsToggle[effect.id] and "T" or nil )
             end
 
             if buff.abilityId and effect.id then
@@ -3005,7 +2975,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
             g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
-                id="Fake", name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3014,7 +2984,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
         elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
             g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
-                id="Fake", name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
+                id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3028,7 +2998,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
             g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                 type=1,
-                id="Fake", name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3037,7 +3007,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
         elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
             g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                 type=1,
-                id="Fake", name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
+                id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3055,7 +3025,7 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
             -- Trigger a buff
             g_effectsList.player1[ A.Innate_Disguised ] = {
                 type=1,
-                id="Fake", name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+                id=A.Innate_Disguised, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3072,7 +3042,7 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
             -- Trigger a buff
             g_effectsList.reticleover1[ A.Innate_Disguised ] = {
                 type=1,
-                id="Fake", name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+                id=A.Innate_Disguised, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3119,7 +3089,7 @@ function SCB.OnPlayerActivated(eventCode)
             -- Trigger a buff
             g_effectsList.player1[ A.Innate_Disguised ] = {
                 type=1,
-                id="Fake", name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+                id=A.Innate_Disguised, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3135,7 +3105,7 @@ function SCB.OnPlayerActivated(eventCode)
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
             g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
-                id="Fake", name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3144,7 +3114,7 @@ function SCB.OnPlayerActivated(eventCode)
         elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
             g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
-                id="Fake", name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
+                id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0

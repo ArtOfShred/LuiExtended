@@ -319,7 +319,6 @@ A.Skill_Dark_Shade                  = 35434
 A.Skill_Shadow_Image                = 35441
 A.Skill_Swallow_Soul                = 34835
 A.Skill_Crippling_Grasp             = 36957
-A.Skill_Siphoning_Strikes           = 33319
 A.Skill_Drain_Power                 = 33316
 A.Skill_Power_Extraction            = 36901
 A.Skill_Sap_Essence                 = 36891
@@ -335,17 +334,10 @@ A.Skill_Dark_Deal                   = 24595
 A.Skill_Dark_Conversion             = 24589
 A.Skill_Daedric_Tomb                = 24842
 A.Skill_Daedric_Minefield           = 24834
-A.Skill_Unstable_Familiar           = 23304
-A.Skill_Unstable_Clannfear          = 23319
-A.Skill_Volatile_Familiar           = 23316
 A.Skill_Familiar_Damage_Pulse       = 108844
-A.Skill_Summon_Winged_Twilight      = 24613
-A.Skill_Summon_Twilight_Tormentor   = 24636
-A.Skill_Summon_Twilight_Matriarch   = 24639
 A.Skill_Winged_Twilight_Restore     = 108845
 A.Skill_Tormentor_Damage_Boost      = GetString(SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST)
 A.Skill_Twilight_Matriarch_Restore  = 77369
-A.Skill_Bound_Aegis                 = 24163
 A.Skill_Atronach_Zap                = 23428
 A.Skill_Greater_Storm_Atronach      = 23492
 A.Skill_Summon_Charged_Atronach     = 23495
@@ -354,8 +346,6 @@ A.Skill_Mages_Wrath                 = 19123
 A.Skill_Endless_Fury                = 19109
 A.Skill_Critical_Surge              = 23678
 A.Skill_Overload                    = 24785
-A.Skill_Power_Overload              = 24806
-A.Skill_Energy_Overload             = 24804
 A.Skill_Overload_Heavy_Attack       = 24794
 
 -- Templar
@@ -384,7 +374,6 @@ A.Skill_Deceptive_Predator          = 86041
 A.Skill_Bird_of_Prey                = 86045
 A.Skill_Feral_Guardian              = 85982
 A.Skill_Eternal_Guardian            = 85986
-A.Skill_Wild_Guardian               = 85990
 A.Skill_Enchanted_Growth            = 85862
 A.Skill_Healing_Seed                = 85578
 A.Skill_Budding_Seeds               = 85840
@@ -532,22 +521,36 @@ A.Skill_Meteor                      = 16536
 A.Skill_Ice_Comet                   = 40489
 
 -- Psijic Order
-A.Skill_Concentrated_Barrier        = 103888
 A.Skill_Imbue_Weapon                = 103483
 A.Skill_Elemental_Weapon            = 103571
 A.Skill_Crushing_Weapon             = 103623
 A.Skill_Accelerate                  = 103503
 A.Skill_Channeled_Acceleration      = 103706
 A.Skill_Race_Against_Time           = 103710
-A.Skill_Mend_Spirit                 = 103747
-A.Skill_Mend_Wounds                 = 103543
 A.Skill_Symbiosis                   = 103755
+
+-- Undaunted
+A.Skill_Black_Widows                = 41994
+A.Skill_Arachnophobia               = 42016
+A.Skill_Healing_Combustion          = 63507
 
 -- ---------------------------------------------------
 -- ALLIANCE WAR --------------------------------------
 -- ---------------------------------------------------
 
-A.Skill_Caltrops                    = 33376 -- TODO: Check is best ID to use
+-- Assault
+A.Skill_Rapid_Maneuver              = 38566
+A.Skill_Retreating_Maneuver         = 40211
+A.Skill_Charging_Maneuver           = 40215
+A.Skill_Caltrops                    = 33376
+A.Skill_Razor_Caltrops              = 40242
+
+-- Support
+A.Skill_Efficient_Purge             = 40232
+A.Skill_Lingering_Flare             = 61519
+A.Skill_Scorching_Flare             = 61524
+
+A.Skill_Reviving_Barrier            = 40237
 
 -- ---------------------------------------------------
 -- NPC BASIC -----------------------------------------
@@ -666,110 +669,6 @@ A.Skill_Winters_Reach               = 4337
 
 -- Monsters
 A.Skill_Assault                     = 4304 -- Ice Wraith
-
---------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------
--- OLD SHIT -- MOVE OVER/DELETE AS NEEDED --------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------
-
--- MAGES GUILD --------------
-A.Skill_Entropy                  = 28567
-A.Skill_Degeneration             = 40457
-A.Skill_Structured_Entropy       = 40452
-A.Skill_Fire_Rune                = 31632
-A.Skill_Scalding_Rune            = 40465
-A.Skill_Volcanic_Rune            = 40470
-A.Skill_Equilibrium              = 48135
-
--- UNDAUNTED ----------------
-A.Skill_Trapping_Webs            = 39425
-A.Skill_Shadow_Silk              = 41990
-A.Skill_Tangling_Webs            = 42012
-A.Skill_Inner_Fire               = 39475
-A.Skill_Inner_Rage               = 42056
-A.Skill_Inner_Beast              = 42060
-A.Skill_Bone_Shield              = 39369
-A.Skill_Bone_Surge               = 42176
-A.Skill_Spiked_Bone_Shield       = 42138
-
--- ---------------------------------------------------
--- WORLD ---------------------------------------------
--- ---------------------------------------------------
-
--- SOUL MAGIC ---------------
-A.Skill_Soul_Strike              = 39270
-A.Skill_Shatter_Soul             = 40414
-A.Skill_Soul_Assault             = 40420
-A.Skill_Soul_Trap                = 26768
-A.Skill_Consuming_Trap           = 40317
-A.Skill_Soul_Splitting_Trap      = 40328
-
--- WEREWOLF -----------------
-A.Skill_Hircines_Rage            = 58317
-A.Skill_Hircines_Fortitude       = 58325
-A.Skill_Roar                     = 32633
-A.Skill_Ferocious_Roar           = 39113
-A.Skill_Rousing_Roar             = 39114
-A.Skill_Piercing_Howl            = 58405
-A.Skill_Howl_of_Despair          = 58742
-A.Skill_Howl_of_Agony            = 58798
-A.Skill_Infectious_Claws         = 58855
-A.Skill_Claws_of_Anguish         = 58864
-A.Skill_Claws_of_Life            = 58879
-
--- VAMPIRE ------------------
-A.Skill_Bat_Swarm                = 32624
-A.Skill_Clouding_Swarm           = 38932
-A.Skill_Devouring_Swarm          = 38931
-A.Skill_Drain_Essence            = 32893
-A.Skill_Invigorating_Drain       = 38949
-A.Skill_Midnight_Drain           = 38956
-A.Skill_Mist_Form                = 32986
-A.Skill_Elusive_Mist             = 38963
-A.Skill_Poison_Mist              = 38965
-
--- ---------------------------------------------------
--- ALLIANCE WAR --------------------------------------
--- ---------------------------------------------------
-
--- ASSAULT ------------------
-A.Skill_War_Horn                 = 38563
-A.Skill_Aggressive_Horn          = 40223
-A.Skill_Sturdy_Horn              = 40220
-A.Skill_Rapid_Maneuver           = 38566
-A.Skill_Charging_Maneuver        = 40215
-A.Skill_Retreating_Maneuver      = 40211
-A.Skill_Vigor                    = 61503
-A.Skill_Echoing_Vigor            = 61505
-A.Skill_Resolving_Vigor          = 61507
-A.Skill_Anti_Cavalry_Caltrops    = 40255
-A.Skill_Razor_Caltrops           = 40242
-A.Skill_Magicka_Detonation       = 61487
-A.Skill_Inevitable_Detonation    = 61491
-A.Skill_Proximity_Detonation     = 61500
-
--- SUPPORT ------------------
-A.Skill_Barrier                  = 38573
-A.Skill_Replenishing_Barrier     = 40239
-A.Skill_Reviving_Barrier         = 40237
-A.Skill_Siege_Shield             = 38570
-A.Skill_Propelling_Shield        = 40226
-A.Skill_Siege_Weapon_Shield      = 40229
-A.Skill_Purge                    = 38571
-A.Skill_Cleanse                  = 40234
-A.Skill_Efficient_Purge          = 40232
-
--- ---------------------------------------------------
--- TOGGLED EFFECTS -----------------------------------
--- ---------------------------------------------------
-
--- TODO: Don't delete - move later
-A.Skill_Guard                     = 63318 -- Guard (Support)
-A.Skill_Mystic_Guard              = 63335 -- Mystic Guard (Support)
-A.Skill_Stalwart_Guard            = 63351 -- Stalwart Guard (Support)
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

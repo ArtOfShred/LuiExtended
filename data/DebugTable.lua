@@ -5773,7 +5773,7 @@ debugAuras = {
             [76453] = true, -- Veil of Shadows (Rank 1)
 
             ------------------------------
-            -- UNDAUNTED PASSIVES
+            -- UNDAUNTED PASSIVES --------
             ------------------------------
 
             [55584] = true, -- Undaunted Command (Rank 1)
@@ -5788,11 +5788,157 @@ debugAuras = {
             [55366] = true, -- Undaunted Mettle (Rank 1)
             [55386] = true, -- Undaunted Mettle (Rank 2)
 
+            ------------------------------
+            -- UNDAUNTED ACTIVES ---------
+            ------------------------------
+
+            [108782] = true, -- Synergy Damage Bonus (Blood Altar - Blood Funnel Synergy)
+            [39500] = true, -- Blood Funnel (Blood Altar - Blood Funnel Synergy)
+            [39501] = true, -- Blood Funnel (Blood Altar - Blood Funnel Synergy)
+            [39519] = true, -- Blood Funnel (Blood Altar - Blood Funnel Synergy)
+            [39521] = true, -- Blood Funnel (Blood Altar - Blood Funnel Synergy)
+            [80020] = true, -- Minor Lifesteal (Blood Altar - All Morphs)
+            [80021] = true, -- Minor Lifesteal (Blood Altar - All Morphs)
+            [39489] = true, -- Blood Altar (Blood Altar)
+            [41328] = true, -- Summon Shade (Blood Altar)
+            [39493] = true, -- Blood Altar (Blood Altar)
+
+            [41967] = true, -- Sanguine Altar (Sanguine Altar)
+            [41970] = true, -- Sanguine Altar (Sanguine Altar)
+            [41969] = true, -- Sanguine Altar (Sanguine Altar)
+
+            [108787] = true, -- Synergy Damage Bonus (Overflowing Altar - Blood Feast Synergy)
+            [41963] = true, -- Synergy Damage Bonus (Overflowing Altar - Blood Feast Synergy)
+            [41964] = true, -- Synergy Damage Bonus (Overflowing Altar - Blood Feast Synergy)
+            [41965] = true, -- Synergy Damage Bonus (Overflowing Altar - Blood Feast Synergy)
+            [41966] = true, -- Synergy Damage Bonus (Overflowing Altar - Blood Feast Synergy)
+
+            [41958] = true, -- Overflowing Altar (Overflowing Altar)
+            [41961] = true, -- Overflowing Altar (Overflowing Altar)
+            [41960] = true, -- Overflowing Altar (Overflowing Altar)
+
+            [108788] = true, -- Synergy Damage Bonus (Trapping Webs - Spawn Broodlings Synergy)
+            [39429] = true, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
+            [39451] = true, -- Spawn Broodlings Cooldown (Trapping Webs - Spawn Broodlings Synergy)
+            [41543] = true, -- Summon Spider Spawn (Trapping Webs - Spawn Broodlings Synergy)
+            [39430] = true, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
+            [39432] = true, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
+            [77245] = true, -- Bite (Trapping Webs - Spawn Broodlings Synergy)
+
+            [80030] = true, -- Only 1 Trapping Web (Trapping Webs - All Morphs)
+            [39425] = true, -- Trapping Webs (Trapping Webs)
+            [80080] = true, -- Trapping Webs (Trapping Webs)
+            [102551] = true, -- Trapping Webs (Trapping Webs)
+            [80079] = true, -- Trapping Webs (Trapping Webs)
+            [103242] = true, -- Trapping Webs (Trapping Webs)
+            [80083] = true, -- Trapping Webs (Trapping Webs)
+            [80078] = true, -- Trapping Webs (Trapping Webs)
+
+            [108791] = true, -- Synergy Damage Bonus (Shadow Silk - Black Widows Synergy)
+            [41994] = true, -- Black Widows (Shadow Silk - Black Widows Synergy)
+            [41997] = true, -- Spawn Broodlings Cooldown (Shadow Silk - Black Widows Synergy)
+            [41998] = true, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
+            [41999] = true, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
+            [42000] = true, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
+            [42007] = true, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
+
+            [41990] = true, -- Shadow Silk (Shadow Silk)
+            [80105] = true, -- Shadow Silk (Shadow Silk)
+            [103263] = true, -- Trapping Webs (Shadow Silk)
+            [80108] = true, -- Shadow Silk (Shadow Silk)
+            [41993] = true, -- Shadow Silk (Shadow Silk)
+            [80107] = true, -- Shadow Silk (Shadow Silk)
+            [41991] = true, -- Shadow Silk (Shadow Silk)
+
+            [108792] = true,  -- Synergy Damage Bonus (Tangling Webs - Arachnophobia Synergy)
+            [42016] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+            [42019] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+            [42023] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+            [42020] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+            [42021] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+
+            [42012] = true, -- Tangling Webs (Tangling Webs)
+            [80127] = true, -- Tangling Webs (Tangling Webs)
+            [103268] = true, -- Trapping Webs (Tangling Webs)
+            [80130] = true, -- Tangling Webs (Tangling Webs)
+            [42015] = true, -- Tangling Webs (Tangling Webs)
+            [80129] = true, -- Tangling Webs (Tangling Webs)
+            [42013] = true, -- Tangling Webs (Tangling Webs)
+
+            [108793] = true, -- Synergy Damage Bonus (Inner Fire - Radiate Synergy)
+            [41838] = true, -- Radiate (Inner Fire - Radiate Synergy)
+            [41840] = true, -- Radiate (Inner Fire - Radiate Synergy)
+            [41839] = true, -- Radiate (Inner Fire - Radiate Synergy)
+
+            [39475] = true, -- Inner Fire (Inner Fire)
+            [41942] = true, -- Inner Fire (Inner Fire)
+            [39481] = true, -- Inner Fire (Inner Fire)
+            [39480] = true, -- Inner Fire (Inner Fire)
+
+            [42056] = true, -- Inner Rage (Inner Rage)
+            [42059] = true, -- Inner Rage (Inner Rage)
+            [42058] = true, -- Inner Rage (Inner Rage)
+            [42057] = true, -- Inner Rage (Inner Rage)
+
+            [42060] = true, -- Inner Rage (Inner Beast)
+            [42062] = true, -- Inner Rage (Inner Beast)
+            [42063] = true, -- Inner Rage (Inner Beast)
+            [42061] = true, -- Inner Rage (Inner Beast)
+
+            [108794] = true, -- Synergy Damage Bonus (Bone Shield - Bone Wall Synergy)
+            [39379] = true, -- Bone Wall (Bone Shield - Bone Wall Synergy)
+            [39424] = true, -- Bone Wall (Bone Shield - Bone Wall Synergy)
+
+            [39369] = true, -- Bone Shield (Bone Shield)
+            [39376] = true, -- Bone Shield (Bone Shield)
+            [39375] = true, -- Bone Shield (Bone Shield)
+
+            [42138] = true, -- Spiked Bone Shield (Spiked Bone Shield)
+            [42141] = true, -- Spiked Bone Shield (Spiked Bone Shield)
+            [42140] = true, -- Spiked Bone Shield (Spiked Bone Shield)
+            [42139] = true, -- Spiked Bone Shield (Spiked Bone Shield)
+
+            [108797] = true, -- Synergy Damage Bonus (Bone Surge - Spinal Surge Synergy)
+            [42198] = true, -- Spinal Surge (Bone Surge - Spinal Surge Synergy)
+            [42197] = true, -- Major Vitality (Bone Surge - Spinal Surge Synergy)
+            [42196] = true, -- Spinal Surge (Bone Surge - Spinal Surge Synergy)
+
+            [42176] = true, -- Bone Surge (Bone Surge)
+            [42193] = true, -- Bone Surge (Bone Surge)
+            [42192] = true, -- Bone Surge (Bone Surge)
+
+            [108799] = true, -- Synergy Damage Bonus (Necrotic Orb - Combustion Synergy)
+            [39301] = true, -- Combustion (Necrotic Orb - Combustion Synergy)
+            [85434] = true, -- Spear Shards / Necrotic Orb CD (Necrotic Orb - Combustion Synergy)
+            [95039] = true, -- Combustion (Necrotic Orb - Combustion Synergy)
+            [95040] = true, -- Combustion (Necrotic Orb - Combustion Synergy)
+            [85431] = true, -- Combustion (Necrotic Orb - Combustion Synergy)
+            [85432] = true, -- Combustion (Necrotic Orb - Combustion Synergy)
+
+            [39298] = true, -- Necrotic Orb (Necrotic Orb)
+            [39299] = true, -- Necrotic Orb (Necrotic Orb)
+            [39300] = true, -- Necrotic Orb (Necrotic Orb)
+
+            [42028] = true, -- Mystic Orb (Mystic Orb)
+            [42029] = true, -- Mystic Orb (Mystic Orb)
+            [42030] = true, -- Mystic Orb (Mystic Orb)
+
+            [108802] = true, -- Synergy Damage Bonus (Energy Orb - Healing Combustion Synergy)
+            [63507] = true, -- Healing Combustion (Energy Orb - Healing Combustion Synergy)
+            [63512] = true, -- Spear Shards / Necrotic Orb CD (Energy Orb - Healing Combustion Synergy)
+            [95041] = true, -- Combustion (Energy Orb - Healing Combustion Synergy)
+            [95042] = true, -- Combustion (Energy Orb - Healing Combustion Synergy)
+            [67797] = true, -- Combustion (Energy Orb - Healing Combustion Synergy)
+            [63511] = true, -- Combustion (Energy Orb - Healing Combustion Synergy)
+
+            [42038] = true, -- Energy Orb (Energy Orb)
+            [42039] = true, -- Energy Orb (Energy Orb)
+            [42040] = true, -- Energy Orb (Energy Orb)
+
             ---------------------------------------------
-            -- AVA PASSIVES  ----------------------------
+            -- ASSAULT PASSIVES -------------------------
             ---------------------------------------------
 
-            -- Assault
             [39248] = true, -- Continuous Attack (Rank 1)
             [39249] = true, -- Continuous Attack
             [45614] = true, -- Continuous Attack (Rank 2)
@@ -5804,7 +5950,92 @@ debugAuras = {
             [45619] = true, -- Combat Frenzy (Rank 2)
             [45620] = true, -- Combat Frenzy
 
-            -- Support
+            ---------------------------------------------
+            -- ASSAULT ACTIVES --------------------------
+            ---------------------------------------------
+
+            [38566] = true, -- Rapid Maneuver (Rapid Maneuver)
+            [101161] = true, -- Major Expedition (Rapid Maneuver)
+            [57472] = true, -- Major Gallop (Rapid Maneuver)
+
+            [40211] = true, -- Retreating Maneuver (Retreating Maneuver)
+            [101169] = true, -- Major Expedition (Retreating Maneuver)
+            [57477] = true, -- Major Gallop (Retreating Maneuver)
+
+            [40215] = true, -- Charging Maneuver (Charging Maneuver)
+            [101178] = true, -- Major Expedition (Charging Maneuver)
+            [57481] = true, -- Major Gallop (Charging Maneuver)
+            [40219] = true, -- Minor Expedition (Charging Maneuver)
+
+            [61503] = true, -- Vigor (Vigor)
+            [61504] = true, -- Vigor (Vigor)
+
+            [61505] = true, -- Echoing Vigor (Echoing Vigor)
+            [61506] = true, -- Echoing Vigor (Echoing Vigor)
+
+            [61507] = true, -- Resolving Vigor (Resolving Vigor)
+            [61509] = true, -- Resolving Vigor (Resolving Vigor)
+            [61508] = true, -- Resolving Vigor (Resolving Vigor)
+
+            [64118] = true, -- Hindered (Caltrops - All Morphs)
+            [33376] = true, -- Caltrops (Caltrops)
+            [38548] = true, -- Spear Shards (Caltrops)
+            [38549] = true, -- Caltrops (Caltrops)
+            [38553] = true, -- Spear Shards (Caltrops)
+            [38561] = true, -- Caltrops (Caltrops)
+
+            [40255] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+            [40257] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+            [40265] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+            [40263] = true, -- Spear Shards (Anti-Cavalry Caltrops)
+            [40267] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+            [40266] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+
+            [40242] = true, -- Razor Caltrops (Razor Caltrops)
+            [40244] = true, -- Razor Caltrops (Razor Caltrops)
+            [40251] = true, -- Caltrops (Razor Caltrops)
+            [40249] = true, -- Spear Shards (Razor Caltrops)
+            [40254] = true, -- Razor Caltrops (Razor Caltrops)
+            [40253] = true, -- Hindered (Razor Caltrops)
+            [40252] = true, -- Razor Caltrops (Razor Caltrops)
+
+            [61487] = true, -- Magicka Detonation (Magicka Detonation)
+            [61490] = true, -- FX DUMMY (Magicka Detonation)
+            [66482] = true, -- Magicka Detonation (Magicka Detonation)
+            [61488] = true, -- Magicka Detonation (Magicka Detonation)
+
+            [61491] = true, -- Inevitable Detonation (Inevitable Detonation)
+            [61492] = true, -- FX DUMMY (Inevitable Detonation)
+            [66491] = true, -- Magicka Detonation (Inevitable Detonation)
+            [61493] = true, -- Inevitable Detonation (Inevitable Detonation)
+
+            [61500] = true, -- Proximity Detonation (Proximity Detonation)
+            [61501] = true, -- FX DUMMY (Proximity Detonation)
+            [66499] = true, -- Magicka Detonation (Proximity Detonation)
+            [61502] = true, -- Proximity Detonation (Proximity Detonation)
+
+            [38563] = true, -- War Horn (War Horn)
+            [63523] = true, -- Minor Toughness (War Horn)
+            [38564] = true, -- War Horn (War Horn)
+            [94080] = true, -- War Horn (War Horn)
+
+            [40223] = true, -- Aggressive Horn (Aggressive Horn)
+            [63527] = true, -- Minor Toughness (Aggressive Horn)
+            [40224] = true, -- Aggressive Horn (Aggressive Horn)
+            [94800] = true, -- Aggressive Horn (Aggressive Horn)
+            [40225] = true, -- Major Force (Aggressive Horn)
+
+            [40220] = true, -- Sturdy Horn (Sturdy Horn)
+            [40221] = true, -- Sturdy Horn (Sturdy Horn)
+            [40222] = true, -- Minor Toughness (Sturdy Horn)
+            [63532] = true, -- Minor Resolve (Sturdy Horn)
+            [63571] = true, -- Minor Ward (Sturdy Horn)
+            [95094] = true, -- Sturdy (Sturdy Horn)
+
+            ---------------------------------------------
+            -- SUPPORT PASSIVES -------------------------
+            ---------------------------------------------
+
             [39255] = true, -- Magicka Aid (Rank 1)
             [45622] = true, -- Magicka Aid (Rank 2)
             [39259] = true, -- Combat Medic (Rank 1)
@@ -5813,7 +6044,83 @@ debugAuras = {
             [45625] = true, -- Battle Resurrection (Rank 2)
 
             ---------------------------------------------
-            -- RACIALS  ---------------------------------
+            -- SUPPORT ACTIVES --------------------------
+            ---------------------------------------------
+
+            [41735] = true, -- Only 1 Siege Shield (Siege Shield - All Morphs)
+            [38570] = true, -- Siege Shield (Siege Shield)
+            [39844] = true, -- Siege Shield (Siege Shield)
+
+            [40229] = true, -- Siege Weapon Shield (Siege Weapon Shield)
+            [40231] = true, -- Siege Weapon Shield (Siege Weapon Shield)
+            [40230] = true, -- Siege Weapon Shield (Siege Weapon Shield)
+
+            [40226] = true, -- Propelling Shield (Propelling Shield)
+            [40227] = true, -- Propelling Shield (Propelling Shield)
+
+            [38571] = true, -- Purge (Purge)
+            [38572] = true, -- Purge (Purge)
+
+            [40232] = true, -- Efficient Purge (Efficient Purge)
+            [40233] = true, -- Purge (Efficient Purge)
+
+            [40234] = true, -- Cleanse (Cleanse)
+            [40235] = true, -- Cleanse (Cleanse)
+            [40236] = true, -- Cleanse (Cleanse)
+            [64571] = true, -- Cleanse Heal Tracker (Cleanse)
+
+            [61511] = true, -- Guard (Guard)
+            [80923] = true, -- Guard (Guard)
+            [78338] = true, -- Guard (Guard)
+            [80926] = true, -- Guard Saved Damage Value (Guard)
+            [80921] = true, -- Guard (Guard)
+
+            [61536] = true, -- Mystic Guard (Mystic Guard)
+            [80947] = true, -- Mystic Guard (Mystic Guard)
+            [80953] = true, -- Minor Vitality (Mystic Guard)
+            [64080] = true, -- Minor Vitality (Mystic Guard)
+            [81415] = true, -- Guard (Mystic Guard)
+            [80950] = true, -- Guard Saved Damage Value (Mystic Guard)
+            [80945] = true, -- Mystic Guard (Mystic Guard)
+
+            [61529] = true, -- Stalwart Guard (Stalwart Guard)
+            [80983] = true, -- Stalwart Guard (Stalwart Guard)
+            [80984] = true, -- Minor Force (Stalwart Guard)
+            [80986] = true, -- Minor Force (Stalwart Guard)
+            [81420] = true, -- Guard (Stalwart Guard)
+            [80988] = true, -- Guard Saved Damage Value (Stalwart Guard)
+            [80981] = true, -- Stalwart Guard (Stalwart Guard)
+
+            [61489] = true, -- Revealing Flare (Revealing Flare)
+            [61497] = true, -- Nova (Revealing Flare)
+            [61498] = true, -- Nova (Revealing Flare)
+            [61496] = true, -- Revealing Flare (Revealing Flare)
+            [77966] = true, -- Revealing Flare (Revealing Flare)
+
+            [61519] = true, -- Lingering Flare (Lingering Flare)
+            [61523] = true, -- Nova (Lingering Flare)
+            [61522] = true, -- Nova (Lingering Flare)
+            [61521] = true, -- Lingering Flare (Lingering Flare)
+            [77970] = true, -- Lingering Flare (Lingering Flare)
+
+            [61524] = true, -- Scorching Flare (Scorching Flare)
+            [61527] = true, -- Nova (Scorching Flare)
+            [61526] = true, -- Nova (Scorching Flare)
+            [61528] = true, -- Scorching Flare (Scorching Flare)
+            [61552] = true, -- Scorching Flare (Scorching Flare)
+            [77974] = true, -- Scorching Flare (Scorching Flare)
+
+            [38573] = true, -- Barrier (Barrier)
+
+            [40237] = true, -- Reviving Barrier (Reviving Barrier)
+            [40238] = true, -- Reviving Barrier (Reviving Barrier Heal)
+
+            [40239] = true, -- Replenishing Barrier (Replenishing Barrier)
+            [40240] = true, -- Replenishing Barrier (Replenishing Barrier)
+            [40241] = true, -- Replenishing Barrier (Replenishing Barrier)
+
+            ---------------------------------------------
+            -- RACIALS ----------------------------------
             ---------------------------------------------
 
             -- BRETON
