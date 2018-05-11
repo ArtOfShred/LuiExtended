@@ -751,6 +751,7 @@ local g_werewolfName = ""
 local g_werewolfIcon = ""
 local g_werewolfCounter = 0
 local g_werewolfQuest = 0
+local g_lastWerewolfPower = 0
 
 local function SetWerewolfIcon()
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
@@ -825,8 +826,6 @@ function SCB.PowerTrailer()
 
 end
 
-g_lastWerewolfPower = 0
-
 function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
 
     if g_lastWerewolfPower > powerValue then
@@ -886,7 +885,7 @@ function SCB.InitializeDisguise()
         local icon = E.DisguiseIcons[g_currentDisguise].icon
         g_effectsList.player1["DisguiseType"] = {
             target="player", type=1,
-            name=name, icon=icon,
+            id ="Fake", name=name, icon=icon,
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
             forced = "long",
             restart=true, iconNum=0
@@ -926,7 +925,7 @@ function SCB.MountStatus(eventCode, mounted)
     if mounted and not SCB.SV.IgnoreMount then
         g_effectsList.player1["Mount"] = {
             target="player", type=1,
-            name=A.Innate_Mounted, icon='LuiExtended/media/icons/abilities/ability_innate_mounted.dds',
+            id ="Fake", name=A.Innate_Mounted, icon='LuiExtended/media/icons/abilities/ability_innate_mounted.dds',
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
             forced = "long",
             restart=true, iconNum=0
@@ -946,7 +945,7 @@ function SCB.CollectibleBuff()
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
         g_effectsList.player1["PetType"] = {
             target="player", type=1,
-            name=A.Innate_Vanity_Pet, icon='LuiExtended/media/icons/abilities/ability_innate_pet.dds',
+            id ="Fake", name=A.Innate_Vanity_Pet, icon='LuiExtended/media/icons/abilities/ability_innate_pet.dds',
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
             forced = "long",
             restart=true, iconNum=0
@@ -962,7 +961,7 @@ function SCB.CollectibleBuff()
         local iconAssistant = E.AssistantIcons[CollectibleName] ~= nil and E.AssistantIcons[CollectibleName] or ''
         g_effectsList.player1["AssistantType"] = {
             target="player", type=1,
-            name=CollectibleName, icon=iconAssistant,
+            id ="Fake", name=CollectibleName, icon=iconAssistant,
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
             forced = "long",
             restart=true, iconNum=0
