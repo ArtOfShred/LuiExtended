@@ -668,6 +668,7 @@ A.Skill_Soul_Rupture                = 73931
 A.Skill_Winters_Reach               = 4337
 
 -- Monsters
+A.Skill_Luring_Snare                = 2821
 A.Skill_Assault                     = 4304 -- Ice Wraith
 
 -- ---------------------------------------------------

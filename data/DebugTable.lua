@@ -2197,6 +2197,21 @@ debugAuras = {
             [70116] = true, -- Pet PvP Damage Reduction
             [62197] = true, -- Pet Crit Chance
 
+            -- HOUSING
+            [89978] = true, -- Target Skeleton (Target Dummy)
+            --[10298] = true, -- Boss (Target Dummy)
+            --[15954] = true, -- Boss (Target Dummy)
+
+            [89445] = true, -- Create Blacksmithing Set Stati (Attunable Blacksmithing Station)
+            [89469] = true, -- 68235 Stun (Attunable Blacksmithing Station)
+            [89643] = true, -- Create Clothier Set Stati (Attunable Clothier Station)
+            [89645] = true, -- 68235 Stun (Attunable Clothier Station)
+            [105215] = true, -- Create Jewelry Set Station (Attunable Jewelry Crafting Station)
+            [105217] = true, -- 68235 Stun (Attunable Jewelry Crafting Station)
+            [89652] = true, -- Create Woodworking Set Stati (Attunable Woodworking Station)
+            [89654] = true, -- 68235 Stun (Attunable Woodworking Station)
+            [89338] = true, -- ALL Furniture Plan Book (Crafting Book - PTS Only)
+
             --------------------------
             -- WORLD EVENTS
             --------------------------
@@ -4767,7 +4782,7 @@ debugAuras = {
             [16145] = true, -- Light Attack
             [16212] = true, -- Heavy Attack
             [32760] = true, -- Heavy Attack (Restoration)
-            --[67106] = true, -- Partial Heavy Attack (Resto)
+            [67106] = true, -- Partial Heavy Attack (Resto)
 
             [30973] = true, -- Essence Drain (Rank 1)
             [77918] = true, -- Major Mending
@@ -6380,6 +6395,30 @@ debugAuras = {
             [46767] = true, -- Runestone Extraction (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
             [46768] = true, -- Runestone Extraction (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [46769] = true, -- Runestone Extraction (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
+
+            -- JEWELRY CRAFTING
+            [103632] = true, -- Engraver (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103633] = true, -- Engraver (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103634] = true, -- Engraver (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103635] = true, -- Engraver (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103636] = true, -- Engraver (Rank 5) -- NOTE: No actual aura or event displayed for this, listed for completion
+
+            [103637] = true, -- Keen Eye: Jewelry (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103638] = true, -- Keen Eye: Jewelry (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103639] = true, -- Keen Eye: Jewelry (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
+
+            [103643] = true, -- Jewelry Extraction (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103644] = true, -- Jewelry Extraction (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103645] = true, -- Jewelry Extraction (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
+
+            [103640] = true, -- Lapidary Research (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103641] = true, -- Lapidary Research (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103642] = true, -- Lapidary Research (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [108098] = true, -- Lapidary Research (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
+
+            [103646] = true, -- Platings Expertise (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103647] = true, -- Platings Expertise (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
+            [103648] = true, -- Platings Expertise (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
 
             -- PROVISIONING
             [44625] = true, -- Recipe Quality (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
@@ -7995,19 +8034,18 @@ debugAuras = {
             [49128] = true, -- Necromantic Implosion -- Bone Colossus
             [88132] = true, -- Voice to Wake the Dead -- Bone Colossus
 
-            --[72980] = true, -- Singing Strike -- Defiled Aegis
-            --[72981] = true, -- Singing Slice -- Defiled Aegis
-            --[72979] = true, -- Dissonant Blow -- Defiled Aegis
-            --[72995] = true, -- Symphony of Blades -- Defiled Aegis
-            --[72996] = true, -- Symphony of Blades -- Defiled Aegis
-            --[77612] = true, -- Symphony of Blades -- Defiled Aegis
-
-            --[73020] = true, -- Shattered Harmony -- Defiled Aegis
-            --[76180] = true, -- Shattered Harmony -- Defiled Aegis
+            [72980] = true, -- Singing Strike -- Defiled Aegis
+            [72981] = true, -- Singing Slice -- Defiled Aegis
+            [72979] = true, -- Dissonant Blow -- Defiled Aegis
+            [72995] = true, -- Symphony of Blades -- Defiled Aegis
+            [72996] = true, -- Symphony of Blades -- Defiled Aegis
+            [77612] = true, -- Symphony of Blades -- Defiled Aegis
+            [73020] = true, -- Shattered Harmony -- Defiled Aegis
+            [76180] = true, -- Shattered Harmony -- Defiled Aegis
             --[73021] = true, -- Shattered Harmony -- Defiled Aegis
-            --[73025] = true, -- Tomb Guardian -- Defiled Aegis
-            --[73322] = true, -- Shattered Harmony -- Defiled Aegis
-            --[74993] = true, -- Shattered Harmony -- Defiled Aegis
+            [73025] = true, -- Tomb Guardian -- Defiled Aegis
+            [73322] = true, -- Shattered Harmony -- Defiled Aegis
+            [74993] = true, -- Shattered Harmony -- Defiled Aegis
 
             [8812] = true, -- Double Strike -- Ghost
             [8813] = true, -- Double Strike -- Ghost
@@ -8053,29 +8091,29 @@ debugAuras = {
             --[68771] = true, -- Vampiric Drain Heal Dummy -- Vampire
             --[68772] = true, -- Vampiric Drain -- Vampire
 
-            --[2849] = true, -- Claw Slash -- Werewolf
-            --[4651] = true, -- Claw Slash -- Werewolf
-            --[2850] = true, -- Swipe -- Werewolf
-            --[2867] = true, -- Crushing Leap -- Werewolf
-            --[45576] = true, -- Generic Stagger Enemy -- Werewolf
-            --[3415] = true, -- Flurry -- Werewolf
-            --[13950] = true, -- Flurry -- Werewolf
-            --[9467] = true, -- Flurry -- Werewolf
-            --[60636] = true, -- Flurry -- Werewolf
-            --[60637] = true, -- Flurry -- Werewolf
-            --[60638] = true, -- Flurry -- Werewolf
-            --[60639] = true, -- Flurry -- Werewolf
-            --[60640] = true, -- Flurry -- Werewolf
-            --[44055] = true, -- Devour -- Werewolf
-            --[44054] = true, -- Devour -- Werewolf
-            --[5785] = true, -- Blood Scent -- Werewolf
-            --[58529] = true, -- Blood Scent -- Werewolf
-            --[27329] = true, -- Houndsman Transform -- Werewolf
-            --[27344] = true, -- Houndsman Regen -- Werewolf
-            --[27345] = true, -- Houndsman Stun -- Werewolf
-            --[27362] = true, -- Houndsman Delay -- Werewolf
-            --[27365] = true, -- MT Houndsman Removal -- Werewolf
-            --[27382] = true, -- MT Houndsman -- Werewolf
+            [2849] = true, -- Claw Slash -- Werewolf
+            [4651] = true, -- Claw Slash -- Werewolf
+            [2850] = true, -- Swipe -- Werewolf
+            [2867] = true, -- Crushing Leap -- Werewolf
+            [45576] = true, -- Generic Stagger Enemy -- Werewolf
+            [3415] = true, -- Flurry -- Werewolf
+            [13950] = true, -- Flurry -- Werewolf
+            [9467] = true, -- Flurry -- Werewolf
+            [60636] = true, -- Flurry -- Werewolf
+            [60637] = true, -- Flurry -- Werewolf
+            [60638] = true, -- Flurry -- Werewolf
+            [60639] = true, -- Flurry -- Werewolf
+            [60640] = true, -- Flurry -- Werewolf
+            [44055] = true, -- Devour -- Werewolf
+            [44054] = true, -- Devour -- Werewolf
+            [5785] = true, -- Blood Scent -- Werewolf
+            [58529] = true, -- Blood Scent -- Werewolf
+            [27329] = true, -- Houndsman Transform -- Werewolf
+            [27344] = true, -- Houndsman Regen -- Werewolf
+            [27345] = true, -- Houndsman Stun -- Werewolf
+            [27362] = true, -- Houndsman Delay -- Werewolf
+            [27365] = true, -- MT Houndsman Removal -- Werewolf
+            [27382] = true, -- MT Houndsman -- Werewolf
 
             [4323] = true, -- Ice Bolt -- Wraith
             [4337] = true, -- Winter's Reach -- Wraith
@@ -8314,6 +8352,9 @@ debugAuras = {
             [46845] = true, -- Sweep -- Giant
             [8674] = true, -- Kick -- Giant
             [26124] = true, -- Shatter -- Giant
+            [26126] = true, -- Shatter -- Giant
+            [26127] = true, -- Shatter -- Giant
+            [26128] = true, -- Shatter -- Giant
             [26129] = true, -- Shatter -- Giant
             [15715] = true, -- Obliterate -- Giant
             [43743] = true, -- Obliterate -- Giant
@@ -8336,13 +8377,13 @@ debugAuras = {
             [58220] = true, -- Surround -- Hagraven
             [58221] = true, -- Shadow Strike -- Hagraven
             [58222] = true, -- Shadow Strike -- Hagraven
-            [64781] = true, -- Briar Heart Can Resurrect -- Hagraven
-            [64786] = true, -- Briar Heart Resurrection -- Hagraven
-            [64806] = true, -- Briarheart Resurrection -- Hagraven
-            [64800] = true, -- Briarheart Resurrection -- Hagraven
-            [64808] = true, -- Briarheart Resurrection -- Hagraven
-            [65027] = true, -- Briarheart Resurrection -- Hagraven
-            [65028] = true, -- System Shock -- Hagraven
+            --[64781] = true, -- Briar Heart Can Resurrect -- Hagraven
+            --[64786] = true, -- Briar Heart Resurrection -- Hagraven
+            --[64806] = true, -- Briarheart Resurrection -- Hagraven
+            --[64800] = true, -- Briarheart Resurrection -- Hagraven
+            --[64808] = true, -- Briarheart Resurrection -- Hagraven
+            --[65027] = true, -- Briarheart Resurrection -- Hagraven
+            --[65028] = true, -- System Shock -- Hagraven
 
             [4112] = true, -- Talon -- Harpy
             [4125] = true, -- Kick -- Harpy
@@ -8699,7 +8740,6 @@ debugAuras = {
             [94903] = true, -- Spring
             [94908] = true, -- Spring
             [94907] = true, -- Spring
-
             [87237] = true, -- Spring
             [87242] = true, -- Spring
             [87241] = true, -- Spring
@@ -8717,7 +8757,6 @@ debugAuras = {
             [84944] = true, -- Hollow
             [91440] = true, -- Hollow
             [91439] = true, -- Hollow
-            [84944] = true, -- Hollow
             [84967] = true, -- Hollow
             [84988] = true, -- Hollow
             [84990] = true, -- Hollow
@@ -8749,6 +8788,7 @@ debugAuras = {
             [88272] = true, -- Lava Wave
             [88267] = true, -- Lava Wave
             [88266] = true, -- Lava Wave
+            [95281] = true, -- Lava Wave
             [89259] = true, -- Subduction
             [89260] = true, -- Subduction
             [89261] = true, -- Subduction
@@ -8762,28 +8802,6 @@ debugAuras = {
             [88316] = true, -- Blast Furnace
             [88317] = true, -- Blast Furnace
             [88318] = true, -- Blast Furnace
-
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
 
             ------------------------------------------
             -- MAIN QUEST

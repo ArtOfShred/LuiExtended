@@ -1733,6 +1733,9 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [22525] = true, -- Defiled Ground (Lich)
     [13972] = true, -- Swipe (Zombie)
 
+    -- MONSTER
+    [32268] = true, -- Grapple (Hag)
+
     -- MAIN QUEST
     [61648] = true, -- Replenish Stamina (Tutorial - Child of Bones)
 
@@ -5659,6 +5662,57 @@ E.EffectOverride = {
     [63612] = { icon = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_tail_clip.dds' }, -- Tail Clip (Winged Twilight)
     [6412] = { icon = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_dusks_howl.dds' }, -- Dusk's Howl (Winged Twilight)
 
+    [84825] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_slash.dds' }, -- Slash (Hunger)
+    [84826] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_slash.dds' }, -- Slash (Hunger)
+    [84827] = { hide = true }, -- Rake (Hunger)
+    [84834] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_rake.dds' }, -- Rake (Hunger)
+
+    [94903] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_spring.dds' }, -- Spring (Hunger)
+    [94908] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_spring.dds', hide = true }, -- Spring (Hunger)
+    [94907] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_spring.dds' }, -- Spring (Hunger)
+    [87237] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_spring.dds' }, -- Spring (Hunger)
+    [87242] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_spring.dds', hide = true }, -- Spring (Hunger)
+    [87241] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_spring.dds' }, -- Spring (Hunger)
+
+    [87247] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_devour.dds' }, -- Devour (Hunger)
+    [87988] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_devour.dds' }, -- Devour (Hunger)
+    [87252] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_devour.dds' }, -- Devour (Hunger)
+    [87253] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_devour.dds' }, -- Devour (Hunger)
+    [87251] = { hide = true }, -- Devour (Hunger)
+    [87385] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_devour.dds', hide = true }, -- Devour (Hunger)
+    [87386] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_devour.dds' }, -- Devour (Hunger)
+    [87987] = { hide = true }, -- Devour (Hunger)
+
+    [84944] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_hollow.dds' }, -- Hollow (Hunger)
+    [91440] = { hide = true }, -- Hollow (Hunger)
+    [91439] = { hide = true }, -- Hollow (Hunger)
+    [84967] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_hollow.dds' }, -- Hollow (Hunger)
+    [84988] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_hollow.dds' }, -- Hollow (Hunger)
+    [84990] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_hollow.dds' }, -- Hollow (Hunger)
+
+    [87269] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds', hide = true }, -- Torpor (Hunger)
+    [87270] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor_aura.dds' }, -- Torpor (Hunger)
+    [87538] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds' }, -- Torpor (Hunger)
+    [87536] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds' }, -- Torpor (Hunger)
+    [89751] = { hide = true }, -- Dispel Illusion (Hunger)
+    [87271] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor_aura.dds' }, -- Torpor (Hunger)
+    [87273] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor_aura.dds' }, -- Torpor (Hunger)
+    [87639] = { hide = true }, -- Fade (Hunger)
+    [91433] = { hide = true }, -- Fade (Voracity - Hunger Boss)
+
+    [89030] = { hide = true }, -- Subduction (Iron Atronach)
+    [88246] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_iron_hand.dds' }, -- Iron Hand (Iron Atronach)
+    [88247] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_eruption.dds' }, -- Eruption (Iron Atronach)
+    [88282] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_rock_stomp.dds' }, -- Rock Stomp (Iron Atronach)
+    [88286] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_rock_stomp.dds' }, -- Rock Stomp (Iron Atronach)
+    [88295] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_rock_stomp_ranged.dds' }, -- Rock Stomp (Iron Atronach)
+    [88261] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_lava_wave.dds' }, -- Lava Wave (Iron Atronach)
+    [88266] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_lava_wave.dds', hide = true }, -- Lava Wave (Iron Atronach)
+    [95281] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_lava_wave.dds', hide = true }, -- Lava Wave (Iron Atronach)
+    [89258] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_blast_furnace.dds', hide = true }, -- Subduction (Iron Atronach)
+    [88297] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_blast_furnace.dds', hide = true }, -- Blast Furnace (Iron Atronach)
+    [88323] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_blast_furnace.dds', hide = true }, -- Blast Furnace (Iron Atronach)
+
     -- DWEMER
     [64508] = { icon = 'esoui/art/icons/ability_warrior_030.dds', name = 'Turret' }, -- Find Turret (Dwemer Sentry)
     [27333] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_overcharge.dds' }, -- Overcharge (Dwemer Spider)
@@ -5818,13 +5872,39 @@ E.EffectOverride = {
     [87031] = { icon = 'LuiExtended/media/icons/abilities/ability_fetcherflygolem_focused_swarm.dds' }, -- Focused Swarm (Fetcherfly Hive Golem)
 
     -- MONSTERS
-    [25716] = { icon = 'esoui/art/icons/ability_debuff_stun.dds', name = A.Skill_Lacerate }, -- Stun (Gargoyle)
-    [25714] = { icon = 'esoui/art/icons/ability_mage_026.dds' }, -- Vampiric Touch (Gargoyle)
-    [43742] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds' }, -- Obliterate (Giant)
-    [32267] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds' }, -- Grapple (Hag)
+    [10259] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_double_swipe.dds' }, -- Double Swipe (Gargoyle)
+    [32672] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_double_swipe.dds' }, -- Double Swipe (Gargoyle)
+    [10270] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_quake.dds' }, -- Quake (Gargoyle)
+    [10271] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_quake.dds' }, -- Quake (Gargoyle)
+    [10256] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_lacerate.dds' }, -- Lacerate (Gargoyle)
+    [25716] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_lacerate.dds', name = A.Skill_Lacerate }, -- Stun (Gargoyle)
+    [25718] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_lacerate.dds', name = A.Skill_Lacerate }, -- Stun (Gargoyle)
+    [25714] = { icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds' }, -- Vampiric Touch (Gargoyle)
+
+    [46845] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_sweep.dds' }, -- Sweep (Giant)
+    [8674] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_kick.dds' }, -- Sweep (Giant)
+    [26124] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_shatter.dds' }, -- Shatter (Giant)
+    [26129] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_shatter.dds', hide = true }, -- Shatter (Giant)
+    [15715] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_obliterate.dds' }, -- Obliterate (Giant)
+    [43743] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_obliterate.dds' }, -- Obliterate (Giant)
+    [43742] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_obliterate.dds' }, -- Obliterate (Giant)
+
+    [2901] = { icon = 'LuiExtended/media/icons/abilities/ability_hag_staff_strike.dds' }, -- Staff Strike (Hag)
+    [2786] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_steal_essence.dds' }, -- Steal Essence (Hag)
+    [21642] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_steal_essence.dds' }, -- Steal Essence (Hag)
+    [3349] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_reflective_shadows.dds' }, -- Reflective Shadows (Hag)
+    [2821] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_luring_snare.dds', hide = true }, -- Luring Snare (Hag)
+    [32267] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_luring_snare.dds', name = A.Skill_Luring_Snare }, -- Grapple (Hag)
+
+    [10611] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fire_ranged.dds' }, -- Flare (Hagraven)
+    [10615] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_raven_storm.dds' }, -- Raven Storm (Hagraven)
+    [10616] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_raven_storm.dds' }, -- Raven Storm (Hagraven)
+    [12426] = { name = A.Innate_Stagger }, -- Raven Storm (Hagraven)
+    [10613] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fire_aoe.dds' }, -- Fire Bomb (Hagraven)
+    [10614] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fire_aoe.dds' }, -- Fire Bomb (Hagraven)
+
     [64808] = { icon = 'esoui/art/icons/ability_healer_028.dds', duration = 2.5 }, -- Briarheart Resurrection (Hagraven)
     [65027] = { icon = 'esoui/art/icons/ability_healer_028.dds' }, -- Briarheart Resurrection (Hagraven)
-    [12426] = { name = A.Innate_Stagger }, -- Raven Storm (Hagraven)
     [32698] = { name = A.Innate_Stagger }, -- Staggered (Lurcher - Pulverize)
     [5349] = { name = A.Innate_Stagger, hide = true }, -- Staggered (Ogre - Shockwave)
     [38554] = { name = 'Crushing Limbs' }, -- Stun (Lurcher)
@@ -5838,8 +5918,6 @@ E.EffectOverride = {
     [8926] = { icon = 'esoui/art/icons/ability_healer_033.dds' }, -- Regeneration (Troll)
     [18040] = { icon = 'LuiExtended/media/icons/abilities/ability_wispmother_clone.dds' }, -- Clone (Wispmother)
     [18049] = { icon = 'LuiExtended/media/icons/abilities/ability_wispmother_clone.dds' }, -- Clone (Wispmother)
-    [26129] = { hide = true }, -- Shatter (Giant) (Pointless aura on damage event)
-    [2821] = { hide = true }, -- Luring Snare (Hag) (Pointless 2 sec buff on player)
     [64806] = { hide = true }, -- Briarheart Resurrection (Hagraven)
     [64132] = { hide = true }, -- Grapple Immunity (Strangle) (Pointless buff on player)
     [48287] = { hide = true }, -- Consuming Omen (Troll - Ranged) (Hiding to add fake aura)
@@ -5899,7 +5977,20 @@ E.EffectOverride = {
     [68771] = { hide = true }, -- Vampiric Drain (Vampire)
     [68772] = { hide = true }, -- Vampiric Drain (Vampire)
 
+    [2849] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_claw_slash.dds' }, -- Claw Slash (Werewolf)
+    [4651] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_claw_slash.dds' }, -- Claw Slash (Werewolf)
+    [2850] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Swipe (Werewolf)
+    [2867] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_crushing_leap.dds' }, -- Crushing Leap (Werewolf)
     [45576] = { name = A.Innate_Stagger }, -- Generic Stagger Enemy (Werewolf)
+    [3415] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', hide = true }, -- Flurry (Werewolf)
+    [13950] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Flurry (Werewolf)
+    [9467] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Flurry (Werewolf)
+    [60636] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Flurry (Werewolf)
+    [60637] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Flurry (Werewolf)
+    [60638] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Flurry (Werewolf)
+    [60639] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Flurry (Werewolf)
+    [60640] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Flurry (Werewolf)
+    [44055] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Werewolf)
 
     [4323] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_frost_ranged.dds' }, -- Ice Bolt (Wraith)
     [4337] = { icon = 'esoui/art/icons/ability_mage_037.dds' }, -- Winter's Reach (Wraith)
@@ -5912,6 +6003,19 @@ E.EffectOverride = {
     [2969] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds' }, -- Pound (Zombie)
     [2960] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Zombie)
     [30347] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Zombie)
+
+    [72980] = { icon = 'LuiExtended/media/icons/abilities/ability_defiledaegis_singing_strike.dds' }, -- Singing Strike (Defiled Aegis)
+    [72981] = { icon = 'LuiExtended/media/icons/abilities/ability_defiledaegis_singing_strike.dds' }, -- Singing Strike (Defiled Aegis)
+    [72979] = { icon = 'LuiExtended/media/icons/abilities/ability_defiledaegis_dissonant_blow.dds' }, -- Dissonant Blow (Defiled Aegis)
+    [72995] = { icon = 'LuiExtended/media/icons/abilities/ability_defiledaegis_symphony_of_blades.dds' }, -- Symphony of Blades (Defiled Aegis)
+    [72996] = { icon = 'LuiExtended/media/icons/abilities/ability_defiledaegis_symphony_of_blades.dds', hide = true }, -- Symphony of Blades (Defiled Aegis)
+
+    [73020] = { hide = true }, -- Shattered Harmoney (Defiled Aegis)
+    [73021] = { hide = true }, -- Shattered Harmony (Defiled Aegis)
+    [76180] = { hide = true }, -- Shattered Harmony (Defiled Aegis)
+    [73025] = { hide = true }, -- Tomb Guardian (Defiled Aegis)
+    [73322] = { hide = true }, -- Shattered Harmony (Defiled Aegis)
+    [74993] = { hide = true }, -- Shattered Harmony (Defiled Aegis)
 
     -- MONSTERS
 

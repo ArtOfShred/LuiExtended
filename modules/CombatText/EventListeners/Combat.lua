@@ -70,7 +70,7 @@ function CTL:EffectChanged(...)
 
         if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].power or AlertT[abilityId].destroy then
             -- Filter by priority
-            if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
+            if (S.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not S.toggles.mitigationDungeon then
                 if AlertT[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
                 if AlertT[abilityId].priority == 2 and not S.toggles.mitigationRank2 then return end
                 if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
@@ -280,7 +280,7 @@ function CTL:OnCombatIn(...)
             if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].power or AlertT[abilityId].destroy then
 
                 -- Filter by priority
-                if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
+                if (S.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not S.toggles.mitigationDungeon then
                     if AlertT[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
                     if AlertT[abilityId].priority == 2 and not S.toggles.mitigationRank2 then return end
                     if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
@@ -510,7 +510,7 @@ function CTL:OnCombatAlert(...)
 
             if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].power or AlertT[abilityId].destroy then
                 -- Filter by priority
-                if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
+                if (S.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not S.toggles.mitigationDungeon then
                     if AlertT[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
                     if AlertT[abilityId].priority == 2 and not S.toggles.mitigationRank2 then return end
                     if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end

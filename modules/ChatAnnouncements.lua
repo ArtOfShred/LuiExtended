@@ -3837,7 +3837,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
 
     local function ResolveCraftingUsed(itemType)
-        if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING) and g_smithing.GetMode() == 4 then
+        if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING or GetCraftingInteractionType() == CRAFTING_TYPE_JEWELRYCRAFTING) and g_smithing.GetMode() == 4 then
             if itemType == ITEMTYPE_ADDITIVE
             or itemType == ITEMTYPE_ARMOR_BOOSTER
             or itemType == ITEMTYPE_ARMOR_TRAIT
@@ -3849,6 +3849,8 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             or itemType == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
             or itemType == ITEMTYPE_ENCHANTING_RUNE_POTENCY
             or itemType == ITEMTYPE_ENCHANTMENT_BOOSTER
+            or itemType == ITEMTYPE_JEWELRYCRAFTING_BOOSTER
+            or itemType == ITEMTYPE_JEWELRYCRAFTING_MATERIAL
             or itemType == ITEMTYPE_INGREDIENT
             or itemType == ITEMTYPE_POISON_BASE
             or itemType == ITEMTYPE_POTION_BASE
@@ -3856,6 +3858,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             or itemType == ITEMTYPE_STYLE_MATERIAL
             or itemType == ITEMTYPE_WEAPON_BOOSTER
             or itemType == ITEMTYPE_WEAPON_TRAIT
+            or itemType == ITEMTYPE_JEWELRY_TRAIT
             or itemType == ITEMTYPE_WOODWORKING_BOOSTER
             or itemType == ITEMTYPE_WOODWORKING_MATERIAL
             or itemType == ITEMTYPE_GLYPH_ARMOR
@@ -3875,7 +3878,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         logPrefixPos = g_enchant_prefix_pos[g_enchanting.GetMode()]
         logPrefixNeg = g_enchant_prefix_neg[g_enchanting.GetMode()]
     end
-    if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING) then
+    if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING or GetCraftingInteractionType() == CRAFTING_TYPE_JEWELRYCRAFTING) then
         logPrefixPos = g_smithing_prefix_pos[g_smithing.GetMode()]
         logPrefixNeg = g_smithing_prefix_neg[g_smithing.GetMode()]
     end

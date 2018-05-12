@@ -347,6 +347,16 @@ LUIE.AlertTable = {
     [6410] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Tail Clip (Winged Twilight)
     [6412] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3 }, -- Dusk's Howl (Winged Twilight)
 
+    [94903] = { block = true, dodge = true, priority = 2 }, -- Spring (Hunger)
+    [87237] = { block = true, dodge = true, priority = 2 }, -- Spring (Hunger)
+    [87247] = { block = true, refire = 400, priority = 2 }, -- Devour (Hunger)
+    [84944] = { block = true, dodge = true, priority = 2 }, -- Hollow (Hunger)
+    [87269] = { avoid = true, eventdetect = true, priority = 2 }, -- Torpor (Hunger)
+
+    [88282] = { avoid = true, eventdetect = true, priority = 2 }, -- Rock Stomp (Iron Atronach)
+    [88261] = { block = true, eventdetect = true, priority = 2 }, -- Lava Wave (Iron Atronach)
+    [88297] = { avoid = true, auradetect = true, priority = 2 }, -- Blast Furnace (Iron Atronach)
+
     -- UNDEAD
     [8569] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Devastating Leap (Bloodfiend)
 
@@ -362,12 +372,31 @@ LUIE.AlertTable = {
 
     [68735] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3 }, -- Vampiric Drain (Vampire)
 
+    [2867] = { block = true, bs = true, dodge = true, priority = 3 }, -- Crushing Leap (Werewolf)
+    [3415] = { block = true, dodge = true, priority = 3, eventdetect = true, refire = 1100 }, -- Flurry (Werewolf)
+    [44055] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Devour (Werewolf)
+
     [4337] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Winter's Reach (Wraith)
 
     [2969] = { block = true, dodge = true, avoid = false, interrupt = false, bs = true, priority = 3 }, -- Pound (Zombie)
     [2960] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3 }, -- Vomit (Zombie)
 
+    [72979] = { block = true, bs = true, dodge = true, priority = 3 }, -- Dissonant Blow (Defiled Aegis)
+    [72995] = { interrupt = true, dodge = true, priority = 2, eventdetect = true, refire = 1100 }, -- Symphony of Blades (Defiled Aegis) -- Higher priority because damage is very high
+
     -- MONSTERS
+    [10270] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1000 }, -- Quake (Gargoyle)
+    [10256] = { block = true, bs = true, dodge = true, priority = 2 }, -- Lacerate (Gargoyle)
+
+    [26124] = { avoid = true, priority = 2 }, -- Shatter (Giant)
+    [15715] = { block = true, dodge = true, priority = 2 }, -- Shatter (Giant)
+
+    [2786] = { interrupt = true, priority = 3, refire = 1200 }, -- Steal Essence (Hag)
+    [2821] = { block = true, priority = 3 }, -- Luring Snare (Hag)
+
+    [10615] = { avoid = true, interrupt = true, priority = 3 }, -- Raven Storm (Hagraven)
+    [10613] = { avoid = true, priority = 3 }, -- Fire Bomb (Hagraven)
+
     [43809] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true}, -- Shard Burst (Ice Wraith)
     [48549] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true}, -- Focused Charge (Ice Wraith)
 
