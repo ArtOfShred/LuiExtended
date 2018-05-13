@@ -5904,8 +5904,8 @@ E.EffectOverride = {
     [10615] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_raven_storm.dds' }, -- Raven Storm (Hagraven)
     [10616] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_raven_storm.dds' }, -- Raven Storm (Hagraven)
     [12426] = { name = A.Innate_Stagger }, -- Raven Storm (Hagraven)
-    [10613] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fire_aoe.dds' }, -- Fire Bomb (Hagraven)
-    [10614] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fire_aoe.dds' }, -- Fire Bomb (Hagraven)
+    [10613] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fire_aoe_alt.dds' }, -- Fire Bomb (Hagraven)
+    [10614] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fire_aoe_alt.dds' }, -- Fire Bomb (Hagraven)
     [64806] = { hide = true }, -- Briarheart Resurrection (Hagraven)
     [64808] = { icon = 'esoui/art/icons/ability_healer_028.dds', duration = 2.5 }, -- Briarheart Resurrection (Hagraven)
     [65027] = { icon = 'esoui/art/icons/ability_healer_028.dds' }, -- Briarheart Resurrection (Hagraven)
@@ -6042,8 +6042,8 @@ E.EffectOverride = {
     [38920] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_shard_burst.dds' }, -- Shard Burst (Ice Wraith)
     [24877] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_shard_burst.dds' }, -- Shard Burst (Ice Wraith)
 
-    [48549] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_bite.dds', name = A.Skill_Assault, hide = true }, -- Focused Charge (Ice Wraith)
-    [24869] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_bite.dds', name = A.Skill_Assault }, -- Blood in the Water (Ice Wraith)
+    [48549] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_blood_in_the_water.dds', name = A.Skill_Assault, hide = true }, -- Focused Charge (Ice Wraith)
+    [24869] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_blood_in_the_water.dds', name = A.Skill_Assault }, -- Blood in the Water (Ice Wraith)
     [46563] = { icon = 'esoui/art/icons/ability_mage_020.dds' }, -- Blood in the Water (Ice Wraith)
 
     -- VVARDENFELL NPC'S
