@@ -64,11 +64,11 @@ UF.D = {
     TargetShowClass                  = true,
     TargetShowFriend                 = true,
     TargetColourByReaction           = false,
-    CustomFormatOnePT                = "Current + Shield / Max",
-    CustomFormatOneGroup             = "Current + Shield / Max",
+    CustomFormatOnePT                = "Current + Shield / Max", -- TODO: localization
+    CustomFormatOneGroup             = "Current + Shield / Max", -- TODO: localization
     CustomFormatTwoPT                = "Percentage%",
     CustomFormatTwoGroup             = "Percentage%",
-    CustomFormatRaid                 = "Current (Percentage%)",
+    CustomFormatRaid                 = "Current (Percentage%)", -- TODO: localization
     CustomFormatBoss                 = "Percentage%",
     CustomFontFace                   = "Univers 67",
     CustomFontStyle                  = "soft-shadow-thin",
@@ -171,19 +171,19 @@ UF.D = {
     DisplayOptionsGroupRaid          = 2,
     ExecutePercentage                = 20,
     RaidIconOptions                  = 2,
-    ChampionOptions                  = "Show Above Cap",
+    ChampionOptions                  = "Show Above Cap", -- TODO: localization
     RepositionFramesAdjust           = 0,
     PlayerFrameOptions               = 1,
     AdjustStaminaHPos                = 200,
     AdjustStaminaVPos                = 0,
     AdjustMagickaHPos                = 200,
     AdjustMagickaVPos                = 0,
-    FrameColorReaction 				 = false,
-    CustomColourPlayer 				 = { 178/255, 178/255, 1 },
-    CustomColourFriendly 			 = { 0, 1, 0 },
-    CustomColourHostile 			 = { 1, 0, 0 },
-    CustomColourNeutral 			 = { 150/255, 150/255, 150/255 },
-    CustomColourGuard 				 = { 95/255, 65/255, 54/255 },
+    FrameColorReaction               = false,
+    CustomColourPlayer               = { 178/255, 178/255, 1 },
+    CustomColourFriendly             = { 0, 1, 0 },
+    CustomColourHostile              = { 1, 0, 0 },
+    CustomColourNeutral              = { 150/255, 150/255, 150/255 },
+    CustomColourGuard                = { 95/255, 65/255, 54/255 },
     LowResourceHealth                = 25,
     LowResourceStamina               = 25,
     LowResourceMagicka               = 25,
@@ -224,6 +224,7 @@ local strDead       = GetString(SI_UNIT_FRAME_STATUS_DEAD)
 local strOffline    = GetString(SI_UNIT_FRAME_STATUS_OFFLINE)
 
 -- Following settings will be used in options menu to define DefaultFrames behaviour
+-- TODO: localization
 local g_DefaultFramesOptions = {
     [1] = "Disable",                                -- false
     [2] = "Do nothing (keep default)",              -- nil
@@ -1206,8 +1207,8 @@ function UF.Initialize( enabled )
         eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED,        UF.SocialUpdateFrames)
         eventManager:RegisterForEvent(moduleName, EVENT_IGNORE_ADDED,          UF.SocialUpdateFrames)
         eventManager:RegisterForEvent(moduleName, EVENT_IGNORE_REMOVED,        UF.SocialUpdateFrames)
-        eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE,	UF.OnPlayerCombatState )
-        eventManager:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED,	UF.OnWerewolf )
+        eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE,    UF.OnPlayerCombatState )
+        eventManager:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED, UF.OnWerewolf )
         eventManager:RegisterForEvent(moduleName, EVENT_BEGIN_SIEGE_CONTROL,       UF.OnSiege )
         eventManager:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL,         UF.OnSiege )
         eventManager:RegisterForEvent(moduleName, EVENT_LEAVE_RAM_ESCORT,          UF.OnSiege )
@@ -4091,11 +4092,11 @@ function UF.CustomFramesReloadExecuteMenu()
         g_DefaultFrames.reticleover[POWERTYPE_HEALTH].threshold = g_targetThreshold
     end
     if UF.CustomFrames["reticleover"] and UF.CustomFrames["reticleover"][POWERTYPE_HEALTH] then
-		UF.CustomFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold
-	end
+        UF.CustomFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold
+    end
     if g_AvaCustFrames["reticleover"] and g_AvaCustFrames["reticleover"][POWERTYPE_HEALTH] then
-		g_AvaCustFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold
-	end
+        g_AvaCustFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold
+    end
 
     for i = 1, 6 do
         local unitTag = "boss" .. i
