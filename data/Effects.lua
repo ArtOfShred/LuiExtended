@@ -1069,6 +1069,10 @@ E.BarHighlightOverride = {
     -- Two Handed -------------
     ---------------------------
 
+    [38814] = { newId = 38816 }, -- Dizzying Swing
+
+    [38788] = { newId = 38791 }, -- Stampede
+
     [20919] = { newId = 31059 }, -- Cleave --> Cleave Bleed
     [38745] = { newId = 38747 }, -- Carve --> Carve Bleed
     [38754] = { newId = 38759 }, -- Brawler --> Brawler Bleed

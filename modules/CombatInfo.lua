@@ -73,6 +73,7 @@ local g_triggeredSlots       = {}
 local g_triggeredSlotsRemain = {}
 local g_toggledSlots         = {}
 local g_toggledSlotsRemain   = {}
+local g_toggledSlotsPlayer   = {}
 local g_lastCast = 0
 local g_pendingGroundAbility = nil
 local g_barFont
@@ -310,6 +311,7 @@ function CI.UpdateBarHighlightTables()
     local g_triggeredSlotsRemain = {}
     local g_toggledSlots         = {}
     local g_toggledSlotsRemain   = {}
+    local g_toggledSlotsPlayer   = {}
     local g_barOverrideCI        = {}
     local g_barFakeAura          = {}
     local g_barDurationOverride  = {}
@@ -393,6 +395,9 @@ function CI.RegisterCombatInfo()
     if CI.SV.ShowTriggered or CI.SV.ShowToggled then
         eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
         eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.OnEffectChanged)
+		eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, CI.OnTargetChange )
+		eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, CI.OnReticleTargetChanged )
+
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, CI.InventoryItemUsed)
 
         -- Setup bar highlight
@@ -417,7 +422,7 @@ function CI.OnUpdate(currentTime)
         local remain = g_triggeredSlotsRemain[k] - currentTime
 
         -- If duration reaches 0 then remove effect
-        if remain <= 0 then
+        if v < currentTime then
             if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] then
                 g_uiProcAnimation[g_triggeredSlots[k]]:Stop()
             end
@@ -437,7 +442,7 @@ function CI.OnUpdate(currentTime)
         local remain = g_toggledSlotsRemain[k] - currentTime
 
         -- If duration reaches 0 then remove effect
-        if remain <= 0 then
+        if v < currentTime then
             if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
                 g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
                 if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
@@ -608,6 +613,47 @@ function CI.ResetPotionTimerLabel()
     uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.PotionTimerLabelPosition)
 end
 
+-- Runs on the EVENT_TARGET_CHANGE listener.
+-- This handler fires every time the someone target changes.
+-- This function is needed in case the player teleports via Way Shrine
+function CI.OnTargetChange(eventCode, unitTag)
+    if unitTag ~= "player" then
+        return
+    end
+    SCB.OnReticleTargetChanged(eventCode)
+end
+
+-- Runs on the EVENT_RETICLE_TARGET_CHANGED listener.
+-- This handler fires every time the player's reticle target changes
+function CI.OnReticleTargetChanged(eventCode)
+    local unitTag = "reticleover"
+
+	for k, v in pairs (g_toggledSlotsRemain) do
+        if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and not g_toggledSlotsPlayer[k] then
+			g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
+            g_toggledSlotsRemain[k] = nil
+        end
+    end
+
+	if DoesUnitExist("reticleover") then
+		-- Fill it again
+		for i = 1, GetNumBuffs(unitTag) do
+			local unitName = GetRawUnitName(unitTag)
+			local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
+			-- Fudge this value to send to SCB.OnEffectChanged if this is a debuff
+			if castByPlayer == true then
+				castByPlayer = 1
+			else
+				castByPlayer = 5
+			end
+
+			if not IsUnitDead(unitTag) then
+				CI.OnEffectChanged(0, EFFECT_RESULT_UPDATED, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0, abilityId, castByPlayer)
+			end
+		end
+	end
+end
+
 function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     -- If we're displaying a fake bar highlight then bail out here (sometimes we need a fake aura that doesn't end to simulate effects that can be overwritten, such as Major/Minor buffs. Technically we don't want to stop the
     -- highlight of the original ability since we can only track one buff per slot and overwriting the buff with a longer duration buff shouldn't throw the player off by making the glow disappear earlier.
@@ -615,23 +661,26 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         return
     end
 
+	if unitTag == "player" then
+		g_toggledSlotsPlayer[abilityId] = true
+	end
+
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
         if g_pendingGroundAbility and g_pendingGroundAbility.id == abilityId and changeType == EFFECT_RESULT_GAINED then
             -- Bar Tracker
             if CI.SV.ShowToggled then
+                g_toggledSlotsPlayer[abilityId] = true
                 local currentTime = GetGameTimeMilliseconds()
                 local slotNum = g_pendingGroundAbility.slotNum
                 if g_toggledSlots[abilityId] then
-                    if CI.SV.ShowToggled then
-                        local groundDuration = endTime - beginTime
-                        g_toggledSlotsRemain[abilityId] = groundDuration*1000 + currentTime
-                        CI.ShowCustomToggle(slotNum)
-                        if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
-                            uiUltimate.LabelPct:SetHidden( true )
-                        end
-                        if CI.SV.BarShowLabel then
-                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and groundDuration or groundDuration - 1 ))
-                        end
+                    g_toggledSlotsRemain[abilityId] = 1000*endTime
+                    CI.ShowCustomToggle(slotNum)
+                    if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
+                        uiUltimate.LabelPct:SetHidden( true )
+                    end
+                    if CI.SV.BarShowLabel then
+                        local remain = g_toggledSlotsRemain[abilityId] - currentTime
+						g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                     end
                 end
             end
@@ -640,65 +689,67 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         end
     end
 
+    if unitTag ~= "player" and unitTag ~= "reticleover" then
+        return
+    end
+
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
         -- Ignore fading event if override is true
         if g_barNoRemove[abilityId] then return end
 
-        if unitTag == "player" then
-            -- Stop any proc animation associated with this effect
-            if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlotsRemain[abilityId] then
-                if g_triggeredSlots[abilityId] and g_uiProcAnimation[g_triggeredSlots[abilityId]] then
-                    g_uiProcAnimation[g_triggeredSlots[abilityId]]:Stop()
-                end
-                g_triggeredSlotsRemain[abilityId] = nil
-            end
-            -- Stop any toggle animation associted with this effect
-            if g_toggledSlotsRemain[abilityId] then
-                if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
-                    g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-                    if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
-                        uiUltimate.LabelPct:SetHidden( false )
-                    end
-                end
-                g_toggledSlotsRemain[abilityId] = nil
-            end
-        end
-    else
-        -- Also create visual enhancements from skill bar
-        if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
-            -- start any proc animation associated with this effect
-            if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlots[abilityId] then
-                local currentTime = GetGameTimeMilliseconds()
-                if CI.SV.ShowTriggered then
-                    -- Play sound twice so its a little louder.
-                    if CI.SV.ProcEnableSound then
-                        PlaySound(g_procSound)
-                        PlaySound(g_procSound)
-                    end
-                    g_triggeredSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
-                    CI.PlayProcAnimations(g_triggeredSlots[abilityId])
-                    if CI.SV.BarShowLabel then
-                        local remain = g_triggeredSlotsRemain[abilityId] - currentTime
-                        g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
-                    end
-                end
-            end
-            -- Display active effects
-            if g_toggledSlots[abilityId] then
-                local currentTime = GetGameTimeMilliseconds()
-                if CI.SV.ShowToggled then
-                    g_toggledSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
-                    CI.ShowCustomToggle(g_toggledSlots[abilityId])
-                    if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
-                        uiUltimate.LabelPct:SetHidden( true )
-                    end
-                    if CI.SV.BarShowLabel then
-                        local remain = g_toggledSlotsRemain[abilityId] - currentTime
-                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
-                    end
-                end
-            end
-        end
+		-- Stop any proc animation associated with this effect
+		if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlotsRemain[abilityId] then
+			if g_triggeredSlots[abilityId] and g_uiProcAnimation[g_triggeredSlots[abilityId]] then
+				g_uiProcAnimation[g_triggeredSlots[abilityId]]:Stop()
+			end
+			g_triggeredSlotsRemain[abilityId] = nil
+		end
+		-- Stop any toggle animation associated with this effect
+		if g_toggledSlotsRemain[abilityId] then
+			if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
+				g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
+				if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
+					uiUltimate.LabelPct:SetHidden( false )
+				end
+			end
+			g_toggledSlotsRemain[abilityId] = nil
+		end
+	else
+		-- Also create visual enhancements from skill bar
+		if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
+			-- start any proc animation associated with this effect
+			if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlots[abilityId] then
+				local currentTime = GetGameTimeMilliseconds()
+				if CI.SV.ShowTriggered then
+					-- Play sound twice so its a little louder.
+					if CI.SV.ProcEnableSound then
+						PlaySound(g_procSound)
+						PlaySound(g_procSound)
+					end
+					g_triggeredSlotsRemain[abilityId] = 1000*endTime
+					CI.PlayProcAnimations(g_triggeredSlots[abilityId])
+					if CI.SV.BarShowLabel then
+						local remain = g_triggeredSlotsRemain[abilityId] - currentTime
+						g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+					end
+				end
+			end
+			-- Display active effects
+			if g_toggledSlots[abilityId] then
+				local currentTime = GetGameTimeMilliseconds()
+				if CI.SV.ShowToggled then
+					g_toggledSlotsRemain[abilityId] = 1000*endTime
+					CI.ShowCustomToggle(g_toggledSlots[abilityId])
+					if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
+						uiUltimate.LabelPct:SetHidden( true )
+					end
+					if CI.SV.BarShowLabel then
+						local remain = g_toggledSlotsRemain[abilityId] - currentTime
+						g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+					end
+				end
+			end
+		end
     end
 end
 
@@ -723,13 +774,16 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
         local currentTime = GetGameTimeMilliseconds()
         if g_toggledSlots[abilityId] then
             if CI.SV.ShowToggled then
-                g_toggledSlotsRemain[abilityId] = CI.GetAbilityDuration(abilityId) + currentTime
+                local duration = CI.GetAbilityDuration(abilityId)
+                local endTime = currentTime + duration
+                g_toggledSlotsRemain[abilityId] = endTime
                 CI.ShowCustomToggle(g_toggledSlots[abilityId])
                 if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
                     uiUltimate.LabelPct:SetHidden( true )
                 end
                 if CI.SV.BarShowLabel then
-                    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(abilityId)/1000) or (CI.GetAbilityDuration(abilityId)/1000) - 1 ))
+                    local remain = g_toggledSlotsRemain[abilityId] - currentTime
+                    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                 end
             end
         end
@@ -849,6 +903,8 @@ function CI.OnSlotUpdated(eventCode, slotNum)
         showFakeAura = showFakeAura
     }
 
+    local currentTime = GetGameTimeMilliseconds()
+
     -- Check if currently this ability is in proc state
     local proc = E.HasAbilityProc[abilityName]
     if E.IsAbilityProc[abilityName] then
@@ -861,7 +917,8 @@ function CI.OnSlotUpdated(eventCode, slotNum)
             if CI.SV.ShowTriggered then
                 CI.PlayProcAnimations(slotNum)
                 if CI.SV.BarShowLabel then
-                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(ability_id)/1000) or (CI.GetAbilityDuration(ability_id)/1000) - 1 ))
+                    local remain = g_triggeredSlotsRemain[proc] - currentTime
+                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                 end
             end
         end
@@ -877,7 +934,8 @@ function CI.OnSlotUpdated(eventCode, slotNum)
                     uiUltimate.LabelPct:SetHidden( true )
                 end
                 if CI.SV.BarShowLabel then
-                    g_uiCustomToggle[slotNum].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(ability_id)/1000) or (CI.GetAbilityDuration(ability_id)/1000) - 1 ))
+                    local remain = g_toggledSlotsRemain[ability_id] - currentTime
+                    g_uiCustomToggle[slotNum].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                 end
             end
         end
