@@ -67,23 +67,22 @@ LUIE.Fonts = {
     ["Fontin Regular"]          = "/LuiExtended/media/fonts/Fontin/fontin_sans_r.otf",
     ["Fontin SmallCaps"]        = "/LuiExtended/media/fonts/Fontin/fontin_sans_sc.otf",
     ["Trajan Pro Bold"]         = "/LuiExtended/media/fonts/TrajanPro/TrajanProBold.otf",
-    ["Trajan Pro Regular"]      = "/LuiExtended/media/fonts/TrajanPro/TrajanProRegular.otf",
-    ["EnigmaReg"]               = [[/LuiExtended/media/fonts/Enigma/EnigmaReg.ttf]],
-    ["EnigmaBold"]              = [[/LuiExtended/media/fonts/Enigma/EnigmaBold.ttf]],
-    ["Adventure"]               = [[/LuiExtended/media/fonts/Adventure/adventure.ttf]],
-    ["Bazooka"]                 = [[/LuiExtended/media/fonts/Bazooka/bazooka.ttf]],
-    ["Cooline"]                 = [[/LuiExtended/media/fonts/Cooline/cooline.ttf]],
-    ["Diogenes"]                = [[/LuiExtended/media/fonts/Diogenes/diogenes.ttf]],
-    ["Ginko"]                   = [[/LuiExtended/media/fonts/Ginko/ginko.ttf]],
-    ["Heroic"]                  = [[/LuiExtended/media/fonts/Heroic/heroic.ttf]],
-    ["Metamorphous"]            = [[/LuiExtended/media/fonts/Metamorphous/metamorphous.otf]],
-    ["Porky"]                   = [[/LuiExtended/media/fonts/Porky/porky.ttf]],
-    ["Roboto Bold"]             = [[/LuiExtended/media/fonts/Roboto/Roboto-Bold.ttf]],
-    ["Roboto Bold Italic"]      = [[/LuiExtended/media/fonts/Roboto/Roboto-BoldItalic.ttf]],
-    ["Talisman"]                = [[/LuiExtended/media/fonts/Talisman/talisman.ttf]],
-    ["Transformers"]            = [[/LuiExtended/media/fonts/Transformers/transformers.ttf]],
-    ["Yellowjacket"]            = [[/LuiExtended/media/fonts/Yellowjacket/yellowjacket.ttf]],
-    ["ProFontWindows"]          = [[/LuiExtended/media/fonts/ProFontWindows/ProFontWindows.ttf]],
+    ["EnigmaReg"]               = "/LuiExtended/media/fonts/Enigma/EnigmaReg.ttf",
+    ["EnigmaBold"]              = "/LuiExtended/media/fonts/Enigma/EnigmaBold.ttf",
+    ["Adventure"]               = "/LuiExtended/media/fonts/Adventure/adventure.ttf",
+    ["Bazooka"]                 = "/LuiExtended/media/fonts/Bazooka/bazooka.ttf",
+    ["Cooline"]                 = "/LuiExtended/media/fonts/Cooline/cooline.ttf",
+    ["Diogenes"]                = "/LuiExtended/media/fonts/Diogenes/diogenes.ttf",
+    ["Ginko"]                   = "/LuiExtended/media/fonts/Ginko/ginko.ttf",
+    ["Heroic"]                  = "/LuiExtended/media/fonts/Heroic/heroic.ttf",
+    ["Metamorphous"]            = "/LuiExtended/media/fonts/Metamorphous/metamorphous.otf",
+    ["Porky"]                   = "/LuiExtended/media/fonts/Porky/porky.ttf",
+    ["Roboto Bold"]             = "/LuiExtended/media/fonts/Roboto/Roboto-Bold.ttf",
+    ["Roboto Bold Italic"]      = "/LuiExtended/media/fonts/Roboto/Roboto-BoldItalic.ttf",
+    ["Talisman"]                = "/LuiExtended/media/fonts/Talisman/talisman.ttf",
+    ["Transformers"]            = "/LuiExtended/media/fonts/Transformers/transformers.ttf",
+    ["Yellowjacket"]            = "/LuiExtended/media/fonts/Yellowjacket/yellowjacket.ttf",
+    ["ProFontWindows"]          = "/LuiExtended/media/fonts/ProFontWindows/ProFontWindows.ttf",
 }
 
 LUIE.Sounds = {
@@ -145,7 +144,6 @@ local function LUIE_LoadMedia()
             LUIE.Sounds[a] = LMP:Fetch(LMP.MediaType.SOUND, a)
         end
     end
-
 end
 
 -- Startup Info string
@@ -699,7 +697,6 @@ function LUIE.PrintToChat(msg, isSystem)
             end
         end
     end
-
 end
 
 -- Returns a formatted number with commas
@@ -750,7 +747,6 @@ function LUIE.AbbreviateNumber(number, shorten, comma)
     end
 
     return number
-
 end
 
 function LUIE.InitGuildData()
