@@ -5906,9 +5906,23 @@ E.EffectOverride = {
     [12426] = { name = A.Innate_Stagger }, -- Raven Storm (Hagraven)
     [10613] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fire_aoe.dds' }, -- Fire Bomb (Hagraven)
     [10614] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fire_aoe.dds' }, -- Fire Bomb (Hagraven)
-
+    [64806] = { hide = true }, -- Briarheart Resurrection (Hagraven)
     [64808] = { icon = 'esoui/art/icons/ability_healer_028.dds', duration = 2.5 }, -- Briarheart Resurrection (Hagraven)
     [65027] = { icon = 'esoui/art/icons/ability_healer_028.dds' }, -- Briarheart Resurrection (Hagraven)
+
+    [4112] = { icon = 'LuiExtended/media/icons/abilities/ability_harpy_talon.dds' }, -- Talon (Harpy)
+    [4125] = { icon = 'LuiExtended/media/icons/abilities/ability_harpy_kick.dds' }, -- Kick (Harpy)
+    [24551] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_zap.dds' }, -- Bolt (Harpy)
+    [4684] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_zap.dds' }, -- Bolt (Harpy)
+    [4123] = { icon = 'LuiExtended/media/icons/abilities/ability_harpy_wing_slice.dds' }, -- Wing Slice (Harpy)
+    [24369] = { icon = 'LuiExtended/media/icons/abilities/ability_harpy_wing_slice.dds' }, -- Wing Slice (Harpy)
+    [13515] = { icon = 'LuiExtended/media/icons/abilities/ability_harpy_wind_gust.dds' }, -- Wind Gust (Harpy)
+    [13516] = { icon = 'LuiExtended/media/icons/abilities/ability_harpy_wind_gust.dds' }, -- Wind Gust (Harpy)
+    [13517] = { icon = 'LuiExtended/media/icons/abilities/ability_harpy_wind_gust.dds' }, -- Wind Gust (Harpy)
+    [8628] = { icon = 'LuiExtended/media/icons/abilities/ability_harpy_charged_ground.dds' }, -- Charged Ground (Harpy)
+    [4689] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_impending_storm.dds' }, -- Impending Storm (Harpy)
+    [4690] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_impending_storm.dds' }, -- Impending Storm (Harpy)
+
     [32698] = { name = A.Innate_Stagger }, -- Staggered (Lurcher - Pulverize)
     [5349] = { name = A.Innate_Stagger, hide = true }, -- Staggered (Ogre - Shockwave)
     [38554] = { name = 'Crushing Limbs' }, -- Stun (Lurcher)
@@ -5922,7 +5936,6 @@ E.EffectOverride = {
     [8926] = { icon = 'esoui/art/icons/ability_healer_033.dds' }, -- Regeneration (Troll)
     [18040] = { icon = 'LuiExtended/media/icons/abilities/ability_wispmother_clone.dds' }, -- Clone (Wispmother)
     [18049] = { icon = 'LuiExtended/media/icons/abilities/ability_wispmother_clone.dds' }, -- Clone (Wispmother)
-    [64806] = { hide = true }, -- Briarheart Resurrection (Hagraven)
     [64132] = { hide = true }, -- Grapple Immunity (Strangle) (Pointless buff on player)
     [48287] = { hide = true }, -- Consuming Omen (Troll - Ranged) (Hiding to add fake aura)
     [48294] = { hide = true }, -- Consuming Omen (Troll - Ranged) (Hiding to add fake aura)
@@ -6029,8 +6042,8 @@ E.EffectOverride = {
     [38920] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_shard_burst.dds' }, -- Shard Burst (Ice Wraith)
     [24877] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_shard_burst.dds' }, -- Shard Burst (Ice Wraith)
 
-    [48549] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_blood_in_the_water.dds', name = A.Skill_Assault, hide = true }, -- Focused Charge (Ice Wraith)
-    [24869] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_blood_in_the_water.dds', name = A.Skill_Assault }, -- Blood in the Water (Ice Wraith)
+    [48549] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_bite.dds', name = A.Skill_Assault, hide = true }, -- Focused Charge (Ice Wraith)
+    [24869] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_bite.dds', name = A.Skill_Assault }, -- Blood in the Water (Ice Wraith)
     [46563] = { icon = 'esoui/art/icons/ability_mage_020.dds' }, -- Blood in the Water (Ice Wraith)
 
     -- VVARDENFELL NPC'S

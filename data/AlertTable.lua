@@ -396,6 +396,12 @@ LUIE.AlertTable = {
 
     [10615] = { avoid = true, interrupt = true, priority = 3 }, -- Raven Storm (Hagraven)
     [10613] = { avoid = true, priority = 3 }, -- Fire Bomb (Hagraven)
+    [64808] = { power = true, priority = 2, auradetect = true }, -- Briarheart Ressurection (Hagraven)
+
+    [4123] = { block = true, bs = true, dodge = true, priority = 3 }, -- Wing Slice (Harpy)
+    [13515] = { block = true, dodge = true, priority = 3 }, -- Wind Gust (Harpy)
+    [8628] = { avoid = true, interrupt = true, skipcheck = true, refire = 8100, priority = 3 }, -- Charged Ground (Harpy)
+    [4689] = { avoid = true, interrupt = true, priority = 3 }, -- Lightning Gale (Harpy)
 
     [43809] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true}, -- Shard Burst (Ice Wraith)
     [48549] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true}, -- Focused Charge (Ice Wraith)
