@@ -335,7 +335,7 @@ CA.D = {
         SkillGuildUndaunted             = true,
         SkillGuildThieves               = true,
         SkillGuildDarkBrotherhood       = true,
-		SkillGuildPsijicOrder			= true,
+        SkillGuildPsijicOrder           = true,
         SkillGuildIcon                  = true,
         SkillGuildMsg                   = GetString(SI_LUIE_CA_SKILL_GUILD_MSG),
         SkillGuildRepName               = GetString(SI_LUIE_CA_SKILL_GUILD_REPUTATION),
@@ -345,7 +345,7 @@ CA.D = {
         SkillGuildColorUD               = { .58, .75, 0, 1},
         SkillGuildColorTG               = { .29, .27, .42, 1},
         SkillGuildColorDB               = { .70, 0, .19, 1},
-		SkillGuildColorPO				= { .5, 1, 1, 1 },
+        SkillGuildColorPO               = { .5, 1, 1, 1 },
 
         SkillGuildThrottle              = 0,
         SkillGuildThreshold             = 0,
@@ -616,7 +616,7 @@ local g_stopDisplaySpam             = false         -- Toggled on to stop spam d
 local g_questIndex                  = { }           -- Index of all current quests. Allows us to read the index so that all quest notifications can use the difficulty icon.
 
 -- Trade
-local g_tradeTarget                 = ""       		-- Saves name of target player being traded with.
+local g_tradeTarget                 = ""            -- Saves name of target player being traded with.
 local g_tradeStacksIn               = { }           -- Table for storing items to be traded in.
 local g_tradeStacksOut              = { }           -- Table for storing items to be traded out.
 
@@ -784,9 +784,9 @@ local g_blacklistIDs = {
 }
 
 local guildAllianceColors = {
-	[1] = colorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_ALDMERI_DOMINION)),
-	[2] = colorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_DAGGERFALL_COVENANT)),
-	[3] = colorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_EBONHEART_PACT)),
+    [1] = colorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_ALDMERI_DOMINION)),
+    [2] = colorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_DAGGERFALL_COVENANT)),
+    [3] = colorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_EBONHEART_PACT)),
 }
 
 function CA.Initialize(enabled)
@@ -5003,10 +5003,10 @@ end
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
     if disguiseState == DISGUISE_STATE_DANGER then
         if CA.SV.Notify.DisguiseWarnCA then
-			local message = GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER)
-			g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
-			g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-			eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            local message = GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Notify.DisguiseWarnCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_MAJOR_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED)
@@ -5025,10 +5025,10 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
 
     if disguiseState == DISGUISE_STATE_SUSPICIOUS then
         if CA.SV.Notify.DisguiseWarnCA then
-			local message = GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)
-			g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
-			g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-			eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            local message = GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Notify.DisguiseWarnCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_MAJOR_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED)
@@ -5052,9 +5052,9 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
     if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
         local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)
         if CA.SV.Notify.DisguiseCA then
-			g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
-			g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-			eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Notify.DisguiseAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -5071,9 +5071,9 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
         g_currentDisguise = GetItemId(0, 10) or 0
         local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)
         if CA.SV.Notify.DisguiseCA then
-			g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
-			g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-			eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Notify.DisguiseAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -5112,9 +5112,9 @@ function CA.OnPlayerActivated(eventCode, initial)
                 g_currentDisguise = GetItemId(0, 10) or 0
                 local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)
                 if CA.SV.Notify.DisguiseCA then
-					g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
-					g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-					eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
+                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
                 if CA.SV.Notify.DisguiseAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -5132,9 +5132,9 @@ function CA.OnPlayerActivated(eventCode, initial)
             if g_disguiseState == 0 then
                 local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)
                 if CA.SV.Notify.DisguiseCA then
-					g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
-					g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-					eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "MESSAGE" }
+                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
                 if CA.SV.Notify.DisguiseAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -5259,7 +5259,7 @@ local GUILD_SKILL_ICONS =
     [55] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",
     [117] = "esoui/art/icons/mapkey/mapkey_thievesguild.dds",
     [118] = "esoui/art/icons/mapkey/mapkey_darkbrotherhood.dds",
-	[130] = "LuiExtended/media/unitframes/mapkey_psijicorder.dds",
+    [130] = "LuiExtended/media/unitframes/mapkey_psijicorder.dds",
 }
 
 -- Alert Prehooks
@@ -5900,10 +5900,10 @@ function CA.HookFunction()
 
     -- Variables for EVENT_GROUP_ELECTION_RESULT
     local GroupElectionResultToSoundId = {
-		[GROUP_ELECTION_RESULT_ELECTION_WON] = SOUNDS.GROUP_ELECTION_RESULT_WON,
-		[GROUP_ELECTION_RESULT_ELECTION_LOST] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
-		[GROUP_ELECTION_RESULT_ABANDONED] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
-	}
+        [GROUP_ELECTION_RESULT_ELECTION_WON] = SOUNDS.GROUP_ELECTION_RESULT_WON,
+        [GROUP_ELECTION_RESULT_ELECTION_LOST] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
+        [GROUP_ELECTION_RESULT_ABANDONED] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
+    }
 
     -- EVENT_GROUP_ELECTION_RESULT -- ALERT HANDLER
     local function GroupElectionResultAlert(resultType, descriptor)
@@ -6782,96 +6782,96 @@ function CA.HookFunction()
 
     end
 
-	local function CollectibleUnlockedHook(collectibleId, lockStateChange)
-		if lockStateChange == ZO_COLLECTIBLE_LOCK_STATE_CHANGE.UNLOCKED then
-			local collectibleData = ZO_COLLECTIBLE_DATA_MANAGER:GetCollectibleDataById(collectibleId)
-			if not collectibleData:IsPlaceholder() then
+    local function CollectibleUnlockedHook(collectibleId, lockStateChange)
+        if lockStateChange == ZO_COLLECTIBLE_LOCK_STATE_CHANGE.UNLOCKED then
+            local collectibleData = ZO_COLLECTIBLE_DATA_MANAGER:GetCollectibleDataById(collectibleId)
+            if not collectibleData:IsPlaceholder() then
 
-				local stringPrefix = CA.SV.Collectibles.CollectiblePrefix
-				local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
+                local stringPrefix = CA.SV.Collectibles.CollectiblePrefix
+                local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
 
-				local collectibleName = collectibleData:GetName()
-				local icon = collectibleData:GetIcon()
-				local categoryData = collectibleData:GetCategoryData()
-				local categoryName = categoryData:GetName()
+                local collectibleName = collectibleData:GetName()
+                local icon = collectibleData:GetIcon()
+                local categoryData = collectibleData:GetCategoryData()
+                local categoryName = categoryData:GetName()
 
-				if CA.SV.Collectibles.CollectibleCA then
-					local link = GetCollectibleLink(collectibleId, linkBrackets[CA.SV.BracketOptionCollectible])
-					local formattedIcon = CA.SV.Collectibles.CollectibleIcon and strfmt("|t16:16:%s|t ", icon) or ""
+                if CA.SV.Collectibles.CollectibleCA then
+                    local link = GetCollectibleLink(collectibleId, linkBrackets[CA.SV.BracketOptionCollectible])
+                    local formattedIcon = CA.SV.Collectibles.CollectibleIcon and strfmt("|t16:16:%s|t ", icon) or ""
 
-					local string1
-					if stringPrefix ~= "" then
-						string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[CA.SV.Collectibles.CollectibleBracket]))
-					else
-						string1 = ""
-					end
-					local string2
-					if CA.SV.Collectibles.CollectibleCategory then
-						string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, categoryName) .. ".")
-					else
-						string2 = link
-					end
-					finalString = strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2)
-					g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
-					g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-					eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-				end
+                    local string1
+                    if stringPrefix ~= "" then
+                        string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[CA.SV.Collectibles.CollectibleBracket]))
+                    else
+                        string1 = ""
+                    end
+                    local string2
+                    if CA.SV.Collectibles.CollectibleCategory then
+                        string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, categoryName) .. ".")
+                    else
+                        string2 = link
+                    end
+                    finalString = strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2)
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
+                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                end
 
-				-- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
-				local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
-				if CA.SV.Collectibles.CollectibleCSA then
-					messageParams:SetText(csaPrefix, strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryName))
-					messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
-					messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SINGLE_COLLECTIBLE_UPDATED)
-					CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-				end
+                -- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
+                if CA.SV.Collectibles.CollectibleCSA then
+                    messageParams:SetText(csaPrefix, strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryName))
+                    messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
+                    messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SINGLE_COLLECTIBLE_UPDATED)
+                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+                end
 
-				if CA.SV.Collectibles.CollectibleAlert then
-					local text = strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryName .. ".")
-					callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
-				end
+                if CA.SV.Collectibles.CollectibleAlert then
+                    local text = strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryName .. ".")
+                    callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
+                end
 
-			end
-		end
-		return true
-	end
+            end
+        end
+        return true
+    end
 
-	local function CollectiblesUnlockedHook(numJustUnlocked)
-		if numJustUnlocked > 0 then
+    local function CollectiblesUnlockedHook(numJustUnlocked)
+        if numJustUnlocked > 0 then
 
-			local stringPrefix = CA.SV.Collectibles.CollectiblePrefix
-			local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
+            local stringPrefix = CA.SV.Collectibles.CollectiblePrefix
+            local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
 
-			if CA.SV.Collectibles.CollectibleCA then
-				local string1
-				if stringPrefix ~= "" then
-					string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[CA.SV.Collectibles.CollectibleBracket]))
-				else
-					string1 = ""
-				end
-				local string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. ".")
-				finalString = strformat("<<1>><<2>>", string1, string2)
-				g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
-				g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-				eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-			end
+            if CA.SV.Collectibles.CollectibleCA then
+                local string1
+                if stringPrefix ~= "" then
+                    string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[CA.SV.Collectibles.CollectibleBracket]))
+                else
+                    string1 = ""
+                end
+                local string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. ".")
+                finalString = strformat("<<1>><<2>>", string1, string2)
+                g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            end
 
-			-- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
-			local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
-			if CA.SV.Collectibles.CollectibleCSA then
-				messageParams:SetText(csaPrefix, strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked))
-				messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COLLECTIBLES_UPDATED)
-				CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-			end
+            -- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
+            if CA.SV.Collectibles.CollectibleCSA then
+                messageParams:SetText(csaPrefix, strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked))
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COLLECTIBLES_UPDATED)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
 
-			if CA.SV.Collectibles.CollectibleAlert then
-				local text = strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. "."
-				callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
-			end
+            if CA.SV.Collectibles.CollectibleAlert then
+                local text = strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. "."
+                callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
+            end
 
-		end
-		return true
-	end
+        end
+        return true
+    end
 
     local function QuestAddedHook(journalIndex, questName, objectiveName)
 
@@ -8136,29 +8136,29 @@ function CA.HookFunction()
     end
 
     local overrideDisplayAnnouncementTitle = {
-		[GetString(SI_SKILLS_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS), announceType = "RESPEC" },
-		[GetString(SI_ATTRIBUTE_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES), announceType = "RESPEC" },
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C), announceType = "GROUPAREA" }, -- Entering Group Area.
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM), announceType = "ARENA"}, -- Maelstrom Arena
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1), announceType = "ROUND" }, -- Round 1
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2), announceType = "ROUND" }, -- Round 2
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3), announceType = "ROUND" }, -- Round 3
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4), announceType = "ROUND" }, -- Round 4
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5), announceType = "ROUND" }, -- Round 5
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF), announceType = "ROUND" }, -- Final Round
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA), announceType = "ARENA" }, -- Dragonstar Arena
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE1)] = { number = 1 }, -- IC (DC 1)
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE2)] = { number = 2 }, -- IC (DC 2)
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE3)] = { number = 3 }, -- IC (DC 3)
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE4)] = { number = 4 }, -- IC (DC 4)
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE5)] = { number = 5 }, -- IC (AD 1)
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE6)] = { number = 6 }, -- IC (AD 2)
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE7)] = { number = 7 }, -- IC (AD 3)
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8)] = { number = 8 }, -- IC (AD 4)
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE9)] = { number = 9 }, -- IC (EP 1)
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE10)] = { number = 10 }, -- IC (EP 2)
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE11)] = { number = 11 }, -- IC (EP 3)
-		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE12)] = { number = 12 }, -- IC (EP 4)
+        [GetString(SI_SKILLS_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS), announceType = "RESPEC" },
+        [GetString(SI_ATTRIBUTE_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES), announceType = "RESPEC" },
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C), announceType = "GROUPAREA" }, -- Entering Group Area.
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM), announceType = "ARENA"}, -- Maelstrom Arena
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1), announceType = "ROUND" }, -- Round 1
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2), announceType = "ROUND" }, -- Round 2
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3), announceType = "ROUND" }, -- Round 3
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4), announceType = "ROUND" }, -- Round 4
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5), announceType = "ROUND" }, -- Round 5
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF), announceType = "ROUND" }, -- Final Round
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA), announceType = "ARENA" }, -- Dragonstar Arena
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE1)] = { number = 1 }, -- IC (DC 1)
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE2)] = { number = 2 }, -- IC (DC 2)
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE3)] = { number = 3 }, -- IC (DC 3)
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE4)] = { number = 4 }, -- IC (DC 4)
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE5)] = { number = 5 }, -- IC (AD 1)
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE6)] = { number = 6 }, -- IC (AD 2)
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE7)] = { number = 7 }, -- IC (AD 3)
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8)] = { number = 8 }, -- IC (AD 4)
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE9)] = { number = 9 }, -- IC (EP 1)
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE10)] = { number = 10 }, -- IC (EP 2)
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE11)] = { number = 11 }, -- IC (EP 3)
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE12)] = { number = 12 }, -- IC (EP 4)
     }
 
     local overrideDisplayAnnouncementDescription = {
@@ -8568,7 +8568,7 @@ function CA.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_DUEL_FINISHED, DuelFinishedHook)
     ZO_PreHook(csaHandlers, EVENT_DUEL_COUNTDOWN, DuelCountdownHook)
 
-	eventManager:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
+    eventManager:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
 
     ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_STARTED, RaidStartedHook)
     ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_COMPLETE, RaidCompleteHook)
@@ -8582,7 +8582,7 @@ function CA.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_ACHIEVEMENT_AWARDED, AchievementAwardedHook)
     ZO_PreHook(csaHandlers, EVENT_PLEDGE_OF_MARA_RESULT, PledgeOfMaraHook)
 
-	eventManager:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, CA.MaraOffer)
+    eventManager:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, CA.MaraOffer)
 
     -- TODO: Allow these to use their default conditions if Saved Variable option for CA is not turned on
     local function GroupTypeChangedChatHook()
@@ -9726,8 +9726,8 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
            return
         elseif lineId == 118 and not CA.SV.Skills.SkillGuildDarkBrotherhood then
            return
-	    elseif lineId == 130 and not CA.SV.Skills.SkillGuildPsijicOrder then
-			return
+        elseif lineId == 130 and not CA.SV.Skills.SkillGuildPsijicOrder then
+            return
         end
 
         local change = currentXP - previousXP
@@ -9782,7 +9782,7 @@ function CA.PrintGuildRep(change, lineName, lineId, priority)
         [55] = SkillGuildColorizeUD,
         [117] = SkillGuildColorizeTG,
         [118] = SkillGuildColorizeDB,
-		[130] = SkillGuildColorizePO,
+        [130] = SkillGuildColorizePO,
     }
 
     local icon = iconFormatInheritColor(GUILD_SKILL_ICONS[lineId], 16, 16)

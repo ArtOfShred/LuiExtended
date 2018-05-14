@@ -432,11 +432,13 @@ function SCB.Initialize( enabled )
 
     eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  SCB.OnDeath )
 
+    -- Stealth Events
     eventManager:RegisterForEvent(moduleName .. "player",          EVENT_STEALTH_STATE_CHANGED, SCB.StealthStateChanged )
     eventManager:RegisterForEvent(moduleName .. "reticleover",     EVENT_STEALTH_STATE_CHANGED, SCB.StealthStateChanged )
     eventManager:AddFilterForEvent(moduleName .. "player",         EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
     eventManager:AddFilterForEvent(moduleName .. "reticleover",    EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
 
+    -- Disguise Events
     eventManager:RegisterForEvent(moduleName .. "player",          EVENT_DISGUISE_STATE_CHANGED, SCB.DisguiseStateChanged )
     eventManager:RegisterForEvent(moduleName .. "reticleover",     EVENT_DISGUISE_STATE_CHANGED, SCB.DisguiseStateChanged )
     eventManager:AddFilterForEvent(moduleName .. "player",         EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
@@ -446,17 +448,18 @@ function SCB.Initialize( enabled )
     eventManager:RegisterForEvent(moduleName, EVENT_ARTIFICIAL_EFFECT_ADDED, SCB.ArtificialEffectUpdate)
     eventManager:RegisterForEvent(moduleName, EVENT_ARTIFICIAL_EFFECT_REMOVED, SCB.ArtificialEffectUpdate)
 
-    -- Activate, Deactivate player, death, alive.
+    -- Activate, Deactivate player, death, alive
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED,   SCB.OnPlayerActivated )
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_DEACTIVATED, SCB.OnPlayerDeactivated )
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ALIVE, SCB.OnPlayerAlive )
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_DEAD,  SCB.OnPlayerDead )
     eventManager:RegisterForEvent(moduleName, EVENT_VIBRATION,    SCB.OnVibration )
 
-    -- Mount
+    -- Mount Events
     eventManager:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED, SCB.MountStatus)
     eventManager:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_USE_RESULT, SCB.CollectibleUsed)
 
+    -- Inventory Events
     eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, SCB.DisguiseItem)
     eventManager:AddFilterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN )
 
@@ -464,8 +467,10 @@ function SCB.Initialize( enabled )
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, SCB.DuelStart)
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, SCB.DuelEnd)
 
+    -- Combat Events
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE, SCB.PlayerCombatState)
 
+    -- Werewolf
     SCB.RegisterWerewolfEvents()
 
     -- Always show debug effects on development account
@@ -708,16 +713,16 @@ function SCB.AddToCustomList(list, input)
             local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat("<<1>> [<<2>>] <<3>> added to <<4>>", icon, id, name, listRef), true)
+            printToChat(strformat("<<1>> [<<2>>] <<3>> added to <<4>>", icon, id, name, listRef), true) -- TODO: localization
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat("Could not add [<<1>>] to <<2>>. That abiilityId does not exist.", input, listRef), true)
+            printToChat(strformat("Could not add [<<1>>] to <<2>>. That abiilityId does not exist.", input, listRef), true) -- TODO: localization
         end
     else
         if input ~= "" then
             list[input] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat("<<1>> added to <<2>>", input, listRef), true)
+            printToChat(strformat("<<1>> added to <<2>>", input, listRef), true) -- TODO: localization
         end
     end
     SCB.Reset()
@@ -732,16 +737,16 @@ function SCB.RemoveFromCustomList(list, input)
             local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat("<<1>> [<<2>>] <<3>> removed from <<4>>", icon, id, name, listRef), true)
+            printToChat(strformat("<<1>> [<<2>>] <<3>> removed from <<4>>", icon, id, name, listRef), true) -- TODO: localization
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat("Could not remove [<<1>>] to <<2>>. That abilityId does not exist.", input, listRef), true)
+            printToChat(strformat("Could not remove [<<1>>] to <<2>>. That abilityId does not exist.", input, listRef), true) -- TODO: localization
         end
     else
         if input ~= "" then
             list[input] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat("<<1>> removed from <<2>>", input, listRef), true)
+            printToChat(strformat("<<1>> removed from <<2>>", input, listRef), true) -- TODO: localization
         end
     end
     SCB.Reset()
@@ -814,7 +819,6 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
 end
 
 function SCB.PowerTrailer()
-
     g_effectsList.player1["Werewolf Indicator"] = {
         type=1,
         id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
@@ -823,11 +827,9 @@ function SCB.PowerTrailer()
         restart=true, iconNum=0
     }
     eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
-
 end
 
 function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
-
     if g_lastWerewolfPower > powerValue then
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
     end
@@ -2610,7 +2612,7 @@ end
 
 -- Called by menu to preview icon positions. Simply iterates through all containers other than player_long and adds dummy test buffs into them.
 function SCB.MenuPreview()
-	local currentTime = GetGameTimeMilliseconds()
+    local currentTime = GetGameTimeMilliseconds()
     local routing = { "player1", "reticleover1", "promb_player", "player2", "reticleover2", "promd_player" }
     local testEffectDurationList = { 22, 44, 55, 300, 1800000 }
     local abilityId = 999000
@@ -3179,13 +3181,13 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
     elseif g_playerResurrectStage == 3 and duration == 350 and SCB.SV.ShowResurrectionImmunity then
         -- We got correct sequence, so let us create a buff and reset the g_playerResurrectStage
         g_playerResurrectStage = nil
-		local currentTime = GetGameTimeMilliseconds()
-		g_effectsList["player1"][ "Resurrection Immunity" ] = {
-			target="player", type=1,
-			id="Fake", name = A.Innate_Resurrection_Immunity, icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds',
-			dur = 10000, starts= currentTime, ends = currentTime + 10000,
-			restart=true, iconNum=0,
-		}
+        local currentTime = GetGameTimeMilliseconds()
+        g_effectsList["player1"][ "Resurrection Immunity" ] = {
+            target="player", type=1,
+            id="Fake", name = A.Innate_Resurrection_Immunity, icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds',
+            dur = 10000, starts= currentTime, ends = currentTime + 10000,
+            restart=true, iconNum=0,
+        }
     else
         -- This event does not seem to have anything to do with player self-resurrection
         g_playerResurrectStage = nil
