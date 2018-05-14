@@ -2079,7 +2079,6 @@ local strings = {
     SI_LUIE_SKILL_BARRELING_CHARGE =                     "Barreling Charge",
     SI_LUIE_SKILL_ZOOM =                                 "Zoom",
     SI_LUIE_SKILL_PLOW =                                 "Plow",
-    SI_LUIE_SKILL_ICE_BARRIER_CHILL =                    "Ice Barrier Chill",
     SI_LUIE_SKILL_DEFENSIVE_WARD =                       "Defensive Ward",
     SI_LUIE_SKILL_GREAT_CLEAVE =                         "Great Cleave",
     SI_LUIE_SKILL_INSPIRE =                              "Inspire",
@@ -2094,14 +2093,13 @@ local strings = {
     SI_LUIE_SKILL_FIRE_TORRENT =                         "Fire Torrent",
     SI_LUIE_SKILL_RIP_AND_TEAR =                         "Rip and Tear",
     SI_LUIE_SKILL_LEECHING_BITE =                        "Leeching Bite",
-    SI_LUIE_SKILL_ZAP_PULSE =                            "Zap Pulse",
     SI_LUIE_SKILL_FETCHERFLY_COLONY =                    "Fetcherfly Colony",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME =               "Empower Atronach: Flame",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST =               "Empower Atronach: Frost",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM =               "Empower Atronach: Storm",
-    SI_LUIE_SKILL_LIGHTNING_PULSE =                      "Lightning Pulse",
     SI_LUIE_SKILL_COLOSSAL_STOMP =                       "Colossal Stomp",
     SI_LUIE_SKILL_DUST_CLOUD =                           "Dust Cloud",
+    SI_LUIE_SKILL_BATTLE_SPIRIT =                        "Battle Spirit",
 }
 
 -- TODO: Switch to StringId's

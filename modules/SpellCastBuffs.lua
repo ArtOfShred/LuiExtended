@@ -2478,6 +2478,10 @@ function SCB.ReloadEffects(unitTag)
         end
     end
 
+    if unitTag == "player" then
+        SCB.ArtificialEffectUpdate()
+    end
+
     -- create custom buff icon for Recall Cooldown effect
     if SCB.SV.ShowRecall and unitTag == "player" then
         local recallRemain, _ = GetRecallCooldown()
@@ -2497,9 +2501,9 @@ function SCB.ReloadEffects(unitTag)
 
     -- Add Battle Spirit icon to target in Cyrodiil or Battlegrounds
     if unitTag == "reticleover" and ( IsInAvAZone() or IsActiveWorldBattleground() or GetUnitName(unitTag) == g_currentDuelTarget ) and IsUnitPlayer("reticleover") and not SCB.SV.IgnoreBattleSpiritTarget then
-        g_effectsList.reticleover1[ "Battle Spirit" ] = {
+        g_effectsList.reticleover1[ A.Skill_Battle_Spirit ] = {
             target ="player", type=1,
-            id="Fake", name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
+            id="Fake", name=A.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
             dur=0, starts=1, ends=nil,
             forced = "short",
             restart=true, iconNum=0
@@ -2530,9 +2534,9 @@ function SCB.ReloadEffects(unitTag)
 
         if not SCB.SV.IgnoreBattleSpiritTarget then
             if ( ( IsInAvAZone() or IsActiveWorldBattleground() ) and IsUnitPlayer("reticleover") ) or GetUnitName(unitTag) == g_currentDuelTarget then
-                g_effectsList.reticleover1[ "Battle Spirit" ] = {
+                g_effectsList.reticleover1[ A.Skill_Battle_Spirit ] = {
                     target ="player", type=1,
-                    id="Fake", name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
+                    id="Fake", name=A.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
                     dur=0, starts=1, ends=nil,
                     forced = "short",
                     restart=true, iconNum=0

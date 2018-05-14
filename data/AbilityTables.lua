@@ -84,7 +84,7 @@ A.Item_Glyph_of_Shock               = 17899
 A.Item_Glyph_of_Weakening           = GetString(SI_LUIE_SKILL_GLYPH_WEAKENING)
 A.Item_Glyph_of_Weapon_Damage       = GetString(SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE)
 
--- Elemental Status Effects & Procs
+-- Elemental Status Effect
 A.Proc_Burning                      = 18084
 A.Proc_Diseased                     = 21925
 A.Proc_Chill                        = 21481
@@ -92,7 +92,7 @@ A.Proc_Chilled                      = 7145
 A.Proc_Poisoned                     = 21929
 A.Proc_Concussion                   = 21487
 
--- POTIONS
+-- Potions/Poisons
 A.Potion_Invisiblity                = 3668
 A.Potion_Ravage_Health              = 46111
 A.Potion_Restore_Health             = 45221
@@ -103,6 +103,7 @@ A.Poison_Lingering_Restore_Health   = 79702
 A.Poison_Stealth_Draining_Poison    = GetString(SI_LUIE_SKILL_POISON_STEALTH_DRAIN)
 A.Poison_Conspicuous_Poison         = GetString(SI_LUIE_SKILL_POISON_CONSPICUOUS)
 
+-- Food/Drink
 A.Food_Magicka_Stamina_Increase     = 61294
 A.Food_Health_Stamina_Increase      = 61255
 A.Food_Health_Magicka_Increase      = 61257
@@ -137,6 +138,7 @@ A.Drink_Crown_Drink                 = GetString(SI_LUIE_SKILL_DRINK_CROWN_DRINK)
 A.Drink_Crown_Stout_Magic_Liqueur   = GetString(SI_LUIE_SKILL_DRINK_CROWN_LIQUEUR)
 A.Drink_Crown_Vigorous_Tincture     = GetString(SI_LUIE_SKILL_DRINK_CROWN_TINCTURE)
 
+-- Experience Consumables
 A.Experience_Psijic_Ambrosia        = GetString(SI_LUIE_SKILL_EXPERIENCE_PSIJIC_AMBROSIA) -- Psijic Ambrosia
 A.Experience_Aetherial_Ambrosia     = GetString(SI_LUIE_SKILL_EXPERIENCE_AETHERIAL_AMBROSIA) -- Aetherial Ambrosia
 A.Experience_Mythic_Ambrosia        = GetString(SI_LUIE_SKILL_EXPERIENCE_MYTHIC_AMBROSIA) -- Mythic Aetherial Ambrosia
@@ -145,9 +147,11 @@ A.Experience_Crown_Crate_Scroll_1   = GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_C
 A.Experience_Crown_Crate_Scroll_2   = GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2) -- Major Crown Crate Experience Scroll
 A.Experience_Crown_Crate_Scroll_3   = GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3) -- Grand Crown Crate Experience Scroll
 
+-- Misc Consumables
 A.Consumable_Festival_Mints         = GetString(SI_LUIE_SKILL_CONSUMABLE_FESTIVAL_MINTS) -- High Hrothgar Festival Mints
 A.Consumable_Sailors_Grog           = GetString(SI_LUIE_SKILL_CONSUMABLE_SAILORS_GROG) -- Sailor's Warning Festival Grog
 
+-- Mementos
 A.Memento_Almalexias_Lantern        = GetCollectibleName(341)
 A.Memento_Bonesnap_Binding_Stone    = GetCollectibleName(348)
 A.Memento_Nirnroot_Wine             = GetCollectibleName(344)
@@ -553,6 +557,12 @@ A.Skill_Scorching_Flare             = 61524
 A.Skill_Reviving_Barrier            = 40237
 
 -- ---------------------------------------------------
+-- CYRODIIL ------------------------------------------
+-- ---------------------------------------------------
+
+A.Skill_Battle_Spirit               = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT)
+
+-- ---------------------------------------------------
 -- NPC BASIC -----------------------------------------
 -- ---------------------------------------------------
 
@@ -568,7 +578,7 @@ A.Skill_Oil_Drenched                = 10650
 A.Skill_Shield_Rush                 = GetString(SI_LUIE_SKILL_SHIELD_RUSH)
 A.Skill_Knockback                   = 77905
 A.Skill_Weakness                    = 8705
-A.Skill_Ice_Barrier_Chill           = GetString(SI_LUIE_SKILL_ICE_BARRIER_CHILL)
+A.Skill_Ice_Barrier                 = 14178
 A.Skill_Vanish                      = 24687
 A.Skill_Bone_Cage                   = 35387
 A.Skill_Defensive_Ward              = GetString(SI_LUIE_SKILL_DEFENSIVE_WARD)
@@ -633,7 +643,6 @@ A.Skill_Necrotic_Explosion          = 61427
 A.Skill_Contagion                   = 47838
 A.Skill_Plow                        = GetString(SI_LUIE_SKILL_PLOW)
 A.Skill_Zap                         = 8429
-A.Skill_Zap_Pulse                   = GetString(SI_LUIE_SKILL_ZAP_PULSE)
 A.Skill_Leeching_Bite               = GetString(SI_LUIE_SKILL_LEECHING_BITE)
 A.Skill_Fetcherfly_Colony           = GetString(SI_LUIE_SKILL_FETCHERFLY_COLONY)
 
@@ -642,7 +651,6 @@ A.Skill_Empower_Atronach_Flame      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_F
 A.Skill_Empower_Atronach_Frost      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST)
 A.Skill_Empower_Atronach_Storm      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM)
 A.Skill_Lightning_Rod               = 50023
-A.Skill_Lightning_Pulse             = GetString(SI_LUIE_SKILL_LIGHTNING_PULSE)
 A.Skill_Headbutt                    = 54380
 A.Skill_Tail_Spike                  = 4799
 A.Skill_Rending_Leap                = 93745
