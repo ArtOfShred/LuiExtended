@@ -678,6 +678,8 @@ A.Skill_Winters_Reach               = 4337
 -- Monsters
 A.Skill_Luring_Snare                = 2821
 A.Skill_Assault                     = 4304 -- Ice Wraith
+A.Skill_Flame_Ray                   = 17703
+A.Skill_Frost_Ray                   = 81794
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

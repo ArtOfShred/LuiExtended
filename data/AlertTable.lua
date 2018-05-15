@@ -406,6 +406,29 @@ LUIE.AlertTable = {
     [43809] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true}, -- Shard Burst (Ice Wraith)
     [48549] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true}, -- Focused Charge (Ice Wraith)
 
+    [17703] = { block = true, interrupt = true, priority = 3, refire = 600 }, -- Flame Ray (Imp - Fire)
+    [8884] = { block = true, interrupt = true, priority = 3, refire = 600 }, -- Zap (Imp - Lightning)
+    [81794] = { block = true, interrupt = true, priority = 3, refire = 600 }, -- Frost Ray (Imp - Frost)
+
+    [9671] = { block = true, bs = true, eventdetect = true, priority = 3 }, -- Howling Strike (Lamia)
+    [9674] = { avoid = true, interrupt = true, priority = 3 }, -- Resonate (Lamia)
+    [7835] = { interrupt = true, notDirect = true, priority = 3, eventdetect = true }, -- Convalescence (Lamia)
+    [7831] = { interrupt = true, notDirect = true, priority = 3, eventdetect = true, refire = 1500 }, -- Harmony (Lamia)
+
+    [5559] = { avoid = true, priority = 3 }, -- Icy Geyser (Nereid)
+    [16040] = { avoid = true, interrupt = true, priority = 3, auradetect = true }, -- Hurricane (Nereid)
+
+    [5881] = { block = true, bs = true, dodge = true, priority = 3 }, -- Smash (Ogre)
+    [5256] = { block = true, priority = 3 }, -- Shockwave (Ogre)
+
+    [53142] = { destroy = true, priority = 2, auradetect = true, refire = 350 }, -- Ice Pillar (Ogre Shaman)
+    [64540] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Freeze Wounds (Ogre Shaman)
+    [53137] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Freeze Wounds (Ogre Shaman)
+
+    [21582] = { block = true, priority = 3, eventdetect = true }, -- Nature's Swarm (Spriggan)
+    [13475] = { interrupt = true, priority = 3, auradetect = true, notDirect = true }, -- Healing Salve (Spriggan)
+    [13477] = { interrupt = true, priority = 3, auradetect = true, notDirect = true }, -- Summon Beast (Spriggan)
+
     --------------------------------------------------
     -- MAIN QUEST ------------------------------------
     --------------------------------------------------

@@ -6,6 +6,7 @@ local mathmin    = math.min
 local mathmax    = math.max
 local tostring   = tostring
 
+local AbbreviateNumber = LUIE.AbbreviateNumber
 local callLater = zo_callLater
 local C = LUIE.CombatTextConstants
 local poolTypes = C.poolType
@@ -57,12 +58,13 @@ end
 
 function CTV:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
     local S = LUIE.CombatText.SV
+    value = AbbreviateNumber(value, S.common.abbreviateNumbers)
 
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
 
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (hits > 1 and S.toggles.showThrottleTrailer) then
-        value = strfmt('%d (%d)', value, hits)
+        value = strfmt('%s (%d)', value, hits)
     end
     if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then
         textColor = S.colors.incomingDamageOverride

@@ -340,6 +340,10 @@ E.DebuffDisplayOverrideId = {
 
     -- Insects
     [61372] = true, -- Infectious Swarm (Necrotic Hoarvor)
+
+    -- Monsters
+    [89399] = true, -- Summon Spectral Lamia (Lamia)
+    [89127] = true, -- Summon Beast (Spriggan)
 }
 
 E.EffectHideWhenDead = {
@@ -1382,6 +1386,11 @@ E.EffectOverrideByName = {
                     ['Skaafin Wretch'] =        { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_flurry.dds' }, -- Flurry (Skaafin Wretch)
                     ['Skaafin Miscreal'] =      { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_flurry.dds' }, -- Flurry (Skaafin Miscreal)
                 },
+
+    -- MONSTERS
+    [9670] =    {
+                    ['Spectral Lamia'] =        { icon = 'LuiExtended/media/icons/abilities/ability_lamia_strike_spectral.dds' }, -- Strike (Lamia)
+                },
 }
 
 E.EffectSourceOverride = {
@@ -1585,6 +1594,9 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
 
     -- Monster
     [32268] = true, -- Grapple (Hag)
+    [33459] = true, -- Hurricane (Nereid)
+    [5881] = true, -- Smash (Ogre)
+    [82685] = true, -- CC (Crown Control) Shared Cool
 
     -- Main Quest
     [61648] = true, -- Replenish Stamina (Tutorial - Child of Bones)
@@ -5120,6 +5132,7 @@ E.EffectOverride = {
     [64806] = { hide = true }, -- Briarheart Resurrection (Hagraven)
     [64808] = { icon = 'esoui/art/icons/ability_healer_028.dds', duration = 2.5 }, -- Briarheart Resurrection (Hagraven)
     [65027] = { icon = 'esoui/art/icons/ability_healer_028.dds' }, -- Briarheart Resurrection (Hagraven)
+
     [4112] = { icon = 'LuiExtended/media/icons/abilities/ability_harpy_talon.dds' }, -- Talon (Harpy)
     [4125] = { icon = 'LuiExtended/media/icons/abilities/ability_harpy_kick.dds' }, -- Kick (Harpy)
     [24551] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_zap.dds' }, -- Bolt (Harpy)
@@ -5138,19 +5151,96 @@ E.EffectOverride = {
     [43810] = { hide = true }, -- Shard Burst (Ice Wraith)
     [38920] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_shard_burst.dds' }, -- Shard Burst (Ice Wraith)
     [24877] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_shard_burst.dds' }, -- Shard Burst (Ice Wraith)
-
     [48549] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_blood_in_the_water.dds', name = A.Skill_Assault, hide = true }, -- Focused Charge (Ice Wraith)
     [24869] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_blood_in_the_water.dds', name = A.Skill_Assault }, -- Blood in the Water (Ice Wraith)
     [46563] = { icon = 'esoui/art/icons/ability_mage_020.dds' }, -- Blood in the Water (Ice Wraith)
 
-    [32698] = { name = A.Innate_Stagger }, -- Staggered (Lurcher - Pulverize)
-    [5349] = { name = A.Innate_Stagger, hide = true }, -- Staggered (Ogre - Shockwave)
-    [38554] = { name = 'Crushing Limbs' }, -- Stun (Lurcher)
-    [17703] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_flameray.dds' }, -- Flame Ray (Imp Fire Beam)
-    [8884] = { icon = 'esoui/art/icons/ability_mage_016.dds' }, -- Zap (Imp Lightning Beam)
-    [24985] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds' }, -- Intimidating Roar (Ogre)
-    [34385] = { icon = 'esoui/art/icons/ability_mage_050.dds', name = 'Ice Pillar Chill' }, -- Generic AOE (Ogre Mage)
-    [54327] = { icon = 'esoui/art/icons/ability_mage_037.dds' }, -- Winter's Reach (Ogre Mage)
+    [14801] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds', hide = true }, -- Flare (Imp - Fire)
+    [14802] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds', hide = true }, -- Fireball (Imp - Fire)
+    [17703] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_flame_ray.dds' }, -- Flame Ray (Imp - Fire)
+    [65078] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_flame_ray.dds' }, -- Flame Ray (Imp - Fire)
+    [17706] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_flamestrike.dds' }, -- Flame Ray (Imp - Fire)
+
+    [7732] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_ranged.dds', hide = true }, -- Bolt (Imp - Lightning)
+    [13648] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_ranged.dds', hide = true }, -- Spark (Imp - Lightning)
+    [8884] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_zap.dds' }, -- Zap (Imp - Lightning)
+    [65077] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_zap.dds' }, -- Zap (Imp - Lightning)
+    [14666] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds' }, -- Zap (Imp - Lightning)
+
+    [88906] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_frost_ranged.dds', hide = true }, -- Frost Bolt (Imp - Frost)
+    [88918] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_frost_ranged.dds', hide = true }, -- Frostball (Imp - Frost)
+
+    [81794] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_frost_ray.dds' }, -- Frost Ray (Imp - Frost)
+    [88907] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_frost_ray.dds', hide = true }, -- Frost Ray (Imp - Frost)
+    [88915] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Frost Ray (Imp - Frost)
+    [88908] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winterborn.dds' }, -- Frost Ray (Imp - Frost)
+
+    [9670] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_strike.dds' }, -- Strike (Lamia)
+    [9671] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_howling_strike.dds' }, -- Howling Strike (Lamia)
+    [89382] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_howling_strike.dds' }, -- Howling Strike (Lamia)
+    [9674] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Resonate (Lamia)
+    [23281] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Resonate (Lamia)
+    [7830] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_shockwave.dds', hide = true }, -- Shockwave (Lamia)
+    [12074] = { hide = true }, -- Summon Spectral Lamia (Lamia)
+    [9680] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_summon_spectral_lamia.dds' }, -- Summon Spectral Lamia (Lamia)
+    [89399] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = A.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Summon Spectral Lamia (Lamia)
+    [7835] = { icon = 'esoui/art/icons/ability_healer_033.dds', hide = true }, -- Convalescence (Lamia)
+    [7831] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_harmony.dds' }, -- Harmony (Lamia)
+    [24745] = { hide = true }, -- Harmony (Lamia)
+    [23358] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_harmony.dds' }, -- Harmony (Lamia)
+    [24814] = { hide = true }, -- Harmony (Lamia)
+
+    --[32698] = { name = A.Innate_Stagger }, -- Staggered (Lurcher - Pulverize)
+    --[38554] = { name = 'Crushing Limbs' }, -- Stun (Lurcher)
+
+    [5520] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_frost_ranged.dds', hide = true }, -- Frost Bolt (Nereid)
+    [5559] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds' }, -- Icy Geyser (Nereid)
+    [11024] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds' }, -- Icy Geyser (Nereid)
+    [5540] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', hide = true }, -- Hurricane (Nereid)
+    [16040] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds' }, -- Hurricane (Nereid)
+    [33459] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds' }, -- Hurricane (Nereid)
+
+    [5254] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_punch.dds' }, -- Punch (Ogre)
+    [5257] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_backhand.dds' }, -- Backhand (Ogre)
+    [5881] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Smash (Ogre)
+    [24948] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Smash (Ogre)
+    [34627] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Smash (Ogre)
+    [24949] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Smash (Ogre)
+    [34614] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds' }, -- Smash (Ogre)
+    [5256] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Shockwave (Ogre)
+    [34616] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Shockwave (Ogre)
+    [5349] = { hide = true }, -- Stagger (Ogre - Shockwave)
+    [8069] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds' }, -- Intimidating Roar (Ogre)
+    [24985] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Enrage }, -- Intimidating Roar (Ogre)
+
+    [53136] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
+    [65434] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
+    [53773] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
+    [53774] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
+    [65469] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
+    [65470] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
+    [53142] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_ice_pillar.dds' }, -- Ice Pillar (Ogre Shaman)
+    [74457] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_ice_pillar.dds' }, -- Ice Pillar (Ogre Shaman)
+    [34385] = { hide = true }, -- Generic AOE (Ogre Shaman)
+    [53966] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_ice_pillar.dds', duration = 0 }, -- Ice Pillar Chill (Ogre Shaman)
+    [54327] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_root_frost.dds', name = A.Skill_Frozen }, -- Winter's Reach (Ogre Shaman)
+    [64540] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_freeze_wounds.dds' }, -- Freeze Wounds (Ogre Shaman)
+    [53137] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_freeze_wounds.dds' }, -- Freeze Wounds (Ogre Shaman)
+
+    [2986] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_lacerate.dds' }, -- Lacerate (Spriggan)
+    [21582] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm.dds' }, -- Nature's Swarm (Spriggan)
+    [31699] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_natures_swarm.dds' }, -- Nature's Swarm (Spriggan)
+    [13475] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_healing_salve.dds' }, -- Healing Salve (Spriggan)
+    [89083] = { hide = true }, -- Healing Salve (Spriggan)
+    [89084] = { hide = true }, -- Healing Salve (Spriggan)
+    [89085] = { hide = true }, -- Healing Salve (Spriggan)
+
+    [89143] = { hide = true }, -- Summon Beast (Spriggan)
+    [89119] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast.dds' }, -- Summon Beast (Spriggan)
+    [89127] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = A.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Summon Beast (Spriggan)
+    [21570] = { hide = true }, -- Backstep (Spriggan)
+    [13477] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_control_beast.dds' }, -- Control Beast (Spriggan)
+
     [9346] = { icon = 'esoui/art/icons/ability_healer_034.dds' }, -- Strangle (Strangler)
     [9707] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_grapple.dds' }, -- Grapple (Strangler)
     [8926] = { icon = 'esoui/art/icons/ability_healer_033.dds' }, -- Regeneration (Troll)
@@ -5791,6 +5881,12 @@ E.FakeExternalDebuffs = {
     [8429] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds', name = A.Skill_Zap, duration = 4000, ignoreBegin = true }, -- Zap (Thunderbug)
 
     -- Monsters
+    [17703] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_flame_ray.dds', name = A.Skill_Flame_Ray, duration = 4000, ignoreBegin = true }, -- Flame Ray (Imp - Fire)
+    [8884] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_zap.dds', name = A.Skill_Zap, duration = 4000, ignoreBegin = true }, -- Zap (Imp - Lightning)
+    [81794] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_frost_ray.dds', name = A.Skill_Frost_Ray, duration = 4000, ignoreBegin = true }, -- Frost Ray (Imp - Frost)
+
+
+
     [48287] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Consuming Omen', duration = 1500}, -- Consuming Omen (Troll - Ranged) (Fake aura to replace bugged aura)
 
     -- Undead
@@ -5976,8 +6072,8 @@ E.FakeStagger = {
     [29765] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Uber Attack (Player staggers self by hitting Blocking NPC with Heavy Attack)
     [68971] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Staggered (Echatere - Shockwave)
     [12426] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Raven Storm (Hagraven)
-    [32698] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Staggered (Lurcher - Pulverize)
-    [5349] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Staggered (Ogre - Shockwave)
+    [32698] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Pulverize (Lurcher - Pulverize)
+    [5349] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Stagger (Ogre - Shockwave)
     [76134] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 600}, -- Stumble Forward (Flesh Colossus)
     [76133] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Stumble Forward (Flesh Colossus - Blocked)
     [65755] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 600}, -- Staggered (Flesh Colossus - Block Pin)
