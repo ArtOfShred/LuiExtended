@@ -429,6 +429,20 @@ LUIE.AlertTable = {
     [13475] = { interrupt = true, priority = 3, auradetect = true, notDirect = true }, -- Healing Salve (Spriggan)
     [13477] = { interrupt = true, priority = 3, auradetect = true, notDirect = true }, -- Summon Beast (Spriggan)
 
+    [9346] = { interrupt = true, priority = 3 }, -- Strangle (Strangler)
+    [9322] = { avoid = true, priority = 3, eventdetect = true, skipcheck = true }, -- Poisoned Ground (Strangler)
+    [9321] = { block = true, priority = 3}, -- Grapple (Strangler)
+
+    [44736] = { block = true, dodge = true, priority = 2, eventdetect = true, refire = 2000 }, -- Swinging Cleave (Troll)
+    [9009] = { avoid = true, priority = 2, eventdetect = true, refire = 300 }, -- Tremor (Troll)
+
+    [76268] = { block = true, dodge = true, priority = 2 }, -- Lope (River Troll)
+    [76277] = { interrupt = true, notDirect = true, priority = 2, eventdetect = true, refire = 1000 }, -- Close Wounds (River Troll)
+    [76295] = { block = true, avoid = true, priority = 2 }, -- Crab Toss (River Troll)
+
+    [48256] = { block = true, avoid = true, priority = 3 }, -- Boulder Toss (Troll - Ranged)
+    [48282] = { interrupt = true, avoid = true, priority = 3, eventdetect = true }, -- Consuming Omen (Troll - Ranged)
+
     --------------------------------------------------
     -- MAIN QUEST ------------------------------------
     --------------------------------------------------

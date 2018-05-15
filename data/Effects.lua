@@ -344,6 +344,8 @@ E.DebuffDisplayOverrideId = {
     -- Monsters
     [89399] = true, -- Summon Spectral Lamia (Lamia)
     [89127] = true, -- Summon Beast (Spriggan)
+    [42794] = true, -- Strangler: (Strangler)
+    [48294] = true, -- Consuming Omen (Troll - Ranged)
 }
 
 E.EffectHideWhenDead = {
@@ -1597,6 +1599,7 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [33459] = true, -- Hurricane (Nereid)
     [5881] = true, -- Smash (Ogre)
     [82685] = true, -- CC (Crown Control) Shared Cool
+    [14221] = true, -- Grapple (Strangler)
 
     -- Main Quest
     [61648] = true, -- Replenish Stamina (Tutorial - Child of Bones)
@@ -5241,14 +5244,52 @@ E.EffectOverride = {
     [21570] = { hide = true }, -- Backstep (Spriggan)
     [13477] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_control_beast.dds' }, -- Control Beast (Spriggan)
 
-    [9346] = { icon = 'esoui/art/icons/ability_healer_034.dds' }, -- Strangle (Strangler)
+    [42793] = { hide = true }, -- Strangler: (Strangler)
+    [42794] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Bash_Stun, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Strangler: (Strangler)
+    [9320] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_strike.dds' }, -- Strike (Strangler)
+    [14219] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds' }, -- Spit (Strangler)
+    [9346] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_strangle.dds' }, -- Strangle (Strangler)
+    [42211] = { hide = true }, -- Strangle (Strangler)
+    [9322] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_poisoned_ground.dds' }, -- Poisoned Ground (Strangler)
+    [9323] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_poisoned_ground.dds' }, -- Poisoned Ground (Strangler)
+    [9321] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_grapple.dds' }, -- Grapple (Strangler)
     [9707] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_grapple.dds' }, -- Grapple (Strangler)
-    [8926] = { icon = 'esoui/art/icons/ability_healer_033.dds' }, -- Regeneration (Troll)
+    [64132] = { hide = true }, -- Grapple Immunity (Strangler)
+
+    [8926] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_regeneration.dds' }, -- Regeneration (Troll)
+    [61225] = { hide = true }, -- Regeneration (Troll)
+    [8925] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_slap.dds' }, -- Slap (Troll)
+    [44736] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_swinging_cleave.dds', hide = true }, -- Swinging Cleave (Troll)
+    [44737] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_swinging_cleave.dds' }, -- Swinging Cleave (Troll)
+    [9009] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_tremor.dds', hide = true }, -- Tremor (Troll)
+    [9011] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_tremor.dds' }, -- Tremor (Troll)
+
+    [76266] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_rip.dds' }, -- Rip (River Troll)
+    [76268] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_lope.dds' }, -- Lope (River Troll)
+    [78834] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_lope.dds' }, -- Lope (River Troll)
+    [76274] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_lope.dds' }, -- Lope (River Troll)
+
+    [76277] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_close_wounds.dds' }, -- Close Wounds (River Troll)
+    [76295] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_crab_toss.dds' }, -- Crab Toss (River Troll)
+    [80506] = { hide = true }, -- Crab Toss (River Troll)
+    [76297] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_crab_toss.dds' }, -- Crab Toss (River Troll)
+    [76298] = { hide = true }, -- Crab Toss (River Troll)
+    [81045] = { hide = true }, -- Crab Toss (River Troll)
+    [76300] = { hide = true }, -- Scuttle (River Troll)
+
+    [48253] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_rock_toss.dds' }, -- Rock Toss (Troll - Ranged)
+    [60549] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_rock_toss.dds' }, -- Rock Toss (Troll - Ranged)
+    [48256] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds' }, -- Boulder Toss (Troll - Ranged)
+    [48257] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds' }, -- Boulder Toss (Troll - Ranged)
+    [50387] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds' }, -- Boulder Toss (Troll - Ranged)
+    [48282] = { icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds' }, -- Consuming Omen (Troll - Ranged)
+
+    [48287] = { icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds', hide = true }, -- Consuming Omen (Troll - Ranged)
+    [48294] = { icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Consuming Omen (Troll - Ranged)
+    [48297] = { icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds' }, -- Consuming Omen (Troll - Ranged)
+
     [18040] = { icon = 'LuiExtended/media/icons/abilities/ability_wispmother_clone.dds' }, -- Clone (Wispmother)
     [18049] = { icon = 'LuiExtended/media/icons/abilities/ability_wispmother_clone.dds' }, -- Clone (Wispmother)
-    [64132] = { hide = true }, -- Grapple Immunity (Strangle) (Pointless buff on player)
-    [48287] = { hide = true }, -- Consuming Omen (Troll - Ranged) (Hiding to add fake aura)
-    [48294] = { hide = true }, -- Consuming Omen (Troll - Ranged) (Hiding to add fake aura)
     [64211] = { hide = true }, -- Summon Wisp (Wispmother) (Pointless aura applied when Wispmother summons wisp)
 
     -- Undead
@@ -5750,9 +5791,9 @@ E.EffectOverride = {
     [92135] = { hide = true }, -- Nchuleftingth Electricity (Dwarven Charge-Wire)
     [86634] = { hide = true }, -- Swinging Cleave (Mud-Tusk)
     [86635] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_swinging_cleave.dds'}, -- Swinging Cleave (Mud-Tusk)
-    [89210] = { icon = 'LuiExtended/media/icons/abilities/ability_trollranged_boulder_toss.dds'}, -- Boulder Toss (Mud-Tusk)
-    [89240] = { icon = 'LuiExtended/media/icons/abilities/ability_trollranged_boulder_toss.dds'}, -- Boulder Toss (Mud-Tusk)
-    [89239] = { icon = 'LuiExtended/media/icons/abilities/ability_trollranged_boulder_toss.dds'}, -- Boulder Toss (Mud-Tusk)
+    [89210] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds'}, -- Boulder Toss (Mud-Tusk)
+    [89240] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds'}, -- Boulder Toss (Mud-Tusk)
+    [89239] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds'}, -- Boulder Toss (Mud-Tusk)
     [94935] = { hide = true }, -- Tremor (Mud-Tusk)
     [94936] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_tremor.dds' }, -- Tremor (Mud-Tusk)
     [86613] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_steam_piston.dds', name = 'Steam Piston' }, -- Piston Thrust (Dwarven Piston)
@@ -5887,7 +5928,7 @@ E.FakeExternalDebuffs = {
 
 
 
-    [48287] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Consuming Omen', duration = 1500}, -- Consuming Omen (Troll - Ranged) (Fake aura to replace bugged aura)
+    [48287] = {icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds', name = A.Skill_Consuming_Omen, duration = 1500}, -- Consuming Omen (Troll - Ranged) (Fake aura to replace bugged aura)
 
     -- Undead
     [38834] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_desecrated_ground_snare.dds', name = A.Skill_Desecrated_Ground, duration = 0 }, -- Desecrated Ground Snare (Desecrated Ground)
@@ -6091,7 +6132,6 @@ E.FakeStagger = {
     [35115] = {icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Extended_Chains, duration = 1000},  -- Pull (Extended Chains) (Cyrodiil Guard T2)
     [47020] = {icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Puncturing_Chains, duration = 1000}, -- Pull (Puncturing Chains) (Cyrodiil Guard T2)
     [52878] = {icon = 'esoui/art/icons/ability_dragonknight_005_b.dds', name = 'Empowering Chains', duration = 433}, -- Pull (Empowering Chains) (Rkindaleft - Sharga the Firestarter)
-    [48294] = {icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds', name = 'Consuming Omen', duration = 10000}, -- Consuming Omen (Troll - Ranged) -- TEMPORARY FIX FOR THIS DEBUFF (Since it can't be removed by Purge)
     [64322] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Glacial Spikes', duration = 1000}, -- Glacial Spikes (For King and Glory - Urfon Ice-Heart) - TEMP FIX
     [72479] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Glacial Spikes', duration = 1000}, -- Glacial Spikes (For King and Glory - Urfon Ice-Heart) - TEMP FIX
     [53290] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Stagger (The Anger of a King - Talviah Aliaria)

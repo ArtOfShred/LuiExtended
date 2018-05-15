@@ -39,6 +39,7 @@ A.Innate_Sprint                     = 973   -- Sprint
 A.Innate_Block                      = 14890 -- Block
 A.Innate_Block_Stun                 = GetString(SI_LUIE_SKILL_BLOCK_STUN) -- Block Stun
 A.Innate_Bash                       = 21970 -- Bash
+A.Innate_Bash_Stun                  = 21971 -- Bash Stun
 A.Innate_Gallop                     = GetString(SI_LUIE_SKILL_MOUNT_SPRINT) -- Gallop
 A.Innate_Hard_Dismount              = 42514
 A.Innate_Fall_Damage                = GetString(SI_LUIE_SKILL_FALL_DAMAGE) -- Fall Damage
@@ -677,9 +678,10 @@ A.Skill_Winters_Reach               = 4337
 
 -- Monsters
 A.Skill_Luring_Snare                = 2821
-A.Skill_Assault                     = 4304 -- Ice Wraith
+A.Skill_Assault                     = 4304
 A.Skill_Flame_Ray                   = 17703
 A.Skill_Frost_Ray                   = 81794
+A.Skill_Consuming_Omen              = 48282
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------
