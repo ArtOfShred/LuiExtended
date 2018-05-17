@@ -8479,9 +8479,14 @@ debugAuras = {
             [75922] = true, -- Ram -- Minotaur
             [75872] = true, -- Flying Axe -- Minotaur
             [79541] = true, -- Flying Leap -- Minotaur
+            [79540] = true, -- Flying Leap -- Minotaur
             [79539] = true, -- Flying Leap -- Minotaur
             [75925] = true, -- Elemental Weapon -- Minotaur
+            [75926] = true, -- Elemental Pool -- Minotaur
             [75928] = true, -- Elemental Pool -- Minotaur
+            [75935] = true, -- Elemental Wave -- Minotaur
+            [75936] = true, -- Elemental Wave -- Minotaur
+            [75937] = true, -- Elemental Wave -- Minotaur
             [75933] = true, -- Elemental Wave -- Minotaur
 
             [75949] = true, -- Fiery Surge -- Minotaur Shaman
@@ -8492,11 +8497,15 @@ debugAuras = {
             [75954] = true, -- Brimstone Hailfire -- Minotaur Shaman
             [75955] = true, -- Pillars of Nirn -- Minotaur Shaman
             [81577] = true, -- Pillars of Nirn -- Minotaur Shaman
+            [75962] = true, -- Pillars of Nirn - Minotaur Shaman
+            [75956] = true, -- Pillars of Nirn -- Minotaur Shaman
             [75957] = true, -- Pillars of Nirn -- Minotaur Shaman
             [75980] = true, -- Pillar Eruption -- Minotaur Shaman
             [75976] = true, -- Pillar of Nirn -- Minotaur Shaman
             [81578] = true, -- Pillar of Nirn -- Minotaur Shaman
             [75978] = true, -- Pillar Explosion -- Minotaur Shaman
+            [75994] = true, -- Molten Armor (Minotaur Shaman)
+            [79689] = true, -- Molten Armor (Minotaur Shaman)
 
             [5520] = true, -- Frost Bolt -- Nereid
             [5559] = true, -- Icy Geyser -- Nereid
@@ -8623,6 +8632,17 @@ debugAuras = {
 
             [6596] = true, -- Summon Wisp -- Wispmother
             [64211] = true, -- Summon Wisp -- Wispmother
+            [19052] = true, -- Rain of Wisps -- Wispmother
+            [19058] = true, -- Rain of Wisps -- Wispmother
+            [8003] = true, -- Rain of Wisps -- Wispmother
+            [19062] = true, -- Rain of Wisps -- Wispmother
+            [19049] = true, -- Rain of Wisps -- Wispmother
+            [19045] = true, -- Rain of Wisps -- Wispmother
+            [19047] = true, -- Rain of Wisps -- Wispmother
+            [19055] = true, -- Rain of Wisps -- Wispmother
+            [19049] = true, -- Rain of Wisps -- Wispmother
+            [19052] = true, -- Rain of Wisps -- Wispmother
+            [19058] = true, -- Rain of Wisps -- Wispmother
             [7976] = true, -- Rain of Wisps -- Wispmother
             [8025] = true, -- Rain of Wisps -- Wispmother
             [19043] = true, -- Rain of Wisps -- Wispmother
@@ -8630,6 +8650,7 @@ debugAuras = {
             [19056] = true, -- Rain of Wisps -- Wispmother
             [61204] = true, -- Rain of Wisps -- Wispmother
             [19061] = true, -- Rain of Wisps -- Wispmother
+
             [18040] = true, -- Clone -- Wispmother
             [18049] = true, -- Clone -- Wispmother
             [18060] = true, -- Clone -- Wispmother
@@ -8637,6 +8658,33 @@ debugAuras = {
             [18073] = true, -- Wispmother Surround Clone 2 -- Wispmother
             [18066] = true, -- Wispmother Surround -- Wispmother
             [19069] = true, -- Rain of Wisps -- Wispmother
+
+            [49395] = true, -- Punch (Mantikora)
+            [49397] = true, -- Spear Sweep (Mantikora)
+            [49499] = true, -- Spear Throw (Mantikora)
+            [49501] = true, -- Spear Throw (Mantikora)
+            [51231] = true, -- locomotion override (Mantikora)
+            [53836] = true, -- Spear Throw (Mantikora)
+            [49504] = true, -- Spear Throw (Mantikora)
+            [49505] = true, -- Spear Throw (Mantikora)
+            [49500] = true, -- Spear Throw (Mantikora)
+            [53834] = true, -- Get Spear Out (Mantikora)
+            [49404] = true, -- Rear Up (Mantikora)
+            [49406] = true, -- Rear Up (Mantikora)
+            [49405] = true, -- Rear Up (Mantikora)
+            [49402] = true, -- Tail Whip (Mantikora)
+            [49403] = true, -- Tail Whip (Mantikora)
+            [51242] = true, -- Enrage (Mantikora)
+            [50187] = true, -- Enrage (Mantikora)
+            [56687] = true, -- Enrage (Mantikora)
+            [56688] = true, -- Enrage (Mantikora)
+            [87712] = true, -- Enraged (Mantikora)
+            [56689] = true, -- Enraged (Mantikora)
+
+
+
+            [87417] = true, -- TEMP
+            [87416] = true, -- TEMP
 
             ---------------------------------
             -- MORROWIND DLC NPCS

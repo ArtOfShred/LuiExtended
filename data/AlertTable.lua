@@ -400,7 +400,7 @@ LUIE.AlertTable = {
 
     [4123] = { block = true, bs = true, dodge = true, priority = 3 }, -- Wing Slice (Harpy)
     [13515] = { block = true, dodge = true, priority = 3 }, -- Wind Gust (Harpy)
-    [8628] = { avoid = true, interrupt = true, skipcheck = true, refire = 8100, priority = 3 }, -- Charged Ground (Harpy)
+    [24604] = { avoid = true, interrupt = true, eventdetect = true, priority = 3 }, -- Charged Ground (Harpy)
     [4689] = { avoid = true, interrupt = true, priority = 3 }, -- Lightning Gale (Harpy)
 
     [43809] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true}, -- Shard Burst (Ice Wraith)
@@ -415,11 +415,17 @@ LUIE.AlertTable = {
     [7835] = { interrupt = true, notDirect = true, priority = 3, eventdetect = true }, -- Convalescence (Lamia)
     [7831] = { interrupt = true, notDirect = true, priority = 3, eventdetect = true, refire = 1500 }, -- Harmony (Lamia)
 
+    [3860] = { block = true, dodge = true, priority = 3 }, -- Pulverize (Lurcher)
+    [3855] = { block = true, bs = true, dodge = true, priority = 3 }, -- Crushing Limbs (Lurcher)
+    [3767] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1100 }, -- Choking Pollen (Lurcher)
+
     [5559] = { avoid = true, priority = 3 }, -- Icy Geyser (Nereid)
     [16040] = { avoid = true, interrupt = true, priority = 3, auradetect = true }, -- Hurricane (Nereid)
 
+    [24985] = { power = true, auradetect = true, priority = 3 }, -- Intimidating Roar (Ogre)
     [5881] = { block = true, bs = true, dodge = true, priority = 3 }, -- Smash (Ogre)
     [5256] = { block = true, priority = 3 }, -- Shockwave (Ogre)
+
 
     [53142] = { destroy = true, priority = 2, auradetect = true, refire = 350 }, -- Ice Pillar (Ogre Shaman)
     [64540] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Freeze Wounds (Ogre Shaman)
@@ -442,6 +448,25 @@ LUIE.AlertTable = {
 
     [48256] = { block = true, avoid = true, priority = 3 }, -- Boulder Toss (Troll - Ranged)
     [48282] = { interrupt = true, avoid = true, priority = 3, eventdetect = true }, -- Consuming Omen (Troll - Ranged)
+
+    [4309] = { block = true, avoid = true, priority = 3 }, -- Dying Blast (Wisp)
+
+    [7976] = { avoid = true, priority = 2 }, -- Rain of Wisps (Wispmother)
+
+    [75867] = { block = true, bs = true, dodge = true, priority = 2 }, -- Clobber (Minotaur)
+    [75917] = { block = true, dodge = true, eventdetect = true }, -- Ram (Minotaur)
+    [79541] = { block = true, dodge = true, priority = 2, auradetect = true }, -- Flying Leap (Minotaur)
+    [75925] = { power = true, auradetect = 2, priority = 2 }, -- Elemental Weapon (Minotaur)
+
+    [75951] = { avoid = true, priority = 2 }, -- Brimstone Hailfire (Minotaur Shaman)
+    [75955] = { avoid = true, priority = 2, eventdetect = true, refire = 1000 }, -- Pillars of Nirn (Minotaur Shaman)
+    [75994] = { power = true, priority = 2, auradetect = true, ignoreRefresh = true }, -- Molten Armor (Minotaur Shaman)
+
+    [49499] = { block = true, dodge = true, priority = 2 }, -- Spear Throw (Mantikora)
+    [49404] = { block = true, dodge = true, priority = 2 }, -- Rear Up (Mantikora)
+    [49402] = { block = true, dodge = true, priority = 2 }, -- Tail Whip (Mantikora)
+    [50187] = { power = true, priority = 2, auradetect = true }, -- Enrage (Mantikora)
+    [56689] = { power = true, priority = 2, auradetect = true }, -- Enraged (Mantikora)
 
     --------------------------------------------------
     -- MAIN QUEST ------------------------------------
