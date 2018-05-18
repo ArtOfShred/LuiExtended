@@ -12,6 +12,16 @@ local strings = {
     SI_BINDING_NAME_LUIE_COMMAND_READY_CHECK =           "Запустить проверку готовности",
     SI_BINDING_NAME_LUIE_COMMAND_HOME =                  "Переместиться в основной дом",
     SI_BINDING_NAME_LUIE_COMMAND_REGROUP =               "Перегруппироваться (Распустить & Собраться)",
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_1 =				 "Equip Outfit in Slot 1", -- TODO: Translate
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_2 =				 "Equip Outfit in Slot 2", -- TODO: Translate
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_3 =				 "Equip Outfit in Slot 3", -- TODO: Translate
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_4 =				 "Equip Outfit in Slot 4", -- TODO: Translate
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_5 =				 "Equip Outfit in Slot 5", -- TODO: Translate
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_6 =				 "Equip Outfit in Slot 6", -- TODO: Translate
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_7 =				 "Equip Outfit in Slot 7", -- TODO: Translate
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_8 =				 "Equip Outfit in Slot 8", -- TODO: Translate
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_9 =				 "Equip Outfit in Slot 9", -- TODO: Translate
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_10 =		     "Equip Outfit in Slot 10", -- TODO: Translate
 
     -- SlashCommands.lua
     SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE =                   "В очереди в кампанию <<1>>...",

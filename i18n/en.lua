@@ -10,6 +10,16 @@ local strings = {
     SI_BINDING_NAME_LUIE_COMMAND_READY_CHECK =           "Initiate Ready Check",
     SI_BINDING_NAME_LUIE_COMMAND_HOME =                  "Teleport to Primary Home",
     SI_BINDING_NAME_LUIE_COMMAND_REGROUP =               "Regroup (Disband & Reform)",
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_1 =				 "Equip Outfit in Slot 1",
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_2 =				 "Equip Outfit in Slot 2",
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_3 =				 "Equip Outfit in Slot 3",
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_4 =				 "Equip Outfit in Slot 4",
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_5 =				 "Equip Outfit in Slot 5",
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_6 =				 "Equip Outfit in Slot 6",
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_7 =				 "Equip Outfit in Slot 7",
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_8 =				 "Equip Outfit in Slot 8",
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_9 =				 "Equip Outfit in Slot 9",
+	SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_10 =		     "Equip Outfit in Slot 10",
 
     -- SlashCommands.lua
     SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE =                   "Queueing for <<1>>...",
