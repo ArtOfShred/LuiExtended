@@ -754,6 +754,27 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashFence,
             },
+			{
+                -- SlashOutfit
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_OUTFIT),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_OUTFIT_TP),
+                getFunc = function() return LUIE.SlashCommands.SV.SlashOutfit end,
+                setFunc = function(value) LUIE.SlashCommands.SV.SlashOutfit = value LUIE.SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = LUIE.SlashCommands.D.SlashOutfit,
+            },
+			{
+                -- SlashOutfit Confirm
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_SLASHCMDS_OUTFITCONFIRM)),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_OUTFITCONFIRM_TP),
+                getFunc = function() return LUIE.SlashCommands.SV.SlashOutfitConfirm end,
+                setFunc = function(value) LUIE.SlashCommands.SV.SlashOutfitConfirm = value end,
+                width = "full",
+                default = LUIE.SlashCommands.D.SlashOutfitConfirm,
+				disabled = function() return not LUIE.SlashCommands.SV.SlashOutfit end,
+            },
             {
                 -- TODO
                 type = "checkbox",
@@ -773,6 +794,16 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.SV.TempAlertCampaign = value end,
                 width = "full",
                 default = LUIE.D.TempAlertCampaign,
+            },
+			{
+                -- TODO
+                type = "checkbox",
+                name = "/Outfit - Show Alert (Temp Setting)",
+                tooltip = "Display an alert when the /outfit command is used.\nNote: This setting will be deprecated in the future when Outfit Alerts are implemented in Chat Announcements.",
+                getFunc = function() return LUIE.SV.TempAlertOutfit end,
+                setFunc = function(value) LUIE.SV.TempAlertOutfit = value end,
+                width = "full",
+                default = LUIE.D.TempAlertOutfit,
             },
         },
     }

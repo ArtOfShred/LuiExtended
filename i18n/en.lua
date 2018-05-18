@@ -60,6 +60,9 @@ local strings = {
     SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG =              "You cannot summon an assistant in a Battleground.",
     SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED =     "You have not unlocked <<1>>.",
     SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP =       "You must be in a group to initiate a ready check.",
+	SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID =				 "You must enter a valid outfit number to wear.",
+	SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED =				 "You have not unlocked Outfit Slot <<1>>.",
+	SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION =				 "You switch your outfit to: <<1>>.",
 
     -- InfoPanel.lua
     SI_LUIE_PNL_TRAINNOW =                               "Train Now",
@@ -548,6 +551,11 @@ local strings = {
     SI_LUIE_LAM_SLASHCMDS_FENCE_TP =                     "'/fence' Summon <<1>> (If unlocked).\n\t\t\t\t\tAlternate options: '/smuggler'",
     SI_LUIE_LAM_SLASHCMDS_READYCHECK =                   "Enable ( '/ready' ) Ready Check",
     SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP =                "Send a 'ready check' dialog to all group members.",
+	SI_LUIE_LAM_SLASHCMDS_OUTFIT =						 "Enable ( '/outfit' ) Outfit",
+	SI_LUIE_LAM_SLASHCMDS_OUTFIT_TP =					 "'/outfit' '#' Equip the outfit the slot entered.",
+	SI_LUIE_LAM_SLASHCMDS_OUTFITCONFIRM =				 "Display Outfit Confirmation Message",
+	SI_LUIE_LAM_SLASHCMDS_OUTFITCONFIRM_TP =			 "Display a chat announcement (and Alert if enabled when you switch outfits).", -- TODO: Update once temporary option is removed.
+	
     -- Module: Buffs & Debuffs
     SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK =                "Buffs & Debuffs Module",
     SI_LUIE_LAM_BUFF_HEADER_POSITION =                   "Position and Display Options",

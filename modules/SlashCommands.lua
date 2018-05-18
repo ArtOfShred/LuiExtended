@@ -36,6 +36,8 @@ SC.D = {
     SlashMerchant       = true,
     SlashFence          = true,
     SlashReadyCheck     = true,
+	SlashOutfit			= true,
+	SlashOutfitConfirm  = true,
 }
 SC.SV       = nil
 
@@ -931,6 +933,52 @@ function LUIE.SlashReadyCheck()
     ZO_SendReadyCheck()
 end
 
+function LUIE.SlashOutfit(option)
+
+	if option == "" or option == nil then
+		printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
+		if LUIE.SV.TempAlertOutfit then
+			callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID) )
+		end
+		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+		return
+	end
+	
+	local valid = tonumber(option)
+	if not valid or valid > 10 then
+		printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
+		if LUIE.SV.TempAlertOutfit then
+			callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID) )
+		end
+		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+		return
+	end
+	
+	local numOutfits = GetNumUnlockedOutfits()
+	
+	if valid > numOutfits then
+		printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
+		if LUIE.SV.TempAlertOutfit then
+			callAlert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
+		end
+		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+		return
+	end
+	
+	EquipOutfit(valid)
+	-- Display a confirmation message if allowed.
+	if SC.SV.SlashOutfitConfirm then
+		local name = GetOutfitName(valid)
+		if name == "" then 
+			name = strformat("<<1>> <<2>>", GetString(SI_CROWN_STORE_SEARCH_ADDITIONAL_OUTFITS), valid)
+		end
+		printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
+		if LUIE.SV.TempAlertOutfit then
+			callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
+		end
+	end
+end
+
 -- Temporary Development function
 function LUIE.SlashConsolidate()
     local consolidate = LUIE.SpellCastBuffs.SV.ExtraConsolidate
@@ -997,6 +1045,7 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/fence"]        = nil
     SLASH_COMMANDS["/ready"]        = nil
     SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck
+	SLASH_COMMANDS["/outfit"]		= nil
 
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
 
@@ -1079,4 +1128,7 @@ function SC.RegisterSlashCommands()
     if SC.SV.SlashReadyCheck then
         SLASH_COMMANDS["/ready"]        = LUIE.SlashReadyCheck
     end
+	if SC.SV.SlashOutfit then
+		SLASH_COMMANDS["/outfit"]		= LUIE.SlashOutfit
+	end
 end

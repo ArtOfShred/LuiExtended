@@ -38,6 +38,7 @@ LUIE.D = {
     HideXPBar                   = false,
     TempAlertHome               = false,
     TempAlertCampaign           = false,
+	TempAlertOutfit				= false,
     WelcomeVersion              = 0,
 
     -- Modules

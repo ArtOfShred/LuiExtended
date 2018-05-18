@@ -62,6 +62,9 @@ local strings = {
     SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG =              "Вы не можете призвать помощника на Поле сражения.",
     SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED =     "У вас не открыт <<1>>.",
     SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP =       "Вы должны быть в группе,чтобы запустить проверку готовности.",
+	SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID =				 "You must enter a valid outfit number to wear.", -- TODO: Translate
+	SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED =				 "You have not unlocked outfit slot <<1>>.", -- TODO: Translate
+	SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION =				 "You switch your outfit to: <<1>>.", -- TODO: Translate
 
     -- InfoPanel.lua
     SI_LUIE_PNL_TRAINNOW =                               "Покормить",
@@ -550,6 +553,11 @@ local strings = {
     SI_LUIE_LAM_SLASHCMDS_FENCE_TP =                     "'/fence' Призывает <<1>> (Если разблокировано).\n\t\t\t\t\tАльтернативный вариант: '/smuggler'",
     SI_LUIE_LAM_SLASHCMDS_READYCHECK =                   "( '/ready' ) Проверка готовности",
     SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP =                "Отправляет запрос готовности каждому члену группы.",
+	SI_LUIE_LAM_SLASHCMDS_OUTFIT =						 "Enable ( '/outfit' ) Outfit", -- TODO: Translate
+	SI_LUIE_LAM_SLASHCMDS_OUTFIT_TP =					 "'/outfit' '#' Equip the outfit the slot entered.", -- TODO: Translate
+	SI_LUIE_LAM_SLASHCMDS_OUTFITCONFIRM =				 "Display Outfit Confirmation Message", -- TODO: Translate
+	SI_LUIE_LAM_SLASHCMDS_OUTFITCONFIRM_TP =			 "Display a chat announcement (and Alert if enabled when you switch outfits).", -- TODO: Update once temporary option is removed. -- TODO: Translate
+	
     -- Module: Buffs & Debuffs
     SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK =                "Включить модуль Баффов & Дебаффов",
     SI_LUIE_LAM_BUFF_HEADER_POSITION =                   "Настройки положения и отображения",
