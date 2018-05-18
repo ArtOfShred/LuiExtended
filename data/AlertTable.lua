@@ -426,7 +426,6 @@ LUIE.AlertTable = {
     [5881] = { block = true, bs = true, dodge = true, priority = 3 }, -- Smash (Ogre)
     [5256] = { block = true, priority = 3 }, -- Shockwave (Ogre)
 
-
     [53142] = { destroy = true, priority = 2, auradetect = true, refire = 350 }, -- Ice Pillar (Ogre Shaman)
     [64540] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Freeze Wounds (Ogre Shaman)
     [53137] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Freeze Wounds (Ogre Shaman)
@@ -467,6 +466,24 @@ LUIE.AlertTable = {
     [49402] = { block = true, dodge = true, priority = 2 }, -- Tail Whip (Mantikora)
     [50187] = { power = true, priority = 2, auradetect = true }, -- Enrage (Mantikora)
     [56689] = { power = true, priority = 2, auradetect = true }, -- Enraged (Mantikora)
+
+    -- DWEMER
+
+    [16031] = { avoid = true, interrupt = true, priority = 3 }, -- Ricochet Wave (Dwemer Sphere)
+    [7520] = { block = true, bs = true, dodge = true, priority = 3 }, -- Steam Wall (Dwemer Sphere)
+    [7544] = { block = true, dodge = true, priority = 3, eventdetect = true }, -- Quake (Dwemer Sphere)
+
+    [11247] = { block = true, dodge = true, priority = 2, eventdetect = true }, -- Sweeping Spin (Dwemer Centurion)
+    [11246] = { avoid = true, priority = 2, eventdetect = true, refire = 2000 }, -- Steam Breath (Dwemer Centurion)
+
+    [20507] = { block = true, bs = true, dodge = true, priority = 3 }, -- Double Strike (Dwemer Spider)
+
+    [64479] = { block = true, avoid = true, priority = 3 }, -- Thunderbolt (Dwemer Sentry)
+
+    [88668] = { block = true, avoid = true, priority = 3 }, -- Impulse Mine (Dwemer Arquebus)
+    [85270] = { interrupt = true, priority = 3, refire = 1500 }, -- Shock Barrage (Dwemer Arquebus)
+    [85319] = { avoid = true, priority = 3 }, -- Siege Ballista (Dwemer Arquebus)
+    [85326] = { interrupt = true, priority = 3, eventdetect = true, refire = 1000, notDirect = true }, -- Polarizing Field (Dwemer Arquebus)
 
     --------------------------------------------------
     -- MAIN QUEST ------------------------------------

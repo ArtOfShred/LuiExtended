@@ -8065,27 +8065,27 @@ debugAuras = {
             [64489] = true, -- Find Turret -- Dwemer Sentry
             [64508] = true, -- Find Turret -- Dwemer Sentry
             [64460] = true, -- Static Shield -- Dwemer Sentry
-            [64479] = true, -- Thunderbolt -- Dwemer Sentry
-            [64543] = true, -- Thunderbolt -- Dwemer Sentry
             [70134] = true, -- Static Shield -- Dwemer Sentry
             [68790] = true, -- Static Shield Explosion -- Dwemer Sentry
+            [64479] = true, -- Thunderbolt -- Dwemer Sentry
+            [64543] = true, -- Thunderbolt -- Dwemer Sentry
 
-            --[7484] = true, -- Blade -- Dwemer Sphere
-            --[7485] = true, -- Dart -- Dwemer Sphere
-            --[16031] = true, -- Ricochet Wave -- Dwemer Sphere
-            --[29832] = true, -- Ricochet Wave -- Dwemer Sphere
-            --[7520] = true, -- Steam Wall -- Dwemer Sphere
-            --[84216] = true, -- Steam Wall -- Dwemer Sphere
-            --[7544] = true, -- Quake -- Dwemer Sphere
-            --[46053] = true, -- Quake -- Dwemer Sphere
+            [7484] = true, -- Blade -- Dwemer Sphere
+            [7485] = true, -- Dart -- Dwemer Sphere
+            [16031] = true, -- Ricochet Wave -- Dwemer Sphere
+            [29832] = true, -- Ricochet Wave -- Dwemer Sphere
+            [7520] = true, -- Steam Wall -- Dwemer Sphere
+            [84216] = true, -- Steam Wall -- Dwemer Sphere
+            [7544] = true, -- Quake -- Dwemer Sphere
+            [46053] = true, -- Quake -- Dwemer Sphere
 
             [7719] = true, -- Shocking Touch -- Dwemer Spider
             [20507] = true, -- Double Strike -- Dwemer Spider
             [20508] = true, -- Double Strike -- Dwemer Spider
-            [7717] = true, -- Detonation -- Dwemer Spider
-            [15206] = true, -- Detonation -- Dwemer Spider
-            [84019] = true, -- Detonation -- Dwemer Spider
-            [13536] = true, -- Detonation -- Dwemer Spider
+            --[7717] = true, -- Detonation -- Dwemer Spider
+            --[15206] = true, -- Detonation -- Dwemer Spider
+            --[84019] = true, -- Detonation -- Dwemer Spider
+            --[13536] = true, -- Detonation -- Dwemer Spider
 
             -- INSECTS
 
@@ -8684,11 +8684,11 @@ debugAuras = {
             [91013] = true, -- Shock Barrage
             [85319] = true, -- Siege Ballista
             [91093] = true, -- Split Bolt
+            [91087] = true, -- Split Bolt
+            [91092] = true, -- Split Bolt
             [91094] = true, -- Split Bolt
             [91095] = true, -- Split Bolt
             [91096] = true, -- Split Bolt
-            [91087] = true, -- Split Bolt
-            [91092] = true, -- Split Bolt
             [85326] = true, -- Polarizing Field
             [85327] = true, -- Polarizing Field
             [85334] = true, -- Polarizing Field

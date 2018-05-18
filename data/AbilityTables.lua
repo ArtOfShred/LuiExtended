@@ -686,6 +686,12 @@ A.Skill_Crushing_Limbs              = 3855
 A.Skill_Pillars_of_Nirn             = 75955
 A.Skill_Claw                        = 27922
 
+-- Dwemer
+A.Skill_Static_Shield               = 64463
+A.Skill_Dart                        = 7485
+A.Skill_Split_Bolt                  = 91093
+A.Skill_Turret_Mode                 = 71045
+
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------
 -- ---------------------------------------------------

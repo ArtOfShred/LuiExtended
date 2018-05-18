@@ -392,7 +392,7 @@ E.EffectGroundDisplay = {
     [59587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = A.Set_Lord_Warden_Dusk, buff = true, debuff = false, ground = false }, -- Lord Warden (Lord Warden)
     [59568] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = A.Set_Malubeth_the_Scourger, buff = true, debuff = false, ground = false }, -- Scourge Harvest (Malubeth)
     [59508] = { icon = 'esoui/art/icons/achievement_ic_020.dds', name = A.Set_Maw_of_the_Infernal, buff = true, debuff = false, ground = false }, -- Banished Cells Item Set (Maw of the Infernal)
-    [81036] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_spider_heal.dds', buff = true, debuff = false, ground = false }, -- Sentinel of Rkugamz
+    [81036] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds', buff = true, debuff = false, ground = false }, -- Sentinel of Rkugamz
     [80954] = { icon = 'esoui/art/icons/achievement_ic_017.dds', name = A.Set_Shadowrend, buff = true, debuff = false, ground = false }, -- Shadowrend Summon (Shadowrend)
     [59497] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Spawn of Mephala (Spawn of Mephala)
     [80523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', buff = false, debuff = false, ground = true }, -- Stormfist (Stormfist)
@@ -2202,8 +2202,8 @@ E.EffectOverride = {
     [80544] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds' }, -- Sellistrix (Sellistrix)
     [80549] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds' }, -- Sellistrix (Sellistrix)
     [81036] = { hide = true }, -- Sentinel of Rkugamz
-    [81038] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_spider_heal.dds' }, -- Sentinel of Rkugamz
-    [81041] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_spider_heal.dds' }, -- Sentinel of Rkugamz
+    [81038] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds' }, -- Sentinel of Rkugamz
+    [81041] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds' }, -- Sentinel of Rkugamz
     [80955] = { hide = true }, -- Shadowrend (Shadowrend)
     [80954] = { hide = true }, -- Shadowrend Summon (Shadowrend)
     [80980] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_headbutt.dds', name = A.Skill_Headbutt }, -- Shadowrend (Shadowrend)
@@ -4965,11 +4965,59 @@ E.EffectOverride = {
     [88323] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_blast_furnace.dds', hide = true }, -- Blast Furnace (Iron Atronach)
 
     -- Dwemer
-    [64508] = { icon = 'esoui/art/icons/ability_warrior_030.dds', name = 'Turret' }, -- Find Turret (Dwemer Sentry)
+    [7484] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_blade.dds' }, -- Blade (Dwemer Sphere)
+    [7485] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_dart.dds' }, -- Dart (Dwemer Sphere)
+    [16031] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Richochet Wave (Dwemer Sphere)
+    [29832] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Richochet Wave (Dwemer Sphere)
+    [7520] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_steam_wall.dds' }, -- Steam Wall (Dwemer Sphere)
+    [84216] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_steam_wall.dds' }, -- Steam Wall (Dwemer Sphere)
+    [7544] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_quake.dds' }, -- Quake (Dwemer Sphere)
+    [46053] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_quake.dds' }, -- Quake (Dwemer Sphere)
+
+    [11245] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_axe.dds' }, -- Axe (Dwemer Centurion)
+    [13783] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_hammer.dds' }, -- Hammer (Dwemer Centurion)
+    [11247] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_sweeping_spin.dds' }, -- Sweeping Spin (Dwemer Centurion)
+    [43554] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_sweeping_spin.dds' }, -- Sweeping Spin (Dwemer Centurion)
+    [11262] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_sweeping_spin.dds' }, -- Sweeping Spin (Dwemer Centurion)
+    [11246] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_steam_breath.dds', hide = true }, -- Steam Breath (Dwemer Centurion)
+    [11282] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_steam_breath.dds' }, -- Steam Breath (Dwemer Centurion)
+
+    [7719] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_shocking_touch.dds' }, -- Shocking Touch (Dwemer Spider)
+    [20507] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_double_strike.dds' }, -- Double Strike (Dwemer Spider)
+    [20508] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_double_strike.dds' }, -- Double Strike (Dwemer Spider)
+
+    [64423] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_ranged.dds', hide = true }, -- Sparks (Dwemer Sentry)
+    [84312] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds' }, -- Static Shield (Dwemer Sentry)
+    [70133] = { hide = true }, -- Static Shield
+    [64556] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds', name = A.Skill_Static_Shield }, -- Static Eruption (Dwemer Sentry)
+    [64460] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds' }, -- Static Shield (Dwemer Sentry)
+    [70134] = { hide = true }, -- Static Shield (Dwemer Sentry)
+    [68790] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds', name = A.Skill_Static_Shield }, -- Static Shield Explosion (Dwemer Sentry)
+    [64479] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds' }, -- Thunderbolt (Dwemer Sentry)
+    [64543] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds', hide = true }, -- Thunderbolt (Dwemer Sentry)
+    [64489] = { hide = true }, -- Find Turret (Dwemer Sentry)
+    [64508] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_turret_mode.dds', name = A.Skill_Turret_Mode }, -- Turret Mode (Dwemer Sentry)
+
+    [85242] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensphere_dart.dds', name = A.Skill_Dart, hide = true }, -- Quick Shot (Dwemer Arquebus)
+    [85255] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_shock_blast.dds' }, -- Shock Blast (Dwemer Arquebus)
+    [88668] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_impulse_mine.dds' }, -- Impulse Mine (Dwemer Arquebus)
+    [88728] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_impulse_mine.dds' }, -- Impulse Mine (Dwemer Arquebus)
+    [85270] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_torrent.dds' }, -- Shock Barrage (Dwemer Arquebus)
+    [85288] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_torrent.dds', hide = true }, -- Shock Barrage (Dwemer Arquebus)
+    [91013] = { hide = true }, -- Shock Barrage (Dwemer Arquebus)
+    [85319] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_split_bolt.dds', name = A.Skill_Split_Bolt, hide = true }, -- Siege Ballista (Dwemer Arquebus)
+    [91093] = { hide = true }, -- Split Bolt (Dwemer Arquebus)
+    [91094] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_split_bolt.dds' }, -- Split Bolt (Dwemer Arquebus)
+    [91095] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_split_bolt.dds' }, -- Split Bolt (Dwemer Arquebus)
+    [91096] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_split_bolt.dds' }, -- Split Bolt (Dwemer Arquebus)
+
+    [85326] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_polarizing_field.dds', hide = true }, -- Polarizing Field (Dwemer Arquebus)
+    [85327] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_polarizing_field.dds', duration = 0 }, -- Polarizing Field (Dwemer Arquebus)
+    [85334] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds', hide = true }, -- Polarizing Field (Dwemer Arquebus)
+
+    ------------ FIX LATER ------------
     [27333] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_overcharge.dds' }, -- Overcharge (Dwemer Spider)
     [20206] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_overcharge.dds' }, -- Overcharge (Dwemer Spider)
-    [64423] = { hide = true }, -- Sparks (Dwemer Sentry)
-    [64543] = { hide = true }, -- Thunderbolt (Dwemer Sentry)
     [19997] = { hide = true }, -- Static Field (Dwemer Spider)
     [20506] = { hide = true }, -- Overcharge Trigger (Dwemer Spider) (Duplicate Aura)
     [20221] = { hide = true }, -- Overcharge (Dwemer Spider) (Duplicate Aura)
@@ -5704,7 +5752,7 @@ E.EffectOverride = {
     [90073] = { hide = true }, -- Blinding Light
     [89753] = { hide = true }, -- Shocking Rake (Old Rust-Eye - Khartag Point)
     [89754] = { icon = 'LuiExtended/media/icons/abilities/ability_dreugh_shocking_rake.dds' }, -- Shocking Rake (Old Rust-Eye - Khartag Point)
-    [86865] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencolossus_powered_up.dds' }, -- Powered Up (Centurion Mthgrazzen - A Melodic Mistake)
+    [86865] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_powered_up.dds' }, -- Powered Up (Centurion Mthgrazzen - A Melodic Mistake)
     [86633] = { hide = true }, -- Barrier Break (A Melodic Mistake)
     [85264] = { hide = true }, -- Sacrifice (Divine Inquiries)
     [85265] = { hide = true }, -- Sacrifice (Divine Inquiries)
@@ -5736,8 +5784,8 @@ E.EffectOverride = {
     [14374] = { hide = true }, -- Generic Dwemer Smoke Plume
     [93221] = { hide = true }, -- Surprise!
     [16910] = { hide = true }, -- Corruption Aura (Objections and Obstacles)
-    [89756] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_drop.dds', name = 'Centurion Drop', unbreakable = 1 }, -- Guardian Shockwave (Mzanchend Guardian -- Vvardenfell -- The Magister Makes a Move)
-    [89757] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_drop.dds', name = 'Centurion Drop' }, -- Guardian Shockwave (Mzanchend Guardian -- Vvardenfell -- The Magister Makes a Move)
+    [89756] = { icon = 'esoui/art/icons/achievement_wrothgar_006.dds', name = 'Centurion Drop', unbreakable = 1 }, -- Guardian Shockwave (Mzanchend Guardian -- Vvardenfell -- The Magister Makes a Move)
+    [89757] = { icon = 'esoui/art/icons/achievement_wrothgar_006.dds', name = 'Centurion Drop' }, -- Guardian Shockwave (Mzanchend Guardian -- Vvardenfell -- The Magister Makes a Move)
     [84273] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_sweeping_spin.dds' }, -- Sweeping Spin (Mzanchend Guardian -- Vvardenfell -- The Magister Makes a Move)
     [87738] = { hide = true }, -- Powder Bomb (The Heart of a Telvanni)
     [89564] = { hide = true }, -- Knockout (The Heart of a Telvanni)
@@ -6033,7 +6081,7 @@ E.FakeExternalDebuffs = {
     [88030] = {icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks.dds', name = 'Falling Rocks', duration = 1500}, -- Falling Rocks -- Deadfall
     [87348] = {icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds', name = 'Water Geyser', duration = 1500}, -- Water Geyser Burst (Vvardenfell -- A Hireling of House Telvanni)
     [87350] = {icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds', name = 'Water Geyser', duration = 2000}, -- Water Geyser Burst (Vvardenfell -- A Hireling of House Telvanni)
-    [89756] = {icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_drop.dds', name = 'Centurion Drop', duration = 2000}, -- Guardian Shockwave (Mzanchend Guardian -- Vvardenfell -- The Magister Makes a Move)
+    [89756] = {icon = 'esoui/art/icons/achievement_wrothgar_006.dds', name = 'Centurion Drop', duration = 2000}, -- Guardian Shockwave (Mzanchend Guardian -- Vvardenfell -- The Magister Makes a Move)
 }
 
 -- Fake buffs applied onto the player by self (also supports debuffs with debuff = true)
