@@ -2,102 +2,6 @@
 -- These id's don't show up on the debug event for EVENT_COMBAT_EVENT or EVENT_EFFECT_CHANGED
 debugAuras = {
 
--------------------------------------
-
-            -- Temporary (for debugging NPC abilities)
-
-            [46519] = true, -- Charging Manuever
-            [101181] = true, -- Charging Manuever
-            [57484] = true, -- Maor Gallop
-            [46522] = true, -- Charging Manuever
-            [46630] = true, -- Purge
-            [46631] = true, -- Purge
-            [41347] = true, -- Defensive Posture
-            [41351] = true, -- Defensive Posture
-            [63257] = true, -- Resolving Vigor
-            [63255] = true, -- Resolving Vigor
-            [63256] = true, -- Resolving Vigor
-            [30043] = true, -- Dark Deal
-            [30045] = true, -- Dark Exchange
-            [30046] = true, -- Dark Exchange Heal
-            [30406] = true, -- Critical Surge
-            [62156] = true, -- Major Brutality
-            [96474] = true, -- Surge Heal
-            [39769] = true, -- Brawler
-            [39771] = true, -- Brawler
-            [39774] = true, -- Brawler
-            [39772] = true, -- Brawler
-            [39770] = true, -- Brawler Bleed
-            [39892] = true, -- Forward Momentum
-            [62398] = true, -- Forward Momentum
-            [62397] = true, -- Momentum
-            [62400] = true, -- Major Brutality
-            [39984] = true, -- Dizzying Swing
-            [39986] = true, -- Dizzying Swing
-            [39987] = true, -- Dizzying Swing
-            [39942] = true, -- Reverse Slice
-            [39946] = true, -- Reverse Slice
-            [39945] = true, -- Reverse Slice
-            [80412] = true, -- Absorption Field
-            [29881] = true, -- Absorption Field
-            [62269] = true, -- Absorption Field
-            [62267] = true, -- Absorption Field
-
-            [81908] = true, -- Some Craglorn stuff
-            [81904] = true, -- Some Craglorn stuff
-            [81900] = true, -- Some Craglorn stuff
-            [81914] = true, -- Some Craglorn stuff
-            [81939] = true, -- Some Craglorn stuff
-            [81898] = true, -- Some Craglorn stuff
-
-            [33743] = true, -- Reflective Scale
-            [23856] = true, -- Hardened Armor
-            [31827] = true, -- Hardened Armor
-            [23857] = true, -- Hardened Armor Damage Return
-            [61834] = true, -- Major Ward
-            [61835] = true, -- Major Resolve
-
-            [73872] = true, -- Catapult (Orsinium)
-
-            [36337] = true, -- Shadow Cloak
-            [36340] = true, -- Shadow Cloak
-            [77753] = true, -- Clairvoyance Fx
-
-            [33670] = true, -- Take Flight
-            [33669] = true, -- Take Flight
-            [33668] = true, -- Take Flight
-            [48758] = true, -- CC Immunity
-
-            -- Sorc stuff --
-
-            [62174] = true,
-            [82801] = true,
-            [30244] = true,
-            [80497] = true,
-            [80496] = true,
-            [62173] = true,
-            [81393] = true,
-            [81391] = true,
-            [40689] = true,
-            [40599] = true,
-            [40690] = true,
-            [30245] = true,
-            [40945] = true,
-            [44552] = true,
-            [40842] = true,
-            [40944] = true,
-            [81392] = true,
-            [40600] = true,
-            [81394] = true,
-            [40687] = true,
-            [40688] = true,
-            [40744] = true,
-            [40746] = true,
-            [57480] = true,
-            [101177] = true,
-            [40946] = true,
-            [00000] = true,
-
             -- POTIONS --
             -------------------------------------
 
@@ -8166,14 +8070,14 @@ debugAuras = {
             [70134] = true, -- Static Shield -- Dwemer Sentry
             [68790] = true, -- Static Shield Explosion -- Dwemer Sentry
 
-            [7484] = true, -- Blade -- Dwemer Sphere
-            [7485] = true, -- Dart -- Dwemer Sphere
-            [16031] = true, -- Ricochet Wave -- Dwemer Sphere
-            [29832] = true, -- Ricochet Wave -- Dwemer Sphere
-            [7520] = true, -- Steam Wall -- Dwemer Sphere
-            [84216] = true, -- Steam Wall -- Dwemer Sphere
-            [7544] = true, -- Quake -- Dwemer Sphere
-            [46053] = true, -- Quake -- Dwemer Sphere
+            --[7484] = true, -- Blade -- Dwemer Sphere
+            --[7485] = true, -- Dart -- Dwemer Sphere
+            --[16031] = true, -- Ricochet Wave -- Dwemer Sphere
+            --[29832] = true, -- Ricochet Wave -- Dwemer Sphere
+            --[7520] = true, -- Steam Wall -- Dwemer Sphere
+            --[84216] = true, -- Steam Wall -- Dwemer Sphere
+            --[7544] = true, -- Quake -- Dwemer Sphere
+            --[46053] = true, -- Quake -- Dwemer Sphere
 
             [7719] = true, -- Shocking Touch -- Dwemer Spider
             [20507] = true, -- Double Strike -- Dwemer Spider
@@ -8680,11 +8584,6 @@ debugAuras = {
             [56688] = true, -- Enrage (Mantikora)
             [87712] = true, -- Enraged (Mantikora)
             [56689] = true, -- Enraged (Mantikora)
-
-
-
-            [87417] = true, -- TEMP
-            [87416] = true, -- TEMP
 
             ---------------------------------
             -- MORROWIND DLC NPCS

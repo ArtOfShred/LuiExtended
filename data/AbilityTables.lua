@@ -684,6 +684,7 @@ A.Skill_Frost_Ray                   = 81794
 A.Skill_Consuming_Omen              = 48282
 A.Skill_Crushing_Limbs              = 3855
 A.Skill_Pillars_of_Nirn             = 75955
+A.Skill_Claw                        = 27922
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------
