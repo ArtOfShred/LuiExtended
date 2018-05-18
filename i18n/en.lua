@@ -553,8 +553,6 @@ local strings = {
     SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP =                "Send a 'ready check' dialog to all group members.",
 	SI_LUIE_LAM_SLASHCMDS_OUTFIT =						 "Enable ( '/outfit' ) Outfit",
 	SI_LUIE_LAM_SLASHCMDS_OUTFIT_TP =					 "'/outfit' '#' Equip the outfit the slot entered.",
-	SI_LUIE_LAM_SLASHCMDS_OUTFITCONFIRM =				 "Display Outfit Confirmation Message",
-	SI_LUIE_LAM_SLASHCMDS_OUTFITCONFIRM_TP =			 "Display a chat announcement (and Alert if enabled when you switch outfits).", -- TODO: Update once temporary option is removed.
 	
     -- Module: Buffs & Debuffs
     SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK =                "Buffs & Debuffs Module",

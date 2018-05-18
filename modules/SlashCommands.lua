@@ -37,7 +37,6 @@ SC.D = {
     SlashFence          = true,
     SlashReadyCheck     = true,
 	SlashOutfit			= true,
-	SlashOutfitConfirm  = true,
 }
 SC.SV       = nil
 
@@ -966,16 +965,14 @@ function LUIE.SlashOutfit(option)
 	end
 	
 	EquipOutfit(valid)
-	-- Display a confirmation message if allowed.
-	if SC.SV.SlashOutfitConfirm then
-		local name = GetOutfitName(valid)
-		if name == "" then 
-			name = strformat("<<1>> <<2>>", GetString(SI_CROWN_STORE_SEARCH_ADDITIONAL_OUTFITS), valid)
-		end
-		printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
-		if LUIE.SV.TempAlertOutfit then
-			callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
-		end
+	-- Display a confirmation message.
+	local name = GetOutfitName(valid)
+	if name == "" then 
+		name = strformat("<<1>> <<2>>", GetString(SI_CROWN_STORE_SEARCH_ADDITIONAL_OUTFITS), valid)
+	end
+	printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
+	if LUIE.SV.TempAlertOutfit then
+		callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
 	end
 end
 

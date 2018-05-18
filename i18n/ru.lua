@@ -555,8 +555,6 @@ local strings = {
     SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP =                "Отправляет запрос готовности каждому члену группы.",
 	SI_LUIE_LAM_SLASHCMDS_OUTFIT =						 "Enable ( '/outfit' ) Outfit", -- TODO: Translate
 	SI_LUIE_LAM_SLASHCMDS_OUTFIT_TP =					 "'/outfit' '#' Equip the outfit the slot entered.", -- TODO: Translate
-	SI_LUIE_LAM_SLASHCMDS_OUTFITCONFIRM =				 "Display Outfit Confirmation Message", -- TODO: Translate
-	SI_LUIE_LAM_SLASHCMDS_OUTFITCONFIRM_TP =			 "Display a chat announcement (and Alert if enabled when you switch outfits).", -- TODO: Update once temporary option is removed. -- TODO: Translate
 	
     -- Module: Buffs & Debuffs
     SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK =                "Включить модуль Баффов & Дебаффов",

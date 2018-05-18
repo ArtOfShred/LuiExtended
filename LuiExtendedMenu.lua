@@ -764,17 +764,6 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashOutfit,
             },
-			{
-                -- SlashOutfit Confirm
-                type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_SLASHCMDS_OUTFITCONFIRM)),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_OUTFITCONFIRM_TP),
-                getFunc = function() return LUIE.SlashCommands.SV.SlashOutfitConfirm end,
-                setFunc = function(value) LUIE.SlashCommands.SV.SlashOutfitConfirm = value end,
-                width = "full",
-                default = LUIE.SlashCommands.D.SlashOutfitConfirm,
-				disabled = function() return not LUIE.SlashCommands.SV.SlashOutfit end,
-            },
             {
                 -- TODO
                 type = "checkbox",
