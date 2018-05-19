@@ -565,7 +565,7 @@ local strings = {
     SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP =                "Отправляет запрос готовности каждому члену группы.",
 	SI_LUIE_LAM_SLASHCMDS_OUTFIT =						 "Enable ( '/outfit' ) Outfit", -- TODO: Translate
 	SI_LUIE_LAM_SLASHCMDS_OUTFIT_TP =					 "'/outfit' '#' Equip the outfit the slot entered.", -- TODO: Translate
-	
+
     -- Module: Buffs & Debuffs
     SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK =                "Включить модуль Баффов & Дебаффов",
     SI_LUIE_LAM_BUFF_HEADER_POSITION =                   "Настройки положения и отображения",

@@ -691,6 +691,7 @@ A.Skill_Static_Shield               = 64463
 A.Skill_Dart                        = 7485
 A.Skill_Split_Bolt                  = 91093
 A.Skill_Turret_Mode                 = 71045
+A.Skill_Overcharge                  = 27333
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

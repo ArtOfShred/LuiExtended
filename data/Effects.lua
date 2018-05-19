@@ -1433,6 +1433,13 @@ E.EffectSourceOverride = {
     [89282] = {source = 'Exploding Spider'}, -- Spider Explosion {A Web of Trouble}
 }
 
+-- If one of these id's is applied then we set the buffSlot for ON_EFFECT_CHANGED to be a single name identifier to prevent more than one aura from appearing. Only works with unlimited duration effects.
+E.EffectMerge = {
+
+    [A.Skill_Overcharge]  = "MERGED_EFFECT_OVERCHARGE",
+
+}
+
 -- Effects we prevent from being prominent - the idea here is to stop some auras with the same name from clashing in prominent buffs & debuffs.
 E.EffectNoProminent = {
     -- Nightblade
@@ -4989,10 +4996,10 @@ E.EffectOverride = {
     [64423] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_ranged.dds', hide = true }, -- Sparks (Dwemer Sentry)
     [84312] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds' }, -- Static Shield (Dwemer Sentry)
     [70133] = { hide = true }, -- Static Shield
-    [64556] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds', name = A.Skill_Static_Shield }, -- Static Eruption (Dwemer Sentry)
+    [64556] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', name = A.Skill_Static_Shield }, -- Static Eruption (Dwemer Sentry)
     [64460] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds' }, -- Static Shield (Dwemer Sentry)
     [70134] = { hide = true }, -- Static Shield (Dwemer Sentry)
-    [68790] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds', name = A.Skill_Static_Shield }, -- Static Shield Explosion (Dwemer Sentry)
+    [68790] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', name = A.Skill_Static_Shield }, -- Static Shield Explosion (Dwemer Sentry)
     [64479] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds' }, -- Thunderbolt (Dwemer Sentry)
     [64543] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds', hide = true }, -- Thunderbolt (Dwemer Sentry)
     [64489] = { hide = true }, -- Find Turret (Dwemer Sentry)
@@ -5015,12 +5022,29 @@ E.EffectOverride = {
     [85327] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_polarizing_field.dds', duration = 0 }, -- Polarizing Field (Dwemer Arquebus)
     [85334] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds', hide = true }, -- Polarizing Field (Dwemer Arquebus)
 
+    [20238] = { hide = true }, -- Move Back (Dwemer Spider - Overcharge Synergy)
+    [19970] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_static_field.dds' }, -- Static Field (Dwemer Spider)
+    [19997] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_static_field.dds', hide = true }, -- Static Field (Dwemer Spider)
+    [20506] = { hide = true }, -- Overcharge Trigger (Dwemer Spider - Overcharge Synergy)
+    [27333] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds' }, -- Overcharge Trigger (Dwemer Spider - Overcharge Synergy)
+    [27458] = { hide = true }, -- tell others (Dwemer Spider - Overcharge Synergy)
+    --[20207] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds' }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    [20206] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds' }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    [20221] = { hide = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+
+    [20505] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds', hide = true }, -- Overcharge (Overcharge)
+    [20222] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds', hide = true }, -- Overcharge (Overcharge)
+    [20504] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Overcharge)
+    [20220] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Overcharge)
+    [52679] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Overcharge)
+    [52680] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Overcharge)
+
     ------------ FIX LATER ------------
-    [27333] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_overcharge.dds' }, -- Overcharge (Dwemer Spider)
-    [20206] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_overcharge.dds' }, -- Overcharge (Dwemer Spider)
-    [19997] = { hide = true }, -- Static Field (Dwemer Spider)
-    [20506] = { hide = true }, -- Overcharge Trigger (Dwemer Spider) (Duplicate Aura)
-    [20221] = { hide = true }, -- Overcharge (Dwemer Spider) (Duplicate Aura)
+    --[27333] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds' }, -- Overcharge (Dwemer Spider)
+    --[20206] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds' }, -- Overcharge (Dwemer Spider)
+    --[19997] = { hide = true }, -- Static Field (Dwemer Spider)
+    --[20506] = { hide = true }, -- Overcharge Trigger (Dwemer Spider) (Duplicate Aura)
+    --[20221] = { hide = true }, -- Overcharge (Dwemer Spider) (Duplicate Aura)
 
     -- Insects
     [5278] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_bite.dds' }, -- Bite (Assassin Beetle)
@@ -5925,11 +5949,11 @@ E.EffectOverride = {
     [86606] = { hide = true }, -- Steam Breath (Guardian of Bthark)
     [86607] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_steam_breath.dds' }, -- Steam Breath (Guardian of Bthark)
     [90192] = { hide = true }, -- Overcharge (Nchuleftingth)
-    [90212] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_overcharge.dds' }, -- Overcharge (Nchuleftingth)
+    [90212] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds' }, -- Overcharge (Nchuleftingth)
     [90214] = { hide = true }, -- Overcharge (Nchuleftingth)
-    [90215] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Nchuleftingth)
-    [90216] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Nchuleftingth)
-    [90217] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Nchuleftingth)
+    [90215] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds' }, -- Overcharge (Nchuleftingth)
+    [90216] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds' }, -- Overcharge (Nchuleftingth)
+    [90217] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds' }, -- Overcharge (Nchuleftingth)
     [71919] = { hide = true}, -- Turret Occupied (Nchuleftingth)
     [71920] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_turret_mode.dds' }, -- Turret Occupied (Nchuleftingth)
     [86566] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_fire_rune.dds' }, -- Fire Runes (Friar Hadelar)
@@ -5941,7 +5965,7 @@ E.EffectOverride = {
     [51634] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_shocking_touch.dds' }, -- Shocking Touch (Steamreaver - Nchuleftingth)
     [86680] = { hide = true }, -- Auditory Signal (Steamreaver)
     [86691] = { hide = true }, -- Overcharge (Nchuleftingth)
-    [86690] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_overcharge.dds' }, -- Overcharge (Nchuleftingth)
+    [86690] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds' }, -- Overcharge (Nchuleftingth)
     [86688] = { hide = true }, -- Overcharge (Nchuleftingth)
     [86689] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Nchuleftingth)
     [92136] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_charge_wire_crystal.dds', name = 'Overcharged Shock', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Laser Snare (Dwarven Charge-Wire)

@@ -1824,6 +1824,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
 
     local forcedType = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].forcedContainer or nil
+    effectSlot = E.EffectMerge[effectName] or effectSlot
 
     if unitTag == "reticleover" and abilityId == 92428 and not IsUnitPlayer('reticleover') then
         return

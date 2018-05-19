@@ -8033,7 +8033,7 @@ debugAuras = {
 
             -- DWEMER
 
-            [20238] = true, -- Charge -- Synergy (Dwemer Spider)
+            [20238] = true, -- Move Back -- Synergy (Dwemer Spider)
             [19970] = true, -- Static Field -- Synergy (Dwemer Spider)
             [19997] = true, -- Static Field -- Synergy (Dwemer Spider)
             [20506] = true, -- Overcharge Trigger -- Synergy (Dwemer Spider)
