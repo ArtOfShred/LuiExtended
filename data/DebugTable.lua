@@ -2,7 +2,8 @@
 -- These id's don't show up on the debug event for EVENT_COMBAT_EVENT or EVENT_EFFECT_CHANGED
 debugAuras = {
 
-            -- POTIONS --
+            -------------------------------------
+            -- POTIONS --------------------------
             -------------------------------------
 
             -- Crafted Potions (2 Traits)
@@ -67,7 +68,7 @@ debugAuras = {
             [63681] = true, -- Major Endurance (... of Stamina)
             -- (no... of Stun)
             [79850] = true, -- Major Vitality (... of Vitality)
-            -- (no... of Vulnerability)
+            [79846] = true, -- Minor Vulnerability (... of Minor Vulnerability)
             [64569] = true, -- Major Savagery (... of Weapon Critical)
             [64554] = true, -- Major Brutality (... of Weapon Power)
 
@@ -108,7 +109,7 @@ debugAuras = {
             [92416] = true, -- Unstoppable (Gold Coast Swift Survivor Elixir)
 
             -------------------------------------
-            -- POTION UP FRONT EFFECTS
+            -- POTION UP FRONT EFFECTS ----------
             -------------------------------------
 
             -- Crafted Potions (2 Traits)
@@ -141,7 +142,7 @@ debugAuras = {
             [92414] = true, -- Crown Survivor's Elixir (Gold Coast Swift Survivor Elixir)
 
             -------------------------------------
-            -- POISONS --
+            -- POISONS --------------------------
             -------------------------------------
 
             -- Crafted Poisons (2 Traits)
@@ -236,7 +237,7 @@ debugAuras = {
             -- (no Gradual Ravage Health Poison)
             [79726] = true, -- Minor Vulnerability (Protection-Reversing Poison)
             [79727] = true, -- Minor Protection (Protection-Reversing Poison)
-            -- (no Vulnerability Poison)
+            [79720] = true, -- Minor Vulnerability (Vulnerability Poison)
             [79854] = true, -- Minor Defile (Vitality-Draining Poison)
             [79855] = true, -- Minor Vitality (Vitality-Draining Poison)
             [79862] = true, -- Minor Defile (Defiling Poison)
@@ -262,7 +263,7 @@ debugAuras = {
             [88463] = true, -- Hindrance (Crown Trapping Poison)
 
             -------------------------------------
-            -- FOOD & DRINK --
+            -- FOOD & DRINK ---------------------
             -------------------------------------
 
             -- General Events
@@ -443,7 +444,7 @@ debugAuras = {
             [92478] = true, -- Increase Health Regen
 
             -------------------------------------
-            -- MISC CONSUMABLES --
+            -- MISC CONSUMABLES -----------------
             -------------------------------------
 
             -- Experience Bonuses
@@ -488,7 +489,7 @@ debugAuras = {
             [88374] = true, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
 
             -------------------------------------
-            -- MEMENTOS --
+            -- MEMENTOS -------------------------
             -------------------------------------
 
             [26829] = true, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
@@ -578,7 +579,7 @@ debugAuras = {
             [101872] = true, -- _CRWN Dragon Priest Memento 3 (Bone Dragon Summons Focus)
 
             -------------------------------------
-            -- PETS --
+            -- NON-COMBAT PETS ------------------
             -------------------------------------
 
             --[76364] = true, -- _CRWN_5s
@@ -590,7 +591,7 @@ debugAuras = {
             --[81301] = true, -- _CRWN_Badger_EatCritter
 
             -------------------------------------
-            -- OTHER COLLECTIBLES --
+            -- OTHER COLLECTIBLES ---------------
             -------------------------------------
 
             [77645] = true, -- Stealth (Pirharri the Smuggler)
@@ -598,7 +599,7 @@ debugAuras = {
             [77630] = true, -- Stun For Costumes, 4s (Various Polymorphs)
 
             -------------------------------------
-            -- ENCHANTS --
+            -- ENCHANTS -------------------------
             -------------------------------------
 
             -- Jewelry Enchants
@@ -631,7 +632,7 @@ debugAuras = {
             [21230] = true, -- Berserker (Glyph of Weapon Damage)
 
             -------------------------------------
-            -- STATUS EFFECT PROCS --
+            -- STATUS EFFECT PROCS --------------
             -------------------------------------
 
             [18084] = true, -- Burning (Fire Status Effect)
@@ -646,7 +647,7 @@ debugAuras = {
             [95134] = true, -- Concussion (Shock Status Effect)
 
             -------------------------------------
-            -- EQUIPMENT --
+            -- EQUIPMENT ------------------------
             -------------------------------------
 
             -- Weapons
@@ -1788,7 +1789,7 @@ debugAuras = {
             [29114] = true, -- Footman's Fortune (of the Footman)
             [29096] = true, -- Minor Mending (of the Healer)
 
-            -- DISGUISES
+            -- Disguises
 
             [46281] = true, -- Necromancer Disguise (Bloodthorn Disguse)
             [31766] = true, -- Disguised (Colovian Uniform)
@@ -1820,7 +1821,7 @@ debugAuras = {
             [43722] = true, -- First Auridon Marine Disguise (Vulkhel Guard Marine Disguise)
 
             -------------------------------------
-            -- CHAMPION POINTS --
+            -- CHAMPION POINTS ------------------
             -------------------------------------
 
             -- The Steed
@@ -1946,7 +1947,7 @@ debugAuras = {
             [65133] = true, -- Major Heroism (The Ritual 120 - Last Stand)
 
             -------------------------------------
-            -- PLAYER EFFECTS --
+            -- PLAYER EFFECTS -------------------
             -------------------------------------
 
             -- ROLL DODGE
@@ -2000,8 +2001,6 @@ debugAuras = {
             [33442] = true, -- Sprint Drain
             [41703] = true, -- Sprint
             [41704] = true, -- Sprint
-
-
 
             -- BLOCK
             [14890] = true, -- Block
@@ -2074,19 +2073,16 @@ debugAuras = {
             [38542] = true, -- Taunt
 
             -- DISGUISE EFFECTS
-
             [50602] = true, -- Disguised
             [26237] = true, -- Disguise Warning Area
             [26238] = true, -- Disguise Warning Area
             [25584] = true, -- Discovered
             [25582] = true, -- Remove Disguise
             [26472] = true, -- Remove Disguise
-
             [25602] = true, -- Suspicious
             [25603] = true, -- Begin
             [25604] = true, -- Interact Complete
             [26223] = true, -- Remove Suspicious
-
             --[13371] = true, -- Acting Suspicious
             [13372] = true, -- Spotted
 
@@ -2111,7 +2107,6 @@ debugAuras = {
             [89978] = true, -- Target Skeleton (Target Dummy)
             --[10298] = true, -- Boss (Target Dummy)
             --[15954] = true, -- Boss (Target Dummy)
-
             [89445] = true, -- Create Blacksmithing Set Stati (Attunable Blacksmithing Station)
             [89469] = true, -- 68235 Stun (Attunable Blacksmithing Station)
             [89643] = true, -- Create Clothier Set Stati (Attunable Clothier Station)
@@ -2122,9 +2117,9 @@ debugAuras = {
             [89654] = true, -- 68235 Stun (Attunable Woodworking Station)
             [89338] = true, -- ALL Furniture Plan Book (Crafting Book - PTS Only)
 
-            --------------------------
-            -- WORLD EVENTS
-            --------------------------
+            -------------------------------------
+            -- WORLD EVENTS ---------------------
+            -------------------------------------
 
             -- Daedric Anchor
             [13603] = true, -- CON_Destealth
@@ -2173,9 +2168,9 @@ debugAuras = {
             [51505] = true, -- Portal Spawn
             [51507] = true, -- Targetable On
 
-            --------------------------
-            -- DRAGONKNIGHT PASSIVES
-            --------------------------
+            -------------------------------------
+            -- DRAGONKNIGHT PASSIVES ------------
+            -------------------------------------
 
             -- Ardent Flame
             [29424] = true, -- Combustion (Rank 1)
@@ -2225,9 +2220,9 @@ debugAuras = {
             [45009] = true, -- Helping Hands (Rank 2)
             [45010] = true, -- Helping Hands
 
-            --------------------------
-            -- DRAGONKNIGHT ACTIVE ABILITIES
-            --------------------------
+            -------------------------------------
+            -- DRAGONKNIGHT ACTIVES -------------
+            -------------------------------------
 
             [23806] = true, -- Lava Whip (Lava Whip - Rank 1)
             [23808] = true, -- Off Balance (Lava Whip - Rank 1)
@@ -2502,9 +2497,9 @@ debugAuras = {
             [17878] = true, -- Corrosive Armor (Corrosive Armor - Rank 1)
             [17879] = true, -- Corrosive Armor (Corrosive Armor - Rank 1)
 
-            --------------------------
-            -- NIGHTBLADE PASSIVES
-            --------------------------
+            -------------------------------------
+            -- NIGHTBLADE PASSIVES --------------
+            -------------------------------------
 
             -- Assassination
             [36616] = true, -- Master Assassin (Rank 1)
@@ -2552,9 +2547,9 @@ debugAuras = {
             [45145] = true, -- Transfer (Rank 2)
             [45146] = true, -- Transfer
 
-            --------------------------
-            -- NIGHTBLADE ACTIVES
-            --------------------------
+            -------------------------------------
+            -- NIGHTBLADE ACTIVES ---------------
+            -------------------------------------
 
             [43706] = true, -- Sense Weakness (Assassin's Blade - All Morphs)
             [33386] = true, -- Assassin's Blade (Assassin's Blade)
@@ -2863,9 +2858,9 @@ debugAuras = {
             [35463] = true, -- Soul Tether (Soul Tether)
             [35461] = true, -- Soul Leech (Soul Tether)
 
-            --------------------------
-            -- SORCERER PASSIVES
-            --------------------------
+            -------------------------------------
+            -- SORCERER PASSIVES ----------------
+            -------------------------------------
 
             -- Dark Magic
             [31386] = true, -- Unholy Knowledge (Rank 1)
@@ -2911,9 +2906,9 @@ debugAuras = {
             [31425] = true, -- Expert Mage (Rank 1)
             [45195] = true, -- Expert Mage (Rank 2)
 
-            --------------------------
-            -- SORCERER ACTIVES
-            --------------------------
+            -------------------------------------
+            -- SORCERER ACTIVES -----------------
+            -------------------------------------
 
             [43714] = true, -- Crystal Shard (Crystal Shard)
 
@@ -3262,9 +3257,9 @@ debugAuras = {
             [24805] = true, -- Overload End (Energy Overload)
             [29740] = true, -- Energy Overload (Energy Overload)
 
-            --------------------------
-            -- TEMPLAR PASSIVES
-            --------------------------
+            -------------------------------------
+            -- TEMPLAR PASSIVES -----------------
+            -------------------------------------
 
             -- Aedric Spear
             [31698] = true, -- Piercing Spear (Rank 1)
@@ -3312,9 +3307,9 @@ debugAuras = {
             [45202] = true, -- Master Ritualist (Rank 2)
             [45203] = true, -- Soul Trap
 
-            --------------------------
-            -- TEMPLAR ACTIVES
-            --------------------------
+            -------------------------------------
+            -- TEMPLAR ACTIVES ------------------
+            -------------------------------------
 
             [26114] = true, -- Puncturing Strikes (Puncturing Strikes - Rank 1)
             [102904] = true, -- Puncturing Strikes (Puncturing Strikes - Rank 1)
@@ -3644,9 +3639,9 @@ debugAuras = {
             [22228] = true, -- Practiced Incantation (Practiced Incantation - Rank 1)
             [26383] = true, -- Practiced Incantation (Practiced Incantation - Rank 1)
 
-            --------------------------
-            -- WARDEN PASSIVES
-            --------------------------
+            -------------------------------------
+            -- WARDEN PASSIVES ------------------
+            -------------------------------------
 
             -- Animal Companions
             [86064] = true, -- Bond With Nature (Rank 1)
@@ -3692,9 +3687,9 @@ debugAuras = {
             [86195] = true, -- Piercing Cold (Rank 1)
             [86196] = true, -- Piercing Cold (Rank 2)
 
-            --------------------------
-            -- WARDEN ACTIVES
-            --------------------------
+            -------------------------------------
+            -- WARDEN ACTIVES -------------------
+            -------------------------------------
 
             [85995] = true, -- Dive (Dive)
 
@@ -4004,9 +3999,9 @@ debugAuras = {
             [90942] = true, -- Permafrost Stack Counter (Permafrost)
             [90943] = true, -- Permafrost (Permafrost)
 
-            --------------------------
-            -- UNARMED
-            --------------------------
+            -------------------------------------
+            -- UNARMED PASSIVES -----------------
+            -------------------------------------
 
             [23604] = true, -- Light Attack
             [18429] = true, -- Heavy Attack (Unarmed)
@@ -4015,9 +4010,9 @@ debugAuras = {
             [18431] = true, -- Heavy Attack
             [60772] = true, -- Heavy Attack (Unarmed)
 
-            --------------------------
-            -- TWO HANDED PASSIVES
-            --------------------------
+            -------------------------------------
+            -- TWO HANDED PASSIVES --------------
+            -------------------------------------
 
             [16037] = true, -- Light Attack
             [16041] = true, -- Heavy Attack (2H)
@@ -4051,9 +4046,9 @@ debugAuras = {
             [45448] = true, -- Battle Rush (Rank 2)
             [45450] = true, -- Battle Rush
 
-            --------------------------
-            -- TWO HANDED ACTIVES
-            --------------------------
+            -------------------------------------
+            -- TWO HANDED ACTIVES ---------------
+            -------------------------------------
 
             [28279] = true, -- Uppercut (Uppercut)
 
@@ -4129,9 +4124,9 @@ debugAuras = {
             [83240] = true, -- Berserker Rage (Berserker Rage)
             [83241] = true, -- Berserker Rage (Berserker Rage)
 
-            --------------------------
-            -- ONE HAND AND SHIELD PASSIVES
-            --------------------------
+            -------------------------------------
+            -- ONE HAND AND SHIELD PASSIVES -----
+            -------------------------------------
 
             [15435] = true, -- Light Attack
             [15279] = true, -- Heavy Attack (1H)
@@ -4155,9 +4150,9 @@ debugAuras = {
             [29422] = true, -- Battlefield Mobility (Rank 1)
             [45473] = true, -- Battlefield Mobility (Rank 2)
 
-            --------------------------
-            -- ONE HAND AND SHIELD ACTIVES
-            --------------------------
+            -------------------------------------
+            -- ONE HAND AND SHIELD ACTIVES ------
+            -------------------------------------
 
             [28306] =  true, -- Puncture (Puncture)
             [28307] =  true, -- Major Fracture (Puncture)
@@ -4226,9 +4221,9 @@ debugAuras = {
 
             [83310] = true, -- Shield Discipline (Shield Discipline)
 
-            --------------------------
-            -- DUAL WIELD PASSIVES
-            --------------------------
+            -------------------------------------
+            -- DUAL WIELD PASSIVES --------------
+            -------------------------------------
 
             [16499] = true, -- Light Attack
             [16420] = true, -- Heavy Attack (Dual Wield)
@@ -4257,9 +4252,9 @@ debugAuras = {
             [45482] = true, -- Twin Blade and Blunt (Rank 2)
             [45483] = true, -- Twin Blade and Blunt Bleed
 
-            --------------------------
-            -- DUAL WIELD ACTIVES
-            --------------------------
+            -------------------------------------
+            -- DUAL WIELD ACTIVES ---------------
+            -------------------------------------
 
             [28607] = true, -- Flurry (Flurry)
             [81355] = true, -- Flurry (Flurry)
@@ -4348,9 +4343,9 @@ debugAuras = {
             [85181] = true, -- Thrive in Chaos (Thrive in Chaos)
             [85180] = true, -- Thrive in Chaos (Thrive in Chaos)
 
-            --------------------------
-            -- BOW PASSIVES
-            --------------------------
+            -------------------------------------
+            -- BOW PASSIVES ---------------------
+            -------------------------------------
 
             [16688] = true, -- Light Attack
             [16691] = true, -- Heavy Attack (Bow)
@@ -4378,9 +4373,9 @@ debugAuras = {
             [45498] = true, -- Hasty Retreat (Rank 2)
             [98490] = true, -- Major Expedition
 
-            --------------------------
-            -- BOW ACTIVES
-            --------------------------
+            -------------------------------------
+            -- BOW ACTIVES ----------------------
+            -------------------------------------
 
             [28882] = true, -- Snipe (Snipe)
 
@@ -4457,9 +4452,9 @@ debugAuras = {
             [85458] = true, -- Ballista (Ballista)
             [85462] = true, -- Ballista (Ballista)
 
-            --------------------------
-            -- DESTRUCTION STAFF PASSIVES
-            --------------------------
+            -------------------------------------
+            -- DESTRUCTION STAFF PASSIVES -------
+            -------------------------------------
 
             [16277] = true, -- Light Attack
             [16261] = true, -- Heavy Attack (Frost)
@@ -4504,9 +4499,9 @@ debugAuras = {
             [45514] = true, -- Destruction Expert -- Rank 1
             [45515] = true, -- Magicka Restore
 
-            --------------------------
-            -- DESTRUCTION STAFF ACTIVES
-            --------------------------
+            -------------------------------------
+            -- DESTRUCTION STAFF ACTIVES --------
+            -------------------------------------
 
             [46340] = true, -- Force Shock (Force Shock - Rank 1)
             [46341] = true, -- Force Shock (Force Shock - Rank 1)
@@ -4688,9 +4683,9 @@ debugAuras = {
             [83684] = true, -- Eye of Frost (Eye of the Storm - Rank 1)
             [83685] = true, -- Eye of Frost (Eye of the Storm - Rank 1)
 
-            --------------------------
-            -- RESTORATION STAFF PASSIVES
-            --------------------------
+            -------------------------------------
+            -- RESTORATION STAFF PASSIVES -------
+            -------------------------------------
 
             [16145] = true, -- Light Attack
             [16212] = true, -- Heavy Attack
@@ -4718,9 +4713,9 @@ debugAuras = {
             [30981] = true, -- Restoration Master (Rank 1)
             [45524] = true, -- Restoration Master (Rank 2)
 
-            --------------------------
-            -- RESTORATION STAFF ACTIVES
-            --------------------------
+            -------------------------------------
+            -- RESTORATION STAFF ACTIVES --------
+            -------------------------------------
 
             [52515] = true, -- Grand Healing Fx (Grand Healing - All Morphs)
             [28385] = true, -- Grand Healing (Grand Healing - Rank 1)
@@ -4804,9 +4799,9 @@ debugAuras = {
             [85154] = true, -- Major Force (Light's Champion - Rank 1)
             [85155] = true, -- Major Protection (Light's Champion - Rank 1)
 
-            --------------------------
-            -- ARMOR PASSIVES
-            --------------------------
+            -------------------------------------
+            -- ARMOR PASSIVES -------------------
+            -------------------------------------
 
             -- LIGHT ARMOR
             [29639] = true, -- Evocation (Rank 1)
@@ -4851,9 +4846,9 @@ debugAuras = {
             [29791] = true, -- Rapid Mending (Rank 1)
             [45529] = true, -- Rapid Mending (Rank 2)
 
-            --------------------------
-            -- ARMOR ACTIVES
-            --------------------------
+            -------------------------------------
+            -- ARMOR ACTIVES --------------------
+            -------------------------------------
 
             -- LIGHT ARMOR
             [29338] = true, -- Annulment (Annulment)
@@ -4894,9 +4889,9 @@ debugAuras = {
             [63119] = true, -- Major Resolve (Unstoppable)
             [63120] = true, -- Major Ward (Unstoppable)
 
-            ------------------------------
-            -- LEGERDEMAIN PASSIVES
-            ------------------------------
+            -------------------------------------
+            -- LEGERDEMAIN PASSIVES -------------
+            -------------------------------------
 
             [63799] = true, -- Improved Hiding (Rank 1)
             [63800] = true, -- Improved Hiding (Rank 2)
@@ -4923,9 +4918,9 @@ debugAuras = {
             [63817] = true, -- Kickback (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
             [63818] = true, -- Kickback (Rank 4) -- NOTE: No actual aura or event displayed for this, listed for completion
 
-            ------------------------------
-            -- SOUL MAGIC PASSIVES
-            ------------------------------
+            -------------------------------------
+            -- SOUL MAGIC PASSIVES --------------
+            -------------------------------------
 
             [39266] = true, -- Soul Shatter (Rank 1)
             [39267] = true, -- Soul Shatter
@@ -4943,9 +4938,9 @@ debugAuras = {
             [45580] = true, -- Soul Lock (Rank 2)
             [45582] = true, -- Soul Trap
 
-            ------------------------------
-            -- SOUL MAGIC ACTIVES
-            ------------------------------
+            -------------------------------------
+            -- SOUL MAGIC ACTIVES ---------------
+            -------------------------------------
 
             [26768] = true, -- Soul Trap (Soul Trap)
             [34720] = true, -- Soul Trap (Soul Trap)
@@ -4970,9 +4965,9 @@ debugAuras = {
             [40414] = true, -- Shatter Soul (Shatter Soul)
             [40416] = true, -- Shatter Soul (Shatter Soul)
 
-            ------------------------------
-            -- VAMPIRE PASSIVES
-            ------------------------------
+            -------------------------------------
+            -- VAMPIRE PASSIVES -----------------
+            -------------------------------------
 
             [35770] = true, -- Vampirism Base
             [40360] = true, -- Vampirism
@@ -5023,9 +5018,9 @@ debugAuras = {
 
             [33090] = true, -- Dark Stalker (Rank 1)
 
-            ------------------------------
-            -- VAMPIRE ACTIVES
-            ------------------------------
+            -------------------------------------
+            -- VAMPIRE ACTIVES ------------------
+            -------------------------------------
 
             [80226] = true, -- Reduce Stage Timer (Drain Essence - All Morphs)
             [32893] = true, -- Drain Essence (Drain Essence)
@@ -5065,9 +5060,9 @@ debugAuras = {
             [38934] = true, -- Devouring Swarm (Devouring Swarm)
             [38936] = true, -- Devouring Swarm (Devouring Swarm)
 
-            ------------------------------
-            -- VAMPIRE QUEST
-            ------------------------------
+            -------------------------------------
+            -- VAMPIRE QUEST --------------------
+            -------------------------------------
 
             [44670] = true, -- Vamp Theater Head Grab Stun
             [42821] = true, -- VampInit_LamaeFirstFeed
@@ -5096,9 +5091,9 @@ debugAuras = {
 
             [72946] = true, -- Stun
 
-            ------------------------------
-            -- WEREWOLF PASSIVES
-            ------------------------------
+            -------------------------------------
+            -- WEREWOLF PASSIVES ----------------
+            -------------------------------------
 
             [35658] = true, -- Lycanthrophy
             [40521] = true, -- Sanies Lupinus (Player Bite)
@@ -5143,9 +5138,9 @@ debugAuras = {
             [46137] = true, -- Call of the Pack (Rank 2)
             [80282] = true, -- Call of the Pack
 
-            ------------------------------
-            -- WEREWOLF ACTIVES
-            ------------------------------
+            -------------------------------------
+            -- WEREWOLF ACTIVES -----------------
+            -------------------------------------
 
             [32632] = true, -- Pounce (Pounce)
             [32645] = true, -- Pounce (Pounce)
@@ -5256,9 +5251,9 @@ debugAuras = {
             [47083] = true, -- Werewolf Berserker (Werewolf Berserker)
             [89147] = true, -- Werewolf Berserker Bleed (Werewolf Berserker)
 
-            ------------------------------
-            -- WEREWOLF QUEST EVENTS
-            ------------------------------
+            -------------------------------------
+            -- WEREWOLF QUEST EVENTS ------------
+            -------------------------------------
 
             [39421] = true, -- Q4961 HircineStun
             [65429] = true, -- Q4961 Songamdir Werewolf
@@ -5287,9 +5282,9 @@ debugAuras = {
             [73126] = true, -- Werewolf Appearance
             [73181] = true, -- Werewolf Appearance
 
-            ------------------------------
-            -- DARK BROTHERHOOD PASSIVES
-            ------------------------------
+            -------------------------------------
+            -- DARK BROTHERHOOD PASSIVES --------
+            -------------------------------------
 
             [78219] = true, -- Blade of Woe (Rank 1)
             [76325] = true, -- Blade of Woe
@@ -5324,9 +5319,9 @@ debugAuras = {
             [77401] = true, -- Spectral Assassin (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
             [80636] = true, -- Spectral Assassin
 
-            ------------------------------
-            -- FIGHTERS GUILD PASSIVES
-            ------------------------------
+            -------------------------------------
+            -- FIGHTERS GUILD PASSIVES ----------
+            -------------------------------------
 
             [29062] = true, -- Intimidating Presence (Rank 1)
 
@@ -5345,9 +5340,9 @@ debugAuras = {
 
             [35804] = true, -- Bounty Hunter (Rank 1)
 
-            -------------------------------
-            -- FIGHTERS GUILD ACTIVES
-            -------------------------------
+            -------------------------------------
+            -- FIGHTERS GUILD ACTIVES -----------
+            -------------------------------------
 
             [35721] = true, -- Silver Bolts (Silver Bolts - Rank 1)
             [35736] = true, -- Silver Bolts (Silver Bolts - Rank 1)
@@ -5432,9 +5427,9 @@ debugAuras = {
             [40160] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
             [62314] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
 
-            ------------------------------
-            -- MAGES GUILD PASSIVES
-            ------------------------------
+            -------------------------------------
+            -- MAGES GUILD PASSIVES -------------
+            -------------------------------------
 
             [29061] = true, -- Persuasive Will (Rank 1)
 
@@ -5452,9 +5447,9 @@ debugAuras = {
             [45607] = true, -- Might of the Guild (Rank 2)
             [65541] = true, -- Empower
 
-            ------------------------------
-            -- MAGES GUILD ACTIVES
-            ------------------------------
+            -------------------------------------
+            -- MAGES GUILD ACTIVES --------------
+            -------------------------------------
 
             [77928] = true, -- Major Prophecy (Magelight)
             [30920] = true, -- Magelight (Magelight)
@@ -5546,9 +5541,9 @@ debugAuras = {
             [63473] = true, -- Shooting Star (Shooting Star)
             [63471] = true, -- Shooting Star (Shooting Star)
 
-            ------------------------------
-            -- PSIJIC ORDER PASSIVES
-            ------------------------------
+            -------------------------------------
+            -- PSIJIC ORDER PASSIVES ------------
+            -------------------------------------
 
             [103793] = true, -- See the Unseen (See the Unseen - Rank 1)
 
@@ -5576,9 +5571,9 @@ debugAuras = {
 
             [103972] = true, -- Deliberation (Deliberation - Rank 1)
 
-            ------------------------------
-            -- PSIJIC ORDER ACTIVE ABILITIES
-            ------------------------------
+            -------------------------------------
+            -- PSIJIC ORDER ACTIVES -------------
+            -------------------------------------
 
             [103488] = true, -- Time Stop (Time Stop)
             [109176] = true, -- Time Stop (Time Stop)
@@ -5676,9 +5671,9 @@ debugAuras = {
             [103564] = true, -- Temporal Guard (Temporal Guard)
             [108641] = true, -- Temporal Guard (Temporal Guard)
 
-            ------------------------------
-            -- THIEVES GUILD PASSIVES
-            ------------------------------
+            -------------------------------------
+            -- THIEVES GUILD PASSIVES -----------
+            -------------------------------------
 
             [74580] = true, -- Finders Keepers (Rank 1)
 
@@ -5700,9 +5695,9 @@ debugAuras = {
 
             [76453] = true, -- Veil of Shadows (Rank 1)
 
-            ------------------------------
-            -- UNDAUNTED PASSIVES --------
-            ------------------------------
+            -------------------------------------
+            -- UNDAUNTED PASSIVES ---------------
+            -------------------------------------
 
             [55584] = true, -- Undaunted Command (Rank 1)
             [55606] = true, -- Undaunted Command
@@ -5716,9 +5711,9 @@ debugAuras = {
             [55366] = true, -- Undaunted Mettle (Rank 1)
             [55386] = true, -- Undaunted Mettle (Rank 2)
 
-            ------------------------------
-            -- UNDAUNTED ACTIVES ---------
-            ------------------------------
+            -------------------------------------
+            -- UNDAUNTED ACTIVES ----------------
+            -------------------------------------
 
             [108782] = true, -- Synergy Damage Bonus (Blood Altar - Blood Funnel Synergy)
             [39500] = true, -- Blood Funnel (Blood Altar - Blood Funnel Synergy)
@@ -5863,9 +5858,9 @@ debugAuras = {
             [42039] = true, -- Energy Orb (Energy Orb)
             [42040] = true, -- Energy Orb (Energy Orb)
 
-            ---------------------------------------------
-            -- ASSAULT PASSIVES -------------------------
-            ---------------------------------------------
+            -------------------------------------
+            -- ASSAULT PASSIVES -----------------
+            -------------------------------------
 
             [39248] = true, -- Continuous Attack (Rank 1)
             [39249] = true, -- Continuous Attack
@@ -5878,9 +5873,9 @@ debugAuras = {
             [45619] = true, -- Combat Frenzy (Rank 2)
             [45620] = true, -- Combat Frenzy
 
-            ---------------------------------------------
-            -- ASSAULT ACTIVES --------------------------
-            ---------------------------------------------
+            -------------------------------------
+            -- ASSAULT ACTIVES ------------------
+            -------------------------------------
 
             [38566] = true, -- Rapid Maneuver (Rapid Maneuver)
             [101161] = true, -- Major Expedition (Rapid Maneuver)
@@ -5960,9 +5955,9 @@ debugAuras = {
             [63571] = true, -- Minor Ward (Sturdy Horn)
             [95094] = true, -- Sturdy (Sturdy Horn)
 
-            ---------------------------------------------
-            -- SUPPORT PASSIVES -------------------------
-            ---------------------------------------------
+            -------------------------------------
+            -- SUPPORT PASSIVES -----------------
+            -------------------------------------
 
             [39255] = true, -- Magicka Aid (Rank 1)
             [45622] = true, -- Magicka Aid (Rank 2)
@@ -5971,9 +5966,9 @@ debugAuras = {
             [39261] = true, -- Battle Resurrection (Rank 1)
             [45625] = true, -- Battle Resurrection (Rank 2)
 
-            ---------------------------------------------
-            -- SUPPORT ACTIVES --------------------------
-            ---------------------------------------------
+            -------------------------------------
+            -- SUPPORT ACTIVES ------------------
+            -------------------------------------
 
             [41735] = true, -- Only 1 Siege Shield (Siege Shield - All Morphs)
             [38570] = true, -- Siege Shield (Siege Shield)
@@ -6047,11 +6042,11 @@ debugAuras = {
             [40240] = true, -- Replenishing Barrier (Replenishing Barrier)
             [40241] = true, -- Replenishing Barrier (Replenishing Barrier)
 
-            ---------------------------------------------
-            -- RACIALS ----------------------------------
-            ---------------------------------------------
+            -------------------------------------
+            -- RACIALS --------------------------
+            -------------------------------------
 
-            -- BRETON
+            -- Breton
             [36247] = true, -- Opportunist (Rank 1)
             [35995] = true, -- Gift of Magnus (Rank 1)
             [45259] = true, -- Gift of Magnus (Rank 2)
@@ -6063,7 +6058,7 @@ debugAuras = {
             [45263] = true, -- Magicka Mastery (Rank 2)
             [45264] = true, -- Magicka Mastery (Rank 3)
 
-            -- ORC
+            -- Orc (Orsimer)
             [33293] = true, -- Craftsman (Rank 1)
             [33301] = true, -- Brawny (Rank 1)
             [45307] = true, -- Brawny (Rank 2)
@@ -6075,7 +6070,7 @@ debugAuras = {
             [45311] = true, -- Swift Warrior (Rank 2)
             [45312] = true, -- Swift Warrior (Rank 3)
 
-            -- REDGUARD
+            -- Redguard
             [84680] = true, -- Wayfarer (Rank 1)
             [36009] = true, -- Exhilaration (Rank 1)
             [45277] = true, -- Exhilaration (Rank 2)
@@ -6090,7 +6085,7 @@ debugAuras = {
             [45315] = true, -- Adrenaline Rush (Rank 3)
             [45316] = true, -- Adrenaline Rush
 
-            -- ALTMER
+            -- High Elf (Altmer)
             [35965] = true, -- Highborn (Rank 1)
             [35993] = true, -- Spellcharge (Rank 1)
             [45273] = true, -- Spellcharge (Rank 2)
@@ -6099,7 +6094,7 @@ debugAuras = {
             [45275] = true, -- Elemental Talent (Rank 2)
             [45276] = true, -- Elemental Talent (Rank 3)
 
-            -- BOSMER
+            -- Wood Elf (Bosmer)
             [36008] = true, -- Acrobat (Rank 1)
             [64279] = true, -- Y'ffre's Endurance (Rank 1)
             [64280] = true, -- Y'ffre's Endurance (Rank 2)
@@ -6111,7 +6106,7 @@ debugAuras = {
             [45295] = true, -- Stealthy (Rank 2)
             [45296] = true, -- Stealthy (Rank 3)
 
-            -- KHAJIIT
+            -- Khajiit
             [36063] = true, -- Cutpurse (Rank 1)
             [70386] = true, -- Nimble (Rank 1)
             [70388] = true, -- Nimble (Rank 2)
@@ -6120,7 +6115,7 @@ debugAuras = {
             [45299] = true, -- Carnage (Rank 2)
             [45301] = true, -- Carnage (Rank 3)
 
-            -- ARGONIAN
+            -- Argonian
             [36582] = true, -- Amphibian (Rank 1)
             [36568] = true, -- Resourceful (Rank 1)
             [49151] = true, -- Resourceful (Rank 1)
@@ -6144,7 +6139,7 @@ debugAuras = {
             [45257] = true, -- Quick Mend (Rank 2)
             [45258] = true, -- Quick Mend (Rank 3)
 
-            -- DUNMER
+            -- Dark Elf (Dunmer)
             [36588] = true, -- Ashlander (Rank 1)
             [36591] = true, -- Dynamic (Rank 1)
             [45265] = true, -- Dynamic (Rank 2)
@@ -6156,7 +6151,7 @@ debugAuras = {
             [45271] = true, -- Destructive Ancestry (Rank 2)
             [45272] = true, -- Destructive Ancestry (Rank 3)
 
-            -- NORD
+            -- Nord
             [36626] = true, -- Reveler (Rank 1)
             [36064] = true, -- Stalwart (Rank 1)
             [45297] = true, -- Stalwart (Rank 2)
@@ -6168,7 +6163,7 @@ debugAuras = {
             [45305] = true, -- Rugged (Rank 2)
             [45306] = true, -- Rugged (Rank 3)
 
-            -- IMPERIAL
+            -- Imperial
             [36312] = true, -- Diplomat (Rank 1)
             [50903] = true, -- Tough (Rank 1)
             [50906] = true, -- Tough (Rank 2)
@@ -6181,11 +6176,11 @@ debugAuras = {
             [45294] = true, -- Red Diamond
 
 
-            ---------------------------------------------
-            -- CRAFTING  --------------------------------
-            ---------------------------------------------
+            -------------------------------------
+            -- CRAFTING  ------------------------
+            -------------------------------------
 
-            -- ALCHEMY
+            -- Alchemy
             [45542] = true, -- Solvent Proficiency (Rank 0/1) -- NOTE: No actual aura or event displayed for this, listed for completion
             [45543] = true, -- Solvent Proficiency (Rank 0/1) -- NOTE: No actual aura or event displayed for this, listed for completion
             [45547] = true, -- Solvent Proficiency (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
@@ -6214,7 +6209,7 @@ debugAuras = {
             [47832] = true, -- Snakeblood (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [47834] = true, -- Snakeblood (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
 
-            -- BLACKSMITHING
+            -- Blacksmithing
             [47276] = true, -- Metalworking (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
             [47277] = true, -- Metalworking (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [47278] = true, -- Metalworking (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
@@ -6247,7 +6242,7 @@ debugAuras = {
             [48167] = true, -- Temper Expertise (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [48168] = true, -- Temper Expertise (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
 
-            -- CLOTHING
+            -- Clothing
             [47288] = true, -- Tailoring (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
             [47289] = true, -- Tailoring (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [47290] = true, -- Tailoring (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
@@ -6280,7 +6275,7 @@ debugAuras = {
             [48197] = true, -- Tannin Expertise (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [48198] = true, -- Tannin Expertise (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
 
-            -- ENCHANTING
+            -- Enchanting
             [46758] = true, -- Aspect Improvement (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
             [46759] = true, -- Aspect Improvement (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [46760] = true, -- Aspect Improvement (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
@@ -6309,7 +6304,7 @@ debugAuras = {
             [46768] = true, -- Runestone Extraction (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [46769] = true, -- Runestone Extraction (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
 
-            -- JEWELRY CRAFTING
+            -- Jewelry Crafting
             [103632] = true, -- Engraver (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
             [103633] = true, -- Engraver (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [103634] = true, -- Engraver (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
@@ -6333,7 +6328,7 @@ debugAuras = {
             [103647] = true, -- Platings Expertise (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [103648] = true, -- Platings Expertise (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
 
-            -- PROVISIONING
+            -- Provisioning
             [44625] = true, -- Recipe Quality (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
             [44630] = true, -- Recipe Quality (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [44631] = true, -- Recipe Quality (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
@@ -6366,7 +6361,7 @@ debugAuras = {
             [44640] = true, -- Hireling (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [44641] = true, -- Hireling (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
 
-            -- WOODWORKING
+            -- Woodworking
             [47282] = true, -- Woodworking (Rank 1) -- NOTE: No actual aura or event displayed for this, listed for completion
             [47283] = true, -- Woodworking (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [47284] = true, -- Woodworking (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
@@ -6399,7 +6394,9 @@ debugAuras = {
             [48176] = true, -- Resin Expertise (Rank 2) -- NOTE: No actual aura or event displayed for this, listed for completion
             [48177] = true, -- Resin Expertise (Rank 3) -- NOTE: No actual aura or event displayed for this, listed for completion
 
-            ---------------------------------------------
+            -------------------------------------
+            -- NPC ABILITIES (SHARED) -----------
+            -------------------------------------
 
             -- GENERIC NPC COMBAT EVENTS
             [20542] = true, -- Prioritize Hit
@@ -6460,23 +6457,25 @@ debugAuras = {
             [40203] = true, -- Heavy Attack -- Monster Fight
             [44364] = true, -- Off-Balance Exploit -- Monster Fight
 
-            ---------------------------------
-            -- FRIENDLY NPC EVENTS
-            ---------------------------------
-
-            [42905] = true, -- Recover
-            [42937] = true, -- TargetPriorityException
-
-            [48296] = true, -- Flare
-            [48298] = true, -- Heat Wave
-            [48299] = true, -- Heat Wave
+            -------------------------------------
+            -- FRIENDLY NPC EVENTS --------------
+            -------------------------------------
 
             [48279] = true, -- Quick Strike
             [48278] = true, -- Heavy Attack
 
-            ---------------------------------
-            -- JUSTICE NPCS
-            ---------------------------------
+            [42905] = true, -- Recover
+            [42937] = true, -- TargetPriorityException
+            [17500] = true, -- Generic Self PermaStun Kneel
+            [57111] = true, -- Interactable Stand
+
+            --[48296] = true, -- Flare
+            --[48298] = true, -- Heat Wave
+            --[48299] = true, -- Heat Wave
+
+            -------------------------------------
+            -- JUSTICE NPCS ---------------------
+            -------------------------------------
 
             [63424] = true, -- JUST Guard Awarness (Guard)
             [63903] = true, -- Guard Hit by CC
@@ -6619,11 +6618,18 @@ debugAuras = {
             [73230] = true, -- Hurried Ward (Mage Guard - DB)
             [73229] = true, -- Hurried Ward (Mage Guard - DB)
 
-            -- Traps & Interactables
+            -------------------------------------
+            -- TRAPS & ENVIRONMENTAL HAZARDS ----
+            -------------------------------------
+
             [62230] = true, -- Coldharbour Flames
             [62771] = true, -- Coldharbour Flames
             [62769] = true, -- Coldharbour Flames
             [62770] = true, -- Coldharbour Flames
+
+            [20886] = true, -- Falling Rocks (Falling Rocks)
+            [20888] = true, -- Falling Rocks (Falling Rocks)
+            [27479] = true, -- Falling Rocks (Falling Rocks)
 
             [72711] = true, -- Hidden (Hiding Spot)
             [72712] = true, -- Hiding Spot (Hiding Spot)
@@ -6635,7 +6641,10 @@ debugAuras = {
             [77339] = true, -- Threat Drop (Hiding Spot)
             [75747] = true, -- Hiding Spot (Hiding Spot)
 
-            -- HUMANOID NPCS
+            -------------------------------------
+            -- HUMANOID NPCS --------------------
+            -------------------------------------
+
             [10618] = true, -- Quick Strike -- Shared
             [12437] = true, -- Quick Shot -- Shared
             [12456] = true, -- Ice Arrow -- Shared
@@ -7249,7 +7258,10 @@ debugAuras = {
             --[84836] = true, -- Broken Pact (Skaafin)
             --[84837] = true, -- Broken Pact (Skaafin)
 
-            -- CYRODIIL GUARDS
+            -------------------------------------
+            -- CYRODIIL GUARDS ------------------
+            -------------------------------------
+
             [47717] = true, -- Quick Strike (Guard T1)
             [46220] = true, -- Puncture (Guard T1 + T2)
             [46221] = true, -- Puncture (Guard T1 + T2)
@@ -7338,7 +7350,9 @@ debugAuras = {
             [15783] = true, -- Triple Strike (Honor Guard T1 + T2)
             [15782] = true, -- Triple Strike (Honor Guard T1 + T2)
 
-            -- ANIMALS
+            -------------------------------------
+            -- ANIMALS --------------------------
+            -------------------------------------
 
             [5451] = true, -- Bite -- Alit
             [5452] = true, -- Lacerate -- Alit
@@ -7467,6 +7481,9 @@ debugAuras = {
             [14828] = true, -- Charge
             [14829] = true, -- Charge
             [18751] = true, -- Charge
+            --[87276] = true, -- Chomp (Kagouti Whelp)
+            --[87310] = true, -- Run Away! (Kagouti Whelp)
+            --[87312] = true, -- Run Away! (Kagouti Whelp)
 
             [7170] = true, -- Rend -- Lion
             [60630] = true, -- Rend -- Lion
@@ -7595,7 +7612,10 @@ debugAuras = {
             [76324] = true, -- Baleful Call -- Dire Wolf
             [76322] = true, -- Baleful Call -- Dire Wolf
 
-            -- DAEDRA
+            -------------------------------------
+            -- DAEDRA ---------------------------
+            -------------------------------------
+
             [51256] = true, -- Siphon (Shared Daedra)
 
             [48092] = true, -- Swipe -- Air Atronach
@@ -7909,7 +7929,9 @@ debugAuras = {
             [63612] = true, -- Tail Clip -- Winged Twilight
             [6412] = true, -- Dusk's Howl -- Winged Twilight
 
-            -- UNDEAD
+            -------------------------------------
+            -- UNDEAD ---------------------------
+            -------------------------------------
 
             [38828] = true, -- Desecrated Ground -- Desecrated Ground
             [69900] = true, -- Desecrated Ground -- Desecrated Ground
@@ -8040,7 +8062,9 @@ debugAuras = {
             [2960] = true, -- Vomit -- Zombie
             [30347] = true, -- Vomit -- Zombie
 
-            -- DWEMER
+            -------------------------------------
+            -- DWEMER ---------------------------
+            -------------------------------------
 
             [20238] = true, -- Move Back -- Synergy (Dwemer Spider)
             [19970] = true, -- Static Field -- Synergy (Dwemer Spider)
@@ -8096,7 +8120,9 @@ debugAuras = {
             --[84019] = true, -- Detonation -- Dwemer Spider
             --[13536] = true, -- Detonation -- Dwemer Spider
 
-            -- INSECTS
+            -------------------------------------
+            -- INSECTS --------------------------
+            -------------------------------------
 
             [5278] = true, -- Bite -- Assassin Beetle
             [6137] = true, -- Laceration -- Assassin Beetle
@@ -8250,7 +8276,10 @@ debugAuras = {
             [26412] = true, -- Thunderstrikes -- Thunderbug
             [34980] = true, -- Thunderstrikes -- Thunderbug
 
-            -- MONSTER
+            -------------------------------------
+            -- MONSTER --------------------------
+            -------------------------------------
+
             [10259] = true, -- Double Swipe -- Gargoyle
             [32672] = true, -- Double Swipe -- Gargoyle
             [10270] = true, -- Quake -- Gargoyle
@@ -8594,10 +8623,11 @@ debugAuras = {
             [87712] = true, -- Enraged (Mantikora)
             [56689] = true, -- Enraged (Mantikora)
 
-            ---------------------------------
-            -- MORROWIND DLC NPCS
-            ---------------------------------
+            -------------------------------------
+            -- MORROWIND DLC NPCS ---------------
+            -------------------------------------
 
+            -- Nix Ox
             [85199] = true, -- Scythe
             [85200] = true, -- Scythe
             [85197] = true, -- Snap
@@ -8606,7 +8636,6 @@ debugAuras = {
             [85202] = true, -- Gore
             [85084] = true, -- Shriek
             [85085] = true, -- Shriek
-
             [90765] = true, -- Acid Spray
             [90776] = true, -- Acid Spray
             [90777] = true, -- Acid Spray
@@ -8634,6 +8663,7 @@ debugAuras = {
             [90190] = true, -- Nix-Call
             [89940] = true, -- Turret
 
+            -- Cliff Strider
             [93597] = true, -- Achievement (Cliff Strider)
             [85387] = true, -- Snap (Cliff Strider)
             [85388] = true, -- Stab (Cliff Strider)
@@ -8655,6 +8685,7 @@ debugAuras = {
             [85392] = true, -- Slash (Cliff Strider Matriarch)
             [85393] = true, -- Slash (Cliff Strider Matriarch)
 
+            -- Fetcherfly Nest
             [87022] = true, -- Summon Swarm
             [92017] = true, -- Summon Swarm
             [86561] = true, -- Snare
@@ -8668,6 +8699,7 @@ debugAuras = {
             [87126] = true, -- Heat Vents
             [92018] = true, -- Summon Swarm
 
+            -- Fetcherfly Hive Golem
             [92083] = true, -- Slam
             [87062] = true, -- Fetcherfly Storm
             [87071] = true, -- Fetcherfly Storm
@@ -8683,6 +8715,7 @@ debugAuras = {
             [87030] = true, -- Focused Swarm
             [87031] = true, -- Focused Swarm
 
+            -- Dwemer Arquebus
             [85242] = true, -- Quick Shot
             [85255] = true, -- Shock Blast
             [88668] = true, -- Impulse Mine
@@ -8702,22 +8735,17 @@ debugAuras = {
             [85327] = true, -- Polarizing Field
             [85334] = true, -- Polarizing Field
 
-            [87276] = true, -- Chomp
-            [87310] = true, -- Run Away!
-            [87312] = true, -- Run Away!
-
+            -- Hunger
             [84825] = true, -- Slash
             [84826] = true, -- Slash
             [84827] = true, -- Rake
             [84834] = true, -- Rake
-
             [94903] = true, -- Spring
             [94908] = true, -- Spring
             [94907] = true, -- Spring
             [87237] = true, -- Spring
             [87242] = true, -- Spring
             [87241] = true, -- Spring
-
             [87247] = true, -- Devour
             [87988] = true, -- Devour
             [91413] = true, -- Devour
@@ -8727,14 +8755,12 @@ debugAuras = {
             [87385] = true, -- Devour
             [87386] = true, -- Devour
             [87987] = true, -- Devour
-
             [84944] = true, -- Hollow
             [91440] = true, -- Hollow
             [91439] = true, -- Hollow
             [84967] = true, -- Hollow
             [84988] = true, -- Hollow
             [84990] = true, -- Hollow
-
             [87269] = true, -- Torpor
             [87270] = true, -- Torpor
             [87538] = true, -- Torpor
@@ -8747,6 +8773,7 @@ debugAuras = {
             [91425] = true, -- Torpor
             [91433] = true, -- Torpor
 
+            -- Iron Atronach
             [89030] = true, -- Subduction
             [88246] = true, -- Iron Hand
             [88247] = true, -- Eruption
@@ -8777,15 +8804,14 @@ debugAuras = {
             [88317] = true, -- Blast Furnace
             [88318] = true, -- Blast Furnace
 
-            ------------------------------------------
-            -- MAIN QUEST
-            ------------------------------------------
+            -------------------------------------
+            -- MAIN QUEST -----------------------
+            -------------------------------------
 
             -- Tutorial (Soul Shriven in Coldharbour)
             [82077] = true, -- Portal In
             [90733] = true, -- Knockout
             [48675] = true, -- Vitality of the Titanborn
-
             [62805] = true, -- Stun
             [62802] = true, -- Targetable Off
             [62803] = true, -- Targetable On
@@ -8794,23 +8820,27 @@ debugAuras = {
             [75527] = true, -- Ultimate Protection
             [64089] = true, -- Titan Bash
             [64091] = true, -- Power Bash
-            [64772] = true, -- MQ1 Input Lock LAtk
-            [64769] = true, -- MQ1 Input Lock LAtk
+            --[64772] = true, -- MQ1 Input Lock LAtk
+            --[64769] = true, -- MQ1 Input Lock LAtk
             [64092] = true, -- PermaStun
             [64133] = true, -- PermRoot
             [63883] = true, -- Major Protection
-            [64029] = true, -- MQ1 Inpuit Lock Visual
-            [61748] = true, -- Heavy Attack
-            [64784] = true, -- MQ1 Tutorial Block Heavy
-            [61956] = true, -- Off-Balance Timer
-            [61980] = true, -- Off-Balance
-            [61961] = true, -- Perma Set Off Balance Target
-            [64677] = true, -- MQ1 Tutorial Perma Off-Balance
-            [63900] = true, -- Major Protection die
-            [64676] = true, -- MQ1 Tutorial Perma Off-Balance
-            [61916] = true, -- Heat Wave
-            [64798] = true, -- MQ1 Heat Wave (Tutorial)
+            [1718] = true, -- Attack
+            --[64029] = true, -- MQ1 Inpuit Lock Visual
+            --[61748] = true, -- Heavy Attack
+            --[64784] = true, -- MQ1 Tutorial Block Heavy
+            --[61956] = true, -- Off-Balance Timer
+            --[61980] = true, -- Off-Balance
+            --[61961] = true, -- Perma Set Off Balance Target
+            --[64677] = true, -- MQ1 Tutorial Perma Off-Balance
+            --[63900] = true, -- Major Protection die
+            --[64676] = true, -- MQ1 Tutorial Perma Off-Balance
+            --[61916] = true, -- Heat Wave
+            --[64798] = true, -- MQ1 Heat Wave (Tutorial)
             [75531] = true, -- Retarget
+            [0] = true, -- (No Name)
+            [63269] = true, -- Heat Wave (Vaekar the Forgemaster)
+            [63270] = true, -- Heat Wave (Vaekar the Forgemaster)
             [63737] = true, -- Heavy Attack
             [63684] = true, -- Uppercut
             [63685] = true, -- Uppercut Stun
@@ -8819,10 +8849,11 @@ debugAuras = {
             [63752] = true, -- Vomit
             [63753] = true, -- Vomit
             [64069] = true, -- Sentinel Barrier
-            [64247] = true, -- MQ1 Input Lock Visual No Delay
-            [63555] = true, -- MQ1 Sneak Atk Tutorial Trigger
-            [63559] = true, -- MQ1 Sneak Tutorial Trigger
-            [64072] = true, -- Eye of the Sentinel
+            --[64247] = true, -- MQ1 Input Lock Visual No Delay
+            --[63555] = true, -- MQ1 Sneak Atk Tutorial Trigger
+            --[63559] = true, -- MQ1 Sneak Tutorial Trigger
+            --[64072] = true, -- Eye of the Sentinel
+            [64112] = true, -- CON_Ground Rise on
             [48345] = true, -- Focused Healing
             [48346] = true, -- Minor Wound
             [63755] = true, -- Heat Wave
@@ -8830,12 +8861,12 @@ debugAuras = {
             [51692] = true, -- Ground Rise on
             [63521] = true, -- Bone Crush
             [63522] = true, -- Bone Saw
-            [61648] = true, -- Replenish Stamina
-            [61644] = true, -- Incapacitating Terror
-            [61646] = true, -- Incapacitating Terror
-            [64074] = true, -- Incapacitating Terror
-            [64166] = true, -- Major Protection
-            [63398] = true, -- Backlash
+            --[61648] = true, -- Replenish Stamina
+            --[61644] = true, -- Incapacitating Terror
+            --[61646] = true, -- Incapacitating Terror
+            --[64074] = true, -- Incapacitating Terror
+            --[64166] = true, -- Major Protection
+            --[63398] = true, -- Backlash
             [63615] = true, -- Insight
             [64110] = true, -- Rending the Skein
             [63637] = true, -- Teleport
@@ -8845,21 +8876,31 @@ debugAuras = {
             [63635] = true, -- Escape Cold Harbor
             [64101] = true, -- Waking
             [25992] = true, -- CON_Screen Flash White
-            [64112] = true, -- CON_Ground Rise on
 
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
+            -- The Harborage
+            [47664] = true, -- Rending the Skein
+            [36375] = true, -- Mind Portal
+            [36377] = true, -- Dream Spawn
+            [36252] = true, -- Soul Burst
+            [36376] = true, -- Reverse Mind Portal
 
+            -- Daughter of Giants
+            [46133] = true, -- Rending the Skein
+            [27697] = true, -- Ragjar Change Forms
+            [52724] = true, -- Call Lyris
+            [27698] = true, -- Impostor Transform
+            [29994] = true, -- Inferno (Manifestation of Solitude)
+            [27689] = true, -- Lyris Dons Armor
+            [37384] = true, -- MQ2 Clannfear Birthing Effects (Ancient Clannfear)
+            [27767] = true, -- Rending Leap (Ancient Clannfear)
+            [27769] = true, -- Rending Leap (Ancient Clannfear)
+            [27774] = true, -- Knockdown (Ancient Clannfear)
+            [27776] = true, -- Feeding (Ancient Clannfear)
+            [27708] = true, -- Lyris Wields Axe
 
-            ------------------------------------------
-            -- VVARDENFELL QUESTS/EVENTS
-            ------------------------------------------
+            -------------------------------------
+            -- VVARDENFELL QUESTS/EVENTS --------
+            -------------------------------------
 
             -- Lava
             [11338] = true, -- In Lava
@@ -8882,7 +8923,6 @@ debugAuras = {
             [92245] = true, -- MQ1 Input Lock LAtk
             [92243] = true, -- MQ1 Input Lock LAtk
             [92248] = true, -- Q5804 Input Lock Visual
-            [1718] = true, -- Attack
             [83416] = true, -- Heavy Attack
             [93577] = true, -- MQ1 Tutorial Block Heavy
             [92262] = true, -- Off-Balance Timer
@@ -8901,8 +8941,6 @@ debugAuras = {
             -- Tutorial NPC's
             [92668] = true, -- Whirlwind (Slaver Cutthroat)
             [92669] = true, -- Whirlwind (Slaver Cutthroat)
-            [63269] = true, -- Heat Wave (Fist Mate Ulveni)
-            [63270] = true, -- Heat Wave (Fist Mate Ulveni)
 
             -- Divine Conundrum (Main Quest)
             [91600] = true, -- Disintegration
@@ -9326,29 +9364,16 @@ debugAuras = {
             [90597] = true, -- Overcharge Explusion
             [90598] = true, -- Overcharge Explusion
 
-            [00000] = true, --
-            [00000] = true, --
+            -------------------------------------
+            -- SEASONAL EVENTS ------------------
+            -------------------------------------
 
-            -- TEMP TEMP TEMP
-            [56975] = true, -- CH Steam Warning
-            [32236] = true, -- Trap Regen Stopper Enemy
-
-            [82137] = true, -- Spellfiends Frost
-            [82138] = true, -- Spellfiends Storm
-            [81911] = true, -- Spellfiends Fire
-
-            [87368] = true, -- Crag shit 2
-            [87371] = true, -- Crag shit 1
-            [87383] = true, -- Crag shit 1
-
-            ----------------------------------
-
-            -- SEASONAL - Witches Harvest - All working, just need to organized eventually
+            -- Witches Harvest
             [83775] = true, -- Event - Q5742 WitchFest Intro -- The Witchmother's Bargain
             [83820] = true, -- Event Q5742 WitchFest Done -- The Witchmother's Bargain
             [82898] = true, -- Event - WitchFest Theater -- The Witchmother's Bargain
 
-            -- SEASONAL -- New Life Festival
+            -- New Life Festival
             [86075] = true, -- Breda's Magnificent Mead -- Breda's Magnificent Mead
             [84125] = true, -- Breton Male Dance -- Lava Foot Stomp
             [84187] = true, -- Breton Dance -- Lava Foot Stomp
@@ -9393,7 +9418,7 @@ debugAuras = {
             [84335] = true, -- Covered in Mud -- Mud Ball Merriment
             [85639] = true, -- Covered in Mud -- Mud Ball Merriment
 
-            -- SEASONAL -- Jester's Festival
+            -- Jester's Festival
             [88095] = true, -- Illusion Dazzler -- Royal Revelry
             [88123] = true, -- Illusion Dazzler -- Royal Revelry
             [88124] = true, -- Illusion Dazzler -- Royal Revelry
@@ -9401,14 +9426,14 @@ debugAuras = {
             [89201] = true, -- Flare -- Springtime Flair
             [87474] = true, -- Flower Garland -- Springtime Flair
 
-            -- SEASONAL -- Anniversary Event
+            -- Anniversary Event
             [88874] = true, -- Q5936 Destroy Voucher 2017 --
 
-            -- SEASONAL -- Midyear Mayhem
+            -- Midyear Mayhem
             [92232] = true, -- Pelinal's Ferocity
 
-            -- DARK BROTHERHOOD LITANY OF BLOOD EVENTS -- All working, just need to sort eventually
-            [78933] = true, -- Litany of Blood Soul Steal
-            [77170] = true, -- Delay Name Swap
+            -------------------------------------
+            -- UNSORTED -------------------------
+            -------------------------------------
 
 }

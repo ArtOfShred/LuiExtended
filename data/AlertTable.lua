@@ -490,17 +490,28 @@ LUIE.AlertTable = {
     [85326] = { interrupt = true, priority = 3, eventdetect = true, refire = 1000, notDirect = true }, -- Polarizing Field (Dwemer Arquebus)
 
     --------------------------------------------------
+    -- FRIENDLY NPC ----------------------------------
+    --------------------------------------------------
+
+    [42905] = { power = true, priority = 1, auradetect = true }, -- Recover (Friendly NPC)
+
+    --------------------------------------------------
     -- MAIN QUEST ------------------------------------
     --------------------------------------------------
 
    -- [61748] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 1}, -- Heavy Attack (Tutorial) -- Default game tutorials display regardless
    -- [61916] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 1}, -- Heat Wave (Tutorial) -- Default game tutorials display regardless
 
+    -- MSQ Tutorial (Soul Shriven in Coldharbour)
     [63737] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Heavy Attack (Tutorial)
     [63684] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Uppercut (Tutorial)
     [63761] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Pound (Tutorial)
     [63752] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Vomit (Tutorial)
     [63755] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Heat Wave (Tutorial)
+    [63521] = { block = true, dodge = true, priority = 3, eventdetect = true }, -- Bone Crush (Tutorial)
+
+    -- MSQ 2 (Daughter of Giants)
+    [27767] = { block = true, bs = true, dodge = true, priority = 2 }, -- Rending Leap (Ancient Clannfear)
 
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------

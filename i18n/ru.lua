@@ -2118,6 +2118,10 @@ local strings = {
     SI_LUIE_SKILL_COLOSSAL_STOMP =                       "Colossal Stomp",
     SI_LUIE_SKILL_DUST_CLOUD =                           "Dust Cloud",
     SI_LUIE_SKILL_BATTLE_SPIRIT =                        "Battle Spirit",
+    SI_LUIE_SKILL_COLD_FIRE_TRAP =                       "Cold Fire Trap",
+    SI_LUIE_SKILL_LAVA_FOOT_STOMP =                      "Lava Foot Stomp",
+    SI_LUIE_SKILL_TORCH_JUGGLING =                       "Torch Juggling",
+    SI_LUIE_SKILL_WALL_OF_FLAMES =                       "Wall of Flames",
 }
 
 -- TODO: Switch to StringId's

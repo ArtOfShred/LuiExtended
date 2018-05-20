@@ -190,6 +190,7 @@ A.Memento_Flame_Eruption            = GetCollectibleName(1483)
 A.Memento_Frost_Shard               = GetCollectibleName(4707)
 A.Memento_Rune_of_Levitation        = GetCollectibleName(4706)
 A.Memento_Dragon_Summons_Focus      = GetCollectibleName(4708)
+A.Memento_The_Pie_of_Misrule        = GetCollectibleName(1167)
 
 -- ---------------------------------------------------
 -- ITEM SETS -----------------------------------------
@@ -579,6 +580,7 @@ A.Skill_Oil_Drenched                = 10650
 A.Skill_Shield_Rush                 = GetString(SI_LUIE_SKILL_SHIELD_RUSH)
 A.Skill_Knockback                   = 77905
 A.Skill_Weakness                    = 8705
+A.Skill_Staff_Strike                = 2901
 A.Skill_Ice_Barrier                 = 14178
 A.Skill_Vanish                      = 24687
 A.Skill_Bone_Cage                   = 35387
@@ -692,6 +694,28 @@ A.Skill_Dart                        = 7485
 A.Skill_Split_Bolt                  = 91093
 A.Skill_Turret_Mode                 = 71045
 A.Skill_Overcharge                  = 27333
+
+-- ---------------------------------------------------
+-- TRAPS ---------------------------------------------
+-- ---------------------------------------------------
+
+A.Trap_Cold_Fire_Trap               = GetString(SI_LUIE_SKILL_COLD_FIRE_TRAP)
+A.Trap_Falling_Rocks                = 20886
+
+-- ---------------------------------------------------
+-- QUEST ABILITIES -----------------------------------
+-- ---------------------------------------------------
+
+-- Seasonal
+A.Skill_Lava_Foot_Stomp             = GetString(SI_LUIE_SKILL_LAVA_FOOT_STOMP)
+A.Skill_Dagger_Juggling             = 84506
+A.Skill_Torch_Juggling              = GetString(SI_LUIE_SKILL_TORCH_JUGGLING)
+A.Skill_Sword_Swallowing            = 84533
+A.Skill_Celebratory_Belch           = 84847
+
+-- MSQ
+A.Skill_Wall_of_Flames              = GetString(SI_LUIE_SKILL_WALL_OF_FLAMES)
+A.Skill_Focused_Healing             = 48345
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------
