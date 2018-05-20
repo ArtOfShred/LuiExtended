@@ -17,6 +17,10 @@ A.Skill_Major_Vitality              = 61275
 A.Skill_Minor_Magickasteal          = 40114
 A.Skill_Minor_Sorcery               = 62799
 A.Skill_Minor_Brutality             = 61798
+
+A.Skill_Minor_Slayer				= 76618
+A.Skill_Minor_Aegis					= 76617
+
 A.Skill_Off_Balance                 = 14062
 A.Skill_Off_Balace_Immunity         = 102771
 
@@ -270,13 +274,22 @@ A.Passive_Heavy_Weapons             = 29375
 A.Passive_Follow_Up                 = 29389
 A.Passive_Twin_Blade_and_Blunt      = 30893
 A.Passive_Destruction_Expert        = 30965
+
+-- Soul Magic
 A.Passive_Soul_Summons              = 39269
 
+-- Vampire
 A.Passive_Savage_Feeding            = 42054
 A.Passive_Blood_Ritual              = 33091
 A.Passive_Noxiphilic_Sanguivoria    = GetString(SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA)
+
+-- Werewolf
 A.Passive_Bloodmoon                 = 32639
+
+-- Undaunted
 A.Passive_Undaunted_Command         = 55584
+
+-- Racial
 A.Passive_Red_Diamond               = 36155
 
 -- ---------------------------------------------------
@@ -390,11 +403,9 @@ A.Skill_Lotus_Blossom               = 85855
 A.Skill_Natures_Grasp               = 85564
 A.Skill_Bursting_Vines              = 85859
 A.Skill_Natures_Embrace             = 85858
-
 A.Skill_Secluded_Grove              = 85532
 A.Skill_Enchanted_Forest            = 85804
 A.Skill_Healing_Thicket             = 85807
-
 A.Skill_Frost_Cloak                 = 86122
 A.Skill_Expansive_Frost_Cloak       = 86126
 A.Skill_Ice_Fortress                = 86130
@@ -555,7 +566,6 @@ A.Skill_Razor_Caltrops              = 40242
 A.Skill_Efficient_Purge             = 40232
 A.Skill_Lingering_Flare             = 61519
 A.Skill_Scorching_Flare             = 61524
-
 A.Skill_Reviving_Barrier            = 40237
 
 -- ---------------------------------------------------
@@ -565,15 +575,13 @@ A.Skill_Reviving_Barrier            = 40237
 A.Skill_Battle_Spirit               = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT)
 
 -- ---------------------------------------------------
--- NPC BASIC -----------------------------------------
+-- NPC ABILITIES -------------------------------------
 -- ---------------------------------------------------
+
+-- Shared/Basic
 
 A.Skill_Hamstring                   = 70068
 A.Skill_Backstabber                 = 13739
-
--- ---------------------------------------------------
--- NPC ABILITIES -------------------------------------
--- ---------------------------------------------------
 
 -- Human
 A.Skill_Oil_Drenched                = 10650

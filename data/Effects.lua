@@ -1442,7 +1442,9 @@ E.EffectSourceOverride = {
 -- If one of these id's is applied then we set the buffSlot for ON_EFFECT_CHANGED to be a single name identifier to prevent more than one aura from appearing. Only works with unlimited duration effects.
 E.EffectMerge = {
 
-    [A.Skill_Overcharge]  = "MERGED_EFFECT_OVERCHARGE",
+    [A.Skill_Overcharge] = "MERGED_EFFECT_OVERCHARGE",
+	[A.Skill_Minor_Slayer] = "MERGED_EFFECT_SLAYER",
+	[A.Skill_Minor_Aegis] = "MERGED_EFFECT_AEGIS",
 
 }
 
