@@ -2202,7 +2202,7 @@ E.EffectOverride = {
     [66808] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds' }, -- Molag Kena (Molag Kena)
     [66812] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds' }, -- Overkill (Molag Kena)
     [59593] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_nerieneth.dds', name = A.Set_Nerieneth }, -- Lich Crystal (Nerien'eth)
-    [85637] = { type = BUFF_EFFECT_TYPE_DEBUFF }, -- Minor Defile (Pirate Skeleton)
+    [85637] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Minor Defile (Pirate Skeleton)
     [80606] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_selene.dds' }, -- Selene (Selene)
     [80607] = { hide = true }, -- Dummy (Selene)
     [80609] = { hide = true }, -- Dummy (Selene)
@@ -3202,13 +3202,14 @@ E.EffectOverride = {
     [89129] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Feral Guardian)
     [90284] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Guardian's Wrath (Feral Guardian)
     [93144] = { hide = true }, -- Guardian's Wrath Trigger (Feral Guardian)
+    [109982] = { hide = true }, -- Eternal Guardian (Eternal Guardian)
     [105906] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_swipe.dds', name = A.Skill_Bite }, -- Swipe (Eternal Guardian)
     [105907] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Eternal Guardian)
     [105908] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Eternal Guardian)
     [94625] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Guardian's Wrath (Eternal Guardian)
     [94626] = { hide = true }, -- Guardian's Wrath Trigger (Eternal Guardian)
-    [89180] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_eternal_guardian_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Eternal_Guardian, A.Set_Cooldown) }, -- Eternal Guardian Respawn Timer (Eternal Guardian)
-    [107588] = { hide = true}, -- Eternal Guardian Cast Speed (Eternal Guardian)
+    [109983] = { hide = true }, -- Eternal Guardian Revive (Eternal Guardian)
+    [110384] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_eternal_guardian_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Eternal_Guardian, A.Set_Cooldown) }, -- Eternal Guardian (Eternal Guardian)
     [89219] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_swipe.dds', name = A.Skill_Bite }, -- Swipe (Wild Guardian)
     [89220] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Wild Guardian)
     [92666] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Wild Guardian)
@@ -6146,7 +6147,12 @@ E.FakePlayerBuffs = {
 
     -- Set Items
     [59573] = { icon = 'esoui/art/icons/ability_buff_major_vitality.dds', name = A.Skill_Major_Vitality, duration = 510 }, -- Major Vitality (Malubeth)
+    [98421] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
+    [98419] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
+    [98420] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
     [81675] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
+    [83288] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
+    [83287] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
     [71107] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds', name = A.Set_Briarheart, duration = 10000 }, -- Briarheart
     [97626] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = A.Set_Ironblood, duration = 10000, debuff = true }, -- Ironblood
 

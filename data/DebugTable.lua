@@ -762,6 +762,7 @@ debugAuras = {
             [83405] = true, -- Infernal Guardian
             [83390] = true, -- Infernal Guardian
             [83393] = true, -- Infernal Guardian
+            [83391] = true, -- Infernal Guardian
             [83409] = true, -- Infernal Guardian
 
             [80564] = true, -- Kra'gh
@@ -798,7 +799,12 @@ debugAuras = {
             [59593] = true, -- Lich Crystal
 
             [80501] = true, -- Pirate Skeleton
+            [98421] = true, -- Pirate Skeleton
+            [98419] = true, -- Pirate Skeleton
+            [98420] = true, -- Pirate Skeleton
             [81675] = true, -- Pirate Skeleton
+            [83288] = true, -- Pirate Skeleton
+            [83287] = true, -- Pirate Skeleton
             [80853] = true, -- Pirate Skeleton
             [85637] = true, -- Pirate Skeleton
 
@@ -3779,6 +3785,7 @@ debugAuras = {
             [91974] = true, -- Guardian's Wrath (Feral Guardian)
 
             [85986] = true, -- Eternal Guardian (Eternal Guardian)
+            [109982] = true, -- Eternal Guardian (Eternal Guardian)
             [89166] = true, -- Eternal Guardian (Eternal Guardian)
             [105924] = true, -- Guardian's Wrath Trigger (Eternal Guardian)
             [105906] = true, -- Swipe (Eternal Guardian)
@@ -3787,9 +3794,11 @@ debugAuras = {
             [94625] = true, -- Guardian's Wrath (Eternal Guardian)
             [94626] = true, -- Guardian's Wrath Trigger (Eternal Guardian)
             [105921] = true, -- Guardian's Wrath (Eternal Guardian)
-            [89180] = true, -- Eternal Guardian Respawn Timer (Eternal Guardian)
-            [107588] = true, -- Eternal Guardian Cast Speed (Eternal Guardian)
-            [95108] = true, -- Eternal Guardian Respawn Timer (Eternal Guardian)
+            [109983] = true, -- Eternal Guardian Revive (Eternal Guardian)
+            [109990] = true, -- Eternal Guardian (Eternal Guardian)
+            [110384] = true, -- Eternal Guardian (Eternal Guardian)
+            [110401] = true, -- Eternal Guardian Respawning (Eternal Guardian)
+            [110006] = true, -- Eternal Guardian (Eternal Guardian)
 
             [85990] = true, -- Wild Guardian (Wild Guardian)
             [89207] = true, -- Wild Guardian (Wild Guardian)
