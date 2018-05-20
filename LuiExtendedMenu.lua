@@ -561,6 +561,18 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
         resetFunc = LUIE.InfoPanel.ResetPosition,
     }
+	optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
+		-- InfoPanel scale
+		type = "slider",
+		name = GetString(SI_LUIE_LAM_PNL_PANELSCALE),
+		tooltip = GetString(SI_LUIE_LAM_PNL_PANELSCALE_TP),
+		min = 100, max = 300, step = 10,
+		getFunc = function() return LUIE.InfoPanel.SV.panelScale end,
+		setFunc = function(value) LUIE.InfoPanel.SV.panelScale = value LUIE.InfoPanel.SetScale() end,
+		width = "full",
+		default = 100,
+		disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
+	}
     optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
         -- Reset InfoPanel position
         type = "button",

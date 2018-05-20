@@ -282,6 +282,7 @@ function PNL.RearrangePanel()
     uiPanel:SetWidth( math.max( uiTopRow:GetWidth(), uiBotRow:GetWidth(), 39*6 ) )
 
     -- Set scale of panel again
+    PNL.SetScale()
     uiPanel:SetHidden(false)
 end
 
@@ -350,6 +351,15 @@ function PNL.SetMovingState( state )
     PNL.panelUnlocked = state
     uiPanel:SetMouseEnabled( state )
     uiPanel:SetMovable( state )
+end
+
+-- Set scale of Info Panel. Called from Settings Menu.
+function PNL.SetScale()
+    if not PNL.Enabled then
+        return
+    end
+    uiPanel:SetScale( PNL.SV.panelScale and PNL.SV.panelScale/100 or 1 )
+    uiPanel:SetHidden(false)
 end
 
 -- Fake Component callback function used by main module
