@@ -7,6 +7,12 @@ local windowManager = WINDOW_MANAGER
 -- TODO: Create a basic logo to use when the changelog is displayed - may consider attempting to center it and remove ability to expand box size.
 
 local fillMessages = {
+    "|cFFA5005.5.1:|r",
+    "• Combat Info: All bar proc abilities will now play a sound when available for use, not just Crystal Fragments.",
+    "• Buffs & Debuffs: Fixed an issue with the prominent buffs font selector that could cause a UI error if an invalid font was selected.",
+    "• Buffs & Debuffs: The debug option for Combat Events and Effect Changes now display abilities with the name updated to reflect changes made by LUIE.",
+    "|",
+    "|cFFA5005.5 (Summerset):|r",
     "|cEEEE00General Components|r",
     "• Added RU Translation thanks to a ton of effort from KiriX!",
     "|",
@@ -108,8 +114,8 @@ function LUIE_WelcomeScreen(menu)
 
         local buffer = luiChangeLog:GetNamedChild("Buffer")
         local slider = luiChangeLog:GetNamedChild("Slider")
-        buffer:SetScrollPosition(30)
-        slider:SetValue(buffer:GetNumHistoryLines() - 30)
+        buffer:SetScrollPosition(34)
+        slider:SetValue(buffer:GetNumHistoryLines() - 34)
 
     end
     -- Set version to current version.

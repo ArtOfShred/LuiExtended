@@ -819,7 +819,7 @@ function CI.OnSlotAbilityUsed(eventCode, slotNum)
     end
 end
 
-function CI.OnSlotUpdated(eventCode, slotNum)
+function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
     if slotNum == 8 then
         CI.UpdateUltimateLabel(eventCode)
     end
@@ -905,6 +905,12 @@ function CI.OnSlotUpdated(eventCode, slotNum)
     if E.IsAbilityProc[abilityName] then
         if CI.SV.ShowTriggered then
             CI.PlayProcAnimations(slotNum)
+            if CI.SV.ProcEnableSound then
+                if not wasfullUpdate then
+                    PlaySound(g_procSound)
+                    PlaySound(g_procSound)
+                end
+            end
         end
     elseif proc then
         g_triggeredSlots[proc] = slotNum
@@ -982,7 +988,7 @@ function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
     -- Update action bar skills
     g_actionBar = {}
     for i = 3, 8 do
-        CI.OnSlotUpdated(eventCode, i)
+        CI.OnSlotUpdated(eventCode, i, true)
     end
 end
 

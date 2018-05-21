@@ -632,10 +632,11 @@ function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGr
     if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then return end
 
     local iconFormatted = iconFormat(GetAbilityIcon(abilityId), 16, 16)
+    local nameFormatted = GetAbilityName(abilityId)
 
     local source = strformat("<<t:1>>", sourceName)
     local target = strformat("<<t:1>>", targetName)
-    local ability = strformat("<<t:1>>", abilityName)
+    local ability = strformat("<<t:1>>", nameFormatted)
     local duration = GetAbilityDuration(abilityId)
     local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
     local showacasttime = ""
@@ -653,7 +654,6 @@ function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGr
         target = "Player"
     end
     if source == "" and target == "" then
-        ability = LUIE.GetAbilityName(abilityId)
         source = "NIL"
         target = "NIL"
     end
@@ -670,6 +670,7 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     end
 
     local iconFormatted = iconFormat(GetAbilityIcon(abilityId), 16, 16)
+    local nameFormatted = GetAbilityName(abilityId)
 
     unitName = strformat("<<t:1>>", unitName)
     if unitName == LUIE.PlayerNameFormatted then
@@ -684,7 +685,7 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     end
 
     if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].hide then
-        d(iconFormatted .. "|c00E200 [" ..abilityId .. "] " .. effectName.. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] ".. unitName .. "|r")
+        d(iconFormatted .. "|c00E200 [" ..abilityId .. "] " .. nameFormatted.. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] ".. unitName .. "|r")
         return
     end
 
@@ -696,11 +697,11 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     end
 
     if changeType == 1 then
-        d("|c00E200Gained:|r " .. refreshOnly .. iconFormatted .. " [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
+        d("|c00E200Gained:|r " .. refreshOnly .. iconFormatted .. " [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     elseif changeType == 2 then
-        d("|c00E200Faded:|r " .. iconFormatted .. " [" .. abilityId .. "] " .. effectName .. ": [Tag] " .. unitName)
+        d("|c00E200Faded:|r " .. iconFormatted .. " [" .. abilityId .. "] " .. nameFormatted .. ": [Tag] " .. unitName)
     else
-        d("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
+        d("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     end
 end
 
