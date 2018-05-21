@@ -2735,22 +2735,31 @@ debugAuras = {
             [51556] = true, -- Corrode (Shadow Image)
             [51558] = true, -- Shade Corrode (Shadow Image)
 
+            [108808] = true, -- Synergy Damage Bonus (Consuming Darkness - Hidden Refresh Synergy)
+            [37729] = true, -- Hidden Refresh (Consuming Darkness - Hidden Refresh Synergy)
+            [37730] = true, -- Hidden Refresh (Consuming Darkness - Hidden Refresh Synergy)
+            [37733] = true, -- Hidden Refresh Cooldown (Consuming Darkness - Hidden Refresh Synergy)
+            [37732] = true, -- Hidden Refresh (Consuming Darkness - Hidden Refresh Synergy)
+            [77769] = true, -- Clairvoyance Fx (Consuming Darkness - Hidden Refresh Synergy)
 
             [25411] = true, -- Consuming Darkness (Consuming Darkness)
             [102438] = true, -- Hidden Refresh Anchor (Consuming Darkness)
             [44871] = true, -- Major Protection (Consuming Darkness)
             [25412] = true, -- Consuming Darkness (Consuming Darkness)
+            [25444] = true, -- Consuming Darkness (Consuming Darkness)
 
             [36493] = true, -- Bolstering Darkness (Bolstering Darkness)
             [102442] = true, -- Hidden Refresh Anchor (Bolstering Darkness)
             [44862] = true, -- Major Protection (Bolstering Darkness)
             [36495] = true, -- Bolstering Darkness (Bolstering Darkness)
+            [36496] = true, -- Bolstering Darkness (Bolstering Darkness)
 
             [36485] = true, -- Veil of Blades (Veil of Blades)
             [102446] = true, -- Hidden Refresh Anchor (Veil of Blades)
             [44854] = true, -- Major Protection (Veil of Blades)
             [36490] = true, -- Veil of Blades (Veil of Blades)
             [36487] = true, -- Veil of Blades (Veil of Blades)
+            [36488] = true, -- Veil of Blades (Veil of Blades)
 
             [60400] = true, -- Caused Damage with Strife (Strife -- All Morphs)
             [60401] = true, -- Strife Saved Damage (Strife -- All Morphs)

@@ -2903,6 +2903,7 @@ E.EffectOverride = {
     [38528] = { hide = true }, -- Shadow (Shadow Image)
     [51556] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode_ranged.dds' }, -- Corrode (Shadow Image)
     [51558] = { name = A.Skill_Minor_Maim }, -- Shade Corrode (Shadow Image)
+    [108808] = { hide = true}, -- Synergy Damage Bonus (Consuming Darkness - Hidden Refresh Synergy)
     [44871] = { forcedContainer = 'short' }, -- Major Protection (Consuming Darkness)
     [44862] = { forcedContainer = 'short' }, -- Major Protection (Bolstering Darkness)
     [44854] = { forcedContainer = 'short' }, -- Major Protection (Veil of Blades)
