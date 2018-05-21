@@ -1,3 +1,9 @@
+### Version 5.5.1
+
+- Combat Info: All bar proc abilities will now play a sound when available for use, not just Crystal Fragments.
+- Buffs & Debuffs: Fixed an issue with the prominent buffs font selector that could cause a UI error if an invalid font was selected.
+- Buffs & Debuffs: The debug option for Combat Events and Effect Changes now display abilities with the name updated to reflect changes made by LUIE.
+
 ### Version 5.5
 
 General Components
