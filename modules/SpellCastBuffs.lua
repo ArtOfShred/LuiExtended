@@ -1629,9 +1629,9 @@ function SCB.ApplyFont()
 
     -- Font Setup for Prominent Buffs & Debuffs
     local prominentName = LUIE.Fonts[SCB.SV.ProminentLabelFontFace]
-    if not fontName or fontName == "" then
+    if not prominentName or prominentName == "" then
         printToChat(GetString(SI_LUIE_ERROR_FONT), true)
-        fontName = "$(MEDIUM_FONT)"
+        prominentName = "$(MEDIUM_FONT)"
     end
     local prominentStyle = ( SCB.SV.ProminentLabelFontStyle and SCB.SV.ProminentLabelFontStyle ~= "" ) and SCB.SV.ProminentLabelFontStyle or "outline"
     local prominentSize = ( SCB.SV.ProminentLabelFontSize and SCB.SV.ProminentLabelFontSize > 0 ) and SCB.SV.ProminentLabelFontSize or 17
