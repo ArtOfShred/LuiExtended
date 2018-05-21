@@ -86,7 +86,7 @@ E.IsLycan = {
 E.IsVampLycanDisease = {
     [39472] = true, -- Vampirism (NPC Bite)
     [40360] = true, -- Vampirism (Player Bite)
-    --[31068] = true, -- Sanies Lupinus (NPC Bite)
+    [31068] = true, -- Sanies Lupinus (NPC Bite)
     [40521] = true, -- Sanies Lupinus (Player Bite)
 }
 
@@ -115,22 +115,23 @@ E.IsBoon = {
 -- TODO: TEMPORARY
 -- Cyrodiil passives
 E.IsCyrodiil = {
-    [11346] = true, -- Home Keep Bonus
-    [11341] = true, -- Enemy Keep Bonus I
-    [11343] = true, -- Enemy Keep Bonus II
-    [11345] = true, -- Enemy Keep Bonus III
-    [11347] = true, -- Enemy Keep Bonus IV
-    [11348] = true, -- Enemy Keep Bonus V
+
+    [39671] = true, -- Emperorship Alliance Bonus
+    [11346] = true, -- Home Keep Bonus -- CONFIRM
+    [11341] = true, -- Enemy Keep Bonus I -- CONFIRM
+    [11343] = true, -- Enemy Keep Bonus II -- CONFIRM
+    [11345] = true, -- Enemy Keep Bonus III -- CONFIRM
+    [11347] = true, -- Enemy Keep Bonus IV -- CONFIRM
+    [11348] = true, -- Enemy Keep Bonus V -- CONFIRM
     [11350] = true, -- Enemy Keep Bonus VI
     [11352] = true, -- Enemy Keep Bonus VII
     [11353] = true, -- Enemy Keep Bonus VIII
-    [11356] = true, -- Enemy Keep Bonus IX
+    [11356] = true, -- Enemy Keep Bonus IX -- CONFIRM
     [15060] = true, -- Defensive Scroll Bonus I
-    [16350] = true, -- Defensive Scroll Bonus II
+    [16350] = true, -- Defensive Scroll Bonus II -- CONFIRM
     [15058] = true, -- Offensive Scroll Bonus I
-    [16348] = true, -- Offensive Scroll Bonus II
-    [39671] = true, -- Emperorship Alliance Bonus
-    [66282] = true, -- Blessing of War
+    [16348] = true, -- Offensive Scroll Bonus II -- CONFIRM
+    [66282] = true, -- Blessing of War -- CONFIRM
 }
 
 E.IsSoulSummons = {
@@ -1519,6 +1520,7 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     -- Actives
     [24307] = true, -- Solar Disturbance Snare (Solar Disturbance - Rank 1)
     [37009] = true, -- Channeled Focus (Channeled Focus - Rank 1)
+    [63020] = true, -- Repentance Remover (Repentance)
 
     ----------------------------
     -- Warden
@@ -1958,6 +1960,7 @@ E.EffectOverride = {
     [61354] = { hide = true }, -- Well Fed: Magicka Regen
     [100488] = { icon = 'LuiExtended/media/icons/consumables/consumable_spring-loaded_infusion.dds' }, -- Spring-Loaded Infusion
     [100490] = { hide = true }, -- Magicka Consumable
+    [100489] = { hide = true }, -- Stamina Consumable
 
     -- Crafted Seasonal Food
     [84681] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_crisp_and_crunchy_pumpkin.dds', name = A.Food_Pumpkin_Snack_Skewer }, -- Crisp and Crunchy Pumpkin Snack Skewer
@@ -2083,6 +2086,17 @@ E.EffectOverride = {
     [101874] = { icon = 'LuiExtended/media/icons/mementos/memento_scalecaller_frost_shard.dds', name = A.Memento_Frost_Shard, unbreakable = 1 }, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
     [101877] = { icon = 'LuiExtended/media/icons/mementos/memento_scalecaller_rune_of_levitation.dds', name = A.Memento_Rune_of_Levitation, unbreakable = 1 }, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
     [101872] = { icon = 'LuiExtended/media/icons/mementos/memento_bone_dragon_summons_focus.dds', name = A.Memento_Dragon_Summons_Focus, unbreakable = 1 }, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
+
+    -- Non-Combat Pets
+    [76364] = { hide = true }, -- _CRWN_5s (Echalette)
+    [76365] = { hide = true }, -- _CRWN_Echalette_Buck (Echalette)
+    [76367] = { hide = true }, -- _CRWN_ResetPosture (Echalette)
+    [76368] = { hide = true }, -- _CRWN_1s (Turquoise Nixad)
+    [78642] = { hide = true }, -- _CRWN_Jackal_Mouse (Jackal)
+    [78643] = { hide = true }, -- _CRWN_Jackal_Digging (Jackal)
+
+    [72955] = { hide = true }, -- _CRWN Pet Goat,Black (Sanguine's Black Goat)
+    [81352] = { hide = true }, -- _CRWN_12.5s (Spotted Snow Senche-Leopard)
 
     -- Assistants
     [77645] = { hide = true }, -- Stealth (Pirharri the Smuggler)
@@ -2500,7 +2514,7 @@ E.EffectOverride = {
     [34512] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_juggernaut.dds' }, -- The Juggernaut (of the Juggernaut)
 
     -- Rewards for the Worthy Sets
-    [76947] = { icon = 'esoui/art/icons/ability_debuff_minor_defile.dds', name = A.Skill_Minor_Defile }, -- Fasalla's Guile (of Fasalla's Guile)
+    [76947] = { icon = 'esoui/art/icons/ability_debuff_minor_defile.dds', name = A.Skill_Minor_Defile, duration = 0 }, -- Fasalla's Guile (of Fasalla's Guile)
     [76950] = { icon = 'esoui/art/icons/ability_warrior_025.dds' }, -- Warrior's Fury (of Fury)
     [76936] = { icon = 'LuiExtended/media/icons/abilities/ability_set_transmutation.dds' }, -- Transmutation (of Transmutation)
     [76938] = { icon = 'esoui/art/icons/procs_003.dds' }, -- Vicious Death (of Vicious Death)
@@ -3613,6 +3627,7 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     [35658] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_lycanthrophy.dds' }, -- Lycanthrophy
+    [31068] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds' }, -- Sanies Lupinus (from player Bite)
     [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds' }, -- Sanies Lupinus (from player Bite)
     [32464] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Light Attack
     [89146] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds' }, -- Werewolf Bleed
@@ -4111,7 +4126,7 @@ E.EffectOverride = {
     [78744] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flare_trap.dds' }, -- Flare (Guard)
     [75613] = { hide = true }, -- Shadowcloak Immunity (Mage Guard)
     [77919] = { hide = true }, -- Clairvoyance Tutorial (Mage Guard)
-    [77937] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = SI_LUIE_SKILL_DETECTION }, -- Clairvoyance (Mage Guard)
+    [77937] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = A.Skill_Detection }, -- Clairvoyance (Mage Guard)
     [77941] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1 }, -- Revealed (Mage Guard)
     [77917] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_empower_weapon_flame.dds' }, -- Empower Weapon: Flame (Mage Guard)
     [74502] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_focused_strike_staff.dds' }, -- Focused Strike (Mage Guard)
@@ -4122,7 +4137,7 @@ E.EffectOverride = {
     [74864] = { hide = true }, -- Teleport Trap (Mage Guard)
     [74863] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_teleport_trap.dds' }, -- Teleport Trap (Mage Guard)
     [77449] = { hide = true }, -- Clairvoyance Tutorial (Mage Guard - Instanced)
-    [72694] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = SI_LUIE_SKILL_DETECTION }, -- Clairvoyance (Mage Guard - Instanced)
+    [72694] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = A.Skill_Detection }, -- Clairvoyance (Mage Guard - Instanced)
     [72695] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1 }, -- Revealed (Mage Guard - Instanced)
     [78060] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Revealed (Mage Guard - Instanced)
     [75809] = { hide = true }, -- Guard Speed Boost (Mage Guard - Instanced)
@@ -5628,6 +5643,44 @@ E.EffectOverride = {
     [91369] = { icon = 'LuiExtended/media/icons/abilities/ability_event_steamy_spring_pie.dds', name = A.Memento_The_Pie_of_Misrule }, -- Jester's Experience Boost Pie (The Pie of Misrule)
     [92232] = { icon = 'LuiExtended/media/icons/abilities/ability_event_pelinals_ferocity.dds' }, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
     [89243] = { hide = true }, -- Butcher Awareness (A Noble Guest)
+
+    ----------------------------------------------------------------
+    -- CYRODIIL ----------------------------------------------------
+    ----------------------------------------------------------------
+
+    [39671] = { icon = 'esoui/art/icons/achievement_midyearevent_009.dds' }, -- Emperorship Alliance Bonus
+    [11346] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds' }, -- Home Keep Bonus
+    [11341] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 1 }, -- Enemy Keep Bonus I
+    [11343] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 2 }, -- Enemy Keep Bonus II
+    [11345] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 3 }, -- Enemy Keep Bonus III
+    [11347] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 4 }, -- Enemy Keep Bonus IV
+    [11348] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 5 }, -- Enemy Keep Bonus V
+    [11350] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 6 }, -- Enemy Keep Bonus VI
+    [11352] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 7 }, -- Enemy Keep Bonus VII
+    [11353] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 8 }, -- Enemy Keep Bonus VIII
+    [11356] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 9 }, -- Enemy Keep Bonus IX
+    [15060] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_defensive_scroll_bonus.dds', stack = 1 }, -- Defensive Scroll Bonus I
+    [16350] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_defensive_scroll_bonus.dds', stack = 2 }, -- Defensive Scroll Bonus II
+    [15058] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_offensive_scroll_bonus.dds', stack = 1 }, -- Offensive Scroll Bonus I
+    [16348] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_offensive_scroll_bonus.dds', stack = 2 }, -- Offensive Scroll Bonus II
+    [66282] = { icon = 'esoui/art/icons/achievement_026.dds' }, -- Blessing of War
+
+    [15177] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Altadoon
+    [15178] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Mnem
+    [22282] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Ghartok
+    [22295] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Chim
+    [22297] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Ni-Mohk
+    [22299] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Alma Ruma
+
+    [8350] = { hide = true }, -- Stronger Walls
+    [8351] = { hide = true }, -- Stronger Doors
+    [64674] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = A.Skill_Detection }, -- Cyrodiil Guard See Stealth
+    [8077] = { hide = true }, -- Increased Health
+    [8639] = { hide = true }, -- Increased Damage
+    [43754] = { hide = true }, -- Heavily Resistant Guards
+    [8657] = { hide = true }, -- Heavily Armored Guards
+    [8658] = { hide = true }, -- Eagle Eye Guards
+    [25873] = { hide = true }, -- heal
 
     ----------------------------------------------------------------
     -- TRAPS -------------------------------------------------------

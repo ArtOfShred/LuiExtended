@@ -127,7 +127,7 @@ debugAuras = {
             -- Vendor Potions + AVA Potions + Roguish Draughts
             [17302] = true, -- Restore Health (Vendor)
             [17323] = true, -- Restore Magicka (Vendor)
-            [17382] = true, -- Restore Stamina (Vendor)
+            [17328] = true, -- Restore Stamina (Vendor)
             [72934] = true, -- Restore Stamina (Alliance Battle Draught)
             [72927] = true, -- Restore Health (Alliance Health Draught)
             [72931] = true, -- Restore Magicka (Alliance Spell Draught)
@@ -323,6 +323,7 @@ debugAuras = {
             [72817] = true, -- Magicka Consumable
             [100488] = true, -- Spring-Loaded Infusion
             [100490] = true, -- Magicka Consumable
+            [100489] = true, -- Stamina Consumable
 
             -- Crafted Seasonal Food
             [84681] = true, -- Crisp and Crunchy Pumpkin Skewer (Blue)
@@ -582,13 +583,16 @@ debugAuras = {
             -- NON-COMBAT PETS ------------------
             -------------------------------------
 
-            --[76364] = true, -- _CRWN_5s
+            [76364] = true, -- _CRWN_5s
             --[76365] = true, -- _CRWN_Echalette_Buck
-            --[76367] = true, -- _CRWN_ResetPosture
-            --[76368] = true, -- _CRWN_1s
-            --[78642] = true, -- _CRWN_Jackal_Mouse
-            --[78463] = true, -- _CRWN_Jackal_Digging
+            [76367] = true, -- _CRWN_ResetPosture
+            [76368] = true, -- _CRWN_1s
+            [78642] = true, -- _CRWN_Jackal_Mouse
+            [78643] = true, -- _CRWN_Jackal_Digging
             --[81301] = true, -- _CRWN_Badger_EatCritter
+            [72955] = true, -- _CROWN Pet Goat,Black
+            [81352] = true, -- _CRWN_12.5s (Spotted Snow Senche-Leopard)
+            [60665] = true, -- Vanity Pet Sphere Stun
 
             -------------------------------------
             -- OTHER COLLECTIBLES ---------------
@@ -2091,6 +2095,9 @@ debugAuras = {
             [20303] = true, -- Remove Sprint
             [38519] = true, -- Hiding
             [39046] = true, -- Add Guild Rep
+            [62797] = true, -- Weapon Swap Cooldown Timer
+            [62798] = true, -- Weapon Swap Cooldown Timer
+            [61875] = true, -- Swap to Weapon Set 2
             [85701] = true, -- Dueling Flag
             [2727] = true, -- Off-Balance
             [21263] = true, -- Ayleid Health Bonus
@@ -3589,10 +3596,12 @@ debugAuras = {
             [34366] = true, -- Repentance (Repentance - Rank 1)
             [26823] = true, -- Repentance Magicka Restore (Repentance - Rank 1)
             [26824] = true, -- Repentance Heal (Repentance - Rank 1)
+            --[63020] = true, -- Repentance Remover (Repentance - Rank 1)
 
             [108824] = true, -- Synergy Damage Bonus (Cleansing Ritual - Purify Synergy)
             [22270] = true, -- Purify (Cleansing Ritual - Purify Synergy)
             [44013] = true, -- Purify (Cleansing Ritual - Purify Synergy)
+            --[22269] = true, -- Purify (Cleansing Ritual - Purify Synergy)
             [22265] = true, -- Cleansing Ritual (Cleansing Ritual - Rank 1)
             [26286] = true, -- Healing Ritual (Cleansing Ritual - Rank 1)
             [26290] = true, -- Clensing Ritual Dummy (Cleansing Ritual - Rank 1)
@@ -4979,7 +4988,7 @@ debugAuras = {
             -------------------------------------
 
             [35770] = true, -- Vampirism Base
-            --[39472] = true, -- Vampirism
+            [39472] = true, -- Vampirism
             [40360] = true, -- Vampirism
             [44767] = true, -- Sense Fed Upon
             [80225] = true, -- Timer Reducer
@@ -5106,6 +5115,7 @@ debugAuras = {
             -------------------------------------
 
             [35658] = true, -- Lycanthrophy
+            [31068] = true, -- Sanies Lupinus (Player Bite)
             [40521] = true, -- Sanies Lupinus (Player Bite)
 
             [32464] = true, -- Light Attack
@@ -6678,7 +6688,7 @@ debugAuras = {
             [11016] = true, -- Throw Oil -- Synergies (Footsoldier)
             [10650] = true, -- Oil Drenched -- Synergies (Footsoldier)
             [12439] = true, -- Burning Arrow -- Synergies (Archer)
-            --[70413] = true, -- Burning Arrow (STILL TESTING)
+            [70413] = true, -- Burning Arrow (Archer - Cyrodiil)
             [14068] = true, -- Ignite -- Synergies (Archer)
             [14070] = true, -- Ignite -- Synergies (Archer)
             [10805] = true, -- Ignite -- Synergies (Fire Mage)
@@ -9373,6 +9383,40 @@ debugAuras = {
 
             [90597] = true, -- Overcharge Explusion
             [90598] = true, -- Overcharge Explusion
+
+            -------------------------------------
+            -- CYRODIIL -------------------------
+            -------------------------------------
+
+            [109844] = true, -- Reach
+            [39671] = true, -- Emperorship Alliance Bonus
+
+            [11348] = true, -- Enemy Keep Bonus V
+            [11350] = true, -- Enemy Keep Bonus VI
+            [11352] = true, -- Enemy Keep Bonus VII
+            [11353] = true, -- Enemy Keep Bonus VIII
+
+            [15060] = true, -- Defensive Scroll Bonus I
+            [15058] = true, -- Offensive Scroll Bonus I
+
+            [66282] = true, -- Blessing of War
+
+            [15177] = true, -- Elder Scroll of Altadoon
+            [15178] = true, -- Elder Scroll of Mnem
+            [22282] = true, -- Elder Scroll of Ghartok
+            [22295] = true, -- Elder Scroll of Chim
+            [22297] = true, -- Elder Scroll of Ni-Mohk
+            [22299] = true, -- Elder Scroll of Alma Ruma
+
+            [8350] = true, -- Stronger Walls
+            [8351] = true, -- Stronger Doors
+            [64674] = true, -- Cyrodiil Guard See Stealth
+            [8077] = true, -- Increased Health
+            [8639] = true, -- Increased Damage
+            [43754] = true, -- Heavily Resistant Guards
+            [8657] = true, -- Heavily Armored Guards
+            [8658] = true, -- Eagle Eye Guards
+            [25873] = true, -- heal
 
             -------------------------------------
             -- SEASONAL EVENTS ------------------
