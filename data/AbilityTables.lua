@@ -7,6 +7,12 @@ local A = {}
 -- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------
 -- ---------------------------------------------------
 
+A.Skill_Minor_Breach                = 46206
+A.Skill_Major_Breach                = 33363
+A.Skill_Minor_Fracture              = 38688
+A.Skill_Major_Fracture              = 28307
+A.Skill_Minor_Vulnerability         = 51434
+A.Skill_Major_Vulnerability         = 106754
 A.Skill_Minor_Maim                  = 61856
 A.Skill_Major_Maim                  = 92041
 A.Skill_Major_Evasion               = 90620
@@ -15,8 +21,13 @@ A.Skill_Major_Defile                = 38686
 A.Skill_Major_Expedition            = 61840
 A.Skill_Major_Vitality              = 61275
 A.Skill_Minor_Magickasteal          = 40114
+A.Skill_Minor_Lifesteal             = 33541
 A.Skill_Minor_Sorcery               = 62799
 A.Skill_Minor_Brutality             = 61798
+A.Skill_Minor_Enveration            = 47202
+A.Skill_Minor_Uncertainty           = 47204
+A.Skill_Minor_Cowardice             = 46202
+A.Skill_Minor_Mangle                = 39168
 
 A.Skill_Minor_Slayer				= 76618
 A.Skill_Minor_Aegis					= 76617

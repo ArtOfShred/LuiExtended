@@ -1,3 +1,49 @@
+### Version 5.5
+
+General Components
+- Added RU Translation thanks to a ton of effort from KiriX!
+
+Buffs & Debuffs
+- Did a pass on ALL player skill line abilities - updated auras for all abilities with name corrections, icon corrections, and hid unneccessary dummy auras.
+- Added custom icons for the attacks used by Nightblade, Sorcerer, and Warden pet abilities.
+- Added custom icons for a great deal of NPCs that were missing them including all Dwemer NPCs, Giants, Trolls, Daedric Hungers, Iron Atronachs, etc...
+- Updated localization for major/minor debuffs so that all languages will show major/minor debuffs on the target regardless of source.
+- Reset the options for "Display Extra Buffs & Consolidate Buffs" to account for some changes made with this update as well as added an additional option to consolidate single major/minor auras.
+- Grim Focus updated to track its stack count on the duration buff applied to the player.
+- Fixed an issue where Ground Mine stacks weren't decremented when a mine triggered if an aura was set to prominent.
+- Removed a significant amount of older code related to ground effects that should result in minor performance enhancement.
+- Fixed an issue where the Pelinal's Ferocity experience buff was not correctly labeled as an experience buffs for the purpose of hiding it from display.
+- Updated auras for various sets, and added updated icons/auras for sets from Dragonstar/Maelstrom Arena, as well as all Summerset sets.
+- Fixed an issue where prominent auras weren't removed from tracking when the player died.
+- Added the option to display a timer buff when transformed into a Werewolf. This timer will pause at a Werewolf Shrine or when using the Devour passive.
+- Fixed an issue where dummy auras added by target name (example: CC Immunity buff added to some boss NPCs) would display on dead targets.
+- Fixed an issue where Artifical Effect id's would not refresh when updating settings in the Buffs & Debuffs menu (dummy auras added by ZOS - such as Battle Spirit).
+
+Chat Announcements
+- Fixed an issue that was causing Disguise Notifications not to display even when enabled.
+- Updated Achievement Tracking options with all current categories.
+- Added Psijic Order guild reputation tracking.
+- Fixed an issue where the menu option to modify the context currency/loot message for "Spend" was missing.
+- Added a new context message option "Pay" for gold given to NPC's in conversation options.
+- Jewelry Crafting should now be supported by Loot crafting messages.
+
+Combat Info
+- Did a pass on ALL player skill line abilities - Bar Ability Highlight tracking is now supported for any ability the player can slot.
+- Bar Ability Highlight tracking now supports multi-target tracking, when changing targets the highlighted abilities will update based on what debuffs are currently applied to that target.
+- Fixed an issue where the Crystal Fragments proc sound wouldn't play due to a bad variable name.
+
+Combat Text
+- Fixed an issue where errors would be displayed when the Shorten Numbers option was enabled.
+
+Info Panel
+- Reimplemented the menu option to change the scaling on the Info Panel for higher resolution displays.
+- Mount feed cooldown notification updated from "Feed Now" to "Train Now."
+
+Slash Commands
+- Added the "/outfit" "#" command. Allows you to swap to an outfit. Also adding keybinding options.
+
+---
+
 ### Version 5.4
 
 General

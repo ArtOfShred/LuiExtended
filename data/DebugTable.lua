@@ -4979,6 +4979,7 @@ debugAuras = {
             -------------------------------------
 
             [35770] = true, -- Vampirism Base
+            --[39472] = true, -- Vampirism
             [40360] = true, -- Vampirism
             [44767] = true, -- Sense Fed Upon
             [80225] = true, -- Timer Reducer

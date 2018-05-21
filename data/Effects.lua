@@ -65,14 +65,12 @@ E.IsAbilityProc = {
     [A.Skill_Power_Lash]          = true,
     [A.Skill_Assassins_Will]      = true,
     [A.Skill_Assassins_Scourge]   = true,
-    --[L.Trigger_Deadly_Throw]      = true, -- TODO: Check
 }
 
 E.HasAbilityProc = {
     [A.Skill_Crystal_Fragments]     = 46327,
 }
 
--- TODO: TEMPORARY - Need to update with variants and make sure all these id's are correct.
 -- Vampire / Lycantropy
 E.IsVamp = {
     [35771] = true, -- Stage 1 Vampirism
@@ -86,9 +84,10 @@ E.IsLycan = {
 }
 
 E.IsVampLycanDisease = {
-    [40360] = true, -- Vampirism
-    --[31068] = true, -- Sanies Lupinus
-    [40521] = true, -- Sanies Lupinus
+    [39472] = true, -- Vampirism (NPC Bite)
+    [40360] = true, -- Vampirism (Player Bite)
+    --[31068] = true, -- Sanies Lupinus (NPC Bite)
+    [40521] = true, -- Sanies Lupinus (Player Bite)
 }
 
 E.IsVampLycanBite = {
@@ -356,26 +355,22 @@ E.EffectHideWhenDead = {
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY NAME
 -- TODO: LOCALIZE THIS
 E.DebuffDisplayOverrideName = {
-    ['Major Breach']                    = true,
-    ['Major Cowardice']                 = true,
-    [A.Skill_Major_Defile]              = true,
-    ['Major Enervation']                = true,
-    ['Major Fracture']                  = true,
-    ['Major Hindrance']                 = true,
-    ['Major Maim']                      = true,
-    ['Major Mangle']                    = true,
-    ['Major Uncertainty']               = true,
-    ['Major Vulnerability']             = true,
-    ['Minor Breach']                    = true,
-    ['Minor Cowardice']                 = true,
+    [A.Skill_Minor_Breach]              = true,
+    [A.Skill_Major_Breach]              = true,
     [A.Skill_Minor_Defile]              = true,
-    ['Minor Enervation']                = true,
-    ['Minor Fracture']                  = true,
-    ['Minor Hindrance']                 = true,
+    [A.Skill_Major_Defile]              = true,
+    [A.Skill_Minor_Fracture]            = true,
+    [A.Skill_Major_Fracture]            = true,
     [A.Skill_Minor_Maim]                = true,
-    ['Minor Mangle']                    = true,
-    ['Minor Uncertainty']               = true,
-    ['Minor Vulnerability']             = true,
+    [A.Skill_Major_Maim]                = true,
+    [A.Skill_Minor_Vulnerability]       = true,
+    [A.Skill_Major_Vulnerability]       = true,
+    [A.Skill_Minor_Mangle]              = true,
+    [A.Skill_Minor_Cowardice]           = true,
+    [A.Skill_Minor_Enveration]          = true,
+    [A.Skill_Minor_Uncertainty]         = true,
+    [A.Skill_Minor_Magickasteal]        = true,
+    [A.Skill_Minor_Lifesteal]           = true,
 }
 
 -- Adds this aura to a list of fake GROUND auras to display
@@ -3581,6 +3576,7 @@ E.EffectOverride = {
     -- VAMPIRE PASSIVES --------------------------------------------
     ----------------------------------------------------------------
 
+    [39472] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = A.Passive_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
     [40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = A.Passive_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
     [35771] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_1.dds', stack = 1 }, -- Stage 1 Vampirism (Vampire General)
     [35776] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_2.dds', stack = 2 }, -- Stage 2 Vampirism (Vampire General)
