@@ -15,6 +15,7 @@ local unpack        = unpack
 local pairs         = pairs
 
 local eventManager  = EVENT_MANAGER
+local sceneManager  = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
 
 local callLater     = zo_callLater
@@ -56,8 +57,21 @@ CI.D = {
     PotionTimerFontSize              = 18,
     PotionTimerColor                 = true,
     PotionTimerMillis                = true,
+    CastBarEnable                    = false,
+    CastBarTexture                   = "Plain",
+    CastBarLabel                     = true,
+    CastBarTimer                     = true,
+    CastBarFontFace                  = "Univers 67",
+    CastBarFontStyle                 = "soft-shadow-thick",
+    CastBarFontSize                  = 16,
+    CastBarGradientC1                = { 0, 47/255, 130/255 },
+    CastBarGradientC2                = { 82/255, 215/255, 1 },
 }
 CI.SV       = nil
+
+local uiTlw                 = {} -- GUI
+local castbar               = {} -- castbar
+local g_casting             = false
 
 local g_ultimateCost        = 0
 local g_ultimateCurrent     = 0
@@ -79,6 +93,7 @@ local g_pendingGroundAbility = nil
 local g_barFont
 local g_potionFont
 local g_ultimateFont
+local g_castbarFont
 local g_ProcSound
 local g_barOverrideCI        = {} -- Table for storing abilityId's from E.BarHighlightOverride that should show as an aura (Created on initialization)
 local g_barFakeAura          = {} -- Table for storing abilityId's that only display a fakeaura (Created on initialization)
@@ -294,6 +309,11 @@ function CI.Initialize( enabled )
         self.isGlobalCooldown = global
         self:UpdateUsable()
     end
+
+    CI.CreateCastBar()
+    CI.UpdateCastBar()
+    CI.SetCastBarPosition()
+
 end
 
 -- Helper function to get override ability duration.
@@ -369,7 +389,7 @@ end
 
 -- Clear and then (maybe) re-register event listeners for Combat/Power/Slot Updates
 function CI.RegisterCombatInfo()
-    eventManager:RegisterForUpdate(moduleName, 100, CI.OnUpdate )
+    eventManager:RegisterForUpdate(moduleName.."CI_UPDATE", 100, CI.OnUpdate )
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CI.OnPlayerActivated )
 
     eventManager:UnregisterForEvent(moduleName, EVENT_COMBAT_EVENT )
@@ -415,6 +435,7 @@ end
 
 -- Updates all floating labels. Called every 100ms
 function CI.OnUpdate(currentTime)
+
     -- Procs
     for k, v in pairs (g_triggeredSlotsRemain) do
         local remain = g_triggeredSlotsRemain[k] - currentTime
@@ -490,6 +511,37 @@ function CI.OnUpdate(currentTime)
             uiUltimate.Texture:SetHidden(true)
         end
     end
+
+end
+
+function CI.OnUpdateCastbar(currentTime)
+    -- Update castbar
+    -- IF CASTBAR STUFF HERE -- TODO
+    if not castbar:IsHidden() then
+
+        local castStarts = castbar.starts
+        local castEnds = castbar.ends
+        local remain = castbar.remain - currentTime
+        if remain <= 0 then
+            castbar.bar.name:SetHidden(true)
+            castbar.bar.timer:SetHidden(true)
+            castbar:SetHidden(true)
+            castbar.remain = nil
+            castbar.starts = nil
+            castbar.ends = nil
+            g_casting = false
+            eventManager:UnregisterForUpdate(moduleName.."CI_CASTBAR")
+        else
+            if CI.SV.CastBarTimer then
+                castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
+            end
+            if castbar.type == 1 then
+                castbar.bar.bar:SetValue( (currentTime - castStarts) / (castEnds - castStarts) )
+            else
+                castbar.bar.bar:SetValue(1 - ((currentTime - castStarts) / (castEnds - castStarts)))
+            end
+        end
+    end
 end
 
 -- Updates local variable with new font and resets all existing icons
@@ -550,6 +602,18 @@ function CI.ApplyFont()
     if uiUltimate.LabelPct then
         uiUltimate.LabelPct:SetFont(g_ultimateFont)
     end
+
+    local castbarFontName = LUIE.Fonts[CI.SV.CastBarFontFace]
+    if not castbarFontName or castbarFontName == "" then
+        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
+        castbarFontName = "$(MEDIUM_FONT)"
+    end
+
+    local castbarFontStyle = ( CI.SV.CastBarFontStyle and CI.SV.CastBarFontStyle ~= "" ) and CI.SV.CastBarFontStyle or "soft-shadow-thin"
+    local castbarFontSize = ( CI.SV.CastBarFontSize and CI.SV.CastBarFontSize > 0 ) and CI.SV.CastBarFontSize or 16
+
+    g_castbarFont = castbarFontName .. "|" .. castbarFontSize .. "|" .. castbarFontStyle
+
 end
 
 function CI.ApplyProcSound(menu)
@@ -745,6 +809,127 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
     end
 end
 
+function CI.CreateCastBar()
+
+            uiTlw.castBar = UI.TopLevel( nil, nil )
+            uiTlw.castBar:SetHandler( "OnMoveStop", function(self)
+                CI.SV.CastOffsetX = self:GetLeft()
+                CI.SV.CastOffsetY = self:GetTop()
+            end )
+
+            uiTlw.castBar:SetDimensions( 500, 40 )
+
+
+            local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.castBar, 0, 0)
+
+            sceneManager:GetScene("hud"):AddFragment( fragment )
+            sceneManager:GetScene("hudui"):AddFragment( fragment )
+            sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+
+            castbar = UI.Backdrop( uiTlw.castBar, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
+            castbar:SetAnchor(CENTER, uiTlw.castBar, CENTER)
+
+            castbar.starts = 0
+            castbar.ends = 0
+            castbar.remain = 0
+
+            castbar:SetDimensions( 32, 32 )
+
+            castbar.back = UI.Texture( castbar, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false )
+            castbar.back:SetAnchor(TOPLEFT, castbar, TOPLEFT)
+            castbar.back:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT)
+
+            castbar.iconbg = UI.Texture( castbar, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false )
+            castbar.iconbg = UI.Backdrop( castbar, nil, nil, {0,0,0,0.9}, {0,0,0,0.9}, false )
+            castbar.iconbg:SetDrawLevel(DL_CONTROLS)
+            castbar.iconbg:SetAnchor( TOPLEFT, buff, TOPLEFT, 3, 3)
+            castbar.iconbg:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -3, -3)
+
+            castbar.icon   = UI.Texture( castbar, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false )
+            castbar.icon:SetAnchor( TOPLEFT, buff, TOPLEFT, 3, 3 )
+            castbar.icon:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -3, -3 )
+
+            castbar.bar = {
+                ["backdrop"] = UI.Backdrop( castbar, nil, {300, 22}, nil, nil, false ),
+                ["bar"] = UI.StatusBar( castbar, nil, {296, 18}, nil, false ),
+                ["name"] = UI.Label( castbar, nil, nil, nil, nil, g_castbarFont, false ),
+                ["timer"] = UI.Label( castbar, nil, nil, nil, nil, g_castbarFont, false ),
+            }
+
+            castbar.bar.backdrop:SetEdgeTexture("",8,2,2)
+            castbar.bar.backdrop:SetDrawLayer(DL_BACKDROP)
+            castbar.bar.backdrop:SetDrawLevel(1)
+            castbar.bar.bar:SetMinMax(0, 1)
+            castbar.bar.backdrop:SetCenterColor((0.1*.50), (0.1*.50), (0.1*.50), 0.75)
+            castbar.bar.bar:SetGradientColors( 0, 47/255, 130/255, 1, 82/255, 215/255, 1, 1)
+            castbar.bar.backdrop:SetCenterColor((0.1*CI.SV.CastBarGradientC1[1]), (0.1*CI.SV.CastBarGradientC1[2]), (0.1*CI.SV.CastBarGradientC1[3]), 0.75)
+            castbar.bar.bar:SetGradientColors( CI.SV.CastBarGradientC1[1], CI.SV.CastBarGradientC1[2], CI.SV.CastBarGradientC1[3], 1, CI.SV.CastBarGradientC2[1], CI.SV.CastBarGradientC2[2], CI.SV.CastBarGradientC2[3], 1)
+
+
+            castbar.bar.backdrop:ClearAnchors()
+            castbar.bar.backdrop:SetAnchor(LEFT, castbar, RIGHT, 4, 0 )
+
+            castbar.bar.timer:ClearAnchors()
+            castbar.bar.timer:SetAnchor(RIGHT, castbar.bar.backdrop, RIGHT, -4, 0 )
+            castbar.bar.timer:SetHidden(true)
+
+            castbar.bar.name:ClearAnchors()
+            castbar.bar.name:SetAnchor(LEFT, castbar.bar.backdrop, LEFT, 4, 0 )
+            castbar.bar.name:SetHidden(true)
+
+            castbar.bar.bar:SetTexture(LUIE.StatusbarTextures[CI.SV.CastBarTexture])
+            castbar.bar.bar:ClearAnchors()
+            castbar.bar.bar:SetAnchor(CENTER, castbar.bar.backdrop, CENTER, 0, 0)
+            castbar.bar.bar:SetAnchor(CENTER, castbar.bar.backdrop, CENTER, 0, 0)
+
+            castbar.bar.timer:SetText("Timer")
+            castbar.bar.name:SetText("Name")
+
+            castbar:SetHidden(true)
+
+end
+
+function CI.UpdateCastBar()
+    castbar.bar.name:SetFont(g_castbarFont)
+    castbar.bar.timer:SetFont(g_castbarFont)
+    castbar.bar.bar:SetTexture(LUIE.StatusbarTextures[CI.SV.CastBarTexture])
+    castbar.bar.backdrop:SetCenterColor((0.1*CI.SV.CastBarGradientC1[1]), (0.1*CI.SV.CastBarGradientC1[2]), (0.1*CI.SV.CastBarGradientC1[3]), 0.75)
+    castbar.bar.bar:SetGradientColors( CI.SV.CastBarGradientC1[1], CI.SV.CastBarGradientC1[2], CI.SV.CastBarGradientC1[3], 1, CI.SV.CastBarGradientC2[1], CI.SV.CastBarGradientC2[2], CI.SV.CastBarGradientC2[3], 1)
+end
+
+function CI.ResetCastBarPosition()
+    if not CI.Enabled then
+        return
+    end
+    CI.SV.CastOffsetX = nil
+    CI.SV.CastOffsetY = nil
+    CI.SetCastBarPosition()
+end
+
+function CI.SetCastBarPosition()
+    if uiTlw.castBar and uiTlw.castBar:GetType() == CT_TOPLEVELCONTROL then
+        uiTlw.castBar:ClearAnchors()
+        if CI.SV.CastOffsetX ~= nil and CI.SV.CastOffsetY ~= nil then
+            uiTlw.castBar:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, CI.SV.CastOffsetX, CI.SV.CastOffsetY )
+        else
+            uiTlw.castBar:SetAnchor( CENTER, GuiRoot, CENTER, -145, 320 )
+        end
+    end
+end
+
+function CI.SetMovingState(state)
+    if not CI.Enabled then
+        return
+    end
+
+    if uiTlw.castBar and uiTlw.castBar:GetType() == CT_TOPLEVELCONTROL then
+        uiTlw.castBar:SetMouseEnabled( state )
+        uiTlw.castBar:SetMovable( state )
+        castbar:SetHidden( not state )
+    end
+
+end
+
 -- Listens to EVENT_COMBAT_EVENT
 function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
     -- Manually track Ultimate generation -- same as in CI module
@@ -756,6 +941,64 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         uiUltimate.Texture:SetHidden(false)
         uiUltimate.FadeTime = GetGameTimeMilliseconds() + 8000
     end
+
+    -- Bail out past here if the source isn't player, cast bar is disabled, or the ability is not on the list of abilities to show the cast bar for
+    if sourceType ~= COMBAT_UNIT_TYPE_PLAYER then
+        return
+    end
+
+    if not CI.SV.CastBarEnable then
+        return
+    end
+
+    if not E.IsCast[abilityId] then
+        return
+    end
+
+        local icon = GetAbilityIcon(abilityId)
+        local name = GetAbilityName(abilityId)
+
+        local duration
+        local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
+        if channeled then
+            duration = channelTime
+        else
+            duration = castTime
+        end
+
+        if duration > 0 and not g_casting then
+            if result == 2200 or result == 2210 then -- and CI.SV.CastBarCast
+                local currentTime = GetGameTimeMilliseconds()
+                local endTime = currentTime + duration
+                local remain = endTime - currentTime
+
+                castbar.remain = endTime
+                castbar.starts = currentTime
+                castbar.ends = endTime
+                castbar.icon:SetTexture(icon)
+
+                if channeled then
+                    castbar.type = 2 -- CHANNEL
+                    castbar.bar.bar:SetValue(1)
+                else
+                    castbar.type = 1 -- CAST
+                    castbar.bar.bar:SetValue(0)
+                end
+                if CI.SV.CastBarLabel then
+                    castbar.bar.name:SetText(name)
+                    castbar.bar.name:SetHidden(false)
+                end
+                if CI.SV.CastBarTimer then
+                    castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
+                    castbar.bar.timer:SetHidden(false)
+                end
+
+                castbar:SetHidden(false)
+                g_casting = true
+                eventManager:RegisterForUpdate(moduleName.."CI_CASTBAR", 20, CI.OnUpdateCastbar )
+            end
+        end
+
 end
 
 function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )

@@ -1387,6 +1387,148 @@ function LUIE_CreateSettings()
             },
         },
     }
+    -- Combat Info -- Cast Bar Option Submenu
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_CI_HEADER_CASTBAR),
+        controls = {
+
+            -- Cast Bar Unlock
+            {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE_TP),
+                getFunc = function() return l_CastBarMovingEnabled end,
+                setFunc = function(value)
+                    l_CastBarMovingEnabled = value
+                    LUIE.CombatInfo.SetMovingState(value)
+                    end,
+                width = "half",
+                default = false,
+                resetFunc = LUIE.CombatInfo.ResetCastBarPosition,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CastBarEnable ) end,
+            },
+            -- Cast Bar Unlock Reset position
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_RESETPOSITION),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_RESET),
+                func = LUIE.CombatInfo.ResetCastBarPosition,
+                width = "half",
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CastBarEnable ) end,
+            },
+            {
+                -- Enable Cast Bar
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_CASTBAR_ENABLE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_ENABLE_TP),
+                getFunc = function() return LUIE.CombatInfo.SV.CastBarEnable end,
+                setFunc = function(value) LUIE.CombatInfo.SV.CastBarEnable = value end,
+                width = "full",
+                default = LUIE.CombatInfo.D.CastBarEnable,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+            },
+
+            {
+                -- Display Label
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_LABEL)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_LABEL_TP),
+                getFunc = function() return LUIE.CombatInfo.SV.CastBarLabel end,
+                setFunc = function(value) LUIE.CombatInfo.SV.CastBarLabel = value end,
+                width = "full",
+                default = LUIE.CombatInfo.D.CastBarLabel,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CastBarEnable ) end,
+            },
+            {
+                -- Display Timer
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_TIMER)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_TIMER_TP),
+                getFunc = function() return LUIE.CombatInfo.SV.CastBarTimer end,
+                setFunc = function(value) LUIE.CombatInfo.SV.CastBarTimer = value end,
+                width = "full",
+                default = LUIE.CombatInfo.D.CastBarTimer,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CastBarEnable ) end,
+            },
+            {
+                -- Cast Bar Font Face
+                type = "dropdown",
+                scrollable = true,
+                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_FONTFACE)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_FONTFACE_TP),
+                choices = FontsList,
+                sort = "name-up",
+                getFunc = function() return LUIE.CombatInfo.SV.CastBarFontFace end,
+                setFunc = function(var) LUIE.CombatInfo.SV.CastBarFontFace = var LUIE.CombatInfo.ApplyFont() LUIE.CombatInfo.UpdateCastBar() end,
+                width = "full",
+                default = LUIE.CombatInfo.D.CastBarFontFace,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.CombatInfo.SV.CastBarEnable and (LUIE.CombatInfo.SV.CastBarTimer or LUIE.CombatInfo.SV.CastBarLabel) ) end,
+            },
+            {
+                -- Cast Bar Font Size
+                type = "slider",
+                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSIZE)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSIZE_TP),
+                min = 10, max = 30, step = 1,
+                getFunc = function() return LUIE.CombatInfo.SV.CastBarFontSize end,
+                setFunc = function(value) LUIE.CombatInfo.SV.CastBarFontSize = value LUIE.CombatInfo.ApplyFont() LUIE.CombatInfo.UpdateCastBar() end,
+                width = "full",
+                default = LUIE.CombatInfo.D.CastBarFontSize,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.CombatInfo.SV.CastBarEnable and (LUIE.CombatInfo.SV.CastBarTimer or LUIE.CombatInfo.SV.CastBarLabel) ) end,
+            },
+            {
+                -- Cast Bar Font Style
+                type = "dropdown",
+                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSTYLE)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSTYLE_TP),
+                choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
+                sort = "name-up",
+                getFunc = function() return LUIE.CombatInfo.SV.CastBarFontStyle end,
+                setFunc = function(var) LUIE.CombatInfo.SV.CastBarFontStyle = var LUIE.CombatInfo.ApplyFont() LUIE.CombatInfo.UpdateCastBar() end,
+                width = "full",
+                default = LUIE.CombatInfo.D.CastBarFontStyle,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.CombatInfo.SV.CastBarEnable and (LUIE.CombatInfo.SV.CastBarTimer or LUIE.CombatInfo.SV.CastBarLabel) ) end,
+            },
+            {
+                -- Cast Bar Texture
+                type = "dropdown",
+                scrollable = true,
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_TEXTURE)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_TEXTURE_TP),
+                choices = StatusbarTexturesList,
+                sort = "name-up",
+                getFunc = function() return LUIE.CombatInfo.SV.CastBarTexture end,
+                setFunc = function(value) LUIE.CombatInfo.SV.CastBarTexture = value LUIE.CombatInfo.UpdateCastBar() end,
+                width = "full",
+                default = LUIE.CombatInfo.D.CastBarTexture,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CastBarEnable ) end,
+            },
+            {
+                -- Cast Bar Gradient Color 1
+                type    = "colorpicker",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC1)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC1_TP),
+                getFunc = function() return unpack(LUIE.CombatInfo.SV.CastBarGradientC1) end,
+                setFunc = function(r, g, b, a) LUIE.CombatInfo.SV.CastBarGradientC1 = { r, g, b, a } LUIE.CombatInfo.UpdateCastBar() end,
+				width = "half",
+                default = {r=LUIE.CombatInfo.SV.CastBarGradientC1[1], g=LUIE.CombatInfo.SV.CastBarGradientC1[2], b=LUIE.CombatInfo.SV.CastBarGradientC1[3]},
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CastBarEnable ) end,
+            },
+			{
+                -- Cast Bar Gradient Color 2
+                type    = "colorpicker",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2)),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2_TP),
+                getFunc = function() return unpack(LUIE.CombatInfo.SV.CastBarGradientC2) end,
+                setFunc = function(r, g, b, a) LUIE.CombatInfo.SV.CastBarGradientC2 = { r, g, b, a } LUIE.CombatInfo.UpdateCastBar() end,
+				width = "half",
+                default = {r=LUIE.CombatInfo.SV.CastBarGradientC2[1], g=LUIE.CombatInfo.SV.CastBarGradientC2[2], b=LUIE.CombatInfo.SV.CastBarGradientC2[3]},
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CastBarEnable ) end,
+            },
+
+        },
+    }
 
 ----------------------------------------------------------------------------------------------
 -- BUFFS AND DEBUFFS
@@ -7456,7 +7598,7 @@ function LUIE_CreateSettings()
     -- Custom Unit Frames Reset position
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "button",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT),
+        name = GetString(SI_LUIE_LAM_RESETPOSITION),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT_TP),
         func = function() LUIE.UnitFrames.CustomFramesResetPosition(false) end,
         width = "half",

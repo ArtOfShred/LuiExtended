@@ -374,6 +374,13 @@ E.DebuffDisplayOverrideName = {
     [A.Skill_Minor_Lifesteal]           = true,
 }
 
+E.IsCast = {
+
+    [26792] = true, -- Biting Jabs
+    [28279] = true, -- Uppercut
+
+}
+
 -- Adds this aura to a list of fake GROUND auras to display
 -- Optional: name, icon
 -- Required: buff, debuff, ground = true/false
