@@ -374,10 +374,80 @@ E.DebuffDisplayOverrideName = {
     [A.Skill_Minor_Lifesteal]           = true,
 }
 
+E.CastDurationFix = {
+
+[33152] = 6300,
+
+}
+
 E.IsCast = {
 
-    [26792] = true, -- Biting Jabs
-    [28279] = true, -- Uppercut
+
+    ------------------------------
+    -- Player Abilities ----------
+    ------------------------------
+
+    -- Class
+    [26114] = true, -- Puncturing Strikes (Templar)
+    [26792] = true, -- Biting Jabs (Templar)
+    [26797] = true, -- Puncturing Sweep (Templar)
+    [22057] = true, -- Solar Flare (Templar)
+    [22110] = true, -- Dark Flare (Templar)
+    [22095] = true, -- Solar Barrage (Templar)
+    [63029] = true, -- Radiant Destruction (Templar)
+    [63044] = true, -- Radiant Glory (Templar)
+    [63046] = true, -- Radiant Oppression (Templar)
+    [22223] = true, -- Rite of Passage (Templar)
+    [22229] = true, -- Remembrance (Templar)
+    [22226] = true, -- Practiced Incantation (Templar)
+
+    [85982] = true, -- Feral Guardian (Warden)
+    [85986] = true, -- Eternal Guardian (Warden)
+    [85990] = true, -- Wild Guardian (Warden)
+
+    -- Weapon
+    [28279] = true, -- Uppercut (Two Handed)
+    [38814] = true, -- Dizzying Swing (Two Handed)
+    [38807] = true, -- Wrecking Blow (Two Handed)
+    [28607] = true, -- Flurry (Dual Wield)
+    [38857] = true, -- Rapid Strikes (Dual Wield)
+    [38846] = true, -- Bloodthirst (Duel Wield)
+    [28882] = true, -- Snipe (Bow)
+    [38685] = true, -- Lethal Arrow (Bow)
+    [38687] = true, -- Focused Aim (Bow)
+    [83465] = true, -- Rapid Fire (Bow)
+    [85257] = true, -- Toxic Barrage (Bow)
+
+    [31531] = true, -- Force Siphon (Restoration Staff)
+    [40109] = true, -- Siphon Spirit (Restoration Staff)
+
+    -- World
+    [39270] = true, -- Soul Strike (Soul Magic)
+    [40420] = true, -- Soul Assault (Soul Magic)
+    [40414] = true, -- Shatter Soul (Soul Magic)
+    [33152] = true, -- Feed (Vampire)
+    [32893] = true, -- Drain Essence (Vampire)
+    [32986] = true, -- Mist Form (Vampire)
+    [38963] = true, -- Elusive Mist (Vampire)
+    [38965] = true, -- Baleful Mist (Vampire)
+    [38949] = true, -- Invigorating Drain (Vampire)
+    [38956] = true, -- Accelerating Drain (Vampire)
+    [33208] = true, -- Devour (Werewolf)
+    [32633] = true, -- Roar (Werewolf)
+    [39113] = true, -- Ferocious Roar (Werewolf)
+    [39114] = true, -- Rousing Roar (Werewolf)
+
+    -- Guild
+    [103488] = true, -- Time Stop (Psijic Order)
+    [104059] = true, -- Borrowed Time (Psijic Order)
+    [103706] = true, -- Channeled Acceleration (Psijic Order)
+    [39489] = true, -- Blood Altar (Undaunted)
+    [41967] = true, -- Sanguine Altar (Undaunted)
+    [41958] = true, -- Overflowing Altar (Undaunted)
+
+    -- Alliance War
+    [61487] = true, -- Magicka Detonation (Assault)
+    [61491] = true, -- Inevitable Detonation (Assault)
 
 }
 

@@ -961,13 +961,13 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         local duration
         local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
         if channeled then
-            duration = channelTime
+            duration = E.CastDurationFix[abilityId] or channelTime
         else
-            duration = castTime
+            duration = E.CastDurationFix[abilityId] or castTime
         end
 
         if duration > 0 and not g_casting then
-            if result == 2200 or result == 2210 then -- and CI.SV.CastBarCast
+            if result == 2200 or result == 2210 or (result == 2240 and E.CastDurationFix[abilityId]) then -- and CI.SV.CastBarCast
                 local currentTime = GetGameTimeMilliseconds()
                 local endTime = currentTime + duration
                 local remain = endTime - currentTime
