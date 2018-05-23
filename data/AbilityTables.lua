@@ -747,6 +747,10 @@ A.Skill_Barrier                     = 38573
 A.Skill_Swordstorm                  = 36858
 A.Skill_Flame_Shield                = 37173
 A.Skill_Royal_Strike                = 38729
+A.Skill_Consecrate_Shrine           = GetString(SI_LUIE_SKILL_CONSECRATE_SHRINE)
+A.Skill_Remove_Ward                 = 18606
+A.Skill_Nova                        = 21752
+A.Skill_Shock                       = 27598
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

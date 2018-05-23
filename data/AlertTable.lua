@@ -520,8 +520,13 @@ LUIE.AlertTable = {
 
     -- MSQ 6 (Halls of Torment)
     [36858] = { interrupt = true, avoid = true, priority = 2, eventdetect = true, refire = 1500 }, -- Swordstorm (Tharn Doppleganger)
-    [37173] = { interrupt = true, priority = 2, eventdetect = true, notdirect = true }, -- Flame Shield (Duchess of Anguish)
+    [37173] = { interrupt = true, priority = 2, eventdetect = true, notDirect = true }, -- Flame Shield (Duchess of Anguish)
     [38729] = { block = true, interrupt = true, priority = 2, refire = 500 }, -- Royal Strike (Duchess of Anguish)
+
+    -- MSQ 7 (Shadow of Sancre Tor)
+    [39302] = { interrupt = true, priority = 2, eventdetect = true, notDirect = true, refire = 1000 }, -- Necromantic Revival
+    [38215] = { interrupt = true, priority = 2, refire = 1000 }, -- Death's Gaze (Mannimarco)
+    [40425] = { avoid = true, priority = 2 }, -- Impending Doom (Mannimarco)
 
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------

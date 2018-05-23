@@ -2143,6 +2143,7 @@ local strings = {
     SI_LUIE_SKILL_LAVA_FOOT_STOMP =                      "Lava Foot Stomp",
     SI_LUIE_SKILL_TORCH_JUGGLING =                       "Torch Juggling",
     SI_LUIE_SKILL_WALL_OF_FLAMES =                       "Wall of Flames",
+    SI_LUIE_SKILL_CONSECRATE_SHRINE =                    "Consecrate Shrine",
 }
 
 -- TODO: Switch to StringId's

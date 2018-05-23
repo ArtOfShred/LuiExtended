@@ -3226,6 +3226,15 @@ function CA.ResolveQuestItemChange()
 
             -- Lower
             if newValue < questItemIndex[itemId].stack then
+
+                -- Easy temporary debug for my accounts only
+                local displayName = GetDisplayName()
+                if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+                    d(itemId .. " Removed")
+                end
+                --
+                if LUIE.Effects.QuestItemHideRemove[itemId] then return end -- Return if this ID should be ignored
+
                 countChange = newValue + questItemIndex[itemId].counter
 
                 if CA.SV.Inventory.LootQuestRemove then
@@ -3257,6 +3266,15 @@ function CA.ResolveQuestItemChange()
 
             -- Higher
             if newValue > questItemIndex[itemId].stack then
+
+                -- Easy temporary debug for my accounts only
+                local displayName = GetDisplayName()
+                if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+                    d(itemId .. " Added")
+                end
+                --
+                if LUIE.Effects.QuestItemHideLoot[itemId] then return end -- Return if this ID should be ignored
+
                 countChange = newValue - questItemIndex[itemId].stack
 
                 if CA.SV.Inventory.LootQuestAdd then

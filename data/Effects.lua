@@ -356,6 +356,24 @@ E.EffectHideWhenDead = {
     [44176] = true, -- Flying Immunities (Various NPC's)
 }
 
+-- TODO: Probably move these into CA later, but for now nice to have tables in one area.
+-- List of Quest Items to ignore when Looted (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
+E.QuestItemHideLoot = {
+
+    -- Main Story Quests
+    [4458] = true, -- Ring of Stendarr's Mercy (Shadow of Sancre Tor)
+
+}
+
+-- List of Quest Items to ignore when Removed (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
+E.QuestItemHideRemove = {
+
+    [4377] = true, -- Ring of Stendarr's Mercy (Shadow of Sancre Tor)
+    -- Main Story Quests
+    -- insert first Ring of SM here
+
+}
+
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY NAME
 -- TODO: LOCALIZE THIS
 E.DebuffDisplayOverrideName = {
@@ -385,6 +403,9 @@ E.CastChannelOverride = {
     [32346] = true, -- Skyshard Collect
     [14031] = true, -- Mundus Use
 
+    -- Quest
+    [39367] = true, -- Altar Use (Shadow of Sancre Tor)
+
 }
 
 E.CastDurationFix = {
@@ -399,6 +420,9 @@ E.CastDurationFix = {
     [39033] = 2000, -- Begin Werewolf (Werewolf)
     [39477] = 1750, -- De-Werewolf (Werewolf)
     [75008] = 6500, -- Werewolf Transformation (Werewolf - Quest Transformation)
+
+    -- Quest
+    [39367] = 10000, -- Altar Use (Shadow of Sancre Tor)
 
 }
 
@@ -497,6 +521,10 @@ E.IsCast = {
     -- Alliance War
     [61487] = true, -- Magicka Detonation (Assault)
     [61491] = true, -- Inevitable Detonation (Assault)
+
+    -- Quest
+    [39367] = true, -- Altar Use (Shadow of Sancre Tor)
+    [37827] = true, -- Stendarr's Protection (Shadow of Sancre Tor)
 
 }
 
@@ -1351,6 +1379,7 @@ E.AddNameAura = {
     ['Manifestation of Regret'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Ancient Clannfear'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Manifestation of Terror'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
+    ['Mannimarco'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
 
     -- Dolmen Bosses
     ['Dread Xivkyn Cauterizer'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
@@ -5939,6 +5968,32 @@ E.EffectOverride = {
     [38729] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_royal_strike.dds' }, -- Royal Strike (Duchess of Anguish)
     [38741] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_royal_strike.dds', name = A.Skill_Royal_Strike }, -- Royal Snare (Duchess of Anguish)
     [38728] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_daedra_fa_red.dds' }, -- Summon Daedra (Duchess of Anguish)
+    [41021] = { hide = true }, -- Mannimarco's Triumph
+    [39302] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_empower_atronach.dds' }, -- Necromantic Revival
+    [39367] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_consecrate_shrine.dds', name = A.Skill_Consecrate_Shrine }, -- Altar Use
+    [37827] = { hide = true, icon = 'esoui/art/icons/achievement_021.dds', name = A.Skill_Remove_Ward }, -- Stendarr's Protection
+    [46816] = { hide = true }, -- Shake
+
+    [38207] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_death_bolt.dds', hide = true }, -- Death Bolt (Mannimarco)
+    [41067] = { hide = true }, -- Dummy (Mannimarco)
+    [40401] = { hide = true }, -- Daedric Step (Mannimarco)
+    [40400] = { hide = true }, -- Daedric Step (Mannimarco)
+    [40399] = { hide = true }, -- Daedric Step (Mannimarco)
+    [38215] = { icon = 'esoui/art/icons/ability_mage_041.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Death's Gaze (Mannimarco)
+    [38217] = { icon = 'esoui/art/icons/ability_mage_041.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, duration = 0 }, -- Death's Gaze (Mannimarco)
+    [40425] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_storm_bound.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Shock, A.Skill_Nova) }, -- Impending Doom (Mannimarco)
+    [40427] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_storm_bound.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Shock, A.Skill_Nova) }, -- Doom (Mannimarco)
+    [40430] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_storm_bound.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Shock, A.Skill_Nova) }, -- Doom (Mannimarco)
+    [41022] = { hide = true }, -- Nova (Mannimarco)
+    [40429] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, unbreakable = 1 }, -- IntroKB (Mannimarco)
+    [40426] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback }, -- Staggering Roar (Mannimarco)
+
+    [40976] = { hide = true }, -- dummy (Mannimarco)
+    [44083] = { hide = true }, -- Ghostly (Mannimarco)
+    [42083] = { hide = true }, -- PortalHoldstun (Mannimarco)
+    [40573] = { hide = true }, -- StopPortalStun (Mannimarco)
+    [40980] = { hide = true }, -- dummy (Mannimarco)
+    [40983] = { hide = true }, -- dummy (Mannimarco)
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -6348,6 +6403,7 @@ E.FakeExternalDebuffs = {
     [14972] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 2000 }, -- CON_Knockback&Knockdown (Castle of the Worm)
     [44561] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 3000 }, -- FGQ4 RGT Event Knockback (Lyris Doppleganger - Halls of Torment)
     [38741] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_royal_strike.dds', name = A.Skill_Royal_Strike, duration = 4000 }, -- Royal Snare (Duchess of Anguish - Halls of Torment)
+    [40429] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 2000 }, -- IntroKB (Mannimarco - Shadow of Sancre Tor)
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------

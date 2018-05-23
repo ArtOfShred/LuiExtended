@@ -9051,6 +9051,52 @@ debugAuras = {
             [36025] = true, -- SW CON_Screen Shake on Target
             [38354] = true, -- MQ4.5 Undead Sword Singer Init
 
+            -- Shadow of Sancre Tor
+            [44413] = true, -- CON_EvilBeamSummonOnSelf
+            [44662] = true, -- Sai Torture
+            [37368] = true, -- Awaken
+            [41021] = true, -- Mannimarco's Triumph
+            [39302] = true, -- Necromantic Revival
+            [39304] = true, -- Necromantic Revival
+            [39367] = true, -- Altar Use
+            [44642] = true, -- Dream Spawn
+            [37827] = true, -- Stendarr's Protection
+            [46816] = true, -- Shake
+            [41989] = true, -- Manniintro
+
+            [38207] = true, -- Death Bolt (Mannimarco)
+            [41067] = true, -- Dummy (Mannimarco)
+            [41069] = true, -- Dummy (Mannimarco)
+            [40398] = true, -- Daedric Step (Mannimarco)
+            [40401] = true, -- Daedric Step (Mannimarco)
+            [40400] = true, -- Daedric Step (Mannimarco)
+            [40399] = true, -- Daedric Step (Mannimarco)
+            [38215] = true, -- Death's Gaze (Mannimarco)
+            [38217] = true, -- Death's Gaze (Mannimarco)
+            [40346] = true, -- Death's Rejuvenation (Mannimarco)
+            [40425] = true, -- Impending Doom (Mannimarco)
+            [40428] = true, -- Nova (Mannimarco)
+            [40431] = true, -- Doom (Mannimarco)
+            [40427] = true, -- Doom (Mannimarco)
+            [40430] = true, -- Doom (Mannimarco)
+            [41022] = true, -- Nova (Mannimarco)
+            --[40429] = true, -- IntroKB (Mannimarco)
+            --[40426] = true, -- Staggering Roar (Mannimarco)
+            [40973] = true, -- Portal Spawn (Mannimarco)
+            [40976] = true, -- dummy (Mannimarco)
+            [40534] = true, -- Portalspawnin (Mannimarco)
+            [41837] = true, -- Ghostly (Mannimarco)
+            [44083] = true, -- Ghostly (Mannimarco)
+            [42078] = true, -- StopPortalStun (Mannimarco)
+            [42079] = true, -- PortalStabalize (Mannimarco)
+            [42083] = true, -- PortalHoldstun (Mannimarco)
+            [40573] = true, -- StopPortalStun (Mannimarco)
+            [40554] = true, -- Dun_Mq5_Portalstabalize (Mannimarco)
+            [40978] = true, -- Portal Spawn (Mannimarco)
+            [40980] = true, -- dummy (Mannimarco)
+            [40981] = true, -- Portal Spawn (Mannimarco)
+            [40983] = true, -- dummy (Mannimarco)
+
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------
             -------------------------------------

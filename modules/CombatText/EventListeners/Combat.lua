@@ -78,6 +78,7 @@ function CTL:EffectChanged(...)
 
             if changeType == EFFECT_RESULT_UPDATED and AlertT[abilityId].ignoreRefresh then return end
 
+            local isDirect
             local block
             local blockstagger
             local dodge
