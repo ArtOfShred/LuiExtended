@@ -63,6 +63,7 @@ A.Innate_Receiving_Boon             = GetString(SI_LUIE_SKILL_RECEIVING_BOON) --
 A.Innate_Ayleid_Well                = GetString(SI_LUIE_SKILL_AYLEID_WELL) -- Ayleid Well
 A.Innate_CC_Immunity                = 38117 -- CC Immunity
 A.Innate_Stagger                    = 1834 -- Stagger
+A.Innate_Revive                     = 5823 -- Revive
 
 -- World
 A.Innate_Drop_Anchor                = 86717 -- Drop Anchor
@@ -505,6 +506,7 @@ A.Skill_Unstoppable                 = 39197
 -- ---------------------------------------------------
 
 A.Skill_Feed                        = 33152
+A.Skill_Vampirism                   = 39472
 
 -- ---------------------------------------------------
 -- WEREWOLF SKILLS -----------------------------------
@@ -521,6 +523,7 @@ A.Skill_Infectious_Claws            = 58855
 A.Skill_Claws_of_Anguish            = 58864
 A.Skill_Claws_of_Life               = 58879
 A.Skill_Werewolf_Fear               = 39045
+A.Skill_Remove                      = 31262
 
 -- ---------------------------------------------------
 -- GUILD SKILLS --------------------------------------
@@ -686,8 +689,10 @@ A.Skill_Chilling_Aura               = 33549
 A.Skill_Frozen_Ground               = 33502
 A.Skill_Body_Slam                   = 24689
 A.Skill_Stomp                       = 91848
+A.Skill_Boulder_Toss                = 91855
 A.Skill_Storm_Bound                 = 4864
 A.Skill_Shockwave                   = 4653
+A.Skill_Doom_Truths_Gaze            = 9219
 A.Skill_Dusks_Howl                  = 6412
 
 -- Undead
@@ -720,6 +725,8 @@ A.Skill_Overcharge                  = 27333
 
 A.Trap_Cold_Fire_Trap               = GetString(SI_LUIE_SKILL_COLD_FIRE_TRAP)
 A.Trap_Falling_Rocks                = 20886
+A.Trap_Spike_Trap                   = 21940
+A.Trap_Lava                         = 5139
 
 -- ---------------------------------------------------
 -- QUEST ABILITIES -----------------------------------
@@ -735,6 +742,11 @@ A.Skill_Celebratory_Belch           = 84847
 -- MSQ
 A.Skill_Wall_of_Flames              = GetString(SI_LUIE_SKILL_WALL_OF_FLAMES)
 A.Skill_Focused_Healing             = 48345
+A.Skill_Necrotic                    = 41852
+A.Skill_Barrier                     = 38573
+A.Skill_Swordstorm                  = 36858
+A.Skill_Flame_Shield                = 37173
+A.Skill_Royal_Strike                = 38729
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

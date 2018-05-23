@@ -6483,6 +6483,12 @@ debugAuras = {
 
             [48279] = true, -- Quick Strike
             [48278] = true, -- Heavy Attack
+            [39088] = true, -- Light Attack
+            [39097] = true, -- Medium Attack
+            [39101] = true, -- Heavy Attack
+            [60703] = true, -- Fright Force
+            [48330] = true, -- Aspect of Terror
+            [48331] = true, -- Aspect of Terror
 
             [42905] = true, -- Recover
             [42937] = true, -- TargetPriorityException
@@ -6642,14 +6648,24 @@ debugAuras = {
             -- TRAPS & ENVIRONMENTAL HAZARDS ----
             -------------------------------------
 
-            [62230] = true, -- Coldharbour Flames
-            [62771] = true, -- Coldharbour Flames
-            [62769] = true, -- Coldharbour Flames
-            [62770] = true, -- Coldharbour Flames
+            [32236] = true, -- Trap Regen Stopper Enemy (Generic Trap)
+
+            [62230] = true, -- Coldharbour Flames (Flame Trap)
+            [62771] = true, -- Coldharbour Flames (Flame Trap)
+            [62769] = true, -- Coldharbour Flames (Flame Trap)
+            [62770] = true, -- Coldharbour Flames (Flame Trap)
 
             [20886] = true, -- Falling Rocks (Falling Rocks)
             [20888] = true, -- Falling Rocks (Falling Rocks)
             [27479] = true, -- Falling Rocks (Falling Rocks)
+
+            [21940] = true, -- Spike Trap (Spike Trap)
+            [21943] = true, -- Spike Trap (Spike Trap)
+            [21941] = true, -- Spike Trap Snare (Spike Trap)
+            [21942] = true, -- Trap Sprung (Spike Trap)
+
+            [19224] = true, -- In Lava (Lava - Halls of Torment)
+            [19225] = true, -- Lava Snare (Lava - Halls of Torment)
 
             [72711] = true, -- Hidden (Hiding Spot)
             [72712] = true, -- Hiding Spot (Hiding Spot)
@@ -6890,6 +6906,7 @@ debugAuras = {
             [37132] = true, -- Ice Cage -- Battlemage
             [44216] = true, -- Negate Magic -- Battlemage
             [50108] = true, -- Negate Magic -- Battlemage
+            [50107] = true, -- Negate Magic -- Battlemage
 
             [37126] = true, -- Entropic Flare -- Time Bomb Mage
             [36985] = true, -- Void -- Time Bomb Mage
@@ -7860,6 +7877,8 @@ debugAuras = {
             [91851] = true, -- Stomp -- Ogrim
             [91855] = true, -- Boulder Toss -- Ogrim
             [91870] = true, -- Boulder Toss -- Ogrim
+            [91872] = true, -- Boulder Toss -- Ogrim
+            [91873] = true, -- Boulder Toss -- Ogrim
             [91874] = true, -- Boulder Toss -- Ogrim
             [91871] = true, -- Boulder Toss -- Ogrim
 
@@ -8829,7 +8848,7 @@ debugAuras = {
             -------------------------------------
 
             -- Tutorial (Soul Shriven in Coldharbour)
-            [82077] = true, -- Portal In
+            --[82077] = true, -- Portal In
             [90733] = true, -- Knockout
             [48675] = true, -- Vitality of the Titanborn
             [62805] = true, -- Stun
@@ -8917,6 +8936,120 @@ debugAuras = {
             [27774] = true, -- Knockdown (Ancient Clannfear)
             [27776] = true, -- Feeding (Ancient Clannfear)
             [27708] = true, -- Lyris Wields Axe
+            --[28718] = true, -- Spawn (Manifestation of Terror)
+            [28792] = true, -- Gaze (Manifestation of Terror)
+            [28788] = true, -- MQ2_Boss1_Doom-Truth'sGaze (Manifestation of Terror)
+            [49960] = true, -- Fire Runes (Manifestation of Terror)
+            [49958] = true, -- Fire Runes (Manifestation of Terror)
+            [49961] = true, -- Doom-Truth's Gaze (Manifestation of Terror)
+            [28723] = true, -- Gravity Well (Manifestation of Terror)
+            [28725] = true, -- Gravity Well (Manifestation of Terror)
+            [28726] = true, -- Gravity Well (Manifestation of Terror)
+            [28730] = true, -- Gravity Well (Manifestation of Terror)
+            [28737] = true, -- Recovery (Manifestation of Terror)
+            [28742] = true, -- Tentacle Whip (Manifestation of Terror)
+            [28753] = true, -- Tentacle Whip (Manifestation of Terror)
+            [28745] = true, -- Tentacle Whip (Manifestation of Terror)
+            [28746] = true, -- Tentacle Whip (Manifestation of Terror)
+            [28751] = true, -- Been Hit (Manifestation of Terror)
+            [28752] = true, -- Tentacle Whip (Manifestation of Terror)
+            [13364] = true, -- CON_Magic Transformation
+
+            -- Chasing Shadows
+            [18686] = true, -- JB - Test Door Fade to Blacks
+
+            -- Castle of the Worm
+            [14597] = true, -- CON_Stealth Despawn
+            [41852] = true, -- Necrotic
+            --[16019] = true, -- Bone Pile Explosion
+            [39211] = true, -- MQ3 Disintegrate
+            [10993] = true, -- Generic Magic Explosion Large
+            [33597] = true, -- Invisible Underground
+            [35794] = true, -- Material Effect
+            [33540] = true, -- Intro Explosion
+            --[33548] = true, -- CON_Knockback&Knockdown
+            --[33547] = true, -- Fire Backlash
+            [31244] = true, -- Consuming Darkness
+            [32563] = true, -- Skeleton Stun Targetable
+            [32561] = true, -- Skeleton Stun
+            [31232] = true, -- Skeleton Stun Targetable
+            [31222] = true, -- Skeleton Stun
+            [32557] = true, -- Skeleton Stun Targetable
+            [32555] = true, -- Skeleton Stun
+            [31250] = true, -- Raising the Dead
+            [32558] = true, -- Delay
+            [32554] = true, -- Delay
+            [32564] = true, -- Delay
+            [32562] = true, -- Ravager Weapons
+            [32553] = true, -- Ravager Weapons
+            [32556] = true, -- Fire Mage Weapons
+            [34484] = true, -- Soul Cage
+            [34462] = true, -- Soul Cage
+            [34473] = true, -- Soul Cage
+            [34475] = true, -- Soul Cage
+            [34479] = true, -- Soul Cage
+            [34480] = true, -- Soul Cage
+            [34481] = true, -- Soul Cage
+            [34482] = true, -- Soul Cage
+            [34483] = true, -- Soul Cage
+            [34478] = true, -- TickCounter
+            [34470] = true, -- Soul Cage
+            [34463] = true, -- Soul Cage
+            [34458] = true, -- Soul Cage
+            [34460] = true, -- Soul Cage
+            [33034] = true, -- Collosus
+            [31275] = true, -- Ground Rise On
+            [31348] = true, -- Hate
+            [70409] = true, -- Necromantic Barrier
+            [31321] = true, -- Disruption
+            [31334] = true, -- Oblivion
+            [31480] = true, -- Overwhelming Power
+            [31341] = true, -- Unleashed Oblivion
+            --[14972] = true, -- CON_Knockback&Knockdown
+            --[14973] = true, -- Fire Backlash
+            [31344] = true, -- Escape
+            [34420] = true, -- MQ Knockback and Knockdown, Sh
+            [34421] = true, -- MQ Knockback and Knockdown, Sh
+
+            -- Halls of Torment
+            [36679] = true, -- Flaming Vice
+            [36672] = true, -- Summon Sword Saint
+            [36673] = true, -- Sword Saint Rise
+            [36858] = true, -- Swordstorm
+            [36860] = true, -- Swordstorm damage
+            [39777] = true, -- Molag Bal Doomed Soul
+            [39778] = true, -- Swallowed
+            [36807] = true, -- Light
+            [36884] = true, -- Light
+            [36885] = true, -- Light
+            [36886] = true, -- Light
+            [36784] = true, -- Dark Seduction Shield
+            --[44561] = true, -- FGQ4 RGT Event Knockback
+            --[44563] = true, -- FGQ4 RGT Event Knockback
+            [36890] = true, -- Seductive Bind
+            --[36862] = true, -- FG Doshia Harvester Transform
+            [37015] = true, -- Lash of Torment
+            [6632] = true, -- CON_MagicExplosionLarge
+            [37166] = true, -- Engulfing Grip
+            [26941] = true, -- CON_EvilBeamSummonOnSelf
+            [37173] = true, -- Flame Shield (Duchess of Anguish)
+            [37176] = true, -- Register (Duchess of Anguish)
+            [37175] = true, -- Flare Up (Duchess of Anguish)
+            [38729] = true, -- Royal Strike (Duchess of Anguish)
+            [38741] = true, -- Royal Snare (Duchess of Anguish)
+            [38727] = true, -- Summon Daedra (Duchess of Anguish)
+            [38728] = true, -- Summon Daedra (Duchess of Anguish)
+
+            -- Valley of Blades
+            [36668] = true, -- MQ4.5 Titan Fly (Titan)
+            [36797] = true, -- MQ4.5 S11 Seq A
+            [42081] = true, -- Generic Statue Stoneskin
+            [36798] = true, -- MQ4.5 S11 Seq B
+            [36819] = true, -- MQ4.5 S11 Seq F
+            [6870] = true, -- CV Delay 10 Seconds
+            [44396] = true, -- Mannimarco Spawn
+            [36025] = true, -- SW CON_Screen Shake on Target
+            [38354] = true, -- MQ4.5 Undead Sword Singer Init
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------

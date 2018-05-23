@@ -512,6 +512,16 @@ LUIE.AlertTable = {
 
     -- MSQ 2 (Daughter of Giants)
     [27767] = { block = true, bs = true, dodge = true, priority = 2 }, -- Rending Leap (Ancient Clannfear)
+    [28788] = { block = true, priority = 2, eventdetect = true }, -- MQ2_Boss1_Doom-Truth'sGaze (Manifestation of Terror)
+    [28723] = { avoid = true, priority = 2, eventdetect = true, refire = 500 }, -- Gravity Well (Manifestation of Terror)
+
+    -- MSQ 4 (Castle of the Worm)
+    [34484] = { block = true, avoid = true, priority = 2, skipcheck = true, refire = 500 }, -- Soul Cage (Mannimarco)
+
+    -- MSQ 6 (Halls of Torment)
+    [36858] = { interrupt = true, avoid = true, priority = 2, eventdetect = true, refire = 1500 }, -- Swordstorm (Tharn Doppleganger)
+    [37173] = { interrupt = true, priority = 2, eventdetect = true, notdirect = true }, -- Flame Shield (Duchess of Anguish)
+    [38729] = { block = true, interrupt = true, priority = 2, refire = 500 }, -- Royal Strike (Duchess of Anguish)
 
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------

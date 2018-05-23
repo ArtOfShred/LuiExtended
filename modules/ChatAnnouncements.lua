@@ -760,12 +760,18 @@ local g_blacklistIDs = {
     [64713]  = true,    -- Laurel
     [64690]  = true,    -- Malachite Shard
     [69432]  = true,    -- Glass Style Motif Fragment
-    -- Trial non worthless junk
+    [134623] = true,    -- Uncracked Transmutation Geode
+    -- Trial Plunder
     [114427] = true,    -- Undaunted Plunder
     [81180]  = true,    -- The Serpent's Egg-Tooth
     [74453]  = true,    -- The Rid-Thar's Moon Pearls
     [87701]  = true,    -- Star-Studded Champion's Baldric
     [87700]  = true,    -- Periapt of Elinhir
+    -- Trial Weekly Coffers
+    [139664] = true,    -- Mage's Ignorant Coffer
+    [139674] = true,    -- Saint's Beatified Coffer
+    [139670] = true,    -- Dro-m'Athra's Burnished Coffer
+    [138711] = true,    -- Welkynar's Grounded Coffer
     -- Mercenary Motif Pages
     [64716]  = true,    -- Mercenary Motif
     [64717]  = true,    -- Mercenary Motif

@@ -346,6 +346,9 @@ E.DebuffDisplayOverrideId = {
     [89127] = true, -- Summon Beast (Spriggan)
     [42794] = true, -- Strangler: (Strangler)
     [48294] = true, -- Consuming Omen (Troll - Ranged)
+
+    -- Friendly NPC's
+
 }
 
 E.EffectHideWhenDead = {
@@ -374,20 +377,59 @@ E.DebuffDisplayOverrideName = {
     [A.Skill_Minor_Lifesteal]           = true,
 }
 
+E.CastChannelOverride = {
+
+    [33175] = true, -- Feed (Vampire)
+    [40350] = true, -- Feed (Vampire - Bite Player)
+
+    [32346] = true, -- Skyshard Collect
+    [14031] = true, -- Mundus Use
+
+}
+
 E.CastDurationFix = {
 
-[33152] = 6300,
+    [37059] = 1165, -- Mount Up
+    [14644] = 4000, -- Revive (Death Dialogue)
+    [32346] = 5800, -- Skyshard Collect
+    [14031] = 5000, -- Mundus Use
+
+    [33175] = 6300, -- Feed (Vampire)
+    [40350] = 5300, -- Feed (Vampire - Bite Player)
+    [39033] = 2000, -- Begin Werewolf (Werewolf)
+    [39477] = 1750, -- De-Werewolf (Werewolf)
+    [75008] = 6500, -- Werewolf Transformation (Werewolf - Quest Transformation)
 
 }
 
 E.IsCast = {
 
-
     ------------------------------
     -- Player Abilities ----------
     ------------------------------
 
+    -- Innate
+    [6811] = true, -- Recall
+    [37059] = true, -- Mount Up
+    [14031] = true, -- Mundus Use
+    [14644] = true, -- Revive (Death Dialogue)
+    [32346] = true, -- Skyshard Collect
+
     -- Class
+    [43714] = true, -- Crystal Shard (Sorcerer)
+    [46331] = true, -- Crystal Blast (Sorcerer)
+    [46324] = true, -- Crystal Fragments (Sorcerer)
+    [24584] = true, -- Dark Exchange (Sorcerer)
+    [24595] = true, -- Dark Deal (Sorcerer)
+    [24589] = true, -- Dark Conversion (Sorcerer)
+    [23304] = true, -- Summon Unstable Familiar
+    [23319] = true, -- Summon Unstable Clannfear
+    [23316] = true, -- Summon Volatile Familiar
+    [24613] = true, -- Summon Winged Twilight
+    [24636] = true, -- Summon Twilight Tormentor
+    [24639] = true, -- Summon Twilight Matriarch
+
+
     [26114] = true, -- Puncturing Strikes (Templar)
     [26792] = true, -- Biting Jabs (Templar)
     [26797] = true, -- Puncturing Sweep (Templar)
@@ -425,7 +467,9 @@ E.IsCast = {
     [39270] = true, -- Soul Strike (Soul Magic)
     [40420] = true, -- Soul Assault (Soul Magic)
     [40414] = true, -- Shatter Soul (Soul Magic)
-    [33152] = true, -- Feed (Vampire)
+    [33175] = true, -- Feed (Vampire)
+    [40350] = true, -- Feed (Vampire - Bite Player)
+    [39692] = true, -- Feed (Vampire - Quest)
     [32893] = true, -- Drain Essence (Vampire)
     [32986] = true, -- Mist Form (Vampire)
     [38963] = true, -- Elusive Mist (Vampire)
@@ -436,6 +480,11 @@ E.IsCast = {
     [32633] = true, -- Roar (Werewolf)
     [39113] = true, -- Ferocious Roar (Werewolf)
     [39114] = true, -- Rousing Roar (Werewolf)
+    [39033] = true, -- Begin Werewolf (Werewolf)
+    [39477] = true, -- De-Werewolf (Werewolf)
+    [40515] = true, -- Devour (Werewolf - Bite Player)
+    [75008] = true, -- Werewolf Transformation (Werewolf - Quest Transformation)
+    [40124] = true, -- Devour (Werewolf - Quest)
 
     -- Guild
     [103488] = true, -- Time Stop (Psijic Order)
@@ -1301,6 +1350,7 @@ E.AddNameAura = {
     ['Ragjar'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Manifestation of Regret'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Ancient Clannfear'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
+    ['Manifestation of Terror'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
 
     -- Dolmen Bosses
     ['Dread Xivkyn Cauterizer'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
@@ -1518,6 +1568,7 @@ E.EffectMerge = {
     [A.Skill_Overcharge] = "MERGED_EFFECT_OVERCHARGE",
 	[A.Skill_Minor_Slayer] = "MERGED_EFFECT_SLAYER",
 	[A.Skill_Minor_Aegis] = "MERGED_EFFECT_AEGIS",
+    [A.Skill_Boulder_Toss] = "MERGED_EFFECT_BOULDER_TOSS",
 
 }
 
@@ -2677,6 +2728,9 @@ E.EffectOverride = {
 
     -- Misc
     [10950] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds', name = A.Innate_Fall_Damage }, -- Fall Snare
+    [6811] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds' }, -- Recall
+    [37059] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds' }, -- Mount Up
+    [14644] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = A.Innate_Revive }, -- Revive (Death Dialogue)
     [31221] = { hide = true }, -- Skyshard Collect (Aura on Skyshard when player collects it)
     [32346] = { icon = 'esoui/art/icons/ability_mage_050.dds', name = A.Innate_Absorbing_Skyshard, unbreakable = 1}, -- Skyshard Collect
     [63601] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds' }, -- ESO Plus Member
@@ -3693,11 +3747,13 @@ E.EffectOverride = {
     [42821] = { hide = true }, -- VampInt_LamaeFirstFeed
     [44676] = { hide = true }, -- SELF SNARE
     [44222] = { hide = true }, -- VampireInitiation_Lamae
+    [39728] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed }, -- VampInit_TheaterFeed
+    [39509] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', name = A.Skill_Vampirism }, -- VampInit_PC Becomes a Vampire
     [39422] = { hide = true }, -- Mist Form
     [56684] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike
     [39692] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = -5.2 }, -- Feed
     [39698] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed
-    [39693] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', unbreakable = 1 }, -- Feed
+    [39693] = { hide = true }, -- Feed
 
     ----------------------------------------------------------------
     -- WEREWOLF PASSIVES -------------------------------------------
@@ -3715,6 +3771,8 @@ E.EffectOverride = {
     [60773] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackrestore.dds', name = A.Skill_Heavy_Attack }, -- Stamina Return
     [33208] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Devour (Devour - Rank 1)
     [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour - Rank 1)
+    [40515] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Blood Moon)
+    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, unbreakable = 1 }, -- Q3047 - Knockdown (Blood Moon)
     [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Bloodmoon, A.Set_Cooldown) }, -- Bit an Ally (Blood Moon)
 
     ----------------------------------------------------------------
@@ -4127,12 +4185,8 @@ E.EffectOverride = {
     [45292] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 2)
     [45294] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 3)
 
-    -- Traps
     [88480] = { hide = true }, -- Trap Triggerer (Various)
     [44029] = { icon = 'LuiExtended/media/icons/abilities/ability_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Slaughterfish Attack (Environmental)
-    [21941] = { icon = 'esoui/art/icons/death_recap_environmental.dds', name = 'Spike Trap', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spike Trap Snare (Spike Trap)
-    [21942] = { icon = 'esoui/art/icons/death_recap_environmental.dds', name = 'Spike Trap', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Trap Sprung (Spike Trap)
-    [21943] = { hide = true }, -- Spike Trap (Spike Trap) (Damage Component)
     [26530] = { type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bear Trap (Bear Trap)
     [65854] = { icon = 'esoui/art/icons/death_recap_environmental.dds', name = 'Spike Trap', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spike Trap Snare (Spike Trap) (Orsinium - To Save a Chief)
     [65855] = { icon = 'esoui/art/icons/death_recap_environmental.dds', name = 'Spike Trap', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Trap Sprung (Spike Trap) (Orsinium - To Save a Chief)
@@ -4239,15 +4293,6 @@ E.EffectOverride = {
     [66669] = { hide = true }, -- Nullify (Estate Spellbreaker - DB)
     [73229] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_hurried_ward.dds' }, -- Hurried Ward (Mage Guard - DB)
 
-    -- Traps & Interactables
-    [72711] = { hide = true }, -- Hidden (Hiding Spot)
-    [77335] = { hide = true }, -- Threat Drop (Hiding Spot)
-    [77336] = { hide = true }, -- Threat Drop (Hiding Spot)
-    [77337] = { hide = true }, -- Threat Drop (Hiding Spot)
-    [77338] = { hide = true }, -- Threat Drop (Hiding Spot)
-    [77339] = { hide = true }, -- Threat Drop (Hiding Spot)
-    [75747] = { hide = true }, -- Hiding Spot (Hiding Spot)
-
     ----------------------------------------------------------------
     -- NPC(Basic) --------------------------------------------------
     ----------------------------------------------------------------
@@ -4275,6 +4320,10 @@ E.EffectOverride = {
     [40165] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = A.Innate_Block, duration = 0 }, -- Scene Choreo Brace (Monster Fight)
 
     -- Friendly NPC Abilities
+    [48330] = { hide = true }, -- Aspect of Terror (Abnur Tharn)
+    [48331] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_aspect_of_terror_p.dds' }, -- Aspect of Terror (Abnur Tharn)
+
+
     [42905] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds' }, -- Recover
     [42937] = { hide = true }, -- TargetPriorityException
 
@@ -4406,6 +4455,7 @@ E.EffectOverride = {
     [37132] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds', duration = 0 }, -- Ice Cage (Battlemage)
     [44216] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds' }, -- Negate Magic (Battlemage)
     [50108] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0 }, -- Negate Magic (Battlemage)
+    [50107] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0 }, -- Negate Magic (Battlemage)
     [37126] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_magic_ranged.dds' }, -- Entropic Flare (Timb Bomb Mage)
     [36986] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_magic_aoe.dds' }, -- Void (Time Bomb Mage)
     [14370] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_magic_aoe.dds' }, -- Void (Time Bomb Mage)
@@ -5445,7 +5495,7 @@ E.EffectOverride = {
     [76266] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_rip.dds' }, -- Rip (River Troll)
     [76268] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_lope.dds' }, -- Lope (River Troll)
     [78834] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_lope.dds' }, -- Lope (River Troll)
-    [76274] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_lope.dds' }, -- Lope (River Troll)
+    [76274] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_shattered_ground.dds' }, -- Lope (River Troll)
 
     [76277] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_close_wounds.dds' }, -- Close Wounds (River Troll)
     [76295] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_crab_toss.dds' }, -- Crab Toss (River Troll)
@@ -5763,6 +5813,7 @@ E.EffectOverride = {
     -- TRAPS -------------------------------------------------------
     ----------------------------------------------------------------
 
+    -- Traps & World Hazards
     [62230] = { hide = true }, -- Coldharbour Flames (Flame Trap)
     [62771] = { hide = true }, -- Coldharbour Flames (Flame Trap)
     [62769] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_coldharbour_flames.dds', name = A.Trap_Cold_Fire_Trap }, -- Coldharbour Flames (Flame Trap)
@@ -5770,6 +5821,22 @@ E.EffectOverride = {
 
     [20888] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds' }, -- Falling Rocks (Falling Rocks)
     [27479] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', unbreakable = 1 }, -- Falling Rocks (Falling Rocks)
+
+    [21940] = { hide = true }, -- Spike Trap (Spike Trap)
+    [21943] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', hide = true }, -- Spike Trap (Spike Trap)
+    [21941] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Spike Trap Snare (Spike Trap)
+    [21942] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Trap Sprung (Spike Trap)
+
+    -- Lava & Slaughterfish
+    [19224] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, unbreakable = 1 }, -- In Lava (Lava - Halls of Torment)
+
+    [72711] = { hide = true }, -- Hidden (Hiding Spot)
+    [77335] = { hide = true }, -- Threat Drop (Hiding Spot)
+    [77336] = { hide = true }, -- Threat Drop (Hiding Spot)
+    [77337] = { hide = true }, -- Threat Drop (Hiding Spot)
+    [77338] = { hide = true }, -- Threat Drop (Hiding Spot)
+    [77339] = { hide = true }, -- Threat Drop (Hiding Spot)
+    [75747] = { hide = true }, -- Hiding Spot (Hiding Spot)
 
     ----------------------------------------------------------------
     -- MAIN QUEST --------------------------------------------------
@@ -5815,6 +5882,63 @@ E.EffectOverride = {
     [27769] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_rending_leap.dds' }, -- Rending Leap (Ancient Clannfear)
     [27774] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_rending_leap.dds', name = A.Skill_Rending_Leap }, -- Knockdown (Ancient Clannfear)
     [27776] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_devour.dds', name = A.Skill_Devour, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Feeding (Ancient Clannfear)
+    [28718] = { hide = true }, -- Spawn (Manifestation of Terror)
+    [28792] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_gaze_alt.dds' }, -- Gaze (Manifestation of Terror)
+    [28788] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze_alt.dds', name = A.Skill_Doom_Truths_Gaze }, -- MQ2_Boss_1_Doom-Truth'sGaze (Manifestation of Terror)
+    [49958] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze_alt.dds', name = A.Skill_Doom_Truths_Gaze }, -- Fire Runes (Manifestation of Terror)
+    [49961] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze_alt.dds' }, -- Doom-Truth's Gaze (Manifestation of Terror)
+    [28723] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_gravity_well.dds' }, -- Gravity Well (Manifestation of Terror)
+    [28730] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_gravity_well.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Gravity Well (Manifestation of Terror)
+    [28745] = { hide = true }, -- Tentacle Whip (Manifestation of Terror)
+    [28746] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_tentacle_whip.dds' }, -- Tentacle Whip (Manifestation of Terror)
+
+    -- Castle of the Worm
+    [41852] = { icon = 'LuiExtended/media/icons/abilities/ability_set_oblivion.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Necrotic, A.Skill_Barrier) }, -- Necrotic
+    [16019] = { hide = true }, -- Bone Pile Explosion
+
+    [33597] = { hide = true }, -- Invisible Underground
+    [35794] = { hide = true }, -- Material Effect
+    [33540] = { hide = true }, -- Intro Explosion
+    [31244] = { hide = true }, -- Consuming Darkness
+    [32563] = { hide = true }, -- Skeleton Stun Targetable
+    [32561] = { hide = true }, -- Skeleton Stun
+    [31232] = { hide = true }, -- Skeleton Stun Targetable
+    [31222] = { hide = true }, -- Skeleton Stun
+    [32557] = { hide = true }, -- Skeleton Stun Targetable
+    [32555] = { hide = true }, -- Skeleton Stun
+    [32558] = { hide = true }, -- Delay
+    [32554] = { hide = true }, -- Delay
+    [32564] = { hide = true }, -- Delay
+    [32562] = { hide = true }, -- Ravager Weapons
+    [32553] = { hide = true }, -- Ravager Weapons
+    [32556] = { hide = true }, -- Fire Mage Weapons
+    [34484] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds' }, -- Soul Cage (Mannimarco)
+    [34470] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds', name = A.Skill_Soul_Rupture }, -- Soul Cage (Mannimarco)
+    [34463] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds', name = A.Skill_Soul_Rupture }, -- Soul Cage (Mannimarco)
+    [34458] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds' }, -- Soul Cage (Mannimarco)
+    [34460] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds' }, -- Soul Cage (Mannimarco)
+    [70409] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sloads_semblance.dds' }, -- Necromantic Barrier
+    [31321] = { hide = true }, -- Disruption
+    [31334] = { hide = true }, -- Oblivion
+    [31480] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Overwhelming Power
+    [31341] = { hide = true }, -- Unleashed Oblivion
+    [14972] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, unbreakable = 1 }, -- CON_Knockback&Knockdown
+    [14973] = { name = A.Skill_Knockback }, -- Fire Backlash
+
+    -- Halls of Torment
+    [36672] = { hide = true }, -- Summon Sword Saint
+    [36858] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Swordstorm (Tharn Doppleganger)
+    [36860] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds', name = A.Skill_Swordstorm }, -- Swordstorm damage (Tharn Doppleganger)
+    [44561] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, unbreakable = 1 }, -- FGQ4 RGT Event Knockback
+    [44563] = { name = A.Skill_Knockback }, -- Fire Backlash
+    [37015] = { hide = true }, -- Lash of Torment
+
+    [37173] = { icon = 'esoui/art/icons/ability_mage_010.dds' }, -- Flame Shield (Duchess of Anguish)
+    [37176] = { hide = true }, -- Register (Duchess of Anguish)
+    [37175] = { icon = 'esoui/art/icons/ability_mage_010.dds', name = A.Skill_Flame_Shield }, -- Flare Up (Duchess of Anguish)
+    [38729] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_royal_strike.dds' }, -- Royal Strike (Duchess of Anguish)
+    [38741] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_royal_strike.dds', name = A.Skill_Royal_Strike }, -- Royal Snare (Duchess of Anguish)
+    [38728] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_daedra_fa_red.dds' }, -- Summon Daedra (Duchess of Anguish)
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -6150,12 +6274,14 @@ E.FakeExternalDebuffs = {
     -- Werewolf
     [39045] = { icon = 'esoui/art/icons/ability_werewolf_001_b.dds', name = A.Skill_Werewolf_Fear, duration = 3200 }, -- Werewolf Fear (Werewolf Transformation - All Morphs)
     [39040] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance, duration = 5000 }, -- Off-Balance Self (Werewolf Transformation - All Morphs)
+    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
 
     -- Item Sets
     [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 0 }, -- Bahraha's Curse
 
     -- Traps
     [27479] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = A.Trap_Falling_Rocks, duration = 2000 }, -- Falling Rocks (Falling Rocks)
+    [19224] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, duration = 0 }, -- Lava (Lava - Halls of Torment)
 
     [29602] = {icon = 'esoui/art/icons/ability_debuff_stun.dds', name = A.Trap_Falling_Rocks, duration = 2000}, -- Falling Rocks (Tripwire)
     [66153] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Trial of Flame', duration = 1500}, -- Trial of Flame (Wrothgar - Old Orsinium)
@@ -6213,6 +6339,15 @@ E.FakeExternalDebuffs = {
     [72641] = {icon = 'esoui/art/icons/ability_1handed_005.dds', name = A.Skill_Power_Bash, duration = 2000}, -- Power Bash (Cryodiil Guard T2)
     [55862] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = A.Skill_Storm_Bound, duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (DOT)
     [55863] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = A.Skill_Storm_Bound, duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (Snare)
+
+    ------------------------------
+    -- Quests --------------------
+    ------------------------------
+
+    -- Main Story
+    [14972] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 2000 }, -- CON_Knockback&Knockdown (Castle of the Worm)
+    [44561] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 3000 }, -- FGQ4 RGT Event Knockback (Lyris Doppleganger - Halls of Torment)
+    [38741] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_royal_strike.dds', name = A.Skill_Royal_Strike, duration = 4000 }, -- Royal Snare (Duchess of Anguish - Halls of Torment)
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------
@@ -6291,8 +6426,8 @@ E.FakePlayerBuffs = {
     -- Player (Basic)
     [973] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', name = A.Innate_Sprint, duration = 0}, -- Sprint
     [33439] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', name = A.Innate_Gallop, duration = 0}, -- Mount Sprint (Generic)
-    [32346] = {icon = 'esoui/art/icons/ability_mage_050.dds', name = A.Innate_Absorbing_Skyshard, duration = 5800}, -- Skyshard Collect
-    [14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = A.Innate_Receiving_Boon, duration = 5000}, -- Mundus Use
+    --[32346] = {icon = 'esoui/art/icons/ability_mage_050.dds', name = A.Innate_Absorbing_Skyshard, duration = 5800}, -- Skyshard Collect
+    --[14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = A.Innate_Receiving_Boon, duration = 5000}, -- Mundus Use
 
     -----------------
     -- Class --------
@@ -6310,8 +6445,8 @@ E.FakePlayerBuffs = {
     [22226] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation - Rank 1)
 
     -- Vampire
-    [40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 5300 }, -- Feed (Blood Ritual - Rank 1)
-    [33175] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 6300 }, -- Feed (Vampire - Feed)
+    --[40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 5300 }, -- Feed (Blood Ritual - Rank 1)
+    --[33175] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 6300 }, -- Feed (Vampire - Feed)
 
     -- Mages Guild
     [40449] = { icon = 'esoui/art/icons/ability_mageguild_003_a.dds', name = A.Skill_Spell_Symmetry, duration = 5000 }, -- Spell Symmetry (Spell Symmetry)
@@ -6369,6 +6504,7 @@ E.FakePlayerDebuffs = {
     -- Werewolf
     [39045] = { icon = 'esoui/art/icons/ability_werewolf_001_b.dds', name = A.Skill_Werewolf_Fear, duration = 3200 }, -- Werewolf Fear (Werewolf Transformation - All Morphs)
     [39040] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance, duration = 5000 }, -- Off-Balance Self (Werewolf Transformation - All Morphs)
+    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
 
     -- Item Sets
     [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 1000 }, -- Bahraha's Curse

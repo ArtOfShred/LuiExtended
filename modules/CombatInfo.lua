@@ -960,10 +960,22 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
 
         local duration
         local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
+        -- Override certain things to display as a channel rather than cast. Note only works for events where we override the duration.
+        if E.CastChannelOverride[abilityId] then
+            channeled = true
+        end
         if channeled then
             duration = E.CastDurationFix[abilityId] or channelTime
         else
             duration = E.CastDurationFix[abilityId] or castTime
+        end
+
+        if abilityId == 39033 or abilityId == 39477 then
+            local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
+            name, icon = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
+            if abilityId == 39477 then
+                name = strformat("<<1>> <<2>>", A.Skill_Remove, name)
+            end
         end
 
         if duration > 0 and not g_casting then
