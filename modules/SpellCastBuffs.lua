@@ -173,6 +173,7 @@ local g_longHorizAlign = CENTER
 local g_longVertAlign = MIDDLE
 local g_prominentVertAlign = BOTTOM
 local g_horizSortInvert = false
+local g_keepTrackOfAuras = {}
 
 -- Some optimization
 local abilityRouting = { "player1", "player2", "ground" }
@@ -1663,30 +1664,82 @@ end
  * This handler fires every long-term effect added or removed:
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
-        -- Create fake ground aura
-        if E.EffectGroundDisplay[abilityId] then
-            if changeType ~= EFFECT_RESULT_FADED then
-                local duration = endTime - beginTime
-                local groundType = { }
-                groundType[1] = { info = E.EffectGroundDisplay[abilityId].buff, context = "player1", promB = "promb_player", promD = "promd_player", type = 1 }
-                groundType[2] = { info = E.EffectGroundDisplay[abilityId].debuff, context = "player2", promB = "promb_target", promD = "promd_target", type = BUFF_EFFECT_TYPE_DEBUFF }
-                groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
-                iconName = E.EffectGroundDisplay[abilityId].icon or iconName
-                effectName = E.EffectGroundDisplay[abilityId].name or effectName
-                stackCount = E.EffectGroundDisplay[abilityId].stack or stackCount
 
-                for i = 1, 3 do
-                    if groundType[i].info == true then
-                        -- Set container context
-                        local context
-                        if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
-                            context = groundType[i].promD
-                        elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
-                            context = groundType[i].promB
-                        else
-                            context = groundType[i].context
+    if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and (E.EffectGroundDisplay[abilityId] or E.LinkedGroundMine[abilityId]) then
+
+        if E.LinkedGroundMine[abilityId] then
+            abilityId = E.LinkedGroundMine[abilityId]
+        end
+
+        -- Create fake ground aura
+        local groundType = { }
+        groundType[1] = { info = E.EffectGroundDisplay[abilityId].buff, context = "player1", promB = "promb_player", promD = "promd_player", type = 1 }
+        groundType[2] = { info = E.EffectGroundDisplay[abilityId].debuff, context = "player2", promB = "promb_target", promD = "promd_target", type = BUFF_EFFECT_TYPE_DEBUFF }
+        groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
+
+        if changeType == EFFECT_RESULT_FADED then
+            -- Due to effect fading AFTER being gained when refreshing Ground Auras, we have to keep track of this.
+            if g_keepTrackOfAuras[abilityId] then
+                g_keepTrackOfAuras[abilityId] = g_keepTrackOfAuras[abilityId] - 1
+                if g_keepTrackOfAuras[abilityId] < 0 then
+                     g_keepTrackOfAuras[abilityId] = 0
+                end
+            else
+                g_keepTrackOfAuras[abilityId] = 0
+            end
+
+            for i = 1, 3 do
+                if groundType[i].info == true then
+                    -- Set container context
+                    local context
+                    if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
+                        context = groundType[i].promD
+                    elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
+                        context = groundType[i].promB
+                    else
+                        context = groundType[i].context
+                    end
+                    if E.IsGroundMineAura[abilityId] then
+                        -- Check to make sure aura exists in case of reloadUI
+                        if g_effectsList[context][ abilityId ] then
+                            g_effectsList[context][ abilityId ].stack = g_effectsList[context][ abilityId ].stack - E.EffectGroundDisplay[abilityId].stackRemove
+                            if g_effectsList[context][ abilityId ].stack == 0 then g_effectsList[context][ abilityId ] = nil end
                         end
+                    else
+                        if g_keepTrackOfAuras[abilityId] == 0 then
+                            g_effectsList[context][ abilityId ] = nil
+                        end
+                    end
+                end
+            end
+        elseif changeType == EFFECT_RESULT_GAINED then
+            local duration = endTime - beginTime
+            iconName = E.EffectGroundDisplay[abilityId].icon or iconName
+            effectName = E.EffectGroundDisplay[abilityId].name or effectName
+
+            -- Due to effect fading AFTER being gained when refreshing Ground Auras, we have to keep track of this.
+            if g_keepTrackOfAuras[abilityId] then
+                g_keepTrackOfAuras[abilityId] = g_keepTrackOfAuras[abilityId] + 1
+                if g_keepTrackOfAuras[abilityId] > 2 then
+                     g_keepTrackOfAuras[abilityId] = 2
+                end
+            else
+                g_keepTrackOfAuras[abilityId] = 1
+            end
+
+            for i = 1, 3 do
+                if groundType[i].info == true then
+                    -- Set container context
+                    local context
+                    if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
+                        context = groundType[i].promD
+                    elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
+                        context = groundType[i].promB
+                    else
+                        context = groundType[i].context
+                    end
+                    if not g_effectsList[context][ abilityId ] or not E.IsGroundMineAura[abilityId] then
+                        stackCount = E.EffectGroundDisplay[abilityId].stackAdd or stackCount
                         g_effectsList[context][ abilityId ] = {
                             target="player", type=groundType[i].type,
                             id=abilityId, name=effectName, icon=iconName,
@@ -1696,6 +1749,21 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                             unbreakable=0,
                             stack = stackCount
                         }
+                    else
+                        if E.IsGroundMineAura[abilityId] then
+                            if g_effectsList[context][ abilityId ] then
+                                stackCount = g_effectsList[context][ abilityId ].stack + E.EffectGroundDisplay[abilityId].stackRemove
+                                g_effectsList[context][ abilityId ] = {
+                                target="player", type=groundType[i].type,
+                                id=abilityId, name=effectName, icon=iconName,
+                                dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                                forced=nil,
+                                restart=true, iconNum=0,
+                                unbreakable=0,
+                                stack = stackCount
+                                }
+                            end
+                        end
                     end
                 end
             end
@@ -2007,15 +2075,8 @@ local IsResultDamage = {
 
  -- Combat Event (Target = Player)
 function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-    if not (E.IsGroundMineAura[abilityId] or E.IsGroundMineDamage[abilityId] or E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId]) then
+    if not (E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId]) then
         return
-    end
-
-    -- TODO: Temp removal for budding seeds, maybe do something else with this in the future
-    if abilityId == 85925 and sourceType == COMBAT_UNIT_TYPE_PLAYER then
-        g_effectsList.player1[85840] = nil
-        g_effectsList.promb_player[85840] = nil
-        g_effectsList.promd_player[85840] = nil
     end
 
     -- If the action result isn't a starting/ending event then we ignore it.
@@ -2197,15 +2258,8 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         return
     end
 
-    if not (E.IsGroundMineAura[abilityId] or E.IsGroundMineDamage[abilityId] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId] or abilityId == 33208) then
+    if not (E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId] or abilityId == 33208) then
         return
-    end
-
-    -- TODO: Temp removal for budding seeds, maybe do something else with this in the future
-    if abilityId == 85925 and sourceType == COMBAT_UNIT_TYPE_PLAYER then
-        g_effectsList.player1[85840] = nil
-        g_effectsList.promb_player[85840] = nil
-        g_effectsList.promd_player[85840] = nil
     end
 
     -- TODO: Temp set werewolf indicator to unlimited on Devour cast
@@ -2218,40 +2272,6 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
             forced = "short",
             restart=true, iconNum=0
             }
-        end
-    end
-
-    -- Try to remove effect like Ground Runes and Traps (we check this before we filter for other result types)
-    if E.IsGroundMineDamage[abilityId] and IsResultDamage[result] and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER or targetType == COMBAT_UNIT_TYPE_GROUP) then
-        for _, effectsList in pairs( {g_effectsList.ground, g_effectsList.promb_ground, g_effectsList.promd_ground} ) do
-            for k, v in pairs(effectsList) do
-                -- Check if we have a buff up a mine, if we do also compare the names to make sure they are equivalent. This prevents removing Daedric Mines with Rearming Trap for example.
-                if v.abilityId == E.IsGroundMineAura[abilityId] and v.name == abilityName then
-                    if v.stack then
-                        if v.stack == 0 then
-                            g_effectsList.ground[ k ] = nil
-                            g_effectsList.promb_ground[ k ] = nil
-                            g_effectsList.promd_ground[ k ] = nil
-                        else
-                            -- Decrement stack counter
-                            v.stack = v.stack - 1
-                            -- Remove if all stacks are removed
-                            if v.stack == 0 then
-                                g_effectsList.ground[ k ] = nil
-                                g_effectsList.promb_ground[ k ] = nil
-                                g_effectsList.promd_ground[ k ] = nil
-                            end
-                            -- For rearming trap, once the initial damage triggers - reset the duration of the aura for the 2nd trap to be 37.5 seconds.
-                            if abilityName == A.Skill_Rearming_Trap and v.stack == 1 then
-                                local currentTime = GetGameTimeMilliseconds()
-                                v.dur = 37500
-                                v.starts = currentTime
-                                v.ends = currentTime + 37500
-                            end
-                        end
-                    end
-                end
-            end
         end
     end
 
@@ -2686,6 +2706,9 @@ function SCB.OnUpdate(currentTime)
             -- Remove effect (that is not permanent and has duration)
             if v.ends ~= nil and v.dur > 0 and v.ends < currentTime then
                 effectsList[k] = nil
+                if g_keepTrackOfAuras[v.id] then
+                    g_keepTrackOfAuras[v.id] = 0
+                end
             -- Or append to correct container
             elseif container then
                 -- Add icons to to-be-sorted list only if effect already started
@@ -2726,46 +2749,6 @@ function SCB.OnUpdate(currentTime)
             SCB.updateBar( currentTime, buffsSorted[container], container )
         end
     end
-
-    -- TODO: Possibly implement some kind of mine counter thing for abilities like Frozen Gate & the Eternal Hunt set
-    --[[g_updateMineCounter = g_updateMineCounter+1
-    if g_updateMineCounter == 10 then
-        g_updateMineCounter = 0
-
-        for mine, data in pairs(g_mineList) do
-            if data.time < currentTime then
-                if g_mineDestroyCounter[data.abilityId] > 1 then
-                    mine = nil
-                    return
-                else
-                    -- Remove one stack of the mine
-                    for _, effectsList in pairs( {g_effectsList.ground, g_effectsList.promb_ground, g_effectsList.promd_ground} ) do
-                        for k, v in pairs(effectsList) do
-                            -- Check if we have a buff up a mine, if we do also compare the names to make sure they are equivalent. This prevents removing Daedric Mines with Rearming Trap for example.
-                            if v.abilityId == data.abilityId then
-                                if v.stack then
-                                    if v.stack == 0 then
-                                        g_effectsList.ground[ k ] = nil
-                                        g_effectsList.promb_ground[ k ] = nil
-                                        g_effectsList.promd_ground[ k ] = nil
-                                    else
-                                        -- Decrement stack counter
-                                        v.stack = v.stack - 1
-                                        -- Remove if all stacks are removed
-                                        if v.stack == 0 then
-                                            g_effectsList.ground[ k ] = nil
-                                            g_effectsList.promb_ground[ k ] = nil
-                                            g_effectsList.promd_ground[ k ] = nil
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end]]--
 
 end
 

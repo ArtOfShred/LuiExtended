@@ -82,14 +82,12 @@ local g_ultimateSlot        = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
 -- Bar Abilities
 local g_uiProcAnimation      = {}
 local g_uiCustomToggle       = {}
-local g_actionBar            = {}
 local g_triggeredSlots       = {}
 local g_triggeredSlotsRemain = {}
 local g_toggledSlots         = {}
 local g_toggledSlotsRemain   = {}
 local g_toggledSlotsPlayer   = {}
 local g_lastCast = 0
-local g_pendingGroundAbility = nil
 local g_barFont
 local g_potionFont
 local g_ultimateFont
@@ -100,6 +98,7 @@ local g_barFakeAura          = {} -- Table for storing abilityId's that only dis
 local g_barDurationOverride  = {} -- Table for storing abilitiyId's that ignore ending event (Created on initialization)
 local g_barNoRemove          = {} -- Table of abilities we don't remove from bar highlight (Created on initialization)
 local g_potionUsed           = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
+local g_keepTrackOfAuras     = {}
 
 -- Quickslot
 local uiQuickSlot   = {
@@ -323,18 +322,17 @@ function CI.GetAbilityDuration(abilityId)
 end
 
 function CI.UpdateBarHighlightTables()
-    local g_uiProcAnimation      = {}
-    local g_uiCustomToggle       = {}
-    local g_actionBar            = {}
-    local g_triggeredSlots       = {}
-    local g_triggeredSlotsRemain = {}
-    local g_toggledSlots         = {}
-    local g_toggledSlotsRemain   = {}
-    local g_toggledSlotsPlayer   = {}
-    local g_barOverrideCI        = {}
-    local g_barFakeAura          = {}
-    local g_barDurationOverride  = {}
-    local g_barNoRemove          = {}
+    g_uiProcAnimation      = {}
+    g_uiCustomToggle       = {}
+    g_triggeredSlots       = {}
+    g_triggeredSlotsRemain = {}
+    g_toggledSlots         = {}
+    g_toggledSlotsRemain   = {}
+    g_toggledSlotsPlayer   = {}
+    g_barOverrideCI        = {}
+    g_barFakeAura          = {}
+    g_barDurationOverride  = {}
+    g_barNoRemove          = {}
 
     local counter = 0
     for abilityId, _ in pairs (g_barOverrideCI) do
@@ -408,7 +406,6 @@ function CI.RegisterCombatInfo()
     if CI.SV.ShowTriggered or CI.SV.ShowToggled or CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
         eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE, CI.OnSlotsFullUpdate)
         eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, CI.OnSlotUpdated)
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED, CI.OnSlotAbilityUsed)
     end
     if CI.SV.ShowTriggered or CI.SV.ShowToggled then
         eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
@@ -468,6 +465,9 @@ function CI.OnUpdate(currentTime)
                 end
             end
             g_toggledSlotsRemain[k] = nil
+            if g_keepTrackOfAuras[k] then
+                g_keepTrackOfAuras[k] = 0
+            end
         end
 
         -- Update Label
@@ -721,16 +721,55 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         g_toggledSlotsPlayer[abilityId] = true
     end
 
-    if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
-        if g_pendingGroundAbility and g_pendingGroundAbility.id == abilityId and changeType == EFFECT_RESULT_GAINED then
+    if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and E.EffectGroundDisplay[abilityId] then
+
+        if changeType == EFFECT_RESULT_FADED then
+
+            -- Due to effect fading AFTER being gained when refreshing Ground Auras, we have to keep track of this.
+            if g_keepTrackOfAuras[abilityId] then
+                g_keepTrackOfAuras[abilityId] = g_keepTrackOfAuras[abilityId] - 1
+                if g_keepTrackOfAuras[abilityId] < 0 then
+                     g_keepTrackOfAuras[abilityId] = 0
+                end
+            else
+                g_keepTrackOfAuras[abilityId] = 0
+            end
+
+            if not E.IsGroundMineAura[abilityId] then
+                if g_keepTrackOfAuras[abilityId] == 0 then
+                    -- Ignore fading event if override is true
+                    if g_barNoRemove[abilityId] then return end
+                    -- Stop any toggle animation associated with this effect
+                    if g_toggledSlotsRemain[abilityId] then
+                        if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
+                            g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
+                            if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
+                                uiUltimate.LabelPct:SetHidden( false )
+                            end
+                        end
+                    end
+                    g_toggledSlotsRemain[abilityId] = nil
+                end
+            end
+        elseif changeType == EFFECT_RESULT_GAINED then
+
+            -- Due to effect fading AFTER being gained when refreshing Ground Auras, we have to keep track of this.
+            if g_keepTrackOfAuras[abilityId] then
+                g_keepTrackOfAuras[abilityId] = g_keepTrackOfAuras[abilityId] + 1
+                if g_keepTrackOfAuras[abilityId] > 2 then
+                     g_keepTrackOfAuras[abilityId] = 2
+                end
+            else
+                g_keepTrackOfAuras[abilityId] = 1
+            end
+
             -- Bar Tracker
             if CI.SV.ShowToggled then
                 g_toggledSlotsPlayer[abilityId] = true
                 local currentTime = GetGameTimeMilliseconds()
-                local slotNum = g_pendingGroundAbility.slotNum
                 if g_toggledSlots[abilityId] then
                     g_toggledSlotsRemain[abilityId] = 1000*endTime
-                    CI.ShowCustomToggle(slotNum)
+                    CI.ShowCustomToggle(g_toggledSlots[abilityId])
                     if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
                         uiUltimate.LabelPct:SetHidden( true )
                     end
@@ -740,8 +779,6 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                     end
                 end
             end
-            -- Clear the ground target queue
-            g_pendingGroundAbility = nil
         end
     end
 
@@ -979,7 +1016,8 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         end
 
         if duration > 0 and not g_casting then
-            if result == 2200 or result == 2210 or (result == 2240 and E.CastDurationFix[abilityId]) then -- and CI.SV.CastBarCast
+            -- If action result is BEGIN and not channeled then start, otherwise only use GAINED
+            if ( (result == 2200 or result == 2210) and not channeled ) or (result == 2240 and (E.CastDurationFix[abilityId] or channeled) ) then -- and CI.SV.CastBarCast
                 local currentTime = GetGameTimeMilliseconds()
                 local endTime = currentTime + duration
                 local remain = endTime - currentTime
@@ -1052,28 +1090,6 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
     end
 end
 
-function CI.OnSlotAbilityUsed(eventCode, slotNum)
-    -- Clear stored ground-target ability
-    g_pendingGroundAbility = nil
-
-    -- Get the used ability & time
-    local currentTime = GetGameTimeMilliseconds()
-    local ability = g_actionBar[slotNum]
-
-    if ability then -- Only proceed if this button is being watched
-        -- Avoid failure and button mashing
-        if not HasFailure( slotNum ) and ( currentTime > g_lastCast + 250 ) then
-            -- Don't process effects immediately for ground-target spells
-            if ability.ground then
-                g_pendingGroundAbility = ability
-            else
-                -- Flag the last cast time
-                g_lastCast = currentTime
-            end
-        end
-    end
-end
-
 function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
     if slotNum == 8 then
         CI.UpdateUltimateLabel(eventCode)
@@ -1119,7 +1135,6 @@ function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
 
     -- Bail out if slot is not used
     if not IsSlotUsed(slotNum) then
-        g_actionBar[slotNum] = nil
         return
     end
 
@@ -1143,15 +1158,6 @@ function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
     local abilityName = E.EffectOverride[ability_id] and E.EffectOverride[ability_id].name or GetAbilityName(ability_id) -- GetSlotName(slotNum)
     --local _, _, channel = GetAbilityCastInfo(ability_id)
     local duration = CI.GetAbilityDuration(ability_id)
-
-    g_actionBar[slotNum] = {
-        id      = ability_id,
-        name    = abilityName,
-        ground  = ( GetAbilityTargetDescription(ability_id) == "Ground" ),
-        duration = duration,
-        slotNum=slotNum,
-        showFakeAura = showFakeAura
-    }
 
     local currentTime = GetGameTimeMilliseconds()
 
@@ -1232,16 +1238,10 @@ function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
     -- Handle ultimate label first
     CI.UpdateUltimateLabel(eventCode)
 
-    -- If the event was triggered by a weapon swap we need to clear ground-target stored ability
-    if isHotbarSwap then
-        g_pendingGroundAbility = nil
-    end
-
     -- Don't update bars if this full update event was from using an inventory item
     if g_potionUsed == true then return end
 
     -- Update action bar skills
-    g_actionBar = {}
     for i = 3, 8 do
         CI.OnSlotUpdated(eventCode, i, true)
     end

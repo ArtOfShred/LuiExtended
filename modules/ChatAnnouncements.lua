@@ -3233,34 +3233,35 @@ function CA.ResolveQuestItemChange()
                     d(itemId .. " Removed")
                 end
                 --
-                if LUIE.Effects.QuestItemHideRemove[itemId] then return end -- Return if this ID should be ignored
 
                 countChange = newValue + questItemIndex[itemId].counter
 
-                if CA.SV.Inventory.LootQuestRemove then
-                    if CA.SV.Currency.CurrencyContextColor then
-                        color = CurrencyDownColorize:ToHex()
-                    else
-                        color = CurrencyColorize:ToHex()
+                if not LUIE.Effects.QuestItemHideRemove[itemId] then
+                    if CA.SV.Inventory.LootQuestRemove then
+                        if CA.SV.Currency.CurrencyContextColor then
+                            color = CurrencyDownColorize:ToHex()
+                        else
+                            color = CurrencyColorize:ToHex()
+                        end
+
+                        logPrefix = CA.SV.ContextMessages.CurrencyMessageRemove
+                        local quantity = (countChange * -1) > 1 and (" |cFFFFFFx" .. (countChange * -1) .. "|r") or ""
+
+                        formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
+                        formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
+
+                        if CA.SV.Inventory.LootTotal and total > 1 then
+                            totalString = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
+                        else
+                            totalString = ""
+                        end
+
+                        finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
+
+                        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT REMOVE" }
+                        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                        eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                     end
-
-                    logPrefix = CA.SV.ContextMessages.CurrencyMessageRemove
-                    local quantity = (countChange * -1) > 1 and (" |cFFFFFFx" .. (countChange * -1) .. "|r") or ""
-
-                    formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
-                    formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
-
-                    if CA.SV.Inventory.LootTotal and total > 1 then
-                        totalString = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
-                    else
-                        totalString = ""
-                    end
-
-                    finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
-
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT REMOVE" }
-                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                 end
             end
 
@@ -3273,44 +3274,45 @@ function CA.ResolveQuestItemChange()
                     d(itemId .. " Added")
                 end
                 --
-                if LUIE.Effects.QuestItemHideLoot[itemId] then return end -- Return if this ID should be ignored
 
                 countChange = newValue - questItemIndex[itemId].stack
 
-                if CA.SV.Inventory.LootQuestAdd then
-                    if CA.SV.Currency.CurrencyContextColor then
-                        color = CurrencyUpColorize:ToHex()
-                    else
-                        color = CurrencyColorize:ToHex()
+                if not LUIE.Effects.QuestItemHideLoot[itemId] then
+                    if CA.SV.Inventory.LootQuestAdd then
+                        if CA.SV.Currency.CurrencyContextColor then
+                            color = CurrencyUpColorize:ToHex()
+                        else
+                            color = CurrencyColorize:ToHex()
+                        end
+
+                        if g_isLooted and not g_itemReceivedIsQuestReward and not g_isPickpocketed and not g_isStolen then
+                            logPrefix = CA.SV.ContextMessages.CurrencyMessageLoot
+                            -- reset variables that control looted, or at least ZO_CallLater them
+                        elseif g_isPickpocketed then
+                            logPrefix = CA.SV.ContextMessages.CurrencyMessagePickpocket
+                        elseif g_isStolen and not g_isPickpocketed then
+                            logPrefix = CA.SV.ContextMessages.CurrencyMessageSteal
+                        else
+                            logPrefix = CA.SV.ContextMessages.CurrencyMessageReceive
+                        end
+
+                        local quantity = countChange > 1 and (" |cFFFFFFx" .. countChange .. "|r") or ""
+
+                        formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
+                        formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
+
+                        if CA.SV.Inventory.LootTotal and total > 1 then
+                            totalString = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
+                        else
+                            totalString = ""
+                        end
+
+                        finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
+
+                        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT ADD" }
+                        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                        eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                     end
-
-                    if g_isLooted and not g_itemReceivedIsQuestReward and not g_isPickpocketed and not g_isStolen then
-                        logPrefix = CA.SV.ContextMessages.CurrencyMessageLoot
-                        -- reset variables that control looted, or at least ZO_CallLater them
-                    elseif g_isPickpocketed then
-                        logPrefix = CA.SV.ContextMessages.CurrencyMessagePickpocket
-                    elseif g_isStolen and not g_isPickpocketed then
-                        logPrefix = CA.SV.ContextMessages.CurrencyMessageSteal
-                    else
-                        logPrefix = CA.SV.ContextMessages.CurrencyMessageReceive
-                    end
-
-                    local quantity = countChange > 1 and (" |cFFFFFFx" .. countChange .. "|r") or ""
-
-                    formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
-                    formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
-
-                    if CA.SV.Inventory.LootTotal and total > 1 then
-                        totalString = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
-                    else
-                        totalString = ""
-                    end
-
-                    finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
-
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT ADD" }
-                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                 end
             end
         end
