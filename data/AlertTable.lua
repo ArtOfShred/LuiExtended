@@ -40,8 +40,8 @@ LUIE.AlertTable = {
     --------------------------------------------------
 
     -- Synergy
-    [10805] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true }, -- Ignite (Synergy)
-
+    [12439] = { avoid = true, priority = 3, eventdetect = true }, -- Burning Arrow (Synergy)
+    [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true }, -- Ignite (Synergy)
 
     -- Abilities
     [29378] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Uppercut (Ravager)

@@ -727,6 +727,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         end
 
         if changeType == EFFECT_RESULT_FADED then
+            if abilityId == 32958 then return end -- Ignore Shifting Standard
             local currentTime = GetGameTimeMilliseconds()
             if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
                 if (E.IsGroundMineAura[abilityId] or E.IsGroundMineStack[abilityId]) then

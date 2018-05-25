@@ -270,6 +270,7 @@ E.IsGroundMineAura = {
     [31632] = true, -- Fire Rune (Fire Rune)
     [40470] = true, -- Volcanic Rune (Volcanic Rune)
     [40465] = true, -- Scalding Rune (Scalding Rune)
+
 }
 
 E.IsGroundMineStack = {
@@ -563,7 +564,7 @@ E.EffectGroundDisplay = {
 
     -- Dungeon Sets
     [97538] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', buff = true, debuff = false, ground = false }, -- Draugr's Rest
-    [102106] = { icon = 'LuiExtended/media/icons/abilities/ability_set_plague_slinger.dds', name = A.Set_Plague_Slinger, buff = false, debuff = false, ground = true }, -- Skeever Corpse
+    [102106] = { icon = 'esoui/art/icons/achievement_bossflavoreasy.dds', name = A.Set_Plague_Slinger, buff = false, debuff = false, ground = true }, -- Skeever Corpse
     [97908] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', buff = true, debuff = false, ground = true }, -- Hagraven's Garden (Hagraven's)
     [67205] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', buff = false, debuff = false, ground = true }, -- Leeching Plate (of Leeching)
     [84354] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Hand of Mephala (of Mephala's Hand)
@@ -4339,9 +4340,6 @@ E.EffectOverride = {
     [79147] = { hide = true }, -- GEN 3 Hits
     [73916] = { hide = true }, -- GEN 2 Hits
 
-    -- Friendly NPC's
-    [42905] = { name = 'Recovering' }, -- Recover
-
     -- Shared NPC Active Events
     [8239] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hamstrung.dds', name = A.Skill_Hamstring }, -- Hamstrung
 
@@ -4357,7 +4355,6 @@ E.EffectOverride = {
     [48330] = { hide = true }, -- Aspect of Terror (Abnur Tharn)
     [48331] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_aspect_of_terror_p.dds' }, -- Aspect of Terror (Abnur Tharn)
 
-
     [42905] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds' }, -- Recover
     [42937] = { hide = true }, -- TargetPriorityException
 
@@ -4371,6 +4368,7 @@ E.EffectOverride = {
     [39065] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds' }, -- Bear Trap (Shared Human NPC)
     [11039] = { hide = true }, -- Spread Out Sound (Synergy)
     [10650] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_oil_drenched.dds' }, -- Oil Drenched (Synergy)
+    [12439] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_ignite.dds', name = A.Skill_Ignite }, -- Burning Arrow (Synergy - Archer)
     [14068] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_ignite.dds' }, -- Ignite (Synergy - Archer)
     [10805] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_ignite.dds' }, -- Ignite (Synergy - Fire Mage)
     [10813] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_ignite.dds' }, -- Ignite (Synergy - Fire Mage)
@@ -4638,8 +4636,8 @@ E.EffectOverride = {
     [83624] = { hide = true }, -- Shard Shield (Bodyguard) (DB DLC)
     [77838] = { hide = true }, -- Shield Charge (Bodyguard) (DB DLC)
     [77602] = { hide = true }, -- Shard Shield (Bodyguard) (DB DLC)
-    [77672] = { name = A.Skill_Recovering }, -- 'Til Death (Bodyguard) (DB DLC)
-    [77742] = { name = A.Skill_Recovering }, -- 'Til Death (Bodyguard) (DB DLC)
+    [77672] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds', name = A.Skill_Recover }, -- 'Til Death (Bodyguard) (DB DLC)
+    [77742] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds', name = A.Skill_Recover }, -- 'Til Death (Bodyguard) (DB DLC)
 
     -- Cyrodiil
     [47717] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Cyrodiil Guard T1)
@@ -5965,19 +5963,19 @@ E.EffectOverride = {
     [44561] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, unbreakable = 1 }, -- FGQ4 RGT Event Knockback
     [44563] = { name = A.Skill_Knockback }, -- Fire Backlash
     [37015] = { hide = true }, -- Lash of Torment
-
     [37173] = { icon = 'esoui/art/icons/ability_mage_010.dds' }, -- Flame Shield (Duchess of Anguish)
     [37176] = { hide = true }, -- Register (Duchess of Anguish)
     [37175] = { icon = 'esoui/art/icons/ability_mage_010.dds', name = A.Skill_Flame_Shield }, -- Flare Up (Duchess of Anguish)
     [38729] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_royal_strike.dds' }, -- Royal Strike (Duchess of Anguish)
     [38741] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_royal_strike.dds', name = A.Skill_Royal_Strike }, -- Royal Snare (Duchess of Anguish)
     [38728] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_daedra_fa_red.dds' }, -- Summon Daedra (Duchess of Anguish)
+
+    -- Shadow of Sancre Tor
     [41021] = { hide = true }, -- Mannimarco's Triumph
     [39302] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_empower_atronach.dds' }, -- Necromantic Revival
     [39367] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_consecrate_shrine.dds', name = A.Skill_Consecrate_Shrine }, -- Altar Use
-    [37827] = { hide = true, icon = 'esoui/art/icons/achievement_021.dds', name = A.Skill_Remove_Ward }, -- Stendarr's Protection
+    [37827] = { hide = true, icon = 'esoui/art/icons/achievement_housing_033.dds', name = A.Skill_Remove_Ward }, -- Stendarr's Protection
     [46816] = { hide = true }, -- Shake
-
     [38207] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_death_bolt.dds', hide = true }, -- Death Bolt (Mannimarco)
     [41067] = { hide = true }, -- Dummy (Mannimarco)
     [40401] = { hide = true }, -- Daedric Step (Mannimarco)
@@ -5991,13 +5989,18 @@ E.EffectOverride = {
     [41022] = { hide = true }, -- Nova (Mannimarco)
     [40429] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, unbreakable = 1 }, -- IntroKB (Mannimarco)
     [40426] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback }, -- Staggering Roar (Mannimarco)
-
     [40976] = { hide = true }, -- dummy (Mannimarco)
     [44083] = { hide = true }, -- Ghostly (Mannimarco)
     [42083] = { hide = true }, -- PortalHoldstun (Mannimarco)
     [40573] = { hide = true }, -- StopPortalStun (Mannimarco)
     [40980] = { hide = true }, -- dummy (Mannimarco)
     [40983] = { hide = true }, -- dummy (Mannimarco)
+
+    [41996] = { hide = true }, -- Smash (Molag Bal)
+    [41385] = { hide = true }, -- Dummystun (Molag Bal)
+
+    -- Council of the Five Companions
+    [36543] = { hide = true }, -- Portal Cast
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------

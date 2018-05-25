@@ -7120,6 +7120,7 @@ debugAuras = {
             [77477] = true, -- Dutiful Fury -- Bodyguard (DB DLC)
             [77476] = true, -- Dutiful Fury -- Bodyguard (DB DLC)
             [77489] = true, -- Dutiful Fury -- Bodyguard (DB DLC)
+            [105606] = true, -- Dutiful Fury -- Bodyguard (DB DLC)
             [81360] = true, -- 'Til Death -- Bodyguard (DB DLC)
             [77472] = true, -- 'Til Death -- Bodyguard (DB DLC)
             [79523] = true, -- 'Til Death -- Bodyguard (DB DLC)
@@ -9065,7 +9066,6 @@ debugAuras = {
             [37827] = true, -- Stendarr's Protection
             [46816] = true, -- Shake
             [41989] = true, -- Manniintro
-
             [38207] = true, -- Death Bolt (Mannimarco)
             [41067] = true, -- Dummy (Mannimarco)
             [41069] = true, -- Dummy (Mannimarco)
@@ -9098,6 +9098,34 @@ debugAuras = {
             [40980] = true, -- dummy (Mannimarco)
             [40981] = true, -- Portal Spawn (Mannimarco)
             [40983] = true, -- dummy (Mannimarco)
+            [41056] = true, -- Ghost Manniappears
+            [38198] = true, -- Obliterate 3
+            --[41996] = true, -- Smash (Molag Bal)
+            --[41198] = true, -- IntroKB (Molag Bal)
+            --[41197] = true, -- Staggering Roar (Molag Bal)
+            --[41385] = true, -- Dummystun (Molag Bal)
+            [47522] = true, -- Nocom (Molag Bal)
+
+            -- Council of the Five Companions
+            --[36543] = true, -- Portal Cast (Varen Aquilarios)
+            [18417] = true, -- Rending the Skein (Varen Aquilarios)
+            [36071] = true, -- MQ5.5 Mannimarco Tortured
+            --[36421] = true, -- Drink with Lyris
+
+            -- Messages Across Tamriel
+            [48079] = true, -- Galerion's Grandiose Greeting
+            --[48086] = true, -- Vanus Appearance Player KB
+
+            -- The Weight of Three Crowns
+            [38141] = true, -- Lady Laurent Delay
+            [36445] = true, -- Lightning Strike
+            [36446] = true, -- Wrath
+            [15792] = true, -- CHT Coldharbour
+            [47472] = true, -- CHT Unstable Spawn
+            [8095] = true, -- Generic Magic Explosion
+            [26542] = true, -- Emanating Prescence
+            [47424] = true, -- CHT Valerion Bubb
+            --[47186] = true, -- CHT Portal Killer
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------

@@ -599,6 +599,7 @@ A.Skill_Backstabber                 = 13739
 
 -- Human
 A.Skill_Oil_Drenched                = 10650
+A.Skill_Ignite                      = 14070
 A.Skill_Shield_Rush                 = GetString(SI_LUIE_SKILL_SHIELD_RUSH)
 A.Skill_Knockback                   = 77905
 A.Skill_Weakness                    = 8705
@@ -612,7 +613,7 @@ A.Skill_Retaliation                 = 65033
 A.Skill_Divine_Leap                 = 54027
 A.Skill_Inspire                     = GetString(SI_LUIE_SKILL_INSPIRE)
 A.Skill_Hide_in_Shadows             = GetString(SI_LUIE_SKILL_HIDE_IN_SHADOWS)
-A.Skill_Recovering                  = 4197
+A.Skill_Recover                     = 42905
 A.Skill_Lunge                       = 78664
 A.Skill_Clobber                     = 24671
 A.Skill_Shadowy_Barrier             = GetString(SI_LUIE_SKILL_SHADOWY_BARRIER)
