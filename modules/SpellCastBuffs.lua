@@ -1723,27 +1723,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     else
                         context = groundType[i].context
                     end
-                    if not (E.IsGroundMineAura[abilityId] or E.IsGroundMineStack[abilityId]) then
-                        g_effectsList[context][ abilityId ] = {
-                            target="player", type=groundType[i].type,
-                            id=abilityId, name=effectName, icon=iconName,
-                            dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                            forced=nil,
-                            restart=true, iconNum=0,
-                            unbreakable=0,
-                            stack = stackCount
-                        }
-                    elseif E.IsGroundMineAura[abilityId] then
+                    if E.IsGroundMineAura[abilityId] then
                         stackCount = E.EffectGroundDisplay[abilityId].stackReset
-                        g_effectsList[context][ abilityId ] = {
-                            target="player", type=groundType[i].type,
-                            id=abilityId, name=effectName, icon=iconName,
-                            dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                            forced=nil,
-                            restart=true, iconNum=0,
-                            unbreakable=0,
-                            stack = stackCount
-                        }
                     elseif E.IsGroundMineStack[abilityId] then
                         if g_effectsList[context][ abilityId ] then
                             stackCount = g_effectsList[context][ abilityId ].stack + E.EffectGroundDisplay[abilityId].stackRemove
@@ -1751,7 +1732,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                             stackCount = 1
                         end
                         if stackCount > E.EffectGroundDisplay[abilityId].stackReset then stackCount = E.EffectGroundDisplay[abilityId].stackReset end
-                        g_effectsList[context][ abilityId ] = {
+                    end
+
+                    g_effectsList[context][ abilityId ] = {
                         target="player", type=groundType[i].type,
                         id=abilityId, name=effectName, icon=iconName,
                         dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
@@ -1759,8 +1742,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                         restart=true, iconNum=0,
                         unbreakable=0,
                         stack = stackCount
-                        }
-                    end
+                    }
+
                 end
             end
         end
