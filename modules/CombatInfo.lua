@@ -707,6 +707,8 @@ function CI.OnReticleTargetChanged(eventCode)
     end
 end
 
+local g_mineStacks = {}
+
 function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     -- If we're displaying a fake bar highlight then bail out here (sometimes we need a fake aura that doesn't end to simulate effects that can be overwritten, such as Major/Minor buffs. Technically we don't want to stop the
     -- highlight of the original ability since we can only track one buff per slot and overwriting the buff with a longer duration buff shouldn't throw the player off by making the glow disappear earlier.
@@ -718,13 +720,30 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         g_toggledSlotsPlayer[abilityId] = true
     end
 
-    if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and E.EffectGroundDisplay[abilityId] then
+    if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and (E.EffectGroundDisplay[abilityId] or E.LinkedGroundMine[abilityId]) then
+
+        if E.LinkedGroundMine[abilityId] then
+            abilityId = E.LinkedGroundMine[abilityId]
+        end
 
         if changeType == EFFECT_RESULT_FADED then
             local currentTime = GetGameTimeMilliseconds()
             if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
-                -- Due to effect fading AFTER being gained when refreshing Ground Auras, we have to keep track of this.
-                if not E.IsGroundMineAura[abilityId] then
+                if (E.IsGroundMineAura[abilityId] or E.IsGroundMineStack[abilityId]) then
+                    g_mineStacks[abilityId] = g_mineStacks[abilityId] - E.EffectGroundDisplay[abilityId].stackRemove
+                    d(g_mineStacks)
+                    if g_mineStacks[abilityId] == 0 then
+                        if g_toggledSlotsRemain[abilityId] then
+                            if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
+                                g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
+                                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
+                                    uiUltimate.LabelPct:SetHidden( false )
+                                end
+                            end
+                        end
+                        g_toggledSlotsRemain[abilityId] = nil
+                    end
+                else
                     -- Ignore fading event if override is true
                     if g_barNoRemove[abilityId] then return end
                     -- Stop any toggle animation associated with this effect
@@ -741,21 +760,64 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
             end
         elseif changeType == EFFECT_RESULT_GAINED then
 
-            g_protectAbilityRemoval[abilityId] = GetGameTimeMilliseconds() + 150
+            local currentTime = GetGameTimeMilliseconds()
+            g_protectAbilityRemoval[abilityId] = currentTime + 150
 
-            -- Bar Tracker
-            if CI.SV.ShowToggled then
-                g_toggledSlotsPlayer[abilityId] = true
-                local currentTime = GetGameTimeMilliseconds()
-                if g_toggledSlots[abilityId] then
-                    g_toggledSlotsRemain[abilityId] = 1000*endTime
-                    CI.ShowCustomToggle(g_toggledSlots[abilityId])
-                    if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
-                        uiUltimate.LabelPct:SetHidden( true )
+            if not (E.IsGroundMineAura[abilityId] or E.IsGroundMineStack[abilityId]) then
+                -- Bar Tracker
+                if CI.SV.ShowToggled then
+                    g_toggledSlotsPlayer[abilityId] = true
+                    local currentTime = GetGameTimeMilliseconds()
+                    if g_toggledSlots[abilityId] then
+                        g_toggledSlotsRemain[abilityId] = 1000*endTime
+                        CI.ShowCustomToggle(g_toggledSlots[abilityId])
+                        if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
+                            uiUltimate.LabelPct:SetHidden( true )
+                        end
+                        if CI.SV.BarShowLabel then
+                            local remain = g_toggledSlotsRemain[abilityId] - currentTime
+                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                        end
                     end
-                    if CI.SV.BarShowLabel then
-                        local remain = g_toggledSlotsRemain[abilityId] - currentTime
-                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                end
+            elseif E.IsGroundMineAura[abilityId] then
+                g_mineStacks[abilityId] = E.EffectGroundDisplay[abilityId].stackReset
+                if CI.SV.ShowToggled then
+                    g_toggledSlotsPlayer[abilityId] = true
+                    local currentTime = GetGameTimeMilliseconds()
+                    if g_toggledSlots[abilityId] then
+                        g_toggledSlotsRemain[abilityId] = 1000*endTime
+                        CI.ShowCustomToggle(g_toggledSlots[abilityId])
+                        if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
+                            uiUltimate.LabelPct:SetHidden( true )
+                        end
+                        if CI.SV.BarShowLabel then
+                            local remain = g_toggledSlotsRemain[abilityId] - currentTime
+                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                        end
+                    end
+                end
+            elseif E.IsGroundMineStack[abilityId] then
+                if g_mineStacks[abilityId] then
+                    g_mineStacks[abilityId] = g_mineStacks[abilityId] + E.EffectGroundDisplay[abilityId].stackRemove
+                else
+                    g_mineStacks[abilityId] = 1
+                end
+                if g_mineStacks[abilityId] > E.EffectGroundDisplay[abilityId].stackReset then g_mineStacks[abilityId] = E.EffectGroundDisplay[abilityId].stackReset end
+                d(g_mineStacks)
+                if CI.SV.ShowToggled then
+                    g_toggledSlotsPlayer[abilityId] = true
+                    local currentTime = GetGameTimeMilliseconds()
+                    if g_toggledSlots[abilityId] then
+                        g_toggledSlotsRemain[abilityId] = 1000*endTime
+                        CI.ShowCustomToggle(g_toggledSlots[abilityId])
+                        if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
+                            uiUltimate.LabelPct:SetHidden( true )
+                        end
+                        if CI.SV.BarShowLabel then
+                            local remain = g_toggledSlotsRemain[abilityId] - currentTime
+                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                        end
                     end
                 end
             end

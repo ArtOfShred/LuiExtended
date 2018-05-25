@@ -251,8 +251,6 @@ E.IsGrimFocusOverride = {
 }
 
 E.IsGroundMineAura = {
-    -- Sets
-    [75930] = true, -- Deadric Mines (Eternal Hunt)
 
     -- Nightblade
     [37475] = true, -- Manifestation of Terror (Nightblade)
@@ -262,20 +260,28 @@ E.IsGroundMineAura = {
     [24847] = true, -- Daedric Mines (Daedric Tomb)
     [25158] = true, -- Daedric Mines (Daedric Minefield)
 
-    -- Warden
-    [86175] = true, -- Frozen Gate (Frozen Gate)
-    [86179] = true, -- Frozen Device (Frozen Device)
-    [86183] = true, -- Frozen Retreat (Frozen Retreat)
-
     -- Fighters Guild
     [35750] = true, -- Trap Beast (Trap Beast - Rank 1)
-    [40382] = true, -- Rearming Trap (Rearming Trap - Rank 1)
+    [40382] = true, -- Rearming Trap (Rearming Trap)
+    [40388] = true, -- Rearming Trap (Rearming Trap)
     [40372] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
 
     -- Mages Guild
     [31632] = true, -- Fire Rune (Fire Rune)
     [40470] = true, -- Volcanic Rune (Volcanic Rune)
     [40465] = true, -- Scalding Rune (Scalding Rune)
+}
+
+E.IsGroundMineStack = {
+
+    -- Sets
+    [75930] = true, -- Deadric Mines (Eternal Hunt)
+
+    -- Warden
+    [86175] = true, -- Frozen Gate (Frozen Gate)
+    [86179] = true, -- Frozen Device (Frozen Device)
+    [86183] = true, -- Frozen Retreat (Frozen Retreat)
+
 }
 
 E.LinkedGroundMine = {
@@ -548,7 +554,7 @@ E.EffectGroundDisplay = {
     [102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', buff = true, debuff = false, ground = false }, -- Zaan
 
     -- Crafted Sets
-    [75930] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', name = A.Set_Eternal_Hunt, buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1 }, -- Daedric Mines (Eternal Hunt)
+    [75930] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', name = A.Set_Eternal_Hunt, buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 7 }, -- Daedric Mines (Eternal Hunt)
     [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', buff = true, debuff = false, ground = false }, -- Morkuldin (Morkuldin)
     [106784] = { name = A.Set_Dust_Cloud, buff = false, debuff = false, ground = true }, -- Dustcloud (Adept Rider's)
 
@@ -587,15 +593,15 @@ E.EffectGroundDisplay = {
     [38517] = { buff = true, debuff = false, ground = false }, -- Summon Shade (Summon Shade)
     [35438] = { name = A.Skill_Dark_Shade, buff = true, debuff = false, ground = false }, -- Dark Shade (Dark Shade)
     [38528] = { name = A.Skill_Shadow_Image, buff = true, debuff = false, ground = false }, -- Shadow (Shadow Image)
-    [37475] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1 }, -- Manifestation of Terror (Nightblade)
+    [37475] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 2 }, -- Manifestation of Terror (Nightblade)
     [25411] = { buff = true, debuff = false, ground = false }, -- Consuming Darkness (Consuming Darkness)
     [36493] = { buff = true, debuff = false, ground = false }, -- Bolstering Darkness (Bolstering Darkness)
     [36485] = { buff = true, debuff = false, ground = false }, -- Veil of Blades (Veil of Blades)
 
     -- Sorcerer
-    [24830] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, icon = 'esoui/art/icons/ability_sorcerer_daedric_mines.dds' }, -- Daedric Mines (Daedric Mines)
-    [24847] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, icon = 'esoui/art/icons/ability_sorcerer_daedric_tomb.dds', name = A.Skill_Daedric_Tomb }, -- Daedric Mines (Daedric Tomb)
-    [25158] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, icon = 'esoui/art/icons/ability_sorcerer_daedric_minefield.dds', name = A.Skill_Daedric_Minefield }, -- Daedric Mines (Daedric Tomb)
+    [24830] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3, icon = 'esoui/art/icons/ability_sorcerer_daedric_mines.dds' }, -- Daedric Mines (Daedric Mines)
+    [24847] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3, icon = 'esoui/art/icons/ability_sorcerer_daedric_tomb.dds', name = A.Skill_Daedric_Tomb }, -- Daedric Mines (Daedric Tomb)
+    [25158] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 5, icon = 'esoui/art/icons/ability_sorcerer_daedric_minefield.dds', name = A.Skill_Daedric_Minefield }, -- Daedric Mines (Daedric Minefield)
     [27706] = { buff = false, debuff = false, ground = true }, -- Negate Magic (Negate Magic)
     [28341] = { buff = false, debuff = false, ground = true }, -- Suppression Field (Suppression Field)
     [28348] = { buff = false, debuff = false, ground = true }, -- Absorption Field (Absorption Field)
@@ -627,9 +633,9 @@ E.EffectGroundDisplay = {
     [85532] = { buff = true, debuff = false, ground = false }, -- Secluded Grove (Secluded Grove)
     [85804] = { buff = true, debuff = false, ground = false }, -- Enchanted Forest (Enchanted Forest)
     [85807] = { buff = true, debuff = false, ground = false }, -- Healing Thicket (Healing Thicket)
-    [86175] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1 }, -- Frozen Gate (Frozen Gate)
-    [86179] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1 }, -- Frozen Device (Frozen Device)
-    [86183] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1 }, -- Frozen Retreat (Frozen Retreat)
+    [86175] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3 }, -- Frozen Gate (Frozen Gate)
+    [86179] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3 }, -- Frozen Device (Frozen Device)
+    [86183] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3 }, -- Frozen Retreat (Frozen Retreat)
 
     ---------------------------
     -- Bow --------------------
@@ -675,18 +681,18 @@ E.EffectGroundDisplay = {
     [35737] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 1)
     [40181] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 1)
     [40169] = { buff = true, debuff = false, ground = false }, -- Ring of Preservation (Ring of Preservation - Rank 1)
-    [35750] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1 }, -- Trap Beast (Trap Beast - Rank 1)
-    [40382] = { buff = false, debuff = false, ground = true, stackAdd = 2, stackRemove = 2 }, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40388] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1 }, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40372] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+    [35750] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Trap Beast (Trap Beast - Rank 1)
+    [40382] = { buff = false, debuff = false, ground = true, stackAdd = 2, stackRemove = 2, stackReset = 2 }, -- Rearming Trap (Rearming Trap - Rank 1)
+    [40388] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Rearming Trap (Rearming Trap - Rank 1)
+    [40372] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
 
     ---------------------------
     -- Mages Guild ------------
     ---------------------------
 
-    [31632] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1 }, -- Fire Rune (Fire Rune)
-    [40470] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1 }, -- Volcanic Rune (Volcanic Rune)
-    [40465] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1 }, -- Scalding Rune (Scalding Rune)
+    [31632] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Fire Rune (Fire Rune)
+    [40470] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Volcanic Rune (Volcanic Rune)
+    [40465] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Scalding Rune (Scalding Rune)
     [63430] = { icon = 'esoui/art/icons/ability_mageguild_005.dds', buff = false, debuff = false, ground = true }, -- Meteor (Meteor)
     [63456] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', buff = false, debuff = false, ground = true }, -- Ice Comet (Ice Comet)
     [63473] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds', buff = false, debuff = false, ground = true }, -- Shooting Star (Shooting Star)

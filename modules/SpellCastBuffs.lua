@@ -1678,26 +1678,26 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
 
         if changeType == EFFECT_RESULT_FADED then
-            for i = 1, 3 do
-                if groundType[i].info == true then
-                    -- Set container context
-                    local context
-                    if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
-                        context = groundType[i].promD
-                    elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
-                        context = groundType[i].promB
-                    else
-                        context = groundType[i].context
-                    end
-                    if E.IsGroundMineAura[abilityId] then
-                        -- Check to make sure aura exists in case of reloadUI
-                        if g_effectsList[context][ abilityId ] then
-                            g_effectsList[context][ abilityId ].stack = g_effectsList[context][ abilityId ].stack - E.EffectGroundDisplay[abilityId].stackRemove
-                            if g_effectsList[context][ abilityId ].stack == 0 then g_effectsList[context][ abilityId ] = nil end
+            local currentTime = GetGameTimeMilliseconds()
+            if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
+                for i = 1, 3 do
+                    if groundType[i].info == true then
+                        -- Set container context
+                        local context
+                        if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
+                            context = groundType[i].promD
+                        elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
+                            context = groundType[i].promB
+                        else
+                            context = groundType[i].context
                         end
-                    else
-                        local currentTime = GetGameTimeMilliseconds()
-                        if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
+                        if (E.IsGroundMineAura[abilityId] or E.IsGroundMineStack[abilityId]) then
+                            -- Check to make sure aura exists in case of reloadUI
+                            if g_effectsList[context][ abilityId ] then
+                                g_effectsList[context][ abilityId ].stack = g_effectsList[context][ abilityId ].stack - E.EffectGroundDisplay[abilityId].stackRemove
+                                if g_effectsList[context][ abilityId ].stack == 0 then g_effectsList[context][ abilityId ] = nil end
+                            end
+                        else
                             g_effectsList[context][ abilityId ] = nil
                         end
                     end
@@ -1705,7 +1705,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             end
         elseif changeType == EFFECT_RESULT_GAINED then
 
-            g_protectAbilityRemoval[abilityId] = GetGameTimeMilliseconds() + 150
+            local currentTime = GetGameTimeMilliseconds()
+            g_protectAbilityRemoval[abilityId] = currentTime + 150
 
             local duration = endTime - beginTime
             iconName = E.EffectGroundDisplay[abilityId].icon or iconName
@@ -1722,8 +1723,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     else
                         context = groundType[i].context
                     end
-                    if not g_effectsList[context][ abilityId ] or not E.IsGroundMineAura[abilityId] then
-                        stackCount = E.EffectGroundDisplay[abilityId].stackAdd or stackCount
+                    if not (E.IsGroundMineAura[abilityId] or E.IsGroundMineStack[abilityId]) then
                         g_effectsList[context][ abilityId ] = {
                             target="player", type=groundType[i].type,
                             id=abilityId, name=effectName, icon=iconName,
@@ -1733,21 +1733,33 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                             unbreakable=0,
                             stack = stackCount
                         }
-                    else
-                        if E.IsGroundMineAura[abilityId] then
-                            if g_effectsList[context][ abilityId ] then
-                                stackCount = g_effectsList[context][ abilityId ].stack + E.EffectGroundDisplay[abilityId].stackRemove
-                                g_effectsList[context][ abilityId ] = {
-                                target="player", type=groundType[i].type,
-                                id=abilityId, name=effectName, icon=iconName,
-                                dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                                forced=nil,
-                                restart=true, iconNum=0,
-                                unbreakable=0,
-                                stack = stackCount
-                                }
-                            end
+                    elseif E.IsGroundMineAura[abilityId] then
+                        stackCount = E.EffectGroundDisplay[abilityId].stackReset
+                        g_effectsList[context][ abilityId ] = {
+                            target="player", type=groundType[i].type,
+                            id=abilityId, name=effectName, icon=iconName,
+                            dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                            forced=nil,
+                            restart=true, iconNum=0,
+                            unbreakable=0,
+                            stack = stackCount
+                        }
+                    elseif E.IsGroundMineStack[abilityId] then
+                        if g_effectsList[context][ abilityId ] then
+                            stackCount = g_effectsList[context][ abilityId ].stack + E.EffectGroundDisplay[abilityId].stackRemove
+                        else
+                            stackCount = 1
                         end
+                        if stackCount > E.EffectGroundDisplay[abilityId].stackReset then stackCount = E.EffectGroundDisplay[abilityId].stackReset end
+                        g_effectsList[context][ abilityId ] = {
+                        target="player", type=groundType[i].type,
+                        id=abilityId, name=effectName, icon=iconName,
+                        dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                        forced=nil,
+                        restart=true, iconNum=0,
+                        unbreakable=0,
+                        stack = stackCount
+                        }
                     end
                 end
             end
