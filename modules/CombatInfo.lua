@@ -98,7 +98,7 @@ local g_barFakeAura          = {} -- Table for storing abilityId's that only dis
 local g_barDurationOverride  = {} -- Table for storing abilitiyId's that ignore ending event (Created on initialization)
 local g_barNoRemove          = {} -- Table of abilities we don't remove from bar highlight (Created on initialization)
 local g_potionUsed           = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
-local g_keepTrackOfAuras     = {}
+local g_protectAbilityRemoval = {}
 
 -- Quickslot
 local uiQuickSlot   = {
@@ -465,9 +465,6 @@ function CI.OnUpdate(currentTime)
                 end
             end
             g_toggledSlotsRemain[k] = nil
-            if g_keepTrackOfAuras[k] then
-                g_keepTrackOfAuras[k] = 0
-            end
         end
 
         -- Update Label
@@ -724,19 +721,9 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and E.EffectGroundDisplay[abilityId] then
 
         if changeType == EFFECT_RESULT_FADED then
-
-            -- Due to effect fading AFTER being gained when refreshing Ground Auras, we have to keep track of this.
-            if g_keepTrackOfAuras[abilityId] then
-                g_keepTrackOfAuras[abilityId] = g_keepTrackOfAuras[abilityId] - 1
-                if g_keepTrackOfAuras[abilityId] < 0 then
-                     g_keepTrackOfAuras[abilityId] = 0
-                end
-            else
-                g_keepTrackOfAuras[abilityId] = 0
-            end
-
-            if not E.IsGroundMineAura[abilityId] then
-                if g_keepTrackOfAuras[abilityId] == 0 then
+            if not g_protectAbilityRemoval[abilityId] then
+                -- Due to effect fading AFTER being gained when refreshing Ground Auras, we have to keep track of this.
+                if not E.IsGroundMineAura[abilityId] then
                     -- Ignore fading event if override is true
                     if g_barNoRemove[abilityId] then return end
                     -- Stop any toggle animation associated with this effect
@@ -753,15 +740,8 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
             end
         elseif changeType == EFFECT_RESULT_GAINED then
 
-            -- Due to effect fading AFTER being gained when refreshing Ground Auras, we have to keep track of this.
-            if g_keepTrackOfAuras[abilityId] then
-                g_keepTrackOfAuras[abilityId] = g_keepTrackOfAuras[abilityId] + 1
-                if g_keepTrackOfAuras[abilityId] > 2 then
-                     g_keepTrackOfAuras[abilityId] = 2
-                end
-            else
-                g_keepTrackOfAuras[abilityId] = 1
-            end
+            g_protectAbilityRemoval[abilityId] = true
+            callLater(function() g_protectAbilityRemoval[abilityId] = nil end, 150)
 
             -- Bar Tracker
             if CI.SV.ShowToggled then

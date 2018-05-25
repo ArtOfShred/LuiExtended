@@ -173,7 +173,7 @@ local g_longHorizAlign = CENTER
 local g_longVertAlign = MIDDLE
 local g_prominentVertAlign = BOTTOM
 local g_horizSortInvert = false
-local g_keepTrackOfAuras = {}
+local g_protectAbilityRemoval = {}
 
 -- Some optimization
 local abilityRouting = { "player1", "player2", "ground" }
@@ -1678,16 +1678,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
 
         if changeType == EFFECT_RESULT_FADED then
-            -- Due to effect fading AFTER being gained when refreshing Ground Auras, we have to keep track of this.
-            if g_keepTrackOfAuras[abilityId] then
-                g_keepTrackOfAuras[abilityId] = g_keepTrackOfAuras[abilityId] - 1
-                if g_keepTrackOfAuras[abilityId] < 0 then
-                     g_keepTrackOfAuras[abilityId] = 0
-                end
-            else
-                g_keepTrackOfAuras[abilityId] = 0
-            end
-
             for i = 1, 3 do
                 if groundType[i].info == true then
                     -- Set container context
@@ -1706,26 +1696,20 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                             if g_effectsList[context][ abilityId ].stack == 0 then g_effectsList[context][ abilityId ] = nil end
                         end
                     else
-                        if g_keepTrackOfAuras[abilityId] == 0 then
+                        if not g_protectAbilityRemoval[abilityId] then
                             g_effectsList[context][ abilityId ] = nil
                         end
                     end
                 end
             end
         elseif changeType == EFFECT_RESULT_GAINED then
+
+            g_protectAbilityRemoval[abilityId] = true
+            callLater(function() g_protectAbilityRemoval[abilityId] = nil end, 150)
+
             local duration = endTime - beginTime
             iconName = E.EffectGroundDisplay[abilityId].icon or iconName
             effectName = E.EffectGroundDisplay[abilityId].name or effectName
-
-            -- Due to effect fading AFTER being gained when refreshing Ground Auras, we have to keep track of this.
-            if g_keepTrackOfAuras[abilityId] then
-                g_keepTrackOfAuras[abilityId] = g_keepTrackOfAuras[abilityId] + 1
-                if g_keepTrackOfAuras[abilityId] > 2 then
-                     g_keepTrackOfAuras[abilityId] = 2
-                end
-            else
-                g_keepTrackOfAuras[abilityId] = 1
-            end
 
             for i = 1, 3 do
                 if groundType[i].info == true then
@@ -2706,9 +2690,6 @@ function SCB.OnUpdate(currentTime)
             -- Remove effect (that is not permanent and has duration)
             if v.ends ~= nil and v.dur > 0 and v.ends < currentTime then
                 effectsList[k] = nil
-                if g_keepTrackOfAuras[v.id] then
-                    g_keepTrackOfAuras[v.id] = 0
-                end
             -- Or append to correct container
             elseif container then
                 -- Add icons to to-be-sorted list only if effect already started
