@@ -721,7 +721,8 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and E.EffectGroundDisplay[abilityId] then
 
         if changeType == EFFECT_RESULT_FADED then
-            if not g_protectAbilityRemoval[abilityId] then
+            local currentTime = GetGameTimeMilliseconds()
+            if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
                 -- Due to effect fading AFTER being gained when refreshing Ground Auras, we have to keep track of this.
                 if not E.IsGroundMineAura[abilityId] then
                     -- Ignore fading event if override is true
@@ -740,8 +741,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
             end
         elseif changeType == EFFECT_RESULT_GAINED then
 
-            g_protectAbilityRemoval[abilityId] = true
-            callLater(function() g_protectAbilityRemoval[abilityId] = nil end, 150)
+            g_protectAbilityRemoval[abilityId] = GetGameTimeMilliseconds() + 150
 
             -- Bar Tracker
             if CI.SV.ShowToggled then

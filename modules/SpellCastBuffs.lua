@@ -1696,7 +1696,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                             if g_effectsList[context][ abilityId ].stack == 0 then g_effectsList[context][ abilityId ] = nil end
                         end
                     else
-                        if not g_protectAbilityRemoval[abilityId] then
+                        local currentTime = GetGameTimeMilliseconds()
+                        if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
                             g_effectsList[context][ abilityId ] = nil
                         end
                     end
@@ -1704,8 +1705,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             end
         elseif changeType == EFFECT_RESULT_GAINED then
 
-            g_protectAbilityRemoval[abilityId] = true
-            callLater(function() g_protectAbilityRemoval[abilityId] = nil end, 150)
+            g_protectAbilityRemoval[abilityId] = GetGameTimeMilliseconds() + 150
 
             local duration = endTime - beginTime
             iconName = E.EffectGroundDisplay[abilityId].icon or iconName
