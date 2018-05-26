@@ -61,6 +61,7 @@ A.Innate_Fall_Damage                = GetString(SI_LUIE_SKILL_FALL_DAMAGE) -- Fa
 A.Innate_Absorbing_Skyshard         = GetString(SI_LUIE_SKILL_ABSORBING_SKYSHARD) -- Absorbing Skyshard
 A.Innate_Receiving_Boon             = GetString(SI_LUIE_SKILL_RECEIVING_BOON) -- Receiving Boon
 A.Innate_Ayleid_Well                = GetString(SI_LUIE_SKILL_AYLEID_WELL) -- Ayleid Well
+A.Innate_Ayleid_Well_Fortified      = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED) -- Ayleid Well
 A.Innate_CC_Immunity                = 38117 -- CC Immunity
 A.Innate_Stagger                    = 1834 -- Stagger
 A.Innate_Revive                     = 5823 -- Revive

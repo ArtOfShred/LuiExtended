@@ -445,7 +445,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local abilityId =  trackBuffs[i].abilityId
                     local markForRemove = trackBuffs[i].markForRemove or false
 
-                    local tooltipText = GetAbilityEffectDescription(buffSlot)
+                    local tooltipText = LUIE.Effects.TooltipOverride[abilityId] or GetAbilityEffectDescription(buffSlot)
                     --if LUIE.Effects.TooltipOverride[abilityId] then tooltipText = LUIE.Effects.TooltipOverride[abilityId] end
                     -- Have to trim trailing spaces on the end of tooltips
                     if tooltipText ~= "" then

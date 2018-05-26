@@ -1810,6 +1810,9 @@ E.ArtificialEffectOverride = {
 -- TODO: MAYBE USE LATER
 E.TooltipOverride = {
 
+    [21263] = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP), -- Ayleid Health Bonus
+    [100862] = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP), -- Fortified Ayleid Health Bonus
+
 }
 
 E.EffectOverride = {
@@ -2774,6 +2777,7 @@ E.EffectOverride = {
     [102771] = { stack = 0, type = 1 }, -- Off Balance Immunity
     [85701] = { hide = true }, -- Dueling Flag
     [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well}, -- Ayleid Health Bonus
+    [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well_Fortified}, -- Ayleid Health Bonus
 
     -- Mount
     [42514] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', unbreakable = 1 }, -- Hard Dismount
@@ -4220,6 +4224,7 @@ E.EffectOverride = {
     [45292] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 2)
     [45294] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 3)
 
+    --[[
     [88480] = { hide = true }, -- Trap Triggerer (Various)
     [44029] = { icon = 'LuiExtended/media/icons/abilities/ability_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Slaughterfish Attack (Environmental)
     [26530] = { type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bear Trap (Bear Trap)
@@ -4228,8 +4233,10 @@ E.EffectOverride = {
     [65856] = { hide = true }, -- Spike Trap (Spike Trap) (Orsinium - To Save a Chief)
     [20259] = { name = 'Sigil of Frost', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Sigil of Frost Snare (Sigil of Frost - Wrothgar - Coldwind's Den)
     [73103] = { hide = true }, -- Lava (Orsinium - The Hand of Morkul) (Lava)
+    ]]--
 
     -- New Listing
+    --[[
     [73095] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = 'Lava' }, -- In Lava (Vvardenfell - Nchuleftingth - Public Dungeon)
     [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = 'Lava' }, -- In Lava (Various)
     [89481] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flame_jet.dds', name = 'Flame Jet Trap' }, -- Flame Jet (Vvardenfell -- An Armiger's Duty)
@@ -4249,6 +4256,7 @@ E.EffectOverride = {
     [87349] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds', name = 'Water Geyser' }, -- Water Geyser Burst (Vvardenfell -- A Hireling of House Telvanni)
     [87350] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds', name = 'Water Geyser', unbreakable = 1 }, -- Water Geyser Burst (Vvardenfell -- A Hireling of House Telvanni)
     [92150] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_dwarven_furnace.dds', name = 'Dwarven Furnace', hide = true }, -- Dwarven Furnace (Vvardenfell -- Divine Intervention)
+    ]]--
 
     ----------------------------------------------------------------
     -- JUSTICE NPCS ------------------------------------------------
@@ -5862,6 +5870,7 @@ E.EffectOverride = {
     -- Lava & Slaughterfish
     [19224] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, unbreakable = 1 }, -- In Lava (Lava - Halls of Torment)
 
+    -- Hiding Spot
     [72711] = { hide = true }, -- Hidden (Hiding Spot)
     [77335] = { hide = true }, -- Threat Drop (Hiding Spot)
     [77336] = { hide = true }, -- Threat Drop (Hiding Spot)
@@ -6006,6 +6015,7 @@ E.EffectOverride = {
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
     ----------------------------------------------------------------
 
+    --[[
     [68660] = { hide = true }, -- Q5489 Zolgar Death Countdown - The Lock and the Legion
     [68720] = { hide = true }, -- Q5489 Regilus Death Timer - The Lock and the Legion
     [82788] = { hide = true }, -- IC Harvester Door Exception - The Imperial Standard (Barracks Defense)
@@ -6022,11 +6032,13 @@ E.EffectOverride = {
     [53480] = { hide = true }, -- Summon Flame Atronach - The Watcher in the Walls (Final Boss)
     [53489] = { hide = true }, -- Summon Flame Atronach - The Watcher in the Walls (Final Boss)
     [80657] = { hide = true }, -- Fright Force - The Watcher in the Walls (Final Boss)
+    ]]--
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------
     ----------------------------------------------------------------
 
+    --[[
     [74875] = { type = BUFF_EFFECT_TYPE_DEBUFF }, -- Catapult (The Hidden Harvest)
     [64734] = { name = 'Harpy Swoop', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Q5318 - Harpy Swoop In (The Hidden Harvest)
     [74104] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_grasping_vines.dds', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Grasping Vines (The Hidden Harvest)
@@ -6090,6 +6102,7 @@ E.EffectOverride = {
     [53829] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = 'Lifting Strike' }, -- Uppercut Stun (Batunalulr - Old Orsinium)
     [53940] = { icon = 'esoui/art/icons/ability_debuff_stun.dds', name = 'Pummel' }, -- Pummel Stun (Batunalulr - Old Orsinium)
     [53874] = { hide = true }, -- Pummel (Batunalulr - Old Orsinium)
+    ]]--
 
     ----------------------------------------------------------------
     -- VVARDENFELL     ---------------------------------------------
@@ -6611,6 +6624,7 @@ E.FakeStagger = {
     [35115] = {icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Extended_Chains, duration = 1000},  -- Pull (Extended Chains) (Cyrodiil Guard T2)
     [47020] = {icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Puncturing_Chains, duration = 1000}, -- Pull (Puncturing Chains) (Cyrodiil Guard T2)
 
+    --[[
     [52878] = {icon = 'esoui/art/icons/ability_dragonknight_005_b.dds', name = 'Empowering Chains', duration = 433}, -- Pull (Empowering Chains) (Rkindaleft - Sharga the Firestarter)
     [64322] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Glacial Spikes', duration = 1000}, -- Glacial Spikes (For King and Glory - Urfon Ice-Heart) - TEMP FIX
     [72479] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Glacial Spikes', duration = 1000}, -- Glacial Spikes (For King and Glory - Urfon Ice-Heart) - TEMP FIX
@@ -6618,6 +6632,7 @@ E.FakeStagger = {
     [75463] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Magma Diver (The King's Gambit - Shield-Wife Razbela)
     [67156] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Kindlepitch Slick', duration = 550}, -- Kindlepitch Slick (Blood on a King's Hands) (Can't be dispelled so best option)
     [70543] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Oil Fire', duration = 550}, -- Kindlepitch Slick (Blood on a King's Hands) (Can't be dispelled so best option)
+    ]]--
 
     -- Vvardenfell
     [86576] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Renduril the Hammer (Nchuleftingth)
