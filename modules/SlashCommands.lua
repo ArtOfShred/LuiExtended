@@ -40,8 +40,8 @@ SC.D = {
 }
 SC.SV       = nil
 
-local g_regroupStacks   = {}
-local PendingRegroup    = false
+local g_regroupStacks   = {} -- Character stack for Regroup reinvites
+local PendingRegroup    = false -- Toggled when a regroup is in progress to prevent additional regroup attempts from firing
 
 function SC.Initialize( enabled )
     -- Load Settings
@@ -976,31 +976,6 @@ function LUIE.SlashOutfit(option)
 	end
 end
 
--- Temporary Development function
-function LUIE.SlashConsolidate()
-    local consolidate = LUIE.SpellCastBuffs.SV.ExtraConsolidate
-    if consolidate == true then
-        LUIE.SpellCastBuffs.SV.ExtraConsolidate = false
-        d("OFF - Consolidate")
-    elseif consolidate == false then
-        LUIE.SpellCastBuffs.SV.ExtraConsolidate = true
-        d("ON - Consolidate")
-    end
-    LUIE.SpellCastBuffs.ReloadEffects()
-end
-
-function LUIE.SlashExtraExpanded()
-    local extra = LUIE.SpellCastBuffs.SV.ExtraExpanded
-    if extra == true then
-        LUIE.SpellCastBuffs.SV.ExtraExpanded = false
-        d("OFF - Expanded Extra Buffs")
-    elseif extra == false then
-        LUIE.SpellCastBuffs.SV.ExtraExpanded = true
-        d("ON - Expanded Extra Buffs")
-    end
-    LUIE.SpellCastBuffs.ReloadEffects()
-end
-
 function SC.RegisterSlashCommands()
     -- Clear commands list
     SLASH_COMMANDS["/home"]         = nil
@@ -1041,14 +1016,9 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/smuggler"]     = nil
     SLASH_COMMANDS["/fence"]        = nil
     SLASH_COMMANDS["/ready"]        = nil
-    SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck
+    SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck -- This command is always registered since it is also a default command
 	SLASH_COMMANDS["/outfit"]		= nil
-
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
-
-    -- TEMPORARY DEVELOPMENT
-    SLASH_COMMANDS["/ct"]           = LUIE.SlashConsolidate
-    SLASH_COMMANDS["/ce"]           = LUIE.SlashExtraExpanded
 
     -- Add commands based off menu options
     if SC.SV.SlashHome then

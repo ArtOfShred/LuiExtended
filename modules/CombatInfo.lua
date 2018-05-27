@@ -69,36 +69,31 @@ CI.D = {
 }
 CI.SV       = nil
 
-local uiTlw                 = {} -- GUI
-local castbar               = {} -- castbar
-local g_casting             = false
-
-local g_ultimateCost        = 0
-local g_ultimateCurrent     = 0
-local g_ultimateAbilityName = ""
-local g_ultimateAbilityId   = 0
-local g_ultimateSlot        = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
-
--- Bar Abilities
-local g_uiProcAnimation      = {}
-local g_uiCustomToggle       = {}
-local g_triggeredSlots       = {}
-local g_triggeredSlotsRemain = {}
-local g_toggledSlots         = {}
-local g_toggledSlotsRemain   = {}
-local g_toggledSlotsPlayer   = {}
-local g_lastCast = 0
-local g_barFont
-local g_potionFont
-local g_ultimateFont
-local g_castbarFont
-local g_ProcSound
-local g_barOverrideCI        = {} -- Table for storing abilityId's from E.BarHighlightOverride that should show as an aura (Created on initialization)
-local g_barFakeAura          = {} -- Table for storing abilityId's that only display a fakeaura (Created on initialization)
-local g_barDurationOverride  = {} -- Table for storing abilitiyId's that ignore ending event (Created on initialization)
-local g_barNoRemove          = {} -- Table of abilities we don't remove from bar highlight (Created on initialization)
-local g_potionUsed           = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
-local g_protectAbilityRemoval = {}
+local uiTlw                   = {} -- GUI
+local castbar                 = {} -- castbar
+local g_casting               = false -- Toggled when casting - prevents additional events from creating a cast bar until finished
+local g_ultimateCost          = 0 -- Cost of ultimate Ability in Slot
+local g_ultimateCurrent       = 0 -- Current ultimate value
+local g_ultimateSlot          = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 -- Ultimate slot number
+local g_uiProcAnimation       = {} -- Animation for bar slots
+local g_uiCustomToggle        = {} -- Toggle slots for bar Slots
+local g_triggeredSlots        = {} -- Triggered bar highlight slots
+local g_triggeredSlotsRemain  = {} -- Table of remaining durations on proc abilities
+local g_toggledSlots          = {} -- Toggled bar highlight slots
+local g_toggledSlotsRemain    = {} -- Table of remaining durations on active abilities
+local g_toggledSlotsPlayer    = {} -- Table of abilities that target the player (bar highlight doesn't fade on reticleover change)
+local g_potionUsed            = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
+local g_barOverrideCI         = {} -- Table for storing abilityId's from E.BarHighlightOverride that should show as an aura
+local g_barFakeAura           = {} -- Table for storing abilityId's that only display a fakeaura
+local g_barDurationOverride   = {} -- Table for storing abilitiyId's that ignore ending event
+local g_barNoRemove           = {} -- Table of abilities we don't remove from bar highlight
+local g_protectAbilityRemoval = {} -- AbilityId's set to a timestamp here to prevent removal of bar highlight when refreshing ground auras from causing the highlight to fade.
+local g_mineStacks 			  = {} -- Individual AbilityId ground mine stack information
+local g_barFont -- Font for Ability Highlight Label
+local g_potionFont -- Font for Potion Timer Label
+local g_ultimateFont -- Font for Ultimate Percentage Label
+local g_castbarFont -- Font for Castbar Label & Timer
+local g_ProcSound -- Proc Sound
 
 -- Quickslot
 local uiQuickSlot   = {
@@ -121,6 +116,7 @@ local uiUltimate = {
     NotFull = false,
 }
 
+-- Cooldown Animation Types for GCD Tracking
 local CooldownMethod = {
     [1] = CD_TYPE_VERTICAL_REVEAL,
     [2] = CD_TYPE_VERTICAL,
@@ -168,6 +164,7 @@ function CI.Initialize( enabled )
 
     CI.RegisterCombatInfo()
 
+	-- Hook to update GCD support
     ActionButton.UpdateUsable = function(self)
         local slotnum = self:GetSlot()
         local isGamepad = IsInGamepadPreferredMode()
@@ -192,6 +189,7 @@ function CI.Initialize( enabled )
         ZO_ActionSlot_SetUnusable(self.icon, not usable, useDesaturation)
     end
 
+	-- Hook to update GCD support
     ActionButton.UpdateCooldown = function(self, options)
         local slotnum = self:GetSlot()
         local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum)
@@ -283,6 +281,7 @@ function CI.Initialize( enabled )
         self:UpdateUsable()
     end
 
+	-- Create and update Cast Bar
     CI.CreateCastBar()
     CI.UpdateCastBar()
     CI.SetCastBarPosition()
@@ -290,11 +289,13 @@ function CI.Initialize( enabled )
 end
 
 -- Helper function to get override ability duration.
-function CI.GetAbilityDuration(abilityId)
+local function GetUpdatedAbilityDuration(abilityId)
     local duration = g_barDurationOverride[abilityId] or GetAbilityDuration(abilityId)
     return duration
 end
 
+-- Called on initialization and menu changes
+-- Pull data from E.BarHighlightOverride Tables to filter the display of Bar Highlight abilities based off menu settings.
 function CI.UpdateBarHighlightTables()
     g_uiProcAnimation      = {}
     g_uiCustomToggle       = {}
@@ -485,37 +486,34 @@ function CI.OnUpdate(currentTime)
 
 end
 
+-- Updates Cast Bar - only enabled when Cast Bar is unhidden
 function CI.OnUpdateCastbar(currentTime)
     -- Update castbar
-    -- IF CASTBAR STUFF HERE -- TODO
-    if not castbar:IsHidden() then
-
-        local castStarts = castbar.starts
-        local castEnds = castbar.ends
-        local remain = castbar.remain - currentTime
-        if remain <= 0 then
-            castbar.bar.name:SetHidden(true)
-            castbar.bar.timer:SetHidden(true)
-            castbar:SetHidden(true)
-            castbar.remain = nil
-            castbar.starts = nil
-            castbar.ends = nil
-            g_casting = false
-            eventManager:UnregisterForUpdate(moduleName.."CI_CASTBAR")
-        else
-            if CI.SV.CastBarTimer then
-                castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
-            end
-            if castbar.type == 1 then
-                castbar.bar.bar:SetValue( (currentTime - castStarts) / (castEnds - castStarts) )
-            else
-                castbar.bar.bar:SetValue(1 - ((currentTime - castStarts) / (castEnds - castStarts)))
-            end
-        end
-    end
+	local castStarts = castbar.starts
+	local castEnds = castbar.ends
+	local remain = castbar.remain - currentTime
+	if remain <= 0 then
+		castbar.bar.name:SetHidden(true)
+		castbar.bar.timer:SetHidden(true)
+		castbar:SetHidden(true)
+		castbar.remain = nil
+		castbar.starts = nil
+		castbar.ends = nil
+		g_casting = false
+		eventManager:UnregisterForUpdate(moduleName.."CI_CASTBAR")
+	else
+		if CI.SV.CastBarTimer then
+			castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
+		end
+		if castbar.type == 1 then
+			castbar.bar.bar:SetValue( (currentTime - castStarts) / (castEnds - castStarts) )
+		else
+			castbar.bar.bar:SetValue(1 - ((currentTime - castStarts) / (castEnds - castStarts)))
+		end
+	end
 end
 
--- Updates local variable with new font and resets all existing icons
+-- Updates local variables with new font
 function CI.ApplyFont()
     if not CI.Enabled then
         return
@@ -587,6 +585,7 @@ function CI.ApplyFont()
 
 end
 
+-- Updates Proc Sound - called on initialization and menu changes
 function CI.ApplyProcSound(menu)
     local barProcSound = LUIE.Sounds[CI.SV.ProcSoundName]
         if not barProcSound or barProcSound == "" then
@@ -633,6 +632,7 @@ function CI.ResetBarLabel()
     end
 end
 
+-- Resets Potion Timer label - called on initialization and menu changes
 function CI.ResetPotionTimerLabel()
     local actionButton = ZO_ActionBar_GetButton(9)
     uiQuickSlot.label:ClearAnchors()
@@ -647,7 +647,7 @@ function CI.OnTargetChange(eventCode, unitTag)
     if unitTag ~= "player" then
         return
     end
-    SCB.OnReticleTargetChanged(eventCode)
+    CI.OnReticleTargetChanged(eventCode)
 end
 
 -- Runs on the EVENT_RETICLE_TARGET_CHANGED listener.
@@ -680,8 +680,6 @@ function CI.OnReticleTargetChanged(eventCode)
         end
     end
 end
-
-local g_mineStacks = {}
 
 function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     -- If we're displaying a fake bar highlight then bail out here (sometimes we need a fake aura that doesn't end to simulate effects that can be overwritten, such as Major/Minor buffs. Technically we don't want to stop the
@@ -1046,7 +1044,7 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
         local currentTime = GetGameTimeMilliseconds()
         if g_toggledSlots[abilityId] then
             if CI.SV.ShowToggled then
-                local duration = CI.GetAbilityDuration(abilityId)
+                local duration = GetUpdatedAbilityDuration(abilityId)
                 local endTime = currentTime + duration
                 g_toggledSlotsRemain[abilityId] = endTime
                 CI.ShowCustomToggle(g_toggledSlots[abilityId])
@@ -1142,7 +1140,7 @@ function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
     end
     local abilityName = E.EffectOverride[ability_id] and E.EffectOverride[ability_id].name or GetAbilityName(ability_id) -- GetSlotName(slotNum)
     --local _, _, channel = GetAbilityCastInfo(ability_id)
-    local duration = CI.GetAbilityDuration(ability_id)
+    local duration = GetUpdatedAbilityDuration(ability_id)
 
     local currentTime = GetGameTimeMilliseconds()
 
@@ -1203,9 +1201,6 @@ function CI.UpdateUltimateLabel(eventCode)
     local cost, mechType = GetSlotAbilityCost( g_ultimateSlot )
 
     g_ultimateCost = ( mechType == POWERTYPE_ULTIMATE ) and cost or 0
-
-    g_ultimateAbilityName = GetSlotName( g_ultimateSlot )
-    g_ultimateAbilityId = GetSlotBoundId( g_ultimateSlot )
 
     -- if this event was caused only by user manually changing the ultimate ability, then
     -- force recalculation of percent value. Otherwise (weapons swap) this will be called by the game
