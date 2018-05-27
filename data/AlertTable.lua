@@ -527,6 +527,9 @@ LUIE.AlertTable = {
     [39302] = { interrupt = true, priority = 2, eventdetect = true, notDirect = true, refire = 1000 }, -- Necromantic Revival
     [38215] = { interrupt = true, priority = 2, refire = 1000 }, -- Death's Gaze (Mannimarco)
     [40425] = { avoid = true, priority = 2 }, -- Impending Doom (Mannimarco)
+    [40973] = { power = true, priority = 2, eventdetect = true }, -- Portal Spawn (Mannimarco)
+    [40978] = { power = true, priority = 2, eventdetect = true }, -- Portal Spawn (Mannimarco)
+    [40981] = { power = true, priority = 2, eventdetect = true }, -- Portal Spawn (Mannimarco)
 
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------

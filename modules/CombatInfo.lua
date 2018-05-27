@@ -991,7 +991,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
     end
 
     -- Bail out past here if the source isn't player, cast bar is disabled, or the ability is not on the list of abilities to show the cast bar for
-    if sourceType ~= COMBAT_UNIT_TYPE_PLAYER then
+    if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not E.CastOverride[abilityId] then
         return
     end
 

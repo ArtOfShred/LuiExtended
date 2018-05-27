@@ -6665,6 +6665,11 @@ debugAuras = {
             [21941] = true, -- Spike Trap Snare (Spike Trap)
             [21942] = true, -- Trap Sprung (Spike Trap)
 
+            [44029] = true, -- Slaughterfish Attack (Slaughterfish)
+            [66863] = true, -- Slaughterfish Bonus (Slaughterfish)
+            [44034] = true, -- Slaughterfish Attack (Slaughterfish)
+            [44039] = true, -- Slaughterfish Attack (Slaughterfish)
+
             [19224] = true, -- In Lava (Lava - Halls of Torment)
             [19225] = true, -- Lava Snare (Lava - Halls of Torment)
 
@@ -9031,7 +9036,7 @@ debugAuras = {
             --[44561] = true, -- FGQ4 RGT Event Knockback
             --[44563] = true, -- FGQ4 RGT Event Knockback
             [36890] = true, -- Seductive Bind
-            --[36862] = true, -- FG Doshia Harvester Transform
+            [36862] = true, -- FG Doshia Harvester Transform
             [37015] = true, -- Lash of Torment
             [6632] = true, -- CON_MagicExplosionLarge
             [37166] = true, -- Engulfing Grip
@@ -9099,26 +9104,29 @@ debugAuras = {
             [40980] = true, -- dummy (Mannimarco)
             [40981] = true, -- Portal Spawn (Mannimarco)
             [40983] = true, -- dummy (Mannimarco)
+            [41096] = true, -- Dummy
             [41056] = true, -- Ghost Manniappears
             [38198] = true, -- Obliterate 3
-            --[41996] = true, -- Smash (Molag Bal)
-            --[41198] = true, -- IntroKB (Molag Bal)
-            --[41197] = true, -- Staggering Roar (Molag Bal)
-            --[41385] = true, -- Dummystun (Molag Bal)
+            [41196] = true, -- Smash (Molag Bal)
+            [41198] = true, -- IntroKB (Molag Bal)
+            [41197] = true, -- Staggering Roar (Molag Bal)
+            [41385] = true, -- Dummystun (Molag Bal)
             [47522] = true, -- Nocom (Molag Bal)
 
             -- Council of the Five Companions
-            --[36543] = true, -- Portal Cast (Varen Aquilarios)
+            [36543] = true, -- Portal Cast (Varen Aquilarios)
             [18417] = true, -- Rending the Skein (Varen Aquilarios)
             [36071] = true, -- MQ5.5 Mannimarco Tortured
-            --[36421] = true, -- Drink with Lyris
+            [36421] = true, -- Drink with Lyris
 
             -- Messages Across Tamriel
             [48079] = true, -- Galerion's Grandiose Greeting
-            --[48086] = true, -- Vanus Appearance Player KB
+            [48086] = true, -- Vanus Appearance Player KB
 
             -- The Weight of Three Crowns
             [38141] = true, -- Lady Laurent Delay
+            [38142] = true, -- Telenger Delay
+            [38143] = true, -- Capt Alphaury Delay
             [36445] = true, -- Lightning Strike
             [36446] = true, -- Wrath
             [15792] = true, -- CHT Coldharbour
@@ -9126,7 +9134,20 @@ debugAuras = {
             [8095] = true, -- Generic Magic Explosion
             [26542] = true, -- Emanating Prescence
             [47424] = true, -- CHT Valerion Bubb
-            --[47186] = true, -- CHT Portal Killer
+            [47186] = true, -- CHT Portal Killer
+
+            -------------------------------------
+            -- QUESTS - FIGHTER'S GUILD ---------
+            -------------------------------------
+
+            --[14974] = true, -- CON_Knockback&KnockdownSelf
+            --[14975] = true, -- Fire Backlash
+            [17744] = true, -- Ray of Judgment (Doshia)
+            [16300] = true, -- Soul Drain (Doshia)
+            [31441] = true, -- FG Doshia Harvester Transform (Doshia)
+            [47945] = true, -- Healing Transformation (Doshia)
+            [47944] = true, -- Transform (Doshia)
+            [47943] = true, -- Galthis Knockback (Doshia)
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------

@@ -753,6 +753,10 @@ A.Skill_Consecrate_Shrine           = GetString(SI_LUIE_SKILL_CONSECRATE_SHRINE)
 A.Skill_Remove_Ward                 = 18606
 A.Skill_Nova                        = 21752
 A.Skill_Shock                       = 27598
+A.Skill_Drink_Mead                  = 13941
+A.Skill_Unstable_Portal             = GetString(SI_LUIE_SKILL_UNSTABLE_PORTAL)
+A.Skill_Stabilize_Portal            = GetString(SI_LUIE_SKILL_STABILIZE_PORTAL)
+A.Skill_Close_Unstable_Rift         = GetString(SI_LUIE_SKILL_CLOSE_UNSTABLE_RIFT)
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

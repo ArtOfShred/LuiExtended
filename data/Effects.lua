@@ -410,6 +410,7 @@ E.CastChannelOverride = {
 
     -- Quest
     [39367] = true, -- Altar Use (Shadow of Sancre Tor)
+    [36421] = true, -- Drink with Lyris (Council of the Five Companions)
 
 }
 
@@ -428,6 +429,7 @@ E.CastDurationFix = {
 
     -- Quest
     [39367] = 10000, -- Altar Use (Shadow of Sancre Tor)
+    [36421] = 3000, -- Drink with Lyris (Council of the Five Companions)
 
 }
 
@@ -530,6 +532,15 @@ E.IsCast = {
     -- Quest
     [39367] = true, -- Altar Use (Shadow of Sancre Tor)
     [37827] = true, -- Stendarr's Protection (Shadow of Sancre Tor)
+    [36421] = true, -- Drink with Lyris (Council of the Five Companions)
+    [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
+
+}
+
+-- Fix for a few goofy events that channel onto the player
+E.CastOverride = {
+
+    [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
 
 }
 
@@ -1799,6 +1810,12 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [86938] = true, -- Volcanic Debris
     [92707] = true, -- Volcanic Debris
     [92704] = true, -- Volcanic Debris
+}
+
+E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMBAT CLOUD ONLY!!!)
+
+    [38215] = true -- Death's Gaze (Shadow of Sancre Tor)
+
 }
 
 -- Using a separate chart for ZOS Artificial Effects just in case this is significantly expanded at any point
@@ -5868,6 +5885,9 @@ E.EffectOverride = {
     [21942] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Trap Sprung (Spike Trap)
 
     -- Lava & Slaughterfish
+    [44029] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Slaughterfish Attack (Slaughterfish)
+    [44034] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds' }, -- Slaughterfish Attack (Slaughterfish)
+
     [19224] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, unbreakable = 1 }, -- In Lava (Lava - Halls of Torment)
 
     -- Hiding Spot
@@ -5998,18 +6018,38 @@ E.EffectOverride = {
     [41022] = { hide = true }, -- Nova (Mannimarco)
     [40429] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, unbreakable = 1 }, -- IntroKB (Mannimarco)
     [40426] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback }, -- Staggering Roar (Mannimarco)
+
+    [40973] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_portal_blue.dds', name = A.Skill_Unstable_Portal }, -- Portal Spawn (Mannimarco)
+    [40978] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_portal_blue.dds', name = A.Skill_Unstable_Portal }, -- Portal Spawn (Mannimarco)
+    [40981] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_portal_blue.dds', name = A.Skill_Unstable_Portal }, -- Portal Spawn (Mannimarco)
+
     [40976] = { hide = true }, -- dummy (Mannimarco)
     [44083] = { hide = true }, -- Ghostly (Mannimarco)
-    [42083] = { hide = true }, -- PortalHoldstun (Mannimarco)
+    [42083] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_portal_stabilize.dds', name = A.Skill_Stabilize_Portal }, -- PortalHoldstun (Mannimarco)
     [40573] = { hide = true }, -- StopPortalStun (Mannimarco)
     [40980] = { hide = true }, -- dummy (Mannimarco)
     [40983] = { hide = true }, -- dummy (Mannimarco)
 
-    [41996] = { hide = true }, -- Smash (Molag Bal)
+    [41196] = { hide = true }, -- Smash (Molag Bal)
+    [41198] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, unbreakable = 1 }, -- IntroKB (Mannimarco)
+    [41197] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback }, -- Staggering Roar (Mannimarco)
     [41385] = { hide = true }, -- Dummystun (Molag Bal)
 
     -- Council of the Five Companions
     [36543] = { hide = true }, -- Portal Cast
+    [36421] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_drink_mead.dds', name = A.Skill_Drink_Mead }, -- Drink with Lyris
+
+    -- The Weight of Three Crowns
+    [47186] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_close_unstable_rift.dds', name = A.Skill_Close_Unstable_Rift }, -- CHT Portal Killer
+
+
+    ----------------------------------------------------------------
+    -- QUESTS - FIGHTER'S GUILD ------------------------------------
+    ----------------------------------------------------------------
+
+    -- Anchors from the Harbour
+    [14974] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, unbreakable = 1 }, -- CON_Knockback&KnockdownSelf
+    [14975] = { name = A.Skill_Knockback }, -- Fire Backlash
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -6424,13 +6464,17 @@ E.FakeExternalDebuffs = {
     [44561] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 3000 }, -- FGQ4 RGT Event Knockback (Lyris Doppleganger - Halls of Torment)
     [38741] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_royal_strike.dds', name = A.Skill_Royal_Strike, duration = 4000 }, -- Royal Snare (Duchess of Anguish - Halls of Torment)
     [40429] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 2000 }, -- IntroKB (Mannimarco - Shadow of Sancre Tor)
+    [41198] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 2000 }, -- IntroKB (Mannimarco - Shadow of Sancre Tor)
+
+    -- Fighter's Guild
+    [14974] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 2000 }, -- CON_Knockback&KnockdownSelf (Anchors from the Harbour)
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------
     ----------------------------------------------------------------
 
+    --[[
     [69794] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Frozen Ground', duration = 2000}, -- Frozen Ground (Invitation to Orsinium - Olarz the Cunning)
-    [14974] = {icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 2000}, -- CON_Knockback&KnockdownSelf (The Hand of Morkul)
     [53272] = {icon = 'esoui/art/icons/ability_destructionstaff_005.dds', name = 'Frost Clench', duration = 500}, -- Frost Clench (The Anger of a King - Talviah Aliaria)
     [66875] = {icon = 'esoui/art/icons/ability_debuff_stun.dds', name = 'Royal Strike', duration = 1500}, -- Royal Strike (Blood on a King's Hands)
     [65186] = {icon = 'esoui/art/icons/ability_debuff_stun.dds', name = 'The King\'s Chains', duration = 4000}, -- The King's Chains (Blood on a King's Hands)
@@ -6440,6 +6484,7 @@ E.FakeExternalDebuffs = {
     [72128] = {icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = 'Harmonic Wave Impact', duration = 2000}, -- Harmonic Wave Impact (Rkindaleft - Resonant Centurion)
     [25265] = {icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = 'Decapitation Function', duration = 2000}, -- Decapitation Function (Rkindaleft - Vessel of the Auditor)
     [70316] = {icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = 'Vessel Knockback', duration = 2000}, -- Q5321 Centurian Knockback (Rkindaleft - Vessel of the Auditor)
+    ]]--
 
     ----------------------------------------------------------------
     -- VVARDENFELL -------------------------------------------------
