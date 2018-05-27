@@ -28,8 +28,8 @@ local iconFormat    = zo_iconFormat
 
 local moduleName    = LUIE.name .. "_SpellCastBuffs"
 
-local hidePlayerEffects = { }
-local hideTargetEffects = { }
+local hidePlayerEffects = { } -- Table of Effects to hide on Player - generated on load or updated from Menu
+local hideTargetEffects = { } -- Table of Effects to hide on Target - generated on load or updated from Menu
 
 local windowTitles = {
     playerb             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
@@ -148,63 +148,29 @@ SCB.D = {
 SCB.SV = nil
 
 local uiTlw                  = {} -- GUI
-local containerRouting       = {}
-
--- Abilities and buffs
-local g_currentDuelTarget    = nil
-local g_effectsList          = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {}, saved = {}, promb_ground = {}, promb_target = {}, promb_player = {}, promd_ground = {}, promd_target = {}, promd_player = {} }
-
--- Self resurrection tracking
-local g_playerActive = false
-local g_playerDead   = false
-local g_playerResurrectStage = nil
-
--- Font to be used on icons "ZoFontWindowSubtitle" or ours:
---local g_buffsFont = "/LuiExtended/media/fonts/Fontin/fontin_sans_r.otf|16|outline"
---local g_buffsFont = "$(MEDIUM_FONT)|17|outline"
-local g_buffsFont
-local g_prominentFont
-
--- Padding distance between icons
-local g_padding = 0
-
-local g_horizAlign = CENTER
-local g_longHorizAlign = CENTER
-local g_longVertAlign = MIDDLE
-local g_prominentVertAlign = BOTTOM
-local g_horizSortInvert = false
-local g_protectAbilityRemoval = {}
-
--- Some optimization
-local abilityRouting = { "player1", "player2", "ground" }
-local g_currentDisguise = GetItemId(0, 10) or 0
-local g_grimFocusCount = 0
-
--- Double check that the slot is actually eligible for use
-local function HasFailure( slotIndex )
-    if HasCostFailure(slotIndex) then
-        return true
-    elseif HasRequirementFailure(slotIndex) then
-        return true
-    elseif HasWeaponSlotFailure(slotIndex) then
-        return true
-    elseif HasTargetFailure(slotIndex) then
-        return true
-    elseif HasRangeFailure(slotIndex) then
-        return true
-    elseif HasStatusEffectFailure(slotIndex) then
-        return true
-    elseif HasFallingFailure(slotIndex) then
-        return true
-    elseif HasSwimmingFailure(slotIndex) then
-        return true
-    elseif HasMountedFailure(slotIndex) then
-        return true
-    elseif HasReincarnatingFailure(slotIndex) then
-        return true
-    end
-    return false
-end
+local containerRouting       = {} -- Routing for Auras
+local g_currentDuelTarget    = nil -- Saved Duel Target for generating Battle Spirit icon when enabled
+local g_effectsList          = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {}, saved = {}, promb_ground = {}, promb_target = {}, promb_player = {}, promd_ground = {}, promd_target = {}, promd_player = {} } -- Saved Effects
+local g_playerActive = false -- Player Active State
+local g_playerDead   = false -- Player Dead State
+local g_playerResurrectStage = nil -- Player resurrection sequence state
+local g_buffsFont -- Buff font
+local g_prominentFont -- Prominent buffs label font
+local g_padding = 0 -- Padding between icons
+local g_horizAlign = CENTER -- Alignment for standard buff containers
+local g_longHorizAlign = CENTER -- Alignment for Long Term Buffs (Horizontal)
+local g_longVertAlign = MIDDLE -- Alignment for Long Term Buffs (Vertical)
+local g_prominentVertBuffAlign = BOTTOM -- Alignment for Prominent Buffs
+local g_prominentVertDebuffAlign = BOTTOM -- Alignment for Prominent Debuffs
+local g_horizSortInvert = false -- Invert sort order on buff container
+local g_protectAbilityRemoval = {} -- AbilityId's set to a timestamp here to prevent removal of ground effects when refreshing ground auras from causing the aura to fade.
+local g_currentDisguise = GetItemId(0, 10) or 0 -- Currently equipped disguise for Disguise Buff Tracker
+local g_grimFocusCount = 0 -- Tracker for Grim Focus Stacks
+local g_werewolfName = "" -- Name for current Werewolf Transformation morph
+local g_werewolfIcon = "" -- Icon for current Werewolf Transformation morph
+local g_werewolfCounter = 0 -- Counter for Werewolf transformation events
+local g_werewolfQuest = 0 -- Counter for Werewolf transformation events (Quest)
+local g_lastWerewolfPower = 0 -- Tracker for last amount of werewolf power - used to freeze counter when using Devour or entering a Werewolf Shrine
 
 --[[
 -- Simple linear tweening - no easing, no acceleration
@@ -369,7 +335,6 @@ function SCB.Initialize( enabled )
                 end
             end )
 
-        -- TODO: Implement change in vertical alignment
         if SCB.SV.LongTermEffectsSeparateAlignment == 1 then
             uiTlw.player_long.alignVertical = false
         elseif SCB.SV.LongTermEffectsSeparateAlignment == 2 then
@@ -474,11 +439,7 @@ function SCB.Initialize( enabled )
     -- Werewolf
     SCB.RegisterWerewolfEvents()
 
-    -- Always show debug effects on development account
-    if GetDisplayName() == "@ArtOfShredLegacy" then
-        SCB.SV.ShowDebugCombat = true
-        SCB.SV.ShowDebugEffect = true
-    end
+    -- Debug
     SCB.RegisterDebugEvents()
 end
 
@@ -624,7 +585,6 @@ local resultTable = {
     [2450] = "WEAPON SWAP",
     [8] = "WRECKING DAMAGE",
     [2380 ] = "WRONG WEAPON",
-
 }
 
 -- Debug Display for Combat Events
@@ -753,12 +713,6 @@ function SCB.RemoveFromCustomList(list, input)
     end
     SCB.Reset()
 end
-
-local g_werewolfName = ""
-local g_werewolfIcon = ""
-local g_werewolfCounter = 0
-local g_werewolfQuest = 0
-local g_lastWerewolfPower = 0
 
 local function SetWerewolfIcon()
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
@@ -1017,13 +971,13 @@ function SCB.SetIconsAlignmentProminentBuff( value )
         return
     end
 
-    g_prominentVertAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or CENTER
+    g_prominentVertBuffAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or CENTER
 
     for _, v in pairs(containerRouting) do
         if uiTlw[v].iconHolder then
             if v == "prominentbuffs" then
                 uiTlw[v].iconHolder:ClearAnchors()
-                uiTlw[v].iconHolder:SetAnchor ( g_prominentVertAlign )
+                uiTlw[v].iconHolder:SetAnchor ( g_prominentVertBuffAlign )
             end
         end
     end
@@ -1039,13 +993,13 @@ function SCB.SetIconsAlignmentProminentDebuff( value )
         return
     end
 
-    g_prominentVertAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or CENTER
+    g_prominentVertDebuffAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or CENTER
 
     for _, v in pairs(containerRouting) do
         if uiTlw[v].iconHolder then
             if v == "prominentdebuffs" then
                 uiTlw[v].iconHolder:ClearAnchors()
-                uiTlw[v].iconHolder:SetAnchor ( g_prominentVertAlign )
+                uiTlw[v].iconHolder:SetAnchor ( g_prominentVertDebuffAlign )
             end
         end
     end
@@ -1903,9 +1857,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
         g_effectsList[context][effectSlot] = nil
-        --[[if E.FakeDuplicate[ abilityId ] then
-            g_effectsList[context][ E.FakeDuplicate[abilityId].name ] = nil
-        end]]--
         if E.EffectCreateSkillAura[ abilityId ] and E.EffectCreateSkillAura [ abilityId ].removeOnEnd then
             if not (SCB.SV.BlacklistTable[E.EffectCreateSkillAura[abilityId].name]) then
                 local simulatedContext = unitTag .. effectType
@@ -2034,17 +1985,6 @@ function SCB.ArtificialEffectUpdate(eventCode, effectId)
         }
     end
 end
-
--- List of all damage results for analysis in following function
-local IsResultDamage = {
-    [ACTION_RESULT_DAMAGE]              = true,
-    [ACTION_RESULT_BLOCKED_DAMAGE]      = true,
-    [ACTION_RESULT_DAMAGE_SHIELDED]     = true,
-    [ACTION_RESULT_CRITICAL_DAMAGE]     = true,
-    [ACTION_RESULT_DOT_TICK]            = true,
-    [ACTION_RESULT_DOT_TICK_CRITICAL]   = true,
-    [ACTION_RESULT_DODGED]              = true,
-}
 
 --[[
  * Runs on the EVENT_COMBAT_EVENT listener.
@@ -2242,7 +2182,6 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         return
     end
 
-    -- TODO: Temp set werewolf indicator to unlimited on Devour cast
     if SCB.SV.ShowWerewolf then
         if abilityId == 33208 and sourceType == COMBAT_UNIT_TYPE_PLAYER and result == ACTION_RESULT_BEGIN then
             g_effectsList.player1["Werewolf Indicator"] = {
@@ -2425,7 +2364,7 @@ function SCB.OnDeath(eventCode, unitTag, isDead)
 end
 
 -- Runs on the EVENT_TARGET_CHANGE listener.
--- This handler fires every time the someone target changes.
+-- This handler fires every time someone target changes.
 -- This function is needed in case the player teleports via Way Shrine
 function SCB.OnTargetChange(eventCode, unitTag)
     if unitTag ~= "player" then
@@ -2655,9 +2594,6 @@ local function buffSort(x, y)
         return (x.dur == 0)
     end
 end
-
---local g_updateMineCounter = 0
---local g_mineList = { }
 
 -- Runs OnUpdate - 100 ms buffer
 function SCB.OnUpdate(currentTime)

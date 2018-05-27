@@ -127,32 +127,6 @@ local CooldownMethod = {
     [3] = CD_TYPE_RADIAL,
 }
 
--- Double check that the slot is actually eligible for use
-local function HasFailure( slotIndex )
-    if ( HasCostFailure( slotIndex ) ) then
-        return true
-    elseif ( HasRequirementFailure( slotIndex ) ) then
-        return true
-    elseif ( HasWeaponSlotFailure( slotIndex ) ) then
-        return true
-    elseif ( HasTargetFailure( slotIndex ) ) then
-        return true
-    elseif ( HasRangeFailure( slotIndex ) ) then
-        return true
-    elseif ( HasStatusEffectFailure( slotIndex )  ) then
-        return true
-    elseif ( HasFallingFailure( slotIndex ) ) then
-        return true
-    elseif ( HasSwimmingFailure( slotIndex ) ) then
-        return true
-    elseif ( HasMountedFailure( slotIndex ) ) then
-        return true
-    elseif ( HasReincarnatingFailure( slotIndex ) ) then
-        return true
-    end
-    return false
-end
-
 -- Module initialization
 function CI.Initialize( enabled )
     -- Load settings
