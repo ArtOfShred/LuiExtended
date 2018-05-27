@@ -1619,11 +1619,17 @@ end
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
 
-    if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and (E.EffectGroundDisplay[abilityId] or E.LinkedGroundMine[abilityId]) then
+    if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and (E.EffectGroundDisplay[abilityId] or E.LinkedGroundMine[abilityId]) and not SCB.SV.HideGroundEffects then
 
+		-- Mines with multiple auras have to be linked into one id for the purpose of tracking stacks
         if E.LinkedGroundMine[abilityId] then
             abilityId = E.LinkedGroundMine[abilityId]
         end
+		
+		-- Bail out if this ability is blacklisted
+		if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then
+			return
+		end
 
         -- Create fake ground aura
         local groundType = { }
