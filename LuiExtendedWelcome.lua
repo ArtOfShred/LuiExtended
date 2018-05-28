@@ -7,6 +7,16 @@ local windowManager = WINDOW_MANAGER
 -- TODO: Create a basic logo to use when the changelog is displayed - may consider attempting to center it and remove ability to expand box size.
 
 local fillMessages = {
+    "|cFFA5005.5.2:|r",
+    "• Combat Info: Added a cast bar for player abilities. Has a variety of customization options and position customization.",
+    "• Combat Info: Fixed an issue where bar highlight for some abilities wasn't working. Updated ground tracking and mine tracking to remove auras when ground effects end prematurely.",
+    "• Buffs & Debuffs: Ground based auras are now removed when a ground effect ends prematurely.",
+    "• Buffs & Debuffs: Updated mine tracker to work for Eternal Hunt set, Manifestation of Terror, and Frozen Gate + morphs.",
+    "• Buffs & Debuffs: Fixed an issue where disabling ground effects from display would not do anything - as well as fixed blacklisting ground abilities not working.",
+    "• Buffs & Debuffs: Updated icons and auras for base Cyrodiil buffs. Keep bonus now shows a stack counter equivalent to the number of enemy keeps your Alliance controls. Also hid some useless auras on Guards/Structures.",
+    "• Buffs & Debuffs: Added missing icon/name changes for pve bite variants of Lycantrophy and Vampirism precursors (evidently its a different abilityId than you get from player bites).",
+    "• Buffs & Debuffs: Updated a few various icons for auras & environmental hazards.",
+    "|",
     "|cFFA5005.5.1:|r",
     "• Combat Info: All bar proc abilities will now play a sound when available for use, not just Crystal Fragments.",
     "• Buffs & Debuffs: Fixed an issue with the prominent buffs font selector that could cause a UI error if an invalid font was selected.",
@@ -75,7 +85,8 @@ function LUIE_WelcomeScreen(menu)
             luiChangeLog:SetAnchor(TOP, GuiRoot, TOP, 0,100)
             luiChangeLog:SetMouseEnabled(false)
             luiChangeLog:SetMovable(false)
-            luiChangeLog:SetDrawLevel(1)
+            luiChangeLog:SetDrawLayer(DL_CONTROLS)
+            luiChangeLog:SetDrawTier(DT_HIGH)
 
             -- Add welcome to new version message
             luiChangeLog:AddText(strformat("|c00C000Welcome to version <<1>> of <<2>> by <<3>>\nPlease take a few minutes to read over the list of changes in this version.\nThis notification will only appear once with each update unless opened manually from the menu.|r", LUIE.version, LUIE.name, LUIE.author))
@@ -114,8 +125,8 @@ function LUIE_WelcomeScreen(menu)
 
         local buffer = luiChangeLog:GetNamedChild("Buffer")
         local slider = luiChangeLog:GetNamedChild("Slider")
-        buffer:SetScrollPosition(34)
-        slider:SetValue(buffer:GetNumHistoryLines() - 34)
+        buffer:SetScrollPosition(45)
+        slider:SetValue(buffer:GetNumHistoryLines() - 45)
 
     end
     -- Set version to current version.

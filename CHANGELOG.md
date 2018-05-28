@@ -1,3 +1,14 @@
+### Version 5.5.2
+
+- Combat Info: Added a cast bar for player abilities. Has a variety of customization options and position customization.
+- Combat Info: Fixed an issue where bar highlight for some abilities wasn't working. Updated ground tracking and mine tracking to remove auras when ground effects end prematurely.
+- Buffs & Debuffs: Ground based auras are now removed when a ground effect ends prematurely.
+- Buffs & Debuffs: Updated mine tracker to work for Eternal Hunt set, Manifestation of Terror, and Frozen Gate + morphs.
+- Buffs & Debuffs: Fixed an issue where disabling ground effects from display would not do anything - as well as fixed blacklisting ground abilities not working.
+- Buffs & Debuffs: Updated icons and auras for base Cyrodiil buffs. Keep bonus now shows a stack counter equivalent to the number of enemy keeps your Alliance controls. Also hid some useless auras on Guards/Structures.
+- Buffs & Debuffs: Added missing icon/name changes for pve bite variants of Lycantrophy and Vampirism precursors (evidently its a different abilityId than you get from player bites).
+- Buffs & Debuffs: Updated a few various icons for auras & environmental hazards.
+
 ### Version 5.5.1
 
 - Combat Info: All bar proc abilities will now play a sound when available for use, not just Crystal Fragments.
