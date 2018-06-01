@@ -6672,6 +6672,8 @@ debugAuras = {
 
             [19224] = true, -- In Lava (Lava - Halls of Torment)
             [19225] = true, -- Lava Snare (Lava - Halls of Torment)
+            [11338] = true, -- In Lava (Lava - The Earth Forge)
+            [11339] = true, -- Lava Snare (Lava - The Earth Forge)
 
             [72711] = true, -- Hidden (Hiding Spot)
             [72712] = true, -- Hiding Spot (Hiding Spot)
@@ -9140,6 +9142,7 @@ debugAuras = {
             -- QUESTS - FIGHTER'S GUILD ---------
             -------------------------------------
 
+            -- Anchors from the Harbour
             --[14974] = true, -- CON_Knockback&KnockdownSelf
             --[14975] = true, -- Fire Backlash
             [17744] = true, -- Ray of Judgment (Doshia)
@@ -9149,13 +9152,87 @@ debugAuras = {
             [47944] = true, -- Transform (Doshia)
             [47943] = true, -- Galthis Knockback (Doshia)
 
+            -- The Dangerous Past
+            [16062] = true, -- FGQ2 CV Sees-All-Colors V0
+            [16006] = true, -- Opening Portal...
+            [16007] = true, -- FGQ2 CV Portal
+            [16926] = true, -- FGQ2 PC Can Spawn SC2
+            [16304] = true, -- FGQ2 Sees Surrender
+            [16305] = true, -- Generic Surrender Perm Check
+            [16928] = true, -- FGQ2 PC Can Space SC4
+            [15990] = true, -- Preserving Soul...
+            [16930] = true, -- FGQ2 PC Can Spawn SC6
+            [16931] = true, -- FGQ2 PC Can Spawn SC7
+            [27236] = true, -- FGQ2 Crystal Beam
+            [16932] = true, -- FGQ2 PC Can Spawn SC8
+            [16933] = true, -- FGQ2 PC Can Spawn SC9
+            [34961] = true, -- Standby
+            [16298] = true, -- Q3858 Sees Change Appearance
+            [16036] = true, -- FGQ2 CV Portal 2
+
+            -- The Prismatic Core
+            [39385] = true, -- Visions of Abagarlas
+            [46577] = true, -- Visions of Abagarlas
+            [47732] = true, -- FG3 Dark Beam FX
+            [39348] = true, -- CCTEST Necrobomb Destruction
+            [50166] = true, -- Q3885 MV Destroy Knockback
+            [39357] = true, -- Necrobomb Camerashake
+            [39358] = true, -- Necrobomb Flash
+            [5259] = true, -- CV Delay 4 Seconds
+            [17919] = true, -- FG Q3885 Flame Burst
+            [27881] = true, -- Earth Shake
+            [27444] = true, -- FG Q3 Jump 1
+            [39577] = true, -- Palolel's Rage
+            --[39579] = true, -- CON_Knockback&Knockdown
+            --[39578] = true, -- Staggering Roar
+
+            -- Proving the Deed
+            [33158] = true, -- FG4 PC Can Spawn
+            [16716] = true, -- FGQ4 PC Talked to A
+            [16718] = true, -- FGQ4 PC Talked to C
+            [16719] = true, -- FGQ4 PC Talked to R
+            [16679] = true, -- Disuprtion
+            [25981] = true, -- Prismatic Light
+            [25979] = true, -- FG4 RGT Event Knockback
+            [25980] = true, -- FGQ4 RGT Event Knockback
+            [25984] = true, -- Subversion (Aelif)
+            [25985] = true, -- FGQ4 PC Failed Crystals
+            [14432] = true, -- CON_DwemerSmokeBurst
+            [64217] = true, -- Damage Immunity Under 50% (Aelif)
+            [64218] = true, -- Combat Regen (Aelif)
+            [64220] = true, -- Base Damage Reduction (Aelif)
+            [47188] = true, -- FG4 Auroran Spawn (Auroran Battlemage)
+            [16472] = true, -- Summoning... (Aelif)
+            [16516] = true, -- FGQ4 CV Aelif Final Perm Vers (Aelif)
+
+            -- Will of the Council
+            [17297] = true, -- Q3973 Cast Portal
+            [47184] = true, -- Summoning...
+            [31547] = true, -- Summoning Ritual
+            [31548] = true, -- Jofnir Summon 2
+            [47181] = true, -- FG5 Jofnir Beam
+            [47182] = true, -- FG5 Aelif Beam
+            [47183] = true, -- FG5 Magic Explosion
+            [26883] = true, -- Prismatic Beam
+            [26842] = true, -- Prismatic Beam
+            [28939] = true, -- Heat Wave (Sees-All-Colors)
+            [28941] = true, -- Crackling Earth (Sees-All-Colors)
+            [28940] = true, -- Crackling Earth (Sees-All-Colors)
+            [28943] = true, -- Crackling Earth (Sees-All-Colors)
+            [28949] = true, -- Crackling Earth (Sees-All-Colors)
+            [28951] = true, -- Crackling Earth (Sees-All-Colors)
+            [28952] = true, -- Crackling Earth (Sees-All-Colors)
+            [28946] = true, -- Heat Wave (Sees-All-Colors)
+            [45999] = true, -- Heat Wave (Sees-All-Colors)
+            [47758] = true, -- Imprisonment (Aelif)
+            [51138] = true, -- Q3973 Aelif Stealth DSPN
+            [34687] = true, -- Corruption Cloud
+            [17503] = true, -- Titan Transform
+            [64111] = true, -- Transformation
+
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------
             -------------------------------------
-
-            -- Lava
-            [11338] = true, -- In Lava
-            [11339] = true, -- Lava Snare
 
             -- Tutorial
             [89095] = true, -- Slaver Clothes
@@ -9561,8 +9638,8 @@ debugAuras = {
             [86575] = true, -- Shield Charge
             [86576] = true, -- Staggered
 
-            [73095] = true, -- In Lava
-            [73103] = true, -- Lava
+            --[73095] = true, -- In Lava
+            --[73103] = true, -- Lava
 
             [51634] = true, -- Shocking Touch
             [86659] = true, -- Auditory Signal

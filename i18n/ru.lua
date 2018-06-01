@@ -2152,6 +2152,7 @@ local strings = {
     SI_LUIE_SKILL_UNSTABLE_PORTAL =                      "Unstable Portal",
     SI_LUIE_SKILL_STABILIZE_PORTAL =                     "Stabilize Portal",
     SI_LUIE_SKILL_CLOSE_UNSTABLE_RIFT =                  "Close Unstable Rift",
+    SI_LUIE_SKILL_FLAME_BLOSSOM =                        "Flame Blossom",
 }
 
 -- TODO: Switch to StringId's

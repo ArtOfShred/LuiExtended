@@ -614,6 +614,8 @@ local g_achievementLastPercentage   = {}            -- Here we will store last d
 -- Quest
 local g_stopDisplaySpam             = false         -- Toggled on to stop spam display of EVENT_DISPLAY_ANNOUNCEMENTS from IC zone transitions.
 local g_questIndex                  = { }           -- Index of all current quests. Allows us to read the index so that all quest notifications can use the difficulty icon.
+local g_questItemAdded              = { }           -- Hold index of Quest items that are added - Prevents pointless and annoying messages from appearing when the same quest item is immediately added and removed when quest updates.
+local g_questItemRemoved            = { }           -- Hold index of Quest items that are removed - Prevents pointless and annoying messages from appearing when the same quest item is immediately added and removed when quest updates.
 
 -- Trade
 local g_tradeTarget                 = ""            -- Saves name of target player being traded with.
@@ -3235,6 +3237,8 @@ function CA.ResolveQuestItemChange()
                 --
 
                 countChange = newValue + questItemIndex[itemId].counter
+                g_questItemRemoved[itemId] = true
+                callLater(function() g_questItemRemoved[itemId] = false end, 100)
 
                 if not LUIE.Effects.QuestItemHideRemove[itemId] then
                     if CA.SV.Inventory.LootQuestRemove then
@@ -3258,7 +3262,7 @@ function CA.ResolveQuestItemChange()
 
                         finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
-                        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT REMOVE" }
+                        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT REMOVE", itemId = itemId }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                     end
@@ -3276,6 +3280,8 @@ function CA.ResolveQuestItemChange()
                 --
 
                 countChange = newValue - questItemIndex[itemId].stack
+                g_questItemAdded[itemId] = true
+                callLater(function() g_questItemAdded[itemId] = false end, 100)
 
                 if not LUIE.Effects.QuestItemHideLoot[itemId] then
                     if CA.SV.Inventory.LootQuestAdd then
@@ -3309,7 +3315,7 @@ function CA.ResolveQuestItemChange()
 
                         finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
 
-                        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT ADD" }
+                        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT ADD", itemId = itemId }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                     end
@@ -9917,14 +9923,24 @@ function CA.PrintQueuedMessages()
     -- Quest Items (Remove)
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i].type == "QUEST LOOT REMOVE" then
-            printToChat(g_queuedMessages[i].message)
+            if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
+            local itemId = g_queuedMessages[i].itemId
+            if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemAdded[itemId]) end -- TODO: Remove debug later
+            if not g_questItemAdded[itemId] == true then
+                printToChat(g_queuedMessages[i].message)
+            end
         end
     end
 
     -- Quest Items (ADD)
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i].type == "QUEST LOOT ADD" then
-            printToChat(g_queuedMessages[i].message)
+            if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
+            local itemId = g_queuedMessages[i].itemId
+            if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemRemoved[itemId]) end -- TODO: Remove debug later
+            if not g_questItemRemoved[itemId] == true then
+                printToChat(g_queuedMessages[i].message)
+            end
         end
     end
 

@@ -369,6 +369,7 @@ E.EffectHideWhenDead = {
 E.QuestItemHideLoot = {
 
     -- Main Story Quests
+    [2785] = true, -- Ayleid Tome (The Dangerous Past)
 
 }
 
@@ -376,6 +377,7 @@ E.QuestItemHideLoot = {
 E.QuestItemHideRemove = {
 
     -- Main Story Quests
+    [2760] = true, -- Ayleid Tome (The Dangerous Past)
 
 }
 
@@ -1571,6 +1573,20 @@ E.EffectOverrideByName = {
     [9670] =    {
                     ['Spectral Lamia'] =        { icon = 'LuiExtended/media/icons/abilities/ability_lamia_strike_spectral.dds' }, -- Strike (Lamia)
                 },
+
+    -- QUESTS
+    [37021] =   {
+                    ['Auroran Battlemage'] =    { icon = 'LuiExtended/media/icons/abilities/ability_mage_empower_weapon_flame_sword.dds' }, -- Empower Weapon: Flame (Auroran Battlemage)
+                },
+    [37028] =   {
+                    ['Auroran Battlemage'] =    { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
+                },
+    [37029] =   {
+                    ['Auroran Battlemage'] =    { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
+                },
+    [37030] =   {
+                    ['Auroran Battlemage'] =    { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
+                },
 }
 
 E.EffectSourceOverride = {
@@ -1814,6 +1830,7 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
 
 E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMBAT CLOUD ONLY!!!)
 
+    [27776] = true, -- Feeding (Daughter of Giants)
     [38215] = true -- Death's Gaze (Shadow of Sancre Tor)
 
 }
@@ -4253,9 +4270,8 @@ E.EffectOverride = {
     ]]--
 
     -- New Listing
+    [73095] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava }, -- In Lava (Vvardenfell - Nchuleftingth - Public Dungeon)
     --[[
-    [73095] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = 'Lava' }, -- In Lava (Vvardenfell - Nchuleftingth - Public Dungeon)
-    [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = 'Lava' }, -- In Lava (Various)
     [89481] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flame_jet.dds', name = 'Flame Jet Trap' }, -- Flame Jet (Vvardenfell -- An Armiger's Duty)
     [88403] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flame_jet.dds', name = 'Flame Jet Trap' }, -- Flame Jet (Vvardenfell -- Ancestral Adversity)
     [88491] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flame_jet.dds', name = 'Flame Jet Trap' }, -- Searing Flame (Vvardenfell -- Ancestral Adversity)
@@ -5888,7 +5904,8 @@ E.EffectOverride = {
     [44029] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Slaughterfish Attack (Slaughterfish)
     [44034] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds' }, -- Slaughterfish Attack (Slaughterfish)
 
-    [19224] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, unbreakable = 1 }, -- In Lava (Lava - Halls of Torment)
+    [19224] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava }, -- In Lava (Lava - Halls of Torment)
+    [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava }, -- In Lava (Lava - The Earth Forge)
 
     -- Hiding Spot
     [72711] = { hide = true }, -- Hidden (Hiding Spot)
@@ -6044,12 +6061,32 @@ E.EffectOverride = {
 
 
     ----------------------------------------------------------------
-    -- QUESTS - FIGHTER'S GUILD ------------------------------------
+    -- QUESTS - FIGHTERS GUILD ------------------------------------
     ----------------------------------------------------------------
 
     -- Anchors from the Harbour
     [14974] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, unbreakable = 1 }, -- CON_Knockback&KnockdownSelf
     [14975] = { name = A.Skill_Knockback }, -- Fire Backlash
+
+    -- The Prismatic Core
+    [39357] = { hide = true }, -- Necrobomb Camerashake
+    [39577] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_palolels_rage.dds' }, -- Palolel's Rage (Queen Palolel)
+    [39579] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_palolels_rage.dds', name = A.Skill_Palolels_Rage }, -- CON_Knockback&Knockdown (Queen Palolel)
+    [39578] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_palolels_rage.dds', name = A.Skill_Palolels_Rage }, -- Staggering Roar (Queen Palolel)
+
+    -- Proving the Deed
+    [25979] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', name = A.Skill_Prismatic_Light, unbreakable = 1 }, -- FG4 RGT Event Knockback
+    [25980] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', name = A.Skill_Prismatic_Light }, -- FGQ4 RGT Event Knockback
+    [25984] = { hide = true }, -- Subversion (Aelif)
+    [64217] = { hide = true }, -- Damage Immunity Under 50% (Aelif)
+    [64218] = { hide = true }, -- Combat Regen (Aelif)
+    [64220] = { hide = true }, -- Base Damage Reduction (Aelif)
+
+    -- Will of the Council
+    [28939] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Flame_Blossom }, -- Heat Wave (Sees-All-Colors)
+    [28946] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Flame_Blossom }, -- Heat Wave (Sees-All-Colors)
+    [47758] = { hide = true }, -- Imprisonment
+    [64111] = { hide = true }, -- Transformation
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -6396,7 +6433,6 @@ E.FakeExternalDebuffs = {
 
     -- Traps
     [27479] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = A.Trap_Falling_Rocks, duration = 2000 }, -- Falling Rocks (Falling Rocks)
-    [19224] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, duration = 0 }, -- Lava (Lava - Halls of Torment)
 
     [29602] = {icon = 'esoui/art/icons/ability_debuff_stun.dds', name = A.Trap_Falling_Rocks, duration = 2000}, -- Falling Rocks (Tripwire)
     [66153] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Trial of Flame', duration = 1500}, -- Trial of Flame (Wrothgar - Old Orsinium)
@@ -6468,6 +6504,8 @@ E.FakeExternalDebuffs = {
 
     -- Fighter's Guild
     [14974] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 2000 }, -- CON_Knockback&KnockdownSelf (Anchors from the Harbour)
+    [39579] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_palolels_rage.dds', name = A.Skill_Palolels_Rage, duration = 2000 }, -- CON_Knockback&Knockdown (The Prismatic Core)
+    [25979] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', name = A.Skill_Prismatic_Light, duration = 1000 }, -- FG4 RGT Event Knockback
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------

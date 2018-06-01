@@ -40,8 +40,8 @@ LUIE.AlertTable = {
     --------------------------------------------------
 
     -- Synergy
-    [12439] = { avoid = true, priority = 3, eventdetect = true }, -- Burning Arrow (Synergy)
-    [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true }, -- Ignite (Synergy)
+    [12439] = { avoid = true, priority = 3, eventdetect = true, refire = 1000 }, -- Burning Arrow (Synergy)
+    [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1000 }, -- Ignite (Synergy)
 
     -- Abilities
     [29378] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Uppercut (Ravager)
@@ -530,6 +530,16 @@ LUIE.AlertTable = {
     [40973] = { power = true, priority = 2, eventdetect = true }, -- Portal Spawn (Mannimarco)
     [40978] = { power = true, priority = 2, eventdetect = true }, -- Portal Spawn (Mannimarco)
     [40981] = { power = true, priority = 2, eventdetect = true }, -- Portal Spawn (Mannimarco)
+
+    --------------------------------------------------
+    -- GUILD QUESTS ----------------------------------
+    --------------------------------------------------
+
+    -- The Prismatic Core
+    [39577] = { block = true, interrupt = true, priority = 2 }, -- Palolel's Rage (Queen Palolel)
+
+    -- Will of the Council
+    [28939] = { avoid = true, priority = 2, eventdetect = true, refire = 2000 }, -- Heat Wave (Sees-All-Colors)
 
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------
