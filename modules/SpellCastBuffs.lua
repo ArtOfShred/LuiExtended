@@ -171,6 +171,7 @@ local g_werewolfIcon = "" -- Icon for current Werewolf Transformation morph
 local g_werewolfCounter = 0 -- Counter for Werewolf transformation events
 local g_werewolfQuest = 0 -- Counter for Werewolf transformation events (Quest)
 local g_lastWerewolfPower = 0 -- Tracker for last amount of werewolf power - used to freeze counter when using Devour or entering a Werewolf Shrine
+local g_ignoreAbilityId = {} -- Ignored abilityId's on EVENT_COMBAT_EVENT, some events fire twice and we need to ignore every other one.
 
 --[[
 -- Simple linear tweening - no easing, no acceleration
@@ -1625,7 +1626,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         if E.LinkedGroundMine[abilityId] then
             abilityId = E.LinkedGroundMine[abilityId]
         end
-		
+
 		-- Bail out if this ability is blacklisted
 		if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then
 			return
@@ -2010,6 +2011,12 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         return
     end
 
+    -- Toggled on when we need to ignore double events from some ids
+    if g_ignoreAbilityId[abilityId] then
+        g_ignoreAbilityId[abilityId] = nil
+        return
+    end
+
     local unbreakable
     local stack
     local internalStack
@@ -2111,6 +2118,10 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if E.FakePlayerBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
             return
         end
+        if g_effectsList.player1[ abilityId ] and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
+            stack = g_effectsList.player1[ abilityId ].stack + E.EffectOverride[abilityId].stackAdd
+        end
+        if abilityId == 26406 then g_ignoreAbilityId[abilityId] = true end
         g_effectsList.player1[ abilityId ] = nil
         if abilityId == 973 and not SCB.SV.ShowSprint then
             return
@@ -2135,7 +2146,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                     forced = "short",
                     restart=true, iconNum=0,
-                    unbreakable=unbreakable
+                    unbreakable=unbreakable,
+                    stack = stack
                 }
             -- Otherwise, display as a normal buff
             else
@@ -2145,7 +2157,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                     forced = "short",
                     restart=true, iconNum=0,
-                    unbreakable=unbreakable
+                    unbreakable=unbreakable,
+                    stack = stack
                 }
             end
         end

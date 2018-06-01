@@ -1012,7 +1012,7 @@ local strings = {
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY_TP =         "По умолчанию: Вы уничтожили %s.",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK =           "Отмычка сломана",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK_TP =        "По умолчанию: Ваша %s ломается.",
-    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE =             "Предмет задания - Убран",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE =             "Item or Quest Item - Removed", -- TODO: Translate
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE_TP =          "По умолчанию: Убран %s.",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP =              "Добыча членов группы",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP_TP =           "По умолчанию: %s получает %s.",
@@ -1050,6 +1050,8 @@ local strings = {
     SI_LUIE_LAM_CA_LOOT_LootConfiscateD_TP =             "Показывает сообщение, когда предмет конфискован стражей.",
     SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED =              "Утрата предметов - Уничтожение",
     SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED_TP =           "Показывает сообщение, когда предмет уничтожен.",
+    SI_LUIE_LAM_CA_LOOT_LOOTSHOWREMOVED =                "Display Item Loss - Removed Items", -- TODO: Translate
+    SI_LUIE_LAM_CA_LOOT_LOOTSHOWREMOVED_TP =             "Display a message when an item is removed from your inventory by an event or quest.", -- TODO: Translate
     SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK =               "Утрата предметов - Поломка отмычки",
     SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK_TP =            "Показывает сообщение о поломке отмычки при неудачном взломе или попытке открыть силой.",
     SI_LUIE_LAM_CA_LOOT_SHOWVENDOR =                     "Торговцы",
@@ -1090,7 +1092,6 @@ local strings = {
     SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT =               "Цвет уровня",
     SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT_TP =            "Задаёт цвет текста уровня в зависимости от контекста в сравнении в текущим уровнем или числом Чемпионских очков.",
     SI_LUIE_LAM_CA_EXPERIENCE_LEVELUP_COLOR =            "Цвет сообщения Повышения уровня", -- TODO: Add Tooltip with finalized color value
-    SI_LUIE_LAM_CA_EXP_HEADER_RESPEC =                   "Оповещения Сброса",
     SI_LUIE_LAM_CA_EXP_RESPEC =                          "Выводит сообщение при Сбросе - <<1>>",
     SI_LUIE_LAM_CA_EXP_RESPEC_TP =                       "Выводит <<1>> когда вы перераспределяете очки чемпиона и очки характеристик, навыков или морфы.",
     SI_LUIE_LAM_CA_EXP_HEADER_EXPERIENCEGAIN =           "Очки опыта",
@@ -2153,6 +2154,8 @@ local strings = {
     SI_LUIE_SKILL_STABILIZE_PORTAL =                     "Stabilize Portal",
     SI_LUIE_SKILL_CLOSE_UNSTABLE_RIFT =                  "Close Unstable Rift",
     SI_LUIE_SKILL_FLAME_BLOSSOM =                        "Flame Blossom",
+    SI_LUIE_SKILL_SAHDINAS_ESSENCE =                     "Sahdina's Essence",
+    SI_LUIE_SKILL_RASHOMTAS_ESSENCE =                    "Rashomta's Essence",
 }
 
 -- TODO: Switch to StringId's

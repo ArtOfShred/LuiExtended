@@ -1010,7 +1010,7 @@ local strings = {
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY_TP =         "Default: You destroy %s.",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK =           "Lockpick Broken",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK_TP =        "Default: Your %s breaks.",
-    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE =             "Quest Item - Removed",
+    SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE =             "Item or Quest Item - Removed",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE_TP =          "Default: Removed %s.",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP =              "Group Member Loot",
     SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP_TP =           "Default: %s loots %s.",
@@ -1048,6 +1048,8 @@ local strings = {
     SI_LUIE_LAM_CA_LOOT_LootConfiscateD_TP =             "Display a message when items are confiscated by a guard.",
     SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED =              "Display Item Loss - Destroyed Items",
     SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED_TP =           "Display a message when an item is destroyed.",
+    SI_LUIE_LAM_CA_LOOT_LOOTSHOWREMOVED =                "Display Item Loss - Removed Items",
+    SI_LUIE_LAM_CA_LOOT_LOOTSHOWREMOVED_TP =             "Display a message when an item is removed from your inventory by an event or quest.",
     SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK =               "Display Item Loss - Lockpick Break",
     SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK_TP =            "Display a message when a lockpick is broken from attempting to pick or forcing a lock open.",
     SI_LUIE_LAM_CA_LOOT_SHOWVENDOR =                     "Display Items - Vendor Transactions",
@@ -1088,7 +1090,6 @@ local strings = {
     SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT =               "Color Level by Context",
     SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT_TP =            "Colors the current level text to match the current level or champion point context color.",
     SI_LUIE_LAM_CA_EXPERIENCE_LEVELUP_COLOR =            "Level Up Message Color", -- TODO: Add Tooltip with finalized color value
-    SI_LUIE_LAM_CA_EXP_HEADER_RESPEC =                   "Respec Notifications",
     SI_LUIE_LAM_CA_EXP_RESPEC =                          "Display Respec Notification - <<1>>",
     SI_LUIE_LAM_CA_EXP_RESPEC_TP =                       "Display <<1>> when you redistribute Champion Points and when you relearn attributes, skill points, or morphs.",
     SI_LUIE_LAM_CA_EXP_HEADER_EXPERIENCEGAIN =           "Experience Points",
@@ -2151,6 +2152,8 @@ local strings = {
     SI_LUIE_SKILL_STABILIZE_PORTAL =                     "Stabilize Portal",
     SI_LUIE_SKILL_CLOSE_UNSTABLE_RIFT =                  "Close Unstable Rift",
     SI_LUIE_SKILL_FLAME_BLOSSOM =                        "Flame Blossom",
+    SI_LUIE_SKILL_SAHDINAS_ESSENCE =                     "Sahdina's Essence",
+    SI_LUIE_SKILL_RASHOMTAS_ESSENCE =                    "Rashomta's Essence",
 }
 
 -- TODO: Switch to StringId's

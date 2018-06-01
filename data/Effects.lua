@@ -4580,6 +4580,7 @@ E.EffectOverride = {
     [88322] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds' }, -- Bone Cage (Bonelord)
     [35391] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds', name = A.Skill_Bone_Cage }, -- Defiled Grave (Bonelord)
     [88504] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = A.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Summon Abomination (Bonelord)
+    [88506] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_abomination.dds' }, -- Summon Abomination (Bonelord)
     [88507] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_abomination.dds' }, -- Summon Abomination (Bonelord)
     [44339] = { icon = 'esoui/art/icons/ability_undaunted_005a.dds' }, -- Bone Surge (Bonelord)
     [10601] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_minor_wound.dds', hide = true }, -- Minor Wound (Healer)
@@ -5212,6 +5213,11 @@ E.EffectOverride = {
     [7719] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_shocking_touch.dds' }, -- Shocking Touch (Dwemer Spider)
     [20507] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_double_strike.dds' }, -- Double Strike (Dwemer Spider)
     [20508] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_double_strike.dds' }, -- Double Strike (Dwemer Spider)
+
+    [7717] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_aoe.dds' }, -- Detonation (Dwemer Spider)
+    [15206] = { hide = true }, -- Detonation (Dwemer Spider)
+    [84019] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_aoe.dds' }, -- Detonation (Dwemer Spider)
+    [13536] = { hide = true }, -- Detonation (Dwemer Spider)
 
     [64423] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_ranged.dds', hide = true }, -- Sparks (Dwemer Sentry)
     [84312] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds' }, -- Static Shield (Dwemer Sentry)
@@ -6061,7 +6067,7 @@ E.EffectOverride = {
 
 
     ----------------------------------------------------------------
-    -- QUESTS - FIGHTERS GUILD ------------------------------------
+    -- QUESTS - FIGHTERS GUILD -------------------------------------
     ----------------------------------------------------------------
 
     -- Anchors from the Harbour
@@ -6087,6 +6093,14 @@ E.EffectOverride = {
     [28946] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Flame_Blossom }, -- Heat Wave (Sees-All-Colors)
     [47758] = { hide = true }, -- Imprisonment
     [64111] = { hide = true }, -- Transformation
+
+    ----------------------------------------------------------------
+    -- QUESTS - MAGES GUILD ----------------------------------------
+    ----------------------------------------------------------------
+
+    [26406] = { stack = 1, stackAdd = 1 }, -- MG2 Captured Essence
+    [31502] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), unbreakable = 1 }, -- MGQ2 Asakala Sahdina Barrier
+    [31503] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), unbreakable = 1 }, -- MGQ2 Asakala Rashomta Barrier
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -6507,6 +6521,10 @@ E.FakeExternalDebuffs = {
     [39579] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_palolels_rage.dds', name = A.Skill_Palolels_Rage, duration = 2000 }, -- CON_Knockback&Knockdown (The Prismatic Core)
     [25979] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', name = A.Skill_Prismatic_Light, duration = 1000 }, -- FG4 RGT Event Knockback
 
+    -- Mages Guild
+    [31502] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), duration = 4000 }, -- MGQ2 Asakala Sahdina Barrier
+    [31503] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), duration = 4000 }, -- MGQ2 Asakala Rashomta Barrier
+
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------
     ----------------------------------------------------------------
@@ -6622,6 +6640,15 @@ E.FakePlayerBuffs = {
     [84506] = {icon = 'LuiExtended/media/icons/abilities/ability_event_knife_juggling.dds', name = A.Skill_Dagger_Juggling, duration = 12000}, -- Dagger Juggling (Castle Charm Challenge)
     [84533] = {icon = 'LuiExtended/media/icons/abilities/ability_event_sword_swallowing.dds', name = A.Skill_Sword_Swallowing, duration = 12000}, -- Sword Swallowing (Castle Charm Challenge)
     [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_event_celebratory_belch.dds', name = A.Skill_Celebratory_Belch, duration = 5000}, -- Celebratory Belch (Stonetooth Bash)
+
+    ------------------------------
+    -- Quests --------------------
+    ------------------------------
+
+    -- Mages Guild
+    [26406] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence.dds', name = A.Skill_Essence, duration = 0 }, -- MG2 Captured Essence (Simply Misplaced)
+    [26634] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence_greater.dds', name = A.Skill_Sahdinas_Essence, duration = 0 }, -- MG2 Captured Sahdina Essence
+    [26581] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence_greater.dds', name = A.Skill_Rashomtas_Essence, duration = 0 }, -- MG2 Captured Rashomta Essence
 
     -- Quest related (Craglorn)
     [81807] = {icon = 'esoui/art/icons/achievement_104.dds', name = 'Power of the Stars', duration = 22000}, -- Power of the Stars (The Star-Gazers)

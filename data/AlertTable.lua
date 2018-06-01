@@ -477,6 +477,7 @@ LUIE.AlertTable = {
     [11246] = { avoid = true, priority = 2, eventdetect = true, refire = 2000 }, -- Steam Breath (Dwemer Centurion)
 
     [20507] = { block = true, bs = true, dodge = true, priority = 3 }, -- Double Strike (Dwemer Spider)
+    [7717] = { block = true, avoid = true, priority = 3, eventdetect = true, refire = 1000 }, -- Detonation (Dwemer Spider)
     [19970] = { power = true, priority = 3, auradetect = true }, -- Static Field (Dwemer Spider - Overcharge Synergy)
     --[20207] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
     [20505] = { block = true, avoid = true, priority = 3, auradetect = true, refire = 1000 }, -- Overcharge (Dwemer Spider - Overcharge Synergy)

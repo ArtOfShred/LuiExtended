@@ -3636,6 +3636,17 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Inventory.LootShowDestroy,
             },
             {
+                -- Show Removed Items
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWREMOVED)),
+                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWREMOVED_TP),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootShowRemove end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootShowRemove = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
+                width = "full",
+                disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.Loot and LUIE.ChatAnnouncements.SV.Inventory.LootShowDestroy and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = LUIE.ChatAnnouncements.D.Inventory.LootShowRemove,
+            },
+            {
                 -- Show Lockpick Break
                 type = "checkbox",
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK)),
@@ -4632,12 +4643,6 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not (LUIE.ChatAnnouncements.SV.XP.ExperienceLevelUpCA or LUIE.ChatAnnouncements.SV.XP.ExperienceLevelUpCSA or LUIE.ChatAnnouncements.SV.XP.ExperienceLevelUpAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.XP.ExperienceLevelColorByLevel,
-            },
-            {
-                -- Respec Notifications Header
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CA_EXP_HEADER_RESPEC),
-                width = "full",
             },
             {
                 -- Experience Points Header

@@ -6986,6 +6986,7 @@ debugAuras = {
             [35384] = true, -- Summon Abomination -- Bonelord
             [88522] = true, -- Summon Abomination -- Bonelord
             [88526] = true, -- Summon Abomination -- Bonelord
+            [88506] = true, -- Summon Abomination -- Bonelord
             [88507] = true, -- Summon Abomination -- Bonelord
             [88504] = true, -- Summon Abomination -- Bonelord
             [88503] = true, -- Summon Abomination -- Bonelord
@@ -8163,10 +8164,10 @@ debugAuras = {
             [7719] = true, -- Shocking Touch -- Dwemer Spider
             [20507] = true, -- Double Strike -- Dwemer Spider
             [20508] = true, -- Double Strike -- Dwemer Spider
-            --[7717] = true, -- Detonation -- Dwemer Spider
-            --[15206] = true, -- Detonation -- Dwemer Spider
-            --[84019] = true, -- Detonation -- Dwemer Spider
-            --[13536] = true, -- Detonation -- Dwemer Spider
+            [7717] = true, -- Detonation -- Dwemer Spider
+            [15206] = true, -- Detonation -- Dwemer Spider
+            [84019] = true, -- Detonation -- Dwemer Spider
+            [13536] = true, -- Detonation -- Dwemer Spider
 
             -------------------------------------
             -- INSECTS --------------------------
@@ -9139,7 +9140,7 @@ debugAuras = {
             [47186] = true, -- CHT Portal Killer
 
             -------------------------------------
-            -- QUESTS - FIGHTER'S GUILD ---------
+            -- QUESTS - FIGHTERS GUILD ---------
             -------------------------------------
 
             -- Anchors from the Harbour
@@ -9229,6 +9230,64 @@ debugAuras = {
             [34687] = true, -- Corruption Cloud
             [17503] = true, -- Titan Transform
             [64111] = true, -- Transformation
+
+            -------------------------------------
+            -- QUESTS - MAGES GUILD ---------
+            -------------------------------------
+
+            -- Long Lost Lore
+            [29648] = true, -- MGQ1 Book 1
+            [21640] = true, -- CON_Blue Glow on Ground
+            [16848] = true, -- MGQ1 CV Crystal
+            [16800] = true, -- MGQ1 Crystal Beam 1
+            [16816] = true, -- MGQ1 Crystal Beam 2
+            [16818] = true, -- MGQ1 Crystal Beam 3
+            [16808] = true, -- MGQ1 CV Shalidor
+            [49347] = true, -- MG2 Shali Buff for Sound
+            [32955] = true, -- MG Shalidor FX
+            [16852] = true, -- MG 1/2/4 Cast Portal to SI
+            [16856] = true, -- MG 1/2/4 CV Darkness
+            [17131] = true, -- Q3916 PC Can Spawn E3
+            [16974] = true, -- Q3916 PC Can Spawn E4
+            [17132] = true, -- Q3916 PC Can Spawn E5
+            [17133] = true, -- Q3916 PC Can Spawn E6
+            [29651] = true, -- MGQ1 Book 4
+            [29650] = true, -- MGQ1 Book 3
+            [29649] = true, -- MGQ1 Book 2
+            [48228] = true, -- MGQ3 Book FX
+            [16973] = true, -- MGQ1 Event Scamp Pause
+            [16829] = true, -- MGQ1 CV Books
+            [31266] = true, -- MGQ1 PC Retrieved Boo
+            [16883] = true, -- Shalidor's Rebuke
+            [16866] = true, -- Q3916 Shalidor Teleport PC
+
+            -- Simply Misplaced
+            [26390] = true, -- MGQ2 Event Screen Shake
+            [26396] = true, -- Q4435 Event Jump
+            [31704] = true, -- Risen Dead
+            [26481] = true, -- MG2 Essence On
+            [26633] = true, -- MG2 Essence Attraction
+            [26406] = true, -- MG2 Captured Essence
+            [49346] = true, -- MG2 Essence Buff for Sound
+            [31502] = true, -- MGQ2 Asakala Sahdina Barrier
+            [31503] = true, -- MGQ2 Asakala Rashomta Barrier
+            [26561] = true, -- MG2 Essence Deposit
+            [26914] = true, -- MGQ2 Orange Cast
+            [26573] = true, -- MGQ2 Green Cast
+            [26943] = true, -- MG2 Greater Essence
+            [26634] = true, -- MG2 Captured Sahdina Essence
+            [26581] = true, -- MG2 Captured Rashomta Essence
+            [26572] = true, -- MG2 Red Cast
+            [26570] = true, -- MG2 Purple Cast
+            [26576] = true, -- MGQ2 White Beam
+            [31493] = true, -- MGQ2 Give PC Wabbajack
+            [26587] = true, -- Wabbajack
+            [70471] = true, -- Wabbajack
+            [70473] = true, -- Wabbajack HIT
+            [6618] = true, -- CON_SmokeBurst
+            [27651] = true, -- MGQ2 PC Used Wabbajack on Targ
+            [27238] = true, -- Explosion
+            [26684] = true, -- Charge
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------

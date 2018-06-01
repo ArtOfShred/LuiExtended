@@ -275,7 +275,19 @@ function CTL:OnCombatIn(...)
         if sourceName ~= nil and sourceName ~= "" and (resultType == ACTION_RESULT_BEGIN or resultType == ACTION_RESULT_BEGIN_CHANNEL or AlertT[abilityId].skipcheck) and not refireDelay[abilityId] then
             local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
 
-            if resultType == ACTION_RESULT_EFFECT_FADED then return end
+            -- Return if any results occur which we absolutely don't want to display alerts for
+            if resultType == ACTION_RESULT_EFFECT_FADED
+               or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN
+               or resultType == ACTION_RESULT_BAD_TARGET
+               or resultType == ACTION_RESULT_BUSY
+               or resultType == ACTION_RESULT_FAILED
+               or resultType == ACTION_RESULT_INVALID
+               or resultType == ACTION_RESULT_CANT_SEE_TARGET
+               or resultType == ACTION_RESULT_TARGET_DEAD
+               or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE
+               or resultType == ACTION_RESULT_TARGET_TOO_CLOSE
+               or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW
+            then return end
 
             if AlertT[abilityId].refire then
                 refireDelay[abilityId] = true

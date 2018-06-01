@@ -433,6 +433,7 @@ CA.D = {
         LootVendorTotalItems          = false,
         LootShowCraftUse              = false,
         LootShowDestroy               = true,
+        LootShowRemove                = true,
         LootShowDisguise              = true,
         LootShowLockpick              = true,
         LootQuestAdd                  = true,
@@ -755,6 +756,16 @@ local g_notableIDs = {
     [56862]  = true,    -- Fortified Nirncrux
     [56863]  = true,    -- Potent Nirncrux
     [68342]  = true,    -- Hakeijo
+}
+
+local g_removeableIDs = {
+
+    [44486] = true, -- Prismatic Blade (Fighters Guild Quests)
+    [44487] = true, -- Prismatic Greatblade (Fighters Guild Quests)
+    [44488] = true, -- Prismatic Long Bow (Fighters Guild Quests)
+    [44489] = true, -- Prismatic Flamestaff (Fighters Guild Quests)
+    [33235] = true, -- Wabbajack (Mages Guild Quests)
+
 }
 
 -- List of items to blacklist as annyoing loot
@@ -3727,6 +3738,11 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                     logPrefix = CA.SV.ContextMessages.CurrencyMessageDestroy
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
+                if g_removeableIDs[itemId] and not g_itemWasDestroyed and CA.SV.Inventory.LootShowRemove and CA.SV.Inventory.LootShowDestroy then
+                    gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageRemove
+                    CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
                 if CA.SV.Inventory.LootShowDisguise and not g_itemWasDestroyed and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
                     if IsUnitInCombat("player") then
                         logPrefix = CA.SV.ContextMessages.CurrencyMessageDisguiseDestroy
@@ -3819,6 +3835,11 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 if g_itemWasDestroyed and CA.SV.Inventory.LootShowDestroy then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = CA.SV.ContextMessages.CurrencyMessageDestroy
+                    CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                if g_removeableIDs[itemId] and not g_itemWasDestroyed and CA.SV.Inventory.LootShowRemove and CA.SV.Inventory.LootShowDestroy then
+                    gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageRemove
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 if CA.SV.Inventory.LootShowLockpick and g_lockpickBroken then
@@ -9923,9 +9944,9 @@ function CA.PrintQueuedMessages()
     -- Quest Items (Remove)
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i].type == "QUEST LOOT REMOVE" then
-            if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
+            --if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
             local itemId = g_queuedMessages[i].itemId
-            if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemAdded[itemId]) end -- TODO: Remove debug later
+            --if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemAdded[itemId]) end -- TODO: Remove debug later
             if not g_questItemAdded[itemId] == true then
                 printToChat(g_queuedMessages[i].message)
             end
@@ -9935,9 +9956,9 @@ function CA.PrintQueuedMessages()
     -- Quest Items (ADD)
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i].type == "QUEST LOOT ADD" then
-            if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
+            --if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_queuedMessages[i].itemId) end -- TODO: Remove debug later
             local itemId = g_queuedMessages[i].itemId
-            if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemRemoved[itemId]) end -- TODO: Remove debug later
+            --if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then d(g_questItemRemoved[itemId]) end -- TODO: Remove debug later
             if not g_questItemRemoved[itemId] == true then
                 printToChat(g_queuedMessages[i].message)
             end

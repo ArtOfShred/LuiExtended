@@ -758,11 +758,17 @@ A.Skill_Unstable_Portal             = GetString(SI_LUIE_SKILL_UNSTABLE_PORTAL)
 A.Skill_Stabilize_Portal            = GetString(SI_LUIE_SKILL_STABILIZE_PORTAL)
 A.Skill_Close_Unstable_Rift         = GetString(SI_LUIE_SKILL_CLOSE_UNSTABLE_RIFT)
 
--- GUILD QUESTS
+-- FIGHTERS GUILD
 A.Skill_Palolels_Rage               = 39577
 A.Skill_Prismatic_Light             = 25981
 A.Skill_Quick_Strike                = 10618
 A.Skill_Flame_Blossom               = GetString(SI_LUIE_SKILL_FLAME_BLOSSOM)
+
+-- MAGES GUILD
+A.Skill_Rock                        = 26775
+A.Skill_Essence                     = 25337
+A.Skill_Sahdinas_Essence            = GetString(SI_LUIE_SKILL_SAHDINAS_ESSENCE)
+A.Skill_Rashomtas_Essence           = GetString(SI_LUIE_SKILL_RASHOMTAS_ESSENCE)
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------
