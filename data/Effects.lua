@@ -1400,6 +1400,10 @@ E.AddNameAura = {
     ['Manifestation of Terror'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Mannimarco'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
 
+    -- Mages Guild
+    ['Uncle Leo'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
+    ['Haskill'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
+
     -- Dolmen Bosses
     ['Dread Xivkyn Cauterizer'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Dread Xivkyn Dreadweaver'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
@@ -6098,9 +6102,14 @@ E.EffectOverride = {
     -- QUESTS - MAGES GUILD ----------------------------------------
     ----------------------------------------------------------------
 
+    -- Simply Misplaced
     [26406] = { stack = 1, stackAdd = 1 }, -- MG2 Captured Essence
     [31502] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), unbreakable = 1 }, -- MGQ2 Asakala Sahdina Barrier
     [31503] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), unbreakable = 1 }, -- MGQ2 Asakala Rashomta Barrier
+
+    -- Circus of Cheerful Slaughter
+    [29814] = { hide = true }, -- Ansei Ward
+    [29815] = { hide = true }, -- Ansei Ward 3
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------

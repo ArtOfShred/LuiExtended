@@ -9289,6 +9289,38 @@ debugAuras = {
             [27238] = true, -- Explosion
             [26684] = true, -- Charge
 
+            -- Circus of Cheerful Slaughter
+            [16859] = true, -- MG Quest 3 Teleporting Book
+            [16882] = true, -- MG Quest 3 Pet on Fire
+            [27637] = true, -- Queen's Fury
+            [34854] = true, -- Immune
+            --[29814] = true, -- Ansei Ward
+            --[29815] = true, -- Ansei Ward 3
+            [29827] = true, -- MG Mage Despawn
+            [34858] = true, -- Book
+
+            -- Chateau of the Ravenous Rodent
+            [26735] = true, -- MG4 Sheo Stun Shali
+            [25878] = true, -- MG Sheogorath Despawn
+            [31123] = true, -- Darkness
+            [31128] = true, -- Darkness
+            [16870] = true, -- Crystal Beam
+            [31279] = true, -- MG4 Book Banish PC
+
+            -- The Mad God's Bargain
+            [31331] = true, -- Book Beam
+            [31342] = true, -- Archmage Surprise
+            [31435] = true, -- MGQ5 Book 4
+            [31434] = true, -- MGQ5 Book 3
+            [31433] = true, -- MGQ5 Book 2
+            [31432] = true, -- MGQ5 Book 1
+            [31361] = true, -- Summon Portal
+            [31444] = true, -- Screen Shake
+            [31446] = true, -- Screen Shake
+            [31450] = true, -- Shivering Summons
+            --[39370] = true, -- MGQ5_Knockback&KnockdownSelf
+            --[39371] = true, -- Fire Backlash
+
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------
             -------------------------------------
