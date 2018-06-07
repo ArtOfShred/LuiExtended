@@ -542,6 +542,12 @@ LUIE.AlertTable = {
     -- Will of the Council
     [28939] = { avoid = true, priority = 2, eventdetect = true, refire = 2000 }, -- Heat Wave (Sees-All-Colors)
 
+    -- The Mad God's Bargain
+    [39555] = { interrupt = true, priority = 2, eventdetect = true, refire = 1500 }, -- Summon Scamp (Haskill)
+    [39527] = { interrupt = true, avoid = true, block = true, priority = 2, refire = 1500 }, -- Skeleton Trap (Haskill)
+    [35533] = { interrupt = true, priority = 2, refire = 1500 }, -- Polymorph (Haskill)
+    [39391] = { interrupt = true, priority = 2, eventdetect = true, refire = 1500 }, -- Summon Pig (Haskill)
+
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------
     --------------------------------------------------

@@ -2154,6 +2154,7 @@ local strings = {
     SI_LUIE_SKILL_FLAME_BLOSSOM =                        "Flame Blossom",
     SI_LUIE_SKILL_SAHDINAS_ESSENCE =                     "Sahdina's Essence",
     SI_LUIE_SKILL_RASHOMTAS_ESSENCE =                    "Rashomta's Essence",
+    SI_LUIE_SKILL_POLYMORPH_SKELETON =                   "Polymorph: Skeleton",
 }
 
 -- TODO: Switch to StringId's

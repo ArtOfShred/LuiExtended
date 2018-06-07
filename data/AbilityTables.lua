@@ -769,6 +769,9 @@ A.Skill_Rock                        = 26775
 A.Skill_Essence                     = 25337
 A.Skill_Sahdinas_Essence            = GetString(SI_LUIE_SKILL_SAHDINAS_ESSENCE)
 A.Skill_Rashomtas_Essence           = GetString(SI_LUIE_SKILL_RASHOMTAS_ESSENCE)
+A.Skill_Polymorph_Skeleton          = GetString(SI_LUIE_SKILL_POLYMORPH_SKELETON)
+A.Skill_Drain_Vitality              = 8787
+A.Skill_Ungulate_Ordnance           = 39393
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

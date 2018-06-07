@@ -122,13 +122,13 @@ E.IsCyrodiil = {
     [11343] = true, -- Enemy Keep Bonus II -- CONFIRM
     [11345] = true, -- Enemy Keep Bonus III -- CONFIRM
     [11347] = true, -- Enemy Keep Bonus IV -- CONFIRM
-    [11348] = true, -- Enemy Keep Bonus V -- CONFIRM
+    [11348] = true, -- Enemy Keep Bonus V
     [11350] = true, -- Enemy Keep Bonus VI
     [11352] = true, -- Enemy Keep Bonus VII
     [11353] = true, -- Enemy Keep Bonus VIII
     [11356] = true, -- Enemy Keep Bonus IX -- CONFIRM
     [15060] = true, -- Defensive Scroll Bonus I
-    [16350] = true, -- Defensive Scroll Bonus II -- CONFIRM
+    [16350] = true, -- Defensive Scroll Bonus II
     [15058] = true, -- Offensive Scroll Bonus I
     [16348] = true, -- Offensive Scroll Bonus II -- CONFIRM
     [66282] = true, -- Blessing of War -- CONFIRM
@@ -1813,6 +1813,9 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     -- Main Quest
     [61648] = true, -- Replenish Stamina (Tutorial - Child of Bones)
 
+    -- Mages Guild
+    [40851] = true, -- Polymorph Snare (The Mad God's Bargain)
+
     -- Vvardenfell
     [82272] = true, -- Dark Reach (Slavemaster Arenim -- Vvardenfell -- The Heart of a Telvanni)
     [82273] = true, -- Dark Reach (Slavemaster Arenim -- Vvardenfell -- The Heart of a Telvanni)
@@ -2876,6 +2879,9 @@ E.EffectOverride = {
     [95813] = { type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1 }, -- Static Charge
     [46291] = { hide = true }, -- Rain of Doom
     [46293] = { hide = true }, -- Stun
+
+    -- Misc World + Theater
+    [822] = { hide = true }, -- Ward
 
     ----------------------------------------------------------------
     -- DRAGONKNIGHT PASSIVES ---------------------------------------
@@ -6110,6 +6116,19 @@ E.EffectOverride = {
     -- Circus of Cheerful Slaughter
     [29814] = { hide = true }, -- Ansei Ward
     [29815] = { hide = true }, -- Ansei Ward 3
+
+    -- The Mad God's Bargain
+    [39555] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_summon_scamp.dds', hide = true }, -- Summon Scamp (Haskill)
+    [39527] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_polymorph.dds', name = A.Skill_Polymorph_Skeleton }, -- Skeleton Trap (Haskill)
+    [39533] = { hide = true }, -- Polymorph (Haskill)
+    [40851] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_polymorph.dds', name = A.Skill_Polymorph_Skeleton }, -- Polymorph Snare (Haskill)
+    [35533] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_drain_vitality.dds', name = A.Skill_Drain_Vitality }, -- Polymorph (Haskill)
+    [39556] = { hide = true }, -- Transform Scamp
+    [39558] = { hide = true }, -- Rabbit
+    [39559] = { hide = true }, -- Atronach
+    [39560] = { hide = true }, -- Netch
+    [39391] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_summon_pig.dds', name = A.Skill_Ungulate_Ordnance }, -- Summon Pig
+    [39393] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_summon_pig.dds' }, -- Ungulate Ordnance
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------

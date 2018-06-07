@@ -2176,6 +2176,14 @@ debugAuras = {
             [51505] = true, -- Portal Spawn
             [51507] = true, -- Targetable On
 
+            -- Misc World + Theater
+            [16553] = true, -- CON_Ritual_Daedric
+            [25706] = true, -- CON_GoodAura
+            [22207] = true, -- CTY-Beam,Capture
+            [48911] = true, -- CTY-Flavor-Scamp
+            [822] = true, -- Ward
+            [1406] = true, -- Ward Snare
+
             -------------------------------------
             -- DRAGONKNIGHT PASSIVES ------------
             -------------------------------------
@@ -9320,6 +9328,30 @@ debugAuras = {
             [31450] = true, -- Shivering Summons
             --[39370] = true, -- MGQ5_Knockback&KnockdownSelf
             --[39371] = true, -- Fire Backlash
+            [17478] = true, -- MG Quest 5 Sheo Stun
+            [17551] = true, -- Spectral Key
+            [20928] = true, -- Spectral Key
+            [39554] = true, -- Butterfly Shield
+            [39555] = true, -- Summon Scamp
+            [39527] = true, -- Skeleton Trap
+            [39528] = true, -- Projectile
+            [39529] = true, -- Trap Down
+            [39533] = true, -- Polymorph
+            [40851] = true, -- Polymorph Snare
+            [35533] = true, -- Polymorph
+            [39556] = true, -- Transform Scamp
+            [39558] = true, -- Rabbit
+            [39559] = true, -- Atronach
+            [39560] = true, -- Netch
+            [39391] = true, -- Summon Pig
+            [39393] = true, -- Ungulate Ordnance
+            [39423] = true, -- Mad God's Whimsy
+
+            -- The Arch-Mage's Boon
+            [7700] = true, -- EB Generic 5 Min Counter 01
+            [48094] = true, -- Q4971 Shalidor Prep
+            [48098] = true, -- Q4971 Shaldior Read
+            [48077] = true, -- Q4971 Shali Cast (Saved)
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------
@@ -9796,6 +9828,8 @@ debugAuras = {
             [11353] = true, -- Enemy Keep Bonus VIII
 
             [15060] = true, -- Defensive Scroll Bonus I
+            [16350] = true, -- Defensive Scroll Bonus II
+
             [15058] = true, -- Offensive Scroll Bonus I
 
             [66282] = true, -- Blessing of War
