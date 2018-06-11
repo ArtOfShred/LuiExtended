@@ -1779,6 +1779,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         if E.EffectOverride[abilityId].hideReduce == true and SCB.SV.HideReduce then
             return
         end
+        if E.EffectOverride[abilityId].isDisguise and SCB.SV.IgnoreDisguise then
+            return
+        end
         iconName = E.EffectOverride[abilityId].icon or iconName
         effectName = E.EffectOverride[abilityId].name or effectName
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0

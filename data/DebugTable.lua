@@ -2183,6 +2183,13 @@ debugAuras = {
             [48911] = true, -- CTY-Flavor-Scamp
             [822] = true, -- Ward
             [1406] = true, -- Ward Snare
+            [26391] = true, -- Quick Strike
+            [48483] = true, -- W20-CMP-PutOutFire
+            [48484] = true, -- City - Putting out Fire 1
+
+            [21811] = true, -- RDS M'aiq Tracker
+            [48899] = true, -- Firelight
+            [48920] = true, -- V11849 Firelight Tracker
 
             -------------------------------------
             -- DRAGONKNIGHT PASSIVES ------------
@@ -6629,6 +6636,7 @@ debugAuras = {
             [77452] = true, -- Shadow Cloak Immunity (Basic Justice NPC)
             [78012] = true, -- Quick Strike (Basic Justice NPC)
             [48321] = true, -- CON_Bamf Out (Basic Justice NPC)
+            [64161] = true, -- Flee (Basic Justice NPC)
             [62472] = true, -- Stab (Justice Rogue)
             [62506] = true, -- Thrown Dagger (Justice Rogue)
             [78013] = true, -- Quick Shot (Justice Archer)
@@ -6672,6 +6680,10 @@ debugAuras = {
             [21943] = true, -- Spike Trap (Spike Trap)
             [21941] = true, -- Spike Trap Snare (Spike Trap)
             [21942] = true, -- Trap Sprung (Spike Trap)
+
+            --[20482] = true, -- Mistwatch Collapse
+            --[20483] = true, -- Falling Rocks
+            --[29602] = true, -- Falling Rocks
 
             [44029] = true, -- Slaughterfish Attack (Slaughterfish)
             [66863] = true, -- Slaughterfish Bonus (Slaughterfish)
@@ -8331,6 +8343,14 @@ debugAuras = {
             [26379] = true, -- Zap -- Thunderbug
             [26382] = true, -- Bolt -- Thunderbug
             [26412] = true, -- Thunderstrikes -- Thunderbug
+            [26414] = true, -- Thunderstrikes -- Thunderbug
+            [26428] = true, -- Thunderstrikes -- Thunderbug
+            [26436] = true, -- Thunderstrikes -- Thunderbug
+            [26437] = true, -- Thunderstrikes -- Thunderbug
+            [26426] = true, -- Thunderstrikes -- Thunderbug
+            [34981] = true, -- Thunderstrikes -- Thunderbug
+            [26416] = true, -- Thunderstrikes -- Thunderbug
+            [26418] = true, -- Thunderstrikes -- Thunderbug
             [34980] = true, -- Thunderstrikes -- Thunderbug
 
             -------------------------------------
@@ -8866,7 +8886,7 @@ debugAuras = {
             -------------------------------------
 
             -- Tutorial (Soul Shriven in Coldharbour)
-            --[82077] = true, -- Portal In
+            [82077] = true, -- Portal In
             [90733] = true, -- Knockout
             [48675] = true, -- Vitality of the Titanborn
             [62805] = true, -- Stun
@@ -9352,6 +9372,190 @@ debugAuras = {
             [48094] = true, -- Q4971 Shalidor Prep
             [48098] = true, -- Q4971 Shaldior Read
             [48077] = true, -- Q4971 Shali Cast (Saved)
+            
+            --------------------------------------
+            -- QUEST / ZONES - ALDMERI DOMINION --
+            --------------------------------------
+            
+            --------------------
+            -- Khenarthi's Roost
+            --------------------
+            
+            -- World Events
+            [32460] = true, -- KR ES Walking Speed Rand
+            [25311] = true, -- AM Posture Reset
+            [32085] = true, -- Q4680 Water Stone Beam
+            [32765] = true, -- KR-TM Priestess Cast
+            
+            -- Storm on the Horizon
+            [35411] = true, -- Q4680 - CV Wait
+            [51219] = true, -- Q4680 End Quest CV
+            
+            -- Cast Adrift
+            [31429] = true, -- Q4620 01 Healed Edhelas
+            [31430] = true, -- Q4620 01 Healed Nistel
+            [31431] = true, -- Q4620 01 Healed Onglorn
+            [35192] = true, -- Q4620 Use Lodestone
+
+            -- Tears of the Two Moons
+            [32766] = true, -- 4625 Uldor's Possession
+            [32052] = true, -- 4625 02 Skeleton Exploade
+            [32053] = true, -- 4625 02 Skeleton Exploade
+            [31649] = true, -- 4625 Ward 1
+            [31665] = true, -- 4625 Ward 2
+            [33233] = true, -- 4625 Stun for Beckon 1.5s
+            [31652] = true, -- 4625 Gathwen Destory Ward
+            [33231] = true, -- 4625 Ward Destory
+            [33029] = true, -- Blessing (Gathwen)
+            [33136] = true, -- Blessing (Gathwen)
+            [35185] = true, -- 4625 Heal (Gathwen)
+            [32063] = true, -- Feedback
+            [49084] = true, -- RobS PC 1 Dmg Limit
+            [31740] = true, -- 4625 Damage Shield
+            [35195] = true, -- No Heal Check
+            [11451] = true, -- CON_NecroBoneExplosion
+            [31709] = true, -- 4625 Gathwen Beam Ritual
+            [35197] = true, -- Beam Damage
+            [31745] = true, -- Risen Dead
+            [32056] = true, -- 4625 08 Gathwen Down
+            [33278] = true, -- Increased Speed
+            [32060] = true, -- Shocked
+            [32768] = true, -- 4625 Uldor's Evil Spirit
+            [33285] = true, -- 4625 Uldor Banish
+            [11069] = true, -- CON_DistortionAura
+            [22524] = true, -- Teleport
+            [61732] = true, -- Q4625 Distortion
+            [32705] = true, -- 4625 No Yell
+            [31968] = true, -- Wrath
+            [31969] = true, -- Wrath
+            [31970] = true, -- Wrath
+            [33449] = true, -- 4625 Stop Bolts
+            [33402] = true, -- Wrath
+            [33403] = true, -- Wrath
+            [33404] = true, -- Wrath
+
+            -- The Perils of Diplomacy
+            [32264] = true, -- Unconscious
+            [36094] = true, -- Q4624 Treaty Tracker
+            [31608] = true, -- Q4624
+            [46686] = true, -- Hidden in Crate
+            [32594] = true, -- Q4624 GL Smellovision Spell
+            [33284] = true, -- Q4624 GL Speed Buff
+            [31543] = true, -- KR MS Follow Trail CV
+            [31788] = true, -- KR MS Maormer Assassin
+            [32595] = true, -- Q4624 GL Murderizing
+            [16376] = true, -- AM Q3834 Ninja Poof
+            [32604] = true, -- Q4624 Deal with Maormer Stab
+
+            -- The Tempest Unleashed
+            [34454] = true, -- KR CQ Maormer Wind Trail
+            [54244] = true, -- CV Delay 3 Seconds
+            [34567] = true, -- Q4621 PC Storm Drain
+            [10223] = true, -- NPC 75% Speed
+            [26186] = true, -- Q4406 Water Splash
+            [34701] = true, -- Q4621 Destory Horn
+            [34708] = true, -- Q4621 Horn Exploade
+            [26952] = true, -- Jump Down 10 Meters
+            [34735] = true, -- Q4621 Atronach Death
+            [34746] = true, -- a
+            [34747] = true, -- a
+
+            -- Dark Knowledge
+            [6351] = true, -- CON_GhostlyFlash
+            [32571] = true, -- Q4667 Spinners
+            [32581] = true, -- Q4667 Daedroth ATK
+            [32574] = true, -- Q4667 Watcher
+            [35271] = true, -- CV Delay 30 Seconds
+            [35264] = true, -- Q4667 Pulling Grasp
+            [35265] = true, -- Q4667 Stun
+            [35268] = true, -- Sahira Screams
+
+            -- The Root of the Problem
+            [44213] = true, -- Scrib Corruption
+            [32214] = true, -- KR-MN Lurching
+            [32864] = true, -- Q4673 Kwama Gnaw FX
+            [32188] = true, -- SW Stun
+            [32116] = true, -- Rejuvination
+            [44214] = true, -- Scrib Cleanse
+            [31948] = true, -- Burrow
+            [31947] = true, -- Burrow
+
+            -- A Pinch of Sugar
+            [32495] = true, -- Q4692 Talking
+            [32335] = true, -- Q4692 Thunderthrow
+            [32330] = true, -- Q4962 Thunderburrow
+            [32359] = true, -- Thunderstrikes
+            [37044] = true, -- Q4692 ACT
+            [37045] = true, -- Q4692 VIS
+            [37046] = true, -- Q4692 ACT
+            [37047] = true, -- Q4692 VIS
+            [37039] = true, -- Q4692 ACT
+            [37041] = true, -- Q4692 VIS
+            [37035] = true, -- Q4692 ACT
+            [37036] = true, -- Q4692 VIS
+            [37042] = true, -- Q4692 ACT
+            [37043] = true, -- Q4692 VIS
+
+            -- The Family Business
+            [32877] = true, -- 4693 Skooma Bag Exploade
+
+            -- Moon-Sugar Medicament
+            --[43047] = true, -- RobS Crouch Fiddle 3 Sec
+
+            --------------------
+            -- Auridon
+            --------------------
+
+            -- Ensuring Security
+            [22692] = true, -- Q4255 VH Soldier Spawn
+
+            -- A Hostile Situation
+            [22579] = true, -- Q4255 PC Black Out and Port
+            [51296] = true, -- Test Waypoint Tele
+            [25347] = true, -- Q4256 Eminwe's Arrow
+            [22699] = true, -- Q4256 Event Jump
+
+            -- To Tanzelwil
+            [50783] = true, -- Q4211 - Needs Finish Quest
+
+            -- In the Name of the Queen
+            [22274] = true, -- Ancestral Binding
+            [21533] = true, -- CON_EVilBeamSummonOnSelf
+
+            -- Rites of the Queen
+            [48921] = true, -- Ancestral Spirit
+            [48922] = true, -- Boss
+            [48924] = true, -- Ancestral Spirit
+            [48926] = true, -- Boss
+            [48927] = true, -- Ancestral Spirit
+            [48929] = true, -- Boss
+
+            -- The Unveiling
+            [28714] = true, -- Q4294 Fade to Black 5sec
+            [50762] = true, -- Q4294 Fade to Black 5sec
+            [22718] = true, -- Knock Out
+            [50763] = true, -- Q4294 Fade to Black 5sec
+            [36540] = true, -- 2 Second Timer
+            [61575] = true, -- CON_Destealth
+            [10665] = true, -- Generic Permanent Hidden Abili
+
+            -- Lifting the Veil
+            [29684] = true, -- Q4330 Altmer Disguise (Raz)
+            [23392] = true, -- Altmer Glamour
+            [23540] = true, -- Teleport
+            [23527] = true, -- Drinking...
+            
+            -- The Veil Falls
+            [24807] = true, -- Hidden Buff 30sec
+            [24254] = true, -- Door Beam 1
+            [46068] = true, -- Door Beam 2
+            [46069] = true, -- Door Beam 3
+
+            -- To Dawnbreak
+            [24855] = true, -- Q4355 Lan + Sin Theater
+
+            -- Through the Ashes
+            [16864] = true, -- CON_SmokeBurst
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------

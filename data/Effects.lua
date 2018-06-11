@@ -371,6 +371,14 @@ E.QuestItemHideLoot = {
     -- Main Story Quests
     [2785] = true, -- Ayleid Tome (The Dangerous Past)
 
+    -- Aldmeri Dominion
+    [4264] = true, -- Ealcil's Lodestone (The Tempest Unleashed)
+    [5434] = true, -- Deployment Plans (A Hostile Situation)
+    [5435] = true, -- Poisoned Meat (A Hostile Situation)
+    [3437] = true, -- Kindlepitch (Putting the Pieces Together)
+    [3555] = true, -- Earring of the Altmer Nobility (Wearing the Veil)
+    [3556] = true, -- Earring of the Altmer Nobility (The Veil Falls)
+
 }
 
 -- List of Quest Items to ignore when Removed (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
@@ -378,6 +386,14 @@ E.QuestItemHideRemove = {
 
     -- Main Story Quests
     [2760] = true, -- Ayleid Tome (The Dangerous Past)
+
+    -- Aldmeri Dominion
+    [4423] = true, -- Ealcil's Lodestone (The Tempest Unleashed)
+    [3429] = true, -- Deployment Plans (Ensuring Security)
+    [3430] = true, -- Poisoned Meat (Ensuring Security)
+    [3437] = true, -- Kindlepitch (Putting the Pieces Together)
+    [3503] = true, -- Earring of the Altmer Nobility (Lifting the Veil)
+    [3555] = true, -- Earring of the Altmer Nobility (Wearing the Veil)
 
 }
 
@@ -413,6 +429,9 @@ E.CastChannelOverride = {
     -- Quest
     [39367] = true, -- Altar Use (Shadow of Sancre Tor)
     [36421] = true, -- Drink with Lyris (Council of the Five Companions)
+    [35192] = true, -- Q4620 Use Lodestone (Cast Adrift)
+    [34567] = true, -- Q4621 PC Storm Drain (The Tempest Unleashed)
+    [34701] = true, -- Q4621 Destory Horn (The Tempest Unleashed)
 
 }
 
@@ -432,6 +451,7 @@ E.CastDurationFix = {
     -- Quest
     [39367] = 10000, -- Altar Use (Shadow of Sancre Tor)
     [36421] = 3000, -- Drink with Lyris (Council of the Five Companions)
+    [34701] = 1950, -- Q4621 Destory Horn (The Tempest Unleashed)
 
 }
 
@@ -536,6 +556,9 @@ E.IsCast = {
     [37827] = true, -- Stendarr's Protection (Shadow of Sancre Tor)
     [36421] = true, -- Drink with Lyris (Council of the Five Companions)
     [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
+    [35192] = true, -- Q4620 Use Lodestone (Cast Adrift)
+    [34567] = true, -- Q4621 PC Storm Drain (The Tempest Unleashed)
+    [34701] = true, -- Q4621 Destory Horn (The Tempest Unleashed)
 
 }
 
@@ -1853,6 +1876,7 @@ E.TooltipOverride = {
 
     [21263] = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP), -- Ayleid Health Bonus
     [100862] = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP), -- Fortified Ayleid Health Bonus
+    [48899] = GetString(SI_LUIE_SKILL_FIRELIGHT_TP), -- Firelight
 
 }
 
@@ -2882,6 +2906,7 @@ E.EffectOverride = {
 
     -- Misc World + Theater
     [822] = { hide = true }, -- Ward
+    [48899] = { icon = 'esoui/art/icons/achievement_newlifefestival_007.dds' }, -- Firelight
 
     ----------------------------------------------------------------
     -- DRAGONKNIGHT PASSIVES ---------------------------------------
@@ -5916,6 +5941,9 @@ E.EffectOverride = {
     [21941] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Spike Trap Snare (Spike Trap)
     [21942] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Trap Sprung (Spike Trap)
 
+    [20483] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds' }, -- Falling Rocks (Cave-In)
+    [29602] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds' }, -- Falling Rocks (Cave-In)
+
     -- Lava & Slaughterfish
     [44029] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Slaughterfish Attack (Slaughterfish)
     [44034] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds' }, -- Slaughterfish Attack (Slaughterfish)
@@ -6129,6 +6157,72 @@ E.EffectOverride = {
     [39560] = { hide = true }, -- Netch
     [39391] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_summon_pig.dds', name = A.Skill_Ungulate_Ordnance }, -- Summon Pig
     [39393] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_summon_pig.dds' }, -- Ungulate Ordnance
+    
+    --------------------------------------
+    -- QUEST / ZONES - ALDMERI DOMINION --
+    --------------------------------------
+    
+    --------------------
+    -- Khenarthi's Roost
+    --------------------
+
+    -- Cast Adrift
+    [35192] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_lodestone.dds', name = A.Skill_Drain_Energy }, -- Q4620 Use Lodestone
+
+    -- Tears of the Two Moons
+    [32766] = { hide = true }, -- 4625 Uldor's Possession
+    [31649] = { hide = true }, -- 4625 Ward 1
+    [31665] = { hide = true }, -- 4625 Ward 2
+    [31652] = { hide = true }, -- 4625 Gathwen Destory Ward
+    [33231] = { hide = true }, -- 4625 Ward Destory
+    [33136] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_blessing.dds' }, -- Blessing (Gathwen)
+    [35185] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_blessing.dds', name = A.Skill_Blessing, hide = true }, -- 4625 Heal (Gathwen)
+    [32063] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_zap.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Feedback
+    [35195] = { hide = true }, -- No Heal Check
+    [31709] = { hide = true }, -- 4625 Gathwen Beam Ritual
+    [33278] = { hide = true }, -- Increased Speed
+    [32060] = { hide = true }, -- Shocked
+    [33285] = { hide = true }, -- 4625 Uldor Banish
+    [32705] = { hide = true }, -- 4625 No Yell
+    [31969] = { hide = true }, -- Wrath (Uldor)
+    [31970] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_pulse.dds', hide = true }, -- Wrath (Uldor)
+    [33449] = { hide = true }, -- 4625 Stop Bolts
+    [33403] = { hide = true }, -- Wrath (Uldor)
+    [33404] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_pulse.dds', hide = true }, -- Wrath (Uldor)
+
+    -- The Perils of Diplomacy
+    [32264] = { hide = true }, -- Unconscious
+
+    -- The Tempest Unleashed
+    [34567] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_lodestone.dds', name = A.Skill_Drain_Energy }, -- Q4621 PC Storm Drain
+    [34701] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_lodestone.dds', name = A.Skill_Disruption }, -- Q4621 Destory Horn
+    [34747] = { hide = true }, -- a
+
+    -- Dark Knowledge
+    [35265] = { hide = true }, -- Q4667 Stun
+    [35268] = { hide = true }, -- Sahira Screams
+
+    -- The Root of the Problem
+    [31948] = { hide = true }, -- Burrow
+    [31947] = { hide = true }, -- Burrow
+
+    -- A Pinch of Sugar
+    [32335] = { hide = true }, -- Q4692 Thunderthrow
+
+    --------------------
+    -- Auridon
+    --------------------
+
+    -- Rites of the Queen
+    [48921] = { hide = true }, -- Ancestral Spirit
+    [48924] = { hide = true }, -- Ancestral Spirit
+    [48927] = { hide = true }, -- Ancestral Spirit
+    
+    -- The Unveiling
+    [22718] = { hide = true }, -- Knock Out
+
+    -- Lifting the Veil
+    [23392] = { icon = 'LuiExtended/media/icons/disguises/ability_disguise_altmer_glamour.dds', isDisguise = true }, -- Altmer Glamour
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -6475,8 +6569,8 @@ E.FakeExternalDebuffs = {
 
     -- Traps
     [27479] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = A.Trap_Falling_Rocks, duration = 2000 }, -- Falling Rocks (Falling Rocks)
+    [29602] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = A.Trap_Falling_Rocks, duration = 2000 }, -- Falling Rocks (Cave-In)
 
-    [29602] = {icon = 'esoui/art/icons/ability_debuff_stun.dds', name = A.Trap_Falling_Rocks, duration = 2000}, -- Falling Rocks (Tripwire)
     [66153] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Trial of Flame', duration = 1500}, -- Trial of Flame (Wrothgar - Old Orsinium)
     [32246] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Steam Trap', duration = 2000}, -- Laser Snare (Steam Trap)
 

@@ -773,6 +773,11 @@ A.Skill_Polymorph_Skeleton          = GetString(SI_LUIE_SKILL_POLYMORPH_SKELETON
 A.Skill_Drain_Vitality              = 8787
 A.Skill_Ungulate_Ordnance           = 39393
 
+-- ALDMERI DOMINION
+A.Skill_Drain_Energy                = GetString(SI_LUIE_SKILL_DRAIN_ENERGY)
+A.Skill_Blessing                    = 33029
+A.Skill_Disruption                  = 31321
+
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------
 -- ---------------------------------------------------
