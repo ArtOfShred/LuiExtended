@@ -2156,7 +2156,8 @@ local strings = {
     SI_LUIE_SKILL_RASHOMTAS_ESSENCE =                    "Rashomta's Essence",
     SI_LUIE_SKILL_POLYMORPH_SKELETON =                   "Polymorph: Skeleton",
     SI_LUIE_SKILL_DRAIN_ENERGY =                         "Drain Energy",
-    SI_LUIE_SKILL_FIRELIGHT_TP =                         "Increase Max Stamina by |cFFFFFF5|r% for |cFFFFFF30|r minutes."
+    SI_LUIE_SKILL_FIRELIGHT_TP =                         "Increase Max Stamina by |cFFFFFF5|r% for |cFFFFFF30|r minutes.",
+    SI_LUIE_SKILL_BARRIER_REBUKE =                       "Barrier Rebuke",
 }
 
 -- TODO: Switch to StringId's

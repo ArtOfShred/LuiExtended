@@ -378,6 +378,7 @@ E.QuestItemHideLoot = {
     [3437] = true, -- Kindlepitch (Putting the Pieces Together)
     [3555] = true, -- Earring of the Altmer Nobility (Wearing the Veil)
     [3556] = true, -- Earring of the Altmer Nobility (The Veil Falls)
+    [3357] = true, -- Runed Talisman (Breaking the Barrier)
 
 }
 
@@ -394,6 +395,7 @@ E.QuestItemHideRemove = {
     [3437] = true, -- Kindlepitch (Putting the Pieces Together)
     [3503] = true, -- Earring of the Altmer Nobility (Lifting the Veil)
     [3555] = true, -- Earring of the Altmer Nobility (Wearing the Veil)
+    [3356] = true, -- Runed Talisman (Breaking the Barrier)
 
 }
 
@@ -1426,6 +1428,9 @@ E.AddNameAura = {
     -- Mages Guild
     ['Uncle Leo'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Haskill'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
+
+    -- Aldmeri Dominion
+    ['High Kinlady Estre'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
 
     -- Dolmen Bosses
     ['Dread Xivkyn Cauterizer'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
@@ -2517,7 +2522,7 @@ E.EffectOverride = {
     [106776] = { forcedContainer = 'short' }, -- Major Evasion (Adept Rider's)
     [106790] = { forcedContainer = 'short' }, -- Major Evasion (Adept Rider's)
     [106783] = { name = A.Set_Dust_Cloud }, -- Dustcloud Damage (Adept Rider's)
-    [106804] = { icon = 'esoui/art/icons/achievement_thievesguild_006.dds', name = A.Set_Nocturnals_Favor }, -- Nocturnal's Heal (Nocturnal's Favor)
+    [106804] = { icon = 'esoui/art/icons/achievement_su_mainquest_6.dds', name = A.Set_Nocturnals_Favor }, -- Nocturnal's Heal (Nocturnal's Favor)
     [106798] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sloads_semblance.dds' }, -- Sload's Semblance (Sload's)
 
     -- Overland Sets (Light)
@@ -4592,6 +4597,7 @@ E.EffectOverride = {
     [31848] = { hide = true }, -- Summon the Dead (Necromancer)
     [88582] = { hide = true }, -- Summon the Dead (Necromancer)
     [88583] = { hide = true }, -- Summon the Dead (Necromancer)
+    [88599] = { hide = true }, -- Summon the Dead (Necromancer)
     [88586] = { hide = true }, -- Summon the Dead (Necromancer)
     [88589] = { hide = true }, -- Summon the Dead (Necromancer)
     [88600] = { hide = true }, -- Summon the Dead (Necromancer)
@@ -4601,6 +4607,7 @@ E.EffectOverride = {
     [88613] = { hide = true }, -- Summon the Dead (Necromancer)
     [88621] = { hide = true }, -- Summon the Dead (Necromancer)
     [88622] = { hide = true }, -- Summon the Dead (Necromancer)
+    [88616] = { hide = true }, -- Summon the Dead (Necromancer)
     [88626] = { hide = true }, -- Summon the Dead (Necromancer)
     [88627] = { hide = true }, -- Summon the Dead (Necromancer)
     [88601] = { hide = true }, -- Summon the Dead (Necromancer)
@@ -5944,6 +5951,10 @@ E.EffectOverride = {
     [20483] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds' }, -- Falling Rocks (Cave-In)
     [29602] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds' }, -- Falling Rocks (Cave-In)
 
+    [17198] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', unbreakable = 1 }, -- Fire Trap (Player)
+    [31606] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds' }, -- Fire Trap (Player)
+    [17314] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds' }, -- Fire Trap (Player)
+
     -- Lava & Slaughterfish
     [44029] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Slaughterfish Attack (Slaughterfish)
     [44034] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds' }, -- Slaughterfish Attack (Slaughterfish)
@@ -6157,11 +6168,11 @@ E.EffectOverride = {
     [39560] = { hide = true }, -- Netch
     [39391] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_summon_pig.dds', name = A.Skill_Ungulate_Ordnance }, -- Summon Pig
     [39393] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_summon_pig.dds' }, -- Ungulate Ordnance
-    
+
     --------------------------------------
     -- QUEST / ZONES - ALDMERI DOMINION --
     --------------------------------------
-    
+
     --------------------
     -- Khenarthi's Roost
     --------------------
@@ -6217,12 +6228,25 @@ E.EffectOverride = {
     [48921] = { hide = true }, -- Ancestral Spirit
     [48924] = { hide = true }, -- Ancestral Spirit
     [48927] = { hide = true }, -- Ancestral Spirit
-    
+
     -- The Unveiling
     [22718] = { hide = true }, -- Knock Out
 
     -- Lifting the Veil
     [23392] = { icon = 'LuiExtended/media/icons/disguises/ability_disguise_altmer_glamour.dds', isDisguise = true }, -- Altmer Glamour
+
+    -- Through the Ashes
+    [48646] = { hide = true }, -- Magefire
+    [2379] = { hide = true }, -- On Fire
+
+    -- Breaking the Barrier
+    [21876] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, unbreakable = 1 }, -- Q4260 West Barrier Teleport
+    [21878] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, unbreakable = 1 }, -- Q4260 East Barrier Teleport
+
+    -- Sever All Ties
+    [22395] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, unbreakable = 1 }, -- Q4261 ROD Barrier Teleport
+    [49224] = { hide = true }, -- Q4868 Aulus Knockback
+    [44136] = { hide = true }, -- RobS Stun Perm
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -6571,6 +6595,8 @@ E.FakeExternalDebuffs = {
     [27479] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = A.Trap_Falling_Rocks, duration = 2000 }, -- Falling Rocks (Falling Rocks)
     [29602] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = A.Trap_Falling_Rocks, duration = 2000 }, -- Falling Rocks (Cave-In)
 
+    [17198] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', duration = 3500, ignoreFade = true }, -- Fire Trap (Player)
+
     [66153] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Trial of Flame', duration = 1500}, -- Trial of Flame (Wrothgar - Old Orsinium)
     [32246] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Steam Trap', duration = 2000}, -- Laser Snare (Steam Trap)
 
@@ -6646,6 +6672,11 @@ E.FakeExternalDebuffs = {
     -- Mages Guild
     [31502] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), duration = 4000 }, -- MGQ2 Asakala Sahdina Barrier
     [31503] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), duration = 4000 }, -- MGQ2 Asakala Rashomta Barrier
+
+    -- Aldmeri Dominion
+    [21876] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, duration = 4500 }, -- Q4260 West Barrier Teleport (Breaking the Barrier)
+    [21878] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, duration = 4500 }, -- Q4260 East Barrier Teleport (Breaking the Barrier)
+    [22395] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, duration = 4000 }, -- Q4261 ROD Barrier Teleport (Sever All Ties)
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------

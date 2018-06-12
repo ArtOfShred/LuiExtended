@@ -777,6 +777,7 @@ A.Skill_Ungulate_Ordnance           = 39393
 A.Skill_Drain_Energy                = GetString(SI_LUIE_SKILL_DRAIN_ENERGY)
 A.Skill_Blessing                    = 33029
 A.Skill_Disruption                  = 31321
+A.Skill_Barrier_Rebuke              = GetString(SI_LUIE_SKILL_BARRIER_REBUKE)
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

@@ -2047,6 +2047,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if E.FakeExternalBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
             return
         end
+        if E.FakeExternalBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+            return
+        end
         g_effectsList.player1[ abilityId ] = nil
         iconName = E.FakeExternalBuffs[abilityId].icon
         effectName = E.FakeExternalBuffs[abilityId].name
@@ -2073,7 +2076,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if E.FakeExternalDebuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
             return
         end
-
+        if E.FakeExternalDebuffs[abilityId].ignoreFade == true and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+            return
+        end
         if internalStack then
             if g_effectsList.player2[abilityId] then
                 -- If the aura faded then remove a stack, otherwise add a stack
@@ -2119,6 +2124,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
     if E.FakePlayerBuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
          -- Bail out if we ignore begin events
         if E.FakePlayerBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+            return
+        end
+        if E.FakePlayerBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         if g_effectsList.player1[ abilityId ] and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
@@ -2171,6 +2179,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
     if E.FakeStagger[abilityId] then
         -- Bail out if we ignore begin events
         if E.FakeStagger[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+            return
+        end
+        if E.FakeStagger[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         iconName = E.FakeStagger[abilityId].icon
@@ -2243,6 +2254,9 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         if E.FakePlayerExternalBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
             return
         end
+        if E.FakePlayerExternalBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+            return
+        end
         g_effectsList.reticleover1[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then return end
         if GetUnitReaction("reticleover") == UNIT_REACTION_HOSTILE then return end
@@ -2276,6 +2290,9 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
     if E.FakePlayerDebuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         -- Bail out if we ignore begin events
         if E.FakePlayerDebuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+            return
+        end
+        if E.FakePlayerDebuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         g_effectsList.reticleover2[ abilityId ] = nil
@@ -2324,6 +2341,9 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
     if E.FakeStagger[abilityId] then
         -- Bail out if we ignore begin events
         if E.FakeStagger[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+            return
+        end
+        if E.FakeStagger[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
         iconName = E.FakeStagger[abilityId].icon

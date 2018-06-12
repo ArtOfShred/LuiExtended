@@ -6685,6 +6685,10 @@ debugAuras = {
             --[20483] = true, -- Falling Rocks
             --[29602] = true, -- Falling Rocks
 
+            [17198] = true, -- Fire Trap (Player)
+            [31606] = true, -- Fire Trap (Player)
+            [17314] = true, -- Fire Trap (Player)
+
             [44029] = true, -- Slaughterfish Attack (Slaughterfish)
             [66863] = true, -- Slaughterfish Bonus (Slaughterfish)
             [44034] = true, -- Slaughterfish Attack (Slaughterfish)
@@ -6973,6 +6977,7 @@ debugAuras = {
             [31848] = true, -- Summon the Dead -- Necromancer
             [88582] = true, -- Summon the Dead -- Necromancer
             [88583] = true, -- Summon the Dead -- Necromancer
+            [88599] = true, -- Summon the Dead -- Necromancer
             --[88586] = true, -- Summon the Dead -- Necromancer
             [88589] = true, -- Summon the Dead -- Necromancer
             --[88600] = true, -- Summon the Dead -- Necromancer
@@ -6982,6 +6987,7 @@ debugAuras = {
             [88613] = true, -- Summon the Dead -- Necromancer
             [88621] = true, -- Summon the Dead -- Necromancer
             [88622] = true, -- Summon the Dead -- Necromancer
+            [88616] = true, -- Summon the Dead -- Necromancer
             [88626] = true, -- Summon the Dead -- Necromancer
             [88627] = true, -- Summon the Dead -- Necromancer
             --[88601] = true, -- Summon the Dead -- Necromancer
@@ -7764,6 +7770,7 @@ debugAuras = {
             [15157] = true, -- Flare -- Flame Atronach
             [12254] = true, -- Flare -- Flame Atronach
             [26324] = true, -- Lava Geyser -- Flame Atronach
+            [26326] = true, -- Lava Geyser -- Flame Atronach
             [26325] = true, -- Lava Geyser -- Flame Atronach
             [4891] = true, -- Radiance -- Flame Atronach
             [4491] = true, -- Radiance -- Flame Atronach
@@ -9372,25 +9379,25 @@ debugAuras = {
             [48094] = true, -- Q4971 Shalidor Prep
             [48098] = true, -- Q4971 Shaldior Read
             [48077] = true, -- Q4971 Shali Cast (Saved)
-            
+
             --------------------------------------
             -- QUEST / ZONES - ALDMERI DOMINION --
             --------------------------------------
-            
+
             --------------------
             -- Khenarthi's Roost
             --------------------
-            
+
             -- World Events
             [32460] = true, -- KR ES Walking Speed Rand
             [25311] = true, -- AM Posture Reset
             [32085] = true, -- Q4680 Water Stone Beam
             [32765] = true, -- KR-TM Priestess Cast
-            
+
             -- Storm on the Horizon
             [35411] = true, -- Q4680 - CV Wait
             [51219] = true, -- Q4680 End Quest CV
-            
+
             -- Cast Adrift
             [31429] = true, -- Q4620 01 Healed Edhelas
             [31430] = true, -- Q4620 01 Healed Nistel
@@ -9544,7 +9551,7 @@ debugAuras = {
             [23392] = true, -- Altmer Glamour
             [23540] = true, -- Teleport
             [23527] = true, -- Drinking...
-            
+
             -- The Veil Falls
             [24807] = true, -- Hidden Buff 30sec
             [24254] = true, -- Door Beam 1
@@ -9556,6 +9563,48 @@ debugAuras = {
 
             -- Through the Ashes
             [16864] = true, -- CON_SmokeBurst
+            [24864] = true, -- Q4355 PC
+            [25333] = true, -- Q4355 PC Completed Fasaran
+            [24863] = true, -- Q4355 PC Persauded Elannie
+            [25332] = true, -- Q4355 PC Completed Elannie
+            [48646] = true, -- Magefire
+            --[2379] = true, -- On Fire
+
+            -- Breaking the Barrier
+            [21876] = true, -- Q4260 West Barrier Teleport
+            [21878] = true, -- Q4260 East Barrier Teleport
+
+            -- Sever All Ties
+            [22395] = true, -- Q4261 ROD Barrier Teleport
+            [22423] = true, -- Q4261 Counter 1
+            [22424] = true, -- Q4261 Counter 2
+            [22425] = true, -- Q4261 Counter 3
+            [22426] = true, -- Q4261 Counter 4
+            [22349] = true, -- ROD CV Puzzle Flame 1
+            [22350] = true, -- ROD CV Puzzle Flame 2
+            [22351] = true, -- ROD CV Puzzle Flame 3
+            [22355] = true, -- ROD CV Puzzle Flame 4
+            [22400] = true, -- Q4261 ROD PC Finished Puzzle
+            [21770] = true, -- Q4261 ROD PC Returns 1
+            [21771] = true, -- Q4261 ROD PC Returns 2
+            [10991] = true, -- Generic Magic Explosion Small
+            [21772] = true, -- Q4261 ROD PC Returns 3
+
+            [24790] = true, -- Q4261 Daedric Estre
+            [44120] = true, -- Q4261 Damage Shield 3 Sec
+            [44141] = true, -- RobS Quick Stun
+            [44138] = true, -- Q4261 Estre Knockback
+            [44140] = true, -- Q4686 Aulus Shield
+            [44153] = true, -- Q4261 Healer Blocks
+            [44157] = true, -- Q4261 Healer Blocks Stun
+            [22074] = true, -- Q4261 ROD Event Atro Spawn In
+
+            [49224] = true, -- Q4868 Aulus Knockback
+            [49223] = true, -- Q4868 Aulus Knockback
+            [44136] = true, -- RobS Stun Perm
+            [44105] = true, -- Q4261 Damage Shield
+            [22030] = true, -- Q4261 ROD Event Atro on Estre
+            [38279] = true, -- Generic Permasurrender
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------
