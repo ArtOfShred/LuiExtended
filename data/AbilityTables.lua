@@ -602,6 +602,8 @@ A.Skill_Backstabber                 = 13739
 A.Skill_Oil_Drenched                = 10650
 A.Skill_Ignite                      = 14070
 A.Skill_Shield_Rush                 = GetString(SI_LUIE_SKILL_SHIELD_RUSH)
+A.Skill_Shock_Aura                  = 17867
+A.Skill_Improved                    = GetString(SI_LUIE_SKILL_IMPROVED)
 A.Skill_Knockback                   = 77905
 A.Skill_Weakness                    = 8705
 A.Skill_Staff_Strike                = 2901
@@ -674,6 +676,7 @@ A.Skill_Leeching_Bite               = GetString(SI_LUIE_SKILL_LEECHING_BITE)
 A.Skill_Fetcherfly_Colony           = GetString(SI_LUIE_SKILL_FETCHERFLY_COLONY)
 
 -- Daedra
+A.Skill_Summon_Daedric_Arch         = 65404
 A.Skill_Empower_Atronach_Flame      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME)
 A.Skill_Empower_Atronach_Frost      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST)
 A.Skill_Empower_Atronach_Storm      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM)
@@ -727,6 +730,7 @@ A.Skill_Overcharge                  = 27333
 
 A.Trap_Cold_Fire_Trap               = GetString(SI_LUIE_SKILL_COLD_FIRE_TRAP)
 A.Trap_Falling_Rocks                = 20886
+A.Trap_Fire_Trap                    = 17198
 A.Trap_Spike_Trap                   = 21940
 A.Trap_Lava                         = 5139
 
@@ -778,6 +782,13 @@ A.Skill_Drain_Energy                = GetString(SI_LUIE_SKILL_DRAIN_ENERGY)
 A.Skill_Blessing                    = 33029
 A.Skill_Disruption                  = 31321
 A.Skill_Barrier_Rebuke              = GetString(SI_LUIE_SKILL_BARRIER_REBUKE)
+A.Skill_Dispel                      = 8490
+A.Skill_Teleport_Scroll             = GetString(SI_LUIE_SKILL_TELEPORT_SCROLL)
+A.Skill_Purify                      = 22260
+A.Skill_Bind_Hands                  = GetString(SI_LUIE_SKILL_BIND_HANDS)
+A.Skill_Bind_Bear                   = GetString(SI_LUIE_SKILL_BIND_BEAR)
+A.Skill_Ferocious_Charge            = 83033
+A.Skill_Daedric_Explosion           = 83017
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

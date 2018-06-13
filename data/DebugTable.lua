@@ -2186,7 +2186,11 @@ debugAuras = {
             [26391] = true, -- Quick Strike
             [48483] = true, -- W20-CMP-PutOutFire
             [48484] = true, -- City - Putting out Fire 1
+            [49287] = true, -- RDS Hunter BowFire
 
+            --[49106] = true, -- V11860 Mage Duel
+            [49147] = true, -- RDS Chest
+            [48318] = true, -- CON_Bamf In
             [21811] = true, -- RDS M'aiq Tracker
             [48899] = true, -- Firelight
             [48920] = true, -- V11849 Firelight Tracker
@@ -6681,13 +6685,16 @@ debugAuras = {
             [21941] = true, -- Spike Trap Snare (Spike Trap)
             [21942] = true, -- Trap Sprung (Spike Trap)
 
-            --[20482] = true, -- Mistwatch Collapse
-            --[20483] = true, -- Falling Rocks
-            --[29602] = true, -- Falling Rocks
+            [20482] = true, -- Mistwatch Collapse
+            [20483] = true, -- Falling Rocks
+            [29602] = true, -- Falling Rocks
 
             [17198] = true, -- Fire Trap (Player)
             [31606] = true, -- Fire Trap (Player)
             [17314] = true, -- Fire Trap (Player)
+
+            [26530] = true, -- Bear Trap (Bear Trap)
+            [26531] = true, -- Bear Trap (Bear Trap)
 
             [44029] = true, -- Slaughterfish Attack (Slaughterfish)
             [66863] = true, -- Slaughterfish Bonus (Slaughterfish)
@@ -6880,6 +6887,7 @@ debugAuras = {
             [88227] = true, -- Call Ally -- Pet Ranger
             [88252] = true, -- Call Ally -- Pet Ranger
             [88251] = true, -- Call Ally -- Pet Ranger
+            [88248] = true, -- Call Ally -- Pet Ranger
             [89425] = true, -- Call Ally -- Pet Ranger
             [88281] = true, -- Call Ally -- Pet Ranger
             [88278] = true, -- Call Ally -- Pet Ranger
@@ -6978,6 +6986,7 @@ debugAuras = {
             [88582] = true, -- Summon the Dead -- Necromancer
             [88583] = true, -- Summon the Dead -- Necromancer
             [88599] = true, -- Summon the Dead -- Necromancer
+            [88592] = true, -- Summon the Dead -- Necromancer
             --[88586] = true, -- Summon the Dead -- Necromancer
             [88589] = true, -- Summon the Dead -- Necromancer
             --[88600] = true, -- Summon the Dead -- Necromancer
@@ -6986,6 +6995,7 @@ debugAuras = {
             --[88611] = true, -- Summon the Dead -- Necromancer
             [88613] = true, -- Summon the Dead -- Necromancer
             [88621] = true, -- Summon the Dead -- Necromancer
+            [88615] = true, -- Summon the Dead -- Necromancer
             [88622] = true, -- Summon the Dead -- Necromancer
             [88616] = true, -- Summon the Dead -- Necromancer
             [88626] = true, -- Summon the Dead -- Necromancer
@@ -7002,6 +7012,7 @@ debugAuras = {
             [88561] = true, -- Summon the Dead -- Necromancer
             [13397] = true, -- Empower Undead -- Necromancer
             [88560] = true, -- Summon the Dead -- Necromancer
+            [89182] = true, -- Summon the Dead -- Necromancer
             [89230] = true, -- Summon the Dead -- Necromancer
 
             [7590] = true, -- Entropic Bolt -- Bonelord
@@ -7690,6 +7701,16 @@ debugAuras = {
             -------------------------------------
 
             [51256] = true, -- Siphon (Shared Daedra)
+            --[31115] = true, -- Summon Dark Anchor (Daedric Synergy)
+            [59129] = true, -- Generic Status Immune (Daedric Synergy)
+            [94481] = true, -- Summon Dark Anchor (Daedric Synergy)
+            [31129] = true, -- Anchor Summon Minions (Daedric Synergy)
+            [31367] = true, -- Daedric Synergy (Daedric Synergy)
+            [31130] = true, -- Daedric Synergy Anchor Minion (Daedric Synergy)
+            [58897] = true, -- Daedric Synergy (Daedric Synergy)
+            [68453] = true, -- Explosive Charge (Daedric Synergy)
+            [68449] = true, -- Explosive Charge (Daedric Synergy)
+            [68452] = true, -- Explosive Charge (Daedric Synergy)
 
             [48092] = true, -- Swipe -- Air Atronach
             [48093] = true, -- Swipe -- Air Atronach
@@ -8225,12 +8246,15 @@ debugAuras = {
 
             [4731] = true, -- Bite -- Giant Spider
             [44086] = true, -- Fire Runes -- Giant Spider
+            [5789] = true, -- Poisonous Burst -- Giant Spider
             [5790] = true, -- Poisonous Burst -- Giant Spider
             [5685] = true, -- Corrosive Bite -- Giant Spider
             [8087] = true, -- Poison Spray -- Giant Spider
             [8088] = true, -- Poison Spray -- Giant Spider
             [4730] = true, -- Spit -- Giant Spider
             [4737] = true, -- Encase -- Giant Spider
+            [47319] = true, -- Encase -- Giant Spider
+            [47320] = true, -- Encase -- Giant Spider
             [47318] = true, -- Encase -- Giant Spider
             [13382] = true, -- Devour -- Giant Spider
             [20541] = true, -- Devour -- Giant Spider
@@ -9513,6 +9537,67 @@ debugAuras = {
             -- Auridon
             --------------------
 
+            -- World Boss - Seaside Scarp Camp
+            [10854] = true, -- Can Spread Out -- Quenyas
+            [45789] = true, -- RobS Bone Colossus Rise -- Oskana
+            [84048] = true, -- Defiled Ground -- Quenyas
+            [84047] = true, -- Defiled Ground -- Quenyas
+            [84045] = true, -- Seal of Defilement -- Quenyas
+            [84044] = true, -- Seal of Defilement -- Quenyas
+            [84050] = true, -- Defiled Ground -- Quenyas
+            [83782] = true, -- Staff Strike -- Quenyas
+            [83783] = true, -- Bash -- Quenyas
+            [83776] = true, -- Dark Summons -- Quenyas
+            [84283] = true, -- Coursing Bones (Oskana)
+            [84285] = true, -- Coursing Bones (Oskana)
+            [84284] = true, -- Coursing Bones (Oskana)
+            [84286] = true, -- Wake the Dead -- Oskana
+            [84287] = true, -- Voice to Wake the Dead -- Oskana
+            [84288] = true, -- Voice to Wake the Dead -- Oskana
+            [84289] = true, -- Voice to Wake the Dead -- Oskana
+
+            -- World Boss - Wreck of the Raptor
+            [32858] = true, -- CON_Ghost Ship Auridon FX
+
+            -- World Boss - Heretic's Summons
+            [82934] = true, -- Shrieking Summons -- Snapjaw
+            [83013] = true, -- Shrieking Summons -- Snapjaw
+            [82935] = true, -- Summon Brood -- Snapjaw
+            [82937] = true, -- Summon Brood - Snapjaw
+            [83151] = true, -- Savage Claw -- Snapjaw
+            [83150] = true, -- Tail Whip -- Snapjaw
+            [83009] = true, -- Rending Leap -- Snapjaw
+            [83059] = true, -- Rending Leap -- Snapjaw
+            [83011] = true, -- Rending Leap -- Snapjaw
+            [87989] = true, -- Rending Leap -- Snapjaw
+            [83012] = true, -- Devour -- Snapjaw
+            [85649] = true, -- Devour -- Snapjaw
+            [83169] = true, -- Devour -- Snapjaw
+            [83049] = true, -- Charge -- Clannfear
+            [83038] = true, -- Charge -- Clannfear
+            [83033] = true, -- Ferocious Charge -- Clannfear
+            [83039] = true, -- Ferocious Charge -- Clannfear
+            [83040] = true, -- Focused Charge -- Clannfear
+            [83035] = true, -- Charge -- Clannfear
+            [83034] = true, -- Charge -- Clannfear
+            [83041] = true, -- Charge Charge -- Clannfear
+            [83042] = true, -- Ferocious Charge -- Clannfear
+            [83046] = true, -- Charge -- Clannfear
+            [83016] = true, -- Necrotic Explosion -- Clannfear
+            [83017] = true, -- Daedric Explosion -- Clannfear
+            [83018] = true, -- Daedric Explosion -- Clannfear
+
+            -- Delve - Ondil
+            [22687] = true, -- Gen Ritual Necromantic
+
+            -- Delve - Entila's Folly
+            [52402] = true, -- Webdrop
+
+            -- Public Dungeon - Toothmaul Gully
+            [56731] = true, -- Bloodroot Link
+            --[58937] = true, -- Generic Assassinate an NPC
+            --[58939] = true, -- Generic Assassinate an NPC
+
             -- Ensuring Security
             [22692] = true, -- Q4255 VH Soldier Spawn
 
@@ -9551,6 +9636,7 @@ debugAuras = {
             [23392] = true, -- Altmer Glamour
             [23540] = true, -- Teleport
             [23527] = true, -- Drinking...
+            [23543] = true, -- Teleport
 
             -- The Veil Falls
             [24807] = true, -- Hidden Buff 30sec
@@ -9568,7 +9654,7 @@ debugAuras = {
             [24863] = true, -- Q4355 PC Persauded Elannie
             [25332] = true, -- Q4355 PC Completed Elannie
             [48646] = true, -- Magefire
-            --[2379] = true, -- On Fire
+            [2379] = true, -- On Fire
 
             -- Breaking the Barrier
             [21876] = true, -- Q4260 West Barrier Teleport
@@ -9589,7 +9675,6 @@ debugAuras = {
             [21771] = true, -- Q4261 ROD PC Returns 2
             [10991] = true, -- Generic Magic Explosion Small
             [21772] = true, -- Q4261 ROD PC Returns 3
-
             [24790] = true, -- Q4261 Daedric Estre
             [44120] = true, -- Q4261 Damage Shield 3 Sec
             [44141] = true, -- RobS Quick Stun
@@ -9598,13 +9683,67 @@ debugAuras = {
             [44153] = true, -- Q4261 Healer Blocks
             [44157] = true, -- Q4261 Healer Blocks Stun
             [22074] = true, -- Q4261 ROD Event Atro Spawn In
-
             [49224] = true, -- Q4868 Aulus Knockback
             [49223] = true, -- Q4868 Aulus Knockback
             [44136] = true, -- RobS Stun Perm
             [44105] = true, -- Q4261 Damage Shield
             [22030] = true, -- Q4261 ROD Event Atro on Estre
             [38279] = true, -- Generic Permasurrender
+            [44171] = true, -- Q4261 Estre Dead
+            [44169] = true, -- Q4261
+            [21831] = true, -- Q4261 CV Finale Friendlies
+            [21778] = true, -- ROD PC Returns 4
+
+            -- The Great Tree
+            [46762] = true, -- Drinking Contest
+
+            -- Silsailen Rescue
+            [25353] = true, -- Hidden Buff 7sec
+
+            -- Real Marines
+            --[44289] = true, -- Generic UFX Crouch Fiddle
+            [22378] = true, -- Equiping...
+
+            -- Teldur's End
+            [3961] = true, -- Generic 8m Fake Buff
+
+            -- The Serpent's Beacon
+            [64303] = true, -- Drinking Mead
+            [21364] = true, -- Casting...
+            [21409] = true, -- Reading...
+
+            -- Corruption Stones
+            [22889] = true, -- Purifying
+            [22912] = true, -- Q4223 Purification
+            [22930] = true, -- Q4223 Purification
+            [22929] = true, -- Q4223 Purification
+
+            -- The First Patient
+            [85079] = true, -- Knockback
+            [22448] = true, -- Q4266 Tie up Hendil
+
+            -- Depths of Madness
+            [22077] = true, -- Teleport
+            [22470] = true, -- Q4272 Sanessalmo Taunt Buff ST
+            [22079] = true, -- Teleport
+            [22158] = true, -- Collecting Magic with Jar...
+            [22141] = true, -- Collecting...
+            [22160] = true, -- Collecting...
+            [22187] = true, -- Throwing Spore Potion
+            [22081] = true, -- Portal to Despair
+            [21985] = true, -- Teleport
+            [22271] = true, -- Teleport Scroll AB
+
+            -- Silent Village
+            [22277] = true, -- Magic Explosion
+            [22533] = true, -- Weakened
+            [21968] = true, -- Binding Bear...
+            [46993] = true, -- Destruction Beam
+            [45784] = true, -- Generic Spawn Fire Atronach AM
+
+            -- A Village Awakened
+            [23329] = true, -- Binding
+            [23332] = true, -- Binding
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------

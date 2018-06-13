@@ -40,8 +40,8 @@ LUIE.AlertTable = {
     --------------------------------------------------
 
     -- Synergy
-    [12439] = { avoid = true, priority = 3, eventdetect = true, refire = 1000 }, -- Burning Arrow (Synergy)
-    [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1000 }, -- Ignite (Synergy)
+    [12439] = { avoid = true, priority = 3, eventdetect = true, refire = 2500 }, -- Burning Arrow (Synergy)
+    [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 2500 }, -- Ignite (Synergy)
 
     -- Abilities
     [29378] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Uppercut (Ravager)
@@ -97,7 +97,7 @@ LUIE.AlertTable = {
 
     [35387] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Defiled Grave (Bonelord)
 
-    [57534] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Focused Healing (Healer)
+    [57534] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true, refire = 1000 }, -- Focused Healing (Healer)
     [44328] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2, auradetect = true, notDirect = true}, -- Rite of Passage (Healer)
 
     [29520] = { destroy = true, auradetect = true, priority = 2 }, -- Aura of Protection (Shaman)
@@ -282,6 +282,9 @@ LUIE.AlertTable = {
     [87030] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Focused Swarm (Fetcherfly Hive Golem)
 
     -- DAEDRA
+    [31115] = { destroy = true, refire = 1000, priority = 2, auradetect = true }, -- Summon Dark Anchor (Daedric Synergy)
+    [68449] = { avoid = true, refire = 1000, priority = 3 }, -- Explosive Charge (Daedric Synergy)
+
     [48121] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Heavy Attack (Air Atronach)
     [48137] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Tornado (Air Atronach)
     [51281] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 1500 }, -- Flame Tornado (Air Atronach)
@@ -547,6 +550,22 @@ LUIE.AlertTable = {
     [39527] = { interrupt = true, avoid = true, block = true, priority = 2, refire = 1500 }, -- Skeleton Trap (Haskill)
     [35533] = { interrupt = true, priority = 2, refire = 1500 }, -- Polymorph (Haskill)
     [39391] = { interrupt = true, priority = 2, eventdetect = true, refire = 1500 }, -- Summon Pig (Haskill)
+
+    --------------------------------------------------
+    -- AD QUESTS -------------------------------------
+    --------------------------------------------------
+
+    --- World Boss - Seaside Scarp Camp
+    [84283] = { block = true, dodge = true, priority = 1, eventdetect = true }, -- Coursing Bones (Oskana)
+
+    -- World Boss - Heretic's Summons
+    [83150] = { block = true, dodge = true, priority = 1 }, -- Tail Whip (Snapjaw)
+    [83009] = { block = true, dodge = true, priority = 1 }, -- Rending Leap (Snapjaw)
+    [83040] = { block = true, dodge = true, bs = true, priority = 1, eventdetect = true, skipcheck = true }, -- Focused Charge (Clannfear - Snapjaw)
+    [83016] = { block = true, priority = 1, refire = 1000, eventdetect = true, skipcheck = true }, -- Necrotic Explosion (Clannfear - Snapjaw)
+
+    -- Sever All Ties
+    [44138] = { interrupt = true, avoid = true, priority = 2, eventdetect = true }, -- Q4261 Estre Knockback (High Kinlady Estre)
 
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------

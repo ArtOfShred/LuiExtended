@@ -153,8 +153,10 @@ function CTL:OnCombatIn(...)
     local S = LUIE.CombatText.SV
     local combatType, togglesInOut = C.combatType.INCOMING, S.toggles.incoming
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
 
     if E.EffectOverrideByName[abilityId] then
+        sourceName = zo_strformat("<<t:1>>",sourceName)
         if E.EffectOverrideByName[abilityId][sourceName] then
             if E.EffectOverrideByName[abilityId][sourceName].icon then
                 formattedIcon = zo_iconFormat(E.EffectOverrideByName[abilityId][sourceName].icon, 32, 32)
@@ -218,7 +220,6 @@ function CTL:OnCombatIn(...)
     if (isWarned.combat) then --Only show CC/Debuff events when in combat
         --Cleanse
         if (isDot and S.toggles.showAlertCleanse and not isWarned.cleanse and not C.isPlayer[sourceType]) and not E.EffectCleanseOverride[abilityId] then
-            local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
             self:TriggerEvent(C.eventType.ALERT, C.alertType.CLEANSE, abilityName, formattedIcon)
             isWarned.cleanse = true
             callLater(function() isWarned.cleanse = false end, 5000) --5 second buffer
@@ -273,7 +274,6 @@ function CTL:OnCombatIn(...)
     -- NEW ALERTS
     if S.toggles.showAlertMitigation and AlertT[abilityId] then
         if sourceName ~= nil and sourceName ~= "" and (resultType == ACTION_RESULT_BEGIN or resultType == ACTION_RESULT_BEGIN_CHANNEL or AlertT[abilityId].skipcheck) and not refireDelay[abilityId] then
-            local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
 
             -- Return if any results occur which we absolutely don't want to display alerts for
             if resultType == ACTION_RESULT_EFFECT_FADED
@@ -387,6 +387,7 @@ function CTL:OnCombatOut(...)
     local S = LUIE.CombatText.SV
     local combatType, togglesInOut = C.combatType.OUTGOING, S.toggles.outgoing
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
 
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//RESULTS//--
@@ -441,7 +442,6 @@ function CTL:OnCombatOut(...)
     if (isWarned.combat) then --Only show CC/Debuff events when in combat
         --Cleanse
         if (isDot and S.toggles.showAlertCleanse and not isWarned.cleanse and not C.isPlayer[sourceType]) and not E.EffectCleanseOverride[abilityId] then
-            local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
             self:TriggerEvent(C.eventType.ALERT, C.alertType.CLEANSE, abilityName, formattedIcon)
             isWarned.cleanse = true
             callLater(function() isWarned.cleanse = false end, 5000) --5 second buffer
@@ -501,11 +501,12 @@ function CTL:OnCombatAlert(...)
     local S = LUIE.CombatText.SV
     local combatType, togglesInOut = C.combatType.INCOMING, S.toggles.incoming
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
+    sourceName = zo_strformat("<<t:1>>", sourceName)
 
     -- NEW ALERTS
     if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and not refireDelay[abilityId] then
         if (resultType == ACTION_RESULT_BEGIN or resultType == ACTION_RESULT_BEGIN_CHANNEL or AlertT[abilityId].skipcheck) and not refireDelay[abilityId] then
-            local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
 
             if resultType == ACTION_RESULT_EFFECT_FADED then return end
 

@@ -2158,6 +2158,10 @@ local strings = {
     SI_LUIE_SKILL_DRAIN_ENERGY =                         "Drain Energy",
     SI_LUIE_SKILL_FIRELIGHT_TP =                         "Increase Max Stamina by |cFFFFFF5|r% for |cFFFFFF30|r minutes.",
     SI_LUIE_SKILL_BARRIER_REBUKE =                       "Barrier Rebuke",
+    SI_LUIE_SKILL_TELEPORT_SCROLL =                      "Teleport Scroll",
+    SI_LUIE_SKILL_BIND_HANDS =                           "Bind Hands",
+    SI_LUIE_SKILL_BIND_BEAR =                            "Bind Bear",
+    SI_LUIE_SKILL_IMPROVED =                             "Improved",
 }
 
 -- TODO: Switch to StringId's
