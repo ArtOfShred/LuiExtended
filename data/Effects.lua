@@ -385,6 +385,7 @@ E.QuestItemHideLoot = {
     [3771] = true, -- Teleport Scroll (Depths of Madness)
     [3416] = true, -- Teleport Scroll (Depths of Madness)
     [3400] = true, -- Binding Gem (Silent Village)
+    [3292] = true, -- Sirinque's Crystal (An Act of Kindness)
 
 }
 
@@ -408,6 +409,7 @@ E.QuestItemHideRemove = {
     [3770] = true, -- Teleport Scroll (Depths of Madness)
     [3771] = true, -- Teleport Scroll (Depths of Madness)
     [3395] = true, -- Binding Gem (Silent Village)
+    [3291] = true, -- Micro Etched Crystal (An Act of Kindness)
 
 }
 
@@ -449,6 +451,8 @@ E.CastChannelOverride = {
     [21364] = true, -- Casting... (The Serpent's Beacon)
     [22889] = true, -- Purifying... (Corruption Stones)
     [21968] = true, -- Binding Bear... (Silent Village)
+    [22931] = true, -- Freeing Spirit... (An Act of Kindness)
+    [23187] = true, -- Q4236 PC Untie Palith (The Veiled Choice)
 
 }
 
@@ -471,6 +475,7 @@ E.CastDurationFix = {
     [34701] = 1950, -- Q4621 Destory Horn (The Tempest Unleashed)
     [22448] = 3000, -- Q4266 Tie up Hendil (The First Patient)
     [22271] = 3000, -- Teleport Scroll AB (Depths of Madness)
+    [23187] = 2000, -- Q4236 PC Untie Palith (The Veiled Choice)
 
 }
 
@@ -584,6 +589,9 @@ E.IsCast = {
     [22448] = true, -- Q4266 Tie up Hendil (The First Patient)
     [22271] = true, -- Teleport Scroll AB (Depths of Madness)
     [21968] = true, -- Binding Bear... (Silent Village)
+    [21040] = true, -- Q4220 Spirit Layer Ability (The Mallari-Mora)
+    [22931] = true, -- Freeing Spirit... (An Act of Kindness)
+    [23187] = true, -- Q4236 PC Untie Palith (The Veiled Choice)
 
 }
 
@@ -1448,6 +1456,8 @@ E.AddNameAura = {
     ['Quenyas'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Seaside Scarp Camp)
     ['Captain Blanchete'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Wreck of the Raptor)
     ['Snapjaw'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Heretic's Summons)
+    ['The Nestmother'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Nestmothers Den)
+    ['Anarume'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Heritance Proving Ground)
 
     -- Public Dungeon
     ['Nitch'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Toothmaul Gully)
@@ -1701,13 +1711,19 @@ E.EffectSourceOverride = {
     [89282] = {source = 'Exploding Spider'}, -- Spider Explosion {A Web of Trouble}
 }
 
--- If one of these id's is applied then we set the buffSlot for ON_EFFECT_CHANGED to be a single name identifier to prevent more than one aura from appearing. Only works with unlimited duration effects.
-E.EffectMerge = {
+-- If one of these id's is applied then we set the buffSlot for ON_EFFECT_CHANGED to be a single name identifier to prevent more than one aura from appearing. Only works with unlimited duration or equal duration effects.
+E.EffectMergeName = {
 
     [A.Skill_Overcharge] = "MERGED_EFFECT_OVERCHARGE",
 	[A.Skill_Minor_Slayer] = "MERGED_EFFECT_SLAYER",
 	[A.Skill_Minor_Aegis] = "MERGED_EFFECT_AEGIS",
     [A.Skill_Boulder_Toss] = "MERGED_EFFECT_BOULDER_TOSS",
+
+}
+
+E.EffectMergeId = {
+
+    [21314] = "MERGED_EFFECT_SPIKE_TRAP_QUEST", -- Trap Sprung! (Auridon - An Act of Kindness)
 
 }
 
@@ -4655,6 +4671,8 @@ E.EffectOverride = {
     [88613] = { hide = true }, -- Summon the Dead (Necromancer)
     [88621] = { hide = true }, -- Summon the Dead (Necromancer)
     [88615] = { hide = true }, -- Summon the Dead (Necromancer)
+    [88610] = { hide = true }, -- Summon the Dead (Necromancer)
+    [88614] = { hide = true }, -- Summon the Dead (Necromancer)
     [88622] = { hide = true }, -- Summon the Dead (Necromancer)
     [88616] = { hide = true }, -- Summon the Dead (Necromancer)
     [88626] = { hide = true }, -- Summon the Dead (Necromancer)
@@ -4696,6 +4714,7 @@ E.EffectOverride = {
     [68868] = { hide = true }, -- War Horn Battlecry (Faction NPC)
     [68869] = { hide = true }, -- War Horn Battlecry (Faction NPC)
     [43644] = { hide = true, icon = 'esoui/art/icons/ability_ava_001.dds', name = A.Skill_Caltrops }, -- Barrier [monster synergy]  (Faction NPCs)
+    [43645] = { hide = true, icon = 'esoui/art/icons/ability_ava_001.dds', name = A.Skill_Caltrops }, -- Barrier [monster synergy]  (Faction NPCs)
     [38119] = { icon = 'esoui/art/icons/ability_ava_001.dds', duration = 0 }, -- Caltrops  (Faction NPCs)
     [38125] = { icon = 'esoui/art/icons/ability_ava_001.dds' }, -- Caltrops  (Faction NPCs)
     [65033] = { icon = 'esoui/art/icons/ability_warrior_014.dds', hide = true }, -- Retaliation (Winterborn Warrior)
@@ -6247,7 +6266,7 @@ E.EffectOverride = {
     [33231] = { hide = true }, -- 4625 Ward Destory
     [33136] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_blessing.dds' }, -- Blessing (Gathwen)
     [35185] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_blessing.dds', name = A.Skill_Blessing, hide = true }, -- 4625 Heal (Gathwen)
-    [32063] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_zap.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Feedback
+    [32063] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Feedback
     [35195] = { hide = true }, -- No Heal Check
     [31709] = { hide = true }, -- 4625 Gathwen Beam Ritual
     [33278] = { hide = true }, -- Increased Speed
@@ -6314,6 +6333,9 @@ E.EffectOverride = {
     [83017] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_aoe.dds', hide = true }, -- Daedric Explosion
     [83018] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_aoe.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Daedric Explosion
 
+    -- World Boss - Heritance Proving Ground
+    [47259] = { hide = true }, -- Frostarrows
+
     -- Rites of the Queen
     [48921] = { hide = true }, -- Ancestral Spirit
     [48924] = { hide = true }, -- Ancestral Spirit
@@ -6359,6 +6381,24 @@ E.EffectOverride = {
     -- Silent Village
     [21968] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_binding_gem.dds', name = A.Skill_Bind_Bear }, -- Binding Bear...
     [45784] = { hide = true }, -- Generic Spawn Fire Atronach AM
+
+    -- The Mallari-Mora
+    [28771] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_atherial_shift.dds', name = A.Skill_Aetherial_Shift, unbreakable = 1 }, -- Q4220 Thirster Stun (The Mallari-Mora)
+    [21040] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_atherial_shift.dds', name = A.Skill_Aetherial_Shift }, -- Q4220 Spirit Layer Ability
+    [21403] = { icon = 'esoui/art/icons/ability_mage_054.dds' }, -- Spiritual Cloak
+
+    -- An Act of Kindness
+    [22931] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_micro_etched_crystal.dds', name = A.Skill_Free_Spirit }, -- Freeing Spirit...
+    [21315] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds' }, -- Spike Trap
+    [21313] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, stack = 0 }, -- Crippled!
+    [21314] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Trap Sprung!
+
+    -- The Veiled Choice
+    [23187] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_bind_hands.dds', name = A.Skill_Unbind }, -- Q4236 PC Untie Palith
+
+    -- Preventative Measure
+    [23606] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback_crystal.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Crystal, A.Skill_Backfire), unbreakable = 1 }, -- Q4326 Crystal Backfire
+    [24535] = { hide = true }, -- Disrupting...
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -6682,6 +6722,9 @@ E.EffectOverride = {
 -- Fake Buffs applied onto the player by NPCs or Events (Friendly)
 E.FakeExternalBuffs = {
     [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds', name = A.Skill_Focused_Healing, duration = 4000 }, -- Focused Healing (The Prophet)
+
+    -- Quests
+    [21403] = { icon = 'esoui/art/icons/ability_mage_054.dds', name = A.Skill_Spiritual_Cloak, duration = 60000, ignoreFade = true }, -- Spiritual Cloak (The Mallari-Mora)
 }
 
  -- Fake Debuffs applied onto the player by NPCs or Events (Hostile)
@@ -6789,6 +6832,8 @@ E.FakeExternalDebuffs = {
     [21876] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, duration = 4500 }, -- Q4260 West Barrier Teleport (Breaking the Barrier)
     [21878] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, duration = 4500 }, -- Q4260 East Barrier Teleport (Breaking the Barrier)
     [22395] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, duration = 4000 }, -- Q4261 ROD Barrier Teleport (Sever All Ties)
+    [28771] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_atherial_shift.dds', name = A.Skill_Aetherial_Shift, duration = 2000 }, -- Q4220 Thirster Stun (The Mallari-Mora)
+    [23606] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback_crystal.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Crystal, A.Skill_Backfire), duration = 2000 }, -- Q4326 Crystal Backfire (Preventative Measure)
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------

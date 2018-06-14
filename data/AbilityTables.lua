@@ -789,6 +789,12 @@ A.Skill_Bind_Hands                  = GetString(SI_LUIE_SKILL_BIND_HANDS)
 A.Skill_Bind_Bear                   = GetString(SI_LUIE_SKILL_BIND_BEAR)
 A.Skill_Ferocious_Charge            = 83033
 A.Skill_Daedric_Explosion           = 83017
+A.Skill_Spiritual_Cloak             = 21403
+A.Skill_Aetherial_Shift             = GetString(SI_LUIE_SKILL_AETHERIAL_SHIFT)
+A.Skill_Free_Spirit                 = GetString(SI_LUIE_SKILL_FREE_SPIRIT)
+A.Skill_Unbind                      = GetString(SI_LUIE_SKILL_UNBIND)
+A.Skill_Crystal                     = 67121
+A.Skill_Backfire                    = GetString(SI_LUIE_SKILL_BACKFIRE)
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

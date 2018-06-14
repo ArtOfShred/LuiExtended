@@ -6996,12 +6996,14 @@ debugAuras = {
             [88613] = true, -- Summon the Dead -- Necromancer
             [88621] = true, -- Summon the Dead -- Necromancer
             [88615] = true, -- Summon the Dead -- Necromancer
+            --[88610] = true, -- Summon the Dead -- Necromancer
+            [88614] = true, -- Summon the Dead -- Necromancer
             [88622] = true, -- Summon the Dead -- Necromancer
             [88616] = true, -- Summon the Dead -- Necromancer
             [88626] = true, -- Summon the Dead -- Necromancer
             [88627] = true, -- Summon the Dead -- Necromancer
             --[88601] = true, -- Summon the Dead -- Necromancer
-            --[88593] = true, -- Summon the Dead -- Necromancer
+            [88593] = true, -- Summon the Dead -- Necromancer
             --[88617] = true, -- Summon the Dead -- Necromancer
             --[88596] = true, -- Summon the Dead -- Necromancer
             [88597] = true, -- Summon the Dead -- Necromancer
@@ -7060,6 +7062,7 @@ debugAuras = {
             [68868] = true, -- War Horn Battlecry -- Faction NPC
             [68869] = true, -- War Horn Battlecry -- Faction NPC
             [43644] = true, -- Barrier [monster synergy] -- Faction NPC
+            [43645] = true, -- Barrier [monster synergy] -- Faction NPC
             [41793] = true, -- Anti-Cavalry Caltrops -- Faction NPC
             [38118] = true, -- Caltrops -- Faction NPC
             [38119] = true, -- Caltrops -- Faction NPC
@@ -9560,6 +9563,8 @@ debugAuras = {
             [32858] = true, -- CON_Ghost Ship Auridon FX
 
             -- World Boss - Heretic's Summons
+            [82984] = true, -- Rending Leap
+            [82986] = true, -- Rending Leap
             [82934] = true, -- Shrieking Summons -- Snapjaw
             [83013] = true, -- Shrieking Summons -- Snapjaw
             [82935] = true, -- Summon Brood -- Snapjaw
@@ -9587,11 +9592,22 @@ debugAuras = {
             [83017] = true, -- Daedric Explosion -- Clannfear
             [83018] = true, -- Daedric Explosion -- Clannfear
 
+            -- World Boss - Heritance Proving Ground
+            [26248] = true, -- Quck Strike
+            [47259] = true, -- Frostarrows
+
             -- Delve - Ondil
             [22687] = true, -- Gen Ritual Necromantic
 
             -- Delve - Entila's Folly
             [52402] = true, -- Webdrop
+
+            -- Delve -- Bewan
+            [7701] = true, -- EB Generic 5 Min Counter 02
+            [7702] = true, -- EB Generic 5 Min Counter 03
+
+            -- Delve -- Mehrune's Spite
+            [47218] = true, -- AR-DC5-Boss Mati
 
             -- Public Dungeon - Toothmaul Gully
             [56731] = true, -- Bloodroot Link
@@ -9744,6 +9760,85 @@ debugAuras = {
             -- A Village Awakened
             [23329] = true, -- Binding
             [23332] = true, -- Binding
+
+            -- Take Me Home
+            [3055] = true, -- CV Delay 2 Seconds
+            [28264] = true, -- Summon Familiar
+
+            -- The Racer
+            [25642] = true, -- Q4409 Frog Run Speed
+            [48489] = true, -- Q4409-Timer,Short(15s)
+
+            -- Spirited Away
+            [25651] = true, -- Distortion Spawn
+            [25678] = true, -- Transformation
+
+            -- The Mallari-Mora
+            [21333] = true, -- Forging...
+            [21643] = true, -- Q4220 CV Undercroft Barrier
+            [24789] = true, -- Q4220 Soul Thirster Ground Pro
+            [28771] = true, -- Q4220 Thirster Stun
+            [21108] = true, -- Transferring...
+            [21393] = true, -- Q4220 PC Chooses to Rescue
+            [21040] = true, -- Q4220 Spirit Layer Ability
+            [21112] = true, -- Q4220 PC Forced to L0
+            [21656] = true, -- Q4220 PC Spawned Ghost 1/4
+            [21657] = true, -- Q4220 PC Spawned Ghost 2/4
+            [21658] = true, -- Q4220 PC Spawned Ghost 3/4
+            [45191] = true, -- Q4220 Asst. Soul PFX
+            [21106] = true, -- Q4220 Assistant Death
+            [21391] = true, -- Q4220 CV Elenya Rescued
+            [21398] = true, -- Q4220 PC to L0 Elenya Rescued
+            [21390] = true, -- Q4220 CV Bolion Rescued
+            [21397] = true, -- Q4220 PC to L0 Bolion Rescued
+            [21392] = true, -- Q4220 CV Eryon Rescued
+            [21399] = true, -- Q4220 PC to L0 Eryon Rescued
+            [21389] = true, -- Q4220 CV Jiluza Rescued
+            [21395] = true, -- Q4220 PC to L0 Jiluza Rescued
+            [21403] = true, -- Spiritual Cloak
+            [21672] = true, -- Q4220 Uri Projection FX
+
+            -- An Act of Kindness
+            [21674] = true, -- Q4221 Spirit Surrender Flag
+            [22931] = true, -- Freeing Spirit...
+            [21309] = true, -- Q4221 Quaronaldil Despawn
+            [21331] = true, -- Q4221 PC Used Persuade
+            [21282] = true, -- Q4221 CV Thief
+            [21283] = true, -- Q4221 CV Warrior
+            [21284] = true, -- Q4221 CV Serpent
+            [21285] = true, -- Q4221 CV Mage
+            [21286] = true, -- Q4221 CV Tower
+            [21287] = true, -- Q4221 CV Lady
+            [21288] = true, -- Q4221 CV Atronach
+            [21289] = true, -- Q4221 CV Lord
+            [21290] = true, -- Q4221 CV Steed
+            [21291] = true, -- Q4221 CV Shadow
+            [21292] = true, -- Q4221 CV Lover
+            [21293] = true, -- Q4221 CV Ritual
+            [21294] = true, -- Q4221 CV Apprentice
+            [21315] = true, -- Spike Trap
+            [21313] = true, -- Crippled!
+            [21314] = true, -- Trap Sprung!
+            [23656] = true, -- Q4221 Sirinque FX
+            [23657] = true, -- Q4221 Sirinque FX Shake
+            [23797] = true, -- Q4221 Sirinque Knockdown
+
+            -- The Veiled Choice
+            [23187] = true, -- Q4236 PC Untie Palith
+            [30707] = true, -- Disguising...
+            [23553] = true, -- Disguised
+
+            -- Preventative Measure
+            [23608] = true, -- Q4327 PC Used
+            [23609] = true, -- Perparing Crystal...
+            [22202] = true, -- CTY-Beam,Electric
+            [23606] = true, -- Q4326 Crystal Backfire
+            [23538] = true, -- Q4327 Sabotage
+            [61446] = true, -- CON_ShockExplosion
+            [24546] = true, -- Disrupting...
+            [24535] = true, -- Disrupting...
+            [24563] = true, -- Q4327 Delves Stop Casting
+            [24548] = true, -- Recalling...
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------

@@ -2164,6 +2164,10 @@ local strings = {
     SI_LUIE_SKILL_BIND_HANDS =                           "Bind Hands",
     SI_LUIE_SKILL_BIND_BEAR =                            "Bind Bear",
     SI_LUIE_SKILL_IMPROVED =                             "Improved",
+    SI_LUIE_SKILL_AETHERIAL_SHIFT =                      "Aetherial Shift",
+    SI_LUIE_SKILL_FREE_SPIRIT =                          "Free Spirit",
+    SI_LUIE_SKILL_UNBIND =                               "Unbind",
+    SI_LUIE_SKILL_BACKFIRE =                             "Backfire",
 }
 
 -- TODO: Switch to StringId's
