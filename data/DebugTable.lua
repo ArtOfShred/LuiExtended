@@ -2188,7 +2188,7 @@ debugAuras = {
             [48484] = true, -- City - Putting out Fire 1
             [49287] = true, -- RDS Hunter BowFire
 
-            --[49106] = true, -- V11860 Mage Duel
+            [49106] = true, -- V11860 Mage Duel
             [49147] = true, -- RDS Chest
             [48318] = true, -- CON_Bamf In
             [21811] = true, -- RDS M'aiq Tracker
@@ -6515,6 +6515,11 @@ debugAuras = {
             [17500] = true, -- Generic Self PermaStun Kneel
             [57111] = true, -- Interactable Stand
 
+            [4246] = true, -- PC Duel Flag
+            [4457] = true, -- Duel On Self
+            [4197] = true, -- Recovering
+            [4198] = true, -- PC Duel Heal
+
             --[48296] = true, -- Flare
             --[48298] = true, -- Heat Wave
             --[48299] = true, -- Heat Wave
@@ -7063,6 +7068,7 @@ debugAuras = {
             [68869] = true, -- War Horn Battlecry -- Faction NPC
             [43644] = true, -- Barrier [monster synergy] -- Faction NPC
             [43645] = true, -- Barrier [monster synergy] -- Faction NPC
+            [43646] = true, -- Barrier [monster synergy] -- Faction NPC
             [41793] = true, -- Anti-Cavalry Caltrops -- Faction NPC
             [38118] = true, -- Caltrops -- Faction NPC
             [38119] = true, -- Caltrops -- Faction NPC
@@ -9774,6 +9780,8 @@ debugAuras = {
             [25678] = true, -- Transformation
 
             -- The Mallari-Mora
+            --[47077] = true, -- Knockback Stagger
+            --[47082] = true, -- Fire Backlash
             [21333] = true, -- Forging...
             [21643] = true, -- Q4220 CV Undercroft Barrier
             [24789] = true, -- Q4220 Soul Thirster Ground Pro
@@ -9839,6 +9847,53 @@ debugAuras = {
             [24535] = true, -- Disrupting...
             [24563] = true, -- Q4327 Delves Stop Casting
             [24548] = true, -- Recalling...
+
+            -- Harsh Lesson
+            [24660] = true, -- Defeated
+            [30749] = true, -- Q4329 White Flag
+            [25430] = true, -- Smoke Bomb
+
+            -- Blessings of the Eight
+            [47149] = true, -- Magefire
+            [23159] = true, -- Divine Speed
+            [22728] = true, -- Water Beam
+            [23217] = true, -- Fire Beam
+            [24647] = true, -- Hidden Buff 1min
+            [22745] = true, -- Q4300 Brazier A1
+            [22746] = true, -- Q4300 Brazier A2
+            [22747] = true, -- Q4300 Brazier A3
+            [22748] = true, -- Q4300 Brazier A4
+            [22749] = true, -- Q4300 Brazier B1
+            [22750] = true, -- Q4300 Brazier B2
+            [22751] = true, -- Q4300 Brazier B3
+            [22752] = true, -- Q4300 Brazier B4
+
+            -- Relic Rescue
+            [11199] = true, -- Self Combat Delay
+
+            -- Eye of the Ancients
+            [24265] = true, -- Q4338 Buff Delay
+            [24233] = true, -- Q4338 Source Fire Beam
+            [24089] = true, -- Q4338 Fire Beam East
+            [23805] = true, -- Q4338 Fire Beam West
+
+            -- The Wayward Dagger
+            [23344] = true, -- Q4295 General Say Buff
+            [23357] = true, -- Q4295 Barracks Say Buff
+            [23367] = true, -- Q4295 Bernadine Say Buff
+
+            -- Eye Spy
+            [11340] = true, -- CV Delay 30 Seconds
+            [23454] = true, -- Disguising...
+            [25600] = true, -- CV Delay 9 Seconds
+
+            -- Rightful Inheritance
+            [24826] = true, -- Spiteful Essence
+            [24827] = true, -- Magic Explosion
+            [30761] = true, -- CON_Skeleton Rise Dirt
+            [30741] = true, -- Sorondil Helmet
+            [49152] = true, -- Q4361 Werewolf Transform
+            [49153] = true, -- Q4361 Werewolf Transform
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------

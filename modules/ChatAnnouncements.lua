@@ -3313,7 +3313,12 @@ function CA.ResolveQuestItemChange()
                             logPrefix = CA.SV.ContextMessages.CurrencyMessageReceive
                         end
 
+                        -- Some quest items we want to limit the maximum possible quantity displayed when looted (for wierd item swapping) so replace the actual quantity with this value.
+                        if E.QuestItemMaxQuantityAdd[itemId] then
+                            countChange = E.QuestItemMaxQuantityAdd[itemId]
+                        end
                         local quantity = countChange > 1 and (" |cFFFFFFx" .. countChange .. "|r") or ""
+
 
                         formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
                         formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)

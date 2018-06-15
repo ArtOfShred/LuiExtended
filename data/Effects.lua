@@ -410,6 +410,14 @@ E.QuestItemHideRemove = {
     [3771] = true, -- Teleport Scroll (Depths of Madness)
     [3395] = true, -- Binding Gem (Silent Village)
     [3291] = true, -- Micro Etched Crystal (An Act of Kindness)
+    [3524] = true, -- Welyknd Stone (Eye of the Ancients)
+    [3525] = true, -- Welyknd Stone (Eye of the Ancients)
+
+}
+
+E.QuestItemMaxQuantityAdd = {
+
+    [3518] = 1, -- Welkynd Stone (Eye of the Ancients)
 
 }
 
@@ -441,6 +449,7 @@ E.CastChannelOverride = {
 
     [32346] = true, -- Skyshard Collect
     [14031] = true, -- Mundus Use
+    [4197] = true, -- Recovering (NPC Duel)
 
     -- Quest
     [39367] = true, -- Altar Use (Shadow of Sancre Tor)
@@ -462,6 +471,7 @@ E.CastDurationFix = {
     [14644] = 4000, -- Revive (Death Dialogue)
     [32346] = 5800, -- Skyshard Collect
     [14031] = 5000, -- Mundus Use
+    [4197] = 4000, -- Recovering (NPC Duel)
 
     [33175] = 6300, -- Feed (Vampire)
     [40350] = 5300, -- Feed (Vampire - Bite Player)
@@ -575,6 +585,9 @@ E.IsCast = {
     [61487] = true, -- Magicka Detonation (Assault)
     [61491] = true, -- Inevitable Detonation (Assault)
 
+    -- NPC Basic
+    [4197] = true, -- Recovering (NPC Duel)
+
     -- Quest
     [39367] = true, -- Altar Use (Shadow of Sancre Tor)
     [37827] = true, -- Stendarr's Protection (Shadow of Sancre Tor)
@@ -595,9 +608,10 @@ E.IsCast = {
 
 }
 
--- Fix for a few goofy events that channel onto the player
+-- Fix for a few goofy events that channel onto the player (or just where we need it).
 E.CastOverride = {
 
+    [4197] = true, -- Recovering (NPC Duel)
     [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
 
 }
@@ -1946,6 +1960,7 @@ E.TooltipOverride = {
     [21263] = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP), -- Ayleid Health Bonus
     [100862] = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP), -- Fortified Ayleid Health Bonus
     [48899] = GetString(SI_LUIE_SKILL_FIRELIGHT_TP), -- Firelight
+    [23159] = GetString(SI_LUIE_SKILL_DIVINE_SPEED_TP), -- Divine Speed (Auridon - Blessings of the Eight)
 
 }
 
@@ -4499,9 +4514,11 @@ E.EffectOverride = {
     -- Friendly NPC Abilities
     [48330] = { hide = true }, -- Aspect of Terror (Abnur Tharn)
     [48331] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_aspect_of_terror_p.dds' }, -- Aspect of Terror (Abnur Tharn)
-
     [42905] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds' }, -- Recover
     [42937] = { hide = true }, -- TargetPriorityException
+
+    [4197] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds', name = A.Skill_Recover, unbreakable = 1 }, -- Recovering
+    [4198] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds', name = A.Skill_Recover }, -- PC Duel Heal
 
     -- Human NPC Abilities
     [18386] = { hide = true }, -- Run Away! (Used by various creatures)
@@ -4715,6 +4732,7 @@ E.EffectOverride = {
     [68869] = { hide = true }, -- War Horn Battlecry (Faction NPC)
     [43644] = { hide = true, icon = 'esoui/art/icons/ability_ava_001.dds', name = A.Skill_Caltrops }, -- Barrier [monster synergy]  (Faction NPCs)
     [43645] = { hide = true, icon = 'esoui/art/icons/ability_ava_001.dds', name = A.Skill_Caltrops }, -- Barrier [monster synergy]  (Faction NPCs)
+    [43646] = { hide = true, icon = 'esoui/art/icons/ability_ava_001.dds', name = A.Skill_Caltrops }, -- Barrier [monster synergy]  (Faction NPCs)
     [38119] = { icon = 'esoui/art/icons/ability_ava_001.dds', duration = 0 }, -- Caltrops  (Faction NPCs)
     [38125] = { icon = 'esoui/art/icons/ability_ava_001.dds' }, -- Caltrops  (Faction NPCs)
     [65033] = { icon = 'esoui/art/icons/ability_warrior_014.dds', hide = true }, -- Retaliation (Winterborn Warrior)
@@ -6399,6 +6417,15 @@ E.EffectOverride = {
     -- Preventative Measure
     [23606] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback_crystal.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Crystal, A.Skill_Backfire), unbreakable = 1 }, -- Q4326 Crystal Backfire
     [24535] = { hide = true }, -- Disrupting...
+
+    -- Blessings of the Eight
+    [47149] = { hide = true }, -- Magefire
+    [23159] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_divine_speed.dds' }, -- Divine Speed
+    [22728] = { hide = true }, -- Water Beam
+    [23217] = { hide = true }, -- Fire Beam
+
+    -- Rightful Inheritance
+    [24826] = { hide = true }, -- Spiteful Essence
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------

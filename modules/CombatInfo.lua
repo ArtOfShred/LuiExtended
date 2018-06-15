@@ -798,7 +798,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                 local currentTime = GetGameTimeMilliseconds()
                 if CI.SV.ShowTriggered then
                     -- Play sound twice so its a little louder.
-                    if CI.SV.ProcEnableSound then
+                    if CI.SV.ProcEnableSound and unitTag == "player" then
                         PlaySound(g_procSound)
                         PlaySound(g_procSound)
                     end

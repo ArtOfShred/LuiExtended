@@ -2166,6 +2166,7 @@ local strings = {
     SI_LUIE_SKILL_FREE_SPIRIT =                          "Free Spirit",
     SI_LUIE_SKILL_UNBIND =                               "Unbind",
     SI_LUIE_SKILL_BACKFIRE =                             "Backfire",
+    SI_LUIE_SKILL_DIVINE_SPEED_TP =                      "A divine blessing boosts your movement speed for |cFFFFFF2|r minutes.",
 }
 
 -- TODO: Switch to StringId's
