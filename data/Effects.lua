@@ -1592,6 +1592,18 @@ E.EffectOverrideByName = {
                     ['Hleran Noble'] =              { icon = 'LuiExtended/media/icons/abilities/ability_weapon_peasant_dagger_light.dds' }, -- Lop (Hleran Noble)\
                 },
 
+    [88251] =   {
+                    ['Great Bear'] =                { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_bear.dds' }, -- Call Ally (Pet Ranger)
+                    ['Spider'] =                    { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_spider.dds' }, -- Call Ally (Pet Ranger)
+                    ['Senche-Tiger'] =              { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_tiger.dds' }, -- Call Ally (Pet Ranger)
+                },
+
+    [88248] =   {
+                    ['Spider'] =                    { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_spider.dds' }, -- Call Ally (Pet Ranger)
+                    ['Venomspit Spider'] =          { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_spider.dds' }, -- Call Ally (Pet Ranger)
+                    ['Websnare Spider'] =           { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_spider.dds' }, -- Call Ally (Pet Ranger)
+                },
+
     -- ANIMALS
     [7170] =    { -- Rend (Lion)
                     ['Lion'] =                      { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
@@ -1673,6 +1685,18 @@ E.EffectOverrideByName = {
     -- MONSTERS
     [9670] =    {
                     ['Spectral Lamia'] =        { icon = 'LuiExtended/media/icons/abilities/ability_lamia_strike_spectral.dds' }, -- Strike (Lamia)
+                },
+
+    [89119] =   {
+                    ['Dire Wolf'] =             { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_wolf.dds' }, -- Summon Beast (Spriggan)
+                    ['Websnare Spider'] =       { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
+                    ['Spider'] =                { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
+                    ['Venomspit Spider'] =      { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
+                },
+    [89102] =   {
+                    ['Thunderbug'] =            { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_thunderbug.dds' }, -- Summon Beast (Spriggan)
+                    ['Thunderbug Lord'] =       { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_thunderbug.dds' }, -- Summon Beast (Spriggan)
+                    ['Hoarvor'] =               { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_hoarvor.dds' }, -- Summon Beast (Spriggan)
                 },
 
     -- QUESTS
@@ -5681,6 +5705,12 @@ E.EffectOverride = {
 
     [89143] = { hide = true }, -- Summon Beast (Spriggan)
     [89119] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast.dds' }, -- Summon Beast (Spriggan)
+    [89102] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_tiger.dds' }, -- Summon Beast (Spriggan)
+    [89157] = { hide = true }, -- Summon Beast (Spriggan)
+    [89158] = { hide = true }, -- Summon Beast (Spriggan)
+    [89151] = { hide = true }, -- Summon Beast (Spriggan)
+    [89154] = { hide = true }, -- Summon Beast (Spriggan)
+    [89168] = { hide = true }, -- Summon Beast (Spriggan)
     [89127] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = A.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Summon Beast (Spriggan)
     [21570] = { hide = true }, -- Backstep (Spriggan)
     [13477] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_control_beast.dds' }, -- Control Beast (Spriggan)

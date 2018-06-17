@@ -287,13 +287,21 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         end
 
         if LUIE.Effects.EffectOverrideByName[abilityId] then
-            unitName = strformat("<<t:1>>", attackerRawName)
+            local unitName = strformat("<<t:1>>", attackerRawName)
+            local petName = strformat("<<t:1>>", minionName)
             if LUIE.Effects.EffectOverrideByName[abilityId][unitName] then
                 if LUIE.Effects.EffectOverrideByName[abilityId][unitName].hide then
                     return
                 end
                 attackName = LUIE.Effects.EffectOverrideByName[abilityId][unitName].name or attackName
                 attackIcon = LUIE.Effects.EffectOverrideByName[abilityId][unitName].icon or attackIcon
+            end
+            if LUIE.Effects.EffectOverrideByName[abilityId][petName] then
+                if LUIE.Effects.EffectOverrideByName[abilityId][petName].hide then
+                    return
+                end
+                attackName = LUIE.Effects.EffectOverrideByName[abilityId][petName].name or attackName
+                attackIcon = LUIE.Effects.EffectOverrideByName[abilityId][petName].icon or attackIcon
             end
         end
 
