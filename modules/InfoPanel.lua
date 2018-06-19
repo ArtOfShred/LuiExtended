@@ -108,6 +108,9 @@ end
 
 local function CreateUIControls()
     uiPanel = UI.TopLevel( nil, {240,48})
+    uiPanel:SetDrawLayer(DL_BACKDROP)
+    uiPanel:SetDrawTier(DT_LOW)
+    uiPanel:SetDrawLevel(1)
     --uiPanel.bg = UI.Backdrop( uiPanel, "fill", nil, nil, nil, false )
 
     local fragment = ZO_HUDFadeSceneFragment:New(uiPanel, 0, 0)
