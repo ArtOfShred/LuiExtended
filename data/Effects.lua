@@ -4606,7 +4606,7 @@ E.EffectOverride = {
     [17867] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_aura.dds' }, -- Shock Aura (Thundermaul)
     [44408] = { icon = 'esoui/art/icons/ability_sorcerer_lightning_form.dds' }, -- Lightning Form (Thundermaul -- Boss)
     [81219] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_ranged.dds', hide = true }, -- Shock (Thundermaul -- Boss)
-    [81215] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_aura.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Improved, A.Skill_Shock_Aura) }, -- Shock Aura (Thundermaul -- Boss)
+    [81215] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_blast.dds', name = A.Skill_Shock_Blast }, -- Shock Aura (Thundermaul -- Boss)
     [77906] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback }, -- Stun (Thundermaul -- Boss)
     [81193] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds', hide = true }, -- Agonizing Strike (Thundermaul -- Boss)
     [81196] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_snare.dds', displayStacks = true, maxStacks = 25, stack = 1 }, -- Agonizing Fury (Thundermaul -- Boss)

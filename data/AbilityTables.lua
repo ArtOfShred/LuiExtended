@@ -603,6 +603,7 @@ A.Skill_Oil_Drenched                = 10650
 A.Skill_Ignite                      = 14070
 A.Skill_Shield_Rush                 = GetString(SI_LUIE_SKILL_SHIELD_RUSH)
 A.Skill_Shock_Aura                  = 17867
+A.Skill_Shock_Blast                 = 85255
 A.Skill_Improved                    = GetString(SI_LUIE_SKILL_IMPROVED)
 A.Skill_Knockback                   = 77905
 A.Skill_Weakness                    = 8705

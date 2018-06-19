@@ -418,6 +418,9 @@ local function CreateCustomFrames()
     if UF.SV.CustomFramesPlayer then
         -- Player Frame
         local playerTlw = UI.TopLevel( nil, nil )
+        playerTlw:SetDrawLayer(DL_BACKDROP)
+        playerTlw:SetDrawTier(DT_LOW)
+        playerTlw:SetDrawLevel(1)
         playerTlw.customPositionAttr = "CustomFramesPlayerFramePos"
         playerTlw.preview = LUIE.UI.Backdrop( playerTlw, "fill", nil, nil, nil, true )
         local player = UI.Control( playerTlw, {TOPLEFT,TOPLEFT}, nil, false )
@@ -505,6 +508,9 @@ local function CreateCustomFrames()
     if UF.SV.CustomFramesTarget then
         -- Target Frame
         local targetTlw = UI.TopLevel( nil, nil )
+        targetTlw:SetDrawLayer(DL_BACKDROP)
+        targetTlw:SetDrawTier(DT_LOW)
+        targetTlw:SetDrawLevel(1)
         targetTlw.customPositionAttr = "CustomFramesTargetFramePos"
         targetTlw.preview = LUIE.UI.Backdrop( targetTlw, "fill", nil, nil, nil, true )
         targetTlw.previewLabel = UI.Label( targetTlw.preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", "Target Frame", false )
@@ -570,6 +576,9 @@ local function CreateCustomFrames()
     if UF.SV.AvaCustFramesTarget then
         -- Target Frame
         local targetTlw = UI.TopLevel( nil, nil )
+        targetTlw:SetDrawLayer(DL_BACKDROP)
+        targetTlw:SetDrawTier(DT_LOW)
+        targetTlw:SetDrawLevel(1)
         targetTlw.customPositionAttr = "AvaCustFramesTargetFramePos"
         targetTlw.preview = LUIE.UI.Backdrop( targetTlw, "fill", nil, nil, nil, true )
         targetTlw.previewLabel = UI.Label( targetTlw.preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", "PvP Player Target Frame", false )
@@ -630,6 +639,9 @@ local function CreateCustomFrames()
     if UF.SV.CustomFramesGroup then
         -- Group Frame
         local group = UI.TopLevel( nil, nil )
+        group:SetDrawLayer(DL_BACKDROP)
+        group:SetDrawTier(DT_LOW)
+        group:SetDrawLevel(1)
         group.customPositionAttr = "CustomFramesGroupFramePos"
         group.preview = LUIE.UI.Backdrop( group, "fill", nil, nil, nil, true )
         group.previewLabel = UI.Label( group.preview, {BOTTOM,TOP,0,-1,group}, nil, nil, "ZoFontGameMedium", "Small Group", false )
@@ -639,6 +651,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("hud"):AddFragment( fragment )
         sceneManager:GetScene("hudui"):AddFragment( fragment )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("loot"):AddFragment( fragment )
 
         for i = 1, 4 do
             local unitTag = "SmallGroup" .. i
@@ -676,6 +689,9 @@ local function CreateCustomFrames()
     if UF.SV.CustomFramesRaid then
         -- Raid Frame
         local raid = UI.TopLevel( nil, nil )
+        raid:SetDrawLayer(DL_BACKDROP)
+        raid:SetDrawTier(DT_LOW)
+        raid:SetDrawLevel(1)
         raid.customPositionAttr = "CustomFramesRaidFramePos"
         raid.preview = LUIE.UI.Backdrop( raid, {TOPLEFT,TOPLEFT}, nil, nil, nil, true )
         raid.preview2 = LUIE.UI.Backdrop( raid.preview, nil, nil, nil, nil, false )
@@ -686,6 +702,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("hud"):AddFragment( fragment )
         sceneManager:GetScene("hudui"):AddFragment( fragment )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("loot"):AddFragment( fragment )
 
         for i = 1, 24 do
             local unitTag = "RaidGroup" .. i
@@ -718,6 +735,9 @@ local function CreateCustomFrames()
     if UF.SV.CustomFramesBosses then
         -- Bosses Frame
         local bosses = UI.TopLevel( nil, nil )
+        bosses:SetDrawLayer(DL_BACKDROP)
+        bosses:SetDrawTier(DT_LOW)
+        bosses:SetDrawLevel(1)
         bosses.customPositionAttr = "CustomFramesBossesFramePos"
         bosses.preview = LUIE.UI.Backdrop( bosses, "fill", nil, nil, nil, true )
         bosses.previewLabel = UI.Label( bosses.preview, {BOTTOM,TOP,0,-1,bosses}, nil, nil, "ZoFontGameMedium", "Bosses Group", false )
@@ -727,6 +747,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("hud"):AddFragment( fragment )
         sceneManager:GetScene("hudui"):AddFragment( fragment )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("loot"):AddFragment( fragment )
 
         for i = 1, 6 do
             local unitTag = "boss" .. i

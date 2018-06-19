@@ -357,6 +357,9 @@ function SCB.Initialize( enabled )
 
     -- Loop over created controls to...
     for _, v in pairs(containerRouting) do
+        uiTlw[v]:SetDrawLayer(DL_BACKDROP)
+        uiTlw[v]:SetDrawTier(DT_LOW)
+        uiTlw[v]:SetDrawLevel(1)
         if uiTlw[v].preview == nil then
             -- Create background areas for preview position purposes
             --uiTlw[v].preview = UI.Backdrop( uiTlw[v], "fill", nil, nil, nil, true )
