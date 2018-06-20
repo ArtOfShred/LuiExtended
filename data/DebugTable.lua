@@ -10370,15 +10370,18 @@ debugAuras = {
             [109844] = true, -- Reach
             [39671] = true, -- Emperorship Alliance Bonus
 
+            [11343] = true, -- Enemy Keep Bonus II
             [11348] = true, -- Enemy Keep Bonus V
             [11350] = true, -- Enemy Keep Bonus VI
             [11352] = true, -- Enemy Keep Bonus VII
             [11353] = true, -- Enemy Keep Bonus VIII
+            [11356] = true, -- Enemy Keep Bonus IX
 
             [15060] = true, -- Defensive Scroll Bonus I
             [16350] = true, -- Defensive Scroll Bonus II
 
             [15058] = true, -- Offensive Scroll Bonus I
+            [16348] = true, -- Offensive Scroll Bonus II
 
             [66282] = true, -- Blessing of War
 

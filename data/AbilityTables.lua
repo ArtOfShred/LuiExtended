@@ -250,7 +250,6 @@ A.Set_Eternal_Hunt                  = 75927
 A.Set_Glorious_Defender             = 71180
 A.Set_Para_Bellum                   = 71191
 A.Set_Winterborn                    = 71644
-A.Set_Grace_of_Gloom                = 106865
 A.Set_Dust_Cloud                    = GetString(SI_LUIE_SKILL_DUST_CLOUD)
 A.Set_Nocturnals_Favor              = 106803
 A.Set_Vestment_of_Olorime           = 107117
@@ -314,28 +313,17 @@ A.Passive_Red_Diamond               = 36155
 A.Skill_Power_Lash                  = 20824
 A.Skill_Fiery_Grip                  = 20492
 A.Skill_Fiery_Breath                = 20917
-A.Skill_Inferno                     = 28967
-A.Skill_Flames_of_Oblivion          = 32853
-A.Skill_Cauterize                   = 32881
 A.Skill_Standard_of_Might           = 32947
 A.Skill_Shackle                     = 32905
 A.Skill_Spiked_Armor                = 20319
 A.Skill_Dragon_Blood                = 29004
-A.Skill_Green_Dragon_Blood          = 32744
-A.Skill_Coagulating_Blood           = 32722
 A.Skill_Inhale                      = 31837
 A.Skill_Deep_Breath                 = 32792
 A.Skill_Draw_Essence                = 32785
 A.Skill_Stonefist                   = 29032
-A.Skill_Stone_Giant                 = 31816
-A.Skill_Molten_Weapons              = 29043
-A.Skill_Igneous_Weapons             = 31874
 A.Skill_Shattering_Rocks            = 32678
 
 -- Nightblade
-A.Skill_Blur                        = 33375
-A.Skill_Mirage                      = 35414
-A.Skill_Double_Take                 = 35419
 A.Skill_Piercing_Mark               = 36968
 A.Skill_Assassins_Will              = 61907
 A.Skill_Assassins_Scourge           = 61932
@@ -349,10 +337,7 @@ A.Skill_Manifestation_of_Terror     = 37475
 A.Skill_Corrode                     = 89010
 A.Skill_Dark_Shade                  = 35434
 A.Skill_Shadow_Image                = 35441
-A.Skill_Swallow_Soul                = 34835
 A.Skill_Crippling_Grasp             = 36957
-A.Skill_Drain_Power                 = 33316
-A.Skill_Power_Extraction            = 36901
 A.Skill_Sap_Essence                 = 36891
 A.Skill_Soul_Tether                 = 35460
 
@@ -389,24 +374,16 @@ A.Skill_Purifying_Light             = 21765
 A.Skill_Unstable_Core               = 22004
 A.Skill_Radiant_Glory               = 63044
 A.Skill_Solar_Disturbance           = 21758
-A.Skill_Restoring_Aura              = 26209
 A.Skill_Repentance                  = 26821
 A.Skill_Cleansing_Ritual            = 22265
-A.Skill_Rune_Focus                  = 22234
-A.Skill_Channeled_Focus             = 22240
-A.Skill_Restoring_Focus             = 22237
 A.Skill_Rite_Of_Passage             = 22223
 A.Skill_Remembrance                 = 22229
 A.Skill_Practiced_Incantation       = 22226
 
 -- Warden
 A.Skill_Bull_Netch                  = 86058
-A.Skill_Falcons_Swiftness           = 86037
-A.Skill_Deceptive_Predator          = 86041
-A.Skill_Bird_of_Prey                = 86045
 A.Skill_Feral_Guardian              = 85982
 A.Skill_Eternal_Guardian            = 85986
-A.Skill_Enchanted_Growth            = 85862
 A.Skill_Healing_Seed                = 85578
 A.Skill_Budding_Seeds               = 85840
 A.Skill_Corrupting_Pollen           = 85845
@@ -419,9 +396,6 @@ A.Skill_Natures_Embrace             = 85858
 A.Skill_Secluded_Grove              = 85532
 A.Skill_Enchanted_Forest            = 85804
 A.Skill_Healing_Thicket             = 85807
-A.Skill_Frost_Cloak                 = 86122
-A.Skill_Expansive_Frost_Cloak       = 86126
-A.Skill_Ice_Fortress                = 86130
 A.Skill_Crystallized_Shield         = 86135
 A.Skill_Crystallized_Slab           = 86139
 A.Skill_Shimmering_Shield           = 86143
@@ -434,12 +408,7 @@ A.Skill_Frozen_Retreat              = 86183
 -- ---------------------------------------------------
 
 -- Restoration Staff
-A.Skill_Blessing_of_Protection      = 37243
 A.Skill_Blessing_of_Restoration     = GetString(SI_LUIE_SKILL_BLESSING_OF_RESTORATION)
-A.Skill_Combat_Prayer               = 40094
-A.Skill_Force_Siphon                = 31531
-A.Skill_Siphon_Spirit               = 40109
-A.Skill_Quick_Siphon                = 40116
 
 -- Destruction Staff
 A.Skill_Crushing_Shock              = 46348
@@ -449,14 +418,9 @@ A.Skill_Frost_Touch                 = 29078
 A.Skill_Flame_Clench                = 38985
 A.Skill_Shock_Clench                = 38993
 A.Skill_Frost_Clench                = 38989
-
 A.Skill_Flame_Reach                 = 38944
 A.Skill_Shock_Reach                 = 38978
 A.Skill_Frost_Reach                 = 38970
-
-A.Skill_Weakness_to_Elements        = 29173
-A.Skill_Elemental_Susceptibility    = 39089
-A.Skill_Elemental_Drain             = 39095
 
 -- Two-Handed
 A.Skill_Dizzying_Swing              = 38814
@@ -467,7 +431,6 @@ A.Skill_Brawler                     = 38754
 A.Skill_Forward_Momentum            = 38794
 
 -- One Hand & Shield
-A.Skill_Pierce_Armor                = 38250
 A.Skill_Low_Slash                   = 28304
 A.Skill_Heroic_Slash                = 38264
 A.Skill_Shield_Charge               = 28719
@@ -480,27 +443,12 @@ A.Skill_Rending_Slashes             = 38839
 A.Skill_Blood_Craze                 = 38845
 A.Skill_Quick_Cloak                 = 38901
 A.Skill_Deadly_Cloak                = 38906
-A.Skill_Hidden_Blade                = 21157
-A.Skill_Shrouded_Daggers            = 38914
-A.Skill_Flying_Blade                = 38910
 
 -- Bow
 A.Skill_Magnum_Shot                 = 38672
 A.Skill_Draining_Shot               = 38669
 A.Skill_Bombard                     = 38705
 A.Skill_Venom_Arrow                 = 38645
-
--- ---------------------------------------------------
--- ARMOR SKILLS --------------------------------------
--- ---------------------------------------------------
-
-A.Skill_Evasion                     = 29556
-A.Skill_Shuffle                     = 39195
-A.Skill_Elude                       = 39192
-
-A.Skill_Immovable                   = 29552
-A.Skill_Immovable_Brute             = 39205
-A.Skill_Unstoppable                 = 39197
 
 -- ---------------------------------------------------
 -- VAMPIRE SKILLS -----------------------------------
@@ -515,7 +463,6 @@ A.Skill_Vampirism                   = 39472
 
 A.Skill_Werewolf_Bleed              = 89146
 A.Skill_Devour                      = 32634
-A.Skill_Rousing_Roar                = 39114
 A.Skill_Piercing_Howl               = 58405
 A.Skill_Feeding_Frenzy              = 58775
 A.Skill_Howl_of_Despair             = 58742
@@ -534,10 +481,6 @@ A.Skill_Remove                      = 31262
 A.Skill_Blade_of_Woe                = 78219
 
 -- Fighters Guild
-A.Skill_Circle_of_Protection        = 35737
-A.Skill_Turn_Undead                 = 40181
-A.Skill_Ring_of_Preservation        = 40169
-A.Skill_Expert_Hunter               = 35762
 A.Skill_Revealed                    = 11717
 A.Skill_Trap_Beast                  = 35750
 A.Skill_Rearming_Trap               = 40382
@@ -545,10 +488,7 @@ A.Skill_Lightweight_Beast_Trap      = 40372
 
 -- Mages Guild
 A.Skill_Magelight                   = 30920
-A.Skill_Inner_Light                 = 40478
-A.Skill_Radiant_Magelight           = 40483
 A.Skill_Spell_Symmetry              = 40445
-A.Skill_Balance                     = 40441
 A.Skill_Meteor                      = 16536
 A.Skill_Ice_Comet                   = 40489
 
@@ -556,9 +496,6 @@ A.Skill_Ice_Comet                   = 40489
 A.Skill_Imbue_Weapon                = 103483
 A.Skill_Elemental_Weapon            = 103571
 A.Skill_Crushing_Weapon             = 103623
-A.Skill_Accelerate                  = 103503
-A.Skill_Channeled_Acceleration      = 103706
-A.Skill_Race_Against_Time           = 103710
 A.Skill_Symbiosis                   = 103755
 
 -- Undaunted
@@ -571,9 +508,6 @@ A.Skill_Healing_Combustion          = 63507
 -- ---------------------------------------------------
 
 -- Assault
-A.Skill_Rapid_Maneuver              = 38566
-A.Skill_Retreating_Maneuver         = 40211
-A.Skill_Charging_Maneuver           = 40215
 A.Skill_Caltrops                    = 33376
 A.Skill_Razor_Caltrops              = 40242
 

@@ -454,7 +454,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local markForRemove = trackBuffs[i].markForRemove or false
 
                     local tooltipText = LUIE.Effects.TooltipOverride[abilityId] or GetAbilityEffectDescription(buffSlot)
-                    --if LUIE.Effects.TooltipOverride[abilityId] then tooltipText = LUIE.Effects.TooltipOverride[abilityId] end
+                    if tooltipText == "" then
+                        tooltipText = GetAbilityDescription(abilityId) or ""
+                    end
                     -- Have to trim trailing spaces on the end of tooltips
                     if tooltipText ~= "" then
                         tooltipText = strmatch(tooltipText, ".*%S")
@@ -506,7 +508,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             GameTooltip:AddLine(tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
         else
             GameTooltip:AddLine(control.tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
-            if control.tooltipText ~= "" then
+            if control.tooltipText ~= "" and control.tooltipText ~= nil then
                 GameTooltip:AddLine(control.tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
             end
         end

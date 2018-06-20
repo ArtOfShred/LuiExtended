@@ -345,6 +345,100 @@ function UF.GetDefaultFramesSetting(frame, default)
     return g_DefaultFramesOptions[out_key]
 end
 
+function UF.AltBar_OnMouseEnterXP(control)
+
+    local isChampion = IsUnitChampion("player")
+    local level
+    local current
+    local levelSize
+    local label
+    if isChampion then
+        level = GetPlayerChampionPointsEarned()
+        current = GetPlayerChampionXP()
+        levelSize = GetNumChampionXPInChampionPoint(level)
+        label = GetString(SI_EXPERIENCE_CHAMPION_LABEL)
+    else
+        level = GetUnitLevel("player")
+        current = GetUnitXP("player")
+        levelSize = GetUnitXPMax("player")
+        label = GetString(SI_EXPERIENCE_LEVEL_LABEL)
+    end
+    local percentageXP = zo_floor(current / levelSize * 100)
+    local enlightenedPool = GetEnlightenedPool()
+    local enlightenedValue = enlightenedPool > 0 and ZO_CommaDelimitNumber(4 * enlightenedPool)
+
+    InitializeTooltip(InformationTooltip, control, BOTTOMLEFT, 0, -2, TOPLEFT)
+
+    SetTooltipText(InformationTooltip, strformat(SI_LEVEL_DISPLAY, label, level))
+    InformationTooltip:AddLine(strformat(SI_EXPERIENCE_CURRENT_MAX_PERCENT, ZO_CommaDelimitNumber(current), ZO_CommaDelimitNumber(levelSize), percentageXP))
+    if enlightenedPool > 0 then
+        InformationTooltip:AddLine(strformat(SI_EXPERIENCE_CHAMPION_ENLIGHTENED_TOOLTIP, enlightenedValue), nil, ZO_SUCCEEDED_TEXT:UnpackRGB())
+    end
+
+end
+
+function UF.AltBar_OnMouseEnterWerewolf(control)
+
+    local function UpdateWerewolfPower()
+        local currentPower, maxPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
+        local percentagePower = zo_floor(currentPower / maxPower * 100)
+        local duration = ( currentPower / 27 )
+        -- Round up by 1 from any decimal number
+        local durationFormatted = mathfloor(duration + 0.999)
+
+        InitializeTooltip(InformationTooltip, control, BOTTOMLEFT, 0, -2, TOPLEFT)
+        SetTooltipText(InformationTooltip, strformat(SI_MONSTERSOCIALCLASS45))
+        InformationTooltip:AddLine(strformat(SI_LUIE_UF_WEREWOLF_POWER, currentPower, maxPower, percentagePower))
+        InformationTooltip:AddLine(strformat(SI_LUIE_UF_WEREWOLF_TP, durationFormatted), nil, ZO_NORMAL_TEXT:UnpackRGBA() )
+    end
+    UpdateWerewolfPower()
+
+    -- Register Tooltip Update while active
+    eventManager:RegisterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, UpdateWerewolfPower)
+    eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
+end
+
+function UF.AltBar_OnMouseEnterMounted(control)
+
+    local function UpdateMountPower()
+        local currentPower, maxPower = GetUnitPower("player", POWERTYPE_MOUNT_STAMINA)
+        local percentagePower = zo_floor(currentPower / maxPower * 100)
+        InitializeTooltip(InformationTooltip, control, BOTTOMLEFT, 0, -2, TOPLEFT)
+
+        SetTooltipText(InformationTooltip, strformat(SI_LUIE_SKILL_MOUNTED))
+        InformationTooltip:AddLine(strformat(SI_LUIE_UF_MOUNT_POWER, currentPower, maxPower, percentagePower))
+    end
+    UpdateMountPower()
+
+    -- Register Tooltip Update while active
+    eventManager:RegisterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, UpdateMountPower)
+    eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_MOUNT_STAMINA, REGISTER_FILTER_UNIT_TAG, "player")
+end
+
+function UF.AltBar_OnMouseEnterSiege(control)
+
+    local function UpdateSiegePower()
+        local currentPower, maxPower = GetUnitPower("controlledsiege", POWERTYPE_HEALTH)
+        local percentagePower = zo_floor(currentPower / maxPower * 100)
+        local siegeName = GetUnitName("controlledsiege")
+        InitializeTooltip(InformationTooltip, control, BOTTOMLEFT, 0, -2, TOPLEFT)
+
+        SetTooltipText(InformationTooltip, strformat(SI_UNIT_NAME, siegeName))
+        InformationTooltip:AddLine(strformat(SI_LUIE_UF_SIEGE_POWER, ZO_CommaDelimitNumber(currentPower), ZO_CommaDelimitNumber(maxPower), percentagePower))
+    end
+    UpdateSiegePower()
+
+    -- Register Tooltip Update while active
+    eventManager:RegisterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, UpdateSiegePower)
+    eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_HEALTH, REGISTER_FILTER_UNIT_TAG, "controlledsiege")
+
+end
+
+function UF.AltBar_OnMouseExit(control)
+    ClearTooltip(InformationTooltip)
+    eventManager:UnregisterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE)
+end
+
 -- Used to create default frames extender controls for player and target.
 -- Called from UF.Initialize
 local function CreateDefaultFrames()
@@ -444,6 +538,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("hud"):AddFragment( fragment )
         sceneManager:GetScene("hudui"):AddFragment( fragment )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
 
         -- Collect all together
         UF.CustomFrames.player = {
@@ -538,6 +633,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("hud"):AddFragment( fragment )
         sceneManager:GetScene("hudui"):AddFragment( fragment )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
 
         -- Collect all together
         UF.CustomFrames.reticleover = {
@@ -596,6 +692,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("hud"):AddFragment( fragment )
         sceneManager:GetScene("hudui"):AddFragment( fragment )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
 
         -- Collect all together
         -- Notice, that we put this table into same UF.CustomFrames table.
@@ -651,6 +748,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("hud"):AddFragment( fragment )
         sceneManager:GetScene("hudui"):AddFragment( fragment )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
         sceneManager:GetScene("loot"):AddFragment( fragment )
 
         for i = 1, 4 do
@@ -702,6 +800,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("hud"):AddFragment( fragment )
         sceneManager:GetScene("hudui"):AddFragment( fragment )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
         sceneManager:GetScene("loot"):AddFragment( fragment )
 
         for i = 1, 24 do
@@ -747,6 +846,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("hud"):AddFragment( fragment )
         sceneManager:GetScene("hudui"):AddFragment( fragment )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
         sceneManager:GetScene("loot"):AddFragment( fragment )
 
         for i = 1, 6 do
@@ -2489,6 +2589,10 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         else
             recenter = true
         end
+
+        UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
+        UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterWerewolf)
+        UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
     elseif UF.SV.PlayerEnableAltbarMSW and isSiege then
         icon    = "LuiExtended/media/unitframes/unitframes_bar_siege.dds"
         center  = { 0.05, 0, 0, 0.9 }
@@ -2503,6 +2607,10 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.OnPowerUpdate(nil, "controlledsiege", nil, POWERTYPE_HEALTH, GetUnitPower("controlledsiege", POWERTYPE_HEALTH))
 
         recenter = true
+
+        UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
+        UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterSiege)
+        UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
     elseif UF.SV.PlayerEnableAltbarMSW and isMounted then
         icon    = "LuiExtended/media/unitframes/unitframes_bar_mount.dds"
         center  = { 0.1*UF.SV.CustomColourStamina[1], 0.1*UF.SV.CustomColourStamina[2], 0.1*UF.SV.CustomColourStamina[3], 0.9 }
@@ -2521,6 +2629,11 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         else
             recenter = true
         end
+
+        UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
+        UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterMounted)
+        UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
+
     elseif UF.SV.PlayerEnableAltbarXP and ( UF.CustomFrames.player.isLevelCap or ( UF.CustomFrames.player.isChampion )) then
         UF.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
         UF.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
@@ -2534,6 +2647,11 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.ChampionXP.bar:SetValue( GetPlayerChampionXP() )
 
         recenter = true
+
+        UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
+        UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterXP)
+        UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
+
     elseif UF.SV.PlayerEnableAltbarXP then
         icon    = "LuiExtended/media/unitframes/unitframes_level_normal.dds"
         center  = { 0, 0.1, 0.1, 0.9 }
@@ -2550,6 +2668,10 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
 
         recenter = true
     -- Otherwise bar should be hidden and no tracking be done
+
+        UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
+        UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterXP)
+        UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
     else
         UF.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
         UF.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
@@ -2558,6 +2680,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.Experience = nil
 
         hidden = true
+        UF.CustomFrames.player.alternative.bar:SetMouseEnabled( false )
     end
 
     -- Setup of bar colours and icon

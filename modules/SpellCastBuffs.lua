@@ -10,6 +10,7 @@ local E             = LUIE.Effects
 local A             = LUIE.GetAbility()
 local printToChat   = LUIE.PrintToChat
 local strfmt        = string.format
+local strmatch      = string.match
 local strformat     = zo_strformat
 local mathfloor     = math.floor
 local mathmin       = math.min
@@ -257,6 +258,8 @@ function SCB.Initialize( enabled )
         sceneManager:GetScene("hudui"):AddFragment( fragment2 )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment1 )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment2 )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment1 )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment2 )
     end
 
     if SCB.SV.lockPositionToUnitFrames and LUIE.UnitFrames.CustomFrames.reticleover and LUIE.UnitFrames.CustomFrames.reticleover.buffs and LUIE.UnitFrames.CustomFrames.reticleover.debuffs then
@@ -289,6 +292,8 @@ function SCB.Initialize( enabled )
         sceneManager:GetScene("hudui"):AddFragment( fragment2 )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment1 )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment2 )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment1 )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment2 )
     end
 
     -- Setup Prominent Buffs
@@ -322,6 +327,8 @@ function SCB.Initialize( enabled )
     sceneManager:GetScene("hudui"):AddFragment( fragmentP2 )
     sceneManager:GetScene("siegeBar"):AddFragment( fragmentP1 )
     sceneManager:GetScene("siegeBar"):AddFragment( fragmentP2 )
+    sceneManager:GetScene("siegeBarUI"):AddFragment( fragmentP1 )
+    sceneManager:GetScene("siegeBarUI"):AddFragment( fragmentP2 )
 
     -- Separate container for players long buffs
     if true then
@@ -349,6 +356,7 @@ function SCB.Initialize( enabled )
         sceneManager:GetScene("hud"):AddFragment( fragment )
         sceneManager:GetScene("hudui"):AddFragment( fragment )
         sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
     else
         containerRouting.player_long = containerRouting.player1
     end
@@ -1457,14 +1465,49 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
     end
 end
 
+function SCB.Buff_OnMouseEnter(control)
+
+    InitializeTooltip(GameTooltip, control, RIGHT, -15)
+    -- Setup Text
+    local tooltipText
+    local tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, control.effectName)
+    if control.isArtificial then
+        tooltipText = GetArtificialEffectTooltipText(control.effectId)
+        GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
+        GameTooltip:AddLine(tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
+    else
+        if control.buffSlot then
+            tooltipText = LUIE.Effects.TooltipOverride[control.effectId] or GetAbilityEffectDescription(control.buffSlot)
+        else
+            tooltipText = LUIE.Effects.TooltipOverride[control.effectId] or ""
+        end
+        if tooltipText == "" and type(control.effectId) == "number" then
+            tooltipText = GetAbilityDescription(control.effectId) or ""
+        end
+        -- Have to trim trailing spaces on the end of tooltips
+        if tooltipText ~= "" then
+            tooltipText = strmatch(tooltipText, ".*%S")
+        end
+
+        GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
+        if tooltipText ~= "" and tooltipText ~= nil then
+            GameTooltip:AddLine(tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
+        end
+    end
+
+end
+
+function SCB.Buff_OnMouseExit(control)
+    ClearTooltip(GameTooltip)
+end
+
 function SCB.CreateSingleIcon(container, AnchorItem, effectType)
     local buff = UI.Backdrop( uiTlw[container], nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
 
     -- Enable tooltip
     buff:SetMouseEnabled( true )
-    buff:SetHandler("OnMouseEnter", ZO_Options_OnMouseEnter)
-    buff:SetHandler("OnMouseExit",  ZO_Options_OnMouseExit)
-    buff.data = {}
+    buff:SetHandler("OnMouseEnter", SCB.Buff_OnMouseEnter)
+    buff:SetHandler("OnMouseExit",  SCB.Buff_OnMouseExit)
 
     -- Border
     buff.back   = UI.Texture( buff, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false )
@@ -1706,7 +1749,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                         forced=nil,
                         restart=true, iconNum=0,
                         unbreakable=0,
-                        stack = stackCount
+                        stack = stackCount,
+                        buffSlot = effectSlot,
                     }
 
                 end
@@ -1840,6 +1884,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
 
     local forcedType = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].forcedContainer or nil
+    local savedEffectSlot = effectSlot
     effectSlot = E.EffectMergeId[abilityId] or E.EffectMergeName[effectName] or effectSlot
 
     if unitTag == "reticleover" and abilityId == 92428 and not IsUnitPlayer('reticleover') then
@@ -1849,13 +1894,13 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     -- Where the new icon will go into
     local context = unitTag .. effectType
 
-    if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) and not E.EffectNoProminent[abilityId] then
+    if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
         if context == "player1" then
             context = "promd_player"
         elseif context == "reticleover2" or abilityId == 102771 then
             context = "promd_target"
         end
-    elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) and not E.EffectNoProminent[abilityId] then
+    elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
         if context == "player1" then
             context = "promb_player"
         elseif context == "reticleover2" or abilityId == 102771 then
@@ -1871,16 +1916,18 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
         g_effectsList[context][effectSlot] = nil
         if E.EffectCreateSkillAura[ abilityId ] and E.EffectCreateSkillAura [ abilityId ].removeOnEnd then
-            if not (SCB.SV.BlacklistTable[E.EffectCreateSkillAura[abilityId].name]) then
+            local name = GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId)
+            local id = E.EffectCreateSkillAura[abilityId].abilityId
+            if not (SCB.SV.BlacklistTable[name] or SCB.SV.BlacklistTable[id]) then
                 local simulatedContext = unitTag .. effectType
 
-                if (SCB.SV.PromDebuffTable[E.EffectCreateSkillAura[abilityId].name]) then
+                if (SCB.SV.PromDebuffTable[name] or SCB.SV.PromDebuffTable[id]) then
                     if simulatedContext == "player1" then
                         simulatedContext = "promd_player"
                     elseif simulatedContext == "reticleover2" then
                         simulatedContext = "promd_target"
                     end
-                elseif (SCB.SV.PromBuffTable[E.EffectCreateSkillAura[abilityId].name]) then
+                elseif (SCB.SV.PromBuffTable[name] or SCB.SV.PromBuffTable[id]) then
                     if simulatedContext == "player1" then
                         simulatedContext = "promb_player"
                     elseif simulatedContext == "reticleover2" then
@@ -1888,7 +1935,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     end
                 end
 
-                g_effectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].name ] = nil
+                g_effectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].abilityId ] = nil
             end
         end
 
@@ -1907,16 +1954,18 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
         --EffectCreateSkillAura
         if ( E.EffectCreateSkillAura[abilityId] ) then
-            if not (SCB.SV.BlacklistTable[E.EffectCreateSkillAura[abilityId].name]) then
+            local name = GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId)
+            local id = E.EffectCreateSkillAura[abilityId].abilityId
+            if not (SCB.SV.BlacklistTable[name] or SCB.SV.BlacklistTable[id]) then
                 local simulatedContext = unitTag .. effectType
 
-                if (SCB.SV.PromDebuffTable[E.EffectCreateSkillAura[abilityId].name]) then
+                if (SCB.SV.PromDebuffTable[name] or SCB.SV.PromDebuffTable[id]) then
                     if simulatedContext == "player1" then
                         simulatedContext = "promd_player"
                     elseif simulatedContext == "reticleover2" then
                         simulatedContext = "promd_target"
                     end
-                elseif (SCB.SV.PromBuffTable[E.EffectCreateSkillAura[abilityId].name]) then
+                elseif (SCB.SV.PromBuffTable[name] or SCB.SV.PromBuffTable[id]) then
                     if simulatedContext == "player1" then
                         simulatedContext = "promb_player"
                     elseif simulatedContext == "reticleover2" then
@@ -1926,9 +1975,10 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
                 if ( SCB.SV.ExtraBuffs ) or ( E.EffectCreateSkillAura[abilityId].consolidate and SCB.SV.ExtraConsolidate ) or ( E.EffectCreateSkillAura[abilityId].alwaysShow ) then
                     if ( not E.EffectCreateSkillAura[abilityId].extendedDisplay ) or (E.EffectCreateSkillAura[abilityId].extendedDisplay and SCB.SV.ExtraExpanded) then
-                        g_effectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].name ] = {
+                        local icon = E.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
+                        g_effectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].abilityId ] = {
                             target=unitTag, type=effectType,
-                            id = "Fake", name=E.EffectCreateSkillAura[abilityId].name, icon=E.EffectCreateSkillAura[abilityId].icon,
+                            id=id, name=name, icon=icon,
                             dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
                             forced=forcedType,
                             restart=true, iconNum=0,
@@ -1970,7 +2020,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             forced=forcedType,
             restart=true, iconNum=0,
             stack = stackCount,
-            unbreakable=unbreakable
+            unbreakable=unbreakable,
+            buffSlot = savedEffectSlot,
         }
     end
 end
@@ -1995,6 +2046,7 @@ function SCB.ArtificialEffectUpdate(eventCode, effectId)
             dur=0, starts=startTime, ends=nil,
             --forced = forcedType,
             restart=true, iconNum=0,
+            artificial = true,
         }
     end
 end
@@ -2494,7 +2546,8 @@ function SCB.ReloadEffects(unitTag)
             id="Fake", name=A.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
             dur=0, starts=1, ends=nil,
             forced = "short",
-            restart=true, iconNum=0
+            restart=true, iconNum=0,
+            artificial=true
         }
     end
 
@@ -2527,7 +2580,8 @@ function SCB.ReloadEffects(unitTag)
                     id="Fake", name=A.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
                     dur=0, starts=1, ends=nil,
                     forced = "short",
-                    restart=true, iconNum=0
+                    restart=true, iconNum=0,
+                    artificial=true
                 }
             end
         end
@@ -2846,7 +2900,13 @@ function SCB.updateIcons( currentTime, sortedList, container )
             effect.iconNum = index
             effect.restart = true
             SCB.SetSingleIconBuffType(buff, effect.type, effect.unbreakable)
-            buff.data.tooltipText = effect.name --.. " || " .. (effect.id or "?")
+
+            -- Setup Info for Tooltip function to pull
+            buff.effectId = effect.id
+            buff.effectName = effect.name
+            buff.buffSlot = effect.buffSlot
+            buff.isArtificial = effect.artificial
+
             buff.icon:SetTexture(effect.icon)
             buff:SetAlpha(1)
             buff:SetHidden(false)

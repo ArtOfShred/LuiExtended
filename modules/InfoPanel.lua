@@ -118,6 +118,7 @@ local function CreateUIControls()
     sceneManager:GetScene("hud"):AddFragment( fragment )
     sceneManager:GetScene("hudui"):AddFragment( fragment )
     sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+    sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
 
     uiPanel.div = UI.Texture( uiPanel, nil, nil, "/esoui/art/miscellaneous/horizontaldivider.dds", DL_BACKGROUND, false )
     uiPanel.div:SetAnchor( LEFT, uiPanel, LEFT, -60, 0 )

@@ -9939,13 +9939,6 @@ function CA.PrintQueuedMessages()
         end
     end
 
-    -- Currency
-    for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "CURRENCY" then
-            printToChat(g_queuedMessages[i].message)
-        end
-    end
-
     -- Quest Items (Remove)
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i].type == "QUEST LOOT REMOVE" then
@@ -9955,6 +9948,13 @@ function CA.PrintQueuedMessages()
             if not g_questItemAdded[itemId] == true then
                 printToChat(g_queuedMessages[i].message)
             end
+        end
+    end
+
+    -- Currency
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "CURRENCY" then
+            printToChat(g_queuedMessages[i].message)
         end
     end
 

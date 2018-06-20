@@ -480,6 +480,12 @@ local strings = {
     SI_LUIE_CT_MITIGATION_FORMAT_POWER =                 "%t %i на %n!",
     SI_LUIE_CT_MITIGATION_FORMAT_DESTROY =               "%t %i",
 
+    -- UnitFrames.lua
+    SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Power (<<3>>%)",
+    SI_LUIE_UF_WEREWOLF_TP =                             "You will remain in Werewolf Form for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Mount Stamina (<<3>>%)",
+    SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Condition (<<3>>%)",
+
     -- LuiExtendedMenu.lua
     SI_LUIE_LAM_COMPATIBILITY_WARNING =                  "Отключите эту настройку, если у вас наблюдаются проблемы совместимости с другими аддонами.",
     SI_LUIE_LAM_FONT =                                   "Шрифт",

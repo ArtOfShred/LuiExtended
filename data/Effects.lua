@@ -119,18 +119,18 @@ E.IsCyrodiil = {
     [39671] = true, -- Emperorship Alliance Bonus
     [11346] = true, -- Home Keep Bonus -- CONFIRM
     [11341] = true, -- Enemy Keep Bonus I -- CONFIRM
-    [11343] = true, -- Enemy Keep Bonus II -- CONFIRM
+    [11343] = true, -- Enemy Keep Bonus II
     [11345] = true, -- Enemy Keep Bonus III -- CONFIRM
     [11347] = true, -- Enemy Keep Bonus IV -- CONFIRM
     [11348] = true, -- Enemy Keep Bonus V
     [11350] = true, -- Enemy Keep Bonus VI
     [11352] = true, -- Enemy Keep Bonus VII
     [11353] = true, -- Enemy Keep Bonus VIII
-    [11356] = true, -- Enemy Keep Bonus IX -- CONFIRM
+    [11356] = true, -- Enemy Keep Bonus IX
     [15060] = true, -- Defensive Scroll Bonus I
     [16350] = true, -- Defensive Scroll Bonus II
     [15058] = true, -- Offensive Scroll Bonus I
-    [16348] = true, -- Offensive Scroll Bonus II -- CONFIRM
+    [16348] = true, -- Offensive Scroll Bonus II
     [66282] = true, -- Blessing of War -- CONFIRM
 }
 
@@ -818,146 +818,144 @@ E.EffectCreateSkillAura = {
     -- extendedDisplay - This will only display if the option to display single effects is enabled as well.
 
     -- Dragonknight
-    [75088] = { icon = 'esoui/art/icons/ability_dragonknight_002.dds', name = A.Skill_Inferno, removeOnEnd = true, consolidate = true, extendedDisplay = true }, -- Major Prophecy --> Inferno
-    [76420] = { icon = 'esoui/art/icons/ability_dragonknight_002_a.dds', name = A.Skill_Flames_of_Oblivion, removeOnEnd = true, consolidate = true }, -- Major Prophecy --> Flames of Oblivion
-    [76426] = { icon = 'esoui/art/icons/ability_dragonknight_002_a.dds', name = A.Skill_Flames_of_Oblivion, removeOnEnd = true, consolidate = true }, -- Major Savagery --> Flames of Oblivion
-    [76433] = { icon = 'esoui/art/icons/ability_dragonknight_002_b.dds', name = A.Skill_Cauterize, removeOnEnd = true, consolidate = true, extendedDisplay = true }, -- Major Prophecy --> Cauterize
-    [29011] = { icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = A.Skill_Dragon_Blood, removeOnEnd = false, consolidate = true, extendedDisplay = true }, -- Major Fortitude --> Dragon Blood
-    [32748] = { icon = 'esoui/art/icons/ability_dragonknight_011_b.dds', name = A.Skill_Green_Dragon_Blood, removeOnEnd = false, consolidate = true }, -- Major Endurance --> Green Dragon Blood
-    [61884] = { icon = 'esoui/art/icons/ability_dragonknight_011_b.dds', name = A.Skill_Green_Dragon_Blood, removeOnEnd = false, consolidate = true }, -- Major Fortitude --> Green Dragon Blood
-    [91670] = { icon = 'esoui/art/icons/ability_dragonknight_011_b.dds', name = A.Skill_Green_Dragon_Blood, removeOnEnd = false, consolidate = true }, -- Minor Vitality --> Green Dragon Blood
-    [91674] = { icon = 'esoui/art/icons/ability_dragonknight_011_a.dds', name = A.Skill_Coagulating_Blood, removeOnEnd = false, consolidate = true, extendedDisplay = true }, -- Major Fortitude --> Coagulating Blood
-    [92507] = { icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = A.Skill_Molten_Weapons, removeOnEnd = false, consolidate = true, extendedDisplay = true }, -- Major Sorcery --> Molten Weapons
-    [31818] = { icon = 'esoui/art/icons/ability_dragonknight_013_a.dds', name = A.Skill_Stone_Giant, removeOnEnd = false, consolidate = true }, -- Minor Resolve (Stone Giant)
-    [108801] = { icon = 'esoui/art/icons/ability_dragonknight_013_a.dds', name = A.Skill_Stone_Giant, removeOnEnd = false, consolidate = true }, -- Minor Ward (Stone Giant)
-    [76518] = { icon = 'esoui/art/icons/ability_dragonknight_015_a.dds', name = A.Skill_Igneous_Weapons, removeOnEnd = false, consolidate = true }, -- Major Brutality --> Igneous Weapons
-    [92503] = { icon = 'esoui/art/icons/ability_dragonknight_015_a.dds', name = A.Skill_Igneous_Weapons, removeOnEnd = false, consolidate = true }, -- Major Sorcery --> Igneous Weapons
+    [75088] = { removeOnEnd = true, consolidate = true, extendedDisplay = true, abilityId = 28967 }, -- Major Prophecy --> Inferno
+    [76420] = { removeOnEnd = true, consolidate = true, abilityId = 32853 }, -- Major Prophecy --> Flames of Oblivion
+    [76426] = { removeOnEnd = true, consolidate = true, abilityId = 32853 }, -- Major Savagery --> Flames of Oblivion
+    [76433] = { removeOnEnd = true, consolidate = true, extendedDisplay = true, abilityId = 32881 }, -- Major Prophecy --> Cauterize
+    [29011] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 29004 }, -- Major Fortitude --> Dragon Blood
+    [32748] = { removeOnEnd = false, consolidate = true, abilityId = 32744 }, -- Major Endurance --> Green Dragon Blood
+    [61884] = { removeOnEnd = false, consolidate = true, abilityId = 32744 }, -- Major Fortitude --> Green Dragon Blood
+    [91670] = { removeOnEnd = false, consolidate = true, abilityId = 32744 }, -- Minor Vitality --> Green Dragon Blood
+    [91674] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 32722 }, -- Major Fortitude --> Coagulating Blood
+    [92507] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 29043 }, -- Major Sorcery --> Molten Weapons
+    [76518] = { removeOnEnd = false, consolidate = true, abilityId = 31874 }, -- Major Brutality --> Igneous Weapons
+    [92503] = { removeOnEnd = false, consolidate = true, abilityId = 31874 }, -- Major Sorcery --> Igneous Weapons
+    [31818] = { removeOnEnd = false, consolidate = true, abilityId = 31816 }, -- Minor Resolve (Stone Giant)
+    [108801] = { removeOnEnd = false, consolidate = true, abilityId = 31816 }, -- Minor Ward (Stone Giant)
 
     -- Nightblade
-    [90587] = { icon = 'esoui/art/icons/ability_nightblade_009.dds', name = A.Skill_Blur, removeOnEnd = false, consolidate = true, extendedDisplay = true }, -- Major Evasion --> Blur
-    [90593] = { icon = 'esoui/art/icons/ability_nightblade_009_a.dds', name = A.Skill_Mirage, removeOnEnd = false, consolidate = true }, -- Major Evasion --> Mirage
-    [61817] = { icon = 'esoui/art/icons/ability_nightblade_009_a.dds', name = A.Skill_Mirage, removeOnEnd = false, consolidate = true }, -- Minor Resolve --> Mirage
-    [68512] = { icon = 'esoui/art/icons/ability_nightblade_009_a.dds', name = A.Skill_Mirage, removeOnEnd = false, consolidate = true }, -- Major Ward --> Mirage
-    [90620] = { icon = 'esoui/art/icons/ability_nightblade_009_b.dds', name = A.Skill_Double_Take, removeOnEnd = false, consolidate = true, extendedDisplay = true }, -- Major Evasion --> Double Take
-    [34837] = { icon = 'esoui/art/icons/ability_nightblade_012_a.dds', name = A.Skill_Swallow_Soul, removeOnEnd = true, consolidate = true, extendedDisplay = true }, -- Minor Vitality --> Swallow Soul
-    [33317] = { icon = 'esoui/art/icons/ability_nightblade_013.dds', name = A.Skill_Drain_Power, removeOnEnd = false, consolidate = true, extendedDisplay = true }, --> Major Brutality --> Drain Power
-    [36903] = { icon = 'esoui/art/icons/ability_nightblade_013_b.dds', name = A.Skill_Power_Extraction, removeOnEnd = false, consolidate = true, extendedDisplay = true }, --> Major Brutality --> Power Extraction
-    [36894] = { icon = 'esoui/art/icons/ability_nightblade_013_a.dds', name = A.Skill_Sap_Essence, removeOnEnd = false, consolidate = true }, -- Major Brutality --> Sap Essence
-    [62240] = { icon = 'esoui/art/icons/ability_nightblade_013_a.dds', name = A.Skill_Sap_Essence, removeOnEnd = false, consolidate = true }, -- Major Sorcery --> Sap Essence
+    [90587] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 33375 }, -- Major Evasion --> Blur
+    [90593] = { removeOnEnd = false, consolidate = true, abilityId = 35414 }, -- Major Evasion --> Mirage
+    [61817] = { removeOnEnd = false, consolidate = true, abilityId = 35414 }, -- Minor Resolve --> Mirage
+    [68512] = { removeOnEnd = false, consolidate = true, abilityId = 35414 }, -- Minor Ward --> Mirage
+    [90620] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 35419 }, -- Major Evasion --> Double Take
+    [34837] = { removeOnEnd = true, consolidate = true, extendedDisplay = true, abilityId = 34835 }, -- Minor Vitality --> Swallow Soul
+    [33317] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 33316  }, --> Major Brutality --> Drain Power
+    [36903] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 36901 }, --> Major Brutality --> Power Extraction
+    [36894] = { removeOnEnd = false, consolidate = true, abilityId = 36891 }, -- Major Brutality --> Sap Essence
+    [62240] = { removeOnEnd = false, consolidate = true, abilityId = 36891 }, -- Major Sorcery --> Sap Essence
 
     -- Templar
-    [26213] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true, consolidate = true }, -- Minor Fortitude (Restoring Aura - All Ranks)
-    [26216] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true, consolidate = true }, -- Minor Intellect (Restoring Aura - All Ranks)
-    [26215] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true, consolidate = true }, -- Minor Endurance (Restoring Aura - All Ranks)
-    [22236] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Resolve (Rune Focus - Rank 1)
-    [44820] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Ward (Rune Focus - Rank 1)
-    [44828] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Resolve (Channeled Focus - Rank 1)
-    [44827] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Ward (Channeled Focus - Rank 1)
-    [44836] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Resolve (Restoring Focus - Rank 1)
-    [44835] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Ward (Restoring Focus - Rank 1)
-    [37027] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 1)
-    [77056] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Protection (Restoring Focus - Rank 1)
+    [26213] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Fortitude (Restoring Aura - All Ranks)
+    [26216] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Intellect (Restoring Aura - All Ranks)
+    [26215] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Endurance (Restoring Aura - All Ranks)
+    [22236] = { consolidate = true, abilityId = 22234 }, -- Major Resolve (Rune Focus - Rank 1)
+    [44820] = { consolidate = true, abilityId = 22234 }, -- Major Ward (Rune Focus - Rank 1)
+    [44828] = { consolidate = true, abilityId = 22240 }, -- Major Resolve (Channeled Focus - Rank 1)
+    [44827] = { consolidate = true, abilityId = 22240 }, -- Major Ward (Channeled Focus - Rank 1)
+    [44836] = { consolidate = true, abilityId = 22237 }, -- Major Resolve (Restoring Focus - Rank 1)
+    [44835] = { consolidate = true, abilityId = 22237 }, -- Major Ward (Restoring Focus - Rank 1)
+    [37027] = { consolidate = true, abilityId = 22237 }, -- Minor Vitality (Restoring Focus - Rank 1)
+    [77056] = { consolidate = true, abilityId = 22237 }, -- Minor Protection (Restoring Focus - Rank 1)
 
     -- Warden
-    [86267] = { icon = 'esoui/art/icons/ability_warden_016.dds', name = A.Skill_Falcons_Swiftness, consolidate = true }, -- Major Expedition --> Falcon's Swiftness
-    [86268] = { icon = 'esoui/art/icons/ability_warden_016.dds', name = A.Skill_Falcons_Swiftness, consolidate = true }, -- Major Endurance --> Falcon's Swiftness
-    [89076] = { icon = 'esoui/art/icons/ability_warden_016_b.dds', name = A.Skill_Deceptive_Predator, consolidate = true }, -- Major Expedition --> Deceptive Predator
-    [89077] = { icon = 'esoui/art/icons/ability_warden_016_b.dds', name = A.Skill_Deceptive_Predator, consolidate = true }, -- Major Endurance --> Deceptive Predator
-    [87861] = { icon = 'esoui/art/icons/ability_warden_016_b.dds', name = A.Skill_Deceptive_Predator, consolidate = true }, -- Minor Evasion --> Deceptive Predator
-    [89078] = { icon = 'esoui/art/icons/ability_warden_016_a.dds', name = A.Skill_Bird_of_Prey, consolidate = true }, -- Major Expedition --> Bird of Prey
-    [89079] = { icon = 'esoui/art/icons/ability_warden_016_a.dds', name = A.Skill_Bird_of_Prey, consolidate = true }, -- Major Endurance --> Bird of Prey
-    [87864] = { icon = 'esoui/art/icons/ability_warden_016_a.dds', name = A.Skill_Bird_of_Prey, consolidate = true }, -- Minor Berserk --> Bird of Prey
-    [86300] = { icon = 'esoui/art/icons/ability_warden_008_b.dds', name = A.Skill_Enchanted_Growth, consolidate = true }, -- Minor Intellect (Enchanted Growth)
-    [87019] = { icon = 'esoui/art/icons/ability_warden_008_b.dds', name = A.Skill_Enchanted_Growth, consolidate = true }, -- Minor Endurance (Enchanted Growth)
-    [86224] = { icon = 'esoui/art/icons/ability_warden_001.dds', name = A.Skill_Frost_Cloak, consolidate = true }, -- Major Resolve --> Frost Cloak
-    [86225] = { icon = 'esoui/art/icons/ability_warden_001.dds', name = A.Skill_Frost_Cloak, consolidate = true }, -- Major Ward --> Frost Cloak
-    [88758] = { icon = 'esoui/art/icons/ability_warden_001_a.dds', name = A.Skill_Expansive_Frost_Cloak, consolidate = true }, -- Major Resolve --> Expansive Frost Cloak
-    [88759] = { icon = 'esoui/art/icons/ability_warden_001_a.dds', name = A.Skill_Expansive_Frost_Cloak, consolidate = true }, -- Major Ward --> Expansive Frost Cloak
-    [88761] = { icon = 'esoui/art/icons/ability_warden_001_b.dds', name = A.Skill_Ice_Fortress, consolidate = true }, -- Major Resolve --> Ice Fortress
-    [88762] = { icon = 'esoui/art/icons/ability_warden_001_b.dds', name = A.Skill_Ice_Fortress, consolidate = true }, -- Major Ward --> Ice Fortress
-    [87194] = { icon = 'esoui/art/icons/ability_warden_001_b.dds', name = A.Skill_Ice_Fortress, consolidate = true }, -- Minor Protection --> Ice Fortress
+    [86267] = { consolidate = true, abilityId = 86037 }, -- Major Expedition --> Falcon's Swiftness
+    [86268] = { consolidate = true, abilityId = 86037 }, -- Major Endurance --> Falcon's Swiftness
+    [89076] = { consolidate = true, abilityId = 86041 }, -- Major Expedition --> Deceptive Predator
+    [89077] = { consolidate = true, abilityId = 86041 }, -- Major Endurance --> Deceptive Predator
+    [87861] = { consolidate = true, abilityId = 86041 }, -- Minor Evasion --> Deceptive Predator
+    [89078] = { consolidate = true, abilityId = 86045 }, -- Major Expedition --> Bird of Prey
+    [89079] = { consolidate = true, abilityId = 86045 }, -- Major Endurance --> Bird of Prey
+    [87864] = { consolidate = true, abilityId = 86045 }, -- Minor Berserk --> Bird of Prey
+    [86300] = { consolidate = true, abilityId = 85862 }, -- Minor Intellect (Enchanted Growth)
+    [87019] = { consolidate = true, abilityId = 85862 }, -- Minor Endurance (Enchanted Growth)
+    [86224] = { consolidate = true, abilityId = 86122 }, -- Major Resolve --> Frost Cloak
+    [86225] = { consolidate = true, abilityId = 86122 }, -- Major Ward --> Frost Cloak
+    [88758] = { consolidate = true, abilityId = 86126 }, -- Major Resolve --> Expansive Frost Cloak
+    [88759] = { consolidate = true, abilityId = 86126 }, -- Major Ward --> Expansive Frost Cloak
+    [88761] = { consolidate = true, abilityId = 86130 }, -- Major Resolve --> Ice Fortress
+    [88762] = { consolidate = true, abilityId = 86130 }, -- Major Ward --> Ice Fortress
+    [87194] = { consolidate = true, abilityId = 86130 }, -- Minor Protection --> Ice Fortress
 
     -- One Hand and Shield
-    [62484] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds', name = A.Skill_Pierce_Armor, consolidate = true }, -- Major Fracture --> Pierce Armor
-    [62485] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds', name = A.Skill_Pierce_Armor, consolidate = true }, -- Major Breach --> Pierce Armor
+    [62484] = { consolidate = true, abilityId = 38256 }, -- Major Fracture --> Pierce Armor
+    [62485] = { consolidate = true, abilityId = 38256 }, -- Major Breach --> Pierce Armor
 
     -- Dual Wield
-    [68807] = { icon = 'esoui/art/icons/ability_dualwield_003.dds', name = A.Skill_Hidden_Blade, consolidate = true, extendedDisplay = true }, -- Major Brutality (Hidden Blade)
-    [68859] = { icon = 'esoui/art/icons/ability_dualwield_003_b.dds', name = A.Skill_Shrouded_Daggers, consolidate = true, extendedDisplay = true }, -- Major Brutality (Shrouded Daggers)
-    [68814] = { icon = 'esoui/art/icons/ability_dualwield_003_a.dds', name = A.Skill_Flying_Blade, consolidate = true, extendedDisplay = true }, -- Major Brutality (Flying Blade)
+    [68807] = { consolidate = true, extendedDisplay = true, abilityId = 21157 }, -- Major Brutality (Hidden Blade)
+    [68859] = { consolidate = true, extendedDisplay = true, abilityId = 38914 }, -- Major Brutality (Shrouded Daggers)
+    [68814] = { consolidate = true, extendedDisplay = true, abilityId = 38910 }, -- Major Brutality (Flying Blade)
 
     -- Destruction Staff
-    [53881] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach --> Weakness to Elements
-
-    [62775] = { icon = 'esoui/art/icons/ability_destructionstaff_011b.dds', name = A.Skill_Elemental_Susceptibility, removeOnEnd = true }, -- Major Breach (Elemental Susceptibility - Rank 1)
-    [62787] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Major Breach (Elemental Drain - Rank 1)
-    [39100] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Minor Magickasteal (Elemental Drain - Rank 1)
+    [53881] = { removeOnEnd = true, abilityId = 29173 }, -- Major Breach --> Weakness to Elements
+    [62775] = { removeOnEnd = true, abilityId = 39089 }, -- Major Breach (Elemental Susceptibility - Rank 1)
+    [62787] = { removeOnEnd = true, abilityId = 39095 }, -- Major Breach (Elemental Drain - Rank 1)
+    [39100] = { removeOnEnd = true, abilityId = 39095 }, -- Minor Magickasteal (Elemental Drain - Rank 1)
 
     -- Restoration Staff
-    [37247] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 1)
-    [62619] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 1)
-    [62626] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Resolve (Blessing of Restoration - Rank 1)
-    [62627] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Ward (Blessing of Restoration - Rank 1)
-    [62634] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Resolve (Combat Prayer - Rank 1)
-    [62635] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Ward (Combat Prayer - Rank 1)
-    [62636] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Berserk (Combat Prayer - Rank 1)
-    [88565] = { icon = 'esoui/art/icons/ability_restorationstaff_005.dds', name = A.Skill_Force_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Force Siphon - Rank 1)
-    [88575] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
-    [88576] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
-    [88606] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 1)
+    [37247] = { consolidate = true, abilityId = 37243 }, -- Minor Resolve (Blessing of Protection - Rank 1)
+    [62619] = { consolidate = true, abilityId = 37243 }, -- Minor Ward (Blessing of Protection - Rank 1)
+    [62626] = { consolidate = true, abilityId = 40103, name = A.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration - Rank 1)
+    [62627] = { consolidate = true, abilityId = 40103, name = A.Skill_Blessing_of_Restoration }, -- Minor Ward (Blessing of Restoration - Rank 1)
+    [62634] = { consolidate = true, abilityId = 40094 }, -- Minor Resolve (Combat Prayer - Rank 1)
+    [62635] = { consolidate = true, abilityId = 40094 }, -- Minor Ward (Combat Prayer - Rank 1)
+    [62636] = { consolidate = true, abilityId = 40094 }, -- Minor Berserk (Combat Prayer - Rank 1)
+    [88565] = { removeOnEnd = true, abilityId = 31531 }, -- Minor Lifesteal (Force Siphon - Rank 1)
+    [88575] = { removeOnEnd = true, abilityId = 40109 }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
+    [88576] = { removeOnEnd = true, abilityId = 40109 }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
+    [88606] = { removeOnEnd = true, abilityId = 40116 }, -- Minor Lifesteal (Quick Siphon - Rank 1)
 
     -- Armor
-    [63015] = { icon = 'esoui/art/icons/ability_armor_002.dds', name = A.Skill_Evasion, consolidate = true, extendedDisplay = true }, -- Major Evasion --> Evasion
-    [63019] = { icon = 'esoui/art/icons/ability_armor_002_a.dds', name = A.Skill_Shuffle, consolidate = true, extendedDisplay = true }, -- Major Evasion --> Shuffle
-    [63030] = { icon = 'esoui/art/icons/ability_armor_002_b.dds', name = A.Skill_Elude, consolidate = true, extendedDisplay = true }, -- Major Evasion --> Elude
-    [63084] = { icon = 'esoui/art/icons/ability_armor_001.dds' , name = A.Skill_Immovable, consolidate = true }, -- Major Resolve --> Immovable
-    [63085] = { icon = 'esoui/art/icons/ability_armor_001.dds' , name = A.Skill_Immovable, consolidate = true }, -- Major Ward --> Immovable
-    [63134] = { icon = 'esoui/art/icons/ability_armor_001_a.dds' , name = A.Skill_Immovable_Brute, consolidate = true }, -- Major Resolve --> Immovable Brute
-    [63135] = { icon = 'esoui/art/icons/ability_armor_001_a.dds' , name = A.Skill_Immovable_Brute, consolidate = true }, -- Major Ward --> Immovable Brute
-    [63119] = { icon = 'esoui/art/icons/ability_armor_001_b.dds' , name = A.Skill_Unstoppable, consolidate = true }, -- Major Resolve --> Unstoppable
-    [63120] = { icon = 'esoui/art/icons/ability_armor_001_b.dds' , name = A.Skill_Unstoppable, consolidate = true }, -- Major Ward --> Unstoppable
+    [63015] = { consolidate = true, extendedDisplay = true, abilityId = 29556 }, -- Major Evasion --> Evasion
+    [63019] = { consolidate = true, extendedDisplay = true, abilityId = 39195 }, -- Major Evasion --> Shuffle
+    [63030] = { consolidate = true, extendedDisplay = true, abilityId = 39192 }, -- Major Evasion --> Elude
+    [63084] = { consolidate = true, abilityId = 29552 }, -- Major Resolve --> Immovable
+    [63085] = { consolidate = true, abilityId = 29552 }, -- Major Ward --> Immovable
+    [63134] = { consolidate = true, abilityId = 39205 }, -- Major Resolve --> Immovable Brute
+    [63135] = { consolidate = true, abilityId = 39205 }, -- Major Ward --> Immovable Brute
+    [63119] = { consolidate = true, abilityId = 39197 }, -- Major Resolve --> Unstoppable
+    [63120] = { consolidate = true, abilityId = 39197 }, -- Major Ward --> Unstoppable
 
     -- Werewolf
-    [39124] = { icon = 'esoui/art/icons/ability_werewolf_003_a.dds', name = A.Skill_Rousing_Roar, consolidate = true, extendedDisplay = true }, -- Major Brutality --> Rousing Roar
+    [39124] = { consolidate = true, extendedDisplay = true, abilityId = 39114 }, -- Major Brutality --> Rousing Roar
 
     -- Fighters Guild
-    [80271] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance --> Circle of Protection
-    [35739] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection --> Circle of Protection
-    [80276] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance --> Turn Undead
-    [40185] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection --> Turn Undead
-    [80284] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Endurance --> Ring of Preservation
-    [40171] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Protection --> Ring of Preservation
-
-    [64509] = { icon = 'esoui/art/icons/ability_fightersguild_002.dds', name = A.Skill_Expert_Hunter, consolidate = true, extendedDisplay = true, removeOnEnd = true }, -- Major Savagery --> Expert Hunter
+    [80271] = { consolidate = true, removeOnEnd = true, abilityId = 35737  }, -- Minor Endurance --> Circle of Protection
+    [35739] = { consolidate = true, removeOnEnd = true, abilityId = 35737 }, -- Minor Protection --> Circle of Protection
+    [80276] = { consolidate = true, removeOnEnd = true, abilityId = 40181 }, -- Minor Endurance --> Turn Undead
+    [40185] = { consolidate = true, removeOnEnd = true, abilityId = 40181 }, -- Minor Protection --> Turn Undead
+    [80284] = { consolidate = true, removeOnEnd = true, abilityId = 40169 }, -- Minor Endurance --> Ring of Preservation
+    [40171] = { consolidate = true, removeOnEnd = true, abilityId = 40169 }, -- Minor Protection --> Ring of Preservation
+    [64509] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 35762 }, -- Major Savagery --> Expert Hunter
 
     -- Mages Guild
-    [77928] = { icon = 'esoui/art/icons/ability_mageguild_002.dds', name = A.Skill_Magelight, consolidate = true, extendedDisplay = true, removeOnEnd = true }, -- Major Prophecy --> Magelight
-    [77945] = { icon = 'esoui/art/icons/ability_mageguild_002_b.dds', name = A.Skill_Inner_Light, consolidate = true, extendedDisplay = true, removeOnEnd = true }, -- Major Prophecy --> Inner Light
-    [77958] = { icon = 'esoui/art/icons/ability_mageguild_002_a.dds', name = A.Skill_Radiant_Magelight, consolidate = true, extendedDisplay = true, removeOnEnd = true }, -- Major Prophecy --> Radiant Magelight
-    [40443] = { icon = 'esoui/art/icons/ability_mageguild_003_b.dds', name = A.Skill_Balance, consolidate = true }, -- Balance --> Major Ward
-    [80160] = { icon = 'esoui/art/icons/ability_mageguild_003_b.dds', name = A.Skill_Balance, consolidate = true }, -- Balance --> Major Resolve
+    [77928] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 30920 }, -- Major Prophecy --> Magelight
+    [77945] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 40478 }, -- Major Prophecy --> Inner Light
+    [77958] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 40483 }, -- Major Prophecy --> Radiant Magelight
+    [40443] = { consolidate = true, abilityId = 40441 }, -- Balance --> Major Ward
+    [80160] = { consolidate = true, abilityId = 40441 }, -- Balance --> Major Resolve
 
     -- Psijic Order
-    [103521] = { icon = 'esoui/art/icons/ability_psijic_005.dds', name = A.Skill_Accelerate, consolidate = true, extendedDisplay = true }, -- Minor Force --> Accelerate
-    [103708] = { icon = 'esoui/art/icons/ability_psijic_005_a.dds', name = A.Skill_Channeled_Acceleration, consolidate = true, extendedDisplay = true }, -- Minor Force --> Channeled Acceleration
-    [103712] = { icon = 'esoui/art/icons/ability_psijic_005_b.dds', name = A.Skill_Race_Against_Time, consolidate = true, extendedDisplay = true }, -- Minor Force --> Race Against Time
+    [103521] = { consolidate = true, extendedDisplay = true, abilityId = 103503 }, -- Minor Force --> Accelerate
+    [103708] = { consolidate = true, extendedDisplay = true, abilityId = 103706 }, -- Minor Force --> Channeled Acceleration
+    [103712] = { consolidate = true, extendedDisplay = true, abilityId = 103710 }, -- Minor Force --> Race Against Time
 
     -- Assault
-    [101161] = { icon = 'esoui/art/icons/ability_ava_002.dds', name = A.Skill_Rapid_Maneuver, consolidate = true, removeOnEnd = true }, -- Major Expedition (Rapid Maneuver)
-    [57472] = { icon = 'esoui/art/icons/ability_ava_002.dds', name = A.Skill_Rapid_Maneuver, consolidate = true, removeOnEnd = true }, -- Major Gallop (Rapid Maneuver)
-    [101169] = { icon = 'esoui/art/icons/ability_ava_002_a.dds', name = A.Skill_Retreating_Maneuver, consolidate = true, removeOnEnd = true }, -- Major Expedition (Retreating Maneuver)
-    [57477] = { icon = 'esoui/art/icons/ability_ava_002_a.dds', name = A.Skill_Retreating_Maneuver, consolidate = true, removeOnEnd = true }, -- Major Gallop (Retreating Maneuver)
-    [101178] = { icon = 'esoui/art/icons/ability_ava_002_b.dds', name = A.Skill_Charging_Maneuver, consolidate = true, removeOnEnd = true }, -- Major Expedition (Charging Maneuver)
-    [57481] = { icon = 'esoui/art/icons/ability_ava_002_b.dds', name = A.Skill_Charging_Maneuver, consolidate = true, removeOnEnd = true }, -- Major Gallop (Charging Maneuver)
+    [101161] = { consolidate = true, removeOnEnd = true, abilityId = 38566 }, -- Major Expedition (Rapid Maneuver)
+    [57472] = { consolidate = true, removeOnEnd = true, abilityId = 38566 }, -- Major Gallop (Rapid Maneuver)
+    [101169] = {consolidate = true, removeOnEnd = true, abilityId = 40211 }, -- Major Expedition (Retreating Maneuver)
+    [57477] = { consolidate = true, removeOnEnd = true, abilityId = 40211 }, -- Major Gallop (Retreating Maneuver)
+    [101178] = { consolidate = true, removeOnEnd = true, abilityId = 40215 }, -- Major Expedition (Charging Maneuver)
+    [57481] = { consolidate = true, removeOnEnd = true, abilityId = 40215 }, -- Major Gallop (Charging Maneuver)
 
     -- Sets
-    [106867] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds', name = A.Set_Grace_of_Gloom, alwaysShow = true }, -- Major Evasion --> Grace of Gloom
+    [106867] = { alwaysShow = true, abilityId = 106865 }, -- Major Evasion --> Grace of Gloom
 
     -- NPC's
     -- Always Show = show regardless of menu setting
-    [65235] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, alwaysShow = true, removeOnEnd = true }, -- Enrage (Vosh Rakh Devoted)
-    [50187] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, alwaysShow = true, removeOnEnd = true }, -- Enrage (Mantikora)
-    [56689] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, alwaysShow = true, removeOnEnd = true }, -- Enraged (Mantikora)
+    [65235] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enrage (Vosh Rakh Devoted)
+    [50187] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enrage (Mantikora)
+    [56689] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enraged (Mantikora)
 
 }
 
@@ -1765,17 +1763,6 @@ E.EffectMergeId = {
 
 }
 
--- Effects we prevent from being prominent - the idea here is to stop some auras with the same name from clashing in prominent buffs & debuffs.
-E.EffectNoProminent = {
-    -- Nightblade
-    [64006] = true, -- Refreshing Path (Refreshing Path)
-
-    -- Sorcerer
-    [27935] = true, -- Daedric Mines (Daedric Mines)
-    [28452] = true, -- Daedric Tomb (Daedric Tomb)
-    [28454] = true, -- Daedric Minefield (Daedric Minefield)
-}
-
 E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!)
     -- Player - Basic
     [20301] = true, -- Crouch Drain
@@ -1825,8 +1812,11 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     ----------------------------
 
     [26098] = true, -- Zap Snare (Summon Storm Atronach - All Morphs)
+    [29824] = true, -- Negate Magic
     [47147] = true, -- Negate Magic
+    [47160] = true, -- Suppression Field
     [47159] = true, -- Suppression Field
+    [47168] = true, -- Absorption Field
     [47167] = true, -- Absorption Field
 
     ----------------------------
@@ -2690,6 +2680,7 @@ E.EffectOverride = {
     [33514] = { icon = 'esoui/art/icons/perks_fighters_guild_003.dds' }, -- Armor of the Veiled Heritance (of the Veiled Heritance)
     [33497] = { icon = 'esoui/art/icons/achievement_vvardenfel_035.dds' }, -- Thunderbug's Carapace (Thunderbug's)
     [92762] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds' }, -- Minor Toughness (Warrior-Poet's)
+    [106865] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds' }, -- Grace of Gloom (Gloom-Graced)
     [106868] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds' }, -- Grace of Gloom (Gloom-Graced)
 
     -- Dungeon Sets (Light)

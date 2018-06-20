@@ -845,6 +845,7 @@ function CI.CreateCastBar()
             sceneManager:GetScene("hud"):AddFragment( fragment )
             sceneManager:GetScene("hudui"):AddFragment( fragment )
             sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+            sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
 
             castbar = UI.Backdrop( uiTlw.castBar, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
             castbar:SetAnchor(CENTER, uiTlw.castBar, CENTER)
@@ -1038,6 +1039,10 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
     -- If the source/target isn't the player then bail out now.
     if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and targetType ~= COMBAT_UNIT_TYPE_PLAYER then
         return
+    end
+
+    if sourceType == COMBAT_UNIT_TYPE_PLAYER and targetType == COMBAT_UNIT_TYPE_PLAYER then
+        g_toggledSlotsPlayer[abilityId] = true
     end
 
     if result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED or result == ACTION_RESULT_EFFECT_GAINED_DURATION then
