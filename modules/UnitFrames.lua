@@ -570,6 +570,7 @@ local function CreateCustomFrames()
             ["alternative"] = {
                 ["backdrop"]= alt,
                 ["bar"]     = UI.StatusBar( alt, nil, nil, nil, false ),
+				["enlightenment"] = UI.StatusBar( alt, nil, nil, nil, false ),
                 ["icon"]    = UI.Texture( alt, {RIGHT,LEFT,-2,0}, {20,20}, nil, nil, false ),
             },
             ["topInfo"]     = topInfo,
@@ -2466,7 +2467,14 @@ function UF.UpdateVeteranXP()
         if UF.CustomFrames.player.Experience then
             UF.CustomFrames.player.Experience.bar:SetValue( GetUnitChampionPoints("player") )
         elseif UF.CustomFrames.player.ChampionXP then
-            UF.CustomFrames.player.ChampionXP.bar:SetValue( GetPlayerChampionXP() )
+			local enlightenedPool = 4 * GetEnlightenedPool()
+			local xp = GetPlayerChampionXP()
+			local maxBar = GetNumChampionXPInChampionPoint(GetPlayerChampionPointsEarned())
+			local enlightenedBar = enlightenedPool + xp
+			if enlightenedBar > maxBar then enlightenedBar = maxBar end -- If the enlightenment pool extends past the current level then cap it at the maximum bar value.
+		
+            UF.CustomFrames.player.ChampionXP.bar:SetValue( xp )
+			UF.CustomFrames.player.ChampionXP.enlightenment:SetValue( enlightenedBar )
         end
     end
     -- Clear local flag
@@ -2593,6 +2601,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterWerewolf)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
+		UF.CustomFrames.player.alternative.enlightenment:SetHidden( true ) 
     elseif UF.SV.PlayerEnableAltbarMSW and isSiege then
         icon    = "LuiExtended/media/unitframes/unitframes_bar_siege.dds"
         center  = { 0.05, 0, 0, 0.9 }
@@ -2611,6 +2620,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterSiege)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
+		UF.CustomFrames.player.alternative.enlightenment:SetHidden( true ) 
     elseif UF.SV.PlayerEnableAltbarMSW and isMounted then
         icon    = "LuiExtended/media/unitframes/unitframes_bar_mount.dds"
         center  = { 0.1*UF.SV.CustomColourStamina[1], 0.1*UF.SV.CustomColourStamina[2], 0.1*UF.SV.CustomColourStamina[3], 0.9 }
@@ -2633,6 +2643,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterMounted)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
+		UF.CustomFrames.player.alternative.enlightenment:SetHidden( true ) 
 
     elseif UF.SV.PlayerEnableAltbarXP and ( UF.CustomFrames.player.isLevelCap or ( UF.CustomFrames.player.isChampion )) then
         UF.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
@@ -2642,15 +2653,27 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.Experience = nil
 
         UF.OnChampionPointGained() -- Setup bar colour and proper icon
+		
+		local enlightenedPool = 4 * GetEnlightenedPool()
+		local xp = GetPlayerChampionXP()
+		local maxBar = GetNumChampionXPInChampionPoint(GetPlayerChampionPointsEarned())
+		local enlightenedBar = enlightenedPool + xp
+		if enlightenedBar > maxBar then enlightenedBar = maxBar end -- If the enlightenment pool extends past the current level then cap it at the maximum bar value.
 
-        UF.CustomFrames.player.ChampionXP.bar:SetMinMax( 0 , GetNumChampionXPInChampionPoint(GetPlayerChampionPointsEarned()) )
-        UF.CustomFrames.player.ChampionXP.bar:SetValue( GetPlayerChampionXP() )
+        UF.CustomFrames.player.ChampionXP.bar:SetMinMax( 0 , maxBar)
+        UF.CustomFrames.player.ChampionXP.bar:SetValue( xp )
+	
+		UF.CustomFrames.player.ChampionXP.enlightenment:SetMinMax( 0 , maxBar)
+		UF.CustomFrames.player.ChampionXP.enlightenment:SetValue( enlightenedBar )
+		
+		d(enlightenedBar)
 
         recenter = true
 
         UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterXP)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
+		UF.CustomFrames.player.alternative.enlightenment:SetHidden( false )
 
     elseif UF.SV.PlayerEnableAltbarXP then
         icon    = "LuiExtended/media/unitframes/unitframes_level_normal.dds"
@@ -2672,6 +2695,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterXP)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
+		UF.CustomFrames.player.alternative.enlightenment:SetHidden( true ) 
     else
         UF.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
         UF.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
@@ -2681,6 +2705,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
 
         hidden = true
         UF.CustomFrames.player.alternative.bar:SetMouseEnabled( false )
+		UF.CustomFrames.player.alternative.enlightenment:SetHidden( true ) 
     end
 
     -- Setup of bar colours and icon
@@ -2783,6 +2808,7 @@ function UF.OnChampionPointGained(eventCode)
         local attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
         local colour = ( UF.SV.PlayerChampionColour and CP_BAR_COLOURS[attribute] ) and CP_BAR_COLOURS[attribute][2] or XP_BAR_COLOURS
         UF.CustomFrames.player.ChampionXP.backdrop:SetCenterColor( 0.1*colour.r, 0.1*colour.g, 0.1*colour.b, 0.9 )
+        UF.CustomFrames.player.ChampionXP.enlightenment:SetColor( 0.5*colour.r, 0.5*colour.g, 0.5*colour.b, 0.9 )
         UF.CustomFrames.player.ChampionXP.bar:SetColor( colour.r, colour.g, colour.b, 0.9 )
         UF.CustomFrames.player.ChampionXP.icon:SetTexture( CHAMPION_ATTRIBUTE_HUD_ICONS[ attribute ] )
     end
