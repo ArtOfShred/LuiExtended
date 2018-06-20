@@ -1467,7 +1467,7 @@ end
 
 function SCB.Buff_OnMouseEnter(control)
 
-    InitializeTooltip(GameTooltip, control, RIGHT, -15)
+    InitializeTooltip(GameTooltip, control, BOTTOM, 0, -5, TOP)
     -- Setup Text
     local tooltipText
     local tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, control.effectName)
