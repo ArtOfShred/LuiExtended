@@ -7,6 +7,47 @@ local A = {}
 -- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------
 -- ---------------------------------------------------
 
+-- Major/Minor Buffs
+A.Skill_Minor_Resolve               = 24159
+A.Skill_Major_Resolve               = 22236
+A.Skill_Minor_Ward                  = 32761
+A.Skill_Major_Ward                  = 18868
+A.Skill_Minor_Fortitude             = 26213
+A.Skill_Major_Fortitude             = 29011
+A.Skill_Minor_Endurance             = 26215
+A.Skill_Major_Endurance             = 32748
+A.Skill_Minor_Intellect             = 26216
+A.Skill_Major_Intellect             = 36740
+A.Skill_Minor_Sorcery               = 61685
+A.Skill_Major_Sorcery               = 45227
+A.Skill_Minor_Prophecy              = 61688
+A.Skill_Major_Prophecy              = 47195
+A.Skill_Minor_Brutality             = 61662
+A.Skill_Major_Brutality             = 23673
+A.Skill_Minor_Savagery              = 79453
+A.Skill_Major_Savagery              = 26795
+A.Skill_Minor_Berserk               = 62636
+A.Skill_Major_Berserk               = 36973
+A.Skill_Minor_Force                 = 68595
+A.Skill_Major_Force                 = 46533
+A.Skill_Minor_Vitality              = 34837
+A.Skill_Major_Vitality              = 42197
+A.Skill_Minor_Mending               = 29096
+A.Skill_Major_Mending               = 61758
+A.Skill_Minor_Protection            = 40158
+A.Skill_Major_Protection            = 22233
+A.Skill_Minor_Evasion               = 61715
+A.Skill_Major_Evasion               = 61716
+A.Skill_Minor_Expedition            = 40219
+A.Skill_Major_Expedition            = 23216
+--A.Skill_Minor_Gallop                =
+A.Skill_Major_Gallop                = 57472
+A.Skill_Minor_Heroism               = 38746
+A.Skill_Major_Heroism               = 61709
+A.Skill_Minor_Toughness             = 46542
+A.Skill_Major_Courage               = 66902
+
+-- Major/Minor Debuffs
 A.Skill_Minor_Breach                = 46206
 A.Skill_Major_Breach                = 33363
 A.Skill_Minor_Fracture              = 38688
@@ -15,15 +56,10 @@ A.Skill_Minor_Vulnerability         = 51434
 A.Skill_Major_Vulnerability         = 106754
 A.Skill_Minor_Maim                  = 61856
 A.Skill_Major_Maim                  = 92041
-A.Skill_Major_Evasion               = 90620
 A.Skill_Minor_Defile                = 61726
 A.Skill_Major_Defile                = 38686
-A.Skill_Major_Expedition            = 61840
-A.Skill_Major_Vitality              = 61275
 A.Skill_Minor_Magickasteal          = 40114
 A.Skill_Minor_Lifesteal             = 33541
-A.Skill_Minor_Sorcery               = 62799
-A.Skill_Minor_Brutality             = 61798
 A.Skill_Minor_Enveration            = 47202
 A.Skill_Minor_Uncertainty           = 47204
 A.Skill_Minor_Cowardice             = 46202
@@ -31,7 +67,6 @@ A.Skill_Minor_Mangle                = 39168
 
 A.Skill_Minor_Slayer				= 76618
 A.Skill_Minor_Aegis					= 76617
-
 A.Skill_Off_Balance                 = 14062
 A.Skill_Off_Balace_Immunity         = 102771
 
@@ -508,6 +543,9 @@ A.Skill_Healing_Combustion          = 63507
 -- ---------------------------------------------------
 
 -- Assault
+A.Skill_Rapid_Manuever              = 38566
+A.Skill_Retreating_Manuever         = 40211
+A.Skill_Charging_Manuever           = 40215
 A.Skill_Caltrops                    = 33376
 A.Skill_Razor_Caltrops              = 40242
 

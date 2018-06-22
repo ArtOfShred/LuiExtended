@@ -1477,12 +1477,16 @@ function SCB.Buff_OnMouseEnter(control)
         GameTooltip:AddLine(tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
     else
         if control.buffSlot then
-            tooltipText = LUIE.Effects.TooltipOverride[control.effectId] or GetAbilityEffectDescription(control.buffSlot)
+            tooltipText = E.TooltipOverride[control.effectId] or GetAbilityEffectDescription(control.buffSlot)
         else
-            tooltipText = LUIE.Effects.TooltipOverride[control.effectId] or ""
+            tooltipText = E.TooltipOverride[control.effectId] or ""
         end
-        if tooltipText == "" and type(control.effectId) == "number" then
+        --[[if tooltipText == "" and type(control.effectId) == "number" then
             tooltipText = GetAbilityDescription(control.effectId) or ""
+        end]]--
+        local thirdLine
+        if E.TooltipNameOverride[control.effectName] then
+            thirdLine = strformat(E.TooltipNameOverride[control.effectName], GetAbilityDuration(control.effectId)/1000 )
         end
         -- Have to trim trailing spaces on the end of tooltips
         if tooltipText ~= "" then
@@ -1492,6 +1496,9 @@ function SCB.Buff_OnMouseEnter(control)
         GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
         if tooltipText ~= "" and tooltipText ~= nil then
             GameTooltip:AddLine(tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
+        end
+        if thirdLine ~="" and thirdLine ~= nil then
+            GameTooltip:AddLine(thirdLine, "", ZO_NORMAL_TEXT:UnpackRGBA())
         end
     end
 

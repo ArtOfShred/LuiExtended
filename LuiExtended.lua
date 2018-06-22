@@ -454,19 +454,24 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local markForRemove = trackBuffs[i].markForRemove or false
 
                     local tooltipText = LUIE.Effects.TooltipOverride[abilityId] or GetAbilityEffectDescription(buffSlot)
-                    if tooltipText == "" then
+                    --[[if tooltipText == "" then
                         tooltipText = GetAbilityDescription(abilityId) or ""
-                    end
+                    end]]--
                     -- Have to trim trailing spaces on the end of tooltips
                     if tooltipText ~= "" then
                         tooltipText = strmatch(tooltipText, ".*%S")
+                    end
+                    local thirdLine
+                    if LUIE.Effects.TooltipNameOverride[buffName] then
+                        thirdLine = strformat(LUIE.Effects.TooltipNameOverride[buffName], GetAbilityDuration(abilityId)/1000 )
                     end
                     if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
                         local effectsRow = effectsRowPool:AcquireObject()
                         effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
                         effectsRow.icon:SetTexture(iconFile)
                         effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, buffName)
-                        effectsRow.tooltipText = (tooltipText)
+                        effectsRow.tooltipText = tooltipText
+                        effectsRow.thirdLine = thirdLine
                         local duration = startTime - endTime
                         effectsRow.time:SetHidden(duration == 0)
                         effectsRow.time.endTime = endTime
@@ -510,6 +515,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             GameTooltip:AddLine(control.tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
             if control.tooltipText ~= "" and control.tooltipText ~= nil then
                 GameTooltip:AddLine(control.tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
+            end
+            if control.thirdLine ~="" and control.thirdLine ~= nil then
+                GameTooltip:AddLine(control.thirdLine, "", ZO_NORMAL_TEXT:UnpackRGBA())
             end
         end
 
