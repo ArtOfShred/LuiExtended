@@ -345,6 +345,56 @@ function UF.GetDefaultFramesSetting(frame, default)
     return g_DefaultFramesOptions[out_key]
 end
 
+-- Right Click function for group frames - basically just a copy of the ZOS group frame menu options
+function UF.GroupFrames_OnMouseUp(self, button, upInside)
+
+    local unitTag = self.defaultUnitTag
+    if(button == MOUSE_BUTTON_INDEX_RIGHT and upInside) then
+        ClearMenu()
+        local isPlayer = AreUnitsEqual(unitTag, "player") -- Flag Player
+        local isLFG = DoesGroupModificationRequireVote() -- Flag if we're in an LFG Group
+        local accountName = strformat(SI_UNIT_NAME, GetUnitDisplayName(unitTag))
+        local isOnline = IsUnitOnline(unitTag)
+
+        if isPlayer then
+            AddMenuItem(GetString(SI_GROUP_LIST_MENU_LEAVE_GROUP), function() ZO_Dialogs_ShowDialog("GROUP_LEAVE_DIALOG") end)
+        elseif isOnline then
+            if IsChatSystemAvailableForCurrentPlatform() then
+                AddMenuItem(GetString(SI_SOCIAL_LIST_PANEL_WHISPER), function() StartChatInput("", CHAT_CHANNEL_WHISPER, accountName) end)
+            end
+            AddMenuItem(GetString(SI_SOCIAL_MENU_VISIT_HOUSE), function() JumpToHouse(accountName) end)
+            AddMenuItem(GetString(SI_SOCIAL_MENU_JUMP_TO_PLAYER), function() JumpToGroupMember(accountName) end)
+        end
+
+        if IsGroupModificationAvailable() then
+            if IsUnitGroupLeader("player") then
+                if isPlayer then
+                    if not isLFG then
+                        AddMenuItem(GetString(SI_GROUP_LIST_MENU_DISBAND_GROUP), function() ZO_Dialogs_ShowDialog("GROUP_DISBAND_DIALOG") end)
+                    end
+                else
+                    if not isLFG then
+                        AddMenuItem(GetString(SI_GROUP_LIST_MENU_KICK_FROM_GROUP), function() GroupKick(unitTag) end)
+                    end
+                end
+            end
+
+            --Cannot vote for yourself
+            if isLFG and not isPlayer then
+                AddMenuItem(GetString(SI_GROUP_LIST_MENU_VOTE_KICK_FROM_GROUP), function() BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, ZO_GROUP_ELECTION_DESCRIPTORS.NONE, unitTag) end)
+            end
+        end
+
+        --Per design, promoting doesn't expressly fall under the mantle of "group modification"
+        if IsUnitGroupLeader("player") and not isPlayer and isOnline then
+            AddMenuItem(GetString(SI_GROUP_LIST_MENU_PROMOTE_TO_LEADER), function() GroupPromote(unitTag) end)
+        end
+
+        ShowMenu(self)
+    end
+
+end
+
 function UF.AltBar_OnMouseEnterXP(control)
 
     local isChampion = IsUnitChampion("player")
@@ -781,6 +831,14 @@ local function CreateCustomFrames()
                 ["dead"]        = UI.Label( ghb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", false ),
                 ["leader"]      = UI.Texture( topInfo, {LEFT,LEFT, -7,0}, {32,32}, nil, 2, false ),
             }
+
+            control.defaultUnitTag = GetGroupUnitTagByIndex(i)
+            control:SetMouseEnabled(true)
+            control:SetHandler("OnMouseUp", UF.GroupFrames_OnMouseUp)
+            topInfo.defaultUnitTag = GetGroupUnitTagByIndex(i)
+            topInfo:SetMouseEnabled(true)
+            topInfo:SetHandler("OnMouseUp", UF.GroupFrames_OnMouseUp)
+
         end
     end
 
@@ -827,6 +885,11 @@ local function CreateCustomFrames()
                 ["leader"]      = UI.Texture( rhb, {LEFT,LEFT, -2,0}, {28,28}, nil, 2, false ),
 
             }
+
+            control.defaultUnitTag = GetGroupUnitTagByIndex(i)
+            control:SetMouseEnabled(true)
+            control:SetHandler("OnMouseUp", UF.GroupFrames_OnMouseUp)
+
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Current (Percentage%)"
         end
     end
@@ -2503,6 +2566,7 @@ function UF.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
     if isOnline and (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then
         UF.CustomFramesApplyColours(false)
     end
+
 end
 
 function UF.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tank)
@@ -3214,7 +3278,7 @@ function UF.CustomFramesApplyColours(isMenu)
             for i = 1, groupSize do
                 if i > 4 then break end
                     local defaultUnitTag = GetGroupUnitTagByIndex(i)
-                    if GetUnitName(defaultUnitTag) == GetUnitName("player") then
+                    if AreUnitsEqual(defaultUnitTag, "player") then
                     incrementMarker = i
                 end
             end
@@ -3234,6 +3298,10 @@ function UF.CustomFramesApplyColours(isMenu)
                 else
                     defaultUnitTag = GetGroupUnitTagByIndex(i)
                 end
+
+                -- Also update control for Right Click Menu
+                UF.CustomFrames[unitTag].control.defaultUnitTag = defaultUnitTag
+                if UF.CustomFrames[unitTag].topInfo then UF.CustomFrames[unitTag].topInfo.defaultUnitTag = defaultUnitTag end
 
                 local isDps, isHealer, isTank = GetGroupMemberRoles(defaultUnitTag)
                 local class = GetUnitClassId(defaultUnitTag)
