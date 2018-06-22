@@ -3162,6 +3162,11 @@ function SCB.OnPlayerAlive(eventCode)
     end
 
     g_playerDead = false
+	
+	-- Display werewolf icon if we're in Werewolf form
+	if SCB.SV.ShowWerewolf and IsWerewolf() then
+        SCB.WerewolfState(nil, true, true)
+    end
 
     -- This is a good place to reload player buffs, as they were wiped on death
     SCB.ReloadEffects( "player" )
@@ -3176,6 +3181,16 @@ end
 function SCB.OnPlayerDead(eventCode)
     if not g_playerActive then
         return
+    end
+	-- If werewolf is active, reset the icon so it's not removed (otherwise it flashes off for about a second until the trailer function picks up on the fact that no power drain has occurred.
+	if SCB.SV.ShowWerewolf and IsWerewolf() then
+        g_effectsList.player1["Werewolf Indicator"] = {
+            type=1,
+            id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
+            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            forced = "short",
+            restart=true, iconNum=0
+		}
     end
     g_playerDead = true
 end
