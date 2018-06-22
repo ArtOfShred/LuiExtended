@@ -8785,7 +8785,7 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_UF_CFRAMESG_INCPLAYER),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESG_INCPLAYER_TP),
                 getFunc = function() return not LUIE.UnitFrames.SV.GroupExcludePlayer end,
-                setFunc = function(value) LUIE.UnitFrames.SV.GroupExcludePlayer = (not value) LUIE.UnitFrames.CustomFramesGroupUpdate() LUIE.UnitFrames.CustomFramesApplyLayoutGroup(true) end,
+                setFunc = function(value) LUIE.UnitFrames.SV.GroupExcludePlayer = (not value) LUIE.UnitFrames.CustomFramesGroupUpdate() LUIE.UnitFrames.CustomFramesApplyLayoutGroup(true) LUIE.UnitFrames.CustomFramesApplyColours(true) end,
                 width = "full",
                 default = not LUIE.UnitFrames.D.GroupExcludePlayer,
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
