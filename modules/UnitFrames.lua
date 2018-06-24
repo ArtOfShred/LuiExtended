@@ -1634,11 +1634,13 @@ function UF.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue,
 
     -- If players powerValue is zero, issue new blinking event on Custom Frames
     if unitTag == "player" and powerValue == 0 then
-        -- Sometimes when werewolf power goes to zero the EVENT_WEREWOLF_STATE_CHANGED is not always issued. Thus try to track it manually.
-        if powerType == POWERTYPE_WEREWOLF then
-            if UF.CustomFrames.player and UF.CustomFrames.player[POWERTYPE_WEREWOLF] then
-                UF.OnWerewolf( eventCode, false )
-            end
+        -- Sometimes when werewolf power goes to zero the EVENT_WEREWOLF_STATE_CHANGED is not always issued. Thus try to track it manually. -- Delayed call only if default removal doesn't work correctly.
+        if powerType == POWERTYPE_WEREWOLF and not IsUnitReincarnating("player") then
+            zo_callLater(function()
+                if UF.CustomFrames.player and UF.CustomFrames.player[POWERTYPE_WEREWOLF] then
+                    UF.OnWerewolf( eventCode, false )
+                end
+            end, 2000)
 
         -- Otherwise - we need to manually trigger blinking of powerbar
         else
@@ -2485,7 +2487,7 @@ function UF.OnLevelUpdate(eventCode, unitTag, level)
 
     -- For Custom Player Frame we have to setup experience bar
     if unitTag == "player" and UF.CustomFrames.player and UF.CustomFrames.player.Experience then
-        UF.CustomFramesSetupAlternative( false, false, false )
+        UF.CustomFramesSetupAlternative()
     end
 end
 
@@ -2508,7 +2510,7 @@ end
 
 -- Runs on the EVENT_MOUNTED_STATE_CHANGED listener.
 function UF.OnMount(eventCode, mounted)
-    UF.CustomFramesSetupAlternative( false, false, mounted )
+    UF.CustomFramesSetupAlternative( IsWerewolf(), false, mounted )
 end
 
 -- Runs on the EVENT_EXPERIENCE_UPDATE listener.

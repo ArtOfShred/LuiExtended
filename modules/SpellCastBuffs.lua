@@ -749,7 +749,7 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
                     g_effectsList.player1["Werewolf Indicator"] = {
                         target="player", type=1,
                         id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-                        dur=0, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
+                        dur=38000, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
                         forced = "short",
                         restart=true, iconNum=0, overrideDur = 38000
                     }
@@ -757,7 +757,6 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
                     eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SCB.OnPowerUpdate)
                     eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
                     g_werewolfCounter = 0
-                    eventManager:RegisterForUpdate(moduleName .. "WerewolfTicker", 1100, SCB.PowerTrailer)
                 end
                 return
             end
@@ -820,7 +819,7 @@ function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue
         g_effectsList.player1["Werewolf Indicator"] = {
             target="player", type=1,
             id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-            dur=0, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
+            dur=38000, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
             forced = "short",
             restart=true, iconNum=0, overrideDur = 38000
         }
@@ -828,6 +827,17 @@ function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue
         g_effectsList.player1["Werewolf Indicator"] = nil
     end
     eventManager:RegisterForUpdate(moduleName .. "WerewolfTicker", 1100, SCB.PowerTrailer)
+
+    -- Remove indicator if power reaches 0 - Needed for when the player is in WW form but dead/reincarnating
+    if powerValue == 0 then
+        g_effectsList.player1["Werewolf Indicator"] = nil
+        eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
+        eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
+        g_werewolfCounter = 0
+        -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
+        callLater(function() g_werewolfQuest = 0 end, 5000)
+    end
+
 end
 
 function SCB.DuelStart()
@@ -901,12 +911,6 @@ function SCB.MountStatus(eventCode, mounted)
             restart=true, iconNum=0
         }
     end
-
-    -- This event fires when the player resurrects as well, need this to keep smooth display of WW icon when dead:
-	if SCB.SV.ShowWerewolf and IsWerewolf() then
-        SCB.WerewolfState(nil, true, true)
-    end
-
 end
 
 function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
@@ -2465,6 +2469,17 @@ function SCB.OnDeath(eventCode, unitTag, isDead)
             g_effectsList.promd_ground = {}
             g_effectsList.promb_player = {}
             g_effectsList.promd_player = {}
+
+            -- If werewolf is active, reset the icon so it's not removed (otherwise it flashes off for about a second until the trailer function picks up on the fact that no power drain has occurred.
+            if SCB.SV.ShowWerewolf and IsWerewolf() then
+                g_effectsList.player1["Werewolf Indicator"] = {
+                    type=1,
+                    id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
+                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                    forced = "short",
+                    restart=true, iconNum=0
+                }
+            end
         else
             for effectType = 1, 2 do
                 g_effectsList[ unitTag .. effectType ] = {}
@@ -2543,7 +2558,7 @@ function SCB.ReloadEffects(unitTag)
             g_effectsList["player1"][ A.Innate_Recall_Penalty ] = {
                 target="player", type=1,
                 id="Fake", name=A.Innate_Recall_Penalty, icon='LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds',
-                dur=recallRemain, starts=currentTime, ends=currentTime+recallRemain,
+                dur=600000, starts=currentTime, ends=currentTime+recallRemain,
                 forced = "long",
                 restart=true, iconNum=0,
                 unbreakable=1,
@@ -3102,6 +3117,17 @@ function SCB.OnPlayerActivated(eventCode)
 
     if SCB.SV.ShowWerewolf and IsWerewolf() then
         SCB.WerewolfState(nil, true, true)
+        -- If player is dead, add unlimited duration Werewolf indicator buff
+        if IsUnitDead("player") then
+            SCB.WerewolfState(nil, true, true)
+            g_effectsList.player1["Werewolf Indicator"] = {
+            type=1,
+            id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
+            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            forced = "short",
+            restart=true, iconNum=0
+            }
+        end
     end
 
     if SCB.SV.DisguiseStatePlayer then
@@ -3171,6 +3197,11 @@ function SCB.OnPlayerAlive(eventCode)
 
     -- This is a good place to reload player buffs, as they were wiped on death
     SCB.ReloadEffects( "player" )
+
+    -- Reload werewolf effects
+    if SCB.SV.ShowWerewolf and IsWerewolf() then
+        SCB.WerewolfState(nil, true, true)
+    end
 
     -- Start Resurrection Sequence
     g_playerResurrectStage = 1
