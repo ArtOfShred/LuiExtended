@@ -1430,6 +1430,40 @@ function LUIE_CreateSettings()
             },
 
             {
+                -- Cast Bar Width
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_CI_CASTBAR_SIZEW),
+                min = 100, max = 500, step = 5,
+                getFunc = function() return LUIE.CombatInfo.SV.CastBarSizeW end,
+                setFunc = function(value) LUIE.CombatInfo.SV.CastBarSizeW = value LUIE.CombatInfo.ResizeCastBar() end,
+                width = "full",
+                default = LUIE.CombatInfo.D.CastBarSizeW,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+            },
+            {
+                -- Cast Bar Height
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_CI_CASTBAR_SIZEH),
+                min = 16, max = 64, step = 2,
+                getFunc = function() return LUIE.CombatInfo.SV.CastBarSizeH end,
+                setFunc = function(value) LUIE.CombatInfo.SV.CastBarSizeH = value LUIE.CombatInfo.ResizeCastBar() end,
+                width = "full",
+                default = LUIE.CombatInfo.D.CastBarSizeH,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+            },
+            {
+                -- Cast Bar Icon Size
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_CI_CASTBAR_ICONSIZE),
+                min = 16, max = 64, step = 2,
+                getFunc = function() return LUIE.CombatInfo.SV.CastBarIconSize end,
+                setFunc = function(value) LUIE.CombatInfo.SV.CastBarIconSize = value LUIE.CombatInfo.ResizeCastBar() end,
+                width = "full",
+                default = LUIE.CombatInfo.D.CastBarIconSize,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+            },
+
+            {
                 -- Display Label
                 type = "checkbox",
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_LABEL)),

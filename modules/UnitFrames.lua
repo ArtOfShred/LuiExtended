@@ -4115,11 +4115,11 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
 
     -- For preview let us consider that large raid consists of 2 groups of 12 players, and display 2 independent preview backdrops
     -- They do not overlap, except for the case of '3 x 8' layout
-    local groupWigth = UF.SV.RaidBarWidth * ( itemsPerColumn == 24 and 1 or mathfloor(0.5 + 12/itemsPerColumn) )
+    local groupWidth = UF.SV.RaidBarWidth * ( itemsPerColumn == 24 and 1 or mathfloor(0.5 + 12/itemsPerColumn) )
     local groupHeight = UF.SV.RaidBarHeight * mathmin(12,itemsPerColumn)
 
-    raid.preview:SetDimensions( groupWigth, groupHeight )
-    raid.preview2:SetDimensions( groupWigth, groupHeight )
+    raid.preview:SetDimensions( groupWidth, groupHeight )
+    raid.preview2:SetDimensions( groupWidth, groupHeight )
     -- raid.preview is already anchored to TOPLEFT,TOPLEFT,0,0
     raid.preview2:ClearAnchors()
     raid.preview2:SetAnchor(TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*mathfloor(12/itemsPerColumn), UF.SV.RaidBarHeight*( itemsPerColumn == 24 and 12 or 0 ) )

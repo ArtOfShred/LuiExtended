@@ -58,6 +58,9 @@ CI.D = {
     PotionTimerColor                 = true,
     PotionTimerMillis                = true,
     CastBarEnable                    = false,
+    CastBarSizeW                     = 300,
+    CastBarSizeH                     = 22,
+    CastBarIconSize                  = 32,
     CastBarTexture                   = "Plain",
     CastBarLabel                     = true,
     CastBarTimer                     = true,
@@ -72,6 +75,7 @@ CI.SV       = nil
 local uiTlw                   = {} -- GUI
 local castbar                 = {} -- castbar
 local g_casting               = false -- Toggled when casting - prevents additional events from creating a cast bar until finished
+local g_castBarUnlocked       = false -- Enabled when Cast Bar position is unlocked
 local g_ultimateCost          = 0 -- Cost of ultimate Ability in Slot
 local g_ultimateCurrent       = 0 -- Current ultimate value
 local g_ultimateSlot          = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 -- Ultimate slot number
@@ -495,7 +499,7 @@ function CI.OnUpdateCastbar(currentTime)
 	if remain <= 0 then
 		castbar.bar.name:SetHidden(true)
 		castbar.bar.timer:SetHidden(true)
-		castbar:SetHidden(true)
+		if not g_castBarUnlocked then castbar:SetHidden(true) end -- Don't hide the cast bar if we have it unlocked to move.
 		castbar.remain = nil
 		castbar.starts = nil
 		castbar.ends = nil
@@ -830,83 +834,138 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
 end
 
 function CI.CreateCastBar()
+    uiTlw.castBar = UI.TopLevel( nil, nil )
+    uiTlw.castBar:SetHandler( "OnMoveStop", function(self)
+        CI.SV.CastbarOffsetX = self:GetLeft()
+        CI.SV.CastbarOffsetY = self:GetTop()
+    end )
 
-            uiTlw.castBar = UI.TopLevel( nil, nil )
-            uiTlw.castBar:SetHandler( "OnMoveStop", function(self)
-                CI.SV.CastOffsetX = self:GetLeft()
-                CI.SV.CastOffsetY = self:GetTop()
-            end )
+    uiTlw.castBar:SetDimensions( CI.SV.CastBarSizeW + CI.SV.CastBarIconSize + 4, CI.SV.CastBarSizeH )
 
-            uiTlw.castBar:SetDimensions( 500, 40 )
+    -- Setup Preview
+    uiTlw.castBar.preview = LUIE.UI.Backdrop( uiTlw.castBar, "fill", nil, nil, nil, true )
+    uiTlw.castBar.previewLabel = UI.Label( uiTlw.castBar.preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", "Cast Bar", false )
 
+    -- Callback used to hide anchor coords preview label on movement start
+    local tlwOnMoveStart = function(self)
+        eventManager:RegisterForUpdate( moduleName .. "previewMove", 200, function()
+            self.preview.anchorLabel:SetText(strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
+        end)
+    end
+    -- Callback used to save new position of frames
+    local tlwOnMoveStop = function(self)
+        eventManager:UnregisterForUpdate( moduleName .. "previewMove" )
+        CI.SV.CastBarCustomPosition = { self:GetLeft(), self:GetTop() }
+    end
 
-            local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.castBar, 0, 0)
+    uiTlw.castBar:SetHandler( "OnMoveStart", tlwOnMoveStart )
+    uiTlw.castBar:SetHandler( "OnMoveStop", tlwOnMoveStop )
 
-            sceneManager:GetScene("hud"):AddFragment( fragment )
-            sceneManager:GetScene("hudui"):AddFragment( fragment )
-            sceneManager:GetScene("siegeBar"):AddFragment( fragment )
-            sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
+    uiTlw.castBar.preview.anchorTexture = UI.Texture( uiTlw.castBar.preview, {TOPLEFT,TOPLEFT}, {16,16}, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false )
+    uiTlw.castBar.preview.anchorTexture:SetColor(1, 1, 0, 0.9)
 
-            castbar = UI.Backdrop( uiTlw.castBar, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
-            castbar:SetAnchor(CENTER, uiTlw.castBar, CENTER)
-
-            castbar.starts = 0
-            castbar.ends = 0
-            castbar.remain = 0
-
-            castbar:SetDimensions( 32, 32 )
-
-            castbar.back = UI.Texture( castbar, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false )
-            castbar.back:SetAnchor(TOPLEFT, castbar, TOPLEFT)
-            castbar.back:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT)
-
-            castbar.iconbg = UI.Texture( castbar, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false )
-            castbar.iconbg = UI.Backdrop( castbar, nil, nil, {0,0,0,0.9}, {0,0,0,0.9}, false )
-            castbar.iconbg:SetDrawLevel(DL_CONTROLS)
-            castbar.iconbg:SetAnchor( TOPLEFT, buff, TOPLEFT, 3, 3)
-            castbar.iconbg:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -3, -3)
-
-            castbar.icon   = UI.Texture( castbar, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false )
-            castbar.icon:SetAnchor( TOPLEFT, buff, TOPLEFT, 3, 3 )
-            castbar.icon:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -3, -3 )
-
-            castbar.bar = {
-                ["backdrop"] = UI.Backdrop( castbar, nil, {300, 22}, nil, nil, false ),
-                ["bar"] = UI.StatusBar( castbar, nil, {296, 18}, nil, false ),
-                ["name"] = UI.Label( castbar, nil, nil, nil, nil, g_castbarFont, false ),
-                ["timer"] = UI.Label( castbar, nil, nil, nil, nil, g_castbarFont, false ),
-            }
-
-            castbar.bar.backdrop:SetEdgeTexture("",8,2,2)
-            castbar.bar.backdrop:SetDrawLayer(DL_BACKDROP)
-            castbar.bar.backdrop:SetDrawLevel(1)
-            castbar.bar.bar:SetMinMax(0, 1)
-            castbar.bar.backdrop:SetCenterColor((0.1*.50), (0.1*.50), (0.1*.50), 0.75)
-            castbar.bar.bar:SetGradientColors( 0, 47/255, 130/255, 1, 82/255, 215/255, 1, 1)
-            castbar.bar.backdrop:SetCenterColor((0.1*CI.SV.CastBarGradientC1[1]), (0.1*CI.SV.CastBarGradientC1[2]), (0.1*CI.SV.CastBarGradientC1[3]), 0.75)
-            castbar.bar.bar:SetGradientColors( CI.SV.CastBarGradientC1[1], CI.SV.CastBarGradientC1[2], CI.SV.CastBarGradientC1[3], 1, CI.SV.CastBarGradientC2[1], CI.SV.CastBarGradientC2[2], CI.SV.CastBarGradientC2[3], 1)
+    uiTlw.castBar.preview.anchorLabel = UI.Label( uiTlw.castBar.preview, {BOTTOMLEFT,TOPLEFT,0,-1}, nil, {0,2}, "ZoFontGameSmall", "xxx, yyy", false )
+    uiTlw.castBar.preview.anchorLabel:SetColor(1, 1, 0 , 1)
+    uiTlw.castBar.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
+    uiTlw.castBar.preview.anchorLabel:SetDrawTier(1)
+    uiTlw.castBar.preview.anchorLabelBg = UI.Backdrop(  uiTlw.castBar.preview.anchorLabel, "fill", nil, {0,0,0,1}, {0,0,0,1}, false )
+    uiTlw.castBar.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
+    uiTlw.castBar.preview.anchorLabelBg:SetDrawTier(0)
 
 
-            castbar.bar.backdrop:ClearAnchors()
-            castbar.bar.backdrop:SetAnchor(LEFT, castbar, RIGHT, 4, 0 )
+    local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.castBar, 0, 0)
 
-            castbar.bar.timer:ClearAnchors()
-            castbar.bar.timer:SetAnchor(RIGHT, castbar.bar.backdrop, RIGHT, -4, 0 )
-            castbar.bar.timer:SetHidden(true)
+    sceneManager:GetScene("hud"):AddFragment( fragment )
+    sceneManager:GetScene("hudui"):AddFragment( fragment )
+    sceneManager:GetScene("siegeBar"):AddFragment( fragment )
+    sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
 
-            castbar.bar.name:ClearAnchors()
-            castbar.bar.name:SetAnchor(LEFT, castbar.bar.backdrop, LEFT, 4, 0 )
-            castbar.bar.name:SetHidden(true)
+    castbar = UI.Backdrop( uiTlw.castBar, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
+    castbar:SetAnchor(LEFT, uiTlw.castBar, LEFT)
 
-            castbar.bar.bar:SetTexture(LUIE.StatusbarTextures[CI.SV.CastBarTexture])
-            castbar.bar.bar:ClearAnchors()
-            castbar.bar.bar:SetAnchor(CENTER, castbar.bar.backdrop, CENTER, 0, 0)
-            castbar.bar.bar:SetAnchor(CENTER, castbar.bar.backdrop, CENTER, 0, 0)
+    castbar.starts = 0
+    castbar.ends = 0
+    castbar.remain = 0
 
-            castbar.bar.timer:SetText("Timer")
-            castbar.bar.name:SetText("Name")
+    castbar:SetDimensions( CI.SV.CastBarIconSize, CI.SV.CastBarIconSize )
 
-            castbar:SetHidden(true)
+    castbar.back = UI.Texture( castbar, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false )
+    castbar.back:SetAnchor(TOPLEFT, castbar, TOPLEFT)
+    castbar.back:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT)
+
+    castbar.iconbg = UI.Texture( castbar, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false )
+    castbar.iconbg = UI.Backdrop( castbar, nil, nil, {0,0,0,0.9}, {0,0,0,0.9}, false )
+    castbar.iconbg:SetDrawLevel(DL_CONTROLS)
+    castbar.iconbg:SetAnchor( TOPLEFT, castbar, TOPLEFT, 3, 3)
+    castbar.iconbg:SetAnchor( BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3)
+
+    castbar.icon = UI.Texture( castbar, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false )
+    castbar.icon:SetAnchor( TOPLEFT, castbar, TOPLEFT, 3, 3 )
+    castbar.icon:SetAnchor( BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3 )
+
+    castbar.bar = {
+        ["backdrop"] = UI.Backdrop( castbar, nil, {CI.SV.CastBarSizeW, CI.SV.CastBarSizeH}, nil, nil, false ),
+        ["bar"] = UI.StatusBar( castbar, nil, {CI.SV.CastBarSizeW-4, CI.SV.CastBarSizeH-4}, nil, false ),
+        ["name"] = UI.Label( castbar, nil, nil, nil, nil, g_castbarFont, false ),
+        ["timer"] = UI.Label( castbar, nil, nil, nil, nil, g_castbarFont, false ),
+    }
+
+    castbar.bar.backdrop:SetEdgeTexture("",8,2,2)
+    castbar.bar.backdrop:SetDrawLayer(DL_BACKDROP)
+    castbar.bar.backdrop:SetDrawLevel(1)
+    castbar.bar.bar:SetMinMax(0, 1)
+    castbar.bar.backdrop:SetCenterColor((0.1*.50), (0.1*.50), (0.1*.50), 0.75)
+    castbar.bar.bar:SetGradientColors( 0, 47/255, 130/255, 1, 82/255, 215/255, 1, 1)
+    castbar.bar.backdrop:SetCenterColor((0.1*CI.SV.CastBarGradientC1[1]), (0.1*CI.SV.CastBarGradientC1[2]), (0.1*CI.SV.CastBarGradientC1[3]), 0.75)
+    castbar.bar.bar:SetGradientColors( CI.SV.CastBarGradientC1[1], CI.SV.CastBarGradientC1[2], CI.SV.CastBarGradientC1[3], 1, CI.SV.CastBarGradientC2[1], CI.SV.CastBarGradientC2[2], CI.SV.CastBarGradientC2[3], 1)
+
+
+    castbar.bar.backdrop:ClearAnchors()
+    castbar.bar.backdrop:SetAnchor(LEFT, castbar, RIGHT, 4, 0 )
+
+    castbar.bar.timer:ClearAnchors()
+    castbar.bar.timer:SetAnchor(RIGHT, castbar.bar.backdrop, RIGHT, -4, 0 )
+    castbar.bar.timer:SetHidden(true)
+
+    castbar.bar.name:ClearAnchors()
+    castbar.bar.name:SetAnchor(LEFT, castbar.bar.backdrop, LEFT, 4, 0 )
+    castbar.bar.name:SetHidden(true)
+
+    castbar.bar.bar:SetTexture(LUIE.StatusbarTextures[CI.SV.CastBarTexture])
+    castbar.bar.bar:ClearAnchors()
+    castbar.bar.bar:SetAnchor(CENTER, castbar.bar.backdrop, CENTER, 0, 0)
+    castbar.bar.bar:SetAnchor(CENTER, castbar.bar.backdrop, CENTER, 0, 0)
+
+    castbar.bar.timer:SetText("Timer")
+    castbar.bar.name:SetText("Name")
+
+    castbar:SetHidden(true)
+end
+
+function CI.ResizeCastBar()
+
+    uiTlw.castBar:SetDimensions( CI.SV.CastBarSizeW + CI.SV.CastBarIconSize + 4, CI.SV.CastBarSizeH )
+    castbar:ClearAnchors()
+    castbar:SetAnchor(LEFT, uiTlw.castBar, LEFT)
+
+    castbar:SetDimensions( CI.SV.CastBarIconSize, CI.SV.CastBarIconSize )
+    castbar.bar.backdrop:SetDimensions(CI.SV.CastBarSizeW, CI.SV.CastBarSizeH)
+    castbar.bar.bar:SetDimensions(CI.SV.CastBarSizeW-4, CI.SV.CastBarSizeH-4)
+
+    castbar.bar.backdrop:ClearAnchors()
+    castbar.bar.backdrop:SetAnchor(LEFT, castbar, RIGHT, 4, 0 )
+
+    castbar.bar.timer:ClearAnchors()
+    castbar.bar.timer:SetAnchor(RIGHT, castbar.bar.backdrop, RIGHT, -4, 0 )
+
+    castbar.bar.name:ClearAnchors()
+    castbar.bar.name:SetAnchor(LEFT, castbar.bar.backdrop, LEFT, 4, 0 )
+
+    castbar.bar.bar:ClearAnchors()
+    castbar.bar.bar:SetAnchor(CENTER, castbar.bar.backdrop, CENTER, 0, 0)
+    castbar.bar.bar:SetAnchor(CENTER, castbar.bar.backdrop, CENTER, 0, 0)
+
+    CI.SetCastBarPosition()
 
 end
 
@@ -922,20 +981,26 @@ function CI.ResetCastBarPosition()
     if not CI.Enabled then
         return
     end
-    CI.SV.CastOffsetX = nil
-    CI.SV.CastOffsetY = nil
+    CI.SV.CastbarOffsetX = nil
+    CI.SV.CastbarOffsetY = nil
+    CI.SV.CastBarCustomPosition = nil
     CI.SetCastBarPosition()
 end
 
 function CI.SetCastBarPosition()
     if uiTlw.castBar and uiTlw.castBar:GetType() == CT_TOPLEVELCONTROL then
         uiTlw.castBar:ClearAnchors()
-        if CI.SV.CastOffsetX ~= nil and CI.SV.CastOffsetY ~= nil then
-            uiTlw.castBar:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, CI.SV.CastOffsetX, CI.SV.CastOffsetY )
+
+        if CI.SV.CastbarOffsetX ~= nil and CI.SV.CastbarOffsetY ~= nil then
+            uiTlw.castBar:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, CI.SV.CastbarOffsetX, CI.SV.CastbarOffsetY )
         else
-            uiTlw.castBar:SetAnchor( CENTER, GuiRoot, CENTER, -145, 320 )
+            uiTlw.castBar:SetAnchor( CENTER, GuiRoot, CENTER, 0, 320 )
         end
     end
+
+    local savedPos = CI.SV.CastBarCustomPosition
+    uiTlw.castBar.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default" )
+
 end
 
 function CI.SetMovingState(state)
@@ -943,7 +1008,10 @@ function CI.SetMovingState(state)
         return
     end
 
+    g_castBarUnlocked = state
+
     if uiTlw.castBar and uiTlw.castBar:GetType() == CT_TOPLEVELCONTROL then
+        uiTlw.castBar.preview:SetHidden( not state )
         uiTlw.castBar:SetMouseEnabled( state )
         uiTlw.castBar:SetMovable( state )
         castbar:SetHidden( not state )
