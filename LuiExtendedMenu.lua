@@ -1399,10 +1399,7 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE_TP),
                 getFunc = function() return l_CastBarMovingEnabled end,
-                setFunc = function(value)
-                    l_CastBarMovingEnabled = value
-                    LUIE.CombatInfo.SetMovingState(value)
-                    end,
+                setFunc = LUIE.CombatInfo.SetMovingState,
                 width = "half",
                 default = false,
                 resetFunc = LUIE.CombatInfo.ResetCastBarPosition,
@@ -7626,7 +7623,7 @@ function LUIE_CreateSettings()
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TP),
-        getFunc = function() return LUIE.UnitFrames.CustomFramesMovingState end,
+        getFunc = function() return LUIE.CombatInfo.CastBarUnlocked end,
         setFunc = LUIE.UnitFrames.CustomFramesSetMovingState,
         width = "half",
         default = false,

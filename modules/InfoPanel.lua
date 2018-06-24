@@ -355,6 +355,7 @@ function PNL.SetMovingState( state )
     PNL.panelUnlocked = state
     uiPanel:SetMouseEnabled( state )
     uiPanel:SetMovable( state )
+    uiPanel:SetHidden ( false )
 end
 
 -- Set scale of Info Panel. Called from Settings Menu.

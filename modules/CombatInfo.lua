@@ -70,12 +70,12 @@ CI.D = {
     CastBarGradientC1                = { 0, 47/255, 130/255 },
     CastBarGradientC2                = { 82/255, 215/255, 1 },
 }
-CI.SV       = nil
+CI.SV               = nil
+CI.CastBarUnlocked  = false
 
 local uiTlw                   = {} -- GUI
 local castbar                 = {} -- castbar
 local g_casting               = false -- Toggled when casting - prevents additional events from creating a cast bar until finished
-local g_castBarUnlocked       = false -- Enabled when Cast Bar position is unlocked
 local g_ultimateCost          = 0 -- Cost of ultimate Ability in Slot
 local g_ultimateCurrent       = 0 -- Current ultimate value
 local g_ultimateSlot          = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 -- Ultimate slot number
@@ -497,14 +497,18 @@ function CI.OnUpdateCastbar(currentTime)
 	local castEnds = castbar.ends
 	local remain = castbar.remain - currentTime
 	if remain <= 0 then
+        local state = CI.CastBarUnlocked
+         -- Don't hide the cast bar if we have it unlocked to move.
 		castbar.bar.name:SetHidden(true)
 		castbar.bar.timer:SetHidden(true)
-		if not g_castBarUnlocked then castbar:SetHidden(true) end -- Don't hide the cast bar if we have it unlocked to move.
+		castbar:SetHidden(true)
 		castbar.remain = nil
 		castbar.starts = nil
 		castbar.ends = nil
 		g_casting = false
 		eventManager:UnregisterForUpdate(moduleName.."CI_CASTBAR")
+
+        if state then CI.GenerateCastbarPreview(state) end
 	else
 		if CI.SV.CastBarTimer then
 			castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
@@ -1007,16 +1011,33 @@ function CI.SetMovingState(state)
     if not CI.Enabled then
         return
     end
-
-    g_castBarUnlocked = state
-
+    CI.CastBarUnlocked = state
     if uiTlw.castBar and uiTlw.castBar:GetType() == CT_TOPLEVELCONTROL then
-        uiTlw.castBar.preview:SetHidden( not state )
+        CI.GenerateCastbarPreview(state)
         uiTlw.castBar:SetMouseEnabled( state )
         uiTlw.castBar:SetMovable( state )
-        castbar:SetHidden( not state )
     end
 
+end
+
+-- Called by CI.SetMovingState from the menu as well as by CI.OnUpdateCastbar when preview is enabled
+function CI.GenerateCastbarPreview(state)
+    local previewIcon = 'esoui/art/icons/icon_missing.dds'
+    castbar.icon:SetTexture(previewIcon)
+    if CI.SV.CastBarLabel then
+        local previewName = "Test"
+        castbar.bar.name:SetText(previewName)
+        castbar.bar.name:SetHidden( not state )
+    end
+    if CI.SV.CastBarTimer then
+        castbar.bar.timer:SetText( strfmt("1.0") )
+        castbar.bar.timer:SetHidden ( not state )
+    end
+    castbar.bar.bar:SetValue( 1 )
+
+    uiTlw.castBar.preview:SetHidden( not state )
+    uiTlw.castBar:SetHidden( not state )
+    castbar:SetHidden( not state )
 end
 
 -- Listens to EVENT_COMBAT_EVENT
