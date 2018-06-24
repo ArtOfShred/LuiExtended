@@ -901,6 +901,12 @@ function SCB.MountStatus(eventCode, mounted)
             restart=true, iconNum=0
         }
     end
+
+    -- This event fires when the player resurrects as well, need this to keep smooth display of WW icon when dead:
+	if SCB.SV.ShowWerewolf and IsWerewolf() then
+        SCB.WerewolfState(nil, true, true)
+    end
+
 end
 
 function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
@@ -3162,11 +3168,6 @@ function SCB.OnPlayerAlive(eventCode)
     end
 
     g_playerDead = false
-	
-	-- Display werewolf icon if we're in Werewolf form
-	if SCB.SV.ShowWerewolf and IsWerewolf() then
-        SCB.WerewolfState(nil, true, true)
-    end
 
     -- This is a good place to reload player buffs, as they were wiped on death
     SCB.ReloadEffects( "player" )
