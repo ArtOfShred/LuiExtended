@@ -2485,7 +2485,7 @@ function UF.OnLevelUpdate(eventCode, unitTag, level)
 
     -- For Custom Player Frame we have to setup experience bar
     if unitTag == "player" and UF.CustomFrames.player and UF.CustomFrames.player.Experience then
-        UF.CustomFramesSetupAlternative()
+        UF.CustomFramesSetupAlternative( false, false, false )
     end
 end
 
@@ -2498,17 +2498,17 @@ end
 
 -- Runs on the EVENT_WEREWOLF_STATE_CHANGED listener.
 function UF.OnWerewolf(eventCode, werewolf)
-    UF.CustomFramesSetupAlternative()
+    UF.CustomFramesSetupAlternative( werewolf, false, false )
 end
 
 -- Runs on the EVENT_BEGIN_SIEGE_CONTROL, EVENT_END_SIEGE_CONTROL, EVENT_LEAVE_RAM_ESCORT listeners.
 function UF.OnSiege(eventCode)
-    UF.CustomFramesSetupAlternative()
+    UF.CustomFramesSetupAlternative( false, nil, false )
 end
 
 -- Runs on the EVENT_MOUNTED_STATE_CHANGED listener.
 function UF.OnMount(eventCode, mounted)
-    UF.CustomFramesSetupAlternative()
+    UF.CustomFramesSetupAlternative( false, false, mounted )
 end
 
 -- Runs on the EVENT_EXPERIENCE_UPDATE listener.
@@ -2623,15 +2623,20 @@ end
 -- This function is used to setup alternative bar for player
 -- Priority order: Werewolf -> Siege -> Mount -> ChampionXP / Experience
 local XP_BAR_COLOURS = ZO_XP_BAR_GRADIENT_COLORS[2]
-function UF.CustomFramesSetupAlternative()
+function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
     if not UF.CustomFrames.player then
         return
     end
-
-    -- Determine what mode we should be in.
-    local isWerewolf = IsWerewolf()
-    local isSiege = ( IsPlayerControllingSiegeWeapon() or IsPlayerEscortingRam() )
-    local isMounted = IsMounted()
+    -- If any of input parameters are nil, we need to query them
+    if isWerewolf == nil then
+        isWerewolf = IsWerewolf()
+    end
+    if isSiege == nil then
+        isSiege = ( IsPlayerControllingSiegeWeapon() or IsPlayerEscortingRam() )
+    end
+    if isMounted == nil then
+        isMounted = IsMounted()
+    end
 
     local center, colour, icon
     local hidden = false
