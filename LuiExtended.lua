@@ -454,10 +454,16 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local markForRemove = trackBuffs[i].markForRemove or false
 
                     local tooltipText = LUIE.Effects.TooltipOverride[abilityId] or GetAbilityEffectDescription(buffSlot)
-                    --[[if tooltipText == "" then
-                        tooltipText = GetAbilityDescription(abilityId) or ""
-                    end]]--
-                    -- Have to trim trailing spaces on the end of tooltips
+
+                    -- In debug mode for now
+                    local displayName = GetDisplayName()
+                    if tooltipText == "" and displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+                        if GetAbilityDescription(abilityId) ~= "" then
+                            tooltipText = "|c2DC50EDescription:|r " .. GetAbilityDescription(abilityId) or ""
+                        end
+                    end
+                    -- In debug mode for now
+
                     if tooltipText ~= "" then
                         tooltipText = strmatch(tooltipText, ".*%S")
                     end

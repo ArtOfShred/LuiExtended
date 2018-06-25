@@ -449,6 +449,11 @@ E.CastChannelOverride = {
     [14031] = true, -- Mundus Use
     [4197] = true, -- Recovering (NPC Duel)
 
+    -- Sets
+    [90940] = true, -- Eternal Warrior
+    [90937] = true, -- Immortal Warrior
+    [90935] = true, -- Phoenix
+
     -- Quest
     [39367] = true, -- Altar Use (Shadow of Sancre Tor)
     [36421] = true, -- Drink with Lyris (Council of the Five Companions)
@@ -460,6 +465,7 @@ E.CastChannelOverride = {
     [21968] = true, -- Binding Bear... (Silent Village)
     [22931] = true, -- Freeing Spirit... (An Act of Kindness)
     [23187] = true, -- Q4236 PC Untie Palith (The Veiled Choice)
+    [47301] = true, -- Stunned (Passage Denied)
 
 }
 
@@ -477,6 +483,11 @@ E.CastDurationFix = {
     [39477] = 1750, -- De-Werewolf (Werewolf)
     [75008] = 6500, -- Werewolf Transformation (Werewolf - Quest Transformation)
 
+    -- Sets
+    [90940] = 3000, -- Eternal Warrior
+    [90937] = 3000, -- Immortal Warrior
+    [90935] = 3000, -- Phoenix
+
     -- Quest
     [39367] = 10000, -- Altar Use (Shadow of Sancre Tor)
     [36421] = 3000, -- Drink with Lyris (Council of the Five Companions)
@@ -484,6 +495,7 @@ E.CastDurationFix = {
     [22448] = 3000, -- Q4266 Tie up Hendil (The First Patient)
     [22271] = 3000, -- Teleport Scroll AB (Depths of Madness)
     [23187] = 2000, -- Q4236 PC Untie Palith (The Veiled Choice)
+    [47301] = 3000, -- Stunned (Passage Denied)
 
 }
 
@@ -513,7 +525,6 @@ E.IsCast = {
     [24613] = true, -- Summon Winged Twilight
     [24636] = true, -- Summon Twilight Tormentor
     [24639] = true, -- Summon Twilight Matriarch
-
 
     [26114] = true, -- Puncturing Strikes (Templar)
     [26792] = true, -- Biting Jabs (Templar)
@@ -583,6 +594,11 @@ E.IsCast = {
     [61487] = true, -- Magicka Detonation (Assault)
     [61491] = true, -- Inevitable Detonation (Assault)
 
+    -- Sets
+    [90940] = true, -- Eternal Warrior
+    [90937] = true, -- Immortal Warrior
+    [90935] = true, -- Phoenix
+
     -- NPC Basic
     [4197] = true, -- Recovering (NPC Duel)
 
@@ -603,6 +619,7 @@ E.IsCast = {
     [21040] = true, -- Q4220 Spirit Layer Ability (The Mallari-Mora)
     [22931] = true, -- Freeing Spirit... (An Act of Kindness)
     [23187] = true, -- Q4236 PC Untie Palith (The Veiled Choice)
+    [47301] = true, -- Stunned (Passage Denied)
 
 }
 
@@ -1469,6 +1486,15 @@ E.AddNameAura = {
     ['The Nestmother'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Nestmothers Den)
     ['Anarume'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Heritance Proving Ground)
 
+    ['Bavura the Blizzard'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Nindaeril's Perch)
+    ['Nindaeril the Monsoon'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Nindaeril's Perch)
+    ['Shagura'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Hircine's Henge)
+    ['Gurgozu'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Hircine's Henge)
+    ['Valanir\'s Shield'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Valanir's Rest)
+    ['Lady Solace'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Lady Solace's Fen)
+    ['Otho Rufinus'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Poacher Camp)
+    ['Thugrub the Reformed'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Thugrub's Cave)
+
     -- Public Dungeon
     ['Nitch'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Toothmaul Gully)
     ['Thek Elf-Stabber'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Toothmaul Gully)
@@ -1478,6 +1504,13 @@ E.AddNameAura = {
     ['Dzeizik'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Toothmaul Gully)
     ['Slakkith'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Toothmaul Gully)
     ['Gorg'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Toothmaul Gully)
+
+    ['Great Thorn'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Root Sunder Ruins)
+    ['The Devil Wrathmaw'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Root Sunder Ruins)
+    ['Rootbiter'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Root Sunder Ruins)
+    ['Silent Claw'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Root Sunder Ruins)
+    ['Thick-Bark'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Root Sunder Ruins)
+    ['Guardian of Root Sunder'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Root Sunder Ruins)
 
     -- MSQ
     ['Ragjar'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
@@ -1606,16 +1639,19 @@ E.EffectOverrideByName = {
                     ['Lioness'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_lioness_rend.dds' }, -- Rend (Lion)
                     ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_rend.dds' }, -- Rend (Sabre Cat)
                     ['Senche-Tiger'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+                    ['Nindaeril the Monsoon'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                 },
     [60630] =   { -- Rend (Lion)
                     ['Lion'] =                      { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
                     ['Lioness'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_lioness_rend.dds' }, -- Rend (Lion)
                     ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_rend.dds' }, -- Rend (Sabre Cat)
                     ['Senche-Tiger'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+                    ['Nindaeril the Monsoon'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                 },
     [60641] =   { -- Claw (Lion)
                     ['Sabre Cat'] =             { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_claw.dds' }, -- Claw (Sabre Cat)
                     ['Senche-Tiger'] =          { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
+                    ['Nindaeril the Monsoon'] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
                 },
     [7158] =    { -- Bite (Lion)
                     ['Lion'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_lion_bite.dds' }, -- Bite (Lion)
@@ -1673,6 +1709,7 @@ E.EffectOverrideByName = {
                     ['Skaafin Miscreal'] =      { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_rending_slash.dds' }, -- Rending Slash (Skaafin Miscreal)
                 },
     [9194] =    { -- Flurry (Bloodfiend)
+                    ['Skeleton'] =              { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Skeleton)
                     ['Bone Flayer'] =           { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Bone Flayer)
                     ['Skaafin Wretch'] =        { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_flurry.dds' }, -- Flurry (Skaafin Wretch)
                     ['Skaafin Miscreal'] =      { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_flurry.dds' }, -- Flurry (Skaafin Miscreal)
@@ -1972,6 +2009,16 @@ E.TooltipOverride = {
     [100862] = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP), -- Fortified Ayleid Health Bonus
     [48899] = GetString(SI_LUIE_SKILL_FIRELIGHT_TP), -- Firelight
     [23159] = GetString(SI_LUIE_SKILL_DIVINE_SPEED_TP), -- Divine Speed (Auridon - Blessings of the Eight)
+
+    -- Minor/Major Slayer/Aegis
+    [76617] = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP), -- Minor Slayer
+    [98103] = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP), -- Minor Slayer
+    [98102] = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP), -- Minor Slayer
+    [76618] = GetString(SI_LUIE_SKILL_MINOR_AEGIS_TP), -- Minor Aegis
+    [93444] = GetString(SI_LUIE_SKILL_MAJOR_AEGIS_TP), -- Major Aegis
+    [93125] = GetString(SI_LUIE_SKILL_MAJOR_AEGIS_TP), -- Major Aegis
+    [93120] = GetString(SI_LUIE_SKILL_MAJOR_SLAYER_TP), -- Major Slayer
+    [93442] = GetString(SI_LUIE_SKILL_MAJOR_SLAYER_TP), -- Major Slayer
 
     -- Fix for Rapid Manuever and Morphs
     [101161] = A.Skill_Rapid_Manuever, -- Major Expedition (Rapid Manuever)
@@ -5762,9 +5809,11 @@ E.EffectOverride = {
     [89102] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_tiger.dds' }, -- Summon Beast (Spriggan)
     [89157] = { hide = true }, -- Summon Beast (Spriggan)
     [89158] = { hide = true }, -- Summon Beast (Spriggan)
+    [89159] = { hide = true }, -- Summon Beast (Spriggan)
     [89151] = { hide = true }, -- Summon Beast (Spriggan)
     [89154] = { hide = true }, -- Summon Beast (Spriggan)
     [89168] = { hide = true }, -- Summon Beast (Spriggan)
+    [89170] = { hide = true }, -- Summon Beast (Spriggan)
     [89127] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = A.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Summon Beast (Spriggan)
     [21570] = { hide = true }, -- Backstep (Spriggan)
     [13477] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_control_beast.dds' }, -- Control Beast (Spriggan)
@@ -6510,6 +6559,35 @@ E.EffectOverride = {
 
     -- Rightful Inheritance
     [24826] = { hide = true }, -- Spiteful Essence
+
+    --------------------
+    -- Grahtwood
+    --------------------
+
+    -- World Events
+    [40035] = { hide = true }, -- GW CTen Swinging Axe (Peacemaker Achievement Location)
+
+    -- World Boss - Nindaeril's Perch
+    [83515] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds' }, -- Hunter's Pounce (Bavura the Blizzard)
+    [83517] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds' }, -- Hunter's Pounce (Bavura the Blizzard)
+    [84018] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds' }, -- Hunter's Pounce (Bavura the Blizzard)
+    [83521] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds' }, -- Hunter's Pounce (Bavura the Blizzard)
+    [83832] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds' }, -- Frenzied Charge (Nindaeril the Monsoon)
+    [83833] = { hide = true }, -- Frenzied Charge (Nindaeril the Monsoon)
+    [83846] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds' }, -- Frenzied Charge (Nindaeril the Monsoon)
+    [83855] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds' }, -- Frenzied Charge (Nindaeril the Monsoon)
+    [83852] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds' }, -- Frenzied Charge (Nindaeril the Monsoon)
+    [83548] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_mighty_roar.dds' }, -- Mighty Roar (Nindaeril the Monsoon)
+    [83549] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_mighty_roar.dds' }, -- Mighty Roar (Nindaeril the Monsoon)
+
+    -- Public Dungeon - Root Sunder Ruins
+    [34176] = { hide = true }, -- Blue Flam (The Bonemonger)
+
+    -- Public Dungeon - Root Sunder Ruins -- Forgotten Soul
+    [91627] = { hide = true }, -- Root Sunder's Favor
+
+    -- Passage Denied
+    [47301] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_ayleid_wand_of_blockade.dds', name = A.Skill_Close_Portal }, -- Stunned
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------

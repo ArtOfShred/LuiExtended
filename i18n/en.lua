@@ -2231,6 +2231,11 @@ local strings = {
     SI_LUIE_SKILL_MINOR_COWARDICE_TP =                   "Increase Ultimate Ability cost by |cffffff60|r% for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_MINOR_MANGLE_TP =                      "Reduce Max Health by |cffffff10|r% for |cffffff<<1>>|r seconds.",
 
+    SI_LUIE_SKILL_MINOR_SLAYER_TP =                      "Your attacks deal |cffffff5|r% more damage to Dungeon and Trial enemies.",
+    SI_LUIE_SKILL_MAJOR_SLAYER_TP =                      "Your attacks deal |cffffff15|r% more damage to Dungeon and Trial enemies.",
+    SI_LUIE_SKILL_MINOR_AEGIS_TP =                       "You take |cffffff5|r% less damage from Dungeon and Trial enemies.",
+    SI_LUIE_SKILL_MAJOR_AEGIS_TP =                       "You take |cffffff15|r% less damage from Dungeon and Trial enemies.",
+
 }
 
 -- TODO: Switch to StringId's

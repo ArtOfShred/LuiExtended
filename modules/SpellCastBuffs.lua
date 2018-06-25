@@ -1491,9 +1491,16 @@ function SCB.Buff_OnMouseEnter(control)
         else
             tooltipText = E.TooltipOverride[control.effectId] or ""
         end
-        --[[if tooltipText == "" and type(control.effectId) == "number" then
-            tooltipText = GetAbilityDescription(control.effectId) or ""
-        end]]--
+
+        -- In debug mode for now
+        local displayName = GetDisplayName()
+        if tooltipText == "" and type(control.effectId) == "number" and displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+            if GetAbilityDescription(control.effectId) ~= "" then
+                tooltipText = "|c2DC50EDescription:|r " .. GetAbilityDescription(control.effectId) or ""
+            end
+        end
+        -- In debug mode for now
+
         local thirdLine
         if E.TooltipNameOverride[control.effectName] then
             thirdLine = strformat(E.TooltipNameOverride[control.effectName], GetAbilityDuration(control.effectId)/1000 )

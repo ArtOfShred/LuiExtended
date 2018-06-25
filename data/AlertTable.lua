@@ -84,7 +84,7 @@ LUIE.AlertTable = {
 
     [12459] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Winter's Reach (Frost Mage)
 
-    [35151] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Spell Absorption (Spirit Mage)
+    [35151] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true, refire = 500}, -- Spell Absorption (Spirit Mage)
 
     [14370] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, auradetect = true}, -- Void (Time Bomb Mage)
 
@@ -98,7 +98,7 @@ LUIE.AlertTable = {
     [35387] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Defiled Grave (Bonelord)
 
     [57534] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true, refire = 1000 }, -- Focused Healing (Healer)
-    [44328] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2, auradetect = true, notDirect = true}, -- Rite of Passage (Healer)
+    [44328] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2, auradetect = true, notDirect = true, refire = 500 }, -- Rite of Passage (Healer)
 
     [29520] = { destroy = true, auradetect = true, priority = 2 }, -- Aura of Protection (Shaman)
 
@@ -270,7 +270,7 @@ LUIE.AlertTable = {
     [5252] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Fire Bite (Shalk)
     [5265] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, skipcheck = true, refire = 4100, notDirect = true}, -- Burning Ground (Shalk)
 
-    [8429] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 600}, -- Zap (Thunderbug)
+    [8429] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 750}, -- Zap (Thunderbug)
     [26412] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Thunderstrikes (Thunderbug)
 
     [73172] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Swarm (Kotu Gava)
@@ -568,6 +568,11 @@ LUIE.AlertTable = {
 
     -- Sever All Ties
     [44138] = { interrupt = true, avoid = true, priority = 2, eventdetect = true }, -- Q4261 Estre Knockback (High Kinlady Estre)
+
+    -- World Boss - Nindaeril's Perch
+    [83515] = { block = true, bs = true, dodge = true, priority = 1 }, -- Hunter's Pounce (Bavura the Blizzard)
+    [83832] = { block = true, dodge = true, priority = 1, eventdetect = true }, -- Frenzied Charge (Nindaeril the Monsoon)
+    [83548] = { interrupt = true, avoid = true, priority = 1, eventdetect = true }, -- Mighty Roar (Nindaeril the Monsoon)
 
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------

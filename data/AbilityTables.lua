@@ -17,7 +17,7 @@ A.Skill_Major_Fortitude             = 29011
 A.Skill_Minor_Endurance             = 26215
 A.Skill_Major_Endurance             = 32748
 A.Skill_Minor_Intellect             = 26216
-A.Skill_Major_Intellect             = 36740
+A.Skill_Major_Intellect             = 45224
 A.Skill_Minor_Sorcery               = 61685
 A.Skill_Major_Sorcery               = 45227
 A.Skill_Minor_Prophecy              = 61688
@@ -768,6 +768,7 @@ A.Skill_Free_Spirit                 = GetString(SI_LUIE_SKILL_FREE_SPIRIT)
 A.Skill_Unbind                      = GetString(SI_LUIE_SKILL_UNBIND)
 A.Skill_Crystal                     = 67121
 A.Skill_Backfire                    = GetString(SI_LUIE_SKILL_BACKFIRE)
+A.Skill_Close_Portal                = 23370
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

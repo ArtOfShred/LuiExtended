@@ -516,7 +516,7 @@ debugAuras = {
             [42080] = true, -- Tear (Mezha-dro's Sealing Amulet)
             [42105] = true, -- Nanwen's Sword (Nanwen's Sword)
             [34578] = true, -- Nirnroot Wine (Nirnroot Wine)
-            --[8825] = true, -- Generic Crouch Fiddle Animatio (Questionable Meat Sack)
+            [8825] = true, -- Generic Crouch Fiddle Animatio (Questionable Meat Sack)
             [26339] = true, -- Eating (Questionable Meat Sack)
             [25369] = true, -- Sanguine's Goblet (Sanguine's Goblet)
             [42008] = true, -- Blessing of Root Sunder (Token of Root Sunder)
@@ -2194,6 +2194,7 @@ debugAuras = {
             [21811] = true, -- RDS M'aiq Tracker
             [48899] = true, -- Firelight
             [48920] = true, -- V11849 Firelight Tracker
+            [48712] = true, -- V1422 Beggar Event Buff
 
             -------------------------------------
             -- DRAGONKNIGHT PASSIVES ------------
@@ -5128,6 +5129,7 @@ debugAuras = {
 
             [40499] = true, -- Rite of the Scion
 
+            [72945] = true, -- _CRWN Become Vampire
             [72946] = true, -- Stun
 
             -------------------------------------
@@ -5318,6 +5320,7 @@ debugAuras = {
 
             [41057] = true, -- Begin Werewolf
 
+            [73123] = true, -- _CRWN Become Werewolf
             [73124] = true, -- Stun
             [73126] = true, -- Werewolf Appearance
             [73181] = true, -- Werewolf Appearance
@@ -8625,9 +8628,11 @@ debugAuras = {
             [89102] = true, -- Summon Beast -- Spriggan
             [89157] = true, -- Summon Beast -- Spriggan
             [89158] = true, -- Summon Beast -- Spriggan
+            [89159] = true, -- Summon Beast -- Spriggan
             [89151] = true, -- Summon Beast -- Spriggan
             [89154] = true, -- Summon Beast -- Spriggan
             [89168] = true, -- Summon Beast -- Spriggan
+            [89170] = true, -- Summon Beast -- Spriggan
             [89127] = true, -- Summon Beast -- Spriggan
             [21570] = true, -- Backstep -- Spriggan
             [13477] = true, -- Control Beast -- Spriggan
@@ -9900,6 +9905,47 @@ debugAuras = {
             [30741] = true, -- Sorondil Helmet
             [49152] = true, -- Q4361 Werewolf Transform
             [49153] = true, -- Q4361 Werewolf Transform
+
+            --------------------
+            -- Grahtwood
+            --------------------
+
+            -- World Events
+            [39775] = true, -- GW CTen BosmVKhaj Scare Ending (Peacemaker Achievement Location)
+            [40035] = true, -- GW CTen Swinging Axe (Peacemaker Achievement Location)
+            [39776] = true, -- GW CTen BosmVKhaj Calm Ending (Peacemaker Achievement Location)
+            [39649] = true, -- GW CTen KhajVAltm Happy Comp (Peacemaker Achievement Location)
+            [39650] = true, -- GW CTen KhajVAltm Sad Comp (Peacemaker Achievement Location)
+
+            -- World Boss - Nindaeril's Perch
+            [70466] = true, -- 35% Boss Speed Buff (Nindaeril the Monsoon)
+            [83515] = true, -- Hunter's Pounce (Bavura the Blizzard)
+            [83517] = true, -- Hunter's Pounce (Bavura the Blizzard)
+            [84018] = true, -- Hunter's Pounce (Bavura the Blizzard)
+            [83521] = true, -- Hunter's Pounce (Bavura the Blizzard)
+            [83832] = true, -- Frenzied Charge (Nindaeril the Monsoon)
+            [83833] = true, -- Frenzied Charge (Nindaeril the Monsoon)
+            [83846] = true, -- Frenzied Charge (Nindaeril the Monsoon)
+            [83855] = true, -- Frenzied Charge (Nindaeril the Monsoon)
+            [83852] = true, -- Frenzied Charge (Nindaeril the Monsoon)
+            [83548] = true, -- Mighty Roar (Nindaeril the Monsoon)
+            [83549] = true, -- Mighty Roar (Nindaeril the Monsoon)
+            [83152] = true, -- Regal Fury (Both Cats)
+
+            -- Public Dungeon - Root Sunder Ruins
+            --[34175] = true, -- Ground Rise
+            [34176] = true, -- Blue Flam
+            [57076] = true, -- Sundered Barrier
+
+            -- Public Dungeon - Root Sunder Ruins - Forgotten Soul
+            [26163] = true, -- Q4406 Entrance Laughter
+            [38510] = true, -- Q4406 Post Accept SAT
+            [26118] = true, -- Root Sunder
+            [91627] = true, -- Root Sunder's Favor
+
+            -- Passage Denied
+            [39415] = true, -- Q4963 Close Portal
+            [47301] = true, -- Stunned
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------
