@@ -1475,6 +1475,12 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
     end
 end
 
+function SCB.Buff_OnMouseUp(self, button, upInside)
+    if upInside and button == MOUSE_BUTTON_INDEX_RIGHT and self.buffSlot and not self.isArtificial then
+        CancelBuff(self.buffSlot)
+    end
+end
+
 function SCB.Buff_OnMouseEnter(control)
 
     InitializeTooltip(GameTooltip, control, BOTTOM, 0, -5, TOP)
@@ -1532,6 +1538,7 @@ function SCB.CreateSingleIcon(container, AnchorItem, effectType)
     buff:SetMouseEnabled( true )
     buff:SetHandler("OnMouseEnter", SCB.Buff_OnMouseEnter)
     buff:SetHandler("OnMouseExit",  SCB.Buff_OnMouseExit)
+    buff:SetHandler("OnMouseUp",  SCB.Buff_OnMouseUp)
 
     -- Border
     buff.back   = UI.Texture( buff, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false )
