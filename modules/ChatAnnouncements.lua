@@ -3278,6 +3278,11 @@ function CA.ResolveQuestItemChange()
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                     end
                 end
+
+                if LUIE.Effects.QuestItemModifyOnRemove[itemId] then
+                    LUIE.Effects.QuestItemModifyOnRemove[itemId]()
+                end
+
             end
 
             -- Higher
@@ -3336,6 +3341,11 @@ function CA.ResolveQuestItemChange()
                         eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                     end
                 end
+
+                if LUIE.Effects.QuestItemModifyOnAdd[itemId] then
+                    LUIE.Effects.QuestItemModifyOnAdd[itemId]()
+                end
+
             end
         end
 

@@ -557,7 +557,7 @@ LUIE.AlertTable = {
     -- AD QUESTS -------------------------------------
     --------------------------------------------------
 
-    --- World Boss - Seaside Scarp Camp
+    -- World Boss - Seaside Scarp Camp
     [84283] = { block = true, dodge = true, priority = 1, eventdetect = true }, -- Coursing Bones (Oskana)
 
     -- World Boss - Heretic's Summons
@@ -573,6 +573,14 @@ LUIE.AlertTable = {
     [83515] = { block = true, bs = true, dodge = true, priority = 1 }, -- Hunter's Pounce (Bavura the Blizzard)
     [83832] = { block = true, dodge = true, priority = 1, eventdetect = true }, -- Frenzied Charge (Nindaeril the Monsoon)
     [83548] = { interrupt = true, avoid = true, priority = 1, eventdetect = true }, -- Mighty Roar (Nindaeril the Monsoon)
+
+    -- The Grips of Madness
+    [38748] = { block = true, interrupt = true, priority = 2 }, -- Aulus's Tongue (Mayor Aulus)
+    [40702] = { avoid = true, priority = 2, eventdetect = true }, -- Q4868 Aulus Knockback (Mayor Aulus)
+
+    -- The Orrery of Elden Root
+    [43820] = { dodge = true, avoid = true, priority = 2, eventdetect = true }, -- Quaking Stomp (Prince Naemon)
+    [43827] = { avoid = true, priority = 2, auradetect = true }, -- Projectile Vomit
 
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------

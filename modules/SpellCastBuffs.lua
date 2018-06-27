@@ -1486,16 +1486,17 @@ function SCB.Buff_OnMouseEnter(control)
     InitializeTooltip(GameTooltip, control, BOTTOM, 0, -5, TOP)
     -- Setup Text
     local tooltipText
+    local colorText = ZO_NORMAL_TEXT
     local tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, control.effectName)
     if control.isArtificial then
         tooltipText = GetArtificialEffectTooltipText(control.effectId)
         GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
-        GameTooltip:AddLine(tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
+        GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
     else
         if control.buffSlot then
-            tooltipText = E.TooltipOverride[control.effectId] or GetAbilityEffectDescription(control.buffSlot)
+            tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) or GetAbilityEffectDescription(control.buffSlot)
         else
-            tooltipText = E.TooltipOverride[control.effectId] or ""
+            tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) or ""
         end
 
         -- In debug mode for now
@@ -1509,19 +1510,22 @@ function SCB.Buff_OnMouseEnter(control)
 
         local thirdLine
         if E.TooltipNameOverride[control.effectName] then
-            thirdLine = strformat(E.TooltipNameOverride[control.effectName], GetAbilityDuration(control.effectId)/1000 )
+            thirdLine = strformat(E.TooltipNameOverride[control.effectName], mathfloor( (GetAbilityDuration(control.effectId)/1000) + 0.5) ) -- Get duration from ability info and round to nearest whole number.
         end
         -- Have to trim trailing spaces on the end of tooltips
         if tooltipText ~= "" then
             tooltipText = strmatch(tooltipText, ".*%S")
         end
+        if thirdLine ~="" and thirdLine ~= nil then
+            colorText = control.buffType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
+        end
 
         GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
         if tooltipText ~= "" and tooltipText ~= nil then
-            GameTooltip:AddLine(tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
+            GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
         end
         if thirdLine ~="" and thirdLine ~= nil then
-            GameTooltip:AddLine(thirdLine, "", ZO_NORMAL_TEXT:UnpackRGBA())
+            GameTooltip:AddLine(thirdLine, "", ZO_NORMAL_TEXT:UnpackRGB())
         end
     end
 
@@ -2946,6 +2950,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
             -- Setup Info for Tooltip function to pull
             buff.effectId = effect.id
             buff.effectName = effect.name
+            buff.buffType = effect.type
             buff.buffSlot = effect.buffSlot
             buff.isArtificial = effect.artificial
 

@@ -6697,12 +6697,17 @@ debugAuras = {
             [20483] = true, -- Falling Rocks
             [29602] = true, -- Falling Rocks
 
+            [44180] = true, -- Generic Flame Trap Warn
             [17198] = true, -- Fire Trap (Player)
             [31606] = true, -- Fire Trap (Player)
             [17314] = true, -- Fire Trap (Player)
 
             [26530] = true, -- Bear Trap (Bear Trap)
             [26531] = true, -- Bear Trap (Bear Trap)
+
+            [20258] = true, -- Sigil of Frost (Sigil of Frost)
+            [20260] = true, -- Rune Burst (Sigil of Frost)
+            [20259] = true, -- Sigil of Frost Snare (Sigil of Frost)
 
             [44029] = true, -- Slaughterfish Attack (Slaughterfish)
             [66863] = true, -- Slaughterfish Bonus (Slaughterfish)
@@ -6795,6 +6800,7 @@ debugAuras = {
             [14924] = true, -- Focused Charge -- Brute
             [66623] = true, -- charge stun cleanup -- Brute
             [48542] = true, -- Focused Charge -- Brute
+            [48543] = true, -- Charge -- Brute
             [14935] = true, -- Charge -- Brute
             [14925] = true, -- Charge -- Brute
             [14926] = true, -- Charge -- Brute
@@ -6994,6 +7000,8 @@ debugAuras = {
             [88582] = true, -- Summon the Dead -- Necromancer
             [88583] = true, -- Summon the Dead -- Necromancer
             [88599] = true, -- Summon the Dead -- Necromancer
+            [88590] = true, -- Summon the Dead -- Necromancer
+            [88591] = true, -- Summon the Dead -- Necromancer
             [88592] = true, -- Summon the Dead -- Necromancer
             --[88586] = true, -- Summon the Dead -- Necromancer
             [88589] = true, -- Summon the Dead -- Necromancer
@@ -7001,10 +7009,12 @@ debugAuras = {
             --[88602] = true, -- Summon the Dead -- Necromancer
             --[88618] = true, -- Summon the Dead -- Necromancer
             --[88611] = true, -- Summon the Dead -- Necromancer
+            [88607] = true, -- Summon the Dead -- Necromancer
             [88613] = true, -- Summon the Dead -- Necromancer
             [88621] = true, -- Summon the Dead -- Necromancer
             [88615] = true, -- Summon the Dead -- Necromancer
             --[88610] = true, -- Summon the Dead -- Necromancer
+            [88608] = true, -- Summon the Dead -- Necromancer
             [88614] = true, -- Summon the Dead -- Necromancer
             [88622] = true, -- Summon the Dead -- Necromancer
             [88616] = true, -- Summon the Dead -- Necromancer
@@ -9734,7 +9744,7 @@ debugAuras = {
             [25353] = true, -- Hidden Buff 7sec
 
             -- Real Marines
-            --[44289] = true, -- Generic UFX Crouch Fiddle
+            [44289] = true, -- Generic UFX Crouch Fiddle
             [22378] = true, -- Equiping...
 
             -- Teldur's End
@@ -9943,9 +9953,250 @@ debugAuras = {
             [26118] = true, -- Root Sunder
             [91627] = true, -- Root Sunder's Favor
 
+            -- The Honor of the Queen
+            [61157] = true, -- Q4943 Scene Tracker
+
+            -- The Grips of Madness
+            [38181] = true, -- Monster V Monster
+            [38183] = true, -- Monster V Monster Heal
+            [38218] = true, -- Q4868 Crazy Stun
+            --[43047] = true, -- RobS Crouch Fiddle 3 Sec
+            [37276] = true, -- Q4868 Beast Person
+            [38911] = true, -- Q4868 Beast Bear Begin
+            [38918] = true, -- Improved Combat Health Regen R8
+            [37277] = true, -- Q4868 Change Beast Person
+            [37296] = true, -- Q4868 Change Beast Person
+            [37297] = true, -- Q4868 Change Beast Person
+            [37427] = true, -- 4868 Damage Shield
+            [37315] = true, -- CFX_4868
+            [37295] = true, -- Q4868 Change Beast Person
+            [38498] = true, -- Lightning
+            [38499] = true, -- Wrath
+            [38500] = true, -- Wrath
+            [37438] = true, -- Shocked
+            [37436] = true, -- Shock
+            [38516] = true, -- Q4868 Rufinus Is Lightning
+            --[47720] = true, -- RobS Stun 1 Sec
+            [37463] = true, -- Q4868 Push NPC
+            [38468] = true, -- Q4842 Stun
+            [37464] = true, -- Q4842 Stun
+            [37465] = true, -- Q4842 Despawn Self
+            [38942] = true, -- Q4868 Rufinus Is Shocked
+            [38943] = true, -- Rufinus's Lightning
+            [38584] = true, -- Q4868 Push NPC
+            [38596] = true, -- Q4842 Stun
+            [37583] = true, -- Q4868 Unlock Chapel
+            [37824] = true, -- Q4868 Elinwe Transform
+            [38079] = true, -- CFX_4868 Sheo Spawn
+            [37988] = true, -- Fire Backlash
+            [38105] = true, -- CFX_4868 Sheo Spawn
+            [38104] = true, -- CFX_4868 Sheo Spawn
+            [38744] = true, -- Q4868 Sheo Teleports Player
+            [38108] = true, -- Q4868 Sheo Teleports Player
+            [38400] = true, -- Q4868 Stun Fade 2 Black
+            [38116] = true, -- Q4868 Sheo Minions Spawn
+            [38432] = true, -- CFX_4868 Sheo Fast Despawn
+            [38720] = true, -- Lightning Fury
+            [47710] = true, -- Lightning Fury
+            [38426] = true, -- Q4868 Sheo Teleports Aulus
+            [38748] = true, -- Aulus's Tongue
+            [63710] = true, -- Aulus's Tongue
+            [40702] = true, -- Q4868 Aulus Knockback
+            [45978] = true, -- Q4868 Aulus Shield
+            [40704] = true, -- Q4868 Aulus Knockback
+            [44100] = true, -- Q4868 Aulus Knockback
+            [47709] = true, -- Q4868 Aulus Knockback
+
+            -- A Lasting Winter
+            [2326] = true, -- Ritual Cast
+            [21622] = true, -- Hakra Is Called
+            [11026] = true, -- Generic Shatter
+            [47816] = true, -- Q4885 Nairume Near PC
+            [47702] = true, -- Q4885 Block Use Ring
+            [47706] = true, -- Q4885 Tag For Ice Stun
+            [38377] = true, -- Q4885
+            [38394] = true, -- Shatter
+            [47780] = true, -- Q4885 Endare FX
+            [38419] = true, -- Q4885 Endare Spawn In
+            [42938] = true, -- GW-FW Endare
+            [47756] = true, -- Q4885 Tag for Spawn Clone
+            [38413] = true, -- Spawn Clone
+            [47762] = true, -- Spawn Clone
+            [47781] = true, -- Q4885 Clone Beam
+            [38418] = true, -- Sibling Health
+            [47770] = true, -- Q4885 Clone Less DMG
+            [47768] = true, -- RobS Immunities 6 Sec
+            [47782] = true, -- Q4885 Endare Leash FX
+            [38441] = true, -- Become
+            [47784] = true, -- Q4885 Inivs Lootable Spawn
+            [47783] = true, -- Become
+            [47804] = true, -- Q4885 Rajhin's Mantle Appears
+            [47805] = true, -- Q4885 Rajhin's Mantle Appears
+            [44664] = true, -- CV Delay 60 Seconds
+            [41859] = true, -- Q4885 Completed 4885
+
+            -- Lost in Study
+            [25615] = true, -- Q4385 Flying Books
+            [39535] = true, -- Q4893 Ukezai
+            [39621] = true, -- Q4385 Stone
+            [25751] = true, -- Q4385 Behelir Captive FX
+
+            -- Heart of the Matter
+            [25761] = true, -- Q4386 Bookcase Open
+            [39783] = true, -- Q4386 Ukaezai Flip
+            [46812] = true, -- Q4386 Ukaezai Body FX
+            [39876] = true, -- Q4386 Port Down
+            [45891] = true, -- Q4386 Port Stun
+            [39908] = true, -- Q4386 Port Down
+            [45972] = true, -- Q4386 Ukaezai Split 3
+            [45975] = true, -- Q4386 Ukaezai Split 3
+            [45997] = true, -- Q4386 Ukaezai Split 3
+            [46188] = true, -- Q4386 Ukaezai Faints
+            [45998] = true, -- Q4386 Ukaezai Book Summon
+            [40848] = true, -- Q4385 Savage Book
+            [40754] = true, -- Q4386 Vortex
+            [40849] = true, -- Annihilation
+            [39956] = true, -- Heart of Anumaril
+            [46144] = true, -- Q4386 Ukaezai Boss Recover
+            [45973] = true, -- Q4386 Ukaezai Split 2
+            [45976] = true, -- Q4386 Ukaezai Split 2
+            [46036] = true, -- Q4386 Ukaezai Split 2
+            [45974] = true, -- Q4386 Ukaezai Split 1
+            [45977] = true, -- Q4386 Ukaezai Split 1
+            [46037] = true, -- Q4386 Ukaezai Split 1
+            [25916] = true, -- Q4386 Child Cleanup
+            [25917] = true, -- Q4386 Child Cleanup
+
+            -- The Orrery of Elden Root
+            [41979] = true, -- RobS Despawn Me Flag
+            [40500] = true, -- Q4922 Use Mantle on Device
+            [40504] = true, -- Q4922 Use Mantle on Device
+            [40056] = true, -- Q4922 Mantle's Shadow
+            [41862] = true, -- Q4922 Orrery Rumble Long
+            [41863] = true, -- Q4922 Orrery Rumble
+            [41860] = true, -- Q4922_Naemon Build Up
+            [40038] = true, -- Q4922 Magic Bubble NPC
+            [39595] = true, -- Q4922 Magic Bubble PC
+            [40115] = true, -- Q4922_Naemon Cast FX
+            [40390] = true, -- Q4922_Naemon Reverse Cast
+            [22683] = true, -- Opening a Portal
+            [40557] = true, -- (12127) CFX_4922 Mantle Cast S
+            [14568] = true, -- TEST_Ritual Arcane
+            [40121] = true, -- Q4922 Orrery Spawn Naemon
+            [43829] = true, -- Q4922_Naemon_Spawn
+            [40403] = true, -- Q4922 Orrery Screen Shake
+            [40394] = true, -- CFX_4922 Naemon Ogre Glow
+            [43820] = true, -- Quaking Stomp (Prince Naemon)
+            [43822] = true, -- Quaking Stomp (Prince Naemon)
+            [43823] = true, -- IntroKB (Prince Naemon)
+            [43821] = true, -- Staggering Roar (Prince Naemon)
+            [43827] = true, -- Projectile Vomit (Prince Naemon)
+            [43828] = true, -- Belch (Prince Naemon)
+            [40537] = true, -- Q49222 Ogre Transform Dead
+            [40532] = true, -- Q49222 Ogre Transform Dead
+            [40141] = true, -- Q4922 Orrery Spawn Ayrenn
+            [41949] = true, -- Q4922 Ayrenn Spawn
+            [40396] = true, -- Q4922 Ayrenn Divine Glow
+
+            -- The Staff of Magnus
+            [46997] = true, -- EB Generic 5 Sec Counter 01
+            [33257] = true, -- EB Generic 10 Sec Counter 01
+            [37037] = true, -- Q4735 Final Ayreen CV
+
             -- Passage Denied
             [39415] = true, -- Q4963 Close Portal
             [47301] = true, -- Stunned
+
+            -- Forbidden Love
+            [41340] = true, -- Q4387 Eraduure Extension
+            [41341] = true, -- Q4387 Eraduure Out
+
+            -- The Blacksap's Hold
+            [39086] = true, -- Q4917 Spawn Portal
+            [39110] = true, -- Q4917 Opens Portal
+            [39158] = true, -- Q4917 03 Opens Portal
+            [30750] = true, -- Generic Fade To Black 2.5s
+            [32693] = true, -- 4625 Stun for Teleport 2.5s
+
+            -- Unsafe Haven
+            [26041] = true, -- Eavesdropping...
+            [60389] = true, -- Bag Rat
+            [41955] = true, -- Q4396 Completed
+
+            -- Luck of the Albatross
+            [18628] = true, -- Generic Stun Self
+            [35984] = true, -- Q4436 Summon Pirate
+            [24762] = true, -- CON_StealthVanish
+
+            -- Forever Bound
+            [37120] = true, -- FX_Q4445_Channel_Capture
+            [35964] = true, -- 4445 Stun + Headgrab
+
+            -- Scars Never Fade
+            [35968] = true, -- Q4768 Bestowal Theatre Check
+            [39542] = true, -- Q4768 Bestowal Theatre Block
+            [35606] = true, -- Q4768 Duel Start Stun
+            --[41339] = true, -- RobS Stun 3 Sec
+            [43151] = true, -- Q4768 Use Bucket
+            [34867] = true, -- Q4768 No-Fingers Wet
+
+            [35645] = true, -- Q4768 PC Tribunal Layer 2 Stun
+            [34887] = true, -- Q4768 Tribunal Stun
+            [34886] = true, -- Q4768 Slim-Jah Kills
+
+            [35621] = true, -- Q4768 Search Mouse Hover
+            [34933] = true, -- Q4768 Search Beach
+            [34931] = true, -- Q4768 Stealh Argonian
+            [34990] = true, -- Q4768 Stealth Stun
+            [34551] = true, -- Q4768 Slim-Jah Beam
+
+            -- Keeper of the Bones
+            [35805] = true, -- SW Risen Dead
+            [35852] = true, -- Dringoth
+            [38637] = true, -- SW Theatre Tracker A
+            [35848] = true, -- Q4773 Borchon
+            [35855] = true, -- Q4773 Dringoth Possess
+            [35854] = true, -- Q4773 Dringoth Splode
+            [35858] = true, -- Possessed
+            [64083] = true, -- Q4773 Dringoth Rib Cooldown
+            [35862] = true, -- Possessed
+            [35980] = true, -- Q4773 Stun
+            [35857] = true, -- Q4773 Dringoth Proxy Splode
+            [36639] = true, -- Q4773 Ethruin Rise
+
+            -- Bosmer Insight
+            [36161] = true, -- Q4833 Bestowal Hunter Spawn
+            [36437] = true, -- Q4833 Fire Burst
+            [36409] = true, -- Q4833
+            [36438] = true, -- Q4833
+            [36411] = true, -- Q4833
+            [36457] = true, -- Q4833 Tiger Roar
+            [36477] = true, -- Q4833 Wolf Howl
+            [36544] = true, -- Fast Jumper
+
+            [36554] = true, -- Vision Journey Start
+            [36558] = true, -- Vision Journey Start
+            [36859] = true, -- Vision Journey Start
+            [36565] = true, -- Vision Journey Start
+            [36597] = true, -- Vision Journey Start
+            [36559] = true, -- Vision Journey Start
+            [35991] = true, -- Vision Journey
+            [36604] = true, -- Q4883 Spriggan Nature Spawn
+
+            [36879] = true, -- Q4833 Teleport into Tree
+            [36883] = true, -- Q4833 Teleport into Tree
+            [36882] = true, -- Q4833 Teleport into Tree
+
+            [36655] = true, -- RobS Screen Shake
+            [36676] = true, -- Q4833 Nature Teleport PC
+            [36677] = true, -- Q4833 Nature Teleport PC
+
+            [36710] = true, -- Q4833 Apply Snake Buff
+            [36713] = true, -- Snake Scales
+            [36841] = true, -- Q4883 Apply Wolf Buff
+            [36843] = true, -- Wolf's Pelt
+            [36824] = true, -- Q4883 Apply Tiger Buff
+            [36828] = true, -- Tiger's Fur
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------

@@ -2232,6 +2232,25 @@ local strings = {
     SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP =                 "Reduce Weapon Critical and Spell Critical by |cffffff657|r for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_MINOR_COWARDICE_TP =                   "Increase Ultimate Ability cost by |cffffff60|r% for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_MINOR_MANGLE_TP =                      "Reduce Max Health by |cffffff10|r% for |cffffff<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_MINOR_SLAYER_TP =                      "Your attacks deal |cffffff5|r% more damage to Dungeon and Trial enemies.",
+    SI_LUIE_SKILL_MAJOR_SLAYER_TP =                      "Your attacks deal |cffffff15|r% more damage to Dungeon and Trial enemies.",
+    SI_LUIE_SKILL_MINOR_AEGIS_TP =                       "You take |cffffff5|r% less damage from Dungeon and Trial enemies.",
+    SI_LUIE_SKILL_MAJOR_AEGIS_TP =                       "You take |cffffff15|r% less damage from Dungeon and Trial enemies.",
+
+    SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned. You are unable to attack or move while stunned.",
+    SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP =                 "Knocked back. You are unable to attack or move while knocked back.",
+    SI_LUIE_SKILL_GENERIC_FEAR_TP =                      "Feared. You are unable to attack or move while feared.",
+    SI_LUIE_SKILL_GENERIC_CC_IMMUNITY =                  "Immune to knockback and disabling effects.",
+
+    SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP =              "Lightning courses through your body causing all weapon attacks to deal lightning damage.",
+    SI_LUIE_SKILL_MANTLES_SHADOW =                       "Mantle's Shadow",
+    SI_LUIE_SKILL_THROW_WATER =                          "Throw Water",
+    SI_LUIE_SKILL_VISION_JOURNEY_TP =                    "The true nature of the forest is revealed to you.",
+    SI_LUIE_SKILL_SNAKE_SCALES_TP =                      "Increase damage done by |cffffff5|r% and reduce damage taken by |cffffff5|r% while in Grahtwood.",
+    SI_LUIE_SKILL_WOLFS_PELT_TP =                        "Increase Movement Speed by |cffffff4|r% and damage done by |cffffff5|r% while in Grahtwood.",
+    SI_LUIE_SKILL_TIGERS_FUR_TP =                        "Increase Movement Speed by |cffffff4|r% and reduce damage taken by |cffffff5|r% while in Grahtwood.",
+
 }
 
 -- TODO: Switch to StringId's

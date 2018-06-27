@@ -385,6 +385,29 @@ E.QuestItemHideLoot = {
     [3416] = true, -- Teleport Scroll (Depths of Madness)
     [3400] = true, -- Binding Gem (Silent Village)
     [3292] = true, -- Sirinque's Crystal (An Act of Kindness)
+    [3532] = true, -- Crystal (Preventative Measure)
+    [4492] = true, -- Rajhin's Mantle (A Lasting Winter)
+    [4650] = true, -- Heart of Anumaril (Heart of the Matter)
+    [4596] = true, -- Rahjin's Mantle (The Orrery of Elden Root)
+    [4645] = true, -- Rahjin's Mantle (The Orrery of Elden Root)
+    [3663] = true, -- Lord Gharesh-ri's Notebook (Unsafe Haven)
+    [4395] = true, -- Bag of Bones (Keeper of the Bones)
+    [4396] = true, -- Bag of Bones (Keeper of the Bones)
+    [4397] = true, -- Bag of Bones (Keeper of the Bones)
+    [4398] = true, -- Bag of Bones (Keeper of the Bones)
+    [4241] = true, -- Femur (Keeper of the Bones)
+    [4243] = true, -- Tibia (Keeper of the Bones)
+    [4244] = true, -- Fibula (Keeper of the Bones)
+    [4245] = true, -- Ulna (Keeper of the Bones)
+    [4246] = true, -- Radius (Keeper of the Bones)
+    [4247] = true, -- Humerus (Keeper of the Bones)
+    [4248] = true, -- Clavicle (Keeper of the Bones)
+    [4249] = true, -- Scapula (Keeper of the Bones)
+    [4251] = true, -- Finger Phalanges (Keeper of the Bones)
+    [4252] = true, -- Toe Phalanges (Keeper of the Bones)
+    [4253] = true, -- Vertebrae (Keeper of the Bones)
+    [4254] = true, -- Ribs (Keeper of the Bones)
+    [4259] = true, -- Pelvis (Keeper of the Bones)
 
 }
 
@@ -411,13 +434,58 @@ E.QuestItemHideRemove = {
     [3291] = true, -- Micro Etched Crystal (An Act of Kindness)
     [3524] = true, -- Welyknd Stone (Eye of the Ancients)
     [3525] = true, -- Welyknd Stone (Eye of the Ancients)
+    [3278] = true, -- Rune of Xarxes (The Mallari-Mora)
+    [3279] = true, -- Rune of Magnus (The Mallari-Mora)
+    [3532] = true, -- Crystal (Preventative Measure)
+    [3491] = true, -- Crystal (Preventative Measure)
+    [4492] = true, -- Rajhin's Mantle (A Lasting Winter)
+    [3609] = true, -- Heart of Anumaril (Heart of the Matter)
+    [4610] = true, -- Rahjin's Mantle (The Orrery of Elden Root)
+    [4596] = true, -- Rahjin's Mantle (The Orrery of Elden Root)
+    [4645] = true, -- Rahjin's Mantle (The Orrery of Elden Root)
+    [3647] = true, -- Lord Gharesh-ri's Notebook (Unsafe Haven)
+    [4261] = true, -- Bag of Bones (Keeper of the Bones)
+    [4395] = true, -- Bag of Bones (Keeper of the Bones)
+    [4396] = true, -- Bag of Bones (Keeper of the Bones)
+    [4397] = true, -- Bag of Bones (Keeper of the Bones)
+    [4241] = true, -- Femur (Keeper of the Bones)
+    [4243] = true, -- Tibia (Keeper of the Bones)
+    [4244] = true, -- Fibula (Keeper of the Bones)
+    [4245] = true, -- Ulna (Keeper of the Bones)
+    [4246] = true, -- Radius (Keeper of the Bones)
+    [4247] = true, -- Humerus (Keeper of the Bones)
+    [4248] = true, -- Clavicle (Keeper of the Bones)
+    [4249] = true, -- Scapula (Keeper of the Bones)
+    [4251] = true, -- Finger Phalanges (Keeper of the Bones)
+    [4252] = true, -- Toe Phalanges (Keeper of the Bones)
+    [4253] = true, -- Vertebrae (Keeper of the Bones)
+    [4254] = true, -- Ribs (Keeper of the Bones)
+    [4259] = true, -- Pelvis (Keeper of the Bones)
 
 }
 
+-- Limit the maximum number of quantity of a quest item that can be added.
 E.QuestItemMaxQuantityAdd = {
 
     [3518] = 1, -- Welkynd Stone (Eye of the Ancients)
 
+}
+
+-- Call specific functions to add/remove table entries for funky quest items. This will trigger when a certain quest item is added.
+E.QuestItemModifyOnAdd = {
+    [3278] = function() E.QuestItemHideLoot[3280] = true end, -- Rune of Xarxes (The Mallari-Mora)
+    [3279] = function() E.QuestItemHideLoot[3281] = true end, -- Rune of Magnus (The Mallari-Mora)
+    [3532] = function() E.QuestItemHideLoot[3491] = true end, -- Crystal (Preventative Measure)
+    [3769] = function() E.QuestItemHideLoot[3415] = true end, -- Teleport Scroll (Depths of Madness)
+    [4485] = function() E.QuestItemHideRemove[4485] = true end, -- Rajhin's Mantle (A Lasting Winter)
+    [4492] = function() E.QuestItemHideLoot[4485] = true end, -- Rajhin's Mantle (A Lasting Winter)
+}
+
+-- Call specific functions to add/remove table entries for funky quest items. This will trigger when a certain quest item is removed.
+E.QuestItemModifyOnRemove = {
+    [3532] = function() E.QuestItemHideRemove[3491] = nil end, -- Crystal (Preventative Measure)
+    [4492] = function() zo_callLater(function() E.QuestItemHideRemove[4485] = nil end, 2000) end, -- Rajhin's Mantle (A Lasting Winter)
+    [4645] = function() zo_callLater(function() E.QuestItemHideRemove[4596] = nil end, 2000) end, -- Rahjin's Mantle (The Orrery of Elden Root)
 }
 
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY NAME
@@ -466,6 +534,9 @@ E.CastChannelOverride = {
     [22931] = true, -- Freeing Spirit... (An Act of Kindness)
     [23187] = true, -- Q4236 PC Untie Palith (The Veiled Choice)
     [47301] = true, -- Stunned (Passage Denied)
+    [36710] = true, -- Q4833 Apply Snake Buff (Bosmer Insight)
+    [36841] = true, -- Q4833 Apply Wolf Buff (Bosmer Insight)
+    [36824] = true, -- Q4833 Apply Tiger Buff (Bosmer Insight)
 
 }
 
@@ -496,6 +567,11 @@ E.CastDurationFix = {
     [22271] = 3000, -- Teleport Scroll AB (Depths of Madness)
     [23187] = 2000, -- Q4236 PC Untie Palith (The Veiled Choice)
     [47301] = 3000, -- Stunned (Passage Denied)
+    [40504] = 3500, -- Q4922 Use Mantle on Device (The Orrery of Elden Root)
+    [40557] = 3500, -- (12127) CFX_4922 Mantle Cast S (The Orrery of Elden Root)
+    [36710] = 4000, -- Q4833 Apply Snake Buff (Bosmer Insight)
+    [36841] = 4000, -- Q4833 Apply Wolf Buff (Bosmer Insight)
+    [36824] = 4000, -- Q4833 Apply Tiger Buff (Bosmer Insight)
 
 }
 
@@ -620,6 +696,15 @@ E.IsCast = {
     [22931] = true, -- Freeing Spirit... (An Act of Kindness)
     [23187] = true, -- Q4236 PC Untie Palith (The Veiled Choice)
     [47301] = true, -- Stunned (Passage Denied)
+    [37463] = true, -- The Grips of Madness
+    [37583] = true, -- Q4868 Unlock Chapel
+    [40504] = true, -- Q4922 Use Mantle on Device (The Orrery of Elden Root)
+    [40557] = true, -- (12127) CFX_4922 Mantle Cast S (The Orrery of Elden Root)
+    [35984] = true, -- Q4436 Summon Pirate (Luck of the Albatross)
+    [43151] = true, -- Q4768 Use Bucket
+    [36710] = true, -- Q4833 Apply Snake Buff (Bosmer Insight)
+    [36841] = true, -- Q4833 Apply Wolf Buff (Bosmer Insight)
+    [36824] = true, -- Q4833 Apply Tiger Buff (Bosmer Insight)
 
 }
 
@@ -1525,6 +1610,8 @@ E.AddNameAura = {
 
     -- Aldmeri Dominion
     ['High Kinlady Estre'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
+    ['Mayor Aulus'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
+    ['Prince Naemon'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
 
     -- Dolmen Bosses
     ['Dread Xivkyn Cauterizer'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
@@ -1640,6 +1727,8 @@ E.EffectOverrideByName = {
                     ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_rend.dds' }, -- Rend (Sabre Cat)
                     ['Senche-Tiger'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                     ['Nindaeril the Monsoon'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+                    ['The Tiger'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+                    ['Spectral Senche-Tiger'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                 },
     [60630] =   { -- Rend (Lion)
                     ['Lion'] =                      { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
@@ -1647,21 +1736,26 @@ E.EffectOverrideByName = {
                     ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_rend.dds' }, -- Rend (Sabre Cat)
                     ['Senche-Tiger'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                     ['Nindaeril the Monsoon'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+                    ['The Tiger'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+                    ['Spectral Senche-Tiger'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                 },
     [60641] =   { -- Claw (Lion)
                     ['Sabre Cat'] =             { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_claw.dds' }, -- Claw (Sabre Cat)
                     ['Senche-Tiger'] =          { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
                     ['Nindaeril the Monsoon'] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
+                    ['The Tiger'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
                 },
     [7158] =    { -- Bite (Lion)
                     ['Lion'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_lion_bite.dds' }, -- Bite (Lion)
                     ['Lioness'] =               { icon = 'LuiExtended/media/icons/abilities/ability_lioness_bite.dds' }, -- Bite (Lion)
                     ['Sabre Cat'] =             { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_bite.dds' }, -- Bite (Sabre Cat)
                     ['Senche-Tiger'] =          { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
+                    ['Spectral Senche-Tiger'] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
                 },
     [7161] =    { -- Double Strike (Lion)
                     ['Sabre Cat'] =             { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_double_strike.dds' }, -- Double Strike (Sabre Cat)
                     ['Senche-Tiger'] =          { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
+                    ['Spectral Senche-Tiger'] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
                 },
     [5362] =    { -- Slam (Skeever / Kagouti)
                     ['Kagouti'] =               { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_slam.dds' }, -- Slam (Kagouti)
@@ -1752,6 +1846,11 @@ E.EffectSourceOverride = {
     [71679] = {pet = 'Morkuldin'}, -- Cleave {Morkuldin}
 
     -- TRAPS
+    [62769] = {source = A.Trap_Cold_Fire_Trap}, -- Coldharbour Flames {MQ Tutorial}
+    [62770] = {source = A.Trap_Cold_Fire_Trap}, -- Coldharbour Flames {MQ Tutorial}
+    [17314] = {source = A.Trap_Fire_Trap}, -- Fire Trap (Fire Trap)
+
+    -- TRAPS (Go back over these)
     [92150] = {source = 'Dwarven Furnace'}, -- Fire Trap {Vvardenfell}
     [89481] = {source = 'Flame Jet Trap'}, -- Flame Jet {Vvardenfell}
     [88491] = {source = 'Flame Jet Trap'}, -- Searing Flame {Vvardenfell}
@@ -1765,8 +1864,6 @@ E.EffectSourceOverride = {
     [91659] = {source = A.Trap_Falling_Rocks}, -- Falling Rocks {Vvardenfell}
     [92672] = {source = 'Red Mountain'}, -- Pyroclast  {Vvardenfell}
     [84527] = {source = 'Steam Vent'}, -- Searing Steam {Vvardenfell}
-    [62769] = {source = A.Trap_Cold_Fire_Trap}, -- Coldharbour Flames {MQ Tutorial}
-    [62770] = {source = A.Trap_Cold_Fire_Trap}, -- Coldharbour Flames {MQ Tutorial}
 
     -----------------------------------------------
     -- VVARDENFELL
@@ -1795,6 +1892,7 @@ E.EffectMergeName = {
 E.EffectMergeId = {
 
     [21314] = "MERGED_EFFECT_SPIKE_TRAP_QUEST", -- Trap Sprung! (Auridon - An Act of Kindness)
+    [47768] = "MERGED_EFFECT_CC_IMMUNITY_QUEST", -- RobS Immunities 6 Sec (Grahtwood - A Lasting Winter)
 
 }
 
@@ -1969,7 +2067,10 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [40851] = true, -- Polymorph Snare (The Mad God's Bargain)
 
     -- Auridon
-    [84047] = true, -- Defiled Ground (Quenyas)
+    [84047] = true, -- Defiled Ground (World Boss - Quenyas)
+
+    -- Grahtwood
+    [38748] = true, -- Aulus's Tongue (The Grips of Madness)
 
     -- Vvardenfell
     [82272] = true, -- Dark Reach (Slavemaster Arenim -- Vvardenfell -- The Heart of a Telvanni)
@@ -2001,33 +2102,6 @@ E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMB
 E.ArtificialEffectOverride = {
     [0] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds' }, -- Battle Spirit (Cyrodiil, Duel)
     [2] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds', name = A.Skill_Battle_Spirit }, -- Battle Spirit Imperial City
-}
-
-E.TooltipOverride = {
-
-    [21263] = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP), -- Ayleid Health Bonus
-    [100862] = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP), -- Fortified Ayleid Health Bonus
-    [48899] = GetString(SI_LUIE_SKILL_FIRELIGHT_TP), -- Firelight
-    [23159] = GetString(SI_LUIE_SKILL_DIVINE_SPEED_TP), -- Divine Speed (Auridon - Blessings of the Eight)
-
-    -- Minor/Major Slayer/Aegis
-    [76617] = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP), -- Minor Slayer
-    [98103] = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP), -- Minor Slayer
-    [98102] = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP), -- Minor Slayer
-    [76618] = GetString(SI_LUIE_SKILL_MINOR_AEGIS_TP), -- Minor Aegis
-    [93444] = GetString(SI_LUIE_SKILL_MAJOR_AEGIS_TP), -- Major Aegis
-    [93125] = GetString(SI_LUIE_SKILL_MAJOR_AEGIS_TP), -- Major Aegis
-    [93120] = GetString(SI_LUIE_SKILL_MAJOR_SLAYER_TP), -- Major Slayer
-    [93442] = GetString(SI_LUIE_SKILL_MAJOR_SLAYER_TP), -- Major Slayer
-
-    -- Fix for Rapid Manuever and Morphs
-    [101161] = A.Skill_Rapid_Manuever, -- Major Expedition (Rapid Manuever)
-    [57472] = A.Skill_Rapid_Manuever, -- Major Gallop (Rapid Manuever)
-    [101169] = A.Skill_Retreating_Manuever, -- Major Expedition (Retreating Manuever)
-    [57477] = A.Skill_Retreating_Manuever, -- Major Gallop (Retreating Manuever)
-    [101178] = A.Skill_Charging_Manuever, -- Major Expedition (Charging Manuever)
-    [57481] = A.Skill_Charging_Manuever, -- Major Gallop (Charging Manuever)
-
 }
 
 E.TooltipNameOverride = {
@@ -2867,7 +2941,7 @@ E.EffectOverride = {
     [90938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Set_Immortal_Warrior, A.Set_Cooldown) }, -- Immortal Warrior (Immortal Yokeda)
     [86907] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
     [50992] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
-    [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds' }, -- Minor Aegis (Eternal Yokeda)
+    [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', tooltip = GetString(SI_LUIE_SKILL_MINOR_AEGIS_TP) }, -- Minor Aegis (Eternal Yokeda)
     [90940] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', unbreakable = 1 }, -- Eternal Warrior (Eternal Yokeda)
     [61437] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds' }, -- Eternal Warrior (Eternal Yokeda)
     [90939] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Set_Eternal_Warrior, A.Set_Cooldown) }, -- Eternal Warrior (Eternal Yokeda)
@@ -2877,20 +2951,20 @@ E.EffectOverride = {
     [51320] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', name = A.Set_Destructive_Mage }, -- Mage Destruction Bomb (Aether... of Destruction)
     [51443] = { icon = 'LuiExtended/media/icons/abilities/ability_set_healing_mage.dds', name = A.Set_Healing_Mage }, -- Healing Bane (of Mending)
     [51434] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Minor Vulnerability (Aether ... of Strategy)
-    [76617] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds' }, -- Minor Slayer (of the Infallible Aether)
+    [76617] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP) }, -- Minor Slayer (of the Infallible Aether)
     [81519] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Minor Vulnerability (of the Infallible Aether)
 
     -- Trial Sets (Sanctum Ophidia)
     [51241] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Poisonous Serpent (Ophidian ... of Venom)
     [51176] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_010.dds' }, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
-    [98103] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds' }, -- Minor Slayer (of the Vicious Ophidian)
+    [98103] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP) }, -- Minor Slayer (of the Vicious Ophidian)
     [81524] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', name = A.Skill_Major_Expedition }, -- Quick Serpent (of the Vicious Ophidian)
     [81522] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicious_serpent.dds', name = A.Set_Vicious_Serpent }, -- Serpent Stamina (of the Vicious Ophidian)
 
     -- Trial Sets (Maw of Lorkhaj)
     [75801] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_lunar.dds' }, -- Lunar Blessing (Moondancer)
     [75804] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_shadow.dds' }, -- Shadow Blessing (Moondancer)
-    [98102] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds' }, -- Minor Slayer (of Alkosh)
+    [98102] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP) }, -- Minor Slayer (of Alkosh)
     [75752] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Roar of Alkosh (of Alkosh)
     [75753] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Line Breaker (of Alkosh)
     [76667] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Roar of Alkosh (of Alkosh)
@@ -2898,10 +2972,10 @@ E.EffectOverride = {
     [75770] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds' }, -- Twilight Remedy (of Twilight Remedy)
 
     -- Trial Sets (Halls of Fabrication)
-    [93444] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds' }, -- Major Aegis (Automated Defense)
-    [93125] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds' }, -- Major Aegis (Inventor's Guard)
-    [93120] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds' }, -- Major Slayer (Master Architect)
-    [93442] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds' }, -- Major Slayer (War Machine)
+    [93444] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', tooltip = GetString(SI_LUIE_SKILL_MAJOR_AEGIS_TP) }, -- Major Aegis (Automated Defense)
+    [93125] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', tooltip = GetString(SI_LUIE_SKILL_MAJOR_AEGIS_TP) }, -- Major Aegis (Inventor's Guard)
+    [93120] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds', tooltip = GetString(SI_LUIE_SKILL_MAJOR_SLAYER_TP) }, -- Major Slayer (Master Architect)
+    [93442] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds', tooltip = GetString(SI_LUIE_SKILL_MAJOR_SLAYER_TP) }, -- Major Slayer (War Machine)
 
     -- Trial Sets (Cloudrest)
     [109994] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds' }, -- Major Courage (Olirime's)
@@ -3050,8 +3124,8 @@ E.EffectOverride = {
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off-Balance
     [102771] = { stack = 0, type = 1 }, -- Off Balance Immunity
     [85701] = { hide = true }, -- Dueling Flag
-    [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well}, -- Ayleid Health Bonus
-    [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well_Fortified}, -- Ayleid Health Bonus
+    [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well, tooltip = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP) }, -- Ayleid Health Bonus
+    [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well_Fortified, tooltip = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP) }, -- Ayleid Health Bonus
 
     -- Mount
     [42514] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', unbreakable = 1 }, -- Hard Dismount
@@ -3115,7 +3189,7 @@ E.EffectOverride = {
 
     -- Misc World + Theater
     [822] = { hide = true }, -- Ward
-    [48899] = { icon = 'esoui/art/icons/achievement_newlifefestival_007.dds' }, -- Firelight
+    [48899] = { icon = 'esoui/art/icons/achievement_newlifefestival_007.dds', tooltip = GetString(SI_LUIE_SKILL_FIRELIGHT_TP) }, -- Firelight
 
     ----------------------------------------------------------------
     -- DRAGONKNIGHT PASSIVES ---------------------------------------
@@ -4335,12 +4409,12 @@ E.EffectOverride = {
     -- ASSAULT ACTIVES ---------------------------------------------
     ----------------------------------------------------------------
 
-    [101161] = { consolidate = true }, -- Major Expedition (Rapid Maneuver)
-    [57472] = { consolidate = true }, -- Major Gallop (Rapid Maneuver)
-    [101169] = { consolidate = true }, -- Major Expedition (Retreating Maneuver)
-    [57477] = { consolidate = true }, -- Major Gallop (Retreating Maneuver)
-    [101178] = { consolidate = true }, -- Major Expedition (Charging Maneuver)
-    [57481] = { consolidate = true }, -- Major Gallop (Charging Maneuver)
+    [101161] = { consolidate = true, tooltip = A.Skill_Rapid_Manuever }, -- Major Expedition (Rapid Maneuver)
+    [57472] = { consolidate = true, tooltip = A.Skill_Rapid_Manuever }, -- Major Gallop (Rapid Maneuver)
+    [101169] = { consolidate = true, tooltip = A.Skill_Retreating_Manuever }, -- Major Expedition (Retreating Maneuver)
+    [57477] = { consolidate = true, tooltip = A.Skill_Retreating_Manuever }, -- Major Gallop (Retreating Maneuver)
+    [101178] = { consolidate = true, tooltip = A.Skill_Charging_Manuever }, -- Major Expedition (Charging Maneuver)
+    [57481] = { consolidate = true, tooltip = A.Skill_Charging_Manuever }, -- Major Gallop (Charging Maneuver)
     [64118] = { name = A.Skill_Caltrops, duration = 0 }, -- Hindered (Caltrops - All Morphs)
     [40253] = { name = A.Skill_Razor_Caltrops }, -- Hindered (Razor Caltrops)
     [66482] = { hide = true }, -- Magicka Detonation (Magicka Detonation)
@@ -4803,6 +4877,8 @@ E.EffectOverride = {
     [88582] = { hide = true }, -- Summon the Dead (Necromancer)
     [88583] = { hide = true }, -- Summon the Dead (Necromancer)
     [88599] = { hide = true }, -- Summon the Dead (Necromancer)
+    [88590] = { hide = true }, -- Summon the Dead (Necromancer)
+    [88591] = { hide = true }, -- Summon the Dead (Necromancer)
     [88592] = { hide = true }, -- Summon the Dead (Necromancer)
     [88586] = { hide = true }, -- Summon the Dead (Necromancer)
     [88589] = { hide = true }, -- Summon the Dead (Necromancer)
@@ -4810,10 +4886,12 @@ E.EffectOverride = {
     [88602] = { hide = true }, -- Summon the Dead (Necromancer)
     [88618] = { hide = true }, -- Summon the Dead (Necromancer)
     [88611] = { hide = true }, -- Summon the Dead (Necromancer)
+    [88607] = { hide = true }, -- Summon the Dead (Necromancer)
     [88613] = { hide = true }, -- Summon the Dead (Necromancer)
     [88621] = { hide = true }, -- Summon the Dead (Necromancer)
     [88615] = { hide = true }, -- Summon the Dead (Necromancer)
     [88610] = { hide = true }, -- Summon the Dead (Necromancer)
+    [88608] = { hide = true }, -- Summon the Dead (Necromancer)
     [88614] = { hide = true }, -- Summon the Dead (Necromancer)
     [88622] = { hide = true }, -- Summon the Dead (Necromancer)
     [88616] = { hide = true }, -- Summon the Dead (Necromancer)
@@ -6184,6 +6262,9 @@ E.EffectOverride = {
     [26530] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Bear Trap (Bear Trap)
     [26531] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds' }, -- Bear Trap (Bear Trap)
 
+    [20260] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_sigil_of_frost.dds', name = A.Trap_Sigil_of_Frost }, -- Rune Burst
+    [20259] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_sigil_of_frost.dds', name = A.Trap_Sigil_of_Frost, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Sigil of Frost Snare
+
     -- Lava & Slaughterfish
     [44029] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Slaughterfish Attack (Slaughterfish)
     [44034] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds' }, -- Slaughterfish Attack (Slaughterfish)
@@ -6425,10 +6506,10 @@ E.EffectOverride = {
     [33285] = { hide = true }, -- 4625 Uldor Banish
     [32705] = { hide = true }, -- 4625 No Yell
     [31969] = { hide = true }, -- Wrath (Uldor)
-    [31970] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_pulse.dds', hide = true }, -- Wrath (Uldor)
+    [31970] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', hide = true }, -- Wrath (Uldor)
     [33449] = { hide = true }, -- 4625 Stop Bolts
     [33403] = { hide = true }, -- Wrath (Uldor)
-    [33404] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_pulse.dds', hide = true }, -- Wrath (Uldor)
+    [33404] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', hide = true }, -- Wrath (Uldor)
 
     -- The Perils of Diplomacy
     [32264] = { hide = true }, -- Unconscious
@@ -6548,12 +6629,12 @@ E.EffectOverride = {
     [23187] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_bind_hands.dds', name = A.Skill_Unbind }, -- Q4236 PC Untie Palith
 
     -- Preventative Measure
-    [23606] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback_crystal.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Crystal, A.Skill_Backfire), unbreakable = 1 }, -- Q4326 Crystal Backfire
+    [23606] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback_crystal.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Crystal, A.Skill_Backfire), unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Q4326 Crystal Backfire
     [24535] = { hide = true }, -- Disrupting...
 
     -- Blessings of the Eight
     [47149] = { hide = true }, -- Magefire
-    [23159] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_divine_speed.dds' }, -- Divine Speed
+    [23159] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_divine_speed.dds', tooltip = GetString(SI_LUIE_SKILL_DIVINE_SPEED_TP) }, -- Divine Speed
     [22728] = { hide = true }, -- Water Beam
     [23217] = { hide = true }, -- Fire Beam
 
@@ -6570,15 +6651,15 @@ E.EffectOverride = {
     -- World Boss - Nindaeril's Perch
     [83515] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds' }, -- Hunter's Pounce (Bavura the Blizzard)
     [83517] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds' }, -- Hunter's Pounce (Bavura the Blizzard)
-    [84018] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds' }, -- Hunter's Pounce (Bavura the Blizzard)
+    [84018] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Hunter's Pounce (Bavura the Blizzard)
     [83521] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds' }, -- Hunter's Pounce (Bavura the Blizzard)
     [83832] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds' }, -- Frenzied Charge (Nindaeril the Monsoon)
     [83833] = { hide = true }, -- Frenzied Charge (Nindaeril the Monsoon)
     [83846] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds' }, -- Frenzied Charge (Nindaeril the Monsoon)
-    [83855] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds' }, -- Frenzied Charge (Nindaeril the Monsoon)
+    [83855] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Frenzied Charge (Nindaeril the Monsoon)
     [83852] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds' }, -- Frenzied Charge (Nindaeril the Monsoon)
     [83548] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_mighty_roar.dds' }, -- Mighty Roar (Nindaeril the Monsoon)
-    [83549] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_mighty_roar.dds' }, -- Mighty Roar (Nindaeril the Monsoon)
+    [83549] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_mighty_roar.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP) }, -- Mighty Roar (Nindaeril the Monsoon)
 
     -- Public Dungeon - Root Sunder Ruins
     [34176] = { hide = true }, -- Blue Flam (The Bonemonger)
@@ -6586,8 +6667,89 @@ E.EffectOverride = {
     -- Public Dungeon - Root Sunder Ruins -- Forgotten Soul
     [91627] = { hide = true }, -- Root Sunder's Favor
 
+    -- The Grips of Madness
+    [37276] = { hide = true }, -- Q4868 Beast Person
+    [37296] = { hide = true }, -- Q4868 Change Beast Person
+    [37297] = { hide = true }, -- Q4868 Change Beast Person
+    [37295] = { hide = true }, -- Q4868 Change Beast Person
+    [38499] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = A.Skill_Lightning_Strike }, -- Wrath
+    [38500] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = A.Skill_Lightning_Strike }, -- Wrath
+    [37438] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = A.Skill_Lightning_Strike, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Shocked
+    [38516] = { hide = true }, -- Q4868 Rufinus Is Lightning
+    [47720] = { hide = true }, -- RobS Stun 1 Sec
+    [37463] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', name = A.Skill_Push }, -- Q4868 Push NPC
+    [37465] = { hide = true }, -- Q4842 Despawn Self
+    [38942] = { hide = true }, -- Q4868 Rufinus Is Shocked
+    [38596] = { hide = true }, -- Q4842 Stun
+    [37583] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_old_scroll.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Dispel, A.Skill_Barrier) }, -- Q4868 Unlock Chapel
+    [38744] = { hide = true }, -- Q4868 Sheo Teleports Player
+    [38720] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_lightning_fury.dds', tooltip = GetString(SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP) }, -- Lightning Fury
+    [47710] = { hide = true }, -- Lightning Fury
+    [38748] = { icon = 'esoui/art/icons/ability_mage_036.dds', hide = true }, -- Aulus's Tongue
+    [63710] = { icon = 'esoui/art/icons/ability_mage_036.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Aulus's Tongue
+    [40702] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shockwave.dds', name = A.Skill_Shockwave }, -- Q4868 Aulus Knockback
+    [44100] = { hide = true }, -- Q4868 Aulus Knockback
+    [47709] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shockwave.dds', name = A.Skill_Shockwave }, -- Q4868 Aulus Knockback
+
+    -- A Lasting Winter
+    [38394] = { hide = true }, -- Shatter
+    [47762] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, duration = 3, tooltip = GetString(SI_LUIE_SKILL_GENERIC_CC_IMMUNITY) }, -- Spawn Clone (General Endare)
+    [47768] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, tooltip = GetString(SI_LUIE_SKILL_GENERIC_CC_IMMUNITY) }, -- RobS Immunities 6 Sec (General Endare)
+    [38441] = { hide = true }, -- Become
+    [47783] = { hide = true }, -- Become
+
+    -- Heart of the Matter
+    [45997] = { hide = true }, -- Q4386 Ukaezai Split 3
+    [46188] = { hide = true }, -- Q4386 Ukaezai Faints
+    [45998] = { hide = true }, -- Q4386 Ukaezai Book Summon
+    [40849] = { icon = 'LuiExtended/media/icons/abilities/ability_set_oblivion.dds' }, -- Annihilation
+    [39956] = { hide = true }, -- Heart of Anumaril
+    [46036] = { hide = true }, -- Q4386 Ukaezai Split 2
+    [46037] = { hide = true }, -- Q4386 Ukaezai Split 1
+
+    -- The Orrery of Elden Root
+    [41979] = { hide = true }, -- RobS Despawn Me Flag
+    [40504] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_quest_mantles_shadow.dds', name = A.Skill_Mantles_Shadow }, -- Q4922 Use Mantle on Device
+    [40557] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_quest_mantles_shadow.dds', name = A.Skill_Mantles_Shadow }, -- (12127) CFX_4922 Mantle Cast S
+    [41863] = { hide = true }, -- Q4922 Orrery Rumble
+    [14568] = { hide = true }, -- TEST_Ritual Arcane
+    [40394] = { hide = true }, -- CFX_4922 Naemon Ogre Glow
+
+    [43820] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds' }, -- Quaking Stomp (Prince Naemon)
+    [43822] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds' }, -- Quaking Stomp (Prince Naemon)
+    [43823] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds', name = A.Skill_Quaking_Stomp, unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP) }, -- IntroKB (Prince Naemon)
+    [43821] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds', name = A.Skill_Quaking_Stomp }, -- Staggering Roar (Prince Naemon)
+    [43827] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_projectile_vomit.dds', hide = true }, -- Projectile Vomit (Prince Naemon)
+    [43828] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_projectile_vomit.dds', name = A.Skill_Projectile_Vomit }, -- Belch (Prince Naemon)
+    [40396] = { hide = true }, -- Q4922 Ayrenn Divine Glow
+
     -- Passage Denied
     [47301] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_ayleid_wand_of_blockade.dds', name = A.Skill_Close_Portal }, -- Stunned
+
+    -- Luck of the Albatross
+    [35984] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_captains_whistle.dds', name = A.Skill_Call_for_Help }, -- Q4436 Summon Pirate
+
+    -- Scars Never Fade
+    [41339] = { hide = true }, -- RobS Stun 3 Sec
+    [43151] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_bucket_of_water.dds', name = A.Skill_Throw_Water }, -- Q4768 Use Bucket
+
+    -- Keeper of the Bones
+    [35854] = { hide = true }, -- Q4773 Dringoth Splode
+    [35862] = { hide = true }, -- Possessed
+    [35857] = { hide = true }, -- Q4773 Dringoth Proxy Splode
+
+    -- Bosmer Insight
+    [36438] = { hide = true }, -- Q4833
+    [36544] = { hide = true }, -- Fast Jumper
+    [35991] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_vision_journey.dds', tooltip = GetString(SI_LUIE_SKILL_VISION_JOURNEY_TP) }, -- Vision Journey
+    [36883] = { hide = true }, -- Q4833 Teleport into Tree
+    [36882] = { hide = true }, -- Q4833 Teleport into Tree
+    [36710] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_snake_scales.dds', name = A.Skill_Snake_Scales }, -- Q4833 Apply Snake Buff
+    [36713] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_snake_scales.dds', tooltip = GetString(SI_LUIE_SKILL_SNAKE_SCALES_TP) }, -- Snake Scales
+    [36841] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wolfs_pelt.dds', name = A.Skill_Wolfs_Pelt }, -- Q4833 Apply Wolf Buff
+    [36843] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wolfs_pelt.dds', tooltip = GetString(SI_LUIE_SKILL_WOLFS_PELT_TP) }, -- Wolf's Pelt
+    [36824] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_tigers_fur.dds', name = A.Skill_Tigers_Fur }, -- Q4833 Apply Tiger Buff
+    [36828] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_tigers_fur.dds', tooltip = GetString(SI_LUIE_SKILL_TIGERS_FUR_TP) }, -- Tiger's Fur
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -6700,7 +6862,6 @@ E.EffectOverride = {
     [86981] = { hide = true }, -- Summon Skaafin (Vvardenfell - Various Quest NPC's)
     [85105] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_unstable_reaction.dds', hide = true }, -- Unstable Reaction (Reclaiming Vos)
     [85537] = { hide = true }, -- Summon Personal Guard (Reclaiming Vos)
-    [47720] = { hide = true }, -- RobS Stun 1 Sec (Reclaiming Vos)
     [92720] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_necrotic_wave.dds' }, -- Necrotic Wave (Vvardenfell -- Ancestral Adversity)
     [92722] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_necrotic_wave.dds', name = 'Necrotic Wave' }, -- Stomp of Flame (Vvardenfell -- Ancestral Adversity)
     [92723] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_necrotic_wave.dds', name = 'Necrotic Wave', hide = true }, -- Fire Backlash (Vvardenfell -- Ancestral Adversity)
@@ -7023,7 +7184,7 @@ E.FakeExternalDebuffs = {
     [22395] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, duration = 4000 }, -- Q4261 ROD Barrier Teleport (Sever All Ties)
     [28771] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_atherial_shift.dds', name = A.Skill_Aetherial_Shift, duration = 2000 }, -- Q4220 Thirster Stun (The Mallari-Mora)
     [23606] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback_crystal.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Crystal, A.Skill_Backfire), duration = 2000 }, -- Q4326 Crystal Backfire (Preventative Measure)
-
+    [43823] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds', name = A.Skill_Quaking_Stomp, duration = 2150 }, -- IntroKB (Prince Naemon)
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------
     ----------------------------------------------------------------

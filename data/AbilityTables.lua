@@ -705,6 +705,7 @@ A.Trap_Cold_Fire_Trap               = GetString(SI_LUIE_SKILL_COLD_FIRE_TRAP)
 A.Trap_Falling_Rocks                = 20886
 A.Trap_Fire_Trap                    = 17198
 A.Trap_Spike_Trap                   = 21940
+A.Trap_Sigil_of_Frost               = 20258
 A.Trap_Lava                         = 5139
 
 -- ---------------------------------------------------
@@ -769,6 +770,16 @@ A.Skill_Unbind                      = GetString(SI_LUIE_SKILL_UNBIND)
 A.Skill_Crystal                     = 67121
 A.Skill_Backfire                    = GetString(SI_LUIE_SKILL_BACKFIRE)
 A.Skill_Close_Portal                = 23370
+A.Skill_Lightning_Strike            = 27596
+A.Skill_Push                        = 8692
+A.Skill_Mantles_Shadow              = GetString(SI_LUIE_SKILL_MANTLES_SHADOW)
+A.Skill_Quaking_Stomp               = 43820
+A.Skill_Projectile_Vomit            = 43827
+A.Skill_Call_for_Help               = 53430
+A.Skill_Throw_Water                 = GetString(SI_LUIE_SKILL_THROW_WATER)
+A.Skill_Snake_Scales                = 36713
+A.Skill_Wolfs_Pelt                  = 36843
+A.Skill_Tigers_Fur                  = 36828
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

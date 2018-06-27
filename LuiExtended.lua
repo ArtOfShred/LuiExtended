@@ -453,7 +453,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local abilityId =  trackBuffs[i].abilityId
                     local markForRemove = trackBuffs[i].markForRemove or false
 
-                    local tooltipText = LUIE.Effects.TooltipOverride[abilityId] or GetAbilityEffectDescription(buffSlot)
+                    local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) or GetAbilityEffectDescription(buffSlot)
 
                     -- In debug mode for now
                     local displayName = GetDisplayName()
@@ -469,7 +469,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     end
                     local thirdLine
                     if LUIE.Effects.TooltipNameOverride[buffName] then
-                        thirdLine = strformat(LUIE.Effects.TooltipNameOverride[buffName], GetAbilityDuration(abilityId)/1000 )
+                        thirdLine = strformat(LUIE.Effects.TooltipNameOverride[buffName], math.floor( (GetAbilityDuration(abilityId)/1000) + 0.5) ) -- Get duration from ability info and round to nearest whole number.
                     end
                     if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
                         local effectsRow = effectsRowPool:AcquireObject()
@@ -513,17 +513,23 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     ZO_StatsActiveEffect_OnMouseEnter = function(control)
         InitializeTooltip(GameTooltip, control, RIGHT, -15)
+
+        local colorText = ZO_NORMAL_TEXT
+        if control.thirdLine ~= "" and control.thirdLine ~= nil then
+            colorText = control.buffType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
+        end
+
         if control.isArtificial then
             local tooltipText = GetArtificialEffectTooltipText(control.effectId)
             GameTooltip:AddLine(control.tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
-            GameTooltip:AddLine(tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
+            GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
         else
             GameTooltip:AddLine(control.tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
             if control.tooltipText ~= "" and control.tooltipText ~= nil then
-                GameTooltip:AddLine(control.tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
+                GameTooltip:AddLine(control.tooltipText, "", colorText:UnpackRGBA())
             end
             if control.thirdLine ~="" and control.thirdLine ~= nil then
-                GameTooltip:AddLine(control.thirdLine, "", ZO_NORMAL_TEXT:UnpackRGBA())
+                GameTooltip:AddLine(control.thirdLine, "", ZO_NORMAL_TEXT:UnpackRGB())
             end
         end
 
@@ -533,7 +539,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         control.animation:PlayForward()
     end
 
-    -- Hook skills advisor and use this variable to refresh the abilityData on time on initialization. We don't want to reload any more after that.
+    -- Hook skills advisor and use this variable to refresh the abilityData on time one initialization. We don't want to reload any more after that.
     local firstRun = true
 
     -- Overwrite skills advisor ability data function
