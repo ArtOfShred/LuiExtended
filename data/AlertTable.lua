@@ -339,7 +339,7 @@ LUIE.AlertTable = {
     [8782] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Lightning Storm (Spider Daedra)
 
     [35220] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 2, eventdetect = true }, -- Impending Storm (Storm Atronach)
-    [4864] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 2, skipcheck = true }, -- Storm Bound (Storm Atronach)
+    [4864] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 2, skipcheck = true, result = ACTION_RESULT_GAINED, refire = 250 }, -- Storm Bound (Storm Atronach)
 
     [7095] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Heavy Attack (Xivilai)
     [88947] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Lightning Grasp (Xivilai)
@@ -580,7 +580,13 @@ LUIE.AlertTable = {
 
     -- The Orrery of Elden Root
     [43820] = { dodge = true, avoid = true, priority = 2, eventdetect = true }, -- Quaking Stomp (Prince Naemon)
-    [43827] = { avoid = true, priority = 2, auradetect = true }, -- Projectile Vomit
+    [43827] = { avoid = true, priority = 2, auradetect = true }, -- Projectile Vomit (Prince Naemon)
+
+    -- World Boss - Gathongor's Mine
+    [84205] = { avoid = true, priority = 1 }, -- Stinging Sputum (Gathongor the Mauler)
+    [84196] = { avoid = true, priority = 1 }, -- Marsh Masher (Gathongor the Mauler)
+    [84209] = { block = true, dodge = true, priority = 1 }, -- Wrecking Jaws (Gathongor the Mauler)
+    [84212] = { avoid = true, priority = 1 }, -- Bog Slam (Gathongor the Mauler)
 
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------

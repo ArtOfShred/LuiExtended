@@ -10296,6 +10296,43 @@ debugAuras = {
             [39229] = true, -- Strike
             [39231] = true, -- Q4893 Delay Spawn
 
+            --------------------
+            -- Grahtwood
+            --------------------
+
+            -- World Boss - Gathongor's Mine
+            [84205] = true, -- Stinging Sputum
+            [84207] = true, -- Stinging Sputum
+            [84206] = true, -- Stinging Sputum
+            [84196] = true, -- Marsh Masher
+            [84198] = true, -- Marsh Masher
+            [84199] = true, -- Marsh Masher
+            [84200] = true, -- Marsh Masher
+            [84202] = true, -- Marsh Masher
+            [84204] = true, -- Marsh Masher
+            [84201] = true, -- Marsh Masher
+            [84203] = true, -- Marsh Masher
+            [84197] = true, -- Marsh Masher
+            [84208] = true, -- Savage Swipe
+            [84209] = true, -- Wrecking Jaws
+            [84211] = true, -- Wrecking Jaws
+            [84210] = true, -- Wrecking Jaws
+            [84137] = true, -- Swamp Minions
+            [84140] = true, -- Find Anchor 1
+            [84141] = true, -- Find Anchor 2
+            [84138] = true, -- Minion of Stone
+            [84139] = true, -- Minion of Stone
+
+            [84212] = true, -- Bog Slam
+            [84214] = true, -- Bog Slam
+            [84213] = true, -- Bog Slam
+
+            -- World Boss - Rootwater Spring
+            [47084] = true, -- Rootwater Healing Spring
+            [47086] = true, -- Rootwater Life Spring
+            [47109] = true, -- Rootwater Heal
+
+
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------
             -------------------------------------

@@ -453,7 +453,8 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local abilityId =  trackBuffs[i].abilityId
                     local markForRemove = trackBuffs[i].markForRemove or false
 
-                    local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) or GetAbilityEffectDescription(buffSlot)
+                    local timer = endTime - startTime
+                    local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, math.floor((timer) + 0.5)) ) or GetAbilityEffectDescription(buffSlot)
 
                     -- In debug mode for now
                     local displayName = GetDisplayName()
@@ -469,7 +470,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     end
                     local thirdLine
                     if LUIE.Effects.TooltipNameOverride[buffName] then
-                        thirdLine = strformat(LUIE.Effects.TooltipNameOverride[buffName], math.floor( (GetAbilityDuration(abilityId)/1000) + 0.5) ) -- Get duration from ability info and round to nearest whole number.
+                        thirdLine = LUIE.Effects.TooltipNameOverride[buffName]
                     end
                     if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
                         local effectsRow = effectsRowPool:AcquireObject()

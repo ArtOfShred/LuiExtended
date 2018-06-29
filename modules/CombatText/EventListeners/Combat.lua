@@ -275,6 +275,9 @@ function CTL:OnCombatIn(...)
     if S.toggles.showAlertMitigation and AlertT[abilityId] then
         if sourceName ~= nil and sourceName ~= "" and (resultType == ACTION_RESULT_BEGIN or resultType == ACTION_RESULT_BEGIN_CHANNEL or AlertT[abilityId].skipcheck) and not refireDelay[abilityId] then
 
+            -- Filter when only a certain event type should fire this
+            if AlertT[abilityId].result and resultType ~= AlertT[abilityId].result then return end
+
             -- Return if any results occur which we absolutely don't want to display alerts for
             if resultType == ACTION_RESULT_EFFECT_FADED
                or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN
@@ -508,7 +511,22 @@ function CTL:OnCombatAlert(...)
     if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and not refireDelay[abilityId] then
         if (resultType == ACTION_RESULT_BEGIN or resultType == ACTION_RESULT_BEGIN_CHANNEL or AlertT[abilityId].skipcheck) and not refireDelay[abilityId] then
 
-            if resultType == ACTION_RESULT_EFFECT_FADED then return end
+            -- Filter when only a certain event type should fire this
+            if AlertT[abilityId].result and resultType ~= AlertT[abilityId].result then return end
+
+            -- Return if any results occur which we absolutely don't want to display alerts for
+            if resultType == ACTION_RESULT_EFFECT_FADED
+               or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN
+               or resultType == ACTION_RESULT_BAD_TARGET
+               or resultType == ACTION_RESULT_BUSY
+               or resultType == ACTION_RESULT_FAILED
+               or resultType == ACTION_RESULT_INVALID
+               or resultType == ACTION_RESULT_CANT_SEE_TARGET
+               or resultType == ACTION_RESULT_TARGET_DEAD
+               or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE
+               or resultType == ACTION_RESULT_TARGET_TOO_CLOSE
+               or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW
+            then return end
 
             if E.EffectOverrideByName[abilityId] then
                 if E.EffectOverrideByName[abilityId][sourceName] then

@@ -1466,6 +1466,17 @@ E.AddNameAura = {
     ['Otho Rufinus'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Poacher Camp)
     ['Thugrub the Reformed'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Thugrub's Cave)
 
+    ['Gathongor the Mauler'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Gathongor's Mine)
+    ['Smiles-With-Knife'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Reconnaissance Camp)
+    ['Maheelius'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Reconnaissance Camp)
+    ['Navlos'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Reconnaissance Camp)
+    ['Heart of Rootwater'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Rootwater Spring)
+    ['Thodundor of the Hill'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Thodundor's View)
+    ['Neiral'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Maormer Camp View)
+    ['Hetsha'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Maormer Camp View)
+    ['Jahlasri'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Maormer Camp View)
+
+
     -- Public Dungeon
     ['Nitch'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Toothmaul Gully)
     ['Thek Elf-Stabber'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Auridon (Toothmaul Gully)
@@ -6685,6 +6696,30 @@ E.EffectOverride = {
     -- Flipping the Coin
     [39309] = { hide = true }, -- Q4983 Stone Cats
 
+    --------------------
+    -- Greenshade
+    --------------------
+
+    -- World Boss -- Rootwater's Spring
+    [47084] = { hide = true }, -- Rootwater Healing Spring
+    [47086] = { hide = true }, -- Rootwater Life Spring
+
+    -- World Boss - Gathongor's Mine
+    [84205] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_gtaoe.dds' }, -- Stinging Sputum (Gathongor the Mauler)
+    [84206] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_gtaoe.dds', hide = true }, -- Stinging Sputum (Gathongor the Mauler)
+    [84196] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Marsh Masher (Gathongor the Mauler)
+    [84203] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds', hide = true }, -- Marsh Masher (Gathongor the Mauler)
+    [84197] = { name = A.Innate_Stagger, hide = true, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STAGGER_TP) }, -- Marsh Masher (Gathongor the Mauler)
+    [84208] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_savage_swipe.dds' }, -- Savage Swipe (Gathongor the Mauler)
+    [84209] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_wrecking_jaws.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Wrecking Jaws (Gathongor the Mauler)
+    [84211] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_wrecking_jaws.dds' }, -- Wrecking Jaws (Gathongor the Mauler)
+    [84210] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_wrecking_jaws.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_BLEED_TP) }, -- Wrecking Jaws (Gathongor the Mauler)
+    [84138] = { hide = true }, -- Minion of Stone (Gathongor the Mauler)
+    [84139] = { hide = true }, -- Minion of Stone (Gathongor the Mauler)
+    [84212] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_bog_slam.dds' }, -- Bog Slam (Gathongor the Mauler)
+    [84214] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_bog_slam.dds', type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = GetString(SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP) }, -- Bog Slam (Gathongor the Mauler)
+    [84213] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_bog_slam.dds' }, -- Bog Slam (Gathongor the Mauler)
+
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
     ----------------------------------------------------------------
@@ -7332,6 +7367,7 @@ E.FakeStagger = {
 
     -- Quest
     [84284] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Coursing Bones (Oskana)
+    [84197] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Marsh Masher (Gathongor the Mauler)
 
     --[[
     [52878] = {icon = 'esoui/art/icons/ability_dragonknight_005_b.dds', name = 'Empowering Chains', duration = 433}, -- Pull (Empowering Chains) (Rkindaleft - Sharga the Firestarter)

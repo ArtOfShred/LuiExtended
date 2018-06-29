@@ -1494,9 +1494,9 @@ function SCB.Buff_OnMouseEnter(control)
         GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
     else
         if control.buffSlot then
-            tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) or GetAbilityEffectDescription(control.buffSlot)
+            tooltipText = (E.EffectOverride[control.effectId] and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) ) or GetAbilityEffectDescription(control.buffSlot)
         else
-            tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) or ""
+            tooltipText = (E.EffectOverride[control.effectId] and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) ) or ""
         end
 
         -- In debug mode for now
@@ -1510,7 +1510,7 @@ function SCB.Buff_OnMouseEnter(control)
 
         local thirdLine
         if E.TooltipNameOverride[control.effectName] then
-            thirdLine = strformat(E.TooltipNameOverride[control.effectName], mathfloor( (GetAbilityDuration(control.effectId)/1000) + 0.5) ) -- Get duration from ability info and round to nearest whole number.
+            thirdLine = E.TooltipNameOverride[control.effectName]
         end
         -- Have to trim trailing spaces on the end of tooltips
         if tooltipText ~= "" then
@@ -2953,6 +2953,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
             buff.buffType = effect.type
             buff.buffSlot = effect.buffSlot
             buff.isArtificial = effect.artificial
+            buff.duration = effect.dur or 0
 
             buff.icon:SetTexture(effect.icon)
             buff:SetAlpha(1)
