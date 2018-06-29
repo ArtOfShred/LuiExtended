@@ -2104,6 +2104,10 @@ debugAuras = {
             [100862] = true, -- Fortified Ayleid Health Bonus
             [45819] = true, -- Remove Werevamp
             --[51064] = true, -- Weakness
+            --[105188] = true, -- Grim Focus Combat Trigger
+            --[105190] = true, -- Grim Focus Combat Trigger
+            --[105192] = true, -- Grim Focus Combat Trigger
+            [105194] = true, -- RF Combat Trigger
 
             -- PET EFFECTS
             [28609] = true, -- Dummy Target Setter
@@ -2192,9 +2196,12 @@ debugAuras = {
             [49147] = true, -- RDS Chest
             [48318] = true, -- CON_Bamf In
             [21811] = true, -- RDS M'aiq Tracker
+            [43617] = true, -- CON_Destealth
             [48899] = true, -- Firelight
             [48920] = true, -- V11849 Firelight Tracker
             [48712] = true, -- V1422 Beggar Event Buff
+            [48647] = true, -- V1472 Rob Event Buff
+            [39972] = true, -- CON_Small Dust 3 Sec
 
             -------------------------------------
             -- DRAGONKNIGHT PASSIVES ------------
@@ -10117,6 +10124,20 @@ debugAuras = {
             [39158] = true, -- Q4917 03 Opens Portal
             [30750] = true, -- Generic Fade To Black 2.5s
             [32693] = true, -- 4625 Stun for Teleport 2.5s
+            [39199] = true, -- Q4917 Thane Theater
+            --[39247] = true, -- RobS Stun .5 Sec
+            [39244] = true, -- Q4917 Push Player Back
+            [39260] = true, -- Q4917 Push Player Back
+            [41342] = true, -- 10 Second Timer
+            [39317] = true, -- Q4917 Left Hand Glow
+            [39312] = true, -- CON_Portal Perm
+            [39307] = true, -- Pulling Grasp
+            [39308] = true, -- Stun
+            [39384] = true, -- Q4917 Lurcher Construct Ground
+            [41325] = true, -- Blacksap's Brew
+            [39293] = true, -- Q4917 Lurcher Spawn
+            [39504] = true, -- Q4917 Return to Prison
+            [39502] = true, -- Q4917 Maeroth Theatre
 
             -- Unsafe Haven
             [26041] = true, -- Eavesdropping...
@@ -10139,11 +10160,9 @@ debugAuras = {
             --[41339] = true, -- RobS Stun 3 Sec
             [43151] = true, -- Q4768 Use Bucket
             [34867] = true, -- Q4768 No-Fingers Wet
-
             [35645] = true, -- Q4768 PC Tribunal Layer 2 Stun
             [34887] = true, -- Q4768 Tribunal Stun
             [34886] = true, -- Q4768 Slim-Jah Kills
-
             [35621] = true, -- Q4768 Search Mouse Hover
             [34933] = true, -- Q4768 Search Beach
             [34931] = true, -- Q4768 Stealh Argonian
@@ -10173,7 +10192,6 @@ debugAuras = {
             [36457] = true, -- Q4833 Tiger Roar
             [36477] = true, -- Q4833 Wolf Howl
             [36544] = true, -- Fast Jumper
-
             [36554] = true, -- Vision Journey Start
             [36558] = true, -- Vision Journey Start
             [36859] = true, -- Vision Journey Start
@@ -10182,21 +10200,101 @@ debugAuras = {
             [36559] = true, -- Vision Journey Start
             [35991] = true, -- Vision Journey
             [36604] = true, -- Q4883 Spriggan Nature Spawn
-
             [36879] = true, -- Q4833 Teleport into Tree
             [36883] = true, -- Q4833 Teleport into Tree
             [36882] = true, -- Q4833 Teleport into Tree
-
             [36655] = true, -- RobS Screen Shake
             [36676] = true, -- Q4833 Nature Teleport PC
             [36677] = true, -- Q4833 Nature Teleport PC
-
             [36710] = true, -- Q4833 Apply Snake Buff
             [36713] = true, -- Snake Scales
             [36841] = true, -- Q4883 Apply Wolf Buff
             [36843] = true, -- Wolf's Pelt
             [36824] = true, -- Q4883 Apply Tiger Buff
             [36828] = true, -- Tiger's Fur
+
+            -- The Unquiet Dead
+            [37361] = true, -- CFX_4842 Ossuary Ghost Possess
+            [37062] = true, -- Exorcise
+            [17049] = true, -- CV Delay 6 Seconds
+            [63719] = true, -- Double Strike
+            [63720] = true, -- Double Strike
+            [36887] = true, -- Kithshade Stun
+            [36766] = true, -- Q4842 Stun Headgrab Knockback
+            [36762] = true, -- Q4842 Puzzle Fail
+
+            [36998] = true, -- Bind Spirit
+            [36996] = true, -- Bind Spirit
+            [37363] = true, -- Q4842 Pulling Slow
+            [37365] = true, -- Q4842 Stun
+
+            -- Until Death
+            [39219] = true, -- Using Whistle...
+
+            -- Phantom Guilt
+            [38644] = true, -- Q4895-RecentCreepyWhisper
+            [38642] = true, -- Q4895-FireCreepyWhisper
+
+            -- Rare Imports
+            [42388] = true, -- Q4908-KwamaChampSelfStun
+
+            -- Eyes of Azura
+            [38643] = true, -- Q4854-ALFire
+            [38337] = true, -- Q4854 Best Guide
+            [38341] = true, -- Q4854 Az Tracker
+            [38342] = true, -- Q4854 Az Tracker B
+            [37006] = true, -- CFX_Q4854
+            [40511] = true, -- Q4854 Weakened
+            [37205] = true, -- Animus Geode
+            [37677] = true, -- Geodesic Corruption
+            [37211] = true, -- Q4854 Empower Heart
+            [37222] = true, -- Q4854 S5
+            [37224] = true, -- Q4854 Lower Barrier
+            [37228] = true, -- Q4854 Parent Vis
+            [37000] = true, -- CFX_Q4854 Vastarie FX
+            [37268] = true, -- Q4854 Vastarie Stun
+            [37270] = true, -- Q4854
+            [37264] = true, -- CFX_Q4854
+            [37265] = true, -- Vastarie Port
+            [37386] = true, -- Vas out
+            [37314] = true, -- Q4854 Channel Stun
+            [61461] = true, -- Q4854 Channel Stun PERM
+            [38246] = true, -- Animus Geode
+            [37082] = true, -- Q4854 to Coldharbour
+            [37085] = true, -- Q4854 from Coldharbour
+            [37585] = true, -- Q4854 Culanwe Fire B
+            [37441] = true, -- Q4854 Vastarie
+            [57967] = true, -- Coldharbour Spawn In
+            [57982] = true, -- Coldharbour Despawn
+
+            -- Pact Advocate
+            [37486] = true, -- Q4851 Strangler Kill
+
+            -- Carnival Conundrum
+            [44879] = true, -- CV Delay 1.5 Seconds
+            [42022] = true, -- 1 Hour Timer
+
+            -- The Wounded Wood
+            [44688] = true, -- Pour Blessed Water
+
+            -- Enemies at the Gate
+            [37670] = true, -- Q4395-ShamanWaitSequence
+            [37674] = true, -- Q4395-ShamanWait
+            [37676] = true, -- Q4395-ShamanWait
+            [37679] = true, -- Q4395-ShamanWait
+            [37682] = true, -- Q4395-ShamanWait
+
+            -- A Chief Concern
+            [38185] = true, -- CON_Jump Off Tower
+
+            -- Blood Hunt
+            [61191] = true, -- Q4915 - CV Appearance Tracker
+
+            -- Flipping the Coin
+            [39309] = true, -- Q4983 Stone Cats
+            [41327] = true, -- Q4893 Statue Move
+            [39229] = true, -- Strike
+            [39231] = true, -- Q4893 Delay Spawn
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------

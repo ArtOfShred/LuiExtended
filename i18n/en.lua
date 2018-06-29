@@ -2248,7 +2248,9 @@ local strings = {
     SI_LUIE_SKILL_SNAKE_SCALES_TP =                      "Increase damage done by |cffffff5|r% and reduce damage taken by |cffffff5|r% while in Grahtwood.",
     SI_LUIE_SKILL_WOLFS_PELT_TP =                        "Increase Movement Speed by |cffffff4|r% and damage done by |cffffff5|r% while in Grahtwood.",
     SI_LUIE_SKILL_TIGERS_FUR_TP =                        "Increase Movement Speed by |cffffff4|r% and reduce damage taken by |cffffff5|r% while in Grahtwood.",
-
+    SI_LUIE_SKILL_SOUL_BINDING_TP =                      "Claim a weakened Daedra Soul, charging the Sigil Geode.",
+    SI_LUIE_SKILL_EMPOWER_TWILIT_HEART =                 "Empower Twilit Heart",
+    SI_LUIE_SKILL_BLACKSAPS_BREW_TP =                    "Increase Movement Speed by |cffffff4|r% and reduce damage taken by |cffffff10|r% for |cffffff30|r minutes.",
 }
 
 -- TODO: Switch to StringId's

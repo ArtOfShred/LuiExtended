@@ -780,6 +780,9 @@ A.Skill_Throw_Water                 = GetString(SI_LUIE_SKILL_THROW_WATER)
 A.Skill_Snake_Scales                = 36713
 A.Skill_Wolfs_Pelt                  = 36843
 A.Skill_Tigers_Fur                  = 36828
+A.Skill_Feedback                    = 32063
+A.Skill_Soul_Binding                = 21171
+A.Skill_Empower_Heart               = GetString(SI_LUIE_SKILL_EMPOWER_TWILIT_HEART)
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

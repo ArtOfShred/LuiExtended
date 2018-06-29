@@ -5,6 +5,7 @@ LUIE.ChatAnnouncements = {}
 -- Performance Enhancement
 local CA             = LUIE.ChatAnnouncements
 local E              = LUIE.Effects
+local Q              = LUIE.Quests
 local printToChat    = LUIE.PrintToChat
 local strfmt         = string.format
 local strformat      = zo_strformat
@@ -3251,7 +3252,7 @@ function CA.ResolveQuestItemChange()
                 g_questItemRemoved[itemId] = true
                 callLater(function() g_questItemRemoved[itemId] = false end, 100)
 
-                if not LUIE.Effects.QuestItemHideRemove[itemId] then
+                if not Q.QuestItemHideRemove[itemId] then
                     if CA.SV.Inventory.LootQuestRemove then
                         if CA.SV.Currency.CurrencyContextColor then
                             color = CurrencyDownColorize:ToHex()
@@ -3279,8 +3280,8 @@ function CA.ResolveQuestItemChange()
                     end
                 end
 
-                if LUIE.Effects.QuestItemModifyOnRemove[itemId] then
-                    LUIE.Effects.QuestItemModifyOnRemove[itemId]()
+                if Q.QuestItemModifyOnRemove[itemId] then
+                    Q.QuestItemModifyOnRemove[itemId]()
                 end
 
             end
@@ -3299,7 +3300,7 @@ function CA.ResolveQuestItemChange()
                 g_questItemAdded[itemId] = true
                 callLater(function() g_questItemAdded[itemId] = false end, 100)
 
-                if not LUIE.Effects.QuestItemHideLoot[itemId] then
+                if not Q.QuestItemHideLoot[itemId] then
                     if CA.SV.Inventory.LootQuestAdd then
                         if CA.SV.Currency.CurrencyContextColor then
                             color = CurrencyUpColorize:ToHex()
@@ -3319,8 +3320,8 @@ function CA.ResolveQuestItemChange()
                         end
 
                         -- Some quest items we want to limit the maximum possible quantity displayed when looted (for wierd item swapping) so replace the actual quantity with this value.
-                        if E.QuestItemMaxQuantityAdd[itemId] then
-                            countChange = E.QuestItemMaxQuantityAdd[itemId]
+                        if Q.QuestItemMaxQuantityAdd[itemId] then
+                            countChange = Q.QuestItemMaxQuantityAdd[itemId]
                         end
                         local quantity = countChange > 1 and (" |cFFFFFFx" .. countChange .. "|r") or ""
 
@@ -3342,8 +3343,8 @@ function CA.ResolveQuestItemChange()
                     end
                 end
 
-                if LUIE.Effects.QuestItemModifyOnAdd[itemId] then
-                    LUIE.Effects.QuestItemModifyOnAdd[itemId]()
+                if Q.QuestItemModifyOnAdd[itemId] then
+                    Q.QuestItemModifyOnAdd[itemId]()
                 end
 
             end
@@ -7317,6 +7318,9 @@ function CA.HookFunction()
 
         for stepIndex = QUEST_MAIN_STEP_INDEX, GetJournalQuestNumSteps(questIndex) do
             local _, visibility, stepType, stepOverrideText, conditionCount = GetJournalQuestStepInfo(questIndex, stepIndex)
+
+            -- Override text if its listed in the override table.
+            if Q.QuestAdvancedOverride[stepOverrideText] then stepOverrideText = Q.QuestAdvancedOverride[stepOverrideText] end
 
             if visibility == nil or visibility == QUEST_STEP_VISIBILITY_OPTIONAL then
                 if stepOverrideText ~= "" then
