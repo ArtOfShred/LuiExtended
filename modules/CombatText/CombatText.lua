@@ -384,6 +384,24 @@ local function SavePosition(panel)
     panelSettings.dimensions = dimensions
 end
 
+CT.AlertColors = {}
+
+function CT.SetAlertColors()
+	local colors = CT.SV.colors
+	CT.AlertColors = {
+		alertColorCleanse = ZO_ColorDef:New(unpack(colors.alertCleanse)):ToHex(),
+		alertColorExploit = ZO_ColorDef:New(unpack(colors.alertExploit)):ToHex(),
+		alertColorExecute = ZO_ColorDef:New(unpack(colors.alertExecute)):ToHex(),
+		alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlock)):ToHex(),
+		alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodge)):ToHex(),
+		alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoid)):ToHex(),
+		alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterrupt)):ToHex(),
+		alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
+		alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex()
+	}
+end
+
+
 -- Module initialization
 function CT.Initialize( enabled )
     -- Load settings
@@ -398,6 +416,8 @@ function CT.Initialize( enabled )
     if not enabled then return end
     CT.Enabled = true
 
+	CT.SetAlertColors()
+	
     -- Set panels to player configured settings
     for k, s in pairs (LUIE.CombatText.SV.panels) do
         if _G[k] ~= nil then

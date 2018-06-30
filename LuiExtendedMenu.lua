@@ -11214,7 +11214,7 @@ function LUIE_CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CLEANSE_TP),
                 getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertCleanse) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertCleanse = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertCleanse = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertCleanse[1], g=LUIE.CombatText.D.colors.alertCleanse[2], b=LUIE.CombatText.D.colors.alertCleanse[3]}
             },
             {
@@ -11247,7 +11247,7 @@ function LUIE_CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPLOIT_TP),
                 getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertExploit) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertExploit = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertExploit = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertExploit[1], g=LUIE.CombatText.D.colors.alertExploit[2], b=LUIE.CombatText.D.colors.alertExploit[3]}
             },
             {
@@ -11306,7 +11306,7 @@ function LUIE_CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP),
                 getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertExecute) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertExecute = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertExecute = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertExecute[1], g=LUIE.CombatText.D.colors.alertExecute[2], b=LUIE.CombatText.D.colors.alertExecute[3]}
             },
             {
@@ -11480,7 +11480,7 @@ function LUIE_CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP),
                 getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertBlock) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertBlock = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertBlock = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertBlock[1], g=LUIE.CombatText.D.colors.alertBlock[2], b=LUIE.CombatText.D.colors.alertBlock[3]}
             },
             {
@@ -11514,7 +11514,7 @@ function LUIE_CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP),
                 getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertDodge) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDodge = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDodge = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertDodge[1], g=LUIE.CombatText.D.colors.alertDodge[2], b=LUIE.CombatText.D.colors.alertDodge[3]}
             },
             {
@@ -11548,7 +11548,7 @@ function LUIE_CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP),
                 getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertAvoid) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertAvoid = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertAvoid = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertAvoid[1], g=LUIE.CombatText.D.colors.alertAvoid[2], b=LUIE.CombatText.D.colors.alertAvoid[3]}
             },
             {
@@ -11582,7 +11582,7 @@ function LUIE_CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP),
                 getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertInterrupt) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterrupt = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterrupt = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertInterrupt[1], g=LUIE.CombatText.D.colors.alertInterrupt[2], b=LUIE.CombatText.D.colors.alertInterrupt[3]}
             },
             {
@@ -11636,7 +11636,7 @@ function LUIE_CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP),
                 getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertPower) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertPower = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertPower = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertPower[1], g=LUIE.CombatText.D.colors.alertPower[2], b=LUIE.CombatText.D.colors.alertPower[3]}
             },
             {
@@ -11690,7 +11690,7 @@ function LUIE_CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP),
                 getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertDestroy) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDestroy = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDestroy = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertDestroy[1], g=LUIE.CombatText.D.colors.alertDestroy[2], b=LUIE.CombatText.D.colors.alertDestroy[3]}
             },
 
