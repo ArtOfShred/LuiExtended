@@ -1628,6 +1628,7 @@ E.EffectOverrideByName = {
                     ['Spectral Senche-Tiger'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                     ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                     ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+                    ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                 },
     [60630] =   { -- Rend (Lion)
                     ['Lion'] =                      { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
@@ -1639,6 +1640,7 @@ E.EffectOverrideByName = {
                     ['Spectral Senche-Tiger'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                     ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                     ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+                    ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                 },
     [60641] =   { -- Claw (Lion)
                     ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_claw.dds' }, -- Claw (Sabre Cat)
@@ -1648,6 +1650,7 @@ E.EffectOverrideByName = {
                     ['Spectral Senche-Tiger'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
                     ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
                     ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
+                    ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
                 },
     [7158] =    { -- Bite (Lion)
                     ['Lion'] =                      { icon = 'LuiExtended/media/icons/abilities/ability_lion_bite.dds' }, -- Bite (Lion)
@@ -1659,6 +1662,7 @@ E.EffectOverrideByName = {
                     ['Spectral Senche-Tiger'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
                     ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
                     ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
+                    ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
                 },
     [7161] =    { -- Double Strike (Lion)
                     ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_double_strike.dds' }, -- Double Strike (Sabre Cat)
@@ -1668,6 +1672,7 @@ E.EffectOverrideByName = {
                     ['Spectral Senche-Tiger'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
                     ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
                     ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
+                    ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
                 },
     [5362] =    { -- Slam (Skeever / Kagouti)
                     ['Kagouti'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_slam.dds' }, -- Slam (Kagouti)
@@ -1984,6 +1989,9 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     -- Grahtwood
     [38748] = true, -- Aulus's Tongue (The Grips of Madness)
 
+    -- Greenshade
+    [83155] = true, -- Thunderous Smash (Thodundor of the Hill)
+
     -- Vvardenfell
     [82272] = true, -- Dark Reach (Slavemaster Arenim -- Vvardenfell -- The Heart of a Telvanni)
     [82273] = true, -- Dark Reach (Slavemaster Arenim -- Vvardenfell -- The Heart of a Telvanni)
@@ -2056,11 +2064,11 @@ E.TooltipNameOverride = {
     [A.Skill_Minor_Toughness] = GetString(SI_LUIE_SKILL_MINOR_TOUGHNESS_TP),
     [A.Skill_Major_Courage] = GetString(SI_LUIE_SKILL_MAJOR_COURAGE_TP),
 
-    [A.Skill_Minor_Breach] = GetString(SI_LUIE_SKILL_MAJOR_BREACH_TP),
-    [A.Skill_Major_Breach] = GetString(SI_LUIE_SKILL_MINOR_BREACH_TP),
-    [A.Skill_Minor_Fracture] = GetString(SI_LUIE_SKILL_MAJOR_FRACTURE_TP),
-    [A.Skill_Major_Fracture] = GetString(SI_LUIE_SKILL_MINOR_FRACTURE_TP),
-    [A.Skill_Minor_Vulnerability] = GetString(SI_LUIE_SKILL_MAJOR_VULNERABILITY_TP),
+    [A.Skill_Minor_Breach] = GetString(SI_LUIE_SKILL_MINOR_BREACH_TP),
+    [A.Skill_Major_Breach] = GetString(SI_LUIE_SKILL_MAJOR_BREACH_TP),
+    [A.Skill_Minor_Fracture] = GetString(SI_LUIE_SKILL_MINOR_FRACTURE_TP),
+    [A.Skill_Major_Fracture] = GetString(SI_LUIE_SKILL_MAJOR_FRACTURE_TP),
+    [A.Skill_Minor_Vulnerability] = GetString(SI_LUIE_SKILL_MINOR_VULNERABILITY_TP),
     [A.Skill_Minor_Maim] = GetString(SI_LUIE_SKILL_MINOR_MAIM_TP),
     [A.Skill_Major_Maim] = GetString(SI_LUIE_SKILL_MAJOR_MAIM_TP),
     [A.Skill_Minor_Defile] = GetString(SI_LUIE_SKILL_MINOR_DEFILE_TP),
@@ -6720,6 +6728,30 @@ E.EffectOverride = {
     [84214] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_bog_slam.dds', type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = GetString(SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP) }, -- Bog Slam (Gathongor the Mauler)
     [84213] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_bog_slam.dds' }, -- Bog Slam (Gathongor the Mauler)
 
+    -- World Boss - Thodundor's View
+    [83164] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_punch.dds' }, -- Clobber (Thodundor of the Hill)
+    [83165] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_backhand.dds' }, -- Sweeping Backhand (Thodundor of the Hill)
+
+    [83124] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP) }, -- Ferocious Bellow (Thodundor of the Hill)
+
+    [83155] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Thunderous Smash (Thodundor of the Hill)
+    [83156] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Thunderous Smash (Thodundor of the Hill)
+    [83159] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Thunderous Smash (Thodundor of the Hill)
+    [83157] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Thunderous Smash (Thodundor of the Hill)
+
+    [83160] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Stone Crusher (Thodundor of the Hill)
+    [83163] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Stone Crusher (Thodundor of the Hill)
+    [83162] = { name = A.Skill_Off_Balance, tooltip = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP) }, -- Stone Crusher (Thodundor of the Hill)
+    [83161] = { name = A.Innate_Stagger, hide = true, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STAGGER_TP) }, -- Stone Crusher (Thodundor of the Hill)
+
+    [83136] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds', hide = true }, -- Ground Shock (Thodundor of the Hill)
+    [83140] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Ground Shock (Thodundor of the Hill)
+    [83141] = { name = A.Innate_Stagger, hide = true, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STAGGER_TP) }, -- Ground Shock (Thodundor of the Hill)
+    [83137] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_shattered_ground.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_SNARE_TP) }, -- Ground Shock (Thodundor of the Hill)
+
+    [83777] = { icon = 'esoui/art/icons/ability_dragonknight_005.dds', hide = true }, -- Iron Grip (Thodundor of the Hill)
+    [83780] = { icon = 'esoui/art/icons/ability_dragonknight_005.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Iron Grip (Thodundor of the Hill)
+
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
     ----------------------------------------------------------------
@@ -7366,8 +7398,10 @@ E.FakeStagger = {
     [47020] = {icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Puncturing_Chains, duration = 1000}, -- Pull (Puncturing Chains) (Cyrodiil Guard T2)
 
     -- Quest
-    [84284] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Coursing Bones (Oskana)
+    [84284] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Coursing Bones (Oskana)
     [84197] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Marsh Masher (Gathongor the Mauler)
+    [83161] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Stone Crusher (Thodundor of the Hill)
+    [83141] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Ground Shock (Thodundor of the Hill)
 
     --[[
     [52878] = {icon = 'esoui/art/icons/ability_dragonknight_005_b.dds', name = 'Empowering Chains', duration = 433}, -- Pull (Empowering Chains) (Rkindaleft - Sharga the Firestarter)

@@ -588,6 +588,11 @@ LUIE.AlertTable = {
     [84209] = { block = true, dodge = true, priority = 1 }, -- Wrecking Jaws (Gathongor the Mauler)
     [84212] = { avoid = true, priority = 1 }, -- Bog Slam (Gathongor the Mauler)
 
+    -- World Boss - Thodundor's View
+    [83155] = { block = true, bs = true, dodge = true, priority = 1 }, -- Thunderous Smash (Thodundor of the Hill)
+    [83160] = { block = true, avoid = true, priority = 1 }, -- Stone Crusher (Thodundor of the Hill)
+    [83136] = { block = true, avoid = true, priority = 1 }, -- Ground Shock (Thodundor of the Hill)
+
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------
     --------------------------------------------------

@@ -2248,6 +2248,8 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_FREEZING_TP =                  "Afflicted with frost damage over time for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_SHOCKED_TP =                   "Afflicted with shock damage over time for |cffffff<<1>>|r seconds.",
 
+    SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP =               "Off Balance.",
+    SI_LUIE_SKILL_GENERIC_SNARE_TP =                     "Snared. Your movement speed is reduced.",
     SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered. You are unable to attack or move while staggered.",
     SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned. You are unable to attack or move while stunned.",
     SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP =                 "Knocked back. You are unable to attack or move while knocked back.",

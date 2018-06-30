@@ -10322,7 +10322,6 @@ debugAuras = {
             [84141] = true, -- Find Anchor 2
             [84138] = true, -- Minion of Stone
             [84139] = true, -- Minion of Stone
-
             [84212] = true, -- Bog Slam
             [84214] = true, -- Bog Slam
             [84213] = true, -- Bog Slam
@@ -10332,6 +10331,29 @@ debugAuras = {
             [47086] = true, -- Rootwater Life Spring
             [47109] = true, -- Rootwater Heal
 
+            -- World Boss - Thodundor's View
+            [83164] = true, -- Clobber
+            [83165] = true, -- Sweeping Backhand
+            [83124] = true, -- Ferocious Bellow
+            [83155] = true, -- Thunderous Smash
+            [83156] = true, -- Thunderous Smash
+            [83159] = true, -- Thunderous Smash
+            [83157] = true, -- Thunderous Smash
+            [83160] = true, -- Stone Crusher
+            [83163] = true, -- Stone Crusher
+            [83162] = true, -- Stone Crusher
+            [83161] = true, -- Stone Crusher
+            [83136] = true, -- Ground Shock
+            [83138] = true, -- Ground Shock
+            [83142] = true, -- Ground Shock
+            [83143] = true, -- Ground Shock
+            [83500] = true, -- Ground Shock
+            [83499] = true, -- Ground Shock
+            [83140] = true, -- Ground Shock
+            [83141] = true, -- Ground Shock
+            [83137] = true, -- Ground Shock
+            [83777] = true, -- Iron Grip
+            [83780] = true, -- Iron Grip
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------
