@@ -133,10 +133,16 @@ CT.D = {
         showAlertMitigation         = true,
         mitigationType              = "Single Line",
         hideMitigation              = true,
-        mitigationFormat            = "%t %i",
-        mitigationFormatPower       = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER),
-        mitigationFormatDestroy     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY),
+        mitigationPrefix            = "%t %i",
+        mitigationPrefixN           = GetString(SI_LUIE_CT_MITIGATION_FORMAT_ALERT_N),
+        mitigationPowerPrefix       = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER),
+        mitigationPowerPrefixN      = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER_N),
+        mitigationDestroyPrefix     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY),
+        mitigationDestroyPrefixN    = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY_N),
+
+        -- Add Name/No Name Variants
         mitigationSuffix            = GetString(SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT), -- "incoming! "
+
         mitigationAura              = false,
         mitigationRank3             = true,
         mitigationRank2             = true,
@@ -203,6 +209,7 @@ CT.D = {
         alert                       = 32,
         point                       = 24,
         resource                    = 32,
+        readylabel                  = 32,
     },
 
     -- Color defaults
@@ -330,7 +337,9 @@ CT.D = {
         pointsChampion              = "%a XP",
 
         -- Resources
-        resource                    = "%t! (%a)",
+        resourceHealth              = "%t! (%a)",
+        resourceMagicka             = "%t! (%a)",
+        resourceStamina             = "%t! (%a)",
         ultimateReady               = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY),
         potionReady                 = GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY),
     },

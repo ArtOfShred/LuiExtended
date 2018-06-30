@@ -9388,892 +9388,67 @@ function LUIE_CreateSettings()
         },
     }
 
-    -- Combat Text - Toggle Options (Incoming) Options Submenu
+    -- Combat Text - Damage & Healing Options
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_INCOMING_HEADER),
+        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_DAMAGE_AND_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
+            },
+            {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_INCOMING_DAMAGE_HEAL_HEADER),
+                name = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE),
                 width = "full",
             },
             {
-                -- Damage
+                -- Damage (Incoming)
                 type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE),
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DAMAGE_TP),
                 getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDamage end,
                 setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDamage = v end,
                 default = LUIE.CombatText.D.toggles.incoming.showDamage,
             },
             {
-                -- Healing
+                -- Damage (Outgoing)
                 type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HEALING),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_HEALING_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showHealing end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showHealing = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showHealing,
-            },
-            {
-                -- Resource Gain
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_ENERGIZE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showEnergize end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showEnergize = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showEnergize,
-            },
-            {
-                -- Ultimate Gain
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_ENERGIZE_ULTIMATE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showUltimateEnergize end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showUltimateEnergize = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showUltimateEnergize,
-            },
-            {
-                -- Resource Drain
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DRAIN),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DRAIN_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDrain end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDrain = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showDrain,
-            },
-            {
-                -- Damage over Time
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DOT),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DOT_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDot end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDot = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showDot,
-            },
-            {
-                -- Healing over Time
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HOT),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_HOT_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showHot end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showHot = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showHot,
-            },
-            {
-                --Incoming Mitigation Header
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_INCOMING_MITIGATION),
-                width = "full",
-            },
-            {
-                -- Missed
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_MISS),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_MISS_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showMiss end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showMiss = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showMiss
-            },
-            {
-                -- Immune
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_IMMUNE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showImmune end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showImmune = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showImmune,
-            },
-            {
-                -- Parried
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_PARRIED),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_PARRIED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showParried end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showParried = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showParried,
-            },
-            {
-                -- Reflected
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_REFLECTED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showReflected end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showReflected = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showReflected,
-            },
-            {
-                -- Damage Shielded
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DAMAGE_SHIELD_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDamageShield end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDamageShield = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showDamageShield,
-            },
-            {
-                -- Dodged
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DODGED),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DODGED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDodged end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDodged = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showDodged,
-            },
-            {
-                -- Blocked
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_BLOCKED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showBlocked end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showBlocked = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showBlocked,
-            },
-            {
-                -- Interrupted
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_INTERRUPTED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showInterrupted end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showInterrupted = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showInterrupted,
-            },
-
-            {
-                -- Incoming Crowd Control Header
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_INCOMING_CROWD_CONTROL),
-                width = "full",
-            },
-            {
-                -- Disoriented
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DISORIENTED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDisoriented end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDisoriented = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showDisoriented,
-            },
-            {
-                -- Feared
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FEARED),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_FEARED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showFeared end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showFeared = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showFeared,
-            },
-            {
-                -- Off-Balance
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_OFF_BALANCE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showOffBalanced end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showOffBalanced = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showOffBalanced,
-            },
-            {
-                -- Silenced
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_SILENCED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showSilenced end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showSilenced = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showSilenced,
-            },
-            {
-                -- Stunned
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED),
-                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_STUNNED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showStunned end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showStunned = v end,
-                default = LUIE.CombatText.D.toggles.incoming.showStunned,
-            },
-        },
-    }
-
-    -- Combat Text - Toggle Options (Outgoing) Options Submenu
-    optionsDataCombatText[#optionsDataCombatText +1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_OUTGOING_HEADER),
-        controls = {
-            {
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_OUTGOING_DAMAGE_HEAL_HEADER),
-                width = "full",
-            },
-            {
-                -- Damage
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE),
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DAMAGE_TP),
                 getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDamage end,
                 setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDamage = v end,
                 default = LUIE.CombatText.D.toggles.outgoing.showDamage,
             },
             {
-                -- Damage over Time
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DOT),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DOT_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDot end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDot = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showDot,
-            },
-            {
-                -- Healing
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HEALING),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_HEALING_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showHealing end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showHealing = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showHealing,
-            },
-            {
-                -- Healing over Time
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HOT),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_HOT_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showHot end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showHot = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showHot,
-            },
-            {
-                -- Resource Gain
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showEnergize end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showEnergize = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showEnergize,
-            },
-            {
-                -- Ultimate Gain
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_ULTIMATE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showUltimateEnergize end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showUltimateEnergize = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showUltimateEnergize,
-            },
-            {
-                -- Resource Drain
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DRAIN),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DRAIN_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDrain end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDrain = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showDrain,
-            },
-            {
-                -- Outgoing Mitigation Header
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_OUTGOING_MITIGATION),
-                width = "full",
-            },
-            {
-                -- Missed
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_MISS),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_MISS_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showMiss end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showMiss = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showMiss,
-            },
-            {
-                -- Immune
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_IMMUNE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showImmune end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showImmune = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showImmune,
-            },
-            {
-                -- Parried
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_PARRIED),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_PARRIED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showParried end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showParried = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showParried,
-            },
-            {
-                -- Reflected
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_REFLECTED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showReflected end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showReflected = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showReflected,
-            },
-            {
-                -- Damage Shielded
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DAMAGE_SHIELD_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDamageShield end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDamageShield = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showDamageShield,
-            },
-            {
-                -- Dodged
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DODGED),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DODGED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDodged end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDodged = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showDodged,
-            },
-            {
-                -- Blocked
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_BLOCKED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showBlocked end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showBlocked = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showBlocked,
-            },
-            {
-                -- Interrupted
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_INTERRUPTED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showInterrupted end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showInterrupted = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showInterrupted,
-            },
-            {
-                -- Outgoing Crowd Control Header
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_OUTGOING_CROWD_CONTROL),
-                width = "full",
-            },
-            {
-                -- Disoriented
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DISORIENTED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDisoriented end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDisoriented = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showDisoriented,
-            },
-            {
-                -- Feared
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FEARED),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_FEARED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showFeared end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showFeared = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showFeared,
-            },
-            {
-                -- Off-Balance
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_OFF_BALANCE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showOffBalanced end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showOffBalanced = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showOffBalanced,
-            },
-            {
-                -- Silenced
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showSilenced end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showSilenced = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showSilenced,
-            },
-            {
-                -- Stunned
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED),
-                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showStunned end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showStunned = v end,
-                default = LUIE.CombatText.D.toggles.outgoing.showStunned,
-            },
-        },
-    }
-
-    -- Combat Text - Toggle Options (Notification) Options Submenu
-    optionsDataCombatText[#optionsDataCombatText +1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_NOTIFICATION),
-        controls = {
-            {
-                -- Toggle Combat State
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE),
-                width = "full",
-            },
-            {
-                -- In Combat
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showInCombat end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showInCombat = v end,
-                default = LUIE.CombatText.D.toggles.showInCombat,
-            },
-            {
-                -- Out of Combat
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT),
-                tooltip =GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_OUT_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showOutCombat end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showOutCombat = v end,
-                default = LUIE.CombatText.D.toggles.showOutCombat,
-            },
-            {
-                -- Toggle Alerts
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERTS),
-                width = "full",
-            },
-            {
-                type = "description",
-                text = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERTS_DESC),
-            },
-            {
-                -- Cleanse
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_CLEANSE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertCleanse end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertCleanse = v end,
-                default = LUIE.CombatText.D.toggles.showAlertCleanse,
-            },
-            {
-                -- Exploit
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXPLOIT_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertExploit end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertExploit = v end,
-                default = LUIE.CombatText.D.toggles.showAlertExploit,
-            },
-            {
-                -- Execute
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXECUTE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertExecute end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertExecute = v end,
-                default = LUIE.CombatText.D.toggles.showAlertExecute,
-            },
-            {
-                -- Execute Threshold Slider
-                type    = "slider",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD_TP),
-                min     = 10,
-                max     = 50,
-                getFunc = function() return LUIE.CombatText.SV.executeThreshold end,
-                setFunc = function(v) LUIE.CombatText.SV.executeThreshold = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertExecute end,
-                default = LUIE.CombatText.D.executeThreshold,
-            },
-            {
-                -- Execute Frequency Slider
-                type    = "slider",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY_TP),
-                min     = 1,
-                max     = 20,
-                getFunc = function() return LUIE.CombatText.SV.executeFrequency end,
-                setFunc = function(v) LUIE.CombatText.SV.executeFrequency = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertExecute end,
-                default = LUIE.CombatText.D.executeFrequency,
-            },
-            {
-                -- Hide Ingame Tips
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.hideIngameTips end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.hideIngameTips = v; ZO_ActiveCombatTips:SetHidden(v) end,
-                default = LUIE.CombatText.D.toggles.hideIngameTips,
-            },
-            {
-                -- Mitigation Alerts
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertMitigation = v end,
-                default = LUIE.CombatText.D.toggles.showAlertMitigation,
-            },
-            {
-                type = "description",
-                text = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION),
-            },
-            {
-                -- Mitigation Method
-                type    = "dropdown",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP),
-                choices = LUIE.CombatTextConstants.mitigationType,
-                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationType end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationType = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.mitigationType,
-            },
-            {
-                -- Hide Mitigation Grouped Alerts
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.hideMitigation end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.hideMitigation = v end,
-                disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.mitigationType == "Single Line") end,
-                default = LUIE.CombatText.D.toggles.hideMitigation,
-            },
-            {
-                -- Mitigation Format
+                -- Damage Format
                 type    = "editbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationFormat end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationFormat = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.mitigationFormat,
+                width   = "half",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.damage end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.damage = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.damage,
             },
             {
-                -- Mitigation Suffix
+                -- Damage Critical Format
                 type    = "editbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationSuffix end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationSuffix = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.mitigationSuffix,
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_CRITICAL_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.damagecritical end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.damagecritical = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.damagecritical,
             },
             {
-                -- Mitigation Aura
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_AURA)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_AURA_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationAura end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationAura = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.mitigationAura,
-            },
-            {
-                -- Mitigation Rank 3
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK3)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK3_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationRank3 end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationRank3 = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.mitigationRank3,
-            },
-            {
-                -- Mitigation Rank 2
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK2)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK2_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationRank2 end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationRank2 = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.mitigationRank2,
-            },
-            {
-                -- Mitigation Rank 1
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK1)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK1_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationRank1 end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationRank1 = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.mitigationRank1,
-            },
-            {
-                -- Mitigation Dungeon
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationDungeon end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationDungeon = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.mitigationDungeon,
-            },
-            {
-                -- Block
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_BLOCK_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertBlock end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertBlock = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.showAlertBlock,
-            },
-            {
-                -- Dodge
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DODGE)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DODGE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertDodge end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertDodge = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.showAlertDodge,
-            },
-            {
-                -- Avoid
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_AVOID)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_AVOID_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertAvoid end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertAvoid = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.showAlertAvoid,
-            },
-            {
-                -- Interrupt
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_INTERRUPT_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertInterrupt end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertInterrupt = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.showAlertInterrupt,
-            },
-            {
-                -- Power
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertPower end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertPower = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.showAlertPower,
-            },
-            {
-                -- Mitigation Format Power
-                type    = "editbox",
-                name    = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationFormatPower end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationFormatPower = v end,
-                disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.showAlertPower) end,
-                default = LUIE.CombatText.D.toggles.mitigationFormatPower,
-            },
-            {
-                -- Destroy
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertDestroy end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertDestroy = v end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.showAlertDestroy,
-            },
-            {
-                -- Mitigation Format Destroy
-                type    = "editbox",
-                name    = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationFormatDestroy end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationFormatDestroy = v end,
-                disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.showAlertDestroy) end,
-                default = LUIE.CombatText.D.toggles.mitigationFormatDestroy,
-            },
-            {
-                -- Toggle Points
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS),
-                width = "full",
-            },
-            {
-                -- Alliance Points
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showPointsAlliance end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showPointsAlliance = v end,
-                default = LUIE.CombatText.D.toggles.showPointsAlliance,
-            },
-            {
-                -- Experience Points
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showPointsExperience end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showPointsExperience = v end,
-                default = LUIE.CombatText.D.toggles.showPointsExperience,
-            },
-            {
-                -- Champion Points
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showPointsChampion end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showPointsChampion = v end,
-                default = LUIE.CombatText.D.toggles.showPointsChampion,
-            },
-            {
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RESOURCES),
-                width = "full",
-            },
-            {
-                -- Low Health
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_HEALTH_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showLowHealth end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showLowHealth = v end,
-                default = LUIE.CombatText.D.toggles.showLowHealth,
-            },
-            {
-                -- Low Health Warning Threshold Slider
+                -- Damage Font Size
                 type    = "slider",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH_TP),
-                min     = 15,
-                max     = 50,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.healthThreshold end,
-                setFunc = function(threshold) LUIE.CombatText.SV.healthThreshold = threshold end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showLowHealth end,
-                default = LUIE.CombatText.D.healthThreshold,
-            },
-            {
-                -- Low Magicka
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_MAGICKA_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showLowMagicka end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showLowMagicka = v end,
-                default = LUIE.CombatText.D.toggles.showLowMagicka,
-            },
-            {
-                -- Low Magicka Warning Threshold Slider
-                type    = "slider",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA_TP),
-                min     = 15,
-                max     = 50,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.magickaThreshold end,
-                setFunc = function(threshold) LUIE.CombatText.SV.magickaThreshold = threshold end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showLowMagicka end,
-                default = LUIE.CombatText.D.magickaThreshold,
-            },
-            {
-                -- Low Stamina
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_STAMINA_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showLowStamina end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showLowStamina = v end,
-                default = LUIE.CombatText.D.toggles.showLowStamina,
-            },
-            {
-                -- Low Stamina Warning Threshold Slider
-                type    = "slider",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA_TP),
-                min     = 15,
-                max     = 50,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.staminaThreshold end,
-                setFunc = function(threshold) LUIE.CombatText.SV.staminaThreshold = threshold end,
-                disabled = function() return not LUIE.CombatText.SV.toggles.showLowStamina end,
-                default = LUIE.CombatText.D.staminaThreshold,
-            },
-            {
-                -- Warning Sound
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.warningSound end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.warningSound = v end,
-                disabled = function() return not (LUIE.CombatText.SV.toggles.showLowHealth or LUIE.CombatText.SV.toggles.showLowMagicka or LUIE.CombatText.SV.toggles.showLowStamina) end,
-                default = LUIE.CombatText.D.toggles.warningSound,
-            },
-            {
-                -- Ultimate Ready
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ULTIMATE_READY_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showUltimate end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showUltimate = v end,
-                default = LUIE.CombatText.D.toggles.showUltimate,
-            },
-            {
-                -- Potion Ready
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POTION_READY_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.showPotionReady end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.showPotionReady = v end,
-                default = LUIE.CombatText.D.toggles.showPotionReady,
-            },
-        },
-    }
-
-    -- Combat Text - Font Format Options Submenu
-    optionsDataCombatText[#optionsDataCombatText +1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_FONT_HEADER),
-        controls = {
-            {
-                -- Font Face Dropdown
-                type    = "dropdown",
-                scrollable = true,
-                name    = GetString(SI_LUIE_LAM_CT_FONT_FACE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_FACE_TP),
-                choices = FontsList,
-                getFunc = function() return LUIE.CombatText.SV.fontFace end,
-                setFunc = function(face)
-                    LUIE.CombatText.SV.fontFace = face
-                    for k, _ in pairs (LUIE.CombatText.SV.panels) do
-                        _G[k .. "_Label"]:SetFont(LMP:Fetch(LMP.MediaType.FONT, LUIE.CombatText.SV.fontFace) .. "|26|" .. LUIE.CombatText.SV.fontOutline)
-                    end
-                end,
-                default = LUIE.CombatText.D.fontFace
-            },
-            {
-                -- Font Outline Dropdown
-                type    = "dropdown",
-                name    = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE_TP),
-                choices = LUIE.CombatTextConstants.outlineType,
-                getFunc = function() return LUIE.CombatText.SV.fontOutline end,
-                setFunc = function(outline)
-                    LUIE.CombatText.SV.fontOutline = outline
-                    for k, _ in pairs (LUIE.CombatText.SV.panels) do
-                        _G[k .. "_Label"]:SetFont(LMP:Fetch(LMP.MediaType.FONT, LUIE.CombatText.SV.fontFace) .. "|26|" .. LUIE.CombatText.SV.fontOutline)
-                    end
-                end,
-                default = LUIE.CombatText.D.fontOutline
-            },
-            {
-                -- Test Font Button
-                type = "button",
-                name    = GetString(SI_LUIE_LAM_CT_FONT_TEST),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_TEST_TP),
-                func = function()
-                    CALLBACK_MANAGER:FireCallbacks(LUIE.CombatTextConstants.eventType.COMBAT, LUIE.CombatTextConstants.combatType.INCOMING, POWERTYPE_STAMINA, mathrandom(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
-                end,
-            },
-        },
-    }
-
-    -- Combat Text - Font Size (Combat) Options Submenu
-    optionsDataCombatText[#optionsDataCombatText +1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HEADER),
-        controls = {
-            {
-                -- Damage
-                type    = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE),
+                width   = "half",
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_TP),
                 min     = 8,
                 max     = 72,
@@ -10283,9 +9458,10 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.fontSizes.damage,
             },
             {
-                -- Damage Critical
+                -- Damage Critical Font Size
                 type    = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_CRITICAL),
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_CRITICAL_TP),
                 min     = 8,
                 max     = 72,
@@ -10295,33 +9471,57 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.fontSizes.damagecritical,
             },
             {
-                -- Healing
-                type    = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HEALING),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_TP),
-                min     = 8,
-                max     = 72,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.fontSizes.healing end,
-                setFunc = function(size) LUIE.CombatText.SV.fontSizes.healing = size end,
-                default = LUIE.CombatText.D.fontSizes.healing,
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_DOT),
+                width = "full",
             },
             {
-                -- Healing Critical
-                type    = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HEALING_CRITICAL),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_CRITICAL_TP),
-                min     = 8,
-                max     = 72,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.fontSizes.healingcritical end,
-                setFunc = function(size) LUIE.CombatText.SV.fontSizes.healingcritical = size end,
-                default = LUIE.CombatText.D.fontSizes.healingcritical,
+                -- Damage over Time (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DOT_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDot end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDot = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showDot,
             },
             {
-                -- Damage over Time
+                -- Damage over Time (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DOT_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDot end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDot = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showDot,
+            },
+            {
+                -- Damage over Time Format
+                type    = "editbox",
+                width   = "half",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.dot end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.dot = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.dot,
+            },
+            {
+                -- Damage over Time Critical Format
+                type    = "editbox",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_CRITICAL_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.dotcritical end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.dotcritical = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.dotcritical,
+            },
+            {
+                -- Damage over Time Font Size
                 type    = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DOT),
+                width   = "half",
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_DOT_TP),
                 min     = 8,
                 max     = 72,
@@ -10331,9 +9531,10 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.fontSizes.dot,
             },
             {
-                -- Damage over Time Critical
+                -- Damage over Time Critical Font Size
                 type    = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DOT_CRITICAL),
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_DOT_CRITICAL_TP),
                 min     = 8,
                 max     = 72,
@@ -10343,133 +9544,9 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.fontSizes.dotcritical,
             },
             {
-                -- Healing over Time
-                type    = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HOT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HOT_TP),
-                min     = 8,
-                max     = 72,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.fontSizes.hot end,
-                setFunc = function(size) LUIE.CombatText.SV.fontSizes.hot = size end,
-                default = LUIE.CombatText.D.fontSizes.hot,
-            },
-            {
-                -- Healing over Time Critical
-                type    = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HOT_CRITICAL),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HOT_CRITICAL_TP),
-                min     = 8,
-                max     = 72,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.fontSizes.hotcritical end,
-                setFunc = function(size) LUIE.CombatText.SV.fontSizes.hotcritical = size end,
-                default = LUIE.CombatText.D.fontSizes.hotcritical,
-            },
-            {
-                -- Gain Loss
-                type    = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_GAIN_LOSS),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_GAIN_LOSS_TP),
-                min     = 8,
-                max     = 72,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.fontSizes.gainLoss end,
-                setFunc = function(size) LUIE.CombatText.SV.fontSizes.gainLoss = size end,
-                default = LUIE.CombatText.D.fontSizes.gainLoss,
-            },
-            {
-                -- Mitigation
-                type    = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_MITIGATION),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP),
-                min     = 8,
-                max     = 72,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.fontSizes.mitigation end,
-                setFunc = function(size) LUIE.CombatText.SV.fontSizes.mitigation = size end,
-                default = LUIE.CombatText.D.fontSizes.mitigation,
-            },
-            {
-                -- Crowd Control
-                type    = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_CROWD_CONTROL),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP),
-                min     = 8,
-                max     = 72,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.fontSizes.crowdControl end,
-                setFunc = function(size) LUIE.CombatText.SV.fontSizes.crowdControl = size end,
-                default = LUIE.CombatText.D.fontSizes.crowdControl,
-            },
-        },
-    }
-
-    -- Combat Text - Font Size (Notification) Options Submenu
-    optionsDataCombatText[#optionsDataCombatText +1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_HEADER),
-        controls = {
-            {
-                -- Combat State
-                type     = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_STATE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP),
-                min     = 8,
-                max     = 72,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.fontSizes.combatState end,
-                setFunc = function(size) LUIE.CombatText.SV.fontSizes.combatState = size end,
-                default = LUIE.CombatText.D.fontSizes.combatState,
-            },
-            {
-                -- Alerts
-                type     = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_ALERT_TP),
-                min     = 8,
-                max     = 72,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.fontSizes.alert end,
-                setFunc = function(size) LUIE.CombatText.SV.fontSizes.alert = size end,
-                default = LUIE.CombatText.D.fontSizes.alert,
-            },
-            {
-                -- Points
-                type     = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POINTS),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP),
-                min     = 8,
-                max     = 72,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.fontSizes.point end,
-                setFunc = function(size) LUIE.CombatText.SV.fontSizes.point = size end,
-                default = LUIE.CombatText.D.fontSizes.point,
-            },
-            {
-                -- Resources
-                type    = "slider",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_RESOURCE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP),
-                min     = 8,
-                max     = 72,
-                step    = 1,
-                getFunc = function() return LUIE.CombatText.SV.fontSizes.resource end,
-                setFunc = function(size) LUIE.CombatText.SV.fontSizes.resource = size end,
-                default = LUIE.CombatText.D.fontSizes.resource,
-            },
-        },
-    }
-
-    -- Combat Text - Color Options (Combat) Options Submenu
-    optionsDataCombatText[#optionsDataCombatText +1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEADER),
-        controls = {
-            {
-                -- Damage & Healing Color Header
+                -- Damage Color Options
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_HEALING_HEADER),
+                name = GetString(SI_LUIE_LAM_CT_HEADER_DAMAGE_COLOR),
                 width = "full",
             },
             {
@@ -10580,60 +9657,7 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[11] = { r, g, b, a } end,
                 default = {r=LUIE.CombatText.D.colors.damage[11][1], g=LUIE.CombatText.D.colors.damage[11][2], b=LUIE.CombatText.D.colors.damage[11][3]}
             },
-            {
-                -- Healing
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HEALING),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.healing) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.healing = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.healing[1], g=LUIE.CombatText.D.colors.healing[2], b=LUIE.CombatText.D.colors.healing[3]}
-            },
-            {
-                -- Gain Magicka
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.energizeMagicka) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.energizeMagicka = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.energizeMagicka[1], g=LUIE.CombatText.D.colors.energizeMagicka[2], b=LUIE.CombatText.D.colors.energizeMagicka[3]}
-            },
-            {
-                -- Gain Stamina
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.energizeStamina) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.energizeStamina = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.energizeStamina[1], g=LUIE.CombatText.D.colors.energizeStamina[2], b=LUIE.CombatText.D.colors.energizeStamina[3]}
-            },
-            {
-                -- Gain Ultimate
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.energizeUltimate) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.energizeUltimate = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.energizeUltimate[1], g=LUIE.CombatText.D.colors.energizeUltimate[2], b=LUIE.CombatText.D.colors.energizeUltimate[3]}
-            },
-            {
-                -- Drain Magicka
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.drainMagicka) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.drainMagicka = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.drainMagicka[1], g=LUIE.CombatText.D.colors.drainMagicka[2], b=LUIE.CombatText.D.colors.drainMagicka[3]}
-            },
-            {
-                -- Drain Stamina
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.drainStamina) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.drainStamina = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.drainStamina[1], g=LUIE.CombatText.D.colors.drainStamina[2], b=LUIE.CombatText.D.colors.drainStamina[3]}
-            },
+
             {
                 -- Checkbox Critical Damage Override
                 type    = "checkbox",
@@ -10652,24 +9676,7 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.criticalDamageOverride = { r, g, b, a } end,
                 default = {r=LUIE.CombatText.D.colors.criticalDamageOverride[1], g=LUIE.CombatText.D.colors.criticalDamageOverride[2], b=LUIE.CombatText.D.colors.criticalDamageOverride[3]}
             },
-            {
-                -- Checkbox Critical Healing Override
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.criticalHealingOverride end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.criticalHealingOverride = v end,
-                default = LUIE.CombatText.D.toggles.criticalHealingOverride
-            },
-            {
-                -- Color Critical Healing Override
-                type    = "colorpicker",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR)),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.criticalHealingOverride) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.criticalHealingOverride = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.criticalHealingOverride[1], g=LUIE.CombatText.D.colors.criticalHealingOverride[2], b=LUIE.CombatText.D.colors.criticalHealingOverride[3]}
-            },
+
             {
                 -- Checkbox Incoming Damage Override
                 type    = "checkbox",
@@ -10689,379 +9696,35 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.CombatText.D.colors.incomingDamageOverride[1], g=LUIE.CombatText.D.colors.incomingDamageOverride[2], b=LUIE.CombatText.D.colors.incomingDamageOverride[3]}
             },
             {
-                -- Color Mitigation
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_MITIGATION_HEADER),
+                name = GetString(SI_LUIE_LAM_CT_SHARED_HEALING),
                 width = "full",
             },
             {
-                -- Miss
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_MISS),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_MISS_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.miss) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.miss = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.miss[1], g=LUIE.CombatText.D.colors.miss[2], b=LUIE.CombatText.D.colors.miss[3]}
+                -- Healing (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_HEALING_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showHealing end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showHealing = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showHealing,
             },
             {
-                -- Immune
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_IMMUNE_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.immune) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.immune = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.immune[1], g=LUIE.CombatText.D.colors.immune[2], b=LUIE.CombatText.D.colors.immune[3]}
+                -- Healing (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_HEALING_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showHealing end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showHealing = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showHealing,
             },
             {
-                -- Parried
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_PARRIED),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_PARRIED_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.parried) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.parried = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.parried[1], g=LUIE.CombatText.D.colors.parried[2], b=LUIE.CombatText.D.colors.parried[3]}
-            },
-            {
-                -- Reflected
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_REFLETCED_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.reflected) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.reflected = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.reflected[1], g=LUIE.CombatText.D.colors.reflected[2], b=LUIE.CombatText.D.colors.reflected[3]}
-            },
-            {
-                -- Damageshield
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHIELD_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.damageShield) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damageShield = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.damageShield[1], g=LUIE.CombatText.D.colors.damageShield[2], b=LUIE.CombatText.D.colors.damageShield[3]}
-            },
-            {
-                -- Dodge
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DODGED),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DODGED_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.dodged) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.dodged = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.dodged[1], g=LUIE.CombatText.D.colors.dodged[2], b=LUIE.CombatText.D.colors.dodged[3]}
-            },
-            {
-                -- Blocked
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_BLOCKED_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.blocked) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.blocked = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.blocked[1], g=LUIE.CombatText.D.colors.blocked[2], b=LUIE.CombatText.D.colors.blocked[3]}
-            },
-            {
-                -- Interrupted
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INTERRUPTED_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.interrupted) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.interrupted = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.interrupted[1], g=LUIE.CombatText.D.colors.interrupted[2], b=LUIE.CombatText.D.colors.interrupted[3]}
-            },
-            {
-                -- Color Crowd Control Header
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CROWD_CONTROL_HEADER),
-                width = "full",
-            },
-            {
-                -- Disoriented
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DISORIENTED_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.disoriented) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.disoriented = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.disoriented[1], g=LUIE.CombatText.D.colors.disoriented[2], b=LUIE.CombatText.D.colors.disoriented[3]}
-            },
-            {
-                -- Feared
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FEARED),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_FEARED_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.feared) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.feared = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.feared[1], g=LUIE.CombatText.D.colors.feared[2], b=LUIE.CombatText.D.colors.feared[3]}
-            },
-            {
-                -- Off-Balanced
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_OFF_BALANCE_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.offBalanced) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.offBalanced = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.offBalanced[1], g=LUIE.CombatText.D.colors.offBalanced[2], b=LUIE.CombatText.D.colors.offBalanced[3]}
-            },
-            {
-                -- Silenced
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_SILENCED_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.silenced) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.silenced = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.silenced[1], g=LUIE.CombatText.D.colors.silenced[2], b=LUIE.CombatText.D.colors.silenced[3]}
-            },
-            {
-                -- Stunned
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_STUNNED_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.stunned) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.stunned = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.stunned[1], g=LUIE.CombatText.D.colors.stunned[2], b=LUIE.CombatText.D.colors.stunned[3]}
-            },
-        },
-    }
-
-    -- Combat Text - Color Options (Notifications) Options Submenu
-    optionsDataCombatText[#optionsDataCombatText +1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_HEADER),
-        controls = {
-            {
-                -- Combat State
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_HEADER),
-                width = "full",
-            },
-            {
-                -- In Combat
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.inCombat) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.inCombat = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.inCombat[1], g=LUIE.CombatText.D.colors.inCombat[2], b=LUIE.CombatText.D.colors.inCombat[3]}
-            },
-            {
-                -- Out Combat
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.outCombat) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.outCombat = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.outCombat[1], g=LUIE.CombatText.D.colors.outCombat[2], b=LUIE.CombatText.D.colors.outCombat[3]}
-            },
-            {
-                -- Color Alerts
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALERT_HEADER),
-                width = "full",
-            },
-            {
-                -- Block
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertBlock) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertBlock = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.alertBlock[1], g=LUIE.CombatText.D.colors.alertBlock[2], b=LUIE.CombatText.D.colors.alertBlock[3]}
-            },
-            {
-                -- Dodge
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DODGE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertDodge) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDodge = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.alertDodge[1], g=LUIE.CombatText.D.colors.alertDodge[2], b=LUIE.CombatText.D.colors.alertDodge[3]}
-            },
-            {
-                -- Avoid
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_AVOID),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertAvoid) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertAvoid = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.alertAvoid[1], g=LUIE.CombatText.D.colors.alertAvoid[2], b=LUIE.CombatText.D.colors.alertAvoid[3]}
-            },
-            {
-                -- Interrupt
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertInterrupt) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterrupt = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.alertInterrupt[1], g=LUIE.CombatText.D.colors.alertInterrupt[2], b=LUIE.CombatText.D.colors.alertInterrupt[3]}
-            },
-            {
-                -- Exploit
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPLOIT_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertExploit) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertExploit = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.alertExploit[1], g=LUIE.CombatText.D.colors.alertExploit[2], b=LUIE.CombatText.D.colors.alertExploit[3]}
-            },
-            {
-                -- Cleanse
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CLEANSE_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertCleanse) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertCleanse = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.alertCleanse[1], g=LUIE.CombatText.D.colors.alertCleanse[2], b=LUIE.CombatText.D.colors.alertCleanse[3]}
-            },
-            {
-                -- Execute
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertExecute) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertExecute = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.alertExecute[1], g=LUIE.CombatText.D.colors.alertExecute[2], b=LUIE.CombatText.D.colors.alertExecute[3]}
-            },
-            {
-                -- Power
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertPower) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertPower = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.alertPower[1], g=LUIE.CombatText.D.colors.alertPower[2], b=LUIE.CombatText.D.colors.alertPower[3]}
-            },
-            {
-                -- Destroy
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertDestroy) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDestroy = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.alertDestroy[1], g=LUIE.CombatText.D.colors.alertDestroy[2], b=LUIE.CombatText.D.colors.alertDestroy[3]}
-            },
-            {
-                -- Color Points
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POINT_HEADER),
-                width = "full",
-            },
-            {
-                -- Alliance Points
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALLIANCE_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.pointsAlliance) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.pointsAlliance = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.pointsAlliance[1], g=LUIE.CombatText.D.colors.pointsAlliance[2], b=LUIE.CombatText.D.colors.pointsAlliance[3]}
-            },
-            {
-                -- Experience Points
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPERIENCE_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.pointsExperience) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.pointsExperience = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.pointsExperience[1], g=LUIE.CombatText.D.colors.pointsExperience[2], b=LUIE.CombatText.D.colors.pointsExperience[3]}
-            },
-            {
-                -- Champion Points
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CHAMPION_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.pointsChampion) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.pointsChampion = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.pointsChampion[1], g=LUIE.CombatText.D.colors.pointsChampion[2], b=LUIE.CombatText.D.colors.pointsChampion[3]}
-            },
-            {
-                -- Color Resources
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_RESOURCE_HEADER),
-                width = "full",
-            },
-            {
-                -- Low Health
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_HEALTH_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.lowHealth) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.lowHealth = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.lowHealth[1], g=LUIE.CombatText.D.colors.lowHealth[2], b=LUIE.CombatText.D.colors.lowHealth[3]}
-            },
-            {
-                -- Low Magicka
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_MAGICKA_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.lowMagicka) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.lowMagicka = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.lowMagicka[1], g=LUIE.CombatText.D.colors.lowMagicka[2], b=LUIE.CombatText.D.colors.lowMagicka[3]}
-            },
-            {
-                -- Low Stamina
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.lowStamina) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.lowStamina = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.lowStamina[1], g=LUIE.CombatText.D.colors.lowStamina[2], b=LUIE.CombatText.D.colors.lowStamina[3]}
-            },
-            {
-                -- Ultimate Ready
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.ultimateReady) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.ultimateReady = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.ultimateReady[1], g=LUIE.CombatText.D.colors.ultimateReady[2], b=LUIE.CombatText.D.colors.ultimateReady[3]}
-            },
-            {
-                -- Potion Ready
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POTION_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.potionReady) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.potionReady = { r, g, b, a } end,
-                default = {r=LUIE.CombatText.D.colors.potionReady[1], g=LUIE.CombatText.D.colors.potionReady[2], b=LUIE.CombatText.D.colors.potionReady[3]}
-            },
-        },
-    }
-
-    -- Combat Text - Format Options (Combat) Options Submenu
-    optionsDataCombatText[#optionsDataCombatText +1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HEADER),
-        controls = {
-            {
-                type = "description",
-                text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
-            },
-            {
-                -- Damage & Healing Header
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_HEALING_HEADER),
-                width = "full",
-            },
-            {
-                -- Damage
+                -- Healing Format
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.damage end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.damage = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.damage,
-            },
-            {
-                -- Damage Critical
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_CRITICAL),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_CRITICAL_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.damagecritical end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.damagecritical = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.damagecritical,
-            },
-            {
-                -- Healing
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HEALING),
+                width   = "half",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.healing end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.healing = v end,
@@ -11069,9 +9732,10 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.healing,
             },
             {
-                -- Healing Critical
+                -- Healing Critical Format
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HEALING_CRITICAL),
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_CRITICAL_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.healingcritical end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.healingcritical = v end,
@@ -11079,59 +9743,61 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.healingcritical,
             },
             {
-                -- Gain
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.energize end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.energize = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.energize,
+                -- Healing Font Size
+                type    = "slider",
+                width   = "half",
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.fontSizes.healing end,
+                setFunc = function(size) LUIE.CombatText.SV.fontSizes.healing = size end,
+                default = LUIE.CombatText.D.fontSizes.healing,
             },
             {
-                -- Ultimate Gain
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_ULTIMATE_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.ultimateEnergize end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.ultimateEnergize = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.ultimateEnergize,
+                -- Healing Critical Font Size
+                type    = "slider",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_CRITICAL_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.fontSizes.healingcritical end,
+                setFunc = function(size) LUIE.CombatText.SV.fontSizes.healingcritical = size end,
+                default = LUIE.CombatText.D.fontSizes.healingcritical,
             },
             {
-                -- Drain
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DRAIN),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DRAIN_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.drain end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.drain = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.drain,
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_HOT),
+                width = "full",
             },
             {
-                -- Damage over Time
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DOT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.dot end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.dot = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.dot,
+                -- Healing over Time (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_HOT_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showHot end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showHot = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showHot,
             },
             {
-                -- Damage over Time Critical
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DOT_CRITICAL),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_CRITICAL_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.dotcritical end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.dotcritical = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.dotcritical,
+                -- Healing over Time (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_HOT_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showHot end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showHot = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showHot,
             },
             {
-                -- Healing over Time
+                -- Healing over Time Format
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HOT),
+                width   = "half",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.hot end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.hot = v end,
@@ -11139,9 +9805,10 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.hot,
             },
             {
-                -- Healing over Time Critical
+                -- Healing over Time Critical Format
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_HOT_CRITICAL),
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_CRITICAL_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.hotcritical end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.hotcritical = v end,
@@ -11149,15 +9816,305 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.hotcritical,
             },
             {
-                -- Formats Mitigation
+                -- Healing over Time Font Size
+                type    = "slider",
+                width   = "half",
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HOT_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.fontSizes.hot end,
+                setFunc = function(size) LUIE.CombatText.SV.fontSizes.hot = size end,
+                default = LUIE.CombatText.D.fontSizes.hot,
+            },
+            {
+                -- Healing over Time Critical Font Size
+                type    = "slider",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HOT_CRITICAL_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.fontSizes.hotcritical end,
+                setFunc = function(size) LUIE.CombatText.SV.fontSizes.hotcritical = size end,
+                default = LUIE.CombatText.D.fontSizes.hotcritical,
+            },
+            {
+                -- Healing Color Options
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_MITIGATION_HEADER),
+                name = GetString(SI_LUIE_LAM_CT_HEADER_HEALING_COLOR),
                 width = "full",
             },
             {
-                -- Miss
+                -- Healing
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.healing) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.healing = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.healing[1], g=LUIE.CombatText.D.colors.healing[2], b=LUIE.CombatText.D.colors.healing[3]}
+            },
+            {
+                -- Checkbox Critical Healing Override
+                type    = "checkbox",
+                name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.criticalHealingOverride end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.criticalHealingOverride = v end,
+                default = LUIE.CombatText.D.toggles.criticalHealingOverride
+            },
+            {
+                -- Color Critical Healing Override
+                type    = "colorpicker",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR)),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.criticalHealingOverride) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.criticalHealingOverride = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.criticalHealingOverride[1], g=LUIE.CombatText.D.colors.criticalHealingOverride[2], b=LUIE.CombatText.D.colors.criticalHealingOverride[3]}
+            },
+        },
+    }
+
+    -- Combat Text - Resource Gain & Drain Options
+    optionsDataCombatText[#optionsDataCombatText +1] = {
+        type = "submenu",
+        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_RESOURCE_GAIN_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        controls = {
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
+                width = "full",
+            },
+            {
+                -- Gain Loss Font Size
+                type    = "slider",
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_GAIN_LOSS_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.fontSizes.gainLoss end,
+                setFunc = function(size) LUIE.CombatText.SV.fontSizes.gainLoss = size end,
+                default = LUIE.CombatText.D.fontSizes.gainLoss,
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE),
+                width = "full",
+            },
+            {
+                -- Resource Gain (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_ENERGIZE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showEnergize end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showEnergize = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showEnergize,
+            },
+            {
+                -- Resource Gain (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showEnergize end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showEnergize = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showEnergize,
+            },
+            {
+                -- Resource Gain Format
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_MISS),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.energize end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.energize = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.energize,
+            },
+            {
+                -- Gain Magicka Color
+                type    = "colorpicker",
+                width   = "half",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_MAGICKA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.energizeMagicka) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.energizeMagicka = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.energizeMagicka[1], g=LUIE.CombatText.D.colors.energizeMagicka[2], b=LUIE.CombatText.D.colors.energizeMagicka[3]}
+            },
+            {
+                -- Gain Stamina Color
+                type    = "colorpicker",
+                width   = "half",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_STAMINA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.energizeStamina) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.energizeStamina = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.energizeStamina[1], g=LUIE.CombatText.D.colors.energizeStamina[2], b=LUIE.CombatText.D.colors.energizeStamina[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE),
+                width = "full",
+            },
+            {
+                -- Ultimate Gain (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_ENERGIZE_ULTIMATE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showUltimateEnergize end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showUltimateEnergize = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showUltimateEnergize,
+            },
+            {
+                -- Ultimate Gain (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_ULTIMATE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showUltimateEnergize end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showUltimateEnergize = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showUltimateEnergize,
+            },
+            {
+                -- Ultimate Gain Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_ULTIMATE_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.ultimateEnergize end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.ultimateEnergize = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.ultimateEnergize,
+            },
+            {
+                -- Gain Ultimate Color
+                type    = "colorpicker",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.energizeUltimate) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.energizeUltimate = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.energizeUltimate[1], g=LUIE.CombatText.D.colors.energizeUltimate[2], b=LUIE.CombatText.D.colors.energizeUltimate[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_DRAIN),
+                width = "full",
+            },
+            {
+                -- Resource Drain (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DRAIN_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDrain end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDrain = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showDrain,
+            },
+            {
+                -- Resource Drain (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DRAIN_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDrain end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDrain = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showDrain,
+            },
+            {
+                -- Resource Damage Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DRAIN_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.drain end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.drain = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.drain,
+            },
+            {
+                -- Drain Magicka Color
+                type    = "colorpicker",
+                width   = "half",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_MAGICKA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.drainMagicka) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.drainMagicka = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.drainMagicka[1], g=LUIE.CombatText.D.colors.drainMagicka[2], b=LUIE.CombatText.D.colors.drainMagicka[3]}
+            },
+            {
+                -- Drain Stamina Color
+                type    = "colorpicker",
+                width   = "half",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_STAMINA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.drainStamina) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.drainStamina = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.drainStamina[1], g=LUIE.CombatText.D.colors.drainStamina[2], b=LUIE.CombatText.D.colors.drainStamina[3]}
+            },
+        },
+    }
+
+    -- Combat Text - Mitigation Options
+    optionsDataCombatText[#optionsDataCombatText +1] = {
+        type = "submenu",
+        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_MITIGATION), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        controls = {
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
+                width = "full",
+            },
+            {
+                -- Mitigation Font Size
+                type    = "slider",
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.fontSizes.mitigation end,
+                setFunc = function(size) LUIE.CombatText.SV.fontSizes.mitigation = size end,
+                default = LUIE.CombatText.D.fontSizes.mitigation,
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_MISS),
+                width = "full",
+            },
+            {
+                -- Missed (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_MISS), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_MISS_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showMiss end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showMiss = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showMiss
+            },
+            {
+                -- Missed (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_MISS), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_MISS_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showMiss end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showMiss = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showMiss,
+            },
+            {
+                -- Missed (Format)
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_MISS_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.miss end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.miss = v end,
@@ -11165,9 +10122,43 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.miss,
             },
             {
-                -- Immune
+                -- Missed (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_MISS_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.miss) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.miss = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.miss[1], g=LUIE.CombatText.D.colors.miss[2], b=LUIE.CombatText.D.colors.miss[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE),
+                width = "full",
+            },
+            {
+                -- Immune (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_IMMUNE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showImmune end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showImmune = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showImmune,
+            },
+            {
+                -- Immune (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_IMMUNE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showImmune end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showImmune = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showImmune,
+            },
+            {
+                -- Immune (Format)
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_IMMUNE_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.immune end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.immune = v end,
@@ -11175,9 +10166,43 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.immune,
             },
             {
-                -- Parried
+                -- Immune (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_IMMUNE_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.immune) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.immune = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.immune[1], g=LUIE.CombatText.D.colors.immune[2], b=LUIE.CombatText.D.colors.immune[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_PARRIED),
+                width = "full",
+            },
+            {
+                -- Parried (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_PARRIED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_PARRIED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showParried end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showParried = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showParried,
+            },
+            {
+                -- Parried (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_PARRIED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_PARRIED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showParried end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showParried = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showParried,
+            },
+            {
+                -- Parried (Format)
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_PARRIED),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_PARRIED_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.parried end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.parried = v end,
@@ -11185,9 +10210,43 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.parried,
             },
             {
-                -- Reflected
+                -- Parried (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_PARRIED_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.parried) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.parried = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.parried[1], g=LUIE.CombatText.D.colors.parried[2], b=LUIE.CombatText.D.colors.parried[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED),
+                width = "full",
+            },
+            {
+                -- Reflected (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_REFLECTED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showReflected end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showReflected = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showReflected,
+            },
+            {
+                -- Reflected (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_REFLECTED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showReflected end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showReflected = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showReflected,
+            },
+            {
+                -- Reflected (Format)
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_REFLECTED_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.reflected end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.reflected = v end,
@@ -11195,9 +10254,43 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.reflected,
             },
             {
-                -- Damage Shield
+                -- Reflected (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_REFLETCED_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.reflected) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.reflected = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.reflected[1], g=LUIE.CombatText.D.colors.reflected[2], b=LUIE.CombatText.D.colors.reflected[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD),
+                width = "full",
+            },
+            {
+                -- Damage Shielded (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DAMAGE_SHIELD_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDamageShield end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDamageShield = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showDamageShield,
+            },
+            {
+                -- Damage Shielded (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DAMAGE_SHIELD_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDamageShield end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDamageShield = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showDamageShield,
+            },
+            {
+                -- Damage Shielded (Format)
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_SHIELD_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.damageShield end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.damageShield = v end,
@@ -11205,9 +10298,43 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.damageShield,
             },
             {
-                -- Dodged
+                -- Damage Shielded (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHIELD_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.damageShield) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damageShield = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.damageShield[1], g=LUIE.CombatText.D.colors.damageShield[2], b=LUIE.CombatText.D.colors.damageShield[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_DODGED),
+                width = "full",
+            },
+            {
+                -- Dodged (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DODGED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DODGED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDodged end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDodged = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showDodged,
+            },
+            {
+                -- Dodged (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DODGED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DODGED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDodged end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDodged = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showDodged,
+            },
+            {
+                -- Dodged (Format)
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DODGED),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DODGED_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.dodged end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.dodged = v end,
@@ -11215,9 +10342,43 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.dodged,
             },
             {
-                -- Blocked
+                -- Dodged (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DODGED_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.dodged) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.dodged = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.dodged[1], g=LUIE.CombatText.D.colors.dodged[2], b=LUIE.CombatText.D.colors.dodged[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED),
+                width = "full",
+            },
+            {
+                -- Blocked (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_BLOCKED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showBlocked end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showBlocked = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showBlocked,
+            },
+            {
+                -- Blocked (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_BLOCKED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showBlocked end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showBlocked = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showBlocked,
+            },
+            {
+                -- Blocked (Format)
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_BLOCKED_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.blocked end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.blocked = v end,
@@ -11225,9 +10386,43 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.blocked,
             },
             {
-                -- Interrupted
+                -- Blocked (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_BLOCKED_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.blocked) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.blocked = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.blocked[1], g=LUIE.CombatText.D.colors.blocked[2], b=LUIE.CombatText.D.colors.blocked[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED),
+                width = "full",
+            },
+            {
+                -- Interrupted (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_INTERRUPTED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showInterrupted end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showInterrupted = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showInterrupted,
+            },
+            {
+                -- Interrupted (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_INTERRUPTED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showInterrupted end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showInterrupted = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showInterrupted,
+            },
+            {
+                -- Interrupted (Format)
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_INTERRUPTED_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.interrupted end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.interrupted = v end,
@@ -11235,15 +10430,72 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.interrupted,
             },
             {
-                -- Formats Crowd Control
+                -- Interrupted (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INTERRUPTED_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.interrupted) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.interrupted = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.interrupted[1], g=LUIE.CombatText.D.colors.interrupted[2], b=LUIE.CombatText.D.colors.interrupted[3]}
+            },
+        },
+    }
+
+    -- Combat Text - Crowd Control Options
+    optionsDataCombatText[#optionsDataCombatText +1] = {
+        type = "submenu",
+        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_CROWD_CONTROL), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        controls = {
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
+            },
+            {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_CROWD_CONTROL_HEADER),
+                name = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
                 width = "full",
             },
             {
-                -- Disoriented
+                -- Crowd Control Font Size
+                type    = "slider",
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.fontSizes.crowdControl end,
+                setFunc = function(size) LUIE.CombatText.SV.fontSizes.crowdControl = size end,
+                default = LUIE.CombatText.D.fontSizes.crowdControl,
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED),
+                width = "full",
+            },
+            {
+                -- Disoriented (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DISORIENTED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDisoriented end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDisoriented = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showDisoriented,
+            },
+            {
+                -- Disoriented (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DISORIENTED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDisoriented end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDisoriented = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showDisoriented,
+            },
+            {
+                -- Disoriented (Format)
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DISORIENTED_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.disoriented end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.disoriented = v end,
@@ -11251,9 +10503,43 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.disoriented,
             },
             {
-                -- Feared
+                -- Disoriented (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DISORIENTED_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.disoriented) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.disoriented = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.disoriented[1], g=LUIE.CombatText.D.colors.disoriented[2], b=LUIE.CombatText.D.colors.disoriented[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_FEARED),
+                width = "full",
+            },
+            {
+                -- Feared (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_FEARED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_FEARED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showFeared end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showFeared = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showFeared,
+            },
+            {
+                -- Feared (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_FEARED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_FEARED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showFeared end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showFeared = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showFeared,
+            },
+            {
+                -- Feared (Format)
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FEARED),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_FEARED_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.feared end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.feared = v end,
@@ -11261,9 +10547,43 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.feared,
             },
             {
-                -- Off-Balanced
+                -- Feared (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_FEARED_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.feared) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.feared = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.feared[1], g=LUIE.CombatText.D.colors.feared[2], b=LUIE.CombatText.D.colors.feared[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE),
+                width = "full",
+            },
+            {
+                -- Off-Balance (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_OFF_BALANCE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showOffBalanced end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showOffBalanced = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showOffBalanced,
+            },
+            {
+                -- Off-Balance (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_OFF_BALANCE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showOffBalanced end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showOffBalanced = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showOffBalanced,
+            },
+            {
+                -- Off-Balanced (Format)
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_OFF_BALANCE_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.offBalanced end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.offBalanced = v end,
@@ -11271,9 +10591,43 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.offBalanced,
             },
             {
-                -- Silenced
+                -- Off-Balanced (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_OFF_BALANCE_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.offBalanced) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.offBalanced = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.offBalanced[1], g=LUIE.CombatText.D.colors.offBalanced[2], b=LUIE.CombatText.D.colors.offBalanced[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED),
+                width = "full",
+            },
+            {
+                -- Silenced (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_SILENCED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_SILENCED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showSilenced end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showSilenced = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showSilenced,
+            },
+            {
+                -- Silenced (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_SILENCED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showSilenced end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showSilenced = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showSilenced,
+            },
+            {
+                -- Silenced (Format)
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_SILENCED_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.silenced end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.silenced = v end,
@@ -11281,37 +10635,101 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.silenced,
             },
             {
-                -- Stunned
+                -- Silenced (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_SILENCED_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.silenced) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.silenced = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.silenced[1], g=LUIE.CombatText.D.colors.silenced[2], b=LUIE.CombatText.D.colors.silenced[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED),
+                width = "full",
+            },
+            {
+                -- Stunned (Incoming)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_STUNNED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_STUNNED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showStunned end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showStunned = v end,
+                default = LUIE.CombatText.D.toggles.incoming.showStunned,
+            },
+            {
+                -- Stunned (Outgoing)
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_STUNNED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showStunned end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showStunned = v end,
+                default = LUIE.CombatText.D.toggles.outgoing.showStunned,
+            },
+            {
+                -- Stunned (Format)
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_STUNNED_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.stunned end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.stunned = v end,
                 isMultiline = false,
                 default = LUIE.CombatText.D.formats.stunned,
             },
+            {
+                -- Stunned (Color)
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_STUNNED_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.stunned) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.stunned = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.stunned[1], g=LUIE.CombatText.D.colors.stunned[2], b=LUIE.CombatText.D.colors.stunned[3]}
+            },
+
         },
     }
 
-    -- Combat Text - Format Options (Notifications) Options Submenu
+    -- Combat Text -- Notification Options
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_HEADER),
+        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_NOTIFICATION), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
                 text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
             },
             {
-                -- Formats Combat State
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_STATE_HEADER),
+                name = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE),
                 width = "full",
             },
             {
                 -- In Combat
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showInCombat end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showInCombat = v end,
+                default = LUIE.CombatText.D.toggles.showInCombat,
+            },
+            {
+                -- Out of Combat
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_OUT_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showOutCombat end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showOutCombat = v end,
+                default = LUIE.CombatText.D.toggles.showOutCombat,
+            },
+            {
+                -- In Combat
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN),
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)",GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_IN_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.inCombat end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.inCombat = v end,
@@ -11321,7 +10739,8 @@ function LUIE_CreateSettings()
             {
                 -- Out Combat
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT),
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)",GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_OUT_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.outCombat end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.outCombat = v end,
@@ -11329,121 +10748,72 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.outCombat,
             },
             {
-                -- Formats Alerts
+                -- Combat State Font Size
+                type     = "slider",
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.fontSizes.combatState end,
+                setFunc = function(size) LUIE.CombatText.SV.fontSizes.combatState = size end,
+                default = LUIE.CombatText.D.fontSizes.combatState,
+            },
+            {
+                -- In Combat
+                type    = "colorpicker",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.inCombat) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.inCombat = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.inCombat[1], g=LUIE.CombatText.D.colors.inCombat[2], b=LUIE.CombatText.D.colors.inCombat[3]}
+            },
+            {
+                -- Out Combat
+                type    = "colorpicker",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.outCombat) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.outCombat = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.outCombat[1], g=LUIE.CombatText.D.colors.outCombat[2], b=LUIE.CombatText.D.colors.outCombat[3]}
+            },
+            {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_FORMAT_ALERT_HEADER),
+                name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE), GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POINT_HEADER)),
                 width = "full",
             },
             {
-                -- Cleanse
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CLEANSE_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.alertCleanse end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.alertCleanse = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.alertCleanse,
+                -- Points Font Size
+                type     = "slider",
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.fontSizes.point end,
+                setFunc = function(size) LUIE.CombatText.SV.fontSizes.point = size end,
+                default = LUIE.CombatText.D.fontSizes.point,
             },
             {
-                -- Block
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.alertBlock end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.alertBlock = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.alertBlock,
-            },
-            {
-                -- Block Stagger
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK_S),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_S_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.alertBlockStagger end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.alertBlockStagger = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.alertBlockStagger,
-            },
-            {
-                -- Exploit
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPLOIT_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.alertExploit end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.alertExploit = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.alertExploit,
-            },
-            {
-                -- Interrupt
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_INTERRUPT_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.alertInterrupt end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.alertInterrupt = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.alertInterrupt,
-            },
-            {
-                -- Dodge
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DODGE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DODGE_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.alertDodge end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.alertDodge = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.alertDodge,
-            },
-            {
-                -- Avoid
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_AVOID),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_AVOID_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.alertAvoid end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.alertAvoid = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.alertAvoid,
-            },
-            {
-                -- Execute
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXECUTE_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.alertExecute end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.alertExecute = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.alertExecute,
-            },
-            {
-                -- Power
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POWER_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.alertPower end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.alertPower = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.alertPower,
-            },
-            {
-                -- Destroy
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DESTROY_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.alertDestroy end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.alertDestroy = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.alertDestroy,
-            },
-            {
-                -- Formats Points
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_FORMAT_POINTS_HEADER),
+                name = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE),
                 width = "full",
             },
             {
                 -- Alliance Points
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showPointsAlliance end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showPointsAlliance = v end,
+                default = LUIE.CombatText.D.toggles.showPointsAlliance,
+            },
+            {
+                -- Alliance Points
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ALLIANCE_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.pointsAlliance end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.pointsAlliance = v end,
@@ -11451,9 +10821,32 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.pointsAlliance,
             },
             {
+                -- Alliance Points Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALLIANCE_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.pointsAlliance) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.pointsAlliance = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.pointsAlliance[1], g=LUIE.CombatText.D.colors.pointsAlliance[2], b=LUIE.CombatText.D.colors.pointsAlliance[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE),
+                width = "full",
+            },
+            {
+                -- Experience Points
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showPointsExperience end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showPointsExperience = v end,
+                default = LUIE.CombatText.D.toggles.showPointsExperience,
+            },
+            {
                 -- Experience Points
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPERIENCE_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.pointsExperience end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.pointsExperience = v end,
@@ -11461,9 +10854,32 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.pointsExperience,
             },
             {
+                -- Experience Points Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPERIENCE_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.pointsExperience) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.pointsExperience = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.pointsExperience[1], g=LUIE.CombatText.D.colors.pointsExperience[2], b=LUIE.CombatText.D.colors.pointsExperience[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION),
+                width = "full",
+            },
+            {
+                -- Champion Points
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showPointsChampion end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showPointsChampion = v end,
+                default = LUIE.CombatText.D.toggles.showPointsChampion,
+            },
+            {
                 -- Champion Points
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CHAMPION_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.pointsChampion end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.pointsChampion = v end,
@@ -11471,25 +10887,56 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.pointsChampion,
             },
             {
-                -- Formats Resources
+                -- Champion Points Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CHAMPION_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.pointsChampion) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.pointsChampion = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.pointsChampion[1], g=LUIE.CombatText.D.colors.pointsChampion[2], b=LUIE.CombatText.D.colors.pointsChampion[3]}
+            },
+            {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_FORMAT_RESOURCES_HEADER),
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_AND_POTION_READY),
                 width = "full",
             },
             {
-                -- Low Health, Magicka, Stamina
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_RESOURCE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
-                getFunc = function() return LUIE.CombatText.SV.formats.resource end,
-                setFunc = function(v) LUIE.CombatText.SV.formats.resource = v end,
-                isMultiline = false,
-                default = LUIE.CombatText.D.formats.resource,
+                -- Font Size Ready
+                type    = "slider",
+                name    = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.fontSizes.readylabel end,
+                setFunc = function(size) LUIE.CombatText.SV.fontSizes.readylabel = size end,
+                default = LUIE.CombatText.D.fontSizes.readylabel,
             },
             {
-                -- Ultimate Ready
+                -- Ultimate Ready Enable
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ULTIMATE_READY_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showUltimate end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showUltimate = v end,
+                default = LUIE.CombatText.D.toggles.showUltimate,
+            },
+            {
+                -- Potion Ready Enable
+                type    = "checkbox",
+                width   = "half",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POTION_READY_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showPotionReady end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showPotionReady = v end,
+                default = LUIE.CombatText.D.toggles.showPotionReady,
+            },
+            {
+                -- Ultimate Ready Format
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY),
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ULTIMATE_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.ultimateReady end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.ultimateReady = v end,
@@ -11497,14 +10944,805 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatText.D.formats.ultimateReady,
             },
             {
-                -- Potion Ready
+                -- Potion Ready Format
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY),
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POTION_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.potionReady end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.potionReady = v end,
                 isMultiline = false,
                 default = LUIE.CombatText.D.formats.potionReady,
+            },
+            {
+                -- Ultimate Ready Color
+                type    = "colorpicker",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.ultimateReady) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.ultimateReady = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.ultimateReady[1], g=LUIE.CombatText.D.colors.ultimateReady[2], b=LUIE.CombatText.D.colors.ultimateReady[3]}
+            },
+            {
+                -- Potion Ready Color
+                type    = "colorpicker",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POTION_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.potionReady) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.potionReady = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.potionReady[1], g=LUIE.CombatText.D.colors.potionReady[2], b=LUIE.CombatText.D.colors.potionReady[3]}
+            },
+        },
+    }
+
+    -- Combat Text - Low Resource Options
+    optionsDataCombatText[#optionsDataCombatText +1] = {
+        type = "submenu",
+        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_LOW_RESOURCE), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        controls = {
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_CT_FORMAT_DESCRIPTION),
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_RESOURCE_OPTIONS),
+                width = "full",
+            },
+            {
+                -- Low Resource Font Size
+                type    = "slider",
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.fontSizes.resource end,
+                setFunc = function(size) LUIE.CombatText.SV.fontSizes.resource = size end,
+                default = LUIE.CombatText.D.fontSizes.resource,
+            },
+            {
+                -- Low Resource Warning Sound
+                type    = "checkbox",
+                name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.warningSound end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.warningSound = v end,
+                disabled = function() return not (LUIE.CombatText.SV.toggles.showLowHealth or LUIE.CombatText.SV.toggles.showLowMagicka or LUIE.CombatText.SV.toggles.showLowStamina) end,
+                default = LUIE.CombatText.D.toggles.warningSound,
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH),
+                width = "full",
+            },
+            {
+                -- Low Health
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_HEALTH_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showLowHealth end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showLowHealth = v end,
+                default = LUIE.CombatText.D.toggles.showLowHealth,
+            },
+            {
+                -- Low Health Warning Threshold Slider
+                type    = "slider",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH_TP),
+                min     = 15,
+                max     = 50,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.healthThreshold end,
+                setFunc = function(threshold) LUIE.CombatText.SV.healthThreshold = threshold end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showLowHealth end,
+                default = LUIE.CombatText.D.healthThreshold,
+            },
+            {
+                -- Low Health Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.resourceHealth end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.resourceHealth = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.resourceHealth,
+            },
+            {
+                -- Low Health Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_HEALTH_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.lowHealth) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.lowHealth = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.lowHealth[1], g=LUIE.CombatText.D.colors.lowHealth[2], b=LUIE.CombatText.D.colors.lowHealth[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA),
+                width = "full",
+            },
+            {
+                -- Low Magicka
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_MAGICKA_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showLowMagicka end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showLowMagicka = v end,
+                default = LUIE.CombatText.D.toggles.showLowMagicka,
+            },
+            {
+                -- Low Magicka Warning Threshold Slider
+                type    = "slider",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA_TP),
+                min     = 15,
+                max     = 50,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.magickaThreshold end,
+                setFunc = function(threshold) LUIE.CombatText.SV.magickaThreshold = threshold end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showLowMagicka end,
+                default = LUIE.CombatText.D.magickaThreshold,
+            },
+            {
+                -- Low Magicka Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.resourceMagicka end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.resourceMagicka = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.resourceMagicka,
+            },
+            {
+                -- Low Magicka Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_MAGICKA_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.lowMagicka) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.lowMagicka = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.lowMagicka[1], g=LUIE.CombatText.D.colors.lowMagicka[2], b=LUIE.CombatText.D.colors.lowMagicka[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA),
+                width = "full",
+            },
+            {
+                -- Low Stamina
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_STAMINA_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showLowStamina end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showLowStamina = v end,
+                default = LUIE.CombatText.D.toggles.showLowStamina,
+            },
+            {
+                -- Low Stamina Warning Threshold Slider
+                type    = "slider",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA_TP),
+                min     = 15,
+                max     = 50,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.staminaThreshold end,
+                setFunc = function(threshold) LUIE.CombatText.SV.staminaThreshold = threshold end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showLowStamina end,
+                default = LUIE.CombatText.D.staminaThreshold,
+            },
+            {
+                -- Low Stamina Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.resourceStamina end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.resourceStamina = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.resourceStamina,
+            },
+            {
+                -- Low Stamina Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.lowStamina) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.lowStamina = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.lowStamina[1], g=LUIE.CombatText.D.colors.lowStamina[2], b=LUIE.CombatText.D.colors.lowStamina[3]}
+            },
+
+
+        },
+    }
+
+    -- Combat Text - Active Combat Alerts
+    optionsDataCombatText[#optionsDataCombatText +1] = {
+        type = "submenu",
+        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_ACTIVE_COMBAT_ALERT), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        controls = {
+
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERTS_DESC),
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE),
+                width = "full",
+            },
+            {
+                -- Alerts Font
+                type     = "slider",
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_ALERT_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return LUIE.CombatText.SV.fontSizes.alert end,
+                setFunc = function(size) LUIE.CombatText.SV.fontSizes.alert = size end,
+                default = LUIE.CombatText.D.fontSizes.alert,
+            },
+
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE),
+                width = "full",
+            },
+            {
+                -- Cleanse Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_CLEANSE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertCleanse end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertCleanse = v end,
+                default = LUIE.CombatText.D.toggles.showAlertCleanse,
+            },
+            {
+                -- Cleanse Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CLEANSE_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.alertCleanse end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.alertCleanse = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.alertCleanse,
+            },
+            {
+                -- Cleanse Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CLEANSE_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertCleanse) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertCleanse = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.alertCleanse[1], g=LUIE.CombatText.D.colors.alertCleanse[2], b=LUIE.CombatText.D.colors.alertCleanse[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT),
+                width = "full",
+            },
+            {
+                -- Exploit Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXPLOIT_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertExploit end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertExploit = v end,
+                default = LUIE.CombatText.D.toggles.showAlertExploit,
+            },
+            {
+                -- Exploit  Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPLOIT_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.alertExploit end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.alertExploit = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.alertExploit,
+            },
+            {
+                -- Exploit Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPLOIT_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertExploit) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertExploit = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.alertExploit[1], g=LUIE.CombatText.D.colors.alertExploit[2], b=LUIE.CombatText.D.colors.alertExploit[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE),
+                width = "full",
+            },
+            {
+                -- Execute Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXECUTE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertExecute end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertExecute = v end,
+                default = LUIE.CombatText.D.toggles.showAlertExecute,
+            },
+            {
+                -- Execute Threshold Slider
+                type    = "slider",
+                width   = "half",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD_TP),
+                min     = 10,
+                max     = 50,
+                getFunc = function() return LUIE.CombatText.SV.executeThreshold end,
+                setFunc = function(v) LUIE.CombatText.SV.executeThreshold = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertExecute end,
+                default = LUIE.CombatText.D.executeThreshold,
+            },
+            {
+                -- Execute Frequency Slider
+                type    = "slider",
+                width   = "half",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY_TP),
+                min     = 1,
+                max     = 20,
+                getFunc = function() return LUIE.CombatText.SV.executeFrequency end,
+                setFunc = function(v) LUIE.CombatText.SV.executeFrequency = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertExecute end,
+                default = LUIE.CombatText.D.executeFrequency,
+            },
+            {
+                -- Execute Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXECUTE_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.alertExecute end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.alertExecute = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.alertExecute,
+            },
+            {
+                -- Execute Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertExecute) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertExecute = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.alertExecute[1], g=LUIE.CombatText.D.colors.alertExecute[2], b=LUIE.CombatText.D.colors.alertExecute[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_INCOMING_ABILITY_ALERTS),
+                width = "full",
+            },
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION),
+            },
+            {
+                -- Hide Ingame Tips
+                type    = "checkbox",
+                name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.hideIngameTips end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.hideIngameTips = v; ZO_ActiveCombatTips:SetHidden(v) end,
+                default = LUIE.CombatText.D.toggles.hideIngameTips,
+            },
+            {
+                -- Mitigation Alerts
+                type    = "checkbox",
+                name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertMitigation = v end,
+                default = LUIE.CombatText.D.toggles.showAlertMitigation,
+            },
+            {
+                -- Mitigation Method
+                type    = "dropdown",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP),
+                choices = LUIE.CombatTextConstants.mitigationType,
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationType end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationType = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.mitigationType,
+            },
+            {
+                -- Hide Mitigation Grouped Alerts
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.hideMitigation end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.hideMitigation = v end,
+                disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.mitigationType == "Single Line") end,
+                default = LUIE.CombatText.D.toggles.hideMitigation,
+            },
+            {
+                -- Mitigation Prefix (No Name)
+                type    = "editbox",
+                name    = strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationPrefix end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationPrefix = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.mitigationPrefix,
+            },
+            {
+                -- Mitigation Prefix (Name)
+                type    = "editbox",
+                name    = strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationPrefixN end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationPrefixN = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.mitigationPrefixN,
+            },
+            {
+                -- Mitigation Suffix
+                type    = "editbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationSuffix end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationSuffix = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.mitigationSuffix,
+            },
+            {
+                -- Mitigation Aura
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_AURA)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_AURA_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationAura end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationAura = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.mitigationAura,
+            },
+            {
+                -- Mitigation Rank 3
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK3)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK3_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationRank3 end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationRank3 = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.mitigationRank3,
+            },
+            {
+                -- Mitigation Rank 2
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK2)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK2_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationRank2 end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationRank2 = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.mitigationRank2,
+            },
+            {
+                -- Mitigation Rank 1
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK1)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK1_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationRank1 end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationRank1 = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.mitigationRank1,
+            },
+            {
+                -- Mitigation Dungeon
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationDungeon end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationDungeon = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.mitigationDungeon,
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK),
+                width = "full",
+            },
+            {
+                -- Block Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_BLOCK_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertBlock end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertBlock = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.showAlertBlock,
+            },
+            {
+                -- Block Format
+                type    = "editbox",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK)),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.alertBlock end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.alertBlock = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.alertBlock,
+            },
+            {
+                -- Block Stagger Format
+                type    = "editbox",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK_S)),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_S_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.alertBlockStagger end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.alertBlockStagger = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.alertBlockStagger,
+            },
+            {
+                -- Block Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertBlock) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertBlock = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.alertBlock[1], g=LUIE.CombatText.D.colors.alertBlock[2], b=LUIE.CombatText.D.colors.alertBlock[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DODGE),
+                width = "full",
+            },
+            {
+                -- Dodge Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DODGE)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DODGE_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertDodge end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertDodge = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.showAlertDodge,
+            },
+            {
+                -- Dodge  Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DODGE_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.alertDodge end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.alertDodge = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.alertDodge,
+            },
+            {
+                -- Dodge Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertDodge) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDodge = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.alertDodge[1], g=LUIE.CombatText.D.colors.alertDodge[2], b=LUIE.CombatText.D.colors.alertDodge[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_AVOID),
+                width = "full",
+            },
+            {
+                -- Avoid Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_AVOID)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_AVOID_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertAvoid end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertAvoid = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.showAlertAvoid,
+            },
+            {
+                -- Avoid Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_AVOID_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.alertAvoid end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.alertAvoid = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.alertAvoid,
+            },
+            {
+                -- Avoid Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertAvoid) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertAvoid = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.alertAvoid[1], g=LUIE.CombatText.D.colors.alertAvoid[2], b=LUIE.CombatText.D.colors.alertAvoid[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT),
+                width = "full",
+            },
+            {
+                -- Interrupt Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_INTERRUPT_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertInterrupt end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertInterrupt = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.showAlertInterrupt,
+            },
+            {
+                -- Interrupt Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_INTERRUPT_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.alertInterrupt end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.alertInterrupt = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.alertInterrupt,
+            },
+            {
+                -- Interrupt Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertInterrupt) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterrupt = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.alertInterrupt[1], g=LUIE.CombatText.D.colors.alertInterrupt[2], b=LUIE.CombatText.D.colors.alertInterrupt[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER),
+                width = "full",
+            },
+            {
+                -- Power Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertPower end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertPower = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.showAlertPower,
+            },
+            {
+                -- Power Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POWER_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.alertPower end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.alertPower = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.alertPower,
+            },
+            {
+                -- Prefix Power (No Name)
+                type    = "editbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationPowerPrefix end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationPowerPrefix = v end,
+                disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.showAlertPower) end,
+                default = LUIE.CombatText.D.toggles.mitigationPowerPrefix,
+            },
+            {
+                -- Prefix Power (Name)
+                type    = "editbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationPowerPrefixN end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationPowerPrefixN = v end,
+                disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.showAlertPower) end,
+                default = LUIE.CombatText.D.toggles.mitigationPowerPrefixN,
+            },
+            {
+                -- Power Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertPower) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertPower = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.alertPower[1], g=LUIE.CombatText.D.colors.alertPower[2], b=LUIE.CombatText.D.colors.alertPower[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY),
+                width = "full",
+            },
+            {
+                -- Destroy Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertDestroy end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertDestroy = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.showAlertDestroy,
+            },
+            {
+                -- Destroy Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DESTROY_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.alertDestroy end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.alertDestroy = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.alertDestroy,
+            },
+            {
+                -- Prefix Destroy (No Name)
+                type    = "editbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationDestroyPrefix end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationDestroyPrefix = v end,
+                disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.showAlertDestroy) end,
+                default = LUIE.CombatText.D.toggles.mitigationDestroyPrefix,
+            },
+            {
+                -- Prefix Destroy (Name)
+                type    = "editbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationDestroyPrefixN end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationDestroyPrefixN = v end,
+                disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.showAlertDestroy) end,
+                default = LUIE.CombatText.D.toggles.mitigationDestroyPrefixN,
+            },
+            {
+                -- Destroy Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertDestroy) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDestroy = { r, g, b, a } end,
+                default = {r=LUIE.CombatText.D.colors.alertDestroy[1], g=LUIE.CombatText.D.colors.alertDestroy[2], b=LUIE.CombatText.D.colors.alertDestroy[3]}
+            },
+
+        },
+    }
+
+
+
+    -- Combat Text - Font Format Options Submenu
+    optionsDataCombatText[#optionsDataCombatText +1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_CT_FONT_HEADER),
+        controls = {
+            {
+                -- Font Face Dropdown
+                type    = "dropdown",
+                scrollable = true,
+                name    = GetString(SI_LUIE_LAM_CT_FONT_FACE),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_FACE_TP),
+                choices = FontsList,
+                getFunc = function() return LUIE.CombatText.SV.fontFace end,
+                setFunc = function(face)
+                    LUIE.CombatText.SV.fontFace = face
+                    for k, _ in pairs (LUIE.CombatText.SV.panels) do
+                        _G[k .. "_Label"]:SetFont(LMP:Fetch(LMP.MediaType.FONT, LUIE.CombatText.SV.fontFace) .. "|26|" .. LUIE.CombatText.SV.fontOutline)
+                    end
+                end,
+                default = LUIE.CombatText.D.fontFace
+            },
+            {
+                -- Font Outline Dropdown
+                type    = "dropdown",
+                name    = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE_TP),
+                choices = LUIE.CombatTextConstants.outlineType,
+                getFunc = function() return LUIE.CombatText.SV.fontOutline end,
+                setFunc = function(outline)
+                    LUIE.CombatText.SV.fontOutline = outline
+                    for k, _ in pairs (LUIE.CombatText.SV.panels) do
+                        _G[k .. "_Label"]:SetFont(LMP:Fetch(LMP.MediaType.FONT, LUIE.CombatText.SV.fontFace) .. "|26|" .. LUIE.CombatText.SV.fontOutline)
+                    end
+                end,
+                default = LUIE.CombatText.D.fontOutline
+            },
+            {
+                -- Test Font Button
+                type = "button",
+                name    = GetString(SI_LUIE_LAM_CT_FONT_TEST),
+                tooltip = GetString(SI_LUIE_LAM_CT_FONT_TEST_TP),
+                func = function()
+                    CALLBACK_MANAGER:FireCallbacks(LUIE.CombatTextConstants.eventType.COMBAT, LUIE.CombatTextConstants.combatType.INCOMING, POWERTYPE_STAMINA, mathrandom(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                end,
             },
         },
     }
