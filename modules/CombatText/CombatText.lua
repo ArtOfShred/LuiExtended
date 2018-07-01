@@ -134,14 +134,14 @@ CT.D = {
         mitigationType              = "Single Line",
         hideMitigation              = true,
         mitigationPrefix            = "%t %i",
-        mitigationPrefixN           = GetString(SI_LUIE_CT_MITIGATION_FORMAT_ALERT_N),
+        mitigationPrefixN           = "%n - %t %i",
         mitigationPowerPrefix       = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER),
         mitigationPowerPrefixN      = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER_N),
         mitigationDestroyPrefix     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY),
         mitigationDestroyPrefixN    = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY_N),
 
         -- Add Name/No Name Variants
-        mitigationSuffix            = GetString(SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT), -- "incoming! "
+        mitigationDefaultSuffix     = GetString(SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT),
 
         mitigationAura              = false,
         mitigationRank3             = true,
@@ -261,12 +261,13 @@ CT.D = {
         outCombat                   = { 1, 1, 1, 1 },
 
         -- Alerts
+        alertShared                 = { 1, 1, 1, 1 },
         alertCleanse                = { 1, 1, 1, 1 },
         alertBlock                  = { 1, 0, 0, 1 },
         alertExploit                = { 1, 1, 1, 1 },
         alertInterrupt              = { 1, 1, 1, 1 },
         alertDodge                  = { 1, 1, 50/255, 1 },
-        alertAvoid                  = { 1, 1, 50/255, 1 },
+        alertAvoid                  = { 1, 128/255, 0, 1 },
         alertExecute                = { 1, 1, 1, 1 },
         alertPower                  = { 1, 1, 1, 1 },
         alertDestroy                = { 1, 1, 1, 1 },
@@ -389,9 +390,6 @@ CT.AlertColors = {}
 function CT.SetAlertColors()
 	local colors = CT.SV.colors
 	CT.AlertColors = {
-		alertColorCleanse = ZO_ColorDef:New(unpack(colors.alertCleanse)):ToHex(),
-		alertColorExploit = ZO_ColorDef:New(unpack(colors.alertExploit)):ToHex(),
-		alertColorExecute = ZO_ColorDef:New(unpack(colors.alertExecute)):ToHex(),
 		alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlock)):ToHex(),
 		alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodge)):ToHex(),
 		alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoid)):ToHex(),
@@ -417,7 +415,7 @@ function CT.Initialize( enabled )
     CT.Enabled = true
 
 	CT.SetAlertColors()
-	
+
     -- Set panels to player configured settings
     for k, s in pairs (LUIE.CombatText.SV.panels) do
         if _G[k] ~= nil then

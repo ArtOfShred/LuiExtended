@@ -217,9 +217,9 @@ function CTV:PrepareLabel(label, fontSize, color, text)
     label:SetAlpha(LUIE.CombatText.SV.common.transparencyValue/100)
 end
 
-function CTV:PrepareLabelAlert(label, fontSize, text)
+function CTV:PrepareLabelAlert(label, fontSize, color, text)
     label:SetText(text)
-	label:SetColor(1, 1, 1)
+	label:SetColor(unpack(color))
     label:SetFont(strfmt('%s|%d|%s', self.LMP:Fetch('font', LUIE.CombatText.SV.fontFace), fontSize, LUIE.CombatText.SV.fontOutline))
     label:SetAlpha(LUIE.CombatText.SV.common.transparencyValue/100)
 end

@@ -11382,10 +11382,10 @@ function LUIE_CreateSettings()
                 type    = "editbox",
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP),
-                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationSuffix end,
-                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationSuffix = v end,
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationDefaultSuffix end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationDefaultSuffix = v end,
                 disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                default = LUIE.CombatText.D.toggles.mitigationSuffix,
+                default = LUIE.CombatText.D.toggles.mitigationDefaultSuffix,
             },
             {
                 -- Mitigation Aura
@@ -11436,6 +11436,15 @@ function LUIE_CreateSettings()
                 setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationDungeon = v end,
                 disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
                 default = LUIE.CombatText.D.toggles.mitigationDungeon,
+            },
+            {
+                -- Shared Label Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BASE),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BASE_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertShared) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertShared = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
+                default = {r=LUIE.CombatText.D.colors.alertShared[1], g=LUIE.CombatText.D.colors.alertShared[2], b=LUIE.CombatText.D.colors.alertShared[3]}
             },
             {
                 type = "header",
