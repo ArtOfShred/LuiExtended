@@ -50,11 +50,11 @@ function CTL:EffectChanged(...)
 
     if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and AlertT[abilityId] and AlertT[abilityId].auradetect and not refireDelay[abilityId] then
         effectName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+        unitName = zo_strformat("<<t:1>>", unitName)
 
         if changeType == EFFECT_RESULT_FADED then return end
 
         if E.EffectOverrideByName[abilityId] then
-            unitName = zo_strformat("<<t:1>>", unitName)
             if E.EffectOverrideByName[abilityId][unitName] then
                 if E.EffectOverrideByName[abilityId][unitName].icon then
                     formattedIcon = zo_iconFormat(E.EffectOverrideByName[abilityId][unitName].icon, 32, 32)
@@ -152,11 +152,14 @@ function CTL:OnCombatIn(...)
 
     local S = LUIE.CombatText.SV
     local combatType, togglesInOut = C.combatType.INCOMING, S.toggles.incoming
-    abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
     local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
 
+    if AlertT[abilityId] then
+        sourceName = zo_strformat("<<t:1>>", sourceName)
+    end
+
     if E.EffectOverrideByName[abilityId] then
-        sourceName = zo_strformat("<<t:1>>",sourceName)
+        sourceName = zo_strformat("<<t:1>>", sourceName)
         if E.EffectOverrideByName[abilityId][sourceName] then
             if E.EffectOverrideByName[abilityId][sourceName].icon then
                 formattedIcon = zo_iconFormat(E.EffectOverrideByName[abilityId][sourceName].icon, 32, 32)

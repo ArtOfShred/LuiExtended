@@ -605,7 +605,7 @@ function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGr
     if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then return end
 
     local iconFormatted = iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = GetAbilityName(abilityId)
+    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     local source = strformat("<<t:1>>", sourceName)
     local target = strformat("<<t:1>>", targetName)
@@ -643,7 +643,7 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     end
 
     local iconFormatted = iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = GetAbilityName(abilityId)
+    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     unitName = strformat("<<t:1>>", unitName)
     if unitName == LUIE.PlayerNameFormatted then
@@ -682,7 +682,7 @@ function SCB.AddToCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.BlacklistTable and "Aura Blacklist." or ""
     if id and id > 0 then
-        local name = GetAbilityName(id)
+        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil then
             local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
@@ -706,7 +706,7 @@ function SCB.RemoveFromCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.BlacklistTable and "Aura Blacklist." or ""
     if id and id > 0 then
-        local name = GetAbilityName(id)
+        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil then
             local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil
@@ -1816,7 +1816,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
     --d(strfmt("OnEffectChanged %d: %s[%s] / %d/%d/%d [%s-%d] %d", changeType, effectName, unitTag, effectType, abilityType, statusEffectType, unitName, unitId, abilityId ))
 
-    effectName = strformat("<<C:1>>", effectName)
     local unbreakable = 0
 
     -- Grim Focus Stack counter
@@ -1951,7 +1950,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
         g_effectsList[context][effectSlot] = nil
         if E.EffectCreateSkillAura[ abilityId ] and E.EffectCreateSkillAura [ abilityId ].removeOnEnd then
-            local name = GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId)
+            local name = zo_strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))
             local id = E.EffectCreateSkillAura[abilityId].abilityId
             if not (SCB.SV.BlacklistTable[name] or SCB.SV.BlacklistTable[id]) then
                 local simulatedContext = unitTag .. effectType
@@ -1989,7 +1988,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
         --EffectCreateSkillAura
         if ( E.EffectCreateSkillAura[abilityId] ) then
-            local name = GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId)
+            local name = zo_strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))
             local id = E.EffectCreateSkillAura[abilityId].abilityId
             if not (SCB.SV.BlacklistTable[name] or SCB.SV.BlacklistTable[id]) then
                 local simulatedContext = unitTag .. effectType
@@ -2967,7 +2966,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
             end
 
             if buff.name then
-                buff.name:SetText(effect.name)
+                buff.name:SetText(zo_strformat("<<C:1>>", effect.name))
             end
 
         end

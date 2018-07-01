@@ -9786,6 +9786,7 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
     if (skillType == SKILL_TYPE_GUILD) then
 
         local lineName, _, _, lineId = GetSkillLineInfo(skillType, skillIndex)
+        formattedName = strformat(SI_UNIT_NAME, lineName)
 
         -- Bail out early if a certain type is not set to be displayed
         if lineId == 45 and not CA.SV.Skills.SkillGuildFighters then
@@ -9806,7 +9807,7 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
         local priority
 
         if CA.SV.Skills.SkillGuildAlert then
-            local text = strformat(GetString(SI_LUIE_CA_SKILL_GUILD_ALERT), lineName)
+            local text = strformat(GetString(SI_LUIE_CA_SKILL_GUILD_ALERT), formattedName)
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
 
@@ -9817,7 +9818,7 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
             -- Only throttle values 5 or lower (FG Dailies give +10 skill)
             if CA.SV.Skills.SkillGuildThrottle > 0 and change <= 5 then
                 g_guildSkillThrottle = g_guildSkillThrottle + change
-                g_guildSkillThrottleLine = lineName
+                g_guildSkillThrottleLine = formattedName
                 eventManager:UnregisterForUpdate(moduleName .. "BufferedRep")
                 eventManager:RegisterForUpdate(moduleName .. "BufferedRep", CA.SV.Skills.SkillGuildThrottle, CA.PrintBufferedGuildRep )
                 return
@@ -9842,7 +9843,7 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
             -- Other guilds are usually either a quest reward or achievement reward
             priority = "EXPERIENCE LEVEL"
         end
-        CA.PrintGuildRep(change, lineName, lineId, priority)
+        CA.PrintGuildRep(change, formattedName, lineId, priority)
      end
 end
 

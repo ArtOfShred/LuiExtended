@@ -1066,7 +1066,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
     end
 
         local icon = GetAbilityIcon(abilityId)
-        local name = GetAbilityName(abilityId)
+        local name = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
         local duration
         local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
