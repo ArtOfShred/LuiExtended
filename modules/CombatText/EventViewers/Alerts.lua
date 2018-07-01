@@ -144,7 +144,7 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
         local color = CT.AlertColors.alertColorPower
 		prefix = (sourceName ~= "" and sourceName ~= nil) and S.toggles.mitigationPowerPrefixN or S.toggles.mitigationPowerPrefix
         size = S.fontSizes.alert
-        local stringPart1 = self:FormatAlertString(S.toggles.mitigationPowerPrefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
+        local stringPart1 = self:FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
         local stringPart2 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertPower)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- DESTROY
@@ -152,7 +152,7 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
         local color = CT.AlertColors.alertColorDestroy
 		prefix = (sourceName ~= "" and sourceName ~= nil) and S.toggles.mitigationDestroyPrefixN or S.toggles.mitigationDestroyPrefix
         size = S.fontSizes.alert
-        local stringPart1 = self:FormatAlertString(S.toggles.mitigationDestroyPrefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
+        local stringPart1 = self:FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
         local stringPart2 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertDestroy)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     end

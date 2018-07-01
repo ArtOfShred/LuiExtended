@@ -1494,6 +1494,12 @@ E.AddNameAura = {
     ['Thick-Bark'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Root Sunder Ruins)
     ['Guardian of Root Sunder'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Grahtwood (Root Sunder Ruins)
 
+    ['Lost Master'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Rulanyil's Fall)
+    ['Utiasl'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Rulanyil's Fall)
+    ['Skirar the Decaying'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Rulanyil's Fall)
+    ['Magna Tharn'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Rulanyil's Fall)
+    ['Hannat the Bonebringer'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Greenshade (Rulanyil's Fall)
+
     -- MSQ
     ['Ragjar'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Manifestation of Regret'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
@@ -6731,26 +6737,24 @@ E.EffectOverride = {
     -- World Boss - Thodundor's View
     [83164] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_punch.dds' }, -- Clobber (Thodundor of the Hill)
     [83165] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_backhand.dds' }, -- Sweeping Backhand (Thodundor of the Hill)
-
     [83124] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP) }, -- Ferocious Bellow (Thodundor of the Hill)
-
     [83155] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Thunderous Smash (Thodundor of the Hill)
     [83156] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Thunderous Smash (Thodundor of the Hill)
     [83159] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Thunderous Smash (Thodundor of the Hill)
     [83157] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Thunderous Smash (Thodundor of the Hill)
-
     [83160] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Stone Crusher (Thodundor of the Hill)
     [83163] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Stone Crusher (Thodundor of the Hill)
-    [83162] = { name = A.Skill_Off_Balance, tooltip = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP) }, -- Stone Crusher (Thodundor of the Hill)
+    [83162] = { name = A.Skill_Off_Balance }, -- Stone Crusher (Thodundor of the Hill)
     [83161] = { name = A.Innate_Stagger, hide = true, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STAGGER_TP) }, -- Stone Crusher (Thodundor of the Hill)
-
     [83136] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds', hide = true }, -- Ground Shock (Thodundor of the Hill)
     [83140] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Ground Shock (Thodundor of the Hill)
     [83141] = { name = A.Innate_Stagger, hide = true, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STAGGER_TP) }, -- Ground Shock (Thodundor of the Hill)
-    [83137] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_shattered_ground.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_SNARE_TP) }, -- Ground Shock (Thodundor of the Hill)
-
+    [83137] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_shattered_ground.dds' }, -- Ground Shock (Thodundor of the Hill)
     [83777] = { icon = 'esoui/art/icons/ability_dragonknight_005.dds', hide = true }, -- Iron Grip (Thodundor of the Hill)
     [83780] = { icon = 'esoui/art/icons/ability_dragonknight_005.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Iron Grip (Thodundor of the Hill)
+
+    -- Public Dungeon - Rulanyil's Fall
+    [33581] = { hide = true }, -- DUN-RF_Event_Blue_Fire
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------

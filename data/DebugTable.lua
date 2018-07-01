@@ -10355,6 +10355,11 @@ debugAuras = {
             [83777] = true, -- Iron Grip
             [83780] = true, -- Iron Grip
 
+            -- Public Dungeon - Rulanyil's Fall
+            [27607] = true, -- Q4462 Necro Channel
+            [60485] = true, -- Arrow Burst
+            [33581] = true, -- DUN-RF_Event_Blue_Fire
+
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------
             -------------------------------------
