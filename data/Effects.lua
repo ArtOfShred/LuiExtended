@@ -4333,12 +4333,12 @@ E.EffectOverride = {
     -- ASSAULT ACTIVES ---------------------------------------------
     ----------------------------------------------------------------
 
-    [101161] = { consolidate = true, tooltip = A.Skill_Rapid_Manuever }, -- Major Expedition (Rapid Maneuver)
-    [57472] = { consolidate = true, tooltip = A.Skill_Rapid_Manuever }, -- Major Gallop (Rapid Maneuver)
-    [101169] = { consolidate = true, tooltip = A.Skill_Retreating_Manuever }, -- Major Expedition (Retreating Maneuver)
-    [57477] = { consolidate = true, tooltip = A.Skill_Retreating_Manuever }, -- Major Gallop (Retreating Maneuver)
-    [101178] = { consolidate = true, tooltip = A.Skill_Charging_Manuever }, -- Major Expedition (Charging Maneuver)
-    [57481] = { consolidate = true, tooltip = A.Skill_Charging_Manuever }, -- Major Gallop (Charging Maneuver)
+    [101161] = { consolidate = true, tooltip = zo_strformat("<<C:1>>", A.Skill_Rapid_Manuever) }, -- Major Expedition (Rapid Maneuver)
+    [57472] = { consolidate = true, tooltip = zo_strformat("<<C:1>>", A.Skill_Rapid_Manuever) }, -- Major Gallop (Rapid Maneuver)
+    [101169] = { consolidate = true, tooltip = zo_strformat("<<C:1>>", A.Skill_Retreating_Manuever) }, -- Major Expedition (Retreating Maneuver)
+    [57477] = { consolidate = true, tooltip = zo_strformat("<<C:1>>", A.Skill_Retreating_Manuever) }, -- Major Gallop (Retreating Maneuver)
+    [101178] = { consolidate = true, tooltip = zo_strformat("<<C:1>>", A.Skill_Charging_Manuever) }, -- Major Expedition (Charging Maneuver)
+    [57481] = { consolidate = true, tooltip = zo_strformat("<<C:1>>", A.Skill_Charging_Manuever) }, -- Major Gallop (Charging Maneuver)
     [64118] = { name = A.Skill_Caltrops, duration = 0 }, -- Hindered (Caltrops - All Morphs)
     [40253] = { name = A.Skill_Razor_Caltrops }, -- Hindered (Razor Caltrops)
     [66482] = { hide = true }, -- Magicka Detonation (Magicka Detonation)

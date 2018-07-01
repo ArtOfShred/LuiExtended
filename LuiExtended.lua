@@ -454,7 +454,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local markForRemove = trackBuffs[i].markForRemove or false
 
                     local timer = endTime - startTime
-                    local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, math.floor((timer) + 0.5)) ) or GetAbilityEffectDescription(buffSlot)
+                    local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, math.floor((timer) + 0.5)) or GetAbilityEffectDescription(buffSlot)
 
                     -- In debug mode for now
                     local displayName = GetDisplayName()

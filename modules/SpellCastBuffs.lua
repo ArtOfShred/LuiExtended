@@ -1494,9 +1494,9 @@ function SCB.Buff_OnMouseEnter(control)
         GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
     else
         if control.buffSlot then
-            tooltipText = (E.EffectOverride[control.effectId] and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) ) or GetAbilityEffectDescription(control.buffSlot)
+            tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) or GetAbilityEffectDescription(control.buffSlot)
         else
-            tooltipText = (E.EffectOverride[control.effectId] and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) ) or ""
+            tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) or ""
         end
 
         -- In debug mode for now
