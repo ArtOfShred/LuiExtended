@@ -152,6 +152,7 @@ function CTL:OnCombatIn(...)
 
     local S = LUIE.CombatText.SV
     local combatType, togglesInOut = C.combatType.INCOMING, S.toggles.incoming
+    abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
     local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
 
     if AlertT[abilityId] then
