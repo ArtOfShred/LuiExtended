@@ -2268,6 +2268,11 @@ local strings = {
     SI_LUIE_SKILL_SOUL_BINDING_TP =                      "Claim a weakened Daedra Soul, charging the Sigil Geode.",
     SI_LUIE_SKILL_EMPOWER_TWILIT_HEART =                 "Empower Twilit Heart",
     SI_LUIE_SKILL_BLACKSAPS_BREW_TP =                    "Increase Movement Speed by |cffffff4|r% and reduce damage taken by |cffffff10|r% for |cffffff30|r minutes.",
+    SI_LUIE_SKILL_SPIRIT_ARMOR_TP =                      "Increase Armor by |cffffff5|r%.",
+    SI_LUIE_SKILL_CHANGE_CLOTHES =                       "Change Clothes",
+    SI_LUIE_SKILL_FANCY_CLOTHING =                       "Fancy Clothing",
+    SI_LUIE_SKILL_FANCY_CLOTHING_TP =                    "Dressed to impress!",
+    SI_LUIE_SKILL_BURROW =                               "You are protected from harm and concealed by burrowing underground.",
 }
 
 -- TODO: Switch to StringId's

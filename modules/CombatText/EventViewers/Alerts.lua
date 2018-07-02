@@ -22,7 +22,7 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
 
     local size, text
     local labelColor = S.colors.alertShared
-	local prefix = (sourceName ~= "" and sourceName ~= nil) and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
+	local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
     local mitigationSuffix = (isDirect and S.toggles.mitigationDefaultSuffix ~= "") and zo_strformat(" <<1>>", S.toggles.mitigationDefaultSuffix) or ""
 
     -- First we handle Cleanse/Execute/Exploit because these messages are always individual
@@ -142,7 +142,7 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
     -- POWER
     elseif (alertType == alertTypes.POWER) then
         local color = CT.AlertColors.alertColorPower
-		prefix = (sourceName ~= "" and sourceName ~= nil) and S.toggles.mitigationPowerPrefixN or S.toggles.mitigationPowerPrefix
+		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPowerPrefixN or S.toggles.mitigationPowerPrefix
         size = S.fontSizes.alert
         local stringPart1 = self:FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
         local stringPart2 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertPower)
@@ -150,7 +150,7 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
     -- DESTROY
     elseif (alertType == alertTypes.DESTROY) then
         local color = CT.AlertColors.alertColorDestroy
-		prefix = (sourceName ~= "" and sourceName ~= nil) and S.toggles.mitigationDestroyPrefixN or S.toggles.mitigationDestroyPrefix
+		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationDestroyPrefixN or S.toggles.mitigationDestroyPrefix
         size = S.fontSizes.alert
         local stringPart1 = self:FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
         local stringPart2 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertDestroy)

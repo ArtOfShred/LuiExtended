@@ -2233,6 +2233,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         iconName = E.FakePlayerBuffs[abilityId].icon
         effectName = E.FakePlayerBuffs[abilityId].name
         duration = E.FakePlayerBuffs[abilityId].duration
+        local forcedType = E.FakePlayerBuffs[abilityId].long and "long" or "short"
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
         local source = strformat("<<t:1>>",sourceName)
@@ -2252,10 +2253,10 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             -- Otherwise, display as a normal buff
             else
                 g_effectsList.player1[ abilityId ] = {
-                    type=1,
+                    target="player", type=1,
                     id=abilityId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-                    forced = "short",
+                    forced = forcedType,
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
                     stack = stack

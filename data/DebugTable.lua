@@ -6910,6 +6910,9 @@ debugAuras = {
             [88251] = true, -- Call Ally -- Pet Ranger
             [88248] = true, -- Call Ally -- Pet Ranger
             [89425] = true, -- Call Ally -- Pet Ranger
+            [88275] = true, -- Call Ally -- Pet Ranger
+            [88265] = true, -- Call Ally -- Pet Ranger
+            [88288] = true, -- Call Ally -- Pet Ranger
             [88281] = true, -- Call Ally -- Pet Ranger
             [88278] = true, -- Call Ally -- Pet Ranger
             [89233] = true, -- Call Ally -- Pet Ranger
@@ -10359,6 +10362,50 @@ debugAuras = {
             [27607] = true, -- Q4462 Necro Channel
             [60485] = true, -- Arrow Burst
             [33581] = true, -- DUN-RF_Event_Blue_Fire
+
+            -- Frighten the Fearsome
+            [28498] = true, -- Speedier Walk
+            [49927] = true, -- Magic Transformation
+
+            -- Audience with the Wilderking
+            [37759] = true, -- Spirit Armor
+            [30822] = true, -- Q4593_FakeSeeBoss
+            [31095] = true, -- Q4593_FakeHazaziConvoCheck
+            [30858] = true, -- Q4593_PastSceneFX
+            [30880] = true, -- Q4593_CanSeeVisions
+
+            -- The Witch of Silatar
+            [33289] = true, -- Q4586 Blue Fireplace FX
+            [44555] = true, -- Q4586 Fire Story Teleport
+            [33384] = true, -- Q4586 Aranias Vine Stun
+            [46925] = true, -- Q4586 TP to Scene 1
+            [33066] = true, -- Q4586_ChangeClothes
+            [33069] = true, -- Q4586_Ara02_TreeSpell
+            [33456] = true, -- Q4586_HugeTree
+            [49116] = true, -- Q4586_HugeTree
+            [49117] = true, -- Q4586_HugeTree
+            [46929] = true, -- Q485 TP out of Silatar
+
+            -- Throne of the Wilderking
+            [33591] = true, -- Fire
+            [35014] = true, -- Wilderking's Protection
+            [49878] = true, -- SW Invisible Man
+            [34411] = true, -- Q4750 Screen Shake
+            [33594] = true, -- Fire
+            [49897] = true, -- Fire
+            [49823] = true, -- Q4750 BurrowFX
+            [33701] = true, -- BurrowEND
+            [33829] = true, -- Burrowing
+            [37506] = true, -- Stealth
+            [33727] = true, -- BurrowEND
+            [33830] = true, -- Wilder Bamf
+            [34416] = true, -- Q4750_WhiteFlash
+
+            -- Veil of Illusion
+            [31569] = true, -- Guise of the Queen
+            [31544] = true, -- Guise of the Queen
+            [31564] = true, -- Guise of the Queen
+            [31679] = true, -- Blinded
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------

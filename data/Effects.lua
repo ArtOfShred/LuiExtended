@@ -452,6 +452,7 @@ E.CastDurationFix = {
     [36710] = 4000, -- Q4833 Apply Snake Buff (Bosmer Insight)
     [36841] = 4000, -- Q4833 Apply Wolf Buff (Bosmer Insight)
     [36824] = 4000, -- Q4833 Apply Tiger Buff (Bosmer Insight)
+    [33701] = 1000, -- BurrowEND (Throne of the Wilderking)
 
 }
 
@@ -591,6 +592,8 @@ E.IsCast = {
     [37211] = true, -- Q4854 Empower Heart (Eyes of Azura)
     [38246] = true, -- Animus Geode (Eyes of Azura)
     [41325] = true, -- Blacksap's Brew (The Blacksap's Hold)
+    [33066] = true, -- Q4586_ChangeClothes (The Witcher of Silatar)
+    [33701] = true, -- BurrowEND (Throne of the Wilderking)
 
 }
 
@@ -4740,6 +4743,9 @@ E.EffectOverride = {
     [88251] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally.dds' }, -- Call Ally (Pet Ranger)
     [88248] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_durzog.dds' }, -- Call Ally (Pet Ranger)
     [89425] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_kwama.dds' }, -- Call Ally (Pet Ranger)
+    [88275] = { hide = true }, -- Call Ally (Pet Ranger)
+    [88265] = { hide = true }, -- Call Ally (Pet Ranger)
+    [88288] = { hide = true }, -- Call Ally (Pet Ranger)
     [88281] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = A.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Call Ally (Pet Ranger)
     [88227] = { hide = true }, -- Call Ally (Pet Ranger)
     [88252] = { hide = true }, -- Call Ally (Pet Ranger)
@@ -6507,7 +6513,7 @@ E.EffectOverride = {
     [22718] = { hide = true }, -- Knock Out
 
     -- Lifting the Veil
-    [23392] = { icon = 'LuiExtended/media/icons/disguises/ability_disguise_altmer_glamour.dds', isDisguise = true }, -- Altmer Glamour
+    [23392] = { icon = 'LuiExtended/media/icons/disguises/disguise_altmer_glamour.dds', isDisguise = true }, -- Altmer Glamour
 
     -- Through the Ashes
     [48646] = { hide = true }, -- Magefire
@@ -6755,6 +6761,22 @@ E.EffectOverride = {
 
     -- Public Dungeon - Rulanyil's Fall
     [33581] = { hide = true }, -- DUN-RF_Event_Blue_Fire
+
+    -- Audience with the Wilderking
+    [37759] = { icon = 'esoui/art/icons/achievement_030.dds', tooltip = GetString(SI_LUIE_SKILL_SPIRIT_ARMOR_TP) }, -- Spirit Armor
+    [33384] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_grasping_vines.dds', name = A.Skill_Grasping_Vines, unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Q4586 Aranias Vine Stun
+    [33066] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_change_clothes.dds', name = A.Skill_Change_Clothes, tooltip = GetString(SI_LUIE_SKILL_FANCY_CLOTHING_TP) }, -- Q4586_ChangeClothes
+    [49116] = { hide = true }, -- Q4586_HugeTree
+
+    -- Throne of the Wilderking
+    [35014] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wilderkings_protection.dds' }, -- Wilderking's Protection
+    [33594] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', hide = true }, -- Fire
+    [49897] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_SNARE_TP) }, -- Fire
+
+    [33701] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = A.Skill_Burrow, hide = true }, -- BurrowEND
+    [33829] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = A.Skill_Burrow, tooltip = GetString(SI_LUIE_SKILL_BURROW) }, -- Burrowing
+    [37506] = { hide = true }, -- Stealth
+    [33727] = { hide = true }, -- BurrowEND
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -7191,6 +7213,8 @@ E.FakeExternalDebuffs = {
     [23606] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback_crystal.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Crystal, A.Skill_Backfire), duration = 2000 }, -- Q4326 Crystal Backfire (Preventative Measure)
     [43823] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds', name = A.Skill_Quaking_Stomp, duration = 2150 }, -- IntroKB (Prince Naemon)
     [36766] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_headgrab.dds', name = A.Skill_Feedback, duration = 5000 }, -- Q4842 Stun Headgrab Knockback (The Unquiet Dead)
+    [33384] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_grasping_vines.dds', name = A.Skill_Grasping_Vines, duration = 4000 }, -- Q4586 Aranias Vine Stun
+    [49897] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Skill_Fire, duration = 2000 }, -- Fire
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------
@@ -7317,11 +7341,14 @@ E.FakePlayerBuffs = {
     [26634] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence_greater.dds', name = A.Skill_Sahdinas_Essence, duration = 0 }, -- MG2 Captured Sahdina Essence
     [26581] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence_greater.dds', name = A.Skill_Rashomtas_Essence, duration = 0 }, -- MG2 Captured Rashomta Essence
 
+    -- Aldmeri Dominion
+    [33066] = { icon = 'LuiExtended/media/icons/disguises/disguise_fancy_clothing.dds', name = A.Skill_Fancy_Clothing, duration = 0, long = true }, -- Q4586_ChangeClothes
+
     -- Quest related (Craglorn)
-    [81807] = {icon = 'esoui/art/icons/achievement_104.dds', name = 'Power of the Stars', duration = 22000}, -- Power of the Stars (The Star-Gazers)
+    --[81807] = {icon = 'esoui/art/icons/achievement_104.dds', name = 'Power of the Stars', duration = 22000}, -- Power of the Stars (The Star-Gazers)
 
     -- Orsinium
-    [66453] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', name = 'Hiding', duration = 45000}, -- Hiding (A Question of Succession)
+    --[66453] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', name = 'Hiding', duration = 45000}, -- Hiding (A Question of Succession)
 }
 
 -- TODO: Fake buffs applied onto a target by the player
