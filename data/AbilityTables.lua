@@ -783,11 +783,12 @@ A.Skill_Tigers_Fur                  = 36828
 A.Skill_Feedback                    = 32063
 A.Skill_Soul_Binding                = 21171
 A.Skill_Empower_Heart               = GetString(SI_LUIE_SKILL_EMPOWER_TWILIT_HEART)
-A.Skill_Grasping_Vines              = 55909
+A.Skill_Restricting_Vines           = GetString(SI_LUIE_SKILL_RESTRICTING_VINES)
 A.Skill_Change_Clothes              = GetString(SI_LUIE_SKILL_CHANGE_CLOTHES)
 A.Skill_Fancy_Clothing              = GetString(SI_LUIE_SKILL_FANCY_CLOTHING)
 A.Skill_Fire                        = 33594
 A.Skill_Burrow                      = 8974
+A.Skill_Serpent_Spit                = GetString(SI_LUIE_SKILL_SERPENT_SPIT)
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

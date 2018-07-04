@@ -863,9 +863,10 @@ function SCB.InitializeDisguise()
 
         local name = GetItemName(0, 10)
         local icon = E.DisguiseIcons[g_currentDisguise].icon
+        local id = E.DisguiseIcons[g_currentDisguise].id or "Fake"
         g_effectsList.player1["DisguiseType"] = {
             target="player", type=1,
-            id ="Fake", name=name, icon=icon,
+            id=id, name=name, icon=icon,
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
             forced = "long",
             restart=true, iconNum=0
@@ -888,9 +889,10 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
 
             local name = GetItemName(0, 10)
             local icon = E.DisguiseIcons[g_currentDisguise].icon
+            local id = E.DisguiseIcons[g_currentDisguise].id or "Fake"
             g_effectsList.player1["DisguiseType"] = {
                 target="player", type=1,
-                id ="Fake", name=name, icon=icon,
+                id=id, name=name, icon=icon,
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "long",
                 restart=true, iconNum=0
@@ -2223,6 +2225,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         end
         if abilityId == 26406 then g_ignoreAbilityId[abilityId] = true end
         g_effectsList.player1[ abilityId ] = nil
+        g_effectsList.player2[ abilityId ] = nil
         if abilityId == 973 and not SCB.SV.ShowSprint then
             return
         end

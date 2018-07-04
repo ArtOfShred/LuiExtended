@@ -6457,6 +6457,7 @@ debugAuras = {
             [15160] = true, -- Monster Heavy Attack
             [31373] = true, -- Modify Shared CD Ability
             [46858] = true, -- Second Wind
+            --[29535] = true, -- Call to Ranged
 
             -- SHARED NPC PASSIVES
             [67950] = true, -- CC Immunity Plus -- Various NPC's
@@ -6912,6 +6913,7 @@ debugAuras = {
             [89425] = true, -- Call Ally -- Pet Ranger
             [88275] = true, -- Call Ally -- Pet Ranger
             [88265] = true, -- Call Ally -- Pet Ranger
+            [88268] = true, -- Call Ally -- Pet Ranger
             [88288] = true, -- Call Ally -- Pet Ranger
             [88281] = true, -- Call Ally -- Pet Ranger
             [88278] = true, -- Call Ally -- Pet Ranger
@@ -10406,6 +10408,39 @@ debugAuras = {
             [31544] = true, -- Guise of the Queen
             [31564] = true, -- Guise of the Queen
             [31679] = true, -- Blinded
+
+            -- A Storm Upon the Shore
+            [34430] = true, -- Invisibility Potion
+            [24680] = true, -- Hidden Buff 4min
+
+            -- Pelidil's End
+            [34630] = true, -- Q4765 Sail After Peledil
+            [34631] = true, -- Teleport
+            [37387] = true, -- GS Seaside
+            [37573] = true, -- GS Seaside
+            [37579] = true, -- GS Seaside
+            [34380] = true, -- GS SS Telegraph AoE
+            [50784] = true, -- Magefire
+            [39330] = true, -- GS Seaside Mage Launch
+            [50719] = true, -- Q4765 Maormer Climb Into Boat
+
+            [50764] = true, -- Q4762 Snake Spit AoE
+            [50766] = true, -- CON_AOE_Template1
+            [50767] = true, -- CON_AOE_Template1
+            [50765] = true, -- CON_AOE_Template1
+
+            [37393] = true, -- GS Seaside Catapult Animate
+            [33545] = true, -- GS Seaside Catapult Shot
+            [48049] = true, -- Q4765 Block Dummy Fire
+            [48054] = true, -- Q4765 Impact Increment
+            [33610] = true, -- GS SS Serpent Hit Descend
+            [33828] = true, -- GS SS Serpent Track Hit
+            [33609] = true, -- GS SS Serpent Rise
+            [32396] = true, -- SM Mudcrab Fighter
+            [33650] = true, -- GS SS Serpent Ready Ram
+            [42042] = true, -- GS SS Serpent DIE
+            [51303] = true, -- Q4765 Maomer TP In
+            [42068] = true, -- CFX_4765 Mage Hold Open Portal
 
             -------------------------------------
             -- VVARDENFELL QUESTS/EVENTS --------
