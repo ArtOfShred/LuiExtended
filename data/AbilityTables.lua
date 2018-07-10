@@ -79,6 +79,7 @@ A.Innate_Recall_Penalty             = GetString(SI_LUIE_SKILL_RECALL_PENALTY) --
 A.Innate_Vanity_Pet                 = GetString(SI_LUIE_SKILL_VANITY_PET) -- Vanity Pet
 A.Innate_Mounted                    = GetString(SI_LUIE_SKILL_MOUNTED) -- Mounted
 A.Innate_Resurrection_Immunity      = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY) -- Resurrection Immunity
+A.Innate_Soul_Gem_Resurrection      = GetString(SI_LUIE_SKILL_SOUL_GEM_RESURRECTION) -- Soul Gem Resurrection
 
 -- Player Basic
 A.Innate_Crouch                     = 20306 -- Crouch
@@ -789,6 +790,7 @@ A.Skill_Fancy_Clothing              = GetString(SI_LUIE_SKILL_FANCY_CLOTHING)
 A.Skill_Fire                        = 33594
 A.Skill_Burrow                      = 8974
 A.Skill_Serpent_Spit                = GetString(SI_LUIE_SKILL_SERPENT_SPIT)
+A.Skill_Shadow_Wood                 = GetString(SI_LUIE_SKILL_SHADOW_WOOD)
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

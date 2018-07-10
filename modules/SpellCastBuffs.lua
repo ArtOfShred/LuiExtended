@@ -169,6 +169,8 @@ local g_currentDisguise = GetItemId(0, 10) or 0 -- Currently equipped disguise f
 local g_grimFocusCount = 0 -- Tracker for Grim Focus Stacks
 local g_werewolfName = "" -- Name for current Werewolf Transformation morph
 local g_werewolfIcon = "" -- Icon for current Werewolf Transformation morph
+local g_werewolfId = "" -- AbilityId for Werewolf Transformation morph
+local g_werewolfDevour = false -- Flag set when Devouring corpses as WW - toggled on/off by EVENT_EFFECT_CHANGED
 local g_werewolfCounter = 0 -- Counter for Werewolf transformation events
 local g_werewolfQuest = 0 -- Counter for Werewolf transformation events (Quest)
 local g_lastWerewolfPower = 0 -- Tracker for last amount of werewolf power - used to freeze counter when using Devour or entering a Werewolf Shrine
@@ -729,6 +731,35 @@ end
 local function SetWerewolfIcon()
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
     g_werewolfName, g_werewolfIcon = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
+    g_werewolfId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
+end
+
+local function SetWerewolfIconTimer(currentTime)
+    SetWerewolfIcon()
+    local currentPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
+    local duration = ( currentPower / 27 )
+    -- Round up by 1 from any decimal number
+    local durationFormatted = mathfloor(duration + 0.999) * 1000
+    local currentTime = GetGameTimeMilliseconds()
+    local endTime = currentTime + durationFormatted
+    g_effectsList.player1["Werewolf Indicator"] = {
+        target="player", type=1,
+        id = g_werewolfId, name=g_werewolfName, icon=g_werewolfIcon,
+        dur=38000, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
+        forced = "short",
+        restart=true, iconNum=0, overrideDur = 38000
+    }
+end
+
+local function SetWerewolfIconFrozen()
+    SetWerewolfIcon()
+    g_effectsList.player1["Werewolf Indicator"] = {
+        type=1,
+        id = g_werewolfId, name=g_werewolfName, icon=g_werewolfIcon,
+        dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+        forced = "short",
+        restart=true, iconNum=0
+    }
 end
 
 function SCB.WerewolfState(eventCode, werewolf, onActivation)
@@ -738,22 +769,8 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
             if skillLineId == 50 and discovered then
                 g_werewolfCounter = g_werewolfCounter + 1
                 if g_werewolfCounter == 3 or onActivation then
-                    -- Pull specific morph info
-                    SetWerewolfIcon()
-                    local currentPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
-                    local duration = ( currentPower / 27 )
-                    -- Round up by 1 from any decimal number
-                    local durationFormatted = mathfloor(duration + 0.999) * 1000
                     local currentTime = GetGameTimeMilliseconds()
-                    local endTime = currentTime + durationFormatted
-                    g_effectsList.player1["Werewolf Indicator"] = {
-                        target="player", type=1,
-                        id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-                        dur=38000, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
-                        forced = "short",
-                        restart=true, iconNum=0, overrideDur = 38000
-                    }
-
+                    SetWerewolfIconTimer(currentTime)
                     eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SCB.OnPowerUpdate)
                     eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
                     g_werewolfCounter = 0
@@ -764,15 +781,8 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
 
         g_werewolfQuest = g_werewolfQuest + 1
         -- If we didn't return from the above statement this must be quest based werewolf transformation - so just display an unlimited duration passive as the counter.
-        SetWerewolfIcon()
         if g_werewolfQuest == 2 or onActivation then
-            g_effectsList.player1["Werewolf Indicator"] = {
-                type=1,
-                id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
+            SetWerewolfIconFrozen()
             g_werewolfCounter = 0
         end
     else
@@ -786,13 +796,7 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
 end
 
 function SCB.PowerTrailer()
-    g_effectsList.player1["Werewolf Indicator"] = {
-        type=1,
-        id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-        dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-        forced = "short",
-        restart=true, iconNum=0
-    }
+    SetWerewolfIconFrozen()
     eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
 end
 
@@ -803,26 +807,16 @@ function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue
 
     -- Ignore gain from Blood Rage when hit while devouring
     if g_effectsList.player1["Werewolf Indicator"] and g_effectsList.player1["Werewolf Indicator"].ends == nil then
-        if (powerValue == g_lastWerewolfPower + 99) then
+        --if (powerValue == g_lastWerewolfPower + 99) or g_werewolfDevour then
+        if g_werewolfDevour then
             return
         end
     end
     g_lastWerewolfPower = powerValue
 
-    local currentPower = powerValue
-    local duration = ( currentPower / 27 )
-    -- Round up by 1 from any decimal number
-    local durationFormatted = mathfloor(duration + 0.999) * 1000
     local currentTime = GetGameTimeMilliseconds()
-    local endTime = currentTime + durationFormatted
-    if currentPower > 0 then
-        g_effectsList.player1["Werewolf Indicator"] = {
-            target="player", type=1,
-            id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-            dur=38000, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
-            forced = "short",
-            restart=true, iconNum=0, overrideDur = 38000
-        }
+    if powerValue > 0 then
+        SetWerewolfIconTimer(currentTime)
     else
         g_effectsList.player1["Werewolf Indicator"] = nil
     end
@@ -1495,20 +1489,41 @@ function SCB.Buff_OnMouseEnter(control)
         GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
         GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
     else
+
+
+    -- BEGIN TEMPORARY DEBUF FUNCTION HERE
+    -- MY ACCOUNT DEBUG: Temporary conditional to check for my Display Name and do some debug stuff, otherwise use normal function
+    local displayName = GetDisplayName()
+    if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+        if control.buffSlot then
+            tooltipText = GetAbilityEffectDescription(control.buffSlot)
+        else
+            tooltipText = ""
+        end
+
+        --local displayName = GetDisplayName()
+        if tooltipText == "" and type(control.effectId) == "number" and displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+            if GetAbilityDescription(control.effectId) ~= "" then
+                tooltipText = "|c3A92FFDescription:|r " .. GetAbilityDescription(control.effectId) or ""
+            end
+        end
+
+        local tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) or ""
+        if tooltipText2 ~= "" then
+            tooltipText2 = "|cEE992A\nOverride:|r " .. tooltipText2
+        end
+        tooltipText = "|cEE992AOriginal Tooltip:|r " ..  tooltipText .. tooltipText2
+
+    -- NORMAL BEHAVIOR:
+    else
         if control.buffSlot then
             tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) or GetAbilityEffectDescription(control.buffSlot)
         else
             tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) or ""
         end
+    end
+    -- END TEMPORARY DEBUG FUNCTION HERE
 
-        -- In debug mode for now
-        local displayName = GetDisplayName()
-        if tooltipText == "" and type(control.effectId) == "number" and displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
-            if GetAbilityDescription(control.effectId) ~= "" then
-                tooltipText = "|c2DC50EDescription:|r " .. GetAbilityDescription(control.effectId) or ""
-            end
-        end
-        -- In debug mode for now
 
         local thirdLine
         if E.TooltipNameOverride[control.effectName] then
@@ -1797,6 +1812,27 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
     if E.EffectOverride[abilityId] then
         effectType = E.EffectOverride[abilityId].type or effectType
+    end
+
+    if SCB.SV.ShowWerewolf then
+        -- Update WW icon while devouring
+        if abilityId == 33208 and castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
+            if changeType ~= EFFECT_RESULT_FADED then
+                SetWerewolfIconFrozen()
+                g_werewolfDevour = true
+            else
+                local currentTime = GetGameTimeMilliseconds()
+                SetWerewolfIconTimer(currentTime)
+                g_werewolfDevour = false
+            end
+        end
+        -- Remove form icon if player cancels early
+        if abilityId == 39477 and castByPlayer == COMBAT_UNIT_TYPE_PLAYER and changeType == EFFECT_RESULT_GAINED then
+            g_effectsList.player1["Werewolf Indicator"] = nil
+            eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
+            eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
+            g_werewolfCounter = 0
+        end
     end
 
     -- Track only effects on self or target debuffs
@@ -2304,20 +2340,8 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         return
     end
 
-    if not (E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId] or abilityId == 33208) then
+    if not (E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId]) then
         return
-    end
-
-    if SCB.SV.ShowWerewolf then
-        if abilityId == 33208 and sourceType == COMBAT_UNIT_TYPE_PLAYER and result == ACTION_RESULT_BEGIN then
-            g_effectsList.player1["Werewolf Indicator"] = {
-            type=1,
-            id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-            forced = "short",
-            restart=true, iconNum=0
-            }
-        end
     end
 
     -- If the action result isn't a starting/ending event then we ignore it.
@@ -2493,13 +2517,7 @@ function SCB.OnDeath(eventCode, unitTag, isDead)
 
             -- If werewolf is active, reset the icon so it's not removed (otherwise it flashes off for about a second until the trailer function picks up on the fact that no power drain has occurred.
             if SCB.SV.ShowWerewolf and IsWerewolf() then
-                g_effectsList.player1["Werewolf Indicator"] = {
-                    type=1,
-                    id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                    forced = "short",
-                    restart=true, iconNum=0
-                }
+                SetWerewolfIconFrozen()
             end
         else
             for effectType = 1, 2 do
@@ -3143,13 +3161,7 @@ function SCB.OnPlayerActivated(eventCode)
         -- If player is dead, add unlimited duration Werewolf indicator buff
         if IsUnitDead("player") then
             SCB.WerewolfState(nil, true, true)
-            g_effectsList.player1["Werewolf Indicator"] = {
-            type=1,
-            id = "Fake", name=g_werewolfName, icon=g_werewolfIcon,
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-            forced = "short",
-            restart=true, iconNum=0
-            }
+            SetWerewolfIconFrozen()
         end
     end
 
@@ -3224,6 +3236,7 @@ function SCB.OnPlayerAlive(eventCode)
     -- Reload werewolf effects
     if SCB.SV.ShowWerewolf and IsWerewolf() then
         SCB.WerewolfState(nil, true, true)
+        SetWerewolfIconFrozen()
     end
 
     -- Start Resurrection Sequence

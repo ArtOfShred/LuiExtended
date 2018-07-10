@@ -2716,7 +2716,6 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterMounted)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
 		UF.CustomFrames.player.alternative.enlightenment:SetHidden( true )
-
     elseif UF.SV.PlayerEnableAltbarXP and ( UF.CustomFrames.player.isLevelCap or ( UF.CustomFrames.player.isChampion )) then
         UF.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
         UF.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
@@ -2732,11 +2731,11 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
 		local enlightenedBar = enlightenedPool + xp
 		if enlightenedBar > maxBar then enlightenedBar = maxBar end -- If the enlightenment pool extends past the current level then cap it at the maximum bar value.
 
-        UF.CustomFrames.player.ChampionXP.bar:SetMinMax( 0 , maxBar)
-        UF.CustomFrames.player.ChampionXP.bar:SetValue( xp )
-
 		UF.CustomFrames.player.ChampionXP.enlightenment:SetMinMax( 0 , maxBar)
 		UF.CustomFrames.player.ChampionXP.enlightenment:SetValue( enlightenedBar )
+
+        UF.CustomFrames.player.ChampionXP.bar:SetMinMax( 0 , maxBar)
+        UF.CustomFrames.player.ChampionXP.bar:SetValue( xp )
 
         recenter = true
 
@@ -2744,7 +2743,6 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterXP)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
 		UF.CustomFrames.player.alternative.enlightenment:SetHidden( false )
-
     elseif UF.SV.PlayerEnableAltbarXP then
         icon    = "LuiExtended/media/unitframes/unitframes_level_normal.dds"
         center  = { 0, 0.1, 0.1, 0.9 }

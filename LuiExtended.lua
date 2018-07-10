@@ -642,7 +642,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     SetupSlotHandlers = {
         [ACTION_TYPE_ABILITY]       = SetupAbilitySlot,
         [ACTION_TYPE_ITEM]          = SetupItemSlot,
-        [ACTION_TYPE_SIEGE_ACTION]  = SetupSiegeActionSlot,
         [ACTION_TYPE_COLLECTIBLE]   = SetupCollectibleActionSlot,
     }
 end

@@ -117,7 +117,7 @@ E.IsCyrodiil = {
 
     [39671] = true, -- Emperorship Alliance Bonus
     [11346] = true, -- Home Keep Bonus -- CONFIRM
-    [11341] = true, -- Enemy Keep Bonus I -- CONFIRM
+    [11341] = true, -- Enemy Keep Bonus I
     [11343] = true, -- Enemy Keep Bonus II
     [11345] = true, -- Enemy Keep Bonus III -- CONFIRM
     [11347] = true, -- Enemy Keep Bonus IV -- CONFIRM
@@ -319,9 +319,6 @@ E.DebuffDisplayOverrideId = {
     -- Dragonknight
     [98447] = true, -- Shackle Snare (Dragonknight Standard Synergy)
 
-    -- Sorcerer
-    [62201] = true, -- Taunt (Summon Unstable Clannfear)
-
     -- Templar
     [31562] = true, -- Supernova (Nova Synergy)
     [34443] = true, -- Gravity Crush (Solar Prison Synergy)
@@ -383,6 +380,29 @@ E.DebuffDisplayOverrideName = {
     [A.Skill_Minor_Lifesteal]           = true,
 }
 
+E.CastBreakingStatus = {
+
+    [ACTION_RESULT_STAGGERED] = true,
+    [ACTION_RESULT_STUNNED] = true,
+    [ACTION_RESULT_KNOCKBACK] = true,
+    [ACTION_RESULT_LEVITATED] = true,
+    [ACTION_RESULT_FEARED] = true,
+    [ACTION_RESULT_DISORIENTED] = true,
+
+}
+
+-- List of abilityId's that should immediately cancel the Cast Bar if detected
+E.CastBreakingActions = {
+
+    [28549] = true, -- Roll Dodge
+    [14890] = true, -- Block
+
+    -- TODO:
+    -- Add sprint, mount sprint, stealth here
+    -- Add Recall, IC Recall Stone, Keep Recall Stone
+
+}
+
 E.CastChannelOverride = {
 
     [33175] = true, -- Feed (Vampire)
@@ -430,8 +450,9 @@ E.CastDurationFix = {
 
     [33175] = 6300, -- Feed (Vampire)
     [40350] = 5300, -- Feed (Vampire - Bite Player)
-    [39033] = 2000, -- Begin Werewolf (Werewolf)
-    [39477] = 1750, -- De-Werewolf (Werewolf)
+    [33208] = 3000, -- Devour (Werewolf)
+    [39033] = 1100, -- Werewolf Transform Setup (Werewolf)
+    [39477] = 1500, -- De-Werewolf (Werewolf)
     [75008] = 6500, -- Werewolf Transformation (Werewolf - Quest Transformation)
 
     -- Sets
@@ -533,7 +554,7 @@ E.IsCast = {
     [32633] = true, -- Roar (Werewolf)
     [39113] = true, -- Ferocious Roar (Werewolf)
     [39114] = true, -- Rousing Roar (Werewolf)
-    [39033] = true, -- Begin Werewolf (Werewolf)
+    [39033] = true, -- Werewolf Transform Setup (Werewolf)
     [39477] = true, -- De-Werewolf (Werewolf)
     [40515] = true, -- Devour (Werewolf - Bite Player)
     [75008] = true, -- Werewolf Transformation (Werewolf - Quest Transformation)
@@ -1824,7 +1845,7 @@ E.EffectMergeId = {
 
 }
 
-E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!)
+E.EffectHideSCT = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!)
     -- Player - Basic
     [20301] = true, -- Crouch Drain
     [15356] = true, -- Sprint Drain
@@ -1843,6 +1864,11 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [16691] = true, -- Heavy Attack (Bow)
     [16261] = true, -- Heavy Attack (Frost)
     [15383] = true, -- Heavy Attack (Flame)
+
+    -- Player - Werewolf
+    [111832] = true, -- Werewolf Transformation
+    [111843] = true, -- Pack Leader
+    [111844] = true, -- Werewolf Berserker
 
     -- Sets
     [32755] = true, -- Nikulas' Heavy Armor (of Nikulas)
@@ -3108,6 +3134,10 @@ E.EffectOverride = {
     -- Disguise Effects
     [13371] = { hide = true }, -- Acting Suspicious
 
+    -- Pet Effects
+    [63794] = { hide = true }, -- Taunt
+    [112170] = { hide = true }, -- CC Immunity
+
     ----------------------------------------------------------------
     -- WORLD EVENTS  -----------------------------------------------
     ----------------------------------------------------------------
@@ -3448,7 +3478,6 @@ E.EffectOverride = {
     [108843] = { name = A.Skill_Familiar_Damage_Pulse }, -- Volatile Familiar (Summon Unstable Familiar)
     [29528] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_claw.dds', name = A.Skill_Headbutt }, -- Claw (Summon Unstable Clannfear)
     [29529] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_tail_spike.dds' }, -- Tail Spike (Summon Unstable Clannfear)
-    [62201] = { icon = 'esoui/art/icons/ability_warrior_010.dds', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Taunt (Summon Unstable Clannfear)
     [77187] = { name = A.Skill_Familiar_Damage_Pulse }, -- Volatile Familiar Damage Pulsi (Summon Volatile Familiar)
     [88933] = { name = A.Skill_Familiar_Damage_Pulse }, -- Volatile Familiar (Summon Volatile Familiar)
     [24617] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_zap.dds' }, -- Zap (Summon Winged Twilight - All Morphs)
@@ -3906,6 +3935,7 @@ E.EffectOverride = {
     [38674] = { name = A.Skill_Magnum_Shot }, -- Scatter Shot (Magnum Shot)
     [38671] = { icon = 'esoui/art/icons/ability_bow_004_a.dds' }, -- Draining Shot (Draining Shot)
     [80764] = { name = A.Skill_Draining_Shot }, -- Draining Shot Heal (Draining Shot)
+    [38706] = { icon = 'esoui/art/icons/ability_bow_005_a.dds' }, -- Bombard (Bombard)
     [38702] = { hideReduce = true }, -- Acid Spray (Acid Spray)
     [38648] = { icon = '' }, -- Poison Arrow (Venom Arrow)
     [38649] = { icon = 'esoui/art/icons/ability_bow_002_a.dds', name = A.Skill_Venom_Arrow }, -- Poison Arrow (Venom Arrow)
@@ -4089,13 +4119,13 @@ E.EffectOverride = {
     [31068] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds' }, -- Sanies Lupinus (from player Bite)
     [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds' }, -- Sanies Lupinus (from player Bite)
     [32464] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Light Attack
-    [89146] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds' }, -- Werewolf Bleed
+    [89146] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_BLEED_TP) }, -- Werewolf Bleed
     [32477] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Were)
     [32479] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
     [32480] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack Werewolf
     [32494] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Heavy Attack
     [60773] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackrestore.dds', name = A.Skill_Heavy_Attack }, -- Stamina Return
-    [33208] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Devour (Devour - Rank 1)
+    [33208] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', hide = true }, -- Devour (Devour - Rank 1)
     [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour - Rank 1)
     [40515] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Blood Moon)
     [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, unbreakable = 1 }, -- Q3047 - Knockdown (Blood Moon)
@@ -4114,15 +4144,21 @@ E.EffectOverride = {
     [58856] = { name = A.Skill_Infectious_Claws }, -- Infection (Infectious Claws)
     [58865] = { name = A.Skill_Claws_of_Anguish }, -- Infection (Claws of Anguish)
     [58880] = { name = A.Skill_Claws_of_Life }, -- Infection (Claws of Life)
-    [39040] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Werewolf Transformation - All Morphs)
+
+    [39477] = { hide = true }, -- De-Werewolf (Werewolf Transformation - All Morphs)
+
+    [111832] = { tooltip = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP) }, -- Werewolf Transformation
+
+    [111843] = { tooltip = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP) }, -- Pack Leader
     [80180] = { hide = true }, -- Birth Direwolf (Pack Leader)
-    [80184] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge.dds' }, -- Lunge (Pack Leader)
-    [80186] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge.dds' }, -- Lunge (Pack Leader)
-    [80187] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_nip.dds' }, -- Nip (Pack Leader)
-    [80188] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_nip.dds' }, -- Nip (Pack Leader)
+    [80177] = { hide = true }, -- Pack Leader (Pack Leader)
+    [80178] = { hide = true }, -- Pack Leader (Pack Leader)
+    [80184] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge_pack_leader.dds' }, -- Lunge (Pack Leader)
     [80189] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
     [80190] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
-    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', name = A.Skill_Werewolf_Bleed }, -- Werewolf Berserker Bleed (Werewolf Bleed)
+
+    [111844] = { icon = 'esoui/art/icons/ability_werewolf_001_b.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP) }, -- Werewolf Berserker
+    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', name = A.Skill_Werewolf_Bleed, tooltip = GetString(SI_LUIE_SKILL_GENERIC_BLEED_TP) }, -- Werewolf Berserker Bleed (Werewolf Bleed)
 
     ----------------------------------------------------------------
     -- WEREWOLF QUEST ABILITIES ------------------------------------
@@ -6788,6 +6824,10 @@ E.EffectOverride = {
     [48054] = { hide = true }, -- Q475 Impact Increment
     [50765] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_gtaoe.dds', name = A.Skill_Serpent_Spit }, -- CON_AOE_Template1
 
+    -- Retaking the Pass
+    [45650] = { hide = true }, -- Indaenir's Spell
+    [29504] = { tooltip = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP) }, -- Q4546 Shade Layer
+
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
     ----------------------------------------------------------------
@@ -7126,8 +7166,6 @@ E.FakeExternalDebuffs = {
     [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
 
     -- Werewolf
-    [39045] = { icon = 'esoui/art/icons/ability_werewolf_001_b.dds', name = A.Skill_Werewolf_Fear, duration = 3200 }, -- Werewolf Fear (Werewolf Transformation - All Morphs)
-    [39040] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance, duration = 5000 }, -- Off-Balance Self (Werewolf Transformation - All Morphs)
     [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
 
     -- Item Sets
@@ -7353,6 +7391,7 @@ E.FakePlayerBuffs = {
 
     -- Aldmeri Dominion
     [33066] = { icon = 'LuiExtended/media/icons/disguises/disguise_fancy_clothing.dds', name = A.Skill_Fancy_Clothing, duration = 0, long = true, ignoreBegin = true }, -- Q4586_ChangeClothes
+    [29504] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = A.Skill_Shadow_Wood, duration = 0, long = true }, -- Q4546 Shade Layer
 
     -- Quest related (Craglorn)
     --[81807] = {icon = 'esoui/art/icons/achievement_104.dds', name = 'Power of the Stars', duration = 22000}, -- Power of the Stars (The Star-Gazers)
@@ -7392,8 +7431,6 @@ E.FakePlayerDebuffs = {
     [70745] = {icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Power_Lash, duration = 2000}, -- Off-Balance Exploit (Flame Lash - Rank 1)
 
     -- Werewolf
-    [39045] = { icon = 'esoui/art/icons/ability_werewolf_001_b.dds', name = A.Skill_Werewolf_Fear, duration = 3200 }, -- Werewolf Fear (Werewolf Transformation - All Morphs)
-    [39040] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance, duration = 5000 }, -- Off-Balance Self (Werewolf Transformation - All Morphs)
     [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
 
     -- Item Sets

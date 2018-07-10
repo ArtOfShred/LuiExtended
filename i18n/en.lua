@@ -2063,6 +2063,7 @@ local strings = {
     SI_LUIE_SKILL_VANITY_PET =                           "Vanity Pet",
     SI_LUIE_SKILL_MOUNTED =                              "Mounted",
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY =                "Resurrection Immunity",
+    SI_LUIE_SKILL_SOUL_GEM_RESURRECTION =                "Soul Gem Resurrection",
     SI_LUIE_SKILL_CROUCH_STUN =                          "Crouch Stun",
     SI_LUIE_SKILL_FALL_DAMAGE =                          "Fall Damage",
     SI_LUIE_SKILL_ABSORBING_SKYSHARD =                   "Absorbing Skyshard",
@@ -2275,6 +2276,8 @@ local strings = {
     SI_LUIE_SKILL_FANCY_CLOTHING_TP =                    "Dressed to impress!",
     SI_LUIE_SKILL_BURROW =                               "You are protected from harm and concealed by burrowing underground.",
     SI_LUIE_SKILL_SERPENT_SPIT =                         "Serpent Spit",
+    SI_LUIE_SKILL_SHADOW_WOOD =                          "Shadow Wood",
+    SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "A servant of the shade of Prince Naemon has dragged you into the Shadow Wood.",
 }
 
 -- TODO: Switch to StringId's
