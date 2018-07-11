@@ -1420,7 +1420,7 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CASTBAR_ENABLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_ENABLE_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.CastBarEnable end,
-                setFunc = function(value) LUIE.CombatInfo.SV.CastBarEnable = value end,
+                setFunc = function(value) LUIE.CombatInfo.SV.CastBarEnable = value LUIE.CombatInfo.RegisterCombatInfo() end,
                 width = "full",
                 default = LUIE.CombatInfo.D.CastBarEnable,
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,

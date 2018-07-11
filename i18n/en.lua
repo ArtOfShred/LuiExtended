@@ -2278,6 +2278,8 @@ local strings = {
     SI_LUIE_SKILL_SERPENT_SPIT =                         "Serpent Spit",
     SI_LUIE_SKILL_SHADOW_WOOD =                          "Shadow Wood",
     SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "A servant of the shade of Prince Naemon has dragged you into the Shadow Wood.",
+
+    SI_LUIE_SKILL_SANIES_LUPINUS_TP =                    "Werewolf Precursor"
 }
 
 -- TODO: Switch to StringId's

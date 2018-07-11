@@ -5146,8 +5146,8 @@ debugAuras = {
             -------------------------------------
 
             [35658] = true, -- Lycanthrophy
-            --[31068] = true, -- Sanies Lupinus (Player Bite)
-            --[40521] = true, -- Sanies Lupinus (Player Bite)
+            --[31068] = true, -- Sanies Lupinus (NPC Bite)
+            [40521] = true, -- Sanies Lupinus (Player Bite)
 
             [32464] = true, -- Light Attack
             [89146] = true, -- Werewolf Bleed
@@ -5175,10 +5175,10 @@ debugAuras = {
             [111925] = true, -- Blood Rage
 
             [32639] = true, -- Bloodmoon (Rank 1)
-            --[40514] = true, -- Ally Bite (Bloodmoon - Rank 1)
+            [40514] = true, -- Ally Bite (Bloodmoon - Rank 1)
             --[40515] = true, -- Devour (Bloodmoon - Rank 1)
-            --[40520] = true, -- Q3047 - Knockdown (Bloodmoon - Rank 1)
-            --[40525] = true, -- Bit an ally (Bloodmoon - Rank 1)
+            [40520] = true, -- Devour (Bloodmoon - Rank 1)
+            [40525] = true, -- Bit an ally (Bloodmoon - Rank 1)
 
             [32638] = true, -- Savage Strength (Rank 1)
             [46139] = true, -- Savage Strength (Rank 2)
