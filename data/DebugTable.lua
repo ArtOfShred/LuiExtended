@@ -5177,7 +5177,7 @@ debugAuras = {
             [32639] = true, -- Bloodmoon (Rank 1)
             [40514] = true, -- Ally Bite (Bloodmoon - Rank 1)
             --[40515] = true, -- Devour (Bloodmoon - Rank 1)
-            [40520] = true, -- Devour (Bloodmoon - Rank 1)
+            [40520] = true, -- Q3047 - Knockdown (Bloodmoon - Rank 1)
             [40525] = true, -- Bit an ally (Bloodmoon - Rank 1)
 
             [32638] = true, -- Savage Strength (Rank 1)
@@ -5303,11 +5303,11 @@ debugAuras = {
 
             [39421] = true, -- Q4961 HircineStun
             [65429] = true, -- Q4961 Songamdir Werewolf
-            [39441] = true, -- Hircine's Power
-            [75008] = true, -- Werewolf Transformation
-            [39457] = true, -- Werewolf Transformation
-            [39458] = true, -- Werewolf Effects
-            [40123] = true, -- Devour Passive
+            --[39441] = true, -- Hircine's Power
+            --[75008] = true, -- Werewolf Transformation
+            --[39457] = true, -- Werewolf Transformation
+            --[39458] = true, -- Werewolf Effects
+            --[40123] = true, -- Devour Passive
 
             [55885] = true, -- Light Attack
             [55886] = true, -- Heavy Attack (Were)
@@ -5319,15 +5319,15 @@ debugAuras = {
             [44687] = true, -- Slow Despawn Self 15M
             [40101] = true, -- Q4961 Feast Swipe
             [40102] = true, -- Q4961 Feast Munch
-            [40124] = true, -- Devour
-            [40125] = true, -- Devour
+            --[40124] = true, -- Devour
+            --[40125] = true, -- Devour
 
             [41057] = true, -- Begin Werewolf
 
-            [73123] = true, -- _CRWN Become Werewolf
-            [73124] = true, -- Stun
-            [73126] = true, -- Werewolf Appearance
-            [73181] = true, -- Werewolf Appearance
+            --[73123] = true, -- _CRWN Become Werewolf
+            --[73124] = true, -- Stun
+            --[73126] = true, -- Werewolf Appearance
+            --[73181] = true, -- Werewolf Appearance
 
             -------------------------------------
             -- DARK BROTHERHOOD PASSIVES --------

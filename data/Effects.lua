@@ -4128,7 +4128,7 @@ E.EffectOverride = {
     [33208] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', hide = true }, -- Devour (Devour - Rank 1)
     [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour - Rank 1)
     [40515] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Blood Moon)
-    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, unbreakable = 1 }, -- Q3047 - Knockdown (Blood Moon)
+    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Q3047 - Knockdown (Blood Moon)
     [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Bloodmoon, A.Set_Cooldown) }, -- Bit an Ally (Blood Moon)
 
     ----------------------------------------------------------------
@@ -4169,7 +4169,7 @@ E.EffectOverride = {
     [55888] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
     [55891] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack Werewolf
     [55890] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Heavy Attack
-    [40124] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Devour
+    [40124] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', hide = true }, -- Devour
     [40125] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour
 
     ----------------------------------------------------------------
