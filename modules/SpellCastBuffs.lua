@@ -1549,7 +1549,11 @@ function SCB.Buff_OnMouseEnter(control)
 end
 
 function SCB.Buff_OnMouseExit(control)
+
     ClearTooltip(GameTooltip)
+    -- TODO: Add Sticky Tooltips
+    --zo_callLater(function() ClearTooltip(GameTooltip) end, 5000)
+
 end
 
 function SCB.CreateSingleIcon(container, AnchorItem, effectType)
@@ -1795,7 +1799,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     end
 
                     g_effectsList[context][ abilityId ] = {
-                        target="player", type=groundType[i].type,
+                        type=groundType[i].type,
                         id=abilityId, name=effectName, icon=iconName,
                         dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
                         forced=nil,
@@ -2596,7 +2600,7 @@ function SCB.ReloadEffects(unitTag)
             local currentTime = GetGameTimeMilliseconds()
             g_effectsList["player1"][ A.Innate_Recall_Penalty ] = {
                 target="player", type=1,
-                id="Fake", name=A.Innate_Recall_Penalty, icon='LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds',
+                id=6811, name=A.Innate_Recall_Penalty, icon='LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds',
                 dur=600000, starts=currentTime, ends=currentTime+recallRemain,
                 forced = "long",
                 restart=true, iconNum=0,

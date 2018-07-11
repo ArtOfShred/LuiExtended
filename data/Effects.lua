@@ -3071,7 +3071,7 @@ E.EffectOverride = {
 
     -- Misc
     [10950] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds', name = A.Innate_Fall_Damage }, -- Fall Snare
-    [6811] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds' }, -- Recall
+    [6811] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', tooltip = T.Innate_Recall_Penalty }, -- Recall
     [37059] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds' }, -- Mount Up
     [14644] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = A.Innate_Revive }, -- Revive (Death Dialogue)
     [31221] = { hide = true }, -- Skyshard Collect (Aura on Skyshard when player collects it)

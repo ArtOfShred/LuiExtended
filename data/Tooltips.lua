@@ -98,6 +98,7 @@ T.Generic_CC_Immunity               = GetString(SI_LUIE_SKILL_GENERIC_CC_IMMUNIT
 -- INNATE/WORLD ---------------------
 -- ---------------------------------------------------
 
+T.Innate_Recall_Penalty             = GetString(SI_LUIE_SKILL_RECALL_PENALTY_TP)
 T.Innate_Ayleid_Well                = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP)
 T.Innate_Ayleid_Well_Fortified      = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP)
 T.Innate_Firelight                  = GetString(SI_LUIE_SKILL_FIRELIGHT_TP)

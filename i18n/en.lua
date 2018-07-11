@@ -2280,7 +2280,8 @@ local strings = {
     SI_LUIE_SKILL_SHADOW_WOOD =                          "Shadow Wood",
     SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "A servant of the shade of Prince Naemon has dragged you into the Shadow Wood.",
 
-    SI_LUIE_SKILL_SANIES_LUPINUS_TP =                    "Werewolf Precursor"
+    SI_LUIE_SKILL_SANIES_LUPINUS_TP =                    "You have been bitten by a Werewolf and contracted Sanies Lupinus.",
+    SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "You have recently recalled to a Wayshrine and must pay an additional gold fee to do so again.",
 }
 
 -- TODO: Switch to StringId's
