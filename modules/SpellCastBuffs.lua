@@ -1502,7 +1502,7 @@ function SCB.Buff_OnMouseEnter(control)
         end
 
         --local displayName = GetDisplayName()
-        if tooltipText == "" and type(control.effectId) == "number" and displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+        if tooltipText == "" and type(control.effectId) == "number" and (displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy") then
             if GetAbilityDescription(control.effectId) ~= "" then
                 tooltipText = "|c3A92FFDescription:|r " .. GetAbilityDescription(control.effectId) or ""
             end

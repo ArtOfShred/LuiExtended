@@ -2,7 +2,6 @@
 -- AbilityTables namespace
 local A = {}
 
--- TODO - need to add all major/minor effects here
 -- ---------------------------------------------------
 -- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------
 -- ---------------------------------------------------
@@ -40,7 +39,7 @@ A.Skill_Minor_Evasion               = 61715
 A.Skill_Major_Evasion               = 61716
 A.Skill_Minor_Expedition            = 40219
 A.Skill_Major_Expedition            = 23216
---A.Skill_Minor_Gallop                =
+--A.Skill_Minor_Gallop              =
 A.Skill_Major_Gallop                = 57472
 A.Skill_Minor_Heroism               = 38746
 A.Skill_Major_Heroism               = 61709

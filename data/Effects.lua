@@ -4,6 +4,7 @@ LUIE.Effects = {}
 
 -- Performance Enhancement
 local E = LUIE.Effects
+local T = LUIE.Tooltips
 local A = LUIE.GetAbility()
 
 -- List of abilities considered for Ultimate generation - used by CombatInfo to determine when Ultimate is being generated
@@ -2061,62 +2062,61 @@ E.ArtificialEffectOverride = {
     [2] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds', name = A.Skill_Battle_Spirit }, -- Battle Spirit Imperial City
 }
 
+-- Table of tooltips to add a third line to for Major/Minor effects. These describe the effect.
 E.TooltipNameOverride = {
+    [A.Skill_Minor_Resolve]         = T.Skill_Minor_Resolve,
+    [A.Skill_Major_Resolve]         = T.Skill_Major_Resolve,
+    [A.Skill_Minor_Ward]            = T.Skill_Minor_Ward,
+    [A.Skill_Major_Ward]            = T.Skill_Major_Ward,
+    [A.Skill_Minor_Fortitude]       = T.Skill_Minor_Fortitude,
+    [A.Skill_Major_Fortitude]       = T.Skill_Major_Fortitude,
+    [A.Skill_Minor_Endurance]       = T.Skill_Minor_Endurance,
+    [A.Skill_Major_Endurance]       = T.Skill_Major_Endurance,
+    [A.Skill_Minor_Intellect]       = T.Skill_Minor_Intellect,
+    [A.Skill_Major_Intellect]       = T.Skill_Major_Intellect,
+    [A.Skill_Minor_Sorcery]         = T.Skill_Minor_Sorcery,
+    [A.Skill_Major_Sorcery]         = T.Skill_Major_Sorcery,
+    [A.Skill_Minor_Prophecy]        = T.Skill_Minor_Prophecy,
+    [A.Skill_Major_Prophecy]        = T.Skill_Major_Prophecy,
+    [A.Skill_Minor_Brutality]       = T.Skill_Minor_Brutality,
+    [A.Skill_Major_Brutality]       = T.Skill_Major_Brutality,
+    [A.Skill_Minor_Savagery]        = T.Skill_Minor_Savagery,
+    [A.Skill_Major_Savagery]        = T.Skill_Major_Savagery,
+    [A.Skill_Minor_Berserk]         = T.Skill_Minor_Berserk,
+    [A.Skill_Major_Berserk]         = T.Skill_Major_Berserk,
+    [A.Skill_Minor_Force]           = T.Skill_Minor_Force,
+    [A.Skill_Major_Force]           = T.Skill_Major_Force,
+    [A.Skill_Minor_Vitality]        = T.Skill_Minor_Vitality,
+    [A.Skill_Major_Vitality]        = T.Skill_Major_Vitality,
+    [A.Skill_Minor_Mending]         = T.Skill_Minor_Mending,
+    [A.Skill_Major_Mending]         = T.Skill_Major_Mending,
+    [A.Skill_Minor_Protection]      = T.Skill_Minor_Protection,
+    [A.Skill_Major_Protection]      = T.Skill_Major_Protection,
+    [A.Skill_Minor_Evasion]         = T.Skill_Minor_Evasion,
+    [A.Skill_Major_Evasion]         = T.Skill_Major_Evasion,
+    [A.Skill_Minor_Expedition]      = T.Skill_Minor_Expedition,
+    [A.Skill_Major_Expedition]      = T.Skill_Major_Expedition,
+    [A.Skill_Major_Gallop]          = T.Skill_Major_Gallop,
+    [A.Skill_Minor_Heroism]         = T.Skill_Minor_Heroism,
+    [A.Skill_Major_Heroism]         = T.Skill_Major_Heroism,
+    [A.Skill_Minor_Toughness]       = T.Skill_Minor_Toughness,
+    [A.Skill_Major_Courage]         = T.Skill_Major_Courage,
 
-    [A.Skill_Minor_Resolve] = GetString(SI_LUIE_SKILL_MINOR_RESOLVE_TP),
-    [A.Skill_Major_Resolve] = GetString(SI_LUIE_SKILL_MAJOR_RESOLVE_TP),
-    [A.Skill_Minor_Ward] = GetString(SI_LUIE_SKILL_MINOR_WARD_TP),
-    [A.Skill_Major_Ward] = GetString(SI_LUIE_SKILL_MAJOR_WARD_TP),
-    [A.Skill_Minor_Fortitude] = GetString(SI_LUIE_SKILL_MINOR_FORTITUDE_TP),
-    [A.Skill_Major_Fortitude] = GetString(SI_LUIE_SKILL_MAJOR_FORTITUDE_TP),
-    [A.Skill_Minor_Endurance] = GetString(SI_LUIE_SKILL_MINOR_ENDURANCE_TP),
-    [A.Skill_Major_Endurance] = GetString(SI_LUIE_SKILL_MAJOR_ENDURANCE_TP),
-    [A.Skill_Minor_Intellect] = GetString(SI_LUIE_SKILL_MINOR_INTELLECT_TP),
-    [A.Skill_Major_Intellect] = GetString(SI_LUIE_SKILL_MAJOR_INTELLECT_TP),
-    [A.Skill_Minor_Sorcery] = GetString(SI_LUIE_SKILL_MINOR_SORCERY_TP),
-    [A.Skill_Major_Sorcery] = GetString(SI_LUIE_SKILL_MAJOR_SORCERY_TP),
-    [A.Skill_Minor_Prophecy] = GetString(SI_LUIE_SKILL_MINOR_PROPHECY_TP),
-    [A.Skill_Major_Prophecy] = GetString(SI_LUIE_SKILL_MAJOR_PROPHECY_TP),
-    [A.Skill_Minor_Brutality] = GetString(SI_LUIE_SKILL_MINOR_BRUTALITY_TP),
-    [A.Skill_Major_Brutality] = GetString(SI_LUIE_SKILL_MAJOR_BRUTALITY_TP),
-    [A.Skill_Minor_Savagery] = GetString(SI_LUIE_SKILL_MINOR_SAVAGERY_TP),
-    [A.Skill_Major_Savagery] = GetString(SI_LUIE_SKILL_MAJOR_SAVAGERY_TP),
-    [A.Skill_Minor_Berserk] = GetString(SI_LUIE_SKILL_MINOR_BERSERK_TP),
-    [A.Skill_Major_Berserk] = GetString(SI_LUIE_SKILL_MAJOR_BERSERK_TP),
-    [A.Skill_Minor_Force] = GetString(SI_LUIE_SKILL_MINOR_FORCE_TP),
-    [A.Skill_Major_Force] = GetString(SI_LUIE_SKILL_MAJOR_FORCE_TP),
-    [A.Skill_Minor_Vitality] = GetString(SI_LUIE_SKILL_MINOR_VITALITY_TP),
-    [A.Skill_Major_Vitality] = GetString(SI_LUIE_SKILL_MAJOR_VITALITY_TP),
-    [A.Skill_Minor_Mending] = GetString(SI_LUIE_SKILL_MINOR_MENDING_TP),
-    [A.Skill_Major_Mending] = GetString(SI_LUIE_SKILL_MAJOR_MENDING_TP),
-    [A.Skill_Minor_Protection] = GetString(SI_LUIE_SKILL_MINOR_PROTECTION_TP),
-    [A.Skill_Major_Protection] = GetString(SI_LUIE_SKILL_MAJOR_PROTECTION_TP),
-    [A.Skill_Minor_Evasion] = GetString(SI_LUIE_SKILL_MINOR_EVASION_TP),
-    [A.Skill_Major_Evasion] = GetString(SI_LUIE_SKILL_MAJOR_EVASION_TP),
-    [A.Skill_Minor_Expedition] = GetString(SI_LUIE_SKILL_MINOR_EXPEDITION_TP),
-    [A.Skill_Major_Expedition] = GetString(SI_LUIE_SKILL_MAJOR_EXPEDITION_TP),
-    [A.Skill_Major_Gallop] = GetString(SI_LUIE_SKILL_MAJOR_GALLOP_TP),
-    [A.Skill_Minor_Heroism] = GetString(SI_LUIE_SKILL_MINOR_HEROISM_TP),
-    [A.Skill_Major_Heroism] = GetString(SI_LUIE_SKILL_MAJOR_HEROISM_TP),
-    [A.Skill_Minor_Toughness] = GetString(SI_LUIE_SKILL_MINOR_TOUGHNESS_TP),
-    [A.Skill_Major_Courage] = GetString(SI_LUIE_SKILL_MAJOR_COURAGE_TP),
-
-    [A.Skill_Minor_Breach] = GetString(SI_LUIE_SKILL_MINOR_BREACH_TP),
-    [A.Skill_Major_Breach] = GetString(SI_LUIE_SKILL_MAJOR_BREACH_TP),
-    [A.Skill_Minor_Fracture] = GetString(SI_LUIE_SKILL_MINOR_FRACTURE_TP),
-    [A.Skill_Major_Fracture] = GetString(SI_LUIE_SKILL_MAJOR_FRACTURE_TP),
-    [A.Skill_Minor_Vulnerability] = GetString(SI_LUIE_SKILL_MINOR_VULNERABILITY_TP),
-    [A.Skill_Minor_Maim] = GetString(SI_LUIE_SKILL_MINOR_MAIM_TP),
-    [A.Skill_Major_Maim] = GetString(SI_LUIE_SKILL_MAJOR_MAIM_TP),
-    [A.Skill_Minor_Defile] = GetString(SI_LUIE_SKILL_MINOR_DEFILE_TP),
-    [A.Skill_Major_Defile] = GetString(SI_LUIE_SKILL_MAJOR_DEFILE_TP),
-    [A.Skill_Minor_Magickasteal] = GetString(SI_LUIE_SKILL_MINOR_MAGICKASTEAL_TP),
-    [A.Skill_Minor_Lifesteal] = GetString(SI_LUIE_SKILL_MINOR_LIFESTEAL_TP),
-    [A.Skill_Minor_Enveration] = GetString(SI_LUIE_SKILL_MINOR_ENERVATION_TP),
-    [A.Skill_Minor_Uncertainty] = GetString(SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP),
-    [A.Skill_Minor_Cowardice] = GetString(SI_LUIE_SKILL_MINOR_COWARDICE_TP),
-    [A.Skill_Minor_Mangle] = GetString(SI_LUIE_SKILL_MINOR_MANGLE_TP),
-
+    [A.Skill_Minor_Breach]          = T.Skill_Minor_Breach,
+    [A.Skill_Major_Breach]          = T.Skill_Major_Breach,
+    [A.Skill_Minor_Fracture]        = T.Skill_Minor_Fracture,
+    [A.Skill_Major_Fracture]        = T.Skill_Major_Fracture,
+    [A.Skill_Minor_Vulnerability]   = T.Skill_Minor_Vulnerability,
+    [A.Skill_Minor_Maim]            = T.Skill_Minor_Maim,
+    [A.Skill_Major_Maim]            = T.Skill_Major_Maim,
+    [A.Skill_Minor_Defile]          = T.Skill_Minor_Defile,
+    [A.Skill_Major_Defile]          = T.Skill_Major_Defile,
+    [A.Skill_Minor_Magickasteal]    = T.Skill_Minor_Magickasteal,
+    [A.Skill_Minor_Lifesteal]       = T.Skill_Minor_Lifesteal,
+    [A.Skill_Minor_Enveration]      = T.Skill_Minor_Enveration,
+    [A.Skill_Minor_Uncertainty]     = T.Skill_Minor_Uncertainty,
+    [A.Skill_Minor_Cowardice]       = T.Skill_Minor_Cowardice,
+    [A.Skill_Minor_Mangle]          = T.Skill_Minor_Mangle,
 }
 
 E.EffectOverride = {
@@ -2898,7 +2898,7 @@ E.EffectOverride = {
     [90938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Set_Immortal_Warrior, A.Set_Cooldown) }, -- Immortal Warrior (Immortal Yokeda)
     [86907] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
     [50992] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
-    [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', tooltip = GetString(SI_LUIE_SKILL_MINOR_AEGIS_TP) }, -- Minor Aegis (Eternal Yokeda)
+    [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', tooltip = T.Skill_Minor_Aegis }, -- Minor Aegis (Eternal Yokeda)
     [90940] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', unbreakable = 1 }, -- Eternal Warrior (Eternal Yokeda)
     [61437] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds' }, -- Eternal Warrior (Eternal Yokeda)
     [90939] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Set_Eternal_Warrior, A.Set_Cooldown) }, -- Eternal Warrior (Eternal Yokeda)
@@ -2908,20 +2908,20 @@ E.EffectOverride = {
     [51320] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', name = A.Set_Destructive_Mage }, -- Mage Destruction Bomb (Aether... of Destruction)
     [51443] = { icon = 'LuiExtended/media/icons/abilities/ability_set_healing_mage.dds', name = A.Set_Healing_Mage }, -- Healing Bane (of Mending)
     [51434] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Minor Vulnerability (Aether ... of Strategy)
-    [76617] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP) }, -- Minor Slayer (of the Infallible Aether)
+    [76617] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = T.Skill_Minor_Slayer }, -- Minor Slayer (of the Infallible Aether)
     [81519] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Minor Vulnerability (of the Infallible Aether)
 
     -- Trial Sets (Sanctum Ophidia)
     [51241] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Poisonous Serpent (Ophidian ... of Venom)
     [51176] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_010.dds' }, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
-    [98103] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP) }, -- Minor Slayer (of the Vicious Ophidian)
+    [98103] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = T.Skill_Minor_Slayer }, -- Minor Slayer (of the Vicious Ophidian)
     [81524] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', name = A.Skill_Major_Expedition }, -- Quick Serpent (of the Vicious Ophidian)
     [81522] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicious_serpent.dds', name = A.Set_Vicious_Serpent }, -- Serpent Stamina (of the Vicious Ophidian)
 
     -- Trial Sets (Maw of Lorkhaj)
     [75801] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_lunar.dds' }, -- Lunar Blessing (Moondancer)
     [75804] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_shadow.dds' }, -- Shadow Blessing (Moondancer)
-    [98102] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP) }, -- Minor Slayer (of Alkosh)
+    [98102] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = T.Skill_Minor_Slayer }, -- Minor Slayer (of Alkosh)
     [75752] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Roar of Alkosh (of Alkosh)
     [75753] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Line Breaker (of Alkosh)
     [76667] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Roar of Alkosh (of Alkosh)
@@ -2929,10 +2929,10 @@ E.EffectOverride = {
     [75770] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds' }, -- Twilight Remedy (of Twilight Remedy)
 
     -- Trial Sets (Halls of Fabrication)
-    [93444] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', tooltip = GetString(SI_LUIE_SKILL_MAJOR_AEGIS_TP) }, -- Major Aegis (Automated Defense)
-    [93125] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', tooltip = GetString(SI_LUIE_SKILL_MAJOR_AEGIS_TP) }, -- Major Aegis (Inventor's Guard)
-    [93120] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds', tooltip = GetString(SI_LUIE_SKILL_MAJOR_SLAYER_TP) }, -- Major Slayer (Master Architect)
-    [93442] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds', tooltip = GetString(SI_LUIE_SKILL_MAJOR_SLAYER_TP) }, -- Major Slayer (War Machine)
+    [93444] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', tooltip = T.Skill_Major_Aegis }, -- Major Aegis (Automated Defense)
+    [93125] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds', tooltip = T.Skill_Major_Aegis }, -- Major Aegis (Inventor's Guard)
+    [93120] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds', tooltip = T.Skill_Minor_Slayer }, -- Major Slayer (Master Architect)
+    [93442] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds', tooltip = T.Skill_Minor_Slayer }, -- Major Slayer (War Machine)
 
     -- Trial Sets (Cloudrest)
     [109994] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds' }, -- Major Courage (Olirime's)
@@ -3081,8 +3081,8 @@ E.EffectOverride = {
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off-Balance
     [102771] = { stack = 0, type = 1 }, -- Off Balance Immunity
     [85701] = { hide = true }, -- Dueling Flag
-    [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well, tooltip = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP) }, -- Ayleid Health Bonus
-    [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well_Fortified, tooltip = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP) }, -- Ayleid Health Bonus
+    [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well, tooltip = T.Innate_Ayleid_Well }, -- Ayleid Health Bonus
+    [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well_Fortified, tooltip = T.Innate_Ayleid_Well_Fortified }, -- Ayleid Health Bonus
     [105188] = { hide = true }, -- Grim Focus Combat Trigger
     [105190] = { hide = true }, -- Grim Focus Combat Trigger
     [105192] = { hide = true }, -- Grim Focus Combat Trigger
@@ -3154,7 +3154,7 @@ E.EffectOverride = {
 
     -- Misc World + Theater
     [822] = { hide = true }, -- Ward
-    [48899] = { icon = 'esoui/art/icons/achievement_newlifefestival_007.dds', tooltip = GetString(SI_LUIE_SKILL_FIRELIGHT_TP) }, -- Firelight
+    [48899] = { icon = 'esoui/art/icons/achievement_newlifefestival_007.dds', tooltip = T.Innate_Firelight }, -- Firelight
 
     ----------------------------------------------------------------
     -- DRAGONKNIGHT PASSIVES ---------------------------------------
@@ -4116,10 +4116,10 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     [35658] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_lycanthrophy.dds' }, -- Lycanthrophy
-    [31068] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = GetString(SI_LUIE_SKILL_SANIES_LUPINUS_TP) }, -- Sanies Lupinus (from NPC Bite)
-    [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = GetString(SI_LUIE_SKILL_SANIES_LUPINUS_TP) }, -- Sanies Lupinus (from Player Bite)
+    [31068] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = T.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from NPC Bite)
+    [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = T.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from Player Bite)
     [32464] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Light Attack
-    [89146] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_BLEED_TP) }, -- Werewolf Bleed
+    [89146] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', tooltip = T.Generic_Bleed }, -- Werewolf Bleed
     [32477] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Were)
     [32479] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
     [32480] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack Werewolf
@@ -4128,7 +4128,7 @@ E.EffectOverride = {
     [33208] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', hide = true }, -- Devour (Devour - Rank 1)
     [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour - Rank 1)
     [40515] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Blood Moon)
-    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Q3047 - Knockdown (Blood Moon)
+    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, unbreakable = 1, tooltip = T.Generic_Stun }, -- Q3047 - Knockdown (Blood Moon)
     [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Bloodmoon, A.Set_Cooldown) }, -- Bit an Ally (Blood Moon)
 
     ----------------------------------------------------------------
@@ -4147,9 +4147,9 @@ E.EffectOverride = {
 
     [39477] = { hide = true }, -- De-Werewolf (Werewolf Transformation - All Morphs)
 
-    [111832] = { tooltip = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP) }, -- Werewolf Transformation
+    [111832] = { tooltip = T.Generic_Fear }, -- Werewolf Transformation
 
-    [111843] = { tooltip = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP) }, -- Pack Leader
+    [111843] = { tooltip = T.Generic_Fear }, -- Pack Leader
     [80180] = { hide = true }, -- Birth Direwolf (Pack Leader)
     [80177] = { hide = true }, -- Pack Leader (Pack Leader)
     [80178] = { hide = true }, -- Pack Leader (Pack Leader)
@@ -4157,8 +4157,8 @@ E.EffectOverride = {
     [80189] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
     [80190] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
 
-    [111844] = { icon = 'esoui/art/icons/ability_werewolf_001_b.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP) }, -- Werewolf Berserker
-    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', name = A.Skill_Werewolf_Bleed, tooltip = GetString(SI_LUIE_SKILL_GENERIC_BLEED_TP) }, -- Werewolf Berserker Bleed (Werewolf Bleed)
+    [111844] = { icon = 'esoui/art/icons/ability_werewolf_001_b.dds', tooltip = T.Generic_Fear }, -- Werewolf Berserker
+    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', name = A.Skill_Werewolf_Bleed, tooltip = T.Generic_Bleed }, -- Werewolf Berserker Bleed (Werewolf Bleed)
 
     ----------------------------------------------------------------
     -- WEREWOLF QUEST ABILITIES ------------------------------------
@@ -6604,12 +6604,12 @@ E.EffectOverride = {
     [23187] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_bind_hands.dds', name = A.Skill_Unbind }, -- Q4236 PC Untie Palith
 
     -- Preventative Measure
-    [23606] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback_crystal.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Crystal, A.Skill_Backfire), unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Q4326 Crystal Backfire
+    [23606] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback_crystal.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Crystal, A.Skill_Backfire), unbreakable = 1, tooltip = T.Generic_Stun }, -- Q4326 Crystal Backfire
     [24535] = { hide = true }, -- Disrupting...
 
     -- Blessings of the Eight
     [47149] = { hide = true }, -- Magefire
-    [23159] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_divine_speed.dds', tooltip = GetString(SI_LUIE_SKILL_DIVINE_SPEED_TP) }, -- Divine Speed
+    [23159] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_divine_speed.dds', tooltip = T.Skill_Divine_Speed }, -- Divine Speed
     [22728] = { hide = true }, -- Water Beam
     [23217] = { hide = true }, -- Fire Beam
 
@@ -6626,15 +6626,15 @@ E.EffectOverride = {
     -- World Boss - Nindaeril's Perch
     [83515] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds' }, -- Hunter's Pounce (Bavura the Blizzard)
     [83517] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds' }, -- Hunter's Pounce (Bavura the Blizzard)
-    [84018] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Hunter's Pounce (Bavura the Blizzard)
+    [84018] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds', tooltip = T.Generic_Stun }, -- Hunter's Pounce (Bavura the Blizzard)
     [83521] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_hunters_pounce.dds' }, -- Hunter's Pounce (Bavura the Blizzard)
     [83832] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds' }, -- Frenzied Charge (Nindaeril the Monsoon)
     [83833] = { hide = true }, -- Frenzied Charge (Nindaeril the Monsoon)
     [83846] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds' }, -- Frenzied Charge (Nindaeril the Monsoon)
-    [83855] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Frenzied Charge (Nindaeril the Monsoon)
+    [83855] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds', tooltip = T.Generic_Stun }, -- Frenzied Charge (Nindaeril the Monsoon)
     [83852] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_frenzied_charge.dds' }, -- Frenzied Charge (Nindaeril the Monsoon)
     [83548] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_mighty_roar.dds' }, -- Mighty Roar (Nindaeril the Monsoon)
-    [83549] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_mighty_roar.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP) }, -- Mighty Roar (Nindaeril the Monsoon)
+    [83549] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_mighty_roar.dds', tooltip = T.Generic_Fear }, -- Mighty Roar (Nindaeril the Monsoon)
 
     -- Public Dungeon - Root Sunder Ruins
     [34176] = { hide = true }, -- Blue Flam (The Bonemonger)
@@ -6649,7 +6649,7 @@ E.EffectOverride = {
     [37295] = { hide = true }, -- Q4868 Change Beast Person
     [38499] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = A.Skill_Lightning_Strike }, -- Wrath
     [38500] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = A.Skill_Lightning_Strike }, -- Wrath
-    [37438] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = A.Skill_Lightning_Strike, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Shocked
+    [37438] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = A.Skill_Lightning_Strike, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Stun }, -- Shocked
     [38516] = { hide = true }, -- Q4868 Rufinus Is Lightning
     [47720] = { hide = true }, -- RobS Stun 1 Sec
     [37463] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', name = A.Skill_Push }, -- Q4868 Push NPC
@@ -6658,18 +6658,18 @@ E.EffectOverride = {
     [38596] = { hide = true }, -- Q4842 Stun
     [37583] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_old_scroll.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Dispel, A.Skill_Barrier) }, -- Q4868 Unlock Chapel
     [38744] = { hide = true }, -- Q4868 Sheo Teleports Player
-    [38720] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_lightning_fury.dds', tooltip = GetString(SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP) }, -- Lightning Fury
+    [38720] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_lightning_fury.dds', tooltip = T.Skill_Lightning_Fury }, -- Lightning Fury
     [47710] = { hide = true }, -- Lightning Fury
     [38748] = { icon = 'esoui/art/icons/ability_mage_036.dds', hide = true }, -- Aulus's Tongue
-    [63710] = { icon = 'esoui/art/icons/ability_mage_036.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Aulus's Tongue
+    [63710] = { icon = 'esoui/art/icons/ability_mage_036.dds', tooltip = T.Generic_Stun }, -- Aulus's Tongue
     [40702] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shockwave.dds', name = A.Skill_Shockwave }, -- Q4868 Aulus Knockback
     [44100] = { hide = true }, -- Q4868 Aulus Knockback
     [47709] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shockwave.dds', name = A.Skill_Shockwave }, -- Q4868 Aulus Knockback
 
     -- A Lasting Winter
     [38394] = { hide = true }, -- Shatter
-    [47762] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, duration = 3, tooltip = GetString(SI_LUIE_SKILL_GENERIC_CC_IMMUNITY) }, -- Spawn Clone (General Endare)
-    [47768] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, tooltip = GetString(SI_LUIE_SKILL_GENERIC_CC_IMMUNITY) }, -- RobS Immunities 6 Sec (General Endare)
+    [47762] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, duration = 3, tooltip = T.Generic_CC_Immunity }, -- Spawn Clone (General Endare)
+    [47768] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, tooltip = T.Generic_CC_Immunity }, -- RobS Immunities 6 Sec (General Endare)
     [38441] = { hide = true }, -- Become
     [47783] = { hide = true }, -- Become
 
@@ -6692,7 +6692,7 @@ E.EffectOverride = {
 
     [43820] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds' }, -- Quaking Stomp (Prince Naemon)
     [43822] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds' }, -- Quaking Stomp (Prince Naemon)
-    [43823] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds', name = A.Skill_Quaking_Stomp, unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP) }, -- IntroKB (Prince Naemon)
+    [43823] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds', name = A.Skill_Quaking_Stomp, unbreakable = 1, tooltip = T.Generic_Knockback }, -- IntroKB (Prince Naemon)
     [43821] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds', name = A.Skill_Quaking_Stomp }, -- Staggering Roar (Prince Naemon)
     [43827] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_projectile_vomit.dds', hide = true }, -- Projectile Vomit (Prince Naemon)
     [43828] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_projectile_vomit.dds', name = A.Skill_Projectile_Vomit }, -- Belch (Prince Naemon)
@@ -6704,12 +6704,12 @@ E.EffectOverride = {
     -- The Blacksap's Hold
     [39247] = { hide = true }, -- RobS Stun .5 Sec
     [39244] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', name = A.Skill_Push }, -- Q4917 Push Player Back
-    [39260] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', name = A.Skill_Push, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP) }, -- Q4917 Push Player Back
+    [39260] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', name = A.Skill_Push, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Q4917 Push Player Back
     [41342] = { hide = true }, -- 10 Second Timer
     [39312] = { hide = true }, -- CON_Portal Perm
     [39308] = { hide = true }, -- Stun
     [39384] = { hide = true }, -- Q4917 Lurcher Construct Ground
-    [41325] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_blacksaps_brew.dds', tooltip = GetString(SI_LUIE_SKILL_BLACKSAPS_BREW_TP) }, -- Blacksap's Brew
+    [41325] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_blacksaps_brew.dds', tooltip = T.Skill_Blacksaps_Brew }, -- Blacksap's Brew
 
     -- Luck of the Albatross
     [35984] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_captains_whistle.dds', name = A.Skill_Call_for_Help }, -- Q4436 Summon Pirate
@@ -6726,26 +6726,26 @@ E.EffectOverride = {
     -- Bosmer Insight
     [36438] = { hide = true }, -- Q4833
     [36544] = { hide = true }, -- Fast Jumper
-    [35991] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_vision_journey.dds', tooltip = GetString(SI_LUIE_SKILL_VISION_JOURNEY_TP) }, -- Vision Journey
+    [35991] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_vision_journey.dds', tooltip = T.Skill_Vision_Journey }, -- Vision Journey
     [36883] = { hide = true }, -- Q4833 Teleport into Tree
     [36882] = { hide = true }, -- Q4833 Teleport into Tree
     [36710] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_snake_scales.dds', name = A.Skill_Snake_Scales }, -- Q4833 Apply Snake Buff
-    [36713] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_snake_scales.dds', tooltip = GetString(SI_LUIE_SKILL_SNAKE_SCALES_TP) }, -- Snake Scales
+    [36713] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_snake_scales.dds', tooltip = T.Skill_Snakes_Scales }, -- Snake Scales
     [36841] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wolfs_pelt.dds', name = A.Skill_Wolfs_Pelt }, -- Q4833 Apply Wolf Buff
-    [36843] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wolfs_pelt.dds', tooltip = GetString(SI_LUIE_SKILL_WOLFS_PELT_TP) }, -- Wolf's Pelt
+    [36843] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wolfs_pelt.dds', tooltip = T.Skill_Wolfs_Pelt }, -- Wolf's Pelt
     [36824] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_tigers_fur.dds', name = A.Skill_Tigers_Fur }, -- Q4833 Apply Tiger Buff
-    [36828] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_tigers_fur.dds', tooltip = GetString(SI_LUIE_SKILL_TIGERS_FUR_TP) }, -- Tiger's Fur
+    [36828] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_tigers_fur.dds', tooltip = T.Skill_Tigers_Fur }, -- Tiger's Fur
 
     -- The Unquiet Dead
     [37062] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_bone_scepter.dds', hide = true }, -- Exorcise
     [36887] = { hide = true }, -- Kithshade Stun
-    [36766] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_headgrab.dds', name = A.Skill_Feedback, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP), unbreakable = 1 }, -- Q4842 Stun Headgrab Knockback
+    [36766] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_headgrab.dds', name = A.Skill_Feedback, tooltip = T.Generic_Stun, unbreakable = 1 }, -- Q4842 Stun Headgrab Knockback
     [36998] = { hide = true }, -- Bind Spirit
     [36996] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_bone_scepter.dds' }, -- Bind Spirit
     [37365] = { hide = true }, -- Q4842 Stun
 
     -- Eyes of Azura
-    [37205] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_sigil_geode.dds', name = A.Skill_Soul_Binding, tooltip = GetString(SI_LUIE_SKILL_SOUL_BINDING_TP) }, -- Animus Geode
+    [37205] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_sigil_geode.dds', name = A.Skill_Soul_Binding, tooltip = T.Skill_Soul_Binding }, -- Animus Geode
     [37677] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_sigil_geode.dds', name = A.Skill_Soul_Binding }, -- Geodesic Corruption
     [37211] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_sigil_geode.dds', name = A.Skill_Empower_Heart }, -- Q4854 Empower Heart
     [37386] = { hide = true }, -- Vas out
@@ -6768,53 +6768,53 @@ E.EffectOverride = {
     [84206] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_gtaoe.dds', hide = true }, -- Stinging Sputum (Gathongor the Mauler)
     [84196] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Marsh Masher (Gathongor the Mauler)
     [84203] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds', hide = true }, -- Marsh Masher (Gathongor the Mauler)
-    [84197] = { name = A.Innate_Stagger, hide = true, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STAGGER_TP) }, -- Marsh Masher (Gathongor the Mauler)
+    [84197] = { name = A.Innate_Stagger, hide = true, tooltip = T.Generic_Stagger }, -- Marsh Masher (Gathongor the Mauler)
     [84208] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_savage_swipe.dds' }, -- Savage Swipe (Gathongor the Mauler)
-    [84209] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_wrecking_jaws.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Wrecking Jaws (Gathongor the Mauler)
+    [84209] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_wrecking_jaws.dds', tooltip = T.Generic_Stun }, -- Wrecking Jaws (Gathongor the Mauler)
     [84211] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_wrecking_jaws.dds' }, -- Wrecking Jaws (Gathongor the Mauler)
-    [84210] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_wrecking_jaws.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_BLEED_TP) }, -- Wrecking Jaws (Gathongor the Mauler)
+    [84210] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_wrecking_jaws.dds', tooltip = T.Generic_Bleed }, -- Wrecking Jaws (Gathongor the Mauler)
     [84138] = { hide = true }, -- Minion of Stone (Gathongor the Mauler)
     [84139] = { hide = true }, -- Minion of Stone (Gathongor the Mauler)
     [84212] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_bog_slam.dds' }, -- Bog Slam (Gathongor the Mauler)
-    [84214] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_bog_slam.dds', type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = GetString(SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP) }, -- Bog Slam (Gathongor the Mauler)
+    [84214] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_bog_slam.dds', type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = T.Generic_Knockdown }, -- Bog Slam (Gathongor the Mauler)
     [84213] = { icon = 'LuiExtended/media/icons/abilities/ability_argonianbehemoth_bog_slam.dds' }, -- Bog Slam (Gathongor the Mauler)
 
     -- World Boss - Thodundor's View
     [83164] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_punch.dds' }, -- Clobber (Thodundor of the Hill)
     [83165] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_backhand.dds' }, -- Sweeping Backhand (Thodundor of the Hill)
-    [83124] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP) }, -- Ferocious Bellow (Thodundor of the Hill)
+    [83124] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds', tooltip = T.Generic_Fear }, -- Ferocious Bellow (Thodundor of the Hill)
     [83155] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Thunderous Smash (Thodundor of the Hill)
     [83156] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Thunderous Smash (Thodundor of the Hill)
     [83159] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Thunderous Smash (Thodundor of the Hill)
-    [83157] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Thunderous Smash (Thodundor of the Hill)
+    [83157] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds', tooltip = T.Generic_Stun }, -- Thunderous Smash (Thodundor of the Hill)
     [83160] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Stone Crusher (Thodundor of the Hill)
     [83163] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Stone Crusher (Thodundor of the Hill)
     [83162] = { name = A.Skill_Off_Balance }, -- Stone Crusher (Thodundor of the Hill)
-    [83161] = { name = A.Innate_Stagger, hide = true, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STAGGER_TP) }, -- Stone Crusher (Thodundor of the Hill)
+    [83161] = { name = A.Innate_Stagger, hide = true, tooltip = T.Generic_Stagger }, -- Stone Crusher (Thodundor of the Hill)
     [83136] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds', hide = true }, -- Ground Shock (Thodundor of the Hill)
     [83140] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Ground Shock (Thodundor of the Hill)
-    [83141] = { name = A.Innate_Stagger, hide = true, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STAGGER_TP) }, -- Ground Shock (Thodundor of the Hill)
+    [83141] = { name = A.Innate_Stagger, hide = true, tooltip = T.Generic_Stagger }, -- Ground Shock (Thodundor of the Hill)
     [83137] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_shattered_ground.dds' }, -- Ground Shock (Thodundor of the Hill)
     [83777] = { icon = 'esoui/art/icons/ability_dragonknight_005.dds', hide = true }, -- Iron Grip (Thodundor of the Hill)
-    [83780] = { icon = 'esoui/art/icons/ability_dragonknight_005.dds', tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Iron Grip (Thodundor of the Hill)
+    [83780] = { icon = 'esoui/art/icons/ability_dragonknight_005.dds', tooltip = T.Generic_Stun }, -- Iron Grip (Thodundor of the Hill)
 
     -- Public Dungeon - Rulanyil's Fall
     [33581] = { hide = true }, -- DUN-RF_Event_Blue_Fire
 
     -- Audience with the Wilderking
-    [37759] = { icon = 'esoui/art/icons/achievement_030.dds', tooltip = GetString(SI_LUIE_SKILL_SPIRIT_ARMOR_TP) }, -- Spirit Armor
+    [37759] = { icon = 'esoui/art/icons/achievement_030.dds', tooltip = T.Skill_Spirit_Armor }, -- Spirit Armor
 
     -- The Witch of Silatar
-    [33384] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_grasping_vines.dds', name = A.Skill_Restricting_Vines, unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP) }, -- Q4586 Aranias Vine Stun
-    [33066] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_change_clothes.dds', name = A.Skill_Change_Clothes, tooltip = GetString(SI_LUIE_SKILL_FANCY_CLOTHING_TP) }, -- Q4586_ChangeClothes
+    [33384] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_grasping_vines.dds', name = A.Skill_Restricting_Vines, unbreakable = 1, tooltip = T.Generic_Stun }, -- Q4586 Aranias Vine Stun
+    [33066] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_change_clothes.dds', name = A.Skill_Change_Clothes, tooltip = T.Skill_Fancy_Clothing }, -- Q4586_ChangeClothes
     [49116] = { hide = true }, -- Q4586_HugeTree
 
     -- Throne of the Wilderking
     [35014] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wilderkings_protection.dds' }, -- Wilderking's Protection
     [33594] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', hide = true }, -- Fire
-    [49897] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', unbreakable = 1, tooltip = GetString(SI_LUIE_SKILL_GENERIC_SNARE_TP) }, -- Fire
+    [49897] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', unbreakable = 1, tooltip = T.Generic_Snare }, -- Fire
     [33701] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = A.Skill_Burrow, hide = true }, -- BurrowEND
-    [33829] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = A.Skill_Burrow, tooltip = GetString(SI_LUIE_SKILL_BURROW) }, -- Burrowing
+    [33829] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = A.Skill_Burrow, tooltip = T.Skill_Burrow }, -- Burrowing
     [37506] = { hide = true }, -- Stealth
     [33727] = { hide = true }, -- BurrowEND
 
@@ -6826,7 +6826,7 @@ E.EffectOverride = {
 
     -- Retaking the Pass
     [45650] = { hide = true }, -- Indaenir's Spell
-    [29504] = { tooltip = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP) }, -- Q4546 Shade Layer
+    [29504] = { tooltip = T.Skill_Shadow_Wood }, -- Q4546 Shade Layer
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
