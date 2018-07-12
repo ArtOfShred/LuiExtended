@@ -82,7 +82,7 @@ A.Innate_Soul_Gem_Resurrection      = GetString(SI_LUIE_SKILL_SOUL_GEM_RESURRECT
 
 -- Player Basic
 A.Innate_Crouch                     = 20306 -- Crouch
-A.Innate_Crouch_Stun                = GetString(SI_LUIE_SKILL_CROUCH_STUN) -- Crouch Stun
+A.Innate_Stealth_Stun               = GetString(SI_LUIE_SKILL_STEALTH_STUN) -- Crouch Stun
 A.Innate_Disguised                  = 23553 -- Disguised
 A.Innate_Hidden                     = 20309 -- Hidden
 A.Innate_Sprint                     = 973   -- Sprint

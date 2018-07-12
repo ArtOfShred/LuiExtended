@@ -19,7 +19,8 @@ E.IsWeaponAttack = {
 -- List of toggle abilities
 E.IsToggle = {
     -- Innate
-    [A.Innate_Hidden] = true, -- Hidden (Innate)
+    [20299] = true, -- Sneak (Innate) -- Used for hidden
+    [20301] = true, -- Crouch (Innate) -- Used for invisibility
     [A.Innate_Disguised] = true, -- Disguised (Innate)
     [14890] = true, -- Block (Player)
     [40165] = true, -- Scene Choreo Brace (Monster Fight))
@@ -410,6 +411,7 @@ E.CastChannelOverride = {
     [40350] = true, -- Feed (Vampire - Bite Player)
 
     [32346] = true, -- Skyshard Collect
+    [47270] = true, -- Ritual of Mara
     [14031] = true, -- Mundus Use
     [4197] = true, -- Recovering (NPC Duel)
 
@@ -446,6 +448,7 @@ E.CastDurationFix = {
     [37059] = 1165, -- Mount Up
     [14644] = 4000, -- Revive (Death Dialogue)
     [32346] = 5800, -- Skyshard Collect
+    [47270] = 5600, -- Ritual of Mara
     [14031] = 5000, -- Mundus Use
     [4197] = 4000, -- Recovering (NPC Duel)
 
@@ -490,6 +493,7 @@ E.IsCast = {
     [14031] = true, -- Mundus Use
     [14644] = true, -- Revive (Death Dialogue)
     [32346] = true, -- Skyshard Collect
+    [47270] = true, -- Ritual of Mara
 
     -- Class
     [43714] = true, -- Crystal Shard (Sorcerer)
@@ -3057,16 +3061,16 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Roll Dodge
-    [29721] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds' }, -- Immobilize Immunity
-    [69143] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_dodge_fatigue.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Dodge Fatigue
+    [29721] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds', tooltip = T.Innate_Immobilize_Immunity }, -- Immobilize Immunity
+    [69143] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_dodge_fatigue.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Innate_Dodge_Fatigue }, -- Dodge Fatigue
 
     -- Crouch
-    --[20309] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds' }, -- Hidden (Reserved here if it ever becomes visible)
+    [20309] = { tooltip = T.Innate_Invisible }, -- Crouch
+
     [20301] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', name = A.Innate_Crouch }, -- Crouch Drain
-    [26245] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_018.dds', name = A.Innate_Crouch_Stun }, -- Slam Stun (Stun from crouch attack)
+    [26245] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_018.dds', name = A.Innate_Stealth_Stun, tooltip = T.Generic_Stun }, -- Slam Stun (Stun from crouch attack)
 
     -- Sprint
-    --[973] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds' }, -- Sprint (Reserved here if it ever becomes visible)
     [15356] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', name = A.Innate_Sprint }, -- Sprint Drain
 
     -- Misc
@@ -3077,9 +3081,9 @@ E.EffectOverride = {
     [31221] = { hide = true }, -- Skyshard Collect (Aura on Skyshard when player collects it)
     [32346] = { icon = 'esoui/art/icons/ability_mage_050.dds', name = A.Innate_Absorbing_Skyshard, unbreakable = 1}, -- Skyshard Collect
     [63601] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds' }, -- ESO Plus Member
-    [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', unbreakable = 1 }, -- Ritual of Mara
-    [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off-Balance
-    [102771] = { stack = 0, type = 1 }, -- Off Balance Immunity
+    [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', hide = true }, -- Ritual of Mara
+    [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance, tooltip = T.Generic_Off_Balance }, -- Off-Balance
+    [102771] = { stack = 0, type = 1, tooltip = T.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
     [85701] = { hide = true }, -- Dueling Flag
     [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well, tooltip = T.Innate_Ayleid_Well }, -- Ayleid Health Bonus
     [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well_Fortified, tooltip = T.Innate_Ayleid_Well_Fortified }, -- Ayleid Health Bonus

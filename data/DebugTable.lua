@@ -2100,6 +2100,7 @@ debugAuras = {
             [61875] = true, -- Swap to Weapon Set 2
             [85701] = true, -- Dueling Flag
             [2727] = true, -- Off-Balance
+            [102771] = true, -- Off Balance Immunity
             [21263] = true, -- Ayleid Health Bonus
             [100862] = true, -- Fortified Ayleid Health Bonus
             [45819] = true, -- Remove Werevamp

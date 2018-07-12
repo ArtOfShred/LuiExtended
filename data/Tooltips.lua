@@ -84,6 +84,7 @@ T.Generic_Freeze                    = GetString(SI_LUIE_SKILL_GENERIC_FREEZE_TP)
 T.Generic_Shock                     = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_TP)
 
 T.Generic_Off_Balance               = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP)
+T.Generic_Off_Balance_Immunity      = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP)
 T.Generic_Snare                     = GetString(SI_LUIE_SKILL_GENERIC_SNARE_TP)
 T.Generic_Immobilize                = GetString(SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP)
 T.Generic_Stagger                   = GetString(SI_LUIE_SKILL_GENERIC_STAGGER_TP)
@@ -97,6 +98,10 @@ T.Generic_CC_Immunity               = GetString(SI_LUIE_SKILL_GENERIC_CC_IMMUNIT
 -- ---------------------------------------------------
 -- INNATE/WORLD ---------------------
 -- ---------------------------------------------------
+
+T.Innate_Immobilize_Immunity        = GetString(SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP)
+T.Innate_Dodge_Fatigue              = GetString(SI_LUIE_SKILL_DODGE_FATIGUE_TP)
+T.Innate_Invisible                  = GetString(SI_LUIE_SKILL_INVISIBLE_TP)
 
 T.Innate_Recall_Penalty             = GetString(SI_LUIE_SKILL_RECALL_PENALTY_TP)
 T.Innate_Ayleid_Well                = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP)

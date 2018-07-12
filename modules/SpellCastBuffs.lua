@@ -1520,8 +1520,10 @@ function SCB.Buff_OnMouseEnter(control)
             tooltipText = tooltipText .. "|c3A92FFOriginal Description:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
         end
 
-        local duration = mathfloor((control.duration/1000) + 0.5)
-        if duration >= 3600 then
+        local duration = GetAbilityDuration(control.effectId) / 1000
+        if duration >= 86400 then
+            duration = duration / 86400
+        elseif duration >= 3600 then
             duration = duration / 3600
         elseif duration >= 60 then
             duration = duration / 60
@@ -1536,8 +1538,10 @@ function SCB.Buff_OnMouseEnter(control)
     -- NORMAL BEHAVIOR:
     else
 
-        local duration = mathfloor((control.duration/1000) + 0.5)
-        if duration >= 3600 then
+        local duration = GetAbilityDuration(control.effectId) / 1000
+        if duration >= 86400 then
+            duration = duration / 86400
+        elseif duration >= 3600 then
             duration = duration / 3600
         elseif duration >= 60 then
             duration = duration / 60
@@ -2692,7 +2696,7 @@ function SCB.ReloadEffects(unitTag)
             if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
                 g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                     type=1,
-                    id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                    id = 20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                     dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                     forced = "short",
                     restart=true, iconNum=0
@@ -2700,7 +2704,7 @@ function SCB.ReloadEffects(unitTag)
             elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
                 g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                     type=1,
-                    id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
+                    id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
                     dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                     forced = "short",
                     restart=true, iconNum=0
@@ -3086,7 +3090,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
             g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
-                id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                id = 20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3095,7 +3099,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
         elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
             g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
-                id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
+                id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3109,7 +3113,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
             g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                 type=1,
-                id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                id = 20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3118,7 +3122,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
         elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
             g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                 type=1,
-                id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
+                id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3221,7 +3225,7 @@ function SCB.OnPlayerActivated(eventCode)
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
             g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
-                id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                id = 20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3230,7 +3234,7 @@ function SCB.OnPlayerActivated(eventCode)
         elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
             g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
-                id = A.Innate_Hidden, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
+                id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0

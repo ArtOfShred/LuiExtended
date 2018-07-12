@@ -454,10 +454,10 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local abilityId =  trackBuffs[i].abilityId
                     local markForRemove = trackBuffs[i].markForRemove or false
 
-                    local timer = endTime - startTime
-
-                    local timer = mathfloor((timer) + 0.5)
-                    if timer >= 3600 then
+                    local timer = GetAbilityDuration(abilityId) / 1000
+                    if timer >= 86400 then
+                        timer = timer / 86400
+                    elseif timer >= 3600 then
                         timer = timer / 3600
                     elseif timer >= 60 then
                         timer = timer / 60
