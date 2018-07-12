@@ -108,8 +108,10 @@ T.Innate_Firelight                  = GetString(SI_LUIE_SKILL_FIRELIGHT_TP)
 -- PLAYER ABILITIES ---------------------
 -- ---------------------------------------------------
 
--- Werewolf
+-- Soul Magic
+T.Skill_Soul_Summons                = GetString(SI_LUIE_SKILL_SOUL_SUMMONS_TP)
 
+-- Werewolf
 T.Skill_Sanies_Lupinus              = GetString(SI_LUIE_SKILL_SANIES_LUPINUS_TP)
 T.Skill_Lycanthrophy                = GetString(SI_LUIE_SKILL_LYCANTHROPHY_TP)
 T.Skill_Blood_Moon                  = GetString(SI_LUIE_SKILL_BLOOD_MOON_TP)

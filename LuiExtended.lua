@@ -21,6 +21,7 @@ local tableinsert   = table.insert
 local tablesort     = table.sort
 local gsub          = gsub
 local reverse       = reverse
+local mathfloor     = math.floor
 local tostring      = tostring
 local pairs, ipairs = pairs, ipairs
 
@@ -454,16 +455,15 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local markForRemove = trackBuffs[i].markForRemove or false
 
                     local timer = endTime - startTime
-                    local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, math.floor((timer) + 0.5)) or GetAbilityEffectDescription(buffSlot)
 
-                    -- In debug mode for now
-                    local displayName = GetDisplayName()
-                    if tooltipText == "" and (displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy") then
-                        if GetAbilityDescription(abilityId) ~= "" then
-                            tooltipText = "|c2DC50EDescription:|r " .. GetAbilityDescription(abilityId) or ""
-                        end
+                    local timer = mathfloor((timer) + 0.5)
+                    if timer >= 3600 then
+                        timer = timer / 3600
+                    elseif timer >= 60 then
+                        timer = timer / 60
                     end
-                    -- In debug mode for now
+
+                    local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, timer) or GetAbilityDescription(abilityId)
 
                     if tooltipText ~= "" then
                         tooltipText = strmatch(tooltipText, ".*%S")

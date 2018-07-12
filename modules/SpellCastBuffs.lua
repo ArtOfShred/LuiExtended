@@ -1520,7 +1520,14 @@ function SCB.Buff_OnMouseEnter(control)
             tooltipText = tooltipText .. "|c3A92FFOriginal Description:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
         end
 
-        local tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) or ""
+        local duration = mathfloor((control.duration/1000) + 0.5)
+        if duration >= 3600 then
+            duration = duration / 3600
+        elseif duration >= 60 then
+            duration = duration / 60
+        end
+
+        local tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or ""
         if tooltipText2 ~= "" then
             tooltipText2 = "|cEE992AOverride:|r " .. tooltipText2
         end
@@ -1528,10 +1535,18 @@ function SCB.Buff_OnMouseEnter(control)
 
     -- NORMAL BEHAVIOR:
     else
+
+        local duration = mathfloor((control.duration/1000) + 0.5)
+        if duration >= 3600 then
+            duration = duration / 3600
+        elseif duration >= 60 then
+            duration = duration / 60
+        end
+
         if control.buffSlot then
-            tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) or GetAbilityEffectDescription(control.buffSlot)
+            tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or GetAbilityDescription(abilityId)
         else
-            tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) or ""
+            tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or ""
         end
     end
     -- END TEMPORARY DEBUG FUNCTION HERE

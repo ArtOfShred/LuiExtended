@@ -2280,6 +2280,8 @@ local strings = {
     SI_LUIE_SKILL_SHADOW_WOOD =                          "Shadow Wood",
     SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "A servant of the shade of Prince Naemon has dragged you into the Shadow Wood.",
 
+    SI_LUIE_SKILL_SOUL_SUMMONS_TP =                      "You have recently revived without spending a soul gem and may not do so again for |cFFFFFF<<1>>|r <<1[hour/hours]>>.",
+
     SI_LUIE_SKILL_SANIES_LUPINUS_TP =                    "You have been bitten by a Werewolf and contracted Sanies Lupinus.",
     SI_LUIE_SKILL_LYCANTHROPHY_TP =                      "You can transform into a savage Werewolf.\n\nYou take |cFFFFFF25|r% more Poison Damage while transformed into a Werewolf.",
     SI_LUIE_SKILL_BLOOD_MOON_TP =                        "You have bitten another player. You may not do so again for seven days.",
