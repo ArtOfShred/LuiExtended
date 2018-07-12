@@ -1108,6 +1108,10 @@ end
 -- Very basic handler registered to only read CC events on the player
 function CI.OnCombatEventBreakCast( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
     -- Some cast/channel abilities (or effects we use to simulate this) stun the player - ignore the effects of these ids when this happens.
+
+    -- Stop mount stun from breaking cast bar (May need to expand this later to a table)
+    if abilityId == 36434 then return end
+
     if not E.IsCast[abilityId] then
         CI.StopCastBar()
     end

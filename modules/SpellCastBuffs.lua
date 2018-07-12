@@ -773,6 +773,7 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
                     SetWerewolfIconTimer(currentTime)
                     eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SCB.OnPowerUpdate)
                     eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
+                    eventManager:RegisterForUpdate(moduleName .. "WerewolfTicker", 2000, SCB.PowerTrailer) -- Register power throttle trailer (in case player transforms into Werewolf in a shrine and no power change event occurs)
                     g_werewolfCounter = 0
                 end
                 return
@@ -1477,7 +1478,16 @@ function SCB.Buff_OnMouseUp(self, button, upInside)
     end
 end
 
+-- TEMP
+local function ClearStickyTooltip()
+    ClearTooltip(GameTooltip)
+    eventManager:UnregisterForUpdate(moduleName .. "StickyTooltip")
+end
+
 function SCB.Buff_OnMouseEnter(control)
+
+    -- TEMP
+    eventManager:UnregisterForUpdate(moduleName .. "StickyTooltip")
 
     InitializeTooltip(GameTooltip, control, BOTTOM, 0, -5, TOP)
     -- Setup Text
@@ -1495,24 +1505,26 @@ function SCB.Buff_OnMouseEnter(control)
     -- MY ACCOUNT DEBUG: Temporary conditional to check for my Display Name and do some debug stuff, otherwise use normal function
     local displayName = GetDisplayName()
     if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+
+        tooltipText = ""
+
+        -- Add original TP if present
         if control.buffSlot then
-            tooltipText = GetAbilityEffectDescription(control.buffSlot)
-        else
-            tooltipText = ""
+            if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                tooltipText = "|cFFFF00Original Tooltip:|r " .. GetAbilityEffectDescription(control.buffSlot) .. "\n"
+            end
         end
 
-        --local displayName = GetDisplayName()
-        if tooltipText == "" and type(control.effectId) == "number" and (displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy") then
-            if GetAbilityDescription(control.effectId) ~= "" then
-                tooltipText = "|c3A92FFDescription:|r " .. GetAbilityDescription(control.effectId) or ""
-            end
+        -- Add original description if preset
+        if GetAbilityDescription(control.effectId) ~= "" then
+            tooltipText = tooltipText .. "|c3A92FFOriginal Description:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
         end
 
         local tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, mathfloor((control.duration/1000) + 0.5)) or ""
         if tooltipText2 ~= "" then
-            tooltipText2 = "|cEE992A\nOverride:|r " .. tooltipText2
+            tooltipText2 = "|cEE992AOverride:|r " .. tooltipText2
         end
-        tooltipText = "|cEE992AOriginal Tooltip:|r " ..  tooltipText .. tooltipText2
+        tooltipText = tooltipText .. tooltipText2
 
     -- NORMAL BEHAVIOR:
     else
@@ -1550,9 +1562,14 @@ end
 
 function SCB.Buff_OnMouseExit(control)
 
-    ClearTooltip(GameTooltip)
+    local displayName = GetDisplayName()
+    if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+        -- Temp - Sticky tooltip so I can edit things easier
+        eventManager:RegisterForUpdate(moduleName .. "StickyTooltip", 4000, ClearStickyTooltip )
+    else
+        ClearTooltip(GameTooltip)
+    end
     -- TODO: Add Sticky Tooltips
-    --zo_callLater(function() ClearTooltip(GameTooltip) end, 5000)
 
 end
 

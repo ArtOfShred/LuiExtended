@@ -2250,15 +2250,15 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_FREEZE_TP =                    "Afflicted with frost damage over time for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_SHOCK_TP =                     "Afflicted with shock damage over time for |cffffff<<1>>|r seconds.",
 
-    SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP =               "Off Balance. You are vulnerable to attacks that exploit off balance targets.",
-    SI_LUIE_SKILL_GENERIC_SNARE_TP =                     "Snared. Your Movement Speed has been reduced.",
-    SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized. Unable to move while immobilized.",
-    SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered. You are unable to attack or move while staggered.",
-    SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned. You are unable to attack or move while stunned.",
-    SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP =                 "Knocked back. You are unable to attack or move while knocked back.",
-    SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP =                 "Knocked down. You are unable to attack or move while knocked down.",
-    SI_LUIE_SKILL_GENERIC_FEAR_TP =                      "Feared. You are unable to attack or move while feared.",
-    SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP =               "Immune to knockback and disabling effects.",
+    SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP =               "Off Balance for |cffffff<<1>>|r seconds. You are vulnerable to attacks that exploit off balance targets.",
+    SI_LUIE_SKILL_GENERIC_SNARE_TP =                     "Snared for |cffffff<<1>>|r seconds. Your Movement Speed has been reduced.",
+    SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized for |cffffff<<1>>|r seconds. Unable to move while immobilized.",
+    SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered for |cffffff<<1>>|r seconds. You are unable to attack or move while staggered.",
+    SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned for |cffffff<<1>>|r seconds. You are unable to attack or move while stunned.",
+    SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP =                 "Knocked back for |cffffff<<1>>|r seconds. You are unable to attack or move while knocked back.",
+    SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP =                 "Knocked down for |cffffff<<1>>|r seconds. You are unable to attack or move while knocked down.",
+    SI_LUIE_SKILL_GENERIC_FEAR_TP =                      "Feared for |cffffff<<1>>|r seconds. You are unable to attack or move while feared.",
+    SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP =               "Immune to knockback and disabling effects for |cffffff<<1>>|r seconds.",
 
     SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP =              "Lightning courses through your body causing all weapon attacks to deal lightning damage.",
     SI_LUIE_SKILL_MANTLES_SHADOW =                       "Mantle's Shadow",
@@ -2281,6 +2281,10 @@ local strings = {
     SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "A servant of the shade of Prince Naemon has dragged you into the Shadow Wood.",
 
     SI_LUIE_SKILL_SANIES_LUPINUS_TP =                    "You have been bitten by a Werewolf and contracted Sanies Lupinus.",
+    SI_LUIE_SKILL_LYCANTHROPHY_TP =                      "You can transform into a savage Werewolf.\n\nYou take |cFFFFFF25|r% more Poison Damage while transformed into a Werewolf.",
+    SI_LUIE_SKILL_BLOOD_MOON_TP =                        "You have bitten another player. You may not do so again for seven days.",
+
+
     SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "You have recently recalled to a Wayshrine and must pay an additional gold fee to do so again.",
 }
 
