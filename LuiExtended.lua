@@ -472,6 +472,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     if LUIE.Effects.TooltipNameOverride[buffName] then
                         thirdLine = LUIE.Effects.TooltipNameOverride[buffName]
                     end
+                    if LUIE.Effects.TooltipNameOverride[abilityId] then
+                        thirdLine = LUIE.Effects.TooltipNameOverride[abilityId]
+                    end
                     if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
                         local effectsRow = effectsRowPool:AcquireObject()
                         effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
@@ -517,7 +520,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
         local colorText = ZO_NORMAL_TEXT
         if control.thirdLine ~= "" and control.thirdLine ~= nil then
-            colorText = control.buffType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
+            colorText = control.effectType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
         end
 
         if control.isArtificial then

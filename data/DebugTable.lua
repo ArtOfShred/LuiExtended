@@ -2060,15 +2060,14 @@ debugAuras = {
             [55401] = true, -- Magicka Restore
 
             -- BASIC ATTACKS
-            [16593] = true, -- Melee Snare
+            --[16593] = true, -- Melee Snare
             --[64842] = true, -- Critter Smash
             [48532] = true, -- Charge Snare
-            [61737] = true, -- Empower
+            --[61737] = true, -- Empower
             [41952] = true, -- Generic Fear Snare
             [55080] = true, -- Pet Hidden
             [28301] = true, -- Ability CC Immunity
             [38117] = true, -- CC Immunity
-            [2874] = true, -- Staggered
 
             -- TAUNT EFFECTS
             [38254] = true, -- Taunt
@@ -2099,7 +2098,7 @@ debugAuras = {
             [62798] = true, -- Weapon Swap Cooldown Timer
             [61875] = true, -- Swap to Weapon Set 2
             [85701] = true, -- Dueling Flag
-            [2727] = true, -- Off-Balance
+            --[2727] = true, -- Off-Balance
             [102771] = true, -- Off Balance Immunity
             [21263] = true, -- Ayleid Health Bonus
             [100862] = true, -- Fortified Ayleid Health Bonus
@@ -6485,6 +6484,9 @@ debugAuras = {
             --[82703] = true, -- Run Away! -- Humanoid NPC's
             [18386] = true, -- Run Away! -- NPC (Mostly Creatures)
             [14249] = true, -- Surround -- NPC (Mostly Animals)
+
+            -- STANDARD NPC ABILITIES
+            [2874] = true, -- Staggered
 
             -- CRITTER EVENTS
             [28890] = true, -- OnDeathFear -- Critter

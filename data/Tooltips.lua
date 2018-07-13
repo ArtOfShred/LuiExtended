@@ -4,6 +4,7 @@ LUIE.Tooltips = {}
 
 -- Performance Enhancement
 local T = LUIE.Tooltips
+local A = LUIE.GetAbility()
 
 -- ---------------------------------------------------
 -- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------
@@ -72,9 +73,14 @@ T.Skill_Major_Aegis                 = GetString(SI_LUIE_SKILL_MAJOR_AEGIS_TP)
 T.Skill_Minor_Slayer                = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP)
 T.Skill_Major_Slayer                = GetString(SI_LUIE_SKILL_MAJOR_SLAYER_TP)
 
+T.Skill_Empower                     = GetString(SI_LUIE_SKILL_EMPOWER_TP)
+T.Skill_Hindrance                   = GetString(SI_LUIE_SKILL_HINDRANCE_TP)
+
 -- ---------------------------------------------------
 -- GENERIC ---------------------
 -- ---------------------------------------------------
+
+T.Generic_Test                      = GetString(SI_LUIE_SKILL_TEST_TP)
 
 T.Generic_Bleed                     = GetString(SI_LUIE_SKILL_GENERIC_BLEED_TP)
 T.Generic_Disease                   = GetString(SI_LUIE_SKILL_GENERIC_DISEASE_TP)
@@ -82,6 +88,10 @@ T.Generic_Poison                    = GetString(SI_LUIE_SKILL_GENERIC_POISON_TP)
 T.Generic_Burn                      = GetString(SI_LUIE_SKILL_GENERIC_BURN_TP)
 T.Generic_Freeze                    = GetString(SI_LUIE_SKILL_GENERIC_FREEZE_TP)
 T.Generic_Shock                     = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_TP)
+
+T.Generic_HoT                       = GetString(SI_LUIE_SKILL_GENERIC_HOT_TP)
+T.Generic_Magicka_Regen             = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP)
+T.Generic_Stamina_Regen             = GetString(SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP)
 
 T.Generic_Off_Balance               = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP)
 T.Generic_Off_Balance_Immunity      = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP)
@@ -94,6 +104,16 @@ T.Generic_Knockdown                 = GetString(SI_LUIE_SKILL_GENERIC_KNOCKDOWN_
 T.Generic_Fear                      = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP)
 
 T.Generic_CC_Immunity               = GetString(SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP)
+T.Generic_Invisibility              = GetString(SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP)
+T.Generic_Detection_Potion          = GetString(SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP)
+T.Generic_Ravage_Magicka_Potion     = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP)
+T.Generic_Ravage_Stamina_Potion     = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP)
+
+T.Generic_Ravage_Magicka_Poison     = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP)
+T.Generic_Ravage_Stamina_Poison     = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP)
+
+T.Generic_Marked                    = GetString(SI_LUIE_SKILL_GENERIC_MARKED_TP)
+T.Generic_Reveal                    = GetString(SI_LUIE_SKILL_GENERIC_REVEAL_TP)
 
 -- ---------------------------------------------------
 -- INNATE/WORLD ---------------------
@@ -101,12 +121,49 @@ T.Generic_CC_Immunity               = GetString(SI_LUIE_SKILL_GENERIC_CC_IMMUNIT
 
 T.Innate_Immobilize_Immunity        = GetString(SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP)
 T.Innate_Dodge_Fatigue              = GetString(SI_LUIE_SKILL_DODGE_FATIGUE_TP)
+T.Innate_Hidden                     = GetString(SI_LUIE_SKILL_HIDDEN_TP)
 T.Innate_Invisible                  = GetString(SI_LUIE_SKILL_INVISIBLE_TP)
-
+T.Innate_Sprint                     = GetString(SI_LUIE_SKILL_SPRINT_TP)
+T.Innate_Gallop                     = GetString(SI_LUIE_SKILL_GALLOP_TP)
+T.Innate_Block                      = GetString(SI_LUIE_SKILL_BLOCK_TP)
+T.Innate_Resurrection_Immunity      = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP)
+T.Innate_Taunt                      = GetString(SI_LUIE_SKILL_TAUNT_TP)
+T.Innate_Disguised                  = GetString(SI_LUIE_SKILL_DISGUISE_TP)
+T.Innate_Battle_Spirit              = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT_TP)
 T.Innate_Recall_Penalty             = GetString(SI_LUIE_SKILL_RECALL_PENALTY_TP)
 T.Innate_Ayleid_Well                = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP)
 T.Innate_Ayleid_Well_Fortified      = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP)
 T.Innate_Firelight                  = GetString(SI_LUIE_SKILL_FIRELIGHT_TP)
+
+-- ---------------------------------------------------
+-- CHAMPION ---------------------
+-- ---------------------------------------------------
+
+T.Champion_Phase                    = GetAbilityDescription(63852)
+T.Champion_Reinforced               = GetAbilityDescription(64067)
+T.Champion_Unchained                = GetAbilityDescription(59286)
+T.Champion_Infusion                 = GetAbilityDescription(59582)
+T.Champion_Revival                  = GetAbilityDescription(60427)
+T.Champion_Determination            = GetAbilityDescription(59893)
+T.Champion_Siphoner                 = GetAbilityDescription(92425)
+T.Champion_Ensnare                  = GetAbilityDescription(60398)
+T.Champion_Shadowstrike             = GetAbilityDescription(61426)
+T.Champion_Foresight                = GetAbilityDescription(59526)
+T.Champion_Vengeance_Charge         = GetAbilityDescription(63150)
+T.Champion_Vengeance                = GetString(SI_LUIE_SKILL_VENGEANCE_TP)
+T.Champion_Retaliation              = GetAbilityDescription(63104)
+T.Champion_Opportunist              = GetAbilityDescription(63099)
+
+-- ---------------------------------------------------
+-- COMSUMABLES & ITEMS -------------------------------
+-- ---------------------------------------------------
+
+T.Item_Glyph_of_Crushing            = GetString(SI_LUIE_SKILL_GLYPH_CRUSHING_TP)
+T.Item_Glyph_of_Hardening           = GetString(SI_LUIE_SKILL_GLYPH_HARDENING_TP)
+T.Item_Glyph_of_Weakening           = GetString(SI_LUIE_SKILL_GLYPH_WEAKENING_TP)
+T.Item_Glyph_of_Weapon_Damage       = GetString(SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE_TP)
+
+T.Potion_Creeping_Ravage_Health     = GetString(SI_LUIE_SKILL_CREEPING_RAVAGE_HEALTH_TP)
 
 
 -- ---------------------------------------------------
@@ -138,16 +195,88 @@ T.Skill_Fancy_Clothing              = GetString(SI_LUIE_SKILL_FANCY_CLOTHING_TP)
 T.Skill_Burrow                      = GetString(SI_LUIE_SKILL_BURROW_TP)
 T.Skill_Shadow_Wood                 = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP)
 
+T.Food_Crafted_Health               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68235:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Magicka              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68238:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Stamina              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68241:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Health_Magicka       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68244:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Health_Stamina       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68247:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Magicka_Stamina      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68250:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Triple               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68254:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+
+T.Food_Vendor_Health                = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57637:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Vendor_Magicka               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57630:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Vendor_Stamina               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Cyrodilic_Field_Bar          = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71076:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Cyrodilic_Field_Tack         = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71074:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Cyrodilic_Field_Treat        = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71075:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+
+T.Food_Crown_Crate_Meal             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:94437:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h'))
+T.Food_Crown_Meal                   = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64711:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h'))
+
+T.Drink_Crafted_Health              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68257:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Magicka             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68260:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Stamina             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68263:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Health_Magicka      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68266:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Health_Stamina      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68269:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Magicka_Stamina     = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68272:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Triple              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68276:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+
+T.Drink_Vendor_Health               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57642:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Vendor_Magicka              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71250:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Vendor_Stamina              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57654:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Cyrodilic_Field_Tonic       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71079:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Cyrodilic_Field_Brew        = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71077:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Cyrodilic_Field_Tea         = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71078:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+
+T.Drink_Crown_Crate_Drink           = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:94438:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h'))
+T.Drink_Crown_Drink                 = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64712:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h'))
+
+function LUIE.ProcessTooltipType(input, tooltip)
+
+    -- dummy func, maybe use
+
+end
+
+
+--[[ Possibly use these at some point
+
+LUIE.DynamicTooltips = { }
+
+local DT = LUIE.DynamicTooltips
+
+DT[20299]                           = function()
+                                                local skillType, skillIndex, abilityIndex = GetSpecificSkillAbilityKeysByAbilityId(45038)
+                                                local _, _, _, _, _, purchased, _, rankIndex = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
+                                                local duration = 2
+                                                if purchased then
+                                                    duration = duration + rankIndex
+                                                end
+
+                                                local tooltip = zo_strformat(GetString(SI_LUIE_SKILL_HIDDEN_TP), duration)
+
+                                                return tooltip
+                                    end
 
 
 
 
+if DT[abilityId] then
+DT[abilityId]()
+
+Q.QuestItemModifyOnAdd[itemId]()
+
+]]
 
 
 
+function GLOBALSCRIPT()
 
+    local itemLink = '|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'
 
+    local abilityDescription = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
 
+    d(abilityDescription)
 
+end
 
 

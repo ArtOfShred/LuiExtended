@@ -99,6 +99,7 @@ SCB.D = {
     IgnoreAssistant                  = true,
     IgnorePet                        = true,
     IgnoreMount                      = false,
+    MountGenericIcon                 = false,
     LongTermEffectsSeparate          = true,
     LongTermEffectsReverse           = true,
     LongTermEffectsSeparateAlignment = 2,
@@ -900,9 +901,22 @@ function SCB.MountStatus(eventCode, mounted)
     -- Remove icon first
     g_effectsList.player1["Mount"] = nil
     if mounted and not SCB.SV.IgnoreMount then
+
+        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_MOUNT)
+        local nickname = GetCollectibleNickname(Collectible)
+        local name, description, icon = GetCollectibleInfo(Collectible)
+
+        if (nickname ~= "" and nickname ~= nil) then
+            name = strformat('<<1>> "<<2>>"', name, nickname)
+        end
+
+        if SCB.SV.MountGenericIcon then
+            icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds'
+        end
+
         g_effectsList.player1["Mount"] = {
             target="player", type=1,
-            id ="Fake", name=A.Innate_Mounted, icon='LuiExtended/media/icons/abilities/ability_innate_mounted.dds',
+            id =37059, name=name, icon=icon, backdrop=true, tooltip = description,
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
             forced = "long",
             restart=true, iconNum=0
@@ -920,9 +934,16 @@ function SCB.CollectibleBuff()
     -- Pets
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SCB.SV.IgnorePet and not IsPlayerInAvAWorld() then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
+        local nickname = GetCollectibleNickname(Collectible)
+        local name, description, icon = GetCollectibleInfo(Collectible)
+
+        if (nickname ~= "" and nickname ~= nil) then
+            name = strformat('<<1>> "<<2>>"', name, nickname)
+        end
+
         g_effectsList.player1["PetType"] = {
             target="player", type=1,
-            id ="Fake", name=A.Innate_Vanity_Pet, icon='LuiExtended/media/icons/abilities/ability_innate_pet.dds',
+            id = "Fake", name=name, icon=icon, backdrop=true, tooltip = description,
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
             forced = "long",
             restart=true, iconNum=0
@@ -934,11 +955,11 @@ function SCB.CollectibleBuff()
     -- Assistants
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 and not SCB.SV.IgnoreAssistant and not IsPlayerInAvAWorld() then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
-        local CollectibleName = GetCollectibleName(Collectible)
-        local iconAssistant = E.AssistantIcons[CollectibleName] ~= nil and E.AssistantIcons[CollectibleName] or ''
+        local name, description = GetCollectibleInfo(Collectible)
+        local iconAssistant = E.AssistantIcons[name] ~= nil and E.AssistantIcons[name] or ''
         g_effectsList.player1["AssistantType"] = {
             target="player", type=1,
-            id ="Fake", name=CollectibleName, icon=iconAssistant,
+            id = "Fake", name=name, icon=iconAssistant, tooltip = description,
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
             forced = "long",
             restart=true, iconNum=0
@@ -1364,6 +1385,10 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
 
     local inset = (SCB.SV.RemainingCooldown and buff.cd ~= nil) and 3 or 1
 
+    buff.drop:ClearAnchors()
+    buff.drop:SetAnchor( TOPLEFT, buff, TOPLEFT, inset, inset )
+    buff.drop:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -inset, -inset )
+
     buff.icon:ClearAnchors()
     buff.icon:SetAnchor( TOPLEFT, buff, TOPLEFT, inset, inset )
     buff.icon:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -inset, -inset )
@@ -1515,18 +1540,23 @@ function SCB.Buff_OnMouseEnter(control)
             end
         end
 
-        -- Add original description if preset
-        if GetAbilityDescription(control.effectId) ~= "" then
-            tooltipText = tooltipText .. "|c3A92FFOriginal Description:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
-        end
+        local duration
+        if type(control.effectId) == "number" then
+            -- Add original description if present
+            if GetAbilityDescription(control.effectId) ~= "" then
+                tooltipText = tooltipText .. "|c3A92FFOriginal Description:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
+            end
 
-        local duration = GetAbilityDuration(control.effectId) / 1000
-        if duration >= 86400 then
-            duration = duration / 86400
-        elseif duration >= 3600 then
-            duration = duration / 3600
-        elseif duration >= 60 then
-            duration = duration / 60
+            duration = GetAbilityDuration(control.effectId) / 1000
+            if duration >= 86400 then
+                duration = duration / 86400
+            elseif duration >= 3600 then
+                duration = duration / 3600
+            elseif duration >= 60 then
+                duration = duration / 60
+            end
+        else
+            duration = 0
         end
 
         local tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or ""
@@ -1535,30 +1565,42 @@ function SCB.Buff_OnMouseEnter(control)
         end
         tooltipText = tooltipText .. tooltipText2
 
+        if control.tooltip then tooltipText = control.tooltip end
+
     -- NORMAL BEHAVIOR:
     else
-
-        local duration = GetAbilityDuration(control.effectId) / 1000
-        if duration >= 86400 then
-            duration = duration / 86400
-        elseif duration >= 3600 then
-            duration = duration / 3600
-        elseif duration >= 60 then
-            duration = duration / 60
-        end
-
-        if control.buffSlot then
-            tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or GetAbilityDescription(abilityId)
+        if control.tooltip then
+            tooltipText = control.tooltip
         else
-            tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or ""
+            local duration
+            if type(control.effectId) == "number" then
+                duration = GetAbilityDuration(control.effectId) / 1000
+                if duration >= 86400 then
+                    duration = duration / 86400
+                elseif duration >= 3600 then
+                    duration = duration / 3600
+                elseif duration >= 60 then
+                    duration = duration / 60
+                end
+
+                if control.buffSlot then
+                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or GetAbilityDescription(abilityId)
+                else
+                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or ""
+                end
+            else
+                duration = 0
+            end
         end
     end
     -- END TEMPORARY DEBUG FUNCTION HERE
 
-
         local thirdLine
         if E.TooltipNameOverride[control.effectName] then
             thirdLine = E.TooltipNameOverride[control.effectName]
+        end
+        if E.TooltipNameOverride[control.effectId] then
+            thirdLine = E.TooltipNameOverride[control.effectId]
         end
         -- Have to trim trailing spaces on the end of tooltips
         if tooltipText ~= "" then
@@ -1613,6 +1655,8 @@ function SCB.CreateSingleIcon(container, AnchorItem, effectType)
         buff.iconbg = UI.Backdrop( buff, nil, nil, {0,0,0,0.9}, {0,0,0,0.9}, false )
         buff.iconbg:SetDrawLevel(DL_CONTROLS)
     end
+    -- Drop for collectible/mount
+    buff.drop   = UI.Texture( buff, nil, nil, "LuiExtended/media/icons/abilities/ability_innate_background.dds", DL_BACKGROUND, true )
     -- Icon itself
     buff.icon   = UI.Texture( buff, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false )
     -- Remaining text label
@@ -2650,7 +2694,7 @@ function SCB.ReloadEffects(unitTag)
     if unitTag == "reticleover" and ( IsInAvAZone() or IsActiveWorldBattleground() or GetUnitName(unitTag) == g_currentDuelTarget ) and IsUnitPlayer("reticleover") and not SCB.SV.IgnoreBattleSpiritTarget then
         g_effectsList.reticleover1[ A.Skill_Battle_Spirit ] = {
             type=1,
-            id="Fake", name=A.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
+            id=85701, name=A.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
             dur=0, starts=1, ends=nil,
             forced = "short",
             restart=true, iconNum=0,
@@ -2683,7 +2727,7 @@ function SCB.ReloadEffects(unitTag)
             if ( ( IsInAvAZone() or IsActiveWorldBattleground() ) and IsUnitPlayer("reticleover") ) or GetUnitName(unitTag) == g_currentDuelTarget then
                 g_effectsList.reticleover1[ A.Skill_Battle_Spirit ] = {
                     type=1,
-                    id="Fake", name=A.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
+                    id=85701, name=A.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
                     dur=0, starts=1, ends=nil,
                     forced = "short",
                     restart=true, iconNum=0,
@@ -2696,7 +2740,7 @@ function SCB.ReloadEffects(unitTag)
             if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
                 g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                     type=1,
-                    id = 20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                    id =20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                     dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                     forced = "short",
                     restart=true, iconNum=0
@@ -2722,7 +2766,7 @@ function SCB.ReloadEffects(unitTag)
                 -- Trigger a buff
                 g_effectsList.reticleover1[ A.Innate_Disguised ] = {
                     type=1,
-                    id=A.Innate_Disguised, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+                    id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                     dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                     forced = "short",
                     restart=true, iconNum=0
@@ -2771,7 +2815,7 @@ function SCB.MenuPreview()
             local duration = testEffectDurationList[i]
             g_effectsList[context][ abilityId ] = {
                 target = context, type=type,
-                id="Fake", name=name, icon=icon,
+                id=16415, name=name, icon=icon,
                 dur = duration * 1000,
                 starts = currentTime,
                 ends = currentTime + (duration * 1000),
@@ -3011,9 +3055,15 @@ function SCB.updateIcons( currentTime, sortedList, container )
             buff.effectName = effect.name
             buff.buffType = effect.type
             buff.buffSlot = effect.buffSlot
+            buff.tooltip = effect.tooltip
             buff.isArtificial = effect.artificial
             buff.duration = effect.dur or 0
 
+            if effect.backdrop then
+                buff.drop:SetHidden(false)
+            else
+                buff.drop:SetHidden(true)
+            end
             buff.icon:SetTexture(effect.icon)
             buff:SetAlpha(1)
             buff:SetHidden(false)
@@ -3139,8 +3189,8 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             -- Trigger a buff
             g_effectsList.player1[ A.Innate_Disguised ] = {
-                type=1,
-                id=A.Innate_Disguised, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+                target ="player", type=1,
+                id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3157,7 +3207,7 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
             -- Trigger a buff
             g_effectsList.reticleover1[ A.Innate_Disguised ] = {
                 type=1,
-                id=A.Innate_Disguised, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+                id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3208,8 +3258,8 @@ function SCB.OnPlayerActivated(eventCode)
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             -- Trigger a buff
             g_effectsList.player1[ A.Innate_Disguised ] = {
-                type=1,
-                id=A.Innate_Disguised, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+                target ="player", type=1,
+                id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "short",
                 restart=true, iconNum=0
@@ -3303,9 +3353,9 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
         -- We got correct sequence, so let us create a buff and reset the g_playerResurrectStage
         g_playerResurrectStage = nil
         local currentTime = GetGameTimeMilliseconds()
-        g_effectsList["player1"][ "Resurrection Immunity" ] = {
+        g_effectsList["player1"]["Resurrection Immunity"] = {
             target="player", type=1,
-            id="Fake", name = A.Innate_Resurrection_Immunity, icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds',
+            id=14646, name = A.Innate_Resurrection_Immunity, icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds',
             dur = 10000, starts= currentTime, ends = currentTime + 10000,
             restart=true, iconNum=0,
         }

@@ -1633,7 +1633,7 @@ function UF.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue,
     end
 
     -- If players powerValue is zero, issue new blinking event on Custom Frames
-    if unitTag == "player" and powerValue == 0 then
+    if unitTag == "player" and powerValue == 0 and powerType ~= POWERTYPE_WEREWOLF then
         UF.OnCombatEvent( eventCode, nil, true, nil, nil, nil, nil, COMBAT_UNIT_TYPE_PLAYER, nil, COMBAT_UNIT_TYPE_PLAYER, 0, powerType, nil, false )
     end
 

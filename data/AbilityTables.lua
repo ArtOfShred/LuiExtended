@@ -69,14 +69,16 @@ A.Skill_Minor_Aegis					= 76617
 A.Skill_Off_Balance                 = 14062
 A.Skill_Off_Balace_Immunity         = 102771
 
+A.Skill_Empower                     = 61737
+A.Skill_Hindrance                   = 46210
+A.Skill_Stun                        = 68565
+
 -- ---------------------------------------------------
 -- INNATE ABILITIES ----------------------------------
 -- ---------------------------------------------------
 
 -- Simulated Auras
 A.Innate_Recall_Penalty             = GetString(SI_LUIE_SKILL_RECALL_PENALTY) -- Recall Penalty
-A.Innate_Vanity_Pet                 = GetString(SI_LUIE_SKILL_VANITY_PET) -- Vanity Pet
-A.Innate_Mounted                    = GetString(SI_LUIE_SKILL_MOUNTED) -- Mounted
 A.Innate_Resurrection_Immunity      = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY) -- Resurrection Immunity
 A.Innate_Soul_Gem_Resurrection      = GetString(SI_LUIE_SKILL_SOUL_GEM_RESURRECTION) -- Soul Gem Resurrection
 
@@ -100,6 +102,9 @@ A.Innate_Ayleid_Well_Fortified      = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIF
 A.Innate_CC_Immunity                = 38117 -- CC Immunity
 A.Innate_Stagger                    = 1834 -- Stagger
 A.Innate_Revive                     = 5823 -- Revive
+
+-- Champion
+A.Champion_Last_Stand               = 60413
 
 -- World
 A.Innate_Drop_Anchor                = 86717 -- Drop Anchor
@@ -143,9 +148,11 @@ A.Proc_Diseased                     = 21925
 A.Proc_Chill                        = 21481
 A.Proc_Chilled                      = 7145
 A.Proc_Poisoned                     = 21929
-A.Proc_Concussion                   = 21487
+A.Proc_Concussion                   = GetString(SI_LUIE_SKILL_CONCUSSED)
 
 -- Potions/Poisons
+A.Potion                            = 32732
+A.Poison                            = 2563
 A.Potion_Invisiblity                = 3668
 A.Potion_Ravage_Health              = 46111
 A.Potion_Restore_Health             = 45221

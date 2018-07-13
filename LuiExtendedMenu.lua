@@ -67,7 +67,7 @@ function LUIE_CreateSettings()
             counter = counter + 1
             -- If the input is a numeric value then we can pull this abilityId's info.
             if type(id) == "number" then
-                options[counter] = iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. zo_strformat("<<C:1>>", GetAbilityName(id))
+                options[counter] = iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. strformat("<<C:1>>", GetAbilityName(id))
             -- If the input is not numeric then add this as a name only.
             else
                 options[counter] = id
@@ -2006,6 +2006,19 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.IgnoreMount,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             },
+
+            {
+                -- Use Generic Mount Icon
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.MountGenericIcon end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.MountGenericIcon = value LUIE.SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.MountGenericIcon,
+                disabled = function() return LUIE.SpellCastBuffs.SV.IgnoreMount and not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            },
+
             {
                 -- Long Term - Pets
                 type = "checkbox",
