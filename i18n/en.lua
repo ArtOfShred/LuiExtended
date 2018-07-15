@@ -2067,8 +2067,8 @@ local strings = {
     SI_LUIE_SKILL_SOUL_GEM_RESURRECTION =                "Soul Gem Resurrection",
     SI_LUIE_SKILL_STEALTH_STUN =                         "Stealth Stun",
     SI_LUIE_SKILL_FALL_DAMAGE =                          "Fall Damage",
-    SI_LUIE_SKILL_ABSORBING_SKYSHARD =                   "Absorbing Skyshard",
-    SI_LUIE_SKILL_RECEIVING_BOON =                       "Receiving Boon",
+    SI_LUIE_SKILL_ABSORBING_SKYSHARD =                   "Absorb Skyshard",
+    SI_LUIE_SKILL_RECEIVING_BOON =                       "Receive Boon",
     SI_LUIE_SKILL_MOUNT_SPRINT =                         "Gallop",
     SI_LUIE_SKILL_BLOCK_STUN =                           "Block Stun",
     SI_LUIE_SKILL_AYLEID_WELL =                          "Ayleid Well",
@@ -2111,9 +2111,9 @@ local strings = {
     SI_LUIE_SKILL_EXPERIENCE_AETHERIAL_AMBROSIA =        "Aetherial Ambrosia",
     SI_LUIE_SKILL_EXPERIENCE_MYTHIC_AMBROSIA =           "Mythic Aetherial Ambrosia",
     SI_LUIE_SKILL_EXPERIENCE_CROWN_SCROLL =              "Crown Experience Scroll",
-    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_1 =      "Crown Crate Experience Scroll",
-    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2 =      "Major Crown Crate Experience Scroll",
-    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3 =      "Grand Crown Crate Experience Scroll",
+    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_1 =      "Gold Coast Experience Scroll",
+    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2 =      "Major Gold Coast Experience Scroll",
+    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3 =      "Grand Gold Coast Experience Scroll",
     SI_LUIE_SKILL_CONSUMABLE_FESTIVAL_MINTS =            "High Hrothgar Festival Mints",
     SI_LUIE_SKILL_CONSUMABLE_SAILORS_GROG =              "Sailor\'s Warning Festival Grog",
     SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT =             "Mystery Meat",
@@ -2329,7 +2329,38 @@ local strings = {
 
     SI_LUIE_SKILL_CONCUSSED =                            "Concussed",
 
-    SI_LUIE_SKILL_CREEPING_RAVAGE_HEALTH_TP =            "You drank a bad potion. You're fucking dying.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Increases your Spell and Physical Resistance by |cFFFFFF2752|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Increases your Spell and Physical Penetration by |cFFFFFF2752|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LORD =                    "Increases your Maximum Health by |cFFFFFF2230|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_MAGE =                    "Increases your Maximum Magicka by |cFFFFFF2028|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_TOWER =                   "Increases your Maximum Stamina by |cFFFFFF2028|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH =                "Increases your Magicka Recovery by |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT =                 "Increases your Stamina Recovery by |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW =                  "Increases your Critical Damage by |cFFFFFF9|r%.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL =                  "Increases your healing done by |cFFFFFF10|r%.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_THIEF =                   "Increases your Weapon and Spell Critical Strike ratings by |cFFFFFF1533|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_WARRIOR =                 "Increases your Weapon Damage by |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE =              "Increases your Spell Damage by |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_STEED =                   "Increases your Movement Speed by |cFFFFFF5|r% and Health Recovery by |cFFFFFF238|r.",
+
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL =          "These effects are scaled based on your level.", -- Note this needs to be an exact match to the description in Crown Crate food/drink items for it to be correctly removed in each localization.
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA =    "If you are a vampire, the blood in this drink will also mildly sate you.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_HISSMIR =               "This drink will also grant you insights into what manner of fish spawn in various bodies of water, as well as alertness for nearby fish activity.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
+    SI_LUIE_SKILL_ADD_TOOLTIP_HISSMIR =                  "\n\nThis drink will also grant you insights into what manner of fish spawn in various bodies of water, as well as alertness for nearby fish activity.",
+    SI_LUIE_SKILL_ESO_PLUS_TP =                          "Increase Experience, Gold, and Inspiration Points earned by |cffffff10|r%. Increase Trait Research speed by |cffffff10|r%.",
+
+    SI_LUIE_SKILL_CRAFTING_STATION_JEWELRY =             "Attune Jewelry Crafting Station",
+    SI_LUIE_SKILL_CRAFTING_STATION_BLACKSMITH =          "Attune Blacksmithing Station",
+    SI_LUIE_SKILL_CRAFTING_STATION_CLOTHING =            "Attune Clothing Station",
+    SI_LUIE_SKILL_CRAFTING_STATION_WOODWORK =            "Attune Woodworking Station",
+
+    SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP =              "Increase Experience Points earned by |cffffff<<1>>|r% for |cffffff30|r minutes.",
+    SI_LUIE_SKILL_EXPERIENCE_HOUR_TP =                   "Increase Experience Points earned by |cffffff<<1>>|r% for |cffffff<<2>>|r <<2[hour/hours]>>.",
+    SI_LUIE_SKILL_FILLET_FISH =                          "Fillet Fish",
+    SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT =             "Counterfeit Pardon Edict",
+    SI_LUIE_SKILL_LENIENCY_EDICT =                       "Leniency Edict",
+    SI_LUIE_SKILL_GRAND_AMNESTY_EDICT =                  "Grand Amnesty Edict",
+
 }
 
 -- TODO: Switch to StringId's

@@ -135,6 +135,22 @@ T.Innate_Ayleid_Well                = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP)
 T.Innate_Ayleid_Well_Fortified      = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP)
 T.Innate_Firelight                  = GetString(SI_LUIE_SKILL_FIRELIGHT_TP)
 
+T.Innate_ESO_Plus                   = GetString(SI_LUIE_SKILL_ESO_PLUS_TP)
+
+T.Boon_Lady = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_LADY)
+T.Boon_Lover = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_LOVER)
+T.Boon_Lord = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_LORD)
+T.Boon_Mage = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_MAGE)
+T.Boon_Tower = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_TOWER)
+T.Boon_Atronach = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH)
+T.Boon_Serpent = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT)
+T.Boon_Shadow = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW)
+T.Boon_Ritual = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL)
+T.Boon_Thief = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_THIEF)
+T.Boon_Warrior = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_WARRIOR)
+T.Boon_Apprentice = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE)
+T.Boon_Steed = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_STEED)
+
 -- ---------------------------------------------------
 -- CHAMPION ---------------------
 -- ---------------------------------------------------
@@ -163,8 +179,51 @@ T.Item_Glyph_of_Hardening           = GetString(SI_LUIE_SKILL_GLYPH_HARDENING_TP
 T.Item_Glyph_of_Weakening           = GetString(SI_LUIE_SKILL_GLYPH_WEAKENING_TP)
 T.Item_Glyph_of_Weapon_Damage       = GetString(SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE_TP)
 
-T.Potion_Creeping_Ravage_Health     = GetString(SI_LUIE_SKILL_CREEPING_RAVAGE_HEALTH_TP)
+T.Food_Crafted_Health               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68235:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Magicka              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68238:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Stamina              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68241:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Health_Magicka       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68244:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Health_Stamina       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68247:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Magicka_Stamina      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68250:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Triple               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68254:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
 
+T.Food_Vendor_Health                = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57637:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Vendor_Magicka               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57630:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Vendor_Stamina               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Cyrodilic_Field_Bar          = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71076:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Cyrodilic_Field_Tack         = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71074:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Cyrodilic_Field_Treat        = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71075:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+
+T.Food_Crown_Crate_Meal             = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:94437:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), "")
+T.Food_Crown_Meal                   = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64711:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), "")
+
+T.Drink_Crafted_Health              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68257:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Magicka             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68260:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Stamina             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68263:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Health_Magicka      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68266:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Health_Stamina      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68269:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Magicka_Stamina     = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68272:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Triple              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68276:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+
+T.Drink_Vendor_Health               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57642:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Vendor_Magicka              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71250:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Vendor_Stamina              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57654:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Cyrodilic_Field_Tonic       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71079:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Cyrodilic_Field_Brew        = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71077:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Cyrodilic_Field_Tea         = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71078:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+
+T.Drink_Crown_Crate_Drink           = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:94438:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), "")
+T.Drink_Crown_Drink                 = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64712:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), "")
+T.Drink_Double_Bloody_Mara          = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87699:6:1:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA), "")
+T.Drink_Hissmir                     = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:101879:6:1:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_HISSMIR), GetString(SI_LUIE_SKILL_ADD_TOOLTIP_HISSMIR))
+
+T.Experience_Psijic_Ambrosia        = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP), "50")
+T.Experience_Aetherial_Ambrosia     = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP), "100")
+T.Experience_Mythic_Aetherial_Ambrosia = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP), "150")
+T.Experience_Crown                  = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "50", "2")
+T.Experience_Gold_Coast             = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "50", "1")
+T.Experience_Major_Gold_Coast       = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "1")
+T.Experience_Grand_Gold_Coast       = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "150", "1")
 
 -- ---------------------------------------------------
 -- PLAYER ABILITIES ---------------------
@@ -194,42 +253,6 @@ T.Skill_Spirit_Armor                = GetString(SI_LUIE_SKILL_SPIRIT_ARMOR_TP)
 T.Skill_Fancy_Clothing              = GetString(SI_LUIE_SKILL_FANCY_CLOTHING_TP)
 T.Skill_Burrow                      = GetString(SI_LUIE_SKILL_BURROW_TP)
 T.Skill_Shadow_Wood                 = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP)
-
-T.Food_Crafted_Health               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68235:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Food_Crafted_Magicka              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68238:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Food_Crafted_Stamina              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68241:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Food_Crafted_Health_Magicka       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68244:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Food_Crafted_Health_Stamina       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68247:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Food_Crafted_Magicka_Stamina      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68250:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Food_Crafted_Triple               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68254:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-
-T.Food_Vendor_Health                = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57637:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Food_Vendor_Magicka               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57630:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Food_Vendor_Stamina               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Food_Cyrodilic_Field_Bar          = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71076:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Food_Cyrodilic_Field_Tack         = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71074:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Food_Cyrodilic_Field_Treat        = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71075:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-
-T.Food_Crown_Crate_Meal             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:94437:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h'))
-T.Food_Crown_Meal                   = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64711:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h'))
-
-T.Drink_Crafted_Health              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68257:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Drink_Crafted_Magicka             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68260:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Drink_Crafted_Stamina             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68263:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Drink_Crafted_Health_Magicka      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68266:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Drink_Crafted_Health_Stamina      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68269:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Drink_Crafted_Magicka_Stamina     = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68272:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Drink_Crafted_Triple              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68276:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-
-T.Drink_Vendor_Health               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57642:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Drink_Vendor_Magicka              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71250:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Drink_Vendor_Stamina              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57654:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Drink_Cyrodilic_Field_Tonic       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71079:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Drink_Cyrodilic_Field_Brew        = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71077:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Drink_Cyrodilic_Field_Tea         = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71078:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-
-T.Drink_Crown_Crate_Drink           = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:94438:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h'))
-T.Drink_Crown_Drink                 = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64712:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h'))
 
 function LUIE.ProcessTooltipType(input, tooltip)
 

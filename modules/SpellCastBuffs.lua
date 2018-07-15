@@ -1536,7 +1536,7 @@ function SCB.Buff_OnMouseEnter(control)
         -- Add original TP if present
         if control.buffSlot then
             if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                tooltipText = "|cFFFF00Original Tooltip:|r " .. GetAbilityEffectDescription(control.buffSlot) .. "\n"
+                tooltipText = "|cFFFF00Original Tool:|r " .. GetAbilityEffectDescription(control.buffSlot) .. "\n"
             end
         end
 
@@ -1544,7 +1544,7 @@ function SCB.Buff_OnMouseEnter(control)
         if type(control.effectId) == "number" then
             -- Add original description if present
             if GetAbilityDescription(control.effectId) ~= "" then
-                tooltipText = tooltipText .. "|c3A92FFOriginal Description:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
+                tooltipText = tooltipText .. "|c3A92FFOriginal Desc:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
             end
 
             duration = GetAbilityDuration(control.effectId) / 1000
@@ -1561,11 +1561,17 @@ function SCB.Buff_OnMouseEnter(control)
 
         local tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or ""
         if tooltipText2 ~= "" then
-            tooltipText2 = "|cEE992AOverride:|r " .. tooltipText2
+            tooltipText2 = "|cEE992AOverride TP:|r " .. tooltipText2
         end
         tooltipText = tooltipText .. tooltipText2
 
         if control.tooltip then tooltipText = control.tooltip end
+
+        if E.TooltipUseDefault[control.effectId] then
+            if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                tooltipText = tooltipText .. "\n\n|c00FFFFFlagged to show original Tooltip|r"
+            end
+        end
 
     -- NORMAL BEHAVIOR:
     else
@@ -1592,6 +1598,13 @@ function SCB.Buff_OnMouseEnter(control)
                 duration = 0
             end
         end
+
+        if E.TooltipUseDefault[control.effectId] then
+            if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                tooltipText = GetAbilityEffectDescription(control.buffSlot)
+            end
+        end
+
     end
     -- END TEMPORARY DEBUG FUNCTION HERE
 

@@ -452,6 +452,11 @@ E.CastDurationFix = {
     [14031] = 5000, -- Mundus Use
     [4197] = 4000, -- Recovering (NPC Duel)
 
+    [89469] = 5000, -- 68235 Stun
+    [89645] = 5000, -- 68235 Stun
+    [105217] = 5000, -- 68235 Stun
+    [89654] = 5000, -- 68235 Stun
+
     [33175] = 6300, -- Feed (Vampire)
     [40350] = 5300, -- Feed (Vampire - Bite Player)
     [33208] = 3000, -- Devour (Werewolf)
@@ -489,11 +494,21 @@ E.IsCast = {
 
     -- Innate
     [6811] = true, -- Recall
+    [69293] = true, -- Sigil of Imperial Retreat
     [37059] = true, -- Mount Up
     [14031] = true, -- Mundus Use
     [14644] = true, -- Revive (Death Dialogue)
     [32346] = true, -- Skyshard Collect
     [47270] = true, -- Ritual of Mara
+
+    [89469] = true, -- 68235 Stun
+    [89645] = true, -- 68235 Stun
+    [105217] = true, -- 68235 Stun
+    [89654] = true, -- 68235 Stun
+    [63427] = true, -- Clean Fish
+    [78052] = true, -- Minor Pardon
+    [76350] = true, -- Moderate Pardon
+    [76349] = true, -- Full Pardon
 
     -- Class
     [43714] = true, -- Crystal Shard (Sorcerer)
@@ -2199,6 +2214,26 @@ E.TooltipNameOverride = {
 
 }
 
+-- LUIE for the most part overwrites default ability tooltips due to the fact they are only exposed for buffs/debuffs that are on the player. In some cases there is no description with scaling or we need to still use the default where possible.
+-- The most noteworthy case of this is Mundus Boons, where there is a tooltip but no description. We want to display a generic tooltip describing the effect if mousing over another player - but display the default for self.
+E.TooltipUseDefault = {
+
+[13940] = true, -- Boon: The Warrior
+[13943] = true, -- Boon: The Mage
+[13974] = true, -- Boon: The Serpent
+[13975] = true, -- Boon: The Thief
+[13976] = true, -- Boon: The Lady
+[13977] = true, -- Boon: The Steed
+[13978] = true, -- Boon: The Lord
+[13979] = true, -- Boon: The Apprentice
+[13980] = true, -- Boon: The Ritual
+[13981] = true, -- Boon: The Lover
+[13982] = true, -- Boon: The Atronach
+[13984] = true, -- Boon: The Shadow
+[13985] = true, -- Boon: The Tower
+
+}
+
 E.EffectOverride = {
     -- Override the display information for various effect auras:
     -- icon = Change Icon
@@ -2525,13 +2560,13 @@ E.EffectOverride = {
 
     -- Crafted Seasonal Drink
     [84700] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_bowl_of_peeled_eyeballs.dds', name = A.Drink_Bowl_of_Peeled_Eyeballs }, -- Bowl of "Peeled Eyeballs"
-    [84735] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_double_bloody_mara.dds' }, -- Double Bloody Mara
+    [84735] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_double_bloody_mara.dds', tooltip = T.Drink_Double_Bloody_Mara }, -- Double Bloody Mara
     [84720] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_ghastly_eye_bowl.dds', name = A.Drink_Ghastly_Eye_Bowl }, -- Ghastly Eye Bowl
     [84704] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_witchmothers_party_punch.dds' }, -- Witchmother's Party Punch
     [84731] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_witchmothers_potent_brew.dds' }, -- Witchmother's Potent Brew
     [86677] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_bergama_warning_fire.dds', name = A.Drink_Bergama_Warning_Fire }, -- Bergama Warning Fire
     [86746] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_betnikh_twice-spiked_ale.dds', name = A.Drink_Betnikh_Twice_Spiked_Ale }, -- Betnikh Twice-Spiked Ale
-    [86559] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_hissmir_fish-eye_rye.dds', name = A.Drink_Hissmir_Fish_Eye_Rye }, -- Hissmir Fish-Eye Rye
+    [86559] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_hissmir_fish-eye_rye.dds', name = A.Drink_Hissmir_Fish_Eye_Rye, tooltip = T.Drink_Hissmir }, -- Hissmir Fish-Eye Rye
     [86791] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_snow_bear_glow-wine.dds', name = A.Drink_Snow_Bear_Glow_Wine }, -- Snow Bear Glow-Wine
     [89957] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_dubious_camoran_throne.dds' }, -- Dubious Camoran Throne
     [89971] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_jewels_of_misrule.dds' }, -- Jewels of Misrule
@@ -2563,16 +2598,20 @@ E.EffectOverride = {
     [92476] = { icon = 'LuiExtended/media/icons/consumables/consumable_crowncrate_staminahealth_drink.dds', name = A.Drink_Crown_Vigorous_Tincture }, -- Crown Vigorous Tincture
 
     -- Experience Bonuses
-    [64210] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_psijic_ambrosia.dds', name = A.Experience_Psijic_Ambrosia }, -- Psijic Ambrosia
-    [89683] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_aetherial_ambrosia.dds', name = A.Experience_Aetherial_Ambrosia }, -- Aetherial Ambrosia
-    [88445] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_mythic_aetherial_ambrosia.dds', name = A.Experience_Mythic_Ambrosia }, -- Mythic Aetherial Ambrosia
-    [66776] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_scroll.dds', name = A.Experience_Crown_Scroll }, -- Crown Experience Scroll
-    [85501] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_1.dds', name = A.Experience_Crown_Crate_Scroll_1 }, -- Crown Crate Experience Scroll
-    [85502] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_2.dds', name = A.Experience_Crown_Crate_Scroll_2 }, -- Major Crown Crate Experience Scroll
-    [85503] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds', name = A.Experience_Crown_Crate_Scroll_3 }, -- Grand Crown Crate Experience Scroll
+    [64210] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_psijic_ambrosia.dds', name = A.Experience_Psijic_Ambrosia, tooltip = T.Experience_Psijic_Ambrosia }, -- Psijic Ambrosia
+    [89683] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_aetherial_ambrosia.dds', name = A.Experience_Aetherial_Ambrosia, tooltip = T.Experience_Aetherial_Ambrosia }, -- Aetherial Ambrosia
+    [88445] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_mythic_aetherial_ambrosia.dds', name = A.Experience_Mythic_Ambrosia, tooltip = T.Experience_Mythic_Aetherial_Ambrosia }, -- Mythic Aetherial Ambrosia
+    [66776] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_scroll.dds', name = A.Experience_Crown_Scroll, tooltip = T.Experience_Crown }, -- Crown Experience Scroll
+    [85501] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_1.dds', name = A.Experience_Crown_Crate_Scroll_1, tooltip = T.Experience_Gold_Coast }, -- Gold Coast Experience Scroll
+    [85502] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_2.dds', name = A.Experience_Crown_Crate_Scroll_2, tooltip = T.Experience_Major_Gold_Coast }, -- Major Gold Coast Experience Scroll
+    [85503] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds', name = A.Experience_Crown_Crate_Scroll_3, tooltip = T.Experience_Grand_Gold_Coast }, -- Grand Gold Coast Experience Scroll
 
     -- Other
     [70582] = { hide = true }, -- Roll 1d1000 (Merethic Restorative Resin)
+    [63427] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fillet_fish.dds', name = A.Innate_Fillet_Fish }, -- Clean Fish
+    [78052] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_pardon_edict_low.dds', name = A.Innate_Pardon_Edict_Low }, -- Minor Pardon
+    [76350] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_pardon_edict_medium.dds', name = A.Innate_Pardon_Edict_Medium }, -- Moderate Pardon
+    [76349] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_pardon_edict_high.dds', name = A.Innate_Pardon_Edict_High }, -- Full Pardon
 
     -- Seasonal Misc
     [86794] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_mints.dds', name = A.Consumable_Festival_Mints }, -- Very Cold (High Hrothgar Festival Mints)
@@ -2700,6 +2739,24 @@ E.EffectOverride = {
     [21929] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_poisoned.dds', tooltip = T.Generic_Poison }, -- Poisoned (Poison Status Effect)
     [21487] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds', name = A.Proc_Concussion }, -- Concussion (Shock Status Effect)
     [68359] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds', tooltip = A.Proc_Concussion }, -- Minor Vulnerability (Shock Status Effect)
+
+    ----------------------------------------------------------------
+    -- MUNDUS STONE BOONS ------------------------------------------
+    ----------------------------------------------------------------
+
+    [13940] = { tooltip = T.Boon_Warrior }, -- Boon: The Warrior
+    [13943] = { tooltip = T.Boon_Mage }, -- Boon: The Mage
+    [13974] = { tooltip = T.Boon_Serpent }, -- Boon: The Serpent
+    [13975] = { tooltip = T.Boon_Thief }, -- Boon: The Thief
+    [13976] = { tooltip = T.Boon_Lady }, -- Boon: The Lady
+    [13977] = { tooltip = T.Boon_Steed }, -- Boon: The Steed
+    [13978] = { tooltip = T.Boon_Lord }, -- Boon: The Lord
+    [13979] = { tooltip = T.Boon_Apprentice }, -- Boon: The Apprentice
+    [13980] = { tooltip = T.Boon_Ritual }, -- Boon: The Ritual
+    [13981] = { tooltip = T.Boon_Lover }, -- Boon: The Lover
+    [13982] = { tooltip = T.Boon_Atronach }, -- Boon: The Atronach
+    [13984] = { tooltip = T.Boon_Shadow }, -- Boon: The Shadow
+    [13985] = { tooltip = T.Boon_Tower }, -- Boon: The Tower
 
     ----------------------------------------------------------------
     -- EQUIPMENT ---------------------------------------------------
@@ -3158,10 +3215,11 @@ E.EffectOverride = {
     -- Misc
     [10950] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds', name = A.Innate_Fall_Damage }, -- Fall Snare
     [6811] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', tooltip = T.Innate_Recall_Penalty }, -- Recall
+    [69293] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', name = A.Innate_Recall }, -- Recall
     [14644] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = A.Innate_Revive }, -- Revive (Death Dialogue)
     [31221] = { hide = true }, -- Skyshard Collect (Aura on Skyshard when player collects it)
     [32346] = { icon = 'esoui/art/icons/ability_mage_050.dds', name = A.Innate_Absorbing_Skyshard, unbreakable = 1}, -- Skyshard Collect
-    [63601] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds' }, -- ESO Plus Member
+    [63601] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds', tooltip = T.Innate_ESO_Plus }, -- ESO Plus Member
     [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', hide = true }, -- Ritual of Mara
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance, tooltip = T.Generic_Off_Balance }, -- Off-Balance
     [102771] = { stack = 0, type = 1, tooltip = T.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
@@ -3227,6 +3285,12 @@ E.EffectOverride = {
     -- Pet Effects
     [63794] = { hide = true }, -- Taunt
     [112170] = { hide = true }, -- CC Immunity
+
+    -- Housing
+    [89469] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_create_station_blacksmith.dds', name = A.Innate_Create_Station_Blacksmith }, -- 68235 Stun
+    [89645] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_create_station_clothing.dds', name = A.Innate_Create_Station_Clothing }, -- 68235 Stun
+    [105217] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_create_station_jewelry.dds', name = A.Innate_Create_Station_Jewelry }, -- 68235 Stun
+    [89654] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_create_station_woodwork.dds', name = A.Innate_Create_Station_Woodwork }, -- 68235 Stun
 
     ----------------------------------------------------------------
     -- WORLD EVENTS  -----------------------------------------------

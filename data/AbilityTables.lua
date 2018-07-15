@@ -78,6 +78,7 @@ A.Skill_Stun                        = 68565
 -- ---------------------------------------------------
 
 -- Simulated Auras
+A.Innate_Recall                     = 6811
 A.Innate_Recall_Penalty             = GetString(SI_LUIE_SKILL_RECALL_PENALTY) -- Recall Penalty
 A.Innate_Resurrection_Immunity      = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY) -- Resurrection Immunity
 A.Innate_Soul_Gem_Resurrection      = GetString(SI_LUIE_SKILL_SOUL_GEM_RESURRECTION) -- Soul Gem Resurrection
@@ -102,6 +103,15 @@ A.Innate_Ayleid_Well_Fortified      = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIF
 A.Innate_CC_Immunity                = 38117 -- CC Immunity
 A.Innate_Stagger                    = 1834 -- Stagger
 A.Innate_Revive                     = 5823 -- Revive
+
+A.Innate_Create_Station_Jewelry     = GetString(SI_LUIE_SKILL_CRAFTING_STATION_JEWELRY)
+A.Innate_Create_Station_Blacksmith  = GetString(SI_LUIE_SKILL_CRAFTING_STATION_BLACKSMITH)
+A.Innate_Create_Station_Clothing    = GetString(SI_LUIE_SKILL_CRAFTING_STATION_CLOTHING)
+A.Innate_Create_Station_Woodwork    = GetString(SI_LUIE_SKILL_CRAFTING_STATION_WOODWORK)
+A.Innate_Fillet_Fish                = GetString(SI_LUIE_SKILL_FILLET_FISH)
+A.Innate_Pardon_Edict_Low           = GetString(SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT)
+A.Innate_Pardon_Edict_Medium        = GetString(SI_LUIE_SKILL_LENIENCY_EDICT)
+A.Innate_Pardon_Edict_High          = GetString(SI_LUIE_SKILL_GRAND_AMNESTY_EDICT)
 
 -- Champion
 A.Champion_Last_Stand               = 60413

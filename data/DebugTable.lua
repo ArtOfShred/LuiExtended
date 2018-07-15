@@ -584,7 +584,7 @@ debugAuras = {
             -------------------------------------
 
             [76364] = true, -- _CRWN_5s
-            --[76365] = true, -- _CRWN_Echalette_Buck
+            [76365] = true, -- _CRWN_Echalette_Buck
             [76367] = true, -- _CRWN_ResetPosture
             [76368] = true, -- _CRWN_1s
             [78642] = true, -- _CRWN_Jackal_Mouse

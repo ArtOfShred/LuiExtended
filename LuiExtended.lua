@@ -465,6 +465,12 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
                     local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, timer) or GetAbilityDescription(abilityId)
 
+                    if LUIE.Effects.TooltipUseDefault[abilityId] then
+                        if GetAbilityEffectDescription(buffSlot) ~= "" then
+                            tooltipText = GetAbilityEffectDescription(buffSlot)
+                        end
+                    end
+
                     if tooltipText ~= "" then
                         tooltipText = strmatch(tooltipText, ".*%S")
                     end
