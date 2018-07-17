@@ -1314,7 +1314,12 @@ end
 -- Main entry point to this module
 function UF.Initialize( enabled )
     -- Load settings
-    UF.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "UnitFrames", UF.D )
+    local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
+    if isCharacterSpecific then
+        UF.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "UnitFrames", UF.D )
+    else
+        UF.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "UnitFrames", UF.D )
+    end
 
     if UF.SV.DefaultOocTransparency < 0 or UF.SV.DefaultOocTransparency > 100 then
         UF.SV.DefaultOocTransparency = UF.D.DefaultOocTransparency
