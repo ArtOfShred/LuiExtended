@@ -5152,8 +5152,8 @@ function LUIE_CreateSettings()
             {
                 -- Skill Undaunted
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_MG),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_MG_TP),
+                name = GetString(SI_LUIE_LAM_CA_GUILDREP_UD),
+                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_UD_TP),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.Skills.SkillGuildUndaunted end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Skills.SkillGuildUndaunted = value end,
                 width = "full",

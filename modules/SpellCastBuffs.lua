@@ -1594,6 +1594,14 @@ function SCB.Buff_OnMouseEnter(control)
                 else
                     tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or ""
                 end
+
+                -- Use default tooltip - temp if needed (TODO: Remove when all base ability/set tooltips are updated)
+                if tooltipText == "" or tooltipText == nil then
+                    if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                        tooltipText = GetAbilityEffectDescription(control.buffSlot)
+                    end
+                end
+
             else
                 duration = 0
             end
@@ -2066,13 +2074,13 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
         if context == "player1" then
             context = "promd_player"
-        elseif context == "reticleover2" or abilityId == 102771 then
+        elseif (context == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER) or abilityId == 102771 then
             context = "promd_target"
         end
     elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
         if context == "player1" then
             context = "promb_player"
-        elseif context == "reticleover2" or abilityId == 102771 then
+        elseif (context == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER) or abilityId == 102771 then
             context = "promb_target"
         end
     end
@@ -2093,13 +2101,13 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                 if (SCB.SV.PromDebuffTable[name] or SCB.SV.PromDebuffTable[id]) then
                     if simulatedContext == "player1" then
                         simulatedContext = "promd_player"
-                    elseif simulatedContext == "reticleover2" then
+                    elseif (simulatedContext == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER)  then
                         simulatedContext = "promd_target"
                     end
                 elseif (SCB.SV.PromBuffTable[name] or SCB.SV.PromBuffTable[id]) then
                     if simulatedContext == "player1" then
                         simulatedContext = "promb_player"
-                    elseif simulatedContext == "reticleover2" then
+                    elseif (simulatedContext == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER) then
                         simulatedContext = "promb_target"
                     end
                 end
@@ -2131,13 +2139,13 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                 if (SCB.SV.PromDebuffTable[name] or SCB.SV.PromDebuffTable[id]) then
                     if simulatedContext == "player1" then
                         simulatedContext = "promd_player"
-                    elseif simulatedContext == "reticleover2" then
+                    elseif (simulatedContext == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER)  then
                         simulatedContext = "promd_target"
                     end
                 elseif (SCB.SV.PromBuffTable[name] or SCB.SV.PromBuffTable[id]) then
                     if simulatedContext == "player1" then
                         simulatedContext = "promb_player"
-                    elseif simulatedContext == "reticleover2" then
+                    elseif (simulatedContext == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER)  then
                         simulatedContext = "promb_target"
                     end
                 end

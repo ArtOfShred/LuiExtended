@@ -3,7 +3,7 @@
 LUIE             = {}
 LUIE.name        = "LuiExtended"
 LUIE.author      = "ArtOfShred, psypanda & SpellBuilder"
-LUIE.version     = "5.5.2"
+LUIE.version     = "5.6"
 LUIE.website     = "http://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github      = "https://github.com/ArtOfShred/LuiExtended"
 LUIE.components  = {}
@@ -465,6 +465,13 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
                     local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, timer) or GetAbilityDescription(abilityId)
 
+                    -- Use default tooltip - temp if needed (TODO: Remove when all base ability/set tooltips are updated)
+                    if tooltipText == "" or tooltipText == nil then
+                        if GetAbilityEffectDescription(buffSlot) ~= "" then
+                            tooltipText = GetAbilityEffectDescription(buffSlot)
+                        end
+                    end
+
                     if LUIE.Effects.TooltipUseDefault[abilityId] then
                         if GetAbilityEffectDescription(buffSlot) ~= "" then
                             tooltipText = GetAbilityEffectDescription(buffSlot)
@@ -548,6 +555,10 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         end
         control.animation:PlayForward()
     end
+
+
+    -- SKILL ADVISOR ICON/NAME OVERRIDES -- OUTDATED -- DISABLED TEMPORARILY
+    --[[
 
     -- Hook skills advisor and use this variable to refresh the abilityData on time one initialization. We don't want to reload any more after that.
     local firstRun = true
@@ -653,6 +664,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         [ACTION_TYPE_ITEM]          = SetupItemSlot,
         [ACTION_TYPE_COLLECTIBLE]   = SetupCollectibleActionSlot,
     }
+
+    ]]--
+
 end
 
 -- Called from the menu and on initialization to update timestamp color when changed.
