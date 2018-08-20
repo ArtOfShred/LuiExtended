@@ -864,10 +864,6 @@ end
 
 function CI.CreateCastBar()
     uiTlw.castBar = UI.TopLevel( nil, nil )
-    uiTlw.castBar:SetHandler( "OnMoveStop", function(self)
-        CI.SV.CastbarOffsetX = self:GetLeft()
-        CI.SV.CastbarOffsetY = self:GetTop()
-    end )
 
     uiTlw.castBar:SetDimensions( CI.SV.CastBarSizeW + CI.SV.CastBarIconSize + 4, CI.SV.CastBarSizeH )
 
@@ -884,6 +880,8 @@ function CI.CreateCastBar()
     -- Callback used to save new position of frames
     local tlwOnMoveStop = function(self)
         eventManager:UnregisterForUpdate( moduleName .. "previewMove" )
+        CI.SV.CastbarOffsetX = self:GetLeft()
+        CI.SV.CastbarOffsetY = self:GetTop()
         CI.SV.CastBarCustomPosition = { self:GetLeft(), self:GetTop() }
     end
 

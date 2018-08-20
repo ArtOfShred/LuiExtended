@@ -8,6 +8,10 @@ local windowManager = WINDOW_MANAGER
 
 local fillMessages = {
 
+    "|cFFA5005.6.1|r",
+    "• Combat Info: Fixed an issue where Cast Bar custom position was not saving correctly.",
+    "• Unit Frames: Fixed an issue where Group and Raid frame Role Colors & Icons were not working (thanks SilverWF for finding the issue and fixing it).",
+    "|",
     "|cFFA5005.6 (Wolfhunter)|r",
     "|cFFFF00General:|r",
     "• Temporarily removed custom icons for passives and racials in the skill tree due to the related functions for this being changed in the update. I intend to reimplement this in the future.",
@@ -124,8 +128,8 @@ function LUIE_WelcomeScreen(menu)
 
         local buffer = luiChangeLog:GetNamedChild("Buffer")
         local slider = luiChangeLog:GetNamedChild("Slider")
-        buffer:SetScrollPosition(41)
-        slider:SetValue(buffer:GetNumHistoryLines() - 41)
+        buffer:SetScrollPosition(45)
+        slider:SetValue(buffer:GetNumHistoryLines() - 45)
 
     end
     -- Set version to current version.
