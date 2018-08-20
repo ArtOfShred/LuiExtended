@@ -38,8 +38,8 @@ local classIcons = {
 local roleIcons = {
     [0] = "LuiExtended/media/unitframes/unitframes_class_none.dds",
     [1] = "esoui/art/lfg/lfg_icon_dps.dds",
-    [2] = "esoui/art/lfg/lfg_icon_healer.dds",
-    [3] = "esoui/art/lfg/lfg_icon_tank.dds",
+    [4] = "esoui/art/lfg/lfg_icon_healer.dds",
+    [2] = "esoui/art/lfg/lfg_icon_tank.dds",
 }
 
 local leaderIcons = {
@@ -1314,7 +1314,12 @@ end
 -- Main entry point to this module
 function UF.Initialize( enabled )
     -- Load settings
-    UF.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "UnitFrames", UF.D )
+    local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
+    if isCharacterSpecific then
+        UF.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "UnitFrames", UF.D )
+    else
+        UF.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "UnitFrames", UF.D )
+    end
 
     if UF.SV.DefaultOocTransparency < 0 or UF.SV.DefaultOocTransparency > 100 then
         UF.SV.DefaultOocTransparency = UF.D.DefaultOocTransparency
@@ -1408,7 +1413,7 @@ function UF.Initialize( enabled )
         eventManager:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_GAINED,     UF.OnChampionPointGained )
         eventManager:RegisterForEvent(moduleName, EVENT_GROUP_SUPPORT_RANGE_UPDATE,    UF.OnGroupSupportRangeUpdate )
         eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_CONNECTED_STATUS, UF.OnGroupMemberConnectedStatus )
-        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLES_CHANGED, UF.OnGroupMemberRoleChange )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLE_CHANGED, UF.OnGroupMemberRoleChange )
         eventManager:RegisterForEvent(moduleName, EVENT_GROUP_UPDATE, UF.OnGroupMemberChange )
         eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, UF.OnGroupMemberChange )
         eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT, UF.OnGroupMemberChange )
@@ -1633,19 +1638,8 @@ function UF.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue,
     end
 
     -- If players powerValue is zero, issue new blinking event on Custom Frames
-    if unitTag == "player" and powerValue == 0 then
-        -- Sometimes when werewolf power goes to zero the EVENT_WEREWOLF_STATE_CHANGED is not always issued. Thus try to track it manually. -- Delayed call only if default removal doesn't work correctly.
-        if powerType == POWERTYPE_WEREWOLF and not IsUnitReincarnating("player") then
-            zo_callLater(function()
-                if UF.CustomFrames.player and UF.CustomFrames.player[POWERTYPE_WEREWOLF] then
-                    UF.OnWerewolf( eventCode, false )
-                end
-            end, 2000)
-
-        -- Otherwise - we need to manually trigger blinking of powerbar
-        else
-            UF.OnCombatEvent( eventCode, nil, true, nil, nil, nil, nil, COMBAT_UNIT_TYPE_PLAYER, nil, COMBAT_UNIT_TYPE_PLAYER, 0, powerType, nil, false )
-        end
+    if unitTag == "player" and powerValue == 0 and powerType ~= POWERTYPE_WEREWOLF then
+        UF.OnCombatEvent( eventCode, nil, true, nil, nil, nil, nil, COMBAT_UNIT_TYPE_PLAYER, nil, COMBAT_UNIT_TYPE_PLAYER, 0, powerType, nil, false )
     end
 
     -- Display skull icon for alive execute-level targets
@@ -2057,13 +2051,8 @@ function UF.UpdateStaticControls( unitFrame )
 
     -- First update roleIcon, classIcon and friendIcon, so then we can set maximal length of name label
     if unitFrame.roleIcon ~= nil then
-        local isDps, isHealer, isTank = GetGroupMemberRoles(unitFrame.unitTag)
-        local role = 0
-
-        if isDps then role = 1 end
-        if isHealer then role = 2 end
-        if isTank then role = 3 end
-
+        local role = GetGroupMemberSelectedRole(unitFrame.unitTag)
+       -- d (unitFrame.unitTag.." - "..role)
         local unitRole = roleIcons[role]
         unitFrame.roleIcon:SetTexture(unitRole)
     end
@@ -2716,7 +2705,6 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterMounted)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
 		UF.CustomFrames.player.alternative.enlightenment:SetHidden( true )
-
     elseif UF.SV.PlayerEnableAltbarXP and ( UF.CustomFrames.player.isLevelCap or ( UF.CustomFrames.player.isChampion )) then
         UF.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
         UF.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
@@ -2732,11 +2720,11 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
 		local enlightenedBar = enlightenedPool + xp
 		if enlightenedBar > maxBar then enlightenedBar = maxBar end -- If the enlightenment pool extends past the current level then cap it at the maximum bar value.
 
-        UF.CustomFrames.player.ChampionXP.bar:SetMinMax( 0 , maxBar)
-        UF.CustomFrames.player.ChampionXP.bar:SetValue( xp )
-
 		UF.CustomFrames.player.ChampionXP.enlightenment:SetMinMax( 0 , maxBar)
 		UF.CustomFrames.player.ChampionXP.enlightenment:SetValue( enlightenedBar )
+
+        UF.CustomFrames.player.ChampionXP.bar:SetMinMax( 0 , maxBar)
+        UF.CustomFrames.player.ChampionXP.bar:SetValue( xp )
 
         recenter = true
 
@@ -2744,7 +2732,6 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterXP)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
 		UF.CustomFrames.player.alternative.enlightenment:SetHidden( false )
-
     elseif UF.SV.PlayerEnableAltbarXP then
         icon    = "LuiExtended/media/unitframes/unitframes_level_normal.dds"
         center  = { 0, 0.1, 0.1, 0.9 }
@@ -3305,26 +3292,26 @@ function UF.CustomFramesApplyColours(isMenu)
                 UF.CustomFrames[unitTag].control.defaultUnitTag = defaultUnitTag
                 if UF.CustomFrames[unitTag].topInfo then UF.CustomFrames[unitTag].topInfo.defaultUnitTag = defaultUnitTag end
 
-                local isDps, isHealer, isTank = GetGroupMemberRoles(defaultUnitTag)
+                local role = GetGroupMemberSelectedRole(defaultUnitTag)
                 local class = GetUnitClassId(defaultUnitTag)
 
                 local unitFrame = UF.CustomFrames[unitTag]
                 local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
 
                 if (groupSize <= 4 and UF.SV.ColorRoleGroup) or (groupSize > 4 and UF.SV.ColorRoleRaid) then
-                    if isDps then
+                    if role == 1 then
                         thb.bar:SetColor( unpack(dps) )
                         thb.backdrop:SetCenterColor( unpack(dps_bg) )
                     end
-                    if isHealer then
+                    if role == 4 then
                         thb.bar:SetColor( unpack(healer) )
                         thb.backdrop:SetCenterColor( unpack(healer_bg) )
                     end
-                    if isTank then
+                    if role == 2 then
                         thb.bar:SetColor( unpack(tank) )
                         thb.backdrop:SetCenterColor( unpack(tank_bg) )
                     end
-                    if not (isDps or isHealer or isTank) then
+                    if not role then
                         thb.bar:SetColor( unpack(health) )
                         thb.backdrop:SetCenterColor( unpack(health_bg) )
                     end
@@ -3400,22 +3387,22 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
 
     if (groupSize <= 4 and UF.SV.ColorRoleGroup) or (groupSize > 4 and UF.SV.ColorRoleRaid) then
         if UF.CustomFrames[unitTag] then
-            local isDps, isHealer, isTank = GetGroupMemberRoles(unitTag)
+            local role = GetGroupMemberSelectedRole(unitTag)
             local unitFrame = UF.CustomFrames[unitTag]
             local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
-            if isDps then
+            if role == 1 then
                 thb.bar:SetColor( unpack(dps) )
                 thb.backdrop:SetCenterColor( unpack(dps_bg) )
             end
-            if isHealer then
+            if role == 4 then
                 thb.bar:SetColor( unpack(healer) )
                 thb.backdrop:SetCenterColor( unpack(healer_bg) )
             end
-            if isTank then
+            if role == 2 then
                 thb.bar:SetColor( unpack(tank) )
                 thb.backdrop:SetCenterColor( unpack(tank_bg) )
             end
-            if not (isDps or isHealer or isTank) then
+            if not role then
                 if UF.SV.FrameColorReaction and unitTag == "reticleover" then
                     thb.bar:SetColor( unpack(reactioncolor) )
                     thb.backdrop:SetCenterColor( unpack(reactioncolor_bg) )
@@ -4068,10 +4055,10 @@ function UF.CustomFramesApplyLayoutGroup(unhide)
             ghb.shieldbackdrop:SetDimensions( UF.SV.GroupBarWidth, UF.SV.CustomShieldBarHeight )
         end
 
-        local role1, role2, role3 = GetGroupMemberRoles(unitTag)
+        local role = GetGroupMemberSelectedRole(unitTag)
 
         -- First HP Label
-        if UF.SV.RoleIconSmallGroup and (role1 or role2 or role3) then
+        if UF.SV.RoleIconSmallGroup and role then
             ghb.labelOne:SetDimensions(UF.SV.GroupBarWidth-52, UF.SV.GroupBarHeight-2)
             ghb.labelOne:SetAnchor ( LEFT, phb, LEFT, 25, 0 )
             unitFrame.dead:ClearAnchors()
@@ -4141,7 +4128,7 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
         unitFrame.control:SetAnchor( TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*column, UF.SV.RaidBarHeight*(row-1) + (UF.SV.RaidSpacers and spacerHeight*(mathfloor((i-1)/4)-mathfloor(column*itemsPerColumn/4)) or 0) )
         unitFrame.control:SetDimensions( UF.SV.RaidBarWidth, UF.SV.RaidBarHeight )
 
-        local role1, role2, role3 = GetGroupMemberRoles(unitTag)
+        local role = GetGroupMemberSelectedRole(unitTag)
 
         -- If we have icons set to display
         if UF.SV.RaidIconOptions > 1 then
@@ -4152,7 +4139,7 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
                 unitFrame.classIcon:SetHidden (false)
             end
             if UF.SV.RaidIconOptions == 3 then -- Role Icon Only
-                if (role1 or role2 or role3) then
+                if role then
                     unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
@@ -4165,7 +4152,7 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (true)
                     unitFrame.classIcon:SetHidden (false)
-                elseif not ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() ) and (role1 or role2 or role3) then
+                elseif not ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() ) and role then
                     unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
@@ -4179,7 +4166,7 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
                 end
             end
             if UF.SV.RaidIconOptions == 5 then -- Class PVE, Role PVP
-                if ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() )  and (role1 or role2 or role3) then
+                if ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() )  and role then
                     unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
@@ -4206,7 +4193,7 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
 
         -- Old Function preserved here just in case
         --[[
-        if (UF.SV.RoleIconRaid and (role1 or role2 or role3) and not IsPlayerInAvAWorld() ) or (UF.SV.ClassIconRaid and IsUnitOnline(unitTag) ) then
+        if (UF.SV.RoleIconRaid and role and not IsPlayerInAvAWorld() ) or (UF.SV.ClassIconRaid and IsUnitOnline(unitTag) ) then
             unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
         else

@@ -72,6 +72,8 @@ CA.D = {
         AchievementCategory17         = true,
         AchievementCategory18         = true,
         AchievementCategory19         = true,
+        AchievementCategory20         = true,
+        AchievementCategory21         = true,
         AchievementProgressMsg        = GetString(SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG),
         AchievementCompleteMsg        = GetString(SI_ACHIEVEMENT_AWARDED_CENTER_SCREEN),
         AchievementColorProgress      = true,
@@ -3595,7 +3597,7 @@ function CA.ResolveItemMessage(message, formattedRecipient, color, logPrefix, to
     -- Handle non group loot messages
     if not groupLoot then
         -- Adds additional string for previous variant of an item when an item is upgraded.
-        if logPrefix == CA.SV.ContextMessages.CurrencyMessageUpgrade and g_oldItem ~= nil and g_oldItem.itemLink ~= "" then
+        if logPrefix == CA.SV.ContextMessages.CurrencyMessageUpgrade and g_oldItem ~= nil and (g_oldItem.itemLink ~= "" and g_oldItem.itemLink ~= nil) and g_oldItem.icon ~= nil then
             local formattedIcon = (CA.SV.Inventory.LootIcons and g_oldItem.icon ~= "") and strformat("<<1>> ", iconFormat(g_oldItem.icon, 16, 16)) or ""
             local formattedMessageUpgrade = ("|r" .. formattedIcon .. g_oldItem.itemLink .. "|c" .. color)
             formattedMessageP1 = ("|r" .. message .. "|c" .. color)
@@ -8823,14 +8825,14 @@ function CA.HookFunction()
         local currentTargetCharacterName = self.currentTargetCharacterName
         local currentTargetCharacterNameRaw = self.currentTargetCharacterNameRaw
         local currentTargetDisplayName = self.currentTargetDisplayName
-        local primaryName = ZO_GetPrimaryPlayerName(currentTargetDisplayName, currentTargetCharacterName);
-        local primaryNameInternal = ZO_GetPrimaryPlayerName(currentTargetDisplayName, currentTargetCharacterName, USE_INTERNAL_FORMAT);
-        local formattedPlayerNames = ZO_GetPrimaryPlayerNameWithSecondary(currentTargetDisplayName, currentTargetCharacterName);
+        local primaryName = ZO_GetPrimaryPlayerName(currentTargetDisplayName, currentTargetCharacterName)
+        local primaryNameInternal = ZO_GetPrimaryPlayerName(currentTargetDisplayName, currentTargetCharacterName, USE_INTERNAL_FORMAT)
         local platformIcons = IsInGamepadPreferredMode() and GAMEPAD_INTERACT_ICONS or KEYBOARD_INTERACT_ICONS
         local ENABLED = true
         local DISABLED = false
         local ENABLED_IF_NOT_IGNORED = not isIgnored
 
+        self:GetRadialMenu():Clear()
         --Gamecard--
         if IsConsoleUI() then
             self:AddShowGamerCard(currentTargetDisplayName, currentTargetCharacterName)
@@ -8971,6 +8973,8 @@ function CA.HookFunction()
         self:AddMenuEntry(GetString(SI_RADIAL_MENU_CANCEL_BUTTON), platformIcons[SI_RADIAL_MENU_CANCEL_BUTTON], ENABLED)
 
         self:GetRadialMenu():Show()
+        self.showingPlayerInteractMenu = true
+        self.isLastRadialMenuGamepad = IsInGamepadPreferredMode()
     end
 
     --local INTERACT_TYPE_TRADE_INVITE = 3
@@ -8998,35 +9002,32 @@ function CA.HookFunction()
                 if CA.SV.Group.GroupAlert then
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
                 end
-            end
             -- Guild Invite
-            if data.incomingType == INTERACT_TYPE_GUILD_INVITE then
+            elseif data.incomingType == INTERACT_TYPE_GUILD_INVITE then
                 if CA.SV.Social.GuildCA then
                     printToChat(strformat(message, typeString), true)
                 end
                 if CA.SV.Social.GuildAlert then
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
                 end
-            end
-
             -- Friend Invite
-            if data.incomingType == INTERACT_TYPE_FRIEND_REQUEST then
+            elseif data.incomingType == INTERACT_TYPE_FRIEND_REQUEST then
                 if CA.SV.Social.FriendIgnoreCA then
                     printToChat(strformat(message, typeString), true)
                 end
                 if CA.SV.Social.FriendIgnoreAlert then
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
                 end
-            end
-
             -- Quest Shared
-            if data.incomingType == INTERACT_TYPE_QUEST_SHARE then
+            elseif data.incomingType == INTERACT_TYPE_QUEST_SHARE then
                 if CA.SV.Quests.QuestShareCA then
                     printToChat(strformat(message, typeString), true)
                 end
                 if CA.SV.Quests.QuestShareAlert then
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
                 end
+            else
+                ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
             end
 
             --[[
@@ -9040,7 +9041,9 @@ function CA.HookFunction()
     end
 
     local function NotificationAccepted(data)
-        data.pendingResponse = false
+        if not data.dontRemoveOnAccept then
+            data.pendingResponse = false
+        end
         if data.acceptCallback then
             data.acceptCallback()
             if data.uniqueSounds then
@@ -9053,7 +9056,9 @@ function CA.HookFunction()
     end
 
     local function NotificationDeclined(data)
-        data.pendingResponse = false
+        if not data.dontRemoveOnDecline then
+            data.pendingResponse = false
+        end
         if data.declineCallback then
             data.declineCallback()
             if data.uniqueSounds then
@@ -9068,7 +9073,9 @@ function CA.HookFunction()
     PLAYER_TO_PLAYER.Accept = function(self, incomingEntry)
         local index = self:GetIndexFromIncomingQueue(incomingEntry)
         if index then
-            self:RemoveEntryFromIncomingQueueTable(index)
+            if not incomingEntry.dontRemoveOnAccept then
+                self:RemoveEntryFromIncomingQueueTable(index)
+            end
             NotificationAccepted(incomingEntry)
         else
             self:OnPromptAccepted()
@@ -9078,7 +9085,9 @@ function CA.HookFunction()
     PLAYER_TO_PLAYER.Decline = function(self, incomingEntry)
         local index = self:GetIndexFromIncomingQueue(incomingEntry)
         if index then
-            self:RemoveEntryFromIncomingQueueTable(index)
+            if not incomingEntry.dontRemoveOnDecline then
+                self:RemoveEntryFromIncomingQueueTable(index)
+            end
             NotificationDeclined(incomingEntry)
         else
             self:OnPromptDeclined()
@@ -9087,15 +9096,21 @@ function CA.HookFunction()
 
     --With proper timing, both of these events can fire in the same frame, making it possible to be responding but having already cleared the incoming queue
     PLAYER_TO_PLAYER.OnPromptAccepted = function(self)
-        if(self.responding and #self.incomingQueue > 0) then
-            local incomingEntryToRespondTo = self:RemoveEntryFromIncomingQueueTable(1)
+        if self.showingResponsePrompt and #self.incomingQueue > 0 then
+            local incomingEntryToRespondTo = self.incomingQueue[1]
+            if not incomingEntryToRespondTo.dontRemoveOnAccept then
+                self:RemoveEntryFromIncomingQueueTable(1)
+            end
             NotificationAccepted(incomingEntryToRespondTo)
         end
     end
 
     PLAYER_TO_PLAYER.OnPromptDeclined = function(self)
-        if(self.responding and #self.incomingQueue > 0) then
-            local incomingEntryToRespondTo = self:RemoveEntryFromIncomingQueueTable(1)
+        if self.showingResponsePrompt and #self.incomingQueue > 0 then
+            local incomingEntryToRespondTo = self.incomingQueue[1]
+            if not incomingEntryToRespondTo.dontRemoveOnDecline then
+                self:RemoveEntryFromIncomingQueueTable(1)
+            end
             NotificationDeclined(incomingEntryToRespondTo)
         end
     end

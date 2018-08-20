@@ -376,11 +376,24 @@ function CI.RegisterCombatInfo()
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
     if CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
         eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
-        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
         eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_BLOCKED_DAMAGE)
-        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)
         eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, CI.OnPowerUpdatePlayer)
         eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player" )
+    end
+    if CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled or CI.SV.CastBarEnable then
+        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
+        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)
+    end
+    if CI.SV.CastBarEnable then
+        local counter = 0
+        for result, _ in pairs (E.CastBreakingStatus) do
+            counter = counter + 1
+            local eventName = (moduleName.. "LUIE_CI_CombatEventCC" .. counter)
+            eventManager:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CI.OnCombatEventBreakCast)
+            eventManager:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, result)
+        end
+        eventManager:RegisterForEvent(moduleName, EVENT_START_SOUL_GEM_RESURRECTION, CI.SoulGemResurrectionStart)
+        eventManager:RegisterForEvent(moduleName, EVENT_END_SOUL_GEM_RESURRECTION, CI.SoulGemResurrectionEnd)
     end
     if CI.SV.ShowTriggered or CI.SV.ShowToggled or CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
         eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE, CI.OnSlotsFullUpdate)
@@ -388,7 +401,6 @@ function CI.RegisterCombatInfo()
     end
     if CI.SV.ShowTriggered or CI.SV.ShowToggled then
         eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
-        eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.OnEffectChanged)
         eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, CI.OnTargetChange )
         eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, CI.OnReticleTargetChanged )
 
@@ -396,6 +408,10 @@ function CI.RegisterCombatInfo()
 
         -- Setup bar highlight
         CI.UpdateBarHighlightTables()
+    end
+    -- Have to register EVENT_EFFECT_CHANGED for werewolf as well - Stop devour cast bar when devour fades
+    if CI.SV.ShowTriggered or CI.SV.ShowToggled or CI.SV.CastBarEnable then
+        eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.OnEffectChanged)
     end
 end
 
@@ -490,6 +506,21 @@ function CI.OnUpdate(currentTime)
 
 end
 
+function CI.StopCastBar()
+    local state = CI.CastBarUnlocked
+     -- Don't hide the cast bar if we have it unlocked to move.
+    castbar.bar.name:SetHidden(true)
+    castbar.bar.timer:SetHidden(true)
+    castbar:SetHidden(true)
+    castbar.remain = nil
+    castbar.starts = nil
+    castbar.ends = nil
+    g_casting = false
+    eventManager:UnregisterForUpdate(moduleName.."CI_CASTBAR")
+
+    if state then CI.GenerateCastbarPreview(state) end
+end
+
 -- Updates Cast Bar - only enabled when Cast Bar is unhidden
 function CI.OnUpdateCastbar(currentTime)
     -- Update castbar
@@ -497,18 +528,7 @@ function CI.OnUpdateCastbar(currentTime)
 	local castEnds = castbar.ends
 	local remain = castbar.remain - currentTime
 	if remain <= 0 then
-        local state = CI.CastBarUnlocked
-         -- Don't hide the cast bar if we have it unlocked to move.
-		castbar.bar.name:SetHidden(true)
-		castbar.bar.timer:SetHidden(true)
-		castbar:SetHidden(true)
-		castbar.remain = nil
-		castbar.starts = nil
-		castbar.ends = nil
-		g_casting = false
-		eventManager:UnregisterForUpdate(moduleName.."CI_CASTBAR")
-
-        if state then CI.GenerateCastbarPreview(state) end
+        CI.StopCastBar()
 	else
 		if CI.SV.CastBarTimer then
 			castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
@@ -696,6 +716,11 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         return
     end
 
+    if abilityId == 33208 and castByPlayer == COMBAT_UNIT_TYPE_PLAYER and changeType == EFFECT_RESULT_FADED then
+        CI.StopCastBar()
+        return
+    end
+
     if unitTag == "player" then
         g_toggledSlotsPlayer[abilityId] = true
     end
@@ -839,10 +864,6 @@ end
 
 function CI.CreateCastBar()
     uiTlw.castBar = UI.TopLevel( nil, nil )
-    uiTlw.castBar:SetHandler( "OnMoveStop", function(self)
-        CI.SV.CastbarOffsetX = self:GetLeft()
-        CI.SV.CastbarOffsetY = self:GetTop()
-    end )
 
     uiTlw.castBar:SetDimensions( CI.SV.CastBarSizeW + CI.SV.CastBarIconSize + 4, CI.SV.CastBarSizeH )
 
@@ -859,6 +880,8 @@ function CI.CreateCastBar()
     -- Callback used to save new position of frames
     local tlwOnMoveStop = function(self)
         eventManager:UnregisterForUpdate( moduleName .. "previewMove" )
+        CI.SV.CastbarOffsetX = self:GetLeft()
+        CI.SV.CastbarOffsetY = self:GetTop()
         CI.SV.CastBarCustomPosition = { self:GetLeft(), self:GetTop() }
     end
 
@@ -1040,6 +1063,58 @@ function CI.GenerateCastbarPreview(state)
     castbar:SetHidden( not state )
 end
 
+function CI.SoulGemResurrectionStart(eventCode, durationMs)
+
+    -- Just in case any other casts are present - stop them first
+    CI.StopCastBar()
+
+    -- Set all parameters and start cast bar
+    local icon = 'esoui/art/icons/achievement_fanglairpeak_deathless.dds'
+    local name = A.Innate_Soul_Gem_Resurrection
+    local duration = durationMs
+
+    local currentTime = GetGameTimeMilliseconds()
+    local endTime = currentTime + duration
+    local remain = endTime - currentTime
+
+    castbar.remain = endTime
+    castbar.starts = currentTime
+    castbar.ends = endTime
+    castbar.icon:SetTexture(icon)
+castbar.type = 1 -- CAST
+                    castbar.bar.bar:SetValue(0)
+
+    if CI.SV.CastBarLabel then
+        castbar.bar.name:SetText(name)
+        castbar.bar.name:SetHidden(false)
+    end
+    if CI.SV.CastBarTimer then
+        castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
+        castbar.bar.timer:SetHidden(false)
+    end
+
+    castbar:SetHidden(false)
+    g_casting = true
+    eventManager:RegisterForUpdate(moduleName.."CI_CASTBAR", 20, CI.OnUpdateCastbar )
+
+end
+
+function CI.SoulGemResurrectionEnd(eventCode)
+    CI.StopCastBar()
+end
+
+-- Very basic handler registered to only read CC events on the player
+function CI.OnCombatEventBreakCast( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
+    -- Some cast/channel abilities (or effects we use to simulate this) stun the player - ignore the effects of these ids when this happens.
+
+    -- Stop mount stun from breaking cast bar (May need to expand this later to a table)
+    if abilityId == 36434 then return end
+
+    if not E.IsCast[abilityId] then
+        CI.StopCastBar()
+    end
+end
+
 -- Listens to EVENT_COMBAT_EVENT
 function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
     -- Manually track Ultimate generation -- same as in CI module
@@ -1059,6 +1134,10 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
 
     if not CI.SV.CastBarEnable then
         return
+    end
+
+    if (E.CastBreakingActions[abilityId] and sourceType == COMBAT_UNIT_TYPE_PLAYER) then
+        CI.StopCastBar()
     end
 
     if not E.IsCast[abilityId] then

@@ -2,7 +2,6 @@
 -- AbilityTables namespace
 local A = {}
 
--- TODO - need to add all major/minor effects here
 -- ---------------------------------------------------
 -- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------
 -- ---------------------------------------------------
@@ -40,7 +39,7 @@ A.Skill_Minor_Evasion               = 61715
 A.Skill_Major_Evasion               = 61716
 A.Skill_Minor_Expedition            = 40219
 A.Skill_Major_Expedition            = 23216
---A.Skill_Minor_Gallop                =
+--A.Skill_Minor_Gallop              =
 A.Skill_Major_Gallop                = 57472
 A.Skill_Minor_Heroism               = 38746
 A.Skill_Major_Heroism               = 61709
@@ -70,19 +69,23 @@ A.Skill_Minor_Aegis					= 76617
 A.Skill_Off_Balance                 = 14062
 A.Skill_Off_Balace_Immunity         = 102771
 
+A.Skill_Empower                     = 61737
+A.Skill_Hindrance                   = 46210
+A.Skill_Stun                        = 68565
+
 -- ---------------------------------------------------
 -- INNATE ABILITIES ----------------------------------
 -- ---------------------------------------------------
 
 -- Simulated Auras
+A.Innate_Recall                     = 6811
 A.Innate_Recall_Penalty             = GetString(SI_LUIE_SKILL_RECALL_PENALTY) -- Recall Penalty
-A.Innate_Vanity_Pet                 = GetString(SI_LUIE_SKILL_VANITY_PET) -- Vanity Pet
-A.Innate_Mounted                    = GetString(SI_LUIE_SKILL_MOUNTED) -- Mounted
 A.Innate_Resurrection_Immunity      = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY) -- Resurrection Immunity
+A.Innate_Soul_Gem_Resurrection      = GetString(SI_LUIE_SKILL_SOUL_GEM_RESURRECTION) -- Soul Gem Resurrection
 
 -- Player Basic
 A.Innate_Crouch                     = 20306 -- Crouch
-A.Innate_Crouch_Stun                = GetString(SI_LUIE_SKILL_CROUCH_STUN) -- Crouch Stun
+A.Innate_Stealth_Stun               = GetString(SI_LUIE_SKILL_STEALTH_STUN) -- Crouch Stun
 A.Innate_Disguised                  = 23553 -- Disguised
 A.Innate_Hidden                     = 20309 -- Hidden
 A.Innate_Sprint                     = 973   -- Sprint
@@ -100,6 +103,18 @@ A.Innate_Ayleid_Well_Fortified      = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIF
 A.Innate_CC_Immunity                = 38117 -- CC Immunity
 A.Innate_Stagger                    = 1834 -- Stagger
 A.Innate_Revive                     = 5823 -- Revive
+
+A.Innate_Create_Station_Jewelry     = GetString(SI_LUIE_SKILL_CRAFTING_STATION_JEWELRY)
+A.Innate_Create_Station_Blacksmith  = GetString(SI_LUIE_SKILL_CRAFTING_STATION_BLACKSMITH)
+A.Innate_Create_Station_Clothing    = GetString(SI_LUIE_SKILL_CRAFTING_STATION_CLOTHING)
+A.Innate_Create_Station_Woodwork    = GetString(SI_LUIE_SKILL_CRAFTING_STATION_WOODWORK)
+A.Innate_Fillet_Fish                = GetString(SI_LUIE_SKILL_FILLET_FISH)
+A.Innate_Pardon_Edict_Low           = GetString(SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT)
+A.Innate_Pardon_Edict_Medium        = GetString(SI_LUIE_SKILL_LENIENCY_EDICT)
+A.Innate_Pardon_Edict_High          = GetString(SI_LUIE_SKILL_GRAND_AMNESTY_EDICT)
+
+-- Champion
+A.Champion_Last_Stand               = 60413
 
 -- World
 A.Innate_Drop_Anchor                = 86717 -- Drop Anchor
@@ -143,9 +158,11 @@ A.Proc_Diseased                     = 21925
 A.Proc_Chill                        = 21481
 A.Proc_Chilled                      = 7145
 A.Proc_Poisoned                     = 21929
-A.Proc_Concussion                   = 21487
+A.Proc_Concussion                   = GetString(SI_LUIE_SKILL_CONCUSSED)
 
 -- Potions/Poisons
+A.Potion                            = 32732
+A.Poison                            = 2563
 A.Potion_Invisiblity                = 3668
 A.Potion_Ravage_Health              = 46111
 A.Potion_Restore_Health             = 45221
@@ -789,6 +806,7 @@ A.Skill_Fancy_Clothing              = GetString(SI_LUIE_SKILL_FANCY_CLOTHING)
 A.Skill_Fire                        = 33594
 A.Skill_Burrow                      = 8974
 A.Skill_Serpent_Spit                = GetString(SI_LUIE_SKILL_SERPENT_SPIT)
+A.Skill_Shadow_Wood                 = GetString(SI_LUIE_SKILL_SHADOW_WOOD)
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

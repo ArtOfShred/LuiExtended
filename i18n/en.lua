@@ -645,6 +645,8 @@ local strings = {
     SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE_TP =              "Set whether the equipped disguises will display an icon on player.",
     SI_LUIE_LAM_BUFF_LONGTERM_MOUNT =                    "Show Icon for Active Mount (Player only)",
     SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TP =                 "Set whether the active mounts will display an icon on player.",
+    SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON =               "Display Generic Mount Icon",
+    SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON_TP =            "Use a generic mount icon instead of using the currently selected mount icon.",
     SI_LUIE_LAM_BUFF_LONGTERM_PET =                      "Show Icon for Active Vanity Pet (Player only)",
     SI_LUIE_LAM_BUFF_LONGTERM_PET_TP =                   "Set whether the active vanity pets will display an icon on player.",
     SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER =             "Show Mundus Boons on Player",
@@ -2060,13 +2062,13 @@ local strings = {
 
     -- Ability name override localization
     SI_LUIE_SKILL_RECALL_PENALTY =                       "Recall Penalty",
-    SI_LUIE_SKILL_VANITY_PET =                           "Vanity Pet",
     SI_LUIE_SKILL_MOUNTED =                              "Mounted",
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY =                "Resurrection Immunity",
-    SI_LUIE_SKILL_CROUCH_STUN =                          "Crouch Stun",
+    SI_LUIE_SKILL_SOUL_GEM_RESURRECTION =                "Soul Gem Resurrection",
+    SI_LUIE_SKILL_STEALTH_STUN =                         "Stealth Stun",
     SI_LUIE_SKILL_FALL_DAMAGE =                          "Fall Damage",
-    SI_LUIE_SKILL_ABSORBING_SKYSHARD =                   "Absorbing Skyshard",
-    SI_LUIE_SKILL_RECEIVING_BOON =                       "Receiving Boon",
+    SI_LUIE_SKILL_ABSORBING_SKYSHARD =                   "Absorb Skyshard",
+    SI_LUIE_SKILL_RECEIVING_BOON =                       "Receive Boon",
     SI_LUIE_SKILL_MOUNT_SPRINT =                         "Gallop",
     SI_LUIE_SKILL_BLOCK_STUN =                           "Block Stun",
     SI_LUIE_SKILL_AYLEID_WELL =                          "Ayleid Well",
@@ -2109,9 +2111,9 @@ local strings = {
     SI_LUIE_SKILL_EXPERIENCE_AETHERIAL_AMBROSIA =        "Aetherial Ambrosia",
     SI_LUIE_SKILL_EXPERIENCE_MYTHIC_AMBROSIA =           "Mythic Aetherial Ambrosia",
     SI_LUIE_SKILL_EXPERIENCE_CROWN_SCROLL =              "Crown Experience Scroll",
-    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_1 =      "Crown Crate Experience Scroll",
-    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2 =      "Major Crown Crate Experience Scroll",
-    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3 =      "Grand Crown Crate Experience Scroll",
+    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_1 =      "Gold Coast Experience Scroll",
+    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2 =      "Major Gold Coast Experience Scroll",
+    SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3 =      "Grand Gold Coast Experience Scroll",
     SI_LUIE_SKILL_CONSUMABLE_FESTIVAL_MINTS =            "High Hrothgar Festival Mints",
     SI_LUIE_SKILL_CONSUMABLE_SAILORS_GROG =              "Sailor\'s Warning Festival Grog",
     SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT =             "Mystery Meat",
@@ -2236,27 +2238,48 @@ local strings = {
     SI_LUIE_SKILL_MINOR_UNCERTAINTY_TP =                 "Reduce Weapon Critical and Spell Critical by |cffffff657|r.",
     SI_LUIE_SKILL_MINOR_COWARDICE_TP =                   "Increase Ultimate Ability cost by |cffffff60|r%.",
     SI_LUIE_SKILL_MINOR_MANGLE_TP =                      "Reduce Max Health by |cffffff10|r%.",
+    SI_LUIE_SKILL_HINDRANCE_TP =                         "Reduce Movement Speed by |cffffff40|r%.",
 
     SI_LUIE_SKILL_MINOR_SLAYER_TP =                      "Your attacks deal |cffffff5|r% more damage to Dungeon and Trial enemies.",
     SI_LUIE_SKILL_MAJOR_SLAYER_TP =                      "Your attacks deal |cffffff15|r% more damage to Dungeon and Trial enemies.",
     SI_LUIE_SKILL_MINOR_AEGIS_TP =                       "You take |cffffff5|r% less damage from Dungeon and Trial enemies.",
     SI_LUIE_SKILL_MAJOR_AEGIS_TP =                       "You take |cffffff15|r% less damage from Dungeon and Trial enemies.",
 
-    SI_LUIE_SKILL_GENERIC_BLEED_TP =                     "Afflicted with bleeding damage over time for |cffffff<<1>>|r seconds.",
-    SI_LUIE_SKILL_GENERIC_DISEASED_TP =                  "Afflicted with disease damage over time for |cffffff<<1>>|r seconds.",
-    SI_LUIE_SKILL_GENERIC_POISON_TP =                    "Afflicted with poison damage over time for |cffffff<<1>>|r seconds.",
-    SI_LUIE_SKILL_GENERIC_BURNING_TP =                   "Afflicted with fire damage over time for |cffffff<<1>>|r seconds.",
-    SI_LUIE_SKILL_GENERIC_FREEZING_TP =                  "Afflicted with frost damage over time for |cffffff<<1>>|r seconds.",
-    SI_LUIE_SKILL_GENERIC_SHOCKED_TP =                   "Afflicted with shock damage over time for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_EMPOWER_TP =                           "Increase the damage of your next Light Attack by |cffffff40|r%.",
 
+    SI_LUIE_SKILL_TEST_TP =                              "This is a test effect.",
+    SI_LUIE_SKILL_GENERIC_BLEED_TP =                     "Afflicted with Bleeding damage over time.",
+    SI_LUIE_SKILL_GENERIC_DISEASE_TP =                   "Afflicted with Disease damage over time.",
+    SI_LUIE_SKILL_GENERIC_POISON_TP =                    "Afflicted with Poison damage over time.",
+    SI_LUIE_SKILL_GENERIC_BURN_TP =                      "Afflicted with Fire damage over time.",
+    SI_LUIE_SKILL_GENERIC_FREEZE_TP =                    "Afflicted with Frost damage over time.",
+    SI_LUIE_SKILL_GENERIC_SHOCK_TP =                     "Afflicted with Shock damage over time.",
+
+    SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Restoring Health every second over time.",
+    SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Restoring Magicka every second over time.",
+    SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Restoring Stamina every second over time.",
+
+    SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Marked. You are visible to the enemy that marked you even when in stealth.",
+    SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Revealed. You are unable to stealth.",
+
+    SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP =      "Immune to effects that exploit off balance targets.",
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP =               "Off Balance. You are vulnerable to attacks that exploit off balance targets.",
     SI_LUIE_SKILL_GENERIC_SNARE_TP =                     "Snared. Your Movement Speed has been reduced.",
+    SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized. Unable to move while immobilized.",
     SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered. You are unable to attack or move while staggered.",
     SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned. You are unable to attack or move while stunned.",
     SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP =                 "Knocked back. You are unable to attack or move while knocked back.",
     SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP =                 "Knocked down. You are unable to attack or move while knocked down.",
     SI_LUIE_SKILL_GENERIC_FEAR_TP =                      "Feared. You are unable to attack or move while feared.",
-    SI_LUIE_SKILL_GENERIC_CC_IMMUNITY =                  "Immune to knockback and disabling effects.",
+    SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP =               "Immune to knockback and disabling effects.",
+    SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Invisible. You are concealed from sight.",
+    SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP =          "Stealth detection increased by |cffffff20|r meters.",
+
+    SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Increase the cost of Magicka abilities by |cffffff60|r%.",
+    SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP =     "Increase the cost of Stamina abilities by |cffffff60|r%.",
+
+    SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP =     "Increase the cost of Magicka abilities by |cffffff30|r%.",
+    SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP =     "Increase the cost of Stamina abilities by |cffffff30|r%.",
 
     SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP =              "Lightning courses through your body causing all weapon attacks to deal lightning damage.",
     SI_LUIE_SKILL_MANTLES_SHADOW =                       "Mantle's Shadow",
@@ -2273,8 +2296,71 @@ local strings = {
     SI_LUIE_SKILL_CHANGE_CLOTHES =                       "Change Clothes",
     SI_LUIE_SKILL_FANCY_CLOTHING =                       "Fancy Clothing",
     SI_LUIE_SKILL_FANCY_CLOTHING_TP =                    "Dressed to impress!",
-    SI_LUIE_SKILL_BURROW =                               "You are protected from harm and concealed by burrowing underground.",
+    SI_LUIE_SKILL_BURROW_TP =                            "You are protected from harm and concealed by burrowing underground.",
     SI_LUIE_SKILL_SERPENT_SPIT =                         "Serpent Spit",
+    SI_LUIE_SKILL_SHADOW_WOOD =                          "Shadow Wood",
+    SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "A servant of the shade of Prince Naemon has dragged you into the Shadow Wood.",
+
+    SI_LUIE_SKILL_SOUL_SUMMONS_TP =                      "You have recently revived without spending a soul gem and may not do so again for |cFFFFFF<<1>>|r <<1[hour/hours]>>.",
+
+    SI_LUIE_SKILL_SANIES_LUPINUS_TP =                    "You have been bitten by a Werewolf and contracted Sanies Lupinus.",
+    SI_LUIE_SKILL_LYCANTHROPHY_TP =                      "You can transform into a savage Werewolf.\n\nYou take |cFFFFFF25|r% more Poison Damage while transformed into a Werewolf.",
+    SI_LUIE_SKILL_BLOOD_MOON_TP =                        "You have bitten another player. You may not do so again for |cFFFFFF<<1>>|r <<1[day/days]>>.",
+
+    SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP =               "Immune to all snare and immobilization effects.",
+    SI_LUIE_SKILL_DODGE_FATIGUE_TP =                     "Consecutive roll dodging costs increased stamina for the next |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_HIDDEN_TP =                            "Crouched and concealed from sight.\n\nDrains Stamina while moving.",
+    SI_LUIE_SKILL_INVISIBLE_TP =                         "Concealed from sight by magical or environmental means.",
+    SI_LUIE_SKILL_SPRINT_TP =                            "Sprint, increasing movement speed by |cFFFFFF40|r%.\n\nDrains Stamina while moving.",
+    SI_LUIE_SKILL_GALLOP_TP =                            "Gallop, increasing movement speed by |cFFFFFF30|r%.\n\nDrains Mount Stamina while moving.",
+    SI_LUIE_SKILL_BLOCK_TP =                             "Brace for attack, reducing damage taken and granting immunity to Stun and Knockback effects.",
+    SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP =             "Reviving. Immune to damage and crowd control effects.",
+    SI_LUIE_SKILL_TAUNT_TP =                             "Taunted. This enemy is focusing all attacks on you.",
+    SI_LUIE_SKILL_DISGUISE_TP =                          "Disguised. You can be revealed by sentries or performing suspicious activity.\n\nTaking damage will destroy your disguise.",
+    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Health increased by |cFFFFFF5000|r\n• Damage taken, healing received, and damage shield strength decreased by |cFFFFFF50|r%\n• Ability range of |cFFFFFF28|r meters or more increased by |cFFFFFF8|r",
+    SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "You have recently recalled to a Wayshrine and must pay an additional gold fee to do so again.",
+
+    SI_LUIE_SKILL_VENGEANCE_TP =                         "Your next Magicka ability used within |cFFFFFF5|r seconds will always be a Critical Strike.",
+
+    SI_LUIE_SKILL_GLYPH_CRUSHING_TP =                    "Reduce the target's Physical and Spell Resistance for |cFFFFFF5|r seconds.",
+    SI_LUIE_SKILL_GLYPH_HARDENING_TP =                   "Grants a Damage Shield for |cFFFFFF7|r seconds.",
+    SI_LUIE_SKILL_GLYPH_WEAKENING_TP =                   "Reduce target Weapon Damage and Spell Damage for |cFFFFFF5|r seconds.",
+    SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE_TP =               "Increase your Weapon Damage and Spell Damage for |cFFFFFF5|r seconds.",
+
+    SI_LUIE_SKILL_CONCUSSED =                            "Concussed",
+
+    SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Increases your Spell and Physical Resistance by |cFFFFFF2752|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Increases your Spell and Physical Penetration by |cFFFFFF2752|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LORD =                    "Increases your Maximum Health by |cFFFFFF2230|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_MAGE =                    "Increases your Maximum Magicka by |cFFFFFF2028|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_TOWER =                   "Increases your Maximum Stamina by |cFFFFFF2028|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH =                "Increases your Magicka Recovery by |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT =                 "Increases your Stamina Recovery by |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW =                  "Increases your Critical Damage by |cFFFFFF9|r%.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL =                  "Increases your healing done by |cFFFFFF10|r%.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_THIEF =                   "Increases your Weapon and Spell Critical Strike ratings by |cFFFFFF1533|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_WARRIOR =                 "Increases your Weapon Damage by |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE =              "Increases your Spell Damage by |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_STEED =                   "Increases your Movement Speed by |cFFFFFF5|r% and Health Recovery by |cFFFFFF238|r.",
+
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL =          "These effects are scaled based on your level.", -- Note this needs to be an exact match to the description in Crown Crate food/drink items for it to be correctly removed in each localization.
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA =    "If you are a vampire, the blood in this drink will also mildly sate you.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_HISSMIR =               "This drink will also grant you insights into what manner of fish spawn in various bodies of water, as well as alertness for nearby fish activity.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
+    SI_LUIE_SKILL_ADD_TOOLTIP_HISSMIR =                  "\n\nThis drink will also grant you insights into what manner of fish spawn in various bodies of water, as well as alertness for nearby fish activity.",
+    SI_LUIE_SKILL_ESO_PLUS_TP =                          "Increase Experience, Gold, and Inspiration Points earned by |cffffff10|r%. Increase Trait Research speed by |cffffff10|r%.",
+
+    SI_LUIE_SKILL_CRAFTING_STATION_JEWELRY =             "Attune Jewelry Crafting Station",
+    SI_LUIE_SKILL_CRAFTING_STATION_BLACKSMITH =          "Attune Blacksmithing Station",
+    SI_LUIE_SKILL_CRAFTING_STATION_CLOTHING =            "Attune Clothing Station",
+    SI_LUIE_SKILL_CRAFTING_STATION_WOODWORK =            "Attune Woodworking Station",
+
+    SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP =              "Increase Experience Points earned by |cffffff<<1>>|r% for |cffffff30|r minutes.",
+    SI_LUIE_SKILL_EXPERIENCE_HOUR_TP =                   "Increase Experience Points earned by |cffffff<<1>>|r% for |cffffff<<2>>|r <<2[hour/hours]>>.",
+    SI_LUIE_SKILL_FILLET_FISH =                          "Fillet Fish",
+    SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT =             "Counterfeit Pardon Edict",
+    SI_LUIE_SKILL_LENIENCY_EDICT =                       "Leniency Edict",
+    SI_LUIE_SKILL_GRAND_AMNESTY_EDICT =                  "Grand Amnesty Edict",
+
 }
 
 -- TODO: Switch to StringId's

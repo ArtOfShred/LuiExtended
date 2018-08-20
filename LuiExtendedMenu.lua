@@ -67,7 +67,7 @@ function LUIE_CreateSettings()
             counter = counter + 1
             -- If the input is a numeric value then we can pull this abilityId's info.
             if type(id) == "number" then
-                options[counter] = iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. zo_strformat("<<C:1>>", GetAbilityName(id))
+                options[counter] = iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. strformat("<<C:1>>", GetAbilityName(id))
             -- If the input is not numeric then add this as a name only.
             else
                 options[counter] = id
@@ -1420,7 +1420,7 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CASTBAR_ENABLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_ENABLE_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.CastBarEnable end,
-                setFunc = function(value) LUIE.CombatInfo.SV.CastBarEnable = value end,
+                setFunc = function(value) LUIE.CombatInfo.SV.CastBarEnable = value LUIE.CombatInfo.RegisterCombatInfo() end,
                 width = "full",
                 default = LUIE.CombatInfo.D.CastBarEnable,
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
@@ -2006,6 +2006,19 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.IgnoreMount,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             },
+
+            {
+                -- Use Generic Mount Icon
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.MountGenericIcon end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.MountGenericIcon = value LUIE.SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.MountGenericIcon,
+                disabled = function() return LUIE.SpellCastBuffs.SV.IgnoreMount and not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            },
+
             {
                 -- Long Term - Pets
                 type = "checkbox",
@@ -5139,8 +5152,8 @@ function LUIE_CreateSettings()
             {
                 -- Skill Undaunted
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CA_GUILDREP_MG),
-                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_MG_TP),
+                name = GetString(SI_LUIE_LAM_CA_GUILDREP_UD),
+                tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_UD_TP),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.Skills.SkillGuildUndaunted end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Skills.SkillGuildUndaunted = value end,
                 width = "full",
@@ -6031,6 +6044,28 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Achievement.AchievementCategory19 = value end,
                 width = "full",
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory19,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+            },
+			{
+                -- Enables achievements tracking in %s category
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(20)),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(20)),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.Achievement.AchievementCategory20 end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.Achievement.AchievementCategory20 = value end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory20,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+            },
+			{
+                -- Enables achievements tracking in %s category
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(21)),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(21)),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.Achievement.AchievementCategory21 end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.Achievement.AchievementCategory21 = value end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory21,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
         },
