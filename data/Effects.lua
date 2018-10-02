@@ -6316,8 +6316,8 @@ E.EffectOverride = {
 
     -- Seasonal Quests
     [86075] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds' }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
-    [83523] = { icon = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Freezing (Snow Bear Plunge)
-    [83522] = { icon = 'LuiExtended/media/icons/abilities/ability_event_warm.dds', forcedContainer = 'short' }, -- Warm (Snow Bear Plunge)
+    [83523] = { icon = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Seasonal_Freezing }, -- Freezing (Snow Bear Plunge)
+    [83522] = { icon = 'LuiExtended/media/icons/abilities/ability_event_warm.dds', forcedContainer = 'short', tooltip = T.Seasonal_Warm }, -- Warm (Snow Bear Plunge)
     [84330] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = A.Memento_Mud_Ball }, -- Mudball (Mud Ball Merriment)
     [85639] = { hide = true }, -- Covered in Mud (Mud Ball Merriment)
     [91369] = { icon = 'LuiExtended/media/icons/abilities/ability_event_steamy_spring_pie.dds', name = A.Memento_The_Pie_of_Misrule }, -- Jester's Experience Boost Pie (The Pie of Misrule)

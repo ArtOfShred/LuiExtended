@@ -152,6 +152,13 @@ T.Boon_Apprentice = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE)
 T.Boon_Steed = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_STEED)
 
 -- ---------------------------------------------------
+-- SEASONAL ---------------------
+-- ---------------------------------------------------
+
+T.Seasonal_Freezing = GetString(SI_LUIE_SKILL_SEASONAL_FREEZING)
+T.Seasonal_Warm = GetString(SI_LUIE_SKILL_SEASONAL_WARM)
+
+-- ---------------------------------------------------
 -- CHAMPION ---------------------
 -- ---------------------------------------------------
 

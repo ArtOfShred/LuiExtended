@@ -93,6 +93,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_TELVAR_STONE =                   " <<1[Tel Var Stone/Tel Var Stones]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_WRIT_VOUCHER =                   " <<1[Writ Voucher/Writ Vouchers]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_TRANSMUTE_CRYSTAL =              " <<1[Transmute Crystal/Transmute Crystals]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    SI_LUIE_CA_CURRENCY_EVENT_TICKET =                   " <<1[Event Ticket/Event Tickets]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_CROWN =                          " <<1[Crown/Crowns]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_CROWN_GEM =                      " <<1[Crown Gem/Crown Gems]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS =                  " <<1[Outfit Change Token/Outfit Change Tokens]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
@@ -328,6 +329,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV =                "Total TV: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV =                "Total Vouchers: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTRANSMUTE =         "Total Crystals: %s",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TOTALEVENT =             "Total Tickets: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS =            "Total Crowns: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS =              "Total Gems: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS =      "Total Tokens: %s",
@@ -875,6 +877,15 @@ local strings = {
     SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL_TP =      "Show total amount of Transmute Crystals after change is displayed.",
     SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG =         "Total Transmute Crystals Syntax",
     SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG_TP =      "Choose the syntax for the Total Transmute Crystals message.\nDefault: Total Crystals: %s",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENT =                  "Display Event Ticket Changes",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENT_TP =               "Print a context sensitive notification to chat when Event Tickets are rewarded or spent.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTCOLOR =             "Event Tickets Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTNAME =              "Event Tickets Name",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTNAME_TP =           "Name to display for Event Tickets.\nDefault: <<1[Event Ticket/Event Tickets]>>",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTTOTAL =             "Display Total Event Tickets Suffix",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTTOTAL_TP =          "Show total amount of Event Tickets after change is displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_EVENTTOTAL_MSG =             "Total Event Tickets Syntax",
+    SI_LUIE_LAM_CA_CURRENCY_EVENTTOTAL_MSG_TP =          "Choose the syntax for the Total Event Tickets message.\nDefault: Total Tickets: %s",
     SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS =                 "Display Crown Changes",
     SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS_TP =              "Print a context sensitive notification to chat when Crowns are rewarded or spent.",
     SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSCOLOR =            "Crowns Color", -- TODO: Add Tooltip with finalized color value
@@ -2360,6 +2371,9 @@ local strings = {
     SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT =             "Counterfeit Pardon Edict",
     SI_LUIE_SKILL_LENIENCY_EDICT =                       "Leniency Edict",
     SI_LUIE_SKILL_GRAND_AMNESTY_EDICT =                  "Grand Amnesty Edict",
+
+    SI_LUIE_SKILL_SEASONAL_FREEZING =                    "You are freezing and your movement speed is reduced. Find a campfire to warm up.",
+    SI_LUIE_SKILL_SEASONAL_WARM =                        "You are huddled around a nearby campfire for warmth. Decreases the duration of Freezing by 10 seconds every second.",
 
 }
 

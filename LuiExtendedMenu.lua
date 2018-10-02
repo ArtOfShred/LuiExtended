@@ -3405,6 +3405,60 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTotalTransmute,
             },
             {
+                -- Show Event Tickets
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENT),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENT_TP),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyEventChange end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyEventChange = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = LUIE.ChatAnnouncements.D.Currency.CurrencyEventChange,
+            },
+            {
+                -- Show Event Tickets Color
+                type = "colorpicker",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTCOLOR)),
+                getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Currency.CurrencyEventColor) end,
+                setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Currency.CurrencyEventColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                width = "full",
+                disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyEventChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = {r=LUIE.ChatAnnouncements.D.Currency.CurrencyEventColor[1], g=LUIE.ChatAnnouncements.D.Currency.CurrencyEventColor[2], b=LUIE.ChatAnnouncements.D.Currency.CurrencyEventColor[3]}
+            },
+            {
+                -- Show Event Tickets Name
+                type = "editbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTNAME)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTNAME_TP),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyEventName end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyEventName = value end,
+                width = "full",
+                disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyEventChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = LUIE.ChatAnnouncements.D.Currency.CurrencyEventName,
+            },
+            {
+                -- Show Event Tickets Total
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTTOTAL)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTTOTAL_TP),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyEventShowTotal end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyEventShowTotal = value end,
+                width = "full",
+                disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyEventChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = LUIE.ChatAnnouncements.D.Currency.CurrencyEventShowTotal,
+            },
+            {
+                -- Total Currency Message (Event Tickets)
+                type = "editbox",
+                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_EVENTTOTAL_MSG)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_EVENTTOTAL_MSG_TP),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTotalEvent end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTotalEvent = value end,
+                width = "full",
+                disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Currency.CurrencyEventChange and LUIE.ChatAnnouncements.SV.Currency.CurrencyEventShowTotal) end,
+                default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTotalEvent,
+            },
+            {
                 -- Show Crowns
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS),

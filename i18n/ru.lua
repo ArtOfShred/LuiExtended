@@ -95,6 +95,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_TELVAR_STONE =                   " <<1[Камень Тель-Вар/Камней Тель-Вар]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_WRIT_VOUCHER =                   " <<1[Ваучер заказа/Ваучеров заказа]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_TRANSMUTE_CRYSTAL =              " <<1[Кристалл Трансмутации/Кристаллов Трансмутации]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    SI_LUIE_CA_CURRENCY_EVENT_TICKET =                   " <<1[Event Ticket/Event Tickets]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s -- TODO: Translate
     SI_LUIE_CA_CURRENCY_CROWN =                          " <<1[Крона/Кроны]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_CROWN_GEM =                      " <<1[Кронный самоцвет/Кронных самоцветов]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS =                  " <<1[Outfit Change Token/Outfit Change Tokens]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
@@ -330,6 +331,7 @@ local strings = {
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV =                "Всего TV: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV =                "Всего ваучеров: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTRANSMUTE =         "Всего кристаллов: %s",
+    SI_LUIE_CA_CURRENCY_MESSAGE_TOTALEVENT =             "Total Tickets: %s", -- TODO: Translate
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS =            "Всего крон: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS =              "Всего самоцветов: %s",
     SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS =      "Всего токенов: %s",
@@ -877,6 +879,15 @@ local strings = {
     SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL_TP =      "Показывает общее количество Кристаллов Трансмутации после оповещения о каждом изменении.",
     SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG =         "Синтаксис 'Всего Кристаллов Трансмутации'",
     SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG_TP =      "Выберите синтаксис для сообщения 'Всего Кристаллов Трансмутации'.\nПо умолчанию: Всего Кристаллов: %s",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENT =                  "Display Event Ticket Changes", -- TODO: Translate this block
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENT_TP =               "Print a context sensitive notification to chat when Event Tickets are rewarded or spent.",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTCOLOR =             "Event Tickets Color", -- TODO: Add Tooltip with finalized color value
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTNAME =              "Event Tickets Name",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTNAME_TP =           "Name to display for Event Tickets.\nDefault: <<1[Event Ticket/Event Tickets]>>",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTTOTAL =             "Display Total Event Tickets Suffix",
+    SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTTOTAL_TP =          "Show total amount of Event Tickets after change is displayed.",
+    SI_LUIE_LAM_CA_CURRENCY_EVENTTOTAL_MSG =             "Total Event Tickets Syntax",
+    SI_LUIE_LAM_CA_CURRENCY_EVENTTOTAL_MSG_TP =          "Choose the syntax for the Total Event Tickets message.\nDefault: Total Tickets: %s", -- TODO: Translate this block
     SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS =                 "Кроны",
     SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS_TP =              "Выводит соответствующее оповещение в чат при получении или трате Крон.",
     SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSCOLOR =            "Цвет Крон", -- TODO: Add Tooltip with finalized color value
@@ -2361,6 +2372,9 @@ local strings = {
     SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT =             "Counterfeit Pardon Edict",
     SI_LUIE_SKILL_LENIENCY_EDICT =                       "Leniency Edict",
     SI_LUIE_SKILL_GRAND_AMNESTY_EDICT =                  "Grand Amnesty Edict",
+
+    SI_LUIE_SKILL_SEASONAL_FREEZING =                    "You are freezing and your movement speed is reduced. Find a campfire to warm up.",
+    SI_LUIE_SKILL_SEASONAL_WARM =                        "You are huddled around a nearby campfire for warmth. Decreases the duration of Freezing by 10 seconds every second.",
 
 }
 

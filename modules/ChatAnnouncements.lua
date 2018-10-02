@@ -390,6 +390,10 @@ CA.D = {
         CurrencyTransmuteColor          = { 1, 1, 1, 1 },
         CurrencyTransmuteName           = GetString(SI_LUIE_CA_CURRENCY_TRANSMUTE_CRYSTAL),
         CurrencyTransmuteShowTotal      = false,
+        CurrencyEventChange             = true,
+        CurrencyEventColor              = { 250/255, 173/255, 187/255, 1 },
+        CurrencyEventName               = GetString(SI_LUIE_CA_CURRENCY_EVENT_TICKET),
+        CurrencyEventShowTotal          = false,
         CurrencyCrownsChange            = false,
         CurrencyCrownsColor             = { 1, 1, 1, 1 },
         CurrencyCrownsName              = GetString(SI_LUIE_CA_CURRENCY_CROWN),
@@ -407,6 +411,7 @@ CA.D = {
         CurrencyMessageTotalTV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV),
         CurrencyMessageTotalWV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV),
         CurrencyMessageTotalTransmute   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTRANSMUTE),
+        CurrencyMessageTotalEvent       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALEVENT),
         CurrencyMessageTotalCrowns      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS),
         CurrencyMessageTotalCrownGems   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS),
         CurrencyMessageTotalOutfitToken = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS),
@@ -646,6 +651,7 @@ local CurrencyTVColorize
 local CurrencyWVColorize
 local CurrencyOutfitTokenColorize
 local CurrencyTransmuteColorize
+local CurrencyEventColorize
 local CurrencyCrownsColorize
 local CurrencyCrownGemsColorize
 
@@ -887,6 +893,7 @@ function CA.RegisterColorEvents()
     CurrencyWVColorize = colorDef:New(unpack(CA.SV.Currency.CurrencyWVColor))
     CurrencyOutfitTokenColorize = colorDef:New(unpack(CA.SV.Currency.CurrencyOutfitTokenColor))
     CurrencyTransmuteColorize = colorDef:New(unpack(CA.SV.Currency.CurrencyTransmuteColor))
+    CurrencyEventColorize = colorDef:New(unpack(CA.SV.Currency.CurrencyEventColor))
     CurrencyCrownsColorize = colorDef:New(unpack(CA.SV.Currency.CurrencyCrownsColor))
     CurrencyCrownGemsColorize = colorDef:New(unpack(CA.SV.Currency.CurrencyCrownGemsColor))
     DisguiseAlertColorize = colorDef:New(unpack(CA.SV.Notify.DisguiseAlertColor))
@@ -1932,7 +1939,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
     elseif currency == CURT_ALLIANCE_POINTS then -- Alliance Points
         if not CA.SV.Currency.CurrencyAPShowChange then return end
         -- Send change info to the throttle printer and end function now if we throttle Alliance Points Gained
-        if CA.SV.Currency.CurrencyAPThrottle > 0 and reason == 13 then
+        if CA.SV.Currency.CurrencyAPThrottle > 0 and (reason == 13 or reason == 40 or reason == 41) then
             eventManager:UnregisterForUpdate(moduleName .. "BufferedAP")
             eventManager:RegisterForUpdate(moduleName .. "BufferedAP", CA.SV.Currency.CurrencyAPThrottle, CA.CurrencyAPThrottlePrinter )
             g_currencyAPThrottleValue = g_currencyAPThrottleValue + UpOrDown
@@ -1941,14 +1948,14 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         end
 
         -- If earned AP is below the filter value, end now.
-        if CA.SV.Currency.CurrencyAPFilter > 0 and reason == 13 then
+        if CA.SV.Currency.CurrencyAPFilter > 0 and (reason == 13 or reason == 40 or reason == 41) then
             if UpOrDown < CA.SV.Currency.CurrencyAPFilter then
                 return
             end
         end
 
         -- Immediately print value if another source of AP is gained (or spent)
-        if CA.SV.Currency.CurrencyAPThrottle > 0 and reason ~= 13 then
+        if CA.SV.Currency.CurrencyAPThrottle > 0 and (reason ~= 13 and reason ~= 40 and reason ~= 41) then
             CA.CurrencyAPThrottlePrinter()
         end
 
@@ -2008,6 +2015,13 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         currencyName = strformat(CA.SV.Currency.CurrencyTransmuteName, UpOrDown)
         currencyTotal = CA.SV.Currency.CurrencyTransmuteShowTotal
         messageTotal = CA.SV.Currency.CurrencyMessageTotalTransmute
+    elseif currency == CURT_EVENT_TICKETS then -- Event Tickets
+        if not CA.SV.Currency.CurrencyEventChange then return end
+        currencyTypeColor = CurrencyEventColorize:ToHex()
+        currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_eventticket.dds|t" or ""
+        currencyName = strformat(CA.SV.Currency.CurrencyEventName, UpOrDown)
+        currencyTotal = CA.SV.Currency.CurrencyEventShowTotal
+        messageTotal = CA.SV.Currency.CurrencyMessageTotalEvent
     elseif currency == CURT_CROWNS then -- Crowns
         if not CA.SV.Currency.CurrencyCrownsChange then return end
         currencyTypeColor = CurrencyCrownsColorize:ToHex()
@@ -2412,7 +2426,7 @@ function CA.CurrencyTVThrottlePrinter()
         local currencyName = strformat(CA.SV.Currency.CurrencyTVName, g_currencyTVThrottleValue)
         local currencyTotal = CA.SV.Currency.CurrencyTVShowTotal
         local messageTotal = CA.SV.Currency.CurrencyMessageTotalTV
-        local messageChange = CA.SV.ContextMessages.CurrencyMessageEarn
+        local messageChange = CA.SV.ContextMessages.CurrencyMessageLoot
         local type = "LUIE_CURRENCY_THROTTLE"
         CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
@@ -2533,7 +2547,7 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
     local icon = itemIcon
     local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
     local type = "LUIE_CURRENCY_VENDOR"
-    local messageChange = (money ~= 0 and CA.SV.Inventory.LootVendorCurrency) and CA.SV.ContextMessages.CurrencyMessageBuy or CA.SV.ContextMessages.CurrencyMessageBuyNoV
+    local messageChange = ( (money ~= 0 or specialCurrencyQuantity1 ~= 0 or specialCurrencyQuantity2 ~= 0) and CA.SV.Inventory.LootVendorCurrency) and CA.SV.ContextMessages.CurrencyMessageBuy or CA.SV.ContextMessages.CurrencyMessageBuyNoV
     local itemCount = quantity > 1 and (" |cFFFFFFx" .. quantity .. "|r") or ""
     local carriedItem
     if CA.SV.BracketOptionItem == 1 then
@@ -2551,7 +2565,7 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
         end
     end
 
-    if money ~= 0 and CA.SV.Inventory.LootVendorCurrency then
+    if (money ~= 0 or specialCurrencyQuantity1 ~= 0 or specialCurrencyQuantity2 ~= 0) and CA.SV.Inventory.LootVendorCurrency then
         -- Stop messages from printing if for some reason the currency event never triggers
         if g_savedPurchase.formattedValue then
             CA.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
