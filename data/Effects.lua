@@ -122,7 +122,7 @@ E.IsCyrodiil = {
     [11341] = true, -- Enemy Keep Bonus I
     [11343] = true, -- Enemy Keep Bonus II
     [11345] = true, -- Enemy Keep Bonus III -- CONFIRM
-    [11347] = true, -- Enemy Keep Bonus IV -- CONFIRM
+    [11347] = true, -- Enemy Keep Bonus IV
     [11348] = true, -- Enemy Keep Bonus V
     [11350] = true, -- Enemy Keep Bonus VI
     [11352] = true, -- Enemy Keep Bonus VII
@@ -159,6 +159,8 @@ E.IsFoodBuff = {
     [72824] = true, -- Orzorga's Smoked Bear Haunch
     [100502] = true, -- Deregulated Mushroom Stew
     [100498] = true, -- Clockwork Citrus Filet
+    [107789] = true, -- Artaeum Takeaway Broth
+    [107748] = true, -- Artaeum Pickled Fish Bowl
     [84681] = true, -- Crisp and Crunchy Pumpkin Skewer
     [84709] = true, -- Crunchy Spider Skewer
     [84725] = true, -- Frosted Brains
@@ -225,12 +227,14 @@ E.IsExperienceBuff = {
     [85503] = true, -- Grand Crown Crate Experience Scroll
 
     -- Event
+    [91369] = true, -- The Pie of Misrule (Jester's Experience Boost Pie)
+    [92232] = true, -- Pelinal's Ferocity
+    [91449] = true, -- Breda's Magnificent Mead
+    [86075] = true, -- Breda's Magnificent Mead
+
+    -- RECHECK -- TODO
     [77123] = true, -- 2017 Anniversary EXP Buff
     [84369] = true, -- Witchmother's Brew
-    [86075] = true, -- Breda's Magnificent Mead
-    [91449] = true, -- Breda's Magnificent Mead
-    [92232] = true, -- Pelinal's Ferocity
-    -- TODO: MISSING JESTER XP BOOST
 }
 
 E.IsBlock = {
@@ -415,6 +419,9 @@ E.CastChannelOverride = {
     [14031] = true, -- Mundus Use
     [4197] = true, -- Recovering (NPC Duel)
 
+    [86792] = true, -- Eating (High Hrothgar Festival Mints)
+    [86739] = true, -- Drinking (Sailor's Warning Festival Grog)
+
     -- Sets
     [90940] = true, -- Eternal Warrior
     [90937] = true, -- Immortal Warrior
@@ -441,6 +448,23 @@ E.CastChannelOverride = {
     [37211] = true, -- Q4854 Empower Heart (Eyes of Azura)
     [38246] = true, -- Animus Geode (Eyes of Azura)
 
+    ---------------------------
+    -- Seasonal Quest ---------
+    ---------------------------
+
+    -- New Life Festival
+    [84847] = true, -- Celebratory Belch (Stonetooth Bash)
+    [84125] = true, -- Breton Male Dance (Lava Foot Stomp)
+    [84126] = true, -- Breton Female Dance (Lava Foot Stomp)
+    [84127] = true, -- Dunmer Male Dance (Lava Foot Stomp)
+    [84128] = true, -- Dunmer Female Dance (Lava Foot Stomp)
+    [84130] = true, -- Altmer Male Dance (Lava Foot Stomp)
+    [84131] = true, -- Altmer Female Dance (Lava Foot Stomp)
+    [84133] = true, -- Nord Dance (Lava Foot Stomp)
+    [84528] = true, -- Flame Juggling (Castle Charm Challenge)
+    [84506] = true, -- Dagger Juggling (Castle Charm Challenge)
+    [84533] = true, -- Sword Swallowing (Castle Charm Challenge)
+
 }
 
 E.CastDurationFix = {
@@ -456,6 +480,9 @@ E.CastDurationFix = {
     [89645] = 5000, -- 68235 Stun
     [105217] = 5000, -- 68235 Stun
     [89654] = 5000, -- 68235 Stun
+
+    [86792] = 3000, -- Eating (High Hrothgar Festival Mints)
+    [86739] = 3000, -- Drinking (Sailor's Warning Festival Grog)
 
     [33175] = 6300, -- Feed (Vampire)
     [40350] = 5300, -- Feed (Vampire - Bite Player)
@@ -484,6 +511,23 @@ E.CastDurationFix = {
     [36824] = 4000, -- Q4833 Apply Tiger Buff (Bosmer Insight)
     [33701] = 1000, -- BurrowEND (Throne of the Wilderking)
 
+    ---------------------------
+    -- Seasonal Quest ---------
+    ---------------------------
+
+    -- New Life Festival
+    [84847] = 5000, -- Celebratory Belch (Stonetooth Bash)
+    [84125] = 10000, -- Breton Male Dance (Lava Foot Stomp)
+    [84126] = 10000, -- Breton Female Dance (Lava Foot Stomp)
+    [84127] = 10000, -- Dunmer Male Dance (Lava Foot Stomp)
+    [84128] = 10000, -- Dunmer Female Dance (Lava Foot Stomp)
+    [84130] = 10000, -- Altmer Male Dance (Lava Foot Stomp)
+    [84131] = 10000, -- Altmer Female Dance (Lava Foot Stomp)
+    [84133] = 10000, -- Nord Dance (Lava Foot Stomp)
+    [84528] = 12000, -- Flame Juggling (Castle Charm Challenge)
+    [84506] = 12000, -- Dagger Juggling (Castle Charm Challenge)
+    [84533] = 12000, -- Sword Swallowing (Castle Charm Challenge)
+
 }
 
 E.IsCast = {
@@ -506,9 +550,18 @@ E.IsCast = {
     [105217] = true, -- 68235 Stun
     [89654] = true, -- 68235 Stun
     [63427] = true, -- Clean Fish
-    [78052] = true, -- Minor Pardon
-    [76350] = true, -- Moderate Pardon
-    [76349] = true, -- Full Pardon
+    [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
+    [76350] = true, -- Moderate Pardon (Leniency Edict)
+    [76349] = true, -- Full Pardon (Grand Amnesty Edict)
+
+    [86792] = true, -- Eating (High Hrothgar Festival Mints)
+    [86739] = true, -- Drinking (Sailor's Warning Festival Grog)
+
+    -- Memento
+    [87964] = true, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
+    [87965] = true, -- Jester's Festival Illusion Daz (Plume Dazzler)
+    [87966] = true, -- Jester's Festival Illusion Daz (Spiral Dazzler)
+    [88374] = true, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
 
     -- Class
     [43714] = true, -- Crystal Shard (Sorcerer)
@@ -635,6 +688,26 @@ E.IsCast = {
     [41325] = true, -- Blacksap's Brew (The Blacksap's Hold)
     [33066] = true, -- Q4586_ChangeClothes (The Witcher of Silatar)
     [33701] = true, -- BurrowEND (Throne of the Wilderking)
+
+    ---------------------------
+    -- Seasonal Quest ---------
+    ---------------------------
+
+    -- Jester's Festival
+    [87474] = true, -- Flower Garland (Springtime Flair)
+
+    -- New Life Festival
+    [84847] = true, -- Celebratory Belch (Stonetooth Bash)
+    [84125] = true, -- Breton Male Dance (Lava Foot Stomp)
+    [84126] = true, -- Breton Female Dance (Lava Foot Stomp)
+    [84127] = true, -- Dunmer Male Dance (Lava Foot Stomp)
+    [84128] = true, -- Dunmer Female Dance (Lava Foot Stomp)
+    [84130] = true, -- Altmer Male Dance (Lava Foot Stomp)
+    [84131] = true, -- Altmer Female Dance (Lava Foot Stomp)
+    [84133] = true, -- Nord Dance (Lava Foot Stomp)
+    [84528] = true, -- Flame Juggling (Castle Charm Challenge)
+    [84506] = true, -- Dagger Juggling (Castle Charm Challenge)
+    [84533] = true, -- Sword Swallowing (Castle Charm Challenge)
 
 }
 
@@ -2523,6 +2596,8 @@ E.EffectOverride = {
     [72824] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_bear_haunch.dds', name = A.Food_Orzorgas_Smoked_Bear_Haunch }, -- Orzorga's Smoked Bear Haunch
     [100502] = { icon = 'LuiExtended/media/icons/consumables/consumable_deregulated_mushroom_stew.dds' }, -- Deregulated Mushroom Stew
     [100498] = { icon = 'LuiExtended/media/icons/consumables/consumable_clockwork_citrus_filet.dds' }, -- Clockwork Citrus Filet
+    [107789] = { icon = 'LuiExtended/media/icons/consumables/consumable_artaeum_takeaway_broth.dds' }, -- Artaeum Takeaway Broth
+    [107748] = { icon = 'LuiExtended/media/icons/consumables/consumable_artaeum_pickled_fish_bowl.dds', name = A.Food_Artaeum_Pickled_Fish_Bowl }, -- Lure Allure (Artaeum Pickled Fish Bowl)
 
     -- Crafted Drink
     [61322] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Recovery), tooltip = T.Drink_Crafted_Health }, -- Health Drink
@@ -2541,7 +2616,7 @@ E.EffectOverride = {
     [61336] = { hide = true }, -- Well Fed
     [61339] = { hide = true }, -- Well Fed
     [61350] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_purple.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Primary_Stat_Recovery), tooltip = T.Drink_Crafted_Triple }, -- Triple Drink
-    [72816] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_red_frothgar.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Orzorgas_Red_Frothgar) }, -- Orzorga's Red Frothgar
+    [72816] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_red_frothgar.dds', name = A.Drink_Orzorgas_Red_Frothgar }, -- Orzorga's Red Frothgar
     [61354] = { hide = true }, -- Well Fed: Magicka Regen
     [100488] = { icon = 'LuiExtended/media/icons/consumables/consumable_spring-loaded_infusion.dds' }, -- Spring-Loaded Infusion
     [100490] = { hide = true }, -- Magicka Consumable
@@ -2614,10 +2689,18 @@ E.EffectOverride = {
     [76349] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_pardon_edict_high.dds', name = A.Innate_Pardon_Edict_High }, -- Full Pardon
 
     -- Seasonal Misc
-    [86794] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_mints.dds', name = A.Consumable_Festival_Mints }, -- Very Cold (High Hrothgar Festival Mints)
-    [86740] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_grog.dds', name = A.Consumable_Sailors_Grog }, -- Very Drunk (Sailor's Warning Festival Grog)
+    [86792] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_mints.dds', name = A.Consumable_Festival_Mints }, -- Eating (High Hrothgar Festival Mints)
+    [86794] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_mints.dds', name = A.Consumable_Festival_Mints, tooltip = T.Event_Festival_Mints, unbreakable = 1 }, -- Very Cold (High Hrothgar Festival Mints)
+    [86739] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_grog.dds', name = A.Consumable_Sailors_Grog }, -- Drinking (Sailor's Warning Festival Grog)
+    [86740] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_grog.dds', name = A.Consumable_Sailors_Grog, tooltip = T.Event_Festival_Grog, unbreakable = 1 }, -- Very Drunk (Sailor's Warning Festival Grog)
+    [87964] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_dazzler_1.dds', name = A.Consumable_Sparkwreath_Dazzler }, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
+    [87965] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_dazzler_1.dds', name = A.Consumable_Plume_Dazzler }, -- Jester's Festival Illusion Daz (Plume Dazzler)
+    [87966] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_dazzler_1.dds', name = A.Consumable_Spiral_Dazzler }, -- Jester's Festival Illusion Daz (Spiral Dazzler)
+    [88374] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_dazzler_2.dds', name = A.Skill_Sparkly_Hat_Dazzler }, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
+
+
     [85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire-breathers_torches.dds', unbreakable = 1 }, -- Flame Juggling (Consumable Version)
-    [85354] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds.dds', unbreakable = 1 }, -- Dagger Juggling (Consumable Verison)
+    [85354] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', unbreakable = 1 }, -- Dagger Juggling (Consumable Verison)
     [85353] = {icon = 'LuiExtended/media/icons/mementos/memento_sword-swallowers_blade.dds', unbreakable = 1 }, -- Sword Swallowing (Consumable Version)
 
     -- Base Mementos
@@ -2651,6 +2734,11 @@ E.EffectOverride = {
     [74232] = { icon = 'LuiExtended/media/icons/mementos/memento_malacaths_wrathful_flame.dds', name = A.Memento_Malacaths_Wrathful_Flame, unbreakable = 1 }, -- Stun (Malacath's Wrathful Flame)
 
     -- Seasonal Mementos
+    [91369] = { icon = 'LuiExtended/media/icons/abilities/ability_event_steamy_spring_pie.dds', name = A.Memento_The_Pie_of_Misrule, tooltip = T.Experience_Seasonal_Event }, -- Jester's Experience Boost Pie (The Pie of Misrule)
+    [92232] = { icon = 'LuiExtended/media/icons/abilities/ability_event_pelinals_ferocity.dds', tooltip = T.Experience_Seasonal_Pelinal }, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
+    [91449] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds', tooltip = T.Experience_Seasonal_Event }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
+    [86075] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds', tooltip = T.Experience_Seasonal_Event }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
+
     [77027] = { hide = true }, -- Anniversary Cake - Forreals (Jubilee Cake)
     [87998] = { hide = true }, -- Anniversary Cake (2nd Annual Jubilee Cake)
     [102009] = { hide = true }, -- Anniversary Cake (3rd Annual Jubilee Cake)
@@ -2658,7 +2746,6 @@ E.EffectOverride = {
     [84369] = { icon = 'LuiExtended/media/icons/abilities/ability_event_witchmothers_brew.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
     [86774] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = A.Memento_Mud_Ball }, -- Mudball (Mud Ball Pouch)
     [86779] = { hide = true }, -- Covered in Mud (Mud Ball Pouch)
-    [91449] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds' }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
 
     -- Crown Store Mementos
     [85344] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_aura.dds', name = A.Memento_Storm_Atronach_Aura, forcedContainer = 'short' }, -- Atronach Aura (Storm Atronach Aura)
@@ -2689,19 +2776,6 @@ E.EffectOverride = {
 
     -- Assistants
     [77645] = { hide = true }, -- Stealth (Pirharri the Smuggler)
-
-    -- Seasonal Quests (New Life Festival)
-    [84125] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Breton Male Dance (Lava Foot Stomp)
-    [84126] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Breton Female Dance (Lava Foot Stomp)
-    [84127] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Dunmer Male Dance (Lava Foot Stomp)
-    [84128] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Dunmer Female Dance (Lava Foot Stomp)
-    [84130] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Altmer Male Dance (Lava Foot Stomp)
-    [84131] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Altmer Female Dance (Lava Foot Stomp)
-    [84133] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Nord Dance (Lava Foot Stomp)
-    [84528] = {icon = 'LuiExtended/media/icons/abilities/ability_event_torch_juggling.dds', unbreakable = 1 }, -- Flame Juggling (Castle Charm Challenge)
-    [84506] = {icon = 'LuiExtended/media/icons/abilities/ability_event_knife_juggling.dds', unbreakable = 1 }, -- Dagger Juggling (Castle Charm Challenge)
-    [84533] = {icon = 'LuiExtended/media/icons/abilities/ability_event_sword_swallowing.dds', unbreakable = 1 }, -- Sword Swallowing (Castle Charm Challenge)
-    [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_event_celebratory_belch.dds', unbreakable = 1 }, -- Celebratory Belch (Stonetooth Bash)
 
     ----------------------------------------------------------------
     -- ENCHANTS ----------------------------------------------------
@@ -6314,15 +6388,30 @@ E.EffectOverride = {
     [87066] = { icon = 'esoui/art/icons/ability_mage_006.dds' }, -- Volcanic Debris (Fire-Binder)
     [88845] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_empower_atronach.dds' }, -- Empower Atronach (Fire-Binder)
 
-    -- Seasonal Quests
-    [86075] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds' }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
-    [83523] = { icon = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Seasonal_Freezing }, -- Freezing (Snow Bear Plunge)
-    [83522] = { icon = 'LuiExtended/media/icons/abilities/ability_event_warm.dds', forcedContainer = 'short', tooltip = T.Seasonal_Warm }, -- Warm (Snow Bear Plunge)
+    ----------------------------------------------------------------
+    -- EVENT QUESTS ---------------------------------------------
+    ----------------------------------------------------------------
+
+    -- Jester's Festival
+    [87474] = { icon = 'LuiExtended/media/icons/abilities/ability_event_flower_garland.dds', name = A.Event_Petal_Pelters }, -- Flower Garland -- Springtime Flair
+
+    -- New Life Festival
+    [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_event_celebratory_belch.dds', name = A.Skill_Celebratory_Belch, unbreakable = 1 }, -- Celebratory Belch (Stonetooth Bash)
+    [83523] = { icon = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Event_Freezing }, -- Freezing (Snow Bear Plunge)
+    [83522] = { icon = 'LuiExtended/media/icons/abilities/ability_event_warm.dds', forcedContainer = 'short', tooltip = T.Event_Warm }, -- Warm (Snow Bear Plunge)
+
+    -- Seasonal Quests (New Life Festival)
+    [84125] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Breton Male Dance (Lava Foot Stomp)
+    [84126] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Breton Female Dance (Lava Foot Stomp)
+    [84127] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Dunmer Male Dance (Lava Foot Stomp)
+    [84128] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Dunmer Female Dance (Lava Foot Stomp)
+    [84130] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Altmer Male Dance (Lava Foot Stomp)
+    [84131] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Altmer Female Dance (Lava Foot Stomp)
+    [84133] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, unbreakable = 1 }, -- Nord Dance (Lava Foot Stomp)
+    [84528] = {icon = 'LuiExtended/media/icons/abilities/ability_event_torch_juggling.dds', name = A.Skill_Torch_Juggling, unbreakable = 1 }, -- Flame Juggling (Castle Charm Challenge)
+    [84506] = {icon = 'LuiExtended/media/icons/abilities/ability_event_knife_juggling.dds', name = A.Skill_Knife_Juggling, unbreakable = 1 }, -- Dagger Juggling (Castle Charm Challenge)
+    [84533] = {icon = 'LuiExtended/media/icons/abilities/ability_event_sword_swallowing.dds', name = A.Skill_Sword_Swallowing, unbreakable = 1 }, -- Sword Swallowing (Castle Charm Challenge)
     [84330] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = A.Memento_Mud_Ball }, -- Mudball (Mud Ball Merriment)
-    [85639] = { hide = true }, -- Covered in Mud (Mud Ball Merriment)
-    [91369] = { icon = 'LuiExtended/media/icons/abilities/ability_event_steamy_spring_pie.dds', name = A.Memento_The_Pie_of_Misrule }, -- Jester's Experience Boost Pie (The Pie of Misrule)
-    [92232] = { icon = 'LuiExtended/media/icons/abilities/ability_event_pelinals_ferocity.dds' }, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
-    [89243] = { hide = true }, -- Butcher Awareness (A Noble Guest)
 
     ----------------------------------------------------------------
     -- CYRODIIL ----------------------------------------------------
@@ -7522,17 +7611,17 @@ E.FakePlayerBuffs = {
     [40449] = { icon = 'esoui/art/icons/ability_mageguild_003_a.dds', name = A.Skill_Spell_Symmetry, duration = 5000 }, -- Spell Symmetry (Spell Symmetry)
 
     -- Seasonal Quests (New Life Festival)
-    [84125] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)
-    [84126] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Breton Female Dance (Lava Foot Stomp)
-    [84127] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Dunmer Male Dance (Lava Foot Stomp)
-    [84128] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Dunmer Female Dance (Lava Foot Stomp)
-    [84130] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Altmer Male Dance (Lava Foot Stomp)
-    [84131] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Altmer Female Dance (Lava Foot Stomp)
-    [84133] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Nord Dance (Lava Foot Stomp)
-    [84528] = {icon = 'LuiExtended/media/icons/abilities/ability_event_torch_juggling.dds', name = A.Skill_Torch_Juggling, duration = 12000}, -- Flame Juggling (Castle Charm Challenge)
-    [84506] = {icon = 'LuiExtended/media/icons/abilities/ability_event_knife_juggling.dds', name = A.Skill_Dagger_Juggling, duration = 12000}, -- Dagger Juggling (Castle Charm Challenge)
-    [84533] = {icon = 'LuiExtended/media/icons/abilities/ability_event_sword_swallowing.dds', name = A.Skill_Sword_Swallowing, duration = 12000}, -- Sword Swallowing (Castle Charm Challenge)
-    [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_event_celebratory_belch.dds', name = A.Skill_Celebratory_Belch, duration = 5000}, -- Celebratory Belch (Stonetooth Bash)
+    --[84125] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)
+    --[84126] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Breton Female Dance (Lava Foot Stomp)
+    --[84127] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Dunmer Male Dance (Lava Foot Stomp)
+    --[84128] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Dunmer Female Dance (Lava Foot Stomp)
+    --[84130] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Altmer Male Dance (Lava Foot Stomp)
+    --[84131] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Altmer Female Dance (Lava Foot Stomp)
+    --[84133] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Nord Dance (Lava Foot Stomp)
+    --[84528] = {icon = 'LuiExtended/media/icons/abilities/ability_event_torch_juggling.dds', name = A.Skill_Torch_Juggling, duration = 12000}, -- Flame Juggling (Castle Charm Challenge)
+    --[84506] = {icon = 'LuiExtended/media/icons/abilities/ability_event_knife_juggling.dds', name = A.Skill_Knife_Juggling, duration = 12000}, -- Dagger Juggling (Castle Charm Challenge)
+    --[84533] = {icon = 'LuiExtended/media/icons/abilities/ability_event_sword_swallowing.dds', name = A.Skill_Sword_Swallowing, duration = 12000}, -- Sword Swallowing (Castle Charm Challenge)
+    --[84847] = {icon = 'LuiExtended/media/icons/abilities/ability_event_celebratory_belch.dds', name = A.Skill_Celebratory_Belch, duration = 5000}, -- Celebratory Belch (Stonetooth Bash)
 
     ------------------------------
     -- Quests --------------------

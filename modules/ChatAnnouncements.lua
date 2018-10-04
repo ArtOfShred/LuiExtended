@@ -775,6 +775,11 @@ local g_removeableIDs = {
     [44489] = true, -- Prismatic Flamestaff (Fighters Guild Quests)
     [33235] = true, -- Wabbajack (Mages Guild Quests)
 
+    -- New Life Festival
+    [100393] = true, -- Histmuck Blobfin (Fish Boon Feast)
+    [100394] = true, -- Shadowfen Creeping Leech (Fish Boon Feast)
+    [100395] = true, -- Black Marsh Cucumber (Fish Boon Feast)
+
 }
 
 -- List of items to blacklist as annyoing loot

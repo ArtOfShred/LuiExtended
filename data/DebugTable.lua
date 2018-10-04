@@ -284,43 +284,65 @@ debugAuras = {
             [61218] = true, -- Triple Food (Purple)
             [61219] = true, -- Magicka Consumable
             [61220] = true, -- Magicka Consumable
+            [73540] = true, -- Unique Food: H, S Reg, Small B
             [72819] = true, -- Orzorga's Tripe Trifle Pocket (Blue)
             [72820] = true, -- Magicka Consumable
+            [73551] = true, -- Unique Food: H, H Reg Pie
             [72822] = true, -- Orzorga's Blood Price Pie (Blue)
             [72823] = true, -- Magicka Consumable
+            [73553] = true, -- Unique Food: H, All Reg, Meal
             [72824] = true, -- Orzorga's Smoked Bear Haunch (Gold)
             [72825] = true, -- Magicka Consumable
             [72826] = true, -- Magicka Consumable
             [72827] = true, -- Magicka Consumable
+            [100485] = true, -- Unique Food: Reg H/S, Stew
             [100502] = true, -- Deregulated Mushroom Stew
             [100503] = true, -- Magicka Consumable
+            [100487] = true, -- Unique Food: Reg H/M, Max H/M
             [100498] = true, -- Clockwork Citrus Filet
             [100499] = true, -- Magicka Consumable
             [100500] = true, -- Magicka Consumable
             [100501] = true, -- Magicka Consumable
+            [107793] = true, -- Unique Food: Reg H/M, Max H/M
+            [107789] = true, -- Artaeum Takeaway Broth
+            [107790] = true, -- Magicka Consumable
+            [107791] = true, -- Magicka Consumable
+            [107792] = true, -- Magicka Consumable
+            [107794] = true, -- Unique Food: Max H/M, Fish Lur
+            [107748] = true, -- Lure Allure
+            [107749] = true, -- Increase Magicka
 
             -- Crafted Drink
+            [61365] = true, -- Drink: H, Flagon
             [61322] = true, -- Health Drink (Green)
             [61323] = true, -- Well Fed
+            [61367] = true, -- Drink: M, Flagon
             [61325] = true, -- Magicka Drink (Green)
             [61326] = true, -- Well Fed
+            [61368] = true, -- Drink: S, Flagon
             [61328] = true, -- Stamina Drink (Green)
             [61329] = true, -- Well Fed
+            [61361] = true, -- Drink: MS, Flagon
             [61345] = true, -- Magicka + Stamina Drink (Blue)
             [61346] = true, -- Well Fed
             [61348] = true, -- Well Fed
+            [61358] = true, -- Drink: HS, Flagon
             [61340] = true, -- Health + Stamina Drink (Blue)
             [61341] = true, -- Well Fed
             [61344] = true, -- Well Fed
+            [61359] = true, -- Drink: HM, Flagon
             [61335] = true, -- Health + Magicka Drink (Blue)
             [61336] = true, -- Well Fed
             [61339] = true, -- Well Fed
+            [61357] = true, -- Drink: HSM, Flagon
             [61350] = true, -- Triple Drink (Purple)
             [61351] = true, -- Well Fed: Health Regen
             [61354] = true, -- Well Fed: Magicka Regen
             [61355] = true, -- Well Fed: Stamina Regen
+            [73539] = true, -- Unique Drink: Max H, M, Flagon
             [72816] = true, -- Orzorga's Red Frothgar (Blue)
             [72817] = true, -- Magicka Consumable
+            [100483] = true, -- Unique Drink: All Max & Detect
             [100488] = true, -- Spring-Loaded Infusion
             [100490] = true, -- Magicka Consumable
             [100489] = true, -- Stamina Consumable
@@ -335,7 +357,9 @@ debugAuras = {
             [84725] = true, -- Frosted Brains (Blue)
             [84728] = true, -- Increase Health Regen
             [84729] = true, -- Witchfest Food: M, H Reg Meal
+            [84679] = true, -- Witchfest Food: M, Meal
             [84678] = true, -- Sweet Sanguine Apples (Green)
+            [86788] = true, -- New Life Food: H, Pie
             [86789] = true, -- Alcaire Festival Sword-Pie (Green)
             [86749] = true, -- Jagga-Drenched "Mud Ball" (Blue)
             [86750] = true, -- Increase Stamina
@@ -343,7 +367,9 @@ debugAuras = {
             [86673] = true, -- Lava Foot Soup-and-Saltrice (Blue)
             [86674] = true, -- Increase Stamina Recovery
             [86669] = true, -- Newlife Food: Reg S, Max S, So
+            [86785] = true, -- New Life Food: M, Soup
             [86560] = true, -- Old Aldmeri Orphan Gruel (Green)
+            [86786] = true, -- New Life Food: S, Sm Bread
             [86787] = true, -- Rajhin's Sugar Claws (Green)
             [89955] = true, -- Candied Jester's Coins (Blue)
             [89954] = true, -- Jesters Food: Max S, Reg M
@@ -366,6 +392,7 @@ debugAuras = {
             [84720] = true, -- Ghastly Eye Bowl (Blue)
             [84722] = true, -- Increase Magicka Regen
             [84723] = true, -- Witchfest Food: Max M, Reg M,
+            [84707] = true, -- Witchfest Drink: HMS, Flagon
             [84704] = true, -- Witchmother's Party Punch (Purple)
             [84705] = true, -- Increase Health Regen
             [84706] = true, -- Increase Health Regen
@@ -382,6 +409,7 @@ debugAuras = {
             [86559] = true, -- Hissmir Fish-Eye Rye (Gold)
             [86558] = true, -- Newlife Drink: Reg MS, Flagon
             [86560] = true, -- Increase Stamina Recovery
+            [86790] = true, -- New Life Drink: S, Flagon
             [86791] = true, -- Snow Bear Glow-Wine (Green)
             [89957] = true, -- Dubious Camoran Throne (Purple)
             [89939] = true, -- Jesters Food: Max HS, Reg S
@@ -392,26 +420,35 @@ debugAuras = {
             [66551] = true, -- Vendor Health Food (White)
             [66568] = true, -- Vendor Magicka Food (White)
             [66576] = true, -- Vendor Stamina Food (White)
+            [66589] = true, -- Drink: H, Flagon
             [66586] = true, -- Vendor Health Drink (White)
             [66588] = true, -- Well Fed
+            [66593] = true, -- Drink: M, Flagon
             [66590] = true, -- Vendor Magicka Drink (White)
             [66592] = true, -- Well Fed
+            [66597] = true, -- Drink: S, Flagon
             [66594] = true, -- Vendor Stamina Drink (White)
             [66596] = true, -- Well Fed
 
             -- AVA Food & Drink
+            [72963] = true, -- Alli-Food: S, M, SmBread
             [72961] = true, -- Cyrodilic Field Bar (White)
             [72962] = true, -- Increase Max Health
+            [72952] = true, -- Alli-Food: H, S, SmBread
             [72956] = true, -- Cyrodilic Field Tack (White)
             [72957] = true, -- Increase Max Health
+            [72958] = true, -- Alli-Food: H, M, SmBread
             [72959] = true, -- Cyrodilic Field Treat (White)
             [72960] = true, -- Increase Max Health
+            [72975] = true, -- Alli-Drink: M S, Flagon
             [72971] = true, -- Cyrodilic Field Tonic (White)
             [72972] = true, -- Well Fed
             [72973] = true, -- Well Fed
+            [72964] = true, -- Alli-Drink: H S, Flagon
             [72965] = true, -- Cyrodilic Field Brew (White)
             [72966] = true, -- Well Fed
             [72967] = true, -- Well Fed
+            [72974] = true, -- Alli-Drink: H M, Flagon
             [72968] = true, -- Cyrodilic Field Tea (White)
             [72969] = true, -- Well Fed
             [72970] = true, -- Well Fed
@@ -420,6 +457,7 @@ debugAuras = {
             [85484] = true, -- Crown Crate Fortifying Meal
             [85485] = true, -- Increase Max Stamina
             [85486] = true, -- Increase Max Magicka
+            [68414] = true, -- _CRWN Food: HSM, Meal
             [68411] = true, -- Crown Fortifying Meal
             [68412] = true, -- Increase Max Stamina
             [68413] = true, -- Increase Max Magicka
@@ -443,6 +481,55 @@ debugAuras = {
             [92476] = true, -- Crown Vigorous Tincture
             [92475] = true, -- Crown Drink: M, H, Flagon
             [92478] = true, -- Increase Health Regen
+
+            -- Food Eating Animations
+            [61221] = true, -- Food: HSM, Meal
+            [61246] = true, -- Food: HSM, Soupl
+            [61252] = true, -- Food: HSM, Small Bread
+            [61253] = true, -- Food: HSM, Meat
+            [61264] = true, -- Food: HS, Meal
+            [61265] = true, -- Food: HS, Soupl
+            [61276] = true, -- Food: HS, Bread
+            [61277] = true, -- Food: HS, SmBread
+            [61278] = true, -- Food: HS, Meat
+            [61287] = true, -- Food: HM, Meal
+            [61288] = true, -- Food: HM, Soup
+            [61290] = true, -- Food: HM, SmBread
+            [61291] = true, -- Food: HM, Meat
+            [61293] = true, -- Food: MS, Meal
+            [61296] = true, -- Food: MS, Soup
+            [61297] = true, -- Food: MS, Bread
+            [61298] = true, -- Food: MS, SmBread
+            [61301] = true, -- Food: H, Meal
+            [61302] = true, -- Food: H, Soup
+            --[61303] = true, -- Food: H, Bread -- TODO: Probably unused
+            [61304] = true, -- Food: H, SmBread
+            [61305] = true, -- Food: H, Meat
+            [61307] = true, -- Food: M, Meal
+            [61308] = true, -- FooD: M, Soup
+            [61309] = true, -- Food: M, Bread
+            [61310] = true, -- Food: M, SmBread
+            [61313] = true, -- Food: S, Meal
+            [61314] = true, -- Food: S, Soup
+            [61315] = true, -- Food: S, Bread
+            [61316] = true, -- Food: S, SmBread
+            [65523] = true, -- Food: M, Pie
+            [65528] = true, -- Food: H, Pie
+            [65534] = true, -- Food: HM, Pie
+            [65535] = true, -- Food: HS, Pie
+            [65536] = true, -- Food: HSM, Pie
+            [66550] = true, -- Food: H, Meal
+            [66565] = true, -- Food: H, SmBread
+            --[66566] = true, -- Food: H, Meat -- TODO: Probably unused
+            [66569] = true, -- Food: M, Meal
+            [66570] = true, -- Food: M, Soup
+            --[66572] = true, -- Food: M, SmBread -- TODO: Probably unused
+            [66577] = true, -- Food: S, Meal
+            [66578] = true, -- Food: S, Soup
+            --[66580] = true, -- Food: S, SmBread -- TODO: Probably unused
+            --[66584] = true, -- Food: M, Pie -- TODO: Probably unused
+            --[66585] = true, -- Food: H, Pie -- TODO: Probably unused
+            --[85487] = true, _CRWN LC FOOD: HSM -- TODO: Probably Crown Crate food
 
             -------------------------------------
             -- MISC CONSUMABLES -----------------
@@ -475,23 +562,24 @@ debugAuras = {
             [68321] = true, -- Riding Stamina Tracking(Crown Lesson: Riding Stamina)
             [68528] = true, -- Stamina Announcement Tracker (Crown Lesson: Riding Stamina)
             [69293] = true, -- Sigil of Imperial Retreat (Sigil of Imperial Retreat)
-
-            -- Seasonal
-            [86792] = true, -- Eating (High Hrothgar Festival Mints)
-            [86794] = true, -- Very Cold (High Hrothgar Festival Mints)
-            [86739] = true, -- Drinking (Sailor's Warning Festival Grog)
-            [86740] = true, -- Very Drunk (Sailor's Warning Festival Grog)
-            [85353] = true, -- Sword Swallowing (Disposable Swallower's Sword)
-            [85354] = true, -- Dagger Juggling (Disposable Juggling Knives)
-            [85355] = true, -- Flame Juggling (Fire-Breather's Oil Bun)
-            [87964] = true, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
-            [87965] = true, -- Jester's Festival Illusion Daz (Plume Dazzler)
-            [87966] = true, -- Jester's Festival Illusion Daz (Spiral Dazzler)
-            [88374] = true, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
+            [59581] = true, -- Clickable Eat Food (Spoiled Food)
 
             -------------------------------------
             -- MEMENTOS -------------------------
             -------------------------------------
+
+            -- Seasonal Mementos & Items
+            [86792] = true, -- Eating (High Hrothgar Festival Mints)
+            [86794] = true, -- Very Cold (High Hrothgar Festival Mints)
+            [86739] = true, -- Drinking (Sailor's Warning Festival Grog)
+            [86740] = true, -- Very Drunk (Sailor's Warning Festival Grog)
+            --[85353] = true, -- Sword Swallowing (Disposable Swallower's Sword)
+            --[85354] = true, -- Dagger Juggling (Disposable Juggling Knives)
+            --[85355] = true, -- Flame Juggling (Fire-Breather's Oil Bun)
+            [87964] = true, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
+            [87965] = true, -- Jester's Festival Illusion Daz (Plume Dazzler)
+            [87966] = true, -- Jester's Festival Illusion Daz (Spiral Dazzler)
+            [88374] = true, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
 
             [26829] = true, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
             [26736] = true, -- Bear Trap (Battered Bear Trap)
@@ -535,26 +623,28 @@ debugAuras = {
             [74151] = true, -- Stun (Hidden Pressure Vent)
             [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
             [74232] = true, -- Stun (Malacath's Wrathful Flame)
-            [77027] = true, -- Anniversary Cake - Forreals (Jubilee Cake)
-            [87998] = true, -- Anniversary Cake (2nd Annual Jubilee Cake)
-            [102009] = true, -- Anniversary Cake (3rd Annual Jubilee Cake)
-            [77123] = true, -- Anniversary EXP Buff (Any Jubilee Cake)
-            [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
-            [84361] = true, -- Witchmother's Brew (Witchmother's Whistle)
-            [84369] = true, -- Witchmother's Brew (Witchmother's Whistle)
-            [86774] = true, -- Mudball (Mud Ball)
-            [86777] = true, -- Mudball (Mud Ball)
-            [86775] = true, -- Covered in Mud (Mud Ball)
-            [86779] = true, -- Covered in Mud (Mud Ball)
-            [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
-            [91368] = true, -- Jester's Experience Boost Pie (The Pie of Misrule)
+
+            --[77027] = true, -- Anniversary Cake - Forreals (Jubilee Cake)
+            --[87998] = true, -- Anniversary Cake (2nd Annual Jubilee Cake)
+            --[102009] = true, -- Anniversary Cake (3rd Annual Jubilee Cake)
+            --[77123] = true, -- Anniversary EXP Buff (Any Jubilee Cake)
+            --[81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
+            --[84361] = true, -- Witchmother's Brew (Witchmother's Whistle)
+            --[84369] = true, -- Witchmother's Brew (Witchmother's Whistle)
+            --[86774] = true, -- Mudball (Mud Ball)
+            --[86777] = true, -- Mudball (Mud Ball)
+            --[86775] = true, -- Covered in Mud (Mud Ball)
+            --[86779] = true, -- Covered in Mud (Mud Ball)
+            --[87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
             [91369] = true, -- Jester's Experience Boost Pie (The Pie of Misrule)
+            [92232] = true, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
             [91446] = true, -- Jester's Experience Boost Pie -- Breda's Bottomless Mead Mug
             [91450] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
             [91451] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
             [91452] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
             [91453] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
             [91449] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
+            [86075] = true, -- Breda's Magnificent Mead -- Breda's Magnificent Mead
 
             [85344] = true, -- Atronach Aura (Storm Atronach Aura)
             [85349] = true, -- Atronach Transformation (Storm Atronach Transform)
@@ -10932,6 +11022,7 @@ debugAuras = {
 
             [11341] = true, -- Enemy Keep Bonus I
             [11343] = true, -- Enemy Keep Bonus II
+            [11347] = true, -- Enemy Keep Bonus IV
             [11348] = true, -- Enemy Keep Bonus V
             [11350] = true, -- Enemy Keep Bonus VI
             [11352] = true, -- Enemy Keep Bonus VII
@@ -10967,13 +11058,20 @@ debugAuras = {
             -- SEASONAL EVENTS ------------------
             -------------------------------------
 
-            -- Witches Harvest
-            [83775] = true, -- Event - Q5742 WitchFest Intro -- The Witchmother's Bargain
-            [83820] = true, -- Event Q5742 WitchFest Done -- The Witchmother's Bargain
-            [82898] = true, -- Event - WitchFest Theater -- The Witchmother's Bargain
+            -- Jester's Festival
+            [89243] = true, -- Butcher Awareness - A Noble Guest
+            [89201] = true, -- Flare -- Springtime Flair
+            [87474] = true, -- Flower Garland -- Springtime Flair
+            --[88095] = true, -- Illusion Dazzler -- Royal Revelry
+            --[88123] = true, -- Illusion Dazzler -- Royal Revelry
+            --[88124] = true, -- Illusion Dazzler -- Royal Revelry
 
             -- New Life Festival
-            [86075] = true, -- Breda's Magnificent Mead -- Breda's Magnificent Mead
+            [84847] = true, -- Celebratory Belch -- Stonetooth Bash
+            [85680] = true, -- Jump -- Snow Bear Plunge
+            [83523] = true, -- Freezing -- Snow Bear Plunge
+            [83544] = true, -- Cold -- Snow Bear Plunge
+            [83522] = true, -- Warm -- Snow Bear Plunge
             [84125] = true, -- Breton Male Dance -- Lava Foot Stomp
             [84187] = true, -- Breton Dance -- Lava Foot Stomp
             [85544] = true, -- Breton Dance -- Lava Foot Stomp
@@ -11005,31 +11103,20 @@ debugAuras = {
             [84533] = true, -- Sword Swallowing -- Castle Charm Challenge
             [84534] = true, -- Sword Swallowing -- Castle Charm Challenge
             [85562] = true, -- Breton Dance -- Castle Charm Challenge
-            --[85351] = true, -- Self-Serve Mudbath -- Mud Ball Merriment (Likely unused)
-            --[85352] = true, -- Covered in Mud -- Mud Ball Merriment (Likely unused)
-            [84847] = true, -- Celebratory Belch -- Stonetooth Bash
-            [85680] = true, -- Jump -- Snow Bear Plunge
-            [83523] = true, -- Freezing -- Snow Bear Plunge
-            [83544] = true, -- Cold -- Snow Bear Plunge
-            [83522] = true, -- Warn -- Snow Bear Plunge
             [84330] = true, -- Mudball -- Mud Ball Merriment
             [84378] = true, -- Mudball -- Mud Ball Merriment
             [84335] = true, -- Covered in Mud -- Mud Ball Merriment
             [85639] = true, -- Covered in Mud -- Mud Ball Merriment
+            --[85351] = true, -- Self-Serve Mudbath -- Mud Ball Merriment (Likely unused)
+            --[85352] = true, -- Covered in Mud -- Mud Ball Merriment (Likely unused)
 
-            -- Jester's Festival
-            [88095] = true, -- Illusion Dazzler -- Royal Revelry
-            [88123] = true, -- Illusion Dazzler -- Royal Revelry
-            [88124] = true, -- Illusion Dazzler -- Royal Revelry
-            [89243] = true, -- Butcher Awareness - A Noble Guest
-            [89201] = true, -- Flare -- Springtime Flair
-            [87474] = true, -- Flower Garland -- Springtime Flair
+            -- Witches Harvest
+            --[83775] = true, -- Event - Q5742 WitchFest Intro -- The Witchmother's Bargain
+            --[83820] = true, -- Event Q5742 WitchFest Done -- The Witchmother's Bargain
+            --[82898] = true, -- Event - WitchFest Theater -- The Witchmother's Bargain
 
             -- Anniversary Event
-            [88874] = true, -- Q5936 Destroy Voucher 2017 --
-
-            -- Midyear Mayhem
-            [92232] = true, -- Pelinal's Ferocity
+            --[88874] = true, -- Q5936 Destroy Voucher 2017 --
 
             -------------------------------------
             -- UNSORTED -------------------------

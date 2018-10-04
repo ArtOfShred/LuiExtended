@@ -8,6 +8,9 @@ local Q = LUIE.Quests
 -- List of Quest Items to ignore when Looted (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
 Q.QuestItemHideLoot = {
 
+        -- Seasonal Quests
+    [6013] = true, -- Soiled Napkin (Stonetooth Bash)
+
     -- Main Story Quests
     [2785] = true, -- Ayleid Tome (The Dangerous Past)
 
@@ -63,6 +66,9 @@ Q.QuestItemHideLoot = {
 
 -- List of Quest Items to ignore when Removed (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
 Q.QuestItemHideRemove = {
+
+    -- Seasonal Quests
+    [6012] = true, -- Soiled Napkin (Stonetooth Bash)
 
     -- Main Story Quests
     [2760] = true, -- Ayleid Tome (The Dangerous Past)

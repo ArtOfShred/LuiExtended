@@ -177,17 +177,18 @@ A.Poison_Conspicuous_Poison         = GetString(SI_LUIE_SKILL_POISON_CONSPICUOUS
 A.Food_Magicka_Stamina_Increase     = 61294
 A.Food_Health_Stamina_Increase      = 61255
 A.Food_Health_Magicka_Increase      = 61257
-A.Food_Orzorgas_Tripe_Trifle_Pocket = GetString(SI_LUIE_SKILL_FOOD_ORZORGA_POCKET)
-A.Food_Orzorgas_Blood_Price_Pie     = GetString(SI_LUIE_SKILL_FOOD_ORZORGA_PIE)
-A.Food_Orzorgas_Smoked_Bear_Haunch  = GetString(SI_LUIE_SKILL_FOOD_ORZORGA_HAUNCH)
-A.Food_Pumpkin_Snack_Skewer         = GetString(SI_LUIE_SKILL_FOOD_SNACK_SKEWER)
-A.Food_Frosted_Brains               = GetString(SI_LUIE_SKILL_FOOD_FROSTED_BRAINS)
-A.Food_Jagga_Drenched_Mud_Ball      = GetString(SI_LUIE_SKILL_FOOD_MUD_BALL)
-A.Food_Lava_Foot_Soup               = GetString(SI_LUIE_SKILL_FOOD_LAVA_FOOT)
-A.Food_Crown_Crate_Meal             = GetString(SI_LUIE_SKILL_FOOD_CROWN_CRATE_FOOD)
-A.Food_Crown_Meal                   = GetString(SI_LUIE_SKILL_FOOD_CROWN_FOOD)
-A.Food_Crown_Combat_Mystics_Stew    = GetString(SI_LUIE_SKILL_FOOD_CROWN_STEW)
-A.Food_Crown_Vigorous_Ragout        = GetString(SI_LUIE_SKILL_FOOD_CROWN_RAGOUT)
+A.Food_Orzorgas_Tripe_Trifle_Pocket = GetItemLinkName("|H0:item:71057:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Food_Orzorgas_Blood_Price_Pie     = GetItemLinkName("|H0:item:71058:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Food_Orzorgas_Smoked_Bear_Haunch  = GetItemLinkName("|H0:item:71059:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Food_Pumpkin_Snack_Skewer         = GetItemLinkName("|H0:item:87686:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Food_Frosted_Brains               = GetItemLinkName("|H0:item:87696:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Food_Jagga_Drenched_Mud_Ball      = GetItemLinkName("|H0:item:112434:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Food_Lava_Foot_Soup               = GetItemLinkName("|H0:item:112425:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Food_Artaeum_Pickled_Fish_Bowl    = GetItemLinkName("|H0:item:139016:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Food_Crown_Crate_Meal             = GetItemLinkName("|H0:item:94437:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Food_Crown_Meal                   = GetItemLinkName("|H0:item:64711:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Food_Crown_Combat_Mystics_Stew    = GetItemLinkName("|H0:item:124675:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Food_Crown_Vigorous_Ragout        = GetItemLinkName("|H0:item:124676:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
 A.Drink_Health_Recovery             = 61322
 A.Drink_Magicka_Recovery            = 61325
 A.Drink_Stamina_Recovery            = 61328
@@ -196,30 +197,34 @@ A.Drink_Health_Stamina_Recovery     = 61340
 A.Drink_Health_Magicka_Recovery     = 61335
 A.Drink_Primary_Stat_Recovery       = 61350
 A.Drink_Increase                    = GetString(SI_LUIE_SKILL_DRINK_INCREASE)
-A.Drink_Orzorgas_Red_Frothgar       = GetString(SI_LUIE_SKILL_DRINK_ORZORGA_FROTHGAR)
-A.Drink_Bowl_of_Peeled_Eyeballs     = GetString(SI_LUIE_SKILL_DRINK_PEELED_EYEBALLS)
-A.Drink_Ghastly_Eye_Bowl            = GetString(SI_LUIE_SKILL_DRINK_GHASTLY_EYE_BOWL)
-A.Drink_Bergama_Warning_Fire        = GetString(SI_LUIE_SKILL_DRINK_WARNING_FIRE)
-A.Drink_Betnikh_Twice_Spiked_Ale    = GetString(SI_LUIE_SKILL_DRINK_BETNIKH_ALE)
-A.Drink_Hissmir_Fish_Eye_Rye        = GetString(SI_LUIE_SKILL_DRINK_FISH_EYE)
-A.Drink_Snow_Bear_Glow_Wine         = GetString(SI_LUIE_SKILL_DRINK_GLOW_WINE)
-A.Drink_Crown_Crate_Drink           = GetString(SI_LUIE_SKILL_DRINK_CROWN_CRATE_DRINK)
-A.Drink_Crown_Drink                 = GetString(SI_LUIE_SKILL_DRINK_CROWN_DRINK)
-A.Drink_Crown_Stout_Magic_Liqueur   = GetString(SI_LUIE_SKILL_DRINK_CROWN_LIQUEUR)
-A.Drink_Crown_Vigorous_Tincture     = GetString(SI_LUIE_SKILL_DRINK_CROWN_TINCTURE)
+A.Drink_Orzorgas_Red_Frothgar       = GetItemLinkName("|H0:item:71056:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Drink_Bowl_of_Peeled_Eyeballs     = GetItemLinkName("|H0:item:87687:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Drink_Ghastly_Eye_Bowl            = GetItemLinkName("|H0:item:87695:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Drink_Bergama_Warning_Fire        = GetItemLinkName("|H0:item:112426:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Drink_Betnikh_Twice_Spiked_Ale    = GetItemLinkName("|H0:item:112433:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Drink_Hissmir_Fish_Eye_Rye        = GetItemLinkName("|H0:item:101879:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Drink_Snow_Bear_Glow_Wine         = GetItemLinkName("|H0:item:112440:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Drink_Crown_Crate_Drink           = GetItemLinkName("|H0:item:94438:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Drink_Crown_Drink                 = GetItemLinkName("|H0:item:64712:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Drink_Crown_Stout_Magic_Liqueur   = GetItemLinkName("|H0:item:124677:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+A.Drink_Crown_Vigorous_Tincture     = GetItemLinkName("|H0:item:124678:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
 
 -- Experience Consumables
-A.Experience_Psijic_Ambrosia        = GetString(SI_LUIE_SKILL_EXPERIENCE_PSIJIC_AMBROSIA) -- Psijic Ambrosia
-A.Experience_Aetherial_Ambrosia     = GetString(SI_LUIE_SKILL_EXPERIENCE_AETHERIAL_AMBROSIA) -- Aetherial Ambrosia
-A.Experience_Mythic_Ambrosia        = GetString(SI_LUIE_SKILL_EXPERIENCE_MYTHIC_AMBROSIA) -- Mythic Aetherial Ambrosia
-A.Experience_Crown_Scroll           = GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_SCROLL) -- Crown Experience Scroll
-A.Experience_Crown_Crate_Scroll_1   = GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_1) -- Crown Crate Experience Scroll
-A.Experience_Crown_Crate_Scroll_2   = GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2) -- Major Crown Crate Experience Scroll
-A.Experience_Crown_Crate_Scroll_3   = GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3) -- Grand Crown Crate Experience Scroll
+A.Experience_Psijic_Ambrosia        = GetItemLinkName("|H0:item:64221:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Psijic Ambrosia
+A.Experience_Aetherial_Ambrosia     = GetItemLinkName("|H0:item:120076:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Aetherial Ambrosia
+A.Experience_Mythic_Ambrosia        = GetItemLinkName("|H0:item:115027:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Mythic Aetherial Ambrosia
+A.Experience_Crown_Scroll           = GetItemLinkName("|H0:item:64537:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h") -- Crown Experience Scroll
+A.Experience_Crown_Crate_Scroll_1   = GetItemLinkName("|H0:item:94439:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h") -- Gold Coast Experience Scroll
+A.Experience_Crown_Crate_Scroll_2   = GetItemLinkName("|H0:item:94440:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h") -- Major Gold Coast Experience Scroll
+A.Experience_Crown_Crate_Scroll_3   = GetItemLinkName("|H0:item:94441:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h") -- Grand Gold Coast Experience Scroll
 
 -- Misc Consumables
-A.Consumable_Festival_Mints         = GetString(SI_LUIE_SKILL_CONSUMABLE_FESTIVAL_MINTS) -- High Hrothgar Festival Mints
-A.Consumable_Sailors_Grog           = GetString(SI_LUIE_SKILL_CONSUMABLE_SAILORS_GROG) -- Sailor's Warning Festival Grog
+A.Consumable_Festival_Mints         = GetItemLinkName("|H0:item:112442:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- High Hrothgar Festival Mints
+A.Consumable_Sailors_Grog           = GetItemLinkName("|H0:item:112441:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Sailor's Warning Festival Grog
+A.Consumable_Sparkwreath_Dazzler    = GetItemLinkName("|H0:item:114946:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Sparkwreath Dazzler
+A.Consumable_Plume_Dazzler          = GetItemLinkName("|H0:item:114947:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Plume Dazzler
+A.Consumable_Spiral_Dazzler         = GetItemLinkName("|H0:item:114948:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Spiral Dazzler
+A.Skill_Sparkly_Hat_Dazzler         = GetItemLinkName("|H0:item:120891:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Sparkly Hat Dazzler
 
 -- Mementos
 A.Memento_Almalexias_Lantern        = GetCollectibleName(341)
@@ -260,6 +265,12 @@ A.Memento_Frost_Shard               = GetCollectibleName(4707)
 A.Memento_Rune_of_Levitation        = GetCollectibleName(4706)
 A.Memento_Dragon_Summons_Focus      = GetCollectibleName(4708)
 A.Memento_The_Pie_of_Misrule        = GetCollectibleName(1167)
+
+-- ---------------------------------------------------
+-- EVENT EVENTS -----------------------------------
+-- ---------------------------------------------------
+
+A.Event_Petal_Pelters               = GetQuestItemNameFromLink("|H0:quest_item:6145|h|h")
 
 -- ---------------------------------------------------
 -- ITEM SETS -----------------------------------------
@@ -731,7 +742,7 @@ A.Trap_Lava                         = 5139
 
 -- Seasonal
 A.Skill_Lava_Foot_Stomp             = GetString(SI_LUIE_SKILL_LAVA_FOOT_STOMP)
-A.Skill_Dagger_Juggling             = 84506
+A.Skill_Knife_Juggling              = GetString(SI_LUIE_SKILL_KNIFE_JUGGLING)
 A.Skill_Torch_Juggling              = GetString(SI_LUIE_SKILL_TORCH_JUGGLING)
 A.Skill_Sword_Swallowing            = 84533
 A.Skill_Celebratory_Belch           = 84847

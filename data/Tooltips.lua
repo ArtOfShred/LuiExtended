@@ -152,11 +152,11 @@ T.Boon_Apprentice = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE)
 T.Boon_Steed = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_STEED)
 
 -- ---------------------------------------------------
--- SEASONAL ---------------------
+-- EVENT ---------------------
 -- ---------------------------------------------------
 
-T.Seasonal_Freezing = GetString(SI_LUIE_SKILL_SEASONAL_FREEZING)
-T.Seasonal_Warm = GetString(SI_LUIE_SKILL_SEASONAL_WARM)
+T.Event_Freezing = GetString(SI_LUIE_SKILL_EVENT_FREEZING)
+T.Event_Warm = GetString(SI_LUIE_SKILL_EVENT_WARM)
 
 -- ---------------------------------------------------
 -- CHAMPION ---------------------
@@ -231,6 +231,11 @@ T.Experience_Crown                  = zo_strformat(GetString(SI_LUIE_SKILL_EXPER
 T.Experience_Gold_Coast             = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "50", "1")
 T.Experience_Major_Gold_Coast       = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "1")
 T.Experience_Grand_Gold_Coast       = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "150", "1")
+T.Experience_Seasonal_Event         = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "2")
+T.Experience_Seasonal_Pelinal       = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_PELINAL), "2")
+
+T.Event_Festival_Grog            = GetString(SI_LUIE_SKILL_EVENT_FESTIVAL_GROG)
+T.Event_Festival_Mints           = GetString(SI_LUIE_SKILL_EVENT_FESTIVAL_MINTS)
 
 -- ---------------------------------------------------
 -- PLAYER ABILITIES ---------------------
