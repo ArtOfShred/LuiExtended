@@ -419,8 +419,13 @@ E.CastChannelOverride = {
     [14031] = true, -- Mundus Use
     [4197] = true, -- Recovering (NPC Duel)
 
+    -- Seasonal Mementos & Items
     [86792] = true, -- Eating (High Hrothgar Festival Mints)
     [86739] = true, -- Drinking (Sailor's Warning Festival Grog)
+    [85355] = true, -- Flame Juggling (Consumable Version)
+    [85354] = true, -- Dagger Juggling (Consumable Verison)
+    [85353] = true, -- Sword Swallowing (Consumable Version)
+    [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
 
     -- Sets
     [90940] = true, -- Eternal Warrior
@@ -481,8 +486,13 @@ E.CastDurationFix = {
     [105217] = 5000, -- 68235 Stun
     [89654] = 5000, -- 68235 Stun
 
+    -- Seasonal Mementos and Items
     [86792] = 3000, -- Eating (High Hrothgar Festival Mints)
     [86739] = 3000, -- Drinking (Sailor's Warning Festival Grog)
+    [85355] = 12000, -- Flame Juggling (Consumable Version)
+    [85354] = 12000, -- Dagger Juggling (Consumable Verison)
+    [85353] = 12000, -- Sword Swallowing (Consumable Version)
+    [102077] = 2000, -- Jester's Festival Scintillator (Jester's Scintillator)
 
     [33175] = 6300, -- Feed (Vampire)
     [40350] = 5300, -- Feed (Vampire - Bite Player)
@@ -557,11 +567,16 @@ E.IsCast = {
     [86792] = true, -- Eating (High Hrothgar Festival Mints)
     [86739] = true, -- Drinking (Sailor's Warning Festival Grog)
 
-    -- Memento
+    -- Memento (Seasonal)
+    [85355] = true, -- Flame Juggling (Consumable Version)
+    [85354] = true, -- Dagger Juggling (Consumable Verison)
+    [85353] = true, -- Sword Swallowing (Consumable Version)
     [87964] = true, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
     [87965] = true, -- Jester's Festival Illusion Daz (Plume Dazzler)
     [87966] = true, -- Jester's Festival Illusion Daz (Spiral Dazzler)
     [88374] = true, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
+    [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
+    [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
 
     -- Class
     [43714] = true, -- Crystal Shard (Sorcerer)
@@ -2693,15 +2708,16 @@ E.EffectOverride = {
     [86794] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_mints.dds', name = A.Consumable_Festival_Mints, tooltip = T.Event_Festival_Mints, unbreakable = 1 }, -- Very Cold (High Hrothgar Festival Mints)
     [86739] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_grog.dds', name = A.Consumable_Sailors_Grog }, -- Drinking (Sailor's Warning Festival Grog)
     [86740] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_grog.dds', name = A.Consumable_Sailors_Grog, tooltip = T.Event_Festival_Grog, unbreakable = 1 }, -- Very Drunk (Sailor's Warning Festival Grog)
-    [87964] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_dazzler_1.dds', name = A.Consumable_Sparkwreath_Dazzler }, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
-    [87965] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_dazzler_1.dds', name = A.Consumable_Plume_Dazzler }, -- Jester's Festival Illusion Daz (Plume Dazzler)
-    [87966] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_dazzler_1.dds', name = A.Consumable_Spiral_Dazzler }, -- Jester's Festival Illusion Daz (Spiral Dazzler)
-    [88374] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_dazzler_2.dds', name = A.Skill_Sparkly_Hat_Dazzler }, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
+    [85355] = {icon = 'LuiExtended/media/icons/abilities/ability_event_torch_juggling.dds', name = A.Memento_Fire_Breathers_Torches, unbreakable = 1 }, -- Flame Juggling (Consumable Version)
+    [85354] = {icon = 'LuiExtended/media/icons/abilities/ability_event_knife_juggling.dds', name = A.Memento_Jugglers_Knives, unbreakable = 1 }, -- Dagger Juggling (Consumable Verison)
+    [85353] = {icon = 'LuiExtended/media/icons/abilities/ability_event_sword_swallowing.dds', name = A.Memento_Sword_Swallowers_Blade, unbreakable = 1 }, -- Sword Swallowing (Consumable Version)
+    [87964] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_1.dds', name = A.Consumable_Sparkwreath_Dazzler }, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
+    [87965] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_1.dds', name = A.Consumable_Plume_Dazzler }, -- Jester's Festival Illusion Daz (Plume Dazzler)
+    [87966] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_1.dds', name = A.Consumable_Spiral_Dazzler }, -- Jester's Festival Illusion Daz (Spiral Dazzler)
+    [88374] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_2.dds', name = A.Skill_Sparkly_Hat_Dazzler }, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
+    [87963] = { icon = 'LuiExtended/media/icons/abilities/ability_event_flower_garland.dds', name = A.Memento_Cherry_Blossom_Branch }, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
+    [102077] = { icon = 'LuiExtended/media/icons/mementos/memento_jesters_scintillator.dds', name = A.Memento_Jesters_Scintillator, unbreakable = 1 }, -- Jester's Festival Scintillator (Jester's Scintillator)
 
-
-    [85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire-breathers_torches.dds', unbreakable = 1 }, -- Flame Juggling (Consumable Version)
-    [85354] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', unbreakable = 1 }, -- Dagger Juggling (Consumable Verison)
-    [85353] = {icon = 'LuiExtended/media/icons/mementos/memento_sword-swallowers_blade.dds', unbreakable = 1 }, -- Sword Swallowing (Consumable Version)
 
     -- Base Mementos
     [26829] = { icon = 'LuiExtended/media/icons/mementos/memento_almalexias_enchanted_lantern.dds', name = A.Memento_Almalexias_Lantern }, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
@@ -2745,7 +2761,6 @@ E.EffectOverride = {
     [77123] = { icon = 'LuiExtended/media/icons/mementos/memento_event_jubilee_cake.dds', name = A.Memento_Jubliee_Cake }, -- Anniversary EXP Buff
     [84369] = { icon = 'LuiExtended/media/icons/abilities/ability_event_witchmothers_brew.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
     [86774] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = A.Memento_Mud_Ball }, -- Mudball (Mud Ball Pouch)
-    [86779] = { hide = true }, -- Covered in Mud (Mud Ball Pouch)
 
     -- Crown Store Mementos
     [85344] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_aura.dds', name = A.Memento_Storm_Atronach_Aura, forcedContainer = 'short' }, -- Atronach Aura (Storm Atronach Aura)
@@ -7538,9 +7553,9 @@ E.FakeExternalDebuffs = {
 -- Fake buffs applied onto the player by self (also supports debuffs with debuff = true)
 E.FakePlayerBuffs = {
     -- Misc Consumables
-    [85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire-breathers_torches.dds', name = A.Memento_Fire_Breathers_Torches, duration = 12000}, -- Flame Juggling (Consumable Version)
-    [85354] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', name = A.Memento_Jugglers_Knives, duration = 12000}, -- Dagger Juggling (Consumable Verison)
-    [85353] = {icon = 'LuiExtended/media/icons/mementos/memento_sword-swallowers_blade.dds', name = A.Memento_Sword_Swallowers_Blade, duration = 12000}, -- Sword Swallowing (Consumable Version)
+    --[85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire-breathers_torches.dds', name = A.Memento_Fire_Breathers_Torches, duration = 12000}, -- Flame Juggling (Consumable Version)
+    --[85354] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', name = A.Memento_Jugglers_Knives, duration = 12000}, -- Dagger Juggling (Consumable Verison)
+    --[85353] = {icon = 'LuiExtended/media/icons/mementos/memento_sword-swallowers_blade.dds', name = A.Memento_Sword_Swallowers_Blade, duration = 12000}, -- Sword Swallowing (Consumable Version)
 
     -- Base Mementos
     [41988] = {icon = 'LuiExtended/media/icons/mementos/memento_bonesnap_binding_stone.dds', name = A.Memento_Bonesnap_Binding_Stone, duration = 10000}, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
