@@ -251,6 +251,7 @@ A.Memento_Coin_of_Illusory_Riches   = GetCollectibleName(361)
 A.Memento_Malacaths_Wrathful_Flame  = GetCollectibleName(353)
 A.Memento_Jubliee_Cake              = 87998
 A.Memento_Mud_Ball                  = 86749
+A.Memento_Cherry_Blossom_Branch     = GetCollectibleName(1108)
 A.Memento_Storm_Atronach_Aura       = GetCollectibleName(594)
 A.Memento_Storm_Orb_Juggle          = GetCollectibleName(595)
 A.Memento_Wild_Hunt_Aura            = GetCollectibleName(760)
@@ -265,6 +266,7 @@ A.Memento_Frost_Shard               = GetCollectibleName(4707)
 A.Memento_Rune_of_Levitation        = GetCollectibleName(4706)
 A.Memento_Dragon_Summons_Focus      = GetCollectibleName(4708)
 A.Memento_The_Pie_of_Misrule        = GetCollectibleName(1167)
+A.Memento_Jesters_Scintillator      = GetCollectibleName(4797)
 
 -- ---------------------------------------------------
 -- EVENT EVENTS -----------------------------------
