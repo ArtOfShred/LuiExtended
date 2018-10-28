@@ -1120,11 +1120,11 @@ debugAuras = {
             [106784] = true, -- Dustcloud (Adept Rider's)
             [106783] = true, -- Dustcloud Damage (Adept Rider's)
 
-            --[106803] = true, -- Nocturnal's Favor (Nocturnal's Favored)
-            --[106804] = true, -- Nocturnal's Heal (Nocturnal's Favored)
+            [106803] = true, -- Nocturnal's Favor (Nocturnal's Favored)
+            [106804] = true, -- Nocturnal's Heal (Nocturnal's Favored)
 
-            --[106797] = true, -- Sload's Semblance (Sload's)
-            --[106798] = true, -- Sload's Semblance (Sload's)
+            [106797] = true, -- Sload's Semblance (Sload's)
+            [106798] = true, -- Sload's Semblance (Sload's)
 
             [113180] = true, -- Grave-Stake Collector (Grave-Stake Collector)
             [113183] = true, -- Grave-Stake Collector (Grave-Stake Collector)

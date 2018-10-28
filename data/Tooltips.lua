@@ -88,6 +88,7 @@ T.Generic_Poison                    = GetString(SI_LUIE_SKILL_GENERIC_POISON_TP)
 T.Generic_Burn                      = GetString(SI_LUIE_SKILL_GENERIC_BURN_TP)
 T.Generic_Freeze                    = GetString(SI_LUIE_SKILL_GENERIC_FREEZE_TP)
 T.Generic_Shock                     = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_TP)
+T.Generic_Oblivion 					= GetString(SI_LUIE_SKILL_GENERIC_OBLIVION_TP)
 
 T.Generic_HoT                       = GetString(SI_LUIE_SKILL_GENERIC_HOT_TP)
 T.Generic_Magicka_Regen             = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP)
@@ -162,20 +163,20 @@ T.Event_Warm = GetString(SI_LUIE_SKILL_EVENT_WARM)
 -- CHAMPION ---------------------
 -- ---------------------------------------------------
 
-T.Champion_Phase                    = GetAbilityDescription(63852)
-T.Champion_Reinforced               = GetAbilityDescription(64067)
-T.Champion_Unchained                = GetAbilityDescription(59286)
-T.Champion_Infusion                 = GetAbilityDescription(59582)
-T.Champion_Revival                  = GetAbilityDescription(60427)
-T.Champion_Determination            = GetAbilityDescription(59893)
-T.Champion_Siphoner                 = GetAbilityDescription(92425)
-T.Champion_Ensnare                  = GetAbilityDescription(60398)
-T.Champion_Shadowstrike             = GetAbilityDescription(61426)
-T.Champion_Foresight                = GetAbilityDescription(59526)
+T.Champion_Phase                    = GetString(SI_LUIE_SKILL_PHASE_TP)
+T.Champion_Reinforced               = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP), 3)
+T.Champion_Unchained                = GetString(SI_LUIE_SKILL_UNCHAINED_TP)
+T.Champion_Infusion                 = GetAbilityDescription(59582) -- TODO: Change
+T.Champion_Revival                  = GetAbilityDescription(60427) -- TODO: Change
+T.Champion_Determination            = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP), 15)
+T.Champion_Siphoner                 = GetAbilityDescription(92425) -- TODO: Change
+T.Champion_Ensnare                  = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), 20)
+T.Champion_Shadowstrike             = GetString(SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP)
+T.Champion_Foresight                = GetString(SI_LUIE_SKILL_FORESIGHT_TP)
 T.Champion_Vengeance_Charge         = GetAbilityDescription(63150)
 T.Champion_Vengeance                = GetString(SI_LUIE_SKILL_VENGEANCE_TP)
-T.Champion_Retaliation              = GetAbilityDescription(63104)
-T.Champion_Opportunist              = GetAbilityDescription(63099)
+T.Champion_Retaliation              = GetString(SI_LUIE_SKILL_RETALIATION_TP)
+T.Champion_Opportunist              = GetString(SI_LUIE_SKILL_OPPORTUNIST_TP)
 
 -- ---------------------------------------------------
 -- COMSUMABLES & ITEMS -------------------------------

@@ -2232,7 +2232,13 @@ local strings = {
     SI_LUIE_SKILL_EMPOWER_TP =                           "Increase the damage of your next Light Attack by |cffffff40|r%.",
 
     SI_LUIE_SKILL_TEST_TP =                              "This is a test effect.",
-
+	
+	SI_LUIE_SKILL_PHASE_TP =							 "Increase Physical and Spell Resistance by |cFFFFFF660|r for |cFFFFFF3|r seconds.",
+	SI_LUIE_SKILL_UNCHAINED_TP = 						 "Reduce the cost of your next Stamina ability used within |cFFFFFF5|r seconds by |cFFFFFF80|r%.",
+	SI_LUIE_SKILL_FORESIGHT_TP = 						 "Reduce the cost of your next Magicka ability used within |cFFFFFF7|r seconds by |cFFFFFF80|r%.",
+	SI_LUIE_SKILL_RETALIATION_TP =						 "Your next Light Attack used within |cFFFFFF7|r seconds deals |cFFFFFF30|r% additional damage.",
+	SI_LUIE_SKILL_OPPORTUNIST_TP = 						 "Your next Physical Damage ability used within |cFFFFFF7|r seconds deals |cFFFFFF15|r% additional damage.",
+	
     SI_LUIE_SKILL_GENERIC_FIRE =                         "Fire",
     SI_LUIE_SKILL_GENERIC_FROST =                        "Frost",
 
@@ -2242,6 +2248,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_BURN_TP =                      "Afflicted with Fire damage over time.",
     SI_LUIE_SKILL_GENERIC_FREEZE_TP =                    "Afflicted with Frost damage over time.",
     SI_LUIE_SKILL_GENERIC_SHOCK_TP =                     "Afflicted with Shock damage over time.",
+	SI_LUIE_SKILL_GENERIC_OBLIVION_TP =					 "Afflicted with Oblivion damage over time.",
 
     SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Restoring Health every second over time.",
     SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Restoring Magicka every second over time.",
@@ -2257,6 +2264,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP =      "Immune to effects that exploit off balance targets.",
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP =               "Off Balance. You are vulnerable to attacks that exploit off balance targets.",
     SI_LUIE_SKILL_GENERIC_SNARE_TP =                     "Snared. Your Movement Speed has been reduced.",
+	SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP =			 "Snared. Your Movement Speed has been reduced by |cFFFFFF<<1>>|r%.",
     SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized. Unable to move while immobilized.",
     SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered. You are unable to attack or move while staggered.",
     SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned. You are unable to attack or move while stunned.",
