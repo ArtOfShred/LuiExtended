@@ -3099,7 +3099,13 @@ function SCB.updateIcons( currentTime, sortedList, container )
             buff:SetAlpha(1)
             buff:SetHidden(false)
             if not remain then
-                buff.label:SetText( E.IsToggle[effect.id] and "T" or nil )
+                if E.IsToggle[effect.id] then
+                    buff.label:SetText("T")
+                elseif E.EffectOverride[effect.id] and E.EffectOverride[effect.id].groundLabel then
+                    buff.label:SetText("G")
+                else
+                    buff.label:SetText(nil)
+                end
             end
 
             if buff.abilityId and effect.id then

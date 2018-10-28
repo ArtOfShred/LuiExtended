@@ -325,6 +325,10 @@ A.Set_Arms_of_Relequen              = 107202
 A.Set_Hist_Bark                     = 32781
 A.Skill_Night_Mothers_Gaze          = 29113
 A.Skill_Nobles_Conquest             = 61780
+A.Set_Daedric_Trickery              = 92769
+A.Set_Might_of_the_Lost_Legion      = 113311
+A.Set_Naga_Shaman                   = 113287
+A.Set_Adept_Rider                   = 106775
 
 A.Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
 

@@ -1014,7 +1014,6 @@ debugAuras = {
             [75746] = true, -- Clever Alchemist
 
             [92769] = true, -- of Daedric Trickery (of Daedric Trickery)
-
             [92774] = true, -- Major Mending (of Daedric Trickery)
             [92771] = true, -- Major Expedition (of Daedric Trickery)
             [92775] = true, -- Major Heroism (of Daedric Trickery)
@@ -1043,8 +1042,8 @@ debugAuras = {
             [29102] = true, -- Magnus' Gift (Magnus)
             [34381] = true, -- Magnus' Gift (Magnus)
 
-            --[99202] = true, -- Mechanical Acuity (of Mechanical Acuity)
-            --[99204] = true, -- Mechanical Acuity (of Mechanical Acuity)
+            [99202] = true, -- Mechanical Acuity (of Mechanical Acuity)
+            [99204] = true, -- Mechanical Acuity (of Mechanical Acuity)
 
             [71670] = true, -- Morkuldin (Morkuldin)
             [71671] = true, -- Morkuldin (Morkuldin)
@@ -1115,17 +1114,36 @@ debugAuras = {
             [29109] = true, -- Whitestrake's Retribution (Whitestrake's)
             [49236] = true, -- Whitestrake's Retribution (Whitestrake's)
 
-            --[106775] = true, -- Adept Rider (Adept Rider's)
-            --[106776] = true, -- Major Evasion (Adept Rider's)
-            --[106790] = true, -- Major Evasion (Adept Rider's)
-            --[106784] = true, -- Dustcloud (Adept Rider's)
-            --[106783] = true, -- Dustcloud Damage (Adept Rider's)
+            [106775] = true, -- Adept Rider (Adept Rider's)
+            [106776] = true, -- Major Evasion (Adept Rider's)
+            [106790] = true, -- Major Evasion (Adept Rider's)
+            [106784] = true, -- Dustcloud (Adept Rider's)
+            [106783] = true, -- Dustcloud Damage (Adept Rider's)
 
             --[106803] = true, -- Nocturnal's Favor (Nocturnal's Favored)
             --[106804] = true, -- Nocturnal's Heal (Nocturnal's Favored)
 
             --[106797] = true, -- Sload's Semblance (Sload's)
             --[106798] = true, -- Sload's Semblance (Sload's)
+
+            [113180] = true, -- Grave-Stake Collector (Grave-Stake Collector)
+            [113183] = true, -- Grave-Stake Collector (Grave-Stake Collector)
+            [114172] = true, -- Grave-Stake Collector (Grave-Stake Collector)
+            --[113181] = true, -- Grave-Stake Collector (Grave-Stake Collector)
+            [113259] = true, -- Grave-Stake Collector (Grave-Stake Collector)
+            [113185] = true, -- Grave-Stake Collector (Grave-Stake Collector)
+            [113237] = true, -- Grave-Stake Collector (Grave-Stake Collector)
+
+            [113311] = true, -- Might of the Lost Legion (Might of the Lost Legion)
+            [113312] = true, -- Empower (Might of the Lost Legion)
+            [114947] = true, -- Might of the Lost Legion (Might of the Lost Legion)
+            [114945] = true, -- Empower (Might of the Lost Legion)
+            [114954] = true, -- Might of the Lost Legion (Might of the Lost Legion)
+            [114952] = true, -- Empower (Might of the Lost Legion)
+
+            [113287] = true, -- Naga Shaman (Naga Shaman)
+            [113306] = true, -- Minor Vitality (Naga Shaman)
+            [113307] = true, -- Minor Mending (Naga Shaman)
 
             -- Overland Sets (All Types)
             --[85541] = true, -- Armor of the Trainee (of the Trainee)

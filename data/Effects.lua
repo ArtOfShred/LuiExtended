@@ -3093,6 +3093,11 @@ E.EffectOverride = {
     [34502] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ashen_grip.dds' }, -- Ashen Grip
     [34592] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', tooltip = T.Set_Alessias_Bulwark }, -- Alessia's Bulwark
     [75746] = { icon = 'LuiExtended/media/icons/abilities/ability_set_clever_alchemist.dds', tooltip = T.Set_Clever_Alchemist }, -- Clever Alchemist
+    [92774] = { tooltip = A.Set_Daedric_Trickery }, -- Major Mending (Daedric Trickery)
+    [92771] = { tooltip = A.Set_Daedric_Trickery }, -- Major Expedition (Daedric Trickery)
+    [92775] = { tooltip = A.Set_Daedric_Trickery }, -- Major Heroism (Daedric Trickery)
+    [92776] = { tooltip = A.Set_Daedric_Trickery }, -- Major Vitality (Daedric Trickery)
+    [92773] = { tooltip = A.Set_Daedric_Trickery }, -- Major Protection (Daedric Trickery)
     [33764] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds', tooltip = T.Generic_Knockback }, -- Death's Wind
     [52289] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds', hide = true }, -- Death's Wind
     [75930] = { tooltip = T.Set_Eternal_Hunt }, -- Eternal Hunt
@@ -3101,7 +3106,7 @@ E.EffectOverride = {
     [86555] = { name = A.Skill_Major_Evasion, tooltip = A.Set_Hist_Bark }, -- Hist Bark
     [57207] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kagrenacs_hope.dds', hide = true }, -- Kagrenac's Hope
     [34381] = { hide = true }, -- Magnus
-    [99204] = { icon = 'esoui/art/icons/achievement_update16_015.dds' }, -- Mechanical Acuity (of Mechanical Acuity)
+    [99204] = { icon = 'esoui/art/icons/achievement_update16_015.dds', tooltip = T.Set_Mechanical_Acuity }, -- Mechanical Acuity (of Mechanical Acuity)
     [71671] = { hide = true, tooltip = T.Set_Morkuldin }, -- Morkuldin (Morkuldin)
     [71678] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds' }, -- Light Attack (Morkuldin)
     [71679] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_cleave.dds' }, -- Cleave (Morkuldin)
@@ -3124,11 +3129,19 @@ E.EffectOverride = {
     [79093] = { hide = true }, -- Remove Trigger (Varen's Legacy)
     [57170] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vampires_kiss.dds', tooltip = T.Set_Vampires_Kiss }, -- Vampire's Kiss
     [49236] = { icon = 'LuiExtended/media/icons/abilities/ability_set_whitestrake.dds', tooltip = T.Set_Whitestrakes_Retribution }, -- Whitestake's Retribution (Whitestrake's)
-    [106776] = { forcedContainer = 'short' }, -- Major Evasion (Adept Rider's)
-    [106790] = { forcedContainer = 'short' }, -- Major Evasion (Adept Rider's)
+    [106776] = { forcedContainer = 'short', tooltip = A.Set_Adept_Rider }, -- Major Evasion (Adept Rider's)
+    [106790] = { forcedContainer = 'short', tooltip = A.Set_Adept_Rider, groundLabel = true }, -- Major Evasion (Adept Rider's)
     [106783] = { name = A.Set_Dust_Cloud }, -- Dustcloud Damage (Adept Rider's)
+    [106784] = { tooltip = T.Set_Adept_Rider }, -- Dustcloud (Adept Rider's)
     [106804] = { icon = 'esoui/art/icons/achievement_su_mainquest_6.dds', name = A.Set_Nocturnals_Favor }, -- Nocturnal's Heal (Nocturnal's Favor)
     [106798] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sloads_semblance.dds' }, -- Sload's Semblance (Sload's)
+
+    [113312] = { stack = 3, tooltip = A.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
+    [114945] = { stack = 2, tooltip = A.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
+    [114952] = { stack = 1, tooltip = A.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
+
+    [113306] = { tooltip = A.Set_Naga_Shaman }, -- Minor Vitality (Naga Shaman)
+    [113307] = { tooltip = A.Set_Naga_Shaman }, -- Minor Mending (Naga Shaman)
 
     -- Overland Sets (Light)
     [75707] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds' }, -- Bahraha's Curse

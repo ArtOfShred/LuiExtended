@@ -278,6 +278,8 @@ T.Set_Trials_Disease                = zo_strformat(GetString(SI_LUIE_SKILL_SET_T
 T.Set_Varens_Legacy                 = GetString(SI_LUIE_SKILL_SET_VARENS_LEGACY)
 T.Set_Vampires_Kiss                 = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_2SEC_TP), 6)
 T.Set_Whitestrakes_Retribution      = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP), 10)
+T.Set_Mechanical_Acuity             = GetString(SI_LUIE_SKILL_SET_MECHANICAL_ACUITY)
+T.Set_Adept_Rider                   = GetString(SI_LUIE_SKILL_SET_ADEPT_RIDER)
 
 --zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
 

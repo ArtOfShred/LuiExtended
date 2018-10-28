@@ -2278,6 +2278,8 @@ local strings = {
     SI_LUIE_SKILL_SET_ARMOR_MASTER =                     "Increase Physical and Spell Resistance for |cffffff10|r seconds.",
     SI_LUIE_SKILL_SET_TRIAL_BY_FIRE =                    "Increase <<1>> Resistance for |cffffff4|r seconds.",
     SI_LUIE_SKILL_SET_VARENS_LEGACY =                    "Increase the damage of your next direct damage area of effect attack.",
+    SI_LUIE_SKILL_SET_MECHANICAL_ACUITY =                "Increase Weapon and Spell Critical by |cFFFFFF100|r% for |cffffff5|r seconds.",
+    SI_LUIE_SKILL_SET_ADEPT_RIDER =                      "Dealing Physical Damage to enemies inside the dust cloud every |cffffff1|r second for |cffffff12|r seconds.",
 
     SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP =              "Lightning courses through your body causing all weapon attacks to deal lightning damage.",
     SI_LUIE_SKILL_MANTLES_SHADOW =                       "Mantle's Shadow",
