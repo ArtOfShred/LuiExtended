@@ -234,8 +234,52 @@ T.Experience_Grand_Gold_Coast       = zo_strformat(GetString(SI_LUIE_SKILL_EXPER
 T.Experience_Seasonal_Event         = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "2")
 T.Experience_Seasonal_Pelinal       = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_PELINAL), "2")
 
-T.Event_Festival_Grog            = GetString(SI_LUIE_SKILL_EVENT_FESTIVAL_GROG)
-T.Event_Festival_Mints           = GetString(SI_LUIE_SKILL_EVENT_FESTIVAL_MINTS)
+T.Event_Festival_Grog               = GetString(SI_LUIE_SKILL_EVENT_FESTIVAL_GROG)
+T.Event_Festival_Mints              = GetString(SI_LUIE_SKILL_EVENT_FESTIVAL_MINTS)
+
+-- Mementos
+T.Memento_Almalexias_Lantern        = select(2, GetCollectibleInfo(341))
+T.Memento_Bonesnap_Binding_Talisman = select(2, GetCollectibleInfo(348))
+T.Memento_Discourse_Amaranthine     = select(2, GetCollectibleInfo(345))
+T.Memento_Fetish_of_Anger           = select(2, GetCollectibleInfo(347))
+T.Memento_Finvirs_Trinket           = select(2, GetCollectibleInfo(336))
+T.Memento_Mystery_Meat              = select(2, GetCollectibleInfo(342))
+T.Memento_Sanguines_Goblet          = select(2, GetCollectibleInfo(338))
+T.Memento_Token_of_Root_Sunder      = select(2, GetCollectibleInfo(349))
+
+-- Crown Mementos
+T.Memento_Storm_Atronach_Aura       = select(2, GetCollectibleInfo(594))
+T.Memento_Storm_Atronach_Transform  = select(2, GetCollectibleInfo(596))
+T.Memento_Wild_Hunt_Leaf_Dance_Aura = select(2, GetCollectibleInfo(760))
+T.Memento_Wild_Hunt_Transform       = select(2, GetCollectibleInfo(759))
+T.Memento_Floral_Swirl_Aura         = select(2, GetCollectibleInfo(758))
+
+T.Memento_Dwarven_Puzzle_Orb        = select(2, GetCollectibleInfo(1181))
+T.Memento_Dwarven_Tonal_Forks       = select(2, GetCollectibleInfo(1182))
+T.Memento_Dwemervamidium_Mirage     = select(2, GetCollectibleInfo(1183))
+T.Memento_Swarm_of_Crows            = select(2, GetCollectibleInfo(1384))
+T.Memento_Ghost_Lantern             = select(2, GetCollectibleInfo(5212))
+
+-- ---------------------------------------------------
+-- SETS ---------------------------------
+-- ---------------------------------------------------
+
+T.Set_Alessias_Bulwark              = GetString(SI_LUIE_SKILL_SET_ALESSIAS_BULWARK)
+T.Set_Clever_Alchemist              = GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST)
+T.Set_Eternal_Hunt                  = GetAbilityDescription(75927)
+T.Set_Morkuldin                     = GetAbilityDescription(71670)
+T.Set_Tavas_Favor                   = GetString(SI_LUIE_SKILL_SET_TAVAS_FAVOR)
+T.Set_Armor_Master                  = GetString(SI_LUIE_SKILL_SET_ARMOR_MASTER)
+T.Set_Trials_Fire                   = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_LUIE_SKILL_GENERIC_FIRE))
+T.Set_Trials_Shock                  = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE4))
+T.Set_Trials_Frost                  = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_LUIE_SKILL_GENERIC_FROST))
+T.Set_Trials_Poison                 = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE11))
+T.Set_Trials_Disease                = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE10))
+T.Set_Varens_Legacy                 = GetString(SI_LUIE_SKILL_SET_VARENS_LEGACY)
+T.Set_Vampires_Kiss                 = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_2SEC_TP), 6)
+T.Set_Whitestrakes_Retribution      = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP), 10)
+
+--zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
 
 -- ---------------------------------------------------
 -- PLAYER ABILITIES ---------------------

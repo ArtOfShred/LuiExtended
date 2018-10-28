@@ -2213,15 +2213,25 @@ function SCB.ArtificialEffectUpdate(eventCode, effectId)
         --local forcedType = E.EffectForcedType[artificialEffectId]
         -- Bail out if we don't have Battle Spirit display for the player on
 
+        local duration = 0
+        local endTime = nil
+
         if (effectId == 0 or effectId == 2) and SCB.SV.IgnoreBattleSpiritPlayer then
             return
+        end
+
+        if (effectId == 3) then
+            duration = 1200000
+            startTime = GetGameTimeMilliseconds()
+            endTime = startTime + ( GetLFGCooldownTimeRemainingSeconds(LFG_COOLDOWN_BATTLEGROUND_DESERTED) * 1000 )
+            effectType = BUFF_EFFECT_TYPE_BUFF -- Set to buff so it shows in long duration effects
         end
 
         g_effectsList.player1[ effectId ] = {
             target="player", type=effectType,
             id=effectId, name = displayName, icon = iconFile,
-            dur=0, starts=startTime, ends=nil,
-            --forced = forcedType,
+            dur=duration, starts=startTime, ends=endTime,
+            forced="long",
             restart=true, iconNum=0,
             artificial = true,
         }

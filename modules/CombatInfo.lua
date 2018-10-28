@@ -1105,10 +1105,9 @@ end
 
 -- Very basic handler registered to only read CC events on the player
 function CI.OnCombatEventBreakCast( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-    -- Some cast/channel abilities (or effects we use to simulate this) stun the player - ignore the effects of these ids when this happens.
 
-    -- Stop mount stun from breaking cast bar (May need to expand this later to a table)
-    if abilityId == 36434 then return end
+    -- Some cast/channel abilities (or effects we use to simulate this) stun the player - ignore the effects of these ids when this happens.
+    if E.IgnoreCastBarStun[abilityId] then return end
 
     if not E.IsCast[abilityId] then
         CI.StopCastBar()
@@ -1149,6 +1148,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
 
         local duration
         local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
+        local forceChanneled = false
         -- Override certain things to display as a channel rather than cast. Note only works for events where we override the duration.
         if E.CastChannelOverride[abilityId] then
             channeled = true
@@ -1157,6 +1157,23 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
             duration = E.CastDurationFix[abilityId] or channelTime
         else
             duration = E.CastDurationFix[abilityId] or castTime
+        end
+
+        if E.CastChannelConvert[abilityId] then
+            channeled = true
+            forceChanneled = true
+            duration = E.CastDurationFix[abilityId] or castTime
+        end
+
+        -- Some abilities cast into a channeled stun effect - we want these abilities to display the cast and channel if flagged.
+        -- Only flags on ACTION_RESULT_BEGIN so this won't interfere with the stun result that is converted to display a channeled cast.
+        if E.MultiCast[abilityId] then
+            if result == 2200 then
+                channeled = false
+                duration = castTime or 0
+            elseif result == 2240 then
+                CI.StopCastBar() -- Stop the cast bar when the GAINED event happens so that we can display the channel when the cast ends
+            end
         end
 
         if abilityId == 39033 or abilityId == 39477 then
@@ -1169,7 +1186,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
 
         if duration > 0 and not g_casting then
             -- If action result is BEGIN and not channeled then start, otherwise only use GAINED
-            if ( (result == 2200 or result == 2210) and not channeled ) or (result == 2240 and (E.CastDurationFix[abilityId] or channeled) ) then -- and CI.SV.CastBarCast
+            if ( not forceChanneled and ( ( (result == 2200 or result == 2210) and not channeled ) or (result == 2240 and (E.CastDurationFix[abilityId] or channeled) ) ) ) or (forceChanneled and result == 2200) then -- and CI.SV.CastBarCast
                 local currentTime = GetGameTimeMilliseconds()
                 local endTime = currentTime + duration
                 local remain = endTime - currentTime

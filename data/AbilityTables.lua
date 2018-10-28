@@ -228,7 +228,11 @@ A.Skill_Sparkly_Hat_Dazzler         = GetItemLinkName("|H0:item:120891:1:1:0:0:0
 
 -- Mementos
 A.Memento_Almalexias_Lantern        = GetCollectibleName(341)
+A.Memento_Battered_Bear_Trap        = GetCollectibleName(343)
 A.Memento_Bonesnap_Binding_Stone    = GetCollectibleName(348)
+A.Memento_Discourse_Amaranthine     = GetCollectibleName(345)
+A.Menento_Lenas_Wand_of_Finding     = GetCollectibleName(340)
+
 A.Memento_Nirnroot_Wine             = GetCollectibleName(344)
 A.Memento_Mystery_Meat              = GetString(SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT)
 A.Memento_Sanguines_Goblet          = GetCollectibleName(338)
@@ -240,7 +244,6 @@ A.Memento_Swarm_of_Crows            = GetCollectibleName(1384)
 A.Memento_Fire_Breathers_Torches    = GetCollectibleName(600)
 A.Memento_Jugglers_Knives           = GetCollectibleName(598)
 A.Memento_Sword_Swallowers_Blade    = GetCollectibleName(597)
-A.Memento_Discourse_Amaranthine     = GetCollectibleName(345)
 A.Memento_Sealing_Amulet            = GetCollectibleName(351)
 A.Memento_Twilight_Shard            = GetCollectibleName(1158)
 A.Memento_Yokudan_Totem             = GetCollectibleName(350)
@@ -267,12 +270,11 @@ A.Memento_Rune_of_Levitation        = GetCollectibleName(4706)
 A.Memento_Dragon_Summons_Focus      = GetCollectibleName(4708)
 A.Memento_The_Pie_of_Misrule        = GetCollectibleName(1167)
 A.Memento_Jesters_Scintillator      = GetCollectibleName(4797)
-
--- ---------------------------------------------------
--- EVENT EVENTS -----------------------------------
--- ---------------------------------------------------
-
-A.Event_Petal_Pelters               = GetQuestItemNameFromLink("|H0:quest_item:6145|h|h")
+A.Memento_Witchmothers_Whistle      = GetCollectibleName(479)
+A.Memento_Psijic_Celestial_Orb      = GetCollectibleName(5031)
+A.Memento_Psijic_Tautology_Glass    = GetCollectibleName(5032)
+A.Memento_Sapiarchic_Discorporation = GetCollectibleName(5033)
+A.Memento_Ghost_Lantern             = GetCollectibleName(5212)
 
 -- ---------------------------------------------------
 -- ITEM SETS -----------------------------------------
@@ -320,6 +322,9 @@ A.Set_Nocturnals_Favor              = 106803
 A.Set_Vestment_of_Olorime           = 107117
 A.Set_Mantle_of_Siroria             = 107093
 A.Set_Arms_of_Relequen              = 107202
+A.Set_Hist_Bark                     = 32781
+A.Skill_Night_Mothers_Gaze          = 29113
+A.Skill_Nobles_Conquest             = 61780
 
 A.Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
 
@@ -590,7 +595,7 @@ A.Skill_Reviving_Barrier            = 40237
 -- ---------------------------------------------------
 
 A.Skill_Battle_Spirit               = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT)
-
+A.Skill_Imperial_City               = GetCollectibleName(154)
 -- ---------------------------------------------------
 -- NPC ABILITIES -------------------------------------
 -- ---------------------------------------------------
@@ -748,6 +753,8 @@ A.Skill_Knife_Juggling              = GetString(SI_LUIE_SKILL_KNIFE_JUGGLING)
 A.Skill_Torch_Juggling              = GetString(SI_LUIE_SKILL_TORCH_JUGGLING)
 A.Skill_Sword_Swallowing            = 84533
 A.Skill_Celebratory_Belch           = 84847
+A.Event_Petal_Pelters               = GetQuestItemNameFromLink("|H0:quest_item:6145|h|h")
+A.Event_Crow_Caller                 = GetItemLinkName("|H0:item:81189:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
 
 -- MSQ
 A.Skill_Wall_of_Flames              = GetString(SI_LUIE_SKILL_WALL_OF_FLAMES)

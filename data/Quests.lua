@@ -10,6 +10,7 @@ Q.QuestItemHideLoot = {
 
         -- Seasonal Quests
     [6013] = true, -- Soiled Napkin (Stonetooth Bash)
+    [5918] = true, -- Crow Caller (The Witchmother's Bargain)
 
     -- Main Story Quests
     [2785] = true, -- Ayleid Tome (The Dangerous Past)

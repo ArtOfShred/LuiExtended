@@ -401,7 +401,16 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, displayName)
                     effectsRow.effectId = effectId
                     effectsRow.isArtificial = true
-
+                    effectsRow.isArtificialTooltip = true
+                    if effectId == 3 then -- Battleground Deserter Penalty
+                        startTime = GetFrameTimeSeconds()
+                        local cooldown = GetLFGCooldownTimeRemainingSeconds(LFG_COOLDOWN_BATTLEGROUND_DESERTED)
+                        endTime = startTime + cooldown
+                        local duration = startTime - endTime
+                        effectsRow.time:SetHidden(duration == 0)
+                        effectsRow.time.endTime = endTime
+                        effectsRow.isArtificial = false -- Sort with normal buffs
+                    end
                     tableinsert(effectsRows, effectsRow)
                 end
 
@@ -536,7 +545,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             colorText = control.effectType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
         end
 
-        if control.isArtificial then
+        if control.isArtificialTooltip then
             local tooltipText = GetArtificialEffectTooltipText(control.effectId)
             GameTooltip:AddLine(control.tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
             GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())

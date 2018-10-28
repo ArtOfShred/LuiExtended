@@ -2179,11 +2179,11 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_ENDURANCE_TP =                   "Increase Stamina Recovery by |cffffff20|r%.",
     SI_LUIE_SKILL_MINOR_INTELLECT_TP =                   "Increase Magicka Recovery by |cffffff10|r%.",
     SI_LUIE_SKILL_MAJOR_INTELLECT_TP =                   "Increase Magicka Recovery by |cffffff20|r%.",
-    SI_LUIE_SKILL_MINOR_SORCERY_TP =                     "Increase Spell Damage by |cffffff5|r%.",
+    SI_LUIE_SKILL_MINOR_SORCERY_TP =                     "Increase Spell Damage by |cffffff10|r%.",
     SI_LUIE_SKILL_MAJOR_SORCERY_TP =                     "Increase Spell Damage by |cffffff20|r%.",
     SI_LUIE_SKILL_MINOR_PROPHECY_TP =                    "Increase Spell Critical by |cffffff657|r.",
     SI_LUIE_SKILL_MAJOR_PROPHECY_TP =                    "Increase Spell Critical by |cffffff2191|r.",
-    SI_LUIE_SKILL_MINOR_BRUTALITY_TP =                   "Increase Weapon Damage by |cffffff5|r%.",
+    SI_LUIE_SKILL_MINOR_BRUTALITY_TP =                   "Increase Weapon Damage by |cffffff10|r%.",
     SI_LUIE_SKILL_MAJOR_BRUTALITY_TP =                   "Increase Weapon Damage by |cffffff20|r%.",
     SI_LUIE_SKILL_MINOR_SAVAGERY_TP =                    "Increase Weapon Critical by |cffffff657|r.",
     SI_LUIE_SKILL_MAJOR_SAVAGERY_TP =                    "Increase Weapon Critical by |cffffff2191|r.",
@@ -2197,8 +2197,8 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_MENDING_TP =                     "Increase healing done by |cffffff25|r%.",
     SI_LUIE_SKILL_MINOR_PROTECTION_TP =                  "Reduce damage taken by |cffffff8|r%.",
     SI_LUIE_SKILL_MAJOR_PROTECTION_TP =                  "Reduce damage taken by |cffffff30|r%.",
-    SI_LUIE_SKILL_MINOR_EVASION_TP =                     "Increase dodge chance by |cffffff5|r%.",
-    SI_LUIE_SKILL_MAJOR_EVASION_TP =                     "Increase dodge chance by |cffffff15|r%.",
+    SI_LUIE_SKILL_MINOR_EVASION_TP =                     "Reduce damage from area attacks by |cffffff10|r%.",
+    SI_LUIE_SKILL_MAJOR_EVASION_TP =                     "Reduce damage from area attacks by |cffffff25|r%.",
     SI_LUIE_SKILL_MINOR_EXPEDITION_TP =                  "Increase Movement Speed by |cffffff10|r%.",
     SI_LUIE_SKILL_MAJOR_EXPEDITION_TP =                  "Increase Movement Speed by |cffffff30|r%.",
     SI_LUIE_SKILL_MAJOR_GALLOP_TP =                      "Increase Mounted Speed by |cffffff30|r%.",
@@ -2224,14 +2224,18 @@ local strings = {
     SI_LUIE_SKILL_MINOR_MANGLE_TP =                      "Reduce Max Health by |cffffff10|r%.",
     SI_LUIE_SKILL_HINDRANCE_TP =                         "Reduce Movement Speed by |cffffff40|r%.",
 
-    SI_LUIE_SKILL_MINOR_SLAYER_TP =                      "Your attacks deal |cffffff5|r% more damage to Dungeon and Trial enemies.",
-    SI_LUIE_SKILL_MAJOR_SLAYER_TP =                      "Your attacks deal |cffffff15|r% more damage to Dungeon and Trial enemies.",
-    SI_LUIE_SKILL_MINOR_AEGIS_TP =                       "You take |cffffff5|r% less damage from Dungeon and Trial enemies.",
-    SI_LUIE_SKILL_MAJOR_AEGIS_TP =                       "You take |cffffff15|r% less damage from Dungeon and Trial enemies.",
+    SI_LUIE_SKILL_MINOR_SLAYER_TP =                      "Your attacks deal |cffffff5|r% more damage to Dungeon, Trial, and Arena enemies.",
+    SI_LUIE_SKILL_MAJOR_SLAYER_TP =                      "Your attacks deal |cffffff15|r% more damage to Dungeon, Trial, and Arena enemies.",
+    SI_LUIE_SKILL_MINOR_AEGIS_TP =                       "You take |cffffff5|r% less damage from Dungeon, Trial, and Arena enemies.",
+    SI_LUIE_SKILL_MAJOR_AEGIS_TP =                       "You take |cffffff15|r% less damage from Dungeon, Trial, and Arena enemies.",
 
     SI_LUIE_SKILL_EMPOWER_TP =                           "Increase the damage of your next Light Attack by |cffffff40|r%.",
 
     SI_LUIE_SKILL_TEST_TP =                              "This is a test effect.",
+
+    SI_LUIE_SKILL_GENERIC_FIRE =                         "Fire",
+    SI_LUIE_SKILL_GENERIC_FROST =                        "Frost",
+
     SI_LUIE_SKILL_GENERIC_BLEED_TP =                     "Afflicted with Bleeding damage over time.",
     SI_LUIE_SKILL_GENERIC_DISEASE_TP =                   "Afflicted with Disease damage over time.",
     SI_LUIE_SKILL_GENERIC_POISON_TP =                    "Afflicted with Poison damage over time.",
@@ -2242,6 +2246,10 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Restoring Health every second over time.",
     SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Restoring Magicka every second over time.",
     SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Restoring Stamina every second over time.",
+
+    SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP =             "Absorbing damage for |cFFFFFF<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_GENERIC_HOT_TIME_2SEC_TP =             "Restoring Health every |cFFFFFF2|r seconds over |cFFFFFF<<1>>|r seconds.",
 
     SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Marked. You are visible to the enemy that marked you even when in stealth.",
     SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Revealed. You are unable to stealth.",
@@ -2262,8 +2270,15 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Increase the cost of Magicka abilities by |cffffff60|r%.",
     SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP =     "Increase the cost of Stamina abilities by |cffffff60|r%.",
 
-    SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP =     "Increase the cost of Magicka abilities by |cffffff30|r%.",
-    SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP =     "Increase the cost of Stamina abilities by |cffffff30|r%.",
+    SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP =     "Increase the cost of Magicka abilities by |cffffff10|r%.",
+    SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP =     "Increase the cost of Stamina abilities by |cffffff10|r%.",
+
+    SI_LUIE_SKILL_SET_ALESSIAS_BULWARK =                 "Reduce Weapon Damage by |cffffff10|r% for |cFFFFFF5|r seconds.",
+    SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST =                 "Increase Weapon and Spell Damage for |cFFFFFF15|r seconds.",
+    SI_LUIE_SKILL_SET_TAVAS_FAVOR =                      "Generating |cFFFFFF9|r Ultimate over |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_SET_ARMOR_MASTER =                     "Increase Physical and Spell Resistance for |cffffff10|r seconds.",
+    SI_LUIE_SKILL_SET_TRIAL_BY_FIRE =                    "Increase <<1>> Resistance for |cffffff4|r seconds.",
+    SI_LUIE_SKILL_SET_VARENS_LEGACY =                    "Increase the damage of your next direct damage area of effect attack.",
 
     SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP =              "Lightning courses through your body causing all weapon attacks to deal lightning damage.",
     SI_LUIE_SKILL_MANTLES_SHADOW =                       "Mantle's Shadow",

@@ -3302,16 +3302,13 @@ function UF.CustomFramesApplyColours(isMenu)
                     if role == 1 then
                         thb.bar:SetColor( unpack(dps) )
                         thb.backdrop:SetCenterColor( unpack(dps_bg) )
-                    end
-                    if role == 4 then
+                    elseif role == 4 then
                         thb.bar:SetColor( unpack(healer) )
                         thb.backdrop:SetCenterColor( unpack(healer_bg) )
-                    end
-                    if role == 2 then
+                    elseif role == 2 then
                         thb.bar:SetColor( unpack(tank) )
                         thb.backdrop:SetCenterColor( unpack(tank_bg) )
-                    end
-                    if not role then
+                    else
                         thb.bar:SetColor( unpack(health) )
                         thb.backdrop:SetCenterColor( unpack(health_bg) )
                     end
@@ -3393,16 +3390,13 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
             if role == 1 then
                 thb.bar:SetColor( unpack(dps) )
                 thb.backdrop:SetCenterColor( unpack(dps_bg) )
-            end
-            if role == 4 then
+            elseif role == 4 then
                 thb.bar:SetColor( unpack(healer) )
                 thb.backdrop:SetCenterColor( unpack(healer_bg) )
-            end
-            if role == 2 then
+            elseif role == 2 then
                 thb.bar:SetColor( unpack(tank) )
                 thb.backdrop:SetCenterColor( unpack(tank_bg) )
-            end
-            if not role then
+            else
                 if UF.SV.FrameColorReaction and unitTag == "reticleover" then
                     thb.bar:SetColor( unpack(reactioncolor) )
                     thb.backdrop:SetCenterColor( unpack(reactioncolor_bg) )

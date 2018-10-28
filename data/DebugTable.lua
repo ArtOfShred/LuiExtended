@@ -587,56 +587,19 @@ debugAuras = {
             [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
             [89372] = true, -- Pelted! (Cherry Blossom Branch)
             [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator
-
-            --[26829] = true, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
-            --[26736] = true, -- Bear Trap (Battered Bear Trap)
-            --[51555] = true, -- Bear Trap (Battered Bear Trap)
-            --[16846] = true, -- Blackfeather Court Whistle (Blackfeather Court Whistle)
-            --[41988] = true, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
-            --[39245] = true, -- Glimpse of the Forbidden (Discourse Amaranthine)
-            --[41950] = true, -- Fetish of Anger (Fetish of Anger)
-            --[21226] = true, -- Finvir's Trinket (Finvir's Trinket)
-            --[41948] = true, -- Glanir's Smoke Bomb (Glanir's Smoke Bomb)
-            --[25696] = true, -- Falcon Takeoff (Justal's Falcon)
-            --[25699] = true, -- Falcon Timer (Justal's Falcon)
-            --[25703] = true, -- Justal's Falcon (Justal's Falcon)
-            --[25701] = true, -- Q4333 Falcon land now (Justal's Falcon)
-            --[43700] = true, -- Wand of Finding (Lena's Wand of Finding)
-            --[43702] = true, -- Invis Chicken Delay (Lena's Wand of Finding)
-            --[43703] = true, -- Extracting... (Lena's Wand of Finding)
-            --[43704] = true, -- Extracting... (Lena's Wand of Finding)
-            --[43701] = true, -- Extracting... (Lena's Wand of Finding)
-            --[42076] = true, -- Tear (Mezha-dro's Sealing Amulet)
-            --[42080] = true, -- Tear (Mezha-dro's Sealing Amulet)
-            --[42105] = true, -- Nanwen's Sword (Nanwen's Sword)
-            --[34578] = true, -- Nirnroot Wine (Nirnroot Wine)
-            --[8825] = true, -- Generic Crouch Fiddle Animatio (Questionable Meat Sack)
-            --[26339] = true, -- Eating (Questionable Meat Sack)
-            --[25369] = true, -- Sanguine's Goblet (Sanguine's Goblet)
-            --[42008] = true, -- Blessing of Root Sunder (Token of Root Sunder)
-            --[89550] = true, -- TROPHY Azura's Light (Twilight Shard)
-            --[42053] = true, -- Yokudan Salute (Yokudan Totem)
-            --[12478] = true, -- CON_Ground Rise on (Yokudan Totem)
-            --[42067] = true, -- Explosion (Yokudan Totem)
-
-            --[79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
-            --[92862] = true, -- Ringing Bell (Dreamer's Chime)
-            --[92863] = true, -- Stun (Dreamer's Chime)
-            --[00000] = true, -- BOX OF FORBIDDEN RELICS SAVED SPACE
-            --[77785] = true, -- Rain of Coins (Coin of Illusory Riches)
-            --[77786] = true, -- Stun (Coin of Illusory Riches)
-            --[73685] = true, -- Rkindaleft Trophy (Hidden Pressure Vent)
-            --[74151] = true, -- Stun (Hidden Pressure Vent)
-            --[73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
-            --[74232] = true, -- Stun (Malacath's Wrathful Flame)
-
-            --[77027] = true, -- Anniversary Cake - Forreals (Jubilee Cake)
-            --[87998] = true, -- Anniversary Cake (2nd Annual Jubilee Cake)
-            --[102009] = true, -- Anniversary Cake (3rd Annual Jubilee Cake)
+            [77027] = true, -- Anniversary Cake - Forreals (Jubilee Cake)
+            [87998] = true, -- Anniversary Cake (2nd Annual Jubilee Cake)
+            [102009] = true, -- Anniversary Cake (3rd Annual Jubilee Cake)
             --[77123] = true, -- Anniversary EXP Buff (Any Jubilee Cake)
-            --[81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
-            --[84361] = true, -- Witchmother's Brew (Witchmother's Whistle)
-            --[84369] = true, -- Witchmother's Brew (Witchmother's Whistle)
+            [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
+            [96118] = true, -- Witchmother's Boon (Witchmother's Whistle)
+            [84361] = true, -- Witchmother's Brew (Witchmother's Whistle)
+            [84364] = true, -- Witchmother's Brew (Witchmother's Whistle)
+            [84365] = true, -- Witchmother's Brew (Witchmother's Whistle)
+            [84366] = true, -- Witchmother's Brew (Witchmother's Whistle)
+            [84367] = true, -- Witchmother's Brew (Witchmother's Whistle)
+            [84368] = true, -- Witchmother's Brew (Witchmother's Whistle)
+            [84369] = true, -- Witchmother's Brew (Witchmother's Whistle)
             [91369] = true, -- Jester's Experience Boost Pie (The Pie of Misrule)
             [92232] = true, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
             [91446] = true, -- Jester's Experience Boost Pie -- Breda's Bottomless Mead Mug
@@ -647,28 +610,76 @@ debugAuras = {
             [91449] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
             [86075] = true, -- Breda's Magnificent Mead -- Breda's Magnificent Mead
 
-            --[85344] = true, -- Atronach Aura (Storm Atronach Aura)
-            --[85349] = true, -- Atronach Transformation (Storm Atronach Transform)
-            --[85347] = true, -- Atronach Juggling (Storm Orb Juggle)
-            --[86976] = true, -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
-            --[86977] = true, -- Spriggan Transformation (Wild Hunt Transform)
-            --[86978] = true, -- Grand Spriggan Aura (Floral Swirl Aura)
-            --[92866] = true, -- Dwarven Globe (Dwarven Puzzle Orb)
-            --[92867] = true, -- Dwarven Tuning Forks (Dwaven Tonal Forks)
-            --[92868] = true, -- Dwarven Transformation (Dwemervamidium Mirage)
+            [26829] = true, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
+            [26736] = true, -- Bear Trap (Battered Bear Trap)
+            [51555] = true, -- Bear Trap (Battered Bear Trap)
+            [16846] = true, -- Blackfeather Court Whistle (Blackfeather Court Whistle)
+            [41988] = true, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
+            [39245] = true, -- Glimpse of the Forbidden (Discourse Amaranthine)
+            [41950] = true, -- Fetish of Anger (Fetish of Anger)
+            [21226] = true, -- Finvir's Trinket (Finvir's Trinket)
+            [41948] = true, -- Glanir's Smoke Bomb (Glanir's Smoke Bomb)
+            [25696] = true, -- Falcon Takeoff (Justal's Falcon)
+            [25699] = true, -- Falcon Timer (Justal's Falcon)
+            [25703] = true, -- Justal's Falcon (Justal's Falcon)
+            [25701] = true, -- Q4333 Falcon land now (Justal's Falcon)
+            [43700] = true, -- Wand of Finding (Lena's Wand of Finding)
+            [43702] = true, -- Invis Chicken Delay (Lena's Wand of Finding)
+            [43703] = true, -- Extracting... (Lena's Wand of Finding)
+            [43704] = true, -- Extracting... (Lena's Wand of Finding)
+            [43701] = true, -- Extracting... (Lena's Wand of Finding)
+            [42076] = true, -- Tear (Mezha-dro's Sealing Amulet)
+            [42080] = true, -- Tear (Mezha-dro's Sealing Amulet)
+            [42105] = true, -- Nanwen's Sword (Nanwen's Sword)
+            [34578] = true, -- Nirnroot Wine (Nirnroot Wine)
+            --[8825] = true, -- Generic Crouch Fiddle Animatio (Questionable Meat Sack)
+            [26339] = true, -- Eating (Questionable Meat Sack)
+            [25369] = true, -- Sanguine's Goblet (Sanguine's Goblet)
+            [42008] = true, -- Blessing of Root Sunder (Token of Root Sunder)
+            [42053] = true, -- Yokudan Salute (Yokudan Totem)
+            --[12478] = true, -- CON_Ground Rise on (Yokudan Totem)
+            --[42067] = true, -- Explosion (Yokudan Totem)
 
-            --[97273] = true, -- TROPHY Death Crate Mem 1 (Crow's Calling)
-            --[97275] = true, -- TROPHY Death Crate Mem 3 (Murderous Strike)
-            --[98378] = true, -- Murderous Strike (Murderous Strike)
-            --[97274] = true, -- Swarm of Crows (Swarm of Crows)
+            [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
+            [79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
+            [92862] = true, -- Ringing Bell (Dreamer's Chime)
+            [92863] = true, -- Stun (Dreamer's Chime)
+            --[00000] = true, -- BOX OF FORBIDDEN RELICS SAVED SPACE
+            --[77785] = true, -- Rain of Coins (Coin of Illusory Riches)
+            --[77786] = true, -- Stun (Coin of Illusory Riches)
+            [73685] = true, -- Rkindaleft Trophy (Hidden Pressure Vent)
+            [74151] = true, -- Stun (Hidden Pressure Vent)
+            [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
+            [74232] = true, -- Stun (Malacath's Wrathful Flame)
 
-            --[99318] = true, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
-            --[99319] = true, -- Flame Crate Memento 2 (Flame Pixie)
-            --[99320] = true, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
-
-            --[101874] = true, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
-            --[101877] = true, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
-            --[101872] = true, -- _CRWN Dragon Priest Memento 3 (Bone Dragon Summons Focus)
+            -- Crown Mementos
+            [85344] = true, -- Atronach Aura (Storm Atronach Aura)
+            [85349] = true, -- Atronach Transformation (Storm Atronach Transform)
+            [85347] = true, -- Atronach Juggling (Storm Orb Juggle)
+            [86976] = true, -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
+            [86977] = true, -- Spriggan Transformation (Wild Hunt Transform)
+            [86978] = true, -- Grand Spriggan Aura (Floral Swirl Aura)
+            [92866] = true, -- Dwarven Globe (Dwarven Puzzle Orb)
+            [92867] = true, -- Dwarven Tuning Forks (Dwaven Tonal Forks)
+            [92868] = true, -- Dwarven Transformation (Dwemervamidium Mirage)
+            [97273] = true, -- TROPHY Death Crate Mem 1 (Crow's Calling)
+            [97275] = true, -- TROPHY Death Crate Mem 3 (Murderous Strike)
+            [98378] = true, -- Murderous Strike (Murderous Strike)
+            [97274] = true, -- Swarm of Crows (Swarm of Crows)
+            [99318] = true, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
+            [99319] = true, -- Flame Crate Memento 2 (Flame Pixie)
+            [99320] = true, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
+            [101874] = true, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
+            [101877] = true, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
+            [101872] = true, -- _CRWN Dragon Priest Memento 3 (Bone Dragon Summons Focus)
+            [104324] = true, -- Psijic Pearl Summon (Psijic Celestial Orb)
+            [104323] = true, -- Psijic Hourglass (Psijic Tautology Glass)
+            [104325] = true, -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
+            [110482] = true, -- Rind-Renewing Pumpkin (Rind-Renewing Pumpkin)
+            [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
+            [113697] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
+            [113696] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
+            [110483] = true, -- Ghost Lantern (Ghost Lantern)
 
             -------------------------------------
             -- NON-COMBAT PETS ------------------
@@ -1032,8 +1043,8 @@ debugAuras = {
             [29102] = true, -- Magnus' Gift (Magnus)
             [34381] = true, -- Magnus' Gift (Magnus)
 
-            [99202] = true, -- Mechanical Acuity (of Mechanical Acuity)
-            [99204] = true, -- Mechanical Acuity (of Mechanical Acuity)
+            --[99202] = true, -- Mechanical Acuity (of Mechanical Acuity)
+            --[99204] = true, -- Mechanical Acuity (of Mechanical Acuity)
 
             [71670] = true, -- Morkuldin (Morkuldin)
             [71671] = true, -- Morkuldin (Morkuldin)
@@ -1104,785 +1115,785 @@ debugAuras = {
             [29109] = true, -- Whitestrake's Retribution (Whitestrake's)
             [49236] = true, -- Whitestrake's Retribution (Whitestrake's)
 
-            [106775] = true, -- Adept Rider (Adept Rider's)
-            [106776] = true, -- Major Evasion (Adept Rider's)
-            [106790] = true, -- Major Evasion (Adept Rider's)
-            [106784] = true, -- Dustcloud (Adept Rider's)
-            [106783] = true, -- Dustcloud Damage (Adept Rider's)
+            --[106775] = true, -- Adept Rider (Adept Rider's)
+            --[106776] = true, -- Major Evasion (Adept Rider's)
+            --[106790] = true, -- Major Evasion (Adept Rider's)
+            --[106784] = true, -- Dustcloud (Adept Rider's)
+            --[106783] = true, -- Dustcloud Damage (Adept Rider's)
 
-            [106803] = true, -- Nocturnal's Favor (Nocturnal's Favored)
-            [106804] = true, -- Nocturnal's Heal (Nocturnal's Favored)
+            --[106803] = true, -- Nocturnal's Favor (Nocturnal's Favored)
+            --[106804] = true, -- Nocturnal's Heal (Nocturnal's Favored)
 
-            [106797] = true, -- Sload's Semblance (Sload's)
-            [106798] = true, -- Sload's Semblance (Sload's)
+            --[106797] = true, -- Sload's Semblance (Sload's)
+            --[106798] = true, -- Sload's Semblance (Sload's)
 
             -- Overland Sets (All Types)
-            [85541] = true, -- Armor of the Trainee (of the Trainee)
+            --[85541] = true, -- Armor of the Trainee (of the Trainee)
 
             -- Overland Sets (Light)
-            [77888] = true, -- Bahraha's Curse (of Bahraha's Curse)
-            [75673] = true, -- Bahraha's Curse (of Bahraha's Curse)
-            [75981] = true, -- Bahraha's Curse (of Bahraha's Curse)
-            [75691] = true, -- Bahraha's Curse (of Bahraha's Curse)
-            [75707] = true, -- Bahraha's Curse (of Bahraha's Curse)
-            [75692] = true, -- Bahraha's Curse (of Bahraha's Curse)
-            [75706] = true, -- Bahraha's Curse (of Bahraha's Curse)
+            --[77888] = true, -- Bahraha's Curse (of Bahraha's Curse)
+            --[75673] = true, -- Bahraha's Curse (of Bahraha's Curse)
+            --[75981] = true, -- Bahraha's Curse (of Bahraha's Curse)
+            --[75691] = true, -- Bahraha's Curse (of Bahraha's Curse)
+            --[75707] = true, -- Bahraha's Curse (of Bahraha's Curse)
+            --[75692] = true, -- Bahraha's Curse (of Bahraha's Curse)
+            --[75706] = true, -- Bahraha's Curse (of Bahraha's Curse)
 
-            [32742] = true, -- Bloodthorn's Touch (Bloodthorn)
-            [34522] = true, -- Bloodthorn's Touch (Bloodthorn)
-            [57177] = true, -- Bloodthorn's Touch (Bloodthorn)
+            --[32742] = true, -- Bloodthorn's Touch (Bloodthorn)
+            --[34522] = true, -- Bloodthorn's Touch (Bloodthorn)
+            --[57177] = true, -- Bloodthorn's Touch (Bloodthorn)
 
-            [29092] = true, -- Dreamer's Mantle (Dreamer's)
-            [31213] = true, -- Dreamer's Mantle (Dreamer's)
-            [48913] = true, -- Dreamer's Mantle (Dreamer's)
-            [57133] = true, -- Dreamer's Mantle (Dreamer's)
+            --[29092] = true, -- Dreamer's Mantle (Dreamer's)
+            --[31213] = true, -- Dreamer's Mantle (Dreamer's)
+            --[48913] = true, -- Dreamer's Mantle (Dreamer's)
+            --[57133] = true, -- Dreamer's Mantle (Dreamer's)
 
-            [32803] = true, -- Queen's Elegance (Elegant)
+            --[32803] = true, -- Queen's Elegance (Elegant)
 
-            [32743] = true, -- Robes of the Hist (of Hist Sap)
-            [85776] = true, -- Robes of the Hist (of Hist Sap)
+            --[32743] = true, -- Robes of the Hist (of Hist Sap)
+            --[85776] = true, -- Robes of the Hist (of Hist Sap)
 
-            [52704] = true, -- Way of Martial Knowledge (of Martial Knowledge)
-            [52705] = true, -- Way of Martial Knowledge (of Martial Knowledge)
+            --[52704] = true, -- Way of Martial Knowledge (of Martial Knowledge)
+            --[52705] = true, -- Way of Martial Knowledge (of Martial Knowledge)
 
-            [32820] = true, -- Necropotence (of Necropotence)
+            --[32820] = true, -- Necropotence (of Necropotence)
 
-            [29094] = true, -- Prisoner's Rags (Prisoner's)
-            [85825] = true, -- Prisoner's Rags (Prisoner's)
+            --[29094] = true, -- Prisoner's Rags (Prisoner's)
+            --[85825] = true, -- Prisoner's Rags (Prisoner's)
 
-            [79192] = true, -- Sithis' Touch (Sithis)
-            [79200] = true, -- Major Berserk (Sithis)
+            --[79192] = true, -- Sithis' Touch (Sithis)
+            --[79200] = true, -- Major Berserk (Sithis)
 
-            [85591] = true, -- Skooma Smuggler (Smuggler's)
-            [85592] = true, -- Major Expedition (Smuggler's)
+            --[85591] = true, -- Skooma Smuggler (Smuggler's)
+            --[85592] = true, -- Major Expedition (Smuggler's)
 
-            [32725] = true, -- Stendarr's Embrace (of Stendarr)
-            [85812] = true, -- Stendarr's Embrace (of Stendarr)
+            --[32725] = true, -- Stendarr's Embrace (of Stendarr)
+            --[85812] = true, -- Stendarr's Embrace (of Stendarr)
 
-            [32728] = true, -- Syrabane's Grip (of Syrabane)
-            [34506] = true, -- Syrabane's Grip (of Syrabane)
+            --[32728] = true, -- Syrabane's Grip (of Syrabane)
+            --[34506] = true, -- Syrabane's Grip (of Syrabane)
 
-            [32741] = true, -- Shadow Dancer's Raiment (of the Shadow Dancer)
+            --[32741] = true, -- Shadow Dancer's Raiment (of the Shadow Dancer)
 
-            [29095] = true, -- Silks of the Sun (of the Sun)
+            --[29095] = true, -- Silks of the Sun (of the Sun)
 
-            [29101] = true, -- Robes of the Withered Hand (of the Withered Hand)
-            [57172] = true, -- Robes of the Withered Hand (of the Withered Hand)
-            [57173] = true, -- Robes of the Withered Hand (of the Withered Hand)
-            [57175] = true, -- Robes of the Withered Hand (of the Withered Hand)
+            --[29101] = true, -- Robes of the Withered Hand (of the Withered Hand)
+            --[57172] = true, -- Robes of the Withered Hand (of the Withered Hand)
+            --[57173] = true, -- Robes of the Withered Hand (of the Withered Hand)
+            --[57175] = true, -- Robes of the Withered Hand (of the Withered Hand)
 
-            [71656] = true, -- Trinimac's Valor (of Trinimac's Valor)
-            [71664] = true, -- Trinimac's Valor (of Trinimac's Valor)
-            [71657] = true, -- Trinimac's Valor (of Trinimac's Valor)
-            [71658] = true, -- Trinimac's Valor (of Trinimac's Valor)
+            --[71656] = true, -- Trinimac's Valor (of Trinimac's Valor)
+            --[71664] = true, -- Trinimac's Valor (of Trinimac's Valor)
+            --[71657] = true, -- Trinimac's Valor (of Trinimac's Valor)
+            --[71658] = true, -- Trinimac's Valor (of Trinimac's Valor)
 
-            [85567] = true, -- Vampire Lord (Vampire Lord's)
+            --[85567] = true, -- Vampire Lord (Vampire Lord's)
 
-            [92761] = true, -- War Maiden (War Maiden's)
+            --[92761] = true, -- War Maiden (War Maiden's)
 
-            [85596] = true, -- Ysgramor's Birthright (Ysgramor's)
+            --[85596] = true, -- Ysgramor's Birthright (Ysgramor's)
 
-            [92981] = true, -- Mad Tinkerer (Mad Tinkerer's)
-            [93026] = true, -- Mad Tinkerer (Mad Tinkerer's)
-            [92982] = true, -- Mad Tinkerer (Mad Tinkerer's)
-            [92986] = true, -- Mad Tinkerer (Mad Tinkerer's)
-            [93001] = true, -- Mad Tinkerer (Mad Tinkerer's)
-            [93002] = true, -- Mad Tinkerer (Mad Tinkerer's)
-            [93003] = true, -- Mad Tinkerer (Mad Tinkerer's)
-            [92998] = true, -- Mad Tinkerer (Mad Tinkerer's)
+            --[92981] = true, -- Mad Tinkerer (Mad Tinkerer's)
+            --[93026] = true, -- Mad Tinkerer (Mad Tinkerer's)
+            --[92982] = true, -- Mad Tinkerer (Mad Tinkerer's)
+            --[92986] = true, -- Mad Tinkerer (Mad Tinkerer's)
+            --[93001] = true, -- Mad Tinkerer (Mad Tinkerer's)
+            --[93002] = true, -- Mad Tinkerer (Mad Tinkerer's)
+            --[93003] = true, -- Mad Tinkerer (Mad Tinkerer's)
+            --[92998] = true, -- Mad Tinkerer (Mad Tinkerer's)
 
-            [106805] = true, -- Wisdom of Vanus (Vanus's)
-            [106806] = true, -- Major Mending (Vanus's)
+            --[106805] = true, -- Wisdom of Vanus (Vanus's)
+            --[106806] = true, -- Major Mending (Vanus's)
 
             -- Overland Sets (Medium)
 
-            [71102] = true, -- Briarheart
-            [71106] = true, -- Briarheart
-            [71107] = true, -- Briarheart
+            --[71102] = true, -- Briarheart
+            --[71106] = true, -- Briarheart
+            --[71107] = true, -- Briarheart
 
-            [32734] = true, -- Darkstride (Darkstride)
+            --[32734] = true, -- Darkstride (Darkstride)
 
-            [93300] = true, -- Defiler (Defiler's)
-            [93308] = true, -- Defiler (Defiler's)
-            [93304] = true, -- Defiler (Defiler's)
-            [93307] = true, -- Defiler (Defiler's)
-            [93305] = true, -- Defiler (Defiler's)
-            [93326] = true, -- Defiler (Defiler's)
-            [100704] = true, -- Defiler (Defiler's)
+            --[93300] = true, -- Defiler (Defiler's)
+            --[93308] = true, -- Defiler (Defiler's)
+            --[93304] = true, -- Defiler (Defiler's)
+            --[93307] = true, -- Defiler (Defiler's)
+            --[93305] = true, -- Defiler (Defiler's)
+            --[93326] = true, -- Defiler (Defiler's)
+            --[100704] = true, -- Defiler (Defiler's)
 
-            [29104] = true, -- Fiord's Legacy (Fiord's)
+            --[29104] = true, -- Fiord's Legacy (Fiord's)
 
-            [79181] = true, -- Flanking Strategist (of Flanking)
+            --[79181] = true, -- Flanking Strategist (of Flanking)
 
-            [19165] = true, -- Night Terror (of Night Terror)
-            [32836] = true, -- Night Terror (of Night Terror)
-            [34875] = true, -- Night Terror (of Night Terror)
+            --[19165] = true, -- Night Terror (of Night Terror)
+            --[32836] = true, -- Night Terror (of Night Terror)
+            --[34875] = true, -- Night Terror (of Night Terror)
 
-            [32822] = true, -- Salvation (of Salvation)
+            --[32822] = true, -- Salvation (of Salvation)
 
-            [32808] = true, -- Senche's Bite (Senche's)
-            [34611] = true, -- Senche's Bite (Senche's)
+            --[32808] = true, -- Senche's Bite (Senche's)
+            --[34611] = true, -- Senche's Bite (Senche's)
 
-            [32750] = true, -- Stygian (Stygian)
+            --[32750] = true, -- Stygian (Stygian)
 
-            [67099] = true, -- Swamp Raider
-            [67101] = true, -- Swamp Raider
+            --[67099] = true, -- Swamp Raider
+            --[67101] = true, -- Swamp Raider
 
-            [85557] = true, -- Sword-Singer (Sword-Singer's)
+            --[85557] = true, -- Sword-Singer (Sword-Singer's)
 
-            [76573] = true, -- Syvarra's Scales (of Syvarra's Scales)
-            [75717] = true, -- Syvarra's Scales (of Syvarra's Scales)
-            [76344] = true, -- Serpent's Spirit (of Syvarra's Scales)
-            [75718] = true, -- Serpent's Spirit (of Syvarra's Scales)
+            --[76573] = true, -- Syvarra's Scales (of Syvarra's Scales)
+            --[75717] = true, -- Syvarra's Scales (of Syvarra's Scales)
+            --[76344] = true, -- Serpent's Spirit (of Syvarra's Scales)
+            --[75718] = true, -- Serpent's Spirit (of Syvarra's Scales)
 
-            [51504] = true, -- Yokudan Air Stealth Detection (of the Air)
-            [52708] = true, -- Way of Air (of the Air)
-            [52709] = true, -- Way of Air (of the Air)
+            --[51504] = true, -- Yokudan Air Stealth Detection (of the Air)
+            --[52708] = true, -- Way of Air (of the Air)
+            --[52709] = true, -- Way of Air (of the Air)
 
-            [29107] = true, -- Night Mother's Embrace (of the Night Mother)
+            --[29107] = true, -- Night Mother's Embrace (of the Night Mother)
 
-            [32751] = true, -- Ranger's Gait (of the Ranger)
+            --[32751] = true, -- Ranger's Gait (of the Ranger)
 
-            [29111] = true, -- Shadow of the Red Mountain (of the Red Mountain)
-            [97806] = true, -- Shadow of the Red Mountain (of the Red Mountain)
-            [34383] = true, -- Shadow of the Red Mountain (of the Red Mountain)
+            --[29111] = true, -- Shadow of the Red Mountain (of the Red Mountain)
+            --[97806] = true, -- Shadow of the Red Mountain (of the Red Mountain)
+            --[34383] = true, -- Shadow of the Red Mountain (of the Red Mountain)
 
-            [32828] = true, -- Twin Sisters (of the Twin Sisters)
-            [34817] = true, -- Twin Sisters Bleed (of the Twin Sisters)
+            --[32828] = true, -- Twin Sisters (of the Twin Sisters)
+            --[34817] = true, -- Twin Sisters Bleed (of the Twin Sisters)
 
-            [32829] = true, -- Wilderqueen's Arch (of the Wilderqueen)
-            [34870] = true, -- Wilderqueen's Arch (of the Wilderqueen)
+            --[32829] = true, -- Wilderqueen's Arch (of the Wilderqueen)
+            --[34870] = true, -- Wilderqueen's Arch (of the Wilderqueen)
 
-            [99266] = true, -- Unfathomable Darkness (of Unfathomable Darkness)
-            [99267] = true, -- Unfathomable Darkness (of Unfathomable Darkness)
-            [99268] = true, -- Unfathomable Darkness (of Unfathomable Darkness)
+            --[99266] = true, -- Unfathomable Darkness (of Unfathomable Darkness)
+            --[99267] = true, -- Unfathomable Darkness (of Unfathomable Darkness)
+            --[99268] = true, -- Unfathomable Darkness (of Unfathomable Darkness)
 
-            [32729] = true, -- Hide of the Werewolf (Werewolf Hide)
-            [34508] = true, -- Hide of the Werewolf (Werewolf Hide)
+            --[32729] = true, -- Hide of the Werewolf (Werewolf Hide)
+            --[34508] = true, -- Hide of the Werewolf (Werewolf Hide)
 
-            [18991] = true, -- Witchman Armor (Witchman's)
-            [18993] = true, -- Witchman Armor (Witchman's)
-            [85818] = true, -- Witchman Armor (Witchman's)
+            --[18991] = true, -- Witchman Armor (Witchman's)
+            --[18993] = true, -- Witchman Armor (Witchman's)
+            --[85818] = true, -- Witchman Armor (Witchman's)
 
-            [106858] = true, -- Gryphon's Ferocity (Gryphon's)
-            [106860] = true, -- Minor Expedition (Gryphon's)
-            [106861] = true, -- Minor Force (Gryphon's)
+            --[106858] = true, -- Gryphon's Ferocity (Gryphon's)
+            --[106860] = true, -- Minor Expedition (Gryphon's)
+            --[106861] = true, -- Minor Force (Gryphon's)
 
             -- Overland Sets (Heavy)
 
-            [32815] = true, -- Meridia's Blessed Armor (Blessed)
-            [34711] = true, -- Meridia's Blessed Armor (Blessed)
+            --[32815] = true, -- Meridia's Blessed Armor (Blessed)
+            --[34711] = true, -- Meridia's Blessed Armor (Blessed)
 
-            [57295] = true, -- Draugr's Heritage (of Draugr Heritage)
-            [57298] = true, -- Draugr's Heritage (of Draugr Heritage)
-            [57296] = true, -- Draugr's Heritage (of Draugr Heritage)
-            [57297] = true, -- Draugr's Heritage (of Draugr Heritage)
+            --[57295] = true, -- Draugr's Heritage (of Draugr Heritage)
+            --[57298] = true, -- Draugr's Heritage (of Draugr Heritage)
+            --[57296] = true, -- Draugr's Heritage (of Draugr Heritage)
+            --[57297] = true, -- Draugr's Heritage (of Draugr Heritage)
 
-            [99281] = true, -- Livewire
-            [99282] = true, -- Livewire
-            [99285] = true, -- Livewire
-            [99286] = true, -- Livewire
-            [99461] = true, -- Livewire
+            --[99281] = true, -- Livewire
+            --[99282] = true, -- Livewire
+            --[99285] = true, -- Livewire
+            --[99286] = true, -- Livewire
+            --[99461] = true, -- Livewire
 
-            [79110] = true, -- Hide of Morihaus (of Morihaus)
-            [79315] = true, -- Hide of Horihaus (of Morihaus)
-            [79506] = true, -- Hide of Morihaus (of Morihaus)
-            [79123] = true, -- Hide of Morihaus (of Morihaus)
-            [79507] = true, -- Tracker (of Morihaus)
-            [79112] = true, -- Hide of Morihaus (of Morihaus)
+            --[79110] = true, -- Hide of Morihaus (of Morihaus)
+            --[79315] = true, -- Hide of Horihaus (of Morihaus)
+            --[79506] = true, -- Hide of Morihaus (of Morihaus)
+            --[79123] = true, -- Hide of Morihaus (of Morihaus)
+            --[79507] = true, -- Tracker (of Morihaus)
+            --[79112] = true, -- Hide of Morihaus (of Morihaus)
 
-            [32752] = true, -- Seventh Legion Brute (Seventh Legion's)
-            [34526] = true, -- Seventh Legion Brute (Seventh Legion's)
-            [57186] = true, -- Seventh Legion Brute (Seventh Legion's)
+            --[32752] = true, -- Seventh Legion Brute (Seventh Legion's)
+            --[34526] = true, -- Seventh Legion Brute (Seventh Legion's)
+            --[57186] = true, -- Seventh Legion Brute (Seventh Legion's)
 
-            [85593] = true, -- Minor Heroism (Shalk's)
-            [85594] = true, -- Minor Heroism (Shalk's)
+            --[85593] = true, -- Minor Heroism (Shalk's)
+            --[85594] = true, -- Minor Heroism (Shalk's)
 
-            [32838] = true, -- Soulshine (of Soulshine)
+            --[32838] = true, -- Soulshine (of Soulshine)
 
-            [18996] = true, -- Akaviri Dragonguard (of the Dragon)
+            --[18996] = true, -- Akaviri Dragonguard (of the Dragon)
 
-            [52710] = true, -- Way of Fire (of the Fire)
-            [52711] = true, -- Fiery Weapon (of the Fire)
+            --[52710] = true, -- Way of Fire (of the Fire)
+            --[52711] = true, -- Fiery Weapon (of the Fire)
 
-            [85570] = true, -- Green Pact (of the Green Pact)
+            --[85570] = true, -- Green Pact (of the Green Pact)
 
-            [32736] = true, -- Hatchling's Shell (of the Hatchling's Shell)
-            [85797] = true, -- Hatchling's Shell (of the Hatchling's Shell)
+            --[32736] = true, -- Hatchling's Shell (of the Hatchling's Shell)
+            --[85797] = true, -- Hatchling's Shell (of the Hatchling's Shell)
 
-            [85565] = true, -- Minor Vitality (of the Order of Diagna)
+            --[85565] = true, -- Minor Vitality (of the Order of Diagna)
 
-            [71077] = true, -- Mark of the Pariah (of the Pariah)
+            --[71077] = true, -- Mark of the Pariah (of the Pariah)
 
-            [32814] = true, -- Storm Knight's Plate (of the Storm Knight)
-            [57210] = true, -- Storm Knight's Plate (of the Storm Knight)
-            [57209] = true, -- Storm Knight's Plate (of the Storm Knight)
+            --[32814] = true, -- Storm Knight's Plate (of the Storm Knight)
+            --[57210] = true, -- Storm Knight's Plate (of the Storm Knight)
+            --[57209] = true, -- Storm Knight's Plate (of the Storm Knight)
 
-            [85551] = true, -- Minor Protection (of the Vampire's Cloak)
+            --[85551] = true, -- Minor Protection (of the Vampire's Cloak)
 
-            [29118] = true, -- Armor of the Veiled Heritance (of the Veiled Heritance)
-            [33514] = true, -- Armor of the Veiled Heritance (of the Veiled Heritance)
+            --[29118] = true, -- Armor of the Veiled Heritance (of the Veiled Heritance)
+            --[33514] = true, -- Armor of the Veiled Heritance (of the Veiled Heritance)
 
-            [32830] = true, -- Wyrd Tree's Blessing (of the Wyrd Tree)
+            --[32830] = true, -- Wyrd Tree's Blessing (of the Wyrd Tree)
 
-            [29116] = true, -- Thunderbug's Carapace (Thunderbug's)
-            [33497] = true, -- Thunderbug's Carapace (Thunderbug's)
+            --[29116] = true, -- Thunderbug's Carapace (Thunderbug's)
+            --[33497] = true, -- Thunderbug's Carapace (Thunderbug's)
 
-            [92762] = true, -- Minor Toughness (Warrior-Poet's)
+            --[92762] = true, -- Minor Toughness (Warrior-Poet's)
 
-            [106865] = true, -- Grace of Gloom (Gloom-Graced)
-            [106867] = true, -- Major Evasion (Gloom-Graced)
-            [106868] = true, -- Grace of Gloom (Gloom-Graced)
+            --[106865] = true, -- Grace of Gloom (Gloom-Graced)
+            --[106867] = true, -- Major Evasion (Gloom-Graced)
+            --[106868] = true, -- Grace of Gloom (Gloom-Graced)
 
             -- Dungeon Sets (Light)
 
-            [60418] = true, -- Burning Spellweave
-            [61459] = true, -- Burning Spellweave
-            [60419] = true, -- Burning Spellweave
+            --[60418] = true, -- Burning Spellweave
+            --[61459] = true, -- Burning Spellweave
+            --[60419] = true, -- Burning Spellweave
 
-            [102026] = true, -- Caluurion's Legacy
-            [102060] = true, -- Caluurion's Legacy
-            [102027] = true, -- Caluurion's Legacy (Fire)
-            [102032] = true, -- Caluurion's Legacy (Ice)
-            [102033] = true, -- Caluurion's Legacy (Disease)
-            [102034] = true, -- Caluurion's Legacy (Shock)
+            --[102026] = true, -- Caluurion's Legacy
+            --[102060] = true, -- Caluurion's Legacy
+            --[102027] = true, -- Caluurion's Legacy (Fire)
+            --[102032] = true, -- Caluurion's Legacy (Ice)
+            --[102033] = true, -- Caluurion's Legacy (Disease)
+            --[102034] = true, -- Caluurion's Legacy (Shock)
 
-            [97532] = true, -- Draugr's Rest
-            [97538] = true, -- Draugr's Rest
-            [97539] = true, -- Draugr's Rest
+            --[97532] = true, -- Draugr's Rest
+            --[97538] = true, -- Draugr's Rest
+            --[97539] = true, -- Draugr's Rest
 
-            [97572] = true, -- Flame Blossom
-            [99144] = true, -- Flame Blossom
-            [97573] = true, -- Flame Blossom
-            [97574] = true, -- Flame Blossom
+            --[97572] = true, -- Flame Blossom
+            --[99144] = true, -- Flame Blossom
+            --[97573] = true, -- Flame Blossom
+            --[97574] = true, -- Flame Blossom
 
-            [84340] = true, -- Gossamer (Gossamer)
-            [84341] = true, -- Major Evasion (Gossamer)
+            --[84340] = true, -- Gossamer (Gossamer)
+            --[84341] = true, -- Major Evasion (Gossamer)
 
-            [101978] = true, -- Jorvuld's Guidance
+            --[101978] = true, -- Jorvuld's Guidance
 
-            [85609] = true, -- Lamia's Song (Lamia's)
-            [85610] = true, -- Lamia's Song (Lamia's)
-            [85636] = true, -- Lamia's Song (Lamia's)
+            --[85609] = true, -- Lamia's Song (Lamia's)
+            --[85610] = true, -- Lamia's Song (Lamia's)
+            --[85636] = true, -- Lamia's Song (Lamia's)
 
-            [85604] = true, -- Light Speaker (Light Speaker's)
+            --[85604] = true, -- Light Speaker (Light Speaker's)
 
-            [67093] = true, -- Overwhelming Surge (Overwhelming)
-            [67129] = true, -- Overwhelming Surge (Overwhelming)
-            [67136] = true, -- Overwhelming Surge (Overwhelming)
+            --[67093] = true, -- Overwhelming Surge (Overwhelming)
+            --[67129] = true, -- Overwhelming Surge (Overwhelming)
+            --[67136] = true, -- Overwhelming Surge (Overwhelming)
 
-            [29099] = true, -- Prayer Shawl (of Prayer)
-            [34504] = true, -- Prayer Shawl (of Prayer)
+            --[29099] = true, -- Prayer Shawl (of Prayer)
+            --[34504] = true, -- Prayer Shawl (of Prayer)
 
-            [88764] = true, -- Sanctuary (of Sanctuary)
-            [32834] = true, -- Sanctuary (of Sanctuary)
+            --[88764] = true, -- Sanctuary (of Sanctuary)
+            --[32834] = true, -- Sanctuary (of Sanctuary)
 
-            [85603] = true, -- Spider Cultist Cowl (Spider Cultist's)
+            --[85603] = true, -- Spider Cultist Cowl (Spider Cultist's)
 
-            [66899] = true, -- Spell Power Cure (Spell Power Cure)
-            [69402] = true, -- WGT Heal Set (Spell Power Cure)
-            [66902] = true, -- Spell Power Cure (Spell Power Cure)
+            --[66899] = true, -- Spell Power Cure (Spell Power Cure)
+            --[69402] = true, -- WGT Heal Set (Spell Power Cure)
+            --[66902] = true, -- Spell Power Cure (Spell Power Cure)
 
-            [67096] = true, -- Combat Physician (of the Combat Physician)
-            [67098] = true, -- Combat Physician (of the Combat Physician)
-            [69291] = true, -- ICP Light Heal Set (of the Combat Physician)
+            --[67096] = true, -- Combat Physician (of the Combat Physician)
+            --[67098] = true, -- Combat Physician (of the Combat Physician)
+            --[69291] = true, -- ICP Light Heal Set (of the Combat Physician)
 
-            [18987] = true, -- Shroud of the Lich (of the Lich)
-            [57164] = true, -- Shroud of the Lich (of the Lich)
+            --[18987] = true, -- Shroud of the Lich (of the Lich)
+            --[57164] = true, -- Shroud of the Lich (of the Lich)
 
-            [32826] = true, -- Magicka Furnace (of the Magicka Furnace)
-            [34813] = true, -- Magicka Furnace (of the Magicka Furnace)
+            --[32826] = true, -- Magicka Furnace (of the Magicka Furnace)
+            --[34813] = true, -- Magicka Furnace (of the Magicka Furnace)
 
-            [29100] = true, -- Noble Duelist's Silks (of the Noble Duelist)
-            [34373] = true, -- Noble Duelist's Silks (of the Noble Duelist)
+            --[29100] = true, -- Noble Duelist's Silks (of the Noble Duelist)
+            --[34373] = true, -- Noble Duelist's Silks (of the Noble Duelist)
 
-            [85606] = true, -- Netch's Touch (of the Netch's Touch)
+            --[85606] = true, -- Netch's Touch (of the Netch's Touch)
 
-            [67287] = true, -- Scathing Mage (of the Scathing Mage)
-            [67288] = true, -- Scathing Mage (of the Scathing Mage)
+            --[67287] = true, -- Scathing Mage (of the Scathing Mage)
+            --[67288] = true, -- Scathing Mage (of the Scathing Mage)
 
-            [59675] = true, -- Undaunted Unweaver (of the Undaunted Unweaver)
-            [59676] = true, -- Undaunted Unweaver (of the Undaunted Unweaver)
+            --[59675] = true, -- Undaunted Unweaver (of the Undaunted Unweaver)
+            --[59676] = true, -- Undaunted Unweaver (of the Undaunted Unweaver)
 
-            [57162] = true, -- Robes of the Warlock (of the Warlock)
-            [57163] = true, -- Robes of the Warlock (of the Warlock)
+            --[57162] = true, -- Robes of the Warlock (of the Warlock)
+            --[57163] = true, -- Robes of the Warlock (of the Warlock)
 
-            [88763] = true, -- Worm's Raiment (of the Worm Cult)
-            [47367] = true, -- Worm's Raiment (of the Worm Cult)
+            --[88763] = true, -- Worm's Raiment (of the Worm Cult)
+            --[47367] = true, -- Worm's Raiment (of the Worm Cult)
 
-            [85613] = true, -- Major Prophecy (Treasure Hunter's)
+            --[85613] = true, -- Major Prophecy (Treasure Hunter's)
 
             -- Dungeon Sets (Medium)
 
-            [85607] = true, -- Strength of the Automaton (Automaton's)
+            --[85607] = true, -- Strength of the Automaton (Automaton's)
 
-            [29105] = true, -- Barkskin
-            [85977] = true, -- Barkskin
-            [85978] = true, -- Barkskin
+            --[29105] = true, -- Barkskin
+            --[85977] = true, -- Barkskin
+            --[85978] = true, -- Barkskin
 
-            [97567] = true, -- Blooddrinker
+            --[97567] = true, -- Blooddrinker
 
-            [85617] = true, -- Bone Pirate's Tatters (Bone Pirate's)
+            --[85617] = true, -- Bone Pirate's Tatters (Bone Pirate's)
 
-            [84305] = true, -- Heem-Jas' Retribution (Heem-Jas')
-            [84308] = true, -- Heem-Jas' Retribution (Heem-Jas')
-            [84310] = true, -- Heem-Jas' Retribution (Heem-Jas')
+            --[84305] = true, -- Heem-Jas' Retribution (Heem-Jas')
+            --[84308] = true, -- Heem-Jas' Retribution (Heem-Jas')
+            --[84310] = true, -- Heem-Jas' Retribution (Heem-Jas')
 
-            [88760] = true, -- Hircine's Veneer (Hircine's)
-            [47365] = true, -- Hircine's Veneer (Hircine's)
+            --[88760] = true, -- Hircine's Veneer (Hircine's)
+            --[47365] = true, -- Hircine's Veneer (Hircine's)
 
-            [32809] = true, -- Oblivion's Edge
-            [34612] = true, -- Oblivion's Edge
-            [57206] = true, -- Oblivion's Edge
+            --[32809] = true, -- Oblivion's Edge
+            --[34612] = true, -- Oblivion's Edge
+            --[57206] = true, -- Oblivion's Edge
 
-            [97712] = true, -- Pillar of Nirn
-            [97714] = true, -- Pillar of Nirn
-            [97716] = true, -- Pillar of Nirn
-            [97743] = true, -- Pillar of Nirn
+            --[97712] = true, -- Pillar of Nirn
+            --[97714] = true, -- Pillar of Nirn
+            --[97716] = true, -- Pillar of Nirn
+            --[97743] = true, -- Pillar of Nirn
 
-            [102104] = true, -- Plague Slinger
-            [102106] = true, -- Skeever Corpse
-            [102113] = true, -- Plague Slinger
+            --[102104] = true, -- Plague Slinger
+            --[102106] = true, -- Skeever Corpse
+            --[102113] = true, -- Plague Slinger
 
-            [67140] = true, -- Sheer Venom (of Sheer Venom)
-            [67926] = true, -- Sheer Venom (of Sheer Venom)
-            [67927] = true, -- Sheer Venom (of Sheer Venom)
-            [67141] = true, -- Sheer Venom (of Sheer Venom)
+            --[67140] = true, -- Sheer Venom (of Sheer Venom)
+            --[67926] = true, -- Sheer Venom (of Sheer Venom)
+            --[67927] = true, -- Sheer Venom (of Sheer Venom)
+            --[67141] = true, -- Sheer Venom (of Sheer Venom)
 
-            [85624] = true, -- Spelunker (Spelunker's)
-            [85626] = true, -- Spelunker (Spelunker's)
-            [85635] = true, -- Spelunker (Spelunker's)
+            --[85624] = true, -- Spelunker (Spelunker's)
+            --[85626] = true, -- Spelunker (Spelunker's)
+            --[85635] = true, -- Spelunker (Spelunker's)
 
-            [66939] = true, -- Storm Master (Storm Master's)
-            [70297] = true, -- Storm Master (Storm Master's)
-            [70298] = true, -- Storm Master (Storm Master's)
+            --[66939] = true, -- Storm Master (Storm Master's)
+            --[70297] = true, -- Storm Master (Storm Master's)
+            --[70298] = true, -- Storm Master (Storm Master's)
 
-            [85622] = true, -- Sword Dancer (Sword Dancer's)
+            --[85622] = true, -- Sword Dancer (Sword Dancer's)
 
-            [60059] = true, -- Sunderflame (Sunderflame)
-            [60060] = true, -- Sunderflame (Sunderflame)
-            [60416] = true, -- Minor Fracture (Sunderflame)
-            [108825] = true, -- Minor Breach (Sunderflame)
+            --[60059] = true, -- Sunderflame (Sunderflame)
+            --[60060] = true, -- Sunderflame (Sunderflame)
+            --[60416] = true, -- Minor Fracture (Sunderflame)
+            --[108825] = true, -- Minor Breach (Sunderflame)
 
-            [32780] = true, -- Crusader (of the Crusader)
-            [49220] = true, -- Extra dodge (of the Crusader)
+            --[32780] = true, -- Crusader (of the Crusader)
+            --[49220] = true, -- Extra dodge (of the Crusader)
 
-            [85605] = true, -- Major Savagery (Toothrow)
+            --[85605] = true, -- Major Savagery (Toothrow)
 
-            [67296] = true, -- Essence Thief (of the Essence Thief)
-            [67324] = true, -- WGT Medium Set 1 (of the Essence Thief)
-            [67298] = true, -- Essence Thief (of the Essence Thief)
-            [67308] = true, -- Essence Thief (of the Essence Thief)
-            [67326] = true, -- Essence Thief (of the Essence Thief)
-            [67330] = true, -- Essence Thief (of the Essence Thief)
-            [67334] = true, -- Essence Thief (of the Essence Thief)
-            [70284] = true, -- Essence Thief (of the Essence Thief)
-            [70290] = true, -- Essence Thief (of the Essence Thief)
+            --[67296] = true, -- Essence Thief (of the Essence Thief)
+            --[67324] = true, -- WGT Medium Set 1 (of the Essence Thief)
+            --[67298] = true, -- Essence Thief (of the Essence Thief)
+            --[67308] = true, -- Essence Thief (of the Essence Thief)
+            --[67326] = true, -- Essence Thief (of the Essence Thief)
+            --[67330] = true, -- Essence Thief (of the Essence Thief)
+            --[67334] = true, -- Essence Thief (of the Essence Thief)
+            --[70284] = true, -- Essence Thief (of the Essence Thief)
+            --[70290] = true, -- Essence Thief (of the Essence Thief)
 
-            [59666] = true, -- Undaunted Infiltrator (of the Undaunted Infiltrator)
-            [59667] = true, -- Undaunted Infiltrator (of the Undaunted Infiltrator)
+            --[59666] = true, -- Undaunted Infiltrator (of the Undaunted Infiltrator)
+            --[59667] = true, -- Undaunted Infiltrator (of the Undaunted Infiltrator)
 
-            [29106] = true, -- Viper's Sting (of the Viper)
-            [33691] = true, -- Viper's Sting (of the Viper)
+            --[29106] = true, -- Viper's Sting (of the Viper)
+            --[33691] = true, -- Viper's Sting (of the Viper)
 
-            [101969] = true, -- Trappings of Invigoration
-            [101970] = true, -- Trappings of Invigoration
+            --[101969] = true, -- Trappings of Invigoration
+            --[101970] = true, -- Trappings of Invigoration
 
-            [84349] = true, -- Widowmaker
-            [97851] = true, -- Widowmaker
-            [84350] = true, -- Widowmaker
+            --[84349] = true, -- Widowmaker
+            --[97851] = true, -- Widowmaker
+            --[84350] = true, -- Widowmaker
 
             -- Dungeon Sets (Heavy)
 
-            [102008] = true, -- Curse of Doylemish
-            [102023] = true, -- Curse of Doylemish
+            --[102008] = true, -- Curse of Doylemish
+            --[102023] = true, -- Curse of Doylemish
 
-            [32825] = true, -- Duneripper's Scales (Duneripper)
+            --[32825] = true, -- Duneripper's Scales (Duneripper)
 
-            [32754] = true, -- Durok's Bane (of Durok's Bane)
-            [34527] = true, -- Durok's Bane Major Defile (of Durok's Bane)
+            --[32754] = true, -- Durok's Bane (of Durok's Bane)
+            --[34527] = true, -- Durok's Bane Major Defile (of Durok's Bane)
 
-            [82890] = true, -- Ebon Armory (Ebon)
-            [47362] = true, -- Ebon Armory (Ebon)
+            --[82890] = true, -- Ebon Armory (Ebon)
+            --[47362] = true, -- Ebon Armory (Ebon)
 
-            [59694] = true, -- Embershield
-            [59695] = true, -- Embershield
-            [59696] = true, -- Embershield
+            --[59694] = true, -- Embershield
+            --[59695] = true, -- Embershield
+            --[59696] = true, -- Embershield
 
-            [97907] = true, -- Hagraven's Garden (Hagraven's)
-            [97908] = true, -- Hagraven's Garden (Hagraven's)
-            [97909] = true, -- Hagraven's Garden (Hagraven's)
-            [97910] = true, -- Hagraven's Garden (Hagraven's)
-            [97918] = true, -- Hagraven's Garden (Hagraven's)
+            --[97907] = true, -- Hagraven's Garden (Hagraven's)
+            --[97908] = true, -- Hagraven's Garden (Hagraven's)
+            --[97909] = true, -- Hagraven's Garden (Hagraven's)
+            --[97910] = true, -- Hagraven's Garden (Hagraven's)
+            --[97918] = true, -- Hagraven's Garden (Hagraven's)
 
-            [29123] = true, -- The Ice Furnace (Ice Furnace)
-            [34404] = true, -- Frostfire (Ice Furnace)
+            --[29123] = true, -- The Ice Furnace (Ice Furnace)
+            --[34404] = true, -- Frostfire (Ice Furnace)
 
-            [97616] = true, -- Ironblood (Ironblood)
-            [97626] = true, -- Ironblood (Ironblood)
-            [97627] = true, -- Major Protection (Ironblood)
+            --[97616] = true, -- Ironblood (Ironblood)
+            --[97626] = true, -- Ironblood (Ironblood)
+            --[97627] = true, -- Major Protection (Ironblood)
 
-            [67077] = true, -- Jolting Arms (Jolting)
-            [67079] = true, -- WGT Heavy Set 2 (Jolting)
-            [67078] = true, -- Jolting Arms (Jolting)
-            [67080] = true, -- Shocking Bash (Jolting)
+            --[67077] = true, -- Jolting Arms (Jolting)
+            --[67079] = true, -- WGT Heavy Set 2 (Jolting)
+            --[67078] = true, -- Jolting Arms (Jolting)
+            --[67080] = true, -- Shocking Bash (Jolting)
 
-            [85619] = true, -- Knight-Errant's Mail (Knight-Errant's)
-            [85620] = true, -- Knight-Errant's Mail (Knight-Errant's)
+            --[85619] = true, -- Knight-Errant's Mail (Knight-Errant's)
+            --[85620] = true, -- Knight-Errant's Mail (Knight-Errant's)
 
-            [67202] = true, -- Leeching Plate (of Leeching)
-            [69346] = true, -- Leeching Plate (of Leeching)
-            [67205] = true, -- Leeching Plate (of Leeching)
-            [69345] = true, -- Leeching Plate (of Leeching)
-            [67204] = true, -- Leeching Plate (of Leeching)
+            --[67202] = true, -- Leeching Plate (of Leeching)
+            --[69346] = true, -- Leeching Plate (of Leeching)
+            --[67205] = true, -- Leeching Plate (of Leeching)
+            --[69345] = true, -- Leeching Plate (of Leeching)
+            --[67204] = true, -- Leeching Plate (of Leeching)
 
-            [84275] = true, -- Aspect of Mazzatun (of Mazzatun)
-            [84277] = true, -- Aspect of Mazzatun (of Mazzatun)
-            [84278] = true, -- Aspect of Mazzatun (of Mazzatun)
-            [84279] = true, -- Aspect of Mazzatun (of Mazzatun)
+            --[84275] = true, -- Aspect of Mazzatun (of Mazzatun)
+            --[84277] = true, -- Aspect of Mazzatun (of Mazzatun)
+            --[84278] = true, -- Aspect of Mazzatun (of Mazzatun)
+            --[84279] = true, -- Aspect of Mazzatun (of Mazzatun)
 
-            [85611] = true, -- Minor Force (of Medusa)
+            --[85611] = true, -- Minor Force (of Medusa)
 
-            [84353] = true, -- Hand of Mephala (of Mephala's Hand)
-            [84354] = true, -- Hand of Mephala (of Mephala's Hand)
-            [84357] = true, -- Hand of Mephala Webbing (of Mephala's Hand)
-            [84355] = true, -- Hand of Mephala (of Mephala's Hand)
-            [84358] = true, -- Minor Fracture (of Mephala's Hand)
+            --[84353] = true, -- Hand of Mephala (of Mephala's Hand)
+            --[84354] = true, -- Hand of Mephala (of Mephala's Hand)
+            --[84357] = true, -- Hand of Mephala Webbing (of Mephala's Hand)
+            --[84355] = true, -- Hand of Mephala (of Mephala's Hand)
+            --[84358] = true, -- Minor Fracture (of Mephala's Hand)
 
-            [32755] = true, -- Nikulas' Heavy Armor (of Nikulas)
+            --[32755] = true, -- Nikulas' Heavy Armor (of Nikulas)
 
-            [85623] = true, -- Major Sorcery (Rattlecage)
+            --[85623] = true, -- Major Sorcery (Rattlecage)
 
-            [32735] = true, -- Major Brutality (of the Dreugh King Slayer)
-            [34511] = true, -- Major Expedition (of the Dreugh King Slayer)
+            --[32735] = true, -- Major Brutality (of the Dreugh King Slayer)
+            --[34511] = true, -- Major Expedition (of the Dreugh King Slayer)
 
-            [66882] = true, -- Brands of the Imperium (of the Imperium)
-            [66887] = true, -- Brands of the Imperium (of the Imperium)
+            --[66882] = true, -- Brands of the Imperium (of the Imperium)
+            --[66887] = true, -- Brands of the Imperium (of the Imperium)
 
-            [29117] = true, -- Knightmare (of the Knightmare)
-            [33512] = true, -- Minor Maim (of the Knightmare)
+            --[29117] = true, -- Knightmare (of the Knightmare)
+            --[33512] = true, -- Minor Maim (of the Knightmare)
 
-            [29115] = true, -- Sargeant's Mail (of the Sargeant)
+            --[29115] = true, -- Sargeant's Mail (of the Sargeant)
 
-            [67280] = true, -- Tormentor (of the Tormentor)
-            [67281] = true, -- ICP Heavy Set 2 Hit W Taunt (of the Tormentor)
-            [67283] = true, -- Tormentor Resistance (of the Tormentor)
+            --[67280] = true, -- Tormentor (of the Tormentor)
+            --[67281] = true, -- ICP Heavy Set 2 Hit W Taunt (of the Tormentor)
+            --[67283] = true, -- Tormentor Resistance (of the Tormentor)
 
-            [59663] = true, -- Undaunted Bastion (of the Undaunted Bastion)
-            [61200] = true, -- Undaunted Bastion (of the Undaunted Bastion)
+            --[59663] = true, -- Undaunted Bastion (of the Undaunted Bastion)
+            --[61200] = true, -- Undaunted Bastion (of the Undaunted Bastion)
 
-            [32818] = true, -- Armor of Truth (of Truth)
-            [86070] = true, -- Armor of Truth (of Truth)
+            --[32818] = true, -- Armor of Truth (of Truth)
+            --[86070] = true, -- Armor of Truth (of Truth)
 
-            [101974] = true, -- Ulfnor's Favor
+            --[101974] = true, -- Ulfnor's Favor
 
             -- Trial Sets (Hel Ra Citadel)
 
-            [50971] = true, -- Berserking Warrior (Advancing Yokeda)
-            [50978] = true, -- Berserking Warrior (Advancing Yokeda)
+            --[50971] = true, -- Berserking Warrior (Advancing Yokeda)
+            --[50978] = true, -- Berserking Warrior (Advancing Yokeda)
 
-            [51300] = true, -- Immortal Warrior (Immortal Yokeda)
-            [90937] = true, -- Immortal Warrior (Immortal Yokeda)
-            [51302] = true, -- Immortal Warrior (Immortal Yokeda)
-            [51401] = true, -- Immortal Warrior (Immortal Yokeda)
-            [90938] = true, -- Immortal Warrior (Immortal Yokeda)
+            --[51300] = true, -- Immortal Warrior (Immortal Yokeda)
+            --[90937] = true, -- Immortal Warrior (Immortal Yokeda)
+            --[51302] = true, -- Immortal Warrior (Immortal Yokeda)
+            --[51401] = true, -- Immortal Warrior (Immortal Yokeda)
+            --[90938] = true, -- Immortal Warrior (Immortal Yokeda)
 
-            [50990] = true, -- Defending Warrior (Resilient Yokeda)
-            [86907] = true, -- Defending Warrior (Resilient Yokeda)
-            [50992] = true, -- Defending Warrior (Resilient Yokeda)
+            --[50990] = true, -- Defending Warrior (Resilient Yokeda)
+            --[86907] = true, -- Defending Warrior (Resilient Yokeda)
+            --[50992] = true, -- Defending Warrior (Resilient Yokeda)
 
-            [61436] = true, -- Eternal Warrior (Eternal Yokeda)
-            [76618] = true, -- Minor Aegis (Eternal Yokeda)
-            [90940] = true, -- Eternal Warrior (Eternal Yokeda)
-            [81527] = true, -- Eternal Warrior (Eternal Yokeda)
-            [61437] = true, -- Eternal Warrior (Eternal Yokeda)
-            [81529] = true, -- Eternal Warrior (Eternal Yokeda)
-            [90939] = true, -- Eternal Warrior (Eternal Yokeda)
+            --[61436] = true, -- Eternal Warrior (Eternal Yokeda)
+            --[76618] = true, -- Minor Aegis (Eternal Yokeda)
+            --[90940] = true, -- Eternal Warrior (Eternal Yokeda)
+            --[81527] = true, -- Eternal Warrior (Eternal Yokeda)
+            --[61437] = true, -- Eternal Warrior (Eternal Yokeda)
+            --[81529] = true, -- Eternal Warrior (Eternal Yokeda)
+            --[90939] = true, -- Eternal Warrior (Eternal Yokeda)
 
             -- Trial Sets (Aetherian Archive)
 
-            [51314] = true, -- Destructive Mage (Aether ... of Destruction)
-            [51315] = true, -- Destructive Mage (Aether ... of Destruction)
-            [51320] = true, -- Mage Destruction Bomb (Aether ... of Destruction)
+            --[51314] = true, -- Destructive Mage (Aether ... of Destruction)
+            --[51315] = true, -- Destructive Mage (Aether ... of Destruction)
+            --[51320] = true, -- Mage Destruction Bomb (Aether ... of Destruction)
 
-            [51442] = true, -- Healing Mage (of Mending)
-            [51443] = true, -- Healing Bane (of Mending)
+            --[51442] = true, -- Healing Mage (of Mending)
+            --[51443] = true, -- Healing Bane (of Mending)
 
-            [51432] = true, -- Wise Mage (Aether ... of Strategy)
-            [51434] = true, -- Minor Vulnerability (Aether ... of Strategy)
+            --[51432] = true, -- Wise Mage (Aether ... of Strategy)
+            --[51434] = true, -- Minor Vulnerability (Aether ... of Strategy)
 
-            [76617] = true, -- Minor Slayer (of the Infallible Aether)
-            [61438] = true, -- Infallible Mage (of the Infallible Aether)
-            [81519] = true, -- Minor Vulnerability (of the Infallible Aether)
+            --[76617] = true, -- Minor Slayer (of the Infallible Aether)
+            --[61438] = true, -- Infallible Mage (of the Infallible Aether)
+            --[81519] = true, -- Minor Vulnerability (of the Infallible Aether)
 
             -- Trial Sets (Sanctum Ophidia)
 
-            [51132] = true, -- Poisonous Serpent (Ophidian ... of Venom)
-            [51241] = true, -- Poisonous Serpent (Ophidian ... of Venom)
+            --[51132] = true, -- Poisonous Serpent (Ophidian ... of Venom)
+            --[51241] = true, -- Poisonous Serpent (Ophidian ... of Venom)
 
-            [51170] = true, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
-            [51176] = true, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
+            --[51170] = true, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
+            --[51176] = true, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
 
-            [50995] = true, -- Quick Serpent (Ophidian... of Celerity)
-            [50997] = true, -- Major Expedition (Ophidian... of Celerity)
+            --[50995] = true, -- Quick Serpent (Ophidian... of Celerity)
+            --[50997] = true, -- Major Expedition (Ophidian... of Celerity)
 
-            [61440] = true, -- Vicious Serpent (of the Vicious Ophidian)
-            [98103] = true, -- Minor Slayer (of the Vicious Ophidian)
-            [81524] = true, -- Quick Serpent (of the Vicious Ophidian)
-            [81522] = true, -- Serpent Stamina (of the Vicious Ophidian)
+            --[61440] = true, -- Vicious Serpent (of the Vicious Ophidian)
+            --[98103] = true, -- Minor Slayer (of the Vicious Ophidian)
+            --[81524] = true, -- Quick Serpent (of the Vicious Ophidian)
+            --[81522] = true, -- Serpent Stamina (of the Vicious Ophidian)
 
             -- Trial Sets (Maw of Lorkhaj)
 
-            [75797] = true, -- Moondancer (Moondancer)
-            [75801] = true, -- Lunar Blessing (Moondancer)
-            [75804] = true, -- Shadow Blessing (Moondancer)
+            --[75797] = true, -- Moondancer (Moondancer)
+            --[75801] = true, -- Lunar Blessing (Moondancer)
+            --[75804] = true, -- Shadow Blessing (Moondancer)
 
-            [75751] = true, -- Roar of Alkosh (of Alkosh)
-            [98102] = true, -- Minor Slayer (of Alkosh)
-            [78835] = true, -- Roar of Alkosh Miss (of Alkosh)
-            [75752] = true, -- Roar of Alkosh (of Alkosh)
-            [75753] = true, -- Line Breaker (of Alkosh)
-            [76667] = true, -- Roar of Alkosh (of Alkosh)
+            --[75751] = true, -- Roar of Alkosh (of Alkosh)
+            --[98102] = true, -- Minor Slayer (of Alkosh)
+            --[78835] = true, -- Roar of Alkosh Miss (of Alkosh)
+            --[75752] = true, -- Roar of Alkosh (of Alkosh)
+            --[75753] = true, -- Line Breaker (of Alkosh)
+            --[76667] = true, -- Roar of Alkosh (of Alkosh)
 
-            [75813] = true, -- Lunar Bastion (of the Lunar Bastion)
-            [75815] = true, -- Lunar Bastion (of the Lunar Bastion)
+            --[75813] = true, -- Lunar Bastion (of the Lunar Bastion)
+            --[75815] = true, -- Lunar Bastion (of the Lunar Bastion)
 
-            [75766] = true, -- Twilight Remedy (of Twilight Remedy)
-            [75768] = true, -- Primal Heal (of Twilight Remedy)
-            [75770] = true, -- Twilight Remedy (of Twilight Remedy)
-            [76564] = true, -- Minor Force (of Twilight Remedy)
+            --[75766] = true, -- Twilight Remedy (of Twilight Remedy)
+            --[75768] = true, -- Primal Heal (of Twilight Remedy)
+            --[75770] = true, -- Twilight Remedy (of Twilight Remedy)
+            --[76564] = true, -- Minor Force (of Twilight Remedy)
 
             -- Trial Sets (Halls of Fabrication)
 
-            [93443] = true, -- Automated Defense (Automated Defense)
-            [93444] = true, -- Major Aegis (Automated Defense)
+            --[93443] = true, -- Automated Defense (Automated Defense)
+            --[93444] = true, -- Major Aegis (Automated Defense)
 
-            [93124] = true, -- Inventor's Guard (Inventor's Guard)
-            [93125] = true, -- Major Aegis (Inventor's Guard)
+            --[93124] = true, -- Inventor's Guard (Inventor's Guard)
+            --[93125] = true, -- Major Aegis (Inventor's Guard)
 
-            [93119] = true, -- Master Architect (Master Architect)
-            [93120] = true, -- Major Slayer (Master Architect)
+            --[93119] = true, -- Master Architect (Master Architect)
+            --[93120] = true, -- Major Slayer (Master Architect)
 
-            [93441] = true, -- War Machine (War Machine)
-            [93442] = true, -- Major Slayer (War Machine)
+            --[93441] = true, -- War Machine (War Machine)
+            --[93442] = true, -- Major Slayer (War Machine)
 
             -- Trial Sets (Cloudrest)
 
-            [107117] = true, -- Vestment of Olirime (Olirime's)
-            [107141] = true, -- Vestment of Olirime (Olirime's)
-            [109994] = true, -- Major Courage (Olirime's)
+            --[107117] = true, -- Vestment of Olirime (Olirime's)
+            --[107141] = true, -- Vestment of Olirime (Olirime's)
+            --[109994] = true, -- Major Courage (Olirime's)
 
-            [109082] = true, -- Ideal Vestment of Olorime (Olirime's Perfect)
-            [109084] = true, -- Ideal Vestment of Olorime (Olirime's Perfect)
-            [110020] = true, -- Major Courage (Olirime's Perfect)
+            --[109082] = true, -- Ideal Vestment of Olorime (Olirime's Perfect)
+            --[109084] = true, -- Ideal Vestment of Olorime (Olirime's Perfect)
+            --[110020] = true, -- Major Courage (Olirime's Perfect)
 
-            [107093] = true, -- Mantle of Siroria (Siroria's)
-            [107095] = true, -- Mantle of Siroria (Siroria's)
-            [110118] = true, -- Siroria's Boon (Siroria's)
+            --[107093] = true, -- Mantle of Siroria (Siroria's)
+            --[107095] = true, -- Mantle of Siroria (Siroria's)
+            --[110118] = true, -- Siroria's Boon (Siroria's)
 
-            [109079] = true, -- Ideal Mantle of Siroria (Perfect Siroria's)
-            [109081] = true, -- Ideal Mantle of Siroria (Perfect Siroria's)
-            [110142] = true, -- Siroria's Boon (Siroria's)
+            --[109079] = true, -- Ideal Mantle of Siroria (Perfect Siroria's)
+            --[109081] = true, -- Ideal Mantle of Siroria (Perfect Siroria's)
+            --[110142] = true, -- Siroria's Boon (Siroria's)
 
-            [107202] = true, -- Arms of Relequen (Relequen's)
-            [107206] = true, -- Arms of Relequen (Relequen's)
-            [107203] = true, -- Arms of Relequen (Relequen's)
+            --[107202] = true, -- Arms of Relequen (Relequen's)
+            --[107206] = true, -- Arms of Relequen (Relequen's)
+            --[107203] = true, -- Arms of Relequen (Relequen's)
 
-            [109085] = true, -- Ideal Arms of Relequen (Perfect Relequen's)
-            [109087] = true, -- Ideal Arms of Relequen (Perfect Relequen's)
-            [109086] = true, -- Ideal Arms of Relequen (Perfect Relequen's)
+            --[109085] = true, -- Ideal Arms of Relequen (Perfect Relequen's)
+            --[109087] = true, -- Ideal Arms of Relequen (Perfect Relequen's)
+            --[109086] = true, -- Ideal Arms of Relequen (Perfect Relequen's)
 
-            [107268] = true, -- Aegis of Galenwe (Galenwe's)
-            [109976] = true, -- Empower (Galenwe's)
+            --[107268] = true, -- Aegis of Galenwe (Galenwe's)
+            --[109976] = true, -- Empower (Galenwe's)
 
-            [109088] = true, -- Ideal Aegis of Galenwe (Galenwe's)
-            [109989] = true, -- Empower (Galenwe's)
+            --[109088] = true, -- Ideal Aegis of Galenwe (Galenwe's)
+            --[109989] = true, -- Empower (Galenwe's)
 
             -- Battleground Sets
-            [92908] = true, -- Major Expedition (Coward's Gear)
-            [92909] = true, -- Major Protection (Coward's Gear)
+            --[92908] = true, -- Major Expedition (Coward's Gear)
+            --[92909] = true, -- Major Protection (Coward's Gear)
 
-            [93099] = true, -- Knight Slayer
-            [93104] = true, -- Knight Slayer
+            --[93099] = true, -- Knight Slayer
+            --[93104] = true, -- Knight Slayer
 
-            [92914] = true, -- Vanguard's Challenge
-            [92916] = true, -- Vanguard's Challenge
+            --[92914] = true, -- Vanguard's Challenge
+            --[92916] = true, -- Vanguard's Challenge
 
-            [92920] = true, -- Wizard's Riposte (Wizard's Riposte)
-            [92921] = true, -- Minor Maim (Wizard's Riposte)
+            --[92920] = true, -- Wizard's Riposte (Wizard's Riposte)
+            --[92921] = true, -- Minor Maim (Wizard's Riposte)
 
             -- Imperial City Sets
-            [61761] = true, -- Black Rose (of the Black Rose)
-            [61762] = true, -- Black Rose (of the Black Rose)
+            --[61761] = true, -- Black Rose (of the Black Rose)
+            --[61762] = true, -- Black Rose (of the Black Rose)
 
-            [79419] = true, -- Galerion's Revenge (Galerion's)
-            [79421] = true, -- Mark of Revenge (Galerion's)
-            [79770] = true, -- U10 AVA MA/LA 1 (Galerion's)
-            [79771] = true, -- U10 AVA MA/LA 1 (Galerion's)
-            [79420] = true, -- Galerion's Revenge (Galerion's)
+            --[79419] = true, -- Galerion's Revenge (Galerion's)
+            --[79421] = true, -- Mark of Revenge (Galerion's)
+            --[79770] = true, -- U10 AVA MA/LA 1 (Galerion's)
+            --[79771] = true, -- U10 AVA MA/LA 1 (Galerion's)
+            --[79420] = true, -- Galerion's Revenge (Galerion's)
 
-            [79405] = true, -- Imperial Physique (Imperial Physique)
-            [79411] = true, -- 4x Bonus (Imperial Physique)
+            --[79405] = true, -- Imperial Physique (Imperial Physique)
+            --[79411] = true, -- 4x Bonus (Imperial Physique)
 
-            [61775] = true, -- Supporting Soldier Trigger (of Meritorious Service)
-            [65706] = true, -- Meritorious Service (of Meritorious Service)
-            [65707] = true, -- Meritorious Service (of Meritorious Service)
+            --[61775] = true, -- Supporting Soldier Trigger (of Meritorious Service)
+            --[65706] = true, -- Meritorious Service (of Meritorious Service)
+            --[65707] = true, -- Meritorious Service (of Meritorious Service)
 
-            [68933] = true, -- Phoenix (of the Phoenix)
-            [90935] = true, -- Phoenix (of the Phoenix)
-            [68935] = true, -- Phoenix (of the Phoenix)
-            [70406] = true, -- Phoenix (of the Phoenix)
-            [68938] = true, -- Phoenix (of the Phoenix)
-            [90936] = true, -- Phoenix (of the Phoenix)
-            [68940] = true, -- Phoenix (of the Phoenix)
-            [70405] = true, -- Phoenix (of the Phoenix)
+            --[68933] = true, -- Phoenix (of the Phoenix)
+            --[90935] = true, -- Phoenix (of the Phoenix)
+            --[68935] = true, -- Phoenix (of the Phoenix)
+            --[70406] = true, -- Phoenix (of the Phoenix)
+            --[68938] = true, -- Phoenix (of the Phoenix)
+            --[90936] = true, -- Phoenix (of the Phoenix)
+            --[68940] = true, -- Phoenix (of the Phoenix)
+            --[70405] = true, -- Phoenix (of the Phoenix)
 
-            [61763] = true, -- Powerful Assault Trigger (of the Powerful Assault)
-            [61771] = true, -- Powerful Assault (of the Powerful Assault)
-            [61774] = true, -- Powerful Assault (of the Powerful Assault)
+            --[61763] = true, -- Powerful Assault Trigger (of the Powerful Assault)
+            --[61771] = true, -- Powerful Assault (of the Powerful Assault)
+            --[61774] = true, -- Powerful Assault (of the Powerful Assault)
 
-            [68947] = true, -- Reactive Armor (Reactive)
-            [68948] = true, -- Reactive Armor (Reactive)
-            [69567] = true, -- Reactive Armor Effects (Reactive)
+            --[68947] = true, -- Reactive Armor (Reactive)
+            --[68948] = true, -- Reactive Armor (Reactive)
+            --[69567] = true, -- Reactive Armor Effects (Reactive)
 
-            [68973] = true, -- Shield Breaker (of the Shield Breaker)
-            [68974] = true, -- Shield Breaker (of the Shield Breaker)
+            --[68973] = true, -- Shield Breaker (of the Shield Breaker)
+            --[68974] = true, -- Shield Breaker (of the Shield Breaker)
 
-            [79362] = true, -- Thews of the Harbinger (of the Harbinger)
-            [79363] = true, -- Thews of the Harbinger (of the Harbinger)
+            --[79362] = true, -- Thews of the Harbinger (of the Harbinger)
+            --[79363] = true, -- Thews of the Harbinger (of the Harbinger)
 
-            [79464] = true, -- Vicecanon of Venom
-            [79469] = true, -- Deadly Venom
-            [79470] = true, -- Vicecanon of Venom Heal
-            [79471] = true, -- Venom Heal
+            --[79464] = true, -- Vicecanon of Venom
+            --[79469] = true, -- Deadly Venom
+            --[79470] = true, -- Vicecanon of Venom Heal
+            --[79471] = true, -- Venom Heal
 
             -- Cyrodiil Sets (Light)
 
-            [32802] = true, -- Almalexia's Mercy (of Almalexia's Mercy)
-            [34605] = true, -- Almalexia's Mercy (of Almalexia's Mercy)
+            --[32802] = true, -- Almalexia's Mercy (of Almalexia's Mercy)
+            --[34605] = true, -- Almalexia's Mercy (of Almalexia's Mercy)
 
-            [32779] = true, -- Robes of Alteration Mastery (of Alteration Mastery)
+            --[32779] = true, -- Robes of Alteration Mastery (of Alteration Mastery)
 
-            [47355] = true, -- Grace of the Ancients (of Ancient Grace)
+            --[47355] = true, -- Grace of the Ancients (of Ancient Grace)
 
-            [32819] = true, -- The Arch-Mage (of the Arch-Mage)
-            [70392] = true, -- The Arch-Mage (of the Arch-Mage)
+            --[32819] = true, -- The Arch-Mage (of the Arch-Mage)
+            --[70392] = true, -- The Arch-Mage (of the Arch-Mage)
 
-            [32827] = true, -- Curse Eater (Curse-Eating)
+            --[32827] = true, -- Curse Eater (Curse-Eating)
 
-            [32833] = true, -- Light of Cyrodiil (of Cyrodiil's Light)
+            --[32833] = true, -- Light of Cyrodiil (of Cyrodiil's Light)
 
-            [29093] = true, -- Desert Rose (of the Desert Rose)
-            [33498] = true, -- Desert Rose (of the Desert Rose)
+            --[29093] = true, -- Desert Rose (of the Desert Rose)
+            --[33498] = true, -- Desert Rose (of the Desert Rose)
 
-            [47351] = true, -- Buffer of the Swift (of the Swift)
-            [47352] = true, -- Buffer of the Swift (of the Swift)
+            --[47351] = true, -- Buffer of the Swift (of the Swift)
+            --[47352] = true, -- Buffer of the Swift (of the Swift)
 
             -- Cyrodiil Sets (Medium)
 
-            [32835] = true, -- Ward of Cyrodiil (of Cyrodiil's Ward)
-            [49119] = true, -- Ward of Cyrodiil (Block) (of Cyrodiil's Ward)
+            --[32835] = true, -- Ward of Cyrodiil (of Cyrodiil's Ward)
+            --[49119] = true, -- Ward of Cyrodiil (Block) (of Cyrodiil's Ward)
 
-            [47361] = true, -- Eagle Eye (Eagle-Eyed)
+            --[47361] = true, -- Eagle Eye (Eagle-Eyed)
 
-            [32823] = true, -- Hawk's Eye (of Hawk's Eye)
+            --[32823] = true, -- Hawk's Eye (of Hawk's Eye)
 
-            [32731] = true, -- Kyne's Kiss (of Kyne's Kiss)
-            [34509] = true, -- Kyne's Kiss (of Kyne's Kiss)
-            [70492] = true, -- Kyne's Kiss (of Kyne's Kiss)
+            --[32731] = true, -- Kyne's Kiss (of Kyne's Kiss)
+            --[34509] = true, -- Kyne's Kiss (of Kyne's Kiss)
+            --[70492] = true, -- Kyne's Kiss (of Kyne's Kiss)
 
-            [29112] = true, -- The Morag Tong (of the Morag Tong)
-            [34384] = true, -- The Morag Tong (of the Morag Tong)
+            --[29112] = true, -- The Morag Tong (of the Morag Tong)
+            --[34384] = true, -- The Morag Tong (of the Morag Tong)
 
-            [32807] = true, -- Sentry (of the Sentry)
+            --[32807] = true, -- Sentry (of the Sentry)
 
-            [32747] = true, -- Shadow Walker (of the Shadow Walker)
-            [57180] = true, -- Shadow Walker (of the Shadow Walker)
-            [57181] = true, -- Shadow Walker (of the Shadow Walker)
+            --[32747] = true, -- Shadow Walker (of the Shadow Walker)
+            --[57180] = true, -- Shadow Walker (of the Shadow Walker)
+            --[57181] = true, -- Shadow Walker (of the Shadow Walker)
 
-            [47353] = true, -- Shield of the Valiant (of the Valiant)
+            --[47353] = true, -- Shield of the Valiant (of the Valiant)
 
-            [47357] = true, -- Vengeance Leech (of Vengeance Leech)
-            [47358] = true, -- Vengeance Leech (of Vengeance Leech)
-            [47359] = true, -- Vengeance Leech (of Vengeance Leech)
-            [47360] = true, -- Vengeance Leech (of Vengeance Leech)
+            --[47357] = true, -- Vengeance Leech (of Vengeance Leech)
+            --[47358] = true, -- Vengeance Leech (of Vengeance Leech)
+            --[47359] = true, -- Vengeance Leech (of Vengeance Leech)
+            --[47360] = true, -- Vengeance Leech (of Vengeance Leech)
 
             -- Cyrodiil Sets (Heavy)
 
-            [32824] = true, -- Affliction (Afflicted)
-            [34787] = true, -- Affliction (Afflicted)
+            --[32824] = true, -- Affliction (Afflicted)
+            --[34787] = true, -- Affliction (Afflicted)
 
-            [29122] = true, -- Beckoning Steel (of Beckoning Steel)
-            [49237] = true, -- Beckoning Steel (of Beckoning Steel)
+            --[29122] = true, -- Beckoning Steel (of Beckoning Steel)
+            --[49237] = true, -- Beckoning Steel (of Beckoning Steel)
 
-            [32837] = true, -- Crest of Cyrodiil (of Cyrodiil's Crest)
-            [34876] = true, -- Major Defile (of Cyrodiil's Crest)
+            --[32837] = true, -- Crest of Cyrodiil (of Cyrodiil's Crest)
+            --[34876] = true, -- Major Defile (of Cyrodiil's Crest)
 
-            [32800] = true, -- Elf Bane (of Elf Bane)
+            --[32800] = true, -- Elf Bane (of Elf Bane)
 
-            [32831] = true, -- Ravager (Ravaging)
-            [34872] = true, -- The Ravager (Ravaging)
+            --[32831] = true, -- Ravager (Ravaging)
+            --[34872] = true, -- The Ravager (Ravaging)
 
-            [29121] = true, -- Armor of the Alessian Order (of the Alessian Order)
+            --[29121] = true, -- Armor of the Alessian Order (of the Alessian Order)
 
-            [47348] = true, -- Bastion of the Heartland (of the Heartland)
-            [47350] = true, -- Bastion of the Heartland (of the Heartland)
+            --[47348] = true, -- Bastion of the Heartland (of the Heartland)
+            --[47350] = true, -- Bastion of the Heartland (of the Heartland)
 
-            [32737] = true, -- The Juggernaut (of the Juggernaut)
-            [34512] = true, -- The Juggernaut (of the Juggernaut)
+            --[32737] = true, -- The Juggernaut (of the Juggernaut)
+            --[34512] = true, -- The Juggernaut (of the Juggernaut)
 
-            [47356] = true, -- Blessing of the Potentates (of the Potentates)
+            --[47356] = true, -- Blessing of the Potentates (of the Potentates)
 
             -- Rewards for the Worthy Sets
-            [76946] = true, -- Fasalla's Guile (of Fasalla's Guile)
-            [76947] = true, -- Fasalla's Guile (of Fasalla's Guile)
+            --[76946] = true, -- Fasalla's Guile (of Fasalla's Guile)
+            --[76947] = true, -- Fasalla's Guile (of Fasalla's Guile)
 
-            [76949] = true, -- Warrior's Fury (of Fury)
-            [76950] = true, -- Warrior's Fury (of Fury)
-            [76951] = true, -- 10 Stack Count FX Dummy (of Fury)
+            --[76949] = true, -- Warrior's Fury (of Fury)
+            --[76950] = true, -- Warrior's Fury (of Fury)
+            --[76951] = true, -- 10 Stack Count FX Dummy (of Fury)
 
-            [76940] = true, -- Leki's Focus (Leki's)
+            --[76940] = true, -- Leki's Focus (Leki's)
 
-            [76932] = true, -- Marksman's Crest (Markman's)
+            --[76932] = true, -- Marksman's Crest (Markman's)
 
-            [76934] = true, -- Robes of Transmutation (Transmutation)
-            [76936] = true, -- Robes of Transmutation (Transmutation)
+            --[76934] = true, -- Robes of Transmutation (Transmutation)
+            --[76936] = true, -- Robes of Transmutation (Transmutation)
 
-            [76937] = true, -- Vicious Death (of Vicious Death)
-            [82987] = true, -- Vicious Death (of Vicious Death)
-            --[76938] = true, -- Vicious Death (of Vicious Death)
+            --[76937] = true, -- Vicious Death (of Vicious Death)
+            --[82987] = true, -- Vicious Death (of Vicious Death)
+            ----[76938] = true, -- Vicious Death (of Vicious Death)
 
             -- Maelstrom Arena Sets
-            [71248] = true, -- Elemental Succession (of Succession)
-            [71311] = true, -- Stack Counter (of Succession)
-            [71264] = true, -- Fire Ascendant (of Succession)
-            [71265] = true, -- Lightning Ascendant (of Succession)
-            [71266] = true, -- Frost Ascendant (of Succession)
+            --[71248] = true, -- Elemental Succession (of Succession)
+            --[71311] = true, -- Stack Counter (of Succession)
+            --[71264] = true, -- Fire Ascendant (of Succession)
+            --[71265] = true, -- Lightning Ascendant (of Succession)
+            --[71266] = true, -- Frost Ascendant (of Succession)
 
-            [71644] = true, -- Winterborn (Winterborn)
-            [71647] = true, -- Winterborn (Winterborn)
-            [73296] = true, -- Winterborn Snare (Winterborn)
-            [71646] = true, -- Winterborn (Winterborn)
+            --[71644] = true, -- Winterborn (Winterborn)
+            --[71647] = true, -- Winterborn (Winterborn)
+            --[73296] = true, -- Winterborn Snare (Winterborn)
+            --[71646] = true, -- Winterborn (Winterborn)
 
-            [71603] = true, -- Hunt Leader (of the Hunt)
-            [71604] = true, -- Mark of the Hunt Leader (of the Hunt)
-            [71605] = true, -- Hunt Leader (of the Hunt)
-            [74106] = true, -- Hunt Leader (of the Hunt)
-            [71191] = true, -- Para Bellum (Para Bellum)
-            [71194] = true, -- Para Bellum Timer (Para Bellum)
-            [71193] = true, -- Para Bellum Shield (Para Bellum)
+            --[71603] = true, -- Hunt Leader (of the Hunt)
+            --[71604] = true, -- Mark of the Hunt Leader (of the Hunt)
+            --[71605] = true, -- Hunt Leader (of the Hunt)
+            --[74106] = true, -- Hunt Leader (of the Hunt)
+            --[71191] = true, -- Para Bellum (Para Bellum)
+            --[71194] = true, -- Para Bellum Timer (Para Bellum)
+            --[71193] = true, -- Para Bellum Shield (Para Bellum)
 
-            [71180] = true, -- Glorious Defender (of Glory)
-            [71188] = true, -- Glorious Defense (of Glory)
-            [71186] = true, -- Dodge Trigger (of Glory)
-            [71101] = true, -- Permafrost (of Permafrost)
+            --[71180] = true, -- Glorious Defender (of Glory)
+            --[71188] = true, -- Glorious Defense (of Glory)
+            --[71186] = true, -- Dodge Trigger (of Glory)
+            --[71101] = true, -- Permafrost (of Permafrost)
 
             -- Dragonstar Arena Sets
-            [29103] = true, -- Archer's Mind (of the Archer's Mind)
-            [57167] = true, -- Archer's Mind (of the Archer's Mind)
-            [32806] = true, -- Robes of Destruction Mastery (of Destruction Mastery)
-            [29114] = true, -- Footman's Fortune (of the Footman)
-            [29096] = true, -- Minor Mending (of the Healer)
+            --[29103] = true, -- Archer's Mind (of the Archer's Mind)
+            --[57167] = true, -- Archer's Mind (of the Archer's Mind)
+            --[32806] = true, -- Robes of Destruction Mastery (of Destruction Mastery)
+            --[29114] = true, -- Footman's Fortune (of the Footman)
+            --[29096] = true, -- Minor Mending (of the Healer)
 
             -- Disguises
 
@@ -11112,9 +11123,10 @@ debugAuras = {
             --[85352] = true, -- Covered in Mud -- Mud Ball Merriment (Likely unused)
 
             -- Witches Harvest
-            --[83775] = true, -- Event - Q5742 WitchFest Intro -- The Witchmother's Bargain
-            --[83820] = true, -- Event Q5742 WitchFest Done -- The Witchmother's Bargain
-            --[82898] = true, -- Event - WitchFest Theater -- The Witchmother's Bargain
+            [83775] = true, -- Event - Q5742 WitchFest Intro (The Witchmother's Bargain)
+            [83820] = true, -- Event Q5742 WitchFest Done (The Witchmother's Bargain)
+            [85055] = true, -- Crows (The Witchmother's Bargain)
+            [82898] = true, -- Event - WitchFest Theater (The Witchmother's Bargain)
 
             -- Anniversary Event
             --[88874] = true, -- Q5936 Destroy Voucher 2017 --
