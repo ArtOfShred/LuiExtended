@@ -6,7 +6,6 @@ LUIE.author      = "ArtOfShred, psypanda & SpellBuilder"
 LUIE.version     = "5.6.1"
 LUIE.website     = "http://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github      = "https://github.com/ArtOfShred/LuiExtended"
-LUIE.components  = {}
 
 -- Saved variables options
 LUIE.SV          = nil
@@ -157,20 +156,9 @@ local function LUIE_LoadScreen()
     end
 end
 
--- Runs on the EVENT_ACTION_LAYER_POPPED and EVENT_ACTION_LAYER_PUSHED listeners.
--- This handler is used to hide and show all GUI elements when player opens any sort of menu.
-local function LUIE_ToggleVisibility(eventCode, layerIndex, activeLayerIndex)
-    local hidden = ( activeLayerIndex > 3 )
-    for _, control in pairs( LUIE.components ) do
-        control:SetHidden( hidden )
-    end
-end
-
 local function LUIE_RegisterEvents()
     eventManager:RegisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED, LUIE_LoadScreen)
-    eventManager:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_POPPED, LUIE_ToggleVisibility)
-    eventManager:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_PUSHED, LUIE_ToggleVisibility)
-    -- Events registerd for Slash Commands
+    -- Events registered for Slash Commands
     -- TODO: Only register if Slash Commands module loaded
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, LUIE.GuildAddedSelf)
     eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, LUIE.GuildRemovedSelf)

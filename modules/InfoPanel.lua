@@ -321,12 +321,6 @@ function PNL.Initialize( enabled )
     CreateUIControls()
     PNL.RearrangePanel()
 
-    -- Add control to global list so it can be hidden
-	--[[
-    LUIE.components[ moduleName ] = uiPanel
-    LUIE.components[ moduleName .. "_FakeControl" ] = fakeControl
-	]]--
-
     -- Panel position
     if PNL.SV.position ~= nil and #PNL.SV.position == 2 then
         uiPanel:SetAnchor( CENTER, GuiRoot, TOPLEFT, PNL.SV.position[1], PNL.SV.position[2] )

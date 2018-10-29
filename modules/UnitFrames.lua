@@ -1301,14 +1301,6 @@ local function CreateCustomFrames()
     -- Apply fonts
     UF.CustomFramesApplyFont()
 
-    --[[
-    -- Add this top level window to global controls list, so it can be hidden
-    for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget" } ) do
-        if UF.CustomFrames[unitTag] then
-            LUIE.components[ moduleName .. "_CustomFrame_" .. unitTag ] = UF.CustomFrames[unitTag].tlw
-        end
-    end
-    ]]--
 end
 
 -- Main entry point to this module
