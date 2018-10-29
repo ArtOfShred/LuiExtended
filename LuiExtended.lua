@@ -158,10 +158,12 @@ end
 
 local function LUIE_RegisterEvents()
     eventManager:RegisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED, LUIE_LoadScreen)
-    -- Events registered for Slash Commands
-    -- TODO: Only register if Slash Commands module loaded
-    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, LUIE.GuildAddedSelf)
-    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, LUIE.GuildRemovedSelf)
+	-- Keep track of guilds for the /ginvite commands & Chat Announcement EVENT_GUILD_SELF_LEFT_GUILD handler
+	if LUIE.SV.SlashCommands_Enable or LUIE.SV.ChatAnnouncements_Enable then
+		LUIE.UpdateGuildData()
+		eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, LUIE.UpdateGuildData)
+		eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, LUIE.UpdateGuildData)
+	end
 end
 
 -- LuiExtended Initialization
@@ -203,9 +205,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Register global event listeners
     LUIE_RegisterEvents()
-
-    -- Keep track of guilds for the /ginvite commands
-    LUIE.InitGuildData()
 
     local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
     GetSkillAbilityInfo = function(skillType, skillIndex, abilityIndex)
@@ -800,30 +799,8 @@ function LUIE.AbbreviateNumber(number, shorten, comma)
     return number
 end
 
-function LUIE.InitGuildData()
-    GuildsIndex = GetNumGuilds()
-    LUIE.GuildIndexData = {}
-    for i = 1,GuildsIndex do
-        local id = GetGuildId(i)
-        local name = GetGuildName(id)
-        local guildAlliance = GetGuildAlliance(id)
-        LUIE.GuildIndexData[i] = {id=id, name=name, guildAlliance=guildAlliance}
-    end
-end
-
-function LUIE.GuildAddedSelf(eventCode, guildId, guildName)
-    GuildsIndex = GetNumGuilds()
-    LUIE.GuildIndexData = {}
-    for i = 1,GuildsIndex do
-        local id = GetGuildId(i)
-        local name = GetGuildName(id)
-        local guildAlliance = GetGuildAlliance(id)
-        LUIE.GuildIndexData[i] = {id=id, name=name, guildAlliance=guildAlliance}
-    end
-end
-
-function LUIE.GuildRemovedSelf(eventCode, guildId, guildName)
-    GuildsIndex = GetNumGuilds()
+function LUIE.UpdateGuildData()
+    local GuildsIndex = GetNumGuilds()
     LUIE.GuildIndexData = {}
     for i = 1,GuildsIndex do
         local id = GetGuildId(i)
