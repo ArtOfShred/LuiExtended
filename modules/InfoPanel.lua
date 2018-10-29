@@ -23,7 +23,7 @@ local colors = {
     GRAY        = { r = 0.5  , g = 0.5  , b = 0.5  },
 }
 
-local fakeControl   = {}
+--local fakeControl   = {}
 
 PNL.Enabled       = false
 PNL.SV            = nil
@@ -106,6 +106,16 @@ local function DelayBuffer(key, buffer, currentTime)
     return eval
 end
 
+local panelFragment
+
+function PNL.SetDisplayOnMap()
+	if PNL.SV.DisplayOnWorldMap then
+		sceneManager:GetScene("worldMap"):AddFragment( panelFragment )
+	else
+		sceneManager:GetScene("worldMap"):RemoveFragment( panelFragment )
+	end
+end
+
 local function CreateUIControls()
     uiPanel = UI.TopLevel( nil, {240,48})
     uiPanel:SetDrawLayer(DL_BACKDROP)
@@ -113,12 +123,14 @@ local function CreateUIControls()
     uiPanel:SetDrawLevel(1)
     --uiPanel.bg = UI.Backdrop( uiPanel, "fill", nil, nil, nil, false )
 
-    local fragment = ZO_HUDFadeSceneFragment:New(uiPanel, 0, 0)
+    panelFragment = ZO_HUDFadeSceneFragment:New(uiPanel, 0, 0)
 
-    sceneManager:GetScene("hud"):AddFragment( fragment )
-    sceneManager:GetScene("hudui"):AddFragment( fragment )
-    sceneManager:GetScene("siegeBar"):AddFragment( fragment )
-    sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
+    sceneManager:GetScene("hud"):AddFragment( panelFragment )
+    sceneManager:GetScene("hudui"):AddFragment( panelFragment )
+    sceneManager:GetScene("siegeBar"):AddFragment( panelFragment )
+    sceneManager:GetScene("siegeBarUI"):AddFragment( panelFragment )
+	
+	PNL.SetDisplayOnMap() -- Add to map scene if the option is enabled.
 
     uiPanel.div = UI.Texture( uiPanel, nil, nil, "/esoui/art/miscellaneous/horizontaldivider.dds", DL_BACKGROUND, false )
     uiPanel.div:SetAnchor( LEFT, uiPanel, LEFT, -60, 0 )
@@ -310,8 +322,10 @@ function PNL.Initialize( enabled )
     PNL.RearrangePanel()
 
     -- Add control to global list so it can be hidden
+	--[[
     LUIE.components[ moduleName ] = uiPanel
     LUIE.components[ moduleName .. "_FakeControl" ] = fakeControl
+	]]--
 
     -- Panel position
     if PNL.SV.position ~= nil and #PNL.SV.position == 2 then
@@ -368,12 +382,12 @@ function PNL.SetScale()
 end
 
 -- Fake Component callback function used by main module
-function fakeControl.SetHidden(self, hidden)
+--[[function fakeControl.SetHidden(self, hidden)
     -- update not more then once every 5 second
     if not hidden and DelayBuffer( "InfoPanelFakeControl", 5000 ) then
         PNL.OnUpdate60()
     end
-end
+end]]--
 
 -- Listens to EVENT_INVENTORY_SINGLE_SLOT_UPDATE and EVENT_LOOT_RECEIVED
 function PNL.OnBagUpdate()

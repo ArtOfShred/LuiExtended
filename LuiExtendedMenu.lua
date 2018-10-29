@@ -670,6 +670,16 @@ function LUIE_CreateSettings()
                 name = GetString(SI_PLAYER_MENU_MISC),
                 width = "full",
             },
+			{
+				type = "checkbox",
+				name = "Display Info Panel on World Map Screen", -- TODO: Localize
+				tooltip = "Display the Info Panel when you are viewing the world map. This option can be toggled if your Info Panel position clips with any important elements on the World Map screen.", -- TODO: Localize
+				getFunc = function() return LUIE.InfoPanel.SV.DisplayOnWorldMap end,
+				setFunc = function(value) LUIE.InfoPanel.SV.DisplayOnWorldMap = value LUIE.InfoPanel.SetDisplayOnMap() end,
+				width = "full",
+				default = false,
+				disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
+			},
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_PNL_DISABLECOLORSRO),
