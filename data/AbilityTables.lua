@@ -329,6 +329,8 @@ A.Set_Daedric_Trickery              = 92769
 A.Set_Might_of_the_Lost_Legion      = 113311
 A.Set_Naga_Shaman                   = 113287
 A.Set_Adept_Rider                   = 106775
+A.Set_Sloads_Semblance              = 106797
+A.Set_Vykosa                        = 111352
 
 A.Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
 

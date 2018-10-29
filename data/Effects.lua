@@ -3024,11 +3024,13 @@ E.EffectOverride = {
     [99781] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds' }, -- Grand Rejuvenation (Master Restoration Staff)
 
     -- Monster Sets
-    [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds' }, -- Blood Spawn (Blood Spawn)
+    [111505] = { icon = 'esoui/art/icons/vmh_killhulks.dds', tooltip = T.Set_Balorgh }, -- Balorgh (Balorgh)
+    [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds', tooltip = T.Set_Blood_Spawn }, -- Blood Spawn (Blood Spawn)
     [61274] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds' }, -- Blood Spawn (Blood Spawn)
+    [59590] = { tooltip = T.Set_Bogdan_the_Nightflame }, -- Imperial Prison Item Set (Bogdan the Nightflame)
     [59591] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = A.Set_Bogdan_the_Nightflame }, -- Bogdan Totem (Bogdan the Nightflame)
     [81069] = { hide = true }, -- Chokethorn (Chokethorn)
-    [81077] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_chokethorn.dds' }, -- Chokethorn (Chokethorn)
+    [81077] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', tooltip = T.Set_Chokethorn }, -- Chokethorn (Chokethorn)
     [97900] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds', forcedContainer = 'short' }, -- Domihaus (Domihaus)
     [97899] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds' }, -- Domihaus (Domihaus)
     [97896] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_fire.dds', forcedContainer = 'short' }, -- Domihaus (Domihaus)
@@ -3087,6 +3089,7 @@ E.EffectOverride = {
     [59596] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_valkyn_skoria.dds' }, -- Valkyn Skoria
     [61273] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_valkyn_skoria.dds' }, -- Valkyn Skoria
     [80490] = { icon = 'esoui/art/icons/achievement_update11_dungeons_035.dds' }, -- Velidreth
+    [111354] = { tooltip = A.Set_Vykosa }, -- Major Maim (Vykosa)
     [102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds' }, -- Zaan
 
     -- Crafted Sets
@@ -3135,6 +3138,7 @@ E.EffectOverride = {
     [106784] = { tooltip = T.Set_Adept_Rider }, -- Dustcloud (Adept Rider's)
     [106804] = { icon = 'esoui/art/icons/achievement_su_mainquest_6.dds', name = A.Set_Nocturnals_Favor }, -- Nocturnal's Heal (Nocturnal's Favor)
     [106798] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sloads_semblance.dds', tooltip = T.Generic_Oblivion }, -- Sload's Semblance (Sload's)
+    [113092] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sloads_semblance.dds', name = A.Set_Sloads_Semblance, hide = true }, -- Sload's Projectile (Sloads)
 
     [113312] = { stack = 3, tooltip = A.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
     [114945] = { stack = 2, tooltip = A.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)

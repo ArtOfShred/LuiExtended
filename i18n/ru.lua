@@ -2232,13 +2232,13 @@ local strings = {
     SI_LUIE_SKILL_EMPOWER_TP =                           "Increase the damage of your next Light Attack by |cffffff40|r%.",
 
     SI_LUIE_SKILL_TEST_TP =                              "This is a test effect.",
-	
+
 	SI_LUIE_SKILL_PHASE_TP =							 "Increase Physical and Spell Resistance by |cFFFFFF660|r for |cFFFFFF3|r seconds.",
 	SI_LUIE_SKILL_UNCHAINED_TP = 						 "Reduce the cost of your next Stamina ability used within |cFFFFFF5|r seconds by |cFFFFFF80|r%.",
 	SI_LUIE_SKILL_FORESIGHT_TP = 						 "Reduce the cost of your next Magicka ability used within |cFFFFFF7|r seconds by |cFFFFFF80|r%.",
 	SI_LUIE_SKILL_RETALIATION_TP =						 "Your next Light Attack used within |cFFFFFF7|r seconds deals |cFFFFFF30|r% additional damage.",
 	SI_LUIE_SKILL_OPPORTUNIST_TP = 						 "Your next Physical Damage ability used within |cFFFFFF7|r seconds deals |cFFFFFF15|r% additional damage.",
-	
+
     SI_LUIE_SKILL_GENERIC_FIRE =                         "Fire",
     SI_LUIE_SKILL_GENERIC_FROST =                        "Frost",
 
@@ -2256,7 +2256,8 @@ local strings = {
 
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP =             "Absorbing damage for |cFFFFFF<<1>>|r seconds.",
 
-    SI_LUIE_SKILL_GENERIC_HOT_TIME_2SEC_TP =             "Restoring Health every |cFFFFFF2|r seconds over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP =             "Restoring Health every |cFFFFFF1|r second over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_HOT_TIME_XSEC_TP =             "Restoring Health every |cFFFFFF<<1>>|r seconds over |cFFFFFF<<2>>|r seconds.",
 
     SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Marked. You are visible to the enemy that marked you even when in stealth.",
     SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Revealed. You are unable to stealth.",
@@ -2281,10 +2282,15 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP =     "Increase the cost of Magicka abilities by |cffffff10|r%.",
     SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP =     "Increase the cost of Stamina abilities by |cffffff10|r%.",
 
+    SI_LUIE_SKILL_SET_GENERIC_ARMOR_SPELL_RESIST =       "Increase Physical and Spell Resistance for |cffffff<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_SET_BALORGH =                          "Increase Weapon and Spell Damage by twice the cost of your last Ultimate used for |cFFFFFF10|r seconds.",
+
     SI_LUIE_SKILL_SET_ALESSIAS_BULWARK =                 "Reduce Weapon Damage by |cffffff10|r% for |cFFFFFF5|r seconds.",
     SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST =                 "Increase Weapon and Spell Damage for |cFFFFFF15|r seconds.",
+    SI_LUIE_SKILL_SET_ETERNAL_HUNT =                     "Detonates when an enemy comes close, dealing Poison Damage and immoblizing them for |cFFFFFF1.5|r seconds.",
+    SI_LUIE_SKILL_SET_MORKULDIN =                        "An animated weapon follows you and attacks your enemies for |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_SET_TAVAS_FAVOR =                      "Generating |cFFFFFF9|r Ultimate over |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_SET_ARMOR_MASTER =                     "Increase Physical and Spell Resistance for |cffffff10|r seconds.",
     SI_LUIE_SKILL_SET_TRIAL_BY_FIRE =                    "Increase <<1>> Resistance for |cffffff4|r seconds.",
     SI_LUIE_SKILL_SET_VARENS_LEGACY =                    "Increase the damage of your next direct damage area of effect attack.",
     SI_LUIE_SKILL_SET_MECHANICAL_ACUITY =                "Increase Weapon and Spell Critical by |cFFFFFF100|r% for |cffffff5|r seconds.",
