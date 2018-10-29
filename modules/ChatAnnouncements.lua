@@ -3412,7 +3412,8 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
             g_isLooted = false
             eventManager:UnregisterForUpdate(moduleName .. "ResetLooted")
         end
-        eventManager:RegisterForUpdate(moduleName .. "ResetLooted", 200, ResetIsLooted )
+		eventManager:UnregisterForUpdate(moduleName .. "ResetLooted")
+        eventManager:RegisterForUpdate(moduleName .. "ResetLooted", 100, ResetIsLooted )
     end
 
     -- If the player pickpockets an item
@@ -3423,7 +3424,8 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
             g_isPickpocketed = false
             eventManager:UnregisterForUpdate(moduleName .. "ResetPickpocket")
         end
-        eventManager:RegisterForUpdate(moduleName .. "ResetPickpocket", 200, ResetIsPickpocketed )
+		eventManager:UnregisterForUpdate(moduleName .. "ResetPickpocket")
+        eventManager:RegisterForUpdate(moduleName .. "ResetPickpocket", 100, ResetIsPickpocketed )
     end
 
     -- Return right now if we don't have group loot set to display
@@ -3713,7 +3715,8 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             g_isStolen = false
             eventManager:UnregisterForUpdate(moduleName .. "ResetStolen")
         end
-        eventManager:RegisterForUpdate(moduleName .. "ResetStolen", 200, ResetIsStolen )
+		eventManager:UnregisterForUpdate(moduleName .. "ResetStolen")
+        eventManager:RegisterForUpdate(moduleName .. "ResetStolen", 100, ResetIsStolen )
     end
 
     local receivedBy = ""
