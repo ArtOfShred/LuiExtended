@@ -1409,6 +1409,7 @@ function UF.Initialize( enabled )
         eventManager:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL,         UF.OnSiege )
         eventManager:RegisterForEvent(moduleName, EVENT_LEAVE_RAM_ESCORT,          UF.OnSiege )
         eventManager:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED,     UF.OnMount )
+		eventManager:RegisterForEvent(moduleName, EVENT_ABILITY_LIST_CHANGED,	   UF.AbilityListChange ) -- TODO: Temporary fix
         eventManager:RegisterForEvent(moduleName, EVENT_EXPERIENCE_UPDATE,         UF.OnXPUpdate )
         eventManager:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_GAINED,     UF.OnChampionPointGained )
         eventManager:RegisterForEvent(moduleName, EVENT_GROUP_SUPPORT_RANGE_UPDATE,    UF.OnGroupSupportRangeUpdate )
@@ -2500,6 +2501,11 @@ end
 -- Runs on the EVENT_MOUNTED_STATE_CHANGED listener.
 function UF.OnMount(eventCode, mounted)
     UF.CustomFramesSetupAlternative( IsWerewolf(), false, mounted )
+end
+
+-- TODO: Temporarily listener for EVENT_ABILITY_LIST_CHANGED to fix issue where no EVENT_MOUNTED_STATE_CHANGED is triggering when Hard Dismounting or Crouching.
+function UF.AbilityListChange(eventCode)
+	UF.CustomFramesSetupAlternative( IsWerewolf(), ( IsPlayerControllingSiegeWeapon() or IsPlayerEscortingRam() ), IsMounted() )
 end
 
 -- Runs on the EVENT_EXPERIENCE_UPDATE listener.

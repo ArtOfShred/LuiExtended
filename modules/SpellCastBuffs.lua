@@ -438,6 +438,7 @@ function SCB.Initialize( enabled )
 
     -- Mount Events
     eventManager:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED, SCB.MountStatus)
+	eventManager:RegisterForEvent(moduleName, EVENT_ABILITY_LIST_CHANGED, SCB.AbilityListChange ) -- TODO: Temporary fix
     eventManager:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_USE_RESULT, SCB.CollectibleUsed)
 
     -- Inventory Events
@@ -895,6 +896,14 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
             }
         end
     end
+end
+
+-- TODO: Temporarily listener for EVENT_ABILITY_LIST_CHANGED to fix issue where no EVENT_MOUNTED_STATE_CHANGED is triggering when Hard Dismounting or Crouching.
+function SCB.AbilityListChange(eventCode)
+	local isMounted = IsMounted()
+	if not isMounted then
+		SCB.MountStatus(false)
+	end
 end
 
 function SCB.MountStatus(eventCode, mounted)
