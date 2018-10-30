@@ -2239,27 +2239,22 @@ local strings = {
 	SI_LUIE_SKILL_RETALIATION_TP =						 "Your next Light Attack used within |cFFFFFF7|r seconds deals |cFFFFFF30|r% additional damage.",
 	SI_LUIE_SKILL_OPPORTUNIST_TP = 						 "Your next Physical Damage ability used within |cFFFFFF7|r seconds deals |cFFFFFF15|r% additional damage.",
 
-    SI_LUIE_SKILL_GENERIC_FIRE =                         "Fire",
-    SI_LUIE_SKILL_GENERIC_FROST =                        "Frost",
-
-
-
     SI_LUIE_SKILL_GENERIC_BLEED_TP =                     "Afflicted with Bleeding damage over time.",
     SI_LUIE_SKILL_GENERIC_DISEASE_TP =                   "Afflicted with Disease damage over time.",
     SI_LUIE_SKILL_GENERIC_POISON_TP =                    "Afflicted with Poison damage over time.",
-    SI_LUIE_SKILL_GENERIC_BURN_TP =                      "Afflicted with Fire damage over time.",
+    SI_LUIE_SKILL_GENERIC_BURN_TP =                      "Afflicted with Flame damage over time.",
     SI_LUIE_SKILL_GENERIC_FREEZE_TP =                    "Afflicted with Frost damage over time.",
     SI_LUIE_SKILL_GENERIC_SHOCK_TP =                     "Afflicted with Shock damage over time.",
 	SI_LUIE_SKILL_GENERIC_OBLIVION_TP =					 "Afflicted with Oblivion damage over time.",
 
-    SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Restoring Health every second over time.",
-    SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Restoring Magicka every second over time.",
-    SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Restoring Stamina every second over time.",
+    SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Healing every |cFFFFFF<<1>>|r second over time.",
+    SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Restoring Magicka every |cFFFFFF<<1>>|r second over time.",
+    SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Restoring Stamina every |cFFFFFF<<1>>|r second over time.",
 
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP =             "Absorbing damage for |cFFFFFF<<1>>|r seconds.",
 
-    SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP =             "Restoring Health every |cFFFFFF1|r second over |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_GENERIC_HOT_TIME_XSEC_TP =             "Restoring Health every |cFFFFFF<<1>>|r seconds over |cFFFFFF<<2>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP =             "Healing every |cFFFFFF1|r second over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_HOT_TIME_XSEC_TP =             "Healing every |cFFFFFF<<1>>|r seconds over |cFFFFFF<<2>>|r seconds.",
 
     SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Marked. You are visible to the enemy that marked you even when in stealth.",
     SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Revealed. You are unable to stealth.",
@@ -2287,16 +2282,34 @@ local strings = {
     SI_LUIE_SKILL_SET_GENERIC_ARMOR_SPELL_RESIST =       "Increase Physical and Spell Resistance for |cffffff<<1>>|r seconds.",
 
     SI_LUIE_SKILL_SET_BALORGH =                          "Increase Weapon and Spell Damage by twice the cost of your last Ultimate used for |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_SET_BOGDAN =                           "Healing allies within |cFFFFFF5|r meters of the totem every |cFFFFFF1|r second for |cFFFFFF6|r seconds.",
+    SI_LUIE_SKILL_SET_DOMIHAUS_BUFF_STAMINA =            "Increase Weapon Damage while standing within the ring.",
+    SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE_STAMINA =          "Dealing Physical Damage to enemies on the edge of the ring every |cffffff1|r second for |cffffff10|r seconds. Increase Weapon Damage while standing within the ring.",
+    SI_LUIE_SKILL_SET_DOMIHAUS_BUFF_MAGICKA =            "Increase Spell Damage while standing within the ring.",
+    SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE_MAGICKA =          "Dealing Flame Damage to enemies on the edge of the ring every |cffffff1|r second for |cffffff10|r seconds. Increase Spell Damage while standing within the ring.",
+    SI_LUIE_SKILL_SET_EARTHGORE =                        "Healing allies in the area every |cFFFFFF1|r second for |cFFFFFF6|r seconds.",
+    SI_LUIE_SKILL_SET_GROTHDARR =                        "Dealing Flame Damage to enemies within |cFFFFFF8|r meters every |cFFFFFF1|r second for |cFFFFFF5|r seconds.",
+    SI_LUIE_SKILL_SET_ICEHEART =                         "Absorbing damage for |cFFFFFF<<1>>|r seconds. Dealing Frost Damage to all enemies within |cFFFFFF5|r meters every |cFFFFFF1|r second for |cFFFFFF5|r seconds while the damage shield holds.",
+    SI_LUIE_SKILL_SET_ILAMBRIS =                         "Dealing <<1>> Damage to all enemies within a |cFFFFFF4|r meter radius every |cFFFFFF1|r second for |cFFFFFF5|r seconds.",
+    SI_LUIE_SKILL_SET_LORD_WARDEN_GROUND =               "Increase Physical and Spell Resistance while standing within |cFFFFFF8|r meters of the shadow orb.",
+    SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF =                 "Increase Physical and Spell Resistance of allies standing within |cFFFFFF8|r meters of the shadow orb for |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_SET_MALUBETH =                         "Draining Health every |cFFFFFF0.5|r seconds over |cFFFFFF4|r seconds while the beam holds.",
+    SI_LUIE_SKILL_SET_MAW_OF_THE_INFERNAL =              "A fire breathing Daedroth follows you and attacks your enemies for |cFFFFFF15|r seconds.",
+    SI_LUIE_SKILL_SET_MIGHTY_CHUDAN =                    "Mighty Chudan",
+    SI_LUIE_SKILL_SET_MOLAG_KENA_OVERKILL_TP =           "Increase Weapon and Spell Damage and increase the cost of your abilities by |cFFFFFF20|r% for |cFFFFFF6|r seconds.",
+    SI_LUIE_SKILL_SET_PIRATE_SKELETON_TP =               "Gain Major Protection and Minor Defile for |cFFFFFF12|r seconds, reducing your damage taken by |cFFFFFF30|r% but reducing your healing received and Health Recovery by |cFFFFFF15|r%.",
+    SI_LUIE_SKILL_SET_SENTINEL_OF_REKUGAMZ_TP =          "Healing and restoring Stamina to allies within |cffffff5|r meters of the Dwemer Spider every |cffffff1|r second for |cffffff8|r seconds.",
 
     SI_LUIE_SKILL_SET_ALESSIAS_BULWARK =                 "Reduce Weapon Damage by |cffffff10|r% for |cFFFFFF5|r seconds.",
     SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST =                 "Increase Weapon and Spell Damage for |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_SET_ETERNAL_HUNT =                     "Detonates when an enemy comes close, dealing Poison Damage and immoblizing them for |cFFFFFF1.5|r seconds.",
     SI_LUIE_SKILL_SET_MORKULDIN =                        "An animated weapon follows you and attacks your enemies for |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_SET_TAVAS_FAVOR =                      "Generating |cFFFFFF9|r Ultimate over |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_SET_TRIAL_BY_FIRE =                    "Increase <<1>> Resistance for |cffffff4|r seconds.",
+    SI_LUIE_SKILL_SET_TRIAL_BY_FIRE =                    "Increase |cffffff<<1>>|r Resistance for |cffffff4|r seconds.",
     SI_LUIE_SKILL_SET_VARENS_LEGACY =                    "Increase the damage of your next direct damage area of effect attack.",
     SI_LUIE_SKILL_SET_MECHANICAL_ACUITY =                "Increase Weapon and Spell Critical by |cFFFFFF100|r% for |cffffff5|r seconds.",
     SI_LUIE_SKILL_SET_ADEPT_RIDER =                      "Dealing Physical Damage to enemies inside the dust cloud every |cffffff1|r second for |cffffff12|r seconds.",
+
 
     SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP =              "Lightning courses through your body causing all weapon attacks to deal lightning damage.",
     SI_LUIE_SKILL_MANTLES_SHADOW =                       "Mantle's Shadow",

@@ -841,100 +841,101 @@ debugAuras = {
             [81069] = true, -- Chokethorn
             [81077] = true, -- Chokethorn
 
-            --[97879] = true, -- Domihaus
-            --[97901] = true, -- Domihaus
-            --[97900] = true, -- Domihaus
-            --[97899] = true, -- Domihaus
-            --[97882] = true, -- Domihaus
-            --[97896] = true, -- Domihaus
-            --[97883] = true, -- Domihaus
+            [97879] = true, -- Domihaus
+            [97901] = true, -- Domihaus
+            [97900] = true, -- Domihaus
+            [97899] = true, -- Domihaus
+            [97882] = true, -- Domihaus
+            [97896] = true, -- Domihaus
+            [97883] = true, -- Domihaus
 
-            --[97854] = true, -- Earthgore
-            --[97855] = true, -- Earthgore
-            --[97857] = true, -- Earthgore
+            [97854] = true, -- Earthgore
+            [97855] = true, -- Earthgore
+            [97857] = true, -- Earthgore
 
-            --[84492] = true, -- Grothdarr
-            --[84504] = true, -- Grothdarr
-            --[84502] = true, -- Grothdarr
+            [84492] = true, -- Grothdarr
+            [84504] = true, -- Grothdarr
+            [84502] = true, -- Grothdarr
 
-            --[80560] = true, -- Iceheart
-            --[80561] = true, -- Iceheart
-            --[80562] = true, -- Iceheart
-            --[80563] = true, -- Iceheart
+            [80560] = true, -- Iceheart
+            [80561] = true, -- Iceheart
+            [80562] = true, -- Iceheart
+            [80563] = true, -- Iceheart
 
-            --[80524] = true, -- Ilambris
-            --[80529] = true, -- Ilambris
-            --[80526] = true, -- Ilambris
-            --[80527] = true, -- Ilambris
-            --[80525] = true, -- Ilambris
+            [80524] = true, -- Ilambris
+            [80529] = true, -- Ilambris
+            [80526] = true, -- Ilambris
+            [80527] = true, -- Ilambris
+            [80525] = true, -- Ilambris
 
-            --[81687] = true, -- Infernal Guardian
-            --[83405] = true, -- Infernal Guardian
-            --[83390] = true, -- Infernal Guardian
-            --[83393] = true, -- Infernal Guardian
-            --[83391] = true, -- Infernal Guardian
-            --[83409] = true, -- Infernal Guardian
+            [81687] = true, -- Infernal Guardian
+            [83405] = true, -- Infernal Guardian
+            [83390] = true, -- Infernal Guardian
+            [83393] = true, -- Infernal Guardian
+            [83391] = true, -- Infernal Guardian
+            [83409] = true, -- Infernal Guardian
 
-            --[80564] = true, -- Kra'gh
-            --[80566] = true, -- Kra'gh
-            --[80565] = true, -- Kra'gh
+            [80564] = true, -- Kra'gh
+            [80566] = true, -- Kra'gh
+            [80565] = true, -- Kra'gh
 
-            --[59585] = true, -- Lord Warden
-            --[59586] = true, -- Lord Warden
-            --[59587] = true, -- Lord Warden
+            [59585] = true, -- Lord Warden
+            [59586] = true, -- Lord Warden
+            [59587] = true, -- Lord Warden
 
-            --[59564] = true, -- Scourge Harvester (Malubeth)
-            --[85658] = true, -- Scourge Harvest (Malubeth)
-            --[59568] = true, -- Scourge Harvest (Malubeth)
-            --[61275] = true, -- Major Vitality (Malubeth)
-            --[59573] = true, -- Scourge Harvest (Malubeth)
+            [59564] = true, -- Scourge Harvester (Malubeth)
+            [85658] = true, -- Scourge Harvest (Malubeth)
+            [59568] = true, -- Scourge Harvest (Malubeth)
+            [61275] = true, -- Major Vitality (Malubeth)
+            [59573] = true, -- Scourge Harvest (Malubeth)
 
-            --[59507] = true, -- Maw of the Infernal (Maw of the Infernal)
-            --[48796] = true, -- DUMMY (Maw of the Infernal)
-            --[59508] = true, -- Banished Cells Item Set (Maw of the Infernal)
-            --[60974] = true, -- Jagged Claw (Maw of the Infernal)
-            --[60971] = true, -- Fiery Breath (Maw of the Infernal)
-            --[60972] = true, -- Fiery Breath (Maw of the Infernal)
-            --[60973] = true, -- Fiery Jaws (Maw of the Infernal)
+            [59507] = true, -- Maw of the Infernal (Maw of the Infernal)
+            [48796] = true, -- DUMMY (Maw of the Infernal)
+            [59508] = true, -- Banished Cells Item Set (Maw of the Infernal)
+            [60974] = true, -- Jagged Claw (Maw of the Infernal)
+            [60971] = true, -- Fiery Breath (Maw of the Infernal)
+            [60972] = true, -- Fiery Breath (Maw of the Infernal)
+            [60973] = true, -- Fiery Jaws (Maw of the Infernal)
 
-            --[80482] = true, -- Major Ward (Mighty Chudan)
-            --[91983] = true, -- Major Resolve (Mighty Chudan)
+            [80482] = true, -- Major Ward (Mighty Chudan)
+            [91983] = true, -- Major Resolve (Mighty Chudan)
 
-            --[66792] = true, -- Molag Kena
-            --[66808] = true, -- Molag Kena
-            --[66812] = true, -- Overkill
+            [66792] = true, -- Molag Kena (Molag Kena)
+            [66808] = true, -- Molag Kena (Molag Kena)
+            [66812] = true, -- Overkill (Molag Kena)
 
-            --[59592] = true, -- Nerien'eth
-            --[59594] = true, -- Crpyt of Hearts Item Set
-            --[59593] = true, -- Lich Crystal
+            [59592] = true, -- Nerien'eth
+            [59594] = true, -- Crpyt of Hearts Item Set
+            [59593] = true, -- Lich Crystal
 
-            --[80501] = true, -- Pirate Skeleton
-            --[98421] = true, -- Pirate Skeleton
-            --[98419] = true, -- Pirate Skeleton
-            --[98420] = true, -- Pirate Skeleton
-            --[81675] = true, -- Pirate Skeleton
-            --[83288] = true, -- Pirate Skeleton
-            --[83287] = true, -- Pirate Skeleton
-            --[80853] = true, -- Pirate Skeleton
-            --[85637] = true, -- Pirate Skeleton
+            [80501] = true, -- Pirate Skeleton
+            [98421] = true, -- Pirate Skeleton
+            [98419] = true, -- Pirate Skeleton
+            [98420] = true, -- Pirate Skeleton
+            [81675] = true, -- Pirate Skeleton
+            [83288] = true, -- Pirate Skeleton
+            [83287] = true, -- Pirate Skeleton
+            [80853] = true, -- Pirate Skeleton
+            [85637] = true, -- Pirate Skeleton
 
-            --[80599] = true, -- Selene
-            --[80607] = true, -- Dummy
-            --[80600] = true, -- Selene
-            --[80604] = true, -- Selene
-            --[80609] = true, -- Dummy
-            --[80606] = true, -- Selene
+            [80599] = true, -- Selene
+            --[11317] = true, -- Generic Self PermaStun
+            [80607] = true, -- Dummy
+            [80600] = true, -- Selene
+            [80604] = true, -- Selene
+            [80609] = true, -- Dummy
+            [80606] = true, -- Selene
 
-            --[80542] = true, -- Sellistrix
-            --[80545] = true, -- Sellistrix
-            --[80544] = true, -- Sellistrix
-            --[80549] = true, -- Sellistrix
+            [80542] = true, -- Sellistrix
+            [80545] = true, -- Sellistrix
+            [80544] = true, -- Sellistrix
+            [80549] = true, -- Sellistrix
 
-            --[81035] = true, -- Sentinel of Rkugamz
-            --[81036] = true, -- Sentinel of Rkugamz
-            --[81037] = true, -- Sentinel of Rkugamz
-            --[81038] = true, -- Sentinel of Rkugamz
-            --[81041] = true, -- Sentinel of Rkugamz
+            [81035] = true, -- Sentinel of Rkugamz
+            [81036] = true, -- Sentinel of Rkugamz
+            [81037] = true, -- Sentinel of Rkugamz
+            [81038] = true, -- Sentinel of Rkugamz
+            [81041] = true, -- Sentinel of Rkugamz
 
             --[80951] = true, -- Shadowrend
             --[80955] = true, -- Forward Charge
@@ -2160,7 +2161,6 @@ debugAuras = {
 
             -- BREAK FREE
             [16565] = true, -- Break Free
-            [16566] = true, -- CC Immunity
 
             -- MUNDUS STONE EVENTS
             [14031] = true, -- Mundus Use
@@ -2193,8 +2193,7 @@ debugAuras = {
             --[61737] = true, -- Empower
             [41952] = true, -- Generic Fear Snare
             [55080] = true, -- Pet Hidden
-            [28301] = true, -- Ability CC Immunity
-            [38117] = true, -- CC Immunity
+            [28301] = true, -- Crowd Control Immunity
 
             -- TAUNT EFFECTS
             [38254] = true, -- Taunt

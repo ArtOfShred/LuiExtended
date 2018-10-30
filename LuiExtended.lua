@@ -484,6 +484,10 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     if LUIE.Effects.TooltipNameOverride[abilityId] then
                         thirdLine = LUIE.Effects.TooltipNameOverride[abilityId]
                     end
+
+                    -- Change effect type if needed
+                    if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].type then effectType = LUIE.Effects.EffectOverride[abilityId].type end
+
                     if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
                         local effectsRow = effectsRowPool:AcquireObject()
                         effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, buffName))

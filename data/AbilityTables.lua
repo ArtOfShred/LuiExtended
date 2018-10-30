@@ -331,6 +331,8 @@ A.Set_Naga_Shaman                   = 113287
 A.Set_Adept_Rider                   = 106775
 A.Set_Sloads_Semblance              = 106797
 A.Set_Vykosa                        = 111352
+A.Set_Mighy_Chudan                  = GetString(SI_LUIE_SKILL_SET_MIGHTY_CHUDAN)
+A.Set_Pirate_Skeleton               = 80501
 
 A.Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
 
