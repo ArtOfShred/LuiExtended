@@ -89,13 +89,13 @@ UF.D = {
     CustomColourShield               = { 1      , 192/255, 0       }, -- .a=0.5 for overlay and .a = 1 for separate
     CustomColourMagicka              = { 0      ,  83/255, 209/255 },
     CustomColourStamina              = {  28/255, 177/255, 0       },
-    CustomColourDPS                  = { 130/255, 99/255, 65/255 },
+    CustomColourDPS                  = { 130/255,  99/255, 65/255  },
     CustomColourHealer               = { 117/255, 077/255, 135/255 },
     CustomColourTank                 = { 133/255, 018/255, 013/255 },
-    CustomColourDragonknight         = { 255/255, 125/255, 35/255 },
-    CustomColourNightblade           = { 255/255, 51/255, 49/255 },
-    CustomColourSorcerer             = { 75/255, 83/255, 247/255 },
-    CustomColourTemplar              = { 255/255, 240/255, 95/255 },
+    CustomColourDragonknight         = { 255/255, 125/255, 35/255  },
+    CustomColourNightblade           = { 255/255, 51/255,  49/255  },
+    CustomColourSorcerer             = { 75/255,  83/255,  247/255 },
+    CustomColourTemplar              = { 255/255, 240/255, 95/255  },
     CustomColourWarden               = { 136/255, 245/255, 125/255 },
     CustomShieldBarSeparate          = false,
     CustomShieldBarHeight            = 10,
@@ -2314,12 +2314,10 @@ function UF.UpdateAttribute( attributeFrame, powerValue, powerEffectiveMax, shie
     end
 end
 
--- Updates title for unit if changed, and also reanchors buffs or toggles display on/off if the unittag had no title selected previously
--- Called from EVENT_TITLE_UPDATE
--- Called from EVENT_RANK_POINT_UPDATE
+-- Updates title for unit if changed, and also re-anchors buffs or toggles display on/off if the unitTag had no title selected previously
+-- Called from EVENT_TITLE_UPDATE & EVENT_RANK_POINT_UPDATE
 function UF.TitleUpdate( eventCode, unitTag )
-    -- TODO: Doesn't seem to be an event handler for AVA Rank change, would be nice to have one for this purpose.
-    UF.UpdateStaticControls( g_DefaultFrames[unitTag] )
+    UF.UpdateStaticControls( g_DefaultFrames[unitTag] )`
     UF.UpdateStaticControls( UF.CustomFrames[unitTag] )
     UF.UpdateStaticControls( g_AvaCustFrames[unitTag] )
 end
