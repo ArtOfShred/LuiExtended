@@ -158,7 +158,7 @@ A.Proc_Diseased                     = 21925
 A.Proc_Chill                        = 21481
 A.Proc_Chilled                      = 7145
 A.Proc_Poisoned                     = 21929
-A.Proc_Concussion                   = GetString(SI_LUIE_SKILL_CONCUSSED)
+A.Proc_Concussion                   = 21487
 
 -- Potions/Poisons
 A.Potion                            = 32732
@@ -309,7 +309,6 @@ A.Set_Vicious_Serpent               = 61440
 A.Set_Phoenix                       = 90935
 A.Set_Vicecannon_of_Venom           = 79464
 A.Set_Bahrahas_Curse                = 75673
-A.Set_Pirate_Skeleton               = 98421
 A.Set_Briarheart                    = 71102
 A.Set_Ironblood                     = 97626
 A.Set_Cooldown                      = GetString(SI_LUIE_SKILL_SET_COOLDOWN)
@@ -333,6 +332,16 @@ A.Set_Sloads_Semblance              = 106797
 A.Set_Vykosa                        = 111352
 A.Set_Mighy_Chudan                  = GetString(SI_LUIE_SKILL_SET_MIGHTY_CHUDAN)
 A.Set_Pirate_Skeleton               = 80501
+A.Set_Slimecraw                     = GetString(SI_LUIE_SKILL_SET_SLIMECRAW)
+A.Set_Thurvokun                     = 102089
+A.Set_Blackrose_DW                  = 113616
+A.Set_Blackrose_Resto_Staff         = 113651
+A.Set_Wisdom_of_Vanus               = 106805
+A.Set_Champion_of_the_Hist          = 113284
+A.Set_Hanus_Compassion              = 111376
+A.Set_Shield_of_Ursus               = 111437
+A.Set_Ursus_Blessing                = 112414
+A.Set_Jailers_Tenacity              = 111220
 
 A.Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
 

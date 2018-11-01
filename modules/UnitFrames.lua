@@ -2317,7 +2317,7 @@ end
 -- Updates title for unit if changed, and also re-anchors buffs or toggles display on/off if the unitTag had no title selected previously
 -- Called from EVENT_TITLE_UPDATE & EVENT_RANK_POINT_UPDATE
 function UF.TitleUpdate( eventCode, unitTag )
-    UF.UpdateStaticControls( g_DefaultFrames[unitTag] )`
+    UF.UpdateStaticControls( g_DefaultFrames[unitTag] )
     UF.UpdateStaticControls( UF.CustomFrames[unitTag] )
     UF.UpdateStaticControls( g_AvaCustFrames[unitTag] )
 end

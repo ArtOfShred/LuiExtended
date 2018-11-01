@@ -875,7 +875,7 @@ E.EffectGroundDisplay = {
     [59497] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Spawn of Mephala (Spawn of Mephala)
     [80523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', buff = false, debuff = false, ground = true }, -- Stormfist (Stormfist)
     [102093] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', buff = false, debuff = false, ground = true }, -- Thurvokun
-    [102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', buff = true, debuff = false, ground = false }, -- Zaan
+    --[102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', buff = true, debuff = false, ground = false }, -- Zaan -- Buff icon for Zaan, may reimplement if I add a way to override tooltips for these.
 
     -- Crafted Sets
     [75930] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', name = A.Set_Eternal_Hunt, buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 7 }, -- Daedric Mines (Eternal Hunt)
@@ -1822,13 +1822,14 @@ E.AddNameAura = {
 }
 
 E.SynergyNameOverride = {
-    ['Tonal Inverter'] = 'LuiExtended/media/icons/abilities/ability_quest_tonal_inverter.dds', -- Tonal Inverter (Divine Intervention)
-    [A.Skill_Blade_of_Woe] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds', -- Blade of Woe (Dark Brotherhood)
-    [A.Skill_Black_Widows] = 'esoui/art/icons/ability_undaunted_003_a.dds', -- Black Widows (Undaunted)
-    [A.Skill_Arachnophobia] = 'esoui/art/icons/ability_undaunted_003_b.dds', -- Arachnophobia (Undaunted)
-    [A.Skill_Feed] = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', -- Feed (Vampire)
-    [A.Skill_Devour] = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', -- Devour (Werewolf)
-    [A.Skill_Feeding_Frenzy] = 'esoui/art/icons/ability_werewolf_005_b.dds', -- Feeding Frenzy (Werewolf)
+    ['Tonal Inverter'] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_tonal_inverter.dds' }, -- Tonal Inverter (Divine Intervention)
+    [A.Skill_Blade_of_Woe] = { icon = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds' }, -- Blade of Woe (Dark Brotherhood)
+    [A.Skill_Black_Widows] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Black Widows (Undaunted)
+    [A.Skill_Arachnophobia] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Undaunted)
+    [A.Skill_Feed] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed (Vampire)
+    [A.Skill_Devour] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Werewolf)
+    [A.Skill_Feeding_Frenzy] = { icon = 'esoui/art/icons/ability_werewolf_005_b.dds' }, -- Feeding Frenzy (Werewolf)
+    [A.Set_Shield_of_Ursus] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', name = A.Set_Ursus_Blessing }, -- Ursus's Blessing (Haven of Ursus)
 }
 
 E.BarNameOverride = {
@@ -2969,7 +2970,7 @@ E.EffectOverride = {
     [21481] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds', name = A.Proc_Chilled }, -- Chill (Frost Status Effect)
     [68368] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds', tooltip = A.Proc_Chilled }, -- Minor Maim (Frost Status Effect)
     [21929] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_poisoned.dds', tooltip = T.Generic_Poison }, -- Poisoned (Poison Status Effect)
-    [21487] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds', name = A.Proc_Concussion }, -- Concussion (Shock Status Effect)
+    [21487] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
     [68359] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds', tooltip = A.Proc_Concussion }, -- Minor Vulnerability (Shock Status Effect)
 
     ----------------------------------------------------------------
@@ -2995,33 +2996,44 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Asylum Weapons
-    [100302] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_piercing_spray.dds' }, -- Piercing Spray (Asylum Bow)
+    [100302] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_piercing_spray.dds', tooltip = T.Set_Asylum_Bow }, -- Piercing Spray (Asylum Bow)
     [100294] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_disciplined_slash.dds' }, -- Disciplined Slash (Asylum 2H)
     [100462] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds' }, -- Defensive Position (Asylum 1H + Shield)
     [100464] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds' }, -- Defensive Position (Asylum 1H + Shield)
-    [100308] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_timeless_blessing.dds' }, -- Timeless Blessing (Asylum Restoration Staff)
-    [100306] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds' }, -- Concentrated Force (Asylum Destruction Staff)
+    [100308] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_timeless_blessing.dds', tooltip = T.Set_Aslyum_Restoration_Staff }, -- Timeless Blessing (Asylum Restoration Staff)
+    [100306] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds', tooltip = T.Set_Asylum_Destruction_Staff }, -- Concentrated Force (Asylum Destruction Staff)
 
     -- Asylum Weapons (Perfected)
-    [99363] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_piercing_spray.dds' }, -- Piercing Spray (Perfected) (Perfected Asylum Bow)
+    [99363] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_piercing_spray.dds', tooltip = T.Set_Asylum_Bow_Perfect }, -- Piercing Spray (Perfected) (Perfected Asylum Bow)
     [99361] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_disciplined_slash.dds' }, -- Disciplined Slash (Perfected) (Perfected Asylum 2H)
     [99920] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds' }, -- Defensive Position (Perfected) (Perfected Asylum 1H + Shield)
     [99919] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds' }, -- Defensive Position (Perfected) (Perfected Asylum 1H + Shield)
-    [99582] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_timeless_blessing.dds' }, -- Timeless Blessing (Perfected) (Perfected Asylum Restoration Staff)
-    [99989] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds', name = A.Set_Asylum_Destruction_Staff }, -- Concentrated Force (P) (Asylum Destruction Staff)
+    [99582] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_timeless_blessing.dds', tooltip = T.Set_Aslyum_Restoration_Staff_P }, -- Timeless Blessing (Perfected) (Perfected Asylum Restoration Staff)
+    [99989] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds', name = A.Set_Asylum_Destruction_Staff, tooltip = T.Set_Asylum_Destruction_Staff_P }, -- Concentrated Force (P) (Asylum Destruction Staff)
 
     -- Maelstrom Weapons
-    [99806] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_cruel_flurry.dds' }, -- Cruel Flurry (Maelstrom Dual Wield)
-    [99789] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_merciless_charge.dds' }, -- Merciless Charge (Maelstrom 2H)
-    [100588] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds' }, -- Rampaging Slash (Maelstrom 1H + Shield)
+    [99806] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_cruel_flurry.dds', tooltip = T.Set_Maelstrom_DW }, -- Cruel Flurry (Maelstrom Dual Wield)
+    [99789] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_merciless_charge.dds', tooltip = T.Generic_Bleed }, -- Merciless Charge (Maelstrom 2H)
+    [100588] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds', tooltip = T.Set_Maelstrom_1H }, -- Rampaging Slash (Maelstrom 1H + Shield)
     [100587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds' }, -- Rampaging Slash (Maelstrom 1H + Shield)
     [100589] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds' }, -- Rampaging Slash (Maelstrom 1H + Shield)
     [99887] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_precise_regeneration.dds' }, -- Precise Regeneration (Maelstrom Restoration Staff)
 
     -- Master Weapons
     [99761] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_puncturing_remedy.dds' }, -- Puncturing Remedy (Master 1H + shield)
-    [100575] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_puncturing_remedy.dds' }, -- Puncturing Remedy (Master 1H + shield)
+    [100575] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_puncturing_remedy.dds', tooltip = T.Set_Master_1H }, -- Puncturing Remedy (Master 1H + shield)
     [99781] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds' }, -- Grand Rejuvenation (Master Restoration Staff)
+
+    -- Blackrose Weapons
+    [113617] = { name = A.Skill_Major_Protection, tooltip = A.Set_Blackrose_DW }, -- Spectral Cloak (Blackrose DW)
+    [113627] = { icon = 'LuiExtended/media/icons/abilities/ability_set_virulent_shot.dds', tooltip = T.Generic_Poison }, -- Virulent Shot (Blackrose Bow)
+    [113553] = { icon = 'LuiExtended/media/icons/abilities/ability_set_radial_uppercut.dds' }, -- Radial Uppercut (Blackrose 2H)
+    [113608] = { icon = 'LuiExtended/media/icons/abilities/ability_set_gallant_charge.dds', tooltip = T.Set_Blackrose_1H }, -- Gallant Charge (Blackrose 1H)
+    [115003] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds', tooltip = T.Set_Blackrose_Destro_Staff }, -- Wild Impulse (Blackrose Destruction Staff)
+    [114988] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds' }, -- Wild Impulse (Blackrose Destruction Staff)
+    [115005] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds' }, -- Wild Impulse (Blackrose Destruction Staff)
+    [115006] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wild_impulse.dds' }, -- Wild Impulse (Blackrose Destruction Staff)
+    [113653] = { tooltip = A.Set_Blackrose_Resto_Staff }, -- Major Vitality (Blackrose Restoration Staff)
 
     -- Monster Sets
     [111505] = { icon = 'esoui/art/icons/vmh_killhulks.dds', tooltip = T.Set_Balorgh }, -- Balorgh (Balorgh)
@@ -3081,31 +3093,37 @@ E.EffectOverride = {
     [81038] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds' }, -- Sentinel of Rkugamz
     [81041] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds' }, -- Sentinel of Rkugamz
     [80955] = { hide = true }, -- Shadowrend (Shadowrend)
-    [80954] = { hide = true }, -- Shadowrend Summon (Shadowrend)
+    [80954] = { hide = true, tooltip = T.Set_Shadowrend }, -- Shadowrend Summon (Shadowrend)
     [80980] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_headbutt.dds', name = A.Skill_Headbutt }, -- Shadowrend (Shadowrend)
-    [80990] = { icon = 'esoui/art/icons/ability_debuff_minor_maim.dds' }, -- Minor Maim (Shadowrend)
+    [80990] = { icon = 'esoui/art/icons/ability_debuff_minor_maim.dds', tooltip = A.Set_Shadowrend }, -- Minor Maim (Shadowrend)
     [80989] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_tail_spike.dds', name = A.Skill_Tail_Spike }, -- Shadowrend (Shadowrend)
+    [81034] = { tooltip = A.Set_Shadowrend }, -- Minor Maim (Shadowrend)
+    [80481] = { tooltip = A.Set_Slimecraw }, -- Minor Berserk (Slimecraw)
+    [59497] = { tooltip = T.Set_Spawn_of_Mephala }, -- Spawn of Mephala (Spawn of Mephala)
     [59498] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = A.Set_Spawn_of_Mephala }, -- Mephala's Web (Spawn of Mephala)
-    [59499] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = A.Set_Spawn_of_Mephala, duration = 0}, -- Mephala's Web (Spawn of Mephala)
+    [59499] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = A.Set_Spawn_of_Mephala, duration = 0, groundLabel = true, tooltip = T.Set_Spawn_of_Mephala_Snare }, -- Mephala's Web (Spawn of Mephala)
+    [80523] = { tooltip = T.Set_Stormfist }, -- Stormfist (Stormfist)
     [80522] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds' }, -- Stormfist (Stormfist)
     [80521] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds' }, -- Stormfist (Stormfist)
     [84419] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = A.Set_Swarm_Mother },
-    [80594] = { hide = true }, -- Ability CC Immunity (Swarm Mother)
-    [80595] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds' }, -- CC Immunity (Swarm Mother)
     [80593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = A.Set_Swarm_Mother },
     [59522] = { hide = true }, -- Engine Guardian
-    [59540] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_stamina.dds', name = A.Set_Engine_Guardian }, -- Engine Guardian Stamina
-    [59533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds', name = A.Set_Engine_Guardian }, -- Engine Guardian Magicka
-    [59543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds', name = A.Set_Engine_Guardian }, -- Engine Guardian Health
-    [80504] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_regeneration.dds', name = A.Set_The_Troll_King }, -- The Troll King
+    [59540] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_stamina.dds', name = A.Set_Engine_Guardian, tooltip = T.Set_Engine_Guardian_Stamina }, -- Engine Guardian Stamina
+    [59533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds', name = A.Set_Engine_Guardian, tooltip = T.Set_Engine_Guardian_Magicka }, -- Engine Guardian Magicka
+    [59543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds', name = A.Set_Engine_Guardian, tooltip = T.Set_Engine_Guardian_Health }, -- Engine Guardian Health
+    [80504] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_regeneration.dds', name = A.Set_The_Troll_King, tooltip = T.Set_The_Troll_King }, -- The Troll King
+    [102097] = { tooltip = A.Set_Thurvokun }, -- Minor Maim (Thurvokun)
+    [102100] = { tooltip = A.Set_Thurvokun }, -- Minor Defile (Thurvokun)
+    [102093] = { tooltip = T.Set_Thurvokun }, -- Thurvokun (Thurvokun)
     [102094] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds' }, -- Thurvokun
     [80865] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds' }, -- Tremorscale
-    [80866] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds' }, -- Tremorscale
+    [80866] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', tooltip = T.Set_Tremorscale }, -- Tremorscale
     [59596] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_valkyn_skoria.dds' }, -- Valkyn Skoria
     [61273] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_valkyn_skoria.dds' }, -- Valkyn Skoria
     [80490] = { icon = 'esoui/art/icons/achievement_update11_dungeons_035.dds' }, -- Velidreth
     [111354] = { tooltip = A.Set_Vykosa }, -- Major Maim (Vykosa)
-    [102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds' }, -- Zaan
+    [102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', tooltip = T.Set_Zaan }, -- Zaan
+    [102142] = { hide = true }, -- Zaan
 
     -- Crafted Sets
     [34502] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ashen_grip.dds' }, -- Ashen Grip
@@ -3154,11 +3172,11 @@ E.EffectOverride = {
     [106804] = { icon = 'esoui/art/icons/achievement_su_mainquest_6.dds', name = A.Set_Nocturnals_Favor }, -- Nocturnal's Heal (Nocturnal's Favor)
     [106798] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sloads_semblance.dds', tooltip = T.Generic_Oblivion }, -- Sload's Semblance (Sload's)
     [113092] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sloads_semblance.dds', name = A.Set_Sloads_Semblance, hide = true }, -- Sload's Projectile (Sloads)
-
+    [113185] = { icon = 'esoui/art/icons/mm_teaser.dds' }, -- Grave-Stake Collector (Grave-Stake Collector)
+    [113237] = { icon = 'esoui/art/icons/mm_teaser.dds' }, -- Grave-Stake Collector (Grave-Stake Collector)
     [113312] = { stack = 3, tooltip = A.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
     [114945] = { stack = 2, tooltip = A.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
     [114952] = { stack = 1, tooltip = A.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
-
     [113306] = { tooltip = A.Set_Naga_Shaman }, -- Minor Vitality (Naga Shaman)
     [113307] = { tooltip = A.Set_Naga_Shaman }, -- Minor Mending (Naga Shaman)
 
@@ -3183,6 +3201,7 @@ E.EffectOverride = {
     [93002] = { icon = 'esoui/art/icons/achievement_update16_029.dds' }, -- Mad Tinkerer (Mad Tinkerer's)
     [93003] = { icon = 'esoui/art/icons/achievement_update16_029.dds', hide = true }, -- Mad Tinkerer (Mad Tinkerer's)
     [93001] = { icon = 'esoui/art/icons/achievement_update16_029.dds' }, -- Mad Tinkerer (Mad Tinkerer's)
+    [106806] = { tooltip = A.Set_Wisdom_of_Vanus }, -- Major Mending (Wisdom of Vanus)
 
     -- Overland Sets (Medium)
     [71106] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Briarheart
@@ -3205,6 +3224,7 @@ E.EffectOverride = {
     [34508] = { icon = 'LuiExtended/media/icons/abilities/ability_set_werewolf_hide.dds' }, -- Hide of the Werewolf (Werewolf Hide)
     [18993] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Witchman Armor (Witchman's)
     [85818] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Witchman Armor (Witchman's)
+    [114977] = { icon = 'esoui/art/icons/achievement_murkmire_friend_dead_water.dds' }, -- Dead-Water's Guile (Dead-Water's Guile)
 
     -- Overland Sets (Heavy)
     [34711] = { icon = 'LuiExtended/media/icons/abilities/ability_set_meridia.dds' }, -- Meridia's Blessed Armor (Blessed)
@@ -3226,6 +3246,8 @@ E.EffectOverride = {
     [92762] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds' }, -- Minor Toughness (Warrior-Poet's)
     [106865] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds' }, -- Grace of Gloom (Gloom-Graced)
     [106868] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds' }, -- Grace of Gloom (Gloom-Graced)
+    [113284] = { name = A.Skill_Minor_Heroism, tooltip = A.Set_Champion_of_the_Hist }, -- Champion of the Hist (Champion of the Hist)
+    [113286] = { icon = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- Minor Heroism (Champion of the Hist)
 
     -- Dungeon Sets (Light)
     [61459] = { icon = 'LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds' }, -- Burning Spellweave
@@ -3248,6 +3270,9 @@ E.EffectOverride = {
     [59676] = { icon = 'LuiExtended/media/icons/abilities/ability_set_undaunted_unweaver.dds' }, -- Undaunted Unweaver (of the Undaunted Unweaver)
     [57163] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_027.dds' }, -- Robes of the Warlock (of the Warlock)
     [47367] = { icon = 'LuiExtended/media/icons/abilities/ability_set_worm_cult.dds'}, -- Worm's Raiment (of the Worm Cult)
+    [111377] = { tooltip = A.Set_Hanus_Compassion }, -- Major Heroism (Hanu's Compassion)
+    [111380] = { tooltip = A.Set_Hanus_Compassion }, -- Major Heroism (Hanu's Compassion)
+    [111204] = { icon = 'esoui/art/icons/achievement_thievesguild_003.dds', tooltip = T.Set_Moon_Hunter }, -- Moon Hunter (Moon Hunter)
 
     -- Dungeon Sets (Medium)
     [85977] = { icon = 'LuiExtended/media/icons/abilities/ability_set_barkskin.dds' }, -- Barkskin
@@ -3271,6 +3296,9 @@ E.EffectOverride = {
     [33691] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Viper's Sting
     [101970] = { icon = 'LuiExtended/media/icons/abilities/ability_set_invigoration.dds' }, -- Trappings of Invigoration
     [84350] = { icon = 'esoui/art/icons/achievement_update11_dungeons_035.dds' }, -- Widowmaker
+    [111387] = { icon = 'esoui/art/icons/mh_no_rage_cleanse.dds', tooltip = T.Set_Blood_Moon_Scent }, -- Blood Scent (Blood Moon)
+    [111386] = { icon = 'LuiExtended/media/icons/abilities/ability_set_blood_moon.dds', tooltip = T.Set_Blood_Moon_Frenzied }, -- Frenzied (Blood Moon)
+    [111216] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_bleed.dds', tooltip = T.Generic_Bleed }, -- Savage Werewolf (Savage Werewolf)
 
     -- Dungeon Sets (Heavy)
     [102023] = { icon = 'LuiExtended/media/icons/abilities/ability_set_curse_of_doylemish.dds' }, -- Curse of Doylemish
@@ -3294,6 +3322,9 @@ E.EffectOverride = {
     [67283] = { icon = 'esoui/art/icons/achievement_ic_025_heroic.dds', name = A.Set_Tormentor }, -- Tormentor Resistance (of the Tormentor)
     [61200] = { icon = 'esoui/art/icons/achievement_undaunteddailies_003.dds' }, -- Undaunted Bastion (of the Undaunted Bastion)
     [86070] = { icon = 'esoui/art/icons/achievement_thievesguild_034.dds' }, -- Armor of Truth (of Truth)
+    [112414] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', tooltip = T.Generic_Damage_Shield_6_Seconds }, -- Ursus's Blessing (Haven of Ursus)
+    [111445] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', tooltip = T.Generic_Damage_Shield_6_Seconds }, -- Ursus's Blessing (Haven of Ursus)
+    [111221] = { tooltip = A.Set_Jailers_Tenacity }, -- Major Vitality (Jailer's Tenacity)
 
     -- Trial Sets (Hel Ra Citadel)
     [50978] = { icon = 'esoui/art/icons/achievement_update11_dungeons_001.dds' }, -- Berserking Warrior (Advancing Yokeda)

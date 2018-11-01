@@ -804,6 +804,9 @@ debugAuras = {
             [100589] = true, -- Rampaging Slash (Maelstrom)
             [99875] = true, -- Crushing Wall (Maelstrom)
             [100155] = true, -- Crushing Wall (Maelstrom)
+            [114887] = true, -- Summon Shade (Maelstrom)
+            [114879] = true, -- Summon Shade (Maelstrom)
+            [114882] = true, -- Summon Shade (Maelstrom)
             [99876] = true, -- Crushing Wall (Maelstrom)
             [99886] = true, -- Precise Regeneration (Maelstrom)
             [100161] = true, -- Precise Regeneration (Maelstrom)
@@ -822,6 +825,25 @@ debugAuras = {
             [99774] = true, -- Destructive Impact (Master)
             [99780] = true, -- Grand Rejuvenation (Master)
             [99781] = true, -- Grand Rejuvenation (Master)
+
+            [113616] = true, -- Spectral Cloak (Blackrose DW)
+            [113617] = true, -- Spectral Cloak (Blackrose DW)
+            [113619] = true, -- Virulent Shot (Blackrose Bow)
+            [113628] = true, -- Virulent Shot (Blackrose Bow)
+            [113627] = true, -- Virulent Shot (Blackrose Bow)
+            [113551] = true, -- Radial Uppercut (Blackrose 2H)
+            [113554] = true, -- Radial Uppercut (Blackrose 2H)
+            [113553] = true, -- Radial Uppercut (Blackrose 2H)
+            [113574] = true, -- Gallant Charge (Blackrose 1H)
+            [113608] = true, -- Gallant Charge (Blackrose 1H)
+            [113687] = true, -- Wild Impulse (Blackrose Destruction Staff)
+            [115003] = true, -- Wild Impulse (Blackrose Destruction Staff)
+            [114988] = true, -- Wild Impulse (Blackrose Destruction Staff)
+            [115005] = true, -- Wild Impulse (Blackrose Destruction Staff)
+            [115006] = true, -- Wild Impulse (Blackrose Destruction Staff)
+            [113651] = true, -- Mender's Ward (Blackrose Restoration Staff)
+            [113654] = true, -- Razor Shot (Blackrose Restoration Staff)
+            [113653] = true, -- Major Vitality (Blackrose Restoration Staff)
 
             -- Monster Helms
             [111504] = true, -- Balorgh
@@ -937,76 +959,75 @@ debugAuras = {
             [81038] = true, -- Sentinel of Rkugamz
             [81041] = true, -- Sentinel of Rkugamz
 
-            --[80951] = true, -- Shadowrend
-            --[80955] = true, -- Forward Charge
-            --[80954] = true, -- Shadowrend Summon
-            --[80980] = true, -- Shadowrend
-            --[80990] = true, -- Minor Maim
-            --[80989] = true, -- Shadowrend
-            --[81034] = true, -- Minor Maim
+            [80951] = true, -- Shadowrend
+            [80955] = true, -- Forward Charge
+            [80954] = true, -- Shadowrend Summon
+            [80980] = true, -- Shadowrend
+            [80990] = true, -- Minor Maim
+            [80989] = true, -- Shadowrend
+            [81034] = true, -- Minor Maim
 
-            --[80481] = true, -- Minor Berserk (Slimecraw)
+            [80481] = true, -- Minor Berserk (Slimecraw)
 
-            --[59489] = true, -- Spawn of Mephala
-            --[59497] = true, -- Spawn of Mephala
-            --[59498] = true, -- Mephala's Web
-            --[59499] = true, -- Mephala's Web
+            [59489] = true, -- Spawn of Mephala
+            [59497] = true, -- Spawn of Mephala
+            [59498] = true, -- Mephala's Web
+            [59499] = true, -- Mephala's Web
 
-            --[80520] = true, -- Stormfist
-            --[80523] = true, -- Stormfist
-            --[80522] = true, -- Stormfist
-            --[80521] = true, -- Stormfist
+            [80520] = true, -- Stormfist
+            [80523] = true, -- Stormfist
+            [80522] = true, -- Stormfist
+            [80521] = true, -- Stormfist
 
-            --[80592] = true, -- Swarm Mother
-            --[84419] = true, -- Swarm Mother Mask
-            --[80594] = true, -- Ability CC Immunity
-            --[80595] = true, -- CC Immunity
-            --[80593] = true, -- Swarm Mother Mask
+            [80592] = true, -- Swarm Mother
+            [84419] = true, -- Swarm Mother Mask
+            [80593] = true, -- Swarm Mother Mask
 
-            --[59521] = true, -- Engine Guardian
-            --[60484] = true, -- Sphere Groundrise
-            --[59522] = true, -- Engine Guardian
-            --[59539] = true, -- Engine Guardian
-            --[59540] = true, -- Engine Guardian Stamina
-            --[59525] = true, -- Engine Guardian
-            --[59533] = true, -- Engine Guardian Magicka
-            --[59541] = true, -- Engine Guardian
-            --[59543] = true, -- Engine Guardian Health
+            [59521] = true, -- Engine Guardian
+            [60484] = true, -- Sphere Groundrise
+            [59522] = true, -- Engine Guardian
+            [59539] = true, -- Engine Guardian
+            [59540] = true, -- Engine Guardian Stamina
+            [59525] = true, -- Engine Guardian
+            [59533] = true, -- Engine Guardian Magicka
+            [59541] = true, -- Engine Guardian
+            [59543] = true, -- Engine Guardian Health
 
-            --[80503] = true, -- The Troll King
-            --[80504] = true, -- The Troll King
+            [80503] = true, -- The Troll King
+            [80504] = true, -- The Troll King
 
-            --[102089] = true, -- Thurvokun
-            --[102094] = true, -- Thurvokun
-            --[102097] = true, -- Thurvokun
-            --[102100] = true, -- Thurvokun
-            --[102093] = true, -- Thurvokun
-            --[102095] = true, -- Thurvokun
+            [102089] = true, -- Thurvokun
+            [102094] = true, -- Thurvokun
+            [102097] = true, -- Thurvokun
+            [102100] = true, -- Thurvokun
+            [102093] = true, -- Thurvokun
+            [102095] = true, -- Thurvokun
 
-            --[80513] = true, -- Tremorscale
-            --[80517] = true, -- Tremorscale
-            --[80865] = true, -- Tremorscale
-            --[80866] = true, -- Tremorscale
+            [80513] = true, -- Tremorscale
+            [80517] = true, -- Tremorscale
+            [80865] = true, -- Tremorscale
+            [80866] = true, -- Tremorscale
 
-            --[59595] = true, -- Valkyn Skoria
-            --[66612] = true, -- CoA Trigger Cooldown
-            --[59596] = true, -- Valkyn Skoria
-            --[61273] = true, -- Valkyn Skoria
+            [59595] = true, -- Valkyn Skoria
+            [66612] = true, -- CoA Trigger Cooldown
+            [59596] = true, -- Valkyn Skoria
+            [61273] = true, -- Valkyn Skoria
 
-            --[80483] = true, -- Velidreth
-            --[80487] = true, -- Hoarvor Mask
-            --[80488] = true, -- Hoarvor Mask
-            --[80856] = true, -- Hoarvor Mask
-            --[80864] = true, -- Hoarvor Mask
-            --[80489] = true, -- Hoarvor Mask
-            --[80490] = true, -- Velidreth
+            [80483] = true, -- Velidreth
+            [80487] = true, -- Hoarvor Mask
+            [80488] = true, -- Hoarvor Mask
+            [80856] = true, -- Hoarvor Mask
+            [80864] = true, -- Hoarvor Mask
+            [80489] = true, -- Hoarvor Mask
+            [80490] = true, -- Velidreth
 
             [111352] = true, -- Vykosa
             [111354] = true, -- Major Maim
 
-            --[102125] = true, -- Zaan
-            --[102136] = true, -- Zaan
-            --[102142] = true, -- Zaan
+            [102125] = true, -- Zaan
+            [102136] = true, -- Zaan
+            [102142] = true, -- Zaan
+            [110997] = true, -- Zaan Buffer
 
             -- Crafted Sets
             [29124] = true, -- Ashen Grip
@@ -1137,7 +1158,7 @@ debugAuras = {
             [113180] = true, -- Grave-Stake Collector (Grave-Stake Collector)
             [113183] = true, -- Grave-Stake Collector (Grave-Stake Collector)
             [114172] = true, -- Grave-Stake Collector (Grave-Stake Collector)
-            --[113181] = true, -- Grave-Stake Collector (Grave-Stake Collector)
+            [113181] = true, -- Grave-Stake Collector (Grave-Stake Collector)
             [113259] = true, -- Grave-Stake Collector (Grave-Stake Collector)
             [113185] = true, -- Grave-Stake Collector (Grave-Stake Collector)
             [113237] = true, -- Grave-Stake Collector (Grave-Stake Collector)
@@ -1228,8 +1249,10 @@ debugAuras = {
             --[93003] = true, -- Mad Tinkerer (Mad Tinkerer's)
             --[92998] = true, -- Mad Tinkerer (Mad Tinkerer's)
 
-            --[106805] = true, -- Wisdom of Vanus (Vanus's)
-            --[106806] = true, -- Major Mending (Vanus's)
+            [106805] = true, -- Wisdom of Vanus (Vanus's)
+            [106806] = true, -- Major Mending (Vanus's)
+
+            [113139] = true, -- Bright-Throat's Boast (Bright-Throat's Boast)
 
             -- Overland Sets (Medium)
 
@@ -1305,6 +1328,10 @@ debugAuras = {
             --[106860] = true, -- Minor Expedition (Gryphon's)
             --[106861] = true, -- Minor Force (Gryphon's)
 
+            [113165] = true, -- Dead-Water's Guile (Dead-Water's Guile)
+            [113170] = true, -- Dead-Water's Guile (Dead-Water's Guile)
+            [114977] = true, -- Dead-Water's Guile (Dead-Water's Guile)
+
             -- Overland Sets (Heavy)
 
             --[32815] = true, -- Meridia's Blessed Armor (Blessed)
@@ -1370,6 +1397,9 @@ debugAuras = {
             --[106865] = true, -- Grace of Gloom (Gloom-Graced)
             --[106867] = true, -- Major Evasion (Gloom-Graced)
             --[106868] = true, -- Grace of Gloom (Gloom-Graced)
+
+            [113284] = true, -- Champion of the Hist (Champion of the Hist)
+            [113286] = true, -- Minor Heroism (Champion of the Hist)
 
             -- Dungeon Sets (Light)
 
@@ -1448,6 +1478,13 @@ debugAuras = {
             --[47367] = true, -- Worm's Raiment (of the Worm Cult)
 
             --[85613] = true, -- Major Prophecy (Treasure Hunter's)
+
+            [111376] = true, -- Hanu's Compassion (Hanu's Compassion)
+            [111377] = true, -- Major Heroism (Hanu's Compassion)
+            [111380] = true, -- Major Heroism (Hanu's Compassion)
+
+            [111200] = true, -- Moon Hunter (Moon Hunter)
+            [111204] = true, -- Moon Hunter (Moon Hunter)
 
             -- Dungeon Sets (Medium)
 
@@ -1528,6 +1565,15 @@ debugAuras = {
             --[84349] = true, -- Widowmaker
             --[97851] = true, -- Widowmaker
             --[84350] = true, -- Widowmaker
+
+            [111385] = true, -- Blood Moon (Blood Moon)
+            [111387] = true, -- Blood Scent (Blood Moon)
+            [111399] = true, -- Counter Buffer (Blood Moon)
+            [111386] = true, -- Frenzied (Blood Moon)
+
+            [111213] = true, -- Savage Werewolf (Savage Werewolf)
+            [112368] = true, -- Impact (Savage Werewolf)
+            [111216] = true, -- Savage Werewolf (Savage Werewolf)
 
             -- Dungeon Sets (Heavy)
 
@@ -1612,6 +1658,17 @@ debugAuras = {
             --[86070] = true, -- Armor of Truth (of Truth)
 
             --[101974] = true, -- Ulfnor's Favor
+
+            [111432] = true, -- Haven of Ursus (Haven of Ursus)
+            [111442] = true, -- Haven of Ursus (Haven of Ursus)
+            [111443] = true, -- Haven of Ursus (Haven of Ursus)
+            [111452] = true, -- Haven of Ursus (Haven of Ursus)
+            [112414] =  true, -- Ursus's Blessing (Haven of Ursus)
+            [111445] =  true, -- Ursus's Blessing (Haven of Ursus)
+            [111440] = true, -- Ursus CD (Haven of Ursus)
+            [113423] = true, -- Checker (Haven of Ursus)
+            [111220] = true, -- Jailer's Tenacity (Jailer's Tenacity)
+            [111221] = true, -- Major Vitality (Jailer's Tenacity)
 
             -- Trial Sets (Hel Ra Citadel)
 

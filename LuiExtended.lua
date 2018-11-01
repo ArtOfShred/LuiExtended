@@ -336,7 +336,12 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         local synergyName, iconFilename = GetSynergyInfo()
 
         if LUIE.Effects.SynergyNameOverride[synergyName] then
-            iconFilename = LUIE.Effects.SynergyNameOverride[synergyName]
+            if LUIE.Effects.SynergyNameOverride[synergyName].icon then
+                iconFilename = LUIE.Effects.SynergyNameOverride[synergyName].icon
+            end
+            if LUIE.Effects.SynergyNameOverride[synergyName].name then
+                synergyName = LUIE.Effects.SynergyNameOverride[synergyName].name
+            end
         end
 
         if synergyName and iconFilename then

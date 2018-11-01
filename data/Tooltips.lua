@@ -265,6 +265,18 @@ T.Memento_Ghost_Lantern             = select(2, GetCollectibleInfo(5212))
 -- SETS ---------------------------------
 -- ---------------------------------------------------
 
+T.Set_Asylum_Bow                    = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 45)
+T.Set_Asylum_Bow_Perfect            = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 50)
+T.Set_Asylum_Destruction_Staff      = GetString(SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF)
+T.Set_Asylum_Destruction_Staff_P    = GetString(SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF_PERFECT)
+T.Set_Aslyum_Restoration_Staff      = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 27)
+T.Set_Aslyum_Restoration_Staff_P    = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 30)
+T.Set_Maelstrom_DW                  = GetString(SI_LUIE_SKILL_SET_MAELSTROM_DW)
+T.Set_Maelstrom_1H                  = GetString(SI_LUIE_SKILL_SET_MAELSTROM_1H)
+T.Set_Master_1H                     = GetString(SI_LUIE_SKILL_SET_MASTER_1H)
+T.Set_Blackrose_1H                  = GetString(SI_LUIE_SKILL_SET_BLACKROSE_1H_TP)
+T.Set_Blackrose_Destro_Staff        = GetString(SI_LUIE_SKILL_SET_BLACKROSE_DESTRO_TP)
+
 T.Set_Balorgh                       = GetString(SI_LUIE_SKILL_SET_BALORGH)
 T.Set_Blood_Spawn                   = zo_strformat(GetString(SI_LUIE_SKILL_SET_GENERIC_ARMOR_SPELL_RESIST), 6)
 T.Set_Bogdan_the_Nightflame         = GetString(SI_LUIE_SKILL_SET_BOGDAN)
@@ -283,9 +295,21 @@ T.Set_Lord_Warden_Buff              = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_BU
 T.Set_Malubeth                      = GetString(SI_LUIE_SKILL_SET_MALUBETH)
 T.Set_Maw_of_the_Infernal           = GetString(SI_LUIE_SKILL_SET_MAW_OF_THE_INFERNAL)
 T.Set_Molag_Kena_Overkill           = GetString(SI_LUIE_SKILL_SET_MOLAG_KENA_OVERKILL_TP)
-T.Set_Molag_Kena                    = GetAbilityDescription(66792)
+T.Set_Molag_Kena                    = GetString(SI_LUIE_SKILL_SET_MOLAG_KENA_TP)
 T.Set_Pirate_Skeleton               = GetString(SI_LUIE_SKILL_SET_PIRATE_SKELETON_TP)
 T.Set_Sentinel_of_Rkugamz           = GetString(SI_LUIE_SKILL_SET_SENTINEL_OF_REKUGAMZ_TP)
+T.Set_Shadowrend                    = GetString(SI_LUIE_SKILL_SET_SHADOWREND_TP)
+T.Set_Spawn_of_Mephala              = GetString(SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_TP)
+-- TODO: Note disabled the TP below due to the damage not actually being part of the debuff as well. Probably should only combine tooltips on things like this if its a dot + snare for example. Might revisit.
+T.Set_Spawn_of_Mephala_Snare        = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), 50) --GetString(SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_SNARE_TP) make sure to uncomment line in en.lua too
+T.Set_Stormfist                     = GetString(SI_LUIE_SKILL_SET_STORMFIST_TP)
+T.Set_Engine_Guardian_Health        = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE_2))
+T.Set_Engine_Guardian_Stamina       = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE6))
+T.Set_Engine_Guardian_Magicka       = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE0))
+T.Set_The_Troll_King                = GetString(SI_LUIE_SKILL_SET_THE_TROLL_KING_TP)
+T.Set_Thurvokun                     = GetString(SI_LUIE_SKILL_SET_THURVOKUN_TP)
+T.Set_Tremorscale                   = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), 70)
+T.Set_Zaan                          = GetString(SI_LUIE_SKILL_SET_ZAAN_TP)
 
 T.Set_Alessias_Bulwark              = GetString(SI_LUIE_SKILL_SET_ALESSIAS_BULWARK)
 T.Set_Clever_Alchemist              = GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST)
@@ -303,6 +327,12 @@ T.Set_Vampires_Kiss                 = zo_strformat(GetString(SI_LUIE_SKILL_GENER
 T.Set_Whitestrakes_Retribution      = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP), 10)
 T.Set_Mechanical_Acuity             = GetString(SI_LUIE_SKILL_SET_MECHANICAL_ACUITY)
 T.Set_Adept_Rider                   = GetString(SI_LUIE_SKILL_SET_ADEPT_RIDER)
+
+T.Set_Moon_Hunter                   = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_SPELL_DAMAGE_DURATION), 6)
+T.Set_Blood_Moon_Scent              = GetString(SI_LUIE_SKILL_SET_BLOOD_SCENT)
+T.Set_Blood_Moon_Frenzied           = GetString(SI_LUIE_SKILL_SET_FRENIZED)
+
+T.Generic_Damage_Shield_6_Seconds   = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP), 6)
 
 --zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
 
