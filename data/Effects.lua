@@ -1268,7 +1268,7 @@ E.BarHighlightOverride = {
 
     -- Ardent Flame
     [23806] = { newId = 23808, secondary = true }, -- Lava Whip --> Off Balance
-    [20805] = { newId = 23806, secondary = true }, -- Molten Whip --> Off Balance
+    [20805] = { newId = 20806, secondary = true }, -- Molten Whip --> Off Balance
     [20816] = { newId = 34117, secondary = true }, -- Flame Lash --> Off Balance
     [20657] = { newId = 44363 }, -- Searing Strike
     [20668] = { newId = 44369 }, -- Venomous Claw
