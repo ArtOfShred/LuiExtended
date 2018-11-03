@@ -2396,6 +2396,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         iconName = E.FakePlayerBuffs[abilityId].icon
         effectName = E.FakePlayerBuffs[abilityId].name
         duration = E.FakePlayerBuffs[abilityId].duration
+        local finalId = E.FakePlayerBuffs[abilityId].shiftId or abilityId
         local forcedType = E.FakePlayerBuffs[abilityId].long and "long" or "short"
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
@@ -2404,9 +2405,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if source == LUIE.PlayerNameFormatted and target == LUIE.PlayerNameFormatted then
             -- If the "buff" is flagged as a debuff, then display it here instead
             if E.FakePlayerBuffs[abilityId].debuff == true then
-                g_effectsList.player2[ abilityId ] = {
+                g_effectsList.player2[ finalId ] = {
                     type=BUFF_EFFECT_TYPE_DEBUFF,
-                    id=abilityId, name=effectName, icon=iconName,
+                    id=finalId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                     forced = "short",
                     restart=true, iconNum=0,
@@ -2415,9 +2416,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
                 }
             -- Otherwise, display as a normal buff
             else
-                g_effectsList.player1[ abilityId ] = {
+                g_effectsList.player1[ finalId ] = {
                     target="player", type=1,
-                    id=abilityId, name=effectName, icon=iconName,
+                    id=finalId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                     forced = forcedType,
                     restart=true, iconNum=0,
@@ -2543,6 +2544,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         iconName = E.FakePlayerDebuffs[abilityId].icon
         effectName = E.FakePlayerDebuffs[abilityId].name
         duration = E.FakePlayerDebuffs[abilityId].duration
+        overrideDuration = E.FakePlayerDebuffs[abilityId].overrideDuration
         effectType = BUFF_EFFECT_TYPE_DEBUFF
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
@@ -2562,7 +2564,8 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                     forced = "short",
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
-                    savedName = strformat(SI_UNIT_NAME, targetName)
+                    savedName = strformat(SI_UNIT_NAME, targetName),
+                    fakeDuration = true
                 }
             else
                 g_effectsList.saved[ abilityId ] = {
@@ -2572,7 +2575,8 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                     forced = "short",
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
-                    savedName = strformat(SI_UNIT_NAME, targetName)
+                    savedName = strformat(SI_UNIT_NAME, targetName),
+                    fakeDuration = true
                 }
             end
         end
@@ -3107,7 +3111,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
             buff.icon:SetTexture(effect.icon)
             buff:SetAlpha(1)
             buff:SetHidden(false)
-            if not remain then
+            if not remain or effect.fakeDuration then
                 if E.IsToggle[effect.id] then
                     buff.label:SetText("T")
                 elseif E.EffectOverride[effect.id] and E.EffectOverride[effect.id].groundLabel then
@@ -3135,7 +3139,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
         end
 
         -- For update remaining text. For temporary effects this is not very efficient, but we have not much such effects
-        if remain then
+        if remain and not effect.fakeDuration then
             if remain > 86400000 then -- more then 1 day
                 buff.label:SetText( strfmt("%d d", mathfloor( remain/86400000 )) )
             elseif remain > 6000000 then -- over 100 minutes - display XXh
@@ -3155,7 +3159,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
             if effect.overrideDur then
                 effect.dur = effect.overrideDur
             end
-            if remain == nil or effect.dur == nil or effect.dur == 0 then
+            if remain == nil or effect.dur == nil or effect.dur == 0 or effect.fakeDuration then
                 buff.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false )
             else
                 buff.cd:StartCooldown(remain, effect.dur, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_UNTIL, false )

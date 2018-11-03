@@ -115,6 +115,7 @@ A.Innate_Pardon_Edict_High          = GetString(SI_LUIE_SKILL_GRAND_AMNESTY_EDIC
 
 -- Champion
 A.Champion_Last_Stand               = 60413
+A.Champion_Tactician                = 60486
 
 -- World
 A.Innate_Drop_Anchor                = 86717 -- Drop Anchor
@@ -321,6 +322,7 @@ A.Set_Nocturnals_Favor              = 106803
 A.Set_Vestment_of_Olorime           = 107117
 A.Set_Mantle_of_Siroria             = 107093
 A.Set_Arms_of_Relequen              = 107202
+A.Set_Aegis_of_Galenwe              = 107268
 A.Set_Hist_Bark                     = 32781
 A.Skill_Night_Mothers_Gaze          = 29113
 A.Skill_Nobles_Conquest             = 61780
@@ -342,6 +344,42 @@ A.Set_Hanus_Compassion              = 111376
 A.Set_Shield_of_Ursus               = 111437
 A.Set_Ursus_Blessing                = 112414
 A.Set_Jailers_Tenacity              = 111220
+A.Set_Sithis_Touch                  = 79192
+A.Set_Skooma_Smuggler               = 85591
+A.Set_Gyphons_Ferocity              = 106858
+A.Set_Shalk_Exoskeleton             = GetString(SI_LUIE_SKILL_SET_SHALK_EXOSKELETON)
+A.Set_Order_of_Diagna               = GetString(SI_LUIE_SKILL_SET_ORDER_OF_DIAGNA)
+A.Set_Vampire_Cloak                 = GetString(SI_LUIE_SKILL_SET_VAMPIRE_CLOAK)
+A.Set_Warrior_Poet                  = GetString(SI_LUIE_SKILL_SET_WARRIOR_POET)
+A.Set_Grace_of_Gloom                = 106865
+A.Set_Gossamer                      = 84340
+A.Set_Spell_Power_Cure              = 66899
+A.Set_Noble_Duelist                 = GetString(SI_LUIE_SKILL_SET_NOBLE_DUELIST)
+A.Set_Treasure_Hunter               = 60566
+A.Set_Heem_Jas                      = 84305
+A.Set_Jailbreaker                   = GetString(SI_LUIE_SKILL_SET_JAILBREAKER)
+A.Set_Sunderflame                   = 60059
+A.Set_Toothrow                      = GetString(SI_LUIE_SKILL_SET_TOOTHROW)
+A.Set_Duroks_Bane                   = 32754
+A.Set_Hagravens_Garden              = 97907
+A.Set_Ironblood                     = 97626
+A.Set_Medusa                        = GetString(SI_LUIE_SKILL_SET_MEDUSA)
+A.Set_Hand_of_Mephala               = 84353
+A.Set_Rattlecage                    = GetString(SI_LUIE_SKILL_SET_RATTLECAGE)
+A.Set_Dreugh_King_Slayer            = GetString(SI_LUIE_SKILL_SET_DREUGH_KING_SLAYER)
+A.Set_Knightmare                    = 29117
+A.Set_Wise_Mage                     = 51432
+A.Set_Infallible_Mage               = 61438
+A.Set_Quick_Serpent                 = 50995
+A.Set_Vicious_Serpent               = 61440
+A.Set_Twilight_Remedy               = 75770
+A.Set_Cowards_Gear                  = GetString(SI_LUIE_SKILL_SET_COWARDS_GEAR)
+A.Set_Wizards_Riposte               = 92920
+A.Set_Indomitable_Fury              = 113324
+A.Set_Soldier_of_Anguish            = 113460
+A.Set_Steadfast_Hero                = 113508
+A.Set_Healers_Habit                 = GetString(SI_LUIE_SKILL_SET_HEALERS_HABIT)
+A.Set_Ward_of_Cyrodiil              = 32837
 
 A.Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
 
@@ -397,9 +435,18 @@ A.Passive_Red_Diamond               = 36155
 
 -- Dragonknight
 
+A.Skill_Lava_Whip                   = 23806
+A.Skill_Molten_Whip                 = 20805
+A.Skill_Flame_Lash                  = 20816
 A.Skill_Power_Lash                  = 20824
-A.Skill_Fiery_Grip                  = 20492
 A.Skill_Fiery_Breath                = 20917
+A.Skill_Noxious_Breath              = 20944
+A.Skill_Fiery_Grip                  = 20492
+A.Skill_Empowering_Chains           = 20499
+A.Skill_Unrelenting_Grip            = 20496
+A.Skill_Inferno                     = 28967
+A.Skill_Flames_of_Oblivion          = 32853
+A.Skill_Cauterize                   = 32881
 A.Skill_Standard_of_Might           = 32947
 A.Skill_Shackle                     = 32905
 A.Skill_Spiked_Armor                = 20319

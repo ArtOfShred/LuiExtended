@@ -561,10 +561,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         control.animation:PlayForward()
     end
 
-
-    -- SKILL ADVISOR ICON/NAME OVERRIDES -- OUTDATED -- DISABLED TEMPORARILY
     --[[
-
     -- Hook skills advisor and use this variable to refresh the abilityData on time one initialization. We don't want to reload any more after that.
     local firstRun = true
 
@@ -615,6 +612,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     ZO_SKILLS_ADVISOR_SINGLETON:UpdateSkillBuildData()
 
     firstRun = false
+    ]]--
 
     local ACTION_BUTTON_BGS = {ability = "EsoUI/Art/ActionBar/abilityInset.dds", item = "EsoUI/Art/ActionBar/quickslotBG.dds"}
     local ACTION_BUTTON_BORDERS = {normal = "EsoUI/Art/ActionBar/abilityFrame64_up.dds", mouseDown = "EsoUI/Art/ActionBar/abilityFrame64_down.dds"}
@@ -643,6 +641,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     local function SetupAbilitySlot(slotObject, slotId)
         SetupActionSlotWithBg(slotObject, slotId)
+
         if slotId == ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 then
             slotObject:RefreshUltimateNumberVisibility()
         else
@@ -655,22 +654,28 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         slotObject:SetupCount()
     end
 
-    local function SetupSiegeActionSlot(slotObject, slotId)
-        SetupActionSlot(slotObject, slotId)
-    end
-
     local function SetupCollectibleActionSlot(slotObject, slotId)
         SetupActionSlotWithBg(slotObject, slotId)
         slotObject:ClearCount()
     end
 
-    SetupSlotHandlers = {
+    local function SetupQuestItemActionSlot(slotObject, slotId)
+        SetupActionSlotWithBg(slotObject, slotId)
+        slotObject:SetupCount()
+    end
+
+    local function SetupEmptyActionSlot(slotObject, slotId)
+        slotObject:Clear()
+    end
+
+    SetupSlotHandlers =
+    {
         [ACTION_TYPE_ABILITY]       = SetupAbilitySlot,
         [ACTION_TYPE_ITEM]          = SetupItemSlot,
         [ACTION_TYPE_COLLECTIBLE]   = SetupCollectibleActionSlot,
+        [ACTION_TYPE_QUEST_ITEM]    = SetupQuestItemActionSlot,
+        [ACTION_TYPE_NOTHING]       = SetupEmptyActionSlot,
     }
-
-    ]]--
 
 end
 
