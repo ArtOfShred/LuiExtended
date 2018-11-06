@@ -456,6 +456,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local markForRemove = trackBuffs[i].markForRemove or false
 
                     local timer = GetAbilityDuration(abilityId) / 1000
+                    if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltipDurFix then
+                        timer = timer + LUIE.Effects.EffectOverride[abilityId].tooltipDurFix
+                    end
                     if timer >= 86400 then
                         timer = timer / 86400
                     elseif timer >= 3600 then
@@ -483,11 +486,15 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                         tooltipText = strmatch(tooltipText, ".*%S")
                     end
                     local thirdLine
+                    local timer2 = (endTime - startTime)
+                    if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltipDurFix then
+                        timer2 = timer2 + LUIE.Effects.EffectOverride[abilityId].tooltipDurFix
+                    end
                     if LUIE.Effects.TooltipNameOverride[buffName] then
-                        thirdLine = LUIE.Effects.TooltipNameOverride[buffName]
+                        thirdLine = strformat(LUIE.Effects.TooltipNameOverride[buffName], timer2)
                     end
                     if LUIE.Effects.TooltipNameOverride[abilityId] then
-                        thirdLine = LUIE.Effects.TooltipNameOverride[abilityId]
+                        thirdLine = strformat(LUIE.Effects.TooltipNameOverride[abilityId], timer2)
                     end
 
                     -- Change effect type if needed
@@ -624,6 +631,10 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         local slotName = GetSlotName(slotId)
         if LUIE.Effects.BarNameOverride[slotName] then
             slotIcon = LUIE.Effects.BarNameOverride[slotName]
+        end
+        local abilityId = GetSlotBoundId(slotId)
+        if LUIE.Effects.BarIdOverride[abilityId] then
+            slotIcon = LUIE.Effects.BarIdOverride[abilityId]
         end
 
         slotObject.slot:SetHidden(false)

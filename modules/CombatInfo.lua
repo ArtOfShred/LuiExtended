@@ -352,6 +352,13 @@ function CI.UpdateBarHighlightTables()
                     end
                 end
             end
+            if value.emulateGround == true then
+                if value.newId then
+                    g_toggledSlotsPlayer[value.newId] = true
+                else
+                    g_toggledSlotsPlayer[abilityId] = true
+                end
+            end
         end
         local counter = 0
         for abilityId, _ in pairs (g_barOverrideCI) do
@@ -807,7 +814,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         if g_barNoRemove[abilityId] then return end
 
         -- Stop any proc animation associated with this effect
-        if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlotsRemain[abilityId] then
+        if g_triggeredSlotsRemain[abilityId] then
             if g_triggeredSlots[abilityId] and g_uiProcAnimation[g_triggeredSlots[abilityId]] then
                 g_uiProcAnimation[g_triggeredSlots[abilityId]]:Stop()
             end
@@ -827,7 +834,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         -- Also create visual enhancements from skill bar
         if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
             -- start any proc animation associated with this effect
-            if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlots[abilityId] then
+            if g_triggeredSlots[abilityId] then
                 local currentTime = GetGameTimeMilliseconds()
                 if CI.SV.ShowTriggered then
                     -- Play sound twice so its a little louder.

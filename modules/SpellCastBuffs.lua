@@ -1557,6 +1557,9 @@ function SCB.Buff_OnMouseEnter(control)
             end
 
             duration = GetAbilityDuration(control.effectId) / 1000
+            if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipDurFix then
+                duration = duration + E.EffectOverride[control.effectId].tooltipDurFix
+            end
             if duration >= 86400 then
                 duration = duration / 86400
             elseif duration >= 3600 then
@@ -1590,6 +1593,9 @@ function SCB.Buff_OnMouseEnter(control)
             local duration
             if type(control.effectId) == "number" then
                 duration = GetAbilityDuration(control.effectId) / 1000
+                if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipDurFix then
+                    duration = duration + E.EffectOverride[control.effectId].tooltipDurFix
+                end
                 if duration >= 86400 then
                     duration = duration / 86400
                 elseif duration >= 3600 then
@@ -1626,11 +1632,15 @@ function SCB.Buff_OnMouseEnter(control)
     -- END TEMPORARY DEBUG FUNCTION HERE
 
         local thirdLine
+        local duration = control.duration / 1000
+        if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipDurFix then
+            duration = duration + E.EffectOverride[control.effectId].tooltipDurFix
+        end
         if E.TooltipNameOverride[control.effectName] then
-            thirdLine = E.TooltipNameOverride[control.effectName]
+            thirdLine = strformat(E.TooltipNameOverride[control.effectName], duration)
         end
         if E.TooltipNameOverride[control.effectId] then
-            thirdLine = E.TooltipNameOverride[control.effectId]
+            thirdLine = strformat(E.TooltipNameOverride[control.effectId], duration)
         end
         -- Have to trim trailing spaces on the end of tooltips
         if tooltipText ~= "" then
@@ -2565,7 +2575,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
                     savedName = strformat(SI_UNIT_NAME, targetName),
-                    fakeDuration = true
+                    fakeDuration = overrideDuration
                 }
             else
                 g_effectsList.saved[ abilityId ] = {
@@ -2576,7 +2586,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
                     savedName = strformat(SI_UNIT_NAME, targetName),
-                    fakeDuration = true
+                    fakeDuration = overrideDuration
                 }
             end
         end

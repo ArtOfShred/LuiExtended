@@ -7,9 +7,9 @@ local A = {}
 -- ---------------------------------------------------
 
 -- Major/Minor Buffs
-A.Skill_Minor_Resolve               = 24159
+A.Skill_Minor_Resolve               = 61693
 A.Skill_Major_Resolve               = 22236
-A.Skill_Minor_Ward                  = 32761
+A.Skill_Minor_Ward                  = 61695
 A.Skill_Major_Ward                  = 18868
 A.Skill_Minor_Fortitude             = 26213
 A.Skill_Major_Fortitude             = 29011
@@ -84,6 +84,7 @@ A.Innate_Resurrection_Immunity      = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUN
 A.Innate_Soul_Gem_Resurrection      = GetString(SI_LUIE_SKILL_SOUL_GEM_RESURRECTION) -- Soul Gem Resurrection
 
 -- Player Basic
+A.Innate_Immobilize_Immunity        = 29721
 A.Innate_Crouch                     = 20306 -- Crouch
 A.Innate_Stealth_Stun               = GetString(SI_LUIE_SKILL_STEALTH_STUN) -- Crouch Stun
 A.Innate_Disguised                  = 23553 -- Disguised
@@ -434,7 +435,7 @@ A.Passive_Red_Diamond               = 36155
 -- ---------------------------------------------------
 
 -- Dragonknight
-
+A.Skill_Mountains_Blessing          = 29473
 A.Skill_Lava_Whip                   = 23806
 A.Skill_Molten_Whip                 = 20805
 A.Skill_Flame_Lash                  = 20816
@@ -447,45 +448,91 @@ A.Skill_Unrelenting_Grip            = 20496
 A.Skill_Inferno                     = 28967
 A.Skill_Flames_of_Oblivion          = 32853
 A.Skill_Cauterize                   = 32881
+A.Skill_Dragonknight_Standard       = 28988
+A.Skill_Shifting_Standard           = 32967
 A.Skill_Standard_of_Might           = 32947
 A.Skill_Shackle                     = 32905
 A.Skill_Spiked_Armor                = 20319
+A.Skill_Hardened_Armor              = 20328
+A.Skill_Volatile_Armor              = 20323
+A.Skill_Choking_Talons              = 20528
 A.Skill_Dragon_Blood                = 29004
+A.Skill_Green_Dragon_Blood          = 32744
+A.Skill_Coagulating_Blood           = 32722
 A.Skill_Inhale                      = 31837
 A.Skill_Deep_Breath                 = 32792
 A.Skill_Draw_Essence                = 32785
+A.Skill_Dragon_Leap                 = 29016
+A.Skill_Take_Flight                 = 32719
+A.Skill_Ferocious_Leap              = 32715
 A.Skill_Stonefist                   = 29032
+A.Skill_Stone_Giant                 = 31816
+A.Skill_Molten_Weapons              = 29043
+A.Skill_Igneous_Weapons             = 31874
+A.Skill_Molten_Armaments            = 31888
+A.Skill_Obsidian_Shield             = 29071
+A.Skill_Igneous_Shield              = 29224
+A.Skill_Fragmented_Shield           = 32673
 A.Skill_Shattering_Rocks            = 32678
 
 -- Nightblade
+A.Skill_Hemorrhage                  = 36641
+A.Skill_Shadow_Barrier              = 18866
+A.Skill_Blur                        = 33375
+A.Skill_Mirage                      = 35414
+A.Skill_Double_Take                 = 35419
+A.Skill_Mark_Target                 = 33357
 A.Skill_Piercing_Mark               = 36968
+A.Skill_Reapers_Mark                = 36967
+A.Skill_Grim_Focus                  = 61902
+A.Skill_Relentless_Focus            = 61927
+A.Skill_Merciless_Resolve           = 61919
 A.Skill_Assassins_Will              = 61907
 A.Skill_Assassins_Scourge           = 61932
-A.Skill_Vulnerability               = GetString(SI_LUIE_SKILL_VULNERABILITY)
 A.Skill_Death_Stroke                = 33398
 A.Skill_Incapacitating_Strike       = 36508
 A.Skill_Soul_Harvest                = 36514
+A.Skill_Veiled_Strike               = 25255
+A.Skill_Surprise_Attack             = 25260
+A.Skill_Concealed_Weapon            = 34739
+A.Skill_Dark_Cloak                  = 25377
+A.Skill_Path_of_Darkness            = 33195
+A.Skill_Twisting_Path               = 36049
 A.Skill_Refreshing_Path             = 36028
 A.Skill_Aspect_of_Terror            = 25352
+A.Skill_Mass_Hysteria               = 37470
 A.Skill_Manifestation_of_Terror     = 37475
 A.Skill_Corrode                     = 89010
+A.Skill_Summon_Shade                = 33211
 A.Skill_Dark_Shade                  = 35434
 A.Skill_Shadow_Image                = 35441
+A.Skill_Shadow_Image_Teleport       = 35445
+A.Skill_Consuming_Darkness          = 25411
+A.Skill_Bolstering_Darkness         = 36493
+A.Skill_Veil_of_Blades              = 36485
+A.Skill_Healthy_Offering            = 34727
+A.Skill_Cripple                     = 33326
+A.Skill_Debilitate                  = 36943
 A.Skill_Crippling_Grasp             = 36957
+A.Skill_Drain_Power                 = 33316
+A.Skill_Power_Extraction            = 36901
 A.Skill_Sap_Essence                 = 36891
 A.Skill_Soul_Tether                 = 35460
+A.Skill_Soul_Siphon                 = 35508
 
 -- Sorcerer
 A.Skill_Crystal_Shard               = 43714
 A.Skill_Crystal_Blast               = 46331
 A.Skill_Crystal_Fragments           = 46324
-A.Skill_Rune_Cage                   = 24578
+A.Skill_Restraining_Prison          = 28311
 A.Skill_Dark_Exchange               = 24584
 A.Skill_Dark_Deal                   = 24595
 A.Skill_Dark_Conversion             = 24589
 A.Skill_Daedric_Tomb                = 24842
 A.Skill_Daedric_Minefield           = 24834
-A.Skill_Familiar_Damage_Pulse       = 108844
+
+A.Skill_Unstable_Pulse              = GetString(SI_LUIE_SKILL_UNSTABLE_PULSE)
+A.Skill_Volatile_Pulse              = GetString(SI_LUIE_SKILL_VOLATILE_PULSE)
 A.Skill_Winged_Twilight_Restore     = 108845
 A.Skill_Tormentor_Damage_Boost      = GetString(SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST)
 A.Skill_Twilight_Matriarch_Restore  = 77369
@@ -616,6 +663,7 @@ A.Skill_Blade_of_Woe                = 78219
 
 -- Fighters Guild
 A.Skill_Revealed                    = 11717
+A.Skill_Marked                      = 103943
 A.Skill_Trap_Beast                  = 35750
 A.Skill_Rearming_Trap               = 40382
 A.Skill_Lightweight_Beast_Trap      = 40372

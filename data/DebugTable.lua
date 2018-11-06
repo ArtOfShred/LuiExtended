@@ -2630,6 +2630,7 @@ debugAuras = {
             [21007] = true, -- Reflective Scale (Reflective Scale)
 
             [21014] = true, -- Reflective Plate (Reflective Plate)
+            [108798] = true, -- Snare Removal (Reflective Plate)
 
             [21017] = true, -- Dragon Fire Scale (Dragon Fire Scale)
             [32753] = true, -- Dragon Fire Scale (Dragon Fire Scale)
@@ -2652,22 +2653,24 @@ debugAuras = {
             [32787] = true, -- Draw Essence (Draw Essence)
             [32789] = true, -- Draw Essence (Draw Essence)
 
-            --[18032] = true, -- Stun (Dragon Leap)
             [48744] = true, -- CC Immunity (Dragon Leap)
             [29012] = true, -- Dragon Leap (Dragon Leap)
             [29014] = true, -- Dragon Leap (Dragon Leap)
             [29016] = true, -- Dragon Leap (Dragon Leap)
+            [114590] = true, -- Stun (Dragon Leap)
 
-            [48753] = true, -- CC Immunity (Take Flight - Rank 1)
-            [32719] = true, -- Take Flight (Take Flight - Rank 1)
-            [32720] = true, -- Take Flight (Take Flight - Rank 1)
-            [32721] = true, -- Take Flight (Take Flight - Rank 1)
+            [48753] = true, -- CC Immunity (Take Flight)
+            [32719] = true, -- Take Flight (Take Flight)
+            [32720] = true, -- Take Flight (Take Flight)
+            [32721] = true, -- Take Flight (Take Flight)
+            [114600] = true, -- Stun (Take Flight)
 
-            [48760] = true, -- CC Immunity (Ferocious Leap - Rank 1)
-            [32715] = true, -- Ferocious Leap (Ferocious Leap - Rank 1)
-            [32716] = true, -- Ferocious Leap (Ferocious Leap - Rank 1)
-            [32717] = true, -- Ferocious Leap (Ferocious Leap - Rank 1)
-            [61814] = true, -- Ferocious Leap (Ferocious Leap - Rank 1)
+            [48760] = true, -- CC Immunity (Ferocious Leap)
+            [32715] = true, -- Ferocious Leap (Ferocious Leap)
+            [32716] = true, -- Ferocious Leap (Ferocious Leap)
+            [32717] = true, -- Ferocious Leap (Ferocious Leap)
+            [61814] = true, -- Ferocious Leap (Ferocious Leap)
+            [114601] = true, -- Stun (Ferocious Leap)
 
             [86798] = true, -- Knockdown Bonus Damage (Stonefist - Rank 1)
             [29032] = true, -- Stonefist (Stonefist - Rank 1)
@@ -2862,7 +2865,6 @@ debugAuras = {
             [61928] = true, -- Relentless Focus (Relentless Focus)
 
             [61930] = true, -- Assassin's Will (Merciless Resolve)
-            [62061] = true, -- Snare (Merciless Resolve)
             [61919] = true, -- Merciless Resolve (Merciless Resolve)
             [64055] = true, -- Minor Berserk (Merciless Resolve)
             [61920] = true, -- Merciless Resolve (Merciless Resolve)
@@ -2874,7 +2876,11 @@ debugAuras = {
             [36508] = true, -- Incapacitating Strike (Incapacitating Strike)
             [36509] = true, -- Major Defile (Incapacitating Strike)
             [61393] = true, -- Damage Taken Increased (Incapacitating Strike)
-            [36513] = true, -- Incapacitating Strike (Incapacitating Strike)
+            [113108] = true, -- 120 Ultimate Tracker (Incapacitating Strike)
+            [113105] = true, -- Incapacitating Strike (Incapacitating Strike)
+            [113110] = true, -- Major Defile (Incapacitating Strike)
+            [113107] = true, -- Damage Taken Increased (Incapacitating Strike)
+            [113109] = true, -- Incapacitating Strike (Incapacitating Strike)
 
             [36518] = true, -- Soul Harvest Passive (Soul Harvest)
             [36514] = true, -- Soul Harvest (Soul Harvest)
@@ -2915,7 +2921,6 @@ debugAuras = {
             [33198] = true, -- Path of Darkness (Path of Darkness)
             [33197] = true, -- Path of Darkness (Path of Darkness)
             [33210] = true, -- Major Expedition (Path of Darkness)
-            [33196] = true, -- Path of Darkness (Path of Darkness)
 
             [36049] = true, -- Twisting Path (Twisting Path)
             [37381] = true, -- Summon Shade (Twisting Path)
@@ -2929,7 +2934,6 @@ debugAuras = {
             [64002] = true, -- Refreshing Path (Refreshing Path)
             [64005] = true, -- Major Expedition (Refreshing Path)
             [64006] = true, -- Refreshing Path (Refreshing Path)
-            [64001] = true, -- Path of Darkness (Refreshing Path)
 
             [25352] = true, -- Aspect of Terror (Aspect of Terror)
             [76683] = true, -- Mass Hysteria (Aspect of Terror)
@@ -2976,9 +2980,9 @@ debugAuras = {
             [38528] = true, -- Shadow (Shadow Image)
             [35442] = true, -- Summon Shade (Shadow Image)
             [35451] = true, -- Shadow (Shadow Image)
-
             [51556] = true, -- Corrode (Shadow Image)
             [51558] = true, -- Shade Corrode (Shadow Image)
+            [35445] = true, -- Shadow Image Teleport (Shadow Image)
 
             [108808] = true, -- Synergy Damage Bonus (Consuming Darkness - Hidden Refresh Synergy)
             [37729] = true, -- Hidden Refresh (Consuming Darkness - Hidden Refresh Synergy)
@@ -3010,6 +3014,7 @@ debugAuras = {
             [60401] = true, -- Strife Saved Damage (Strife -- All Morphs)
             [33291] = true, -- Strife (Strife)
             [33292] = true, -- Strife (Strife)
+            [115037] = true, -- Funnel Health (Strife)
 
             [34838] = true, -- Funnel Health (Funnel Health)
             [34840] = true, -- Funnel Health (Funnel Health)
@@ -3017,7 +3022,6 @@ debugAuras = {
             [46181] = true, -- Funnel Health (Funnel Health)
             [34841] = true, -- Funnel Health (Funnel Health)
 
-            [34837] = true, -- Minor Vitality (Swallow Soul)
             [34835] = true, -- Swallow Soul (Swallow Soul)
             [34836] = true, -- Swallow Soul (Swallow Soul)
 
@@ -3056,6 +3060,7 @@ debugAuras = {
 
             [33319] = true, -- Siphoning Strikes (Siphoning Strikes)
             [33321] = true, -- Siphoning Strikes (Siphoning Strikes)
+            [114957] = true, -- Siphoning Strikes (Siphoning Strikes)
 
             [36908] = true, -- Leeching Strikes (Leeching Strikes)
             [96689] = true, -- Leeching Strikes (Leeching Strikes)
@@ -3063,6 +3068,8 @@ debugAuras = {
             [95895] = true, -- Leeching Strikes (Leeching Strikes)
             [36911] = true, -- Leeching Strikes (Leeching Strikes)
             [36912] = true, -- Leeching Strikes (Leeching Strikes)
+            [114964] = true, -- Leeching Strikes (Leeching Strikes)
+            [114963] = true, -- Leeching Strikes (Leeching Strikes)
 
             [36935] = true, -- Siphoning Attacks (Siphoning Attacks)
             [96713] = true, -- Siphoning Strikes (Siphoning Attacks)
@@ -3070,6 +3077,8 @@ debugAuras = {
             [95908] = true, -- Siphoning Attacks (Siphoning Attacks)
             [36937] = true, -- Siphoning Attacks (Siphoning Attacks)
             [36938] = true, -- Siphoning Attacks (Siphoning Attacks)
+            [114969] = true, -- Siphoning Attacks (Siphoning Attacks)
+            [114968] = true, -- Siphoning Attacks (Siphoning Attacks)
 
             [33316] = true, -- Drain Power (Drain Power)
             [33317] = true, -- Major Brutality (Drain Power)
@@ -3173,8 +3182,7 @@ debugAuras = {
             [46326] = true, -- Crystal Fragments Passive (Crystal Fragments)
             [46324] = true, -- Crystal Fragments (Crystal Fragments)
             [46327] = true, -- Crystal Fragments Proc (Crystal Fragments)
-            [64158] = true, -- Reduced Post Global (Crystal Fragments)
-            [64160] = true, -- Crystal Fragments Passive (Crystal Fragments)
+            [114716] = true, -- Crystal Fragments (Crystal Fragments)
 
             [28025] = true, -- Encase (Encase)
             [43759] = true, -- Encase (Encase)
@@ -3187,9 +3195,6 @@ debugAuras = {
             [43780] = true, -- Encase (Shattering Prison)
             [28309] = true, -- Shattering Prison (Shattering Prison)
 
-            [24371] = true, -- Rune Prison (Rune Prison)
-            [24559] = true, -- Rune Prison (Rune Prison)
-
             [28311] = true, -- Restraining Prison (Restraining Prison)
             [43793] = true, -- Encase (Restraining Prison)
             [43794] = true, -- Encase (Restraining Prison)
@@ -3197,24 +3202,31 @@ debugAuras = {
             [108833] = true, -- Restraining Stack Count (Restraining Prison)
             [108832] = true, -- Major Vitality (Restraining Prison)
 
+            [24371] = true, -- Rune Prison (Rune Prison)
+            [24559] = true, -- Rune Prison (Rune Prison)
+
             [24578] = true, -- Rune Cage (Rune Cage)
             [24581] = true, -- Rune Cage (Rune Cage)
-            [100118] = true, -- Petrify (Rune Cage)
+            [100118] = true, -- Rune Cage (Rune Cage)
 
             [24574] = true, -- Defensive Rune (Defensive Rune)
+            [114602] = true, -- Defensive Rune Constrict (Defensive Rune)
             [24576] = true, -- Defensive Rune (Defensive Rune)
 
             [24584] = true, -- Dark Exchange (Dark Exchange)
             [24585] = true, -- Dark Exchange (Dark Exchange)
             [24587] = true, -- Dark Exchange Heal (Dark Exchange)
+            [114903] = true, -- Dark Exchange (Dark Exchange)
 
             [24595] = true, -- Dark Deal (Dark Deal)
             [24596] = true, -- Dark Exchange (Dark Deal)
             [24597] = true, -- Dark Exchange Heal (Dark Deal)
+            [114908] = true, -- Dark Deal (Dark Deal)
 
             [24589] = true, -- Dark Conversion (Dark Conversion)
             [24591] = true, -- Dark Exchange (Dark Conversion)
             [24592] = true, -- Dark Exchange Heal (Dark Conversion)
+            [114909] = true, -- Dark Deal (Dark Conversion)
 
             [24828] = true, -- Daedric Mines (Daedric Mines)
             [24830] = true, -- Daedric Mines (Daedric Mines)
