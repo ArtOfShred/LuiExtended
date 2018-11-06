@@ -64,9 +64,10 @@ E.IsToggle = {
 }
 
 E.IsAbilityProc = {
-    [A.Skill_Power_Lash]          = true,
-    [A.Skill_Assassins_Will]      = true,
-    [A.Skill_Assassins_Scourge]   = true,
+    [20824] = true, -- Power Lash (Flame Lash
+    [61907] = true, -- Assassin's Will (Grim Focus)
+    [61932] = true, -- Assassin's Scourge (Relentless Focus)
+    [61930] = true, -- Assassin's Will (Merciless Resolve)
 }
 
 E.HasAbilityProc = {
@@ -1312,10 +1313,12 @@ E.BarHighlightOverride = {
     [33375] = { newId = 90587, showFakeAura = true, noRemove = true }, -- Blur --> Major Evasion
     [35414] = { newId = 90593, showFakeAura = true, noRemove = true }, -- Mirage --> Major Evasion
     [35419] = { newId = 90620, showFakeAura = true, noRemove = true }, -- Double Take --> Major Evasion
+    [61907] = { newId = 61902 }, -- Grim Focus --> Assassin's Will
+    [61932] = { newId = 61927 }, -- Relentless Focus --> Assassin's Scourge
+    [61930] = { newId = 61919 }, -- Merciless Resolve --> Assassin's Will
     [33398] = { newId = 61389 }, -- Death Stroke --> Damage Taken Increased
     [36508] = { newId = 61393 }, -- Incapacitating Strike --> Damage Taken Increased
     [36514] = { newId = 61400} , -- Soul Harvest --> Damage Taken Increased
-    [25091] = { newId = 25093 }, -- Soul Shred
 
     -- Shadow
     [25255] = { newId = 33185 }, -- Veiled Strike
@@ -1344,6 +1347,7 @@ E.BarHighlightOverride = {
     [33316] = { newId = 33317, showFakeAura = true, noRemove = true }, -- Drain Power --> Major Brutality
     [36901] = { newId = 36903, showFakeAura = true, noRemove = true }, -- Power Extraction --> Major Brutality
     [36891] = { newId = 36894, showFakeAura = true, noRemove = true }, -- Sap Essence --> Major Brutality
+    [25091] = { newId = 25093 }, -- Soul Shred
 
     ---------------------------
     -- Sorcerer ---------------
@@ -1839,24 +1843,21 @@ E.SynergyNameOverride = {
     [A.Set_Shield_of_Ursus] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', name = A.Set_Ursus_Blessing }, -- Ursus's Blessing (Haven of Ursus)
 }
 
-E.BarNameOverride = {
+E.BarIdOverride = {
+
     -- Dragonknight
-    [A.Skill_Power_Lash] = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', -- Power Lash (Flame Lash)
+    [20824] = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', -- Power Lash (Flame Lash)
 
     -- Nightblade
-    [A.Skill_Assassins_Will] = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', -- Assassin's Will (Grim Focus + Merciless Resolve)
-    [A.Skill_Assassins_Scourge] = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', -- Assassin's Scourge (Grim Focus + Merciless Resolve)
-    [A.Skill_Shadow_Image_Teleport] = 'LuiExtended/media/icons/abilities/ability_nightblade_shadow_image_teleport.dds', -- Shadow Image Teleport (Shadow Image)
-
-    -- Sorcerer
-    [A.Skill_Winged_Twilight_Restore] = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds', -- Winged Twilight Restore (Summon Winged Twilight)
-
-}
-
-E.BarIdOverride = {
+    [61907] = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', -- Assassin's Will (Grim Focus)
+    [61932] = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', -- Assassin's Scourge (Relentless Focus)
+    [61930] = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', -- Assassin's Will (Merciless Resolve)
+    [35445] = 'LuiExtended/media/icons/abilities/ability_nightblade_shadow_image_teleport.dds', -- Shadow Image Teleport (Shadow Image)
 
     -- Sorcerer
     [108840] = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds', -- Summon Unstable Familiar (Summon Unstable Familiar)
+    [108845] = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds', -- Winged Twilight Restore (Summon Winged Twilight)
+
 }
 
 E.EffectOverrideByName = {
@@ -4099,14 +4100,11 @@ E.EffectOverride = {
     [108814] = { hide = true }, -- Synergy Damage Bonus (Synergy - Soul Shred)
     [25171] = { icon = 'esoui/art/icons/ability_nightblade_018.dds' }, -- Soul Leech (Synergy - Soul Shred)
     [25091] = { hide = true }, -- Soul Shred (Soul Shred)
-
     [25093] = { tooltip = T.Generic_Stun }, -- Soul Shred (Soul Shred)
-
     [35508] = { tooltip = T.Generic_HoT_05Sec, tooltipDurFix = 0.5 }, -- Soul Siphon (Soul Siphon)
     [63533] = { tooltip = A.Skill_Soul_Siphon }, -- Major Vitality (Soul Siphon)
     [106133] = { icon = 'esoui/art/icons/ability_nightblade_018_b.dds' }, -- Soul Siphon (Soul Siphon)
     [35613] = { hide = true }, -- Soul Leech (Soul Siphon)
-
     [35460] = { tooltip = T.Skill_Soul_Tether }, -- Soul Tether (Soul Tether)
     [35466] = { tooltip = T.Skill_Soul_Tether, hideReduce = true }, -- Soul Tether (Soul Tether)
     [36606] = { icon = 'esoui/art/icons/ability_nightblade_018_a.dds' }, -- Soul Tether (Soul Tether)
@@ -4118,14 +4116,16 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Dark Magic
-    [108858] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_persistence.dds', name = A.Passive_Persistence }, -- Persistance Cost Reduction (Persistence - Rank 1)
-    [108862] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_persistence.dds', name = A.Passive_Persistence }, -- Persistance Cost Reduction (Persistence - Rank 2)
+    [108858] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_persistence.dds', name = A.Passive_Persistence, tooltip = T.Skill_Persistence_Rank_1 }, -- Persistance Cost Reduction (Persistence - Rank 1)
+    [108862] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_persistence.dds', name = A.Passive_Persistence, tooltip = T.Skill_Persistence_Rank_2 }, -- Persistance Cost Reduction (Persistence - Rank 2)
+    [62319] = { tooltip = A.Skill_Exploitation }, -- Minor Prophecy (Exploitation - Rank 1)
+    [62320] = { tooltip = A.Skill_Exploitation }, -- Minor Prophecy (Exploitation - Rank 2)
     [31384] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_blood_magic.dds' }, -- Blood Magic (Blood Magic - Rank 1)
     [45173] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_blood_magic.dds' }, -- Blood Magic (Blood Magic - Rank 2)
 
     -- Daedric Summoning
-    [64860] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_rebate.dds', name = A.Passive_Rebate }, -- Rebate Magic (Rebate - Rank 1)
-    [64861] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_rebate.dds', name = A.Passive_Rebate }, -- Rebate Magic (Rebate - Rank 2)
+    [64860] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_rebate.dds' }, -- Rebate (Rebate - Rank 1)
+    [64861] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_rebate.dds' }, -- Rebate (Rebate - Rank 2)
     [31415] = { hide = true }, -- Expert Summoner (Expert Summoner - Rank 1)
     [46198] = { hide = true }, -- Expert Summoner (Expert Summoner - Rank 2)
 
@@ -4196,51 +4196,65 @@ E.EffectOverride = {
     [108842] = { name = A.Skill_Unstable_Pulse, tooltip = T.Skill_Familiar_Damage_Pulse, icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds'  }, -- Volatile Familiar Damage Pulsi (Summon Unstable Familiar)
     [108843] = { name = A.Skill_Unstable_Pulse, tooltip = T.Skill_Familiar_Damage_Pulse_Self, icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds'  }, -- Volatile Familiar (Summon Unstable Familiar)
     [108844] = { name = A.Skill_Unstable_Pulse, icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds' }, -- Familiar Damage Pulse (Summon Unstable Familiar)
-
     [23319] = { tooltip = T.Skill_Unstable_Clannfear }, -- Summon Unstable Clannfear (Summon Unstable Clannfear)
     [29528] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_claw.dds', name = A.Skill_Headbutt }, -- Claw (Summon Unstable Clannfear)
     [29529] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_tail_spike.dds' }, -- Tail Spike (Summon Unstable Clannfear)
-
     [23316] = { tooltip = T.Skill_Volatile_Familiar }, -- Summon Volatile Familiar (Summon Volatile Familiar)
     [77187] = { name = A.Skill_Volatile_Pulse, tooltip = T.Skill_Familiar_Stun_Pulse }, -- Volatile Familiar Damage Pulsi (Summon Volatile Familiar)
     [88933] = { name = A.Skill_Volatile_Pulse, tooltip = T.Skill_Familiar_Stun_Pulse_Self }, -- Volatile Familiar (Summon Volatile Familiar)
     [77186] = { name = A.Skill_Volatile_Pulse }, -- Familiar Damage Pulse (Summon Volatile Familiar)
     [77243] = { tooltip = T.Generic_Stun, name = A.Skill_Volatile_Pulse }, -- Volatile Familiar Stun (Summon Volatile Familiar)
 
+    -- Daedric Curse / Daedric Prey / Haunting Curse
     [24326] = { tooltip = T.Skill_Daedric_Curse }, -- Daedric Curse (Daedric Curse)
     [24328] = { tooltip = T.Skill_Daedric_Prey }, -- Daedric Prey (Daedric Prey)
     [24330] = { tooltip = T.Skill_Haunting_Curse }, -- Haunting Curse (Haunting Curse)
     [89491] = { tooltip = T.Skill_Haunting_Curse }, -- Haunting Curse (Haunting Curse)
 
-
+    -- Summon Winged Twilight / Summon Twilight Tormentor / Summon Twilight Matriarch
     [24617] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_zap.dds' }, -- Zap (Summon Winged Twilight - All Morphs)
     [28027] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_kick.dds' }, -- Kick (Summon Winged Twilight - All Morphs)
-
     [24613] = { tooltip = T.Skill_Winged_Twilight }, -- Summon Winged Twilight (Summon Winged Twilight)
     [24739] = { hide = true }, -- Summon Winged Twilight (Summon Winged Twilight)
     [108847] = { name = A.Skill_Winged_Twilight_Restore, icon = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds' }, -- Summon Twilight Matriarch (Summon Winged Twilight)
     [108846] = { name = A.Skill_Winged_Twilight_Restore, icon = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds' }, -- Summon Twilight Matriarch (Summon Winged Twilight)
-
-    [108845] = { name = "Bob" },
-
     [24636] = { tooltip = T.Skill_Twilight_Tormentor }, -- Summon Twilight Tormentor (Summon Twilight Tormentor)
     [24741] = { hide = true }, -- Twilight Tormentor (Summon Twilight Tormentor)
     [77354] = { name = A.Skill_Tormentor_Damage_Boost, tooltip = T.Skill_Tormentor_Damage_Boost }, -- Summon Twilight Tormentor (Summon Twilight Tormentor)
     [88937] = { name = A.Skill_Tormentor_Damage_Boost, tooltip = T.Skill_Tormentor_Damage_Boost_Self }, -- Twilight Tormentor (Summon Twilight Tormentor)
-
     [24639] = { tooltip = T.Skill_Twilight_Matriarch }, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
     [24742] = { hide = true }, -- Twilight Matriarch (Summon Twilight Matriarch)
     [77407] = { name = A.Skill_Twilight_Matriarch_Restore }, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
     [77371] = { name = A.Skill_Twilight_Matriarch_Restore }, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
 
+    -- Conjured Ward / Hardened Ward / Empowered Ward
+    [28418] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Conjured Ward (Conjured Ward)
+    [28421] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Conjured Ward (Conjured Ward)
+    [29489] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Hardened Ward (Hardened Ward)
+    [29490] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Hardened Ward (Hardened Ward)
+    [29482] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Empowered Ward (Empowered Ward)
+    [29483] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Empowered Ward (Empowered Ward)
+    [77418] = { tooltip = A.Skill_Empowered_Ward }, -- Minor Intellect (Empowered Ward)
 
-    [23428] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_atronach_zap.dds' }, -- Atronach Zap (Summon Storm Atronach - All Morphs)
-    [26098] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_atronach_zap.dds', name = A.Skill_Atronach_Zap, hideReduce = true }, -- Zap Snare (Summon Storm Atronach - All Morphs)
-    [23659] = { icon = 'esoui/art/icons/ability_sorcerer_storm_atronach.dds' }, -- Summon Storm Atronach (Summon Storm Atronach)
-    [80463] = { name = A.Skill_Greater_Storm_Atronach }, -- Summon Storm Atronach (Greater Storm Atronach)
-    [23664] = { icon = 'esoui/art/icons/ability_sorcerer_greater_storm_atronach.dds' }, -- Greater Storm Atronach (Greater Storm Atronach)
-    [80468] = { name = A.Skill_Summon_Charged_Atronach }, -- Summon Storm Atronach (Summon Charged Atronach)
-    [23667] = { icon = 'esoui/art/icons/ability_sorcerer_endless_atronachs.dds' }, -- Summon Charged Atronach (Summon Charged Atronach)
+    -- Bound Armor / Bound Armaments / Bound Aegis
+    [24158] = { tooltip = T.Skill_Bound_Armor }, -- Bound Armor (Bound Armor)
+    [24165] = { tooltip = T.Skill_Bound_Armor }, -- Bound Armaments (Bound Armaments)
+    [24163] = { tooltip = T.Skill_Bound_Armor }, -- Bound Aegis (Bound Aegis)
+
+    -- Summon Storm Atronach / Greater Storm Atronach / Summon Charged Atronach
+    [48078] = { tooltip = A.Skill_Charged_Lightning }, -- Major Berserk (Charged Lightning Synergy)
+    [62195] = { tooltip = A.Skill_Charged_Lightning }, -- Major Berserk (Charged Lightning Synergy)
+    [23428] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_atronach_zap.dds', tooltip = T.Skill_Atronach_Zap }, -- Atronach Zap (Summon Storm Atronach - All Morphs)
+    [26098] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_atronach_zap.dds', name = A.Skill_Atronach_Zap, hideReduce = true, tooltip = T.Skill_Atronach_Zap }, -- Zap Snare (Summon Storm Atronach - All Morphs)
+    [23636] = { tooltip = T.Skill_Storm_Atronach }, -- Summon Storm Atronach (Summon Storm Atronach)
+    [80459] = { tooltip = T.Skill_Storm_Atronach }, -- Summon Storm Atronach (Summon Storm Atronach)
+    [23658] = { tooltip = T.Generic_Stun }, -- Summon Storm Atronach (Summon Storm Atronach)
+    [23665] = { tooltip = T.Skill_Storm_Atronach }, -- Greater Storm Atronach (Greater Storm Atronach)
+    [80463] = { tooltip = T.Skill_Storm_Atronach }, -- Greater Storm Atronach (Greater Storm Atronach)
+    [23662] = { tooltip = T.Generic_Stun }, -- Greater Storm Atronach (Greater Storm Atronach)
+    [23668] = { tooltip = T.Skill_Charged_Atronach }, -- Summon Charged Atronach (Summon Charged Atronach)
+    [80468] = { tooltip = T.Skill_Charged_Atronach }, -- Summon Charged Atronach (Summon Charged Atronach)
+    [23666] = { tooltip = T.Generic_Stun }, -- Summon Charged Atronach (Summon Charged Atronach)
     [29806] = { hide = true }, -- Lightning Strike (Summon Charged Atronach)
     [43764] = { hide = true }, -- Lightning Strike (Summon Charged Atronach)
     [43767] = { hide = true }, -- Lightning Strike (Summon Charged Atronach)
@@ -4248,40 +4262,56 @@ E.EffectOverride = {
     [43766] = { hide = true }, -- Lightning Strike (Summon Charged Atronach)
     [29809] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_strike.dds' }, -- Lightning Strike (Summon Charged Atronach)
 
-    -- Storm Calling
-    [18719] = { name = A.Skill_Mages_Fury }, -- Mages' Fury Explosion (Mages' Fury)
-    [44483] = { name = A.Skill_Mages_Fury }, -- Mages' Fury Explosion (Mages' Fury)
-    [19128] = { name = A.Skill_Mages_Wrath }, -- Mages' Wrath Explosion (Mages' Wrath)
-    [44487] = { name = A.Skill_Mages_Wrath }, -- Mages' Wrath Explosion (Mages' Wrath)
-    [24925] = { hide = true }, -- Endless fury dummy (Endless Fury)
-    [24923] = { icon = 'esoui/art/icons/ability_sorcerer_endless_fury.dds', name = A.Skill_Endless_Fury }, -- Endless Fury Regeneration (Endless Fury)
-    [19120] = { name = A.Skill_Endless_Fury }, -- Endless Fury Explosion (Endless Fury)
-    [44491] = { name = A.Skill_Endless_Fury }, -- Endless Fury Explosion (Endless Fury)
-    [62159] = { consolidate = true }, -- Major Resolve (Lightning Form)
-    [62160] = { consolidate = true }, -- Major Ward (Lightning Form)
-    [62167] = { consolidate = true }, -- Major Ward (Hurricane)
-    [62168] = { consolidate = true }, -- Major Resolve (Hurricane)
-    [82797] = { consolidate = true }, -- Minor Expedition (Hurricane)
-    [62175] = { consolidate = true }, -- Major Resolve (Boundless Storm)
-    [62176] = { consolidate = true }, -- Major Ward (Boundless Storm)
+    -- Mages' Fury, Mages' Wrath, Endless Fury
+    [18746] = { tooltip = T.Skill_Mages_Fury }, -- Mages' Fury (Mages' Fury)
+    [19125] = { tooltip = T.Skill_Mages_Fury }, -- Mages' Wrath (Mages' Wrath)
+    [19118] = { tooltip = T.Skill_Endless_Fury }, -- Endless Fury (Endless Fury)
+
+    -- Lightning Form / Hurricane / Boundless Storm
+    [23210] = { tooltip = T.Skill_Lightning_Form }, -- Lightning Form (Lightning Form)
+    [62159] = { consolidate = true, tooltip = A.Skill_Lightning_Form }, -- Major Resolve (Lightning Form)
+    [62160] = { consolidate = true, tooltip = A.Skill_Lightning_Form }, -- Major Ward (Lightning Form)
+    [23231] = { tooltip = T.Skill_Hurricane }, -- Hurricane (Hurricane)
+    [62167] = { consolidate = true, tooltip = A.Skill_Hurricane }, -- Major Ward (Hurricane)
+    [62168] = { consolidate = true, tooltip = A.Skill_Hurricane }, -- Major Resolve (Hurricane)
+    [82797] = { consolidate = true, tooltip = A.Skill_Hurricane }, -- Minor Expedition (Hurricane)
+    [23213] = { tooltip = T.Skill_Lightning_Form }, -- Boundless Storm (Boundless Storm)
+    [23216] = { tooltip = A.Skill_Boundless_Storm }, -- Major Expedition (Boundless Storm)
+    [62175] = { consolidate = true, tooltip = A.Skill_Boundless_Storm }, -- Major Resolve (Boundless Storm)
+    [62176] = { consolidate = true, tooltip = A.Skill_Boundless_Storm }, -- Major Ward (Boundless Storm)
+
+    -- Lightning Splash / Liquid Lightning / Lightning Flood
     [108607] = {hide = true }, -- Synergy Damage Bonus (Lightning Splash - Conduit Synergy)
-    [23673] = { consolidate = true }, -- Major Brutality (Surge)
-    [64492] = { icon = 'esoui/art/icons/ability_sorcerer_surge.dds' }, -- Surge (Surge)
-    [96453] = { icon = 'esoui/art/icons/ability_sorcerer_surge.dds' }, -- Surge (Surge)
-    [62062] = { consolidate = true }, -- Major Sorcery (Power Surge)
-    [62060] = { consolidate = true }, -- Major Brutality (Power Surge)
-    [64500] = { icon = 'esoui/art/icons/ability_sorcerer_power_surge.dds' }, -- Power Surge (Power Surge)
-    [96457] = { icon = 'esoui/art/icons/ability_sorcerer_power_surge.dds' }, -- Power Surge (Power Surge)
-    [62147] = { consolidate = true }, -- Major Brutality (Critical Surge)
-    [23682] = { icon = 'esoui/art/icons/ability_sorcerer_critical_surge.dds', name = A.Skill_Critical_Surge }, -- Surge Heal (Critical Surge)
-    [96461] = { icon = 'esoui/art/icons/ability_sorcerer_critical_surge.dds', name = A.Skill_Critical_Surge }, -- Surge Heal (Critical Surge)
-    [51392] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Bolt Escape Fatigue
+    [23182] = { tooltip = T.Skill_Lightning_Splash }, -- Lightning Splash (Lightning Splash)
+    [23200] = { tooltip = T.Skill_Lightning_Splash }, -- Liquid Lightning (Liquid Lightning)
+    [23205] = { tooltip = T.Skill_Lightning_Splash }, -- Lightning Flood (Lightning Flood)
+
+    -- Surge / Power Surge / Critical Surge
+    [23670] = { tooltip = T.Skill_Surge }, -- Surge (Surge)
+    [23673] = { consolidate = true, tooltip = A.Skill_Surge }, -- Major Brutality (Surge)
+    [23674] = { tooltip = T.Skill_Surge }, -- Power Surge (Power Surge)
+    [62062] = { consolidate = true, tooltip = A.Skill_Power_Surge }, -- Major Sorcery (Power Surge)
+    [62060] = { consolidate = true, tooltip = A.Skill_Power_Surge }, -- Major Brutality (Power Surge)
+    [23678] = { tooltip = T.Skill_Surge }, -- Critical Surge (Critical Surge)
+    [62147] = { consolidate = true, tooltip = A.Skill_Critical_Surge }, -- Major Brutality (Critical Surge)
+
+    -- Bolt Escape
+    [51392] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Bolt_Escape_Fatigue }, -- Bolt Escape Fatigue (Bolt Escape - All Morphs)
+    [23235] = { tooltip = T.Generic_Stun_2_Sec }, -- Bolt Escape (Bolt Escape)
+    [28482] = { tooltip = T.Generic_Stun }, -- Streak (Streak)
     [23283] = { hide = true }, -- Summoned Ball of Lightning (Ball of Lightning)
-    [23284] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds', duration = 0, forcedContainer = 'short' }, -- Intercept (Ball of Lightning)
+    [23284] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds', duration = 0, forcedContainer = 'short', tooltip = T.Skill_Intercept, groundLabel = true }, -- Intercept (Ball of Lightning)
     [23279] = { hide = true }, -- Ball of Lightning (Ball of Lightning)
-    [24810] = { icon = 'esoui/art/icons/ability_sorcerer_overload.dds', name = A.Skill_Overload_Heavy_Attack, hide = true }, -- Power Overload Heavy Attack (Power Overload)
-    [24811] = { icon = 'esoui/art/icons/ability_sorcerer_overload.dds', name = A.Skill_Overload_Heavy_Attack }, -- Power Overload Heavy Attack (Power Overload)
-    [29740] = { icon = 'esoui/art/icons/ability_sorcerer_energy_overload.dds' }, -- Energy Overload
+    [23278] = { tooltip = T.Generic_Stun }, -- Ball of Lightning (Ball of Lightning)
+
+    -- Overload / Power Overload / Energy Overload
+    [24785] = { tooltip = T.Skill_Overload }, -- Overload (Overload)
+    [24806] = { tooltip = T.Skill_Overload }, -- Power Overload (Power Overload)
+    [114769] = { icon = 'esoui/art/icons/ability_sorcerer_power_overload.dds' }, -- Power Overload Light Attack (Power Overload)
+    [24804] = { tooltip = T.Skill_Energy_Overload }, -- Energy Overload (Energy Overload)
+    [114773] = { icon = 'esoui/art/icons/ability_sorcerer_energy_overload.dds' }, -- Energy Overload Light Attack (Energy Overload)
+    [114798] = { icon = 'esoui/art/icons/ability_sorcerer_energy_overload.dds', name = A.Skill_Energy_Overload_Heavy }, -- Power Overload Heavy Attack (Energy Overload)
+    [29740] = { icon = 'esoui/art/icons/ability_sorcerer_energy_overload.dds' }, -- Energy Overload (Energy Overload)
 
     ----------------------------------------------------------------
     -- TEMPLAR PASSIVES --------------------------------------------
@@ -8184,9 +8214,6 @@ E.FakePlayerDebuffs = {
 
     -- Destruction Staff
     [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
-
-    -- Dragonknight (Flame Lash)
-    [70745] = {icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Power_Lash, duration = 2000}, -- Off-Balance Exploit (Flame Lash - Rank 1)
 
     -- Werewolf
     [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)

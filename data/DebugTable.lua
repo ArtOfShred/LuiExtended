@@ -3143,9 +3143,9 @@ debugAuras = {
 
             -- Daedric Summoning
             [31398] = true, -- Rebate (Rank 1)
-            [64860] = true, -- Rebate Magic
+            [64860] = true, -- Rebate
             [45198] = true, -- Rebate (Rank 2)
-            [64861] = true, -- Rebate Magic
+            [64861] = true, -- Rebate
             [31396] = true, -- Power Stone (Rank 1)
             [45196] = true, -- Power Stone (Rank 2)
             [31417] = true, -- Daedric Protection (Rank 1)
@@ -3387,7 +3387,7 @@ debugAuras = {
             [23492] = true, -- Greater Storm Atronach (Greater Storm Atronach)
             [23663] = true, -- Greater Storm Atronach (Greater Storm Atronach)
             [23665] = true, -- Greater Storm Atronach (Greater Storm Atronach)
-            [80463] = true, -- Summon Storm Atronach (Greater Storm Atronach)
+            [80463] = true, -- Greater Storm Atronach (Greater Storm Atronach)
             [102322] = true, -- Atronach Synergy Anchor (Greater Storm Atronach)
             [102321] = true, -- Charged Lightning (Greater Storm Atronach)
             [23664] = true, -- Greater Storm Atronach (Greater Storm Atronach)
@@ -3396,7 +3396,7 @@ debugAuras = {
             [23495] = true, -- Summon Charged Atronach (Summon Charged Atronach)
             [23669] = true, -- Summon Charged Atronach (Summon Charged Atronach)
             [23668] = true, -- Summon Charged Atronach (Summon Charged Atronach)
-            [80468] = true, -- Summon Storm Atronach (Summon Charged Atronach)
+            [80468] = true, -- Summon Charged Atronach (Summon Charged Atronach)
             [102330] = true, -- Atronach Synergy Anchor (Summon Charged Atronach)
             [102329] = true, -- Charged Lightning (Summon Charged Atronach)
             [23667] = true, -- Summon Charged Atronach (Summon Charged Atronach)
@@ -3416,21 +3416,21 @@ debugAuras = {
 
             [18718] = true, -- Mages' Fury (Mages' Fury)
             [18746] = true, -- Mages' Fury (Mages' Fury)
-            [18719] = true, -- Mages' Fury Explosion (Mages' Fury)
-            [44483] = true, -- Mages' Fury Explosion (Mages' Fury)
+            [18719] = true, -- Mages' Fury (Mages' Fury)
+            [44483] = true, -- Mages' Fury (Mages' Fury)
 
             [19123] = true, -- Mages' Wrath (Mages' Wrath)
             [19125] = true, -- Mages' Wrath (Mages' Wrath)
-            [19128] = true, -- Mages' Wrath Explosion (Mages' Wrath)
-            [44487] = true, -- Mages' Wrath Explosion (Mages' Wrath)
+            [19128] = true, -- Mages' Wrath (Mages' Wrath)
+            [44487] = true, -- Mages' Wrath (Mages' Wrath)
 
-            [19121] = true, -- Endless Fury Regeneration (Endless Fury)
             [19109] = true, -- Endless Fury (Endless Fury)
             [19118] = true, -- Endless Fury (Endless Fury)
-            [24925] = true, -- Endless fury dummy (Endless Fury)
-            [24923] = true, -- Endless Fury Regeneration (Endless Fury)
-            [19120] = true, -- Endless Fury Explosion (Endless Fury)
-            [44491] = true, -- Endless Fury Explosion (Endless Fury)
+            [114764] = true, -- Endless Fury (Endless Fury)
+            [114762] = true, -- Endless Fury (Endless Fury)
+            [114763] = true, -- Endless Fury (Endless Fury)
+            [19120] = true, -- Endless Fury (Endless Fury)
+            [44491] = true, -- Endless Fury (Endless Fury)
 
             [23210] = true, -- Lightning Form (Lightning Form)
             [62159] = true, -- Major Resolve (Lightning Form)
@@ -3484,8 +3484,8 @@ debugAuras = {
 
             [23678] = true, -- Critical Surge (Critical Surge)
             [62147] = true, -- Major Brutality (Critical Surge)
-            [23682] = true, -- Surge Heal (Critical Surge)
-            [96461] = true, -- Surge Heal (Critical Surge)
+            [23682] = true, -- Critical Surge (Critical Surge)
+            [96461] = true, -- Critical Surge (Critical Surge)
 
             [51392] = true, -- Bolt Escape Fatigue (Bolt Escape - All Morphs)
             [23234] = true, -- Bolt Escape (Bolt Escape)
@@ -3502,22 +3502,27 @@ debugAuras = {
             [23278] = true, -- Ball of Lightning (Ball of Lightning)
             [70518] = true, -- 1 Orb Up (Ball of Lightning)
 
+            [24785] = true, -- Overload (Overload)
+            [24799] = true, -- Overload End (Overload)
             [26111] = true, -- Shock Dummy (Overload - Light Attack)
             [24792] = true, -- Overload Light Attack (Overload - Light Attack)
             [24794] = true, -- Overload Heavy Attack (Overload - Heavy Attack)
             [27787] = true, -- Controlled Fury Cost (Overload - Heavy Attack)
             [24798] = true, -- Overload Heavy Attack (Overload - Heavy Attack)
-            [24785] = true, -- Overload (Overload)
-            [24799] = true, -- Overload End (Overload)
-
             [24806] = true, -- Power Overload (Power Overload)
             [24808] = true, -- Overload End (Power Overload)
+            [114770] = true, -- Shock Dummy (Power Overload - Light Attack)
+            [114769] = true, -- Power Overload Light Attack (Power Overload - Light Attack)
             [24810] = true, -- Power Overload Heavy Attack (Power Overload - Heavy Attack)
             [28433] = true, -- Controlled Fury Cost (Power Overload - Heavy Attack)
             [24811] = true, -- Power Overload Heavy Attack (Power Overload - Heavy Attack)
-
             [24804] = true, -- Energy Overload (Energy Overload)
             [24805] = true, -- Overload End (Energy Overload)
+            [114774] = true, -- Shock Dummy (Energy Overload - Light Attack)
+            [114773] = true, -- Energy Overload Light Attack (Energy Overload - Light Attack)
+            [114797] = true, -- Energy Overload Heavy Attack (Energy Overload - Heavy Attack)
+            [114799] = true, -- Controlled Fury Cost (Energy Overload - Heavy Attack)
+            [114798] = true, -- Power Overload Heavy Attack (Energy Overload - Heavy Attack)
             [29740] = true, -- Energy Overload (Energy Overload)
 
             -------------------------------------

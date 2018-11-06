@@ -628,10 +628,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         local slotIcon = GetSlotTexture(slotId)
 
         -- Added function - Replace icons if needed
-        local slotName = GetSlotName(slotId)
-        if LUIE.Effects.BarNameOverride[slotName] then
-            slotIcon = LUIE.Effects.BarNameOverride[slotName]
-        end
         local abilityId = GetSlotBoundId(slotId)
         if LUIE.Effects.BarIdOverride[abilityId] then
             slotIcon = LUIE.Effects.BarIdOverride[abilityId]

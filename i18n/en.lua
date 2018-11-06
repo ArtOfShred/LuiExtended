@@ -2254,8 +2254,8 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_MAGIC_2_SEC_TP =               "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
 
     SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Restoring Magicka every |cFFFFFF1|r second |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Restoring Stamina every |cFFFFFF1|r second |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Restoring Magicka every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Restoring Stamina every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
 
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP =      "Absorbing damage.",
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP =             "Absorbing damage for |cFFFFFF<<1>>|r seconds.",
@@ -2289,6 +2289,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized for |cFFFFFF<<1>>|r seconds. Unable to move while immobilized.",
     SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while staggered.",
     SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.",
+    SI_LUIE_SKILL_GENERIC_STUN_2_SEC_TP =                "Stunned for |cFFFFFF2|r seconds. You are unable to attack or move while stunned.",
     SI_LUIE_SKILL_GENERIC_STUN_NO_DUR_TP =               "Stunned. You are unable to attack or move while stunned.",
     SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP =                 "Knocked back for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while knocked back.",
     SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP =                 "Knocked down for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while knocked down.",
@@ -2367,6 +2368,7 @@ local strings = {
     SI_LUIE_SKILL_SOUL_TETHER_TP =                       "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nStunned for |cFFFFFF4.5|r seconds. You are unable to attack or move while stunned.",
 
     -- Sorcerer
+    SI_LUIE_SKILL_PERSISTENCE =                          "Your next Magicka or Stamina ability cast within |cFFFFFF4|r seconds costs |cFFFFFF<<1>>|r% less.",
     SI_LUIE_SKILL_CRYSTAL_FRAGMENTS_TP =                 "Your next Crystal Fragments cast within |cFFFFFF<<1>>|r seconds is instant, deals |cFFFFFF20|r% more damage, and costs |cFFFFFF50|r% less Magicka.",
     SI_LUIE_SKILL_SHATTERING_PRISON_TP =                 "Encased in Daedric shards and immobilized for |cFFFFFF<<1>>|r seconds. Unable to move while immobilized.\n\nThe shards deal Magic Damage when the effect ends.",
     SI_LUIE_SKILL_RUNE_CAGE_TP =                         "Imprisoned in a sphere of dark magic and stunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.\n\nDeals Magic Damage if the stun lasts the full duration.",
@@ -2387,14 +2389,26 @@ local strings = {
     SI_LUIE_SKILL_DAEDRIC_CURSE_TP =                     "Cursed with a destructive rune. After |cFFFFFF6|r seconds the rune detonates, dealing Magic Damage and splashing to other nearby targets.",
     SI_LUIE_SKILL_DAEDRIC_PREY_TP =                      "Cursed with a destructive rune. After |cFFFFFF6|r seconds the rune detonates, dealing Magic Damage and splashing to other nearby targets.\n\nWhile the curse is active, the Sorcerer's pets deal an additional |cFFFFFF55|r% damage to you.",
     SI_LUIE_SKILL_HAUNTING_CURSE_TP =                    "Cursed with a destructive rune. After |cFFFFFF3.5|r seconds the rune detonates, dealing Magic Damage and splashing to other nearby targets.\n\nThe curse will apply a second time, detonating again after |cFFFFFF8.5|r seconds.",
-
     SI_LUIE_SKILL_WINGED_TWILIGHT_TP =                   "A Winged Twilight fights at your side. The winged twilight remains until killed or unsummoned.",
     SI_LUIE_SKILL_TWILIGHT_TORMENTOR_TP =                "A Twilight Tormentor fights at your side. The tormentor remains until killed or unsummoned.",
     SI_LUIE_SKILL_TWILIGHT_MATRIARCH_TP =                "A Twilight Matriarch fights at your side. The matriarch remains until killed or unsummoned.",
-
     SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST =               "Twilight Empowerment",
     SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST_SELF_TP =       "Increase Twilight Tormentor damage against enemies above |cFFFFFF50|r% Health by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST_TP =            "Increase damage against enemies above |cFFFFFF50|r% Health by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BOUND_ARMOR_TP =                       "Increase block mitigation by |cFFFFFF36|r% for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_ATRONACH_ZAP_TP =                      "Afflicted with Shock Damage every |cFFFFFF1|r second for |cFFFFFF4|r seconds.\n\nSnared for |cFFFFFF4|r seconds. Your Movement Speed has been reduced.",
+    SI_LUIE_SKILL_STORM_ATRONACH_TP =                    "An immobile storm atronach zaps the closest enemy, dealing Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nAn ally near the atronach can activate the |cFFFFFFCharged Lightning|r synergy.",
+    SI_LUIE_SKILL_CHARGED_ATRONACH_TP =                  "An immobile storm atronach zaps the closest enemy, dealing Shock Damage every |cFFFFFF1|r second, and periodically deals Shock Damage to enemies around it for |cFFFFFF<<1>>|r seconds.\n\nAn ally near the atronach can activate the |cFFFFFFCharged Lightning|r synergy.",
+    SI_LUIE_SKILL_MAGES_FURY_TP =                        "If you fall below |cFFFFFF20%|r Health within |cFFFFFF4|r seconds, an explosion deals additional Shock Damage to you and nearby targets.",
+    SI_LUIE_SKILL_ENDLESS_FURY_TP =                      "If you fall below |cFFFFFF20%|r Health within |cFFFFFF4|r seconds, an explosion deals additional Shock Damage to you and nearby targets.\n\nRestore Magicka to the Sorcerer on death.",
+    SI_LUIE_SKILL_LIGHTNING_FORM_TP =                    "Enemies within |cFFFFFF5|r meters are zapped with electricity and take Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_HURRICANE_TP =                         "Enemies within |cFFFFFF5|r meters are buffeted with winds and take Physical Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThe winds grow in damage and size, increasing up to |cFFFFFF150|r% more damage and up to |cFFFFFF9|r meters in size.",
+    SI_LUIE_SKILL_LIGHTNING_SPLASH_TP =                  "Enemies standing in the storm energy take Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SURGE_TP =                             "For |cFFFFFF<<1>>|r seconds, dealing a Critical Strike heals you. This effect can occur once every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_BOLT_ESCAPE_FATIGUE_TP =               "Consecutive Bolt Escape casts cost |cFFFFFF50|r% more Magicka for the next |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_INTERCEPT_TP =                         "Spell projectiles directed at you will be absorbed by the Ball of Lightning.",
+    SI_LUIE_SKILL_OVERLOAD_TP =                          "Light Attacks are replaced by lightning bolts, dealing Shock Damage, and Heavy Attacks blast enemies in the target area for Shock Damage.\n\nAttacks deplete Ultimate until you run out or the ability is toggled off.",
+    SI_LUIE_SKILL_ENERGY_OVERLOAD_TP =                   "Light Attacks are replaced by lightning bolts, dealing Shock Damage, and Heavy Attacks blast enemies in the target area for Shock Damage.\n\nLight and Heavy Attacks restore Magicka.\n\nAttacks deplete Ultimate until you run out or the ability is toggled off.",
 
     -- Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Direct damage taken from the next Snipe, Scatter Shot, or Poison Arrow increased by |cffffff<<1>>|r% used within |cffffff6|r seconds.",

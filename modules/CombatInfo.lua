@@ -1343,7 +1343,7 @@ function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
 
     -- Check if currently this ability is in proc state
     local proc = E.HasAbilityProc[abilityName]
-    if E.IsAbilityProc[abilityName] then
+    if E.IsAbilityProc[GetSlotBoundId(slotNum)] then
         if CI.SV.ShowTriggered then
             CI.PlayProcAnimations(slotNum)
             if CI.SV.ProcEnableSound then

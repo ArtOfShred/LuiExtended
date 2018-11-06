@@ -397,7 +397,6 @@ A.Champion_Riposte                  = 60230
 
 -- Sorcerer
 A.Passive_Persistence               = 31378
-A.Passive_Rebate                    = 31398
 
 -- Templar
 A.Passive_Light_Weaver              = 31760
@@ -439,7 +438,6 @@ A.Skill_Mountains_Blessing          = 29473
 A.Skill_Lava_Whip                   = 23806
 A.Skill_Molten_Whip                 = 20805
 A.Skill_Flame_Lash                  = 20816
-A.Skill_Power_Lash                  = 20824
 A.Skill_Fiery_Breath                = 20917
 A.Skill_Noxious_Breath              = 20944
 A.Skill_Fiery_Grip                  = 20492
@@ -487,8 +485,6 @@ A.Skill_Reapers_Mark                = 36967
 A.Skill_Grim_Focus                  = 61902
 A.Skill_Relentless_Focus            = 61927
 A.Skill_Merciless_Resolve           = 61919
-A.Skill_Assassins_Will              = 61907
-A.Skill_Assassins_Scourge           = 61932
 A.Skill_Death_Stroke                = 33398
 A.Skill_Incapacitating_Strike       = 36508
 A.Skill_Soul_Harvest                = 36514
@@ -521,6 +517,7 @@ A.Skill_Soul_Tether                 = 35460
 A.Skill_Soul_Siphon                 = 35508
 
 -- Sorcerer
+A.Skill_Exploitation                = 31389
 A.Skill_Crystal_Shard               = 43714
 A.Skill_Crystal_Blast               = 46331
 A.Skill_Crystal_Fragments           = 46324
@@ -530,21 +527,21 @@ A.Skill_Dark_Deal                   = 24595
 A.Skill_Dark_Conversion             = 24589
 A.Skill_Daedric_Tomb                = 24842
 A.Skill_Daedric_Minefield           = 24834
-
 A.Skill_Unstable_Pulse              = GetString(SI_LUIE_SKILL_UNSTABLE_PULSE)
 A.Skill_Volatile_Pulse              = GetString(SI_LUIE_SKILL_VOLATILE_PULSE)
 A.Skill_Winged_Twilight_Restore     = 108845
 A.Skill_Tormentor_Damage_Boost      = GetString(SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST)
 A.Skill_Twilight_Matriarch_Restore  = 77369
+A.Skill_Empowered_Ward              = 29482
+A.Skill_Charged_Lightning           = 102310
 A.Skill_Atronach_Zap                = 23428
-A.Skill_Greater_Storm_Atronach      = 23492
-A.Skill_Summon_Charged_Atronach     = 23495
-A.Skill_Mages_Fury                  = 18718
-A.Skill_Mages_Wrath                 = 19123
-A.Skill_Endless_Fury                = 19109
+A.Skill_Lightning_Form              = 23210
+A.Skill_Hurricane                   = 23231
+A.Skill_Boundless_Storm             = 23213
+A.Skill_Surge                       = 23670
+A.Skill_Power_Surge                 = 23674
 A.Skill_Critical_Surge              = 23678
-A.Skill_Overload                    = 24785
-A.Skill_Overload_Heavy_Attack       = 24794
+A.Skill_Energy_Overload_Heavy       = 114797
 
 -- Templar
 A.Skill_Puncturing_Sweep            = 26797
