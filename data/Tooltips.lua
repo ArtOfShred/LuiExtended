@@ -500,6 +500,23 @@ T.Skill_Intercept                   = GetString(SI_LUIE_SKILL_INTERCEPT_TP)
 T.Skill_Overload                    = GetString(SI_LUIE_SKILL_OVERLOAD_TP)
 T.Skill_Energy_Overload             = GetString(SI_LUIE_SKILL_ENERGY_OVERLOAD_TP)
 
+-- Templar
+T.Skill_Spear_Shards                = GetString(SI_LUIE_SKILL_SPEAR_SHARDS_TP)
+T.Skill_Luminous_Shards             = GetString(SI_LUIE_SKILL_LUMINOUS_SHARDS_TP)
+T.Skill_Blazing_Shield              = GetString(SI_LUIE_SKILL_BLAZING_SHIELD_TP)
+T.Skill_Radial_Sweep                = GetString(SI_LUIE_SKILL_RADIAL_SWEEP_TP)
+T.Skill_Sun_Fire                    = GetString(SI_LUIE_SKILL_SUN_FIRE_TP)
+T.Skill_Sun_Fire_Snare              = GetString(SI_LUIE_SKILL_SUN_FIRE_SNARE_TP)
+T.Skill_Solar_Barrage               = GetString(SI_LUIE_SKILL_SOLAR_BARRAGE_TP)
+T.Skill_Backlash                    = GetString(SI_LUIE_SKILL_BACKLASH_TP)
+T.Skill_Purifying_Light             = GetString(SI_LUIE_SKILL_PURIFYING_LIGHT_TP)
+T.Skill_Purifying_Light_HoT         = GetString(SI_LUIE_SKILL_PURIFYING_LIGHT_HOT_TP)
+T.Skill_Power_of_the_Light          = GetString(SI_LUIE_SKILL_POWER_OF_THE_LIGHT_TP)
+T.Skill_Eclipse                     = GetString(SI_LUIE_SKILL_ECLIPSE_TP)
+T.Skill_Total_Dark                  = GetString(SI_LUIE_SKILL_TOTAL_DARK_TP)
+T.Skill_Unstable_Core               = GetString(SI_LUIE_SKILL_UNSTABLE_CORE_TP)
+T.Skill_Radiant_Destruction         = GetString(SI_LUIE_SKILL_RADIANT_DESTRUCTION_TP)
+
 --zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
 
 -- ---------------------------------------------------

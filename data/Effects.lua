@@ -692,7 +692,6 @@ E.IsCast = {
     [26797] = true, -- Puncturing Sweep (Templar)
     [22057] = true, -- Solar Flare (Templar)
     [22110] = true, -- Dark Flare (Templar)
-    [22095] = true, -- Solar Barrage (Templar)
     [63029] = true, -- Radiant Destruction (Templar)
     [63044] = true, -- Radiant Glory (Templar)
     [63046] = true, -- Radiant Oppression (Templar)
@@ -1214,6 +1213,7 @@ function E.BarHighlightRefresh()
 
         -- Templar
         E.BarHighlightOverride[26792] = { duration = 8000, showFakeAura = true, secondary = true, noRemove = true } -- Biting Jabs --> Major Savagery
+        E.BarHighlightOverride[22144] = { newId = 55214 } -- Empowering Sweep --> Major Protection
         E.BarHighlightOverride[22229] = { newId = 22233, showFakeAura = true, secondary = true, noRemove = true } -- Remembrance --> Major Protection
 
         -- Restoration Staff
@@ -1237,6 +1237,7 @@ function E.BarHighlightRefresh()
 
         -- Templar
         E.BarHighlightOverride[26792] = { newId = 76912, duration = 2000, showFakeAura = true, noRemove = true } -- Biting Jabs
+        E.BarHighlightOverride[22144] = { newId = 62599 } -- Empowering Sweep
         E.BarHighlightOverride[22229] = { showFakeAura = true } -- Remembrance (Remembrance - Rank 1)
 
         -- Werewolf
@@ -1389,9 +1390,9 @@ E.BarHighlightOverride = {
     [26114] = { newId = 76908, duration = 2000, showFakeAura = true, noRemove = true }, -- Puncturing Strikes
     [26792] = { newId = 76912, duration = 2000, showFakeAura = true, noRemove = true }, -- Biting Jabs
     [26797] = { newId = 76916, duration = 2000, showFakeAura = true, noRemove = true }, -- Puncturing Sweep
-    [26158] = { newId = 26162 }, -- Piercing Javelin
-    [26800] = { newId = 26801 }, -- Aurora Javelin
-    [26804] = { newId = 26805 }, -- Binding Javelin
+    [26158] = { newId = 37409 }, -- Piercing Javelin
+    [26800] = { newId = 37414 }, -- Aurora Javelin
+    [26804] = { newId = 32099 }, -- Binding Javelin
     [22149] = { newId = 49205 }, -- Focused Charge
     [22161] = { newId = 49213 }, -- Explosive Charge
     [15540] = { newId = 15546 }, -- Toppling Charge
@@ -1402,7 +1403,7 @@ E.BarHighlightOverride = {
     [22182] = { newId = 22183 }, -- Radiant Ward
     [22180] = { newId = 49091 }, -- Blazing Shield
     [22138] = { newId = 62593 }, -- Radial Sweep
-    [22144] = { newId = 55214 }, -- Empowering Sweep
+    [22144] = { newId = 62599 }, -- Empowering Sweep
     [22139] = { newId = 62607 }, -- Crescent Sweep
 
     -- Dawn's Wrath
@@ -3736,15 +3737,15 @@ E.EffectOverride = {
     [23105] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', tooltip = T.Generic_HoT_1Sec }, -- Power Lash (Flame Lash)
 
     -- Searing Strike / Venomous Claw /Burning Embers
-    [44363] = { tooltip = T.Generic_Burn_2_Sec, tooltipDurFix = 0.5 }, -- Searing Strike (Searing Strike)
-    [44369] = { tooltip = T.Generic_Poison_2_Sec, tooltipDurFix = 0.5 }, -- Venomous Claw (Venomous Claw)
-    [44373] = { tooltip = T.Skill_Burning_Embers, tooltipDurFix = 0.5 }, -- Burning Embers (Burning Embers)
+    [44363] = { tooltip = T.Generic_Burn_2_Sec }, -- Searing Strike (Searing Strike)
+    [44369] = { tooltip = T.Generic_Poison_2_Sec }, -- Venomous Claw (Venomous Claw)
+    [44373] = { tooltip = T.Skill_Burning_Embers }, -- Burning Embers (Burning Embers)
 
     -- Fiery Breath / Noxious Breath / Engulfing Flames
-    [31102] = { tooltip = T.Generic_Burn_2_Sec, tooltipDurFix = 2 }, -- Fiery Breath (Fiery Breath)
-    [31103] = { tooltip = T.Generic_Poison_2_Sec, tooltipDurFix = 2 }, -- Noxious Breath (Noxious Breath)
+    [31102] = { tooltip = T.Generic_Burn_2_Sec }, -- Fiery Breath (Fiery Breath)
+    [31103] = { tooltip = T.Generic_Poison_2_Sec }, -- Noxious Breath (Noxious Breath)
     [48946] = { tooltip = A.Skill_Noxious_Breath }, -- Major Fracture (Noxious Breath)
-    [31104] = { tooltip = T.Skill_Engulfing_Flames, tooltipDurFix = 2 }, -- Engulfing Flames (Engulfing Flames)
+    [31104] = { tooltip = T.Skill_Engulfing_Flames }, -- Engulfing Flames (Engulfing Flames)
 
     -- Fiery Grip / Empowering Chains / Unrelenting Grip
     [76498] = { tooltip = A.Skill_Fiery_Grip }, -- Major Expedition (Fiery Grip)
@@ -3794,7 +3795,7 @@ E.EffectOverride = {
     -- Dark Talons / Burning Talons / Choking Talons
     [108807] = { hide = true }, -- Synergy Damage Bonus (Dark Talons - Ignite Synergy)
     [20527] = { tooltip = T.Generic_Immobilize }, -- Dark Talons (Dark Talons)
-    [31898] = { tooltip = T.Skill_Burning_Talons, tooltipDurFix = 1.5 }, -- Burning Talons (Burning Talons)
+    [31898] = { tooltip = T.Skill_Burning_Talons }, -- Burning Talons (Burning Talons)
     [20253] = { hideReduce = true, tooltip = T.Skill_Burning_Talons }, -- Burning Talons (Burning Talons)
     [31899] = { tooltip = A.Skill_Choking_Talons }, -- Minor Maim (Choking Talons)
     [20528] = { tooltip = T.Generic_Immobilize }, -- Choking Talons (Choking Talons)
@@ -3810,7 +3811,7 @@ E.EffectOverride = {
     -- Reflective Scales / Reflective Plate / Dragon Fire Scale
     [21007] = { tooltip = T.Skill_Reflective_Scale }, -- Reflective Scale (Reflective Scale)
     [21014] = { tooltip = T.Skill_Reflective_Plate }, -- Reflective Plate (Reflective Plate)
-    [108798] = { name = A.Innate_Immobilize_Immunity, tooltip = T.Innate_Immobilize_Immunity, hideReduce = true }, -- Snare Removal (Reflective Plate)
+    [108798] = { name = A.Skill_Reflective_Plate, tooltip = T.Skill_Reflective_Plate, hideReduce = true, noDuplicate = true }, -- Snare Removal (Reflective Plate)
     [21017] = { tooltip = T.Skill_Dragon_Fire_Scale }, -- Dragon Fire Scale (Dragon Fire Scale)
 
     -- Inhale / Deep Breath / Draw Essence
@@ -3934,7 +3935,7 @@ E.EffectOverride = {
     -- Teleport Strike / Lotus Fan / Ambush
     [25887] = { tooltip = T.Generic_Stun }, -- Teleport Strike (Teleport Strike)
     [35334] = { icon = 'esoui/art/icons/ability_nightblade_008_a.dds' }, -- Lotus Fan (Lotus Fan)
-    [35336] = { tooltip = T.Skill_Lotus_Fan, tooltipDurFix = 2 }, -- Lotus Fan (Lotus Fan)
+    [35336] = { tooltip = T.Skill_Lotus_Fan }, -- Lotus Fan (Lotus Fan)
     [25959] = { tooltip = T.Generic_Stun }, -- Ambush (Ambush)
 
     -- Blur / Mirage / Double Take
@@ -4101,7 +4102,7 @@ E.EffectOverride = {
     [25171] = { icon = 'esoui/art/icons/ability_nightblade_018.dds' }, -- Soul Leech (Synergy - Soul Shred)
     [25091] = { hide = true }, -- Soul Shred (Soul Shred)
     [25093] = { tooltip = T.Generic_Stun }, -- Soul Shred (Soul Shred)
-    [35508] = { tooltip = T.Generic_HoT_05Sec, tooltipDurFix = 0.5 }, -- Soul Siphon (Soul Siphon)
+    [35508] = { tooltip = T.Generic_HoT_05Sec }, -- Soul Siphon (Soul Siphon)
     [63533] = { tooltip = A.Skill_Soul_Siphon }, -- Major Vitality (Soul Siphon)
     [106133] = { icon = 'esoui/art/icons/ability_nightblade_018_b.dds' }, -- Soul Siphon (Soul Siphon)
     [35613] = { hide = true }, -- Soul Leech (Soul Siphon)
@@ -4161,13 +4162,13 @@ E.EffectOverride = {
     -- Dark Exchange / Dark Deal / Dark Conversion
     [24585] = { icon = 'esoui/art/icons/ability_sorcerer_dark_exchange.dds' }, -- Dark Exchange (Dark Exchange)
     [24587] = { icon = 'esoui/art/icons/ability_sorcerer_dark_exchange.dds', name = A.Skill_Dark_Exchange }, -- Dark Exchange Heal (Dark Exchange)
-    [114903] = { tooltip = T.Generic_Magicka_Regen, tooltipDurFix = 1 }, -- Dark Exchange (Dark Exchange)
+    [114903] = { tooltip = T.Generic_Magicka_Regen }, -- Dark Exchange (Dark Exchange)
     [24596] = { icon = 'esoui/art/icons/ability_sorcerer_dark_deal.dds', name = A.Skill_Dark_Deal }, -- Dark Exchange (Dark Deal)
     [24597] = { icon = 'esoui/art/icons/ability_sorcerer_dark_deal.dds', name = A.Skill_Dark_Deal }, -- Dark Exchange Heal (Dark Deal)
-    [114908] = { tooltip = T.Generic_Stamina_Regen, tooltipDurFix = 1 }, -- Dark Deal (Dark Deal)
+    [114908] = { tooltip = T.Generic_Stamina_Regen }, -- Dark Deal (Dark Deal)
     [24591] = { icon = 'esoui/art/icons/ability_sorcerer_dark_conversion.dds', name = A.Skill_Dark_Conversion }, -- Dark Exchange (Dark Conversion)
     [24592] = { icon = 'esoui/art/icons/ability_sorcerer_dark_conversion.dds', name = A.Skill_Dark_Conversion }, -- Dark Exchange Heal (Dark Conversion)
-    [114909] = { icon = 'esoui/art/icons/ability_sorcerer_dark_conversion.dds', name = A.Skill_Dark_Conversion, tooltip = T.Generic_Magicka_Regen, tooltipDurFix = 1 }, -- Dark Exchange (Dark Exchange)
+    [114909] = { icon = 'esoui/art/icons/ability_sorcerer_dark_conversion.dds', name = A.Skill_Dark_Conversion, tooltip = T.Generic_Magicka_Regen }, -- Dark Exchange (Dark Exchange)
 
     -- Daedric Mines / Daedric Tomb / Daedric Minefield
     [24830] = { tooltip = T.Skill_Daedric_Mines }, -- Daedric Mines (Daedric Mines)
@@ -4245,7 +4246,7 @@ E.EffectOverride = {
     [48078] = { tooltip = A.Skill_Charged_Lightning }, -- Major Berserk (Charged Lightning Synergy)
     [62195] = { tooltip = A.Skill_Charged_Lightning }, -- Major Berserk (Charged Lightning Synergy)
     [23428] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_atronach_zap.dds', tooltip = T.Skill_Atronach_Zap }, -- Atronach Zap (Summon Storm Atronach - All Morphs)
-    [26098] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_atronach_zap.dds', name = A.Skill_Atronach_Zap, hideReduce = true, tooltip = T.Skill_Atronach_Zap }, -- Zap Snare (Summon Storm Atronach - All Morphs)
+    [26098] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_atronach_zap.dds', name = A.Skill_Atronach_Zap, hide = true }, -- Zap Snare (Summon Storm Atronach - All Morphs)
     [23636] = { tooltip = T.Skill_Storm_Atronach }, -- Summon Storm Atronach (Summon Storm Atronach)
     [80459] = { tooltip = T.Skill_Storm_Atronach }, -- Summon Storm Atronach (Summon Storm Atronach)
     [23658] = { tooltip = T.Generic_Stun }, -- Summon Storm Atronach (Summon Storm Atronach)
@@ -4347,50 +4348,107 @@ E.EffectOverride = {
     -- TEMPLAR ACTIVE ABILITIES ------------------------------------
     ----------------------------------------------------------------
 
-    -- Aedric Spear
-    [55183] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = A.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep - Rank 1)
-    [37414] = { name = A.Skill_Aurora_Javelin }, -- Piercing Javelin
-    [26508] = { icon = '' }, -- Charge (Focused Charge - Rank 1) -- Hide for Interrupt notification on Combat Text
-    [49204] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds' }, -- Focused Charge (Focused Charge - Rank 1)
-    [49205] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds' }, -- Focused Charge (Focused Charge - Rank 1)
-    [26522] = { hide = true, icon = '' }, -- Charge (Explosive Charge - Rank 1)
-    [49213] = { icon = 'esoui/art/icons/ability_templar_double_tipped_charge.dds' }, -- Explosive Charge (Explosive Charge - Rank 1)
-    [26518] = { icon = '' }, -- Charge (Toppling Charge - Rank 1)
-    [44422] = { name = A.Skill_Off_Balance }, -- Toppling Charge (Toppling Charge - Rank 1)
+    -- Puncturing Strikes / Biting Jabs / Puncturing Sweep
+    [76908] = { tooltip = T.Generic_Snare_70 }, -- Puncturing Strikes (Puncturing Strikes)
+    [26795] = { tooltip = A.Skill_Biting_Jabs }, -- Major Savagery (Biting Jabs)
+    [76912] = { tooltip = T.Generic_Snare_70 }, -- Biting Jabs (Biting Jabs)
+    [55183] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = A.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep)
+    [76916] = { tooltip = T.Generic_Snare_70 }, -- Puncturing Sweep (Puncturing Sweep)
+
+    -- Piercing Javelin / Aurora Javelin / Binding Javelin
+    [37409] = { tooltip = T.Generic_Knockback }, -- Piercing Javelin (Piercing Javelin)
+    [37414] = { name = A.Skill_Aurora_Javelin, tooltip = T.Generic_Knockback }, -- Piercing Javelin (Aurora Javelin)
+    [32099] = { tooltip = T.Generic_Knockdown }, -- Binding Javelin (Binding Javelin)
+
+    -- Focused Charge / Explosive Charge / Toppling Charge
+    [26508] = { icon = '' }, -- Charge (Focused Charge) -- Hide for Interrupt notification on Combat Text
+    [49204] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds' }, -- Focused Charge (Focused Charge)
+    [49205] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds', tooltip = T.Generic_Stun }, -- Focused Charge (Focused Charge)
+    [26522] = { hide = true, icon = '' }, -- Charge (Explosive Charge)
+    [49213] = { icon = 'esoui/art/icons/ability_templar_double_tipped_charge.dds', tooltip = T.Generic_Stun }, -- Explosive Charge (Explosive Charge)
+    [15546] = { tooltip = T.Generic_Stun }, -- Toppling Charge (Toppling Charge)
+    [26518] = { icon = '' }, -- Charge (Toppling Charge)
+    [44422] = { name = A.Skill_Off_Balance }, -- Toppling Charge (Toppling Charge)
+    [115940] = { tooltip = T.Generic_Stun }, -- Toppling Charge (Toppling Charge)
+
+    -- Spear Shards / Luminous Shards / Blazing Spear
     [108924] = { hide = true }, -- Synergy Damage Bonus (Spear Shards - Blessed Shards Synergy)
-    [95931] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds' }, -- Spear Shards (Spear Shards - Rank 1)
     [108821] = { hide = true }, -- Synergy Damage Bonus (Luminous Shards - Holy Shards Synergy)
-    [95955] = { icon = 'esoui/art/icons/ability_templar_light_strike.dds' }, -- Luminous Shards (Luminous Shards - Rank 1)
-    [26724] = { hide = true }, -- Sun Shield Hit Bonus (Sun Shield - Rank 1)
-    [26732] = { hide = true }, -- Sun Shield Hit Bonus (Radiant Ward - Rank 1)
-    [49090] = { hide = true }, -- Sun Shield Hit Bonus (Blazing Shield - Rank 1)
-    [22181] = { hide = true }, -- Blazing Shield (Blazing Shield - Rank 1)
-    [22147] = { hide = true }, -- Empowering Sweep (Empowering Sweep - Rank 1)
-    [62599] = { name = A.Skill_Empowering_Sweep }, -- Radial Sweep (Empowering Sweep - Rank 1)
-    [62598] = { name = A.Skill_Empowering_Sweep }, -- Radial Sweep (Empowering Sweep - Rank 1)
-    [62607] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds', name = A.Skill_Crescent_Sweep }, -- Radial Sweep (Crescent Sweep - Rank 1)
-    [62606] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds', name = A.Skill_Crescent_Sweep }, -- Radial Sweep (Crescent Sweep - Rank 1)
+    [95933] = { tooltip = T.Skill_Spear_Shards }, -- Spear Shards (Spear Shards)
+    [95931] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds' }, -- Spear Shards (Spear Shards)
+    [95957] = { tooltip = T.Skill_Luminous_Shards }, -- Luminous Shards (Luminous Shards)
+    [95955] = { icon = 'esoui/art/icons/ability_templar_light_strike.dds' }, -- Luminous Shards (Luminous Shards)
+    [26880] = { tooltip = T.Skill_Spear_Shards }, -- Blazing Spear (Blazing Spear)
+
+    -- Sun Shield / Radiant Ward / Blazing Shield
+    [22179] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Sun Shield (Sun Shield)
+    [26724] = { hide = true }, -- Sun Shield Hit Bonus (Sun Shield)
+    [22183] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Radiant Ward (Radiant Ward)
+    [26732] = { hide = true }, -- Sun Shield Hit Bonus (Radiant Ward)
+    [49091] = { tooltip = T.Skill_Blazing_Shield }, -- Blazing Shield (Blazing Shield)
+    [49090] = { hide = true }, -- Sun Shield Hit Bonus (Blazing Shield)
+    [22181] = { hide = true }, -- Blazing Shield (Blazing Shield)
+
+    -- Radial Sweep /  Empowering Sweep / Crescent Sweep
+    [62593] = { tooltip = T.Skill_Radial_Sweep }, -- Radial Sweep (Radial Sweep)
+    [55214 ] = { name = A.Skill_Major_Protection, tooltip = A.Skill_Empowering_Sweep }, -- Empowering Sweep (Empowering Sweep)
+    [62599] = { name = A.Skill_Empowering_Sweep, tooltip = T.Skill_Radial_Sweep }, -- Radial Sweep (Empowering Sweep)
+    [62598] = { name = A.Skill_Empowering_Sweep }, -- Radial Sweep (Empowering Sweep)
+    [62607] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds', tooltip = T.Skill_Radial_Sweep  }, -- Crescent Sweep (Crescent Sweep)
+    [62606] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds', name = A.Skill_Crescent_Sweep }, -- Radial Sweep (Crescent Sweep)
 
     -- Dawn's Wrath
-    [21727] = { icon = 'esoui/art/icons/ability_templar_sun_fire.dds' }, -- Sun Fire (Sun Fire - Rank 1)
-    [21730] = { icon = 'esoui/art/icons/ability_templar_vampire_bane.dds' }, -- Vampire's Bane (Vampire's Bane - Rank 1)
-    [21733] = { icon = 'esoui/art/icons/ability_templar_reflective_light.dds' }, -- Reflective Light (Reflective Light - Rank 1)
-    [68581] = { name = A.Skill_Purifying_Light, icon = 'esoui/art/icons/ability_templar_purifying_light.dds', unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Purifying Light Tick (Purifying Light - Rank 1)
-    [21908] = { icon = 'esoui/art/icons/ability_templar_purifying_light.dds' }, -- Purifying Light (Purifying Light - Rank 1)
-    [64144] = { consolidate = true }, -- Minor Fracture (Power of the Light)
-    [68588] = { consolidate = true }, -- Minor Breach (Power of the Light)
-    [63083] = { icon = 'esoui/art/icons/ability_templar_total_dark.dds' }, -- Total Dark (Total Dark - Rank 1)
-    [68729] = { icon = 'esoui/art/icons/ability_templar_total_dark.dds' }, -- Total Dark (Total Dark - Rank 1)
-    [100211] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds', name = A.Skill_Unstable_Core }, -- Eclipse Trigger (Unstable Core - Rank 1)
-    [100210] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds', name = A.Skill_Unstable_Core }, -- Eclipse (Unstable Core - Rank 1)
+
+    -- Sun Fire / Vampire's Bane / Reflective Light
+    [21727] = { icon = 'esoui/art/icons/ability_templar_sun_fire.dds', tooltip = T.Skill_Sun_Fire_Snare, tooltipValue2Mod = 2.3, hideReduce = true }, -- Sun Fire (Sun Fire)
+    [21728] = { tooltip = T.Skill_Sun_Fire, tooltipValue2Mod = -2.3 }, -- Sun Fire (Sun Fire)
+    [62747] = { tooltip = A.Skill_Sun_Fire }, -- Major Prophecy (Sun Fire)
+    [21730] = { icon = 'esoui/art/icons/ability_templar_vampire_bane.dds', tooltip = T.Skill_Sun_Fire_Snare, tooltipValue2Mod = 4.3, hideReduce = true }, -- Vampire's Bane (Vampire's Bane)
+    [21731] = { tooltip = T.Skill_Sun_Fire, tooltipValue2Mod = -4.3 }, -- Vampire's Bane (Vampire's Bane)
+    [62751] = { tooltip = A.Skill_Vampires_Bane }, -- Major Prophecy (Vampire's Bane)
+    [21733] = { icon = 'esoui/art/icons/ability_templar_reflective_light.dds', tooltip = T.Skill_Sun_Fire_Snare, tooltipValue2Mod = 2.3, hideReduce = true }, -- Reflective Light (Reflective Light)
+    [21734] = { tooltip = T.Skill_Sun_Fire, tooltipValue2Mod = -2.3 }, -- Reflective Light (Reflective Light)
+    [62755] = { tooltip = A.Skill_Reflective_Light }, -- Major Prophecy (Reflective Light)
+
+    -- Solar Flare / Dark Flare / Solar Barrage
+    [109418] = { tooltip = A.Skill_Solar_Flare }, -- Empower (Solar Flare)
+    [24686] = { tooltip = A.Skill_Dark_Flare }, -- Major Defile (Dark Flare)
+    [109419] = { tooltip = A.Skill_Dark_Flare }, -- Empower (Dark Flare)
+    [22095] = { tooltip = T.Skill_Solar_Barrage }, -- Solar Barrage (Solar Barrage)
+    [109420] = { tooltip = A.Skill_Solar_Barrage }, -- Empower (Solar Barrage)
+
+    -- Backlash / Purifying Light / Power of the Light
+    [21761] = { tooltip = T.Skill_Backlash }, -- Backlash (Backlash)
+    [21765] = { tooltip = T.Skill_Purifying_Light }, -- Purifying Light (Purifying Light)
+    [68581] = { name = A.Skill_Purifying_Light, icon = 'esoui/art/icons/ability_templar_purifying_light.dds', unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = T.Skill_Purifying_Light_HoT }, -- Purifying Light Tick (Purifying Light)
+    [21908] = { icon = 'esoui/art/icons/ability_templar_purifying_light.dds' }, -- Purifying Light (Purifying Light)
+    [21763] = { tooltip = T.Skill_Power_of_the_Light }, -- Power of the Light (Power of the Light)
+    [64144] = { consolidate = true, tooltip = A.Skill_Power_of_the_Light }, -- Minor Fracture (Power of the Light)
+    [68588] = { consolidate = true, tooltip = A.Skill_Power_of_the_Light }, -- Minor Breach (Power of the Light)
+
+    -- Eclipse / Total Dark / Unstable Core
+    [21776] = { tooltip = T.Skill_Eclipse }, -- Eclipse (Eclipse)
+    [22006] = { tooltip = T.Skill_Total_Dark }, -- Total Dark (Total Dark)
+    [63083] = { icon = 'esoui/art/icons/ability_templar_total_dark.dds' }, -- Total Dark (Total Dark)
+    [68729] = { icon = 'esoui/art/icons/ability_templar_total_dark.dds' }, -- Total Dark (Total Dark)
+    [22004] = { tooltip = T.Skill_Unstable_Core }, -- Unstable Core (Unstable Core)
+    [100211] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds', name = A.Skill_Unstable_Core, tooltip = T.Skill_Eclipse }, -- Eclipse Trigger (Unstable Core)
+    [100210] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds', name = A.Skill_Unstable_Core }, -- Eclipse (Unstable Core)
+
+    -- Radiant Destruction / Radiant Glory / Radiant Oppression
+    [63029] = { tooltip = T.Skill_Radiant_Destruction }, -- Radiant Destruction (Radiant Destruction)
+    [63044] = { tooltip = T.Skill_Radiant_Destruction }, -- Radiant Glory (Radiant Glory)
     [69118] = { icon = 'esoui/art/icons/ability_templar_under_exposure.dds', name = A.Skill_Radiant_Glory }, -- Radiant Glory Heal (Radiant Glory - Rank 1)
     [63956] = { icon = 'esoui/art/icons/ability_templar_under_exposure.dds' }, -- Radiant Glory (Radiant Glory - Rank 1)
+    [63046] = { tooltip = T.Skill_Radiant_Destruction }, -- Radiant Oppression (Radiant Oppresion)
     [63961] = { icon = 'esoui/art/icons/ability_templar_stendarr_aura.dds'}, -- Radiant Destruction (Radiant Oppression - Rank 1)
+
+    -- Nova / Solar Prison / Solar Disturbance
     [108822] = { hide = true }, -- Synergy Damage Bonus (Nova - Supernova Synergy)
-    [21754] = { name = A.Skill_Major_Maim, duration = 0 }, -- Nova (Nova - Rank 1)
+    [21754] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Nova }, -- Nova (Nova - Rank 1)
     [108823] = { hide = true }, -- Synergy Damage Bonus (Solar Prison - Gravity Crush Synergy)
-    [21757] = { name = A.Skill_Major_Maim, duration = 0 }, -- Solar Prison (Solar Prison - Rank 1)
-    [21760] = { name = A.Skill_Major_Maim, duration = 0 }, -- Solar Disturbance (Solar Disturbance - Rank 1)
+    [21757] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Prison }, -- Solar Prison (Solar Prison - Rank 1)
+    [21760] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Disturbance }, -- Solar Disturbance (Solar Disturbance - Rank 1)
     [24307] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance }, -- Solar Disturbance Snare (Solar Disturbance - Rank 1)
 
     -- Restoring Light

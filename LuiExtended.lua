@@ -455,19 +455,10 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local abilityId =  trackBuffs[i].abilityId
                     local markForRemove = trackBuffs[i].markForRemove or false
 
-                    local timer = GetAbilityDuration(abilityId) / 1000
-                    if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltipDurFix then
-                        timer = timer + LUIE.Effects.EffectOverride[abilityId].tooltipDurFix
-                    end
-                    if timer >= 86400 then
-                        timer = timer / 86400
-                    elseif timer >= 3600 then
-                        timer = timer / 3600
-                    elseif timer >= 60 then
-                        timer = timer / 60
-                    end
+                    local timer = endTime - startTime
+                    local value2 = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltipValue2Mod) and (timer + LUIE.Effects.EffectOverride[abilityId].tooltipValue2Mod) or ""
 
-                    local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, timer) or GetAbilityDescription(abilityId)
+                    local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, timer, value2) or GetAbilityDescription(abilityId)
 
                     -- Use default tooltip - temp if needed (TODO: Remove when all base ability/set tooltips are updated)
                     if tooltipText == "" or tooltipText == nil then

@@ -457,6 +457,7 @@ A.Skill_Choking_Talons              = 20528
 A.Skill_Dragon_Blood                = 29004
 A.Skill_Green_Dragon_Blood          = 32744
 A.Skill_Coagulating_Blood           = 32722
+A.Skill_Reflective_Plate            = 21014
 A.Skill_Inhale                      = 31837
 A.Skill_Deep_Breath                 = 32792
 A.Skill_Draw_Essence                = 32785
@@ -544,14 +545,25 @@ A.Skill_Critical_Surge              = 23678
 A.Skill_Energy_Overload_Heavy       = 114797
 
 -- Templar
+A.Skill_Biting_Jabs                 = 26792
 A.Skill_Puncturing_Sweep            = 26797
 A.Skill_Aurora_Javelin              = 26800
 A.Skill_Empowering_Sweep            = 22144
 A.Skill_Crescent_Sweep              = 22139
+A.Skill_Sun_Fire                    = 21726
+A.Skill_Vampires_Bane               = 21729
+A.Skill_Reflective_Light            = 21732
+A.Skill_Solar_Flare                 = 22057
+A.Skill_Dark_Flare                  = 22110
+A.Skill_Solar_Barrage               = 22095
 A.Skill_Purifying_Light             = 21765
+A.Skill_Power_of_the_Light          = 21763
 A.Skill_Unstable_Core               = 22004
 A.Skill_Radiant_Glory               = 63044
+A.Skill_Nova                        = 21752
+A.Skill_Solar_Prison                = 21755
 A.Skill_Solar_Disturbance           = 21758
+
 A.Skill_Repentance                  = 26821
 A.Skill_Cleansing_Ritual            = 22265
 A.Skill_Rite_Of_Passage             = 22223

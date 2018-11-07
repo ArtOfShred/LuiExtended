@@ -1556,22 +1556,13 @@ function SCB.Buff_OnMouseEnter(control)
                 tooltipText = tooltipText .. "|c3A92FFOriginal Desc:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
             end
 
-            duration = GetAbilityDuration(control.effectId) / 1000
-            if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipDurFix then
-                duration = duration + E.EffectOverride[control.effectId].tooltipDurFix
-            end
-            if duration >= 86400 then
-                duration = duration / 86400
-            elseif duration >= 3600 then
-                duration = duration / 3600
-            elseif duration >= 60 then
-                duration = duration / 60
-            end
+            duration = control.duration / 1000
         else
             duration = 0
         end
+        local value2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue2Mod) and (duration + E.EffectOverride[control.effectId].tooltipValue2Mod) or ""
 
-        local tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or ""
+        local tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2) or ""
         if tooltipText2 ~= "" then
             tooltipText2 = "|cEE992AOverride TP:|r " .. tooltipText2
         end
@@ -1592,22 +1583,13 @@ function SCB.Buff_OnMouseEnter(control)
         else
             local duration
             if type(control.effectId) == "number" then
-                duration = GetAbilityDuration(control.effectId) / 1000
-                if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipDurFix then
-                    duration = duration + E.EffectOverride[control.effectId].tooltipDurFix
-                end
-                if duration >= 86400 then
-                    duration = duration / 86400
-                elseif duration >= 3600 then
-                    duration = duration / 3600
-                elseif duration >= 60 then
-                    duration = duration / 60
-                end
+                duration = control.duration / 1000
+                local value2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue2Mod) and (duration + E.EffectOverride[control.effectId].tooltipValue2Mod) or ""
 
                 if control.buffSlot then
-                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or GetAbilityDescription(abilityId)
+                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2) or GetAbilityDescription(abilityId)
                 else
-                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration) or ""
+                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2) or ""
                 end
 
                 -- Use default tooltip - temp if needed (TODO: Remove when all base ability/set tooltips are updated)
