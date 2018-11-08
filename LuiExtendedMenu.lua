@@ -52,7 +52,9 @@ function LUIE_CreateSettings()
     local globalMethodOptionsKeys       = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
     local playerFrameOptions            = { "Vertical Stacked Frames", "Separated Horizontal Frames", "Pyramid" }
     local playerFrameOptionsKeys        = { ["Vertical Stacked Frames"] = 1, ["Separated Horizontal Frames"] = 2, ["Pyramid"] = 3 }
-    local championOptions               = { "Show Above Cap", "Limit to Cap", }
+    local championOptions               = { "Show Above Cap", "Limit to Cap" }
+    local resolutionOptions             = { "1080p", "1440p", "4K" }
+    local resolutionOptionsKeys         = { ["1080p"] = 1, ["1440p"] = 2, ["4K"] = 3 }
 
     -- Variables for custom generated tables
     local PromBuffs, PromBuffsValues = {}
@@ -7715,6 +7717,19 @@ function LUIE_CreateSettings()
         tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         func = function() ReloadUI("ingame") end,
         width = "full",
+    }
+
+    -- Resolution Options
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_UF_RESOLUTION),
+        tooltip = GetString(SI_LUIE_LAM_UF_RESOLUTION_TP),
+        choices = resolutionOptions,
+        getFunc = function() return resolutionOptions[LUIE.UnitFrames.SV.ResolutionOptions] end,
+        setFunc = function(value) LUIE.UnitFrames.SV.ResolutionOptions = resolutionOptionsKeys[value] LUIE.UnitFrames.CustomFramesSetPositions() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.ResolutionOptions,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
 
     -- Custom Unit Frames Unlock

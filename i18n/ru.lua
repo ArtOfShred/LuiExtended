@@ -1505,6 +1505,11 @@ local strings = {
     SI_LUIE_LAM_UF_SHARED_REGEN_TP =                     "Показывает анимированные стрелки когда восстановление увеличено или снижено.",
     SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY =            "Прозрачность Группы/Рейда (Общая настройка)",
     SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY_TP =         "Изменяет прозрачность кастомных фреймов группы и рейда.",
+
+    SI_LUIE_LAM_UF_RESOLUTION =                          "Set Resolution", -- TODO: TRANSLATE
+    SI_LUIE_LAM_UF_RESOLUTION_TP =                       "Select the Resolution you are using. This will change the default anchors for Unit Frames. You may need to reset custom positions after changing this value to see any changes.\nNote: You should select 1080p if you are using any resolution lower than 1080p.", -- TODO: TRANSLATE
+
+
     SI_LUIE_LAM_UF_DFRAMES_HEADER =                      "Стандартные Фрейм юнитов",
     SI_LUIE_LAM_UF_DFRAMES_PLAYER =                      "Стандартный фрейм ИГРОКА",
     SI_LUIE_LAM_UF_DFRAMES_TARGET =                      "Стандартный фрейм ЦЕЛИ",

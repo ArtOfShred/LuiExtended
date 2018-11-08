@@ -1503,6 +1503,10 @@ local strings = {
     SI_LUIE_LAM_UF_SHARED_REGEN_TP =                     "Display an animated arrow overlay when regeneration is increased or decreased.",
     SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY =            "Group/Raid Transparency (Shared Setting)",
     SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY_TP =         "Change the transparency of custom group and raid unit frames.",
+
+    SI_LUIE_LAM_UF_RESOLUTION =                          "Set Resolution",
+    SI_LUIE_LAM_UF_RESOLUTION_TP =                       "Select the Resolution you are using. This will change the default anchors for Unit Frames. You may need to reset custom positions after changing this value to see any changes.\nNote: You should select 1080p if you are using any resolution lower than 1080p.",
+
     SI_LUIE_LAM_UF_DFRAMES_HEADER =                      "Default Unit Frames",
     SI_LUIE_LAM_UF_DFRAMES_PLAYER =                      "Default PLAYER Frame",
     SI_LUIE_LAM_UF_DFRAMES_TARGET =                      "Default TARGET Frame",

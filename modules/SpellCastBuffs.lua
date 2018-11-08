@@ -2675,8 +2675,15 @@ function SCB.ReloadEffects(unitTag)
     -- Clear Existing
     g_effectsList[unitTag .. 1] = {}
     g_effectsList[unitTag .. 2] = {}
-    g_effectsList["promb_target"] = {}
-    g_effectsList["promd_target"] = {}
+    if unitTag == "player" then
+        g_effectsList["promb_player"] = {}
+        g_effectsList["promb_ground"] = {}
+        g_effectsList["promd_player"] = {}
+        g_effectsList["promd_ground"] = {}
+    else
+        g_effectsList["promb_target"] = {}
+        g_effectsList["promd_target"] = {}
+    end
 
     -- Fill it again
     for i = 1, GetNumBuffs(unitTag) do

@@ -188,6 +188,7 @@ UF.D = {
     LowResourceStamina               = 25,
     LowResourceMagicka               = 25,
     ShieldAlpha                      = 50,
+    ResolutionOptions                = 1,
 }
 UF.SV = nil
 
@@ -3098,34 +3099,56 @@ end
 -- Set anchors for all top level windows of CustomFrames
 function UF.CustomFramesSetPositions()
     local default_anchors = { }
-    if UF.SV.PlayerFrameOptions == 1 then
-        default_anchors = {
-            ["player"]      = {TOPLEFT,TOPLEFT,468,745},
-            ["reticleover"] = {TOPLEFT,TOPLEFT,1152,745},
-            ["SmallGroup1"] = {TOPLEFT,TOPLEFT,6,208},
-            ["RaidGroup1"]  = {TOPLEFT,TOPLEFT,6,330},
-            ["boss1"]       = {TOPLEFT,TOPLEFT,1266,228},
-            ["AvaPlayerTarget"] = {TOP,TOP,0,200},
-        }
-    elseif UF.SV.PlayerFrameOptions == 2 then
-        default_anchors = {
-            ["player"]      = {CENTER,CENTER,0,344},
-            ["reticleover"] = {CENTER,CENTER,0,-344},
-            ["SmallGroup1"] = {TOPLEFT,TOPLEFT,6,208},
-            ["RaidGroup1"]  = {TOPLEFT,TOPLEFT,6,330},
-            ["boss1"]       = {TOPLEFT,TOPLEFT,1266,228},
-            ["AvaPlayerTarget"] = {TOP,TOP,0,200},
-        }
-    else
-        default_anchors = {
-            ["player"]      = {CENTER,CENTER,0,334},
-            ["reticleover"] = {CENTER,CENTER,0,-344},
-            ["SmallGroup1"] = {TOPLEFT,TOPLEFT,6,208},
-            ["RaidGroup1"]  = {TOPLEFT,TOPLEFT,6,330},
-            ["boss1"]       = {TOPLEFT,TOPLEFT,1266,228},
-            ["AvaPlayerTarget"] = {TOP,TOP,0,200},
-        }
+
+    local player
+    local playerCenter
+    local reticleover
+    local reticleoverCenter
+    local SmallGroup1
+    local RaidGroup1
+    local boss1
+    local AvaPlayerTarget
+    -- 1 = 1080, 2 = 1440, 3 = 4k
+    if UF.SV.ResolutionOptions == 1 then -- 1080p Resolution
+        player = { -492, 205 }
+        playerCenter = { 0, 334 }
+        reticleover = { 192, 205 }
+        reticleoverCenter = { 0, -334 }
+        SmallGroup1 = { -954, -332 }
+        RaidGroup1 = { -954, -210 }
+        boss1 = { 306, -312 }
+        AvaPlayerTarget = { 0, -200 }
+    elseif UF.SV.ResolutionOptions == 2 then -- 1440p Resolution
+        player = { -570, 272 }
+        playerCenter = { 0, 445 }
+        reticleover = { 270, 272 }
+        reticleoverCenter = { 0, -445 }
+        SmallGroup1 = { -1271, -385 }
+        RaidGroup1 = { -1271, -243 }
+        boss1 = { 354, -365 }
+        AvaPlayerTarget = { 0, -266 }
+    else -- 4k Resolution
+        player = { -738, 410 }
+        playerCenter = { 0, 668 }
+        reticleover = { 438, 410 }
+        reticleoverCenter = { 0, -668 }
+        SmallGroup1 = { -2036, -498 }
+        RaidGroup1 = { -2036, -315 }
+        boss1 = { 459, -478 }
+        AvaPlayerTarget = { 0, -400 }
     end
+
+    if UF.SV.PlayerFrameOptions == 1 then
+        default_anchors["player"]      = {TOPLEFT,CENTER,player[1],player[2]}
+        default_anchors["reticleover"] = {TOPLEFT,CENTER,reticleover[1],reticleover[2]}
+    else
+        default_anchors["player"]      = {CENTER,CENTER,playerCenter[1],playerCenter[2]}
+        default_anchors["reticleover"] = {CENTER,CENTER,reticleoverCenter[1],reticleoverCenter[2]}
+    end
+    default_anchors["SmallGroup1"] = {TOPLEFT,CENTER,SmallGroup1[1],SmallGroup1[2]}
+    default_anchors["RaidGroup1"]  = {TOPLEFT,CENTER,RaidGroup1[1],RaidGroup1[2]}
+    default_anchors["boss1"]       = {TOPLEFT,CENTER,boss1[1],boss1[2]}
+    default_anchors["AvaPlayerTarget"] = {CENTER,CENTER,AvaPlayerTarget[1],AvaPlayerTarget[2]}
 
     for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget" } ) do
         if UF.CustomFrames[unitTag] then
