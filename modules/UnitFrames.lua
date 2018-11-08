@@ -53,9 +53,9 @@ UF.D = {
     RepositionFrames                 = true,
     DefaultOocTransparency           = 85,
     DefaultIncTransparency           = 85,
-    DefaultFramesPlayer              = nil, -- this default setting HAS TO BE nil!!!
-    DefaultFramesTarget              = nil, -- this default setting HAS TO BE nil!!!
-    DefaultFramesGroup               = nil, -- this default setting HAS TO BE nil!!!
+    DefaultFramesPlayer              = false,
+    DefaultFramesTarget              = false,
+    DefaultFramesGroup               = false,
     Format                           = "Current + Shield (Percentage%)",
     DefaultFontFace                  = "Univers 67",
     DefaultFontStyle                 = "soft-shadow-thick",
@@ -320,9 +320,7 @@ end
 function UF.GetDefaultFramesOptions(frame)
     local retval = {}
     for k,v in pairs(g_DefaultFramesOptions) do
-        if k ~= 1 or frame == "Player" or frame == "Target" then
-            tableinsert( retval, v )
-        end
+        tableinsert( retval, v )
     end
     return retval
 end
@@ -2961,10 +2959,14 @@ function UF.CustomFramesGroupUpdate()
     end
 
     if UF.SV.CustomFramesGroup then
-        if GetGroupSize() <= 4 then ZO_UnitFramesGroups:SetHidden ( true ) end
+        if GetGroupSize() <= 4 then
+            ZO_UnitFramesGroups:SetHidden ( true )
+        end
     end
     if UF.SV.CustomFramesRaid then
-        if GetGroupSize() >4 then ZO_UnitFramesGroups:SetHidden ( true ) end
+        if (GetGroupSize() > 4 or (not UF.CustomFrames.SmallGroup1 and UF.CustomFrames.RaidGroup1)) then
+            ZO_UnitFramesGroups:SetHidden ( true )
+        end
     end
 
     -- This requires some tricks if we want to keep list alphabetically sorted
@@ -3005,9 +3007,9 @@ function UF.CustomFramesGroupUpdate()
             if UF.CustomFrames.RaidGroup1 then -- In this case just hide all raid frames if they are enabled
                 UF.CustomFramesUnreferenceGroupControl("RaidGroup", 1)
             end
-        elseif UF.CustomFrames.RaidGroup1 then -- Remove frames if custom Small Group is not set to show
-            UF.CustomFramesUnreferenceGroupControl("RaidGroup", 1)
-            raid = false
+        elseif UF.CustomFrames.RaidGroup1 then -- Use raid frames if Custom Frames are not set to show but Raid frames are
+            UF.CustomFramesUnreferenceGroupControl("RaidGroup", n+1)
+            raid = true
         end
     end
 
