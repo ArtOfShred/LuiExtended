@@ -1560,7 +1560,9 @@ function SCB.Buff_OnMouseEnter(control)
         else
             duration = 0
         end
-        local value2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue2Mod) and (duration + E.EffectOverride[control.effectId].tooltipValue2Mod) or ""
+        local value2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue2Mod) and (duration + E.EffectOverride[control.effectId].tooltipValue2Mod) or 0
+        value2 = math.floor((value2 * 10) + 0.5) / 10
+        duration = math.floor((duration * 10) + 0.5) / 10
 
         local tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2) or ""
         if tooltipText2 ~= "" then
@@ -1584,7 +1586,9 @@ function SCB.Buff_OnMouseEnter(control)
             local duration
             if type(control.effectId) == "number" then
                 duration = control.duration / 1000
-                local value2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue2Mod) and (duration + E.EffectOverride[control.effectId].tooltipValue2Mod) or ""
+                local value2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue2Mod) and (duration + E.EffectOverride[control.effectId].tooltipValue2Mod) or 0
+                value2 = math.floor((value2 * 10) + 0.5) / 10
+                duration = math.floor((duration * 10) + 0.5) / 10
 
                 if control.buffSlot then
                     tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2) or GetAbilityDescription(abilityId)

@@ -946,9 +946,9 @@ E.EffectGroundDisplay = {
     [80540] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds', buff = true, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual - Rank 1)
     [80547] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds', buff = true, debuff = false, ground = false }, -- Ritual of Retribution (Ritual of Retribution - Rank 1)
     [80553] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds', buff = true, debuff = false, ground = false }, -- Extended Ritual (Extended Ritual - Rank 1)
-    [22234] = { buff = true, debuff = false, ground = false }, -- Rune Focus (Rune Focus)
-    [22240] = { buff = true, debuff = false, ground = false }, -- Channeled Focus (Channeled Focus)
-    [22237] = { buff = true, debuff = false, ground = false }, -- Restoring Focus (Restoring Focus)
+    --[22234] = { buff = true, debuff = false, ground = false }, -- Rune Focus (Rune Focus)
+    --[22240] = { buff = true, debuff = false, ground = false }, -- Channeled Focus (Channeled Focus)
+    --[22237] = { buff = true, debuff = false, ground = false }, -- Restoring Focus (Restoring Focus)
 
     -- Warden Actives
     [86161] = { buff = false, debuff = false, ground = true }, -- Impaling Shards (Impaling Shards)
@@ -1093,12 +1093,6 @@ E.EffectCreateSkillAura = {
     [26215] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Endurance (Restoring Aura - All Ranks)
     [22236] = { consolidate = true, abilityId = 22234 }, -- Major Resolve (Rune Focus - Rank 1)
     [44820] = { consolidate = true, abilityId = 22234 }, -- Major Ward (Rune Focus - Rank 1)
-    [44828] = { consolidate = true, abilityId = 22240 }, -- Major Resolve (Channeled Focus - Rank 1)
-    [44827] = { consolidate = true, abilityId = 22240 }, -- Major Ward (Channeled Focus - Rank 1)
-    [44836] = { consolidate = true, abilityId = 22237 }, -- Major Resolve (Restoring Focus - Rank 1)
-    [44835] = { consolidate = true, abilityId = 22237 }, -- Major Ward (Restoring Focus - Rank 1)
-    [37027] = { consolidate = true, abilityId = 22237 }, -- Minor Vitality (Restoring Focus - Rank 1)
-    [77056] = { consolidate = true, abilityId = 22237 }, -- Minor Protection (Restoring Focus - Rank 1)
 
     -- Warden
     [86267] = { consolidate = true, abilityId = 86037 }, -- Major Expedition --> Falcon's Swiftness
@@ -1214,7 +1208,6 @@ function E.BarHighlightRefresh()
         -- Templar
         E.BarHighlightOverride[26792] = { duration = 8000, showFakeAura = true, secondary = true, noRemove = true } -- Biting Jabs --> Major Savagery
         E.BarHighlightOverride[22144] = { newId = 55214 } -- Empowering Sweep --> Major Protection
-        E.BarHighlightOverride[22229] = { newId = 22233, showFakeAura = true, secondary = true, noRemove = true } -- Remembrance --> Major Protection
 
         -- Restoration Staff
         E.BarHighlightOverride[85132] = { newId = 85154, showFakeAura = true, secondary = true, noRemove = true } -- Light's Champion --> Major Force
@@ -1238,7 +1231,6 @@ function E.BarHighlightRefresh()
         -- Templar
         E.BarHighlightOverride[26792] = { newId = 76912, duration = 2000, showFakeAura = true, noRemove = true } -- Biting Jabs
         E.BarHighlightOverride[22144] = { newId = 62599 } -- Empowering Sweep
-        E.BarHighlightOverride[22229] = { showFakeAura = true } -- Remembrance (Remembrance - Rank 1)
 
         -- Werewolf
         E.BarHighlightOverride[32633] = { newId = 45823 } -- Roar
@@ -1424,6 +1416,11 @@ E.BarHighlightOverride = {
     [22265] = { newId = 80540 }, -- Cleansing Ritual (Cleansing Ritual - Rank 1)
     [22259] = { newId = 80547 }, -- Ritual of Retribution (Ritual of Retribution - Rank 1)
     [22262] = { newId = 80553 }, -- Extended Ritual (Extended Ritual - Rank 1)
+
+    [22234] = { showFakeAura = true }, -- Rune Focus --> Major Resolve
+    [22240] = { showFakeAura = true }, -- Channeled Focus
+    [22237] = { showFakeAura = true }, -- Restoring Focus
+
     [22223] = { showFakeAura = true }, -- Rite of Passage
     [22229] = { showFakeAura = true }, -- Remembrance
     [22226] = { showFakeAura = true }, -- Practiced Incantation
@@ -2171,8 +2168,9 @@ E.EffectHideSCT = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!
     [80261] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rite of Passage
 
     -- Actives
-    [24307] = true, -- Solar Disturbance Snare (Solar Disturbance - Rank 1)
-    [37009] = true, -- Channeled Focus (Channeled Focus - Rank 1)
+    [24307] = true, -- Solar Disturbance Snare (Solar Disturbance)
+    [37009] = true, -- Channeled Focus (Channeled Focus)
+    [114842] = true, -- Restoring Focus (Restoring Focus)
     [63020] = true, -- Repentance Remover (Repentance)
 
     ----------------------------
@@ -4298,7 +4296,7 @@ E.EffectOverride = {
 
     -- Bolt Escape
     [51392] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Bolt_Escape_Fatigue }, -- Bolt Escape Fatigue (Bolt Escape - All Morphs)
-    [23235] = { tooltip = T.Generic_Stun_2_Sec }, -- Bolt Escape (Bolt Escape)
+    [23235] = { tooltip = T.Generic_Stun }, -- Bolt Escape (Bolt Escape)
     [28482] = { tooltip = T.Generic_Stun }, -- Streak (Streak)
     [23283] = { hide = true }, -- Summoned Ball of Lightning (Ball of Lightning)
     [23284] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds', duration = 0, forcedContainer = 'short', tooltip = T.Skill_Intercept, groundLabel = true }, -- Intercept (Ball of Lightning)
@@ -4319,6 +4317,8 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Aedric Spear
+    [114838] = { tooltip = A.Skill_Spear_Wall }, -- Minor Protection (Spear Wall - Rank 1)
+    [114841] = { tooltip = A.Skill_Spear_Wall }, -- Minor Protection (Spear Wall - Rank 2)
     [31720] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_burning_light.dds' }, -- Burning Light (Burning Light - Rank 1)
     [80153] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_burning_light.dds' }, -- Burning Light (Burning Light - Rank 1)
     [44731] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_burning_light.dds' }, -- Burning Light (Burning Light - Rank 2)
@@ -4331,15 +4331,17 @@ E.EffectOverride = {
     [45217] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_prism.dds' }, -- Prism (Prism - Rank 2)
     [31721] = { icon = 'LuiExtended/media/icons/abilities/passive_templar_restoring_spirit.dds' }, -- Restoring Spirt
     [45212] = { icon = 'LuiExtended/media/icons/abilities/passive_templar_restoring_spirit.dds' }, -- Restoring Spirt
+    [62799] = { tooltip = A.Skill_Illuminate }, -- Minor Sorcery (Illuminate)
+    [62800] = { tooltip = A.Skill_Illuminate }, -- Minor Sorcery (Illuminate)
 
     -- Restoring Light
     [31757] = { icon = 'esoui/art/icons/ability_templar_032.dds' }, -- Sacred Ground
     [45207] = { icon = 'esoui/art/icons/ability_templar_032.dds' }, -- Sacred Ground
-    [31759] = { duration = 0, forcedContainer = 'short' }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
-    [77082] = { duration = 0, forcedContainer = 'short' }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
-    [80195] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
-    [80230] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
-    [80261] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    [31759] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Sacred_Ground }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
+    [77082] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Sacred_Ground }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
+    [80195] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_No_Dur }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    [80230] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_No_Dur }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    [80261] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_No_Dur }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
     [31760] = { icon = 'esoui/art/icons/ability_templar_014.dds' }, -- Light Weaver
     [45208] = { icon = 'esoui/art/icons/ability_templar_014.dds' }, -- Light Weaver
     [52703] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_light_weaver.dds', name = A.Passive_Light_Weaver }, -- Light Weaver Ultimate (Light Weaver - Rank 1 & 2)
@@ -4445,46 +4447,70 @@ E.EffectOverride = {
 
     -- Nova / Solar Prison / Solar Disturbance
     [108822] = { hide = true }, -- Synergy Damage Bonus (Nova - Supernova Synergy)
-    [21754] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Nova }, -- Nova (Nova - Rank 1)
+    [31562] = { tooltip = T.Generic_Stun }, -- Supernova (Nova - Supernova Synergy)
+    [21976] = { tooltip = T.Skill_Nova }, -- Nova (Nova)
+    [21754] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Nova }, -- Nova (Nova)
     [108823] = { hide = true }, -- Synergy Damage Bonus (Solar Prison - Gravity Crush Synergy)
-    [21757] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Prison }, -- Solar Prison (Solar Prison - Rank 1)
-    [21760] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Disturbance }, -- Solar Disturbance (Solar Disturbance - Rank 1)
-    [24307] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance }, -- Solar Disturbance Snare (Solar Disturbance - Rank 1)
+    [34443] = { tooltip = T.Generic_Stun }, -- Gravity Crush (Solar Prison - Gravity Crush Synergy)
+    [22003] = { tooltip = T.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
+    [21757] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
+    [22001] = { tooltip = T.Skill_Solar_Disturbance, tooltipValue2Mod = -4.8 }, -- Solar Disturbance (Solar Disturbance)
+    [21760] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Disturbance }, -- Solar Disturbance (Solar Disturbance)
+    [24307] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance }, -- Solar Disturbance Snare (Solar Disturbance)
 
     -- Restoring Light
+    [35632] = { tooltip = T.Generic_Magicka_Regen_2_Sec }, -- Honor the Dead (Honor the Dead)
     [44391] = { icon = 'esoui/art/icons/ability_templar_breath_of_life.dds' }, -- Breath of Life (Breath of Life)
+
+    -- Healing Ritual
     [22307] = { icon = 'esoui/art/icons/ability_templar_healing_ritual.dds' }, -- Healing Ritual (Healing Ritual)
     [22331] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth)
     [88456] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth)
-    [108935] = { icon = 'esoui/art/icons/ability_buff_minor_expedition.dds' }, -- Minor Expedition (Hasty Prayer)
-    [26213] = { consolidate = true }, -- Minor Fortitude (Restoring Aura - All Morphs)
-    [26216] = { consolidate = true }, -- Minor Intellect (Restoring Aura - All Morphs)
-    [26215] = { consolidate = true }, -- Minor Endurance (Restoring Aura - All Morphs)
-    [26220] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Restoring Aura)
+    [108935] = { icon = 'esoui/art/icons/ability_buff_minor_expedition.dds', tooltip = A.Skill_Hasty_Prayer }, -- Minor Expedition (Hasty Prayer)
+
+    -- Restoring Aura / Radiant Aura / Cleansing Ritual
+    [26213] = { consolidate = true, tooltip = A.Skill_Restoring_Aura }, -- Minor Fortitude (Restoring Aura - All Morphs)
+    [26216] = { consolidate = true, tooltip = A.Skill_Restoring_Aura }, -- Minor Intellect (Restoring Aura - All Morphs)
+    [26215] = { consolidate = true, tooltip = A.Skill_Restoring_Aura }, -- Minor Endurance (Restoring Aura - All Morphs)
+    [26220] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds', tooltip = A.Skill_Restoring_Aura }, -- Minor Magickasteal (Restoring Aura)
     [88472] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Restoring Aura)
-    [26809] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Radiant Aura)
+    [26809] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds', tooltip = A.Skill_Radiant_Aura }, -- Minor Magickasteal (Radiant Aura)
     [88486] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Radiant Aura)
-    [34366] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Repentance (Repentance - Rank 1)
-    [26823] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds', name = A.Skill_Repentance }, -- Repentance Magicka Restore (Repentance - Rank 1)
-    [26824] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds', name = A.Skill_Repentance }, -- Repentance Heal (Repentance - Rank 1)
+    [26823] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds' }, -- Repentance Magicka Restore (Repentance - Rank 1)
+    [26824] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds' }, -- Repentance Heal (Repentance - Rank 1)
+
+    -- Cleansing Ritual / Ritual of Retribution / Extended Ritual
     [108824] = { hide = true }, -- Synergy Damage Bonus (Cleansing Ritual - Purify Synergy)
     [44013] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds' }, -- Purify (Cleansing Ritual - Purify Synergy)
     [26286] = { name = A.Skill_Cleansing_Ritual }, -- Healing Ritual (Cleansing Ritual - Rank 1)
+    [80540] = { tooltip = T.Skill_Cleansing_Ritual }, -- Cleansing Ritual (Cleansing Ritual)
     [26298] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution - Rank 1)
     [80172] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution - Rank 1)
+    [80547] = { tooltip = T.Skill_Ritual_of_Retribution }, -- Ritual of Retribution (Ritual of Retribution - Rank 1)
     [26303] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds' }, -- Extended Ritual (Extended Ritual - Rank 1)
-    [22236] = { consolidate = true }, -- Major Resolve (Rune Focus - Rank 1)
-    [44820] = { consolidate = true }, -- Major Ward (Rune Focus - Rank 1)
-    [44828] = { consolidate = true }, -- Major Resolve (Channeled Focus - Rank 1)
-    [44827] = { consolidate = true }, -- Major Ward (Channeled Focus - Rank 1)
-    [37009] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds' },  -- Channeled Focus (Channeled Focus - Rank 1)
-    [44836] = { consolidate = true }, -- Major Resolve (Restoring Focus - Rank 1)
-    [44835] = { consolidate = true }, -- Major Ward (Restoring Focus - Rank 1)
-    [37027] = { consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 1)
-    [77056] = { consolidate = true }, -- Minor Protection (Restoring Focus - Rank 1)
-    [22225] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds' }, -- Rite of Passage (Rite of Passage - Rank 1)
-    [22231] = { icon = 'esoui/art/icons/ability_templar_remembrance.dds' }, -- Remembrance (Remembrance - Rank 1)
-    [22228] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds' }, -- Practiced Incantation (Practiced Incantation - Rank 1)
+    [80553] = { tooltip = T.Skill_Cleansing_Ritual }, -- Extended Ritual (Extended Ritual - Rank 1)
+
+    -- Rune Focus / Channeled Focus / Restoring Focus
+    [22236] = { consolidate = true, tooltip = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus - Rank 1)
+    [44820] = { consolidate = true, tooltip = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus - Rank 1)
+    [112145] = { name = A.Skill_Rune_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = 1 }, -- Rune Focus Circle Bonus (Rune Focus)
+    [44828] = { consolidate = true, tooltip = A.Skill_Channeled_Focus }, -- Major Resolve (Channeled Focus)
+    [44827] = { consolidate = true, tooltip = A.Skill_Channeled_Focus }, -- Major Ward (Channeled Focus)
+    [37009] = { tooltip = T.Generic_Magicka_Regen },  -- Channeled Focus (Channeled Focus)
+    [112166] = { name = A.Skill_Channeled_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = 1 }, -- Rune Focus Circle Bonus (Channeled Focus)
+    [44836] = { consolidate = true, tooltip = A.Skill_Restoring_Focus }, -- Major Resolve (Restoring Focus - Rank 1)
+    [44835] = { consolidate = true, tooltip = A.Skill_Restoring_Focus }, -- Major Ward (Restoring Focus - Rank 1)
+    [114842] = { tooltip = T.Generic_Stamina_Regen },  -- Restoring Focus (Restoring Focus)
+    [112167] = { name = A.Skill_Restoring_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = 1 }, -- Rune Focus Circle Bonus (Restoring Focus)
+
+    -- Rite of Passage / Remembrance / Practiced Incantation
+    [22223] = { tooltip = T.Skill_Rite_of_Passage }, -- Rite of Passage (Rite of Passage)
+    [22225] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds' }, -- Rite of Passage (Rite of Passage)
+    [22229] = { tooltip = T.Skill_Rite_of_Passage }, -- Remembrance (Remembrance)
+    [22231] = { icon = 'esoui/art/icons/ability_templar_remembrance.dds' }, -- Remembrance (Remembrance)
+    [22233] = { tooltip = A.Skill_Remembrance }, -- Remembrance (Remembrance)
+    [22226] = { tooltip = T.Skill_Rite_of_Passage }, -- Practiced Incantation (Practiced Incantation)
+    [22228] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds' }, -- Practiced Incantation (Practiced Incantation)
 
     ----------------------------------------------------------------
     -- WARDEN PASSIVE ABILITIES ------------------------------------
@@ -8205,7 +8231,7 @@ E.FakePlayerBuffs = {
     [32788] = { icon = 'esoui/art/icons/ability_dragonknight_012_b.dds', name = A.Skill_Draw_Essence, duration = 2500 }, -- Draw Essence
 
     -- Templar
-    [22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 1)
+    [22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000 }, -- Rite of Passage (Rite of Passage - Rank 1)
     [22229] = { icon = 'esoui/art/icons/ability_templar_remembrance.dds', name = A.Skill_Remembrance, duration = 4000 }, -- Remembrance (Remembrance - Rank 1)
     [22226] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation - Rank 1)
 

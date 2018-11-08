@@ -2255,6 +2255,7 @@ local strings = {
 
     SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Restoring Magicka every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_MGK_REGEN_2_SEC_TP =           "Restoring Magicka every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Restoring Stamina every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
 
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP =      "Absorbing damage.",
@@ -2289,7 +2290,6 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized for |cFFFFFF<<1>>|r seconds. Unable to move while immobilized.",
     SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while staggered.",
     SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.",
-    SI_LUIE_SKILL_GENERIC_STUN_2_SEC_TP =                "Stunned for |cFFFFFF2|r seconds. You are unable to attack or move while stunned.",
     SI_LUIE_SKILL_GENERIC_STUN_NO_DUR_TP =               "Stunned. You are unable to attack or move while stunned.",
     SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP =                 "Knocked back for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while knocked back.",
     SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP =                 "Knocked down for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while knocked down.",
@@ -2417,7 +2417,7 @@ local strings = {
     SI_LUIE_SKILL_RADIAL_SWEEP_TP =                      "Nearby enemies take Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SUN_FIRE_TP =                          "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nSnared for |cFFFFFF<<2>>|r seconds. Your Movement Speed has been reduced by |cFFFFFF40|r%.",
     SI_LUIE_SKILL_SUN_FIRE_SNARE_TP =                    "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cFFFFFF<<2>>|r seconds.\n\nSnared for |cFFFFFF<<1>>|r seconds. Your Movement Speed has been reduced by |cFFFFFF40|r%.",
-    SI_LUIE_SKILL_SOLAR_BARRAGE_TP =                     "Nearby enemies take Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nAlso grants you |cFFFFFFEmpower|r after every blast.",
+    SI_LUIE_SKILL_SOLAR_BARRAGE_TP =                     "Nearby enemies take Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nAlso grants you Empower after every blast.",
     SI_LUIE_SKILL_BACKLASH_TP =                          "|cFFFFFF20|r% of all damage taken for the next |cFFFFFF<<1>>|r seconds will be copied then released as Magic Damage when the effect ends.",
     SI_LUIE_SKILL_PURIFYING_LIGHT_TP =                   "|cFFFFFF20|r% of all damage taken for the next |cFFFFFF<<1>>|r seconds will be copied then released as Magic Damage when the effect ends.\n\nWhen the effect ends, a pool of sunlight remains attached to you, healing any of the Templar's allies every |cFFFFFF2|r seconds for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_PURIFYING_LIGHT_HOT_TP =               "Healing nearby enemies every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
@@ -2425,8 +2425,14 @@ local strings = {
     SI_LUIE_SKILL_ECLIPSE_TP =                           "Enveloped by a lightless sphere, take Magic Damage each time you use a direct damage attack for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_TOTAL_DARK_TP =                        "Enveloped by a lightless sphere, take Magic Damage and heal the Templar each time you use a direct damage attack for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_UNSTABLE_CORE_TP =                     "Marked wih volatile magnetic energy which explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to you and nearby allies.",
-
     SI_LUIE_SKILL_RADIANT_DESTRUCTION_TP =               "Afflicted with Magic Damage over time for |cFFFFFF<<1>>|r seconds. Deals up to |cFFFFFF480|r% more damage if you are below |cFFFFFF50|r% Health.",
+    SI_LUIE_SKILL_NOVA_TP =                              "Enemies in the area take Magic Damage every |cFFFFFF1|r second and have Major Maim applied to them for |cFFFFFF<<1>>|r seconds.\n\nAn ally near the fragment can activate the |cFFFFFFSupernova|r synergy.",
+    SI_LUIE_SKILL_SOLAR_PRISON_TP =                      "Enemies in the area take Magic Damage every |cFFFFFF1|r second and have Major Maim applied to them for |cFFFFFF<<1>>|r seconds.\n\nAn ally near the fragment can activate the |cFFFFFFGravity Crush|r synergy.",
+    SI_LUIE_SKILL_SOLAR_DISTURBANCE_TP =                 "Enemies in the area take Magic Damage every |cFFFFFF1|r second and have Major Maim applied to them for |cFFFFFF<<1>>|r seconds. Major Maim persists on enemies who leave the Nova for |cFFFFFF<<2>>|r seconds.\n\nEnemies are also by snared |cffffff65|r%.\n\nAn ally near the fragment can activate the |cFFFFFFSupernova|r synergy.",
+    SI_LUIE_SKILL_CLEANSING_RITUAL_TP =                  "Allies in the area are healed every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
+    SI_LUIE_SKILL_CLEANSING_RITUAL_RETRIBUTION_TP =      "Allies in the area are healed every |cFFFFFF2|r seconds, and enemies take Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
+    SI_LUIE_SKILL_RUNE_FOCUS_BONUS_TP =                  "Increase Physical and Spell Resistance by |cFFFFFF2640|r while standing in the rune.",
+    SI_LUIE_SKILL_RITE_OF_PASSAGE_TP =                   "Healing you and nearby allies every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
 
     -- Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Direct damage taken from the next Snipe, Scatter Shot, or Poison Arrow increased by |cffffff<<1>>|r% used within |cffffff6|r seconds.",

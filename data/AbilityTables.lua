@@ -545,6 +545,9 @@ A.Skill_Critical_Surge              = 23678
 A.Skill_Energy_Overload_Heavy       = 114797
 
 -- Templar
+A.Skill_Spear_Wall                  = 31708
+A.Skill_Illuminate                  = 31743
+A.Skill_Sacred_Ground               = 31757
 A.Skill_Biting_Jabs                 = 26792
 A.Skill_Puncturing_Sweep            = 26797
 A.Skill_Aurora_Javelin              = 26800
@@ -563,9 +566,13 @@ A.Skill_Radiant_Glory               = 63044
 A.Skill_Nova                        = 21752
 A.Skill_Solar_Prison                = 21755
 A.Skill_Solar_Disturbance           = 21758
-
-A.Skill_Repentance                  = 26821
+A.Skill_Hasty_Prayer                = 22314
+A.Skill_Restoring_Aura              = 26209
+A.Skill_Radiant_Aura                = 26807
 A.Skill_Cleansing_Ritual            = 22265
+A.Skill_Rune_Focus                  = 22234
+A.Skill_Channeled_Focus             = 22240
+A.Skill_Restoring_Focus             = 22237
 A.Skill_Rite_Of_Passage             = 22223
 A.Skill_Remembrance                 = 22229
 A.Skill_Practiced_Incantation       = 22226

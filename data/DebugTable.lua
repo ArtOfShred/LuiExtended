@@ -3533,7 +3533,9 @@ debugAuras = {
             [31698] = true, -- Piercing Spear (Rank 1)
             [44046] = true, -- Piercing Spear (Rank 2)
             [31708] = true, -- Spear Wall (Rank 1)
+            [114838] = true, -- Minor Protection (Spear Wall)
             [44721] = true, -- Spear Wall (Rank 2)
+            [114841] = true, -- Minor Protetion (Spear Wall)
             [31718] = true, -- Burning Light (Rank 1)
             [31720] = true, -- Burning Light
             [80153] = true, -- Burning Light
@@ -3846,8 +3848,8 @@ debugAuras = {
 
             [26821] = true, -- Repentance (Repentance)
             [34366] = true, -- Repentance (Repentance)
-            [26823] = true, -- Repentance Magicka Restore (Repentance)
-            [26824] = true, -- Repentance Heal (Repentance)
+            [26823] = true, -- Repentance (Repentance)
+            [26824] = true, -- Repentance (Repentance)
             --[63020] = true, -- Repentance Remover (Repentance)
 
             [108824] = true, -- Synergy Damage Bonus (Cleansing Ritual - Purify Synergy)
@@ -3881,20 +3883,21 @@ debugAuras = {
             [22234] = true, -- Rune Focus (Rune Focus)
             [33516] = true, -- Summon Shade (Rune Focus)
             [101649] = true, -- Rune Focus (Rune Focus)
+            [112145] = true, -- Rune Focus Circle Bonus (Rune Focus)
 
             [44828] = true, -- Major Resolve (Channeled Focus)
             [44827] = true, -- Major Ward (Channeled Focus)
             [22240] = true, -- Channeled Focus (Channeled Focus)
             [33524] = true, -- Summon Shade (Channeled Focus)
             [37009] = true, -- Channeled Focus (Channeled Focus)
+            [112166] = true, -- Rune Focus Circle Bonus (Channeled Focus)
 
             [44836] = true, -- Major Resolve (Restoring Focus)
             [44835] = true, -- Major Ward (Restoring Focus)
-            [37027] = true, -- Minor Vitality (Restoring Focus)
-            [77056] = true, -- Minor Protection (Restoring Focus)
             [22237] = true, -- Restoring Focus (Restoring Focus)
-            [101690] = true, -- Restoring Focus (Restoring Focus)
             [33528] = true, -- Restoring Focus (Restoring Focus)
+            [114842] = true, -- Restoring Focus (Restoring Focus)
+            [112167] = true, -- Rune Focus Circle Bonus (Restoring Focus)
 
             [22223] = true, -- Rite of Passage (Rite of Passage)
             [22225] = true, -- Rite of Passage (Rite of Passage)
