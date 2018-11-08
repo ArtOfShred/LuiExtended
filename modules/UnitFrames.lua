@@ -179,6 +179,7 @@ UF.D = {
     AdjustMagickaHPos                = 200,
     AdjustMagickaVPos                = 0,
     FrameColorReaction               = false,
+    FrameColorClass                  = false,
     CustomColourPlayer               = { 178/255, 178/255, 1 },
     CustomColourFriendly             = { 0, 1, 0 },
     CustomColourHostile              = { 1, 0, 0 },
@@ -1891,9 +1892,7 @@ function UF.OnReticleTargetChanged(eventCode)
             g_DefaultFrames.reticleover.friendIcon:SetHidden(true)
         end
 
-        if UF.SV.FrameColorReaction then
-            UF.CustomFramesApplyReactionColor()
-        end
+        UF.CustomFramesApplyReactionColor(g_DefaultFrames.reticleover.isPlayer)
 
     -- Target is invalid: reset stored values to defaults
     else
@@ -3418,55 +3417,81 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
                 thb.bar:SetColor( unpack(tank) )
                 thb.backdrop:SetCenterColor( unpack(tank_bg) )
             else
-                if UF.SV.FrameColorReaction and unitTag == "reticleover" then
-                    thb.bar:SetColor( unpack(reactioncolor) )
-                    thb.backdrop:SetCenterColor( unpack(reactioncolor_bg) )
-                else
-                    thb.bar:SetColor( unpack(health) )
-                    thb.backdrop:SetCenterColor( unpack(health_bg) )
-                end
+                thb.bar:SetColor( unpack(health) )
+                thb.backdrop:SetCenterColor( unpack(health_bg) )
             end
         end
     end
 end
 
-function UF.CustomFramesApplyReactionColor()
-    local reactionColor = {
-        [UNIT_REACTION_PLAYER_ALLY] = { UF.SV.CustomColourPlayer[1], UF.SV.CustomColourPlayer[2], UF.SV.CustomColourPlayer[3], 0.9 },
-        [UNIT_REACTION_DEFAULT]     = { UF.SV.CustomColourFriendly[1], UF.SV.CustomColourFriendly[2], UF.SV.CustomColourFriendly[3], 0.9 },
-        [UNIT_REACTION_FRIENDLY]        = { UF.SV.CustomColourFriendly[1], UF.SV.CustomColourFriendly[2], UF.SV.CustomColourFriendly[3], 0.9 },
-        [UNIT_REACTION_NPC_ALLY]        = { UF.SV.CustomColourFriendly[1], UF.SV.CustomColourFriendly[2], UF.SV.CustomColourFriendly[3], 0.9 },
-        [UNIT_REACTION_HOSTILE]     = { UF.SV.CustomColourHostile[1], UF.SV.CustomColourHostile[2], UF.SV.CustomColourHostile[3], 0.9 },
-        [UNIT_REACTION_NEUTRAL]     = { UF.SV.CustomColourNeutral[1], UF.SV.CustomColourNeutral[2], UF.SV.CustomColourNeutral[3], 0.9 },
-    }
+function UF.CustomFramesApplyReactionColor(isPlayer)
 
-    local reactionBackground = {
-        [UNIT_REACTION_PLAYER_ALLY] = { 0.1*UF.SV.CustomColourPlayer[1],   0.1*UF.SV.CustomColourPlayer[2],   0.1*UF.SV.CustomColourPlayer[3], 0.9 },
-        [UNIT_REACTION_DEFAULT]     = { 0.1*UF.SV.CustomColourFriendly[1],   0.1*UF.SV.CustomColourFriendly[2],   0.1*UF.SV.CustomColourFriendly[3], 0.9 },
-        [UNIT_REACTION_FRIENDLY]        = { 0.1*UF.SV.CustomColourFriendly[1],   0.1*UF.SV.CustomColourFriendly[2],   0.1*UF.SV.CustomColourFriendly[3], 0.9 },
-        [UNIT_REACTION_NPC_ALLY]        = { 0.1*UF.SV.CustomColourFriendly[1],   0.1*UF.SV.CustomColourFriendly[2],   0.1*UF.SV.CustomColourFriendly[3], 0.9 },
-        [UNIT_REACTION_HOSTILE]     = { 0.1*UF.SV.CustomColourHostile[1],   0.1*UF.SV.CustomColourHostile[2],   0.1*UF.SV.CustomColourHostile[3], 0.9 },
-        [UNIT_REACTION_NEUTRAL]     = { 0.1*UF.SV.CustomColourNeutral[1],   0.1*UF.SV.CustomColourNeutral[2],   0.1*UF.SV.CustomColourNeutral[3], 0.9 },
-    }
+    if UF.SV.FrameColorReaction then
+        local reactionColor = {
+            [UNIT_REACTION_PLAYER_ALLY] = { UF.SV.CustomColourPlayer[1], UF.SV.CustomColourPlayer[2], UF.SV.CustomColourPlayer[3], 0.9 },
+            [UNIT_REACTION_DEFAULT]     = { UF.SV.CustomColourFriendly[1], UF.SV.CustomColourFriendly[2], UF.SV.CustomColourFriendly[3], 0.9 },
+            [UNIT_REACTION_FRIENDLY]        = { UF.SV.CustomColourFriendly[1], UF.SV.CustomColourFriendly[2], UF.SV.CustomColourFriendly[3], 0.9 },
+            [UNIT_REACTION_NPC_ALLY]        = { UF.SV.CustomColourFriendly[1], UF.SV.CustomColourFriendly[2], UF.SV.CustomColourFriendly[3], 0.9 },
+            [UNIT_REACTION_HOSTILE]     = { UF.SV.CustomColourHostile[1], UF.SV.CustomColourHostile[2], UF.SV.CustomColourHostile[3], 0.9 },
+            [UNIT_REACTION_NEUTRAL]     = { UF.SV.CustomColourNeutral[1], UF.SV.CustomColourNeutral[2], UF.SV.CustomColourNeutral[3], 0.9 },
+        }
 
-    if UF.CustomFrames["reticleover"] then
-        local unitFrame = UF.CustomFrames["reticleover"]
-        local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+        local reactionBackground = {
+            [UNIT_REACTION_PLAYER_ALLY] = { 0.1*UF.SV.CustomColourPlayer[1],   0.1*UF.SV.CustomColourPlayer[2],   0.1*UF.SV.CustomColourPlayer[3], 0.9 },
+            [UNIT_REACTION_DEFAULT]     = { 0.1*UF.SV.CustomColourFriendly[1],   0.1*UF.SV.CustomColourFriendly[2],   0.1*UF.SV.CustomColourFriendly[3], 0.9 },
+            [UNIT_REACTION_FRIENDLY]        = { 0.1*UF.SV.CustomColourFriendly[1],   0.1*UF.SV.CustomColourFriendly[2],   0.1*UF.SV.CustomColourFriendly[3], 0.9 },
+            [UNIT_REACTION_NPC_ALLY]        = { 0.1*UF.SV.CustomColourFriendly[1],   0.1*UF.SV.CustomColourFriendly[2],   0.1*UF.SV.CustomColourFriendly[3], 0.9 },
+            [UNIT_REACTION_HOSTILE]     = { 0.1*UF.SV.CustomColourHostile[1],   0.1*UF.SV.CustomColourHostile[2],   0.1*UF.SV.CustomColourHostile[3], 0.9 },
+            [UNIT_REACTION_NEUTRAL]     = { 0.1*UF.SV.CustomColourNeutral[1],   0.1*UF.SV.CustomColourNeutral[2],   0.1*UF.SV.CustomColourNeutral[3], 0.9 },
+        }
 
-        local reactioncolor
-        local reactioncolor_bg
-        if IsUnitInvulnerableGuard("reticleover") then
-            reactioncolor = { UF.SV.CustomColourGuard[1], UF.SV.CustomColourGuard[2], UF.SV.CustomColourGuard[3], 0.9 }
-            reactioncolor_bg = { 0.1*UF.SV.CustomColourGuard[1],   0.1*UF.SV.CustomColourGuard[2],   0.1*UF.SV.CustomColourGuard[3], 0.9 }
-        else
-            reactioncolor = reactionColor[GetUnitReaction("reticleover")]
-            reactioncolor_bg = reactionBackground[GetUnitReaction("reticleover")]
+        if UF.CustomFrames["reticleover"] then
+            local unitFrame = UF.CustomFrames["reticleover"]
+            local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+
+            local reactioncolor
+            local reactioncolor_bg
+            if IsUnitInvulnerableGuard("reticleover") then
+                reactioncolor = { UF.SV.CustomColourGuard[1], UF.SV.CustomColourGuard[2], UF.SV.CustomColourGuard[3], 0.9 }
+                reactioncolor_bg = { 0.1*UF.SV.CustomColourGuard[1],   0.1*UF.SV.CustomColourGuard[2],   0.1*UF.SV.CustomColourGuard[3], 0.9 }
+            else
+                reactioncolor = reactionColor[GetUnitReaction("reticleover")]
+                reactioncolor_bg = reactionBackground[GetUnitReaction("reticleover")]
+            end
+
+            thb.bar:SetColor( unpack(reactioncolor) )
+            thb.backdrop:SetCenterColor( unpack(reactioncolor_bg) )
         end
+    end
 
-        thb.bar:SetColor( unpack(reactioncolor) )
-        thb.backdrop:SetCenterColor( unpack(reactioncolor_bg) )
+    if isPlayer and UF.SV.FrameColorClass then
+        local classColor = {
+            [1]  = { UF.SV.CustomColourDragonknight[1], UF.SV.CustomColourDragonknight[2], UF.SV.CustomColourDragonknight[3], 0.9}, -- Dragonkight
+            [3]  = { UF.SV.CustomColourNightblade[1], UF.SV.CustomColourNightblade[2], UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
+            [2]  = { UF.SV.CustomColourSorcerer[1], UF.SV.CustomColourSorcerer[2], UF.SV.CustomColourSorcerer[3], 0.9}, -- Sorcerer
+            [6]  = { UF.SV.CustomColourTemplar[1], UF.SV.CustomColourTemplar[2], UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
+            [4]  = { UF.SV.CustomColourWarden[1], UF.SV.CustomColourWarden[2], UF.SV.CustomColourWarden[3], 0.9}, -- Warden
+        }
+
+        local classBackground = {
+            [1]  = { 0.1*UF.SV.CustomColourDragonknight[1], 0.1*UF.SV.CustomColourDragonknight[2], 0.1*UF.SV.CustomColourDragonknight[3], 0.9}, -- Dragonkight
+            [3]  = { 0.1*UF.SV.CustomColourNightblade[1], 0.1*UF.SV.CustomColourNightblade[2], 0.1*UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
+            [2]  = { 0.1*UF.SV.CustomColourSorcerer[1], 0.1*UF.SV.CustomColourSorcerer[2], 0.1*UF.SV.CustomColourSorcerer[3], 0.9}, -- Sorcerer
+            [6]  = { 0.1*UF.SV.CustomColourTemplar[1], 0.1*UF.SV.CustomColourTemplar[2], 0.1*UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
+            [4]  = { 0.1*UF.SV.CustomColourWarden[1], 0.1*UF.SV.CustomColourWarden[2], 0.1*UF.SV.CustomColourWarden[3], 0.9}, -- Warden
+        }
+
+        if UF.CustomFrames["reticleover"] then
+            local unitFrame = UF.CustomFrames["reticleover"]
+            local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+            local classcolor = classColor[GetUnitClassId("reticleover")]
+            local classcolor_bg = classBackground[GetUnitClassId("reticleover")]
+            thb.bar:SetColor( unpack(classcolor) )
+            thb.backdrop:SetCenterColor( unpack(classcolor_bg) )
+        end
     end
 end
+
 
 -- Apply selected texture for all known bars on custom unit frames
 function UF.CustomFramesApplyTexture()

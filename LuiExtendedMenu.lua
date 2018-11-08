@@ -8563,9 +8563,20 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET_TP),
                 getFunc = function() return LUIE.UnitFrames.SV.FrameColorReaction end,
-                setFunc = function(value) LUIE.UnitFrames.SV.FrameColorReaction = value LUIE.UnitFrames.CustomFramesApplyColours() end,
+                setFunc = function(value) LUIE.UnitFrames.SV.FrameColorReaction = value LUIE.UnitFrames.CustomFramesApplyReactionColor() end,
                 width = "full",
                 default = LUIE.UnitFrames.D.FrameColorReaction,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
+            },
+            {
+                -- Color Target by Class
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_CLASS_TARGET),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_CLASS_TARGET_TP),
+                getFunc = function() return LUIE.UnitFrames.SV.FrameColorClass end,
+                setFunc = function(value) LUIE.UnitFrames.SV.FrameColorClass = value LUIE.UnitFrames.CustomFramesApplyReactionColor() end,
+                width = "full",
+                default = LUIE.UnitFrames.D.FrameColorClass,
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
             },
             {
