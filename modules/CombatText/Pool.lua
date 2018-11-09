@@ -66,6 +66,12 @@ function CTP:CreateNewAnimation()
         anim:Move('scroll', 0, 0, 2500, 0, even)
         anim:Alpha('fadeOut', 1, 0, 500, 1400, slowFast)
 
+    elseif (self.poolType == poolTypes.ANIMATION_DEATH) then
+        anim:Alpha(nil, 0, 1, 50)
+        anim:Scale(nil, 1.5, 1, 150, 0, slowFast)
+        anim:Move('scroll', 0, 0, 5000, 0, even)
+        anim:Alpha('fadeOut', 1, 0, 500, 2000, slowFast)
+
     elseif (self.poolType == poolTypes.ANIMATION_ALERT) then
         anim:Alpha(nil, 0, 1, 50)
         anim:Scale(nil, 0.5, 1.5, 100, 0, fastSlow)

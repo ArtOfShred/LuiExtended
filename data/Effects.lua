@@ -3051,6 +3051,7 @@ E.EffectOverride = {
 
     -- Blackrose Weapons
     [113617] = { name = A.Skill_Major_Protection, tooltip = A.Set_Blackrose_DW }, -- Spectral Cloak (Blackrose DW)
+    [113619] = { hide = true }, -- Virulent Shot (Blackrose Bow) -- SHOWS ONLY ON TARGET PLAYERS
     [113627] = { icon = 'LuiExtended/media/icons/abilities/ability_set_virulent_shot.dds', tooltip = T.Generic_Poison }, -- Virulent Shot (Blackrose Bow)
     [113553] = { icon = 'LuiExtended/media/icons/abilities/ability_set_radial_uppercut.dds' }, -- Radial Uppercut (Blackrose 2H)
     [113608] = { icon = 'LuiExtended/media/icons/abilities/ability_set_gallant_charge.dds', tooltip = T.Set_Blackrose_1H }, -- Gallant Charge (Blackrose 1H)
@@ -5334,7 +5335,7 @@ E.EffectOverride = {
     [35998] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_elemental_talent.dds' }, -- Elemental Talent
     [45275] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_elemental_talent.dds' }, -- Elemental Talent
     [45276] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_elemental_talent.dds' }, -- Elemental Talent
-    [36008] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_acrobat.dds' }, -- Acrobat
+    [36008] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_acrobat.dds', hide = true }, -- Acrobat -- SHOWS ONLY ON TARGET PLAYERS
     [64279] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_yffres_endurance.dds' }, -- Y'ffre's Endurance
     [64280] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_yffres_endurance.dds' }, -- Y'ffre's Endurance
     [64281] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_yffres_endurance.dds' }, -- Y'ffre's Endurance

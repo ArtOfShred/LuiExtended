@@ -95,6 +95,7 @@ modules/CombatText/PoolManager.lua
 modules/CombatText/EventListeners/_Base.lua
 modules/CombatText/EventListeners/Alerts.lua
 modules/CombatText/EventListeners/Combat.lua
+modules/CombatText/EventListeners/Death.lua
 modules/CombatText/EventListeners/Points_Alliance.lua
 modules/CombatText/EventListeners/Points_Experience.lua
 modules/CombatText/EventListeners/Points_Champion.lua
@@ -108,5 +109,6 @@ modules/CombatText/EventViewers/Combat_Ellipse.lua
 modules/CombatText/EventViewers/Combat_Scroll.lua
 modules/CombatText/EventViewers/Alerts.lua
 modules/CombatText/EventViewers/CrowdControl.lua
+modules/CombatText/EventViewers/Death.lua
 modules/CombatText/EventViewers/Points.lua
 modules/CombatText/EventViewers/Resources.lua

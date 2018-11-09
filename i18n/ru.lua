@@ -462,6 +462,7 @@ local strings = {
     -- CombatText.lua
     SI_LUIE_CT_COMBAT_IN_DEFAULT =                       "В бою",
     SI_LUIE_CT_COMBAT_OUT_DEFAULT =                      "Выход из боя",
+	SI_LUIE_CT_DEATH_DEFAULT = 						  	 "%t died!", -- TODO: Localize
     SI_LUIE_CT_CLEANSE_DEFAULT =                         "ОЧИСТИСЬ",
     SI_LUIE_CT_BLOCK_DEFAULT =                           "БЛОКИРУЙ",
     SI_LUIE_CT_BLOCKSTAGGER_DEFAULT =                    "*БЛОКИРУЙ*",
@@ -483,7 +484,6 @@ local strings = {
     SI_LUIE_CT_MITIGATION_FORMAT_POWER_N =               "%t %i on %n!",
     SI_LUIE_CT_MITIGATION_FORMAT_DESTROY =               "%t %i",
     SI_LUIE_CT_MITIGATION_FORMAT_DESTROY_N =             "%t %i",
-	SI_LUIE_CT_DEATH_FORMAT = 						  	 "%n died!",
 
     -- UnitFrames.lua
     SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Power (<<3>>%)",

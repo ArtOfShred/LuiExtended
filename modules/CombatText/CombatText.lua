@@ -128,6 +128,7 @@ CT.D = {
         -- Combat State
         showInCombat                = true,
         showOutCombat               = true,
+        showDeath                   = true,
 
         --Alerts
         showAlertMitigation         = true,
@@ -206,6 +207,7 @@ CT.D = {
 
         -- Combat State, Points, Alerts & Resources
         combatState                 = 24,
+        death                       = 32,
         alert                       = 32,
         point                       = 24,
         resource                    = 32,
@@ -259,6 +261,7 @@ CT.D = {
         -- Combat State
         inCombat                    = { 1, 1, 1, 1 },
         outCombat                   = { 1, 1, 1, 1 },
+        death                       = { 1, 0, 0, 1 },
 
         -- Alerts
         alertShared                 = { 1, 1, 1, 1 },
@@ -319,6 +322,7 @@ CT.D = {
         -- Combat State
         inCombat                    = GetString(SI_LUIE_CT_COMBAT_IN_DEFAULT),
         outCombat                   = GetString(SI_LUIE_CT_COMBAT_OUT_DEFAULT),
+        death                       = GetString(SI_LUIE_CT_DEATH_DEFAULT),
 
         -- Alerts
         alertCleanse                = GetString(SI_LUIE_CT_CLEANSE_DEFAULT),
@@ -449,6 +453,7 @@ function CT.Initialize( enabled )
     LUIE.CombatTextResourcesPowerEventListener:New()
     LUIE.CombatTextResourcesUltimateEventListener:New()
     LUIE.CombatTextResourcesPotionEventListener:New()
+    LUIE.CombatTextDeathListener:New()
 
     -- Event Viewers
     LUIE.CombatTextCombatCloudEventViewer:New(poolManager, LMP)
@@ -459,6 +464,7 @@ function CT.Initialize( enabled )
     LUIE.CombatTextCrowdControlEventViewer:New(poolManager, LMP)
     LUIE.CombatTextPointEventViewer:New(poolManager, LMP)
     LUIE.CombatTextResourceEventViewer:New(poolManager, LMP)
+    LUIE.CombatTextDeathViewer:New(poolManager, LMP)
 
     -- Hide ingame active combat tips
     ZO_ActiveCombatTips:SetHidden(LUIE.CombatText.SV.toggles.hideIngameTips)

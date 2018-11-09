@@ -3426,6 +3426,34 @@ end
 
 function UF.CustomFramesApplyReactionColor(isPlayer)
 
+    if isPlayer and UF.SV.FrameColorClass then
+        local classColor = {
+            [1]  = { UF.SV.CustomColourDragonknight[1], UF.SV.CustomColourDragonknight[2], UF.SV.CustomColourDragonknight[3], 0.9}, -- Dragonkight
+            [3]  = { UF.SV.CustomColourNightblade[1], UF.SV.CustomColourNightblade[2], UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
+            [2]  = { UF.SV.CustomColourSorcerer[1], UF.SV.CustomColourSorcerer[2], UF.SV.CustomColourSorcerer[3], 0.9}, -- Sorcerer
+            [6]  = { UF.SV.CustomColourTemplar[1], UF.SV.CustomColourTemplar[2], UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
+            [4]  = { UF.SV.CustomColourWarden[1], UF.SV.CustomColourWarden[2], UF.SV.CustomColourWarden[3], 0.9}, -- Warden
+        }
+
+        local classBackground = {
+            [1]  = { 0.1*UF.SV.CustomColourDragonknight[1], 0.1*UF.SV.CustomColourDragonknight[2], 0.1*UF.SV.CustomColourDragonknight[3], 0.9}, -- Dragonkight
+            [3]  = { 0.1*UF.SV.CustomColourNightblade[1], 0.1*UF.SV.CustomColourNightblade[2], 0.1*UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
+            [2]  = { 0.1*UF.SV.CustomColourSorcerer[1], 0.1*UF.SV.CustomColourSorcerer[2], 0.1*UF.SV.CustomColourSorcerer[3], 0.9}, -- Sorcerer
+            [6]  = { 0.1*UF.SV.CustomColourTemplar[1], 0.1*UF.SV.CustomColourTemplar[2], 0.1*UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
+            [4]  = { 0.1*UF.SV.CustomColourWarden[1], 0.1*UF.SV.CustomColourWarden[2], 0.1*UF.SV.CustomColourWarden[3], 0.9}, -- Warden
+        }
+
+        if UF.CustomFrames["reticleover"] then
+            local unitFrame = UF.CustomFrames["reticleover"]
+            local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+            local classcolor = classColor[GetUnitClassId("reticleover")]
+            local classcolor_bg = classBackground[GetUnitClassId("reticleover")]
+            thb.bar:SetColor( unpack(classcolor) )
+            thb.backdrop:SetCenterColor( unpack(classcolor_bg) )
+            return -- If we apply Class color then end the function here
+        end
+    end
+
     if UF.SV.FrameColorReaction then
         local reactionColor = {
             [UNIT_REACTION_PLAYER_ALLY] = { UF.SV.CustomColourPlayer[1], UF.SV.CustomColourPlayer[2], UF.SV.CustomColourPlayer[3], 0.9 },
@@ -3461,33 +3489,6 @@ function UF.CustomFramesApplyReactionColor(isPlayer)
 
             thb.bar:SetColor( unpack(reactioncolor) )
             thb.backdrop:SetCenterColor( unpack(reactioncolor_bg) )
-        end
-    end
-
-    if isPlayer and UF.SV.FrameColorClass then
-        local classColor = {
-            [1]  = { UF.SV.CustomColourDragonknight[1], UF.SV.CustomColourDragonknight[2], UF.SV.CustomColourDragonknight[3], 0.9}, -- Dragonkight
-            [3]  = { UF.SV.CustomColourNightblade[1], UF.SV.CustomColourNightblade[2], UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
-            [2]  = { UF.SV.CustomColourSorcerer[1], UF.SV.CustomColourSorcerer[2], UF.SV.CustomColourSorcerer[3], 0.9}, -- Sorcerer
-            [6]  = { UF.SV.CustomColourTemplar[1], UF.SV.CustomColourTemplar[2], UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
-            [4]  = { UF.SV.CustomColourWarden[1], UF.SV.CustomColourWarden[2], UF.SV.CustomColourWarden[3], 0.9}, -- Warden
-        }
-
-        local classBackground = {
-            [1]  = { 0.1*UF.SV.CustomColourDragonknight[1], 0.1*UF.SV.CustomColourDragonknight[2], 0.1*UF.SV.CustomColourDragonknight[3], 0.9}, -- Dragonkight
-            [3]  = { 0.1*UF.SV.CustomColourNightblade[1], 0.1*UF.SV.CustomColourNightblade[2], 0.1*UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
-            [2]  = { 0.1*UF.SV.CustomColourSorcerer[1], 0.1*UF.SV.CustomColourSorcerer[2], 0.1*UF.SV.CustomColourSorcerer[3], 0.9}, -- Sorcerer
-            [6]  = { 0.1*UF.SV.CustomColourTemplar[1], 0.1*UF.SV.CustomColourTemplar[2], 0.1*UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
-            [4]  = { 0.1*UF.SV.CustomColourWarden[1], 0.1*UF.SV.CustomColourWarden[2], 0.1*UF.SV.CustomColourWarden[3], 0.9}, -- Warden
-        }
-
-        if UF.CustomFrames["reticleover"] then
-            local unitFrame = UF.CustomFrames["reticleover"]
-            local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
-            local classcolor = classColor[GetUnitClassId("reticleover")]
-            local classcolor_bg = classBackground[GetUnitClassId("reticleover")]
-            thb.bar:SetColor( unpack(classcolor) )
-            thb.backdrop:SetCenterColor( unpack(classcolor_bg) )
         end
     end
 end

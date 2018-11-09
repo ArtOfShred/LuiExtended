@@ -100,6 +100,7 @@ LUIE.CombatTextConstants = {
         POINT                       = "LUIE_CombatText_EVENT_POINT",
         CROWDCONTROL                = "LUIE_CombatText_EVENT_CROWDCONTROL",
         RESOURCE                    = "LUIE_CombatText_EVENT_RESOURCE",
+        DEATH                       = "LUIE_CombatText_EVENT_DEATH",
     },
     alertType = {
         BLOCK                       = "LUIE_LUIE_CombatText_Alert_TYPE_BLOCK",
@@ -154,6 +155,7 @@ LUIE.CombatTextConstants = {
         ANIMATION_COMBATSTATE       = "LUIE_CombatText_POOL_TYPE_ANIMATION_COMBATSTATE",
         ANIMATION_POINT             = "LUIE_CombatText_POOL_TYPE_ANIMATION_POINT",
         ANIMATION_RESOURCE          = "LUIE_CombatText_POOL_TYPE_ANIMATION_RESOURCE",
+        ANIMATION_DEATH             = "LUIE_CombatText_POOL_TYPE_ANIMATION_DEATH",
     },
 
     -- Animation & Fonts
