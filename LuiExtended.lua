@@ -52,17 +52,17 @@ LUIE.D = {
 }
 
 -- Global fonts table to use in other parts of this addon
-LUIE.Fonts = {
-    ["ProseAntique"]            = "/EsoUI/Common/Fonts/ProseAntiquePSMT.otf",
-    ["Consolas"]                = "/EsoUI/Common/Fonts/consola.ttf",
-    ["Futura Condensed"]        = "/EsoUI/Common/Fonts/FTN57.otf",
-    ["Futura Condensed Bold"]   = "/EsoUI/Common/Fonts/FTN87.otf",
-    ["Futura Condensed Light"]  = "/EsoUI/Common/Fonts/FTN47.otf",
-    ["Skyrim Handwritten"]      = "/EsoUI/Common/Fonts/Handwritten_Bold.otf",
-    ["Trajan Pro"]              = "/EsoUI/Common/Fonts/trajanpro-regular.otf",
-    ["Univers 55"]              = "/EsoUI/Common/Fonts/univers55.otf",
-    ["Univers 57"]              = "/EsoUI/Common/Fonts/univers57.otf",
-    ["Univers 67"]              = "/EsoUI/Common/Fonts/univers67.otf",
+    LUIE.Fonts = {
+    ["ProseAntique"] 			= ZoFontBookPaper:GetFontInfo(), 
+    ["Consolas"] 				= "/EsoUI/Common/Fonts/consola.ttf", 
+    ["Futura Condensed"] 		= "/EsoUI/Common/Fonts/FTN57.otf", 
+    ["Futura Condensed Bold"] 	= "/EsoUI/Common/Fonts/FTN87.otf", 
+    ["Futura Condensed Light"] 	= "/EsoUI/Common/Fonts/FTN47.otf", 
+    ["Skyrim Handwritten"] 		= ZoFontBookLetter:GetFontInfo(), 
+    ["Trajan Pro"] 				= ZoFontBookTablet:GetFontInfo(), 
+    ["Univers 55"] 				= "/EsoUI/Common/Fonts/univers55.otf", 
+    ["Univers 57"] 				= ZoFontGame:GetFontInfo(), 
+    ["Univers 67"] 				= ZoFontWinH1:GetFontInfo(),
     ["Fontin Bold"]             = "/LuiExtended/media/fonts/Fontin/fontin_sans_b.otf",
     ["Fontin Italic"]           = "/LuiExtended/media/fonts/Fontin/fontin_sans_i.otf",
     ["Fontin Regular"]          = "/LuiExtended/media/fonts/Fontin/fontin_sans_r.otf",
