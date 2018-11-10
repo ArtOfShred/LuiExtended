@@ -3317,8 +3317,15 @@ function UF.CustomFramesApplyColours(isMenu)
 
                 local unitFrame = UF.CustomFrames[unitTag]
                 local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+				
+				local group = groupSize <= 4
+				local raid = groupSize > 4
+				if not UF.SV.CustomFramesGroup then 
+					raid = true
+					group = false
+				end
 
-                if (groupSize <= 4 and UF.SV.ColorRoleGroup) or (groupSize > 4 and UF.SV.ColorRoleRaid) then
+				if (group and UF.SV.ColorRoleGroup) or (raid and UF.SV.ColorRoleRaid) then
                     if role == 1 then
                         thb.bar:SetColor( unpack(dps) )
                         thb.backdrop:SetCenterColor( unpack(dps_bg) )
@@ -3332,7 +3339,7 @@ function UF.CustomFramesApplyColours(isMenu)
                         thb.bar:SetColor( unpack(health) )
                         thb.backdrop:SetCenterColor( unpack(health_bg) )
                     end
-                elseif (groupSize <= 4 and UF.SV.ColorClassGroup) or (groupSize > 4 and UF.SV.ColorClassRaid) and class ~= 0 then
+                elseif (group and UF.SV.ColorClassGroup) or (raid and UF.SV.ColorClassRaid) and class ~= 0 then
                     local class_color
                     local class_bg
                     if class == 1 then
@@ -3356,7 +3363,7 @@ function UF.CustomFramesApplyColours(isMenu)
                     end
                     thb.bar:SetColor( unpack(class_color) )
                     thb.backdrop:SetCenterColor( unpack(class_bg) )
-                else
+				else
                     thb.bar:SetColor( unpack(health) )
                     thb.backdrop:SetCenterColor( unpack(health_bg) )
                 end
@@ -3401,8 +3408,14 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
     local tank_bg   = { 0.1*UF.SV.CustomColourTank[1],   0.1*UF.SV.CustomColourTank[2],   0.1*UF.SV.CustomColourTank[3], 0.9 }
 
     local groupSize = GetGroupSize()
-
-    if (groupSize <= 4 and UF.SV.ColorRoleGroup) or (groupSize > 4 and UF.SV.ColorRoleRaid) then
+	local group = groupSize <= 4
+	local raid = groupSize > 4
+	if not UF.SV.CustomFramesGroup then 
+		raid = true
+		group = false
+	end
+	
+    if (group and UF.SV.ColorRoleGroup) or (raid and UF.SV.ColorRoleRaid) then
         if UF.CustomFrames[unitTag] then
             local role = GetGroupMemberSelectedRole(unitTag)
             local unitFrame = UF.CustomFrames[unitTag]
@@ -3416,10 +3429,10 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
             elseif role == 2 then
                 thb.bar:SetColor( unpack(tank) )
                 thb.backdrop:SetCenterColor( unpack(tank_bg) )
-            else
-                thb.bar:SetColor( unpack(health) )
-                thb.backdrop:SetCenterColor( unpack(health_bg) )
-            end
+			else
+				thb.bar:SetColor( unpack(health) )
+				thb.backdrop:SetCenterColor( unpack(health_bg) )
+			end
         end
     end
 end
