@@ -378,7 +378,8 @@ function CI.RegisterCombatInfo()
 
     eventManager:UnregisterForEvent(moduleName, EVENT_COMBAT_EVENT )
     eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE )
-    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE )
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED )
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED )
     eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED )
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
     if CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
@@ -403,7 +404,8 @@ function CI.RegisterCombatInfo()
         eventManager:RegisterForEvent(moduleName, EVENT_END_SOUL_GEM_RESURRECTION, CI.SoulGemResurrectionEnd)
     end
     if CI.SV.ShowTriggered or CI.SV.ShowToggled or CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE, CI.OnSlotsFullUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED, CI.OnSlotsFullUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED, CI.OnSlotsFullUpdate)
         eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, CI.OnSlotUpdated)
     end
     if CI.SV.ShowTriggered or CI.SV.ShowToggled then
@@ -1401,7 +1403,7 @@ function CI.UpdateUltimateLabel(eventCode)
 
     -- if this event was caused only by user manually changing the ultimate ability, then
     -- force recalculation of percent value. Otherwise (weapons swap) this will be called by the game
-    if ( (eventCode == EVENT_ACTION_SLOT_UPDATED or EVENT_ACTION_SLOTS_FULL_UPDATE) and not setHidden ) then
+    if ( (eventCode == EVENT_ACTION_SLOT_UPDATED or EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED or EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED) and not setHidden ) then
         CI.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, g_ultimateCurrent, 0, 0)
     end
 end
