@@ -56,7 +56,7 @@ UF.D = {
     DefaultFramesPlayer              = false,
     DefaultFramesTarget              = false,
     DefaultFramesGroup               = false,
-    DefaultFramesBoss                = false,
+    DefaultFramesBoss                = nil,
     Format                           = "Current + Shield (Percentage%)",
     DefaultFontFace                  = "Univers 67",
     DefaultFontStyle                 = "soft-shadow-thick",
@@ -322,7 +322,9 @@ end
 function UF.GetDefaultFramesOptions(frame)
     local retval = {}
     for k,v in pairs(g_DefaultFramesOptions) do
-        tableinsert( retval, v )
+        if not (frame == "Boss" and k == 3) then
+            tableinsert( retval, v )
+        end
     end
     return retval
 end
@@ -1369,7 +1371,7 @@ function UF.Initialize( enabled )
         end
         self.healthText:SetText(ZO_FormatResourceBarCurrentAndMax(totalHealth, totalMaxHealth))
 
-        if not UF.SV.DefaultFramesBoss then
+        if UF.SV.DefaultFramesBoss == nil then
             COMPASS_FRAME:SetBossBarActive(totalHealth > 0)
         end
     end
@@ -3126,6 +3128,19 @@ function UF.OnBossesChanged( eventCode )
         else
             UF.CustomFrames[unitTag].control:SetHidden(true)
         end
+    end
+end
+
+function LUIE.UnitFrames.ResetCompassBarMenu()
+    if UF.SV.DefaultFramesBoss == nil then
+        for i = 1, 6 do
+            local unitTag = "boss" .. i
+            if DoesUnitExist(unitTag) then
+                COMPASS_FRAME:SetBossBarActive(true)
+            end
+        end
+    else
+        COMPASS_FRAME:SetBossBarActive(false)
     end
 end
 

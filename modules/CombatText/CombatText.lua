@@ -394,10 +394,10 @@ CT.AlertColors = {}
 function CT.SetAlertColors()
 	local colors = CT.SV.colors
 	CT.AlertColors = {
-		alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlock)):ToHex(),
-		alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodge)):ToHex(),
-		alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoid)):ToHex(),
-		alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterrupt)):ToHex(),
+		alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlockA)):ToHex(),
+		alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodgeA)):ToHex(),
+		alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoidA)):ToHex(),
+		alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterruptA)):ToHex(),
 		alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
 		alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex()
 	}

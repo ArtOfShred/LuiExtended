@@ -7808,24 +7808,15 @@ function LUIE_CreateSettings()
             },
             {
                 -- Compass Boss Bar
-                type = "checkbox",
+                type = "dropdown",
                 name = GetString(SI_LUIE_LAM_UF_DFRAMES_BOSS_COMPASS),
-                tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_BOSS_COMPASS_TP),
-                getFunc = function() return LUIE.UnitFrames.SV.DefaultFramesBoss end,
-                setFunc = function(value) LUIE.UnitFrames.SV.DefaultFramesBoss = value
-                    for i = 1, 6 do
-                        local unitTag = "boss" .. i
-                        if DoesUnitExist(unitTag) and value == false then
-                            COMPASS_FRAME:SetBossBarActive(true)
-                            return
-                        else
-                            COMPASS_FRAME:SetBossBarActive(false)
-                        end
-                    end
-                end,
+                choices = LUIE.UnitFrames.GetDefaultFramesOptions('Boss'),
+                getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Boss') end,
+                setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Boss', value) LUIE.UnitFrames.ResetCompassBarMenu() end,
                 width = "full",
-                default = LUIE.UnitFrames.D.DefaultFramesBoss,
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                default = LUIE.UnitFrames.GetDefaultFramesSetting('Boss', true),
             },
             {
                 -- Reposition default player bars
