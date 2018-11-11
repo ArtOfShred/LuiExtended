@@ -1701,6 +1701,7 @@ E.DisguiseIcons = {
     [79505] = { icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'as a Sentinel Guard.', id = nil }, -- NO ICON (Not sure it exists)
     [94209] = { icon = 'LuiExtended/media/icons/disguises/disguise_scarlet_judges_regalia.dds', description = 'as The Scarlet Judge.', id = 85204 },
     -- TODO: Are we missing Dunmer Cultural Garb?
+    [0] = { icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'by the Earring of Disguise.', id = nil }, -- Generic Disguise override - at least the Arenthia quest in Reaper's March applies a disguise without utilizing an item
 }
 
 E.AssistantIcons = {
