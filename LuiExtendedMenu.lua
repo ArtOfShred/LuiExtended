@@ -6134,6 +6134,17 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory21,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
+			{
+                -- Enables achievements tracking in %s category
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(22)),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(22)),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.Achievement.AchievementCategory22 end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.Achievement.AchievementCategory22 = value end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory22,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+            },
         },
     }
 
@@ -11667,9 +11678,9 @@ function LUIE_CreateSettings()
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertBlock) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertBlock = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
-                default = {r=LUIE.CombatText.D.colors.alertBlock[1], g=LUIE.CombatText.D.colors.alertBlock[2], b=LUIE.CombatText.D.colors.alertBlock[3]}
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertBlockA) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertBlockA = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
+                default = {r=LUIE.CombatText.D.colors.alertBlockA[1], g=LUIE.CombatText.D.colors.alertBlockA[2], b=LUIE.CombatText.D.colors.alertBlockA[3]}
             },
             {
                 type = "header",
@@ -11701,9 +11712,9 @@ function LUIE_CreateSettings()
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertDodge) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDodge = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
-                default = {r=LUIE.CombatText.D.colors.alertDodge[1], g=LUIE.CombatText.D.colors.alertDodge[2], b=LUIE.CombatText.D.colors.alertDodge[3]}
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertDodgeA) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDodgeA = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
+                default = {r=LUIE.CombatText.D.colors.alertDodgeA[1], g=LUIE.CombatText.D.colors.alertDodgeA[2], b=LUIE.CombatText.D.colors.alertDodgeA[3]}
             },
             {
                 type = "header",
@@ -11735,9 +11746,9 @@ function LUIE_CreateSettings()
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertAvoid) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertAvoid = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
-                default = {r=LUIE.CombatText.D.colors.alertAvoid[1], g=LUIE.CombatText.D.colors.alertAvoid[2], b=LUIE.CombatText.D.colors.alertAvoid[3]}
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertAvoidA) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertAvoidA = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
+                default = {r=LUIE.CombatText.D.colors.alertAvoidA[1], g=LUIE.CombatText.D.colors.alertAvoidA[2], b=LUIE.CombatText.D.colors.alertAvoidA[3]}
             },
             {
                 type = "header",
@@ -11769,9 +11780,9 @@ function LUIE_CreateSettings()
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertInterrupt) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterrupt = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
-                default = {r=LUIE.CombatText.D.colors.alertInterrupt[1], g=LUIE.CombatText.D.colors.alertInterrupt[2], b=LUIE.CombatText.D.colors.alertInterrupt[3]}
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertInterruptA) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterruptA = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
+                default = {r=LUIE.CombatText.D.colors.alertInterruptA[1], g=LUIE.CombatText.D.colors.alertInterruptA[2], b=LUIE.CombatText.D.colors.alertInterruptA[3]}
             },
             {
                 type = "header",

@@ -74,6 +74,7 @@ CA.D = {
         AchievementCategory19         = true,
         AchievementCategory20         = true,
         AchievementCategory21         = true,
+        AchievementCategory22         = true,
         AchievementProgressMsg        = GetString(SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG),
         AchievementCompleteMsg        = GetString(SI_ACHIEVEMENT_AWARDED_CENTER_SCREEN),
         AchievementColorProgress      = true,
