@@ -707,6 +707,9 @@ local function CreateCustomFrames()
             ["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
             ["className"]   = UI.Label( topInfo, {BOTTOMRIGHT,TOPRIGHT,-1,-1}, nil, {2,4}, nil, "Class", false ),
             ["friendIcon"]  = UI.Texture( topInfo, {RIGHT,RIGHT,-20,0}, {22,22}, nil, nil, false ),
+            ["star1"]       = UI.Texture( topInfo, {RIGHT,RIGHT,-28,-1}, {16,16}, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true ),
+            ["star2"]       = UI.Texture( topInfo, {RIGHT,RIGHT,-46,-1}, {16,16}, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true ),
+            ["star3"]       = UI.Texture( topInfo, {RIGHT,RIGHT,-64,-1}, {16,16}, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true ),
             ["botInfo"]     = botInfo,
             ["buffAnchor"]  = buffAnchor,
             ["title"]       = UI.Label( botInfo, {TOPLEFT,TOPLEFT}, nil, {0,3}, nil, "<Title>", false ),
@@ -2047,6 +2050,13 @@ function UF.UpdateStaticControls( unitFrame )
         local unitRole = roleIcons[role]
         unitFrame.roleIcon:SetTexture(unitRole)
     end
+    -- If unitFrame has difficulty stars
+    if unitFrame.star1 ~= nil and unitFrame.star2 ~= nil and unitFrame.star3 ~= nil then
+        local unitDifficulty = GetUnitDifficulty( unitFrame.unitTag )
+        unitFrame.star1:SetHidden( unitDifficulty < 2 )
+        unitFrame.star2:SetHidden( unitDifficulty < 3 )
+        unitFrame.star3:SetHidden( unitDifficulty < 4 )
+    end
     -- If unitFrame has unit classIcon control
     if unitFrame.classIcon ~= nil then
         local unitDifficulty = GetUnitDifficulty( unitFrame.unitTag )
@@ -3317,10 +3327,10 @@ function UF.CustomFramesApplyColours(isMenu)
 
                 local unitFrame = UF.CustomFrames[unitTag]
                 local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
-				
+
 				local group = groupSize <= 4
 				local raid = groupSize > 4
-				if not UF.SV.CustomFramesGroup then 
+				if not UF.SV.CustomFramesGroup then
 					raid = true
 					group = false
 				end
@@ -3410,11 +3420,11 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
     local groupSize = GetGroupSize()
 	local group = groupSize <= 4
 	local raid = groupSize > 4
-	if not UF.SV.CustomFramesGroup then 
+	if not UF.SV.CustomFramesGroup then
 		raid = true
 		group = false
 	end
-	
+
     if (group and UF.SV.ColorRoleGroup) or (raid and UF.SV.ColorRoleRaid) then
         if UF.CustomFrames[unitTag] then
             local role = GetGroupMemberSelectedRole(unitTag)

@@ -2077,6 +2077,12 @@ local strings = {
     SI_LUIE_LAM_CT_THROTTLE_CRITICAL_TP =                "Enable throttle for critical hits.",
     SI_LUIE_LAM_CT_THROTTLE_TRAILER =                    "Show Throttle Trailer",
     SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP =                 "Enable Throttle Trailer.",
+    SI_LUIE_LAM_CT_DEATH_HEADER =                        "Group Member Death",
+    SI_LUIE_LAM_CT_DEATH_NOTIFICATION =                  "Display Group Member Deaths",
+    SI_LUIE_LAM_CT_DEATH_NOTIFICATION_TP =               "Display a notification when a friendly player in your group or raid dies.",
+    SI_LUIE_LAM_CT_DEATH_FORMAT_TP =                     "Text format for group member death notifications.",
+    SI_LUIE_LAM_CT_DEATH_FONT_SIZE_TP =                  "Font size of message displayed when a group member dies.\nDefault: 32",
+    SI_LUIE_LAM_CT_DEATH_COLOR_TP =                      "Set a color for notifications when a group member dies.",
 
     -- Ability name override localization
     SI_LUIE_SKILL_RECALL_PENALTY =                       "Recall Penalty",

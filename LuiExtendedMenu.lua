@@ -10921,14 +10921,14 @@ function LUIE_CreateSettings()
 
             {
                 type = "header",
-                name = "DEATH NOTIFICATION",
+                name = GetString(SI_LUIE_LAM_CT_DEATH_HEADER),
                 width = "full",
             },
             {
                 -- Death Toggle
                 type    = "checkbox",
-                name    = "DEATH",
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP),
+                name    = GetString(SI_LUIE_LAM_CT_DEATH_NOTIFICATION),
+                tooltip = GetString(SI_LUIE_LAM_CT_DEATH_NOTIFICATION_TP),
                 getFunc = function() return LUIE.CombatText.SV.toggles.showDeath end,
                 setFunc = function(v) LUIE.CombatText.SV.toggles.showDeath = v end,
                 default = LUIE.CombatText.D.toggles.showDeath,
@@ -10936,8 +10936,8 @@ function LUIE_CreateSettings()
             {
                 -- Death Format
                 type    = "editbox",
-                name    = "DEATH FORMAT",
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_IN_TP),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_DEATH_FORMAT_TP),
                 getFunc = function() return LUIE.CombatText.SV.formats.death end,
                 setFunc = function(v) LUIE.CombatText.SV.formats.death = v end,
                 isMultiline = false,
@@ -10947,7 +10947,7 @@ function LUIE_CreateSettings()
                 -- Death Font Size
                 type     = "slider",
                 name    = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP),
+                tooltip = GetString(SI_LUIE_LAM_CT_DEATH_FONT_SIZE_TP),
                 min     = 8,
                 max     = 72,
                 step    = 1,
@@ -10958,8 +10958,8 @@ function LUIE_CreateSettings()
             {
                 -- Death Color
                 type    = "colorpicker",
-                name    = "DEATH COLOR",
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP),
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_DEATH_COLOR_TP),
                 getFunc = function() return unpack(LUIE.CombatText.SV.colors.death) end,
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.death = { r, g, b, a } end,
                 default = {r=LUIE.CombatText.D.colors.death[1], g=LUIE.CombatText.D.colors.death[2], b=LUIE.CombatText.D.colors.death[3]}

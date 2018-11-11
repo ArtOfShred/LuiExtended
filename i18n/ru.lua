@@ -2074,8 +2074,14 @@ local strings = {
     SI_LUIE_LAM_CT_THROTTLE_HOT_TP =                     "Задаёт период времени в мс для суммирование цифр исцеления HoT.\nПо умолчанию: 200 мс",
     SI_LUIE_LAM_CT_THROTTLE_CRITICAL =                   "Суммировать Крит.удары",
     SI_LUIE_LAM_CT_THROTTLE_CRITICAL_TP =                "Включает суммирование критических ударов.",
-    SI_LUIE_LAM_CT_THROTTLE_TRAILER =                    "Show Throttle Trailer",
-    SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP =                 "Enable Throttle Trailer.",
+    SI_LUIE_LAM_CT_THROTTLE_TRAILER =                    "Show Throttle Trailer",, -- TODO: Translate
+    SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP =                 "Enable Throttle Trailer.",, -- TODO: Translate
+    SI_LUIE_LAM_CT_DEATH_HEADER =                        "Group Member Death",, -- TODO: Translate
+    SI_LUIE_LAM_CT_DEATH_NOTIFICATION =                  "Display Group Member Deaths",, -- TODO: Translate
+    SI_LUIE_LAM_CT_DEATH_NOTIFICATION_TP =               "Display a notification when a friendly player in your group or raid dies.",, -- TODO: Translate
+    SI_LUIE_LAM_CT_DEATH_FORMAT_TP =                     "Text format for group member death notifications.",, -- TODO: Translate
+    SI_LUIE_LAM_CT_DEATH_FONT_SIZE_TP =                  "Font size of message displayed when a group member dies.\nDefault: 32",, -- TODO: Translate
+    SI_LUIE_LAM_CT_DEATH_COLOR_TP =                      "Set a color for notifications when a group member dies.", -- TODO: Translate
 
     -- Ability name override localization
     SI_LUIE_SKILL_RECALL_PENALTY =                       "Штраф перемещения",
