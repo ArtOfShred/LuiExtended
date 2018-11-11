@@ -56,6 +56,7 @@ UF.D = {
     DefaultFramesPlayer              = false,
     DefaultFramesTarget              = false,
     DefaultFramesGroup               = false,
+    DefaultFramesBoss                = false,
     Format                           = "Current + Shield (Percentage%)",
     DefaultFontFace                  = "Univers 67",
     DefaultFontStyle                 = "soft-shadow-thick",
@@ -708,8 +709,8 @@ local function CreateCustomFrames()
             ["className"]   = UI.Label( topInfo, {BOTTOMRIGHT,TOPRIGHT,-1,-1}, nil, {2,4}, nil, "Class", false ),
             ["friendIcon"]  = UI.Texture( topInfo, {RIGHT,RIGHT,-20,0}, {22,22}, nil, nil, false ),
             ["star1"]       = UI.Texture( topInfo, {RIGHT,RIGHT,-28,-1}, {16,16}, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true ),
-            ["star2"]       = UI.Texture( topInfo, {RIGHT,RIGHT,-46,-1}, {16,16}, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true ),
-            ["star3"]       = UI.Texture( topInfo, {RIGHT,RIGHT,-64,-1}, {16,16}, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true ),
+            ["star2"]       = UI.Texture( topInfo, {RIGHT,RIGHT,-45,-1}, {16,16}, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true ),
+            ["star3"]       = UI.Texture( topInfo, {RIGHT,RIGHT,-62,-1}, {16,16}, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true ),
             ["botInfo"]     = botInfo,
             ["buffAnchor"]  = buffAnchor,
             ["title"]       = UI.Label( botInfo, {TOPLEFT,TOPLEFT}, nil, {0,3}, nil, "<Title>", false ),
@@ -1351,6 +1352,27 @@ function UF.Initialize( enabled )
     CreateDefaultFrames()
 
     CreateCustomFrames()
+
+    BOSS_BAR.RefreshBossHealthBar = function(self, smoothAnimate)
+        local totalHealth = 0
+        local totalMaxHealth = 0
+
+        for unitTag, bossEntry in pairs(self.bossHealthValues) do
+            totalHealth = totalHealth + bossEntry.health
+            totalMaxHealth = totalMaxHealth + bossEntry.maxHealth
+        end
+
+        local halfHealth = zo_floor(totalHealth / 2)
+        local halfMax = zo_floor(totalMaxHealth / 2)
+        for i = 1, #self.bars do
+            ZO_StatusBar_SmoothTransition(self.bars[i], halfHealth, halfMax, not smoothAnimate)
+        end
+        self.healthText:SetText(ZO_FormatResourceBarCurrentAndMax(totalHealth, totalMaxHealth))
+
+        if not UF.SV.DefaultFramesBoss then
+            COMPASS_FRAME:SetBossBarActive(totalHealth > 0)
+        end
+    end
 
     -- Reposition frames
     if UF.SV.RepositionFrames then

@@ -7807,6 +7807,27 @@ function LUIE_CreateSettings()
                 default = LUIE.UnitFrames.GetDefaultFramesSetting('Group', true),
             },
             {
+                -- Compass Boss Bar
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_DFRAMES_BOSS_COMPASS),
+                tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_BOSS_COMPASS_TP),
+                getFunc = function() return LUIE.UnitFrames.SV.DefaultFramesBoss end,
+                setFunc = function(value) LUIE.UnitFrames.SV.DefaultFramesBoss = value
+                    for i = 1, 6 do
+                        local unitTag = "boss" .. i
+                        if DoesUnitExist(unitTag) and value == false then
+                            COMPASS_FRAME:SetBossBarActive(true)
+                            return
+                        else
+                            COMPASS_FRAME:SetBossBarActive(false)
+                        end
+                    end
+                end,
+                width = "full",
+                default = LUIE.UnitFrames.D.DefaultFramesBoss,
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
                 -- Reposition default player bars
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_UF_DFRAMES_REPOSIT),
