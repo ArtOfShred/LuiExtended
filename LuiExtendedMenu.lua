@@ -9091,7 +9091,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.UnitFrames.SV.GroupAlpha = value LUIE.UnitFrames.CustomFramesGroupAlpha() LUIE.UnitFrames.CustomFramesApplyLayoutRaid(true) end,
                 width = "full",
                 default = LUIE.UnitFrames.D.GroupAlpha,
-                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
             },
             {
                 -- Raid Frame Layout
