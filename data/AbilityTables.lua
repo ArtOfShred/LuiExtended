@@ -724,6 +724,11 @@ A.Skill_Reviving_Barrier            = 40237
 
 A.Skill_Battle_Spirit               = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT)
 A.Skill_Imperial_City               = GetCollectibleName(154)
+A.Skill_Home_Keep_Bonus             = 11346
+A.Skill_Edge_Keep_Bonus_1           = 111549
+A.Skill_Edge_Keep_Bonus_2           = 111552
+A.Skill_Edge_Keep_Bonus_3           = 111553
+
 -- ---------------------------------------------------
 -- NPC ABILITIES -------------------------------------
 -- ---------------------------------------------------

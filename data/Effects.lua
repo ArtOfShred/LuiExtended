@@ -7051,21 +7051,22 @@ E.EffectOverride = {
     -- CYRODIIL ----------------------------------------------------
     ----------------------------------------------------------------
 
-    [39671] = { icon = 'esoui/art/icons/achievement_midyearevent_009.dds' }, -- Emperorship Alliance Bonus
-    [11346] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds' }, -- Home Keep Bonus
-    [11341] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 1 }, -- Enemy Keep Bonus I
-    [11343] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 2 }, -- Enemy Keep Bonus II
-    [11345] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 3 }, -- Enemy Keep Bonus III
-    [11347] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 4 }, -- Enemy Keep Bonus IV
-    [11348] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 5 }, -- Enemy Keep Bonus V
-    [11350] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 6 }, -- Enemy Keep Bonus VI
-    [11352] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 7 }, -- Enemy Keep Bonus VII
-    [11353] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 8 }, -- Enemy Keep Bonus VIII
-    [11356] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 9 }, -- Enemy Keep Bonus IX
-    [15060] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_defensive_scroll_bonus.dds', stack = 1 }, -- Defensive Scroll Bonus I
-    [16350] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_defensive_scroll_bonus.dds', stack = 2 }, -- Defensive Scroll Bonus II
-    [15058] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_offensive_scroll_bonus.dds', stack = 1 }, -- Offensive Scroll Bonus I
-    [16348] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_offensive_scroll_bonus.dds', stack = 2 }, -- Offensive Scroll Bonus II
+    [39671] = { icon = 'esoui/art/icons/achievement_midyearevent_009.dds', passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_emperorship_alliance_bonus.dds' }, -- Emperorship Alliance Bonus
+    [11346] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds', passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_home_keep_bonus.dds' }, -- Home Keep Bonus
+    [11341] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 1, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus I
+    [11343] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 2, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus II
+    [11345] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 3, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus III
+    [11347] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 4, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus IV
+    [11348] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 5, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus V
+    [11350] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 6, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus VI
+    [11352] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 7, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus VII
+    [11353] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 8, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus VIII
+    [11356] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 9, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus IX
+    [15060] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_defensive_scroll_bonus.dds', stack = 1, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_defensive_scroll_bonus.dds' }, -- Defensive Scroll Bonus I
+    [16350] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_defensive_scroll_bonus.dds', stack = 2, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_defensive_scroll_bonus.dds' }, -- Defensive Scroll Bonus II
+    [15058] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_offensive_scroll_bonus.dds', stack = 1, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_offensive_scroll_bonus.dds' }, -- Offensive Scroll Bonus I
+    [16348] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_offensive_scroll_bonus.dds', stack = 2, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_offensive_scroll_bonus.dds' }, -- Offensive Scroll Bonus II
+
     [66282] = { icon = 'esoui/art/icons/achievement_026.dds' }, -- Blessing of War
 
     [15177] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Altadoon

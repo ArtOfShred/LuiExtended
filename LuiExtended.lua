@@ -53,15 +53,15 @@ LUIE.D = {
 
 -- Global fonts table to use in other parts of this addon
     LUIE.Fonts = {
-    ["ProseAntique"] 			= ZoFontBookPaper:GetFontInfo(), 
-    ["Consolas"] 				= "/EsoUI/Common/Fonts/consola.ttf", 
-    ["Futura Condensed"] 		= "/EsoUI/Common/Fonts/FTN57.otf", 
-    ["Futura Condensed Bold"] 	= "/EsoUI/Common/Fonts/FTN87.otf", 
-    ["Futura Condensed Light"] 	= "/EsoUI/Common/Fonts/FTN47.otf", 
-    ["Skyrim Handwritten"] 		= ZoFontBookLetter:GetFontInfo(), 
-    ["Trajan Pro"] 				= ZoFontBookTablet:GetFontInfo(), 
-    ["Univers 55"] 				= "/EsoUI/Common/Fonts/univers55.otf", 
-    ["Univers 57"] 				= ZoFontGame:GetFontInfo(), 
+    ["ProseAntique"] 			= ZoFontBookPaper:GetFontInfo(),
+    ["Consolas"] 				= "/EsoUI/Common/Fonts/consola.ttf",
+    ["Futura Condensed"] 		= "/EsoUI/Common/Fonts/FTN57.otf",
+    ["Futura Condensed Bold"] 	= "/EsoUI/Common/Fonts/FTN87.otf",
+    ["Futura Condensed Light"] 	= "/EsoUI/Common/Fonts/FTN47.otf",
+    ["Skyrim Handwritten"] 		= ZoFontBookLetter:GetFontInfo(),
+    ["Trajan Pro"] 				= ZoFontBookTablet:GetFontInfo(),
+    ["Univers 55"] 				= "/EsoUI/Common/Fonts/univers55.otf",
+    ["Univers 57"] 				= ZoFontGame:GetFontInfo(),
     ["Univers 67"] 				= ZoFontWinH1:GetFontInfo(),
     ["Fontin Bold"]             = "/LuiExtended/media/fonts/Fontin/fontin_sans_b.otf",
     ["Fontin Italic"]           = "/LuiExtended/media/fonts/Fontin/fontin_sans_i.otf",
@@ -676,7 +676,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         [ACTION_TYPE_QUEST_ITEM]    = SetupQuestItemActionSlot,
         [ACTION_TYPE_NOTHING]       = SetupEmptyActionSlot,
     }
-	
+
 	-- Hook campaign screen to fix icons
 	local function GetHomeKeepBonusString(campaignId)
 		local allHomeKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
@@ -745,7 +745,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 		local allHomeScrollsHeld, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE)
 		return allHomeScrollsHeld and enemyScrollsHeld or 0
 	end
-	
+
 	local function GetEmperorBonusString(campaignId)
 		if DoesCampaignHaveEmperor(campaignId) then
 			local alliance = GetCampaignEmperorInfo(campaignId)
@@ -773,7 +773,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
 		return 0
 	end
-	
+
 	local BONUS_SECTION_DATA =
 	{
 		[ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] =           {
@@ -781,8 +781,8 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 												typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
 												headerText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_HEADER),
 												infoText = GetHomeKeepBonusString,
-												count = 1, 
-												countText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_ALL), 
+												count = 1,
+												countText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_ALL),
 												abilityFunction = GetKeepScoreBonusAbilityId,
 												scoreFunction = GetHomeKeepBonusScore,
 											},
@@ -829,7 +829,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 												typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
 												headerText = GetString(SI_CAMPAIGN_BONUSES_EDGE_KEEP_HEADER),
 												infoText = GetEdgeKeepBonusString,
-												count = GetNumEdgeKeepBonuses, 
+												count = GetNumEdgeKeepBonuses,
 												abilityFunction = GetEdgeKeepBonusAbilityId,
 												scoreFunction = GetEdgeKeepBonusScore,
 											},
@@ -855,7 +855,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 			for i = startIndex, count do
 				local abilityId = info.abilityFunction(i)
 				local name = GetAbilityName(abilityId)
-				local icon = GetAbilityIcon(abilityId)
+				local icon = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId)
 				local description = GetAbilityDescription(abilityId)
 
 				local scoreIndex = i - startIndex + 1

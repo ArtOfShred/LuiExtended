@@ -2737,17 +2737,6 @@ function SCB.ReloadEffects(unitTag)
         end
     end
 
-    -- Add Battle Spirit icon to target in Cyrodiil or Battlegrounds
-    if unitTag == "reticleover" and ( IsInAvAZone() or IsActiveWorldBattleground() or GetUnitName(unitTag) == g_currentDuelTarget ) and IsUnitPlayer("reticleover") and not SCB.SV.IgnoreBattleSpiritTarget then
-        g_effectsList.reticleover1[ A.Skill_Battle_Spirit ] = {
-            type=1,
-            id=85701, name=A.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
-            dur=0, starts=1, ends=nil,
-            forced = "short",
-            restart=true, iconNum=0,
-        }
-    end
-
     if unitTag == "reticleover" then
         for _, effectsList in pairs( {g_effectsList.ground, g_effectsList.saved} ) do
             --local container = containerRouting[context]
@@ -2779,6 +2768,52 @@ function SCB.ReloadEffects(unitTag)
                     forced = "short",
                     restart=true, iconNum=0,
                 }
+            end
+        end
+
+        if not SCB.SV.IgnoreCyrodiilTarget then
+            if IsInAvAZone() and IsUnitPlayer("reticleover") then
+                local campaignId = GetCurrentCampaignId()
+                local homeKeep, _, _, _, edgeKeepCount = GetAvAKeepScore(campaignId, GetUnitAlliance("reticleover"))
+                local id
+                local icon
+                local name
+                local stack
+                if edgeKeepCount >= 1 then
+                    if edgeKeepCount == 1 then
+                        id = 111549
+                        icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_1.dds"
+                        name = A.Skill_Edge_Keep_Bonus_1
+                        stack = 1
+                    elseif edgeKeepCount == 2 then
+                        id = 111552
+                        icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_2.dds"
+                        name = A.Skill_Edge_Keep_Bonus_2
+                        stack = 2
+                    elseif edgeKeepCount == 3 then
+                        id = 111553
+                        icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_3.dds"
+                        name = A.Skill_Edge_Keep_Bonus_3
+                        stack = 3
+                    end
+                    g_effectsList.reticleover1[ A.Skill_Edge_Keep_Bonus_1 ] = {
+                        type=1,
+                        id=id, name=name, icon = icon,
+                        dur=0, starts=1, ends=nil,
+                        forced = "short",
+                        restart=true, iconNum=0,
+                        stack = stack,
+                    }
+                end
+                if homeKeep then
+                    g_effectsList.reticleover1[ A.Skill_Home_Keep_Bonus ] = {
+                    type=1,
+                    id=11346, name=A.Skill_Home_Keep_Bonus, icon = "LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds",
+                    dur=0, starts=1, ends=nil,
+                    forced = "short",
+                    restart=true, iconNum=0,
+                    }
+                end
             end
         end
 
@@ -3347,6 +3382,8 @@ function SCB.OnPlayerActivated(eventCode)
         end
     end
 
+    -- Load Cyrodiil Buffs
+    SCB.LoadCyrodiilPlayerBuffs()
     -- Checks for Artificial effects on the player just in case they have no buffs/debuffs present to trigger OnEffectUpdate
     SCB.ArtificialEffectUpdate()
 
@@ -3355,6 +3392,52 @@ function SCB.OnPlayerActivated(eventCode)
         g_playerDead = true
     end
 
+end
+
+function SCB.LoadCyrodiilPlayerBuffs()
+    if not SCB.SV.IgnoreCyrodiilPlayer and IsInAvAZone() then
+        local campaignId = GetCurrentCampaignId()
+        local homeKeep, _, _, _, edgeKeepCount = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
+        local id
+        local icon
+        local name
+        local stack
+        if edgeKeepCount >= 1 then
+            if edgeKeepCount == 1 then
+                id = 111549
+                icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_1.dds"
+                name = A.Skill_Edge_Keep_Bonus_1
+                stack = 1
+            elseif edgeKeepCount == 2 then
+                id = 111552
+                icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_2.dds"
+                name = A.Skill_Edge_Keep_Bonus_2
+                stack = 2
+            elseif edgeKeepCount == 3 then
+                id = 111553
+                icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_3.dds"
+                name = A.Skill_Edge_Keep_Bonus_3
+                stack = 3
+            end
+            g_effectsList["player1"][ A.Skill_Edge_Keep_Bonus_1 ] = {
+                target="player", type=1,
+                id=id, name=name, icon = icon,
+                dur=0, starts=1, ends=nil,
+                forced = "long",
+                restart=true, iconNum=0,
+                stack = stack,
+            }
+        end
+        if homeKeep then
+            g_effectsList["player1"][ A.Skill_Home_Keep_Bonus ] = {
+            target = "player", type=1,
+            id=11346, name=A.Skill_Home_Keep_Bonus, icon = "LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds",
+            dur=0, starts=1, ends=nil,
+            forced = "long",
+            restart=true, iconNum=0,
+            }
+        end
+    end
 end
 
 function SCB.OnPlayerDeactivated(eventCode)
