@@ -3,7 +3,7 @@
 LUIE             = {}
 LUIE.name        = "LuiExtended"
 LUIE.author      = "ArtOfShred, psypanda & SpellBuilder"
-LUIE.version     = "5.6.1"
+LUIE.version     = "5.7"
 LUIE.website     = "http://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github      = "https://github.com/ArtOfShred/LuiExtended"
 
@@ -561,59 +561,29 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         control.animation:PlayForward()
     end
 
-    --[[
     -- Hook skills advisor and use this variable to refresh the abilityData on time one initialization. We don't want to reload any more after that.
-    local firstRun = true
+    ZO_SkillsAdvisor_Suggestions_Keyboard.SetupAbilityEntry = function(self, ability, skillProgressionData)
+        local skillData = skillProgressionData:GetSkillData()
+        local isPassive = skillData:IsPassive()
 
-    -- Overwrite skills advisor ability data function
-    ZO_SKILLS_ADVISOR_SINGLETON.FillInAbilityData = function(self, abilityData, skillBuildId, skillBuildAbilityIndex)
-        local skillType, lineIndex, abilityIndex, isActive, skillBuildMorphChoice, skillBuildRankIndex = GetSkillBuildEntryInfo(skillBuildId, skillBuildAbilityIndex)
-        local _, _, earnedRank, _, ultimate, purchased, progressionIndex, rankIndex = GetSkillAbilityInfo(skillType, lineIndex, abilityIndex)
-        local _, lineRank = GetSkillLineInfo(skillType, lineIndex)
-        local abilityId, rankNeeded = GetSpecificSkillAbilityInfo(skillType, lineIndex, abilityIndex, skillBuildMorphChoice, skillBuildRankIndex)
-        local _, _, nextUpgradeEarnedRank = GetSkillAbilityNextUpgradeInfo(skillType, lineIndex, abilityIndex)
-        local currentMorphChoice
-        local atMorph = false
-        if progressionIndex then
-            currentMorphChoice = select(2, GetAbilityProgressionInfo(progressionIndex))
-            atMorph = select(4, GetAbilityProgressionXPInfo(progressionIndex))
-        end
+        local detailedName = (isPassive and skillData:GetNumRanks() > 1) and skillProgressionData:GetFormattedNameWithRank() or skillProgressionData:GetFormattedName()
+        detailedName = detailedName:gsub("With", "with")
+        ability.nameLabel:SetText(detailedName)
+        ability.nameLabel:SetColor(PURCHASED_COLOR:UnpackRGBA())
+        ability.lock:SetHidden(skillProgressionData:IsUnlocked())
+        ability.skillProgressionData = skillProgressionData
 
-        -- This data is expensive to get, and won't change when the ID is the same.
-        if abilityData.abilityId ~= abilityId or firstRun then
-            local rawName = GetAbilityName(abilityId)
-            local icon = GetAbilityIcon(abilityId)
+        local morphControl = ability:GetNamedChild("Morph")
+        morphControl:SetHidden(isPassive or not skillProgressionData:IsMorph())
 
-            local plainName = strformat(SI_ABILITY_NAME, rawName)
-            abilityData.name = isActive and plainName or strformat(SI_ABILITY_NAME_AND_RANK, rawName, skillBuildRankIndex)
-            abilityData.plainName = plainName
-            abilityData.icon = icon
-        end
-
-        abilityData.abilityId = abilityId
-        abilityData.skillType = skillType
-        abilityData.lineIndex = lineIndex
-        abilityData.abilityIndex = abilityIndex
-        abilityData.earnedRank = earnedRank
-        abilityData.nextUpgradeEarnedRank = nextUpgradeEarnedRank
-        abilityData.rankIndex = rankIndex
-        abilityData.passive = not isActive
-        abilityData.ultimate = ultimate
-        abilityData.purchased = purchased
-        abilityData.progressionIndex = progressionIndex
-        abilityData.lineRank = lineRank
-        abilityData.atMorph = atMorph
-        abilityData.morph = currentMorphChoice
-        abilityData.skillBuildMorphChoice = skillBuildMorphChoice
-        abilityData.skillBuildRankIndex = skillBuildRankIndex
-        abilityData.rankNeeded = rankNeeded
+        local slot = ability.slot
+        local id = skillProgressionData:GetAbilityId()
+        slot.skillProgressionData = skillProgressionData
+        slot.icon:SetTexture(GetAbilityIcon(id))
+        ZO_Skills_SetKeyboardAbilityButtonTextures(slot)
     end
 
-    ZO_SKILLS_ADVISOR_SINGLETON:UpdateSkillBuildData()
-
-    firstRun = false
-    ]]--
-
+    -- Hook Action Slots
     local ACTION_BUTTON_BGS = {ability = "EsoUI/Art/ActionBar/abilityInset.dds", item = "EsoUI/Art/ActionBar/quickslotBG.dds"}
     local ACTION_BUTTON_BORDERS = {normal = "EsoUI/Art/ActionBar/abilityFrame64_up.dds", mouseDown = "EsoUI/Art/ActionBar/abilityFrame64_down.dds"}
 
@@ -887,6 +857,299 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
 		return self.masterList
 	end
+
+    -- HOOK SKILLS
+    local INCREASE_BUTTON_TEXTURES =
+        {
+            PLUS =
+            {
+                normal = "EsoUI/Art/Progression/addPoints_up.dds",
+                mouseDown = "EsoUI/Art/Progression/addPoints_down.dds",
+                mouseover = "EsoUI/Art/Progression/addPoints_over.dds",
+                disabled = "EsoUI/Art/Progression/addPoints_disabled.dds",
+            },
+            MORPH =
+            {
+                normal = "EsoUI/Art/Progression/morph_up.dds",
+                mouseDown = "EsoUI/Art/Progression/morph_down.dds",
+                mouseover = "EsoUI/Art/Progression/morph_over.dds",
+                disabled = "EsoUI/Art/Progression/morph_disabled.dds",
+            },
+            REMORPH =
+            {
+                normal = "EsoUI/Art/Progression/remorph_up.dds",
+                mouseDown = "EsoUI/Art/Progression/remorph_down.dds",
+                mouseover = "EsoUI/Art/Progression/remorph_over.dds",
+                disabled = "EsoUI/Art/Progression/remorph_disabled.dds",
+            },
+        }
+
+    local function ApplyButtonTextures(button, textures)
+        button:SetNormalTexture(textures.normal)
+        button:SetPressedTexture(textures.mouseDown)
+        button:SetMouseOverTexture(textures.mouseover)
+        button:SetDisabledTexture(textures.disabled)
+    end
+
+    SKILLS_WINDOW.SetupAbilityEntry = function(self, ability, data)
+        local skillData = data.skillData
+        local skillPointAllocator = skillData:GetPointAllocator()
+        local skillProgressionData = skillPointAllocator:GetProgressionData()
+        local id = skillProgressionData:GetAbilityId()
+
+        local isPassive = skillData:IsPassive()
+        local isActive = not isPassive
+        local isPurchased = skillPointAllocator:IsPurchased()
+        local isUnlocked = skillProgressionData:IsUnlocked()
+
+        local detailedName
+        if isPassive and skillData:GetNumRanks() > 1 then
+            detailedName = skillProgressionData:GetFormattedNameWithUpgradeLevels()
+        elseif isActive then
+            detailedName = skillProgressionData:GetFormattedNameWithRank()
+        else
+            detailedName = skillProgressionData:GetFormattedName()
+        end
+        detailedName = detailedName:gsub("With", "with")
+        ability.nameLabel:SetText(detailedName)
+
+        if isPurchased then
+            ability.nameLabel:SetColor(PURCHASED_COLOR:UnpackRGBA())
+        else
+            if isUnlocked then
+                ability.nameLabel:SetColor(UNPURCHASED_COLOR:UnpackRGBA())
+            else
+                ability.nameLabel:SetColor(LOCKED_COLOR:UnpackRGBA())
+            end
+        end
+
+        local slot = ability.slot
+
+        local id = skillProgressionData:GetAbilityId()
+
+        slot.skillProgressionData = skillProgressionData
+        slot.icon:SetTexture(GetAbilityIcon(id))
+        ZO_Skills_SetKeyboardAbilityButtonTextures(slot)
+        ZO_ActionSlot_SetUnusable(slot.icon, not isPurchased)
+        slot:SetEnabled(isPurchased and not isPassive)
+
+        local hideXPBar = true
+        if isActive and skillProgressionData:HasRankData() then
+            local currentRank = skillProgressionData:GetCurrentRank()
+            local startXP, endXP = skillProgressionData:GetRankXPExtents(currentRank)
+            local currentXP = skillProgressionData:GetCurrentXP()
+
+            local dontWrap = ability.skillProgressionData ~= skillProgressionData
+            ability.xpBar:SetHidden(false)
+            ZO_SkillInfoXPBar_SetValue(ability.xpBar, currentRank, startXP, endXP, currentXP, dontWrap)
+            hideXPBar = false
+        end
+
+        ability.skillProgressionData = skillProgressionData
+
+        local offsetY = hideXPBar and 0 or -10
+        ability.nameLabel:SetAnchor(LEFT, slot, RIGHT, 10, offsetY)
+
+        if hideXPBar then
+            ability.xpBar:SetHidden(true)
+            local NO_LEVEL = nil
+            local DONT_WRAP = true
+            ZO_SkillInfoXPBar_SetValue(ability.xpBar, NO_LEVEL, 0, 1, 0, DONT_WRAP)
+        end
+
+        ability.lock:SetHidden(isUnlocked)
+
+        local canPurchase = skillPointAllocator:CanPurchase()
+        local canIncreaseRank = skillPointAllocator:CanIncreaseRank()
+        local canMorph = skillPointAllocator:CanMorph()
+
+        local increaseButton = ability.increaseButton
+        local decreaseButton = ability.decreaseButton
+        local hideIncreaseButton = true
+        local hideDecreaseButton = true
+        local skillPointAllocationMode = SKILLS_AND_ACTION_BAR_MANAGER:GetSkillPointAllocationMode()
+        if skillPointAllocationMode == SKILL_POINT_ALLOCATION_MODE_PURCHASE_ONLY then
+            local increaseTextures = nil
+            if canMorph then
+                increaseTextures = INCREASE_BUTTON_TEXTURES.MORPH
+            elseif canPurchase or canIncreaseRank then
+                increaseTextures = INCREASE_BUTTON_TEXTURES.PLUS
+            end
+
+            if increaseTextures then
+                ApplyButtonTextures(increaseButton, increaseTextures)
+                if IsUnitInCombat("player") then
+                    increaseButton:SetState(BSTATE_DISABLED)
+                else
+                    increaseButton:SetState(BSTATE_NORMAL)
+                end
+                hideIncreaseButton = false
+            end
+        else
+            local isFullRespec = skillPointAllocationMode == SKILL_POINT_ALLOCATION_MODE_FULL
+            if skillData:CanPointAllocationsBeAltered(isFullRespec) then
+                hideIncreaseButton = false
+                hideDecreaseButton = false
+
+                if isPassive or not isPurchased or not skillData:IsAtMorph() then
+                    ApplyButtonTextures(increaseButton, INCREASE_BUTTON_TEXTURES.PLUS)
+                else
+                    if skillProgressionData:IsMorph() then
+                        ApplyButtonTextures(increaseButton, INCREASE_BUTTON_TEXTURES.REMORPH)
+                    else
+                        ApplyButtonTextures(increaseButton, INCREASE_BUTTON_TEXTURES.MORPH)
+                    end
+                end
+
+                if canMorph or canPurchase or canIncreaseRank then
+                    increaseButton:SetState(BSTATE_NORMAL)
+                else
+                    increaseButton:SetState(BSTATE_DISABLED)
+                end
+
+                if skillPointAllocator:CanSell() or skillPointAllocator:CanDecreaseRank() or skillPointAllocator:CanUnmorph() then
+                    decreaseButton:SetState(BSTATE_NORMAL)
+                else
+                    decreaseButton:SetState(BSTATE_DISABLED)
+                end
+            end
+        end
+
+        increaseButton:SetHidden(hideIncreaseButton)
+        decreaseButton:SetHidden(hideDecreaseButton)
+    end
+
+    -- Overwrite default Skill Confirm Learn Menu for Skills with Custom Icons
+    local function InitializeKeyboardConfirmDialog()
+        local confirmDialogControl = ZO_SkillsConfirmDialog
+        confirmDialogControl.abilityName = confirmDialogControl:GetNamedChild("AbilityName")
+        confirmDialogControl.ability = confirmDialogControl:GetNamedChild("Ability")
+        confirmDialogControl.ability.icon = confirmDialogControl.ability:GetNamedChild("Icon")
+        local advisementLabel = confirmDialogControl:GetNamedChild("Advisement")
+        advisementLabel:SetText(GetString(SI_SKILLS_ADVISOR_PURCHASE_ADVISED))
+        advisementLabel:SetColor(ZO_SKILLS_ADVISOR_ADVISED_COLOR:UnpackRGBA())
+        confirmDialogControl.advisementLabel = advisementLabel
+
+        local function SetupPurchaseAbilityConfirmDialog(dialog, skillProgressionData)
+            if skillProgressionData:GetSkillData():GetPointAllocator():CanPurchase() then
+                local dialogAbility = dialog.ability
+                local id = skillProgressionData:GetAbilityId()
+                dialog.abilityName:SetText(GetAbilityName(id))
+
+                dialogAbility.skillProgressionData = skillProgressionData
+                dialogAbility.icon:SetTexture(GetAbilityIcon(id))
+                ZO_Skills_SetKeyboardAbilityButtonTextures(dialogAbility)
+
+                local hideAdvisement = ZO_SKILLS_ADVISOR_SINGLETON:IsAdvancedModeSelected() or not skillProgressionData:IsAdvised()
+                dialog.advisementLabel:SetHidden(hideAdvisement)
+            end
+        end
+
+        ZO_Dialogs_RegisterCustomDialog("PURCHASE_ABILITY_CONFIRM",
+        {
+            customControl = confirmDialogControl,
+            setup = SetupPurchaseAbilityConfirmDialog,
+            title =
+            {
+                text = SI_SKILLS_CONFIRM_PURCHASE_ABILITY,
+            },
+            buttons =
+            {
+                [1] =
+                {
+                    control =   confirmDialogControl:GetNamedChild("Confirm"),
+                    text =      SI_SKILLS_UNLOCK_CONFIRM,
+                    callback =  function(dialog)
+                                    local skillProgressionData = dialog.data
+                                    local skillPointAllocator = skillProgressionData:GetSkillData():GetPointAllocator()
+                                    skillPointAllocator:Purchase()
+                                end,
+                },
+
+                [2] =
+                {
+                    control =   confirmDialogControl:GetNamedChild("Cancel"),
+                    text =      SI_CANCEL,
+                }
+            }
+        })
+    end
+
+    -- Overwrite default Upgrade menu for Skills with Custom Icons
+    local function InitializeKeyboardUpgradeDialog()
+        local upgradeDialogControl = ZO_SkillsUpgradeDialog
+        upgradeDialogControl.desc = upgradeDialogControl:GetNamedChild("Description")
+
+        upgradeDialogControl.baseAbility = upgradeDialogControl:GetNamedChild("BaseAbility")
+        upgradeDialogControl.baseAbility.icon = upgradeDialogControl.baseAbility:GetNamedChild("Icon")
+
+        upgradeDialogControl.upgradeAbility = upgradeDialogControl:GetNamedChild("UpgradeAbility")
+        upgradeDialogControl.upgradeAbility.icon = upgradeDialogControl.upgradeAbility:GetNamedChild("Icon")
+
+        local advisementLabel = upgradeDialogControl:GetNamedChild("Advisement")
+        advisementLabel:SetText(GetString(SI_SKILLS_ADVISOR_PURCHASE_ADVISED))
+        advisementLabel:SetColor(ZO_SKILLS_ADVISOR_ADVISED_COLOR:UnpackRGBA())
+
+        local function SetupUpgradeAbilityDialog(dialog, skillData)
+            --Only passives upgrade
+            assert(skillData:IsPassive())
+
+            local skillPointAllocator = skillData:GetPointAllocator()
+            if skillPointAllocator:CanIncreaseRank() then
+                local rank = skillPointAllocator:GetSkillProgressionKey()
+                local skillProgressionData = skillData:GetRankData(rank)
+                local nextSkillProgressionData = skillData:GetRankData(rank + 1)
+
+                local id = skillProgressionData:GetAbilityId()
+                dialog.desc:SetText(zo_strformat(SI_SKILLS_UPGRADE_DESCRIPTION, GetAbilityName(id)))
+
+                local baseAbility = dialog.baseAbility
+                baseAbility.skillProgressionData = skillProgressionData
+                baseAbility.icon:SetTexture(GetAbilityIcon(id))
+                ZO_Skills_SetKeyboardAbilityButtonTextures(baseAbility)
+
+                local upgradeAbility = dialog.upgradeAbility
+                local idUpgrade = nextSkillProgressionData:GetAbilityId()
+                upgradeAbility.skillProgressionData = nextSkillProgressionData
+                upgradeAbility.icon:SetTexture(GetAbilityIcon(idUpgrade))
+                ZO_Skills_SetKeyboardAbilityButtonTextures(upgradeAbility)
+
+                local hideAdvisement = ZO_SKILLS_ADVISOR_SINGLETON:IsAdvancedModeSelected() or not skillData:IsAdvised()
+                advisementLabel:SetHidden(hideAdvisement)
+            end
+        end
+
+        ZO_Dialogs_RegisterCustomDialog("UPGRADE_ABILITY_CONFIRM",
+        {
+            customControl = upgradeDialogControl,
+            setup = SetupUpgradeAbilityDialog,
+            title =
+            {
+                text = SI_SKILLS_UPGRADE_ABILITY,
+            },
+            buttons =
+            {
+                [1] =
+                {
+                    control = upgradeDialogControl:GetNamedChild("Confirm"),
+                    text =  SI_SKILLS_UPGRADE_CONFIRM,
+                    callback =  function(dialog)
+                                    local skillData = dialog.data
+                                    local skillPointAllocator = skillData:GetPointAllocator()
+                                    skillPointAllocator:IncreaseRank()
+                                end,
+                },
+                [2] =
+                {
+                    control =   upgradeDialogControl:GetNamedChild("Cancel"),
+                    text =      SI_CANCEL,
+                }
+            }
+        })
+    end
+
+    InitializeKeyboardConfirmDialog()
+    InitializeKeyboardUpgradeDialog()
 
 end
 
