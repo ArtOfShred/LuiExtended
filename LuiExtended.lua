@@ -494,20 +494,22 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].type then effectType = LUIE.Effects.EffectOverride[abilityId].type end
 
                     if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
-                        local effectsRow = effectsRowPool:AcquireObject()
-                        effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
-                        effectsRow.icon:SetTexture(iconFile)
-                        effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, buffName)
-                        effectsRow.tooltipText = tooltipText
-                        effectsRow.thirdLine = thirdLine
-                        local duration = startTime - endTime
-                        effectsRow.time:SetHidden(duration == 0)
-                        effectsRow.time.endTime = endTime
-                        effectsRow.effectType = effectType
-                        effectsRow.buffSlot = buffSlot
-                        effectsRow.isArtificial = false
+                        if (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hideReduce and not LUIE.SpellCastBuffs.SV.HideReduce) or not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hideReduce) then
+                            local effectsRow = effectsRowPool:AcquireObject()
+                            effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
+                            effectsRow.icon:SetTexture(iconFile)
+                            effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, buffName)
+                            effectsRow.tooltipText = tooltipText
+                            effectsRow.thirdLine = thirdLine
+                            local duration = startTime - endTime
+                            effectsRow.time:SetHidden(duration == 0)
+                            effectsRow.time.endTime = endTime
+                            effectsRow.effectType = effectType
+                            effectsRow.buffSlot = buffSlot
+                            effectsRow.isArtificial = false
 
-                        tableinsert(effectsRows, effectsRow)
+                            tableinsert(effectsRows, effectsRow)
+                        end
                     end
                 end
 

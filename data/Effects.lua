@@ -2428,10 +2428,10 @@ E.TooltipNameOverride = {
     [79122]                         = T.Generic_Immobilize, -- Entrapping Poison (2 Traits)
     [79459]                         = T.Generic_Immobilize, -- Escapist's Poison (3 Traits)
     [79460]                         = T.Generic_CC_Immunity, -- Escapist's Poison (3 Traits)
-    --[79996]                         = T.Generic_Reveal, -- Stealth-Draining Poison (2 Traits)
-    --[80003]                         = T.Generic_Marked, -- Conspicuous Posion (2 Traits)
-    --[80002]                         = T.Generic_Reveal, -- Stealth-Draining Poison (2 Traits)
-    --[80004]                         = T.Generic_Marked, -- Conspicuous Posion (2 Traits)
+    [79996]                         = T.Generic_Reveal, -- Stealth-Draining Poison (2 Traits)
+    [80003]                         = T.Generic_Marked, -- Conspicuous Posion (2 Traits)
+    [80002]                         = T.Generic_Reveal, -- Stealth-Draining Poison (2 Traits)
+    [80004]                         = T.Generic_Marked, -- Conspicuous Posion (2 Traits)
     [79699]                         = T.Generic_Poison, -- ... of Gradual Drain Health (2 Traits)
     [79700]                         = T.Generic_HoT, -- ... of Gradual Drain Health (2 Traits)
     [79701]                         = T.Generic_Poison, -- ... of Gradual Drain Health (3 Traits)
@@ -2663,8 +2663,8 @@ E.EffectOverride = {
     [79457] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds', tooltip = A.Poison }, -- Immobilize (Escapist's Poison) DEBUFF
     [79458] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_g.dds', tooltip = A.Poison }, -- Unstoppable (Escapist's Poison) BUFF
     [79122] = { icon = 'LuiExtended/media/icons/poisons/poison_1_red_r.dds', tooltip = A.Poison }, -- Immobilize (Entrapping Poison) DEBUFF
-    [79996] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', name = A.Poison_Stealth_Draining_Poison, tooltip = A.Poison }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
-    [80003] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', name = A.Poison_Conspicuous_Poison, tooltip = A.Poison }, -- Marking Poison (Conspicuous Poison) DEBUFF
+    [79996] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', name = A.Skill_Revealed, tooltip = A.Poison }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
+    [80003] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', name = A.Skill_Marked, tooltip = A.Poison }, -- Marking Poison (Conspicuous Poison) DEBUFF
     [79367] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_r.dds', name = A.Skill_Hindrance, tooltip = A.Poison }, -- Hindrance (Speed-Draining Poison) DEBUFF
     [79368] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_g.dds', tooltip = A.Poison }, -- Major Expedition (Speed-Draining Poison) BUFF
     [79094] = { icon = 'LuiExtended/media/icons/poisons/poison_1_green_r.dds', tooltip = A.Poison }, -- Hindrance (Hindering Poison) DEBUFF
@@ -2709,8 +2709,8 @@ E.EffectOverride = {
     [79459] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds', tooltip = A.Poison }, -- Immobilize (Escapist's Poison) DEBUFF
     [79460] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_g.dds', tooltip = A.Poison }, -- Unstoppable (Escapist's Poison) BUFF
     -- No Entrapping
-    [80002] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', name = A.Poison_Stealth_Draining_Poison, tooltip = A.Poison }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
-    [80004] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', name = A.Poison_Conspicuous_Poison, tooltip = A.Poison }, -- Marking Poison (Conspicuous Poison) DEBUFF
+    [80002] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', name = A.Skill_Revealed, tooltip = A.Poison }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
+    [80004] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', name = A.Skill_Marked, tooltip = A.Poison }, -- Marking Poison (Conspicuous Poison) DEBUFF
     [79369] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_r.dds', name = A.Skill_Hindrance, tooltip = A.Poison }, -- Hindrance (Speed-Draining Poison) DEBUFF
     [79370] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_g.dds', tooltip = A.Poison }, -- Major Expedition (Speed-Draining Poison) BUFF
     [79102] = { icon = 'LuiExtended/media/icons/poisons/poison_1_green_r.dds', name = A.Skill_Hindrance, tooltip = A.Poison }, -- Hindrance (Hindering Poison) DEBUFF
@@ -3618,7 +3618,7 @@ E.EffectOverride = {
 
     -- Mount
     [37059] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds' }, -- Mount Up
-    [42514] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', unbreakable = 1, tooltip = T.Generic_Knockdown }, -- Hard Dismount
+    [115607] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', name = A.Innate_Hard_Dismount, unbreakable = 1, tooltip = T.Generic_Knockdown }, -- Dismount Stun
     [33439] = { tooltip = T.Innate_Gallop },
 
     -- Block
@@ -8313,7 +8313,7 @@ E.FakePlayerDebuffs = {
 -- Useful for effects like staggers where there is no way to break out of them for the short duration they are applied
 E.FakeStagger = {
     -- Player Basic
-    [42514] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', name = A.Innate_Hard_Dismount, duration = 2000}, -- Hard Dismount (Player knocked off horse)
+    [115607] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', name = A.Innate_Hard_Dismount, duration = 2000}, -- Dismount Stun
 
     -- Bow
     [38649] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Poison Arrow (Venom Arrow)

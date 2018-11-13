@@ -1482,30 +1482,32 @@ end
 function CI.ShowCustomToggle(slotNum)
     if not g_uiCustomToggle[slotNum] then
         local actionButton = ZO_ActionBar_GetButton(slotNum)
+        local name = "ActionButton" .. slotNum .. "Toggle_LUIE"
+        local window = windowManager:GetControlByName(name) -- Check to see if this frame already exists, don't create it if it does.
+        if window == nil then
+            local toggleFrame = windowManager:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
+            --toggleFrame.back = UI.Texture( toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
+            toggleFrame:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+            toggleFrame:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
+            toggleFrame:SetTexture("/esoui/art/actionbar/actionslot_toggledon.dds")
+            toggleFrame:SetBlendMode(TEX_BLEND_MODE_ADD)
+            toggleFrame:SetDrawLayer(0)
+            toggleFrame:SetDrawLevel(0)
+            toggleFrame:SetDrawTier(2)
+            toggleFrame:SetColor(0.5,1,0.5,1)
+            toggleFrame:SetHidden(false)
 
-        local toggleFrame = windowManager:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
+            toggleFrame.label = UI.Label (toggleFrame, nil, nil, nil, g_barFont, nil, false)
+            toggleFrame.label:SetAnchor(TOPLEFT, actionButton.slot)
+            toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.BarLabelPosition)
+            toggleFrame.label:SetDrawLayer(DL_COUNT)
+            toggleFrame.label:SetDrawLevel(1)
+            toggleFrame.label:SetDrawTier(3)
+            toggleFrame.label:SetColor( unpack( CI.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
+            toggleFrame.label:SetHidden(false)
 
-        --toggleFrame.back = UI.Texture( toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
-        toggleFrame:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
-        toggleFrame:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
-        toggleFrame:SetTexture("/esoui/art/actionbar/actionslot_toggledon.dds")
-        toggleFrame:SetBlendMode(TEX_BLEND_MODE_ADD)
-        toggleFrame:SetDrawLayer(0)
-        toggleFrame:SetDrawLevel(0)
-        toggleFrame:SetDrawTier(2)
-        toggleFrame:SetColor(0.5,1,0.5,1)
-        toggleFrame:SetHidden(false)
-
-        toggleFrame.label = UI.Label (toggleFrame, nil, nil, nil, g_barFont, nil, false)
-        toggleFrame.label:SetAnchor(TOPLEFT, actionButton.slot)
-        toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.BarLabelPosition)
-        toggleFrame.label:SetDrawLayer(DL_COUNT)
-        toggleFrame.label:SetDrawLevel(1)
-        toggleFrame.label:SetDrawTier(3)
-        toggleFrame.label:SetColor( unpack( CI.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
-        toggleFrame.label:SetHidden(false)
-
-        g_uiCustomToggle[slotNum] = toggleFrame
+            g_uiCustomToggle[slotNum] = toggleFrame
+        end
     end
     if g_uiCustomToggle[slotNum] then
         g_uiCustomToggle[slotNum]:SetHidden(false)
