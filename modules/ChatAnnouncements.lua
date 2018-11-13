@@ -7794,74 +7794,78 @@ function CA.HookFunction()
         return true
     end
 
+    local throttleEarnedCP = false -- In case the same event fires at the same time, stops wierd printouts.
+
     local function ChampionPointGainedHook(pointDelta)
+        if not throttleEarnedCP then
+            -- Print throttled XP value
+            eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
+            CA.PrintBufferedXP()
 
-        -- Print throttled XP value
-        eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
-        CA.PrintBufferedXP()
+            -- adding one so that we are starting from the first gained point instead of the starting champion points
+            local endingPoints = GetPlayerChampionPointsEarned()
+            local startingPoints = endingPoints - pointDelta + 1
+            local championPointsByType = { 0, 0, 0 }
 
-        -- adding one so that we are starting from the first gained point instead of the starting champion points
-        local endingPoints = GetPlayerChampionPointsEarned()
-        local startingPoints = endingPoints - pointDelta + 1
-        local championPointsByType = { 0, 0, 0 }
+            while startingPoints <= endingPoints do
+                local pointType = GetChampionPointAttributeForRank(startingPoints)
+                championPointsByType[pointType] = championPointsByType[pointType] + 1
+                startingPoints = startingPoints + 1
+            end
 
-        while startingPoints <= endingPoints do
-            local pointType = GetChampionPointAttributeForRank(startingPoints)
-            championPointsByType[pointType] = championPointsByType[pointType] + 1
-            startingPoints = startingPoints + 1
-        end
+            if CA.SV.XP.ExperienceLevelUpCA then
+                local formattedString = ExperienceLevelUpColorize:Colorize(strformat(SI_CHAMPION_POINT_EARNED, pointDelta) .. ": ")
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            end
 
-        if CA.SV.XP.ExperienceLevelUpCA then
-            local formattedString = ExperienceLevelUpColorize:Colorize(strformat(SI_CHAMPION_POINT_EARNED, pointDelta) .. ": ")
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-        end
-
-        local secondLine = ""
-        if CA.SV.XP.ExperienceLevelUpCA or CA.SV.XP.ExperienceLevelUpCSA then
-            for pointType,amount in pairs(championPointsByType) do
-                if amount > 0 then
-                    local icon = GetChampionPointAttributeHUDIcon(pointType)
-                    local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and strformat(" <<1>>", iconFormat(icon, 16, 16)) or ""
-                    local constellationGroupName = ZO_Champion_GetUnformattedConstellationGroupNameFromAttribute(pointType)
-                    if CA.SV.XP.ExperienceLevelColorByLevel then
-                        formattedString = ZO_CP_BAR_GRADIENT_COLORS[pointType][2]:Colorize(strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, formattedIcon, constellationGroupName))
-                    else
-                        formattedString = ExperienceLevelUpColorize:Colorize(strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, formattedIcon, constellationGroupName))
-                    end
-                    if CA.SV.XP.ExperienceLevelUpCA then
-                        g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
-                        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-                    end
-                    if CA.SV.XP.ExperienceLevelUpCSA then
-                        secondLine = secondLine .. strformat(SI_CHAMPION_POINT_TYPE, amount, icon, constellationGroupName) .. "\n"
+            local secondLine = ""
+            if CA.SV.XP.ExperienceLevelUpCA or CA.SV.XP.ExperienceLevelUpCSA then
+                for pointType,amount in pairs(championPointsByType) do
+                    if amount > 0 then
+                        local icon = GetChampionPointAttributeHUDIcon(pointType)
+                        local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and strformat(" <<1>>", iconFormat(icon, 16, 16)) or ""
+                        local constellationGroupName = ZO_Champion_GetUnformattedConstellationGroupNameFromAttribute(pointType)
+                        if CA.SV.XP.ExperienceLevelColorByLevel then
+                            formattedString = ZO_CP_BAR_GRADIENT_COLORS[pointType][2]:Colorize(strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, formattedIcon, constellationGroupName))
+                        else
+                            formattedString = ExperienceLevelUpColorize:Colorize(strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, formattedIcon, constellationGroupName))
+                        end
+                        if CA.SV.XP.ExperienceLevelUpCA then
+                            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
+                            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                        end
+                        if CA.SV.XP.ExperienceLevelUpCSA then
+                            secondLine = secondLine .. strformat(SI_CHAMPION_POINT_TYPE, amount, icon, constellationGroupName) .. "\n"
+                        end
                     end
                 end
             end
+
+            if CA.SV.XP.ExperienceLevelUpCSA then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.CHAMPION_POINT_GAINED)
+                messageParams:SetText(strformat(SI_CHAMPION_POINT_EARNED, pointDelta), secondLine)
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_CHAMPION_POINT_GAINED)
+                messageParams:MarkSuppressIconFrame()
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+
+            if CA.SV.XP.ExperienceLevelUpAlert then
+                local text = strformat("<<1>>!", GetString(SI_CHAMPION_POINT_EARNED, pointDelta))
+                callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
+            end
+
+            if not CA.SV.XP.ExperienceLevelUpCSA then
+                PlaySound(SOUNDS.CHAMPION_POINT_GAINED)
+            end
+
+            throttleEarnedCP = true
+            callLater(function() throttleEarnedCP = false end, 500)
+
+            return true
         end
-
-        if CA.SV.XP.ExperienceLevelUpCSA then
-            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.CHAMPION_POINT_GAINED)
-            messageParams:SetText(strformat(SI_CHAMPION_POINT_EARNED, pointDelta), secondLine)
-            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_CHAMPION_POINT_GAINED)
-            messageParams:MarkSuppressIconFrame()
-            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-        end
-
-        if CA.SV.XP.ExperienceLevelUpAlert then
-            local text = strformat("<<1>>!", GetString(SI_CHAMPION_POINT_EARNED, pointDelta))
-            callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
-        end
-
-        if not CA.SV.XP.ExperienceLevelUpCSA then
-            PlaySound(SOUNDS.CHAMPION_POINT_GAINED)
-        end
-
-        return true
-
-
     end
 
     -- Extra Functions for EVENT_DUEL_NEAR_BOUNDARY
