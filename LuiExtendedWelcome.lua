@@ -8,6 +8,9 @@ local windowManager = WINDOW_MANAGER
 
 local fillMessages = {
 
+    "|cFFA5005.7.1|r",
+    "• Unit Frames - Fixed an issue where the default Player / Target / Group frames would fail to display even when enabled in the menu. This setting has been updated and the Saved Variables have been reset. Default Frames will be disabled by default and can be re-enabled by changing the menu option.",
+    "|",
     "|cFFA5005.7 (Murkmire)|r",
     "|cFFFF00General:|r",
     "• Did some various minor optimization, removing some old and un-needed functions and adjusting a few functions that were enabled all the time to only be used when relevant options are enabled.",
@@ -133,8 +136,8 @@ function LUIE_WelcomeScreen(menu)
 
         local buffer = luiChangeLog:GetNamedChild("Buffer")
         local slider = luiChangeLog:GetNamedChild("Slider")
-        buffer:SetScrollPosition(51)
-        slider:SetValue(buffer:GetNumHistoryLines() - 51)
+        buffer:SetScrollPosition(54)
+        slider:SetValue(buffer:GetNumHistoryLines() - 54)
 
     end
     -- Set version to current version.

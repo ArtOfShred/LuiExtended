@@ -53,10 +53,10 @@ UF.D = {
     RepositionFrames                 = true,
     DefaultOocTransparency           = 85,
     DefaultIncTransparency           = 85,
-    DefaultFramesPlayer              = false,
-    DefaultFramesTarget              = false,
-    DefaultFramesGroup               = false,
-    DefaultFramesBoss                = nil,
+    DefaultFramesNewPlayer           = 1,
+    DefaultFramesNewTarget           = 1,
+    DefaultFramesNewGroup            = 1,
+    DefaultFramesNewBoss             = 2,
     Format                           = "Current + Shield (Percentage%)",
     DefaultFontFace                  = "Univers 67",
     DefaultFontStyle                 = "soft-shadow-thick",
@@ -330,22 +330,21 @@ function UF.GetDefaultFramesOptions(frame)
 end
 
 function UF.SetDefaultFramesSetting(frame, value)
-    local key = "DefaultFrames" .. tostring(frame)
+    local key = "DefaultFramesNew" .. tostring(frame)
     if value == g_DefaultFramesOptions[3] then
-        UF.SV[key] = true
-    elseif value == g_DefaultFramesOptions[1] then
-        UF.SV[key] = false
+        UF.SV[key] = 3
+    elseif value == g_DefaultFramesOptions[2] then
+        UF.SV[key] = 2
     else
-        UF.SV[key] = nil
+        UF.SV[key] = 1
     end
 end
 
 function UF.GetDefaultFramesSetting(frame, default)
-    local key = "DefaultFrames" .. tostring(frame)
+    local key = "DefaultFramesNew" .. tostring(frame)
     local from = default and UF.D or UF.SV
     local value = from[key]
-    local out_key = (value == true) and 3 or (value == false) and 1 or 2
-    return g_DefaultFramesOptions[out_key]
+    return g_DefaultFramesOptions[value]
 end
 
 -- Right Click function for group frames - basically just a copy of the ZOS group frame menu options
@@ -498,14 +497,14 @@ local function CreateDefaultFrames()
     -- Create text overlay for default unit frames for player and reticleover.
     local default_controls = {}
 
-    if UF.SV.DefaultFramesPlayer then
+    if UF.SV.DefaultFramesNewPlayer == 3 then
         default_controls.player = {
             [POWERTYPE_HEALTH]  = ZO_PlayerAttributeHealth,
             [POWERTYPE_MAGICKA] = ZO_PlayerAttributeMagicka,
             [POWERTYPE_STAMINA] = ZO_PlayerAttributeStamina,
         }
     end
-    if UF.SV.DefaultFramesTarget then
+    if UF.SV.DefaultFramesNewTarget == 3 then
         default_controls.reticleover = { [POWERTYPE_HEALTH]  = ZO_TargetUnitFramereticleover, }
         -- g_DefaultFrames.reticleover should be always present to hold target classIcon and friendIcon
     else
@@ -537,7 +536,7 @@ local function CreateDefaultFrames()
     tableinsert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.friendIcon )
 
     -- When default Group frame in use, then create dummy boolean field, so this setting remain constant between /reloadui calls
-    if UF.SV.DefaultFramesGroup then
+    if UF.SV.DefaultFramesNewGroup == 3 then
         g_DefaultFrames.SmallGroup = true
     end
 
@@ -545,7 +544,7 @@ local function CreateDefaultFrames()
     UF.DefaultFramesApplyFont()
 
     -- Instead of using Default Unit Frames Extender, the player could wish simply to disable and hide default UI frames
-    if UF.SV.DefaultFramesPlayer == false then
+    if UF.SV.DefaultFramesNewPlayer == 1 then
         local frames = { "Health" , "Stamina" , "Magicka" , "MountStamina" , "Werewolf", "SiegeHealth" }
         for i = 1 , #frames do
             local frame = _G["ZO_PlayerAttribute"..frames[i]]
@@ -1371,7 +1370,7 @@ function UF.Initialize( enabled )
         end
         self.healthText:SetText(ZO_FormatResourceBarCurrentAndMax(totalHealth, totalMaxHealth))
 
-        if UF.SV.DefaultFramesBoss == nil then
+        if UF.SV.DefaultFramesNewBoss == 2 then
             COMPASS_FRAME:SetBossBarActive(totalHealth > 0)
         end
     end
@@ -1951,7 +1950,7 @@ function UF.OnReticleTargetChanged(eventCode)
     end
 
     -- Finally if user does not want to have default target frame we have to hide it here all the time
-    if not g_DefaultFrames.reticleover[POWERTYPE_HEALTH] and UF.SV.DefaultFramesTarget == false then
+    if not g_DefaultFrames.reticleover[POWERTYPE_HEALTH] and UF.SV.DefaultFramesNewTarget == 1 then
         ZO_TargetUnitFramereticleover:SetHidden( true )
     end
 end
@@ -3132,7 +3131,7 @@ function UF.OnBossesChanged( eventCode )
 end
 
 function LUIE.UnitFrames.ResetCompassBarMenu()
-    if UF.SV.DefaultFramesBoss == nil then
+    if UF.SV.DefaultFramesNewBoss == 2 then
         for i = 1, 6 do
             local unitTag = "boss" .. i
             if DoesUnitExist(unitTag) then
