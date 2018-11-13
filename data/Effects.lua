@@ -1099,10 +1099,8 @@ E.EffectCreateSkillAura = {
     [86268] = { consolidate = true, abilityId = 86037 }, -- Major Endurance --> Falcon's Swiftness
     [89076] = { consolidate = true, abilityId = 86041 }, -- Major Expedition --> Deceptive Predator
     [89077] = { consolidate = true, abilityId = 86041 }, -- Major Endurance --> Deceptive Predator
-    [87861] = { consolidate = true, abilityId = 86041 }, -- Minor Evasion --> Deceptive Predator
     [89078] = { consolidate = true, abilityId = 86045 }, -- Major Expedition --> Bird of Prey
     [89079] = { consolidate = true, abilityId = 86045 }, -- Major Endurance --> Bird of Prey
-    [87864] = { consolidate = true, abilityId = 86045 }, -- Minor Berserk --> Bird of Prey
     [86300] = { consolidate = true, abilityId = 85862 }, -- Minor Intellect (Enchanted Growth)
     [87019] = { consolidate = true, abilityId = 85862 }, -- Minor Endurance (Enchanted Growth)
     [86224] = { consolidate = true, abilityId = 86122 }, -- Major Resolve --> Frost Cloak
@@ -1438,7 +1436,7 @@ E.BarHighlightOverride = {
     [86045] = { showFakeAura = true, noRemove = true }, -- Bird of Prey
 
     -- Green Balance
-    [85682] = { newId = 86300, showFakeAura = true, noRemove = true }, -- Enchanted Growth --> Minor Intellect
+    [85862] = { newId = 87019, showFakeAura = true, noRemove = true }, -- Enchanted Growth
     [85922] = { newId = 85840 }, -- Budding Seeds
     [85564] = { newId = 90266 }, -- Nature's Grasp
     [85858] = { newId = 87074 }, -- Nature's Embrace
@@ -2178,8 +2176,9 @@ E.EffectHideSCT = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!
     -- Warden
     ----------------------------
 
-    [87876] = true, -- Betty Netch (Betty Netch)
-    [91475] = true, -- Restore Remover (Bull Netch)
+    [114852] = true, -- Betty Netch (Betty Netch)
+    [114854] = true, -- Betty Netch (Blue Betty)
+    [114853] = true, -- Bull Netch (Bull Netch)
     [86238] = true, -- Impaling Shards (Impaling Shards)
     [87448] = true, -- Gripping Shards (Gripping Shards)
     [88801] = true, -- Winter's Revenge (Gripping Shards)
@@ -4538,66 +4537,126 @@ E.EffectOverride = {
     -- WARDEN ACTIVE ABILITIES ------------------------------------
     ----------------------------------------------------------------
 
-    -- Animal Companions
+    -- ANIMAL COMPANIONS
+
+    -- Scorch / Subterranean Assault / Deep Fissure
+    [86009] = { tooltip = T.Skill_Scorch }, -- Scorch (Scorch)
+    [86019] = { tooltip = T.Skill_Subterranean_Assault }, -- Subterranean Assault (Subterranean Assault)
+    [94444] = { tooltip = A.Skill_Subterranean_Assault }, -- Major Fracture (Subterranean Assault)
+    [86015] = { tooltip = T.Skill_Deep_Fissure }, -- Deep Fissure (Deep Fissure)
     [94424] = { icon = 'esoui/art/icons/ability_warden_015_a.dds' }, -- Deep Fissure (Deep Fissure)
-    [91416] = { forcedContainer = 'short' }, -- Fetcher Infection Bonus Damage (Fetcher Infection)
-    [87929] = { consolidateExtra = true }, -- Major Sorcery (Betty Netch)
-    [87876] = { icon = 'esoui/art/icons/ability_warden_017_a.dds' }, -- Betty Netch (Betty Netch)
-    [89107] = { consolidateExtra = true }, -- Major Sorcery (Blue Betty)
-    [89110] = { consolidate = true }, -- Major Brutality (Bull Netch)
-    [95125] = { consolidate = true }, -- Major Sorcery (Bull Netch)
-    [91475] = { icon = 'esoui/art/icons/ability_warden_017_b.dds', name = A.Skill_Bull_Netch }, -- Bull Netch (Bull Netch)
-    [86267] = { consolidate = true }, -- Major Expedition (Falcon's Swiftness)
-    [86268] = { consolidate = true }, -- Major Endurance (Falcon's Swiftness)
-    [89076] = { consolidate = true }, -- Major Expedition (Deceptive Predator)
-    [89077] = { consolidate = true }, -- Major Endurance (Deceptive Predator)
-    [87861] = { consolidate = true }, -- Minor Evasion (Deceptive Predator)
-    [89078] = { consolidate = true }, -- Major Expedition (Bird of Prey)
-    [89079] = { consolidate = true }, -- Major Endurance (Bird of Prey)
-    [87864] = { consolidate = true }, -- Minor Berserk (Bird of Prey)
-    [101438] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity }, -- Bear Immunity (Feral Guardian - All Morphs)
+    [108951] = { tooltip = A.Skill_Deep_Fissure }, -- Major Breach (Deep Fissure)
+
+    -- Swarm / Fetcher Infection / Growing Swarm
+    [101703] = { tooltip = T.Generic_Magic_2_Sec }, -- Swarm (Swarm)
+    [91416] = { forcedContainer = 'short', name = A.Skill_Fetcher_Infection, tooltip = T.Skill_Fetcher_Infection_Bonus }, -- Fetcher Infection Bonus Damage (Fetcher Infection)
+    [101904] = { tooltip = T.Generic_Magic_2_Sec }, -- Fetcher Infection (Fetcher Infection)
+    [101944] = { tooltip = T.Skill_Growing_Swarm }, -- Growing Swarm (Growing Swarm)
+    [101948] = { tooltip = T.Generic_Magic_2_Sec }, -- Growing Swarm (Growing Swarm)
+
+    -- Betty Netch / Blue Betty / Bull Netch
+    [86050] = { tooltip = T.Skill_Betty_Netch }, -- Betty Netch (Betty Netch)
+    [87929] = { consolidateExtra = true, tooltip = A.Skill_Betty_Netch }, -- Major Sorcery (Betty Netch)
+    [114852] = { icon = 'esoui/art/icons/ability_warden_017_a.dds' }, -- Betty Netch (Betty Netch)
+    [86054] = { tooltip = T.Skill_Blue_Betty }, -- Blue Betty (Blue Betty)
+    [89107] = { consolidateExtra = true, tooltip = A.Skill_Blue_Betty }, -- Major Sorcery (Blue Betty)
+    [114854] = { name = A.Skill_Blue_Betty, icon = 'esoui/art/icons/ability_warden_017.dds' }, -- Betty Netch (Blue Betty)
+    [86058] = { tooltip = T.Skill_Bull_Netch }, -- Bull Netch (Bull Netch)
+    [89110] = { consolidate = true, tooltip = A.Skill_Bull_Netch }, -- Major Brutality (Bull Netch)
+    [95125] = { consolidate = true, tooltip = A.Skill_Bull_Netch }, -- Major Sorcery (Bull Netch)
+    [89109] = { hide = true }, -- Bull Netch (Bull Netch)
+    [114853] = { icon = 'esoui/art/icons/ability_warden_017_b.dds' }, -- Bull Netch (Bull Netch)
+
+    -- Falcon's Swiftness / Deceptive Predator / Bird of Prey
+    [86267] = { consolidate = true, tooltip = A.Skill_Falcons_Swiftness }, -- Major Expedition (Falcon's Swiftness)
+    [86268] = { consolidate = true, tooltip = A.Skill_Falcons_Swiftness }, -- Major Endurance (Falcon's Swiftness)
+    [89076] = { consolidate = true, tooltip = A.Skill_Deceptive_Predator }, -- Major Expedition (Deceptive Predator)
+    [89077] = { consolidate = true, tooltip = A.Skill_Deceptive_Predator }, -- Major Endurance (Deceptive Predator)
+    [114858] = { tooltip = A.Skill_Deceptive_Predator }, -- Minor Evasion (Deceptive Predator)
+    [89078] = { consolidate = true, tooltip = A.Skill_Bird_of_Prey }, -- Major Expedition (Bird of Prey)
+    [89079] = { consolidate = true, tooltip = A.Skill_Bird_of_Prey }, -- Major Endurance (Bird of Prey)
+    [114862] = { tooltip = A.Skill_Bird_of_Prey }, -- Minor Berserk (Bird of Prey)
+
+    -- Feral Guardian / Eternal Guardian / Wild Guardian
+    [101438] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, tooltip = T.Generic_CC_Immunity }, -- Bear Immunity (Feral Guardian - All Morphs)
+    [85982] = { tooltip = T.Skill_Feral_Guardian }, -- Feral Guardian (Feral Guardian)
     [89135] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_swipe.dds', name = A.Skill_Bite }, -- Swipe (Feral Guardian)
     [89128] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Feral Guardian)
-    [89129] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Feral Guardian)
-    [90284] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Guardian's Wrath (Feral Guardian)
+    [89129] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds', tooltip = T.Generic_Knockdown }, -- Crushing Swipe (Feral Guardian)
+    [90284] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Guardians_Wrath }, -- Guardian's Wrath (Feral Guardian)
     [93144] = { hide = true }, -- Guardian's Wrath Trigger (Feral Guardian)
+    [85986] = { tooltip = T.Skill_Eternal_Guardian }, -- Eternal Guardian (Eternal Guardian)
     [109982] = { hide = true }, -- Eternal Guardian (Eternal Guardian)
     [105906] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_swipe.dds', name = A.Skill_Bite }, -- Swipe (Eternal Guardian)
     [105907] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Eternal Guardian)
-    [105908] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Eternal Guardian)
-    [94625] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Guardian's Wrath (Eternal Guardian)
+    [105908] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds', tooltip = T.Generic_Knockdown }, -- Crushing Swipe (Eternal Guardian)
+    [94625] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Guardians_Wrath }, -- Guardian's Wrath (Eternal Guardian)
     [94626] = { hide = true }, -- Guardian's Wrath Trigger (Eternal Guardian)
     [109983] = { hide = true }, -- Eternal Guardian Revive (Eternal Guardian)
-    [110384] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_eternal_guardian_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Eternal_Guardian, A.Set_Cooldown) }, -- Eternal Guardian (Eternal Guardian)
+    [110384] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_eternal_guardian_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Eternal_Guardian, A.Set_Cooldown), tooltip = T.Skill_Eternal_Guardian_Cooldown }, -- Eternal Guardian (Eternal Guardian)
+    [85990] = { tooltip = T.Skill_Wild_Guardian }, -- Wild Guardian (Wild Guardian)
     [89219] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_swipe.dds', name = A.Skill_Bite }, -- Swipe (Wild Guardian)
     [89220] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Wild Guardian)
-    [92666] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Wild Guardian)
-    [92163] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Guardian's Savagery (Wild Guardian)
+    [92666] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds', tooltip = T.Generic_Knockdown }, -- Crushing Swipe (Wild Guardian)
+    [92163] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Guardians_Savagery }, -- Guardian's Savagery (Wild Guardian)
     [93233] = { hide = true }, -- Guardian's Savagery Trigger (Wild Guardian)
 
-    -- Green Balance
-    [86300] = { consolidate = true }, -- Minor Intellect (Enchanted Growth)
-    [87019] = { consolidate = true }, -- Minor Endurance (Enchanted Growth)
+    -- GREEN BALANCE
+
+    -- Fungal Growth / Enchanted Growth / Soothing Spores
+    [86300] = { consolidate = true, tooltip = A.Skill_Enchanted_Growth }, -- Minor Intellect (Enchanted Growth)
+    [87019] = { consolidate = true, tooltip = A.Skill_Enchanted_Growth }, -- Minor Endurance (Enchanted Growth)
+
+    -- Healing Seed / Budding Seeds / Corrupting Pollen
     [108826] = { hide = true }, -- Synergy Damage Bonus (Healing Seed - Harvest Synergy)
+    [85577] = { tooltip = T.Generic_HoT_1Sec }, -- Harvest (Healing Seed - Harvest Synergy)
+    [85578] = { tooltip = T.Skill_Healing_Seed } , -- Healing Seed (Healing Seed)
     [85582] = { name = A.Skill_Healing_Seed }, -- Healing Seed Heal (Healing Seed)
+    [85840] = { tooltip = T.Skill_Budding_Seeds } , -- Budding Seeds (Budding Seeds)
     [85841] = { name = A.Skill_Budding_Seeds }, -- Budding Seeds (Budding Seeds)
     [85925] = { name = A.Skill_Budding_Seeds }, -- Budding Seeds (Budding Seeds)
+    [85845] = { tooltip = T.Skill_Corrupting_Pollen } , -- Corrupting Pollen (Corrupting Pollen)
     [85846] = { name = A.Skill_Corrupting_Pollen }, -- Corrupting Pollen Heal (Corrupting Pollen)
+    [85944] = { tooltip = A.Skill_Corrupting_Pollen }, -- Major Defile (Corrupting Pollen)
+
+    -- Living Vines / Leeching Vines / Living Trellis
+    [85552] = { tooltip = T.Skill_Living_Vines }, -- Living Vines (Living Vines)
     [85559] = { name = A.Skill_Living_Vines }, -- Living Vines Heal (Living Vines)
+    [85850] = { tooltip = T.Skill_Leeching_Vines }, -- Leeching Vines (Leeching Vines)
+    [86307] = { tooltip = A.Skill_Leeching_Vines }, -- Minor Lifesteal (Leeching Vines)
+    [85851] = { tooltip = T.Skill_Living_Trellis }, -- Living Trellis (Living Trellis)
     [88721] = { name = A.Skill_Living_Trellis }, -- Living Trellis Heal (Living Trellis)
     [88723] = { icon = 'esoui/art/icons/ability_warden_010_b.dds', name = A.Skill_Living_Trellis }, -- Living Trellis Heal Burst (Living Trellis)
-    [87061] = { consolidateExtra = true }, -- Major Savagery (Green Lotus)
-    [86303] = { consolidateExtra = true }, -- Major Prophecy (Lotus Blossom)
+
+    -- Lotus Flower / Green Lotus / Lotus Blossom
+    [85539] = { tooltip = T.Skill_Lotus_Flower }, -- Lotus Flower (Lotus Flower)
+    [85854] = { tooltip = T.Skill_Lotus_Flower }, -- Green Lotus (Green Lotus)
+    [87061] = { consolidateExtra = true, tooltip = A.Skill_Green_Lotus }, -- Major Savagery (Green Lotus)
+    [85855] = { tooltip = T.Skill_Lotus_Flower }, -- Lotus Blossom (Lotus Blossom)
+    [86303] = { consolidateExtra = true, tooltip = A.Skill_Lotus_Blossom }, -- Major Prophecy (Lotus Blossom)
     [88695] = { name = A.Skill_Lotus_Blossom }, -- Lotus Blossom Heal (Lotus Blossom)
     [94590] = { icon = 'esoui/art/icons/ability_warden_009_b.dds', name = A.Skill_Lotus_Blossom }, -- Lotus Blossom Heal (Lotus Blossom)
+
+    -- Nature's Grasp / Bursting Vines / Nature's Embrace
+    [90266] = { tooltip = T.Skill_Natures_Grasp }, -- Nature's Grasp (Nature's Grasp)
     [108943] = { icon = 'esoui/art/icons/ability_warden_011.dds', name = A.Skill_Natures_Grasp }, -- Nature's Grasp Ultimate Restor (Nature's Grasp)
     [108947] = { icon = 'esoui/art/icons/ability_warden_011_a.dds', name = A.Skill_Bursting_Vines }, -- Bursting Vines Ultimate Rest (Bursting Vines)
+    [88726] = { tooltip = T.Skill_Natures_Grasp }, -- Nature's Embrace (Nature's Embrace)
+    [87074] = { tooltip = T.Skill_Natures_Grasp_Self }, -- Nature's Embrace (Nature's Embrace)
     [108945] = { icon = 'esoui/art/icons/ability_warden_011_b.dds', name = A.Skill_Natures_Embrace }, -- Nature's Embrace Ultimate Rest (Nature's Embrace)
+
+    -- Secluded Grove / Enchanted Forest / Healing Thicket
+    [85532] = { tooltip = T.Skill_Secluded_Grove }, -- Secluded Grove (Secluded Grove)
     [85533] = { name = A.Skill_Secluded_Grove }, -- Secluded Grove Instant Heal (Secluded Grove)
     [85534] = { name = A.Skill_Secluded_Grove }, -- Secluded GroveTick Heal (Secluded Grove)
+
+    [85804] = { tooltip = T.Skill_Secluded_Grove }, -- Enchanted Forest (Enchanted Forest)
     [88748] = { name = A.Skill_Enchanted_Forest }, -- Enchanted Forest Burst (Enchanted Forest)
     [86357] = { icon = 'esoui/art/icons/ability_warden_012_a.dds', name = A.Skill_Enchanted_Forest }, -- Enchanted Forest Ultimate Rest (Enchanted Forest)
+
+    [85807] = { tooltip = T.Skill_Healing_Thicket }, -- Healing Thicket (Healing Thicket)
     [88750] = { name = A.Skill_Healing_Thicket }, -- Healing Thicket Instant Heal (Healing Thicket)
+    [91819] = { tooltip = T.Generic_HoT_1Sec }, -- Healing Thicket (Healing Thicket)
 
     -- Winter's Embrace
     [86224] = { consolidate = true }, -- Major Resolve (Frost Cloak)
@@ -5923,7 +5982,7 @@ E.EffectOverride = {
     [70366] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Slam (Great Bear)
     [89189] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Slam (Great Bear)
     [69073] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Slam }, -- Knockdown (Great Bear)
-    [70374] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity }, -- Ferocity (Great Bear)
+    [70374] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, tooltip = T.Generic_CC_Immunity }, -- Ferocity (Great Bear)
     [70372] = { hide = true }, -- Ferocity (Great Bear)
     [70376] = { hide = true }, -- Ferocity (Great Bear)
     [70375] = { hide = true }, -- Ferocity (Great Bear)
@@ -6126,7 +6185,7 @@ E.EffectOverride = {
     -- Daedra
     [51256] = { hide = true }, -- Siphon (Atronach Passive)
     [31115] = { icon = 'esoui/art/icons/achievement_089.dds', name = A.Skill_Summon_Daedric_Arch }, -- Summon Dark Anchor (Daedric Synergy)
-    [59129] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity }, -- Generic Status Immune (Daedric Synergy)
+    [59129] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, tooltip = T.Generic_CC_Immunity }, -- Generic Status Immune (Daedric Synergy)
     [94481] = { hide = true }, -- Summon Dark Anchor (Daedric Synergy)
     [68453] = { hide = true }, -- Explosive Charge (Daedric Synergy)
     [68449] = { icon = 'LuiExtended/media/icons/abilities/ability_banekin_envelop.dds' }, -- Explosive Charge (Daedric Synergy)

@@ -578,15 +578,27 @@ A.Skill_Remembrance                 = 22229
 A.Skill_Practiced_Incantation       = 22226
 
 -- Warden
+A.Skill_Subterranean_Assault        = 86019
+A.Skill_Deep_Fissure                = 86015
+A.Skill_Fetcher_Infection           = 86027
+A.Skill_Betty_Netch                 = 86050
+A.Skill_Blue_Betty                  = 86054
 A.Skill_Bull_Netch                  = 86058
+A.Skill_Falcons_Swiftness           = 86037
+A.Skill_Deceptive_Predator          = 86041
+A.Skill_Bird_of_Prey                = 86045
 A.Skill_Feral_Guardian              = 85982
 A.Skill_Eternal_Guardian            = 85986
+A.Skill_Enchanted_Growth            = 85862
 A.Skill_Healing_Seed                = 85578
 A.Skill_Budding_Seeds               = 85840
 A.Skill_Corrupting_Pollen           = 85845
 A.Skill_Living_Vines                = 85552
+A.Skill_Leeching_Vines              = 85850
 A.Skill_Living_Trellis              = 85851
+A.Skill_Green_Lotus                 = 85854
 A.Skill_Lotus_Blossom               = 85855
+
 A.Skill_Natures_Grasp               = 85564
 A.Skill_Bursting_Vines              = 85859
 A.Skill_Natures_Embrace             = 85858

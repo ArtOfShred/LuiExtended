@@ -525,6 +525,35 @@ T.Skill_Ritual_of_Retribution       = GetString(SI_LUIE_SKILL_CLEANSING_RITUAL_R
 T.Skill_Rune_Focus_Bonus            = GetString(SI_LUIE_SKILL_RUNE_FOCUS_BONUS_TP)
 T.Skill_Rite_of_Passage             = GetString(SI_LUIE_SKILL_RITE_OF_PASSAGE_TP)
 
+-- Warden
+T.Skill_Scorch                      = GetString(SI_LUIE_SKILL_SCORCH_TP)
+T.Skill_Subterranean_Assault        = GetString(SI_LUIE_SKILL_SUB_ASSAULT_TP)
+T.Skill_Deep_Fissure                = GetString(SI_LUIE_SKILL_DEEP_FISSURE_TP)
+T.Skill_Fetcher_Infection_Bonus     = GetString(SI_LUIE_SKILL_FETCHER_INFECTION_BONUS_DAMAGE_TP)
+T.Skill_Growing_Swarm               = GetString(SI_LUIE_SKILL_GROWING_SWARM_TP)
+T.Skill_Betty_Netch                 = GetString(SI_LUIE_SKILL_BETTY_NETCH_TP)
+T.Skill_Blue_Betty                  = GetString(SI_LUIE_SKILL_BLUE_BETTY_TP)
+T.Skill_Bull_Netch                  = GetString(SI_LUIE_SKILL_BULL_NETCH_TP)
+T.Skill_Feral_Guardian              = GetString(SI_LUIE_SKILL_FERAL_GUARDIAN_TP)
+T.Skill_Eternal_Guardian            = GetString(SI_LUIE_SKILL_ETERNAL_GUARDIAN_TP)
+T.Skill_Wild_Guardian               = GetString(SI_LUIE_SKILL_WILD_GUARDIAN_TP)
+T.Skill_Guardians_Wrath             = GetString(SI_LUIE_SKILL_GUARDIANS_WRATH_TP)
+T.Skill_Guardians_Savagery          = GetString(SI_LUIE_SKILL_GUARDIANS_SAVAGERY_TP)
+T.Skill_Eternal_Guardian_Cooldown   = GetString(SI_LUIE_SKILL_ETERNAL_GUARDIAN_COOLDOWN_TP)
+
+T.Skill_Healing_Seed                = GetString(SI_LUIE_SKILL_HEALING_SEED_TP)
+T.Skill_Budding_Seeds               = GetString(SI_LUIE_SKILL_BUDDING_SEEDS_TP)
+T.Skill_Corrupting_Pollen           = GetString(SI_LUIE_SKILL_CORRUPTING_POLLEN_TP)
+
+T.Skill_Living_Vines                = GetString(SI_LUIE_SKILL_LIVING_VINES_TP)
+T.Skill_Leeching_Vines              = GetString(SI_LUIE_SKILL_LEECHING_VINES_TP)
+T.Skill_Living_Trellis              = GetString(SI_LUIE_SKILL_LIVING_TRELLIS_TP)
+T.Skill_Lotus_Flower                = GetString(SI_LUIE_SKILL_LOTUS_FLOWER_TP)
+T.Skill_Natures_Grasp               = GetString(SI_LUIE_SKILL_NATURES_GRASP_TP)
+T.Skill_Natures_Grasp_Self          = GetString(SI_LUIE_SKILL_NATURES_GRASP_SELF_TP)
+T.Skill_Secluded_Grove              = GetString(SI_LUIE_SKILL_SECLUDED_GROVE_TP)
+T.Skill_Healing_Thicket             = GetString(SI_LUIE_SKILL_HEALING_THICKET_TP)
+
 --zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
 
 -- ---------------------------------------------------

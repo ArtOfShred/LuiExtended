@@ -3968,7 +3968,7 @@ debugAuras = {
             [88515] = true, -- Bond With Nature Trigger (Cutting Dive - All Morphs)
             [85999] = true, -- Cutting Dive (Cutting Dive)
 
-            [87663] = true, -- Screaming Cliff Racer (Screaming Cliff Racer)
+            [87663] = true, -- Screaming Cliff Racer B (Screaming Cliff Racer)
             [86003] = true, -- Screaming Cliff Racer (Screaming Cliff Racer)
 
             [86009] = true, -- Scorch (Scorch)
@@ -4006,22 +4006,23 @@ debugAuras = {
             [101948] = true, -- Growing Swarm (Growing Swarm)
 
             [89103] = true, -- Betty Netch Summon (Betty Netch - All Morphs)
-            [87875] = true, -- Betty Netch (Betty Netch + Blue Betty)
-            [87876] = true, -- Betty Netch (Betty Netch + Blue Betty)
+            [87875] = true, -- Betty Netch (Betty Netch)
             [86050] = true, -- Betty Netch (Betty Netch)
             [87929] = true, -- Major Sorcery (Betty Netch)
             [86106] = true, -- Betty Netch (Betty Netch)
+            [114852] = true, -- Betty Netch (Betty Netch)
 
             [86054] = true, -- Blue Betty (Blue Betty)
             [89107] = true, -- Major Sorcery (Blue Betty)
             [89106] = true, -- Blue Betty (Blue Betty)
+            [114854] = true, -- Betty Netch (Blue Betty)
 
             [86058] = true, -- Bull Netch (Bull Netch)
             [89110] = true, -- Major Brutality (Bull Netch)
             [95125] = true, -- Major Sorcery (Bull Netch)
             [89109] = true, -- Bull Netch (Bull Netch)
             [86103] = true, -- Bull Netch (Bull Netch)
-            [91475] = true, -- Restore Remover (Bull Netch)
+            [114853] = true, -- Bull Netch (Bull Netch)
 
             [86037] = true, -- Falcon's Swiftness (Falcon's Swiftness)
             [86267] = true, -- Major Expedition (Falcon's Swiftness)
@@ -4030,12 +4031,12 @@ debugAuras = {
             [86041] = true, -- Deceptive Predator (Deceptive Predator)
             [89076] = true, -- Major Expedition (Deceptive Predator)
             [89077] = true, -- Major Endurance (Deceptive Predator)
-            [87861] = true, -- Minor Evasion (Deceptive Predator)
+            [114858] = true, -- Minor Evasion (Deceptive Predator)
 
             [86045] = true, -- Bird of Prey (Bird of Prey)
             [89078] = true, -- Major Expedition (Bird of Prey)
             [89079] = true, -- Major Endurance (Bird of Prey)
-            [87864] = true, -- Minor Berserk (Bird of Prey)
+            [114862] = true, -- Minor Berserk (Bird of Prey)
 
             [89363] = true, -- Feral Guardian Summon (Feral Guardian - All Morphs)
             [90826] = true, -- Pet PvP Damage Reduction(Feral Guardian - All Morphs)
