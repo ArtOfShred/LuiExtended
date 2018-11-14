@@ -893,8 +893,11 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         button:SetDisabledTexture(textures.disabled)
     end
 
+	local zos_SetupAbilityEntry = SKILLS_WINDOW.SetupAbilityEntry
     SKILLS_WINDOW.SetupAbilityEntry = function(self, ability, data)
-        local skillData = data.skillData
+		zos_SetupAbilityEntry(self, ability, data)
+
+		local skillData = data.skillData
         local skillPointAllocator = skillData:GetPointAllocator()
         local skillProgressionData = skillPointAllocator:GetProgressionData()
         local id = skillProgressionData:GetAbilityId()
@@ -914,111 +917,10 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         end
         detailedName = detailedName:gsub("With", "with") -- Easiest way to fix the capitalization of the skill "Bond With Nature" (the only skill name we overwrite in the menu) is by using this.
         ability.nameLabel:SetText(detailedName)
+		
+		local slot = ability.slot
 
-        if isPurchased then
-            ability.nameLabel:SetColor(PURCHASED_COLOR:UnpackRGBA())
-        else
-            if isUnlocked then
-                ability.nameLabel:SetColor(UNPURCHASED_COLOR:UnpackRGBA())
-            else
-                ability.nameLabel:SetColor(LOCKED_COLOR:UnpackRGBA())
-            end
-        end
-
-        local slot = ability.slot
-
-        local id = skillProgressionData:GetAbilityId()
-
-        slot.skillProgressionData = skillProgressionData
         slot.icon:SetTexture(GetAbilityIcon(id))
-        ZO_Skills_SetKeyboardAbilityButtonTextures(slot)
-        ZO_ActionSlot_SetUnusable(slot.icon, not isPurchased)
-        slot:SetEnabled(isPurchased and not isPassive)
-
-        local hideXPBar = true
-        if isActive and skillProgressionData:HasRankData() then
-            local currentRank = skillProgressionData:GetCurrentRank()
-            local startXP, endXP = skillProgressionData:GetRankXPExtents(currentRank)
-            local currentXP = skillProgressionData:GetCurrentXP()
-
-            local dontWrap = ability.skillProgressionData ~= skillProgressionData
-            ability.xpBar:SetHidden(false)
-            ZO_SkillInfoXPBar_SetValue(ability.xpBar, currentRank, startXP, endXP, currentXP, dontWrap)
-            hideXPBar = false
-        end
-
-        ability.skillProgressionData = skillProgressionData
-
-        local offsetY = hideXPBar and 0 or -10
-        ability.nameLabel:SetAnchor(LEFT, slot, RIGHT, 10, offsetY)
-
-        if hideXPBar then
-            ability.xpBar:SetHidden(true)
-            local NO_LEVEL = nil
-            local DONT_WRAP = true
-            ZO_SkillInfoXPBar_SetValue(ability.xpBar, NO_LEVEL, 0, 1, 0, DONT_WRAP)
-        end
-
-        ability.lock:SetHidden(isUnlocked)
-
-        local canPurchase = skillPointAllocator:CanPurchase()
-        local canIncreaseRank = skillPointAllocator:CanIncreaseRank()
-        local canMorph = skillPointAllocator:CanMorph()
-
-        local increaseButton = ability.increaseButton
-        local decreaseButton = ability.decreaseButton
-        local hideIncreaseButton = true
-        local hideDecreaseButton = true
-        local skillPointAllocationMode = SKILLS_AND_ACTION_BAR_MANAGER:GetSkillPointAllocationMode()
-        if skillPointAllocationMode == SKILL_POINT_ALLOCATION_MODE_PURCHASE_ONLY then
-            local increaseTextures = nil
-            if canMorph then
-                increaseTextures = INCREASE_BUTTON_TEXTURES.MORPH
-            elseif canPurchase or canIncreaseRank then
-                increaseTextures = INCREASE_BUTTON_TEXTURES.PLUS
-            end
-
-            if increaseTextures then
-                ApplyButtonTextures(increaseButton, increaseTextures)
-                if IsUnitInCombat("player") then
-                    increaseButton:SetState(BSTATE_DISABLED)
-                else
-                    increaseButton:SetState(BSTATE_NORMAL)
-                end
-                hideIncreaseButton = false
-            end
-        else
-            local isFullRespec = skillPointAllocationMode == SKILL_POINT_ALLOCATION_MODE_FULL
-            if skillData:CanPointAllocationsBeAltered(isFullRespec) then
-                hideIncreaseButton = false
-                hideDecreaseButton = false
-
-                if isPassive or not isPurchased or not skillData:IsAtMorph() then
-                    ApplyButtonTextures(increaseButton, INCREASE_BUTTON_TEXTURES.PLUS)
-                else
-                    if skillProgressionData:IsMorph() then
-                        ApplyButtonTextures(increaseButton, INCREASE_BUTTON_TEXTURES.REMORPH)
-                    else
-                        ApplyButtonTextures(increaseButton, INCREASE_BUTTON_TEXTURES.MORPH)
-                    end
-                end
-
-                if canMorph or canPurchase or canIncreaseRank then
-                    increaseButton:SetState(BSTATE_NORMAL)
-                else
-                    increaseButton:SetState(BSTATE_DISABLED)
-                end
-
-                if skillPointAllocator:CanSell() or skillPointAllocator:CanDecreaseRank() or skillPointAllocator:CanUnmorph() then
-                    decreaseButton:SetState(BSTATE_NORMAL)
-                else
-                    decreaseButton:SetState(BSTATE_DISABLED)
-                end
-            end
-        end
-
-        increaseButton:SetHidden(hideIncreaseButton)
-        decreaseButton:SetHidden(hideDecreaseButton)
     end
 
     -- Overwrite default Skill Confirm Learn Menu for Skills with Custom Icons
