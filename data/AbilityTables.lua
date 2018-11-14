@@ -578,6 +578,8 @@ A.Skill_Remembrance                 = 22229
 A.Skill_Practiced_Incantation       = 22226
 
 -- Warden
+A.Skill_Accelerated_Growth          = 85882
+A.Skill_Maturation                  = 85880
 A.Skill_Subterranean_Assault        = 86019
 A.Skill_Deep_Fissure                = 86015
 A.Skill_Fetcher_Infection           = 86027
@@ -598,19 +600,26 @@ A.Skill_Leeching_Vines              = 85850
 A.Skill_Living_Trellis              = 85851
 A.Skill_Green_Lotus                 = 85854
 A.Skill_Lotus_Blossom               = 85855
-
 A.Skill_Natures_Grasp               = 85564
 A.Skill_Bursting_Vines              = 85859
 A.Skill_Natures_Embrace             = 85858
 A.Skill_Secluded_Grove              = 85532
 A.Skill_Enchanted_Forest            = 85804
 A.Skill_Healing_Thicket             = 85807
+A.Skill_Frost_Cloak                 = 86122
+A.Skill_Expansive_Frost_Cloak       = 86126
+A.Skill_Ice_Fortress                = 86130
+A.Skill_Arctic_Blast                = 86156
 A.Skill_Crystallized_Shield         = 86135
 A.Skill_Crystallized_Slab           = 86139
 A.Skill_Shimmering_Shield           = 86143
 A.Skill_Frozen_Gate                 = 86175
 A.Skill_Frozen_Device               = 86179
 A.Skill_Frozen_Retreat              = 86183
+A.Skill_Icy_Escape                  = 88884
+A.Skill_Sleet_Storm                 = 86109
+A.Skill_Northern_Storm              = 87542
+A.Skill_Permafrost                  = 86117
 
 -- ---------------------------------------------------
 -- WEAPON SKILLS -------------------------------------

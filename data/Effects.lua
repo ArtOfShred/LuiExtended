@@ -4526,12 +4526,14 @@ E.EffectOverride = {
     [88513] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_savage_beast.dds', name = A.Passive_Savage_Beast }, -- Transfer (Savage Beast - Rank 2)
 
     -- Green Balance
+    [88525] = { tooltip = A.Skill_Accelerated_Growth }, -- Major Mending (Accelerated Growth - Rank 1)
+    [88528] = { tooltip = A.Skill_Accelerated_Growth }, -- Major Mending (Accelerated Growth - Rank 2)
     [88483] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds', name = A.Passive_Natures_Gift }, -- Nature's Give (Nature's Gift - Rank 1)
     [93054] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds' }, -- Nature's Gift (Nature's Gift - Rank 1)
     [93072] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds', name = A.Passive_Natures_Gift }, -- Nature's Give (Nature's Gift - Rank 2)
     [93073] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds' }, -- Nature's Gift (Nature's Gift - Rank 2)
-    [88492] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds' }, -- Minor Toughness (Maturation - Rank 1)
-    [88509] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds' }, -- Minor Toughness (Maturation - Rank 2)
+    [88492] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds', tooltip = A.Skill_Maturation }, -- Minor Toughness (Maturation - Rank 1)
+    [88509] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds', tooltip = A.Skill_Maturation }, -- Minor Toughness (Maturation - Rank 2)
 
     ----------------------------------------------------------------
     -- WARDEN ACTIVE ABILITIES ------------------------------------
@@ -4658,32 +4660,67 @@ E.EffectOverride = {
     [88750] = { name = A.Skill_Healing_Thicket }, -- Healing Thicket Instant Heal (Healing Thicket)
     [91819] = { tooltip = T.Generic_HoT_1Sec }, -- Healing Thicket (Healing Thicket)
 
-    -- Winter's Embrace
-    [86224] = { consolidate = true }, -- Major Resolve (Frost Cloak)
-    [86225] = { consolidate = true }, -- Major Ward (Frost Cloak)
-    [88758] = { consolidate = true }, -- Major Resolve (Expansive Frost Cloak)
-    [88759] = { consolidate = true }, -- Major Ward (Expansive Frost Cloak)
-    [88761] = { consolidate = true }, -- Major Resolve (Ice Fortress)
-    [88762] = { consolidate = true }, -- Major Ward (Ice Fortress)
-    [87194] = { consolidate = true }, -- Minor Protection (Ice Fortress)
-    [87443] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_root_frost.dds', name = A.Skill_Frozen }, -- Gripping Shards (Gripping Shards)
+    -- WINTER'S EMBRACE
+
+    -- Frost cloak / Expansive Frost Cloak / Ice Fortress
+    [86224] = { consolidate = true, tooltip = A.Skill_Frost_Cloak }, -- Major Resolve (Frost Cloak)
+    [86225] = { consolidate = true, tooltip = A.Skill_Frost_Cloak  }, -- Major Ward (Frost Cloak)
+    [88758] = { consolidate = true, tooltip = A.Skill_Expansive_Frost_Cloak }, -- Major Resolve (Expansive Frost Cloak)
+    [88759] = { consolidate = true, tooltip = A.Skill_Expansive_Frost_Cloak }, -- Major Ward (Expansive Frost Cloak)
+    [88761] = { consolidate = true, tooltip = A.Skill_Ice_Fortress }, -- Major Resolve (Ice Fortress)
+    [88762] = { consolidate = true, tooltip = A.Skill_Ice_Fortress }, -- Major Ward (Ice Fortress)
+    [87194] = { consolidate = true, tooltip = A.Skill_Ice_Fortress }, -- Minor Protection (Ice Fortress)
+
+    -- Impaling Shards / Gripping Shards / Winter's Revenge
+    [86161] = { tooltip = T.Skill_Impaling_Shards }, -- Impaling Shards (Impaling Shards)
+    [86238] = { tooltip = T.Generic_Snare_30_No_Dur, duration = 0, groundLabel = true }, -- Impaling Shards (Impaling Shards)
+    [86165] = { tooltip = T.Skill_Impaling_Shards }, -- Gripping Shards (Gripping Shards)
+    [87443] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_root_frost.dds', name = A.Skill_Frozen, tooltip = T.Generic_Immobilize }, -- Gripping Shards (Gripping Shards)
+    [87448] = { tooltip = T.Generic_Snare_30_No_Dur, duration = 0, groundLabel = true }, -- Gripping Shards (Gripping Shards)
+    [86169] = { tooltip = T.Skill_Impaling_Shards }, -- Winter's Revenge (Winter's Revenge)
+    [88801] = { tooltip = T.Generic_Snare_30_No_Dur, duration = 0, groundLabel = true }, -- Winter's Revenge (Winter's Revenge)
+
+    -- Arctic Wind / Polar Wind / Arctic Blast
+    [90833] = { tooltip = T.Skill_Arctic_Wind }, -- Arctic Wind (Arctic Wind)
+    [90835] = { tooltip = T.Skill_Arctic_Wind }, -- Polar Wind (Polar Wind)
+    [86156] = { hide = true }, -- Artic Blast (Arctic Blast)
+    [90834] = { tooltip = T.Skill_Arctic_Wind }, -- Arctic Blast (Arctic Blast)
+    [114875] = { name = A.Skill_Arctic_Blast, tooltip = T.Generic_Stun }, -- Artic Blast Stun (Artic Blast)
+
+    -- Crystallized Shield / Crystallized Slab / Shimmering Shield
+    [86135] = { tooltip = T.Skill_Crystallized_Shield }, -- Crystallized Shield (Crystallized Shield)
     [92068] = { icon = 'esoui/art/icons/ability_warden_002.dds', name = A.Skill_Crystallized_Shield }, -- Crystalized Shield (Crystallized Shield)
     [87224] = { icon = 'esoui/art/icons/ability_warden_002.dds', name = A.Skill_Crystallized_Shield }, -- Combat Restore Crystalized Shi (Crystallized Shield)
+    [86139] = { tooltip = T.Skill_Crystallized_Slab }, -- Crystallized Slab (Crystallized Slab)
     [92168] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = A.Skill_Crystallized_Slab }, -- Crystalized Slab (Crystallized Slab)
     [88766] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = A.Skill_Crystallized_Slab }, -- Crystalized Slab Restore (Crystallized Slab)
     [93175] = { hide = true }, -- Crystallized Slab (Crystallized Slab)
+    [86143] = { tooltip = T.Skill_Shimmering_Shield }, -- Shimmering Shield (Shimmering Shield)
     [92170] = { icon = 'esoui/art/icons/ability_warden_002_b.dds' }, -- Shimmering Shield (Shimmering Shield)
     [88771] = { icon = 'esoui/art/icons/ability_warden_002_b.dds', name = A.Skill_Shimmering_Shield }, -- Shimmering Shield Restore (Shimmering Shield)
-    [87560] = { name = A.Skill_Frozen_Gate }, -- Frozen Gate Root (Frozen Gate)
-    [92039] = { name = A.Skill_Frozen_Device }, -- Frozen Gate Root (Frozen Device)
-    [92060] = { name = A.Skill_Frozen_Retreat }, -- Frozen Retreat Root (Frozen Retreat)
-    [86249] = { forcedContainer = 'short' }, -- Major Protection (Sleet Storm)
-    [86250] = { duration = 0 }, -- Sleet Storm (Sleet Storm)
-    [88859] = { forcedContainer = 'short' }, -- Major Protection (Northern Storm)
-    [88858] = { duration = 0 }, -- Northern Storm (Northern Storm)
-    [88862] = { duration = 0, forcedContainer = 'short' }, -- Major Protection (Permafrost)
-    [88861] = { duration = 0 }, -- Permafrost (Permafrost)
-    [90943] = { icon = 'esoui/art/icons/ability_warden_006_b.dds' }, -- Permafrost (Permafrost)
+    [87234] = { tooltip = A.Skill_Shimmering_Shield }, -- Major Heroism (Shimmering Shield)
+
+    -- Frozen Gate / Frozen Device / Frozen Retreat
+    [86175] = { tooltip = T.Skill_Frozen_Gate }, -- Frozen Gate (Frozen Gate)
+    [87560] = { name = A.Skill_Frozen_Gate, tooltip = T.Generic_Immobilize }, -- Frozen Gate Root (Frozen Gate)
+    [86179] = { tooltip = T.Skill_Frozen_Device }, -- Frozen Device (Frozen Device)
+    [92039] = { name = A.Skill_Frozen_Device, tooltip = T.Generic_Immobilize }, -- Frozen Gate Root (Frozen Device)
+    [92041] = { tooltip = A.Skill_Frozen_Device }, -- Minor Maim (Frozen Device)
+    [86183] = { tooltip = T.Skill_Frozen_Retreat }, -- Frozen Retreat (Frozen Retreat)
+    [92060] = { name = A.Skill_Frozen_Retreat, tooltip = T.Generic_Immobilize }, -- Frozen Retreat Root (Frozen Retreat)
+    [103321] = { tooltip = A.Skill_Icy_Escape }, -- Major Expedition (Frozen Retreat - Icy Escape Synergy)
+
+    -- Sleet Storm / Northern Storm / Permafrost
+    [86109] = { tooltip = T.Skill_Sleet_Storm }, -- Sleet Storm (Sleet Storm)
+    [86249] = { forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Sleet_Storm }, -- Major Protection (Sleet Storm)
+    [86250] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_70_No_Dur }, -- Sleet Storm (Sleet Storm)
+    [86113] = { tooltip = T.Skill_Sleet_Storm }, -- Northern Storm (Northern Storm)
+    [88859] = { forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Northern_Storm }, -- Major Protection (Northern Storm)
+    [88858] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_70_No_Dur }, -- Northern Storm (Northern Storm)
+    [86117] = { tooltip = T.Skill_Permafrost }, -- Permafrost (Permafrost)
+    [88862] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Permafrost }, -- Major Protection (Permafrost)
+    [88861] = { duration = 0, groundLabel = true, tooltip = T.Skill_Permafrost_Snare }, -- Permafrost (Permafrost)
+    [90943] = { icon = 'esoui/art/icons/ability_warden_006_b.dds', tooltip = T.Generic_Stun }, -- Permafrost (Permafrost)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------

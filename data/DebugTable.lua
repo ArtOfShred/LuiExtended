@@ -4202,8 +4202,7 @@ debugAuras = {
             [86156] = true, -- Arctic Blast (Arctic Blast)
             [90834] = true, -- Arctic Blast (Arctic Blast)
             [105334] = true, -- Arctic Blast (Arctic Blast)
-            [105336] = true, -- Arctic Blast (Arctic Blast)
-            [87256] = true, -- Arctic Blast (Arctic Blast)
+            [114875] = true, -- Artic Blast Stun (Arctic Blast)
 
             [86135] = true, -- Crystallized Shield (Crystallized Shield)
             [92068] = true, -- Crystalized Shield (Crystallized Shield)

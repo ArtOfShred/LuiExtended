@@ -554,6 +554,21 @@ T.Skill_Natures_Grasp_Self          = GetString(SI_LUIE_SKILL_NATURES_GRASP_SELF
 T.Skill_Secluded_Grove              = GetString(SI_LUIE_SKILL_SECLUDED_GROVE_TP)
 T.Skill_Healing_Thicket             = GetString(SI_LUIE_SKILL_HEALING_THICKET_TP)
 
+T.Skill_Impaling_Shards             = GetString(SI_LUIE_SKILL_IMPALING_SHARDS_TP)
+T.Skill_Arctic_Wind                 = GetString(SI_LUIE_SKILL_ARCTIC_WIND_TP)
+
+T.Skill_Crystallized_Shield         = GetString(SI_LUIE_SKILL_CRYSTALLIZED_SHIELD_TP)
+T.Skill_Crystallized_Slab           = GetString(SI_LUIE_SKILL_CRYSTALLIZED_SLAB_TP)
+T.Skill_Shimmering_Shield           = GetString(SI_LUIE_SKILL_SHIMMERING_SHIELD_TP)
+
+T.Skill_Frozen_Gate                 = GetString(SI_LUIE_SKILL_FROZEN_GATE_TP)
+T.Skill_Frozen_Device               = GetString(SI_LUIE_SKILL_FROZEN_DEVICE_TP)
+T.Skill_Frozen_Retreat              = GetString(SI_LUIE_SKILL_FROZEN_RETREAT_TP)
+
+T.Skill_Sleet_Storm                 = GetString(SI_LUIE_SKILL_SLEET_STORM_TP)
+T.Skill_Permafrost                  = GetString(SI_LUIE_SKILL_PERMAFROST_TP)
+T.Skill_Permafrost_Snare            = GetString(SI_LUIE_SKILL_PERMAFROST_SNARE_TP)
+
 --zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
 
 -- ---------------------------------------------------

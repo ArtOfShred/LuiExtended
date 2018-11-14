@@ -2473,6 +2473,18 @@ local strings = {
     SI_LUIE_SKILL_NATURES_GRASP_SELF_TP =                "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nYou gain |cFFFFFF3|r Ultimate when this effect ends if you are in combat.",
     SI_LUIE_SKILL_SECLUDED_GROVE_TP =                    "Healing you and your allies in the area every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_HEALING_THICKET_TP =                   "Every |cFFFFFF1|r second apply a |cFFFFFF4.1|r second duration heal over time effect on you and nearby allies in the area for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_IMPALING_SHARDS_TP =                   "For |cFFFFFF<<1>>|r seconds, enemies in the area take Frost Damage and have their movement speed reduced by |cFFFFFF30|r% for |cFFFFFF3|r seconds every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_ARCTIC_WIND_TP =                       "Healing for |cFFFFFF15|r% of your Max Health over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_CRYSTALLIZED_SHIELD_TP =               "Absorbing damage from up to |cFFFFFF3|r projectiles.\n\nEach time you absorb a projectile you restore |cFFFFFF578|r Magicka.",
+    SI_LUIE_SKILL_CRYSTALLIZED_SLAB_TP =                 "Absorbing damage from up to |cFFFFFF3|r projectiles.\n\nEach time you absorb a projectile you restore |cFFFFFF578|r Magicka and launch an icy bolt back at the enemy, dealing Frost Damage.",
+    SI_LUIE_SKILL_SHIMMERING_SHIELD_TP =                 "Absorbing damage from up to |cFFFFFF3|r projectiles.\n\nEach time you absorb a projectile you restore |cFFFFFF578|r Magicka and gain Major Heroism for |cFFFFFF6|r seconds.",
+    SI_LUIE_SKILL_FROZEN_GATE_TP =                       "Detonates when a enemy comes close, dealing Frost Damage and teleporting the enemy to you and immobilizing them for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_FROZEN_DEVICE_TP =                     "Detonates when a enemy comes close, dealing Frost Damage, teleporting the enemy to you, immobilizing them for |cFFFFFF3|r seconds, and applying Major Maim for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_FROZEN_RETREAT_TP =                    "Detonates when a enemy comes close, dealing Frost Damage and teleporting the enemy to you and immobilizing them for |cFFFFFF3|r seconds.\n\nAn ally in the portal can activate the |cFFFFFFIcy Escape|r synergy.",
+
+    SI_LUIE_SKILL_SLEET_STORM_TP =                       "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_PERMAFROST_TP =                        "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDamaging an enemy three times with the storm will stun them for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_PERMAFROST_SNARE_TP =                  "Snared. Your Movement Speed has been reduced by |cFFFFFF70|r%. If you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.",
 
     -- Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Direct damage taken from the next Snipe, Scatter Shot, or Poison Arrow increased by |cffffff<<1>>|r% used within |cffffff6|r seconds.",
