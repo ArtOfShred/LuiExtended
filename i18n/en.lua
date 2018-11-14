@@ -2254,6 +2254,7 @@ local strings = {
     SI_LUIE_SKILL_SIPHONER_TP =                          "Decrease Health, Magicka, and Stamina resource restore and Recovery for |cFFFFFF3|r seconds.",
 
     SI_LUIE_SKILL_GENERIC_BLEED_TP =                     "Afflicted with Bleeding Damage over time for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_BLEED_2_SEC_TP =               "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_DISEASE_TP =                   "Afflicted with Disease Damage over time for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_POISON_TP =                    "Afflicted with Poison Damage over time for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP =              "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
@@ -2481,10 +2482,15 @@ local strings = {
     SI_LUIE_SKILL_FROZEN_GATE_TP =                       "Detonates when a enemy comes close, dealing Frost Damage and teleporting the enemy to you and immobilizing them for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_FROZEN_DEVICE_TP =                     "Detonates when a enemy comes close, dealing Frost Damage, teleporting the enemy to you, immobilizing them for |cFFFFFF3|r seconds, and applying Major Maim for |cFFFFFF4|r seconds.",
     SI_LUIE_SKILL_FROZEN_RETREAT_TP =                    "Detonates when a enemy comes close, dealing Frost Damage and teleporting the enemy to you and immobilizing them for |cFFFFFF3|r seconds.\n\nAn ally in the portal can activate the |cFFFFFFIcy Escape|r synergy.",
-
     SI_LUIE_SKILL_SLEET_STORM_TP =                       "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_PERMAFROST_TP =                        "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDamaging an enemy three times with the storm will stun them for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_PERMAFROST_SNARE_TP =                  "Snared. Your Movement Speed has been reduced by |cFFFFFF70|r%. If you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.",
+
+    -- Weapon Skills
+    SI_LUIE_SKILL_RALLY_TP =                             "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds, and for additional Health when Rally expires.\n\nThe final heal is increased by up to |cFFFFFF564|r%, in proportion to the length of time Rally has been active. ",
+    SI_LUIE_SKILL_BERSERKER_STRIKE_TP =                  "Increase Physical and Spell Resistance equal to the amount of the target hit by Berserker Strike for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_ONSLAUGHT_TP =                         "Increase Physical and Spell Resistance equal to the amount of the target hit by Onslaught for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BERSERKER_RAGE_TP =                    "Increase Physical and Spell Resistance equal to the amount of the target hit by Berserker Rage for |cFFFFFF<<1>>|r seconds.\n\nYou are immune to all disabling, snare, and immobilization effects for the duration.",
 
     -- Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Direct damage taken from the next Snipe, Scatter Shot, or Poison Arrow increased by |cffffff<<1>>|r% used within |cffffff6|r seconds.",

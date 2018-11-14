@@ -4841,18 +4841,40 @@ E.EffectOverride = {
     -- TWO HANDED ACTIVES -------------------
     -----------------------------------------
 
+    -- Uppercut / Dizzying Swing / Wrecking Blow
+    [38816] = { tooltip = T.Generic_Knockback }, -- Dizzying Swing (Dizzying Swing)
     [38818] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds' }, -- Dizzying Swing (Dizzying Swing)
-    [31059] = { icon = 'esoui/art/icons/ability_2handed_002.dds', name = A.Skill_Cleave }, -- Cleave Bleed (Cleave)
-    [38747] = { icon = 'esoui/art/icons/ability_2handed_002_a.dds', name = A.Skill_Carve }, -- Carve Bleed (Carve)
-    [38759] = { icon = 'esoui/art/icons/ability_2handed_002_b.dds', name = A.Skill_Brawler }, -- Brawler Bleed (Brawler)
+
+    -- Critical Charge / Stampede / Critical Rush
+    [38791] = { tooltip = T.Generic_Snare_60 }, -- Stampede (Stampede)
+
+    -- Cleave / Carve / Brawler
+    [31059] = { icon = 'esoui/art/icons/ability_2handed_002.dds', name = A.Skill_Cleave, tooltip = T.Generic_Bleed_2_Sec }, -- Cleave Bleed (Cleave)
+    [38747] = { icon = 'esoui/art/icons/ability_2handed_002_a.dds', name = A.Skill_Carve, tooltip = T.Generic_Bleed_2_Sec }, -- Carve Bleed (Carve)
+    [38746] = { tooltip = A.Skill_Carve }, -- Minor Heroism (Carve)
+    [38759] = { icon = 'esoui/art/icons/ability_2handed_002_b.dds', name = A.Skill_Brawler, tooltip = T.Generic_Bleed_2_Sec }, -- Brawler Bleed (Brawler)
+    [38763] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Brawler (Brawler)
+
+    -- Reverse Slash / Reverse Slice / Executioner
     [38827] = { icon = 'esoui/art/icons/ability_2handed_004_b.dds' }, -- Reverse Slice (Reverse Slice)
-    [61670] = { consolidateExtra = true }, -- Major Brutality (Momentum)
+
+    -- Momentum / Forward Momentum / Rally
+    [28297] = { tooltip = T.Generic_HoT_2Sec }, -- Momentum (Momentum)
+    [61670] = { consolidateExtra = true, tooltip = A.Skill_Momentum }, -- Major Brutality (Momentum)
     [28299] = { icon = 'esoui/art/icons/ability_2handed_005.dds' }, -- Momentum (Momentum)
-    [62387] = { consolidateExtra = true }, -- Major Brutality (Forward Momentum)
+    [38794] = { tooltip = T.Generic_HoT_2Sec }, -- Forward Momentum (Forward Momentum)
+    [62387] = { consolidateExtra = true, tooltip = A.Skill_Forward_Momentum }, -- Major Brutality (Forward Momentum)
+    [38797] = { tooltip = T.Innate_Immobilize_Immunity }, -- Forward Momentum (Forward Momentum)
     [62385] = { icon = 'esoui/art/icons/ability_2handed_005_a.dds', name = A.Skill_Forward_Momentum }, -- Momentum (Forward Momentum)
-    [62415] = { consolidateExtra = true }, -- Major Brutality (Rally)
+    [38802] = { tooltip = T.Skill_Rally }, -- Rally (Rally)
+    [62415] = { consolidateExtra = true, tooltip = A.Skill_Rally }, -- Major Brutality (Rally)
     [38805] = { icon = 'esoui/art/icons/ability_2handed_005_b.dds' }, -- Rally (Rally)
+
+    -- Berserker Strike / Onslaught / Berserker Rage
+    [83217] = { tooltip = T.Skill_Berserker_Strike }, -- Berserker Strike (Berserker Strike)
+    [83230] = { tooltip = T.Skill_Onslaught }, -- Onslaught (Onslaught)
     [83346] = { icon = 'esoui/art/icons/ability_2handed_006_a.dds' }, -- Onslaught (Onslaught)
+    [83239] = { tooltip = T.Skill_Berserker_Rage }, -- Berserker Rage (Berserker Rage)
 
     -----------------------------------------
     -- ONE HAND AND SHIELD ACTIVES ----------

@@ -83,6 +83,7 @@ T.Skill_Hindrance                   = GetString(SI_LUIE_SKILL_HINDRANCE_TP)
 T.Generic_Test                      = GetString(SI_LUIE_SKILL_TEST_TP)
 
 T.Generic_Bleed                     = GetString(SI_LUIE_SKILL_GENERIC_BLEED_TP)
+T.Generic_Bleed_2_Sec               = GetString(SI_LUIE_SKILL_GENERIC_BLEED_2_SEC_TP)
 T.Generic_Disease                   = GetString(SI_LUIE_SKILL_GENERIC_DISEASE_TP)
 T.Generic_Poison                    = GetString(SI_LUIE_SKILL_GENERIC_POISON_TP)
 T.Generic_Poison_2_Sec              = GetString(SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP)
@@ -540,11 +541,9 @@ T.Skill_Wild_Guardian               = GetString(SI_LUIE_SKILL_WILD_GUARDIAN_TP)
 T.Skill_Guardians_Wrath             = GetString(SI_LUIE_SKILL_GUARDIANS_WRATH_TP)
 T.Skill_Guardians_Savagery          = GetString(SI_LUIE_SKILL_GUARDIANS_SAVAGERY_TP)
 T.Skill_Eternal_Guardian_Cooldown   = GetString(SI_LUIE_SKILL_ETERNAL_GUARDIAN_COOLDOWN_TP)
-
 T.Skill_Healing_Seed                = GetString(SI_LUIE_SKILL_HEALING_SEED_TP)
 T.Skill_Budding_Seeds               = GetString(SI_LUIE_SKILL_BUDDING_SEEDS_TP)
 T.Skill_Corrupting_Pollen           = GetString(SI_LUIE_SKILL_CORRUPTING_POLLEN_TP)
-
 T.Skill_Living_Vines                = GetString(SI_LUIE_SKILL_LIVING_VINES_TP)
 T.Skill_Leeching_Vines              = GetString(SI_LUIE_SKILL_LEECHING_VINES_TP)
 T.Skill_Living_Trellis              = GetString(SI_LUIE_SKILL_LIVING_TRELLIS_TP)
@@ -553,21 +552,23 @@ T.Skill_Natures_Grasp               = GetString(SI_LUIE_SKILL_NATURES_GRASP_TP)
 T.Skill_Natures_Grasp_Self          = GetString(SI_LUIE_SKILL_NATURES_GRASP_SELF_TP)
 T.Skill_Secluded_Grove              = GetString(SI_LUIE_SKILL_SECLUDED_GROVE_TP)
 T.Skill_Healing_Thicket             = GetString(SI_LUIE_SKILL_HEALING_THICKET_TP)
-
 T.Skill_Impaling_Shards             = GetString(SI_LUIE_SKILL_IMPALING_SHARDS_TP)
 T.Skill_Arctic_Wind                 = GetString(SI_LUIE_SKILL_ARCTIC_WIND_TP)
-
 T.Skill_Crystallized_Shield         = GetString(SI_LUIE_SKILL_CRYSTALLIZED_SHIELD_TP)
 T.Skill_Crystallized_Slab           = GetString(SI_LUIE_SKILL_CRYSTALLIZED_SLAB_TP)
 T.Skill_Shimmering_Shield           = GetString(SI_LUIE_SKILL_SHIMMERING_SHIELD_TP)
-
 T.Skill_Frozen_Gate                 = GetString(SI_LUIE_SKILL_FROZEN_GATE_TP)
 T.Skill_Frozen_Device               = GetString(SI_LUIE_SKILL_FROZEN_DEVICE_TP)
 T.Skill_Frozen_Retreat              = GetString(SI_LUIE_SKILL_FROZEN_RETREAT_TP)
-
 T.Skill_Sleet_Storm                 = GetString(SI_LUIE_SKILL_SLEET_STORM_TP)
 T.Skill_Permafrost                  = GetString(SI_LUIE_SKILL_PERMAFROST_TP)
 T.Skill_Permafrost_Snare            = GetString(SI_LUIE_SKILL_PERMAFROST_SNARE_TP)
+
+-- Weapon Skills
+T.Skill_Rally                       = GetString(SI_LUIE_SKILL_RALLY_TP)
+T.Skill_Berserker_Strike            = GetString(SI_LUIE_SKILL_BERSERKER_STRIKE_TP)
+T.Skill_Onslaught                   = GetString(SI_LUIE_SKILL_ONSLAUGHT_TP)
+T.Skill_Berserker_Rage              = GetString(SI_LUIE_SKILL_BERSERKER_RAGE_TP)
 
 --zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
 

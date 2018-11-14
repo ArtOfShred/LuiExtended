@@ -646,7 +646,9 @@ A.Skill_Stampede                    = 38788
 A.Skill_Cleave                      = 20919
 A.Skill_Carve                       = 38745
 A.Skill_Brawler                     = 38754
+A.Skill_Momentum                    = 28297
 A.Skill_Forward_Momentum            = 38794
+A.Skill_Rally                       = 38802
 
 -- One Hand & Shield
 A.Skill_Low_Slash                   = 28304
