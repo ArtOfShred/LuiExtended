@@ -11758,9 +11758,9 @@ function LUIE_CreateSettings()
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertAvoidA) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertAvoidA = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
-                default = {r=LUIE.CombatText.D.colors.alertAvoidA[1], g=LUIE.CombatText.D.colors.alertAvoidA[2], b=LUIE.CombatText.D.colors.alertAvoidA[3]}
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertAvoidB) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertAvoidB = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
+                default = {r=LUIE.CombatText.D.colors.alertAvoidB[1], g=LUIE.CombatText.D.colors.alertAvoidB[2], b=LUIE.CombatText.D.colors.alertAvoidB[3]}
             },
             {
                 type = "header",

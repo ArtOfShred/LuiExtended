@@ -270,7 +270,7 @@ CT.D = {
         alertExploit                = { 1, 1, 1, 1 },
         alertInterruptA             = { 0, 0.5, 255, 1 },
         alertDodgeA                 = { 1, 1, 50/255, 1 },
-        alertAvoidA                 = { 1, 128/255, 0, 1 },
+        alertAvoidB                 = { 1, 127/255, 0, 1 },
         alertExecute                = { 1, 1, 1, 1 },
         alertPower                  = { 1, 1, 1, 1 },
         alertDestroy                = { 1, 1, 1, 1 },
@@ -396,7 +396,7 @@ function CT.SetAlertColors()
 	CT.AlertColors = {
 		alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlockA)):ToHex(),
 		alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodgeA)):ToHex(),
-		alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoidA)):ToHex(),
+		alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoidB)):ToHex(),
 		alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterruptA)):ToHex(),
 		alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
 		alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex()

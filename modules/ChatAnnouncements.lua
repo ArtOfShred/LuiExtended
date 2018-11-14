@@ -7794,32 +7794,30 @@ function CA.HookFunction()
         return true
     end
 
-    local function ChampionPointGainedHook(pointDelta)
+	local savedEndingPoints = 0 -- We reset this value after the throttled function sends info to the chat printer 
+	local savedPointDelta = 0 -- We reset this value after the throttled function sends info to the chat printer
+	
+	local function ChampionPointGainedPrinter()
+	
+		-- adding one so that we are starting from the first gained point instead of the starting champion points
+		local startingPoints = savedEndingPoints - savedPointDelta + 1
+		local championPointsByType = { 0, 0, 0 }
 
-        -- Print throttled XP value
-        eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
-        CA.PrintBufferedXP()
+		while startingPoints <= savedEndingPoints do
+			local pointType = GetChampionPointAttributeForRank(startingPoints)
+			championPointsByType[pointType] = championPointsByType[pointType] + 1
+			startingPoints = startingPoints + 1
+		end
 
-        -- adding one so that we are starting from the first gained point instead of the starting champion points
-        local endingPoints = GetPlayerChampionPointsEarned()
-        local startingPoints = endingPoints - pointDelta + 1
-        local championPointsByType = { 0, 0, 0 }
-
-        while startingPoints <= endingPoints do
-            local pointType = GetChampionPointAttributeForRank(startingPoints)
-            championPointsByType[pointType] = championPointsByType[pointType] + 1
-            startingPoints = startingPoints + 1
-        end
-
-        if CA.SV.XP.ExperienceLevelUpCA then
-            local formattedString = ExperienceLevelUpColorize:Colorize(strformat(SI_CHAMPION_POINT_EARNED, pointDelta) .. ": ")
+		if CA.SV.XP.ExperienceLevelUpCA then
+            local formattedString = ExperienceLevelUpColorize:Colorize(strformat(SI_CHAMPION_POINT_EARNED, savedPointDelta) .. ": ")
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
         end
-
-        local secondLine = ""
-        if CA.SV.XP.ExperienceLevelUpCA or CA.SV.XP.ExperienceLevelUpCSA then
+		
+		local secondLine = ""
+		if CA.SV.XP.ExperienceLevelUpCA or CA.SV.XP.ExperienceLevelUpCSA then
             for pointType,amount in pairs(championPointsByType) do
                 if amount > 0 then
                     local icon = GetChampionPointAttributeHUDIcon(pointType)
@@ -7833,7 +7831,7 @@ function CA.HookFunction()
                     if CA.SV.XP.ExperienceLevelUpCA then
                         g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                        eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                     end
                     if CA.SV.XP.ExperienceLevelUpCSA then
                         secondLine = secondLine .. strformat(SI_CHAMPION_POINT_TYPE, amount, icon, constellationGroupName) .. "\n"
@@ -7841,26 +7839,44 @@ function CA.HookFunction()
                 end
             end
         end
-
-        if CA.SV.XP.ExperienceLevelUpCSA then
+		
+		if CA.SV.XP.ExperienceLevelUpCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.CHAMPION_POINT_GAINED)
-            messageParams:SetText(strformat(SI_CHAMPION_POINT_EARNED, pointDelta), secondLine)
+            messageParams:SetText(strformat(SI_CHAMPION_POINT_EARNED, savedPointDelta), secondLine)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_CHAMPION_POINT_GAINED)
             messageParams:MarkSuppressIconFrame()
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
 
         if CA.SV.XP.ExperienceLevelUpAlert then
-            local text = strformat("<<1>>!", GetString(SI_CHAMPION_POINT_EARNED, pointDelta))
+            local text = strformat("<<1>>!", GetString(SI_CHAMPION_POINT_EARNED, savedPointDelta))
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
 
         if not CA.SV.XP.ExperienceLevelUpCSA then
             PlaySound(SOUNDS.CHAMPION_POINT_GAINED)
         end
+		
+		savedEndingPoints = 0
+		savedPointDelta = 0
+		
+		eventManager:UnregisterForUpdate(moduleName .. "ChampionPointThrottle")
+	
+	end
+
+    local function ChampionPointGainedHook(pointDelta)
+
+        -- Print throttled XP value
+        eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
+        CA.PrintBufferedXP()
+		
+		savedEndingPoints = GetPlayerChampionPointsEarned()
+		savedPointDelta = savedPointDelta + pointDelta
+		
+		eventManager:UnregisterForUpdate(moduleName .. "ChampionPointThrottle")
+		eventManager:RegisterForUpdate(moduleName .. "ChampionPointThrottle", 25, ChampionPointGainedPrinter)
 
         return true
-
 
     end
 
