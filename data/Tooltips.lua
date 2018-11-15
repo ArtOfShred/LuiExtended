@@ -565,10 +565,25 @@ T.Skill_Permafrost                  = GetString(SI_LUIE_SKILL_PERMAFROST_TP)
 T.Skill_Permafrost_Snare            = GetString(SI_LUIE_SKILL_PERMAFROST_SNARE_TP)
 
 -- Weapon Skills
+
+-- Two Handed
+T.Skill_Follow_Up_Rank_1            = zo_strformat(GetString(SI_LUIE_SKILL_FOLLOW_UP_TP), 5)
+T.Skill_Follow_Up_Rank_2            = zo_strformat(GetString(SI_LUIE_SKILL_FOLLOW_UP_TP), 10)
+T.Skill_Battle_Rush_Rank_1          = zo_strformat(GetString(SI_LUIE_SKILL_BATTLE_RUSH_TP), 15)
+T.Skill_Battle_Rush_Rank_2          = zo_strformat(GetString(SI_LUIE_SKILL_BATTLE_RUSH_TP), 30)
 T.Skill_Rally                       = GetString(SI_LUIE_SKILL_RALLY_TP)
 T.Skill_Berserker_Strike            = GetString(SI_LUIE_SKILL_BERSERKER_STRIKE_TP)
 T.Skill_Onslaught                   = GetString(SI_LUIE_SKILL_ONSLAUGHT_TP)
 T.Skill_Berserker_Rage              = GetString(SI_LUIE_SKILL_BERSERKER_RAGE_TP)
+
+-- Sword and Shield
+T.Skill_Defensive_Posture           = GetString(SI_LUIE_SKILL_DEFENSIVE_POSTURE_TP)
+T.Skill_Defensive_Stance            = GetString(SI_LUIE_SKILL_DEFENSIVE_STANCE_TP)
+T.Skill_Absorb_Magic                = GetString(SI_LUIE_SKILL_ABSORB_MAGIC_TP)
+T.Skill_Power_Slam                  = GetString(SI_LUIE_SKILL_POWER_SLAM_TP)
+T.Skill_Shield_Wall                 = GetString(SI_LUIE_SKILL_SHIELD_WALL_TP)
+T.Skill_Spell_Wall                  = GetString(SI_LUIE_SKILL_SPELL_WALL_TP)
+T.Skill_Shield_Discipline           = GetString(SI_LUIE_SKILL_SHIELD_DISCIPLINE_TP)
 
 --zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
 

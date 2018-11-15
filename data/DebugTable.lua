@@ -4452,6 +4452,7 @@ debugAuras = {
             [62505] = true, -- Minor Heroism (Heroic Slash)
 
             [28728] = true, -- Defensive Posture (Defensive Posture - All Morphs)
+            [41347] = true, -- Defensive Posture (Defensive Posture - All Morphs)
             [28727] = true, -- Defensive Posture (Defensive Posture)
 
             [38312] = true, -- Defensive Stance (Defensive Stance)

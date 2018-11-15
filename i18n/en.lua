@@ -2486,11 +2486,26 @@ local strings = {
     SI_LUIE_SKILL_PERMAFROST_TP =                        "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDamaging an enemy three times with the storm will stun them for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_PERMAFROST_SNARE_TP =                  "Snared. Your Movement Speed has been reduced by |cFFFFFF70|r%. If you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.",
 
+    ------------------
     -- Weapon Skills
+    ------------------
+
+    -- Two-Handed
+    SI_LUIE_SKILL_FOLLOW_UP_TP =                         "Your next direct damage attack used within |cFFFFFF7|r seconds deals |cFFFFFF<<1>>|r% additional damage.",
+    SI_LUIE_SKILL_BATTLE_RUSH_TP =                       "Increase Stamina Recovery by |cFFFFFF<<1>>|r% for |cFFFFFF10|r seconds.",
     SI_LUIE_SKILL_RALLY_TP =                             "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds, and for additional Health when Rally expires.\n\nThe final heal is increased by up to |cFFFFFF564|r%, in proportion to the length of time Rally has been active. ",
     SI_LUIE_SKILL_BERSERKER_STRIKE_TP =                  "Increase Physical and Spell Resistance equal to the amount of the target hit by Berserker Strike for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_ONSLAUGHT_TP =                         "Increase Physical and Spell Resistance equal to the amount of the target hit by Onslaught for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BERSERKER_RAGE_TP =                    "Increase Physical and Spell Resistance equal to the amount of the target hit by Berserker Rage for |cFFFFFF<<1>>|r seconds.\n\nYou are immune to all disabling, snare, and immobilization effects for the duration.",
+
+    -- One Hand and Shield
+    SI_LUIE_SKILL_DEFENSIVE_POSTURE_TP =                 "Reflect the next spell projectile cast at you within |cFFFFFF<<1>>|r seconds back to the enemy.",
+    SI_LUIE_SKILL_DEFENSIVE_STANCE_TP =                  "Reflect the next spell projectile cast at you within |cFFFFFF<<1>>|r seconds back to the enemy.\n\nThe reflected spell projectile stuns the enemy for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_ABSORB_MAGIC_TP =                      "Absorb damage from the next spell projectile cast at you within |cFFFFFF<<1>>|r seconds and heal for |cFFFFFF15|r% of your Max Health.",
+    SI_LUIE_SKILL_POWER_SLAM_TP =                        "Your next Power Slam used within |cFFFFFF<<1>>|r seconds deals |cFFFFFF25|r% additional damage.",
+    SI_LUIE_SKILL_SHIELD_WALL_TP =                       "Automatically block all attacks at no cost for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SPELL_WALL_TP =                        "Automatically block all attacks at no cost and reflect all projectiles cast at you for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SHIELD_DISCIPLINE_TP =                 "Automatically block all attacks at no cost for |cFFFFFF<<1>>|r seconds.\n\nYour One Hand and Shield ability costs are reduced by |cFFFFFF100|r% while active.",
 
     -- Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Direct damage taken from the next Snipe, Scatter Shot, or Poison Arrow increased by |cffffff<<1>>|r% used within |cffffff6|r seconds.",

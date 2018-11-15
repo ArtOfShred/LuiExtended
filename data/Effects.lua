@@ -1111,10 +1111,6 @@ E.EffectCreateSkillAura = {
     [88762] = { consolidate = true, abilityId = 86130 }, -- Major Ward --> Ice Fortress
     [87194] = { consolidate = true, abilityId = 86130 }, -- Minor Protection --> Ice Fortress
 
-    -- One Hand and Shield
-    [62484] = { consolidate = true, abilityId = 38256 }, -- Major Fracture --> Pierce Armor
-    [62485] = { consolidate = true, abilityId = 38256 }, -- Major Breach --> Pierce Armor
-
     -- Dual Wield
     [68807] = { consolidate = true, extendedDisplay = true, abilityId = 21157 }, -- Major Brutality (Hidden Blade)
     [68859] = { consolidate = true, extendedDisplay = true, abilityId = 38914 }, -- Major Brutality (Shrouded Daggers)
@@ -4771,17 +4767,17 @@ E.EffectOverride = {
     [30821] = { icon = 'LuiExtended/media/icons/abilities/ability_2handed_forceful.dds' }, -- Forceful (Rank 1)
     [45445] = { icon = 'LuiExtended/media/icons/abilities/ability_2handed_forceful.dds' }, -- Forceful (Rank 2)
     [29375] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_heavy_weapons.dds' }, -- Heavy Weapons (Rank 1)
-    [29383] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = A.Passive_Heavy_Weapons }, -- Heavy Weapons Bleed (Rank 1)
+    [29383] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = A.Passive_Heavy_Weapons, tooltip = T.Generic_Bleed_2_Sec }, -- Heavy Weapons Bleed (Rank 1)
     [45430] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_heavy_weapons.dds' }, -- Heavy Weapons (Rank 2)
-    [45431] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = A.Passive_Heavy_Weapons }, -- Heavy Weapons Bleed (Rank 2)
+    [45431] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = A.Passive_Heavy_Weapons, tooltip = T.Generic_Bleed_2_Sec }, -- Heavy Weapons Bleed (Rank 2)
     [29388] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_balanced_blade.dds' }, -- Balanced Blade (Rank 1)
     [45443] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_balanced_blade.dds' }, -- Balanced Blade (Rank 2)
     [29389] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_follow_up.dds' }, -- Follow Up (Follow Up - Rank 1)
-    [60860] = { icon = 'esoui/art/icons/ability_warrior_018.dds' }, -- Bonus Damage (Follow Up - Rank 1)
+    [60860] = { icon = 'esoui/art/icons/ability_warrior_018.dds', tooltip = T.Skill_Follow_Up_Rank_1 }, -- Bonus Damage (Follow Up - Rank 1)
     [45446] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_follow_up.dds' }, -- Follow Up (Follow Up - Rank 2)
-    [60888] = { icon = 'esoui/art/icons/ability_warrior_018.dds', name = A.Passive_Follow_Up }, -- Bonus Damage (Follow Up - Rank 2)
-    [29392] = { icon = 'LuiExtended/media/icons/abilities/ability_2handed_battle_rush.dds' }, -- Battle Rush (Battle Rush - Rank 1)
-    [45450] = { icon = 'LuiExtended/media/icons/abilities/ability_2handed_battle_rush.dds' }, -- Battle Rush (Battle Rush - Rank 2)
+    [60888] = { icon = 'esoui/art/icons/ability_warrior_018.dds', name = A.Passive_Follow_Up, tooltip = T.Skill_Follow_Up_Rank_2 }, -- Bonus Damage (Follow Up - Rank 2)
+    [29392] = { icon = 'LuiExtended/media/icons/abilities/ability_2handed_battle_rush.dds', tooltip = T.Skill_Battle_Rush_Rank_1 }, -- Battle Rush (Battle Rush - Rank 1)
+    [45450] = { icon = 'LuiExtended/media/icons/abilities/ability_2handed_battle_rush.dds', tooltip = T.Skill_Battle_Rush_Rank_2 }, -- Battle Rush (Battle Rush - Rank 2)
 
     -- One Hand and Shield
     [29420] = { icon = 'esoui/art/icons/ability_weapon_029.dds' }, -- Fortress (Fortress - Rank 1)
@@ -4880,12 +4876,44 @@ E.EffectOverride = {
     -- ONE HAND AND SHIELD ACTIVES ----------
     -----------------------------------------
 
-    [62484] = { consolidate = true }, -- Major Fracture (Pierce Armor)
-    [62485] = { consolidate = true }, -- Major Breach (Pierce Armor)
-    [28305] = { name = A.Skill_Low_Slash }, -- Low Slash Snare (Low Slash)
-    [38266] = { name = A.Skill_Heroic_Slash }, -- Heroic Slash Snare (Heroic Slash)
+    -- Puncture / Ransack / Pierce Armor
+    [28307] = { tooltip = A.Skill_Puncture }, -- Major Fracture (Puncture)
+    [62474] = { tooltip = A.Skill_Ransack }, -- Major Fracture (Ransack)
+    [62475] = { tooltip = A.Skill_Ransack }, -- Major Breach (Ransack)
+    [62484] = { tooltip = A.Skill_Pierce_Armor }, -- Major Fracture (Pierce Armor)
+    [62485] = { tooltip = A.Skill_Pierce_Armor }, -- Major Breach (Pierce Armor)
+
+    -- Low Slash / Deep Slash / Heroic Slash
+    [29308] = { tooltip = A.Skill_Low_Slash }, -- Minor Maim (Low Slash)
+    [28305] = { name = A.Skill_Low_Slash, tooltip = T.Generic_Snare_60 }, -- Low Slash Snare (Low Slash)
+    [62495] = { tooltip = A.Skill_Deep_Slash }, -- Minor Maim (Deep Slash)
+    [38271] = { tooltip = T.Generic_Snare_60 }, -- Deep Slash (Deep Slash)
+    [62504] = { tooltip = A.Skill_Heroic_Slash }, -- Minor Maim (Heroic Slash)
+    [38266] = { name = A.Skill_Heroic_Slash, tooltip = T.Generic_Snare_60 }, -- Heroic Slash Snare (Heroic Slash)
+    [62505] = { tooltip = A.Skill_Heroic_Slash }, -- Minor Heroism (Heroic Slash)
+
+    -- Defensive Posture / Defensive Stance / Absorb Magic
+    [28727] = { tooltip = T.Skill_Defensive_Posture }, -- Defensive Posture (Defensive Posture)
+    [38312] = { tooltip = T.Skill_Defensive_Stance }, -- Defensive Stance (Defensive Stance)
+    [38317] = { tooltip = T.Skill_Absorb_Magic }, -- Absorb Magic (Absorb Magic)
     [38398] = { icon = 'esoui/art/icons/ability_1handed_004_b.dds' }, -- Absorb Magic (Absorb Magic)
-    [38407] = { name = A.Skill_Invasion }, -- Invasion (Invasion)
+
+    -- Shield Charge / Shielded Assault / Invasion
+    [28720] = { tooltip = T.Generic_Knockdown }, -- Shield Charge (Shield Charge)
+    [38404] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Shielded Assault (Shielded Assault)
+    [38403] = { tooltip = T.Generic_Knockdown }, -- Shielded Assault (Shielded Assault)
+    [38407] = { name = A.Skill_Invasion, tooltip = T.Generic_Knockdown }, -- Invasion (Invasion)
+
+    -- Power Bash / Reverberating Bash / Power Slam
+    [83433] = { tooltip = T.Generic_Stun }, -- Power Bash (Power Bash)
+    [83446] = { tooltip = T.Generic_Stun }, -- Reverberating Bash (Reverberating Bash)
+    [38838] = { tooltip = A.Skill_Reverberating_Bash }, -- Major Defile (Reverberating Bash)
+    [80625] = { tooltip = T.Skill_Power_Slam }, -- Power Slam (Power Slam)
+
+    -- Shield Wall / Spell Wall / Shield Discipline
+    [83272] = { tooltip = T.Skill_Shield_Wall }, -- Shield Wall (Shield Wall)
+    [83292] = { tooltip = T.Skill_Spell_Wall }, -- Spell Wall (Spell Wall)
+    [83310] = { tooltip = T.Skill_Shield_Discipline }, -- Shield Discipline (Shield Discipline)
 
     -----------------------------------------
     -- DUAL WIELD ACTIVES -------------------

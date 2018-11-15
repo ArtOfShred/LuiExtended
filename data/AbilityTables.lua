@@ -651,11 +651,16 @@ A.Skill_Forward_Momentum            = 38794
 A.Skill_Rally                       = 38802
 
 -- One Hand & Shield
+A.Skill_Puncture                    = 28306
+A.Skill_Ransack                     = 38256
+A.Skill_Pierce_Armor                = 38250
 A.Skill_Low_Slash                   = 28304
+A.Skill_Deep_Slash                  = 38268
 A.Skill_Heroic_Slash                = 38264
 A.Skill_Shield_Charge               = 28719
 A.Skill_Invasion                    = 38405
 A.Skill_Power_Bash                  = 28365
+A.Skill_Reverberating_Bash          = 38455
 
 -- Dual Wield
 A.Skill_Twin_Slashes                = 28379
