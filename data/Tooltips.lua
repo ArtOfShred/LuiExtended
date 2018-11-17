@@ -585,6 +585,14 @@ T.Skill_Shield_Wall                 = GetString(SI_LUIE_SKILL_SHIELD_WALL_TP)
 T.Skill_Spell_Wall                  = GetString(SI_LUIE_SKILL_SPELL_WALL_TP)
 T.Skill_Shield_Discipline           = GetString(SI_LUIE_SKILL_SHIELD_DISCIPLINE_TP)
 
+-- Dual Wield
+T.Skill_Rending_Slashes             = GetString(SI_LUIE_SKILL_RENDING_SLASHES_TP)
+T.Skill_Blood_Craze                 = GetString(SI_LUIE_SKILL_BLOOD_CRAZE_TP)
+T.Skill_Blood_Craze_Heal            = GetString(SI_LUIE_SKILL_BLOOD_CRAZE_HEAL_TP)
+T.Skill_Blade_Cloak                 = GetString(SI_LUIE_SKILL_BLADE_CLOAK_TP)
+T.Skill_Lacerate                    = GetString(SI_LUIE_SKILL_LACERATE_TP)
+T.Skill_Thrive_in_Chaos             = GetString(SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP)
+
 --zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
 
 -- ---------------------------------------------------

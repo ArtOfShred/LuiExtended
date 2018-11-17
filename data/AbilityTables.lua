@@ -666,8 +666,13 @@ A.Skill_Reverberating_Bash          = 38455
 A.Skill_Twin_Slashes                = 28379
 A.Skill_Rending_Slashes             = 38839
 A.Skill_Blood_Craze                 = 38845
+A.Skill_Whirling_Blades             = 38891
+A.Skill_Blade_Cloak                 = 28613
 A.Skill_Quick_Cloak                 = 38901
 A.Skill_Deadly_Cloak                = 38906
+A.Skill_Hidden_Blade                = 21157
+A.Skill_Shrouded_Daggers            = 38914
+A.Skill_Flying_Blade                = 38910
 
 -- Bow
 A.Skill_Magnum_Shot                 = 38672

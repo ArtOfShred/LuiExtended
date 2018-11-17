@@ -1112,6 +1112,9 @@ E.EffectCreateSkillAura = {
     [87194] = { consolidate = true, abilityId = 86130 }, -- Minor Protection --> Ice Fortress
 
     -- Dual Wield
+    [28613] = { alwaysShow = true, removeOnEnd = true, abilityId = 999001 }, -- Blade Cloak (Blade Cloak) -- Fake ID for Major Evasion
+    [38901] = { alwaysShow = true, removeOnEnd = true, abilityId = 999002 }, -- Quick Cloak (Quick Cloak) -- Fake ID for Major Evasion
+    [38906] = { alwaysShow = true, removeOnEnd = true, abilityId = 999003 }, -- Deadly Cloak (Deadly Cloak) -- Fake ID for Major Evasion
     [68807] = { consolidate = true, extendedDisplay = true, abilityId = 21157 }, -- Major Brutality (Hidden Blade)
     [68859] = { consolidate = true, extendedDisplay = true, abilityId = 38914 }, -- Major Brutality (Shrouded Daggers)
     [68814] = { consolidate = true, extendedDisplay = true, abilityId = 38910 }, -- Major Brutality (Flying Blade)
@@ -1482,19 +1485,19 @@ E.BarHighlightOverride = {
     [28379] = { newId = 29293 }, -- Twin Slashes --> Twin Slashes Bleed
     [38839] = { newId = 38841 }, -- Rending Slashes --> Rending Slashes Bleed
     [38845] = { newId = 38852 }, -- Blood Craze
-    [38891] = { newId = 68801, showFakeAura = true, noRemove = true, secondary = true }, -- Whirling Blades --> Major Endurance
+    [38891] = { newId = 68801, showFakeAura = true, noRemove = true }, -- Whirling Blades --> Major Endurance
     [21157] = { newId = 68807, showFakeAura = true, noRemove = true }, -- Hidden Blade --> Major Brutality
     [38914] = { newId = 68859, showFakeAura = true, noRemove = true }, -- Shrouded Daggers --> Major Brutality
     [38910] = { newId = 68814, showFakeAura = true, noRemove = true }, -- Flying Blade --> Major Brutality
     [83600] = { newId = 85156 }, -- Lacerate
     [85187] = { newId = 85192 }, -- Rend
-    [85179] = { newId = 85182 }, -- Thrive in Chaos
+    [85179] = { newId = 85184 }, -- Thrive in Chaos
 
     ---------------------------
     -- Bow --------------------
     ---------------------------
 
-    [38685] = { newId = 38686, showFakeAura = true, secondary = true }, -- Lethal Arrow --> Major Defile
+    [38685] = { newId = 38686, showFakeAura = true }, -- Lethal Arrow --> Major Defile
     [38687] = { newId = 38699 }, -- Focused Aim
     [28879] = { newId = 28887 }, -- Scatter Shot
     [38672] = { newId = 38674 }, -- Magnum Shot
@@ -4796,8 +4799,8 @@ E.EffectOverride = {
     [45478] = { icon = 'esoui/art/icons/ability_weapon_020.dds' }, -- Controlled Fury (Controlled Fury - Rank 2)
     [21114] = { icon = 'esoui/art/icons/ability_weapon_012.dds' }, -- Ruffian (Ruffian - Rank 1)
     [45481] = { icon = 'esoui/art/icons/ability_weapon_012.dds' }, -- Ruffian (Ruffian - Rank 2)
-    [30894] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = A.Passive_Twin_Blade_and_Blunt }, -- Twin Blade and Blunt Bleed (Rank 1)
-    [45483] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = A.Passive_Twin_Blade_and_Blunt }, -- Twin Blade and Blunt Bleed (Rank 2)
+    [30894] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = A.Passive_Twin_Blade_and_Blunt, tooltip = T.Generic_Bleed_2_Sec }, -- Twin Blade and Blunt Bleed (Rank 1)
+    [45483] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = A.Passive_Twin_Blade_and_Blunt, tooltip = T.Generic_Bleed_2_Sec }, -- Twin Blade and Blunt Bleed (Rank 2)
 
     -- Bow
     [30930] = { icon = 'LuiExtended/media/icons/abilities/passive_bow_accuracy.dds' }, -- Accuracy (Accuracy - Rank 1)
@@ -4919,14 +4922,39 @@ E.EffectOverride = {
     -- DUAL WIELD ACTIVES -------------------
     -----------------------------------------
 
-    [29293] = { icon = 'esoui/art/icons/ability_dualwield_001.dds', name = A.Skill_Twin_Slashes }, -- Twin Slashes Bleed (Twin Slashes)
-    [38841] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', name = A.Skill_Rending_Slashes }, -- Rending Slashes Bleed (Rending Slashes)
-    [38848] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', name = A.Skill_Blood_Craze }, -- Blood Craze Bleed (Blood Craze)
+    -- Twin Slashes / Rending Slashes / Blood Craze
+    [29293] = { icon = 'esoui/art/icons/ability_dualwield_001.dds', name = A.Skill_Twin_Slashes, tooltip = T.Generic_Bleed_2_Sec }, -- Twin Slashes Bleed (Twin Slashes)
+    [38841] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', name = A.Skill_Rending_Slashes, tooltip = T.Skill_Rending_Slashes }, -- Rending Slashes Bleed (Rending Slashes)
+    [38848] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', name = A.Skill_Blood_Craze, tooltip = T.Skill_Blood_Craze }, -- Blood Craze Bleed (Blood Craze)
+    [38852] = { tooltip = T.Skill_Blood_Craze_Heal }, -- Blood Craze (Blood Craze)
+
+    -- Whirlwind / Whirling Blades / Steel Tornado
+    [68801] = { tooltip = A.Skill_Whirling_Blades }, -- Major Endurance (Whirling Blades)
+
+    -- Blade Cloak / Quick Cloak / Deadly Cloak
+    [28613] = { tooltip = T.Skill_Blade_Cloak }, -- Blade Cloak (Blade Cloak)
+    [999001] = { name = A.Skill_Major_Evasion, icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = A.Skill_Blade_Cloak }, -- Major Evasion fake aura for Blade Cloak
+    [38901] = { tooltip = T.Skill_Blade_Cloak }, -- Quick Cloak (Quick Cloak)
+    [999002] = { name = A.Skill_Major_Evasion, icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = A.Skill_Quick_Cloak }, -- Major Evasion fake aura for Quick Cloak
+    [62531] = { tooltip = A.Skill_Quick_Cloak }, -- Major Expedition (Quick Cloak)
     [62529] = { name = A.Skill_Quick_Cloak }, -- Blade Cloak (Quick Cloak)
+    [38906] = { tooltip = T.Skill_Blade_Cloak }, -- Deadly Cloak (Deadly Cloak)
+    [999003] = { name = A.Skill_Major_Evasion, icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = A.Skill_Deadly_Cloak }, -- Major Evasion fake aura for Deadly Cloak
     [62547] = { name = A.Skill_Deadly_Cloak }, -- Blade Cloak (Deadly Cloak)
-    [68807] = { consolidateExtra = true }, -- Major Brutality (Hidden Blade)
-    [68859] = { consolidateExtra = true }, -- Major Brutality (Shrouded Daggers)
-    [68814] = { consolidateExtra = true }, -- Major Brutality (Flying Blade)
+
+    -- Hidden Blade / Shrouded Daggers / Flying Blade
+    [68807] = { consolidateExtra = true, tooltip = A.Skill_Hidden_Blade }, -- Major Brutality (Hidden Blade)
+    [28378] = { tooltip = T.Generic_Snare_40 }, -- Hidden Blade (Hidden Blade)
+    [68859] = { consolidateExtra = true, tooltip = A.Skill_Shrouded_Daggers }, -- Major Brutality (Shrouded Daggers)
+    [68861] = { tooltip = T.Generic_Snare_40 }, -- Shrouded Daggers (Shrouded Daggers)
+    [68814] = { consolidateExtra = true, tooltip = A.Skill_Flying_Blade }, -- Major Brutality (Flying Blade)
+    [38912] = { tooltip = T.Generic_Snare_40 }, -- Flying Blade (Flying Blade)
+
+    -- Lacerate / Rend / Thrive in Chaos
+    [85156] = { tooltip = T.Skill_Lacerate }, -- Lacerate (Lacerate)
+    [85192] = { tooltip = T.Skill_Lacerate }, -- Rend (Rend)
+    [85182] = { tooltip = T.Skill_Lacerate }, -- Thrive in Chaos (Thrive in Chaos)
+    [85184] = { tooltip = T.Skill_Thrive_in_Chaos }, -- Thrive in Chaos (Thrive in Chaos)
 
     -----------------------------------------
     -- BOW ACTIVES --------------------------

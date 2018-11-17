@@ -2507,6 +2507,14 @@ local strings = {
     SI_LUIE_SKILL_SPELL_WALL_TP =                        "Automatically block all attacks at no cost and reflect all projectiles cast at you for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SHIELD_DISCIPLINE_TP =                 "Automatically block all attacks at no cost for |cFFFFFF<<1>>|r seconds.\n\nYour One Hand and Shield ability costs are reduced by |cFFFFFF100|r% while active.",
 
+    SI_LUIE_SKILL_RENDING_SLASHES_TP =                   "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nSnared for |cFFFFFF4|r seconds. Your Movement Speed has been reduced by |cFFFFFF40|r%.",
+    SI_LUIE_SKILL_BLOOD_CRAZE_TP =                       "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF2|r seconds while Blood Craze remains active.",
+    SI_LUIE_SKILL_BLOOD_CRAZE_HEAL_TP =                  "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds as long as Blood Craze remains active on your target.",
+    SI_LUIE_SKILL_BLADE_CLOAK_TP =                       "A ring of floating razors surrounds you, dealing Physical Damage to all nearby enemies every |cFFFFFF3|r seconds for |cFFFFFF<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_LACERATE_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds. Each tick heals your attacker for |cFFFFFF50|r% of the damage done.",
+    SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP =                   "Increase damage done by |cFFFFFF5|r% for each enemy hit by Thrive in Chaos, up to a maximum of |cFFFFFF30|r%.",
+
     -- Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Direct damage taken from the next Snipe, Scatter Shot, or Poison Arrow increased by |cffffff<<1>>|r% used within |cffffff6|r seconds.",
     SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF =         "Every third cast of Force Shock within |cffffff10|r seconds will always apply the Burning, Concussion, and Chilled status effects.",
