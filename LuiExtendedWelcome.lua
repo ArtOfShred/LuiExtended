@@ -7,7 +7,17 @@ local windowManager = WINDOW_MANAGER
 -- TODO: Create a basic logo to use when the changelog is displayed - may consider attempting to center it and remove ability to expand box size.
 
 local fillMessages = {
-
+    "|cFFA5005.7.2|r",
+    "• General - Fixed typos in the RU localization that was causing UI errors. Thank you Jmopel for fixing this!",
+    "• General - Fixed an issue with the hook for the Skill Window to add custom passive/racial icons that prevented Harven's Improved Skills Window from working correctly.",
+    "• Buffs & Debuffs - Added tooltips for all Warden abilities & for melee weapon abilities.",
+    "• Buffs & Debuffs - Fixed broken tooltips on Stealth-Draining / Conspicuous Poison.",
+    "• Buffs & Debuffs - Added an aura for the new ID used for Dismount Stun.",
+    "• Buffs & Debuffs - When \"Hide Duplicates in Paired Auras\" is toggled in SCB, the Active Effects window on the character screen will also hide the auras.",
+    "• Chat Announcements - Occasionally \"Champion Point Gained\" Center Screen Announcements can trigger at the same time, causing the output to display the wrong Champion Points gained. Added a small throttle to prevent this.",
+    "• Combat Info - Added a redundant check in Combat Info to stop possible duplicate controls for Bar Highlight from being created and throwing UI errors.",
+    "• Combat Text - Reset the \"Interrupt\" notification color due to a formatting error that occured.",
+    "|",
     "|cFFA5005.7.1|r",
     "• Unit Frames - Fixed an issue where the default Player / Target / Group frames would fail to display even when enabled in the menu. This setting has been updated and the Saved Variables have been reset. Default Frames will be disabled by default and can be re-enabled by changing the menu option.",
     "|",
@@ -136,8 +146,8 @@ function LUIE_WelcomeScreen(menu)
 
         local buffer = luiChangeLog:GetNamedChild("Buffer")
         local slider = luiChangeLog:GetNamedChild("Slider")
-        buffer:SetScrollPosition(54)
-        slider:SetValue(buffer:GetNumHistoryLines() - 54)
+        buffer:SetScrollPosition(65)
+        slider:SetValue(buffer:GetNumHistoryLines() - 65)
 
     end
     -- Set version to current version.
