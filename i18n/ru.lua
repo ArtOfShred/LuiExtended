@@ -2446,6 +2446,72 @@ local strings = {
     SI_LUIE_SKILL_RUNE_FOCUS_BONUS_TP =                  "Increase Physical and Spell Resistance by |cFFFFFF2640|r while standing in the rune.",
     SI_LUIE_SKILL_RITE_OF_PASSAGE_TP =                   "Healing you and nearby allies every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
 
+    -- Warden
+    SI_LUIE_SKILL_SCORCH_TP =                            "After |cFFFFFF3|r seconds, deal Magic Damage to enemies up to |cFFFFFF20|r yards in front of you.",
+    SI_LUIE_SKILL_SUB_ASSAULT_TP =                       "After |cFFFFFF3|r seconds, deal Physical Damage and apply Major Fracture for |cFFFFFF5|r seconds to enemies up to |cFFFFFF20|r yards in front of you.",
+    SI_LUIE_SKILL_DEEP_FISSURE_TP =                      "After |cFFFFFF3|r seconds, deal Magic Damage and apply Major Breach for |cFFFFFF5|r seconds to enemies up to |cFFFFFF20|r yards in front of you.",
+    SI_LUIE_SKILL_FETCHER_INFECTION_BONUS_DAMAGE_TP =    "Your next Fetcher Infection cast will deal |cFFFFFF50|r% increased damage.",
+    SI_LUIE_SKILL_GROWING_SWARM_TP =                     "Swarmed by fetcherflies and afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends, the fetcherflies infect up to |cFFFFFF6|r new nearby targets.",
+    SI_LUIE_SKILL_BETTY_NETCH_TP =                       "Restoring |cFFFFFF4800|r Magicka over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BLUE_BETTY_TP =                        "Restoring |cFFFFFF5376|r Magicka over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BULL_NETCH_TP =                        "Restoring |cFFFFFF5376|r Stamina over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_FERAL_GUARDIAN_TP =                    "A grizzly fights at your side. The grizzly remains until killed or unsummoned.\n\nYou can activate Guardian's Wrath for |cFFFFFF75|r Ultimate, causing the grizzly to maul an enemy for Magic Damage.",
+    SI_LUIE_SKILL_ETERNAL_GUARDIAN_TP =                  "A grizzly fights at your side. The grizzly remains until killed or unsummoned.\n\nOnce every minute, the grizzly respawns when killed.\n\nYou can activate Guardian's Wrath for |cFFFFFF75|r Ultimate, causing the grizzly to maul an enemy for Magic Damage.",
+    SI_LUIE_SKILL_WILD_GUARDIAN_TP =                     "A grizzly fights at your side. The grizzly remains until killed or unsummoned.\n\nYou can activate Guardian's Savagery for |cFFFFFF75|r Ultimate, causing the grizzly to maul an enemy for Physical Damage.",
+    SI_LUIE_SKILL_GUARDIANS_WRATH_TP =                   "Targeted by Guardian's Wrath.",
+    SI_LUIE_SKILL_GUARDIANS_SAVAGERY_TP =                "Targeted by Guardian's Savagery.",
+    SI_LUIE_SKILL_ETERNAL_GUARDIAN_COOLDOWN_TP =         "Your grizzly has respawned recently and cannot automatically respawn again.",
+    SI_LUIE_SKILL_HEALING_SEED_TP =                      "After |cFFFFFF6|r seconds, heals you and all allies in the area.\n\nAn ally within the field can activate the |cFFFFFFHarvest|r synergy.",
+    SI_LUIE_SKILL_BUDDING_SEEDS_TP =                     "After |cFFFFFF6|r seconds, heals you and all allies in the area.\n\nWhile the field grows, you can activate this ability again to cause it to instantly bloom.\n\nAn ally within the field can activate the |cFFFFFFHarvest|r synergy.",
+    SI_LUIE_SKILL_CORRUPTING_POLLEN_TP =                 "After |cFFFFFF6|r seconds, heals you and all allies in the area.\n\nEnemies who enter the field are afflicted with Major Defile for |cFFFFFF4|r seconds every |cFFFFFF1|r second.\n\nAn ally within the field can activate the |cFFFFFFHarvest|r synergy.",
+    SI_LUIE_SKILL_LIVING_VINES_TP =                      "Heal when you take damage for |cFFFFFF<<1>>|r seconds. This effect can occur once every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_LEECHING_VINES_TP =                    "Heal when you take damage for |cFFFFFF<<1>>|r seconds. This effect can occur once every |cFFFFFF1|r second.\n\nThe vines apply Minor Lifesteal to enemies that damage you for |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_LIVING_TRELLIS_TP =                    "Heal when you take damage for |cFFFFFF<<1>>|r seconds. This effect can occur once every |cFFFFFF1|r second.\n\nWhen the vines expire, heal for additional Health.",
+    SI_LUIE_SKILL_LOTUS_FLOWER_TP =                      "Your Light and Heavy Attacks heal you or a nearby ally for |cFFFFFF20|r seconds. Fully charged Heavy Attacks restore three times the value.",
+    SI_LUIE_SKILL_NATURES_GRASP_TP =                     "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThe Warden gains |cFFFFFF3|r Ultimate when this effect ends if they are in combat.",
+    SI_LUIE_SKILL_NATURES_GRASP_SELF_TP =                "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nYou gain |cFFFFFF3|r Ultimate when this effect ends if you are in combat.",
+    SI_LUIE_SKILL_SECLUDED_GROVE_TP =                    "Healing you and your allies in the area every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_HEALING_THICKET_TP =                   "Every |cFFFFFF1|r second apply a |cFFFFFF4.1|r second duration heal over time effect on you and nearby allies in the area for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_IMPALING_SHARDS_TP =                   "For |cFFFFFF<<1>>|r seconds, enemies in the area take Frost Damage and have their movement speed reduced by |cFFFFFF30|r% for |cFFFFFF3|r seconds every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_ARCTIC_WIND_TP =                       "Healing for |cFFFFFF15|r% of your Max Health over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_CRYSTALLIZED_SHIELD_TP =               "Absorbing damage from up to |cFFFFFF3|r projectiles.\n\nEach time you absorb a projectile you restore |cFFFFFF578|r Magicka.",
+    SI_LUIE_SKILL_CRYSTALLIZED_SLAB_TP =                 "Absorbing damage from up to |cFFFFFF3|r projectiles.\n\nEach time you absorb a projectile you restore |cFFFFFF578|r Magicka and launch an icy bolt back at the enemy, dealing Frost Damage.",
+    SI_LUIE_SKILL_SHIMMERING_SHIELD_TP =                 "Absorbing damage from up to |cFFFFFF3|r projectiles.\n\nEach time you absorb a projectile you restore |cFFFFFF578|r Magicka and gain Major Heroism for |cFFFFFF6|r seconds.",
+    SI_LUIE_SKILL_FROZEN_GATE_TP =                       "Detonates when a enemy comes close, dealing Frost Damage and teleporting the enemy to you and immobilizing them for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_FROZEN_DEVICE_TP =                     "Detonates when a enemy comes close, dealing Frost Damage, teleporting the enemy to you, immobilizing them for |cFFFFFF3|r seconds, and applying Major Maim for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_FROZEN_RETREAT_TP =                    "Detonates when a enemy comes close, dealing Frost Damage and teleporting the enemy to you and immobilizing them for |cFFFFFF3|r seconds.\n\nAn ally in the portal can activate the |cFFFFFFIcy Escape|r synergy.",
+    SI_LUIE_SKILL_SLEET_STORM_TP =                       "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_PERMAFROST_TP =                        "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDamaging an enemy three times with the storm will stun them for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_PERMAFROST_SNARE_TP =                  "Snared. Your Movement Speed has been reduced by |cFFFFFF70|r%. If you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.",
+
+    ------------------
+    -- Weapon Skills
+    ------------------
+
+    -- Two-Handed
+    SI_LUIE_SKILL_FOLLOW_UP_TP =                         "Your next direct damage attack used within |cFFFFFF7|r seconds deals |cFFFFFF<<1>>|r% additional damage.",
+    SI_LUIE_SKILL_BATTLE_RUSH_TP =                       "Increase Stamina Recovery by |cFFFFFF<<1>>|r% for |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_RALLY_TP =                             "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds, and for additional Health when Rally expires.\n\nThe final heal is increased by up to |cFFFFFF564|r%, in proportion to the length of time Rally has been active. ",
+    SI_LUIE_SKILL_BERSERKER_STRIKE_TP =                  "Increase Physical and Spell Resistance equal to the amount of the target hit by Berserker Strike for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_ONSLAUGHT_TP =                         "Increase Physical and Spell Resistance equal to the amount of the target hit by Onslaught for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BERSERKER_RAGE_TP =                    "Increase Physical and Spell Resistance equal to the amount of the target hit by Berserker Rage for |cFFFFFF<<1>>|r seconds.\n\nYou are immune to all disabling, snare, and immobilization effects for the duration.",
+
+    -- One Hand and Shield
+    SI_LUIE_SKILL_DEFENSIVE_POSTURE_TP =                 "Reflect the next spell projectile cast at you within |cFFFFFF<<1>>|r seconds back to the enemy.",
+    SI_LUIE_SKILL_DEFENSIVE_STANCE_TP =                  "Reflect the next spell projectile cast at you within |cFFFFFF<<1>>|r seconds back to the enemy.\n\nThe reflected spell projectile stuns the enemy for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_ABSORB_MAGIC_TP =                      "Absorb damage from the next spell projectile cast at you within |cFFFFFF<<1>>|r seconds and heal for |cFFFFFF15|r% of your Max Health.",
+    SI_LUIE_SKILL_POWER_SLAM_TP =                        "Your next Power Slam used within |cFFFFFF<<1>>|r seconds deals |cFFFFFF25|r% additional damage.",
+    SI_LUIE_SKILL_SHIELD_WALL_TP =                       "Automatically block all attacks at no cost for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SPELL_WALL_TP =                        "Automatically block all attacks at no cost and reflect all projectiles cast at you for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SHIELD_DISCIPLINE_TP =                 "Automatically block all attacks at no cost for |cFFFFFF<<1>>|r seconds.\n\nYour One Hand and Shield ability costs are reduced by |cFFFFFF100|r% while active.",
+
+    SI_LUIE_SKILL_RENDING_SLASHES_TP =                   "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nSnared for |cFFFFFF4|r seconds. Your Movement Speed has been reduced by |cFFFFFF40|r%.",
+    SI_LUIE_SKILL_BLOOD_CRAZE_TP =                       "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF2|r seconds while Blood Craze remains active.",
+    SI_LUIE_SKILL_BLOOD_CRAZE_HEAL_TP =                  "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds as long as Blood Craze remains active on your target.",
+    SI_LUIE_SKILL_BLADE_CLOAK_TP =                       "A ring of floating razors surrounds you, dealing Physical Damage to all nearby enemies every |cFFFFFF3|r seconds for |cFFFFFF<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_LACERATE_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds. Each tick heals your attacker for |cFFFFFF50|r% of the damage done.",
+    SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP =                   "Increase damage done by |cFFFFFF5|r% for each enemy hit by Thrive in Chaos, up to a maximum of |cFFFFFF30|r%.",
     -- Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Direct damage taken from the next Snipe, Scatter Shot, or Poison Arrow increased by |cffffff<<1>>|r% used within |cffffff6|r seconds.",
     SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF =         "Every third cast of Force Shock within |cffffff10|r seconds will always apply the Burning, Concussion, and Chilled status effects.",
