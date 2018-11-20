@@ -2510,6 +2510,8 @@ local strings = {
     SI_LUIE_SKILL_SHIELD_WALL_TP =                       "Automatically block all attacks at no cost for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SPELL_WALL_TP =                        "Automatically block all attacks at no cost and reflect all projectiles cast at you for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SHIELD_DISCIPLINE_TP =                 "Automatically block all attacks at no cost for |cFFFFFF<<1>>|r seconds.\n\nYour One Hand and Shield ability costs are reduced by |cFFFFFF100|r% while active.",
+
+    -- Dual Wield
     SI_LUIE_SKILL_RENDING_SLASHES_TP =                   "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nSnared for |cFFFFFF4|r seconds. Your Movement Speed has been reduced by |cFFFFFF40|r%.",
     SI_LUIE_SKILL_BLOOD_CRAZE_TP =                       "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF2|r seconds while Blood Craze remains active.",
     SI_LUIE_SKILL_BLOOD_CRAZE_HEAL_TP =                  "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds as long as Blood Craze remains active on your target.",
