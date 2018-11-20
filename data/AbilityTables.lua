@@ -649,7 +649,6 @@ A.Skill_Frost_Clench                = 38989
 A.Skill_Flame_Reach                 = 38944
 A.Skill_Shock_Reach                 = 38978
 A.Skill_Frost_Reach                 = 38970
-
 A.Skill_Weakness_to_Elements        = 29173
 A.Skill_Elemental_Susceptibility    = 39089
 A.Skill_Elemental_Drain             = 39095
@@ -701,7 +700,19 @@ A.Skill_Bombard                     = 38705
 A.Skill_Venom_Arrow                 = 38645
 
 -- ---------------------------------------------------
--- VAMPIRE SKILLS -----------------------------------
+-- ARMOR SKILLS --------------------------------------
+-- ---------------------------------------------------
+
+A.Skill_Evasion                     = 29556
+A.Skill_Shuffle                     = 39195
+A.Skill_Elude                       = 39192
+
+A.Skill_Immovable                   = 29553
+A.Skill_Immovable_Brute             = 39205
+A.Skill_Unstoppable                 = 63118
+
+-- ---------------------------------------------------
+-- VAMPIRE SKILLS ------------------------------------
 -- ---------------------------------------------------
 
 A.Skill_Feed                        = 33152
@@ -713,13 +724,13 @@ A.Skill_Vampirism                   = 39472
 
 A.Skill_Werewolf_Bleed              = 89146
 A.Skill_Devour                      = 32634
-A.Skill_Piercing_Howl               = 58405
-A.Skill_Feeding_Frenzy              = 58775
-A.Skill_Howl_of_Despair             = 58742
-A.Skill_Howl_of_Agony               = 58798
+A.Skill_Hircines_Rage               = 58317
+A.Skill_Ferocious_Roar              = 39113
+A.Skill_Deafening_Roar              = 39114
 A.Skill_Infectious_Claws            = 58855
 A.Skill_Claws_of_Anguish            = 58864
 A.Skill_Claws_of_Life               = 58879
+
 A.Skill_Werewolf_Fear               = 39045
 A.Skill_Remove                      = 31262
 

@@ -335,10 +335,6 @@ E.DebuffDisplayOverrideId = {
     [92039] = true, -- Frozen Gate Root (Frozen Device)
     [92060] = true, -- Frozen Retreat Root (Frozen Retreat)
 
-    -- Werewolf
-    [39122] = true, -- Off Balance (Ferocious Roar)
-    [39123] = true, -- Ferocious Roar (Ferocious Roar)
-
     -- Human NPC's
     [88281] = true, -- Call Ally (Pet Ranger)
     [89017] = true, -- Dark Shade (Dreadweaver)
@@ -733,9 +729,6 @@ E.IsCast = {
     [38949] = true, -- Invigorating Drain (Vampire)
     [38956] = true, -- Accelerating Drain (Vampire)
     [33208] = true, -- Devour (Werewolf)
-    [32633] = true, -- Roar (Werewolf)
-    [39113] = true, -- Ferocious Roar (Werewolf)
-    [39114] = true, -- Rousing Roar (Werewolf)
     [39033] = true, -- Werewolf Transform Setup (Werewolf)
     [39477] = true, -- De-Werewolf (Werewolf)
     [40515] = true, -- Devour (Werewolf - Bite Player)
@@ -842,12 +835,16 @@ E.MultiCast = {
 -- If one of these abilities stuns the player - we ignore the standard effect of breaking the cast bar.
 E.IgnoreCastBarStun = {
 
+    -- Player
     [36434] = true, -- Mount Stun
     [74232] = true, -- Stun (Malacath's Wrathful Flame)
     [92863] = true, -- Stun (Dreamer's Chime)
     [51401] = true, -- Immortal Warrior (Immortal Yokeda)
     [81529] = true, -- Eternal Warrior (Eternal Yokeda)
     [68938] = true, -- Phoenix (of the Phoenix)
+
+    -- Quests
+    --[75008] = true, -- Werewolf Transformation (Hircine's Gift)
 
 }
 
@@ -1149,9 +1146,6 @@ E.EffectCreateSkillAura = {
     [63119] = { consolidate = true, abilityId = 39197 }, -- Major Resolve --> Unstoppable
     [63120] = { consolidate = true, abilityId = 39197 }, -- Major Ward --> Unstoppable
 
-    -- Werewolf
-    [39124] = { consolidate = true, extendedDisplay = true, abilityId = 39114 }, -- Major Brutality --> Rousing Roar
-
     -- Fighters Guild
     [80271] = { consolidate = true, removeOnEnd = true, abilityId = 35737  }, -- Minor Endurance --> Circle of Protection
     [35739] = { consolidate = true, removeOnEnd = true, abilityId = 35737 }, -- Minor Protection --> Circle of Protection
@@ -1210,8 +1204,8 @@ function E.BarHighlightRefresh()
         E.BarHighlightOverride[85132] = { newId = 85154, showFakeAura = true, secondary = true, noRemove = true } -- Light's Champion --> Major Force
 
         -- Werewolf
-        E.BarHighlightOverride[32633] = { newId = 45821, secondary = true } -- Roar --> Off Balance
         E.BarHighlightOverride[39113] = { newId = 45834, secondary = true } -- Ferocious Roar --> Off Balance
+        E.BarHighlightOverride[39114] = { newId = 111788, secondary = true } -- Deafening Roar --> Major Fracture
 
         -- Mages Guild
         E.BarHighlightOverride[28567] = { newId = 63223, showFakeAura = true, secondary = true, noRemove = true } -- Entropy --> Major Sorcery
@@ -1229,12 +1223,12 @@ function E.BarHighlightRefresh()
         E.BarHighlightOverride[26792] = { newId = 76912, duration = 2000, showFakeAura = true, noRemove = true } -- Biting Jabs
         E.BarHighlightOverride[22144] = { newId = 62599 } -- Empowering Sweep
 
-        -- Werewolf
-        E.BarHighlightOverride[32633] = { newId = 45823 } -- Roar
-        E.BarHighlightOverride[39113] = { newId = 45836 } -- Ferocious Roar
-
         -- Restoration Staff
         E.BarHighlightOverride[85132] = nil -- Light's Champion
+
+        -- Werewolf
+        E.BarHighlightOverride[39113] = nil -- Ferocious Roar
+        E.BarHighlightOverride[39114] = nil -- Deafening Roar
 
         -- Mages Guild
         E.BarHighlightOverride[28567] = nil -- Entropy
@@ -1571,17 +1565,7 @@ E.BarHighlightOverride = {
     -- Werewolf ---------------
     ---------------------------
 
-    [32632] = { newId = 38425 }, -- Pounce
-    [39105] = { newId = 39108 }, -- Brutal Pounce
-    [39104] = { newId = 39106 }, -- Feral Pounce
     [58317] = { newId = 58318 }, -- Hircine's Rage
-    [58325] = { newId = 58327 }, -- Hircine's Fortitude
-    [32633] = { newId = 45823 }, -- Roar
-    [39113] = { newId = 45836 }, -- Ferocious Roar
-    [39114] = { newId = 39124, showFakeAura = true, noRemove = true }, -- Rousing Roar --> Major Brutality
-    [58405] = { newId = 58406 }, -- Piercing Howl --> Piercing Howl Stun
-    [58742] = { newId = 58743 }, -- Howl of Despair --> Howl of Despair Stun
-    [58798] = { newId = 58800 }, -- Howl of Agony --> Piercing Howl Stun
     [58855] = { newId = 58856 }, -- Infectious Claws --> Infection
     [58864] = { newId = 58865 }, -- Claws of Anguish --> Infection
     [58879] = { newId = 58880 }, -- Claws of Life --> Infection
@@ -1839,7 +1823,6 @@ E.SynergyNameOverride = {
     [A.Skill_Arachnophobia] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Undaunted)
     [A.Skill_Feed] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed (Vampire)
     [A.Skill_Devour] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Werewolf)
-    [A.Skill_Feeding_Frenzy] = { icon = 'esoui/art/icons/ability_werewolf_005_b.dds' }, -- Feeding Frenzy (Werewolf)
     [A.Set_Shield_of_Ursus] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', name = A.Set_Ursus_Blessing }, -- Ursus's Blessing (Haven of Ursus)
 }
 
@@ -5166,21 +5149,27 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     -- LIGHT ARMOR
+    [29338] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Annulment (Annulment)
+    [39186] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Dampen Magic (Dampen Magic)
     [39188] = { hide = true }, -- Dampen Magic (Dampen Magic)
+    [39182] = { tooltip = T.Skill_Harness_Magicka }, -- Harness Magicka (Harness Magicka)
 
     -- MEDIUM ARMOR
-    [63015] = { consolidateExtra = true }, -- Major Evasion (Evasion)
-    [63019] = { consolidateExtra = true }, -- Major Evasion (Shuffle)
-    [39196] = { noDuplicate = true }, -- Shuffle (Shuffle)
-    [63030] = { consolidateExtra = true }, -- Major Evasion (Elude)
+    [63015] = { consolidateExtra = true, tooltip = A.Skill_Evasion }, -- Major Evasion (Evasion)
+    [63019] = { consolidateExtra = true, tooltip = A.Skill_Shuffle }, -- Major Evasion (Shuffle)
+    [39196] = { noDuplicate = true, tooltip = T.Innate_Immobilize_Immunity }, -- Shuffle (Shuffle)
+    [63030] = { consolidateExtra = true, tooltip = A.Skill_Elude }, -- Major Evasion (Elude)
 
     -- HEAVY ARMOR
-    [63084] = { consolidate = true }, -- Major Resolve (Immovable)
-    [63085] = { consolidate = true }, -- Major Ward (Immovable)
-    [63134] = { consolidate = true }, -- Major Resolve (Immovable Brute)
-    [63135] = { consolidate = true }, -- Major Ward (Immovable Brute)
-    [63119] = { consolidate = true }, -- Major Resolve (Unstoppable)
-    [63120] = { consolidate = true }, -- Major Ward (Unstoppable)
+    [29553] = { tooltip = T.Generic_CC_Immunity }, -- Immovable (Immovable)
+    [63084] = { consolidate = true, tooltip = A.Skill_Immovable }, -- Major Resolve (Immovable)
+    [63085] = { consolidate = true, tooltip = A.Skill_Immovable }, -- Major Ward (Immovable)
+    [63133] = { tooltip = T.Generic_CC_Immunity }, -- Immovable Brute (Immovable Brute)
+    [63134] = { consolidate = true, tooltip = A.Skill_Immovable_Brute }, -- Major Resolve (Immovable Brute)
+    [63135] = { consolidate = true, tooltip = A.Skill_Immovable_Brute }, -- Major Ward (Immovable Brute)
+    [63118] = { tooltip = T.Generic_CC_Immunity }, -- Unstoppable (Unstoppable)
+    [63119] = { consolidate = true, tooltip = A.Skill_Unstoppable }, -- Major Resolve (Unstoppable)
+    [63120] = { consolidate = true, tooltip = A.Skill_Unstoppable }, -- Major Ward (Unstoppable)
 
     ----------------------------------------------------------------
     -- SOUL MAGIC PASSIVES -----------------------------------------
@@ -5204,8 +5193,11 @@ E.EffectOverride = {
     -- SOUL MAGIC ACTIVES ------------------------------------------
     ----------------------------------------------------------------
 
+    [26768] = { tooltip = T.Skill_Soul_Trap }, -- Soul Trap (Soul Trap)
     [26769] = { hide = true}, -- Soul Trap (Soul Trap)
+    [40328] = { tooltip = T.Skill_Soul_Trap }, -- Soul Splitting Trap (Soul Splitting Trap)
     [40329] = { hide = true}, -- Soul Splitting Trap (Soul Splitting Trap)
+    [40317] = { tooltip = T.Skill_Consuming_Trap }, -- Consuming Trap (Consuming Trap)
     [40319] = { hide = true}, -- Consuming Trap (Consuming Trap)
     [40323] = { icon = 'esoui/art/icons/ability_otherclass_001_b.dds' }, -- Consuming Trap (Consuming Trap)
     [40321] = { icon = 'esoui/art/icons/ability_otherclass_001_b.dds' }, -- Consuming Trap (Consuming Trap)
@@ -5257,7 +5249,7 @@ E.EffectOverride = {
     [31068] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = T.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from NPC Bite)
     [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = T.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from Player Bite)
     [32464] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Light Attack
-    [89146] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', tooltip = T.Generic_Bleed }, -- Werewolf Bleed
+    [89146] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', tooltip = T.Generic_Bleed_2_Sec }, -- Werewolf Bleed
     [32477] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Were)
     [32479] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
     [32480] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack Werewolf
@@ -5273,20 +5265,30 @@ E.EffectOverride = {
     -- WEREWOLF ACTIVES --------------------------------------------
     ----------------------------------------------------------------
 
-    [39124] = { consolidateExtra = true }, -- Major Brutality (Rousing Roar)
-    [58406] = { name = A.Skill_Piercing_Howl }, -- Piercing Howl Stun (Piercing Howl)
-    [58775] = { icon = 'esoui/art/icons/ability_werewolf_005_b.dds' }, -- Feeding Frenzy (Howl of Despair - Feeding Frenzy Synergy)
-    [58743] = { name = A.Skill_Howl_of_Despair }, -- Howl of Despair Stun (Howl of Despair)
-    [58744] = { hide = true }, -- Howl of Despair Synergy (Howl of Despair)
-    [58800] = { name = A.Skill_Howl_of_Agony }, -- Piercing Howl Stun (Howl of Agony)
-    [58856] = { name = A.Skill_Infectious_Claws }, -- Infection (Infectious Claws)
-    [58865] = { name = A.Skill_Claws_of_Anguish }, -- Infection (Claws of Anguish)
-    [58880] = { name = A.Skill_Claws_of_Life }, -- Infection (Claws of Life)
+    -- Hircine's Bounty / Hircine's Rage / Hircine's Fortitude
+    [58318] = { tooltip = A.Skill_Hircines_Rage, name = A.Skill_Major_Brutality }, -- Hircine's Rage (Hircine's Rage)
 
+    -- Roar / Ferocious Roar / Defeaning Roar
+    [32633] = { tooltip = T.Generic_Fear }, -- Roar (Roar)
+    [39113] = { tooltip = T.Generic_Fear }, -- Ferocious Roar (Ferocious Roar)
+    [45834] = { tooltip = A.Skill_Ferocious_Roar }, -- Off Balance (Ferocious Roar)
+    [39114] = { tooltip = T.Generic_Fear }, -- Deafening Roar (Deafening Roar)
+    [111788] = { tooltip = A.Skill_Deafening_Roar }, -- Major Fracture (Deafening Roar)
+
+    -- Piercing Howl / Howl of Despair / Howl of Agony
+    [58775] = { tooltip = T.Skill_Feeding_Frenzy }, -- Feeding Frenzy (Howl of Despair - Feeding Frenzy Synergy)
+
+    -- Infectious Claws / Claws of Anguish / Claws of Life
+    [58856] = { name = A.Skill_Infectious_Claws, tooltip = T.Generic_Disease_2_Sec }, -- Infection (Infectious Claws)
+    [58865] = { name = A.Skill_Claws_of_Anguish, tooltip = T.Generic_Disease_2_Sec }, -- Infection (Claws of Anguish)
+    [58869] = { tooltip = A.Skill_Claws_of_Anguish }, -- Major Defile (Claws of Anguish)
+    [58880] = { name = A.Skill_Claws_of_Life, tooltip = T.Skill_Claws_of_Life }, -- Infection (Claws of Life)
+
+    -- Werewolf Transformation / Pack Leader / Werewolf Berserker
     [39477] = { hide = true }, -- De-Werewolf (Werewolf Transformation - All Morphs)
-
+    [32455] = { tooltip = T.Skill_Werewolf_Transformation }, -- Werewolf Transformation (Werewolf Transformation)
     [111832] = { tooltip = T.Generic_Fear }, -- Werewolf Transformation
-
+    [39075] = { tooltip = T.Skill_Pack_Leader }, -- Pack Leader (Pack Leader)
     [111843] = { tooltip = T.Generic_Fear }, -- Pack Leader
     [80180] = { hide = true }, -- Birth Direwolf (Pack Leader)
     [80177] = { hide = true }, -- Pack Leader (Pack Leader)
@@ -5294,9 +5296,9 @@ E.EffectOverride = {
     [80184] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge_pack_leader.dds' }, -- Lunge (Pack Leader)
     [80189] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
     [80190] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
-
+    [39076] = { tooltip = T.Skill_Werewolf_Transformation }, -- Werewolf Berserker (Werewolf Berserker)
     [111844] = { icon = 'esoui/art/icons/ability_werewolf_001_b.dds', tooltip = T.Generic_Fear }, -- Werewolf Berserker
-    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', name = A.Skill_Werewolf_Bleed, tooltip = T.Generic_Bleed }, -- Werewolf Berserker Bleed (Werewolf Bleed)
+    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', name = A.Skill_Werewolf_Bleed, tooltip = T.Generic_Bleed_2_Sec }, -- Werewolf Berserker Bleed (Werewolf Bleed)
 
     ----------------------------------------------------------------
     -- WEREWOLF QUEST ABILITIES ------------------------------------

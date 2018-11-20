@@ -85,6 +85,7 @@ T.Generic_Test                      = GetString(SI_LUIE_SKILL_TEST_TP)
 T.Generic_Bleed                     = GetString(SI_LUIE_SKILL_GENERIC_BLEED_TP)
 T.Generic_Bleed_2_Sec               = GetString(SI_LUIE_SKILL_GENERIC_BLEED_2_SEC_TP)
 T.Generic_Disease                   = GetString(SI_LUIE_SKILL_GENERIC_DISEASE_TP)
+T.Generic_Disease_2_Sec             = GetString(SI_LUIE_SKILL_GENERIC_DISEASE_2_SEC_TP)
 T.Generic_Poison                    = GetString(SI_LUIE_SKILL_GENERIC_POISON_TP)
 T.Generic_Poison_2_Sec              = GetString(SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP)
 T.Generic_Burn                      = GetString(SI_LUIE_SKILL_GENERIC_BURN_TP)
@@ -640,6 +641,9 @@ T.Skill_Mutagen                     = GetString(SI_LUIE_SKILL_MUTAGEN)
 T.Skill_Healing_Ward                = GetString(SI_LUIE_SKILL_HEALING_WARD)
 T.Skill_Lights_Champion             = GetString(SI_LUIE_SKILL_LIGHTS_CHAMPION)
 
+-- Light Armor
+T.Skill_Harness_Magicka             = GetString(SI_LUIE_SKILL_HARNESS_MAGICKA)
+
 --zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
 
 -- ---------------------------------------------------
@@ -648,11 +652,17 @@ T.Skill_Lights_Champion             = GetString(SI_LUIE_SKILL_LIGHTS_CHAMPION)
 
 -- Soul Magic
 T.Skill_Soul_Summons                = GetString(SI_LUIE_SKILL_SOUL_SUMMONS_TP)
+T.Skill_Soul_Trap                   = GetString(SI_LUIE_SKILL_SOUL_TRAP)
+T.Skill_Consuming_Trap              = GetString(SI_LUIE_SKILL_CONSUMING_TRAP)
 
 -- Werewolf
 T.Skill_Sanies_Lupinus              = GetString(SI_LUIE_SKILL_SANIES_LUPINUS_TP)
 T.Skill_Lycanthrophy                = GetString(SI_LUIE_SKILL_LYCANTHROPHY_TP)
 T.Skill_Blood_Moon                  = GetString(SI_LUIE_SKILL_BLOOD_MOON_TP)
+T.Skill_Feeding_Frenzy              = GetString(SI_LUIE_SKILL_FEEDING_FREZNY_TP)
+T.Skill_Claws_of_Life               = GetString(SI_LUIE_SKILL_CLAWS_OF_LIFE_TP)
+T.Skill_Werewolf_Transformation     = GetString(SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP)
+T.Skill_Pack_Leader                 = GetString(SI_LUIE_SKILL_PACK_LEADER_TP)
 
 -- ---------------------------------------------------
 -- QUESTS ---------------------
