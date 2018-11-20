@@ -569,7 +569,8 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         local isPassive = skillData:IsPassive()
 
         local detailedName = (isPassive and skillData:GetNumRanks() > 1) and skillProgressionData:GetFormattedNameWithRank() or skillProgressionData:GetFormattedName()
-        detailedName = detailedName:gsub("With", "with") -- Easiest way to fix the capitalization of the skill "Bond With Nature" (the only skill name we overwrite in the menu) is by using this.
+        detailedName = detailedName:gsub("With", "with") -- Easiest way to fix the capitalization of the skill "Bond With Nature"
+        detailedName = detailedName:gsub("Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
         ability.nameLabel:SetText(detailedName)
         ability.nameLabel:SetColor(PURCHASED_COLOR:UnpackRGBA())
         ability.lock:SetHidden(skillProgressionData:IsUnlocked())
@@ -915,7 +916,8 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         else
             detailedName = skillProgressionData:GetFormattedName()
         end
-        detailedName = detailedName:gsub("With", "with") -- Easiest way to fix the capitalization of the skill "Bond With Nature" (the only skill name we overwrite in the menu) is by using this.
+        detailedName = detailedName:gsub("With", "with") -- Easiest way to fix the capitalization of the skill "Bond With Nature"
+        detailedName = detailedName:gsub("Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
         ability.nameLabel:SetText(detailedName)
 
 		local slot = ability.slot

@@ -907,7 +907,7 @@ E.EffectGroundDisplay = {
 
     -- Dragonknight
     [28988] = { buff = false, debuff = false, ground = true }, -- Dragonknight Standard (Dragonknight Standard - Rank 1)
-    [32958] = { buff = false, debuff = false, ground = true }, -- Shifting Standard (Shifting Standard - Rank 1)
+    [32958] = { buff = false, debuff = false, ground = true, noRemove = true }, -- Shifting Standard (Shifting Standard - Rank 1)
     [32947] = { buff = false, debuff = false, ground = true }, -- Standard of Might (Standard of Might - Rank 1)
     [29059] = { buff = true, debuff = false, ground = false }, -- Ash Cloud (Ash Cloud)
     [20779] = { buff = true, debuff = false, ground = false }, -- Cinder Storm (Cinder Storm)
@@ -997,9 +997,9 @@ E.EffectGroundDisplay = {
     -- Restoration Staff ------
     ---------------------------
 
-    [28385] = { buff = true, debuff = false, ground = false }, -- Grand Healing (Grand Healing - Rank 1)
-    [40058] = { buff = true, debuff = false, ground = false }, -- Illustrious Healing (Illustrious Healing - Rank 1)
-    [40060] = { buff = true, debuff = false, ground = false }, -- Healing Springs (Healing Springs - Rank 1)
+    [28385] = { buff = true, debuff = false, ground = false, noRemove = true }, -- Grand Healing (Grand Healing - Rank 1)
+    [40058] = { buff = true, debuff = false, ground = false, noRemove = true }, -- Illustrious Healing (Illustrious Healing - Rank 1)
+    [40060] = { buff = true, debuff = false, ground = false, noRemove = true }, -- Healing Springs (Healing Springs - Rank 1)
 
     ---------------------------
     -- Fighters Guild ---------
@@ -1528,13 +1528,17 @@ E.BarHighlightOverride = {
     [29173] = { newId = 53881 }, -- Weakness to Elements (Weakness to Elements - Rank 1)
     [39089] = { newId = 62775 }, -- Elemental Susceptibility (Elemental Susceptibility - Rank 1)
     [39095] = { newId = 62787 }, -- Elemental Drain (Elemental Drain - Rank 1)
-    [39162] = { newId = 39168, secondary = true }, -- Flame Pulsar --> Minor Mangle
-    [39167] = { newId = 39181, secondary = true }, -- Storm Pulsar --> Minor Mangle
-    [39163] = { newId = 39180, secondary = true }, -- Frost Pulsar --> Minor Mangle
+    [39162] = { newId = 39168 }, -- Flame Pulsar --> Minor Mangle
+    [39167] = { newId = 39181 }, -- Storm Pulsar --> Minor Mangle
+    [39163] = { newId = 39180 }, -- Frost Pulsar --> Minor Mangle
 
     ---------------------------
     -- Restoration Staff ------
     ---------------------------
+
+    [28385] = { noRemove = true }, -- Grand Healing (Grand Healing)
+    [40058] = { noRemove = true }, -- Illustrious Healing (Illustrious Healing)
+    [40060] = { noRemove = true }, -- Healing Springs (Healing Springs)
 
     [37243] = { showFakeAura = true, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 1)
     [40103] = { showFakeAura = true, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration - Rank 1)
@@ -3652,6 +3656,7 @@ E.EffectOverride = {
     --[61737] = { tooltip = T.Skill_Empower }, -- Empower
     [55080] = { hide = true }, -- Pet Hidden
     [28301] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', tooltip = T.Generic_CC_Immunity }, -- Crowd Control Immunity
+    [38117] = { hide = true }, -- Crowd Control Immunity
 
     -- Taunt Effects
     [38254] = { icon = 'esoui/art/icons/ability_warrior_010.dds' }, -- Taunt
@@ -4755,11 +4760,11 @@ E.EffectOverride = {
     [16321] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_flame_attackheavy.dds' }, -- Heavy Attack
     [60763] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_attackrestore.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Fire)
     [18350] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attacklight.dds' }, -- Light Attack
-    [18396] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Shock)
+    [18396] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds', name = A.Skill_Heavy_Attack, tooltip = T.Skill_Heavy_Attack_Lightning }, -- Heavy Attack (Shock)
     [19277] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavypulse.dds', name = A.Skill_Heavy_Attack, hide = true }, -- Shock Pulse
     [60764] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_attackrestore.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Shock)
     [16145] = { icon = 'LuiExtended/media/icons/abilities/ability_restorationstaff_attacklight.dds' }, -- Light Attack
-    [16212] = { icon = 'LuiExtended/media/icons/abilities/ability_restorationstaff_attackheavy.dds' }, -- Heavy Attack
+    [16212] = { icon = 'LuiExtended/media/icons/abilities/ability_restorationstaff_attackheavy.dds', tooltip = T.Generic_Magic }, -- Heavy Attack
     [32760] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_attackrestore.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Restoration)
 
     ----------------------------------------------------------------
@@ -4808,17 +4813,19 @@ E.EffectOverride = {
     [30942] = { icon = 'LuiExtended/media/icons/abilities/passive_bow_ranger.dds' }, -- Ranger (Ranger) - Rank 1)
     [45493] = { icon = 'LuiExtended/media/icons/abilities/passive_bow_ranger.dds' }, -- Ranger (Ranger) - Rank 2)
     [30936] = { icon = 'esoui/art/icons/ability_weapon_024.dds' }, -- Hawk Eye (Hawk Eye - Rank 1)
-    [78854] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_hawk_eye.dds' }, -- Hawk Eye (Hawk Eye - Rank 1)
+    [78854] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_hawk_eye.dds', tooltip = T.Skill_Hawk_Eye_Rank_1 }, -- Hawk Eye (Hawk Eye - Rank 1)
     [45497] = { icon = 'esoui/art/icons/ability_weapon_024.dds' }, -- Hawk Eye (Hawk Eye - Rank 2)
-    [78855] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_hawk_eye.dds' }, -- Hawk Eye (Hawk Eye - Rank 2)
+    [78855] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_hawk_eye.dds', tooltip = T.Skill_Hawk_Eye_Rank_2 }, -- Hawk Eye (Hawk Eye - Rank 2)
     [30923] = { icon = 'LuiExtended/media/icons/abilities/passive_bow_hasty_retreat.dds' }, -- Hasty Retreat (Hasty Retreat - Rank 1)
+    [98489] = { tooltip = A.Skill_Hasty_Retreat }, -- Major Expedition (Hasty Retreat - Rank 1)
     [45498] = { icon = 'LuiExtended/media/icons/abilities/passive_bow_hasty_retreat.dds' }, -- Hasty Retreat (Hasty Retreat - Rank 2)
+    [98490] = { tooltip = A.Skill_Hasty_Retreat }, -- Major Expedition (Hasty Retreat - Rank 2)
 
     -- Destruction Staff
     [30948] = { icon = 'LuiExtended/media/icons/abilities/passive_destructionstaff_tri_focus.dds' }, -- Tri Focus (Tri Focus - Rank 1)
-    [69774] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_tri_focus.dds' }, -- Tri Focus (Tri Focus - Rank 1)
+    [69774] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_tri_focus.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Tri Focus (Tri Focus - Rank 1)
     [45500] = { icon = 'LuiExtended/media/icons/abilities/passive_destructionstaff_tri_focus.dds' }, -- Tri Focus (Tri Focus - Rank 2)
-    [69773] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_tri_focus.dds' }, -- Tri Focus (Tri Focus - Rank 2)
+    [69773] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_tri_focus.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Tri Focus (Tri Focus - Rank 2)
     [30951] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds' }, -- Shock (Tri Focus - Rank 1)
     [45505] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds' }, -- Shock (Tri Focus - Rank 2)
     [30959] = { icon = 'esoui/art/icons/ability_weapon_007.dds' }, -- Ancient Knowledge (Ancient Knowledge - Rank 1)
@@ -4828,8 +4835,10 @@ E.EffectOverride = {
 
     -- Restoration Staff
     [30973] = { icon = 'esoui/art/icons/ability_weapon_002.dds' }, -- Essence Drain (Essence Drain -  Rank 1)
+    [77918] = { tooltip = A.Skill_Essence_Drain }, -- Major Mending (Essence Drain -  Rank 1)
     [30978] = { icon = 'LuiExtended/media/icons/abilities/ability_restorationstaff_essence_drain.dds' }, -- Essence Drain (Essence Drain -  Rank 1)
     [45517] = { icon = 'esoui/art/icons/ability_weapon_002.dds' }, -- Essence Drain (Essence Drain -  Rank 2)
+    [77922] = { tooltip = A.Skill_Essence_Drain }, -- Major Mending (Essence Drain -  Rank 2)
     [45518] = { icon = 'LuiExtended/media/icons/abilities/ability_restorationstaff_essence_drain.dds' }, -- Essence Drain (Essence Drain -  Rank 2)
     [30971] = { icon = 'LuiExtended/media/icons/abilities/ability_restorationstaff_absorb.dds' }, -- Absorb (Absorb - Rank 1)
     [45522] = { icon = 'LuiExtended/media/icons/abilities/ability_restorationstaff_absorb.dds' }, -- Absorb (Absorb - Rank 2)
@@ -4960,80 +4969,176 @@ E.EffectOverride = {
     -- BOW ACTIVES --------------------------
     -----------------------------------------
 
+    -- Snipe / Lethal Arrow / Focused Aim
+    [38686] = { tooltip = A.Skill_Lethal_Arrow }, -- Major Defile (Lethal Arrow)
     [38698] = { hide = true }, -- Focused Aim (Focused Aim)
-    [38688] = { consolidateExtra = true }, -- Minor Fracture (Focused Aim)
+    [38699] = { tooltip = T.Skill_Focused_Aim }, -- Focused Aim (Focused Aim)
+    [38688] = { consolidateExtra = true, tooltip = A.Skill_Focused_Aim }, -- Minor Fracture (Focused Aim)
+
+    -- Volley / Endless Hail / Arrow Barrage
+    [28876] = { tooltip = T.Skill_Volley }, -- Volley (Volley)
+    [38689] = { tooltip = T.Skill_Endless_Hail }, -- Endless Hail (Endless Hail)
+    [38695] = { tooltip = T.Skill_Volley }, -- Arrow Barrage (Arrow Barrage)
+
+    -- Scatter Shot / Magnum Shot / Draining Shot
     [28888] = { icon = 'esoui/art/icons/ability_bow_004.dds' }, -- Scatter Shot (Scatter Shot)
+    [28887] = { tooltip = T.Generic_Stun }, -- Scatter Shot (Scatter Shot)
     [38676] = { icon = 'esoui/art/icons/ability_bow_004_b.dds', name = A.Skill_Magnum_Shot }, -- Scatter Shot (Magnum Shot)
     [38675] = { icon = 'esoui/art/icons/ability_bow_004_b.dds', name = A.Skill_Magnum_Shot }, -- Scatter Shot (Magnum Shot)
-    [38674] = { name = A.Skill_Magnum_Shot }, -- Scatter Shot (Magnum Shot)
+    [38674] = { name = A.Skill_Magnum_Shot, tooltip = T.Generic_Stun }, -- Scatter Shot (Magnum Shot)
     [38671] = { icon = 'esoui/art/icons/ability_bow_004_a.dds' }, -- Draining Shot (Draining Shot)
+    [38670] = { tooltip = T.Skill_Draining_Shot }, -- Draining Shot (Draining Shot)
     [80764] = { name = A.Skill_Draining_Shot }, -- Draining Shot Heal (Draining Shot)
-    [38706] = { icon = 'esoui/art/icons/ability_bow_005_a.dds' }, -- Bombard (Bombard)
-    [38702] = { hideReduce = true }, -- Acid Spray (Acid Spray)
+
+    -- Arrow Spray / Bombarb / Acid Spray
+    [31272] = { icon = 'esoui/art/icons/ability_bow_005.dds', tooltip = T.Generic_Snare_40 }, -- Arrow Spray (Arrow Spray)
+    [38707] = { tooltip = T.Skill_Bombard }, -- Bombard (Bombard)
+    [38706] = { icon = 'esoui/art/icons/ability_bow_005_a.dds', tooltip = T.Generic_Snare_40 }, -- Bombard (Bombard)
+    [38702] = { hideReduce = true, tooltip = T.Skill_Acid_Spray, icon = 'esoui/art/icons/ability_bow_005_b.dds'  }, -- Acid Spray (Acid Spray)
+    [38703] = { tooltip = T.Skill_Acid_Spray }, -- Acid Spray (Acid Spray)
+
+    -- Poison Arrow / Venom Arrow / Poison Injection
+    [44540] = { tooltip = T.Generic_Poison_2_Sec }, -- Poison Arrow (Venom Arrow)
+    [44545] = { tooltip = T.Generic_Poison_2_Sec }, -- Venom Arrow (Venom Arrow)
     [38648] = { icon = '' }, -- Poison Arrow (Venom Arrow)
-    [38649] = { icon = 'esoui/art/icons/ability_bow_002_a.dds', name = A.Skill_Venom_Arrow }, -- Poison Arrow (Venom Arrow)
-    [38650] = { name = A.Skill_Venom_Arrow }, -- Poison Arrow (Venom Arrow)
+    [38649] = { icon = 'esoui/art/icons/ability_bow_002_a.dds', name = A.Skill_Venom_Arrow, tooltip = T.Generic_Stagger }, -- Poison Arrow (Venom Arrow)
+    [38650] = { name = A.Skill_Venom_Arrow, tooltip = T.Generic_Stun }, -- Poison Arrow (Venom Arrow)
+    [44549] = { tooltip = T.Skill_Poison_Injection }, -- Poison Injection (Poison Injection)
+
+    -- Rapid Fire / Toxic Barrage / Ballista
+    [85261] = { tooltip = T.Generic_Poison_2_Sec }, -- Toxic Barrage (Toxic Barrage)
+    [85458] = { tooltip = T.Skill_Ballista }, -- Ballista (Ballista)
 
     -----------------------------------------
     -- DESTRUCTION STAFF ACTIVES ------------
     -----------------------------------------
 
+    -- Force Shock / Crushing Shock / Force Pulse
     [48010] = { icon = '' }, -- Force Shock (Destruction) (Crushing Shock - Rank 1)
-    [48009] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds', name = A.Skill_Crushing_Shock }, -- Stagger (Crushing Shock - Rank 1)
-    [48011] = { name = A.Skill_Crushing_Shock }, -- Uber Attack (Crushing Shock - Rank 1)
+    [48009] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds', name = A.Skill_Crushing_Shock, tooltip = T.Generic_Stagger }, -- Stagger (Crushing Shock - Rank 1)
+    [48011] = { name = A.Skill_Crushing_Shock, tooltip = T.Generic_Stun }, -- Uber Attack (Crushing Shock - Rank 1)
     [48016] = { icon = 'esoui/art/icons/ability_destructionstaff_001b.dds' }, -- Force Pulse (Force Pulse - Rank 1)
     [48022] = { icon = 'esoui/art/icons/ability_destructionstaff_001b.dds' }, -- Force Pulse (Force Pulse - Rank 1)
-    [68719] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds' }, -- Frozen (Wall of Elements - All Ranks) -- Frost
-    [62928] = { duration = 0 }, -- Wall of Frost (Wall of Elements - Rank 1) -- Frost
-    [39068] = { duration = 0 }, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
-    [62948] = { duration = 0 }, -- Blockade of Frost (Elemental Blockade - Rank 1) -- Frost
-    [62648] = { name = A.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch - Rank 1) -- Fire
-    [38172] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Stun After Knockback Movement (Destructive Touch - Rank 1) -- Fire
+
+    -- Wall of Elements / Unstable Wall of Elements / Elemental Blockade
+    [68719] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', tooltip = T.Generic_Immobilize }, -- Frozen (Wall of Elements - All Ranks) -- Frost
+    [28807] = { tooltip = T.Skill_Wall_of_Elements_Fire }, -- Wall of Fire (Wall of Fire)
+    [28854] = { tooltip = T.Skill_Wall_of_Elements_Shock }, -- Wall of Storms (Wall of Storms)
+    [62968] = { tooltip = A.Skill_Wall_of_Storms }, -- Off Balance (Wall of Storms)
+    [28849] = { tooltip = T.Skill_Wall_of_Elements_Frost }, -- Wall of Frost (Wall of Frost)
+    [62928] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_60_No_Dur }, -- Wall of Frost (Wall of Elements) -- Frost
+    [39053] = { tooltip = T.Skill_U_Wall_of_Elements_Fire }, -- Unstable Wall of Fire (Unstable Wall of Fire)
+    [39073] = { tooltip = T.Skill_U_Wall_of_Elements_Shock }, -- Unstable Wall of Storms (Unstable Wall of Storms)
+    [39077] = { tooltip = A.Skill_Unstable_Wall_of_Storms }, -- Off Balance (Unstable Wall of Storms)
+    [39067] = { tooltip = T.Skill_U_Wall_of_Elements_Frost }, -- Unstable Wall of Frost (Unstable Wall of Frost)
+    [39068] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_60_No_Dur }, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
+    [39012] = { tooltip = T.Skill_Wall_of_Elements_Fire }, -- Blockade of Fire (Blockade of Fire)
+    [39018] = { tooltip = T.Skill_Wall_of_Elements_Shock }, -- Blockade of Storms (Blockade of Storms)
+    [62988] = { tooltip = A.Skill_Blockade_of_Storms }, -- Off Balance (Blockade of Storms)
+    [39028] = { tooltip = T.Skill_Wall_of_Elements_Frost }, -- Blockade of Frost (Blockade of Frost)
+    [62948] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_60_No_Dur }, -- Blockade of Frost (Elemental Blockade) -- Frost
+
+    -- Destructive Touch / Destructive Clench / Destructive Reach
+    [62648] = { name = A.Skill_Flame_Touch, tooltip = T.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch - Rank 1) -- Fire
+    [38172] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch, tooltip = T.Skill_Flame_Touch_Alt, hideReduce = true }, -- Stun After Knockback Movement (Destructive Touch - Rank 1) -- Fire
     [29075] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Fire Touch (destruction) (Destructive Touch - Rank 1) -- Fire
-    [30450] = { icon = 'esoui/art/icons/ability_destructionstaff_005.dds', name = A.Skill_Frost_Touch }, -- Frost Touch (Destructive Touch - Rank 1) -- Frost
-    [62668] = { name = A.Skill_Flame_Clench }, -- Fire Clench (Destructive Clench - Rank 1) -- Fire
-    [38987] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench }, -- Stun After Knockback Movement (Destructive Clench - Rank 1) -- Fire
+    [62722] = { tooltip = T.Skill_Shock_Touch }, -- Shock Touch (Destructive Touch)
+    [68536] = { tooltip = T.Skill_Shock_Touch_Alt, hideReduce = true }, -- Shock Touch (Destructive Touch)
+    [62692] = { tooltip = T.Skill_Frost_Touch }, -- Frost Touch (Destructive Touch)
+    [30450] = { icon = 'esoui/art/icons/ability_destructionstaff_005.dds', name = A.Skill_Frost_Touch, tooltip = T.Skill_Frost_Touch_Alt, hideReduce = true }, -- Frost Touch (Destructive Touch - Rank 1) -- Frost
+    [62668] = { name = A.Skill_Flame_Clench, tooltip = T.Skill_Flame_Touch }, -- Fire Clench (Destructive Clench - Rank 1) -- Fire
+    [38987] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench, tooltip = T.Skill_Flame_Touch_Alt, hideReduce = true }, -- Stun After Knockback Movement (Destructive Clench - Rank 1) -- Fire
     [38986] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench }, -- Fire Touch (destruction) (Destructive Clench - Rank 1) -- Fire
-    [68635] = { name = A.Skill_Shock_Clench }, -- Shock Touch (Destructive Clench - Rank 1) -- Shock
+    [62733] = { tooltip = T.Skill_Shock_Touch }, -- Shock Clench (Destructive Clench - Rank 1) -- Shock
+    [68635] = { name = A.Skill_Shock_Clench, tooltip = T.Skill_Shock_Touch_Alt, hideReduce = true }, -- Shock Touch (Destructive Clench - Rank 1) -- Shock
     [62734] = { name = A.Skill_Shock_Clench, hide = true }, -- Shock Clench Explosion (Destructive Clench - Rank 1) -- Shock
-    [38990] = { icon = 'esoui/art/icons/ability_destructionstaff_005_a.dds', name = A.Skill_Frost_Clench }, -- Deep Freeze (Destructive Clench - Rank 1) -- Frost
-    [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
+    [62702] = { tooltip = T.Skill_Frost_Clench }, -- Frost Clench (Destructive Clench)
+    [38990] = { icon = 'esoui/art/icons/ability_destructionstaff_005_a.dds', name = A.Skill_Frost_Clench, tooltip = T.Skill_Frost_Clench_Alt, hideReduce = true }, -- Deep Freeze (Destructive Clench - Rank 1) -- Frost
+    [62682] = { tooltip = T.Skill_Flame_Touch }, -- Flame Reach (Destructive Reach)
+    [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, tooltip = T.Skill_Flame_Touch_Alt, hideReduce = true }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
     [38945] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach }, -- Flame Reach (destruction) (Destructive Reach - Rank 1) -- Fire
-    [68574] = { name = A.Skill_Shock_Reach }, -- Shock Touch (Destructive Reach - Rank 1) -- Shock
-    [38971] = { icon = 'esoui/art/icons/ability_destructionstaff_005_b.dds', name = A.Skill_Frost_Reach }, -- Frost Grip (Destructive Reach - Rank 1) -- Frost
-    [53881] = { consolidate = true }, -- Major Breach (Weakness to Elements)
-    [62775] = { consolidate = true }, -- Major Breach (Elemental Susceptibility)
-    [39100] = { consolidate = true }, -- Minor Magickasteal (Elemental Drain)
-    [62787] = { consolidate = true }, -- Minor Magickasteal (Elemental Drain)
+    [62745] = { tooltip = T.Skill_Shock_Touch }, -- Shock Reach (Destructive Reach - Rank 1) -- Shock
+    [68574] = { name = A.Skill_Shock_Reach, tooltip = T.Skill_Shock_Touch_Alt, hideReduce = true }, -- Shock Touch (Destructive Reach - Rank 1) -- Shock
+    [62712] = { tooltip = T.Skill_Frost_Touch_Alt }, -- Frost Reach (Destructive Reach)
+    [38971] = { icon = 'esoui/art/icons/ability_destructionstaff_005_b.dds', name = A.Skill_Frost_Reach, tooltip = T.Skill_Frost_Touch_Alt, hideReduce = true }, -- Frost Grip (Destructive Reach - Rank 1) -- Frost
+
+    -- Weakness to Elements / Elemental Susceptibility / Elemental Drain
+    [53881] = { consolidate = true, tooltip = A.Skill_Weakness_to_Elements }, -- Major Breach (Weakness to Elements)
+    [62775] = { consolidate = true, tooltip = A.Skill_Elemental_Susceptibility }, -- Major Breach (Elemental Susceptibility)
+    [39100] = { consolidate = true, tooltip = A.Skill_Elemental_Drain }, -- Minor Magickasteal (Elemental Drain)
+    [62787] = { consolidate = true, tooltip = A.Skill_Elemental_Drain }, -- Minor Magickasteal (Elemental Drain)
     [39099] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Elemental Drain - Rank 1)
+
+    -- Impulse / Elemental Ring / Pulsar
+    [39168] = { tooltip = A.Skill_Flame_Pulsar }, -- Minor Mangle (Flame Pulsar)
+    [39181] = { tooltip = A.Skill_Storm_Pulsar }, -- Minor Mangle (Storm Pulsar)
+    [39180] = { tooltip = A.Skill_Frost_Pulsar }, -- Minor Mangle (Frost Pulsar)
+
+    -- Elemental Storm / Elemental Rage / Eye of the Storm
+    [83625] = { tooltip = T.Skill_Fire_Storm }, -- Fire Storm (Elemental Storm)
+    [83630] = { tooltip = T.Skill_Thunder_Storm }, -- Thunder Storm (Elemental Storm)
+    [83628] = { tooltip = T.Skill_Ice_Storm }, -- Ice Storm (Elemental Storm)
+    [85126] = { tooltip = T.Skill_Fiery_Rage }, -- Fiery Rage (Elemental Rage)
+    [85130] = { tooltip = T.Skill_Thunderous_Rage }, -- Thunderous Rage (Elemental Rage)
+    [85128] = { tooltip = T.Skill_Icy_Rage }, -- Icy Rage (Elemental Rage)
+    [104825] = { tooltip = T.Generic_Immobilize }, -- Icy Rage (Elemental Rage)
+    [83682] = { tooltip = T.Skill_Eye_of_Flame }, -- Eye of Flame (Eye of the Storm)
+    [83686] = { tooltip = T.Skill_Eye_of_Lightning }, -- Eye of Lightning (Eye of the Storm)
+    [83684] = { tooltip = T.Skill_Eye_of_Frost }, -- Eye of Frost (Eye of the Storm)
 
     -----------------------------------------
     -- RESTORATION STAFF ACTIVES ------------
     -----------------------------------------
 
+    -- Grand Healing / Illustrious Healing / Healing Springs
+    [28385] = { tooltip = T.Skill_Secluded_Grove }, -- Grand Healing (Grand Healing)
     [28386] = { icon = 'esoui/art/icons/ability_restorationstaff_004.dds' }, -- Grand Healing (Grand Healing - Rank 1)
+    [40058] = { tooltip = T.Skill_Secluded_Grove }, -- Illustrious Healing (Illustrious Healing)
     [40059] = { icon = 'esoui/art/icons/ability_restorationstaff_004b.dds' }, -- Illustrious Healing (Illustrious Healing - Rank 1)
+    [40060] = { tooltip = T.Skill_Secluded_Grove }, -- Healing Springs (Healing Springs)
     [40061] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs - Rank 1)
     [40062] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs - Rank 1)
+
+    -- Regeneration / Rapid Regeneration / Mutagen
+    [28536] = { tooltip = T.Generic_HoT_2Sec }, -- Regeneration (Regeneration)
+    [40076] = { tooltip = T.Generic_HoT_1_5_Sec }, -- Rapid Regeneration (Rapid Regeneration)
+    [40079] = { tooltip = T.Skill_Mutagen }, -- Mutagen (Mutagen)
+
+    -- Blessing of Protection / Blessing of Restoration / Combat Prayer
     [37243] = { hide = true }, -- Blessing of Protection (Blessing of Protection - Rank 1)
-    [37247] = { consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 1)
-    [62619] = { consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 1)
+    [37247] = { consolidate = true, tooltip = A.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection - Rank 1)
+    [62619] = { consolidate = true, tooltip = A.Skill_Blessing_of_Protection }, -- Minor Ward (Blessing of Protection - Rank 1)
     [40103] = { hide = true, name = A.Skill_Blessing_of_Restoration }, -- Blessing of Restoration (Blessing of Restoration - Rank 1)
-    [62626] = { consolidate = true }, -- Minor Resolve (Blessing of Restoration - Rank 1)
-    [62627] = { consolidate = true }, -- Minor Ward (Blessing of Restoration - Rank 1)
+    [62626] = { consolidate = true, tooltip = A.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration - Rank 1)
+    [62627] = { consolidate = true, tooltip = A.Skill_Blessing_of_Restoration }, -- Minor Ward (Blessing of Restoration - Rank 1)
     [40094] = { hide = true }, -- Combat Prayer (Combat Prayer - Rank 1)
-    [62634] = { consolidate = true }, -- Minor Resolve (Combat Prayer - Rank 1)
-    [62635] = { consolidate = true }, -- Minor Ward (Combat Prayer - Rank 1)
-    [62636] = { consolidate = true }, -- Minor Berserk (Combat Prayer - Rank 1)
+    [62634] = { consolidate = true, tooltip = A.Skill_Combat_Prayer }, -- Minor Resolve (Combat Prayer - Rank 1)
+    [62635] = { consolidate = true, tooltip = A.Skill_Combat_Prayer }, -- Minor Ward (Combat Prayer - Rank 1)
+    [62636] = { consolidate = true, tooltip = A.Skill_Combat_Prayer }, -- Minor Berserk (Combat Prayer - Rank 1)
+
+    -- Steadfast Ward / Ward Ally / Healing Ward
+    [37232] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Steadfast Ward (Steadfast Ward)
+    [40130] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Ward Ally (Ward Ally)
+    [40132] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Ward Ally (Ward Ally)
+    [40126] = { tooltip = T.Skill_Healing_Ward }, -- Healing Ward (Healing Ward)
     [40128] = { hide = true }, -- Healing Ward (Healing Ward - Rank 1)
-    [88565] = { consolidate = true }, -- Minor Lifesteal (Force Siphon)
+
+    -- Force Siphon / Siphon Spirit / Quick Siphon
+    [88565] = { consolidate = true, tooltip = A.Skill_Force_Siphon }, -- Minor Lifesteal (Force Siphon)
     [33541] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Force Siphon - Rank 1)
-    [88575] = { consolidate = true }, -- Minor Lifesteal (Siphon Spirit)
-    [88576] = { consolidate = true }, -- Minor Magickasteal (Siphon Spirit)
+    [88575] = { consolidate = true, tooltip = A.Skill_Siphon_Spirit }, -- Minor Lifesteal (Siphon Spirit)
+    [88576] = { consolidate = true, tooltip = A.Skill_Siphon_Spirit }, -- Minor Magickasteal (Siphon Spirit)
     [40110] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
     [40114] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
-    [88606] = { consolidate = true }, -- Minor Lifesteal (Quick Siphon)
+    [88606] = { consolidate = true, tooltip = A.Skill_Quick_Siphon }, -- Minor Lifesteal (Quick Siphon)
     [40117] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Quick Siphon - Rank 1)
+
+    -- Panacea / Life Giver / Light's Champion
+    [83552] = { tooltip = T.Generic_HoT_1Sec }, -- Panacea (Panacea)
+    [83850] = { tooltip = T.Generic_HoT_1Sec }, -- Life Giver (Life Giver)
+    [85132] = { tooltip = T.Skill_Lights_Champion }, -- Light's Champion (Light's Champion)
+    [85154] = { tooltip = A.Skill_Lights_Champion }, -- Major Force (Light's Champion)
+    [85155] = { tooltip = A.Skill_Lights_Champion }, -- Major Protection (Light's Champion)
 
     ----------------------------------------------------------------
     -- ARMOR PASSIVES ----------------------------------------------

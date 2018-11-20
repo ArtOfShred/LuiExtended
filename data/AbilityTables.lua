@@ -626,11 +626,21 @@ A.Skill_Permafrost                  = 86117
 -- ---------------------------------------------------
 
 -- Restoration Staff
+A.Skill_Essence_Drain               = 30973
+A.Skill_Blessing_of_Protection      = 37243
 A.Skill_Blessing_of_Restoration     = GetString(SI_LUIE_SKILL_BLESSING_OF_RESTORATION)
+A.Skill_Combat_Prayer               = 40094
+A.Skill_Force_Siphon                = 31531
+A.Skill_Siphon_Spirit               = 40109
+A.Skill_Quick_Siphon                = 40116
+A.Skill_Lights_Champion             = 85132
 
 -- Destruction Staff
 A.Skill_Crushing_Shock              = 46348
 A.Skill_Frozen                      = 68719
+A.Skill_Wall_of_Storms              = 28854
+A.Skill_Unstable_Wall_of_Storms     = 39073
+A.Skill_Blockade_of_Storms          = 39018
 A.Skill_Flame_Touch                 = 29073
 A.Skill_Frost_Touch                 = 29078
 A.Skill_Flame_Clench                = 38985
@@ -639,6 +649,13 @@ A.Skill_Frost_Clench                = 38989
 A.Skill_Flame_Reach                 = 38944
 A.Skill_Shock_Reach                 = 38978
 A.Skill_Frost_Reach                 = 38970
+
+A.Skill_Weakness_to_Elements        = 29173
+A.Skill_Elemental_Susceptibility    = 39089
+A.Skill_Elemental_Drain             = 39095
+A.Skill_Flame_Pulsar                = 39162
+A.Skill_Storm_Pulsar                = 39167
+A.Skill_Frost_Pulsar                = 39163
 
 -- Two-Handed
 A.Skill_Dizzying_Swing              = 38814
@@ -675,6 +692,9 @@ A.Skill_Shrouded_Daggers            = 38914
 A.Skill_Flying_Blade                = 38910
 
 -- Bow
+A.Skill_Hasty_Retreat               = 30923
+A.Skill_Lethal_Arrow                = 38685
+A.Skill_Focused_Aim                 = 38687
 A.Skill_Magnum_Shot                 = 38672
 A.Skill_Draining_Shot               = 38669
 A.Skill_Bombard                     = 38705

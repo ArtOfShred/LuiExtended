@@ -2261,7 +2261,9 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_BURN_TP =                      "Afflicted with Flame Damage over time for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_BURN_2_SEC_TP =                "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_FREEZE_TP =                    "Afflicted with Frost Damage over time for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_FREEZE_2_SEC_TP =              "Afflicted with Frost Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_SHOCK_TP =                     "Afflicted with Shock Damage over time for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_SHOCK_2_SEC_TP =               "Afflicted with Shock Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
 	SI_LUIE_SKILL_GENERIC_OBLIVION_TP =					 "Afflicted with Oblivion Damage over time for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_MAGIC_TP =                     "Afflicted with Magic Damage over time for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_MAGIC_1_SEC_TP =               "Afflicted with Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds.",
@@ -2277,6 +2279,7 @@ local strings = {
 
     SI_LUIE_SKILL_GENERIC_HOT_TIME_05SEC_TP =            "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP =             "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_HOT_TIME_1_5_SEC_TP =          "Healing every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_HOT_TIME_08SEC_TP =            "Healing every |cFFFFFF0.8|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_HOT_TIME_2SEC_TP =             "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
 
@@ -2302,7 +2305,7 @@ local strings = {
 	SI_LUIE_SKILL_GENERIC_SNARE_70_TP =			         "Snared for |cFFFFFF<<1>>|r seconds. Your Movement Speed has been reduced by |cFFFFFF70|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_70_NO_DUR_TP =			         "Snared. Your Movement Speed has been reduced by |cFFFFFF70|r%.",
     SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized for |cFFFFFF<<1>>|r seconds. Unable to move while immobilized.",
-    SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while staggered.",
+    SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered. You are unable to attack or move while staggered.",
     SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.",
     SI_LUIE_SKILL_GENERIC_STUN_NO_DUR_TP =               "Stunned. You are unable to attack or move while stunned.",
     SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP =                 "Knocked back for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while knocked back.",
@@ -2506,14 +2509,50 @@ local strings = {
     SI_LUIE_SKILL_SHIELD_WALL_TP =                       "Automatically block all attacks at no cost for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SPELL_WALL_TP =                        "Automatically block all attacks at no cost and reflect all projectiles cast at you for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SHIELD_DISCIPLINE_TP =                 "Automatically block all attacks at no cost for |cFFFFFF<<1>>|r seconds.\n\nYour One Hand and Shield ability costs are reduced by |cFFFFFF100|r% while active.",
-
     SI_LUIE_SKILL_RENDING_SLASHES_TP =                   "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nSnared for |cFFFFFF4|r seconds. Your Movement Speed has been reduced by |cFFFFFF40|r%.",
     SI_LUIE_SKILL_BLOOD_CRAZE_TP =                       "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF2|r seconds while Blood Craze remains active.",
     SI_LUIE_SKILL_BLOOD_CRAZE_HEAL_TP =                  "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds as long as Blood Craze remains active on your target.",
     SI_LUIE_SKILL_BLADE_CLOAK_TP =                       "A ring of floating razors surrounds you, dealing Physical Damage to all nearby enemies every |cFFFFFF3|r seconds for |cFFFFFF<<1>>|r seconds.",
-
-    SI_LUIE_SKILL_LACERATE_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds. Each tick heals your attacker for |cFFFFFF50|r% of the damage done.",
+    SI_LUIE_SKILL_LACERATE_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds. Every time this effect deals damage, your attacker heals for |cFFFFFF50|r% of the damage done.",
     SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP =                   "Increase damage done by |cFFFFFF5|r% for each enemy hit by Thrive in Chaos, up to a maximum of |cFFFFFF30|r%.",
+
+    -- Bow
+    SI_LUIE_SKILL_HAWK_EYE_TP =                          "Increase the damage of your Bow abilities by |cFFFFFF<<1>>|r% for |cFFFFFF5|r seconds, stacking up to |cFFFFFF5|r times.",
+    SI_LUIE_SKILL_FOCUSED_AIM_TP =                       "Increase the range from which your attacker can hit you with Bow attacks by |cFFFFFF5|r meters for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_VOLLEY_TP =                            "Arrows rain down from the sky, dealing Physical Damage to enemies in the target area every |cFFFFFF0.5|r seconds for |cFFFFFF8|r seconds.",
+    SI_LUIE_SKILL_ENDLESS_HAIL_TP =                      "Arrows rain down from the sky, dealing Physical Damage to enemies in the target area every |cFFFFFF0.5|r seconds for |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_DRAINING_SHOT_TP =                     "Stunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.\n\nWhen the stun ends, your attacker heals.",
+    SI_LUIE_SKILL_BOMBARD_TP =                           "Immobilized for |cFFFFFF<<1>>|r seconds. Unable to move while immobilized.\n\nWhen this effect ends, become snared by |cFFFFFF40|r% for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_ACID_SPRAY_TP =			             "Afflicted with Poison Damage every |cFFFFFF1|r second for |cFFFFFF6|r seconds.\n\nSnared for |cFFFFFF4|r seconds. Your Movement Speed has been reduced by |cFFFFFF40|r%.",
+    SI_LUIE_SKILL_POISON_INJECTION_TP =                  "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF200|r% more damage in proportion to your missing health under |cFFFFFF50|r%.",
+    SI_LUIE_SKILL_BALLISTA_TP =                          "Your ballista turret unleashes a barrage of arrows, dealing Physical Damage over |cFFFFFF<<1>>|r seconds.",
+
+    -- Destruction Staff
+    SI_LUIE_HEAVY_ATTACK_LIGHTNING_STAFF_TP =            "Afflicted with Shock Damage over time for |cFFFFFF<<1>>|r seconds.\n\nDeals additional Shock Damage if the channel is finished.",
+    SI_LUIE_SKILL_WOE_FIRE_TP =                          "Enemies standing in the area take Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nBurning enemies take |cFFFFFF20|r% more damage from this ability.",
+    SI_LUIE_SKILL_WOE_FROST_TP =                         "Enemies standing in the area take Frost Damage and have their Movement Speed reduced by |cFFFFFF60|r% every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nChilled enemies become frozen and are immobilized for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_WOE_SHOCK_TP =                         "Enemies standing in the area take Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nConcussed enemies are set Off Balance for |cFFFFFF5|r seconds.",
+    SI_LUIE_SKILL_UWOE_FIRE_TP =                         "Enemies standing in the area take Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nBurning enemies take |cFFFFFF20|r% more damage from this ability.\n\nThe wall explodes when it expires, dealing additional Flame Damage.",
+    SI_LUIE_SKILL_UWOE_FROST_TP =                        "Enemies standing in the area take Frost Damage and have their Movement Speed reduced by |cFFFFFF60|r% every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nChilled enemies become frozen and are immobilized for |cFFFFFF4|r seconds.\n\nThe wall explodes when it expires, dealing additional Frost Damage.",
+    SI_LUIE_SKILL_UWOE_SHOCK_TP =                        "Enemies standing in the area take Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nConcussed enemies are set Off Balance for |cFFFFFF5|r seconds.\n\nThe wall explodes when it expires, dealing additional Shock Damage.",
+    SI_LUIE_SKILL_FLAME_TOUCH_TP =                       "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nKnocked back for |cFFFFFF1.8|r seconds. You are unable to attack or move while knocked back.",
+    SI_LUIE_SKILL_FLAME_TOUCH_ALT_TP =                   "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cFFFFFF10|r seconds.\n\nKnocked back for |cFFFFFF1.8|r seconds. You are unable to attack or move while knocked back.",
+    SI_LUIE_SKILL_SHOCK_TOUCH_TP =                       "Afflicted with Shock Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nStunned for |cFFFFFF2.5|r seconds. You are unable to attack or move while stunned.",
+    SI_LUIE_SKILL_SHOCK_TOUCH_ALT_TP =                   "Afflicted with Shock Damage every |cFFFFFF2|r seconds for |cFFFFFF10|r seconds.\n\nStunned for |cFFFFFF2.5|r seconds. You are unable to attack or move while stunned.",
+    SI_LUIE_SKILL_FROST_TOUCH_TP =                       "Afflicted with Frost Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nImmobilized for |cFFFFFF4|r seconds. Unable to move while immobilized.",
+    SI_LUIE_SKILL_FROST_TOUCH_ALT_TP =                   "Afflicted with Frost Damage every |cFFFFFF2|r seconds for |cFFFFFF10|r seconds.\n\nImmobilized for |cFFFFFF4|r seconds. Unable to move while immobilized.",
+    SI_LUIE_SKILL_FROST_CLENCH_TP =                      "Afflicted with Frost Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nImmobilized for |cFFFFFF6.5|r seconds. Unable to move while immobilized.",
+    SI_LUIE_SKILL_FROST_CLENCH_ALT_TP =                  "Afflicted with Frost Damage every |cFFFFFF2|r seconds for |cFFFFFF10|r seconds.\n\nImmobilized for |cFFFFFF6.5|r seconds. Unable to move while immobilized.",
+
+    SI_LUIE_SKILL_ELEMENTAL_STORM_TP =                   "A cataclysmic storm builds for |cFFFFFF2|r seconds then lays waste to all enemies in the area, dealing <<1>> Damage every |cFFFFFF1|r second for |cFFFFFF7|r seconds.",
+    SI_LUIE_SKILL_ICY_RAGE_TP =                          "A cataclysmic storm builds for |cFFFFFF2|r seconds then lays waste to all enemies in the area, dealing Frost Damage every |cFFFFFF1|r second for |cFFFFFF7|r seconds.\n\nImmobilizes enemies hit for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_THUNDEROUS_RAGE_TP =                   "A cataclysmic storm builds for |cFFFFFF2|r seconds then lays waste to all enemies in the area, dealing Shock Damage every |cFFFFFF1|r second for |cFFFFFF9|r seconds.",
+    SI_LUIE_SKILL_EYE_OF_THE_STORM_TP =                  "A cataclysmic storm builds around you for |cFFFFFF2|r seconds then lays waste to all enemies nearby, dealing <<1>> Damage every |cFFFFFF1|r second for |cFFFFFF7|r seconds.",
+
+    -- Restoration Staff
+    SI_LUIE_SKILL_MUTAGEN =                              "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nIf you fall below |cFFFFFF20%|r Health, the Mutagen is consumed but instantly heals and removes |cFFFFFF1|r harmful effect.",
+    SI_LUIE_SKILL_HEALING_WARD =                         "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nWhen the shield expires, heal for |cFFFFFF105|r% of the shield's remaining strength.",
+    SI_LUIE_SKILL_LIGHTS_CHAMPION =                      "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nGain Major Force and Major Protection for |cFFFFFF5|r seconds every time this effect heals.",
 
     -- Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Direct damage taken from the next Snipe, Scatter Shot, or Poison Arrow increased by |cffffff<<1>>|r% used within |cffffff6|r seconds.",

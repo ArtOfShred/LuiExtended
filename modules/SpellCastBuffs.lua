@@ -1847,7 +1847,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
 
         if changeType == EFFECT_RESULT_FADED then
-            if abilityId == 32958 then return end -- Ignore Shifting Standard
+            if E.EffectGroundDisplay[abilityId] and E.EffectGroundDisplay[abilityId].noRemove then return end -- Ignore some abilities
             local currentTime = GetGameTimeMilliseconds()
             if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
                 for i = 1, 3 do

@@ -90,7 +90,9 @@ T.Generic_Poison_2_Sec              = GetString(SI_LUIE_SKILL_GENERIC_POISON_2_S
 T.Generic_Burn                      = GetString(SI_LUIE_SKILL_GENERIC_BURN_TP)
 T.Generic_Burn_2_Sec                = GetString(SI_LUIE_SKILL_GENERIC_BURN_2_SEC_TP)
 T.Generic_Freeze                    = GetString(SI_LUIE_SKILL_GENERIC_FREEZE_TP)
+T.Generic_Freeze_2_Sec              = GetString(SI_LUIE_SKILL_GENERIC_FREEZE_2_SEC_TP)
 T.Generic_Shock                     = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_TP)
+T.Generic_Shock_2_Sec               = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_2_SEC_TP)
 T.Generic_Oblivion 					= GetString(SI_LUIE_SKILL_GENERIC_OBLIVION_TP)
 T.Generic_Magic                     = GetString(SI_LUIE_SKILL_GENERIC_MAGIC_TP)
 T.Generic_Magic_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_MAGIC_1_SEC_TP)
@@ -407,6 +409,7 @@ T.Generic_Weapon_Spell_Damage_Duration = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP
 
 T.Generic_HoT_05Sec                 = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_05SEC_TP)
 T.Generic_HoT_1Sec                  = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP)
+T.Generic_HoT_1_5_Sec               = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_1_5_SEC_TP)
 T.Generic_HoT_08Sec                 = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_08SEC_TP)
 T.Generic_HoT_2Sec                  = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_2SEC_TP)
 
@@ -592,6 +595,50 @@ T.Skill_Blood_Craze_Heal            = GetString(SI_LUIE_SKILL_BLOOD_CRAZE_HEAL_T
 T.Skill_Blade_Cloak                 = GetString(SI_LUIE_SKILL_BLADE_CLOAK_TP)
 T.Skill_Lacerate                    = GetString(SI_LUIE_SKILL_LACERATE_TP)
 T.Skill_Thrive_in_Chaos             = GetString(SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP)
+
+-- Bow
+T.Skill_Hawk_Eye_Rank_1             = zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 2)
+T.Skill_Hawk_Eye_Rank_2             = zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 5)
+T.Skill_Focused_Aim                 = GetString(SI_LUIE_SKILL_FOCUSED_AIM_TP)
+T.Skill_Volley                      = GetString(SI_LUIE_SKILL_VOLLEY_TP)
+T.Skill_Endless_Hail                = GetString(SI_LUIE_SKILL_ENDLESS_HAIL_TP)
+T.Skill_Draining_Shot               = GetString(SI_LUIE_SKILL_DRAINING_SHOT_TP)
+T.Skill_Acid_Spray                  = GetString(SI_LUIE_SKILL_ACID_SPRAY_TP)
+T.Skill_Bombard                     = GetString(SI_LUIE_SKILL_BOMBARD_TP)
+T.Skill_Poison_Injection            = GetString(SI_LUIE_SKILL_POISON_INJECTION_TP)
+T.Skill_Ballista                    = GetString(SI_LUIE_SKILL_BALLISTA_TP)
+
+-- Destruction Staff
+T.Skill_Heavy_Attack_Lightning      = GetString(SI_LUIE_HEAVY_ATTACK_LIGHTNING_STAFF_TP)
+T.Skill_Wall_of_Elements_Fire       = GetString(SI_LUIE_SKILL_WOE_FIRE_TP)
+T.Skill_Wall_of_Elements_Frost      = GetString(SI_LUIE_SKILL_WOE_FROST_TP)
+T.Skill_Wall_of_Elements_Shock      = GetString(SI_LUIE_SKILL_WOE_SHOCK_TP)
+T.Skill_U_Wall_of_Elements_Fire     = GetString(SI_LUIE_SKILL_UWOE_FIRE_TP)
+T.Skill_U_Wall_of_Elements_Frost    = GetString(SI_LUIE_SKILL_UWOE_FROST_TP)
+T.Skill_U_Wall_of_Elements_Shock    = GetString(SI_LUIE_SKILL_UWOE_SHOCK_TP)
+T.Skill_Flame_Touch                 = GetString(SI_LUIE_SKILL_FLAME_TOUCH_TP)
+T.Skill_Flame_Touch_Alt             = GetString(SI_LUIE_SKILL_FLAME_TOUCH_ALT_TP)
+T.Skill_Shock_Touch                 = GetString(SI_LUIE_SKILL_SHOCK_TOUCH_TP)
+T.Skill_Shock_Touch_Alt             = GetString(SI_LUIE_SKILL_SHOCK_TOUCH_ALT_TP)
+T.Skill_Frost_Touch                 = GetString(SI_LUIE_SKILL_FROST_TOUCH_TP)
+T.Skill_Frost_Touch_Alt             = GetString(SI_LUIE_SKILL_FROST_TOUCH_ALT_TP)
+T.Skill_Frost_Clench                = GetString(SI_LUIE_SKILL_FROST_CLENCH_TP)
+T.Skill_Frost_Clench_Alt            = GetString(SI_LUIE_SKILL_FROST_CLENCH_ALT_TP)
+
+T.Skill_Fire_Storm                  = zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE3))
+T.Skill_Thunder_Storm               = zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE4))
+T.Skill_Ice_Storm                   = zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE6))
+T.Skill_Fiery_Rage                  = zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE3))
+T.Skill_Thunderous_Rage             = GetString(SI_LUIE_SKILL_THUNDEROUS_RAGE_TP)
+T.Skill_Icy_Rage                    = GetString(SI_LUIE_SKILL_ICY_RAGE_TP)
+T.Skill_Eye_of_Flame                = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE3))
+T.Skill_Eye_of_Lightning            = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE4))
+T.Skill_Eye_of_Frost                = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE6))
+
+-- Restoration Staff
+T.Skill_Mutagen                     = GetString(SI_LUIE_SKILL_MUTAGEN)
+T.Skill_Healing_Ward                = GetString(SI_LUIE_SKILL_HEALING_WARD)
+T.Skill_Lights_Champion             = GetString(SI_LUIE_SKILL_LIGHTS_CHAMPION)
 
 --zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
 
