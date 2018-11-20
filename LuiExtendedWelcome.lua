@@ -7,6 +7,11 @@ local windowManager = WINDOW_MANAGER
 -- TODO: Create a basic logo to use when the changelog is displayed - may consider attempting to center it and remove ability to expand box size.
 
 local fillMessages = {
+    "|cFFA5005.7.3|r",
+    "• General - Significantly updated the Russian localization, as well as fixed an error causing RU strings not to load at all. Thanks KiriX!",
+    "• Buffs & Debuffs - Updated tooltips & some auras/icons for all Weapon, Armor, Soul Magic, and Werewolf Skills.",
+    "• Combat Info - Fixed a few abilities that had broken Bar Highlight functionality and did some minor cleanup with this functionality.",
+    "|",
     "|cFFA5005.7.2|r",
     "• General - Fixed typos in the RU localization that was causing UI errors. Thank you Jmopel for fixing this!",
     "• General - Fixed an issue with the hook for the Skill Window to add custom passive/racial icons that prevented Harven's Improved Skills Window from working correctly.",
@@ -146,8 +151,8 @@ function LUIE_WelcomeScreen(menu)
 
         local buffer = luiChangeLog:GetNamedChild("Buffer")
         local slider = luiChangeLog:GetNamedChild("Slider")
-        buffer:SetScrollPosition(65)
-        slider:SetValue(buffer:GetNumHistoryLines() - 65)
+        buffer:SetScrollPosition(70)
+        slider:SetValue(buffer:GetNumHistoryLines() - 70)
 
     end
     -- Set version to current version.

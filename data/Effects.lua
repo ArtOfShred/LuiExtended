@@ -844,7 +844,6 @@ E.IgnoreCastBarStun = {
     [68938] = true, -- Phoenix (of the Phoenix)
 
     -- Quests
-    --[75008] = true, -- Werewolf Transformation (Hircine's Gift)
 
 }
 
