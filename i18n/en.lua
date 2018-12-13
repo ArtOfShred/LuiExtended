@@ -2712,6 +2712,12 @@ local strings = {
     SI_LUIE_SKILL_LYCANTHROPHY_TP =                      "You can transform into a savage Werewolf.\n\nYou take |cFFFFFF25|r% more Poison Damage while transformed into a Werewolf.",
     SI_LUIE_SKILL_BLOOD_MOON_TP =                        "You have bitten another player. You may not do so again for |cFFFFFF7|r days.",
 
+    SI_LUIE_SKILL_NOXIPHILIC_SANGUIVORIA_TP =            "You have been bitten by a Vampire and contracted Noxiphilic Sanguivoria.",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE1_TP =                  "• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed\n• Using Vampire abilities advances your vampirism stage",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE2_TP =                  "• Reduce Health Recovery by |cFFFFFF25|r%\n• Increase Fire Damage taken by |cFFFFFF15|r%\n• Vampirism abilities cost |cFFFFFF7|r% less and advance your stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed• Using Vampire abilities advances your vampirism stage",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE3_TP =                  "• Reduce Health Recovery by |cFFFFFF50|r%\n• Increase Fire Damage taken by |cFFFFFF20|r%\n• Vampirism abilities cost |cFFFFFF14|r% less and advance your stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed• Using Vampire abilities advances your vampirism stage",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE4_TP =                  "• Reduce Health Recovery by |cFFFFFF75|r%\n• Increase Fire Damage taken by |cFFFFFF25|r%\n• Vampirism abilities cost |cFFFFFF21|r% less and advance your stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed• Using Vampire abilities advances your vampirism stage",
+
     SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP =               "Immune to snare and immobilization effects for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_DODGE_FATIGUE_TP =                     "Consecutive roll dodging costs increased stamina for the next |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_HIDDEN_TP =                            "Crouched and concealed from sight.\n\nDrains Stamina while moving.",

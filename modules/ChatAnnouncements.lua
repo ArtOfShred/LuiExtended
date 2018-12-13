@@ -3494,7 +3494,7 @@ function CA.ItemFilter(itemType, itemId, itemLink, groupLoot)
     end
 end
 
-function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot)
+function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, delayValue)
     if filter then
         -- If filter returns false then bail out right now, we're not displaying this item.
         if not CA.ItemFilter(itemType, itemId, itemLink, false) then return end
@@ -3560,6 +3560,10 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
 
     local itemString = strfmt("%s%s%s%s%s%s", formattedIcon, itemLink, formattedQuantity, formattedArmorType, formattedTrait, formattedStyle)
 
+    -- Set delay to 25 or 50 ms depending on source
+    local callDelay
+    callDelay = delayValue == 25 and 25 or 50
+
     -- Printer function, seperate handling for listed entires (from crafting) or simple function that sends a message over to the printer.
     if receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 1 or gainOrLoss == 3) and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgradeFail then
         local itemString2 = itemString
@@ -3575,7 +3579,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         if g_queuedMessagesCounter -1 == g_itemCounterGain then g_queuedMessagesCounter = g_itemCounterGain end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         g_queuedMessages[g_itemCounterGain] = { message=g_itemStringGain, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
-        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", delayValue, CA.PrintQueuedMessages )
     elseif receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 2 or gainOrLoss == 4) and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgradeFail then
         local itemString2 = itemString
         if g_itemStringLoss ~= "" then
@@ -3588,12 +3592,12 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         if g_queuedMessagesCounter -1 == g_itemCounterLoss then g_queuedMessagesCounter = g_itemCounterLoss end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         g_queuedMessages[g_itemCounterLoss] = { message=g_itemStringLoss, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
-        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", delayValue, CA.PrintQueuedMessages )
     else
         local totalString = formattedTotal
         g_queuedMessages[g_queuedMessagesCounter] = { message=itemString, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString=totalString, groupLoot=groupLoot }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", delayValue, CA.PrintQueuedMessages )
     end
 end
 
@@ -3705,6 +3709,29 @@ function CA.CraftModeOverrides()
     }
 end
 
+local delayedItemPool = { } -- Store items we are counting up when the player loots multiple bodies at once to print combined counts for any duplicate items
+
+function CA.ItemCounterDelay(icon, stack, itemType, itemId, itemLink)
+
+    if delayedItemPool[itemId] then
+        stack = delayedItemPool[itemId].stack + stack -- Add stack count first, only if item already exists.
+    end
+    delayedItemPool[itemId] = { icon = icon, itemType = itemType, itemLink = itemLink, stack = stack } -- Save relevant parameters
+
+    -- Pass along all values to SendDelayedItems()
+    eventManager:UnregisterForUpdate(moduleName .. "SendDelayedItems")
+    eventManager:RegisterForUpdate(moduleName .. "SendDelayedItems", 25, CA.SendDelayedItems)
+
+end
+
+function CA.SendDelayedItems()
+    for id, data in pairs(delayedItemPool) do
+        if id then
+            CA.ItemPrinter(data.icon, data.stack, data.itemType, id, data.itemLink, "", "", CA.SV.Currency.CurrencyContextColor and 1 or 3, true, nil, 25)
+        end
+    end
+    delayedItemPool = { }
+end
 
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     -- End right now if this is any other reason (durability loss, etc)
@@ -3832,7 +3859,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 logPrefix = ""
             end
             if not g_weAreInAStore and CA.SV.Inventory.Loot and isNewItem and not g_inTrade and not g_inMail then
-                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
+                CA.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink)
             end
             if g_inMail and isNewItem then
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
@@ -3865,7 +3892,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                     logPrefix = ""
                 end
                 if not g_weAreInAStore and CA.SV.Inventory.Loot and isNewItem and not g_inTrade and not g_inMail then
-                    CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
+                    CA.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink)
                 end
                 if g_inMail and isNewItem then
                     CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
@@ -3915,7 +3942,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         local itemQuality = GetItemLinkQuality(itemLink)
 
         if not g_weAreInAStore and CA.SV.Inventory.Loot and isNewItem and not g_inTrade and not g_inMail then
-            CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
+            CA.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink)
         end
         if g_inMail and isNewItem then
             CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
@@ -7794,11 +7821,11 @@ function CA.HookFunction()
         return true
     end
 
-	local savedEndingPoints = 0 -- We reset this value after the throttled function sends info to the chat printer 
+	local savedEndingPoints = 0 -- We reset this value after the throttled function sends info to the chat printer
 	local savedPointDelta = 0 -- We reset this value after the throttled function sends info to the chat printer
-	
+
 	local function ChampionPointGainedPrinter()
-	
+
 		-- adding one so that we are starting from the first gained point instead of the starting champion points
 		local startingPoints = savedEndingPoints - savedPointDelta + 1
 		local championPointsByType = { 0, 0, 0 }
@@ -7815,7 +7842,7 @@ function CA.HookFunction()
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
         end
-		
+
 		local secondLine = ""
 		if CA.SV.XP.ExperienceLevelUpCA or CA.SV.XP.ExperienceLevelUpCSA then
             for pointType,amount in pairs(championPointsByType) do
@@ -7839,7 +7866,7 @@ function CA.HookFunction()
                 end
             end
         end
-		
+
 		if CA.SV.XP.ExperienceLevelUpCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.CHAMPION_POINT_GAINED)
             messageParams:SetText(strformat(SI_CHAMPION_POINT_EARNED, savedPointDelta), secondLine)
@@ -7856,12 +7883,12 @@ function CA.HookFunction()
         if not CA.SV.XP.ExperienceLevelUpCSA then
             PlaySound(SOUNDS.CHAMPION_POINT_GAINED)
         end
-		
+
 		savedEndingPoints = 0
 		savedPointDelta = 0
-		
+
 		eventManager:UnregisterForUpdate(moduleName .. "ChampionPointThrottle")
-	
+
 	end
 
     local function ChampionPointGainedHook(pointDelta)
@@ -7869,10 +7896,10 @@ function CA.HookFunction()
         -- Print throttled XP value
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
-		
+
 		savedEndingPoints = GetPlayerChampionPointsEarned()
 		savedPointDelta = savedPointDelta + pointDelta
-		
+
 		eventManager:UnregisterForUpdate(moduleName .. "ChampionPointThrottle")
 		eventManager:RegisterForUpdate(moduleName .. "ChampionPointThrottle", 25, ChampionPointGainedPrinter)
 
