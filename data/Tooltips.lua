@@ -655,6 +655,15 @@ T.Skill_Soul_Summons                = GetString(SI_LUIE_SKILL_SOUL_SUMMONS_TP)
 T.Skill_Soul_Trap                   = GetString(SI_LUIE_SKILL_SOUL_TRAP)
 T.Skill_Consuming_Trap              = GetString(SI_LUIE_SKILL_CONSUMING_TRAP)
 
+-- Vampire
+T.Skill_Noxiphilic_Sanguivoria      = GetString(SI_LUIE_SKILL_NOXIPHILIC_SANGUIVORIA_TP)
+T.Skill_Vampirism_Stage_1           = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE1_TP)
+T.Skill_Vampirism_Stage_2           = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE2_TP)
+T.Skill_Vampirism_Stage_3           = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE3_TP)
+T.Skill_Vampirism_Stage_4           = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE4_TP)
+T.Skill_Feed                        = GetString(SI_LUIE_SKILL_FEED_TP)
+T.Skill_Blood_Ritual                = GetString(SI_LUIE_SKILL_BLOOD_RITUAL_TP)
+
 -- Werewolf
 T.Skill_Sanies_Lupinus              = GetString(SI_LUIE_SKILL_SANIES_LUPINUS_TP)
 T.Skill_Lycanthrophy                = GetString(SI_LUIE_SKILL_LYCANTHROPHY_TP)

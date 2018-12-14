@@ -397,6 +397,7 @@ E.CastBreakingStatus = {
 -- List of abilityId's that should immediately cancel the Cast Bar if detected
 E.CastBreakingActions = {
 
+    [20299] = true, -- Sneak
     [28549] = true, -- Roll Dodge
     [14890] = true, -- Block
     [20309] = true, -- Hidden
@@ -460,6 +461,11 @@ E.CastChannelOverride = {
     [90935] = true, -- Phoenix
 
     -- Quest
+
+    -- Vampire
+    [39507] = true, -- VampInitStun_Profane (Scion of the Blood Matron)
+
+    -- MSQ
     [39367] = true, -- Altar Use (Shadow of Sancre Tor)
     [36421] = true, -- Drink with Lyris (Council of the Five Companions)
     [35192] = true, -- Q4620 Use Lodestone (Cast Adrift)
@@ -561,6 +567,11 @@ E.CastDurationFix = {
     [90935] = 3000, -- Phoenix
 
     -- Quest
+
+    -- Vampire
+    [39507] = 23000, -- VampInitStun_Profane (Scion of the Blood Matron)
+
+    -- MSQ
     [39367] = 10000, -- Altar Use (Shadow of Sancre Tor)
     [36421] = 3000, -- Drink with Lyris (Council of the Five Companions)
     [34701] = 1950, -- Q4621 Destory Horn (The Tempest Unleashed)
@@ -756,6 +767,11 @@ E.IsCast = {
     [4197] = true, -- Recovering (NPC Duel)
 
     -- Quest
+
+    -- Vampire
+    [39507] = true, -- VampInitStun_Profane (Scion of the Blood Matron)
+
+    -- MSQ
     [39367] = true, -- Altar Use (Shadow of Sancre Tor)
     [37827] = true, -- Stendarr's Protection (Shadow of Sancre Tor)
     [36421] = true, -- Drink with Lyris (Council of the Five Companions)
@@ -846,6 +862,21 @@ E.IgnoreCastBarStun = {
     -- Quests
 
 }
+
+E.CastBreakOnRemoveEffect = {
+
+    [33208] = true, -- Devour (Werewolf)
+    [33152] = true, -- Feed (Vampire)
+    [32986] = true, -- Mist Form (Vampire)
+
+    [39692] = true, -- Feed Quest
+
+}
+
+--[[
+E.CastBreakOnRemoveEvent = {
+}
+]]--
 
 -- Convert a cast time ability to channeled
 E.CastChannelConvert = {
@@ -5206,24 +5237,24 @@ E.EffectOverride = {
     -- VAMPIRE PASSIVES --------------------------------------------
     ----------------------------------------------------------------
 
-    [39472] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = A.Passive_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
-    [40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = A.Passive_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
-    [35771] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_1.dds', stack = 1 }, -- Stage 1 Vampirism (Vampire General)
-    [35776] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_2.dds', stack = 2 }, -- Stage 2 Vampirism (Vampire General)
-    [35783] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_3.dds', stack = 3 }, -- Stage 3 Vampirism (Vampire General)
-    [35792] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', stack = 4 }, -- Stage 4 Vampirism (Vampire General)
-    [33152] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed
+    [39472] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = A.Passive_Noxiphilic_Sanguivoria, tooltip = T.Skill_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
+    [40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = A.Passive_Noxiphilic_Sanguivoria, tooltip = T.Skill_Noxiphilic_Sanguivoria }, -- Vampirism (Blood Ritual)
+    [35771] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_1.dds', stack = 1, tooltip = T.Skill_Vampirism_Stage_1 }, -- Stage 1 Vampirism (Vampire General)
+    [35776] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_2.dds', stack = 2, tooltip = T.Skill_Vampirism_Stage_2 }, -- Stage 2 Vampirism (Vampire General)
+    [35783] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_3.dds', stack = 3, tooltip = T.Skill_Vampirism_Stage_3 }, -- Stage 3 Vampirism (Vampire General)
+    [35792] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', stack = 4, tooltip = T.Skill_Vampirism_Stage_4 }, -- Stage 4 Vampirism (Vampire General)
+    [33152] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', tooltip = T.Skill_Feed }, -- Feed
     [33177] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed
     [33175] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', unbreakable = 1 }, -- Feed (Vampire - Feed)
-    [33182] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Savage_Feeding }, -- Uber Attack (Savage Feeding - Rank 1)
-    [33183] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Savage Feeding - Rank 1)
-    [46047] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Savage_Feeding }, -- Uber Attack (Savage Feeding - Rank 2)
-    [46046] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Savage Feeding - Rank 2)
-    [40349] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, duration = .95 }, -- Feed (Blood Ritual - Rank 1)
+    [33182] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Savage_Feeding, tooltip = T.Generic_Stun }, -- Uber Attack (Savage Feeding - Rank 1)
+    [33183] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance, tooltip = A.Passive_Savage_Feeding }, -- Off-Balance Self (Savage Feeding - Rank 1)
+    [46047] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Savage_Feeding, tooltip = T.Generic_Stun }, -- Uber Attack (Savage Feeding - Rank 2)
+    [46046] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance, tooltip = A.Passive_Savage_Feeding }, -- Off-Balance Self (Savage Feeding - Rank 2)
+    [40349] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, duration = .95, tooltip = T.Generic_Stun }, -- Feed (Blood Ritual - Rank 1)
     [40351] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed (Blood Ritual - Rank 1)
     [40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', unbreakable = 1 }, -- Feed (Blood Ritual - Rank 1)
-    [40353] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed }, -- Uber Attack (Blood Ritual - Rank 1)
-    [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Blood_Ritual, A.Set_Cooldown) }, -- Fed on ally (Blood Ritual)
+    [40353] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, tooltip = T.Generic_Stun }, -- Uber Attack (Blood Ritual - Rank 1)
+    [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Blood_Ritual, A.Set_Cooldown), tooltip = T.Skill_Blood_Ritual }, -- Fed on ally (Blood Ritual)
 
     ----------------------------------------------------------------
     -- VAMPIRE QUEST ---------------------------------------------
@@ -5231,12 +5262,13 @@ E.EffectOverride = {
 
     [42821] = { hide = true }, -- VampInt_LamaeFirstFeed
     [44676] = { hide = true }, -- SELF SNARE
+    [39507] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_profane_symbol.dds', name = A.Skill_Profane_Symbol }, -- VampInitStun_Profane
     [44222] = { hide = true }, -- VampireInitiation_Lamae
     [39728] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed }, -- VampInit_TheaterFeed
     [39509] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', name = A.Skill_Vampirism }, -- VampInit_PC Becomes a Vampire
     [39422] = { hide = true }, -- Mist Form
     [56684] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike
-    [39692] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = -5.2 }, -- Feed
+    [39692] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = -5.2, tooltip = T.Skill_Feed }, -- Feed
     [39698] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed
     [39693] = { hide = true }, -- Feed
 

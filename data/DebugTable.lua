@@ -2274,7 +2274,7 @@ debugAuras = {
             [41952] = true, -- Generic Fear Snare
             [55080] = true, -- Pet Hidden
             [28301] = true, -- Crowd Control Immunity
-            --[38117] = true, -- Crowd Control Immunity
+            [38117] = true, -- Crowd Control Immunity
 
             -- TAUNT EFFECTS
             [38254] = true, -- Taunt

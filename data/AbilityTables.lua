@@ -717,6 +717,7 @@ A.Skill_Unstoppable                 = 63118
 
 A.Skill_Feed                        = 33152
 A.Skill_Vampirism                   = 39472
+A.Skill_Profane_Symbol              = GetString(SI_LUIE_SKILL_PROFANE_SYMBOL)
 
 -- ---------------------------------------------------
 -- WEREWOLF SKILLS -----------------------------------

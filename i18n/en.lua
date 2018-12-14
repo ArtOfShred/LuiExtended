@@ -2713,10 +2713,14 @@ local strings = {
     SI_LUIE_SKILL_BLOOD_MOON_TP =                        "You have bitten another player. You may not do so again for |cFFFFFF7|r days.",
 
     SI_LUIE_SKILL_NOXIPHILIC_SANGUIVORIA_TP =            "You have been bitten by a Vampire and contracted Noxiphilic Sanguivoria.",
-    SI_LUIE_SKILL_VAMPIRISM_STAGE1_TP =                  "• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed\n• Using Vampire abilities advances your vampirism stage",
-    SI_LUIE_SKILL_VAMPIRISM_STAGE2_TP =                  "• Reduce Health Recovery by |cFFFFFF25|r%\n• Increase Fire Damage taken by |cFFFFFF15|r%\n• Vampirism abilities cost |cFFFFFF7|r% less and advance your stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed• Using Vampire abilities advances your vampirism stage",
-    SI_LUIE_SKILL_VAMPIRISM_STAGE3_TP =                  "• Reduce Health Recovery by |cFFFFFF50|r%\n• Increase Fire Damage taken by |cFFFFFF20|r%\n• Vampirism abilities cost |cFFFFFF14|r% less and advance your stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed• Using Vampire abilities advances your vampirism stage",
-    SI_LUIE_SKILL_VAMPIRISM_STAGE4_TP =                  "• Reduce Health Recovery by |cFFFFFF75|r%\n• Increase Fire Damage taken by |cFFFFFF25|r%\n• Vampirism abilities cost |cFFFFFF21|r% less and advance your stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed• Using Vampire abilities advances your vampirism stage",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE1_TP =                  "• Using Vampire abilities advances your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE2_TP =                  "• Reduce Health Recovery by |cFFFFFF25|r%\n• Increase Fire Damage taken by |cFFFFFF15|r%\n• Vampire abilities cost |cFFFFFF7|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE3_TP =                  "• Reduce Health Recovery by |cFFFFFF50|r%\n• Increase Fire Damage taken by |cFFFFFF20|r%\n• Vampire abilities cost |cFFFFFF14|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE4_TP =                  "• Reduce Health Recovery by |cFFFFFF75|r%\n• Increase Fire Damage taken by |cFFFFFF25|r%\n• Vampire abilities cost |cFFFFFF21|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
+
+    SI_LUIE_SKILL_FEED_TP =                              "A Vampire is draining your life force, healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds and reducing their vampirism Stage when the effect ends.\n\nStunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.",
+    SI_LUIE_SKILL_BLOOD_RITUAL_TP =                      "You have fed on another player. You may not do so again for |cFFFFFF7|r days.",
+    SI_LUIE_SKILL_PROFANE_SYMBOL =                       "Profane Symbol",
 
     SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP =               "Immune to snare and immobilization effects for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_DODGE_FATIGUE_TP =                     "Consecutive roll dodging costs increased stamina for the next |cFFFFFF<<1>>|r <<1[second/seconds]>>.",

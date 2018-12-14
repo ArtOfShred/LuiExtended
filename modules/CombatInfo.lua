@@ -402,6 +402,13 @@ function CI.RegisterCombatInfo()
         end
         eventManager:RegisterForEvent(moduleName, EVENT_START_SOUL_GEM_RESURRECTION, CI.SoulGemResurrectionStart)
         eventManager:RegisterForEvent(moduleName, EVENT_END_SOUL_GEM_RESURRECTION, CI.SoulGemResurrectionEnd)
+        --[[counter = 0
+        for id, _ in pairs (E.CastBreakOnRemoveEvent) do
+            counter = counter + 1
+            local eventName = (moduleName.. "LUIE_CI_CombatEventCastBreak" .. counter)
+            eventManager:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CI.OnCombatEventSpecialFilters )
+            eventManager:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_ABILITY_ID, id, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_EFFECT_FADED)
+        end]]--
     end
     if CI.SV.ShowTriggered or CI.SV.ShowToggled or CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
         eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED, CI.OnSlotsFullUpdate)
@@ -725,9 +732,11 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         return
     end
 
-    if abilityId == 33208 and castByPlayer == COMBAT_UNIT_TYPE_PLAYER and changeType == EFFECT_RESULT_FADED then
+    if E.CastBreakOnRemoveEffect[abilityId] and castByPlayer == COMBAT_UNIT_TYPE_PLAYER and changeType == EFFECT_RESULT_FADED then
         CI.StopCastBar()
-        return
+        if abilityId == 33208 then -- Devour (Werewolf)
+            return
+        end
     end
 
     if unitTag == "player" then
@@ -1121,6 +1130,7 @@ function CI.OnCombatEventBreakCast( eventCode, result, isError, abilityName, abi
     if not E.IsCast[abilityId] then
         CI.StopCastBar()
     end
+
 end
 
 -- Listens to EVENT_COMBAT_EVENT
@@ -1227,7 +1237,18 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
             end
         end
 
+        -- Fix to lower the duration of the next cast of Profane Symbol quest ability for Scion of the Blood Matron (Vampire)
+        if abilityId == 39507 then
+            E.CastDurationFix[39507] = 19500
+        end
+
 end
+
+--[[
+function CI.OnCombatEventSpecialFilters( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
+    CI.StopCastBar()
+end
+]]--
 
 function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
     -- If the source/target isn't the player then bail out now.
