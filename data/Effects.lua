@@ -869,7 +869,8 @@ E.CastBreakOnRemoveEffect = {
     [33152] = true, -- Feed (Vampire)
     [32986] = true, -- Mist Form (Vampire)
 
-    [39692] = true, -- Feed Quest
+    -- Quests
+    [39692] = true, -- Feed (Scion of the Blood Matron)
 
 }
 
