@@ -718,6 +718,8 @@ A.Skill_Unstoppable                 = 63118
 A.Skill_Feed                        = 33152
 A.Skill_Vampirism                   = 39472
 A.Skill_Profane_Symbol              = GetString(SI_LUIE_SKILL_PROFANE_SYMBOL)
+A.Skill_Accelerating_Drain          = 38956
+A.Skill_Elusive_Mist                = 38963
 
 -- ---------------------------------------------------
 -- WEREWOLF SKILLS -----------------------------------
@@ -741,8 +743,15 @@ A.Skill_Remove                      = 31262
 
 -- Dark Brotherhood
 A.Skill_Blade_of_Woe                = 78219
+A.Skill_Padomaic_Sprint             = 77397
 
 -- Fighters Guild
+A.Skill_Circle_of_Protection        = 35737
+A.Skill_Turn_Undead                 = 40181
+A.Skill_Ring_of_Preservation        = 40169
+A.Skill_Expert_Hunter               = 35762
+A.Skill_Evil_Hunter                 = 40194
+A.Skill_Camouflaged_Hunter          = 40195
 A.Skill_Revealed                    = 11717
 A.Skill_Marked                      = 103943
 A.Skill_Trap_Beast                  = 35750

@@ -397,7 +397,7 @@ E.CastBreakingStatus = {
 -- List of abilityId's that should immediately cancel the Cast Bar if detected
 E.CastBreakingActions = {
 
-    [20299] = true, -- Sneak
+    --[20299] = true, -- Sneak -- Some effects don't break sneak so probably best not to add this.
     [28549] = true, -- Roll Dodge
     [14890] = true, -- Block
     [20309] = true, -- Hidden
@@ -867,7 +867,13 @@ E.CastBreakOnRemoveEffect = {
 
     [33208] = true, -- Devour (Werewolf)
     [33152] = true, -- Feed (Vampire)
+    [32893] = true, -- Drain Essence
+    [38949] = true, -- Invigorating Drain
+    [38956] = true, -- Accelerating Drain
     [32986] = true, -- Mist Form (Vampire)
+    [38963] = true, -- Elusive Mist
+    [38965] = true, -- Baleful Mist
+
 
     -- Quests
     [39692] = true, -- Feed (Scion of the Blood Matron)
@@ -1178,13 +1184,7 @@ E.EffectCreateSkillAura = {
     [63120] = { consolidate = true, abilityId = 39197 }, -- Major Ward --> Unstoppable
 
     -- Fighters Guild
-    [80271] = { consolidate = true, removeOnEnd = true, abilityId = 35737  }, -- Minor Endurance --> Circle of Protection
-    [35739] = { consolidate = true, removeOnEnd = true, abilityId = 35737 }, -- Minor Protection --> Circle of Protection
-    [80276] = { consolidate = true, removeOnEnd = true, abilityId = 40181 }, -- Minor Endurance --> Turn Undead
-    [40185] = { consolidate = true, removeOnEnd = true, abilityId = 40181 }, -- Minor Protection --> Turn Undead
-    [80284] = { consolidate = true, removeOnEnd = true, abilityId = 40169 }, -- Minor Endurance --> Ring of Preservation
-    [40171] = { consolidate = true, removeOnEnd = true, abilityId = 40169 }, -- Minor Protection --> Ring of Preservation
-    [64509] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 35762 }, -- Major Savagery --> Expert Hunter
+    [64509] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999004 }, -- Major Savagery --> Expert Hunter
 
     -- Mages Guild
     [77928] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 30920 }, -- Major Prophecy --> Magelight
@@ -1587,9 +1587,9 @@ E.BarHighlightOverride = {
     -- Vampire ----------------
     ---------------------------
 
-    [32893] = { newId = 68883 }, -- Drain Essence
-    [38949] = { newId = 68892 }, -- Invigorating Drain
-    [38956] = { newId = 81493 }, -- Accelerating Drain
+    [32893] = { newId = 68883 }, -- Drain Essence -- TODO: For some reason these won't show up unless the ID is switched, they don't get added to the table at all
+    [38949] = { newId = 68892 }, -- Invigorating Drain -- TODO: For some reason these won't show up unless the ID is switched, they don't get added to the table at all
+    [38956] = { newId = 81493 }, -- Accelerating Drain -- TODO: For some reason these won't show up unless the ID is switched, they don't get added to the table at all
     [88158] = { newId = 38932 }, -- Materialize --> Clouding Swarm
 
     ---------------------------
@@ -5258,6 +5258,30 @@ E.EffectOverride = {
     [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Blood_Ritual, A.Set_Cooldown), tooltip = T.Skill_Blood_Ritual }, -- Fed on ally (Blood Ritual)
 
     ----------------------------------------------------------------
+    -- VAMPIRE ACTIVES --------------------------------------------
+    ----------------------------------------------------------------
+
+    -- Drain Essence / Invigorating Drain / Accelerating Drain
+    [32893] = { tooltip = T.Skill_Drain_Essence }, -- Drain Essence
+    [68883] = { tooltip = T.Generic_Stun }, -- Drain Essence
+    [38949] = { tooltip = T.Skill_Invigorating_Drain }, -- Invigorating Drain
+    [68892] = { tooltip = T.Generic_Stun }, -- Invigorating Drain
+    [38956] = { tooltip = T.Skill_Drain_Essence }, -- Accelerating Drain
+    [81493] = { tooltip = T.Generic_Stun }, -- Accelerating Drain
+    [63558] = { tooltip = A.Skill_Accelerating_Drain }, -- Minor Expedition (Accelerating Drain)
+
+    -- Mist Form / Elusive Mist / Baleful Mist
+    [32986] = { tooltip = T.Skill_Mist_Form }, -- Mist Form
+    [38963] = { tooltip = T.Skill_Mist_Form }, -- Elusive Mist
+    [38967] = { tooltip = A.Skill_Elusive_Mist }, -- Major Expedition (Elusive Mist)
+    [38965] = { tooltip = T.Skill_Baleful_Mist }, -- Baleful Mist
+
+    -- Bat Swarm / Clouding Swarm / Devouring Swarm
+    [32624] = { tooltip = T.Skill_Bat_Swarm }, -- Bat Swarm
+    [38932] = { tooltip = T.Skill_Bat_Swarm }, -- Clouding Swarm
+    [38931] = { tooltip = T.Skill_Devouring_Swarm }, -- Devouring Swarm
+
+    ----------------------------------------------------------------
     -- VAMPIRE QUEST ---------------------------------------------
     ----------------------------------------------------------------
 
@@ -5349,14 +5373,14 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     [76325] = { icon = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds' }, -- Blade of Woe
-    [79623] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 1) (Blade of Woe Kill)
-    [79624] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 2) (Blade of Woe Kill)
-    [79625] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 3) (Blade of Woe Kill)
-    [79877] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 4) (Blade of Woe Kill)
-    [80392] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 1) (Normal Kill)
-    [80394] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 2) (Normal Kill)
-    [80396] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 3) (Normal Kill)
-    [80398] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds' }, -- Major Expedition (Padomaic Sprint - Rank 4) (Normal Kill)
+    [79623] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', tooltip = A.Skill_Padomaic_Sprint }, -- Major Expedition (Padomaic Sprint - Rank 1) (Blade of Woe Kill)
+    [79624] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', tooltip = A.Skill_Padomaic_Sprint }, -- Major Expedition (Padomaic Sprint - Rank 2) (Blade of Woe Kill)
+    [79625] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', tooltip = A.Skill_Padomaic_Sprint }, -- Major Expedition (Padomaic Sprint - Rank 3) (Blade of Woe Kill)
+    [79877] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', tooltip = A.Skill_Padomaic_Sprint }, -- Major Expedition (Padomaic Sprint - Rank 4) (Blade of Woe Kill)
+    [80392] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', tooltip = A.Skill_Padomaic_Sprint }, -- Major Expedition (Padomaic Sprint - Rank 1) (Normal Kill)
+    [80394] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', tooltip = A.Skill_Padomaic_Sprint }, -- Major Expedition (Padomaic Sprint - Rank 2) (Normal Kill)
+    [80396] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', tooltip = A.Skill_Padomaic_Sprint }, -- Major Expedition (Padomaic Sprint - Rank 3) (Normal Kill)
+    [80398] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', tooltip = A.Skill_Padomaic_Sprint }, -- Major Expedition (Padomaic Sprint - Rank 4) (Normal Kill)
 
 
     ----------------------------------------------------------------
@@ -5380,22 +5404,56 @@ E.EffectOverride = {
     -- FIGHTERS GUILD ACTIVE ABILITIES -----------------------------
     ----------------------------------------------------------------
 
-    [40340] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds' }, -- Silver Leash (Silver Leash - Rank 1)
+    -- Silver Bolts / Silver Shards / Silver Leash
+    [35736] = { icon = 'esoui/art/icons/ability_fightersguild_003.dds', tooltip = T.Generic_Snare_40 }, -- Silver Bolts (Silver Bolts - Rank 1)
+    [40302] = { icon = 'esoui/art/icons/ability_fightersguild_003_a.dds', tooltip = T.Generic_Snare_40 }, -- Silver Shards (Silver Shards - Rank 1)
+    [40340] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds', tooltip = T.Generic_Snare_40 }, -- Silver Leash (Silver Leash - Rank 1)
     [109354] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds' }, -- Silver Leash (Silver Leash - Rank 1)
-    [80271] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Circle of Protection - Rank 1)
-    [35739] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Circle of Protection - Rank 1)
-    [80276] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Turn Undead - Rank 1)
-    [40185] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Turn Undead - Rank 1)
-    [80284] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Ring of Preservation - Rank 1)
-    [40171] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Ring of Preservation - Rank 1)
-    [64509] = { consolidateExtra = true }, -- Major Savagery
-    [80307] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Expert Hunter (Expert Hunter)
-    [80381] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Evil Hunter (Evil Hunter)
-    [80338] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Camouflaged Hunter (Camouflaged Hunter)
-    [35753] = { hideReduce = true }, -- Trap Beast (Trap Beast - Rank 1)
-    [40384] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40391] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40374] = { hideReduce = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+
+    -- Circle of Protection / Turn Undead / Ring of Preservation
+    [35737] = { tooltip = T.Skill_Circle_of_Protection }, -- Circle of Protection
+    [80271] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Circle_of_Protection }, -- Minor Endurance (Circle of Protection - Rank 1)
+    [35739] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Circle_of_Protection }, -- Minor Protection (Circle of Protection - Rank 1)
+    [40181] = { tooltip = T.Skill_Circle_of_Protection }, -- Turn Undead
+    [80276] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Turn_Undead }, -- Minor Endurance (Turn Undead - Rank 1)
+    [40185] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Turn_Undead }, -- Minor Protection (Turn Undead - Rank 1)
+    [40187] = { tooltip = T.Generic_Fear }, -- Turn Undead (Turn Undead)
+    [40169] = { tooltip = T.Skill_Ring_of_Preservation }, -- Ring of Preservation
+    [80284] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Ring_of_Preservation }, -- Minor Endurance (Ring of Preservation - Rank 1)
+    [40171] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Ring_of_Preservation }, -- Minor Protection (Ring of Preservation - Rank 1)
+
+    -- Expert Hunter / Evil Hunter / Camouflaged Hunter
+    [64509] = { consolidateExtra = true, tooltip = A.Skill_Expert_Hunter }, -- Major Savagery
+    [999004] = { name = A.Skill_Expert_Hunter, icon = 'esoui/art/icons/ability_fightersguild_002.dds', tooltip = T.Skill_Expert_Hunter_Passive }, -- Major Savagery fake aura for Expert Hunter
+    [35762] = { tooltip = T.Skill_Expert_Hunter }, -- Expert Hunter (Expert Hunter)
+    [80307] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed, tooltip = A.Skill_Expert_Hunter }, -- Expert Hunter (Expert Hunter)
+    [40194] = { tooltip = T.Skill_Evil_Hunter }, -- Evil Hunter (Evil Hunter)
+    [80381] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed, tooltip = A.Skill_Evil_Hunter }, -- Evil Hunter (Evil Hunter)
+    [40195] = { tooltip = T.Skill_Expert_Hunter}, -- Camouflaged Hunter (Camouflaged Hunter)
+    [80338] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed, tooltip = A.Skill_Camouflaged_Hunter }, -- Camouflaged Hunter (Camouflaged Hunter)
+    [80471] = { tooltip = A.Skill_Camouflaged_Hunter }, -- Minor Berserk (Camouflaged Hunter)
+
+    -- Trap Beast / Rearming Trap / Lightweight Beast Trap
+    [35750] = { tooltip = T.Skill_Trap_Beast }, -- Trap Beast (Trap Beast)
+    [35756] = { tooltip = T.Skill_Trap_Beast_Debuff }, -- Trap Beast (Trap Beast)
+    [35753] = { hideReduce = true, tooltip = T.Skill_Trap_Beast_Debuff }, -- Trap Beast (Trap Beast - Rank 1)
+    [68595] = { tooltip = A.Skill_Trap_Beast }, -- Minor Force (Trap Beast)
+    [40382] = { tooltip = T.Skill_Rearming_Trap }, -- Rearming Trap (Rearming Trap)
+    [40388] = { tooltip = T.Skill_Rearming_Trap }, -- Rearming Trap (Rearming Trap)
+    [40385] = { tooltip = T.Skill_Trap_Beast_Debuff }, -- Rearming Trap (Rearming Trap)
+    [40384] = { hideReduce = true, tooltip = T.Skill_Trap_Beast_Debuff }, -- Rearming Trap (Rearming Trap - Rank 1)
+    [40391] = { hideReduce = true, tooltip = T.Skill_Trap_Beast_Debuff }, -- Rearming Trap (Rearming Trap - Rank 1)
+    [68632] = { tooltip = A.Skill_Rearming_Trap }, -- Minor Force (Rearming Trap)
+    [40372] = { tooltip = T.Skill_Trap_Beast }, -- Lightweight Beast Trap (Lightweight Beast Trap)
+    [40375] = { tooltip = T.Skill_Trap_Beast_Debuff }, -- Lightweight Beast Trap (Lightweight Beast Trap)
+    [40374] = { hideReduce = true, tooltip = T.Skill_Trap_Beast_Debuff }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+    [68628] = { tooltip = A.Skill_Lightweight_Beast_Trap }, -- Minor Force (Lightweight Beast Trap)
+
+    -- Dawnbreaker / Flawless Dawnbreaker / Dawnbreaker of Smiting
+    [62305] = { tooltip = T.Generic_Bleed_2_Sec }, -- Dawnbreaker
+    [62310] = { tooltip = T.Generic_Bleed_2_Sec }, -- Flawless Dawnbreaker
+    [40160] = { tooltip = T.Skill_Dawnbreaker_of_Smiting, hideReduce = true }, -- Dawnbreaker of Smiting
+    [62314] = { tooltip = T.Skill_Dawnbreaker_of_Smiting }, -- Dawnbreaker of Smiting
 
     ----------------------------------------------------------------
     -- MAGES GUILD PASSIVES ----------------------------------------

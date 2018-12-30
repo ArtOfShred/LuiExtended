@@ -1875,6 +1875,13 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             end
         elseif changeType == EFFECT_RESULT_GAINED then
 
+            -- Special condition to remove 2nd Rearming Trap aura if it is recast before the 2nd trap triggers
+            if abilityId == 40382 then
+                g_effectsList.ground[40388] = nil
+                g_effectsList.promb_ground[40388] = nil
+                g_effectsList.promd_ground[40388] = nil
+            end
+
             local currentTime = GetGameTimeMilliseconds()
             g_protectAbilityRemoval[abilityId] = currentTime + 150
 

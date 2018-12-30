@@ -664,6 +664,13 @@ T.Skill_Vampirism_Stage_4           = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE4_T
 T.Skill_Feed                        = GetString(SI_LUIE_SKILL_FEED_TP)
 T.Skill_Blood_Ritual                = GetString(SI_LUIE_SKILL_BLOOD_RITUAL_TP)
 
+T.Skill_Drain_Essence               = GetString(SI_LUIE_SKILL_DRAIN_ESSENCE_TP)
+T.Skill_Invigorating_Drain          = GetString(SI_LUIE_SKILL_INVIGORATING_DRAIN_TP)
+T.Skill_Mist_Form                   = GetString(SI_LUIE_SKILL_MIST_FORM_TP)
+T.Skill_Baleful_Mist                = GetString(SI_LUIE_SKILL_BALEFUL_MIST_TP)
+T.Skill_Bat_Swarm                   = GetString(SI_LUIE_SKILL_BAT_SWARM_TP)
+T.Skill_Devouring_Swarm             = GetString(SI_LUIE_SKILL_DEVOURING_SWARM_TP)
+
 -- Werewolf
 T.Skill_Sanies_Lupinus              = GetString(SI_LUIE_SKILL_SANIES_LUPINUS_TP)
 T.Skill_Lycanthrophy                = GetString(SI_LUIE_SKILL_LYCANTHROPHY_TP)
@@ -672,6 +679,17 @@ T.Skill_Feeding_Frenzy              = GetString(SI_LUIE_SKILL_FEEDING_FREZNY_TP)
 T.Skill_Claws_of_Life               = GetString(SI_LUIE_SKILL_CLAWS_OF_LIFE_TP)
 T.Skill_Werewolf_Transformation     = GetString(SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP)
 T.Skill_Pack_Leader                 = GetString(SI_LUIE_SKILL_PACK_LEADER_TP)
+
+-- Fighters Guild
+T.Skill_Circle_of_Protection        = GetString(SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_TP)
+T.Skill_Ring_of_Preservation        = GetString(SI_LUIE_SKILL_RING_OF_PRESERVATION_TP)
+T.Skill_Expert_Hunter_Passive       = GetAbilityDescription(35762)
+T.Skill_Expert_Hunter               = GetString(SI_LUIE_SKILL_EXPERT_HUNTER_TP)
+T.Skill_Evil_Hunter                 = GetString(SI_LUIE_SKILL_EVIL_HUNTER_TP)
+T.Skill_Trap_Beast                  = GetString(SI_LUIE_SKILL_TRAP_BEAST_TP)
+T.Skill_Trap_Beast_Debuff           = GetString(SI_LUIE_SKILL_TRAP_BEAST_DEBUFF_TP)
+T.Skill_Rearming_Trap               = GetString(SI_LUIE_SKILL_REARMING_TRAP_TP)
+T.Skill_Dawnbreaker_of_Smiting      = GetString(SI_LUIE_SKILL_DAWNBREAKER_OF_SMITING_TP)
 
 -- ---------------------------------------------------
 -- QUESTS ---------------------

@@ -2571,6 +2571,19 @@ local strings = {
     SI_LUIE_SKILL_CLAWS_OF_LIFE_TP =                     "Afflicted with Disease Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage, your attacker heals for |cFFFFFF50|r% of the damage done.",
     SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP =           "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF8|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.",
     SI_LUIE_SKILL_PACK_LEADER_TP =                       "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF8|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nSummon two direwolves while transformed. If killed, they return after |cFFFFFF10|r seconds.",
+
+    ----------------------
+    -- Guild Skills
+    ----------------------
+
+    SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_TP =              "You and your allies in the area gain Minor Protection and Minor Endurance.",
+    SI_LUIE_SKILL_RING_OF_PRESERVATION_TP =              "You and your allies in the area have the cost of Roll Dodge reduced by |cFFFFFF20|r% and gain Minor Protection and Minor Endurance.",
+    SI_LUIE_SKILL_EXPERT_HUNTER_TP =                     "Revealing invisible enemies within |cFFFFFF6|r meters for |cFFFFFF<<1>>|r seconds. Exposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_EVIL_HUNTER_TP =                       "Revealing invisible enemies within |cFFFFFF6|r meters for |cFFFFFF<<1>>|r seconds. Exposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.\n\nWhile active the Stamina costs of your Fighters Guild abilities are reduced by |cFFFFFF25|r%.",
+    SI_LUIE_SKILL_TRAP_BEAST_TP =                        "Triggers when an enemy comes close, dealing Physical Damage and afflicting them with Bleeding Damage over time for |cFFFFFF6|r seconds as well as immobilizing them. When triggered, grants you Minor Force for |cFFFFFF8|r seconds.",
+    SI_LUIE_SKILL_TRAP_BEAST_DEBUFF_TP =                 "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nImmobilized for |cFFFFFF<<1>>|r seconds. Unable to move while immobilized.",
+    SI_LUIE_SKILL_REARMING_TRAP_TP =                     "Triggers when an enemy comes close, dealing Physical Damage and afflicting them with Bleeding Damage over time for |cFFFFFF6|r seconds as well as immobilizing them. When triggered, grants you Minor Force for |cFFFFFF8|r seconds.\n\nAfter being triggered the trap resets and can be triggered one more time.",
+    SI_LUIE_SKILL_DAWNBREAKER_OF_SMITING_TP =            "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF5|r seconds.\n\nStunned for |cFFFFFF2.5|r seconds. You are unable to attack or move while stunned.",
     -- TODO: END Translate this block
 
     -- Sets
@@ -2712,6 +2725,22 @@ local strings = {
     SI_LUIE_SKILL_SANIES_LUPINUS_TP =                    "Вы были укушены Оборотнем и заразились Гнойным люпинусом.",
     SI_LUIE_SKILL_LYCANTHROPHY_TP =                      "Вы можете обратиться в дикого Оборотня.\n\nВы получаете на |cFFFFFF25|r% больше урона от Яда, пока находитесь в форме Вервольфа.",
     SI_LUIE_SKILL_BLOOD_MOON_TP =                        "Вы укусили другого игрока. Вы не сможете сделать этого снова в течение |cFFFFFF7|r дней.", -- TODO: Check Translation
+
+    SI_LUIE_SKILL_NOXIPHILIC_SANGUIVORIA_TP =            "You have been bitten by a Vampire and contracted Noxiphilic Sanguivoria.", -- TODO: Translate this block START
+    SI_LUIE_SKILL_VAMPIRISM_STAGE1_TP =                  "• Using Vampire abilities advances your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE2_TP =                  "• Reduce Health Recovery by |cFFFFFF25|r%\n• Increase Fire Damage taken by |cFFFFFF15|r%\n• Vampire abilities cost |cFFFFFF7|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE3_TP =                  "• Reduce Health Recovery by |cFFFFFF50|r%\n• Increase Fire Damage taken by |cFFFFFF20|r%\n• Vampire abilities cost |cFFFFFF14|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE4_TP =                  "• Reduce Health Recovery by |cFFFFFF75|r%\n• Increase Fire Damage taken by |cFFFFFF25|r%\n• Vampire abilities cost |cFFFFFF21|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
+
+    SI_LUIE_SKILL_FEED_TP =                              "A Vampire is draining your life force, healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds and reducing their vampirism Stage when the effect ends.\n\nStunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.",
+    SI_LUIE_SKILL_BLOOD_RITUAL_TP =                      "You have fed on another player. You may not do so again for |cFFFFFF7|r days.",
+    SI_LUIE_SKILL_PROFANE_SYMBOL =                       "Profane Symbol",
+    SI_LUIE_SKILL_DRAIN_ESSENCE_TP =                     "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. Each tick heals the vampire for |cFFFFFF20|r% of their missing health.",
+    SI_LUIE_SKILL_INVIGORATING_DRAIN_TP =                "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. Each tick heals the vampire for |cFFFFFF20|r% of their missing health and generates |cFFFFFF2|r Ultimate.",
+    SI_LUIE_SKILL_MIST_FORM_TP =                         "Reduce damage taken by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.\n\nImmune to all disabling and immobilization effects while active, but cannot be healed and Magicka Recovery is disabled.",
+    SI_LUIE_SKILL_BALEFUL_MIST_TP =                      "Reduce damage taken by |cFFFFFF75|r% and nearby enemies take Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds.\n\nImmune to all disabling and immobilization effects while active, but cannot be healed and Magicka Recovery is disabled.",
+    SI_LUIE_SKILL_BAT_SWARM_TP =                         "Nearby enemies take Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_DEVOURING_SWARM_TP =                   "Nearby enemies take Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds. The bats heal you for each enemy they damage.", -- TODO: Translate this block END
 
     SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP =               "Иммунитет к замедляющим и обездвиживающим эффектам на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_DODGE_FATIGUE_TP =                     "Повторный уворот будет расходовать больше Запаса сил в течение следующих |cFFFFFF<<1>>|r <<1[секунду/секунд]>>.",
