@@ -2600,6 +2600,10 @@ local strings = {
     SI_LUIE_SKILL_METEOR_TP =                            "Enemies in the target area take Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_ICE_COMET_TP =                         "Enemies in the target area take Frost Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
 
+    -- Psijic Order
+    SI_LUIE_SKILL_SPELL_ORB_TP =                         "When you cast a Psijic Order ability while you are in combat, you generate a spell charge.\n\nWhen you reach |cFFFFFF5|r spell charges, you launch a spell orb at the closest enemy to you dealing Magic Damage or Physical Damage, whichever is higher.",
+    SI_LUIE_SKILL_CONCENTRATED_BARRIER_TP =              "Absorbing damage while blocking.\n\nThis damage shield recharges back to full strength after you spend |cFFFFFF10|r seconds not blocking.",
+
     -- Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Direct damage taken from the next Snipe, Scatter Shot, or Poison Arrow increased by |cffffff<<1>>|r% used within |cffffff6|r seconds.",
     SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF =         "Every third cast of Force Shock within |cffffff10|r seconds will always apply the Burning, Concussion, and Chilled status effects.",

@@ -5535,14 +5535,14 @@ E.EffectOverride = {
     -- PSIJIC ORDER PASSIVES ---------------------------------------
     ----------------------------------------------------------------
 
-    [103820] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds' }, -- Spell Orb (Spell Orb - Rank 1)
+    [103820] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds', tooltip = T.Skill_Spell_Orb }, -- Spell Orb (Spell Orb - Rank 1)
     [103827] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds', hide = true }, -- Spell Orb (Spell Orb - Rank 1)
     [103828] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds', hide = true }, -- Spell Orb (Spell Orb - Rank 1)
-    [103879] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds' }, -- Spell Orb (Spell Orb - Rank 2)
+    [103879] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds', tooltip = T.Skill_Spell_Orb }, -- Spell Orb (Spell Orb - Rank 2)
     [103880] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds', hide = true }, -- Spell Orb (Spell Orb - Rank 2)
     [103881] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_spell_orb.dds', hide = true }, -- Spell Orb (Spell Orb - Rank 2)
-    [103923] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_concentrated_barrier.dds', forcedContainer = 'short' }, -- Concentrated Barrier (Concentrated Barrier - Rank 1)
-    [103966] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_concentrated_barrier.dds', forcedContainer = 'short' }, -- Concentrated Barrier (Concentrated Barrier - Rank 2)
+    [103923] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_concentrated_barrier.dds', forcedContainer = 'short', tooltip = T.Skill_Concentrated_Barrier }, -- Concentrated Barrier (Concentrated Barrier - Rank 1)
+    [103966] = { icon = 'LuiExtended/media/icons/abilities/ability_psijic_concentrated_barrier.dds', forcedContainer = 'short', tooltip = T.Skill_Concentrated_Barrier }, -- Concentrated Barrier (Concentrated Barrier - Rank 2)
 
     ----------------------------------------------------------------
     -- PSIJIC ORDER ACTIVE ABILITIES -------------------------------
