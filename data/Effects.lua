@@ -1187,9 +1187,9 @@ E.EffectCreateSkillAura = {
     [64509] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999004 }, -- Major Savagery --> Expert Hunter
 
     -- Mages Guild
-    [77928] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 30920 }, -- Major Prophecy --> Magelight
-    [77945] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 40478 }, -- Major Prophecy --> Inner Light
-    [77958] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 40483 }, -- Major Prophecy --> Radiant Magelight
+    [77928] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999005 }, -- Major Prophecy --> Magelight
+    [77945] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999006 }, -- Major Prophecy --> Inner Light
+    [77958] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999007 }, -- Major Prophecy --> Radiant Magelight
     [40443] = { consolidate = true, abilityId = 40441 }, -- Balance --> Major Ward
     [80160] = { consolidate = true, abilityId = 40441 }, -- Balance --> Major Resolve
 
@@ -5467,33 +5467,69 @@ E.EffectOverride = {
     [40438] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_magicka_controller.dds' }, -- Magicka Controller (Rank 1)
     [45603] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_magicka_controller.dds' }, -- Magicka Controller (Rank 2)
     [43561] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_might_of_the_guild.dds' }, -- Might of the Guild (Rank 1)
+    [65507] = { tooltip = A.Skill_Might_of_the_Guild }, -- Empower (Might of the Guild)
     [45607] = { icon = 'LuiExtended/media/icons/abilities/passive_mageguild_might_of_the_guild.dds' }, -- Might of the Guild (Rank 2)
+    [65541] = { tooltip = A.Skill_Might_of_the_Guild }, -- Empower (Might of the Guild)
 
     ----------------------------------------------------------------
     -- MAGES GUILD ACTIVE ABILITIES --------------------------------
     ----------------------------------------------------------------
 
-    [77928] = { consolidateExtra = true }, -- Major Prophecy (Magelight)
-    [31079] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Magelight (Magelight)
-    [77945] = { consolidateExtra = true }, -- Major Prophecy (Radiant Magelight)
-    [40480] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Inner Light (Inner Light)
-    [77958] = { consolidateExtra = true }, -- Major Prophecy (Radiant Magelight)
-    [40484] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed }, -- Radiant Magelight (Radiant Magelight)
+    -- Magelight / Radiant Magelight / Inner Light
+    [77928] = { consolidateExtra = true, tooltip = A.Skill_Magelight }, -- Major Prophecy (Magelight)
+    [30920] = { tooltip = T.Skill_Expert_Hunter }, -- Magelight (Magelight)
+    [31079] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed, tooltip = A.Skill_Magelight }, -- Magelight (Magelight)
+    [77945] = { consolidateExtra = true, tooltip = A.Skill_Inner_Light }, -- Major Prophecy (Inner Light)
+    [40478] = { tooltip = T.Skill_Expert_Hunter }, -- Inner Light (Inner Light)
+    [40480] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = A.Skill_Inner_Light }, -- Inner Light (Inner Light)
+    [77958] = { consolidateExtra = true, tooltip = A.Skill_Radiant_Magelight }, -- Major Prophecy (Radiant Magelight)
+    [40483] = { tooltip = T.Skill_Radiant_Magelight }, -- Radiant Magelight (Radiant Magelight)
+    [40484] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Revealed, tooltip = A.Skill_Radiant_Magelight }, -- Radiant Magelight (Radiant Magelight)
+    [999005] = { icon = 'esoui/art/icons/ability_mageguild_002.dds', name = A.Skill_Magelight, tooltip = T.Skill_Magelight_Passive }, -- Magelight Fake ID for Consolidate
+    [999006] = { icon = 'esoui/art/icons/ability_mageguild_002_b.dds', name = A.Skill_Inner_Light, tooltip = T.Skill_Inner_Light_Passive }, -- Inner Light Fake ID for Consolidate
+    [999007] = { icon = 'esoui/art/icons/ability_mageguild_002_a.dds', name = A.Skill_Radiant_Magelight, tooltip = T.Skill_Radiant_Magelight_Passive }, -- Radiant Magelight Fake ID for Consolidate
+
+    -- Entropy / Degeneration / Structured Entropy
+    [28567] = { tooltip = T.Skill_Entropy }, -- Entropy
+    [63223] = { tooltip = A.Skill_Entropy }, -- Major Sorcery
+    [40457] = { tooltip = T.Skill_Degeneration }, -- Degeneration
+    [63227] = { tooltip = A.Skill_Degeneration }, -- Major Sorcery (Degeneration)
+    [40452] = { tooltip = T.Skill_Entropy }, -- Structured Entropy
+    [63231] = { tooltip = A.Skill_Structured_Entropy }, -- Major Sorcery (Structured Entropy)
+
+    -- Fire Rune / Volcanic Rune / Scalding Rune
+    [31632] = { tooltip = T.Skill_Fire_Rune }, -- Fire Rune (Fire Rune)
     [31633] = { hide = true }, -- Fire Rune (Fire Rune)
+    [40470] = { tooltip = T.Skill_Volcanic_Rune }, -- Volcanic Rune (Volcanic Rune)
     [40477] = { icon = 'esoui/art/icons/ability_mageguild_001_a.dds', hide = true }, -- Volcanic Rune (Volcanic Rune)
+    [40476] = { tooltip = T.Generic_Stun }, -- Volcanic Rune (Volcanic Rune)
     [40472] = { hide = true}, -- Volcanic Rune (Volcanic Rune)
+    [40465] = { tooltip = T.Skill_Scalding_Rune }, -- Scaling Rune (Scalding Rune)
+    [40468] = { tooltip = T.Generic_Burn_2_Sec }, -- Scalding Rune (Scalding Rune)
     [40467] = { hide = true}, -- Scalding Rune (Scalding Rune)
-    [48131] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Equilibrium (Equilibrium)
-    [48136] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Spell Symmetry (Spell Symmetry)
-    [40443] = { consolidate = true }, -- Major Ward (Balance)
-    [80160] = { consolidate = true }, -- Major Resolve (Balance)
-    [48141] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Balance (Balance)
+
+    -- Equilibrium / Spell Symmetry / Balance
+    [48131] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Equilibrium }, -- Equilibrium (Equilibrium)
+    [48136] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Equilibrium }, -- Spell Symmetry (Spell Symmetry)
+    [40449] = { tooltip = T.Skill_Spell_Symmetry }, -- Spell Symmetry (Spell Symmetry)
+    [40443] = { consolidate = true, tooltip = A.Skill_Balance }, -- Major Ward (Balance)
+    [80160] = { consolidate = true, tooltip = A.Skill_Balance }, -- Major Resolve (Balance)
+    [48141] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Equilibrium }, -- Balance (Balance)
+
+    -- Meteor / Ice Comet / Shooting Star
+    [63430] = { tooltip = T.Skill_Meteor }, -- Meteor
     [16538] = { icon = 'esoui/art/icons/ability_mageguild_005.dds', name = A.Skill_Meteor }, -- Meteor Knockback (Meteor)
+    [114701] = { name = A.Skill_Meteor, tooltip = T.Generic_Knockback }, -- Stun (Meteor)
+    [63456] = { tooltip = T.Skill_Ice_Comet }, -- Ice Comet
+    [40492] = { tooltip = T.Generic_Snare_50 }, -- Ice Comet
     [63457] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds' }, -- Ice Comet (Ice Comet)
     [63455] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', name = A.Skill_Ice_Comet }, -- Ice Comet Knockback (Ice Comet)
     [63454] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds' }, -- Ice Comet (Ice Comet)
+    [114714] = { name = A.Skill_Ice_Comet, tooltip = T.Generic_Knockback }, -- Stun (Ice Comet)
+    [63473] = { tooltip = T.Skill_Meteor }, -- Shooting Star
     [63472] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds' }, -- Shooting Star (Shooting Star)
     [40495] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds' }, -- Shooting Star (Shooting Star)
+    [114715] = { name = A.Skill_Shooting_Star, tooltip = T.Generic_Knockback }, -- Shooting Star (Shooting Star)
 
     ----------------------------------------------------------------
     -- PSIJIC ORDER PASSIVES ---------------------------------------

@@ -759,10 +759,18 @@ A.Skill_Rearming_Trap               = 40382
 A.Skill_Lightweight_Beast_Trap      = 40372
 
 -- Mages Guild
+A.Skill_Might_of_the_Guild          = 43561
 A.Skill_Magelight                   = 30920
+A.Skill_Inner_Light                 = 40478
+A.Skill_Radiant_Magelight           = 77960
+A.Skill_Entropy                     = 28567
+A.Skill_Degeneration                = 40457
+A.Skill_Structured_Entropy          = 40452
 A.Skill_Spell_Symmetry              = 40445
+A.Skill_Balance                     = 40441
 A.Skill_Meteor                      = 16536
 A.Skill_Ice_Comet                   = 40489
+A.Skill_Shooting_Star               = 40493
 
 -- Psijic Order
 A.Skill_Imbue_Weapon                = 103483

@@ -2576,15 +2576,28 @@ local strings = {
     -- Guild Skills
     ----------------------
 
+    -- Fighters Guild
     SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_TP =              "You and your allies in the area gain Minor Protection and Minor Endurance.",
     SI_LUIE_SKILL_RING_OF_PRESERVATION_TP =              "You and your allies in the area have the cost of Roll Dodge reduced by |cFFFFFF20|r% and gain Minor Protection and Minor Endurance.",
-    SI_LUIE_SKILL_EXPERT_HUNTER_TP =                     "Revealing invisible enemies within |cFFFFFF6|r meters for |cFFFFFF<<1>>|r seconds. Exposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_EVIL_HUNTER_TP =                       "Revealing invisible enemies within |cFFFFFF6|r meters for |cFFFFFF<<1>>|r seconds. Exposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.\n\nWhile active the Stamina costs of your Fighters Guild abilities are reduced by |cFFFFFF25|r%.",
+    SI_LUIE_SKILL_EXPERT_HUNTER_TP =                     "Revealing stealthed and invisible enemies within |cFFFFFF6|r meters for |cFFFFFF<<1>>|r seconds. Exposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_EVIL_HUNTER_TP =                       "Revealing stealthed and invisible enemies within |cFFFFFF6|r meters for |cFFFFFF<<1>>|r seconds. Exposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.\n\nWhile active the Stamina costs of your Fighters Guild abilities are reduced by |cFFFFFF25|r%.",
     SI_LUIE_SKILL_TRAP_BEAST_TP =                        "Triggers when an enemy comes close, dealing Physical Damage and afflicting them with Bleeding Damage over time for |cFFFFFF6|r seconds as well as immobilizing them. When triggered, grants you Minor Force for |cFFFFFF8|r seconds.",
     SI_LUIE_SKILL_TRAP_BEAST_DEBUFF_TP =                 "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nImmobilized for |cFFFFFF<<1>>|r seconds. Unable to move while immobilized.",
     SI_LUIE_SKILL_REARMING_TRAP_TP =                     "Triggers when an enemy comes close, dealing Physical Damage and afflicting them with Bleeding Damage over time for |cFFFFFF6|r seconds as well as immobilizing them. When triggered, grants you Minor Force for |cFFFFFF8|r seconds.\n\nAfter being triggered the trap resets and can be triggered one more time.",
     SI_LUIE_SKILL_DAWNBREAKER_OF_SMITING_TP =            "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF5|r seconds.\n\nStunned for |cFFFFFF2.5|r seconds. You are unable to attack or move while stunned.",
-    -- TODO: END Translate this block
+
+    -- Mages Guild
+    SI_LUIE_SKILL_RADIANT_MAGELIGHT_TP =                 "Revealing stealthed and invisible enemies within |cFFFFFF12|r meters for |cFFFFFF<<1>>|r seconds. Exposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_ENTROPY_TP =                           "Afflicted with Magic Damage every |cFFFFFF2|r seconds and healing the mage every |cFFFFFF6|r seconds for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_DEGENERATION_TP =                      "Afflicted with Magic Damage every |cFFFFFF2|r seconds and healing the mage every |cFFFFFF6|r seconds for |cFFFFFF<<1>>|r seconds.\n\nLight and Heavy attacks made against you by the mage have a |cFFFFFF15|r% chance to heal them for |cFFFFFF100|r% of the damage dealt.",
+    SI_LUIE_SKILL_FIRE_RUNE_TP =                         "When triggered, the rune blasts all enemies in the target area for Flame Damage.",
+    SI_LUIE_SKILL_VOLCANIC_RUNE_TP =                     "When triggered, the rune blasts all enemies in the target area for Flame Damage, knocks them into the air, and stuns them for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_SCALDING_RUNE_TP =                     "When triggered, the rune blasts all enemies in the target area for Flame Damage and afflicts them with additional Flame Damage over time.",
+    SI_LUIE_SKILL_EQUILIBRIUM_TP =                       "Reduce healing done and damage shield strength by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SPELL_SYMMETRY_TP =                    "Reduce the cost of your next Magicka ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF28|r%.",
+    SI_LUIE_SKILL_METEOR_TP =                            "Enemies in the target area take Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_ICE_COMET_TP =                         "Enemies in the target area take Frost Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    -- END TRANSLATE THIS BLOCK
 
     -- Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Прямой урон от следующей атаки Snipe, Scatter Shot или Poison Arrow в течение |cffffff6|r секунд увеличен на |cffffff<<1>>|r%.",

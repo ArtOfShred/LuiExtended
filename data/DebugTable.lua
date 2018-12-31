@@ -5789,6 +5789,7 @@ debugAuras = {
             [17912] = true, -- Meteor (Meteor)
             [16538] = true, -- Meteor Knockback (Meteor)
             [63429] = true, -- Meteor (Meteor)
+            [114701] = true, -- Stun (Meteor)
 
             [40489] = true, -- Ice Comet (Ice Comet)
             [63456] = true, -- Ice Comet (Ice Comet)
@@ -5796,6 +5797,7 @@ debugAuras = {
             [40492] = true, -- Ice Comet (Ice Comet)
             [63455] = true, -- Ice Comet Knockback (Ice Comet)
             [63454] = true, -- Ice Comet (Ice Comet)
+            [114714] = true, -- Stun (Ice Comet)
 
             [40493] = true, -- Shooting Star (Shooting Star)
             [63474] = true, -- Shooting Star (Shooting Star)
@@ -5803,6 +5805,7 @@ debugAuras = {
             [40495] = true, -- Shooting Star (Shooting Star)
             [63473] = true, -- Shooting Star (Shooting Star)
             [63471] = true, -- Shooting Star (Shooting Star)
+            [114715] = true, -- Stun (Shooting Star)
 
             -------------------------------------
             -- PSIJIC ORDER PASSIVES ------------

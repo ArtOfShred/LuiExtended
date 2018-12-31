@@ -691,6 +691,25 @@ T.Skill_Trap_Beast_Debuff           = GetString(SI_LUIE_SKILL_TRAP_BEAST_DEBUFF_
 T.Skill_Rearming_Trap               = GetString(SI_LUIE_SKILL_REARMING_TRAP_TP)
 T.Skill_Dawnbreaker_of_Smiting      = GetString(SI_LUIE_SKILL_DAWNBREAKER_OF_SMITING_TP)
 
+-- Mages Guild
+T.Skill_Radiant_Magelight           = GetString(SI_LUIE_SKILL_RADIANT_MAGELIGHT_TP)
+T.Skill_Magelight_Passive           = GetAbilityDescription(30920)
+T.Skill_Inner_Light_Passive         = GetAbilityDescription(40478)
+T.Skill_Radiant_Magelight_Passive   = GetAbilityDescription(40483)
+
+T.Skill_Entropy                     = GetString(SI_LUIE_SKILL_ENTROPY_TP)
+T.Skill_Degeneration                = GetString(SI_LUIE_SKILL_DEGENERATION_TP)
+
+T.Skill_Fire_Rune                   = GetString(SI_LUIE_SKILL_FIRE_RUNE_TP)
+T.Skill_Volcanic_Rune               = GetString(SI_LUIE_SKILL_VOLCANIC_RUNE_TP)
+T.Skill_Scalding_Rune               = GetString(SI_LUIE_SKILL_SCALDING_RUNE_TP)
+
+T.Skill_Equilibrium                 = GetString(SI_LUIE_SKILL_EQUILIBRIUM_TP)
+T.Skill_Spell_Symmetry              = GetString(SI_LUIE_SKILL_SPELL_SYMMETRY_TP)
+
+T.Skill_Meteor                      = GetString(SI_LUIE_SKILL_METEOR_TP)
+T.Skill_Ice_Comet                   = GetString(SI_LUIE_SKILL_ICE_COMET_TP)
+
 -- ---------------------------------------------------
 -- QUESTS ---------------------
 -- ---------------------------------------------------
