@@ -7,21 +7,26 @@ local E = LUIE.Effects
 local T = LUIE.Tooltips
 local A = LUIE.GetAbility()
 
--- List of abilities considered for Ultimate generation - used by CombatInfo to determine when Ultimate is being generated
+--------------------------------------------------------------------------------------------------------------------------------
+-- List of abilities considered for Ultimate generation - used by CombatInfo to determine when Ultimate is being generated (Uses base abilityName sent to the listener - so we need the default names, not LUIE modified ones)
+--------------------------------------------------------------------------------------------------------------------------------
 E.IsWeaponAttack = {
-    [A.Skill_Light_Attack]                  = true,
-    [A.Skill_Heavy_Attack]                  = true,
-    [A.Skill_Heavy_Attack_Dual_Wield]       = true,
-    [A.Skill_Heavy_Attack_Werewolf]         = true,
-    [A.Skill_Heavy_Attack_Shock]            = true,
+    [A.Skill_Light_Attack]                  = true, -- Light Attack
+    [A.Skill_Heavy_Attack]                  = true, -- Heavy Attack
+    [A.Skill_Heavy_Attack_Dual_Wield]       = true, -- Heavy Attack (Dual Wield)
+    [A.Skill_Heavy_Attack_Werewolf]         = true, -- Heavy Attack (Werewolf)
+    [A.Skill_Heavy_Attack_Shock]            = true, -- Heavy Attack (Shock)
 }
 
--- List of toggle abilities
+--------------------------------------------------------------------------------------------------------------------------------
+-- List of abilities flagged as a Toggle. For the purpose of adding a "T" label to the buff icon.
+--------------------------------------------------------------------------------------------------------------------------------
 E.IsToggle = {
+
     -- Innate
     [20299] = true, -- Sneak (Innate) -- Used for hidden
     [20301] = true, -- Crouch (Innate) -- Used for invisibility
-    [A.Innate_Disguised] = true, -- Disguised (Innate)
+    [A.Innate_Disguised] = true, -- Disguised (Innate) -- NOTE: We use this name as the fake ID for the player disguise buff
     [14890] = true, -- Block (Player)
     [40165] = true, -- Scene Choreo Brace (Monster Fight))
     [29761] = true, -- Brace (Guard)
@@ -63,6 +68,9 @@ E.IsToggle = {
     [44258] = true, -- Magelight (Soulbrander)
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- List of abilities flagged to display a Proc highlight / sound notification in Combat Info when the Ability Bar is updated with a matching id.
+--------------------------------------------------------------------------------------------------------------------------------
 E.IsAbilityProc = {
     [20824] = true, -- Power Lash (Flame Lash
     [61907] = true, -- Assassin's Will (Grim Focus)
@@ -70,11 +78,18 @@ E.IsAbilityProc = {
     [61930] = true, -- Assassin's Will (Merciless Resolve)
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- List of abilities flagged to display a Proc highlight / sound notification when an ability with a matching name appears as a buff.
+--------------------------------------------------------------------------------------------------------------------------------
 E.HasAbilityProc = {
     [A.Skill_Crystal_Fragments]   = 46327,
 }
 
--- Vampire / Lycantropy
+--------------------------------------------------------------------------------------------------------------------------------
+-- Context Based Hidden Effects - Used by SCB.UpdateContextHideList to bulk hide certain abilities from displaying Buffs/Debuffs in the menu options.
+--------------------------------------------------------------------------------------------------------------------------------
+
+-- Vampire Stages
 E.IsVamp = {
     [35771] = true, -- Stage 1 Vampirism
     [35996] = true, -- Stage 2 Vampirism
@@ -82,10 +97,12 @@ E.IsVamp = {
     [35792] = true, -- Stage 4 Vampirism
 }
 
+-- Werewolf Buff
 E.IsLycan = {
     [35658] = true, -- Lycanthrophy
 }
 
+-- Werewolf & Vampire Precursor Diseases
 E.IsVampLycanDisease = {
     [39472] = true, -- Vampirism (NPC Bite)
     [40360] = true, -- Vampirism (Player Bite)
@@ -93,6 +110,7 @@ E.IsVampLycanDisease = {
     [40521] = true, -- Sanies Lupinus (Player Bite)
 }
 
+-- Werewolf & Vampire Bite cooldown timers
 E.IsVampLycanBite = {
     [40359] = true, -- Fed on ally (Vampire)
     [40525] = true, -- Bit an ally (Werewolf)
@@ -136,16 +154,19 @@ E.IsCyrodiil = {
     [66282] = true, -- Blessing of War -- CONFIRM
 }
 
+-- Soul Summons
 E.IsSoulSummons = {
     [43752] = true, -- Soul Summons
 }
 
+-- Internal Cooldown for cheat death set procs
 E.IsSetICD = {
     [90936] = true, -- Phoenix
     [90938] = true, -- Immortal Warrior
     [90939] = true, -- Eternal Warrior
 }
 
+-- Food & Drink Buffs
 E.IsFoodBuff = {
     -- Food Buff
     [61259] = true, -- Health Food
@@ -217,6 +238,8 @@ E.IsFoodBuff = {
     [92476] = true, -- Crown Vigorous Tincture
 }
 
+
+-- Experience Buffs
 E.IsExperienceBuff = {
     -- Consumable
     [64210] = true, -- Psijic Ambrosia
@@ -238,24 +261,35 @@ E.IsExperienceBuff = {
     [96118] = true, -- Witchmother's Boon
 }
 
+-- Block buffs (NPC and Player)
 E.IsBlock = {
     [14890] = true, -- Block
     [29761] = true, -- Brace
     [40165] = true, -- Scene Choreo Brace
 }
 
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- Grim Focus Id's - Used by SCB to track the id's for Grim Focus & its morphs - These id's are merged with the Override for stack tracking
+--------------------------------------------------------------------------------------------------------------------------------
 E.IsGrimFocus = {
     [61905] = true, -- Grim Focus
     [61928] = true, -- Relentless Focus
     [61920] = true, -- Merciless Resolve
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Grim Focus Override Id's - Used by SCB to track the id's for Grim Focus & its morphs - These id's are merged with the base buff for stack tracking
+--------------------------------------------------------------------------------------------------------------------------------
 E.IsGrimFocusOverride = {
     [61902] = true, -- Grim Focus
     [61927] = true, -- Relentless Focus
     [61919] = true, -- Merciless Resolve
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Ground Mine Auras tracking
+--------------------------------------------------------------------------------------------------------------------------------
 E.IsGroundMineAura = {
 
     -- Nightblade
@@ -267,10 +301,10 @@ E.IsGroundMineAura = {
     [25158] = true, -- Daedric Mines (Daedric Minefield)
 
     -- Fighters Guild
-    [35750] = true, -- Trap Beast (Trap Beast - Rank 1)
+    [35750] = true, -- Trap Beast (Trap Beast)
     [40382] = true, -- Rearming Trap (Rearming Trap)
     [40388] = true, -- Rearming Trap (Rearming Trap)
-    [40372] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+    [40372] = true, -- Lightweight Beast Trap (Lightweight Beast Trap)
 
     -- Mages Guild
     [31632] = true, -- Fire Rune (Fire Rune)
@@ -279,6 +313,9 @@ E.IsGroundMineAura = {
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Abilities flagged as Ground Mines that need a stack counter, when an EFFECT_RESULT_FADED event occurs for these buffs decrement by 1 instead of being removed
+--------------------------------------------------------------------------------------------------------------------------------
 E.IsGroundMineStack = {
 
     -- Sets
@@ -291,6 +328,9 @@ E.IsGroundMineStack = {
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Linked id's for tracking ground mine explosions - These id's all all merged into one and considered for the purpose of reducing the stack count of certain mine abilities
+--------------------------------------------------------------------------------------------------------------------------------
 E.LinkedGroundMine = {
 
     [76631] = 37475, -- Manifestation of Terror (Nightblade)
@@ -308,20 +348,27 @@ E.LinkedGroundMine = {
 
 }
 
--- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY ID
+--------------------------------------------------------------------------------------------------------------------------------
+-- Filter out Debuffs to always display regardless of whether they are sourced from the player - useful for some odd effects that get applied by the player or a player pet but aren't actually sourced from them on the API
+--------------------------------------------------------------------------------------------------------------------------------
 E.DebuffDisplayOverrideId = {
+
+    ----------------------------------------------------------------
+    -- INNATE / SHARED ---------------------------------------------
+    ----------------------------------------------------------------
+
     -- Basic (Shared)
     [2727] = true, -- Off-Balance (Generic)
     [102771] = true, -- Off Balance Immunity
 
-    -- Player (Sets)
+    ----------------------------------------------------------------
+    -- PLAYER ABILITIES --------------------------------------------
+    ----------------------------------------------------------------
+
+    -- Item Sets
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
     [75753] = true, -- Line Breaker (of Alkosh)
     [93001] = true, -- Mad Tinkerer (Stun from Fabricant)
-
-    -----------------
-    -- Class
-    ------------------
 
     -- Dragonknight
     [98447] = true, -- Shackle Snare (Dragonknight Standard Synergy)
@@ -334,6 +381,10 @@ E.DebuffDisplayOverrideId = {
     [87560] = true, -- Frozen Gate Root (Frozen Gate)
     [92039] = true, -- Frozen Gate Root (Frozen Device)
     [92060] = true, -- Frozen Retreat Root (Frozen Retreat)
+
+    ----------------------------------------------------------------
+    -- NPC ABILITIES -----------------------------------------------
+    ----------------------------------------------------------------
 
     -- Human NPC's
     [88281] = true, -- Call Ally (Pet Ranger)
@@ -354,16 +405,11 @@ E.DebuffDisplayOverrideId = {
     [42794] = true, -- Strangler: (Strangler)
     [48294] = true, -- Consuming Omen (Troll - Ranged)
 
-    -- Friendly NPC's
-
 }
 
-E.EffectHideWhenDead = {
-    [33097] = true, -- Scary Immunities (Various NPC's)
-    [44176] = true, -- Flying Immunities (Various NPC's)
-}
-
--- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY NAME
+--------------------------------------------------------------------------------------------------------------------------------
+-- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY NAME -- Used for all Major / Minor Debuffs
+--------------------------------------------------------------------------------------------------------------------------------
 E.DebuffDisplayOverrideName = {
     [A.Skill_Minor_Breach]              = true,
     [A.Skill_Major_Breach]              = true,
@@ -383,6 +429,17 @@ E.DebuffDisplayOverrideName = {
     [A.Skill_Minor_Lifesteal]           = true,
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Hide these effects on a target that is dead - only shows up when the player is able to target dead bodies, which, seems to be really inconsistent outside of being in Werewolf form.
+--------------------------------------------------------------------------------------------------------------------------------
+E.EffectHideWhenDead = {
+    [33097] = true, -- Scary Immunities (Various NPC's)
+    [44176] = true, -- Flying Immunities (Various NPC's)
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- When a hard CC effect is successfully applied to the player, instantly stop any in progress Casts
+--------------------------------------------------------------------------------------------------------------------------------
 E.CastBreakingStatus = {
 
     [ACTION_RESULT_STAGGERED] = true,
@@ -394,7 +451,9 @@ E.CastBreakingStatus = {
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
 -- List of abilityId's that should immediately cancel the Cast Bar if detected
+--------------------------------------------------------------------------------------------------------------------------------
 E.CastBreakingActions = {
 
     --[20299] = true, -- Sneak -- Some effects don't break sneak so probably best not to add this.
@@ -407,16 +466,20 @@ E.CastBreakingActions = {
     [69293] = true, -- Sigil of Imperial Retreat
 
     -- TODO:
-    -- check stealth id timing for breaking + sprint/mount sprint
     -- make sure keep/IC recall stones work here
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+--  List of abilities flagged for CombatInfo to show as a Channel on the Cast Bar
+--------------------------------------------------------------------------------------------------------------------------------
 E.CastChannelOverride = {
 
-    [33175] = true, -- Feed (Vampire)
-    [40350] = true, -- Feed (Vampire - Bite Player)
+    ----------------------------------------------------------------
+    -- PLAYER ABILITIES --------------------------------------------
+    ----------------------------------------------------------------
 
+    -- Innate
     [32346] = true, -- Skyshard Collect
     [47270] = true, -- Ritual of Mara
     [14031] = true, -- Mundus Use
@@ -460,9 +523,15 @@ E.CastChannelOverride = {
     [90937] = true, -- Immortal Warrior
     [90935] = true, -- Phoenix
 
-    -- Quest
-
     -- Vampire
+    [33175] = true, -- Feed (Vampire)
+    [40350] = true, -- Feed (Vampire - Bite Player)
+
+    ----------------------------------------------------------------
+    -- QUEST ABILITIES ---------------------------------------------
+    ----------------------------------------------------------------
+
+    -- Vampire Quest
     [39507] = true, -- VampInitStun_Profane (Scion of the Blood Matron)
 
     -- MSQ
@@ -486,9 +555,9 @@ E.CastChannelOverride = {
     [37211] = true, -- Q4854 Empower Heart (Eyes of Azura)
     [38246] = true, -- Animus Geode (Eyes of Azura)
 
-    ---------------------------
-    -- Seasonal Quest ---------
-    ---------------------------
+    ----------------------------------------------------------------
+    -- SEASONAL QUEST ----------------------------------------------
+    ----------------------------------------------------------------
 
     -- New Life Festival
     [84847] = true, -- Celebratory Belch (Stonetooth Bash)
@@ -505,8 +574,16 @@ E.CastChannelOverride = {
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+--  Duration update for any effects that are converted to casts (A lot of stun effects in PVE Quests with casting animations)
+--------------------------------------------------------------------------------------------------------------------------------
 E.CastDurationFix = {
 
+    ----------------------------------------------------------------
+    -- PLAYER ABILITIES --------------------------------------------
+    ----------------------------------------------------------------
+
+    -- Innate
     [37059] = 1165, -- Mount Up
     [14644] = 4000, -- Revive (Death Dialogue)
     [32346] = 5800, -- Skyshard Collect
@@ -514,10 +591,11 @@ E.CastDurationFix = {
     [14031] = 5000, -- Mundus Use
     [4197] = 4000, -- Recovering (NPC Duel)
 
-    [89469] = 5000, -- 68235 Stun
-    [89645] = 5000, -- 68235 Stun
-    [105217] = 5000, -- 68235 Stun
-    [89654] = 5000, -- 68235 Stun
+    -- Misc Items
+    [89469] = 5000, -- 68235 Stun (Create crafting station)
+    [89645] = 5000, -- 68235 Stun (Create crafting station)
+    [105217] = 5000, -- 68235 Stun (Create crafting station)
+    [89654] = 5000, -- 68235 Stun (Create crafting station)
 
     -- Seasonal Mementos and Items
     [86792] = 3000, -- Eating (High Hrothgar Festival Mints)
@@ -566,12 +644,14 @@ E.CastDurationFix = {
     [90937] = 3000, -- Immortal Warrior
     [90935] = 3000, -- Phoenix
 
-    -- Quest
+    ----------------------------------------------------------------
+    -- QUEST ABILITIES ---------------------------------------------
+    ----------------------------------------------------------------
 
-    -- Vampire
+    -- Vampire Quest
     [39507] = 23000, -- VampInitStun_Profane (Scion of the Blood Matron)
 
-    -- MSQ
+    -- Main Story Quest
     [39367] = 10000, -- Altar Use (Shadow of Sancre Tor)
     [36421] = 3000, -- Drink with Lyris (Council of the Five Companions)
     [34701] = 1950, -- Q4621 Destory Horn (The Tempest Unleashed)
@@ -586,9 +666,9 @@ E.CastDurationFix = {
     [36824] = 4000, -- Q4833 Apply Tiger Buff (Bosmer Insight)
     [33701] = 1000, -- BurrowEND (Throne of the Wilderking)
 
-    ---------------------------
-    -- Seasonal Quest ---------
-    ---------------------------
+    ----------------------------------------------------------------
+    -- SEASONAL QUEST ----------------------------------------------
+    ----------------------------------------------------------------
 
     -- New Life Festival
     [84847] = 5000, -- Celebratory Belch (Stonetooth Bash)
@@ -606,11 +686,14 @@ E.CastDurationFix = {
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+--  List of abilities flagged for CombatInfo to show on the Cast Bar
+--------------------------------------------------------------------------------------------------------------------------------
 E.IsCast = {
 
-    ------------------------------
-    -- Player Abilities ----------
-    ------------------------------
+    ----------------------------------------------------------------
+    -- PLAYER ABILITIES --------------------------------------------
+    ----------------------------------------------------------------
 
     -- Innate
     [6811] = true, -- Recall
@@ -621,15 +704,17 @@ E.IsCast = {
     [32346] = true, -- Skyshard Collect
     [47270] = true, -- Ritual of Mara
 
-    [89469] = true, -- 68235 Stun
-    [89645] = true, -- 68235 Stun
-    [105217] = true, -- 68235 Stun
-    [89654] = true, -- 68235 Stun
-    [63427] = true, -- Clean Fish
+    -- Misc Items
+    [89469] = true, -- 68235 Stun (Create furniture station)
+    [89645] = true, -- 68235 Stun (Create furniture station)
+    [105217] = true, -- 68235 Stun (Create furniture station)
+    [89654] = true, -- 68235 Stun (Create furniture station)
+    [63427] = true, -- Clean Fish (Create furniture station)
     [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
     [76350] = true, -- Moderate Pardon (Leniency Edict)
     [76349] = true, -- Full Pardon (Grand Amnesty Edict)
 
+    -- Seasonal Mementos and Items
     [86792] = true, -- Eating (High Hrothgar Festival Mints)
     [86739] = true, -- Drinking (Sailor's Warning Festival Grog)
 
@@ -680,20 +765,21 @@ E.IsCast = {
     [74151] = true, -- Stun (Hidden Pressure Vent)
     [92862] = true, -- Ringing Bell (Dreamer's Chime)
 
-    -- Class
+    -- Sorcerer
     [43714] = true, -- Crystal Shard (Sorcerer)
     [46331] = true, -- Crystal Blast (Sorcerer)
     [46324] = true, -- Crystal Fragments (Sorcerer)
     [24584] = true, -- Dark Exchange (Sorcerer)
     [24595] = true, -- Dark Deal (Sorcerer)
     [24589] = true, -- Dark Conversion (Sorcerer)
-    [23304] = true, -- Summon Unstable Familiar
-    [23319] = true, -- Summon Unstable Clannfear
-    [23316] = true, -- Summon Volatile Familiar
-    [24613] = true, -- Summon Winged Twilight
-    [24636] = true, -- Summon Twilight Tormentor
-    [24639] = true, -- Summon Twilight Matriarch
+    [23304] = true, -- Summon Unstable Familiar (Sorcerer)
+    [23319] = true, -- Summon Unstable Clannfear (Sorcerer)
+    [23316] = true, -- Summon Volatile Familiar (Sorcerer)
+    [24613] = true, -- Summon Winged Twilight (Sorcerer)
+    [24636] = true, -- Summon Twilight Tormentor (Sorcerer)
+    [24639] = true, -- Summon Twilight Matriarch (Sorcerer)
 
+    -- Templar
     [26114] = true, -- Puncturing Strikes (Templar)
     [26792] = true, -- Biting Jabs (Templar)
     [26797] = true, -- Puncturing Sweep (Templar)
@@ -706,30 +792,38 @@ E.IsCast = {
     [22229] = true, -- Remembrance (Templar)
     [22226] = true, -- Practiced Incantation (Templar)
 
+    -- Warden
     [85982] = true, -- Feral Guardian (Warden)
     [85986] = true, -- Eternal Guardian (Warden)
     [85990] = true, -- Wild Guardian (Warden)
 
-    -- Weapon
+    -- Two Handed
     [28279] = true, -- Uppercut (Two Handed)
     [38814] = true, -- Dizzying Swing (Two Handed)
     [38807] = true, -- Wrecking Blow (Two Handed)
+
+    -- Dual Wield
     [28607] = true, -- Flurry (Dual Wield)
     [38857] = true, -- Rapid Strikes (Dual Wield)
     [38846] = true, -- Bloodthirst (Duel Wield)
+
+    -- Bow
     [28882] = true, -- Snipe (Bow)
     [38685] = true, -- Lethal Arrow (Bow)
     [38687] = true, -- Focused Aim (Bow)
     [83465] = true, -- Rapid Fire (Bow)
     [85257] = true, -- Toxic Barrage (Bow)
 
+    -- Restoration Staff
     [31531] = true, -- Force Siphon (Restoration Staff)
     [40109] = true, -- Siphon Spirit (Restoration Staff)
 
-    -- World
+    -- Soul Magic
     [39270] = true, -- Soul Strike (Soul Magic)
     [40420] = true, -- Soul Assault (Soul Magic)
     [40414] = true, -- Shatter Soul (Soul Magic)
+
+    -- Vampire
     [33175] = true, -- Feed (Vampire)
     [40350] = true, -- Feed (Vampire - Bite Player)
     [39692] = true, -- Feed (Vampire - Quest)
@@ -739,6 +833,8 @@ E.IsCast = {
     [38965] = true, -- Baleful Mist (Vampire)
     [38949] = true, -- Invigorating Drain (Vampire)
     [38956] = true, -- Accelerating Drain (Vampire)
+
+    -- Werewolf
     [33208] = true, -- Devour (Werewolf)
     [39033] = true, -- Werewolf Transform Setup (Werewolf)
     [39477] = true, -- De-Werewolf (Werewolf)
@@ -763,15 +859,21 @@ E.IsCast = {
     [90937] = true, -- Immortal Warrior
     [90935] = true, -- Phoenix
 
-    -- NPC Basic
+    ----------------------------------------------------------------
+    -- NPC ABILITIES -----------------------------------------------
+    ----------------------------------------------------------------
+
+    -- Shared/Innate
     [4197] = true, -- Recovering (NPC Duel)
 
-    -- Quest
+    ----------------------------------------------------------------
+    -- QUEST ABILITIES ---------------------------------------------
+    ----------------------------------------------------------------
 
-    -- Vampire
+    -- Vampire Quest
     [39507] = true, -- VampInitStun_Profane (Scion of the Blood Matron)
 
-    -- MSQ
+    -- Main Story Quest
     [39367] = true, -- Altar Use (Shadow of Sancre Tor)
     [37827] = true, -- Stendarr's Protection (Shadow of Sancre Tor)
     [36421] = true, -- Drink with Lyris (Council of the Five Companions)
@@ -807,9 +909,9 @@ E.IsCast = {
     [33066] = true, -- Q4586_ChangeClothes (The Witcher of Silatar)
     [33701] = true, -- BurrowEND (Throne of the Wilderking)
 
-    ---------------------------
-    -- Seasonal Quest ---------
-    ---------------------------
+    ----------------------------------------------------------------
+    -- SEASONAL QUEST ----------------------------------------------
+    ----------------------------------------------------------------
 
     -- Jester's Festival
     [87474] = true, -- Flower Garland (Springtime Flair)
@@ -832,23 +934,26 @@ E.IsCast = {
 
 }
 
--- Fix for a few goofy events that channel onto the player (or just where we need it).
+--------------------------------------------------------------------------------------------------------------------------------
+-- Fix for a few goofy events that channel onto the player (or just where we need it)
+--------------------------------------------------------------------------------------------------------------------------------
 E.CastOverride = {
 
     [4197] = true, -- Recovering (NPC Duel)
     [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
-
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
 -- Some abilities cast into a channeled stun effect - we want these abilities to display the cast and channel if flagged.
+--------------------------------------------------------------------------------------------------------------------------------
 E.MultiCast = {
-
     [42076] = true, -- Tear (Mezha-dro's Sealing Amulet)
     [42053] = true, -- Yokudan Salute (Yokudan Totem)
-
 }
 
--- If one of these abilities stuns the player - we ignore the standard effect of breaking the cast bar.
+--------------------------------------------------------------------------------------------------------------------------------
+-- If one of these abilities stuns the player - we ignore the standard effect of breaking the cast bar. In some cases a cast event is also applied with a stun for certain quest events, etc.
+--------------------------------------------------------------------------------------------------------------------------------
 E.IgnoreCastBarStun = {
 
     -- Player
@@ -863,16 +968,22 @@ E.IgnoreCastBarStun = {
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Abilities flagged to break when EFFECT_RESULT_FADED is detected with the source as the player
+--------------------------------------------------------------------------------------------------------------------------------
 E.CastBreakOnRemoveEffect = {
 
+    -- Werewolf
     [33208] = true, -- Devour (Werewolf)
+
+    -- Vampire
     [33152] = true, -- Feed (Vampire)
-    [32893] = true, -- Drain Essence
-    [38949] = true, -- Invigorating Drain
-    [38956] = true, -- Accelerating Drain
+    [32893] = true, -- Drain Essence (Vampire)
+    [38949] = true, -- Invigorating Drain (Vampire)
+    [38956] = true, -- Accelerating Drain (Vampire)
     [32986] = true, -- Mist Form (Vampire)
-    [38963] = true, -- Elusive Mist
-    [38965] = true, -- Baleful Mist
+    [38963] = true, -- Elusive Mist (Vampire)
+    [38965] = true, -- Baleful Mist (Vampire)
 
 
     -- Quests
@@ -881,11 +992,14 @@ E.CastBreakOnRemoveEffect = {
 }
 
 --[[
+-- Possibly use later if any cast removal events need to rely on EVENT_COMBAT_EVENT
 E.CastBreakOnRemoveEvent = {
 }
 ]]--
 
--- Convert a cast time ability to channeled
+--------------------------------------------------------------------------------------------------------------------------------
+-- Convert a cast time ability to channeled, since our function detects Casts/Channels automatically and tries to sort them, we need to add a forced override for certain things we want to show as a channel when it makes sense
+--------------------------------------------------------------------------------------------------------------------------------
 E.CastChannelConvert = {
 
     [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
@@ -893,10 +1007,21 @@ E.CastChannelConvert = {
 
 }
 
--- Adds this aura to a list of fake GROUND auras to display
--- Optional: name, icon
--- Required: buff, debuff, ground = true/false
+--------------------------------------------------------------------------------------------------------------------------------
+-- Adds this aura to a list of fake Ground auras to display when the player casts them
+--------------------------------------------------------------------------------------------------------------------------------
 E.EffectGroundDisplay = {
+
+    -- Required:
+        -- buff, debuff, ground = true/false -- Choose whether this effect shows up in any of these containers
+    -- Optional:
+        --name = '' -- Add a custom name
+        --icon = '' -- Add a custom icon
+        --stackAdd = # -- How many stacks to add when this effect begins (used for Ground Mines)
+        --stackRemove = # -- How many stacks to remove when this effect ends (used for Ground Mines)
+        --stackReset = # -- Maximum stack counter (used for Ground Mines)
+        --noRemove = true -- Do not end this aura on EFFECT_RESULT_FADED
+
     -- Monster Sets
     [59590] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = A.Set_Bogdan_the_Nightflame, buff = true, debuff = false, ground = false }, -- Imperial Prison Item Set (Bogdan the Nightflame)
     [97901] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds', buff = true, debuff = false, ground = true }, -- Domihaus (Domihaus)
@@ -940,9 +1065,9 @@ E.EffectGroundDisplay = {
     ---------------------------
 
     -- Dragonknight
-    [28988] = { buff = false, debuff = false, ground = true }, -- Dragonknight Standard (Dragonknight Standard - Rank 1)
-    [32958] = { buff = false, debuff = false, ground = true, noRemove = true }, -- Shifting Standard (Shifting Standard - Rank 1)
-    [32947] = { buff = false, debuff = false, ground = true }, -- Standard of Might (Standard of Might - Rank 1)
+    [28988] = { buff = false, debuff = false, ground = true }, -- Dragonknight Standard (Dragonknight Standard)
+    [32958] = { buff = false, debuff = false, ground = true, noRemove = true }, -- Shifting Standard (Shifting Standard)
+    [32947] = { buff = false, debuff = false, ground = true }, -- Standard of Might (Standard of Might)
     [29059] = { buff = true, debuff = false, ground = false }, -- Ash Cloud (Ash Cloud)
     [20779] = { buff = true, debuff = false, ground = false }, -- Cinder Storm (Cinder Storm)
     [32710] = { buff = false, debuff = false, ground = true }, -- Eruption (Eruption)
@@ -971,15 +1096,15 @@ E.EffectGroundDisplay = {
     [23205] = { buff = false, debuff = false, ground = true }, -- Lightning Flood (Lightning Flood)
 
     -- Templar
-    [95933] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds', buff = false, debuff = false, ground = true }, -- Spear Shards (Spear Shards - Rank 1)
-    [95957] = { icon = 'esoui/art/icons/ability_templar_light_strike.dds', buff = false, debuff = false, ground = true }, -- Luminous Shards (Luminous Shards - Rank 1)
-    [26880] = { icon = 'esoui/art/icons/ability_templarsun_thrust.dds', buff = false, debuff = false, ground = true }, -- Blazing Spear (Blazing Spear - Rank 1)
-    [21976] = { buff = false, debuff = false, ground = true }, -- Nova (Nova - Rank 1)
-    [22003] = { buff = false, debuff = false, ground = true }, -- Solar Prison (Solar Prison - Rank 1)
-    [22001] = { buff = false, debuff = false, ground = true }, -- Solar Disturbance (Solar Disturbance - Rank 1)
-    [80540] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds', buff = true, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual - Rank 1)
-    [80547] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds', buff = true, debuff = false, ground = false }, -- Ritual of Retribution (Ritual of Retribution - Rank 1)
-    [80553] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds', buff = true, debuff = false, ground = false }, -- Extended Ritual (Extended Ritual - Rank 1)
+    [95933] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds', buff = false, debuff = false, ground = true }, -- Spear Shards (Spear Shards)
+    [95957] = { icon = 'esoui/art/icons/ability_templar_light_strike.dds', buff = false, debuff = false, ground = true }, -- Luminous Shards (Luminous Shards)
+    [26880] = { icon = 'esoui/art/icons/ability_templarsun_thrust.dds', buff = false, debuff = false, ground = true }, -- Blazing Spear (Blazing Spear)
+    [21976] = { buff = false, debuff = false, ground = true }, -- Nova (Nova)
+    [22003] = { buff = false, debuff = false, ground = true }, -- Solar Prison (Solar Prison)
+    [22001] = { buff = false, debuff = false, ground = true }, -- Solar Disturbance (Solar Disturbance)
+    [80540] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds', buff = true, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual)
+    [80547] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds', buff = true, debuff = false, ground = false }, -- Ritual of Retribution (Ritual of Retribution)
+    [80553] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds', buff = true, debuff = false, ground = false }, -- Extended Ritual (Extended Ritual)
     --[22234] = { buff = true, debuff = false, ground = false }, -- Rune Focus (Rune Focus)
     --[22240] = { buff = true, debuff = false, ground = false }, -- Channeled Focus (Channeled Focus)
     --[22237] = { buff = true, debuff = false, ground = false }, -- Restoring Focus (Restoring Focus)
@@ -1011,41 +1136,41 @@ E.EffectGroundDisplay = {
     -- Destruction Staff ------
     ---------------------------
 
-    [28807] = { buff = false, debuff = false, ground = true }, -- Wall of Fire (Wall of Elements - Rank 1)
-    [28854] = { buff = false, debuff = false, ground = true }, -- Wall of Storms (Wall of Elements - Rank 1)
-    [28849] = { buff = false, debuff = false, ground = true }, -- Wall of Frost (Wall of Elements - Rank 1)
-    [39053] = { buff = false, debuff = false, ground = true }, -- Unstable Wall of Fire (Unstable Wall of Elements - Rank 1)
-    [39073] = { buff = false, debuff = false, ground = true }, -- Unstable Wall of Storms (Unstable Wall of Elements - Rank 1)
-    [39067] = { buff = false, debuff = false, ground = true }, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1)
-    [39012] = { buff = false, debuff = false, ground = true }, -- Blockade of Fire (Elemental Blockade - Rank 1)
-    [39018] = { buff = false, debuff = false, ground = true }, -- Blockade of Storms (Elemental Blockade - Rank 1)
-    [39028] = { buff = false, debuff = false, ground = true }, -- Blockade of Frost (Elemental Blockade - Rank 1)
-    [83625] = { buff = false, debuff = false, ground = true }, -- Fire Storm (Elemental Storm - Rank 1)
-    [83630] = { buff = false, debuff = false, ground = true }, -- Thunder Storm (Elemental Storm - Rank 1)
-    [83628] = { buff = false, debuff = false, ground = true }, -- Ice Storm (Elemental Storm - Rank 1)
-    [85126] = { buff = false, debuff = false, ground = true }, -- Fiery Rage (Elemental Rage - Rank 1)
-    [85130] = { buff = false, debuff = false, ground = true }, -- Thunderous Rage (Elemental Rage - Rank 1)
-    [85128] = { buff = false, debuff = false, ground = true }, -- Icy Rage (Elemental Rage - Rank 1)
+    [28807] = { buff = false, debuff = false, ground = true }, -- Wall of Fire (Wall of Elements)
+    [28854] = { buff = false, debuff = false, ground = true }, -- Wall of Storms (Wall of Elements)
+    [28849] = { buff = false, debuff = false, ground = true }, -- Wall of Frost (Wall of Elements)
+    [39053] = { buff = false, debuff = false, ground = true }, -- Unstable Wall of Fire (Unstable Wall of Elements)
+    [39073] = { buff = false, debuff = false, ground = true }, -- Unstable Wall of Storms (Unstable Wall of Elements)
+    [39067] = { buff = false, debuff = false, ground = true }, -- Unstable Wall of Frost (Unstable Wall of Elements)
+    [39012] = { buff = false, debuff = false, ground = true }, -- Blockade of Fire (Elemental Blockade)
+    [39018] = { buff = false, debuff = false, ground = true }, -- Blockade of Storms (Elemental Blockade)
+    [39028] = { buff = false, debuff = false, ground = true }, -- Blockade of Frost (Elemental Blockade)
+    [83625] = { buff = false, debuff = false, ground = true }, -- Fire Storm (Elemental Storm)
+    [83630] = { buff = false, debuff = false, ground = true }, -- Thunder Storm (Elemental Storm)
+    [83628] = { buff = false, debuff = false, ground = true }, -- Ice Storm (Elemental Storm)
+    [85126] = { buff = false, debuff = false, ground = true }, -- Fiery Rage (Elemental Rage)
+    [85130] = { buff = false, debuff = false, ground = true }, -- Thunderous Rage (Elemental Rage)
+    [85128] = { buff = false, debuff = false, ground = true }, -- Icy Rage (Elemental Rage)
 
     ---------------------------
     -- Restoration Staff ------
     ---------------------------
 
-    [28385] = { buff = true, debuff = false, ground = false, noRemove = true }, -- Grand Healing (Grand Healing - Rank 1)
-    [40058] = { buff = true, debuff = false, ground = false, noRemove = true }, -- Illustrious Healing (Illustrious Healing - Rank 1)
-    [40060] = { buff = true, debuff = false, ground = false, noRemove = true }, -- Healing Springs (Healing Springs - Rank 1)
+    [28385] = { buff = true, debuff = false, ground = false, noRemove = true }, -- Grand Healing (Grand Healing)
+    [40058] = { buff = true, debuff = false, ground = false, noRemove = true }, -- Illustrious Healing (Illustrious Healing)
+    [40060] = { buff = true, debuff = false, ground = false, noRemove = true }, -- Healing Springs (Healing Springs)
 
     ---------------------------
     -- Fighters Guild ---------
     ---------------------------
 
-    [35737] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 1)
-    [40181] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 1)
-    [40169] = { buff = true, debuff = false, ground = false }, -- Ring of Preservation (Ring of Preservation - Rank 1)
-    [35750] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Trap Beast (Trap Beast - Rank 1)
-    [40382] = { buff = false, debuff = false, ground = true, stackAdd = 2, stackRemove = 2, stackReset = 2 }, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40388] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40372] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+    [35737] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection)
+    [40181] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead)
+    [40169] = { buff = true, debuff = false, ground = false }, -- Ring of Preservation (Ring of Preservation)
+    [35750] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Trap Beast (Trap Beast)
+    [40382] = { buff = false, debuff = false, ground = true, stackAdd = 2, stackRemove = 2, stackReset = 2 }, -- Rearming Trap (Rearming Trap)
+    [40388] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Rearming Trap (Rearming Trap)
+    [40372] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap)
 
     ---------------------------
     -- Mages Guild ------------
@@ -1087,12 +1212,20 @@ E.EffectGroundDisplay = {
     [61522] = { name = A.Skill_Lingering_Flare, buff = false, debuff = false, ground = true }, -- Nova (Lingering Flare)
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
 -- This will create an effect on the player or target when X skill is detected as active. SCB creates the buff by the name listed here, this way if 3 or 4 effects all need to display for 1 ability, it will only show the one aura.
+--------------------------------------------------------------------------------------------------------------------------------
 E.EffectCreateSkillAura = {
-    -- icon, name
-    -- removeOnEnd -- Remove this aura when one of these effects ends.
-    -- consolidate -- Also use this when consolidated auras is enabled.
-    -- extendedDisplay - This will only display if the option to display single effects is enabled as well.
+
+    -- Required:
+        -- abilityId = #
+    -- Optional:
+        --name = '' -- Add a custom name
+        --icon = '' -- Add a custom icon
+        -- alwaysShow = true -- Ignore the menu setting and always show this ability - Used for PVE abilities where we need to create additional information
+        -- removeOnEnd = true -- Remove this aura when one of these effects ends.
+        -- consolidate = true -- Also use this when consolidated auras is enabled.
+        -- extendedDisplay = true - This will only display if the option to display single effects is enabled as well.
 
     -- Dragonknight
     [75088] = { removeOnEnd = true, consolidate = true, extendedDisplay = true, abilityId = 28969 }, -- Major Prophecy --> Inferno
@@ -1122,11 +1255,11 @@ E.EffectCreateSkillAura = {
     [62240] = { removeOnEnd = false, consolidate = true, abilityId = 36891 }, -- Major Sorcery --> Sap Essence
 
     -- Templar
-    [26213] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Fortitude (Restoring Aura - All Ranks)
-    [26216] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Intellect (Restoring Aura - All Ranks)
-    [26215] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Endurance (Restoring Aura - All Ranks)
-    [22236] = { consolidate = true, abilityId = 22234 }, -- Major Resolve (Rune Focus - Rank 1)
-    [44820] = { consolidate = true, abilityId = 22234 }, -- Major Ward (Rune Focus - Rank 1)
+    [26213] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Fortitude (Restoring Aura)
+    [26216] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Intellect (Restoring Aura)
+    [26215] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Endurance (Restoring Aura)
+    [22236] = { consolidate = true, abilityId = 22234 }, -- Major Resolve (Rune Focus)
+    [44820] = { consolidate = true, abilityId = 22234 }, -- Major Ward (Rune Focus)
 
     -- Warden
     [86267] = { consolidate = true, abilityId = 86037 }, -- Major Expedition --> Falcon's Swiftness
@@ -1155,22 +1288,22 @@ E.EffectCreateSkillAura = {
 
     -- Destruction Staff
     [53881] = { removeOnEnd = true, abilityId = 29173 }, -- Major Breach --> Weakness to Elements
-    [62775] = { removeOnEnd = true, abilityId = 39089 }, -- Major Breach (Elemental Susceptibility - Rank 1)
-    [62787] = { removeOnEnd = true, abilityId = 39095 }, -- Major Breach (Elemental Drain - Rank 1)
-    [39100] = { removeOnEnd = true, abilityId = 39095 }, -- Minor Magickasteal (Elemental Drain - Rank 1)
+    [62775] = { removeOnEnd = true, abilityId = 39089 }, -- Major Breach (Elemental Susceptibility)
+    [62787] = { removeOnEnd = true, abilityId = 39095 }, -- Major Breach (Elemental Drain)
+    [39100] = { removeOnEnd = true, abilityId = 39095 }, -- Minor Magickasteal (Elemental Drain)
 
     -- Restoration Staff
-    [37247] = { consolidate = true, abilityId = 37243 }, -- Minor Resolve (Blessing of Protection - Rank 1)
-    [62619] = { consolidate = true, abilityId = 37243 }, -- Minor Ward (Blessing of Protection - Rank 1)
-    [62626] = { consolidate = true, abilityId = 40103, name = A.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration - Rank 1)
-    [62627] = { consolidate = true, abilityId = 40103, name = A.Skill_Blessing_of_Restoration }, -- Minor Ward (Blessing of Restoration - Rank 1)
-    [62634] = { consolidate = true, abilityId = 40094 }, -- Minor Resolve (Combat Prayer - Rank 1)
-    [62635] = { consolidate = true, abilityId = 40094 }, -- Minor Ward (Combat Prayer - Rank 1)
-    [62636] = { consolidate = true, abilityId = 40094 }, -- Minor Berserk (Combat Prayer - Rank 1)
-    [88565] = { removeOnEnd = true, abilityId = 31531 }, -- Minor Lifesteal (Force Siphon - Rank 1)
-    [88575] = { removeOnEnd = true, abilityId = 40109 }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
-    [88576] = { removeOnEnd = true, abilityId = 40109 }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
-    [88606] = { removeOnEnd = true, abilityId = 40116 }, -- Minor Lifesteal (Quick Siphon - Rank 1)
+    [37247] = { consolidate = true, abilityId = 37243 }, -- Minor Resolve (Blessing of Protection)
+    [62619] = { consolidate = true, abilityId = 37243 }, -- Minor Ward (Blessing of Protection)
+    [62626] = { consolidate = true, abilityId = 40103, name = A.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration)
+    [62627] = { consolidate = true, abilityId = 40103, name = A.Skill_Blessing_of_Restoration }, -- Minor Ward (Blessing of Restoration)
+    [62634] = { consolidate = true, abilityId = 40094 }, -- Minor Resolve (Combat Prayer)
+    [62635] = { consolidate = true, abilityId = 40094 }, -- Minor Ward (Combat Prayer)
+    [62636] = { consolidate = true, abilityId = 40094 }, -- Minor Berserk (Combat Prayer)
+    [88565] = { removeOnEnd = true, abilityId = 31531 }, -- Minor Lifesteal (Force Siphon)
+    [88575] = { removeOnEnd = true, abilityId = 40109 }, -- Minor Lifesteal (Siphon Spirit)
+    [88576] = { removeOnEnd = true, abilityId = 40109 }, -- Minor Lifesteal (Siphon Spirit)
+    [88606] = { removeOnEnd = true, abilityId = 40116 }, -- Minor Lifesteal (Quick Siphon)
 
     -- Armor
     [63015] = { consolidate = true, extendedDisplay = true, abilityId = 29556 }, -- Major Evasion --> Evasion
@@ -1217,7 +1350,9 @@ E.EffectCreateSkillAura = {
 
 }
 
--- Toggle a few options for some potentially useful skills.
+--------------------------------------------------------------------------------------------------------------------------------
+-- Function called in CombatInfo to toggle a few options for some potentially useful skills. Called by CombatInfo when changing menu settings for Bar Highlight Overrides.
+--------------------------------------------------------------------------------------------------------------------------------
 function E.BarHighlightRefresh()
     if LUIE.CombatInfo.SV.ShowToggledSecondary then
         -- Dragonknight
@@ -1268,13 +1403,18 @@ function E.BarHighlightRefresh()
     end
 end
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Replaces the tracking ID on an ability bar ability with a different id for the purpose of tracking effect duration on Bar Highlight tracker.
+--------------------------------------------------------------------------------------------------------------------------------
 E.BarHighlightOverride = {
-    -- newId = replace ID
-    -- showFakeAura = USE EVENT_COMBAT_EVENT instead - allows auras to display even if they weren't applied. Should be used with major/minor effects.
-    -- secondary = If menu option disabled, do not show this highlight
-    -- noRemove = don't remove effect on fading -- Doesn't apply to hostile effects. Should be used with major/minor effects.
-    -- duration = override duration
-    -- emulateGround = Don't remove this highlight on target change
+
+    -- Optional
+        -- newId = # -- Replace ID
+        -- showFakeAura = true -- USE EVENT_COMBAT_EVENT instead - allows auras to display even if they weren't applied. Should be used with major/minor effects.
+        -- secondary = true -- If the menu option for Secondary effects set to false, hide this ID
+        -- noRemove = ture -- don't remove effect on fading -- Doesn't apply to hostile effects. Should be used with major/minor effects.
+        -- duration = # -- override duration
+        -- emulateGround = true -- Don't remove this highlight on target change
 
     ---------------------------
     -- Dragonknight -----------
@@ -1410,9 +1550,9 @@ E.BarHighlightOverride = {
     [22149] = { newId = 49205 }, -- Focused Charge
     [22161] = { newId = 49213 }, -- Explosive Charge
     [15540] = { newId = 15546 }, -- Toppling Charge
-    [26188] = { newId = 95933 }, -- Spear Shards (Spear Shards - Rank 1)
-    [26858] = { newId = 95957 }, -- Luminous Shards (Luminous Shards - Rank 1)
-    [26869] = { newId = 26880 }, -- Blazing Spear (Blazing Spear - Rank 1)
+    [26188] = { newId = 95933 }, -- Spear Shards (Spear Shards)
+    [26858] = { newId = 95957 }, -- Luminous Shards (Luminous Shards)
+    [26869] = { newId = 26880 }, -- Blazing Spear (Blazing Spear)
     [22178] = { newId = 22179 }, -- Sun Shield
     [22182] = { newId = 22183 }, -- Radiant Ward
     [22180] = { newId = 49091 }, -- Blazing Shield
@@ -1423,21 +1563,21 @@ E.BarHighlightOverride = {
     -- Dawn's Wrath
     [21726] = { newId = 21728 }, -- Sun Fire
     [21729] = { newId = 21731 }, -- Vampire's Bane
-    [21732] = { newId = 21734 }, -- Reflective Light (Reflective Light - Rank 1)
+    [21732] = { newId = 21734 }, -- Reflective Light (Reflective Light)
     [22057] = { newId = 109418, secondary = true }, -- Solar Flare --> Empower
     [22110] = { newId = 24686 }, -- Dark Flare
-    [21752] = { newId = 21976 }, -- Nova (Nova - Rank 1)
-    [21755] = { newId = 22003 }, -- Solar Prison (Solar Prison - Rank 1)
-    [21758] = { newId = 22001 }, -- Solar Disturbance (Solar Disturbance - Rank 1)
+    [21752] = { newId = 21976 }, -- Nova (Nova)
+    [21755] = { newId = 22003 }, -- Solar Prison (Solar Prison)
+    [21758] = { newId = 22001 }, -- Solar Disturbance (Solar Disturbance)
 
     -- Restoring Light
     [22253] = { newId = 35632, secondary = true }, -- Honor the Dead
     [22314] = { newId = 108935, secondary = true, showFakeAura = true, noRemove = true }, -- Hasty Prayer --> Minor Expedition
     [26209] = { newId = 26220 }, -- Restoring Aura
     [26807] = { newId = 26809 }, -- Radiant Aura
-    [22265] = { newId = 80540 }, -- Cleansing Ritual (Cleansing Ritual - Rank 1)
-    [22259] = { newId = 80547 }, -- Ritual of Retribution (Ritual of Retribution - Rank 1)
-    [22262] = { newId = 80553 }, -- Extended Ritual (Extended Ritual - Rank 1)
+    [22265] = { newId = 80540 }, -- Cleansing Ritual (Cleansing Ritual)
+    [22259] = { newId = 80547 }, -- Ritual of Retribution (Ritual of Retribution)
+    [22262] = { newId = 80553 }, -- Extended Ritual (Extended Ritual)
 
     [22234] = { showFakeAura = true, emulateGround = true }, -- Rune Focus --> Major Resolve
     [22240] = { showFakeAura = true, emulateGround = true }, -- Channeled Focus
@@ -1541,18 +1681,18 @@ E.BarHighlightOverride = {
     ---------------------------
 
     [46348] = { newId = 48011 }, -- Crushing Shock --> Uber Attack
-    [29073] = { newId = 62648 }, -- Flame Touch (Destructive Touch - Rank 1)
-    [29089] = { newId = 62722 }, -- Shock Touch (Destructive Touch - Rank 1)
-    [29078] = { newId = 62692 }, -- Frost Touch (Destructive Touch - Rank 1)
-    [38985] = { newId = 62668 }, -- Flame Clench (Destructive Clench - Rank 1)
-    [38993] = { newId = 62733 }, -- Shock Clench (Destructive Clench - Rank 1)
-    [38989] = { newId = 62702 }, -- Frost Clench (Destructive Clench - Rank 1)
-    [38944] = { newId = 62682 }, -- Flame Reach (Destructive Reach - Rank 1)
-    [38978] = { newId = 62745 }, -- Shock Reach (Destructive Reach - Rank 1)
-    [38970] = { newId = 62712 }, -- Frost Reach (Destructive Reach - Rank 1)
-    [29173] = { newId = 53881 }, -- Weakness to Elements (Weakness to Elements - Rank 1)
-    [39089] = { newId = 62775 }, -- Elemental Susceptibility (Elemental Susceptibility - Rank 1)
-    [39095] = { newId = 62787 }, -- Elemental Drain (Elemental Drain - Rank 1)
+    [29073] = { newId = 62648 }, -- Flame Touch (Destructive Touch)
+    [29089] = { newId = 62722 }, -- Shock Touch (Destructive Touch)
+    [29078] = { newId = 62692 }, -- Frost Touch (Destructive Touch)
+    [38985] = { newId = 62668 }, -- Flame Clench (Destructive Clench)
+    [38993] = { newId = 62733 }, -- Shock Clench (Destructive Clench)
+    [38989] = { newId = 62702 }, -- Frost Clench (Destructive Clench)
+    [38944] = { newId = 62682 }, -- Flame Reach (Destructive Reach)
+    [38978] = { newId = 62745 }, -- Shock Reach (Destructive Reach)
+    [38970] = { newId = 62712 }, -- Frost Reach (Destructive Reach)
+    [29173] = { newId = 53881 }, -- Weakness to Elements (Weakness to Elements)
+    [39089] = { newId = 62775 }, -- Elemental Susceptibility (Elemental Susceptibility)
+    [39095] = { newId = 62787 }, -- Elemental Drain (Elemental Drain)
     [39162] = { newId = 39168 }, -- Flame Pulsar --> Minor Mangle
     [39167] = { newId = 39181 }, -- Storm Pulsar --> Minor Mangle
     [39163] = { newId = 39180 }, -- Frost Pulsar --> Minor Mangle
@@ -1565,12 +1705,12 @@ E.BarHighlightOverride = {
     [40058] = { noRemove = true }, -- Illustrious Healing (Illustrious Healing)
     [40060] = { noRemove = true }, -- Healing Springs (Healing Springs)
 
-    [37243] = { showFakeAura = true, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 1)
-    [40103] = { showFakeAura = true, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration - Rank 1)
-    [40094] = { showFakeAura = true, noRemove = true }, -- Combat Prayer (Combat Prayer - Rank 1)
-    [31531] = { newId = 88565 }, -- Force Siphon (Force Siphon - Rank 1)
-    [40109] = { newId = 88575 }, -- Siphon Spirit (Siphon Spirit - Rank 1)
-    [40116] = { newId = 88606 }, -- Quick Siphon (Quick Siphon - Rank 1)
+    [37243] = { showFakeAura = true, noRemove = true }, -- Blessing of Protection (Blessing of Protection)
+    [40103] = { showFakeAura = true, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration)
+    [40094] = { showFakeAura = true, noRemove = true }, -- Combat Prayer (Combat Prayer)
+    [31531] = { newId = 88565 }, -- Force Siphon (Force Siphon)
+    [40109] = { newId = 88575 }, -- Siphon Spirit (Siphon Spirit)
+    [40116] = { newId = 88606 }, -- Quick Siphon (Quick Siphon)
 
     ---------------------------
     -- Armor ------------------
@@ -1608,12 +1748,12 @@ E.BarHighlightOverride = {
     [35721] = { newId = 35736 }, -- Silver Bolts
     [40300] = { newId = 40302 }, -- Silver Shards
     [40336] = { newId = 40340 }, -- Silver Leash
-    [35750] = { newId = 68595, showFakeAura = true }, -- Trap Beast (Trap Beast - Rank 1)
-    [40382] = { newId = 68632, showFakeAura = true }, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40372] = { newId = 68628, showFakeAura = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
-    [35713] = { newId = 62305 }, -- Dawnbreaker (Dawnbreaker - Rank 1)
-    [40161] = { newId = 62310 }, -- Flawless Dawnbreaker (Flawless Dawnbreaker - Rank 1)
-    [40158] = { newId = 62314 }, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
+    [35750] = { newId = 68595, showFakeAura = true }, -- Trap Beast (Trap Beast)
+    [40382] = { newId = 68632, showFakeAura = true }, -- Rearming Trap (Rearming Trap)
+    [40372] = { newId = 68628, showFakeAura = true }, -- Lightweight Beast Trap (Lightweight Beast Trap)
+    [35713] = { newId = 62305 }, -- Dawnbreaker (Dawnbreaker)
+    [40161] = { newId = 62310 }, -- Flawless Dawnbreaker (Flawless Dawnbreaker)
+    [40158] = { newId = 62314 }, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting)
 
     ---------------------------
     -- Mages Guild ------------
@@ -1680,7 +1820,16 @@ E.BarHighlightOverride = {
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Data for icon & description to show for the fake Disguise buff applied to the player.
+--------------------------------------------------------------------------------------------------------------------------------
 E.DisguiseIcons = {
+
+    -- Required:
+        -- icon = '' -- Icon to use
+        -- description = '' -- String to use for description when equipped (used by Chat Announcements)
+        -- id = # -- Ability id to pull a tooltip description from
+
     [2571]  = { icon = 'LuiExtended/media/icons/disguises/disguise_midnight_union_disguise.dds', description = 'as a Midnight Union thief.', id = 35607 },
     [27266] = { icon = 'LuiExtended/media/icons/disguises/disguise_vanguard_uniform.dds', description = 'as a soldier in Tanval\'s Vanguard.', id = 50177 },
     [29536] = { icon = 'LuiExtended/media/icons/disguises/disguise_stormfist_disguise.dds', description = 'as a Stormfist soldier.', id = 19086 },
@@ -1717,15 +1866,21 @@ E.DisguiseIcons = {
     [79505] = { icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'as a Sentinel Guard.', id = nil }, -- NO ICON (Not sure it exists)
     [94209] = { icon = 'LuiExtended/media/icons/disguises/disguise_scarlet_judges_regalia.dds', description = 'as The Scarlet Judge.', id = 85204 },
     -- TODO: Are we missing Dunmer Cultural Garb?
-    [0] = { icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'by the Earring of Disguise.', id = nil }, -- Generic Disguise override - at least the Arenthia quest in Reaper's March applies a disguise without utilizing an item
+    [0] = { icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'by the Earring of Disguise.', id = nil }, -- Generic Disguise override - at least the Arenthia quest in Reaper's March applies a disguise without utilizing an item -- TODO -- check others
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Icon to display for Assistant Collectibles
+--------------------------------------------------------------------------------------------------------------------------------
 E.AssistantIcons = {
     [GetCollectibleName(301)] = 'LuiExtended/media/icons/abilities/ability_innate_assistant_nuzhimeh.dds',
     [GetCollectibleName(300)] = 'LuiExtended/media/icons/abilities/ability_innate_assistant_pirharri.dds',
     [GetCollectibleName(267)] = 'LuiExtended/media/icons/abilities/ability_innate_assistant_tythis.dds',
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- When a target name matches a string here, add id's in the table with the name and icon specified. We use this primarily to add CC Immunity buffs for bosses.
+--------------------------------------------------------------------------------------------------------------------------------
 E.AddNameAura = {
 
     -- World Bosses
@@ -1847,6 +2002,10 @@ E.AddNameAura = {
     ['Barbas'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
 }
 
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- Synergy Icon Overrides - When a synergy with a matching ability name appears, change the icon or name.
+--------------------------------------------------------------------------------------------------------------------------------
 E.SynergyNameOverride = {
     ['Tonal Inverter'] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_tonal_inverter.dds' }, -- Tonal Inverter (Divine Intervention)
     [A.Skill_Blade_of_Woe] = { icon = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds' }, -- Blade of Woe (Dark Brotherhood)
@@ -1857,6 +2016,9 @@ E.SynergyNameOverride = {
     [A.Set_Shield_of_Ursus] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', name = A.Set_Ursus_Blessing }, -- Ursus's Blessing (Haven of Ursus)
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- When a bar ability proc with a matching id appears, change the icon.
+--------------------------------------------------------------------------------------------------------------------------------
 E.BarIdOverride = {
 
     -- Dragonknight
@@ -1874,6 +2036,9 @@ E.BarIdOverride = {
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Table of effects to adjust only based off a specific target - this allows us to override the name/icon or hide an effect only when the source is a specific NPC. Used to change icons for attacks with the same id coming from different types of animals, etc...
+--------------------------------------------------------------------------------------------------------------------------------
 E.EffectOverrideByName = {
     -- TUTORIAL
 
@@ -2054,9 +2219,14 @@ E.EffectOverrideByName = {
                 },
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Override source name - when one of these abilities hits change the source to match this name. Used for death recap to rename odd trap or source names for damage.
+--------------------------------------------------------------------------------------------------------------------------------
 E.EffectSourceOverride = {
-    [71678] = {pet = 'Morkuldin'}, -- Light Attack {Morkuldin}
-    [71679] = {pet = 'Morkuldin'}, -- Cleave {Morkuldin}
+
+    -- PLAYER ABILITIES
+    [71678] = {pet = 'Morkuldin'}, -- Light Attack {Morkuldin} -- TODO: Localize
+    [71679] = {pet = 'Morkuldin'}, -- Cleave {Morkuldin} -- TODO: Localize
 
     -- TRAPS
     [62769] = {source = A.Trap_Cold_Fire_Trap}, -- Coldharbour Flames {MQ Tutorial}
@@ -2092,7 +2262,9 @@ E.EffectSourceOverride = {
     [89282] = {source = 'Exploding Spider'}, -- Spider Explosion {A Web of Trouble}
 }
 
--- If one of these id's is applied then we set the buffSlot for ON_EFFECT_CHANGED to be a single name identifier to prevent more than one aura from appearing. Only works with unlimited duration or equal duration effects.
+--------------------------------------------------------------------------------------------------------------------------------
+-- If one of these ability Names is applied then we set the buffSlot for ON_EFFECT_CHANGED to be a single name identifier to prevent more than one aura from appearing. Only works with unlimited duration or equal duration effects.
+--------------------------------------------------------------------------------------------------------------------------------
 E.EffectMergeName = {
 
     [A.Skill_Overcharge] = "MERGED_EFFECT_OVERCHARGE",
@@ -2102,6 +2274,9 @@ E.EffectMergeName = {
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- If one of these id's is applied then we set the buffSlot for ON_EFFECT_CHANGED to be a single name identifier to prevent more than one aura from appearing. Only works with unlimited duration or equal duration effects.
+--------------------------------------------------------------------------------------------------------------------------------
 E.EffectMergeId = {
 
     [21314] = "MERGED_EFFECT_SPIKE_TRAP_QUEST", -- Trap Sprung! (Auridon - An Act of Kindness)
@@ -2109,7 +2284,11 @@ E.EffectMergeId = {
 
 }
 
-E.EffectHideSCT = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!)
+--------------------------------------------------------------------------------------------------------------------------------
+-- Hide this ID from appearing in any way on Combat Cloud Text - Useful for spammy ids.
+--------------------------------------------------------------------------------------------------------------------------------
+E.EffectHideSCT = {
+
     -- Player - Basic
     [20301] = true, -- Crouch Drain
     [15356] = true, -- Sprint Drain
@@ -2179,9 +2358,9 @@ E.EffectHideSCT = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!
     ----------------------------
 
     -- Passives
-    [80195] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rune Focus
-    [80230] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Cleansing Ritual
-    [80261] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rite of Passage
+    [80195] = true, -- Sacred Ground (Sacred Ground) - Rune Focus
+    [80230] = true, -- Sacred Ground (Sacred Ground) - Cleansing Ritual
+    [80261] = true, -- Sacred Ground (Sacred Ground) - Rite of Passage
 
     -- Actives
     [24307] = true, -- Solar Disturbance Snare (Solar Disturbance)
@@ -2215,11 +2394,11 @@ E.EffectHideSCT = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!
     -- Destruction Staff
     ----------------------------
 
-    [68719] = true, -- Frozen (Wall of Elements - All Ranks)
-    [62928] = true, -- Wall of Frost (Wall of Elements - Rank 1)
-    [39068] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1)
-    [62948] = true, -- Blockade of Frost (Elemental Blockade - Rank 1)
-    [104825] = true, -- Icy Rage (Elemental Rage - All Ranks)
+    [68719] = true, -- Frozen (Wall of Elements)
+    [62928] = true, -- Wall of Frost (Wall of Elements)
+    [39068] = true, -- Unstable Wall of Frost (Unstable Wall of Elements)
+    [62948] = true, -- Blockade of Frost (Elemental Blockade)
+    [104825] = true, -- Icy Rage (Elemental Rage)
 
     ----------------------------
     -- Vampire Quest
@@ -2318,22 +2497,32 @@ E.EffectHideSCT = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!
     [92704] = true, -- Volcanic Debris
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Hide this ID from displaying a cleanse notification on Combat Text - used to stop some spammy abilities, or abilities that cannot be cleansed from displaying a cleanse alert.
+--------------------------------------------------------------------------------------------------------------------------------
 E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMBAT CLOUD ONLY!!!)
 
+    -- Main Story Quest
     [27776] = true, -- Feeding (Daughter of Giants)
     [38215] = true -- Death's Gaze (Shadow of Sancre Tor)
 
 }
 
--- Using a separate chart for ZOS Artificial Effects just in case this is significantly expanded at any point
+--------------------------------------------------------------------------------------------------------------------------------
+-- Using a separate chart for ZOS Artificial Effects just in case this is significantly expanded at any point -- Overrides Artificial Effect id name or icon.
+--------------------------------------------------------------------------------------------------------------------------------
 E.ArtificialEffectOverride = {
     --[0] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds' }, -- Battle Spirit (Cyrodiil, Duel)
     [2] = { name = zo_strformat("<<1>> (<<2>>)", A.Skill_Battle_Spirit, A.Skill_Imperial_City) }, -- Battle Spirit Imperial City
     -- 3 = Battleground Deserter Penalty
 }
 
--- Table of tooltips to add a third line to for Major/Minor effects. These describe the effect.
+--------------------------------------------------------------------------------------------------------------------------------
+-- Table of NAME or ID's to add a third line to the tooltip. Any ability listed here should use its source ability as the tooltip, and this added 3 line will describe the effect. Used for major/minor effects & potions/poison primarily.
+--------------------------------------------------------------------------------------------------------------------------------
 E.TooltipNameOverride = {
+
+    -- Major/Minor Buffs
     [A.Skill_Minor_Resolve]         = T.Skill_Minor_Resolve,
     [A.Skill_Major_Resolve]         = T.Skill_Major_Resolve,
     [A.Skill_Minor_Ward]            = T.Skill_Minor_Ward,
@@ -2372,6 +2561,7 @@ E.TooltipNameOverride = {
     [A.Skill_Minor_Toughness]       = T.Skill_Minor_Toughness,
     [A.Skill_Major_Courage]         = T.Skill_Major_Courage,
 
+    -- Major/Minor Debuffs
     [A.Skill_Minor_Breach]          = T.Skill_Minor_Breach,
     [A.Skill_Major_Breach]          = T.Skill_Major_Breach,
     [A.Skill_Minor_Fracture]        = T.Skill_Minor_Fracture,
@@ -2388,6 +2578,7 @@ E.TooltipNameOverride = {
     [A.Skill_Minor_Cowardice]       = T.Skill_Minor_Cowardice,
     [A.Skill_Minor_Mangle]          = T.Skill_Minor_Mangle,
 
+    -- Misc Buffs & Debuffs
     [A.Skill_Empower]               = T.Skill_Empower,
     [A.Skill_Hindrance]             = T.Skill_Hindrance,
     [A.Skill_Stun]                  = T.Generic_Stun,
@@ -2395,19 +2586,17 @@ E.TooltipNameOverride = {
     [A.Skill_Revealed]              = T.Generic_Reveal,
     [A.Skill_Marked]                = T.Generic_Marked,
 
-    -- POTIONS
+    -- Potions
     [45239]                         = T.Generic_CC_Immunity, -- ... of Immovability (2 Traits)
     [45463]                         = T.Generic_CC_Immunity, -- ... of Immovability (3 Traits)
     [72930]                         = T.Generic_CC_Immunity, -- Alliance Health Draught
     [86698]                         = T.Generic_CC_Immunity, -- Gold Coast Survivor Elixir
     [92416]                         = T.Generic_CC_Immunity, -- Gold Coast Swift Survivor Elixir
-
     [45237]                         = T.Generic_Invisibility, -- ... of Invisibility (2 Traits)
     [45460]                         = T.Generic_Invisibility, -- ... of Invisibility (3 Traits)
     [86780]                         = T.Generic_Invisibility, -- Crown Invisibility Potion
     [86699]                         = T.Generic_Invisibility, -- Gold Coast Survivor Elixir
     [78058]                         = T.Generic_Invisibility, -- Roguish Escape Draught
-
     [79709]                         = T.Generic_Bleed, -- ... of Creeping Ravage Health (2 Traits)
     [46113]                         = T.Generic_Bleed, -- ... of Ravage Health (2 Traits)
     [46217]                         = T.Generic_Bleed, -- ... of Ravage Health (3 Traits)
@@ -2420,7 +2609,7 @@ E.TooltipNameOverride = {
     [46199]                         = T.Generic_Ravage_Stamina_Potion, -- ... of Ravage Stamina (2 Traits)
     [46240]                         = T.Generic_Ravage_Stamina_Potion, -- ... of Ravage Stamina (3 Traits)
 
-    -- POISONS
+    -- Poisons
     [79133]                         = T.Generic_Poison, -- ... of Drain Health (2 Traits)
     [79134]                         = T.Generic_HoT, -- ... of Drain Health (2 Traits)
     [79135]                         = T.Generic_Poison, -- ... of Drain Health (3 Traits)
@@ -2453,10 +2642,8 @@ E.TooltipNameOverride = {
     [79701]                         = T.Generic_Poison, -- ... of Gradual Drain Health (3 Traits)
     [79702]                         = T.Generic_HoT, -- ... of Gradual Drain Health (3 Traits)
     [79707]                         = T.Generic_Poison, -- ... of Gradual Ravage Health (2 Traits)
-
     [81553]                         = T.Generic_Poison, -- Cloudy Damage Health Poison
     [81551]                         = T.Generic_Poison, -- Cloudy Gradual Ravage Health Poison
-
     [88476]                         = T.Generic_Poison, -- Crown Debilitating Poison
     [88471]                         = T.Generic_Ravage_Magicka_Poison, -- Crown Draining Poison
     [88475]                         = T.Generic_Ravage_Stamina_Poison, -- Crown Draining Poison
@@ -2468,8 +2655,10 @@ E.TooltipNameOverride = {
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
 -- LUIE for the most part overwrites default ability tooltips due to the fact they are only exposed for buffs/debuffs that are on the player. In some cases there is no description with scaling or we need to still use the default where possible.
--- The most noteworthy case of this is Mundus Boons, where there is a tooltip but no description. We want to display a generic tooltip describing the effect if mousing over another player - but display the default for self.
+-- The most noteworthy case of this is Mundus Boons, where there is a tooltip but no description. We want to display a generic tooltip describing the effect if mousing over another player - but display the default value with accurate number for self.
+--------------------------------------------------------------------------------------------------------------------------------
 E.TooltipUseDefault = {
 
 [13940] = true, -- Boon: The Warrior
@@ -2488,16 +2677,24 @@ E.TooltipUseDefault = {
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- Override various information displayed for Effect auras
+--------------------------------------------------------------------------------------------------------------------------------
 E.EffectOverride = {
-    -- Override the display information for various effect auras:
-    -- icon = Change Icon
-    -- name = Change Name
-    -- hide = Hide this aura from appearing
-    -- type = 1 or BUFF_EFFECT_TYPE_DEBUFF
-    -- duration = modify the duration display of this effect. ONLY NEGATIVE VALUES supported. This will subject x seconds from the duration of the effect. Can also set to 0 to display the buff for an unlimited amount of time until an action result of fade occurs.
-    -- unbreakable = flag this aura as unremoveable and change border color to grey for debuffs or cyan for buffs
+    -- Optional:
+    -- icon = '' -- Change Icon
+    -- name = '' -- Change Name
+    -- tooltip = '' -- Set a custom tooltip to display for this ability
+    -- hide = true -- Hide this aura from appearing
+    -- type = 1 or BUFF_EFFECT_TYPE_DEBUFF -- Adjust this effect to be a debuff or not a debuff to fix API errors (Commonly used as most undispellable debuffs show as a buff)
+    -- duration = # modify the duration display of this effect. Option 1 - Set a negative value - to subtract x seconds from the duration of the effect. Option 2 - Set to 0 to display the buff for an unlimited amount of time until an action result of fade occurs.
+    -- unbreakable = true -- flag this aura as unremoveable and change border color to grey for debuffs or cyan for buffs
     -- forcedContainer = 'short' or 'long' - Forces a buff to appear in one of these containers
-    -- consolidate = If the menu option to consolidate buffs is enabled, these auras will be hidden.
+    -- consolidate = true -- If the menu option to consolidate buffs is enabled, these auras will be hidden.
+    -- groundLabel = true -- "Display a "G" ground label on this effect to indicate it is the result of standing in a ground aura
+    -- noDuplicate = true -- Adds to a table that uses an expensive function - in some cases effects like Shuffle add a new aura every time the effect is cast. This will flag the effect to only show the latest casted one and hide the others.
+    -- hideReduce = true -- Hide this aura if the "HIDE PAIRED AURAS" menu setting is enabled. Merging similar effects so as not to clutter the UI such as the Sun Fire effect with its snare.
+    -- tooltipValue2Mod = # -- Needed in some cases to derive a value on an ability tooltip. This value is used for effects like the snare from Sun Fire, when the duration needs to be derived from either buff since one can potentially be hidden.
 
     -- TEMP MOVE LATER
     [64197] = { forcedContainer = 'short' }, -- Sanctuary Cyrodiil passive is considered unlimited duration, but the effect is only while the player is in the area. Should show up under short buffs.
@@ -3876,8 +4073,8 @@ E.EffectOverride = {
     [32685] = { tooltip = T.Skill_Fossilize_Stun }, -- Fossilize (Fossilize)
     [61785] = { tooltip = T.Generic_Immobilize }, -- Fossilize (Fossilize)
     [32678] = { tooltip = T.Skill_Shattering_Rocks_Stun }, -- Shattering Rocks (Shattering Rocks)
-    [108813] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, name = A.Skill_Shattering_Rocks, tooltip = T.Skill_Shattering_Rocks }, -- Heal Trigger Shattering Rocks (Shattering Rocks - Rank 1)
-    [108811] = { icon = 'esoui/art/icons/ability_dragonknight_014b.dds', name = A.Skill_Shattering_Rocks }, -- Shattering Rocks Heal (Shattering Rocks - Rank 1)
+    [108813] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, name = A.Skill_Shattering_Rocks, tooltip = T.Skill_Shattering_Rocks }, -- Heal Trigger Shattering Rocks (Shattering Rocks)
+    [108811] = { icon = 'esoui/art/icons/ability_dragonknight_014b.dds', name = A.Skill_Shattering_Rocks }, -- Shattering Rocks Heal (Shattering Rocks)
 
     -- Ash Cloud / Cinder Storm / Eruption
     [29059] = { tooltip = T.Skill_Ash_Cloud }, -- Ash Cloud (Ash Cloud)
@@ -3890,7 +4087,7 @@ E.EffectOverride = {
     -- Magma Armor / Magma Shell / Corrosive Armor
     [15957] = { tooltip = T.Skill_Magma_Armor }, -- Magma Armor (Magma Armor)
     [17874] = { tooltip = T.Skill_Magma_Armor }, -- Magma Shell (Magma Shell)
-    [76483] = { refreshOnly = true, tooltip = T.Generic_Damage_Shield_Duration }, -- Magma Shell (Magma Shell - Rank 1)
+    [76483] = { refreshOnly = true, tooltip = T.Generic_Damage_Shield_Duration }, -- Magma Shell (Magma Shell)
     [17878] = { tooltip = T.Skill_Corrosive_Armor }, -- Corrosive Armor (Corrosive Armor)
 
     ----------------------------------------------------------------
@@ -4459,10 +4656,10 @@ E.EffectOverride = {
     -- Radiant Destruction / Radiant Glory / Radiant Oppression
     [63029] = { tooltip = T.Skill_Radiant_Destruction }, -- Radiant Destruction (Radiant Destruction)
     [63044] = { tooltip = T.Skill_Radiant_Destruction }, -- Radiant Glory (Radiant Glory)
-    [69118] = { icon = 'esoui/art/icons/ability_templar_under_exposure.dds', name = A.Skill_Radiant_Glory }, -- Radiant Glory Heal (Radiant Glory - Rank 1)
-    [63956] = { icon = 'esoui/art/icons/ability_templar_under_exposure.dds' }, -- Radiant Glory (Radiant Glory - Rank 1)
+    [69118] = { icon = 'esoui/art/icons/ability_templar_under_exposure.dds', name = A.Skill_Radiant_Glory }, -- Radiant Glory Heal (Radiant Glory)
+    [63956] = { icon = 'esoui/art/icons/ability_templar_under_exposure.dds' }, -- Radiant Glory (Radiant Glory)
     [63046] = { tooltip = T.Skill_Radiant_Destruction }, -- Radiant Oppression (Radiant Oppresion)
-    [63961] = { icon = 'esoui/art/icons/ability_templar_stendarr_aura.dds'}, -- Radiant Destruction (Radiant Oppression - Rank 1)
+    [63961] = { icon = 'esoui/art/icons/ability_templar_stendarr_aura.dds'}, -- Radiant Destruction (Radiant Oppression)
 
     -- Nova / Solar Prison / Solar Disturbance
     [108822] = { hide = true }, -- Synergy Damage Bonus (Nova - Supernova Synergy)
@@ -4495,30 +4692,30 @@ E.EffectOverride = {
     [88472] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Restoring Aura)
     [26809] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds', tooltip = A.Skill_Radiant_Aura }, -- Minor Magickasteal (Radiant Aura)
     [88486] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Radiant Aura)
-    [26823] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds' }, -- Repentance Magicka Restore (Repentance - Rank 1)
-    [26824] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds' }, -- Repentance Heal (Repentance - Rank 1)
+    [26823] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds' }, -- Repentance Magicka Restore (Repentance)
+    [26824] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds' }, -- Repentance Heal (Repentance)
 
     -- Cleansing Ritual / Ritual of Retribution / Extended Ritual
     [108824] = { hide = true }, -- Synergy Damage Bonus (Cleansing Ritual - Purify Synergy)
     [44013] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds' }, -- Purify (Cleansing Ritual - Purify Synergy)
-    [26286] = { name = A.Skill_Cleansing_Ritual }, -- Healing Ritual (Cleansing Ritual - Rank 1)
+    [26286] = { name = A.Skill_Cleansing_Ritual }, -- Healing Ritual (Cleansing Ritual)
     [80540] = { tooltip = T.Skill_Cleansing_Ritual }, -- Cleansing Ritual (Cleansing Ritual)
-    [26298] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution - Rank 1)
-    [80172] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution - Rank 1)
-    [80547] = { tooltip = T.Skill_Ritual_of_Retribution }, -- Ritual of Retribution (Ritual of Retribution - Rank 1)
-    [26303] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds' }, -- Extended Ritual (Extended Ritual - Rank 1)
-    [80553] = { tooltip = T.Skill_Cleansing_Ritual }, -- Extended Ritual (Extended Ritual - Rank 1)
+    [26298] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution)
+    [80172] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution)
+    [80547] = { tooltip = T.Skill_Ritual_of_Retribution }, -- Ritual of Retribution (Ritual of Retribution)
+    [26303] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds' }, -- Extended Ritual (Extended Ritual)
+    [80553] = { tooltip = T.Skill_Cleansing_Ritual }, -- Extended Ritual (Extended Ritual)
 
     -- Rune Focus / Channeled Focus / Restoring Focus
-    [22236] = { consolidate = true, tooltip = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus - Rank 1)
-    [44820] = { consolidate = true, tooltip = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus - Rank 1)
+    [22236] = { consolidate = true, tooltip = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus)
+    [44820] = { consolidate = true, tooltip = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus)
     [112145] = { name = A.Skill_Rune_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = 1 }, -- Rune Focus Circle Bonus (Rune Focus)
     [44828] = { consolidate = true, tooltip = A.Skill_Channeled_Focus }, -- Major Resolve (Channeled Focus)
     [44827] = { consolidate = true, tooltip = A.Skill_Channeled_Focus }, -- Major Ward (Channeled Focus)
     [37009] = { tooltip = T.Generic_Magicka_Regen },  -- Channeled Focus (Channeled Focus)
     [112166] = { name = A.Skill_Channeled_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = 1 }, -- Rune Focus Circle Bonus (Channeled Focus)
-    [44836] = { consolidate = true, tooltip = A.Skill_Restoring_Focus }, -- Major Resolve (Restoring Focus - Rank 1)
-    [44835] = { consolidate = true, tooltip = A.Skill_Restoring_Focus }, -- Major Ward (Restoring Focus - Rank 1)
+    [44836] = { consolidate = true, tooltip = A.Skill_Restoring_Focus }, -- Major Resolve (Restoring Focus)
+    [44835] = { consolidate = true, tooltip = A.Skill_Restoring_Focus }, -- Major Ward (Restoring Focus)
     [114842] = { tooltip = T.Generic_Stamina_Regen },  -- Restoring Focus (Restoring Focus)
     [112167] = { name = A.Skill_Restoring_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = 1 }, -- Rune Focus Circle Bonus (Restoring Focus)
 
@@ -5028,14 +5225,14 @@ E.EffectOverride = {
     -----------------------------------------
 
     -- Force Shock / Crushing Shock / Force Pulse
-    [48010] = { icon = '' }, -- Force Shock (Destruction) (Crushing Shock - Rank 1)
-    [48009] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds', name = A.Skill_Crushing_Shock, tooltip = T.Generic_Stagger }, -- Stagger (Crushing Shock - Rank 1)
-    [48011] = { name = A.Skill_Crushing_Shock, tooltip = T.Generic_Stun }, -- Uber Attack (Crushing Shock - Rank 1)
-    [48016] = { icon = 'esoui/art/icons/ability_destructionstaff_001b.dds' }, -- Force Pulse (Force Pulse - Rank 1)
-    [48022] = { icon = 'esoui/art/icons/ability_destructionstaff_001b.dds' }, -- Force Pulse (Force Pulse - Rank 1)
+    [48010] = { icon = '' }, -- Force Shock (Destruction) (Crushing Shock)
+    [48009] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds', name = A.Skill_Crushing_Shock, tooltip = T.Generic_Stagger }, -- Stagger (Crushing Shock)
+    [48011] = { name = A.Skill_Crushing_Shock, tooltip = T.Generic_Stun }, -- Uber Attack (Crushing Shock)
+    [48016] = { icon = 'esoui/art/icons/ability_destructionstaff_001b.dds' }, -- Force Pulse (Force Pulse)
+    [48022] = { icon = 'esoui/art/icons/ability_destructionstaff_001b.dds' }, -- Force Pulse (Force Pulse)
 
     -- Wall of Elements / Unstable Wall of Elements / Elemental Blockade
-    [68719] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', tooltip = T.Generic_Immobilize }, -- Frozen (Wall of Elements - All Ranks) -- Frost
+    [68719] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', tooltip = T.Generic_Immobilize }, -- Frozen (Wall of Elements) -- Frost
     [28807] = { tooltip = T.Skill_Wall_of_Elements_Fire }, -- Wall of Fire (Wall of Fire)
     [28854] = { tooltip = T.Skill_Wall_of_Elements_Shock }, -- Wall of Storms (Wall of Storms)
     [62968] = { tooltip = A.Skill_Wall_of_Storms }, -- Off Balance (Wall of Storms)
@@ -5053,35 +5250,35 @@ E.EffectOverride = {
     [62948] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_60_No_Dur }, -- Blockade of Frost (Elemental Blockade) -- Frost
 
     -- Destructive Touch / Destructive Clench / Destructive Reach
-    [62648] = { name = A.Skill_Flame_Touch, tooltip = T.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch - Rank 1) -- Fire
-    [38172] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch, tooltip = T.Skill_Flame_Touch_Alt, hideReduce = true }, -- Stun After Knockback Movement (Destructive Touch - Rank 1) -- Fire
-    [29075] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Fire Touch (destruction) (Destructive Touch - Rank 1) -- Fire
+    [62648] = { name = A.Skill_Flame_Touch, tooltip = T.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch) -- Fire
+    [38172] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch, tooltip = T.Skill_Flame_Touch_Alt, hideReduce = true }, -- Stun After Knockback Movement (Destructive Touch) -- Fire
+    [29075] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Fire Touch (destruction) (Destructive Touch) -- Fire
     [62722] = { tooltip = T.Skill_Shock_Touch }, -- Shock Touch (Destructive Touch)
     [68536] = { tooltip = T.Skill_Shock_Touch_Alt, hideReduce = true }, -- Shock Touch (Destructive Touch)
     [62692] = { tooltip = T.Skill_Frost_Touch }, -- Frost Touch (Destructive Touch)
-    [30450] = { icon = 'esoui/art/icons/ability_destructionstaff_005.dds', name = A.Skill_Frost_Touch, tooltip = T.Skill_Frost_Touch_Alt, hideReduce = true }, -- Frost Touch (Destructive Touch - Rank 1) -- Frost
-    [62668] = { name = A.Skill_Flame_Clench, tooltip = T.Skill_Flame_Touch }, -- Fire Clench (Destructive Clench - Rank 1) -- Fire
-    [38987] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench, tooltip = T.Skill_Flame_Touch_Alt, hideReduce = true }, -- Stun After Knockback Movement (Destructive Clench - Rank 1) -- Fire
-    [38986] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench }, -- Fire Touch (destruction) (Destructive Clench - Rank 1) -- Fire
-    [62733] = { tooltip = T.Skill_Shock_Touch }, -- Shock Clench (Destructive Clench - Rank 1) -- Shock
-    [68635] = { name = A.Skill_Shock_Clench, tooltip = T.Skill_Shock_Touch_Alt, hideReduce = true }, -- Shock Touch (Destructive Clench - Rank 1) -- Shock
-    [62734] = { name = A.Skill_Shock_Clench, hide = true }, -- Shock Clench Explosion (Destructive Clench - Rank 1) -- Shock
+    [30450] = { icon = 'esoui/art/icons/ability_destructionstaff_005.dds', name = A.Skill_Frost_Touch, tooltip = T.Skill_Frost_Touch_Alt, hideReduce = true }, -- Frost Touch (Destructive Touch) -- Frost
+    [62668] = { name = A.Skill_Flame_Clench, tooltip = T.Skill_Flame_Touch }, -- Fire Clench (Destructive Clench) -- Fire
+    [38987] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench, tooltip = T.Skill_Flame_Touch_Alt, hideReduce = true }, -- Stun After Knockback Movement (Destructive Clench) -- Fire
+    [38986] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench }, -- Fire Touch (destruction) (Destructive Clench) -- Fire
+    [62733] = { tooltip = T.Skill_Shock_Touch }, -- Shock Clench (Destructive Clench) -- Shock
+    [68635] = { name = A.Skill_Shock_Clench, tooltip = T.Skill_Shock_Touch_Alt, hideReduce = true }, -- Shock Touch (Destructive Clench) -- Shock
+    [62734] = { name = A.Skill_Shock_Clench, hide = true }, -- Shock Clench Explosion (Destructive Clench) -- Shock
     [62702] = { tooltip = T.Skill_Frost_Clench }, -- Frost Clench (Destructive Clench)
-    [38990] = { icon = 'esoui/art/icons/ability_destructionstaff_005_a.dds', name = A.Skill_Frost_Clench, tooltip = T.Skill_Frost_Clench_Alt, hideReduce = true }, -- Deep Freeze (Destructive Clench - Rank 1) -- Frost
+    [38990] = { icon = 'esoui/art/icons/ability_destructionstaff_005_a.dds', name = A.Skill_Frost_Clench, tooltip = T.Skill_Frost_Clench_Alt, hideReduce = true }, -- Deep Freeze (Destructive Clench) -- Frost
     [62682] = { tooltip = T.Skill_Flame_Touch }, -- Flame Reach (Destructive Reach)
-    [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, tooltip = T.Skill_Flame_Touch_Alt, hideReduce = true }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
-    [38945] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach }, -- Flame Reach (destruction) (Destructive Reach - Rank 1) -- Fire
-    [62745] = { tooltip = T.Skill_Shock_Touch }, -- Shock Reach (Destructive Reach - Rank 1) -- Shock
-    [68574] = { name = A.Skill_Shock_Reach, tooltip = T.Skill_Shock_Touch_Alt, hideReduce = true }, -- Shock Touch (Destructive Reach - Rank 1) -- Shock
+    [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, tooltip = T.Skill_Flame_Touch_Alt, hideReduce = true }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
+    [38945] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach }, -- Flame Reach (destruction) (Destructive Reach) -- Fire
+    [62745] = { tooltip = T.Skill_Shock_Touch }, -- Shock Reach (Destructive Reach) -- Shock
+    [68574] = { name = A.Skill_Shock_Reach, tooltip = T.Skill_Shock_Touch_Alt, hideReduce = true }, -- Shock Touch (Destructive Reach) -- Shock
     [62712] = { tooltip = T.Skill_Frost_Touch_Alt }, -- Frost Reach (Destructive Reach)
-    [38971] = { icon = 'esoui/art/icons/ability_destructionstaff_005_b.dds', name = A.Skill_Frost_Reach, tooltip = T.Skill_Frost_Touch_Alt, hideReduce = true }, -- Frost Grip (Destructive Reach - Rank 1) -- Frost
+    [38971] = { icon = 'esoui/art/icons/ability_destructionstaff_005_b.dds', name = A.Skill_Frost_Reach, tooltip = T.Skill_Frost_Touch_Alt, hideReduce = true }, -- Frost Grip (Destructive Reach) -- Frost
 
     -- Weakness to Elements / Elemental Susceptibility / Elemental Drain
     [53881] = { consolidate = true, tooltip = A.Skill_Weakness_to_Elements }, -- Major Breach (Weakness to Elements)
     [62775] = { consolidate = true, tooltip = A.Skill_Elemental_Susceptibility }, -- Major Breach (Elemental Susceptibility)
     [39100] = { consolidate = true, tooltip = A.Skill_Elemental_Drain }, -- Minor Magickasteal (Elemental Drain)
     [62787] = { consolidate = true, tooltip = A.Skill_Elemental_Drain }, -- Minor Magickasteal (Elemental Drain)
-    [39099] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Elemental Drain - Rank 1)
+    [39099] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Elemental Drain)
 
     -- Impulse / Elemental Ring / Pulsar
     [39168] = { tooltip = A.Skill_Flame_Pulsar }, -- Minor Mangle (Flame Pulsar)
@@ -5106,12 +5303,12 @@ E.EffectOverride = {
 
     -- Grand Healing / Illustrious Healing / Healing Springs
     [28385] = { tooltip = T.Skill_Secluded_Grove }, -- Grand Healing (Grand Healing)
-    [28386] = { icon = 'esoui/art/icons/ability_restorationstaff_004.dds' }, -- Grand Healing (Grand Healing - Rank 1)
+    [28386] = { icon = 'esoui/art/icons/ability_restorationstaff_004.dds' }, -- Grand Healing (Grand Healing)
     [40058] = { tooltip = T.Skill_Secluded_Grove }, -- Illustrious Healing (Illustrious Healing)
-    [40059] = { icon = 'esoui/art/icons/ability_restorationstaff_004b.dds' }, -- Illustrious Healing (Illustrious Healing - Rank 1)
+    [40059] = { icon = 'esoui/art/icons/ability_restorationstaff_004b.dds' }, -- Illustrious Healing (Illustrious Healing)
     [40060] = { tooltip = T.Skill_Secluded_Grove }, -- Healing Springs (Healing Springs)
-    [40061] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs - Rank 1)
-    [40062] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs - Rank 1)
+    [40061] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs)
+    [40062] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs)
 
     -- Regeneration / Rapid Regeneration / Mutagen
     [28536] = { tooltip = T.Generic_HoT_2Sec }, -- Regeneration (Regeneration)
@@ -5119,33 +5316,33 @@ E.EffectOverride = {
     [40079] = { tooltip = T.Skill_Mutagen }, -- Mutagen (Mutagen)
 
     -- Blessing of Protection / Blessing of Restoration / Combat Prayer
-    [37243] = { hide = true }, -- Blessing of Protection (Blessing of Protection - Rank 1)
-    [37247] = { consolidate = true, tooltip = A.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection - Rank 1)
-    [62619] = { consolidate = true, tooltip = A.Skill_Blessing_of_Protection }, -- Minor Ward (Blessing of Protection - Rank 1)
-    [40103] = { hide = true, name = A.Skill_Blessing_of_Restoration }, -- Blessing of Restoration (Blessing of Restoration - Rank 1)
-    [62626] = { consolidate = true, tooltip = A.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration - Rank 1)
-    [62627] = { consolidate = true, tooltip = A.Skill_Blessing_of_Restoration }, -- Minor Ward (Blessing of Restoration - Rank 1)
-    [40094] = { hide = true }, -- Combat Prayer (Combat Prayer - Rank 1)
-    [62634] = { consolidate = true, tooltip = A.Skill_Combat_Prayer }, -- Minor Resolve (Combat Prayer - Rank 1)
-    [62635] = { consolidate = true, tooltip = A.Skill_Combat_Prayer }, -- Minor Ward (Combat Prayer - Rank 1)
-    [62636] = { consolidate = true, tooltip = A.Skill_Combat_Prayer }, -- Minor Berserk (Combat Prayer - Rank 1)
+    [37243] = { hide = true }, -- Blessing of Protection (Blessing of Protection)
+    [37247] = { consolidate = true, tooltip = A.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection)
+    [62619] = { consolidate = true, tooltip = A.Skill_Blessing_of_Protection }, -- Minor Ward (Blessing of Protection)
+    [40103] = { hide = true, name = A.Skill_Blessing_of_Restoration }, -- Blessing of Restoration (Blessing of Restoration)
+    [62626] = { consolidate = true, tooltip = A.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration)
+    [62627] = { consolidate = true, tooltip = A.Skill_Blessing_of_Restoration }, -- Minor Ward (Blessing of Restoration)
+    [40094] = { hide = true }, -- Combat Prayer (Combat Prayer)
+    [62634] = { consolidate = true, tooltip = A.Skill_Combat_Prayer }, -- Minor Resolve (Combat Prayer)
+    [62635] = { consolidate = true, tooltip = A.Skill_Combat_Prayer }, -- Minor Ward (Combat Prayer)
+    [62636] = { consolidate = true, tooltip = A.Skill_Combat_Prayer }, -- Minor Berserk (Combat Prayer)
 
     -- Steadfast Ward / Ward Ally / Healing Ward
     [37232] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Steadfast Ward (Steadfast Ward)
     [40130] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Ward Ally (Ward Ally)
     [40132] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Ward Ally (Ward Ally)
     [40126] = { tooltip = T.Skill_Healing_Ward }, -- Healing Ward (Healing Ward)
-    [40128] = { hide = true }, -- Healing Ward (Healing Ward - Rank 1)
+    [40128] = { hide = true }, -- Healing Ward (Healing Ward)
 
     -- Force Siphon / Siphon Spirit / Quick Siphon
     [88565] = { consolidate = true, tooltip = A.Skill_Force_Siphon }, -- Minor Lifesteal (Force Siphon)
-    [33541] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Force Siphon - Rank 1)
+    [33541] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Force Siphon)
     [88575] = { consolidate = true, tooltip = A.Skill_Siphon_Spirit }, -- Minor Lifesteal (Siphon Spirit)
     [88576] = { consolidate = true, tooltip = A.Skill_Siphon_Spirit }, -- Minor Magickasteal (Siphon Spirit)
-    [40110] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
-    [40114] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
+    [40110] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Siphon Spirit)
+    [40114] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Lifesteal (Siphon Spirit)
     [88606] = { consolidate = true, tooltip = A.Skill_Quick_Siphon }, -- Minor Lifesteal (Quick Siphon)
-    [40117] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Quick Siphon - Rank 1)
+    [40117] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Quick Siphon)
 
     -- Panacea / Life Giver / Light's Champion
     [83552] = { tooltip = T.Generic_HoT_1Sec }, -- Panacea (Panacea)
@@ -5311,8 +5508,8 @@ E.EffectOverride = {
     [32480] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack Werewolf
     [32494] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Heavy Attack
     [60773] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackrestore.dds', name = A.Skill_Heavy_Attack }, -- Stamina Return
-    [33208] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', hide = true }, -- Devour (Devour - Rank 1)
-    [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour - Rank 1)
+    [33208] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', hide = true }, -- Devour (Devour)
+    [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour)
     [40515] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Blood Moon)
     [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, unbreakable = 1, tooltip = T.Generic_Stun }, -- Q3047 - Knockdown (Blood Moon)
     [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Bloodmoon, A.Set_Cooldown), tooltip = T.Skill_Blood_Moon }, -- Bit an Ally (Blood Moon)
@@ -5412,15 +5609,15 @@ E.EffectOverride = {
 
     -- Circle of Protection / Turn Undead / Ring of Preservation
     [35737] = { tooltip = T.Skill_Circle_of_Protection }, -- Circle of Protection
-    [80271] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Circle_of_Protection }, -- Minor Endurance (Circle of Protection - Rank 1)
-    [35739] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Circle_of_Protection }, -- Minor Protection (Circle of Protection - Rank 1)
+    [80271] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Circle_of_Protection }, -- Minor Endurance (Circle of Protection)
+    [35739] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Circle_of_Protection }, -- Minor Protection (Circle of Protection)
     [40181] = { tooltip = T.Skill_Circle_of_Protection }, -- Turn Undead
-    [80276] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Turn_Undead }, -- Minor Endurance (Turn Undead - Rank 1)
-    [40185] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Turn_Undead }, -- Minor Protection (Turn Undead - Rank 1)
+    [80276] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Turn_Undead }, -- Minor Endurance (Turn Undead)
+    [40185] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Turn_Undead }, -- Minor Protection (Turn Undead)
     [40187] = { tooltip = T.Generic_Fear }, -- Turn Undead (Turn Undead)
     [40169] = { tooltip = T.Skill_Ring_of_Preservation }, -- Ring of Preservation
-    [80284] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Ring_of_Preservation }, -- Minor Endurance (Ring of Preservation - Rank 1)
-    [40171] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Ring_of_Preservation }, -- Minor Protection (Ring of Preservation - Rank 1)
+    [80284] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Ring_of_Preservation }, -- Minor Endurance (Ring of Preservation)
+    [40171] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Ring_of_Preservation }, -- Minor Protection (Ring of Preservation)
 
     -- Expert Hunter / Evil Hunter / Camouflaged Hunter
     [64509] = { consolidateExtra = true, tooltip = A.Skill_Expert_Hunter }, -- Major Savagery
@@ -5436,17 +5633,17 @@ E.EffectOverride = {
     -- Trap Beast / Rearming Trap / Lightweight Beast Trap
     [35750] = { tooltip = T.Skill_Trap_Beast }, -- Trap Beast (Trap Beast)
     [35756] = { tooltip = T.Skill_Trap_Beast_Debuff }, -- Trap Beast (Trap Beast)
-    [35753] = { hideReduce = true, tooltip = T.Skill_Trap_Beast_Debuff }, -- Trap Beast (Trap Beast - Rank 1)
+    [35753] = { hideReduce = true, tooltip = T.Skill_Trap_Beast_Debuff }, -- Trap Beast (Trap Beast)
     [68595] = { tooltip = A.Skill_Trap_Beast }, -- Minor Force (Trap Beast)
     [40382] = { tooltip = T.Skill_Rearming_Trap }, -- Rearming Trap (Rearming Trap)
     [40388] = { tooltip = T.Skill_Rearming_Trap }, -- Rearming Trap (Rearming Trap)
     [40385] = { tooltip = T.Skill_Trap_Beast_Debuff }, -- Rearming Trap (Rearming Trap)
-    [40384] = { hideReduce = true, tooltip = T.Skill_Trap_Beast_Debuff }, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40391] = { hideReduce = true, tooltip = T.Skill_Trap_Beast_Debuff }, -- Rearming Trap (Rearming Trap - Rank 1)
+    [40384] = { hideReduce = true, tooltip = T.Skill_Trap_Beast_Debuff }, -- Rearming Trap (Rearming Trap)
+    [40391] = { hideReduce = true, tooltip = T.Skill_Trap_Beast_Debuff }, -- Rearming Trap (Rearming Trap)
     [68632] = { tooltip = A.Skill_Rearming_Trap }, -- Minor Force (Rearming Trap)
     [40372] = { tooltip = T.Skill_Trap_Beast }, -- Lightweight Beast Trap (Lightweight Beast Trap)
     [40375] = { tooltip = T.Skill_Trap_Beast_Debuff }, -- Lightweight Beast Trap (Lightweight Beast Trap)
-    [40374] = { hideReduce = true, tooltip = T.Skill_Trap_Beast_Debuff }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+    [40374] = { hideReduce = true, tooltip = T.Skill_Trap_Beast_Debuff }, -- Lightweight Beast Trap (Lightweight Beast Trap)
     [68628] = { tooltip = A.Skill_Lightweight_Beast_Trap }, -- Minor Force (Lightweight Beast Trap)
 
     -- Dawnbreaker / Flawless Dawnbreaker / Dawnbreaker of Smiting
@@ -8446,7 +8643,7 @@ E.FakeExternalDebuffs = {
     [36964] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds', name = A.Skill_Crippling_Grasp, duration = 1500 }, -- Crippling Grasp (Crippling Grasp)
 
     -- Destruction Staff
-    [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
+    [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
 
     -- Werewolf
     [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
@@ -8635,18 +8832,18 @@ E.FakePlayerBuffs = {
     -----------------
 
     -- Dragonknight
-    [32956] = { icon = 'esoui/art/icons/ability_dragonknight_006_b.dds', name = A.Skill_Standard_of_Might, duration = 0 }, -- Standard of Might (Standard of Might - Rank 1)
+    [32956] = { icon = 'esoui/art/icons/ability_dragonknight_006_b.dds', name = A.Skill_Standard_of_Might, duration = 0 }, -- Standard of Might (Standard of Might)
     [31841] = { icon = 'esoui/art/icons/ability_dragonknight_012.dds', name = A.Skill_Inhale, duration = 2500 }, -- Inhale
     [32796] = { icon = 'esoui/art/icons/ability_dragonknight_012_a.dds', name = A.Skill_Deep_Breath, duration = 2500 }, -- Deep Breath
     [32788] = { icon = 'esoui/art/icons/ability_dragonknight_012_b.dds', name = A.Skill_Draw_Essence, duration = 2500 }, -- Draw Essence
 
     -- Templar
-    [22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000 }, -- Rite of Passage (Rite of Passage - Rank 1)
-    [22229] = { icon = 'esoui/art/icons/ability_templar_remembrance.dds', name = A.Skill_Remembrance, duration = 4000 }, -- Remembrance (Remembrance - Rank 1)
-    [22226] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation - Rank 1)
+    [22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000 }, -- Rite of Passage (Rite of Passage)
+    [22229] = { icon = 'esoui/art/icons/ability_templar_remembrance.dds', name = A.Skill_Remembrance, duration = 4000 }, -- Remembrance (Remembrance)
+    [22226] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation)
 
     -- Vampire
-    --[40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 5300 }, -- Feed (Blood Ritual - Rank 1)
+    --[40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 5300 }, -- Feed (Blood Ritual)
     --[33175] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 6300 }, -- Feed (Vampire - Feed)
 
     -- Mages Guild
@@ -8707,7 +8904,7 @@ E.FakePlayerDebuffs = {
     [36964] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds', name = A.Skill_Crippling_Grasp, duration = 1500 }, -- Crippling Grasp (Crippling Grasp)
 
     -- Destruction Staff
-    [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
+    [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
 
     -- Werewolf
     [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
