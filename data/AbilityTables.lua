@@ -777,8 +777,15 @@ A.Skill_Imbue_Weapon                = 103483
 A.Skill_Elemental_Weapon            = 103571
 A.Skill_Crushing_Weapon             = 103623
 A.Skill_Symbiosis                   = 103755
+A.Skill_Accelerate                  = 103503
+A.Skill_Channeled_Acceleration      = 103706
+A.Skill_Race_Against_Time           = 103710
+A.Skill_Mend_Spirit                 = 103747
+A.Skill_Temporal_Guard              = 103564
 
 -- Undaunted
+A.Skill_Blood_Altar                 = 39489
+
 A.Skill_Black_Widows                = 41994
 A.Skill_Arachnophobia               = 42016
 A.Skill_Healing_Combustion          = 63507

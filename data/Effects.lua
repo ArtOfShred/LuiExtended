@@ -51,7 +51,7 @@ E.IsToggle = {
 
     -- Psijic Order
     [103923] = true, -- Concentrated Barrier
-    [103966] = true, -- Concentrated Barrie
+    [103966] = true, -- Concentrated Barrier
     [103543] = true, -- Mend Wounds
     [103747] = true, -- Mend Spirit
     [103755] = true, -- Symbiosis
@@ -1415,6 +1415,7 @@ E.BarHighlightOverride = {
         -- noRemove = ture -- don't remove effect on fading -- Doesn't apply to hostile effects. Should be used with major/minor effects.
         -- duration = # -- override duration
         -- emulateGround = true -- Don't remove this highlight on target change
+        -- hide = true -- Hide this bar highlight
 
     ---------------------------
     -- Dragonknight -----------
@@ -1787,9 +1788,9 @@ E.BarHighlightOverride = {
     [39475] = { newId = 41942, showFakeAura = true }, -- Inner Fire
     [42056] = { newId = 42059, showFakeAura = true }, -- Inner Rage
     [42060] = { newId = 42062, showFakeAura = true }, -- Inner Beast
-    [39298] = { hide = true }, -- Necrotic Orb
-    [42028] = { hide = true }, -- Mystic Orb
-    [42038] = { hide = true }, -- Energy Orb
+    --[39298] = { hide = true }, -- Necrotic Orb
+    --[42028] = { hide = true }, -- Mystic Orb
+    --[42038] = { hide = true }, -- Energy Orb
 
     ---------------------------
     -- Assault ----------------
@@ -2690,11 +2691,13 @@ E.EffectOverride = {
     -- duration = # modify the duration display of this effect. Option 1 - Set a negative value - to subtract x seconds from the duration of the effect. Option 2 - Set to 0 to display the buff for an unlimited amount of time until an action result of fade occurs.
     -- unbreakable = true -- flag this aura as unremoveable and change border color to grey for debuffs or cyan for buffs
     -- forcedContainer = 'short' or 'long' - Forces a buff to appear in one of these containers
-    -- consolidate = true -- If the menu option to consolidate buffs is enabled, these auras will be hidden.
+    -- consolidate = true -- If the menu option to consolidate buffs is enabled, this auras will be hidden.
+    -- consolidateExtra = true -- If the menu option to consolidate buffs for Single Auras as well is enabled, this auras will be hidden
     -- groundLabel = true -- "Display a "G" ground label on this effect to indicate it is the result of standing in a ground aura
     -- noDuplicate = true -- Adds to a table that uses an expensive function - in some cases effects like Shuffle add a new aura every time the effect is cast. This will flag the effect to only show the latest casted one and hide the others.
     -- hideReduce = true -- Hide this aura if the "HIDE PAIRED AURAS" menu setting is enabled. Merging similar effects so as not to clutter the UI such as the Sun Fire effect with its snare.
     -- tooltipValue2Mod = # -- Needed in some cases to derive a value on an ability tooltip. This value is used for effects like the snare from Sun Fire, when the duration needs to be derived from either buff since one can potentially be hidden.
+    -- refreshOnly = true -- Only show this effect when the duration is updated/refreshed - Toggle this to hide some goofy effects that have a travel time aura for their projectile before the actual effect applies.
 
     -- TEMP MOVE LATER
     [64197] = { forcedContainer = 'short' }, -- Sanctuary Cyrodiil passive is considered unlimited duration, but the effect is only while the player is in the area. Should show up under short buffs.
@@ -5745,32 +5748,66 @@ E.EffectOverride = {
     -- PSIJIC ORDER ACTIVE ABILITIES -------------------------------
     ----------------------------------------------------------------
 
-    [104075] = { hideReduce = true }, -- Borrowed Time (Borrowed Time)
+    -- Time Stop / Borrowed Time / Time Freeze
+    [103538] = { tooltip = T.Skill_Time_Stop, groundLabel = true }, -- Time Stop (Time Stop)
+    [104007] = { tooltip = T.Skill_Time_Stop, groundLabel = true }, -- Time Stop (Time Stop)
+    [104009] = { tooltip = T.Skill_Time_Stop, groundLabel = true }, -- Time Stop (Time Stop)
+    [104050] = { tooltip = T.Generic_Stun }, -- Time Stop (Time Stop)
+    [104071] = { tooltip = T.Skill_Borrowed_Time, groundLabel = true }, -- Borrowed Time (Borrowed Time)
+    [104072] = { tooltip = T.Skill_Borrowed_Time, groundLabel = true }, -- Borrowed Time (Borrowed Time)
+    [104073] = { tooltip = T.Skill_Borrowed_Time, groundLabel = true }, -- Borrowed Time (Borrowed Time)
+    [104075] = { hideReduce = true, tooltip = T.Skill_Borrowed_Time_Stun }, -- Borrowed Time (Borrowed Time)
+    [104078] = { tooltip = T.Skill_Borrowed_Time_Stun }, -- Borrowed Time (Borrowed Time)
+    [104080] = { tooltip = T.Skill_Time_Freeze, groundLabel = true }, -- Time Freeze (Time Freeze)
+    [104081] = { tooltip = T.Skill_Time_Freeze, groundLabel = true }, -- Time Freeze (Time Freeze)
+    [104082] = { tooltip = T.Skill_Time_Freeze, groundLabel = true }, -- Time Freeze (Time Freeze)
+    [104083] = { tooltip = T.Skill_Time_Freeze, groundLabel = true }, -- Time Freeze (Time Freeze)
+    [104085] = { tooltip = T.Generic_Stun }, -- Time Freeze (Time Freeze)
+
+    -- Imbue Weapon / Elemental Weapon / Crushing Weapon
+    [103483] = { tooltip = T.Skill_Imbue_Weapon }, -- Imbue Weapon (Imbue Weapon)
     [110420] = { icon = 'esoui/art/icons/ability_psijic_003.dds', name = A.Skill_Imbue_Weapon }, -- Imbue Weapon Restore (Imbue Weapon)
+    [103571] = { tooltip = T.Skill_Elemental_Weapon }, -- Elemental Weapon (Elemental Weapon)
     [110421] = { icon = 'esoui/art/icons/ability_psijic_003_a.dds', name = A.Skill_Elemental_Weapon }, -- Elemental Weapon Restore (Elemental Weapon)
-    [110422] = { icon = 'esoui/art/icons/ability_psijic_003_b.dds', name = A.Skill_Crushing_Weapon }, -- Crushing Weapon Restore ( Crushing Weapon)
-    [103521] = { consolidateExtra = true }, -- Minor Force (Accelerate)
-    [103708] = { consolidateExtra = true }, -- Minor Force (Channeled Acceleration)
-    [103712] = { consolidateExtra = true }, -- Minor Force (Race Against Time)
-    [107583] = { refreshOnly = true }, -- Mend Wounds (Mend Wounds)
-    [107579] = { duration = 0, forcedContainer = 'short' }, -- Mend Wounds (Mend Wounds)
-    [107629] = { refreshOnly = true }, -- Mend Spirit (Mend Spirit)
-    [107632] = { forcedContainer = 'short' }, -- Major Resolve (Mend Spirit)
-    [107631] = { forcedContainer = 'short' }, -- Major Ward (Mend Spirit)
-    [107630] = { duration = 0, forcedContainer = 'short' }, -- Mend Spirit (Mend Spirit)
-    [103752] = { forcedContainer = 'short' }, -- Major Resolve (Mend Spirit)
-    [103751] = { forcedContainer = 'short' }, -- Major Ward (Mend Spirit)
-    [107636] = { refreshOnly = true }, -- Symbiosis (Symbiosis)
-    [107637] = { name = A.Skill_Symbiosis, duration = 0, forcedContainer = 'short' }, -- Symbiosis HA (Symbiosis)
-    [103492] = { forcedContainer = 'short' }, -- Meditate (Meditate)
+    [103623] = { tooltip = T.Skill_Crushing_Weapon }, -- Crushing Weapon (Crushing Weapon)
+    [110422] = { icon = 'esoui/art/icons/ability_psijic_003_b.dds', name = A.Skill_Crushing_Weapon }, -- Crushing Weapon Restore (Crushing Weapon)
+
+    -- Accelerate / Channeled Acceleration / Race Against Time
+    [103520] = { tooltip = A.Skill_Accelerate }, -- Major Expedition (Accelerate)
+    [103521] = { consolidateExtra = true, tooltip = A.Skill_Accelerate }, -- Minor Force (Accelerate)
+    [103707] = { tooltip = A.Skill_Channeled_Acceleration }, -- Major Expedition (Channeled Acceleration)
+    [103708] = { consolidateExtra = true, tooltip = A.Skill_Channeled_Acceleration }, -- Minor Force (Channeled Acceleration)
+    [103711] = { tooltip = A.Skill_Race_Against_Time }, -- Major Expedition (Race Against Time)
+    [103712] = { consolidateExtra = true, tooltip = A.Skill_Race_Against_Time }, -- Minor Force (Race Against Time)
+
+    -- Mend Wounds / Mend Spirit / Symbiosis
+    [103543] = { tooltip = T.Skill_Mend_Wounds }, -- Mend Wounds (Mend Wounds)
+    [107583] = { refreshOnly = true, tooltip = T.Generic_HoT_2Sec }, -- Mend Wounds (Mend Wounds)
+    [107579] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Mend_Wounds_Channel }, -- Mend Wounds (Mend Wounds)
+    [103747] = { tooltip = T.Skill_Mend_Spirit }, -- Mend Spirit (Mend Spirit)
+    [107629] = { refreshOnly = true, tooltip = T.Generic_HoT_2Sec }, -- Mend Spirit (Mend Spirit)
+    [107632] = { forcedContainer = 'short', tooltip = A.Skill_Mend_Spirit }, -- Major Resolve (Mend Spirit)
+    [107631] = { forcedContainer = 'short', tooltip = A.Skill_Mend_Spirit }, -- Major Ward (Mend Spirit)
+    [107630] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Mend_Wounds_Channel }, -- Mend Spirit (Mend Spirit)
+    [103752] = { forcedContainer = 'short', tooltip = A.Skill_Mend_Spirit }, -- Major Resolve (Mend Spirit)
+    [103751] = { forcedContainer = 'short', tooltip = A.Skill_Mend_Spirit }, -- Major Ward (Mend Spirit)
+    [103755] = { tooltip = T.Skill_Symbiosis }, -- Symbiosis (Symbiosis)
+    [107636] = { refreshOnly = true, tooltip = T.Generic_HoT_2Sec }, -- Symbiosis (Symbiosis)
+    [107637] = { name = A.Skill_Symbiosis, duration = 0, forcedContainer = 'short', tooltip = T.Skill_Mend_Wounds_Channel }, -- Symbiosis HA (Symbiosis)
+
+    -- Meditate / Deep Thoughts / Introspection
+    [103492] = { forcedContainer = 'short', tooltip = T.Skill_Meditate }, -- Meditate (Meditate)
     [103500] = { icon = 'esoui/art/icons/ability_psijic_004.dds' }, -- Meditate (Meditate)
     [103501] = { icon = 'esoui/art/icons/ability_psijic_004.dds' }, -- Meditate (Meditate)
-    [103652] = { forcedContainer = 'short' }, -- Deep Thoughts (Deep Thoughts)
+    [103652] = { forcedContainer = 'short', tooltip = T.Skill_Meditate }, -- Deep Thoughts (Deep Thoughts)
     [103655] = { icon = 'esoui/art/icons/ability_psijic_004_a.dds' }, -- Deep Thoughts (Deep Thoughts)
     [103656] = { icon = 'esoui/art/icons/ability_psijic_004_a.dds' }, -- Deep Thoughts (Deep Thoughts)
-    [103665] = { forcedContainer = 'short' }, -- Introspection (Introspection)
+    [103665] = { forcedContainer = 'short', tooltip = T.Skill_Introspection }, -- Introspection (Introspection)
     [103668] = { icon = 'esoui/art/icons/ability_psijic_004_b.dds' }, -- Introspection (Introspection)
     [103669] = { icon = 'esoui/art/icons/ability_psijic_004_b.dds' }, -- Introspection (Introspection)
+
+    -- Undo / Precognition / Temporal Guard
+    [103570] = { tooltip = A.Skill_Temporal_Guard }, -- Minor Protection (Temporal Guard)
 
     ----------------------------------------------------------------
     -- UNDAUNTED PASSIVES ------------------------------------------
@@ -5791,32 +5828,51 @@ E.EffectOverride = {
     -- UNDAUNTED ACTIVES -------------------------------------------
     ----------------------------------------------------------------
 
+    -- Blood Altar / Sanguine Altar / Overflowing Altar
     [108782] = { hide = true }, -- Blood Funnel (Blood Altar - Blood Funnel Synergy)
     [80021] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Blood Altar)
     [39501] = { icon = 'esoui/art/icons/ability_undaunted_001.dds' }, -- Blood Funnel (Blood Altar - Blood Funnel Synergy)
     [108787] = { hide = true }, -- Blood Feast (Overflowing Altar - Blood Feast Synergy)
     [41964] = { icon = 'esoui/art/icons/ability_undaunted_001_a.dds' }, -- Blood Feast (Overflowing Altar)
+    [80020] = { tooltip = A.Skill_Blood_Altar, groundLabel = true }, -- Blood Altar (Blood Altar - Shared - All Morphs)
+    [39489] = { tooltip = T.Skill_Blood_Altar }, -- Blood Altar (Blood Altar)
+    [41967] = { tooltip = T.Skill_Blood_Altar }, -- Sanguine Altar (Sanguine Altar)
+    [41958] = { tooltip = T.Skill_Overflowing_Altar }, -- Overflowing Altar (Overflowing Altar)
+
+    -- Trapping Webs / Shadow Silk / Tangling Webs
     [108788] = { hide = true }, -- Synergy Damage Bonus (Trapping Webs - Spawn Broodlings Synergy)
     [39430] = { icon = 'esoui/art/icons/ability_undaunted_003.dds' }, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
     [39432] = { icon = 'esoui/art/icons/ability_undaunted_003.dds' }, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
     [77245] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_bite.dds' }, -- Bite (Trapping Webs - Spawn Broodlings Synergy)
-    [80079] = { duration = 0 }, -- Trapping Webs (Trapping Webs)
+    [39425] = { tooltip = T.Skill_Trapping_Webs }, -- Trapping Webs (Trapping Webs)
+    [80079] = { duration = 0, tooltip = T.Skill_Trapping_Webs_Snare, groundLabel = true }, -- Trapping Webs (Trapping Webs)
     [108791] = { hide = true }, -- Synergy Damage Bonus (Shadow Silk - Black Widows Synergy)
     [41994] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Black Widows (Shadow Silk - Black Widows Synergy)
     [41998] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', name = A.Skill_Black_Widows }, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
     [41999] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', name = A.Skill_Black_Widows }, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
     [42000] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_undaunted_black_widow_poison.dds' }, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
     [42007] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_black_widow_poison.dds' }, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
-    [80108] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', duration = 0 }, -- Shadow Silk (Shadow Silk)
+    [41990] = { tooltip = T.Skill_Shadow_Silk}, -- Shadow Silk (Shadow Silk)
+    [80108] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', duration = 0, tooltip = T.Skill_Trapping_Webs_Snare, groundLabel = true }, -- Shadow Silk (Shadow Silk)
     [80107] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Shadow Silk (Shadow Silk)
     [108792] = { hide = true }, -- Synergy Damage Bonus (Tangling Webs - Arachnophobia Synergy)
     [42016] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
     [42023] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
-    [80130] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds', duration = 0 }, --  Tangling Webs (Tangling Webs)
+    [42012] = { tooltip = T.Skill_Tangling_Webs }, -- Tangling Webs (Tangling Webs)
+    [80130] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds', duration = 0, tooltip = T.Skill_Trapping_Webs_Snare, groundLabel = true }, --  Tangling Webs (Tangling Webs)
     [80129] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, --  Tangling Webs (Tangling Webs)
+
+    -- Inner Fire / Inner Rage / Inner Beast
     [108793] = { hide = true }, -- Synergy Damage Bonus (Inner Fire - Radiate Synergy)
+
+    -- Bone Shield / Spiked Bone Shield / Bone Surge
     [108794] = { hide = true }, -- Synergy Damage Bonus (Bone Shield - Bone Wall Synergy)
     [108797] = { hide = true }, -- Synergy Damage Bonus (Bone Surge - Spinal Surge Synergy)
+    [39369] = { tooltip = T.Skill_Bone_Shield }, -- Bone Shield
+    [42138] = { tooltip = T.Skill_Spiked_Bone_Shield }, -- Spiked Bone Shield
+    [42176] = { tooltip = T.Skill_Bone_Surge }, -- Bone Surge
+
+    -- Necrotic Orb / Mystic Orb / Energy Orb
     [108799] = { hide = true }, -- Synergy Damage Bonus (Necrotic Orb - Combustion Synergy)
     [85432] = { icon = 'esoui/art/icons/ability_undaunted_004.dds' }, -- Combustion (Necrotic Orb - Combustion Synergy)
     [108802] = { hide = true }, -- Synergy Damage Bonus (Energy Orb - Healing Combustion Synergy)

@@ -5932,6 +5932,7 @@ debugAuras = {
 
             [103557] = true, -- Precognition (Precognition)
             [108621] = true, -- Precognition (Precognition)
+            [108626] = true, -- Precognition (Precognition)
 
             [103570] = true, -- Minor Protection (Temporal Guard)
             [103564] = true, -- Temporal Guard (Temporal Guard)

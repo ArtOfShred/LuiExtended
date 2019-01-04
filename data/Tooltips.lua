@@ -709,6 +709,31 @@ T.Skill_Ice_Comet                   = GetString(SI_LUIE_SKILL_ICE_COMET_TP)
 -- Psijic Order
 T.Skill_Spell_Orb                   = GetString(SI_LUIE_SKILL_SPELL_ORB_TP)
 T.Skill_Concentrated_Barrier        = GetString(SI_LUIE_SKILL_CONCENTRATED_BARRIER_TP)
+T.Skill_Time_Stop                   = GetString(SI_LUIE_SKILL_TIME_STOP_TP)
+T.Skill_Borrowed_Time               = GetString(SI_LUIE_SKILL_TIME_BORROWED_TIME_TP)
+T.Skill_Borrowed_Time_Stun          = GetString(SI_LUIE_SKILL_TIME_BORROWED_TIME_STUN_TP)
+T.Skill_Time_Freeze                 = GetString(SI_LUIE_SKILL_TIME_FREEZE_TP)
+T.Skill_Imbue_Weapon                = GetString(SI_LUIE_SKILL_IMBUE_WEAPON_TP)
+T.Skill_Elemental_Weapon            = GetString(SI_LUIE_SKILL_ELEMENTAL_WEAPON_TP)
+T.Skill_Crushing_Weapon             = GetString(SI_LUIE_SKILL_CRUSHING_WEAPON_TP)
+T.Skill_Mend_Wounds                 = GetString(SI_LUIE_SKILL_MEND_WOUNDS_TP)
+T.Skill_Mend_Spirit                 = GetString(SI_LUIE_SKILL_MEND_SPIRIT_TP)
+T.Skill_Symbiosis                   = GetString(SI_LUIE_SKILL_SYMBIOSIS_TP)
+T.Skill_Mend_Wounds_Channel         = GetString(SI_LUIE_SKILL_MEND_WOUNDS_CHANNEL_TP)
+T.Skill_Meditate                    = GetString(SI_LUIE_SKILL_MEDITATE_TP)
+T.Skill_Introspection               = GetString(SI_LUIE_SKILL_INTROSPECTION_TP)
+
+-- Undaunted
+T.Skill_Blood_Altar                 = GetString(SI_LUIE_SKILL_BLOOD_ALTAR_TP)
+T.Skill_Overflowing_Altar           = GetString(SI_LUIE_SKILL_OVERFLOWING_ALTAR_TP)
+T.Skill_Trapping_Webs               = GetString(SI_LUIE_SKILL_TRAPPING_WEBS_TP)
+T.Skill_Shadow_Silk                 = GetString(SI_LUIE_SKILL_SHADOW_SILK_TP)
+T.Skill_Tangling_Webs               = GetString(SI_LUIE_SKILL_TANGLING_WEBS_TP)
+T.Skill_Trapping_Webs_Snare         = GetString(SI_LUIE_SKILL_TRAPPING_WEBS_SNARE_TP)
+
+T.Skill_Bone_Shield                 = GetString(SI_LUIE_SKILL_BONE_SHIELD_TP)
+T.Skill_Spiked_Bone_Shield          = GetString(SI_LUIE_SKILL_SPIKED_BONE_SHIELD_TP)
+T.Skill_Bone_Surge                  = GetString(SI_LUIE_SKILL_BONE_SURGE_TP)
 
 -- ---------------------------------------------------
 -- QUESTS ---------------------

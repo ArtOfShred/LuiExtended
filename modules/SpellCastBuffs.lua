@@ -2141,6 +2141,18 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             endTime = endTime - E.EffectOverride[abilityId].duration
         end
 
+        -- Specific override for Mend Spirit -- Updates Major Resolve / Major Ward to use the remaining duration of Mend Spirit.
+        if abilityId == 107632 or abilityId == 107631 then
+            for i = 1, GetNumBuffs(unitTag) do
+                local _, timeStarted, timeEnding, _, _, _, _, _, _, _, abilityId = GetUnitBuffInfo(unitTag, i)
+                if abilityId == 107629 then
+                    duration = timeEnding - timeStarted
+                    beginTime = timeStarted
+                    endTime = timeEnding
+                end
+            end
+        end
+
         --EffectCreateSkillAura
         if ( E.EffectCreateSkillAura[abilityId] ) then
             local name = zo_strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))

@@ -90,6 +90,7 @@ function LUIE_CreateSettings()
 
         for accountName, data in pairs(LUIESV.Default) do
             for profile, vars in pairs(data) do
+                if profile == '$AccountWide' then profile = '$AccountWide (' .. accountName .. ')' end -- Add display name onto Account Wide for differentiation
                 if vars.version == LUIE.SVVer then
                     if isCharacterSpecific then
                         -- Add list of other player characters (but not self) to settings to copy. We also add AccountWide here so you can copy from your base settings if desired.
@@ -126,7 +127,7 @@ function LUIE_CreateSettings()
     local function DeleteCurrentProfile(account)
         local deleteProfile
         if account then
-            deleteProfile = '$AccountWide'
+            deleteProfile = '$AccountWide (' .. GetDisplayName() .. ')'
         else
             deleteProfile = GetUnitName('player')
         end
@@ -149,6 +150,7 @@ function LUIE_CreateSettings()
 
         for accountName, data in pairs(LUIESV.Default) do
             for profile, vars in pairs(data) do
+                if profileQueuedCopy == '$AccountWide (' .. accountName .. ')' then profileQueuedCopy = '$AccountWide' end -- When the account name matches the one we're iterating through, copy that value
                 if profile == profileQueuedCopy then
                     sourceCharacter = vars
                 end
@@ -159,7 +161,7 @@ function LUIE_CreateSettings()
         end
 
         if not sourceCharacter or not targetCharacter then
-            d("Some shit got fucked up dawg.")
+            d("LUIE - Unable to copy Character Profile Data.")
             return
         else
             CopyTable(sourceCharacter, targetCharacter)
