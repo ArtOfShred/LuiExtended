@@ -6,9 +6,9 @@ LUIE.Tooltips = {}
 local T = LUIE.Tooltips
 local A = LUIE.GetAbility()
 
--- ---------------------------------------------------
--- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------
--- ---------------------------------------------------
+----------------------------------------------------------------
+-- MAJOR / MINOR BUFFS & DEBUFFS -------------------------------
+----------------------------------------------------------------
 
 -- Major/Minor Buffs
 T.Skill_Minor_Resolve                   = GetString(SI_LUIE_SKILL_MINOR_RESOLVE_TP)
@@ -69,16 +69,50 @@ T.Skill_Minor_Mangle                    = GetString(SI_LUIE_SKILL_MINOR_MANGLE_T
 -- Aegis/Slayer
 T.Skill_Minor_Aegis                     = GetString(SI_LUIE_SKILL_MINOR_AEGIS_TP)
 T.Skill_Major_Aegis                     = GetString(SI_LUIE_SKILL_MAJOR_AEGIS_TP)
-
 T.Skill_Minor_Slayer                    = GetString(SI_LUIE_SKILL_MINOR_SLAYER_TP)
 T.Skill_Major_Slayer                    = GetString(SI_LUIE_SKILL_MAJOR_SLAYER_TP)
 
+-- Empower / Hindrance
 T.Skill_Empower                         = GetString(SI_LUIE_SKILL_EMPOWER_TP)
 T.Skill_Hindrance                       = GetString(SI_LUIE_SKILL_HINDRANCE_TP)
 
--- ---------------------------------------------------
--- GENERIC ---------------------
--- ---------------------------------------------------
+----------------------------------------------------------------
+-- GENERIC SKILLS ----------------------------------------------
+----------------------------------------------------------------
+
+T.Generic_Immunity                      = GetString(SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP)
+T.Generic_Snare_15                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_15_TP)
+T.Generic_Snare_15_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_15_NO_DUR_TP)
+T.Generic_Snare_20                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_20_TP)
+T.Generic_Snare_20_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_20_NO_DUR_TP)
+T.Generic_Snare_30                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_30_TP)
+T.Generic_Snare_30_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_30_NO_DUR_TP)
+T.Generic_Snare_40                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_40_TP)
+T.Generic_Snare_40_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_40_NO_DUR_TP)
+T.Generic_Snare_50                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_50_TP)
+T.Generic_Snare_50_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_50_NO_DUR_TP)
+T.Generic_Snare_60                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_60_TP)
+T.Generic_Snare_60_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_60_NO_DUR_TP)
+T.Generic_Snare_70                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_70_TP)
+T.Generic_Snare_70_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_70_NO_DUR_TP)
+T.Generic_Damage_Shield_No_Duration     = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP)
+T.Generic_Damage_Shield_Duration        = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP)
+T.Generic_Weapon_Damage_Duration        = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_TIME_TP)
+T.Generic_Spell_Damage_Duration         = GetString(SI_LUIE_SKILL_SET_GENERIC_SPELL_DAMAGE_TIME_TP)
+T.Generic_LA_HA_Damage_Duration         = GetString(SI_LUIE_SKILL_SET_GENERIC_LA_HA_DAMAGE)
+T.Generic_Phy_Spell_Resist_Duration     = GetString(SI_LUIE_SKILL_SET_GENERIC_ARMOR_SPELL_RESIST)
+T.Generic_Magicka_Recovery_Duration     = GetString(SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_TP)
+T.Generic_Weapon_Spell_Damage_Duration  = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_TP)
+
+-- T.Generic_HoT                           = GetString(SI_LUIE_SKILL_GENERIC_HOT_TP)
+T.Generic_Magicka_Regen                 = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP)
+T.Generic_Magicka_Regen_2_Sec           = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_2_SEC_TP)
+T.Generic_Stamina_Regen                 = GetString(SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP)
+T.Generic_HoT_05Sec                     = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_05SEC_TP)
+T.Generic_HoT_1Sec                      = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP)
+T.Generic_HoT_1_5_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_1_5_SEC_TP)
+T.Generic_HoT_08Sec                     = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_08SEC_TP)
+T.Generic_HoT_2Sec                      = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_2SEC_TP)
 
 T.Generic_Test                          = GetString(SI_LUIE_SKILL_TEST_TP)
 
@@ -98,11 +132,6 @@ T.Generic_Oblivion 					    = GetString(SI_LUIE_SKILL_GENERIC_OBLIVION_TP)
 T.Generic_Magic                         = GetString(SI_LUIE_SKILL_GENERIC_MAGIC_TP)
 T.Generic_Magic_1_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_MAGIC_1_SEC_TP)
 T.Generic_Magic_2_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_MAGIC_2_SEC_TP)
-
-T.Generic_HoT                           = GetString(SI_LUIE_SKILL_GENERIC_HOT_TP)
-T.Generic_Magicka_Regen                 = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP)
-T.Generic_Magicka_Regen_2_Sec           = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_2_SEC_TP)
-T.Generic_Stamina_Regen                 = GetString(SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP)
 
 T.Generic_Off_Balance                   = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP)
 T.Generic_Off_Balance_Immunity          = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP)
@@ -130,13 +159,13 @@ T.Generic_Ravage_Stamina_Poison         = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE
 
 T.Generic_Marked                        = GetString(SI_LUIE_SKILL_GENERIC_MARKED_TP)
 T.Generic_Reveal                        = GetString(SI_LUIE_SKILL_GENERIC_REVEAL_TP)
-
 T.Generic_Blind                         = GetString(SI_LUIE_SKILL_GENERIC_BLIND_TP)
 
--- ---------------------------------------------------
--- INNATE/WORLD ---------------------
--- ---------------------------------------------------
+----------------------------------------------------------------
+-- INNATE SKILLS ----------------------------------------------
+----------------------------------------------------------------
 
+-- Player Basic
 T.Innate_Immobilize_Immunity            = GetString(SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP)
 T.Innate_Dodge_Fatigue                  = GetString(SI_LUIE_SKILL_DODGE_FATIGUE_TP)
 T.Innate_Hidden                         = GetString(SI_LUIE_SKILL_HIDDEN_TP)
@@ -152,142 +181,150 @@ T.Innate_Recall_Penalty                 = GetString(SI_LUIE_SKILL_RECALL_PENALTY
 T.Innate_Ayleid_Well                    = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP)
 T.Innate_Ayleid_Well_Fortified          = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP)
 T.Innate_Firelight                      = GetString(SI_LUIE_SKILL_FIRELIGHT_TP)
-
 T.Innate_ESO_Plus                       = GetString(SI_LUIE_SKILL_ESO_PLUS_TP)
 
-T.Boon_Lady     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_LADY)
-T.Boon_Lover     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_LOVER)
-T.Boon_Lord     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_LORD)
-T.Boon_Mage     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_MAGE)
-T.Boon_Tower     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_TOWER)
-T.Boon_Atronach     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH)
-T.Boon_Serpent     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT)
-T.Boon_Shadow     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW)
-T.Boon_Ritual     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL)
-T.Boon_Thief     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_THIEF)
-T.Boon_Warrior     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_WARRIOR)
-T.Boon_Apprentice     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE)
-T.Boon_Steed     = GetString(SI_LUIE_SKILL_MUNDUS_BASIC_STEED)
+-- Mundus Stones
+T.Boon_Lady     						= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_LADY)
+T.Boon_Lover     						= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_LOVER)
+T.Boon_Lord     						= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_LORD)
+T.Boon_Mage     						= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_MAGE)
+T.Boon_Tower     						= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_TOWER)
+T.Boon_Atronach     					= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH)
+T.Boon_Serpent     						= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT)
+T.Boon_Shadow     						= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW)
+T.Boon_Ritual     						= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL)
+T.Boon_Thief     						= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_THIEF)
+T.Boon_Warrior     						= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_WARRIOR)
+T.Boon_Apprentice     					= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE)
+T.Boon_Steed     						= GetString(SI_LUIE_SKILL_MUNDUS_BASIC_STEED)
 
--- ---------------------------------------------------
--- EVENT ---------------------
--- ---------------------------------------------------
+----------------------------------------------------------------
+-- EVENT SKILLS ------------------------------------------------
+----------------------------------------------------------------
 
-T.Event_Freezing     = GetString(SI_LUIE_SKILL_EVENT_FREEZING)
-T.Event_Warm     = GetString(SI_LUIE_SKILL_EVENT_WARM)
+T.Event_Freezing     					= GetString(SI_LUIE_SKILL_EVENT_FREEZING)
+T.Event_Warm     						= GetString(SI_LUIE_SKILL_EVENT_WARM)
+T.Event_Festival_Grog                   = GetString(SI_LUIE_SKILL_EVENT_FESTIVAL_GROG)
+T.Event_Festival_Mints                  = GetString(SI_LUIE_SKILL_EVENT_FESTIVAL_MINTS)
 
--- ---------------------------------------------------
--- CHAMPION ---------------------
--- ---------------------------------------------------
+----------------------------------------------------------------
+-- CHAMPION POINT SKILLS ---------------------------------------
+----------------------------------------------------------------
 
 T.Champion_Phase                        = GetString(SI_LUIE_SKILL_PHASE_TP)
 T.Champion_Unchained                    = GetString(SI_LUIE_SKILL_UNCHAINED_TP)
 T.Champion_Siphoner                     = GetString(SI_LUIE_SKILL_SIPHONER_TP)
 T.Champion_Foresight                    = GetString(SI_LUIE_SKILL_FORESIGHT_TP)
-T.Champion_Vengeance_Charge         = GetAbilityDescription(63150)
+T.Champion_Vengeance_Charge         	= GetAbilityDescription(63150)
 T.Champion_Vengeance                    = GetString(SI_LUIE_SKILL_VENGEANCE_TP)
 T.Champion_Retaliation                  = GetString(SI_LUIE_SKILL_RETALIATION_TP)
 T.Champion_Opportunist                  = GetString(SI_LUIE_SKILL_OPPORTUNIST_TP)
 
--- ---------------------------------------------------
--- COMSUMABLES & ITEMS -------------------------------
--- ---------------------------------------------------
+----------------------------------------------------------------
+-- CONSUMABLES & ITEMS -----------------------------------------
+----------------------------------------------------------------
 
+-- Glyphs
 T.Item_Glyph_of_Crushing                = GetString(SI_LUIE_SKILL_GLYPH_CRUSHING_TP)
 T.Item_Glyph_of_Hardening               = GetString(SI_LUIE_SKILL_GLYPH_HARDENING_TP)
 T.Item_Glyph_of_Weakening               = GetString(SI_LUIE_SKILL_GLYPH_WEAKENING_TP)
 T.Item_Glyph_of_Weapon_Damage           = GetString(SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE_TP)
 
-T.Food_Crafted_Health               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68235:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Food_Crafted_Magicka              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68238:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Food_Crafted_Stamina              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68241:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Food_Crafted_Health_Magicka       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68244:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Food_Crafted_Health_Stamina       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68247:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Food_Crafted_Magicka_Stamina      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68250:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Food_Crafted_Triple               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68254:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+-- Crafted Food
+T.Food_Crafted_Health               	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68235:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Magicka              	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68238:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Stamina              	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68241:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Health_Magicka       	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68244:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Health_Stamina       	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68247:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Magicka_Stamina      	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68250:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Food_Crafted_Triple               	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68254:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
 
-T.Food_Vendor_Health                = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57637:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Food_Vendor_Magicka               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57630:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Food_Vendor_Stamina               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Food_Cyrodilic_Field_Bar          = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71076:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Food_Cyrodilic_Field_Tack         = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71074:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Food_Cyrodilic_Field_Treat        = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71075:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+-- Vendor / Cyrodiil Food
+T.Food_Vendor_Health                	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57637:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Vendor_Magicka               	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57630:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Vendor_Stamina               	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Cyrodilic_Field_Bar          	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71076:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Cyrodilic_Field_Tack         	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71074:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Food_Cyrodilic_Field_Treat        	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71075:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
 
-T.Food_Crown_Crate_Meal             = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:94437:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), "")
-T.Food_Crown_Meal                   = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64711:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), "")
+-- Crown Food
+T.Food_Crown_Crate_Meal             	= string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:94437:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), "")
+T.Food_Crown_Meal                   	= string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64711:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), "")
 
-T.Drink_Crafted_Health              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68257:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Drink_Crafted_Magicka             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68260:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Drink_Crafted_Stamina             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68263:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Drink_Crafted_Health_Magicka      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68266:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Drink_Crafted_Health_Stamina      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68269:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Drink_Crafted_Magicka_Stamina     = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68272:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
-T.Drink_Crafted_Triple              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68276:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+-- Crafted Drink
+T.Drink_Crafted_Health             	 	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68257:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Magicka             	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68260:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Stamina             	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68263:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Health_Magicka      	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68266:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Health_Stamina      	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68269:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Magicka_Stamina     	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68272:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
+T.Drink_Crafted_Triple              	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68276:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h'))
 
-T.Drink_Vendor_Health               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57642:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Drink_Vendor_Magicka              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71250:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Drink_Vendor_Stamina              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57654:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Drink_Cyrodilic_Field_Tonic       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71079:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Drink_Cyrodilic_Field_Brew        = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71077:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
-T.Drink_Cyrodilic_Field_Tea         = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71078:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+-- Vendor / Cyroiil Drink
+T.Drink_Vendor_Health               	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57642:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Vendor_Magicka              	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71250:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Vendor_Stamina              	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57654:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Cyrodilic_Field_Tonic       	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71079:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Cyrodilic_Field_Brew        	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71077:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Cyrodilic_Field_Tea         	= select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71078:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'))
+T.Drink_Double_Bloody_Mara          	= string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87699:6:1:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA), "")
+T.Drink_Hissmir                     	= string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:101879:6:1:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_HISSMIR), GetString(SI_LUIE_SKILL_ADD_TOOLTIP_HISSMIR))
 
-T.Drink_Crown_Crate_Drink           = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:94438:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), "")
-T.Drink_Crown_Drink                 = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64712:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), "")
-T.Drink_Double_Bloody_Mara          = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87699:6:1:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA), "")
-T.Drink_Hissmir                     = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:101879:6:1:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_HISSMIR), GetString(SI_LUIE_SKILL_ADD_TOOLTIP_HISSMIR))
+-- Crown Drink
+T.Drink_Crown_Crate_Drink           	= string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:94438:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), "")
+T.Drink_Crown_Drink                 	= string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64712:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), "")
 
-T.Experience_Psijic_Ambrosia        = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP),"50")
-T.Experience_Aetherial_Ambrosia     = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP), "100")
-T.Experience_Mythic_Aetherial_Ambrosia = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP), "150")
-T.Experience_Crown                  = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "50", "2")
-T.Experience_Gold_Coast             = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "50", "1")
-T.Experience_Major_Gold_Coast       = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "1")
-T.Experience_Grand_Gold_Coast       = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "150", "1")
-T.Experience_Seasonal_Event         = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "2")
-T.Experience_Seasonal_Pelinal       = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_PELINAL), "2")
-
-T.Event_Festival_Grog                   = GetString(SI_LUIE_SKILL_EVENT_FESTIVAL_GROG)
-T.Event_Festival_Mints                  = GetString(SI_LUIE_SKILL_EVENT_FESTIVAL_MINTS)
+-- Experience
+T.Experience_Psijic_Ambrosia        	= zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP),"50")
+T.Experience_Aetherial_Ambrosia     	= zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP), "100")
+T.Experience_Mythic_Aetherial_Ambrosia 	= zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP), "150")
+T.Experience_Crown                  	= zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "50", "2")
+T.Experience_Gold_Coast             	= zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "50", "1")
+T.Experience_Major_Gold_Coast       	= zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "1")
+T.Experience_Grand_Gold_Coast       	= zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "150", "1")
+T.Experience_Seasonal_Event         	= zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "2")
+T.Experience_Seasonal_Pelinal       	= zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_PELINAL), "2")
 
 -- Mementos
-T.Memento_Almalexias_Lantern        = select(2, GetCollectibleInfo(341))
-T.Memento_Bonesnap_Binding_Talisman = select(2, GetCollectibleInfo(348))
-T.Memento_Discourse_Amaranthine     = select(2, GetCollectibleInfo(345))
-T.Memento_Fetish_of_Anger           = select(2, GetCollectibleInfo(347))
-T.Memento_Finvirs_Trinket           = select(2, GetCollectibleInfo(336))
-T.Memento_Mystery_Meat              = select(2, GetCollectibleInfo(342))
-T.Memento_Sanguines_Goblet          = select(2, GetCollectibleInfo(338))
-T.Memento_Token_of_Root_Sunder      = select(2, GetCollectibleInfo(349))
+T.Memento_Almalexias_Lantern        	= select(2, GetCollectibleInfo(341))
+T.Memento_Bonesnap_Binding_Talisman 	= select(2, GetCollectibleInfo(348))
+T.Memento_Discourse_Amaranthine     	= select(2, GetCollectibleInfo(345))
+T.Memento_Fetish_of_Anger           	= select(2, GetCollectibleInfo(347))
+T.Memento_Finvirs_Trinket           	= select(2, GetCollectibleInfo(336))
+T.Memento_Mystery_Meat              	= select(2, GetCollectibleInfo(342))
+T.Memento_Sanguines_Goblet          	= select(2, GetCollectibleInfo(338))
+T.Memento_Token_of_Root_Sunder      	= select(2, GetCollectibleInfo(349))
 
 -- Crown Mementos
-T.Memento_Storm_Atronach_Aura       = select(2, GetCollectibleInfo(594))
-T.Memento_Storm_Atronach_Transform  = select(2, GetCollectibleInfo(596))
-T.Memento_Wild_Hunt_Leaf_Dance_Aura = select(2, GetCollectibleInfo(760))
-T.Memento_Wild_Hunt_Transform       = select(2, GetCollectibleInfo(759))
-T.Memento_Floral_Swirl_Aura         = select(2, GetCollectibleInfo(758))
+T.Memento_Storm_Atronach_Aura       	= select(2, GetCollectibleInfo(594))
+T.Memento_Storm_Atronach_Transform  	= select(2, GetCollectibleInfo(596))
+T.Memento_Wild_Hunt_Leaf_Dance_Aura 	= select(2, GetCollectibleInfo(760))
+T.Memento_Wild_Hunt_Transform       	= select(2, GetCollectibleInfo(759))
+T.Memento_Floral_Swirl_Aura         	= select(2, GetCollectibleInfo(758))
+T.Memento_Dwarven_Puzzle_Orb        	= select(2, GetCollectibleInfo(1181))
+T.Memento_Dwarven_Tonal_Forks       	= select(2, GetCollectibleInfo(1182))
+T.Memento_Dwemervamidium_Mirage     	= select(2, GetCollectibleInfo(1183))
+T.Memento_Swarm_of_Crows            	= select(2, GetCollectibleInfo(1384))
+T.Memento_Ghost_Lantern             	= select(2, GetCollectibleInfo(5212))
 
-T.Memento_Dwarven_Puzzle_Orb        = select(2, GetCollectibleInfo(1181))
-T.Memento_Dwarven_Tonal_Forks       = select(2, GetCollectibleInfo(1182))
-T.Memento_Dwemervamidium_Mirage     = select(2, GetCollectibleInfo(1183))
-T.Memento_Swarm_of_Crows            = select(2, GetCollectibleInfo(1384))
-T.Memento_Ghost_Lantern             = select(2, GetCollectibleInfo(5212))
+----------------------------------------------------------------
+-- ITEM SETS --------------------------------------------------
+----------------------------------------------------------------
 
--- ---------------------------------------------------
--- SETS ---------------------------------
--- ---------------------------------------------------
-
-T.Set_Asylum_Bow                    = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 45)
-T.Set_Asylum_Bow_Perfect            = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 50)
+-- Weapon Sets
+T.Set_Asylum_Bow                    	= zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 45)
+T.Set_Asylum_Bow_Perfect            	= zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 50)
 T.Set_Asylum_Destruction_Staff          = GetString(SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF)
 T.Set_Asylum_Destruction_Staff_P        = GetString(SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF_PERFECT)
-T.Set_Aslyum_Restoration_Staff      = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 27)
-T.Set_Aslyum_Restoration_Staff_P    = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 30)
+T.Set_Aslyum_Restoration_Staff      	= zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 27)
+T.Set_Aslyum_Restoration_Staff_P    	= zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 30)
 T.Set_Maelstrom_DW                      = GetString(SI_LUIE_SKILL_SET_MAELSTROM_DW)
 T.Set_Maelstrom_1H                      = GetString(SI_LUIE_SKILL_SET_MAELSTROM_1H)
 T.Set_Master_1H                         = GetString(SI_LUIE_SKILL_SET_MASTER_1H)
 T.Set_Blackrose_1H                      = GetString(SI_LUIE_SKILL_SET_BLACKROSE_1H_TP)
 T.Set_Blackrose_Destro_Staff            = GetString(SI_LUIE_SKILL_SET_BLACKROSE_DESTRO_TP)
 
+-- Monster Helms
 T.Set_Balorgh                           = GetString(SI_LUIE_SKILL_SET_BALORGH)
 T.Set_Bogdan_the_Nightflame             = GetString(SI_LUIE_SKILL_SET_BOGDAN)
 T.Set_Domihaus_Stamina_Buff             = GetString(SI_LUIE_SKILL_SET_DOMIHAUS_BUFF_STAMINA)
@@ -297,8 +334,8 @@ T.Set_Domihaus_Magicka_Damage           = GetString(SI_LUIE_SKILL_SET_DOMIHAUS_D
 T.Set_Earthgore                         = GetString(SI_LUIE_SKILL_SET_EARTHGORE)
 T.Set_Grothdarr                         = GetString(SI_LUIE_SKILL_SET_GROTHDARR)
 T.Set_Iceheart                          = GetString(SI_LUIE_SKILL_SET_ICEHEART)
-T.Set_Ilambris_Fire                 = zo_strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE3))
-T.Set_Ilambris_Shock                = zo_strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE4))
+T.Set_Ilambris_Fire                 	= zo_strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE3))
+T.Set_Ilambris_Shock                	= zo_strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE4))
 T.Set_Lord_Warden_Ground                = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_GROUND)
 T.Set_Lord_Warden_Buff                  = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF)
 T.Set_Malubeth                          = GetString(SI_LUIE_SKILL_SET_MALUBETH)
@@ -312,27 +349,29 @@ T.Set_Spawn_of_Mephala                  = GetString(SI_LUIE_SKILL_SET_SPAWN_OF_M
 -- TODO: Note disabled the TP below due to the damage not actually being part of the debuff as well. Probably should only combine tooltips on things like this if its a dot + snare for example. Might revisit.
 --GetString(SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_SNARE_TP) make sure to uncomment line in en.lua too
 T.Set_Stormfist                         = GetString(SI_LUIE_SKILL_SET_STORMFIST_TP)
-T.Set_Engine_Guardian_Health        = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE_2))
-T.Set_Engine_Guardian_Stamina       = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE6))
-T.Set_Engine_Guardian_Magicka       = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE0))
+T.Set_Engine_Guardian_Health        	= zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE_2))
+T.Set_Engine_Guardian_Stamina      	 	= zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE6))
+T.Set_Engine_Guardian_Magicka       	= zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE0))
 T.Set_The_Troll_King                    = GetString(SI_LUIE_SKILL_SET_THE_TROLL_KING_TP)
 T.Set_Thurvokun                         = GetString(SI_LUIE_SKILL_SET_THURVOKUN_TP)
 T.Set_Zaan                              = GetString(SI_LUIE_SKILL_SET_ZAAN_TP)
 
+-- Crafted Sets
 T.Set_Alessias_Bulwark                  = GetString(SI_LUIE_SKILL_SET_ALESSIAS_BULWARK)
 T.Set_Clever_Alchemist                  = GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST)
 T.Set_Eternal_Hunt                      = GetString(SI_LUIE_SKILL_SET_ETERNAL_HUNT)
 T.Set_Morkuldin                         = GetString(SI_LUIE_SKILL_SET_MORKULDIN)
 T.Set_Tavas_Favor                       = GetString(SI_LUIE_SKILL_SET_TAVAS_FAVOR)
-T.Set_Trials_Fire                   = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE3))
-T.Set_Trials_Shock                  = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE4))
-T.Set_Trials_Frost                  = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE6))
-T.Set_Trials_Poison                 = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE11))
-T.Set_Trials_Disease                = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE10))
+T.Set_Trials_Fire                   	= zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE3))
+T.Set_Trials_Shock                  	= zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE4))
+T.Set_Trials_Frost                  	= zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE6))
+T.Set_Trials_Poison                 	= zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE11))
+T.Set_Trials_Disease                	= zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE10))
 T.Set_Varens_Legacy                     = GetString(SI_LUIE_SKILL_SET_VARENS_LEGACY)
 T.Set_Mechanical_Acuity                 = GetString(SI_LUIE_SKILL_SET_MECHANICAL_ACUITY)
 T.Set_Adept_Rider                       = GetString(SI_LUIE_SKILL_SET_ADEPT_RIDER)
 
+-- Light / Medium / Heavy Sets
 T.Set_Bahrahas_Curse                    = GetString(SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP)
 T.Set_Way_of_Martial_Knowledge          = GetString(SI_LUIE_SKILL_SET_WAY_OF_MARTIAL_KNOWLEDGE_TP)
 T.Set_Briarheart                        = GetString(SI_LUIE_SKILL_SET_BRIARHEART_TP)
@@ -346,7 +385,7 @@ T.Set_Sanctuary                         = GetString(SI_LUIE_SKILL_SANCTUARY_TP)
 T.Set_Shroud_of_the_Lich                = GetString(SI_LUIE_SKILL_SHROUD_OF_THE_LICH_TP)
 T.Set_Noble_Duelist                     = GetString(SI_LUIE_SKILL_SET_NOBLE_DUELIST_TP)
 T.Set_Worms_Raiment                     = GetString(SI_LUIE_SKILL_SET_WORMS_RAIMENT_TP)
-T.Set_Moon_Hunter                   = zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_SPELL_DAMAGE_DURATION), 6)
+T.Set_Moon_Hunter                   	= zo_strformat(GetString(SI_LUIE_SKILL_GENERIC_SPELL_DAMAGE_DURATION), 6)
 T.Set_Hircines_Veneer                   = GetString(SI_LUIE_SKILL_SET_HIRCINES_VENEER_TP)
 T.Set_Plague_Slinger                    = GetString(SI_LUIE_SKILL_PLAGUE_SLINGER_TP)
 T.Set_Storm_Master                      = GetString(SI_LUIE_SKILL_SET_STORM_MASTER_TP)
@@ -358,7 +397,9 @@ T.Set_Embershield                       = GetString(SI_LUIE_SKILL_SET_EMBERSHIEL
 T.Set_Hagravens_Garden                  = GetString(SI_LUIE_SKILL_SET_HAGRAVENS_GARDEN)
 T.Set_Jolting_Arms                      = GetString(SI_LUIE_SKILL_SET_JOLTING_ARMS)
 T.Set_Leeching_Plate                    = GetString(SI_LUIE_SKILL_SET_LEECHING_PLATE_TP)
-T.Set_Handle_of_Mephala                 = GetString(SI_LUIE_SKILL_SET_HAND_OF_MEPHALA_TP)
+T.Set_Hand_of_Mephala                   = GetString(SI_LUIE_SKILL_SET_HAND_OF_MEPHALA_TP)
+
+-- Trial Sets
 T.Set_Berserking_Warrior                = GetString(SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP)
 T.Set_Eternal_Immortal_Warrior          = GetString(SI_LUIE_SKILL_SET_ETERNAL_IMMORTAL_WARRIOR_TP)
 T.Set_Destructive_Mage                  = GetString(SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP)
@@ -370,59 +411,39 @@ T.Set_Vestment_of_Olorime               = GetString(SI_LUIE_SKILL_SET_VESTMENT_O
 T.Set_Mantle_of_Siroria                 = GetString(SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP)
 T.Set_Sirorias_Boon                     = GetString(SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP)
 T.Set_Relequens                         = GetString(SI_LUIE_SKILL_SET_RELEQUENS_TP)
+
+-- Battleground Sets
 T.Set_Vanguards_Challenge               = GetString(SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP)
+
+-- Imperial City Sets
 T.Set_Galerions_Revenge                 = GetString(SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP)
 T.Set_Meritorius_Service                = GetString(SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP)
 T.Set_Phoenix                           = GetString(SI_LUIE_SKILL_SET_PHOENIX_TP)
+
+-- Cyrodiil Sets
 T.Set_Soldier_of_Anguish                = GetString(SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP)
 T.Set_Spell_Strategist                  = GetString(SI_LUIE_SKILL_SET_SPELL_STRATEGIST_TP)
-T.Set_Succession_Flame              = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE3))
-T.Set_Succession_Shock              = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE4))
-T.Set_Succession_Frost              = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE6))
-T.Set_Para_Bellum                       = GetString(SI_LUIE_SKILL_SET_PARA_BELLUM_TP)
 T.Set_Glorious_Defender                 = GetString(SI_LUIE_SKILL_SET_GLORIOUS_DEFENDER_TP)
 T.Set_Light_of_Cyrodiil                 = GetString(SI_LUIE_SKILL_SET_CYRODIILS_LIGHT_TP)
 T.Set_Morag_Tong                        = GetString(SI_LUIE_SKILL_SET_MORAG_TONG_TP)
 
-T.Generic_Immunity                      = GetString(SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP)
-T.Generic_Snare_15                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_15_TP)
-T.Generic_Snare_15_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_15_NO_DUR_TP)
-T.Generic_Snare_20                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_20_TP)
-T.Generic_Snare_20_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_20_NO_DUR_TP)
-T.Generic_Snare_30                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_30_TP)
-T.Generic_Snare_30_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_30_NO_DUR_TP)
-T.Generic_Snare_40                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_40_TP)
-T.Generic_Snare_40_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_40_NO_DUR_TP)
-T.Generic_Snare_50                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_50_TP)
-T.Generic_Snare_50_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_50_NO_DUR_TP)
-T.Generic_Snare_60                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_60_TP)
-T.Generic_Snare_60_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_60_NO_DUR_TP)
-T.Generic_Snare_70                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_70_TP)
-T.Generic_Snare_70_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_70_NO_DUR_TP)
-T.Generic_Damage_Shield_No_Duration     = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP)
-T.Generic_Damage_Shield_Duration        = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP)
-T.Generic_Weapon_Damage_Duration        = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_TIME_TP)
-T.Generic_Spell_Damage_Duration         = GetString(SI_LUIE_SKILL_SET_GENERIC_SPELL_DAMAGE_TIME_TP)
-T.Generic_LA_HA_Damage_Duration         = GetString(SI_LUIE_SKILL_SET_GENERIC_LA_HA_DAMAGE)
-T.Generic_Phy_Spell_Resist_Duration     = GetString(SI_LUIE_SKILL_SET_GENERIC_ARMOR_SPELL_RESIST)
-T.Generic_Magicka_Recovery_Duration     = GetString(SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_TP)
-T.Generic_Weapon_Spell_Damage_Duration     = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_TP)
+-- Arena Sets
+T.Set_Succession_Flame              	= zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE3))
+T.Set_Succession_Shock              	= zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE4))
+T.Set_Succession_Frost             	 	= zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE6))
+T.Set_Para_Bellum                       = GetString(SI_LUIE_SKILL_SET_PARA_BELLUM_TP)
 
-T.Generic_HoT_05Sec                     = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_05SEC_TP)
-T.Generic_HoT_1Sec                      = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP)
-T.Generic_HoT_1_5_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_1_5_SEC_TP)
-T.Generic_HoT_08Sec                     = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_08SEC_TP)
-T.Generic_HoT_2Sec                      = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_2SEC_TP)
-
--- Player Skills
+----------------------------------------------------------------
+-- CLASS SKILLS ------------------------------------------------
+----------------------------------------------------------------
 
 -- Dragonknight
 T.Skill_Burning_Embers                  = GetString(SI_LUIE_SKILL_BURNING_EMBERS_TP)
 T.Skill_Engulfing_Flames                = GetString(SI_LUIE_SKILL_ENGULFING_FLAMES_TP)
-T.Skill_Inferno_Base                = GetAbilityDescription(28967)
+T.Skill_Inferno_Base                	= GetAbilityDescription(28967)
 T.Skill_Inferno_Active                  = GetString(SI_LUIE_SKILL_INFERNO_TP)
-T.Skill_Flames_of_Oblivion_Base     = GetAbilityDescription(32853)
-T.Skill_Cauterize_Base              = GetAbilityDescription(32881)
+T.Skill_Flames_of_Oblivion_Base     	= GetAbilityDescription(32853)
+T.Skill_Cauterize_Base              	= GetAbilityDescription(32881)
 T.Skill_Cauterize_Active                = GetString(SI_LUIE_SKILL_CAUTERIZE_TP)
 T.Skill_Dragonknight_Standard           = GetString(SI_LUIE_SKILL_DRAGONKIGHT_STANDARD_TP)
 T.Skill_Standard_of_Might_Buff          = GetString(SI_LUIE_SKILL_STANDARD_OF_MIGHT_TP)
@@ -466,8 +487,8 @@ T.Skill_Siphoning_Attacks               = GetString(SI_LUIE_SKILL_SIPHONING_ATTA
 T.Skill_Soul_Tether                     = GetString(SI_LUIE_SKILL_SOUL_TETHER_TP)
 
 -- Sorcerer
-T.Skill_Persistence_Rank_1          = zo_strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 7)
-T.Skill_Persistence_Rank_2          = zo_strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 15)
+T.Skill_Persistence_Rank_1          	= zo_strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 7)
+T.Skill_Persistence_Rank_2          	= zo_strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 15)
 T.Skill_Crystal_Fragments               = GetString(SI_LUIE_SKILL_CRYSTAL_FRAGMENTS_TP)
 T.Skill_Shattering_Prison               = GetString(SI_LUIE_SKILL_SHATTERING_PRISON_TP)
 T.Skill_Rune_Cage                       = GetString(SI_LUIE_SKILL_RUNE_CAGE_TP)
@@ -568,13 +589,15 @@ T.Skill_Sleet_Storm                     = GetString(SI_LUIE_SKILL_SLEET_STORM_TP
 T.Skill_Permafrost                      = GetString(SI_LUIE_SKILL_PERMAFROST_TP)
 T.Skill_Permafrost_Snare                = GetString(SI_LUIE_SKILL_PERMAFROST_SNARE_TP)
 
--- Weapon Skills
+----------------------------------------------------------------
+-- WEAPON SKILLS -----------------------------------------------
+----------------------------------------------------------------
 
 -- Two Handed
-T.Skill_Follow_Up_Rank_1            = zo_strformat(GetString(SI_LUIE_SKILL_FOLLOW_UP_TP), 5)
-T.Skill_Follow_Up_Rank_2            = zo_strformat(GetString(SI_LUIE_SKILL_FOLLOW_UP_TP), 10)
-T.Skill_Battle_Rush_Rank_1          = zo_strformat(GetString(SI_LUIE_SKILL_BATTLE_RUSH_TP), 15)
-T.Skill_Battle_Rush_Rank_2          = zo_strformat(GetString(SI_LUIE_SKILL_BATTLE_RUSH_TP), 30)
+T.Skill_Follow_Up_Rank_1            	= zo_strformat(GetString(SI_LUIE_SKILL_FOLLOW_UP_TP), 5)
+T.Skill_Follow_Up_Rank_2            	= zo_strformat(GetString(SI_LUIE_SKILL_FOLLOW_UP_TP), 10)
+T.Skill_Battle_Rush_Rank_1          	= zo_strformat(GetString(SI_LUIE_SKILL_BATTLE_RUSH_TP), 15)
+T.Skill_Battle_Rush_Rank_2          	= zo_strformat(GetString(SI_LUIE_SKILL_BATTLE_RUSH_TP), 30)
 T.Skill_Rally                           = GetString(SI_LUIE_SKILL_RALLY_TP)
 T.Skill_Berserker_Strike                = GetString(SI_LUIE_SKILL_BERSERKER_STRIKE_TP)
 T.Skill_Onslaught                       = GetString(SI_LUIE_SKILL_ONSLAUGHT_TP)
@@ -598,8 +621,8 @@ T.Skill_Lacerate                        = GetString(SI_LUIE_SKILL_LACERATE_TP)
 T.Skill_Thrive_in_Chaos                 = GetString(SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP)
 
 -- Bow
-T.Skill_Hawk_Eye_Rank_1             = zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 2)
-T.Skill_Hawk_Eye_Rank_2             = zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 5)
+T.Skill_Hawk_Eye_Rank_1            	 	= zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 2)
+T.Skill_Hawk_Eye_Rank_2             	= zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 5)
 T.Skill_Focused_Aim                     = GetString(SI_LUIE_SKILL_FOCUSED_AIM_TP)
 T.Skill_Volley                          = GetString(SI_LUIE_SKILL_VOLLEY_TP)
 T.Skill_Endless_Hail                    = GetString(SI_LUIE_SKILL_ENDLESS_HAIL_TP)
@@ -625,30 +648,31 @@ T.Skill_Frost_Touch                     = GetString(SI_LUIE_SKILL_FROST_TOUCH_TP
 T.Skill_Frost_Touch_Alt                 = GetString(SI_LUIE_SKILL_FROST_TOUCH_ALT_TP)
 T.Skill_Frost_Clench                    = GetString(SI_LUIE_SKILL_FROST_CLENCH_TP)
 T.Skill_Frost_Clench_Alt                = GetString(SI_LUIE_SKILL_FROST_CLENCH_ALT_TP)
-
-T.Skill_Fire_Storm                  = zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE3))
-T.Skill_Thunder_Storm               = zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE4))
-T.Skill_Ice_Storm                   = zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE6))
-T.Skill_Fiery_Rage                  = zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE3))
+T.Skill_Fire_Storm                  	= zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE3))
+T.Skill_Thunder_Storm               	= zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE4))
+T.Skill_Ice_Storm                   	= zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE6))
+T.Skill_Fiery_Rage                  	= zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE3))
 T.Skill_Thunderous_Rage                 = GetString(SI_LUIE_SKILL_THUNDEROUS_RAGE_TP)
 T.Skill_Icy_Rage                        = GetString(SI_LUIE_SKILL_ICY_RAGE_TP)
-T.Skill_Eye_of_Flame                = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE3))
-T.Skill_Eye_of_Lightning            = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE4))
-T.Skill_Eye_of_Frost                = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE6))
+T.Skill_Eye_of_Flame                	= zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE3))
+T.Skill_Eye_of_Lightning            	= zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE4))
+T.Skill_Eye_of_Frost                	= zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE6))
 
 -- Restoration Staff
 T.Skill_Mutagen                         = GetString(SI_LUIE_SKILL_MUTAGEN)
 T.Skill_Healing_Ward                    = GetString(SI_LUIE_SKILL_HEALING_WARD)
 T.Skill_Lights_Champion                 = GetString(SI_LUIE_SKILL_LIGHTS_CHAMPION)
 
+----------------------------------------------------------------
+-- ARMOR SKILLS ------------------------------------------------
+----------------------------------------------------------------
+
 -- Light Armor
 T.Skill_Harness_Magicka                 = GetString(SI_LUIE_SKILL_HARNESS_MAGICKA)
 
---zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
-
--- ---------------------------------------------------
--- PLAYER ABILITIES ---------------------
--- ---------------------------------------------------
+----------------------------------------------------------------
+-- WORLD SKILLS ------------------------------------------------
+----------------------------------------------------------------
 
 -- Soul Magic
 T.Skill_Soul_Summons                    = GetString(SI_LUIE_SKILL_SOUL_SUMMONS_TP)
@@ -663,7 +687,6 @@ T.Skill_Vampirism_Stage_3               = GetString(SI_LUIE_SKILL_VAMPIRISM_STAG
 T.Skill_Vampirism_Stage_4               = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE4_TP)
 T.Skill_Feed                            = GetString(SI_LUIE_SKILL_FEED_TP)
 T.Skill_Blood_Ritual                    = GetString(SI_LUIE_SKILL_BLOOD_RITUAL_TP)
-
 T.Skill_Drain_Essence                   = GetString(SI_LUIE_SKILL_DRAIN_ESSENCE_TP)
 T.Skill_Invigorating_Drain              = GetString(SI_LUIE_SKILL_INVIGORATING_DRAIN_TP)
 T.Skill_Mist_Form                       = GetString(SI_LUIE_SKILL_MIST_FORM_TP)
@@ -680,10 +703,14 @@ T.Skill_Claws_of_Life                   = GetString(SI_LUIE_SKILL_CLAWS_OF_LIFE_
 T.Skill_Werewolf_Transformation         = GetString(SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP)
 T.Skill_Pack_Leader                     = GetString(SI_LUIE_SKILL_PACK_LEADER_TP)
 
+----------------------------------------------------------------
+-- GUILDS SKILLS ------------------------------------------------
+----------------------------------------------------------------
+
 -- Fighters Guild
 T.Skill_Circle_of_Protection            = GetString(SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_TP)
 T.Skill_Ring_of_Preservation            = GetString(SI_LUIE_SKILL_RING_OF_PRESERVATION_TP)
-T.Skill_Expert_Hunter_Passive       = GetAbilityDescription(35762)
+T.Skill_Expert_Hunter_Passive       	= GetAbilityDescription(35762)
 T.Skill_Expert_Hunter                   = GetString(SI_LUIE_SKILL_EXPERT_HUNTER_TP)
 T.Skill_Evil_Hunter                     = GetString(SI_LUIE_SKILL_EVIL_HUNTER_TP)
 T.Skill_Trap_Beast                      = GetString(SI_LUIE_SKILL_TRAP_BEAST_TP)
@@ -693,9 +720,9 @@ T.Skill_Dawnbreaker_of_Smiting          = GetString(SI_LUIE_SKILL_DAWNBREAKER_OF
 
 -- Mages Guild
 T.Skill_Radiant_Magelight               = GetString(SI_LUIE_SKILL_RADIANT_MAGELIGHT_TP)
-T.Skill_Magelight_Passive           = GetAbilityDescription(30920)
-T.Skill_Inner_Light_Passive         = GetAbilityDescription(40478)
-T.Skill_Radiant_Magelight_Passive   = GetAbilityDescription(40483)
+T.Skill_Magelight_Passive           	= GetAbilityDescription(30920)
+T.Skill_Inner_Light_Passive         	= GetAbilityDescription(40478)
+T.Skill_Radiant_Magelight_Passive   	= GetAbilityDescription(40483)
 T.Skill_Entropy                         = GetString(SI_LUIE_SKILL_ENTROPY_TP)
 T.Skill_Degeneration                    = GetString(SI_LUIE_SKILL_DEGENERATION_TP)
 T.Skill_Fire_Rune                       = GetString(SI_LUIE_SKILL_FIRE_RUNE_TP)
@@ -736,6 +763,10 @@ T.Skill_Bone_Shield                     = GetString(SI_LUIE_SKILL_BONE_SHIELD_TP
 T.Skill_Spiked_Bone_Shield              = GetString(SI_LUIE_SKILL_SPIKED_BONE_SHIELD_TP)
 T.Skill_Bone_Surge                      = GetString(SI_LUIE_SKILL_BONE_SURGE_TP)
 
+----------------------------------------------------------------
+-- ALLIANCE WAR SKILLS -----------------------------------------
+----------------------------------------------------------------
+
 -- Assault
 T.Skill_Rapid_Maneuver                  = GetString(SI_LUIE_SKILL_RAPID_MANEUVER_TP)
 T.Skill_Charging_Maneuver               = GetString(SI_LUIE_SKILL_CHARGING_MANEUVER_TP)
@@ -757,9 +788,9 @@ T.Skill_Propelling_Shield               = GetString(SI_LUIE_SKILL_PROPELLING_SHI
 T.Skill_Propelling_Shield_Ground        = GetString(SI_LUIE_SKILL_PROPELLING_SHIELD_GROUND_TP)
 T.Skill_Purge                           = GetString(SI_LUIE_SKILL_PURGE_TP)
 
--- ---------------------------------------------------
--- QUESTS ---------------------
--- ---------------------------------------------------
+----------------------------------------------------------------
+-- QUESTS ------------------------------------------------------
+----------------------------------------------------------------
 
 T.Skill_Divine_Speed                    = GetString(SI_LUIE_SKILL_DIVINE_SPEED_TP)
 T.Skill_Lightning_Fury                  = GetString(SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP)
@@ -774,14 +805,11 @@ T.Skill_Fancy_Clothing                  = GetString(SI_LUIE_SKILL_FANCY_CLOTHING
 T.Skill_Burrow                          = GetString(SI_LUIE_SKILL_BURROW_TP)
 T.Skill_Shadow_Wood                     = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP)
 
-function LUIE.ProcessTooltipType(input, tooltip)
-
-    -- dummy func, maybe use
-
-end
-
-
 --[[ Possibly use these at some point
+
+function LUIE.ProcessTooltipType(input, tooltip)
+    -- dummy func, maybe use
+end
 
 LUIE.DynamicTooltips = { }
 
@@ -808,10 +836,9 @@ DT[abilityId]()
 
 Q.QuestItemModifyOnAdd[itemId]()
 
-]]
+]]--
 
-
-
+--[[
 function GLOBALSCRIPT()
 
     local itemLink = '|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h'
@@ -820,6 +847,6 @@ function GLOBALSCRIPT()
 
     d(abilityDescription)
 
-end
+en]]--
 
-
+--zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )

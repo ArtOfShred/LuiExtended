@@ -2603,8 +2603,8 @@ E.TooltipNameOverride = {
     [46217]                         = T.Generic_Bleed, -- ... of Ravage Health (3 Traits)
     [45236]                         = T.Generic_Detection_Potion, -- ... of Detection (2 Traits)
     [45458]                         = T.Generic_Detection_Potion, -- ... of Detection (3 Traits)
-    [79705]                         = T.Generic_HoT, -- ... of Lingering Restore Health (2 Traits)
-    [79706]                         = T.Generic_HoT, -- ... of Lingering Restore Health (3 Traits)
+    [79705]                         = T.Generic_HoT_1Sec, -- ... of Lingering Restore Health (2 Traits)
+    [79706]                         = T.Generic_HoT_1Sec, -- ... of Lingering Restore Health (3 Traits)
     [46193]                         = T.Generic_Ravage_Magicka_Potion, -- ... of Ravage Magicka (2 Traits)
     [46237]                         = T.Generic_Ravage_Magicka_Potion, -- ... of Ravage Magicka (3 Traits)
     [46199]                         = T.Generic_Ravage_Stamina_Potion, -- ... of Ravage Stamina (2 Traits)
@@ -2612,9 +2612,9 @@ E.TooltipNameOverride = {
 
     -- Poisons
     [79133]                         = T.Generic_Poison, -- ... of Drain Health (2 Traits)
-    [79134]                         = T.Generic_HoT, -- ... of Drain Health (2 Traits)
+    [79134]                         = T.Generic_HoT_1Sec, -- ... of Drain Health (2 Traits)
     [79135]                         = T.Generic_Poison, -- ... of Drain Health (3 Traits)
-    [79136]                         = T.Generic_HoT, -- ... of Drain Health (3 Traits)
+    [79136]                         = T.Generic_HoT_1Sec, -- ... of Drain Health (3 Traits)
     [79025]                         = T.Generic_Poison, -- ... of Ravage Health (2 Traits)
     [78922]                         = T.Generic_Poison, -- ... of Ravage Health (3 Traits)
     [79137]                         = T.Generic_Ravage_Magicka_Poison, -- of Drain Magicka (2 Traits)
@@ -2639,9 +2639,9 @@ E.TooltipNameOverride = {
     [80002]                         = T.Generic_Reveal, -- Stealth-Draining Poison (2 Traits)
     [80004]                         = T.Generic_Marked, -- Conspicuous Posion (2 Traits)
     [79699]                         = T.Generic_Poison, -- ... of Gradual Drain Health (2 Traits)
-    [79700]                         = T.Generic_HoT, -- ... of Gradual Drain Health (2 Traits)
+    [79700]                         = T.Generic_HoT_1Sec, -- ... of Gradual Drain Health (2 Traits)
     [79701]                         = T.Generic_Poison, -- ... of Gradual Drain Health (3 Traits)
-    [79702]                         = T.Generic_HoT, -- ... of Gradual Drain Health (3 Traits)
+    [79702]                         = T.Generic_HoT_1Sec, -- ... of Gradual Drain Health (3 Traits)
     [79707]                         = T.Generic_Poison, -- ... of Gradual Ravage Health (2 Traits)
     [81553]                         = T.Generic_Poison, -- Cloudy Damage Health Poison
     [81551]                         = T.Generic_Poison, -- Cloudy Gradual Ravage Health Poison
@@ -3584,7 +3584,7 @@ E.EffectOverride = {
     [84278] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
     [84279] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
     [85611] = { tooltip = A.Set_Medusa }, -- Minor Force (of Medusa)
-    [84354] = { tooltip = T.Set_Handle_of_Mephala }, -- Hand of Mephala (Mephala's Hand)
+    [84354] = { tooltip = T.Set_Hand_of_Mephala }, -- Hand of Mephala (Mephala's Hand)
     [84357] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = A.Set_Hand_of_Mephala, duration = 0, tooltip = T.Generic_Snare_50_No_Dur, groundLabel = true }, -- Hand of Mephala Webbing (of Mephala's Hand)
     [84355] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds' }, -- Hand of Mephala (of Mephala's Hand)
     [84358] = { tooltip = A.Set_Hand_of_Mephala }, -- Hand of Mephala (of Mephala's Hand)
@@ -8727,7 +8727,23 @@ E.EffectOverride = {
     [90598] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds', hide = true }, -- Overcharge Explusion
 }
 
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- Fake Buffs & Debuffs - Fake auras created by EVENT_COMBAT_EVENT for abilities that lack proper auras. Note tooltips & unbreakable status are determined in E.EffectOverride
+
+    -- icon = '' -- Set an icon to use
+    -- name = '' -- Set a name to use
+	-- duration = # -- Set the duration of the effect
+	-- ignoreFade = true -- Don't remove this effect when it fades.
+	-- ignoreBegin = true -- Ignore effect begin and only apply on refresh - Emulates the same functionality as refreshOnly in E.EffectOverride. For stopping auras from being created for travel times.
+	-- shiftId = # -- Shift the ability id displayed to use this id instead, for tooltip compatibility in some cases.
+	-- overrideDuration = true -- Set duration to display as 0, but preserve the correct duration so this effect doesn't fade improperly.
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------
 -- Fake Buffs applied onto the player by NPCs or Events (Friendly)
+--------------------------------------------------------------------------------------------------------------------------------
 E.FakeExternalBuffs = {
     [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds', name = A.Skill_Focused_Healing, duration = 4000 }, -- Focused Healing (The Prophet)
 
@@ -8735,7 +8751,9 @@ E.FakeExternalBuffs = {
     [21403] = { icon = 'esoui/art/icons/ability_mage_054.dds', name = A.Skill_Spiritual_Cloak, duration = 60000, ignoreFade = true }, -- Spiritual Cloak (The Mallari-Mora)
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
  -- Fake Debuffs applied onto the player by NPCs or Events (Hostile)
+--------------------------------------------------------------------------------------------------------------------------------
 E.FakeExternalDebuffs = {
 
     -- Nightblade
@@ -8871,7 +8889,9 @@ E.FakeExternalDebuffs = {
     [89756] = {icon = 'esoui/art/icons/achievement_wrothgar_006.dds', name = 'Centurion Drop', duration = 2000}, -- Guardian Shockwave (Mzanchend Guardian -- Vvardenfell -- The Magister Makes a Move)
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
 -- Fake buffs applied onto the player by self (also supports debuffs with debuff = true)
+--------------------------------------------------------------------------------------------------------------------------------
 E.FakePlayerBuffs = {
     -- Misc Consumables
     --[85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire-breathers_torches.dds', name = A.Memento_Fire_Breathers_Torches, duration = 12000}, -- Flame Juggling (Consumable Version)
@@ -8981,12 +9001,16 @@ E.FakePlayerBuffs = {
     --[66453] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', name = 'Hiding', duration = 45000}, -- Hiding (A Question of Succession)
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
 -- TODO: Fake buffs applied onto a target by the player
+--------------------------------------------------------------------------------------------------------------------------------
 E.FakePlayerExternalBuffs = {
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
 -- Fake debuffs applied onto a target by the player
+--------------------------------------------------------------------------------------------------------------------------------
 E.FakePlayerDebuffs = {
     -- JUSTICE NPCS
     -- Disabled: Duration is too long and Guard always CC breaks. Maybe setup a calllater removal function?
@@ -9012,8 +9036,9 @@ E.FakePlayerDebuffs = {
     [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 1100, overrideDuration = true }, -- Bahraha's Curse -- Note: We add 100 ms to buffer here because it doesn't really matter and stops flashing
 }
 
--- We use this for debuffs applied on the player or on a target that don't need to check for a removal condition
--- Useful for effects like staggers where there is no way to break out of them for the short duration they are applied
+--------------------------------------------------------------------------------------------------------------------------------
+-- Fake Stagger Effects - For debuffs applied on the player or on a target that don't need to check for a removal condition (Useful for effects like staggers where this is no way to break out of them for the short duration they are applied.
+--------------------------------------------------------------------------------------------------------------------------------
 E.FakeStagger = {
     -- Player Basic
     [115607] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', name = A.Innate_Hard_Dismount, duration = 2000}, -- Dismount Stun

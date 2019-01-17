@@ -2084,8 +2084,33 @@ local strings = {
     SI_LUIE_LAM_CT_DEATH_FONT_SIZE_TP =                  "Размер шрифта сообщения о смерти.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_DEATH_COLOR_TP =                      "Цвет предупреждения о смерти члена группы.",
 
-    -- Ability name override localization
-    SI_LUIE_SKILL_RECALL_PENALTY =                       "Штраф перемещения",
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	-- SKILL NAMES AND TOOLTIPS
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+	----------------------------------------------------------------
+    -- INNATE SKILLS -----------------------------------------------
+    ----------------------------------------------------------------
+	
+	-- Mundus Stones
+	SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Повышает ваши магическую и физическую сопротивляемости на |cFFFFFF2752|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Повышает ваши магическую и физическую проникновение на |cFFFFFF2752|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_LORD =                    "Повышает ваш макс.запас Здоровья на |cFFFFFF2230|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_MAGE =                    "Повышает ваш макс.запас Магии на |cFFFFFF2028|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_TOWER =                   "Повышает ваш макс. Запас сил на |cFFFFFF2028|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH =                "Повышает ваше восстановление Магии на |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT =                 "Повышает ваше восстановление Запаса сил на |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW =                  "Повышает ваш критический урон на |cFFFFFF9|r%.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL =                  "Повышает наносимое вами исцеление на |cFFFFFF10|r%.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_THIEF =                   "Повышает ваш рейтинг критического удара Оружием и Заклинаниями на |cFFFFFF1533|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_WARRIOR =                 "Повышает ваш урон от Оружия на |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE =              "Повышает ваш урон от Заклинаний на |cFFFFFF238|r.",
+    SI_LUIE_SKILL_MUNDUS_BASIC_STEED =                   "Повышает вашу скорость передвижения на |cFFFFFF10|r% и восстановление Здоровья на |cFFFFFF238|r.",
+	
+	-- Player Innate
+	SI_LUIE_SKILL_RECALL_PENALTY =                       "Штраф перемещения",
     SI_LUIE_SKILL_MOUNTED =                              "Верхом",
     SI_LUIE_SKILL_RESURRECTION_IMMUNITY =                "Иммун воскрешения",
     SI_LUIE_SKILL_SOUL_GEM_RESURRECTION =                "Воскрешение камнем душ",
@@ -2099,87 +2124,78 @@ local strings = {
     SI_LUIE_SKILL_AYLEID_WELL_TP =                       "Повышение здоровья на |cFFFFFF10|r% в течение |cFFFFFF10|r минут.",
     SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED =                "Усиленный Айлейдский колодец",
     SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP =             "Повышение здоровья на |cFFFFFF10|r% в течение |cFFFFFF30|r минут.",
-    SI_LUIE_SKILL_ANCHOR_DROP =                          "Сундук якоря",
-    SI_LUIE_SKILL_VENGEANCE_CHARGE =                     "Месть",
-    SI_LUIE_SKILL_GLYPH_CRUSHING =                       "Crushing (Зачарование)",
+	SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP =               "Иммунитет к замедляющим и обездвиживающим эффектам на |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_DODGE_FATIGUE_TP =                     "Повторный уворот будет расходовать больше Запаса сил в течение следующих |cFFFFFF<<1>>|r <<1[секунду/секунд]>>.",
+    SI_LUIE_SKILL_HIDDEN_TP =                            "Крадётесь и сокрыты от чужих глаз.\n\nРасходуется Запас сил при движении.",
+    SI_LUIE_SKILL_INVISIBLE_TP =                         "Сокрыты от чужих глаз магией или окружающей средой.",
+    SI_LUIE_SKILL_SPRINT_TP =                            "Спринт, скорость передвижения увеличена на |cFFFFFF40|r%.\n\nРасходуется Запас сил при движении.",
+    SI_LUIE_SKILL_GALLOP_TP =                            "Галоп, скорость передвижения увеличена на |cFFFFFF30|r%.\n\nРасходуется Запас сил ездового животного при движении.",
+    SI_LUIE_SKILL_BLOCK_TP =                             "Блокируется атака, получаемый урон снижен и действует иммунитет к оглушающим и отбрасывающим эффектам .",
+    SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP =             "Воскрешение. Иммунитет к урону и эффектам контроля.",
+    SI_LUIE_SKILL_TAUNT_TP =                             "Спровоцирован. Этот противник фокусирует все атаки на вас.",
+    SI_LUIE_SKILL_DISGUISE_TP =                          "Маскировка. Вы можете быть обнаружены часовыми или выполняя подозрительную деятельность.\n\nПолучение урона снимет вашу маскировку.",
+    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Здоровье увеличено на |cFFFFFF5000|r\n• Получаемый урон, исцеление и щиты от урона уменьшены на |cFFFFFF50|r%\n• Дальность действия способностей действующих на расстоянии |cFFFFFF28|r метров и более увеличена на |cFFFFFF8|r",
+    SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "Вы недавно пользовались перемещением к дорожному святилищу и должно заплатить дополнительное золото, чтобы воспользоваться им вновь.",
+
+	----------------------------------------------------------------
+    -- ITEM / CONSUMABLE TOOLTIPS ----------------------------------
+    ----------------------------------------------------------------		
+	
+	-- Glyphs
+	SI_LUIE_SKILL_GLYPH_CRUSHING =                       "Crushing (Зачарование)",
     SI_LUIE_SKILL_GLYPH_DECREASE_HEALTH =                "Снижение здоровья",
     SI_LUIE_SKILL_GLYPH_HARDENING =                      "Hardening (Зачарование)",
     SI_LUIE_SKILL_GLYPH_WEAKENING =                      "Weakening (Зачарование)",
     SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE =                  "Урон от оружия (Зачарование)",
+    SI_LUIE_SKILL_GLYPH_CRUSHING_TP =                    "Снижает Физическую и Магическую сопротивляемости цели на |cFFFFFF5|r секунд.",
+    SI_LUIE_SKILL_GLYPH_HARDENING_TP =                   "Даёт вам щит от урона на |cFFFFFF7|r секунд.",
+    SI_LUIE_SKILL_GLYPH_WEAKENING_TP =                   "Уменьшает урон от Оружия и Заклинаний цели на |cFFFFFF5|r секунд.",
+    SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE_TP =               "Увеличивает ваш урон от Оружия и Заклинаний на |cFFFFFF5|r секунд.",
+	
+	-- Crafting Station Creation
+    SI_LUIE_SKILL_CRAFTING_STATION_JEWELRY =             "Настройка Ювелирной станции",
+    SI_LUIE_SKILL_CRAFTING_STATION_BLACKSMITH =          "Настройка Кузницы",
+    SI_LUIE_SKILL_CRAFTING_STATION_CLOTHING =            "Настройка Портняжного станка",
+    SI_LUIE_SKILL_CRAFTING_STATION_WOODWORK =            "Настройка Столярного верстака",
+	
+	-- Consumable / Food / Drink
     SI_LUIE_SKILL_POISON_STEALTH_DRAIN =                 "Яд скрытности",
     SI_LUIE_SKILL_POISON_CONSPICUOUS =                   "Яд обнаружения",
-
     SI_LUIE_SKILL_DRINK_INCREASE =                       "Повышение",
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL =          "Сила эффектов зависит от вашего уровня.", -- Note this needs to be an exact match to the description in Crown Crate food/drink items for it to be correctly removed in each localization.
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA =    "Если вы вампир, кровь, входящая в состав этого напитка, постепенно утоляет ваш голод.\nСила эффектов зависит от вашего уровня.", -- Must be exact match in each localization
+    SI_LUIE_SKILL_REMOVE_TOOLTIP_HISSMIR =               "Этот напиток также дает вам понимание того, какая рыба водится в различных водоемах, и наделяет особым вниманием к местам рыбной ловли поблизости.\nСила эффектов зависит от вашего уровня.", -- Must be exact match in each localization
+    SI_LUIE_SKILL_ADD_TOOLTIP_HISSMIR =                  "\n\nЭтот напиток также дает вам понимание того, какая рыба водится в различных водоемах, и наделяет особым вниманием к местам рыбной ловли поблизости.",
+    SI_LUIE_SKILL_ESO_PLUS_TP =                          "Увеличивает получаемые Опыт, Золото и Вдохновение на |cffffff10|r%. Увеличивает скорость исследования особенностей на |cffffff10|r%.",
 
+	-- Collectible
     SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT =             "Mystery Meat",
-    SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME =            "Bogdan the Nightflame",
-    SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK =                 "Lord Warden Dusk",
-    SI_LUIE_SKILL_SET_MALUBETH_THE_SCOURGER =            "Malubeth the Scourger",
-    SI_LUIE_SKILL_SET_TROLL_KING =                       "Troll King",
-    SI_LUIE_SKILL_SET_REDISTRIBUTION =                   "Redistribution",
-    SI_LUIE_SKILL_SET_ICE_FURNACE =                      "Ice Furnace",
-    SI_LUIE_SKILL_SET_COOLDOWN =                         "Перезарядка", -- Used as suffix for certain abilities internal cooldown
-    SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE =              "Monk\'s Disguise",
-    SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND =              "Силовая атака (Ведущая рука)",
-    SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND =               "Силовая атака (Вторая рука)",
-    SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA =       "Noxiphilic Sanguivoria",
-    SI_LUIE_SKILL_BOND_WITH_NATURE =                     "Bond with Nature",
-    SI_LUIE_SKILL_BLESSING_OF_RESTORATION =              "Blessing of Restoration",
-    SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST =               "Tormentor Damage Boost",
+	
+	-- Experience
+    SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP =              "Увеличивает получаемый опыт на |cffffff<<1>>|r% в течение |cffffff30|r минут.",
+    SI_LUIE_SKILL_EXPERIENCE_HOUR_TP =                   "Увеличивает получаемый опыт на |cffffff<<1>>|r% в течение |cffffff<<2>>|r <<2[часа/часов]>>.",
+    SI_LUIE_SKILL_EXPERIENCE_PELINAL =                   "Увеличивает получаемые Очки Альянса и опыт, получаемый за убийство игроков на |cffffff100|r% в течение |cffffff<<1>>|r <<1[часа/часов]>>.",
+	
+	-- Misc
+    SI_LUIE_SKILL_FILLET_FISH =                          "Чистка рыбы",
+    SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT =             "Поддельный указ о помиловании",
+    SI_LUIE_SKILL_LENIENCY_EDICT =                       "Указ о смягчении наказания",
+    SI_LUIE_SKILL_GRAND_AMNESTY_EDICT =                  "Указ о большой амнистии",
+	
+	----------------------------------------------------------------
+    -- EVENT TOOLTIPS ----------------------------------------------
+    ----------------------------------------------------------------
 
-    -- NPC Skills
-    SI_LUIE_SKILL_SHIELD_RUSH =                          "Shield Rush",
-    SI_LUIE_SKILL_BLITZ =                                "Blitz",
-    SI_LUIE_SKILL_BARRELING_CHARGE =                     "Barreling Charge",
-    SI_LUIE_SKILL_ZOOM =                                 "Zoom",
-    SI_LUIE_SKILL_PLOW =                                 "Plow",
-    SI_LUIE_SKILL_DEFENSIVE_WARD =                       "Defensive Ward",
-    SI_LUIE_SKILL_GREAT_CLEAVE =                         "Great Cleave",
-    SI_LUIE_SKILL_INSPIRE =                              "Inspire",
-    SI_LUIE_SKILL_HIDE_IN_SHADOWS =                      "Hide in Shadows",
-    SI_LUIE_SKILL_SHADOWY_BARRIER =                      "Shadowy Barrier",
-    SI_LUIE_SKILL_MIGHTY_CHARGE =                        "Mighty Charge",
-    SI_LUIE_SKILL_DETECTION =                            "Detection",
-    SI_LUIE_SKILL_IMPROVED_SHOCK_TORRENT =               "Improved Shock Torrent",
-    SI_LUIE_SKILL_SIEGE_BARRIER =                        "Siege Barrier",
-    SI_LUIE_SKILL_PUNCTURING_CHAINS =                    "Puncturing Chains",
-    SI_LUIE_SKILL_IMPROVED_VOLLEY =                      "Improved Volley",
-    SI_LUIE_SKILL_FIRE_TORRENT =                         "Fire Torrent",
-    SI_LUIE_SKILL_RIP_AND_TEAR =                         "Rip and Tear",
-    SI_LUIE_SKILL_LEECHING_BITE =                        "Leeching Bite",
-    SI_LUIE_SKILL_FETCHERFLY_COLONY =                    "Fetcherfly Colony",
-    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME =               "Empower Atronach: Flame",
-    SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST =               "Empower Atronach: Frost",
-    SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM =               "Empower Atronach: Storm",
-    SI_LUIE_SKILL_COLOSSAL_STOMP =                       "Colossal Stomp",
-    SI_LUIE_SKILL_DUST_CLOUD =                           "Dust Cloud",
-    SI_LUIE_SKILL_BATTLE_SPIRIT =                        "Battle Spirit",
-    SI_LUIE_SKILL_COLD_FIRE_TRAP =                       "Cold Fire Trap",
-    SI_LUIE_SKILL_LAVA_FOOT_STOMP =                      "Lava Foot Stomp",
-    SI_LUIE_SKILL_KNIFE_JUGGLING =                       "Knife Juggling",
-    SI_LUIE_SKILL_TORCH_JUGGLING =                       "Torch Juggling",
-    SI_LUIE_SKILL_WALL_OF_FLAMES =                       "Wall of Flames",
-    SI_LUIE_SKILL_CONSECRATE_SHRINE =                    "Consecrate Shrine",
-    SI_LUIE_SKILL_UNSTABLE_PORTAL =                      "Unstable Portal",
-    SI_LUIE_SKILL_STABILIZE_PORTAL =                     "Stabilize Portal",
-    SI_LUIE_SKILL_CLOSE_UNSTABLE_RIFT =                  "Close Unstable Rift",
-    SI_LUIE_SKILL_FLAME_BLOSSOM =                        "Flame Blossom",
-    SI_LUIE_SKILL_SAHDINAS_ESSENCE =                     "Sahdina's Essence",
-    SI_LUIE_SKILL_RASHOMTAS_ESSENCE =                    "Rashomta's Essence",
-    SI_LUIE_SKILL_POLYMORPH_SKELETON =                   "Polymorph: Skeleton",
-    SI_LUIE_SKILL_DRAIN_ENERGY =                         "Drain Energy",
-    SI_LUIE_SKILL_FIRELIGHT_TP =                         "Увеличивает Запас сил на |cFFFFFF5|r% в течение |cFFFFFF30|r минут.",
-    SI_LUIE_SKILL_BARRIER_REBUKE =                       "Barrier Rebuke",
-    SI_LUIE_SKILL_TELEPORT_SCROLL =                      "Teleport Scroll",
-    SI_LUIE_SKILL_BIND_HANDS =                           "Bind Hands",
-    SI_LUIE_SKILL_BIND_BEAR =                            "Bind Bear",
-    SI_LUIE_SKILL_IMPROVED =                             "Improved",
-    SI_LUIE_SKILL_AETHERIAL_SHIFT =                      "Aetherial Shift",
-    SI_LUIE_SKILL_FREE_SPIRIT =                          "Free Spirit",
-    SI_LUIE_SKILL_UNBIND =                               "Unbind",
-    SI_LUIE_SKILL_BACKFIRE =                             "Backfire",
-    SI_LUIE_SKILL_DIVINE_SPEED_TP =                      "Божественное благословление увеличивает вашу скорость передвижения на |cFFFFFF2|r минуты.",
+    SI_LUIE_SKILL_EVENT_FREEZING =                    	 "Вы замерзаете и скорость вашего передвижения замедлена. Найдите костёр, чтобы согреться.",
+    SI_LUIE_SKILL_EVENT_WARM =							 "Вы прижимаетесь к ближайшему костру, чтобы согреться. Время замерзания сокращается на |cffffff10|r секунд каждую |cffffff1|r секунду.",
+    SI_LUIE_SKILL_EVENT_FESTIVAL_GROG =                  "У вас небольшая... дезориентация.",
+    SI_LUIE_SKILL_EVENT_FESTIVAL_MINTS =                 "Вы ОЧЕНЬ замерзли.",
 
+	----------------------------------------------------------------
+    -- MAJOR / MINOR EFFECTS ---------------------------------------
+    ----------------------------------------------------------------
+	
+	-- Major / Minor Buffs
     SI_LUIE_SKILL_MINOR_RESOLVE_TP =                     "Повышает физическую сопротивляемость на |cffffff1320|r.",
     SI_LUIE_SKILL_MAJOR_RESOLVE_TP =                     "Повышает физическую сопротивляемость на |cffffff5280|r.",
     SI_LUIE_SKILL_MINOR_WARD_TP =                        "Повышает магическую сопротивляемость на |cffffff1320|r.",
@@ -2218,6 +2234,7 @@ local strings = {
     SI_LUIE_SKILL_MINOR_TOUGHNESS_TP =                   "Повышает здоровье на |cffffff10|r%.",
     SI_LUIE_SKILL_MAJOR_COURAGE_TP =                     "Повышает урон от оружия и заклинаний на |cffffff258|r.",
 
+	-- Major / Minor Debuffs
     SI_LUIE_SKILL_MINOR_BREACH_TP =                      "Снижает магическую сопротивляемость на |cffffff1320|r.",
     SI_LUIE_SKILL_MAJOR_BREACH_TP =                      "Снижает магическую сопротивляемость на |cffffff5280|r.",
     SI_LUIE_SKILL_MINOR_FRACTURE_TP =                    "Снижает физическую сопротивляемость на |cffffff1320|r.",
@@ -2235,23 +2252,36 @@ local strings = {
     SI_LUIE_SKILL_MINOR_MANGLE_TP =                      "Снижает макс. здоровье на |cffffff10|r%.",
     SI_LUIE_SKILL_HINDRANCE_TP =                         "Снижает скорость передвижения на |cffffff40|r%.",
 
+	-- Slayer / Aegis
     SI_LUIE_SKILL_MINOR_SLAYER_TP =                      "Ваши атаки наносят на |cffffff5|r% больше урона по противникам в Подземельях, Испытаниях и на Аренах.",
     SI_LUIE_SKILL_MAJOR_SLAYER_TP =                      "Ваши атаки наносят на |cffffff15|r% больше урона по противникам в Подземельях, Испытаниях и на Аренах.",
     SI_LUIE_SKILL_MINOR_AEGIS_TP =                       "Вы получаете на |cffffff5|r% меньше урона от противников в Подземельях, Испытаниях и на Аренах.",
     SI_LUIE_SKILL_MAJOR_AEGIS_TP =                       "Вы получаете на |cffffff15|r% меньше урона от противников в Подземельях, Испытаниях и на Аренах.",
 
+	-- Empower
     SI_LUIE_SKILL_EMPOWER_TP =                           "Увеличивает урон от вашей следующей обычной атаки на |cffffff40|r%.",
 
-    SI_LUIE_SKILL_TEST_TP =                              "Это тестовый эффект.",
+	----------------------------------------------------------------
+    -- CHAMPION POINT SKILLS ---------------------------------------
+    ----------------------------------------------------------------
 
 	SI_LUIE_SKILL_PHASE_TP =							 "Повышает Физическую и Магическую сопротивляемости на |cFFFFFF660|r в течение |cFFFFFF3|r секунд.",
 	SI_LUIE_SKILL_UNCHAINED_TP = 						 "Снижает расход Запаса сил на вашу следующую способность, применённую в течение |cFFFFFF5|r секунд на |cFFFFFF80|r%.",
 	SI_LUIE_SKILL_FORESIGHT_TP = 						 "Снижает расход Магии на вашу следующую способность, применённую в течение |cFFFFFF7|r секунд на |cFFFFFF80|r%.",
 	SI_LUIE_SKILL_RETALIATION_TP =						 "Ваша следующая Обычная атака, проведённая в течение |cFFFFFF7|r секунд наносит |cFFFFFF30|r% дополнительного урона.",
 	SI_LUIE_SKILL_OPPORTUNIST_TP = 						 "Ваша следующая способность, наносящая Физический урон, применённая в течение |cFFFFFF7|r секунд наносит |cFFFFFF15|r% дополнительного урона.",
-
     SI_LUIE_SKILL_SIPHONER_TP =                          "Снижает Здоровье, Магию и Запас сил, а также их восстановление на |cFFFFFF3|r секунд.",
+	SI_LUIE_SKILL_VENGEANCE_TP =                         "Ваша следующая способность, расходующая магию, применённая в течение |cFFFFFF5|r секунд обязательно нанесёт Критический удар.",
+    SI_LUIE_SKILL_VENGEANCE_CHARGE =                     "Месть",
+	
+	----------------------------------------------------------------
+    -- GENERIC / SHARED TOOLTIPS -----------------------------------
+    ----------------------------------------------------------------
 
+	-- Test Effect
+	SI_LUIE_SKILL_TEST_TP =                              "Это тестовый эффект.",
+	
+	-- Damage over Time
     SI_LUIE_SKILL_GENERIC_BLEED_TP =                     "Подвержен урону от Кровотечения на |cFFFFFF<<1>>|r секунд.",
 	SI_LUIE_SKILL_GENERIC_BLEED_2_SEC_TP =               "Подвержен урону от Кровотечения каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_DISEASE_TP =                   "Подвержен урону от Болезни на |cFFFFFF<<1>>|r секунд.",
@@ -2269,23 +2299,26 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_MAGIC_1_SEC_TP =               "Подвержен Магическому урону каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_MAGIC_2_SEC_TP =               "Подвержен Магическому урону каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
 
-    SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Исцеление каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
-    SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Восстанавливает Магию каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
-    SI_LUIE_SKILL_GENERIC_MGK_REGEN_2_SEC_TP =           "Восстанавливает Магию каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
-    SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Восстанавливает Запас сил каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
-
-    SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP =      "Поглощение урона.",
-    SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP =             "Поглощение урона в течение |cFFFFFF<<1>>|r секунд.",
-
+	-- Heal over Time, Resource Regeneration, Shields
+	-- SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Healing over time for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_HOT_TIME_05SEC_TP =            "Исцеление каждые |cFFFFFF0.5|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP =             "Исцеление каждую|cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_HOT_TIME_1_5_SEC_TP =          "Исцеление каждые |cFFFFFF1.5|r секунды в течение |cFFFFFF<<1>>|r секунд.",-- TODO: Check Translation
     SI_LUIE_SKILL_GENERIC_HOT_TIME_08SEC_TP =            "Исцеление каждые |cFFFFFF0.8|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_HOT_TIME_2SEC_TP =             "Исцеление каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
+	SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Восстанавливает Магию каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_MGK_REGEN_2_SEC_TP =           "Восстанавливает Магию каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Восстанавливает Запас сил каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP =      "Поглощение урона.",
+    SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP =             "Поглощение урона в течение |cFFFFFF<<1>>|r секунд.",
 
+	-- Stealth / Detection
     SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Помечен на |cFFFFFF<<1>>|r секунд. Вы видны для противника, который пометил вас, даже если уходите в скрытность.",
     SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Обнаружен на |cFFFFFF<<1>>|r секунд. Вы не можете уйти в невидимость.",
-
+    SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Невидим на |cFFFFFF<<1>>|r секунд. Вы сокрыты от чужих глаз.",
+    SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP =          "Обнаружение увеличено на |cffffff20|r метров в течение |cFFFFFF<<1>>|r секунд.",
+	
+	-- Crowd Control / Immunity
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP =      "Иммунитет к эффектам, которые выводят из равновесия и делают уязвимым.",
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP =               "Выведен из равновесия на |cFFFFFF<<1>>|r секунд. Вы уязвимы для атак, применяемых против целей, выведенных из равновесия.",
     SI_LUIE_SKILL_GENERIC_SNARE_TP =                     "Замедлен на |cFFFFFF<<1>>|r секунд. Ваша скорость передвижения снижена.",
@@ -2314,22 +2347,18 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_FEAR_NO_DUR_TP =               "Находитесь в страхе. Вы не можете атаковать или передвигаться, пока находитесь в страхе.",
     SI_LUIE_SKILL_GENERIC_SILENCE_TP =                   "Обезмолвлен на |cFFFFFF<<1>>|r секунд. Вы не можете использовать способности, расходующие Магию, пока обезмолвлены.",
     SI_LUIE_SKILL_GENERIC_SILENCE_NO_DUR_TP =            "Обезмолвлен. Вы не можете использовать способности, расходующие Магию, пока обезмолвлены.",
+	SI_LUIE_SKILL_GENERIC_BLIND_TP =                     "Ослеплён на |cFFFFFF<<1>>|r секунд. |cffffff100|r% шанс пропустить все атаки.",
     SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP =               "Иммунитет к отбрасыванию и прочим ограничивающим эффектам на |cFFFFFF<<1>>|r секунд.",
-    SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Невидим на |cFFFFFF<<1>>|r секунд. Вы сокрыты от чужих глаз.",
-    SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP =          "Обнаружение увеличено на |cffffff20|r метров в течение |cFFFFFF<<1>>|r секунд.",
+	SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Иммунитет к урону и эффектам контроля на |cffffff<<1>>|r секунд.",
 
-    SI_LUIE_SKILL_GENERIC_BLIND_TP =                     "Ослеплён на |cFFFFFF<<1>>|r секунд. |cffffff100|r% шанс пропустить все атаки.",
-
+	-- Ravage Potions / Poisons
     SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Увеличивает стоимость способностей, расходующих Магию на |cffffff60|r%.",
     SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP =     "Увеличивает стоимость способностей, расходующих Запас сил на |cffffff60|r%.",
-
     SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP =     "Увеличивает стоимость способностей, расходующих Магию на |cffffff10|r%.",
     SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP =     "Увеличивает стоимость способностей, расходующих Запас сил на |cffffff10|r.%",
 
+	-- Generic Stat Buffs
     SI_LUIE_SKILL_GENERIC_SPELL_DAMAGE_DURATION =        "Увеличивает урон от заклинаний на |cffffff<<1>>|r секунд.",
-
-    SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Иммунитет к урону и эффектам контроля на |cffffff<<1>>|r секунд.",
-
     SI_LUIE_SKILL_SET_GENERIC_ARMOR_SPELL_RESIST =       "Повышает Физическую и Магическую сопротивляемости на |cffffff<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_TP = "Увеличивает урон от Оружия и Заклинаний на |cffffff<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_TIME_TP       = "Увеличивает урон от Оружия на |cffffff<<1>>|r секунд.",
@@ -2337,6 +2366,10 @@ local strings = {
     SI_LUIE_SKILL_SET_GENERIC_LA_HA_DAMAGE =             "Ваши обычные и силовые атаки наносят дополнительный урон в течение |cffffff<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_GENERIC_SPELL_RESIST_TIME_TP     = "Повышает Магическую сопротивляемость на |cffffff<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_TP     = "Увеличивает восстановление Магии на |cffffff<<1>>|r секунд.",
+	
+	----------------------------------------------------------------
+    -- CLASS SKILLS ------------------------------------------------
+    ----------------------------------------------------------------
 
     -- Dragonknight Skills
     SI_LUIE_SKILL_BURNING_EMBERS_TP =                    "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cffffff<<1>>|r секунд.\n\nИсцеляет рыцаря-дракона на |cffffff75|r% от нанесённого урона по завершению действия эффекта.",
@@ -2452,6 +2485,7 @@ local strings = {
     SI_LUIE_SKILL_RITE_OF_PASSAGE_TP =                   "Исцеляет вас и ваших ближайших союзников каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
 
     -- Warden
+    SI_LUIE_SKILL_BOND_WITH_NATURE =                     "Bond with Nature",
     SI_LUIE_SKILL_SCORCH_TP =                            "Через |cFFFFFF3|r секунды, наносит Магический урон противникам перед вами на расстоянии до |cFFFFFF20|r метров.",
     SI_LUIE_SKILL_SUB_ASSAULT_TP =                       "Через |cFFFFFF3|r секунды, наносит Физический урон и накладывает Major Fracture на |cFFFFFF5|r секунд противникам перед вами на расстоянии до |cFFFFFF20|r метров.",
     SI_LUIE_SKILL_DEEP_FISSURE_TP =                      "Через |cFFFFFF3|r секунды, наносит Магический урон и накладывает Major Breach на |cFFFFFF5|r секунд противникам перед вами на расстоянии до |cFFFFFF20|r метров.",
@@ -2489,10 +2523,14 @@ local strings = {
     SI_LUIE_SKILL_PERMAFROST_TP =                        "Противнике в шторме получают урон от Мороза каждую |cFFFFFF1|r секунду и замедляются на |cFFFFFF70|r% в течение |cFFFFFF<<1>>|r секунд.\n\nПолучив урон от шторма три раза, противник оказывается оглушён на |cFFFFFF3|r секунд.",
     SI_LUIE_SKILL_PERMAFROST_SNARE_TP =                  "Замедлен. Ваша скорость передвижения снижена на |cFFFFFF70|r%. Если вы получите урон от шторма три раза, вы будете оглушены на |cFFFFFF3|r секунды.",
 
-    ------------------
-    -- Weapon Skills
-    ------------------
+	----------------------------------------------------------------
+    -- WEAPON SKILLS -----------------------------------------------
+    ----------------------------------------------------------------
 
+	-- Shared
+	SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND =              "Силовая атака (Ведущая рука)",
+    SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND =               "Силовая атака (Вторая рука)",
+	
     -- Two-Handed
     SI_LUIE_SKILL_FOLLOW_UP_TP =                         "Ваша следующая атака с прямым уроном, нанесённая в течение |cFFFFFF7|r секунд нанесёт |cFFFFFF<<1>>|r% дополнительного урона.",
     SI_LUIE_SKILL_BATTLE_RUSH_TP =                       "Увеличивает восстановление Запаса сил на |cFFFFFF<<1>>|r% в течение |cFFFFFF10|r секунд.",
@@ -2518,7 +2556,6 @@ local strings = {
     SI_LUIE_SKILL_LACERATE_TP =                          "Подвержен Кровотечению каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд. Каждое срабатывание исцеляет атакующего вас на |cFFFFFF50|r% от нанесённого урона.",
     SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP =                   "Увеличивает наносимый урон на |cFFFFFF5|r% за каждый удар способностью Thrive in Chaos, максимум на |cFFFFFF30|r%.",
 
-    -- TODO: Translate this block
     -- Bow
     SI_LUIE_SKILL_HAWK_EYE_TP =                          "Increase the damage of your Bow abilities by |cFFFFFF<<1>>|r% for |cFFFFFF5|r seconds, stacking up to |cFFFFFF5|r times.",
     SI_LUIE_SKILL_FOCUSED_AIM_TP =                       "Increase the range from which your attacker can hit you with Bow attacks by |cFFFFFF5|r meters for |cFFFFFF<<1>>|r seconds.",
@@ -2546,35 +2583,62 @@ local strings = {
     SI_LUIE_SKILL_FROST_TOUCH_ALT_TP =                   "Afflicted with Frost Damage every |cFFFFFF2|r seconds for |cFFFFFF10|r seconds.\n\nImmobilized for |cFFFFFF4|r seconds. Unable to move while immobilized.",
     SI_LUIE_SKILL_FROST_CLENCH_TP =                      "Afflicted with Frost Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nImmobilized for |cFFFFFF6.5|r seconds. Unable to move while immobilized.",
     SI_LUIE_SKILL_FROST_CLENCH_ALT_TP =                  "Afflicted with Frost Damage every |cFFFFFF2|r seconds for |cFFFFFF10|r seconds.\n\nImmobilized for |cFFFFFF6.5|r seconds. Unable to move while immobilized.",
-
     SI_LUIE_SKILL_ELEMENTAL_STORM_TP =                   "A cataclysmic storm builds for |cFFFFFF2|r seconds then lays waste to all enemies in the area, dealing <<1>> Damage every |cFFFFFF1|r second for |cFFFFFF7|r seconds.",
     SI_LUIE_SKILL_ICY_RAGE_TP =                          "A cataclysmic storm builds for |cFFFFFF2|r seconds then lays waste to all enemies in the area, dealing Frost Damage every |cFFFFFF1|r second for |cFFFFFF7|r seconds.\n\nImmobilizes enemies hit for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_THUNDEROUS_RAGE_TP =                   "A cataclysmic storm builds for |cFFFFFF2|r seconds then lays waste to all enemies in the area, dealing Shock Damage every |cFFFFFF1|r second for |cFFFFFF9|r seconds.",
     SI_LUIE_SKILL_EYE_OF_THE_STORM_TP =                  "A cataclysmic storm builds around you for |cFFFFFF2|r seconds then lays waste to all enemies nearby, dealing <<1>> Damage every |cFFFFFF1|r second for |cFFFFFF7|r seconds.",
 
     -- Restoration Staff
+    SI_LUIE_SKILL_BLESSING_OF_RESTORATION =              "Blessing of Restoration",
     SI_LUIE_SKILL_MUTAGEN =                              "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nIf you fall below |cFFFFFF20%|r Health, the Mutagen is consumed but instantly heals and removes |cFFFFFF1|r harmful effect.",
     SI_LUIE_SKILL_HEALING_WARD =                         "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nWhen the shield expires, heal for |cFFFFFF105|r% of the shield's remaining strength.",
     SI_LUIE_SKILL_LIGHTS_CHAMPION =                      "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nGain Major Force and Major Protection for |cFFFFFF5|r seconds every time this effect heals.",
 
-    -- Armor Skills
+	----------------------------------------------------------------
+    -- ARMOR SKILLS ------------------------------------------------
+    ----------------------------------------------------------------
+	
+	-- Light Armor
     SI_LUIE_SKILL_HARNESS_MAGICKA =                      "Absorbing damage for |cFFFFFF<<1>>|r seconds. While active, up to three times when spell damage is absorbed, you restore Magicka.",
 
-    -- World Skills
+    ----------------------------------------------------------------
+    -- WORLD SKILLS ------------------------------------------------
+    ----------------------------------------------------------------
 
     -- Soul Magic
+	SI_LUIE_SKILL_SOUL_SUMMONS_TP =                      "Вы недавно воскресли без затрат Камня душ и не можете воскреснуть сова не потратив камня душ в течение |cFFFFFF<<1>>|r час.", -- TODO: Check Translation
     SI_LUIE_SKILL_SOUL_TRAP =                            "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker fills a soul gem if you die under this effect.",
     SI_LUIE_SKILL_CONSUMING_TRAP =                       "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker fills a soul gem and restores Health, Magicka, and Stamina if you die under this effect.",
 
     -- Werewolf
+    SI_LUIE_SKILL_SANIES_LUPINUS_TP =                    "Вы были укушены Оборотнем и заразились Гнойным люпинусом.",
+    SI_LUIE_SKILL_LYCANTHROPHY_TP =                      "Вы можете обратиться в дикого Оборотня.\n\nВы получаете на |cFFFFFF25|r% больше урона от Яда, пока находитесь в форме Вервольфа.",
+    SI_LUIE_SKILL_BLOOD_MOON_TP =                        "Вы укусили другого игрока. Вы не сможете сделать этого снова в течение |cFFFFFF7|r дней.", -- TODO: Check Translation
     SI_LUIE_SKILL_FEEDING_FREZNY_TP =                    "Empowered for |cFFFFFF<<1>>|r seconds, increasing the damage of your Light Attacks by |cFFFFFF40|r%.",
     SI_LUIE_SKILL_CLAWS_OF_LIFE_TP =                     "Afflicted with Disease Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage, your attacker heals for |cFFFFFF50|r% of the damage done.",
     SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP =           "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF8|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.",
     SI_LUIE_SKILL_PACK_LEADER_TP =                       "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF8|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nSummon two direwolves while transformed. If killed, they return after |cFFFFFF10|r seconds.",
 
-    ----------------------
-    -- Guild Skills
-    ----------------------
+	-- Vampire
+	SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA =       "Noxiphilic Sanguivoria",
+    SI_LUIE_SKILL_NOXIPHILIC_SANGUIVORIA_TP =            "You have been bitten by a Vampire and contracted Noxiphilic Sanguivoria.",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE1_TP =                  "• Using Vampire abilities advances your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE2_TP =                  "• Reduce Health Recovery by |cFFFFFF25|r%\n• Increase Fire Damage taken by |cFFFFFF15|r%\n• Vampire abilities cost |cFFFFFF7|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE3_TP =                  "• Reduce Health Recovery by |cFFFFFF50|r%\n• Increase Fire Damage taken by |cFFFFFF20|r%\n• Vampire abilities cost |cFFFFFF14|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
+    SI_LUIE_SKILL_VAMPIRISM_STAGE4_TP =                  "• Reduce Health Recovery by |cFFFFFF75|r%\n• Increase Fire Damage taken by |cFFFFFF25|r%\n• Vampire abilities cost |cFFFFFF21|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
+    SI_LUIE_SKILL_FEED_TP =                              "A Vampire is draining your life force, healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds and reducing their vampirism Stage when the effect ends.\n\nStunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.",
+    SI_LUIE_SKILL_BLOOD_RITUAL_TP =                      "You have fed on another player. You may not do so again for |cFFFFFF7|r days.",
+    SI_LUIE_SKILL_PROFANE_SYMBOL =                       "Profane Symbol",
+    SI_LUIE_SKILL_DRAIN_ESSENCE_TP =                     "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. Each tick heals the vampire for |cFFFFFF20|r% of their missing health.",
+    SI_LUIE_SKILL_INVIGORATING_DRAIN_TP =                "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. Each tick heals the vampire for |cFFFFFF20|r% of their missing health and generates |cFFFFFF2|r Ultimate.",
+    SI_LUIE_SKILL_MIST_FORM_TP =                         "Reduce damage taken by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.\n\nImmune to all disabling and immobilization effects while active, but cannot be healed and Magicka Recovery is disabled.",
+    SI_LUIE_SKILL_BALEFUL_MIST_TP =                      "Reduce damage taken by |cFFFFFF75|r% and nearby enemies take Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds.\n\nImmune to all disabling and immobilization effects while active, but cannot be healed and Magicka Recovery is disabled.",
+    SI_LUIE_SKILL_BAT_SWARM_TP =                         "Nearby enemies take Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_DEVOURING_SWARM_TP =                   "Nearby enemies take Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds. The bats heal you for each enemy they damage.", -- TODO: Translate this block END
+	
+    ----------------------------------------------------------------
+    -- GUILD SKILLS ------------------------------------------------
+    ----------------------------------------------------------------
 
     -- Fighters Guild
     SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_TP =              "You and your allies in the area gain Minor Protection and Minor Endurance.",
@@ -2601,9 +2665,72 @@ local strings = {
     -- Psijic Order
     SI_LUIE_SKILL_SPELL_ORB_TP =                         "When you cast a Psijic Order ability while you are in combat, you generate a spell charge.\n\nWhen you reach |cFFFFFF5|r spell charges, you launch a spell orb at the closest enemy to you dealing Magic Damage or Physical Damage, whichever is higher.",
     SI_LUIE_SKILL_CONCENTRATED_BARRIER_TP =              "Absorbing damage while blocking.\n\nThis damage shield recharges back to full strength after you spend |cFFFFFF10|r seconds not blocking.",
-    -- END TRANSLATE THIS BLOCK
+    SI_LUIE_SKILL_TIME_STOP_TP =                         "Gradually being slowed over time for |cFFFFFF2|r seconds. If you are still in the area of effect at end of this duration you will be stunned for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_TIME_BORROWED_TIME_TP =                "Gradually being slowed over time for |cFFFFFF2|r seconds. If you are still in the area of effect at end of this duration you will be stunned and have the next |cFFFFFF5000|r points of healing negated for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_TIME_BORROWED_TIME_STUN_TP =           "Negating the next |cFFFFFF5000|r points of healing for |cFFFFFF<<1>>|r seconds.\n\nStunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.",
+    SI_LUIE_SKILL_TIME_FREEZE_TP =                       "Gradually being slowed over time for |cFFFFFF4|r seconds. If you are still in the area of effect at end of this duration you will be stunned for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_IMBUE_WEAPON_TP =                      "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Physical Damage.\n\nResources are refunded if a Light Attack is not activated.",
+    SI_LUIE_SKILL_ELEMENTAL_WEAPON_TP =                  "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Magic Damage and applies the Burning, Concussion, or Chill status effect.\n\nResources are refunded if a Light Attack is not activated.",
+    SI_LUIE_SKILL_CRUSHING_WEAPON_TP =                   "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Physical Damage and heals you for |cFFFFFF25|r% of the damage done.\n\nResources are refunded if a Light Attack is not activated.",
+    SI_LUIE_SKILL_MEND_WOUNDS_TP =                       "Your Light and Heavy attacks are replaced with healing abilities that can be used on allies.\n\nYour Light Attack applies a heal over time for |cFFFFFF10|r seconds.\n\nYour Heavy Attack heals every |cFFFFFF1|r second while channeling.",
+    SI_LUIE_SKILL_MEND_SPIRIT_TP =                       "Your Light and Heavy attacks are replaced with healing abilities that can be used on allies.\n\nYour Light Attack applies a heal over time for |cFFFFFF10|r seconds.\n\nYour Heavy Attack heals every |cFFFFFF1|r second while channeling.\n\nWhile you heal an ally you grant them Major Resolve and Major Ward.",
+    SI_LUIE_SKILL_SYMBIOSIS_TP =                         "Your Light and Heavy attacks are replaced with healing abilities that can be used on allies.\n\nYour Light Attack applies a heal over time for |cFFFFFF10|r seconds.\n\nYour Heavy Attack heals every |cFFFFFF1|r second while channeling.\n\nYou heal yourself for |cFFFFFF50|r% of the amount of healing done to the ally.",
+    SI_LUIE_SKILL_MEDITATE_TP =                          "Healing and restoring Magicka and Stamina every |cFFFFFF1|r second.\n\nYou will remain in a meditative state until you toggle this ability off or are interrupted.",
+    SI_LUIE_SKILL_INTROSPECTION_TP =                     "Healing and restoring Magicka and Stamina every |cFFFFFF1|r second.\n\nMaintaining the channel increases the Health restored by |cFFFFFF10|r% every tick, up to a maximum of |cFFFFFF50|r%.\n\nYou will remain in a meditative state until you toggle this ability off or are interrupted.",
 
-    -- Sets
+    -- Undaunted
+    SI_LUIE_SKILL_BLOOD_ALTAR_TP =                       "Nearby enemies are afflicted with Minor Lifesteal.\n\nAllies in the area can activate the |cFFFFFFBlood Funnel|r synergy, healing for |cFFFFFF40|r% of their Max Health.",
+    SI_LUIE_SKILL_OVERFLOWING_ALTAR_TP =                 "Nearby enemies are afflicted with Minor Lifesteal.\n\nAllies in the area can activate the |cFFFFFFBlood Feast|r synergy, healing for |cFFFFFF65|r% of their Max Health.",
+    SI_LUIE_SKILL_TRAPPING_WEBS_TP =                     "Enemies caught in the webs are snared, reducing their Movement Speed by |cFFFFFF50|r%. After |cFFFFFF5|r seconds the webs explode, dealing Poison Damage to enemies within.\n\nA ranged ally targeting an enemy in the webs can activate the |cFFFFFFSpawn Broodlings|r synergy.",
+    SI_LUIE_SKILL_SHADOW_SILK_TP =                       "Enemies caught in the webs are snared, reducing their Movement Speed by |cFFFFFF50|r%. After |cFFFFFF5|r seconds the webs explode, dealing Poison Damage to enemies within.\n\nA ranged ally targeting an enemy in the webs can activate the |cFFFFFFBlack Widows|r synergy.",
+    SI_LUIE_SKILL_TANGLING_WEBS_TP =                     "Enemies caught in the webs are snared, reducing their Movement Speed by |cFFFFFF50|r%. After |cFFFFFF5|r seconds the webs explode, dealing Poison Damage to enemies within.\n\nA ranged ally targeting an enemy in the webs can activate the |cFFFFFFArachnophobia|r synergy.",
+    SI_LUIE_SKILL_TRAPPING_WEBS_SNARE_TP =               "Ensnared by webs. Your Movement Speed has been reduced by |cFFFFFF50|r%.\n\nAfter |cFFFFFF5|r seconds the webs explode, dealing Poison damage.",
+    SI_LUIE_SKILL_RADIATE_TP =                           "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. When this effect ends, you and nearby allies take additional Magic Damage.",
+    SI_LUIE_SKILL_SPAWN_BROODLINGS_TP =                  "Attacking nearby enemies for |cFFFFFF<<1>>|r seconds.\n\nDespawns after the duration ends.",
+    SI_LUIE_SKILL_BONE_SHIELD_TP =                       "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
+    SI_LUIE_SKILL_SPIKED_BONE_SHIELD_TP =                "Absorbing damage for |cFFFFFF<<1>>|r seconds and returning |cFFFFFF43|r% of any direct damage absorbed back to the enemy.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
+    SI_LUIE_SKILL_BONE_SURGE_TP =                        "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nAn ally near you can activate the |cFFFFFFSpinal Surge|r synergy.",
+
+	----------------------------------------------------------------
+    -- AVA SKILLS --------------------------------------------------
+    ----------------------------------------------------------------
+	
+    -- Assault
+    SI_LUIE_SKILL_RAPID_MANEUVER_TP =                    "Immune to snare and immobilization effects for |cFFFFFF<<1>>|r seconds.\n\nThe effect ends if you cast any spell on an enemy or ally.",
+    SI_LUIE_SKILL_CHARGING_MANEUVER_TP =                 "Immune to snare and immobilization effects for |cFFFFFF<<1>>|r seconds.\n\nThe effect ends if you cast any spell on an enemy or ally, but you gain Minor Expedition for |cFFFFFF8|r seconds.",
+    SI_LUIE_SKILL_CALTROPS_TP =                          "Enemies standing in the caltrops take Physical Damage every |cFFFFFF1|r second and have their Movement Speed reduced by |cFFFFFF30|r%.",
+    SI_LUIE_SKILL_ANTI_CAVALRY_CALTROPS_TP =             "Enemies standing in the caltrops take Physical Damage every |cFFFFFF1|r second and have their Movement Speed reduced by |cFFFFFF30|r%.\n\nThe caltrops rapidly drain the Mount Stamina of any enemy in the area.",
+    SI_LUIE_SKILL_CALTROPS_DEBUFF_TP =                   "Snared and taking Physical Damage every |cFFFFFF1|r second while standing in the caltrops. Your Movement Speed has been reduced by |cFFFFFF30|r%.",
+    SI_LUIE_SKILL_ANTI_CAVALRY_CALTROPS_DEBUFF_TP =      "Snared and taking Physical Damage every |cFFFFFF1|r second while standing in the caltrops. Your Movement Speed has been reduced by |cFFFFFF30|r%.\n\nThe caltrops rapidly drain Mount Stamina.",
+    SI_LUIE_SKILL_MAGICKA_DETONATION_TP =                "Cursed with a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to you and any allies within |cFFFFFF8|r meters.\n\nEach ally within the bomb's radius increases the damage by |cFFFFFF25|r%, up to a maximum of |cFFFFFF250|r% increased damage.",
+    SI_LUIE_SKILL_INEVITABLE_DETONATION_TP =             "Cursed with a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to you and any allies within |cFFFFFF8|r meters.\n\nEach ally within the bomb's radius increases the damage by |cFFFFFF25|r%, up to a maximum of |cFFFFFF250|r% increased damage.\n\nIf the bomb is dispelled or removed early, the explosion is triggered immediately.",
+    SI_LUIE_SKILL_PROXIMITY_DETONATION_TP =              "Charging a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to all enemies within |cFFFFFF8|r meters.\n\nEach enemy within the bomb's radius increases the damage by |cFFFFFF25|r%, up to a maximum of |cFFFFFF250|r% increased damage.",
+    SI_LUIE_SKILL_WAR_HORN_TP =                          "Increase Max Stamina and Max Magicka by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
+
+    -- Support
+    SI_LUIE_SKILL_SIEGE_SHIELD_TP =                      "Reduce damage taken from siege weapons by |cFFFFFF50|r% while standing in the bubble.",
+    SI_LUIE_SKILL_SIEGE_SHIELD_GROUND_TP =               "A protective sphere guards you and your allies, reducing damage taken from siege weapons while in the bubble by |cFFFFFF50|r%.",
+    SI_LUIE_SKILL_SIEGE_WEAPON_SHIELD_TP =               "Reduce damage taken from siege weapons by |cFFFFFF50|r% while standing in the bubble.\n\nYour siege weapons take |cFFFFFF90|r% reduced damage from enemy siege weapons.",
+    SI_LUIE_SKILL_SIEGE_WEAPON_SHIELD_GROUND_TP =        "A protective sphere guards you and your allies, reducing damage taken from siege weapons while in the bubble by |cFFFFFF50|r%.\n\nYou and your allies' siege weapons in the bubble take |cFFFFFF90|r% reduced damage from enemy siege weapons.",
+    SI_LUIE_SKILL_PROPELLING_SHIELD_TP =                 "Reduce damage taken from siege weapons by |cFFFFFF50|r% while standing in the bubble.\n\nIncrease the range of abilities with a range greater than |cFFFFFF20|r meters by |cFFFFFF7|r meters. Does not effect Leap, Move Position, and Pull abilities.",
+    SI_LUIE_SKILL_PROPELLING_SHIELD_GROUND_TP =          "A protective sphere guards you and your allies, reducing damage taken from siege weapons while in the bubble by |cFFFFFF50|r%.\n\nIncrease the range of you and your allies' abilities with a range greater than |cFFFFFF20|r meters by |cFFFFFF7|r meters in the bubble. Does not effect Leap, Move Position, and Pull abilities.",
+    SI_LUIE_SKILL_PURGE_TP =                             "Reduce the duration of new negative effects applied on you by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+
+	----------------------------------------------------------------
+    -- SETS --------------------------------------------------------
+    ----------------------------------------------------------------
+	
+	-- Set Names
+	SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME =            "Bogdan the Nightflame",
+    SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK =                 "Lord Warden Dusk",
+    SI_LUIE_SKILL_SET_MALUBETH_THE_SCOURGER =            "Malubeth the Scourger",
+    SI_LUIE_SKILL_SET_TROLL_KING =                       "Troll King",
+    SI_LUIE_SKILL_SET_REDISTRIBUTION =                   "Redistribution",
+    SI_LUIE_SKILL_SET_ICE_FURNACE =                      "Ice Furnace",
+    SI_LUIE_SKILL_SET_COOLDOWN =                         "Перезарядка", -- Used as suffix for certain abilities internal cooldown
+    SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE =              "Monk\'s Disguise",
+	
+    -- Weapon Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Прямой урон от следующей атаки Snipe, Scatter Shot или Poison Arrow в течение |cffffff6|r секунд увеличен на |cffffff<<1>>|r%.",
     SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF =         "Каждое третье применение Force Shock в течение |cffffff10|r секунд будет всегда накладывать эффекты Burning, Concussion и Chilled.",
     SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF_PERFECT = "Каждое второе применение Force Shock в течение |cffffff10|r секунд будет всегда накладывать эффекты Burning, Concussion и Chilled.",
@@ -2613,7 +2740,8 @@ local strings = {
     SI_LUIE_SKILL_SET_MASTER_1H =                        "Даёт вплоть до |cffffff2500|r Магической и Физической сопротивляемости, в зависимости от количества исцеления, сделанного способностью Puncturing Remedy в течение |cffffff3|r секунд.",
     SI_LUIE_SKILL_SET_BLACKROSE_1H_TP =                  "Снижает стоимость применения следующей способности ветки Одноручного оружия и щита на |cffffff100|r%.",
     SI_LUIE_SKILL_SET_BLACKROSE_DESTRO_TP =              "Подвержен урону от Огня, Электричества и Мороза каждые |cffffff2|r секунды в течение |cffffff8|r секунд.",
-
+	
+	-- Monster Helms
     SI_LUIE_SKILL_SET_BALORGH =                          "Увеличивает урон от Оружия и Заклинаний на значение, вдвое большее, чем потраченные при применении ульты очки, на |cFFFFFF10|r секунд.",
     SI_LUIE_SKILL_SET_BOGDAN =                           "Союзники в радиусе |cFFFFFF5|r метров от тотема исцеляются каждую |cFFFFFF1|r секунду в течение |cFFFFFF6|r секунд.",
     SI_LUIE_SKILL_SET_DOMIHAUS_BUFF_STAMINA =            "Повышает урон от Оружия, пока находитесь в круге.",
@@ -2643,6 +2771,7 @@ local strings = {
     SI_LUIE_SKILL_SET_THURVOKUN_TP =                     "Противники в луже получают урон от Болезни каждую |cffffff1|r секунду и получают Minor Maim и Minor Defile на |cffffff4|r секунды в течение |cffffff8|r секунд.",
     SI_LUIE_SKILL_SET_ZAAN_TP =                          "Подвержен увеличивающемуся урону от Огня каждую |cffffff1|r секунду в течение |cffffff5|r секунд, пока луч активен.",
 
+	-- Crafted Sets
     SI_LUIE_SKILL_SET_ALESSIAS_BULWARK =                 "Урон от Оружия снижен на |cffffff10|r% в течение |cFFFFFF5|r секунд.",
     SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST =                 "Урон от оружие и Заклинаний увеличен в течение |cFFFFFF15|r секунд.",
     SI_LUIE_SKILL_SET_ETERNAL_HUNT =                     "Взрывается при приближении противника, нанося урон Ядом и обездвиживая их на |cFFFFFF1.5|r секунды.",
@@ -2653,6 +2782,7 @@ local strings = {
     SI_LUIE_SKILL_SET_MECHANICAL_ACUITY =                "Повышает шанс критического удара Заклинанием и Оружием до |cFFFFFF100|r% в течение |cffffff5|r секунд.",
     SI_LUIE_SKILL_SET_ADEPT_RIDER =                      "Противнике в пыли получают Физический урон каждую |cffffff1|r секунду в течение |cffffff12|r секунд.",
 
+	-- Light / Medium / Heavy Armor Sets
     SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP =                "Противники на осквернённой земле замедляются на |cffffff70|r%, получают Магический урон каждую |cffffff1|r секунду в течение |cffffff5|r секунд, и исцеляют вас на |cffffff100|r% от полученного урона.",
     SI_LUIE_SKILL_SET_WAY_OF_MARTIAL_KNOWLEDGE_TP =      "Увеличен получаемый урон от следующей атаки на |cffffff10|r%.",
     SI_LUIE_SKILL_SET_BRIARHEART_TP =                    "Ваши критические удары исцеляют вас в течение |cffffff10|r секунд.",
@@ -2688,6 +2818,7 @@ local strings = {
     SI_LUIE_SKILL_SET_RATTLECAGE =                       "Rattlecage",
     SI_LUIE_SKILL_SET_DREUGH_KING_SLAYER =               "Dreugh King Slayer",
 
+	-- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Увеличивается шанс критического удара в течение |cffffff5|r секунд и суммируется до |cffffff5|r раз.",
     SI_LUIE_SKILL_SET_ETERNAL_IMMORTAL_WARRIOR_TP =      "Вы недавно были обращены в статую и не можете избежать смерти этим способом снова.",
     SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "Когда другой игрок поразит эту же цель полностью заряженной Силовой атакой, бомба взорвётся, нанося Магический урон всем противникам в радиусе |cffffff8|r метров.",
@@ -2700,13 +2831,16 @@ local strings = {
     SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Увеличивает урон от Заклинаний на |cffffff30|r в течение |cffffff5|r секунд, суммируется максимум до |cffffff20|r раз.",
     SI_LUIE_SKILL_SET_RELEQUENS_TP =                     "Охвачен губительными ветрами, подвержен Физическому урону в течение|cffffff5|r секунд.",
 
+	-- Battleground Sets
     SI_LUIE_SKILL_SET_COWARDS_GEAR =                     "Coward's Gear",
     SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP =           "Наносите на |cffffff100|r% больше урона игроку, который провоцирует вас, но на |cffffff50|r% меньше урона другим игрокам в течение |cffffff15|r секунд.",
 
+	-- Imperial City Sets
     SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP =             "Отмечен на |cffffff15|r секунд. Если на вас будет |cffffff6|r Marks of Revenge, они взорвутся, нанося Магический урон.",
     SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP =            "Физическая и Магическая сопротивляемости повышены на |cffffff2|r минуты.",
     SI_LUIE_SKILL_SET_PHOENIX_TP =                       "Вы недавно возродились как феникс и не можете избежать смерти этим способом снова.",
 
+	-- Alliance War Sets
     SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Нивелирует получаемое исцеление в течение |cffffff4|r секунд.",
     SI_LUIE_SKILL_SET_SPELL_STRATEGIST_TP =              "Увеличивает урон от Заклинаний против цели в течение |cffffff5|r секунд.",
     SI_LUIE_SKILL_SET_SUCCESSION_TP =                    "Увеличивает урон от Заклинаний атакам, наносящим урон с типом \"<<1>>\", в течение |cffffff4|r секунд.",
@@ -2717,6 +2851,62 @@ local strings = {
     SI_LUIE_SKILL_SET_CYRODIILS_LIGHT_TP =               "Ваша следующая способность, расходующая Магию, применённая в течение |cffffff30|r секунд, будет применена бесплатно.",
     SI_LUIE_SKILL_SET_MORAG_TONG_TP =                    "Увеличивает урон, получаемый от способностей с уроном от Яда, на |cffffff10|r% в течение |cffffff5|r секунд.",
 
+	----------------------------------------------------------------
+    -- NPC ABILITY / QUEST TOOLTIPS --------------------------------
+    ----------------------------------------------------------------
+	
+	SI_LUIE_SKILL_ANCHOR_DROP =                          "Сундук якоря",
+	SI_LUIE_SKILL_SHIELD_RUSH =                          "Shield Rush",
+    SI_LUIE_SKILL_BLITZ =                                "Blitz",
+    SI_LUIE_SKILL_BARRELING_CHARGE =                     "Barreling Charge",
+    SI_LUIE_SKILL_ZOOM =                                 "Zoom",
+    SI_LUIE_SKILL_PLOW =                                 "Plow",
+    SI_LUIE_SKILL_DEFENSIVE_WARD =                       "Defensive Ward",
+    SI_LUIE_SKILL_GREAT_CLEAVE =                         "Great Cleave",
+    SI_LUIE_SKILL_INSPIRE =                              "Inspire",
+    SI_LUIE_SKILL_HIDE_IN_SHADOWS =                      "Hide in Shadows",
+    SI_LUIE_SKILL_SHADOWY_BARRIER =                      "Shadowy Barrier",
+    SI_LUIE_SKILL_MIGHTY_CHARGE =                        "Mighty Charge",
+    SI_LUIE_SKILL_DETECTION =                            "Detection",
+    SI_LUIE_SKILL_IMPROVED_SHOCK_TORRENT =               "Improved Shock Torrent",
+    SI_LUIE_SKILL_SIEGE_BARRIER =                        "Siege Barrier",
+    SI_LUIE_SKILL_PUNCTURING_CHAINS =                    "Puncturing Chains",
+    SI_LUIE_SKILL_IMPROVED_VOLLEY =                      "Improved Volley",
+    SI_LUIE_SKILL_FIRE_TORRENT =                         "Fire Torrent",
+    SI_LUIE_SKILL_RIP_AND_TEAR =                         "Rip and Tear",
+    SI_LUIE_SKILL_LEECHING_BITE =                        "Leeching Bite",
+    SI_LUIE_SKILL_FETCHERFLY_COLONY =                    "Fetcherfly Colony",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME =               "Empower Atronach: Flame",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST =               "Empower Atronach: Frost",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM =               "Empower Atronach: Storm",
+    SI_LUIE_SKILL_COLOSSAL_STOMP =                       "Colossal Stomp",
+    SI_LUIE_SKILL_DUST_CLOUD =                           "Dust Cloud",
+    SI_LUIE_SKILL_BATTLE_SPIRIT =                        "Battle Spirit",
+    SI_LUIE_SKILL_COLD_FIRE_TRAP =                       "Cold Fire Trap",
+    SI_LUIE_SKILL_LAVA_FOOT_STOMP =                      "Lava Foot Stomp",
+    SI_LUIE_SKILL_KNIFE_JUGGLING =                       "Knife Juggling",
+    SI_LUIE_SKILL_TORCH_JUGGLING =                       "Torch Juggling",
+    SI_LUIE_SKILL_WALL_OF_FLAMES =                       "Wall of Flames",
+    SI_LUIE_SKILL_CONSECRATE_SHRINE =                    "Consecrate Shrine",
+    SI_LUIE_SKILL_UNSTABLE_PORTAL =                      "Unstable Portal",
+    SI_LUIE_SKILL_STABILIZE_PORTAL =                     "Stabilize Portal",
+    SI_LUIE_SKILL_CLOSE_UNSTABLE_RIFT =                  "Close Unstable Rift",
+    SI_LUIE_SKILL_FLAME_BLOSSOM =                        "Flame Blossom",
+    SI_LUIE_SKILL_SAHDINAS_ESSENCE =                     "Sahdina's Essence",
+    SI_LUIE_SKILL_RASHOMTAS_ESSENCE =                    "Rashomta's Essence",
+    SI_LUIE_SKILL_POLYMORPH_SKELETON =                   "Polymorph: Skeleton",
+    SI_LUIE_SKILL_DRAIN_ENERGY =                         "Drain Energy",
+    SI_LUIE_SKILL_FIRELIGHT_TP =                         "Увеличивает Запас сил на |cFFFFFF5|r% в течение |cFFFFFF30|r минут.",
+    SI_LUIE_SKILL_BARRIER_REBUKE =                       "Barrier Rebuke",
+    SI_LUIE_SKILL_TELEPORT_SCROLL =                      "Teleport Scroll",
+    SI_LUIE_SKILL_BIND_HANDS =                           "Bind Hands",
+    SI_LUIE_SKILL_BIND_BEAR =                            "Bind Bear",
+    SI_LUIE_SKILL_IMPROVED =                             "Improved",
+    SI_LUIE_SKILL_AETHERIAL_SHIFT =                      "Aetherial Shift",
+    SI_LUIE_SKILL_FREE_SPIRIT =                          "Free Spirit",
+    SI_LUIE_SKILL_UNBIND =                               "Unbind",
+    SI_LUIE_SKILL_BACKFIRE =                             "Backfire",
+    SI_LUIE_SKILL_DIVINE_SPEED_TP =                      "Божественное благословление увеличивает вашу скорость передвижения на |cFFFFFF2|r минуты.",
     SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP =              "Молния протекает через ваше тело, наделяя все ваши атаки оружием уроном от Электричества.",
     SI_LUIE_SKILL_MANTLES_SHADOW =                       "Mantle's Shadow",
     SI_LUIE_SKILL_THROW_WATER =                          "Throw Water",
@@ -2736,87 +2926,6 @@ local strings = {
     SI_LUIE_SKILL_SERPENT_SPIT =                         "Serpent Spit",
     SI_LUIE_SKILL_SHADOW_WOOD =                          "Shadow Wood",
     SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "Слуга тени принца Неймона утащил вас в Теневое древо.",
-
-    SI_LUIE_SKILL_SOUL_SUMMONS_TP =                      "Вы недавно воскресли без затрат Камня душ и не можете воскреснуть сова не потратив камня душ в течение |cFFFFFF<<1>>|r час.", -- TODO: Check Translation
-
-    SI_LUIE_SKILL_SANIES_LUPINUS_TP =                    "Вы были укушены Оборотнем и заразились Гнойным люпинусом.",
-    SI_LUIE_SKILL_LYCANTHROPHY_TP =                      "Вы можете обратиться в дикого Оборотня.\n\nВы получаете на |cFFFFFF25|r% больше урона от Яда, пока находитесь в форме Вервольфа.",
-    SI_LUIE_SKILL_BLOOD_MOON_TP =                        "Вы укусили другого игрока. Вы не сможете сделать этого снова в течение |cFFFFFF7|r дней.", -- TODO: Check Translation
-
-    SI_LUIE_SKILL_NOXIPHILIC_SANGUIVORIA_TP =            "You have been bitten by a Vampire and contracted Noxiphilic Sanguivoria.", -- TODO: Translate this block START
-    SI_LUIE_SKILL_VAMPIRISM_STAGE1_TP =                  "• Using Vampire abilities advances your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
-    SI_LUIE_SKILL_VAMPIRISM_STAGE2_TP =                  "• Reduce Health Recovery by |cFFFFFF25|r%\n• Increase Fire Damage taken by |cFFFFFF15|r%\n• Vampire abilities cost |cFFFFFF7|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
-    SI_LUIE_SKILL_VAMPIRISM_STAGE3_TP =                  "• Reduce Health Recovery by |cFFFFFF50|r%\n• Increase Fire Damage taken by |cFFFFFF20|r%\n• Vampire abilities cost |cFFFFFF14|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
-    SI_LUIE_SKILL_VAMPIRISM_STAGE4_TP =                  "• Reduce Health Recovery by |cFFFFFF75|r%\n• Increase Fire Damage taken by |cFFFFFF25|r%\n• Vampire abilities cost |cFFFFFF21|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
-
-    SI_LUIE_SKILL_FEED_TP =                              "A Vampire is draining your life force, healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds and reducing their vampirism Stage when the effect ends.\n\nStunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.",
-    SI_LUIE_SKILL_BLOOD_RITUAL_TP =                      "You have fed on another player. You may not do so again for |cFFFFFF7|r days.",
-    SI_LUIE_SKILL_PROFANE_SYMBOL =                       "Profane Symbol",
-    SI_LUIE_SKILL_DRAIN_ESSENCE_TP =                     "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. Each tick heals the vampire for |cFFFFFF20|r% of their missing health.",
-    SI_LUIE_SKILL_INVIGORATING_DRAIN_TP =                "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. Each tick heals the vampire for |cFFFFFF20|r% of their missing health and generates |cFFFFFF2|r Ultimate.",
-    SI_LUIE_SKILL_MIST_FORM_TP =                         "Reduce damage taken by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.\n\nImmune to all disabling and immobilization effects while active, but cannot be healed and Magicka Recovery is disabled.",
-    SI_LUIE_SKILL_BALEFUL_MIST_TP =                      "Reduce damage taken by |cFFFFFF75|r% and nearby enemies take Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds.\n\nImmune to all disabling and immobilization effects while active, but cannot be healed and Magicka Recovery is disabled.",
-    SI_LUIE_SKILL_BAT_SWARM_TP =                         "Nearby enemies take Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_DEVOURING_SWARM_TP =                   "Nearby enemies take Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds. The bats heal you for each enemy they damage.", -- TODO: Translate this block END
-
-    SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP =               "Иммунитет к замедляющим и обездвиживающим эффектам на |cFFFFFF<<1>>|r секунд.",
-    SI_LUIE_SKILL_DODGE_FATIGUE_TP =                     "Повторный уворот будет расходовать больше Запаса сил в течение следующих |cFFFFFF<<1>>|r <<1[секунду/секунд]>>.",
-    SI_LUIE_SKILL_HIDDEN_TP =                            "Крадётесь и сокрыты от чужих глаз.\n\nРасходуется Запас сил при движении.",
-    SI_LUIE_SKILL_INVISIBLE_TP =                         "Сокрыты от чужих глаз магией или окружающей средой.",
-    SI_LUIE_SKILL_SPRINT_TP =                            "Спринт, скорость передвижения увеличена на |cFFFFFF40|r%.\n\nРасходуется Запас сил при движении.",
-    SI_LUIE_SKILL_GALLOP_TP =                            "Галоп, скорость передвижения увеличена на |cFFFFFF30|r%.\n\nРасходуется Запас сил ездового животного при движении.",
-    SI_LUIE_SKILL_BLOCK_TP =                             "Блокируется атака, получаемый урон снижен и действует иммунитет к оглушающим и отбрасывающим эффектам .",
-    SI_LUIE_SKILL_RESURRECTION_IMMUNITY_TP =             "Воскрешение. Иммунитет к урону и эффектам контроля.",
-    SI_LUIE_SKILL_TAUNT_TP =                             "Спровоцирован. Этот противник фокусирует все атаки на вас.",
-    SI_LUIE_SKILL_DISGUISE_TP =                          "Маскировка. Вы можете быть обнаружены часовыми или выполняя подозрительную деятельность.\n\nПолучение урона снимет вашу маскировку.",
-    SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Здоровье увеличено на |cFFFFFF5000|r\n• Получаемый урон, исцеление и щиты от урона уменьшены на |cFFFFFF50|r%\n• Дальность действия способностей действующих на расстоянии |cFFFFFF28|r метров и более увеличена на |cFFFFFF8|r",
-    SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "Вы недавно пользовались перемещением к дорожному святилищу и должно заплатить дополнительное золото, чтобы воспользоваться им вновь.",
-
-    SI_LUIE_SKILL_VENGEANCE_TP =                         "Ваша следующая способность, расходующая магию, применённая в течение |cFFFFFF5|r секунд обязательно нанесёт Критический удар.",
-
-    SI_LUIE_SKILL_GLYPH_CRUSHING_TP =                    "Снижает Физическую и Магическую сопротивляемости цели на |cFFFFFF5|r секунд.",
-    SI_LUIE_SKILL_GLYPH_HARDENING_TP =                   "Даёт вам щит от урона на |cFFFFFF7|r секунд.",
-    SI_LUIE_SKILL_GLYPH_WEAKENING_TP =                   "Уменьшает урон от Оружия и Заклинаний цели на |cFFFFFF5|r секунд.",
-    SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE_TP =               "Увеличивает ваш урон от Оружия и Заклинаний на |cFFFFFF5|r секунд.",
-
-    SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Повышает ваши магическую и физическую сопротивляемости на |cFFFFFF2752|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Повышает ваши магическую и физическую проникновение на |cFFFFFF2752|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_LORD =                    "Повышает ваш макс.запас Здоровья на |cFFFFFF2230|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_MAGE =                    "Повышает ваш макс.запас Магии на |cFFFFFF2028|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_TOWER =                   "Повышает ваш макс. Запас сил на |cFFFFFF2028|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_ATRONACH =                "Повышает ваше восстановление Магии на |cFFFFFF238|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_SERPENT =                 "Повышает ваше восстановление Запаса сил на |cFFFFFF238|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_SHADOW =                  "Повышает ваш критический урон на |cFFFFFF9|r%.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_RITUAL =                  "Повышает наносимое вами исцеление на |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_THIEF =                   "Повышает ваш рейтинг критического удара Оружием и Заклинаниями на |cFFFFFF1533|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_WARRIOR =                 "Повышает ваш урон от Оружия на |cFFFFFF238|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE =              "Повышает ваш урон от Заклинаний на |cFFFFFF238|r.",
-    SI_LUIE_SKILL_MUNDUS_BASIC_STEED =                   "Повышает вашу скорость передвижения на |cFFFFFF10|r% и восстановление Здоровья на |cFFFFFF238|r.",
-
-    SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL =          "Сила эффектов зависит от вашего уровня.", -- Note this needs to be an exact match to the description in Crown Crate food/drink items for it to be correctly removed in each localization.
-    SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA =    "Если вы вампир, кровь, входящая в состав этого напитка, постепенно утоляет ваш голод.\nСила эффектов зависит от вашего уровня.", -- Must be exact match in each localization
-    SI_LUIE_SKILL_REMOVE_TOOLTIP_HISSMIR =               "Этот напиток также дает вам понимание того, какая рыба водится в различных водоемах, и наделяет особым вниманием к местам рыбной ловли поблизости.\nСила эффектов зависит от вашего уровня.", -- Must be exact match in each localization
-    SI_LUIE_SKILL_ADD_TOOLTIP_HISSMIR =                  "\n\nЭтот напиток также дает вам понимание того, какая рыба водится в различных водоемах, и наделяет особым вниманием к местам рыбной ловли поблизости.",
-    SI_LUIE_SKILL_ESO_PLUS_TP =                          "Увеличивает получаемые Опыт, Золото и Вдохновение на |cffffff10|r%. Увеличивает скорость исследования особенностей на |cffffff10|r%.",
-
-    SI_LUIE_SKILL_CRAFTING_STATION_JEWELRY =             "Настройка Ювелирной станции",
-    SI_LUIE_SKILL_CRAFTING_STATION_BLACKSMITH =          "Настройка Кузницы",
-    SI_LUIE_SKILL_CRAFTING_STATION_CLOTHING =            "Настройка Портняжного станка",
-    SI_LUIE_SKILL_CRAFTING_STATION_WOODWORK =            "Настройка Столярного верстака",
-
-    SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP =              "Увеличивает получаемый опыт на |cffffff<<1>>|r% в течение |cffffff30|r минут.",
-    SI_LUIE_SKILL_EXPERIENCE_HOUR_TP =                   "Увеличивает получаемый опыт на |cffffff<<1>>|r% в течение |cffffff<<2>>|r <<2[часа/часов]>>.",
-    SI_LUIE_SKILL_EXPERIENCE_PELINAL =                   "Увеличивает получаемые Очки Альянса и опыт, получаемый за убийство игроков на |cffffff100|r% в течение |cffffff<<1>>|r <<1[часа/часов]>>.",
-    SI_LUIE_SKILL_FILLET_FISH =                          "Чистка рыбы",
-    SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT =             "Поддельный указ о помиловании",
-    SI_LUIE_SKILL_LENIENCY_EDICT =                       "Указ о смягчении наказания",
-    SI_LUIE_SKILL_GRAND_AMNESTY_EDICT =                  "Указ о большой амнистии",
-
-    SI_LUIE_SKILL_EVENT_FREEZING =                    	 "Вы замерзаете и скорость вашего передвижения замедлена. Найдите костёр, чтобы согреться.",
-    SI_LUIE_SKILL_EVENT_WARM =							 "Вы прижимаетесь к ближайшему костру, чтобы согреться. Время замерзания сокращается на |cffffff10|r секунд каждую |cffffff1|r секунду.",
-
-    SI_LUIE_SKILL_EVENT_FESTIVAL_GROG =                  "У вас небольшая... дезориентация.",
-    SI_LUIE_SKILL_EVENT_FESTIVAL_MINTS =                 "Вы ОЧЕНЬ замерзли.",
 
 }
 
