@@ -790,6 +790,8 @@ A.Skill_Black_Widows                = 41994
 A.Skill_Arachnophobia               = 42016
 A.Skill_Healing_Combustion          = 63507
 
+A.Skill_Spinal_Surge                = 42198
+
 -- ---------------------------------------------------
 -- ALLIANCE WAR --------------------------------------
 -- ---------------------------------------------------
@@ -800,9 +802,10 @@ A.Skill_Retreating_Manuever         = 40211
 A.Skill_Charging_Manuever           = 40215
 A.Skill_Caltrops                    = 33376
 A.Skill_Razor_Caltrops              = 40242
+A.Skill_Aggressive_Horn             = 40223
+A.Skill_Sturdy_Horn                 = 40220
 
 -- Support
-A.Skill_Efficient_Purge             = 40232
 A.Skill_Lingering_Flare             = 61519
 A.Skill_Scorching_Flare             = 61524
 A.Skill_Reviving_Barrier            = 40237

@@ -2623,9 +2623,32 @@ local strings = {
     SI_LUIE_SKILL_SHADOW_SILK_TP =                       "Enemies caught in the webs are snared, reducing their Movement Speed by |cFFFFFF50|r%. After |cFFFFFF5|r seconds the webs explode, dealing Poison Damage to enemies within.\n\nA ranged ally targeting an enemy in the webs can activate the |cFFFFFFBlack Widows|r synergy.",
     SI_LUIE_SKILL_TANGLING_WEBS_TP =                     "Enemies caught in the webs are snared, reducing their Movement Speed by |cFFFFFF50|r%. After |cFFFFFF5|r seconds the webs explode, dealing Poison Damage to enemies within.\n\nA ranged ally targeting an enemy in the webs can activate the |cFFFFFFArachnophobia|r synergy.",
     SI_LUIE_SKILL_TRAPPING_WEBS_SNARE_TP =               "Ensnared by webs. Your Movement Speed has been reduced by |cFFFFFF50|r%.\n\nAfter |cFFFFFF5|r seconds the webs explode, dealing Poison damage.",
+    SI_LUIE_SKILL_RADIATE_TP =                           "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. When this effect ends, you and nearby allies take additional Magic Damage.",
+    SI_LUIE_SKILL_SPAWN_BROODLINGS_TP =                  "Attacking nearby enemies for |cFFFFFF<<1>>|r seconds.\n\nDespawns after the duration ends.",
     SI_LUIE_SKILL_BONE_SHIELD_TP =                       "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
     SI_LUIE_SKILL_SPIKED_BONE_SHIELD_TP =                "Absorbing damage for |cFFFFFF<<1>>|r seconds and returning |cFFFFFF43|r% of any direct damage absorbed back to the enemy.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
-    SI_LUIE_SKILL_BONE_SURGE_TP =                       "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nAn ally near you can activate the |cFFFFFFSpinal Surge|r synergy.",
+    SI_LUIE_SKILL_BONE_SURGE_TP =                        "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nAn ally near you can activate the |cFFFFFFSpinal Surge|r synergy.",
+
+    -- Assault
+    SI_LUIE_SKILL_RAPID_MANEUVER_TP =                    "Immune to snare and immobilization effects for |cFFFFFF<<1>>|r seconds.\n\nThe effect ends if you cast any spell on an enemy or ally.",
+    SI_LUIE_SKILL_CHARGING_MANEUVER_TP =                 "Immune to snare and immobilization effects for |cFFFFFF<<1>>|r seconds.\n\nThe effect ends if you cast any spell on an enemy or ally, but you gain Minor Expedition for |cFFFFFF8|r seconds.",
+    SI_LUIE_SKILL_CALTROPS_TP =                          "Enemies standing in the caltrops take Physical Damage every |cFFFFFF1|r second and have their Movement Speed reduced by |cFFFFFF30|r%.",
+    SI_LUIE_SKILL_ANTI_CAVALRY_CALTROPS_TP =             "Enemies standing in the caltrops take Physical Damage every |cFFFFFF1|r second and have their Movement Speed reduced by |cFFFFFF30|r%.\n\nThe caltrops rapidly drain the Mount Stamina of any enemy in the area.",
+    SI_LUIE_SKILL_CALTROPS_DEBUFF_TP =                   "Snared and taking Physical Damage every |cFFFFFF1|r second while standing in the caltrops. Your Movement Speed has been reduced by |cFFFFFF30|r%.",
+    SI_LUIE_SKILL_ANTI_CAVALRY_CALTROPS_DEBUFF_TP =      "Snared and taking Physical Damage every |cFFFFFF1|r second while standing in the caltrops. Your Movement Speed has been reduced by |cFFFFFF30|r%.\n\nThe caltrops rapidly drain Mount Stamina.",
+    SI_LUIE_SKILL_MAGICKA_DETONATION_TP =                "Cursed with a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to you and any allies within |cFFFFFF8|r meters.\n\nEach ally within the bomb's radius increases the damage by |cFFFFFF25|r%, up to a maximum of |cFFFFFF250|r% increased damage.",
+    SI_LUIE_SKILL_INEVITABLE_DETONATION_TP =             "Cursed with a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to you and any allies within |cFFFFFF8|r meters.\n\nEach ally within the bomb's radius increases the damage by |cFFFFFF25|r%, up to a maximum of |cFFFFFF250|r% increased damage.\n\nIf the bomb is dispelled or removed early, the explosion is triggered immediately.",
+    SI_LUIE_SKILL_PROXIMITY_DETONATION_TP =              "Charging a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to all enemies within |cFFFFFF8|r meters.\n\nEach enemy within the bomb's radius increases the damage by |cFFFFFF25|r%, up to a maximum of |cFFFFFF250|r% increased damage.",
+    SI_LUIE_SKILL_WAR_HORN_TP =                          "Increase Max Stamina and Max Magicka by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
+
+    -- Support
+    SI_LUIE_SKILL_SIEGE_SHIELD_TP =                      "Reduce damage taken from siege weapons by |cFFFFFF50|r% while standing in the bubble.",
+    SI_LUIE_SKILL_SIEGE_SHIELD_GROUND_TP =               "A protective sphere guards you and your allies, reducing damage taken from siege weapons while in the bubble by |cFFFFFF50|r%.",
+    SI_LUIE_SKILL_SIEGE_WEAPON_SHIELD_TP =               "Reduce damage taken from siege weapons by |cFFFFFF50|r% while standing in the bubble.\n\nYour siege weapons take |cFFFFFF90|r% reduced damage from enemy siege weapons.",
+    SI_LUIE_SKILL_SIEGE_WEAPON_SHIELD_GROUND_TP =        "A protective sphere guards you and your allies, reducing damage taken from siege weapons while in the bubble by |cFFFFFF50|r%.\n\nYou and your allies' siege weapons in the bubble take |cFFFFFF90|r% reduced damage from enemy siege weapons.",
+    SI_LUIE_SKILL_PROPELLING_SHIELD_TP =                 "Reduce damage taken from siege weapons by |cFFFFFF50|r% while standing in the bubble.\n\nIncrease the range of abilities with a range greater than |cFFFFFF20|r meters by |cFFFFFF7|r meters. Does not effect Leap, Move Position, and Pull abilities.",
+    SI_LUIE_SKILL_PROPELLING_SHIELD_GROUND_TP =          "A protective sphere guards you and your allies, reducing damage taken from siege weapons while in the bubble by |cFFFFFF50|r%.\n\nIncrease the range of you and your allies' abilities with a range greater than |cFFFFFF20|r meters by |cFFFFFF7|r meters in the bubble. Does not effect Leap, Move Position, and Pull abilities.",
+    SI_LUIE_SKILL_PURGE_TP =                             "Reduce the duration of new negative effects applied on you by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
 
     -- Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Direct damage taken from the next Snipe, Scatter Shot, or Poison Arrow increased by |cffffff<<1>>|r% used within |cffffff6|r seconds.",

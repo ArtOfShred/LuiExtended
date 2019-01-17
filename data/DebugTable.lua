@@ -6167,12 +6167,12 @@ debugAuras = {
             [61509] = true, -- Resolving Vigor (Resolving Vigor)
             [61508] = true, -- Resolving Vigor (Resolving Vigor)
 
-            [64118] = true, -- Hindered (Caltrops - All Morphs)
             [33376] = true, -- Caltrops (Caltrops)
             [38548] = true, -- Spear Shards (Caltrops)
             [38549] = true, -- Caltrops (Caltrops)
             [38553] = true, -- Spear Shards (Caltrops)
             [38561] = true, -- Caltrops (Caltrops)
+            [113769] = true, -- Caltrops (Caltrops)
 
             [40255] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
             [40257] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
@@ -6180,6 +6180,7 @@ debugAuras = {
             [40263] = true, -- Spear Shards (Anti-Cavalry Caltrops)
             [40267] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
             [40266] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+            [113770] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
 
             [40242] = true, -- Razor Caltrops (Razor Caltrops)
             [40244] = true, -- Razor Caltrops (Razor Caltrops)
@@ -6188,6 +6189,7 @@ debugAuras = {
             [40254] = true, -- Razor Caltrops (Razor Caltrops)
             [40253] = true, -- Hindered (Razor Caltrops)
             [40252] = true, -- Razor Caltrops (Razor Caltrops)
+            [113771] = true, -- Razor Caltrops (Razor Caltrops)
 
             [61487] = true, -- Magicka Detonation (Magicka Detonation)
             [61490] = true, -- FX DUMMY (Magicka Detonation)
@@ -6205,19 +6207,16 @@ debugAuras = {
             [61502] = true, -- Proximity Detonation (Proximity Detonation)
 
             [38563] = true, -- War Horn (War Horn)
-            [63523] = true, -- Minor Toughness (War Horn)
             [38564] = true, -- War Horn (War Horn)
             [94080] = true, -- War Horn (War Horn)
 
             [40223] = true, -- Aggressive Horn (Aggressive Horn)
-            [63527] = true, -- Minor Toughness (Aggressive Horn)
             [40224] = true, -- Aggressive Horn (Aggressive Horn)
             [94800] = true, -- Aggressive Horn (Aggressive Horn)
             [40225] = true, -- Major Force (Aggressive Horn)
 
             [40220] = true, -- Sturdy Horn (Sturdy Horn)
             [40221] = true, -- Sturdy Horn (Sturdy Horn)
-            [40222] = true, -- Minor Toughness (Sturdy Horn)
             [63532] = true, -- Minor Resolve (Sturdy Horn)
             [63571] = true, -- Minor Ward (Sturdy Horn)
             [95094] = true, -- Sturdy (Sturdy Horn)
@@ -6249,10 +6248,8 @@ debugAuras = {
             [40227] = true, -- Propelling Shield (Propelling Shield)
 
             [38571] = true, -- Purge (Purge)
-            [38572] = true, -- Purge (Purge)
 
             [40232] = true, -- Efficient Purge (Efficient Purge)
-            [40233] = true, -- Purge (Efficient Purge)
 
             [40234] = true, -- Cleanse (Cleanse)
             [40235] = true, -- Cleanse (Cleanse)

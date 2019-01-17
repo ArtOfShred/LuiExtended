@@ -382,6 +382,9 @@ E.DebuffDisplayOverrideId = {
     [92039] = true, -- Frozen Gate Root (Frozen Device)
     [92060] = true, -- Frozen Retreat Root (Frozen Retreat)
 
+    -- Undaunted
+    [42007] = true, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
+
     ----------------------------------------------------------------
     -- NPC ABILITIES -----------------------------------------------
     ----------------------------------------------------------------
@@ -1332,12 +1335,9 @@ E.EffectCreateSkillAura = {
     [103712] = { consolidate = true, extendedDisplay = true, abilityId = 103710 }, -- Minor Force --> Race Against Time
 
     -- Assault
-    [101161] = { consolidate = true, removeOnEnd = true, abilityId = 38566 }, -- Major Expedition (Rapid Maneuver)
-    [57472] = { consolidate = true, removeOnEnd = true, abilityId = 38566 }, -- Major Gallop (Rapid Maneuver)
-    [101169] = {consolidate = true, removeOnEnd = true, abilityId = 40211 }, -- Major Expedition (Retreating Maneuver)
-    [57477] = { consolidate = true, removeOnEnd = true, abilityId = 40211 }, -- Major Gallop (Retreating Maneuver)
-    [101178] = { consolidate = true, removeOnEnd = true, abilityId = 40215 }, -- Major Expedition (Charging Maneuver)
-    [57481] = { consolidate = true, removeOnEnd = true, abilityId = 40215 }, -- Major Gallop (Charging Maneuver)
+    [57472] = { alwaysShow = true, removeOnEnd = true, abilityId = 38566 }, -- Major Gallop (Rapid Maneuver)
+    [57477] = { alwaysShow = true, removeOnEnd = true, abilityId = 40211 }, -- Major Gallop (Retreating Maneuver)
+    [57481] = { alwaysShow = true, removeOnEnd = true, abilityId = 40215 }, -- Major Gallop (Charging Maneuver)
 
     -- Sets
     [106867] = { alwaysShow = true, abilityId = 106865 }, -- Major Evasion --> Grace of Gloom
@@ -1813,8 +1813,6 @@ E.BarHighlightOverride = {
     -- Support ----------------
     ---------------------------
 
-    [38571] = { newId = 38572 }, -- Purge
-    [40232] = { newId = 40233 }, -- Efficient Purge --> Purge
     [61489] = { newId = 61496 }, -- Revealing Flare
     [61519] = { newId = 61522 }, -- Lingering Flare --> Nova
     [61524] = { newId = 61528 }, -- Scorching Flare
@@ -2435,7 +2433,9 @@ E.EffectHideSCT = {
     -- Assault
     ----------------------------
 
-    [64118] = true, -- Hindered (Caltrops)
+    [113769] = true, -- Caltrops (Caltrops)
+    [113770] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+    [113771] = true, -- Razor Caltrops (Razor Caltrops)
 
     -- Human NPC
     [10648] = true, -- Throw Oil (Synergy)
@@ -5841,33 +5841,39 @@ E.EffectOverride = {
 
     -- Trapping Webs / Shadow Silk / Tangling Webs
     [108788] = { hide = true }, -- Synergy Damage Bonus (Trapping Webs - Spawn Broodlings Synergy)
-    [39430] = { icon = 'esoui/art/icons/ability_undaunted_003.dds' }, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
-    [39432] = { icon = 'esoui/art/icons/ability_undaunted_003.dds' }, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
+    [39430] = { icon = 'esoui/art/icons/ability_undaunted_003.dds', tooltip = T.Skill_Spawn_Broodlings }, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
+    [39432] = { icon = 'esoui/art/icons/ability_undaunted_003.dds', tooltip = T.Skill_Spawn_Broodlings }, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
     [77245] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_bite.dds' }, -- Bite (Trapping Webs - Spawn Broodlings Synergy)
     [39425] = { tooltip = T.Skill_Trapping_Webs }, -- Trapping Webs (Trapping Webs)
     [80079] = { duration = 0, tooltip = T.Skill_Trapping_Webs_Snare, groundLabel = true }, -- Trapping Webs (Trapping Webs)
     [108791] = { hide = true }, -- Synergy Damage Bonus (Shadow Silk - Black Widows Synergy)
     [41994] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Black Widows (Shadow Silk - Black Widows Synergy)
-    [41998] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', name = A.Skill_Black_Widows }, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
-    [41999] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', name = A.Skill_Black_Widows }, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
+    [41998] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', name = A.Skill_Black_Widows, tooltip = T.Skill_Spawn_Broodlings }, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
+    [41999] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', name = A.Skill_Black_Widows, tooltip = T.Skill_Spawn_Broodlings }, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
     [42000] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_undaunted_black_widow_poison.dds' }, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
-    [42007] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_black_widow_poison.dds' }, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
+    [42007] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_black_widow_poison.dds', tooltip = T.Generic_Poison_2_Sec }, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
     [41990] = { tooltip = T.Skill_Shadow_Silk}, -- Shadow Silk (Shadow Silk)
     [80108] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', duration = 0, tooltip = T.Skill_Trapping_Webs_Snare, groundLabel = true }, -- Shadow Silk (Shadow Silk)
     [80107] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Shadow Silk (Shadow Silk)
     [108792] = { hide = true }, -- Synergy Damage Bonus (Tangling Webs - Arachnophobia Synergy)
     [42016] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
-    [42023] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+    [42023] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds', tooltip = T.Generic_Fear }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+    [42020] = { tooltip = T.Skill_Spawn_Broodlings }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+    [42021] = { tooltip = T.Skill_Spawn_Broodlings }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
     [42012] = { tooltip = T.Skill_Tangling_Webs }, -- Tangling Webs (Tangling Webs)
     [80130] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds', duration = 0, tooltip = T.Skill_Trapping_Webs_Snare, groundLabel = true }, --  Tangling Webs (Tangling Webs)
     [80129] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, --  Tangling Webs (Tangling Webs)
 
     -- Inner Fire / Inner Rage / Inner Beast
     [108793] = { hide = true }, -- Synergy Damage Bonus (Inner Fire - Radiate Synergy)
+    [41838] = { tooltip = T.Skill_Radiate }, -- Radiate (Inner Fire - Radiate Synergy)
 
     -- Bone Shield / Spiked Bone Shield / Bone Surge
     [108794] = { hide = true }, -- Synergy Damage Bonus (Bone Shield - Bone Wall Synergy)
+    [39379] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Bone Wall (Bone Shield - Bone Wall Synergy)
     [108797] = { hide = true }, -- Synergy Damage Bonus (Bone Surge - Spinal Surge Synergy)
+    [42198] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Spinal Surge (Bone Surge - Spinal Surge Synergy)
+    [42197] = { tooltip = A.Skill_Spinal_Surge }, -- Major Vitality (Bone Surge - Spinal Surge Synergy)
     [39369] = { tooltip = T.Skill_Bone_Shield }, -- Bone Shield
     [42138] = { tooltip = T.Skill_Spiked_Bone_Shield }, -- Spiked Bone Shield
     [42176] = { tooltip = T.Skill_Bone_Surge }, -- Bone Surge
@@ -5899,22 +5905,48 @@ E.EffectOverride = {
     -- ASSAULT ACTIVES ---------------------------------------------
     ----------------------------------------------------------------
 
-    [101161] = { consolidate = true, tooltip = zo_strformat("<<C:1>>", A.Skill_Rapid_Manuever) }, -- Major Expedition (Rapid Maneuver)
-    [57472] = { consolidate = true, tooltip = zo_strformat("<<C:1>>", A.Skill_Rapid_Manuever) }, -- Major Gallop (Rapid Maneuver)
-    [101169] = { consolidate = true, tooltip = zo_strformat("<<C:1>>", A.Skill_Retreating_Manuever) }, -- Major Expedition (Retreating Maneuver)
-    [57477] = { consolidate = true, tooltip = zo_strformat("<<C:1>>", A.Skill_Retreating_Manuever) }, -- Major Gallop (Retreating Maneuver)
-    [101178] = { consolidate = true, tooltip = zo_strformat("<<C:1>>", A.Skill_Charging_Manuever) }, -- Major Expedition (Charging Maneuver)
-    [57481] = { consolidate = true, tooltip = zo_strformat("<<C:1>>", A.Skill_Charging_Manuever) }, -- Major Gallop (Charging Maneuver)
-    [64118] = { name = A.Skill_Caltrops, duration = 0 }, -- Hindered (Caltrops - All Morphs)
-    [40253] = { name = A.Skill_Razor_Caltrops }, -- Hindered (Razor Caltrops)
+    -- Rapid Manuever / Retreating Maneuver / Charging Maneuver
+    [38566] = { tooltip = T.Skill_Rapid_Maneuver }, -- Rapid Manuever (Rapid Maneuver)
+    [101161] = { consolidate = true, tooltip = A.Skill_Rapid_Manuever }, -- Major Expedition (Rapid Maneuver)
+    [57472] = { consolidate = true, tooltip = A.Skill_Rapid_Manuever }, -- Major Gallop (Rapid Maneuver)
+    [40211] = { tooltip = T.Skill_Rapid_Maneuver }, -- Retreating Maneuver (Retreating Maneuver)
+    [101169] = { consolidate = true, tooltip = A.Skill_Retreating_Manuever }, -- Major Expedition (Retreating Maneuver)
+    [57477] = { consolidate = true, tooltip = A.Skill_Retreating_Manuever }, -- Major Gallop (Retreating Maneuver)
+    [40215] = { tooltip = T.Skill_Charging_Maneuver }, -- Charging Maneuver (Charging Maneuver)
+    [101178] = { consolidate = true, tooltip = A.Skill_Charging_Manuever }, -- Major Expedition (Charging Maneuver)
+    [57481] = { consolidate = true, tooltip = A.Skill_Charging_Manuever }, -- Major Gallop (Charging Maneuver)
+    [40219] = { tooltip = A.Skill_Charging_Manuever }, -- Minor Expedition (Charging Maneuver)
+
+    -- Vigor / Echoing Vigor / Resolving Vigor
+    [61504] = { tooltip = T.Generic_HoT_1Sec }, -- Vigor (Vigor)
+    [61506] = { tooltip = T.Generic_HoT_1Sec }, -- Echoing Vigor (Echoing Vigor)
+    [61509] = { tooltip = T.Generic_HoT_1Sec }, -- Resolving Vigor (Resolving Vigor)
+    [61508] = { tooltip = T.Generic_HoT_1Sec }, -- Resolving Vigor (Resolving Vigor)
+
+    -- Caltrops / Anti-Cavalry Caltrops / Razor Caltrops
+    [38549] = { tooltip = T.Skill_Caltrops }, -- Caltrops (Caltrops)
+    [113769] = { tooltip = T.Skill_Caltrops_Debuff, groundLabel = true }, -- Caltrops (Caltrops)
+    [40265] = { tooltip = T.Skill_Anti_Cavalry_Caltrops }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+    [113770] = { tooltip = T.Skill_Anti_Cavalry_Caltrops_Debuff, groundLabel = true }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+    [40251] = { tooltip = T.Skill_Caltrops }, -- Caltrops (Razor Caltrops)
+    [113771] = { tooltip = T.Skill_Caltrops_Debuff, groundLabel = true }, -- Razor Caltrops (Razor Caltrops)
+    [40253] = { name = A.Skill_Razor_Caltrops, tooltip = T.Generic_Snare_70 }, -- Hindered (Razor Caltrops)
+
+    -- Magicka Detonation/ Inevitable Detonation / Proximity Detonation
+    [61487] = { tooltip = T.Skill_Magicka_Detonation }, -- Magicka Detonation (Magicka Detonation)
     [66482] = { hide = true }, -- Magicka Detonation (Magicka Detonation)
+    [61491] = { tooltip = T.Skill_Inevitable_Detonation }, -- Magicka Detonation (Inevitable Detonation)
     [66491] = { hide = true }, -- Magicka Detonation (Inevitable Detonation)
+    [61500] = { tooltip = T.Skill_Proximity_Detonation }, -- Magicka Detonation (Proximity Detonation)
     [66499] = { hide = true }, -- Magicka Detonation (Proximity Detonation)
-    [63523] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds', consolidate = true }, -- Minor Toughness (War Horn)
-    [63527] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds', consolidate = true }, -- Minor Toughness (Aggressive Horn)
-    [40222] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds', consolidate = true }, -- Minor Toughness (Sturdy Horn)
-    [63532] = { consolidate = true }, -- Minor Resolve (Sturdy Horn)
-    [63571] = { consolidate = true }, -- Minor Ward (Sturdy Horn)
+
+    -- War Horn
+    [38564] = { tooltip = T.Skill_War_Horn }, -- War Horn (War Horn)
+    [40224] = { tooltip = T.Skill_War_Horn }, -- Aggresive Horn (Aggresive Horn)
+    [40225] = { tooltip = A.Skill_Aggressive_Horn }, -- Major Force (Aggresive Horn)
+    [40221] = { tooltip = T.Skill_War_Horn }, -- Sturdy Horn (Sturdy Horn)
+    [63532] = { consolidate = true, tooltip = A.Skill_Sturdy_Horn }, -- Minor Resolve (Sturdy Horn)
+    [63571] = { consolidate = true, tooltip = A.Skill_Sturdy_Horn }, -- Minor Ward (Sturdy Horn)
 
     ----------------------------------------------------------------
     -- SUPPORT PASSIVES --------------------------------------------
@@ -5931,15 +5963,21 @@ E.EffectOverride = {
     -- SUPPORT ACTIVES ---------------------------------------------
     ----------------------------------------------------------------
 
-    [39844] = { duration = 0, forcedContainer = 'short' }, -- Siege Shield (Siege Shield)
-    [40231] = { duration = 0, forcedContainer = 'short' }, -- Siege Weapon Shield (Siege Weapon Shield)
-    [40227] = { duration = 0, forcedContainer = 'short' }, -- Propelling Shield (Siege Weapon Shield)
-    [40237] = { hideReduce = true }, -- Reviving Barrier (Reviving Barrier)
-    [40238] = { name = A.Skill_Reviving_Barrier }, -- Reviving Barrier Heal (Reviving Barrier)
-    [40240] = { icon = 'esoui/art/icons/ability_ava_006_a.dds' }, -- Replenishing Barrier (Replenishing Barrier)
-    [40241] = { icon = 'esoui/art/icons/ability_ava_006_a.dds' }, -- Replenishing Barrier (Replenishing Barrier)
-    [40233] = { name = A.Skill_Efficient_Purge }, -- Purge (Efficient Purge)
+    -- Siege Shield / Siege Weapon Shield / Propelling Shield
+    [38570] = { tooltip = T.Skill_Siege_Shield_Ground }, -- Siege Shield (Siege Shield)
+    [39844] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = T.Skill_Siege_Shield }, -- Siege Shield (Siege Shield)
+    [40229] = { tooltip = T.Skill_Siege_Weapon_Shield_Ground }, -- Siege Weapon Shield (Siege Weapon Shield)
+    [40231] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = T.Skill_Siege_Weapon_Shield }, -- Siege Weapon Shield (Siege Weapon Shield)
+    [40226] = { tooltip = T.Skill_Propelling_Shield_Ground }, -- Propelling Shield (Siege Weapon Shield)
+    [40227] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = T.Skill_Propelling_Shield }, -- Propelling Shield (Siege Weapon Shield)
+
+
+    -- Purge / Efficient Purge / Cleanse
+    [38571] = { tooltip = T.Skill_Purge }, -- Purge (Purge)
+    [40232] = { tooltip = T.Skill_Purge }, -- Purge (Efficient Purge)
+    [40234] = { tooltip = T.Skill_Purge } , -- Cleanse (Cleanse)
     [40235] = { hide = true }, -- Cleanse (Cleanse)
+
     [61511] = { duration = 0, forcedContainer = 'short' }, -- Guard (Guard)
     [80923] = { duration = 0 }, -- Guard (Guard)
     [61536] = { duration = 0, forcedContainer = 'short' }, -- Mystic Guard (Mystic Guard)
@@ -5954,6 +5992,11 @@ E.EffectOverride = {
     [80981] = { icon = 'esoui/art/icons/ability_ava_stalwart_guard.dds' }, -- Stalwart Guard (Stalwart Guard)
     [61528] = { name = A.Skill_Scorching_Flare }, -- Scorching Flare Reveal (Scorching Flare)
     [61552] = { hideReduce = true }, -- Scorching Flare (Scorching Flare)
+
+    [40237] = { hideReduce = true }, -- Reviving Barrier (Reviving Barrier)
+    [40238] = { name = A.Skill_Reviving_Barrier }, -- Reviving Barrier Heal (Reviving Barrier)
+    [40240] = { icon = 'esoui/art/icons/ability_ava_006_a.dds' }, -- Replenishing Barrier (Replenishing Barrier)
+    [40241] = { icon = 'esoui/art/icons/ability_ava_006_a.dds' }, -- Replenishing Barrier (Replenishing Barrier)
 
     ----------------------------------------------------------------
     -- PLAYER PASSIVES RACIAL --------------------------------------
