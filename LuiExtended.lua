@@ -650,6 +650,60 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         [ACTION_TYPE_NOTHING]       = SetupEmptyActionSlot,
     }
 
+    -- Hook to make Activation Highlight play indefinitely
+    ActionButton.UpdateActivationHighlight = function(self)
+        local slotnum = self:GetSlot()
+        local slotType = GetSlotType(slotnum)
+        local slotIsEmpty = (slotType == ACTION_TYPE_NOTHING)
+
+        local showHighlight = not slotIsEmpty and HasActivationHighlight(slotnum) and not self.useFailure and not self.showingCooldown
+        local isShowingHighlight = self.activationHighlight:IsHidden() == false
+
+        if showHighlight ~= isShowingHighlight then
+            self.activationHighlight:SetHidden(not showHighlight)
+
+            if showHighlight then
+                local _, _, activationAnimation = GetSlotTexture(slotnum)
+                self.activationHighlight:SetTexture(activationAnimation)
+
+                self.activationHighlight.animation = self.activationHighlight.animation or CreateSimpleAnimation(ANIMATION_TEXTURE, self.activationHighlight)
+                local anim = self.activationHighlight.animation
+
+                anim:SetImageData(64, 1)
+                anim:SetFramerate(30)
+                anim:GetTimeline():SetPlaybackType(ANIMATION_PLAYBACK_LOOP, LOOP_INDEFINITELY) -- Set Playback to loop indefinitely, not sure why this isn't the default behavior
+                anim:GetTimeline():PlayFromStart()
+            else
+                local anim = self.activationHighlight.animation
+                if anim then
+                    anim:GetTimeline():Stop()
+                end
+            end
+        end
+    end
+
+    -- Hook to add AVA Guard Ability + Morphs into Toggle Highlights
+    ActionButton.UpdateState = function(self)
+        local slotnum = self:GetSlot()
+        local slotType = GetSlotType(slotnum)
+        local slotIsEmpty = (slotType == ACTION_TYPE_NOTHING)
+        local abilityId = GetSlotBoundId(slotnum) -- Check AbilityId for if this should be a fake activation highlight
+
+        self.button.actionId = GetSlotBoundId(slotnum)
+
+        self:UpdateUseFailure()
+
+        local hidden = true
+        if IsSlotToggled(slotnum) == true or LUIE.Effects.IsAbilityActiveHighlight[abilityId] == true then
+            hidden = false
+        end
+
+        self.status:SetHidden(hidden)
+
+        self:UpdateActivationHighlight()
+        self:UpdateCooldown(FORCE_SUPPRESS_COOLDOWN_SOUND)
+    end
+
 	-- Hook campaign screen to fix icons
 	local function GetHomeKeepBonusString(campaignId)
 		local allHomeKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))

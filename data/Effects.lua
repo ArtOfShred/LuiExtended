@@ -1816,6 +1816,7 @@ E.BarHighlightOverride = {
     [61489] = { newId = 61496 }, -- Revealing Flare
     [61519] = { newId = 61522 }, -- Lingering Flare --> Nova
     [61524] = { newId = 61528 }, -- Scorching Flare
+    [40237] = { newId = 40238 }, -- Reviving Barrier --> Reviving Barrier Heal
 
 }
 
@@ -2032,6 +2033,23 @@ E.BarIdOverride = {
     -- Sorcerer
     [108840] = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds', -- Summon Unstable Familiar (Summon Unstable Familiar)
     [108845] = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds', -- Winged Twilight Restore (Summon Winged Twilight)
+
+    -- Support
+    [78338] = 'esoui/art/icons/ability_ava_guard.dds', -- Guard (Guard)
+    [81415] = 'esoui/art/icons/ability_ava_mystic_guard.dds', -- Mystic Guard (Mystic Guard)
+    [81420] = 'esoui/art/icons/ability_ava_stalwart_guard.dds', -- Stalwart Guard (Stalwart Guard)
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- When a bar ability proc with a matching id appears, display the toggle highlight
+--------------------------------------------------------------------------------------------------------------------------------
+E.IsAbilityActiveHighlight = {
+
+    -- Support
+    [78338] = true, -- Guard (Guard)
+    [81415] = true, -- Mystic Guard (Mystic Guard)
+    [81420] = true, -- Stalwart Guard (Stalwart Guard)
 
 }
 
@@ -5891,9 +5909,9 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     [39248] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_continuous_attack.dds' }, -- Continuous Attack (Continuous Attack - Rank 1)
-    [39249] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_continuous_attack.dds' }, -- Continuous Attack (Continuous Attack - Rank 1)
+    [39249] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_continuous_attack.dds', tooltip = T.Skill_Continuous_Attack_Rank_1 }, -- Continuous Attack (Continuous Attack - Rank 1)
     [45614] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_continuous_attack.dds' }, -- Continuous Attack (Continuous Attack - Rank 2)
-    [45617] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_continuous_attack.dds' }, -- Continuous Attack (Continuous Attack - Rank 2)
+    [45617] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_continuous_attack.dds', tooltip = T.Skill_Continuous_Attack_Rank_2 }, -- Continuous Attack (Continuous Attack - Rank 2)
     [39254] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_reach.dds' }, -- Reach
     [45621] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_reach.dds' }, -- Reach
     [39252] = { icon = 'LuiExtended/media/icons/abilities/passive_ava_combat_frenzy.dds' }, -- Combat Frenzy (Combat Frenzy - Rank 1)
@@ -5978,23 +5996,32 @@ E.EffectOverride = {
     [40234] = { tooltip = T.Skill_Purge } , -- Cleanse (Cleanse)
     [40235] = { hide = true }, -- Cleanse (Cleanse)
 
-    [61511] = { duration = 0, forcedContainer = 'short' }, -- Guard (Guard)
-    [80923] = { duration = 0 }, -- Guard (Guard)
-    [61536] = { duration = 0, forcedContainer = 'short' }, -- Mystic Guard (Mystic Guard)
-    [80947] = { duration = 0 }, -- Mystic Guard (Mystic Guard)
-    [80953] = { duration = 0, forcedContainer = 'short', consolidate = true }, -- Minor Vitality (Mystic Guard)
-    [64080] = { duration = 0, consolidate = true }, -- Minor Vitality (Mystic Guard)
+    -- Guard / Mystic Guard / Stalwart Guard
+    [61511] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Guard_Other }, -- Guard (Guard)
+    [80923] = { duration = 0, tooltip = T.Skill_Guard_Self }, -- Guard (Guard)
+    [61536] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Guard_Other }, -- Mystic Guard (Mystic Guard)
+    [80947] = { duration = 0, tooltip = T.Skill_Guard_Self }, -- Mystic Guard (Mystic Guard)
+    [80953] = { duration = 0, forcedContainer = 'short', consolidate = true, tooltip = A.Skill_Mystic_Guard }, -- Minor Vitality (Mystic Guard)
+    [64080] = { duration = 0, consolidate = true, tooltip = A.Skill_Mystic_Guard }, -- Minor Vitality (Mystic Guard)
     [80945] = { icon = 'esoui/art/icons/ability_ava_mystic_guard.dds' }, -- Mystic Guard (Mystic Guard)
-    [61529] = { duration = 0, forcedContainer = 'short' }, -- Stalwart Guard (Stalwart Guard)
-    [80983] = { duration = 0 }, -- Stalwart Guard (Stalwart Guard)
-    [80984] = { duration = 0, forcedContainer = 'short', consolidate = true }, -- Minor Force (Stalwart Guard)
-    [80986] = { duration = 0, consolidate = true }, -- Minor Force (Stalwart Guard)
+    [61529] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Guard_Other }, -- Stalwart Guard (Stalwart Guard)
+    [80983] = { duration = 0, tooltip = T.Skill_Guard_Self }, -- Stalwart Guard (Stalwart Guard)
+    [80984] = { duration = 0, forcedContainer = 'short', consolidate = true, tooltip = A.Skill_Stalwart_Guard }, -- Minor Force (Stalwart Guard)
+    [80986] = { duration = 0, consolidate = true, tooltip = A.Skill_Stalwart_Guard }, -- Minor Force (Stalwart Guard)
     [80981] = { icon = 'esoui/art/icons/ability_ava_stalwart_guard.dds' }, -- Stalwart Guard (Stalwart Guard)
-    [61528] = { name = A.Skill_Scorching_Flare }, -- Scorching Flare Reveal (Scorching Flare)
-    [61552] = { hideReduce = true }, -- Scorching Flare (Scorching Flare)
 
-    [40237] = { hideReduce = true }, -- Reviving Barrier (Reviving Barrier)
-    [40238] = { name = A.Skill_Reviving_Barrier }, -- Reviving Barrier Heal (Reviving Barrier)
+    -- Revealing Flare / Lingering Flare / Scorching Flare
+    [61496] = { tooltip = T.Skill_Revealing_Flare }, -- Revealing Flare (Revealing Flare)
+    [61522] = { tooltip = T.Skill_Lingering_Flare }, -- Nova (Lingering Flare)
+    [61521] = { tooltip = T.Skill_Revealing_Flare }, -- Lingering Flare (Lingering Flare)
+    [61528] = { name = A.Skill_Scorching_Flare, tooltip = T.Skill_Scorching_Flare }, -- Scorching Flare Reveal (Scorching Flare)
+    [61552] = { hideReduce = true, tooltip = T.Skill_Scorching_Flare }, -- Scorching Flare (Scorching Flare)
+
+    -- Barrier / Reviving Barrier / Replenishing Barrier
+    [38573] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Barrier (Barrier)
+    [40237] = { hideReduce = true, tooltip = T.Skill_Reviving_Barrier }, -- Reviving Barrier (Reviving Barrier)
+    [40238] = { name = A.Skill_Reviving_Barrier, tooltip = T.Skill_Reviving_Barrier }, -- Reviving Barrier Heal (Reviving Barrier)
+    [40239] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Replenishing Barrier (Replenishing Barrier)
     [40240] = { icon = 'esoui/art/icons/ability_ava_006_a.dds' }, -- Replenishing Barrier (Replenishing Barrier)
     [40241] = { icon = 'esoui/art/icons/ability_ava_006_a.dds' }, -- Replenishing Barrier (Replenishing Barrier)
 
