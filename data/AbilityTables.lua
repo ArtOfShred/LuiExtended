@@ -806,6 +806,8 @@ A.Skill_Aggressive_Horn             = 40223
 A.Skill_Sturdy_Horn                 = 40220
 
 -- Support
+A.Skill_Mystic_Guard                = 61536
+A.Skill_Stalwart_Guard              = 61529
 A.Skill_Lingering_Flare             = 61519
 A.Skill_Scorching_Flare             = 61524
 A.Skill_Reviving_Barrier            = 40237

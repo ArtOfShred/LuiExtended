@@ -768,6 +768,8 @@ T.Skill_Bone_Surge                      = GetString(SI_LUIE_SKILL_BONE_SURGE_TP)
 ----------------------------------------------------------------
 
 -- Assault
+T.Skill_Continuous_Attack_Rank_1        = GetString(SI_LUIE_SKILL_CONTINUOUS_ATTACK_RANK_1_TP)
+T.Skill_Continuous_Attack_Rank_2        = GetString(SI_LUIE_SKILL_CONTINUOUS_ATTACK_RANK_2_TP)
 T.Skill_Rapid_Maneuver                  = GetString(SI_LUIE_SKILL_RAPID_MANEUVER_TP)
 T.Skill_Charging_Maneuver               = GetString(SI_LUIE_SKILL_CHARGING_MANEUVER_TP)
 T.Skill_Caltrops                        = GetString(SI_LUIE_SKILL_CALTROPS_TP)
@@ -787,6 +789,12 @@ T.Skill_Siege_Weapon_Shield_Ground      = GetString(SI_LUIE_SKILL_SIEGE_WEAPON_S
 T.Skill_Propelling_Shield               = GetString(SI_LUIE_SKILL_PROPELLING_SHIELD_TP)
 T.Skill_Propelling_Shield_Ground        = GetString(SI_LUIE_SKILL_PROPELLING_SHIELD_GROUND_TP)
 T.Skill_Purge                           = GetString(SI_LUIE_SKILL_PURGE_TP)
+T.Skill_Guard_Self                      = GetString(SI_LUIE_SKILL_GUARD_SELF_TP)
+T.Skill_Guard_Other                     = GetString(SI_LUIE_SKILL_GUARD_OTHER_TP)
+T.Skill_Revealing_Flare                 = GetString(SI_LUIE_SKILL_REVEALING_FLARE_TP)
+T.Skill_Lingering_Flare                 = GetString(SI_LUIE_SKILL_LINGERING_FLARE_TP)
+T.Skill_Scorching_Flare                 = GetString(SI_LUIE_SKILL_SCORCHING_FLARE_TP)
+T.Skill_Reviving_Barrier                = GetString(SI_LUIE_SKILL_REVIVING_BARRIER_TP)
 
 ----------------------------------------------------------------
 -- QUESTS ------------------------------------------------------

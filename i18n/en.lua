@@ -2090,11 +2090,11 @@ local strings = {
 	-- SKILL NAMES AND TOOLTIPS
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	
+
 	----------------------------------------------------------------
     -- INNATE SKILLS -----------------------------------------------
-    ----------------------------------------------------------------	
-	
+    ----------------------------------------------------------------
+
 	-- Mundus Stones
 	SI_LUIE_SKILL_MUNDUS_BASIC_LADY =                    "Increases your Spell and Physical Resistance by |cFFFFFF2752|r.",
     SI_LUIE_SKILL_MUNDUS_BASIC_LOVER =                   "Increases your Spell and Physical Penetration by |cFFFFFF2752|r.",
@@ -2109,7 +2109,7 @@ local strings = {
     SI_LUIE_SKILL_MUNDUS_BASIC_WARRIOR =                 "Increases your Weapon Damage by |cFFFFFF238|r.",
     SI_LUIE_SKILL_MUNDUS_BASIC_APPRENTICE =              "Increases your Spell Damage by |cFFFFFF238|r.",
     SI_LUIE_SKILL_MUNDUS_BASIC_STEED =                   "Increases your Movement Speed by |cFFFFFF10|r% and Health Recovery by |cFFFFFF238|r.",
-	
+
 	-- Player Innate
 	SI_LUIE_SKILL_RECALL_PENALTY =                       "Recall Penalty",
     SI_LUIE_SKILL_MOUNTED =                              "Mounted",
@@ -2140,8 +2140,8 @@ local strings = {
 
 	----------------------------------------------------------------
     -- ITEM / CONSUMABLE TOOLTIPS ----------------------------------
-    ----------------------------------------------------------------		
-	
+    ----------------------------------------------------------------
+
 	-- Glyphs
 	SI_LUIE_SKILL_GLYPH_CRUSHING =                       "Crushing Enchantment",
     SI_LUIE_SKILL_GLYPH_DECREASE_HEALTH =                "Decrease Health",
@@ -2152,7 +2152,7 @@ local strings = {
     SI_LUIE_SKILL_GLYPH_HARDENING_TP =                   "Grants a Damage Shield for |cFFFFFF7|r seconds.",
     SI_LUIE_SKILL_GLYPH_WEAKENING_TP =                   "Reduce target Weapon Damage and Spell Damage for |cFFFFFF5|r seconds.",
     SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE_TP =               "Increase your Weapon Damage and Spell Damage for |cFFFFFF5|r seconds.",
-	
+
 	-- Crafting Station Creation
     SI_LUIE_SKILL_CRAFTING_STATION_JEWELRY =             "Attune Jewelry Crafting Station",
     SI_LUIE_SKILL_CRAFTING_STATION_BLACKSMITH =          "Attune Blacksmithing Station",
@@ -2176,7 +2176,7 @@ local strings = {
     SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP =              "Increase Experience Points earned by |cffffff<<1>>|r% for |cffffff30|r minutes.",
     SI_LUIE_SKILL_EXPERIENCE_HOUR_TP =                   "Increase Experience Points earned by |cffffff<<1>>|r% for |cffffff<<2>>|r <<2[hour/hours]>>.",
     SI_LUIE_SKILL_EXPERIENCE_PELINAL =                   "Increase Alliance Points earned by |cffffff100|r% and Experience Points earned from player kills by |cffffff100|r% for |cffffff<<1>>|r <<1[hour/hours]>>.",
-	
+
 	-- Misc
     SI_LUIE_SKILL_FILLET_FISH =                          "Fillet Fish",
     SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT =             "Counterfeit Pardon Edict",
@@ -2186,7 +2186,7 @@ local strings = {
 	----------------------------------------------------------------
     -- EVENT TOOLTIPS ----------------------------------------------
     ----------------------------------------------------------------
-	
+
     SI_LUIE_SKILL_EVENT_FREEZING =                      "You are freezing and your movement speed is reduced. Find a bonfire to warm up.",
     SI_LUIE_SKILL_EVENT_WARM =                          "You are huddled around a nearby bonfire for warmth. Decreases the duration of Freezing by |cffffff10|r seconds every |cffffff1|r second.",
     SI_LUIE_SKILL_EVENT_FESTIVAL_GROG =                  "You're feeling a bit... disoriented.",
@@ -2195,7 +2195,7 @@ local strings = {
 	----------------------------------------------------------------
     -- MAJOR / MINOR EFFECTS ---------------------------------------
     ----------------------------------------------------------------
-	
+
 	-- Major / Minor Buffs
     SI_LUIE_SKILL_MINOR_RESOLVE_TP =                     "Increase Physical Resistance by |cffffff1320|r.",
     SI_LUIE_SKILL_MAJOR_RESOLVE_TP =                     "Increase Physical Resistance by |cffffff5280|r.",
@@ -2265,7 +2265,7 @@ local strings = {
 	----------------------------------------------------------------
     -- CHAMPION POINT SKILLS ---------------------------------------
     ----------------------------------------------------------------
-	
+
 	SI_LUIE_SKILL_PHASE_TP =							 "Increase Physical and Spell Resistance by |cFFFFFF660|r for |cFFFFFF3|r seconds.",
 	SI_LUIE_SKILL_UNCHAINED_TP = 						 "Reduce the cost of your next Stamina ability used within |cFFFFFF5|r seconds by |cFFFFFF80|r%.",
 	SI_LUIE_SKILL_FORESIGHT_TP = 						 "Reduce the cost of your next Magicka ability used within |cFFFFFF7|r seconds by |cFFFFFF80|r%.",
@@ -2278,10 +2278,10 @@ local strings = {
 	----------------------------------------------------------------
     -- GENERIC / SHARED TOOLTIPS -----------------------------------
     ----------------------------------------------------------------
-	
+
 	-- Test Effect
 	SI_LUIE_SKILL_TEST_TP =                              "This is a test effect.",
-	
+
 	-- Damage over Time
     SI_LUIE_SKILL_GENERIC_BLEED_TP =                     "Afflicted with Bleeding Damage over time for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_BLEED_2_SEC_TP =               "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
@@ -2371,7 +2371,7 @@ local strings = {
 	----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------
     ----------------------------------------------------------------
-	
+
     -- Dragonknight Skills
     SI_LUIE_SKILL_BURNING_EMBERS_TP =                    "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nHeals the Dragonknight for |cffffff75|r% of the total damage inflicted when the effect ends.",
     SI_LUIE_SKILL_ENGULFING_FLAMES_TP =                  "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nIncrease damage taken from Fire Damage attacks by |cffffff10|r%.",
@@ -2531,7 +2531,7 @@ local strings = {
 	-- Shared
     SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND =              "Heavy Attack (Main Hand)",
     SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND =               "Heavy Attack (Off Hand)",
-	
+
     -- Two-Handed
     SI_LUIE_SKILL_FOLLOW_UP_TP =                         "Your next direct damage attack used within |cFFFFFF7|r seconds deals |cFFFFFF<<1>>|r% additional damage.",
     SI_LUIE_SKILL_BATTLE_RUSH_TP =                       "Increase Stamina Recovery by |cFFFFFF<<1>>|r% for |cFFFFFF10|r seconds.",
@@ -2598,7 +2598,7 @@ local strings = {
 	----------------------------------------------------------------
     -- ARMOR SKILLS ------------------------------------------------
     ----------------------------------------------------------------
-	
+
 	-- Light Armor
     SI_LUIE_SKILL_HARNESS_MAGICKA =                      "Absorbing damage for |cFFFFFF<<1>>|r seconds. While active, up to three times when spell damage is absorbed, you restore Magicka.",
 
@@ -2636,7 +2636,7 @@ local strings = {
     SI_LUIE_SKILL_BALEFUL_MIST_TP =                      "Reduce damage taken by |cFFFFFF75|r% and nearby enemies take Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds.\n\nImmune to all disabling and immobilization effects while active, but cannot be healed and Magicka Recovery is disabled.",
     SI_LUIE_SKILL_BAT_SWARM_TP =                         "Nearby enemies take Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_DEVOURING_SWARM_TP =                   "Nearby enemies take Magic Damage every |cFFFFFF1|r seconds for |cFFFFFF<<1>>|r seconds. The bats heal you for each enemy they damage.",
-	
+
     ----------------------------------------------------------------
     -- GUILD SKILLS ------------------------------------------------
     ----------------------------------------------------------------
@@ -2695,8 +2695,10 @@ local strings = {
 	----------------------------------------------------------------
     -- AVA SKILLS --------------------------------------------------
     ----------------------------------------------------------------
-	
+
     -- Assault
+    SI_LUIE_SKILL_CONTINUOUS_ATTACK_RANK_1_TP =          "Increase Weapon and Spell Damage by |cFFFFFF5|r% and Magicka and Stamina Recovery by |cFFFFFF10|r% for |cFFFFFF10|r minutes.",
+    SI_LUIE_SKILL_CONTINUOUS_ATTACK_RANK_2_TP =          "Increase Weapon and Spell Damage by |cFFFFFF10|r% and Magicka and Stamina Recovery by |cFFFFFF20|r% for |cFFFFFF10|r minutes.",
     SI_LUIE_SKILL_RAPID_MANEUVER_TP =                    "Immune to snare and immobilization effects for |cFFFFFF<<1>>|r seconds.\n\nThe effect ends if you cast any spell on an enemy or ally.",
     SI_LUIE_SKILL_CHARGING_MANEUVER_TP =                 "Immune to snare and immobilization effects for |cFFFFFF<<1>>|r seconds.\n\nThe effect ends if you cast any spell on an enemy or ally, but you gain Minor Expedition for |cFFFFFF8|r seconds.",
     SI_LUIE_SKILL_CALTROPS_TP =                          "Enemies standing in the caltrops take Physical Damage every |cFFFFFF1|r second and have their Movement Speed reduced by |cFFFFFF30|r%.",
@@ -2716,11 +2718,17 @@ local strings = {
     SI_LUIE_SKILL_PROPELLING_SHIELD_TP =                 "Reduce damage taken from siege weapons by |cFFFFFF50|r% while standing in the bubble.\n\nIncrease the range of abilities with a range greater than |cFFFFFF20|r meters by |cFFFFFF7|r meters. Does not effect Leap, Move Position, and Pull abilities.",
     SI_LUIE_SKILL_PROPELLING_SHIELD_GROUND_TP =          "A protective sphere guards you and your allies, reducing damage taken from siege weapons while in the bubble by |cFFFFFF50|r%.\n\nIncrease the range of you and your allies' abilities with a range greater than |cFFFFFF20|r meters by |cFFFFFF7|r meters in the bubble. Does not effect Leap, Move Position, and Pull abilities.",
     SI_LUIE_SKILL_PURGE_TP =                             "Reduce the duration of new negative effects applied on you by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GUARD_SELF_TP =                        "While the lifebond holds, |cFFFFFF30|r% of the damage your ally takes is redistributed to you.",
+    SI_LUIE_SKILL_GUARD_OTHER_TP =                       "While the lifebond holds, |cFFFFFF30|r% of the damage you take is redistributed to your ally.",
+    SI_LUIE_SKILL_REVEALING_FLARE_TP =                   "Revealed for |cFFFFFF<<1>>|r seconds. You are unable to stealth.\n\nSnared for |cFFFFFF<<1>>|r seconds.Your Movement Speed has been reduced by |cFFFFFF50|r%.",
+    SI_LUIE_SKILL_LINGERING_FLARE_TP =                   "Enemies in the target area are revealed and have their Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_SCORCHING_FLARE_TP =                   "Revealed for |cFFFFFF<<1>>|r seconds. You are unable to stealth.\n\nAfflicted with Flame Damage every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds.\n\nSnared for |cFFFFFF<<1>>|r seconds.Your Movement Speed has been reduced by |cFFFFFF50|r%.",
+    SI_LUIE_SKILL_REVIVING_BARRIER_TP =                  "Absorbing damage for |cFFFFFF30|r seconds.\n\nHealing every |cFFFFFF1.5|r seconds for |cFFFFFF30|r seconds.",
 
 	----------------------------------------------------------------
     -- SETS --------------------------------------------------------
     ----------------------------------------------------------------
-	
+
 	-- Set Names
     SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME =            "Bogdan the Nightflame",
     SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK =                 "Lord Warden Dusk",
@@ -2854,8 +2862,8 @@ local strings = {
 
 	----------------------------------------------------------------
     -- NPC ABILITY / QUEST TOOLTIPS --------------------------------
-    ----------------------------------------------------------------	
-	
+    ----------------------------------------------------------------
+
     SI_LUIE_SKILL_ANCHOR_DROP =                          "Anchor Drop",
 	SI_LUIE_SKILL_SHIELD_RUSH =                          "Shield Rush",
     SI_LUIE_SKILL_BLITZ =                                "Blitz",
