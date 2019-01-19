@@ -870,6 +870,73 @@ E.IsCast = {
     [4197] = true, -- Recovering (NPC Duel)
 
     ----------------------------------------------------------------
+    -- CYRODIIL ----------------------------------------------------
+    ----------------------------------------------------------------
+
+    [12256] = true, -- Pack Siege (Siege Weapons)
+
+    [29673] = true, -- Create Ballista Bolt... (Ballista)
+    [29672] = true, -- Create Ballista Bolt... (Ballista)
+    [29671] = true, -- Create Ballista Bolt... (Ballista)
+
+    [30611] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
+    [30607] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
+    [16751] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
+
+    [30612] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+    [30608] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+    [16752] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+
+    [39914] = true, -- Create Trebuchet... (Stone Trebuchet)
+    [39917] = true, -- Create Trebuchet... (Stone Trebuchet)
+    [39910] = true, -- Create Trebuchet... (Stone Trebuchet)
+
+    [39913] = true, -- Create Trebuchet... (Iceball Trebuchet)
+    [39916] = true, -- Create Trebuchet... (Iceball Trebuchet)
+    [39909] = true, -- Create Trebuchet... (Iceball Trebuchet)
+
+    [13665] = true, -- Create Trebuchet... (Firepot Trebuchet)
+    [13664] = true, -- Create Trebuchet... (Firepot Trebuchet)
+    [13663] = true, -- Create Trebuchet... (Firepot Trebuchet)
+
+    [30613] = true, -- Create Catapult Meatbag (Meatbag Catapult)
+    [30609] = true, -- Create Catapult Meatbag (Meatbag Catapult)
+    [16755] = true, -- Create Catapult Meatbag (Meatbag Catapult)
+
+    [30614] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+    [30610] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+    [16754] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+
+    [39915] = true, -- Create Catapult Meatbag (Scattershot Catapult)
+    [39918] = true, -- Create Catapult Oil Jar... (Scattershot Catapult)
+    [39911] = true, -- Create Trebuchet... (Scattershot Catapult)
+
+    [66438] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+    [66439] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+
+    [66434] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+    [66388] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+
+    [66437] = true, -- Create Ballista... (Cold Fire Ballista)
+    [66436] = true, -- Create Ballista... (Cold Fire Ballista)
+
+    [22570] = true, -- Create Boiling Oil... (Flaming Oil)
+    [15876] = true, -- Create Large Ram... (Battering Ram)
+    [16171] = true, -- Create Large Ram... (Battering Ram)
+    [16170] = true, -- Create Large Ram... (Battering Ram)
+
+    [13853] = true, -- Wall Repair Kit
+    [16723] = true, -- Door Repair Kit
+    [13601] = true, -- Advanced Siege Repair Kit
+    [112975] = true, -- Wall Repair Kit (Bridge and Milegate Repair Kit)
+
+    [19039] = true, -- Ebonheart Forward Camp
+    [19040] = true, -- Aldmeri Forward Camp
+    [19041] = true, -- Daggerfall Forward Camp
+
+    -- [12355] = true, -- Destroy Siege Weapon (Doesn't show up due to Cyrodiil Limitations)
+
+    ----------------------------------------------------------------
     -- QUEST ABILITIES ---------------------------------------------
     ----------------------------------------------------------------
 
@@ -1005,6 +1072,10 @@ E.CastBreakOnRemoveEvent = {
 --------------------------------------------------------------------------------------------------------------------------------
 E.CastChannelConvert = {
 
+    -- Cyrodiil
+    [12256] = true, -- Pack Siege (Siege Weapons)
+
+    -- Memementos
     [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
     [92862] = true, -- Ringing Bell (Dreamer's Chime)
 
@@ -1024,6 +1095,11 @@ E.EffectGroundDisplay = {
         --stackRemove = # -- How many stacks to remove when this effect ends (used for Ground Mines)
         --stackReset = # -- Maximum stack counter (used for Ground Mines)
         --noRemove = true -- Do not end this aura on EFFECT_RESULT_FADED
+
+    -- Cyrodiil
+    [88714] = { icon = 'esoui/art/icons/ava_siege_ammo_003.dds', name = A.Skill_Meatbag_Catapult, buff = false, debuff = false, ground = true }, -- Meatbag (Meatbag Catapult)
+    [104700] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_oil.dds', name = A.Skill_Oil_Catapult, buff = false, debuff = false, ground = true }, -- Twisting Path (Oil Catapult)
+    [104690] = { icon = 'esoui/art/icons/ava_siege_ammo_005.dds', name = A.Skill_Scattershot_Catapult, buff = false, debuff = false, ground = true }, -- Twisting Path (Scattershot Catapult)
 
     -- Monster Sets
     [59590] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = A.Set_Bogdan_the_Nightflame, buff = true, debuff = false, ground = false }, -- Imperial Prison Item Set (Bogdan the Nightflame)
@@ -1957,9 +2033,13 @@ E.AddNameAura = {
     ['Dread Xivkyn Cauterizer'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Dread Xivkyn Dreadweaver'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Dread Xivkyn Voidstalker'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
+    ['Dread Xivkyn Chillfiend'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
+    ['Dread Xivkyn Banelord'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Vika'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Dylora'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Jansa'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
+    ['Medrike'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
+    ['Anaxes'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     -- NPC's
     ['Flame Atronach'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_radiance.dds', name = A.Skill_Radiance } },
     ['Frost Atronach'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', name = A.Skill_Chilling_Aura } },
@@ -2454,6 +2534,9 @@ E.EffectHideSCT = {
     [113769] = true, -- Caltrops (Caltrops)
     [113770] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [113771] = true, -- Razor Caltrops (Razor Caltrops)
+
+    -- Cyrodiil
+    [12355] = true, -- Destroy Siege Weapon
 
     -- Human NPC
     [10648] = true, -- Throw Oil (Synergy)
@@ -3921,6 +4004,10 @@ E.EffectOverride = {
     [95813] = { type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1 }, -- Static Charge
     [46291] = { hide = true }, -- Rain of Doom
     [46293] = { hide = true }, -- Stun
+
+    -- Daedric Anchor Bosses
+    [89249] = { hide = true }, -- Summon Daedra (Ozozzachar)
+    [89251] = { hide = true }, -- Summon Daedra (Ozozzachar)
 
     -- Misc World + Theater
     [822] = { hide = true }, -- Ward
@@ -7815,6 +7902,120 @@ E.EffectOverride = {
     [8657] = { hide = true }, -- Heavily Armored Guards
     [8658] = { hide = true }, -- Eagle Eye Guards
     [25873] = { hide = true }, -- heal
+
+    -- ABCDE
+
+    -- Siege Weapons
+
+    [12256] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_pack_siege.dds', name = A.Skill_Stow_Siege_Weapon }, -- Pack Siege (Generic Siege)
+
+    [29673] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
+    [29672] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
+    [29671] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
+    [7468] = { icon = 'esoui/art/icons/ava_siege_ammo_006.dds' }, -- Ballista Bolt (Ballista)
+    [7469] = { icon = 'esoui/art/icons/ava_siege_ammo_006.dds' }, -- Ballista Bolt (Ballista)
+    [13043] = { icon = 'esoui/art/icons/ava_siege_ammo_006.dds' }, -- Ballista Bolt (Ballista)
+
+    [30611] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
+    [30607] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
+    [16751] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
+    [16775] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_fire_ballista_bolt.dds' }, -- Fire Ballista Bolt (Fire Ballista)
+    [28480] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_fire_ballista_bolt.dds', tooltip = T.Generic_Burn_2_Sec }, -- Fire Ballista Bolt (Fire Ballista)
+    [14367] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_fire_ballista_bolt.dds' }, -- Fire Ballista Bolt (Fire Ballista)
+
+    [30612] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Lightning_Ballista) }, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+    [30608] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Lightning_Ballista) }, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+    [16752] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Lightning_Ballista) }, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+    [14363] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_lightning_ballista_bolt.dds' }, -- Lightning Ballista Bolt (Lightning Ballista)
+    [14364] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_lightning_ballista_bolt.dds', tooltip = T.Skill_Lightning_Ballista_Bolt }, -- Lightning Ballista Bolt (Lightning Ballista)
+    [16776] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_lightning_ballista_bolt.dds' }, -- Lightning Ballista Bolt (Lightning Ballista)
+    [76103] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_lightning_ballista_bolt.dds', name = A.Skill_Lightning_Ballista_Bolt }, -- Magicka Hit (Lightning Ballista)
+    [30454] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_lightning_ballista_bolt.dds' }, -- Lightning Ballista Bolt (Lightning Ballista)
+
+    [39914] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Stone_Trebuchet) }, -- Create Trebuchet... (Stone Trebuchet)
+    [39917] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Stone_Trebuchet) }, -- Create Trebuchet... (Stone Trebuchet)
+    [39910] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Stone_Trebuchet) }, -- Create Trebuchet... (Stone Trebuchet)
+
+    [39913] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Iceball_Trebuchet) }, -- Create Trebuchet... (Iceball Trebuchet)
+    [39916] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Iceball_Trebuchet) }, -- Create Trebuchet... (Iceball Trebuchet)
+    [39909] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Iceball_Trebuchet) }, -- Create Trebuchet... (Iceball Trebuchet)
+    [13551] = { icon = 'esoui/art/icons/ava_siege_ammo_002.dds' }, -- Iceball Trebuchet (Iceball Trebuchet)
+    [64105] = { icon = 'esoui/art/icons/ava_siege_ammo_002.dds' }, -- Iceball Trebuchet (Iceball Trebuchet)
+    [13588] = { icon = 'esoui/art/icons/ava_siege_ammo_002.dds', tooltip = T.Generic_Snare_50 }, -- Iceball Trebuchet (Iceball Trebuchet)
+    [13552] = { icon = 'esoui/art/icons/ava_siege_ammo_002.dds' }, -- Iceball Trebuchet (Iceball Trebuchet)
+
+    [13665] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Firepot_Trebuchet) }, -- Create Trebuchet... (Firepot Trebuchet)
+    [13664] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Firepot_Trebuchet) }, -- Create Trebuchet... (Firepot Trebuchet)
+    [13663] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Firepot_Trebuchet) }, -- Create Trebuchet... (Firepot Trebuchet)
+    [7010] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_firepot_trebuchet.dds' }, -- Firepot Trebuchet (Firepot Trebuchet)
+    [7429] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_firepot_trebuchet.dds' }, -- Firepot Trebuchet (Firepot Trebuchet)
+    [28483] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_firepot_trebuchet.dds', tooltip = T.Generic_Burn_2_Sec }, -- Firepot Trebuchet (Firepot Trebuchet)
+    [25869] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_firepot_trebuchet.dds', tooltip = T.Generic_Burn_2_Sec }, -- Firepot Trebuchet (Firepot Trebuchet)
+
+    [30613] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Meatbag_Catapult) }, -- Create Catapult Meatbag (Meatbag Catapult)
+    [30609] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Meatbag_Catapult) }, -- Create Catapult Meatbag (Meatbag Catapult)
+    [16755] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Meatbag_Catapult) }, -- Create Catapult Meatbag (Meatbag Catapult)
+    [88714] = { tooltip = T.Skill_Meatbag_Catapult_Ground }, -- Meatbag (Meatbag Catapult)
+    [14774] = { icon = 'esoui/art/icons/ava_siege_ammo_003.dds' }, -- Meatbag Catapult (Meatbag Catapult)
+    [104693] = { icon = 'esoui/art/icons/ava_siege_ammo_003.dds' }, -- Meatbag Catapult (Meatbag Catapult)
+    [32036] = { icon = 'esoui/art/icons/ava_siege_ammo_003.dds', tooltip = T.Skill_Meatbag_Catapult }, -- Meatbag Catapult (Meatbag Catapult)
+    [36408] = { icon = 'esoui/art/icons/ava_siege_ammo_003.dds', type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = T.Generic_Disease_2_Sec }, -- Meatbag Catapult (Meatbag Catapult)
+
+    [30614] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Oil_Catapult) }, -- Create Catapult Oil Jar... (Oil Catapult)
+    [30610] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Oil_Catapult) }, -- Create Catapult Oil Jar... (Oil Catapult)
+    [16754] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Oil_Catapult) }, -- Create Catapult Oil Jar... (Oil Catapult)
+    [104700] = { tooltip = T.Skill_Oil_Catapult_Ground }, -- Twisting Path (Oil Catapult)
+    [16789] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_oil_catapult.dds' }, -- Oil Catapult (Oil Catapult)
+    [104699] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_oil.dds', tooltip = T.Generic_Snare_50 }, -- Oil Catapult (Oil Catapult)
+    [64108] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_oil_catapult.dds' }, -- Oil Catapult (Oil Catapult)
+    [76105] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_oil_catapult.dds', name = A.Skill_Oil_Catapult }, -- Stamina Hit (Oil Catapult)
+    [16790] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_oil_catapult.dds' }, -- Oil Catapult (Oil Catapult)
+
+    [39915] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Scattershot_Catapult) }, -- Create Catapult Meatbag (Scattershot Catapult)
+    [39918] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Scattershot_Catapult) }, -- Create Catapult Oil Jar... (Scattershot Catapult)
+    [39911] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Scattershot_Catapult) }, -- Create Trebuchet... (Scattershot Catapult)
+    [104690] = { tooltip = T.Skill_Scattershot_Catapult_Ground }, -- Twisting Path (Scattershot Catapult)
+    [14611] = { icon = 'esoui/art/icons/ava_siege_ammo_005.dds' }, -- Scattershot Catapult (Scattershot Catapult)
+    [104695] = { icon = 'esoui/art/icons/ava_siege_ammo_005.dds' }, -- Scattershot Catapult (Scattershot Catapult)
+    [104696] = { icon = 'esoui/art/icons/ava_siege_ammo_005.dds', tooltip = T.Skill_Scattershot_Catapult }, -- Scattershot Catapult (Scattershot Catapult)
+
+    [66438] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
+    [66439] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
+    [66250] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet_shot.dds', name = A.Skill_Cold_Stone_Trebuchet }, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
+    [66251] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet_shot.dds', name = A.Skill_Cold_Stone_Trebuchet }, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
+    [66252] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet_shot.dds', name = A.Skill_Cold_Stone_Trebuchet }, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
+
+    [66434] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Cold_Fire_Trebuchet) }, -- Create Trebuchet... (Cold Fire Trebuchet)
+    [66388] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Cold_Fire_Trebuchet) }, -- Create Trebuchet... (Cold Fire Trebuchet)
+    [66246] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet_shot.dds', name = A.Skill_Cold_Fire_Trebuchet }, -- Firepot Trebuchet (Cold Fire Trebuchet)
+    [66247] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet_shot.dds', name = A.Skill_Cold_Fire_Trebuchet, tooltip = T.Generic_Burn_2_Sec }, -- Firepot Trebuchet (Cold Fire Trebuchet)
+    [66248] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet_shot.dds', name = A.Skill_Cold_Fire_Trebuchet }, -- Firepot Trebuchet (Cold Fire Trebuchet)
+    [66245] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet_shot.dds', name = A.Skill_Cold_Fire_Trebuchet, tooltip = T.Generic_Burn_2_Sec }, -- Cold Harbor Trebuchet (Cold Fire Trebuchet)
+
+    [66437] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
+    [66436] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
+    [66242] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista_bolt.dds', name = A.Skill_Cold_Fire_Ballista_Bolt }, -- Fire Ballista Bolt (Cold Fire Ballista)
+    [66244] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista_bolt.dds', name = A.Skill_Cold_Fire_Ballista_Bolt }, -- Fire Ballista Bolt (Cold Fire Ballista)
+    [66243] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista_bolt.dds', name = A.Skill_Cold_Fire_Ballista_Bolt, tooltip = T.Generic_Burn_2_Sec }, -- Cold Harbor Ballista Bolt (Cold Fire Ballista)
+
+    [22570] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_flaming_oil.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Deploy, A.Skill_Flaming_Oil) }, -- Create Boiling Oil... (Flaming Oil)
+    [15775] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_burning_oil.dds', tooltip = T.Generic_Burn_2_Sec }, -- Flaming oil (Flaming Oil)
+    [15776] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_burning_oil.dds', name = A.Skill_Flaming_Oil, tooltip = T.Generic_Burn_2_Sec }, -- Flaming oil (Flaming Oil)
+
+    [15876] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ram.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Battering_Ram) }, -- Create Large Ram... (Battering Ram)
+    [16171] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ram.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Battering_Ram) }, -- Create Large Ram... (Battering Ram)
+    [16170] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ram.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Battering_Ram) }, -- Create Large Ram... (Battering Ram)
+
+    [12355] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds' }, -- Destroy Siege Weapon
+
+    [13853] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_repair_kit_wall.dds', name = A.Skill_Keep_Wall_Repair_Kit }, -- Wall Repair Kit
+    [16723] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_repair_kit_door.dds', name = A.Skill_Keep_Door_Repair_Kit }, -- Door Repair Kit
+    [13601] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_repair_kit_siege.dds', name = A.Skill_Siege_Repair_Kit }, -- Advanced Siege Repair Kit
+    [112975] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_repair_kit_bridge.dds', name = A.Skill_Bridge_Repair_Kit }, -- Wall Repair Kit (Bridge and Milegate Repair Kit)
+
+    [19039] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_forward_camp_ep.dds', name = A.Skill_Pact_Forward_Camp }, -- Ebonheart Forward Camp
+    [19040] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_forward_camp_ad.dds', name = A.Skill_Dominion_Forward_Camp }, -- Aldmeri Forward Camp
+    [19041] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_forward_camp_dc.dds', name = A.Skill_Covenant_Forward_Camp }, -- Daggerfall Forward Camp
 
     ----------------------------------------------------------------
     -- TRAPS -------------------------------------------------------

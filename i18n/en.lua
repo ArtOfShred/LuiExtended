@@ -2726,6 +2726,28 @@ local strings = {
     SI_LUIE_SKILL_REVIVING_BARRIER_TP =                  "Absorbing damage for |cFFFFFF30|r seconds.\n\nHealing every |cFFFFFF1.5|r seconds for |cFFFFFF30|r seconds.",
 
 	----------------------------------------------------------------
+    -- CYRODIIL ----------------------------------------------------
+    ----------------------------------------------------------------
+
+    SI_LUIE_SKILL_STOW_SIEGE_WEAPON =                    "Stow Siege Weapon",
+    SI_LUIE_SKILL_DEPLOY =                               "Deploy",
+    SI_LUIE_SKILL_PACT =                                 "Pact",
+    SI_LUIE_SKILL_COVENANT =                             "Covenant",
+    SI_LUIE_SKILL_DOMINION =                             "Dominion",
+    SI_LUIE_SKILL_LIGHTNING_BALLISTA =                   "Lightning Ballista",
+    SI_LUIE_SKILL_LIGHTNING_BALLISTA_BOLT_TP =           "Afflicted with Shock Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds. Each tick drains |cFFFFFF10|r% of your Max Magicka.\n\nSnared for |cFFFFFF<<1>>|r seconds. Your Movement Speed has been reduced by |cFFFFFF50|r%.",
+
+    SI_LUIE_SKILL_MEATBAG_CATAPULT_TP =                  "Healing and Health Recovery reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_MEATBAG_CATAPULT_GROUND_TP =           "Enemies in the area take Disease Damage every |cFFFFFF1|r second and suffer |cFFFFFF50|r% reduced Healing and Health Recovery for |cFFFFFF6|r seconds.",
+    SI_LUIE_SKILL_OIL_CATAPULT_GROUND_TP =               "Enemies in the oil are snared, reducing their Movement Speed by |cFFFFFF50|r% for |cFFFFFF6|r seconds.",
+    SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_TP =              "Increase damage taken from all sources by |cFFFFFF20|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_GROUND_TP =       "Enemies in the area take Physical Damage every |cFFFFFF1|r second and take |cFFFFFF20|r% more damage from all sources for |cFFFFFF6|r seconds.",
+
+    SI_LUIE_SKILL_COLD_STONE_TREBUCHET =                 "Cold Stone Trebuchet",
+    SI_LUIE_SKILL_COLD_FIRE_TREBUCHET =                  "Cold Fire Trebuchet",
+    SI_LUIE_SKILL_COLD_FIRE_BALLISTA =                   "Cold Fire Ballista",
+
+	----------------------------------------------------------------
     -- SETS --------------------------------------------------------
     ----------------------------------------------------------------
 

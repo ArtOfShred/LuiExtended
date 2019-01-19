@@ -2391,6 +2391,10 @@ debugAuras = {
             [51505] = true, -- Portal Spawn
             [51507] = true, -- Targetable On
 
+            -- Daedric Anchor Bosses
+            --[89249] = true, -- Summon Daedra (Ozozzachar)
+            --[89251] = true, -- Summon Daedra (Ozozzachar)
+
             -- Misc World + Theater
             [16553] = true, -- CON_Ritual_Daedric
             [25706] = true, -- CON_GoodAura
@@ -11180,6 +11184,121 @@ debugAuras = {
             [8657] = true, -- Heavily Armored Guards
             [8658] = true, -- Eagle Eye Guards
             [25873] = true, -- heal
+
+            -- Siege Weapons
+            [12256] = true, -- Pack Siege
+
+            [29673] = true, -- Create Ballista Bolt...
+            [29672] = true, -- Create Ballista Bolt...
+            [29671] = true, -- Create Ballista Bolt...
+            [7468] = true, -- Ballista Bolt
+            [7469] = true, -- Ballista Bolt
+            [13043] = true, -- Ballista Bolt
+
+            [30611] = true, -- Create Ballista Fire Bolt...
+            [30607] = true, -- Create Ballista Fire Bolt...
+            [16751] = true, -- Create Ballista Fire Bolt...
+            [16775] = true, -- Fire Ballista Bolt
+            [28480] = true, -- Fire Ballista Bolt
+            [14367] = true, -- Fire Ballista Bolt
+
+            [30612] = true, -- Create Ballista Lightning Bolt...
+            [30608] = true, -- Create Ballista Lightning Bolt...
+            [16752] = true, -- Create Ballista Lightning Bolt...
+            [14363] = true, -- Lightning Ballista Bolt
+            [14364] = true, -- Lightning Ballista Bolt
+            [16776] = true, -- Lightning Ballista Bolt
+            [76103] = true, -- Magicka Hit
+            [30454] = true, -- Lightning Ballista Bolt
+
+            [39914] = true, -- Create Trebuchet...
+            [39917] = true, -- Create Trebuchet...
+            [39910] = true, -- Create Trebuchet...
+            [14159] = true, -- Stone Trebuchet
+            [64109] = true, -- Stone Trebuchet
+            [14160] = true, -- Stone Trebuchet
+
+            [39913] = true, -- Create Trebuchet...
+            [39916] = true, -- Create Trebuchet...
+            [39909] = true, -- Create Trebuchet...
+            [13551] = true, -- Iceball Trebuchet
+            [64105] = true, -- Iceball Trebuchet
+            [13588] = true, -- Iceball Trebuchet
+            [13552] = true, -- Iceball Trebuchet
+
+            [13665] = true, -- Create Trebuchet... (Firepot Trebuchet)
+            [13664] = true, -- Create Trebuchet... (Firepot Trebuchet)
+            [13663] = true, -- Create Trebuchet... (Firepot Trebuchet)
+            [7010] = true, -- Firepot Trebuchet (Firepot Trebuchet)
+            [7429] = true, -- Firepot Trebuchet (Firepot Trebuchet)
+            [28483] = true, -- Firepot Trebuchet (Firepot Trebuchet)
+            [25869] = true, -- Firepot Trebuchet (Firepot Trebuchet)
+
+            [30613] = true, -- Create Catapult Meatbag
+            [30609] = true, -- Create Catapult Meatbag
+            [16755] = true, -- Create Catapult Meatbag
+            [88714] = true, -- Meatbag
+            [14774] = true, -- Meatbag Catapult
+            [104693] = true, -- Meatbag Catapult
+            [32036] = true, -- Meatbag Catapult
+            [36408] = true, -- Meatbag Catapult
+
+            [30614] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+            [30610] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+            [16754] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+            [104700] = true, -- Twisting Path (Oil Catapult)
+            [16789] = true, -- Oil Catapult (Oil Catapult)
+            [104699] = true, -- Oil Catapult (Oil Catapult)
+            [64108] = true, -- Oil Catapult (Oil Catapult)
+            [76105] = true, -- Stamina Hit (Oil Catapult)
+            [16790] = true, -- Oil Catapult (Oil Catapult)
+
+            [39915] = true, -- Create Catapult Meatbag (Scattershot Catapult)
+            [39918] = true, -- Create Catapult Meatbag (Scattershot Catapult)
+            [39911] = true, -- Create Trebuchet... (Scattershot Catapult)
+            [104690] = true, -- Twisting Path (Scattershot Catapult)
+            [14611] = true, -- Scattershot Catapult (Scattershot Catapult)
+            [104695] = true, -- Scattershot Catapult (Scattershot Catapult)
+            [104696] = true, -- Scattershot Catapult (Scattershot Catapult)
+
+            [66438] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+            [66439] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+            [66250] = true, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
+            [66251] = true, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
+            [66252] = true, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
+
+            [66434] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+            [66388] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+            [66246] = true, -- Firepot Trebuchet (Cold Fire Trebuchet)
+            [66247] = true, -- Firepot Trebuchet (Cold Fire Trebuchet)
+            [66248] = true, -- Firepot Trebuchet (Cold Fire Trebuchet)
+            [66245] = true, -- Cold Harbor Trebuchet (Cold Fire Trebuchet)
+
+            [66437] = true, -- Create Ballista... (Cold Fire Ballista)
+            [66436] = true, -- Create Ballista... (Cold Fire Ballista)
+            [66242] = true, -- Fire Ballista Bolt (Cold Fire Ballista)
+            [66244] = true, -- Fire Ballista Bolt (Cold Fire Ballista)
+            [66243] = true, -- Cold Harbor Ballista Bolt (Cold Fire Ballista)
+
+            [22570] = true, -- Create Boiling Oil... (Flaming Oil)
+            [15775] = true, -- Flaming oil (Flaming Oil)
+            [15776] = true, -- Flaming oil (Flaming Oil)
+
+            [15876] = true, -- Create Large Ram... (Battering Ram)
+            [16171] = true, -- Create Large Ram... (Battering Ram)
+            [16170] = true, -- Create Large Ram... (Battering Ram)
+
+            [12355] = true, -- Destroy Siege Weapon
+
+            [13853] = true, -- Wall Repair Kit
+            [16723] = true, -- Door Repair Kit
+            [13601] = true, -- Advanced Siege Repair Kit
+            [112975] = true, -- Wall Repair Kit (Bridge and Milegate Repair Kit)
+
+            [19039] = true, -- Ebonheart Forward Camp
+            [19040] = true, -- Aldmeri Forward Camp
+            [19041] = true, -- Daggerfall Forward Camp
+
 
             -------------------------------------
             -- SEASONAL EVENTS ------------------

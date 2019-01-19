@@ -823,6 +823,41 @@ A.Skill_Edge_Keep_Bonus_1           = 111549
 A.Skill_Edge_Keep_Bonus_2           = 111552
 A.Skill_Edge_Keep_Bonus_3           = 111553
 
+A.Skill_Stow_Siege_Weapon           = GetString(SI_LUIE_SKILL_STOW_SIEGE_WEAPON)
+A.Skill_Deploy                      = GetString(SI_LUIE_SKILL_DEPLOY)
+A.Skill_Pact                        = GetString(SI_LUIE_SKILL_PACT)
+A.Skill_Covenant                    = GetString(SI_LUIE_SKILL_COVENANT)
+A.Skill_Dominion                    = GetString(SI_LUIE_SKILL_DOMINION)
+A.Skill_Ballista                    = 68205
+A.Skill_Fire_Ballista               = 35049
+A.Skill_Lightning_Ballista          = GetString(SI_LUIE_SKILL_LIGHTNING_BALLISTA)
+A.Skill_Lightning_Ballista_Bolt     = 14364
+
+A.Skill_Stone_Trebuchet             = 14159
+A.Skill_Iceball_Trebuchet           = 13551
+A.Skill_Firepot_Trebuchet           = 7010
+A.Skill_Meatbag_Catapult            = 14774
+A.Skill_Oil_Catapult                = 16789
+A.Skill_Scattershot_Catapult        = 14611
+
+A.Skill_Cold_Stone_Trebuchet        = GetString(SI_LUIE_SKILL_COLD_STONE_TREBUCHET)
+A.Skill_Cold_Fire_Trebuchet         = GetString(SI_LUIE_SKILL_COLD_FIRE_TREBUCHET)
+A.Skill_Cold_Fire_Ballista          = GetString(SI_LUIE_SKILL_COLD_FIRE_BALLISTA)
+A.Skill_Cold_Fire_Ballista_Bolt     = 66239
+
+A.Skill_Flaming_Oil                 = 15774
+A.Skill_Battering_Ram               = 15197
+
+A.Skill_Siege_Repair_Kit            = GetItemLinkName("|H0:item:27112:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h") -- Siege Repair Kit
+A.Skill_Keep_Wall_Repair_Kit        = GetItemLinkName("|H0:item:27138:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h") -- Keep Wall Masonry Repair Kit
+A.Skill_Keep_Door_Repair_Kit        = GetItemLinkName("|H0:item:27962:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h") -- Keep Door Woodwork Repair Kit
+A.Skill_Bridge_Repair_Kit           = GetItemLinkName("|H0:item:142133:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h") -- Bridge and Milegate Repair Kit
+A.Skill_Practice_Siege_Repair_Kit   = GetItemLinkName("|H0:item:43056:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h") -- Practice Siege Repair Kit
+
+A.Skill_Pact_Forward_Camp           = GetItemLinkName("|H0:item:29534:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Pact Foward Camp
+A.Skill_Dominion_Forward_Camp       = GetItemLinkName("|H0:item:29533:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Dominion Forward Camp
+A.Skill_Covenant_Forward_Camp       = GetItemLinkName("|H0:item:29535:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Covenant Forward Camp
+
 -- ---------------------------------------------------
 -- NPC ABILITIES -------------------------------------
 -- ---------------------------------------------------
