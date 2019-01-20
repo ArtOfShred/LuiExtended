@@ -2744,6 +2744,7 @@ local strings = {
     SI_LUIE_SKILL_COLD_STONE_TREBUCHET =                 "Cold Stone Trebuchet",
     SI_LUIE_SKILL_COLD_FIRE_TREBUCHET =                  "Cold Fire Trebuchet",
     SI_LUIE_SKILL_COLD_FIRE_BALLISTA =                   "Cold Fire Ballista",
+    SI_LUIE_SKILL_GUARD_DETECTION =                      "Revealing nearby stealthed and invisible enemies.",
 
 	----------------------------------------------------------------
     -- SETS --------------------------------------------------------

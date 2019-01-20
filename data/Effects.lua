@@ -7900,7 +7900,7 @@ E.EffectOverride = {
 
     [109862] = { hide = true }, -- Stronger Walls
     [109944] = { hide = true }, -- Stronger Doors
-    [64674] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = A.Skill_Detection }, -- Cyrodiil Guard See Stealth
+    [64674] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = A.Skill_Detection, tooltip = T.Skill_Guard_Detection }, -- Cyrodiil Guard See Stealth
     [8077] = { hide = true }, -- Increased Guard Health
     [8639] = { hide = true }, -- Increased Damage
     [43754] = { hide = true }, -- Heavily Resistant Guards
