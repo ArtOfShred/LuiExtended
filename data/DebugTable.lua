@@ -1952,23 +1952,23 @@ debugAuras = {
             [113508] = true, -- Steadfast Hero (Steadfast Hero)
             [113509] = true, -- Major Protection (Steadfast Hero)
 
-            --[76946] = true, -- Fasalla's Guile (of Fasalla's Guile)
-            --[76947] = true, -- Fasalla's Guile (of Fasalla's Guile)
+            [76946] = true, -- Fasalla's Guile (of Fasalla's Guile)
+            [76947] = true, -- Fasalla's Guile (of Fasalla's Guile)
 
-            --[76949] = true, -- Warrior's Fury (of Fury)
-            --[76950] = true, -- Warrior's Fury (of Fury)
-            --[76951] = true, -- 10 Stack Count FX Dummy (of Fury)
+            [76949] = true, -- Warrior's Fury (of Fury)
+            [76950] = true, -- Warrior's Fury (of Fury)
+            [76951] = true, -- 10 Stack Count FX Dummy (of Fury)
 
-            --[76940] = true, -- Leki's Focus (Leki's)
+            [76940] = true, -- Leki's Focus (Leki's)
 
-            --[76932] = true, -- Marksman's Crest (Markman's)
+            [76932] = true, -- Marksman's Crest (Markman's)
 
-            --[76934] = true, -- Robes of Transmutation (Transmutation)
-            --[76936] = true, -- Robes of Transmutation (Transmutation)
+            [76934] = true, -- Robes of Transmutation (Transmutation)
+            [76936] = true, -- Robes of Transmutation (Transmutation)
 
-            --[76937] = true, -- Vicious Death (of Vicious Death)
-            --[82987] = true, -- Vicious Death (of Vicious Death)
-            ----[76938] = true, -- Vicious Death (of Vicious Death)
+            [76937] = true, -- Vicious Death (of Vicious Death)
+            [82987] = true, -- Vicious Death (of Vicious Death)
+            [76938] = true, -- Vicious Death (of Vicious Death)
 
             -- Maelstrom Arena Sets
             [71248] = true, -- Elemental Succession (of Succession)
@@ -11151,9 +11151,10 @@ debugAuras = {
 
             [109844] = true, -- Reach
             [39671] = true, -- Emperorship Alliance Bonus
-
+            [11346] = true, -- Home Keep Bonus
             [11341] = true, -- Enemy Keep Bonus I
             [11343] = true, -- Enemy Keep Bonus II
+            [11345] = true, -- Enemy Keep Bonus III
             [11347] = true, -- Enemy Keep Bonus IV
             [11348] = true, -- Enemy Keep Bonus V
             [11350] = true, -- Enemy Keep Bonus VI
@@ -11176,15 +11177,15 @@ debugAuras = {
             [22297] = true, -- Elder Scroll of Ni-Mohk
             [22299] = true, -- Elder Scroll of Alma Ruma
 
-            --[8350] = true, -- Stronger Walls
-            --[8351] = true, -- Stronger Doors
-            --[64674] = true, -- Cyrodiil Guard See Stealth
-            --[8077] = true, -- Increased Health
-            --[8639] = true, -- Increased Damage
-            --[43754] = true, -- Heavily Resistant Guards
-            --[8657] = true, -- Heavily Armored Guards
-            --[8658] = true, -- Eagle Eye Guards
-            --[25873] = true, -- heal
+            [109862] = true, -- Stronger Walls
+            [109944] = true, -- Stronger Doors
+            [64674] = true, -- Cyrodiil Guard See Stealth
+            [8077] = true, -- Increased Guard Health
+            [8639] = true, -- Increased Damage
+            [43754] = true, -- Heavily Resistant Guards
+            [8657] = true, -- Heavily Armored Guards
+            [8658] = true, -- Eagle Eye Guards
+            [25873] = true, -- heal
 
             [64197] = true, -- Sanctuary
             [64687] = true, -- Silence

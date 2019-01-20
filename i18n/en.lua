@@ -2730,7 +2730,6 @@ local strings = {
     ----------------------------------------------------------------
 
     SI_LUIE_SKILL_AVA_SANCTUARY_TP =                     "While in a Sanctuary, you cannot attack other players and other players cannot attack you.",
-
     SI_LUIE_SKILL_STOW_SIEGE_WEAPON =                    "Stow Siege Weapon",
     SI_LUIE_SKILL_DEPLOY =                               "Deploy",
     SI_LUIE_SKILL_PACT =                                 "Pact",
@@ -2738,13 +2737,11 @@ local strings = {
     SI_LUIE_SKILL_DOMINION =                             "Dominion",
     SI_LUIE_SKILL_LIGHTNING_BALLISTA =                   "Lightning Ballista",
     SI_LUIE_SKILL_LIGHTNING_BALLISTA_BOLT_TP =           "Afflicted with Shock Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds. Each tick drains |cFFFFFF10|r% of your Max Magicka.\n\nSnared for |cFFFFFF<<1>>|r seconds. Your Movement Speed has been reduced by |cFFFFFF50|r%.",
-
     SI_LUIE_SKILL_MEATBAG_CATAPULT_TP =                  "Healing and Health Recovery reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_MEATBAG_CATAPULT_GROUND_TP =           "Enemies in the area take Disease Damage every |cFFFFFF1|r second and suffer |cFFFFFF50|r% reduced Healing and Health Recovery for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_OIL_CATAPULT_GROUND_TP =               "Enemies in the oil are snared, reducing their Movement Speed by |cFFFFFF50|r% for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_TP =              "Increase damage taken from all sources by |cFFFFFF20|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_GROUND_TP =       "Enemies in the area take Physical Damage every |cFFFFFF1|r second and take |cFFFFFF20|r% more damage from all sources for |cFFFFFF6|r seconds.",
-
     SI_LUIE_SKILL_COLD_STONE_TREBUCHET =                 "Cold Stone Trebuchet",
     SI_LUIE_SKILL_COLD_FIRE_TREBUCHET =                  "Cold Fire Trebuchet",
     SI_LUIE_SKILL_COLD_FIRE_BALLISTA =                   "Cold Fire Ballista",
@@ -2883,6 +2880,8 @@ local strings = {
     --SI_LUIE_SKILL_SET_BECKONING_STEEL_TP =               "You have a |cffffff40|r% chance to intercept any projectile cast on an ally within |cffffff5|r meters of you.",
     SI_LUIE_SKILL_SET_CYRODIILS_LIGHT_TP =               "Your next Magicka ability used within |cffffff30|r seconds will cost no Magicka.",
     SI_LUIE_SKILL_SET_MORAG_TONG_TP =                    "Increase damage taken from Poison Damage abilities by |cffffff10|r% for |cffffff5|r seconds.",
+    SI_LUIE_SKILL_SET_WARRIORS_FURY_TP =                 "Increase Weapon Damage for |cffffff6|r seconds when you take Critical Damage, stacking up to |cffffff25|r times.",
+    SI_LUIE_SKILL_SET_ROBES_OF_TRANSMUTATION_TP =        "Increase Critical Resistance for |cffffff20|r seconds.",
 
 	----------------------------------------------------------------
     -- NPC ABILITY / QUEST TOOLTIPS --------------------------------

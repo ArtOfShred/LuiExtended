@@ -3826,9 +3826,9 @@ E.EffectOverride = {
     [113417] = { hide = true }, -- Spell Strategist (Spell Strategist)
     [113509] = { tooltip = A.Set_Steadfast_Hero }, -- Major Protection (Steadfast Hero)
 
-    [76947] = { icon = 'esoui/art/icons/ability_debuff_minor_defile.dds', name = A.Skill_Minor_Defile, duration = 0 }, -- Fasalla's Guile (of Fasalla's Guile)
-    [76950] = { icon = 'esoui/art/icons/ability_warrior_025.dds' }, -- Warrior's Fury (of Fury)
-    [76936] = { icon = 'LuiExtended/media/icons/abilities/ability_set_transmutation.dds' }, -- Transmutation (of Transmutation)
+    [76947] = { name = A.Skill_Minor_Defile, tooltip = A.Set_Fasallas_Guile }, -- Fasalla's Guile (of Fasalla's Guile)
+    [76950] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = T.Set_Warriors_Fury }, -- Warrior's Fury (of Fury)
+    [76936] = { icon = 'LuiExtended/media/icons/abilities/ability_set_transmutation.dds', tooltip = T.Set_Robes_of_Transmutation }, -- Transmutation (of Transmutation)
     [76938] = { icon = 'esoui/art/icons/procs_003.dds' }, -- Vicious Death (of Vicious Death)
 
     -- Maelstrom Arena Sets
@@ -7898,10 +7898,10 @@ E.EffectOverride = {
     [22297] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Ni-Mohk
     [22299] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Alma Ruma
 
-    [8350] = { hide = true }, -- Stronger Walls
-    [8351] = { hide = true }, -- Stronger Doors
+    [109862] = { hide = true }, -- Stronger Walls
+    [109944] = { hide = true }, -- Stronger Doors
     [64674] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = A.Skill_Detection }, -- Cyrodiil Guard See Stealth
-    [8077] = { hide = true }, -- Increased Health
+    [8077] = { hide = true }, -- Increased Guard Health
     [8639] = { hide = true }, -- Increased Damage
     [43754] = { hide = true }, -- Heavily Resistant Guards
     [8657] = { hide = true }, -- Heavily Armored Guards

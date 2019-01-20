@@ -381,6 +381,7 @@ A.Set_Soldier_of_Anguish            = 113460
 A.Set_Steadfast_Hero                = 113508
 A.Set_Healers_Habit                 = GetString(SI_LUIE_SKILL_SET_HEALERS_HABIT)
 A.Set_Ward_of_Cyrodiil              = 32837
+A.Set_Fasallas_Guile                = 76946
 
 A.Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
 

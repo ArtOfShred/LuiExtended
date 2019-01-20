@@ -426,6 +426,8 @@ T.Set_Spell_Strategist                  = GetString(SI_LUIE_SKILL_SET_SPELL_STRA
 T.Set_Glorious_Defender                 = GetString(SI_LUIE_SKILL_SET_GLORIOUS_DEFENDER_TP)
 T.Set_Light_of_Cyrodiil                 = GetString(SI_LUIE_SKILL_SET_CYRODIILS_LIGHT_TP)
 T.Set_Morag_Tong                        = GetString(SI_LUIE_SKILL_SET_MORAG_TONG_TP)
+T.Set_Warriors_Fury                     = GetString(SI_LUIE_SKILL_SET_WARRIORS_FURY_TP)
+T.Set_Robes_of_Transmutation            = GetString(SI_LUIE_SKILL_SET_ROBES_OF_TRANSMUTATION_TP)
 
 -- Arena Sets
 T.Set_Succession_Flame              	= zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE3))

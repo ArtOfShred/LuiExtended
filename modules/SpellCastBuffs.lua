@@ -2779,7 +2779,7 @@ function SCB.ReloadEffects(unitTag)
         end
 
         if not SCB.SV.IgnoreBattleSpiritTarget then
-            if ( ( IsInAvAZone() or IsActiveWorldBattleground() ) and IsUnitPlayer("reticleover") ) or GetUnitName(unitTag) == g_currentDuelTarget then
+            if ( ( IsInAvAZone() or IsActiveWorldBattleground() ) and IsUnitPlayer("reticleover") and (GetUnitReaction("reticleover") == UNIT_REACTION_PLAYER_ALLY) ) or GetUnitName(unitTag) == g_currentDuelTarget then
                 g_effectsList.reticleover1[ A.Skill_Battle_Spirit ] = {
                     type=1,
                     id=85701, name=A.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
@@ -2791,7 +2791,7 @@ function SCB.ReloadEffects(unitTag)
         end
 
         if not SCB.SV.IgnoreCyrodiilTarget then
-            if IsInAvAZone() and IsUnitPlayer("reticleover") then
+            if IsInAvAZone() and IsUnitPlayer("reticleover") and (GetUnitReaction("reticleover") == UNIT_REACTION_PLAYER_ALLY) then
                 local campaignId = GetCurrentCampaignId()
                 local homeKeep, _, _, _, edgeKeepCount = GetAvAKeepScore(campaignId, GetUnitAlliance("reticleover"))
                 local id
