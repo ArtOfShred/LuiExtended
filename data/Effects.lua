@@ -913,12 +913,15 @@ E.IsCast = {
 
     [66438] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
     [66439] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+    [66440] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
 
     [66434] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
     [66388] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+    [66387] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
 
     [66437] = true, -- Create Ballista... (Cold Fire Ballista)
     [66436] = true, -- Create Ballista... (Cold Fire Ballista)
+    [66435] = true, -- Create Ballista... (Cold Fire Ballista)
 
     [22570] = true, -- Create Boiling Oil... (Flaming Oil)
     [15876] = true, -- Create Large Ram... (Battering Ram)
@@ -935,6 +938,9 @@ E.IsCast = {
     [19041] = true, -- Daggerfall Forward Camp
 
     -- [12355] = true, -- Destroy Siege Weapon (Doesn't show up due to Cyrodiil Limitations)
+
+    -- Siege Warfare
+    [33348] = true, -- Practice Siege Repair Kit (Practice Siege Repair Kit)
 
     ----------------------------------------------------------------
     -- QUEST ABILITIES ---------------------------------------------
@@ -2801,7 +2807,6 @@ E.EffectOverride = {
     -- refreshOnly = true -- Only show this effect when the duration is updated/refreshed - Toggle this to hide some goofy effects that have a travel time aura for their projectile before the actual effect applies.
 
     -- TEMP MOVE LATER
-    [64197] = { forcedContainer = 'short' }, -- Sanctuary Cyrodiil passive is considered unlimited duration, but the effect is only while the player is in the area. Should show up under short buffs.
     [54119] = { forcedContainer = 'short' }, -- Remembrance (The Anger of a King)
 
     -- Craglorn buffs
@@ -7903,6 +7908,14 @@ E.EffectOverride = {
     [8658] = { hide = true }, -- Eagle Eye Guards
     [25873] = { hide = true }, -- heal
 
+    [64197] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_sanctuary.dds', forcedContainer = 'short', tooltip = T.Skill_AvA_Sanctuary }, -- Sanctuary Cyrodiil passive is considered unlimited duration, but the effect is only while the player is in the area. Should show up under short buffs.
+    [52291] = { hide = true }, -- Chain Pull Range Suppression
+    [96091] = { hide = true }, -- Frozen Gate Suppression
+    [97414] = { hide = true }, -- Nature Grasp Suppression
+    [59079] = { hide = true }, -- Dragon Leap Range Suppression
+    [90095] = { hide = true }, -- Falling Damage Reduction
+
+
     -- ABCDE
 
     -- Siege Weapons
@@ -7981,12 +7994,14 @@ E.EffectOverride = {
 
     [66438] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
     [66439] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
+    [66440] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
     [66250] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet_shot.dds', name = A.Skill_Cold_Stone_Trebuchet }, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
     [66251] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet_shot.dds', name = A.Skill_Cold_Stone_Trebuchet }, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
     [66252] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet_shot.dds', name = A.Skill_Cold_Stone_Trebuchet }, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
 
     [66434] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Cold_Fire_Trebuchet) }, -- Create Trebuchet... (Cold Fire Trebuchet)
     [66388] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Cold_Fire_Trebuchet) }, -- Create Trebuchet... (Cold Fire Trebuchet)
+    [66387] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Cold_Fire_Trebuchet) }, -- Create Trebuchet... (Cold Fire Trebuchet)
     [66246] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet_shot.dds', name = A.Skill_Cold_Fire_Trebuchet }, -- Firepot Trebuchet (Cold Fire Trebuchet)
     [66247] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet_shot.dds', name = A.Skill_Cold_Fire_Trebuchet, tooltip = T.Generic_Burn_2_Sec }, -- Firepot Trebuchet (Cold Fire Trebuchet)
     [66248] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet_shot.dds', name = A.Skill_Cold_Fire_Trebuchet }, -- Firepot Trebuchet (Cold Fire Trebuchet)
@@ -7994,6 +8009,7 @@ E.EffectOverride = {
 
     [66437] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
     [66436] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
+    [66435] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
     [66242] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista_bolt.dds', name = A.Skill_Cold_Fire_Ballista_Bolt }, -- Fire Ballista Bolt (Cold Fire Ballista)
     [66244] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista_bolt.dds', name = A.Skill_Cold_Fire_Ballista_Bolt }, -- Fire Ballista Bolt (Cold Fire Ballista)
     [66243] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista_bolt.dds', name = A.Skill_Cold_Fire_Ballista_Bolt, tooltip = T.Generic_Burn_2_Sec }, -- Cold Harbor Ballista Bolt (Cold Fire Ballista)
@@ -8016,6 +8032,18 @@ E.EffectOverride = {
     [19039] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_forward_camp_ep.dds', name = A.Skill_Pact_Forward_Camp }, -- Ebonheart Forward Camp
     [19040] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_forward_camp_ad.dds', name = A.Skill_Dominion_Forward_Camp }, -- Aldmeri Forward Camp
     [19041] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_forward_camp_dc.dds', name = A.Skill_Covenant_Forward_Camp }, -- Daggerfall Forward Camp
+
+    -- Siege Warfare
+    [35106] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_firepot_trebuchet.dds' , name = A.Skill_Firepot_Trebuchet }, -- Fire (Firepot Trebuchet)
+    [35099] = { icon = 'esoui/art/icons/ava_siege_ammo_002.dds', name = A.Skill_Iceball_Trebuchet }, -- Ice Damage (Iceball Trebuchet)
+    [35112] = { icon = 'esoui/art/icons/ava_siege_ammo_004.dds', name = A.Skill_Stone_Trebuchet }, -- Stoneball (Stone Trebuchet)
+    [35094] = { icon = 'esoui/art/icons/ava_siege_ammo_006.dds', name = A.Skill_Ballista_Bolt }, -- Bolt (Ballista)
+    [35055] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_fire_ballista_bolt.dds', name = A.Skill_Fire_Ballista_Bolt }, -- Fire (Firebolt Ballista)
+    [35080] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_lightning_ballista_bolt.dds', name = A.Skill_Lightning_Ballista_Bolt }, -- Bolt (Lightning Ballista)
+    [35121] = { icon = 'esoui/art/icons/ava_siege_ammo_005.dds', name = A.Skill_Scattershot_Catapult }, -- Ice Damage (Scattershot Catapult)
+    [35136] = { icon = 'esoui/art/icons/ava_siege_ammo_003.dds' , name = A.Skill_Meatbag_Catapult }, -- Meatbag (Meatbag Catapult)
+    [35132] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_oil_catapult.dds', name = A.Skill_Oil_Catapult }, -- Oil Pot (Oil Catapult)
+    [33348] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_repair_kit_practice_siege.dds' }, -- Practice Siege Repair Kit (Practice Siege Repair Kit)
 
     ----------------------------------------------------------------
     -- TRAPS -------------------------------------------------------

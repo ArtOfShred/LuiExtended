@@ -800,6 +800,8 @@ T.Skill_Reviving_Barrier                = GetString(SI_LUIE_SKILL_REVIVING_BARRI
 -- CYRODIIL ------------------------------------------
 -- ---------------------------------------------------
 
+T.Skill_AvA_Sanctuary                   = GetString(SI_LUIE_SKILL_AVA_SANCTUARY_TP)
+
 T.Skill_Lightning_Ballista_Bolt         = GetString(SI_LUIE_SKILL_LIGHTNING_BALLISTA_BOLT_TP)
 T.Skill_Meatbag_Catapult                = GetString(SI_LUIE_SKILL_MEATBAG_CATAPULT_TP)
 T.Skill_Meatbag_Catapult_Ground         = GetString(SI_LUIE_SKILL_MEATBAG_CATAPULT_GROUND_TP)

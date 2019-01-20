@@ -829,7 +829,9 @@ A.Skill_Pact                        = GetString(SI_LUIE_SKILL_PACT)
 A.Skill_Covenant                    = GetString(SI_LUIE_SKILL_COVENANT)
 A.Skill_Dominion                    = GetString(SI_LUIE_SKILL_DOMINION)
 A.Skill_Ballista                    = 68205
+A.Skill_Ballista_Bolt               = 7468
 A.Skill_Fire_Ballista               = 35049
+A.Skill_Fire_Ballista_Bolt          = 28480
 A.Skill_Lightning_Ballista          = GetString(SI_LUIE_SKILL_LIGHTNING_BALLISTA)
 A.Skill_Lightning_Ballista_Bolt     = 14364
 

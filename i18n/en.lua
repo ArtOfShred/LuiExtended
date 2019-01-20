@@ -2729,6 +2729,8 @@ local strings = {
     -- CYRODIIL ----------------------------------------------------
     ----------------------------------------------------------------
 
+    SI_LUIE_SKILL_AVA_SANCTUARY_TP =                     "While in a Sanctuary, you cannot attack other players and other players cannot attack you.",
+
     SI_LUIE_SKILL_STOW_SIEGE_WEAPON =                    "Stow Siege Weapon",
     SI_LUIE_SKILL_DEPLOY =                               "Deploy",
     SI_LUIE_SKILL_PACT =                                 "Pact",

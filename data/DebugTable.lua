@@ -2303,6 +2303,7 @@ debugAuras = {
             [39046] = true, -- Add Guild Rep
             [62797] = true, -- Weapon Swap Cooldown Timer
             [62798] = true, -- Weapon Swap Cooldown Timer
+            [61874] = true, -- Swap to Weapon Set 1
             [61875] = true, -- Swap to Weapon Set 2
             [85701] = true, -- Dueling Flag
             --[2727] = true, -- Off-Balance
@@ -11175,15 +11176,23 @@ debugAuras = {
             [22297] = true, -- Elder Scroll of Ni-Mohk
             [22299] = true, -- Elder Scroll of Alma Ruma
 
-            [8350] = true, -- Stronger Walls
-            [8351] = true, -- Stronger Doors
-            [64674] = true, -- Cyrodiil Guard See Stealth
-            [8077] = true, -- Increased Health
-            [8639] = true, -- Increased Damage
-            [43754] = true, -- Heavily Resistant Guards
-            [8657] = true, -- Heavily Armored Guards
-            [8658] = true, -- Eagle Eye Guards
-            [25873] = true, -- heal
+            --[8350] = true, -- Stronger Walls
+            --[8351] = true, -- Stronger Doors
+            --[64674] = true, -- Cyrodiil Guard See Stealth
+            --[8077] = true, -- Increased Health
+            --[8639] = true, -- Increased Damage
+            --[43754] = true, -- Heavily Resistant Guards
+            --[8657] = true, -- Heavily Armored Guards
+            --[8658] = true, -- Eagle Eye Guards
+            --[25873] = true, -- heal
+
+            [64197] = true, -- Sanctuary
+            [64687] = true, -- Silence
+            [52291] = true, -- Chain Pull Range Suppression
+            [96091] = true, -- Frozen Gate Suppression
+            [97414] = true, -- Nature Grasp Suppression
+            [59079] = true, -- Dragon Leap Range Suppression
+            --[90095] = true, -- Falling Damage Reduction
 
             -- Siege Weapons
             [12256] = true, -- Pack Siege
@@ -11263,12 +11272,14 @@ debugAuras = {
 
             [66438] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
             [66439] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+            [66440] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
             [66250] = true, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
             [66251] = true, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
             [66252] = true, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
 
             [66434] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
             [66388] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+            [66387] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
             [66246] = true, -- Firepot Trebuchet (Cold Fire Trebuchet)
             [66247] = true, -- Firepot Trebuchet (Cold Fire Trebuchet)
             [66248] = true, -- Firepot Trebuchet (Cold Fire Trebuchet)
@@ -11276,6 +11287,7 @@ debugAuras = {
 
             [66437] = true, -- Create Ballista... (Cold Fire Ballista)
             [66436] = true, -- Create Ballista... (Cold Fire Ballista)
+            [66435] = true, -- Create Ballista... (Cold Fire Ballista)
             [66242] = true, -- Fire Ballista Bolt (Cold Fire Ballista)
             [66244] = true, -- Fire Ballista Bolt (Cold Fire Ballista)
             [66243] = true, -- Cold Harbor Ballista Bolt (Cold Fire Ballista)
@@ -11299,6 +11311,17 @@ debugAuras = {
             [19040] = true, -- Aldmeri Forward Camp
             [19041] = true, -- Daggerfall Forward Camp
 
+            -- Siege Warfare
+            [35106] = true, -- Fire (Firepot Trebuchet)
+            [35099] = true, -- Ice Damage (Iceball Trebuchet)
+            [35112] = true, -- Stoneball (Stone Trebuchet)
+            [35094] = true, -- Bolt (Ballista)
+            [35055] = true, -- Fire (Firebolt Ballista)
+            [35080] = true, -- Bolt (Lightning Ballista)
+            [35121] = true, -- Ice Damage (Scattershot Catapult)
+            [35136] = true, -- Meatbag (Meatbag Catapult)
+            [35132] = true, -- Oil Pot (Oil Catapult)
+            [33348] = true, -- Practice Siege Repair Kit (Practice Siege Repair Kit)
 
             -------------------------------------
             -- SEASONAL EVENTS ------------------
