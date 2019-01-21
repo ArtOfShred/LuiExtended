@@ -883,6 +883,7 @@ A.Trap_Spinning_Blade_Trap         = GetString(SI_LUIE_SKILL_SPINNING_BLADE_TRAP
 -- Shared/Basic
 
 A.Skill_Hamstring                   = 70068
+A.Skill_Boss_CC_Immunity            = GetString(SI_LUIE_SKILL_BOSS_CC_IMMUNITY)
 A.Skill_Backstabber                 = 13739
 
 -- Human

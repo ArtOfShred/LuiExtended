@@ -2355,6 +2355,8 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_SILENCE_NO_DUR_TP =            "Silenced. You are unable to use Magicka abilities while silenced.",
 	SI_LUIE_SKILL_GENERIC_BLIND_TP =                     "Blinded for |cFFFFFF<<1>>|r seconds. |cffffff100|r% chance to miss all attacks.",
     SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP =               "Immune to knockback and disabling effects for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_TP =          "Immune to all crowd control and movement impairing effects.",
+    SI_LUIE_SKILL_GENERIC_FLYING_IMMUNITIES_TP =         "Immune to movement imparing effects.",
     SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Immune to damage and crowd control effects for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_DISORIENT_TP =                 "Disoriented. You cannot attack or move until you take damage for |cffffff<<1>>|r seconds.",
 
@@ -2989,6 +2991,9 @@ local strings = {
     SI_LUIE_SKILL_SERPENT_SPIT =                         "Serpent Spit",
     SI_LUIE_SKILL_SHADOW_WOOD =                          "Shadow Wood",
     SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "A servant of the shade of Prince Naemon has dragged you into the Shadow Wood.",
+
+    SI_LUIE_SKILL_BEAR_FEROCITY_TP =                     "Immune to all crowd control and movement impairing effects for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_BOSS_CC_IMMUNITY =                     "Boss Immunities",
 
 }
 

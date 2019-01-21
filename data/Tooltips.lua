@@ -154,6 +154,8 @@ T.Generic_Silence_No_Dur                = GetString(SI_LUIE_SKILL_GENERIC_SILENC
 T.Generic_Disorient                     = GetString(SI_LUIE_SKILL_GENERIC_DISORIENT_TP)
 
 T.Generic_CC_Immunity                   = GetString(SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP)
+T.Generic_Scary_Immunities              = GetString(SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_TP)
+T.Generic_Flying_Immunities             = GetString(SI_LUIE_SKILL_GENERIC_FLYING_IMMUNITIES_TP)
 T.Generic_Invisibility                  = GetString(SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP)
 T.Generic_Detection_Potion              = GetString(SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP)
 T.Generic_Ravage_Magicka_Potion         = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP)
@@ -845,6 +847,13 @@ T.Skill_Mark_of_the_Worm                = GetString(SI_LUIE_SKILL_MARK_OF_THE_WO
 -- ---------------------------------------------------
 
 T.Skill_Lava                            = GetString(SI_LUIE_SKILL_LAVA_SNARE_TP)
+
+
+----------------------------------------------------------------
+-- NPCS ------------------------------------------------------
+----------------------------------------------------------------
+
+T.Skill_Ferocity                        = GetString(SI_LUIE_SKILL_BEAR_FEROCITY_TP)
 
 ----------------------------------------------------------------
 -- QUESTS ------------------------------------------------------

@@ -2354,6 +2354,8 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_SILENCE_NO_DUR_TP =            "Обезмолвлен. Вы не можете использовать способности, расходующие Магию, пока обезмолвлены.",
 	SI_LUIE_SKILL_GENERIC_BLIND_TP =                     "Ослеплён на |cFFFFFF<<1>>|r секунд. |cffffff100|r% шанс пропустить все атаки.",
     SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP =               "Иммунитет к отбрасыванию и прочим ограничивающим эффектам на |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_TP =          "Immune to all crowd control and movement impairing effects.", -- TODO: Translate
+    SI_LUIE_SKILL_GENERIC_FLYING_IMMUNITIES_TP =         "Immune to movement imparing effects.", -- TODO: Translate
 	SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Иммунитет к урону и эффектам контроля на |cffffff<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_DISORIENT_TP =                 "Disoriented. You cannot attack or move until you take damage for |cffffff<<1>>|r seconds.",
 
@@ -2988,6 +2990,9 @@ local strings = {
     SI_LUIE_SKILL_SERPENT_SPIT =                         "Serpent Spit",
     SI_LUIE_SKILL_SHADOW_WOOD =                          "Shadow Wood",
     SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "Слуга тени принца Неймона утащил вас в Теневое древо.",
+
+    SI_LUIE_SKILL_BEAR_FEROCITY_TP =                     "Completely immune to all crowd control and movement impairing effects for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_BOSS_CC_IMMUNITY =                     "Boss Immunities",
 
 }
 

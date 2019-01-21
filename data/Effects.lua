@@ -6355,8 +6355,8 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Shared NPC Passives
-    [33097] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity }, -- Scary Immunities
-    [44176] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_flying_immunities.dds' }, -- Flying Immunities
+    [33097] = { icon = 'esoui/art/icons/achievement_wrothgar_007.dds', name = A.Skill_Boss_CC_Immunity, tooltip = T.Generic_Scary_Immunities }, -- Scary Immunities
+    [44176] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_flying_immunities.dds', tooltip = T.Generic_Flying_Immunities }, -- Flying Immunities
     [13739] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_backstabber.dds' }, -- Backstabber
     [73768] = { hide = true }, -- GEN 5 Hits
     [79147] = { hide = true }, -- GEN 3 Hits
@@ -6760,7 +6760,7 @@ E.EffectOverride = {
     [70366] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Slam (Great Bear)
     [89189] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Slam (Great Bear)
     [69073] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Slam }, -- Knockdown (Great Bear)
-    [70374] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, tooltip = T.Generic_CC_Immunity }, -- Ferocity (Great Bear)
+    [70374] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_ferocity.dds', tooltip = T.Skill_Ferocity }, -- Ferocity (Great Bear)
     [70372] = { hide = true }, -- Ferocity (Great Bear)
     [70376] = { hide = true }, -- Ferocity (Great Bear)
     [70375] = { hide = true }, -- Ferocity (Great Bear)
