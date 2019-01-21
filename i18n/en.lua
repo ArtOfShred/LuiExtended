@@ -2284,16 +2284,19 @@ local strings = {
 
 	-- Damage over Time
     SI_LUIE_SKILL_GENERIC_BLEED_TP =                     "Afflicted with Bleeding Damage over time for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_BLEED_1_SEC_TP =               "Afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_BLEED_2_SEC_TP =               "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_DISEASE_TP =                   "Afflicted with Disease Damage over time for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_DISEASE_2_SEC_TP =             "Afflicted with Disease Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_POISON_TP =                    "Afflicted with Poison Damage over time for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP =              "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_BURN_TP =                      "Afflicted with Flame Damage over time for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_BURN_1_SEC_TP =                "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_BURN_2_SEC_TP =                "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_FREEZE_TP =                    "Afflicted with Frost Damage over time for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_FREEZE_2_SEC_TP =              "Afflicted with Frost Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_SHOCK_TP =                     "Afflicted with Shock Damage over time for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_SHOCK_1_SEC_TP =               "Afflicted with Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_SHOCK_2_SEC_TP =               "Afflicted with Shock Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
 	SI_LUIE_SKILL_GENERIC_OBLIVION_TP =					 "Afflicted with Oblivion Damage over time for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_MAGIC_TP =                     "Afflicted with Magic Damage over time for |cFFFFFF<<1>>|r seconds.",
@@ -2302,6 +2305,7 @@ local strings = {
 
 	-- Heal over Time, Resource Regeneration, Shields
 	-- SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Healing over time for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP =           "Increase Health Recovery for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_HOT_TIME_05SEC_TP =            "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP =             "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_HOT_TIME_1_5_SEC_TP =          "Healing every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds.",
@@ -2351,6 +2355,7 @@ local strings = {
 	SI_LUIE_SKILL_GENERIC_BLIND_TP =                     "Blinded for |cFFFFFF<<1>>|r seconds. |cffffff100|r% chance to miss all attacks.",
     SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP =               "Immune to knockback and disabling effects for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Immune to damage and crowd control effects for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_DISORIENT_TP =                 "Disoriented. You cannot attack or move until you take damage for |cffffff<<1>>|r seconds.",
 
 	-- Ravage Potions / Poisons
     SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Increase the cost of Magicka abilities by |cffffff60|r%.",
@@ -2745,7 +2750,16 @@ local strings = {
     SI_LUIE_SKILL_COLD_STONE_TREBUCHET =                 "Cold Stone Trebuchet",
     SI_LUIE_SKILL_COLD_FIRE_TREBUCHET =                  "Cold Fire Trebuchet",
     SI_LUIE_SKILL_COLD_FIRE_BALLISTA =                   "Cold Fire Ballista",
-    SI_LUIE_SKILL_GUARD_DETECTION =                      "Revealing nearby stealthed and invisible enemies.",
+    SI_LUIE_SKILL_GUARD_DETECTION =                      "Vigilance",
+    SI_LUIE_SKILL_GUARD_DETECTION_TP =                   "Guards are particularly vigilant and can see nearby players that are hiding in stealth.",
+    SI_LUIE_SKILL_BLESSING_OF_WAR_TP =                   "Increase Alliance Points earned by |cFFFFFF20|r% for |cFFFFFF1|r hour.\n\nOnly active while in Cyrodiil or Cyrodiil delves.",
+    SI_LUIE_SKILL_PUNCTURE_CYRODIIL_TP =                 "Increase damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_RAZOR_ARMOR_TP =                       "Decrease damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.\n\nWhile active the armor returns Physical Damage to attackers.",
+    SI_LUIE_SKILL_PUNCTURING_CHAINS_TP =                 "Increase damage taken by |cFFFFFF21.5|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP =            "Enveloped by a lightless sphere, your single target ranged abilities are reflected back on you for |cFFFFFF<<1>>|r seconds.\n\nThe core explodes when this effect ends, dealing Magic Damage.",
+    SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP =        "Disoriented. You cannot attack or move until you take damage for |cffffff<<1>>|r seconds.\n\nThe prison shatters when this effect ends, dealing Magic Damage.",
+    SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP =             "Reduce healing received by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP =             "Negate damage taken from Siege Weapons for |cFFFFFF<<1>>|r seconds.",
 
 	----------------------------------------------------------------
     -- SETS --------------------------------------------------------
@@ -2798,7 +2812,7 @@ local strings = {
     --SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_SNARE_TP =      "Deals Poison Damage every |cffffff1|r second and reduces Movement Speed by |cffffff50|r%.",
     SI_LUIE_SKILL_SET_STORMFIST_TP =                     "Enemies within |cffffff4|r meters of the thunderfist take Shock Damage every |cffffff1|r second for |cffffff3|r seconds.",
     SI_LUIE_SKILL_SET_ENGINE_GUARDIAN =                  "Restoring <<1>> every |cffffff0.5|r seconds for |cffffff6.5|r seconds.",
-    SI_LUIE_SKILL_SET_THE_TROLL_KING_TP =                "Health Recovery increased for |cffffff10|r seconds.",
+    SI_LUIE_SKILL_SET_THE_TROLL_KING_TP =                "Increase Health Recovery for |cffffff10|r seconds.",
     SI_LUIE_SKILL_SET_THURVOKUN_TP =                     "Enemies in the pool take Disease Damage every |cffffff1|r second and are afflicted with Minor Maim and Minor Defile for |cffffff4|r seconds for |cffffff8|r seconds.",
     SI_LUIE_SKILL_SET_ZAAN_TP =                          "Afflicted with increasing Flame Damage every |cffffff1|r second for |cffffff5|r seconds while the beam holds.",
 

@@ -108,6 +108,7 @@ T.Generic_Weapon_Spell_Damage_Duration  = GetString(SI_LUIE_SKILL_SET_GENERIC_WE
 T.Generic_Magicka_Regen                 = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP)
 T.Generic_Magicka_Regen_2_Sec           = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_2_SEC_TP)
 T.Generic_Stamina_Regen                 = GetString(SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP)
+T.Generic_Health_Recovery               = GetString(SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP)
 T.Generic_HoT_05Sec                     = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_05SEC_TP)
 T.Generic_HoT_1Sec                      = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP)
 T.Generic_HoT_1_5_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_1_5_SEC_TP)
@@ -117,16 +118,19 @@ T.Generic_HoT_2Sec                      = GetString(SI_LUIE_SKILL_GENERIC_HOT_TI
 T.Generic_Test                          = GetString(SI_LUIE_SKILL_TEST_TP)
 
 T.Generic_Bleed                         = GetString(SI_LUIE_SKILL_GENERIC_BLEED_TP)
+T.Generic_Bleed_1_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_BLEED_1_SEC_TP)
 T.Generic_Bleed_2_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_BLEED_2_SEC_TP)
 T.Generic_Disease                       = GetString(SI_LUIE_SKILL_GENERIC_DISEASE_TP)
 T.Generic_Disease_2_Sec                 = GetString(SI_LUIE_SKILL_GENERIC_DISEASE_2_SEC_TP)
 T.Generic_Poison                        = GetString(SI_LUIE_SKILL_GENERIC_POISON_TP)
 T.Generic_Poison_2_Sec                  = GetString(SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP)
 T.Generic_Burn                          = GetString(SI_LUIE_SKILL_GENERIC_BURN_TP)
+T.Generic_Burn_1_Sec                    = GetString(SI_LUIE_SKILL_GENERIC_BURN_1_SEC_TP)
 T.Generic_Burn_2_Sec                    = GetString(SI_LUIE_SKILL_GENERIC_BURN_2_SEC_TP)
 T.Generic_Freeze                        = GetString(SI_LUIE_SKILL_GENERIC_FREEZE_TP)
 T.Generic_Freeze_2_Sec                  = GetString(SI_LUIE_SKILL_GENERIC_FREEZE_2_SEC_TP)
 T.Generic_Shock                         = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_TP)
+T.Generic_Shock_1_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_1_SEC_TP)
 T.Generic_Shock_2_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_2_SEC_TP)
 T.Generic_Oblivion 					    = GetString(SI_LUIE_SKILL_GENERIC_OBLIVION_TP)
 T.Generic_Magic                         = GetString(SI_LUIE_SKILL_GENERIC_MAGIC_TP)
@@ -147,6 +151,7 @@ T.Generic_Fear                          = GetString(SI_LUIE_SKILL_GENERIC_FEAR_T
 T.Generic_Fear_No_Dur                   = GetString(SI_LUIE_SKILL_GENERIC_FEAR_NO_DUR_TP)
 T.Generic_Silence                       = GetString(SI_LUIE_SKILL_GENERIC_SILENCE_TP)
 T.Generic_Silence_No_Dur                = GetString(SI_LUIE_SKILL_GENERIC_SILENCE_NO_DUR_TP)
+T.Generic_Disorient                     = GetString(SI_LUIE_SKILL_GENERIC_DISORIENT_TP)
 
 T.Generic_CC_Immunity                   = GetString(SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP)
 T.Generic_Invisibility                  = GetString(SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP)
@@ -809,7 +814,16 @@ T.Skill_Meatbag_Catapult_Ground         = GetString(SI_LUIE_SKILL_MEATBAG_CATAPU
 T.Skill_Oil_Catapult_Ground             = GetString(SI_LUIE_SKILL_OIL_CATAPULT_GROUND_TP)
 T.Skill_Scattershot_Catapult            = GetString(SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_TP)
 T.Skill_Scattershot_Catapult_Ground     = GetString(SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_GROUND_TP)
-T.Skill_Guard_Detection                 = GetString(SI_LUIE_SKILL_GUARD_DETECTION)
+T.Skill_Guard_Detection                 = GetString(SI_LUIE_SKILL_GUARD_DETECTION_TP)
+T.Skill_Blessing_of_War                 = GetString(SI_LUIE_SKILL_BLESSING_OF_WAR_TP)
+
+T.Skill_Puncture_Cyrodiil               = GetString(SI_LUIE_SKILL_PUNCTURE_CYRODIIL_TP)
+T.Skill_Razor_Armor                     = GetString(SI_LUIE_SKILL_RAZOR_ARMOR_TP)
+T.Skill_Puncturing_Chains               = GetString(SI_LUIE_SKILL_PUNCTURING_CHAINS_TP)
+T.Skill_Unstable_Core_Cyrodiil          = GetString(SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP)
+T.Skill_Shattering_Prison_Cyrodiil      = GetString(SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP)
+T.Skill_Lethal_Arrow_Cyrodiil           = GetString(SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP)
+T.Skill_Siege_Shield_Cyrodiil           = GetString(SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP)
 
 ----------------------------------------------------------------
 -- QUESTS ------------------------------------------------------

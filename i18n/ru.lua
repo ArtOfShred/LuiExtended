@@ -2283,16 +2283,19 @@ local strings = {
 
 	-- Damage over Time
     SI_LUIE_SKILL_GENERIC_BLEED_TP =                     "Подвержен урону от Кровотечения на |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_BLEED_1_SEC_TP =               "Afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
 	SI_LUIE_SKILL_GENERIC_BLEED_2_SEC_TP =               "Подвержен урону от Кровотечения каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_DISEASE_TP =                   "Подвержен урону от Болезни на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_DISEASE_2_SEC_TP =             "Afflicted with Disease Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_POISON_TP =                    "Подвержен урону от Яда на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP =              "Подвержен урону от Болезни каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_BURN_TP =                      "Подвержен урону от Огня на |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_BURN_1_SEC_TP =                "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_BURN_2_SEC_TP =                "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_FREEZE_TP =                    "Подвержен урону от Мороза на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_FREEZE_2_SEC_TP =              "Afflicted with Frost Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_SHOCK_TP =                     "Подвержен урону от Электричества на |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_SHOCK_1_SEC_TP =               "Afflicted with Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_SHOCK_2_SEC_TP =               "Afflicted with Shock Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
 	SI_LUIE_SKILL_GENERIC_OBLIVION_TP =					 "Подвержен урону Обливиона на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_MAGIC_TP =                     "Подвержен Магическому урону на |cFFFFFF<<1>>|r секунд.",
@@ -2301,6 +2304,7 @@ local strings = {
 
 	-- Heal over Time, Resource Regeneration, Shields
 	-- SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Healing over time for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
+    SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP =           "Increase Health Recovery for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_HOT_TIME_05SEC_TP =            "Исцеление каждые |cFFFFFF0.5|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP =             "Исцеление каждую|cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_HOT_TIME_1_5_SEC_TP =          "Исцеление каждые |cFFFFFF1.5|r секунды в течение |cFFFFFF<<1>>|r секунд.",-- TODO: Check Translation
@@ -2350,6 +2354,7 @@ local strings = {
 	SI_LUIE_SKILL_GENERIC_BLIND_TP =                     "Ослеплён на |cFFFFFF<<1>>|r секунд. |cffffff100|r% шанс пропустить все атаки.",
     SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP =               "Иммунитет к отбрасыванию и прочим ограничивающим эффектам на |cFFFFFF<<1>>|r секунд.",
 	SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Иммунитет к урону и эффектам контроля на |cffffff<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_DISORIENT_TP =                 "Disoriented. You cannot attack or move until you take damage for |cffffff<<1>>|r seconds.",
 
 	-- Ravage Potions / Poisons
     SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Увеличивает стоимость способностей, расходующих Магию на |cffffff60|r%.",
@@ -2744,7 +2749,16 @@ local strings = {
     SI_LUIE_SKILL_COLD_STONE_TREBUCHET =                 "Cold Stone Trebuchet",
     SI_LUIE_SKILL_COLD_FIRE_TREBUCHET =                  "Cold Fire Trebuchet",
     SI_LUIE_SKILL_COLD_FIRE_BALLISTA =                   "Cold Fire Ballista",
-    SI_LUIE_SKILL_GUARD_DETECTION =                      "Revealing nearby stealthed and invisible enemies.",
+    SI_LUIE_SKILL_GUARD_DETECTION =                      "Vigilance",
+    SI_LUIE_SKILL_GUARD_DETECTION_TP =                   "Guards are particularly vigilant and can see nearby players that are hiding in stealth.",
+    SI_LUIE_SKILL_BLESSING_OF_WAR_TP =                   "Increase Alliance Points earned by |cFFFFFF20|r% for |cFFFFFF1|r hour.\n\nOnly active while in Cyrodiil or Cyrodiil delves.",
+    SI_LUIE_SKILL_PUNCTURE_CYRODIIL_TP =                 "Increase damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_RAZOR_ARMOR_TP =                       "Decrease damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.\n\nWhile active the armor returns Physical Damage to attackers.",
+    SI_LUIE_SKILL_PUNCTURING_CHAINS_TP =                 "Increase damage taken by |cFFFFFF21.5|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP =            "Enveloped by a lightless sphere, your single target ranged abilities are reflected back on you for |cFFFFFF<<1>>|r seconds.\n\nThe core explodes when this effect ends, dealing Magic Damage.",
+    SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP =        "Disoriented. You cannot attack or move until you take damage for |cffffff<<1>>|r seconds.\n\nThe prison shatters when this effect ends, dealing Magic Damage.",
+    SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP =             "Reduce healing received by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP =             "Negate damage taken from Siege Weapons for |cFFFFFF<<1>>|r seconds.",
 
 	----------------------------------------------------------------
     -- SETS --------------------------------------------------------

@@ -6118,6 +6118,16 @@ E.EffectOverride = {
     [40241] = { icon = 'esoui/art/icons/ability_ava_006_a.dds' }, -- Replenishing Barrier (Replenishing Barrier)
 
     ----------------------------------------------------------------
+    -- EMPEROR PASSIVES --------------------------------------------
+    ----------------------------------------------------------------
+
+    [39625] = { icon = 'LuiExtended/media/icons/abilities/passive_emperor_monarch.dds' }, -- Monarch
+    [39630] = { icon = 'LuiExtended/media/icons/abilities/passive_emperor_authority.dds' }, -- Authority
+    [39644] = { icon = 'LuiExtended/media/icons/abilities/passive_emperor_domination.dds' }, -- Domination
+    [39647] = { icon = 'LuiExtended/media/icons/abilities/passive_emperor_tactician.dds' }, -- Tactician
+    [39641] = { icon = 'LuiExtended/media/icons/abilities/passive_emperor_emperor.dds' }, -- Emperor
+
+    ----------------------------------------------------------------
     -- PLAYER PASSIVES RACIAL --------------------------------------
     ----------------------------------------------------------------
 
@@ -6670,61 +6680,65 @@ E.EffectOverride = {
 
     -- Cyrodiil
     [47717] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Cyrodiil Guard T1)
+    [46221] = { tooltip = T.Skill_Puncture_Cyrodiil }, -- Puncture (Cyrodiil Guard T1 & T2)
     [46830] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds' }, -- Bleeding Strike (Cyrodiil Guard T2)
-    [46832] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = A.Skill_Bleeding_Strike }, -- Bleeding (Cyrodiil Guard T2)
+    [46832] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = A.Skill_Bleeding_Strike, tooltip = T.Generic_Bleed_1_Sec }, -- Bleeding (Cyrodiil Guard T2)
     [46831] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = A.Skill_Bleeding_Strike }, -- Bleeding (Cyrodiil Guard T2)
     [46834] = { icon = 'esoui/art/icons/ability_1handed_005.dds' }, -- Power Bash (Cyrodiil Guard T2)
-    [72639] = { icon = 'esoui/art/icons/ability_1handed_005.dds', hide = true }, -- Power Bash (Cyrodiil Guard T2)
-    [72641] = { icon = 'esoui/art/icons/ability_1handed_005.dds' }, -- Power Bash (Cyrodiil Guard T2)
-    [36304] = { name = A.Skill_Spiked_Armor }, -- Razor Armor (Cyrodiil Guard T2)
+    [72639] = { icon = 'esoui/art/icons/ability_1handed_005.dds', hide = true, tooltip = T.Generic_Stagger }, -- Power Bash (Cyrodiil Guard T2)
+    [72641] = { icon = 'esoui/art/icons/ability_1handed_005.dds', tooltip = T.Generic_Stun }, -- Power Bash (Cyrodiil Guard T2)
+    [74087] = { tooltip = T.Generic_Disorient }, -- Power Bash (Cyrodiil Guard T2)
+    [36304] = { tooltip = T.Skill_Razor_Armor }, -- Razor Armor (Cyrodiil Guard T2)
     [36306] = { hide = true }, -- Razor Armor (Cyrodiil Guard T2)
-    [36305] = { name = A.Skill_Spiked_Armor }, -- Spike Armor Damage Return (Cyrodiil Guard T2)
+    [36305] = { name = A.Skill_Razor_Armor }, -- Spike Armor Damage Return (Cyrodiil Guard T2)
     [7880] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_torrent.dds', name = A.Skill_Shock_Torrent, hide = true }, -- Light Attack (Cyrodiil Mage T1)
-    [46336] = { name = A.Skill_Crystal_Shard }, -- Crystal Shard Stun (Cyrodiil Mage T1)
+    [46336] = { name = A.Skill_Crystal_Shard, tooltip = T.Generic_Stun }, -- Crystal Shard Stun (Cyrodiil Mage T1)
     [21629] = { icon = 'esoui/art/icons/ability_mage_008.dds' }, -- Mage's Lifesteal (Cyrodiil Mage T1)
     [46711] = { hide = true }, -- Bound Aegis (Cyrodiil Mage T2)
     [46726] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_torrent.dds', name = A.Skill_Improved_Shock_Torrent, hide = true }, -- Shock Torrent (Cyrodiil Mage T2)
-    [46730] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_torrent.dds', name = A.Skill_Improved_Shock_Torrent }, -- Shock Torrent (Cyrodiil Mage T2)
+    [46730] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_torrent.dds', name = A.Skill_Improved_Shock_Torrent, tooltip = T.Generic_Shock_1_Sec }, -- Shock Torrent (Cyrodiil Mage T2)
     [46819] = { icon = 'esoui/art/icons/ability_mage_068.dds', name = A.Skill_Lasting_Storm }, -- Storm Damage (Cyrodiil Mage T2)
     [46704] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds' }, -- Crystal Blast (Cyrodiil Mage T2)
-    [46706] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds', name = A.Skill_Crystal_Blast }, -- Crystal Shard Stun (Cyrodiil Mage T2)
+    [46705] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds' }, -- Crystal Blast (Cyrodiil Mage T2)
+    [46706] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds', name = A.Skill_Crystal_Blast, tooltip = T.Generic_Stun }, -- Crystal Shard Stun (Cyrodiil Mage T2)
     [46716] = { icon = 'esoui/art/icons/ability_mage_008.dds', name = A.Skill_Steal_Essence }, -- Stolen Essence (Cyrodiil Mage T2)
     [46719] = { hide = true }, -- Stolen Essence (Cryodiil Mage T2) (Pointless aura)
+    [52806] = { tooltip = T.Skill_Unstable_Core_Cyrodiil }, -- Unstable Core (Cyrodiil Mage T2)
     [75397] = { hide = true }, -- Unstable Core (Cryodiil Mage T2) (Pointless aura)
     [75395] = { hide = true }, -- Reflected FX (Cryodiil Mage T2) (Pointless aura)
     [57962] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_minor_wound.dds', hide = true }, -- Minor Wound (Cyrodiil Mender T1)
-    [46272] = { duration = 0 }, -- Rune Focus (Cyrodiil Mender T1)
-    [21638] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_telekinetic_disorient.dds', name = A.Skill_Telekinetic_Prison }, -- Telekinetic Disorient (Cyrodiil Mender T1)
+    [46272] = { duration = 0, groundLabel = true, tooltip = T.Generic_Damage_Shield_No_Duration }, -- Rune Focus (Cyrodiil Mender T1)
+    [21638] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_telekinetic_disorient.dds', name = A.Skill_Telekinetic_Prison, tooltip = T.Generic_Disorient }, -- Telekinetic Disorient (Cyrodiil Mender T1)
     [46839] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_minor_wound.dds', hide = true }, -- Major Wound (Cyrodiil Mender T2)
-    [46904] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', duration = 0 }, -- Rune Focus (Cyrodiil Mender T2)
-    [46906] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_telekinetic_disorient.dds', name = A.Skill_Shattering_Prison }, -- Telekinetic Disorient (Cyrodiil Mender T2)
+    [46904] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Damage_Shield_No_Duration }, -- Rune Focus (Cyrodiil Mender T2)
+    [46906] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_telekinetic_disorient.dds', name = A.Skill_Shattering_Prison, tooltip = T.Skill_Shattering_Prison_Cyrodiil }, -- Telekinetic Disorient (Cyrodiil Mender T2)
     [46910] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_telekinetic_disorient.dds' }, -- Shattering Prison (Cyrodiil Mender T2)
     [52862] = { hide = true }, -- Health Boon (Cyrodiil Mender T2)
     [22469] = { hide = true }, -- Siege Shield (Cyrodiil Mender T1 + T2)
-    [22489] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_healer_immune.dds', name = A.Skill_Siege_Barrier }, -- Siege Bubble (Cyrodiil Mender T1 + T2)
-    [51893] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0 }, -- Negate Magic (Cyrodiil Mender T1 + T2)
-    [51894] = { duration = 0 }, -- Negate Magic (Cyrodiil Mender T1 + T2)
+    [22489] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_healer_immune.dds', name = A.Skill_Siege_Barrier, tooltip = T.Skill_Siege_Shield_Cyrodiil }, -- Siege Bubble (Cyrodiil Mender T1 + T2)
+    [51893] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0, tooltip = T.Generic_Stun_No_Dur, groundLabel = true }, -- Negate Magic (Cyrodiil Mender T1 + T2)
+    [51894] = { duration = 0, tooltip = T.Generic_Silence_No_Dur, groundLabel = true }, -- Negate Magic (Cyrodiil Mender T1 + T2)
     [52864] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds' }, -- Quick Shot (Cyrodiil Archer T1 + T2)
     [54258] = { name = A.Skill_Improved_Volley }, -- Upgraded Volley (Cyrodiil Archer T2)
     [54264] = { icon = 'esoui/art/icons/ability_bow_001_a.dds', hide = true }, -- Lethal Arrow (Cryodiil Archer T2)
-    [54265] = { icon = 'esoui/art/icons/ability_bow_001_a.dds' }, -- Lethal Arrow (Cryodiil Archer T2)
+    [54265] = { icon = 'esoui/art/icons/ability_bow_001_a.dds', tooltip = T.Skill_Lethal_Arrow_Cyrodiil }, -- Lethal Arrow (Cryodiil Archer T2)
     [54259] = { icon = 'esoui/art/icons/ability_bow_004_a.dds', hide = true }, -- Draining Shot (Cryodiil Archer T2)
-    [54261] = { icon = 'esoui/art/icons/ability_bow_004_a.dds' }, -- Draining Shot (Cryodiil Archer T2)
+    [54261] = { icon = 'esoui/art/icons/ability_bow_004_a.dds', tooltip = T.Generic_Snare }, -- Draining Shot (Cryodiil Archer T2)
     [16510] = { name = A.Skill_Fire_Torrent, hide = true }, -- Fire Salvo (Cyrodiil Honor Guard T1)
     [15780] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_aoe_alt.dds' }, -- Honor Guard Rage (Cyrodiil Honor Guard T1)
-    [32446] = { icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = A.Skill_Dragon_Blood }, -- Guardian Heal (Cyrodiil Honor Guard T1)
+    [32446] = { icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = A.Skill_Dragon_Blood, tooltip = T.Generic_Health_Recovery }, -- Guardian Heal (Cyrodiil Honor Guard T1)
     [35113] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', hide = true }, -- Extended Chains (Cyrodiil Honor Guard T1)
-    [35115] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Extended_Chains, hide = true }, -- Pull (Cyrodiil Honor Guard T1)
+    [35115] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Extended_Chains, hide = true, tooltip = T.Generic_Stun }, -- Pull (Cyrodiil Honor Guard T1)
     [46992] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_snare_shock.dds' }, -- Cripping Rage (Cyrodiil Honor Guard T2)
-    [47001] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_snare_shock.dds' }, -- Cripping Rage (Cyrodiil Honor Guard T2)
-    [47004] = { icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = A.Skill_Dragon_Blood }, -- Guardian Heal (Cyrodiil Honor Guard T2)
+    [47001] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_snare_shock.dds', tooltip = T.Generic_Snare }, -- Cripping Rage (Cyrodiil Honor Guard T2)
+    [47004] = { icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = A.Skill_Dragon_Blood, tooltip = T.Generic_Health_Recovery }, -- Guardian Heal (Cyrodiil Honor Guard T2)
     [47019] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', hide = true }, -- Puncturing Chains (Cyrodiil Honor Guard T2)
-    [47023] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Puncturing_Chains }, -- Puncture (Cyrodiil Honor Guard T2)
-    [47020] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Puncturing_Chains, hide = true }, -- Pull (Cyrodiil Honor Guard T2)
+    [47023] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Puncturing_Chains, tooltip = T.Skill_Puncturing_Chains }, -- Puncture (Cyrodiil Honor Guard T2)
+    [47020] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Puncturing_Chains, hide = true, tooltip = T.Generic_Stun }, -- Pull (Cyrodiil Honor Guard T2)
     [15783] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Triple Strike (Cyrodiil Honor Guard T1 + T2)
     [15782] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Triple Strike (Cyrodiil Honor Guard T1 + T2)
     [46990] = { hide = true }, -- Improved Fire Torrent (Cyrodiil Honor Guard T2)
-    [46991] = { icon = 'esoui/art/icons/ability_mage_011.dds', name = A.Skill_Improved_Fire_Torrent }, -- Fire Torrent Burning (Cryodiil Honor Guard T2)
+    [46991] = { icon = 'esoui/art/icons/ability_mage_011.dds', name = A.Skill_Improved_Fire_Torrent, tooltip = T.Generic_Burn_1_Sec }, -- Fire Torrent Burning (Cryodiil Honor Guard T2)
 
     -- Animals
     [5451] = { icon = 'LuiExtended/media/icons/abilities/ability_alit_bite.dds' }, -- Bite (Alit)
@@ -7873,7 +7887,7 @@ E.EffectOverride = {
     -- CYRODIIL ----------------------------------------------------
     ----------------------------------------------------------------
 
-    [39671] = { icon = 'esoui/art/icons/achievement_midyearevent_009.dds', passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_emperorship_alliance_bonus.dds' }, -- Emperorship Alliance Bonus
+    [39671] = { icon = 'esoui/art/icons/achievement_ic_024.dds', passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_emperorship_alliance_bonus.dds' }, -- Emperorship Alliance Bonus
     [11346] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds', passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_home_keep_bonus.dds' }, -- Home Keep Bonus
     [11341] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 1, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus I
     [11343] = { icon = 'esoui/art/icons/achievement_midyearevent_008.dds', stack = 2, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_enemy_keep_bonus.dds' }, -- Enemy Keep Bonus II
@@ -7889,7 +7903,7 @@ E.EffectOverride = {
     [15058] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_offensive_scroll_bonus.dds', stack = 1, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_offensive_scroll_bonus.dds' }, -- Offensive Scroll Bonus I
     [16348] = { icon = 'LuiExtended/media/icons/abilities/ability_cyrodiil_offensive_scroll_bonus.dds', stack = 2, passiveIcon = 'LuiExtended/media/icons/abilities/passive_cyrodiil_offensive_scroll_bonus.dds' }, -- Offensive Scroll Bonus II
 
-    [66282] = { icon = 'esoui/art/icons/achievement_026.dds' }, -- Blessing of War
+    [66282] = { icon = 'esoui/art/icons/achievement_ic_007_c.dds', tooltip = T.Skill_Blessing_of_War }, -- Blessing of War
 
     [15177] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Altadoon
     [15178] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Mnem
@@ -7900,7 +7914,7 @@ E.EffectOverride = {
 
     [109862] = { hide = true }, -- Stronger Walls
     [109944] = { hide = true }, -- Stronger Doors
-    [64674] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = A.Skill_Detection, tooltip = T.Skill_Guard_Detection }, -- Cyrodiil Guard See Stealth
+    [64674] = { icon = 'esoui/art/icons/ava_siege_hookpoint_005.dds', name = A.Skill_Guard_Detection, tooltip = T.Skill_Guard_Detection }, -- Cyrodiil Guard See Stealth
     [8077] = { hide = true }, -- Increased Guard Health
     [8639] = { hide = true }, -- Increased Damage
     [43754] = { hide = true }, -- Heavily Resistant Guards

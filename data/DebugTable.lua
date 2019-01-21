@@ -6312,6 +6312,16 @@ debugAuras = {
             [40241] = true, -- Replenishing Barrier (Replenishing Barrier)
 
             -------------------------------------
+            -- EMPEROR PASSIVES -----------------
+            -------------------------------------
+
+            [39625] = true, -- Monarch
+            [39630] = true, -- Authority
+            [39644] = true, -- Domination
+            [39647] = true, -- Tactician
+            [39641] = true, -- Emperor
+
+            -------------------------------------
             -- RACIALS --------------------------
             -------------------------------------
 
@@ -6987,6 +6997,7 @@ debugAuras = {
             [10650] = true, -- Oil Drenched -- Synergies (Footsoldier)
             [12439] = true, -- Burning Arrow -- Synergies (Archer)
             [70413] = true, -- Burning Arrow (Archer - Cyrodiil)
+            --[70417] = true, -- Ignite (Archer - Cyrodiil)
             [14068] = true, -- Ignite -- Synergies (Archer)
             [14070] = true, -- Ignite -- Synergies (Archer)
             [10805] = true, -- Ignite -- Synergies (Fire Mage)
@@ -7635,6 +7646,7 @@ debugAuras = {
             [46718] = true, -- Lifesteal (Mage T2)
             [46717] = true, -- Lifesteal (Mage T2)
             [46704] = true, -- Crystal Blast (Mage T2)
+            [46705] = true, -- Crystal Blast (Mage T2)
             [46706] = true, -- Crystal Shard Stun (Mage T2)
             [52806] = true, -- Unstable Core (Mage T2)
             [52808] = true, -- Unstable Core  (Mage T2)
@@ -7664,8 +7676,8 @@ debugAuras = {
             [51894] = true, -- Negate Magic (Mender T2)
 
             [52864] = true, -- Quick Shot (Archer T1)
-            --[54257] = true, -- Upgraded Volley (Archer T2)
-            --[54258] = true, -- Upgraded Volley (Archer T2)
+            [54257] = true, -- Upgraded Volley (Archer T2)
+            [54258] = true, -- Upgraded Volley (Archer T2)
             [54264] = true, -- Lethal Arrow (Archer T2)
             [54265] = true, -- Lethal Arrow (Archer T2)
             [54259] = true, -- Draining Shot (Archer T2)

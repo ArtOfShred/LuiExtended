@@ -823,6 +823,7 @@ A.Skill_Home_Keep_Bonus             = 11346
 A.Skill_Edge_Keep_Bonus_1           = 111549
 A.Skill_Edge_Keep_Bonus_2           = 111552
 A.Skill_Edge_Keep_Bonus_3           = 111553
+A.Skill_Guard_Detection             = GetString(SI_LUIE_SKILL_GUARD_DETECTION)
 
 A.Skill_Stow_Siege_Weapon           = GetString(SI_LUIE_SKILL_STOW_SIEGE_WEAPON)
 A.Skill_Deploy                      = GetString(SI_LUIE_SKILL_DEPLOY)
@@ -860,6 +861,8 @@ A.Skill_Practice_Siege_Repair_Kit   = GetItemLinkName("|H0:item:43056:1:1:0:0:0:
 A.Skill_Pact_Forward_Camp           = GetItemLinkName("|H0:item:29534:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Pact Foward Camp
 A.Skill_Dominion_Forward_Camp       = GetItemLinkName("|H0:item:29533:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Dominion Forward Camp
 A.Skill_Covenant_Forward_Camp       = GetItemLinkName("|H0:item:29535:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Covenant Forward Camp
+
+A.Skill_Razor_Armor                 = 36304
 
 -- ---------------------------------------------------
 -- NPC ABILITIES -------------------------------------
