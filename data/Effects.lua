@@ -8106,8 +8106,11 @@ E.EffectOverride = {
     [20259] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_sigil_of_frost.dds', name = A.Trap_Sigil_of_Frost, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Sigil of Frost Snare
 
     -- Lava & Slaughterfish
-    [44029] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Slaughterfish Attack (Slaughterfish)
+    [44029] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Slaughterfish_Attack }, -- Slaughterfish Attack (Slaughterfish)
     [44034] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds' }, -- Slaughterfish Attack (Slaughterfish)
+
+    [113080] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Slaughterfish_Attack }, -- Slaughterfish Attack (Slaughterfish)
+    [113082] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds' }, -- Slaughterfish Attack (Slaughterfish)
 
     [19224] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava }, -- In Lava (Lava - Halls of Torment)
     [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava }, -- In Lava (Lava - The Earth Forge)

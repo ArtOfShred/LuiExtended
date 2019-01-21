@@ -6960,6 +6960,11 @@ debugAuras = {
             [44034] = true, -- Slaughterfish Attack (Slaughterfish)
             [44039] = true, -- Slaughterfish Attack (Slaughterfish)
 
+            [113080] = true, -- Slaughterfish Attack (Slaughterfish - Cyrodiil)
+            [113081] = true, -- Slaughterfish Bonus (Slaughterfish - Cyrodiil)
+            [113082] = true, -- Slaughterfish Attack (Slaughterfish - Cyrodiil)
+            [113083] = true, -- Slaughterfish Attack (Slaughterfish - Cyrodiil)
+
             [19224] = true, -- In Lava (Lava - Halls of Torment)
             [19225] = true, -- Lava Snare (Lava - Halls of Torment)
             [11338] = true, -- In Lava (Lava - The Earth Forge)

@@ -847,7 +847,7 @@ T.Skill_Mark_of_the_Worm                = GetString(SI_LUIE_SKILL_MARK_OF_THE_WO
 -- ---------------------------------------------------
 
 T.Skill_Lava                            = GetString(SI_LUIE_SKILL_LAVA_SNARE_TP)
-
+T.Skill_Slaughterfish_Attack            = GetString(SI_LUIE_SKILL_SLAUGHTERFISH_ATTACK_TP)
 
 ----------------------------------------------------------------
 -- NPCS ------------------------------------------------------

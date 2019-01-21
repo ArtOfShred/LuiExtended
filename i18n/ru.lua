@@ -2993,6 +2993,7 @@ local strings = {
 
     SI_LUIE_SKILL_BEAR_FEROCITY_TP =                     "Completely immune to all crowd control and movement impairing effects for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_BOSS_CC_IMMUNITY =                     "Boss Immunities",
+    SI_LUIE_SKILL_SLAUGHTERFISH_ATTACK_TP =              "You are being devoured by a swarm of Slaughterfish, turn back before it's too late!",
 
 }
 
