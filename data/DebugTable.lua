@@ -11180,7 +11180,7 @@ debugAuras = {
             [15058] = true, -- Offensive Scroll Bonus I
             [16348] = true, -- Offensive Scroll Bonus II
 
-            --[66282] = true, -- Blessing of War
+            [66282] = true, -- Blessing of War
 
             [15177] = true, -- Elder Scroll of Altadoon
             [15178] = true, -- Elder Scroll of Mnem
@@ -11205,7 +11205,8 @@ debugAuras = {
             [96091] = true, -- Frozen Gate Suppression
             [97414] = true, -- Nature Grasp Suppression
             [59079] = true, -- Dragon Leap Range Suppression
-            --[90095] = true, -- Falling Damage Reduction
+            [90095] = true, -- Falling Damage Reduction
+            [112288] = true, -- Wipe Undo Timer
 
             -- Siege Weapons
             [12256] = true, -- Pack Siege
@@ -11335,6 +11336,31 @@ debugAuras = {
             [35136] = true, -- Meatbag (Meatbag Catapult)
             [35132] = true, -- Oil Pot (Oil Catapult)
             [33348] = true, -- Practice Siege Repair Kit (Practice Siege Repair Kit)
+
+            -------------------------------------
+            -- BATTLEGROUNDS --------------------
+            -------------------------------------
+
+            -- Arcane University
+            [92600] = true, -- BGArcane Teleport 01
+            [92602] = true, -- BGArcane Teleport 02
+            [92605] = true, -- BGArcane Teleport 03
+            [92607] = true, -- BGArcane Teleport 04
+            [94480] = true, -- BGArcane Teleport 06
+
+            -- Foyada Quarry
+            [87946] = true, -- BG Lava
+            [87949] = true, -- Lava
+            [87948] = true, -- Lava Snare
+            [88707] = true, -- Lava Bonus
+
+            -- Ald Carac
+            --[93602] = true, -- Move buff
+            --[92755] = true, -- Stun
+            [92757] = true, -- Spinning Blade
+            [92759] = true, -- Serrated Blade
+            [92754] = true, -- Blade Vulnerability
+            --[92957] = true, -- Blade Despawn
 
             -------------------------------------
             -- SEASONAL EVENTS ------------------

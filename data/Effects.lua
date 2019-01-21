@@ -2325,6 +2325,10 @@ E.EffectSourceOverride = {
     [71678] = {pet = 'Morkuldin'}, -- Light Attack {Morkuldin} -- TODO: Localize
     [71679] = {pet = 'Morkuldin'}, -- Cleave {Morkuldin} -- TODO: Localize
 
+    -- BATTLEGROUNDS
+    [92757] = {source = A.Trap_Spinning_Blade_Trap }, -- Spinning Blade (Alc Carac)
+    [92759] = {source = A.Trap_Spinning_Blade_Trap }, -- Serrated Blade (Alc Carac)
+
     -- TRAPS
     [62769] = {source = A.Trap_Cold_Fire_Trap}, -- Coldharbour Flames {MQ Tutorial}
     [62770] = {source = A.Trap_Cold_Fire_Trap}, -- Coldharbour Flames {MQ Tutorial}
@@ -2616,7 +2620,7 @@ E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMB
 E.ArtificialEffectOverride = {
     --[0] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds' }, -- Battle Spirit (Cyrodiil, Duel)
     [2] = { name = zo_strformat("<<1>> (<<2>>)", A.Skill_Battle_Spirit, A.Skill_Imperial_City) }, -- Battle Spirit Imperial City
-    -- 3 = Battleground Deserter Penalty
+    [3] = { tooltip = T.Innate_Battleground_Deserter }, -- Battleground Deserter Penalty
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -7923,9 +7927,6 @@ E.EffectOverride = {
     [59079] = { hide = true }, -- Dragon Leap Range Suppression
     [90095] = { hide = true }, -- Falling Damage Reduction
 
-
-    -- ABCDE
-
     -- Siege Weapons
 
     [12256] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_pack_siege.dds', name = A.Skill_Stow_Siege_Weapon }, -- Pack Siege (Generic Siege)
@@ -8052,6 +8053,16 @@ E.EffectOverride = {
     [35136] = { icon = 'esoui/art/icons/ava_siege_ammo_003.dds' , name = A.Skill_Meatbag_Catapult }, -- Meatbag (Meatbag Catapult)
     [35132] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_oil_catapult.dds', name = A.Skill_Oil_Catapult }, -- Oil Pot (Oil Catapult)
     [33348] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_repair_kit_practice_siege.dds' }, -- Practice Siege Repair Kit (Practice Siege Repair Kit)
+
+    ----------------------------------------------------------------
+    -- BATTLEGROUNDS -------------------------------------------------------
+    ----------------------------------------------------------------
+
+    [87949] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds' }, -- Lava (Foyada Quarry)
+    [87948] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, duration = 0, forcedContainer = "short", tooltip = T.Trap_Lava }, -- Lava Snare (Foyada Quarry)
+
+    [92757] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Spinning_Blade_Trap}, -- Spinning Blade (Blade Trap)
+    [92759] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Spinning_Blade_Trap, tooltip = T.Generic_Bleed_1_Sec }, -- Serrated Blade (Blade Trap)
 
     ----------------------------------------------------------------
     -- TRAPS -------------------------------------------------------

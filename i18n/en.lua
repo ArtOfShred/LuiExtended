@@ -2137,6 +2137,7 @@ local strings = {
     SI_LUIE_SKILL_DISGUISE_TP =                          "Disguised. You can be revealed by sentries or performing suspicious activity.\n\nTaking damage will destroy your disguise.",
     SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Health increased by |cFFFFFF5000|r\n• Damage taken, healing received, and damage shield strength decreased by |cFFFFFF50|r%\n• Ability range of |cFFFFFF28|r meters or more increased by |cFFFFFF8|r",
     SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "You have recently recalled to a Wayshrine and must pay an additional gold fee to do so again.",
+    SI_LUIE_SKILL_BATTLEGROUND_DESERTER_TP =             "You left a Battleground match early and cannot queue again or earn Alliance points from any PvP sources.",
 
 	----------------------------------------------------------------
     -- ITEM / CONSUMABLE TOOLTIPS ----------------------------------
@@ -2761,6 +2762,13 @@ local strings = {
     SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP =             "Reduce healing received by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP =             "Negate damage taken from Siege Weapons for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP =               "Stunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.\n\nWhen this effect ends you will be disoriented for |cffffff15|r seconds.",
+
+	----------------------------------------------------------------
+    -- TRAPS -------------------------------------------------------
+    ----------------------------------------------------------------
+
+    SI_LUIE_SKILL_LAVA_SNARE_TP =                        "Sufffering flame damage every |cFFFFFF<<1>>|r seconds. Snared.", -- TODO: Make better tooltip.
+    SI_LUIE_SKILL_SPINNING_BLADE_TRAP =                  "Spinning Blade Trap",
 
 	----------------------------------------------------------------
     -- SETS --------------------------------------------------------

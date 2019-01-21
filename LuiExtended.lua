@@ -332,6 +332,18 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         return displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding
     end
 
+    zos_GetArtificialEffectTooltipText = GetArtificialEffectTooltipText
+    GetArtificialEffectTooltipText = function(artificialEffectId)
+        local tooltip
+        if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].tooltip then
+            tooltip = LUIE.Effects.ArtificialEffectOverride[artificialEffectId].tooltip
+            return tooltip
+        else
+            tooltip = zos_GetArtificialEffectTooltipText(artificialEffectId)
+            return tooltip
+        end
+    end
+
     ZO_Synergy.OnSynergyAbilityChanged = function(self)
         local synergyName, iconFilename = GetSynergyInfo()
 

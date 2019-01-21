@@ -2136,6 +2136,7 @@ local strings = {
     SI_LUIE_SKILL_DISGUISE_TP =                          "Маскировка. Вы можете быть обнаружены часовыми или выполняя подозрительную деятельность.\n\nПолучение урона снимет вашу маскировку.",
     SI_LUIE_SKILL_BATTLE_SPIRIT_TP =                     "• Здоровье увеличено на |cFFFFFF5000|r\n• Получаемый урон, исцеление и щиты от урона уменьшены на |cFFFFFF50|r%\n• Дальность действия способностей действующих на расстоянии |cFFFFFF28|r метров и более увеличена на |cFFFFFF8|r",
     SI_LUIE_SKILL_RECALL_PENALTY_TP =                    "Вы недавно пользовались перемещением к дорожному святилищу и должно заплатить дополнительное золото, чтобы воспользоваться им вновь.",
+    SI_LUIE_SKILL_BATTLEGROUND_DESERTER_TP =             "You left a Battleground match early and cannot queue again or earn Alliance points from any PvP sources.", -- TODO: Translate
 
 	----------------------------------------------------------------
     -- ITEM / CONSUMABLE TOOLTIPS ----------------------------------
@@ -2760,6 +2761,13 @@ local strings = {
     SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP =             "Reduce healing received by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP =             "Negate damage taken from Siege Weapons for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP =               "Stunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.\n\nWhen this effect ends you will be disoriented for |cffffff15|r seconds.",
+
+	----------------------------------------------------------------
+    -- TRAPS -------------------------------------------------------
+    ----------------------------------------------------------------
+
+    SI_LUIE_SKILL_LAVA_SNARE_TP =                        "Sufffering flame damage every |cFFFFFF<<1>>|r seconds. Snared.", -- TODO: Make better tooltip.
+    SI_LUIE_SKILL_SPINNING_BLADE_TRAP =                  "Spinning Blade Trap",
 
 	----------------------------------------------------------------
     -- SETS --------------------------------------------------------

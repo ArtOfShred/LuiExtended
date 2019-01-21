@@ -183,6 +183,7 @@ T.Innate_Taunt                          = GetString(SI_LUIE_SKILL_TAUNT_TP)
 T.Innate_Disguised                      = GetString(SI_LUIE_SKILL_DISGUISE_TP)
 T.Innate_Battle_Spirit                  = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT_TP)
 T.Innate_Recall_Penalty                 = GetString(SI_LUIE_SKILL_RECALL_PENALTY_TP)
+T.Innate_Battleground_Deserter          = GetString(SI_LUIE_SKILL_BATTLEGROUND_DESERTER_TP)
 T.Innate_Ayleid_Well                    = GetString(SI_LUIE_SKILL_AYLEID_WELL_TP)
 T.Innate_Ayleid_Well_Fortified          = GetString(SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP)
 T.Innate_Firelight                      = GetString(SI_LUIE_SKILL_FIRELIGHT_TP)
@@ -825,6 +826,12 @@ T.Skill_Shattering_Prison_Cyrodiil      = GetString(SI_LUIE_SKILL_SHATTERING_PRI
 T.Skill_Lethal_Arrow_Cyrodiil           = GetString(SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP)
 T.Skill_Siege_Shield_Cyrodiil           = GetString(SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP)
 T.Skill_Power_Bash_Cyrodiil             = GetString(SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP)
+
+-- ---------------------------------------------------
+-- TRAPS ---------------------------------------------
+-- ---------------------------------------------------
+
+T.Skill_Lava                            = GetString(SI_LUIE_SKILL_LAVA_SNARE_TP)
 
 ----------------------------------------------------------------
 -- QUESTS ------------------------------------------------------
