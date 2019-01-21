@@ -2762,6 +2762,13 @@ local strings = {
     SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP =             "Reduce healing received by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP =             "Negate damage taken from Siege Weapons for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP =               "Stunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.\n\nWhen this effect ends you will be disoriented for |cffffff15|r seconds.",
+    SI_LUIE_SKILL_ELDER_SCROLL_TP =                      "Carrying the |cFFFFFF<<1>>|r.",
+
+	----------------------------------------------------------------
+    -- BATTLEGROUNDS -----------------------------------------------
+    ----------------------------------------------------------------
+
+    SI_LUIE_SKILL_MARK_OF_THE_WORM_TP =                  "Cursed with a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage.",
 
 	----------------------------------------------------------------
     -- TRAPS -------------------------------------------------------

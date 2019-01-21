@@ -827,6 +827,19 @@ T.Skill_Lethal_Arrow_Cyrodiil           = GetString(SI_LUIE_SKILL_LETHAL_ARROW_C
 T.Skill_Siege_Shield_Cyrodiil           = GetString(SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP)
 T.Skill_Power_Bash_Cyrodiil             = GetString(SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP)
 
+T.Skill_Elder_Scroll_Altadoon           = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(15177))
+T.Skill_Elder_Scroll_Mnem               = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(15178))
+T.Skill_Elder_Scroll_Ghartok            = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22282))
+T.Skill_Elder_Scroll_Chim               = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22295))
+T.Skill_Elder_Scroll_Ni_Mohk            = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22297))
+T.Skill_Elder_Scroll_Alma_Ruma          = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22299))
+
+-- ---------------------------------------------------
+-- BATTLEGROUNDS -------------------------------------
+-- ---------------------------------------------------
+
+T.Skill_Mark_of_the_Worm                = GetString(SI_LUIE_SKILL_MARK_OF_THE_WORM_TP)
+
 -- ---------------------------------------------------
 -- TRAPS ---------------------------------------------
 -- ---------------------------------------------------

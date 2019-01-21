@@ -4556,10 +4556,13 @@ E.EffectOverride = {
     -- Conjured Ward / Hardened Ward / Empowered Ward
     [28418] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Conjured Ward (Conjured Ward)
     [28421] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Conjured Ward (Conjured Ward)
+    [28832] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Conjured Ward (Conjured Ward)
     [29489] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Hardened Ward (Hardened Ward)
     [29490] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Hardened Ward (Hardened Ward)
+    [29491] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Hardened Ward (Hardened Ward)
     [29482] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Empowered Ward (Empowered Ward)
     [29483] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Empowered Ward (Empowered Ward)
+    [29484] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Empowered Ward (Empowered Ward)
     [77418] = { tooltip = A.Skill_Empowered_Ward }, -- Minor Intellect (Empowered Ward)
 
     -- Bound Armor / Bound Armaments / Bound Aegis
@@ -4782,7 +4785,7 @@ E.EffectOverride = {
     [22003] = { tooltip = T.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
     [21757] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
     [22001] = { tooltip = T.Skill_Solar_Disturbance, tooltipValue2Mod = -4.8 }, -- Solar Disturbance (Solar Disturbance)
-    [21760] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Disturbance }, -- Solar Disturbance (Solar Disturbance)
+    [21760] = { name = A.Skill_Major_Maim, tooltip = A.Skill_Solar_Disturbance }, -- Solar Disturbance (Solar Disturbance)
     [24307] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance }, -- Solar Disturbance Snare (Solar Disturbance)
 
     -- Restoring Light
@@ -5066,9 +5069,9 @@ E.EffectOverride = {
     [60759] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackrestore.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Shield)
     [16499] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Light Attack
     [17170] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackmedium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
-    [17169] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds', name = A.Skill_Heavy_Attack_Main_Hand }, -- Heavy Attack
-    [18622] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds', name = A.Skill_Heavy_Attack_Off_Hand }, -- Heavy Attack (Dual Wield)
-    [60758] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackrestore.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Dual Wield)
+    [17169] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy_dw.dds', name = A.Skill_Heavy_Attack_Main_Hand }, -- Heavy Attack
+    [18622] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy_dw.dds', name = A.Skill_Heavy_Attack_Off_Hand }, -- Heavy Attack (Dual Wield)
+    [60758] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackrestore_dw.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Dual Wield)
     [16688] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds' }, -- Light Attack
     [17174] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attackmedium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
     [17173] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attackheavy.dds' }, -- Heavy Attack
@@ -7903,12 +7906,12 @@ E.EffectOverride = {
 
     [66282] = { icon = 'esoui/art/icons/achievement_ic_007_c.dds', tooltip = T.Skill_Blessing_of_War }, -- Blessing of War
 
-    [15177] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Altadoon
-    [15178] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Mnem
-    [22282] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Ghartok
-    [22295] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Chim
-    [22297] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Ni-Mohk
-    [22299] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short' }, -- Elder Scroll of Alma Ruma
+    [15177] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short', tooltip = T.Skill_Elder_Scroll_Altadoon }, -- Elder Scroll of Altadoon
+    [15178] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short', tooltip = T.Skill_Elder_Scroll_Mnem }, -- Elder Scroll of Mnem
+    [22282] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short', tooltip = T.Skill_Elder_Scroll_Ghartok }, -- Elder Scroll of Ghartok
+    [22295] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short', tooltip = T.Skill_Elder_Scroll_Chim }, -- Elder Scroll of Chim
+    [22297] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short', tooltip = T.Skill_Elder_Scroll_Ni_Mohk }, -- Elder Scroll of Ni-Mohk
+    [22299] = { icon = 'esoui/art/icons/achievement_068.dds', forcedContainer = 'short', tooltip = T.Skill_Elder_Scroll_Alma_Ruma }, -- Elder Scroll of Alma Ruma
 
     [109862] = { hide = true }, -- Stronger Walls
     [109944] = { hide = true }, -- Stronger Doors
@@ -7919,6 +7922,7 @@ E.EffectOverride = {
     [8657] = { hide = true }, -- Heavily Armored Guards
     [8658] = { hide = true }, -- Eagle Eye Guards
     [25873] = { hide = true }, -- heal
+    [72059] = { hide = true }, -- Portal Spawn
 
     [64197] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_sanctuary.dds', forcedContainer = 'short', tooltip = T.Skill_AvA_Sanctuary }, -- Sanctuary Cyrodiil passive is considered unlimited duration, but the effect is only while the player is in the area. Should show up under short buffs.
     [52291] = { hide = true }, -- Chain Pull Range Suppression
@@ -8058,8 +8062,13 @@ E.EffectOverride = {
     -- BATTLEGROUNDS -------------------------------------------------------
     ----------------------------------------------------------------
 
+    [95826] = { icon = 'esoui/art/icons/achievement_042.dds', name = A.Skill_Mark_of_the_Worm, unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = T.Skill_Mark_of_the_Worm }, -- Worm Cult Curse
+    [95829] = { hide = true }, -- FX Dummy
+    [95830] = { hide = true }, -- Mark of the Worm
+    [95831] = { icon = 'esoui/art/icons/achievement_042.dds', }, -- Mark of the Worm
+
     [87949] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds' }, -- Lava (Foyada Quarry)
-    [87948] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, duration = 0, forcedContainer = "short", tooltip = T.Trap_Lava }, -- Lava Snare (Foyada Quarry)
+    [87948] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, duration = 0, tooltip = T.Trap_Lava }, -- Lava Snare (Foyada Quarry)
 
     [92757] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Spinning_Blade_Trap}, -- Spinning Blade (Blade Trap)
     [92759] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Spinning_Blade_Trap, tooltip = T.Generic_Bleed_1_Sec }, -- Serrated Blade (Blade Trap)

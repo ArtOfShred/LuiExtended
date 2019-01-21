@@ -1776,10 +1776,12 @@ debugAuras = {
             [107093] = true, -- Mantle of Siroria (Siroria's)
             [107095] = true, -- Mantle of Siroria (Siroria's)
             [110118] = true, -- Siroria's Boon (Siroria's)
+            [110067] = true, -- Siroria's Boon (Siroria's)
 
             [109079] = true, -- Ideal Mantle of Siroria (Perfect Siroria's)
             [109081] = true, -- Ideal Mantle of Siroria (Perfect Siroria's)
             [110142] = true, -- Siroria's Boon (Siroria's)
+            [110143] = true, -- Siroria's Boon (Siroria's)
 
             [107202] = true, -- Arms of Relequen (Relequen's)
             [110504] = true, -- Arms of Relequen (Relequen's)
@@ -2273,6 +2275,7 @@ debugAuras = {
             --[61737] = true, -- Empower
             [41952] = true, -- Generic Fear Snare
             [55080] = true, -- Pet Hidden
+            [16566] = true, -- CC Immunity
             [28301] = true, -- Crowd Control Immunity
             [38117] = true, -- Crowd Control Immunity
 
@@ -3348,13 +3351,16 @@ debugAuras = {
 
             [28418] = true, -- Conjured Ward (Conjured Ward)
             [28421] = true, -- Conjured Ward (Conjured Ward)
+            [28832] = true, -- Conjured Ward (Conjured Ward)
 
             [29492] = true, -- Hardened Ward (Hardened Ward)
             [29489] = true, -- Hardened Ward (Hardened Ward)
             [29490] = true, -- Hardened Ward (Hardened Ward)
+            [29491] = true, -- Hardened Ward (Hardened Ward)
 
             [29482] = true, -- Empowered Ward (Empowered Ward)
             [29483] = true, -- Empowered Ward (Empowered Ward)
+            [29484] = true, -- Empowered Ward (Empowered Ward)
             [77418] = true, -- Minor Intellect (Empowered Ward)
 
             [108849] = true, -- Bound Armor Passive (Bound Armor)
@@ -11198,6 +11204,7 @@ debugAuras = {
             [8657] = true, -- Heavily Armored Guards
             [8658] = true, -- Eagle Eye Guards
             [25873] = true, -- heal
+            --[72059] = true, -- Portal Spawn
 
             [64197] = true, -- Sanctuary
             [64687] = true, -- Silence
@@ -11346,7 +11353,13 @@ debugAuras = {
             [92602] = true, -- BGArcane Teleport 02
             [92605] = true, -- BGArcane Teleport 03
             [92607] = true, -- BGArcane Teleport 04
+            [92609] = true, -- BGArcane Teleport 05
             [94480] = true, -- BGArcane Teleport 06
+            [94483] = true, -- BGArcane Teleport 07
+            --[95826] = true, -- Worm Cult Curse
+            --[95829] = true, -- FX Dummy
+            --[95830] = true, -- Mark of the Worm
+            --[95831] = true, -- Mark of the Worm
 
             -- Foyada Quarry
             [87946] = true, -- BG Lava
@@ -11361,6 +11374,13 @@ debugAuras = {
             [92759] = true, -- Serrated Blade
             [92754] = true, -- Blade Vulnerability
             --[92957] = true, -- Blade Despawn
+
+            -- Ularra
+            [95292] = true, -- BG6 Teleport 01
+            [95293] = true, -- BG6 Teleport 02
+            [95294] = true, -- BG6 Teleport 02
+            [95295] = true, -- BG6 Teleport 03
+            [95296] = true, -- BG6 Teleport 03
 
             -------------------------------------
             -- SEASONAL EVENTS ------------------

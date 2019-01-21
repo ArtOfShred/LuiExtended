@@ -865,6 +865,12 @@ A.Skill_Covenant_Forward_Camp       = GetItemLinkName("|H0:item:29535:1:1:0:0:0:
 A.Skill_Razor_Armor                 = 36304
 
 -- ---------------------------------------------------
+-- BATTLEGROUNDS -------------------------------------
+-- ---------------------------------------------------
+
+A.Skill_Mark_of_the_Worm            = 95830
+
+-- ---------------------------------------------------
 -- TRAPS ---------------------------------------------
 -- ---------------------------------------------------
 
@@ -1122,7 +1128,7 @@ A.Effect_Curse_Duration             = 25000
 local pairs = pairs
 for k, v in pairs(A) do
     if type(v) == "number" then
-        A[k] = GetAbilityName(v)
+        A[k] = zo_strformat("<<C:1>>", GetAbilityName(v))
     end
 end
 
