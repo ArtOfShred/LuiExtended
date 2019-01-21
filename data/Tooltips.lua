@@ -824,6 +824,7 @@ T.Skill_Unstable_Core_Cyrodiil          = GetString(SI_LUIE_SKILL_UNSTABLE_CORE_
 T.Skill_Shattering_Prison_Cyrodiil      = GetString(SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP)
 T.Skill_Lethal_Arrow_Cyrodiil           = GetString(SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP)
 T.Skill_Siege_Shield_Cyrodiil           = GetString(SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP)
+T.Skill_Power_Bash_Cyrodiil             = GetString(SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP)
 
 ----------------------------------------------------------------
 -- QUESTS ------------------------------------------------------

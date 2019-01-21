@@ -459,17 +459,11 @@ E.CastBreakingStatus = {
 --------------------------------------------------------------------------------------------------------------------------------
 E.CastBreakingActions = {
 
-    --[20299] = true, -- Sneak -- Some effects don't break sneak so probably best not to add this.
     [28549] = true, -- Roll Dodge
     [14890] = true, -- Block
-    [20309] = true, -- Hidden
+    --[20309] = true, -- Hidden
     [973] = true, -- Sprint
     [33439] = true, -- Mount Sprint
-    [6811] = true, -- Recall
-    [69293] = true, -- Sigil of Imperial Retreat
-
-    -- TODO:
-    -- make sure keep/IC recall stones work here
 
 }
 
@@ -6686,7 +6680,7 @@ E.EffectOverride = {
     [46831] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = A.Skill_Bleeding_Strike }, -- Bleeding (Cyrodiil Guard T2)
     [46834] = { icon = 'esoui/art/icons/ability_1handed_005.dds' }, -- Power Bash (Cyrodiil Guard T2)
     [72639] = { icon = 'esoui/art/icons/ability_1handed_005.dds', hide = true, tooltip = T.Generic_Stagger }, -- Power Bash (Cyrodiil Guard T2)
-    [72641] = { icon = 'esoui/art/icons/ability_1handed_005.dds', tooltip = T.Generic_Stun }, -- Power Bash (Cyrodiil Guard T2)
+    [72641] = { icon = 'esoui/art/icons/ability_1handed_005.dds', tooltip = T.Skill_Power_Bash_Cyrodiil }, -- Power Bash (Cyrodiil Guard T2)
     [74087] = { tooltip = T.Generic_Disorient }, -- Power Bash (Cyrodiil Guard T2)
     [36304] = { tooltip = T.Skill_Razor_Armor }, -- Razor Armor (Cyrodiil Guard T2)
     [36306] = { hide = true }, -- Razor Armor (Cyrodiil Guard T2)

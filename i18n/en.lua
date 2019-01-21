@@ -2760,6 +2760,7 @@ local strings = {
     SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP =        "Disoriented. You cannot attack or move until you take damage for |cffffff<<1>>|r seconds.\n\nThe prison shatters when this effect ends, dealing Magic Damage.",
     SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP =             "Reduce healing received by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP =             "Negate damage taken from Siege Weapons for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP =               "Stunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.\n\nWhen this effect ends you will be disoriented for |cffffff15|r seconds.",
 
 	----------------------------------------------------------------
     -- SETS --------------------------------------------------------
