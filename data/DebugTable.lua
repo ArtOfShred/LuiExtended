@@ -586,6 +586,22 @@ debugAuras = {
             [88374] = true, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
             [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
             [89372] = true, -- Pelted! (Cherry Blossom Branch)
+
+            [116879] = true, -- Alliance Pie (Revelry Pie)
+            [118833] = true, -- Piessive (Revelry Pie)
+            [116933] = true, -- Covered in Pie (Revelry Pie)
+            [116935] = true, -- Pie (Revelry Pie)
+            [118837] = true, -- PiedFX (Revelry Pie)
+            [116987] = true, -- Covered in Pie (Revelry Pie)
+            [116989] = true, -- Covered in Pie (Revelry Pie)
+            [116988] = true, -- Covered in Pie (Revelry Pie)
+            [116942] = true, -- Covered in Pie (Revelry Pie)
+            [116944] = true, -- Covered in Pie (Revelry Pie)
+            [116943] = true, -- Covered in Pie (Revelry Pie)
+
+
+
+
             [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator
             [77027] = true, -- Anniversary Cake - Forreals (Jubilee Cake)
             [87998] = true, -- Anniversary Cake (2nd Annual Jubilee Cake)
@@ -6983,6 +6999,36 @@ debugAuras = {
             [20260] = true, -- Rune Burst (Sigil of Frost)
             [20259] = true, -- Sigil of Frost Snare (Sigil of Frost)
 
+            -- Elinhir Private Arena
+            [117429] = true, -- Lava Eruption (Lava Trap)
+            [117430] = true, -- Projectile (Lava Trap)
+            [117431] = true, -- Lava Eruption (Lava Trap)
+            [117433] = true, -- Projectile (Lava Trap)
+            [117442] = true, -- Lava Eruption (Lava Trap)
+            [117443] = true, -- Projectile (Lava Trap)
+            [117428] = true, -- Lava Eruption (Lava Trap)
+            [118437] = true, -- Major Fracture (Lava Trap)
+            [118438] = true, -- Major Breach (Lava Trap)
+
+            [117482] = true, -- Shock Wall (Lightning Trap)
+            [117600] = true, -- Shock Wall (Lightning Trap)
+            [117620] = true, -- Lightning Trap (Lightning Trap)
+
+            [117508] = true, -- Shock Wall (Lightning Trap)
+            [117480] = true, -- Shock Wall (Lightning Trap)
+            [117622] = true, -- Shock Wall (Lightning Trap)
+            [117617] = true, -- Shock Wall (Lightning Trap)
+            [117598] = true, -- Shock Wall (Lightning Trap)
+            [117599] = true, -- Shock Wall (Lightning Trap)
+
+            [117136] = true, -- Blade Trap (Blade Trap)
+            [117140] = true, -- Move buff (Blade Trap)
+            [117141] = true, -- Stun (Blade Trap)
+            [117667] = true, -- Blade Despawn (Blade Trap)
+            [117139] = true, -- Spinning Blade (Blade Trap)
+            [117145] = true, -- Serrated Blade (Blade Trap)
+
+            -- Slaughterfish / Lava
             [44029] = true, -- Slaughterfish Attack (Slaughterfish)
             [66863] = true, -- Slaughterfish Bonus (Slaughterfish)
             [44034] = true, -- Slaughterfish Attack (Slaughterfish)
@@ -11423,9 +11469,9 @@ debugAuras = {
             [89243] = true, -- Butcher Awareness - A Noble Guest
             [89201] = true, -- Flare -- Springtime Flair
             [87474] = true, -- Flower Garland -- Springtime Flair
-            --[88095] = true, -- Illusion Dazzler -- Royal Revelry
-            --[88123] = true, -- Illusion Dazzler -- Royal Revelry
-            --[88124] = true, -- Illusion Dazzler -- Royal Revelry
+            [88095] = true, -- Illusion Dazzler -- Royal Revelry
+            [88123] = true, -- Illusion Dazzler -- Royal Revelry
+            [88124] = true, -- Illusion Dazzler -- Royal Revelry
 
             -- New Life Festival
             [84847] = true, -- Celebratory Belch -- Stonetooth Bash

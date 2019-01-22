@@ -2285,6 +2285,7 @@ local strings = {
 
 	-- Damage over Time
     SI_LUIE_SKILL_GENERIC_BLEED_TP =                     "Afflicted with Bleeding Damage over time for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_BLEED_0_5_SEC_TP =             "Afflicted with Bleeding Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_BLEED_1_SEC_TP =               "Afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_BLEED_2_SEC_TP =               "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_DISEASE_TP =                   "Afflicted with Disease Damage over time for |cFFFFFF<<1>>|r seconds.",
@@ -2319,46 +2320,46 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP =             "Absorbing damage for |cFFFFFF<<1>>|r seconds.",
 
 	-- Stealth / Detection
-    SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Marked for |cFFFFFF<<1>>|r seconds. You are visible to the enemy that marked you even when in stealth.",
-    SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Revealed for |cFFFFFF<<1>>|r seconds. You are unable to stealth.",
-	SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Invisible for |cFFFFFF<<1>>|r seconds. You are concealed from sight.",
-    SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP =          "Stealth Detection increased by |cffffff20|r meters for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Marked for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are visible to the enemy that marked you even when in stealth.",
+    SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Revealed for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are unable to stealth.",
+	SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Invisible for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are concealed from sight.",
+    SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP =          "Stealth Detection increased by |cffffff20|r meters for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
 	-- Crowd Control / Immunity
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP =      "Immune to effects that exploit off balance targets.",
-    SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP =               "Off Balance for |cFFFFFF<<1>>|r seconds. You are vulnerable to attacks that exploit off balance targets.",
-    SI_LUIE_SKILL_GENERIC_SNARE_TP =                     "Snared for |cFFFFFF<<1>>|r seconds. Your Movement Speed has been reduced.",
+    SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP =               "Off Balance for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are vulnerable to attacks that exploit off balance targets.",
+    SI_LUIE_SKILL_GENERIC_SNARE_TP =                     "Snared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Your Movement Speed has been reduced.",
     SI_LUIE_SKILL_GENERIC_SNARE_NO_DUR_TP =                      "Snared. Your Movement Speed has been reduced.",
-	SI_LUIE_SKILL_GENERIC_SNARE_15_TP =			         "Snared for |cFFFFFF<<1>>|r seconds. Your Movement Speed has been reduced by |cFFFFFF15|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_15_TP =			         "Snared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Your Movement Speed has been reduced by |cFFFFFF15|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_15_NO_DURTP =			         "Snared. Your Movement Speed has been reduced by |cFFFFFF15|r%.",
-	SI_LUIE_SKILL_GENERIC_SNARE_20_TP =			         "Snared for |cFFFFFF<<1>>|r seconds. Your Movement Speed has been reduced by |cFFFFFF20|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_20_TP =			         "Snared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Your Movement Speed has been reduced by |cFFFFFF20|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_20_NO_DUR_TP =			         "Snared. Your Movement Speed has been reduced by |cFFFFFF20|r%.",
-	SI_LUIE_SKILL_GENERIC_SNARE_30_TP =			         "Snared for |cFFFFFF<<1>>|r seconds. Your Movement Speed has been reduced by |cFFFFFF30|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_30_TP =			         "Snared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Your Movement Speed has been reduced by |cFFFFFF30|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_30_NO_DUR_TP =			         "Snared. Your Movement Speed has been reduced by |cFFFFFF30|r%.",
-	SI_LUIE_SKILL_GENERIC_SNARE_40_TP =			         "Snared for |cFFFFFF<<1>>|r seconds. Your Movement Speed has been reduced by |cFFFFFF40|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_40_TP =			         "Snared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Your Movement Speed has been reduced by |cFFFFFF40|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_40_NO_DUR_TP =			         "Snared. Your Movement Speed has been reduced by |cFFFFFF40|r%.",
-	SI_LUIE_SKILL_GENERIC_SNARE_50_TP =			         "Snared for |cFFFFFF<<1>>|r seconds. Your Movement Speed has been reduced by |cFFFFFF50|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_50_TP =			         "Snared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Your Movement Speed has been reduced by |cFFFFFF50|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_50_NO_DUR_TP =			         "Snared. Your Movement Speed has been reduced by |cFFFFFF50|r%.",
-	SI_LUIE_SKILL_GENERIC_SNARE_60_TP =			         "Snared for |cFFFFFF<<1>>|r seconds. Your Movement Speed has been reduced by |cFFFFFF60|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_60_TP =			         "Snared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Your Movement Speed has been reduced by |cFFFFFF60|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_60_NO_DUR_TP =			         "Snared. Your Movement Speed has been reduced by |cFFFFFF60|r%.",
-	SI_LUIE_SKILL_GENERIC_SNARE_70_TP =			         "Snared for |cFFFFFF<<1>>|r seconds. Your Movement Speed has been reduced by |cFFFFFF70|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_70_TP =			         "Snared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Your Movement Speed has been reduced by |cFFFFFF70|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_70_NO_DUR_TP =			         "Snared. Your Movement Speed has been reduced by |cFFFFFF70|r%.",
-    SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized for |cFFFFFF<<1>>|r seconds. Unable to move while immobilized.",
+    SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Unable to move while immobilized.",
     SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered. You are unable to attack or move while staggered.",
-    SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.",
+    SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are unable to attack or move while stunned.",
     SI_LUIE_SKILL_GENERIC_STUN_NO_DUR_TP =               "Stunned. You are unable to attack or move while stunned.",
-    SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP =                 "Knocked back for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while knocked back.",
-    SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP =                 "Knocked down for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while knocked down.",
-    SI_LUIE_SKILL_GENERIC_FEAR_TP =                      "Feared for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while feared.",
+    SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP =                 "Knocked back for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are unable to attack or move while knocked back.",
+    SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP =                 "Knocked down for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are unable to attack or move while knocked down.",
+    SI_LUIE_SKILL_GENERIC_FEAR_TP =                      "Feared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are unable to attack or move while feared.",
     SI_LUIE_SKILL_GENERIC_FEAR_NO_DUR_TP =               "Feared. You are unable to attack or move while feared.",
-    SI_LUIE_SKILL_GENERIC_SILENCE_TP =                   "Silenced for |cFFFFFF<<1>>|r seconds. You are unable to use Magicka abilities while silenced.",
+    SI_LUIE_SKILL_GENERIC_SILENCE_TP =                   "Silenced for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are unable to use Magicka abilities while silenced.",
     SI_LUIE_SKILL_GENERIC_SILENCE_NO_DUR_TP =            "Silenced. You are unable to use Magicka abilities while silenced.",
-	SI_LUIE_SKILL_GENERIC_BLIND_TP =                     "Blinded for |cFFFFFF<<1>>|r seconds. |cffffff100|r% chance to miss all attacks.",
-    SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP =               "Immune to knockback and disabling effects for |cFFFFFF<<1>>|r seconds.",
+	SI_LUIE_SKILL_GENERIC_BLIND_TP =                     "Blinded for |cFFFFFF<<1>>|r <<1[second/seconds]>>. |cffffff100|r% chance to miss all attacks.",
+    SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP =               "Immune to knockback and disabling effects for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_TP =          "Immune to all crowd control and movement impairing effects.",
     SI_LUIE_SKILL_GENERIC_FLYING_IMMUNITIES_TP =         "Immune to movement imparing effects.",
-    SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Immune to damage and crowd control effects for |cffffff<<1>>|r seconds.",
-    SI_LUIE_SKILL_GENERIC_DISORIENT_TP =                 "Disoriented. You cannot attack or move until you take damage for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Immune to damage and crowd control effects for |cffffff<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_DISORIENT_TP =                 "Disoriented. You cannot attack or move until you take damage for |cffffff<<1>>|r <<1[second/seconds]>>.",
 
 	-- Ravage Potions / Poisons
     SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Increase the cost of Magicka abilities by |cffffff60|r%.",
@@ -2783,8 +2784,10 @@ local strings = {
     -- TRAPS -------------------------------------------------------
     ----------------------------------------------------------------
 
-    SI_LUIE_SKILL_LAVA_SNARE_TP =                        "Sufffering flame damage every |cFFFFFF<<1>>|r seconds. Snared.", -- TODO: Make better tooltip.
-    SI_LUIE_SKILL_SPINNING_BLADE_TRAP =                  "Spinning Blade Trap",
+    SI_LUIE_SKILL_LAVA_SNARE_TP =                        "Engulfed in lava and sufffering Flame Damage every |cFFFFFF1|r second.\n\nSnared. Your Movement Speed has been reduced.",
+
+    SI_LUIE_SKILL_LAVA_TRAP =                            "Lava Trap",
+    SI_LUIE_SKILL_LIGHTNING_TRAP =                       "Lightning Trap",
 
 	----------------------------------------------------------------
     -- SETS --------------------------------------------------------

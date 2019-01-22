@@ -118,6 +118,7 @@ T.Generic_HoT_2Sec                      = GetString(SI_LUIE_SKILL_GENERIC_HOT_TI
 T.Generic_Test                          = GetString(SI_LUIE_SKILL_TEST_TP)
 
 T.Generic_Bleed                         = GetString(SI_LUIE_SKILL_GENERIC_BLEED_TP)
+T.Generic_Bleed_0_5_Sec                 = GetString(SI_LUIE_SKILL_GENERIC_BLEED_0_5_SEC_TP)
 T.Generic_Bleed_1_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_BLEED_1_SEC_TP)
 T.Generic_Bleed_2_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_BLEED_2_SEC_TP)
 T.Generic_Disease                       = GetString(SI_LUIE_SKILL_GENERIC_DISEASE_TP)

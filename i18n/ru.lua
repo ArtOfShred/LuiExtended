@@ -2284,6 +2284,7 @@ local strings = {
 
 	-- Damage over Time
     SI_LUIE_SKILL_GENERIC_BLEED_TP =                     "Подвержен урону от Кровотечения на |cFFFFFF<<1>>|r секунд.",
+	SI_LUIE_SKILL_GENERIC_BLEED_0_5_SEC_TP =             "Подвержен урону от Кровотечения каждые |cFFFFFF0.5|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_BLEED_1_SEC_TP =               "Afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
 	SI_LUIE_SKILL_GENERIC_BLEED_2_SEC_TP =               "Подвержен урону от Кровотечения каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_DISEASE_TP =                   "Подвержен урону от Болезни на |cFFFFFF<<1>>|r секунд.",
@@ -2782,8 +2783,10 @@ local strings = {
     -- TRAPS -------------------------------------------------------
     ----------------------------------------------------------------
 
-    SI_LUIE_SKILL_LAVA_SNARE_TP =                        "Sufffering flame damage every |cFFFFFF<<1>>|r seconds. Snared.", -- TODO: Make better tooltip.
-    SI_LUIE_SKILL_SPINNING_BLADE_TRAP =                  "Spinning Blade Trap",
+    SI_LUIE_SKILL_LAVA_SNARE_TP =                        "Engulfed by lava and sufffering Flame Damage every |cFFFFFF1|r second.\n\nSnared. Your Movement Speed has been reduced.",
+
+    SI_LUIE_SKILL_LAVA_TRAP =                            "Lava Trap",
+    SI_LUIE_SKILL_LIGHTNING_TRAP =                       "Lightning Trap",
 
 	----------------------------------------------------------------
     -- SETS --------------------------------------------------------

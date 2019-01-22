@@ -871,12 +871,6 @@ A.Skill_Razor_Armor                 = 36304
 A.Skill_Mark_of_the_Worm            = 95830
 
 -- ---------------------------------------------------
--- TRAPS ---------------------------------------------
--- ---------------------------------------------------
-
-A.Trap_Spinning_Blade_Trap         = GetString(SI_LUIE_SKILL_SPINNING_BLADE_TRAP)
-
--- ---------------------------------------------------
 -- NPC ABILITIES -------------------------------------
 -- ---------------------------------------------------
 
@@ -1022,6 +1016,11 @@ A.Trap_Falling_Rocks                = 20886
 A.Trap_Fire_Trap                    = 17198
 A.Trap_Spike_Trap                   = 21940
 A.Trap_Sigil_of_Frost               = 20258
+
+A.Trap_Lava_Trap                    = GetString(SI_LUIE_SKILL_LAVA_TRAP)
+A.Trap_Lightning_Trap               = GetString(SI_LUIE_SKILL_LIGHTNING_TRAP)
+A.Trap_Blade_Trap                   = 66793
+
 A.Trap_Lava                         = 5139
 
 -- ---------------------------------------------------
@@ -1036,6 +1035,10 @@ A.Skill_Sword_Swallowing            = 84533
 A.Skill_Celebratory_Belch           = 84847
 A.Event_Petal_Pelters               = GetQuestItemNameFromLink("|H0:quest_item:6145|h|h")
 A.Event_Crow_Caller                 = GetItemLinkName("|H0:item:81189:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")
+
+A.Event_Sparkle_Dazzler             = GetQuestItemNameFromLink("|H0:quest_item:6191|h|h")
+A.Event_Burst_Dazzler               = GetQuestItemNameFromLink("|H0:quest_item:6192|h|h")
+A.Event_Flash_Dazzler               = GetQuestItemNameFromLink("|H0:quest_item:6193|h|h")
 
 -- MSQ
 A.Skill_Wall_of_Flames              = GetString(SI_LUIE_SKILL_WALL_OF_FLAMES)

@@ -985,6 +985,9 @@ E.IsCast = {
 
     -- Jester's Festival
     [87474] = true, -- Flower Garland (Springtime Flair)
+    [88095] = true, -- Illusion Dazzler (Royal Revelry)
+    [88123] = true, -- Illusion Dazzler (Royal Revelry)
+    [88124] = true, -- Illusion Dazzler (Royal Revelry)
 
     -- New Life Festival
     [84847] = true, -- Celebratory Belch (Stonetooth Bash)
@@ -2326,8 +2329,6 @@ E.EffectSourceOverride = {
     [71679] = {pet = 'Morkuldin'}, -- Cleave {Morkuldin} -- TODO: Localize
 
     -- BATTLEGROUNDS
-    [92757] = {source = A.Trap_Spinning_Blade_Trap }, -- Spinning Blade (Alc Carac)
-    [92759] = {source = A.Trap_Spinning_Blade_Trap }, -- Serrated Blade (Alc Carac)
 
     -- TRAPS
     [62769] = {source = A.Trap_Cold_Fire_Trap}, -- Coldharbour Flames {MQ Tutorial}
@@ -6286,7 +6287,6 @@ E.EffectOverride = {
 
     --[[
     [88480] = { hide = true }, -- Trap Triggerer (Various)
-    [44029] = { icon = 'LuiExtended/media/icons/abilities/ability_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Slaughterfish Attack (Environmental)
     [26530] = { type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bear Trap (Bear Trap)
     [65854] = { icon = 'esoui/art/icons/death_recap_environmental.dds', name = 'Spike Trap', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spike Trap Snare (Spike Trap) (Orsinium - To Save a Chief)
     [65855] = { icon = 'esoui/art/icons/death_recap_environmental.dds', name = 'Spike Trap', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Trap Sprung (Spike Trap) (Orsinium - To Save a Chief)
@@ -7908,6 +7908,11 @@ E.EffectOverride = {
     -- Jester's Festival
     [87474] = { icon = 'LuiExtended/media/icons/abilities/ability_event_flower_garland.dds', name = A.Event_Petal_Pelters }, -- Flower Garland -- Springtime Flair
 
+    [88095] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_3.dds', name = A.Event_Sparkle_Dazzler }, -- Illusion Dazzler - Royal Revelry
+    [88123] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_2.dds', name = A.Event_Burst_Dazzler }, -- Illusion Dazzler - Royal Revelry
+    [88124] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_1.dds', name = A.Event_Flash_Dazzler }, -- Illusion Dazzler - Royal Revelry
+
+
     -- New Life Festival
     [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_event_celebratory_belch.dds', name = A.Skill_Celebratory_Belch, unbreakable = 1 }, -- Celebratory Belch (Stonetooth Bash)
     [83523] = { icon = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Event_Freezing }, -- Freezing (Snow Bear Plunge)
@@ -8113,10 +8118,10 @@ E.EffectOverride = {
     [95831] = { icon = 'esoui/art/icons/achievement_042.dds', }, -- Mark of the Worm
 
     [87949] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds' }, -- Lava (Foyada Quarry)
-    [87948] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, duration = 0, tooltip = T.Trap_Lava }, -- Lava Snare (Foyada Quarry)
+    [87948] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, duration = 0, groundLabel = true, unbreakable = 1, tooltip = T.Trap_Lava }, -- Lava Snare (Foyada Quarry)
 
-    [92757] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Spinning_Blade_Trap}, -- Spinning Blade (Blade Trap)
-    [92759] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Spinning_Blade_Trap, tooltip = T.Generic_Bleed_1_Sec }, -- Serrated Blade (Blade Trap)
+    [92757] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Blade_Trap }, -- Spinning Blade (Blade Trap)
+    [92759] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Blade_Trap, tooltip = T.Generic_Bleed_1_Sec }, -- Serrated Blade (Blade Trap)
 
     ----------------------------------------------------------------
     -- TRAPS -------------------------------------------------------
@@ -8150,15 +8155,30 @@ E.EffectOverride = {
     [20260] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_sigil_of_frost.dds', name = A.Trap_Sigil_of_Frost }, -- Rune Burst
     [20259] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_sigil_of_frost.dds', name = A.Trap_Sigil_of_Frost, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Sigil of Frost Snare
 
+    -- Elinhir Private Arena
+    [117428] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava_trap.dds', name = A.Trap_Lava_Trap }, -- Lava Eruption (Lava Trap)
+    [118437] = { tooltip = A.Trap_Lava_Trap }, -- Lava Eruption (Lava Trap)
+    [118438] = { tooltip = A.Trap_Lava_Trap }, -- Lava Eruption (Lava Trap)
+
+    [117508] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_shock_wall.dds', name = A.Trap_Lightning_Trap }, -- Shock Wall (Lightning Trap)
+    [117480] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_shock_wall.dds', tooltip = T.Generic_Snare_No_Dur, name = A.Trap_Lightning_Trap, duration = 0, groundLabel = true }, -- Shock Wall (Lightning Trap)
+    [117622] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_shock_wall.dds', name = A.Trap_Lightning_Trap }, -- Shock Wall (Lightning Trap)
+    [117617] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_shock_wall.dds', tooltip = T.Generic_Snare_No_Dur, name = A.Trap_Lightning_Trap, duration = 0, groundLabel = true }, -- Shock Wall (Lightning Trap)
+    [117598] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_shock_wall.dds', name = A.Trap_Lightning_Trap }, -- Shock Wall (Lightning Trap)
+    [117599] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_shock_wall.dds', tooltip = T.Generic_Snare_No_Dur, name = A.Trap_Lightning_Trap, duration = 0, groundLabel = true }, -- Shock Wall (Lightning Trap)
+
+    [117139] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Blade_Trap }, -- Spinning Blade (Blade Trap), -- Spinning Blade
+    [117145] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Blade_Trap, tooltip = T.Generic_Bleed_0_5_Sec }, -- Spinning Blade (Blade Trap), -- Serrated Blade
+
     -- Lava & Slaughterfish
-    [44029] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Slaughterfish_Attack }, -- Slaughterfish Attack (Slaughterfish)
+    [44029] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Slaughterfish_Attack, groundLabel = true }, -- Slaughterfish Attack (Slaughterfish)
     [44034] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds' }, -- Slaughterfish Attack (Slaughterfish)
 
-    [113080] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Slaughterfish_Attack }, -- Slaughterfish Attack (Slaughterfish)
+    [113080] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Slaughterfish_Attack, groundLabel = true }, -- Slaughterfish Attack (Slaughterfish)
     [113082] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds' }, -- Slaughterfish Attack (Slaughterfish)
 
     [19224] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava }, -- In Lava (Lava - Halls of Torment)
-    [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava }, -- In Lava (Lava - The Earth Forge)
+    [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, tooltip = T.Skill_Lava, unbreakable = 1, groundLabel = true }, -- In Lava (Lava - The Earth Forge)
 
     -- Hiding Spot
     [72711] = { hide = true }, -- Hidden (Hiding Spot)
@@ -9159,8 +9179,13 @@ E.FakeExternalDebuffs = {
 
     -- Cyrodiil
     [72641] = {icon = 'esoui/art/icons/ability_1handed_005.dds', name = A.Skill_Power_Bash, duration = 2000}, -- Power Bash (Cryodiil Guard T2)
+
+    -- Craglorn: TODO
     [55862] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = A.Skill_Storm_Bound, duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (DOT)
     [55863] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = A.Skill_Storm_Bound, duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (Snare)
+
+    -- Traps
+    [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, duration = 0 }, -- Lava -- In Lava
 
     ------------------------------
     -- Quests --------------------
