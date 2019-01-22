@@ -436,6 +436,9 @@ T.Set_Light_of_Cyrodiil                 = GetString(SI_LUIE_SKILL_SET_CYRODIILS_
 T.Set_Morag_Tong                        = GetString(SI_LUIE_SKILL_SET_MORAG_TONG_TP)
 T.Set_Warriors_Fury                     = GetString(SI_LUIE_SKILL_SET_WARRIORS_FURY_TP)
 T.Set_Robes_of_Transmutation            = GetString(SI_LUIE_SKILL_SET_ROBES_OF_TRANSMUTATION_TP)
+T.Set_Beckoning_Steel                   = GetString(SI_LUIE_SKILL_SET_BECKONING_STEEL_TP)
+T.Set_Sentry                            = GetString(SI_LUIE_SKILL_SET_SENTRY_TP)
+T.Set_Sentry_Cooldown                   = GetString(SI_LUIE_SKILL_SET_SENTRY_ICD_TP)
 
 -- Arena Sets
 T.Set_Succession_Flame              	= zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE3))
@@ -781,6 +784,7 @@ T.Skill_Bone_Surge                      = GetString(SI_LUIE_SKILL_BONE_SURGE_TP)
 T.Skill_Continuous_Attack_Rank_1        = GetString(SI_LUIE_SKILL_CONTINUOUS_ATTACK_RANK_1_TP)
 T.Skill_Continuous_Attack_Rank_2        = GetString(SI_LUIE_SKILL_CONTINUOUS_ATTACK_RANK_2_TP)
 T.Skill_Rapid_Maneuver                  = GetString(SI_LUIE_SKILL_RAPID_MANEUVER_TP)
+T.Skill_Retreating_Maneuver             = GetString(SI_LUIE_SKILL_RETREATING_MANEUEVER_TP)
 T.Skill_Charging_Maneuver               = GetString(SI_LUIE_SKILL_CHARGING_MANEUVER_TP)
 T.Skill_Caltrops                        = GetString(SI_LUIE_SKILL_CALTROPS_TP)
 T.Skill_Anti_Cavalry_Caltrops           = GetString(SI_LUIE_SKILL_ANTI_CAVALRY_CALTROPS_TP)
@@ -805,6 +809,14 @@ T.Skill_Revealing_Flare                 = GetString(SI_LUIE_SKILL_REVEALING_FLAR
 T.Skill_Lingering_Flare                 = GetString(SI_LUIE_SKILL_LINGERING_FLARE_TP)
 T.Skill_Scorching_Flare                 = GetString(SI_LUIE_SKILL_SCORCHING_FLARE_TP)
 T.Skill_Reviving_Barrier                = GetString(SI_LUIE_SKILL_REVIVING_BARRIER_TP)
+
+-- ---------------------------------------------------
+-- RACIALS ------------------------------------------
+-- ---------------------------------------------------
+
+T.Skill_Hunters_Eye_Rank_1              = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 5)
+T.Skill_Hunters_Eye_Rank_2              = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 10)
+T.Skill_Hunters_Eye_Rank_3              = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 20)
 
 -- ---------------------------------------------------
 -- CYRODIIL ------------------------------------------

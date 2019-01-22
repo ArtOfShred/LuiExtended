@@ -1154,7 +1154,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         return
     end
 
-    if (E.CastBreakingActions[abilityId] or (E.IsCast[abilityId] and not E.CastDurationFix[abilityId]) ) and sourceType == COMBAT_UNIT_TYPE_PLAYER then
+    if E.CastBreakingActions[abilityId] and sourceType == COMBAT_UNIT_TYPE_PLAYER then
         CI.StopCastBar()
     end
 

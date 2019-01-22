@@ -1867,6 +1867,8 @@ debugAuras = {
             [70392] = true, -- The Arch-Mage (of the Arch-Mage)
 
             [32827] = true, -- Curse Eater (Curse-Eating)
+            [117359] = true, -- Curse Eater (Curse-Eating)
+            [117360] = true, -- Curse Eater (Curse-Eating)
 
             [32833] = true, -- Light of Cyrodiil (of Cyrodiil's Light)
             [111550] = true, -- Light of Cyrodiil (of Cyrodiil's Light)
@@ -1876,12 +1878,13 @@ debugAuras = {
             [33498] = true, -- Desert Rose (of the Desert Rose)
 
             [47351] = true, -- Buffer of the Swift (of the Swift)
-            [47352] = true, -- Buffer of the Swift (of the Swift)
 
             -- Cyrodiil Sets (Medium)
 
             [32835] = true, -- Crest of Cyrodiil (of Cyrodiil's Ward)
             [34876] = true, -- Major Defile (of Cyrodiil's Ward)
+
+            [117402] = true, -- Deadly Strike (Deadly)
 
             [47361] = true, -- Eagle Eye (Eagle-Eyed)
 
@@ -1895,6 +1898,8 @@ debugAuras = {
             [34384] = true, -- The Morag Tong (of the Morag Tong)
 
             [32807] = true, -- Sentry (of the Sentry)
+            [117391] = true, -- Sentry (of the Sentry)
+            [117397] = true, -- Exhausted Sentry (of the Sentry)
 
             [32747] = true, -- Shadow Walker (of the Shadow Walker)
             [57180] = true, -- Shadow Walker (of the Shadow Walker)
@@ -1912,6 +1917,7 @@ debugAuras = {
             [32824] = true, -- Affliction (Afflicted)
             [34787] = true, -- Affliction (Afflicted)
 
+            [117344] = true, -- Beckoning Steel (of Beckoning Steel)
             [29122] = true, -- Beckoning Steel (of Beckoning Steel)
 
             [32837] = true, -- Ward of Cyrodiil (of Cyrodiil's Crest)
@@ -3168,12 +3174,8 @@ debugAuras = {
             [45188] = true, -- Capacitor (Rank 2)
             [31421] = true, -- Energized (Rank 1)
             [45190] = true, -- Energized (Rank 2)
-            [31422] = true, -- Implosion (Rank 1)
-            [31424] = true, -- Implosion
-            [82803] = true, -- Implosion
-            [45192] = true, -- Implosion (Rank 2)
-            [45194] = true, -- Implosion
-            [82806] = true, -- Implosion
+            [31422] = true, -- Amplitude (Rank 1)
+            [45192] = true, -- Amplitude (Rank 2)
             [31425] = true, -- Expert Mage (Rank 1)
             [45195] = true, -- Expert Mage (Rank 2)
 
@@ -3742,7 +3744,6 @@ debugAuras = {
             [22095] = true, -- Solar Barrage (Solar Barrage)
             [100223] = true, -- Solar Barrage (Solar Barrage)
             [100218] = true, -- Solar Barrage (Solar Barrage)
-            [109420] = true, -- Empower (Solar Barrage)
 
             [21761] = true, -- Backlash (Backlash)
             [22643] = true, -- Backlash D (Backlash)
@@ -6348,21 +6349,27 @@ debugAuras = {
             [33301] = true, -- Brawny (Rank 1)
             [45307] = true, -- Brawny (Rank 2)
             [45309] = true, -- Brawny (Rank 3)
-            [84668] = true, -- Unflinching (Rank 1)
-            [84670] = true, -- Unflinching (Rank 2)
-            [84672] = true, -- Unflinching (Rank 3)
+            [84668] = true, -- Unflinching Rage (Rank 1)
+            [118195] = true, -- Unflinching Rage (Rank 1)
+            [118196] = true, -- Unflinching Rage (Rank 1)
+            [84670] = true, -- Unflinching Rage (Rank 2)
+            [118202] = true, -- Unflinching Rage (Rank 2)
+            [118203] = true, -- Unflinching Rage (Rank 2)
+            [84672] = true, -- Unflinching Rage (Rank 3)
+            [118205] = true, -- Unflinching Rage (Rank 3)
+            [118206] = true, -- Unflinching Rage (Rank 3)
             [33304] = true, -- Swift Warrior (Rank 1)
             [45311] = true, -- Swift Warrior (Rank 2)
             [45312] = true, -- Swift Warrior (Rank 3)
 
             -- Redguard
             [84680] = true, -- Wayfarer (Rank 1)
-            [36009] = true, -- Exhilaration (Rank 1)
-            [45277] = true, -- Exhilaration (Rank 2)
-            [45278] = true, -- Exhilaration (Rank 3)
-            [36153] = true, -- Conditioning (Rank 1)
-            [45279] = true, -- Conditioning (Rank 2)
-            [45280] = true, -- Conditioning (Rank 3)
+            [36009] = true, -- Martial Training (Rank 1)
+            [45277] = true, -- Martial Training (Rank 2)
+            [45278] = true, -- Martial Training (Rank 3)
+            [117752] = true, -- Conditioning (Rank 1)
+            [117753] = true, -- Conditioning (Rank 2)
+            [117754] = true, -- Conditioning (Rank 3)
             [36546] = true, -- Adrenaline Rush (Rank 1)
             [36548] = true, -- Adrenaline Rush
             [45313] = true, -- Adrenaline Rush (Rank 2)
@@ -6372,30 +6379,45 @@ debugAuras = {
 
             -- High Elf (Altmer)
             [35965] = true, -- Highborn (Rank 1)
-            [35993] = true, -- Spellcharge (Rank 1)
-            [45273] = true, -- Spellcharge (Rank 2)
-            [45274] = true, -- Spellcharge (Rank 3)
+            [35993] = true, -- Spell Recharge (Rank 1)
+            [118110] = true, -- Spell Recharge (Rank 1)
+            [118111] = true, -- Spell Recharge (Rank 1)
+            [45273] = true, -- Spell Recharge (Rank 2)
+            [118113] = true, -- Spell Recharge (Rank 2)
+            [118114] = true, -- Spell Recharge (Rank 2)
+            [45274] = true, -- Spell Recharge (Rank 3)
+            [118116] = true, -- Spell Recharge (Rank 3)
+            [118117] = true, -- Spell Recharge (Rank 3)
+            [117968] = true, -- Syrabane's Boon (Rank 1)
+            [117969] = true, -- Syrabane's Boon (Rank 2)
+            [117970] = true, -- Syrabane's Boon (Rank 3)
             [35998] = true, -- Elemental Talent (Rank 1)
             [45275] = true, -- Elemental Talent (Rank 2)
             [45276] = true, -- Elemental Talent (Rank 3)
 
             -- Wood Elf (Bosmer)
             [36008] = true, -- Acrobat (Rank 1)
+            [36022] = true, -- Hunter's Eye (Rank 1)
+            [49175] = true, -- Hunter's Eye (Rank 1)
+            [45295] = true, -- Hunter's Eye (Rank 2)
+            [49176] = true, -- Hunter's Eye (Rank 2)
+            [45296] = true, -- Hunter's Eye (Rank 3)
+            [49177] = true, -- Hunter's Eye (Rank 3)
             [64279] = true, -- Y'ffre's Endurance (Rank 1)
             [64280] = true, -- Y'ffre's Endurance (Rank 2)
             [64281] = true, -- Y'ffre's Endurance (Rank 3)
             [36011] = true, -- Resist Affliction (Rank 1)
             [45317] = true, -- Resist Affliction (Rank 2)
             [45319] = true, -- Resist Affliction (Rank 3)
-            [36022] = true, -- Stealthy (Rank 1)
-            [45295] = true, -- Stealthy (Rank 2)
-            [45296] = true, -- Stealthy (Rank 3)
 
             -- Khajiit
             [36063] = true, -- Cutpurse (Rank 1)
             [70386] = true, -- Nimble (Rank 1)
             [70388] = true, -- Nimble (Rank 2)
             [70390] = true, -- Nimble (Rank 3)
+            [117846] = true, -- Lunar Blessings (Rank 1)
+            [117847] = true, -- Lunar Blessings (Rank 2)
+            [117848] = true, -- Lunar Blessings (Rank 3)
             [36067] = true, -- Carnage (Rank 1)
             [45299] = true, -- Carnage (Rank 2)
             [45301] = true, -- Carnage (Rank 3)
@@ -6439,8 +6461,11 @@ debugAuras = {
             -- Nord
             [36626] = true, -- Reveler (Rank 1)
             [36064] = true, -- Stalwart (Rank 1)
+            [118182] = true, -- Stalwart (Rank 1)
             [45297] = true, -- Stalwart (Rank 2)
+            [118184] = true, -- Stalwart (Rank 2)
             [45298] = true, -- Stalwart (Rank 3)
+            [118186] = true, -- Stalwart (Rank 3)
             [36627] = true, -- Resist Frost (Rank 1)
             [45303] = true, -- Resist Frost (Rank 2)
             [45304] = true, -- Resist Frost (Rank 3)
@@ -6453,6 +6478,9 @@ debugAuras = {
             [50903] = true, -- Tough (Rank 1)
             [50906] = true, -- Tough (Rank 2)
             [50907] = true, -- Tough (Rank 3)
+            [36153] = true, -- Imperial Mettle (Rank 1)
+            [45279] = true, -- Imperial Mettle (Rank 2)
+            [45280] = true, -- Imperial Mettle (Rank 3)
             [36155] = true, -- Red Diamond (Rank 1)
             [36214] = true, -- Red Diamond
             [45291] = true, -- Red Diamond (Rank 2)

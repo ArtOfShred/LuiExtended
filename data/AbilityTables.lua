@@ -382,6 +382,7 @@ A.Set_Steadfast_Hero                = 113508
 A.Set_Healers_Habit                 = GetString(SI_LUIE_SKILL_SET_HEALERS_HABIT)
 A.Set_Ward_of_Cyrodiil              = 32837
 A.Set_Fasallas_Guile                = 76946
+A.Set_Sentry                        = 32807
 
 A.Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
 
@@ -559,7 +560,6 @@ A.Skill_Vampires_Bane               = 21729
 A.Skill_Reflective_Light            = 21732
 A.Skill_Solar_Flare                 = 22057
 A.Skill_Dark_Flare                  = 22110
-A.Skill_Solar_Barrage               = 22095
 A.Skill_Purifying_Light             = 21765
 A.Skill_Power_of_the_Light          = 21763
 A.Skill_Unstable_Core               = 22004

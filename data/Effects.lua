@@ -3789,16 +3789,22 @@ E.EffectOverride = {
     -- Cyrodiil Sets (Light)
     [34605] = { icon = 'LuiExtended/media/icons/abilities/ability_set_almalexias_mercy.dds' }, -- Almalexia's Mercy (of Almalexia's Mercy)
     [70392] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arch-mage.dds' }, -- The Arch-Mage (of the Arch-Mage)
+
+    [117359] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syrabane.dds' }, -- Curse-Eater (Curse-Eating)
+
     [111550] = { icon ='esoui/art/icons/achievement_darkbrotherhood_027.dds', tooltip = T.Set_Light_of_Cyrodiil }, -- Light of Cyrodiil (of Cyrodiil's Light)
     [112750] = { hide = true }, -- Light of Cyrodiil (of Cyrodiil's Light)
     [33498] = { icon = 'esoui/art/icons/achievement_update11_dungeons_007.dds' }, -- Desert Rose (of the Desert Rose)
-    [47352] = { icon = 'LuiExtended/media/icons/abilities/ability_set_whitestrake.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Buffer of the Swift (of the Swift)
 
     -- Cyrodiil Sets (Medium)
     [34876] = { tooltip = A.Set_Ward_of_Cyrodiil }, -- Major Defile (of Cyrodiil's Ward)
     [34509] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_kiss.dds' }, -- Kyne's Kiss (of Kyne's Kiss)
     [70492] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_kiss.dds' }, -- Kyne's Kiss (of Kyne's Kiss)
     [34384] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morag_tong.dds', tooltip = T.Set_Morag_Tong }, -- The Morag Tong (of the Morag Tong)
+
+    [117391] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sentry.dds', tooltip = T.Set_Sentry }, -- Sentry (of the Sentry)
+    [117397] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sentry_icd.dds', tooltip = T.Set_Sentry_Cooldown, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, name = zo_strformat("<<1>> <<2>>", A.Set_Sentry, A.Set_Cooldown) }, -- Exhausted Sentry (of the Sentry)
+
     [57180] = { icon = 'esoui/art/icons/achievement_thievesguild_011.dds' }, -- Shadow Walker (of the Shadow Walker)
     [57181] = { icon = 'esoui/art/icons/achievement_thievesguild_011.dds' }, -- Shadow Walker (of the Shadow Walker)
     [47358] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds' }, -- Vengeance Leech (of Vengeance Leech)
@@ -3807,7 +3813,7 @@ E.EffectOverride = {
 
     -- Cyrodiil Sets (Heavy)
     [34787] = { icon = 'LuiExtended/media/icons/abilities/ability_set_affliction.dds' }, -- Affliction (Afflicted)
-    [29122] = { hide = true }, -- Beckoning Steel (Beckoning Steel)
+    [29122] = { icon = 'LuiExtended/media/icons/abilities/ability_set_beckoning_steel.dds', tooltip = T.Set_Beckoning_Steel }, -- Beckoning Steel (Beckoning Steel)
 
     [111575] = { icon = 'LuiExtended/media/icons/abilities/ability_set_crest_of_cyrodiil.dds' }, -- Crest of Cyrodiil (Cyrodiil's Crest)
 
@@ -4455,12 +4461,6 @@ E.EffectOverride = {
     [31415] = { hide = true }, -- Expert Summoner (Expert Summoner - Rank 1)
     [46198] = { hide = true }, -- Expert Summoner (Expert Summoner - Rank 2)
 
-    -- Storm Calling
-    [31424] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_implosion.dds' }, -- Implosion (Implosion - Rank 1)
-    [82803] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_implosion.dds' }, -- Implosion (Implosion - Rank 1)
-    [45194] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_implosion.dds' }, -- Implosion (Implosion - Rank 2)
-    [82806] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_implosion.dds' }, -- Implosion (Implosion - Rank 2)
-
     ----------------------------------------------------------------
     -- SORCERER ACTIVES --------------------------------------------
     ----------------------------------------------------------------
@@ -4747,7 +4747,6 @@ E.EffectOverride = {
     [24686] = { tooltip = A.Skill_Dark_Flare }, -- Major Defile (Dark Flare)
     [109419] = { tooltip = A.Skill_Dark_Flare }, -- Empower (Dark Flare)
     [22095] = { tooltip = T.Skill_Solar_Barrage }, -- Solar Barrage (Solar Barrage)
-    [109420] = { tooltip = A.Skill_Solar_Barrage }, -- Empower (Solar Barrage)
 
     -- Backlash / Purifying Light / Power of the Light
     [21761] = { tooltip = T.Skill_Backlash }, -- Backlash (Backlash)
@@ -4924,7 +4923,7 @@ E.EffectOverride = {
     [94625] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Guardians_Wrath }, -- Guardian's Wrath (Eternal Guardian)
     [94626] = { hide = true }, -- Guardian's Wrath Trigger (Eternal Guardian)
     [109983] = { hide = true }, -- Eternal Guardian Revive (Eternal Guardian)
-    [110384] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_eternal_guardian_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Eternal_Guardian, A.Set_Cooldown), tooltip = T.Skill_Eternal_Guardian_Cooldown }, -- Eternal Guardian (Eternal Guardian)
+    [110384] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_eternal_guardian_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Eternal_Guardian, A.Set_Cooldown), tooltip = T.Skill_Eternal_Guardian_Cooldown, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Eternal Guardian (Eternal Guardian)
     [85990] = { tooltip = T.Skill_Wild_Guardian }, -- Wild Guardian (Wild Guardian)
     [89219] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_swipe.dds', name = A.Skill_Bite }, -- Swipe (Wild Guardian)
     [89220] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Wild Guardian)
@@ -6020,7 +6019,7 @@ E.EffectOverride = {
     [38566] = { tooltip = T.Skill_Rapid_Maneuver }, -- Rapid Manuever (Rapid Maneuver)
     [101161] = { consolidate = true, tooltip = A.Skill_Rapid_Manuever }, -- Major Expedition (Rapid Maneuver)
     [57472] = { consolidate = true, tooltip = A.Skill_Rapid_Manuever }, -- Major Gallop (Rapid Maneuver)
-    [40211] = { tooltip = T.Skill_Rapid_Maneuver }, -- Retreating Maneuver (Retreating Maneuver)
+    [40211] = { tooltip = T.Skill_Retreating_Maneuver }, -- Retreating Maneuver (Retreating Maneuver)
     [101169] = { consolidate = true, tooltip = A.Skill_Retreating_Manuever }, -- Major Expedition (Retreating Maneuver)
     [57477] = { consolidate = true, tooltip = A.Skill_Retreating_Manuever }, -- Major Gallop (Retreating Maneuver)
     [40215] = { tooltip = T.Skill_Charging_Maneuver }, -- Charging Maneuver (Charging Maneuver)
@@ -6132,100 +6131,146 @@ E.EffectOverride = {
     -- PLAYER PASSIVES RACIAL --------------------------------------
     ----------------------------------------------------------------
 
+    -- Breton
     [36247] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_opportunist.dds' }, -- Opportunist
-    [35995] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_gift_of_magnus.dds' }, -- Gift of Magnus
-    [45259] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_gift_of_magnus.dds' }, -- Gift of Magnus
-    [45260] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_gift_of_magnus.dds' }, -- Gift of Magnus
-    [36266] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_spell_resistance.dds' }, -- Spell Resistance
-    [45261] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_spell_resistance.dds' }, -- Spell Resistance
-    [45262] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_spell_resistance.dds' }, -- Spell Resistance
-    [36303] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_magicka_mastery.dds' }, -- Magicka Mastery
-    [45263] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_magicka_mastery.dds' }, -- Magicka Mastery
-    [45264] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_magicka_mastery.dds' }, -- Magicka Mastery
+    [35995] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_gift_of_magnus.dds' }, -- Gift of Magnus (Rank 1)
+    [45259] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_gift_of_magnus.dds' }, -- Gift of Magnus (Rank 2)
+    [45260] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_gift_of_magnus.dds' }, -- Gift of Magnus (Rank 3)
+    [36266] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_spell_resistance.dds' }, -- Spell Resistance (Rank 1)
+    [45261] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_spell_resistance.dds' }, -- Spell Resistance (Rank 2)
+    [45262] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_spell_resistance.dds' }, -- Spell Resistance (Rank 3)
+    [36303] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_magicka_mastery.dds' }, -- Magicka Mastery (Rank 1)
+    [45263] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_magicka_mastery.dds' }, -- Magicka Mastery (Rank 2)
+    [45264] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_magicka_mastery.dds' }, -- Magicka Mastery (Rank 3)
+
+    -- Orc (Orsimer)
     [33293] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_craftsman.dds' }, -- Craftsman
-    [33301] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_brawny.dds' }, -- Brawny
-    [45307] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_brawny.dds' }, -- Brawny
-    [45309] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_brawny.dds' }, -- Brawny
-    [84668] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_unflinching.dds' }, -- Unflinching
-    [84670] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_unflinching.dds' }, -- Unflinching
-    [84672] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_unflinching.dds' }, -- Unflinching
-    [33304] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_swift_warrior.dds' }, -- Swift Warrior
-    [45311] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_swift_warrior.dds' }, -- Swift Warrior
-    [45312] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_swift_warrior.dds' }, -- Swift Warrior
+    [33301] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_brawny.dds' }, -- Brawny (Rank 1)
+    [45307] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_brawny.dds' }, -- Brawny (Rank 2)
+    [45309] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_brawny.dds' }, -- Brawny (Rank 3)
+    [84668] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_unflinching.dds' }, -- Unflinching Rage (Rank 1)
+    [118195] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_unflinching.dds' }, -- Unflinching Rage (Rank 1)
+    [118196] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_unflinching.dds' }, -- Unflinching Rage (Rank 1)
+    [84670] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_unflinching.dds' }, -- Unflinching Rage (Rank 2)
+    [118202] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_unflinching.dds' }, -- Unflinching Rage (Rank 2)
+    [118203] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_unflinching.dds' }, -- Unflinching Rage (Rank 2)
+    [84672] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_unflinching.dds' }, -- Unflinching Rage (Rank 3)
+    [118205] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_unflinching.dds' }, -- Unflinching Rage (Rank 3)
+    [118206] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_unflinching.dds' }, -- Unflinching Rage (Rank 3)
+    [33304] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_swift_warrior.dds' }, -- Swift Warrior (Rank 1)
+    [45311] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_swift_warrior.dds' }, -- Swift Warrior (Rank 2)
+    [45312] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_swift_warrior.dds' }, -- Swift Warrior (Rank 3)
+
+    -- Redguard
     [84680] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_wayfarer.dds' }, -- Wayfarer
-    [36009] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_exhilaration.dds' }, -- Exhilaration
-    [45277] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_exhilaration.dds' }, -- Exhilaration
-    [45278] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_exhilaration.dds' }, -- Exhilaration
-    [36153] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_conditioning.dds' }, -- Conditioning
-    [45279] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_conditioning.dds' }, -- Conditioning
-    [45280] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_conditioning.dds' }, -- Conditioning
-    [36546] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_adrenaline_rush.dds' }, -- Adrenaline Rush
-    [45313] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_adrenaline_rush.dds' }, -- Adrenaline Rush
-    [45315] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_adrenaline_rush.dds' }, -- Adrenaline Rush
-    [35965] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_highborn.dds' }, -- Highborn
-    [35993] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_spellcharge.dds' }, -- Spellcharge
-    [45273] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_spellcharge.dds' }, -- Spellcharge
-    [45274] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_spellcharge.dds' }, -- Spellcharge
-    [35998] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_elemental_talent.dds' }, -- Elemental Talent
-    [45275] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_elemental_talent.dds' }, -- Elemental Talent
-    [45276] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_elemental_talent.dds' }, -- Elemental Talent
-    [36008] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_acrobat.dds', hide = true }, -- Acrobat -- SHOWS ONLY ON TARGET PLAYERS
-    [64279] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_yffres_endurance.dds' }, -- Y'ffre's Endurance
-    [64280] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_yffres_endurance.dds' }, -- Y'ffre's Endurance
-    [64281] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_yffres_endurance.dds' }, -- Y'ffre's Endurance
-    [36011] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_affliction.dds' }, -- Resist Affliction
-    [45317] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_affliction.dds' }, -- Resist Affliction
-    [45319] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_affliction.dds' }, -- Resist Affliction
-    [36022] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_stealthy.dds' }, -- Stealthy
-    [45295] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_stealthy.dds' }, -- Stealthy
-    [45296] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_stealthy.dds' }, -- Stealthy
-    [36063] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_cutpurse.dds' }, -- Cutpurse
-    [70386] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_nimble.dds' }, -- Nimble
-    [70388] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_nimble.dds' }, -- Nimble
-    [70390] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_nimble.dds' }, -- Nimble
-    [36067] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_carnage.dds' }, -- Carnage
-    [45299] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_carnage.dds' }, -- Carnage
-    [45301] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_carnage.dds' }, -- Carnage
-    [36582] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_amphibian.dds' }, -- Amphibian
-    [36568] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resourceful.dds' }, -- Resourceful
-    [45243] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resourceful.dds' }, -- Resourceful
-    [45247] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resourceful.dds' }, -- Resourceful
-    [36583] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_argonian_resistance.dds' }, -- Argonian Rsistance
-    [45253] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_argonian_resistance.dds' }, -- Argonian Rsistance
-    [45255] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_argonian_resistance.dds' }, -- Argonian Rsistance
-    [36585] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_quick_to_mend.dds' }, -- Quick to Mend
-    [45257] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_quick_to_mend.dds' }, -- Quick to Mend
-    [45258] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_quick_to_mend.dds' }, -- Quick to Mend
-    [36588] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_ashlander.dds' }, -- Ashlander
-    [36591] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_dynamic.dds' }, -- Dynamic
-    [45265] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_dynamic.dds' }, -- Dynamic
-    [45267] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_dynamic.dds' }, -- Dynamic
-    [36593] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_flame.dds' }, -- Resist Flame
-    [45269] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_flame.dds' }, -- Resist Flame
-    [45270] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_flame.dds' }, -- Resist Flame
-    [36598] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_destructive_ancestry.dds' }, -- Destructive Ancestry
-    [45271] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_destructive_ancestry.dds' }, -- Destructive Ancestry
-    [45272] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_destructive_ancestry.dds' }, -- Destructive Ancestry
-    [36626] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_reveler.dds' }, -- Reveler
-    [36064] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_stalwart.dds' }, -- Stalwart
-    [45297] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_stalwart.dds' }, -- Stalwart
-    [45298] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_stalwart.dds' }, -- Stalwart
-    [36627] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_frost.dds' }, -- Resist Frost
-    [45303] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_frost.dds' }, -- Resist Frost
-    [45304] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_frost.dds' }, -- Resist Frost
-    [36628] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_rugged.dds' }, -- Rugged
-    [45305] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_rugged.dds' }, -- Rugged
-    [45306] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_rugged.dds' }, -- Rugged
-    [36312] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_diplomat.dds' }, -- Diplomat
-    [50903] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_tough.dds' }, -- Tough
-    [50906] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_tough.dds' }, -- Tough
-    [50907] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_tough.dds' }, -- Tough
-    [36155] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_red_diamond.dds' }, -- Red Diamond
-    [45291] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_red_diamond.dds' }, -- Red Diamond
-    [45293] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_red_diamond.dds' }, -- Red Diamond
+    [36009] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_exhilaration.dds' }, -- Martial Training (Rank 1)
+    [45277] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_exhilaration.dds' }, -- Martial Training (Rank 2)
+    [45278] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_exhilaration.dds' }, -- Martial Training (Rank 3)
+    [117752] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_conditioning.dds' }, -- Conditioning (Rank 1)
+    [117753] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_conditioning.dds' }, -- Conditioning (Rank 2)
+    [117754] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_conditioning.dds' }, -- Conditioning (Rank 3)
+    [36546] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_adrenaline_rush.dds' }, -- Adrenaline Rush (Rank 1)
     [36548] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_adrenaline_rush.dds' }, -- Adrenaline Rush (Adrenaline Rush - Rank 1)
+    [45313] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_adrenaline_rush.dds' }, -- Adrenaline Rush (Rank 2)
     [45314] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_adrenaline_rush.dds' }, -- Adrenaline Rush (Adrenaline Rush - Rank 2)
+    [45315] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_adrenaline_rush.dds' }, -- Adrenaline Rush (Rank 3)
     [45316] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_adrenaline_rush.dds' }, -- Adrenaline Rush (Adrenaline Rush - Rank 3)
+
+    -- High Elf (Altmer)
+    [35965] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_highborn.dds' }, -- Highborn
+    [35993] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_spell_recharge.dds' }, -- Spell Recharge (Rank 1)
+    [118110] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_spell_recharge.dds' }, -- Spell Recharge (Rank 1)
+    [118111] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_spell_recharge.dds' }, -- Spell Recharge (Rank 1)
+    [45273] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_spell_recharge.dds' }, -- Spell Recharge (Rank 2)
+    [118113] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_spell_recharge.dds' }, -- Spell Recharge (Rank 2)
+    [118114] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_spell_recharge.dds' }, -- Spell Recharge (Rank 2)
+    [45274] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_spell_recharge.dds' }, -- Spell Recharge (Rank 3)
+    [118116] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_spell_recharge.dds' }, -- Spell Recharge (Rank 3)
+    [118117] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_spell_recharge.dds' }, -- Spell Recharge (Rank 3)
+    [117968] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_syrabanes_boon.dds' }, -- Syrabane's Boon (Rank 1)
+    [117969] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_syrabanes_boon.dds' }, -- Syrabane's Boon (Rank 2)
+    [117970] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_syrabanes_boon.dds' }, -- Syrabane's Boon (Rank 3)
+    [35998] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_elemental_talent.dds' }, -- Elemental Talent (Rank 1)
+    [45275] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_elemental_talent.dds' }, -- Elemental Talent (Rank 2)
+    [45276] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_elemental_talent.dds' }, -- Elemental Talent (Rank 3)
+
+    -- Wood Elf (Bosmer)
+    [36008] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_acrobat.dds', hide = true }, -- Acrobat -- SHOWS ONLY ON TARGET PLAYERS
+    [36022] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_hunters_eye.dds' }, -- Hunter's Eye (Rank 1)
+    [49175] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_hunters_eye.dds', tooltip = T.Skill_Hunters_Eye_Rank_1 }, -- Hunter's Eye (Rank 1)
+    [45295] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_hunters_eye.dds' }, -- Hunter's Eye (Rank 2)
+    [49176] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_hunters_eye.dds', tooltip = T.Skill_Hunters_Eye_Rank_2 }, -- Hunter's Eye (Rank 2)
+    [45296] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_hunters_eye.dds' }, -- Hunter's Eye (Rank 3)
+    [49177] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_hunters_eye.dds', tooltip = T.Skill_Hunters_Eye_Rank_3 }, -- Hunter's Eye (Rank 3)
+    [64279] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_yffres_endurance.dds' }, -- Y'ffre's Endurance (Rank 1)
+    [64280] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_yffres_endurance.dds' }, -- Y'ffre's Endurance (Rank 2)
+    [64281] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_yffres_endurance.dds' }, -- Y'ffre's Endurance (Rank 3)
+    [36011] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_affliction.dds' }, -- Resist Affliction (Rank 1)
+    [45317] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_affliction.dds' }, -- Resist Affliction (Rank 2)
+    [45319] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_affliction.dds' }, -- Resist Affliction (Rank 3)
+
+    -- Khajiit
+    [36063] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_cutpurse.dds' }, -- Cutpurse
+    [70386] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_nimble.dds' }, -- Nimble (Rank 1)
+    [70388] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_nimble.dds' }, -- Nimble (Rank 2)
+    [70390] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_nimble.dds' }, -- Nimble (Rank 3)
+    [117846] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_lunar_blessings.dds' }, -- Lunar Blessings (Rank 1)
+    [117847] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_lunar_blessings.dds' }, -- Lunar Blessings (Rank 2)
+    [117848] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_lunar_blessings.dds' }, -- Lunar Blessings (Rank 3)
+    [36067] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_carnage.dds' }, -- Carnage (Rank 1)
+    [45299] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_carnage.dds' }, -- Carnage (Rank 2)
+    [45301] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_carnage.dds' }, -- Carnage (Rank 3)
+
+    -- Argonian
+    [36582] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_amphibian.dds' }, -- Amphibian
+    [36568] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resourceful.dds' }, -- Resourceful (Rank 1)
+    [45243] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resourceful.dds' }, -- Resourceful (Rank 2)
+    [45247] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resourceful.dds' }, -- Resourceful (Rank 3)
+    [36583] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_argonian_resistance.dds' }, -- Argonian Resistance (Rank 1)
+    [45253] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_argonian_resistance.dds' }, -- Argonian Resistance (Rank 2)
+    [45255] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_argonian_resistance.dds' }, -- Argonian Resistance (Rank 3)
+    [36585] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_quick_to_mend.dds' }, -- Quick to Mend (Rank 1)
+    [45257] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_quick_to_mend.dds' }, -- Quick to Mend (Rank 2)
+    [45258] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_quick_to_mend.dds' }, -- Quick to Mend (Rank 3)
+
+    -- Dark Elf (Dunmer)
+    [36588] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_ashlander.dds' }, -- Ashlander
+    [36591] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_dynamic.dds' }, -- Dynamic (Rank 1)
+    [45265] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_dynamic.dds' }, -- Dynamic (Rank 2)
+    [45267] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_dynamic.dds' }, -- Dynamic (Rank 3)
+    [36593] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_flame.dds' }, -- Resist Flame (Rank 1)
+    [45269] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_flame.dds' }, -- Resist Flame (Rank 2)
+    [45270] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_flame.dds' }, -- Resist Flame (Rank 3)
+    [36598] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_destructive_ancestry.dds' }, -- Destructive Ancestry (Rank 1)
+    [45271] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_destructive_ancestry.dds' }, -- Destructive Ancestry (Rank 2)
+    [45272] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_destructive_ancestry.dds' }, -- Destructive Ancestry (Rank 3)
+
+    -- Nord
+    [36626] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_reveler.dds' }, -- Reveler
+    [36064] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_stalwart.dds' }, -- Stalwart (Rank 1)
+    [118182] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_stalwart.dds' }, -- Stalwart (Rank 1)
+    [45297] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_stalwart.dds' }, -- Stalwart (Rank 2)
+    [118184] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_stalwart.dds' }, -- Stalwart (Rank 2)
+    [45298] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_stalwart.dds' }, -- Stalwart (Rank 3)
+    [118186] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_stalwart.dds' }, -- Stalwart (Rank 3)
+    [36627] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_frost.dds' }, -- Resist Frost (Rank 1)
+    [45303] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_frost.dds' }, -- Resist Frost (Rank 2)
+    [45304] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_resist_frost.dds' }, -- Resist Frost
+    [36628] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_rugged.dds' }, -- Rugged (Rank 1)
+    [45305] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_rugged.dds' }, -- Rugged (Rank 2)
+    [45306] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_rugged.dds' }, -- Rugged (Rank 3)
+
+    -- Imperial
+    [36312] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_diplomat.dds' }, -- Diplomat
+    [50903] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_tough.dds' }, -- Tough (Rank 1)
+    [50906] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_tough.dds' }, -- Tough (Rank 2)
+    [50907] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_tough.dds' }, -- Tough (Rank 3)
+    [36153] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_imperial_mettle.dds' }, -- Imperial Mettle (Rank 1)
+    [45279] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_imperial_mettle.dds' }, -- Imperial Mettle (Rank 2)
+    [45280] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_imperial_mettle.dds' }, -- Imperial Mettle (Rank 3)
+    [36155] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_red_diamond.dds' }, -- Red Diamond (Rank 1)
+    [45291] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_red_diamond.dds' }, -- Red Diamond (Rank 2)
+    [45293] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_red_diamond.dds' }, -- Red Diamond (Rank 3)
     [63694] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 1)
     [63695] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 1)
     [63696] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 1)

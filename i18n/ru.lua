@@ -2321,7 +2321,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Помечен на |cFFFFFF<<1>>|r секунд. Вы видны для противника, который пометил вас, даже если уходите в скрытность.",
     SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Обнаружен на |cFFFFFF<<1>>|r секунд. Вы не можете уйти в невидимость.",
     SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Невидим на |cFFFFFF<<1>>|r секунд. Вы сокрыты от чужих глаз.",
-    SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP =          "Обнаружение увеличено на |cffffff20|r метров в течение |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP =          "Stealth Detection increased by |cffffff20|r meters for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
 
 	-- Crowd Control / Immunity
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP =      "Иммунитет к эффектам, которые выводят из равновесия и делают уязвимым.",
@@ -2475,7 +2475,7 @@ local strings = {
     SI_LUIE_SKILL_RADIAL_SWEEP_TP =                      "Ближайшие враги получают Магический урон каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_SUN_FIRE_TP =                          "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.\n\nЗамедлен на |cFFFFFF<<2>>|r секунд. Ваша скорость передвижения снижена на |cFFFFFF40|r%.",
     SI_LUIE_SKILL_SUN_FIRE_SNARE_TP =                    "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<2>>|r секунд.\n\nЗамедлен на |cFFFFFF<<1>>|r секунд. Ваша скорость передвижения снижена на |cFFFFFF40|r%.",
-    SI_LUIE_SKILL_SOLAR_BARRAGE_TP =                     "Ближайшие враги получают Магический урона каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.\n\nТакже даёт вам Empower после каждого взрыва.",
+    SI_LUIE_SKILL_SOLAR_BARRAGE_TP =                     "Nearby enemies take Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nWhile this ability is active you gain Empower.", -- TODO: Translate
     SI_LUIE_SKILL_BACKLASH_TP =                          "|cFFFFFF20|r% от всего урона, полученного в течение следующих |cFFFFFF<<1>>|r секунд будет накоплено и затем выпущено в виде Магического урона по истечению времени действия эффекта.",
     SI_LUIE_SKILL_PURIFYING_LIGHT_TP =                   "|cFFFFFF20|r% от всего урона, полученного в течение следующих |cFFFFFF<<1>>|r секунд будет накоплено и затем выпущено в виде Магического урона по истечению времени действия эффекта.\n\nПо истечению эффекта, запас солнечного света остаётся с вами, исцеляя всех союзников храмовника каждые |cFFFFFF2|r секунды в течение |cFFFFFF6|r секунд.",
     SI_LUIE_SKILL_PURIFYING_LIGHT_HOT_TP =               "Исцеляет ближайших врагов каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
@@ -2677,9 +2677,9 @@ local strings = {
     SI_LUIE_SKILL_TIME_BORROWED_TIME_TP =                "Gradually being slowed over time for |cFFFFFF2|r seconds. If you are still in the area of effect at end of this duration you will be stunned and have the next |cFFFFFF5000|r points of healing negated for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_TIME_BORROWED_TIME_STUN_TP =           "Negating the next |cFFFFFF5000|r points of healing for |cFFFFFF<<1>>|r seconds.\n\nStunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.",
     SI_LUIE_SKILL_TIME_FREEZE_TP =                       "Gradually being slowed over time for |cFFFFFF4|r seconds. If you are still in the area of effect at end of this duration you will be stunned for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_IMBUE_WEAPON_TP =                      "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Physical Damage.\n\nResources are refunded if a Light Attack is not activated.",
-    SI_LUIE_SKILL_ELEMENTAL_WEAPON_TP =                  "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Magic Damage and applies the Burning, Concussion, or Chill status effect.\n\nResources are refunded if a Light Attack is not activated.",
-    SI_LUIE_SKILL_CRUSHING_WEAPON_TP =                   "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Physical Damage and heals you for |cFFFFFF25|r% of the damage done.\n\nResources are refunded if a Light Attack is not activated.",
+    SI_LUIE_SKILL_IMBUE_WEAPON_TP =                      "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Physical Damage.\n\nA portion of the resources spent are refunded if a Light Attack is not activated.",
+    SI_LUIE_SKILL_ELEMENTAL_WEAPON_TP =                  "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Magic Damage and applies the Burning, Concussion, or Chill status effect.\n\nA portion of the resources spent are refunded if a Light Attack is not activated.",
+    SI_LUIE_SKILL_CRUSHING_WEAPON_TP =                   "Your next Light Attack used within |cFFFFFF2|r seconds deals additional Physical Damage and heals you for |cFFFFFF25|r% of the damage done.\n\nA portion of the resources spent are refunded if a Light Attack is not activated.",
     SI_LUIE_SKILL_MEND_WOUNDS_TP =                       "Your Light and Heavy attacks are replaced with healing abilities that can be used on allies.\n\nYour Light Attack applies a heal over time for |cFFFFFF10|r seconds.\n\nYour Heavy Attack heals every |cFFFFFF1|r second while channeling.",
     SI_LUIE_SKILL_MEND_SPIRIT_TP =                       "Your Light and Heavy attacks are replaced with healing abilities that can be used on allies.\n\nYour Light Attack applies a heal over time for |cFFFFFF10|r seconds.\n\nYour Heavy Attack heals every |cFFFFFF1|r second while channeling.\n\nWhile you heal an ally you grant them Major Resolve and Major Ward.",
     SI_LUIE_SKILL_SYMBIOSIS_TP =                         "Your Light and Heavy attacks are replaced with healing abilities that can be used on allies.\n\nYour Light Attack applies a heal over time for |cFFFFFF10|r seconds.\n\nYour Heavy Attack heals every |cFFFFFF1|r second while channeling.\n\nYou heal yourself for |cFFFFFF50|r% of the amount of healing done to the ally.",
@@ -2706,8 +2706,9 @@ local strings = {
     -- Assault
     SI_LUIE_SKILL_CONTINUOUS_ATTACK_RANK_1_TP =          "Increase Weapon and Spell Damage by |cFFFFFF5|r% and Magicka and Stamina Recovery by |cFFFFFF10|r% for |cFFFFFF10|r minutes.",
     SI_LUIE_SKILL_CONTINUOUS_ATTACK_RANK_2_TP =          "Increase Weapon and Spell Damage by |cFFFFFF10|r% and Magicka and Stamina Recovery by |cFFFFFF20|r% for |cFFFFFF10|r minutes.",
-    SI_LUIE_SKILL_RAPID_MANEUVER_TP =                    "Immune to snare and immobilization effects for |cFFFFFF<<1>>|r seconds.\n\nThe effect ends if you cast any spell on an enemy or ally.",
-    SI_LUIE_SKILL_CHARGING_MANEUVER_TP =                 "Immune to snare and immobilization effects for |cFFFFFF<<1>>|r seconds.\n\nThe effect ends if you cast any spell on an enemy or ally, but you gain Minor Expedition for |cFFFFFF8|r seconds.",
+    SI_LUIE_SKILL_RAPID_MANEUVER_TP =                    "Gain Major Expedition and Major Gallop for |cFFFFFF<<1>>|r seconds.\n\nThe effect ends if you cast any spell on an enemy or ally.",
+    SI_LUIE_SKILL_RETREATING_MANEUEVER_TP =              "Gain Major Expedition and Major Gallop for |cFFFFFF<<1>>|r seconds.\n\nAttacks from behind deal |cFFFFFF15|r% less damage while this effect persists.\n\nThe effect ends if you cast any spell on an enemy or ally.",
+    SI_LUIE_SKILL_CHARGING_MANEUVER_TP =                 "Gain Major Expedition and Major Gallop for |cFFFFFF<<1>>|r seconds.\n\nThe effect ends if you cast any spell on an enemy or ally, but you gain Minor Expedition for |cFFFFFF8|r seconds.",
     SI_LUIE_SKILL_CALTROPS_TP =                          "Enemies standing in the caltrops take Physical Damage every |cFFFFFF1|r second and have their Movement Speed reduced by |cFFFFFF30|r%.",
     SI_LUIE_SKILL_ANTI_CAVALRY_CALTROPS_TP =             "Enemies standing in the caltrops take Physical Damage every |cFFFFFF1|r second and have their Movement Speed reduced by |cFFFFFF30|r%.\n\nThe caltrops rapidly drain the Mount Stamina of any enemy in the area.",
     SI_LUIE_SKILL_CALTROPS_DEBUFF_TP =                   "Snared and taking Physical Damage every |cFFFFFF1|r second while standing in the caltrops. Your Movement Speed has been reduced by |cFFFFFF30|r%.",
@@ -2731,6 +2732,12 @@ local strings = {
     SI_LUIE_SKILL_LINGERING_FLARE_TP =                   "Enemies in the target area are revealed and have their Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_SCORCHING_FLARE_TP =                   "Revealed for |cFFFFFF<<1>>|r seconds. You are unable to stealth.\n\nAfflicted with Flame Damage every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds.\n\nSnared for |cFFFFFF<<1>>|r seconds.Your Movement Speed has been reduced by |cFFFFFF50|r%.",
     SI_LUIE_SKILL_REVIVING_BARRIER_TP =                  "Absorbing damage for |cFFFFFF30|r seconds.\n\nHealing every |cFFFFFF1.5|r seconds for |cFFFFFF30|r seconds.",
+
+	----------------------------------------------------------------
+    -- RACIAL SKILLS -----------------------------------------------
+    ----------------------------------------------------------------
+
+    SI_LUIE_SKILL_HUNTERS_EYE_TP =                       "Increase Movement Speed by |cFFFFFF<<1>>|r for |cFFFFFF4|r seconds.",
 
 	----------------------------------------------------------------
     -- CYRODIIL ----------------------------------------------------
@@ -2822,7 +2829,7 @@ local strings = {
     SI_LUIE_SKILL_SET_MOLAG_KENA_TP =                    "При нанесении урона |cFFFFFF2|r последовательными обычными атаками, активируется способность |cFFFFFFOverload|r на |cFFFFFF6|r секунд.",
     SI_LUIE_SKILL_SET_MOLAG_KENA_OVERKILL_TP =           "Увеличивает урон от Оружия и Заклинания, но повышает стоимость способностей на |cFFFFFF20|r% в течение |cFFFFFF6|r секунд.",
     SI_LUIE_SKILL_SET_PIRATE_SKELETON_TP =               "Даёт Major Protection и Minor Defile на |cFFFFFF12|r секунды, снижающих получение урона на |cFFFFFF30|r%, но и снижающих получаемое исцеление и восстановление Здоровья на |cFFFFFF15|r%.",
-    SI_LUIE_SKILL_SET_SENTINEL_OF_REKUGAMZ_TP =          "Союзники в радиусе |cffffff5|r метров от двемерского паука исцеляются каждую |cffffff1|r секунду в течение |cffffff8|r секунд.",
+    SI_LUIE_SKILL_SET_SENTINEL_OF_REKUGAMZ_TP =          "You and your allies within |cffffff5|r meters of the Dwemer Spider are healed every |cffffff1|r second for |cffffff8|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_SET_SHADOWREND_TP =                    "Теневой кланфир следует за вами и атакует ваших противников в течение |cFFFFFF15|r секунд.",
     SI_LUIE_SKILL_SET_SLIMECRAW =                        "Slimecraw",
     SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_TP =              "Противники в радиусе |cffffff4|r метров от паутины получают урон Ядом каждую |cffffff1|r секунду, а их скорость передвижения снижена на  |cffffff50|r% в течение |cffffff10|r секунд.",
@@ -2864,7 +2871,7 @@ local strings = {
     SI_LUIE_SKILL_SET_WORMS_RAIMENT_TP =                 "Снижает стоимость способностей, расходующих Магию, на |cffffff4|r%.",
     SI_LUIE_SKILL_SET_HIRCINES_VENEER_TP =               "Снижает стоимость способностей, расходующих Запас сил, на |cffffff4|r%.",
     SI_LUIE_SKILL_SET_JAILBREAKER =                      "Jailbreaker",
-    SI_LUIE_SKILL_PLAGUE_SLINGER_TP =                    "Выпускает ядовитый шар в ближайшего противника, нанося урон от Яда каждую |cffffff1|r секунду в течение |cffffff4|r секунд.",
+    SI_LUIE_SKILL_PLAGUE_SLINGER_TP =                    "Выпускает ядовитый шар в ближайшего противника, нанося урон от Яда каждую |cffffff1|r секунду в течение |cffffff<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_STORM_MASTER_TP =                  "Ваши Обычные атаки наносят урон от Электричества в течение |cffffff20|r секунд.",
     SI_LUIE_SKILL_SET_ESSENCE_THIEF_TP =                 "Увеличивает наносимый урон на |cffffff12|r% в течение |cffffff10|r секунд.",
     SI_LUIE_SKILL_SET_TOOTHROW =                         "Toothrow",
@@ -2914,6 +2921,9 @@ local strings = {
     SI_LUIE_SKILL_SET_MORAG_TONG_TP =                    "Увеличивает урон, получаемый от способностей с уроном от Яда, на |cffffff10|r% в течение |cffffff5|r секунд.",
     SI_LUIE_SKILL_SET_WARRIORS_FURY_TP =                 "Increase Weapon Damage for |cffffff6|r seconds when you take Critical Damage, stacking up to |cffffff25|r times.",
     SI_LUIE_SKILL_SET_ROBES_OF_TRANSMUTATION_TP =        "Increase Critical Resistance for |cffffff20|r seconds.",
+    SI_LUIE_SKILL_SET_BECKONING_STEEL_TP =               "Reduce damage taken from projectiles by |cffffff10|r%.",
+    SI_LUIE_SKILL_SET_SENTRY_TP =                        "Dramatically increase Stealth Detection radius for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_SENTRY_ICD_TP =                    "You have recently crouched to increase detection and cannot do so again.",
 
 	----------------------------------------------------------------
     -- NPC ABILITY / QUEST TOOLTIPS --------------------------------
