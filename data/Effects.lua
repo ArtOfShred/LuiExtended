@@ -593,6 +593,7 @@ E.CastDurationFix = {
     [89645] = 5000, -- 68235 Stun (Create crafting station)
     [105217] = 5000, -- 68235 Stun (Create crafting station)
     [89654] = 5000, -- 68235 Stun (Create crafting station)
+    [113432] = 5000, -- 68235 Stun (Nascent Indrik)
 
     -- Seasonal Mementos and Items
     [86792] = 3000, -- Eating (High Hrothgar Festival Mints)
@@ -706,6 +707,7 @@ E.IsCast = {
     [89645] = true, -- 68235 Stun (Create furniture station)
     [105217] = true, -- 68235 Stun (Create furniture station)
     [89654] = true, -- 68235 Stun (Create furniture station)
+    [113432] = true, -- 68235 Stun (Nascent Indrik)
     [63427] = true, -- Clean Fish (Create furniture station)
     [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
     [76350] = true, -- Moderate Pardon (Leniency Edict)
@@ -3168,6 +3170,7 @@ E.EffectOverride = {
     [85503] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds', name = A.Experience_Crown_Crate_Scroll_3, tooltip = T.Experience_Grand_Gold_Coast }, -- Grand Gold Coast Experience Scroll
 
     -- Other
+    [113432] = { icon = 'esoui/art/icons/achievement_su_groupboss_2.dds', name = zo_strformat("<<1>> <<2>>", A.Innate_Summon, A.Innate_Nascent_Indrik) }, -- 68235 Stun (Nascent Indrik)
     [70582] = { hide = true }, -- Roll 1d1000 (Merethic Restorative Resin)
     [63427] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fillet_fish.dds', name = A.Innate_Fillet_Fish }, -- Clean Fish
     [78052] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_pardon_edict_low.dds', name = A.Innate_Pardon_Edict_Low }, -- Minor Pardon
