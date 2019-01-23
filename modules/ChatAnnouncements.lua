@@ -8591,6 +8591,7 @@ function CA.HookFunction()
 
         local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
         -- Bail out if this achievement comes from unwanted category
+        -- TODO: Make this less shit in the future
         if topLevelIndex == 1 and not CA.SV.Achievement.AchievementCategory1 then return true end
         if topLevelIndex == 2 and not CA.SV.Achievement.AchievementCategory2 then return true end
         if topLevelIndex == 3 and not CA.SV.Achievement.AchievementCategory3 then return true end
@@ -8602,7 +8603,18 @@ function CA.HookFunction()
         if topLevelIndex == 9 and not CA.SV.Achievement.AchievementCategory9 then return true end
         if topLevelIndex == 10 and not CA.SV.Achievement.AchievementCategory10 then return true end
         if topLevelIndex == 11 and not CA.SV.Achievement.AchievementCategory11 then return true end
-        --if topLevelIndex == 12 and not CA.SV.Achievement.AchievementCategory12 then return end
+        if topLevelIndex == 12 and not CA.SV.Achievement.AchievementCategory12 then return true end
+        if topLevelIndex == 13 and not CA.SV.Achievement.AchievementCategory13 then return true end
+        if topLevelIndex == 14 and not CA.SV.Achievement.AchievementCategory14 then return true end
+        if topLevelIndex == 15 and not CA.SV.Achievement.AchievementCategory15 then return true end
+        if topLevelIndex == 16 and not CA.SV.Achievement.AchievementCategory16 then return true end
+        if topLevelIndex == 17 and not CA.SV.Achievement.AchievementCategory17 then return true end
+        if topLevelIndex == 18 and not CA.SV.Achievement.AchievementCategory18 then return true end
+        if topLevelIndex == 19 and not CA.SV.Achievement.AchievementCategory19 then return true end
+        if topLevelIndex == 20 and not CA.SV.Achievement.AchievementCategory20 then return true end
+        if topLevelIndex == 21 and not CA.SV.Achievement.AchievementCategory21 then return true end
+        if topLevelIndex == 22 and not CA.SV.Achievement.AchievementCategory22 then return true end
+        if topLevelIndex == 23 and not CA.SV.Achievement.AchievementCategory23 then return true end
 
         if CA.SV.Achievement.AchievementCompleteCA then
 
