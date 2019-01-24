@@ -1155,9 +1155,15 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         return
     end
 
+	-- Stop when a cast breaking action is detected
     if CBT.CastBreakingActions[abilityId] and sourceType == COMBAT_UNIT_TYPE_PLAYER then
         CI.StopCastBar()
     end
+		
+	-- Stop if an ability is interrupted and we want a new cast to display
+	if CBT.AllowRecast[abilityId] and sourceType == COMBAT_UNIT_TYPE_PLAYER and result == ACTION_RESULT_BEGIN then
+		CI.StopCastBar()
+	end
 
     if not CBT.IsCast[abilityId] then
         return

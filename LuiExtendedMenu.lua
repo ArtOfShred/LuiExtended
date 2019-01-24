@@ -11805,9 +11805,9 @@ function LUIE_CreateSettings()
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertInterruptA) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterruptA = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
-                default = {r=LUIE.CombatText.D.colors.alertInterruptA[1], g=LUIE.CombatText.D.colors.alertInterruptA[2], b=LUIE.CombatText.D.colors.alertInterruptA[3]}
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertInterruptB) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterruptB = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
+                default = {r=LUIE.CombatText.D.colors.alertInterruptB[1], g=LUIE.CombatText.D.colors.alertInterruptB[2], b=LUIE.CombatText.D.colors.alertInterruptB[3]}
             },
             {
                 type = "header",
