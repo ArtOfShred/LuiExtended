@@ -4361,7 +4361,7 @@ debugAuras = {
             [38818] = true, -- Dizzying Swing (Dizzying Swing)
             [38816] = true, -- Dizzying Swing (Dizzying Swing)
 
-            [38807] = true, -- Wrecking Blow (Wrecking Blow)
+			[38807] = true, -- Wrecking Blow (Wrecking Blow)
 
             [28448] = true, -- Critical Charge (Critical Charge)
             [28450] = true, -- Critical Strike (Critical Charge)
