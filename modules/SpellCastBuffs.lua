@@ -7,7 +7,6 @@ local SCB           = LUIE.SpellCastBuffs
 local CI            = LUIE.CombatInfo
 local UI            = LUIE.UI
 local E             = LUIE.Effects
-local T             = LUIE.Tooltips
 local A             = LUIE.GetAbility()
 local printToChat   = LUIE.PrintToChat
 local strfmt        = string.format
@@ -2270,8 +2269,6 @@ end
  * As well as create fake buffs/debuffs for events with no active effect present.
  ]]--
 
-local InternalStackCounter = { }
-
  -- Combat Event (Target = Player)
 function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
     if not (E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId]) then
@@ -2349,16 +2346,20 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             return
         end
         if internalStack then
-            if not InternalStackCounter[abilityId] then InternalStackCounter[abilityId] = 0 end -- Create stack if it doesn't exist
-            if result == ACTION_RESULT_EFFECT_FADED then
-                InternalStackCounter[abilityId] = InternalStackCounter[abilityId] - 1
-            elseif result == ACTION_RESULT_EFFECT_GAINED_DURATION then
-                InternalStackCounter[abilityId] = InternalStackCounter[abilityId] + 1
-            end
             if g_effectsList.player2[abilityId] then
-                if InternalStackCounter[abilityId] <= 0 then
-                    g_effectsList.player2[abilityId] = nil
-                    InternalStackCounter[abilityId] = nil
+                -- If the aura faded then remove a stack, otherwise add a stack
+                if result == ACTION_RESULT_EFFECT_FADED then
+                    g_effectsList.player2[abilityId].internalStack = g_effectsList.player2[abilityId].internalStack - 1
+                    if g_effectsList.player2[abilityId].internalStack == 0 then
+                        g_effectsList.player2[abilityId] = nil
+                    end
+                else
+                    internalStack = g_effectsList.player2[abilityId].internalStack + 1
+                end
+            else
+                -- Just make sure the aura didn't fade before applying for some reason
+                if result ~= ACTION_RESULT_EFFECT_FADED then
+                    internalStack = internalStack + 1
                 end
             end
         else
@@ -2372,14 +2373,6 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local endTime = beginTime + duration
         local source = strformat("<<t:1>>",sourceName)
         local target = strformat("<<t:1>>",targetName)
-
-        -- TODO: Temp - converts icon for Helljoint, might be other abilities that need this in the future
-        if abilityId == 14523 then
-            if source == "Jackal" then
-                iconName = 'LuiExtended/media/icons/abilities/ability_jackal_helljoint.dds'
-            end
-        end
-
         if source ~= "" and target == LUIE.PlayerNameFormatted then
             g_effectsList.player2[ abilityId ] = {
                 type=BUFF_EFFECT_TYPE_DEBUFF,
@@ -2387,6 +2380,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
                 dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                 forced = "short",
                 restart=true, iconNum=0,
+                internalStack = internalStack,
                 unbreakable=unbreakable
             }
         end
@@ -2730,11 +2724,9 @@ function SCB.ReloadEffects(unitTag)
         -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
         if E.AddNameAura[unitName] and GetUnitReaction(unitTag) == UNIT_REACTION_HOSTILE and IsUnitInCombat(unitTag) and not IsUnitPlayer(unitTag) and not IsUnitDead(unitTag) then
             for k, v in ipairs(E.AddNameAura[unitName]) do
-                local abilityName = GetAbilityName(v.id)
-                local abilityIcon = GetAbilityIcon(v.id)
                 g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
                     type=1,
-                    id= v.id, name= abilityName, icon= abilityIcon,
+                    id = "Fake", name= v.name, icon= v.icon,
                     dur=0, starts=1, ends=nil,
                     forced = "short",
                     restart=true, iconNum=0
@@ -2896,11 +2888,9 @@ function SCB.PlayerCombatState(eventCode, inCombat)
         -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
         if E.AddNameAura[unitName] and GetUnitReaction('reticleover') == UNIT_REACTION_HOSTILE and IsUnitInCombat('reticleover') and not IsUnitPlayer('reticleover') and not IsUnitDead('reticleover') then
             for k, v in ipairs(E.AddNameAura[unitName]) do
-                local abilityName = GetAbilityName(v.id)
-                local abilityIcon = GetAbilityIcon(v.id)
                 g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
                     type=1,
-                    id= v.id, name= abilityName, icon= abilityIcon,
+                    id="Fake", name= v.name, icon= v.icon,
                     dur=0, starts=1, ends=nil,
                     forced = "short",
                     restart=true, iconNum=0

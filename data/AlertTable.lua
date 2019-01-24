@@ -15,49 +15,42 @@ LUIE.AlertTable = {
     -- [00000] = { block = false, dodge = false, avoid = false, interrupt = false, priority = 3}, --
     -- TEMPLATE
 
-    -- skipcheck -- DEPRICATE
-    -- eventDetect -- doesn't need a result, ignoreRefresh = ignores refresh event here
-    -- result = ONLY ON THIS ACTION RESULT!!!!
-
     --------------------------------------------------
     -- JUSTICE NPC'S ---------------------------------
     --------------------------------------------------
 
-    [63157] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Blow (Justice Guard 1H)
-    [63261] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Blow (Justice Guard 2H)
-    [63179] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 2, bs = false, result = ACTION_RESULT_BEGIN }, -- Flame Shard (Justice Guard 2H)
-    [78743] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, bs = false, result = ACTION_RESULT_BEGIN }, -- Flare (Justice Guard - Any)
+    [63157] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true}, -- Heavy Blow (Justice Guard 1H)
+    [63261] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true}, -- Heavy Blow (Justice Guard 2H)
+    [63179] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = false}, -- Flame Shard (Justice Guard 2H)
+    [78743] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, bs = false}, -- Flare (Justice Guard - Any)
 
-    [74862] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, bs = false, result = ACTION_RESULT_BEGIN }, -- Teleport Trap (Mage Guard)
+    [74862] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, bs = false}, -- Teleport Trap (Mage Guard)
 
-    [62409] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500, result = ACTION_RESULT_BEGIN }, -- Fiery Wind (Justice Mage NPC)
-    [62472] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Stab (Justice Dagger NPC)
+    [62409] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500 }, -- Fiery Wind (Justice Mage NPC)
+    [62472] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Stab (Justice Dagger NPC)
 
-    [78265] = { power = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Alarm (Estate Marshal) (DB DLC)
+    [78265] = { power = true, priority = 2 }, -- Alarm (Estate Marshal) (DB DLC)
 
-    [52471] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Nullify (Estate Spellbreaker) (DB DLC)
+    [52471] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, refire = 2000 }, -- Nullify (Estate Spellbreaker) (DB DLC)
 
-    [73229] = { power = true, priority = 2, auradetect = true, ignoreRefresh = true, refire = 100 }, -- Hurried Ward (Guard - DB Mage)
+    [73229] = { power = true, priority = 2, auradetect = true, ignoreRefresh = true, refire = 500 }, -- Hurried Ward (Guard - DB Mage)
 
     --------------------------------------------------
     -- STANDARD NPC'S --------------------------------
     --------------------------------------------------
-
-    -- Shared
-    [39058] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, notDirect = true }, -- Bear Trap (Bear Trap)
 
     -- Synergy
     [12439] = { avoid = true, priority = 3, eventdetect = true, refire = 2500 }, -- Burning Arrow (Synergy)
     [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 2500 }, -- Ignite (Synergy)
 
     -- Abilities
-    [29378] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Uppercut (Ravager)
+    [29378] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Uppercut (Ravager)
 
-    [28408] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Whirlwind (Skirmisher)
+    [28408] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true}, -- Whirlwind (Skirmisher)
 
-    [37108] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Arrow Spray (Archer)
-    [28628] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Volley (Archer)
-    [74978] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Taking Aim (Archer)
+    [37108] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Arrow Spray (Archer)
+    [28628] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Volley (Archer)
+    [74978] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Taking Aim (Archer)
 
     [14096] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Heavy Attack (Footsoldier)
     [28499] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Throw Dagger (Footsoldier)
@@ -74,13 +67,13 @@ LUIE.AlertTable = {
     [81215] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 2 }, -- Shock Aura (Thundermaul - Boss)
     [81217] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Thunder Hammer (Thundermaul)
 
-    [36470] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Veiled Strike (Nightblade)
-    [44345] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Soul Tether (Nightblade)
+    [36470] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Veiled Strike (Nightblade)
+    [44345] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true }, -- Soul Tether (Nightblade)
 
-    [34742] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Fiery Breath (Dragonknight)
-    [34646] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Lava Whip (Dragonknight)
-    [44227] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dragonknight Standard (Dragonknight - Elite)
-    [52041] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN }, -- Blink Strike (Dragonknight - Elite)
+    [34742] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3}, -- Fiery Breath (Dragonknight)
+    [34646] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Lava Whip (Dragonknight)
+    [44227] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Dragonknight Standard (Dragonknight - Elite)
+    [52041] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true }, -- Blink Strike (Dragonknight - Elite)
 
     [44301] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true, refire = 1500}, -- Trap Beast (Pet Ranger)
 
@@ -100,13 +93,12 @@ LUIE.AlertTable = {
     [44216] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2}, -- Negate Magic (Battlemage - Elite)
 
     [13397] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true, refire = 1000}, -- Empower Undead (Necromancer)
-
-    [14350] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Aspect of Terror (Fear Mage)
+    [14350] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Aspect of Terror (Fear Mage)
 
     [35387] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Defiled Grave (Bonelord)
 
-    [50966] = { power = true, auradetect = true, priority = 2 }, -- Healer Immune (Healer - Craglorn/DLC)
-    [44328] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2, auradetect = true, notDirect = true }, -- Rite of Passage (Healer)
+    [57534] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true, refire = 1000 }, -- Focused Healing (Healer)
+    [44328] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2, auradetect = true, notDirect = true, refire = 500 }, -- Rite of Passage (Healer)
 
     [29520] = { destroy = true, auradetect = true, priority = 2 }, -- Aura of Protection (Shaman)
 
@@ -126,7 +118,7 @@ LUIE.AlertTable = {
     [53987] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Rally (Vosh Rakh Devoted)
     [54027] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, refire = 1600}, -- Divine Leap (Vosh Rakh Devoted)
 
-    [51000] = { power = true, auradetect = true, priority = 2 }, -- Cleave Stance (Dremora Caitiff) (Craglorn)
+    [51000] = { power = true, auradetect = true, priority = 2, refire = 1000 }, -- Cleave Stance (Dremora Caitiff) (Craglorn)
 
     [72725] = { power = true, auradetect = true, priority = 2, refire = 1000 }, -- Fool Me Once (Sentinel) (TG DLC)
 
@@ -167,17 +159,17 @@ LUIE.AlertTable = {
     [84835] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true }, -- Broken Pact (Skaafin) (Morrowind)
 
     -- ANIMALS
-    [5452] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Lacerate (Alit)
+    [5452] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true }, -- Lacerate (Alit)
 
     [4415] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true}, -- Crushing Swipe (Bear)
     [4416] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Savage Blows (Bear)
 
     [70366] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true}, -- Slam (Great Bear)
 
-    [4591] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Sweep (Crocodile)
-    [4594] = { power = true, auradetect = true, priority = 2, ignoreRefresh = true, refire = 500 }, -- Ancient Skin (Crocodile)
+    [4591] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Sweep (Crocodile)
+    [4594] = { power = true, auradetect = true, refire = 1000, priority = 2, ignoreRefresh = true}, -- Ancient Skin (Crocodile)
 
-    [8977] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Sweep (Duneripper)
+    [8977] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Sweep (Duneripper)
 
     [7227] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Rotbone (Durzog)
 
@@ -194,12 +186,11 @@ LUIE.AlertTable = {
     [5242] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Kiss of Poison (Giant Snake)
     [5244] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true, refire = 1000}, -- Shed Skin (Giant Snake)
 
-    [5441] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dive (Guar)
+    [5441] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true }, -- Dive (Guar)
 
-    [14196] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Charge (Kagouti)
-    [5363] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Chomp (Kagouti)
-    [5926] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Toss (Kagouti)
-    [87276] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Chomp (Kagouti Whelp)
+    [14819] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Charge (Kagouti)
+    [5363] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Chomp (Kagouti)
+    [5926] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true}, -- Toss (Kagouti)
 
     [7161] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Double Strike (Lion)
 
@@ -207,28 +198,26 @@ LUIE.AlertTable = {
     [8600] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, skipcheck = true}, -- Stomp (Mammoth)
     [48551] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true}, -- Charge (Mammoth)
 
-    [4200] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Unforgiving Claws (Mudcrab)
+    [4200] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Unforgiving Claws (Mudcrab)
 
-    [16690] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Thrust (Netch)
-    [16697] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1800 }, -- Poisonbloom (Netch)
+    [16690] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Thrust (Netch)
+    [16697] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 2000}, -- Poisonbloom (Netch)
 
-    [7268] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 500, result = ACTION_RESULT_BEGIN }, -- Leech
-    [7273] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dampworm (Nix-Hound)
+    [7268] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 500}, -- Leech
+    [7273] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true }, -- Dampworm (Nix-Hound)
 
     [21904] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Rend (Skeever)
 
-    [21951] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Repulsion Shock (Wamasu)
-    [21949] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Sweep (Wamasu)
-    [21957] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Charge (Wamasu)
-    [22045] = { power = true, auradetect = true, priority = 2 }, --- Static (Wamasu)
+    [21951] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2}, -- Repulsion Shock (Wamasu)
+    [21949] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true}, -- Sweep (Wamasu)
+    [48556] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, auradetect = true}, -- Focused Charge (Wamasu)
+    [22045] = { power = true, auradetect = true, priority = 2, refire = 1000}, --- Static (Wamasu)
 
-    [44791] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Rear Kick (Welwa)
-    [50714] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true }, -- Charge (Welwa)
+    [44791] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Rear Kick (Welwa)
+    [52417] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Charge (Welwa)
 
-    [42844] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Rotbone (Wolf)
-    [14523] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Helljoint (Wolf)
-    [14272] = { summon = true, auradetect = true, priority = 2 }, -- Call of the Pack (Wolf)
-    [26658] = { summon = true, auradetect = true, priority = 2 }, -- Call of the Pack (Jackal)
+    [42844] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Rotbone (Wolf)
+    [14523] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3, refire = 1000}, -- Helljoint (Wolf)
 
     [72793] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 2}, -- Toxic Mucus (Haj Mota)
     [72796] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, auradetect = true}, -- Bog Burst (Haj Mota)
@@ -249,12 +238,12 @@ LUIE.AlertTable = {
     [85390] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, refire = 750 }, -- Slash (Cliff Strider)
 
     -- INSECTS
-    [6137] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Laceration (Assassin Beetle)
-    [5268] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Collywobbles (Assassin Beetle)
+    [6137] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Laceration (Assassin Beetle)
+    [5268] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Collywobbles (Assassin Beetle)
 
-    [6757] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Blurred Strike (Giant Scorpion)
-    [6756] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Paralyze (Giant Scorpion)
-    [6758] = { power = true, auradetect = true, priority = 2, ignoreRefresh = true, refire = 500 }, -- Hardened Carapace (Giant Scorpion)
+    [6757] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Blurred Strike (Giant Scorpion)
+    [6756] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3 }, -- Paralyze (Giant Scorpion)
+    [6758] = { power = true, auradetect = true, refire = 1000, priority = 2, ignoreRefresh = true}, -- Hardened Carapace (Giant Scorpion)
 
     [44086] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true, refire = 850 }, -- Fire Runes (Giant Spider)
     [5685] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Corrosive Bite (Giant Spider)
@@ -262,9 +251,9 @@ LUIE.AlertTable = {
     [4737] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true }, -- Encase (Giant Spider)
     [13382] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true }, -- Devour (Giant Spider)
 
-    [9226] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Sting (Wasp)
-    [25110] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Focused Charge (Giant Wasp)
-    [9229] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Inject Larva (Giant Wasp)
+    [9226] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Sting (Wasp)
+    [48559] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Focused Charge (Giant Wasp)
+    [9229] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Inject Larva (Giant Wasp)
 
     [6800] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Bloodletting (Hoarvor)
     [6795] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3}, -- Latch On (Hoarvor)
@@ -273,13 +262,13 @@ LUIE.AlertTable = {
     [61244] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3}, -- Fevered Retch (Necrotic Hoarvor)
     [61427] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, skipcheck = true, refire = 1000 }, -- Necrotic Explosion (Necrotic Hoarvor)
 
-    [14841] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Focused Charge (Kwama Worker)
+    [48539] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Focused Charge (Kwama Worker)
 
-    [9769] = { block = true, dodge = true, avoid = false, interrupt = false, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Excavation (Kwama Warrior)
+    [9769] = { block = true, dodge = true, avoid = false, interrupt = false, eventdetect = true }, -- Excavation (Kwama Warrior)
 
-    [5260] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 750, result = ACTION_RESULT_BEGIN }, -- Flamethrower (Shalk)
-    [5252] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Fire Bite (Shalk)
-    [5262] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, notDirect = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Burning Ground (Shalk)
+    [5260] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 750 }, -- Flamethrower (Shalk)
+    [5252] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Fire Bite (Shalk)
+    [5265] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, skipcheck = true, refire = 4100, notDirect = true}, -- Burning Ground (Shalk)
 
     [8429] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 750}, -- Zap (Thunderbug)
     [26412] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Thunderstrikes (Thunderbug)
@@ -298,16 +287,11 @@ LUIE.AlertTable = {
     [31115] = { destroy = true, refire = 1000, priority = 2, auradetect = true }, -- Summon Dark Anchor (Daedric Synergy)
     [68449] = { avoid = true, refire = 1000, priority = 3 }, -- Explosive Charge (Daedric Synergy)
 
-    [48121] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Air Atronach)
-    [48137] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Tornado (Air Atronach)
-
-    [51262] = { power = true, auradetect = true, priority = 2 }, -- Air Atronach Flame (Air Atronach)
-    [51271] = { power = true, auradetect = true, priority = 2 }, -- Air Atronach Flame (Air Atronach)
-    [51269] = { power = true, auradetect = true, priority = 2 }, -- Air Atronach Flame (Air Atronach)
-
-    [51281] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1500 }, -- Flame Tornado (Air Atronach)
-    [50021] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Ice Vortex (Air Atronach)
-    [50023] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 800, result = ACTION_RESULT_BEGIN }, -- Lightning Rod (Air Atronach)
+    [48121] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Heavy Attack (Air Atronach)
+    [48137] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Tornado (Air Atronach)
+    [51281] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 1500 }, -- Flame Tornado (Air Atronach)
+    [50021] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Ice Vortex (Air Atronach)
+    [50023] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 1000}, -- Lightning Rod (Air Atronach)
 
     [9747] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 3 }, -- Dire Wound (Banekin)
     [9748] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Envelop (Banekin)
@@ -322,11 +306,11 @@ LUIE.AlertTable = {
     [91946] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Ground Tremor (Daedroth)
     [91937] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3 }, -- Burst of Embers (Daedroth)
 
-    [26324] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lava Geyser (Flame Atronach)
-    [50216] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, skipcheck = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Combustion (Flame Atronach)
+    [26324] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Lava Geyser (Flame Atronach)
+    [50216] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, skipcheck = true, refire = 1000 }, -- Combustion (Flame Atronach)
 
-    [5017] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Hoarfrost Fist (Frost Atronach)
-    [33502] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Frozen Ground (Frost Atronach)
+    [5017] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Hoarfrost Fist (Frost Atronach)
+    [33502] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Frozen Ground (Frost Atronach)
 
     [50626] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Shadow Strike (Grevious Twilight)
     [65889] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Shadow Strike (Grevious Twilight)
@@ -354,8 +338,8 @@ LUIE.AlertTable = {
     [89306] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Web (Spiderling)
     [8782] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Lightning Storm (Spider Daedra)
 
-    [35220] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Impending Storm (Storm Atronach)
-    [4864] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 2, result = ACTION_RESULT_EFFECT_GAINED, refire = 100 }, -- Storm Bound (Storm Atronach)
+    [35220] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 2, eventdetect = true }, -- Impending Storm (Storm Atronach)
+    [4864] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 2, skipcheck = true, result = ACTION_RESULT_GAINED, refire = 250 }, -- Storm Bound (Storm Atronach)
 
     [7095] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Heavy Attack (Xivilai)
     [88947] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Lightning Grasp (Xivilai)
@@ -389,7 +373,7 @@ LUIE.AlertTable = {
 
     [73925] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Soul Cage (Lich)
 
-    [50182] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Consuming Energy (Spellfiend)
+    [50182] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Consuming Energy (Spellfiend)
 
     [68735] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3 }, -- Vampiric Drain (Vampire)
 
@@ -440,8 +424,8 @@ LUIE.AlertTable = {
     [3855] = { block = true, bs = true, dodge = true, priority = 3 }, -- Crushing Limbs (Lurcher)
     [3767] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1100 }, -- Choking Pollen (Lurcher)
 
-    [5559] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Icy Geyser (Nereid)
-    [5540] = { avoid = true, interrupt = true, priority = 3, auradetect = true }, -- Hurricane (Nereid)
+    [5559] = { avoid = true, priority = 3 }, -- Icy Geyser (Nereid)
+    [16040] = { avoid = true, interrupt = true, priority = 3, auradetect = true }, -- Hurricane (Nereid)
 
     [24985] = { power = true, auradetect = true, priority = 3 }, -- Intimidating Roar (Ogre)
     [5881] = { block = true, bs = true, dodge = true, priority = 3 }, -- Smash (Ogre)
@@ -482,9 +466,9 @@ LUIE.AlertTable = {
     [75955] = { avoid = true, priority = 2, eventdetect = true, refire = 1000 }, -- Pillars of Nirn (Minotaur Shaman)
     [75994] = { power = true, priority = 2, auradetect = true, ignoreRefresh = true }, -- Molten Armor (Minotaur Shaman)
 
-    [49499] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Spear Throw (Mantikora)
-    [49404] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Rear Up (Mantikora)
-    [49402] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Tail Whip (Mantikora)
+    [49499] = { block = true, dodge = true, priority = 2 }, -- Spear Throw (Mantikora)
+    [49404] = { block = true, dodge = true, priority = 2 }, -- Rear Up (Mantikora)
+    [49402] = { block = true, dodge = true, priority = 2 }, -- Tail Whip (Mantikora)
     [50187] = { power = true, priority = 2, auradetect = true }, -- Enrage (Mantikora)
     [56689] = { power = true, priority = 2, auradetect = true }, -- Enraged (Mantikora)
 
@@ -633,6 +617,8 @@ LUIE.AlertTable = {
 
     -- Delves/Public Dungeons/World
     [88427] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Charge (Kwama Worker - Matus-Akin Egg Mine)
+
+    [87276] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Chomp (Kagouti Whelp)
 
     [86983] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2}, -- Succubus Touch (Echoes of a Fallen House)
     [86930] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 2}, -- Volcanic Debris (The Forgotten Wastes)

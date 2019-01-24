@@ -140,8 +140,6 @@ CT.D = {
         mitigationPowerPrefixN      = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER_N),
         mitigationDestroyPrefix     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY),
         mitigationDestroyPrefixN    = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY_N),
-        mitigationSummonPrefix      = GetString(SI_LUIE_CT_MITIGATION_FORMAT_SUMMON),
-        mitigationSummonPrefixN     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_SUMMON_N),
 
         -- Add Name/No Name Variants
         mitigationDefaultSuffix     = GetString(SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT),
@@ -158,7 +156,6 @@ CT.D = {
         showAlertAvoid              = true,
         showAlertPower              = true,
         showAlertDestroy            = true,
-        showAlertSummon             = true,
 
         showAlertCleanse            = true,
         showAlertExploit            = true,
@@ -277,7 +274,6 @@ CT.D = {
         alertExecute                = { 1, 1, 1, 1 },
         alertPower                  = { 1, 1, 1, 1 },
         alertDestroy                = { 1, 1, 1, 1 },
-        alertSummon                 = { 1, 1, 1, 1 },
 
         -- Points
         pointsAlliance              = { 0.235294, 0.784314, 0.313725, 1 },  --RGB(60, 200, 80)
@@ -339,7 +335,6 @@ CT.D = {
         alertExecute                = GetString(SI_LUIE_CT_EXECUTE_DEFAULT),
         alertPower                  = GetString(SI_LUIE_CT_POWER_DEFAULT),
         alertDestroy                = GetString(SI_LUIE_CT_DESTROY_DEFAULT),
-        alertSummon                 = GetString(SI_LUIE_CT_SUMMON_DEFAULT),
 
         -- Points
         pointsAlliance              = "%a AP",
@@ -404,8 +399,7 @@ function CT.SetAlertColors()
 		alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoidB)):ToHex(),
 		alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterruptA)):ToHex(),
 		alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
-		alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex(),
-		alertColorSummon = ZO_ColorDef:New(unpack(colors.alertSummon)):ToHex(),
+		alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex()
 	}
 end
 

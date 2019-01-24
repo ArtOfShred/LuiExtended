@@ -89,18 +89,12 @@ T.Generic_Snare_30                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_
 T.Generic_Snare_30_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_30_NO_DUR_TP)
 T.Generic_Snare_40                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_40_TP)
 T.Generic_Snare_40_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_40_NO_DUR_TP)
-T.Generic_Snare_45                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_45_TP)
-T.Generic_Snare_45_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_45_NO_DUR_TP)
 T.Generic_Snare_50                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_50_TP)
 T.Generic_Snare_50_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_50_NO_DUR_TP)
-T.Generic_Snare_55                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_55_TP)
-T.Generic_Snare_55_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_55_NO_DUR_TP)
 T.Generic_Snare_60                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_60_TP)
 T.Generic_Snare_60_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_60_NO_DUR_TP)
 T.Generic_Snare_70                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_70_TP)
 T.Generic_Snare_70_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_70_NO_DUR_TP)
-T.Generic_Snare_75                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_75_TP)
-T.Generic_Snare_75_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_75_NO_DUR_TP)
 T.Generic_Damage_Shield_No_Duration     = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP)
 T.Generic_Damage_Shield_Duration        = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP)
 T.Generic_Weapon_Damage_Duration        = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_TIME_TP)
@@ -131,7 +125,6 @@ T.Generic_Disease                       = GetString(SI_LUIE_SKILL_GENERIC_DISEAS
 T.Generic_Disease_2_Sec                 = GetString(SI_LUIE_SKILL_GENERIC_DISEASE_2_SEC_TP)
 T.Generic_Poison                        = GetString(SI_LUIE_SKILL_GENERIC_POISON_TP)
 T.Generic_Poison_2_Sec                  = GetString(SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP)
-T.Generic_Poison_1_5_Sec                = GetString(SI_LUIE_SKILL_GENERIC_POISON_1_5_SEC_TP)
 T.Generic_Burn                          = GetString(SI_LUIE_SKILL_GENERIC_BURN_TP)
 T.Generic_Burn_1_Sec                    = GetString(SI_LUIE_SKILL_GENERIC_BURN_1_SEC_TP)
 T.Generic_Burn_2_Sec                    = GetString(SI_LUIE_SKILL_GENERIC_BURN_2_SEC_TP)
@@ -166,7 +159,6 @@ T.Generic_Scary_Immunities              = GetString(SI_LUIE_SKILL_GENERIC_SCARY_
 T.Generic_Flying_Immunities             = GetString(SI_LUIE_SKILL_GENERIC_FLYING_IMMUNITIES_TP)
 T.Generic_Invisibility                  = GetString(SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP)
 T.Generic_Detection_Potion              = GetString(SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP)
-T.Generic_Detection_NPC                 = GetString(SI_LUIE_SKILL_GENERIC_DETECTION_NPC_TP)
 T.Generic_Ravage_Magicka_Potion         = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP)
 T.Generic_Ravage_Stamina_Potion         = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP)
 
@@ -175,7 +167,6 @@ T.Generic_Ravage_Stamina_Poison         = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE
 
 T.Generic_Marked                        = GetString(SI_LUIE_SKILL_GENERIC_MARKED_TP)
 T.Generic_Reveal                        = GetString(SI_LUIE_SKILL_GENERIC_REVEAL_TP)
-T.Generic_Reveal_No_Dur                 = GetString(SI_LUIE_SKILL_GENERIC_REVEAL_NO_DUR_TP)
 T.Generic_Blind                         = GetString(SI_LUIE_SKILL_GENERIC_BLIND_TP)
 
 ----------------------------------------------------------------
@@ -875,40 +866,7 @@ T.Skill_Slaughterfish_Attack            = GetString(SI_LUIE_SKILL_SLAUGHTERFISH_
 -- NPCS ------------------------------------------------------
 ----------------------------------------------------------------
 
--- Basic / Shared
-T.Skill_Backstabber                     = GetString(SI_LUIE_SKILL_BACKSTABBER_TP)
-T.Skill_Recover                         = GetString(SI_LUIE_SKILL_RECOVER_TP)
-T.Skill_Recover_Duel                    = GetString(SI_LUIE_SKILL_RECOVER_DUEL_TP)
-
--- Animals
 T.Skill_Ferocity                        = GetString(SI_LUIE_SKILL_BEAR_FEROCITY_TP)
-T.Skill_Wamasu_Static                   = GetString(SI_LUIE_SKILL_WAMASU_STATIC_TP)
-T.Skill_Ancient_Skin                    = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 9)
-
--- Human NPCs
-T.Skill_Empower_Weapon_Flame            = GetString(SI_LUIE_SKILL_EMPOWER_WEAPON_FLAME_TP)
-T.Skill_Cleave_Stance                   = GetString(SI_LUIE_SKILL_CLEAVE_STANCE_TP)
-T.Skill_Defensive_Ward                  = GetString(SI_LUIE_SKILL_DEFENSIVE_WARD_TP)
-T.Skill_Soul_Tether_NPC                 = GetString(SI_LUIE_SKILL_SOUL_TETHER_NPC_TP)
-T.Skill_Siphoning_Strikes_NPC           = GetString(SI_LUIE_SKILL_SIPHONING_STRIKES_NPC_TP)
-T.Skill_Focused_Healing                 = GetString(SI_LUIE_SKILL_FOCUSED_HEALING_TP)
-T.Skill_Rite_of_Passage_NPC             = GetString(SI_LUIE_SKILL_RITE_OF_PASSAGE_NPC_TP)
-
--- Insects
-T.Skill_Hardened_Carapace               = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 15)
-T.Skill_Inject_Larva                    = GetString(SI_LUIE_SKILL_INJECT_LARVA_TP)
-
--- Monsters
-T.Skill_Mantikora_Enrage                = GetString(SI_LUIE_SKILL_MANTIKORA_ENRAGE_TP)
-
--- Daedra
-T.Skill_Empower_Atronach_Flame          = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_TP)
-T.Skill_Empower_Atronach_Frost          = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST_TP)
-T.Skill_Empower_Atronach_Storm          = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM_TP)
-T.Skill_Lightning_Rod                   = GetString(SI_LUIE_SKILL_LIGHTNING_ROD_TP)
-T.Skill_Storm_Bound                     = GetString(SI_LUIE_SKILL_STORM_BOUND_TP)
-T.Skill_Chilling_Aura                   = GetString(SI_LUIE_SKILL_CHILLING_AURA_TP)
-T.Skill_Radiance                        = GetString(SI_LUIE_SKILL_RADIANCE_TP)
 
 ----------------------------------------------------------------
 -- QUESTS ------------------------------------------------------

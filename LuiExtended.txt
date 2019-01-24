@@ -76,7 +76,6 @@ i18n/$(language).lua
 data/AbilityTables.lua
 data/Tooltips.lua
 data/Effects.lua
-data/CastBarTable.lua
 data/CombatTextConstants.lua
 data/AlertTable.lua
 data/DebugTable.lua
