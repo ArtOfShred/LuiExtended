@@ -279,6 +279,8 @@ A.Memento_Psijic_Celestial_Orb      = GetCollectibleName(5031)
 A.Memento_Psijic_Tautology_Glass    = GetCollectibleName(5032)
 A.Memento_Sapiarchic_Discorporation = GetCollectibleName(5033)
 A.Memento_Ghost_Lantern             = GetCollectibleName(5212)
+A.Memento_Mire_Drum                 = GetCollectibleName(5734)
+A.Memento_Vossa_Satl                = GetCollectibleName(5735)
 
 -- ---------------------------------------------------
 -- ITEM SETS -----------------------------------------
@@ -907,6 +909,7 @@ A.Skill_Clobber                     = 24671
 A.Skill_Shadowy_Barrier             = GetString(SI_LUIE_SKILL_SHADOWY_BARRIER)
 
 -- Justice
+A.Skill_Criminals_Bane              = 63145
 A.Skill_Cage_Talons                 = 63168
 A.Skill_Heavy_Blow                  = 63157
 A.Skill_Mighty_Charge               = GetString(SI_LUIE_SKILL_MIGHTY_CHARGE)
@@ -943,6 +946,7 @@ A.Skill_Toxic_Mucus                 = 72793
 A.Skill_Bog_Burst                   = 72796
 A.Skill_Gore                        = 85202
 A.Skill_Bile_Spit                   = 64559
+A.Skill_Helljoint                   = 14523
 
 -- Insects
 A.Skill_Paralyze                    = 6756

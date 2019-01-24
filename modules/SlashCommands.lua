@@ -942,7 +942,7 @@ function LUIE.SlashOutfit(option)
 		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 		return
 	end
-	
+
 	local valid = tonumber(option)
 	if not valid or valid > 10 then
 		printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
@@ -952,9 +952,9 @@ function LUIE.SlashOutfit(option)
 		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 		return
 	end
-	
+
 	local numOutfits = GetNumUnlockedOutfits()
-	
+
 	if valid > numOutfits then
 		printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
 		if LUIE.SV.TempAlertOutfit then
@@ -963,17 +963,31 @@ function LUIE.SlashOutfit(option)
 		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 		return
 	end
-	
+
 	EquipOutfit(valid)
 	-- Display a confirmation message.
 	local name = GetOutfitName(valid)
-	if name == "" then 
+	if name == "" then
 		name = strformat("<<1>> <<2>>", GetString(SI_CROWN_STORE_SEARCH_ADDITIONAL_OUTFITS), valid)
 	end
 	printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
 	if LUIE.SV.TempAlertOutfit then
 		callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
 	end
+end
+
+function LUIE.TempSlashFilter()
+
+    local filter = LUIE.SpellCastBuffs.SV.ShowDebugFilter
+
+    if filter == true then
+        LUIE.SpellCastBuffs.SV.ShowDebugFilter = false
+        d("LUIE --- Ability Debug Filter Disabled ---")
+    else
+        LUIE.SpellCastBuffs.SV.ShowDebugFilter = true
+        d("LUIE --- Ability Debug Filter Enabled ---")
+    end
+
 end
 
 function SC.RegisterSlashCommands()
@@ -1098,4 +1112,8 @@ function SC.RegisterSlashCommands()
 	if SC.SV.SlashOutfit then
 		SLASH_COMMANDS["/outfit"]		= LUIE.SlashOutfit
 	end
+
+    -- TODO: DEBUG, REMOVE
+    SLASH_COMMANDS["/filter"]           = LUIE.TempSlashFilter
+
 end

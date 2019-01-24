@@ -473,6 +473,7 @@ local strings = {
     SI_LUIE_CT_EXECUTE_DEFAULT =                         "ДОБЕЙ",
     SI_LUIE_CT_POWER_DEFAULT =                           "",
     SI_LUIE_CT_DESTROY_DEFAULT =                         "УНИЧТОЖЬ",
+    SI_LUIE_CT_SUMMON_DEFAULT =                          "SUMMON", -- TODO: Translate
     SI_LUIE_CT_MISS_DEFAULT =                            "Промах %t",
     SI_LUIE_CT_IMMUNE_DEFAULT =                          "Невосприимчивость %t",
     SI_LUIE_CT_PARRIED_DEFAULT =                         "Парировано %t",
@@ -484,6 +485,8 @@ local strings = {
     SI_LUIE_CT_MITIGATION_FORMAT_POWER_N =               "%t %i на %n!",
     SI_LUIE_CT_MITIGATION_FORMAT_DESTROY =               "%t %i",
     SI_LUIE_CT_MITIGATION_FORMAT_DESTROY_N =             "%t %i",
+    SI_LUIE_CT_MITIGATION_FORMAT_SUMMON =                "%t %i",
+    SI_LUIE_CT_MITIGATION_FORMAT_SUMMON_N =              "%t %i",
 
     -- UnitFrames.lua
     SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Энергия (<<3>>%)",
@@ -1767,6 +1770,7 @@ local strings = {
     SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE =                "Добей",
     SI_LUIE_LAM_CT_SHARED_ALERT_POWER =                  "Важный бафф на цели (Сила/Бешенство)",
     SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY =                "Уничтожь (основную цель)",
+    SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON =                 "Enemy NPC Summons", -- TODO: Translate
     SI_LUIE_LAM_CT_SHARED_POINTS =                       "Очки Опыта, Чемпиона и Альянса",
     SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE =              "Очки Альянса",
     SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE =            "Очки Опыта",
@@ -1864,12 +1868,14 @@ local strings = {
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P_TP = "Выберите префикс для отображения применения важных баффов ближайшими вражескими целями",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D =    "Префикс приоритетной цели",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D_TP = "Выберите префикс для для отображения, когда рядом обнаруживается приоритетная вражеская цель",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S =    "Summon Prefix", -- TODO: Translate
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S_TP = "Choose the prefix to display when a summon is detected nearby", -- TODO: Translate
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME =     "(Без имени)",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP =  "(Префикс, когда имя врага не может быть получено).",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME =        "(С именем)",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP =     "(Префикс, когда имя врага получено корректно).",
     SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX =                 "Суффикс прямой атаки",
-    SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP =              "Добавляет суффикс к сообщению об атаки ПРЯМОЙ целью которой являетесь вы. Это не будет касаться эффектов урона по площади или исцеляющих способностей противника. Добавьте здесь пробел в начале и в конце.",
+    SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP =              "Добавляет суффикс к сообщению об атаки ПРЯМОЙ целью которой являетесь вы. Это не будет касаться эффектов урона по площади или исцеляющих способностей противника.",
     SI_LUIE_LAM_CT_NOTIFICATION_AURA =                   "События ближайших NPC",
     SI_LUIE_LAM_CT_NOTIFICATION_AURA_TP =                "Многие способности, прямой целью которых не является игрок, не могут быть обнаружены, чтобы вывести предупреждение (например, когда ближайший NPC кастует целительную способность). Эта настройка позволяет компоненту предупреждений также отслеживать ауры и предоставлять больше информации. Тем не менее, это может привести к тому, что будут появляться предупреждения об NPC, которые далеко от игрока. Помните, что такие события всегда будут отображаться в Подземельях.",
     SI_LUIE_LAM_CT_NOTIFICATION_RANK3 =                  "Способности обычных NPC",
@@ -1889,6 +1895,7 @@ local strings = {
     SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXECUTE_TP =       "Показывать предупреждение, когда цель можно добить.",
     SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP =         "Показывать предупреждение, когда ближайший враждебный NPC кастует важный бафф (такой сильный бафф, как бешенство).",
     SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP =       "Показывать предупреждение, когда ближайшая враждебная цель представляет как приоритетная цель для уничтожения (те, кто уменьшают исходящий или увеличивают получаемый урон, или предоставляют неуязвимость).",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_SUMMON_TP =        "Show an alert when a nearby enemy target summons additional enemies.", -- TODO: Translate
     SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD =      "Порог добивания",
     SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD_TP =   "Порог здоровья цели, при котором появится сообщение 'ДОБЕЙ!'.\nПо умолчанию: 20%",
     SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY =      "Частота добивания",
@@ -2002,6 +2009,7 @@ local strings = {
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP =       "Задаёт цвет для предупреждения о добивании.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP =         "Задаёт цвет для предупреждения о важных баффах.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP =       "Задаёт цвет для предупреждения о приоритетной цели.",
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_SUMMON_TP =        "Set a color for summon alerts.", -- TODO: Translate
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALLIANCE_TP =      "Задаёт цвет для оповещения о получении Очков Альянса.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPERIENCE_TP =    "Задаёт цвет для оповещения о получении Очков Опыта.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CHAMPION_TP =      "Задаёт цвет для оповещения о получении Очков Чемпиона.",
@@ -2048,6 +2056,7 @@ local strings = {
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXECUTE_TP =      "Формат текста для предупреждения о добивании.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POWER_TP =        "Формат текста для предупреждения о важных баффах.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DESTROY_TP =      "Формат текста для предупреждения о приоритетной цели.",
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SUMMON_TP =       "Text format for summon alerts.", -- TODO: Translate
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ALLIANCE_TP =     "Формат текста для оповещения о получении Очков Альянса.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPERIENCE_TP =   "Формат текста для оповещения о получении Очков Опыта.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CHAMPION_TP =     "Формат текста для оповещения о получении Очков Чемпиона.",
@@ -2189,7 +2198,7 @@ local strings = {
 
     SI_LUIE_SKILL_EVENT_FREEZING =                    	 "Вы замерзаете и скорость вашего передвижения замедлена. Найдите костёр, чтобы согреться.",
     SI_LUIE_SKILL_EVENT_WARM =							 "Вы прижимаетесь к ближайшему костру, чтобы согреться. Время замерзания сокращается на |cffffff10|r секунд каждую |cffffff1|r секунду.",
-    SI_LUIE_SKILL_EVENT_FESTIVAL_GROG =                  "У вас небольшая... дезориентация.",
+    SI_LUIE_SKILL_EVENT_FESTIVAL_GROG =                  "You are feeling a bit... disoriented.", -- TODO: Translate
     SI_LUIE_SKILL_EVENT_FESTIVAL_MINTS =                 "Вы ОЧЕНЬ замерзли.",
 
 	----------------------------------------------------------------
@@ -2290,6 +2299,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_DISEASE_TP =                   "Подвержен урону от Болезни на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_DISEASE_2_SEC_TP =             "Afflicted with Disease Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_POISON_TP =                    "Подвержен урону от Яда на |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_POISON_1_5_SEC_TP =            "Подвержен урону от Болезни каждые |cFFFFFF1.5|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP =              "Подвержен урону от Болезни каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_BURN_TP =                      "Подвержен урону от Огня на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_BURN_1_SEC_TP =                "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
@@ -2321,8 +2331,10 @@ local strings = {
 	-- Stealth / Detection
     SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Помечен на |cFFFFFF<<1>>|r секунд. Вы видны для противника, который пометил вас, даже если уходите в скрытность.",
     SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Обнаружен на |cFFFFFF<<1>>|r секунд. Вы не можете уйти в невидимость.",
+    SI_LUIE_SKILL_GENERIC_REVEAL_NO_DUR_TP =             "Revealed. You are unable to stealth.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Невидим на |cFFFFFF<<1>>|r секунд. Вы сокрыты от чужих глаз.",
     SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP =          "Stealth Detection increased by |cffffff20|r meters for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
+    SI_LUIE_SKILL_GENERIC_DETECTION_NPC_TP =             "Revealing nearby stealthed and invisible enemies.", -- TODO: Translate
 
 	-- Crowd Control / Immunity
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP =      "Иммунитет к эффектам, которые выводят из равновесия и делают уязвимым.",
@@ -2337,12 +2349,18 @@ local strings = {
 	SI_LUIE_SKILL_GENERIC_SNARE_30_NO_DUR_TP =			 "Замедлен. Ваша скорость передвижения снижена на |cFFFFFF30|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_40_TP =			         "Замедлен на |cFFFFFF<<1>>|r секунд. Ваша скорость передвижения снижена на |cFFFFFF40|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_40_NO_DUR_TP =			 "Замедлен. Ваша скорость передвижения снижена на |cFFFFFF40|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_45_TP =			         "Замедлен на |cFFFFFF<<1>>|r секунд. Ваша скорость передвижения снижена на |cFFFFFF45|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_45_NO_DUR_TP =			 "Замедлен. Ваша скорость передвижения снижена на |cFFFFFF45|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_50_TP =			         "Замедлен на |cFFFFFF<<1>>|r секунд. Ваша скорость передвижения снижена на |cFFFFFF50|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_50_NO_DUR_TP =			 "Замедлен. Ваша скорость передвижения снижена на |cFFFFFF50|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_55_TP =			         "Замедлен на |cFFFFFF<<1>>|r секунд. Ваша скорость передвижения снижена на |cFFFFFF55|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_55_NO_DUR_TP =			 "Замедлен. Ваша скорость передвижения снижена на |cFFFFFF55|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_60_TP =			         "Замедлен на |cFFFFFF<<1>>|r секунд. Ваша скорость передвижения снижена на |cFFFFFF60|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_60_NO_DUR_TP =			 "Замедлен. Ваша скорость передвижения снижена на |cFFFFFF60|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_70_TP =			         "Замедлен на |cFFFFFF<<1>>|r секунд. Ваша скорость передвижения снижена на |cFFFFFF70|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_70_NO_DUR_TP =			 "Замедлен. Ваша скорость передвижения снижена на |cFFFFFF70|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_75_TP =			         "Замедлен на |cFFFFFF<<1>>|r секунд. Ваша скорость передвижения снижена на |cFFFFFF75|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_75_NO_DUR_TP =			 "Замедлен. Ваша скорость передвижения снижена на |cFFFFFF75|r%.",
     SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Обездвижен на |cFFFFFF<<1>>|r секунд. Невозможно перемещаться во время обездвиживания.",
     SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered. You are unable to attack or move while staggered.", -- Todo: Translate
     SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Оглушён на |cFFFFFF<<1>>|r секунд. Вы не можете атаковать или передвигаться, пока оглушены.",
@@ -2358,7 +2376,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_TP =          "Immune to all crowd control and movement impairing effects.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_FLYING_IMMUNITIES_TP =         "Immune to movement imparing effects.", -- TODO: Translate
 	SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Иммунитет к урону и эффектам контроля на |cffffff<<1>>|r секунд.",
-    SI_LUIE_SKILL_GENERIC_DISORIENT_TP =                 "Disoriented. You cannot attack or move until you take damage for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_DISORIENT_TP =                 "Disoriented for |cffffff<<1>>|r <<1[second/seconds]>>. You cannot attack or move until you take damage.",
 
 	-- Ravage Potions / Poisons
     SI_LUIE_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Увеличивает стоимость способностей, расходующих Магию на |cffffff60|r%.",
@@ -2684,6 +2702,7 @@ local strings = {
     SI_LUIE_SKILL_MEND_WOUNDS_TP =                       "Your Light and Heavy attacks are replaced with healing abilities that can be used on allies.\n\nYour Light Attack applies a heal over time for |cFFFFFF10|r seconds.\n\nYour Heavy Attack heals every |cFFFFFF1|r second while channeling.",
     SI_LUIE_SKILL_MEND_SPIRIT_TP =                       "Your Light and Heavy attacks are replaced with healing abilities that can be used on allies.\n\nYour Light Attack applies a heal over time for |cFFFFFF10|r seconds.\n\nYour Heavy Attack heals every |cFFFFFF1|r second while channeling.\n\nWhile you heal an ally you grant them Major Resolve and Major Ward.",
     SI_LUIE_SKILL_SYMBIOSIS_TP =                         "Your Light and Heavy attacks are replaced with healing abilities that can be used on allies.\n\nYour Light Attack applies a heal over time for |cFFFFFF10|r seconds.\n\nYour Heavy Attack heals every |cFFFFFF1|r second while channeling.\n\nYou heal yourself for |cFFFFFF50|r% of the amount of healing done to the ally.",
+    SI_LUIE_SKILL_MEND_WOUNDS_CHANNEL_TP =               "Healing every |cFFFFFF1|r second while the channel is maintained.",
     SI_LUIE_SKILL_MEDITATE_TP =                          "Healing and restoring Magicka and Stamina every |cFFFFFF1|r second.\n\nYou will remain in a meditative state until you toggle this ability off or are interrupted.",
     SI_LUIE_SKILL_INTROSPECTION_TP =                     "Healing and restoring Magicka and Stamina every |cFFFFFF1|r second.\n\nMaintaining the channel increases the Health restored by |cFFFFFF10|r% every tick, up to a maximum of |cFFFFFF50|r%.\n\nYou will remain in a meditative state until you toggle this ability off or are interrupted.",
 
@@ -2732,7 +2751,7 @@ local strings = {
     SI_LUIE_SKILL_REVEALING_FLARE_TP =                   "Revealed for |cFFFFFF<<1>>|r seconds. You are unable to stealth.\n\nSnared for |cFFFFFF<<1>>|r seconds.Your Movement Speed has been reduced by |cFFFFFF50|r%.",
     SI_LUIE_SKILL_LINGERING_FLARE_TP =                   "Enemies in the target area are revealed and have their Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_SCORCHING_FLARE_TP =                   "Revealed for |cFFFFFF<<1>>|r seconds. You are unable to stealth.\n\nAfflicted with Flame Damage every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds.\n\nSnared for |cFFFFFF<<1>>|r seconds.Your Movement Speed has been reduced by |cFFFFFF50|r%.",
-    SI_LUIE_SKILL_REVIVING_BARRIER_TP =                  "Absorbing damage for |cFFFFFF30|r seconds.\n\nHealing every |cFFFFFF1.5|r seconds for |cFFFFFF30|r seconds.",
+    SI_LUIE_SKILL_REVIVING_BARRIER_TP =                  "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nHealing every |cFFFFFF1.5|r seconds for |cFFFFFF30|r seconds.",
 
 	----------------------------------------------------------------
     -- RACIAL SKILLS -----------------------------------------------
@@ -2767,7 +2786,7 @@ local strings = {
     SI_LUIE_SKILL_RAZOR_ARMOR_TP =                       "Decrease damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.\n\nWhile active the armor returns Physical Damage to attackers.",
     SI_LUIE_SKILL_PUNCTURING_CHAINS_TP =                 "Increase damage taken by |cFFFFFF21.5|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP =            "Enveloped by a lightless sphere, your single target ranged abilities are reflected back on you for |cFFFFFF<<1>>|r seconds.\n\nThe core explodes when this effect ends, dealing Magic Damage.",
-    SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP =        "Disoriented. You cannot attack or move until you take damage for |cffffff<<1>>|r seconds.\n\nThe prison shatters when this effect ends, dealing Magic Damage.",
+    SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP =        "Disoriented for |cffffff<<1>>|r <<1[second/seconds]>>. You cannot attack or move until you take damage.\n\nThe prison shatters when this effect ends, dealing Magic Damage.",
     SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP =             "Reduce healing received by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP =             "Negate damage taken from Siege Weapons for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP =               "Stunned for |cFFFFFF<<1>>|r seconds. You are unable to attack or move while stunned.\n\nWhen this effect ends you will be disoriented for |cffffff15|r seconds.",
@@ -2956,6 +2975,13 @@ local strings = {
     SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME =               "Empower Atronach: Flame",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST =               "Empower Atronach: Frost",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM =               "Empower Atronach: Storm",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_TP =            "The death of a nearby Flame Atronach has empowered this Air Atronach, granting it the use of |cFFFFFFFlame Tornado|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM_TP =            "The death of a nearby Storm Atronach has empowered this Air Atronach, granting it the use of |cFFFFFFLightning Rod|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST_TP =            "The death of a nearby Frost Atronach has empowered this Air Atronach, granting it the use of |cFFFFFFIce Vortex|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_STORM_BOUND_TP =                       "Afflicted with Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nSnared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Your Movement Speed has been reduced by |cFFFFFF50|r%.",
+    SI_LUIE_SKILL_CHILLING_AURA_TP =                     "Nearby enemies have their Movement Speed reduced by |cFFFFFF20|r%.",
+    SI_LUIE_SKILL_RADIANCE_TP =                          "Nearby enemies take Flame Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_LIGHTNING_ROD_TP =                     "Afflicted with Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals additional Shock Damage if the channel is finished.",
     SI_LUIE_SKILL_COLOSSAL_STOMP =                       "Colossal Stomp",
     SI_LUIE_SKILL_DUST_CLOUD =                           "Dust Cloud",
     SI_LUIE_SKILL_BATTLE_SPIRIT =                        "Battle Spirit",
@@ -3007,6 +3033,23 @@ local strings = {
     SI_LUIE_SKILL_BEAR_FEROCITY_TP =                     "Completely immune to all crowd control and movement impairing effects for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_BOSS_CC_IMMUNITY =                     "Boss Immunities",
     SI_LUIE_SKILL_SLAUGHTERFISH_ATTACK_TP =              "You are being devoured by a swarm of Slaughterfish, turn back before it's too late!",
+
+    SI_LUIE_SKILL_RECOVER_TP =                           "Wounded and out of the fight, recovering Health over |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_RECOVER_DUEL_TP =                      "Wounded and recovering, you will heal after |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_BACKSTABBER_TP =                       "Increase damage done by |cffffff20|r% when you attack an enemy from behind.",
+
+    SI_LUIE_SKILL_EMPOWER_WEAPON_FLAME_TP =              "Increase Flame Damage dealt.",
+    SI_LUIE_SKILL_HARDENED_CARAPACE_TP =                 "Reduce damage taken by |cffffff15|r% for each stack remaining.",
+    SI_LUIE_SKILL_WAMASU_STATIC_TP =                     "Increase damage done by |cFFFFFF20|%r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_MANTIKORA_ENRAGE_TP =                  "Increase damage done by |cFFFFFF20|r%.",
+    SI_LUIE_SKILL_CLEAVE_STANCE_TP =                     "Cleaving with wild abandon for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_DEFENSIVE_WARD_TP =                    "Reduce damage taken by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds as long as the channel is maintained.",
+    SI_LUIE_SKILL_SOUL_TETHER_NPC_TP =                   "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF8|r seconds.\n\nStunned for |cFFFFFF2|r seconds. You are unable to attack or move while stunned.",
+    SI_LUIE_SKILL_SIPHONING_STRIKES_NPC_TP =             "Your attacks heal you while this ability is toggled on.",
+    SI_LUIE_SKILL_FOCUSED_HEALING_TP =                   "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
+    SI_LUIE_SKILL_RITE_OF_PASSAGE_NPC_TP =               "Reduce damage taken by |cFFFFFF80|r% while the channel is maintained.",
+
+    SI_LUIE_SKILL_INJECT_LARVA_TP =                      "You have been injected with a wasp larva. At the end of its |cFFFFFF<<1>>|r second gestation, it will burst out of you, dealing Physical Damage and spawning a Young Wasp.",
 
 }
 

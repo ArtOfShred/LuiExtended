@@ -698,6 +698,8 @@ debugAuras = {
             [113697] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
             [113696] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
             [110483] = true, -- Ghost Lantern (Ghost Lantern)
+            [113288] = true, -- UC Crown Memento 1 (Mire Drum)
+            [113291] = true, -- UC Crown Memento 2 (Vossa-satl)
 
             -------------------------------------
             -- NON-COMBAT PETS ------------------
@@ -6739,6 +6741,9 @@ debugAuras = {
             [31373] = true, -- Modify Shared CD Ability
             [46858] = true, -- Second Wind
             --[29535] = true, -- Call to Ranged
+            --[82686] = true, -- AD (Area Denial) Shared Cool
+            --[28528] = true, -- Modify Clearing Move Cooldown
+            --[59100] = true, -- AI Range (Ranged Brute EXC)
 
             -- SHARED NPC PASSIVES
             [67950] = true, -- CC Immunity Plus -- Various NPC's
@@ -6854,7 +6859,7 @@ debugAuras = {
             [64134] = true, -- JUST Guard Evade
             [64150] = true, -- JUST Death Timer
 
-            --[64152] = true, -- JUST Unlock Death Bolts
+            [64152] = true, -- JUST Unlock Death Bolts
 
             [63086] = true, -- Guard Charge
             [63258] = true, -- Guard Charge
@@ -6956,7 +6961,7 @@ debugAuras = {
             [67567] = true, -- Generic Self Stun (Estate Marshal - DB)
             [78266] = true, -- Alarm (Estate Marshal - DB)
 
-            [52471] = true, -- Nullify (Estate Spellbreaker - DB)
+            --[52471] = true, -- Nullify (Estate Spellbreaker - DB)
             [52473] = true, -- Nullify (Estate Spellbreaker - DB)
             [52474] = true, -- Nullify (Estate Spellbreaker - DB)
             [66669] = true, -- Nullify (Estate Spellbreaker - DB)
@@ -7054,6 +7059,7 @@ debugAuras = {
             [77337] = true, -- Threat Drop (Hiding Spot)
             [77338] = true, -- Threat Drop (Hiding Spot)
             [77339] = true, -- Threat Drop (Hiding Spot)
+            [75670] = true, -- Threat Drop (Hiding Spot)
             [75747] = true, -- Hiding Spot (Hiding Spot)
 
             -------------------------------------
@@ -7822,9 +7828,9 @@ debugAuras = {
             [4583] = true, -- Bite -- Crocodile
             [9642] = true, -- Bite -- Crocodile
             [4587] = true, -- Crushing Chomp -- Crocodile
-            [4591] = true, -- Sweep -- Crocodile
+            --[4591] = true, -- Sweep -- Crocodile
             [32051] = true, -- Sweep -- Crocodile
-            [4594] = true, -- Ancient Skin -- Crocodile
+            --[4594] = true, -- Ancient Skin -- Crocodile
 
             [8971] = true, -- Bite -- Duneripper
             [9643] = true, -- Bite -- Duneripper
@@ -7920,9 +7926,9 @@ debugAuras = {
             [14828] = true, -- Charge
             [14829] = true, -- Charge
             [18751] = true, -- Charge
-            --[87276] = true, -- Chomp (Kagouti Whelp)
-            --[87310] = true, -- Run Away! (Kagouti Whelp)
-            --[87312] = true, -- Run Away! (Kagouti Whelp)
+            [87276] = true, -- Chomp (Kagouti Whelp)
+            [87310] = true, -- Run Away! (Kagouti Whelp)
+            [87312] = true, -- Run Away! (Kagouti Whelp)
 
             [7170] = true, -- Rend -- Lion
             [60630] = true, -- Rend -- Lion
