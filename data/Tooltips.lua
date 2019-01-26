@@ -130,8 +130,10 @@ T.Generic_Bleed_2_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_BLEED_
 T.Generic_Disease                       = GetString(SI_LUIE_SKILL_GENERIC_DISEASE_TP)
 T.Generic_Disease_2_Sec                 = GetString(SI_LUIE_SKILL_GENERIC_DISEASE_2_SEC_TP)
 T.Generic_Poison                        = GetString(SI_LUIE_SKILL_GENERIC_POISON_TP)
-T.Generic_Poison_2_Sec                  = GetString(SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP)
+T.Generic_Poison_0_5_Sec                = GetString(SI_LUIE_SKILL_GENERIC_POISON_0_5_SEC_TP)
+T.Generic_Poison_1_Sec                  = GetString(SI_LUIE_SKILL_GENERIC_POISON_1_SEC_TP)
 T.Generic_Poison_1_5_Sec                = GetString(SI_LUIE_SKILL_GENERIC_POISON_1_5_SEC_TP)
+T.Generic_Poison_2_Sec                  = GetString(SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP)
 T.Generic_Burn                          = GetString(SI_LUIE_SKILL_GENERIC_BURN_TP)
 T.Generic_Burn_1_Sec                    = GetString(SI_LUIE_SKILL_GENERIC_BURN_1_SEC_TP)
 T.Generic_Burn_2_Sec                    = GetString(SI_LUIE_SKILL_GENERIC_BURN_2_SEC_TP)
@@ -884,6 +886,8 @@ T.Skill_Recover_Duel                    = GetString(SI_LUIE_SKILL_RECOVER_DUEL_T
 T.Skill_Ferocity                        = GetString(SI_LUIE_SKILL_BEAR_FEROCITY_TP)
 T.Skill_Wamasu_Static                   = GetString(SI_LUIE_SKILL_WAMASU_STATIC_TP)
 T.Skill_Ancient_Skin                    = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 9)
+T.Skill_Weakness_Lion                   = GetString(SI_LUIE_SKILL_WEAKNESS_LION_TP)
+T.Skill_Hardened_Shell                  = GetString(SI_LUIE_SKILL_HARDENED_SHELL_TP)
 
 -- Human NPCs
 T.Skill_Empower_Weapon_Flame            = GetString(SI_LUIE_SKILL_EMPOWER_WEAPON_FLAME_TP)
@@ -893,13 +897,34 @@ T.Skill_Soul_Tether_NPC                 = GetString(SI_LUIE_SKILL_SOUL_TETHER_NP
 T.Skill_Siphoning_Strikes_NPC           = GetString(SI_LUIE_SKILL_SIPHONING_STRIKES_NPC_TP)
 T.Skill_Focused_Healing                 = GetString(SI_LUIE_SKILL_FOCUSED_HEALING_TP)
 T.Skill_Rite_of_Passage_NPC             = GetString(SI_LUIE_SKILL_RITE_OF_PASSAGE_NPC_TP)
+T.Skill_Throw_Dagger                    = GetString(SI_LUIE_SKILL_THROW_DAGGER_TP)
+T.Skill_Agony                           = GetString(SI_LUIE_SKILL_AGONY_TP)
+T.Skill_Ice_Barrier                     = GetString(SI_LUIE_SKILL_ICE_BARRIER_TP)
+T.Skill_Agonizing_Fury                  = GetString(SI_LUIE_SKILL_AGONIZING_FURY_TP)
+T.Skill_Grasping_Vines                  = GetString(SI_LUIE_SKILL_GRASPING_VINES_TP)
+T.Skill_Retaliation_NPC                 = GetString(SI_LUIE_SKILL_RETALIATION_NPC_TP)
+T.Skill_Briarheart_Resurrection         = GetString(SI_LUIE_SKILL_BRIARHEART_RESURRECTION_TP)
+T.Skill_Inspire                         = GetString(SI_LUIE_SKILL_INSPIRE_TP)
+T.Skill_Enrage_Devoted                  = GetString(SI_LUIE_SKILL_ENRAGE_DEVOTED_TP)
+T.Skill_Enraged_Sentinel                = GetString(SI_LUIE_SKILL_ENRAGE_SENTINEL_TP)
+T.Skill_Uncanny_Dodge                   = GetString(SI_LUIE_SKILL_UNCANNY_DODGE_TP)
 
 -- Insects
 T.Skill_Hardened_Carapace               = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 15)
 T.Skill_Inject_Larva                    = GetString(SI_LUIE_SKILL_INJECT_LARVA_TP)
+T.Skill_Latch_On                        = GetString(SI_LUIE_SKILL_LATCH_ON_TP)
+T.Skill_Kotu_Gava_Swarm                 = GetString(SI_LUIE_SKILL_KOTU_GAVA_SWARM_TP)
 
 -- Monsters
 T.Skill_Mantikora_Enrage                = GetString(SI_LUIE_SKILL_MANTIKORA_ENRAGE_TP)
+T.Skill_Harmony                         = GetString(SI_LUIE_SKILL_HARMONY_TP)
+T.Skill_Summon_Spectral_Lamia           = GetString(SI_LUIE_SKILL_SUMMON_SPECTRAL_LAMIA_TP)
+T.Skill_Weakness_NPC_Summon             = GetString(SI_LUIE_SKILL_WEAKNESS_NPC_SUMMON_TP)
+T.Skill_Enrage_Ogre                     = GetString(SI_LUIE_SKILL_ENRAGE_OGRE_TP)
+T.Skill_Ice_Pillar                      = GetString(SI_LUIE_SKILL_ICE_PILLAR_TP)
+T.Skill_Summon_Beast                    = GetString(SI_LUIE_SKILL_SUMMON_BEAST_TP)
+T.Skill_Control_Beast                   = GetString(SI_LUIE_SKILL_CONTROL_BEAST_TP)
+T.Skill_Healing_Salve                   = GetString(SI_LUIE_SKILL_HEALING_SALVE_TP)
 
 -- Daedra
 T.Skill_Empower_Atronach_Flame          = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_TP)
@@ -909,6 +934,9 @@ T.Skill_Lightning_Rod                   = GetString(SI_LUIE_SKILL_LIGHTNING_ROD_
 T.Skill_Storm_Bound                     = GetString(SI_LUIE_SKILL_STORM_BOUND_TP)
 T.Skill_Chilling_Aura                   = GetString(SI_LUIE_SKILL_CHILLING_AURA_TP)
 T.Skill_Radiance                        = GetString(SI_LUIE_SKILL_RADIANCE_TP)
+T.Skill_Devour_Clannfear                = GetString(SI_LUIE_SKILL_DEVOUR_CLANNFEAR_TP)
+T.Skill_Aura_of_Protection              = GetString(SI_LUIE_SKILL_AURA_OF_PROTECTION_TP)
+T.Skill_Aura_of_Protection_Other        = GetString(SI_LUIE_SKILL_AURA_OF_PROTECTION_OTHER_TP)
 
 ----------------------------------------------------------------
 -- QUESTS ------------------------------------------------------

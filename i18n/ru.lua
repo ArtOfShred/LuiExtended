@@ -2299,6 +2299,8 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_DISEASE_TP =                   "Подвержен урону от Болезни на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_DISEASE_2_SEC_TP =             "Afflicted with Disease Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_POISON_TP =                    "Подвержен урону от Яда на |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_POISON_0_5_SEC_TP =            "Afflicted with Poison Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
+    SI_LUIE_SKILL_GENERIC_POISON_1_SEC_TP =              "Afflicted with Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_POISON_1_5_SEC_TP =            "Подвержен урону от Болезни каждые |cFFFFFF1.5|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP =              "Подвержен урону от Болезни каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_BURN_TP =                      "Подвержен урону от Огня на |cFFFFFF<<1>>|r секунд.",
@@ -2311,7 +2313,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_SHOCK_2_SEC_TP =               "Afflicted with Shock Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
 	SI_LUIE_SKILL_GENERIC_OBLIVION_TP =					 "Подвержен урону Обливиона на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_MAGIC_TP =                     "Подвержен Магическому урону на |cFFFFFF<<1>>|r секунд.",
-    SI_LUIE_SKILL_GENERIC_MAGIC_1_SEC_TP =               "Подвержен Магическому урону каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_MAGIC_1_SEC_TP =               "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_MAGIC_2_SEC_TP =               "Подвержен Магическому урону каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
 
 	-- Heal over Time, Resource Regeneration, Shields
@@ -3030,26 +3032,49 @@ local strings = {
     SI_LUIE_SKILL_SHADOW_WOOD =                          "Shadow Wood",
     SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "Слуга тени принца Неймона утащил вас в Теневое древо.",
 
-    SI_LUIE_SKILL_BEAR_FEROCITY_TP =                     "Completely immune to all crowd control and movement impairing effects for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_BEAR_FEROCITY_TP =                     "Immune to all crowd control and movement impairing effects for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_BOSS_CC_IMMUNITY =                     "Boss Immunities",
     SI_LUIE_SKILL_SLAUGHTERFISH_ATTACK_TP =              "You are being devoured by a swarm of Slaughterfish, turn back before it's too late!",
-
     SI_LUIE_SKILL_RECOVER_TP =                           "Wounded and out of the fight, recovering Health over |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_RECOVER_DUEL_TP =                      "Wounded and recovering, you will heal after |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_BACKSTABBER_TP =                       "Increase damage done by |cffffff20|r% when you attack an enemy from behind.",
-
     SI_LUIE_SKILL_EMPOWER_WEAPON_FLAME_TP =              "Increase Flame Damage dealt.",
-    SI_LUIE_SKILL_HARDENED_CARAPACE_TP =                 "Reduce damage taken by |cffffff15|r% for each stack remaining.",
-    SI_LUIE_SKILL_WAMASU_STATIC_TP =                     "Increase damage done by |cFFFFFF20|%r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_HARDENED_CARAPACE_TP =                 "Reduce damage taken by |cffffff<<1>>|r% for each stack remaining. Lose one stack upon taking any damage.",
+    SI_LUIE_SKILL_WAMASU_STATIC_TP =                     "Increase damage done by |cFFFFFF20|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_MANTIKORA_ENRAGE_TP =                  "Increase damage done by |cFFFFFF20|r%.",
     SI_LUIE_SKILL_CLEAVE_STANCE_TP =                     "Cleaving with wild abandon for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_DEFENSIVE_WARD_TP =                    "Reduce damage taken by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds as long as the channel is maintained.",
     SI_LUIE_SKILL_SOUL_TETHER_NPC_TP =                   "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF8|r seconds.\n\nStunned for |cFFFFFF2|r seconds. You are unable to attack or move while stunned.",
     SI_LUIE_SKILL_SIPHONING_STRIKES_NPC_TP =             "Your attacks heal you while this ability is toggled on.",
-    SI_LUIE_SKILL_FOCUSED_HEALING_TP =                   "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
+    SI_LUIE_SKILL_FOCUSED_HEALING_TP =                   "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.\n\nHealing doubles in power after |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_RITE_OF_PASSAGE_NPC_TP =               "Reduce damage taken by |cFFFFFF80|r% while the channel is maintained.",
-
     SI_LUIE_SKILL_INJECT_LARVA_TP =                      "You have been injected with a wasp larva. At the end of its |cFFFFFF<<1>>|r second gestation, it will burst out of you, dealing Physical Damage and spawning a Young Wasp.",
+    SI_LUIE_SKILL_THROW_DAGGER_TP =                      "Afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF8|r seconds.\n\nSnared for |cFFFFFF4|r seconds. Your Movement Speed has been reduced by |cFFFFFF40|r%.",
+    SI_LUIE_SKILL_AGONY_TP =                             "Stunned for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are unable to attack or move while stunned.\n\nWhen this effect ends you will be afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF7|r seconds.",
+    SI_LUIE_SKILL_HARMONY_TP =                           "Reduce damage taken by |cFFFFFF20|r% for |cFFFFFF<<1>>|r seconds as long as another Lamia is nearby.",
+    SI_LUIE_SKILL_SUMMON_SPECTRAL_LAMIA_TP =             "A Spectral Lamia fights at your side. The lamia remains for |cFFFFFF2|r minutes or until killed.",
+    SI_LUIE_SKILL_WEAKNESS_NPC_SUMMON_TP =               "Reduce damage done by |cFFFFFF50|r% as long as a summoned creature fights at your side.",
+    SI_LUIE_SKILL_WEAKNESS_LION_TP =                     "Reduce damage done by |cFFFFFF15|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_ICE_BARRIER_TP =                       "Intercepting frontal attacks for the caster for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_DEVOUR_CLANNFEAR_TP =                  "A clannfear is devouring you, dealing Bleeding Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds. Each tick heals the clannfear.\n\nBreak free to end the onslaught.",
+    SI_LUIE_SKILL_AURA_OF_PROTECTION_TP =                "The shaman and nearby allies take |cFFFFFF25|r% less damage for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_AURA_OF_PROTECTION_OTHER_TP =          "Reduce damage taken by |cFFFFFF25|r% while in proximity of the Aura of Protection.",
+    SI_LUIE_SKILL_AGONIZING_FURY_TP =                    "Snared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Your Movement Speed has been reduced by |cFFFFFF10|r%.\n\nThis effect stacks up to |cFFFFFF5|r times, to a maximum of |cFFFFFF50|r% Movement Speed reduction.",
+    SI_LUIE_SKILL_ENRAGE_OGRE_TP =                       "Increase damage done by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GRASPING_VINES_TP =                    "Afflicted with Bleeding Damage every |cFFFFFF0.5|r seconds and immobilized for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe vines explode at the end of the duration, dealing fire damage if you do not move away from them.",
+    SI_LUIE_SKILL_RETALIATION_NPC_TP =                   "Counterattacking any incoming hits for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_BRIARHEART_RESURRECTION_TP =           "A Hagraven has restarted the beating briarheart of this enemy, restoring them to life.",
+    SI_LUIE_SKILL_INSPIRE_TP =                           "Increase damage done by |cFFFFFF5|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_ENRAGE_DEVOTED_TP =                    "Increase damage done by |cFFFFFF20|r% for |cFFFFFF2|r minutes.",
+    SI_LUIE_SKILL_ICE_PILLAR_TP =                        "Nearby enemies are chilled, reducing their Movement Speed by |cFFFFFF60|r%.\n\nThe Ogre Shaman's Frost Bolts will apply a |cFFFFFF4|r second immobilize on any chilled targets.",
+    SI_LUIE_SKILL_SUMMON_BEAST_TP =                      "A beast fights at your side. The beast remains for |cFFFFFF2|r minutes or until killed.",
+    SI_LUIE_SKILL_CONTROL_BEAST_TP =                     "Increase damage done by |cFFFFFF83|r% for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
+    SI_LUIE_SKILL_HEALING_SALVE_TP =                     "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.\n\nHealing doubles in power after |cFFFFFF2|r seconds, leading into a stronger burst heal at the end of the channel.",
+    SI_LUIE_SKILL_LATCH_ON_TP =                          "A Hoarvor is latched onto you, dealing Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. Each tick heals the hoarvor.",
+    SI_LUIE_SKILL_KOTU_GAVA_SWARM_TP =                   "Swarmed by Kotu Gava larva, taking Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. After |cFFFFFF<<2>>|r <<2[second/seconds]>>, a swarm of Kotu Gava will spawn around you.",
+    SI_LUIE_SKILL_HARDENED_SHELL_TP =                    "Chance when hit to reduce damage taken by |cFFFFFF50|r%.",
+    SI_LUIE_SKILL_ENRAGE_SENTINEL_TP =                   "Increase damage done by |cFFFFFF25|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_UNCANNY_DODGE_TP =                     "Unable to be taken off guard. Will always dodge the initial hit when engaged."
 
 }
 

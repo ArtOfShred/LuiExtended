@@ -385,7 +385,7 @@ function CTL:OnCombatIn(...)
                         self:TriggerEvent(C.eventType.ALERT, C.alertType.DESTROY, abilityName, formattedIcon, sourceName, isDirect)
                     end
                     if summon then
-                        self:TriggerEvent(C.eventType.ALERT, c.alertType.SUMMON, abilityName, formattedIcon, sourceName, isDirect)
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.SUMMON, abilityName, formattedIcon, sourceName, isDirect)
                     end
                 end
             end
@@ -638,7 +638,7 @@ function CTL:OnCombatAlert(...)
                         self:TriggerEvent(C.eventType.ALERT, C.alertType.DESTROY, abilityName, formattedIcon, sourceName, isDirect)
                     end
                     if summon then
-                        self:TriggerEvent(C.eventType.ALERT, c.alertType.SUMMON, abilityName, formattedIcon, sourceName, isDirect)
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.SUMMON, abilityName, formattedIcon, sourceName, isDirect)
                     end
                 end
             end
