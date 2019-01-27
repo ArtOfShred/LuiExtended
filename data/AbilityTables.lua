@@ -908,6 +908,7 @@ A.Skill_Lunge                       = 78664
 A.Skill_Clobber                     = 24671
 A.Skill_Shadowy_Barrier             = GetString(SI_LUIE_SKILL_SHADOWY_BARRIER)
 A.Skill_Flare_Trap                  = 74628
+A.Skill_Heated_Blades               = 44208
 
 -- Justice
 A.Skill_Criminals_Bane              = 63145

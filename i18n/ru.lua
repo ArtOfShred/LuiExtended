@@ -3062,7 +3062,7 @@ local strings = {
     SI_LUIE_SKILL_AGONIZING_FURY_TP =                    "Snared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Your Movement Speed has been reduced by |cFFFFFF10|r%.\n\nThis effect stacks up to |cFFFFFF5|r times, to a maximum of |cFFFFFF50|r% Movement Speed reduction.",
     SI_LUIE_SKILL_ENRAGE_OGRE_TP =                       "Increase damage done by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GRASPING_VINES_TP =                    "Afflicted with Bleeding Damage every |cFFFFFF0.5|r seconds and immobilized for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe vines explode at the end of the duration, dealing fire damage if you do not move away from them.",
-    SI_LUIE_SKILL_RETALIATION_NPC_TP =                   "Counterattacking any incoming hits for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_RETALIATION_NPC_TP =                   "Blocking and counterattacking any incoming hits for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_BRIARHEART_RESURRECTION_TP =           "A Hagraven has restarted the beating briarheart of this enemy, restoring them to life.",
     SI_LUIE_SKILL_INSPIRE_TP =                           "Increase damage done by |cFFFFFF5|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_ENRAGE_DEVOTED_TP =                    "Increase damage done by |cFFFFFF20|r% for |cFFFFFF2|r minutes.",
@@ -3074,7 +3074,10 @@ local strings = {
     SI_LUIE_SKILL_KOTU_GAVA_SWARM_TP =                   "Swarmed by Kotu Gava larva, taking Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. After |cFFFFFF<<2>>|r <<2[second/seconds]>>, a swarm of Kotu Gava will spawn around you.",
     SI_LUIE_SKILL_HARDENED_SHELL_TP =                    "Chance when hit to reduce damage taken by |cFFFFFF50|r%.",
     SI_LUIE_SKILL_ENRAGE_SENTINEL_TP =                   "Increase damage done by |cFFFFFF25|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_UNCANNY_DODGE_TP =                     "Unable to be taken off guard. Will always dodge the initial hit when engaged."
+    SI_LUIE_SKILL_UNCANNY_DODGE_TP =                     "Unable to be taken off guard. Will always dodge the initial hit when engaged.",
+    SI_LUIE_SKILL_BLOCK_NPC_TP =                         "Brace for attack, reducing damage taken and granting immunity to Stun and Knockback effects.\n\nIncoming melee Heavy Attacks will be counterattacked while active.",
+    SI_LUIE_SKILL_CALL_ALLY_TP =                         "A summoned beast ally fights at your side. The beast remains for |cFFFFFF2|r minutes or until killed.",
+    SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP =                    "A Vampire is draining your life force, dealing Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. Each tick heals the vampire.",
 
 }
 

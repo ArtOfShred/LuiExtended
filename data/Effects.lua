@@ -5818,24 +5818,34 @@ E.EffectOverride = {
     [31390] = { hide = true }, -- Necromancer Synergy Move Back
     [31387] = { hide = true }, -- Necromancer Snergy Kill Self
     [43757] = { hide = true }, -- Cultist Synergy Cast
+
+    -- Footsoldier (1H)
     [14096] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds' }, -- Heavy Attack (Footsoldier)
     [28499] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_throw_dagger.dds', hide = true }, -- Throw Dagger (Footsoldier)
     [28502] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_throw_dagger.dds', tooltip = T.Skill_Throw_Dagger }, -- Throw Dagger (Footsoldier)
     [28504] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_throw_dagger.dds', hideReduce = true, tooltip = T.Skill_Throw_Dagger }, -- Throw Dagger (Footsoldier)
+
+    -- Guard (1H + Shield)
     [29400] = { icon = 'esoui/art/icons/ability_1handed_005.dds' }, -- Power Bash (Guard)
-    [29401] = { icon = 'esoui/art/icons/ability_1handed_005.dds' }, -- Power Bash (Guard)
-    [29402] = { icon = 'esoui/art/icons/ability_1handed_005.dds', hide = true }, -- Power Bash (Guard)
-    [29761] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = A.Innate_Block, duration = 0 }, -- Brace (Guard)
+    [29401] = { icon = 'esoui/art/icons/ability_1handed_005.dds', tooltip = T.Generic_Disorient }, -- Power Bash (Guard)
+    [29402] = { icon = 'esoui/art/icons/ability_1handed_005.dds', hide = true, tooltip = T.Generic_Stagger }, -- Power Bash (Guard)
+    [29761] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = A.Innate_Block, duration = 0, tooltip = T.Skill_Block_NPC }, -- Brace (Guard)
     [29762] = { hide = true }, -- Blocked Stack (Guard)
     [29757] = { hide = true }, -- Remove block (Guard)
     [29766] = { hide = true }, -- Blocked Stack (Guard)
-    [29765] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun, hide = true }, -- Uber Attack (Guard)
-    [29767] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun }, -- Uber Attack (Guard)
-    [84346] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun }, -- Uber Attack (Guard)
-    [48542] = { icon = 'esoui/art/icons/ability_warrior_011.dds', name = A.Skill_Shield_Rush, hide = true }, -- Focused Charge (Brute)
+    [29765] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun, hide = true, tooltip = T.Generic_Stagger }, -- Uber Attack (Guard)
+    [29767] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun, tooltip = T.Generic_Stun }, -- Uber Attack (Guard)
+    [84346] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun, tooltip = T.Generic_Stun }, -- Uber Attack (Guard)
+
+    -- Brute (1H + Shield)
+    [34919] = { tooltip = T.Generic_Snare_60 }, -- Low Slash (Brute)
+    [13701] = { icon = 'esoui/art/icons/ability_warrior_011.dds', name = A.Skill_Shield_Rush }, -- Focused Charge (Brute)
+    [48542] = { hide = true }, -- Focused Charge (Brute)
     [14924] = { hide = true }, -- Focused Charge (Brute)
     [14925] = { icon = 'esoui/art/icons/ability_warrior_011.dds', name = A.Skill_Shield_Rush }, -- Charge (Brute)
-    [14926] = { icon = 'esoui/art/icons/ability_warrior_011.dds', name = A.Skill_Shield_Rush }, -- Charge (Brute)
+    [14926] = { icon = 'esoui/art/icons/ability_warrior_011.dds', name = A.Skill_Shield_Rush, tooltip = T.Generic_Knockdown }, -- Charge (Brute)
+
+    -- Ravager (2H)
     [29378] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing }, -- Uppercut (Ravager)
     [29379] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing, tooltip = T.Generic_Knockback }, -- Uppercut (Ravager)
     [29380] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing, hide = true }, -- Uppercut (Ravager)
@@ -5844,14 +5854,16 @@ E.EffectOverride = {
     [12381] = { icon = 'esoui/art/icons/ability_rogue_063.dds' }, -- Assassinate (Rogue/Skirmisher)
     [35164] = { hide = true }, -- Agony (Pointless projectile travel time aura)
 
+    -- Berserker (Dual Wield)
     [76328] = { tooltip = T.Skill_Agony }, -- Agony (Berserker)
     [35165] = { tooltip = T.Generic_Magic_1_Sec }, -- Agony (Berserker)
-
     [10735] = { icon = 'esoui/art/icons/ability_dualwield_001_b.dds' }, -- Blood Craze (Berserker)
     [49252] = { icon = 'esoui/art/icons/ability_dualwield_001_b.dds' }, -- Blood Craze (Berserker)
     [49253] = { icon = 'esoui/art/icons/ability_dualwield_001_b.dds', tooltip = T.Skill_Blood_Craze_Heal }, -- Blood Craze (Berserker)
     [49254] = { icon = 'esoui/art/icons/ability_dualwield_001_b.dds', tooltip = T.Skill_Blood_Craze }, -- Blood Craze (Berserker)
-    [44206] = { icon = 'esoui/art/icons/ability_debuff_minor_maim.dds' }, -- Minor Maim (Berserker)
+    [44206] = { icon = 'esoui/art/icons/ability_debuff_minor_maim.dds', tooltip = A.Skill_Heated_Blades }, -- Minor Maim (Berserker)
+
+    -- Dragonknight (NPC)
     [34742] = { icon = 'esoui/art/icons/ability_dragonknight_004.dds' }, -- Fiery Breath (Dragonknight)
     [34647] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance, tooltip = A.Skill_Lava_Whip }, -- Lava Whip (Dragonknight)
     [74472] = { icon = 'esoui/art/icons/ability_dragonknight_010.dds' }, -- Dark Talons (Dragonknight)
@@ -5861,6 +5873,8 @@ E.EffectOverride = {
     [52041] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_blink_strike.dds' }, -- Blink Strike (Dragonknight  - Elite)
     [52045] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_blink_strike.dds' }, -- Blink Strike (Dragonknight  - Elite)
     [52051] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_blink_strike.dds', tooltip = T.Generic_Knockdown }, -- Blink Strike (Dragonknight  - Elite)
+
+    -- Thundermaul
     [29510] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul)
     [29511] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul)
     [17867] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_aura.dds' }, -- Shock Aura (Thundermaul)
@@ -5876,6 +5890,7 @@ E.EffectOverride = {
     [81217] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul -- Boss)
     [81218] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_hammer.dds' }, -- Thunder Hammer (Thundermaul -- Boss)
 
+    -- Nightblade (NPC)
     [73712] = { hide = true }, -- Shadow Cloak (Nightblade NPC) (Pointless .5 second aura applied on player)
     [73713] = { icon = 'esoui/art/icons/ability_nightblade_004.dds' }, -- Shadow Cloak (Nightblade)
     [36471] = { icon = 'esoui/art/icons/ability_nightblade_002.dds', tooltip = T.Generic_Stun }, -- Veiled Strike (Nightblade)
@@ -5885,25 +5900,31 @@ E.EffectOverride = {
     [44352] = { icon = 'esoui/art/icons/ability_nightblade_018_a.dds', hideReduce = true, tooltip = T.Skill_Soul_Tether_NPC }, -- Soul Tether (Nightblade - Elite)
     [44350] = { icon = 'esoui/art/icons/ability_nightblade_018_a.dds', tooltip = T.Skill_Soul_Tether_NPC }, -- Soul Tether (Nightblade - Elite)
     [53462] = { icon = 'esoui/art/icons/ability_nightblade_003.dds', tooltip = T.Skill_Siphoning_Strikes_NPC }, -- Siphoning Strikes (Nightblade - Elite)
+
+    -- Archer
     [37109] = { icon = 'esoui/art/icons/ability_bow_005.dds', tooltip = T.Generic_Snare_75 }, -- Arrow Spray (Archer)
     [28628] = { icon = 'esoui/art/icons/ability_bow_003.dds' }, -- Volley (Archer)
     [74978] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_taking_aim.dds', hide = true }, -- Taking Aim (Archer)
     [74980] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_taking_aim.dds' }, -- Taking Aim (Archer)
+
+    -- Pet Ranger
     [89460] = { hide = true }, -- Set Area (Pet Ranger)
     [36499] = { hide = true }, -- Roll Dodge (Pet Ranger)
     [44301] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap }, -- Trap Beast (Pet Ranger)
-    [44305] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap }, -- Trap Beast (Pet Ranger)
+    [44305] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap, tooltip = T.Generic_Immobilize }, -- Trap Beast (Pet Ranger)
     [44307] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap }, -- Trap Beast (Pet Ranger)
-    [88251] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally.dds' }, -- Call Ally (Pet Ranger)
-    [88248] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_durzog.dds' }, -- Call Ally (Pet Ranger)
-    [89425] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_kwama.dds' }, -- Call Ally (Pet Ranger)
+    [88251] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally.dds', tooltip = T.Skill_Call_Ally }, -- Call Ally (Pet Ranger)
+    [88248] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_durzog.dds', tooltip = T.Skill_Call_Ally }, -- Call Ally (Pet Ranger)
+    [89425] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_kwama.dds', tooltip = T.Skill_Call_Ally }, -- Call Ally (Pet Ranger)
     [88275] = { hide = true }, -- Call Ally (Pet Ranger)
     [88265] = { hide = true }, -- Call Ally (Pet Ranger)
     [88288] = { hide = true }, -- Call Ally (Pet Ranger)
     [88268] = { hide = true }, -- Call Ally (Pet Ranger)
-    [88281] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = A.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Call Ally (Pet Ranger)
+    [88281] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = A.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = T.Skill_Weakness_NPC_Summon }, -- Call Ally (Pet Ranger)
     [88227] = { hide = true }, -- Call Ally (Pet Ranger)
     [88252] = { hide = true }, -- Call Ally (Pet Ranger)
+
+    -- Fire Mage
     [15164] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds'}, -- Heat Wave (Fire Mage)
     [16588] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds', hide = true }, -- Heat Wave (Fire Mage)
     [47095] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_fire_rune.dds' }, -- Fire Rune (Fire Mage)
@@ -5930,12 +5951,12 @@ E.EffectOverride = {
     [37028] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_staff_strike.dds', name = A.Skill_Staff_Strike }, -- Quick Strike (Battlemage)
     [37029] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_staff_strike.dds', name = A.Skill_Staff_Strike }, -- Quick Strike (Battlemage)
     [37030] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_staff_strike.dds', name = A.Skill_Staff_Strike }, -- Quick Strike (Battlemage)
-    [37021] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_empower_weapon_flame.dds' }, -- Empower Weapon: Flame (Battlemage)
+    [37021] = { hide = true }, -- Empower Weapon: Flame (Battlemage)
     [37087] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_lightning_onslaught.dds' }, -- Lightning Onslaught (Battlemage)
     [37156] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_lightning_onslaught.dds' }, -- Lightning Onslaught (Battlemage)
     [37129] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds' }, -- Ice Cage (Battlemage)
     [37131] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds' }, -- Ice Cage (Battlemage)
-    [37132] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds', duration = 0 }, -- Ice Cage (Battlemage)
+    [37132] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds', duration = 0, groundLabel = true, tooltip = T.Skill_Ice_Cage }, -- Ice Cage (Battlemage)
     [44216] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds' }, -- Negate Magic (Battlemage)
     [50108] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0 }, -- Negate Magic (Battlemage)
     [50107] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0 }, -- Negate Magic (Battlemage)
@@ -7189,7 +7210,7 @@ E.EffectOverride = {
     [50182] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_consuming_energy.dds' }, -- Consuming Energy (Spellfiend)
     [50183] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_consuming_energy.dds' }, -- Consuming Energy (Spellfiend)
     [52398] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_consuming_energy.dds', tooltip = T.Generic_Stun }, -- Consuming Energy (Spellfiend)
-    [68735] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Vampiric Drain (Vampire)
+    [68735] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', tooltip = T.Skill_Vampiric_Drain }, -- Vampiric Drain (Vampire)
     [68750] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', hide = true }, -- Vampiric Drain (Vampire)
     [68765] = { hide = true }, -- Vampiric Drain (Vampire)
     [68771] = { hide = true }, -- Vampiric Drain (Vampire)
@@ -8887,3 +8908,4 @@ E.FakeStagger = {
     [86310] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500}, -- Stagger (Player Blocks charged NPC attack)
     [21972] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500}, -- Stagger (Player interrupts NPC cast)
 }
+

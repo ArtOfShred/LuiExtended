@@ -7301,7 +7301,7 @@ debugAuras = {
             [37129] = true, -- Ice Cage -- Battlemage
             [37131] = true, -- Ice Cage -- Battlemage
             [37132] = true, -- Ice Cage -- Battlemage
-            [44216] = true, -- Negate Magic -- Battlemage
+            --[44216] = true, -- Negate Magic -- Battlemage
             [50108] = true, -- Negate Magic -- Battlemage
             [50107] = true, -- Negate Magic -- Battlemage
 
@@ -8485,10 +8485,10 @@ debugAuras = {
             [52398] = true, -- Consuming Energy -- Spellfiend
 
             --[68735] = true, -- Vampiric Drain -- Vampire
-            --[68750] = true, -- Vampiric Drain -- Vampire
-            --[68765] = true, -- Vampiric Drain -- Vampire
-            --[68771] = true, -- Vampiric Drain Heal Dummy -- Vampire
-            --[68772] = true, -- Vampiric Drain -- Vampire
+            [68750] = true, -- Vampiric Drain -- Vampire
+            [68765] = true, -- Vampiric Drain -- Vampire
+            [68771] = true, -- Vampiric Drain Heal Dummy -- Vampire
+            [68772] = true, -- Vampiric Drain -- Vampire
 
             [2849] = true, -- Claw Slash -- Werewolf
             [4651] = true, -- Claw Slash -- Werewolf

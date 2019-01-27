@@ -908,6 +908,9 @@ T.Skill_Inspire                         = GetString(SI_LUIE_SKILL_INSPIRE_TP)
 T.Skill_Enrage_Devoted                  = GetString(SI_LUIE_SKILL_ENRAGE_DEVOTED_TP)
 T.Skill_Enraged_Sentinel                = GetString(SI_LUIE_SKILL_ENRAGE_SENTINEL_TP)
 T.Skill_Uncanny_Dodge                   = GetString(SI_LUIE_SKILL_UNCANNY_DODGE_TP)
+T.Skill_Block_NPC                       = GetString(SI_LUIE_SKILL_BLOCK_NPC_TP)
+T.Skill_Call_Ally                       = GetString(SI_LUIE_SKILL_CALL_ALLY_TP)
+T.Skill_Ice_Cage                        = GetString(SI_LUIE_SKILL_ICE_CAGE_TP)
 
 -- Insects
 T.Skill_Hardened_Carapace               = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 15)
@@ -937,6 +940,9 @@ T.Skill_Radiance                        = GetString(SI_LUIE_SKILL_RADIANCE_TP)
 T.Skill_Devour_Clannfear                = GetString(SI_LUIE_SKILL_DEVOUR_CLANNFEAR_TP)
 T.Skill_Aura_of_Protection              = GetString(SI_LUIE_SKILL_AURA_OF_PROTECTION_TP)
 T.Skill_Aura_of_Protection_Other        = GetString(SI_LUIE_SKILL_AURA_OF_PROTECTION_OTHER_TP)
+
+-- Undead
+T.Skill_Vampiric_Drain                  = GetString(SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP)
 
 ----------------------------------------------------------------
 -- QUESTS ------------------------------------------------------

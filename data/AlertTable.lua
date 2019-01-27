@@ -62,9 +62,10 @@ LUIE.AlertTable = {
     [14096] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Footsoldier)
     [28499] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Throw Dagger (Footsoldier)
 
-    [29400] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Power Bash (Guard)
+    [29400] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Power Bash (Guard)
+    [29761] = { power = true, priority = 3, auradetect = true }, -- Brace (Guard)
 
-    [48542] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true, bs = true}, -- Focused Charge (Brute)
+    [13701] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, bs = true, result = ACTION_RESULT_BEGIN }, -- Focused Charge (Brute)
 
     [35164] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Agony (Berserker)
 
@@ -82,7 +83,10 @@ LUIE.AlertTable = {
     [44227] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dragonknight Standard (Dragonknight - Elite)
     [52041] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN }, -- Blink Strike (Dragonknight - Elite)
 
-    [44301] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true, refire = 1500}, -- Trap Beast (Pet Ranger)
+    [88251] = { summon = true, priority = 2, auradetect = true }, -- Call Ally (Pet Ranger)
+    [88248] = { summon = true, priority = 2, auradetect = true }, -- Call Ally (Pet Ranger)
+    [89425] = { summon = true, priority = 2, auradetect = true }, -- Call Ally (Pet Ranger)
+    [44301] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true , ignoreRefresh = true }, -- Trap Beast (Pet Ranger)
 
     [15164] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Heat Wave (Fire Mage)
     [47095] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Fire Rune (Fire Mage)
@@ -95,9 +99,9 @@ LUIE.AlertTable = {
 
     [14370] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, auradetect = true }, -- Void (Time Bomb Mage)
 
-    [37087] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Lightning Onslaught (Battlemage)
-    [37129] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2}, -- Ice Cage (Battlemage)
-    [44216] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2}, -- Negate Magic (Battlemage - Elite)
+    [37087] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Onslaught (Battlemage)
+    [37129] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Ice Cage (Battlemage)
+    [44216] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Negate Magic (Battlemage - Elite)
 
     [13397] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true, refire = 1000}, -- Empower Undead (Necromancer)
 
@@ -218,7 +222,7 @@ LUIE.AlertTable = {
     [7268] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 500, result = ACTION_RESULT_BEGIN }, -- Leech
     [7273] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dampworm (Nix-Hound)
 
-    [21904] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Rend (Skeever)
+    [21904] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Rend (Skeever)
 
     [21951] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Repulsion Shock (Wamasu)
     [21949] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Sweep (Wamasu)
@@ -394,7 +398,7 @@ LUIE.AlertTable = {
 
     [50182] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Consuming Energy (Spellfiend)
 
-    [68735] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3 }, -- Vampiric Drain (Vampire)
+    [68735] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Vampiric Drain (Vampire)
 
     [2867] = { block = true, bs = true, dodge = true, priority = 3 }, -- Crushing Leap (Werewolf)
     [3415] = { block = true, dodge = true, priority = 3, eventdetect = true, refire = 1100 }, -- Flurry (Werewolf)

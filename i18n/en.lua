@@ -2490,6 +2490,9 @@ local strings = {
     SI_LUIE_SKILL_OVERLOAD_TP =                          "Light Attacks are replaced by lightning bolts, dealing Shock Damage, and Heavy Attacks blast enemies in the target area for Shock Damage.\n\nAttacks deplete Ultimate until you run out or the ability is toggled off.",
     SI_LUIE_SKILL_ENERGY_OVERLOAD_TP =                   "Light Attacks are replaced by lightning bolts, dealing Shock Damage, and Heavy Attacks blast enemies in the target area for Shock Damage.\n\nLight and Heavy Attacks restore Magicka.\n\nAttacks deplete Ultimate until you run out or the ability is toggled off.",
 
+    SI_LUIE_SKILL_NEGATE_SILENCE_TP =                    "Trapped in a globe of magic suppression and Silenced. You are unable to use Magicka abilities while silenced.",
+    SI_LUIE_SKILL_NEGATE_STUN_TP =                       "Stunned. You are unable to attack or move while stunned.",
+
     -- Templar
     SI_LUIE_SKILL_SPEAR_SHARDS_TP =                      "Enemies standing in the radius of the spear take Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nAn ally near the spear can activate the |cFFFFFFBlessed Shards|r synergy.",
     SI_LUIE_SKILL_LUMINOUS_SHARDS_TP =                   "Enemies standing in the radius of the spear take Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nAn ally near the spear can activate the |cFFFFFFHoly Shards|r synergy.",
@@ -3063,7 +3066,7 @@ local strings = {
     SI_LUIE_SKILL_AGONIZING_FURY_TP =                    "Snared for |cFFFFFF<<1>>|r <<1[second/seconds]>>. Your Movement Speed has been reduced by |cFFFFFF10|r%.\n\nThis effect stacks up to |cFFFFFF5|r times, to a maximum of |cFFFFFF50|r% Movement Speed reduction.",
     SI_LUIE_SKILL_ENRAGE_OGRE_TP =                       "Increase damage done by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GRASPING_VINES_TP =                    "Afflicted with Bleeding Damage every |cFFFFFF0.5|r seconds and immobilized for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe vines explode at the end of the duration, dealing fire damage if you do not move away from them.",
-    SI_LUIE_SKILL_RETALIATION_NPC_TP =                   "Counterattacking any incoming hits for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_RETALIATION_NPC_TP =                   "Blocking and counterattacking any incoming hits for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_BRIARHEART_RESURRECTION_TP =           "A Hagraven has restarted the beating briarheart of this enemy, restoring them to life.",
     SI_LUIE_SKILL_INSPIRE_TP =                           "Increase damage done by |cFFFFFF5|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_ENRAGE_DEVOTED_TP =                    "Increase damage done by |cFFFFFF20|r% for |cFFFFFF2|r minutes.",
@@ -3075,7 +3078,12 @@ local strings = {
     SI_LUIE_SKILL_KOTU_GAVA_SWARM_TP =                   "Swarmed by Kotu Gava larva, taking Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. After |cFFFFFF<<2>>|r <<2[second/seconds]>>, a swarm of Kotu Gava will spawn around you.",
     SI_LUIE_SKILL_HARDENED_SHELL_TP =                    "Chance when hit to reduce damage taken by |cFFFFFF50|r%.",
     SI_LUIE_SKILL_ENRAGE_SENTINEL_TP =                   "Increase damage done by |cFFFFFF25|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_UNCANNY_DODGE_TP =                     "Unable to be taken off guard. Will always dodge the initial hit when engaged."
+    SI_LUIE_SKILL_UNCANNY_DODGE_TP =                     "Unable to be taken off guard. Will always dodge the initial hit when engaged.",
+    SI_LUIE_SKILL_BLOCK_NPC_TP =                         "Brace for attack, reducing damage taken and granting immunity to Stun and Knockback effects.\n\nIncoming melee Heavy Attacks will be counterattacked while active.",
+    SI_LUIE_SKILL_CALL_ALLY_TP =                         "A summoned beast ally fights at your side. The beast remains for |cFFFFFF2|r minutes or until killed.",
+    SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP =                    "A Vampire is draining your life force, dealing Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. Each tick heals the vampire.",
+
+    SI_LUIE_SKILL_ICE_CAGE_TP =                          "Snared and taking Frost Damage every |cFFFFFF0.5|r seconds while standing in the Ice Cage. Your Movement Speed has been reduced by |cFFFFFF60|r%.",
 
 }
 
