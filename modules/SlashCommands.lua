@@ -990,6 +990,22 @@ function LUIE.TempSlashFilter()
 
 end
 
+function LUIE.TempSlashGround()
+
+    local ground = LUIE.SpellCastBuffs.SV.GroundDamageAura
+
+    if ground == true then
+        LUIE.SpellCastBuffs.SV.GroundDamageAura = false
+        d("LUIE --- Ground Damage Auras Disabled ---")
+    else
+        LUIE.SpellCastBuffs.SV.GroundDamageAura = true
+        d("LUIE --- Ground Damage Auras Enabled ---")
+    end
+
+    LUIE.SpellCastBuffs.ReloadEffects()
+
+end
+
 function SC.RegisterSlashCommands()
     -- Clear commands list
     SLASH_COMMANDS["/home"]         = nil
@@ -1115,5 +1131,6 @@ function SC.RegisterSlashCommands()
 
     -- TODO: DEBUG, REMOVE
     SLASH_COMMANDS["/filter"]           = LUIE.TempSlashFilter
+    SLASH_COMMANDS["/ground"]           = LUIE.TempSlashGround
 
 end

@@ -605,6 +605,8 @@ local strings = {
     SI_LUIE_LAM_BUFF_EXTEND_EXTRA_TP =                   "Enabling this will extend the settings for Extra or Consolidated Buffs to effects with only a single Major/Minor effect such as Blur, Shuffle, Molten Weapons.",
     SI_LUIE_LAM_BUFF_REDUCE =                            "Hide Duplicates in Paired Auras",
     SI_LUIE_LAM_BUFF_REDUCE_TP =                         "Some abilities have multiple effects with the same duration, for example: Burning Talons applies an equivalent duration DoT & Snare effect. Enabling this will hide one of these icons for this ability and others like it, reducing the amount of pollution in the buff/debuff containers.",
+    SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE =                "Show Aura for Incoming Ground Damage/Healing",
+    SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE_TP =             "Display a buff indicator when you are standing in a hostile ground effect without any crowd control elements such as Arrow Barrage. Also shows for healing effect such as Cleansing Ritual.",
     SI_LUIE_LAM_BUFF_ICON_HEADER =                       "Icon Options",
     SI_LUIE_LAM_BUFF_ICONSIZE =                          "Buff Icon Size",
     SI_LUIE_LAM_BUFF_ICONSIZE_TP =                       "Choose the size for buff icons.",
@@ -2419,7 +2421,7 @@ local strings = {
     SI_LUIE_SKILL_FOSSILIZE_STUN_TP =                    "Stunned for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhen the stun ends, take Magic Damage and become immobilized for |cffffff3|r seconds.",
     SI_LUIE_SKILL_SHATTERING_ROCKS_STUN_TP =             "Stunned for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhen the stun ends, take Magic Damage and your next attack used within |cffffff4|r seconds heals your target.",
     SI_LUIE_SKILL_SHATTERING_ROCKS_TP =                  "Your next attack used within |cffffff<<1>>|r seconds heals your target.",
-    SI_LUIE_SKILL_ASH_CLOUD_TP =                         "Enemies in the ash cloud have their Movement Speed reduced by |cffffff70|r%, while allies are healed every |cffffff1|r second.",
+    SI_LUIE_SKILL_ASH_CLOUD_TP =                         "Enemies in the ash cloud have their Movement Speed reduced by |cffffff70|r%, while you and allies are healed every |cffffff1|r second.",
     SI_LUIE_SKILL_ERUPTION_TP =                          "Enemies in the ash cloud have their Movement Speed reduced by |cffffff70|r% and take Flame Damage every |cffffff1|r second.",
     SI_LUIE_SKILL_MAGMA_ARMOR_TP =                       "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies take Flame Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_CORROSIVE_ARMOR_TP =                   "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies take Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nWhile active, your attacks ignore all Physical Resistance.",
@@ -2466,8 +2468,8 @@ local strings = {
     SI_LUIE_SKILL_FAMILIAR_DAMAGE_PULSE_STUN_TP =        "Pulsing waves of volatile electricity, dealing Shock Damage to nearby enemies every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nThe final pulse will stun all enemies hit for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_UNSTABLE_PULSE =                       "Unstable Pulse",
     SI_LUIE_SKILL_VOLATILE_PULSE =                       "Volatile Pulse",
-    SI_LUIE_SKILL_DAEDRIC_CURSE_TP =                     "After |cFFFFFF6|r seconds the rune detonates, dealing Magic Damage and splashing to nearby allies.",
-    SI_LUIE_SKILL_DAEDRIC_PREY_TP =                      "After |cFFFFFF6|r seconds the rune detonates, dealing Magic Damage and splashing to nearby allies.\n\nWhile the curse is active, the Sorcerer's pets deal an additional |cFFFFFF55|r% damage to you.",
+    SI_LUIE_SKILL_DAEDRIC_CURSE_TP =                     "After |cFFFFFF6|r seconds the rune detonates, dealing Magic Damage to you and nearby allies.",
+    SI_LUIE_SKILL_DAEDRIC_PREY_TP =                      "After |cFFFFFF6|r seconds the rune detonates, dealing Magic Damage to you and nearby allies.\n\nWhile the curse is active, the Sorcerer's pets deal an additional |cFFFFFF55|r% damage to you.",
     SI_LUIE_SKILL_HAUNTING_CURSE_TP =                    "After |cFFFFFF3.5|r seconds the rune detonates, dealing Magic Damage and splashing to nearby allies.\n\nThe curse will apply a second time, detonating again after |cFFFFFF8.5|r seconds.",
     SI_LUIE_SKILL_WINGED_TWILIGHT_TP =                   "A Winged Twilight fights at your side. The winged twilight remains until killed or unsummoned.",
     SI_LUIE_SKILL_TWILIGHT_TORMENTOR_TP =                "A Twilight Tormentor fights at your side. The tormentor remains until killed or unsummoned.",
@@ -2672,6 +2674,7 @@ local strings = {
     -- Fighters Guild
     SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_TP =              "You and allies in the rune gain Minor Protection and Minor Endurance.",
     SI_LUIE_SKILL_RING_OF_PRESERVATION_TP =              "You and allies in the rune have the cost of Roll Dodge reduced by |cFFFFFF20|r% and gain Minor Protection and Minor Endurance.",
+    SI_LUIE_SKILL_RING_OF_PRESERVATION_GROUND_TP =       "The cost of Roll Dodge is reduced by |cFFFFFF20|r%.",
     SI_LUIE_SKILL_EXPERT_HUNTER_TP =                     "Revealing stealthed and invisible enemies within |cFFFFFF6|r meters for |cFFFFFF<<1>>|r seconds.\n\nExposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_EVIL_HUNTER_TP =                       "Revealing stealthed and invisible enemies within |cFFFFFF6|r meters for |cFFFFFF<<1>>|r seconds.\n\nExposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.\n\nWhile active the Stamina costs of your Fighters Guild abilities are reduced by |cFFFFFF25|r%.",
     SI_LUIE_SKILL_TRAP_BEAST_TP =                        "Triggers when an enemy comes close, dealing Physical Damage and afflicting them with Bleeding Damage for |cFFFFFF6|r seconds as well as immobilizing them.\n\nWhen triggered, grants you Minor Force for |cFFFFFF8|r seconds.",
@@ -2715,7 +2718,7 @@ local strings = {
     SI_LUIE_SKILL_TRAPPING_WEBS_TP =                     "Enemies caught in the webs are snared, reducing their Movement Speed by |cFFFFFF50|r%.\n\nAfter |cFFFFFF5|r seconds the webs explode, dealing Poison Damage to enemies within.\n\nA ranged ally targeting an enemy in the webs can activate the |cFFFFFFSpawn Broodlings|r synergy.",
     SI_LUIE_SKILL_SHADOW_SILK_TP =                       "Enemies caught in the webs are snared, reducing their Movement Speed by |cFFFFFF50|r%.\n\nAfter |cFFFFFF5|r seconds the webs explode, dealing Poison Damage to enemies within.\n\nA ranged ally targeting an enemy in the webs can activate the |cFFFFFFBlack Widows|r synergy.",
     SI_LUIE_SKILL_TANGLING_WEBS_TP =                     "Enemies caught in the webs are snared, reducing their Movement Speed by |cFFFFFF50|r%.\n\nAfter |cFFFFFF5|r seconds the webs explode, dealing Poison Damage to enemies within.\n\nA ranged ally targeting an enemy in the webs can activate the |cFFFFFFArachnophobia|r synergy.",
-    SI_LUIE_SKILL_TRAPPING_WEBS_SNARE_TP =               "Your Movement Speed has been reduced by |cFFFFFF50|r%.\n\nAfter |cFFFFFF5|r seconds the webs explode, dealing Poison damage.",
+    SI_LUIE_SKILL_TRAPPING_WEBS_SNARE_TP =               "Movement Speed reduced by |cFFFFFF50|r%.\n\nAfter |cFFFFFF5|r seconds the webs explode, dealing Poison damage.",
     SI_LUIE_SKILL_RADIATE_TP =                           "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends, you and nearby allies take additional Magic Damage.",
     SI_LUIE_SKILL_SPAWN_BROODLINGS_TP =                  "Attacking nearby enemies. The spider remains for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BONE_SHIELD_TP =                       "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
@@ -2847,7 +2850,7 @@ local strings = {
     SI_LUIE_SKILL_SET_ICEHEART =                         "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nEnemies within |cFFFFFF5|r meters take Frost Damage every |cFFFFFF1|r second while the damage shield holds.",
     SI_LUIE_SKILL_SET_ILAMBRIS =                         "Enemies within |cffffff4|r meters of the meteor shower take <<1>> Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_LORD_WARDEN_GROUND =               "Increase Physical and Spell Resistance.",
-    SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF =                 "Allies within |cFFFFFF8|r meters of the shadow orb have increased Physical and Spell Resistance.",
+    SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF =                 "You and allies within |cFFFFFF8|r meters of the shadow orb have increased Physical and Spell Resistance.",
     SI_LUIE_SKILL_SET_MALUBETH =                         "Draining Health every |cFFFFFF0.5|r seconds over |cFFFFFF4|r seconds while the beam holds.",
     SI_LUIE_SKILL_SET_MAW_OF_THE_INFERNAL =              "A fire breathing Daedroth fights at your side. The daedroth remains for |cFFFFFF15|r seconds or until killed.",
     SI_LUIE_SKILL_SET_MIGHTY_CHUDAN =                    "Mighty Chudan",
@@ -2888,7 +2891,7 @@ local strings = {
     SI_LUIE_SKILL_SET_VAMPIRE_CLOAK =                    "Vampire Cloak",
     SI_LUIE_SKILL_SET_WARRIOR_POET =                     "Warrior-Poet",
     SI_LUIE_SKILL_SET_GRACE_OF_GLOOM_TP =                "Your Light and Heavy Attacks heal you for the next |cffffff5|r seconds.",
-    SI_LUIE_SKILL_SET_DRAUGRS_REST_TP =                  "Allies within |cffffff5|r meters of the consecrated circle heal every |cffffff1|r second.",
+    SI_LUIE_SKILL_SET_DRAUGRS_REST_TP =                  "You and allies within |cffffff5|r meters of the consecrated circle heal every |cffffff1|r second.",
     SI_LUIE_SKILL_SET_OVERWHELMING_SURGE_TP =            "The closest enemy within |cffffff12|r meters takes Shock Damage every |cffffff1|r second for |cffffff6|r seconds.",
     SI_LUIE_SKILL_SANCTUARY_TP =                         "Increase healing received by |cffffff12|r%.",
     SI_LUIE_SKILL_SHROUD_OF_THE_LICH_TP =                "Increase Magicka Recovery for |cffffff20|r seconds.",
@@ -2920,7 +2923,7 @@ local strings = {
     SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Increase Physical Penetration for |cffffff3|r seconds, stacking up to |cffffff5|r times.",
     SI_LUIE_SKILL_SET_ALKOSH_TP =                        "Reduce Physical and Spell Resistance for |cffffff10|r seconds.",
     SI_LUIE_SKILL_SET_LUNAR_BASTION_TP =                 "Absorb damage every |cffffff2|r seconds while standing in the lunar blessing.",
-    SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP =           "Allies standing in the circle of might gain Major Courage for |cffffff30|r seconds.",
+    SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP =           "You and allies standing in the circle of might gain Major Courage for |cffffff30|r seconds.",
     SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP =             "Standing in the ring grants you a stack of Siroria's Boon every |cffffff1|r second.",
     SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Increase Spell Damage by |cffffff30|r for |cffffff5|r seconds, stacking up to |cffffff20|r times.",
     SI_LUIE_SKILL_SET_RELEQUENS_TP =                     "Afflicted with Physical damage every |cffffff1|r second for |cffffff5|r seconds.",
@@ -3077,8 +3080,11 @@ local strings = {
     SI_LUIE_SKILL_BLOCK_NPC_TP =                         "Brace for attack, reducing damage taken and granting immunity to Stun and Knockback effects.\n\nIncoming melee Heavy Attacks will be counterattacked while active.",
     SI_LUIE_SKILL_CALL_ALLY_TP =                         "A summoned beast ally fights at your side. The beast remains for |cFFFFFF2|r minutes or until killed.",
     SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP =                    "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEach tick heals the vampire.",
-
     SI_LUIE_SKILL_ICE_CAGE_TP =                          "Taking Frost Damage every |cFFFFFF0.5|r seconds and Movement Speed reduced by |cFFFFFF60|r%.",
+
+    -- MOVE LATER
+    SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_0_5_SEC =         "Taking Physical Damage every |cFFFFFF0.5|r seconds.",
+
 
 }
 

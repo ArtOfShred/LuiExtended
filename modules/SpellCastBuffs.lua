@@ -128,6 +128,7 @@ SCB.D = {
     ShowDebugFilter                  = false,
     ShowDebugAbilityId               = false,
     HideReduce                       = true,
+    GroundDamageAura                 = true,
     ProminentLabel                   = true,
     ProminentLabelFontFace           = "Univers 67",
     ProminentLabelFontStyle          = "outline",
@@ -1930,6 +1931,10 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
     if E.EffectOverride[abilityId] then
         effectType = E.EffectOverride[abilityId].type or effectType
+        -- Bail out now if we hide ground snares and other effects because we are showing Damaging Auras (Only do this for the player, we don't want effects on targets to stop showing up).
+        if E.EffectOverride[abilityId].hideGround and SCB.SV.GroundDamageAura and unitTag == "player" then
+            return
+        end
     end
 
     if SCB.SV.ShowWerewolf then
@@ -2274,8 +2279,52 @@ local InternalStackCounter = { }
 
  -- Combat Event (Target = Player)
 function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-    if not (E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId]) then
+    if not (E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId] or E.AddGroundDamageAura[abilityId]) then
         return
+    end
+
+    -- Create ground auras for damaging effects if toggled on
+    if SCB.SV.GroundDamageAura and E.AddGroundDamageAura[abilityId] then
+
+        -- Return if this isn't damage or healing, or blocked, dodged, or shielded.
+        if result ~= ACTION_RESULT_DAMAGE and result ~= ACTION_RESULT_DAMAGE_SHIELDED and result ~= ACTION_RESULT_DODGED and result ~=ACTION_RESULT_CRITICAL_DAMAGE and result ~= ACTION_RESULT_CRITICAL_HEAL and result ~= ACTION_RESULT_HEAL and result ~= ACTION_RESULT_BLOCKED and result ~= ACTION_RESULT_BLOCKED_DAMAGE and not E.AddGroundDamageAura[abilityId].exception then
+            return
+        end
+
+        -- Only allow exceptions through if flagged as such
+        if E.AddGroundDamageAura[abilityId].exception and result ~= E.AddGroundDamageAura[abilityId].exception then
+            return
+        end
+
+        local iconName = GetAbilityIcon(abilityId)
+        local stack = 0
+        local effectName
+        local unbreakable
+        local duration = E.AddGroundDamageAura[abilityId].duration
+        local effectType = E.AddGroundDamageAura[abilityId].type
+
+        if E.EffectOverride[abilityId] then
+            effectName = E.EffectOverride[abilityId].name or abilityName
+            unbreakable = E.EffectOverride[abilityId].unbreakable or 0
+        else
+            effectName = abilityName
+            unbreakable = 0
+        end
+
+        local beginTime = GetGameTimeMilliseconds()
+        local endTime = beginTime + duration
+        local context = "player" .. effectType
+
+        g_effectsList[context][ abilityId ] = {
+            type=effectType,
+            id=abilityId, name=effectName, icon=iconName,
+            dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+            forced = "short",
+            restart=true, iconNum=0,
+            unbreakable=unbreakable,
+            fakeDuration= true,
+        }
+
     end
 
     -- If the action result isn't a starting/ending event then we ignore it.

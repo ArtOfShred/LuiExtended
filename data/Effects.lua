@@ -2168,6 +2168,7 @@ E.EffectOverride = {
     -- hideReduce = true -- Hide this aura if the "HIDE PAIRED AURAS" menu setting is enabled. Merging similar effects so as not to clutter the UI such as the Sun Fire effect with its snare.
     -- tooltipValue2Mod = # -- Needed in some cases to derive a value on an ability tooltip. This value is used for effects like the snare from Sun Fire, when the duration needs to be derived from either buff since one can potentially be hidden.
     -- refreshOnly = true -- Only show this effect when the duration is updated/refreshed - Toggle this to hide some goofy effects that have a travel time aura for their projectile before the actual effect applies.
+    -- hideGround = true -- Hide this effect if ground effect damaging auras are set to show - we want damage to always prioritize so that the aura always shows even if the player is immune to the snare or other effect of the ability.
 
     -- TEMP MOVE LATER
     [54119] = { forcedContainer = 'short' }, -- Remembrance (The Anger of a King)
@@ -4676,8 +4677,11 @@ E.EffectOverride = {
 
     -- Volley / Endless Hail / Arrow Barrage
     [28876] = { tooltip = T.Skill_Volley }, -- Volley (Volley)
+    [28877] = { groundLabel = true, tooltip = T.Generic_AOE_Physical_0_5_Sec }, -- Volley (Volley)
     [38689] = { tooltip = T.Skill_Endless_Hail }, -- Endless Hail (Endless Hail)
+    [38690] = { groundLabel = true, tooltip = T.Generic_AOE_Physical_0_5_Sec }, -- Endless Hail (Endless Hail)
     [38695] = { tooltip = T.Skill_Volley }, -- Arrow Barrage (Arrow Barrage)
+    [38696] = { groundLabel = true, tooltip = T.Generic_AOE_Physical_0_5_Sec }, -- Arrow Barrage (Arrow Barrage)
 
     -- Scatter Shot / Magnum Shot / Draining Shot
     [28888] = { icon = 'esoui/art/icons/ability_bow_004.dds' }, -- Scatter Shot (Scatter Shot)
@@ -5106,6 +5110,7 @@ E.EffectOverride = {
     [40169] = { tooltip = T.Skill_Ring_of_Preservation }, -- Ring of Preservation
     [80284] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Ring_of_Preservation }, -- Minor Endurance (Ring of Preservation)
     [40171] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = A.Skill_Ring_of_Preservation }, -- Minor Protection (Ring of Preservation)
+    [80293] = { tooltip = T.Skill_Ring_of_Preservation_Ground, groundLabel = true, icon = 'esoui/art/icons/ability_fightersguild_001_b.dds' }, -- Ring of Preservation (Ring of Preservation)
 
     -- Expert Hunter / Evil Hunter / Camouflaged Hunter
     [64509] = { consolidateExtra = true, tooltip = A.Skill_Expert_Hunter }, -- Major Savagery
@@ -5410,11 +5415,14 @@ E.EffectOverride = {
 
     -- Caltrops / Anti-Cavalry Caltrops / Razor Caltrops
     [38549] = { tooltip = T.Skill_Caltrops }, -- Caltrops (Caltrops)
-    [113769] = { tooltip = T.Skill_Caltrops_Debuff, groundLabel = true }, -- Caltrops (Caltrops)
+    [38561] = { groundLabel = true, tooltip = T.Skill_Caltrops_Debuff }, -- Caltrops (Caltrops)
+    [113769] = { tooltip = T.Skill_Caltrops_Debuff, groundLabel = true, hideGround = true }, -- Caltrops (Caltrops)
     [40265] = { tooltip = T.Skill_Anti_Cavalry_Caltrops }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
-    [113770] = { tooltip = T.Skill_Anti_Cavalry_Caltrops_Debuff, groundLabel = true }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+    [40267] = { groundLabel = true, tooltip = T.Skill_Anti_Cavalry_Caltrops_Debuff }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+    [113770] = { tooltip = T.Skill_Anti_Cavalry_Caltrops_Debuff, groundLabel = true, hideGround = true }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [40251] = { tooltip = T.Skill_Caltrops }, -- Caltrops (Razor Caltrops)
-    [113771] = { tooltip = T.Skill_Caltrops_Debuff, groundLabel = true }, -- Razor Caltrops (Razor Caltrops)
+    [113771] = { tooltip = T.Skill_Caltrops_Debuff, groundLabel = true, hideGround = true }, -- Razor Caltrops (Razor Caltrops)
+    [40252] = { groundLabel = true, tooltip = T.Skill_Caltrops_Debuff }, -- Razor Caltrops (Razor Caltrops)
     [40253] = { name = A.Skill_Razor_Caltrops, tooltip = T.Generic_Snare_70 }, -- Hindered (Razor Caltrops)
 
     -- Magicka Detonation/ Inevitable Detonation / Proximity Detonation
@@ -8913,5 +8921,25 @@ E.FakeStagger = {
     -- On Target
     [86310] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500}, -- Stagger (Player Blocks charged NPC attack)
     [21972] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500}, -- Stagger (Player interrupts NPC cast)
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- Fake Ground Damaging Effect Auras - We use EffectOverride to pull information for these unlike the other tables above.
+--------------------------------------------------------------------------------------------------------------------------------
+E.AddGroundDamageAura = {
+
+    -- Bow
+    [28877] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Volley (Volley)
+    [38690] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Endless Hail (Endless Hail)
+    [38696] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arrow Barrage (Arrow Barrage)
+
+    -- Fighter's Guild
+    [80293] = { duration = 600, type = BUFF_EFFECT_TYPE_BUFF, exception = ACTION_RESULT_EFFECT_GAINED }, -- Ring of Preservation (Ring of Preservation)
+
+    -- Assault
+    [38561] = { duration = 1110, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Caltrops (Caltrops)
+    [40267] = { duration = 1110, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+    [40252] = { duration = 1110, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Razor Caltrops (Razor Caltrops)
+
 }
 

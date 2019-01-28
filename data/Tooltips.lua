@@ -734,6 +734,7 @@ T.Skill_Pack_Leader                     = GetString(SI_LUIE_SKILL_PACK_LEADER_TP
 -- Fighters Guild
 T.Skill_Circle_of_Protection            = GetString(SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_TP)
 T.Skill_Ring_of_Preservation            = GetString(SI_LUIE_SKILL_RING_OF_PRESERVATION_TP)
+T.Skill_Ring_of_Preservation_Ground     = GetString(SI_LUIE_SKILL_RING_OF_PRESERVATION_GROUND_TP)
 T.Skill_Expert_Hunter_Passive       	= GetAbilityDescription(35762)
 T.Skill_Expert_Hunter                   = GetString(SI_LUIE_SKILL_EXPERT_HUNTER_TP)
 T.Skill_Evil_Hunter                     = GetString(SI_LUIE_SKILL_EVIL_HUNTER_TP)
@@ -959,6 +960,22 @@ T.Skill_Spirit_Armor                    = GetString(SI_LUIE_SKILL_SPIRIT_ARMOR_T
 T.Skill_Fancy_Clothing                  = GetString(SI_LUIE_SKILL_FANCY_CLOTHING_TP)
 T.Skill_Burrow                          = GetString(SI_LUIE_SKILL_BURROW_TP)
 T.Skill_Shadow_Wood                     = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP)
+
+
+
+
+
+
+
+
+
+
+-- MOVE LATER
+
+T.Generic_AOE_Physical_0_5_Sec          = GetString(SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_0_5_SEC)
+
+
+
 
 --[[ Possibly use these at some point
 
