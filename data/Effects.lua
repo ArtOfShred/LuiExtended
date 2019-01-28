@@ -3887,7 +3887,7 @@ E.EffectOverride = {
     [27287] = { hide = true }, -- Birth Unstable Familiar (Summon Unstable Familiar - All Morphs)
     [43963] = { hide = true }, -- Pet Bonus Threat (Summon Unstable Familiar - All Morphs)
     [23304] = { tooltip = T.Skill_Unstable_Familiar }, -- Summon Unstable Familiar (Summon Unstable Familiar)
-    [27850] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_familiar_melee.dds' }, -- Familiar Melee (Summon Unstable Familiar + Summon Volatile Familiar)
+    [27850] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_familiar_melee.dds', name = A.Skill_Entropic_Touch }, -- Familiar Melee (Summon Unstable Familiar + Summon Volatile Familiar)
     [108842] = { name = A.Skill_Unstable_Pulse, tooltip = T.Skill_Familiar_Damage_Pulse, icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds'  }, -- Volatile Familiar Damage Pulsi (Summon Unstable Familiar)
     [108843] = { name = A.Skill_Unstable_Pulse, tooltip = T.Skill_Familiar_Damage_Pulse_Self, icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds'  }, -- Volatile Familiar (Summon Unstable Familiar)
     [108844] = { name = A.Skill_Unstable_Pulse, icon = 'esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds' }, -- Familiar Damage Pulse (Summon Unstable Familiar)
@@ -3899,6 +3899,7 @@ E.EffectOverride = {
     [88933] = { name = A.Skill_Volatile_Pulse, tooltip = T.Skill_Familiar_Stun_Pulse_Self }, -- Volatile Familiar (Summon Volatile Familiar)
     [77186] = { name = A.Skill_Volatile_Pulse }, -- Familiar Damage Pulse (Summon Volatile Familiar)
     [77243] = { tooltip = T.Generic_Stun, name = A.Skill_Volatile_Pulse }, -- Volatile Familiar Stun (Summon Volatile Familiar)
+    [117255] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_familiar_melee.dds', name = A.Skill_Entropic_Touch }, -- Volatile Familiar Melee (Summon Volatile Familiar)
 
     -- Daedric Curse / Daedric Prey / Haunting Curse
     [24326] = { tooltip = T.Skill_Daedric_Curse }, -- Daedric Curse (Daedric Curse)
@@ -3907,8 +3908,8 @@ E.EffectOverride = {
     [89491] = { tooltip = T.Skill_Haunting_Curse }, -- Haunting Curse (Haunting Curse)
 
     -- Summon Winged Twilight / Summon Twilight Tormentor / Summon Twilight Matriarch
-    [24617] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_zap.dds' }, -- Zap (Summon Winged Twilight - All Morphs)
-    [28027] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_kick.dds' }, -- Kick (Summon Winged Twilight - All Morphs)
+    [24617] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_zap.dds', name = A.Skill_Zap }, -- Zap (Summon Winged Twilight - All Morphs)
+    [28027] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_kick.dds', name = A.Skill_Kick }, -- Kick (Summon Winged Twilight - All Morphs)
     [24613] = { tooltip = T.Skill_Winged_Twilight }, -- Summon Winged Twilight (Summon Winged Twilight)
     [24739] = { hide = true }, -- Summon Winged Twilight (Summon Winged Twilight)
     [108847] = { name = A.Skill_Winged_Twilight_Restore, icon = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds' }, -- Summon Twilight Matriarch (Summon Winged Twilight)
@@ -3917,10 +3918,14 @@ E.EffectOverride = {
     [24741] = { hide = true }, -- Twilight Tormentor (Summon Twilight Tormentor)
     [77354] = { name = A.Skill_Tormentor_Damage_Boost, tooltip = T.Skill_Tormentor_Damage_Boost }, -- Summon Twilight Tormentor (Summon Twilight Tormentor)
     [88937] = { name = A.Skill_Tormentor_Damage_Boost, tooltip = T.Skill_Tormentor_Damage_Boost_Self }, -- Twilight Tormentor (Summon Twilight Tormentor)
+    [117274] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_zap.dds', name = A.Skill_Zap }, -- Twilight Tormentor Zap (Summon Twilight Tormentor)
+    [117273] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_kick.dds', name = A.Skill_Kick }, -- Twilight Tormentor Kick (Summon Twilight Tormentor)
     [24639] = { tooltip = T.Skill_Twilight_Matriarch }, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
     [24742] = { hide = true }, -- Twilight Matriarch (Summon Twilight Matriarch)
     [77407] = { name = A.Skill_Twilight_Matriarch_Restore }, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
     [77371] = { name = A.Skill_Twilight_Matriarch_Restore }, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
+    [117321] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_zap.dds', name = A.Skill_Zap }, -- Twilight Matriarch Zap (Summon Twilight Matriarch)
+    [117320] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_kick.dds', name = A.Skill_Kick }, -- Twilight Matriarch Kick (Summon Twilight Matriarch)
 
     -- Conjured Ward / Hardened Ward / Empowered Ward
     [28418] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Conjured Ward (Conjured Ward)
@@ -4600,6 +4605,7 @@ E.EffectOverride = {
     -- Defensive Posture / Defensive Stance / Absorb Magic
     [28727] = { tooltip = T.Skill_Defensive_Posture }, -- Defensive Posture (Defensive Posture)
     [38312] = { tooltip = T.Skill_Defensive_Stance }, -- Defensive Stance (Defensive Stance)
+    [38315] = { tooltip = T.Generic_Stun }, -- Defensive Stance (Defensive Stance)
     [38317] = { tooltip = T.Skill_Absorb_Magic }, -- Absorb Magic (Absorb Magic)
     [38398] = { icon = 'esoui/art/icons/ability_1handed_004_b.dds' }, -- Absorb Magic (Absorb Magic)
 
@@ -4772,7 +4778,7 @@ E.EffectOverride = {
     [83630] = { tooltip = T.Skill_Thunder_Storm }, -- Thunder Storm (Elemental Storm)
     [83628] = { tooltip = T.Skill_Ice_Storm }, -- Ice Storm (Elemental Storm)
     [85126] = { tooltip = T.Skill_Fiery_Rage }, -- Fiery Rage (Elemental Rage)
-    [85130] = { tooltip = T.Skill_Thunderous_Rage }, -- Thunderous Rage (Elemental Rage)
+    [85130] = { tooltip = T.Skill_Thunder_Storm }, -- Thunderous Rage (Elemental Rage)
     [85128] = { tooltip = T.Skill_Icy_Rage }, -- Icy Rage (Elemental Rage)
     [104825] = { tooltip = T.Generic_Immobilize }, -- Icy Rage (Elemental Rage)
     [83682] = { tooltip = T.Skill_Eye_of_Flame }, -- Eye of Flame (Eye of the Storm)
@@ -5173,7 +5179,7 @@ E.EffectOverride = {
     [63223] = { tooltip = A.Skill_Entropy }, -- Major Sorcery
     [40457] = { tooltip = T.Skill_Degeneration }, -- Degeneration
     [63227] = { tooltip = A.Skill_Degeneration }, -- Major Sorcery (Degeneration)
-    [40452] = { tooltip = T.Skill_Entropy }, -- Structured Entropy
+    [40452] = { tooltip = T.Skill_Structured_Entropy }, -- Structured Entropy
     [63231] = { tooltip = A.Skill_Structured_Entropy }, -- Major Sorcery (Structured Entropy)
 
     -- Fire Rune / Volcanic Rune / Scalding Rune

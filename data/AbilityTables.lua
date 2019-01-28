@@ -549,6 +549,8 @@ A.Skill_Surge                       = 23670
 A.Skill_Power_Surge                 = 23674
 A.Skill_Critical_Surge              = 23678
 A.Skill_Energy_Overload_Heavy       = 114797
+A.Skill_Kick                        = 4125
+A.Skill_Entropic_Touch              = 9743
 
 -- Templar
 A.Skill_Spear_Wall                  = 31708

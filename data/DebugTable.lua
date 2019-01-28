@@ -2993,6 +2993,7 @@ debugAuras = {
             [76638] = true, -- Mass Hysteria (Manifestation of Terror)
 
             [65269] = true, -- Shade Initialize (Summon Shade - All Morphs)
+            [71904] = true, -- Player Pet Speed
             [62197] = true, -- Pet Crit Chance (Summon Shade - All Morphs)
             --[85086] = true, -- Boss (Summon Shade - All Morphs)
             --[85087] = true, -- Boss (Summon Shade - All Morphs)
@@ -3329,6 +3330,7 @@ debugAuras = {
             [77246] = true, -- Volatile Familiar FX (Summon Volatile Familiar)
             [77186] = true, -- Familiar Damage Pulse (Summon Volatile Familiar)
             [77243] = true, -- Volatile Familiar Stun (Summon Volatile Familiar)
+            [117255] = true, -- Volatile Familiar Melee (Summon Volatile Familiar)
 
             [24326] = true, -- Daedric Curse (Daedric Curse)
             [28169] = true, -- Daedric Curse (Daedric Curse)
@@ -3363,6 +3365,8 @@ debugAuras = {
             [77369] = true, -- Twilight Matriarch Restore (Summon Twilight Matriarch)
             [77407] = true, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
             [77371] = true, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
+            [117320] = true, -- Twilight Matriarch Kick (Summon Twilight Matriarch)
+            [117321] = true, -- Twilight Matriarch Zap (Summon Twilight Matriarch)
 
             [24636] = true, -- Summon Twilight Tormentor (Summon Twilight Tormentor)
             [24741] = true, -- Twilight Tormentor (Summon Twilight Tormentor)
@@ -3371,6 +3375,8 @@ debugAuras = {
             [77354] = true, -- Summon Twilight Tormentor (Summon Twilight Tormentor)
             [88937] = true, -- Twilight Tormentor (Summon Twilight Tormentor)
             [77368] = true, -- Twilight Tormentor Damage Bonu (Summon Twilight Tormentor)
+            [117273] = true, -- Twilight Tormentor Kick (Summon Twilight Tormentor)
+            [117274] = true, -- Twilight Tormentor Zap (Summon Twilight Tormentor)
 
             [28418] = true, -- Conjured Ward (Conjured Ward)
             [28421] = true, -- Conjured Ward (Conjured Ward)

@@ -677,7 +677,6 @@ T.Skill_Fire_Storm                  	= zo_strformat(GetString(SI_LUIE_SKILL_ELEM
 T.Skill_Thunder_Storm               	= zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE4))
 T.Skill_Ice_Storm                   	= zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE6))
 T.Skill_Fiery_Rage                  	= zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE3))
-T.Skill_Thunderous_Rage                 = GetString(SI_LUIE_SKILL_THUNDEROUS_RAGE_TP)
 T.Skill_Icy_Rage                        = GetString(SI_LUIE_SKILL_ICY_RAGE_TP)
 T.Skill_Eye_of_Flame                	= zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE3))
 T.Skill_Eye_of_Lightning            	= zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE4))
@@ -749,6 +748,7 @@ T.Skill_Magelight_Passive           	= GetAbilityDescription(30920)
 T.Skill_Inner_Light_Passive         	= GetAbilityDescription(40478)
 T.Skill_Radiant_Magelight_Passive   	= GetAbilityDescription(40483)
 T.Skill_Entropy                         = GetString(SI_LUIE_SKILL_ENTROPY_TP)
+T.Skill_Structured_Entropy              = GetString(SI_LUIE_SKILL_STRUCTURED_ENTROPY_TP)
 T.Skill_Degeneration                    = GetString(SI_LUIE_SKILL_DEGENERATION_TP)
 T.Skill_Fire_Rune                       = GetString(SI_LUIE_SKILL_FIRE_RUNE_TP)
 T.Skill_Volcanic_Rune                   = GetString(SI_LUIE_SKILL_VOLCANIC_RUNE_TP)
@@ -890,7 +890,6 @@ T.Skill_Weakness_Lion                   = GetString(SI_LUIE_SKILL_WEAKNESS_LION_
 T.Skill_Hardened_Shell                  = GetString(SI_LUIE_SKILL_HARDENED_SHELL_TP)
 
 -- Human NPCs
-T.Skill_Empower_Weapon_Flame            = GetString(SI_LUIE_SKILL_EMPOWER_WEAPON_FLAME_TP)
 T.Skill_Cleave_Stance                   = GetString(SI_LUIE_SKILL_CLEAVE_STANCE_TP)
 T.Skill_Defensive_Ward                  = GetString(SI_LUIE_SKILL_DEFENSIVE_WARD_TP)
 T.Skill_Soul_Tether_NPC                 = GetString(SI_LUIE_SKILL_SOUL_TETHER_NPC_TP)
