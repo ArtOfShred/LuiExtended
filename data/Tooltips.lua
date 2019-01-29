@@ -612,7 +612,6 @@ T.Skill_Frozen_Device                   = GetString(SI_LUIE_SKILL_FROZEN_DEVICE_
 T.Skill_Frozen_Retreat                  = GetString(SI_LUIE_SKILL_FROZEN_RETREAT_TP)
 T.Skill_Sleet_Storm                     = GetString(SI_LUIE_SKILL_SLEET_STORM_TP)
 T.Skill_Permafrost                      = GetString(SI_LUIE_SKILL_PERMAFROST_TP)
-T.Skill_Permafrost_Snare                = GetString(SI_LUIE_SKILL_PERMAFROST_SNARE_TP)
 
 ----------------------------------------------------------------
 -- WEAPON SKILLS -----------------------------------------------
@@ -974,7 +973,39 @@ T.Skill_Shadow_Wood                     = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP
 
 T.Generic_AOE_Physical_0_5_Sec          = GetString(SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_0_5_SEC)
 
+T.Generic_AOE_Fire_1_Sec                = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_SEC)
+T.Generic_AOE_Frost_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_FROST_1_SEC)
+T.Generic_AOE_Shock_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_SHOCK_1_SEC)
+T.Generic_AOE_Magic_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_1_SEC)
+T.Generic_AOE_Magic_2_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_2_SEC)
 
+T.Generic_AOE_Heal_1_Sec                = GetString(SI_LUIE_SKILL_GENERIC_AOE_HEAL_1_SEC)
+T.Generic_AOE_Heal_2_Sec                = GetString(SI_LUIE_SKILL_GENERIC_AOE_HEAL_2_SEC)
+T.Generic_AOE_Heal_0_5_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_HEAL_0_5_SEC)
+
+T.Skill_Eruption_Ground                 = GetString(SI_LUIE_SKILL_ERUPTION_GROUND_TP)
+
+T.Skill_Impaling_Shards_Ground          = GetString(SI_LUIE_SKILL_IMPALING_SHARDS_GROUND_TP)
+T.Skill_Sleet_Storm_Ground              = GetString(SI_LUIE_SKILL_SLEET_STORM_GROUND_TP)
+T.Skill_Permafrost_Ground               = GetString(SI_LUIE_SKILL_PERMAFROST_GROUND_TP)
+
+T.Skill_Refreshing_Path_Ground          = GetString(SI_LUIE_SKILL_REFRESHING_PATH_GROUND)
+T.Skill_Veil_of_Blades_Ground           = GetString(SI_LUIE_SKILL_VEIL_OF_BLADES_GROUND)
+
+T.Skill_Solar_Disturbance_Ground        = GetString(SI_LUIE_SKILL_SOLAR_DISTURBANCE_GROUND_TP)
+
+T.Skill_Suppression_Field_Stun          = GetString(SI_LUIE_SKILL_SUPPRESSION_FIELD_STUN)
+T.Skill_Suppression_Field_Silence       = GetString(SI_LUIE_SKILL_SUPPRESSION_FIELD_SILENCE)
+
+T.Skill_Wall_of_Elements_Ground_Fire    = GetString(SI_LUIE_SKILL_WALL_OF_ELEMENTS_GROUND_FIRE)
+T.Skill_Wall_of_Elements_Ground_Shock   = GetString(SI_LUIE_SKILL_WALL_OF_ELEMENTS_GROUND_SHOCK)
+T.Skill_Wall_of_Elements_Ground_Frost   = GetString(SI_LUIE_SKILL_WALL_OF_ELEMENTS_GROUND_FROST)
+
+T.Skill_U_Wall_of_Elements_Ground_Fire    = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_FIRE)
+T.Skill_U_Wall_of_Elements_Ground_Shock   = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_SHOCK)
+T.Skill_U_Wall_of_Elements_Ground_Frost   = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_FROST)
+
+T.Skill_Devouring_Swarm_Ground          = GetString(SI_LUIE_SKILL_DEVOURING_SWARM_GROUND_TP)
 
 
 --[[ Possibly use these at some point

@@ -1088,7 +1088,7 @@ function CI.SoulGemResurrectionStart(eventCode, durationMs)
     CI.StopCastBar()
 
     -- Set all parameters and start cast bar
-    local icon = 'esoui/art/icons/achievement_fanglairpeak_deathless.dds'
+    local icon = 'esoui/art/icons/achievement_frostvault_death_challenge.dds'
     local name = A.Innate_Soul_Gem_Resurrection
     local duration = durationMs
 
@@ -1179,7 +1179,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         else
             duration = CBT.CastDurationFix[abilityId] or castTime
         end
-		
+
 		-- End the cast bar and restart if a new begin event is detected and the effect isn't a channel or fake cast
 		if result == ACTION_RESULT_BEGIN and not channeled and not CBT.CastDurationFix[abilityId] then
 			CI.StopCastBar()

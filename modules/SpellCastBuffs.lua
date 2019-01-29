@@ -2368,9 +2368,11 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if E.FakeExternalBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
+
         g_effectsList.player1[ abilityId ] = nil
         iconName = E.FakeExternalBuffs[abilityId].icon
         effectName = E.FakeExternalBuffs[abilityId].name
+        overrideDuration = E.FakeExternalBuffs[abilityId].overrideDuration
         duration = E.FakeExternalBuffs[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
@@ -2383,7 +2385,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
                 dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                 forced = "short",
                 restart=true, iconNum=0,
-                unbreakable=unbreakable
+                unbreakable=unbreakable,
+                fakeDuration = overrideDuration
             }
         end
     end
@@ -2395,6 +2398,10 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             return
         end
         if E.FakeExternalDebuffs[abilityId].ignoreFade == true and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+            return
+        end
+        -- Bail out if we hide ground snares/etc to replace them with auras for damage
+        if SCB.SV.GroundDamageAura and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].hideGround then
             return
         end
         if internalStack then
@@ -2593,7 +2600,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                 dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
                 forced = "short",
                 restart=true, iconNum=0,
-                unbreakable=unbreakable
+                unbreakable=unbreakable,
             }
         end
     end

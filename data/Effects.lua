@@ -366,6 +366,7 @@ E.DebuffDisplayOverrideId = {
     ----------------------------------------------------------------
 
     -- Item Sets
+    [52705] = true, -- Way of Martial Knowledge (... of Martial Knowledge)
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
     [75753] = true, -- Line Breaker (of Alkosh)
     [93001] = true, -- Mad Tinkerer (Stun from Fabricant)
@@ -2757,7 +2758,7 @@ E.EffectOverride = {
     [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds', tooltip = T.Generic_Phy_Spell_Resist_Duration }, -- Blood Spawn (Blood Spawn)
     [61274] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds' }, -- Blood Spawn (Blood Spawn)
     [59590] = { tooltip = T.Set_Bogdan_the_Nightflame }, -- Imperial Prison Item Set (Bogdan the Nightflame)
-    [59591] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = A.Set_Bogdan_the_Nightflame }, -- Bogdan Totem (Bogdan the Nightflame)
+    [59591] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = A.Set_Bogdan_the_Nightflame, groundLabel = true, tooltip = T.Generic_AOE_Heal_1_Sec }, -- Bogdan Totem (Bogdan the Nightflame)
     [81069] = { hide = true }, -- Chokethorn (Chokethorn)
     [81077] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', tooltip = T.Generic_HoT_08Sec }, -- Chokethorn (Chokethorn)
     [97901] = { tooltip = T.Set_Domihaus_Stamina_Damage }, -- Domihaus (Domihaus)
@@ -3483,6 +3484,11 @@ E.EffectOverride = {
     [32956] = { tooltip = T.Skill_Standard_of_Might_Buff, groundLabel = true}, -- Standard of Might (Standard of Might)
     [32949] = { duration = 0, groundLabel = true, tooltip = A.Skill_Standard_of_Might }, -- Major Defile (Standard of Might)
 
+    [28995] = { groundLabel = true, tooltip = T.Generic_AOE_Fire_1_Sec }, -- Dragonknight Standard
+    [32960] = { groundLabel = true, tooltip = T.Generic_AOE_Fire_1_Sec }, -- Shifting Standard
+    [32964] = { groundLabel = true, tooltip = T.Generic_AOE_Fire_1_Sec }, -- Shifting Standard
+    [32948] = { groundLabel = true, tooltip = T.Generic_AOE_Fire_1_Sec }, -- Standard of Might
+
     -- Spiked Armor / Hardened Armor / Volatile Armor
     [61815] = { consolidate = true, tooltip = A.Skill_Spiked_Armor }, -- Major Resolve (Spiked Armor)
     [61816] = { consolidate = true, tooltip = A.Skill_Spiked_Armor }, -- Major Ward (Spiked Armor)
@@ -3569,7 +3575,11 @@ E.EffectOverride = {
     [20779] = { tooltip = T.Skill_Ash_Cloud }, -- Cinder Storm (Cinder Storm)
     [20780] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_70_No_Dur }, -- Cinder Storm (Cinder Storm)
     [32710] = { tooltip = T.Skill_Eruption }, -- Eruption (Eruption)
-    [32712] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_70_No_Dur }, -- Eruption (Eruption)
+    [32712] = { duration = 0, groundLabel = true, tooltip = T.Skill_Eruption_Ground, hideGround = true }, -- Eruption (Eruption)
+
+    [61772] = { groundLabel = true, tooltip = T.Generic_AOE_Heal_1_Sec }, -- Ash Cloud (Ash Cloud)
+    [34791] = { groundLabel = true, tooltip = T.Generic_AOE_Heal_1_Sec }, -- Cinder Storm (Cinder Storm)
+    [32711] = { groundLabel = true, tooltip = T.Skill_Eruption_Ground }, -- Eruption (Eruption)
 
     -- Magma Armor / Magma Shell / Corrosive Armor
     [15957] = { tooltip = T.Skill_Magma_Armor }, -- Magma Armor (Magma Armor)
@@ -3710,8 +3720,10 @@ E.EffectOverride = {
     [33210] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Path_of_Darkness }, -- Major Expedition (Path of Darkness)
     [36049] = { tooltip = T.Skill_Twisting_Path }, -- Twisting Path (Twisting Path)
     [36050] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Twisting_Path }, -- Major Expedition (Twisting Path)
+    [36052] = { tooltip = T.Generic_AOE_Magic_1_Sec, groundLabel = true }, -- Twisting Path (Twisting Path)
     [36028] = { tooltip = T.Skill_Refreshing_Path }, -- Refreshing Path (Refreshing Path)
     [64005] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Refreshing_Path }, -- Major Expedition (Refreshing Path)
+    [64006] = { groundLabel = true, tooltip = T.Skill_Refreshing_Path_Ground }, -- Refreshing Path (Refreshing Path)
 
     -- Aspect of Terror / Mass Hysteria / Manifestation of Terror
     [25352] = { tooltip = T.Generic_Fear_No_Dur }, -- Aspect of Terror (Aspect of Terror)
@@ -3754,7 +3766,8 @@ E.EffectOverride = {
     [36495] = { tooltip = T.Generic_Snare_70_No_Dur, groundLabel = true }, -- Bolstering Darkness (Bolstering Darkness)
     [36485] = { tooltip = T.Skill_Veil_of_Blades }, -- Veil of Blades (Veil of Blades)
     [44854] = { forcedContainer = 'short', tooltip = A.Skill_Veil_of_Blades, groundLabel = true }, -- Major Protection (Veil of Blades)
-    [36487] = { tooltip = T.Generic_Snare_70_No_Dur, groundLabel = true }, -- Veil of Blades (Veil of Blades)
+    [36490] = { groundLabel = true, tooltip = T.Skill_Veil_of_Blades_Ground }, -- Veil of Blades (Veil of Blades)
+    [36487] = { tooltip = T.Skill_Veil_of_Blades_Ground, groundLabel = true, hideGround = true }, -- Veil of Blades (Veil of Blades)
 
     -- Strife / Funnel Health / Swallow Soul
     [33292] = { tooltip = T.Generic_HoT_2Sec }, -- Strife (Strife)
@@ -3878,11 +3891,13 @@ E.EffectOverride = {
     [29824] = { duration = 0, groundLabel = true, tooltip = T.Generic_Silence_No_Dur }, -- Negate Magic (Negate Magic)
     [47147] = { duration = 0, groundLabel = true, tooltip = T.Generic_Stun_No_Dur }, -- Negate Magic (Negate Magic)
     [28341] = { tooltip = T.Skill_Suppression_Field }, -- Suppression Field (Suppression Field)
-    [47160] = { duration = 0, groundLabel = true, tooltip = T.Generic_Silence_No_Dur }, -- Suppression Field (Suppression Field)
-    [47159] = { duration = 0, groundLabel = true, tooltip = T.Generic_Stun_No_Dur }, -- Suppression Field (Suppression Field)
+    [47160] = { duration = 0, groundLabel = true, tooltip = T.Skill_Suppression_Field_Silence, hideGround = true }, -- Suppression Field (Suppression Field)
+    [47159] = { duration = 0, groundLabel = true, tooltip = T.Skill_Suppression_Field_Stun }, -- Suppression Field (Suppression Field)
+    [80435] = { groundLabel = true, tooltip = T.Skill_Suppression_Field_Silence }, -- Suppression Field (Suppression Field)
     [28348] = { tooltip = T.Skill_Absorption_Field }, -- Absorption Field (Absorption Field)
     [47168] = { duration = 0, groundLabel = true, tooltip = T.Generic_Silence_No_Dur }, -- Absorption Field (Absorption Field)
     [47167] = { duration = 0, groundLabel = true, tooltip = T.Generic_Stun_No_Dur }, -- Absorption Field (Absorption Field)
+    [80405] = { groundLabel = true, tooltip = T.Generic_AOE_Heal_0_5_Sec }, -- Absorption Field (Absorption Field)
 
     -- Summon Unstable Familiar / Summon Unstable Clannfear / Summon Volatile Familiar
     [27287] = { hide = true }, -- Birth Unstable Familiar (Summon Unstable Familiar - All Morphs)
@@ -3989,6 +4004,9 @@ E.EffectOverride = {
     [23182] = { tooltip = T.Skill_Lightning_Splash }, -- Lightning Splash (Lightning Splash)
     [23200] = { tooltip = T.Skill_Lightning_Splash }, -- Liquid Lightning (Liquid Lightning)
     [23205] = { tooltip = T.Skill_Lightning_Splash }, -- Lightning Flood (Lightning Flood)
+    [23189] = { groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Lightning Splash (Lightning Splash)
+    [23202] = { groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Liquid Lightning (Liquid Lightning)
+    [23208] = { groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Lightning Flood (Lightning Flood)
 
     -- Surge / Power Surge / Critical Surge
     [23670] = { tooltip = T.Skill_Surge }, -- Surge (Surge)
@@ -4044,9 +4062,9 @@ E.EffectOverride = {
     [45207] = { icon = 'esoui/art/icons/ability_templar_032.dds' }, -- Sacred Ground
     [31759] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Sacred_Ground }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
     [77082] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Sacred_Ground }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
-    [80195] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_No_Dur }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
-    [80230] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_No_Dur }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
-    [80261] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_No_Dur }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    [80195] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_40_No_Dur }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    [80230] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_40_No_Dur }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    [80261] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_40_No_Dur }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
     [31760] = { icon = 'esoui/art/icons/ability_templar_014.dds' }, -- Light Weaver
     [45208] = { icon = 'esoui/art/icons/ability_templar_014.dds' }, -- Light Weaver
     [52703] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_light_weaver.dds', name = A.Passive_Light_Weaver }, -- Light Weaver Ultimate (Light Weaver - Rank 1 & 2)
@@ -4082,10 +4100,11 @@ E.EffectOverride = {
     [108924] = { hide = true }, -- Synergy Damage Bonus (Spear Shards - Blessed Shards Synergy)
     [108821] = { hide = true }, -- Synergy Damage Bonus (Luminous Shards - Holy Shards Synergy)
     [95933] = { tooltip = T.Skill_Spear_Shards }, -- Spear Shards (Spear Shards)
-    [95931] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds' }, -- Spear Shards (Spear Shards)
+    [95931] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds', groundLabel = true, tooltip = T.Generic_AOE_Magic_1_Sec }, -- Spear Shards (Spear Shards)
     [95957] = { tooltip = T.Skill_Luminous_Shards }, -- Luminous Shards (Luminous Shards)
-    [95955] = { icon = 'esoui/art/icons/ability_templar_light_strike.dds' }, -- Luminous Shards (Luminous Shards)
+    [95955] = { icon = 'esoui/art/icons/ability_templar_light_strike.dds', groundLabel = true, tooltip = T.Generic_AOE_Magic_1_Sec }, -- Luminous Shards (Luminous Shards)
     [26880] = { tooltip = T.Skill_Spear_Shards }, -- Blazing Spear (Blazing Spear)
+    [26879] = { groundLabel = true, tooltip = T.Generic_AOE_Magic_1_Sec }, -- Blazing Spear
 
     -- Sun Shield / Radiant Ward / Blazing Shield
     [22179] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Sun Shield (Sun Shield)
@@ -4160,7 +4179,11 @@ E.EffectOverride = {
     [21757] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
     [22001] = { tooltip = T.Skill_Solar_Disturbance, tooltipValue2Mod = -4.8 }, -- Solar Disturbance (Solar Disturbance)
     [21760] = { name = A.Skill_Major_Maim, tooltip = A.Skill_Solar_Disturbance }, -- Solar Disturbance (Solar Disturbance)
-    [24307] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance }, -- Solar Disturbance Snare (Solar Disturbance)
+    [24307] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance, internalStack = 0, groundLabel = true, tooltip = T.Skill_Solar_Disturbance_Ground, hideGround = true }, -- Solar Disturbance Snare (Solar Disturbance)
+
+    [21753] = { groundLabel = true, tooltip = T.Generic_AOE_Magic_1_Sec }, -- Nova
+    [21756] = { groundLabel = true, tooltip = T.Generic_AOE_Magic_1_Sec }, -- Solar Prison
+    [21759] = { groundLabel = true, tooltip = T.Skill_Solar_Disturbance_Ground }, -- Solar Disturbance
 
     -- Restoring Light
     [35632] = { tooltip = T.Generic_Magicka_Regen_2_Sec }, -- Honor the Dead (Honor the Dead)
@@ -4186,12 +4209,12 @@ E.EffectOverride = {
     -- Cleansing Ritual / Ritual of Retribution / Extended Ritual
     [108824] = { hide = true }, -- Synergy Damage Bonus (Cleansing Ritual - Purify Synergy)
     [44013] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds' }, -- Purify (Cleansing Ritual - Purify Synergy)
-    [26286] = { name = A.Skill_Cleansing_Ritual }, -- Healing Ritual (Cleansing Ritual)
+    [26286] = { name = A.Skill_Cleansing_Ritual, groundLabel = true, tooltip = T.Generic_AOE_Heal_2_Sec }, -- Healing Ritual (Cleansing Ritual)
     [80540] = { tooltip = T.Skill_Cleansing_Ritual }, -- Cleansing Ritual (Cleansing Ritual)
-    [26298] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution)
-    [80172] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution)
+    [26298] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds', groundLabel = true, tooltip = T.Generic_AOE_Heal_2_Sec }, -- Ritual of Retribution (Ritual of Retribution)
+    [80172] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds', groundLabel = true, tooltip = T.Generic_AOE_Magic_2_Sec }, -- Ritual of Retribution (Ritual of Retribution)
     [80547] = { tooltip = T.Skill_Ritual_of_Retribution }, -- Ritual of Retribution (Ritual of Retribution)
-    [26303] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds' }, -- Extended Ritual (Extended Ritual)
+    [26303] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds', groundLabel = true, tooltip = T.Generic_AOE_Heal_2_Sec }, -- Extended Ritual (Extended Ritual)
     [80553] = { tooltip = T.Skill_Cleansing_Ritual }, -- Extended Ritual (Extended Ritual)
 
     -- Rune Focus / Channeled Focus / Restoring Focus
@@ -4353,11 +4376,12 @@ E.EffectOverride = {
     -- Secluded Grove / Enchanted Forest / Healing Thicket
     [85532] = { tooltip = T.Skill_Secluded_Grove }, -- Secluded Grove (Secluded Grove)
     [85533] = { name = A.Skill_Secluded_Grove }, -- Secluded Grove Instant Heal (Secluded Grove)
-    [85534] = { name = A.Skill_Secluded_Grove }, -- Secluded GroveTick Heal (Secluded Grove)
+    [85534] = { name = A.Skill_Secluded_Grove, groundLabel = true, tooltip = T.Generic_AOE_Heal_1_Sec }, -- Secluded GroveTick Heal (Secluded Grove)
 
     [85804] = { tooltip = T.Skill_Secluded_Grove }, -- Enchanted Forest (Enchanted Forest)
     [88748] = { name = A.Skill_Enchanted_Forest }, -- Enchanted Forest Burst (Enchanted Forest)
     [86357] = { icon = 'esoui/art/icons/ability_warden_012_a.dds', name = A.Skill_Enchanted_Forest }, -- Enchanted Forest Ultimate Rest (Enchanted Forest)
+    [88747] = { groundLabel = true, tooltip = T.Generic_AOE_Heal_1_Sec }, -- Enchanted Forest (Enchanted Forest)
 
     [85807] = { tooltip = T.Skill_Healing_Thicket }, -- Healing Thicket (Healing Thicket)
     [88750] = { name = A.Skill_Healing_Thicket }, -- Healing Thicket Instant Heal (Healing Thicket)
@@ -4376,12 +4400,16 @@ E.EffectOverride = {
 
     -- Impaling Shards / Gripping Shards / Winter's Revenge
     [86161] = { tooltip = T.Skill_Impaling_Shards }, -- Impaling Shards (Impaling Shards)
-    [86238] = { tooltip = T.Generic_Snare_30_No_Dur, duration = 0, groundLabel = true }, -- Impaling Shards (Impaling Shards)
+    [86238] = { tooltip = T.Skill_Impaling_Shards_Ground, duration = 0, groundLabel = true, hideGround = true }, -- Impaling Shards (Impaling Shards)
     [86165] = { tooltip = T.Skill_Impaling_Shards }, -- Gripping Shards (Gripping Shards)
     [87443] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_root_frost.dds', name = A.Skill_Frozen, tooltip = T.Generic_Immobilize }, -- Gripping Shards (Gripping Shards)
-    [87448] = { tooltip = T.Generic_Snare_30_No_Dur, duration = 0, groundLabel = true }, -- Gripping Shards (Gripping Shards)
+    [87448] = { tooltip = T.Skill_Impaling_Shards_Ground, duration = 0, groundLabel = true, hideGround = true }, -- Gripping Shards (Gripping Shards)
     [86169] = { tooltip = T.Skill_Impaling_Shards }, -- Winter's Revenge (Winter's Revenge)
-    [88801] = { tooltip = T.Generic_Snare_30_No_Dur, duration = 0, groundLabel = true }, -- Winter's Revenge (Winter's Revenge)
+    [88801] = { tooltip = T.Skill_Impaling_Shards_Ground, duration = 0, groundLabel = true, hideGround = true }, -- Winter's Revenge (Winter's Revenge)
+
+    [88783] = { groundLabel = true, tooltip = T.Skill_Impaling_Shards_Ground }, -- Impaling Shards (Impaling Shards)
+    [88791] = { groundLabel = true, tooltip = T.Skill_Impaling_Shards_Ground }, -- Gripping Shards (Gripping Shards)
+    [88802] = { groundLabel = true, tooltip = T.Skill_Impaling_Shards_Ground }, -- Winter's Revenge (Winter's Revenge)
 
     -- Arctic Wind / Polar Wind / Arctic Blast
     [90833] = { tooltip = T.Skill_Arctic_Wind }, -- Arctic Wind (Arctic Wind)
@@ -4416,14 +4444,18 @@ E.EffectOverride = {
     -- Sleet Storm / Northern Storm / Permafrost
     [86109] = { tooltip = T.Skill_Sleet_Storm }, -- Sleet Storm (Sleet Storm)
     [86249] = { forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Sleet_Storm }, -- Major Protection (Sleet Storm)
-    [86250] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_70_No_Dur }, -- Sleet Storm (Sleet Storm)
+    [86250] = { duration = 0, groundLabel = true, tooltip = T.Skill_Sleet_Storm_Ground, hideGround = true }, -- Sleet Storm (Sleet Storm)
     [86113] = { tooltip = T.Skill_Sleet_Storm }, -- Northern Storm (Northern Storm)
     [88859] = { forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Northern_Storm }, -- Major Protection (Northern Storm)
-    [88858] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_70_No_Dur }, -- Northern Storm (Northern Storm)
+    [88858] = { duration = 0, groundLabel = true, tooltip = T.Skill_Sleet_Storm_Ground, hideGround = true }, -- Northern Storm (Northern Storm)
     [86117] = { tooltip = T.Skill_Permafrost }, -- Permafrost (Permafrost)
     [88862] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Permafrost }, -- Major Protection (Permafrost)
-    [88861] = { duration = 0, groundLabel = true, tooltip = T.Skill_Permafrost_Snare }, -- Permafrost (Permafrost)
+    [88861] = { duration = 0, groundLabel = true, tooltip = T.Skill_Permafrost_Ground, hideGround = true }, -- Permafrost (Permafrost)
     [90943] = { icon = 'esoui/art/icons/ability_warden_006_b.dds', tooltip = T.Generic_Stun }, -- Permafrost (Permafrost)
+
+    [86247] = { groundLabel = true, tooltip = T.Skill_Sleet_Storm_Ground }, -- Sleet Storm (Sleet Storm)
+    [88860] = { groundLabel = true, tooltip = T.Skill_Sleet_Storm_Ground }, -- Northern Storm (Northern Storm)
+    [88863] = { groundLabel = true, tooltip = T.Skill_Permafrost_Ground }, -- Permafrost (Permafrost)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
@@ -4729,17 +4761,27 @@ E.EffectOverride = {
     [28854] = { tooltip = T.Skill_Wall_of_Elements_Shock }, -- Wall of Storms (Wall of Storms)
     [62968] = { tooltip = A.Skill_Wall_of_Storms }, -- Off Balance (Wall of Storms)
     [28849] = { tooltip = T.Skill_Wall_of_Elements_Frost }, -- Wall of Frost (Wall of Frost)
-    [62928] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_60_No_Dur }, -- Wall of Frost (Wall of Elements) -- Frost
+    [62928] = { duration = 0, groundLabel = true, tooltip = T.Skill_Wall_of_Elements_Ground_Frost, hideGround = true }, -- Wall of Frost (Wall of Elements) -- Frost
     [39053] = { tooltip = T.Skill_U_Wall_of_Elements_Fire }, -- Unstable Wall of Fire (Unstable Wall of Fire)
     [39073] = { tooltip = T.Skill_U_Wall_of_Elements_Shock }, -- Unstable Wall of Storms (Unstable Wall of Storms)
     [39077] = { tooltip = A.Skill_Unstable_Wall_of_Storms }, -- Off Balance (Unstable Wall of Storms)
     [39067] = { tooltip = T.Skill_U_Wall_of_Elements_Frost }, -- Unstable Wall of Frost (Unstable Wall of Frost)
-    [39068] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_60_No_Dur }, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
+    [39068] = { duration = 0, groundLabel = true, tooltip = T.Skill_U_Wall_of_Elements_Ground_Frost, hideGround = true }, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
     [39012] = { tooltip = T.Skill_Wall_of_Elements_Fire }, -- Blockade of Fire (Blockade of Fire)
     [39018] = { tooltip = T.Skill_Wall_of_Elements_Shock }, -- Blockade of Storms (Blockade of Storms)
     [62988] = { tooltip = A.Skill_Blockade_of_Storms }, -- Off Balance (Blockade of Storms)
     [39028] = { tooltip = T.Skill_Wall_of_Elements_Frost }, -- Blockade of Frost (Blockade of Frost)
-    [62948] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_60_No_Dur }, -- Blockade of Frost (Elemental Blockade) -- Frost
+    [62948] = { duration = 0, groundLabel = true, tooltip = T.Skill_Wall_of_Elements_Ground_Frost, hideGround = true }, -- Blockade of Frost (Elemental Blockade) -- Frost
+
+    [62896] = { groundLabel = true, tooltip = T.Skill_Wall_of_Elements_Ground_Fire }, -- Wall of Fire
+    [62971] = { groundLabel = true, tooltip = T.Skill_Wall_of_Elements_Ground_Shock }, -- Wall of Storms
+    [62931] = { groundLabel = true, tooltip = T.Skill_Wall_of_Elements_Ground_Frost }, -- Wall of Frost
+    [39054] = { groundLabel = true, tooltip = T.Skill_U_Wall_of_Elements_Ground_Fire }, -- Unstable Wall of Fire
+    [39079] = { groundLabel = true, tooltip = T.Skill_U_Wall_of_Elements_Ground_Shock }, -- Unstable Wall of Storms
+    [39071] = { groundLabel = true, tooltip = T.Skill_U_Wall_of_Elements_Ground_Frost }, -- Unstable Wall of Frost
+    [62912] = { groundLabel = true, tooltip = T.Skill_Wall_of_Elements_Ground_Fire }, -- Blockade of Fire
+    [62990] = { groundLabel = true, tooltip = T.Skill_Wall_of_Elements_Ground_Shock }, -- Blockade of Storms
+    [62951] = { groundLabel = true, tooltip = T.Skill_Wall_of_Elements_Ground_Frost }, -- Blockade of Frost
 
     -- Destructive Touch / Destructive Clench / Destructive Reach
     [62648] = { name = A.Skill_Flame_Touch, tooltip = T.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch) -- Fire
@@ -4789,17 +4831,29 @@ E.EffectOverride = {
     [83686] = { tooltip = T.Skill_Eye_of_Lightning }, -- Eye of Lightning (Eye of the Storm)
     [83684] = { tooltip = T.Skill_Eye_of_Frost }, -- Eye of Frost (Eye of the Storm)
 
+    [83626] = { groundLabel = true, tooltip = T.Generic_AOE_Fire_1_Sec }, --Fire Storm
+    [83631] = { groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, --Thunder Storm
+    [83629] = { groundLabel = true, tooltip = T.Generic_AOE_Frost_1_Sec }, --Ice Storm
+
+    [85127] = { groundLabel = true, tooltip = T.Generic_AOE_Fire_1_Sec }, --Fiery Rage
+    [85131] = { groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, --Thunderous Rage
+    [85129] = { groundLabel = true, tooltip = T.Generic_AOE_Frost_1_Sec }, --Icy Rage
+
+    [83683] = { groundLabel = true, tooltip = T.Generic_AOE_Fire_1_Sec }, --Eye of Flame
+    [83687] = { groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, --Eye of Lightning
+    [83685] = { groundLabel = true, tooltip = T.Generic_AOE_Frost_1_Sec }, --Eye of Frost
+
     -----------------------------------------
     -- RESTORATION STAFF ACTIVES ------------
     -----------------------------------------
 
     -- Grand Healing / Illustrious Healing / Healing Springs
     [28385] = { tooltip = T.Skill_Secluded_Grove }, -- Grand Healing (Grand Healing)
-    [28386] = { icon = 'esoui/art/icons/ability_restorationstaff_004.dds' }, -- Grand Healing (Grand Healing)
+    [28386] = { icon = 'esoui/art/icons/ability_restorationstaff_004.dds', tooltip = T.Generic_AOE_Heal_1_Sec, groundLabel = true }, -- Grand Healing (Grand Healing)
     [40058] = { tooltip = T.Skill_Secluded_Grove }, -- Illustrious Healing (Illustrious Healing)
-    [40059] = { icon = 'esoui/art/icons/ability_restorationstaff_004b.dds' }, -- Illustrious Healing (Illustrious Healing)
+    [40059] = { icon = 'esoui/art/icons/ability_restorationstaff_004b.dds', tooltip = T.Generic_AOE_Heal_1_Sec, groundLabel = true }, -- Illustrious Healing (Illustrious Healing)
     [40060] = { tooltip = T.Skill_Secluded_Grove }, -- Healing Springs (Healing Springs)
-    [40061] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs)
+    [40061] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds', tooltip = T.Generic_AOE_Heal_1_Sec, groundLabel = true }, -- Healing Springs (Healing Springs)
     [40062] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs)
 
     -- Regeneration / Rapid Regeneration / Mutagen
@@ -4969,6 +5023,10 @@ E.EffectOverride = {
     [32624] = { tooltip = T.Skill_Bat_Swarm }, -- Bat Swarm
     [38932] = { tooltip = T.Skill_Bat_Swarm }, -- Clouding Swarm
     [38931] = { tooltip = T.Skill_Devouring_Swarm }, -- Devouring Swarm
+
+    [32625] = { groundLabel = true, tooltip = T.Generic_AOE_Magic_1_Sec }, -- Bat Swarm
+    [38935] = { groundLabel = true, tooltip = T.Generic_AOE_Magic_1_Sec }, -- Clouding Swarm
+    [38934] = { groundLabel = true, tooltip = T.Skill_Devouring_Swarm_Ground }, -- Devouring Swarm
 
     ----------------------------------------------------------------
     -- VAMPIRE QUEST ---------------------------------------------
@@ -5209,16 +5267,18 @@ E.EffectOverride = {
     -- Meteor / Ice Comet / Shooting Star
     [63430] = { tooltip = T.Skill_Meteor }, -- Meteor
     [16538] = { icon = 'esoui/art/icons/ability_mageguild_005.dds', name = A.Skill_Meteor }, -- Meteor Knockback (Meteor)
+    [63429] = { tooltip = T.Generic_AOE_Fire_1_Sec, groundLabel = true }, -- Meteor (Meteor)
     [114701] = { name = A.Skill_Meteor, tooltip = T.Generic_Knockback }, -- Stun (Meteor)
     [63456] = { tooltip = T.Skill_Ice_Comet }, -- Ice Comet
     [40492] = { tooltip = T.Generic_Snare_50 }, -- Ice Comet
     [63457] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds' }, -- Ice Comet (Ice Comet)
     [63455] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', name = A.Skill_Ice_Comet }, -- Ice Comet Knockback (Ice Comet)
-    [63454] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds' }, -- Ice Comet (Ice Comet)
+    [63454] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', tooltip = T.Generic_AOE_Frost_1_Sec, groundLabel = true }, -- Ice Comet (Ice Comet)
     [114714] = { name = A.Skill_Ice_Comet, tooltip = T.Generic_Knockback }, -- Stun (Ice Comet)
     [63473] = { tooltip = T.Skill_Meteor }, -- Shooting Star
     [63472] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds' }, -- Shooting Star (Shooting Star)
     [40495] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds' }, -- Shooting Star (Shooting Star)
+    [63471] = { tooltip = T.Generic_AOE_Fire_1_Sec, groundLabel = true }, -- Shooting Star (Shooting Star)
     [114715] = { name = A.Skill_Shooting_Star, tooltip = T.Generic_Knockback }, -- Shooting Star (Shooting Star)
 
     ----------------------------------------------------------------
@@ -8561,6 +8621,11 @@ E.EffectOverride = {
 -- Fake Buffs applied onto the player by NPCs or Events (Friendly)
 --------------------------------------------------------------------------------------------------------------------------------
 E.FakeExternalBuffs = {
+
+    -- Nightblade
+    [64006] = { icon = 'esoui/art/icons/ability_nightblade_010_a.dds', name = A.Skill_Refreshing_Path, duration = 2000, overrideDuration = true }, -- Refreshing Path (Refreshing Path)
+
+    -- MSQ
     [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds', name = A.Skill_Focused_Healing, duration = 4000 }, -- Focused Healing (The Prophet)
 
     -- Quests
@@ -8574,6 +8639,9 @@ E.FakeExternalDebuffs = {
 
     -- Nightblade
     [36964] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds', name = A.Skill_Crippling_Grasp, duration = 1500 }, -- Crippling Grasp (Crippling Grasp)
+
+    -- Templar
+    [24307] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance, duration = 0 }, -- Solar Disturbance Snare (Solar Disturbance)
 
     -- Destruction Staff
     [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
@@ -8829,6 +8897,8 @@ E.FakePlayerBuffs = {
 --------------------------------------------------------------------------------------------------------------------------------
 E.FakePlayerExternalBuffs = {
 
+
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -8928,13 +8998,98 @@ E.FakeStagger = {
 --------------------------------------------------------------------------------------------------------------------------------
 E.AddGroundDamageAura = {
 
+    -- Sets
+    [59591] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Bogdan Totem (Bogdan the Nightflame)
+
+    -- Dragonknight
+    [28995] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Dragonknight Standard
+    [32960] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shifting Standard
+    [32964] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shifting Standard
+    [32948] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Standard of Might
+
+    [61772] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Ash Cloud (Ash Cloud)
+    [34791] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Cinder Storm (Cinder Storm)
+    [32711] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Eruption (Eruption)
+
+    -- Nightblade
+    [36052] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Twisting Path (Twisting Path)
+    [36490] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Veil of Blades (Veil of Blades)
+
+    -- Sorcerer
+    [23189] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Lightning Splash (Lightning Splash)
+    [23202] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Liquid Lightning (Liquid Lightning)
+    [23208] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Lightning Flood (Lightning Flood)
+    [80435] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Suppression Field (Suppression Field)
+    [80405] = { duration = 600, type = BUFF_EFFECT_TYPE_BUFF }, -- Absorption Field (Absorption Field)
+
+    -- Templar
+    [95931] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spear Shards
+    [95955] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Luminous Shards
+    [26879] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Blazing Spear
+
+    [26286] = { duration = 2100, type = BUFF_EFFECT_TYPE_BUFF }, -- Healing Ritual (Cleansing Ritual)
+    [26298] = { duration = 2100, type = BUFF_EFFECT_TYPE_BUFF }, -- Ritual of Retribution
+    [80172] = { duration = 2100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ritual of Retribution
+    [26303] = { duration = 2100, type = BUFF_EFFECT_TYPE_BUFF }, -- Extended Ritual
+
+    [21753] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Nova
+    [21756] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Solar Prison
+    [21759] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Solar Disturbance
+
+    -- Warden
+    [85534] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Secluded Grove (Secluded Grove)
+    [88747] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Enchanted Forest (Enchanted Forest)
+    [88783] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Impaling Shards (Impaling Shards)
+    [88791] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Gripping Shards (Gripping Shards)
+    [88802] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Winter's Revenge (Winter's Revenge)
+
+    [86247] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Sleet Storm (Sleet Storm)
+    [88860] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Northern Storm (Northern Storm)
+    [88863] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Permafrost (Permafrost)
+
     -- Bow
     [28877] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Volley (Volley)
     [38690] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Endless Hail (Endless Hail)
     [38696] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arrow Barrage (Arrow Barrage)
 
-    -- Fighter's Guild
+    -- Destruction Staff
+    [62896] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Wall of Fire
+    [62971] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Wall of Storms
+    [62931] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Wall of Frost
+    [39054] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Unstable Wall of Fire
+    [39079] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Unstable Wall of Storms
+    [39071] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Unstable Wall of Frost
+    [62912] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Blockade of Fire
+    [62990] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Blockade of Storms
+    [62951] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Blockade of Frost
+
+    [83626] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Fire Storm
+    [83631] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Thunder Storm
+    [83629] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Ice Storm
+    [85127] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Fiery Rage
+    [85131] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Thunderous Rage
+    [85129] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Icy Rage
+    [83683] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Eye of Flame
+    [83687] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Eye of Lightning
+    [83685] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Eye of Frost
+
+    -- Restoration Staff
+    [28386] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Grand Healing
+    [40059] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Illustrious Healing
+    [40061] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Healing Springs
+
+    -- Fighters Guild
     [80293] = { duration = 600, type = BUFF_EFFECT_TYPE_BUFF, exception = ACTION_RESULT_EFFECT_GAINED }, -- Ring of Preservation (Ring of Preservation)
+
+    -- Mages Guild
+    [63429] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Meteor (Meteor)
+    [63454] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ice Comet (Ice Comet)
+    [63471] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shooting Star (Shooting Star)
+
+    -- Vampire
+    [32625] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bat Swarm
+    [38935] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Clouding Swarm
+    [38934] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Devouring Swarm
 
     -- Assault
     [38561] = { duration = 1110, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Caltrops (Caltrops)

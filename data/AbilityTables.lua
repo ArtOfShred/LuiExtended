@@ -522,6 +522,7 @@ A.Skill_Power_Extraction            = 36901
 A.Skill_Sap_Essence                 = 36891
 A.Skill_Soul_Tether                 = 35460
 A.Skill_Soul_Siphon                 = 35508
+A.Skill_Refreshing_Path             = 36028
 
 -- Sorcerer
 A.Skill_Exploitation                = 31389

@@ -2509,7 +2509,7 @@ local strings = {
     SI_LUIE_SKILL_RADIANT_DESTRUCTION_TP =               "Afflicted with Magic Damage every |cFFFFFF0.75|r seconds for |cFFFFFF<<1>>|r seconds. Deals up to |cFFFFFF480|r% more damage if you are below |cFFFFFF50|r% Health.",
     SI_LUIE_SKILL_NOVA_TP =                              "Enemies in the nova take Magic Damage every |cFFFFFF1|r second and have Major Maim applied to them.\n\nAn ally near the fragment can activate the |cFFFFFFSupernova|r synergy.",
     SI_LUIE_SKILL_SOLAR_PRISON_TP =                      "Enemies in the nova take Magic Damage every |cFFFFFF1|r second and have Major Maim applied to them.\n\nAn ally near the fragment can activate the |cFFFFFFGravity Crush|r synergy.",
-    SI_LUIE_SKILL_SOLAR_DISTURBANCE_TP =                 "Enemies in the nova take Magic Damage every |cFFFFFF1|r second, have their Movement Speed reduced by |cffffff65|%r, and have Major Maim applied to them.\n\nMajor Maim persists on enemies who leave the area for |cFFFFFF<<2>>|r seconds.\n\nAn ally near the fragment can activate the |cFFFFFFSupernova|r synergy.",
+    SI_LUIE_SKILL_SOLAR_DISTURBANCE_TP =                 "Enemies in the nova take Magic Damage every |cFFFFFF1|r second, have their Movement Speed reduced by |cffffff70|r%, and have Major Maim applied to them.\n\nMajor Maim persists on enemies who leave the area for |cFFFFFF<<2>>|r seconds.\n\nAn ally near the fragment can activate the |cFFFFFFSupernova|r synergy.",
     SI_LUIE_SKILL_CLEANSING_RITUAL_TP =                  "You and allies in the area are healed every |cFFFFFF2|r seconds.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
     SI_LUIE_SKILL_CLEANSING_RITUAL_RETRIBUTION_TP =      "You and allies in the area are healed every |cFFFFFF2|r seconds, while enemies take Magic Damage every |cFFFFFF2|r seconds.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
     SI_LUIE_SKILL_RUNE_FOCUS_BONUS_TP =                  "Increase Physical and Spell Resistance by |cFFFFFF2640|r.",
@@ -2880,7 +2880,7 @@ local strings = {
 
 	-- Light / Medium / Heavy Armor Sets
     SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP =                "Enemies in the desecrated ground take Magic Damage every |cffffff1|r second and have their Movement Speed reduced by |cffffff70|r%.\n\nYou heal for |cffffff100|r% of the damage done.", -- TODO: Translate
-    SI_LUIE_SKILL_SET_WAY_OF_MARTIAL_KNOWLEDGE_TP =      "Увеличен получаемый урон от следующей атаки на |cffffff10|r%.",
+    SI_LUIE_SKILL_SET_WAY_OF_MARTIAL_KNOWLEDGE_TP =      "Increase damage taken from the next attack by |cffffff10|r%.", -- TODO: Translate
     SI_LUIE_SKILL_SET_BRIARHEART_TP =                    "Ваши критические удары исцеляют вас в течение |cffffff10|r секунд.",
     SI_LUIE_SKILL_SET_SENCHE_TP =                        "Увеличен урон от Оружия и шанс критического удара на |cffffff5|r секунд.",
     SI_LUIE_SKILL_SET_UNFATHOMABLE_DARKNESS_TP =         "Every |cffffff3|r seconds a crow will be sent to peck the closest enemy within |cffffff12|r meters, dealing Physical Damage.", -- TODO: Translate

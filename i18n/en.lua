@@ -2510,7 +2510,7 @@ local strings = {
     SI_LUIE_SKILL_RADIANT_DESTRUCTION_TP =               "Afflicted with Magic Damage every |cFFFFFF0.75|r seconds for |cFFFFFF<<1>>|r seconds. Deals up to |cFFFFFF480|r% more damage if you are below |cFFFFFF50|r% Health.",
     SI_LUIE_SKILL_NOVA_TP =                              "Enemies in the nova take Magic Damage every |cFFFFFF1|r second and have Major Maim applied to them.\n\nAn ally near the fragment can activate the |cFFFFFFSupernova|r synergy.",
     SI_LUIE_SKILL_SOLAR_PRISON_TP =                      "Enemies in the nova take Magic Damage every |cFFFFFF1|r second and have Major Maim applied to them.\n\nAn ally near the fragment can activate the |cFFFFFFGravity Crush|r synergy.",
-    SI_LUIE_SKILL_SOLAR_DISTURBANCE_TP =                 "Enemies in the nova take Magic Damage every |cFFFFFF1|r second, have their Movement Speed reduced by |cffffff65|%r, and have Major Maim applied to them.\n\nMajor Maim persists on enemies who leave the area for |cFFFFFF<<2>>|r seconds.\n\nAn ally near the fragment can activate the |cFFFFFFSupernova|r synergy.",
+    SI_LUIE_SKILL_SOLAR_DISTURBANCE_TP =                 "Enemies in the nova take Magic Damage every |cFFFFFF1|r second, have their Movement Speed reduced by |cffffff70|r%, and have Major Maim applied to them.\n\nMajor Maim persists on enemies who leave the area for |cFFFFFF<<2>>|r seconds.\n\nAn ally near the fragment can activate the |cFFFFFFSupernova|r synergy.",
     SI_LUIE_SKILL_CLEANSING_RITUAL_TP =                  "You and allies in the area are healed every |cFFFFFF2|r seconds.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
     SI_LUIE_SKILL_CLEANSING_RITUAL_RETRIBUTION_TP =      "You and allies in the area are healed every |cFFFFFF2|r seconds, while enemies take Magic Damage every |cFFFFFF2|r seconds.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
     SI_LUIE_SKILL_RUNE_FOCUS_BONUS_TP =                  "Increase Physical and Spell Resistance by |cFFFFFF2640|r.",
@@ -2553,7 +2553,6 @@ local strings = {
     SI_LUIE_SKILL_FROZEN_RETREAT_TP =                    "Detonates when a enemy comes close, dealing Frost Damage, teleporting the enemy to you, and immobilizing them for |cFFFFFF3|r seconds.\n\nAn ally in the portal can activate the |cFFFFFFIcy Escape|r synergy.",
     SI_LUIE_SKILL_SLEET_STORM_TP =                       "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_PERMAFROST_TP =                        "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second.\n\nDamaging an enemy three times with the storm will stun them for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_PERMAFROST_SNARE_TP =                  "Movement Speed reduced by |cFFFFFF70|r%.\n\nIf you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.",
 
 	----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------
@@ -2881,7 +2880,7 @@ local strings = {
 
 	-- Light / Medium / Heavy Armor Sets
     SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP =                "Enemies in the desecrated ground take Magic Damage every |cffffff1|r second and have their Movement Speed reduced by |cffffff70|r%.\n\nYou heal for |cffffff100|r% of the damage done.",
-    SI_LUIE_SKILL_SET_WAY_OF_MARTIAL_KNOWLEDGE_TP =      "Increase damage taken from next attack by |cffffff10|r%.",
+    SI_LUIE_SKILL_SET_WAY_OF_MARTIAL_KNOWLEDGE_TP =      "Increase damage taken from the next attack by |cffffff10|r%.",
     SI_LUIE_SKILL_SET_BRIARHEART_TP =                    "Your critical strikes heal you for |cffffff10|r seconds.",
     SI_LUIE_SKILL_SET_SENCHE_TP =                        "Increase Weapon Damage and Weapon Critical for |cffffff5|r seconds.",
     SI_LUIE_SKILL_SET_UNFATHOMABLE_DARKNESS_TP =         "Every |cffffff3|r seconds a crow will be sent to peck the closest enemy within |cffffff12|r meters, dealing Physical Damage.",
@@ -3084,6 +3083,39 @@ local strings = {
 
     -- MOVE LATER
     SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_0_5_SEC =         "Taking Physical Damage every |cFFFFFF0.5|r seconds.",
+    SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_SEC =               "Taking Flame Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_GENERIC_AOE_FROST_1_SEC =              "Taking Frost Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_GENERIC_AOE_SHOCK_1_SEC =              "Taking Shock Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_GENERIC_AOE_MAGIC_1_SEC =              "Taking Magic Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_GENERIC_AOE_MAGIC_2_SEC =              "Taking Magic Damage every |cFFFFFF2|r seconds.",
+
+    SI_LUIE_SKILL_GENERIC_AOE_HEAL_1_SEC =               "Healing every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_GENERIC_AOE_HEAL_2_SEC =               "Healing every |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_GENERIC_AOE_HEAL_0_5_SEC =             "Healing every |cFFFFFF0.5|r seconds.",
+
+    SI_LUIE_SKILL_ERUPTION_GROUND_TP =                   "Taking Flame Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.",
+
+    SI_LUIE_SKILL_REFRESHING_PATH_GROUND =               "Healing every |cFFFFFF1|r second.\n\nThe effect persists for |cFFFFFF2|r seconds after leaving the path.",
+    SI_LUIE_SKILL_VEIL_OF_BLADES_GROUND =                "Taking Magic Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.",
+
+    SI_LUIE_SKILL_SUPPRESSION_FIELD_STUN =               "Stunned and taking Magic Damage every |cFFFFFF0.5|r seconds.",
+    SI_LUIE_SKILL_SUPPRESSION_FIELD_SILENCE =            "Silenced and taking Magic Damage every |cFFFFFF0.5|r seconds.",
+
+    SI_LUIE_SKILL_SOLAR_DISTURBANCE_GROUND_TP =          "Taking Magic Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.",
+
+    SI_LUIE_SKILL_IMPALING_SHARDS_GROUND_TP =            "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF30|r%.",
+    SI_LUIE_SKILL_SLEET_STORM_GROUND_TP =                "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.",
+    SI_LUIE_SKILL_PERMAFROST_GROUND_TP =                 "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.\n\nIf you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.",
+
+    SI_LUIE_SKILL_WALL_OF_ELEMENTS_GROUND_FIRE =         "Taking Flame Damage every |cFFFFFF1|r second.\n\nIf you are Burning, take |cFFFFFF20|r% more damage from this ability.",
+    SI_LUIE_SKILL_WALL_OF_ELEMENTS_GROUND_FROST =        "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF60|r%.\n\nIf you are Chilled you will be immobilized for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_WALL_OF_ELEMENTS_GROUND_SHOCK =        "Taking Shock Damage every |cFFFFFF1|r second.\n\nIf you are Concussed you will be set Off Balance for |cFFFFFF5|r seconds.",
+
+    SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_FIRE =       "Taking Flame Damage every |cFFFFFF1|r second.\n\nIf you are Burning, take |cFFFFFF20|r% more damage from this ability.\n\nThe wall explodes when it expires, dealing additional Flame Damage.",
+    SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_FROST =      "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF60|r%.\n\nIf you are Chilled you will be immobilized for |cFFFFFF4|r seconds.\n\nThe wall explodes when it expires, dealing additional Frost Damage.",
+    SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_SHOCK =      "Taking Shock Damage every |cFFFFFF1|r second.\n\nIf you are Concussed you will be set Off Balance for |cFFFFFF5|r seconds.\n\nThe wall explodes when it expires, dealing additional Shock Damage.",
+
+    SI_LUIE_SKILL_DEVOURING_SWARM_GROUND_TP =            "Taking Magic Damage every |cFFFFFF1|r second.\n\nEach tick heals the Vampire.",
 
 
 }
