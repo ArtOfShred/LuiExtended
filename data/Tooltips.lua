@@ -972,6 +972,9 @@ T.Skill_Shadow_Wood                     = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP
 -- MOVE LATER
 
 T.Generic_AOE_Physical_0_5_Sec          = GetString(SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_0_5_SEC)
+T.Generic_AOE_Physical_1_Sec			= GetString(SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_1_SEC)
+
+T.Generic_AOE_Disease_1_Sec				= GetString(SI_LUIE_SKILL_GENERIC_AOE_DISEASE_1_SEC)
 
 T.Generic_AOE_Fire_1_Sec                = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_SEC)
 T.Generic_AOE_Frost_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_FROST_1_SEC)
@@ -982,6 +985,12 @@ T.Generic_AOE_Magic_2_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_MA
 T.Generic_AOE_Heal_1_Sec                = GetString(SI_LUIE_SKILL_GENERIC_AOE_HEAL_1_SEC)
 T.Generic_AOE_Heal_2_Sec                = GetString(SI_LUIE_SKILL_GENERIC_AOE_HEAL_2_SEC)
 T.Generic_AOE_Heal_0_5_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_HEAL_0_5_SEC)
+
+T.Skill_Spawn_of_Mephala_Ground			= GetString(SI_LUIE_SKILL_SPAWN_OF_MEPHALA_GROUND_TP)
+T.Skill_Bahrahas_Curse_Ground			= GetString(SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP)
+T.Skill_Leeching_Plate_Ground			= GetString(SI_LUIE_SKILL_LEECHING_PLATE_GROUND_TP)
+T.Skill_Winterborn_Ground				= GetString(SI_LUIE_SKILL_WINTERBORN_GROUND_TP)
+
 
 T.Skill_Eruption_Ground                 = GetString(SI_LUIE_SKILL_ERUPTION_GROUND_TP)
 

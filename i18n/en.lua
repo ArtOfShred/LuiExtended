@@ -3083,6 +3083,8 @@ local strings = {
 
     -- MOVE LATER
     SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_0_5_SEC =         "Taking Physical Damage every |cFFFFFF0.5|r seconds.",
+    SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_1_SEC =         	 "Taking Physical Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_GENERIC_AOE_DISEASE_1_SEC =            "Taking Disease Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_SEC =               "Taking Flame Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_FROST_1_SEC =              "Taking Frost Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_SHOCK_1_SEC =              "Taking Shock Damage every |cFFFFFF1|r second.",
@@ -3092,7 +3094,13 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_AOE_HEAL_1_SEC =               "Healing every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_HEAL_2_SEC =               "Healing every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_HEAL_0_5_SEC =             "Healing every |cFFFFFF0.5|r seconds.",
-
+	
+	SI_LUIE_SKILL_SPAWN_OF_MEPHALA_GROUND_TP =			 "Taking Poison Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF50|r%.",
+	SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP =			 "Taking Magic Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.\n\nEach tick heals your attacker.",
+	SI_LUIE_SKILL_LEECHING_PLATE_GROUND_TP =		     "Taking Poison Damage every |cFFFFFF1|r second.\n\nEach tick heals your attacker.",
+	
+	SI_LUIE_SKILL_WINTERBORN_GROUND_TP =				 "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF60|r%."
+	
     SI_LUIE_SKILL_ERUPTION_GROUND_TP =                   "Taking Flame Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.",
 
     SI_LUIE_SKILL_REFRESHING_PATH_GROUND =               "Healing every |cFFFFFF1|r second.\n\nThe effect persists for |cFFFFFF2|r seconds after leaving the path.",

@@ -2763,20 +2763,20 @@ E.EffectOverride = {
     [81077] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', tooltip = T.Generic_HoT_08Sec }, -- Chokethorn (Chokethorn)
     [97901] = { tooltip = T.Set_Domihaus_Stamina_Damage }, -- Domihaus (Domihaus)
     [97900] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds', forcedContainer = 'short', groundLabel = true, tooltip = T.Set_Domihaus_Stamina_Buff }, -- Domihaus (Domihaus)
-    [97899] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds' }, -- Domihaus (Domihaus)
+    [97899] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds', groundLabel = true, tooltip = T.Generic_AOE_Physical_1_Sec }, -- Domihaus (Domihaus)
     [97882] = { tooltip = T.Set_Domihaus_Magicka_Damage }, -- Domihaus (Domihaus)
     [97896] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_fire.dds', forcedContainer = 'short', groundLabel = true, tooltip = T.Set_Domihaus_Magicka_Buff }, -- Domihaus (Domihaus)
-    [97883] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_fire.dds' }, -- Domihaus (Domihaus)
+    [97883] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_fire.dds', groundLabel = true, tooltip = T.Generic_AOE_Fire_1_Sec }, -- Domihaus (Domihaus)
     [97855] = { tooltip = T.Set_Earthgore }, -- Earthgore (Earthgore)
-    [97857] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_earthgore.dds' }, -- Earthgore (Earthgore)
+    [97857] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_earthgore.dds', groundLabel = true, tooltip = T.Generic_AOE_Heal_1_Sec }, -- Earthgore (Earthgore)
     [84504] = { icon = 'esoui/art/icons/achievement_update11_dungeons_033.dds', tooltip = T.Set_Grothdarr }, -- Grothdarr (Grothdarr)
-    [84502] = { icon = 'esoui/art/icons/achievement_update11_dungeons_033.dds' }, -- Grothdarr (Grothdarr)
+    [84502] = { icon = 'esoui/art/icons/achievement_update11_dungeons_033.dds', groundLabel = true, tooltip = T.Generic_AOE_Fire_1_Sec }, -- Grothdarr (Grothdarr)
     [80562] = { icon = 'esoui/art/icons/achievement_wrothgar_042.dds', tooltip = T.Set_Iceheart }, -- Iceheart (Iceheart)
     [80561] = { icon = 'esoui/art/icons/achievement_wrothgar_042.dds' }, -- Iceheart (Iceheart)
     [80529] = { tooltip = T.Set_Ilambris_Shock }, -- Ilambris (Ilambris)
-    [80526] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_ilambris_shock.dds' }, -- Ilambris (Ilambris)
+    [80526] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_ilambris_shock.dds', groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Ilambris (Ilambris)
     [80527] = { tooltip = T.Set_Ilambris_Fire }, -- Ilambris (Ilambris)
-    [80525] = { icon = 'esoui/art/icons/ava_siege_ui_002.dds' }, -- Ilambris (Ilambris)
+    [80525] = { icon = 'esoui/art/icons/ava_siege_ui_002.dds', groundLabel = true, tooltip = T.Generic_AOE_Fire_1_Sec }, -- Ilambris (Ilambris)
     [83405] = { hide = true }, -- Infernal Guardian (Infernal Guardian)
     [83409] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_infernal_guardian.dds' }, -- Infernal Guardian (Infernal Guardian)
     [80566] = { hide = true }, -- Kra'gh (Kra'gh)
@@ -2808,7 +2808,7 @@ E.EffectOverride = {
     [80544] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds' }, -- Sellistrix (Sellistrix)
     [80549] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds', tooltip = T.Generic_Stun }, -- Sellistrix (Sellistrix)
     [81036] = { hide = true, tooltip = T.Set_Sentinel_of_Rkugamz }, -- Sentinel of Rkugamz
-    [81038] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds' }, -- Sentinel of Rkugamz
+    [81038] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds', groundLabel = true, tooltip = T.Generic_AOE_Heal_1_Sec }, -- Sentinel of Rkugamz
     [81041] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds' }, -- Sentinel of Rkugamz
     [80955] = { hide = true }, -- Shadowrend (Shadowrend)
     [80954] = { hide = true, tooltip = T.Set_Shadowrend }, -- Shadowrend Summon (Shadowrend)
@@ -2818,10 +2818,10 @@ E.EffectOverride = {
     [81034] = { tooltip = A.Set_Shadowrend }, -- Minor Maim (Shadowrend)
     [80481] = { tooltip = A.Set_Slimecraw }, -- Minor Berserk (Slimecraw)
     [59497] = { tooltip = T.Set_Spawn_of_Mephala }, -- Spawn of Mephala (Spawn of Mephala)
-    [59498] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = A.Set_Spawn_of_Mephala }, -- Mephala's Web (Spawn of Mephala)
-    [59499] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = A.Set_Spawn_of_Mephala, duration = 0, groundLabel = true, tooltip = T.Generic_Snare_50_No_Dur }, -- Mephala's Web (Spawn of Mephala)
+    [59498] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = A.Set_Spawn_of_Mephala, groundLabel = true, tooltip = T.Skill_Spawn_of_Mephala_Ground }, -- Mephala's Web (Spawn of Mephala)
+    [59499] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = A.Set_Spawn_of_Mephala, duration = 0, groundLabel = true, tooltip = T.Skill_Spawn_of_Mephala_Ground, hideGround = true }, -- Mephala's Web (Spawn of Mephala)
     [80523] = { tooltip = T.Set_Stormfist }, -- Stormfist (Stormfist)
-    [80522] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds' }, -- Stormfist (Stormfist)
+    [80522] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Stormfist (Stormfist)
     [80521] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds' }, -- Stormfist (Stormfist)
     [84419] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = A.Set_Swarm_Mother },
     [80593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = A.Set_Swarm_Mother },
@@ -2830,10 +2830,10 @@ E.EffectOverride = {
     [59533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds', name = A.Set_Engine_Guardian, tooltip = T.Set_Engine_Guardian_Magicka }, -- Engine Guardian Magicka
     [59543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds', name = A.Set_Engine_Guardian, tooltip = T.Set_Engine_Guardian_Health }, -- Engine Guardian Health
     [80504] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_regeneration.dds', name = A.Set_The_Troll_King, tooltip = T.Set_The_Troll_King }, -- The Troll King
+	[102094] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', groundLabel = true, tooltip = T.Generic_AOE_Disease_1_Sec }, -- Thurvokun
     [102097] = { tooltip = A.Set_Thurvokun }, -- Minor Maim (Thurvokun)
     [102100] = { tooltip = A.Set_Thurvokun }, -- Minor Defile (Thurvokun)
     [102093] = { tooltip = T.Set_Thurvokun }, -- Thurvokun (Thurvokun)
-    [102094] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds' }, -- Thurvokun
     [80865] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds' }, -- Tremorscale
     [80866] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', tooltip = T.Generic_Snare_70 }, -- Tremorscale
     [59596] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_valkyn_skoria.dds' }, -- Valkyn Skoria
@@ -2885,7 +2885,7 @@ E.EffectOverride = {
     [49236] = { icon = 'LuiExtended/media/icons/abilities/ability_set_whitestrake.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Whitestake's Retribution (Whitestrake's)
     [106776] = { forcedContainer = 'short', tooltip = A.Set_Adept_Rider }, -- Major Evasion (Adept Rider's)
     [106790] = { forcedContainer = 'short', tooltip = A.Set_Adept_Rider, groundLabel = true }, -- Major Evasion (Adept Rider's)
-    [106783] = { name = A.Set_Dust_Cloud }, -- Dustcloud Damage (Adept Rider's)
+    [106783] = { name = A.Set_Dust_Cloud, groundLabel = true, tooltip = T.Generic_AOE_Physical_1_Sec }, -- Dustcloud Damage (Adept Rider's)
     [106784] = { tooltip = T.Set_Adept_Rider }, -- Dustcloud (Adept Rider's)
     [106804] = { icon = 'esoui/art/icons/achievement_su_mainquest_6.dds', name = A.Set_Nocturnals_Favor }, -- Nocturnal's Heal (Nocturnal's Favor)
     [106798] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sloads_semblance.dds', tooltip = T.Generic_Oblivion }, -- Sload's Semblance (Sload's)
@@ -2901,8 +2901,8 @@ E.EffectOverride = {
     -- Overland Sets (Light)
     [75691] = { tooltip = T.Set_Bahrahas_Curse }, -- Bahraha's Curse
     [75707] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds' }, -- Bahraha's Curse
-    [75692] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds' }, -- Bahraha's Curse
-    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', tooltip = T.Generic_Snare_70_No_Dur, groundLabel = true }, -- Bahraha's Curse
+    [75692] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', groundLabel = true, tooltip = T.Skill_Bahrahas_Curse_Ground }, -- Bahraha's Curse
+    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', tooltip = T.Skill_Bahrahas_Curse_Ground, groundLabel = true, hideGround = true }, -- Bahraha's Curse
     [34522] = { icon = 'esoui/art/icons/achievement_wrothgar_012.dds' }, -- Bloodthorn's Touch (Bloodthorn)
     [57177] = { icon = 'esoui/art/icons/achievement_wrothgar_012.dds' }, -- Bloodthorn's Touch (Bloodthorn)
     [48913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds', tooltip = T.Generic_Knockdown }, -- Dreamer's Mantle (Dreamer's)
@@ -2965,7 +2965,7 @@ E.EffectOverride = {
     [112523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hatchlings_shell.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Hatchling's Shell (of the Hatchling's Shell)
     [85565] = { tooltip = A.Set_Order_of_Diagna }, -- Minor Vitality (Order of Diagna)
     [57210] = { icon = 'LuiExtended/media/icons/abilities/ability_set_storm_knight.dds', tooltip = T.Set_Storm_Knight }, -- Storm Knight's Plate (of the Storm Knight)
-    [57209] = { icon = 'LuiExtended/media/icons/abilities/ability_set_storm_knight.dds' }, -- Storm Knight's Plate (of the Storm Knight)
+    [57209] = { icon = 'LuiExtended/media/icons/abilities/ability_set_storm_knight.dds', groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Storm Knight's Plate (of the Storm Knight)
     [85551] = { tooltip = A.Set_Vampire_Cloak }, -- Minor Protection (Vampire's Cloak)
     [33514] = { icon = 'esoui/art/icons/perks_fighters_guild_003.dds', tooltip = T.Generic_Weapon_Damage_Duration }, -- Armor of the Veiled Heritance (of the Veiled Heritance)
     [33497] = { icon = 'esoui/art/icons/achievement_vvardenfel_035.dds' }, -- Thunderbug's Carapace (Thunderbug's)
@@ -2983,7 +2983,7 @@ E.EffectOverride = {
     [102033] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds', hide = true }, -- Caluurion's Legacy (Disease)
     [102034] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_ranged.dds', hide = true }, -- Caluurion's Legacy (Shock)
     [97538] = { tooltip = T.Set_Draugrs_Rest }, -- Draugr's Rest (Draugr's Rest)
-    [97539] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds' }, -- Draugr's Rest
+    [97539] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', groundLabel = true, tooltip = T.Generic_AOE_Heal_1_Sec }, -- Draugr's Rest
     [97574] = { icon = 'LuiExtended/media/icons/abilities/ability_set_flame_blossom.dds' }, -- Flame Blossom
     [84341] = { tooltip = A.Set_Gossamer }, -- Major Evasion (Gossamer)
     [85610] = { icon = 'esoui/art/icons/achievement_021.dds' }, -- Lamia's Song (Lamia's)
@@ -3054,7 +3054,7 @@ E.EffectOverride = {
     [85620] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_028.dds' }, -- Knight-Errant's Mail (Knight-Errant's)
     [67205] = { tooltip = T.Set_Leeching_Plate }, -- Leeching Plate (of Leeching)
     [69345] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds' }, -- Leeching Plate (of Leeching)
-    [67204] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds' }, -- Leeching Plate (of Leeching)
+    [67204] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', groundLabel = true, tooltip = T.Skill_Leeching_Plate_Ground }, -- Leeching Plate (of Leeching)
     [84277] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
     [84278] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
     [84279] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
@@ -3210,8 +3210,8 @@ E.EffectOverride = {
     [71264] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_melee_alt.dds', tooltip = T.Set_Succession_Flame }, -- Fire Ascendant (of Succession)
     [71265] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee_alt.dds', tooltip = T.Set_Succession_Shock  }, -- Lightning Ascendant (of Succession)
     [71266] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cold_melee_alt.dds', tooltip = T.Set_Succession_Frost }, -- Frost Ascendant (of Succession)
-    [73296] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winterborn.dds', name = A.Set_Winterborn, duration = 0, groundLabel = true, tooltip = T.Generic_Snare_60_No_Dur }, -- Winterborn Snare (Winterborn)
-    [71646] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winterborn.dds' }, -- Winterborn (Winterborn)
+    [73296] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winterborn.dds', name = A.Set_Winterborn, duration = 0, groundLabel = true, tooltip = T.Skill_Winterborn_Ground, hideGround = true }, -- Winterborn Snare (Winterborn)
+    [71646] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winterborn.dds', groundLabel = true, tooltip = T.Skill_Winterborn_Ground }, -- Winterborn (Winterborn)
     [71188] = { icon = 'esoui/art/icons/ability_rogue_019.dds', name = A.Set_Glorious_Defender, tooltip = T.Set_Glorious_Defender }, -- Glorious Defense (of Glory)
     [71605] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hunt_leader.dds' }, -- Hunt Leader (of the Hunt)
     [74106] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hunt_leader.dds' }, -- Hunt Leader (of the Hunt)
@@ -9000,7 +9000,35 @@ E.AddGroundDamageAura = {
 
     -- Sets
     [59591] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Bogdan Totem (Bogdan the Nightflame)
-
+	
+	-- TODO: Test
+	-- TODO: Don't forget to add Templar healing ultimate as well
+	[97899] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Domihaus (Domihaus)
+	[97883] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Domihaus (Domihaus)
+	
+	[97857] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Earthgore (Earthgore)
+	
+	[84502] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Grothdarr (Grothdarr)
+	
+	[80526] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Illambris
+	[80525] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Illambris
+	
+	[81038] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Sentinel of Rkugamz
+	
+	[59498] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spawn of Mephala
+	
+	[80522] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Stormfist
+	
+	[102094] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Thurvokun
+	
+	[106783] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Dustcloud Damage (Adept Rider's)
+	
+	[75692] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bahraha's Curse
+	
+	[57209] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Storm Knight's Plate
+	
+	[97539] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Draugr's Rest
+	
     -- Dragonknight
     [28995] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Dragonknight Standard
     [32960] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shifting Standard
