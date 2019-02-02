@@ -2457,11 +2457,22 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if E.FakePlayerBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
-        if g_effectsList.player1[ abilityId ] and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
-            stack = g_effectsList.player1[ abilityId ].stack + E.EffectOverride[abilityId].stackAdd
+
+        -- Prominent Support
+        local context
+        if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
+            context = "promd_player"
+        elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
+            context = "promb_player"
+        else
+            context = "player1"
+        end
+
+        if g_effectsList[context][ abilityId ] and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
+            stack = g_effectsList[context][ abilityId ].stack + E.EffectOverride[abilityId].stackAdd
         end
         if abilityId == 26406 then g_ignoreAbilityId[abilityId] = true end
-        g_effectsList.player1[ abilityId ] = nil
+        g_effectsList[context][ abilityId ] = nil
         g_effectsList.player2[ abilityId ] = nil
         if abilityId == 973 and not SCB.SV.ShowSprint then
             return
@@ -2493,7 +2504,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
                 }
             -- Otherwise, display as a normal buff
             else
-                g_effectsList.player1[ finalId ] = {
+                g_effectsList[context][ finalId ] = {
                     target="player", type=1,
                     id=finalId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,

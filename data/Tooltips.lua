@@ -143,6 +143,7 @@ T.Generic_Shock                         = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_
 T.Generic_Shock_1_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_1_SEC_TP)
 T.Generic_Shock_2_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_2_SEC_TP)
 T.Generic_Oblivion 					    = GetString(SI_LUIE_SKILL_GENERIC_OBLIVION_TP)
+T.Generic_Oblivion_1_Sec 				= GetString(SI_LUIE_SKILL_GENERIC_OBLIVION_1_SEC_TP)
 T.Generic_Magic                         = GetString(SI_LUIE_SKILL_GENERIC_MAGIC_TP)
 T.Generic_Magic_1_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_MAGIC_1_SEC_TP)
 T.Generic_Magic_2_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_MAGIC_2_SEC_TP)
@@ -989,8 +990,10 @@ T.Generic_AOE_Heal_0_5_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_HE
 T.Skill_Spawn_of_Mephala_Ground			= GetString(SI_LUIE_SKILL_SPAWN_OF_MEPHALA_GROUND_TP)
 T.Skill_Bahrahas_Curse_Ground			= GetString(SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP)
 T.Skill_Leeching_Plate_Ground			= GetString(SI_LUIE_SKILL_LEECHING_PLATE_GROUND_TP)
-T.Skill_Winterborn_Ground				= GetString(SI_LUIE_SKILL_WINTERBORN_GROUND_TP)
 
+T.Skill_Hand_of_Mephala_Ground          = GetString(SI_LUIE_SKILL_HAND_OF_MEPHALA_GROUND_TP)
+
+T.Skill_Stormfist_Ground                = GetString(SI_LUIE_SKILL_STORMFIST_GROUND_TP)
 
 T.Skill_Eruption_Ground                 = GetString(SI_LUIE_SKILL_ERUPTION_GROUND_TP)
 
@@ -1015,6 +1018,9 @@ T.Skill_U_Wall_of_Elements_Ground_Shock   = GetString(SI_LUIE_SKILL_U_WALL_OF_EL
 T.Skill_U_Wall_of_Elements_Ground_Frost   = GetString(SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_FROST)
 
 T.Skill_Devouring_Swarm_Ground          = GetString(SI_LUIE_SKILL_DEVOURING_SWARM_GROUND_TP)
+
+T.Skill_Meatbag_Catapult_AOE            = GetString(SI_LUIE_SKILL_MEATBAG_CATAPULT_AOE_TP)
+T.Skill_Scattershot_Catapult_AOE        = GetString(SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_AOE_TP)
 
 
 --[[ Possibly use these at some point

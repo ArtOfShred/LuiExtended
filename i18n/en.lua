@@ -2315,6 +2315,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_SHOCK_1_SEC_TP =               "Afflicted with Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_SHOCK_2_SEC_TP =               "Afflicted with Shock Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 	SI_LUIE_SKILL_GENERIC_OBLIVION_TP =					 "Afflicted with Oblivion Damage over time for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_OBLIVION_1_SEC_TP =            "Afflicted with Oblivion Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_MAGIC_TP =                     "Afflicted with Magic Damage over time for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_MAGIC_1_SEC_TP =               "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_MAGIC_2_SEC_TP =               "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -2908,7 +2909,7 @@ local strings = {
     SI_LUIE_SKILL_SET_EMBERSHIELD =                      "Increase Spell Resistance.\n\nEnemies within |cffffff5|r meters take Flame Damage every |cffffff1|r second for |cffffff6|r seconds.",
     SI_LUIE_SKILL_SET_HAGRAVENS_GARDEN =                 "Any damage you take from enemies outside of the preservation is reduced by |cffffff50|r%.\n\nThe first time an enemy tries to enter the preservation they are knocked back |cffffff5|r meters.",
     SI_LUIE_SKILL_SET_JOLTING_ARMS =                     "Increase Spell Resistance for |cffffff<<1>>|r seconds and your next Bash deals additional Shock Damage.",
-    SI_LUIE_SKILL_SET_LEECHING_PLATE_TP =                "Enemies in a |cffffff4|r meter radius take Poison Damage every |cffffff1|r second and heal you for |cffffff100|r% of the damage dealt.",
+    SI_LUIE_SKILL_SET_LEECHING_PLATE_TP =                "Enemies in the |cffffff4|r meter radius of the poison cloud take Poison Damage every |cffffff1|r second and heal you for |cffffff100|r% of the damage dealt.",
     SI_LUIE_SKILL_SET_MEDUSA =                           "Medusa",
     SI_LUIE_SKILL_SET_HAND_OF_MEPHALA_TP =               "Enemies in the web have their Movement Speed reduced by |cffffff50|r% for |cffffff5|r seconds.\n\nAfter |cffffff5|r seconds the webs burst into venom, dealing Poison Damage and applying Minor Fracture to any enemy hit for |cffffff5|r seconds.",
     SI_LUIE_SKILL_SET_RATTLECAGE =                       "Rattlecage",
@@ -3013,7 +3014,7 @@ local strings = {
     SI_LUIE_SKILL_FREE_SPIRIT =                          "Free Spirit",
     SI_LUIE_SKILL_UNBIND =                               "Unbind",
     SI_LUIE_SKILL_BACKFIRE =                             "Backfire",
-    SI_LUIE_SKILL_DIVINE_SPEED_TP =                      "A divine blessing boosts your movement speed for |cFFFFFF2|r minutes.",
+    SI_LUIE_SKILL_DIVINE_SPEED_TP =                      "A divine blessing boosts your Movement Speed for |cFFFFFF2|r minutes.", -- TODO: ADD %
     SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP =              "Lightning courses through your body causing all weapon attacks to deal Shock Damage.",
     SI_LUIE_SKILL_MANTLES_SHADOW =                       "Mantle's Shadow",
     SI_LUIE_SKILL_THROW_WATER =                          "Throw Water",
@@ -3094,13 +3095,15 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_AOE_HEAL_1_SEC =               "Healing every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_HEAL_2_SEC =               "Healing every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_HEAL_0_5_SEC =             "Healing every |cFFFFFF0.5|r seconds.",
-	
+
 	SI_LUIE_SKILL_SPAWN_OF_MEPHALA_GROUND_TP =			 "Taking Poison Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF50|r%.",
 	SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP =			 "Taking Magic Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.\n\nEach tick heals your attacker.",
 	SI_LUIE_SKILL_LEECHING_PLATE_GROUND_TP =		     "Taking Poison Damage every |cFFFFFF1|r second.\n\nEach tick heals your attacker.",
-	
-	SI_LUIE_SKILL_WINTERBORN_GROUND_TP =				 "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF60|r%."
-	
+
+    SI_LUIE_SKILL_HAND_OF_MEPHALA_GROUND_TP =            "Movement Speed reduced by |cffffff50|r%.\n\nAfter |cffffff5|r seconds the webs burst into venom, dealing Poison Damage and applying Minor Fracture for |cffffff5|r seconds.",
+
+    SI_LUIE_SKILL_STORMFIST_GROUND_TP =                  "Taking Shock Damage every |cFFFFFF1|r second.\n\nAfter |cffffff3|r seconds the fist closes, dealing Physical Damage.",
+
     SI_LUIE_SKILL_ERUPTION_GROUND_TP =                   "Taking Flame Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.",
 
     SI_LUIE_SKILL_REFRESHING_PATH_GROUND =               "Healing every |cFFFFFF1|r second.\n\nThe effect persists for |cFFFFFF2|r seconds after leaving the path.",
@@ -3125,6 +3128,8 @@ local strings = {
 
     SI_LUIE_SKILL_DEVOURING_SWARM_GROUND_TP =            "Taking Magic Damage every |cFFFFFF1|r second.\n\nEach tick heals the Vampire.",
 
+    SI_LUIE_SKILL_MEATBAG_CATAPULT_AOE_TP =             "Taking Disease Damage every |cFFFFFF1|r second.\n\nHealing and Health Recovery reduced by |cFFFFFF50|r% for |cFFFFFF6|r seconds whenever you take damage from this effect.",
+    SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_AOE_TP =         "Taking Physical Damage every |cFFFFFF1|r second.\n\nIncrease damage taken from all sources by |cFFFFFF20|r% for |cFFFFFF6|r seconds whenever you take damage from this effect.",
 
 }
 
