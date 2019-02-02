@@ -977,6 +977,7 @@ T.Generic_AOE_Physical_1_Sec			= GetString(SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_1_
 
 T.Generic_AOE_Disease_1_Sec				= GetString(SI_LUIE_SKILL_GENERIC_AOE_DISEASE_1_SEC)
 
+T.Generic_AOE_Fire_0_5_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_0_5_SEC)
 T.Generic_AOE_Fire_1_Sec                = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_SEC)
 T.Generic_AOE_Frost_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_FROST_1_SEC)
 T.Generic_AOE_Shock_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_SHOCK_1_SEC)

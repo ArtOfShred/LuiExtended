@@ -6227,11 +6227,12 @@ E.EffectOverride = {
     [36305] = { name = A.Skill_Razor_Armor }, -- Spike Armor Damage Return (Cyrodiil Guard T2)
     [7880] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_torrent.dds', name = A.Skill_Shock_Torrent, hide = true }, -- Light Attack (Cyrodiil Mage T1)
     [46336] = { name = A.Skill_Crystal_Shard, tooltip = T.Generic_Stun }, -- Crystal Shard Stun (Cyrodiil Mage T1)
+    [7883] = { groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Guardian Storm
     [21629] = { icon = 'esoui/art/icons/ability_mage_008.dds' }, -- Mage's Lifesteal (Cyrodiil Mage T1)
     [46711] = { hide = true }, -- Bound Aegis (Cyrodiil Mage T2)
     [46726] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_torrent.dds', name = A.Skill_Improved_Shock_Torrent, hide = true }, -- Shock Torrent (Cyrodiil Mage T2)
     [46730] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_torrent.dds', name = A.Skill_Improved_Shock_Torrent, tooltip = T.Generic_Shock_1_Sec }, -- Shock Torrent (Cyrodiil Mage T2)
-    [46819] = { icon = 'esoui/art/icons/ability_mage_068.dds', name = A.Skill_Lasting_Storm }, -- Storm Damage (Cyrodiil Mage T2)
+    [46819] = { icon = 'esoui/art/icons/ability_mage_068.dds', name = A.Skill_Lasting_Storm, groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Storm Damage (Cyrodiil Mage T2)
     [46704] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds' }, -- Crystal Blast (Cyrodiil Mage T2)
     [46705] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds' }, -- Crystal Blast (Cyrodiil Mage T2)
     [46706] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds', name = A.Skill_Crystal_Blast, tooltip = T.Generic_Stun }, -- Crystal Shard Stun (Cyrodiil Mage T2)
@@ -6253,18 +6254,20 @@ E.EffectOverride = {
     [51893] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0, tooltip = T.Generic_Stun_No_Dur, groundLabel = true }, -- Negate Magic (Cyrodiil Mender T1 + T2)
     [51894] = { duration = 0, tooltip = T.Generic_Silence_No_Dur, groundLabel = true }, -- Negate Magic (Cyrodiil Mender T1 + T2)
     [52864] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds' }, -- Quick Shot (Cyrodiil Archer T1 + T2)
-    [54258] = { name = A.Skill_Improved_Volley }, -- Upgraded Volley (Cyrodiil Archer T2)
+    [52866] = { groundLabel = true, tooltip = T.Generic_AOE_Physical_0_5_Sec }, -- Volley (Cyrodiil Archer T1)
+    [54258] = { name = A.Skill_Improved_Volley, groundLabel = true, tooltip = T.Generic_AOE_Physical_0_5_Sec }, -- Upgraded Volley (Cyrodiil Archer T2)
     [54264] = { icon = 'esoui/art/icons/ability_bow_001_a.dds', hide = true }, -- Lethal Arrow (Cryodiil Archer T2)
     [54265] = { icon = 'esoui/art/icons/ability_bow_001_a.dds', tooltip = T.Skill_Lethal_Arrow_Cyrodiil }, -- Lethal Arrow (Cryodiil Archer T2)
     [54259] = { icon = 'esoui/art/icons/ability_bow_004_a.dds', hide = true }, -- Draining Shot (Cryodiil Archer T2)
-    [54261] = { icon = 'esoui/art/icons/ability_bow_004_a.dds', tooltip = T.Generic_Snare }, -- Draining Shot (Cryodiil Archer T2)
+    [54261] = { icon = 'esoui/art/icons/ability_bow_004_a.dds', tooltip = T.Generic_Snare_50 }, -- Draining Shot (Cryodiil Archer T2)
+    [70414] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_ignite.dds', tooltip = T.Generic_AOE_Fire_0_5_Sec, groundLabel = true }, -- Ignite (Synergy - Fire Mage)
     [16510] = { name = A.Skill_Fire_Torrent, hide = true }, -- Fire Salvo (Cyrodiil Honor Guard T1)
     [15780] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_aoe_alt.dds' }, -- Honor Guard Rage (Cyrodiil Honor Guard T1)
     [32446] = { icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = A.Skill_Dragon_Blood, tooltip = T.Generic_Health_Recovery }, -- Guardian Heal (Cyrodiil Honor Guard T1)
     [35113] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', hide = true }, -- Extended Chains (Cyrodiil Honor Guard T1)
     [35115] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Extended_Chains, hide = true, tooltip = T.Generic_Stun }, -- Pull (Cyrodiil Honor Guard T1)
-    [46992] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_snare_shock.dds' }, -- Cripping Rage (Cyrodiil Honor Guard T2)
-    [47001] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_snare_shock.dds', tooltip = T.Generic_Snare }, -- Cripping Rage (Cyrodiil Honor Guard T2)
+    [46992] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_snare_shock.dds' }, -- Crippling Rage (Cyrodiil Honor Guard T2)
+    [47001] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_snare_shock.dds', tooltip = T.Generic_Snare_50 }, -- Crippling Rage (Cyrodiil Honor Guard T2)
     [47004] = { icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = A.Skill_Dragon_Blood, tooltip = T.Generic_Health_Recovery }, -- Guardian Heal (Cyrodiil Honor Guard T2)
     [47019] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', hide = true }, -- Puncturing Chains (Cyrodiil Honor Guard T2)
     [47023] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Puncturing_Chains, tooltip = T.Skill_Puncturing_Chains }, -- Puncture (Cyrodiil Honor Guard T2)
@@ -9003,6 +9006,10 @@ E.FakeStagger = {
 --------------------------------------------------------------------------------------------------------------------------------
 E.AddGroundDamageAura = {
 
+    --------------------
+    -- PLAYER
+    --------------------
+
     -- Siege
     [104693] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Meatbag Catapult
     [104695] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Scattershot Catapult
@@ -9122,6 +9129,17 @@ E.AddGroundDamageAura = {
     [38561] = { duration = 1110, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Caltrops (Caltrops)
     [40267] = { duration = 1110, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [40252] = { duration = 1110, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Razor Caltrops (Razor Caltrops)
+
+    --------------------
+    -- NPC
+    --------------------
+
+    -- Cyrodiil
+    [7883] = { duration = 1110, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Guardian Storm (Cyrodiil Mage)
+    [46819] = { duration = 1110, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Storm Damage (Cyrodiil Mage)
+    [52866] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Volley (Cyrodiil Archer)
+    [54258] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Upgraded Volley (Cyrodiil Archer)
+    [70414] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ignite (Cyrodiil Archer)
 
 }
 

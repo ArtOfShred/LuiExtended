@@ -3086,6 +3086,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_0_5_SEC =         "Taking Physical Damage every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_1_SEC =         	 "Taking Physical Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_DISEASE_1_SEC =            "Taking Disease Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_GENERIC_AOE_FIRE_0_5_SEC =             "Taking Flame Damage every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_SEC =               "Taking Flame Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_FROST_1_SEC =              "Taking Frost Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_SHOCK_1_SEC =              "Taking Shock Damage every |cFFFFFF1|r second.",
