@@ -2252,6 +2252,7 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_BREACH_TP =                      "Reduce Spell Resistance by |cffffff5280|r.",
     SI_LUIE_SKILL_MINOR_FRACTURE_TP =                    "Reduce Physical Resistance |cffffff1320|r.",
     SI_LUIE_SKILL_MAJOR_FRACTURE_TP =                    "Reduce Physical Resistance |cffffff5280|r.",
+    SI_LUIE_SKILL_MAJOR_FRACTURE_NPC_TP =                "Reduce Physical Resistance |cffffff4000|r.",
     SI_LUIE_SKILL_MINOR_VULNERABILITY_TP =               "Increase damage taken by |cffffff8|r%.",
     SI_LUIE_SKILL_MINOR_MAIM_TP =                        "Reduce damage done by |cffffff15|r%.",
     SI_LUIE_SKILL_MAJOR_MAIM_TP =                        "Reduce damage done by |cffffff30|r%.",
@@ -2353,6 +2354,8 @@ local strings = {
 	SI_LUIE_SKILL_GENERIC_SNARE_20_NO_DUR_TP =			 "Movement Speed reduced by |cFFFFFF20|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_30_TP =			         "Movement Speed reduced by |cFFFFFF30|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 	SI_LUIE_SKILL_GENERIC_SNARE_30_NO_DUR_TP =			 "Movement Speed reduced by |cFFFFFF30|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_35_TP =			         "Movement Speed reduced by |cFFFFFF35|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+	SI_LUIE_SKILL_GENERIC_SNARE_35_NO_DUR_TP =			 "Movement Speed reduced by |cFFFFFF35|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_40_TP =			         "Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 	SI_LUIE_SKILL_GENERIC_SNARE_40_NO_DUR_TP =			 "Movement Speed reduced by |cFFFFFF40|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_45_TP =			         "Movement Speed reduced by |cFFFFFF45|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -2371,6 +2374,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered.",
     SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_STUN_NO_DUR_TP =               "Stunned.",
+    SI_LUIE_SKILL_GENERIC_LEVITATE_TP =                  "Levitated for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP =                 "Knocked back for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP =                 "Knocked down for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_FEAR_TP =                      "Feared for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -3080,16 +3084,22 @@ local strings = {
     SI_LUIE_SKILL_BLOCK_NPC_TP =                         "Brace for attack, reducing damage taken and granting immunity to Stun and Knockback effects.\n\nIncoming melee Heavy Attacks will be counterattacked while active.",
     SI_LUIE_SKILL_CALL_ALLY_TP =                         "A summoned beast ally fights at your side. The beast remains for |cFFFFFF2|r minutes or until killed.",
     SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP =                    "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEach tick heals the vampire.",
-    SI_LUIE_SKILL_ICE_CAGE_TP =                          "Taking Frost Damage every |cFFFFFF0.5|r seconds and Movement Speed reduced by |cFFFFFF60|r%.",
+    SI_LUIE_SKILL_ICE_CAGE_TP =                          "Taking Frost Damage every |cFFFFFF0.66|r seconds and Movement Speed reduced by |cFFFFFF60|r%.",
 
     -- MOVE LATER
     SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_0_5_SEC =         "Taking Physical Damage every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_1_SEC =         	 "Taking Physical Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_GENERIC_AOE_POISON_0_5_SEC =           "Taking Poison Damage every |cFFFFFF0.5|r seconds.",
+    SI_LUIE_SKILL_GENERIC_AOE_POISON_0_66_SEC =          "Taking Poison Damage every |cFFFFFF0.66|r seconds.",
+    SI_LUIE_SKILL_GENERIC_AOE_POISON_1_SEC =             "Taking Poison Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_GENERIC_AOE_DISEASE_0_5_SEC =          "Taking Disease Damage every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_DISEASE_1_SEC =            "Taking Disease Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_FIRE_0_5_SEC =             "Taking Flame Damage every |cFFFFFF0.5|r seconds.",
+    SI_LUIE_SKILL_GENERIC_AOE_FIRE_0_9_SEC =             "Taking Flame Damage every |cFFFFFF0.9|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_SEC =               "Taking Flame Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_FROST_1_SEC =              "Taking Frost Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_SHOCK_1_SEC =              "Taking Shock Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_GENERIC_AOE_MAGIC_0_5_SEC =            "Taking Magic Damage every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_MAGIC_1_SEC =              "Taking Magic Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_MAGIC_2_SEC =              "Taking Magic Damage every |cFFFFFF2|r seconds.",
 
@@ -3129,8 +3139,47 @@ local strings = {
 
     SI_LUIE_SKILL_DEVOURING_SWARM_GROUND_TP =            "Taking Magic Damage every |cFFFFFF1|r second.\n\nEach tick heals the Vampire.",
 
-    SI_LUIE_SKILL_MEATBAG_CATAPULT_AOE_TP =             "Taking Disease Damage every |cFFFFFF1|r second.\n\nHealing and Health Recovery reduced by |cFFFFFF50|r% for |cFFFFFF6|r seconds whenever you take damage from this effect.",
-    SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_AOE_TP =         "Taking Physical Damage every |cFFFFFF1|r second.\n\nIncrease damage taken from all sources by |cFFFFFF20|r% for |cFFFFFF6|r seconds whenever you take damage from this effect.",
+    SI_LUIE_SKILL_MEATBAG_CATAPULT_AOE_TP =              "Taking Disease Damage every |cFFFFFF1|r second.\n\nHealing and Health Recovery reduced by |cFFFFFF50|r% for |cFFFFFF6|r seconds whenever you take damage from this effect.",
+    SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_AOE_TP =          "Taking Physical Damage every |cFFFFFF1|r second.\n\nIncrease damage taken from all sources by |cFFFFFF20|r% for |cFFFFFF6|r seconds whenever you take damage from this effect.",
+
+    SI_LUIE_SKILL_REVELRY_PIE_TP =                       "Covered in pie! Delicious!.",
+
+    SI_LUIE_SKILL_FROZEN_GROUND_TP =                     "Taking Frost Damage every |cFFFFFF0.5|r seconds and Movement Speed reduced by |cFFFFFF70|r%.",
+    SI_LUIE_SKILL_HURRICANE_GROUND_TP =                  "Taking Frost Damage every |cFFFFFF0.66|r seconds and Movement Speed reduced by |cFFFFFF60|r%.",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_TP =                  "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
+
+    SI_LUIE_SKILL_DEVOUR_HUNGER_TP =                     "Stunned and afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends you will be knocked back for |cFFFFFF1.5|r seconds.",
+    SI_LUIE_SKILL_TORPOR_TP =                            "You are hallucinating.",
+    SI_LUIE_SKILL_COLONIZE_TP =                          "After |cFFFFFF5|r seconds this Fetcherfly Colony will turn into a nest.",
+    SI_LUIE_SKILL_FERAL_GUARDIAN_NPC_TP =                "A grizzly fights at your side. The grizzly remains for |cFFFFFF1|r minute or until killed.",
+    SI_LUIE_SKILL_BASILISK_POWDER_TP =                   "Stunned and Silenced for |cFFFFFF<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_SHADOWY_DUPLICATE_TP =                 "Detonating after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to nearby enemies and stunning them for |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_SHADOWY_BARRIER_TP =                   "Absorbing damage for |cFFFFFF5|r seconds.",
+
+    SI_LUIE_SKILL_FIENDISH_HEALING_TP =                  "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.\n\nHealing doubles in power after |cFFFFFF2|r seconds.\n\nEach tick enrages the Skaafin, increasing damage done by |cFFFFFF20|r%.",
+    SI_LUIE_SKILL_ENRAGE_NIX_OX_TP =                     "Increase damage done by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_SLASH_CLIFF_STRIDER_TP =               "Afflicted with Bleeding Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_CALTROPS_NPC_TP =                      "Taking Physical Damage every |cFFFFFF0.5|r seconds and Movement Speed reduced by |cFFFFFF60|r%.",
+    SI_LUIE_SKILL_WAR_HORN_NPC_TP =                      "Increase Max Health by |cFFFFFF15|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_RADIANT_MAGELIGHT_NPC_TP =             "Revealing nearby stealthed and invisible enemies.\n\nReduce damage taken from stealth attacks by |cFFFFFF50|r%.",
+    SI_LUIE_SKILL_REGENERATION_OGRIM_TP =                "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
+    SI_LUIE_SKILL_SUMMON_SPIDERLING_TP =                 "A spiderling fights at your side. The spiderling remains for |cFFFFFF2|r minutes or until killed.",
+
+    SI_LUIE_SKILL_SOUL_FLAME_TP =                        "Taking Fire Damage every |cFFFFFF1|r second and Movement Speed reduced.", -- TODO: Add duration of snare here when I can find an area I can track it.
+    SI_LUIE_SKILL_UNYIELDING_MACE_TP =                   "Afflicted with Bleeding Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF8|r seconds.\n\nStunned for |cFFFFFF1.5|r seconds.",
+
+    SI_LUIE_SKILL_REFLECTIVE_SHADOWS_TP =                "Reflecting projectiles for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_STEAL_ESSENCE_TP =                     "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals additional Magic Damage if the channel is finished.",
+
+    SI_LUIE_SKILL_DAMPEN_MAGIC_TP =                      "Absorbing |cFFFFFF40|r% of incoming Flame, Frost, Shock, and Magic Damage for |cFFFFFF<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_FLAME_RAY_TP =                         "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals additional Flame Damage if the channel is finished.",
+    SI_LUIE_SKILL_FROST_RAY_TP =                         "Afflicted with Frost Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals additional Frost Damage if the channel is finished.",
+
+    SI_LUIE_SKILL_LACERATE_GARGOYLE_TP =                 "Afflicted with Bleeding Damage every |cFFFFFF2.5|r seconds for |cFFFFFF16.5|r seconds.\n\nKnocked down for |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_VAMPIRIC_TOUCH_GARGOYLE_TP =           "Single target direct damage attacks restore Health.",
 
 }
 

@@ -54,6 +54,7 @@ T.Skill_Minor_Breach                    = GetString(SI_LUIE_SKILL_MINOR_BREACH_T
 T.Skill_Major_Breach                    = GetString(SI_LUIE_SKILL_MAJOR_BREACH_TP)
 T.Skill_Minor_Fracture                  = GetString(SI_LUIE_SKILL_MINOR_FRACTURE_TP)
 T.Skill_Major_Fracture                  = GetString(SI_LUIE_SKILL_MAJOR_FRACTURE_TP)
+T.Skill_Major_Fracture_NPC              = GetString(SI_LUIE_SKILL_MAJOR_FRACTURE_NPC_TP)
 T.Skill_Minor_Vulnerability             = GetString(SI_LUIE_SKILL_MINOR_VULNERABILITY_TP)
 T.Skill_Minor_Maim                      = GetString(SI_LUIE_SKILL_MINOR_MAIM_TP)
 T.Skill_Major_Maim                      = GetString(SI_LUIE_SKILL_MAJOR_MAIM_TP)
@@ -87,6 +88,8 @@ T.Generic_Snare_20                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_
 T.Generic_Snare_20_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_20_NO_DUR_TP)
 T.Generic_Snare_30                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_30_TP)
 T.Generic_Snare_30_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_30_NO_DUR_TP)
+T.Generic_Snare_35                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_35_TP)
+T.Generic_Snare_35_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_35_NO_DUR_TP)
 T.Generic_Snare_40                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_40_TP)
 T.Generic_Snare_40_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_40_NO_DUR_TP)
 T.Generic_Snare_45                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_45_TP)
@@ -156,6 +159,7 @@ T.Generic_Immobilize                    = GetString(SI_LUIE_SKILL_GENERIC_IMMOBI
 T.Generic_Stagger                       = GetString(SI_LUIE_SKILL_GENERIC_STAGGER_TP)
 T.Generic_Stun                          = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP)
 T.Generic_Stun_No_Dur                   = GetString(SI_LUIE_SKILL_GENERIC_STUN_NO_DUR_TP)
+T.Generic_Levitate                      = GetString(SI_LUIE_SKILL_GENERIC_LEVITATE_TP)
 T.Generic_Knockback                     = GetString(SI_LUIE_SKILL_GENERIC_KNOCKBACK_TP)
 T.Generic_Knockdown                     = GetString(SI_LUIE_SKILL_GENERIC_KNOCKDOWN_TP)
 T.Generic_Fear                          = GetString(SI_LUIE_SKILL_GENERIC_FEAR_TP)
@@ -227,6 +231,7 @@ T.Event_Freezing     					= GetString(SI_LUIE_SKILL_EVENT_FREEZING)
 T.Event_Warm     						= GetString(SI_LUIE_SKILL_EVENT_WARM)
 T.Event_Festival_Grog                   = GetString(SI_LUIE_SKILL_EVENT_FESTIVAL_GROG)
 T.Event_Festival_Mints                  = GetString(SI_LUIE_SKILL_EVENT_FESTIVAL_MINTS)
+T.Event_Revelry_Pie                     = GetString(SI_LUIE_SKILL_REVELRY_PIE_TP)
 
 ----------------------------------------------------------------
 -- CHAMPION POINT SKILLS ---------------------------------------
@@ -889,6 +894,8 @@ T.Skill_Wamasu_Static                   = GetString(SI_LUIE_SKILL_WAMASU_STATIC_
 T.Skill_Ancient_Skin                    = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 9)
 T.Skill_Weakness_Lion                   = GetString(SI_LUIE_SKILL_WEAKNESS_LION_TP)
 T.Skill_Hardened_Shell                  = GetString(SI_LUIE_SKILL_HARDENED_SHELL_TP)
+T.Skill_Enrage_Nix_Ox                   = GetString(SI_LUIE_SKILL_ENRAGE_NIX_OX_TP)
+T.Skill_Slash_Cliff_Strider             = GetString(SI_LUIE_SKILL_SLASH_CLIFF_STRIDER_TP)
 
 -- Human NPCs
 T.Skill_Cleave_Stance                   = GetString(SI_LUIE_SKILL_CLEAVE_STANCE_TP)
@@ -911,12 +918,23 @@ T.Skill_Uncanny_Dodge                   = GetString(SI_LUIE_SKILL_UNCANNY_DODGE_
 T.Skill_Block_NPC                       = GetString(SI_LUIE_SKILL_BLOCK_NPC_TP)
 T.Skill_Call_Ally                       = GetString(SI_LUIE_SKILL_CALL_ALLY_TP)
 T.Skill_Ice_Cage                        = GetString(SI_LUIE_SKILL_ICE_CAGE_TP)
+T.Skill_Empower_Atronach                = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_TP)
+T.Skill_Feral_Guardian_NPC              = GetString(SI_LUIE_SKILL_FERAL_GUARDIAN_NPC_TP)
+T.Skill_Basilisk_Powder                 = GetString(SI_LUIE_SKILL_BASILISK_POWDER_TP)
+T.Skill_Shadowy_Duplicate               = GetString(SI_LUIE_SKILL_SHADOWY_DUPLICATE_TP)
+T.Skill_Shadowy_Barrier                 = GetString(SI_LUIE_SKILL_SHADOWY_BARRIER_TP)
+T.Skill_Fiendish_Healing                = GetString(SI_LUIE_SKILL_FIENDISH_HEALING_TP)
+T.Skill_Caltrops_NPC                    = GetString(SI_LUIE_SKILL_CALTROPS_NPC_TP)
+T.Skill_War_Horn_NPC                    = GetString(SI_LUIE_SKILL_WAR_HORN_NPC_TP)
+T.Skill_Radiant_Magelight_NPC           = GetString(SI_LUIE_SKILL_RADIANT_MAGELIGHT_NPC_TP)
+T.Skill_Dampen_Magic                    = GetString(SI_LUIE_SKILL_DAMPEN_MAGIC_TP)
 
 -- Insects
 T.Skill_Hardened_Carapace               = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 15)
 T.Skill_Inject_Larva                    = GetString(SI_LUIE_SKILL_INJECT_LARVA_TP)
 T.Skill_Latch_On                        = GetString(SI_LUIE_SKILL_LATCH_ON_TP)
 T.Skill_Kotu_Gava_Swarm                 = GetString(SI_LUIE_SKILL_KOTU_GAVA_SWARM_TP)
+T.Skill_Colonize                        = GetString(SI_LUIE_SKILL_COLONIZE_TP)
 
 -- Monsters
 T.Skill_Mantikora_Enrage                = GetString(SI_LUIE_SKILL_MANTIKORA_ENRAGE_TP)
@@ -928,6 +946,13 @@ T.Skill_Ice_Pillar                      = GetString(SI_LUIE_SKILL_ICE_PILLAR_TP)
 T.Skill_Summon_Beast                    = GetString(SI_LUIE_SKILL_SUMMON_BEAST_TP)
 T.Skill_Control_Beast                   = GetString(SI_LUIE_SKILL_CONTROL_BEAST_TP)
 T.Skill_Healing_Salve                   = GetString(SI_LUIE_SKILL_HEALING_SALVE_TP)
+T.Skill_Hurricane_Ground                = GetString(SI_LUIE_SKILL_HURRICANE_GROUND_TP)
+T.Skill_Reflective_Shadows              = GetString(SI_LUIE_SKILL_REFLECTIVE_SHADOWS_TP)
+T.Skill_Steal_Essence                   = GetString(SI_LUIE_SKILL_STEAL_ESSENCE_TP)
+T.Skill_Flame_Ray                       = GetString(SI_LUIE_SKILL_FLAME_RAY_TP)
+T.Skill_Frost_Ray                       = GetString(SI_LUIE_SKILL_FROST_RAY_TP)
+T.Skill_Lacerate_Gargoyle               = GetString(SI_LUIE_SKILL_LACERATE_GARGOYLE_TP)
+T.Skill_Vampiric_Touch_Gargoyle         = GetString(SI_LUIE_SKILL_VAMPIRIC_TOUCH_GARGOYLE_TP)
 
 -- Daedra
 T.Skill_Empower_Atronach_Flame          = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_TP)
@@ -940,6 +965,13 @@ T.Skill_Radiance                        = GetString(SI_LUIE_SKILL_RADIANCE_TP)
 T.Skill_Devour_Clannfear                = GetString(SI_LUIE_SKILL_DEVOUR_CLANNFEAR_TP)
 T.Skill_Aura_of_Protection              = GetString(SI_LUIE_SKILL_AURA_OF_PROTECTION_TP)
 T.Skill_Aura_of_Protection_Other        = GetString(SI_LUIE_SKILL_AURA_OF_PROTECTION_OTHER_TP)
+T.Skill_Frozen_Ground                   = GetString(SI_LUIE_SKILL_FROZEN_GROUND_TP)
+T.Skill_Devour_Hunger                   = GetString(SI_LUIE_SKILL_DEVOUR_HUNGER_TP)
+T.Skill_Torpor                          = GetString(SI_LUIE_SKILL_TORPOR_TP)
+T.Skill_Regeneration_Ogrim              = GetString(SI_LUIE_SKILL_REGENERATION_OGRIM_TP)
+T.Skill_Summon_Spiderling               = GetString(SI_LUIE_SKILL_SUMMON_SPIDERLING_TP)
+T.Skill_Soul_Flame                      = GetString(SI_LUIE_SKILL_SOUL_FLAME_TP)
+T.Skill_Unyielding_Mace                 = GetString(SI_LUIE_SKILL_UNYIELDING_MACE_TP)
 
 -- Undead
 T.Skill_Vampiric_Drain                  = GetString(SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP)
@@ -975,12 +1007,19 @@ T.Skill_Shadow_Wood                     = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP
 T.Generic_AOE_Physical_0_5_Sec          = GetString(SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_0_5_SEC)
 T.Generic_AOE_Physical_1_Sec			= GetString(SI_LUIE_SKILL_GENERIC_AOE_PHYSICAL_1_SEC)
 
+T.Generic_AOE_Poison_0_5_Sec            = GetString(SI_LUIE_SKILL_GENERIC_AOE_POISON_0_5_SEC)
+T.Generic_AOE_Poison_0_66_Sec           = GetString(SI_LUIE_SKILL_GENERIC_AOE_POISON_0_66_SEC)
+T.Generic_AOE_Poison_1_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_POISON_1_SEC)
+
+T.Generic_AOE_Disease_0_5_Sec			= GetString(SI_LUIE_SKILL_GENERIC_AOE_DISEASE_0_5_SEC)
 T.Generic_AOE_Disease_1_Sec				= GetString(SI_LUIE_SKILL_GENERIC_AOE_DISEASE_1_SEC)
 
 T.Generic_AOE_Fire_0_5_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_0_5_SEC)
+T.Generic_AOE_Fire_0_9_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_0_9_SEC)
 T.Generic_AOE_Fire_1_Sec                = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_SEC)
 T.Generic_AOE_Frost_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_FROST_1_SEC)
 T.Generic_AOE_Shock_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_SHOCK_1_SEC)
+T.Generic_AOE_Magic_0_5_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_0_5_SEC)
 T.Generic_AOE_Magic_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_1_SEC)
 T.Generic_AOE_Magic_2_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_2_SEC)
 

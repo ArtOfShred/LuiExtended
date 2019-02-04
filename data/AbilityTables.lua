@@ -229,6 +229,7 @@ A.Consumable_Sparkwreath_Dazzler    = GetItemLinkName("|H0:item:114946:1:1:0:0:0
 A.Consumable_Plume_Dazzler          = GetItemLinkName("|H0:item:114947:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Plume Dazzler
 A.Consumable_Spiral_Dazzler         = GetItemLinkName("|H0:item:114948:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Spiral Dazzler
 A.Skill_Sparkly_Hat_Dazzler         = GetItemLinkName("|H0:item:120891:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Sparkly Hat Dazzler
+A.Consumable_Revelry_Pie            = GetItemLinkName("|H0:item:147300:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Revelry Pie
 
 -- Mementos
 A.Memento_Almalexias_Lantern        = GetCollectibleName(341)
@@ -952,6 +953,7 @@ A.Skill_Bog_Burst                   = 72796
 A.Skill_Gore                        = 85202
 A.Skill_Bile_Spit                   = 64559
 A.Skill_Helljoint                   = 14523
+A.Skill_Slash                       = 85390
 
 -- Insects
 A.Skill_Paralyze                    = 6756

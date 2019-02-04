@@ -589,7 +589,7 @@ debugAuras = {
             [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
             [89372] = true, -- Pelted! (Cherry Blossom Branch)
 
-            [116879] = true, -- Alliance Pie (Revelry Pie)
+            --[116879] = true, -- Alliance Pie (Revelry Pie)
             [118833] = true, -- Piessive (Revelry Pie)
             [116933] = true, -- Covered in Pie (Revelry Pie)
             [116935] = true, -- Pie (Revelry Pie)
@@ -597,9 +597,9 @@ debugAuras = {
             [116987] = true, -- Covered in Pie (Revelry Pie)
             [116989] = true, -- Covered in Pie (Revelry Pie)
             [116988] = true, -- Covered in Pie (Revelry Pie)
-            [116942] = true, -- Covered in Pie (Revelry Pie)
-            [116944] = true, -- Covered in Pie (Revelry Pie)
-            [116943] = true, -- Covered in Pie (Revelry Pie)
+            --[116942] = true, -- Covered in Pie (Revelry Pie)
+            --[116944] = true, -- Covered in Pie (Revelry Pie)
+            --[116943] = true, -- Covered in Pie (Revelry Pie)
 
 
 
@@ -608,7 +608,9 @@ debugAuras = {
             [77027] = true, -- Anniversary Cake - Forreals (Jubilee Cake)
             [87998] = true, -- Anniversary Cake (2nd Annual Jubilee Cake)
             [102009] = true, -- Anniversary Cake (3rd Annual Jubilee Cake)
-            --[77123] = true, -- Anniversary EXP Buff (Any Jubilee Cake)
+            [115688] = true, -- Anniversary Cake (2019 Jubilee Cake)
+            [77123] = true, -- Anniversary EXP Buff (Any Jubilee Cake except 2019)
+            [118985] = true, -- Anniversary EXP Buff (2019 Jubilee Cake)
             [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
             [96118] = true, -- Witchmother's Boon (Witchmother's Whistle)
             [84361] = true, -- Witchmother's Brew (Witchmother's Whistle)
@@ -7305,7 +7307,7 @@ debugAuras = {
             [37129] = true, -- Ice Cage -- Battlemage
             [37131] = true, -- Ice Cage -- Battlemage
             [37132] = true, -- Ice Cage -- Battlemage
-            --[44216] = true, -- Negate Magic -- Battlemage
+            [44216] = true, -- Negate Magic -- Battlemage
             [50108] = true, -- Negate Magic -- Battlemage
             [50107] = true, -- Negate Magic -- Battlemage
 
@@ -7426,11 +7428,11 @@ debugAuras = {
             [68867] = true, -- War Horn Battlecry -- Faction NPC
             [68868] = true, -- War Horn Battlecry -- Faction NPC
             [68869] = true, -- War Horn Battlecry -- Faction NPC
+            [38118] = true, -- Caltrops -- Faction NPC
             [43644] = true, -- Barrier [monster synergy] -- Faction NPC
             [43645] = true, -- Barrier [monster synergy] -- Faction NPC
             [43646] = true, -- Barrier [monster synergy] -- Faction NPC
             [41793] = true, -- Anti-Cavalry Caltrops -- Faction NPC
-            [38118] = true, -- Caltrops -- Faction NPC
             [38119] = true, -- Caltrops -- Faction NPC
             [38125] = true, -- Caltrops -- Faction NPC
 
@@ -7630,7 +7632,7 @@ debugAuras = {
             [87068] = true, -- Volcanic Debris (Fire-Binder)
             [87066] = true, -- Volcanic Debris (Fire-Binder)
             [88845] = true, -- Empower Atronach (Fire-Binder)
-            --[92646] = true, -- Volcanic Debris (Fire-Binder)
+            [92646] = true, -- Volcanic Debris (Fire-Binder)
 
             [81545] = true, -- Fright Force (Voidbringer)
             [76621] = true, -- Shadeway (Voidbringer)
@@ -8336,6 +8338,7 @@ debugAuras = {
             [89301] = true, -- Summon Spiderling -- Spider Daedra
             [89302] = true, -- Summon Spiderling -- Spider Daedra
             [89300] = true, -- Summon Spiderling -- Spider Daedra
+            [89299] = true, -- Summon Spiderling -- Spider Daedra
             [89306] = true, -- Web -- Spider Daedra
             [89307] = true, -- Web -- Spider Daedra
 
@@ -8360,9 +8363,10 @@ debugAuras = {
             [83072] = true, -- Frozen Edge -- Xivilai
             [49203] = true, -- Frozen Weapon -- Xivilai
             [88947] = true, -- Lightning Grasp -- Xivilai
-            [88952] = true, -- Lightning Grasp -- Xivilai
             [88951] = true, -- Lightning Grasp -- Xivilai
             [88949] = true, -- Lightning Grasp -- Xivilai
+            [88948] = true, -- Lightning Grasp -- Xivilai
+            [111955] = true, -- Lightning Grasp -- Xivilai
             [7100] = true, -- Hand of Flame -- Xivilai
             [25747] = true, -- Hand of Flame -- Xivilai
             [25749] = true, -- Hand of Flame -- Xivilai
@@ -11547,7 +11551,7 @@ debugAuras = {
             [82898] = true, -- Event - WitchFest Theater (The Witchmother's Bargain)
 
             -- Anniversary Event
-            --[88874] = true, -- Q5936 Destroy Voucher 2017 --
+            [88874] = true, -- Q5936 Destroy Voucher 2017 (Ache for Cake)
 
             -------------------------------------
             -- UNSORTED -------------------------

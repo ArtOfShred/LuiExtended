@@ -286,6 +286,13 @@ function CTL:OnCombatIn(...)
     if S.toggles.showAlertMitigation and AlertT[abilityId] then
         if sourceName ~= nil and sourceName ~= "" and not refireDelay[abilityId] then
 
+            -- Stop spam when enemy is out of line of sight and trying to cast
+            if resultType == ACTION_RESULT_CANT_SEE_TARGET then
+                refireDelay[abilityId] = true
+                callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
+                return
+            end
+
             -- Filter when only a certain event type should fire this
             if AlertT[abilityId].result and resultType ~= AlertT[abilityId].result then return end
             if AlertT[abilityId].eventdetect then return end -- Don't create a duplicate warning if event detection already handles this.
@@ -529,6 +536,13 @@ function CTL:OnCombatAlert(...)
     -- NEW ALERTS
     if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and not refireDelay[abilityId] then
         if not refireDelay[abilityId] then
+
+            -- Stop spam when enemy is out of line of sight and trying to cast
+            if resultType == ACTION_RESULT_CANT_SEE_TARGET then
+                refireDelay[abilityId] = true
+                callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
+                return
+            end
 
             -- Filter when only a certain event type should fire this
             if AlertT[abilityId].result and resultType ~= AlertT[abilityId].result then return end

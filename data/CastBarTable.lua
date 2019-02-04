@@ -296,6 +296,7 @@ CBT.IsCast = {
     [87965] = true, -- Jester's Festival Illusion Daz (Plume Dazzler)
     [87966] = true, -- Jester's Festival Illusion Daz (Spiral Dazzler)
     [88374] = true, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
+    [116879] = true, -- Alliance Pie (Revelry Pie)
     [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
     [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
     [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
