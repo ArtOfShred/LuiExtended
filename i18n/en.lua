@@ -3186,10 +3186,13 @@ local strings = {
     SI_LUIE_SKILL_SUMMON_THE_DEAD_TP =                   "An risen undead companion fights at your side. The undead remains for |cFFFFFF2|r minutes or until killed.",
 
     SI_LUIE_SKILL_BURDENING_EYE_TP =                     "The Burdening Eye seeks out a nearby enemy and explodes, dealing Magic Damage and reducing the targets Movement Speed by |cFFFFFF80|r% for |cFFFFFF2|r seconds.",
-    SI_LUIE_SKILL_SPELL_ABSORPTION_TP =                  "Reduce Flame, Frost, Shock, and Magic Damage taken by |cFFFFFF90|r% for |cFFFFFF<<1>>|r seconds while the channel is maintained."
+    SI_LUIE_SKILL_SPELL_ABSORPTION_TP =                  "Reduce Flame, Frost, Shock, and Magic Damage taken by |cFFFFFF90|r% for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
 
-    SI_LUIE_SKILL_SHARD_SHIELD_TP =                      "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nWhen the shield takes damage, your attacker takes Physical Damage and is stunned for |cFFFFFF1|r seconds.",
+    SI_LUIE_SKILL_SHARD_SHIELD_TP =                      "Absorbing damage for |cFFFFFF5|r minutes.\n\nWhen the shield takes damage, as long as absorption remains, your attacker takes Physical Damage and is stunned for |cFFFFFF1.2|r seconds.",
     SI_LUIE_SKILL_TIL_DEATH_TP =                         "Protected from death by a bodyguard. When you take lethal damage the bodyguard will swap places with you and absorb the killing blow, providing you with immunity to damage and all negative effects for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_TIL_DEATH_SELF_TP =                    "Protecting a nearby ally from death. When your ally takes lethal damage, swap places with them and absorb the killing blow, providing you with immunity to damage and all negative effects for |cFFFFFF3|r seconds.",
+	SI_LUIE_SKILL_DUTIFUL_FURY_TP =						 "Whenever a nearby ally takes damage, your next attack deals |cFFFFFF5|r% additional damage.",
+	SI_LUIE_SKILL_DUTIFUL_FURY_PROC_TP =				 "Your next attack deals |cFFFFFF5|r% additional damage.",
 
 }
 

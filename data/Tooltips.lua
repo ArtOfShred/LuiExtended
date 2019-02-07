@@ -933,6 +933,11 @@ T.Skill_Dampen_Magic                    = GetString(SI_LUIE_SKILL_DAMPEN_MAGIC_T
 T.Skill_Summon_the_Dead                 = GetString(SI_LUIE_SKILL_SUMMON_THE_DEAD_TP)
 T.Skill_Burdening_Eye                   = GetString(SI_LUIE_SKILL_BURDENING_EYE_TP)
 T.Skill_Spell_Absorption                = GetString(SI_LUIE_SKILL_SPELL_ABSORPTION_TP)
+T.Skill_Shard_Shield				    = GetString(SI_LUIE_SKILL_SHARD_SHIELD_TP)
+T.Skill_Til_Death					    = GetString(SI_LUIE_SKILL_TIL_DEATH_TP)
+T.Skill_Til_Death_Self				    = GetString(SI_LUIE_SKILL_TIL_DEATH_SELF_TP)
+T.Skill_Dutiful_Fury					= GetString(SI_LUIE_SKILL_DUTIFUL_FURY_TP)
+T.Skill_Dutiful_Fury_Proc				= GetString(SI_LUIE_SKILL_DUTIFUL_FURY_PROC_TP)
 
 -- Insects
 T.Skill_Hardened_Carapace               = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 15)
