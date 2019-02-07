@@ -7113,11 +7113,11 @@ debugAuras = {
             [38262] = true, -- Ignite -- Synergies (Fire Mage)
             [38260] = true, -- Ignite -- Synergies (Fire Mage)
 
-            [31385] = true, -- Necromancer Synergy Move Back (Cultist)
-            [31390] = true, -- Necromancer Synergy Move Back (Cultist)
-            [31387] = true, -- Necromancer Synergy Kill Self (Cultist)
-            [43756] = true, -- Necromancer Synergy Kill Self (Cultist)
-            [43757] = true, -- Cultist Synergy Cast (Cultist)
+            --[31385] = true, -- Necromancer Synergy Move Back (Cultist)
+            --[31390] = true, -- Necromancer Synergy Move Back (Cultist)
+            --[31387] = true, -- Necromancer Synergy Kill Self (Cultist)
+            --[43756] = true, -- Necromancer Synergy Kill Self (Cultist)
+            --[43757] = true, -- Cultist Synergy Cast (Cultist)
 
             [14096] = true, -- Heavy Attack -- Footsoldier
             [27683] = true, -- Step Back -- Footsoldier

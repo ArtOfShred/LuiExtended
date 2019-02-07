@@ -104,6 +104,8 @@ T.Generic_Snare_70                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_
 T.Generic_Snare_70_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_70_NO_DUR_TP)
 T.Generic_Snare_75                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_75_TP)
 T.Generic_Snare_75_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_75_NO_DUR_TP)
+T.Generic_Snare_80                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_80_TP)
+T.Generic_Snare_80_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_80_NO_DUR_TP)
 T.Generic_Damage_Shield_No_Duration     = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP)
 T.Generic_Damage_Shield_Duration        = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP)
 T.Generic_Weapon_Damage_Duration        = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_TIME_TP)
@@ -928,6 +930,9 @@ T.Skill_Caltrops_NPC                    = GetString(SI_LUIE_SKILL_CALTROPS_NPC_T
 T.Skill_War_Horn_NPC                    = GetString(SI_LUIE_SKILL_WAR_HORN_NPC_TP)
 T.Skill_Radiant_Magelight_NPC           = GetString(SI_LUIE_SKILL_RADIANT_MAGELIGHT_NPC_TP)
 T.Skill_Dampen_Magic                    = GetString(SI_LUIE_SKILL_DAMPEN_MAGIC_TP)
+T.Skill_Summon_the_Dead                 = GetString(SI_LUIE_SKILL_SUMMON_THE_DEAD_TP)
+T.Skill_Burdening_Eye                   = GetString(SI_LUIE_SKILL_BURDENING_EYE_TP)
+T.Skill_Spell_Absorption                = GetString(SI_LUIE_SKILL_SPELL_ABSORPTION_TP)
 
 -- Insects
 T.Skill_Hardened_Carapace               = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 15)

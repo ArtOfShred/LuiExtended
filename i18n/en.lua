@@ -2370,6 +2370,8 @@ local strings = {
 	SI_LUIE_SKILL_GENERIC_SNARE_70_NO_DUR_TP =			 "Movement Speed reduced by |cFFFFFF70|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_75_TP =			         "Movement Speed reduced by |cFFFFFF75|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 	SI_LUIE_SKILL_GENERIC_SNARE_75_NO_DUR_TP =			 "Movement Speed reduced by |cFFFFFF75|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_80_TP =			         "Movement Speed reduced by |cFFFFFF80|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+	SI_LUIE_SKILL_GENERIC_SNARE_80_NO_DUR_TP =			 "Movement Speed reduced by |cFFFFFF80|r%.",
     SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered.",
     SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -3180,6 +3182,14 @@ local strings = {
 
     SI_LUIE_SKILL_LACERATE_GARGOYLE_TP =                 "Afflicted with Bleeding Damage every |cFFFFFF2.5|r seconds for |cFFFFFF16.5|r seconds.\n\nKnocked down for |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_VAMPIRIC_TOUCH_GARGOYLE_TP =           "Single target direct damage attacks restore Health.",
+
+    SI_LUIE_SKILL_SUMMON_THE_DEAD_TP =                   "An risen undead companion fights at your side. The undead remains for |cFFFFFF2|r minutes or until killed.",
+
+    SI_LUIE_SKILL_BURDENING_EYE_TP =                     "The Burdening Eye seeks out a nearby enemy and explodes, dealing Magic Damage and reducing the targets Movement Speed by |cFFFFFF80|r% for |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_SPELL_ABSORPTION_TP =                  "Reduce Flame, Frost, Shock, and Magic Damage taken by |cFFFFFF90|r% for |cFFFFFF<<1>>|r seconds while the channel is maintained."
+
+    SI_LUIE_SKILL_SHARD_SHIELD_TP =                      "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nWhen the shield takes damage, your attacker takes Physical Damage and is stunned for |cFFFFFF1|r seconds.",
+    SI_LUIE_SKILL_TIL_DEATH_TP =                         "Protected from death by a bodyguard. When you take lethal damage the bodyguard will swap places with you and absorb the killing blow, providing you with immunity to damage and all negative effects for |cFFFFFF3|r seconds.",
 
 }
 
