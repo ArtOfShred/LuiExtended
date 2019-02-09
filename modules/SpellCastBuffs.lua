@@ -2302,6 +2302,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local unbreakable
         local duration = E.AddGroundDamageAura[abilityId].duration
         local effectType = E.AddGroundDamageAura[abilityId].type
+        local buffSlot
 
         if E.EffectOverride[abilityId] then
             effectName = E.EffectOverride[abilityId].name or abilityName
@@ -2311,11 +2312,17 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             unbreakable = 0
         end
 
+        if E.AddGroundDamageAura[abilityId].merge then
+            buffSlot = "GroundDamageAura" .. tostring(E.AddGroundDamageAura[abilityId].merge)
+        else
+            buffSlot = abilityId
+        end
+
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
         local context = "player" .. effectType
 
-        g_effectsList[context][ abilityId ] = {
+        g_effectsList[context][ buffSlot ] = {
             type=effectType,
             id=abilityId, name=effectName, icon=iconName,
             dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,

@@ -287,7 +287,7 @@ function CTL:OnCombatIn(...)
         if sourceName ~= nil and sourceName ~= "" and not refireDelay[abilityId] then
 
             -- Stop spam when enemy is out of line of sight and trying to cast
-            if resultType == ACTION_RESULT_CANT_SEE_TARGET then
+            if resultType == ACTION_RESULT_CANT_SEE_TARGET or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE or resultType == ACTION_RESULT_TARGET_TOO_CLOSE or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW or resultType == ACTION_RESULT_TARGET_DEAD or resultType == ACTION_RESULT_BAD_TARGET then
                 refireDelay[abilityId] = true
                 callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
                 return
@@ -538,7 +538,7 @@ function CTL:OnCombatAlert(...)
         if not refireDelay[abilityId] then
 
             -- Stop spam when enemy is out of line of sight and trying to cast
-            if resultType == ACTION_RESULT_CANT_SEE_TARGET then
+            if resultType == ACTION_RESULT_CANT_SEE_TARGET or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE or resultType == ACTION_RESULT_TARGET_TOO_CLOSE or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW or resultType == ACTION_RESULT_TARGET_DEAD or resultType == ACTION_RESULT_BAD_TARGET then
                 refireDelay[abilityId] = true
                 callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
                 return

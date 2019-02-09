@@ -194,18 +194,18 @@ LUIE.AlertTable = {
 
     [7227] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Rotbone (Durzog)
 
-    [6308] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Shocking Touch (Dreugh)
-    [6328] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, refire = 2000 }, -- Shocking Rake (Dreugh)
+    [6308] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Shocking Touch (Dreugh)
+    [6328] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2000 }, -- Shocking Rake (Dreugh)
 
     [54375] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Shockwave (Echatere)
     [54380] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Headbutt (Echatere)
 
-    [4632] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3}, -- Screech (Giant Bat)
-    [4630] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3, refire = 1500}, -- Draining Bite (Giant Bat)
+    [4632] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Screech (Giant Bat)
+    [4630] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3, refire = 1500, result = ACTION_RESULT_BEGIN }, -- Draining Bite (Giant Bat)
 
-    [5240] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Lash (Giant Snake)
-    [5242] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Kiss of Poison (Giant Snake)
-    [5244] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true, refire = 1000}, -- Shed Skin (Giant Snake)
+    [5240] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lash (Giant Snake)
+    [5242] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Kiss of Poison (Giant Snake)
+    [5244] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true }, -- Shed Skin (Giant Snake)
 
     [5441] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dive (Guar)
 
@@ -247,8 +247,8 @@ LUIE.AlertTable = {
     [72796] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bog Burst (Haj Mota)
     [72789] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Shockwave (Haj Mota)
 
-    [76307] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Lunge (Dire Wolf)
-    [76324] = { power = true, auradetect = true, priority = 2, refire = 1000}, -- Baleful Call (Dire Wolf)
+    [76307] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Lunge (Dire Wolf)
+    [76324] = { power = true, auradetect = true, priority = 2, refire = 1000 }, -- Baleful Call (Dire Wolf)
 
     [85201] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Bite (Nix-Ox)
     [85084] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 750, result = ACTION_RESULT_BEGIN }, -- Shriek (Nix-Ox)
@@ -294,8 +294,8 @@ LUIE.AlertTable = {
     [5252] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Fire Bite (Shalk)
     [5262] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, notDirect = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Burning Ground (Shalk)
 
-    [8429] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 750}, -- Zap (Thunderbug)
-    [26412] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Thunderstrikes (Thunderbug)
+    [8429] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 750, result = ACTION_RESULT_BEGIN }, -- Zap (Thunderbug)
+    [26412] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunderstrikes (Thunderbug)
 
     [73172] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN  }, -- Swarm (Kotu Gava Broodmother)
     [73199] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Swarmburst (Kotu Gava Broodmother)
@@ -336,7 +336,7 @@ LUIE.AlertTable = {
     [91937] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Burst of Embers (Daedroth)
 
     [26324] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lava Geyser (Flame Atronach)
-    [50216] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, skipcheck = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Combustion (Flame Atronach)
+    [50216] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Combustion (Flame Atronach)
 
     [5017] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Hoarfrost Fist (Frost Atronach)
     [33502] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Frozen Ground (Frost Atronach)
@@ -396,13 +396,14 @@ LUIE.AlertTable = {
     [88297] = { avoid = true, auradetect = true, priority = 2 }, -- Blast Furnace (Iron Atronach)
 
     -- UNDEAD
-    [8569] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Devastating Leap (Bloodfiend)
+    [8569] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Devastating Leap (Bloodfiend)
 
-    [5050] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true }, -- Bone Saw (Bone Colossus)
+    [5050] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bone Saw (Bone Colossus)
+    [5030] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Voice to Wake the Dead (Bone Colossus)
     [17207] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true }, -- Necromantic Implosion (Risen Dead)
 
-    [18514] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3 }, -- Chill Touch (Ghost)
-    [19137] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Haunting Spectre (Ghost)
+    [18514] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Chill Touch (Ghost)
+    [19137] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Haunting Spectre (Ghost)
 
     [73925] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Soul Cage (Lich)
 
@@ -410,11 +411,12 @@ LUIE.AlertTable = {
 
     [68735] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Vampiric Drain (Vampire)
 
-    [2867] = { block = true, bs = true, dodge = true, priority = 3 }, -- Crushing Leap (Werewolf)
-    [3415] = { block = true, dodge = true, priority = 3, eventdetect = true, refire = 1100 }, -- Flurry (Werewolf)
-    [44055] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Devour (Werewolf)
+    [2867] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Crushing Leap (Werewolf)
+    [3415] = { block = true, dodge = true, priority = 3, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN }, -- Flurry (Werewolf)
+    [44055] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true, result = ACTION_RESULT_BEGIN }, -- Devour (Werewolf)
+    --[5785] = { power = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Blood Scent (Werewolf)
 
-    [4337] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Winter's Reach (Wraith)
+    [4337] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Winter's Reach (Wraith)
 
     [2969] = { block = true, dodge = true, avoid = false, interrupt = false, bs = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Pound (Zombie)
     [2960] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Vomit (Zombie)
@@ -438,10 +440,10 @@ LUIE.AlertTable = {
     [10613] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Fire Bomb (Hagraven)
     [64808] = { power = true, priority = 2, auradetect = true }, -- Briarheart Ressurection (Hagraven)
 
-    [4123] = { block = true, bs = true, dodge = true, priority = 3 }, -- Wing Slice (Harpy)
-    [13515] = { block = true, dodge = true, priority = 3 }, -- Wind Gust (Harpy)
-    [24604] = { avoid = true, interrupt = true, eventdetect = true, priority = 3 }, -- Charged Ground (Harpy)
-    [4689] = { avoid = true, interrupt = true, priority = 3 }, -- Lightning Gale (Harpy)
+    [4123] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Wing Slice (Harpy)
+    [13515] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Wind Gust (Harpy)
+    [24604] = { avoid = true, interrupt = true, eventdetect = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Charged Ground (Harpy)
+    [4689] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Gale (Harpy)
 
     [43809] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true }, -- Shard Burst (Ice Wraith)
     [24866] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Focused Charge (Ice Wraith)
@@ -481,27 +483,28 @@ LUIE.AlertTable = {
     [9322] = { avoid = true, priority = 3, auradetect = true }, -- Poisoned Ground (Strangler)
     [9321] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Grapple (Strangler)
 
-    [44736] = { block = true, dodge = true, priority = 2, eventdetect = true, refire = 2000 }, -- Swinging Cleave (Troll)
-    [9009] = { avoid = true, priority = 2, eventdetect = true, refire = 300 }, -- Tremor (Troll)
+    [44736] = { block = true, dodge = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN }, -- Swinging Cleave (Troll)
+    [9009] = { avoid = true, priority = 2, eventdetect = true, refire = 300, result = ACTION_RESULT_BEGIN }, -- Tremor (Troll)
 
-    [76268] = { block = true, dodge = true, priority = 2 }, -- Lope (River Troll)
-    [76277] = { interrupt = true, notDirect = true, priority = 2, eventdetect = true, refire = 1000 }, -- Close Wounds (River Troll)
-    [76295] = { block = true, avoid = true, priority = 2 }, -- Crab Toss (River Troll)
+    [76268] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Lope (River Troll)
+    [76277] = { interrupt = true, notDirect = true, priority = 2, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Close Wounds (River Troll)
+    [76295] = { block = true, avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Crab Toss (River Troll)
 
-    [48256] = { block = true, avoid = true, priority = 3 }, -- Boulder Toss (Troll - Ranged)
-    [48282] = { interrupt = true, avoid = true, priority = 3, eventdetect = true }, -- Consuming Omen (Troll - Ranged)
+    [48256] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Boulder Toss (Troll - Ranged)
+    [48282] = { interrupt = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Consuming Omen (Troll - Ranged)
 
-    [4309] = { block = true, avoid = true, priority = 3 }, -- Dying Blast (Wisp)
+    [4309] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dying Blast (Wisp)
 
-    [7976] = { avoid = true, priority = 2 }, -- Rain of Wisps (Wispmother)
+    [7976] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Rain of Wisps (Wispmother)
+    [18040] = { power = true, priority = 2, auradetect = true }, -- Clone (Wispmother)
 
-    [75867] = { block = true, bs = true, dodge = true, priority = 2 }, -- Clobber (Minotaur)
-    [75917] = { block = true, dodge = true, eventdetect = true }, -- Ram (Minotaur)
-    [79541] = { block = true, dodge = true, priority = 2, auradetect = true }, -- Flying Leap (Minotaur)
-    [75925] = { power = true, auradetect = 2, priority = 2 }, -- Elemental Weapon (Minotaur)
+    [75867] = { block = true, bs = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Clobber (Minotaur)
+    [75917] = { block = true, dodge = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Ram (Minotaur)
+    [79541] = { block = true, dodge = true, priority = 2, auradetect = true, result = ACTION_RESULT_BEGIN }, -- Flying Leap (Minotaur)
+    [75925] = { power = true, auradetect = 2, priority = 2, ignoreRefresh = true }, -- Elemental Weapon (Minotaur)
 
-    [75951] = { avoid = true, priority = 2 }, -- Brimstone Hailfire (Minotaur Shaman)
-    [75955] = { avoid = true, priority = 2, eventdetect = true, refire = 1000 }, -- Pillars of Nirn (Minotaur Shaman)
+    [75951] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Brimstone Hailfire (Minotaur Shaman)
+    [75955] = { avoid = true, priority = 2, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Pillars of Nirn (Minotaur Shaman)
     [75994] = { power = true, priority = 2, auradetect = true, ignoreRefresh = true }, -- Molten Armor (Minotaur Shaman)
 
     [49499] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Spear Throw (Mantikora)
@@ -511,27 +514,26 @@ LUIE.AlertTable = {
     [56689] = { power = true, priority = 2, auradetect = true }, -- Enraged (Mantikora)
 
     -- DWEMER
+    [16031] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Ricochet Wave (Dwemer Sphere)
+    [7520] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Steam Wall (Dwemer Sphere)
+    [7544] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Quake (Dwemer Sphere)
 
-    [16031] = { avoid = true, interrupt = true, priority = 3 }, -- Ricochet Wave (Dwemer Sphere)
-    [7520] = { block = true, bs = true, dodge = true, priority = 3 }, -- Steam Wall (Dwemer Sphere)
-    [7544] = { block = true, dodge = true, priority = 3, eventdetect = true }, -- Quake (Dwemer Sphere)
+    [11247] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Sweeping Spin (Dwemer Centurion)
+    [11246] = { avoid = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN }, -- Steam Breath (Dwemer Centurion)
 
-    [11247] = { block = true, dodge = true, priority = 2, eventdetect = true }, -- Sweeping Spin (Dwemer Centurion)
-    [11246] = { avoid = true, priority = 2, eventdetect = true, refire = 2000 }, -- Steam Breath (Dwemer Centurion)
-
-    [20507] = { block = true, bs = true, dodge = true, priority = 3 }, -- Double Strike (Dwemer Spider)
-    [7717] = { block = true, avoid = true, priority = 3, eventdetect = true, refire = 1000 }, -- Detonation (Dwemer Spider)
+    [20507] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Double Strike (Dwemer Spider)
+    [7717] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Detonation (Dwemer Spider)
     [19970] = { power = true, priority = 3, auradetect = true }, -- Static Field (Dwemer Spider - Overcharge Synergy)
     --[20207] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
-    [20505] = { block = true, avoid = true, priority = 3, auradetect = true, refire = 1000 }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
-    [20222] = { block = true, avoid = true, priority = 3, auradetect = true, refire = 1000 }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    [20505] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    [20222] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
 
-    [64479] = { block = true, avoid = true, priority = 3 }, -- Thunderbolt (Dwemer Sentry)
+    [64479] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunderbolt (Dwemer Sentry)
 
-    [88668] = { block = true, avoid = true, priority = 3 }, -- Impulse Mine (Dwemer Arquebus)
-    [85270] = { interrupt = true, priority = 3, refire = 1500 }, -- Shock Barrage (Dwemer Arquebus)
-    [85319] = { avoid = true, priority = 3 }, -- Siege Ballista (Dwemer Arquebus)
-    [85326] = { interrupt = true, priority = 3, eventdetect = true, refire = 1000, notDirect = true }, -- Polarizing Field (Dwemer Arquebus)
+    [88668] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Impulse Mine (Dwemer Arquebus)
+    [85270] = { interrupt = true, priority = 3, refire = 1500, result = ACTION_RESULT_BEGIN }, -- Shock Barrage (Dwemer Arquebus)
+    [85319] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Siege Ballista (Dwemer Arquebus)
+    [85326] = { interrupt = true, priority = 3, eventdetect = true, refire = 1000, notDirect = true, result = ACTION_RESULT_BEGIN }, -- Polarizing Field (Dwemer Arquebus)
 
     --------------------------------------------------
     -- FRIENDLY NPC ----------------------------------
