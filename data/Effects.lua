@@ -1675,15 +1675,15 @@ E.EffectOverrideByName = {
 E.EffectSourceOverride = {
 
     -- PLAYER ABILITIES
-    [71678] = {pet = 'Morkuldin'}, -- Light Attack {Morkuldin} -- TODO: Localize
-    [71679] = {pet = 'Morkuldin'}, -- Cleave {Morkuldin} -- TODO: Localize
+    [71678] = { pet = 'Morkuldin' }, -- Light Attack {Morkuldin} -- TODO: Localize
+    [71679] = { pet = 'Morkuldin' }, -- Cleave {Morkuldin} -- TODO: Localize
 
     -- BATTLEGROUNDS
 
     -- TRAPS
-    [62769] = {source = A.Trap_Cold_Fire_Trap}, -- Coldharbour Flames {MQ Tutorial}
-    [62770] = {source = A.Trap_Cold_Fire_Trap}, -- Coldharbour Flames {MQ Tutorial}
-    [17314] = {source = A.Trap_Fire_Trap}, -- Fire Trap (Fire Trap)
+    [62769] = { source = A.Trap_Cold_Fire_Trap }, -- Coldharbour Flames {MQ Tutorial}
+    [62770] = { source = A.Trap_Cold_Fire_Trap }, -- Coldharbour Flames {MQ Tutorial}
+    [17314] = { source = A.Trap_Fire_Trap }, -- Fire Trap (Fire Trap)
 
     -- TRAPS (Go back over these)
     [92150] = {source = 'Dwarven Furnace'}, -- Fire Trap {Vvardenfell}
@@ -7683,7 +7683,7 @@ E.EffectOverride = {
     -- Traps & World Hazards
     [62230] = { hide = true }, -- Coldharbour Flames (Flame Trap)
     [62771] = { hide = true }, -- Coldharbour Flames (Flame Trap)
-    [62769] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_coldharbour_flames.dds', name = A.Trap_Cold_Fire_Trap }, -- Coldharbour Flames (Flame Trap)
+    [62769] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_coldharbour_flames.dds', name = A.Trap_Cold_Fire_Trap, tooltip = T.Generic_Burn_2_Sec }, -- Coldharbour Flames (Flame Trap)
     [62770] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_coldharbour_flames.dds', name = A.Trap_Cold_Fire_Trap }, -- Coldharbour Flames (Flame Trap)
 
     [20888] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds' }, -- Falling Rocks (Falling Rocks)
@@ -7755,19 +7755,19 @@ E.EffectOverride = {
     [63270] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Wall_of_Flames, hide = true }, -- Heat Wave
     [63737] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds' }, -- Heavy Attack (Dremora Churl)
     [63684] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing }, -- Uppercut (Dremora Caitiff)
-    [63685] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing }, -- Uppercut Stun (Dremora Caitiff)
+    [63685] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing, tooltip = T.Generic_Knockback }, -- Uppercut Stun (Dremora Caitiff)
     [63686] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing }, -- Uppercut (Dremora Caitiff)
     [63761] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds' }, -- Pound (Feral Soul Shriven)
     [63752] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Feral Soul Shriven)
     [63753] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Feral Soul Shriven)
     [63755] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds' }, -- Heat Wave (Skeletal Pyromancer)
     [63756] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds', hide = true }, -- Heat Wave - Used by Skeletal Pyromancer in Tutorial }, -- Heat Wave (Skeletal Pyromancer)
-    [64072] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1 }, -- Eye of the Sentinel (CH Tutorial)
-    [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds' }, -- Focused Healing (The Prophet)
+    [64072] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1, tooltip = T.Generic_Stun_No_Dur, stack = 0 }, -- Eye of the Sentinel (CH Tutorial)
+    [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds', tooltip = T.Skill_Regeneration_Ogrim }, -- Focused Healing (The Prophet)
     [48346] = { hide = true }, -- Minor Wound (The Prophet)
     [63521] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds', name = A.Skill_Stomp }, -- Bone Crush (Child of Bones)
     [63522] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds', name = A.Skill_Stomp }, -- Bone Saw (Child of Bones)
-    [61646] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_incapacitating_terror.dds', duration = 0}, -- Incapacitating Terror
+    [61646] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_incapacitating_terror.dds', duration = 0, tooltip = T.Skill_Incapacitating_Terror }, -- Incapacitating Terror
     [64074] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_incapacitating_terror.dds'}, -- Incapacitating Terror
     [75514] = { hide = true }, -- Greater Protection - CH Tutorial pointless aura
     [1718] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Light_Attack }, -- Attack

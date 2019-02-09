@@ -1014,6 +1014,7 @@ T.Skill_Static_Charge                   = GetString(SI_LUIE_SKILL_STATIC_CHARGE_
 -- QUESTS ------------------------------------------------------
 ----------------------------------------------------------------
 
+T.Skill_Incapacitating_Terror           = GetString(SI_LUIE_SKILL_INCAPACITATING_TERROR_TP)
 T.Skill_Divine_Speed                    = GetString(SI_LUIE_SKILL_DIVINE_SPEED_TP)
 T.Skill_Lightning_Fury                  = GetString(SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP)
 T.Skill_Blacksaps_Brew                  = GetString(SI_LUIE_SKILL_BLACKSAPS_BREW_TP)

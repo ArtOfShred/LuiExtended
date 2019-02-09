@@ -545,16 +545,16 @@ LUIE.AlertTable = {
     -- MAIN QUEST ------------------------------------
     --------------------------------------------------
 
+    -- MSQ Tutorial (Soul Shriven in Coldharbour)
    -- [61748] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 1}, -- Heavy Attack (Tutorial) -- Default game tutorials display regardless
    -- [61916] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 1}, -- Heat Wave (Tutorial) -- Default game tutorials display regardless
-
-    -- MSQ Tutorial (Soul Shriven in Coldharbour)
-    [63737] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Heavy Attack (Tutorial)
-    [63684] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Uppercut (Tutorial)
-    [63761] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Pound (Tutorial)
-    [63752] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Vomit (Tutorial)
-    [63755] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Heat Wave (Tutorial)
-    [63521] = { block = true, dodge = true, priority = 3, eventdetect = true }, -- Bone Crush (Tutorial)
+    [63269] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Heat Wave (Tutorial)
+    [63737] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Tutorial)
+    [63684] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Uppercut (Tutorial)
+    [63761] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Pound (Tutorial)
+    [63752] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Vomit (Tutorial)
+    [63755] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Heat Wave (Tutorial)
+    [63521] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bone Crush (Tutorial)
 
     -- MSQ 2 (Daughter of Giants)
     [27767] = { block = true, bs = true, dodge = true, priority = 2 }, -- Rending Leap (Ancient Clannfear)
@@ -640,7 +640,6 @@ LUIE.AlertTable = {
     -- Tutorial
     -- [83416] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 1}, -- Heavy Attack (Tutorial) -- Default game tutorials display regardless
     -- [92233] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 1}, -- Throw Dagger (Tutorial) -- Default game tutorials display regardless
-    [63269] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Heat Wave (Tutorial)
 
     -- Main Quest
     [87958] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 2 }, -- Ash Storm (Divine Delusions)
