@@ -1042,6 +1042,8 @@ debugAuras = {
             [80864] = true, -- Hoarvor Mask
             [80489] = true, -- Hoarvor Mask
             [80490] = true, -- Velidreth
+            [80859] = true, -- Hoarvor Mask
+            [80863] = true, -- Hoarvor Mask
 
             [111352] = true, -- Vykosa
             [111354] = true, -- Major Maim
@@ -9116,6 +9118,51 @@ debugAuras = {
             [87712] = true, -- Enraged (Mantikora)
             [56689] = true, -- Enraged (Mantikora)
 
+            [105459] = true, -- Triggered (Yaghra Strider)
+            [103777] = true, -- Lacerate (Yaghra Strider)
+            [103778] = true, -- Lacerate (Yaghra Strider)
+            [105432] = true, -- Lacerate (Yaghra Strider)
+            [105433] = true, -- Lacerate (Yaghra Strider)
+            [103780] = true, -- Bleeding Laceratation (Yaghra Strider)
+            [104479] = true, -- Reave (Yaghra Strider)
+            [104509] = true, -- Reave (Yaghra Strider)
+            [104508] = true, -- Reave (Yaghra Strider)
+            [105214] = true, -- Lunge (Yaghra Strider)
+            [110418] = true, -- Lunge (Yaghra Strider)
+            [105220] = true, -- Lunge (Yaghra Strider)
+            [105221] = true, -- Lunge (Yaghra Strider)
+            [105285] = true, -- Lunge (Yaghra Strider)
+            [105330] = true, -- Frenzy (Yaghra Strider)
+            [105428] = true, -- Frenzy (Yaghra Strider)
+            [109469] = true, -- Frenzy (Yaghra Strider)
+
+            [103776] = true, -- Slash (Yaghra Strider)
+            [103775] = true, -- Chop (Yaghra Strider)
+            [103784] = true, -- Dazed Snare (Yaghra Strider)
+            [103786] = true, -- Purge (Yaghra Strider)
+            [103804] = true, -- Deluge (Yaghra Strider)
+            [103810] = true, -- Deluge (Yaghra Strider)
+            [103812] = true, -- Deluge (Yaghra Strider)
+            [103852] = true, -- Deluge (Yaghra Strider)
+            [103805] = true, -- Deluge (Yaghra Strider)
+            [103849] = true, -- Deluge (Yaghra Strider)
+            [103856] = true, -- Deluge (Yaghra Strider)
+            [103857] = true, -- Deluge (Yaghra Strider)
+            [103821] = true, -- YAGRAN Deluge AoE2 (Yaghra Strider)
+            [103850] = true, -- Deluge (Yaghra Strider)
+            [103858] = true, -- Deluge (Yaghra Strider)
+            [103862] = true, -- Deluge (Yaghra Strider)
+            [103864] = true, -- Deluge (Yaghra Strider)
+            [103931] = true, -- Luminescent Mark (Yaghra Strider)
+            [103955] = true, -- Knockback (Yaghra Strider)
+            [103954] = true, -- Stun (Yaghra Strider)
+            [103993] = true, -- Luminescent Mark (Yaghra Strider)
+            [103958] = true, -- Luminescent Mark (Yaghra Strider)
+            [103957] = true, -- Luminescent Mark (Yaghra Strider)
+            [103973] = true, -- Luminescent Mark (Yaghra Strider)
+            [103991] = true, -- Luminescent Mark (Yaghra Strider)
+            [103992] = true, -- Luminescent Burn (Yaghra Strider)
+
             -------------------------------------
             -- MORROWIND DLC NPCS ---------------
             -------------------------------------
@@ -10281,6 +10328,8 @@ debugAuras = {
             [39776] = true, -- GW CTen BosmVKhaj Calm Ending (Peacemaker Achievement Location)
             [39649] = true, -- GW CTen KhajVAltm Happy Comp (Peacemaker Achievement Location)
             [39650] = true, -- GW CTen KhajVAltm Sad Comp (Peacemaker Achievement Location)
+            [60390] = true, -- Visability (Misc)
+            [39638] = true, -- GW CulTen BosVSAlt Happy Comp (Peacemaker Achievement Location)
 
             -- World Boss - Nindaeril's Perch
             [70466] = true, -- 35% Boss Speed Buff (Nindaeril the Monsoon)
@@ -10811,6 +10860,7 @@ debugAuras = {
             -- Tutorial
             [89095] = true, -- Slaver Clothes
             [92087] = true, -- Slaver Clothes
+            [92100] = true, -- Slaver Clothes
             [92106] = true, -- Slaver Clothes
             [92108] = true, -- Slaver Clothes
             [89096] = true, -- Slaver Clothes
@@ -10839,6 +10889,7 @@ debugAuras = {
             [88905] = true, -- Metal Trap
             [22337] = true, -- Generic Fade to Black 2s
             [92002] = true, -- Waking
+            [106162] = true, -- Not CC Immune
 
             -- Tutorial NPC's
             [92668] = true, -- Whirlwind (Slaver Cutthroat)
@@ -10985,6 +11036,7 @@ debugAuras = {
             [89564] = true, -- Knockout
             [93289] = true, -- Q5922 Stun Capt
             [88244] = true, -- The Slavemaster's Chains
+            [43148] = true, -- CV Delay 10 Minutes
 
             -- Divine Delusions
             [86972] = true, -- Q5888 Chodala Magic Shield Fx
@@ -11265,6 +11317,57 @@ debugAuras = {
 
             [90597] = true, -- Overcharge Explusion
             [90598] = true, -- Overcharge Explusion
+
+            -------------------------------------
+            -- SUMMERSET QUESTS/EVENTS ----------
+            -------------------------------------
+
+            [107581] = true, -- Mind Haze
+            [107747] = true, -- Mind Trap
+            [100672] = true, -- MQ1 Input Lock Visual
+            [100678] = true, -- Major Protection
+            [100671] = true, -- Heavy Attack
+            [100683] = true, -- Block Me
+            [100677] = true, -- Block Me
+            [100686] = true, -- Off-Balance
+            [100694] = true, -- Off-Balance
+            [100687] = true, -- Off-Balance
+            [100690] = true, -- Off-Balance
+            [100722] = true, -- Heat Wave
+            [100733] = true, -- Heat Wave
+
+            [108553] = true, -- Generic ANY Stun 4s
+            [106862] = true, -- SU Tutorial Touch PearlFail
+
+            [105498] = true, -- Flog (Yaghra Larva)
+            [105540] = true, -- Body Bash (Yaghra Larva)
+            [105561] = true, -- Momentous Discharge (Yaghra Larva)
+            [105563] = true, -- Momentous Discharge (Yaghra Larva)
+            [105562] = true, -- Momentous Discharge (Yaghra Larva)
+            [105601] = true, -- Explosive Toxins (Yaghra Larva)
+            [108773] = true, -- Explosive Toxins (Yaghra Larva)
+            [105605] = true, -- Explosive Toxins (Yaghra Larva)
+            [105604] = true, -- Explosive Toxins (Yaghra Larva)
+
+            [105737] = true, -- Stab (Yaghra Nightmare)
+            [105739] = true, -- Stab (Yaghra Nightmare)
+            [107282] = true, -- Impale (Yaghra Nightmare)
+            [107284] = true, -- Impale (Yaghra Nightmare)
+            [107299] = true, -- Impale (Yaghra Nightmare)
+
+            [105867] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105876] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105874] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105877] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105878] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105879] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105880] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105881] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105873] = true, -- Pustulant Eruption (Yaghra Nightmare)
+
+            [105889] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105912] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105893] = true, -- Pustulant Film (Yaghra Nightmare)
 
             -------------------------------------
             -- CYRODIIL -------------------------

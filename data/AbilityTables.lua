@@ -913,6 +913,7 @@ A.Skill_Clobber                     = 24671
 A.Skill_Shadowy_Barrier             = GetString(SI_LUIE_SKILL_SHADOWY_BARRIER)
 A.Skill_Flare_Trap                  = 74628
 A.Skill_Heated_Blades               = 44208
+A.Skill_Bear_Trap                   = 39058
 
 -- Justice
 A.Skill_Criminals_Bane              = 63145
@@ -1124,6 +1125,9 @@ A.Skill_Fire                        = 33594
 A.Skill_Burrow                      = 8974
 A.Skill_Serpent_Spit                = GetString(SI_LUIE_SKILL_SERPENT_SPIT)
 A.Skill_Shadow_Wood                 = GetString(SI_LUIE_SKILL_SHADOW_WOOD)
+
+-- SUMMERSET
+A.Skill_Pustulant_Eruption          = 105867
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

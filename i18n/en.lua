@@ -2340,6 +2340,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_AOE_SHOCK_0_7_SEC =            "Taking Shock Damage every |cFFFFFF0.75|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_SHOCK_1_SEC =              "Taking Shock Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_MAGIC_0_5_SEC =            "Taking Magic Damage every |cFFFFFF0.5|r seconds.",
+    SI_LUIE_SKILL_GENERIC_AOE_MAGIC_0_66_SEC =           "Taking Magic Damage every |cFFFFFF0.7|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_MAGIC_1_SEC =              "Taking Magic Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_MAGIC_2_SEC =              "Taking Magic Damage every |cFFFFFF2|r seconds.",
 
@@ -2378,6 +2379,8 @@ local strings = {
 	SI_LUIE_SKILL_GENERIC_SNARE_15_NO_DURTP =			 "Movement Speed reduced by |cFFFFFF15|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_20_TP =			         "Movement Speed reduced by |cFFFFFF20|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 	SI_LUIE_SKILL_GENERIC_SNARE_20_NO_DUR_TP =			 "Movement Speed reduced by |cFFFFFF20|r%.",
+	SI_LUIE_SKILL_GENERIC_SNARE_25_TP =			         "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+	SI_LUIE_SKILL_GENERIC_SNARE_25_NO_DUR_TP =			 "Movement Speed reduced by |cFFFFFF25|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_30_TP =			         "Movement Speed reduced by |cFFFFFF30|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 	SI_LUIE_SKILL_GENERIC_SNARE_30_NO_DUR_TP =			 "Movement Speed reduced by |cFFFFFF30|r%.",
 	SI_LUIE_SKILL_GENERIC_SNARE_35_TP =			         "Movement Speed reduced by |cFFFFFF35|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -2399,6 +2402,7 @@ local strings = {
 	SI_LUIE_SKILL_GENERIC_SNARE_80_TP =			         "Movement Speed reduced by |cFFFFFF80|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 	SI_LUIE_SKILL_GENERIC_SNARE_80_NO_DUR_TP =			 "Movement Speed reduced by |cFFFFFF80|r%.",
     SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_IMMOBILIZE_NO_DUR_TP =         "Immobilized.",
     SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered.",
     SI_LUIE_SKILL_GENERIC_STUN_TP =                      "Stunned for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_STUN_NO_DUR_TP =               "Stunned.",
@@ -2862,6 +2866,11 @@ local strings = {
 
     SI_LUIE_SKILL_LAVA_TRAP =                            "Lava Trap",
     SI_LUIE_SKILL_LIGHTNING_TRAP =                       "Lightning Trap",
+    SI_LUIE_SKILL_SPIKE_TRAP_TP =                        "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF5|r seconds.\n\nImmobilized for |cFFFFFF0.8|r seconds.",
+
+    SI_LUIE_SKILL_FIRE_TRAP_TP =                         "Taking Flame Damage every |cFFFFFF0.75|r seconds and Movement Speed reduced by |cFFFFFF50|r%.",
+
+    SI_LUIE_SKILL_SPIKE_TRAP_AURIDON_TP =                "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF10|r seconds.\n\nThis effect stacks up to |cFFFFFF3|r times, to a maximum of |cFFFFFF75|r% Movement Speed reduction.\n\nStunned for |cFFFFFF1|r second.",
 
 	----------------------------------------------------------------
     -- SETS --------------------------------------------------------
@@ -3190,6 +3199,8 @@ local strings = {
     SI_LUIE_SKILL_STATIC_CHARGE_TP =                     "Residual static energy from the Dolmen is suppressing your Health Recovery and you will be targeted by Static Charge, taking Oblivion damage.\n\nMove to reduce to the static buildup.",
 
     SI_LUIE_SKILL_INCAPACITATING_TERROR_TP =             "Feared and taking Frost Damage every |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_SPIRITUAL_CLOAK_TP =                   "Prevent Soul Thirsters from pulling you into the spirit realm.",
+    SI_LUIE_SKILL_BLESSING_GATHWEN_TP =                  "Reduce damage taken by |cFFFFFF3|r% for |cFFFFFF<<1>>|r seconds.",
 
 }
 

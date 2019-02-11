@@ -442,6 +442,11 @@ function CI.OnPlayerActivated( eventCode )
     CI.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, GetUnitPower("player", POWERTYPE_ULTIMATE))
 end
 
+local savedPlayerX = 0
+local savedPlayerZ = 0
+local playerX = 0
+local playerZ = 0
+
 -- Updates all floating labels. Called every 100ms
 function CI.OnUpdate(currentTime)
 
@@ -518,6 +523,19 @@ function CI.OnUpdate(currentTime)
     if CI.SV.UltimateGeneration then
         if not uiUltimate.Texture:IsHidden() and uiUltimate.FadeTime < currentTime then
             uiUltimate.Texture:SetHidden(true)
+        end
+    end
+
+    -- Break castbar when movement interrupt is detected for certain effects.
+    savedPlayerX = playerX
+    savedPlayerZ = playerZ
+    playerX, playerZ = GetMapPlayerPosition("player")
+
+    if savedPlayerX == playerX and savedPlayerZ == playerZ then
+        return
+    else
+        if CBT.BreakCastOnMove[castbar.id] then
+            CI.StopCastBar()
         end
     end
 
@@ -955,6 +973,7 @@ function CI.CreateCastBar()
         ["name"] = UI.Label( castbar, nil, nil, nil, nil, g_castbarFont, false ),
         ["timer"] = UI.Label( castbar, nil, nil, nil, nil, g_castbarFont, false ),
     }
+    castbar.id = 0
 
     castbar.bar.backdrop:SetEdgeTexture("",8,2,2)
     castbar.bar.backdrop:SetDrawLayer(DL_BACKDROP)
@@ -1100,8 +1119,8 @@ function CI.SoulGemResurrectionStart(eventCode, durationMs)
     castbar.starts = currentTime
     castbar.ends = endTime
     castbar.icon:SetTexture(icon)
-castbar.type = 1 -- CAST
-                    castbar.bar.bar:SetValue(0)
+    castbar.type = 1 -- CAST
+    castbar.bar.bar:SetValue(0)
 
     if CI.SV.CastBarLabel then
         castbar.bar.name:SetText(name)
@@ -1127,6 +1146,8 @@ function CI.OnCombatEventBreakCast( eventCode, result, isError, abilityName, abi
 
     -- Some cast/channel abilities (or effects we use to simulate this) stun the player - ignore the effects of these ids when this happens.
     if CBT.IgnoreCastBarStun[abilityId] then return end
+
+    if CBT.IgnoreCastBreakingActions[castbar.id] then return end
 
     if not CBT.IsCast[abilityId] then
         CI.StopCastBar()
@@ -1157,7 +1178,9 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
 
 	-- Stop when a cast breaking action is detected
     if CBT.CastBreakingActions[abilityId] then
-        CI.StopCastBar()
+        if not CBT.IgnoreCastBreakingActions[castbar.id] then
+            CI.StopCastBar()
+        end
     end
 
     if not CBT.IsCast[abilityId] then
@@ -1183,6 +1206,8 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
 		-- End the cast bar and restart if a new begin event is detected and the effect isn't a channel or fake cast
 		if result == ACTION_RESULT_BEGIN and not channeled and not CBT.CastDurationFix[abilityId] then
 			CI.StopCastBar()
+        elseif result == ACTION_RESULT_EFFECT_GAINED and channeled then
+            CI.StopCastBar()
 		end
 
         if CBT.CastChannelConvert[abilityId] then
@@ -1221,6 +1246,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
                 castbar.starts = currentTime
                 castbar.ends = endTime
                 castbar.icon:SetTexture(icon)
+                castbar.id = abilityId
 
                 if channeled then
                     castbar.type = 2 -- CHANNEL

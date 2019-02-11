@@ -2,6 +2,7 @@ LUIE.CombatTextEventViewer = ZO_Object:Subclass()
 local CTV = LUIE.CombatTextEventViewer
 
 local C = LUIE.CombatTextConstants
+local E = LUIE.Effects
 local strfmt = string.format
 local callbackManager = CALLBACK_MANAGER
 local gsub = string.gsub
@@ -156,12 +157,21 @@ function CTV:ControlLayout(control, abilityId, combatType, sourceName)
     local width, height = control.label:GetTextDimensions()
 
     if abilityId then
-        local iconPath = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon or GetAbilityIcon(abilityId)
+        local iconPath = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].icon or GetAbilityIcon(abilityId)
 
-        if LUIE.Effects.EffectOverrideByName[abilityId] then
+        if E.EffectOverrideByName[abilityId] then
             sourceName = zo_strformat("<<t:1>>", sourceName)
-            if LUIE.Effects.EffectOverrideByName[abilityId][sourceName] and LUIE.Effects.EffectOverrideByName[abilityId][sourceName].icon then
-                iconPath = LUIE.Effects.EffectOverrideByName[abilityId][sourceName].icon
+            if E.EffectOverrideByName[abilityId][sourceName] and E.EffectOverrideByName[abilityId][sourceName].icon then
+                iconPath = E.EffectOverrideByName[abilityId][sourceName].icon
+            end
+        end
+
+        if E.MapDataOverride[abilityId] then
+            local index = GetCurrentMapZoneIndex()
+            if E.MapDataOverride[abilityId][index] then
+                if E.MapDataOverride[abilityId][index].icon then
+                    iconPath = E.MapDataOverride[abilityId][index].icon
+                end
             end
         end
 

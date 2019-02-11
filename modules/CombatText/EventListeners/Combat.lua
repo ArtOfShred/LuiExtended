@@ -178,6 +178,15 @@ function CTL:OnCombatIn(...)
         end
     end
 
+    if E.MapDataOverride[abilityId] then
+        local index = GetCurrentMapZoneIndex()
+        if E.MapDataOverride[abilityId][index] then
+            if E.MapDataOverride[abilityId][index].name then
+                abilityName = E.MapDataOverride[abilityId][index].name
+            end
+        end
+    end
+
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//RESULTS//--
 ---------------------------------------------------------------------------------------------------------------------------------------

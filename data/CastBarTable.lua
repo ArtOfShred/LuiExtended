@@ -34,6 +34,22 @@ CBT.CastBreakingActions = {
 
 }
 
+CBT.BreakCastOnMove = {
+
+    -- Aldmeri Quests
+    [21364] = true, -- Casting... (The Serpent's Beacon)
+    [21409] = true, -- Reading... (The Serpent's Beacon)
+    [21393] = true, -- Q4220 PC Chooses to Rescue
+    [22931] = true, -- Freeing Spirit... (An Act of Kindness)
+
+}
+
+CBT.IgnoreCastBreakingActions = {
+
+    --[21112] = true, -- Q4220 PC Forced to L0
+
+}
+
 --------------------------------------------------------------------------------------------------------------------------------
 --  List of abilities flagged for CombatInfo to show as a Channel on the Cast Bar
 --------------------------------------------------------------------------------------------------------------------------------
@@ -223,8 +239,12 @@ CBT.CastDurationFix = {
     -- Main Story Quest
     [39367] = 10000, -- Altar Use (Shadow of Sancre Tor)
     [36421] = 3000, -- Drink with Lyris (Council of the Five Companions)
+
+    -- Aldmeri Quests
     [34701] = 1950, -- Q4621 Destory Horn (The Tempest Unleashed)
     [22448] = 3000, -- Q4266 Tie up Hendil (The First Patient)
+    [21393] = 2500, -- Q4220 PC Chooses to Rescue (The Mallari-Mora)
+    --[21112] = 1500, -- Q4220 PC Forced to L0
     [22271] = 3000, -- Teleport Scroll AB (Depths of Madness)
     [23187] = 2000, -- Q4236 PC Untie Palith (The Veiled Choice)
     [47301] = 3000, -- Stunned (Passage Denied)
@@ -533,7 +553,8 @@ CBT.IsCast = {
     [22448] = true, -- Q4266 Tie up Hendil (The First Patient)
     [22271] = true, -- Teleport Scroll AB (Depths of Madness)
     [21968] = true, -- Binding Bear... (Silent Village)
-    [21040] = true, -- Q4220 Spirit Layer Ability (The Mallari-Mora)
+    [21393] = true, -- Q4220 PC Chooses to Rescue (The Mallari-Mora)
+    --[21112] = true, -- Q4220 PC Forced to L0
     [22931] = true, -- Freeing Spirit... (An Act of Kindness)
     [23187] = true, -- Q4236 PC Untie Palith (The Veiled Choice)
     [47301] = true, -- Stunned (Passage Denied)

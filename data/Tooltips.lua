@@ -86,6 +86,8 @@ T.Generic_Snare_15                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_
 T.Generic_Snare_15_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_15_NO_DUR_TP)
 T.Generic_Snare_20                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_20_TP)
 T.Generic_Snare_20_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_20_NO_DUR_TP)
+T.Generic_Snare_25                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_25_TP)
+T.Generic_Snare_25_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_25_NO_DUR_TP)
 T.Generic_Snare_30                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_30_TP)
 T.Generic_Snare_30_No_Dur               = GetString(SI_LUIE_SKILL_GENERIC_SNARE_30_NO_DUR_TP)
 T.Generic_Snare_35                      = GetString(SI_LUIE_SKILL_GENERIC_SNARE_35_TP)
@@ -159,6 +161,7 @@ T.Generic_Off_Balance_Immunity          = GetString(SI_LUIE_SKILL_GENERIC_OFF_BA
 T.Generic_Snare                         = GetString(SI_LUIE_SKILL_GENERIC_SNARE_TP)
 T.Generic_Snare_No_Dur                  = GetString(SI_LUIE_SKILL_GENERIC_SNARE_NO_DUR_TP)
 T.Generic_Immobilize                    = GetString(SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP)
+T.Generic_Immobilize_No_Dur             = GetString(SI_LUIE_SKILL_GENERIC_IMMOBILIZE_NO_DUR_TP)
 T.Generic_Stagger                       = GetString(SI_LUIE_SKILL_GENERIC_STAGGER_TP)
 T.Generic_Stun                          = GetString(SI_LUIE_SKILL_GENERIC_STUN_TP)
 T.Generic_Stun_No_Dur                   = GetString(SI_LUIE_SKILL_GENERIC_STUN_NO_DUR_TP)
@@ -882,6 +885,11 @@ T.Skill_Mark_of_the_Worm                = GetString(SI_LUIE_SKILL_MARK_OF_THE_WO
 T.Skill_Lava                            = GetString(SI_LUIE_SKILL_LAVA_SNARE_TP)
 T.Skill_Slaughterfish_Attack            = GetString(SI_LUIE_SKILL_SLAUGHTERFISH_ATTACK_TP)
 
+T.Skill_Spike_Trap                      = GetString(SI_LUIE_SKILL_SPIKE_TRAP_TP)
+T.Skill_Fire_Trap                       = GetString(SI_LUIE_SKILL_FIRE_TRAP_TP)
+
+T.Skill_Spike_Trap_Auridon              = GetString(SI_LUIE_SKILL_SPIKE_TRAP_AURIDON_TP)
+
 ----------------------------------------------------------------
 -- NPCS ------------------------------------------------------
 ----------------------------------------------------------------
@@ -1014,7 +1022,12 @@ T.Skill_Static_Charge                   = GetString(SI_LUIE_SKILL_STATIC_CHARGE_
 -- QUESTS ------------------------------------------------------
 ----------------------------------------------------------------
 
+-- MQS
 T.Skill_Incapacitating_Terror           = GetString(SI_LUIE_SKILL_INCAPACITATING_TERROR_TP)
+
+-- Aldmeri Quests
+T.Skill_Blessing_Gathwen                = GetString(SI_LUIE_SKILL_BLESSING_GATHWEN_TP)
+T.Skill_Spiritual_Cloak                 = GetString(SI_LUIE_SKILL_SPIRITUAL_CLOAK_TP)
 T.Skill_Divine_Speed                    = GetString(SI_LUIE_SKILL_DIVINE_SPEED_TP)
 T.Skill_Lightning_Fury                  = GetString(SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP)
 T.Skill_Blacksaps_Brew                  = GetString(SI_LUIE_SKILL_BLACKSAPS_BREW_TP)
@@ -1058,6 +1071,7 @@ T.Generic_AOE_Shock_0_5_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_SH
 T.Generic_AOE_Shock_0_7_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_SHOCK_0_7_SEC)
 T.Generic_AOE_Shock_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_SHOCK_1_SEC)
 T.Generic_AOE_Magic_0_5_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_0_5_SEC)
+T.Generic_AOE_Magic_0_66_Sec            = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_0_66_SEC)
 T.Generic_AOE_Magic_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_1_SEC)
 T.Generic_AOE_Magic_2_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_2_SEC)
 

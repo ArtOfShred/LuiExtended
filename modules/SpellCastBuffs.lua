@@ -2436,6 +2436,18 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local source = strformat("<<t:1>>",sourceName)
         local target = strformat("<<t:1>>",targetName)
 
+        if E.MapDataOverride[abilityId] then
+            local index = GetCurrentMapZoneIndex()
+            if E.MapDataOverride[abilityId][index] then
+                if E.MapDataOverride[abilityId][index].icon then
+                    iconName = E.MapDataOverride[abilityId][index].icon
+                end
+                if E.MapDataOverride[abilityId][index].name then
+                    effectName = E.MapDataOverride[abilityId][index].name
+                end
+            end
+        end
+
         -- TODO: Temp - converts icon for Helljoint, might be other abilities that need this in the future
         if abilityId == 14523 then
             if source == "Jackal" then
