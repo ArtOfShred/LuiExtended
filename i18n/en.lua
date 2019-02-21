@@ -2815,7 +2815,7 @@ local strings = {
     -- RACIAL SKILLS -----------------------------------------------
     ----------------------------------------------------------------
 
-    SI_LUIE_SKILL_HUNTERS_EYE_TP =                       "Increase Movement Speed by |cFFFFFF<<1>>|r% for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_HUNTERS_EYE_TP =                       "Increase Movement Speed by |cFFFFFF<<1>>|r% and Physical and Spell Penetration by |cFFFFFF<<2>>|r for |cFFFFFF6|r seconds.",
 
 	----------------------------------------------------------------
     -- CYRODIIL ----------------------------------------------------

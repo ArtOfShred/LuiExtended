@@ -2885,7 +2885,7 @@ E.EffectOverride = {
     [61870] = { icon = 'esoui/art/icons/ava_siege_hookpoint_005.dds', tooltip = T.Generic_Phy_Spell_Resist_Duration }, -- Armor Master
     [34386] = { tooltip = A.Skill_Night_Mothers_Gaze }, -- Major Fracture (Night Mother's Gaze)
     [61781] = { icon = 'LuiExtended/media/icons/abilities/ability_set_nobles_conquest.dds' }, -- Noble's Conquest
-    [61782] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = A.Skill_Nobles_Conquest }, -- Minor Vulnerability (Noble's Conquest)
+    [61782] = { tooltip = A.Skill_Nobles_Conquest }, -- Minor Vulnerability (Noble's Conquest)
     [34587] = { icon = 'esoui/art/icons/achievement_021.dds' }, -- Song of Lamae
     [34588] = { icon = 'esoui/art/icons/achievement_021.dds' }, -- Song of Lamae
     [71067] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee_alt.dds', tooltip = T.Set_Trials_Shock }, -- Trial by Shock (Trials)
@@ -3104,9 +3104,9 @@ E.EffectOverride = {
     [51315] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Set_Destructive_Mage }, -- Destructive Mage (Aether... of Destruction)
     [51320] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', name = A.Set_Destructive_Mage }, -- Mage Destruction Bomb (Aether... of Destruction)
     [51443] = { icon = 'LuiExtended/media/icons/abilities/ability_set_healing_mage.dds', name = A.Set_Healing_Mage, tooltip = T.Set_Healing_Mage }, -- Healing Bane (of Mending)
-    [51434] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = A.Set_Wise_Mage }, -- Minor Vulnerability (Aether ... of Strategy)
+    [51434] = { tooltip = A.Set_Wise_Mage }, -- Minor Vulnerability (Aether ... of Strategy)
     [76617] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = T.Skill_Minor_Slayer }, -- Minor Slayer (of the Infallible Aether)
-    [81519] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = A.Set_Infallible_Mage }, -- Minor Vulnerability (of the Infallible Aether)
+    [81519] = { tooltip = A.Set_Infallible_Mage }, -- Minor Vulnerability (of the Infallible Aether)
 
     -- Trial Sets (Sanctum Ophidia)
     [51241] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Poisonous Serpent (Ophidian ... of Venom)
@@ -5737,9 +5737,16 @@ E.EffectOverride = {
     [63701] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 3)
     [63702] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 3)
     [63703] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 3)
+
     [36214] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 1)
+    [121126] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 1)
+    [121127] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 1)
     [45292] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 2)
+    [121139] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 2)
+    [121140] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 2)
     [45294] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 3)
+    [121141] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 3)
+    [121142] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 3)
 
     --[[
     [88480] = { hide = true }, -- Trap Triggerer (Various)

@@ -838,9 +838,9 @@ T.Skill_Reviving_Barrier                = GetString(SI_LUIE_SKILL_REVIVING_BARRI
 -- RACIALS ------------------------------------------
 -- ---------------------------------------------------
 
-T.Skill_Hunters_Eye_Rank_1              = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 5)
-T.Skill_Hunters_Eye_Rank_2              = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 10)
-T.Skill_Hunters_Eye_Rank_3              = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 20)
+T.Skill_Hunters_Eye_Rank_1              = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 3, 400)
+T.Skill_Hunters_Eye_Rank_2              = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 6, 900)
+T.Skill_Hunters_Eye_Rank_3              = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 10, 1500)
 
 -- ---------------------------------------------------
 -- CYRODIIL ------------------------------------------
