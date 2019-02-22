@@ -853,6 +853,9 @@ function SCB.DuelEnd()
 end
 
 function SCB.InitializeDisguise()
+	if SCB.SV.HidePlayerBuffs then
+		return
+	end
     g_effectsList.player1["DisguiseType"] = nil
     if g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
         -- Don't show Monk's Disguise since it already has an aura, and don't show Guild Tabard
@@ -875,6 +878,9 @@ end
 
 function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     if slotId == 10 then
+		if SCB.SV.HidePlayerBuffs then
+			return
+		end
         g_effectsList.player1["DisguiseType"] = nil
         g_currentDisguise = GetItemId(0, 10) or 0
         SCB.CollectibleBuff()
@@ -911,7 +917,7 @@ end
 function SCB.MountStatus(eventCode, mounted)
     -- Remove icon first
     g_effectsList.player1["Mount"] = nil
-    if mounted and not SCB.SV.IgnoreMount then
+    if mounted and not (SCB.SV.IgnoreMount or SCB.SV.HidePlayerBuffs) then
 
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_MOUNT)
         local nickname = GetCollectibleNickname(Collectible)
@@ -942,6 +948,11 @@ function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
 end
 
 function SCB.CollectibleBuff()
+
+	if SCB.SV.HidePlayerBuffs then
+		return
+	end
+
     -- Pets
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SCB.SV.IgnorePet and not IsPlayerInAvAWorld() then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
@@ -1963,18 +1974,21 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         return
     end
 
-    if SCB.SV.HidePlayerBuffs and effectType == 1 and unitTag == "player" then
-        return
-    end
-    if SCB.SV.HidePlayerDebuffs and effectType == 2 and unitTag == "player" then
-        return
-    end
-    if SCB.SV.HideTargetBuffs and effectType == 1 and unitTag ~= "player" then
-        return
-    end
-    if SCB.SV.HideTargetDebuffs and effectType == 2 and unitTag ~= "player" then
-        return
-    end
+	-- If this effect isn't a prominent buff or debuff and we have certain buffs set to hidden - then hide those.
+	if not (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName] or SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
+		if SCB.SV.HidePlayerBuffs and effectType == 1 and unitTag == "player" then
+			return
+		end
+		if SCB.SV.HidePlayerDebuffs and effectType == 2 and unitTag == "player" then
+			return
+		end
+		if SCB.SV.HideTargetBuffs and effectType == 1 and unitTag ~= "player" then
+			return
+		end
+		if SCB.SV.HideTargetDebuffs and effectType == 2 and unitTag ~= "player" then
+			return
+		end
+	end
     --d(strfmt("OnEffectChanged %d: %s[%s] / %d/%d/%d [%s-%d] %d", changeType, effectName, unitTag, effectType, abilityType, statusEffectType, unitName, unitId, abilityId ))
 
     local unbreakable = 0
@@ -2234,6 +2248,11 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 end
 
 function SCB.ArtificialEffectUpdate(eventCode, effectId)
+
+	if SCB.SV.HidePlayerBuffs then
+		return
+	end
+	
     if effectId then
         g_effectsList.player1[effectId] = nil
     end
@@ -2351,7 +2370,6 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
     local iconName
     local effectName
     local duration
-    local effectType
 
     if E.EffectOverride[abilityId] then
         if E.EffectOverride[abilityId].hideReduce and SCB.SV.HideReduce then
@@ -2375,6 +2393,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if E.FakeExternalBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
+		if SCB.SV.HidePlayerBuffs then
+			return
+		end
 
         g_effectsList.player1[ abilityId ] = nil
         iconName = E.FakeExternalBuffs[abilityId].icon
@@ -2407,6 +2428,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if E.FakeExternalDebuffs[abilityId].ignoreFade == true and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
+		if SCB.SV.HidePlayerDebuffs then
+			return
+		end
         -- Bail out if we hide ground snares/etc to replace them with auras for damage
         if SCB.SV.GroundDamageAura and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].hideGround then
             return
@@ -2476,7 +2500,10 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if E.FakePlayerBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
-
+		if SCB.SV.HidePlayerBuffs and not (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName] or SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
+			return
+		end
+		
         -- Prominent Support
         local context
         if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
@@ -2545,6 +2572,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if E.FakeStagger[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
+		if SCB.SV.HidePlayerDebuffs then
+			return
+		end
         iconName = E.FakeStagger[abilityId].icon
         effectName = E.FakeStagger[abilityId].name
         duration = E.FakeStagger[abilityId].duration
@@ -2606,6 +2636,9 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         if E.FakePlayerExternalBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
+		if SCB.SV.HideTargetBuffs then
+			return
+		end
         g_effectsList.reticleover1[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then return end
         if GetUnitReaction("reticleover") == UNIT_REACTION_HOSTILE then return end
@@ -2644,6 +2677,9 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         if E.FakePlayerDebuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
+		if SCB.SV.HideTargetDebuffs then
+			return
+		end
         g_effectsList.reticleover2[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then end
         --if GetUnitReaction("reticleover") ~= UNIT_REACTION_HOSTILE then return end
@@ -2698,6 +2734,9 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         if E.FakeStagger[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
+		if SCB.SV.HideTargetDebuffs then
+			return
+		end
         iconName = E.FakeStagger[abilityId].icon
         effectName = E.FakeStagger[abilityId].name
         duration = E.FakeStagger[abilityId].duration
@@ -2834,7 +2873,7 @@ function SCB.ReloadEffects(unitTag)
     end
 
     -- create custom buff icon for Recall Cooldown effect
-    if SCB.SV.ShowRecall and unitTag == "player" then
+    if SCB.SV.ShowRecall and unitTag == "player" and not (SCB.SV.HidePlayerBuffs or SCB.SV.HidePlayerDebuffs) then
         local recallRemain, _ = GetRecallCooldown()
         if recallRemain > 0 then
             local currentTime = GetGameTimeMilliseconds()
@@ -2871,6 +2910,10 @@ function SCB.ReloadEffects(unitTag)
                 end
             end
         end
+		
+		if SCB.SV.HideTargetBuffs then
+			return
+		end
 
         if not SCB.SV.IgnoreBattleSpiritTarget then
             if ( ( IsInAvAZone() or IsActiveWorldBattleground() ) and IsUnitPlayer("reticleover") and (GetUnitReaction("reticleover") == UNIT_REACTION_PLAYER_ALLY) ) or GetUnitName(unitTag) == g_currentDuelTarget then
@@ -2930,7 +2973,7 @@ function SCB.ReloadEffects(unitTag)
             end
         end
 
-        if SCB.SV.StealthStateTarget then
+        if SCB.SV.StealthStateTarget and not SCB.SV.HideTargetBuffs then
             local stealthState = GetUnitStealthState ("reticleover")
             if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
                 g_effectsList.reticleover1[ A.Innate_Hidden ] = {
@@ -2953,7 +2996,7 @@ function SCB.ReloadEffects(unitTag)
             end
         end
 
-        if SCB.SV.DisguiseStateTarget then
+        if SCB.SV.DisguiseStateTarget and not SCB.SV.HideTargetBuffs then
             --d("checking for disguise")
             local disguiseState = GetUnitDisguiseState ("reticleover")
             --d("Disguise State: " .. disguiseState )
@@ -3339,7 +3382,7 @@ end
 -- Runs on the EVENT_STEALTH_STATE_CHANGED listener.
 -- Watches for changes in a stealth state to display custom buff icon
 function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
-    if SCB.SV.StealthStatePlayer and unitTag == "player" then
+    if SCB.SV.StealthStatePlayer and unitTag == "player" and not SCB.SV.HidePlayerBuffs then
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
             g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
@@ -3362,7 +3405,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
         end
     end
 
-    if SCB.SV.StealthStateTarget and unitTag == "reticleover" then
+    if SCB.SV.StealthStateTarget and unitTag == "reticleover" and not SCB.SV.HideTargetBuffs then
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
             g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                 type=1,
@@ -3388,7 +3431,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
 end
 
 function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
-    if SCB.SV.DisguiseStatePlayer and unitTag == "player" then
+    if SCB.SV.DisguiseStatePlayer and unitTag == "player" and not SCB.SV.HidePlayerBuffs then
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             -- Trigger a buff
             g_effectsList.player1[ A.Innate_Disguised ] = {
@@ -3405,7 +3448,7 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
         end
     end
 
-    if SCB.SV.DisguiseStatePlayer and unitTag == "reticleover" then
+    if SCB.SV.DisguiseStatePlayer and unitTag == "reticleover" and not SCB.SV.HideTargetBuffs then
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             -- Trigger a buff
             g_effectsList.reticleover1[ A.Innate_Disguised ] = {
@@ -3456,7 +3499,7 @@ function SCB.OnPlayerActivated(eventCode)
         end
     end
 
-    if SCB.SV.DisguiseStatePlayer then
+    if SCB.SV.DisguiseStatePlayer and not SCB.SV.HidePlayerBuffs then
         local disguiseState = GetUnitDisguiseState ("player")
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             -- Trigger a buff
@@ -3473,7 +3516,7 @@ function SCB.OnPlayerActivated(eventCode)
         end
     end
 
-    if SCB.SV.StealthStatePlayer then
+    if SCB.SV.StealthStatePlayer and not SCB.SV.HidePlayerBuffs then
         local stealthState = GetUnitStealthState ("player")
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
             g_effectsList.player1[ A.Innate_Hidden ] = {
@@ -3510,6 +3553,9 @@ function SCB.OnPlayerActivated(eventCode)
 end
 
 function SCB.LoadCyrodiilPlayerBuffs()
+	if SCB.SV.HidePlayerBuffs then
+		return
+	end
     if not SCB.SV.IgnoreCyrodiilPlayer and IsInAvAZone() then
         local campaignId = GetCurrentCampaignId()
         local homeKeep, _, _, _, edgeKeepCount = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
@@ -3596,6 +3642,9 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
     if not g_playerResurrectStage then
         return
     end
+	if SCB.SV.HidePlayerBuffs then
+		return
+	end
     if g_playerResurrectStage == 1 and duration == 600 then
         g_playerResurrectStage = 2
     elseif g_playerResurrectStage == 2 and duration == 0 then

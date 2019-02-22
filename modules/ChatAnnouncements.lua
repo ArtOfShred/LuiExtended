@@ -3547,7 +3547,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
     formattedArmorType = (CA.SV.Inventory.LootShowArmorType and armorType ~= ARMORTYPE_NONE and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade ) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType)) or ""
 
     local traitType = GetItemLinkTraitInfo(itemLink) -- Get Trait type of item
-    formattedTrait = (CA.SV.Inventory.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade ) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType)) or ""
+    formattedTrait = (CA.SV.Inventory.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT and itemType ~= ITEMTYPE_JEWELRY_TRAIT and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade ) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType)) or ""
 
     local styleType = GetItemLinkItemStyle(itemLink) -- Get Style of the item
     local unformattedStyle = strformat("<<1>>", GetItemStyleName(styleType))
@@ -3558,7 +3558,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         and itemType ~= ITEMTYPE_STYLE_MATERIAL
         and itemType ~= ITEMTYPE_GLYPH_ARMOR
         and itemType ~= ITEMTYPE_GLYPH_JEWELRY
-        and itemType ~= ITEMTYPE_GLYPH_WEAPON
+        and itemType ~= ITEMTYPE_GLYPH_WEAPON	
         and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade )
     and strfmt(" |cFFFFFF(%s)|r", unformattedStyle) or ""
 
