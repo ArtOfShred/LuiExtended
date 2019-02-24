@@ -2162,10 +2162,11 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
 
         -- Specific override for Mend Spirit -- Updates Major Resolve / Major Ward to use the remaining duration of Mend Spirit.
-        if abilityId == 107632 or abilityId == 107631 then
+        if E.EffectPullDuration[abilityId] then
+            local matchId = E.EffectPullDuration[abilityId]
             for i = 1, GetNumBuffs(unitTag) do
                 local _, timeStarted, timeEnding, _, _, _, _, _, _, _, abilityId = GetUnitBuffInfo(unitTag, i)
-                if abilityId == 107629 then
+                if abilityId == matchId then
                     duration = timeEnding - timeStarted
                     beginTime = timeStarted
                     endTime = timeEnding
@@ -2174,38 +2175,40 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
 
         --EffectCreateSkillAura
-        if ( E.EffectCreateSkillAura[abilityId] ) then
-            local name = zo_strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))
-            local id = E.EffectCreateSkillAura[abilityId].abilityId
-            if not (SCB.SV.BlacklistTable[name] or SCB.SV.BlacklistTable[id]) then
-                local simulatedContext = unitTag .. effectType
+        if E.EffectCreateSkillAura[abilityId] then
+            if (not E.EffectCreateSkillAura[abilityId].requiredStack) or (E.EffectCreateSkillAura[abilityId].requiredStack and stackCount == E.EffectCreateSkillAura[abilityId].requiredStack) then
+                local name = zo_strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))
+                local id = E.EffectCreateSkillAura[abilityId].abilityId
+                if not (SCB.SV.BlacklistTable[name] or SCB.SV.BlacklistTable[id]) then
+                    local simulatedContext = unitTag .. effectType
 
-                if (SCB.SV.PromDebuffTable[name] or SCB.SV.PromDebuffTable[id]) then
-                    if simulatedContext == "player1" then
-                        simulatedContext = "promd_player"
-                    elseif (simulatedContext == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER)  then
-                        simulatedContext = "promd_target"
+                    if (SCB.SV.PromDebuffTable[name] or SCB.SV.PromDebuffTable[id]) then
+                        if simulatedContext == "player1" then
+                            simulatedContext = "promd_player"
+                        elseif (simulatedContext == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER)  then
+                            simulatedContext = "promd_target"
+                        end
+                    elseif (SCB.SV.PromBuffTable[name] or SCB.SV.PromBuffTable[id]) then
+                        if simulatedContext == "player1" then
+                            simulatedContext = "promb_player"
+                        elseif (simulatedContext == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER)  then
+                            simulatedContext = "promb_target"
+                        end
                     end
-                elseif (SCB.SV.PromBuffTable[name] or SCB.SV.PromBuffTable[id]) then
-                    if simulatedContext == "player1" then
-                        simulatedContext = "promb_player"
-                    elseif (simulatedContext == "reticleover2" and castByPlayer == COMBAT_UNIT_TYPE_PLAYER)  then
-                        simulatedContext = "promb_target"
-                    end
-                end
 
-                if ( SCB.SV.ExtraBuffs ) or ( E.EffectCreateSkillAura[abilityId].consolidate and SCB.SV.ExtraConsolidate ) or ( E.EffectCreateSkillAura[abilityId].alwaysShow ) then
-                    if ( not E.EffectCreateSkillAura[abilityId].extendedDisplay ) or (E.EffectCreateSkillAura[abilityId].extendedDisplay and SCB.SV.ExtraExpanded) then
-                        local icon = E.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
-                        g_effectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].abilityId ] = {
-                            target=unitTag, type=effectType,
-                            id=id, name=name, icon=icon,
-                            dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                            forced=forcedType,
-                            restart=true, iconNum=0,
-                            stack = stackCount,
-                            unbreakable=unbreakable
-                        }
+                    if ( SCB.SV.ExtraBuffs ) or ( E.EffectCreateSkillAura[abilityId].consolidate and SCB.SV.ExtraConsolidate ) or ( E.EffectCreateSkillAura[abilityId].alwaysShow ) then
+                        if ( not E.EffectCreateSkillAura[abilityId].extendedDisplay ) or (E.EffectCreateSkillAura[abilityId].extendedDisplay and SCB.SV.ExtraExpanded) then
+                            local icon = E.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
+                            g_effectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].abilityId ] = {
+                                target=unitTag, type=effectType,
+                                id=id, name=name, icon=icon,
+                                dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                                forced=forcedType,
+                                restart=true, iconNum=0,
+                                stack = 0,
+                                unbreakable=unbreakable
+                            }
+                        end
                     end
                 end
             end
@@ -2252,7 +2255,7 @@ function SCB.ArtificialEffectUpdate(eventCode, effectId)
 	if SCB.SV.HidePlayerBuffs then
 		return
 	end
-	
+
     if effectId then
         g_effectsList.player1[effectId] = nil
     end
@@ -2503,7 +2506,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
 		if SCB.SV.HidePlayerBuffs and not (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName] or SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
 			return
 		end
-		
+
         -- Prominent Support
         local context
         if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
@@ -2910,7 +2913,7 @@ function SCB.ReloadEffects(unitTag)
                 end
             end
         end
-		
+
 		if SCB.SV.HideTargetBuffs then
 			return
 		end

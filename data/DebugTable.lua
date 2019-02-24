@@ -996,6 +996,16 @@ debugAuras = {
             [59498] = true, -- Mephala's Web
             [59499] = true, -- Mephala's Web
 
+            [116838] = true, -- Stonekeeper (Stonekeeper)
+            [116839] = true, -- Charging (Stonekeeper)
+            [116846] = true, -- Stonekeeper (Stonekeeper)
+            [116847] = true, -- Stonekeeper (Stonekeeper)
+            [116877] = true, -- Stonekeeper (Stonekeeper)
+            [116878] = true, -- Stonekeeper (Stonekeeper)
+            [116876] = true, -- Stonekeeper (Stonekeeper)
+            [116880] = true, -- Stonekeeper (Stonekeeper)
+            [116881] = true, -- Stonekeeper (Stonekeeper)
+
             [80520] = true, -- Stormfist
             [80523] = true, -- Stormfist
             [80522] = true, -- Stormfist
@@ -1004,6 +1014,11 @@ debugAuras = {
             [80592] = true, -- Swarm Mother
             [84419] = true, -- Swarm Mother Mask
             [80593] = true, -- Swarm Mother Mask
+
+            [117110] = true, -- Symphony of Blades (Symphony of Blades)
+            [117111] = true, -- Meridia's Favor (Symphony of Blades)
+            [117118] = true, -- Meridia's Favor (Symphony of Blades)
+            [117119] = true, -- Meridia's Favor (Symphony of Blades)
 
             [59521] = true, -- Engine Guardian
             [60484] = true, -- Sphere Groundrise
@@ -1510,6 +1525,14 @@ debugAuras = {
             [111200] = true, -- Moon Hunter (Moon Hunter)
             [111204] = true, -- Moon Hunter (Moon Hunter)
 
+            [116726] = true, -- Icy Conjuror
+            [117666] = true, -- Icy Conjuror
+            [116727] = true, -- Icy Conjuror
+
+            [116882] = true, -- Auroran's Thunder (Auroran's Thunder)
+            [116884] = true, -- Auroran's Thunder (Auroran's Thunder)
+            [116920] = true, -- Auroran's Thunder (Auroran's Thunder)
+
             -- Dungeon Sets (Medium)
 
             [85607] = true, -- Strength of the Automaton (Automaton's)
@@ -1600,6 +1623,15 @@ debugAuras = {
             [111213] = true, -- Savage Werewolf (Savage Werewolf)
             [112368] = true, -- Impact (Savage Werewolf)
             [111216] = true, -- Savage Werewolf (Savage Werewolf)
+
+            [116734] = true, -- Tzogvin's Warband (Tzogvin's Warband)
+            [116742] = true, -- Precision (Tzogvin's Warband)
+            [116775] = true, -- Minor Force (Tzogvin's Warband)
+
+            [116947] = true, -- Scavenging Demise (Scavenging Demise)
+            [116954] = true, -- Stalked (Scavenging Demise)
+            [116991] = true, -- Scavenging Maw (Scavenging Demise)
+            [117025] = true, -- Minor Vulnerability (Scavenging Demise)
 
             -- Dungeon Sets (Heavy)
 
@@ -1696,6 +1728,15 @@ debugAuras = {
             [113423] = true, -- Checker (Haven of Ursus)
             [111220] = true, -- Jailer's Tenacity (Jailer's Tenacity)
             [111221] = true, -- Major Vitality (Jailer's Tenacity)
+
+            [116798] = true, -- Mighty Glacier (Mighty Glacier)
+            [117670] = true, -- Mighty Glacier (Mighty Glacier)
+            [116804] = true, -- Major Ward (Mighty Glacier)
+            [116805] = true, -- Major Resolve (Mighty Glacier)
+
+            [117059] = true, -- Frozen Watcher (Frozen Watcher)
+            [117082] = true, -- Frozen Watcher (Frozen Watcher)
+            [117060] = true, -- Frozen Watcher (Frozen Watcher)
 
             -- Trial Sets (Hel Ra Citadel)
 
@@ -7023,6 +7064,11 @@ debugAuras = {
             [31606] = true, -- Fire Trap (Player)
             [17314] = true, -- Fire Trap (Player)
 
+            [72887] = true, -- Steam Burst (Fire)
+            [72888] = true, -- Fire Attack 1 (Fire)
+            [72889] = true, -- Fire Attack 2 (Fire)
+            [72890] = true, -- Laser Snare (Fire)
+
             [26530] = true, -- Bear Trap (Bear Trap)
             [26531] = true, -- Bear Trap (Bear Trap)
 
@@ -9640,7 +9686,7 @@ debugAuras = {
             [47186] = true, -- CHT Portal Killer
 
             -------------------------------------
-            -- QUESTS - FIGHTERS GUILD ---------
+            -- QUESTS - FIGHTERS GUILD ----------
             -------------------------------------
 
             -- Anchors from the Harbour
@@ -11377,6 +11423,303 @@ debugAuras = {
             [105889] = true, -- Pustulant Eruption (Yaghra Nightmare)
             [105912] = true, -- Pustulant Eruption (Yaghra Nightmare)
             [105893] = true, -- Pustulant Film (Yaghra Nightmare)
+
+            -------------------------------------
+            -- DUNGEONS -------------------------
+            -------------------------------------
+
+            -- Banished Cells I
+            [86710] = true, -- Checkpoint Tele Arrive (Banished Cells - 2nd to last boss)
+            [8523] = true, -- Keeper Prison
+            [18998] = true, -- DUN_BC P6_Ritual_Daedric
+            [18995] = true, -- DUN_BC Skeleton Rise
+            [19028] = true, -- Drain Essence (Cell Haunter)
+            [42052] = true, -- Drain Essence (Cell Haunter)
+            [46235] = true, -- ClannFear Intro 1 (Shadowrend)
+            [46258] = true, -- Clannfear Arrives (Shadowrend)
+            [18725] = true, -- Spiked Headbutt (Shadowrend)
+            [47587] = true, -- Tail Smite (Shadowrend)
+            [47608] = true, -- Knocked Down (Shadowrend)
+            [21886] = true, -- Summon Dark Proxy (Shadowrend)
+            [21887] = true, -- Forward Charge (Shadowrend)
+            [18728] = true, -- Pounce (Shadowrend)
+            [35625] = true, -- Pounce (Shadowrend)
+            [18772] = true, -- Feeding (Shadowrend)
+            [18759] = true, -- Pounce (Shadowrend)
+            [18708] = true, -- Summon Clannfear (Angata the Clannfear Handler)
+            [18709] = true, -- Summon Appearance (Angata the Clannfear Handler)
+            [19025] = true, -- Dead Zone (Skeletal Destroyer)
+            [19027] = true, -- Dead Zone (Skeletal Destroyer)
+            [18961] = true, -- Ghostly Summon (Generic Invisible Target)
+            [18798] = true, -- Slash (High Kinlord Rilis)
+            [33189] = true, -- Crushing Blow (High Kinlord Rilis)
+            [33190] = true, -- Crushing Blow (High Kinlord Rilis)
+            [33191] = true, -- Crushing Blow (High Kinlord Rilis)
+            [18795] = true, -- CON_Invisible_30%_Speed_Debuff (The Feast)
+            [86759] = true, -- The Feast Tick (The Feast)
+            [33172] = true, -- Oblivion Restoration (The Feast)
+            [33165] = true, -- Despawn Self (The Feast)
+            [18840] = true, -- Soul Blast (High Kinlord Rilis)
+            [18846] = true, -- Soul Blast (High Kinlord Rilis)
+            [18847] = true, -- Soul Blast (High Kinlord Rilis)
+            [18875] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [33437] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [33174] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [33179] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [33184] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [33187] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [33188] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [36522] = true, -- Daedric Flames (High Kinlord Rilis)
+            [46296] = true, -- Crystals (Binding Stones)
+            [36524] = true, -- Binding
+
+            -- Banished Cells II
+            [85885] = true, -- Teleport
+            [32287] = true, -- Rilis' Cruelty
+            [64490] = true, -- Shatter
+            [31265] = true, -- NFX_Q4597 Cruelty Stone
+            [36473] = true, -- DUN_BCH Cruelty One Shot
+            [46715] = true, -- DUN_BCH Cruelty One Shot
+            [46713] = true, -- DUN_BCH Cruelty One Shot
+
+            [70612] = true, -- Chains
+            [70613] = true, -- Chains
+            [70614] = true, -- Chains
+            [70615] = true, -- Chains
+            [29481] = true, -- Chains
+            [29486] = true, -- Chains
+            [28786] = true, -- Inferno
+            [28915] = true, -- Inferno
+            [49190] = true, -- Dummy
+            [49191] = true, -- Dummy
+            [70633] = true, -- Dummy
+            [70632] = true, -- Dummy
+
+            [28902] = true, -- Swipe (Maw of the Infernal)
+            [48271] = true, -- Dummy (Maw of the Infernal)
+            [49150] = true, -- Cone of Rot (Maw of the Infernal)
+            [49149] = true, -- Breath of Flame (Maw of the Infernal)
+            [28903] = true, -- Immolating Bite (Maw of the Infernal)
+            [35680] = true, -- Immolating Bite (Maw of the Infernal)
+            [28905] = true, -- Immolating Bite (Maw of the Infernal)
+            [28904] = true, -- Immolating Bite (Maw of the Infernal)
+            [47127] = true, -- Nocom (Maw of the Infernal)
+
+            [48281] = true, -- Slash (Keeper Voranil)
+            [27826] = true, -- Crushing Blow (Keeper Voranil)
+            [27827] = true, -- Crushing Blow (Keeper Voranil)
+            [27828] = true, -- Crushing Blow (Keeper Voranil)
+            [29018] = true, -- Berserker Frenzy (Keeper Voranil)
+            [29020] = true, -- Berserker Frenzy (Keeper Voranil)
+            [29022] = true, -- Berserker Frenzy Snare (Keeper Voranil)
+            [28750] = true, -- Essence Siphon (Keeper Voranil)
+            [28759] = true, -- Essence Siphon (Keeper Voranil)
+
+            [32290] = true, -- Rilis' Madness (High Kinlord Rilis)
+            [64518] = true, -- Shatter (The Second Binding Stone)
+
+            [28964] = true, -- Spawn (Keeper Imiril)
+            [30734] = true, -- Portal (Daedric Chaos)
+            [31713] = true, -- Root (Daedric Chaos)
+            [32044] = true, -- Has Jumped (Daedric Chaos)
+            [31712] = true, -- Portal Leap (Daedric Chaos)
+            [31726] = true, -- Corruption (Daedric Chaos)
+            [32054] = true, -- SpawnRun (Banekin)
+            [32038] = true, -- Into Portal (Keeper Imiril)
+            [36631] = true, -- ExitPortal (Keeper Imiril)
+            [31727] = true, -- Corruption (Daedric Chaos)
+            [28916] = true, -- Slash (Keeper Imiril)
+            [29143] = true, -- Daedric Blast (Keeper Imiril)
+
+            [32291] = true, -- Rilis' Dominion (High Kinlord Rilis)
+            [64526] = true, -- Shatter (The Third Binding Stone)
+
+            [28961] = true, -- Sister's Love (Sister Sihna / Sister Vera)
+            [28962] = true, -- Sister's Love (Sister Sihna / Sister Vera)
+            [28966] = true, -- Dummy (Sister Sihna / Sister Vera)
+
+            [35847] = true, -- Dummy
+            [31436] = true, -- NFX_Q4597 Final Stone
+            [46433] = true, -- DUN_BCH_Knockback&Knockdown (High Kinlord Rilis)
+            [46435] = true, -- Fire Backlash (High Kinlord Rilis)
+
+            [28715] = true, -- Daedric Bolt (High Kinlord Rilis)
+            [28570] = true, -- Levitate (High Kinlord Rilis)
+            [64618] = true, -- Bubble Immunity (High Kinlord Rilis)
+            [28772] = true, -- Stun (High Kinlord Rilis)
+            [46960] = true, -- Levitate (High Kinlord Rilis)
+            [28773] = true, -- Levitate (High Kinlord Rilis)
+            [28462] = true, -- Levitate (High Kinlord Rilis)
+            [64619] = true, -- Bubble Immunity (High Kinlord Rilis)
+            [28774] = true, -- Stun (High Kinlord Rilis)
+            [46961] = true, -- Levitate (High Kinlord Rilis)
+            [28775] = true, -- Levitate (High Kinlord Rilis)
+            [28475] = true, -- Curse of Suffering
+            [48502] = true, -- Snare
+            [48889] = true, -- Curse of Suffering
+            [48308] = true, -- Curse of Suffering
+            [28571] = true, -- Curse of Dominance
+            [48508] = true, -- Snare
+            [48888] = true, -- Curse of Dominance
+            [48507] = true, -- Curse of Dominance
+
+            [29989] = true, -- Daedric Step
+            [46967] = true, -- Daedric Step
+            [46964] = true, -- Daedric Step
+            [46965] = true, -- Daedric Step
+            [46963] = true, -- Teleportdummy
+
+            [36029] = true, -- The Feast Projectile
+            [48908] = true, -- The Feast
+            [48909] = true, -- The Feast
+            [26070] = true, -- The Feast
+
+            [48799] = true, -- Deadric Tempest
+            [48802] = true, -- Daedric Tempest
+            [48801] = true, -- Daedric Tempest
+            [48810] = true, -- Daedric Tempest
+            [48811] = true, -- Daedric Tempest
+            [48812] = true, -- Daedric Tempest
+            [48813] = true, -- Daedric Tempest
+            [48803] = true, -- Daedric Tempest
+            [48804] = true, -- Daedric Tempest
+            [48805] = true, -- Daedric Tempest
+            [48806] = true, -- Daedric Tempest
+            [48807] = true, -- Daedric Tempest
+            [48808] = true, -- Daedric Tempest
+            [48809] = true, -- Daedric Tempest
+            [48800] = true, -- Daedric Tempest
+
+            [48814] = true, -- Daedric Tempest
+            [48816] = true, -- Daedric Tempest
+            [48818] = true, -- Daedric Tempest
+            [48821] = true, -- Daedric Tempest
+            [48823] = true, -- Daedric Tempest
+            [48826] = true, -- Daedric Tempest
+            [48827] = true, -- Daedric Tempest
+            [48817] = true, -- Daedric Tempest
+            [48819] = true, -- Daedric Tempest
+            [48822] = true, -- Daedric Tempest
+            [48824] = true, -- Daedric Tempest
+            [48825] = true, -- Daedric Tempest
+            [48820] = true, -- Daedric Tempest
+            [48828] = true, -- Daedric Tempest
+            [48815] = true, -- Daedric Tempest
+            [28362] = true, -- Black Sigil
+            [36020] = true, -- Black Sigil
+            [28088] = true, -- Red Sigil
+            [36030] = true, -- Red Sigil
+            [31482] = true, -- DUN_BCH Portal
+
+            -- Frostvault
+            [115316] = true, -- Weatherman
+
+            [117286] = true, -- Rending Bleed (Coldsnap Goblin - Shared)
+            [117486] = true, -- Bleed (Coldsnap Goblin - Shared)
+
+            [109574] = true, -- Fire Power (Coldsnap Harrier)
+            [109590] = true, -- Firepower (Coldsnap Harrier)
+            [109584] = true, -- Firepower (Coldsnap Harrier)
+            [120945] = true, -- Firepower (Coldsnap Harrier)
+
+            [117298] = true, -- Quick Strike (Coldsnap Snowstalker)
+            [117352] = true, -- Whirlwind (Coldsnap Snowstalker)
+            [118540] = true, -- Whirlwind (Coldsnap Snowstalker)
+
+            [117295] = true, -- Bite (Coldsnap Durzog)
+            [117296] = true, -- Rend (Coldsnap Durzog)
+
+            [117289] = true, -- Backhand (Coldsnap Ogre)
+            [117290] = true, -- Shockwave (Coldsnap Ogre)
+            [118491] = true, -- Shockwave (Coldsnap Ogre)
+            [117292] = true, -- Off Balance (Coldsnap Ogre)
+            [117291] = true, -- Stagger (Coldsnap Ogre)
+            [117287] = true, -- Crushing Blow (Coldsnap Ogre)
+            [117288] = true, -- Crushing Blow (Coldsnap Ogre)
+
+            [117316] = true, -- Ice Arrow (Coldsnap Skysplitter)
+            [117323] = true, -- Ice Comet (Coldsnap Skysplitter)
+            [117326] = true, -- Ice Comet (Coldsnap Skysplitter)
+            [117325] = true, -- Ice Comet (Coldsnap Skysplitter)
+            [117327] = true, -- Ice Comet (Coldsnap Skysplitter)
+            [117324] = true, -- Ice Comet (Coldsnap Skysplitter)
+
+            [117309] = true, -- Cleave (Coldsnap Frostbiter)
+
+            [117345] = true, -- Low Slash (Coldsnap Toothbreaker)
+            [117346] = true, -- Low Slash (Coldsnap Toothbreaker)
+            [114490] = true, -- Maim (Coldsnap Toothbreaker)
+
+            [119246] = true, -- Border Chk (Icestalker)
+            [110390] = true, -- Icestalker Target
+            [110391] = true, -- Icestalker Target 2
+            [118131] = true, -- Get Hit
+            [118132] = true, -- Icestalker Targ Remove
+
+            [109821] = true, -- Rock Toss (Icestalker)
+            [109822] = true, -- Rock Toss (Icestalker)
+
+            [109801] = true, -- Leaping Crush (Icestalker)
+            [119417] = true, -- Add 2.5 to Ground Slam CD (Icestalker)
+            [109803] = true, -- Leaping Crush (Icestalker)
+            [109802] = true, -- Leaping Crush (Icestalker)
+            [109804] = true, -- Leaping Crush (Icestalker)
+            [109805] = true, -- Leaping Crush (Icestalker)
+            [116667] = true, -- Skeletal Smash (Icestalker)
+            [116666] = true, -- Skeletal Smash (Icestalker)
+
+            [109827] = true, -- Boulder Toss (Icestalker)
+            [109832] = true, -- Turn (Icestalker)
+            [109830] = true, -- Boulder Toss (Icestalker)
+            [109829] = true, -- Boulder Toss (Icestalker)
+            [109828] = true, -- Boulder Toss (Icestalker)
+            [109831] = true, -- Boulder Toss (Icestalker)
+
+            [109811] = true, -- Ground Slam (Icestalker)
+            [109813] = true, -- Ground Slam (Icestalker)
+            [109814] = true, -- Ground Slam (Icestalker)
+            [109815] = true, -- Ground Slam (Icestalker)
+            [109816] = true, -- Ground Slam (Icestalker)
+            [109817] = true, -- Ground Slam (Icestalker)
+            [109812] = true, -- Ground Slam (Icestalker)
+            [109818] = true, -- Ground Slam (Icestalker)
+            [109819] = true, -- Ground Slam (Icestalker)
+            [116684] = true, -- Ground Slam (Icestalker)
+            [109820] = true, -- Effected (Icestalker)
+
+            [109800] = true, -- Slap (Icestalker)
+
+            [109833] = true, -- Frenzied Pummeling (Icestalker)
+            [115179] = true, -- Extra Damage to Monsters (Icestalker)
+            [109834] = true, -- Lifting Strike (Icestalker)
+            [109835] = true, -- Frenzied Pummeling (Icestalker)
+            [109870] = true, -- Time (Icestalker)
+            [109878] = true, -- Caster Stun (Icestalker)
+            [109837] = true, -- Pummel (Icestalker)
+            [118489] = true, -- Frenzied Pummeling (Icestalker)
+            [117791] = true, -- Frenzied Pummeling (Icestalker)
+            [120638] = true, -- Remove (Icestalker)
+            [109838] = true, -- End Stun (Icestalker)
+            [121824] = true, -- Frenzied Pummeling (Icestalker)
+
+            [119249] = true, -- Teleport Failsafe (Border Chk)
+            [119461] = true, -- Teleport Failsafe (Border Chk)
+            [119254] = true, -- Teleport Failsafe (Border Chk)
+            [119255] = true, -- Teleport Failsafe (Border Chk)
+            [120795] = true, -- Teleport Failsafe (Border Chk)
+
+            [109806] = true, -- Frozen Aura (Icestalker)
+            [109807] = true, -- Snare Ticker (Icestalker)
+            [109808] = true, -- Frostbite (Icestalker)
+            [109810] = true, -- Frozen Aura (Icestalker)
+
+            [83430] = true, -- Skeletal Smash (Ice Wraith)
+            [83435] = true, -- Headbutt (Ice Wraith)
+            [83454] = true, -- Skeletal Smash (Ice Wraith)
+            [83453] = true, -- Skeletal Smash (Ice Wraith)
+
+            --[76993] = true, -- 35% Bonus Movement (Skeevaton)
+            [116683] = true, -- U23-DUN1 B N Intro (Skeevaton)
 
             -------------------------------------
             -- CYRODIIL -------------------------

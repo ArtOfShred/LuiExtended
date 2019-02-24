@@ -683,6 +683,46 @@ LUIE.AlertTable = {
     [107282] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Impale (Yaghra Nightmare)
     [105867] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Pustulant Explosion (Yaghra Nightmare)
 
+    --------------------------------------------------
+    -- DUNGEONS --------------------------------------
+    --------------------------------------------------
+
+    -- Banished Cells I
+    [47587] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Tail Smite (Shadowrend)
+    [21886] = { summon = true, priority = 1, auradetect = true }, -- Summon Dark Proxy (Shadowrend)
+    [18772] = { interrupt = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, notDirect = true }, -- Feeding (Shadowrend)
+    [18708] = { summon = true, priority = 1, auradetect = true }, -- Summon Clannfear (Angata the Clannfear Handler)
+    [19025] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Dead Zone (Skeletal Destroyer)
+
+    [33189] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crushing Blow (High Kinlord Rilis)
+    [18840] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Soul Blast (High Kinlord Rilis)
+    [18875] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true }, -- Daedric Tempest (High Kinlord Rilis)
+
+    -- Banished Cells II
+    [49150] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500 }, -- Cone of Rot (Maw of the Infernal)
+    [27826] = { block = true, bs = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crushing Blow (Keeper Voranil)
+    [29018] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 750, eventdetect = true }, -- Berserker Frenzy (Keeper Voranil)
+    [28750] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Essence Siphon (Keeper Voranil)
+    [29143] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Daedric Blast (Keeper Imiril)
+    [28962] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Sister's Love (Sister Sihna / Sister Vera)
+    [48799] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500 }, -- Daedric Tempest (High Kinlord Rilis)
+    [48814] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500 }, -- Daedric Tempest (High Kinlord Rilis)
+
+    -- Frostvault
+    [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)
+    [117352] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind (Coldsnap Snowstalker)
+
+    [117290] = { block = true, avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Shockwave (Coldsnap Ogre)
+    [117287] = { block = true, bs = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Crushing Blow (Coldsnap Ogre)
+
+    [117326] = { block = true, priority = 3, result = ACTION_RESULT_EFFECT_GAINED, refire = 200 }, -- Ice Comet (Coldsnap Skysplitter)
+
+    [109827] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Boulder Toss (Icestalker)
+    [109811] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Ground Slam (Icestalker)
+    [109837] = { interrupt = true, priority = 1,  result = ACTION_RESULT_BEGIN, eventdetect = true, notDirect = true }, -- Frenzied Pummeling (Icestalker)
+    [109806] = { block = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Frozen Aura (Icestalker)
+    [83430] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Skeletal Smash (Ice Wraith)
+
 }
 
 

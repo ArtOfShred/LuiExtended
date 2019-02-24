@@ -3427,7 +3427,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
             eventManager:UnregisterForUpdate(moduleName .. "ResetLooted")
         end
 		eventManager:UnregisterForUpdate(moduleName .. "ResetLooted")
-        eventManager:RegisterForUpdate(moduleName .. "ResetLooted", 100, ResetIsLooted )
+        eventManager:RegisterForUpdate(moduleName .. "ResetLooted", 150, ResetIsLooted )
     end
 
     -- If the player pickpockets an item
@@ -3439,7 +3439,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
             eventManager:UnregisterForUpdate(moduleName .. "ResetPickpocket")
         end
 		eventManager:UnregisterForUpdate(moduleName .. "ResetPickpocket")
-        eventManager:RegisterForUpdate(moduleName .. "ResetPickpocket", 100, ResetIsPickpocketed )
+        eventManager:RegisterForUpdate(moduleName .. "ResetPickpocket", 150, ResetIsPickpocketed )
     end
 
     -- Return right now if we don't have group loot set to display
@@ -3558,7 +3558,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         and itemType ~= ITEMTYPE_STYLE_MATERIAL
         and itemType ~= ITEMTYPE_GLYPH_ARMOR
         and itemType ~= ITEMTYPE_GLYPH_JEWELRY
-        and itemType ~= ITEMTYPE_GLYPH_WEAPON	
+        and itemType ~= ITEMTYPE_GLYPH_WEAPON
         and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade )
     and strfmt(" |cFFFFFF(%s)|r", unformattedStyle) or ""
 
@@ -3757,7 +3757,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             eventManager:UnregisterForUpdate(moduleName .. "ResetStolen")
         end
 		eventManager:UnregisterForUpdate(moduleName .. "ResetStolen")
-        eventManager:RegisterForUpdate(moduleName .. "ResetStolen", 100, ResetIsStolen )
+        eventManager:RegisterForUpdate(moduleName .. "ResetStolen", 150, ResetIsStolen )
     end
 
     local receivedBy = ""

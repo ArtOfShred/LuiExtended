@@ -2312,6 +2312,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_BURN_1_SEC_TP =                "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_BURN_2_SEC_TP =                "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_FREEZE_TP =                    "Подвержен урону от Мороза на |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_FREEZE_1_SEC_TP =              "Afflicted with Frost Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_FREEZE_2_SEC_TP =              "Afflicted with Frost Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_SHOCK_TP =                     "Подвержен урону от Электричества на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_SHOCK_1_SEC_TP =               "Afflicted with Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
@@ -2334,6 +2335,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_AOE_FIRE_0_66_SEC =            "Taking Flame Damage every |cFFFFFF0.7|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_FIRE_0_9_SEC =             "Taking Flame Damage every |cFFFFFF0.9|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_SEC =               "Taking Flame Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_5_SEC =             "Taking Flame Damage every |cFFFFFF1.5|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_FROST_1_SEC =              "Taking Frost Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_SHOCK_0_5_SEC =            "Taking Shock Damage every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_SHOCK_0_7_SEC =            "Taking Shock Damage every |cFFFFFF0.75|r seconds.",
@@ -2341,6 +2343,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_AOE_MAGIC_0_5_SEC =            "Taking Magic Damage every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_MAGIC_0_66_SEC =           "Taking Magic Damage every |cFFFFFF0.7|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_MAGIC_1_SEC =              "Taking Magic Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_GENERIC_AOE_MAGIC_1_5_SEC =            "Taking Magic Damage every |cFFFFFF1.5|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_MAGIC_2_SEC =              "Taking Magic Damage every |cFFFFFF2|r seconds.",
 
     SI_LUIE_SKILL_GENERIC_AOE_HEAL_1_SEC =               "Healing every |cFFFFFF1|r second.",
@@ -2866,6 +2869,12 @@ local strings = {
 
     SI_LUIE_SKILL_LAVA_TRAP =                            "Lava Trap",
     SI_LUIE_SKILL_LIGHTNING_TRAP =                       "Lightning Trap",
+    SI_LUIE_SKILL_SPIKE_TRAP_TP =                        "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF5|r seconds.\n\nImmobilized for |cFFFFFF0.8|r seconds.",
+
+    SI_LUIE_SKILL_FIRE_TRAP_TP =                         "Taking Flame Damage every |cFFFFFF0.75|r seconds and Movement Speed reduced by |cFFFFFF50|r%.",
+    SI_LUIE_SKILL_FIRE_TRAP_CELLS_TP =                   "Taking Flame Damage every |cFFFFFF1.5|r seconds and Movement Speed reduced by |cFFFFFF50|r%.",
+
+    SI_LUIE_SKILL_SPIKE_TRAP_AURIDON_TP =                "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF10|r seconds.\n\nThis effect stacks up to |cFFFFFF3|r times, to a maximum of |cFFFFFF75|r% Movement Speed reduction.\n\nStunned for |cFFFFFF1|r second.",
 
 	----------------------------------------------------------------
     -- SETS --------------------------------------------------------
@@ -2923,6 +2932,12 @@ local strings = {
     SI_LUIE_SKILL_SET_THE_TROLL_KING_TP =                "Восстановление Здоровья увеличено в течение |cffffff10|r секунд.",
     SI_LUIE_SKILL_SET_THURVOKUN_TP =                     "Enemies in the pool take Disease Damage every |cffffff1|r second and are afflicted with Minor Maim and Minor Defile for |cffffff4|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_SET_ZAAN_TP =                          "Подвержен увеличивающемуся урону от Огня каждую |cffffff1|r секунду в течение |cffffff5|r секунд, пока луч активен.",
+    SI_LUIE_SKILL_SET_ENERGY_CHARGE =                    "Energy Charge",
+    SI_LUIE_SKILL_SET_ENERGY_CHARGE_TP =                 "Gain an Energy Charge for |cffffff<<1>>|r seconds when you block an attack.\n\nWhen you gain |cffffff6|r charges, release the energy, restoring Stamina and Magicka and Healing.",
+    SI_LUIE_SKILL_SET_MERIDIAS_FAVOR_TP =                "Restoring Magicka or Stamina, whichever maximum is higher, every |cffffff1|r second for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_AURORANS_THUNDER_TP =              "Enemies in a cone in front of you take Shock Damage every |cffffff0.5|r seconds for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_TZOGVINS_WARBAND_TP =              "Increase Weapon Critical for |cffffff10|r seconds, stacking up to |cffffff10|r times.\n\nAt max stacks, you also gain Minor Force.",
+    SI_LUIE_SKILL_SET_FROZEN_WATCHER_TP =                "Nearby enemies take Frost Damage every |cffffff1|r second while you are blocking.\n\nYour blizzard has a |cffffff15|r% chance of inflicting Chilled on enemies damaged.",
 
 	-- Crafted Sets
     SI_LUIE_SKILL_SET_ALESSIAS_BULWARK =                 "Урон от Оружия снижен на |cffffff10|r% в течение |cFFFFFF5|r секунд.",
@@ -3192,6 +3207,20 @@ local strings = {
     SI_LUIE_SKILL_STATIC_SHIELD_TP =                     "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nIf the shield is not destroyed it will detonate at the end of the duration, dealing Shock Damage to nearby enemies.",
     SI_LUIE_SKILL_TURRET_MODE_TP =                       "Charged by a power conduit, enabling the Sentry to shield itself with |cFFFFFFStatic Shield|r and use the |cFFFFFFThunderbolt|r ability.",
     SI_LUIE_SKILL_STATIC_CHARGE_TP =                     "Residual static energy from the Dolmen is suppressing your Health Recovery and you will be targeted by Static Charge, taking Oblivion damage.\n\nMove to reduce to the static buildup.",
+
+    SI_LUIE_SKILL_INCAPACITATING_TERROR_TP =             "Feared and taking Frost Damage every |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_SPIRITUAL_CLOAK_TP =                   "Prevent Soul Thirsters from pulling you into the spirit realm.",
+    SI_LUIE_SKILL_BLESSING_GATHWEN_TP =                  "Reduce damage taken by |cFFFFFF3|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_MAIM_NPC_TP =                          "Reduce damage done by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_DRAIN_ESSENCE_NPC_TP =                 "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEach tick heals the caster.",
+    SI_LUIE_SKILL_SUMMON_DARK_PROXY_TP =                 "A shadowy Clannfear fights at your side. The clannfear remains for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SUMMON_CLANNFEAR_TP =                  "A Clannfear fights at your side. The clannfear remains for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_POOL_OF_FIRE =                         "Pool of Fire",
+    SI_LUIE_SKILL_SISTERS_BOND =                         "Sister's Bond",
+
+    SI_LUIE_SKILL_CURSE_OF_SUFFERING_TP =                "Afflicted with with Magic Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF40|r%.\n\nEnter the Red Sigil to remove the curse.",
+    SI_LUIE_SKILL_CURSE_OF_DOMINANCE_TP =                "Afflicted with with Magic Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF40|r%.\n\nEnter the Black Sigil to remove the curse.",
 
 }
 

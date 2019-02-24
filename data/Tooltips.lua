@@ -146,6 +146,7 @@ T.Generic_Burn                          = GetString(SI_LUIE_SKILL_GENERIC_BURN_T
 T.Generic_Burn_1_Sec                    = GetString(SI_LUIE_SKILL_GENERIC_BURN_1_SEC_TP)
 T.Generic_Burn_2_Sec                    = GetString(SI_LUIE_SKILL_GENERIC_BURN_2_SEC_TP)
 T.Generic_Freeze                        = GetString(SI_LUIE_SKILL_GENERIC_FREEZE_TP)
+T.Generic_Freeze_1_Sec                  = GetString(SI_LUIE_SKILL_GENERIC_FREEZE_1_SEC_TP)
 T.Generic_Freeze_2_Sec                  = GetString(SI_LUIE_SKILL_GENERIC_FREEZE_2_SEC_TP)
 T.Generic_Shock                         = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_TP)
 T.Generic_Shock_1_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_SHOCK_1_SEC_TP)
@@ -387,6 +388,11 @@ T.Set_Engine_Guardian_Magicka       	= zo_strformat(GetString(SI_LUIE_SKILL_SET_
 T.Set_The_Troll_King                    = GetString(SI_LUIE_SKILL_SET_THE_TROLL_KING_TP)
 T.Set_Thurvokun                         = GetString(SI_LUIE_SKILL_SET_THURVOKUN_TP)
 T.Set_Zaan                              = GetString(SI_LUIE_SKILL_SET_ZAAN_TP)
+T.Set_Energy_Charge                     = GetString(SI_LUIE_SKILL_SET_ENERGY_CHARGE_TP)
+T.Set_Meridias_Favor                    = GetString(SI_LUIE_SKILL_SET_MERIDIAS_FAVOR_TP)
+T.Set_Aurorans_Thunder                  = GetString(SI_LUIE_SKILL_SET_AURORANS_THUNDER_TP)
+T.Set_Tzogvins_Warband                  = GetString(SI_LUIE_SKILL_SET_TZOGVINS_WARBAND_TP)
+T.Set_Frozen_Watcher                    = GetString(SI_LUIE_SKILL_SET_FROZEN_WATCHER_TP)
 
 -- Crafted Sets
 T.Set_Alessias_Bulwark                  = GetString(SI_LUIE_SKILL_SET_ALESSIAS_BULWARK)
@@ -887,6 +893,7 @@ T.Skill_Slaughterfish_Attack            = GetString(SI_LUIE_SKILL_SLAUGHTERFISH_
 
 T.Skill_Spike_Trap                      = GetString(SI_LUIE_SKILL_SPIKE_TRAP_TP)
 T.Skill_Fire_Trap                       = GetString(SI_LUIE_SKILL_FIRE_TRAP_TP)
+T.Skill_Fire_Trap_Cells                 = GetString(SI_LUIE_SKILL_FIRE_TRAP_CELLS_TP)
 
 T.Skill_Spike_Trap_Auridon              = GetString(SI_LUIE_SKILL_SPIKE_TRAP_AURIDON_TP)
 
@@ -1041,8 +1048,21 @@ T.Skill_Fancy_Clothing                  = GetString(SI_LUIE_SKILL_FANCY_CLOTHING
 T.Skill_Burrow                          = GetString(SI_LUIE_SKILL_BURROW_TP)
 T.Skill_Shadow_Wood                     = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP)
 
+----------------------------------------------------------------
+-- DUNGEONS ------------------------------------------------------
+----------------------------------------------------------------
 
+-- Banished Cells I
+T.Skill_Drain_Essence                   = GetString(SI_LUIE_SKILL_DRAIN_ESSENCE_NPC_TP)
+T.Skill_Summon_Dark_Proxy               = GetString(SI_LUIE_SKILL_SUMMON_DARK_PROXY_TP)
+T.Skill_Summon_Clannfear                = GetString(SI_LUIE_SKILL_SUMMON_CLANNFEAR_TP)
 
+-- Banished Cells II
+T.Skill_Curse_of_Suffering              = GetString(SI_LUIE_SKILL_CURSE_OF_SUFFERING_TP)
+T.Skill_Curse_of_Dominance              = GetString(SI_LUIE_SKILL_CURSE_OF_DOMINANCE_TP)
+
+-- Frostvault
+T.Skill_Maim                            = GetString(SI_LUIE_SKILL_MAIM_NPC_TP)
 
 
 
@@ -1066,6 +1086,7 @@ T.Generic_AOE_Fire_0_5_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_FI
 T.Generic_AOE_Fire_0_66_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_0_66_SEC)
 T.Generic_AOE_Fire_0_9_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_0_9_SEC)
 T.Generic_AOE_Fire_1_Sec                = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_SEC)
+T.Generic_Aoe_Fire_1_5_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_5_SEC)
 T.Generic_AOE_Frost_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_FROST_1_SEC)
 T.Generic_AOE_Shock_0_5_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_SHOCK_0_5_SEC)
 T.Generic_AOE_Shock_0_7_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_SHOCK_0_7_SEC)
@@ -1073,6 +1094,7 @@ T.Generic_AOE_Shock_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_SH
 T.Generic_AOE_Magic_0_5_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_0_5_SEC)
 T.Generic_AOE_Magic_0_66_Sec            = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_0_66_SEC)
 T.Generic_AOE_Magic_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_1_SEC)
+T.Generic_AOE_Magic_1_5_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_1_5_SEC)
 T.Generic_AOE_Magic_2_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_MAGIC_2_SEC)
 
 T.Generic_AOE_Heal_1_Sec                = GetString(SI_LUIE_SKILL_GENERIC_AOE_HEAL_1_SEC)

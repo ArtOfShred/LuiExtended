@@ -298,6 +298,11 @@ A.Set_Spawn_of_Mephala              = 59497
 A.Set_Swarm_Mother                  = 80592
 A.Set_Engine_Guardian               = 59521
 A.Set_The_Troll_King                = GetString(SI_LUIE_SKILL_SET_TROLL_KING)
+A.Set_Energy_Charge                 = GetString(SI_LUIE_SKILL_SET_ENERGY_CHARGE)
+A.Set_Tzogvins_Warband              = 116734
+A.Set_Scavenging_Demise             = 116947
+A.Set_Mighty_Glacier                = 116798
+
 A.Set_Redistribution                = GetString(SI_LUIE_SKILL_SET_REDISTRIBUTION)
 A.Set_Varens_Legacy                 = 79029
 A.Set_Syvarras_Scales               = 75717
@@ -707,6 +712,7 @@ A.Skill_Magnum_Shot                 = 38672
 A.Skill_Draining_Shot               = 38669
 A.Skill_Bombard                     = 38705
 A.Skill_Venom_Arrow                 = 38645
+A.Skill_Rapid_Fire                  = 83465
 
 -- ---------------------------------------------------
 -- ARMOR SKILLS --------------------------------------
@@ -1128,6 +1134,29 @@ A.Skill_Shadow_Wood                 = GetString(SI_LUIE_SKILL_SHADOW_WOOD)
 
 -- SUMMERSET
 A.Skill_Pustulant_Eruption          = 105867
+
+-- ---------------------------------------------------
+-- DUNGEON EFFECTS -----------------------------------
+-- ---------------------------------------------------
+
+-- Banished Cells I
+A.Skill_Tail_Smite                  = 47587
+A.Skill_Shadow_Proxy                = 114655
+
+-- Banished Cells II
+A.Skill_Breath_of_Flame             = 49149
+A.Skill_Immolating_Bite             = 28903
+A.Skill_Pool_of_Fire                = GetString(SI_LUIE_SKILL_POOL_OF_FIRE)
+A.Skill_Crushing_Blow               = 27826
+A.Skill_Sisters_Bond                = GetString(SI_LUIE_SKILL_SISTERS_BOND)
+A.Skill_Levitate                    = 28570
+
+-- Frostvault
+A.Skill_Rending_Bleed               = 117286
+A.Skill_Leaping_Crush               = 109801
+A.Skill_Lifting_Strike              = 109834
+A.Skill_Frenzied_Pummeling          = 118489
+A.Skill_Frozen_Aura                 = 109806
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

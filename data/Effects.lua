@@ -33,6 +33,9 @@ E.IsToggle = {
     [973] = true, -- Sprint (Innate)
     [33439] = true, -- Mount Sprint (Generic)
 
+    -- Sets
+    [117082] = true, -- Frozen Watcher (Frozen Watcher)
+
     -- Sorcerer
     [23304] = true, -- Summon Unstable Familiar
     [23319] = true, -- Summon Unstable Clannfear
@@ -660,7 +663,8 @@ E.EffectCreateSkillAura = {
         -- alwaysShow = true -- Ignore the menu setting and always show this ability - Used for PVE abilities where we need to create additional information
         -- removeOnEnd = true -- Remove this aura when one of these effects ends.
         -- consolidate = true -- Also use this when consolidated auras is enabled.
-        -- extendedDisplay = true - This will only display if the option to display single effects is enabled as well.
+        -- extendedDisplay = true -- This will only display if the option to display single effects is enabled as well.
+        -- requiredStack = number -- Requires this number of stacks to apply
 
     -- Dragonknight
     [75088] = { removeOnEnd = true, consolidate = true, extendedDisplay = true, abilityId = 28969 }, -- Major Prophecy --> Inferno
@@ -773,6 +777,7 @@ E.EffectCreateSkillAura = {
 
     -- Sets
     [106867] = { alwaysShow = true, abilityId = 106865 }, -- Major Evasion --> Grace of Gloom
+    [116742] = { alwaysShow = true, abilityId = 116775, requiredStack = 10 }, -- Precision --> Minor Force (Tzogvin's Warband)
 
     -- NPC's
     -- Always Show = show regardless of menu setting
@@ -1441,7 +1446,30 @@ E.AddNameAura = {
     ['Clockwork Mediator Core'] = { [1] = { id = 33097 } }, -- Quest -- Vvardenfell -- Divine Restoration
     ['Clockwork Assembly Core'] = { [1] = { id = 33097 } }, -- Quest -- Vvardenfell -- Divine Restoration
     ['Barbas'] = { [1] = { id = 33097 } }, -- Quest -- Vvardenfell -- Divine Restoration
+
+    --------------------------------------------
+    -- DUNGEONS --------------------------------
+    --------------------------------------------
+
+    -- Banished Cells I
+    ['Cell Haunter'] = { [1] = { id = 33097 } }, -- Cell Haunter
+    ['Shadowrend'] = { [1] = { id = 33097 } }, -- Shadowrend
+    ['Angata the Clannfear Handler'] = { [1] = { id = 33097 } }, -- Angata the Clannfear Handler
+    ['High Kinlord Rilis'] = { [1] = { id = 33097 } }, -- High Kinlord Rilis
+
+    -- Banished Cells II
+    ['Keeper Areldur'] = { [1] = { id = 33097 } }, -- Keeper Areldur
+    ['Maw of the Infernal'] = { [1] = { id = 33097 } }, -- Maw of the Infernal
+    ['Keeper Voranil'] = { [1] = { id = 33097 } }, -- Keeper Voranil
+    ['Keeper Imiril'] = { [1] = { id = 33097 } }, -- Keeper Imiril
+
+    -- Frostvault
+    ['Coldsnap Ogre'] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
+    ['Icestalker'] = { [1] = { id = 33097 } }, -- Icestalker
+
 }
+
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1499,7 +1527,6 @@ E.IsAbilityActiveHighlight = {
 --------------------------------------------------------------------------------------------------------------------------------
 E.EffectOverrideByName = {
     -- TUTORIAL
-
     [1718] =    { -- Attack (CH + Vvardenfell Tutorial)
                     ['Naryu Virian'] =              { icon = 'LuiExtended/media/icons/abilities/ability_unarmed_attacklight.dds' } -- Attack (Tutorial)
                 },
@@ -1667,6 +1694,12 @@ E.EffectOverrideByName = {
     [37030] =   {
                     ['Auroran Battlemage'] =        { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
                 },
+
+    -- GENERIC
+    [44176] =   { -- Flying Immunities
+                   ['Cell Haunter'] = { hide = true }, -- Cell Haunter
+                   ['The Feast'] = { hide = true }, -- The Feast
+                },
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1684,6 +1717,9 @@ E.EffectSourceOverride = {
     [62769] = { source = A.Trap_Cold_Fire_Trap }, -- Coldharbour Flames {MQ Tutorial}
     [62770] = { source = A.Trap_Cold_Fire_Trap }, -- Coldharbour Flames {MQ Tutorial}
     [17314] = { source = A.Trap_Fire_Trap }, -- Fire Trap (Fire Trap)
+
+    [72888] = { source = A.Trap_Fire_Trap }, -- Fire Attack 1 (Fire) -- Banished Cells II
+    [72889] = { source = A.Trap_Fire_Trap }, -- Fire Attack 2 (Fire) -- Banished Cells II
 
     -- TRAPS (Go back over these)
     [92150] = {source = 'Dwarven Furnace'}, -- Fire Trap {Vvardenfell}
@@ -1979,6 +2015,17 @@ E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMB
     -- Main Story Quest
     [27776] = true, -- Feeding (Daughter of Giants)
     [38215] = true, -- Death's Gaze (Shadow of Sancre Tor)
+
+    --------------
+    -- DUNGEONS --
+    --------------
+
+    -- Banished Cells I
+    [19028] = true, -- Drain Essence (Banished Cells I)
+    [18772] = true, -- Feeding (Banished Cells I)
+
+    -- Frostvault
+    [117286] = true, -- Rending Bleed (Coldsnap Goblin - Shared)
 
 }
 
@@ -2857,6 +2904,16 @@ E.EffectOverride = {
     [102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', tooltip = T.Set_Zaan }, -- Zaan
     [102142] = { hide = true }, -- Zaan
 
+    [116839] = { icon = 'esoui/art/icons/ability_skeevatonschock.dds', name = A.Set_Energy_Charge, tooltip = T.Set_Energy_Charge }, -- Charging (Stonekeeper)
+    [116847] = { icon = 'esoui/art/icons/achievement_frostvault_killmonstersb.dds' }, -- Stonekeeper (Stonekeeper)
+    [116877] = { icon = 'esoui/art/icons/achievement_frostvault_killmonstersb.dds' }, -- Stonekeeper (Stonekeeper)
+    [116878] = { icon = 'esoui/art/icons/achievement_frostvault_killmonstersb.dds' }, -- Stonekeeper (Stonekeeper)
+    [116880] = { hide = true }, -- Stonekeeper (Stonekeeper)
+
+    [117111] = { icon = 'esoui/art/icons/achievement_depthsofmalatar_killmonstersb.dds', tooltip = T.Set_Meridias_Favor }, -- Meridia's Favor (Symphony of Blades)
+    [117118] = { icon = 'esoui/art/icons/achievement_depthsofmalatar_killmonstersb.dds' }, -- Meridia's Favor (Symphony of Blades)
+    [117119] = { icon = 'esoui/art/icons/achievement_depthsofmalatar_killmonstersb.dds' }, -- Meridia's Favor (Symphony of Blades)
+
     -- Crafted Sets
     [34502] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ashen_grip.dds' }, -- Ashen Grip
     [34592] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', tooltip = T.Set_Alessias_Bulwark }, -- Alessia's Bulwark
@@ -3019,6 +3076,12 @@ E.EffectOverride = {
     [111380] = { tooltip = A.Set_Hanus_Compassion }, -- Major Heroism (Hanu's Compassion)
     [111204] = { icon = 'esoui/art/icons/achievement_thievesguild_003.dds', tooltip = T.Set_Moon_Hunter }, -- Moon Hunter (Moon Hunter)
 
+    [117666] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds', hide = true }, -- Icy Conjuror
+    [116727] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds', tooltip = T.Generic_Freeze_1_Sec }, -- Icy Conjuror (Icy Conjuror)
+
+    [116884] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aurorans_thunder.dds', tooltip = T.Set_Aurorans_Thunder }, -- Auroran's Thunder (Auroran's Thunder)
+    [116920] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aurorans_thunder.dds' }, -- Auroran's Thunder (Auroran's Thunder)
+
     -- Dungeon Sets (Medium)
     [85977] = { icon = 'LuiExtended/media/icons/abilities/ability_set_barkskin.dds' }, -- Barkskin
     [85978] = { icon = 'LuiExtended/media/icons/abilities/ability_set_barkskin.dds' }, -- Barkskin
@@ -3050,6 +3113,13 @@ E.EffectOverride = {
     [111387] = { icon = 'esoui/art/icons/mh_no_rage_cleanse.dds', tooltip = T.Set_Blood_Moon_Scent }, -- Blood Scent (Blood Moon)
     [111386] = { icon = 'LuiExtended/media/icons/abilities/ability_set_blood_moon.dds', tooltip = T.Set_Blood_Moon_Frenzied }, -- Frenzied (Blood Moon)
     [111216] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_bleed.dds', tooltip = T.Generic_Bleed_2_Sec }, -- Savage Werewolf (Savage Werewolf)
+
+    [116742] = { icon = 'esoui/art/icons/achievement_wrothgar_003.dds', tooltip = T.Set_Tzogvins_Warband }, -- Precision (Tzogvin's Warband)
+    [116775] = { tooltip = A.Set_Tzogvins_Warband, hide = true }, -- Minor Force (Tzogvin's Warband)
+
+    [116954] = { hide = true }, -- Stalked (Scavenging Demise)
+    [116991] = { icon = 'LuiExtended/media/icons/abilities/ability_set_scavenging_demise.dds', name = A.Set_Scavenging_Demise }, -- Stalked (Scavenging Demise)
+    [117025] = { tooltip = A.Set_Scavenging_Demise }, -- Minor Vulnerability (Scavenging Demise)
 
     -- Dungeon Sets (Heavy)
     [102023] = { icon = 'LuiExtended/media/icons/abilities/ability_set_curse_of_doylemish.dds' }, -- Curse of Doylemish
@@ -3088,6 +3158,12 @@ E.EffectOverride = {
     [112414] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
     [111445] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
     [111221] = { tooltip = A.Set_Jailers_Tenacity }, -- Major Vitality (Jailer's Tenacity)
+
+    [116804] = { tooltip = A.Set_Mighty_Glacier }, -- Major Ward (Mighty Glacier)
+    [116805] = { tooltip = A.Set_Mighty_Glacier }, -- Major Resolve (Mighty Glacier)
+
+    [117082] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', forcedContainer = 'short', tooltip = T.Set_Frozen_Watcher }, -- Frozen Watcher (Frozen Watcher)
+    [117060] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds' }, -- Frozen Watcher (Frozen Watcher)
 
     -- Trial Sets (Hel Ra Citadel)
     [50978] = { icon = 'esoui/art/icons/achievement_update11_dungeons_001.dds', tooltip = T.Set_Berserking_Warrior }, -- Berserking Warrior (Advancing Yokeda)
@@ -6034,7 +6110,7 @@ E.EffectOverride = {
     [12460] = { icon = 'esoui/art/icons/ability_mage_037.dds' }, -- Winter's Reach (Frost Mage)
     [14550] = { icon = 'esoui/art/icons/ability_mage_037.dds', tooltip = T.Generic_Immobilize }, -- Winter's Reach (Frost Mage)
     [14194] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_barrier.dds', tooltip = T.Skill_Ice_Barrier }, -- Ice Barrier (Frost Mage)
-    [7145] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_barrier.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Ice_Barrier, A.Proc_Chill), stack = 0, tooltip = T.Generic_Snare_20 }, -- Ice Barrier (Frost Mage)
+    [7145] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_barrier.dds', name = A.Proc_Chill, stack = 0, tooltip = T.Generic_Snare_20 }, -- Ice Barrier (Frost Mage)
 
     [35151] = { icon = 'esoui/art/icons/ability_mage_064.dds', tooltip = T.Skill_Spell_Absorption }, -- Spell Absorption (Spirit Mage)
     [14472] = { icon = 'esoui/art/icons/ability_mage_004.dds', tooltip = T.Skill_Burdening_Eye }, -- Burdening Eye (Spirit Mage)
@@ -7735,6 +7811,10 @@ E.EffectOverride = {
     [31606] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', groundLabel = true, unbreakable = 1, tooltip = T.Skill_Fire_Trap, hideGround = true }, -- Fire Trap (Player)
     [17314] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', groundLabel = true, unbreakable = 1, tooltip = T.Skill_Fire_Trap }, -- Fire Trap (Player)
 
+    [72888] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, hide = true, groundLabel = true, unbreakable = 1, tooltip = T.Skill_Fire_Trap_Cells }, -- Fire Attack 1 (Fire) -- Banished Cells II
+    [72889] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, groundLabel = true, unbreakable = 1, tooltip = T.Skill_Fire_Trap_Cells }, -- Fire Attack 2 (Fire) -- Banished Cells II
+    [72890] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, tooltip = T.Skill_Fire_Trap_Cells, groundLabel = true, unbreakable = 1, hideGround = true }, -- Laser Snare (Fire) -- Banished Cells II
+
     [26530] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Bear Trap (Bear Trap)
     [26531] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds' }, -- Bear Trap (Bear Trap)
 
@@ -7943,8 +8023,8 @@ E.EffectOverride = {
     [64220] = { hide = true }, -- Base Damage Reduction (Aelif)
 
     -- Will of the Council
-    [28939] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Flame_Blossom }, -- Heat Wave (Sees-All-Colors)
-    [28946] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Flame_Blossom }, -- Heat Wave (Sees-All-Colors)
+    [28939] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_set_flame_blossom.dds', name = A.Skill_Flame_Blossom }, -- Heat Wave (Sees-All-Colors)
+    [28946] = { icon = 'LuiExtended/media/icons/abilities/ability_set_flame_blossom.dds', name = A.Skill_Flame_Blossom }, -- Heat Wave (Sees-All-Colors)
     [47758] = { hide = true }, -- Imprisonment
     [64111] = { hide = true }, -- Transformation
 
@@ -8696,8 +8776,192 @@ E.EffectOverride = {
     [105912] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_slime_alt.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_50 }, -- Pustulant Eruption (Yaghra Nightmare)
     [105893] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_gtaoe.dds', name = A.Skill_Pustulant_Eruption }, -- Pustulant Film (Yaghra Nightmare)
 
+    ----------------------------------------------------------------
+    -- DUNGEONS    -------------------------------------------------
+    ----------------------------------------------------------------
+
+    -- Banished Cells I
+    [19028] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_drain_essence.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Drain_Essence }, -- Drain Essence (Cell Haunter)
+
+    [46258] = { hide = true }, -- Clannfear Arrives (Shadowrend)
+    [18725] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_headbutt.dds' }, -- Spiked Headbutt (Shadowrend)
+    [47587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_tail_spike.dds' }, -- Tail Smite (Shadowrend)
+    [47608] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_tail_spike.dds', name = A.Skill_Tail_Smite, tooltip = T.Generic_Knockdown }, -- Knocked Down (Shadowrend)
+    [21886] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_shadow_proxy.dds', name = zo_strformat("<<1>> <<2>>", A.Innate_Summon, A.Skill_Shadow_Proxy), tooltip = T.Skill_Summon_Dark_Proxy }, -- Summon Dark Proxy (Shadowrend)
+    [21887] = { hide = true }, -- Forward Charge (Dark Proxy)
+    [35625] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_rending_leap_shadowrend.dds' }, -- Pounce (Shadowrend)
+    [18772] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_devour_shadowrend.dds', name = A.Skill_Devour, hide = true }, -- Feeding (Shadowrend)
+    [18759] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_rending_leap_shadowrend.dds', tooltip = T.Generic_Knockdown }, -- Pounce (Shadowrend)
+
+    [18708] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_daedra.dds', tooltip = T.Skill_Summon_Clannfear }, -- Summon Clannfear (Angata the Clannfear Handler)
+    [18709] = { hide = true }, -- Summon Appearance (Angata the Clannfear Handler)
+
+    [19025] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_dead_zone.dds' }, -- Dead Zone (Skeletal Destroyer)
+    [19027] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_dead_zone.dds', tooltip = T.Generic_AOE_Magic_1_5_Sec, groundLabel = true }, -- Dead Zone (Skeletal Destroyer)
+
+    [18961] = { hide = true }, -- Ghostly Summon (Generic Invisible Target)
+    [18798] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Slash (High Kinlord Rilis)
+    [33189] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds' }, -- Crushing Blow (High Kinlord Rilis)
+    [33190] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', hide = true }, -- Crushing Blow (High Kinlord Rilis)
+    [33191] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Crushing Blow (High Kinlord Rilis)
+    [33172] = { hide = true }, -- Oblivion Restoration (The Feast)
+    [33165] = { hide = true }, -- Despawn Self (The Feast)
+
+    [18840] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_death_bolt.dds', hide = true }, -- Soul Blast (High Kinlord Rilis)
+    [18846] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_death_bolt.dds', hide = true }, -- Soul Blast (High Kinlord Rilis)
+    [18847] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_death_bolt.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Soul Blast (High Kinlord Rilis)
+
+    [18875] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_coldfire_gtaoe.dds', hide = true }, -- Daedric Tempest (High Kinlord Rilis)
+    [33437] = { hide = true }, -- Daedric Tempest (High Kinlord Rilis)
+    [33174] = { hide = true }, -- Daedric Tempest (High Kinlord Rilis)
+    [33188] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_coldfire_gtaoe.dds', tooltip = T.Generic_AOE_Magic_1_5_Sec, groundLabel = true }, -- Daedric Tempest (High Kinlord Rilis)
+
+    [36522] = { hide = true }, -- Daedric Flames (High Kinlord Rilis)
+    [46296] = { hide = true }, -- Crystals (Binding Stones)
+
+    -- Banished Cells II
+    [64490] = { hide = true }, -- Shatter
+    [46715] = { hide = true }, -- DUN_BCH Cruelty One Shot
+
+    [28902] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_jagged_claw.dds' }, -- Swipe (Maw of the Infernal)
+    [49150] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds', name = A.Skill_Breath_of_Flame }, -- Cone of Rot (Maw of the Infernal)
+    [49149] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds' }, -- Breath of Flame (Maw of the Infernal)
+    [35680] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds', unbreakable = 1, tooltip = T.Generic_Stun }, -- Immolating Bite (Maw of the Infernal)
+    [28904] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_gtaoe.dds', name = A.Skill_Pool_of_Fire, groundLabel = true, tooltip = T.Generic_Aoe_Fire_1_5_Sec }, -- Immolating Bite (Maw of the Infernal)
+    [47127] = { hide = true }, -- Nocom
+
+    [48281] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Slash (Keeper Voranil)
+    [27826] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds' }, -- Crushing Blow (Keeper Voranil)
+    [27827] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', hide = true }, -- Crushing Blow (Keeper Voranil)
+    [27828] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', tooltip = T.Generic_Knockback }, -- Crushing Blow (Keeper Voranil)
+    [29018] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Keeper Voranil)
+    [29020] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Keeper Voranil)
+    [28750] = { icon = 'esoui/art/icons/ability_mage_008.dds', hide = true }, -- Essence Siphon (Keeper Voranil)
+
+    [64518] = { hide = true }, -- Shatter
+
+    [30734] = { hide = true }, -- Portal (Daedric Chaos)
+    [31713] = { hide = true }, -- Root (Daedric Chaos)
+    [31726] = { hide = true }, -- Corruption (Daedric Chaos)
+    [32054] = { hide = true }, -- SpawnRun (Banekin)
+    [32038] = { hide = true }, -- Into Portal (Keeper Imiril)
+    [36631] = { hide = true }, -- ExitPortal (Keeper Imiril)
+
+    [31727] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_daedric_chaos.dds', groundLabel = true, tooltip = T.Generic_AOE_Magic_1_Sec }, -- Corruption (Daedric Chaos)
+    [28916] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Slash (Keeper Imiril)
+    [29143] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_magic_aoe.dds' }, -- Daedric Blast (Keeper Imiril)
+
+    [64526] = { hide = true }, -- Shatter
+
+    [28962] = { icon = 'esoui/art/icons/ability_mage_030.dds', name = A.Skill_Sisters_Bond }, -- Sister's Love (Sister Sihna / Sister Vera)
+
+    [35847] = { hide = true }, -- Shatter
+
+    [28715] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_ranged.dds' }, -- Daedric Bolt (High Kinlord Rilis)
+    [28772] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds', name = A.Skill_Levitate, unbreakable = 1, tooltip = T.Generic_Levitate }, -- Stun (High Kinlord Rilis)
+    [28774] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds', name = A.Skill_Levitate, unbreakable = 1, tooltip = T.Generic_Levitate }, -- Stun (High Kinlord Rilis)
+    [28475] = { tooltip = T.Skill_Curse_of_Suffering, unbreakable = 1, duration = 0 }, -- Curse of Suffering (High Kinlord Rilis)
+    [48308] = { icon = 'esoui/art/icons/ability_mage_023.dds' }, -- Curse of Suffering (High Kinlord Rilis)
+    [28571] = { icon = 'esoui/art/icons/ability_mage_001.dds', tooltip = T.Skill_Curse_of_Dominance, unbreakable = 1, duration = 0 }, -- Curse of Dominance (High Kinlord Rilis)
+    [48507] = { icon = 'esoui/art/icons/ability_mage_001.dds' }, -- Curse of Dominance (High Kinlord Rilis)
+
+    [46967] = { hide = true }, -- Daedric Step (High Kinlord Rilis)
+    [46964] = { hide = true }, -- Daedric Step (High Kinlord Rilis)
+    [46965] = { hide = true }, -- Daedric Step (High Kinlord Rilis)
+    [48909] = { hide = true }, -- The Feast (High Kinlord Rilis)
+    [26070] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_the_feast_heal.dds' }, -- The Feast
+
+    [48799] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_coldfire_gtaoe.dds' }, -- Daedric Tempest (High Kinlord Rilis)
+    [48814] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_coldfire_gtaoe.dds' }, -- Daedric Tempest (High Kinlord Rilis)
+    [48800] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_coldfire_gtaoe.dds', tooltip = T.Generic_AOE_Magic_1_5_Sec, groundLabel = true }, -- Daedric Tempest (High Kinlord Rilis)
+    [48815] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_coldfire_gtaoe.dds', tooltip = T.Generic_AOE_Magic_1_5_Sec, groundLabel = true }, -- Daedric Tempest (High Kinlord Rilis)
+
+    [28362] = { hide = true }, -- Black Sigil (High Kinlord Rilis)
+    [36020] = { hide = true }, -- Black Sigil (High Kinlord Rilis)
+    [28088] = { hide = true }, -- Red Sigil (High Kinlord Rilis)
+    [36030] = { hide = true }, -- Red Sigil (High Kinlord Rilis)
+
+    -- Frostvault
+    [117286] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', hide = true }, -- Rending Bleed (Coldsnap Goblin - Shared)
+    [117486] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = A.Skill_Rending_Bleed, unbreakable = 1, tooltip = T.Generic_Bleed_2_Sec }, -- Bleed (Coldsnap Goblin - Shared)
+
+    [109574] = { name = A.Skill_Rapid_Fire }, -- Fire Power (Coldsnap Harrier)
+    [102945] = { icon = 'esoui/art/icons/ability_bow_006.dds', name = A.Skill_Rapid_Fire }, -- Firepower (Coldsnap Harrier)
+
+    [117298] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Coldsnap Snowstalker)
+    [117352] = { icon = 'esoui/art/icons/ability_dualwield_005.dds' }, -- Whirlwind (Coldsnap Snowstalker)
+
+    [117295] = { icon = 'LuiExtended/media/icons/abilities/ability_durzog_bite.dds' }, -- Bite (Coldsnap Durzog)
+    [117296] = { icon = 'LuiExtended/media/icons/abilities/ability_durzog_rend.dds' }, -- Rend (Coldsnap Durzog)
+
+    [117289] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_backhand.dds' }, -- Backhand (Coldsnap Ogre)
+    [117290] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Shockwave (Coldsnap Ogre)
+    [118491] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Shockwave (Coldsnap Ogre)
+    [117292] = { tooltip = A.Skill_Shockwave }, -- Off Balance (Coldsnap Ogre)
+    [117291] = { hide = true, tooltip = T.Generic_Stagger }, -- Stagger (Coldsnap Ogre)
+    [117287] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Crushing Blow (Coldsnap Ogre)
+    [117288] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds', tooltip = T.Generic_Knockdown }, -- Crushing Blow (Coldsnap Ogre)
+
+    [117316] = { icon = 'esoui/art/icons/ability_mage_009.dds', hide = true }, -- Ice Arrow (Coldsnap Skysplitter)
+    [117326] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds' }, -- Ice Comet (Coldsnap Skysplitter)
+    [117327] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds' }, -- Ice Comet (Coldsnap Skysplitter)
+    [117324] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', tooltip = T.Generic_Knockdown }, -- Ice Comet (Coldsnap Skysplitter)
+
+    [117309] = { icon = 'esoui/art/icons/ability_2handed_002.dds' }, -- Cleave (Coldsnap Frostbiter)
+
+    [117346] = { tooltip = T.Generic_Snare_60 }, -- Low Slash (Coldsnap Toothbreaker)
+    [114490] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_maim.dds', tooltip = T.Skill_Maim }, -- Maim (Coldsnap Toothbreaker)
+
+    [109821] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_rock_toss.dds' }, -- Rock Toss (Icestalker)
+    [109822] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_rock_toss.dds' }, -- Rock Toss (Icestalker)
+
+    [109803] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_lope.dds' }, -- Leaping Crush (Icestalker)
+    [109802] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_lope.dds' }, -- Leaping Crush (Icestalker)
+    [109804] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_lope.dds' }, -- Leaping Crush (Icestalker)
+    [109805] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_lope.dds' }, -- Leaping Crush (Icestalker)
+    [116667] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_lope.dds', name = A.Skill_Leaping_Crush }, -- Skeletal Smash (Icestalker)
+    [116666] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_lope.dds', name = A.Skill_Leaping_Crush, tooltip = T.Generic_Knockback, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Skeletal Smash (Icestalker)
+
+    [109827] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds' }, -- Boulder Toss (Icestalker)
+    [109828] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds' }, -- Boulder Toss (Icestalker)
+    [109831] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds', tooltip = T.Generic_Knockdown }, -- Boulder Toss (Icestalker)
+
+    [109811] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Ground Slam (Icestalker)
+    [109819] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Ground Slam (Icestalker)
+    [116684] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Ground Slam (Icestalker)
+
+    [109800] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_slap.dds' }, -- Slap (Icestalker)
+
+    [109833] = { icon = 'esoui/art/icons/achievement_frostvault_flavor_boss_1a.dds', name = A.Skill_Lifting_Strike }, -- Frenzied Pummeling (Icestalker)
+    [109834] = { icon = 'esoui/art/icons/achievement_frostvault_flavor_boss_1a.dds' }, -- Lifting Strike (Icestalker)
+    [109835] = { icon = 'esoui/art/icons/achievement_frostvault_flavor_boss_1a.dds', name = A.Skill_Lifting_Strike, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Frenzied Pummeling (Icestalker)
+
+    [109837] = { icon = 'esoui/art/icons/achievement_frostvault_flavor_boss_2a.dds', name = A.Skill_Frenzied_Pummeling }, -- Frenzied Pummeling (Icestalker)
+    [118489] = { icon = 'esoui/art/icons/achievement_frostvault_flavor_boss_2a.dds' }, -- Frenzied Pummeling (Icestalker)
+    [121824] = { icon = 'esoui/art/icons/achievement_frostvault_flavor_boss_2a.dds' }, -- Frenzied Pummeling (Icestalker)
+    [109838] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds', name = A.Skill_Recover }, -- End Stun (Icestalker)
+
+    [109806] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds' }, -- Frozen Aura (Icestalker)
+    [109808] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', name = A.Skill_Frozen_Aura, groundLabel = true, tooltip = T.Generic_Snare_50_No_Dur }, -- Frostbite (Icestalker)
+    [109810] = { name = A.Innate_Stagger, tooltip = T.Generic_Stagger, hide = true }, -- Frozen Aura (Icestalker)
+
+    [83430] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds' }, -- Skeletal Smash (Ice Wraith)
+    [83454] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds' }, -- Skeletal Smash (Ice Wraith)
+    [83453] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds', tooltip = T.Generic_Knockback }, -- Skeletal Smash (Ice Wraith)
+
+    [116683] = { hide = true }, -- U23-DUN1 B N Intro (Skeevaton)
+
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+-- If this abilityId is up, then pull the duration from another active ability Id to set its duration
+--------------------------------------------------------------------------------------------------------------------------------
+E.EffectPullDuration = {
+
+    [107632] = 107629, -- Major Resolve --> Mend Spirit (Mend Spirit)
+    [107631] = 107629, -- Major Ward --> Mend Spirit (Mend Spirit)
+
+}
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fake Buffs & Debuffs - Fake auras created by EVENT_COMBAT_EVENT for abilities that lack proper auras. Note tooltips & unbreakable status are determined in E.EffectOverride
@@ -8752,6 +9016,8 @@ E.FakeExternalDebuffs = {
     [29602] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = A.Trap_Falling_Rocks, duration = 2000 }, -- Falling Rocks (Cave-In)
 
     [31606] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, duration = 0 }, -- Fire Trap (Player)
+
+    [72890] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, duration = 0 }, -- Laser Snare (Fire)
 
     [66153] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Trial of Flame', duration = 1500}, -- Trial of Flame (Wrothgar - Old Orsinium)
     [32246] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Steam Trap', duration = 2000}, -- Laser Snare (Steam Trap)
@@ -8874,6 +9140,21 @@ E.FakeExternalDebuffs = {
     [87348] = {icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds', name = 'Water Geyser', duration = 1500}, -- Water Geyser Burst (Vvardenfell -- A Hireling of House Telvanni)
     [87350] = {icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds', name = 'Water Geyser', duration = 2000}, -- Water Geyser Burst (Vvardenfell -- A Hireling of House Telvanni)
     [89756] = {icon = 'esoui/art/icons/achievement_wrothgar_006.dds', name = 'Centurion Drop', duration = 2000}, -- Guardian Shockwave (Mzanchend Guardian -- Vvardenfell -- The Magister Makes a Move)
+
+    ----------------------------------------------------------------
+    -- DUNGEONS ----------------------------------------------------
+    ----------------------------------------------------------------
+
+    -- Banished Cells II
+    [35680] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds', name = A.Skill_Immolating_Bite, duration = 2250 }, -- Immolating Bite (Maw of the Infernal)
+    [27828] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = A.Skill_Crushing_Blow, duration = 2500 }, -- Crushing Blow (Keeper Voranil)
+    [28772] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds', name = A.Skill_Levitate, duration = 5000 }, -- Stun (High Kinlord Rilis)
+    [28774] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds', name = A.Skill_Levitate, duration = 5000 }, -- Stun (High Kinlord Rilis)
+
+    -- Frostvault
+    [117486] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = A.Skill_Rending_Bleed, duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
+    [109808] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', name = A.Skill_Frozen_Aura, duration = 0 }, -- Frostbite (Icestalker)
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -9085,8 +9366,12 @@ E.FakeStagger = {
     [88510] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Staggered (Vvardenfell -- Ancestral Adversity)
 
     -- On Target
-    [86310] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500}, -- Stagger (Player Blocks charged NPC attack)
-    [21972] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500}, -- Stagger (Player interrupts NPC cast)
+    [86310] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500}, -- Stagger (Player Blocks charged NPC attack)
+    [21972] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500}, -- Stagger (Player interrupts NPC cast)
+
+    -- Dungeons
+    [117291] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Stagger (Coldsnap Ogre) -- Frostvault
+    [109810] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 600 }, -- Frozen Aura (Icestalker) -- Frostvault
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -9224,6 +9509,9 @@ E.AddGroundDamageAura = {
 
     [17314] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF, exception = ACTION_RESULT_DOT_TICK }, -- Fire Trap (Player)
 
+    [72888] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire Attack 1 (Fire) -- Banished Cells II
+    [72889] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire Attack 2 (Fire) -- Banished Cells II
+
     --------------------
     -- NPC
     --------------------
@@ -9294,6 +9582,20 @@ E.AddGroundDamageAura = {
     [91094] = { duration = 650, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 1 }, -- Split Bolt (Dwemer Arquebus)
     [91095] = { duration = 650, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 1 }, -- Split Bolt (Dwemer Arquebus)
     [91096] = { duration = 650, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 1 }, -- Split Bolt (Dwemer Arquebus)
+
+    ------------------
+    -- DUNGEONS ------
+    ------------------
+
+    -- Banished Cells I
+    [19027] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Dead Zone (Skeletal Destroyer)
+    [33188] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Daedric Tempest (High Kinlord Rilis)
+
+    -- Banished Cells II
+    [28904] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Immolating Bite (Maw of the Infernal)
+    [31727] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Corruption (Daedric Chaos)
+    [48800] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Daedric Tempest (High Kinlord Rilis)
+    [48815] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Daedric Tempest (High Kinlord Rilis)
 
 }
 
