@@ -2401,8 +2401,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
 		end
 
         g_effectsList.player1[ abilityId ] = nil
-        iconName = E.FakeExternalBuffs[abilityId].icon
-        effectName = E.FakeExternalBuffs[abilityId].name
+        iconName = E.FakeExternalBuffs[abilityId].icon or GetAbilityIcon(abilityId)
+        effectName = E.FakeExternalBuffs[abilityId].name or GetAbilityName(abilityId)
         overrideDuration = E.FakeExternalBuffs[abilityId].overrideDuration
         duration = E.FakeExternalBuffs[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
@@ -2455,8 +2455,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             g_effectsList.player2[ abilityId ] = nil
         end
 
-        iconName = E.FakeExternalDebuffs[abilityId].icon
-        effectName = E.FakeExternalDebuffs[abilityId].name
+        iconName = E.FakeExternalDebuffs[abilityId].icon or GetAbilityIcon(abilityId)
+        effectName = E.FakeExternalDebuffs[abilityId].name or GetAbilityName(abilityId)
         duration = E.FakeExternalDebuffs[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
@@ -2530,8 +2530,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             return
         end
 
-        iconName = E.FakePlayerBuffs[abilityId].icon
-        effectName = E.FakePlayerBuffs[abilityId].name
+        iconName = E.FakePlayerBuffs[abilityId].icon or GetAbilityIcon(abilityId)
+        effectName = E.FakePlayerBuffs[abilityId].name or GetAbilityName(abilityId)
         duration = E.FakePlayerBuffs[abilityId].duration
         local finalId = E.FakePlayerBuffs[abilityId].shiftId or abilityId
         local forcedType = E.FakePlayerBuffs[abilityId].long and "long" or "short"
@@ -2578,8 +2578,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
 		if SCB.SV.HidePlayerDebuffs then
 			return
 		end
-        iconName = E.FakeStagger[abilityId].icon
-        effectName = E.FakeStagger[abilityId].name
+        iconName = E.FakeStagger[abilityId].icon or GetAbilityIcon(abilityId)
+        effectName = E.FakeStagger[abilityId].name or GetAbilityName(abilityId)
         duration = E.FakeStagger[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
@@ -2646,8 +2646,8 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         if not DoesUnitExist("reticleover") then return end
         if GetUnitReaction("reticleover") == UNIT_REACTION_HOSTILE then return end
         if IsUnitDead(unitTag) then return end
-        iconName = E.FakePlayerExternalBuffs[abilityId].icon
-        effectName = E.FakePlayerExternalBuffs[abilityId].name
+        iconName = E.FakePlayerExternalBuffs[abilityId].icon or GetAbilityIcon(abilityId)
+        effectName = E.FakePlayerExternalBuffs[abilityId].name or GetAbilityName(abilityId)
         duration = E.FakePlayerExternalBuffs[abilityId].duration
         effectType = BUFF_EFFECT_TYPE_DEBUFF
         local beginTime = GetGameTimeMilliseconds()
@@ -2687,8 +2687,8 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         if not DoesUnitExist("reticleover") then end
         --if GetUnitReaction("reticleover") ~= UNIT_REACTION_HOSTILE then return end
         if IsUnitDead(unitTag) then return end
-        iconName = E.FakePlayerDebuffs[abilityId].icon
-        effectName = E.FakePlayerDebuffs[abilityId].name
+        iconName = E.FakePlayerDebuffs[abilityId].icon or GetAbilityIcon(abilityId)
+        effectName = E.FakePlayerDebuffs[abilityId].name or GetAbilityName(abilityId)
         duration = E.FakePlayerDebuffs[abilityId].duration
         overrideDuration = E.FakePlayerDebuffs[abilityId].overrideDuration
         effectType = BUFF_EFFECT_TYPE_DEBUFF
@@ -2740,8 +2740,8 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 		if SCB.SV.HideTargetDebuffs then
 			return
 		end
-        iconName = E.FakeStagger[abilityId].icon
-        effectName = E.FakeStagger[abilityId].name
+        iconName = E.FakeStagger[abilityId].icon or GetAbilityIcon(abilityId)
+        effectName = E.FakeStagger[abilityId].name or GetAbilityName(abilityId)
         duration = E.FakeStagger[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration

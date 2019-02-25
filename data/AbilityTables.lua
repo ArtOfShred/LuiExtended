@@ -320,8 +320,6 @@ A.Set_Healing_Mage                  = 51442
 A.Set_Vicious_Serpent               = 61440
 A.Set_Phoenix                       = 90935
 A.Set_Vicecannon_of_Venom           = 79464
-A.Set_Bahrahas_Curse                = 75673
-A.Set_Briarheart                    = 71102
 A.Set_Ironblood                     = 97626
 A.Set_Cooldown                      = GetString(SI_LUIE_SKILL_SET_COOLDOWN)
 A.Set_Eternal_Hunt                  = 75927
@@ -471,8 +469,6 @@ A.Skill_Green_Dragon_Blood          = 32744
 A.Skill_Coagulating_Blood           = 32722
 A.Skill_Reflective_Plate            = 21014
 A.Skill_Inhale                      = 31837
-A.Skill_Deep_Breath                 = 32792
-A.Skill_Draw_Essence                = 32785
 A.Skill_Dragon_Leap                 = 29016
 A.Skill_Take_Flight                 = 32719
 A.Skill_Ferocious_Leap              = 32715
@@ -587,9 +583,7 @@ A.Skill_Cleansing_Ritual            = 22265
 A.Skill_Rune_Focus                  = 22234
 A.Skill_Channeled_Focus             = 22240
 A.Skill_Restoring_Focus             = 22237
-A.Skill_Rite_Of_Passage             = 22223
 A.Skill_Remembrance                 = 22229
-A.Skill_Practiced_Incantation       = 22226
 
 -- Warden
 A.Skill_Accelerated_Growth          = 85882
@@ -781,7 +775,6 @@ A.Skill_Radiant_Magelight           = 77960
 A.Skill_Entropy                     = 28567
 A.Skill_Degeneration                = 40457
 A.Skill_Structured_Entropy          = 40452
-A.Skill_Spell_Symmetry              = 40445
 A.Skill_Balance                     = 40441
 A.Skill_Meteor                      = 16536
 A.Skill_Ice_Comet                   = 40489
@@ -895,7 +888,6 @@ A.Skill_Boss_CC_Immunity            = GetString(SI_LUIE_SKILL_BOSS_CC_IMMUNITY)
 A.Skill_Backstabber                 = 13739
 
 -- Human
-A.Skill_Oil_Drenched                = 10650
 A.Skill_Ignite                      = 14070
 A.Skill_Shield_Rush                 = GetString(SI_LUIE_SKILL_SHIELD_RUSH)
 A.Skill_Shock_Aura                  = 17867
@@ -914,7 +906,6 @@ A.Skill_Divine_Leap                 = 54027
 A.Skill_Inspire                     = GetString(SI_LUIE_SKILL_INSPIRE)
 A.Skill_Hide_in_Shadows             = GetString(SI_LUIE_SKILL_HIDE_IN_SHADOWS)
 A.Skill_Recover                     = 42905
-A.Skill_Lunge                       = 78664
 A.Skill_Clobber                     = 24671
 A.Skill_Shadowy_Barrier             = GetString(SI_LUIE_SKILL_SHADOWY_BARRIER)
 A.Skill_Flare_Trap                  = 74628
@@ -923,7 +914,6 @@ A.Skill_Bear_Trap                   = 39058
 
 -- Justice
 A.Skill_Criminals_Bane              = 63145
-A.Skill_Cage_Talons                 = 63168
 A.Skill_Heavy_Blow                  = 63157
 A.Skill_Mighty_Charge               = GetString(SI_LUIE_SKILL_MIGHTY_CHARGE)
 A.Skill_Throw_Dagger                = 28499
@@ -956,11 +946,8 @@ A.Skill_Barreling_Charge            = GetString(SI_LUIE_SKILL_BARRELING_CHARGE)
 A.Skill_Swipe                       = 2850
 A.Skill_Blitz                       = GetString(SI_LUIE_SKILL_BLITZ)
 A.Skill_Toxic_Mucus                 = 72793
-A.Skill_Bog_Burst                   = 72796
 A.Skill_Gore                        = 85202
 A.Skill_Bile_Spit                   = 64559
-A.Skill_Helljoint                   = 14523
-A.Skill_Slash                       = 85390
 
 -- Insects
 A.Skill_Paralyze                    = 6756
@@ -968,7 +955,6 @@ A.Skill_Poisonous_Burst             = 5790
 A.Skill_Web                         = 58521
 A.Skill_Inject_Larva                = 9229
 A.Skill_Zoom                        = GetString(SI_LUIE_SKILL_ZOOM)
-A.Skill_Latch_On                    = 6795
 A.Skill_Vile_Bite                   = 61243
 A.Skill_Infectious_Swarm            = 61360
 A.Skill_Necrotic_Explosion          = 61427
@@ -983,7 +969,6 @@ A.Skill_Summon_Daedric_Arch         = 65404
 A.Skill_Empower_Atronach_Flame      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME)
 A.Skill_Empower_Atronach_Frost      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST)
 A.Skill_Empower_Atronach_Storm      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM)
-A.Skill_Lightning_Rod               = 50023
 A.Skill_Headbutt                    = 54380
 A.Skill_Tail_Spike                  = 4799
 A.Skill_Rending_Leap                = 93745
@@ -993,29 +978,20 @@ A.Skill_Tremor                      = 67123
 A.Skill_Pin                         = 65709
 A.Skill_Sweep                       = 67872
 A.Skill_Enrage                      = 71696
-A.Skill_Chilling_Aura               = 33549
-A.Skill_Frozen_Ground               = 33502
-A.Skill_Body_Slam                   = 24689
 A.Skill_Stomp                       = 91848
 A.Skill_Boulder_Toss                = 91855
-A.Skill_Storm_Bound                 = 4864
 A.Skill_Shockwave                   = 4653
 A.Skill_Doom_Truths_Gaze            = 9219
-A.Skill_Dusks_Howl                  = 6412
 
 -- Undead
 A.Skill_Desecrated_Ground           = 38828
 A.Skill_Colossal_Stomp              = GetString(SI_LUIE_SKILL_COLOSSAL_STOMP)
 A.Skill_Defiled_Ground              = 22521
 A.Skill_Soul_Rupture                = 73931
-A.Skill_Winters_Reach               = 4337
 
 -- Monsters
 A.Skill_Luring_Snare                = 2821
 A.Skill_Assault                     = 4304
-A.Skill_Flame_Ray                   = 17703
-A.Skill_Frost_Ray                   = 81794
-A.Skill_Consuming_Omen              = 48282
 A.Skill_Crushing_Limbs              = 3855
 A.Skill_Pillars_of_Nirn             = 75955
 A.Skill_Claw                        = 27922
@@ -1062,7 +1038,6 @@ A.Event_Flash_Dazzler               = GetQuestItemNameFromLink("|H0:quest_item:6
 
 -- MSQ
 A.Skill_Wall_of_Flames              = GetString(SI_LUIE_SKILL_WALL_OF_FLAMES)
-A.Skill_Focused_Healing             = 48345
 A.Skill_Necrotic                    = 41852
 A.Skill_Barrier                     = 38573
 A.Skill_Swordstorm                  = 36858
@@ -1104,7 +1079,6 @@ A.Skill_Bind_Hands                  = GetString(SI_LUIE_SKILL_BIND_HANDS)
 A.Skill_Bind_Bear                   = GetString(SI_LUIE_SKILL_BIND_BEAR)
 A.Skill_Ferocious_Charge            = 83033
 A.Skill_Daedric_Explosion           = 83017
-A.Skill_Spiritual_Cloak             = 21403
 A.Skill_Aetherial_Shift             = GetString(SI_LUIE_SKILL_AETHERIAL_SHIFT)
 A.Skill_Free_Spirit                 = GetString(SI_LUIE_SKILL_FREE_SPIRIT)
 A.Skill_Unbind                      = GetString(SI_LUIE_SKILL_UNBIND)
@@ -1145,9 +1119,7 @@ A.Skill_Shadow_Proxy                = 114655
 
 -- Banished Cells II
 A.Skill_Breath_of_Flame             = 49149
-A.Skill_Immolating_Bite             = 28903
 A.Skill_Pool_of_Fire                = GetString(SI_LUIE_SKILL_POOL_OF_FIRE)
-A.Skill_Crushing_Blow               = 27826
 A.Skill_Sisters_Bond                = GetString(SI_LUIE_SKILL_SISTERS_BOND)
 A.Skill_Levitate                    = 28570
 
@@ -1155,7 +1127,6 @@ A.Skill_Levitate                    = 28570
 A.Skill_Executioners_Strike         = 16834
 A.Skill_Heal_Spores                 = GetString(SI_LUIE_SKILL_HEAL_SPORES)
 A.Skill_Summon_Saplings             = GetString(SI_LUIE_SKILL_SUMMON_STRANGLER_SAPLINGS)
-A.Skill_Necrotic_Circle             = 16262
 
 -- Elden Hollow II
 A.Skill_Fortified_Ground            = 32648

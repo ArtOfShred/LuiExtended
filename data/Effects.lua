@@ -2700,11 +2700,11 @@ E.EffectOverride = {
     [85349] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_transform.dds', name = A.Memento_Storm_Atronach_Transform, tooltip = T.Memento_Storm_Atronach_Transform, unbreakable = 1 }, -- Storm Atronach Transform (Atronach Transformation)
     [85347] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_juggle.dds', name = A.Memento_Storm_Orb_Juggle, unbreakable = 1 }, -- Storm Orb Juggle (Atronach Juggling)
     [86976] = { icon = 'LuiExtended/media/icons/mementos/memento_wild_hunt_leaf-dance_aura.dds', name = A.Memento_Wild_Hunt_Aura, forcedContainer = 'short', tooltip = T.Memento_Wild_Hunt_Leaf_Dance_Aura, unbreakable = 1 }, -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
-    [86977] = {icon = 'LuiExtended/media/icons/mementos/memento_wild_hunt_transform.dds', name = A.Memento_Wild_Hunt_Transform, tooltip = T.Memento_Wild_Hunt_Transform, unbreakable = 1 }, -- Spriggan Transformation (Wild Hunt Transform)
+    [86977] = { icon = 'LuiExtended/media/icons/mementos/memento_wild_hunt_transform.dds', name = A.Memento_Wild_Hunt_Transform, tooltip = T.Memento_Wild_Hunt_Transform, unbreakable = 1 }, -- Spriggan Transformation (Wild Hunt Transform)
     [86978] = { icon = 'LuiExtended/media/icons/mementos/memento_floral_swirl_aura.dds', name = A.Memento_Floral_Swirl_Aura, forcedContainer = 'short', tooltip = T.Memento_Floral_Swirl_Aura, unbreakable = 1 }, -- Grand Spriggan Aura (Floral Swirl Aura)
     [92866] = { icon = 'LuiExtended/media/icons/mementos/memento_dwarven_puzzle_orb.dds', name = A.Memento_Dwarven_Puzzle_Orb, unbreakable = 1, tooltip = T.Memento_Dwarven_Puzzle_Orb }, -- Dwarven Globe (Dwarven Puzzle Orb)
     [92867] = { icon = 'LuiExtended/media/icons/mementos/memento_dwarven_tonal_forks.dds', name = A.Memento_Dwarven_Tonal_Forks, unbreakable = 1, tooltip = T.Memento_Dwarven_Tonal_Forks }, -- Dwarven Tuning Forks (Dwarven Tonal Forks)
-    [92868] = {icon = 'LuiExtended/media/icons/mementos/memento_dwemervamidium_mirage.dds', name = A.Memento_Dwemervamidium_Mirage, unbreakable = 1, tooltip = T.Memento_Dwemervamidium_Mirage }, -- Dwarven Transformation (Dwemervamidium Mirage)
+    [92868] = { icon = 'LuiExtended/media/icons/mementos/memento_dwemervamidium_mirage.dds', name = A.Memento_Dwemervamidium_Mirage, unbreakable = 1, tooltip = T.Memento_Dwemervamidium_Mirage }, -- Dwarven Transformation (Dwemervamidium Mirage)
     [97273] = { icon = 'LuiExtended/media/icons/mementos/memento_crows_calling.dds', name = A.Memento_Crows_Calling, unbreakable = 1 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
     [97274] = { icon = 'esoui/art/icons/achievement_update16_017.dds', name = A.Memento_Swarm_of_Crows, unbreakable = 1, tooltip = T.Memento_Swarm_of_Crows }, -- Swarm of Crows (Swarm of Crows)
     [98378] = { hide = true }, -- Murderous Strike (Murderous Strike)
@@ -2879,12 +2879,12 @@ E.EffectOverride = {
     [66808] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds', tooltip = T.Set_Molag_Kena }, -- Molag Kena (Molag Kena)
     [66812] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds', tooltip = T.Set_Molag_Kena_Overkill }, -- Overkill (Molag Kena)
     [59593] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_nerieneth.dds', name = A.Set_Nerieneth }, -- Lich Crystal (Nerien'eth)
-    [98421] = { tooltip = T.Set_Pirate_Skeleton }, -- Pirate Skeleton
-    [98419] = { tooltip = T.Set_Pirate_Skeleton }, -- Pirate Skeleton
-    [98420] = { tooltip = T.Set_Pirate_Skeleton }, -- Pirate Skeleton
-    [81675] = { tooltip = T.Set_Pirate_Skeleton }, -- Pirate Skeleton
-    [83288] = { tooltip = T.Set_Pirate_Skeleton }, -- Pirate Skeleton
-    [83287] = { tooltip = T.Set_Pirate_Skeleton }, -- Pirate Skeleton
+    [98421] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = T.Set_Pirate_Skeleton }, -- Pirate Skeleton
+    [98419] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = T.Set_Pirate_Skeleton }, -- Pirate Skeleton
+    [98420] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = T.Set_Pirate_Skeleton }, -- Pirate Skeleton
+    [81675] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = T.Set_Pirate_Skeleton }, -- Pirate Skeleton
+    [83288] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = T.Set_Pirate_Skeleton }, -- Pirate Skeleton
+    [83287] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = T.Set_Pirate_Skeleton }, -- Pirate Skeleton
     [80853] = { tooltip = A.Set_Pirate_Skeleton }, -- Major Protection (Pirate Skeleton)
     [85637] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = A.Set_Pirate_Skeleton }, -- Minor Defile (Pirate Skeleton)
     [80606] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_selene.dds' }, -- Selene (Selene)
@@ -3021,7 +3021,7 @@ E.EffectOverride = {
 
     -- Overland Sets (Medium)
     [71106] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Briarheart
-    [71107] = { tooltip = T.Set_Briarheart }, -- Briarheart
+    [71107] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds', tooltip = T.Set_Briarheart }, -- Briarheart
     [93308] = { hide = true }, -- Defiler
     [93307] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds' }, -- Defiler
     [93305] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds', tooltip = T.Generic_Stun }, -- Defiler
@@ -3405,7 +3405,7 @@ E.EffectOverride = {
     [26245] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_018.dds', name = A.Innate_Stealth_Stun, tooltip = T.Generic_Stun }, -- Slam Stun (Stun from crouch attack)
 
     -- Sprint
-    [973] = {  tooltip = T.Innate_Sprint }, -- Sprint
+    [973] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', tooltip = T.Innate_Sprint }, -- Sprint
     [15356] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', name = A.Innate_Sprint }, -- Sprint Drain
 
     -- Misc
@@ -3430,7 +3430,7 @@ E.EffectOverride = {
     -- Mount
     [37059] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds' }, -- Mount Up
     [115607] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', name = A.Innate_Hard_Dismount, unbreakable = 1, tooltip = T.Generic_Knockdown }, -- Dismount Stun
-    [33439] = { tooltip = T.Innate_Gallop },
+    [33439] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', name = A.Innate_Gallop, tooltip = T.Innate_Gallop }, -- Mount Sprint (Generic)
 
     -- Block
     [14890] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', forcedContainer = 'short', tooltip = T.Innate_Block }, -- Block
@@ -3595,7 +3595,7 @@ E.EffectOverride = {
     [32961] = { duration = 0, groundLabel = true, tooltip = A.Skill_Shifting_Standard }, -- Major Defile (Shifting Standard)
     [32965] = { duration = 0, name = A.Skill_Major_Defile, groundLabel = true, tooltip = A.Skill_Shifting_Standard }, -- Major Defile (Shifting Standard)
     [32947] = { tooltip = T.Skill_Dragonknight_Standard }, -- Standard of Might (Standard of Might)
-    [32956] = { tooltip = T.Skill_Standard_of_Might_Buff, groundLabel = true}, -- Standard of Might (Standard of Might)
+    [32956] = { icon = 'esoui/art/icons/ability_dragonknight_006_b.dds', tooltip = T.Skill_Standard_of_Might_Buff, groundLabel = true}, -- Standard of Might (Standard of Might)
     [32949] = { duration = 0, groundLabel = true, tooltip = A.Skill_Standard_of_Might }, -- Major Defile (Standard of Might)
 
     [28995] = { groundLabel = true, tooltip = T.Generic_AOE_Fire_1_Sec }, -- Dragonknight Standard
@@ -3636,12 +3636,12 @@ E.EffectOverride = {
     [21017] = { tooltip = T.Skill_Dragon_Fire_Scale }, -- Dragon Fire Scale (Dragon Fire Scale)
 
     -- Inhale / Deep Breath / Draw Essence
-    [31841] = { tooltip = T.Skill_Inhale }, -- Inhale (Inhale)
+    [31841] = { icon = 'esoui/art/icons/ability_dragonknight_012.dds', tooltip = T.Skill_Inhale }, -- Inhale (Inhale)
     [31859] = { icon = 'esoui/art/icons/ability_dragonknight_012.dds', name = A.Skill_Inhale }, -- Inhale Heal (Inhale)
-    [32796] = { tooltip = T.Skill_Inhale }, -- Deep Breath (Deep Breath)
+    [32796] = { icon = 'esoui/art/icons/ability_dragonknight_012_a.dds', tooltip = T.Skill_Inhale }, -- Deep Breath (Deep Breath)
     [32795] = { icon = 'esoui/art/icons/ability_dragonknight_012_a.dds' }, -- Deep Breath (Deep Breath)
     [32797] = { icon = '' }, -- Deep Breath (Deep Breath) -- Hide for Interrupt notification on Combat Text
-    [32788] = { tooltip = T.Skill_Draw_Essence }, -- Draw Essence (Draw Essence)
+    [32788] = { icon = 'esoui/art/icons/ability_dragonknight_012_b.dds', tooltip = T.Skill_Draw_Essence }, -- Draw Essence (Draw Essence)
     [32786] = { icon = 'esoui/art/icons/ability_dragonknight_012_b.dds' }, -- Draw Essence (Draw Essence)
     [32789] = { hide = true, icon = 'esoui/art/icons/ability_dragonknight_012_b.dds' }, -- Draw Essence (Draw Essence)
 
@@ -7223,9 +7223,8 @@ E.EffectOverride = {
     [34614] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', tooltip = T.Generic_Knockdown }, -- Smash (Ogre)
     [5256] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Shockwave (Ogre)
     [34616] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_shockwave.dds' }, -- Shockwave (Ogre)
-    [5349] = { hide = true }, -- Stagger (Ogre - Shockwave)
+    [5349] = { hide = true, tooltip = T.Generic_Stagger }, -- Stagger (Ogre - Shockwave)
     [6150] = { tooltip = A.Skill_Shockwave }, -- Off Balance (Ogre)
-    [5349] = { tooltip = T.Generic_Stagger }, -- Stagger (Ogre)
     [8069] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds', tooltip = T.Generic_Fear }, -- Intimidating Roar (Ogre)
     [24985] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Enrage, tooltip = T.Skill_Enrage_Ogre }, -- Intimidating Roar (Ogre)
 
@@ -8058,7 +8057,9 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Simply Misplaced
-    [26406] = { stack = 1, stackAdd = 1 }, -- MG2 Captured Essence
+    [26406] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence.dds', name = A.Skill_Essence, stack = 1, stackAdd = 1 }, -- MG2 Captured Essence
+    [26634] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence_greater.dds', name = A.Skill_Sahdinas_Essence }, -- MG2 Captured Sahdina Essence
+    [26581] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence_greater.dds', name = A.Skill_Rashomtas_Essence }, -- MG2 Captured Rashomta Essence
     [31502] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), unbreakable = 1 }, -- MGQ2 Asakala Sahdina Barrier
     [31503] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), unbreakable = 1 }, -- MGQ2 Asakala Rashomta Barrier
 
@@ -8451,7 +8452,7 @@ E.EffectOverride = {
 
     -- Retaking the Pass
     [45650] = { hide = true }, -- Indaenir's Spell
-    [29504] = { tooltip = T.Skill_Shadow_Wood }, -- Q4546 Shade Layer
+    [29504] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = A.Skill_Shadow_Wood, tooltip = T.Skill_Shadow_Wood }, -- Q4546 Shade Layer
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -8681,7 +8682,7 @@ E.EffectOverride = {
 
     -- The Forgotten Wastes (Public Dungeon)
     [91659] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks.dds', hide = true }, -- Falling Rocks -- Deadfall
-    [88030] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks.dds' }, -- Falling Rocks -- Deadfall
+    [88030] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks.dds', name = A.Trap_Falling_Rocks }, -- Falling Rocks -- Deadfall
     [92671] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_meteor.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Pyroclast -- Meteor
     [92672] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_meteor.dds' }, -- Pyroclast -- Meteor
     [86983] = { icon = 'esoui/art/icons/ability_mage_018.dds', type = BUFF_EFFECT_TYPE_DEBUFF}, -- Succubus Touch
@@ -9077,21 +9078,21 @@ E.EffectPullDuration = {
 E.FakeExternalBuffs = {
 
     -- Nightblade
-    [64006] = { icon = 'esoui/art/icons/ability_nightblade_010_a.dds', name = A.Skill_Refreshing_Path, duration = 2000, overrideDuration = true }, -- Refreshing Path (Refreshing Path)
+    [64006] = { duration = 2000, overrideDuration = true }, -- Refreshing Path (Refreshing Path)
 
     -- MSQ
-    [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds', name = A.Skill_Focused_Healing, duration = 4000 }, -- Focused Healing (The Prophet)
+    [48345] = { duration = 4000 }, -- Focused Healing (The Prophet)
 
     -- Quests
-    [21403] = { icon = 'esoui/art/icons/ability_mage_054.dds', name = A.Skill_Spiritual_Cloak, duration = 60000, ignoreFade = true }, -- Spiritual Cloak (The Mallari-Mora)
+    [21403] = { duration = 60000, ignoreFade = true }, -- Spiritual Cloak (The Mallari-Mora)
 
     ----------------
     -- Dungeons ----
     ----------------
 
     -- Elden Root II
-    [32655] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_fortified_ground.dds', name = A.Skill_Fortified_Ground, duration = 0 }, -- Fortification (Fortified Guardian)
-    [32614] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_empowered_ground.dds', name = A.Skill_Empowered_Ground, duration = 0 }, -- Empowered (Mystic Guardian)
+    [32655] = { duration = 0 }, -- Fortification (Fortified Guardian)
+    [32614] = { duration = 0 }, -- Empowered (Mystic Guardian)
 
 }
 
@@ -9101,122 +9102,122 @@ E.FakeExternalBuffs = {
 E.FakeExternalDebuffs = {
 
     -- Nightblade
-    [36964] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds', name = A.Skill_Crippling_Grasp, duration = 1500 }, -- Crippling Grasp (Crippling Grasp)
+    [36964] = { duration = 1500 }, -- Crippling Grasp (Crippling Grasp)
 
     -- Templar
-    [24307] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance, duration = 0 }, -- Solar Disturbance Snare (Solar Disturbance)
+    [24307] = { duration = 0 }, -- Solar Disturbance Snare (Solar Disturbance)
 
     -- Destruction Staff
-    [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
+    [38946] = { duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
 
     -- Werewolf
-    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
+    [40520] = { duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
 
     -- Item Sets
-    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 0 }, -- Bahraha's Curse
+    [75706] = { duration = 0 }, -- Bahraha's Curse
 
     -- Traps
-    [27479] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = A.Trap_Falling_Rocks, duration = 2000 }, -- Falling Rocks (Falling Rocks)
-    [29602] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = A.Trap_Falling_Rocks, duration = 2000 }, -- Falling Rocks (Cave-In)
+    [27479] = { duration = 2000 }, -- Falling Rocks (Falling Rocks)
+    [29602] = { duration = 2000 }, -- Falling Rocks (Cave-In)
 
-    [31606] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, duration = 0 }, -- Fire Trap (Player)
+    [31606] = { duration = 0 }, -- Fire Trap (Player)
+    [72890] = { duration = 0 }, -- Laser Snare (Fire)
 
-    [72890] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, duration = 0 }, -- Laser Snare (Fire)
-
-    [66153] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Trial of Flame', duration = 1500}, -- Trial of Flame (Wrothgar - Old Orsinium)
-    [32246] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Steam Trap', duration = 2000}, -- Laser Snare (Steam Trap)
+    --[66153] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Trial of Flame', duration = 1500}, -- Trial of Flame (Wrothgar - Old Orsinium)
+    --[32246] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Steam Trap', duration = 2000}, -- Laser Snare (Steam Trap)
 
     -- Quest Traps
-    [64535] = {icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', name = 'Chilling Wind', duration = 2000}, -- Chilling Wind (Orsinium - Sorrow's Kiss)
-    [67586] = {icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = 'Avalanche', duration = 2500}, -- Avalanche (Orsinium - Sorrow's Kiss)
+    -- TODO: Orsinium
+    --[64535] = {icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', name = 'Chilling Wind', duration = 2000}, -- Chilling Wind (Orsinium - Sorrow's Kiss)
+    --[67586] = {icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = 'Avalanche', duration = 2500}, -- Avalanche (Orsinium - Sorrow's Kiss)
 
     -- Justice NPC's
-    [63160] = { icon = 'esoui/art/icons/ability_1handed_005.dds', name = A.Skill_Power_Bash, duration = 2000 }, -- Heavy Blow Knockdown (Justice Guard)
-    [63263] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = A.Skill_Heavy_Blow, duration = 2000 }, -- Heavy Blow Knockdown (Justice Guard)
-    [63094] = { icon = 'esoui/art/icons/ability_1handed_003.dds', name = A.Skill_Shield_Charge, duration = 1500 }, -- Shield Charge (Justice Guard 1H)
-    [63260] = { icon = 'esoui/art/icons/ability_2handed_003.dds', name = A.Skill_Mighty_Charge, duration = 1500 }, -- Shield Charge (Justice Guard 2H)
-    [63194] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = A.Skill_Stonefist, duration = 6000 }, -- Flame Shard (Justice Guard 2H)
-    [63168] = { icon = 'esoui/art/icons/ability_dragonknight_010.dds', name = A.Skill_Cage_Talons, duration = 3500, ignoreBegin = true }, -- Cage Talons (Justice Guard 1H + 2H)
+    [63160] = { duration = 2000 }, -- Heavy Blow Knockdown (Justice Guard)
+    [63263] = { duration = 2000 }, -- Heavy Blow Knockdown (Justice Guard)
+    [63094] = { duration = 1500 }, -- Shield Charge (Justice Guard 1H)
+    [63260] = { duration = 1500 }, -- Shield Charge (Justice Guard 2H)
+    [63194] = { duration = 6000 }, -- Flame Shard (Justice Guard 2H)
+    [63168] = { duration = 3500, ignoreBegin = true }, -- Cage Talons (Justice Guard 1H + 2H)
 
     -- Standard NPC Abilities
-    [29401] = { icon = 'esoui/art/icons/ability_1handed_005.dds', name = A.Skill_Power_Bash, duration = 3000 }, --Power Bash (NPC Disorient)
-    [14926] = { icon = 'esoui/art/icons/ability_warrior_011.dds', name = A.Skill_Shield_Rush, duration = 2000 }, -- Charge (Human NPC)
-    [10650] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_oil_drenched.dds', name = A.Skill_Oil_Drenched, duration = 0 }, -- Oil Drenched
-    [79930] = { icon = 'esoui/art/icons/ability_rogue_066.dds', name = A.Skill_Lunge, duration = 2500 }, -- Lunge (Tracker) (Morrowind)
+    [29401] = { duration = 3000 }, --Power Bash (NPC Disorient)
+    [14926] = { duration = 2000 }, -- Charge (Human NPC)
+    [10650] = { duration = 0 }, -- Oil Drenched
+    [79930] = { duration = 2500 }, -- Lunge (Tracker) (Morrowind)
 
     -- Animals
-    [69073] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Slam, duration = 2000 }, -- Knockdown (Bear Orsinium)
-    [74336] = { icon = 'LuiExtended/media/icons/abilities/ability_hajmota_bog_burst.dds', name = A.Skill_Bog_Burst, duration = 2000 }, -- Bog Burst (Haj Mota)
-    [14523] = { icon = 'LuiExtended/media/icons/abilities/ability_wolf_helljoint.dds', duration = 6000, name = A.Skill_Helljoint, ignoreBegin = true }, -- Helljoint (Wolf)
-    [85394] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_slash.dds', name = A.Skill_Slash, duration = 8000 }, -- Slash (Cliff Strider Matriach)
+    [69073] = { duration = 2000 }, -- Knockdown (Bear Orsinium)
+    [74336] = { duration = 2000 }, -- Bog Burst (Haj Mota)
+    [14523] = { duration = 6000, ignoreBegin = true }, -- Helljoint (Wolf)
+    [85394] = { duration = 8000 }, -- Slash (Cliff Strider Matriach)
 
     -- Daedra
-    [50023] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds', name = A.Skill_Lightning_Rod, duration = 4000, ignoreBegin = true }, -- Lightning Rod (Air Atronach)
-    [33551] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', name = A.Skill_Chilling_Aura, duration = 0 }, -- Chilling Aura (Frost Atronach)
-    [51646] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', name = A.Skill_Frozen_Ground, duration = 0 }, -- Frozen Ground (Frost Atronach)
-    [24700] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds', name = A.Skill_Body_Slam, duration = 2000 }, -- Body Slam (Ogrim)
-    [91851] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_shattered_ground.dds', name = A.Skill_Stomp, duration = 2000 }, -- Stomp (Ogrim)
-    [12287] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', name = A.Skill_Storm_Bound, duration = 8000 }, -- Storm Bound (Storm Atronach) (DOT)
-    [12288] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', name = A.Skill_Storm_Bound, duration = 8000 }, -- Storm Bound (Storm Atronach) (Snare)
-    [6412] = { icon = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_dusks_howl.dds', name = A.Skill_Dusks_Howl, duration = 2000, ignoreBegin = true }, -- Dusk's Howl (Winged Twilight)
+    [50023] = { duration = 4000, ignoreBegin = true }, -- Lightning Rod (Air Atronach)
+    [33551] = { duration = 0 }, -- Chilling Aura (Frost Atronach)
+    [51646] = { duration = 0 }, -- Frozen Ground (Frost Atronach)
+    [24700] = { duration = 2000 }, -- Body Slam (Ogrim)
+    [91851] = { duration = 2000 }, -- Stomp (Ogrim)
+    [12287] = { duration = 8000 }, -- Storm Bound (Storm Atronach) (DOT)
+    [12288] = { duration = 8000 }, -- Storm Bound (Storm Atronach) (Snare)
+    [6412] = { duration = 2000, ignoreBegin = true }, -- Dusk's Howl (Winged Twilight)
 
     -- Insects
-    [9237] = { icon = 'LuiExtended/media/icons/abilities/ability_wasp_inject_larva.dds', name = A.Skill_Inject_Larva, duration = 10000 }, -- Larva Gestation (Giant Wasp)
-    [6795] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on.dds', name = A.Skill_Latch_On, duration = 7500 }, -- Latch On (Hoarvor)
-    [61372] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds', name = A.Skill_Infectious_Swarm, duration = 4000 }, -- Infectious Swarm (Necrotic Hoarvor)
-    [8429] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds', name = A.Skill_Zap, duration = 4000, ignoreBegin = true }, -- Zap (Thunderbug)
+    [9237] = { duration = 10000 }, -- Larva Gestation (Giant Wasp)
+    [6795] = { duration = 7500 }, -- Latch On (Hoarvor)
+    [61372] = { duration = 4000 }, -- Infectious Swarm (Necrotic Hoarvor)
+    [8429] = { duration = 4000, ignoreBegin = true }, -- Zap (Thunderbug)
 
     -- Monsters
-    [17703] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_flame_ray.dds', name = A.Skill_Flame_Ray, duration = 4000, ignoreBegin = true }, -- Flame Ray (Imp - Fire)
-    [8884] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_zap.dds', name = A.Skill_Zap, duration = 4000, ignoreBegin = true }, -- Zap (Imp - Lightning)
-    [81794] = { icon = 'LuiExtended/media/icons/abilities/ability_imp_frost_ray.dds', name = A.Skill_Frost_Ray, duration = 4000, ignoreBegin = true }, -- Frost Ray (Imp - Frost)
-    [48287] = {icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds', name = A.Skill_Consuming_Omen, duration = 1500}, -- Consuming Omen (Troll - Ranged) (Fake aura to replace bugged aura)
+    [17703] = { duration = 4000, ignoreBegin = true }, -- Flame Ray (Imp - Fire)
+    [8884] = { duration = 4000, ignoreBegin = true }, -- Zap (Imp - Lightning)
+    [81794] = { duration = 4000, ignoreBegin = true }, -- Frost Ray (Imp - Frost)
+    [48287] = { duration = 1500}, -- Consuming Omen (Troll - Ranged) (Fake aura to replace bugged aura)
 
     -- Undead
-    [38834] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_desecrated_ground_snare.dds', name = A.Skill_Desecrated_Ground, duration = 0 }, -- Desecrated Ground Snare (Desecrated Ground)
-    [22525] = {icon = 'LuiExtended/media/icons/abilities/ability_mage_defiled_ground.dds', name = A.Skill_Defiled_Ground, duration = 0 }, -- Defiled Ground (Lich)
-    [43146] = {icon = 'esoui/art/icons/ability_mage_037.dds', name = A.Skill_Winters_Reach, duration = 4000 }, -- Winter's Reach (Wraith)
+    [38834] = { duration = 0 }, -- Desecrated Ground Snare (Desecrated Ground)
+    [22525] = { duration = 0 }, -- Defiled Ground (Lich)
+    [43146] = { duration = 4000 }, -- Winter's Reach (Wraith)
 
     -- Cyrodiil
-    [72641] = {icon = 'esoui/art/icons/ability_1handed_005.dds', name = A.Skill_Power_Bash, duration = 2000}, -- Power Bash (Cryodiil Guard T2)
+    [72641] = { duration = 2000 }, -- Power Bash (Cryodiil Guard T2)
 
     -- Craglorn: TODO
-    [55862] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = A.Skill_Storm_Bound, duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (DOT)
-    [55863] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = A.Skill_Storm_Bound, duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (Snare)
+    --[55862] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = A.Skill_Storm_Bound, duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (DOT)
+    --[55863] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = A.Skill_Storm_Bound, duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (Snare)
 
     -- Traps
-    [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, duration = 0 }, -- Lava -- In Lava
+    [11338] = { duration = 0 }, -- Lava -- In Lava
 
     ------------------------------
     -- Quests --------------------
     ------------------------------
 
     -- Main Story
-    [14972] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 2000 }, -- CON_Knockback&Knockdown (Castle of the Worm)
-    [44561] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 3000 }, -- FGQ4 RGT Event Knockback (Lyris Doppleganger - Halls of Torment)
-    [38741] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_royal_strike.dds', name = A.Skill_Royal_Strike, duration = 4000 }, -- Royal Snare (Duchess of Anguish - Halls of Torment)
-    [40429] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 2000 }, -- IntroKB (Mannimarco - Shadow of Sancre Tor)
-    [41198] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 2000 }, -- IntroKB (Mannimarco - Shadow of Sancre Tor)
+    [14972] = { duration = 2000 }, -- CON_Knockback&Knockdown (Castle of the Worm)
+    [44561] = { duration = 3000 }, -- FGQ4 RGT Event Knockback (Lyris Doppleganger - Halls of Torment)
+    [38741] = { duration = 4000 }, -- Royal Snare (Duchess of Anguish - Halls of Torment)
+    [40429] = { duration = 2000 }, -- IntroKB (Mannimarco - Shadow of Sancre Tor)
+    [41198] = { duration = 2000 }, -- IntroKB (Mannimarco - Shadow of Sancre Tor)
 
     -- Fighter's Guild
-    [14974] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, duration = 2000 }, -- CON_Knockback&KnockdownSelf (Anchors from the Harbour)
-    [39579] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_palolels_rage.dds', name = A.Skill_Palolels_Rage, duration = 2000 }, -- CON_Knockback&Knockdown (The Prismatic Core)
-    [25979] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', name = A.Skill_Prismatic_Light, duration = 1000 }, -- FG4 RGT Event Knockback
+    [14974] = { duration = 2000 }, -- CON_Knockback&KnockdownSelf (Anchors from the Harbour)
+    [39579] = { duration = 2000 }, -- CON_Knockback&Knockdown (The Prismatic Core)
+    [25979] = { duration = 1000 }, -- FG4 RGT Event Knockback
 
     -- Mages Guild
-    [31502] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), duration = 4000 }, -- MGQ2 Asakala Sahdina Barrier
-    [31503] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), duration = 4000 }, -- MGQ2 Asakala Rashomta Barrier
+    [31502] = { duration = 4000 }, -- MGQ2 Asakala Sahdina Barrier
+    [31503] = { duration = 4000 }, -- MGQ2 Asakala Rashomta Barrier
 
     -- Aldmeri Dominion
-    [21876] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, duration = 4500 }, -- Q4260 West Barrier Teleport (Breaking the Barrier)
-    [21878] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, duration = 4500 }, -- Q4260 East Barrier Teleport (Breaking the Barrier)
-    [22395] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Barrier_Rebuke, duration = 4000 }, -- Q4261 ROD Barrier Teleport (Sever All Ties)
-    [28771] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_atherial_shift.dds', name = A.Skill_Aetherial_Shift, duration = 2000 }, -- Q4220 Thirster Stun (The Mallari-Mora)
-    [23606] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback_crystal.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Crystal, A.Skill_Backfire), duration = 2000 }, -- Q4326 Crystal Backfire (Preventative Measure)
-    [43823] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds', name = A.Skill_Quaking_Stomp, duration = 2150 }, -- IntroKB (Prince Naemon)
-    [36766] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_headgrab.dds', name = A.Skill_Feedback, duration = 5000 }, -- Q4842 Stun Headgrab Knockback (The Unquiet Dead)
-    [33384] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_grasping_vines.dds', name = A.Skill_Restricting_Vines, duration = 4000 }, -- Q4586 Aranias Vine Stun
-    [49897] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Skill_Fire, duration = 2000 }, -- Fire
+    [21876] = { duration = 4500 }, -- Q4260 West Barrier Teleport (Breaking the Barrier)
+    [21878] = { duration = 4500 }, -- Q4260 East Barrier Teleport (Breaking the Barrier)
+    [22395] = { duration = 4000 }, -- Q4261 ROD Barrier Teleport (Sever All Ties)
+    [28771] = { duration = 2000 }, -- Q4220 Thirster Stun (The Mallari-Mora)
+    [23606] = { duration = 2000 }, -- Q4326 Crystal Backfire (Preventative Measure)
+    [43823] = { duration = 2150 }, -- IntroKB (Prince Naemon)
+    [36766] = { duration = 5000 }, -- Q4842 Stun Headgrab Knockback (The Unquiet Dead)
+    [33384] = { duration = 4000 }, -- Q4586 Aranias Vine Stun
+    [49897] = { duration = 2000 }, -- Fire
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------
@@ -9240,33 +9241,33 @@ E.FakeExternalDebuffs = {
     ----------------------------------------------------------------
 
     -- The Forgotten Wastes (Public Dungeon)
-    [88030] = {icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks.dds', name = A.Trap_Falling_Rocks, duration = 1500}, -- Falling Rocks -- Deadfall
-    [87348] = {icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds', name = 'Water Geyser', duration = 1500}, -- Water Geyser Burst (Vvardenfell -- A Hireling of House Telvanni)
-    [87350] = {icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds', name = 'Water Geyser', duration = 2000}, -- Water Geyser Burst (Vvardenfell -- A Hireling of House Telvanni)
-    [89756] = {icon = 'esoui/art/icons/achievement_wrothgar_006.dds', name = 'Centurion Drop', duration = 2000}, -- Guardian Shockwave (Mzanchend Guardian -- Vvardenfell -- The Magister Makes a Move)
+    [88030] = { duration = 1500 }, -- Falling Rocks -- Deadfall
+    [87348] = { duration = 1500 }, -- Water Geyser Burst (Vvardenfell -- A Hireling of House Telvanni)
+    [87350] = { duration = 2000 }, -- Water Geyser Burst (Vvardenfell -- A Hireling of House Telvanni)
+    [89756] = { duration = 2000 }, -- Guardian Shockwave (Mzanchend Guardian -- Vvardenfell -- The Magister Makes a Move)
 
     ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------
     ----------------------------------------------------------------
 
     -- Banished Cells II
-    [35680] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds', name = A.Skill_Immolating_Bite, duration = 2250 }, -- Immolating Bite (Maw of the Infernal)
-    [27828] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = A.Skill_Crushing_Blow, duration = 2500 }, -- Crushing Blow (Keeper Voranil)
-    [28772] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds', name = A.Skill_Levitate, duration = 5000 }, -- Stun (High Kinlord Rilis)
-    [28774] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds', name = A.Skill_Levitate, duration = 5000 }, -- Stun (High Kinlord Rilis)
-
-    -- Frostvault
-    [117486] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = A.Skill_Rending_Bleed, duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
-    [109808] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', name = A.Skill_Frozen_Aura, duration = 0 }, -- Frostbite (Icestalker)
+    [35680] = { duration = 2250 }, -- Immolating Bite (Maw of the Infernal)
+    [27828] = { duration = 2500 }, -- Crushing Blow (Keeper Voranil)
+    [28772] = { duration = 5000 }, -- Stun (High Kinlord Rilis)
+    [28774] = { duration = 5000 }, -- Stun (High Kinlord Rilis)
 
     -- Elden Hollow I
-    [25310] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Executioners_Strike, duration = 2500 }, -- Leaping Strike (Akash gra-Mal)
-    [25348] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_necrotic_circle.dds', name = A.Skill_Necrotic_Circle, duration = 6000, ignoreBegin = true }, -- Necrotic Circle (Canonreeve Oraneth)
-    [46800] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_necrotic_circle.dds', name = A.Skill_Necrotic_Circle, duration = 1200 }, -- Necrotic Circle (Canonreeve Oraneth)
+    [25310] = { name = A.Skill_Executioners_Strike, duration = 2500 }, -- Leaping Strike (Akash gra-Mal)
+    [25348] = { duration = 6000, ignoreBegin = true }, -- Necrotic Circle (Canonreeve Oraneth)
+    [46800] = { duration = 1200 }, -- Necrotic Circle (Canonreeve Oraneth)
 
     -- Elden Hollow II
-    [33334] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on_stamina.dds', name = A.Skill_Siphon_Stamina, ignoreBegin = true, duration = 7500 }, -- Latch On Stamina (Frenzied Guardian)
-    [33337] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on_magicka.dds', name = A.Skill_Siphon_Magicka, ignoreBegin = true, duration = 7500 }, -- Latch On Magicka (Mystic Guardian)
+    [33334] = { ignoreBegin = true, duration = 7500 }, -- Latch On Stamina (Frenzied Guardian)
+    [33337] = { ignoreBegin = true, duration = 7500 }, -- Latch On Magicka (Mystic Guardian)
+
+    -- Frostvault
+    [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
+    [109808] = { duration = 0 }, -- Frostbite (Icestalker)
 
 }
 
@@ -9280,13 +9281,13 @@ E.FakePlayerBuffs = {
     --[85353] = {icon = 'LuiExtended/media/icons/mementos/memento_sword-swallowers_blade.dds', name = A.Memento_Sword_Swallowers_Blade, duration = 12000}, -- Sword Swallowing (Consumable Version)
 
     -- Base Mementos
-    [41988] = {icon = 'LuiExtended/media/icons/mementos/memento_bonesnap_binding_stone.dds', name = A.Memento_Bonesnap_Binding_Stone, duration = 10000}, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
-    [39245] = {icon = 'LuiExtended/media/icons/mementos/memento_discourse_amaranthine.dds', name = A.Memento_Discourse_Amaranthine, duration = 10000}, -- Glimpse of the Forbidden (Discoure Amaranthine)
+    [41988] = { duration = 10000 }, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
+    [39245] = { duration = 10000 }, -- Glimpse of the Forbidden (Discoure Amaranthine)
     --[42076] = {icon = 'LuiExtended/media/icons/mementos/memento_mezha-dros_sealing_amulet.dds', name = A.Memento_Sealing_Amulet, duration = 8000}, -- Tear (Mezha-dro's Sealing Amulet)
     --[34578] = {icon = 'LuiExtended/media/icons/mementos/memento_nirnroot_wine.dds', name = A.Memento_Nirnroot_Wine, duration = 8000}, -- Nirnroot Wine (Nirnroot Wine)
-    [26339] = {icon = 'LuiExtended/media/icons/mementos/memento_questionable_meat_sack.dds', name = A.Memento_Mystery_Meat, duration = 5500}, -- Questionable Meat Sack (Questionable Meat Sack)
-    [25369] = {icon = 'LuiExtended/media/icons/mementos/memento_sanguines_goblet.dds', name = A.Memento_Sanguines_Goblet, duration = 10000}, -- Sanguine's Goblet (Sanguine's Goblet)
-    [42008] = {icon = 'LuiExtended/media/icons/mementos/memento_token_of_root_sunder.dds', name = A.Memento_Token_of_Root_Sunder, duration = 10000}, -- Blessing of Root Sunder (Token of Root Sunder)
+    [26339] = { duration = 5500 }, -- Questionable Meat Sack (Questionable Meat Sack)
+    [25369] = { duration = 10000 }, -- Sanguine's Goblet (Sanguine's Goblet)
+    [42008] = { duration = 10000 }, -- Blessing of Root Sunder (Token of Root Sunder)
     --[42053] = {icon = 'LuiExtended/media/icons/mementos/memento_yokudan_totem.dds', name = A.Memento_Yokudan_Totem, duration = 10000}, -- Yokudan Salute (Yokudan Totem)
 
     -- DLC Mementos
@@ -9295,12 +9296,12 @@ E.FakePlayerBuffs = {
     --[74151] = {icon = 'LuiExtended/media/icons/mementos/memento_hidden_pressure_vent.dds', name = A.Memento_Hidden_Pressure_Vent, duration = 2500}, -- Stun (Hidden Pressure Vent)
 
     -- Crown Store Mementos
-    [85349] = {icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_transform.dds', name = A.Memento_Storm_Atronach_Transform, duration = 180000}, -- Storm Atronach Transform (Atronach Transformation)
+    [85349] = { duration = 180000 }, -- Storm Atronach Transform (Atronach Transformation)
     --[85347] = {icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_juggle.dds', name = A.Memento_Storm_Orb_Juggle, duration = 12000}, -- Storm Orb Juggle (Atronach Juggling)
-    [86977] = {icon = 'LuiExtended/media/icons/mementos/memento_wild_hunt_transform.dds', name = A.Memento_Wild_Hunt_Transform, duration = 180000}, -- Spriggan Transformation (Wild Hunt Transform)
-    [92868] = {icon = 'LuiExtended/media/icons/mementos/memento_dwemervamidium_mirage.dds', name = A.Memento_Dwemervamidium_Mirage, duration= 180000}, -- Dwarven Transformation (Dwemervamidium Mirage)
+    [86977] = { duration = 180000 }, -- Spriggan Transformation (Wild Hunt Transform)
+    [92868] = { duration= 180000 }, -- Dwarven Transformation (Dwemervamidium Mirage)
     --[97273] = { icon = 'LuiExtended/media/icons/mementos/memento_crows_calling.dds', name = A.Memento_Crows_Calling, duration = 9000 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
-    [97274] = { icon = 'esoui/art/icons/achievement_update16_017.dds', name = A.Memento_Swarm_of_Crows, duration = 180000 }, -- Swarm of Crows (Swarm of Crows)
+    [97274] = { duration = 180000 }, -- Swarm of Crows (Swarm of Crows)
 
     --[99318] = { icon = 'LuiExtended/media/icons/mementos/memento_fiery_orb.dds', name = A.Memento_Fiery_Orb, duration = 9000 }, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
     --[99319] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_pixie.dds', name = A.Memento_Flame_Pixie, duration = 8000 }, -- Flame Crate Memento 2 (Flame Pixie)
@@ -9308,22 +9309,22 @@ E.FakePlayerBuffs = {
     --[101874] = { icon = 'LuiExtended/media/icons/mementos/memento_scalecaller_frost_shard.dds', name = A.Memento_Frost_Shard, duration = 10000 }, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
     --[101877] = { icon = 'LuiExtended/media/icons/mementos/memento_scalecaller_rune_of_levitation.dds', name = A.Memento_Rune_of_Levitation, duration = 9000 }, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
     --[101872] = { icon = 'LuiExtended/media/icons/mementos/memento_bone_dragon_summons_focus.dds', name = A.Memento_Dragon_Summons_Focus, duration = 5000 }, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
-    [110483] = { icon = 'LuiExtended/media/icons/mementos/memento_ghost_lantern.dds', name = A.Memento_Ghost_Lantern, duration = 6800 }, -- Ghost Lantern (Ghost Lantern)
+    [110483] = { duration = 6800 }, -- Ghost Lantern (Ghost Lantern)
 
     -- Set Items
     --[59573] = { icon = 'esoui/art/icons/ability_buff_major_vitality.dds', name = A.Skill_Major_Vitality, duration = 510 }, -- Major Vitality (Malubeth) TODO: Doesn't work
-    [98421] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
-    [98419] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
-    [98420] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
-    [81675] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
-    [83288] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
-    [83287] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
-    [71107] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds', name = A.Set_Briarheart, duration = 10000 }, -- Briarheart
+    [98421] = { duration = 12000 }, -- Pirate Skeleton
+    [98419] = { duration = 12000 }, -- Pirate Skeleton
+    [98420] = { duration = 12000 }, -- Pirate Skeleton
+    [81675] = { duration = 12000 }, -- Pirate Skeleton
+    [83288] = { duration = 12000 }, -- Pirate Skeleton
+    [83287] = { duration = 12000 }, -- Pirate Skeleton
+    [71107] = { duration = 10000 }, -- Briarheart
     [97627] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = A.Set_Ironblood, duration = 10000, debuff = true, shiftId = 97626 }, -- Ironblood
 
     -- Player (Basic)
-    [973] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', name = A.Innate_Sprint, duration = 0}, -- Sprint
-    [33439] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', name = A.Innate_Gallop, duration = 0}, -- Mount Sprint (Generic)
+    [973] = { duration = 0 }, -- Sprint
+    [33439] = { duration = 0 }, -- Mount Sprint (Generic)
     --[32346] = {icon = 'esoui/art/icons/ability_mage_050.dds', name = A.Innate_Absorbing_Skyshard, duration = 5800}, -- Skyshard Collect
     --[14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = A.Innate_Receiving_Boon, duration = 5000}, -- Mundus Use
 
@@ -9332,22 +9333,22 @@ E.FakePlayerBuffs = {
     -----------------
 
     -- Dragonknight
-    [32956] = { icon = 'esoui/art/icons/ability_dragonknight_006_b.dds', name = A.Skill_Standard_of_Might, duration = 0 }, -- Standard of Might (Standard of Might)
-    [31841] = { icon = 'esoui/art/icons/ability_dragonknight_012.dds', name = A.Skill_Inhale, duration = 2500 }, -- Inhale
-    [32796] = { icon = 'esoui/art/icons/ability_dragonknight_012_a.dds', name = A.Skill_Deep_Breath, duration = 2500 }, -- Deep Breath
-    [32788] = { icon = 'esoui/art/icons/ability_dragonknight_012_b.dds', name = A.Skill_Draw_Essence, duration = 2500 }, -- Draw Essence
+    [32956] = { duration = 0 }, -- Standard of Might (Standard of Might)
+    [31841] = { duration = 2500 }, -- Inhale
+    [32796] = { duration = 2500 }, -- Deep Breath
+    [32788] = { duration = 2500 }, -- Draw Essence
 
     -- Templar
-    [22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000 }, -- Rite of Passage (Rite of Passage)
-    [22229] = { icon = 'esoui/art/icons/ability_templar_remembrance.dds', name = A.Skill_Remembrance, duration = 4000 }, -- Remembrance (Remembrance)
-    [22226] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation)
+    [22223] = { duration = 4000 }, -- Rite of Passage (Rite of Passage)
+    [22229] = { duration = 4000 }, -- Remembrance (Remembrance)
+    [22226] = { duration = 6000 }, -- Practiced Incantation (Practiced Incantation)
 
     -- Vampire
     --[40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 5300 }, -- Feed (Blood Ritual)
     --[33175] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 6300 }, -- Feed (Vampire - Feed)
 
     -- Mages Guild
-    [40449] = { icon = 'esoui/art/icons/ability_mageguild_003_a.dds', name = A.Skill_Spell_Symmetry, duration = 5000 }, -- Spell Symmetry (Spell Symmetry)
+    [40449] = { duration = 5000 }, -- Spell Symmetry (Spell Symmetry)
 
     -- Seasonal Quests (New Life Festival)
     --[84125] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)
@@ -9367,13 +9368,13 @@ E.FakePlayerBuffs = {
     ------------------------------
 
     -- Mages Guild
-    [26406] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence.dds', name = A.Skill_Essence, duration = 0 }, -- MG2 Captured Essence (Simply Misplaced)
-    [26634] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence_greater.dds', name = A.Skill_Sahdinas_Essence, duration = 0 }, -- MG2 Captured Sahdina Essence
-    [26581] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence_greater.dds', name = A.Skill_Rashomtas_Essence, duration = 0 }, -- MG2 Captured Rashomta Essence
+    [26406] = { duration = 0 }, -- MG2 Captured Essence (Simply Misplaced)
+    [26634] = { duration = 0 }, -- MG2 Captured Sahdina Essence
+    [26581] = { duration = 0 }, -- MG2 Captured Rashomta Essence
 
     -- Aldmeri Dominion
     [33066] = { icon = 'LuiExtended/media/icons/disguises/disguise_fancy_clothing.dds', name = A.Skill_Fancy_Clothing, duration = 0, long = true, ignoreBegin = true }, -- Q4586_ChangeClothes
-    [29504] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = A.Skill_Shadow_Wood, duration = 0, long = true }, -- Q4546 Shade Layer
+    [29504] = { duration = 0, long = true }, -- Q4546 Shade Layer
 
     -- Quest related (Craglorn)
     --[81807] = {icon = 'esoui/art/icons/achievement_104.dds', name = 'Power of the Stars', duration = 22000}, -- Power of the Stars (The Star-Gazers)
@@ -9403,20 +9404,20 @@ E.FakePlayerDebuffs = {
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
 
-    [86309] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun, duration = 3000}, -- Stun (Player blocks NPC charged attack)
-    [86312] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun, duration = 3000}, -- Stun (Player blocks Ogrim Body Slam)
+    [86309] = { duration = 3000 }, -- Stun (Player blocks NPC charged attack)
+    [86312] = { duration = 3000 }, -- Stun (Player blocks Ogrim Body Slam)
 
     -- Nightblade
-    [36964] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds', name = A.Skill_Crippling_Grasp, duration = 1500 }, -- Crippling Grasp (Crippling Grasp)
+    [36964] = { duration = 1500 }, -- Crippling Grasp (Crippling Grasp)
 
     -- Destruction Staff
-    [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
+    [38946] = { duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
 
     -- Werewolf
-    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
+    [40520] = { duration = 7000 }, -- Q3047 - Knockdown (Blood Moon)
 
     -- Item Sets
-    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 1100, overrideDuration = true }, -- Bahraha's Curse -- Note: We add 100 ms to buffer here because it doesn't really matter and stops flashing
+    [75706] = { duration = 1100, overrideDuration = true }, -- Bahraha's Curse -- Note: We add 100 ms to buffer here because it doesn't really matter and stops flashing
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -9424,45 +9425,45 @@ E.FakePlayerDebuffs = {
 --------------------------------------------------------------------------------------------------------------------------------
 E.FakeStagger = {
     -- Player Basic
-    [115607] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', name = A.Innate_Hard_Dismount, duration = 2000}, -- Dismount Stun
+    [115607] = { duration = 2000 }, -- Dismount Stun
 
     -- Bow
-    [38649] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Poison Arrow (Venom Arrow)
+    [38649] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Poison Arrow (Venom Arrow)
 
     -- Destruction Staff
-    [48009] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Stagger (Crushing Shock)
+    [48009] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Stagger (Crushing Shock)
 
     -- On Player
-    [2874] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Staggered (Generic Stagger applied to player by many different NPC abilities)
-    [29402] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Power Bash (Stagger when hit with Power Bash)
-    [29765] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Uber Attack (Player staggers self by hitting Blocking NPC with Heavy Attack)
-    [68971] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Staggered (Echatere - Shockwave)
-    [12426] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Raven Storm (Hagraven)
-    [32698] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Pulverize (Lurcher - Pulverize)
-    [5349] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Stagger (Ogre - Shockwave)
-    [49405] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Rear Up (Mantikora)
-    [76134] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 600}, -- Stumble Forward (Flesh Colossus)
-    [76133] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Stumble Forward (Flesh Colossus - Blocked)
-    [65755] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 600}, -- Staggered (Flesh Colossus - Block Pin)
-    [68826] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 600}, -- Staggered (Flesh Colossus - Block Sweep)
-    [74794] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Black Winter (Harvester)
-    [32023] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Generic Stagger Enemy (Bloodfiend)
-    [17206] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Bone Saw(Bone Colossus)
-    [45576] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Generic Stagger Enemy (Werewolf)
-    [69157] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Retaliation (Winterborn Warrior)
-    [69153] = {icon = 'esoui/art/icons/ability_warrior_014.dds', name = A.Skill_Retaliation, duration = 1000}, -- Retaliation (Winterborn Warrior)
-    [54050] = {icon = 'esoui/art/icons/ability_warrior_032.dds', name = A.Skill_Divine_Leap, duration = 500}, -- Divine Leap Stun (Vosh Rakh Devoted)
-    [77927] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Staggered (Bodyguard) (DB DLC)
-    [72639] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Power Bash  (Cyrodiil Guard T2) (Stagger when hit with Power Bash)
-    [74483] = {icon = 'esoui/art/icons/ability_dragonknight_005.dds', name = A.Skill_Fiery_Grip, duration = 1000}, -- Fiery Grip (Sentinel) (TG DLC)
-    [35115] = {icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Extended_Chains, duration = 1000},  -- Pull (Extended Chains) (Cyrodiil Guard T2)
-    [47020] = {icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Puncturing_Chains, duration = 1000}, -- Pull (Puncturing Chains) (Cyrodiil Guard T2)
+    [2874] = { duration = 433 }, -- Staggered (Generic Stagger applied to player by many different NPC abilities)
+    [29402] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Power Bash (Stagger when hit with Power Bash)
+    [29765] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Uber Attack (Player staggers self by hitting Blocking NPC with Heavy Attack)
+    [68971] = { duration = 433 }, -- Staggered (Echatere - Shockwave)
+    [12426] = { duration = 433 }, -- Raven Storm (Hagraven)
+    [32698] = { duration = 433 }, -- Pulverize (Lurcher - Pulverize)
+    [5349] = { duration = 433 }, -- Stagger (Ogre - Shockwave)
+    [49405] = { duration = 433 }, -- Rear Up (Mantikora)
+    [76134] = { duration = 600 }, -- Stumble Forward (Flesh Colossus)
+    [76133] = { duration = 433 }, -- Stumble Forward (Flesh Colossus - Blocked)
+    [65755] = { duration = 600 }, -- Staggered (Flesh Colossus - Block Pin)
+    [68826] = { duration = 600 }, -- Staggered (Flesh Colossus - Block Sweep)
+    [74794] = { duration = 433 }, -- Black Winter (Harvester)
+    [32023] = { duration = 433 }, -- Generic Stagger Enemy (Bloodfiend)
+    [17206] = { duration = 433 }, -- Bone Saw (Bone Colossus)
+    [45576] = { duration = 433 }, -- Generic Stagger Enemy (Werewolf)
+    [69157] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Retaliation (Winterborn Warrior)
+    [69153] = { duration = 1000 }, -- Retaliation (Winterborn Warrior)
+    [54050] = { duration = 500 }, -- Divine Leap Stun (Vosh Rakh Devoted)
+    [77927] = { duration = 433 }, -- Staggered (Bodyguard) (DB DLC)
+    [72639] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Power Bash  (Cyrodiil Guard T2) (Stagger when hit with Power Bash)
+    [74483] = { duration = 1000 }, -- Fiery Grip (Sentinel) (TG DLC)
+    [35115] = { duration = 1000 },  -- Pull (Extended Chains) (Cyrodiil Guard T2)
+    [47020] = { duration = 1000 }, -- Pull (Puncturing Chains) (Cyrodiil Guard T2)
 
     -- Quest
-    [84284] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Coursing Bones (Oskana)
-    [84197] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Marsh Masher (Gathongor the Mauler)
-    [83161] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Stone Crusher (Thodundor of the Hill)
-    [83141] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Ground Shock (Thodundor of the Hill)
+    [84284] = { duration = 433 }, -- Coursing Bones (Oskana)
+    [84197] = { duration = 433 }, -- Marsh Masher (Gathongor the Mauler)
+    [83161] = { duration = 433 }, -- Stone Crusher (Thodundor of the Hill)
+    [83141] = { duration = 433 }, -- Ground Shock (Thodundor of the Hill)
 
     --[[
     [52878] = {icon = 'esoui/art/icons/ability_dragonknight_005_b.dds', name = 'Empowering Chains', duration = 433}, -- Pull (Empowering Chains) (Rkindaleft - Sharga the Firestarter)
@@ -9475,24 +9476,24 @@ E.FakeStagger = {
     ]]--
 
     -- Vvardenfell
-    [86576] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Renduril the Hammer (Nchuleftingth)
-    [88510] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Staggered (Vvardenfell -- Ancestral Adversity)
+    [86576] = { duration = 433 }, -- Renduril the Hammer (Nchuleftingth)
+    [88510] = { duration = 433 }, -- Staggered (Vvardenfell -- Ancestral Adversity)
 
     -- On Target
-    [86310] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500}, -- Stagger (Player Blocks charged NPC attack)
-    [21972] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500}, -- Stagger (Player interrupts NPC cast)
+    [86310] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500 }, -- Stagger (Player Blocks charged NPC attack)
+    [21972] = { duration = 500 }, -- Stagger (Player interrupts NPC cast)
 
     -----------------
     -- Dungeons -----
     -----------------
 
     -- Elden Hollow I
-    [44093] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Battlecry (Akash gra-Mal)
-    [44092] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Generic Stagger Enemy (Chokethorn)
+    [44093] = { duration = 433 }, -- Battlecry (Akash gra-Mal)
+    [44092] = { duration = 433 }, -- Generic Stagger Enemy (Chokethorn)
 
     -- Frostvault
-    [117291] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Stagger (Coldsnap Ogre)
-    [109810] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 600 }, -- Frozen Aura (Icestalker)
+    [117291] = { duration = 433 }, -- Stagger (Coldsnap Ogre)
+    [109810] = { duration = 600 }, -- Frozen Aura (Icestalker)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
