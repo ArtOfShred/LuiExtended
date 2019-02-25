@@ -4137,13 +4137,15 @@ function UF.CustomFramesApplyLayoutGroup(unhide)
         unitFrame.levelIcon:ClearAnchors()
 
         if IsUnitGroupLeader(unitTag) then
-            unitFrame.name:SetDimensions(UF.SV.GroupBarWidth - 137)
-            unitFrame.name:SetAnchor ( LEFT, TopInfo, LEFT, 22, 0)
+            unitFrame.name:SetWidth(UF.SV.GroupBarWidth - 137)
+            unitFrame.name:ClearAnchors()
+            unitFrame.name:SetAnchor ( LEFT, unitFrame.topInfo, LEFT, 22, -8)
             unitFrame.levelIcon:SetAnchor( LEFT, unitFrame.topInfo, LEFT, unitFrame.name:GetTextWidth()+23, 0 )
             unitFrame.leader:SetTexture(leaderIcons[1])
         else
-            unitFrame.name:SetDimensions(UF.SV.GroupBarWidth - 115)
-            unitFrame.name:SetAnchor ( LEFT, TopInfo, LEFT, 0, 0)
+            unitFrame.name:SetWidth(UF.SV.GroupBarWidth - 115)
+            unitFrame.name:ClearAnchors()
+            unitFrame.name:SetAnchor ( LEFT, unitFrame.topInfo, LEFT, 0, -8)
             unitFrame.levelIcon:SetAnchor( LEFT, unitFrame.topInfo, LEFT, unitFrame.name:GetTextWidth()+1, 0 )
             unitFrame.leader:SetTexture(leaderIcons[0])
         end

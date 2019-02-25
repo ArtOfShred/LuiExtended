@@ -109,6 +109,8 @@ A.Innate_Create_Station_Jewelry     = GetString(SI_LUIE_SKILL_CRAFTING_STATION_J
 A.Innate_Create_Station_Blacksmith  = GetString(SI_LUIE_SKILL_CRAFTING_STATION_BLACKSMITH)
 A.Innate_Create_Station_Clothing    = GetString(SI_LUIE_SKILL_CRAFTING_STATION_CLOTHING)
 A.Innate_Create_Station_Woodwork    = GetString(SI_LUIE_SKILL_CRAFTING_STATION_WOODWORK)
+A.Innate_Summon                     = 29585
+A.Innate_Nascent_Indrik             = GetCollectibleName(5710)
 A.Innate_Fillet_Fish                = GetString(SI_LUIE_SKILL_FILLET_FISH)
 A.Innate_Pardon_Edict_Low           = GetString(SI_LUIE_SKILL_COUNTERFEIT_PARDON_EDICT)
 A.Innate_Pardon_Edict_Medium        = GetString(SI_LUIE_SKILL_LENIENCY_EDICT)
@@ -227,6 +229,7 @@ A.Consumable_Sparkwreath_Dazzler    = GetItemLinkName("|H0:item:114946:1:1:0:0:0
 A.Consumable_Plume_Dazzler          = GetItemLinkName("|H0:item:114947:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Plume Dazzler
 A.Consumable_Spiral_Dazzler         = GetItemLinkName("|H0:item:114948:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Spiral Dazzler
 A.Skill_Sparkly_Hat_Dazzler         = GetItemLinkName("|H0:item:120891:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Sparkly Hat Dazzler
+A.Consumable_Revelry_Pie            = GetItemLinkName("|H0:item:147300:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") -- Revelry Pie
 
 -- Mementos
 A.Memento_Almalexias_Lantern        = GetCollectibleName(341)
@@ -277,6 +280,8 @@ A.Memento_Psijic_Celestial_Orb      = GetCollectibleName(5031)
 A.Memento_Psijic_Tautology_Glass    = GetCollectibleName(5032)
 A.Memento_Sapiarchic_Discorporation = GetCollectibleName(5033)
 A.Memento_Ghost_Lantern             = GetCollectibleName(5212)
+A.Memento_Mire_Drum                 = GetCollectibleName(5734)
+A.Memento_Vossa_Satl                = GetCollectibleName(5735)
 
 -- ---------------------------------------------------
 -- ITEM SETS -----------------------------------------
@@ -293,6 +298,11 @@ A.Set_Spawn_of_Mephala              = 59497
 A.Set_Swarm_Mother                  = 80592
 A.Set_Engine_Guardian               = 59521
 A.Set_The_Troll_King                = GetString(SI_LUIE_SKILL_SET_TROLL_KING)
+A.Set_Energy_Charge                 = GetString(SI_LUIE_SKILL_SET_ENERGY_CHARGE)
+A.Set_Tzogvins_Warband              = 116734
+A.Set_Scavenging_Demise             = 116947
+A.Set_Mighty_Glacier                = 116798
+
 A.Set_Redistribution                = GetString(SI_LUIE_SKILL_SET_REDISTRIBUTION)
 A.Set_Varens_Legacy                 = 79029
 A.Set_Syvarras_Scales               = 75717
@@ -518,6 +528,7 @@ A.Skill_Power_Extraction            = 36901
 A.Skill_Sap_Essence                 = 36891
 A.Skill_Soul_Tether                 = 35460
 A.Skill_Soul_Siphon                 = 35508
+A.Skill_Refreshing_Path             = 36028
 
 -- Sorcerer
 A.Skill_Exploitation                = 31389
@@ -545,6 +556,8 @@ A.Skill_Surge                       = 23670
 A.Skill_Power_Surge                 = 23674
 A.Skill_Critical_Surge              = 23678
 A.Skill_Energy_Overload_Heavy       = 114797
+A.Skill_Kick                        = 4125
+A.Skill_Entropic_Touch              = 9743
 
 -- Templar
 A.Skill_Spear_Wall                  = 31708
@@ -699,6 +712,7 @@ A.Skill_Magnum_Shot                 = 38672
 A.Skill_Draining_Shot               = 38669
 A.Skill_Bombard                     = 38705
 A.Skill_Venom_Arrow                 = 38645
+A.Skill_Rapid_Fire                  = 83465
 
 -- ---------------------------------------------------
 -- ARMOR SKILLS --------------------------------------
@@ -903,8 +917,12 @@ A.Skill_Recover                     = 42905
 A.Skill_Lunge                       = 78664
 A.Skill_Clobber                     = 24671
 A.Skill_Shadowy_Barrier             = GetString(SI_LUIE_SKILL_SHADOWY_BARRIER)
+A.Skill_Flare_Trap                  = 74628
+A.Skill_Heated_Blades               = 44208
+A.Skill_Bear_Trap                   = 39058
 
 -- Justice
+A.Skill_Criminals_Bane              = 63145
 A.Skill_Cage_Talons                 = 63168
 A.Skill_Heavy_Blow                  = 63157
 A.Skill_Mighty_Charge               = GetString(SI_LUIE_SKILL_MIGHTY_CHARGE)
@@ -941,6 +959,8 @@ A.Skill_Toxic_Mucus                 = 72793
 A.Skill_Bog_Burst                   = 72796
 A.Skill_Gore                        = 85202
 A.Skill_Bile_Spit                   = 64559
+A.Skill_Helljoint                   = 14523
+A.Skill_Slash                       = 85390
 
 -- Insects
 A.Skill_Paralyze                    = 6756
@@ -1111,6 +1131,44 @@ A.Skill_Fire                        = 33594
 A.Skill_Burrow                      = 8974
 A.Skill_Serpent_Spit                = GetString(SI_LUIE_SKILL_SERPENT_SPIT)
 A.Skill_Shadow_Wood                 = GetString(SI_LUIE_SKILL_SHADOW_WOOD)
+
+-- SUMMERSET
+A.Skill_Pustulant_Eruption          = 105867
+
+-- ---------------------------------------------------
+-- DUNGEON EFFECTS -----------------------------------
+-- ---------------------------------------------------
+
+-- Banished Cells I
+A.Skill_Tail_Smite                  = 47587
+A.Skill_Shadow_Proxy                = 114655
+
+-- Banished Cells II
+A.Skill_Breath_of_Flame             = 49149
+A.Skill_Immolating_Bite             = 28903
+A.Skill_Pool_of_Fire                = GetString(SI_LUIE_SKILL_POOL_OF_FIRE)
+A.Skill_Crushing_Blow               = 27826
+A.Skill_Sisters_Bond                = GetString(SI_LUIE_SKILL_SISTERS_BOND)
+A.Skill_Levitate                    = 28570
+
+-- Elden Hollow I
+A.Skill_Executioners_Strike         = 16834
+A.Skill_Heal_Spores                 = GetString(SI_LUIE_SKILL_HEAL_SPORES)
+A.Skill_Summon_Saplings             = GetString(SI_LUIE_SKILL_SUMMON_STRANGLER_SAPLINGS)
+A.Skill_Necrotic_Circle             = 16262
+
+-- Elden Hollow II
+A.Skill_Fortified_Ground            = 32648
+A.Skill_Empowered_Ground            = 32647
+A.Skill_Siphon_Magicka              = GetString(SI_LUIE_SKILL_SIPHON_MAGICKA)
+A.Skill_Siphon_Stamina              = GetString(SI_LUIE_SKILL_SIPHON_STAMINA)
+
+-- Frostvault
+A.Skill_Rending_Bleed               = 117286
+A.Skill_Leaping_Crush               = 109801
+A.Skill_Lifting_Strike              = 109834
+A.Skill_Frenzied_Pummeling          = 118489
+A.Skill_Frozen_Aura                 = 109806
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------

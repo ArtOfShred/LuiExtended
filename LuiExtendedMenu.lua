@@ -1686,6 +1686,17 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
+                -- Ground Damage Auras
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.GroundDamageAura end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.GroundDamageAura = value LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.SV.GroundDamageAura,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
                  -- Add Extra
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS)),
@@ -1719,7 +1730,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.SV.ExtraExpanded,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.ExtraBuffs or LUIE.SpellCastBuffs.SV.ExtraConsolidate ) ) end,
             },
-
             {
                 -- Reduce
                 type = "checkbox",
@@ -6145,6 +6155,17 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Achievement.AchievementCategory22 = value end,
                 width = "full",
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory22,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+            },
+			{
+                -- Enables achievements tracking in %s category
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(23)),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(23)),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.Achievement.AchievementCategory23 end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.Achievement.AchievementCategory23 = value end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory23,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
         },
@@ -11794,9 +11815,9 @@ function LUIE_CreateSettings()
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP),
-                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertInterruptA) end,
-                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterruptA = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
-                default = {r=LUIE.CombatText.D.colors.alertInterruptA[1], g=LUIE.CombatText.D.colors.alertInterruptA[2], b=LUIE.CombatText.D.colors.alertInterruptA[3]}
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertInterruptB) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterruptB = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
+                default = {r=LUIE.CombatText.D.colors.alertInterruptB[1], g=LUIE.CombatText.D.colors.alertInterruptB[2], b=LUIE.CombatText.D.colors.alertInterruptB[3]}
             },
             {
                 type = "header",
@@ -11905,6 +11926,62 @@ function LUIE_CreateSettings()
                 getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertDestroy) end,
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDestroy = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertDestroy[1], g=LUIE.CombatText.D.colors.alertDestroy[2], b=LUIE.CombatText.D.colors.alertDestroy[3]}
+            },
+
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON),
+                width = "full",
+            },
+
+            {
+                -- Summon Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_SUMMON_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertSummon end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertSummon = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.showAlertSummon,
+            },
+            {
+                -- Summon Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SUMMON_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.alertSummon end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.alertSummon = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.alertSummon,
+            },
+            {
+                -- Prefix Summon (No Name)
+                type    = "editbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationSummonPrefix end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationSummonPrefix = v end,
+                disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.showAlertSummon) end,
+                default = LUIE.CombatText.D.toggles.mitigationSummonPrefix,
+            },
+            {
+                -- Prefix Summon (Name)
+                type    = "editbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
+                getFunc = function() return LUIE.CombatText.SV.toggles.mitigationSummonPrefixN end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationSummonPrefixN = v end,
+                disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.showAlertSummon) end,
+                default = LUIE.CombatText.D.toggles.mitigationSummonPrefixN,
+            },
+            {
+                -- Summon Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_SUMMON_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertSummon) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertSummon = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
+                default = {r=LUIE.CombatText.D.colors.alertSummon[1], g=LUIE.CombatText.D.colors.alertSummon[2], b=LUIE.CombatText.D.colors.alertSummon[3]}
             },
 
         },

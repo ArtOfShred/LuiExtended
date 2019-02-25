@@ -6,6 +6,7 @@ LUIE.CombatInfo     = {}
 local CI            = LUIE.CombatInfo
 local UI            = LUIE.UI
 local E             = LUIE.Effects
+local CBT           = LUIE.CastBarTable
 local A             = LUIE.GetAbility()
 local printToChat   = LUIE.PrintToChat
 local strfmt        = string.format
@@ -394,7 +395,7 @@ function CI.RegisterCombatInfo()
     end
     if CI.SV.CastBarEnable then
         local counter = 0
-        for result, _ in pairs (E.CastBreakingStatus) do
+        for result, _ in pairs (CBT.CastBreakingStatus) do
             counter = counter + 1
             local eventName = (moduleName.. "LUIE_CI_CombatEventCC" .. counter)
             eventManager:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CI.OnCombatEventBreakCast)
@@ -440,6 +441,11 @@ function CI.OnPlayerActivated( eventCode )
     CI.OnSlotsFullUpdate(nil)
     CI.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, GetUnitPower("player", POWERTYPE_ULTIMATE))
 end
+
+local savedPlayerX = 0
+local savedPlayerZ = 0
+local playerX = 0
+local playerZ = 0
 
 -- Updates all floating labels. Called every 100ms
 function CI.OnUpdate(currentTime)
@@ -517,6 +523,19 @@ function CI.OnUpdate(currentTime)
     if CI.SV.UltimateGeneration then
         if not uiUltimate.Texture:IsHidden() and uiUltimate.FadeTime < currentTime then
             uiUltimate.Texture:SetHidden(true)
+        end
+    end
+
+    -- Break castbar when movement interrupt is detected for certain effects.
+    savedPlayerX = playerX
+    savedPlayerZ = playerZ
+    playerX, playerZ = GetMapPlayerPosition("player")
+
+    if savedPlayerX == playerX and savedPlayerZ == playerZ then
+        return
+    else
+        if CBT.BreakCastOnMove[castbar.id] then
+            CI.StopCastBar()
         end
     end
 
@@ -732,7 +751,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         return
     end
 
-    if E.CastBreakOnRemoveEffect[abilityId] and castByPlayer == COMBAT_UNIT_TYPE_PLAYER and changeType == EFFECT_RESULT_FADED then
+    if CBT.CastBreakOnRemoveEffect[abilityId] and castByPlayer == COMBAT_UNIT_TYPE_PLAYER and changeType == EFFECT_RESULT_FADED then
         CI.StopCastBar()
         if abilityId == 33208 then -- Devour (Werewolf)
             return
@@ -954,6 +973,7 @@ function CI.CreateCastBar()
         ["name"] = UI.Label( castbar, nil, nil, nil, nil, g_castbarFont, false ),
         ["timer"] = UI.Label( castbar, nil, nil, nil, nil, g_castbarFont, false ),
     }
+    castbar.id = 0
 
     castbar.bar.backdrop:SetEdgeTexture("",8,2,2)
     castbar.bar.backdrop:SetDrawLayer(DL_BACKDROP)
@@ -1087,7 +1107,7 @@ function CI.SoulGemResurrectionStart(eventCode, durationMs)
     CI.StopCastBar()
 
     -- Set all parameters and start cast bar
-    local icon = 'esoui/art/icons/achievement_fanglairpeak_deathless.dds'
+    local icon = 'esoui/art/icons/achievement_frostvault_death_challenge.dds'
     local name = A.Innate_Soul_Gem_Resurrection
     local duration = durationMs
 
@@ -1099,8 +1119,8 @@ function CI.SoulGemResurrectionStart(eventCode, durationMs)
     castbar.starts = currentTime
     castbar.ends = endTime
     castbar.icon:SetTexture(icon)
-castbar.type = 1 -- CAST
-                    castbar.bar.bar:SetValue(0)
+    castbar.type = 1 -- CAST
+    castbar.bar.bar:SetValue(0)
 
     if CI.SV.CastBarLabel then
         castbar.bar.name:SetText(name)
@@ -1125,9 +1145,11 @@ end
 function CI.OnCombatEventBreakCast( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
 
     -- Some cast/channel abilities (or effects we use to simulate this) stun the player - ignore the effects of these ids when this happens.
-    if E.IgnoreCastBarStun[abilityId] then return end
+    if CBT.IgnoreCastBarStun[abilityId] then return end
 
-    if not E.IsCast[abilityId] then
+    if CBT.IgnoreCastBreakingActions[castbar.id] then return end
+
+    if not CBT.IsCast[abilityId] then
         CI.StopCastBar()
     end
 
@@ -1146,7 +1168,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
     end
 
     -- Bail out past here if the source isn't player, cast bar is disabled, or the ability is not on the list of abilities to show the cast bar for
-    if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not E.CastOverride[abilityId] then
+    if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not CBT.CastOverride[abilityId] then
         return
     end
 
@@ -1154,11 +1176,14 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         return
     end
 
-    if E.CastBreakingActions[abilityId] and sourceType == COMBAT_UNIT_TYPE_PLAYER then
-        CI.StopCastBar()
+	-- Stop when a cast breaking action is detected
+    if CBT.CastBreakingActions[abilityId] then
+        if not CBT.IgnoreCastBreakingActions[castbar.id] then
+            CI.StopCastBar()
+        end
     end
 
-    if not E.IsCast[abilityId] then
+    if not CBT.IsCast[abilityId] then
         return
     end
 
@@ -1169,24 +1194,31 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
         local forceChanneled = false
         -- Override certain things to display as a channel rather than cast. Note only works for events where we override the duration.
-        if E.CastChannelOverride[abilityId] then
+        if CBT.CastChannelOverride[abilityId] then
             channeled = true
         end
         if channeled then
-            duration = E.CastDurationFix[abilityId] or channelTime
+            duration = CBT.CastDurationFix[abilityId] or channelTime
         else
-            duration = E.CastDurationFix[abilityId] or castTime
+            duration = CBT.CastDurationFix[abilityId] or castTime
         end
 
-        if E.CastChannelConvert[abilityId] then
+		-- End the cast bar and restart if a new begin event is detected and the effect isn't a channel or fake cast
+		if result == ACTION_RESULT_BEGIN and not channeled and not CBT.CastDurationFix[abilityId] then
+			CI.StopCastBar()
+        elseif result == ACTION_RESULT_EFFECT_GAINED and channeled then
+            CI.StopCastBar()
+		end
+
+        if CBT.CastChannelConvert[abilityId] then
             channeled = true
             forceChanneled = true
-            duration = E.CastDurationFix[abilityId] or castTime
+            duration = CBT.CastDurationFix[abilityId] or castTime
         end
 
         -- Some abilities cast into a channeled stun effect - we want these abilities to display the cast and channel if flagged.
         -- Only flags on ACTION_RESULT_BEGIN so this won't interfere with the stun result that is converted to display a channeled cast.
-        if E.MultiCast[abilityId] then
+        if CBT.MultiCast[abilityId] then
             if result == 2200 then
                 channeled = false
                 duration = castTime or 0
@@ -1205,7 +1237,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
 
         if duration > 0 and not g_casting then
             -- If action result is BEGIN and not channeled then start, otherwise only use GAINED
-            if ( not forceChanneled and ( ( (result == 2200 or result == 2210) and not channeled ) or (result == 2240 and (E.CastDurationFix[abilityId] or channeled) ) ) ) or (forceChanneled and result == 2200) then -- and CI.SV.CastBarCast
+            if ( not forceChanneled and ( ( (result == 2200 or result == 2210) and not channeled ) or (result == 2240 and (CBT.CastDurationFix[abilityId] or channeled) ) ) ) or (forceChanneled and result == 2200) then -- and CI.SV.CastBarCast
                 local currentTime = GetGameTimeMilliseconds()
                 local endTime = currentTime + duration
                 local remain = endTime - currentTime
@@ -1214,6 +1246,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
                 castbar.starts = currentTime
                 castbar.ends = endTime
                 castbar.icon:SetTexture(icon)
+                castbar.id = abilityId
 
                 if channeled then
                     castbar.type = 2 -- CHANNEL
@@ -1239,7 +1272,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
 
         -- Fix to lower the duration of the next cast of Profane Symbol quest ability for Scion of the Blood Matron (Vampire)
         if abilityId == 39507 then
-            E.CastDurationFix[39507] = 19500
+            CBT.CastDurationFix[39507] = 19500
         end
 
 end

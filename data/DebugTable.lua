@@ -545,9 +545,11 @@ debugAuras = {
             [85503] = true, -- Increased Experience (Grand Crown Crate Experience Scroll)
 
             -- Other
-            [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
-            [70582] = true, -- Roll 1d1000 (Merethic Resorative Resin)
-            [70584] = true, -- 68235 Stun (Merethic Restorative Resin)
+            [113432] = true, -- 68235 Stun (Nascent Indrik)
+            [115046] = true, -- 68235 Stun (Nascent Indrik)
+            --[68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I-VII)
+            --[70582] = true, -- Roll 1d1000 (Merethic Resorative Resin)
+            --[70584] = true, -- 68235 Stun (Merethic Restorative Resin)
             [63427] = true, -- Clean Fish (Any Fish)
             [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
             [76350] = true, -- Moderate Pardon (Leniency Edict)
@@ -587,7 +589,7 @@ debugAuras = {
             [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
             [89372] = true, -- Pelted! (Cherry Blossom Branch)
 
-            [116879] = true, -- Alliance Pie (Revelry Pie)
+            --[116879] = true, -- Alliance Pie (Revelry Pie)
             [118833] = true, -- Piessive (Revelry Pie)
             [116933] = true, -- Covered in Pie (Revelry Pie)
             [116935] = true, -- Pie (Revelry Pie)
@@ -595,9 +597,9 @@ debugAuras = {
             [116987] = true, -- Covered in Pie (Revelry Pie)
             [116989] = true, -- Covered in Pie (Revelry Pie)
             [116988] = true, -- Covered in Pie (Revelry Pie)
-            [116942] = true, -- Covered in Pie (Revelry Pie)
-            [116944] = true, -- Covered in Pie (Revelry Pie)
-            [116943] = true, -- Covered in Pie (Revelry Pie)
+            --[116942] = true, -- Covered in Pie (Revelry Pie)
+            --[116944] = true, -- Covered in Pie (Revelry Pie)
+            --[116943] = true, -- Covered in Pie (Revelry Pie)
 
 
 
@@ -606,7 +608,9 @@ debugAuras = {
             [77027] = true, -- Anniversary Cake - Forreals (Jubilee Cake)
             [87998] = true, -- Anniversary Cake (2nd Annual Jubilee Cake)
             [102009] = true, -- Anniversary Cake (3rd Annual Jubilee Cake)
-            --[77123] = true, -- Anniversary EXP Buff (Any Jubilee Cake)
+            [115688] = true, -- Anniversary Cake (2019 Jubilee Cake)
+            [77123] = true, -- Anniversary EXP Buff (Any Jubilee Cake except 2019)
+            [118985] = true, -- Anniversary EXP Buff (2019 Jubilee Cake)
             [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
             [96118] = true, -- Witchmother's Boon (Witchmother's Whistle)
             [84361] = true, -- Witchmother's Brew (Witchmother's Whistle)
@@ -696,6 +700,8 @@ debugAuras = {
             [113697] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
             [113696] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
             [110483] = true, -- Ghost Lantern (Ghost Lantern)
+            [113288] = true, -- UC Crown Memento 1 (Mire Drum)
+            [113291] = true, -- UC Crown Memento 2 (Vossa-satl)
 
             -------------------------------------
             -- NON-COMBAT PETS ------------------
@@ -990,6 +996,16 @@ debugAuras = {
             [59498] = true, -- Mephala's Web
             [59499] = true, -- Mephala's Web
 
+            [116838] = true, -- Stonekeeper (Stonekeeper)
+            [116839] = true, -- Charging (Stonekeeper)
+            [116846] = true, -- Stonekeeper (Stonekeeper)
+            [116847] = true, -- Stonekeeper (Stonekeeper)
+            [116877] = true, -- Stonekeeper (Stonekeeper)
+            [116878] = true, -- Stonekeeper (Stonekeeper)
+            [116876] = true, -- Stonekeeper (Stonekeeper)
+            [116880] = true, -- Stonekeeper (Stonekeeper)
+            [116881] = true, -- Stonekeeper (Stonekeeper)
+
             [80520] = true, -- Stormfist
             [80523] = true, -- Stormfist
             [80522] = true, -- Stormfist
@@ -998,6 +1014,11 @@ debugAuras = {
             [80592] = true, -- Swarm Mother
             [84419] = true, -- Swarm Mother Mask
             [80593] = true, -- Swarm Mother Mask
+
+            [117110] = true, -- Symphony of Blades (Symphony of Blades)
+            [117111] = true, -- Meridia's Favor (Symphony of Blades)
+            [117118] = true, -- Meridia's Favor (Symphony of Blades)
+            [117119] = true, -- Meridia's Favor (Symphony of Blades)
 
             [59521] = true, -- Engine Guardian
             [60484] = true, -- Sphere Groundrise
@@ -1036,6 +1057,8 @@ debugAuras = {
             [80864] = true, -- Hoarvor Mask
             [80489] = true, -- Hoarvor Mask
             [80490] = true, -- Velidreth
+            [80859] = true, -- Hoarvor Mask
+            [80863] = true, -- Hoarvor Mask
 
             [111352] = true, -- Vykosa
             [111354] = true, -- Major Maim
@@ -1502,6 +1525,14 @@ debugAuras = {
             [111200] = true, -- Moon Hunter (Moon Hunter)
             [111204] = true, -- Moon Hunter (Moon Hunter)
 
+            [116726] = true, -- Icy Conjuror
+            [117666] = true, -- Icy Conjuror
+            [116727] = true, -- Icy Conjuror
+
+            [116882] = true, -- Auroran's Thunder (Auroran's Thunder)
+            [116884] = true, -- Auroran's Thunder (Auroran's Thunder)
+            [116920] = true, -- Auroran's Thunder (Auroran's Thunder)
+
             -- Dungeon Sets (Medium)
 
             [85607] = true, -- Strength of the Automaton (Automaton's)
@@ -1592,6 +1623,15 @@ debugAuras = {
             [111213] = true, -- Savage Werewolf (Savage Werewolf)
             [112368] = true, -- Impact (Savage Werewolf)
             [111216] = true, -- Savage Werewolf (Savage Werewolf)
+
+            [116734] = true, -- Tzogvin's Warband (Tzogvin's Warband)
+            [116742] = true, -- Precision (Tzogvin's Warband)
+            [116775] = true, -- Minor Force (Tzogvin's Warband)
+
+            [116947] = true, -- Scavenging Demise (Scavenging Demise)
+            [116954] = true, -- Stalked (Scavenging Demise)
+            [116991] = true, -- Scavenging Maw (Scavenging Demise)
+            [117025] = true, -- Minor Vulnerability (Scavenging Demise)
 
             -- Dungeon Sets (Heavy)
 
@@ -1688,6 +1728,15 @@ debugAuras = {
             [113423] = true, -- Checker (Haven of Ursus)
             [111220] = true, -- Jailer's Tenacity (Jailer's Tenacity)
             [111221] = true, -- Major Vitality (Jailer's Tenacity)
+
+            [116798] = true, -- Mighty Glacier (Mighty Glacier)
+            [117670] = true, -- Mighty Glacier (Mighty Glacier)
+            [116804] = true, -- Major Ward (Mighty Glacier)
+            [116805] = true, -- Major Resolve (Mighty Glacier)
+
+            [117059] = true, -- Frozen Watcher (Frozen Watcher)
+            [117082] = true, -- Frozen Watcher (Frozen Watcher)
+            [117060] = true, -- Frozen Watcher (Frozen Watcher)
 
             -- Trial Sets (Hel Ra Citadel)
 
@@ -2928,6 +2977,7 @@ debugAuras = {
             [34734] = true, -- Major Fracture (Surprise Attack)
 
             [34738] = true, -- Concealed Weapon Passive (Concealed Weapon)
+            [61155] = true, -- Concealed Weapon (Concealed Weapon)
             [34739] = true, -- Concealed Weapon (Concealed Weapon)
             [25267] = true, -- Concealed Weapon (Concealed Weapon)
             [34737] = true, -- Off Balance (Concealed Weapon)
@@ -2988,6 +3038,7 @@ debugAuras = {
             [76638] = true, -- Mass Hysteria (Manifestation of Terror)
 
             [65269] = true, -- Shade Initialize (Summon Shade - All Morphs)
+            [71904] = true, -- Player Pet Speed
             [62197] = true, -- Pet Crit Chance (Summon Shade - All Morphs)
             --[85086] = true, -- Boss (Summon Shade - All Morphs)
             --[85087] = true, -- Boss (Summon Shade - All Morphs)
@@ -3324,6 +3375,7 @@ debugAuras = {
             [77246] = true, -- Volatile Familiar FX (Summon Volatile Familiar)
             [77186] = true, -- Familiar Damage Pulse (Summon Volatile Familiar)
             [77243] = true, -- Volatile Familiar Stun (Summon Volatile Familiar)
+            [117255] = true, -- Volatile Familiar Melee (Summon Volatile Familiar)
 
             [24326] = true, -- Daedric Curse (Daedric Curse)
             [28169] = true, -- Daedric Curse (Daedric Curse)
@@ -3358,6 +3410,8 @@ debugAuras = {
             [77369] = true, -- Twilight Matriarch Restore (Summon Twilight Matriarch)
             [77407] = true, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
             [77371] = true, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
+            [117320] = true, -- Twilight Matriarch Kick (Summon Twilight Matriarch)
+            [117321] = true, -- Twilight Matriarch Zap (Summon Twilight Matriarch)
 
             [24636] = true, -- Summon Twilight Tormentor (Summon Twilight Tormentor)
             [24741] = true, -- Twilight Tormentor (Summon Twilight Tormentor)
@@ -3366,6 +3420,8 @@ debugAuras = {
             [77354] = true, -- Summon Twilight Tormentor (Summon Twilight Tormentor)
             [88937] = true, -- Twilight Tormentor (Summon Twilight Tormentor)
             [77368] = true, -- Twilight Tormentor Damage Bonu (Summon Twilight Tormentor)
+            [117273] = true, -- Twilight Tormentor Kick (Summon Twilight Tormentor)
+            [117274] = true, -- Twilight Tormentor Zap (Summon Twilight Tormentor)
 
             [28418] = true, -- Conjured Ward (Conjured Ward)
             [28421] = true, -- Conjured Ward (Conjured Ward)
@@ -4357,7 +4413,7 @@ debugAuras = {
             [38818] = true, -- Dizzying Swing (Dizzying Swing)
             [38816] = true, -- Dizzying Swing (Dizzying Swing)
 
-            [38807] = true, -- Wrecking Blow (Wrecking Blow)
+			[38807] = true, -- Wrecking Blow (Wrecking Blow)
 
             [28448] = true, -- Critical Charge (Critical Charge)
             [28450] = true, -- Critical Strike (Critical Charge)
@@ -4960,10 +5016,13 @@ debugAuras = {
 
             [39161] = true, -- Pulsar (Pulsar - Rank 1)
             [39162] = true, -- Flame Pulsar (Pulsar - Rank 1)
+            [89837] = true, -- Fiery Pulsar (Pulsar)
             [39168] = true, -- Minor Mangle (Pulsar - Rank 1)
             [39167] = true, -- Storm Pulsar (Pulsar - Rank 1)
+            [89844] = true, -- Shock Pulsar (Pulsar)
             [39181] = true, -- Minor Mangle (Pulsar - Rank 1)
             [39163] = true, -- Frost Pulsar (Pulsar - Rank 1)
+            [89840] = true, -- Frost Pulsar (Pulsar)
             [39180] = true, -- Minor Mangle (Pulsar - Rank 1)
 
             [83619] = true, -- Elemental Storm (Elemental Storm - Rank 1)
@@ -6366,13 +6425,10 @@ debugAuras = {
             [45307] = true, -- Brawny (Rank 2)
             [45309] = true, -- Brawny (Rank 3)
             [84668] = true, -- Unflinching Rage (Rank 1)
-            [118195] = true, -- Unflinching Rage (Rank 1)
             [118196] = true, -- Unflinching Rage (Rank 1)
             [84670] = true, -- Unflinching Rage (Rank 2)
-            [118202] = true, -- Unflinching Rage (Rank 2)
             [118203] = true, -- Unflinching Rage (Rank 2)
             [84672] = true, -- Unflinching Rage (Rank 3)
-            [118205] = true, -- Unflinching Rage (Rank 3)
             [118206] = true, -- Unflinching Rage (Rank 3)
             [33304] = true, -- Swift Warrior (Rank 1)
             [45311] = true, -- Swift Warrior (Rank 2)
@@ -6415,10 +6471,16 @@ debugAuras = {
             [36008] = true, -- Acrobat (Rank 1)
             [36022] = true, -- Hunter's Eye (Rank 1)
             [49175] = true, -- Hunter's Eye (Rank 1)
+            [121106] = true, -- Hunter's Eye (Rank 1)
+            [121107] = true, -- Hunter's Eye (Rank 1)
             [45295] = true, -- Hunter's Eye (Rank 2)
             [49176] = true, -- Hunter's Eye (Rank 2)
+            [121108] = true, -- Hunter's Eye (Rank 2)
+            [121109] = true, -- Hunter's Eye (Rank 2)
             [45296] = true, -- Hunter's Eye (Rank 3)
             [49177] = true, -- Hunter's Eye (Rank 3)
+            [121110] = true, -- Hunter's Eye (Rank 3)
+            [121111] = true, -- Hunter's Eye (Rank 3)
             [64279] = true, -- Y'ffre's Endurance (Rank 1)
             [64280] = true, -- Y'ffre's Endurance (Rank 2)
             [64281] = true, -- Y'ffre's Endurance (Rank 3)
@@ -6499,10 +6561,16 @@ debugAuras = {
             [45280] = true, -- Imperial Mettle (Rank 3)
             [36155] = true, -- Red Diamond (Rank 1)
             [36214] = true, -- Red Diamond
+            [121126] = true, -- Red Diamond
+            [121127] = true, -- Red Diamond
             [45291] = true, -- Red Diamond (Rank 2)
             [45292] = true, -- Red Diamond
+            [121139] = true, -- Red Diamond
+            [121140] = true, -- Red Diamond
             [45293] = true, -- Red Diamond (Rank 3)
             [45294] = true, -- Red Diamond
+            [121141] = true, -- Red Diamond
+            [121142] = true, -- Red Diamond
 
 
             -------------------------------------
@@ -6737,13 +6805,17 @@ debugAuras = {
             [31373] = true, -- Modify Shared CD Ability
             [46858] = true, -- Second Wind
             --[29535] = true, -- Call to Ranged
+            --[82686] = true, -- AD (Area Denial) Shared Cool
+            --[28528] = true, -- Modify Clearing Move Cooldown
+            --[59100] = true, -- AI Range (Ranged Brute EXC)
+            [36845] = true, -- Shadow Cloak Stun Remover
 
             -- SHARED NPC PASSIVES
             [67950] = true, -- CC Immunity Plus -- Various NPC's
             [33097] = true, -- Scary Immunities -- Various NPC's
             [44176] = true, -- Flying Immunities -- Various NPC's
             [13739] = true, -- Backstabber -- Various NPC's
-            [71904] = true, -- Increased Speed -- Dire Wolf + Sentinel
+            [112296] = true, -- Increased Speed -- Dire Wolf + Sentinel
             [73768] = true, -- GEN 5 Hits -- Various NPC's
             [73769] = true, -- GEN 5 Hits -- Various NPC's
             [73772] = true, -- GEN 5 Hits -- Various NPC's
@@ -6852,7 +6924,7 @@ debugAuras = {
             [64134] = true, -- JUST Guard Evade
             [64150] = true, -- JUST Death Timer
 
-            --[64152] = true, -- JUST Unlock Death Bolts
+            [64152] = true, -- JUST Unlock Death Bolts
 
             [63086] = true, -- Guard Charge
             [63258] = true, -- Guard Charge
@@ -6954,7 +7026,7 @@ debugAuras = {
             [67567] = true, -- Generic Self Stun (Estate Marshal - DB)
             [78266] = true, -- Alarm (Estate Marshal - DB)
 
-            [52471] = true, -- Nullify (Estate Spellbreaker - DB)
+            --[52471] = true, -- Nullify (Estate Spellbreaker - DB)
             [52473] = true, -- Nullify (Estate Spellbreaker - DB)
             [52474] = true, -- Nullify (Estate Spellbreaker - DB)
             [66669] = true, -- Nullify (Estate Spellbreaker - DB)
@@ -6991,6 +7063,11 @@ debugAuras = {
             [17198] = true, -- Fire Trap (Player)
             [31606] = true, -- Fire Trap (Player)
             [17314] = true, -- Fire Trap (Player)
+
+            [72887] = true, -- Steam Burst (Fire)
+            [72888] = true, -- Fire Attack 1 (Fire)
+            [72889] = true, -- Fire Attack 2 (Fire)
+            [72890] = true, -- Laser Snare (Fire)
 
             [26530] = true, -- Bear Trap (Bear Trap)
             [26531] = true, -- Bear Trap (Bear Trap)
@@ -7052,6 +7129,7 @@ debugAuras = {
             [77337] = true, -- Threat Drop (Hiding Spot)
             [77338] = true, -- Threat Drop (Hiding Spot)
             [77339] = true, -- Threat Drop (Hiding Spot)
+            [75670] = true, -- Threat Drop (Hiding Spot)
             [75747] = true, -- Hiding Spot (Hiding Spot)
 
             -------------------------------------
@@ -7081,8 +7159,6 @@ debugAuras = {
             [11016] = true, -- Throw Oil -- Synergies (Footsoldier)
             [10650] = true, -- Oil Drenched -- Synergies (Footsoldier)
             [12439] = true, -- Burning Arrow -- Synergies (Archer)
-            [70413] = true, -- Burning Arrow (Archer - Cyrodiil)
-            --[70417] = true, -- Ignite (Archer - Cyrodiil)
             [14068] = true, -- Ignite -- Synergies (Archer)
             [14070] = true, -- Ignite -- Synergies (Archer)
             [10805] = true, -- Ignite -- Synergies (Fire Mage)
@@ -7094,11 +7170,11 @@ debugAuras = {
             [38262] = true, -- Ignite -- Synergies (Fire Mage)
             [38260] = true, -- Ignite -- Synergies (Fire Mage)
 
-            [31385] = true, -- Necromancer Synergy Move Back (Cultist)
-            [31390] = true, -- Necromancer Synergy Move Back (Cultist)
-            [31387] = true, -- Necromancer Synergy Kill Self (Cultist)
-            [43756] = true, -- Necromancer Synergy Kill Self (Cultist)
-            [43757] = true, -- Cultist Synergy Cast (Cultist)
+            --[31385] = true, -- Necromancer Synergy Move Back (Cultist)
+            --[31390] = true, -- Necromancer Synergy Move Back (Cultist)
+            --[31387] = true, -- Necromancer Synergy Kill Self (Cultist)
+            --[43756] = true, -- Necromancer Synergy Kill Self (Cultist)
+            --[43757] = true, -- Cultist Synergy Cast (Cultist)
 
             [14096] = true, -- Heavy Attack -- Footsoldier
             [27683] = true, -- Step Back -- Footsoldier
@@ -7409,11 +7485,11 @@ debugAuras = {
             [68867] = true, -- War Horn Battlecry -- Faction NPC
             [68868] = true, -- War Horn Battlecry -- Faction NPC
             [68869] = true, -- War Horn Battlecry -- Faction NPC
+            [38118] = true, -- Caltrops -- Faction NPC
             [43644] = true, -- Barrier [monster synergy] -- Faction NPC
             [43645] = true, -- Barrier [monster synergy] -- Faction NPC
             [43646] = true, -- Barrier [monster synergy] -- Faction NPC
             [41793] = true, -- Anti-Cavalry Caltrops -- Faction NPC
-            [38118] = true, -- Caltrops -- Faction NPC
             [38119] = true, -- Caltrops -- Faction NPC
             [38125] = true, -- Caltrops -- Faction NPC
 
@@ -7613,7 +7689,7 @@ debugAuras = {
             [87068] = true, -- Volcanic Debris (Fire-Binder)
             [87066] = true, -- Volcanic Debris (Fire-Binder)
             [88845] = true, -- Empower Atronach (Fire-Binder)
-            --[92646] = true, -- Volcanic Debris (Fire-Binder)
+            [92646] = true, -- Volcanic Debris (Fire-Binder)
 
             [81545] = true, -- Fright Force (Voidbringer)
             [76621] = true, -- Shadeway (Voidbringer)
@@ -7761,8 +7837,13 @@ debugAuras = {
             [51894] = true, -- Negate Magic (Mender T2)
 
             [52864] = true, -- Quick Shot (Archer T1)
-            [54257] = true, -- Upgraded Volley (Archer T2)
-            [54258] = true, -- Upgraded Volley (Archer T2)
+            --[52865] = true, -- Volley (Archer T1)
+            --[52866] = true, -- Volley (Archer T1)
+            [70413] = true, -- Burning Arrow (Archer - Cyrodiil)
+            --[70417] = true, -- Ignite (Archer T1)
+            --[70414] = true, -- Ignite (Archer T1)
+            --[54257] = true, -- Upgraded Volley (Archer T2)
+            --[54258] = true, -- Upgraded Volley (Archer T2)
             [54264] = true, -- Lethal Arrow (Archer T2)
             [54265] = true, -- Lethal Arrow (Archer T2)
             [54259] = true, -- Draining Shot (Archer T2)
@@ -7918,9 +7999,9 @@ debugAuras = {
             [14828] = true, -- Charge
             [14829] = true, -- Charge
             [18751] = true, -- Charge
-            --[87276] = true, -- Chomp (Kagouti Whelp)
-            --[87310] = true, -- Run Away! (Kagouti Whelp)
-            --[87312] = true, -- Run Away! (Kagouti Whelp)
+            [87276] = true, -- Chomp (Kagouti Whelp)
+            [87310] = true, -- Run Away! (Kagouti Whelp)
+            [87312] = true, -- Run Away! (Kagouti Whelp)
 
             [7170] = true, -- Rend -- Lion
             [60630] = true, -- Rend -- Lion
@@ -7936,6 +8017,7 @@ debugAuras = {
             [75633] = true, -- Vigorous Swipe -- Mammoth
             [75634] = true, -- Vigorous Swipes -- Mammoth
             [8600] = true, -- Stomp -- Mammoth
+            [23197] = true, -- Stomp -- Mammoth
             [23164] = true, -- Stomp -- Mammoth
             [23230] = true, -- Charge -- Mammoth
             [48551] = true, -- Focused Charge -- Mammoth
@@ -8313,6 +8395,7 @@ debugAuras = {
             [89301] = true, -- Summon Spiderling -- Spider Daedra
             [89302] = true, -- Summon Spiderling -- Spider Daedra
             [89300] = true, -- Summon Spiderling -- Spider Daedra
+            [89299] = true, -- Summon Spiderling -- Spider Daedra
             [89306] = true, -- Web -- Spider Daedra
             [89307] = true, -- Web -- Spider Daedra
 
@@ -8337,9 +8420,10 @@ debugAuras = {
             [83072] = true, -- Frozen Edge -- Xivilai
             [49203] = true, -- Frozen Weapon -- Xivilai
             [88947] = true, -- Lightning Grasp -- Xivilai
-            [88952] = true, -- Lightning Grasp -- Xivilai
             [88951] = true, -- Lightning Grasp -- Xivilai
             [88949] = true, -- Lightning Grasp -- Xivilai
+            [88948] = true, -- Lightning Grasp -- Xivilai
+            [111955] = true, -- Lightning Grasp -- Xivilai
             [7100] = true, -- Hand of Flame -- Xivilai
             [25747] = true, -- Hand of Flame -- Xivilai
             [25749] = true, -- Hand of Flame -- Xivilai
@@ -8427,7 +8511,7 @@ debugAuras = {
             [77612] = true, -- Symphony of Blades -- Defiled Aegis
             [73020] = true, -- Shattered Harmony -- Defiled Aegis
             [76180] = true, -- Shattered Harmony -- Defiled Aegis
-            --[73021] = true, -- Shattered Harmony -- Defiled Aegis
+            [73021] = true, -- Shattered Harmony -- Defiled Aegis
             [73025] = true, -- Tomb Guardian -- Defiled Aegis
             [73322] = true, -- Shattered Harmony -- Defiled Aegis
             [74993] = true, -- Shattered Harmony -- Defiled Aegis
@@ -8471,10 +8555,10 @@ debugAuras = {
             [52398] = true, -- Consuming Energy -- Spellfiend
 
             --[68735] = true, -- Vampiric Drain -- Vampire
-            --[68750] = true, -- Vampiric Drain -- Vampire
-            --[68765] = true, -- Vampiric Drain -- Vampire
-            --[68771] = true, -- Vampiric Drain Heal Dummy -- Vampire
-            --[68772] = true, -- Vampiric Drain -- Vampire
+            [68750] = true, -- Vampiric Drain -- Vampire
+            [68765] = true, -- Vampiric Drain -- Vampire
+            [68771] = true, -- Vampiric Drain Heal Dummy -- Vampire
+            [68772] = true, -- Vampiric Drain -- Vampire
 
             [2849] = true, -- Claw Slash -- Werewolf
             [4651] = true, -- Claw Slash -- Werewolf
@@ -8482,13 +8566,10 @@ debugAuras = {
             [2867] = true, -- Crushing Leap -- Werewolf
             [45576] = true, -- Generic Stagger Enemy -- Werewolf
             [3415] = true, -- Flurry -- Werewolf
+            [113156] = true, -- Flurry -- Werewolf
             [13950] = true, -- Flurry -- Werewolf
             [9467] = true, -- Flurry -- Werewolf
             [60636] = true, -- Flurry -- Werewolf
-            [60637] = true, -- Flurry -- Werewolf
-            [60638] = true, -- Flurry -- Werewolf
-            [60639] = true, -- Flurry -- Werewolf
-            [60640] = true, -- Flurry -- Werewolf
             [44055] = true, -- Devour -- Werewolf
             [44054] = true, -- Devour -- Werewolf
             [5785] = true, -- Blood Scent -- Werewolf
@@ -8565,7 +8646,7 @@ debugAuras = {
             [7719] = true, -- Shocking Touch -- Dwemer Spider
             [20507] = true, -- Double Strike -- Dwemer Spider
             [20508] = true, -- Double Strike -- Dwemer Spider
-            [7717] = true, -- Detonation -- Dwemer Spider
+            --[7717] = true, -- Detonation -- Dwemer Spider
             [15206] = true, -- Detonation -- Dwemer Spider
             [84019] = true, -- Detonation -- Dwemer Spider
             [13536] = true, -- Detonation -- Dwemer Spider
@@ -8650,7 +8731,7 @@ debugAuras = {
             [61377] = true, -- Infectious Swarm -- Necrotic Hoarvor
             [61372] = true, -- Infectious Swarm -- Necrotic Hoarvor
             [61374] = true, -- Infectious Swarm -- Necrotic Hoarvor
-            [61375] = true, -- Infectious Swarm -- Necrotic Hoarvor
+            [61375] = true, -- Infectious Swarm Snare -- Necrotic Hoarvor
             [61376] = true, -- Infectious Swarm -- Necrotic Hoarvor
             [61427] = true, -- Necrotic Explosion -- Necrotic Hoarvor
             [61249] = true, -- Necrotic Explosion -- Necrotic Hoarvor
@@ -8972,6 +9053,7 @@ debugAuras = {
             [89159] = true, -- Summon Beast -- Spriggan
             [89151] = true, -- Summon Beast -- Spriggan
             [89154] = true, -- Summon Beast -- Spriggan
+            [89160] = true, -- Summon Beast -- Spriggan
             [89168] = true, -- Summon Beast -- Spriggan
             [89170] = true, -- Summon Beast -- Spriggan
             [89127] = true, -- Summon Beast -- Spriggan
@@ -9092,6 +9174,51 @@ debugAuras = {
             [87712] = true, -- Enraged (Mantikora)
             [56689] = true, -- Enraged (Mantikora)
 
+            [105459] = true, -- Triggered (Yaghra Strider)
+            [103777] = true, -- Lacerate (Yaghra Strider)
+            [103778] = true, -- Lacerate (Yaghra Strider)
+            [105432] = true, -- Lacerate (Yaghra Strider)
+            [105433] = true, -- Lacerate (Yaghra Strider)
+            [103780] = true, -- Bleeding Laceratation (Yaghra Strider)
+            [104479] = true, -- Reave (Yaghra Strider)
+            [104509] = true, -- Reave (Yaghra Strider)
+            [104508] = true, -- Reave (Yaghra Strider)
+            [105214] = true, -- Lunge (Yaghra Strider)
+            [110418] = true, -- Lunge (Yaghra Strider)
+            [105220] = true, -- Lunge (Yaghra Strider)
+            [105221] = true, -- Lunge (Yaghra Strider)
+            [105285] = true, -- Lunge (Yaghra Strider)
+            [105330] = true, -- Frenzy (Yaghra Strider)
+            [105428] = true, -- Frenzy (Yaghra Strider)
+            [109469] = true, -- Frenzy (Yaghra Strider)
+
+            [103776] = true, -- Slash (Yaghra Strider)
+            [103775] = true, -- Chop (Yaghra Strider)
+            [103784] = true, -- Dazed Snare (Yaghra Strider)
+            [103786] = true, -- Purge (Yaghra Strider)
+            [103804] = true, -- Deluge (Yaghra Strider)
+            [103810] = true, -- Deluge (Yaghra Strider)
+            [103812] = true, -- Deluge (Yaghra Strider)
+            [103852] = true, -- Deluge (Yaghra Strider)
+            [103805] = true, -- Deluge (Yaghra Strider)
+            [103849] = true, -- Deluge (Yaghra Strider)
+            [103856] = true, -- Deluge (Yaghra Strider)
+            [103857] = true, -- Deluge (Yaghra Strider)
+            [103821] = true, -- YAGRAN Deluge AoE2 (Yaghra Strider)
+            [103850] = true, -- Deluge (Yaghra Strider)
+            [103858] = true, -- Deluge (Yaghra Strider)
+            [103862] = true, -- Deluge (Yaghra Strider)
+            [103864] = true, -- Deluge (Yaghra Strider)
+            [103931] = true, -- Luminescent Mark (Yaghra Strider)
+            [103955] = true, -- Knockback (Yaghra Strider)
+            [103954] = true, -- Stun (Yaghra Strider)
+            [103993] = true, -- Luminescent Mark (Yaghra Strider)
+            [103958] = true, -- Luminescent Mark (Yaghra Strider)
+            [103957] = true, -- Luminescent Mark (Yaghra Strider)
+            [103973] = true, -- Luminescent Mark (Yaghra Strider)
+            [103991] = true, -- Luminescent Mark (Yaghra Strider)
+            [103992] = true, -- Luminescent Burn (Yaghra Strider)
+
             -------------------------------------
             -- MORROWIND DLC NPCS ---------------
             -------------------------------------
@@ -9200,7 +9327,7 @@ debugAuras = {
             [91094] = true, -- Split Bolt
             [91095] = true, -- Split Bolt
             [91096] = true, -- Split Bolt
-            [85326] = true, -- Polarizing Field
+            --[85326] = true, -- Polarizing Field
             [85327] = true, -- Polarizing Field
             [85334] = true, -- Polarizing Field
 
@@ -9289,23 +9416,23 @@ debugAuras = {
             [75527] = true, -- Ultimate Protection
             [64089] = true, -- Titan Bash
             [64091] = true, -- Power Bash
-            --[64772] = true, -- MQ1 Input Lock LAtk
-            --[64769] = true, -- MQ1 Input Lock LAtk
+            [64772] = true, -- MQ1 Input Lock LAtk
+            [64769] = true, -- MQ1 Input Lock LAtk
             [64092] = true, -- PermaStun
             [64133] = true, -- PermRoot
             [63883] = true, -- Major Protection
             [1718] = true, -- Attack
-            --[64029] = true, -- MQ1 Inpuit Lock Visual
-            --[61748] = true, -- Heavy Attack
-            --[64784] = true, -- MQ1 Tutorial Block Heavy
-            --[61956] = true, -- Off-Balance Timer
-            --[61980] = true, -- Off-Balance
-            --[61961] = true, -- Perma Set Off Balance Target
-            --[64677] = true, -- MQ1 Tutorial Perma Off-Balance
-            --[63900] = true, -- Major Protection die
-            --[64676] = true, -- MQ1 Tutorial Perma Off-Balance
-            --[61916] = true, -- Heat Wave
-            --[64798] = true, -- MQ1 Heat Wave (Tutorial)
+            [64029] = true, -- MQ1 Inpuit Lock Visual
+            [61748] = true, -- Heavy Attack
+            [64784] = true, -- MQ1 Tutorial Block Heavy
+            [61956] = true, -- Off-Balance Timer
+            [61980] = true, -- Off-Balance
+            [61961] = true, -- Perma Set Off Balance Target
+            [64677] = true, -- MQ1 Tutorial Perma Off-Balance
+            [63900] = true, -- Major Protection die
+            [64676] = true, -- MQ1 Tutorial Perma Off-Balance
+            [61916] = true, -- Heat Wave
+            [64798] = true, -- MQ1 Heat Wave (Tutorial)
             [75531] = true, -- Retarget
             [0] = true, -- (No Name)
             [63269] = true, -- Heat Wave (Vaekar the Forgemaster)
@@ -9318,10 +9445,10 @@ debugAuras = {
             [63752] = true, -- Vomit
             [63753] = true, -- Vomit
             [64069] = true, -- Sentinel Barrier
-            --[64247] = true, -- MQ1 Input Lock Visual No Delay
-            --[63555] = true, -- MQ1 Sneak Atk Tutorial Trigger
-            --[63559] = true, -- MQ1 Sneak Tutorial Trigger
-            --[64072] = true, -- Eye of the Sentinel
+            [64247] = true, -- MQ1 Input Lock Visual No Delay
+            [63555] = true, -- MQ1 Sneak Atk Tutorial Trigger
+            [63559] = true, -- MQ1 Sneak Tutorial Trigger
+            [64072] = true, -- Eye of the Sentinel
             [64112] = true, -- CON_Ground Rise on
             [48345] = true, -- Focused Healing
             [48346] = true, -- Minor Wound
@@ -9331,12 +9458,12 @@ debugAuras = {
             [51693] = true, -- Hate
             [63521] = true, -- Bone Crush
             [63522] = true, -- Bone Saw
-            --[61648] = true, -- Replenish Stamina
-            --[61644] = true, -- Incapacitating Terror
-            --[61646] = true, -- Incapacitating Terror
-            --[64074] = true, -- Incapacitating Terror
-            --[64166] = true, -- Major Protection
-            --[63398] = true, -- Backlash
+            [61648] = true, -- Replenish Stamina
+            [61644] = true, -- Incapacitating Terror
+            [61646] = true, -- Incapacitating Terror
+            [64074] = true, -- Incapacitating Terror
+            [64166] = true, -- Major Protection
+            [63398] = true, -- Backlash
             [63615] = true, -- Insight
             [64110] = true, -- Rending the Skein
             [63637] = true, -- Teleport
@@ -9560,7 +9687,7 @@ debugAuras = {
             [47186] = true, -- CHT Portal Killer
 
             -------------------------------------
-            -- QUESTS - FIGHTERS GUILD ---------
+            -- QUESTS - FIGHTERS GUILD ----------
             -------------------------------------
 
             -- Anchors from the Harbour
@@ -10257,6 +10384,8 @@ debugAuras = {
             [39776] = true, -- GW CTen BosmVKhaj Calm Ending (Peacemaker Achievement Location)
             [39649] = true, -- GW CTen KhajVAltm Happy Comp (Peacemaker Achievement Location)
             [39650] = true, -- GW CTen KhajVAltm Sad Comp (Peacemaker Achievement Location)
+            [60390] = true, -- Visability (Misc)
+            [39638] = true, -- GW CulTen BosVSAlt Happy Comp (Peacemaker Achievement Location)
 
             -- World Boss - Nindaeril's Perch
             [70466] = true, -- 35% Boss Speed Buff (Nindaeril the Monsoon)
@@ -10787,6 +10916,7 @@ debugAuras = {
             -- Tutorial
             [89095] = true, -- Slaver Clothes
             [92087] = true, -- Slaver Clothes
+            [92100] = true, -- Slaver Clothes
             [92106] = true, -- Slaver Clothes
             [92108] = true, -- Slaver Clothes
             [89096] = true, -- Slaver Clothes
@@ -10815,6 +10945,7 @@ debugAuras = {
             [88905] = true, -- Metal Trap
             [22337] = true, -- Generic Fade to Black 2s
             [92002] = true, -- Waking
+            [106162] = true, -- Not CC Immune
 
             -- Tutorial NPC's
             [92668] = true, -- Whirlwind (Slaver Cutthroat)
@@ -10961,6 +11092,7 @@ debugAuras = {
             [89564] = true, -- Knockout
             [93289] = true, -- Q5922 Stun Capt
             [88244] = true, -- The Slavemaster's Chains
+            [43148] = true, -- CV Delay 10 Minutes
 
             -- Divine Delusions
             [86972] = true, -- Q5888 Chodala Magic Shield Fx
@@ -11241,6 +11373,476 @@ debugAuras = {
 
             [90597] = true, -- Overcharge Explusion
             [90598] = true, -- Overcharge Explusion
+
+            -------------------------------------
+            -- SUMMERSET QUESTS/EVENTS ----------
+            -------------------------------------
+
+            [107581] = true, -- Mind Haze
+            [107747] = true, -- Mind Trap
+            [100672] = true, -- MQ1 Input Lock Visual
+            [100678] = true, -- Major Protection
+            [100671] = true, -- Heavy Attack
+            [100683] = true, -- Block Me
+            [100677] = true, -- Block Me
+            [100686] = true, -- Off-Balance
+            [100694] = true, -- Off-Balance
+            [100687] = true, -- Off-Balance
+            [100690] = true, -- Off-Balance
+            [100722] = true, -- Heat Wave
+            [100733] = true, -- Heat Wave
+
+            [108553] = true, -- Generic ANY Stun 4s
+            [106862] = true, -- SU Tutorial Touch PearlFail
+
+            [105498] = true, -- Flog (Yaghra Larva)
+            [105540] = true, -- Body Bash (Yaghra Larva)
+            [105561] = true, -- Momentous Discharge (Yaghra Larva)
+            [105563] = true, -- Momentous Discharge (Yaghra Larva)
+            [105562] = true, -- Momentous Discharge (Yaghra Larva)
+            [105601] = true, -- Explosive Toxins (Yaghra Larva)
+            [108773] = true, -- Explosive Toxins (Yaghra Larva)
+            [105605] = true, -- Explosive Toxins (Yaghra Larva)
+            [105604] = true, -- Explosive Toxins (Yaghra Larva)
+
+            [105737] = true, -- Stab (Yaghra Nightmare)
+            [105739] = true, -- Stab (Yaghra Nightmare)
+            [107282] = true, -- Impale (Yaghra Nightmare)
+            [107284] = true, -- Impale (Yaghra Nightmare)
+            [107299] = true, -- Impale (Yaghra Nightmare)
+
+            [105867] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105876] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105874] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105877] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105878] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105879] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105880] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105881] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105873] = true, -- Pustulant Eruption (Yaghra Nightmare)
+
+            [105889] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105912] = true, -- Pustulant Eruption (Yaghra Nightmare)
+            [105893] = true, -- Pustulant Film (Yaghra Nightmare)
+
+            -------------------------------------
+            -- DUNGEONS -------------------------
+            -------------------------------------
+
+            -- Banished Cells I
+            [86710] = true, -- Checkpoint Tele Arrive (Banished Cells - 2nd to last boss)
+            [8523] = true, -- Keeper Prison
+            [18998] = true, -- DUN_BC P6_Ritual_Daedric
+            [18995] = true, -- DUN_BC Skeleton Rise
+            [19028] = true, -- Drain Essence (Cell Haunter)
+            [42052] = true, -- Drain Essence (Cell Haunter)
+            [46235] = true, -- ClannFear Intro 1 (Shadowrend)
+            [46258] = true, -- Clannfear Arrives (Shadowrend)
+            [18725] = true, -- Spiked Headbutt (Shadowrend)
+            [47587] = true, -- Tail Smite (Shadowrend)
+            [47608] = true, -- Knocked Down (Shadowrend)
+            [21886] = true, -- Summon Dark Proxy (Shadowrend)
+            [21887] = true, -- Forward Charge (Shadowrend)
+            [18728] = true, -- Pounce (Shadowrend)
+            [35625] = true, -- Pounce (Shadowrend)
+            [18772] = true, -- Feeding (Shadowrend)
+            [18759] = true, -- Pounce (Shadowrend)
+            [18708] = true, -- Summon Clannfear (Angata the Clannfear Handler)
+            [18709] = true, -- Summon Appearance (Angata the Clannfear Handler)
+            [19025] = true, -- Dead Zone (Skeletal Destroyer)
+            [19027] = true, -- Dead Zone (Skeletal Destroyer)
+            [18961] = true, -- Ghostly Summon (Generic Invisible Target)
+            [18798] = true, -- Slash (High Kinlord Rilis)
+            [33189] = true, -- Crushing Blow (High Kinlord Rilis)
+            [33190] = true, -- Crushing Blow (High Kinlord Rilis)
+            [33191] = true, -- Crushing Blow (High Kinlord Rilis)
+            [18795] = true, -- CON_Invisible_30%_Speed_Debuff (The Feast)
+            [86759] = true, -- The Feast Tick (The Feast)
+            [33172] = true, -- Oblivion Restoration (The Feast)
+            [33165] = true, -- Despawn Self (The Feast)
+            [18840] = true, -- Soul Blast (High Kinlord Rilis)
+            [18846] = true, -- Soul Blast (High Kinlord Rilis)
+            [18847] = true, -- Soul Blast (High Kinlord Rilis)
+            [18875] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [33437] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [33174] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [33179] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [33184] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [33187] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [33188] = true, -- Daedric Tempest (High Kinlord Rilis)
+            [36522] = true, -- Daedric Flames (High Kinlord Rilis)
+            [46296] = true, -- Crystals (Binding Stones)
+            [36524] = true, -- Binding
+
+            -- Banished Cells II
+            [85885] = true, -- Teleport
+            [32287] = true, -- Rilis' Cruelty
+            [64490] = true, -- Shatter
+            [31265] = true, -- NFX_Q4597 Cruelty Stone
+            [36473] = true, -- DUN_BCH Cruelty One Shot
+            [46715] = true, -- DUN_BCH Cruelty One Shot
+            [46713] = true, -- DUN_BCH Cruelty One Shot
+
+            [70612] = true, -- Chains
+            [70613] = true, -- Chains
+            [70614] = true, -- Chains
+            [70615] = true, -- Chains
+            [29481] = true, -- Chains
+            [29486] = true, -- Chains
+            [28786] = true, -- Inferno
+            [28915] = true, -- Inferno
+            [49190] = true, -- Dummy
+            [49191] = true, -- Dummy
+            [70633] = true, -- Dummy
+            [70632] = true, -- Dummy
+
+            [28902] = true, -- Swipe (Maw of the Infernal)
+            [48271] = true, -- Dummy (Maw of the Infernal)
+            [49150] = true, -- Cone of Rot (Maw of the Infernal)
+            [49149] = true, -- Breath of Flame (Maw of the Infernal)
+            [28903] = true, -- Immolating Bite (Maw of the Infernal)
+            [35680] = true, -- Immolating Bite (Maw of the Infernal)
+            [28905] = true, -- Immolating Bite (Maw of the Infernal)
+            [28904] = true, -- Immolating Bite (Maw of the Infernal)
+            [47127] = true, -- Nocom (Maw of the Infernal)
+
+            [48281] = true, -- Slash (Keeper Voranil)
+            [27826] = true, -- Crushing Blow (Keeper Voranil)
+            [27827] = true, -- Crushing Blow (Keeper Voranil)
+            [27828] = true, -- Crushing Blow (Keeper Voranil)
+            [29018] = true, -- Berserker Frenzy (Keeper Voranil)
+            [29020] = true, -- Berserker Frenzy (Keeper Voranil)
+            [29022] = true, -- Berserker Frenzy Snare (Keeper Voranil)
+            [28750] = true, -- Essence Siphon (Keeper Voranil)
+            [28759] = true, -- Essence Siphon (Keeper Voranil)
+
+            [32290] = true, -- Rilis' Madness (High Kinlord Rilis)
+            [64518] = true, -- Shatter (The Second Binding Stone)
+
+            [28964] = true, -- Spawn (Keeper Imiril)
+            [30734] = true, -- Portal (Daedric Chaos)
+            [31713] = true, -- Root (Daedric Chaos)
+            [32044] = true, -- Has Jumped (Daedric Chaos)
+            [31712] = true, -- Portal Leap (Daedric Chaos)
+            [31726] = true, -- Corruption (Daedric Chaos)
+            [32054] = true, -- SpawnRun (Banekin)
+            [32038] = true, -- Into Portal (Keeper Imiril)
+            [36631] = true, -- ExitPortal (Keeper Imiril)
+            [31727] = true, -- Corruption (Daedric Chaos)
+            [28916] = true, -- Slash (Keeper Imiril)
+            [29143] = true, -- Daedric Blast (Keeper Imiril)
+
+            [32291] = true, -- Rilis' Dominion (High Kinlord Rilis)
+            [64526] = true, -- Shatter (The Third Binding Stone)
+
+            [28961] = true, -- Sister's Love (Sister Sihna / Sister Vera)
+            [28962] = true, -- Sister's Love (Sister Sihna / Sister Vera)
+            [28966] = true, -- Dummy (Sister Sihna / Sister Vera)
+
+            [35847] = true, -- Dummy
+            [31436] = true, -- NFX_Q4597 Final Stone
+            [46433] = true, -- DUN_BCH_Knockback&Knockdown (High Kinlord Rilis)
+            [46435] = true, -- Fire Backlash (High Kinlord Rilis)
+
+            [28715] = true, -- Daedric Bolt (High Kinlord Rilis)
+            [28570] = true, -- Levitate (High Kinlord Rilis)
+            [64618] = true, -- Bubble Immunity (High Kinlord Rilis)
+            [28772] = true, -- Stun (High Kinlord Rilis)
+            [46960] = true, -- Levitate (High Kinlord Rilis)
+            [28773] = true, -- Levitate (High Kinlord Rilis)
+            [28462] = true, -- Levitate (High Kinlord Rilis)
+            [64619] = true, -- Bubble Immunity (High Kinlord Rilis)
+            [28774] = true, -- Stun (High Kinlord Rilis)
+            [46961] = true, -- Levitate (High Kinlord Rilis)
+            [28775] = true, -- Levitate (High Kinlord Rilis)
+            [28475] = true, -- Curse of Suffering
+            [48502] = true, -- Snare
+            [48889] = true, -- Curse of Suffering
+            [48308] = true, -- Curse of Suffering
+            [28571] = true, -- Curse of Dominance
+            [48508] = true, -- Snare
+            [48888] = true, -- Curse of Dominance
+            [48507] = true, -- Curse of Dominance
+
+            [29989] = true, -- Daedric Step
+            [46967] = true, -- Daedric Step
+            [46964] = true, -- Daedric Step
+            [46965] = true, -- Daedric Step
+            [46963] = true, -- Teleportdummy
+
+            [36029] = true, -- The Feast Projectile
+            [48908] = true, -- The Feast
+            [48909] = true, -- The Feast
+            [26070] = true, -- The Feast
+
+            [48799] = true, -- Deadric Tempest
+            [48802] = true, -- Daedric Tempest
+            [48801] = true, -- Daedric Tempest
+            [48810] = true, -- Daedric Tempest
+            [48811] = true, -- Daedric Tempest
+            [48812] = true, -- Daedric Tempest
+            [48813] = true, -- Daedric Tempest
+            [48803] = true, -- Daedric Tempest
+            [48804] = true, -- Daedric Tempest
+            [48805] = true, -- Daedric Tempest
+            [48806] = true, -- Daedric Tempest
+            [48807] = true, -- Daedric Tempest
+            [48808] = true, -- Daedric Tempest
+            [48809] = true, -- Daedric Tempest
+            [48800] = true, -- Daedric Tempest
+
+            [48814] = true, -- Daedric Tempest
+            [48816] = true, -- Daedric Tempest
+            [48818] = true, -- Daedric Tempest
+            [48821] = true, -- Daedric Tempest
+            [48823] = true, -- Daedric Tempest
+            [48826] = true, -- Daedric Tempest
+            [48827] = true, -- Daedric Tempest
+            [48817] = true, -- Daedric Tempest
+            [48819] = true, -- Daedric Tempest
+            [48822] = true, -- Daedric Tempest
+            [48824] = true, -- Daedric Tempest
+            [48825] = true, -- Daedric Tempest
+            [48820] = true, -- Daedric Tempest
+            [48828] = true, -- Daedric Tempest
+            [48815] = true, -- Daedric Tempest
+            [28362] = true, -- Black Sigil
+            [36020] = true, -- Black Sigil
+            [28088] = true, -- Red Sigil
+            [36030] = true, -- Red Sigil
+            [31482] = true, -- DUN_BCH Portal
+
+            -- Elden Hollow I
+            [14905] = true, -- Hacking Strike (Akash gra-Mal)
+            [16834] = true, -- Executioner's Strike (Akash gra-Mal)
+            [25309] = true, -- Fire Backlash (Akash gra-Mal)
+            [25310] = true, -- CON_Knockback&Knockdown (Akash gra-Mal)
+            [15999] = true, -- Leaping Strike (Akash gra-Mal)
+            [16003] = true, -- Leaping Strike (Akash gra-Mal)
+            [9936] = true, -- Battlecry (Akash gra-Mal)
+            [44093] = true, -- Battlecry (Akash gra-Mal)
+            [16016] = true, -- Berserker Frenzy (Akash gra-Mal)
+            [16017] = true, -- Berserker Frenzy (Akash gra-Mal)
+            [16022] = true, -- Berserker Frenzy Snare (Akash gra-Mal)
+            [25300] = true, -- Berserker Frenzy (Akash gra-Mal)
+            [25301] = true, -- Berserker Frenzy (Akash gra-Mal)
+            [25302] = true, -- Berserker Frenzy (Akash gra-Mal)
+            [23498] = true, -- End Undeath
+            [23481] = true, -- End Undeath
+            [25400] = true, -- Intro Theater
+            [25402] = true, -- Roar
+
+            [15116] = true, -- Piercing Strike (Chokethorn)
+            [15113] = true, -- Pulling Grasp (Chokethorn)
+            [15114] = true, -- Pulling Grasp (Chokethorn)
+            [9905] = true, -- Pulling Grasp (Chokethorn)
+            [25528] = true, -- Pulling Grasp (Chokethorn)
+            [9910] = true, -- Summon Saplings (Chokethorn)
+            [25458] = true, -- Init Self Stun (Strangler Saplings)
+            [25455] = true, -- Summon Saplings (Strangler Saplings)
+            [9930] = true, -- Heal Spores (Strangler Saplings)
+            [9875] = true, -- Fungal Burst (Chokethorn)
+            [44092] = true, -- Generic Stagger Enemy (Chokethorn)
+
+            [16451] = true, -- Watching Combat (Nenesh gro-Mal)
+            [35816] = true, -- Leefseether (Leafseether)
+            [44223] = true, -- Inhale (Leafseether)
+            [44225] = true, -- Inhale (Leafseether)
+            [14216] = true, -- Generic Shadowy Effect
+            [25796] = true, -- Intro
+            [25930] = true, -- Intro End
+            [15120] = true, -- Phantasmal Bolt (Canonreeve Oraneth)
+            [9845] = true, -- Rotting Bolt (Canonreeve Oraneth)
+            [9852] = true, -- Rotting Bolt (Canonreeve Oraneth)
+            [16262] = true, -- Necrotic Circle (Canonreeve Oraneth)
+            [16275] = true, -- Necrotic Circle (Canonreeve Oraneth)
+            [25932] = true, -- Necrotic Circle (Canonreeve Oraneth)
+            [25936] = true, -- Necrotic Circle (Canonreeve Oraneth)
+            [25938] = true, -- Necrotic Circle (Canonreeve Oraneth)
+            [25937] = true, -- Necrotic Circle (Canonreeve Oraneth)
+            [25348] = true, -- Necrotic Circle (Canonreeve Oraneth)
+            [25877] = true, -- Necrotic Circle (Canonreeve Oraneth)
+            [42601] = true, -- Necrotic Circle (Canonreeve Oraneth)
+            [25370] = true, -- Necrotic Circle (Canonreeve Oraneth)
+            [46800] = true, -- Necrotic Circle (Canonreeve Oraneth)
+            [12478] = true, -- CON_Ground Rise ON (Darkfern Skeleton)
+            [25820] = true, -- Necrotic Circle (Darkfern Skeleton)
+            [25828] = true, -- Necrotic Circle (Darkfern Skeleton)
+            [25829] = true, -- Necrotic Circle (Darkfern Skeleton)
+            [25827] = true, -- Necrotic Circle (Darkfern Skeleton)
+            [9944] = true, -- Necrotic Burst (Canonreeve Oraneth)
+            [15682] = true, -- Necrotic Burst (Canonreeve Oraneth)
+            [15681] = true, -- Necrotic Burst (Canonreeve Oraneth)
+            [9839] = true, -- Bone Hurricane (Canonreeve Oraneth)
+
+            [25721] = true, -- End Undeath
+            [25724] = true, -- End Undeath
+            [25722] = true, -- Fire Backlash
+            [25723] = true, -- CON_Knockback&Knockdown
+            [28830] = true, -- Rumbling
+            [28820] = true, -- Rumbling
+            [27888] = true, -- Darkness Below
+            [27894] = true, -- Bonus Radius
+            [27891] = true, -- Darkness Below
+            [27893] = true, -- Darkness Below Immunity
+            [27889] = true, -- Knockback Immunity
+            [27892] = true, -- Darkness Below
+            [27890] = true, -- Darkness Below
+            --[28886] = true, -- Darkness Below
+
+            -- Elden Hollow II
+            [85909] = true, -- Teleport
+            [31114] = true, -- EHH_Striker_Invis
+            [31109] = true, -- Intro
+            [31347] = true, -- Portal
+            [34376] = true, -- Flame Geyser (Dubroze the Infestor)
+            [34377] = true, -- Flame Geyser (Dubroze the Infestor)
+            [34378] = true, -- Flame Geyser (Dubroze the Infestor)
+
+            [32709] = true, -- Lacerate (Dark Root)
+            [32567] = true, -- Hammering Light (Dark Root)
+            [32572] = true, -- Hammering Light (Dark Root)
+            [32569] = true, -- Hammering Light (Dark Root)
+            [32582] = true, -- Hammering Light (Dark Root)
+            [32585] = true, -- Hammering Light (Dark Root)
+            [32583] = true, -- Hammering Light (Dark Root)
+            [32586] = true, -- Hammering Light (Dark Root)
+            [32589] = true, -- Hammering Light (Dark Root)
+            [32587] = true, -- Hammering Light (Dark Root)
+            [32590] = true, -- Hammering Light (Dark Root)
+            [32593] = true, -- Hammering Light (Dark Root)
+            [32591] = true, -- Hammering Light (Dark Root)
+            [32707] = true, -- Summon Guardians (Dark Root)
+            [32708] = true, -- Summon Guardians (Dark Root)
+            [32845] = true, -- Summon Guardians (Dark Root)
+            [32599] = true, -- Dummy (Dark Root)
+            [32596] = true, -- Dummy (Dark Root)
+            [33334] = true, -- Latch On Stamina (Frenzied Guardian)
+            [33335] = true, -- Latch On Stamina (Frenzied Guardian)
+            [33337] = true, -- Latch On Magicka (Mystic Guardian)
+            [33338] = true, -- Latch On MAgicka (Mystic Guardian)
+            [32648] = true, -- Fortified Ground (Fortified Guardian)
+            [32653] = true, -- Fortification (Fortified Guardian)
+            [32655] = true, -- Fortification (Fortified Guardian)
+            [32654] = true, -- Fortification (Fortified Guardian)
+            [32706] = true, -- Fortification (Fortified Guardian)
+            [32647] = true, -- Empowered Ground (Mystic Guardian)
+            [32613] = true, -- Empowered (Mystic Guardian)
+            [32614] = true, -- Empowered (Mystic Guardian)
+            [32618] = true, -- Empowered (Mystic Guardian)
+            [32890] = true, -- Gleaming Light (Dark Root)
+            [33533] = true, -- Glaring Light (Dark Root)
+            [33535] = true, -- Brightening Light (Dark Root)
+
+            -- Frostvault
+            [115316] = true, -- Weatherman
+
+            [117286] = true, -- Rending Bleed (Coldsnap Goblin - Shared)
+            [117486] = true, -- Bleed (Coldsnap Goblin - Shared)
+
+            [109574] = true, -- Fire Power (Coldsnap Harrier)
+            [109590] = true, -- Firepower (Coldsnap Harrier)
+            [109584] = true, -- Firepower (Coldsnap Harrier)
+            [120945] = true, -- Firepower (Coldsnap Harrier)
+
+            [117298] = true, -- Quick Strike (Coldsnap Snowstalker)
+            [117352] = true, -- Whirlwind (Coldsnap Snowstalker)
+            [118540] = true, -- Whirlwind (Coldsnap Snowstalker)
+
+            [117295] = true, -- Bite (Coldsnap Durzog)
+            [117296] = true, -- Rend (Coldsnap Durzog)
+
+            [117289] = true, -- Backhand (Coldsnap Ogre)
+            [117290] = true, -- Shockwave (Coldsnap Ogre)
+            [118491] = true, -- Shockwave (Coldsnap Ogre)
+            [117292] = true, -- Off Balance (Coldsnap Ogre)
+            [117291] = true, -- Stagger (Coldsnap Ogre)
+            [117287] = true, -- Crushing Blow (Coldsnap Ogre)
+            [117288] = true, -- Crushing Blow (Coldsnap Ogre)
+
+            [117316] = true, -- Ice Arrow (Coldsnap Skysplitter)
+            [117323] = true, -- Ice Comet (Coldsnap Skysplitter)
+            [117326] = true, -- Ice Comet (Coldsnap Skysplitter)
+            [117325] = true, -- Ice Comet (Coldsnap Skysplitter)
+            [117327] = true, -- Ice Comet (Coldsnap Skysplitter)
+            [117324] = true, -- Ice Comet (Coldsnap Skysplitter)
+
+            [117309] = true, -- Cleave (Coldsnap Frostbiter)
+
+            [117345] = true, -- Low Slash (Coldsnap Toothbreaker)
+            [117346] = true, -- Low Slash (Coldsnap Toothbreaker)
+            [114490] = true, -- Maim (Coldsnap Toothbreaker)
+
+            [119246] = true, -- Border Chk (Icestalker)
+            [110390] = true, -- Icestalker Target
+            [110391] = true, -- Icestalker Target 2
+            [118131] = true, -- Get Hit
+            [118132] = true, -- Icestalker Targ Remove
+
+            [109821] = true, -- Rock Toss (Icestalker)
+            [109822] = true, -- Rock Toss (Icestalker)
+
+            [109801] = true, -- Leaping Crush (Icestalker)
+            [119417] = true, -- Add 2.5 to Ground Slam CD (Icestalker)
+            [109803] = true, -- Leaping Crush (Icestalker)
+            [109802] = true, -- Leaping Crush (Icestalker)
+            [109804] = true, -- Leaping Crush (Icestalker)
+            [109805] = true, -- Leaping Crush (Icestalker)
+            [116667] = true, -- Skeletal Smash (Icestalker)
+            [116666] = true, -- Skeletal Smash (Icestalker)
+
+            [109827] = true, -- Boulder Toss (Icestalker)
+            [109832] = true, -- Turn (Icestalker)
+            [109830] = true, -- Boulder Toss (Icestalker)
+            [109829] = true, -- Boulder Toss (Icestalker)
+            [109828] = true, -- Boulder Toss (Icestalker)
+            [109831] = true, -- Boulder Toss (Icestalker)
+
+            [109811] = true, -- Ground Slam (Icestalker)
+            [109813] = true, -- Ground Slam (Icestalker)
+            [109814] = true, -- Ground Slam (Icestalker)
+            [109815] = true, -- Ground Slam (Icestalker)
+            [109816] = true, -- Ground Slam (Icestalker)
+            [109817] = true, -- Ground Slam (Icestalker)
+            [109812] = true, -- Ground Slam (Icestalker)
+            [109818] = true, -- Ground Slam (Icestalker)
+            [109819] = true, -- Ground Slam (Icestalker)
+            [116684] = true, -- Ground Slam (Icestalker)
+            [109820] = true, -- Effected (Icestalker)
+
+            [109800] = true, -- Slap (Icestalker)
+
+            [109833] = true, -- Frenzied Pummeling (Icestalker)
+            [115179] = true, -- Extra Damage to Monsters (Icestalker)
+            [109834] = true, -- Lifting Strike (Icestalker)
+            [109835] = true, -- Frenzied Pummeling (Icestalker)
+            [109870] = true, -- Time (Icestalker)
+            [109878] = true, -- Caster Stun (Icestalker)
+            [109837] = true, -- Pummel (Icestalker)
+            [118489] = true, -- Frenzied Pummeling (Icestalker)
+            [117791] = true, -- Frenzied Pummeling (Icestalker)
+            [120638] = true, -- Remove (Icestalker)
+            [109838] = true, -- End Stun (Icestalker)
+            [121824] = true, -- Frenzied Pummeling (Icestalker)
+
+            [119249] = true, -- Teleport Failsafe (Border Chk)
+            [119461] = true, -- Teleport Failsafe (Border Chk)
+            [119254] = true, -- Teleport Failsafe (Border Chk)
+            [119255] = true, -- Teleport Failsafe (Border Chk)
+            [120795] = true, -- Teleport Failsafe (Border Chk)
+
+            [109806] = true, -- Frozen Aura (Icestalker)
+            [109807] = true, -- Snare Ticker (Icestalker)
+            [109808] = true, -- Frostbite (Icestalker)
+            [109810] = true, -- Frozen Aura (Icestalker)
+
+            [83430] = true, -- Skeletal Smash (Ice Wraith)
+            [83435] = true, -- Headbutt (Ice Wraith)
+            [83454] = true, -- Skeletal Smash (Ice Wraith)
+            [83453] = true, -- Skeletal Smash (Ice Wraith)
+
+            --[76993] = true, -- 35% Bonus Movement (Skeevaton)
+            [116683] = true, -- U23-DUN1 B N Intro (Skeevaton)
 
             -------------------------------------
             -- CYRODIIL -------------------------
@@ -11524,7 +12126,7 @@ debugAuras = {
             [82898] = true, -- Event - WitchFest Theater (The Witchmother's Bargain)
 
             -- Anniversary Event
-            --[88874] = true, -- Q5936 Destroy Voucher 2017 --
+            [88874] = true, -- Q5936 Destroy Voucher 2017 (Ache for Cake)
 
             -------------------------------------
             -- UNSORTED -------------------------
