@@ -1405,15 +1405,16 @@ E.AddNameAura = {
     ['Anaxes'] = { [1] = { id = 33097 } },
 
     -- NPC's
-    ['Flame Atronach'] = { [1] = { id = 4891 } },
-    ['Frost Atronach'] = { [1] = { id = 33549 } },
-    ['Ice Barrier'] = { [1] = { id = 33097 } },
+    [U.NPC_Flame_Atronach] = { [1] = { id = 4891 } },
+    [U.NPC_Frost_Atronach] = { [1] = { id = 33549 } },
+    [U.NPC_Ice_Barrier] = { [1] = { id = 33097 } },
     --['Aura of Protection'] = { [1] = { id = 33097 } }, -- TODO: Not actually CC immune despite CC not doing anything (maybe switch to knockback immunity eventually)
     --['Ice Pillar'] = { [1] = { id = 33097 } }, -- TODO: Not actually CC immune despite CC not doing anything (maybe switch to knockback immunity eventually)
 
     -- Bosses
     ['War Chief Ozozai'] = { [1] = { id = 33097 } },
     ['Broodbirther'] = { [1] = { id = 33097 } },
+
     ['Mad Griskild'] = { [1] = { id = 33097 } }, -- Quest -- Vvardenfell -- A Web of Troubles
     ['Veya Releth'] = { [1] = { id = 33097 } }, -- Quest -- Vvardenfell - Family Reunion
     ['Old Rust-Eye'] = { [1] = { id = 33097 } }, -- Delve -- Vvardenfell - Khartag Point
@@ -1453,32 +1454,32 @@ E.AddNameAura = {
     --------------------------------------------
 
     -- Banished Cells I
-    ['Cell Haunter'] = { [1] = { id = 33097 } }, -- Cell Haunter
-    ['Shadowrend'] = { [1] = { id = 33097 } }, -- Shadowrend
-    ['Angata the Clannfear Handler'] = { [1] = { id = 33097 } }, -- Angata the Clannfear Handler
-    ['High Kinlord Rilis'] = { [1] = { id = 33097 } }, -- High Kinlord Rilis
+    [U.Boss_Cell_Haunter] = { [1] = { id = 33097 } }, -- Cell Haunter
+    [U.Boss_Shadowrend] = { [1] = { id = 33097 } }, -- Shadowrend
+    [U.Boss_Angata_the_Clannfear_Handler] = { [1] = { id = 33097 } }, -- Angata the Clannfear Handler
+    [U.Boss_High_Kinlord_Rilis] = { [1] = { id = 33097 } }, -- High Kinlord Rilis
 
     -- Banished Cells II
-    ['Keeper Areldur'] = { [1] = { id = 33097 } }, -- Keeper Areldur
-    ['Maw of the Infernal'] = { [1] = { id = 33097 } }, -- Maw of the Infernal
-    ['Keeper Voranil'] = { [1] = { id = 33097 } }, -- Keeper Voranil
-    ['Keeper Imiril'] = { [1] = { id = 33097 } }, -- Keeper Imiril
+    [U.Boss_Keeper_Areldur] = { [1] = { id = 33097 } }, -- Keeper Areldur
+    [U.Boss_Maw_of_the_Infernal] = { [1] = { id = 33097 } }, -- Maw of the Infernal
+    [U.Boss_Keeper_Voranil] = { [1] = { id = 33097 } }, -- Keeper Voranil
+    [U.Boss_Keeper_Imiril] = { [1] = { id = 33097 } }, -- Keeper Imiril
 
     -- Elden Hollow I
-    ['Ancient Spriggan'] = { [1] = { id = 33097 } }, -- Ancient Spriggan
-    ['Akash gra-Mal'] = { [1] = { id = 33097 } }, -- Akash gra-Mal
-    ['Chokethorn']  = { [1] = { id = 33097 } }, -- Chokethorn
-    ['Nenesh gro-Mal']  = { [1] = { id = 33097 } }, -- Nenesh gro-Mal
-    ['Leafseether']  = { [1] = { id = 33097 } }, -- Leafseether
-    ['Canonreeve Oraneth']  = { [1] = { id = 33097 } }, -- Canonreeve Oraneth
+    [U.Boss_Ancient_Spriggan] = { [1] = { id = 33097 } }, -- Ancient Spriggan
+    [U.Boss_Akash_gra_Mal] = { [1] = { id = 33097 } }, -- Akash gra-Mal
+    [U.Boss_Chokethorn]  = { [1] = { id = 33097 } }, -- Chokethorn
+    [U.Boss_Nenesh_gro_Mal]  = { [1] = { id = 33097 } }, -- Nenesh gro-Mal
+    [U.Boss_Leafseether]  = { [1] = { id = 33097 } }, -- Leafseether
+    [U.Boss_Canonreeve_Oraneth]  = { [1] = { id = 33097 } }, -- Canonreeve Oraneth
 
     -- Elden Hollow II
-    ['Dubroze the Infestor'] = { [1] = { id = 33097 } }, -- Dubroze the Infestor
+    [U.Boss_Dubroze_the_Infestor] = { [1] = { id = 33097 } }, -- Dubroze the Infestor
     [U.Boss_Dark_Root] = { [1] = { id = 33097 } }, -- Dark Root
 
     -- Frostvault
-    ['Coldsnap Ogre'] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
-    ['Icestalker'] = { [1] = { id = 33097 } }, -- Icestalker
+    [U.Boss_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
+    [U.Boss_Icestalker] = { [1] = { id = 33097 } }, -- Icestalker
 
 }
 
