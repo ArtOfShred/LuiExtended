@@ -1686,6 +1686,17 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
+                -- Ground Damage Auras
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.GroundDamageAura end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.GroundDamageAura = value LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.SV.GroundDamageAura,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
                  -- Add Extra
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS)),
@@ -1728,17 +1739,6 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideReduce = value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
                 default = LUIE.SpellCastBuffs.SV.HideReduce,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                -- Ground Damage Auras
-                type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.GroundDamageAura end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.GroundDamageAura = value LUIE.SpellCastBuffs.ReloadEffects() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.SV.GroundDamageAura,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
         },
