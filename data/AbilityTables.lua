@@ -1151,6 +1151,18 @@ A.Skill_Crushing_Blow               = 27826
 A.Skill_Sisters_Bond                = GetString(SI_LUIE_SKILL_SISTERS_BOND)
 A.Skill_Levitate                    = 28570
 
+-- Elden Hollow I
+A.Skill_Executioners_Strike         = 16834
+A.Skill_Heal_Spores                 = GetString(SI_LUIE_SKILL_HEAL_SPORES)
+A.Skill_Summon_Saplings             = GetString(SI_LUIE_SKILL_SUMMON_STRANGLER_SAPLINGS)
+A.Skill_Necrotic_Circle             = 16262
+
+-- Elden Hollow II
+A.Skill_Fortified_Ground            = 32648
+A.Skill_Empowered_Ground            = 32647
+A.Skill_Siphon_Magicka              = GetString(SI_LUIE_SKILL_SIPHON_MAGICKA)
+A.Skill_Siphon_Stamina              = GetString(SI_LUIE_SKILL_SIPHON_STAMINA)
+
 -- Frostvault
 A.Skill_Rending_Bleed               = 117286
 A.Skill_Leaping_Crush               = 109801

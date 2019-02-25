@@ -70,6 +70,10 @@ function CTL:EffectChanged(...)
             callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
         end
 
+        if AlertT[abilityId].fakeName then
+            unitName = AlertT[abilityId].fakeName
+        end
+
         if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].power or AlertT[abilityId].destroy or AlertT[abilityId].summon then
             -- Filter by priority
             if (S.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not S.toggles.mitigationDungeon then
@@ -163,7 +167,11 @@ function CTL:OnCombatIn(...)
     local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
 
     if AlertT[abilityId] then
-        sourceName = zo_strformat("<<t:1>>", sourceName)
+        if AlertT[abilityId].fakeName then
+            sourceName = AlertT[abilityId].fakeName
+        else
+            sourceName = zo_strformat("<<t:1>>", sourceName)
+        end
     end
 
     if E.EffectOverrideByName[abilityId] then
@@ -542,6 +550,7 @@ function CTL:OnCombatAlert(...)
     local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
     sourceName = zo_strformat("<<t:1>>", sourceName)
 
+
     -- NEW ALERTS
     if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and not refireDelay[abilityId] then
         if not refireDelay[abilityId] then
@@ -579,6 +588,10 @@ function CTL:OnCombatAlert(...)
                         abilityName = E.EffectOverrideByName[abilityId][sourceName].name
                     end
                 end
+            end
+
+            if AlertT[abilityId].fakeName then
+                sourceName = AlertT[abilityId].fakeName
             end
 
             if AlertT[abilityId].refire then

@@ -1061,6 +1061,15 @@ T.Skill_Summon_Clannfear                = GetString(SI_LUIE_SKILL_SUMMON_CLANNFE
 T.Skill_Curse_of_Suffering              = GetString(SI_LUIE_SKILL_CURSE_OF_SUFFERING_TP)
 T.Skill_Curse_of_Dominance              = GetString(SI_LUIE_SKILL_CURSE_OF_DOMINANCE_TP)
 
+-- Elden Hollow I
+T.Skill_Heal_Spores                     = GetString(SI_LUIE_SKILL_HEAL_SPORES_TP)
+
+-- Elden Hollow II
+T.Skill_Siphon_Magicka                  = GetString(SI_LUIE_SKILL_SIPHON_MAGICKA_TP)
+T.Skill_Siphon_Stamina                  = GetString(SI_LUIE_SKILL_SIPHON_STAMINA_TP)
+T.Skill_Dark_Root_Stamina               = GetString(SI_LUIE_SKILL_DARK_ROOT_STAMINA_TP)
+T.Skill_Dark_Root_Magicka               = GetString(SI_LUIE_SKILL_DARK_ROOT_MAGICKA_TP)
+
 -- Frostvault
 T.Skill_Maim                            = GetString(SI_LUIE_SKILL_MAIM_NPC_TP)
 
@@ -1087,6 +1096,7 @@ T.Generic_AOE_Fire_0_66_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_FI
 T.Generic_AOE_Fire_0_9_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_0_9_SEC)
 T.Generic_AOE_Fire_1_Sec                = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_SEC)
 T.Generic_Aoe_Fire_1_5_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_5_SEC)
+T.Generic_AOE_Frost_0_5_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_FROST_0_5_SEC)
 T.Generic_AOE_Frost_1_Sec               = GetString(SI_LUIE_SKILL_GENERIC_AOE_FROST_1_SEC)
 T.Generic_AOE_Shock_0_5_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_SHOCK_0_5_SEC)
 T.Generic_AOE_Shock_0_7_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_SHOCK_0_7_SEC)

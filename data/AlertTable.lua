@@ -1,3 +1,6 @@
+-- Performance Enhancement
+local U = LUIE.UnitNames
+
 LUIE.AlertTable = {
 
 -- PRIORITY NOTES:
@@ -9,6 +12,7 @@ LUIE.AlertTable = {
     -- auradetect = true -- Detect aura application rather than using targeting info
     -- eventdetect = true -- Detect combat event application rather than using targeting info
     -- refire = "x" -- refire duration
+    -- fakeName = string -- Set this name for the source
     -- skipcheck = true -- display on any event fired rather than just event started
 
     -- TEMPLATE
@@ -707,6 +711,30 @@ LUIE.AlertTable = {
     [28962] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Sister's Love (Sister Sihna / Sister Vera)
     [48799] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500 }, -- Daedric Tempest (High Kinlord Rilis)
     [48814] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500 }, -- Daedric Tempest (High Kinlord Rilis)
+
+    -- Elden Hollow I
+    [16834] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Executioner's Strike (Akash gra-Mal)
+    [15999] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Leaping Strike (Akash gra-Mal)
+    [16016] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Berserker Frenzy (Akash gra-Mal)
+
+    [9910] = { destroy = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Summon Saplings (Chokethorn)
+    [9930] = { interrupt = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, notDirect = true, refire = 1000 }, -- Heal Spores (Chokethorn)
+    [9875] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Fungal Burst (Chokethorn)
+    [44223] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Inhale (Leafseether)
+
+    [9845] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Rotting Bolt (Canonreeve Oraneth)
+    [16262] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Necrotic Circle (Canonreeve Oraneth)
+    [9944] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Necrotic Burst (Canonreeve Oraneth)
+    [9839] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true, refire = 100 }, -- Bone Hurricane (Canonreeve Oraneth)
+
+    -- Elden Hollow II
+    [34376] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 1500 }, -- Flame Geyser (Dubroze the Infestor)
+    [32707] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true }, -- Summon Guardians (Dark Root)
+    [33334] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Latch On Stamina (Frenzied Guardian)
+    [33337] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Latch On Magicka (Mystic Guardian)
+    [32890] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.Boss_Dark_Root }, -- Gleaming Light (Dark Root)
+    [33533] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.Boss_Dark_Root }, -- Glaring Light (Dark Root)
+    [33535] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.Boss_Dark_Root }, -- Brightening Light (Dark Root)
 
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)

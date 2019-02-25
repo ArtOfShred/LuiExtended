@@ -2336,6 +2336,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_AOE_FIRE_0_9_SEC =             "Taking Flame Damage every |cFFFFFF0.9|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_SEC =               "Taking Flame Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_FIRE_1_5_SEC =             "Taking Flame Damage every |cFFFFFF1.5|r seconds.",
+    SI_LUIE_SKILL_GENERIC_AOE_FROST_0_5_SEC =            "Taking Frost Damage every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_FROST_1_SEC =              "Taking Frost Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_SHOCK_0_5_SEC =            "Taking Shock Damage every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_SHOCK_0_7_SEC =            "Taking Shock Damage every |cFFFFFF0.75|r seconds.",
@@ -3221,6 +3222,17 @@ local strings = {
 
     SI_LUIE_SKILL_CURSE_OF_SUFFERING_TP =                "Afflicted with with Magic Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF40|r%.\n\nEnter the Red Sigil to remove the curse.",
     SI_LUIE_SKILL_CURSE_OF_DOMINANCE_TP =                "Afflicted with with Magic Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF40|r%.\n\nEnter the Black Sigil to remove the curse.",
+    SI_LUIE_SKILL_HEAL_SPORES_TP =                       "Healing every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
+
+    SI_LUIE_SKILL_HEAL_SPORES =                          "Healing Spores",
+    SI_LUIE_SKILL_SUMMON_STRANGLER_SAPLINGS =            "Summon Strangler Saplings",
+
+    SI_LUIE_SKILL_SIPHON_MAGICKA =                       "Siphon Magicka",
+    SI_LUIE_SKILL_SIPHON_MAGICKA_TP =                    "Draining |cFFFFFF5|r% Max Magicka every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SIPHON_STAMINA =                       "Siphon Stamina",
+    SI_LUIE_SKILL_SIPHON_STAMINA_TP =                    "Draining |cFFFFFF5|r% Max Stamina every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_DARK_ROOT_STAMINA_TP =                 "Dramatically increase Max Stamina and Stamina Recovery.",
+    SI_LUIE_SKILL_DARK_ROOT_MAGICKA_TP =                 "Dramatically increase Max Magicka and Magicka Recovery.",
 
 }
 

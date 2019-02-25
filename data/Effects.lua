@@ -5,6 +5,7 @@ LUIE.Effects = {}
 -- Performance Enhancement
 local E = LUIE.Effects
 local T = LUIE.Tooltips
+local U = LUIE.UnitNames
 local A = LUIE.GetAbility()
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1463,6 +1464,18 @@ E.AddNameAura = {
     ['Keeper Voranil'] = { [1] = { id = 33097 } }, -- Keeper Voranil
     ['Keeper Imiril'] = { [1] = { id = 33097 } }, -- Keeper Imiril
 
+    -- Elden Hollow I
+    ['Ancient Spriggan'] = { [1] = { id = 33097 } }, -- Ancient Spriggan
+    ['Akash gra-Mal'] = { [1] = { id = 33097 } }, -- Akash gra-Mal
+    ['Chokethorn']  = { [1] = { id = 33097 } }, -- Chokethorn
+    ['Nenesh gro-Mal']  = { [1] = { id = 33097 } }, -- Nenesh gro-Mal
+    ['Leafseether']  = { [1] = { id = 33097 } }, -- Leafseether
+    ['Canonreeve Oraneth']  = { [1] = { id = 33097 } }, -- Canonreeve Oraneth
+
+    -- Elden Hollow II
+    ['Dubroze the Infestor'] = { [1] = { id = 33097 } }, -- Dubroze the Infestor
+    [U.Boss_Dark_Root] = { [1] = { id = 33097 } }, -- Dark Root
+
     -- Frostvault
     ['Coldsnap Ogre'] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
     ['Icestalker'] = { [1] = { id = 33097 } }, -- Icestalker
@@ -2002,6 +2015,14 @@ E.EffectHideSCT = {
     [86938] = true, -- Volcanic Debris
     [92707] = true, -- Volcanic Debris
     [92704] = true, -- Volcanic Debris
+
+    ----------------------------
+    -- Dungeons
+    ----------------------------
+
+    -- Elden Hollow II
+    [34378] = true, -- Flame Geyser (Dubroze the Infestor)
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2021,8 +2042,11 @@ E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMB
     --------------
 
     -- Banished Cells I
-    [19028] = true, -- Drain Essence (Banished Cells I)
-    [18772] = true, -- Feeding (Banished Cells I)
+    [19028] = true, -- Drain Essence (Shadowrend)
+    [18772] = true, -- Feeding (Shadowrend)
+
+    -- Elden Hollow I
+    [42601] = true, -- Necrotic Circle (Canonreeve Oraneth)
 
     -- Frostvault
     [117286] = true, -- Rending Bleed (Coldsnap Goblin - Shared)
@@ -7235,6 +7259,7 @@ E.EffectOverride = {
     [89159] = { hide = true }, -- Summon Beast (Spriggan)
     [89151] = { hide = true }, -- Summon Beast (Spriggan)
     [89154] = { hide = true }, -- Summon Beast (Spriggan)
+    [89160] = { hide = true }, -- Summon Beast (Spriggan)
     [89168] = { hide = true }, -- Summon Beast (Spriggan)
     [89170] = { hide = true }, -- Summon Beast (Spriggan)
     [89127] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = A.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = T.Skill_Weakness_NPC_Summon }, -- Summon Beast (Spriggan)
@@ -8881,6 +8906,76 @@ E.EffectOverride = {
     [28088] = { hide = true }, -- Red Sigil (High Kinlord Rilis)
     [36030] = { hide = true }, -- Red Sigil (High Kinlord Rilis)
 
+    -- Elden Hollow I
+    [14905] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Hacking Strike (Akash gra-Mal)
+    [16834] = { icon = 'esoui/art/icons/ability_warrior_016.dds' }, -- Executioner's Strike (Akash gra-Mal)
+    [25309] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Executioners_Strike, hide = true }, -- Fire Backlash (Akash gra-Mal)
+    [25310] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Executioners_Strike, tooltip = T.Generic_Knockback }, -- CON_Knockback&Knockdown (Akash gra-Mal)
+    [16003] = { icon = 'esoui/art/icons/ability_warrior_004.dds' }, -- Leaping Strike (Akash gra-Mal)
+    [9936] = { icon = 'esoui/art/icons/ability_warrior_031.dds' }, -- Battlecry (Akash gra-Mal)
+    [44093] = { name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Battlecry (Akash gra-Mal)
+    [16016] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
+    [16017] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
+    [25300] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
+    [25301] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
+    [25302] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (Akash gra-Mal)
+
+    [15116] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_strike.dds' }, -- Piercing Strike (Chokethorn)
+    [15114] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_grapple.dds', tooltip = T.Generic_Stun }, -- Pulling Grasp (Chokethorn)
+    [25528] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_grapple.dds', tooltip = T.Generic_Stun }, -- Pulling Grasp (Chokethorn)
+
+    [9910] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', name = A.Skill_Summon_Saplings }, -- Summon Saplings (Chokethorn)
+    [9930] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', name = A.Skill_Heal_Spores, tooltip = T.Skill_Heal_Spores }, -- Heal Spores (Chokethorn)
+    [9875] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds' }, -- Fungal Burst (Chokethorn)
+    [44092] = { name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Generic Stagger Enemy (Chokethorn)
+
+    [44223] = { icon = 'LuiExtended/media/icons/abilities/ability_alit_inhale.dds' }, -- Inhale (Leafseether)
+    [44225] = { icon = 'LuiExtended/media/icons/abilities/ability_alit_inhale.dds', hide = true }, -- Inhale (Leafseether)
+
+    [15120] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_entropic_bolt.dds' }, -- Phantasmal Bolt (Canonreeve Oraneth)
+    [9845] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_poison_ranged.dds', hide = true }, -- Rotting Bolt (Canonreeve Oraneth)
+    [9852] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_poison_ranged.dds', tooltip = T.Generic_Poison_2_Sec }, -- Rotting Bolt (Canonreeve Oraneth)
+
+    [16262] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_necrotic_circle_ground.dds' }, -- Necrotic Circle (Canonreeve Oraneth)
+    [25348] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_necrotic_circle.dds', tooltip = T.Generic_Stun }, -- Necrotic Circle (Canonreeve Oraneth)
+    [42601] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_necrotic_circle_ground.dds', tooltip = T.Generic_AOE_Frost_0_5_Sec, groundLabel = true }, -- Necrotic Circle (Canonreeve Oraneth)
+    [25370] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_necrotic_circle.dds' }, -- Necrotic Circle (Canonreeve Oraneth)
+    [46800] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_necrotic_circle.dds', tooltip = T.Generic_Stun, unbreakable = 1 }, -- Necrotic Circle (Canonreeve Oraneth)
+
+    [9944] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_necrotic_burst.dds' }, -- Necrotic Burst (Canonreeve Oraneth)
+    [15682] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_necrotic_burst.dds', tooltip = T.Generic_Knockback }, -- Necrotic Burst (Canonreeve Oraneth)
+    [15681] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_necrotic_burst.dds' }, -- Necrotic Burst (Canonreeve Oraneth)
+
+    [9839] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_bone_hurricane.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Bone Hurricane (Canonreeve Oraneth)
+
+    [27891] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_darkness_below.dds', tooltip = T.Generic_Stun }, -- Darkness Below (Elden Hollow)
+    [27892] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_darkness_below.dds' }, -- Darkness Below (Elden Hollow)
+    [27890] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_darkness_below.dds', tooltip = T.Generic_Stun, unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Darkness Below (Elden Hollow)
+    [28886] = { hide = true }, -- Darkness Below
+
+    -- Elden Hollow II
+    [31114] = { hide = true }, -- EHH_Striker_Invis (Dremora Fearkyn)
+
+    [34376] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds' }, -- Flame Geyser (Dubroze the Infestor)
+    [34377] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds' }, -- Flame Geyser (Dubroze the Infestor)
+    [34378] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds', tooltip = T.Generic_Fear }, -- Flame Geyser (Dubroze the Infestor)
+
+    [32709] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_lacerate.dds' }, -- Lacerate (Dark Root)
+    [32569] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vestment_of_olirime.dds', hide = true }, -- Hammering Light (Dark Root)
+    [32583] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vestment_of_olirime.dds', hide = true }, -- Hammering Light (Dark Root)
+    [32587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vestment_of_olirime.dds', hide = true }, -- Hammering Light (Dark Root)
+    [32591] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vestment_of_olirime.dds', hide = true }, -- Hammering Light (Dark Root)
+    [32707] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_hoarvor.dds' }, -- Summon Guardians (Dark Root)
+    [33334] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on_stamina.dds', name = A.Skill_Siphon_Stamina, tooltip = T.Skill_Siphon_Stamina }, -- Latch On Stamina (Frenzied Guardian)
+    [33335] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on_stamina.dds', name = A.Skill_Siphon_Stamina }, -- Latch On Stamina (Frenzied Guardian)
+    [33337] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on_magicka.dds', name = A.Skill_Siphon_Magicka, tooltip = T.Skill_Siphon_Magicka }, -- Latch On Magicka (Mystic Guardian)
+    [33338] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on_magicka.dds', name = A.Skill_Siphon_Magicka }, -- Latch On MAgicka (Mystic Guardian)
+    [32655] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_fortified_ground.dds', name = A.Skill_Fortified_Ground, groundLabel = true, tooltip = T.Skill_Dark_Root_Stamina }, -- Fortification (Fortified Guardian)
+    [32614] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_empowered_ground.dds', name = A.Skill_Empowered_Ground, groundLabel = true, tooltip = T.Skill_Dark_Root_Magicka }, -- Empowered (Mystic Guardian)
+    [32890] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_gleaming_light.dds', hide = true }, -- Gleaming Light (Dark Root)
+    [33533] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_gleaming_light.dds', hide = true }, -- Glaring Light (Dark Root)
+    [33535] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_gleaming_light.dds' }, -- Brightening Light (Dark Root)
+
     -- Frostvault
     [117286] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', hide = true }, -- Rending Bleed (Coldsnap Goblin - Shared)
     [117486] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = A.Skill_Rending_Bleed, unbreakable = 1, tooltip = T.Generic_Bleed_2_Sec }, -- Bleed (Coldsnap Goblin - Shared)
@@ -8989,6 +9084,15 @@ E.FakeExternalBuffs = {
 
     -- Quests
     [21403] = { icon = 'esoui/art/icons/ability_mage_054.dds', name = A.Skill_Spiritual_Cloak, duration = 60000, ignoreFade = true }, -- Spiritual Cloak (The Mallari-Mora)
+
+    ----------------
+    -- Dungeons ----
+    ----------------
+
+    -- Elden Root II
+    [32655] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_fortified_ground.dds', name = A.Skill_Fortified_Ground, duration = 0 }, -- Fortification (Fortified Guardian)
+    [32614] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_empowered_ground.dds', name = A.Skill_Empowered_Ground, duration = 0 }, -- Empowered (Mystic Guardian)
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -9154,6 +9258,15 @@ E.FakeExternalDebuffs = {
     -- Frostvault
     [117486] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = A.Skill_Rending_Bleed, duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
     [109808] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', name = A.Skill_Frozen_Aura, duration = 0 }, -- Frostbite (Icestalker)
+
+    -- Elden Hollow I
+    [25310] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Executioners_Strike, duration = 2500 }, -- Leaping Strike (Akash gra-Mal)
+    [25348] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_necrotic_circle.dds', name = A.Skill_Necrotic_Circle, duration = 6000, ignoreBegin = true }, -- Necrotic Circle (Canonreeve Oraneth)
+    [46800] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_necrotic_circle.dds', name = A.Skill_Necrotic_Circle, duration = 1200 }, -- Necrotic Circle (Canonreeve Oraneth)
+
+    -- Elden Hollow II
+    [33334] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on_stamina.dds', name = A.Skill_Siphon_Stamina, ignoreBegin = true, duration = 7500 }, -- Latch On Stamina (Frenzied Guardian)
+    [33337] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on_magicka.dds', name = A.Skill_Siphon_Magicka, ignoreBegin = true, duration = 7500 }, -- Latch On Magicka (Mystic Guardian)
 
 }
 
@@ -9369,9 +9482,17 @@ E.FakeStagger = {
     [86310] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500}, -- Stagger (Player Blocks charged NPC attack)
     [21972] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500}, -- Stagger (Player interrupts NPC cast)
 
-    -- Dungeons
-    [117291] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Stagger (Coldsnap Ogre) -- Frostvault
-    [109810] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 600 }, -- Frozen Aura (Icestalker) -- Frostvault
+    -----------------
+    -- Dungeons -----
+    -----------------
+
+    -- Elden Hollow I
+    [44093] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Battlecry (Akash gra-Mal)
+    [44092] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Generic Stagger Enemy (Chokethorn)
+
+    -- Frostvault
+    [117291] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Stagger (Coldsnap Ogre)
+    [109810] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 600 }, -- Frozen Aura (Icestalker)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -9596,6 +9717,9 @@ E.AddGroundDamageAura = {
     [31727] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Corruption (Daedric Chaos)
     [48800] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Daedric Tempest (High Kinlord Rilis)
     [48815] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Daedric Tempest (High Kinlord Rilis)
+
+    -- Elden Hollow I
+    [42601] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF, exception = ACTION_RESULT_DOT_TICK }, -- Necrotic Circle (Canonreeve Oraneth)
 
 }
 

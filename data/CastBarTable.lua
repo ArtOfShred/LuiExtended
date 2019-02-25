@@ -36,6 +36,10 @@ CBT.CastBreakingActions = {
 
 CBT.BreakCastOnMove = {
 
+    -- Generic
+    [6811] = true, -- Recall
+    [69293] = true, -- Sigil of Imperial Retreat
+
     -- Aldmeri Quests
     [21364] = true, -- Casting... (The Serpent's Beacon)
     [21409] = true, -- Reading... (The Serpent's Beacon)

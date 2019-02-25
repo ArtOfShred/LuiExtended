@@ -2390,7 +2390,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalBuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         -- Bail out if we ignore begin events
-        if E.FakeExternalBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+        if E.FakeExternalBuffs[abilityId].ignoreBegin and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
         if E.FakeExternalBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
@@ -2425,7 +2425,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
     -- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalDebuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         -- Bail out if we ignore begin events
-        if E.FakeExternalDebuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+        if E.FakeExternalDebuffs[abilityId].ignoreBegin and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
         if E.FakeExternalDebuffs[abilityId].ignoreFade == true and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
@@ -2497,7 +2497,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by player)
     if E.FakePlayerBuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
          -- Bail out if we ignore begin events
-        if E.FakePlayerBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+        if E.FakePlayerBuffs[abilityId].ignoreBegin and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
         if E.FakePlayerBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
@@ -2569,7 +2569,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
     if E.FakeStagger[abilityId] then
         -- Bail out if we ignore begin events
-        if E.FakeStagger[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+        if E.FakeStagger[abilityId].ignoreBegin and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
         if E.FakeStagger[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
@@ -2633,7 +2633,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on target by player)
     if E.FakePlayerExternalBuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         -- Bail out if we ignore begin events
-        if E.FakePlayerExternalBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+        if E.FakePlayerExternalBuffs[abilityId].ignoreBegin and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
         if E.FakePlayerExternalBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
@@ -2674,7 +2674,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
     -- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on target by player)
     if E.FakePlayerDebuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         -- Bail out if we ignore begin events
-        if E.FakePlayerDebuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+        if E.FakePlayerDebuffs[abilityId].ignoreBegin and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
         if E.FakePlayerDebuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
@@ -2731,7 +2731,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
     -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
     if E.FakeStagger[abilityId] then
         -- Bail out if we ignore begin events
-        if E.FakeStagger[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+        if E.FakeStagger[abilityId].ignoreBegin and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
         if E.FakeStagger[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
