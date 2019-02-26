@@ -1899,6 +1899,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             g_protectAbilityRemoval[abilityId] = currentTime + 150
 
             local duration = endTime - beginTime
+            local groundLabel = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].groundLabel or false
+            local toggle = E.IsToggle[abilityId] or false
             iconName = E.EffectGroundDisplay[abilityId].icon or iconName
             effectName = E.EffectGroundDisplay[abilityId].name or effectName
 
@@ -1933,6 +1935,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                         unbreakable=0,
                         stack = stackCount,
                         buffSlot = effectSlot,
+                        groundLabel = groundLabel,
+                        toggle = toggle,
                     }
 
                 end
@@ -2151,6 +2155,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     -- Create Effect
     else
         local duration = endTime - beginTime
+        local groundLabel = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].groundLabel or false
+        local toggle = E.IsToggle[abilityId] or false
 
         if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].duration then
             if E.EffectOverride[abilityId].duration == 0 then
@@ -2206,7 +2212,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                                 forced=forcedType,
                                 restart=true, iconNum=0,
                                 stack = 0,
-                                unbreakable=unbreakable
+                                unbreakable=unbreakable,
+                                groundLabel = groundLabel,
+                                toggle = toggle,
                             }
                         end
                     end
@@ -2246,6 +2254,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             stack = stackCount,
             unbreakable=unbreakable,
             buffSlot = savedEffectSlot,
+            groundLabel = groundLabel,
+            toggle = toggle,
         }
     end
 end
@@ -2325,6 +2335,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local duration = E.AddGroundDamageAura[abilityId].duration
         local effectType = E.AddGroundDamageAura[abilityId].type
         local buffSlot
+        local groundLabel = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].groundLabel or false
+        local toggle = E.IsToggle[abilityId] or false
 
         if E.EffectOverride[abilityId] then
             effectName = E.EffectOverride[abilityId].name or abilityName
@@ -2352,6 +2364,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             restart=true, iconNum=0,
             unbreakable=unbreakable,
             fakeDuration= true,
+            groundLabel = groundLabel,
+            toggle = toggle,
         }
 
     end
@@ -2530,6 +2544,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             return
         end
 
+        local toggle = E.IsToggle[abilityId] or false
+
         iconName = E.FakePlayerBuffs[abilityId].icon or GetAbilityIcon(abilityId)
         effectName = E.FakePlayerBuffs[abilityId].name or GetAbilityName(abilityId)
         duration = E.FakePlayerBuffs[abilityId].duration
@@ -2549,7 +2565,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
                     forced = "short",
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
-                    stack = stack
+                    stack = stack,
+                    toggle = toggle,
                 }
             -- Otherwise, display as a normal buff
             else
@@ -2560,7 +2577,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
                     forced = forcedType,
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
-                    stack = stack
+                    stack = stack,
+                    toggle = toggle,
                 }
             end
         end
@@ -3072,17 +3090,28 @@ end
 
 -- Helper function to sort buffs
 local function buffSort(x, y)
-    -- Sort pernament effects
-    if (x.ends == nil and y.ends == nil) or (x.dur == 0 and y.dur == 0) then
-        return (x.starts == y.starts) and (x.name < y.name) or (x.starts < y.starts)
-
+    local xDuration = (x.ends == nil or x.dur == 0 or x.groundLabel or x.toggle) and 0 or x.dur
+    local yDuration = (y.ends == nil or y.dur == 0 or y.groundLabel or y.toggle) and 0 or y.dur
+    -- Sort toggle effects
+    if x.toggle or y.toggle then
+        if xDuration == 0 and yDuration == 0 then
+            if x.toggle and y.toggle then
+                return (x.name < y.name)
+            elseif x.toggle and not y.toggle then
+                return (xDuration == 0)
+            end
+        else
+            return (xDuration == 0)
+        end
+    -- Sort permanent/ground effects (might separate these at some point but for now want the sorting function simplified)
+    elseif (xDuration == 0 and yDuration == 0) then
+        return (x.name < y.name)
     -- Both non-permanent
-    elseif x.dur ~= 0 and y.dur ~= 0 then
-        return x.ends > y.ends
-
+    elseif xDuration ~= 0 and yDuration ~= 0 then
+        return (x.starts == y.starts) and (x.name < y.name) or (x.ends > y.ends)
     -- One permanent, one not
     else
-        return (x.dur == 0)
+        return (xDuration == 0)
     end
 end
 
@@ -3172,14 +3201,16 @@ function SCB.updateBar( currentTime, sortedList, container )
         -- Get current buff definition
         local effect = sortedList[i]
 
+        local ground = effect.groundLabel
         local remain = ( effect.ends ~= nil ) and ( effect.ends - currentTime ) or nil
         local buff = uiTlw[container].icons[index]
         local auraStarts = effect.starts or nil
         local auraEnds = effect.ends or nil
+        local fakeDuration = effect.fakeDuration
 
         -- If this isn't a permanent duration buff then update the bar on every tick
         if buff and buff.bar and buff.bar.bar then
-            if auraStarts and auraEnds and remain > 0 then
+            if auraStarts and auraEnds and remain > 0 and not ground then
                 buff.bar.bar:SetValue(1 - ((currentTime - auraStarts) / (auraEnds - auraStarts)))
             else
                 buff.bar.bar:SetValue(1)
@@ -3311,9 +3342,9 @@ function SCB.updateIcons( currentTime, sortedList, container )
             buff:SetAlpha(1)
             buff:SetHidden(false)
             if not remain or effect.fakeDuration then
-                if E.IsToggle[effect.id] then
+                if effect.toggle then
                     buff.label:SetText("T")
-                elseif E.EffectOverride[effect.id] and E.EffectOverride[effect.id].groundLabel then
+                elseif effect.groundLabel then
                     buff.label:SetText("G")
                 else
                     buff.label:SetText(nil)

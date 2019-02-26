@@ -4335,15 +4335,15 @@ E.EffectOverride = {
     -- Rune Focus / Channeled Focus / Restoring Focus
     [22236] = { consolidate = true, tooltip = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus)
     [44820] = { consolidate = true, tooltip = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus)
-    [112145] = { name = A.Skill_Rune_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = 1 }, -- Rune Focus Circle Bonus (Rune Focus)
+    [112145] = { name = A.Skill_Rune_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Rune Focus)
     [44828] = { consolidate = true, tooltip = A.Skill_Channeled_Focus }, -- Major Resolve (Channeled Focus)
     [44827] = { consolidate = true, tooltip = A.Skill_Channeled_Focus }, -- Major Ward (Channeled Focus)
     [37009] = { tooltip = T.Generic_Magicka_Regen },  -- Channeled Focus (Channeled Focus)
-    [112166] = { name = A.Skill_Channeled_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = 1 }, -- Rune Focus Circle Bonus (Channeled Focus)
+    [112166] = { name = A.Skill_Channeled_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Channeled Focus)
     [44836] = { consolidate = true, tooltip = A.Skill_Restoring_Focus }, -- Major Resolve (Restoring Focus)
     [44835] = { consolidate = true, tooltip = A.Skill_Restoring_Focus }, -- Major Ward (Restoring Focus)
     [114842] = { tooltip = T.Generic_Stamina_Regen },  -- Restoring Focus (Restoring Focus)
-    [112167] = { name = A.Skill_Restoring_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = 1 }, -- Rune Focus Circle Bonus (Restoring Focus)
+    [112167] = { name = A.Skill_Restoring_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Restoring Focus)
 
     -- Rite of Passage / Remembrance / Practiced Incantation
     [22223] = { tooltip = T.Skill_Rite_of_Passage }, -- Rite of Passage (Rite of Passage)
