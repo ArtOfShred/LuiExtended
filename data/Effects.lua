@@ -1476,6 +1476,11 @@ E.AddNameAura = {
     -- Elden Hollow II
     [U.Boss_Dubroze_the_Infestor] = { [1] = { id = 33097 } }, -- Dubroze the Infestor
     [U.Boss_Dark_Root] = { [1] = { id = 33097 } }, -- Dark Root
+    [U.Boss_Azara_the_Frightener] = { [1] = { id = 33097 } }, -- Azara the Frightener
+    [U.Boss_Shadow_Tendril] = { [1] = { id = 33097 } }, -- Shadow Tendril
+    [U.Boss_Murklight] = { [1] = { id = 33097 } }, -- Murklight
+    [U.Boss_The_Shadow_Guard] = { [1] = { id = 33097 } }, -- The Shadow Guard
+    [U.Boss_Bogdan_the_Nightflame] = { [1] = { id = 33097 } }, -- Bogdan the Nightflame
 
     -- Frostvault
     [U.Boss_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
@@ -1712,7 +1717,8 @@ E.EffectOverrideByName = {
     -- GENERIC
     [44176] =   { -- Flying Immunities
                    ['Cell Haunter'] = { hide = true }, -- Cell Haunter
-                   ['The Feast'] = { hide = true }, -- The Feast
+                   [U.Boss_Cell_Haunter] = { hide = true }, -- The Feast
+                   [U.Boss_Azara_the_Frightener] = { hide = true }, -- Azara the Frightener
                 },
 }
 
@@ -5988,7 +5994,7 @@ E.EffectOverride = {
     -- Friendly NPC Abilities
     [48330] = { hide = true }, -- Aspect of Terror (Abnur Tharn)
     [48331] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_aspect_of_terror_p.dds' }, -- Aspect of Terror (Abnur Tharn)
-    [42905] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds' }, -- Recover
+    [42905] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds', tooltip = T.Skill_Recover }, -- Recover
     [42937] = { hide = true }, -- TargetPriorityException
 
     [4197] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds', name = A.Skill_Recover, unbreakable = 1, tooltip = T.Skill_Recover_Duel }, -- Recovering
@@ -8854,7 +8860,7 @@ E.EffectOverride = {
     [49150] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds', name = A.Skill_Breath_of_Flame }, -- Cone of Rot (Maw of the Infernal)
     [49149] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds' }, -- Breath of Flame (Maw of the Infernal)
     [35680] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds', unbreakable = 1, tooltip = T.Generic_Stun }, -- Immolating Bite (Maw of the Infernal)
-    [28904] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_gtaoe.dds', name = A.Skill_Pool_of_Fire, groundLabel = true, tooltip = T.Generic_Aoe_Fire_1_5_Sec }, -- Immolating Bite (Maw of the Infernal)
+    [28904] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_gtaoe.dds', name = A.Skill_Pool_of_Fire, groundLabel = true, tooltip = T.Generic_AOE_Fire_1_5_Sec }, -- Immolating Bite (Maw of the Infernal)
     [47127] = { hide = true }, -- Nocom
 
     [48281] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Slash (Keeper Voranil)
@@ -8962,6 +8968,7 @@ E.EffectOverride = {
     [34377] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds' }, -- Flame Geyser (Dubroze the Infestor)
     [34378] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds', tooltip = T.Generic_Fear }, -- Flame Geyser (Dubroze the Infestor)
 
+    [40753] = { hide = true }, -- PortalIntro (Portal)
     [32709] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_lacerate.dds' }, -- Lacerate (Dark Root)
     [32569] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vestment_of_olirime.dds', hide = true }, -- Hammering Light (Dark Root)
     [32583] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vestment_of_olirime.dds', hide = true }, -- Hammering Light (Dark Root)
@@ -8977,6 +8984,33 @@ E.EffectOverride = {
     [32890] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_gleaming_light.dds', hide = true }, -- Gleaming Light (Dark Root)
     [33533] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_gleaming_light.dds', hide = true }, -- Glaring Light (Dark Root)
     [33535] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_gleaming_light.dds' }, -- Brightening Light (Dark Root)
+
+    [33170] = { hide = true, icon = 'esoui/art/icons/achievement_update16_033.dds', name = A.Skill_Shadow_Tendril }, -- Hate (Shadow Tendril)
+    [33164] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', tooltip = T.Generic_Fear }, -- Incite Fear (Shadow Tendril)
+    [47087] = { hide = true }, -- Incite Fear (Shadow Tendril)
+
+    [33499] = { hide = true }, -- EHH_Boss_02_Shadow_Effect
+
+    [32811] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw.dds' }, -- Double Slam (Murklight)
+    [32817] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw.dds' }, -- Double Slam (Murklight)
+    [33052] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize.dds' }, -- Shadow Stomp (Murklight)
+    [32832] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_consuming_shadow.dds' }, -- Consuming Shadow (Murklight)
+    [32972] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_consuming_shadow.dds', tooltip = T.Generic_AOE_Magic_0_5_Sec, groundLabel = true }, -- Consuming Shadow (Murklight)
+    [33049] = { hide = true }, -- Eclipse (Murklight)
+    [32975] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_eclipse.dds' }, -- Eclipse (Murklight)
+    [33050] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_eclipse.dds', tooltip = T.Generic_AOE_Magic_0_5_Sec }, -- Eclipse (Murklight)
+
+    [33102] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_spout_shadow.dds', hide = true }, -- Spout Shadow (The Shadow Guard)
+    [33104] = { hide = true }, -- Spout Shadow (The Shadow Guard)
+    [33103] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_spout_shadow.dds', tooltip = T.Generic_AOE_Magic_1_5_Sec, groundLabel = true }, -- Spout Shadow (The Shadow Guard)
+
+    [33313] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_strike_bogdan.dds' }, -- Swipe (Bogdan the Nightflame)
+    [33359] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_soul_flame_bogdan.dds' }, -- Swipe (Bogdan the Nightflame)
+    [33432] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_aoe_bogdan.dds' }, -- Daedric Flame (Bogdan the Nightflame)
+    [33434] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_aoe_bogdan.dds', tooltip = T.Generic_AOE_Fire_1_5_Sec, groundLabel = true }, -- Daedric Flame (Bogdan the Nightflame)
+    [33480] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Pulverize (Bogdan the Nightflame)
+    [33492] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Pulverize (Bogdan the Nightflame)
+    [33494] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Pulverize (Bogdan the Nightflame)
 
     -- Frostvault
     [117286] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', hide = true }, -- Rending Bleed (Coldsnap Goblin - Shared)
@@ -9259,12 +9293,13 @@ E.FakeExternalDebuffs = {
 
     -- Elden Hollow I
     [25310] = { name = A.Skill_Executioners_Strike, duration = 2500 }, -- Leaping Strike (Akash gra-Mal)
-    [25348] = { duration = 6000, ignoreBegin = true }, -- Necrotic Circle (Canonreeve Oraneth)
+    [25348] = { duration = 6000, refreshOnly = true }, -- Necrotic Circle (Canonreeve Oraneth)
     [46800] = { duration = 1200 }, -- Necrotic Circle (Canonreeve Oraneth)
 
     -- Elden Hollow II
     [33334] = { ignoreBegin = true, duration = 7500 }, -- Latch On Stamina (Frenzied Guardian)
     [33337] = { ignoreBegin = true, duration = 7500 }, -- Latch On Magicka (Mystic Guardian)
+    [33164] = { duration = 4000, ignoreBegin = true }, -- Incite Fear (Shadow Tendril)
 
     -- Frostvault
     [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
@@ -9722,6 +9757,12 @@ E.AddGroundDamageAura = {
 
     -- Elden Hollow I
     [42601] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF, exception = ACTION_RESULT_DOT_TICK }, -- Necrotic Circle (Canonreeve Oraneth)
+
+    -- Elden Hollow II
+    [32972] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Consuming Shadow (Murklight)
+    [33050] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Eclipse (Murklight)
+    [33103] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spout Shadow (The Shadow Guard)
+    [33434] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Daedric Flame (Bogdan the Nightflame)
 
 }
 

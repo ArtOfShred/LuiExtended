@@ -11699,6 +11699,8 @@ debugAuras = {
             [34377] = true, -- Flame Geyser (Dubroze the Infestor)
             [34378] = true, -- Flame Geyser (Dubroze the Infestor)
 
+            [32791] = true, -- Q4675-Flip
+            --[40753] = true, -- PortalIntro (Portal)
             [32709] = true, -- Lacerate (Dark Root)
             [32567] = true, -- Hammering Light (Dark Root)
             [32572] = true, -- Hammering Light (Dark Root)
@@ -11733,6 +11735,65 @@ debugAuras = {
             [32890] = true, -- Gleaming Light (Dark Root)
             [33533] = true, -- Glaring Light (Dark Root)
             [33535] = true, -- Brightening Light (Dark Root)
+
+            [33169] = true, -- Incite Fear (Shadow Tendril)
+            [33170] = true, -- Hate (Shadow Tendril)
+            [33181] = true, -- Summon Despair (Shadow Tendril)
+            [33164] = true, -- Incite Fear (Shadow Tendril)
+            [47087] = true, -- Incite Fear (Shadow Tendril)
+
+            [33513] = true, -- Q4675-Channel-On_Bakkhara
+            [35799] = true, -- Q4675-Channel-On_Bakkhara
+            [35798] = true, -- Beam
+            [33499] = true, -- EHH_Boss_02_Shadow_Effect
+
+            [32811] = true, -- Double Slam (Murklight)
+            [32817] = true, -- Double Slam (Murklight)
+            [33052] = true, -- Shadow Stomp (Murklight)
+
+            [32832] = true, -- Consuming Shadow (Murklight)
+            [32849] = true, -- Consuming Shadow (Murklight)
+            [32851] = true, -- Consuming Shadow (Murklight)
+            [32968] = true, -- Consuming Shadow (Murklight)
+            [32971] = true, -- Consuming Shadow (Murklight)
+            [32972] = true, -- Consuming Shadow (Murklight)
+            [32973] = true, -- Consuming Shadow (Murklight)
+
+            [32975] = true, -- Eclipse (Murklight)
+            [32978] = true, -- Eclipse (Murklight)
+            [33049] = true, -- Eclipse (Murklight)
+            [33050] = true, -- Eclipse (Murklight)
+            [33530] = true, -- Eclipse (Murklight)
+            [33531] = true, -- Eclipse (Murklight)
+
+            [33102] = true, -- Spout Shadow (The Shadow Guard)
+            [33104] = true, -- Spout Shadow (The Shadow Guard)
+            [33105] = true, -- Spout Shadow (The Shadow Guard)
+            [48793] = true, -- Spout Shadow (The Shadow Guard)
+            [33103] = true, -- Spout Shadow (The Shadow Guard)
+
+            [61677] = true, -- Smoke Bomb
+            [35375] = true, -- Emerge (Bogdan the Nightflame)
+            [35429] = true, -- Emerge (Bogdan the Nightflame)
+            [34171] = true, -- Emerge (Bogdan the Nightflame)
+            [33465] = true, -- Dummy (Bogdan the Nightflame)
+            [33313] = true, -- Swipe (Bogdan the Nightflame)
+            [33461] = true, -- Empower (Bogdan the Nightflame)
+            [33346] = true, -- Burn Down (Bogdan the Nightflame)
+            [33359] = true, -- Burn Down (Bogdan the Nightflame)
+            [33432] = true, -- Daedric Flame (Bogdan the Nightflame)
+            [68492] = true, -- Delay Pulverize (Bogdan the Nightflame)
+            [33435] = true, -- Daedric Flame (Bogdan the Nightflame)
+            [33436] = true, -- Daedric Flame (Bogdan the Nightflame)
+            [33434] = true, -- Daedric Flame (Bogdan the Nightflame)
+            [33480] = true, -- Pulverize (Bogdan the Nightflame)
+            [68521] = true, -- Delay Daedric Flame
+            [33492] = true, -- Pulverize (Bogdan the Nightflame)
+            [68522] = true, -- Delay Daedric Flame
+            [33494] = true, -- Pulverize (Bogdan the Nightflame)
+            [68523] = true, -- Delay Daedric Flame
+            [33471] = true, -- Flare
+            [82789] = true, -- Flare
 
             -- Frostvault
             [115316] = true, -- Weatherman

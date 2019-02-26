@@ -60,6 +60,11 @@ U.Boss_Canonreeve_Oraneth               = 'Canonreeve Oraneth'
 -- Elden Hollow II
 U.Boss_Dubroze_the_Infestor             = 'Dubroze the Infestor'
 U.Boss_Dark_Root                        = 'Dark Root'
+U.Boss_Azara_the_Frightener             = 'Azara the Frightener'
+U.Boss_Shadow_Tendril                   = 'Shadow Tendril'
+U.Boss_Murklight                        = 'Murklight'
+U.Boss_The_Shadow_Guard                 = 'The Shadow Guard'
+U.Boss_Bogdan_the_Nightflame            = 'Bogdan the Nightflame'
 
 -- Frostvault
 U.Boss_Coldsnap_Ogre                    = 'Coldsnap Ogre'

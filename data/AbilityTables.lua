@@ -1133,6 +1133,7 @@ A.Skill_Fortified_Ground            = 32648
 A.Skill_Empowered_Ground            = 32647
 A.Skill_Siphon_Magicka              = GetString(SI_LUIE_SKILL_SIPHON_MAGICKA)
 A.Skill_Siphon_Stamina              = GetString(SI_LUIE_SKILL_SIPHON_STAMINA)
+A.Skill_Shadow_Tendril              = GetString(SI_LUIE_SKILL_SHADOW_TENDRIL)
 
 -- Frostvault
 A.Skill_Rending_Bleed               = 117286

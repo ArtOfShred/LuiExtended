@@ -3234,6 +3234,8 @@ local strings = {
     SI_LUIE_SKILL_DARK_ROOT_STAMINA_TP =                 "Dramatically increase Max Stamina and Stamina Recovery.",
     SI_LUIE_SKILL_DARK_ROOT_MAGICKA_TP =                 "Dramatically increase Max Magicka and Magicka Recovery.",
 
+    SI_LUIE_SKILL_SHADOW_TENDRIL =                       "Shadow Tendril",
+
 }
 
 -- TODO: Switch to StringId's

@@ -736,6 +736,19 @@ LUIE.AlertTable = {
     [33533] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.Boss_Dark_Root }, -- Glaring Light (Dark Root)
     [33535] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.Boss_Dark_Root }, -- Brightening Light (Dark Root)
 
+    [33170] = { destroy = true, priority = 1, auradetect = true }, -- Hate (Shadow Tendril)
+
+    [33052] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Shadow Stomp (Murklight)
+    [32832] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1750 }, -- Consuming Shadow (Murklight)
+    [32975] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Eclipse (Murklight)
+
+    [33102] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1250 }, -- Spout Shadow (The Shadow Guard)
+
+    [33432] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Daedric Flame (Bogdan the Nightflame)
+    [33480] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Pulverize (Bogdan the Nightflame)
+    [33492] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Pulverize (Bogdan the Nightflame)
+    [33494] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Pulverize (Bogdan the Nightflame)
+
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)
     [117352] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind (Coldsnap Snowstalker)
