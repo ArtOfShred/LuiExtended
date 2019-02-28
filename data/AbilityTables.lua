@@ -1135,6 +1135,13 @@ A.Skill_Siphon_Magicka              = GetString(SI_LUIE_SKILL_SIPHON_MAGICKA)
 A.Skill_Siphon_Stamina              = GetString(SI_LUIE_SKILL_SIPHON_STAMINA)
 A.Skill_Shadow_Tendril              = GetString(SI_LUIE_SKILL_SHADOW_TENDRIL)
 
+-- City of Ash I
+A.Skill_Steel_Cyclone               = 5843
+A.Skill_Fan_of_Flames               = 34654
+A.Skill_Thorny_Backhand             = 34190
+A.Skill_Fiery_Deception             = 52224
+A.Skill_Blazing_Arrow               = 34901
+
 -- Frostvault
 A.Skill_Rending_Bleed               = 117286
 A.Skill_Leaping_Crush               = 109801

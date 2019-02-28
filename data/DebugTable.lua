@@ -6874,6 +6874,8 @@ debugAuras = {
             [60703] = true, -- Fright Force
             [48330] = true, -- Aspect of Terror
             [48331] = true, -- Aspect of Terror
+            [48342] = true, -- Quick Shot
+            [48337] = true, -- Burning Arrow
 
             [42905] = true, -- Recover
             [42937] = true, -- TargetPriorityException
@@ -11613,6 +11615,7 @@ debugAuras = {
             [31482] = true, -- DUN_BCH Portal
 
             -- Elden Hollow I
+            [85726] = true, -- Teleport
             [14905] = true, -- Hacking Strike (Akash gra-Mal)
             [16834] = true, -- Executioner's Strike (Akash gra-Mal)
             [25309] = true, -- Fire Backlash (Akash gra-Mal)
@@ -11688,7 +11691,7 @@ debugAuras = {
             [27889] = true, -- Knockback Immunity
             [27892] = true, -- Darkness Below
             [27890] = true, -- Darkness Below
-            --[28886] = true, -- Darkness Below
+            [28886] = true, -- Darkness Below
 
             -- Elden Hollow II
             [85909] = true, -- Teleport
@@ -11700,7 +11703,7 @@ debugAuras = {
             [34378] = true, -- Flame Geyser (Dubroze the Infestor)
 
             [32791] = true, -- Q4675-Flip
-            --[40753] = true, -- PortalIntro (Portal)
+            [40753] = true, -- PortalIntro (Portal)
             [32709] = true, -- Lacerate (Dark Root)
             [32567] = true, -- Hammering Light (Dark Root)
             [32572] = true, -- Hammering Light (Dark Root)
@@ -11776,6 +11779,9 @@ debugAuras = {
             [35375] = true, -- Emerge (Bogdan the Nightflame)
             [35429] = true, -- Emerge (Bogdan the Nightflame)
             [34171] = true, -- Emerge (Bogdan the Nightflame)
+            [47114] = true, -- Emerge (Bogdan the Nightflame)
+            [35371] = true, -- Emerge (Bogdan the Nightflame)
+            [35372] = true, -- Emerge (Bogdan the Nightflame)
             [33465] = true, -- Dummy (Bogdan the Nightflame)
             [33313] = true, -- Swipe (Bogdan the Nightflame)
             [33461] = true, -- Empower (Bogdan the Nightflame)
@@ -11792,8 +11798,165 @@ debugAuras = {
             [68522] = true, -- Delay Daedric Flame
             [33494] = true, -- Pulverize (Bogdan the Nightflame)
             [68523] = true, -- Delay Daedric Flame
+            [61115] = true, -- DUN-EH-Screen Shake
+            [35777] = true, -- Portal Closing
+            [32514] = true, -- Q4675-Portal
             [33471] = true, -- Flare
             [82789] = true, -- Flare
+
+            -- City of Ash I
+            [34245] = true, -- Fireball
+            [34257] = true, -- Intro
+            [34126] = true, -- DUN_CA_Brute_Fire
+
+            [29501] = true, -- Jab (Golor the Banekin Handler)
+            [31101] = true, -- Cleave (Golor the Banekin Handler)
+            [25034] = true, -- Crushing Blow (Golor the Banekin Handler)
+            [25035] = true, -- Crushing Blow (Golor the Banekin Handler)
+            [25036] = true, -- Crushing Blow (Golor the Banekin Handler)
+
+            [33604] = true, -- Summon Banekin (Golor the Banekin Handler)
+            [33612] = true, -- Scampintro (Golor the Banekin Handler)
+            [33605] = true, -- Dummy (Golor the Banekin Handler)
+            [33606] = true, -- Dummy (Golor the Banekin Handler)
+            [33607] = true, -- Dummy (Golor the Banekin Handler)
+            [45322] = true, -- Dummy (Golor the Banekin Handler)
+
+            [34956] = true, -- Intro (Warden of the Shrine)
+            [34963] = true, -- Projectile (Warden of the Shrine)
+            [34589] = true, -- Light Swing (Warden of the Shrine)
+            [34607] = true, -- Measured Uppercut (Warden of the Shrine)
+            [34608] = true, -- Measured Uppercut (Warden of the Shrine)
+            [34609] = true, -- Measured Uppercut (Warden of the Shrine)
+            [46567] = true, -- Teleport Strike (Warden of the Shrine)
+            [46569] = true, -- Teleport Strike (Warden of the Shrine)
+            [46568] = true, -- Teleport Strike (Warden of the Shrine)
+            [34654] = true, -- Fan of Flames (Warden of the Shrine)
+            [34655] = true, -- Fan of Flames (Warden of the Shrine)
+            [34656] = true, -- Fan of Flames (Warden of the Shrine)
+            [34657] = true, -- Fan of Flames (Warden of the Shrine)
+            [34658] = true, -- Fan of Flames (Warden of the Shrine)
+            [34659] = true, -- Fan of Flames (Warden of the Shrine)
+            [34660] = true, -- Fan of Flames (Warden of the Shrine)
+            [34661] = true, -- Fan of Flames (Warden of the Shrine)
+            [34662] = true, -- Fan of Flames (Warden of the Shrine)
+            [34664] = true, -- Fan of Flames (Warden of the Shrine)
+            [34665] = true, -- Fan of Flames (Warden of the Shrine)
+            [34666] = true, -- Fan of Flames (Warden of the Shrine)
+            [34653] = true, -- Fan of Flames (Warden of the Shrine)
+            [34620] = true, -- Fan of Flames (Warden of the Shrine)
+            [34621] = true, -- Fan of Flames (Warden of the Shrine)
+            [34622] = true, -- Fan of Flames (Warden of the Shrine)
+            [34624] = true, -- Fan of Flames (Warden of the Shrine)
+            [34632] = true, -- Fan of Flames (Warden of the Shrine)
+            [34633] = true, -- Fan of Flames (Warden of the Shrine)
+            [34634] = true, -- Fan of Flames (Warden of the Shrine)
+            [34635] = true, -- Fan of Flames (Warden of the Shrine)
+            [34625] = true, -- Fan of Flames (Warden of the Shrine)
+            [34959] = true, -- Blazing Fire (Warden of the Shrine)
+            [34960] = true, -- Blazing Fire (Warden of the Shrine)
+
+            [34352] = true, -- Fire Tornado (Infernal Guardian)
+            [34168] = true, -- Double Slam (Infernal Guardian)
+            [34169] = true, -- Double Slam (Infernal Guardian)
+            [34190] = true, -- Thorny Backhand (Infernal Guardian)
+            [8398] = true, -- Bleeding (Infernal Guardian)
+            [23074] = true, -- Bleeding (Infernal Guardian)
+            [34189] = true, -- Ground Slam (Infernal Guardian)
+            [44080] = true, -- Ground Slam (Infernal Guardian)
+            [64243] = true, -- Ground Slam (Infernal Guardian)
+            [44079] = true, -- Ground Slam (Infernal Guardian)
+            [44090] = true, -- Generic Stagger Enemy (Infernal Guardian)
+            [35061] = true, -- Consuming Fire (Infernal Guardian)
+            [35062] = true, -- Consuming Fire (Infernal Guardian)
+            [35147] = true, -- Snare (Infernal Guardian)
+            [35063] = true, -- Anchor1 (Infernal Guardian)
+            [35091] = true, -- Anchor1 (Infernal Guardian)
+            [35122] = true, -- Anchor21 (Infernal Guardian)
+            [35065] = true, -- Anchor2 (Infernal Guardian)
+            [35066] = true, -- Anchor3 (Infernal Guardian)
+            [35067] = true, -- Anchor4 (Infernal Guardian)
+            [35068] = true, -- Anchor1 (Infernal Guardian)
+            [35069] = true, -- Anchor1 (Infernal Guardian)
+            [35070] = true, -- Anchor1 (Infernal Guardian)
+            [35071] = true, -- Anchor1 (Infernal Guardian)
+            [35072] = true, -- Anchor1 (Infernal Guardian)
+            [35073] = true, -- Anchor1 (Infernal Guardian)
+            [35082] = true, -- Anchor1 (Infernal Guardian)
+            [35083] = true, -- Anchor1 (Infernal Guardian)
+            [35084] = true, -- Anchor1 (Infernal Guardian)
+            [35085] = true, -- Anchor1 (Infernal Guardian)
+            [35086] = true, -- Anchor1 (Infernal Guardian)
+            [35087] = true, -- Anchor1 (Infernal Guardian)
+            [35088] = true, -- Anchor1 (Infernal Guardian)
+            [35089] = true, -- Anchor1 (Infernal Guardian)
+            [35090] = true, -- Anchor1 (Infernal Guardian)
+            [35125] = true, -- Anchor12 (Infernal Guardian)
+            [35124] = true, -- Anchor12 (Infernal Guardian)
+            [35126] = true, -- Anchor12 (Infernal Guardian)
+            [35127] = true, -- Anchor12 (Infernal Guardian)
+            [35128] = true, -- Anchor12 (Infernal Guardian)
+            [35064] = true, -- Fire Projectile (Infernal Guardian)
+            [35074] = true, -- Damage Anchor (Infernal Guardian)
+            [35144] = true, -- Fiery Explosion (Infernal Guardian)
+            [35145] = true, -- Consuming Fire (Infernal Guardian)
+            [34183] = true, -- Tunneling Roots (Infernal Guardian)
+            [34184] = true, -- Ground Anchor (Infernal Guardian)
+            [34185] = true, -- Projectile (Infernal Guardian)
+            [34188] = true, -- Damage Anchor (Infernal Guardian)
+            [34187] = true, -- Tunneling Roots (Infernal Guardian)
+            [44089] = true, -- Generic Enemy Stagger (Infernal Guardian)
+
+            [44278] = true, -- Lava Geyser (Dark Ember)
+            [44274] = true, -- Lava Geyser (Dark Ember)
+            [44277] = true, -- Lava Geyser (Dark Ember)
+            [44276] = true, -- Lava Geyser (Dark Ember)
+
+            [35409] = true, -- Dummy (Rothariel Flameheart)
+            [34198] = true, -- Burning Field (Rothariel Flameheart
+            [34199] = true, -- Burning Field (Rothariel Flameheart)
+            [34200] = true, -- Burning Field (Rothariel Flameheart)
+            [34201] = true, -- Burning Field (Rothariel Flameheart)
+            [34202] = true, -- Burning Field (Rothariel Flameheart)
+            [34204] = true, -- Burning Field (Rothariel Flameheart)
+            [34222] = true, -- Spiderexplosion (Rothariel Flameheart)
+            [34205] = true, -- Deception (Rothariel Flameheart)
+            [34224] = true, -- Dummy (Rothariel Flameheart)
+            [34226] = true, -- Dummy (Rothariel Flameheart)
+            [34223] = true, -- Dummy (Rothariel Flameheart)
+
+            [34456] = true, -- Portal
+            [49136] = true, -- Oblivion Portal
+            [34516] = true, -- Dummy
+
+            [34904] = true, -- Dummy (Razor Master Erthas)
+            [34788] = true, -- Quick Draw (Razor Master Erthas)
+            [34901] = true, -- Blazing Arrow (Razor Master Erthas)
+            [34948] = true, -- Burning Embers (Razor Master Erthas)
+            [34949] = true, -- Burning Embers (Razor Master Erthas)
+
+            [34805] = true, -- Release Flame
+            [34819] = true, -- Release Flame
+
+            [34799] = true, -- Lava Pitch
+            [34814] = true, -- Release Flame
+            [34806] = true, -- Release Flame
+            [34809] = true, -- Dummy
+            [34810] = true, -- Dummy
+            [34811] = true, -- Dummy
+            [34812] = true, -- Dummy
+
+            [34623] = true, -- Summon Flame Atronach
+            [34626] = true, -- Summon Flame Atronach (Razor Master Erthas)
+            [34776] = true, -- Summon Flame Atronach (Razor Master Erthas)
+            [34637] = true, -- Summon Flame Atronach (Razor Master Erthas)
+            [34777] = true, -- Summon Flame Atronach (Razor Master Erthas)
+            [34640] = true, -- Summon Flame Atronach (Razor Master Erthas)
+            [34778] = true, -- Summon Flame Atronach (Razor Master Erthas)
+            [34579] = true, -- Dummy (Flame Atronach)
+            [34600] = true, -- Dummy (Flame Atronach)
+            [34602] = true, -- Dummy (Flame Atronach)
+            [35379] = true, -- Flare (Flame Atronach)
 
             -- Frostvault
             [115316] = true, -- Weatherman

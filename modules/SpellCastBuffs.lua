@@ -2447,6 +2447,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if E.FakeExternalDebuffs[abilityId].ignoreBegin and (result == ACTION_RESULT_BEGIN) then
             return
         end
+        if E.FakeExternalDebuffs[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
+            return
+        end
         if E.FakeExternalDebuffs[abilityId].ignoreFade == true and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end

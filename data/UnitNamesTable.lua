@@ -66,6 +66,13 @@ U.Boss_Murklight                        = 'Murklight'
 U.Boss_The_Shadow_Guard                 = 'The Shadow Guard'
 U.Boss_Bogdan_the_Nightflame            = 'Bogdan the Nightflame'
 
+-- City of Ash I
+U.Boss_Golor_the_Banekin_Handler        = 'Golor the Banekin Handler'
+U.Boss_Warden_of_the_Shrine             = 'Warden of the Shrine'
+U.Boss_Infernal_Guardian                = 'Infernal Guardian'
+U.Boss_Dark_Ember                       = 'Dark Ember'
+U.Boss_Rothariel_Flameheart             = 'Rothariel Flameheart'
+
 -- Frostvault
 U.Boss_Coldsnap_Ogre                    = 'Coldsnap Ogre'
 U.Boss_Icestalker                       = 'Icestalker'

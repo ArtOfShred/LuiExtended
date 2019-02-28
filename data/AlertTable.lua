@@ -745,9 +745,31 @@ LUIE.AlertTable = {
     [33102] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1250 }, -- Spout Shadow (The Shadow Guard)
 
     [33432] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Daedric Flame (Bogdan the Nightflame)
-    [33480] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Pulverize (Bogdan the Nightflame)
-    [33492] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Pulverize (Bogdan the Nightflame)
-    [33494] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Pulverize (Bogdan the Nightflame)
+    [33480] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = '' }, -- Pulverize (Bogdan the Nightflame)
+    [33492] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = '' }, -- Pulverize (Bogdan the Nightflame)
+    [33494] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = '' }, -- Pulverize (Bogdan the Nightflame)
+
+    -- City of Ash I
+    [31101] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Golor_the_Banekin_Handler }, -- Cleave (Golor the Banekin Handler)
+    [25034] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Cleave (Golor the Banekin Handler)
+    [33604] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.Boss_Golor_the_Banekin_Handler }, -- Summon Banekin (Golor the Banekin Handler)
+
+    [34607] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Measured Uppercut (Warden of the Shrine)
+    [34654] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true, fakeName = U.Boss_Warden_of_the_Shrine }, -- Fan of Flames (Warden of the Shrine)
+    [34620] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true, fakeName = U.Boss_Warden_of_the_Shrine }, -- Fan of Flames (Warden of the Shrine)
+
+    [34190] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Thorny Backhand (Infernal Guardian)
+    [34189] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Infernal_Guardian }, -- Ground Slam (Infernal Guardian)
+    [35061] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Infernal_Guardian }, -- Consuming Fire (Infernal Guardian)
+    [34183] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Tunneling Roots (Infernal Guardian)
+
+    [44278] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED }, -- Lava Geyser (Dark Ember)
+
+    [34198] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Rothariel_Flameheart }, -- Burning Field (Rothariel Flameheart)
+    [34205] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED }, -- Deception (Rothariel Flameheart)
+
+    [34901] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Blazing Arrow (Razor Master Erthas)
+    [34623] = { summon = true, priority = 1, auradetect = true, refire = 500 }, -- Summon Flame Atronach (Razor Master Erthas)
 
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)

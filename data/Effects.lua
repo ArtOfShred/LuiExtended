@@ -1482,6 +1482,13 @@ E.AddNameAura = {
     [U.Boss_The_Shadow_Guard] = { [1] = { id = 33097 } }, -- The Shadow Guard
     [U.Boss_Bogdan_the_Nightflame] = { [1] = { id = 33097 } }, -- Bogdan the Nightflame
 
+    -- City of Ash I
+    [U.Boss_Golor_the_Banekin_Handler] = { [1] = { id = 33097 } }, -- Golor the Banekin Handler
+    [U.Boss_Warden_of_the_Shrine] = { [1] = { id = 33097 } }, -- Warden of the Shrine
+    [U.Boss_Infernal_Guardian] = { [1] = { id = 33097 } }, -- Infernal Guardian
+    [U.Boss_Dark_Ember] = { [1] = { id = 33097 } }, -- Dark Ember
+    [U.Boss_Rothariel_Flameheart] = { [1] = { id = 33097 } }, -- Rothariel Flameheart
+
     -- Frostvault
     [U.Boss_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
     [U.Boss_Icestalker] = { [1] = { id = 33097 } }, -- Icestalker
@@ -1716,9 +1723,10 @@ E.EffectOverrideByName = {
 
     -- GENERIC
     [44176] =   { -- Flying Immunities
-                   ['Cell Haunter'] = { hide = true }, -- Cell Haunter
-                   [U.Boss_Cell_Haunter] = { hide = true }, -- The Feast
+                   [U.Boss_Cell_Haunter] = { hide = true }, -- Cell Haunter
+                   ['The Feast'] = { hide = true }, -- The Feast
                    [U.Boss_Azara_the_Frightener] = { hide = true }, -- Azara the Frightener
+                   [U.Boss_Dark_Ember] = { hide = true }, -- Azara the Frightener
                 },
 }
 
@@ -2822,6 +2830,7 @@ E.EffectOverride = {
 
     -- Maelstrom Weapons
     [99806] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_cruel_flurry.dds', tooltip = T.Set_Maelstrom_DW }, -- Cruel Flurry (Maelstrom Dual Wield)
+    [99851] = { hide = true }, -- Thunderous Volley (Maelstrom Bow)
     [99789] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_merciless_charge.dds', tooltip = T.Generic_Bleed_1_Sec }, -- Merciless Charge (Maelstrom 2H)
     [100588] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds', tooltip = T.Set_Maelstrom_1H }, -- Rampaging Slash (Maelstrom 1H + Shield)
     [100587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds' }, -- Rampaging Slash (Maelstrom 1H + Shield)
@@ -5994,6 +6003,7 @@ E.EffectOverride = {
     -- Friendly NPC Abilities
     [48330] = { hide = true }, -- Aspect of Terror (Abnur Tharn)
     [48331] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_aspect_of_terror_p.dds' }, -- Aspect of Terror (Abnur Tharn)
+    [48337] = { hide = true }, -- Burning Arrow (Elolir - City of Ash I)
     [42905] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recover.dds', tooltip = T.Skill_Recover }, -- Recover
     [42937] = { hide = true }, -- TargetPriorityException
 
@@ -9004,6 +9014,9 @@ E.EffectOverride = {
     [33104] = { hide = true }, -- Spout Shadow (The Shadow Guard)
     [33103] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_spout_shadow.dds', tooltip = T.Generic_AOE_Magic_1_5_Sec, groundLabel = true }, -- Spout Shadow (The Shadow Guard)
 
+    [35371] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Emerge (Bogdan the Nightflame)
+    [35372] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds', tooltip = T.Generic_Knockback, unbreakable = 1 }, -- Emerge (Bogdan the Nightflame)
+
     [33313] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_strike_bogdan.dds' }, -- Swipe (Bogdan the Nightflame)
     [33359] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_soul_flame_bogdan.dds' }, -- Swipe (Bogdan the Nightflame)
     [33432] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_aoe_bogdan.dds' }, -- Daedric Flame (Bogdan the Nightflame)
@@ -9011,6 +9024,71 @@ E.EffectOverride = {
     [33480] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Pulverize (Bogdan the Nightflame)
     [33492] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Pulverize (Bogdan the Nightflame)
     [33494] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Pulverize (Bogdan the Nightflame)
+
+    -- City of Ash I
+    [34245] = { hide = true }, -- Fireball (Invis)
+
+    [29501] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Jab (Golor the Banekin Handler)
+    [31101] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_brands_cleave.dds', name = A.Skill_Steel_Cyclone }, -- Cleave (Golor the Banekin Handler)
+    [25034] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds' }, -- Crushing Blow (Golor the Banekin Handler)
+    [25035] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds' }, -- Crushing Blow (Golor the Banekin Handler)
+    [25036] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', unbreakable = 1, tooltip = T.Generic_Knockback }, -- Crushing Blow (Golor the Banekin Handler)
+    [33604] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_banekin.dds' }, -- Summon Banekin (Golor the Banekin Handler)
+    [33612] = { hide = true }, -- Scampintro (Banekin)
+
+    [34956] = { hide = true }, -- Intro (Warden of the Shrine)
+    [34589] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Light Swing (Warden of the Shrine)
+    [34607] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy_dw.dds' }, -- Measured Uppercut (Warden of the Shrine)
+    [34608] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy_dw.dds', hide = true }, -- Measured Uppercut (Warden of the Shrine)
+    [34609] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy_dw.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Measured Uppercut (Warden of the Shrine)
+    [46568] = { icon = 'esoui/art/icons/ability_nightblade_008.dds', tooltip = T.Generic_Stun }, -- Teleport Strike (Warden of the Shrine)
+    [34654] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_fan_of_flames.dds' }, -- Fan of Flames (Warden of the Shrine)
+    [34620] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_fan_of_flames.dds' }, -- Fan of Flames (Warden of the Shrine)
+    [34960] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_warrior_fan_of_flames.dds', name = A.Skill_Fan_of_Flames, tooltip = T.Generic_AOE_Fire_1_5_Sec, groundLabel = true }, -- Blazing Fire (Warden of the Shrine)
+
+    [34352] = { hide = true }, -- Fire Tornado (Infernal Guardian)
+
+    [34168] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_fire_claw.dds' }, -- Double Slam (Infernal Guardian)
+    [34169] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_fire_claw.dds' }, -- Double Slam (Infernal Guardian)
+
+    [34190] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_fire_thorny_backhand.dds' }, -- Thorny Backhand (Infernal Guardian)
+    [8398] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_fire_thorny_backhand.dds', name = A.Skill_Thorny_Backhand, tooltip = T.Generic_Bleed_1_Sec }, -- Bleeding (Infernal Guardian)
+    [23074] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_fire_thorny_backhand.dds', name = A.Skill_Thorny_Backhand }, -- Bleeding (Infernal Guardian)
+
+    [34189] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_fire_crushing_limbs.dds' }, -- Ground Slam (Infernal Guardian)
+    [44079] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_fire_crushing_limbs.dds' }, -- Ground Slam (Infernal Guardian)
+    [44090] = { name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Generic Stagger Enemy (Infernal Guardian)
+
+    [35061] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_fire_consuming_fire.dds' }, -- Consuming Fire (Infernal Guardian)
+    [35144] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_infernal_guardian.dds' }, -- Fiery Explosion (Infernal Guardian)
+    [35145] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_fire_consuming_fire.dds' }, -- Consuming Fire (Infernal Guardian)
+
+    [34183] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds', hide = true }, -- Tunneling Roots (Infernal Guardian)
+    [34187] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Tunneling Roots (Infernal Guardian)
+    [44089] = { name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Generic Stagger Enemy (Infernal Guardian)
+
+    [44278] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_lava_geyser.dds', hide = true }, -- Lava Geyser (Flame Atronach)
+    [44274] = { hide = true }, -- Lava Geyser (Flame Atronach)
+    [44276] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_lava_geyser.dds' }, -- Lava Geyser (Flame Atronach)
+
+    [35409] = { hide = true }, -- Dummy (Rothariel Flameheart)
+    [34198] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_ignite.dds', hide = true }, -- Burning Field (Rothariel Flameheart)
+    [34204] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_ignite.dds', groundLabel = true, tooltip = T.Generic_AOE_Fire_1_Sec }, -- Burning Field
+    [34222] = { hide = true }, -- Spiderexplosion (Rothariel Flameheart)
+    [34205] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_mage_fiery_deception.dds', name = A.Skill_Fiery_Deception }, -- Deception (Rothariel Flameheart)
+    [34226] = { hide = true }, -- Dummy (Rothariel Flameheart)
+
+    [49136] = { hide = true }, -- Oblivion Portal
+
+    [34788] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds' }, -- Quick Dark (Razor Master Erthas)
+    [34901] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_blazing_arrow.dds' }, -- Burning Embers (Razor Master Erthas)
+    [34948] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_blazing_arrow.dds', name = A.Skill_Blazing_Arrow, unbreakable = 1, tooltip = T.Generic_Burn_1_Sec, internalStack = 0 }, -- Burning Embers (Razor Master Erthas)
+    [34949] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_blazing_arrow.dds', name = A.Skill_Blazing_Arrow }, -- Burning Embers (Razor Master Erthas)
+
+    [34799] = { hide = true }, -- Lava Pitch (Release Flame)
+
+    [34623] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_daedra_fa_red.dds', hide = true }, -- Summon Flame Atronach (Razor Master Erthas)
+    [35379] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds' }, -- Flare (Flame Atronach)
 
     -- Frostvault
     [117286] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', hide = true }, -- Rending Bleed (Coldsnap Goblin - Shared)
@@ -9300,6 +9378,11 @@ E.FakeExternalDebuffs = {
     [33334] = { ignoreBegin = true, duration = 7500 }, -- Latch On Stamina (Frenzied Guardian)
     [33337] = { ignoreBegin = true, duration = 7500 }, -- Latch On Magicka (Mystic Guardian)
     [33164] = { duration = 4000, ignoreBegin = true }, -- Incite Fear (Shadow Tendril)
+    [35372] = { duration = 3500 }, -- Emerge (Bogdan the Nightflame)
+
+    -- City of Ash I
+    [25036] = { duration = 2000 }, -- Crushing Blow (Golor the Banekin Handler)
+    [34948] = { duration = 25000 }, -- Burning Embers (Razor Master Erthas)
 
     -- Frostvault
     [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
@@ -9526,6 +9609,10 @@ E.FakeStagger = {
     -- Elden Hollow I
     [44093] = { duration = 433 }, -- Battlecry (Akash gra-Mal)
     [44092] = { duration = 433 }, -- Generic Stagger Enemy (Chokethorn)
+
+    -- City of Ash I
+    [44090] = { duration = 433 }, -- Generic Stagger Enemy (Infernal Guardian)
+    [44089] = { duration = 433 }, -- Generic Stagger Enemy (Infernal Guardian)
 
     -- Frostvault
     [117291] = { duration = 433 }, -- Stagger (Coldsnap Ogre)
@@ -9763,6 +9850,10 @@ E.AddGroundDamageAura = {
     [33050] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Eclipse (Murklight)
     [33103] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spout Shadow (The Shadow Guard)
     [33434] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Daedric Flame (Bogdan the Nightflame)
+
+    -- City of Ash I
+    [34960] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF },-- Blazing Fire (Warden of the Shrine)
+    [34204] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Burning Field
 
 }
 
