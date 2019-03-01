@@ -6816,7 +6816,7 @@ function CA.HookFunction()
 
         if atMorph then
             if CA.SV.Skills.SkillAbilityCA then
-                formattedString = SkillLineColorize:Colorize(strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. ".")
+                local formattedString = SkillLineColorize:Colorize(strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. ".")
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL MORPH" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
@@ -6839,7 +6839,7 @@ function CA.HookFunction()
             end
         else
             if CA.SV.Skills.SkillAbilityCA then
-                formattedString = SkillLineColorize:Colorize(strformat(SI_LUIE_CA_ABILITY_RANK_UP, name, rank) .. ".")
+                local formattedString = SkillLineColorize:Colorize(strformat(SI_LUIE_CA_ABILITY_RANK_UP, name, rank) .. ".")
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
@@ -7615,7 +7615,7 @@ function CA.HookFunction()
 
         if IsEnlightenedAvailableForCharacter() then
 
-            formattedString = strformat("<<1>>! <<2>>", GetString(SI_ENLIGHTENED_STATE_GAINED_HEADER), GetString(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
+            local formattedString = strformat("<<1>>! <<2>>", GetString(SI_ENLIGHTENED_STATE_GAINED_HEADER), GetString(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
 
             if CA.SV.XP.ExperienceEnlightenedCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
@@ -7650,7 +7650,7 @@ function CA.HookFunction()
 
         if IsEnlightenedAvailableForCharacter() then
 
-            formattedString = strformat("<<1>>!", GetString(SI_ENLIGHTENED_STATE_LOST_HEADER))
+            local formattedString = strformat("<<1>>!", GetString(SI_ENLIGHTENED_STATE_LOST_HEADER))
 
             if CA.SV.XP.ExperienceEnlightenedCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
@@ -7863,6 +7863,7 @@ function CA.HookFunction()
 		if CA.SV.XP.ExperienceLevelUpCA or CA.SV.XP.ExperienceLevelUpCSA then
             for pointType,amount in pairs(championPointsByType) do
                 if amount > 0 then
+                    local formattedString
                     local icon = GetChampionPointAttributeHUDIcon(pointType)
                     local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and strformat(" <<1>>", iconFormat(icon, 16, 16)) or ""
                     local constellationGroupName = ZO_Champion_GetUnformattedConstellationGroupNameFromAttribute(pointType)
