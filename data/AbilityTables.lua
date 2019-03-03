@@ -1141,6 +1141,23 @@ A.Skill_Fan_of_Flames               = 34654
 A.Skill_Thorny_Backhand             = 34190
 A.Skill_Fiery_Deception             = 52224
 A.Skill_Blazing_Arrow               = 34901
+A.Skill_Blazing_Embers              = 34953
+A.Skill_Summon_Flame_Atronach       = 34623
+A.Skill_Oblivion_Gate               = GetString(SI_LUIE_SKILL_OBLIVION_GATE)
+
+-- City of Ash II
+A.Skill_Trail_of_Flames             = GetString(SI_LUIE_SKILL_TRAIL_OF_FLAMES)
+A.Skill_Pyroclasm                   = 92269
+A.Skill_Fire_Rune                   = 47102
+A.Skill_Flare                       = 10611
+A.Skill_Seismic_Tremor              = 55203
+A.Skill_Enraged_Fortitude           = GetString(SI_LUIE_SKILL_ENRAGED_FORTITUDE)
+A.Skill_Wing_Gust                   = 26554
+A.Skill_Flame_Tsunami               = GetString(SI_LUIE_SKILL_FLAME_TSUNAMI)
+A.Skill_Ignore_Pain                 = GetString(SI_LUIE_SKILL_IGNORE_PAIN)
+A.Skill_Call_Storm_Atronach         = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACH)
+A.Skill_Flame_Bolt                  = 55513
+A.Skill_Call_the_Flames             = 55514
 
 -- Frostvault
 A.Skill_Rending_Bleed               = 117286

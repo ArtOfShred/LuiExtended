@@ -2867,6 +2867,7 @@ local strings = {
     ----------------------------------------------------------------
 
     SI_LUIE_SKILL_LAVA_SNARE_TP =                        "Taking Flame Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF30|r%.",
+    SI_LUIE_SKILL_LAVA_STACK_TP =                        "Taking increasing Flame Damage every |cFFFFFF1|r second.",
 
     SI_LUIE_SKILL_LAVA_TRAP =                            "Lava Trap",
     SI_LUIE_SKILL_LIGHTNING_TRAP =                       "Lightning Trap",
@@ -3056,6 +3057,7 @@ local strings = {
     SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST =               "Empower Atronach: Frost",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM =               "Empower Atronach: Storm",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_TP =            "The death of a nearby Flame Atronach has empowered this Air Atronach, granting it the use of |cFFFFFFFlame Tornado|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_UNLIMITED_TP =  "This Air Atronach is empowered, granting it the use of |cFFFFFFFlame Tornado|r.",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM_TP =            "The death of a nearby Storm Atronach has empowered this Air Atronach, granting it the use of |cFFFFFFLightning Rod|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST_TP =            "The death of a nearby Frost Atronach has empowered this Air Atronach, granting it the use of |cFFFFFFIce Vortex|r for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_STORM_BOUND_TP =                       "Afflicted with Shock Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
@@ -3070,6 +3072,7 @@ local strings = {
     SI_LUIE_SKILL_KNIFE_JUGGLING =                       "Knife Juggling",
     SI_LUIE_SKILL_TORCH_JUGGLING =                       "Torch Juggling",
     SI_LUIE_SKILL_WALL_OF_FLAMES =                       "Wall of Flames",
+    SI_LUIE_SKILL_TRAIL_OF_FLAMES =                      "Trail of Flames",
     SI_LUIE_SKILL_CONSECRATE_SHRINE =                    "Consecrate Shrine",
     SI_LUIE_SKILL_UNSTABLE_PORTAL =                      "Unstable Portal",
     SI_LUIE_SKILL_STABILIZE_PORTAL =                     "Stabilize Portal",

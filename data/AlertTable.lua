@@ -1,5 +1,6 @@
 -- Performance Enhancement
 local U = LUIE.UnitNames
+local A = LUIE.GetAbility()
 
 LUIE.AlertTable = {
 
@@ -100,7 +101,7 @@ LUIE.AlertTable = {
     [12459] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Winter's Reach (Frost Mage)
 
     [35151] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true }, -- Spell Absorption (Spirit Mage)
-    [14472] = { summon = true, priority = 2, auradetect = true }, -- Spell Absorption (Spirit Mage)
+    [14472] = { summon = true, priority = 2, auradetect = true }, -- Burdening Eye (Spirit Mage)
 
     [14370] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, auradetect = true }, -- Void (Time Bomb Mage)
 
@@ -340,7 +341,7 @@ LUIE.AlertTable = {
     [91937] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Burst of Embers (Daedroth)
 
     [26324] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lava Geyser (Flame Atronach)
-    [50216] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Combustion (Flame Atronach)
+    [50216] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Combustion (Flame Atronach)
 
     [5017] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Hoarfrost Fist (Frost Atronach)
     [33502] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Frozen Ground (Frost Atronach)
@@ -536,8 +537,8 @@ LUIE.AlertTable = {
     [7717] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Detonation (Dwemer Spider)
     [19970] = { power = true, priority = 3, auradetect = true }, -- Static Field (Dwemer Spider - Overcharge Synergy)
     --[20207] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
-    [20505] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
-    [20222] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    [20505] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    [20222] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
 
     [64479] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunderbolt (Dwemer Sentry)
 
@@ -769,7 +770,55 @@ LUIE.AlertTable = {
     [34205] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED }, -- Deception (Rothariel Flameheart)
 
     [34901] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Blazing Arrow (Razor Master Erthas)
+    [34805] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Release Flame (Razor Master Erthas)
     [34623] = { summon = true, priority = 1, auradetect = true, refire = 500 }, -- Summon Flame Atronach (Razor Master Erthas)
+    [34780] = { summon = true, priority = 1, auradetect = true, refire = 500 }, -- Summon Flame Atranach (Razor Master Erthas)
+
+    -- City of Ash II
+    [53999] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = A.Skill_Oblivion_Gate }, -- Summon (Flame Atronach)
+    [54021] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Release Flame (Marruz)
+    [53976] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Blazing Arrow (Marruz)
+    [54025] = { interrupt = true, priority = 1, auradetect = true, notDirect = true, refire = 500, fakeName = U.Boss_Akezel }, -- Spell Absorption (Akezel)
+    [53994] = { interrupt = true, priority = 1, eventdetect = true, notDirect = true, fakeName = U.Boss_Akezel, result = ACTION_RESULT_BEGIN }, -- Focused Healing (Akezel)
+    [54096] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Rukhan }, -- Pyrocasm (Rukhan)
+
+    [56811] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.NPC_Xivilai_Ravager }, -- Pyrocasm (Xivilai Ravager)
+
+    [56414] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.Boss_Urata_the_Legion }, -- Fire Runes (Urata the Legion)
+    [54225] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Urata_the_Legion }, -- Multiply (Urata the Legion)
+    [56098] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Urata_the_Legion }, -- Multiply (Urata the Legion)
+    [56104] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Urata_the_Legion }, -- Multiply (Urata the Legion)
+    [56131] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Urata_the_Legion }, -- Reunite (Urata the Legion)
+
+    [56186] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = U.NPC_Flame_Colossus }, -- Voice to Wake the Dead (Bone Colossus)
+
+    [55203] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Horvantud_the_Fire_Maw }, -- Seismic Tremor (Horvantud the Fire Maw)
+    [56002] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Horvantud_the_Fire_Maw }, -- Seismic Tremor (Horvantud the Fire Maw)
+    [55312] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Horvantud_the_Fire_Maw }, -- Slag Breath (Horvantud the Fire Maw)
+    [55333] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Horvantud_the_Fire_Maw }, -- Fiery Breath (Horvantud the Fire Maw)
+    [55320] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Horvantud_the_Fire_Maw }, -- Fiery Breath (Horvantud the Fire Maw)
+    [55335] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Horvantud_the_Fire_Maw }, -- Fiery Breath (Horvantud the Fire Maw)
+    [55326] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Horvantud_the_Fire_Maw }, -- Fiery Breath (Horvantud the Fire Maw)
+    [55337] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Horvantud_the_Fire_Maw }, -- Fiery Breath (Horvantud the Fire Maw)
+    [57618] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true, refire = 250 }, -- Damage Shield (Horvantud the Fire Maw)
+
+    [55315] = { power = true, priority = 1, auradetect = true, refire = 250 }, -- Slag Breath (Horvantud the Fire Maw)
+    [55324] = { power = true, priority = 1, auradetect = true, refire = 250 }, -- Enrage 2 (Horvantud the Fire Maw)
+    [55329] = { power = true, priority = 1, auradetect = true, refire = 250 }, -- Enrage 3 (Horvantud the Fire Maw)
+
+    [54218] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = U.Boss_Ash_Titan }, -- Monstrous Cleave (Ash Titan)
+    [54895] = { block = true, avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = U.Boss_Ash_Titan }, -- Molten Rain (Ash Titan)
+    [54699] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.Boss_Ash_Titan }, -- Fire Swarm (Ash Titan)
+
+    [58468] = { power = true, auradetect = true, priority = 1, refire = 100 }, -- Shadow Cloak (Ash Titan)
+    [54783] = { power = true, auradetect = true, priority = 1 }, -- Air Atronach Flame (Air Atronach)
+    [54366] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1500, fakeName = U.NPC_Air_Atronach }, -- Flame Tornado (Air Atronach)
+
+    [58280] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 100 }, -- Scary Summon 1 (Xivilai Fulminator / Boltaic)
+    [56601] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 100 }, -- Scary Summon 2 (Xivilai Fulminator / Boltaic)
+
+    [55513] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Flame Bolt (Valkyn Skoria)
+    [55387] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Meteor Strike (Valkyn Skoria)
 
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)
@@ -778,7 +827,7 @@ LUIE.AlertTable = {
     [117290] = { block = true, avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Shockwave (Coldsnap Ogre)
     [117287] = { block = true, bs = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Crushing Blow (Coldsnap Ogre)
 
-    [117326] = { block = true, priority = 3, result = ACTION_RESULT_EFFECT_GAINED, refire = 200 }, -- Ice Comet (Coldsnap Skysplitter)
+    [117326] = { block = true, priority = 3, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Ice Comet (Coldsnap Skysplitter)
 
     [109827] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Boulder Toss (Icestalker)
     [109811] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Ground Slam (Icestalker)

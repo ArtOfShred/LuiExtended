@@ -3549,6 +3549,16 @@ function UF.CustomFramesApplyReactionColor(isPlayer)
             thb.bar:SetColor( unpack(reactioncolor) )
             thb.backdrop:SetCenterColor( unpack(reactioncolor_bg) )
         end
+    else
+        local health    = { UF.SV.CustomColourHealth[1],  UF.SV.CustomColourHealth[2],  UF.SV.CustomColourHealth[3], 0.9 }
+        local health_bg  = { 0.1*UF.SV.CustomColourHealth[1],  0.1*UF.SV.CustomColourHealth[2],  0.1*UF.SV.CustomColourHealth[3], 0.9 }
+
+        if UF.CustomFrames["reticleover"] then
+            local unitFrame = UF.CustomFrames["reticleover"]
+            local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+            thb.bar:SetColor( unpack(health) )
+            thb.backdrop:SetCenterColor( unpack(health_bg) )
+        end
     end
 end
 

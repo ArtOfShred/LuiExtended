@@ -889,6 +889,7 @@ T.Skill_Mark_of_the_Worm                = GetString(SI_LUIE_SKILL_MARK_OF_THE_WO
 -- ---------------------------------------------------
 
 T.Skill_Lava                            = GetString(SI_LUIE_SKILL_LAVA_SNARE_TP)
+T.Skill_Lava_Stack                      = GetString(SI_LUIE_SKILL_LAVA_STACK_TP)
 T.Skill_Slaughterfish_Attack            = GetString(SI_LUIE_SKILL_SLAUGHTERFISH_ATTACK_TP)
 
 T.Skill_Spike_Trap                      = GetString(SI_LUIE_SKILL_SPIKE_TRAP_TP)
@@ -989,6 +990,7 @@ T.Skill_Close_Wounds                    = GetString(SI_LUIE_SKILL_CLOSE_WOUNDS_T
 
 -- Daedra
 T.Skill_Empower_Atronach_Flame          = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_TP)
+T.Skill_Empower_Atronach_Flame_Unlimited = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME_UNLIMITED_TP)
 T.Skill_Empower_Atronach_Frost          = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST_TP)
 T.Skill_Empower_Atronach_Storm          = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM_TP)
 T.Skill_Lightning_Rod                   = GetString(SI_LUIE_SKILL_LIGHTNING_ROD_TP)
@@ -1069,6 +1071,16 @@ T.Skill_Siphon_Magicka                  = GetString(SI_LUIE_SKILL_SIPHON_MAGICKA
 T.Skill_Siphon_Stamina                  = GetString(SI_LUIE_SKILL_SIPHON_STAMINA_TP)
 T.Skill_Dark_Root_Stamina               = GetString(SI_LUIE_SKILL_DARK_ROOT_STAMINA_TP)
 T.Skill_Dark_Root_Magicka               = GetString(SI_LUIE_SKILL_DARK_ROOT_MAGICKA_TP)
+
+-- City of Ash I
+T.Skill_Blazing_Arrow                   = GetString(SI_LUIE_SKILL_BLAZING_ARROW_TP)
+T.Skill_Blazing_Embers                  = GetString(SI_LUIE_SKILL_BLAZING_EMBERS_TP)
+
+-- City of Ash II
+T.Skill_Enrage_Horvantud                = GetString(SI_LUIE_SKILL_ENRAGE_HORVANTUD)
+T.Skill_Flame_Tsunami                   = GetString(SI_LUIE_SKILL_FLAME_TSUNAMI_TP)
+T.Skill_Flame_Tornado_Shield            = GetString(SI_LUIE_SKILL_FLAME_TORNADO_SHIELD_TP)
+T.Skill_Ignore_Pain                     = GetString(SI_LUIE_SKILL_IGNORE_PAIN_TP)
 
 -- Frostvault
 T.Skill_Maim                            = GetString(SI_LUIE_SKILL_MAIM_NPC_TP)

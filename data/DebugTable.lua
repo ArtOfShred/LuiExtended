@@ -7123,6 +7123,10 @@ debugAuras = {
             [11338] = true, -- In Lava (Lava - The Earth Forge)
             [11339] = true, -- Lava Snare (Lava - The Earth Forge)
 
+            [55923] = true, -- Lava (Lava - City of Ash II)
+            [56277] = true, -- Lava (Lava - City of Ash II)
+            [55925] = true, -- Lava (Lava - City of Ash II)
+
             [72711] = true, -- Hidden (Hiding Spot)
             [72712] = true, -- Hiding Spot (Hiding Spot)
             [80262] = true, -- Hiding Spot (Hiding Spot)
@@ -11805,6 +11809,7 @@ debugAuras = {
             [82789] = true, -- Flare
 
             -- City of Ash I
+            [85743] = true, -- Teleport
             [34245] = true, -- Fireball
             [34257] = true, -- Intro
             [34126] = true, -- DUN_CA_Brute_Fire
@@ -11934,29 +11939,446 @@ debugAuras = {
             [34901] = true, -- Blazing Arrow (Razor Master Erthas)
             [34948] = true, -- Burning Embers (Razor Master Erthas)
             [34949] = true, -- Burning Embers (Razor Master Erthas)
+            [34805] = true, -- Release Flame (Razor Master Erthas)
+            [34819] = true, -- Release Flame (Razor Master Erthas)
 
-            [34805] = true, -- Release Flame
-            [34819] = true, -- Release Flame
+            [34799] = true, -- Lava Pitch (Release Flame)
+            [34814] = true, -- Release Flame (Release Flame)
+            [34806] = true, -- Release Flame (Release Flame)
+            [34809] = true, -- Dummy (Release Flame)
+            [34810] = true, -- Dummy (Release Flame)
+            [34811] = true, -- Dummy (Release Flame)
+            [34812] = true, -- Dummy (Release Flame)
+            [34820] = true, -- Lava Pitch (Release Flame)
+            [34953] = true, -- Blazing Embers (Release Flame)
+            [34955] = true, -- Dummy (Release Flame)
+            [34951] = true, -- Blazing Embers (Release Flame)
 
-            [34799] = true, -- Lava Pitch
-            [34814] = true, -- Release Flame
-            [34806] = true, -- Release Flame
-            [34809] = true, -- Dummy
-            [34810] = true, -- Dummy
-            [34811] = true, -- Dummy
-            [34812] = true, -- Dummy
-
-            [34623] = true, -- Summon Flame Atronach
+            [34623] = true, -- Summon Flame Atronach (Razor Master Erthas)
             [34626] = true, -- Summon Flame Atronach (Razor Master Erthas)
             [34776] = true, -- Summon Flame Atronach (Razor Master Erthas)
             [34637] = true, -- Summon Flame Atronach (Razor Master Erthas)
             [34777] = true, -- Summon Flame Atronach (Razor Master Erthas)
             [34640] = true, -- Summon Flame Atronach (Razor Master Erthas)
             [34778] = true, -- Summon Flame Atronach (Razor Master Erthas)
+            [34642] = true, -- Summon Flame Atronach (Razor Master Erthas)
+            [34779] = true, -- Summon Flame Atronach (Razor Master Erthas)
             [34579] = true, -- Dummy (Flame Atronach)
             [34600] = true, -- Dummy (Flame Atronach)
             [34602] = true, -- Dummy (Flame Atronach)
             [35379] = true, -- Flare (Flame Atronach)
+            [34892] = true, -- Body of Flame (Razor Master Erthas)
+            [34895] = true, -- Body of Flame (Razor Master Erthas)
+            [34896] = true, -- Body of Flame (Razor Master Erthas)
+            [34898] = true, -- Body of Flame (Razor Master Erthas)
+            [34780] = true, -- Summon Flame Atranach (Razor Master Erthas)
+            [34784] = true, -- Summon Flame Atranach (Razor Master Erthas)
+            [34785] = true, -- Summon Flame Atranach (Razor Master Erthas)
+            [34786] = true, -- Summon Flame Atranach (Razor Master Erthas)
+            [34641] = true, -- Summon Flame Atranach (Razor Master Erthas)
+
+            [49138] = true, -- Oblivion Portal
+            [49137] = true, -- Oblivion Portal
+
+            -- City of Ash II
+            [85930] = true, -- Teleport
+            [56243] = true, -- Jump
+
+            [56097] = true, -- Portal Fx
+            [54032] = true, -- Add Threat
+            [53952] = true, -- Body of Flame
+            [56089] = true, -- Tele Spot Used
+            [56090] = true, -- Body of Flame
+            [53956] = true, -- Body of Flame
+            [53954] = true, -- Body of Flame
+            [53957] = true, -- Body of Flame
+            [53989] = true, -- Dummy
+            [56080] = true, -- Body of Flame
+            [56085] = true, -- Body of Flame
+            [56082] = true, -- Body of Flame
+            [53999] = true, -- Summon
+            [56081] = true, -- Body of Flame
+            [54126] = true, -- Minor Wound (Akezel)
+            [54025] = true, -- Spell Absorption (Akezel)
+            [53994] = true, -- Focused Healing (Akezel)
+            [53996] = true, -- Health Boon (Akezel)
+            [53988] = true, -- Quick Draw (Merruz)
+            [54021] = true, -- Release Flame (Merruz)
+            [54024] = true, -- Release Flame (Merruz)
+            [54130] = true, -- Release Flame (Merruz)
+            [54022] = true, -- Release Flame (Merruz)
+            [54023] = true, -- Release Flame (Merruz)
+            [54136] = true, -- Blazing Embers (Merruz)
+            [54132] = true, -- Blazing Embers (Merruz)
+            [54134] = true, -- Blazing Embers (Merruz)
+            [54137] = true, -- Blazing Embers (Merruz)
+            [54138] = true, -- Blazing Embers (Merruz)
+            [54139] = true, -- Blazing Embers (Merruz)
+            [54133] = true, -- Blazing Embers (Merruz)
+            [57120] = true, -- Blazing Embers (Merruz)
+            [53976] = true, -- Blazing Arrow (Merruz)
+            [53978] = true, -- Burning Embers (Merruz)
+            [53977] = true, -- Burning Embers (Merruz)
+            [57119] = true, -- Burning Embers (Merruz)
+            [54129] = true, -- Fire Chain (Rukhan)
+            [54145] = true, -- Fire Chain (Rukhan)
+            [54096] = true, -- Pyrocasm (Rukhan)
+            [54098] = true, -- CON_Knockback&Knockdown (Rukhan)
+            [54097] = true, -- Fire Backlash (Rukhan)
+
+            [55010] = true, -- Fiery Entrance
+            [56056] = true, -- Quick Shot Nerf Damage
+            [56074] = true, -- Start Clone Spawn In
+            [56811] = true, -- Pyrocasm (Xivilai Ravager)
+            [56813] = true, -- CON_Knockback&Knockdown (Xivilai Ravager)
+            [56812] = true, -- Fire Backlash (Xivilai Ravager)
+            [55367] = true, -- Flame Conduit
+            [55407] = true, -- Flame Conduit
+            [56547] = true, -- Flame Conduit
+            [55466] = true, -- Flame Conduit
+            [55442] = true, -- Flame Conduit
+
+            [55652] = true, -- Venomous Explosion (Venomous Skeleton)
+            [55659] = true, -- Venomous Explosion (Venomous Skeleton)
+            [55654] = true, -- Venomous Explosion (Venomous Skeleton)
+            [55655] = true, -- Venomous Explosion (Venomous Skeleton)
+            [55658] = true, -- Venomous Explosion (Venomous Skeleton)
+            [55657] = true, -- Venomous Explosion (Venomous Skeleton)
+
+            [55184] = true, -- Urata Spawn In
+            [46222] = true, -- RobS Immunities .5 Sec (Urata the Legion)
+            [56419] = true, -- Flare (Urata the Legion)
+            [56414] = true, -- Fire Runes (Urata the Legion)
+            [56607] = true, -- Fire Runes (Urata the Legion)
+            [56608] = true, -- Fire Runes (Urata the Legion)
+            [56609] = true, -- Fire Runes (Urata the Legion)
+            [56415] = true, -- Fire Runes (Urata the Legion)
+            [54225] = true, -- Multiply (Urata the Legion)
+            [54228] = true, -- Summon Clones (Urata the Legion)
+            [56115] = true, -- Clones Casted Stack (Urata the Legion)
+            [56120] = true, -- Set Absorb CD (Urata the Legion)
+            [54227] = true, -- Clone Beam (Clones)
+            [54272] = true, -- Clone Spawn FX (Clones)
+            [54273] = true, -- Clone Spawn In (Clones)
+            [72285] = true, -- No Damage While Spawning (Clones)
+            [54455] = true, -- Clone Less DMG (Clones)
+            [54447] = true, -- Summon Clones (Clones)
+            [54449] = true, -- Summon Clones (Clones)
+
+            [54277] = true, -- Reunite (Urata the Legion)
+            [56131] = true, -- Reunite (Urata the Legion)
+            [54453] = true, -- Absorb Clones (Urata the Legion)
+            [56134] = true, -- Reunite (Urata the Legion)
+            [56420] = true, -- Reunite (Urata the Legion)
+            [56440] = true, -- Set Clone CD (Urata the Legion)
+            [54283] = true, -- Clone Absorbing (Clones)
+            [54494] = true, -- Stun (Clones)
+            [54451] = true, -- Shadow Heal (Urata the Legion)
+            [54450] = true, -- Shadow Heal (Urata the Legion)
+            [56388] = true, -- Shadow Heal (Urata the Legion)
+            [56132] = true, -- Shadow Heal (Urata the Legion)
+
+            [56098] = true, -- Multiply (Urata the Legion)
+            [56099] = true, -- Summon Clones (Urata the Legion)
+            [56121] = true, -- Set Absorb CD (Urata the Legion)
+            [56100] = true, -- Summon Clones (Urata the Legion)
+            [56101] = true, -- Summon Clones (Urata the Legion)
+            [56103] = true, -- Summon Clones (Urata the Legion)
+
+            [56104] = true, -- Multiply (Urata the Legion)
+            [56105] = true, -- Summon Clones (Urata the Legion)
+            [56122] = true, -- Set Absorb CD (Urata the Legion)
+            [56106] = true, -- Summon Clones (Urata the Legion)
+            [56107] = true, -- Summon Clones (Urata the Legion)
+            [56108] = true, -- Summon Clones (Urata the Legion)
+            [56110] = true, -- Summon Clones (Urata the Legion)
+
+            [56172] = true, -- Fiery Entrance
+            [61201] = true, -- Melt Up
+            [55728] = true, -- Scamp Spawn
+            [56173] = true, -- Scamps
+            [55434] = true, -- 30% Speed Buff
+            [56178] = true, -- Gauntlet NPC Add Threat
+            [56186] = true, -- Voice to Wake the Dead (Flame Colossus)
+            [56187] = true, -- Voice to Wake the Dead (Flame Colossus)
+            [56188] = true, -- Voice to Wake the Dead (Flame Colossus)
+            [56189] = true, -- Voice to Wake the Dead (Flame Colossus)
+            [86753] = true, -- Bone Flare (Flame Colossus)
+            [56442] = true, -- Flame Conduit (Gilraen)
+
+            [56055] = true, -- Jagged Claw (Horvantud the Fire Maw)
+            [56054] = true, -- Fiery Jaws (Horvantud the Fire Maw)
+            [56307] = true, -- Fiery Jaws (Horvantud the Fire Maw)
+            [55203] = true, -- Seismic Tremor (Horvantud the Fire Maw)
+            [56032] = true, -- Ground Tremor (Horvantud the Fire Maw)
+            [56043] = true, -- Seismic Tremor (Horvantud the Fire Maw)
+            [56036] = true, -- Ground Tremor (Horvantud the Fire Maw)
+            [56037] = true, -- Ground Tremor (Horvantud the Fire Maw)
+            [56038] = true, -- Ground Tremor (Horvantud the Fire Maw)
+            [56039] = true, -- Ground Tremor (Horvantud the Fire Maw)
+            [56040] = true, -- Ground Tremor (Horvantud the Fire Maw)
+            [56034] = true, -- Tremor (Horvantud the Fire Maw)
+            [56264] = true, -- Stagger (Horvantud the Fire Maw)
+            [56265] = true, -- Tremor (Horvantud the Fire Maw)
+
+            [56002] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56012] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56011] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56006] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56004] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56013] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56014] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56003] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56023] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56015] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56016] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56021] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56022] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56024] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56027] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56007] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56019] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56020] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56008] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56017] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56018] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56010] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [56009] = true, -- Ground Quake (Horvantud the Fire Maw)
+            [55648] = true, -- VDUN_CoA_B1 Add Jump Down (Adds)
+            [56069] = true, -- Add Bruiser (Adds)
+            [56070] = true, -- Add Bruiser (Adds)
+            [56071] = true, -- Add Bruiser (Adds)
+            [56072] = true, -- Add Bruiser (Adds)
+            [56073] = true, -- Add Bruiser (Adds)
+
+            [55312] = true, -- Slag Breath (Horvantud the Fire Maw)
+            [56091] = true, -- Slag Breath (Horvantud the Fire Maw)
+            [55315] = true, -- Slag Breath (Horvantud the Fire Maw)
+            [55313] = true, -- Slag Breath (Horvantud the Fire Maw)
+            [55319] = true, -- Slag Breath (Horvantud the Fire Maw)
+            [55314] = true, -- Slag Breath (Horvantud the Fire Maw)
+            [55318] = true, -- Slag Breath (Horvantud the Fire Maw)
+            [55333] = true, -- Fiery Breath (Horvantud the Fire Maw)
+            [56086] = true, -- Fiery Breath (Horvantud the Fire Maw)
+            [55334] = true, -- Fiery Breath (Horvantud the Fire Maw)
+            [55320] = true, -- Fiery Breath (Horvantud the Fire Maw)
+            [56092] = true, -- Fiery Breath (Horvantud the Fire Maw)
+            [55321] = true, -- Fiery Breath (Horvantud the Fire Maw)
+            [55335] = true, -- Fiery Breath (Horvantud the Fire Maw)
+            [56087] = true, -- Fiery Breath (Horvantud the Fire Maw)
+            [55336] = true, -- Fiery Breath (Horvantud the Fire Maw)
+
+            [55326] = true, -- Fiery Breath (Horvantud the Fire Maw)
+            [56093] = true, -- Fiery Breath (Horvantud the Fire Maw)
+            [55327] = true, -- Fiery Breath (Horvantud the Fire Maw)
+
+            [55337] = true, -- Fiery Breath (Horvantud the Fire Maw)
+            [56088] = true, -- Fiery Breath (Horvantud the Fire Maw)
+            [55338] = true, -- Fiery Breath (Horvantud the Fire Maw)
+
+            [55324] = true, -- Enrage 2 (Horvantud the Fire Maw)
+            [55325] = true, -- Enrage 2 Tracker (Horvantud the Fire Maw)
+            [55332] = true, -- Remove Enrage 1 (Horvantud the Fire Maw)
+            [55330] = true, -- Remove Enrage 1 (Horvantud the Fire Maw)
+            [55322] = true, -- Enrage 2 Bonus (Horvantud the Fire Maw)
+            [55323] = true, -- Can Enrage Go 3 (Horvantud the Fire Maw)
+            [55329] = true, -- Enrage 3 (Horvantud the Fire Maw)
+            [55328] = true, -- Enrage 3 Bonus (Horvantud the Fire Maw)
+            [55331] = true, -- Remove Enrage 2 (Horvantud the Fire Maw)
+            [57618] = true, -- Damage Shield (Horvantud the Fire Maw)
+            [55724] = true, -- Clean Up (Horvantud the Fire Maw)
+            [55675] = true, -- VDUN-CoA-B1 Add Stealth Despaw (Horvantud the Fire Maw)
+
+            [56191] = true, -- Bone Flare
+            [56190] = true, -- Snare
+
+            [54760] = true, -- VDUN-CoA-B2 Fly In Intro (Ash Titan)
+            [54763] = true, -- VDUN-CoA-B2 Fly In Intro (Ash Titan)
+            [54764] = true, -- Backdraft (Ash Titan)
+            [54767] = true, -- Backdraft (Ash Titan)
+            [54768] = true, -- Backdraft (Ash Titan)
+            [56194] = true, -- Knockdown (Ash Titan)
+            [56197] = true, -- Fire Backlash (Ash Titan)
+
+            [54267] = true, -- Lava Bolt (Ash Titan)
+            [54270] = true, -- Lava Bolt (Ash Titan)
+            [54269] = true, -- Ethereal Flame (Ash Titan)
+            [56151] = true, -- Ethereal Flame (Ash Titan)
+            [56152] = true, -- Ethereal Flame (Ash Titan)
+
+            [54218] = true, -- Monstrous Cleave (Ash Titan)
+            [54224] = true, -- Monstrous Cleave (Ash Titan)
+            [54223] = true, -- Monstrous Cleave (Ash Titan)
+            [54222] = true, -- Monstrous Cleave (Ash Titan)
+            [61214] = true, -- Monstrous Cleave (Ash Titan)
+            [54221] = true, -- Monstrous Cleave (Ash Titan)
+            [54266] = true, -- Cleave (Ash Titan)
+
+            [54895] = true, -- Molten Rain (Ash Titan)
+            [54913] = true, -- Molten Rain (Ash Titan)
+            [56096] = true, -- Molten Rain (Ash Titan)
+            [54973] = true, -- Molten Rain (Ash Titan)
+            [55179] = true, -- Molten Rain (Ash Titan)
+            [54915] = true, -- Molten Rain (Ash Titan)
+            [54920] = true, -- Molten Rain (Ash Titan)
+            [55176] = true, -- Molten Rain (Ash Titan)
+            [55177] = true, -- Molten Rain (Ash Titan)
+            [55128] = true, -- Molten Rain (Ash Titan)
+            [55129] = true, -- Molten Rain (Ash Titan)
+            [55130] = true, -- Molten Rain (Ash Titan)
+            [55178] = true, -- Molten Rain (Ash Titan)
+            [55175] = true, -- Molten Rain (Ash Titan)
+            [56094] = true, -- Molten Rain (Ash Titan)
+            [56095] = true, -- Molten Rain (Ash Titan)
+
+            [54698] = true, -- Fire Swarm (Ash Titan)
+            [54857] = true, -- Random Target (Ash Titan)
+            [54858] = true, -- Knockback (Ash Titan)
+            [54873] = true, -- Heavy Slash (Ash Titan)
+
+            [54856] = true, -- Wing Burst (Ash Titan)
+            [54855] = true, -- Shockwave (Ash Titan)
+            [56145] = true, -- Shockwave (Ash Titan)
+            [56144] = true, -- Shockwave (Ash Titan)
+            [54859] = true, -- Stagger (Ash Titan)
+            [54874] = true, -- Shockwave (Ash Titan)
+
+            [54699] = true, -- Fire Swarm (Ash Titan)
+            [54648] = true, -- Fire Swarm (Ash Titan)
+            [54861] = true, -- Fire Swarm (Ash Titan)
+            [54663] = true, -- Fire Swarm (Ash Titan)
+            [54664] = true, -- Fire Swarm (Ash Titan)
+            [54665] = true, -- Fire Swarm (Ash Titan)
+            [54666] = true, -- Fire Swarm (Ash Titan)
+            [54667] = true, -- Fire Swarm (Ash Titan)
+            [54650] = true, -- Fire Swarm (Ash Titan)
+            [54668] = true, -- Fire Swarm (Ash Titan)
+            [54863] = true, -- Fire Swarm (Ash Titan)
+            [54864] = true, -- Fire Swarm (Ash Titan)
+            [54865] = true, -- Fire Swarm (Ash Titan)
+            [54866] = true, -- Fire Swarm (Ash Titan)
+            [54867] = true, -- Fire Swarm (Ash Titan)
+            [54860] = true, -- Fire Swarm (Ash Titan)
+            [54862] = true, -- Fire Swarm (Ash Titan)
+            [54868] = true, -- Fire Swarm (Ash Titan)
+            [54654] = true, -- Fire Swarm (Ash Titan)
+            [56375] = true, -- Fire Swarm (Ash Titan)
+            [56309] = true, -- Fire Swarm (Ash Titan)
+            [56357] = true, -- Fire Swarm (Ash Titan)
+            [56358] = true, -- Fire Swarm (Ash Titan)
+            [56369] = true, -- Fire Swarm (Ash Titan)
+            [56359] = true, -- Fire Swarm (Ash Titan)
+            [56361] = true, -- Fire Swarm (Ash Titan)
+            [56360] = true, -- Fire Swarm (Ash Titan)
+            [56362] = true, -- Fire Swarm (Ash Titan)
+            [56363] = true, -- Fire Swarm (Ash Titan)
+            [56364] = true, -- Fire Swarm (Ash Titan)
+            [56367] = true, -- Fire Swarm (Ash Titan)
+            [56366] = true, -- Fire Swarm (Ash Titan)
+            [56365] = true, -- Fire Swarm (Ash Titan)
+            [56368] = true, -- Fire Swarm (Ash Titan)
+            [56370] = true, -- Fire Swarm (Ash Titan)
+            [56373] = true, -- Fire Swarm (Ash Titan)
+            [56371] = true, -- Fire Swarm (Ash Titan)
+            [56372] = true, -- Fire Swarm (Ash Titan)
+            [56374] = true, -- Fire Swarm (Ash Titan)
+
+            [56314] = true, -- Damage Shield (Ash Titan)
+            [58468] = true, -- Shadow Cloak (Ash Titan)
+            [54779] = true, -- Air Take Flame (Air Atronach)
+            [54780] = true, -- Air Take Flame (Air Atronach)
+            [54781] = true, -- Boss (Air Atronach)
+            [54786] = true, -- VDUN_CoA_B2_Air Take Flame (Air Atronach)
+            [54787] = true, -- Air Take Flame (Air Atronach)
+            [54783] = true, -- Air Atronach Flame (Air Atronach)
+            [54788] = true, -- Remove Blood Lust (Air Atronach)
+            [56318] = true, -- Cooldowns (Ash Titan)
+            [56319] = true, -- Cooldown2 (Ash Titan)
+
+            [54366] = true, -- Flame Tornado (Ash Titan)
+            [56312] = true, -- Flame Tornado (Ash Titan)
+            [60683] = true, -- Flame Tornado (Ash Titan)
+            [54367] = true, -- Flame Tornado (Ash Titan)
+            [54370] = true, -- Flame Tornado Snare (Ash Titan)
+            [54790] = true, -- Swipe (Ash Titan)
+            [54791] = true, -- Swipe (Ash Titan)
+
+            [55707] = true, -- Fiery Entrance
+            [55725] = true, -- Scamps
+            [55618] = true, -- VDUN_CoA_B3 Flame Atr Spawn In
+            [2616] = true, -- NPC Run Away Theater Speed
+            [55215] = true, -- Capture Point
+
+            [56227] = true, -- Fiery Entrace (Xivilai Fulminator / Boltaic)
+            [56229] = true, -- Fiery Entrace (Xivilai Fulminator / Boltaic)
+            [56231] = true, -- Fiery Entrace (Xivilai Fulminator / Boltaic)
+            [56230] = true, -- Scamps (Xivilai Fulminator / Boltaic)
+            [56232] = true, -- Scamps (Xivilai Fulminator / Boltaic)
+            [56228] = true, -- Scamps (Xivilai Fulminator / Boltaic)
+            [56591] = true, -- Shocking Entry (Xivilai Fulminator / Boltaic)
+            [58280] = true, -- Scary Summon 1 (Xivilai Fulminator / Boltaic)
+            [58281] = true, -- Scary Summon 1 (Xivilai Fulminator / Boltaic)
+            [56601] = true, -- Scary Summon 2 (Xivilai Fulminator / Boltaic)
+            [58279] = true, -- Scary Summon 2 (Xivilai Fulminator / Boltaic)
+
+            [31171] = true, -- Frontflip
+            --[56651] = true, -- Flame Shield (Gilrean)
+
+            -- IMPORTANT -- TEMP ONLY
+            -- IMPORTANT -- TEMP ONLY
+            -- IMPORTANT -- TEMP ONLY
+            [85086] = true, -- Boss
+            [85087] = true, -- Boss
+            -- IMPORTANT -- TEMP ONLY
+            -- IMPORTANT -- TEMP ONLY
+            -- IMPORTANT -- TEMP ONLY
+
+            [55879] = true, -- Lava Spout IdleFX
+            [55783] = true, -- Slag Geyser
+            [55800] = true, -- Slag Geyser
+            [55792] = true, -- Slag Geyser
+            [55784] = true, -- Slag Geyser
+            [55801] = true, -- Slag Geyser
+            [55793] = true, -- Slag Geyser
+            [55759] = true, -- Slag Geyser
+            [55798] = true, -- Slag Geyser
+            [55790] = true, -- Slag Geyser
+            [55786] = true, -- Slag Geyser
+            [55787] = true, -- Slag Geyser
+            [55788] = true, -- Slag Geyser
+            [56068] = true, -- Slag Geyser
+
+            [55513] = true, -- Flame Bolt (Valkyn Skoria)
+            [55573] = true, -- Flame Bolt Knockdown (Valkyn Skoria)
+            [55574] = true, -- Meteor Strike (Valkyn Skoria)
+            [55575] = true, -- Meteor Strike (Valkyn Skoria)
+
+            [55387] = true, -- Meteor Strike (Valkyn Skoria)
+            [55758] = true, -- Meteor Strike (Valkyn Skoria)
+            [56167] = true, -- Meteor Strike (Valkyn Skoria)
+            [55757] = true, -- Meteor Strike (Valkyn Skoria)
+            [55505] = true, -- Meteor (Valkyn Skoria)
+            [55503] = true, -- Meteor (Valkyn Skoria)
+            [55391] = true, -- Meteor Strike (Valkyn Skoria)
+            [55390] = true, -- Meteor Strike (Valkyn Skoria)
+            [55504] = true, -- Meteor (Valkyn Skoria)
+            [55506] = true, -- Meteor (Valkyn Skoria)
+            [55502] = true, -- Meteor (Valkyn Skoria)
+
+            [55382] = true, -- Flame Strike (Valkyn Skoria)
+            [55383] = true, -- Flame Strike (Valkyn Skoria)
+
+            [55514] = true, -- Call the Flames (Valkyn Skoria)
+            [55559] = true, -- Call the Flames (Valkyn Skoria)
+            [55755] = true, -- Call the Flames (Valkyn Skoria)
+            [55566] = true, -- Crackling Earth (Valkyn Skoria)
+            [55568] = true, -- Crackling Earth (Valkyn Skoria)
+            [55567] = true, -- Crackling Earth (Valkyn Skoria)
+            [55564] = true, -- Crackling Earth (Valkyn Skoria)
+            [55569] = true, -- Crackling Earth (Valkyn Skoria)
+            [55565] = true, -- Crackling Earth (Valkyn Skoria)
+            [55572] = true, -- Heat Wave (Valkyn Skoria)
+            [55756] = true, -- Burning (Valkyn Skoria)
 
             -- Frostvault
             [115316] = true, -- Weatherman

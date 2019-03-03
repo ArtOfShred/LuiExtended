@@ -2909,15 +2909,17 @@ function SCB.ReloadEffects(unitTag)
         -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
         if E.AddNameAura[unitName] and GetUnitReaction(unitTag) == UNIT_REACTION_HOSTILE and IsUnitInCombat(unitTag) and not IsUnitPlayer(unitTag) and not IsUnitDead(unitTag) then
             for k, v in ipairs(E.AddNameAura[unitName]) do
-                local abilityName = GetAbilityName(v.id)
-                local abilityIcon = GetAbilityIcon(v.id)
-                g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
-                    type=1,
-                    id= v.id, name= abilityName, icon= abilityIcon,
-                    dur=0, starts=1, ends=nil,
-                    forced = "short",
-                    restart=true, iconNum=0
-                }
+                if not (v.zone) or (v.zone and GetCurrentMapZoneIndex() == v.zone) then
+                    local abilityName = GetAbilityName(v.id)
+                    local abilityIcon = GetAbilityIcon(v.id)
+                    g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
+                        type=1,
+                        id= v.id, name= abilityName, icon= abilityIcon,
+                        dur=0, starts=1, ends=nil,
+                        forced = "short",
+                        restart=true, iconNum=0
+                    }
+                end
             end
         end
     end
