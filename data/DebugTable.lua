@@ -11432,6 +11432,122 @@ debugAuras = {
             [105893] = true, -- Pustulant Film (Yaghra Nightmare)
 
             -------------------------------------
+            -- ARENAS ---------------------------
+            -------------------------------------
+
+            -- Maelstrom Arena (Shared)
+            [43882] = true, -- CON_Portal 3 Seconds
+            [72057] = true, -- Portal Spawn
+            [72059] = true, -- Portal Spawn
+            [72060] = true, -- Portal Spawn
+            [72058] = true, -- Portal Spawn
+
+            [71957] = true, -- Sigil of Speed
+            [71959] = true, -- Sigil of Speed
+            [67257] = true, -- Speed Used
+            [71947] = true, -- Sigil of Health
+            [71948] = true, -- Sigil of Health
+            [67227] = true, -- Healing Used
+            [71900] = true, -- Sigil of Power
+            [71912] = true, -- Sigil of Power
+            [71901] = true, -- Sigil of Power
+            [67210] = true, -- Power Used
+            [71955] = true, -- Sigil of Defense
+            [71956] = true, -- Sigil of Defense
+            [67239] = true, -- Defense Used
+
+            [71951] = true, -- Sigil of Defense
+            [67240] = true, -- Sigil of Defense
+            [71729] = true, -- Sigil of Defense
+            [71953] = true, -- Sigil of Haste
+            [67253] = true, -- Sigil of Haste
+            [71902] = true, -- Sigil of Power
+            [67209] = true, -- Sigil of Power
+            [72444] = true, -- Sigil of Power
+            [72445] = true, -- Sigil of Power
+            [71949] = true, -- Sigil of Healing
+            [66920] = true, -- Sigil of Healing
+            [66921] = true, -- Healing Aura
+
+            [71727] = true, -- DUN-MA Remove Pick Up Buffs
+            [72408] = true, -- DUN-MA Remove Pick Up Buffs
+            [72471] = true, -- DUN-MA Grant Resources
+            [72472] = true, -- DUN-MA Grant Resources
+            [72474] = true, -- DUN-MA Grant Resources
+
+            [70928] = true, -- Is Essential Mob
+            [73924] = true, -- DUN-MA Increased Gold
+            [72286] = true, -- Portal Spawn
+            [72430] = true, -- FNH Portal Spawn
+            [72433] = true, -- FNH Portal Spawn
+            [72287] = true, -- Portal Spawn
+            [72288] = true, -- Portal Spawn
+            [72432] = true, -- Portal Spawn
+            [72431] = true, -- Portal Spawn
+
+            -- Stage 1 - Vale of the Surreal
+            [70885] = true, -- Miasma
+            [68194] = true, -- Necrotic Orb (Necrotic Orb)
+            [68195] = true, -- Seeking Orb (Necrotic Orb)
+            [68199] = true, -- Dummy (Necrotic Orb)
+            [68197] = true, -- Necrotic Essence (Necrotic Orb)
+            [68198] = true, -- Necrotic Explosion (Necrotic Orb)
+
+            [67765] = true, -- Multiply (Maxus the Many)
+            [67768] = true, -- Summon Clones (Maxus the Many)
+            [67705] = true, -- Clones Casted Stack (Maxus the Many)
+            [73857] = true, -- Set Absorb CD (Maxus the Many)
+            [67769] = true, -- Summon Clones (Maxus the Many)
+            [44603] = true, -- Break Free (Clones)
+            [44605] = true, -- Break Free (Clones)
+            [44623] = true, -- Break Free (Clones)
+            [44622] = true, -- Break Free (Clones)
+
+            [67682] = true, -- Reunite (Maxus the Many)
+            [67691] = true, -- Reunite (Maxus the Many)
+            [67683] = true, -- Absorb Clones (Maxus the Many)
+            [67687] = true, -- Reunite (Maxus the Many)
+            [67694] = true, -- Reunite (Maxus the Many)
+            [67690] = true, -- Set Clone CD (Maxus the Many)
+            [67735] = true, -- Clone Absorbing (Maxus the Many)
+            [67737] = true, -- Stun (Maxus the Many)
+            [73856] = true, -- Shadow Heal (Maxus the Many)
+            [67738] = true, -- Shadow Heal (Maxus the Many)
+            [67736] = true, -- Clone Absorbed (Maxus the Many)
+            [67692] = true, -- Set Clone CD (Maxus the Many)
+
+            [67656] = true, -- Multiply (Maxus the Many)
+            [67658] = true, -- Summon Clones (Maxus the Many)
+            [73859] = true, -- Set Absorb CD (Maxus the Many)
+            [67659] = true, -- Summon Clones (Maxus the Many)
+            [67660] = true, -- Summon Clones (Maxus the Many)
+
+            [69515] = true, -- Multiply (Maxus the Many)
+            [69516] = true, -- Summon Clones (Maxus the Many)
+            [73858] = true, -- Set Absorb CD (Maxus the Many)
+            [69517] = true, -- Summon Clones (Maxus the Many)
+            [69518] = true, -- Summon Clones (Maxus the Many)
+            [69519] = true, -- Summon Clones (Maxus the Many)
+
+            [70891] = true, -- Entropic Bolt (Maxus the Many)
+            [70892] = true, -- Bone Cage (Maxus the Many)
+            [70895] = true, -- Encase (Maxus the Many)
+            [70893] = true, -- Defiled Grave (Maxus the Many)
+            [70901] = true, -- Defiled Grave (Maxus the Many)
+            [72148] = true, -- Bone Cage (Maxus the Many)
+            [72151] = true, -- Encase (Maxus the Many)
+            [72152] = true, -- Defiled Grave (Maxus the Many)
+            [72149] = true, -- Defiled Grave (Maxus the Many)
+            [70993] = true, -- Shadow Step (Maxus the Many)
+            [73868] = true, -- Teleport Ground (Maxus the Many)
+
+            [67771] = true, -- Set Absorb CD (Maxus the Many)
+            [67662] = true, -- Set Absorb CD (Maxus the Many)
+            [69522] = true, -- Set Absorb CD (Maxus the Many)
+            [67739] = true, -- Shadow Heal (Maxus the Many)
+            [72086] = true, -- Shadow Strength (Maxus the Many)
+
+            -------------------------------------
             -- DUNGEONS -------------------------
             -------------------------------------
 
@@ -12322,16 +12438,7 @@ debugAuras = {
             [58279] = true, -- Scary Summon 2 (Xivilai Fulminator / Boltaic)
 
             [31171] = true, -- Frontflip
-            --[56651] = true, -- Flame Shield (Gilrean)
-
-            -- IMPORTANT -- TEMP ONLY
-            -- IMPORTANT -- TEMP ONLY
-            -- IMPORTANT -- TEMP ONLY
-            [85086] = true, -- Boss
-            [85087] = true, -- Boss
-            -- IMPORTANT -- TEMP ONLY
-            -- IMPORTANT -- TEMP ONLY
-            -- IMPORTANT -- TEMP ONLY
+            [56651] = true, -- Flame Shield (Gilrean)
 
             [55879] = true, -- Lava Spout IdleFX
             [55783] = true, -- Slag Geyser
@@ -12346,6 +12453,12 @@ debugAuras = {
             [55786] = true, -- Slag Geyser
             [55787] = true, -- Slag Geyser
             [55788] = true, -- Slag Geyser
+            [55794] = true, -- Slag Geyser
+            [55796] = true, -- Slag Geyser
+            [55797] = true, -- Slag Geyser
+            [55802] = true, -- Slag Geyser
+            [55804] = true, -- Slag Geyser
+            [55805] = true, -- Slag Geyser
             [56068] = true, -- Slag Geyser
 
             [55513] = true, -- Flame Bolt (Valkyn Skoria)
@@ -12379,6 +12492,48 @@ debugAuras = {
             [55565] = true, -- Crackling Earth (Valkyn Skoria)
             [55572] = true, -- Heat Wave (Valkyn Skoria)
             [55756] = true, -- Burning (Valkyn Skoria)
+
+            [55426] = true, -- Magma Prison (Valkyn Skoria)
+            [55463] = true, -- Magma Prison (Valkyn Skoria)
+            [55464] = true, -- Magma Prison Track (Valkyn Skoria)
+            [55458] = true, -- Magma Prison (Valkyn Skoria)
+            [55429] = true, -- Magma Prison (Valkyn Skoria)
+            [55468] = true, -- Magma Prison (Valkyn Skoria)
+            [56296] = true, -- Magma Prison (Valkyn Skoria)
+            [56383] = true, -- Magma Prison (Valkyn Skoria)
+            [60644] = true, -- Magma Prison (Valkyn Skoria)
+            [55469] = true, -- Magma Prison (Valkyn Skoria)
+            [56297] = true, -- Magma Prison (Valkyn Skoria)
+
+            [55030] = true, -- Leap to Center
+            [55031] = true, -- Can Quake
+            [55024] = true, -- Lava Quake
+            [55032] = true, -- Lava Quake
+            [55134] = true, -- Test
+            [56549] = true, -- Lava Quake
+            [56242] = true, -- Block Spout
+            [58506] = true, -- Expl Sound
+            [55133] = true, -- Can Teleport
+            [55059] = true, -- Body of Flame
+            [55062] = true, -- Body of Flame
+            [55061] = true, -- Body of Flame
+            [55060] = true, -- Body of Flame
+            [55593] = true, -- Can Flame Shield
+            [55497] = true, -- Rock Shield
+            [55500] = true, -- Rock Shield
+            [55632] = true, -- Add Ticking
+            [55623] = true, -- Flame Atronach
+            [55622] = true, -- Rock Shield
+            [55499] = true, -- Rock Shield
+            [55498] = true, -- Flame Spit
+            [56305] = true, -- Flame Atro Add
+            [55501] = true, -- Rock Shield
+            [56239] = true, -- Rock Shield
+            [56240] = true, -- Rock Shield
+            [56241] = true, -- Rock Shield
+            [56548] = true, -- Platform Detonation
+            [56551] = true, -- Lava Quake
+            [52008] = true, -- Destroy Sigil Stone
 
             -- Frostvault
             [115316] = true, -- Weatherman
@@ -12531,7 +12686,6 @@ debugAuras = {
             [8657] = true, -- Heavily Armored Guards
             [8658] = true, -- Eagle Eye Guards
             [25873] = true, -- heal
-            --[72059] = true, -- Portal Spawn
 
             [64197] = true, -- Sanctuary
             [64687] = true, -- Silence

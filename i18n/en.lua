@@ -2311,6 +2311,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP =              "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_BURN_TP =                      "Afflicted with Flame Damage over time for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_BURN_1_SEC_TP =                "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_BURN_1_5_SEC_TP =              "Afflicted with Flame Damage every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_BURN_2_SEC_TP =                "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_FREEZE_TP =                    "Afflicted with Frost Damage over time for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_FREEZE_1_SEC_TP =              "Afflicted with Frost Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -3248,8 +3249,16 @@ local strings = {
     SI_LUIE_SKILL_FLAME_TORNADO_SHIELD_TP =              "Absorbing |cFFFFFF35|r% of damage taken for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_IGNORE_PAIN =                          "Ignore Pain",
     SI_LUIE_SKILL_IGNORE_PAIN_TP =                       "Damage taken reduced by |cFFFFFF95|r%.",
-    SI_LUIE_SKILL_CALL_STORM_ATRONACH =                  "Call Storm Atronach",
+    SI_LUIE_SKILL_MAGMA_PRISON_TP =                      "Stunned and afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_VOLCANIC_SHIELD =                      "Volcanic Shield",
+    SI_LUIE_SKILL_VOLCANIC_SHIELD_TP =                   "Absorbing damage and launching bolts of fire at all nearby enemies every |cFFFFFF1|r second while the shield holds.",
 
+    SI_LUIE_SKILL_SIGIL_OF_HASTE_TP =                    "Increase Movement Speed by |cffffff40|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SIGIL_OF_POWER_TP =                    "Increase Weapon and Spell Damage by |cFFFFFF<<1>>|r for |cFFFFFF30|r seconds.",
+    SI_LUIE_SKILL_SIGIL_OF_HEALING_TP =                  "Healing for |cFFFFFF10|r% of your Max Health every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SIGIL_OF_DEFENSE_TP =                  "Reduce damage taken by |cffffff50|r% and reflect all projectiles cast at you for |cFFFFFF<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_DEFILED_GRAVE_TP =                     "Immobilized and taking Magic Damage every |cFFFFFF1|r second.",
 }
 
 -- TODO: Switch to StringId's

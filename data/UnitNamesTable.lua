@@ -32,6 +32,11 @@ U.NPC_Ice_Barrier                       = 'Ice Barrier'
 ----------------------------------------------------------------
 
 
+----------------------------------------------------------------
+-- ARENAS ------------------------------------------------------
+----------------------------------------------------------------
+
+U.Boss_Maxus_the_Many                   = 'Maxus the Many'
 
 ----------------------------------------------------------------
 -- DUNGEONS ----------------------------------------------------
@@ -86,9 +91,11 @@ U.NPC_Flame_Colossus                    = 'Flame Colossus'
 U.Boss_Horvantud_the_Fire_Maw           = 'Horvantud the Fire Maw'
 U.Boss_Ash_Titan                        = 'Ash Titan'
 U.NPC_Air_Atronach                      = 'Air Atronach'
+U.NPC_Dremora_Hauzkyn                   = 'Dremora Hauzkyn'
 U.NPC_Fire_Ravager                      = 'Fire Ravager'
 U.NPC_Xivilai_Fulminator                = 'Xivilai Fulminator'
 U.NPC_Xivilai_Boltaic                   = 'Xivilai Boltaic'
+U.Boss_Valkyn_Skoria                    = 'Valkyn Skoria'
 
 -- Frostvault
 U.NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre'

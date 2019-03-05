@@ -2065,6 +2065,18 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
+    if E.MapDataOverride[abilityId] then
+        local index = GetCurrentMapZoneIndex()
+        if E.MapDataOverride[abilityId][index] then
+            if E.MapDataOverride[abilityId][index].icon then
+                iconName = E.MapDataOverride[abilityId][index].icon
+            end
+            if E.MapDataOverride[abilityId][index].name then
+                effectName = E.MapDataOverride[abilityId][index].name
+            end
+        end
+    end
+
     if E.EffectOverrideByName[abilityId] then
         unitName = strformat("<<t:1>>", unitName)
         if E.EffectOverrideByName[abilityId][unitName] then

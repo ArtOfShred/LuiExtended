@@ -144,6 +144,7 @@ T.Generic_Poison_1_5_Sec                = GetString(SI_LUIE_SKILL_GENERIC_POISON
 T.Generic_Poison_2_Sec                  = GetString(SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP)
 T.Generic_Burn                          = GetString(SI_LUIE_SKILL_GENERIC_BURN_TP)
 T.Generic_Burn_1_Sec                    = GetString(SI_LUIE_SKILL_GENERIC_BURN_1_SEC_TP)
+T.Generic_Burn_1_5_Sec                  = GetString(SI_LUIE_SKILL_GENERIC_BURN_1_5_SEC_TP)
 T.Generic_Burn_2_Sec                    = GetString(SI_LUIE_SKILL_GENERIC_BURN_2_SEC_TP)
 T.Generic_Freeze                        = GetString(SI_LUIE_SKILL_GENERIC_FREEZE_TP)
 T.Generic_Freeze_1_Sec                  = GetString(SI_LUIE_SKILL_GENERIC_FREEZE_1_SEC_TP)
@@ -1051,6 +1052,19 @@ T.Skill_Burrow                          = GetString(SI_LUIE_SKILL_BURROW_TP)
 T.Skill_Shadow_Wood                     = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP)
 
 ----------------------------------------------------------------
+-- ARENAS ------------------------------------------------------
+----------------------------------------------------------------
+
+-- Maelstrom Arena
+T.Skill_Sigil_of_Haste                  = GetString(SI_LUIE_SKILL_SIGIL_OF_HASTE_TP)
+T.Skill_Sigil_of_Power                  = zo_strformat(GetString(SI_LUIE_SKILL_SIGIL_OF_POWER_TP), 990)
+T.Skill_Sigil_of_Power_Veteran          = zo_strformat(GetString(SI_LUIE_SKILL_SIGIL_OF_POWER_TP), 1188)
+T.Skill_Sigil_of_Healing                = GetString(SI_LUIE_SKILL_SIGIL_OF_HEALING_TP)
+T.Skill_Sigil_of_Defense                = GetString(SI_LUIE_SKILL_SIGIL_OF_DEFENSE_TP)
+
+T.Skill_Defiled_Grave                   = GetString(SI_LUIE_SKILL_DEFILED_GRAVE_TP)
+
+----------------------------------------------------------------
 -- DUNGEONS ------------------------------------------------------
 ----------------------------------------------------------------
 
@@ -1081,6 +1095,8 @@ T.Skill_Enrage_Horvantud                = GetString(SI_LUIE_SKILL_ENRAGE_HORVANT
 T.Skill_Flame_Tsunami                   = GetString(SI_LUIE_SKILL_FLAME_TSUNAMI_TP)
 T.Skill_Flame_Tornado_Shield            = GetString(SI_LUIE_SKILL_FLAME_TORNADO_SHIELD_TP)
 T.Skill_Ignore_Pain                     = GetString(SI_LUIE_SKILL_IGNORE_PAIN_TP)
+T.Skill_Magma_Prison                    = GetString(SI_LUIE_SKILL_MAGMA_PRISON_TP)
+T.Skill_Volcanic_Shield                 = GetString(SI_LUIE_SKILL_VOLCANIC_SHIELD_TP)
 
 -- Frostvault
 T.Skill_Maim                            = GetString(SI_LUIE_SKILL_MAIM_NPC_TP)

@@ -1450,6 +1450,13 @@ E.AddNameAura = {
     ['Barbas'] = { [1] = { id = 33097 } }, -- Quest -- Vvardenfell -- Divine Restoration
 
     --------------------------------------------
+    -- ARENAS ----------------------------------
+    --------------------------------------------
+
+    -- Maelstrom Arena
+    [U.Boss_Maxus_the_Many] = { [1] = { id = 33097 } }, -- Maxus the Many
+
+    --------------------------------------------
     -- DUNGEONS --------------------------------
     --------------------------------------------
 
@@ -1500,10 +1507,12 @@ E.AddNameAura = {
     [U.NPC_Flame_Colossus] = { [1] = { id = 33097 } }, -- Flame Colossus
     [U.Boss_Horvantud_the_Fire_Maw] = { [1] = { id = 33097 } }, -- Horvantud the Fire Maw
     [U.Boss_Ash_Titan] = { [1] = { id = 33097 } }, -- Ash Titan
-    [U.NPC_Air_Atronach] = { [1] = { id = 33097, zone = 376 } }, -- Air Atronach (City of Ash II Normal)
+    [U.NPC_Air_Atronach] = { [1] = { id = 33097, zone = 376 } }, -- Air Atronach (City of Ash II)
+    [U.NPC_Dremora_Hauzkyn] = { [1] = { id = 33097, zone = 376 } }, -- Dremora Hauzkyn (City of Ash II)
     [U.NPC_Fire_Ravager] = { [1] = { id = 33097 } }, -- Fire Ravager
     [U.NPC_Xivilai_Fulminator] = { [1] = { id = 33097 } }, -- Xivilai Fulminator
     [U.NPC_Xivilai_Boltaic] = { [1] = { id = 33097 } }, -- Xivilai Fulminator
+    [U.Boss_Valkyn_Skoria] = { [1] = { id = 33097 } }, -- Valkyn Skoria
 
     -- Frostvault
     [U.NPC_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
@@ -1583,6 +1592,35 @@ E.EffectOverrideByName = {
                 },
     [16588] =   { -- Heat Wave (Fire Mage)
                     [U.Boss_Akezel] =               { icon = 'LuiExtended/media/icons/abilities/ability_templar_heat_wave.dds', name = A.Skill_Trail_of_Flames }, -- Akezel (City of Ash II)
+                },
+
+    [88947] =   { -- Lightning Grasp (Xivilai)
+                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Fulminator (City of Ash II)
+                    [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Boltaic (City of Ash II)
+                },
+    [88949] =   { -- Lightning Grasp (Xivilai)
+                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Fulminator (City of Ash II)
+                    [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Boltaic (City of Ash II)
+                },
+    [37087] =   { -- Lightning Onslaught (Battlemage)
+                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Fulminator (City of Ash II)
+                    [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Boltaic (City of Ash II)
+                },
+    [37156] =   { -- Lightning Onslaught (Battlemage)
+                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Fulminator (City of Ash II)
+                    [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Boltaic (City of Ash II)
+                },
+
+    [14524] =   { -- Shock (Storm Mage)
+                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_ranged.dds' }, -- Xivilai Fulminator (City of Ash II)
+                },
+    [29471] =   { -- Thunder Thrall (Storm Mage)
+                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Fulminator (City of Ash II)
+                    [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Boltaic (City of Ash II)
+                },
+    [29470] =   { -- Thunder Thrall (Storm Mage)
+                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Fulminator (City of Ash II)
+                    [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Boltaic (City of Ash II)
                 },
 
     [86704] =   { -- Chop (Peasant)
@@ -1813,6 +1851,8 @@ E.EffectSourceOverride = {
     -- City of Ash II
     [54133] = { pet = '' }, -- Blazing Embers (Marruz)
     [56034] = { pet = '' }, -- Ground Tremor (Horvantud the Fire Maw)
+    [55756] = { pet = '' }, -- Burning (Valkyn Skoria)
+    [56068] = { source = A.Skill_Slag_Geyser }, -- Slag Geyser (Lava Pools)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2069,6 +2109,13 @@ E.EffectHideSCT = {
     [92704] = true, -- Volcanic Debris
 
     ----------------------------
+    -- Arenas
+    ----------------------------
+
+    -- Maelstrom Arena
+    [71729] = true, -- Sigil of Defense (Sigil of Defense)
+
+    ----------------------------
     -- Dungeons
     ----------------------------
 
@@ -2099,6 +2146,12 @@ E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMB
 
     -- Elden Hollow I
     [42601] = true, -- Necrotic Circle (Canonreeve Oraneth)
+
+    -- City of Ash II
+    [56357] = true, -- Fire Swarm (Ash Titan)
+    [55756] = true, -- Burning (Valkyn Skoria)
+    [55383] = true, -- Flame Strike (Valkyn Skoria)
+    [55468] = true, -- Magma Prison (Valkyn Skoria)
 
     -- Frostvault
     [117286] = true, -- Rending Bleed (Coldsnap Goblin - Shared)
@@ -7712,7 +7765,6 @@ E.EffectOverride = {
     [8657] = { hide = true }, -- Heavily Armored Guards
     [8658] = { hide = true }, -- Eagle Eye Guards
     [25873] = { hide = true }, -- heal
-    [72059] = { hide = true }, -- Portal Spawn
 
     [64197] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_sanctuary.dds', forcedContainer = 'short', tooltip = T.Skill_AvA_Sanctuary }, -- Sanctuary Cyrodiil passive is considered unlimited duration, but the effect is only while the player is in the area. Should show up under short buffs.
     [52291] = { hide = true }, -- Chain Pull Range Suppression
@@ -8859,6 +8911,68 @@ E.EffectOverride = {
     [105912] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_slime_alt.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_50 }, -- Pustulant Eruption (Yaghra Nightmare)
     [105893] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_gtaoe.dds', name = A.Skill_Pustulant_Eruption }, -- Pustulant Film (Yaghra Nightmare)
 
+
+    ----------------------------------------------------------------
+    -- ARENA    ----------------------------------------------------
+    ----------------------------------------------------------------
+
+    -- Maelstrom Arena (Shared)
+    [43882] = { hide = true }, -- CON_Portal 3 Seconds
+    [72059] = { hide = true }, -- Portal Spawn
+
+    [71957] = { hide = true }, -- Sigil of Speed
+    [67257] = { hide = true }, -- Speed Used
+    [71947] = { hide = true }, -- Sigil of Health
+    [67227] = { hide = true }, -- Healing Used
+    [71900] = { hide = true }, -- Sigil of Power
+    [71912] = { hide = true }, -- Sigil of Power
+    [67210] = { hide = true }, -- Power Used
+    [71955] = { hide = true }, -- Sigil of Defense
+    [67239] = { hide = true }, -- Defense Used
+
+    [67240] = { tooltip = T.Skill_Sigil_of_Defense }, -- Sigil of Defense
+    [67253] = { tooltip = T.Skill_Sigil_of_Haste }, -- Sigil of Haste
+    [67209] = { tooltip = T.Skill_Sigil_of_Power }, -- Sigil of Power
+    [66920] = { tooltip = T.Skill_Sigil_of_Healing }, -- Sigil of Healing
+    [66921] = { icon = 'esoui/art/icons/sigil_healing_001.dds', name = A.Skill_Sigil_of_Healing }, -- Healing Aura (Sigil of Healing)
+
+    [72471] = { icon = '', name = '' }, -- DUN-MA Grant Resources (End of Round Heal & Resource Restore)
+    [72472] = { icon = '', name = '' }, -- DUN-MA Grant Resources (End of Round Heal & Resource Restore)
+    [72474] = { icon = '', name = '' }, -- DUN-MA Grant Resources (End of Round Heal & Resource Restore)
+
+    [70928] = { hide = true }, -- Is Essential Mob
+    [73924] = { hide = true }, -- DUN-MA Increased Gold
+    [72433] = { hide = true }, -- FNH Portal Spawn
+
+    -- Stage 1 - Vale of the Surreal
+    [70885] = { hide = true }, -- Miasma
+
+    [68195] = { hide = true }, -- Necrotic Orb (Necrotic Orb)
+    [68197] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_necrotic_essence.dds', groundLabel = true, tooltip = T.Generic_AOE_Frost_1_Sec }, -- Necrotic Essence (Necrotic Orb)
+    [68198] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_necrotic_essence.dds' }, -- Necrotic Explosion (Necrotic Orb)
+
+    [44622] = { hide = true }, -- Break Free (Clones)
+
+    [67765] = { icon = 'esoui/art/icons/ability_mage_025.dds' }, -- Multiply (Maxus the Many)
+    [67656] = { icon = 'esoui/art/icons/ability_mage_025.dds' }, -- Multiply (Maxus the Many)
+    [69515] = { icon = 'esoui/art/icons/ability_mage_025.dds' }, -- Multiply (Maxus the Many)
+
+    [67691] = { icon = 'esoui/art/icons/ability_mage_044.dds' }, -- Reunite (Maxus the Many)
+    [67683] = { hide = true }, -- Absorb Clones (Maxus the Many)
+    [67694] = { hide = true }, -- Reunite (Maxus the Many)
+    [67690] = { hide = true }, -- Set Clone CD (Maxus the Many)
+
+    [70891] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_entropic_bolt.dds' }, -- Entropic Bolt (Maxus the Many)
+    [70892] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds', name = A.Skill_Defiled_Grave }, -- Bone Cage (Maxus the Many)
+    [70893] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds', tooltip = T.Skill_Defiled_Grave, groundLabel = true, duration = 0, hideGround = true }, -- Defiled Grave (Maxus the Many)
+    [70901] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds', tooltip = T.Skill_Defiled_Grave, groundLabel = true }, -- Defiled Grave (Maxus the Many)
+
+    [72148] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds', name = A.Skill_Defiled_Grave }, -- Bone Cage (Maxus the Many)
+    [72152] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds', tooltip = T.Skill_Defiled_Grave, groundLabel = true, duration = 0, hideGround = true }, -- Defiled Grave (Maxus the Many)
+    [72149] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds', tooltip = T.Skill_Defiled_Grave, groundLabel = true }, -- Defiled Grave (Maxus the Many)
+
+    [72086] = { hide = true }, -- Shadow Strength (Maxus the Many)
+
     ----------------------------------------------------------------
     -- DUNGEONS    -------------------------------------------------
     ----------------------------------------------------------------
@@ -9118,14 +9232,14 @@ E.EffectOverride = {
     [49137] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Oblivion_Gate }, -- Oblivion Portal
 
     [34788] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds' }, -- Quick Dark (Razor Master Erthas)
-    [34805] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_fire_generic.dds', name = A.Skill_Blazing_Embers }, -- Release Flame (Razor Master Erthas)
+    [34805] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_blazing_embers.dds', name = A.Skill_Blazing_Embers }, -- Release Flame (Razor Master Erthas)
     [34901] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_blazing_arrow.dds' }, -- Burning Embers (Razor Master Erthas)
     [34948] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_blazing_arrow.dds', name = A.Skill_Blazing_Arrow, unbreakable = 1, tooltip = T.Skill_Blazing_Arrow, internalStack = 0 }, -- Burning Embers (Razor Master Erthas)
     [34949] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_blazing_arrow.dds', name = A.Skill_Blazing_Arrow }, -- Burning Embers (Razor Master Erthas)
     [34799] = { hide = true }, -- Lava Pitch (Release Flame)
-    [34820] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_fire_generic.dds', name = A.Skill_Blazing_Embers }, -- Lava Pitch (Release Flame)
-    [34953] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_fire_generic.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Blazing_Embers, duration = 20 }, -- Blazing Embers (Release Flame)
-    [34951] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_fire_generic.dds' }, -- Blazing Embers (Release Flame)
+    [34820] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_blazing_embers.dds', name = A.Skill_Blazing_Embers }, -- Lava Pitch (Release Flame)
+    [34953] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_blazing_embers.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Blazing_Embers, duration = 20 }, -- Blazing Embers (Release Flame)
+    [34951] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_blazing_embers.dds' }, -- Blazing Embers (Release Flame)
     [34623] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_daedra_fa_red.dds', hide = true }, -- Summon Flame Atronach (Razor Master Erthas)
     [35379] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds' }, -- Flare (Flame Atronach)
     [34780] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_daedra_fa_red.dds', name = A.Skill_Summon_Flame_Atronach, hide = true }, -- Summon Flame Atranach (Razor Master Erthas)
@@ -9137,9 +9251,9 @@ E.EffectOverride = {
     [53994] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds' }, -- Focused Healing (Akezel)
     [53996] = { hide = true }, -- Health Boon (Akezel)
     [53988] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds' }, -- Quick Draw (Marruz)
-    [54021] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_fire_generic.dds', name = A.Skill_Blazing_Embers }, -- Release Flame (Marruz)
-    [54139] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_fire_generic.dds', unbreakable = 1, tooltip = T.Generic_Burn_1_Sec }, -- Blazing Embers (Marruz)
-    [54133] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_fire_generic.dds' }, -- Blazing Embers (Marruz)
+    [54021] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_blazing_embers.dds', name = A.Skill_Blazing_Embers }, -- Release Flame (Marruz)
+    [54139] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_blazing_embers.dds', unbreakable = 1, tooltip = T.Generic_Burn_1_Sec }, -- Blazing Embers (Marruz)
+    [54133] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_blazing_embers.dds' }, -- Blazing Embers (Marruz)
     [53976] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_blazing_arrow.dds' }, -- Blazing Arrow (Marruz)
     [53978] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_blazing_arrow.dds', name = A.Skill_Blazing_Arrow, tooltip = T.Generic_Burn_1_Sec }, -- Blazing Arrow (Marruz)
     [53977] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_blazing_arrow.dds', name = A.Skill_Blazing_Arrow }, -- Blazing Arrow (Marruz)
@@ -9295,8 +9409,8 @@ E.EffectOverride = {
     [54790] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_swipe.dds' }, -- Swipe (Air Atronach)
     [54791] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_swipe.dds' }, -- Swipe (Air Atronach)
 
-    [58280] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_call_storm_atronach.dds', name = A.Skill_Call_Storm_Atronach }, -- Scary Summon 1 (Xivilai Fulminator / Boltaic)
-    [56601] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_call_storm_atronach.dds', name = A.Skill_Call_Storm_Atronach }, -- Scary Summon 2 (Xivilai Fulminator / Boltaic)
+    [58280] = { icon = 'esoui/art/icons/ability_sorcerer_storm_atronach.dds', name = A.Skill_Summon_Storm_Atronach }, -- Scary Summon 1 (Xivilai Fulminator / Boltaic)
+    [56601] = { icon = 'esoui/art/icons/ability_sorcerer_storm_atronach.dds', name = A.Skill_Summon_Storm_Atronach }, -- Scary Summon 2 (Xivilai Fulminator / Boltaic)
 
     [56651] = { hide = true }, -- Flame Shield (Gilrean)
 
@@ -9330,7 +9444,46 @@ E.EffectOverride = {
     [55755] = { hide = true }, -- Call the Flames (Valkyn Skoria)
 
     [55572] = { hide = true }, -- Heat Wave (Fire Stab)
-    [55756] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_generic.dds', name = A.Skill_Call_the_Flames, tooltip = T.Generic_Burn_1_5_Sec, unbreakable = 1 }, -- Burning (Fire Stab)
+    [55514] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_call_the_flames.dds' }, -- Call the Flames (Valkyn Skoria)
+    [55756] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_call_the_flames.dds', name = A.Skill_Call_the_Flames, tooltip = T.Generic_Burn_1_5_Sec, unbreakable = 1 }, -- Burning (Fire Stab)
+
+    [55426] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_magma_prison.dds' }, -- Magma Prison (Valkyn Skoria)
+    [55463] = { hide = true }, -- Magma Prison (Valkyn Skoria)
+    [55464] = { hide = true }, -- Magma Prison Track (Valkyn Skoria)
+    [55458] = { hide = true }, -- Magma Prison (Valkyn Skoria)
+    [55429] = { hide = true }, -- Magma Prison (Valkyn Skoria)
+    [55468] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_magma_prison.dds', hide = true }, -- Magma Prison (Valkyn Skoria)
+    [56296] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_magma_prison.dds', tooltip = T.Skill_Magma_Prison }, -- Magma Prison (Valkyn Skoria)
+    [56383] = { hide = true }, -- Magma Prison (Valkyn Skoria)
+    [60644] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_magma_prison.dds' }, -- Magma Prison (Valkyn Skoria)
+    [55469] = { hide = true }, -- Magma Prison (Valkyn Skoria)
+    [56297] = { hide = true }, -- Magma Prison (Valkyn Skoria)
+
+    [55031] = { hide = true }, -- Can Quake (Valkyn Skoria)
+    [55024] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_platform_detonation.dds', name = A.Skill_Platform_Detonation }, -- Lava Quake (Valkyn Skoria)
+    [55032] = { hide = true }, -- Lava Quake (Valkyn Skoria)
+    [55134] = { hide = true }, -- Test (Valkyn Skoria)
+    [56549] = { hide = true }, -- Lava Quake (Valkyn Skoria)
+    [56242] = { hide = true }, -- Block Spout (Valkyn Skoria)
+    [58506] = { hide = true }, -- Expl Sound (Valkyn Skoria)
+    [55133] = { hide = true }, -- Can Teleport (Valkyn Skoria)
+    [55593] = { hide = true }, -- Can Flame Shield (Valkyn Skoria)
+
+    [55497] = { hide = true }, -- Rock Shield (Valkyn Skoria)
+    [55500] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_volcanic_shield.dds', name = A.Skill_Volcanic_Shield, tooltip = T.Skill_Volcanic_Shield, duration = 0 }, -- Rock Shield (Valkyn Skoria)
+    [55632] = { hide = true }, -- Add Ticking (Valkyn Skoria)
+
+    [55622] = { hide = true }, -- Rock Shield (Flame Atronach)
+    [55499] = { hide = true }, -- Rock Shield (Valkyn Skoria)
+    [55498] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_ranged.dds' }, -- Flame Spit (Valkyn Skoria)
+
+    [55501] =  { hide = true }, -- Rock Shield (Valkyn Skoria)
+    [56239] =  { hide = true }, -- Rock Shield (Valkyn Skoria)
+    [56240] =  { hide = true }, -- Rock Shield (Valkyn Skoria)
+    [56241] =  { hide = true }, -- Rock Shield (Valkyn Skoria)
+
+    [56548] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_platform_detonation.dds' }, -- Platform Detonation (Valkyn Skoria)
+    [56551] = { hide = true, name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Lava Quake (Valkyn Skoria)
 
     -- Frostvault
     [117286] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', hide = true }, -- Rending Bleed (Coldsnap Goblin - Shared)
@@ -9877,6 +10030,7 @@ E.FakeStagger = {
     [56264] = { duration = 500 }, -- Stagger (Horvantud the Fire Maw)
     [54221] = { duration = 500 }, -- Monstrous Cleave (Ash Titan)
     [54859] = { duration = 500 }, -- Stagger (Ash Titan)
+    [56551] = { duration = 433 }, -- Lava Quake (Valkyn Skoria)
 
     -- Frostvault
     [117291] = { duration = 433 }, -- Stagger (Coldsnap Ogre)
@@ -10091,6 +10245,14 @@ E.AddGroundDamageAura = {
     [91094] = { duration = 650, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 1 }, -- Split Bolt (Dwemer Arquebus)
     [91095] = { duration = 650, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 1 }, -- Split Bolt (Dwemer Arquebus)
     [91096] = { duration = 650, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 1 }, -- Split Bolt (Dwemer Arquebus)
+
+    ------------------
+    -- ARENAS --------
+    ------------------
+
+    [68197] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Necrotic Essence (Necrotic Orb)
+    [70901] = { duration = 1200, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Defiled Grave (Maxus the Many)
+    [72149] = { duration = 1200, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Defiled Grave (Maxus the Many)
 
     ------------------
     -- DUNGEONS ------

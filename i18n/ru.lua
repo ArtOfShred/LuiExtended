@@ -2310,6 +2310,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_POISON_2_SEC_TP =              "Подвержен урону от Болезни каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_BURN_TP =                      "Подвержен урону от Огня на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_BURN_1_SEC_TP =                "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_BURN_1_5_SEC_TP =              "Afflicted with Flame Damage every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_BURN_2_SEC_TP =                "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_FREEZE_TP =                    "Подвержен урону от Мороза на |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_GENERIC_FREEZE_1_SEC_TP =              "Afflicted with Frost Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",

@@ -1110,6 +1110,13 @@ A.Skill_Shadow_Wood                 = GetString(SI_LUIE_SKILL_SHADOW_WOOD)
 A.Skill_Pustulant_Eruption          = 105867
 
 -- ---------------------------------------------------
+-- ARENA EFFECTS -----------------------------------
+-- ---------------------------------------------------
+
+A.Skill_Sigil_of_Healing            = 66920
+A.Skill_Defiled_Grave               = 70893
+
+-- ---------------------------------------------------
 -- DUNGEON EFFECTS -----------------------------------
 -- ---------------------------------------------------
 
@@ -1155,9 +1162,12 @@ A.Skill_Enraged_Fortitude           = GetString(SI_LUIE_SKILL_ENRAGED_FORTITUDE)
 A.Skill_Wing_Gust                   = 26554
 A.Skill_Flame_Tsunami               = GetString(SI_LUIE_SKILL_FLAME_TSUNAMI)
 A.Skill_Ignore_Pain                 = GetString(SI_LUIE_SKILL_IGNORE_PAIN)
-A.Skill_Call_Storm_Atronach         = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACH)
+A.Skill_Summon_Storm_Atronach       = 23634
 A.Skill_Flame_Bolt                  = 55513
 A.Skill_Call_the_Flames             = 55514
+A.Skill_Slag_Geyser                 = 56068
+A.Skill_Platform_Detonation         = 56548
+A.Skill_Volcanic_Shield             = GetString(SI_LUIE_SKILL_VOLCANIC_SHIELD)
 
 -- Frostvault
 A.Skill_Rending_Bleed               = 117286

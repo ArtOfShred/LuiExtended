@@ -689,6 +689,19 @@ LUIE.AlertTable = {
     [105867] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Pustulant Explosion (Yaghra Nightmare)
 
     --------------------------------------------------
+    -- ARENAS ----------------------------------------
+    --------------------------------------------------
+
+    -- Maelstrom Arena
+
+    [70892] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.Boss_Maxus_the_Many}, -- Bone Cage (Maxus the Many)
+    [72148] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.Boss_Maxus_the_Many}, -- Bone Cage (Maxus the Many)
+    [67765] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Maxus_the_Many }, -- Multiply (Maxus the Many)
+    [67656] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Maxus_the_Many }, -- Multiply (Maxus the Many)
+    [69515] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Maxus_the_Many }, -- Multiply (Maxus the Many)
+    [67691] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Maxus_the_Many }, -- Reunite (Maxus the Many)
+
+    --------------------------------------------------
     -- DUNGEONS --------------------------------------
     --------------------------------------------------
 
@@ -819,6 +832,10 @@ LUIE.AlertTable = {
 
     [55513] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Flame Bolt (Valkyn Skoria)
     [55387] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Meteor Strike (Valkyn Skoria)
+    [55514] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Valkyn_Skoria }, -- Call the Flames (Valkyn Skoria)
+    [55426] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Magma Prison (Valkyn Skoria)
+    [55024] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Valkyn_Skoria }, -- Lava Quake (Valkyn Skoria)
+    [55500] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true, refire = 100 }, -- Rock Shield (Valkyn Skoria)
 
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)
