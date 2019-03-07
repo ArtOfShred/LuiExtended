@@ -841,7 +841,7 @@ LUIE.AlertTable = {
     [46732] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Sonolia_the_Matriarch, refire = 1000 }, -- Sonic Scream (Sonolia the Matriarch)
 
     [26370] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Slash (Valaran Stormcaller)
-    [26628] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Enervating Bolt (Valaran Stormcaller)
+    [26628] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Enervating Bolt (Valaran Stormcaller)
     [26592] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.Boss_Valaran_Stormcaller }, -- Lightning Avatar (Valaran Stormcaller)
 
     [6106] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Yalorasse_the_Speaker }, -- Lightning Storm (Yalorasse the Speaker)
@@ -852,7 +852,7 @@ LUIE.AlertTable = {
 
     [27039] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Commodore_Ohmanil, refire = 600 }, -- Ethereal Chain (Commodore Ohmanil)
 
-    [27596] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Lightning Strike (Stormreeve Neider)
+    [27596] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Lightning Strike (Stormreeve Neider)
     [26741] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Swift Wind (Stormreeve Neider)
     [26712] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Stormreeve_Neidir }, -- Gust of Wind (Stormreeve Neider)
 

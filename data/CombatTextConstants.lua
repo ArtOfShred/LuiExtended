@@ -108,6 +108,7 @@ LUIE.CombatTextConstants = {
         DODGE                       = "LUIE_LUIE_CombatText_Alert_TYPE_DODGE",
         AVOID                       = "LUIE_LUIE_CombatText_Alert_TYPE_AVOID",
         INTERRUPT                   = "LUIE_LUIE_CombatText_Alert_TYPE_INTERRUPT",
+		UNMIT						= "LUIE_LUIE_CombatText_Alert_TYPE_UNMIT",
         CLEANSE                     = "LUIE_LUIE_CombatText_Alert_TYPE_CLEANSE",
         EXPLOIT                     = "LUIE_LUIE_CombatText_Alert_TYPE_EXPLOIT",
         EXECUTE                     = "LUIE_LUIE_CombatText_Alert_TYPE_EXECUTE",

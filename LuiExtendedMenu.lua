@@ -11793,8 +11793,8 @@ function LUIE_CreateSettings()
             {
                 -- Interrupt Enable
                 type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_INTERRUPT_TP),
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_UNMIT_TP),
                 getFunc = function() return LUIE.CombatText.SV.toggles.showAlertInterrupt end,
                 setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertInterrupt = v end,
                 disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
@@ -11819,6 +11819,45 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterruptB = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertInterruptB[1], g=LUIE.CombatText.D.colors.alertInterruptB[2], b=LUIE.CombatText.D.colors.alertInterruptB[3]}
             },
+			
+			{
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT),
+                width = "full",
+            },
+			
+			
+			{
+                -- Unmit Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_UNMIT_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.showAlertUnmit end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertUnmit = v end,
+                disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                default = LUIE.CombatText.D.toggles.showAlertUnmit,
+            },
+            {
+                -- Unmit Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_UNMIT_TP),
+                getFunc = function() return LUIE.CombatText.SV.formats.alertUnmit end,
+                setFunc = function(v) LUIE.CombatText.SV.formats.alertUnmit = v end,
+                isMultiline = false,
+                default = LUIE.CombatText.D.formats.alertUnmit,
+            },
+            {
+                -- Unmit Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_UNMIT_TP),
+                getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertUnmit) end,
+                setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertUnmit = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
+                default = {r=LUIE.CombatText.D.colors.alertUnmit[1], g=LUIE.CombatText.D.colors.alertUnmit[2], b=LUIE.CombatText.D.colors.alertUnmit[3]}
+            },
+			
+			
             {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER),

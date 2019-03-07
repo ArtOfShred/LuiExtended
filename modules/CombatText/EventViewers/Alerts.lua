@@ -139,6 +139,18 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
         local stringPart2 = mitigationSuffix
         local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertAvoid)
         text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
+	-- UNMIT
+	elseif (alertType == alertTypes.UNMIT) then
+		local color = CT.AlertColors.alertColorUnmit
+		size = S.fontSizes.alert
+		local stringPart1 = self:FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
+        local stringPart2 = mitigationSuffix
+        local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertUnmit)
+		if S.toggles.mitigationType == "Single Line" then
+			text = zo_strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
+		else
+			text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
+		end
     -- POWER
     elseif (alertType == alertTypes.POWER) then
         local color = CT.AlertColors.alertColorPower
