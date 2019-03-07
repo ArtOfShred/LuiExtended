@@ -1098,6 +1098,11 @@ T.Skill_Ignore_Pain                     = GetString(SI_LUIE_SKILL_IGNORE_PAIN_TP
 T.Skill_Magma_Prison                    = GetString(SI_LUIE_SKILL_MAGMA_PRISON_TP)
 T.Skill_Volcanic_Shield                 = GetString(SI_LUIE_SKILL_VOLCANIC_SHIELD_TP)
 
+-- Tempest Island
+T.Skill_Backstab                        = GetString(SI_LUIE_SKILL_BACKSTAB_TP)
+T.Skill_Enervating_Stone                = GetString(SI_LUIE_SKILL_ENERVATING_STONE_TP)
+T.Skill_Ethereal_Chain                  = GetString(SI_LUIE_SKILL_ETHEREAL_CHAIN_TP)
+
 -- Frostvault
 T.Skill_Maim                            = GetString(SI_LUIE_SKILL_MAIM_NPC_TP)
 

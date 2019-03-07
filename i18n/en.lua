@@ -3259,6 +3259,13 @@ local strings = {
     SI_LUIE_SKILL_SIGIL_OF_DEFENSE_TP =                  "Reduce damage taken by |cffffff50|r% and reflect all projectiles cast at you for |cFFFFFF<<1>>|r seconds.",
 
     SI_LUIE_SKILL_DEFILED_GRAVE_TP =                     "Immobilized and taking Magic Damage every |cFFFFFF1|r second.",
+
+    SI_LUIE_SKILL_SUDDEN_STORM =                         "Sudden Storm",
+    SI_LUIE_SKILL_BACKSTAB_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_CALL_STORM_ATRONACH =                  "Call Storm Atronachs",
+
+    SI_LUIE_SKILL_ENERVATING_STONE_TP =                  "Stunned and taking Shock Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_ETHEREAL_CHAIN_TP =                    "Levitated and afflicted with Magic Damage every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds.",
 }
 
 -- TODO: Switch to StringId's

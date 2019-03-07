@@ -1169,6 +1169,16 @@ A.Skill_Slag_Geyser                 = 56068
 A.Skill_Platform_Detonation         = 56548
 A.Skill_Volcanic_Shield             = GetString(SI_LUIE_SKILL_VOLCANIC_SHIELD)
 
+-- Tempest Island
+A.Skill_Sonic_Scream                = 46732
+A.Skill_Sudden_Storm                = GetString(SI_LUIE_SKILL_SUDDEN_STORM)
+A.Skill_Shadowstep                  = 18190
+A.Skill_Poisoned_Blade              = 29063
+A.Skill_Call_Storm_Atronach         = GetString(SI_LUIE_SKILL_CALL_STORM_ATRONACH)
+A.Skill_Stormfist                   = 80520
+A.Skill_Wind_Charge                 = 26746
+A.Skill_Twister                     = 26514
+
 -- Frostvault
 A.Skill_Rending_Bleed               = 117286
 A.Skill_Leaping_Crush               = 109801

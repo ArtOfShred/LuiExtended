@@ -12535,6 +12535,101 @@ debugAuras = {
             [56551] = true, -- Lava Quake
             [52008] = true, -- Destroy Sigil Stone
 
+            -- Tempest Island
+            [85791] = true, -- Teleport
+            [28012] = true, -- Fireball
+            [43049] = true, -- Fireball
+            [23542] = true, -- Block
+
+            [46732] = true, -- Sonic Scream
+            [46738] = true, -- Piercing Shriek
+            [46737] = true, -- Piercing Shriek
+
+            [26653] = true, -- Introdummy
+            [26313] = true, -- Lightning Hand
+            [26674] = true, -- Introcloud
+            [31097] = true, -- Dummy
+            [26676] = true, -- IntroKB
+            [26678] = true, -- Staggering Roar
+
+            [42948] = true, -- VF_Boss1_Twisted_Steel (Sudden Storm)
+            [26604] = true, -- Storm (Sudden Storm)
+            [26619] = true, -- Shock (Sudden Storm)
+            [46110] = true, -- Dummy (Sudden Storm)
+
+            [26332] = true, -- Slash (Valaran Stormcaller)
+            [26370] = true, -- Crushing Blow (Valaran Stormcaller)
+            [26371] = true, -- Crushing Blow (Valaran Stormcaller)
+            [26372] = true, -- Crushing Blow (Valaran Stormcaller)
+            [26628] = true, -- Enervating Bolt (Valaran Stormcaller)
+            [26631] = true, -- Enervating Bolt (Valaran Stormcaller)
+            [26592] = true, -- Lightning Avatar (Valaran Stormcaller)
+
+            [28391] = true, -- Q4538 Stoen Explosion (Conduit Stone)
+            [32451] = true, -- Fire Backlash (Conduit Stone)
+
+            [5696] = true, -- Backstab (Yalorasse the Speaker)
+            [5699] = true, -- Backstab (Yalorasse the Speaker)
+            [5698] = true, -- Backstab (Yalorasse the Speaker)
+            [5697] = true, -- Backstab (Yalorasse the Speaker)
+
+            [6106] = true, -- Lightning Storm (Yalorasse the Speaker)
+            [6108] = true, -- Lightning Storm (Yalorasse the Speaker)
+            [6107] = true, -- Lightning Storm (Yalorasse the Speaker)
+
+            [29063] = true, -- Poisoned Blade (Yalorasse the Speaker)
+            [29064] = true, -- Crimson Web Poison (Yalorasse the Speaker)
+
+            [26743] = true, -- Left Cross (Stormfist)
+            [26714] = true, -- Skyward Slam (Stormfist)
+            [26716] = true, -- Skyward Slam (Stormfist)
+            [26715] = true, -- Skyward Slam (Stormfist)
+            [27263] = true, -- Skyward Slam (Stormfist)
+
+            [26748] = true, -- Enervating Stone (Stormfist)
+            [46122] = true, -- Enervating Stone (Stormfist)
+            [33212] = true, -- Enervating Stone (Stormfist)
+            [26752] = true, -- Enervating Stone (Stormfist)
+            [26938] = true, -- Enervating Stone (Stormfist)
+
+            [26833] = true, -- Summon Storm Atronach (Stormfist)
+            [26837] = true, -- Summon Storm Atronach (Stormfist)
+            [26849] = true, -- Summon Storm Atronach (Stormfist)
+            [26839] = true, -- Summon Storm Atronach (Stormfist)
+            [26850] = true, -- Summon Storm Atronach (Stormfist)
+            [26854] = true, -- Summon Storm Atronach (Stormfist)
+            [26853] = true, -- Summon Storm Atronach (Stormfist)
+            [26851] = true, -- Summon Storm Atronach (Stormfist)
+            [26836] = true, -- Summon Storm Atronach (Stormfist)
+            [26838] = true, -- Summon Storm Atronach (Stormfist)
+
+            [26790] = true, -- Unstable Explosion (Stormfist)
+            [26791] = true, -- Dummy (Stormfist)
+
+            [27039] = true, -- Ethereal Chain (Commodore Ohmanil)
+            [27058] = true, -- Ethereal Chain (Commodore Ohmanil)
+
+            [27624] = true, -- Wind Storm
+            [29144] = true, -- Q4538-Death From Above
+            [46106] = true, -- DUN_TI3 Neider Intro Self FX
+
+            [26534] = true, -- Sparking Strike
+            [27596] = true, -- Lightning Strike
+
+            [26741] = true, -- Swift Wind
+            [26746] = true, -- Wind Charge
+            [26759] = true, -- Swift Wind
+
+            [26712] = true, -- Gust of Wind
+            [46810] = true, -- Gust of Wind
+            [46809] = true, -- Gust of Wind
+
+            [26514] = true, -- Twister (Twister)
+            [11184] = true, -- Windy Movement (Twister)
+            [26517] = true, -- Electrical Shock (Twister)
+            [26515] = true, -- Been Hit (Twister)
+            [46808] = true, -- Stagger (Twister)
+
             -- Frostvault
             [115316] = true, -- Weatherman
 

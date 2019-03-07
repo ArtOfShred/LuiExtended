@@ -1514,6 +1514,15 @@ E.AddNameAura = {
     [U.NPC_Xivilai_Boltaic] = { [1] = { id = 33097 } }, -- Xivilai Fulminator
     [U.Boss_Valkyn_Skoria] = { [1] = { id = 33097 } }, -- Valkyn Skoria
 
+    -- Tempest Island
+    [U.Boss_Sonolia_the_Matriarch] = { [1] = { id = 33097 } }, -- Sonolia the Matriarch
+    [U.Boss_Valaran_Stormcaller] = { [1] = { id = 33097 } }, -- Valaran Stormcaller
+    [U.NPC_Lightning_Avatar] = { [1] = { id = 33097 } }, -- Lightning Avatar
+    [U.Boss_Yalorasse_the_Speaker] = { [1] = { id = 33097 } }, -- Yalorasse the Speaker
+    [U.Boss_Stormfist] = { [1] = { id = 33097 } }, -- Stormfist
+    [U.Boss_Commodore_Ohmanil] = { [1] = { id = 33097 } }, -- Commodore Ohmanil
+    [U.Boss_Stormreeve_Neidir] = { [1] = { id = 33097 } }, -- Stormreeve Neidir
+
     -- Frostvault
     [U.NPC_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
     [U.Boss_Icestalker] = { [1] = { id = 33097 } }, -- Icestalker
@@ -2121,6 +2130,9 @@ E.EffectHideSCT = {
 
     -- Elden Hollow II
     [34378] = true, -- Flame Geyser (Dubroze the Infestor)
+
+    -- Tempest Island
+    [6107] = true, -- Lightning Storm (Yalorasse the Speaker)
 
 }
 
@@ -9485,6 +9497,79 @@ E.EffectOverride = {
     [56548] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_platform_detonation.dds' }, -- Platform Detonation (Valkyn Skoria)
     [56551] = { hide = true, name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Lava Quake (Valkyn Skoria)
 
+    -- Tempest Island
+    [28012] = { hide = true }, -- Fireball
+    [43049] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds' }, -- Fireball (Lamia Curare)
+
+    [46732] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_sonic_scream.dds' }, -- Sonic Scream (Sonolia the Matriarch)
+    [46738] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_sonic_scream.dds', name = A.Skill_Sonic_Scream }, -- Piercing Shriek (Sonolia the Matriarch)
+    [46737] = { name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Piercing Shriek (Sonolia the Matriarch)
+
+    [26676] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = A.Skill_Lightning_Strike, tooltip = T.Generic_Stun, unbreakable = 1 }, -- IntroKB (Valaran Stormcaller)
+    [26678] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = A.Skill_Lightning_Strike }, -- Staggering Roar (Valaran Stormcaller)
+
+    [26604] = { hide = true }, -- Storm (Sudden Storm)
+    [26619] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_thunderstrikes.dds', name = A.Skill_Sudden_Storm, groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Shock (Sudden Storm)
+
+    [26332] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Slash (Valaran Stormcaller)
+    [26370] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds' }, -- Crushing Blow (Valaran Stormcaller)
+    [26371] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', hide = true }, -- Crushing Blow (Valaran Stormcaller)
+    [26372] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Crushing Blow (Valaran Stormcaller)
+    [26628] = { icon = 'esoui/art/icons/ability_mage_043.dds', tooltip = T.Generic_Stun }, -- Enervating Bolt
+    [26631] = { icon = 'esoui/art/icons/ability_mage_043.dds' }, -- Enervating Bolt
+    [26592] = { icon = 'esoui/art/icons/ability_mage_066.dds' }, -- Lightning Avatar (Valaran Stormcaller)
+
+    [28391] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback.dds', name = A.Skill_Feedback, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Q4538 Stoen Explosion (Conduit Stone)
+    [32451] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback.dds', name = A.Skill_Feedback }, -- Fire Backlash (Conduit Stone)
+
+    [5699] = { icon = 'esoui/art/icons/ability_rogue_038.dds', name = A.Skill_Shadowstep }, -- Backstab (Yalorasse the Speaker)
+    [5698] = { icon = 'esoui/art/icons/ability_rogue_038.dds', name = A.Skill_Shadowstep, tooltip = T.Skill_Backstab }, -- Backstab (Yalorasse the Speaker)
+    [5697] = { icon = 'esoui/art/icons/ability_rogue_038.dds', name = A.Skill_Shadowstep }, -- Backstab (Yalorasse the Speaker)
+    [6106] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_storm.dds' }, -- Lightning Storm (Yalorasse the Speaker)
+    [6108] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_storm.dds', groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Lightning Storm (Yalorasse the Speaker)
+    [6107] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_storm.dds', tooltip = T.Generic_Snare_35 }, -- Lightning Storm (Yalorasse the Speaker)
+    [29063] = { icon = 'esoui/art/icons/ability_rogue_016.dds', hide = true }, -- Poisoned Blade (Yalorasse the Speaker)
+    [29064] = { icon = 'esoui/art/icons/ability_rogue_016.dds', name = A.Skill_Poisoned_Blade, tooltip = T.Generic_Poison_1_5_Sec, stack = 0 }, -- Crimson Web Poison (Yalorasse the Speaker)
+
+    [26743] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_bash.dds' }, -- Left Cross (Stormfist)
+
+    [26714] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_skyward_slam.dds' }, -- Skyward Slam (Stormfist)
+    [26716] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_skyward_slam.dds', tooltip = T.Generic_Knockback, unbreakable = 1 }, -- Skyward Slam (Stormfist)
+    [26715] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_skyward_slam.dds' }, -- Skyward Slam (Stormfist)
+    [27263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds', hide = true }, -- Skyward Slam (Stormfist)
+
+    [26748] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds' }, -- Enervating Stone (Stormfist)
+    [46122] = { hide = true }, -- Enervating Stone (Stormfist)
+    [26752] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', groundLabel = true, tooltip = T.Skill_Enervating_Stone }, -- Enervating Stone (Stormfist)
+    [26938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', tooltip = T.Generic_Stun_No_Dur, hideGround = true, groundLabel = true }, -- Enervating Stone (Stormfist)
+
+    [26833] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_call_storm_atronach.dds', name = A.Skill_Call_Storm_Atronach }, -- Summon Storm Atronach (Stormfist)
+    [26851] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_call_storm_atronach.dds', name = A.Skill_Call_Storm_Atronach, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Stun }, -- Summon Storm Atronach (Stormfist)
+    [26836] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_call_storm_atronach.dds', name = A.Skill_Call_Storm_Atronach, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Stun }, -- Summon Storm Atronach (Stormfist)
+    [26838] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_call_storm_atronach.dds', name = A.Skill_Call_Storm_Atronach }, -- Summon Storm Atronach (Stormfist)
+
+    [26790] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_unstable_explosion.dds' }, -- Unstable Explosion (Stormfist)
+
+    [27039] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds', tooltip = T.Skill_Ethereal_Chain }, -- Ethereal Chain (Commodore Ohmanil)
+    [27058] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds' }, -- Ethereal Chain (Commodore Ohmanil)
+
+    [27624] = { hide = true }, -- Wind Storm
+
+    [26534] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_ranged.dds', hide = true }, -- Sparking Strike (Stormreeve Neider)
+    [27596] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Lightning Strike (Stormreeve Neider)
+
+    [26741] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_wind_charge.dds', name = A.Skill_Wind_Charge }, -- Swift Wind (Stormreeve Neider)
+    [26746] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_wind_charge.dds', name = A.Skill_Wind_Charge, hide = true }, -- Wind Charge (Stormreeve Neider)
+    [26759] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_wind_charge.dds', name = A.Skill_Wind_Charge }, -- Swift Wind (Stormreeve Neider)
+
+    [26712] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shockwave.dds' }, -- Gust of Wind (Stormreeve Neider)
+    [46810] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shockwave.dds', hide = true }, -- Gust of Wind (Stormreeve Neider)
+    [46809] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shockwave.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Gust of Wind (Stormreeve Neider)
+
+    [26514] = { hide = true }, -- Twister (Twister)
+    [26517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = A.Skill_Twister }, -- Twister (Twister)
+    [46808] = { hide = true, tooltip = T.Generic_Stagger }, -- Stagger (Twister)
+
     -- Frostvault
     [117286] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', hide = true }, -- Rending Bleed (Coldsnap Goblin - Shared)
     [117486] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = A.Skill_Rending_Bleed, unbreakable = 1, tooltip = T.Generic_Bleed_2_Sec }, -- Bleed (Coldsnap Goblin - Shared)
@@ -9795,6 +9880,12 @@ E.FakeExternalDebuffs = {
     [55383] = { duration = 2000 }, -- Flame Strike (Valkyn Skoria)
     [55756] = { duration = 7500 }, -- Burning (Fire Stab)
 
+    -- Tempest Island
+    [26676] = { duration = 2000 }, -- IntroKB (Valaran Stormcaller)
+    [28391] = { duration = 2500 }, -- Q4538 Stoen Explosion (Conduit Stone)
+    [26716] = { duration = 2800 }, -- Skyward Slam (Stormfist)
+    [26938] = { duration = 0 }, -- Enervating Stone (Stormfist)
+
     -- Frostvault
     [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
     [109808] = { duration = 0 }, -- Frostbite (Icestalker)
@@ -10031,6 +10122,10 @@ E.FakeStagger = {
     [54221] = { duration = 500 }, -- Monstrous Cleave (Ash Titan)
     [54859] = { duration = 500 }, -- Stagger (Ash Titan)
     [56551] = { duration = 433 }, -- Lava Quake (Valkyn Skoria)
+
+    -- Tempest Island
+    [46737] = { duration = 433 }, -- Piercing Shriek (Sonolia the Matriarch)
+    [46808] = { duration = 100 }, -- Stagger (Twister)
 
     -- Frostvault
     [117291] = { duration = 433 }, -- Stagger (Coldsnap Ogre)
@@ -10284,6 +10379,11 @@ E.AddGroundDamageAura = {
     -- City of Ash II
     [56415] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire Runes (Urata the Legion)
     [56151] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ethereal Flame (Ash Titan)
+
+    -- Tempest Island
+    [26619] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shock (Sudden Storm)
+    [6108] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Lightning Storm
+    [26752] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Enervating Stone (Stormfist)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

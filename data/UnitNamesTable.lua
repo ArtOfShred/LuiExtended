@@ -37,6 +37,13 @@ U.NPC_Ice_Barrier                       = 'Ice Barrier'
 ----------------------------------------------------------------
 
 U.Boss_Maxus_the_Many                   = 'Maxus the Many'
+U.Boss_Sonolia_the_Matriarch            = 'Sonolia the Matriarch'
+U.Boss_Valaran_Stormcaller              = 'Valaran Stormcaller'
+U.NPC_Lightning_Avatar                  = 'Lightning Avatar'
+U.Boss_Yalorasse_the_Speaker            = 'Yalorasse the Speaker'
+U.Boss_Stormfist                        = 'Stormfist'
+U.Boss_Commodore_Ohmanil                = 'Commodore Ohmanil'
+U.Boss_Stormreeve_Neidir                = 'Stormreeve Neidir'
 
 ----------------------------------------------------------------
 -- DUNGEONS ----------------------------------------------------
