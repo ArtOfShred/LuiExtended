@@ -11819,14 +11819,11 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterruptB = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertInterruptB[1], g=LUIE.CombatText.D.colors.alertInterruptB[2], b=LUIE.CombatText.D.colors.alertInterruptB[3]}
             },
-			
 			{
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT),
                 width = "full",
             },
-			
-			
 			{
                 -- Unmit Enable
                 type    = "checkbox",
@@ -11856,8 +11853,6 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertUnmit = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertUnmit[1], g=LUIE.CombatText.D.colors.alertUnmit[2], b=LUIE.CombatText.D.colors.alertUnmit[3]}
             },
-			
-			
             {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER),
