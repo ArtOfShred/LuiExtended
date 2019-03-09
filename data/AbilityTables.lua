@@ -1179,6 +1179,22 @@ A.Skill_Stormfist                   = 80520
 A.Skill_Wind_Charge                 = 26746
 A.Skill_Twister                     = 26514
 
+-- Selene's Web
+A.Skill_Primal_Swarm                = GetString(SI_LUIE_SKILL_PRIMAL_SWARM)
+A.Skill_Volley                      = 28876
+A.Skill_Senche_Spirit               = GetString(SI_LUIE_SKILL_SENCHE_SPIRIT)
+A.Skill_Lash                        = 5240
+A.Skill_Vicious_Maul                = 30996
+A.Skill_Trampling_Charge            = 30987
+A.Skill_Selenes_Rose                = GetString(SI_LUIE_SKILL_SELENES_ROSE)
+A.Skill_Free_Ally                   = 31180
+A.Skill_Primal_Maul                 = GetString(SI_LUIE_SKILL_PRIMAL_MAUL)
+A.Skill_Primal_Leap                 = 30901
+
+A.Skill_Root_Guard                  = GetString(SI_LUIE_SKILL_ROOT_GUARD)
+A.Skill_Earth_Mender                = GetString(SI_LUIE_SKILL_EARTH_MENDER)
+A.Skill_True_Shot                   = GetString(SI_LUIE_SKILL_TRUE_SHOT)
+
 -- Frostvault
 A.Skill_Rending_Bleed               = 117286
 A.Skill_Leaping_Crush               = 109801

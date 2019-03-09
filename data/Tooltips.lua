@@ -1103,6 +1103,13 @@ T.Skill_Backstab                        = GetString(SI_LUIE_SKILL_BACKSTAB_TP)
 T.Skill_Enervating_Stone                = GetString(SI_LUIE_SKILL_ENERVATING_STONE_TP)
 T.Skill_Ethereal_Chain                  = GetString(SI_LUIE_SKILL_ETHEREAL_CHAIN_TP)
 
+-- Selene's Web
+T.Skill_Ensnare                         = GetString(SI_LUIE_SKILL_ENSNARE_TP)
+T.Skill_Mirror_Ward                     = GetString(SI_LUIE_SKILL_MIRROR_WARD_TP)
+T.Skill_Poison_Shot                     = GetString(SI_LUIE_SKILL_POISON_SHOT_TP)
+T.Skill_Venomous_Burst                  = GetString(SI_LUIE_SKILL_VENOMOUS_BURST_TP)
+T.Skill_Web_Wrap                        = GetString(SI_LUIE_SKILL_WEB_WRAP_TP)
+
 -- Frostvault
 T.Skill_Maim                            = GetString(SI_LUIE_SKILL_MAIM_NPC_TP)
 

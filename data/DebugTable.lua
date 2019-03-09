@@ -12580,6 +12580,12 @@ debugAuras = {
             [29063] = true, -- Poisoned Blade (Yalorasse the Speaker)
             [29064] = true, -- Crimson Web Poison (Yalorasse the Speaker)
 
+            [26761] = true, -- Lightning Call
+            [26776] = true, -- TCloud
+            [26767] = true, -- Lightning Call
+            [31579] = true, -- IntroKB
+            [34357] = true, -- Intro End
+
             [26743] = true, -- Left Cross (Stormfist)
             [26714] = true, -- Skyward Slam (Stormfist)
             [26716] = true, -- Skyward Slam (Stormfist)
@@ -12629,6 +12635,146 @@ debugAuras = {
             [26517] = true, -- Electrical Shock (Twister)
             [26515] = true, -- Been Hit (Twister)
             [46808] = true, -- Stagger (Twister)
+
+            -- Selene's Web
+            [85833] = true, -- Teleport
+            [64548] = true, -- Flare
+            [64549] = true, -- Flare
+            [32431] = true, -- Climb Away
+            [32428] = true, -- Climb Away
+
+            [30909] = true, -- Ensnare
+            [31249] = true, -- Ensnare
+            [46648] = true, -- Ensnare
+            [31247] = true, -- Ensnare
+            [49275] = true, -- Ensnare
+            [31248] = true, -- Ensnare
+            [30922] = true, -- Ensnare
+            [31251] = true, -- Ensnare
+            [64171] = true, -- SW_Boss3_WebGrip
+            [30907] = true, -- Summon Primal Swarm
+            [30908] = true, -- Summon Primal Swarm
+
+            [33601] = true, -- Q4733_Torture
+
+            [31085] = true, -- Trap (Trap)
+            [31086] = true, -- Trap (Trap)
+
+            [64761] = true, -- Fast (Longclaw)
+            [31091] = true, -- Invisibility (Longclaw)
+            [30781] = true, -- Mirror Ward (Longclaw)
+            [30785] = true, -- Quick Shot (Longclaw)
+            [30772] = true, -- Arrow Rain (Longclaw)
+            [30774] = true, -- Arrow Rain (Longclaw)
+            [30773] = true, -- Arrow Rain (Longclaw)
+            [31024] = true, -- Senche Spirits (Longclaw)
+            [46570] = true, -- Senche Spirits (Longclaw)
+            [46571] = true, -- Senche Spirits (Longclaw)
+            [30779] = true, -- Spirit Form (Senche Spirit)
+
+            [30801] = true, -- Poison Shot (Longclaw)
+            [30802] = true, -- Poison Shot (Longclaw)
+            [30803] = true, -- Poison Shot (Longclaw)
+            [60670] = true, -- Poison Shot (Longclaw)
+
+            [31096] = true, -- Poison Burst (Longclaw)
+            [31154] = true, -- Poison Burst (Longclaw)
+            [31150] = true, -- Poison Burst (Longclaw)
+
+            [43968] = true, -- Roll Dodge (Longclaw)
+            [43973] = true, -- Roll Dodge (Longclaw)
+            [30925] = true, -- Roll Dodge (Longclaw)
+
+            [34520] = true, -- Q4733_Locked_Door_Effect
+
+            [31202] = true, -- Venomous Burst (Queen Aklayah)
+            [31205] = true, -- Venomous Burst (Queen Aklayah)
+            [31203] = true, -- Venomous Burst (Queen Aklayah)
+            [46647] = true, -- Nocom (Queen Aklayah)
+
+            [47057] = true, -- Fast (Foulhide)
+            [30982] = true, -- Swipe (Foulhide)
+
+            [30996] = true, -- Vicious Maul (Foulhide)
+            [46879] = true, -- Fire Backlash (Foulhide)
+            [46878] = true, -- CON_Knockback&Knockdown (Foulhide)
+
+            [31001] = true, -- Horrifying Roar (Foulhide)
+
+            [30812] = true, -- Trampling Charge (Foulhide)
+            [30813] = true, -- Trampling Charge (Foulhide)
+            [30986] = true, -- Trampling Charge (Foulhide)
+            [30989] = true, -- Trampling Charge (Foulhide)
+            [31368] = true, -- Stun (Foulhide)
+            [30987] = true, -- Trampling Charge (Foulhide)
+            [30988] = true, -- Been Hit (Foulhide)
+            [46895] = true, -- Knocked Down (Foulhide)
+            [31366] = true, -- Emboldened (Foulhide)
+
+            [31002] = true, -- Intro (Selene's Rose)
+            [31003] = true, -- Lunge (Selene's Rose)
+            [9039] = true, -- Snare (Selene's Rose)
+
+            [31241] = true, -- Summon Spiders (Mennir Many-Legs)
+            [31245] = true, -- Dummy (Mennir Many-Legs)
+            [31242] = true, -- Summon Spiders (Mennir Many-Legs)
+
+            [46683] = true, -- Dummy
+
+            [31189] = true, -- Bite (Selene)
+            [31183] = true, -- Rending Venom (Selene)
+            [31186] = true, -- Rending Venom (Selene)
+            [31048] = true, -- Web Wrap (Selene)
+            [31052] = true, -- Web Wrap (Selene)
+            [31469] = true, -- Web Wrap (Selene)
+            [31054] = true, -- Web Wrap (Selene)
+            [31049] = true, -- Web Wrap (Selene)
+            [31180] = true, -- Free Ally (Selene)
+
+            [59486] = true, -- Shield (Selene)
+            [59487] = true, -- Shield (Selene)
+            [30991] = true, -- Webport (Selene)
+            [35558] = true, -- Exoburst (Selene)
+            [35561] = true, -- Encase (Selene)
+            [35598] = true, -- Dummy (Selene)
+            [35826] = true, -- Webmove (Selene)
+            [46682] = true, -- Nocom (Selene)
+            [46681] = true, -- Nocom (Selene)
+            [58521] = true, -- Web (Selene)
+            [35824] = true, -- DUN_SW_Boss3_Pullplayer (Selene)
+            [33347] = true, -- Webbreakfx (Selene)
+            [59488] = true, -- Remove Shield (Selene)
+
+            [31190] = true, -- Transform into Bosmer (Selene)
+            [31191] = true, -- Transform into Bosmer (Selene)
+            [33559] = true, -- Transform into Bosmer (Selene)
+            [31218] = true, -- Spiderexplosion (Selene)
+            [85188] = true, -- 25% More Max Health (Adds)
+            [85189] = true, -- 25% More Max Health (Adds)
+            [31986] = true, -- Summon Melee (Adds)
+            [31984] = true, -- Summon Melee (Adds)
+            [31985] = true, -- Summon Melee (Adds)
+
+            [30723] = true, -- Dummy (Ghostbear)
+            [30728] = true, -- Summon Primal Spirit (Selene)
+            [30731] = true, -- Summon Primal Spirit (Selene)
+            [30725] = true, -- Dummy (Ghostbear)
+            [30724] = true, -- Dummy (Ghostbear)
+            [30730] = true, -- Summon Primal Spirit (Selene)
+            [30970] = true, -- Summon Primal Spirit (Selene)
+            [30969] = true, -- Summon Primal Spirit (Selene)
+
+            [30968] = true, -- Bash (Selene)
+
+            [30890] = true, -- Dummy (Selene)
+            [30883] = true, -- Summon Senche Spirit (Selene)
+            [30896] = true, -- Summon Senche Spirit (Selene)
+            [30887] = true, -- Leap (Spectral Senche-Tiger)
+            [49184] = true, -- Dummy (Selene)
+            [30905] = true, -- IntroKB (Spectral Senche-Tiger)
+            [30901] = true, -- Primal Leap (Spectral Senche-Tiger)
+
+            [33860] = true, -- Q4733_Siphon
 
             -- Frostvault
             [115316] = true, -- Weatherman

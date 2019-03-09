@@ -54,6 +54,12 @@ function CTL:EffectChanged(...)
 
         if changeType == EFFECT_RESULT_FADED then return end
 
+        -- Don't duplicate events if unitTag is player and in a group.
+        if GetGroupSize() > 1 and unitTag == 'player' then return end
+        -- Don't duplicate events if the target is reticleover, we already find all named targets w/o this.
+        if unitTag == 'reticleover' or unitTag == 'reticleoverplayer' then return end
+        if AlertT[abilityId].noSelf and unitName == LUIE.PlayerNameFormatted then return end
+
         if E.EffectOverrideByName[abilityId] then
             if E.EffectOverrideByName[abilityId][unitName] then
                 if E.EffectOverrideByName[abilityId][unitName].icon then
@@ -177,7 +183,11 @@ function CTL:OnCombatIn(...)
         if AlertT[abilityId].fakeName then
             sourceName = AlertT[abilityId].fakeName
         else
-            sourceName = zo_strformat("<<t:1>>", sourceName)
+            if AlertT[abilityId].bossName and DoesUnitExist('boss1') then
+                sourceName = zo_strformat("<<t:1>>", GetUnitName('boss1'))
+            else
+                sourceName = zo_strformat("<<t:1>>", sourceName)
+            end
         end
     end
 
@@ -255,6 +265,7 @@ function CTL:OnCombatIn(...)
     if (isWarned.combat) then --Only show CC/Debuff events when in combat
         --Cleanse
         if (isDot and S.toggles.showAlertCleanse and not isWarned.cleanse and not C.isPlayer[sourceType]) and not E.EffectCleanseOverride[abilityId] then
+            if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].unbreakable then return end -- Don't display a cleanse alert if this ability is flagged as unbreakable
             self:TriggerEvent(C.eventType.ALERT, C.alertType.CLEANSE, abilityName, formattedIcon)
             isWarned.cleanse = true
             callLater(function() isWarned.cleanse = false end, 5000) --5 second buffer
@@ -319,7 +330,8 @@ function CTL:OnCombatIn(...)
 
             -- Filter when only a certain event type should fire this
             if AlertT[abilityId].result and resultType ~= AlertT[abilityId].result then return end
-            if AlertT[abilityId].eventdetect then return end -- Don't create a duplicate warning if event detection already handles this.
+            if AlertT[abilityId].eventdetect or AlertT[abilityId].auradetect then return end -- Don't create a duplicate warning if event/aura detection already handles this.
+            if AlertT[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
 
             -- Return if any results occur which we absolutely don't want to display alerts for
             if resultType == ACTION_RESULT_EFFECT_FADED
@@ -384,7 +396,7 @@ function CTL:OnCombatIn(...)
                 end
 				if AlertT[abilityId].unmit and (S.toggles.showAlertUnmit) == true then
 					unmit = true
-				end				
+				end
                 if AlertT[abilityId].power and (S.toggles.showAlertPower) == true then
                     power = true
                 end
@@ -500,12 +512,6 @@ function CTL:OnCombatOut(...)
     --//CROWD CONTROL & CLEANSE TRIGGERS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
     if (isWarned.combat) then --Only show CC/Debuff events when in combat
-        --Cleanse
-        if (isDot and S.toggles.showAlertCleanse and not isWarned.cleanse and not C.isPlayer[sourceType]) and not E.EffectCleanseOverride[abilityId] then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.CLEANSE, abilityName, formattedIcon)
-            isWarned.cleanse = true
-            callLater(function() isWarned.cleanse = false end, 5000) --5 second buffer
-        end
         --Disoriented
         if (isDisoriented and togglesInOut.showDisoriented) then
             if (isWarned.disoriented) then
@@ -578,6 +584,8 @@ function CTL:OnCombatAlert(...)
 
             -- Filter when only a certain event type should fire this
             if AlertT[abilityId].result and resultType ~= AlertT[abilityId].result then return end
+            if AlertT[abilityId].auradetect then return end -- Don't create a duplicate warning if aura detection already handles this.
+            if AlertT[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
 
             -- Return if any results occur which we absolutely don't want to display alerts for
             if resultType == ACTION_RESULT_EFFECT_FADED
@@ -606,6 +614,9 @@ function CTL:OnCombatAlert(...)
 
             if AlertT[abilityId].fakeName then
                 sourceName = AlertT[abilityId].fakeName
+            end
+            if AlertT[abilityId].bossName and DoesUnitExist('boss1') then
+                sourceName = zo_strformat("<<t:1>>", GetUnitName('boss1'))
             end
 
             if AlertT[abilityId].refire then

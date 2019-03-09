@@ -655,6 +655,7 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     if unitName == LUIE.PlayerNameFormatted then
         unitName = "Player"
     end
+    unitName = unitName .. " (" .. unitTag .. ")"
 
     local cmxHIDE
     if CMX and CMX.CustomAbilityHide and CMX.CustomAbilityHide[abilityId] then

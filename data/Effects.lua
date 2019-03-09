@@ -1523,6 +1523,14 @@ E.AddNameAura = {
     [U.Boss_Commodore_Ohmanil] = { [1] = { id = 33097 } }, -- Commodore Ohmanil
     [U.Boss_Stormreeve_Neidir] = { [1] = { id = 33097 } }, -- Stormreeve Neidir
 
+    -- Selene's Web
+    [U.Boss_Treethane_Kerninn] = { [1] = { id = 33097 } }, -- Treethane Kerninn
+    [U.Boss_Longclaw] = { [1] = { id = 33097 } }, -- Longclaw
+    [U.Boss_Queen_Aklayah] = { [1] = { id = 33097 } }, -- Queen Aklayah
+    [U.Boss_Foulhide] = { [1] = { id = 33097 } }, -- Foulhide
+    [U.Boss_Mennir_Many_Legs] = { [1] = { id = 33097 } }, -- Mennir Many-Legs
+    [U.Boss_Selene] = { [1] = { id = 33097 } }, -- Selene
+
     -- Frostvault
     [U.NPC_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
     [U.Boss_Icestalker] = { [1] = { id = 33097 } }, -- Icestalker
@@ -1543,6 +1551,8 @@ E.SynergyNameOverride = {
     [A.Skill_Feed] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed (Vampire)
     [A.Skill_Devour] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Werewolf)
     [A.Set_Shield_of_Ursus] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', name = A.Set_Ursus_Blessing }, -- Ursus's Blessing (Haven of Ursus)
+    -- Dungeons
+    [A.Skill_Free_Ally] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds' }, -- Free Ally (Selene) -- Selene's Web
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1663,6 +1673,12 @@ E.EffectOverrideByName = {
                     ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                     ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                     ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+                    ['Senche-Panther'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+                    ['Silentpaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+                    ['Heartstalker'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+                    ['Nighteyes'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+                    ['Shadowhiskers'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+                    ['Senche Spirit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend_ghost.dds' }, -- Rend (Senche Spirit)
                 },
     [60630] =   { -- Rend (Lion)
                     ['Lion'] =                      { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
@@ -1675,6 +1691,12 @@ E.EffectOverrideByName = {
                     ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                     ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                     ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+                    ['Senche-Panther'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+                    ['Silentpaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+                    ['Heartstalker'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+                    ['Nighteyes'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+                    ['Shadowhiskers'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+                    ['Senche Spirit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend_ghost.dds' }, -- Rend (Senche Spirit)
                 },
     [60641] =   { -- Claw (Lion)
                     ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_claw.dds' }, -- Claw (Sabre Cat)
@@ -1697,6 +1719,12 @@ E.EffectOverrideByName = {
                     ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
                     ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
                     ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
+                    ['Senche-Panther'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
+                    ['Silentpaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
+                    ['Heartstalker'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
+                    ['Nighteyes'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
+                    ['Shadowhiskers'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
+                    ['Senche Spirit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite_ghost.dds' }, -- Bite (Senche Spirit)
                 },
     [7161] =    { -- Double Strike (Lion)
                     ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_double_strike.dds' }, -- Double Strike (Sabre Cat)
@@ -1707,6 +1735,12 @@ E.EffectOverrideByName = {
                     ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
                     ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
                     ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
+                    ['Senche-Panther'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
+                    ['Silentpaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
+                    ['Heartstalker'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
+                    ['Nighteyes'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
+                    ['Shadowhiskers'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
+                    ['Senche Spirit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike_ghost.dds' }, -- Double Strike (Senche Spirit)
                 },
     [5362] =    { -- Slam (Skeever / Kagouti)
                     ['Kagouti'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_slam.dds' }, -- Slam (Kagouti)
@@ -1862,6 +1896,10 @@ E.EffectSourceOverride = {
     [56034] = { pet = '' }, -- Ground Tremor (Horvantud the Fire Maw)
     [55756] = { pet = '' }, -- Burning (Valkyn Skoria)
     [56068] = { source = A.Skill_Slag_Geyser }, -- Slag Geyser (Lava Pools)
+
+    -- Selene's Web
+    [31086] = { source = A.Skill_Bear_Trap }, -- Trap (Trap)
+    [30901] = { pet = '' }, -- IntroKB (Spectral Senche-Tiger)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2146,14 +2184,12 @@ E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMB
 
     -- Main Story Quest
     [27776] = true, -- Feeding (Daughter of Giants)
-    [38215] = true, -- Death's Gaze (Shadow of Sancre Tor)
 
     --------------
     -- DUNGEONS --
     --------------
 
     -- Banished Cells I
-    [19028] = true, -- Drain Essence (Shadowrend)
     [18772] = true, -- Feeding (Shadowrend)
 
     -- Elden Hollow I
@@ -2161,7 +2197,6 @@ E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMB
 
     -- City of Ash II
     [56357] = true, -- Fire Swarm (Ash Titan)
-    [55756] = true, -- Burning (Valkyn Skoria)
     [55383] = true, -- Flame Strike (Valkyn Skoria)
     [55468] = true, -- Magma Prison (Valkyn Skoria)
 
@@ -9525,9 +9560,9 @@ E.EffectOverride = {
     [5699] = { icon = 'esoui/art/icons/ability_rogue_038.dds', name = A.Skill_Shadowstep }, -- Backstab (Yalorasse the Speaker)
     [5698] = { icon = 'esoui/art/icons/ability_rogue_038.dds', name = A.Skill_Shadowstep, tooltip = T.Skill_Backstab }, -- Backstab (Yalorasse the Speaker)
     [5697] = { icon = 'esoui/art/icons/ability_rogue_038.dds', name = A.Skill_Shadowstep }, -- Backstab (Yalorasse the Speaker)
-    [6106] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_storm.dds' }, -- Lightning Storm (Yalorasse the Speaker)
-    [6108] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_storm.dds', groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Lightning Storm (Yalorasse the Speaker)
-    [6107] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_storm.dds', tooltip = T.Generic_Snare_35 }, -- Lightning Storm (Yalorasse the Speaker)
+    [6106] = { icon = 'LuiExtended/media/icons/abilities/ability_rogue_lightning_strike.dds' }, -- Lightning Storm (Yalorasse the Speaker)
+    [6108] = { icon = 'LuiExtended/media/icons/abilities/ability_rogue_lightning_strike.dds', groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Lightning Storm (Yalorasse the Speaker)
+    [6107] = { icon = 'LuiExtended/media/icons/abilities/ability_rogue_snare_shock.dds', tooltip = T.Generic_Snare_35 }, -- Lightning Storm (Yalorasse the Speaker)
     [29063] = { icon = 'esoui/art/icons/ability_rogue_016.dds', hide = true }, -- Poisoned Blade (Yalorasse the Speaker)
     [29064] = { icon = 'esoui/art/icons/ability_rogue_016.dds', name = A.Skill_Poisoned_Blade, tooltip = T.Generic_Poison_1_5_Sec, stack = 0 }, -- Crimson Web Poison (Yalorasse the Speaker)
 
@@ -9569,6 +9604,105 @@ E.EffectOverride = {
     [26514] = { hide = true }, -- Twister (Twister)
     [26517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = A.Skill_Twister }, -- Twister (Twister)
     [46808] = { hide = true, tooltip = T.Generic_Stagger }, -- Stagger (Twister)
+
+    -- Selene's Web
+    [32428] = { hide = true }, -- Climb Away
+
+    [30909] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_ensnare.dds', tooltip = T.Skill_Ensnare, unbreakable = 1, hideReduce = true }, -- Ensnare
+    [31247] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_ensnare.dds', tooltip = T.Skill_Ensnare, unbreakable = 1, hideReduce = true }, -- Ensnare
+    [49275] = { hide = true }, -- Ensnare (Treethane Kerninn)
+    [31248] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_ensnare.dds', tooltip = T.Skill_Ensnare, unbreakable = 1 }, -- Ensnare
+    [64171] = { hide = true }, -- SW_Boss3_WebGrip (Treethane Kerninn)
+    [30907] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_summon_primal_swarm.dds', name = A.Skill_Primal_Swarm, hide = true }, -- Summon Primal Swarm (Treethane Kerninn)
+    [30908] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_summon_primal_swarm.dds', name = A.Skill_Primal_Swarm, groundLabel = true, tooltip = T.Generic_AOE_Magic_1_Sec }, -- Summon Primal Swarm (Treethane Kerninn)
+
+    [31085] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', name = A.Skill_Bear_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Immobilize }, -- Trap (Longclaw)
+    [31086] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', name = A.Skill_Bear_Trap }, -- Trap (Longclaw)
+
+    [30781] = { icon = 'esoui/art/icons/ability_healer_022.dds', tooltip = T.Skill_Mirror_Ward }, -- Mirror Ward (Longclaw)
+    [30785] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds' }, -- Quick Shot (Longclaw)
+    [30772] = { icon = 'esoui/art/icons/ability_bow_003.dds', name = A.Skill_Volley }, -- Arrow Rain (Longclaw)
+    [30773] = { icon = 'esoui/art/icons/ability_bow_003.dds', name = A.Skill_Volley, groundLabel = true, tooltip = T.Generic_AOE_Physical_0_5_Sec }, -- Arrow Rain (Longclaw)
+
+    [30779] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_summon_senche_spirit.dds', name = A.Skill_Senche_Spirit, hide = true }, -- Spirit Form (Senche Spirit)
+
+    [30801] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_poison_shot.dds' }, -- Poison Shot (Longclaw)
+    [30802] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_poison_shot.dds', tooltip = T.Skill_Poison_Shot }, -- Poison Shot (Longclaw)
+    [30803] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_poison_shot.dds' }, -- Poison Shot (Longclaw)
+    [60670] = { hide = true }, -- Poison Shot (Longclaw)
+
+    [31096] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_poison_gtaoe.dds' }, -- Poison Burst (Longclaw)
+    [31154] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_stun_poison.dds', tooltip = T.Generic_Stun }, -- Poison Burst (Longclaw)
+    [31150] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_poison_gtaoe.dds', groundLabel = true, tooltip = T.Generic_AOE_Poison_1_Sec }, -- Poison Burst (Longclaw)
+
+    [34520] = { hide = true }, -- Q4733_Locked_Door_Effect
+
+    [31202] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_ranged.dds', hide = true }, -- Venomous Burst (Queen Aklayah)
+    [31205] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_venomous_burst.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Venomous_Burst }, -- Venomous Burst (Queen Aklayah)
+    [31203] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_venomous_burst.dds' }, -- Venomous Burst (Queen Aklayah)
+
+    [30982] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_bite.dds', name = A.Skill_Bite }, -- Swipe (Foulhide)
+
+    [31002] = { hide = true, icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', name = A.Skill_Selenes_Rose }, -- Intro (Selene's Rose)
+    [31003] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = A.Skill_Lash }, -- Lunge (Selene's Rose)
+    [9039] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = A.Skill_Lash, tooltip = T.Generic_Snare_40 }, -- Snare (Selene's Rose)
+
+    [30996] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Vicious_Maul }, -- Vicious Maul (Foulhide)
+    [46879] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Vicious_Maul, hide = true }, -- Fire Backlash (Foulhide)
+    [46878] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Vicious_Maul, tooltip = T.Generic_Knockback }, -- CON_Knockback&Knockdown (Foulhide)
+
+    [31001] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_horrifying_roar.dds', tooltip = T.Generic_Fear }, -- Horrifying Roar (Foulhide)
+
+    [30812] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_trampling_charge.dds' }, -- Trampling Charge (Foulhide)
+    [30813] = { hide = true }, -- Trampling Charge (Foulhide)
+    [30986] = { hide = true }, -- Trampling Charge (Foulhide)
+    [31368] = { hide = true }, -- Stun (Foulhide)
+    [30987] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_trampling_charge.dds' }, -- Trampling Charge (Foulhide)
+    [46895] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_trampling_charge.dds', name = A.Skill_Trampling_Charge, tooltip = T.Generic_Knockdown }, -- Knocked Down (Foulhide)
+    [31366] = { hide = true }, -- Emboldened (Foulhide)
+
+    [31241] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_summon_spiders.dds' }, -- Summon Spiders (Mennir Many-Legs)
+
+    [31189] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_bite.dds' }, -- Bite (Selene)
+    [31183] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_corrosive_bite.dds' }, -- Rending Venom (Selene)
+    [31186] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_corrosive_bite.dds', tooltip = T.Generic_Poison_2_Sec, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Rending Venom (Selene)
+    [31048] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds', hide = true }, -- Web Wrap (Selene)
+    [31052] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds', tooltip = T.Skill_Web_Wrap }, -- Web Wrap (Selene)
+    [31469] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds' }, -- Web Wrap (Selene)
+
+    [59486] = { hide = true }, -- Shield (Selene)
+    [59487] = { hide = true }, -- Shield (Selene)
+    [35558] = { hide = true }, -- Exoburst (Selene)
+
+    [35561] = { hide = true }, -- Encase (Selene)
+    [35598] = { hide = true }, -- Dummy (Selene)
+    [35826] = { hide = true }, -- Webmove (Selene)
+
+    [58521] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web_white.dds', tooltip = T.Generic_Stun, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Web (Selene)
+    [35824] = { hide = true }, -- DUN_SW_Boss3_Pullplayer (Selene)
+    [33347] = { hide = true }, -- Webbreakfx (Webbreakdummy)
+    [59488] = { hide = true }, -- Remove Shield (Selene)
+
+    [31191] = { hide = true }, -- Transform into Bosmer (Selene)
+    [31218] = { hide = true }, -- Spiderexplosion (Selene)
+    [30731] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_maul.dds', name = A.Skill_Primal_Maul, hide = true }, -- Summon Primal Spirit (Selene)
+    [30725] = { hide = true }, -- Dummy (Ghostbear)
+    [30724] = { hide = true }, -- Dummy (Ghostbear)
+
+    [30730] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_maul.dds', name = A.Skill_Primal_Maul }, -- Summon Primal Spirit (Selene)
+    [30970] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_maul.dds', name = A.Skill_Primal_Maul, hide = true }, -- Summon Primal Spirit (Selene)
+    [30969] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_maul.dds', name = A.Skill_Primal_Maul, tooltip = T.Generic_Knockback, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Summon Primal Spirit (Selene)
+
+    [30968] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Bash (Selene)
+
+    [30896] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_leap.dds', name = A.Skill_Primal_Leap, hide = true }, -- Summon Senche Spirit (Selene)
+
+    [30905] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_leap.dds', name = A.Skill_Primal_Leap, tooltip = T.Generic_Stun, unbreakable = 1 }, -- IntroKB (Spectral Senche-Tiger)
+    [30901] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_leap.dds' }, -- IntroKB (Spectral Senche-Tiger)
+
+    [31986] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_root_guard.dds', name = A.Skill_Root_Guard }, -- Summon Melee (Selene)
+    [31984] = { icon = 'esoui/art/icons/ava_siege_hookpoint_001.dds', name = A.Skill_Earth_Mender }, -- Summon Healer (Selene)
+    [31985] = { icon = 'esoui/art/icons/ava_siege_hookpoint_003.dds', name = A.Skill_True_Shot }, -- Summon Archer (Selene)
 
     -- Frostvault
     [117286] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', hide = true }, -- Rending Bleed (Coldsnap Goblin - Shared)
@@ -9885,6 +10019,11 @@ E.FakeExternalDebuffs = {
     [28391] = { duration = 2500 }, -- Q4538 Stoen Explosion (Conduit Stone)
     [26716] = { duration = 2800 }, -- Skyward Slam (Stormfist)
     [26938] = { duration = 0 }, -- Enervating Stone (Stormfist)
+
+    -- Selene's Web
+    [31247] = { duration = 4000 }, -- Ensnare
+    [31248] = { duration = 8000 }, -- Ensnare
+    [30905] = { duration = 2000 }, -- IntroKB (Spectral Senche-Tiger)
 
     -- Frostvault
     [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
@@ -10384,6 +10523,12 @@ E.AddGroundDamageAura = {
     [26619] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shock (Sudden Storm)
     [6108] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Lightning Storm
     [26752] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Enervating Stone (Stormfist)
+
+    -- Selene's Web
+    [30908] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Summon Primal Swarm (Treethane Kerninn)
+    [30773] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arrow Rain (Longclaw)
+    [31150] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Poison Burst (Longclaw)
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

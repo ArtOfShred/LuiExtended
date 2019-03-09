@@ -3271,6 +3271,19 @@ local strings = {
 
     SI_LUIE_SKILL_ENERVATING_STONE_TP =                  "Stunned and taking Shock Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_ETHEREAL_CHAIN_TP =                    "Levitated and afflicted with Magic Damage every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_PRIMAL_SWARM =                         "Primal Swarm",
+    SI_LUIE_SKILL_ENSNARE_TP =                           "Stunned for |cFFFFFF4|r seconds.\n\nMovement Speed reduced by |cFFFFFF50|r% for |cFFFFFF8|r seconds.",
+    SI_LUIE_SKILL_MIRROR_WARD_TP =                       "Reflect all projectiles cast at you.",
+    SI_LUIE_SKILL_POISON_SHOT_TP =                       "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds, stacking indefinitely.",
+    SI_LUIE_SKILL_VENOMOUS_BURST_TP =                    "You and nearby allies take Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SELENES_ROSE =                         "Selene's Roses",
+    SI_LUIE_SKILL_WEB_WRAP_TP =                          "Wrapped in webs and unable to take any actions for |cFFFFFF<<1>>|r seconds. Break free to remove.",
+    SI_LUIE_SKILL_PRIMAL_MAUL =                          "Primal Maul",
+    SI_LUIE_SKILL_ROOT_GUARD =                           "Root Guard",
+    SI_LUIE_SKILL_EARTH_MENDER =                         "Earth Mender",
+    SI_LUIE_SKILL_TRUE_SHOT =                            "True Shot",
+    SI_LUIE_SKILL_SENCHE_SPIRIT =                        "Senche Spirit",
 }
 
 -- TODO: Switch to StringId's

@@ -37,13 +37,6 @@ U.NPC_Ice_Barrier                       = 'Ice Barrier'
 ----------------------------------------------------------------
 
 U.Boss_Maxus_the_Many                   = 'Maxus the Many'
-U.Boss_Sonolia_the_Matriarch            = 'Sonolia the Matriarch'
-U.Boss_Valaran_Stormcaller              = 'Valaran Stormcaller'
-U.NPC_Lightning_Avatar                  = 'Lightning Avatar'
-U.Boss_Yalorasse_the_Speaker            = 'Yalorasse the Speaker'
-U.Boss_Stormfist                        = 'Stormfist'
-U.Boss_Commodore_Ohmanil                = 'Commodore Ohmanil'
-U.Boss_Stormreeve_Neidir                = 'Stormreeve Neidir'
 
 ----------------------------------------------------------------
 -- DUNGEONS ----------------------------------------------------
@@ -65,6 +58,7 @@ U.Boss_Keeper_Imiril                    = 'Keeper Imiril'
 U.Boss_Ancient_Spriggan                 = 'Ancient Spriggan'
 U.Boss_Akash_gra_Mal                    = 'Akash gra-Mal'
 U.Boss_Chokethorn                       = 'Chokethorn'
+U.NPC_Strangler_Saplings                = 'Strangler Saplings'
 U.Boss_Nenesh_gro_Mal                   = 'Nenesh gro-Mal'
 U.Boss_Leafseether                      = 'Leafseether'
 U.Boss_Canonreeve_Oraneth               = 'Canonreeve Oraneth'
@@ -72,6 +66,8 @@ U.Boss_Canonreeve_Oraneth               = 'Canonreeve Oraneth'
 -- Elden Hollow II
 U.Boss_Dubroze_the_Infestor             = 'Dubroze the Infestor'
 U.Boss_Dark_Root                        = 'Dark Root'
+U.NPC_Frenzied_Guardian                 = 'Frenzied Guardian'
+U.NPC_Mystic_Guardian                   = 'Mystic Guardian'
 U.Boss_Azara_the_Frightener             = 'Azara the Frightener'
 U.Boss_Shadow_Tendril                   = 'Shadow Tendril'
 U.Boss_Murklight                        = 'Murklight'
@@ -103,6 +99,23 @@ U.NPC_Fire_Ravager                      = 'Fire Ravager'
 U.NPC_Xivilai_Fulminator                = 'Xivilai Fulminator'
 U.NPC_Xivilai_Boltaic                   = 'Xivilai Boltaic'
 U.Boss_Valkyn_Skoria                    = 'Valkyn Skoria'
+
+-- Tempest Island
+U.Boss_Sonolia_the_Matriarch            = 'Sonolia the Matriarch'
+U.Boss_Valaran_Stormcaller              = 'Valaran Stormcaller'
+U.NPC_Lightning_Avatar                  = 'Lightning Avatar'
+U.Boss_Yalorasse_the_Speaker            = 'Yalorasse the Speaker'
+U.Boss_Stormfist                        = 'Stormfist'
+U.Boss_Commodore_Ohmanil                = 'Commodore Ohmanil'
+U.Boss_Stormreeve_Neidir                = 'Stormreeve Neidir'
+
+-- Selene's Web
+U.Boss_Treethane_Kerninn                = 'Treethane Kerninn'
+U.Boss_Longclaw                         = 'Longclaw'
+U.Boss_Queen_Aklayah                    = 'Queen Aklayah'
+U.Boss_Foulhide                         = 'Foulhide'
+U.Boss_Mennir_Many_Legs                 = 'Mennir Many-Legs'
+U.Boss_Selene                           = 'Selene'
 
 -- Frostvault
 U.NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre'
