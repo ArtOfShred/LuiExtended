@@ -1704,6 +1704,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ExtraBuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ExtraBuffs = value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.SpellCastBuffs.SV.ExtraBuffs,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
