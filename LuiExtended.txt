@@ -45,12 +45,12 @@ libs/LibMediaProvider-1.0/LibMediaProvider-1.0.lua
 libs/LibMsgWin-1.0/LibMsgWin-1.0.lua
 
 LuiExtended.lua
-LuiExtendedUI.lua
-LuiExtendedMenu.lua
-LuiExtendedWelcome.lua
+UI.lua
+Settings.lua
+Welcome.lua
+Bindings.xml
 
-xml/bindings.xml
-xml/CombatText.xml
+frontend/CombatText.xml
 
 i18n/en.lua
 i18n/$(language).lua
@@ -65,13 +65,8 @@ data/AlertTable.lua
 data/DebugTable.lua
 data/Quests.lua
 
-modules/ChatAnnouncements.lua
-modules/CombatInfo.lua
-modules/InfoPanel.lua
-modules/UnitFrames.lua
-modules/SpellCastBuffs.lua
-modules/SlashCommands.lua
-
+modules/ChatAnnouncements/ChatAnnouncements.lua
+modules/CombatInfo/CombatInfo.lua
 modules/CombatText/CombatText.lua
 modules/CombatText/Animation.lua
 modules/CombatText/Pool.lua
@@ -96,3 +91,7 @@ modules/CombatText/EventViewers/CrowdControl.lua
 modules/CombatText/EventViewers/Death.lua
 modules/CombatText/EventViewers/Points.lua
 modules/CombatText/EventViewers/Resources.lua
+modules/InfoPanel/InfoPanel.lua
+modules/SpellCastBuffs/SpellCastBuffs.lua
+modules/SlashCommands/SlashCommands.lua
+modules/UnitFrames/UnitFrames.lua
