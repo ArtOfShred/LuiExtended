@@ -977,6 +977,54 @@ function LUIE_CreateSettings()
         },
     }
 
+    -- Slash Commands - Holiday XP Events Commands Options Submenu
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_HOLIDAY),
+        controls = {
+            {
+                -- SlashCake
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_CAKE),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_CAKE_TP),
+                getFunc = function() return LUIE.SlashCommands.SV.SlashCake end,
+                setFunc = function(value) LUIE.SlashCommands.SV.SlashCake = value LUIE.SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = LUIE.SlashCommands.D.SlashCake,
+            },
+            {
+                -- SlashPie
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_PIE),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_PIE_TP),
+                getFunc = function() return LUIE.SlashCommands.SV.SlashPie end,
+                setFunc = function(value) LUIE.SlashCommands.SV.SlashPie = value LUIE.SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = LUIE.SlashCommands.D.SlashPie,
+            },
+            {
+                -- SlashMead
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_MEAD),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_MEAD_TP),
+                getFunc = function() return LUIE.SlashCommands.SV.SlashMead end,
+                setFunc = function(value) LUIE.SlashCommands.SV.SlashMead = value LUIE.SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = LUIE.SlashCommands.D.SlashMead,
+            },
+            {
+                -- SlashWitch
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_WITCH),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_WITCH_TP),
+                getFunc = function() return LUIE.SlashCommands.SV.SlashWitch end,
+                setFunc = function(value) LUIE.SlashCommands.SV.SlashWitch = value LUIE.SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = LUIE.SlashCommands.D.SlashWitch,
+            },
+        },
+    }
+
 ----------------------------------------------------------------------------------------------
 -- COMBAT INFO
 ----------------------------------------------------------------------------------------------
