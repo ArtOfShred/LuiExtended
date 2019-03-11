@@ -1,4 +1,4 @@
-﻿## Title: |cE12000L|cFFFFB0ui E|rxtended|
+## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, psypanda, SpellBuilder
 ## Version: 5.8.0
 ## APIVersion: 100026
