@@ -3426,7 +3426,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
             g_isLooted = false
             eventManager:UnregisterForUpdate(moduleName .. "ResetLooted")
         end
-		eventManager:UnregisterForUpdate(moduleName .. "ResetLooted")
+        eventManager:UnregisterForUpdate(moduleName .. "ResetLooted")
         eventManager:RegisterForUpdate(moduleName .. "ResetLooted", 150, ResetIsLooted )
     end
 
@@ -3438,7 +3438,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
             g_isPickpocketed = false
             eventManager:UnregisterForUpdate(moduleName .. "ResetPickpocket")
         end
-		eventManager:UnregisterForUpdate(moduleName .. "ResetPickpocket")
+        eventManager:UnregisterForUpdate(moduleName .. "ResetPickpocket")
         eventManager:RegisterForUpdate(moduleName .. "ResetPickpocket", 150, ResetIsPickpocketed )
     end
 
@@ -3756,7 +3756,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             g_isStolen = false
             eventManager:UnregisterForUpdate(moduleName .. "ResetStolen")
         end
-		eventManager:UnregisterForUpdate(moduleName .. "ResetStolen")
+        eventManager:UnregisterForUpdate(moduleName .. "ResetStolen")
         eventManager:RegisterForUpdate(moduleName .. "ResetStolen", 150, ResetIsStolen )
     end
 
@@ -7837,30 +7837,30 @@ function CA.HookFunction()
         return true
     end
 
-	local savedEndingPoints = 0 -- We reset this value after the throttled function sends info to the chat printer
-	local savedPointDelta = 0 -- We reset this value after the throttled function sends info to the chat printer
+    local savedEndingPoints = 0 -- We reset this value after the throttled function sends info to the chat printer
+    local savedPointDelta = 0 -- We reset this value after the throttled function sends info to the chat printer
 
-	local function ChampionPointGainedPrinter()
+    local function ChampionPointGainedPrinter()
 
-		-- adding one so that we are starting from the first gained point instead of the starting champion points
-		local startingPoints = savedEndingPoints - savedPointDelta + 1
-		local championPointsByType = { 0, 0, 0 }
+        -- adding one so that we are starting from the first gained point instead of the starting champion points
+        local startingPoints = savedEndingPoints - savedPointDelta + 1
+        local championPointsByType = { 0, 0, 0 }
 
-		while startingPoints <= savedEndingPoints do
-			local pointType = GetChampionPointAttributeForRank(startingPoints)
-			championPointsByType[pointType] = championPointsByType[pointType] + 1
-			startingPoints = startingPoints + 1
-		end
+        while startingPoints <= savedEndingPoints do
+            local pointType = GetChampionPointAttributeForRank(startingPoints)
+            championPointsByType[pointType] = championPointsByType[pointType] + 1
+            startingPoints = startingPoints + 1
+        end
 
-		if CA.SV.XP.ExperienceLevelUpCA then
+        if CA.SV.XP.ExperienceLevelUpCA then
             local formattedString = ExperienceLevelUpColorize:Colorize(strformat(SI_CHAMPION_POINT_EARNED, savedPointDelta) .. ": ")
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
         end
 
-		local secondLine = ""
-		if CA.SV.XP.ExperienceLevelUpCA or CA.SV.XP.ExperienceLevelUpCSA then
+        local secondLine = ""
+        if CA.SV.XP.ExperienceLevelUpCA or CA.SV.XP.ExperienceLevelUpCSA then
             for pointType,amount in pairs(championPointsByType) do
                 if amount > 0 then
                     local formattedString
@@ -7884,7 +7884,7 @@ function CA.HookFunction()
             end
         end
 
-		if CA.SV.XP.ExperienceLevelUpCSA then
+        if CA.SV.XP.ExperienceLevelUpCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.CHAMPION_POINT_GAINED)
             messageParams:SetText(strformat(SI_CHAMPION_POINT_EARNED, savedPointDelta), secondLine)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_CHAMPION_POINT_GAINED)
@@ -7901,12 +7901,12 @@ function CA.HookFunction()
             PlaySound(SOUNDS.CHAMPION_POINT_GAINED)
         end
 
-		savedEndingPoints = 0
-		savedPointDelta = 0
+        savedEndingPoints = 0
+        savedPointDelta = 0
 
-		eventManager:UnregisterForUpdate(moduleName .. "ChampionPointThrottle")
+        eventManager:UnregisterForUpdate(moduleName .. "ChampionPointThrottle")
 
-	end
+    end
 
     local function ChampionPointGainedHook(pointDelta)
 
@@ -7914,11 +7914,11 @@ function CA.HookFunction()
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
 
-		savedEndingPoints = GetPlayerChampionPointsEarned()
-		savedPointDelta = savedPointDelta + pointDelta
+        savedEndingPoints = GetPlayerChampionPointsEarned()
+        savedPointDelta = savedPointDelta + pointDelta
 
-		eventManager:UnregisterForUpdate(moduleName .. "ChampionPointThrottle")
-		eventManager:RegisterForUpdate(moduleName .. "ChampionPointThrottle", 25, ChampionPointGainedPrinter)
+        eventManager:UnregisterForUpdate(moduleName .. "ChampionPointThrottle")
+        eventManager:RegisterForUpdate(moduleName .. "ChampionPointThrottle", 25, ChampionPointGainedPrinter)
 
         return true
 

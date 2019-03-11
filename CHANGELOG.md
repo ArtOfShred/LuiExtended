@@ -1,19 +1,239 @@
+### Version 5.8.0
+
+General
+- Updated auras/icons/tooltips/cast bar/etc for all Player Abilities, Siege Weapons/Repair Kits, any missing & new item sets.
+- Updated auras/icons/tooltips/combat alerts/etc for almost all basic NPC abilities, and started working on Dungeon abilities.
+
+Buffs & Debuffs
+- Prominent Buffs will now display even when ALL OTHER BUFF/DEBUFF options are turned off. This was always the intended behavior, but was not working due to a massive oversight on my part.
+- Added a new toggle option for Ground Damage/Healing Auras - when enabled a debuff aura will be displayed when you are standing in a ground aoe effect (e.g. Arrow Barrage)
+- Fixed an issue where dropping a new rearming trap after only 1 of the 2 traps was consumed would result in two mine auras showing.
+
+Chat Announcements
+- When looting multiple bodies at once - multiple items with the same ID are now combined into a single count. This significantly reduces the amount of spam loot logging generates.
+- Updated the Achievement Options with the new category added in Wrathstone and fixed an issue where only some categories would toggle off correctly.
+
+Combat Info
+- Cast Bar - The cast bar will now automatically break when certain actions are taken, such as roll dodging.
+- Cast Bar - Added functionality to break the cast bar on movement for casts where this happens, as well as fixed various issues with the cast bar not refreshing when interrupting your cast & attempting to recast before the bar finished.
+- Ability Bar - Updated the default "Activation Highlight" effect (e.g. Shadow Image Teleport) to now loop the visual effect on the bar rather than playing only once.
+- Ability Bar - Guard and its morphs now display the Toggle Highlight visual effect used by other toggle effects (e.g. Mend Wounds) when active instead of just turning into an "X" icon on the bar.
+
+Combat Text
+- Updated Combat Alerts to work toward making them less spammy (requiring specific criteria for each ability when cast, and applying a refire delay when various error events such as an NPC being out of range are detected).
+- Added "Summon" alerts to Combat Alerts - notifying you if an enemy summons an add.
+- Fixed an error where the Interrupt message on Combat Alerts was displaying as "01Interrupt" due to a syntax error in the default color.
+- Hid a few snares that rapidly refire from ground auras or other effects that would result in spam when you were immune to them.
+
+Unit Frames
+- Fixed an issue introduced on the PTS where Player Names on the Group Unit Frames were being displaced from their proper positions.
+
+---
+
+### Version 5.7.3
+
+General
+- Significantly updated the Russian localization, as well as fixed an error causing RU strings not to load at all. Thanks KiriX!
+
+Buffs & Debuffs
+- Updated tooltips & some auras/icons for all Weapon, Armor, Soul Magic, and Werewolf Skills.
+
+Combat Info
+- Fixed a few abilities that had broken Bar Highlight functionality and did some minor cleanup with this functionality.
+
+---
+
+### Version 5.7.2
+
+General
+- Fixed typos in the RU localization that was causing UI errors. Thank you Jmopel for fixing this!
+- Fixed an issue with the hook for the Skill Window to add custom passive/racial icons that prevented Harven's Improved Skills Window from working correctly.
+
+Buffs & Debuffs
+- Added tooltips for all Warden abilities & for melee weapon abilities.
+- Fixed broken tooltips on Stealth-Draining / Conspicuous Poison.
+- Added an aura for the new ID used for Dismount Stun.
+- When "Hide Duplicates in Paired Auras" is toggled in SCB, the Active Effects window on the character screen will also hide the auras.
+
+Chat Announcements
+- Occasionally "Champion Point Gained" Center Screen Announcements can trigger at the same time, causing the output to display the wrong Champion Points gained. Added a small throttle to prevent this.
+    
+Combat Info
+- Added a redundant check in Combat Info to stop possible duplicate controls for Bar Highlight from being created and throwing UI errors.
+
+Combat Text
+- Reset the "Interrupt" notification color due to a formatting error that occured.
+
+---
+
+### Version 5.7.1
+
+Unit Frames
+- Fixed an issue where the default Player / Target / Group frames would fail to display even when enabled in the menu. This setting has been updated and the Saved Variables have been reset. Default Frames will be disabled by default and can be re-enabled by changing the menu option.
+
+---
+
+### Version 5.7.0
+
+General
+- Did some various minor optimization, removing some old and un-needed functions and adjusting a few functions that were enabled all the time to only be used when relevant options are enabled.
+- Fixed font paths for non-English localizations.
+- Updated Russian localization with many new translations from KiriX. Thank you!
+- Fixed an issue where the new icons added for Cyrodiil Campaign Bonuses were clipping through the rounded frames in the Campaign Window.
+- Reimplemented custom icons in the Skills Menu & Skills Advisor for Racials & Various passive skill lines.
+
+Buffs & Debuffs
+- Fixed an issue where the Mount icon wouldn't disappear when dismounting in any other way than pressing the mount key. This is due to an issue with the API that should be addressed in a later ESO update.
+- Fixed various minor issues with buffs & debuffs from changes made in the Wolfhunter & Murkmire updates.
+- Updated tooltips for Champion abilities.
+- Updated icons, tooltips, and names for Seasonal Items, Seasonal Experience buffs, and mementos.
+- Updated the names & tooltips of various food and consumable items by using the Item Names and Item Descriptions from these items.
+- Added duration into most toolips and updated the functions used for this to pull accurate values.
+- Updated tooltips for almost all item sets (missing Rewards for the Worthy Sets) and all Classes except Warden. Other skill lines will be processed in the future.
+- Added a timer to the "Battleground Deserter" debuff - and moved it into the long term effects container if enabled.
+- Started adding support to add a "G" label on any buff/debuff effect that is applied while the player is standing in a ground AoE effect. This is only implemented on some abilities but will be expanded in the future.
+- Fixed an issue where some undispellable debuffs (read by the game API as buffs) weren't set to debuffs in the Character Screen Active Effects Panel.
+- "Crystal Fragments Proc" has been renamed to "Crystal Fragments." If you are tracking it by name in a prominent container you will need to update the name. The abilityId remains unchanged.
+- Fixed an issue where Prominent buffs with an unlimited duration would duplicate auras when you zoned into a new aura.
+- Added fake buffs for Home Keep Bonus & Edge Keep Bonuses to Player/Target when Cyrodiil Buffs are enabled.
+
+Chat Announcements
+- Added currency message options for Event Tickets.
+- Fixed an issue where sometimes when rapidly looting/stealing items the message context would switch back from looted/stolen to "received."
+- Fixed an issue causing Tel'var Stone and Alliance Point transactions not to display the amount of currency spent with the merged message option enabled.
+- Updated Alliance Point throttle to include AP earned from Keep Repairs & Resurrecting Players.
+- Added a note to specify that the "Show Used Crafting Items" option in Loot Announcements doesn't work properly without ESO Plus.
+- Fixed achievement tracking categories missing with the Murkmire update.
+- Fixed a UI Error that would occur from Disguise Alerts during "The Colovian Occupation" quest in Arenthia in Reaper's March. This quest puts you into a disguised state without an item in your disguise slot which was causing errors.
+
+Combat Info
+- Added a cast/channel bar for various mementos (replacing the icons that showed on buffs & debuffs previously).
+- Added a cast/channel bar for some seasonal quest events & items (replaced the icons that showed on buffs & debuffs previously).
+- Fixed an issue causing Crystal Fragments proc not to play a sound or be tracked.
+- Fixed a few missing Bar Highlight trackers.
+- Fixed an issue introduced with Murkmire where Bar Highlight & Ultimate Tracking was not behaving properly due to relying on a function no longer used by the API.
+- Dragonknight: Updated the icon for Power Lash to stand out a little more from Molten Whip.
+- Nightblade: Shadow Image now has a unique icon (with similar colorization to the new green color for Incapciating Strike when the player is above 120 ultimate).
+- Nightblade: The Proc Icon for Grim Focus and its morphs now shows the remaining timer for Grim Focus on it.
+- Sorcerer: Unstable Familiar & Summon Winged Twilight abilities now use different icons on their bar/for their effects. The icons matching the base icon are ingame but for some reason not used.
+
+Combat Text
+- Added an option to display Group Member Deaths (enabled by default).
+- Updated the variable names for Incoming Ability Alerts - this will reset the color for Block, Dodge, Avoid, and Interrupt notifications. In a previous update Combat Alerts were changed to support multiple colors for the different alert mitigation types to improve clarity - this resets this for anyone who wasn't aware as well as adds a blue color for interrupt instead of white.
+
+Info Panel
+- Info Panel no longer shows on all screens (Now hidden in menus, on the world map, and during dialogues).
+- Added an option to enable the Info Panel on the World Map Screen.
+
+Unit Frames
+- Added Resolution Selection options to UnitFrames, this changes the default anchors for UnitFrames.
+- Updated UnitFrame default positions to anchor relative to the center of the screen rather than top left.
+- If you are installing the addon for the first time or clearing saved variables - the default unit frames are now disabled by default.
+- Added a "Disable" option to Default Group Unit Frames. It was confusing not being able to set this to disabled before if you were using Custom Group/Raid Frames.
+- Added an option to toggle off the Default Compass Boss Bar.
+- Added target Rank Stars to elite enemy NPC frames - this will show 1-3 stars based on the difficulty of the elite mob you are fighting - similar to the default boss/target frames indicators.
+- Updated Group/Raid frames to follow this functionality described in the Custom Raid Frames description: "If custom group frames are unused, then this raid frame will also be used for small groups."
+- Added an option to color the Target Frame by Player Class - this option takes precedence over Reaction Colors when both options are enabled.
+- Fixed an issue where Group/Raid Frames didn't color correctly when no role was detected (in Battlegrounds).
+- Fixed an issue where the Mount Stamina bar wouldn't toggle off properly when dismounting in any other way than pressing the mount key. This is due to an issue with the API that should be addressed in a later ESO update.
+- Fixed an issue where the shared transparency setting for Group/Raid frames under Custom Raid Frames would be disabled when Custom Group Frames were disabled.
+- Flipped the menu order for color Group/Raid Frames by Class/Role. Role color takes precendence and therefore is the later option listed in the menu.
+
+---
+
+### Version 5.6.0
+
+Combat Info
+- Fixed an issue where Cast Bar custom position was not saving correctly.
+
+Unit Frames
+- Fixed an issue where Group and Raid frame Role Colors & Icons were not working (thanks SilverWF for finding the issue and fixing it).
+
+---
+
+### Version 5.6.0
+
+General
+- Temporarily removed custom icons for passives and racials in the skill tree due to the related functions for this being changed in the update. I intend to reimplement this in the future.
+- Fixed various localization issues with some components.
+- Moved UnitFrames, Buffs & Debuffs, Combat Text, and Info Panel components down to lower draw layers (preventing them from overlapping low priority layer custom addon windows).
+
+Buffs & Debuffs
+- It may have been possible for debuffs not cast by the player to display in prominent buffs - added a filter to only show debuffs sourced from the player.
+- Fake & Consolidated Buffs & Debuffs can now be added to Prominent Buffs & Debuffs or the Blacklist by AbilityId.
+- Mousing over buffs & debuffs now shows the tooltip information.
+- Right clicking on buffs that can be removed will now remove the buff.
+- Updated & added custom tooltips for many abilities - as well as added normalized tooltips for Major/Minor effects.
+- Updated icons + auras for Main Story Quests, Fighter's Guild, Mage's Guild & the first 2 (about 50% of Greenshade as well) zones of AD quests.
+- Updated icons for NPC summon abilities (Each summon type now has an individual icon).
+- Hid various dummy id's for NPC summon abilities & NPC Caltrops.
+- Fixed an issue where NPC name based icon/name overrides for pets didn't correctly apply to the Death Recap Screen.
+- Buff Icon for Vanity Pet / Mount now shows the actual collectible icon overlaid over a background (Added an option to show the generic mount icon if desired).
+- Added cast bar for various general effects such as Filleting Fish, using Keep/Imperial City Retreat Sigils, Pardon Edicts, etc...
+- Werewolf Buff Indicator & Power Bar now behave correctly when dead/reincarnating
+- Fixed issue with Werewolf buff icon bouncing back and forth between effects that had a longer duration than it (due to forcing it to always have a maximum duration of 38 seconds).
+- Devour Cast Bar now ends when devour channel is broken
+- Devour now pauses Werewolf Timer buff when starting and resumes immediately when ending
+
+Chat Announcements
+- Added an option to show when items are removed by quests or events. This requires the destroyed item message display option to be enabled (Otherwise can't tell if a player just destroys an item).
+- Removed hook for EVENT_BROADCAST - stops duplicate server shutdown messages from being displayed.
+- Updated Achievement Tracking Categories to support all achievement categories (they have been branched out again with Wolfhunter DLC).
+- Added some additional conditionals to messages displayed when upgrading an item in order to prevent errors.
+
+Combat Info
+- Added option to resize Cast Bar & Cast Bar Icon
+- Cast Bar Frame is now centered by default, and resizing keeps the bar centered
+- Cast Bar - Significantly improved the display options when unlocking the Cast Bar in the menu to adjust position.
+- Cast Bar will now break when incoming hard CC hits the player - or when the player rolls/blocks
+- Fixed a bug where Bar Highlight effects that were created by EVENT_COMBAT_EVENT would be removed when mousing over another target.
+- Added cast bar indicators for for Main Story Quests, Fighters Guild, Mages Guild & the first 2 (about 50% of Greenshade as well) zones of AD quests.
+- Added cast bar for Soul Gem Resurrection.
+
+Combat Text
+- Combat Text menu completely reorganized in order to be more accessible. All options are now categorized together (I.E. all options for Outgoing Damage, Healing, etc are grouped together now rather than being split across multiple submenus).
+- Updated Alerts to use different colors for each type of alert in order to improve differentiation.
+- Updated Alerts to use conditionals to determine if "Name" or "No Name" prefixes should be used. These options have been added to the menu as well.
+- Fixed an issue where custom icons/ability names based off target name were not displaying correctly.
+- Added the silence effect from Negate Magic & Morphs to the blacklist for SCT - this will no longer spam immunity notifications every .5 seconds on CC Immune targets.
+
+Unit Frames
+- Fixed a major issue where Unit Frames did not properly follow the Account Wide / Player Specific saved variable settings in the menu.
+- Added right click handler for Group Frames - you can now acccess group menu functions by right clicking frames.
+- Fixed an issue where disabling the option to display the player in Small Group frames would cause the role of class color to be incorrect.
+- Added Group Frames, Raid Frames, and Boss Frames into "loot" scene to prevent those frames from disappearing when looting an item.
+- Added tooltips to Custom Frames - Alternate Player Bar( for level information, Siege, Werewolf, and Mounted Status).
+- Alternate Player Bar - Champion XP bar now shows Enlightenment value.
+- Fixed an issue where frames weren't added to the "siegeBarUI" scene - causing your frames (and buffs if anchored) to fade when typing in chat or switching to mouse controls while using a Siege weapon.
+
+---
+
 ### Version 5.5.2
 
-- Combat Info: Added a cast bar for player abilities. Has a variety of customization options and position customization.
-- Combat Info: Fixed an issue where bar highlight for some abilities wasn't working. Updated ground tracking and mine tracking to remove auras when ground effects end prematurely.
-- Buffs & Debuffs: Ground based auras are now removed when a ground effect ends prematurely.
-- Buffs & Debuffs: Updated mine tracker to work for Eternal Hunt set, Manifestation of Terror, and Frozen Gate + morphs.
-- Buffs & Debuffs: Fixed an issue where disabling ground effects from display would not do anything - as well as fixed blacklisting ground abilities not working.
-- Buffs & Debuffs: Updated icons and auras for base Cyrodiil buffs. Keep bonus now shows a stack counter equivalent to the number of enemy keeps your Alliance controls. Also hid some useless auras on Guards/Structures.
-- Buffs & Debuffs: Added missing icon/name changes for pve bite variants of Lycantrophy and Vampirism precursors (evidently its a different abilityId than you get from player bites).
-- Buffs & Debuffs: Updated a few various icons for auras & environmental hazards.
+Combat Info
+- Added a cast bar for player abilities. Has a variety of customization options and position customization.
+- Fixed an issue where bar highlight for some abilities wasn't working. Updated ground tracking and mine tracking to remove auras when ground effects end prematurely.
+
+Buffs & Debuffs
+- Ground based auras are now removed when a ground effect ends prematurely.
+- Updated mine tracker to work for Eternal Hunt set, Manifestation of Terror, and Frozen Gate + morphs.
+- Fixed an issue where disabling ground effects from display would not do anything - as well as fixed blacklisting ground abilities not working.
+- Updated icons and auras for base Cyrodiil buffs. Keep bonus now shows a stack counter equivalent to the number of enemy keeps your Alliance controls. Also hid some useless auras on Guards/Structures.
+- Added missing icon/name changes for pve bite variants of Lycantrophy and Vampirism precursors (evidently its a different abilityId than you get from player bites).
+- Updated a few various icons for auras & environmental hazards.
+
+---
 
 ### Version 5.5.1
 
-- Combat Info: All bar proc abilities will now play a sound when available for use, not just Crystal Fragments.
-- Buffs & Debuffs: Fixed an issue with the prominent buffs font selector that could cause a UI error if an invalid font was selected.
-- Buffs & Debuffs: The debug option for Combat Events and Effect Changes now display abilities with the name updated to reflect changes made by LUIE.
+Combat Info
+- All bar proc abilities will now play a sound when available for use, not just Crystal Fragments.
+
+Buffs & Debuffs:
+- Fixed an issue with the prominent buffs font selector that could cause a UI error if an invalid font was selected.
+- The debug option for Combat Events and Effect Changes now display abilities with the name updated to reflect changes made by LUIE.
+
+---
 
 ### Version 5.5
 

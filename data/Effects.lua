@@ -1933,8 +1933,8 @@ E.EffectSourceOverride = {
 E.EffectMergeName = {
 
     [A.Skill_Overcharge] = "MERGED_EFFECT_OVERCHARGE",
-	[A.Skill_Minor_Slayer] = "MERGED_EFFECT_SLAYER",
-	[A.Skill_Minor_Aegis] = "MERGED_EFFECT_AEGIS",
+    [A.Skill_Minor_Slayer] = "MERGED_EFFECT_SLAYER",
+    [A.Skill_Minor_Aegis] = "MERGED_EFFECT_AEGIS",
     [A.Skill_Boulder_Toss] = "MERGED_EFFECT_BOULDER_TOSS",
 
 }
@@ -3096,7 +3096,7 @@ E.EffectOverride = {
     [59533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds', name = A.Set_Engine_Guardian, tooltip = T.Set_Engine_Guardian_Magicka }, -- Engine Guardian Magicka
     [59543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds', name = A.Set_Engine_Guardian, tooltip = T.Set_Engine_Guardian_Health }, -- Engine Guardian Health
     [80504] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_regeneration.dds', name = A.Set_The_Troll_King, tooltip = T.Set_The_Troll_King }, -- The Troll King
-	[102094] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', groundLabel = true, tooltip = T.Generic_AOE_Disease_1_Sec }, -- Thurvokun
+    [102094] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', groundLabel = true, tooltip = T.Generic_AOE_Disease_1_Sec }, -- Thurvokun
     [102097] = { tooltip = A.Set_Thurvokun }, -- Minor Maim (Thurvokun)
     [102100] = { tooltip = A.Set_Thurvokun }, -- Minor Defile (Thurvokun)
     [102093] = { tooltip = T.Set_Thurvokun }, -- Thurvokun (Thurvokun)
@@ -9930,11 +9930,11 @@ E.EffectPullDuration = {
 
     -- icon = '' -- Set an icon to use
     -- name = '' -- Set a name to use
-	-- duration = # -- Set the duration of the effect
-	-- ignoreFade = true -- Don't remove this effect when it fades.
-	-- ignoreBegin = true -- Ignore effect begin and only apply on refresh - Emulates the same functionality as refreshOnly in E.EffectOverride. For stopping auras from being created for travel times.
-	-- shiftId = # -- Shift the ability id displayed to use this id instead, for tooltip compatibility in some cases.
-	-- overrideDuration = true -- Set duration to display as 0, but preserve the correct duration so this effect doesn't fade improperly.
+    -- duration = # -- Set the duration of the effect
+    -- ignoreFade = true -- Don't remove this effect when it fades.
+    -- ignoreBegin = true -- Ignore effect begin and only apply on refresh - Emulates the same functionality as refreshOnly in E.EffectOverride. For stopping auras from being created for travel times.
+    -- shiftId = # -- Shift the ability id displayed to use this id instead, for tooltip compatibility in some cases.
+    -- overrideDuration = true -- Set duration to display as 0, but preserve the correct duration so this effect doesn't fade improperly.
 
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -10435,19 +10435,19 @@ E.AddGroundDamageAura = {
 
     -- Sets
     [59591] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Bogdan Totem (Bogdan the Nightflame)
-	[97899] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Domihaus (Domihaus)
-	[97883] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Domihaus (Domihaus)
-	[97857] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Earthgore (Earthgore)
-	[84502] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Grothdarr (Grothdarr)
-	[80526] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ilambris
-	[80525] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ilambris
-	[81038] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Sentinel of Rkugamz
-	[59498] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spawn of Mephala
-	[80522] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Stormfist
-	[102094] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Thurvokun
-	[106783] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Dustcloud Damage (Adept Rider's)
-	[75692] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bahraha's Curse
-	[97539] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Draugr's Rest
+    [97899] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Domihaus (Domihaus)
+    [97883] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Domihaus (Domihaus)
+    [97857] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Earthgore (Earthgore)
+    [84502] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Grothdarr (Grothdarr)
+    [80526] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ilambris
+    [80525] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ilambris
+    [81038] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Sentinel of Rkugamz
+    [59498] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spawn of Mephala
+    [80522] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Stormfist
+    [102094] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Thurvokun
+    [106783] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Dustcloud Damage (Adept Rider's)
+    [75692] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bahraha's Curse
+    [97539] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Draugr's Rest
     [67204] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Leeching Plate (of Leeching)
 
     -- Dragonknight

@@ -1,74 +1,56 @@
-﻿## Title: |cE12000L|cFFFFB0ui E|rxtended|
+## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, psypanda, SpellBuilder
-## Version: 5.8
+## Version: 5.8.1
 ## APIVersion: 100026
+## AddOnVersion: 581
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
-## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibMediaProvider-1.0 LibMsgWin-1.0
+## DependsOn: LibStub LibAddonMenu-2.0
+## OptionalDependsOn: LibMediaProvider-1.0 LibMsgWin-1.0
 ## SavedVariables: LUIESV
-##
-## This Add-on is not created by, affiliated with or sponsored by ZeniMax Media Inc. or its affiliates.
-## The Elder Scrolls® and related logos are registered trademarks or trademarks of ZeniMax Media Inc. in the United States and/or other countries.
-## All rights reserved
-##
-## You can read the full terms at https://account.elderscrollsonline.com/add-on-terms
 
-; The MIT License (MIT)
-;
-; Copyright (c) 2017-2018 - LuiExtended - ArtOfShred <esoui.com>
-; Copyright (c) 2015-2016 - LuiExtended - SpellBuilder and Upularity <esoui.com>
-; Copyright (c) 2014 - CombatCloud - Samantha James
-;
-; Permission is hereby granted, free of charge, to any person obtaining a copy
-; of this software and associated documentation files (the "Software"), to deal
-; in the Software without restriction, including without limitation the rights
-; to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-; copies of the Software, and to permit persons to whom the Software is
-; furnished to do so, subject to the following conditions:
-;
-; The above copyright notice and this permission notice shall be included in
-; all copies or substantial portions of the Software.
-;
-; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-; THE SOFTWARE.
+# This Add-on is not created by, affiliated with or sponsored by ZeniMax Media Inc. or its affiliates.
+# The Elder Scrolls® and related logos are registered trademarks or trademarks of ZeniMax Media Inc. in the United States and/or other countries.
+# All rights reserved
+#
+# You can read the full terms at https://account.elderscrollsonline.com/add-on-terms
 
-; see http://www.esoui.com/downloads/info44-LibStub.html
-libs/LibStub/LibStub.lua
+# The MIT License (MIT)
+#
+# Copyright (c) 2017-2019 - LuiExtended - ArtOfShred <esoui.com>
+# Copyright (c) 2015-2016 - LuiExtended - SpellBuilder and Upularity <esoui.com>
+# Copyright (c) 2014 - CombatCloud - Samantha James
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 
-; see http://www.esoui.com/downloads/info56-LibMediaProvider.html
+# http://www.esoui.com/downloads/info56-LibMediaProvider.html
 libs/LibMediaProvider-1.0/LibMediaProvider-1.0.lua
 
-; see http://www.esoui.com/downloads/info802-LibMsgWin.html
+# http://www.esoui.com/downloads/info802-LibMsgWin.html
 libs/LibMsgWin-1.0/LibMsgWin-1.0.lua
 
-; see http://www.esoui.com/downloads/info7-LibAddonMenu.html
-libs/LibAddonMenu-2.0/LibAddonMenu-2.0.lua
-libs/LibAddonMenu-2.0/controls/panel.lua
-libs/LibAddonMenu-2.0/controls/submenu.lua
-libs/LibAddonMenu-2.0/controls/button.lua
-libs/LibAddonMenu-2.0/controls/checkbox.lua
-libs/LibAddonMenu-2.0/controls/colorpicker.lua
-libs/LibAddonMenu-2.0/controls/custom.lua
-libs/LibAddonMenu-2.0/controls/description.lua
-libs/LibAddonMenu-2.0/controls/dropdown.lua
-libs/LibAddonMenu-2.0/controls/editbox.lua
-libs/LibAddonMenu-2.0/controls/header.lua
-libs/LibAddonMenu-2.0/controls/slider.lua
-libs/LibAddonMenu-2.0/controls/texture.lua
-libs/LibAddonMenu-2.0/controls/iconpicker.lua
-libs/LibAddonMenu-2.0/controls/divider.lua
-
 LuiExtended.lua
-LuiExtendedUI.lua
-LuiExtendedMenu.lua
-LuiExtendedWelcome.lua
+UI.lua
+Settings.lua
+Welcome.lua
+Bindings.xml
 
-xml/bindings.xml
-xml/CombatText.xml
+frontend/CombatText.xml
 
 i18n/en.lua
 i18n/$(language).lua
@@ -83,34 +65,33 @@ data/AlertTable.lua
 data/DebugTable.lua
 data/Quests.lua
 
-modules/ChatAnnouncements.lua
-modules/CombatInfo.lua
-modules/InfoPanel.lua
-modules/UnitFrames.lua
-modules/SpellCastBuffs.lua
-modules/SlashCommands.lua
-
+modules/ChatAnnouncements/ChatAnnouncements.lua
+modules/CombatInfo/CombatInfo.lua
 modules/CombatText/CombatText.lua
 modules/CombatText/Animation.lua
 modules/CombatText/Pool.lua
 modules/CombatText/PoolManager.lua
-modules/CombatText/EventListeners/_Base.lua
+modules/CombatText/EventListeners/Base.lua
 modules/CombatText/EventListeners/Alerts.lua
 modules/CombatText/EventListeners/Combat.lua
 modules/CombatText/EventListeners/Death.lua
-modules/CombatText/EventListeners/Points_Alliance.lua
-modules/CombatText/EventListeners/Points_Experience.lua
-modules/CombatText/EventListeners/Points_Champion.lua
-modules/CombatText/EventListeners/Resources_Potion.lua
-modules/CombatText/EventListeners/Resources_Power.lua
-modules/CombatText/EventListeners/Resources_Ultimate.lua
-modules/CombatText/EventViewers/_Base.lua
-modules/CombatText/EventViewers/Combat_Cloud.lua
-modules/CombatText/EventViewers/Combat_Hybrid.lua
-modules/CombatText/EventViewers/Combat_Ellipse.lua
-modules/CombatText/EventViewers/Combat_Scroll.lua
+modules/CombatText/EventListeners/PointsAlliance.lua
+modules/CombatText/EventListeners/PointsExperience.lua
+modules/CombatText/EventListeners/PointsChampion.lua
+modules/CombatText/EventListeners/ResourcesPotion.lua
+modules/CombatText/EventListeners/ResourcesPower.lua
+modules/CombatText/EventListeners/ResourcesUltimate.lua
+modules/CombatText/EventViewers/Base.lua
+modules/CombatText/EventViewers/CombatCloud.lua
+modules/CombatText/EventViewers/CombatHybrid.lua
+modules/CombatText/EventViewers/CombatEllipse.lua
+modules/CombatText/EventViewers/CombatScroll.lua
 modules/CombatText/EventViewers/Alerts.lua
 modules/CombatText/EventViewers/CrowdControl.lua
 modules/CombatText/EventViewers/Death.lua
 modules/CombatText/EventViewers/Points.lua
 modules/CombatText/EventViewers/Resources.lua
+modules/InfoPanel/InfoPanel.lua
+modules/SpellCastBuffs/SpellCastBuffs.lua
+modules/SlashCommands/SlashCommands.lua
+modules/UnitFrames/UnitFrames.lua

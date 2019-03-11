@@ -36,7 +36,11 @@ SC.D = {
     SlashMerchant       = true,
     SlashFence          = true,
     SlashReadyCheck     = true,
-	SlashOutfit			= true,
+    SlashOutfit         = true,
+    SlashCake           = true,
+    SlashPie            = true,
+    SlashMead           = true,
+    SlashWitch          = true,
 }
 SC.SV       = nil
 
@@ -882,35 +886,34 @@ local function SlashInvite(option)
     end
 end
 
--- Summon/Unsummon assistants based on their collectible id
-function LUIE.SlashAssistant(id)
-    local assistant = id
+-- Use collectibles based on their collectible id
+function LUIE.SlashCollectible(id)
+    local collectibleid = id
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA), true)
+        printToChat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_AVA), true)
         if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_AVA)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
     -- Check to make sure we're not in a battleground
     if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG), true)
+        printToChat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_BG), true)
         if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_BG)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    -- Check to make sure that we have the Assistant unlocked
-    if IsCollectibleUnlocked(assistant) then
-        -- Summon/Unsummon the Assistant
-        UseCollectible(assistant)
+    -- Check to make sure that we have the collectible unlocked
+    if IsCollectibleUnlocked(collectibleid) then
+        UseCollectible(collectibleid)
     else
-        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED), GetCollectibleName(assistant)), true)
+        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(collectibleid)), true)
         if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -934,46 +937,46 @@ end
 
 function LUIE.SlashOutfit(option)
 
-	if option == "" or option == nil then
-		printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
-		if LUIE.SV.TempAlertOutfit then
-			callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID) )
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-		return
-	end
+    if option == "" or option == nil then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
+        if LUIE.SV.TempAlertOutfit then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID) )
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 
-	local valid = tonumber(option)
-	if not valid or valid > 10 then
-		printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
-		if LUIE.SV.TempAlertOutfit then
-			callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID) )
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-		return
-	end
+    local valid = tonumber(option)
+    if not valid or valid > 10 then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
+        if LUIE.SV.TempAlertOutfit then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID) )
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 
-	local numOutfits = GetNumUnlockedOutfits()
+    local numOutfits = GetNumUnlockedOutfits()
 
-	if valid > numOutfits then
-		printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
-		if LUIE.SV.TempAlertOutfit then
-			callAlert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-		return
-	end
+    if valid > numOutfits then
+        printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
+        if LUIE.SV.TempAlertOutfit then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 
-	EquipOutfit(valid)
-	-- Display a confirmation message.
-	local name = GetOutfitName(valid)
-	if name == "" then
-		name = strformat("<<1>> <<2>>", GetString(SI_CROWN_STORE_SEARCH_ADDITIONAL_OUTFITS), valid)
-	end
-	printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
-	if LUIE.SV.TempAlertOutfit then
-		callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
-	end
+    EquipOutfit(valid)
+    -- Display a confirmation message.
+    local name = GetOutfitName(valid)
+    if name == "" then
+        name = strformat("<<1>> <<2>>", GetString(SI_CROWN_STORE_SEARCH_ADDITIONAL_OUTFITS), valid)
+    end
+    printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
+    if LUIE.SV.TempAlertOutfit then
+        callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
+    end
 end
 
 function LUIE.TempSlashFilter()
@@ -1047,7 +1050,11 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/fence"]        = nil
     SLASH_COMMANDS["/ready"]        = nil
     SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck -- This command is always registered since it is also a default command
-	SLASH_COMMANDS["/outfit"]		= nil
+    SLASH_COMMANDS["/outfit"]       = nil
+    SLASH_COMMANDS["/cake"]         = nil
+    SLASH_COMMANDS["/pie"]          = nil
+    SLASH_COMMANDS["/mead"]         = nil
+    SLASH_COMMANDS["/witch"]        = nil
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
 
     -- Add commands based off menu options
@@ -1110,24 +1117,36 @@ function SC.RegisterSlashCommands()
         SLASH_COMMANDS["/campaign"]     = SlashCampaignQ
     end
     if SC.SV.SlashBanker then
-        SLASH_COMMANDS["/bank"]         = function(...) LUIE.SlashAssistant(267) end
-        SLASH_COMMANDS["/banker"]       = function(...) LUIE.SlashAssistant(267) end
+        SLASH_COMMANDS["/bank"]         = function(...) LUIE.SlashCollectible(267) end
+        SLASH_COMMANDS["/banker"]       = function(...) LUIE.SlashCollectible(267) end
     end
     if SC.SV.SlashMerchant then
-        SLASH_COMMANDS["/sell"]         = function(...) LUIE.SlashAssistant(301) end
-        SLASH_COMMANDS["/merchant"]     = function(...) LUIE.SlashAssistant(301) end
-        SLASH_COMMANDS["/vendor"]       = function(...) LUIE.SlashAssistant(301) end
+        SLASH_COMMANDS["/sell"]         = function(...) LUIE.SlashCollectible(301) end
+        SLASH_COMMANDS["/merchant"]     = function(...) LUIE.SlashCollectible(301) end
+        SLASH_COMMANDS["/vendor"]       = function(...) LUIE.SlashCollectible(301) end
     end
     if SC.SV.SlashFence then
-        SLASH_COMMANDS["/smuggler"]     = function(...) LUIE.SlashAssistant(300) end
-        SLASH_COMMANDS["/fence"]        = function(...) LUIE.SlashAssistant(300) end
+        SLASH_COMMANDS["/smuggler"]     = function(...) LUIE.SlashCollectible(300) end
+        SLASH_COMMANDS["/fence"]        = function(...) LUIE.SlashCollectible(300) end
+    end
+    if SC.SV.SlashCake then
+        SLASH_COMMANDS["/cake"]         = function(...) LUIE.SlashCollectible(4786) end
+    end
+    if SC.SV.SlashPie then
+        SLASH_COMMANDS["/pie"]          = function(...) LUIE.SlashCollectible(1167) end
+    end
+    if SC.SV.SlashMead then
+        SLASH_COMMANDS["/mead"]         = function(...) LUIE.SlashCollectible(1168) end
+    end
+    if SC.SV.SlashWitch then
+        SLASH_COMMANDS["/witch"]        = function(...) LUIE.SlashCollectible(479) end
     end
     if SC.SV.SlashReadyCheck then
         SLASH_COMMANDS["/ready"]        = LUIE.SlashReadyCheck
     end
-	if SC.SV.SlashOutfit then
-		SLASH_COMMANDS["/outfit"]		= LUIE.SlashOutfit
-	end
+    if SC.SV.SlashOutfit then
+        SLASH_COMMANDS["/outfit"]       = LUIE.SlashOutfit
+    end
 
     -- TODO: DEBUG, REMOVE
     SLASH_COMMANDS["/filter"]           = LUIE.TempSlashFilter

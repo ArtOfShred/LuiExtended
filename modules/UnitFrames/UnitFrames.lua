@@ -1427,7 +1427,7 @@ function UF.Initialize( enabled )
         eventManager:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL,         UF.OnSiege )
         eventManager:RegisterForEvent(moduleName, EVENT_LEAVE_RAM_ESCORT,          UF.OnSiege )
         eventManager:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED,     UF.OnMount )
-		eventManager:RegisterForEvent(moduleName, EVENT_ABILITY_LIST_CHANGED,	   UF.AbilityListChange ) -- TODO: Temporary fix
+        eventManager:RegisterForEvent(moduleName, EVENT_ABILITY_LIST_CHANGED,      UF.AbilityListChange ) -- TODO: Temporary fix
         eventManager:RegisterForEvent(moduleName, EVENT_EXPERIENCE_UPDATE,         UF.OnXPUpdate )
         eventManager:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_GAINED,     UF.OnChampionPointGained )
         eventManager:RegisterForEvent(moduleName, EVENT_GROUP_SUPPORT_RANGE_UPDATE,    UF.OnGroupSupportRangeUpdate )
@@ -2526,7 +2526,7 @@ end
 
 -- TODO: Temporarily listener for EVENT_ABILITY_LIST_CHANGED to fix issue where no EVENT_MOUNTED_STATE_CHANGED is triggering when Hard Dismounting or Crouching.
 function UF.AbilityListChange(eventCode)
-	UF.CustomFramesSetupAlternative( IsWerewolf(), ( IsPlayerControllingSiegeWeapon() or IsPlayerEscortingRam() ), IsMounted() )
+    UF.CustomFramesSetupAlternative( IsWerewolf(), ( IsPlayerControllingSiegeWeapon() or IsPlayerEscortingRam() ), IsMounted() )
 end
 
 -- Runs on the EVENT_EXPERIENCE_UPDATE listener.
@@ -2554,14 +2554,14 @@ function UF.UpdateVeteranXP()
         if UF.CustomFrames.player.Experience then
             UF.CustomFrames.player.Experience.bar:SetValue( GetUnitChampionPoints("player") )
         elseif UF.CustomFrames.player.ChampionXP then
-			local enlightenedPool = 4 * GetEnlightenedPool()
-			local xp = GetPlayerChampionXP()
-			local maxBar = GetNumChampionXPInChampionPoint(GetPlayerChampionPointsEarned())
-			local enlightenedBar = enlightenedPool + xp
-			if enlightenedBar > maxBar then enlightenedBar = maxBar end -- If the enlightenment pool extends past the current level then cap it at the maximum bar value.
+            local enlightenedPool = 4 * GetEnlightenedPool()
+            local xp = GetPlayerChampionXP()
+            local maxBar = GetNumChampionXPInChampionPoint(GetPlayerChampionPointsEarned())
+            local enlightenedBar = enlightenedPool + xp
+            if enlightenedBar > maxBar then enlightenedBar = maxBar end -- If the enlightenment pool extends past the current level then cap it at the maximum bar value.
 
             UF.CustomFrames.player.ChampionXP.bar:SetValue( xp )
-			UF.CustomFrames.player.ChampionXP.enlightenment:SetValue( enlightenedBar )
+            UF.CustomFrames.player.ChampionXP.enlightenment:SetValue( enlightenedBar )
         end
     end
     -- Clear local flag
@@ -2689,7 +2689,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterWerewolf)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
-		UF.CustomFrames.player.alternative.enlightenment:SetHidden( true )
+        UF.CustomFrames.player.alternative.enlightenment:SetHidden( true )
     elseif UF.SV.PlayerEnableAltbarMSW and isSiege then
         icon    = "LuiExtended/media/unitframes/unitframes_bar_siege.dds"
         center  = { 0.05, 0, 0, 0.9 }
@@ -2708,7 +2708,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterSiege)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
-		UF.CustomFrames.player.alternative.enlightenment:SetHidden( true )
+        UF.CustomFrames.player.alternative.enlightenment:SetHidden( true )
     elseif UF.SV.PlayerEnableAltbarMSW and isMounted then
         icon    = "LuiExtended/media/unitframes/unitframes_bar_mount.dds"
         center  = { 0.1*UF.SV.CustomColourStamina[1], 0.1*UF.SV.CustomColourStamina[2], 0.1*UF.SV.CustomColourStamina[3], 0.9 }
@@ -2731,7 +2731,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterMounted)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
-		UF.CustomFrames.player.alternative.enlightenment:SetHidden( true )
+        UF.CustomFrames.player.alternative.enlightenment:SetHidden( true )
     elseif UF.SV.PlayerEnableAltbarXP and ( UF.CustomFrames.player.isLevelCap or ( UF.CustomFrames.player.isChampion )) then
         UF.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
         UF.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
@@ -2741,14 +2741,14 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
 
         UF.OnChampionPointGained() -- Setup bar colour and proper icon
 
-		local enlightenedPool = 4 * GetEnlightenedPool()
-		local xp = GetPlayerChampionXP()
-		local maxBar = GetNumChampionXPInChampionPoint(GetPlayerChampionPointsEarned())
-		local enlightenedBar = enlightenedPool + xp
-		if enlightenedBar > maxBar then enlightenedBar = maxBar end -- If the enlightenment pool extends past the current level then cap it at the maximum bar value.
+        local enlightenedPool = 4 * GetEnlightenedPool()
+        local xp = GetPlayerChampionXP()
+        local maxBar = GetNumChampionXPInChampionPoint(GetPlayerChampionPointsEarned())
+        local enlightenedBar = enlightenedPool + xp
+        if enlightenedBar > maxBar then enlightenedBar = maxBar end -- If the enlightenment pool extends past the current level then cap it at the maximum bar value.
 
-		UF.CustomFrames.player.ChampionXP.enlightenment:SetMinMax( 0 , maxBar)
-		UF.CustomFrames.player.ChampionXP.enlightenment:SetValue( enlightenedBar )
+        UF.CustomFrames.player.ChampionXP.enlightenment:SetMinMax( 0 , maxBar)
+        UF.CustomFrames.player.ChampionXP.enlightenment:SetValue( enlightenedBar )
 
         UF.CustomFrames.player.ChampionXP.bar:SetMinMax( 0 , maxBar)
         UF.CustomFrames.player.ChampionXP.bar:SetValue( xp )
@@ -2758,7 +2758,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterXP)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
-		UF.CustomFrames.player.alternative.enlightenment:SetHidden( false )
+        UF.CustomFrames.player.alternative.enlightenment:SetHidden( false )
     elseif UF.SV.PlayerEnableAltbarXP then
         icon    = "LuiExtended/media/unitframes/unitframes_level_normal.dds"
         center  = { 0, 0.1, 0.1, 0.9 }
@@ -2779,7 +2779,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.bar:SetMouseEnabled( true )
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseEnter", UF.AltBar_OnMouseEnterXP)
         UF.CustomFrames.player.alternative.bar:SetHandler("OnMouseExit",  UF.AltBar_OnMouseExit)
-		UF.CustomFrames.player.alternative.enlightenment:SetHidden( true )
+        UF.CustomFrames.player.alternative.enlightenment:SetHidden( true )
     else
         UF.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
         UF.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
@@ -2789,7 +2789,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
 
         hidden = true
         UF.CustomFrames.player.alternative.bar:SetMouseEnabled( false )
-		UF.CustomFrames.player.alternative.enlightenment:SetHidden( true )
+        UF.CustomFrames.player.alternative.enlightenment:SetHidden( true )
     end
 
     -- Setup of bar colours and icon
@@ -3364,14 +3364,14 @@ function UF.CustomFramesApplyColours(isMenu)
                 local unitFrame = UF.CustomFrames[unitTag]
                 local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
 
-				local group = groupSize <= 4
-				local raid = groupSize > 4
-				if not UF.SV.CustomFramesGroup then
-					raid = true
-					group = false
-				end
+                local group = groupSize <= 4
+                local raid = groupSize > 4
+                if not UF.SV.CustomFramesGroup then
+                    raid = true
+                    group = false
+                end
 
-				if (group and UF.SV.ColorRoleGroup) or (raid and UF.SV.ColorRoleRaid) then
+                if (group and UF.SV.ColorRoleGroup) or (raid and UF.SV.ColorRoleRaid) then
                     if role == 1 then
                         thb.bar:SetColor( unpack(dps) )
                         thb.backdrop:SetCenterColor( unpack(dps_bg) )
@@ -3409,7 +3409,7 @@ function UF.CustomFramesApplyColours(isMenu)
                     end
                     thb.bar:SetColor( unpack(class_color) )
                     thb.backdrop:SetCenterColor( unpack(class_bg) )
-				else
+                else
                     thb.bar:SetColor( unpack(health) )
                     thb.backdrop:SetCenterColor( unpack(health_bg) )
                 end
@@ -3454,12 +3454,12 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
     local tank_bg   = { 0.1*UF.SV.CustomColourTank[1],   0.1*UF.SV.CustomColourTank[2],   0.1*UF.SV.CustomColourTank[3], 0.9 }
 
     local groupSize = GetGroupSize()
-	local group = groupSize <= 4
-	local raid = groupSize > 4
-	if not UF.SV.CustomFramesGroup then
-		raid = true
-		group = false
-	end
+    local group = groupSize <= 4
+    local raid = groupSize > 4
+    if not UF.SV.CustomFramesGroup then
+        raid = true
+        group = false
+    end
 
     if (group and UF.SV.ColorRoleGroup) or (raid and UF.SV.ColorRoleRaid) then
         if UF.CustomFrames[unitTag] then
@@ -3475,10 +3475,10 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
             elseif role == 2 then
                 thb.bar:SetColor( unpack(tank) )
                 thb.backdrop:SetCenterColor( unpack(tank_bg) )
-			else
-				thb.bar:SetColor( unpack(health) )
-				thb.backdrop:SetCenterColor( unpack(health_bg) )
-			end
+            else
+                thb.bar:SetColor( unpack(health) )
+                thb.backdrop:SetCenterColor( unpack(health_bg) )
+            end
         end
     end
 end

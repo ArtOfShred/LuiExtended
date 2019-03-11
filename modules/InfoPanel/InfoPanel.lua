@@ -109,11 +109,11 @@ end
 local panelFragment
 
 function PNL.SetDisplayOnMap()
-	if PNL.SV.DisplayOnWorldMap then
-		sceneManager:GetScene("worldMap"):AddFragment( panelFragment )
-	else
-		sceneManager:GetScene("worldMap"):RemoveFragment( panelFragment )
-	end
+    if PNL.SV.DisplayOnWorldMap then
+        sceneManager:GetScene("worldMap"):AddFragment( panelFragment )
+    else
+        sceneManager:GetScene("worldMap"):RemoveFragment( panelFragment )
+    end
 end
 
 local function CreateUIControls()
@@ -129,8 +129,8 @@ local function CreateUIControls()
     sceneManager:GetScene("hudui"):AddFragment( panelFragment )
     sceneManager:GetScene("siegeBar"):AddFragment( panelFragment )
     sceneManager:GetScene("siegeBarUI"):AddFragment( panelFragment )
-	
-	PNL.SetDisplayOnMap() -- Add to map scene if the option is enabled.
+
+    PNL.SetDisplayOnMap() -- Add to map scene if the option is enabled.
 
     uiPanel.div = UI.Texture( uiPanel, nil, nil, "/esoui/art/miscellaneous/horizontaldivider.dds", DL_BACKGROUND, false )
     uiPanel.div:SetAnchor( LEFT, uiPanel, LEFT, -60, 0 )
