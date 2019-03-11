@@ -117,6 +117,23 @@ U.Boss_Foulhide                         = 'Foulhide'
 U.Boss_Mennir_Many_Legs                 = 'Mennir Many-Legs'
 U.Boss_Selene                           = 'Selene'
 
+-- Spindleclutch I
+U.Boss_Spindlekin                       = 'Spindlekin'
+U.Boss_Swarm_Mother                     = 'Swarm Mother'
+U.Boss_Cerise_the_Widow_Maker           = 'Cerise the Widow-Maker'
+U.Boss_Big_Rabbu                        = 'Big Rabbu'
+U.Boss_The_Whisperer                    = 'The Whisperer'
+
+U.Boss_Praxin_Douare                    = 'Praxin Douare'
+
+-- Spindleclutch II
+U.Boss_Mad_Mortine                      = 'Mad Mortine'
+U.Boss_Blood_Spawn                      = 'Blood Spawn'
+U.NPC_The_Whisperer_Nightmare           = 'The Whisperer Nightmare'
+U.NPC_Flesh_Atronach                    = 'Flesh Atronach'
+U.Boss_Urvan_Veleth                     = 'Urvan Veleth'
+U.Boss_Vorenor_Winterbourne             = 'Vorenor_Winterborne'
+
 -- Frostvault
 U.NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre'
 U.Boss_Icestalker                       = 'Icestalker'

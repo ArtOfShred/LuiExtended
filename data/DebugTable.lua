@@ -7441,6 +7441,7 @@ debugAuras = {
             [88566] = true, -- Summon the Dead -- Necromancer
             [88554] = true, -- Summon the Dead -- Necromancer
             [88555] = true, -- Summon the Dead -- Necromancer
+            [88556] = true, -- Summon the Dead -- Necromancer
             [88561] = true, -- Summon the Dead -- Necromancer
             [13397] = true, -- Empower Undead -- Necromancer
             [88560] = true, -- Summon the Dead -- Necromancer
@@ -8560,7 +8561,7 @@ debugAuras = {
             [50183] = true, -- Consuming Energy -- Spellfiend
             [52398] = true, -- Consuming Energy -- Spellfiend
 
-            --[68735] = true, -- Vampiric Drain -- Vampire
+            [68735] = true, -- Vampiric Drain -- Vampire
             [68750] = true, -- Vampiric Drain -- Vampire
             [68765] = true, -- Vampiric Drain -- Vampire
             [68771] = true, -- Vampiric Drain Heal Dummy -- Vampire
@@ -12775,6 +12776,183 @@ debugAuras = {
             [30901] = true, -- Primal Leap (Spectral Senche-Tiger)
 
             [33860] = true, -- Q4733_Siphon
+
+            -- Spindleclutch I
+            [85714] = true, -- Teleport
+            [18184] = true, -- Q4054 Torch Burn
+            [46147] = true, -- Summon Swarm (Spindlekin)
+
+            [21777] = true, -- Webdrop
+            [17957] = true, -- Bite (Swarm Mother)
+            [22034] = true, -- Inject Poison (Swarm Mother)
+            [22035] = true, -- Inject Poison (Swarm Mother)
+            [22087] = true, -- Inject Poison (Swarm Mother)
+            [22086] = true, -- Inject Poison (Swarm Mother)
+            [17964] = true, -- Impeding Webs (Swarm Mother)
+            [34422] = true, -- Impeding Webs (Swarm Mother)
+            [32080] = true, -- Impeding Webs (Swarm Mother)
+            [21827] = true, -- Impeding Webs (Swarm Mother)
+            [17965] = true, -- Impeding Webs (Swarm Mother)
+            [17960] = true, -- Arachnid Leap (Swarm Mother)
+            [20642] = true, -- Poisoned Fang (Swarm Mother)
+            [18559] = true, -- Spawn Broodlings (Swarm Mother)
+
+            [18690] = true, -- Fighter's Boon
+
+            [18363] = true, -- Fiery Reach (Big Rabbu)
+            [18365] = true, -- Grapple (Big Rabbu)
+
+            [29985] = true, -- Whispers (The Whisperer)
+            [33355] = true, -- Combat Walk (The Whisperer)
+
+            [18076] = true, -- Impale (The Whisperer)
+            [18111] = true, -- Arachnophobia (The Whisperer)
+            [18116] = true, -- Arachnophobia (The Whisperer)
+            [47981] = true, -- Webdrop (The Whisperer)
+
+            [18078] = true, -- Web Blast (The Whisperer)
+            [46218] = true, -- Fire Backlash (The Whisperer)
+            [46219] = true, -- Web Blast (The Whisperer)
+
+            [35572] = true, -- Grappling Web (The Whisperer)
+            [35599] = true, -- Can Cast Explosion (The Whisperer)
+            [35574] = true, -- Stun Picker (The Whisperer)
+            [35575] = true, -- Grappling Web (The Whisperer)
+
+            [18058] = true, -- Daedric Explosion (The Whisperer)
+            [22033] = true, -- Daedric Explosion (The Whisperer)
+            [22032] = true, -- Daedric Explosion Knockback (The Whisperer)
+
+            -- Spindleclutch II
+            [85897] = true, -- Teleport
+            [29820] = true, -- Dummy
+            [28749] = true, -- Intro
+
+            [27922] = true, -- Claw (Blood Spawn)
+            [27923] = true, -- Claw (Blood Spawn)
+
+            [28093] = true, -- Vicious Smash (Blood Spawn)
+            [47139] = true, -- Knockdown (Blood Spawn)
+            [47140] = true, -- Knockdown (Blood Spawn)
+
+            [47151] = true, -- Leap to Center (Blood Spawn)
+            [47154] = true, -- Leap to Center (Blood Spawn)
+            [47145] = true, -- Has Charged (Blood Spawn)
+            [44594] = true, -- Sound Initial (Blood Spawn)
+            [27995] = true, -- Cave-In (Blood Spawn)
+            [28006] = true, -- Cave In (Blood Spawn)
+            [64975] = true, -- Cave In Bonus (Blood Spawn)
+            [40046] = true, -- Sound Level 1 (Blood Spawn)
+            [47198] = true, -- Falling Rocks (Blood Spawn)
+            [40047] = true, -- Sound Level 2 (Blood Spawn)
+            [40048] = true, -- Sound Level 3 (Blood Spawn)
+            [40049] = true, -- Sound Level 4 (Blood Spawn)
+
+            [47331] = true, -- Cave-In (Blood Spawn)
+            [47332] = true, -- Cave-In (Blood Spawn)
+            [64979] = true, -- Cave In Bonus (Blood Spawn)
+
+            [31611] = true, -- Crusing Rocks (Cave In)
+            [87373] = true, -- Crusing Rocks (Cave In)
+
+            [27764] = true, -- Dark Ritual (Praxin Douare)
+            [27765] = true, -- Dummy (Praxin Douare)
+            [27820] = true, -- Dummy (Praxin Douare)
+            [28620] = true, -- Dummy (Praxin Douare)
+
+            [28438] = true, -- Dummy (Praxin Douare)
+            [47122] = true, -- Praxin's Nightmare (Praxin Douare)
+            [27768] = true, -- Dummy (Praxin Douare)
+
+            [18036] = true, -- Grappling Web (The Whisperer Nightmare)
+            [21635] = true, -- Grappling Web (The Whisperer Nightmare)
+            [18054] = true, -- Entangled (The Whisperer Nightmare)
+            [18051] = true, -- Encased (The Whisperer Nightmare)
+            [18039] = true, -- Grappling Web (The Whisperer Nightmare)
+            [21477] = true, -- Can Cast Daedric Explosion (The Whisperer Nightmare)
+
+            [28002] = true, -- Dummy (Praxin Douare)
+
+            [27750] = true, -- Distorted Bolt (Praxin Douare)
+            [27965] = true, -- Despair (Praxin Douare)
+            [27975] = true, -- Lava Quake (Praxin Douare)
+            [27973] = true, -- Lava Quake (Praxin Douare)
+            [27974] = true, -- Lava Quake (Praxin Douare)
+            [27979] = true, -- Despair (Praxin Douare)
+
+            [27741] = true, -- Enervating Seal (Praxin Douare)
+            [27748] = true, -- Enervating Seal (Praxin Douare)
+            [27743] = true, -- Enervating Seal (Praxin Douare)
+            [27744] = true, -- Enervating Seal (Praxin Douare)
+            [27742] = true, -- Enervating Seal (Praxin Douare)
+
+            [27703] = true, -- Harrowing Ring (Praxin Douare)
+            [61443] = true, -- Harrowing Ring (Praxin Douare)
+            [61442] = true, -- Harrowing Ring (Praxin Douare)
+            [28406] = true, -- Dummy (Blood Essence)
+            [61445] = true, -- Dummy (Blood Essence)
+            [73016] = true, -- Dummy (Blood Essence)
+            [27650] = true, -- Harrowing Ring (Blood Essence)
+            [27684] = true, -- Dummy (Blood Essence)
+            [27709] = true, -- Harrowing Ring (Blood Essence)
+            [27653] = true, -- Dummy (Blood Essence)
+
+            [86418] = true, -- Harrowing Ring (Harrowing Ring)
+            [27716] = true, -- Dummy (Blood Essence)
+            [43176] = true, -- Shocked (Blood Essence)
+            [61444] = true, -- Shocked (Blood Essence)
+            [43173] = true, -- DUN_SCH_RingBurst (Blood Essence)
+
+            [58502] = true, -- Invisibility
+            [29782] = true, -- Cocooned
+
+            [29828] = true, -- Dummy (Flesh Atronach)
+            [61202] = true, -- Claw Buff Damage (Flesh Atronach)
+            [27435] = true, -- Monstrous Growth (Flesh Atronach)
+            [27436] = true, -- Monstrous Growth (Flesh Atronach)
+            [27447] = true, -- Monstrous Growth (Flesh Atronach)
+            [27437] = true, -- Monstrous Growth (Flesh Atronach)
+            [27438] = true, -- Monstrous Growth (Flesh Atronach)
+            [27448] = true, -- Monstrous Growth (Flesh Atronach)
+
+            [27600] = true, -- Blood Pool (Urvan Veleth)
+            [27611] = true, -- Blood Pool (Urvan Veleth)
+            [27603] = true, -- Blood Pool (Urvan Veleth)
+            [27605] = true, -- Blood Pool (Urvan Veleth)
+
+            --[32100] = true, -- Arachnopbohia
+            --[28632] = true, -- Intro (Vorenor Winterbourne)
+
+            [27660] = true, -- Blood Drain (Vorenor Winterbourne)
+            [27707] = true, -- Blood Drain (Vorenor Winterbourne)
+
+            [27905] = true, -- Blood Pool (Vorenor Winterbourne)
+            [32357] = true, -- Blood Pool (Vorenor Winterbourne)
+            [27906] = true, -- Blood Pool (Vorenor Winterbourne)
+            [27907] = true, -- Blood Pool (Vorenor Winterbourne)
+            [32652] = true, -- Blood Pool (Vorenor Winterbourne)
+
+            [27897] = true, -- Open Wounds (Vorenor Winterbourne)
+            [27898] = true, -- Open Wounds (Vorenor Winterbourne)
+
+            [27791] = true, -- Blood Frenzy (Vorenor Winterbourne)
+            [27792] = true, -- Blood Frenzy (Vorenor Winterbourne)
+            [27799] = true, -- Blood Frenzy (Vorenor Winterbourne)
+            [33106] = true, -- Blood Frenzy (Vorenor Winterbourne)
+
+            [31672] = true, -- Thrall Feast (Vorenor Winterbourne)
+            [31669] = true, -- Shielded (Vorenor Winterbourne)
+            [31663] = true, -- Restrained (Vorenor Winterbourne)
+            [31674] = true, -- Thrall Feast (Vorenor Winterbourne)
+            [31684] = true, -- Thrall Feast (Vorenor Winterbourne)
+            [31685] = true, -- Thrall Feast (Vorenor Winterbourne)
+            [31673] = true, -- Thrall Feast (Vorenor Winterbourne)
+            [31686] = true, -- Thrall Feast (Vorenor Winterbourne)
+            [31687] = true, -- Thrall Feast (Vorenor Winterbourne)
+            [31688] = true, -- Thrall Feast (Vorenor Winterbourne)
+            [31689] = true, -- Thrall Feast (Vorenor Winterbourne)
+            [47120] = true, -- Death of the Suffering (Captive)
+            [47118] = true, -- Death of the Suffering (Captive)
 
             -- Frostvault
             [115316] = true, -- Weatherman

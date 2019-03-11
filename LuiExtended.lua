@@ -260,6 +260,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             if LUIE.Effects.EffectSourceOverride[abilityId].pet then
                 minionName = LUIE.Effects.EffectSourceOverride[abilityId].pet
             end
+            if LUIE.Effects.EffectSourceOverride[abilityId].removePlayer then
+                isPlayer = false
+            end
         end
 
         return attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName

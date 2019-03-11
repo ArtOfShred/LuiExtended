@@ -111,6 +111,7 @@ LUIE.AlertTable = {
 
     [88554] = { summon = true, priority = 2, auradetect = true }, -- Summon the Dead (Necromancer)
     [88555] = { summon = true, priority = 2, auradetect = true }, -- Summon the Dead (Necromancer)
+    [88556] = { summon = true, priority = 2, auradetect = true }, -- Summon the Dead (Necromancer)
     [13397] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true, result = ACTION_RESULT_BEGIN, refire = 1000 }, -- Empower Undead (Necromancer)
 
     [14350] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Aspect of Terror (Fear Mage)
@@ -414,7 +415,7 @@ LUIE.AlertTable = {
 
     [50182] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Consuming Energy (Spellfiend)
 
-    [68735] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Vampiric Drain (Vampire)
+    [68735] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Vampiric Drain (Vampire)
 
     [2867] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Crushing Leap (Werewolf)
     [3415] = { block = true, dodge = true, priority = 3, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN }, -- Flurry (Werewolf)
@@ -868,7 +869,7 @@ LUIE.AlertTable = {
     [31096] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Poison Burst (Longclaw)
 
     [31202] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Venomous Burst (Queen Aklayah)
-    [31205] = { avoid = true, priority = 1, auradetect = true, notDirect = true, bossName = true, noSelf = true }, -- Venomous Burst (Queen Aklayah)
+    [31205] = { power = true, priority = 1, auradetect = true, noSelf = true }, -- Venomous Burst (Queen Aklayah)
 
     [30996] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Vicious Maul (Foulhide)
     [30812] = { avoid = true, block = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Trampling Charge (Foulhide)
@@ -880,9 +881,45 @@ LUIE.AlertTable = {
     [30731] = { block = true, dodge = true, priority = 1, auradetect = true }, -- Summon Primal Spirit (Selene)
     [30896] = { dodge = true, priority = 1, auradetect = true, bossName = true }, -- Summon Senche Spirit (Selene)
 
-    [31986] = { summon= true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Summon Melee (Selene)
-    [31984] = { summon= true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Summon Healer (Selene)
-    [31985] = { summon= true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Summon Archer (Selene)
+    [31986] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Summon Melee (Selene)
+    [31984] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Summon Healer (Selene)
+    [31985] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Summon Archer (Selene)
+
+    -- Spindleclutch I
+    [46147] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Summon Swarm (Spindlekin)
+
+    [22034] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Inject Poison (Swarm Mother)
+    [17964] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Impeding Webs (Swarm Mother)
+    [17960] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Arachnid Leap (Swarm Mother)
+    [18559] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, refire = 1000, bossName = true }, -- Spawn Broodling (Swarm Mother)
+
+    [18111] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Arachnophobia (Swarm Mother)
+    [18078] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Web Blast (Swarm Mother)
+    [35572] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Grappling Web (Swarm Mother)
+    [18058] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Daedric Explosion (Swarm Mother)
+
+    -- Spindleclutch II
+    [28093] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Vicious Smash (Blood Spawn)
+    [27995] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Cave-In (Blood Spawn)
+    [47331] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, refire = 60000 }, -- Cave-In (Blood Spawn)
+    [47198] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, auradetect = true, refire = 5000, fakeName = '' }, -- Falling Rocks (Cave In)
+
+    [28438] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Dummy (Praxin Douare)
+    [18036] = { block = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.NPC_The_Whisperer_Nightmare, refire = 2500 }, -- Grappling Web (The Whisperer Nightmare)
+
+    [27965] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Despair (Praxin Douare)
+    [27741] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Despair (Praxin Douare)
+    [27703] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Harrowing Ring (Praxin Douare)
+    [61443] = { power = true, priority = 1, auradetect = true, noSelf = true }, -- Harrowing Ring (Praxin Douare)
+
+    [27435] = { power = true, priority = 1, auradetect = true }, -- Monstrous Growth (Flesh Atronach)
+    [27437] = { power = true, priority = 1, auradetect = true }, -- Monstrous Growth (Flesh Atronach)
+
+    [27600] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true }, -- Blood Pool (Urvan Veleth)
+
+    [27905] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Blood Pool (Vorenor Winterbourne)
+    [27897] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Open Wounds (Vorenor Winterbourne)
+    [27791] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Blood Frenzy (Vorenor Winterbourne)
 
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)

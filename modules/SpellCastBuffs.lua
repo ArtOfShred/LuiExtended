@@ -2075,6 +2075,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             if E.MapDataOverride[abilityId][index].name then
                 effectName = E.MapDataOverride[abilityId][index].name
             end
+            if E.MapDataOverride[abilityId][index].hide then
+                return
+            end
         end
     end
 
@@ -2506,6 +2509,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
                 end
                 if E.MapDataOverride[abilityId][index].name then
                     effectName = E.MapDataOverride[abilityId][index].name
+                end
+                if E.MapDataOverride[abilityId][index].hide then
+                    return
                 end
             end
         end

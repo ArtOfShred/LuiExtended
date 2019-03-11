@@ -3284,6 +3284,14 @@ local strings = {
     SI_LUIE_SKILL_EARTH_MENDER =                         "Earth Mender",
     SI_LUIE_SKILL_TRUE_SHOT =                            "True Shot",
     SI_LUIE_SKILL_SENCHE_SPIRIT =                        "Senche Spirit",
+
+    SI_LUIE_SKILL_INJECT_POISON_TP =                     "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF6|r seconds.\n\nKnocked back for |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_SPAWN_HATCHLINGS =                     "Spawn Hatchlings",
+    SI_LUIE_SKILL_FIGHTERS_BOON_TP =                     "Increase Armor by |cFFFFFF559|r for |cFFFFFF2|r minutes.",
+    SI_LUIE_SKILL_ENERVATING_SEAL_TP =                   "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds. Each tick drains |cFFFFFF15|r% of your Max Stamina and Magicka.",
+    SI_LUIE_SKILL_MONSTROUS_GROWTH_TP =                  "Increase damage done by |cFFFFFF<<1>>|r%.",
+    SI_LUIE_SKILL_BLOOD_POOL_TP =                        "Taking Physical Damage every |cFFFFFF1|r second. Each tick heals the Vampire.",
+    SI_LUIE_SKILL_BLOOD_POOL_1_5_TP =                    "Taking Physical Damage every |cFFFFFF1.5|r seconds. Each tick heals the Vampire.",
 }
 
 -- TODO: Switch to StringId's

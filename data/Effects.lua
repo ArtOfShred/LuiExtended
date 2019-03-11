@@ -1531,6 +1531,23 @@ E.AddNameAura = {
     [U.Boss_Mennir_Many_Legs] = { [1] = { id = 33097 } }, -- Mennir Many-Legs
     [U.Boss_Selene] = { [1] = { id = 33097 } }, -- Selene
 
+    -- Spindleclutch I
+    [U.Boss_Spindlekin] = { [1] = { id = 33097 } }, -- Spindlekin
+    [U.Boss_Swarm_Mother] = { [1] = { id = 33097 } }, -- Swarm Mother
+    [U.Boss_Cerise_the_Widow_Maker] = { [1] = { id = 33097 } }, -- Cerise the Widow-Maker
+    [U.Boss_Big_Rabbu] = { [1] = { id = 33097 } }, -- Big Rabbu
+    [U.Boss_The_Whisperer] = { [1] = { id = 33097 } }, -- The Whisperer
+
+    [U.Boss_Praxin_Douare] = { [1] = { id = 33097 } }, -- Praxin Douare
+
+    -- Spindleclutch II
+    [U.Boss_Mad_Mortine] = { [1] = { id = 33097 } }, -- Mad Mortine
+    [U.Boss_Blood_Spawn] = { [1] = { id = 33097 } }, -- Blood Spawn
+
+    [U.NPC_Flesh_Atronach] = { [1] = { id = 33097, zone = 576 } }, -- Flesh Atronach (Spindleclutch II)
+    [U.Boss_Urvan_Veleth] = { [1] = { id = 33097 } }, -- Urvan Veleth
+    [U.Boss_Vorenor_Winterbourne] = { [1] = { id = 33097 } }, -- Vorenor_Winterborne
+
     -- Frostvault
     [U.NPC_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
     [U.Boss_Icestalker] = { [1] = { id = 33097 } }, -- Icestalker
@@ -1678,7 +1695,7 @@ E.EffectOverrideByName = {
                     ['Heartstalker'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
                     ['Nighteyes'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
                     ['Shadowhiskers'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-                    ['Senche Spirit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend_ghost.dds' }, -- Rend (Senche Spirit)
+                    ['Senche Spirit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite_ghost.dds' }, -- Rend (Senche Spirit)
                 },
     [60630] =   { -- Rend (Lion)
                     ['Lion'] =                      { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
@@ -1696,7 +1713,7 @@ E.EffectOverrideByName = {
                     ['Heartstalker'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
                     ['Nighteyes'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
                     ['Shadowhiskers'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-                    ['Senche Spirit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend_ghost.dds' }, -- Rend (Senche Spirit)
+                    ['Senche Spirit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite_ghost.dds' }, -- Rend (Senche Spirit)
                 },
     [60641] =   { -- Claw (Lion)
                     ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_claw.dds' }, -- Claw (Sabre Cat)
@@ -1838,6 +1855,9 @@ E.EffectOverrideByName = {
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Override source name - when one of these abilities hits change the source to match this name. Used for death recap to rename odd trap or source names for damage.
+-- source = '' -- Change source name
+-- pet = '' -- Change or remove pet name
+-- removePlayer = true -- If for some reason a damage effect is sourced from the player, set it to not be flagged as isPlayer == true in order to stop AVA rank, etc from showing.
 --------------------------------------------------------------------------------------------------------------------------------
 E.EffectSourceOverride = {
 
@@ -1900,6 +1920,11 @@ E.EffectSourceOverride = {
     -- Selene's Web
     [31086] = { source = A.Skill_Bear_Trap }, -- Trap (Trap)
     [30901] = { pet = '' }, -- IntroKB (Spectral Senche-Tiger)
+
+    -- Spindleclutch II
+    [31611] = { source = A.Skill_Cave_In }, -- Crushing Rocks (Cave In)
+    [87373] = { source = A.Skill_Cave_In }, -- Cave-In (Collapsed Ceiling)
+    [86418] = { source = U.Boss_Praxin_Douare, pet = '', removePlayer = true }, -- Harrowing Ring (Blood Essence)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2199,6 +2224,9 @@ E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMB
     [56357] = true, -- Fire Swarm (Ash Titan)
     [55383] = true, -- Flame Strike (Valkyn Skoria)
     [55468] = true, -- Magma Prison (Valkyn Skoria)
+
+    -- Spindleclutch II
+    [27898] = true, -- Open Wounds (Vorenor Winterbourne)
 
     -- Frostvault
     [117286] = true, -- Rending Bleed (Coldsnap Goblin - Shared)
@@ -3599,6 +3627,7 @@ E.EffectOverride = {
     [21973] = { icon = '' }, -- Bash (Hides icon for interrupt)
     [21972] = { tooltip = T.Generic_Stagger }, -- Stagger
     [21971] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', tooltip = T.Generic_Stun }, -- Bash Stun (Stun from bashing cast)
+    [48416] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Bash_Stun }, -- Uber Attack (3 sec duration but no aura - when bashing cast when NPC is pinned against an obstacle)
     [45982] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', tooltip = T.Generic_Stun }, -- Bash Stun (Stun from bashing cast when NPC is pinned against an obstacle)
 
     -- Off-Balance Exploit
@@ -6334,6 +6363,7 @@ E.EffectOverride = {
     [29372] = { icon = 'esoui/art/icons/ability_mage_027.dds', hide = true }, -- Necrotic Spear (Necromancer)
     [88554] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_the_dead.dds', tooltip = T.Skill_Summon_the_Dead }, -- Summon the Dead (Necromancer)
     [88555] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_the_dead.dds', tooltip = T.Skill_Summon_the_Dead }, -- Summon the Dead (Necromancer)
+    [88556] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_the_dead.dds', tooltip = T.Skill_Summon_the_Dead }, -- Summon the Dead (Necromancer)
     [88561] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = A.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = T.Skill_Weakness_NPC_Summon }, -- Summon the Dead (Necromancer)
     [13397] = { icon = 'esoui/art/icons/achievement_update15_030.dds' }, -- Empower Undead (Necromancer)
     [31848] = { hide = true }, -- Summon the Dead (Necromancer)
@@ -9631,8 +9661,8 @@ E.EffectOverride = {
     [30803] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_poison_shot.dds' }, -- Poison Shot (Longclaw)
     [60670] = { hide = true }, -- Poison Shot (Longclaw)
 
-    [31096] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_poison_gtaoe.dds' }, -- Poison Burst (Longclaw)
-    [31154] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_stun_poison.dds', tooltip = T.Generic_Stun }, -- Poison Burst (Longclaw)
+    [31096] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_poison_burst.dds' }, -- Poison Burst (Longclaw)
+    [31154] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_poison_burst.dds', tooltip = T.Generic_Stun }, -- Poison Burst (Longclaw)
     [31150] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_poison_gtaoe.dds', groundLabel = true, tooltip = T.Generic_AOE_Poison_1_Sec }, -- Poison Burst (Longclaw)
 
     [34520] = { hide = true }, -- Q4733_Locked_Door_Effect
@@ -9645,7 +9675,7 @@ E.EffectOverride = {
 
     [31002] = { hide = true, icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', name = A.Skill_Selenes_Rose }, -- Intro (Selene's Rose)
     [31003] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = A.Skill_Lash }, -- Lunge (Selene's Rose)
-    [9039] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = A.Skill_Lash, tooltip = T.Generic_Snare_40 }, -- Snare (Selene's Rose)
+    [9039] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = A.Skill_Grappling_Web, tooltip = T.Generic_Snare_35 }, -- Snare (Selene's Rose)
 
     [30996] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Vicious_Maul }, -- Vicious Maul (Foulhide)
     [46879] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Vicious_Maul, hide = true }, -- Fire Backlash (Foulhide)
@@ -9703,6 +9733,113 @@ E.EffectOverride = {
     [31986] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_root_guard.dds', name = A.Skill_Root_Guard }, -- Summon Melee (Selene)
     [31984] = { icon = 'esoui/art/icons/ava_siege_hookpoint_001.dds', name = A.Skill_Earth_Mender }, -- Summon Healer (Selene)
     [31985] = { icon = 'esoui/art/icons/ava_siege_hookpoint_003.dds', name = A.Skill_True_Shot }, -- Summon Archer (Selene)
+
+    -- Spindleclutch I
+    [46147] = { icon = 'esoui/art/icons/achievement_update11_dungeons_022.dds', name = A.Skill_Summon_Swarm }, -- Summon Swarm (Spindlekin)
+
+    [17957] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_bite.dds' }, -- Bite (Swarm Mother)
+    [22034] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_corrosive_bite.dds' }, -- Inject Poison (Swarm Mother)
+    [22035] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_corrosive_bite.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Inject_Poison }, -- Inject Poison (Swarm Mother)
+    [22087] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_corrosive_bite.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Inject_Poison, hideReduce = true }, -- Inject Poison (Swarm Mother)
+    [22086] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_corrosive_bite.dds' }, -- Inject Poison (Swarm Mother)
+
+    [17964] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', hide = true }, -- Impeding Webs (Swarm Mother)
+    [17965] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_50_No_Dur }, -- Impeding Webs (Swarm Mother)
+
+    [17960] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_arachnid_leap.dds' }, -- Arachnid Leap (Swarm Mother)
+    [20642] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_arachnid_leap.dds', name = A.Skill_Arachnid_Leap }, -- Poisoned Fang (Swarm Mother)
+
+    [18559] = { icon = 'esoui/art/icons/achievement_update11_dungeons_020.dds', name = A.Skill_Spawn_Hatchlings }, -- Spawn Broodling (Swarm Mother)
+
+    [18690] = { icon = 'esoui/art/icons/achievement_fightersguilddailies_003.dds', tooltip = T.Skill_Fighters_Boon, stack = 0 }, -- Fighter's Boon
+
+    [18363] = { icon = 'esoui/art/icons/ability_dragonknight_005.dds', name = A.Skill_Fiery_Grip }, -- Fiery Reach (Big Rabbu)
+    [18365] = { icon = 'esoui/art/icons/ability_dragonknight_005.dds', name = A.Skill_Fiery_Grip, tooltip = T.Generic_Stun }, -- Grapple (Big Rabbu)
+
+    [18076] = { icon = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_strike.dds' }, -- Impale (The Whisperer)
+
+    [18111] = { icon = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_arachnophobia.dds' }, -- Arachnophobia (The Whisperer)
+    [18116] = { icon = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_arachnophobia.dds', unbreakable = 1, tooltip = T.Generic_Stun }, -- Arachnophobia (The Whisperer)
+
+    [18078] = { icon = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_web_blast.dds' }, -- Web Blast (The Whisperer)
+    [46218] = { icon = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_web_blast.dds', name = A.Skill_Web_Blast }, -- Fire Backlash (The Whisperer)
+    [46219] = { icon = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_web_blast.dds', unbreakable = 1, tooltip = T.Generic_Knockback }, -- Web Blast (The Whisperer)
+
+    [35572] = { icon = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_grappling_web.dds' }, -- Grappling Web (The Whisperer)
+    [35575] = { icon = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_grappling_web.dds', tooltip = T.Generic_Stun }, -- Grappling Web (The Whisperer)
+
+    [18058] = { icon = 'esoui/art/icons/achievement_ic_021.dds' }, -- Daedric Explosion (The Whisperer)
+    [22033] = { icon = 'esoui/art/icons/achievement_ic_021.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Daedric Explosion (The Whisperer)
+    [22032] = { icon = 'esoui/art/icons/achievement_ic_021.dds', name = A.Skill_Daedric_Explosion }, -- Daedric Explosion Knockback (The Whisperer)
+
+    -- Spindleclutch II
+    [28749] = { hide = true }, -- Intro (Blood Spawn)
+
+    [27922] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_double_swipe.dds' }, -- Claw (Blood Spawn)
+    [27923] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_double_swipe.dds' }, -- Claw (Blood Spawn)
+
+    [28093] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_vicious_smash.dds' }, -- Vicious Smash (Blood Spawn)
+    [47139] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_vicious_smash.dds', name = A.Skill_Vicious_Smash }, -- Knockdown (Blood Spawn)
+    [47140] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_vicious_smash.dds', name = A.Skill_Vicious_Smash, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Knockdown (Blood Spawn)
+
+    [47145] = { hide = true }, -- Has Charged (Blood Spawn)
+    [27995] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_quake.dds', name = A.Skill_Quake }, -- Cave-In (Blood Spawn)
+    [28006] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_quake.dds', name = A.Skill_Quake }, -- Cave In (Blood Spawn)
+    [47198] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = A.Skill_Cave_In, hide = true }, -- Falling Rocks (Cave In)
+
+    [47331] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_quake.dds', name = A.Skill_Quake }, -- Cave-In (Blood Spawn)
+    [47332] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_quake.dds', name = A.Skill_Quake }, -- Cave In (Blood Spawn)
+
+    [31611] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = A.Skill_Cave_In }, -- Crushing Rocks (Cave In)
+    [87373] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds' }, -- Cave In (Collapsed Ceiling)
+
+    [28438] = { icon = 'esoui/art/icons/achievement_update16_033.dds', name = A.Skill_Praxins_Nightmare }, -- Dummy (Praxin Douare)
+    [47122] = { hide = true }, -- Praxin's Nightmare (Praxin Douare)
+
+    [18036] = { icon = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_grappling_web.dds' }, -- Grappling Web (The Whisperer Nightmare)
+    [18054] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = A.Skill_Grappling_Web, unbreakable = 1, tooltip = T.Generic_Snare_50 }, -- Entangled (The Whisperer Nightmare)
+    [18051] = { icon = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_grappling_web.dds', name = A.Skill_Grappling_Web, tooltip = T.Generic_Stun }, -- Encased (The Whisperer Nightmare)
+    [18039] = { icon = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_grappling_web.dds' }, -- Grappling Web (The Whisperer Nightmare)
+
+    [27750] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_distorted_bolt.dds' }, -- Distorted Bolt (Praxin Douare)
+    [27965] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_despair.dds' }, -- Despair (Praxin Douare)
+    [27979] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_despair.dds' }, -- Despair (Praxin Douare)
+
+    [27741] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_enervating_seal.dds' }, -- Enervating Seal (Praxin Douare)
+    [27748] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_enervating_seal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = T.Skill_Enervating_Seal }, -- Enervating Seal (Praxin Douare)
+    [27743] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_enervating_seal.dds' }, -- Enervating Seal (Praxin Douare)
+    [27744] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_enervating_seal.dds' }, -- Enervating Seal (Praxin Douare)
+    [27742] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_enervating_seal.dds' }, -- Enervating Seal (Praxin Douare)
+
+    [27703] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_harrowing_ring.dds' }, -- Harrowing Ring (Praxin Douare)
+    [61443] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_harrowing_ring.dds', hide = true }, -- Harrowing Ring (Praxin Douare)
+    [61442] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_harrowing_ring.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Stun }, -- Harrowing Ring (Praxin Douare)
+    [28406] = { hide = true }, -- Dummy (Blood Essence)
+    [61445] = { hide = true }, -- Dummy (Blood Essence)
+    [73016] = { hide = true }, -- Dummy (Blood Essence)
+    [86418] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_harrowing_ring.dds' }, -- Harrowing Ring (Blood Essence)
+    [43176] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_harrowing_ring.dds', name = A.Skill_Harrowing_Ring, unbreakable = 1, tooltip = T.Generic_Stun }, -- Shocked (Blood Essence)
+    [61444] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_harrowing_ring.dds', name = A.Skill_Harrowing_Ring, unbreakable = 1, tooltip = T.Generic_Stun }, -- Shocked (Blood Essence)
+    [43173] = { hide = true }, -- DUN_SCH_RingBurst (Blood Essence)
+
+    [27435] = { tooltip = T.Skill_Monstrous_Growth_1 }, -- Monstrous Growth (Flesh Atronach)
+    [27437] = { tooltip = T.Skill_Monstrous_Growth_2 }, -- Monstrous Growth (Flesh Atronach)
+
+    [27600] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', hide = true }, -- Blood Pool (Urvan Veleth)
+    [27603] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', groundLabel = true, tooltip = T.Skill_Blood_Pool }, -- Blood Pool (Urvan Veleth)
+
+    [28632] = { hide = true }, -- Intro (Vorenor Winterbourne)
+
+    [27660] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_drain.dds' }, -- Blood Drain (Vorenor Winterbourne)
+
+    [27905] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', hide = true }, -- Blood Pool (Vorenor Winterbourne)
+    [27906] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', groundLabel = true, tooltip = T.Skill_Blood_Pool_1_5 }, -- Blood Pool (Vorenor Winterbourne)
+
+    [27897] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Magic_2_Sec, stack = 0 }, -- Open Wounds (Vorenor Winterbourne)
+    [27898] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Open Wounds (Vorenor Winterbourne)
+
+    [27791] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_frenzy.dds' }, -- Blood Frenzy (Vorenor Winterbourne)
+    [27799] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_frenzy.dds' }, -- Blood Frenzy (Vorenor Winterbourne)
 
     -- Frostvault
     [117286] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', hide = true }, -- Rending Bleed (Coldsnap Goblin - Shared)
@@ -10024,6 +10161,16 @@ E.FakeExternalDebuffs = {
     [31247] = { duration = 4000 }, -- Ensnare
     [31248] = { duration = 8000 }, -- Ensnare
     [30905] = { duration = 2000 }, -- IntroKB (Spectral Senche-Tiger)
+
+    -- Spindleclutch I
+    [18116] = { duration = 3500 }, -- Arachnophobia (The Whisperer)
+    [46219] = { duration = 2500 }, -- Web Blast (The Whisperer)
+
+    -- Spindleclutch II
+    [18054] = { duration = 8000 }, -- Entangled (The Whisperer Nightmare)
+    [18051] = { duration = 2000 }, -- Encased (The Whisperer Nightmare)
+    [43176] = { duration = 1200 }, -- Shocked (Blood Essence)
+    [61444] = { duration = 1200 }, -- Shocked (Blood Essence)
 
     -- Frostvault
     [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
@@ -10529,6 +10676,9 @@ E.AddGroundDamageAura = {
     [30773] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arrow Rain (Longclaw)
     [31150] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Poison Burst (Longclaw)
 
+    -- Spindleclutch II
+    [27603] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Blood Pool (Urvan Veleth)
+    [27906] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Blood Pool (Vorenor Winterbourne)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -10536,8 +10686,15 @@ E.AddGroundDamageAura = {
 --------------------------------------------------------------------------------------------------------------------------------
 E.MapDataOverride = {
 
-    [11338] = { -- In Lava
-              [608] = { name = A.Skill_Fire, icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds' }, -- Vvardenfell Tutorial Area
-              },
+    [11338] =   { -- In Lava
+                    [608] = { name = A.Skill_Fire, icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds' }, -- Vvardenfell Tutorial Area
+                },
+
+    [9039] =    {  -- Snare (Selene's Rose)
+                    [7] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = A.Skill_Lash, tooltip = T.Generic_Snare_35 }, -- Snare (Selene's Rose)
+                },
+    [33097] =   { -- Scary Immunities
+                    [576] = { hide = true }, -- Scary Immunities (Flesh Atronach)
+                }
 
 }

@@ -1110,6 +1110,17 @@ T.Skill_Poison_Shot                     = GetString(SI_LUIE_SKILL_POISON_SHOT_TP
 T.Skill_Venomous_Burst                  = GetString(SI_LUIE_SKILL_VENOMOUS_BURST_TP)
 T.Skill_Web_Wrap                        = GetString(SI_LUIE_SKILL_WEB_WRAP_TP)
 
+-- Spindleclutch I
+T.Skill_Inject_Poison                   = GetString(SI_LUIE_SKILL_INJECT_POISON_TP)
+T.Skill_Fighters_Boon                   = GetString(SI_LUIE_SKILL_FIGHTERS_BOON_TP)
+
+-- Spindleclutch II
+T.Skill_Enervating_Seal                 = GetString(SI_LUIE_SKILL_ENERVATING_SEAL_TP)
+T.Skill_Monstrous_Growth_1              = zo_strformat(GetString(SI_LUIE_SKILL_MONSTROUS_GROWTH_TP), 40)
+T.Skill_Monstrous_Growth_2              = zo_strformat(GetString(SI_LUIE_SKILL_MONSTROUS_GROWTH_TP), 125)
+T.Skill_Blood_Pool                      = GetString(SI_LUIE_SKILL_BLOOD_POOL_TP)
+T.Skill_Blood_Pool_1_5                  = GetString(SI_LUIE_SKILL_BLOOD_POOL_1_5_TP)
+
 -- Frostvault
 T.Skill_Maim                            = GetString(SI_LUIE_SKILL_MAIM_NPC_TP)
 

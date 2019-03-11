@@ -1190,10 +1190,24 @@ A.Skill_Selenes_Rose                = GetString(SI_LUIE_SKILL_SELENES_ROSE)
 A.Skill_Free_Ally                   = 31180
 A.Skill_Primal_Maul                 = GetString(SI_LUIE_SKILL_PRIMAL_MAUL)
 A.Skill_Primal_Leap                 = 30901
-
 A.Skill_Root_Guard                  = GetString(SI_LUIE_SKILL_ROOT_GUARD)
 A.Skill_Earth_Mender                = GetString(SI_LUIE_SKILL_EARTH_MENDER)
 A.Skill_True_Shot                   = GetString(SI_LUIE_SKILL_TRUE_SHOT)
+
+-- Spindleclutch I
+A.Skill_Summon_Swarm                = 51408
+A.Skill_Arachnid_Leap               = 17960
+A.Skill_Spawn_Hatchlings            = GetString(SI_LUIE_SKILL_SPAWN_HATCHLINGS)
+A.Skill_Web_Blast                   = 18078
+A.Skill_Grappling_Web               = 35572
+A.Skill_Daedric_Explosion           = 18058
+
+-- Spindleclutch II
+A.Skill_Vicious_Smash               = 28093
+A.Skill_Quake                       = 10270
+A.Skill_Cave_In                     = 27995
+A.Skill_Praxins_Nightmare           = 47122
+A.Skill_Harrowing_Ring              = 27703
 
 -- Frostvault
 A.Skill_Rending_Bleed               = 117286
