@@ -818,63 +818,63 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     local BONUS_SECTION_DATA =
     {
-        [ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] =           {
-                                                typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
-                                                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
-                                                headerText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_HEADER),
-                                                infoText = GetHomeKeepBonusString,
-                                                count = 1,
-                                                countText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_ALL),
-                                                abilityFunction = GetKeepScoreBonusAbilityId,
-                                                scoreFunction = GetHomeKeepBonusScore,
-                                            },
-        [ZO_CAMPAIGN_BONUS_TYPE_ENEMY_KEEPS] =          {
-                                                typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
-                                                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
-                                                headerText = GetString(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_HEADER),
-                                                infoText = GetKeepBonusString,
-                                                count = GetNumKeepScoreBonuses,
-                                                startIndex = 2,
-                                                abilityFunction = GetKeepScoreBonusAbilityId,
-                                                scoreFunction = GetKeepBonusScore,
-                                            },
-        [ZO_CAMPAIGN_BONUS_TYPE_DEFENSIVE_SCROLLS] =    {
-                                                typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
-                                                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
-                                                headerText = GetString(SI_CAMPAIGN_BONUSES_DEFENSIVE_SCROLL_HEADER),
-                                                infoText = GetDefensiveBonusString,
-                                                count = GetDefensiveBonusCount,
-                                                abilityFunction = GetDefensiveBonusAbilityId,
-                                                scoreFunction = GetDefensiveBonusScore,
-                                            },
-        [ZO_CAMPAIGN_BONUS_TYPE_OFFENSIVE_SCROLLS] =    {
-                                                typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
-                                                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
-                                                headerText = GetString(SI_CAMPAIGN_BONUSES_OFFENSIVE_SCROLL_HEADER),
-                                                infoText = GetOffensiveBonusString,
-                                                count = GetOffensiveBonusCount,
-                                                abilityFunction = GetOffensiveBonusAbilityId,
-                                                scoreFunction = GetOffensiveBonusScore,
-                                            },
-        [ZO_CAMPAIGN_BONUS_TYPE_EMPEROR] =              {
-                                                typeIcon = "EsoUI/Art/Campaign/campaignBonus_emporershipIcon.dds",
-                                                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_emperor.dds",
-                                                headerText = GetString(SI_CAMPAIGN_BONUSES_EMPERORSHIP_HEADER),
-                                                infoText = GetEmperorBonusString,
-                                                count = 1,
-                                                countText = HIDE_COUNT,
-                                                abilityFunction = GetEmperorBonusAbilityId,
-                                                scoreFunction = GetEmperorBonusScore,
-                                            },
-        [ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS] =           {
-                                                typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
-                                                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
-                                                headerText = GetString(SI_CAMPAIGN_BONUSES_EDGE_KEEP_HEADER),
-                                                infoText = GetEdgeKeepBonusString,
-                                                count = GetNumEdgeKeepBonuses,
-                                                abilityFunction = GetEdgeKeepBonusAbilityId,
-                                                scoreFunction = GetEdgeKeepBonusScore,
-                                            },
+        [ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] = {
+            typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
+            typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
+            headerText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_HEADER),
+            infoText = GetHomeKeepBonusString,
+            count = 1,
+            countText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_ALL),
+            abilityFunction = GetKeepScoreBonusAbilityId,
+            scoreFunction = GetHomeKeepBonusScore,
+        },
+        [ZO_CAMPAIGN_BONUS_TYPE_ENEMY_KEEPS] = {
+            typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
+            typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
+            headerText = GetString(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_HEADER),
+            infoText = GetKeepBonusString,
+            count = GetNumKeepScoreBonuses,
+            startIndex = 2,
+            abilityFunction = GetKeepScoreBonusAbilityId,
+            scoreFunction = GetKeepBonusScore,
+        },
+        [ZO_CAMPAIGN_BONUS_TYPE_DEFENSIVE_SCROLLS] = {
+            typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
+            typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
+            headerText = GetString(SI_CAMPAIGN_BONUSES_DEFENSIVE_SCROLL_HEADER),
+            infoText = GetDefensiveBonusString,
+            count = GetDefensiveBonusCount,
+            abilityFunction = GetDefensiveBonusAbilityId,
+            scoreFunction = GetDefensiveBonusScore,
+        },
+        [ZO_CAMPAIGN_BONUS_TYPE_OFFENSIVE_SCROLLS] = {
+            typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
+            typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
+            headerText = GetString(SI_CAMPAIGN_BONUSES_OFFENSIVE_SCROLL_HEADER),
+            infoText = GetOffensiveBonusString,
+            count = GetOffensiveBonusCount,
+            abilityFunction = GetOffensiveBonusAbilityId,
+            scoreFunction = GetOffensiveBonusScore,
+        },
+        [ZO_CAMPAIGN_BONUS_TYPE_EMPEROR] = {
+            typeIcon = "EsoUI/Art/Campaign/campaignBonus_emporershipIcon.dds",
+            typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_emperor.dds",
+            headerText = GetString(SI_CAMPAIGN_BONUSES_EMPERORSHIP_HEADER),
+            infoText = GetEmperorBonusString,
+            count = 1,
+            countText = HIDE_COUNT,
+            abilityFunction = GetEmperorBonusAbilityId,
+            scoreFunction = GetEmperorBonusScore,
+        },
+        [ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS] = {
+            typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
+            typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
+            headerText = GetString(SI_CAMPAIGN_BONUSES_EDGE_KEEP_HEADER),
+            infoText = GetEdgeKeepBonusString,
+            count = GetNumEdgeKeepBonuses,
+            abilityFunction = GetEdgeKeepBonusAbilityId,
+            scoreFunction = GetEdgeKeepBonusScore,
+        },
     }
 
     ZO_CampaignBonuses_Shared.BuildMasterList = function(self)
@@ -933,22 +933,19 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     -- HOOK SKILLS
     local INCREASE_BUTTON_TEXTURES =
         {
-            PLUS =
-            {
+            PLUS = {
                 normal = "EsoUI/Art/Progression/addPoints_up.dds",
                 mouseDown = "EsoUI/Art/Progression/addPoints_down.dds",
                 mouseover = "EsoUI/Art/Progression/addPoints_over.dds",
                 disabled = "EsoUI/Art/Progression/addPoints_disabled.dds",
             },
-            MORPH =
-            {
+            MORPH = {
                 normal = "EsoUI/Art/Progression/morph_up.dds",
                 mouseDown = "EsoUI/Art/Progression/morph_down.dds",
                 mouseover = "EsoUI/Art/Progression/morph_over.dds",
                 disabled = "EsoUI/Art/Progression/morph_disabled.dds",
             },
-            REMORPH =
-            {
+            REMORPH = {
                 normal = "EsoUI/Art/Progression/remorph_up.dds",
                 mouseDown = "EsoUI/Art/Progression/remorph_down.dds",
                 mouseover = "EsoUI/Art/Progression/remorph_over.dds",
@@ -1125,7 +1122,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     InitializeKeyboardConfirmDialog()
     InitializeKeyboardUpgradeDialog()
-
 end
 
 -- Called from the menu and on initialization to update timestamp color when changed.

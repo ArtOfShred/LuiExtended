@@ -17,7 +17,6 @@
 			<Action name="LUIE_COMMAND_OUTFIT_8"><Down>LUIE.SlashOutfit(8)</Down></Action>
 			<Action name="LUIE_COMMAND_OUTFIT_9"><Down>LUIE.SlashOutfit(9)</Down></Action>
 			<Action name="LUIE_COMMAND_OUTFIT_10"><Down>LUIE.SlashOutfit(10)</Down></Action>
-			
         </Category>
     </Layer>
 </Bindings>
