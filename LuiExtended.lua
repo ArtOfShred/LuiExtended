@@ -38,7 +38,7 @@ LUIE.D = {
     HideXPBar                   = false,
     TempAlertHome               = false,
     TempAlertCampaign           = false,
-	TempAlertOutfit				= false,
+    TempAlertOutfit             = false,
     WelcomeVersion              = 0,
 
     -- Modules
@@ -53,16 +53,16 @@ LUIE.D = {
 
 -- Global fonts table to use in other parts of this addon
     LUIE.Fonts = {
-    ["ProseAntique"] 			= ZoFontBookPaper:GetFontInfo(),
-    ["Consolas"] 				= "/EsoUI/Common/Fonts/consola.ttf",
-    ["Futura Condensed"] 		= "/EsoUI/Common/Fonts/FTN57.otf",
-    ["Futura Condensed Bold"] 	= "/EsoUI/Common/Fonts/FTN87.otf",
-    ["Futura Condensed Light"] 	= "/EsoUI/Common/Fonts/FTN47.otf",
-    ["Skyrim Handwritten"] 		= ZoFontBookLetter:GetFontInfo(),
-    ["Trajan Pro"] 				= ZoFontBookTablet:GetFontInfo(),
-    ["Univers 55"] 				= "/EsoUI/Common/Fonts/univers55.otf",
-    ["Univers 57"] 				= ZoFontGame:GetFontInfo(),
-    ["Univers 67"] 				= ZoFontWinH1:GetFontInfo(),
+    ["ProseAntique"]            = ZoFontBookPaper:GetFontInfo(),
+    ["Consolas"]                = "/EsoUI/Common/Fonts/consola.ttf",
+    ["Futura Condensed"]        = "/EsoUI/Common/Fonts/FTN57.otf",
+    ["Futura Condensed Bold"]   = "/EsoUI/Common/Fonts/FTN87.otf",
+    ["Futura Condensed Light"]  = "/EsoUI/Common/Fonts/FTN47.otf",
+    ["Skyrim Handwritten"]      = ZoFontBookLetter:GetFontInfo(),
+    ["Trajan Pro"]              = ZoFontBookTablet:GetFontInfo(),
+    ["Univers 55"]              = "/EsoUI/Common/Fonts/univers55.otf",
+    ["Univers 57"]              = ZoFontGame:GetFontInfo(),
+    ["Univers 67"]              = ZoFontWinH1:GetFontInfo(),
     ["Fontin Bold"]             = "/LuiExtended/media/fonts/Fontin/fontin_sans_b.otf",
     ["Fontin Italic"]           = "/LuiExtended/media/fonts/Fontin/fontin_sans_i.otf",
     ["Fontin Regular"]          = "/LuiExtended/media/fonts/Fontin/fontin_sans_r.otf",
@@ -158,12 +158,12 @@ end
 
 local function LUIE_RegisterEvents()
     eventManager:RegisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED, LUIE_LoadScreen)
-	-- Keep track of guilds for the /ginvite commands & Chat Announcement EVENT_GUILD_SELF_LEFT_GUILD handler
-	if LUIE.SV.SlashCommands_Enable or LUIE.SV.ChatAnnouncements_Enable then
-		LUIE.UpdateGuildData()
-		eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, LUIE.UpdateGuildData)
-		eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, LUIE.UpdateGuildData)
-	end
+    -- Keep track of guilds for the /ginvite commands & Chat Announcement EVENT_GUILD_SELF_LEFT_GUILD handler
+    if LUIE.SV.SlashCommands_Enable or LUIE.SV.ChatAnnouncements_Enable then
+        LUIE.UpdateGuildData()
+        eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, LUIE.UpdateGuildData)
+        eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, LUIE.UpdateGuildData)
+    end
 end
 
 -- LuiExtended Initialization
@@ -197,7 +197,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     LUIE.SpellCastBuffs.Initialize( LUIE.SV.SpellCastBuff_Enable )
     LUIE.SlashCommands.Initialize( LUIE.SV.SlashCommands_Enable )
 
-	-- Load Timetamp Color
+    -- Load Timetamp Color
     LUIE.UpdateTimeStampColor()
 
     -- Create settings menu for our addon
@@ -719,216 +719,216 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         self:UpdateCooldown(FORCE_SUPPRESS_COOLDOWN_SOUND)
     end
 
-	-- Hook campaign screen to fix icons
-	local function GetHomeKeepBonusString(campaignId)
-		local allHomeKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
-		if allHomeKeepsHeld then
-			return GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_PASS_INFO)
-		else
-			return GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_FAIL_INFO)
-		end
-	end
+    -- Hook campaign screen to fix icons
+    local function GetHomeKeepBonusString(campaignId)
+        local allHomeKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
+        if allHomeKeepsHeld then
+            return GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_PASS_INFO)
+        else
+            return GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_FAIL_INFO)
+        end
+    end
 
-	local function GetHomeKeepBonusScore(campaignId)
-		local allHomeKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
-		return allHomeKeepsHeld and 1 or 0
-	end
+    local function GetHomeKeepBonusScore(campaignId)
+        local allHomeKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
+        return allHomeKeepsHeld and 1 or 0
+    end
 
-	local function GetKeepBonusString(campaignId)
-		local _, enemyKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
-		return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_INFO, enemyKeepsHeld)
-	end
+    local function GetKeepBonusString(campaignId)
+        local _, enemyKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
+        return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_INFO, enemyKeepsHeld)
+    end
 
-	local function GetKeepBonusScore(campaignId)
-		local allHomeKeepsHeld, enemyKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
-		return allHomeKeepsHeld and enemyKeepsHeld or 0
-	end
+    local function GetKeepBonusScore(campaignId)
+        local allHomeKeepsHeld, enemyKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
+        return allHomeKeepsHeld and enemyKeepsHeld or 0
+    end
 
-	local function GetEdgeKeepBonusScore(campaignId)
-		return select(5, GetAvAKeepScore(campaignId, GetUnitAlliance("player")))
-	end
+    local function GetEdgeKeepBonusScore(campaignId)
+        return select(5, GetAvAKeepScore(campaignId, GetUnitAlliance("player")))
+    end
 
-	local function GetEdgeKeepBonusString(campaignId)
-		return zo_strformat(SI_CAMPAIGN_BONUSES_EDGE_KEEP_INFO, GetEdgeKeepBonusScore(campaignId))
-	end
+    local function GetEdgeKeepBonusString(campaignId)
+        return zo_strformat(SI_CAMPAIGN_BONUSES_EDGE_KEEP_INFO, GetEdgeKeepBonusScore(campaignId))
+    end
 
-	local function GetDefensiveBonusString(campaignId)
-		local _, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE)
-		return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
-	end
+    local function GetDefensiveBonusString(campaignId)
+        local _, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE)
+        return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
+    end
 
-	local function GetDefensiveBonusCount()
-		return GetNumArtifactScoreBonuses(GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE)
-	end
+    local function GetDefensiveBonusCount()
+        return GetNumArtifactScoreBonuses(GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE)
+    end
 
-	local function GetDefensiveBonusAbilityId(index)
-		return GetArtifactScoreBonusAbilityId(GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE, index)
-	end
+    local function GetDefensiveBonusAbilityId(index)
+        return GetArtifactScoreBonusAbilityId(GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE, index)
+    end
 
-	local function GetDefensiveBonusScore(campaignId)
-		local allHomeScrollsHeld, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE)
-		return allHomeScrollsHeld and enemyScrollsHeld or 0
-	end
+    local function GetDefensiveBonusScore(campaignId)
+        local allHomeScrollsHeld, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE)
+        return allHomeScrollsHeld and enemyScrollsHeld or 0
+    end
 
-	local function GetOffensiveBonusString(campaignId)
-		local _, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE)
-		return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
-	end
+    local function GetOffensiveBonusString(campaignId)
+        local _, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE)
+        return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
+    end
 
-	local function GetOffensiveBonusCount()
-		return GetNumArtifactScoreBonuses(GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE)
-	end
+    local function GetOffensiveBonusCount()
+        return GetNumArtifactScoreBonuses(GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE)
+    end
 
-	local function GetOffensiveBonusAbilityId(index)
-		return GetArtifactScoreBonusAbilityId(GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE, index)
-	end
+    local function GetOffensiveBonusAbilityId(index)
+        return GetArtifactScoreBonusAbilityId(GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE, index)
+    end
 
-	local function GetOffensiveBonusScore(campaignId)
-		local allHomeScrollsHeld, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE)
-		return allHomeScrollsHeld and enemyScrollsHeld or 0
-	end
+    local function GetOffensiveBonusScore(campaignId)
+        local allHomeScrollsHeld, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE)
+        return allHomeScrollsHeld and enemyScrollsHeld or 0
+    end
 
-	local function GetEmperorBonusString(campaignId)
-		if DoesCampaignHaveEmperor(campaignId) then
-			local alliance = GetCampaignEmperorInfo(campaignId)
-			if alliance == GetUnitAlliance("player") then
-				return GetString(SI_CAMPAIGN_BONUSES_EMPEROR_PASS_INFO)
-			else
-				return GetString(SI_CAMPAIGN_BONUSES_EMPEROR_FAIL_INFO)
-			end
-		else
-			return GetString(SI_CAMPAIGN_BONUSES_EMPEROR_NONE_INFO)
-		end
-	end
+    local function GetEmperorBonusString(campaignId)
+        if DoesCampaignHaveEmperor(campaignId) then
+            local alliance = GetCampaignEmperorInfo(campaignId)
+            if alliance == GetUnitAlliance("player") then
+                return GetString(SI_CAMPAIGN_BONUSES_EMPEROR_PASS_INFO)
+            else
+                return GetString(SI_CAMPAIGN_BONUSES_EMPEROR_FAIL_INFO)
+            end
+        else
+            return GetString(SI_CAMPAIGN_BONUSES_EMPEROR_NONE_INFO)
+        end
+    end
 
-	local function GetEmperorBonusAbilityId(campaignId)
-		return GetEmperorAllianceBonusAbilityId(campaignId, GetUnitAlliance("player"))
-	end
+    local function GetEmperorBonusAbilityId(campaignId)
+        return GetEmperorAllianceBonusAbilityId(campaignId, GetUnitAlliance("player"))
+    end
 
-	local function GetEmperorBonusScore(campaignId)
-		if(DoesCampaignHaveEmperor(campaignId)) then
-			local alliance = GetCampaignEmperorInfo(campaignId)
-			if alliance == GetUnitAlliance("player") then
-				return 1
-			end
-		end
+    local function GetEmperorBonusScore(campaignId)
+        if(DoesCampaignHaveEmperor(campaignId)) then
+            local alliance = GetCampaignEmperorInfo(campaignId)
+            if alliance == GetUnitAlliance("player") then
+                return 1
+            end
+        end
 
-		return 0
-	end
+        return 0
+    end
 
-	local BONUS_SECTION_DATA =
-	{
-		[ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] =           {
-												typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
-												typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
-												headerText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_HEADER),
-												infoText = GetHomeKeepBonusString,
-												count = 1,
-												countText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_ALL),
-												abilityFunction = GetKeepScoreBonusAbilityId,
-												scoreFunction = GetHomeKeepBonusScore,
-											},
-		[ZO_CAMPAIGN_BONUS_TYPE_ENEMY_KEEPS] =          {
-												typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
-												typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
-												headerText = GetString(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_HEADER),
-												infoText = GetKeepBonusString,
-												count = GetNumKeepScoreBonuses,
-												startIndex = 2,
-												abilityFunction = GetKeepScoreBonusAbilityId,
-												scoreFunction = GetKeepBonusScore,
-											},
-		[ZO_CAMPAIGN_BONUS_TYPE_DEFENSIVE_SCROLLS] =    {
-												typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
-												typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
-												headerText = GetString(SI_CAMPAIGN_BONUSES_DEFENSIVE_SCROLL_HEADER),
-												infoText = GetDefensiveBonusString,
-												count = GetDefensiveBonusCount,
-												abilityFunction = GetDefensiveBonusAbilityId,
-												scoreFunction = GetDefensiveBonusScore,
-											},
-		[ZO_CAMPAIGN_BONUS_TYPE_OFFENSIVE_SCROLLS] =    {
-												typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
-												typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
-												headerText = GetString(SI_CAMPAIGN_BONUSES_OFFENSIVE_SCROLL_HEADER),
-												infoText = GetOffensiveBonusString,
-												count = GetOffensiveBonusCount,
-												abilityFunction = GetOffensiveBonusAbilityId,
-												scoreFunction = GetOffensiveBonusScore,
-											},
-		[ZO_CAMPAIGN_BONUS_TYPE_EMPEROR] =              {
-												typeIcon = "EsoUI/Art/Campaign/campaignBonus_emporershipIcon.dds",
-												typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_emperor.dds",
-												headerText = GetString(SI_CAMPAIGN_BONUSES_EMPERORSHIP_HEADER),
-												infoText = GetEmperorBonusString,
-												count = 1,
-												countText = HIDE_COUNT,
-												abilityFunction = GetEmperorBonusAbilityId,
-												scoreFunction = GetEmperorBonusScore,
-											},
-		[ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS] =           {
-												typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
-												typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
-												headerText = GetString(SI_CAMPAIGN_BONUSES_EDGE_KEEP_HEADER),
-												infoText = GetEdgeKeepBonusString,
-												count = GetNumEdgeKeepBonuses,
-												abilityFunction = GetEdgeKeepBonusAbilityId,
-												scoreFunction = GetEdgeKeepBonusScore,
-											},
-	}
+    local BONUS_SECTION_DATA =
+    {
+        [ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] =           {
+                                                typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
+                                                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
+                                                headerText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_HEADER),
+                                                infoText = GetHomeKeepBonusString,
+                                                count = 1,
+                                                countText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_ALL),
+                                                abilityFunction = GetKeepScoreBonusAbilityId,
+                                                scoreFunction = GetHomeKeepBonusScore,
+                                            },
+        [ZO_CAMPAIGN_BONUS_TYPE_ENEMY_KEEPS] =          {
+                                                typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
+                                                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
+                                                headerText = GetString(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_HEADER),
+                                                infoText = GetKeepBonusString,
+                                                count = GetNumKeepScoreBonuses,
+                                                startIndex = 2,
+                                                abilityFunction = GetKeepScoreBonusAbilityId,
+                                                scoreFunction = GetKeepBonusScore,
+                                            },
+        [ZO_CAMPAIGN_BONUS_TYPE_DEFENSIVE_SCROLLS] =    {
+                                                typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
+                                                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
+                                                headerText = GetString(SI_CAMPAIGN_BONUSES_DEFENSIVE_SCROLL_HEADER),
+                                                infoText = GetDefensiveBonusString,
+                                                count = GetDefensiveBonusCount,
+                                                abilityFunction = GetDefensiveBonusAbilityId,
+                                                scoreFunction = GetDefensiveBonusScore,
+                                            },
+        [ZO_CAMPAIGN_BONUS_TYPE_OFFENSIVE_SCROLLS] =    {
+                                                typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
+                                                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
+                                                headerText = GetString(SI_CAMPAIGN_BONUSES_OFFENSIVE_SCROLL_HEADER),
+                                                infoText = GetOffensiveBonusString,
+                                                count = GetOffensiveBonusCount,
+                                                abilityFunction = GetOffensiveBonusAbilityId,
+                                                scoreFunction = GetOffensiveBonusScore,
+                                            },
+        [ZO_CAMPAIGN_BONUS_TYPE_EMPEROR] =              {
+                                                typeIcon = "EsoUI/Art/Campaign/campaignBonus_emporershipIcon.dds",
+                                                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_emperor.dds",
+                                                headerText = GetString(SI_CAMPAIGN_BONUSES_EMPERORSHIP_HEADER),
+                                                infoText = GetEmperorBonusString,
+                                                count = 1,
+                                                countText = HIDE_COUNT,
+                                                abilityFunction = GetEmperorBonusAbilityId,
+                                                scoreFunction = GetEmperorBonusScore,
+                                            },
+        [ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS] =           {
+                                                typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
+                                                typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
+                                                headerText = GetString(SI_CAMPAIGN_BONUSES_EDGE_KEEP_HEADER),
+                                                infoText = GetEdgeKeepBonusString,
+                                                count = GetNumEdgeKeepBonuses,
+                                                abilityFunction = GetEdgeKeepBonusAbilityId,
+                                                scoreFunction = GetEdgeKeepBonusScore,
+                                            },
+    }
 
-	ZO_CampaignBonuses_Shared.BuildMasterList = function(self)
-		self.masterList = {}
+    ZO_CampaignBonuses_Shared.BuildMasterList = function(self)
+        self.masterList = {}
 
-		for bonusType, info in ipairs(BONUS_SECTION_DATA) do
-			local data = {
-				isHeader = true,
-				headerString = info.headerText,
-				infoString = type(info.infoText) == "function" and info.infoText(self.campaignId) or info.infoText,
-				bonusType = bonusType,
-			}
+        for bonusType, info in ipairs(BONUS_SECTION_DATA) do
+            local data = {
+                isHeader = true,
+                headerString = info.headerText,
+                infoString = type(info.infoText) == "function" and info.infoText(self.campaignId) or info.infoText,
+                bonusType = bonusType,
+            }
 
-			self.masterList[#self.masterList + 1] = data
+            self.masterList[#self.masterList + 1] = data
 
-			local count = type(info.count) == "function" and info.count(self.campaignId) or info.count
-			local startIndex = info.startIndex or 1
-			local score = info.scoreFunction(self.campaignId)
+            local count = type(info.count) == "function" and info.count(self.campaignId) or info.count
+            local startIndex = info.startIndex or 1
+            local score = info.scoreFunction(self.campaignId)
 
-			for i = startIndex, count do
-				local abilityId = info.abilityFunction(i)
-				local name = GetAbilityName(abilityId)
-				local icon = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId)
-				local description = GetAbilityDescription(abilityId)
+            for i = startIndex, count do
+                local abilityId = info.abilityFunction(i)
+                local name = GetAbilityName(abilityId)
+                local icon = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId)
+                local description = GetAbilityDescription(abilityId)
 
-				local scoreIndex = i - startIndex + 1
-				local countText = scoreIndex
-				if info.countText then
-					if info.countText == HIDE_COUNT then
-						countText = nil
-					else
-						countText = info.countText
-					end
-				end
+                local scoreIndex = i - startIndex + 1
+                local countText = scoreIndex
+                if info.countText then
+                    if info.countText == HIDE_COUNT then
+                        countText = nil
+                    else
+                        countText = info.countText
+                    end
+                end
 
-				local data = {
-					index = i,
-					isHeader = false,
-					typeIcon = info.typeIcon,
-					typeIconGamepad = info.typeIconGamepad,
-					countText = countText,
-					name = zo_strformat(SI_CAMPAIGN_BONUSES_ENTRY_ROW_FORMATTER, name),
-					icon = icon,
-					active = score and score >= scoreIndex,
-					bonusType = bonusType,
-					description = description,
-				}
+                local data = {
+                    index = i,
+                    isHeader = false,
+                    typeIcon = info.typeIcon,
+                    typeIconGamepad = info.typeIconGamepad,
+                    countText = countText,
+                    name = zo_strformat(SI_CAMPAIGN_BONUSES_ENTRY_ROW_FORMATTER, name),
+                    icon = icon,
+                    active = score and score >= scoreIndex,
+                    bonusType = bonusType,
+                    description = description,
+                }
 
-				self.masterList[#self.masterList + 1] = data
-			end
-		end
+                self.masterList[#self.masterList + 1] = data
+            end
+        end
 
-		return self.masterList
-	end
+        return self.masterList
+    end
 
     -- HOOK SKILLS
     local INCREASE_BUTTON_TEXTURES =
@@ -963,11 +963,11 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         button:SetDisabledTexture(textures.disabled)
     end
 
-	local zos_SetupAbilityEntry = SKILLS_WINDOW.SetupAbilityEntry
+    local zos_SetupAbilityEntry = SKILLS_WINDOW.SetupAbilityEntry
     SKILLS_WINDOW.SetupAbilityEntry = function(self, ability, data)
-		zos_SetupAbilityEntry(self, ability, data)
+        zos_SetupAbilityEntry(self, ability, data)
 
-		local skillData = data.skillData
+        local skillData = data.skillData
         local skillPointAllocator = skillData:GetPointAllocator()
         local skillProgressionData = skillPointAllocator:GetProgressionData()
         local id = skillProgressionData:GetAbilityId()
@@ -989,7 +989,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         detailedName = detailedName:gsub("Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
         ability.nameLabel:SetText(detailedName)
 
-		local slot = ability.slot
+        local slot = ability.slot
 
         slot.icon:SetTexture(GetAbilityIcon(id))
     end

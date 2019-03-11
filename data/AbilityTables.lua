@@ -64,8 +64,8 @@ A.Skill_Minor_Uncertainty           = 47204
 A.Skill_Minor_Cowardice             = 46202
 A.Skill_Minor_Mangle                = 39168
 
-A.Skill_Minor_Slayer				= 76618
-A.Skill_Minor_Aegis					= 76617
+A.Skill_Minor_Slayer                = 76618
+A.Skill_Minor_Aegis                 = 76617
 A.Skill_Off_Balance                 = 14062
 A.Skill_Off_Balace_Immunity         = 102771
 

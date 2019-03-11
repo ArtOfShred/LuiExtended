@@ -93,7 +93,7 @@ local g_barFakeAura           = {} -- Table for storing abilityId's that only di
 local g_barDurationOverride   = {} -- Table for storing abilitiyId's that ignore ending event
 local g_barNoRemove           = {} -- Table of abilities we don't remove from bar highlight
 local g_protectAbilityRemoval = {} -- AbilityId's set to a timestamp here to prevent removal of bar highlight when refreshing ground auras from causing the highlight to fade.
-local g_mineStacks 			  = {} -- Individual AbilityId ground mine stack information
+local g_mineStacks            = {} -- Individual AbilityId ground mine stack information
 local g_barFont -- Font for Ability Highlight Label
 local g_potionFont -- Font for Potion Timer Label
 local g_ultimateFont -- Font for Ultimate Percentage Label
@@ -169,7 +169,7 @@ function CI.Initialize( enabled )
 
     CI.RegisterCombatInfo()
 
-	-- Hook to update GCD support
+    -- Hook to update GCD support
     ActionButton.UpdateUsable = function(self)
         local slotnum = self:GetSlot()
         local isGamepad = IsInGamepadPreferredMode()
@@ -194,7 +194,7 @@ function CI.Initialize( enabled )
         ZO_ActionSlot_SetUnusable(self.icon, not usable, useDesaturation)
     end
 
-	-- Hook to update GCD support
+    -- Hook to update GCD support
     ActionButton.UpdateCooldown = function(self, options)
         local slotnum = self:GetSlot()
         local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum)
@@ -286,7 +286,7 @@ function CI.Initialize( enabled )
         self:UpdateUsable()
     end
 
-	-- Create and update Cast Bar
+    -- Create and update Cast Bar
     CI.CreateCastBar()
     CI.UpdateCastBar()
     CI.SetCastBarPosition()
@@ -559,21 +559,21 @@ end
 -- Updates Cast Bar - only enabled when Cast Bar is unhidden
 function CI.OnUpdateCastbar(currentTime)
     -- Update castbar
-	local castStarts = castbar.starts
-	local castEnds = castbar.ends
-	local remain = castbar.remain - currentTime
-	if remain <= 0 then
+    local castStarts = castbar.starts
+    local castEnds = castbar.ends
+    local remain = castbar.remain - currentTime
+    if remain <= 0 then
         CI.StopCastBar()
-	else
-		if CI.SV.CastBarTimer then
-			castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
-		end
-		if castbar.type == 1 then
-			castbar.bar.bar:SetValue( (currentTime - castStarts) / (castEnds - castStarts) )
-		else
-			castbar.bar.bar:SetValue(1 - ((currentTime - castStarts) / (castEnds - castStarts)))
-		end
-	end
+    else
+        if CI.SV.CastBarTimer then
+            castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
+        end
+        if castbar.type == 1 then
+            castbar.bar.bar:SetValue( (currentTime - castStarts) / (castEnds - castStarts) )
+        else
+            castbar.bar.bar:SetValue(1 - ((currentTime - castStarts) / (castEnds - castStarts)))
+        end
+    end
 end
 
 -- Updates local variables with new font
@@ -1176,7 +1176,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         return
     end
 
-	-- Stop when a cast breaking action is detected
+    -- Stop when a cast breaking action is detected
     if CBT.CastBreakingActions[abilityId] then
         if not CBT.IgnoreCastBreakingActions[castbar.id] then
             CI.StopCastBar()
@@ -1203,12 +1203,12 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
             duration = CBT.CastDurationFix[abilityId] or castTime
         end
 
-		-- End the cast bar and restart if a new begin event is detected and the effect isn't a channel or fake cast
-		if result == ACTION_RESULT_BEGIN and not channeled and not CBT.CastDurationFix[abilityId] then
-			CI.StopCastBar()
+        -- End the cast bar and restart if a new begin event is detected and the effect isn't a channel or fake cast
+        if result == ACTION_RESULT_BEGIN and not channeled and not CBT.CastDurationFix[abilityId] then
+            CI.StopCastBar()
         elseif result == ACTION_RESULT_EFFECT_GAINED and channeled then
             CI.StopCastBar()
-		end
+        end
 
         if CBT.CastChannelConvert[abilityId] then
             channeled = true

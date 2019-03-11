@@ -565,18 +565,18 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
         resetFunc = LUIE.InfoPanel.ResetPosition,
     }
-	optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
-		-- InfoPanel scale
-		type = "slider",
-		name = GetString(SI_LUIE_LAM_PNL_PANELSCALE),
-		tooltip = GetString(SI_LUIE_LAM_PNL_PANELSCALE_TP),
-		min = 100, max = 300, step = 10,
-		getFunc = function() return LUIE.InfoPanel.SV.panelScale end,
-		setFunc = function(value) LUIE.InfoPanel.SV.panelScale = value LUIE.InfoPanel.SetScale() end,
-		width = "full",
-		default = 100,
-		disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
-	}
+    optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
+        -- InfoPanel scale
+        type = "slider",
+        name = GetString(SI_LUIE_LAM_PNL_PANELSCALE),
+        tooltip = GetString(SI_LUIE_LAM_PNL_PANELSCALE_TP),
+        min = 100, max = 300, step = 10,
+        getFunc = function() return LUIE.InfoPanel.SV.panelScale end,
+        setFunc = function(value) LUIE.InfoPanel.SV.panelScale = value LUIE.InfoPanel.SetScale() end,
+        width = "full",
+        default = 100,
+        disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
+    }
     optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
         -- Reset InfoPanel position
         type = "button",
@@ -674,16 +674,16 @@ function LUIE_CreateSettings()
                 name = GetString(SI_PLAYER_MENU_MISC),
                 width = "full",
             },
-			{
-				type = "checkbox",
-				name = "Display Info Panel on World Map Screen", -- TODO: Localize
-				tooltip = "Display the Info Panel when you are viewing the world map. This option can be toggled if your Info Panel position clips with any important elements on the World Map screen.", -- TODO: Localize
-				getFunc = function() return LUIE.InfoPanel.SV.DisplayOnWorldMap end,
-				setFunc = function(value) LUIE.InfoPanel.SV.DisplayOnWorldMap = value LUIE.InfoPanel.SetDisplayOnMap() end,
-				width = "full",
-				default = false,
-				disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
-			},
+            {
+                type = "checkbox",
+                name = "Display Info Panel on World Map Screen", -- TODO: Localize
+                tooltip = "Display the Info Panel when you are viewing the world map. This option can be toggled if your Info Panel position clips with any important elements on the World Map screen.", -- TODO: Localize
+                getFunc = function() return LUIE.InfoPanel.SV.DisplayOnWorldMap end,
+                setFunc = function(value) LUIE.InfoPanel.SV.DisplayOnWorldMap = value LUIE.InfoPanel.SetDisplayOnMap() end,
+                width = "full",
+                default = false,
+                disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
+            },
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_PNL_DISABLECOLORSRO),
@@ -780,7 +780,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashFence,
             },
-			{
+            {
                 -- SlashOutfit
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_OUTFIT),
@@ -810,7 +810,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.D.TempAlertCampaign,
             },
-			{
+            {
                 -- TODO
                 type = "checkbox",
                 name = "/Outfit - Show Alert (Temp Setting)",
@@ -1556,20 +1556,20 @@ function LUIE_CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC1_TP),
                 getFunc = function() return unpack(LUIE.CombatInfo.SV.CastBarGradientC1) end,
                 setFunc = function(r, g, b, a) LUIE.CombatInfo.SV.CastBarGradientC1 = { r, g, b, a } LUIE.CombatInfo.UpdateCastBar() end,
-				width = "half",
+                width = "half",
                 default = {r=LUIE.CombatInfo.SV.CastBarGradientC1[1], g=LUIE.CombatInfo.SV.CastBarGradientC1[2], b=LUIE.CombatInfo.SV.CastBarGradientC1[3]},
-				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CastBarEnable ) end,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CastBarEnable ) end,
             },
-			{
+            {
                 -- Cast Bar Gradient Color 2
                 type    = "colorpicker",
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2_TP),
                 getFunc = function() return unpack(LUIE.CombatInfo.SV.CastBarGradientC2) end,
                 setFunc = function(r, g, b, a) LUIE.CombatInfo.SV.CastBarGradientC2 = { r, g, b, a } LUIE.CombatInfo.UpdateCastBar() end,
-				width = "half",
+                width = "half",
                 default = {r=LUIE.CombatInfo.SV.CastBarGradientC2[1], g=LUIE.CombatInfo.SV.CastBarGradientC2[2], b=LUIE.CombatInfo.SV.CastBarGradientC2[3]},
-				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CastBarEnable ) end,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CastBarEnable ) end,
             },
 
         },
@@ -2462,7 +2462,7 @@ function LUIE_CreateSettings()
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_PROM_DESCRIPTION),
             },
-			{
+            {
                 -- Prominent Buffs Label Toggle
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_PROM_LABEL),
@@ -2473,7 +2473,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabel,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-			{
+            {
                 -- Prominent Buffs Label Font Face
                 type = "dropdown",
                 scrollable = true,
@@ -2512,7 +2512,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabelFontStyle,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
             },
-			{
+            {
                 -- Prominent Buffs Progress Bar
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR),
@@ -2537,52 +2537,52 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentProgressTexture,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-			{
+            {
                 -- Prominent Buffs Gradient Color 1
                 type    = "colorpicker",
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF1)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF1_TP),
                 getFunc = function() return unpack(LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1) end,
                 setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1 = { r, g, b, a } LUIE.SpellCastBuffs.Reset() end,
-				width = "half",
+                width = "half",
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[3]},
-				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-			{
+            {
                 -- Prominent Buffs Gradient Color 2
                 type    = "colorpicker",
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF2)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF2_TP),
                 getFunc = function() return unpack(LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2) end,
                 setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2 = { r, g, b, a } LUIE.SpellCastBuffs.Reset() end,
-				width = "half",
+                width = "half",
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[3]},
-				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-			{
+            {
                 -- Prominent Debuffs Gradient Color 1
                 type    = "colorpicker",
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1_TP),
                 getFunc = function() return unpack(LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1) end,
                 setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1 = { r, g, b, a } LUIE.SpellCastBuffs.Reset() end,
-				width = "half",
+                width = "half",
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[3]},
-				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-			{
+            {
                 -- Prominent Debuffs Gradient Color 2
                 type    = "colorpicker",
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2_TP),
                 getFunc = function() return unpack(LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2) end,
                 setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2 = { r, g, b, a } LUIE.SpellCastBuffs.Reset() end,
-				width = "half",
+                width = "half",
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[3]},
-				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-			{
-				-- Prominent Buffs Label/Progress Bar Direction
+            {
+                -- Prominent Buffs Label/Progress Bar Direction
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION_TP),
@@ -2594,8 +2594,8 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentBuffLabelDirection,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and (LUIE.SpellCastBuffs.SV.ProminentLabel or LUIE.SpellCastBuffs.SV.ProminentProgress) ) end,
             },
-			{
-				-- Prominent Debuffs Label/Progress Bar Direction
+            {
+                -- Prominent Debuffs Label/Progress Bar Direction
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION_TP),
@@ -2608,7 +2608,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and (LUIE.SpellCastBuffs.SV.ProminentLabel or LUIE.SpellCastBuffs.SV.ProminentProgress) ) end,
             },
             {
-				-- Prominent Buffs Alignment
+                -- Prominent Buffs Alignment
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFALIGNMENT),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFALIGNMENT_TP),
@@ -2620,8 +2620,8 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentBuffAlignment,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-			{
-				-- Prominent Debuffs Alignment
+            {
+                -- Prominent Debuffs Alignment
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFALIGNMENT),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFALIGNMENT_TP),
@@ -2644,7 +2644,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentBuffReverseSort,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-			{
+            {
                 -- Prominent Debuffs Reverse Sort Order
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFREVERSESORT),
@@ -5290,7 +5290,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Skills.SkillGuildDarkBrotherhood) end,
                 default = {r=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorDB[1], g=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorDB[2], b=LUIE.ChatAnnouncements.D.Skills.SkillGuildColorDB[3]}
             },
-			{
+            {
                 -- Skill Psijic Order
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CA_GUILDREP_PO),
@@ -6036,7 +6036,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory11,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
-			{
+            {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(12)),
@@ -6047,7 +6047,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory12,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
-			{
+            {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(13)),
@@ -6058,7 +6058,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory13,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
-			{
+            {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(14)),
@@ -6069,7 +6069,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory14,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
-			{
+            {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(15)),
@@ -6080,7 +6080,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory15,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
-			{
+            {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(16)),
@@ -6091,7 +6091,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory16,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
-			{
+            {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(17)),
@@ -6102,7 +6102,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory17,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
-			{
+            {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(18)),
@@ -6113,7 +6113,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory18,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
-			{
+            {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(19)),
@@ -6124,7 +6124,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory19,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
-			{
+            {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(20)),
@@ -6135,7 +6135,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory20,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
-			{
+            {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(21)),
@@ -6146,7 +6146,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory21,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
-			{
+            {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(22)),
@@ -6157,7 +6157,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory22,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
-			{
+            {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(23)),
@@ -11819,12 +11819,12 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterruptB = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertInterruptB[1], g=LUIE.CombatText.D.colors.alertInterruptB[2], b=LUIE.CombatText.D.colors.alertInterruptB[3]}
             },
-			{
+            {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT),
                 width = "full",
             },
-			{
+            {
                 -- Unmit Enable
                 type    = "checkbox",
                 name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),

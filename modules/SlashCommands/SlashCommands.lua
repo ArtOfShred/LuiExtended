@@ -36,7 +36,7 @@ SC.D = {
     SlashMerchant       = true,
     SlashFence          = true,
     SlashReadyCheck     = true,
-	SlashOutfit			= true,
+    SlashOutfit         = true,
 }
 SC.SV       = nil
 
@@ -934,46 +934,46 @@ end
 
 function LUIE.SlashOutfit(option)
 
-	if option == "" or option == nil then
-		printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
-		if LUIE.SV.TempAlertOutfit then
-			callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID) )
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-		return
-	end
+    if option == "" or option == nil then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
+        if LUIE.SV.TempAlertOutfit then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID) )
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 
-	local valid = tonumber(option)
-	if not valid or valid > 10 then
-		printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
-		if LUIE.SV.TempAlertOutfit then
-			callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID) )
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-		return
-	end
+    local valid = tonumber(option)
+    if not valid or valid > 10 then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
+        if LUIE.SV.TempAlertOutfit then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID) )
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 
-	local numOutfits = GetNumUnlockedOutfits()
+    local numOutfits = GetNumUnlockedOutfits()
 
-	if valid > numOutfits then
-		printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
-		if LUIE.SV.TempAlertOutfit then
-			callAlert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-		return
-	end
+    if valid > numOutfits then
+        printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
+        if LUIE.SV.TempAlertOutfit then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 
-	EquipOutfit(valid)
-	-- Display a confirmation message.
-	local name = GetOutfitName(valid)
-	if name == "" then
-		name = strformat("<<1>> <<2>>", GetString(SI_CROWN_STORE_SEARCH_ADDITIONAL_OUTFITS), valid)
-	end
-	printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
-	if LUIE.SV.TempAlertOutfit then
-		callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
-	end
+    EquipOutfit(valid)
+    -- Display a confirmation message.
+    local name = GetOutfitName(valid)
+    if name == "" then
+        name = strformat("<<1>> <<2>>", GetString(SI_CROWN_STORE_SEARCH_ADDITIONAL_OUTFITS), valid)
+    end
+    printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
+    if LUIE.SV.TempAlertOutfit then
+        callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
+    end
 end
 
 function LUIE.TempSlashFilter()
@@ -1047,7 +1047,7 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/fence"]        = nil
     SLASH_COMMANDS["/ready"]        = nil
     SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck -- This command is always registered since it is also a default command
-	SLASH_COMMANDS["/outfit"]		= nil
+    SLASH_COMMANDS["/outfit"]       = nil
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
 
     -- Add commands based off menu options
@@ -1125,9 +1125,9 @@ function SC.RegisterSlashCommands()
     if SC.SV.SlashReadyCheck then
         SLASH_COMMANDS["/ready"]        = LUIE.SlashReadyCheck
     end
-	if SC.SV.SlashOutfit then
-		SLASH_COMMANDS["/outfit"]		= LUIE.SlashOutfit
-	end
+    if SC.SV.SlashOutfit then
+        SLASH_COMMANDS["/outfit"]       = LUIE.SlashOutfit
+    end
 
     -- TODO: DEBUG, REMOVE
     SLASH_COMMANDS["/filter"]           = LUIE.TempSlashFilter
