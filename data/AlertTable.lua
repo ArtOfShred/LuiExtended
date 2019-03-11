@@ -921,6 +921,8 @@ LUIE.AlertTable = {
     [27897] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Open Wounds (Vorenor Winterbourne)
     [27791] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Blood Frenzy (Vorenor Winterbourne)
 
+    [31672] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, refire = 2500 }, -- Thrall Feast (Vorenor Winterbourne)
+
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)
     [117352] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind (Coldsnap Snowstalker)

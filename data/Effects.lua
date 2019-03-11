@@ -9835,11 +9835,13 @@ E.EffectOverride = {
     [27905] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', hide = true }, -- Blood Pool (Vorenor Winterbourne)
     [27906] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', groundLabel = true, tooltip = T.Skill_Blood_Pool_1_5 }, -- Blood Pool (Vorenor Winterbourne)
 
-    [27897] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Magic_2_Sec, stack = 0 }, -- Open Wounds (Vorenor Winterbourne)
-    [27898] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Open Wounds (Vorenor Winterbourne)
+    [27897] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_open_wounds.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Magic_2_Sec, stack = 0 }, -- Open Wounds (Vorenor Winterbourne)
+    [27898] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_open_wounds.dds' }, -- Open Wounds (Vorenor Winterbourne)
 
     [27791] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_frenzy.dds' }, -- Blood Frenzy (Vorenor Winterbourne)
     [27799] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_frenzy.dds' }, -- Blood Frenzy (Vorenor Winterbourne)
+
+    [31672] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Thrall Feast (Vorenor Winterbourne)
 
     -- Frostvault
     [117286] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', hide = true }, -- Rending Bleed (Coldsnap Goblin - Shared)

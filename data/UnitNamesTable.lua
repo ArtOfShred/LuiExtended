@@ -132,7 +132,7 @@ U.Boss_Blood_Spawn                      = 'Blood Spawn'
 U.NPC_The_Whisperer_Nightmare           = 'The Whisperer Nightmare'
 U.NPC_Flesh_Atronach                    = 'Flesh Atronach'
 U.Boss_Urvan_Veleth                     = 'Urvan Veleth'
-U.Boss_Vorenor_Winterbourne             = 'Vorenor_Winterborne'
+U.Boss_Vorenor_Winterbourne             = 'Vorenor Winterbourne'
 
 -- Frostvault
 U.NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre'
