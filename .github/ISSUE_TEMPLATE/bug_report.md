@@ -9,7 +9,7 @@ labels: 'i: bug'
 A clear and concise description of what the bug is.
 
 **To Reproduce**
-Steps to reproduce the behavior:
+Steps to reproduce the behavior (please be as specific as possible):
 1. Go to '...'
 2. Click on '....'
 3. Interact with '....'
@@ -19,10 +19,10 @@ Steps to reproduce the behavior:
 A clear and concise description of what you expected to happen.
 
 **Lua Error**
-`Insert the Error message here`
+`Copy and paste the Lua Error message here.`
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**List all other Addons you are using besides LUI**
-`Add the Addon list here`
+**Other installed AddOns**
+`List all other Addons you are using besides LUI here.`
