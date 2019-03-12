@@ -1143,7 +1143,6 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatInfo.D.UltimatePctEnabled,
                 disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
             },
-
             {
                 type = "slider",
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
@@ -1191,8 +1190,6 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatInfo.D.UltimateFontStyle,
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.UltimatePctEnabled ) end,
             },
-
-
             {
                 type = "checkbox",
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL)),
@@ -1232,7 +1229,6 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatInfo.D.ShowTriggered,
                 disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
             },
-
             {
                 -- Bar Proc Sound
                 type = "checkbox",
@@ -1244,7 +1240,6 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatInfo.D.ProcEnableSound,
                 disabled = function() return not (LUIE.CombatInfo.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
-
             {
                 -- Bar Proc Sound Choice
                 type = "dropdown",
@@ -1259,7 +1254,6 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatInfo.D.ProcSoundName,
                 disabled = function() return not (LUIE.CombatInfo.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
-
             {
                 -- Highlight Ability Bar Icon for Active Effects
                 type = "checkbox",
@@ -1487,7 +1481,6 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatInfo.D.CastBarEnable,
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
             },
-
             {
                 -- Cast Bar Width
                 type = "slider",
@@ -1521,7 +1514,6 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatInfo.D.CastBarIconSize,
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
             },
-
             {
                 -- Display Label
                 type = "checkbox",
@@ -1619,7 +1611,6 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.CombatInfo.SV.CastBarGradientC2[1], g=LUIE.CombatInfo.SV.CastBarGradientC2[2], b=LUIE.CombatInfo.SV.CastBarGradientC2[3]},
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CastBarEnable ) end,
             },
-
         },
     }
 
@@ -1766,7 +1757,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.SV.ExtraConsolidate,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
-
             {
                 -- Extra Expanded
                 type = "checkbox",
@@ -2078,7 +2068,6 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.IgnoreMount,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             },
-
             {
                 -- Use Generic Mount Icon
                 type = "checkbox",
@@ -2090,7 +2079,6 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.MountGenericIcon,
                 disabled = function() return LUIE.SpellCastBuffs.SV.IgnoreMount and not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             },
-
             {
                 -- Long Term - Pets
                 type = "checkbox",
@@ -2418,7 +2406,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ShowRecall,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
-
             {
                 -- Show Werewolf Timer Icon
                 type = "checkbox",
@@ -2430,7 +2417,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ShowWerewolf,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
-
             {
                 -- Show Block Player Icon
                 type = "checkbox",
@@ -2715,7 +2701,6 @@ function LUIE_CreateSettings()
                 getFunc = function() end,
                 setFunc = function(value) LUIE.SpellCastBuffs.AddToCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable, value) LUIE_Prominent_Buffs_List:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable)) end,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
-
             },
             {
                 -- Prominent Buffs List (Remove)
@@ -2739,7 +2724,6 @@ function LUIE_CreateSettings()
                 getFunc = function() end,
                 setFunc = function(value) LUIE.SpellCastBuffs.AddToCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable, value) LUIE_Prominent_Debuffs_List:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable)) end,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
-
             },
             {
                 -- Prominent Debuffs List (Remove)
@@ -2775,7 +2759,6 @@ function LUIE_CreateSettings()
                 getFunc = function() end,
                 setFunc = function(value) LUIE.SpellCastBuffs.AddToCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable, value) LUIE_Blacklist:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable)) end,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
-
             },
             {
                 -- Buffs & Debuffs Blacklist (Remove)
@@ -3367,7 +3350,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange and LUIE.ChatAnnouncements.SV.Currency.CurrencyWVShowTotal) end,
                 default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTotalWV,
             },
-
             {
                 -- Show Outfit Tokens
                 type = "checkbox",
@@ -3724,7 +3706,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.LootTotal and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.Inventory.LootTotalString,
             },
-
             {
                 -- Show looted items
                 type = "checkbox",
@@ -3770,7 +3751,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.Inventory.LootBlacklist,
             },
-
             {
                 -- Hide Trash Quality Items
                 type = "checkbox",
@@ -3782,7 +3762,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.Inventory.LootNotTrash,
             },
-
             {
                 -- Show Confiscated Items
                 type = "checkbox",
@@ -3827,7 +3806,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.Inventory.LootShowLockpick,
             },
-
             {
                 -- Show Quest Loot (Add)
                 type = "checkbox",
@@ -3850,7 +3828,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.Inventory.LootQuestRemove,
             },
-
             {
                 -- Show Vendor Inventory Changes
                 type = "checkbox",
@@ -5738,7 +5715,6 @@ function LUIE_CreateSettings()
                 LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.Lorebooks.LorebookShowHidden,
             },
-
         },
     }
 
@@ -8344,7 +8320,6 @@ function LUIE_CreateSettings()
                 default = { r=LUIE.UnitFrames.D.CustomColourNeutral[1], g=LUIE.UnitFrames.D.CustomColourNeutral[2], b=LUIE.UnitFrames.D.CustomColourNeutral[3] },
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
             },
-
             {
                 -- Custom Unit Reaction color
                 type = "colorpicker",
@@ -9876,7 +9851,6 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[11] = { r, g, b, a } end,
                 default = {r=LUIE.CombatText.D.colors.damage[11][1], g=LUIE.CombatText.D.colors.damage[11][2], b=LUIE.CombatText.D.colors.damage[11][3]}
             },
-
             {
                 -- Checkbox Critical Damage Override
                 type    = "checkbox",
@@ -9895,7 +9869,6 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.criticalDamageOverride = { r, g, b, a } end,
                 default = {r=LUIE.CombatText.D.colors.criticalDamageOverride[1], g=LUIE.CombatText.D.colors.criticalDamageOverride[2], b=LUIE.CombatText.D.colors.criticalDamageOverride[3]}
             },
-
             {
                 -- Checkbox Incoming Damage Override
                 type    = "checkbox",
@@ -10906,7 +10879,6 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.stunned = { r, g, b, a } end,
                 default = {r=LUIE.CombatText.D.colors.stunned[1], g=LUIE.CombatText.D.colors.stunned[2], b=LUIE.CombatText.D.colors.stunned[3]}
             },
-
         },
     }
 
@@ -10998,10 +10970,6 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.outCombat = { r, g, b, a } end,
                 default = {r=LUIE.CombatText.D.colors.outCombat[1], g=LUIE.CombatText.D.colors.outCombat[2], b=LUIE.CombatText.D.colors.outCombat[3]}
             },
-
----------------------
----------------------
-
             {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CT_DEATH_HEADER),
@@ -11047,11 +11015,6 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.death = { r, g, b, a } end,
                 default = {r=LUIE.CombatText.D.colors.death[1], g=LUIE.CombatText.D.colors.death[2], b=LUIE.CombatText.D.colors.death[3]}
             },
-
-
----------------------
----------------------
-
             {
                 type = "header",
                 name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE), GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POINT_HEADER)),
@@ -11424,8 +11387,6 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.lowStamina = { r, g, b, a } end,
                 default = {r=LUIE.CombatText.D.colors.lowStamina[1], g=LUIE.CombatText.D.colors.lowStamina[2], b=LUIE.CombatText.D.colors.lowStamina[3]}
             },
-
-
         },
     }
 
@@ -11434,7 +11395,6 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_ACTIVE_COMBAT_ALERT), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
-
             {
                 type = "description",
                 text = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERTS_DESC),
@@ -11456,7 +11416,6 @@ function LUIE_CreateSettings()
                 setFunc = function(size) LUIE.CombatText.SV.fontSizes.alert = size end,
                 default = LUIE.CombatText.D.fontSizes.alert,
             },
-
             {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE),
@@ -12009,13 +11968,11 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDestroy = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertDestroy[1], g=LUIE.CombatText.D.colors.alertDestroy[2], b=LUIE.CombatText.D.colors.alertDestroy[3]}
             },
-
             {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON),
                 width = "full",
             },
-
             {
                 -- Summon Enable
                 type    = "checkbox",
@@ -12065,11 +12022,8 @@ function LUIE_CreateSettings()
                 setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertSummon = { r, g, b, a } LUIE.CombatText.SetAlertColors() end,
                 default = {r=LUIE.CombatText.D.colors.alertSummon[1], g=LUIE.CombatText.D.colors.alertSummon[2], b=LUIE.CombatText.D.colors.alertSummon[3]}
             },
-
         },
     }
-
-
 
     -- Combat Text - Font Format Options Submenu
     optionsDataCombatText[#optionsDataCombatText +1] = {
