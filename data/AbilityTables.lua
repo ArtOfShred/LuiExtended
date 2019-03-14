@@ -1208,6 +1208,7 @@ A.Skill_Quake                       = 10270
 A.Skill_Cave_In                     = 27995
 A.Skill_Praxins_Nightmare           = 47122
 A.Skill_Harrowing_Ring              = 27703
+A.Skill_Wracking_Pain               = GetString(SI_LUIE_SKILL_WRACKING_PAIN)
 
 -- Frostvault
 A.Skill_Rending_Bleed               = 117286

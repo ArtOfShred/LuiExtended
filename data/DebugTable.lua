@@ -12855,6 +12855,9 @@ debugAuras = {
             [31611] = true, -- Crusing Rocks (Cave In)
             [87373] = true, -- Crusing Rocks (Cave In)
 
+            [59598] = true, -- Smoke Bomb
+            [59597] = true, -- Smoke Bomb
+
             [27764] = true, -- Dark Ritual (Praxin Douare)
             [27765] = true, -- Dummy (Praxin Douare)
             [27820] = true, -- Dummy (Praxin Douare)
@@ -12898,6 +12901,7 @@ debugAuras = {
             [27653] = true, -- Dummy (Blood Essence)
 
             [86418] = true, -- Harrowing Ring (Harrowing Ring)
+            [27655] = true, -- Harrowing Ring (Harrowing Ring)
             [27716] = true, -- Dummy (Blood Essence)
             [43176] = true, -- Shocked (Blood Essence)
             [61444] = true, -- Shocked (Blood Essence)
@@ -12920,8 +12924,8 @@ debugAuras = {
             [27603] = true, -- Blood Pool (Urvan Veleth)
             [27605] = true, -- Blood Pool (Urvan Veleth)
 
-            --[32100] = true, -- Arachnopbohia
-            --[28632] = true, -- Intro (Vorenor Winterbourne)
+            [32100] = true, -- Arachnopbohia
+            [28632] = true, -- Intro (Vorenor Winterbourne)
 
             [27660] = true, -- Blood Drain (Vorenor Winterbourne)
             [27707] = true, -- Blood Drain (Vorenor Winterbourne)

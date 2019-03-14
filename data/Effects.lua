@@ -1925,6 +1925,7 @@ E.EffectSourceOverride = {
     [31611] = { source = A.Skill_Cave_In }, -- Crushing Rocks (Cave In)
     [87373] = { source = A.Skill_Cave_In }, -- Cave-In (Collapsed Ceiling)
     [86418] = { source = U.Boss_Praxin_Douare, pet = '', removePlayer = true }, -- Harrowing Ring (Blood Essence)
+    [27655] = { source = U.Boss_Praxin_Douare, pet = '', removePlayer = true }, -- Harrowing Ring (Blood Essence)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -9818,6 +9819,7 @@ E.EffectOverride = {
     [61445] = { hide = true }, -- Dummy (Blood Essence)
     [73016] = { hide = true }, -- Dummy (Blood Essence)
     [86418] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_harrowing_ring.dds' }, -- Harrowing Ring (Blood Essence)
+    [27655] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_harrowing_ring.dds' }, -- Harrowing Ring (Blood Essence)
     [43176] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_harrowing_ring.dds', name = A.Skill_Harrowing_Ring, unbreakable = 1, tooltip = T.Generic_Stun }, -- Shocked (Blood Essence)
     [61444] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_harrowing_ring.dds', name = A.Skill_Harrowing_Ring, unbreakable = 1, tooltip = T.Generic_Stun }, -- Shocked (Blood Essence)
     [43173] = { hide = true }, -- DUN_SCH_RingBurst (Blood Essence)
@@ -9828,6 +9830,7 @@ E.EffectOverride = {
     [27600] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', hide = true }, -- Blood Pool (Urvan Veleth)
     [27603] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', groundLabel = true, tooltip = T.Skill_Blood_Pool }, -- Blood Pool (Urvan Veleth)
 
+    [32100] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_headgrab.dds', name = A.Skill_Wracking_Pain, tooltip = T.Generic_Stun, unbreakable = 1 }, -- Arachnophobia (Vorenor Winterbourne)
     [28632] = { hide = true }, -- Intro (Vorenor Winterbourne)
 
     [27660] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_drain.dds' }, -- Blood Drain (Vorenor Winterbourne)
@@ -10173,6 +10176,7 @@ E.FakeExternalDebuffs = {
     [18051] = { duration = 2000 }, -- Encased (The Whisperer Nightmare)
     [43176] = { duration = 1200 }, -- Shocked (Blood Essence)
     [61444] = { duration = 1200 }, -- Shocked (Blood Essence)
+    [32100] = { duration = 3500 }, -- Arachnophobia (Vorenor Winterbourne)
 
     -- Frostvault
     [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
