@@ -54,6 +54,10 @@ frontend/CombatText.xml
 
 i18n/en.lua
 i18n/$(language).lua
+i18n/settings/Settings_en.lua
+i18n/settings/Settings_$(language).lua
+i18n/skills/Skills_en.lua
+i18n/skills/Skills_$(language).lua
 
 data/AbilityTables.lua
 data/Tooltips.lua
