@@ -47,7 +47,7 @@ libs/LibMsgWin-1.0/LibMsgWin-1.0.lua
 LuiExtended.lua
 UI.lua
 Settings.lua
-Welcome.lua
+Changelog.lua
 Bindings.xml
 
 frontend/CombatText.xml
