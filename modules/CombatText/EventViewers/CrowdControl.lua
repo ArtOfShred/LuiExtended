@@ -3,7 +3,6 @@ local CTV = LUIE.CombatTextCrowdControlEventViewer
 
 local callLater = zo_callLater
 local C = LUIE.CombatTextConstants
-local L = CombatTextLocalization
 local poolTypes = LUIE.CombatTextConstants.poolType
 local crowdControlTypes = LUIE.CombatTextConstants.crowdControlType
 

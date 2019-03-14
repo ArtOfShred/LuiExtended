@@ -496,20 +496,14 @@ local strings = {
     SI_LUIE_UF_WEREWOLF_TP =                             "Вы останетесь в форме оборотня в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Запас сил езд. животного (<<3>>%)",
     SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Состояние (<<3>>%)",
-}
-
--- TODO: Switch to StringId's
-CombatTextLocalization = {
----------------------------------------------------------------------------------------------------------------------------------------
-    --//PANEL TITLES//--
----------------------------------------------------------------------------------------------------------------------------------------
-    panelTitles = {
-        LUIE_CombatText_Outgoing                = "Исходящий",
-        LUIE_CombatText_Incoming                = "Входящий",
-        LUIE_CombatText_Point                   = "Очки",
-        LUIE_CombatText_Alert                   = "Предупреждения",
-        LUIE_CombatText_Resource                = "Ресурсы"
-    },
+	
+	-- CombatText.lua
+	SI_LUIE_CT_PANEL_OUTGOING =							 "Outgoing",
+	SI_LUIE_CT_PANEL_INCOMING =						     "Incoming",
+	SI_LUIE_CT_PANEL_POINT =							 "Points",
+	SI_LUIE_CT_PANEL_ALERT =							 "Alerts",
+	SI_LUIE_CT_PANEL_RESOURCE =							 "Resources",
+	
 }
 
 local pairs = pairs

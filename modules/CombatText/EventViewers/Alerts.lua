@@ -1,7 +1,6 @@
 LUIE.CombatTextAlertViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextAlertViewer
 local CT = LUIE.CombatText
-local L = CombatTextLocalization
 local callLater = zo_callLater
 local poolTypes = LUIE.CombatTextConstants.poolType
 local alertTypes = LUIE.CombatTextConstants.alertType

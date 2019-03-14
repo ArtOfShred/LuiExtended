@@ -2,7 +2,6 @@ LUIE.CombatTextPointEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextPointEventViewer
 
 local callLater = zo_callLater
-local L = CombatTextLocalization
 local poolTypes = LUIE.CombatTextConstants.poolType
 local pointTypes = LUIE.CombatTextConstants.pointType
 

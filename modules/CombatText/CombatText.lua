@@ -10,6 +10,14 @@ local pairs  = pairs
 
 local moduleName    = LUIE.name .. "_CombatText"
 
+local panelTitles = {
+        LUIE_CombatText_Outgoing                = GetString(SI_LUIE_CT_PANEL_OUTGOING),
+        LUIE_CombatText_Incoming                = GetString(SI_LUIE_CT_PANEL_INCOMING),
+        LUIE_CombatText_Point                   = GetString(SI_LUIE_CT_PANEL_POINT),
+        LUIE_CombatText_Alert                   = GetString(SI_LUIE_CT_PANEL_ALERT),
+        LUIE_CombatText_Resource                = GetString(SI_LUIE_CT_PANEL_RESOURCE),
+}
+
 CT.Enabled  = false
 CT.D = {
     unlocked = false,
@@ -438,7 +446,7 @@ function CT.Initialize( enabled )
             _G[k]:SetDimensions(unpack(s.dimensions))
             _G[k]:SetHandler('OnMouseUp', SavePosition)
             _G[k .. '_Label']:SetFont(LMP:Fetch('font', LUIE.CombatText.SV.fontFace) .. '|26|' .. LUIE.CombatText.SV.fontOutline)
-            _G[k .. '_Label']:SetText(CombatTextLocalization.panelTitles[k])
+            _G[k .. '_Label']:SetText(panelTitles[k])
         else
             LUIE.CombatText.SV.panels[k] = nil
         end

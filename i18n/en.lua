@@ -496,20 +496,14 @@ local strings = {
     SI_LUIE_UF_WEREWOLF_TP =                             "You will remain in Werewolf Form for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Mount Stamina (<<3>>%)",
     SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Condition (<<3>>%)",
-}
+	
+	-- CombatText.lua
+	SI_LUIE_CT_PANEL_OUTGOING =							 "Outgoing",
+	SI_LUIE_CT_PANEL_INCOMING =						     "Incoming",
+	SI_LUIE_CT_PANEL_POINT =							 "Points",
+	SI_LUIE_CT_PANEL_ALERT =							 "Alerts",
+	SI_LUIE_CT_PANEL_RESOURCE =							 "Resources",
 
--- TODO: Switch to StringId's
-CombatTextLocalization = {
----------------------------------------------------------------------------------------------------------------------------------------
-    --//PANEL TITLES//--
----------------------------------------------------------------------------------------------------------------------------------------
-    panelTitles = {
-        LUIE_CombatText_Outgoing                = "Outgoing",
-        LUIE_CombatText_Incoming                = "Incoming",
-        LUIE_CombatText_Point                   = "Points",
-        LUIE_CombatText_Alert                   = "Alerts",
-        LUIE_CombatText_Resource                = "Resources"
-    },
 }
 
 local pairs = pairs
