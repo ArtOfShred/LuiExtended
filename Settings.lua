@@ -3765,8 +3765,8 @@ function LUIE_CreateSettings()
             {
                 -- Show Confiscated Items
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LootConfiscateD)),
-                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LootConfiscateD_TP),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTCONFISCATED)),
+                tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTCONFISCATED_TP),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootConfiscate end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootConfiscate = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
                 width = "full",
