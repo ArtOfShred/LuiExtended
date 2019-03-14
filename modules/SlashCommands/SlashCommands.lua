@@ -1130,7 +1130,7 @@ function SC.RegisterSlashCommands()
         SLASH_COMMANDS["/fence"]        = function(...) LUIE.SlashCollectible(300) end
     end
     if SC.SV.SlashCake then
-        SLASH_COMMANDS["/cake"]         = function(...) LUIE.SlashCollectible(4786) end
+        SLASH_COMMANDS["/cake"]         = function(...) LUIE.SlashCollectible(5886) end
     end
     if SC.SV.SlashPie then
         SLASH_COMMANDS["/pie"]          = function(...) LUIE.SlashCollectible(1167) end
