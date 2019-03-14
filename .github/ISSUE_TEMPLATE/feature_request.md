@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Request a feature to be added to LUI Extended
-labels: 'i: feature request'
+labels: 'feature request'
 
 ---
 
