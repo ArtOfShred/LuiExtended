@@ -10,12 +10,6 @@ local pairs  = pairs
 
 local moduleName    = LUIE.name .. "_CombatText"
 
-LUIE_CombatText_Outgoing                = GetString(SI_LUIE_COMBATTEXT_OUTGOING),
-LUIE_CombatText_Incoming                = GetString(SI_LUIE_COMBATTEXT_INCOMING),
-LUIE_CombatText_Point                   = GetString(SI_LUIE_COMBATTEXT_POINTS),
-LUIE_CombatText_Alert                   = GetString(SI_LUIE_COMBATTEXT_ALERTS),
-LUIE_CombatText_Resource                = GetString(SI_LUIE_COMBATTEXT_RESOURCES),
-
 CT.Enabled  = false
 CT.D = {
     unlocked = false,
