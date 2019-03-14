@@ -1,5 +1,5 @@
 -- Skill names & Tooltips localization
--- Translation by KiriX
+-- Translation by: KiriX
 
 local strings = {
 
@@ -501,7 +501,6 @@ local strings = {
     SI_LUIE_SKILL_FROZEN_RETREAT_TP =                    "Detonates when a enemy comes close, dealing Frost Damage, teleporting the enemy to you, and immobilizing them for |cFFFFFF3|r seconds.\n\nAn ally in the portal can activate the |cFFFFFFIcy Escape|r synergy.", -- TODO: Translate
     SI_LUIE_SKILL_SLEET_STORM_TP =                       "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second.", -- TODO: Translate
     SI_LUIE_SKILL_PERMAFROST_TP =                        "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second.\n\nDamaging an enemy three times with the storm will stun them for |cFFFFFF3|r seconds.", -- TODO: Translate
-    SI_LUIE_SKILL_PERMAFROST_SNARE_TP =                  "Movement Speed reduced by |cFFFFFF70|r%.\n\nIf you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_IMPALING_SHARDS_GROUND_TP =            "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF30|r%.",
     SI_LUIE_SKILL_SLEET_STORM_GROUND_TP =                "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.",
     SI_LUIE_SKILL_PERMAFROST_GROUND_TP =                 "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.\n\nIf you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.",
@@ -1128,6 +1127,50 @@ local strings = {
     SI_LUIE_SKILL_SIPHON_STAMINA_TP =                    "Draining |cFFFFFF5|r% Max Stamina every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_DARK_ROOT_STAMINA_TP =                 "Dramatically increase Max Stamina and Stamina Recovery.",
     SI_LUIE_SKILL_DARK_ROOT_MAGICKA_TP =                 "Dramatically increase Max Magicka and Magicka Recovery.",
+    SI_LUIE_SKILL_SHADOW_TENDRIL =                       "Shadow Tendril",
+    SI_LUIE_SKILL_BLAZING_ARROW_TP =                     "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nPut out the flames by jumping in the water.",
+    SI_LUIE_SKILL_BLAZING_EMBERS_TP =                    "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF5|r seconds.\n\nPut out the flames by jumping in the water.",
+    SI_LUIE_SKILL_OBLIVION_GATE =                        "Oblivion Gate",
+    SI_LUIE_SKILL_ENRAGED_FORTITUDE =                    "Enraged Fortitude",
+    SI_LUIE_SKILL_ENRAGE_HORVANTUD =                     "Increase damage done by |cFFFFFF5|r%, stacking up to |cFFFFFF3|r times.",
+    SI_LUIE_SKILL_FLAME_TSUNAMI =                        "Flame Tsunami",
+    SI_LUIE_SKILL_FLAME_TSUNAMI_TP =                     "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF2|r seconds.\n\nStunned for |cFFFFFF1.5|r seconds.",
+    SI_LUIE_SKILL_FLAME_TORNADO_SHIELD_TP =              "Absorbing |cFFFFFF35|r% of damage taken for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_IGNORE_PAIN =                          "Ignore Pain",
+    SI_LUIE_SKILL_IGNORE_PAIN_TP =                       "Damage taken reduced by |cFFFFFF95|r%.",
+    SI_LUIE_SKILL_MAGMA_PRISON_TP =                      "Stunned and afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_VOLCANIC_SHIELD =                      "Volcanic Shield",
+    SI_LUIE_SKILL_VOLCANIC_SHIELD_TP =                   "Absorbing damage and launching bolts of fire at all nearby enemies every |cFFFFFF1|r second while the shield holds.",
+    SI_LUIE_SKILL_SIGIL_OF_HASTE_TP =                    "Increase Movement Speed by |cffffff40|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SIGIL_OF_POWER_TP =                    "Increase Weapon and Spell Damage by |cFFFFFF<<1>>|r for |cFFFFFF30|r seconds.",
+    SI_LUIE_SKILL_SIGIL_OF_HEALING_TP =                  "Healing for |cFFFFFF10|r% of your Max Health every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SIGIL_OF_DEFENSE_TP =                  "Reduce damage taken by |cffffff50|r% and reflect all projectiles cast at you for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_DEFILED_GRAVE_TP =                     "Immobilized and taking Magic Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_SUDDEN_STORM =                         "Sudden Storm",
+    SI_LUIE_SKILL_BACKSTAB_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_CALL_STORM_ATRONACH =                  "Call Storm Atronachs",
+    SI_LUIE_SKILL_ENERVATING_STONE_TP =                  "Stunned and taking Shock Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_ETHEREAL_CHAIN_TP =                    "Levitated and afflicted with Magic Damage every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_PRIMAL_SWARM =                         "Primal Swarm",
+    SI_LUIE_SKILL_ENSNARE_TP =                           "Stunned for |cFFFFFF4|r seconds.\n\nMovement Speed reduced by |cFFFFFF50|r% for |cFFFFFF8|r seconds.",
+    SI_LUIE_SKILL_MIRROR_WARD_TP =                       "Reflect all projectiles cast at you.",
+    SI_LUIE_SKILL_POISON_SHOT_TP =                       "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds, stacking indefinitely.",
+    SI_LUIE_SKILL_VENOMOUS_BURST_TP =                    "You and nearby allies take Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SELENES_ROSE =                         "Selene's Roses",
+    SI_LUIE_SKILL_WEB_WRAP_TP =                          "Wrapped in webs and unable to take any actions for |cFFFFFF<<1>>|r seconds. Break free to remove.",
+    SI_LUIE_SKILL_PRIMAL_MAUL =                          "Primal Maul",
+    SI_LUIE_SKILL_ROOT_GUARD =                           "Root Guard",
+    SI_LUIE_SKILL_EARTH_MENDER =                         "Earth Mender",
+    SI_LUIE_SKILL_TRUE_SHOT =                            "True Shot",
+    SI_LUIE_SKILL_SENCHE_SPIRIT =                        "Senche Spirit",
+    SI_LUIE_SKILL_INJECT_POISON_TP =                     "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF6|r seconds.\n\nKnocked back for |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_SPAWN_HATCHLINGS =                     "Spawn Hatchlings",
+    SI_LUIE_SKILL_FIGHTERS_BOON_TP =                     "Increase Armor by |cFFFFFF559|r for |cFFFFFF2|r minutes.",
+    SI_LUIE_SKILL_ENERVATING_SEAL_TP =                   "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds. Each tick drains |cFFFFFF15|r% of your Max Stamina and Magicka.",
+    SI_LUIE_SKILL_MONSTROUS_GROWTH_TP =                  "Increase damage done by |cFFFFFF<<1>>|r%.",
+    SI_LUIE_SKILL_BLOOD_POOL_TP =                        "Taking Physical Damage every |cFFFFFF1|r second. Each tick heals the Vampire.",
+    SI_LUIE_SKILL_BLOOD_POOL_1_5_TP =                    "Taking Physical Damage every |cFFFFFF1.5|r seconds. Each tick heals the Vampire.",
+    SI_LUIE_SKILL_WRACKING_PAIN =                        "Wracking Pain",
 }
 
 local pairs = pairs

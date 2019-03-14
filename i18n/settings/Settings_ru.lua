@@ -1,5 +1,5 @@
 -- Addon Settings Menu localization
--- Translation by KiriX
+-- Translation by: KiriX
 
 local strings = {
 

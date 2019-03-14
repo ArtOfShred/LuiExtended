@@ -1,4 +1,5 @@
 -- Addon Settings Menu localization
+-- Translation by: <default>
 
 local strings = {
 

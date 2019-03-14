@@ -1,4 +1,5 @@
 -- Main LUI Extended localization
+-- Translation by: <default>
 
 local strings = {
 

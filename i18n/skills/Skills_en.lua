@@ -1,4 +1,5 @@
 -- Skill names & Tooltips localization
+-- Translation by: <default>
 
 local strings = {
 

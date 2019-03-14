@@ -1,5 +1,5 @@
 -- Main LUI Extended localization
--- Translation by KiriX
+-- Translation by: KiriX
 
 local strings = {
 
