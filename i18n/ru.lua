@@ -490,20 +490,17 @@ local strings = {
     SI_LUIE_CT_MITIGATION_FORMAT_DESTROY_N =             "%t %i",
     SI_LUIE_CT_MITIGATION_FORMAT_SUMMON =                "%t %i",
     SI_LUIE_CT_MITIGATION_FORMAT_SUMMON_N =              "%t %i",
+    SI_LUIE_CT_PANEL_OUTGOING =                          "Исходящий",
+    SI_LUIE_CT_PANEL_INCOMING =                          "Входящий",
+    SI_LUIE_CT_PANEL_POINT =                             "Очки",
+    SI_LUIE_CT_PANEL_ALERT =                             "Предупреждения",
+    SI_LUIE_CT_PANEL_RESOURCE =                          "Ресурсы",
 
     -- UnitFrames.lua
     SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Энергия (<<3>>%)",
     SI_LUIE_UF_WEREWOLF_TP =                             "Вы останетесь в форме оборотня в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Запас сил езд. животного (<<3>>%)",
     SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Состояние (<<3>>%)",
-	
-	-- CombatText.lua
-	SI_LUIE_CT_PANEL_OUTGOING =							 "Outgoing",
-	SI_LUIE_CT_PANEL_INCOMING =						     "Incoming",
-	SI_LUIE_CT_PANEL_POINT =							 "Points",
-	SI_LUIE_CT_PANEL_ALERT =							 "Alerts",
-	SI_LUIE_CT_PANEL_RESOURCE =							 "Resources",
-	
 }
 
 local pairs = pairs
