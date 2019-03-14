@@ -3,7 +3,7 @@
 
 local strings = {
 
-    -- LuiExtendedMenu.lua
+    -- Settings.lua
     SI_LUIE_LAM_COMPATIBILITY_WARNING =                  "Отключите эту настройку, если у вас наблюдаются проблемы совместимости с другими аддонами.",
     SI_LUIE_LAM_FONT =                                   "Шрифт",
     SI_LUIE_LAM_FONT_SIZE =                              "Размер шрифта",

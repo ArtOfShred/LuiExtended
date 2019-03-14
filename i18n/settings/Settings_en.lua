@@ -2,7 +2,7 @@
 
 local strings = {
 
-    -- LuiExtendedMenu.lua
+    -- Settings.lua
     SI_LUIE_LAM_COMPATIBILITY_WARNING =                  "Disable this option if you are having compatibility issues with other addons.",
     SI_LUIE_LAM_FONT =                                   "Font",
     SI_LUIE_LAM_FONT_SIZE =                              "Font Size",

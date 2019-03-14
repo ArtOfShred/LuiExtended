@@ -249,7 +249,6 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_AOE_MAGIC_1_SEC =              "Taking Magic Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_MAGIC_1_5_SEC =            "Taking Magic Damage every |cFFFFFF1.5|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_MAGIC_2_SEC =              "Taking Magic Damage every |cFFFFFF2|r seconds.",
-
     SI_LUIE_SKILL_GENERIC_AOE_HEAL_1_SEC =               "Healing every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_GENERIC_AOE_HEAL_2_SEC =               "Healing every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_GENERIC_AOE_HEAL_0_5_SEC =             "Healing every |cFFFFFF0.5|r seconds.", -- TODO: End - Translate this Block
@@ -771,14 +770,11 @@ local strings = {
 
     SI_LUIE_SKILL_LAVA_SNARE_TP =                        "Taking Flame Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF30|r%.",
     SI_LUIE_SKILL_LAVA_STACK_TP =                        "Taking increasing Flame Damage every |cFFFFFF1|r second.",
-
     SI_LUIE_SKILL_LAVA_TRAP =                            "Lava Trap",
     SI_LUIE_SKILL_LIGHTNING_TRAP =                       "Lightning Trap",
     SI_LUIE_SKILL_SPIKE_TRAP_TP =                        "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF5|r seconds.\n\nImmobilized for |cFFFFFF0.8|r seconds.",
-
     SI_LUIE_SKILL_FIRE_TRAP_TP =                         "Taking Flame Damage every |cFFFFFF0.75|r seconds and Movement Speed reduced by |cFFFFFF50|r%.",
     SI_LUIE_SKILL_FIRE_TRAP_CELLS_TP =                   "Taking Flame Damage every |cFFFFFF1.5|r seconds and Movement Speed reduced by |cFFFFFF50|r%.",
-
     SI_LUIE_SKILL_SPIKE_TRAP_AURIDON_TP =                "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF10|r seconds.\n\nThis effect stacks up to |cFFFFFF3|r times, to a maximum of |cFFFFFF75|r% Movement Speed reduction.\n\nStunned for |cFFFFFF1|r second.",
 
     ----------------------------------------------------------------
@@ -1015,7 +1011,6 @@ local strings = {
     SI_LUIE_SKILL_SERPENT_SPIT =                         "Serpent Spit",
     SI_LUIE_SKILL_SHADOW_WOOD =                          "Shadow Wood",
     SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "Слуга тени принца Неймона утащил вас в Теневое древо.",
-
     SI_LUIE_SKILL_BEAR_FEROCITY_TP =                     "Immune to all crowd control and movement impairing effects for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_BOSS_CC_IMMUNITY =                     "Boss Immunities",
     SI_LUIE_SKILL_SLAUGHTERFISH_ATTACK_TP =              "You are being devoured by a swarm of Slaughterfish, turn back before it's too late!",
@@ -1062,7 +1057,6 @@ local strings = {
     SI_LUIE_SKILL_CALL_ALLY_TP =                         "A summoned beast ally fights at your side. The beast remains for |cFFFFFF2|r minutes or until killed.",
     SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP =                    "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEach tick heals the vampire.",
     SI_LUIE_SKILL_ICE_CAGE_TP =                          "Taking Frost Damage every |cFFFFFF0.7|r seconds and Movement Speed reduced by |cFFFFFF60|r%.",
-
     SI_LUIE_SKILL_FROZEN_GROUND_TP =                     "Taking Frost Damage every |cFFFFFF0.5|r seconds and Movement Speed reduced by |cFFFFFF70|r%.",
     SI_LUIE_SKILL_HURRICANE_GROUND_TP =                  "Taking Frost Damage every |cFFFFFF0.7|r seconds and Movement Speed reduced by |cFFFFFF60|r%.",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_TP =                  "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
@@ -1114,25 +1108,20 @@ local strings = {
     SI_LUIE_SKILL_STATIC_SHIELD_TP =                     "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nIf the shield is not destroyed it will detonate at the end of the duration, dealing Shock Damage to nearby enemies.",
     SI_LUIE_SKILL_TURRET_MODE_TP =                       "Charged by a power conduit, enabling the Sentry to shield itself with |cFFFFFFStatic Shield|r and use the |cFFFFFFThunderbolt|r ability.",
     SI_LUIE_SKILL_STATIC_CHARGE_TP =                     "Residual static energy from the Dolmen is suppressing your Health Recovery and you will be targeted by Static Charge, taking Oblivion damage.\n\nMove to reduce to the static buildup.",
-
     SI_LUIE_SKILL_INCAPACITATING_TERROR_TP =             "Feared and taking Frost Damage every |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_SPIRITUAL_CLOAK_TP =                   "Prevent Soul Thirsters from pulling you into the spirit realm.",
     SI_LUIE_SKILL_BLESSING_GATHWEN_TP =                  "Reduce damage taken by |cFFFFFF3|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_MAIM_NPC_TP =                          "Reduce damage done by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
-
     SI_LUIE_SKILL_DRAIN_ESSENCE_NPC_TP =                 "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEach tick heals the caster.",
     SI_LUIE_SKILL_SUMMON_DARK_PROXY_TP =                 "A shadowy Clannfear fights at your side. The clannfear remains for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SUMMON_CLANNFEAR_TP =                  "A Clannfear fights at your side. The clannfear remains for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POOL_OF_FIRE =                         "Pool of Fire",
     SI_LUIE_SKILL_SISTERS_BOND =                         "Sister's Bond",
-
     SI_LUIE_SKILL_CURSE_OF_SUFFERING_TP =                "Afflicted with with Magic Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF40|r%.\n\nEnter the Red Sigil to remove the curse.",
     SI_LUIE_SKILL_CURSE_OF_DOMINANCE_TP =                "Afflicted with with Magic Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF40|r%.\n\nEnter the Black Sigil to remove the curse.",
     SI_LUIE_SKILL_HEAL_SPORES_TP =                       "Healing every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
-
     SI_LUIE_SKILL_HEAL_SPORES =                          "Healing Spores",
     SI_LUIE_SKILL_SUMMON_STRANGLER_SAPLINGS =            "Summon Strangler Saplings",
-
     SI_LUIE_SKILL_SIPHON_MAGICKA =                       "Siphon Magicka",
     SI_LUIE_SKILL_SIPHON_MAGICKA_TP =                    "Draining |cFFFFFF5|r% Max Magicka every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SIPHON_STAMINA =                       "Siphon Stamina",
