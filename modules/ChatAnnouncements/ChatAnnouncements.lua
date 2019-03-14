@@ -3544,10 +3544,10 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
     end
 
     local armorType = GetItemLinkArmorType(itemLink) -- Get Armor Type of item
-    formattedArmorType = (CA.SV.Inventory.LootShowArmorType and armorType ~= ARMORTYPE_NONE and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade ) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType)) or ""
+    formattedArmorType = (CA.SV.Inventory.LootShowArmorType and armorType ~= ARMORTYPE_NONE and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgradeFail ) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType)) or ""
 
     local traitType = GetItemLinkTraitInfo(itemLink) -- Get Trait type of item
-    formattedTrait = (CA.SV.Inventory.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT and itemType ~= ITEMTYPE_JEWELRY_TRAIT and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade ) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType)) or ""
+    formattedTrait = (CA.SV.Inventory.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT and itemType ~= ITEMTYPE_JEWELRY_TRAIT and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgradeFail ) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType)) or ""
 
     local styleType = GetItemLinkItemStyle(itemLink) -- Get Style of the item
     local unformattedStyle = strformat("<<1>>", GetItemStyleName(styleType))
@@ -3559,11 +3559,11 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         and itemType ~= ITEMTYPE_GLYPH_ARMOR
         and itemType ~= ITEMTYPE_GLYPH_JEWELRY
         and itemType ~= ITEMTYPE_GLYPH_WEAPON
-        and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade )
+        and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgradeFail )
     and strfmt(" |cFFFFFF(%s)|r", unformattedStyle) or ""
 
     local formattedTotal = ""
-    if CA.SV.Inventory.LootTotal and receivedBy ~= "LUIE_INVENTORY_UPDATE_DISGUISE" and not groupLoot then
+    if CA.SV.Inventory.LootTotal and receivedBy ~= "LUIE_INVENTORY_UPDATE_DISGUISE" and receivedBy ~= "LUIE_RECEIVE_CRAFT" and not groupLoot then
         local total1, total2, total3 = GetItemLinkStacks(itemLink)
         local total = total1 + total2 + total3
         if total > 1 then
@@ -3645,7 +3645,7 @@ function CA.ResolveItemMessage(message, formattedRecipient, color, logPrefix, to
         else
             formattedMessageP1 = ("|r" .. message .. "|c" .. color)
             if formattedRecipient == "" then
-                formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
+                formattedMessageP2 = strfmt(logPrefix, formattedMessageP1, "")
             else
                 local recipient = ("|r" .. formattedRecipient .. "|c" .. color)
                 formattedMessageP2 = strfmt(logPrefix, formattedMessageP1, recipient)
