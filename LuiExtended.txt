@@ -60,14 +60,14 @@ i18n/skills/Skills_en.lua
 i18n/skills/Skills_$(language).lua
 
 data/AbilityTables.lua
-data/Tooltips.lua
-data/UnitNamesTable.lua
-data/Effects.lua
+data/AlertTable.lua
 data/CastBarTable.lua
 data/CombatTextConstants.lua
-data/AlertTable.lua
 data/DebugTable.lua
+data/Effects.lua
 data/Quests.lua
+data/Tooltips.lua
+data/UnitNamesTable.lua
 
 modules/ChatAnnouncements/ChatAnnouncements.lua
 modules/CombatInfo/CombatInfo.lua
