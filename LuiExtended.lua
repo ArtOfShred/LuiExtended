@@ -656,8 +656,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         slotObject:Clear()
     end
 
-    SetupSlotHandlers =
-    {
+    SetupSlotHandlers = {
         [ACTION_TYPE_ABILITY]       = SetupAbilitySlot,
         [ACTION_TYPE_ITEM]          = SetupItemSlot,
         [ACTION_TYPE_COLLECTIBLE]   = SetupCollectibleActionSlot,
@@ -816,8 +815,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         return 0
     end
 
-    local BONUS_SECTION_DATA =
-    {
+    local BONUS_SECTION_DATA = {
         [ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] = {
             typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
             typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
@@ -931,27 +929,26 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     end
 
     -- HOOK SKILLS
-    local INCREASE_BUTTON_TEXTURES =
-        {
-            PLUS = {
-                normal = "EsoUI/Art/Progression/addPoints_up.dds",
-                mouseDown = "EsoUI/Art/Progression/addPoints_down.dds",
-                mouseover = "EsoUI/Art/Progression/addPoints_over.dds",
-                disabled = "EsoUI/Art/Progression/addPoints_disabled.dds",
-            },
-            MORPH = {
-                normal = "EsoUI/Art/Progression/morph_up.dds",
-                mouseDown = "EsoUI/Art/Progression/morph_down.dds",
-                mouseover = "EsoUI/Art/Progression/morph_over.dds",
-                disabled = "EsoUI/Art/Progression/morph_disabled.dds",
-            },
-            REMORPH = {
-                normal = "EsoUI/Art/Progression/remorph_up.dds",
-                mouseDown = "EsoUI/Art/Progression/remorph_down.dds",
-                mouseover = "EsoUI/Art/Progression/remorph_over.dds",
-                disabled = "EsoUI/Art/Progression/remorph_disabled.dds",
-            },
-        }
+    local INCREASE_BUTTON_TEXTURES = {
+        PLUS = {
+            normal = "EsoUI/Art/Progression/addPoints_up.dds",
+            mouseDown = "EsoUI/Art/Progression/addPoints_down.dds",
+            mouseover = "EsoUI/Art/Progression/addPoints_over.dds",
+            disabled = "EsoUI/Art/Progression/addPoints_disabled.dds",
+        },
+        MORPH = {
+            normal = "EsoUI/Art/Progression/morph_up.dds",
+            mouseDown = "EsoUI/Art/Progression/morph_down.dds",
+            mouseover = "EsoUI/Art/Progression/morph_over.dds",
+            disabled = "EsoUI/Art/Progression/morph_disabled.dds",
+        },
+        REMORPH = {
+            normal = "EsoUI/Art/Progression/remorph_up.dds",
+            mouseDown = "EsoUI/Art/Progression/remorph_down.dds",
+            mouseover = "EsoUI/Art/Progression/remorph_over.dds",
+            disabled = "EsoUI/Art/Progression/remorph_disabled.dds",
+        },
+    }
 
     local function ApplyButtonTextures(button, textures)
         button:SetNormalTexture(textures.normal)
