@@ -486,7 +486,6 @@ end
 
 -- For debug function - convert result reason codes to string value
 local resultTable = {
-
     [2080] = "ON CD",
     [2120] = "ABSORB",
     [2040] = "BAD TARGET",
@@ -837,7 +836,6 @@ function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue
         -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
         callLater(function() g_werewolfQuest = 0 end, 5000)
     end
-
 end
 
 function SCB.DuelStart()
@@ -949,7 +947,6 @@ function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
 end
 
 function SCB.CollectibleBuff()
-
     if SCB.SV.HidePlayerBuffs then
         return
     end
@@ -1658,11 +1655,9 @@ function SCB.Buff_OnMouseEnter(control)
             GameTooltip:AddLine(thirdLine, "", ZO_NORMAL_TEXT:UnpackRGB())
         end
     end
-
 end
 
 function SCB.Buff_OnMouseExit(control)
-
     local displayName = GetDisplayName()
     if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
         -- Temp - Sticky tooltip so I can edit things easier
@@ -1671,7 +1666,6 @@ function SCB.Buff_OnMouseExit(control)
         ClearTooltip(GameTooltip)
     end
     -- TODO: Add Sticky Tooltips
-
 end
 
 function SCB.CreateSingleIcon(container, AnchorItem, effectType)
@@ -1841,9 +1835,7 @@ end
  * This handler fires every long-term effect added or removed:
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and (E.EffectGroundDisplay[abilityId] or E.LinkedGroundMine[abilityId]) and not SCB.SV.HideGroundEffects then
-
         -- Mines with multiple auras have to be linked into one id for the purpose of tracking stacks
         if E.LinkedGroundMine[abilityId] then
             abilityId = E.LinkedGroundMine[abilityId]
@@ -1888,7 +1880,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                 end
             end
         elseif changeType == EFFECT_RESULT_GAINED then
-
             -- Special condition to remove 2nd Rearming Trap aura if it is recast before the 2nd trap triggers
             if abilityId == 40382 then
                 g_effectsList.ground[40388] = nil
@@ -1939,7 +1930,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                         groundLabel = groundLabel,
                         toggle = toggle,
                     }
-
                 end
             end
         end
@@ -2163,7 +2153,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                         simulatedContext = "promb_target"
                     end
                 end
-
                 g_effectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].abilityId ] = nil
             end
         end
@@ -2277,7 +2266,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 end
 
 function SCB.ArtificialEffectUpdate(eventCode, effectId)
-
     if SCB.SV.HidePlayerBuffs then
         return
     end
@@ -2333,7 +2321,6 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
 
     -- Create ground auras for damaging effects if toggled on
     if SCB.SV.GroundDamageAura and E.AddGroundDamageAura[abilityId] then
-
         -- Return if this isn't damage or healing, or blocked, dodged, or shielded.
         if result ~= ACTION_RESULT_DAMAGE and result ~= ACTION_RESULT_DAMAGE_SHIELDED and result ~= ACTION_RESULT_DODGED and result ~=ACTION_RESULT_CRITICAL_DAMAGE and result ~= ACTION_RESULT_CRITICAL_HEAL and result ~= ACTION_RESULT_HEAL and result ~= ACTION_RESULT_BLOCKED and result ~= ACTION_RESULT_BLOCKED_DAMAGE and not E.AddGroundDamageAura[abilityId].exception then
             return
@@ -2383,7 +2370,6 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             groundLabel = groundLabel,
             toggle = toggle,
         }
-
     end
 
     -- If the action result isn't a starting/ending event then we ignore it.
@@ -2845,7 +2831,6 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
             end
         end
     end
-
 end
 
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
@@ -3515,7 +3500,6 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
             g_effectsList.reticleover1[ A.Innate_Hidden ] = nil
         end
     end
-
 end
 
 function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
@@ -3551,7 +3535,6 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
             g_effectsList.reticleover1[ A.Innate_Disguised ] = nil
         end
     end
-
 end
 
 function SCB.OnPlayerActivated(eventCode)
@@ -3637,7 +3620,6 @@ function SCB.OnPlayerActivated(eventCode)
     if IsUnitDead("player") then
         g_playerDead = true
     end
-
 end
 
 function SCB.LoadCyrodiilPlayerBuffs()

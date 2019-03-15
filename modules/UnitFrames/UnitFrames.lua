@@ -349,7 +349,6 @@ end
 
 -- Right Click function for group frames - basically just a copy of the ZOS group frame menu options
 function UF.GroupFrames_OnMouseUp(self, button, upInside)
-
     local unitTag = self.defaultUnitTag
     if(button == MOUSE_BUTTON_INDEX_RIGHT and upInside) then
         ClearMenu()
@@ -394,11 +393,9 @@ function UF.GroupFrames_OnMouseUp(self, button, upInside)
 
         ShowMenu(self)
     end
-
 end
 
 function UF.AltBar_OnMouseEnterXP(control)
-
     local isChampion = IsUnitChampion("player")
     local level
     local current
@@ -426,11 +423,9 @@ function UF.AltBar_OnMouseEnterXP(control)
     if enlightenedPool > 0 then
         InformationTooltip:AddLine(strformat(SI_EXPERIENCE_CHAMPION_ENLIGHTENED_TOOLTIP, enlightenedValue), nil, ZO_SUCCEEDED_TEXT:UnpackRGB())
     end
-
 end
 
 function UF.AltBar_OnMouseEnterWerewolf(control)
-
     local function UpdateWerewolfPower()
         local currentPower, maxPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
@@ -451,7 +446,6 @@ function UF.AltBar_OnMouseEnterWerewolf(control)
 end
 
 function UF.AltBar_OnMouseEnterMounted(control)
-
     local function UpdateMountPower()
         local currentPower, maxPower = GetUnitPower("player", POWERTYPE_MOUNT_STAMINA)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
@@ -468,7 +462,6 @@ function UF.AltBar_OnMouseEnterMounted(control)
 end
 
 function UF.AltBar_OnMouseEnterSiege(control)
-
     local function UpdateSiegePower()
         local currentPower, maxPower = GetUnitPower("controlledsiege", POWERTYPE_HEALTH)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
@@ -483,7 +476,6 @@ function UF.AltBar_OnMouseEnterSiege(control)
     -- Register Tooltip Update while active
     eventManager:RegisterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, UpdateSiegePower)
     eventManager:AddFilterForEvent(moduleName .. "TooltipPower", EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_HEALTH, REGISTER_FILTER_UNIT_TAG, "controlledsiege")
-
 end
 
 function UF.AltBar_OnMouseExit(control)
@@ -843,7 +835,6 @@ local function CreateCustomFrames()
             topInfo.defaultUnitTag = GetGroupUnitTagByIndex(i)
             topInfo:SetMouseEnabled(true)
             topInfo:SetHandler("OnMouseUp", UF.GroupFrames_OnMouseUp)
-
         end
     end
 
@@ -1305,7 +1296,6 @@ local function CreateCustomFrames()
     UF.CustomFramesApplyTexture()
     -- Apply fonts
     UF.CustomFramesApplyFont()
-
 end
 
 -- Main entry point to this module
@@ -2584,7 +2574,6 @@ function UF.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
     if isOnline and (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then
         UF.CustomFramesApplyColours(false)
     end
-
 end
 
 function UF.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tank)
@@ -2981,7 +2970,6 @@ end
 -- Repopulate group members, but try to update only those, that require it
 function UF.CustomFramesGroupUpdate()
     --d( strfmt("[%s] GroupUpdate", GetTimeString()) )
-
     -- Unregister update function and clear local flag
     eventManager:UnregisterForUpdate( g_PendingUpdate.Group.name )
     g_PendingUpdate.Group.flag = false
@@ -3420,7 +3408,6 @@ function UF.CustomFramesApplyColours(isMenu)
                 if isMenu then
                     unitFrame.tlw:SetHidden( false )
                 end
-
             end
         end
     end
@@ -3484,7 +3471,6 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
 end
 
 function UF.CustomFramesApplyReactionColor(isPlayer)
-
     if isPlayer and UF.SV.FrameColorClass then
         local classColor = {
             [1]  = { UF.SV.CustomColourDragonknight[1], UF.SV.CustomColourDragonknight[2], UF.SV.CustomColourDragonknight[3], 0.9}, -- Dragonkight

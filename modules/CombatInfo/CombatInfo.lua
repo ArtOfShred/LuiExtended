@@ -290,7 +290,6 @@ function CI.Initialize( enabled )
     CI.CreateCastBar()
     CI.UpdateCastBar()
     CI.SetCastBarPosition()
-
 end
 
 -- Helper function to get override ability duration.
@@ -449,7 +448,6 @@ local playerZ = 0
 
 -- Updates all floating labels. Called every 100ms
 function CI.OnUpdate(currentTime)
-
     -- Procs
     for k, v in pairs (g_triggeredSlotsRemain) do
         local remain = g_triggeredSlotsRemain[k] - currentTime
@@ -538,7 +536,6 @@ function CI.OnUpdate(currentTime)
             CI.StopCastBar()
         end
     end
-
 end
 
 function CI.StopCastBar()
@@ -553,7 +550,9 @@ function CI.StopCastBar()
     g_casting = false
     eventManager:UnregisterForUpdate(moduleName.."CI_CASTBAR")
 
-    if state then CI.GenerateCastbarPreview(state) end
+    if state then
+        CI.GenerateCastbarPreview(state)
+    end
 end
 
 -- Updates Cast Bar - only enabled when Cast Bar is unhidden
@@ -645,7 +644,6 @@ function CI.ApplyFont()
     local castbarFontSize = ( CI.SV.CastBarFontSize and CI.SV.CastBarFontSize > 0 ) and CI.SV.CastBarFontSize or 16
 
     g_castbarFont = castbarFontName .. "|" .. castbarFontSize .. "|" .. castbarFontStyle
-
 end
 
 -- Updates Proc Sound - called on initialization and menu changes
@@ -763,7 +761,6 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
     end
 
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and (E.EffectGroundDisplay[abilityId] or E.LinkedGroundMine[abilityId]) then
-
         if E.LinkedGroundMine[abilityId] then
             abilityId = E.LinkedGroundMine[abilityId]
         end
@@ -936,7 +933,6 @@ function CI.CreateCastBar()
     uiTlw.castBar.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
     uiTlw.castBar.preview.anchorLabelBg:SetDrawTier(0)
 
-
     local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.castBar, 0, 0)
 
     sceneManager:GetScene("hud"):AddFragment( fragment )
@@ -984,7 +980,6 @@ function CI.CreateCastBar()
     castbar.bar.backdrop:SetCenterColor((0.1*CI.SV.CastBarGradientC1[1]), (0.1*CI.SV.CastBarGradientC1[2]), (0.1*CI.SV.CastBarGradientC1[3]), 0.75)
     castbar.bar.bar:SetGradientColors( CI.SV.CastBarGradientC1[1], CI.SV.CastBarGradientC1[2], CI.SV.CastBarGradientC1[3], 1, CI.SV.CastBarGradientC2[1], CI.SV.CastBarGradientC2[2], CI.SV.CastBarGradientC2[3], 1)
 
-
     castbar.bar.backdrop:ClearAnchors()
     castbar.bar.backdrop:SetAnchor(LEFT, castbar, RIGHT, 4, 0 )
 
@@ -1008,7 +1003,6 @@ function CI.CreateCastBar()
 end
 
 function CI.ResizeCastBar()
-
     uiTlw.castBar:SetDimensions( CI.SV.CastBarSizeW + CI.SV.CastBarIconSize + 4, CI.SV.CastBarSizeH )
     castbar:ClearAnchors()
     castbar:SetAnchor(LEFT, uiTlw.castBar, LEFT)
@@ -1031,7 +1025,6 @@ function CI.ResizeCastBar()
     castbar.bar.bar:SetAnchor(CENTER, castbar.bar.backdrop, CENTER, 0, 0)
 
     CI.SetCastBarPosition()
-
 end
 
 function CI.UpdateCastBar()
@@ -1065,7 +1058,6 @@ function CI.SetCastBarPosition()
 
     local savedPos = CI.SV.CastBarCustomPosition
     uiTlw.castBar.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default" )
-
 end
 
 function CI.SetMovingState(state)
@@ -1078,7 +1070,6 @@ function CI.SetMovingState(state)
         uiTlw.castBar:SetMouseEnabled( state )
         uiTlw.castBar:SetMovable( state )
     end
-
 end
 
 -- Called by CI.SetMovingState from the menu as well as by CI.OnUpdateCastbar when preview is enabled
@@ -1102,7 +1093,6 @@ function CI.GenerateCastbarPreview(state)
 end
 
 function CI.SoulGemResurrectionStart(eventCode, durationMs)
-
     -- Just in case any other casts are present - stop them first
     CI.StopCastBar()
 
@@ -1134,7 +1124,6 @@ function CI.SoulGemResurrectionStart(eventCode, durationMs)
     castbar:SetHidden(false)
     g_casting = true
     eventManager:RegisterForUpdate(moduleName.."CI_CASTBAR", 20, CI.OnUpdateCastbar )
-
 end
 
 function CI.SoulGemResurrectionEnd(eventCode)
@@ -1143,7 +1132,6 @@ end
 
 -- Very basic handler registered to only read CC events on the player
 function CI.OnCombatEventBreakCast( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-
     -- Some cast/channel abilities (or effects we use to simulate this) stun the player - ignore the effects of these ids when this happens.
     if CBT.IgnoreCastBarStun[abilityId] then return end
 
@@ -1152,7 +1140,6 @@ function CI.OnCombatEventBreakCast( eventCode, result, isError, abilityName, abi
     if not CBT.IsCast[abilityId] then
         CI.StopCastBar()
     end
-
 end
 
 -- Listens to EVENT_COMBAT_EVENT
@@ -1274,7 +1261,6 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         if abilityId == 39507 then
             CBT.CastDurationFix[39507] = 19500
         end
-
 end
 
 --[[

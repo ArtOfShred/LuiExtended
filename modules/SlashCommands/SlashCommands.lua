@@ -936,7 +936,6 @@ function LUIE.SlashReadyCheck()
 end
 
 function LUIE.SlashOutfit(option)
-
     if option == "" or option == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
         if LUIE.SV.TempAlertOutfit then
@@ -980,7 +979,6 @@ function LUIE.SlashOutfit(option)
 end
 
 function LUIE.TempSlashFilter()
-
     local filter = LUIE.SpellCastBuffs.SV.ShowDebugFilter
 
     if filter == true then
@@ -990,11 +988,9 @@ function LUIE.TempSlashFilter()
         LUIE.SpellCastBuffs.SV.ShowDebugFilter = true
         d("LUIE --- Ability Debug Filter Enabled ---")
     end
-
 end
 
 function LUIE.TempSlashGround()
-
     local ground = LUIE.SpellCastBuffs.SV.GroundDamageAura
 
     if ground == true then
@@ -1006,7 +1002,6 @@ function LUIE.TempSlashGround()
     end
 
     LUIE.SpellCastBuffs.ReloadEffects()
-
 end
 
 function SC.RegisterSlashCommands()
@@ -1151,5 +1146,4 @@ function SC.RegisterSlashCommands()
     -- TODO: DEBUG, REMOVE
     SLASH_COMMANDS["/filter"]           = LUIE.TempSlashFilter
     SLASH_COMMANDS["/ground"]           = LUIE.TempSlashGround
-
 end

@@ -421,33 +421,33 @@ CA.D = {
 
     -- Loot
     Inventory = {
-        Loot                          = true,
-        LootBank                      = true,
-        LootBlacklist                 = false,
-        LootTotal                     = false,
-        LootTotalString               = GetString(SI_LUIE_CA_LOOT_MESSAGE_TOTAL),
-        LootCraft                     = true,
-        LootGroup                     = true,
-        LootIcons                     = true,
-        LootMail                      = true,
-        LootNotTrash                  = true,
-        LootOnlyNotable               = false,
-        LootShowArmorType             = false,
-        LootShowStyle                 = false,
-        LootShowTrait                 = false,
-        LootConfiscate                = true,
-        LootTrade                     = true,
-        LootVendor                    = true,
-        LootVendorCurrency            = true,
-        LootVendorTotalCurrency       = false,
-        LootVendorTotalItems          = false,
-        LootShowCraftUse              = false,
-        LootShowDestroy               = true,
-        LootShowRemove                = true,
-        LootShowDisguise              = true,
-        LootShowLockpick              = true,
-        LootQuestAdd                  = true,
-        LootQuestRemove               = false,
+        Loot                            = true,
+        LootBank                        = true,
+        LootBlacklist                   = false,
+        LootTotal                       = false,
+        LootTotalString                 = GetString(SI_LUIE_CA_LOOT_MESSAGE_TOTAL),
+        LootCraft                       = true,
+        LootGroup                       = true,
+        LootIcons                       = true,
+        LootMail                        = true,
+        LootNotTrash                    = true,
+        LootOnlyNotable                 = false,
+        LootShowArmorType               = false,
+        LootShowStyle                   = false,
+        LootShowTrait                   = false,
+        LootConfiscate                  = true,
+        LootTrade                       = true,
+        LootVendor                      = true,
+        LootVendorCurrency              = true,
+        LootVendorTotalCurrency         = false,
+        LootVendorTotalItems            = false,
+        LootShowCraftUse                = false,
+        LootShowDestroy                 = true,
+        LootShowRemove                  = true,
+        LootShowDisguise                = true,
+        LootShowLockpick                = true,
+        LootQuestAdd                    = true,
+        LootQuestRemove                 = false,
     },
 
     ContextMessages = {
@@ -521,7 +521,6 @@ CA.D = {
     DisplayAnnouncements = {
         Debug                           = false -- Display EVENT_DISPLAY_ANNOUNCEMENT debug messages
     },
-
 }
 
 ------------------------------------------------
@@ -770,7 +769,6 @@ local g_notableIDs = {
 }
 
 local g_removeableIDs = {
-
     [44486] = true, -- Prismatic Blade (Fighters Guild Quests)
     [44487] = true, -- Prismatic Greatblade (Fighters Guild Quests)
     [44488] = true, -- Prismatic Long Bow (Fighters Guild Quests)
@@ -781,7 +779,6 @@ local g_removeableIDs = {
     [100393] = true, -- Histmuck Blobfin (Fish Boon Feast)
     [100394] = true, -- Shadowfen Creeping Leech (Fish Boon Feast)
     [100395] = true, -- Black Marsh Cucumber (Fish Boon Feast)
-
 }
 
 -- List of items to blacklist as annyoing loot
@@ -1047,7 +1044,6 @@ end
 
 function CA.RegisterLootEvents()
     -- NON CONDITIONAL EVENTS
-
     -- LOCKPICK
     eventManager:RegisterForEvent(moduleName, EVENT_LOCKPICK_BROKE, CA.MiscAlertLockBroke)
     eventManager:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
@@ -1670,7 +1666,6 @@ end
 -- EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED
 function CA.ReadyCheckUpdate(eventCode)
     --d("ready check update")
-
     local activityType, playerRole = GetLFGReadyCheckNotificationInfo()
     local tanksAccepted, tanksPending, healersAccepted, healersPending, dpsAccepted, dpsPending = GetLFGReadyCheckCounts()
     --d(tanksAccepted .. " " .. tanksPending .. " " .. healersAccepted .. " " .. healersPending .. " " .. dpsAccepted .." " .. dpsPending)
@@ -1891,7 +1886,9 @@ function CA.PointRespecDisplay(respecType)
 end
 
 function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, oldValue, reason)
-    if (currencyLocation ~= CURRENCY_LOCATION_CHARACTER and currencyLocation ~= CURRENCY_LOCATION_ACCOUNT) then return end
+    if (currencyLocation ~= CURRENCY_LOCATION_CHARACTER and currencyLocation ~= CURRENCY_LOCATION_ACCOUNT) then
+        return
+    end
 
     local UpOrDown = newValue - oldValue
 
@@ -2296,8 +2293,8 @@ end
 -- Printer function receives values from currency update or from other functions that display currency updates.
 -- Type here refers to an LUIE_CURRENCY_TYPE
 function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type, carriedItem, carriedItemTotal)
-    local messageP1                                                     -- First part of message - Change
-    local messageP2                                                     -- Second part of the message (if enabled) - Total
+    local messageP1  -- First part of message - Change
+    local messageP2  -- Second part of the message (if enabled) - Total
 
     messageP1 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. changeType .. currencyName .. "|r|c" .. changeColor)
 
@@ -2797,7 +2794,6 @@ end
 
 function CA.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
     -- d("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
-
     if CA.SV.XP.Experience and ( not ( CA.SV.XP.ExperienceHideCombat and reason == 0 ) or not reason == 0 ) then
 
         local change = currentExperience - previousExperience -- Change in Experience Points on gaining them
@@ -2825,7 +2821,6 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
         end
 
         CA.PrintExperienceGain(change)
-
     end
 end
 
@@ -2982,9 +2977,7 @@ function CA.OnAchievementUpdated(eventCode, id)
             local alertMessage = strformat("<<1>>: <<2>>", CA.SV.Achievement.AchievementProgressMsg, name)
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
         end
-
     end
-
 end
 
 function CA.GuildBankItemAdded(eventCode, slotId)
@@ -3209,7 +3202,6 @@ end
 
 -- Helper function for Craft Bag
 function CA.GetItemLinkFromItemId(itemId)
-
     local name = GetItemLinkName(ZO_LinkHandler_CreateLink("Test Trash", nil, ITEM_LINK_TYPE,itemId, 1, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 10000, 0))
     if CA.SV.BracketOptionItem == 1 then
         return ZO_LinkHandler_CreateLinkWithoutBrackets(strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -3221,7 +3213,6 @@ end
 local questItemIndex = { }
 
 function CA.AddQuestItemsToIndex()
-
     questItemIndex = { }
 
     local function AddQuests(questIndex)
@@ -3252,7 +3243,6 @@ function CA.ResolveQuestItemChange()
 
         -- Only if the value changes
         if newValue > questItemIndex[itemId].stack or newValue < questItemIndex[itemId].stack then
-
             local icon = questItemIndex[itemId].icon
             local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
@@ -3275,7 +3265,6 @@ function CA.ResolveQuestItemChange()
 
             -- Lower
             if newValue < questItemIndex[itemId].stack then
-
                 -- Easy temporary debug for my accounts only
                 local displayName = GetDisplayName()
                 if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
@@ -3318,19 +3307,16 @@ function CA.ResolveQuestItemChange()
                 if Q.QuestItemModifyOnRemove[itemId] then
                     Q.QuestItemModifyOnRemove[itemId]()
                 end
-
             end
 
             -- Higher
             if newValue > questItemIndex[itemId].stack then
-
                 -- Easy temporary debug for my accounts only
                 local displayName = GetDisplayName()
                 if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
                     d(itemId .. " Added")
                 end
                 --
-
                 countChange = newValue - questItemIndex[itemId].stack
                 g_questItemAdded[itemId] = true
                 callLater(function() g_questItemAdded[itemId] = false end, 100)
@@ -3381,7 +3367,6 @@ function CA.ResolveQuestItemChange()
                 if Q.QuestItemModifyOnAdd[itemId] then
                     Q.QuestItemModifyOnAdd[itemId]()
                 end
-
             end
         end
 
@@ -3398,7 +3383,6 @@ function CA.ResolveQuestItemChange()
     end
 
     eventManager:UnregisterForUpdate(moduleName .. "QuestItemUpdater")
-
 end
 
 local function DisplayQuestItem(itemId, stackCount, icon, reset)
@@ -3449,7 +3433,6 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
 
     -- Group loot handling
     if not lootedBySelf then
-
         local itemType = GetItemLinkItemType(itemLink)
         -- Check filter and if this item isn't included bail out now
         if not CA.ItemFilter(itemType, itemId, itemLink, true) then return end
@@ -3725,7 +3708,6 @@ end
 local delayedItemPool = { } -- Store items we are counting up when the player loots multiple bodies at once to print combined counts for any duplicate items
 
 function CA.ItemCounterDelay(icon, stack, itemType, itemId, itemLink)
-
     if delayedItemPool[itemId] then
         stack = delayedItemPool[itemId].stack + stack -- Add stack count first, only if item already exists.
     end
@@ -3734,7 +3716,6 @@ function CA.ItemCounterDelay(icon, stack, itemType, itemId, itemLink)
     -- Pass along all values to SendDelayedItems()
     eventManager:UnregisterForUpdate(moduleName .. "SendDelayedItems")
     eventManager:RegisterForUpdate(moduleName .. "SendDelayedItems", 25, CA.SendDelayedItems)
-
 end
 
 function CA.SendDelayedItems()
@@ -3849,7 +3830,6 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
     end
 
     if bagId == BAG_BACKPACK then
-
         local gainOrLoss
         local logPrefix
         local icon
@@ -4022,7 +4002,6 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
     if logPrefixNeg == nil then logPrefixNeg = CA.SV.ContextMessages.CurrencyMessageDeconstruct end
 
     if bagId == BAG_WORN then
-
         local gainOrLoss
         local logPrefix
         local icon
@@ -4092,7 +4071,6 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
     end
 
     if bagId == BAG_BACKPACK then
-
         local gainOrLoss
         local logPrefix
         local icon
@@ -4332,7 +4310,9 @@ end
 
 function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
 -- End right now if this is any other reason (durability loss, etc)
-    if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
+    if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then
+        return
+    end
 
     local receivedBy = ""
     if bagId == BAG_BACKPACK then
@@ -4415,12 +4395,10 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             if not g_itemWasDestroyed then
                 callLater(CA.BankFixer, 50)
             end
-
         end
     end
 
     if bagId == BAG_BANK then
-
         local gainOrLoss
         local logPrefix
         local icon
@@ -4499,12 +4477,10 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             if not g_itemWasDestroyed then
                 callLater(CA.BankFixer, 50)
             end
-
         end
     end
 
     if bagId == BAG_SUBSCRIBER_BANK then
-
         local gainOrLoss
         local logPrefix
         local icon
@@ -4583,12 +4559,10 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             if not g_itemWasDestroyed then
                 callLater(CA.BankFixer, 50)
             end
-
         end
     end
 
     if bagId > 6 and bagId < 16 then
-
         local gainOrLoss
         local logPrefix
         local icon
@@ -4667,7 +4641,6 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             if not g_itemWasDestroyed then
                 callLater(CA.BankFixer, 50)
             end
-
         end
     end
 
@@ -4788,7 +4761,6 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             else
                 g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             end
-
         end
     end
 
@@ -4834,7 +4806,6 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
 
     local receivedBy = ""
     if bagId == BAG_BACKPACK then
-
         local gainOrLoss
         local logPrefix
         local icon
@@ -5040,7 +5011,6 @@ function CA.JusticeDisplayConfiscate()
 end
 
 function CA.JusticeRemovePrint()
-
     g_itemsConfiscated = true
 
     -- PART 1 -- INVENTORY
@@ -5385,9 +5355,7 @@ local GUILD_SKILL_SHOW_SOUNDS = {
     [PROGRESS_REASON_BOSS_KILL] = SOUNDS.SKILL_XP_BOSS_KILLED,
 }
 
-local GUILD_SKILL_ICONS =
-{
-
+local GUILD_SKILL_ICONS = {
     [45] = "esoui/art/icons/mapkey/mapkey_fightersguild.dds",
     [44] = "esoui/art/icons/mapkey/mapkey_magesguild.dds",
     [55] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",
@@ -5424,7 +5392,6 @@ function CA.HookFunction()
     end
 
     local function RidingSkillImprovementAlertHook(ridingSkill, previous, current, source)
-
         if source == RIDING_TRAIN_SOURCE_STABLES then
             -- If we purchased from the stables, display a currency announcement if relevant
             if CA.SV.Currency.CurrencyGoldChange then
@@ -5475,7 +5442,6 @@ function CA.HookFunction()
         end
 
         return true
-
     end
 
     local function LoreBookLearnedAlertHook(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, isMaxRank)
@@ -5564,7 +5530,6 @@ function CA.HookFunction()
 
     -- EVENT_DUEL_INVITE_RECEIVED - ALERT HANDLER
     local function DuelInviteReceivedAlert(inviterCharacterName, inviterDisplayName)
-
         -- Display CA
         if CA.SV.Social.DuelCA then
             local finalName = CA.ResolveNameLink(inviterCharacterName, inviterDisplayName)
@@ -5579,12 +5544,10 @@ function CA.HookFunction()
         end
 
         return true
-
     end
 
     -- EVENT_DUEL_INVITE_ACCEPTED - ALERT HANDLER
     local function DuelInviteAcceptedAlert()
-
         -- Display CA
         if CA.SV.Social.DuelCA then
             printToChat(GetString(SI_LUIE_CA_DUEL_INVITE_ACCEPTED), true)
@@ -5604,7 +5567,6 @@ function CA.HookFunction()
 
     -- EVENT_DUEL_INVITE_SENT - ALERT HANDLER
     local function DuelInviteSentAlert(inviteeCharacterName, inviteeDisplayName)
-
         -- Display CA
         if CA.SV.Social.DuelCA then
             local finalName = CA.ResolveNameLink(inviteeCharacterName, inviteeDisplayName)
@@ -5648,7 +5610,6 @@ function CA.HookFunction()
 
     -- EVENT_DUEL_INVITE_FAILED -- ALERT HANDLER
     local function DuelInviteFailedAlert(reason, targetCharacterName, targetDisplayName)
-
         local userFacingName = ZO_GetPrimaryPlayerNameWithSecondary(targetDisplayName, targetCharacterName)
         -- Display CA
         if CA.SV.Social.DuelCA then
@@ -5725,7 +5686,6 @@ function CA.HookFunction()
 
     -- EVENT_GROUP_INVITE_RESPONSE -- ALERT HANDLER
     local function GroupInviteResponseAlert(characterName, response, displayName)
-
         local finalName
         local finalAlertName
 
@@ -5774,7 +5734,6 @@ function CA.HookFunction()
 
         end
         return true
-
     end
 
     -- EVENT_GROUP_INVITE_ACCEPT_RESPONSE_TIMEOUT -- ALERT HANDLER
@@ -5824,7 +5783,6 @@ function CA.HookFunction()
 
     -- EVENT_GROUP_MEMBER_LEFT -- ALERT HANDLER
     local function GroupMemberLeftAlert(characterName, reason, isLocalPlayer, isLeader, displayName, actionRequiredVote)
-
         CA.IndexGroupLoot()
 
         local message = nil
@@ -5954,7 +5912,9 @@ function CA.HookFunction()
         currentGroupLeaderDisplayName = GetUnitDisplayName(leaderTag)
 
         -- If for some reason we don't have a valid leader name, bail out now.
-        if currentGroupLeaderRawName == "" or currentGroupLeaderRawName == nil or currentGroupLeaderDisplayName == "" or currentGroupLeaderDisplayName == nil then return end
+        if currentGroupLeaderRawName == "" or currentGroupLeaderRawName == nil or currentGroupLeaderDisplayName == "" or currentGroupLeaderDisplayName == nil then
+            return
+        end
 
         local displayString
         local alertString
@@ -5983,7 +5943,6 @@ function CA.HookFunction()
 
     -- EVENT_GROUPING_TOOLS_LFG_JOINED -- ALERT HANDLER
     local function GroupingToolsLFGJoinedAlert(locationName)
-
         if not g_LFGJoinAntiSpam then
             if CA.SV.Group.GroupLFGCA then
                 printToChat(strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName), true)
@@ -6403,7 +6362,6 @@ function CA.HookFunction()
             end
         end
 
-
         eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
         if CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise then
             eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
@@ -6420,7 +6378,6 @@ function CA.HookFunction()
     end
 
     local function MailSendFailedAlert(reason)
-
         local function RestoreMailBackupValues()
             g_postageAmount = GetQueuedMailPostage()
             g_mailCOD = GetQueuedCOD()
@@ -6504,7 +6461,6 @@ function CA.HookFunction()
 
     local function LoreBookXPHook(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
         if guildReputationIndex > 0 then
-
             local collectionName, _, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
             local title, icon = GetLoreBookInfo(categoryIndex, collectionIndex, bookIndex)
             local bookName
@@ -6629,7 +6585,6 @@ function CA.HookFunction()
                 if not CA.SV.Lorebooks.LorebookCSA then
                     PlaySound(SOUNDS.BOOK_COLLECTION_COMPLETED)
                 end
-
             end
         end
         return true
@@ -6686,7 +6641,6 @@ function CA.HookFunction()
                 if not CA.SV.Lorebooks.LorebookCSA then
                     PlaySound(SOUNDS.BOOK_COLLECTION_COMPLETED)
                 end
-
             end
         end
         return true
@@ -6860,7 +6814,6 @@ function CA.HookFunction()
             if not CA.SV.Skills.SkillAbilityCSA then
                 PlaySound(SOUNDS.ABILITY_RANK_UP)
             end
-
         end
         return true
     end
@@ -6894,7 +6847,6 @@ function CA.HookFunction()
                 if not CA.SV.Skills.SkillLineCSA then
                     PlaySound(SOUNDS.SKILL_LINE_LEVELED_UP)
                 end
-
             end
         end
         return true
@@ -6913,7 +6865,6 @@ function CA.HookFunction()
             end
         end
         return true
-
     end
 
     local function CollectibleUnlockedHook(collectionUpdateType, collectiblesByUnlockState)
@@ -6952,9 +6903,7 @@ function CA.HookFunction()
                         callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
                     end
                     return true
-
                 else
-
                     --local messageParamsObjects = {}
                     for _, collectibleData in ipairs(nowOwnedCollectibles) do
                         local collectibleName = collectibleData:GetName()
@@ -7001,17 +6950,14 @@ function CA.HookFunction()
                             local text = strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, categoryName .. ".")
                             callAlert(UI_ALERT_CATEGORY_ALERT, nil, text)
                         end
-
                     end
                     return true
-
                 end
             end
         end
     end
 
     local function QuestAddedHook(journalIndex, questName, objectiveName)
-
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
 
@@ -7026,11 +6972,10 @@ function CA.HookFunction()
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
 
         -- Add quest to index
-        g_questIndex[questName] =
-            {
-                questType = questType,
-                instanceDisplayType = instanceDisplayType
-            }
+        g_questIndex[questName] = {
+            questType = questType,
+            instanceDisplayType = instanceDisplayType
+        }
 
         if CA.SV.Quests.QuestAcceptCA then
             local questNameFormatted
@@ -7079,11 +7024,9 @@ function CA.HookFunction()
             PlaySound(SOUNDS.QUEST_ACCEPTED)
         end
         return true
-
     end
 
     local function QuestCompleteHook(questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
-
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
 
@@ -7149,7 +7092,6 @@ function CA.HookFunction()
         end
 
         return true
-
     end
 
     local function ObjectiveCompletedHook(zoneIndex, poiIndex, level, previousExperience, currentExperience, championPoints)
@@ -7443,7 +7385,6 @@ function CA.HookFunction()
     end
 
     local function DiscoveryExperienceHook(subzoneName, level, previousExperience, currentExperience, championPoints)
-
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
 
@@ -7478,7 +7419,6 @@ function CA.HookFunction()
     end
 
     local function PoiDiscoveredHook(zoneIndex, poiIndex)
-
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
 
@@ -7521,7 +7461,6 @@ function CA.HookFunction()
 
     -- This function is prehooked in order to allow the XP bar popup to be hidden. In addition we shift the sound over
     local function ExperienceGainHook(reason, level, previousExperience, currentExperience, championPoints)
-
         local sound = XP_GAIN_SHOW_SOUNDS[reason]
 
         if XP_GAIN_SHOW_REASONS[reason] and not LUIE.SV.HideXPBar then
@@ -7546,7 +7485,6 @@ function CA.HookFunction()
         -- Level up notification
         local levelSize = GetNumExperiencePointsInLevel(level)
         if levelSize ~= nil and currentExperience >= levelSize then
-
             eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
             CA.PrintBufferedXP()
 
@@ -7612,11 +7550,8 @@ function CA.HookFunction()
     end
 
     local function EnlightenGainHook()
-
         if IsEnlightenedAvailableForCharacter() then
-
             local formattedString = strformat("<<1>>! <<2>>", GetString(SI_ENLIGHTENED_STATE_GAINED_HEADER), GetString(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
-
             if CA.SV.XP.ExperienceEnlightenedCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
@@ -7647,9 +7582,7 @@ function CA.HookFunction()
     end
 
     local function EnlightenLossHook()
-
         if IsEnlightenedAvailableForCharacter() then
-
             local formattedString = strformat("<<1>>!", GetString(SI_ENLIGHTENED_STATE_LOST_HEADER))
 
             if CA.SV.XP.ExperienceEnlightenedCA then
@@ -7695,10 +7628,8 @@ function CA.HookFunction()
 
     -- Note: This function is effected by a throttle in centerscreenannouncehandlers, we resolve any message that needs to be throttled in this function.
     local function RidingSkillImprovementHook(ridingSkill, previous, current, source)
-
         if source == RIDING_TRAIN_SOURCE_ITEM then
             if CA.SV.Notify.StorageRidingCA then
-
                 -- TODO: Switch to using Recipe/Learn variable in the future
                 if CA.SV.Inventory.Loot then
                     local icon
@@ -7735,7 +7666,6 @@ function CA.HookFunction()
                     local formattedString = (messageP1 .. "|r|cFFFFFF x" .. value .. "|r|c" .. formattedColor)
                     local messageP2 = strfmt(learnString, formattedString )
                     local finalMessage = strfmt("|c%s%s|r", formattedColor, messageP2)
-
 
                     g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "MESSAGE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
@@ -7784,7 +7714,6 @@ function CA.HookFunction()
     end
 
     local function ChampionLevelAchievedHook(wasChampionSystemUnlocked)
-
         local icon = GetChampionPointsIcon()
 
         if CA.SV.XP.ExperienceLevelUpCA then
@@ -7841,7 +7770,6 @@ function CA.HookFunction()
     local savedPointDelta = 0 -- We reset this value after the throttled function sends info to the chat printer
 
     local function ChampionPointGainedPrinter()
-
         -- adding one so that we are starting from the first gained point instead of the starting champion points
         local startingPoints = savedEndingPoints - savedPointDelta + 1
         local championPointsByType = { 0, 0, 0 }
@@ -7905,11 +7833,9 @@ function CA.HookFunction()
         savedPointDelta = 0
 
         eventManager:UnregisterForUpdate(moduleName .. "ChampionPointThrottle")
-
     end
 
     local function ChampionPointGainedHook(pointDelta)
-
         -- Print throttled XP value
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
@@ -7921,7 +7847,6 @@ function CA.HookFunction()
         eventManager:RegisterForUpdate(moduleName .. "ChampionPointThrottle", 25, ChampionPointGainedPrinter)
 
         return true
-
     end
 
     -- Extra Functions for EVENT_DUEL_NEAR_BOUNDARY
@@ -7973,7 +7898,6 @@ function CA.HookFunction()
 
     -- EVENT_DUEL_FINISHED -- CSA HANDLER
     local function DuelFinishedHook(result, wasLocalPlayersResult, opponentCharacterName, opponentDisplayName)
-
         -- Setup result format, name, and result sound
         local resultString = wasLocalPlayersResult and GetString("SI_LUIE_CA_DUEL_SELF_RESULT", result) or GetString("SI_LUIE_CA_DUEL_RESULT", result)
 
@@ -8029,7 +7953,6 @@ function CA.HookFunction()
             PlaySound(resultSound)
         end
         return true
-
     end
 
     -- EVENT_DUEL_COUNTDOWN -- CSA HANDLER
@@ -8048,7 +7971,6 @@ function CA.HookFunction()
 
     -- EVENT_RAID_TRIAL_STARTED -- CSA HANDLER
     local function RaidStartedHook(raidName, isWeekly)
-
         -- Display CA
         if CA.SV.Group.GroupRaidCA then
             local formattedName = strformat("|cFEFEFE<<1>>|r", raidName)
@@ -8129,7 +8051,6 @@ function CA.HookFunction()
 
     -- EVENT_RAID_TRIAL_FAILED -- CSA HANDLER
     local function RaidFailedHook(raidName, score)
-
         -- Display CA
         if CA.SV.Group.GroupRaidCA then
             local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
@@ -8158,7 +8079,6 @@ function CA.HookFunction()
 
     -- EVENT_RAID_TRIAL_NEW_BEST_SCORE -- CSA HANDLER
     local function RaidBestScoreHook(raidName, score, isWeekly)
-
         -- Display CA
         if CA.SV.Group.GroupRaidBestScoreCA then
             local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
@@ -8234,9 +8154,7 @@ function CA.HookFunction()
     -- EVENT_RAID_TRIAL_SCORE_UPDATE -- CSA HANDLER
     local function RaidScoreUpdateHook(scoreUpdateReason, scoreAmount, totalScore)
         local reasonAssets = TRIAL_SCORE_REASON_TO_ASSETS[scoreUpdateReason]
-
         if reasonAssets then
-
             -- Display CA
             if CA.SV.Group.GroupRaidScoreCA then
                 local iconCA = iconFormat(reasonAssets.icon, 16, 16)
@@ -8268,7 +8186,6 @@ function CA.HookFunction()
 
     -- EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE -- CSA HANDLER
     local function ActivityFinderCompleteHook()
-
         local message = GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT)
         if CA.SV.Group.GroupLFGCompleteCA then
             printToChat(message, true)
@@ -8416,12 +8333,10 @@ function CA.HookFunction()
         if (flagCA or flagAlert) and not flagCSA then
             PlaySound(SOUNDS.DISPLAY_ANNOUNCEMENT)
         end
-
     end
 
     -- EVENT_DISPLAY_ANNOUNCEMENT -- CSA HANDLER
     local function DisplayAnnouncementHook(title, description)
-
         if ( (title ~= "" and not overrideDisplayAnnouncementTitle[title]) or (description ~= "" and not overrideDisplayAnnouncementDescription[description]) ) and CA.SV.DisplayAnnouncements.Debug then
             d("EVENT_DISPLAY_ANNOUNCEMENT")
             d("If you see this message please post a screenshot and context for the event on the LUI Extended ESOUI page.")
@@ -8574,7 +8489,6 @@ function CA.HookFunction()
 
     -- EVENT_ACHIEVEMENT_AWARDED
     local function AchievementAwardedHook(name, points, id, link)
-
         -- Display CSA
         if CA.SV.Achievement.AchievementCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ACHIEVEMENT_AWARDED)
@@ -8618,7 +8532,6 @@ function CA.HookFunction()
         if topLevelIndex == 23 and not CA.SV.Achievement.AchievementCategory23 then return true end
 
         if CA.SV.Achievement.AchievementCompleteCA then
-
             link = strformat(GetAchievementLink(id, linkBrackets[CA.SV.BracketOptionAchievement]))
             local catName = GetAchievementCategoryInfo(topLevelIndex)
             local subcatName = categoryIndex ~= nil and GetAchievementSubCategoryInfo(topLevelIndex, categoryIndex) or "General"
@@ -8647,7 +8560,6 @@ function CA.HookFunction()
             g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-
         end
 
         -- Display Alert
@@ -8660,7 +8572,6 @@ function CA.HookFunction()
     end
 
     local function PledgeOfMaraHook(result, characterName, displayName)
-
         -- Display CA (Success or Failure)
         if CA.SV.Social.PledgeOfMaraCA then
             local finalName = CA.ResolveNameLink(characterName, displayName)
@@ -8794,8 +8705,7 @@ function CA.HookFunction()
     ZO_PreHook(chatHandlers, EVENT_IGNORE_REMOVED, IgnoreRemovedHook)
 
     -- HOOK PLAYER_TO_PLAYER Group Notifications to edit Ignore alert
-    local KEYBOARD_INTERACT_ICONS =
-    {
+    local KEYBOARD_INTERACT_ICONS = {
         [SI_PLAYER_TO_PLAYER_WHISPER] =
         {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_whisper_up.dds",
@@ -8850,8 +8760,7 @@ function CA.HookFunction()
         },
     }
 
-    local GAMEPAD_INTERACT_ICONS =
-    {
+    local GAMEPAD_INTERACT_ICONS = {
         [SI_PLAYER_TO_PLAYER_WHISPER] =
         {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_whisper_down.dds",
@@ -9131,7 +9040,6 @@ function CA.HookFunction()
             end
             ]]--
         end
-
     end
 
     local function NotificationAccepted(data)
@@ -9440,12 +9348,10 @@ function CA.HookFunction()
                 break
             end
         end
-
     end
 
     -- Hook for EVENT_GUILD_MEMBER_REMOVED
     GUILD_ROSTER_MANAGER.OnGuildMemberRemoved = function(self, guildId, rawCharacterName, displayName)
-
         local displayNameLink
         if CA.SV.BracketOptionCharacter == 1 then
             displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
@@ -9477,12 +9383,10 @@ function CA.HookFunction()
             end
         end
         self:RefreshData()
-
     end
 
     -- Hook for Guild Invite function used from Guild Menu
     ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)
-
         -- TODO: Update when more alerts are added to CA
         if not DoesPlayerHaveGuildPermission(guildId, GUILD_PERMISSION_INVITE) then
             ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_INVITE_PERMISSION)
@@ -9581,27 +9485,26 @@ function CA.HookFunction()
 
     -- Used to pull the cost of guild Heraldry change
     ZO_GuildHeraldryManager_Shared.AttemptSaveAndExit = function(self, showBaseScene)
-    local blocked = false
+        local blocked = false
 
-    if HasPendingHeraldryChanges() then
-        self:SetPendingExit(true)
-        if not IsCreatingHeraldryForFirstTime() then
-            local pendingCost = GetPendingHeraldryCost()
-            -- Pull Heraldry Cost to currency function to use
-            g_pendingHeraldryCost = pendingCost
-            local heraldryFunds = GetHeraldryGuildBankedMoney()
-            if heraldryFunds and pendingCost <= heraldryFunds then
-                self:ConfirmHeraldryApplyChanges()
-                blocked = true
+        if HasPendingHeraldryChanges() then
+            self:SetPendingExit(true)
+            if not IsCreatingHeraldryForFirstTime() then
+                local pendingCost = GetPendingHeraldryCost()
+                -- Pull Heraldry Cost to currency function to use
+                g_pendingHeraldryCost = pendingCost
+                local heraldryFunds = GetHeraldryGuildBankedMoney()
+                if heraldryFunds and pendingCost <= heraldryFunds then
+                    self:ConfirmHeraldryApplyChanges()
+                    blocked = true
+                end
             end
         end
-    end
 
-    if not blocked then
-        self:ConfirmExit(showBaseScene)
+        if not blocked then
+            self:ConfirmExit(showBaseScene)
+        end
     end
-end
-
 end
 
 function CA.TradeInviteAccepted(eventCode)
@@ -9639,7 +9542,6 @@ end
 
 -- Removes items from index if they are removed from the trade
 function CA.OnTradeRemoved(eventCode, who, tradeIndex, itemSoundCategory)
-
     local indexOut = tradeIndex
     if who == 0 then
         g_tradeStacksOut[indexOut] = nil
@@ -9740,7 +9642,6 @@ end
 
 -- EVENT_GROUP_MEMBER_JOINED
 function CA.OnGroupMemberJoined(eventCode, memberName)
-
     -- Update index for Group Loot
     CA.IndexGroupLoot()
 
@@ -9814,7 +9715,6 @@ function CA.VoteNotify(eventCode)
     end
 
     if electionType == 3 then -- Vote Kick
-
         local kickMemberName = GetUnitName(targetUnitTag)
         local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
 
@@ -9838,7 +9738,6 @@ end
 
 -- EVENT_PLEDGE_OF_MARA_OFFER - EVENT HANDLER
 function CA.MaraOffer(eventCode, characterName, isSender, displayName)
-
     -- Display CA
     if CA.SV.Social.PledgeOfMaraCA then
         local finalName = CA.ResolveNameLink(characterName, displayName)
@@ -9893,7 +9792,6 @@ end
 
 function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
     if (skillType == SKILL_TYPE_GUILD) then
-
         local lineName, _, _, lineId = GetSkillLineInfo(skillType, skillIndex)
         formattedName = strformat(SI_UNIT_NAME, lineName)
 
@@ -9953,7 +9851,7 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
             priority = "EXPERIENCE LEVEL"
         end
         CA.PrintGuildRep(change, formattedName, lineId, priority)
-     end
+    end
 end
 
 function CA.PrintGuildRep(change, lineName, lineId, priority)
