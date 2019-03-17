@@ -937,7 +937,6 @@ local strings = {
     SI_LUIE_SKILL_ZOOM =                                 "Zoom",
     SI_LUIE_SKILL_PLOW =                                 "Plow",
     SI_LUIE_SKILL_DEFENSIVE_WARD =                       "Defensive Ward",
-    SI_LUIE_SKILL_GREAT_CLEAVE =                         "Great Cleave",
     SI_LUIE_SKILL_INSPIRE =                              "Inspire",
     SI_LUIE_SKILL_HIDE_IN_SHADOWS =                      "Hide in Shadows",
     SI_LUIE_SKILL_SHADOWY_BARRIER =                      "Shadowy Barrier",

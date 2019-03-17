@@ -6461,9 +6461,9 @@ E.EffectOverride = {
 
     -- Dremora Caitiff (Craglorn)
     [51000] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_cleave_stance.dds', tooltip = T.Skill_Cleave_Stance }, -- Cleave Stance (Dremora Caitiff)
-    [51923] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Great_Cleave }, -- Cleave Stance (Dremora Caitiff)
-    [51940] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Great_Cleave }, -- Cleave Stance (Dremora Caitiff)
-    [51942] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Great_Cleave }, -- Cleave Stance (Dremora Caitiff)
+    [51923] = { icon = 'esoui/art/icons/ability_2handed_002.dds', name = A.Skill_Cleave }, -- Cleave Stance (Dremora Caitiff)
+    [51940] = { icon = 'esoui/art/icons/ability_2handed_002.dds', name = A.Skill_Cleave }, -- Cleave Stance (Dremora Caitiff)
+    [51942] = { icon = 'esoui/art/icons/ability_2handed_002.dds', name = A.Skill_Cleave }, -- Cleave Stance (Dremora Caitiff)
 
     -- Sentinel (TG DLC)
     [74487] = { tooltip = T.Generic_Snare_60 }, -- Low Slash (Sentinel) (TG DLC)

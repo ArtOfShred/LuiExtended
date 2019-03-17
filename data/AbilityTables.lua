@@ -888,6 +888,7 @@ A.Skill_Boss_CC_Immunity            = GetString(SI_LUIE_SKILL_BOSS_CC_IMMUNITY)
 A.Skill_Backstabber                 = 13739
 
 -- Human
+A.Skill_Cleave                      = 20919
 A.Skill_Ignite                      = 14070
 A.Skill_Shield_Rush                 = GetString(SI_LUIE_SKILL_SHIELD_RUSH)
 A.Skill_Shock_Aura                  = 17867
@@ -900,7 +901,6 @@ A.Skill_Ice_Barrier                 = 14178
 A.Skill_Vanish                      = 24687
 A.Skill_Bone_Cage                   = 35387
 A.Skill_Defensive_Ward              = GetString(SI_LUIE_SKILL_DEFENSIVE_WARD)
-A.Skill_Great_Cleave                = GetString(SI_LUIE_SKILL_GREAT_CLEAVE)
 A.Skill_Retaliation                 = 65033
 A.Skill_Divine_Leap                 = 54027
 A.Skill_Inspire                     = GetString(SI_LUIE_SKILL_INSPIRE)
