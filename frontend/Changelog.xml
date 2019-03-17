@@ -1,23 +1,71 @@
 <GuiXml>
     <Controls>
-        <TopLevelControl name="LUIE_Welcome_Screen2" mouseEnabled="true" movable="true" clampedToScreen="true" >
+        <TopLevelControl name="LUIE_Changelog" mouseEnabled="true" movable="true" clampedToScreen="true">
             <Dimensions x="900" y="700" />
-            <Anchor point="CENTER" />
+            <Anchor point="CENTER" relativeTo="GuiRoot" relativePoint="CENTER" />
             <Controls>
-                <Backdrop name="$(parent)Bg" inherits="ZO_DefaultBackdrop" />
-
-                <Backdrop name="$(parent)Text" inherits="ZO_MultiLineEditBackdrop_Keyboard">
-                    <Anchor point="TOPLEFT" offsetY="30" />
-                    <Anchor point="BOTTOMRIGHT" offsetX="-2" offsetY="-40" />
-                    <Controls>
-                        <EditBox name="$(parent)Edit" inherits="ZO_DefaultEditMultiLineForBackdrop" />
-                    </Controls>
-                </Backdrop>
-
-                <Label name="$(parent)NoteIndex" font="ZoFontWinT2" text="Some Test Label">
-                    <Anchor point="TOPLEFT" offsetX="10" offsetY="10" />
+                <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" />
+                <Label name="$(parent)WindowTitle" text="LuiExtended Changelog" font="ZoFontWindowTitle" color="CFDCBD" wrapMode="ELLIPSIS" verticalAlignment="TOP">
+                    <Anchor relativeTo="$(parent)" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="5" offsetY="5" />
                 </Label>
-
+                <Button name="$(parent)Close" alpha="1">
+                    <Textures normal="EsoUI/Art/Buttons/closeButton_up.dds" pressed="EsoUI/Art/Buttons/closeButton_down.dds" mouseOver="EsoUI/Art/Buttons/closeButton_mouseOver.dds" disabled="EsoUI/Art/Buttons/closeButton_disabled.dds" />
+                    <Anchor relativeTo="$(parent)" relativePoint="TOPRIGHT" point="TOPRIGHT" offsetX="-3" offsetY="1" />
+                    <Dimensions x="30" y="30" />
+                    <TextureCoords left="0" top="0" right="0.625" bottom="0.625" />
+                    <OnClicked>
+                        DO_SOMETHING_HERE()
+                    </OnClicked>
+                </Button>
+                <Control name="$(parent)Container" inherits="ZO_ScrollContainer">
+                    <Anchor point="TOPLEFT" offsetY="60" />
+                    <Anchor point="BOTTOMRIGHT" offsetY="-12" />
+                </Control>
+                <Label name="$(parent)Roll" font="ZoFontGame" color="CFDCBD" wrapMode="ELLIPSIS">
+                    <OnInitialized>
+                        local text = {
+                                "Aldmeri Dominion",
+                                "*Khenarthis Roost: 11",
+                                "*Auridon: 51",
+                                "*Grahtwood: 44",
+                                "*Greenshade: 50",
+                                "*Malabal Tor: 45",
+                                "*Reaper's March: 60",
+                                "",
+                                "Daggerfall Covenant",
+                                "*Stros M'Kai: 15",
+                                "*Betnikh: 9",
+                                "*Glenumbra: 67",
+                                "*Stormhaven: 70",
+                                "*Rivenspir: 48",
+                                "*Alik'r Desert: 53",
+                                "*Bangkorai: 47",
+                                "",
+                                "Ebonheart Pact",
+                                "*Bleakrock Isle: 12",
+                                "*Bal Foyen: 9",
+                                "*Stonefalls: 76",
+                                "*Deshaan: 67",
+                                "*Shadowfen: 64",
+                                "*Eastmarch: 52",
+                                "*The Rift: 73",
+                                "",
+                                "Quest for all factions",
+                                "*Coldharbour: 32",
+                                "*Craglorn: 18",
+                                "*Cyrodill: 566",
+                                "",
+                                "Quest by Guild",
+                                "*Fighters Guild: 5",
+                                "*Mages Guild: 8",
+                                "*Undaunted: Unknown",
+                            }
+                            local parent = self:GetParent():GetNamedChild("ContainerScrollChild")
+                            self:SetParent(parent)
+                            self:SetAnchor(TOPLEFT, parent, TOPLEFT, 18, 6)
+                            self:SetText(table.concat(text, "\n"))
+                    </OnInitialized>
+                </Label>
             </Controls>
         </TopLevelControl>
     </Controls>

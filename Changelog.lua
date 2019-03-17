@@ -45,7 +45,7 @@ function LUIE_WelcomeScreen(menu)
 
 
     -- temp shit
-    luiChangelog2 = LUIE_Welcome_Screen2
+    luiChangelog2 = LUIE_Changelog
 
     -- If saved version number is less than current version number then display the welcome screen.
     if (LUIESV.Default[GetDisplayName()]['$AccountWide'].WelcomeVersion ~= LUIE.version) or menu then
