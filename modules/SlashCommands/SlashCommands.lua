@@ -979,11 +979,12 @@ function LUIE.SlashOutfit(option)
     end
 end
 
+-- Report a player by given name and attach useful information
 local function SlashReport(player)
     local name = player
     local location = GetPlayerLocationName()
     local currenttime = GetTimeString()
-    local currentdatedate = GetDateStringFromTimestamp(GetTimeStamp())
+    local currentdate = GetDateStringFromTimestamp(GetTimeStamp())
     local server = GetCVar("LastPlatform")
     local text = "I've encounterd a suspicious player.\n\nName: <<1>>\nLocation: <<2>>\nDate & Time: <<3>> <<4>>\nServer: <<5>>"
 
