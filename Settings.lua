@@ -791,6 +791,16 @@ function LUIE_CreateSettings()
                 default = LUIE.SlashCommands.D.SlashOutfit,
             },
             {
+                -- SlashReport
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_REPORT),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REPORT_TP),
+                getFunc = function() return LUIE.SlashCommands.SV.SlashReport end,
+                setFunc = function(value) LUIE.SlashCommands.SV.SlashReport = value LUIE.SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = LUIE.SlashCommands.D.SlashReport,
+            },
+            {
                 -- TODO
                 type = "checkbox",
                 name = "/Home Results - Show Alert (Temp Setting)",

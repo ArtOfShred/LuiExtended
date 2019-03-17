@@ -23,8 +23,8 @@ SC.D = {
     SlashGroupLeave     = true,
     SlashGroupKick      = true,
     SlashGuildInvite    = true,
-    SlashGuildQuit      = true,
-    SlashGuildKick      = true,
+    SlashGuildQuit      = false,
+    SlashGuildKick      = false,
     SlashFriend         = true,
     SlashIgnore         = true,
     SlashRemoveFriend   = true,
@@ -41,11 +41,9 @@ SC.D = {
     SlashPie            = true,
     SlashMead           = true,
     SlashWitch          = true,
+    SlashReport         = true,
 }
 SC.SV       = nil
-
-local g_regroupStacks   = {} -- Character stack for Regroup reinvites
-local PendingRegroup    = false -- Toggled when a regroup is in progress to prevent additional regroup attempts from firing
 
 function SC.Initialize( enabled )
     -- Load Settings
@@ -64,6 +62,7 @@ function SC.Initialize( enabled )
     SC.RegisterSlashCommands()
 end
 
+-- Slash Command to port to primary home
 function LUIE.SlashHome()
     local primaryHouse = GetHousingPrimaryHouse()
     -- Check if we are in combat
@@ -111,27 +110,30 @@ function LUIE.SlashHome()
     end
 end
 
-local function RegroupInvite()
-    printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG), true)
-    if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-        callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG) )
-    end
-    for i = 1, #g_regroupStacks do
-        local member = g_regroupStacks[i]
-        -- Don't invite self and offline members
-        if member.memberName ~= LUIE.PlayerNameFormatted then
-            GroupInviteByName(member.memberName)
-            printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink), true)
-            if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink) )
+-- Slash Command to perform a group regroup
+local g_regroupStacks   = {}    -- Character stack for Regroup reinvites
+local PendingRegroup    = false -- Toggled when a regroup is in progress to prevent additional regroup attempts from firing
+function LUIE.SlashRegroup()
+    local function RegroupInvite()
+        printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG), true)
+        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+            callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG) )
+        end
+        for i = 1, #g_regroupStacks do
+            local member = g_regroupStacks[i]
+            -- Don't invite self and offline members
+            if member.memberName ~= LUIE.PlayerNameFormatted then
+                GroupInviteByName(member.memberName)
+                printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink), true)
+                if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+                    callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink) )
+                end
             end
         end
+        PendingRegroup = false -- Allow Regroup command to be used again
+        g_regroupStacks = {} -- Allow index to be used again.
     end
-    PendingRegroup = false -- Allow Regroup command to be used again
-    g_regroupStacks = {} -- Allow index to be used again.
-end
 
-function LUIE.SlashRegroup()
     local groupSize = GetGroupSize()
     -- Check for pending regroup
     if PendingRegroup then
@@ -229,6 +231,7 @@ function LUIE.SlashRegroup()
     end
 end
 
+-- Slash Command to disband the current group
 local function SlashDisband()
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
@@ -271,11 +274,13 @@ local function SlashDisband()
     GroupDisband()
 end
 
+-- Slash Command to leave a group
 local function SlashGroupLeave()
     -- EVENT_GROUP_NOTIFICATION_MESSAGE hook handles response to this.
     GroupLeave()
 end
 
+-- Slash Command to kick someone from a group
 local function SlashGroupKick(option)
     local groupSize = GetGroupSize()
     -- Rather then error out, let the player use /kick and /remove as a substitute for /votekick and /voteremove in LFG
@@ -369,8 +374,8 @@ local function SlashGroupKick(option)
     PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 end
 
+-- If the player uses /kick with no option then we need to play the kick emote, otherwise handle everything with the SlashGroupKick function.
 local function SlashKick(option)
-    -- If the player uses /kick with no option then we need to play the kick emote, otherwise handle everything with the SlashGroupKick function.
     if option == "" or not SC.SV.SlashGroupKick then
         PlayEmoteByIndex(109)
     else
@@ -378,6 +383,7 @@ local function SlashKick(option)
     end
 end
 
+-- Slash Command to invite someone to a guild
 local function SlashGuildInvite(option)
     -- If no input was entered, display an error and end.
     if option == "" then
@@ -434,6 +440,7 @@ local function SlashGuildInvite(option)
     ZO_TryGuildInvite(guildnumber, name, true)
 end
 
+-- Slash Command to leave a guild
 local function SlashGuildQuit(guildnumber)
     if guildnumber == "1" and LUIE.GuildIndexData[1] then
         guildnumber = LUIE.GuildIndexData[1].id
@@ -468,6 +475,7 @@ local function SlashGuildQuit(guildnumber)
     GuildLeave(guildnumber)
 end
 
+-- Slash Command to kick someone from a guild
 local function SlashGuildKick(option)
     -- If no input was entered, display an error and end.
     if option == "" then
@@ -570,6 +578,7 @@ local function SlashGuildKick(option)
     end
 end
 
+-- Slash Command to add someone to the friendslist
 local function SlashFriend(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME), true)
@@ -611,6 +620,7 @@ AddIgnore = function(option)
     end
 end
 
+-- Slash Command to add someone to ignore list
 local function SlashIgnore(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME), true)
@@ -623,6 +633,7 @@ local function SlashIgnore(option)
     AddIgnore(option)
 end
 
+-- Slash Command to remove someone from friends list
 local function SlashRemoveFriend(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME), true)
@@ -666,6 +677,7 @@ local function SlashRemoveFriend(option)
     end
 end
 
+-- Slash Command to remove a given name from the ignore list
 local function SlashRemoveIgnore(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE), true)
@@ -707,6 +719,7 @@ local function SlashRemoveIgnore(option)
     end
 end
 
+-- Slash Command to initiate a trade dialogue
 local function SlashTrade(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME), true)
@@ -719,6 +732,7 @@ local function SlashTrade(option)
     TradeInviteByName(option)
 end
 
+-- Slash Command to initiate a votekick
 local function SlashVoteKick(option)
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
@@ -806,6 +820,7 @@ local function SlashVoteKick(option)
     -- EVENT HANDLER takes care of the error messages here.
 end
 
+-- Slash Command to queue for a campaign
 local function SlashCampaignQ(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME), true)
@@ -858,6 +873,7 @@ local function SlashCampaignQ(option)
     PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 end
 
+-- Slash Command to send a group invite to a player
 local function SlashInvite(option)
     local groupSize = GetGroupSize()
 
@@ -886,7 +902,7 @@ local function SlashInvite(option)
     end
 end
 
--- Use collectibles based on their collectible id
+-- Slash Command to use collectibles based on their collectible id
 function LUIE.SlashCollectible(id)
     local collectibleid = id
     -- Check to make sure we're not in Cyrodiil
@@ -920,6 +936,7 @@ function LUIE.SlashCollectible(id)
     end
 end
 
+-- Slash Command to initiate a group ready check
 function LUIE.SlashReadyCheck()
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
@@ -935,6 +952,7 @@ function LUIE.SlashReadyCheck()
     ZO_SendReadyCheck()
 end
 
+-- Slash Command to equip a chosen outfit by number
 function LUIE.SlashOutfit(option)
     if option == "" or option == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
@@ -978,6 +996,29 @@ function LUIE.SlashOutfit(option)
     end
 end
 
+-- Slash Command to report a player by given name and attach useful information
+local function SlashReport(player)
+    local name = player
+    local location = GetPlayerLocationName()
+    local currenttime = GetTimeString()
+    local currentdate = GetDateStringFromTimestamp(GetTimeStamp())
+    local server = GetCVar("LastPlatform")
+    local text = "I've encounterd a suspicious player.\n\nName: <<1>>\nLocation: <<2>>\nDate & Time: <<3>> <<4>>\nServer: <<5>>"
+
+    -- Set the category to report a player
+    HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD:SelectCategory(2)
+    -- Set the subcategory (default: Other)
+    HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD:SelectSubcategory(4)
+
+    -- Populate the reporting window name and description
+    ZO_Help_Ask_For_Help_Keyboard_ControlDetailsTextLineField:SetText(name)
+	ZO_Help_Ask_For_Help_Keyboard_ControlDescriptionBodyField:SetText(strformat(text, name, location, currentdate, currenttime, server))
+
+    -- Open the reporting window
+    HELP_CUSTOMER_SUPPORT_KEYBOARD:OpenScreen(HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD_FRAGMENT)
+end
+
+-- TODO: remove
 function LUIE.TempSlashFilter()
     local filter = LUIE.SpellCastBuffs.SV.ShowDebugFilter
 
@@ -990,6 +1031,7 @@ function LUIE.TempSlashFilter()
     end
 end
 
+-- TODO: remove
 function LUIE.TempSlashGround()
     local ground = LUIE.SpellCastBuffs.SV.GroundDamageAura
 
@@ -1047,9 +1089,14 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck -- This command is always registered since it is also a default command
     SLASH_COMMANDS["/outfit"]       = nil
     SLASH_COMMANDS["/cake"]         = nil
+    SLASH_COMMANDS["/anniversary"]  = nil
     SLASH_COMMANDS["/pie"]          = nil
+    SLASH_COMMANDS["/jester"]       = nil
     SLASH_COMMANDS["/mead"]         = nil
+    SLASH_COMMANDS["/newlife"]      = nil
     SLASH_COMMANDS["/witch"]        = nil
+    SLASH_COMMANDS["/witchfest"]    = nil
+    SLASH_COMMANDS["/report"]       = nil
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
 
     -- Add commands based off menu options
@@ -1126,21 +1173,28 @@ function SC.RegisterSlashCommands()
     end
     if SC.SV.SlashCake then
         SLASH_COMMANDS["/cake"]         = function(...) LUIE.SlashCollectible(5886) end
+        SLASH_COMMANDS["/anniversary"]  = function(...) LUIE.SlashCollectible(5886) end
     end
     if SC.SV.SlashPie then
         SLASH_COMMANDS["/pie"]          = function(...) LUIE.SlashCollectible(1167) end
+        SLASH_COMMANDS["/jester"]       = function(...) LUIE.SlashCollectible(1167) end
     end
     if SC.SV.SlashMead then
         SLASH_COMMANDS["/mead"]         = function(...) LUIE.SlashCollectible(1168) end
+        SLASH_COMMANDS["/newlife"]      = function(...) LUIE.SlashCollectible(1168) end
     end
     if SC.SV.SlashWitch then
         SLASH_COMMANDS["/witch"]        = function(...) LUIE.SlashCollectible(479) end
+        SLASH_COMMANDS["/witchfest"]    = function(...) LUIE.SlashCollectible(479) end
     end
     if SC.SV.SlashReadyCheck then
         SLASH_COMMANDS["/ready"]        = LUIE.SlashReadyCheck
     end
     if SC.SV.SlashOutfit then
         SLASH_COMMANDS["/outfit"]       = LUIE.SlashOutfit
+    end
+    if SC.SV.SlashReport then
+        SLASH_COMMANDS["/report"]       = SlashReport
     end
 
     -- TODO: DEBUG, REMOVE
