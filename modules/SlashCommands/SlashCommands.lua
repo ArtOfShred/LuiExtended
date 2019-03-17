@@ -374,8 +374,8 @@ local function SlashGroupKick(option)
     PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 end
 
+-- If the player uses /kick with no option then we need to play the kick emote, otherwise handle everything with the SlashGroupKick function.
 local function SlashKick(option)
-    -- If the player uses /kick with no option then we need to play the kick emote, otherwise handle everything with the SlashGroupKick function.
     if option == "" or not SC.SV.SlashGroupKick then
         PlayEmoteByIndex(109)
     else
@@ -1169,15 +1169,19 @@ function SC.RegisterSlashCommands()
     end
     if SC.SV.SlashCake then
         SLASH_COMMANDS["/cake"]         = function(...) LUIE.SlashCollectible(5886) end
+        SLASH_COMMANDS["/anniversary"]  = function(...) LUIE.SlashCollectible(5886) end
     end
     if SC.SV.SlashPie then
         SLASH_COMMANDS["/pie"]          = function(...) LUIE.SlashCollectible(1167) end
+        SLASH_COMMANDS["/jester"]       = function(...) LUIE.SlashCollectible(1167) end
     end
     if SC.SV.SlashMead then
         SLASH_COMMANDS["/mead"]         = function(...) LUIE.SlashCollectible(1168) end
+        SLASH_COMMANDS["/newlife"]      = function(...) LUIE.SlashCollectible(1168) end
     end
     if SC.SV.SlashWitch then
         SLASH_COMMANDS["/witch"]        = function(...) LUIE.SlashCollectible(479) end
+        SLASH_COMMANDS["/witchfest"]    = function(...) LUIE.SlashCollectible(479) end
     end
     if SC.SV.SlashReadyCheck then
         SLASH_COMMANDS["/ready"]        = LUIE.SlashReadyCheck
