@@ -99,6 +99,8 @@ local strings = {
     SI_LUIE_LAM_SLASHCMDS_MEAD_TP =                      "'/mead' Uses the New Life Festival XP Buff Memento to activate/refresh the buff.",
     SI_LUIE_LAM_SLASHCMDS_WITCH =                        "Enable ( '/witch' ) The Witches Festival XP Buff",
     SI_LUIE_LAM_SLASHCMDS_WITCH_TP =                     "'/witch' Uses the the Witches Festival XP Buff Memento to activate/refresh the buff.",
+    SI_LUIE_LAM_SLASHCMDS_REPORT =                       "Enable ( '/report' ) Report",
+    SI_LUIE_LAM_SLASHCMDS_REPORT_TP =                    "'/report' 'name' Opens the report player window.",
 
     -- Module: Buffs & Debuffs
     SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK =                "Buffs & Debuffs Module",

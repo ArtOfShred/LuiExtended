@@ -41,6 +41,7 @@ SC.D = {
     SlashPie            = true,
     SlashMead           = true,
     SlashWitch          = true,
+    SlashReport         = true,
 }
 SC.SV       = nil
 
@@ -978,6 +979,28 @@ function LUIE.SlashOutfit(option)
     end
 end
 
+local function SlashReport(player)
+    local name = player
+    local location = GetPlayerLocationName()
+    local currenttime = GetTimeString()
+    local currentdatedate = GetDateStringFromTimestamp(GetTimeStamp())
+    local server = GetCVar("LastPlatform")
+    local text = "I've encounterd a suspicious player.\n\nName: <<1>>\nLocation: <<2>>\nDate & Time: <<3>> <<4>>\nServer: <<5>>"
+
+    -- Set the category to report a player
+    HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD:SelectCategory(2)
+    -- Set the subcategory (default: Other)
+    HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD:SelectSubcategory(4)
+
+    -- Populate the reporting window name and description
+    ZO_Help_Ask_For_Help_Keyboard_ControlDetailsTextLineField:SetText(name)
+	ZO_Help_Ask_For_Help_Keyboard_ControlDescriptionBodyField:SetText(strformat(text, name, location, currentdate, currenttime, server))
+
+    -- Open the reporting window
+    HELP_CUSTOMER_SUPPORT_KEYBOARD:OpenScreen(HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD_FRAGMENT)
+end
+
+-- TODO: remove
 function LUIE.TempSlashFilter()
     local filter = LUIE.SpellCastBuffs.SV.ShowDebugFilter
 
@@ -990,6 +1013,7 @@ function LUIE.TempSlashFilter()
     end
 end
 
+-- TODO: remove
 function LUIE.TempSlashGround()
     local ground = LUIE.SpellCastBuffs.SV.GroundDamageAura
 
@@ -1050,6 +1074,7 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/pie"]          = nil
     SLASH_COMMANDS["/mead"]         = nil
     SLASH_COMMANDS["/witch"]        = nil
+    SLASH_COMMANDS["/report"]       = nil
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
 
     -- Add commands based off menu options
@@ -1141,6 +1166,9 @@ function SC.RegisterSlashCommands()
     end
     if SC.SV.SlashOutfit then
         SLASH_COMMANDS["/outfit"]       = LUIE.SlashOutfit
+    end
+    if SC.SV.SlashReport then
+        SLASH_COMMANDS["/report"]       = SlashReport
     end
 
     -- TODO: DEBUG, REMOVE
