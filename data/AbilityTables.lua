@@ -1168,6 +1168,7 @@ A.Skill_Call_the_Flames             = 55514
 A.Skill_Slag_Geyser                 = 56068
 A.Skill_Platform_Detonation         = 56548
 A.Skill_Volcanic_Shield             = GetString(SI_LUIE_SKILL_VOLCANIC_SHIELD)
+A.Skill_Meteoric_Strike             = GetString(SI_LUIE_SKILL_METEORIC_STRIKE)
 
 -- Tempest Island
 A.Skill_Sonic_Scream                = 46732

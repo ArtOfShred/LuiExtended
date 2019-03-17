@@ -12221,6 +12221,7 @@ debugAuras = {
             [56188] = true, -- Voice to Wake the Dead (Flame Colossus)
             [56189] = true, -- Voice to Wake the Dead (Flame Colossus)
             [86753] = true, -- Bone Flare (Flame Colossus)
+            [55744] = true, -- Bone Flare (Flame Colossus)
             [56442] = true, -- Flame Conduit (Gilraen)
 
             [56055] = true, -- Jagged Claw (Horvantud the Fire Maw)
@@ -12535,6 +12536,10 @@ debugAuras = {
             [56548] = true, -- Platform Detonation
             [56551] = true, -- Lava Quake
             [52008] = true, -- Destroy Sigil Stone
+
+            [56564] = true, -- Book (Frigid Tome)
+            [56562] = true, -- Book (Frigid Tome)
+            [56563] = true, -- Book (Frigid Tome)
 
             -- Tempest Island
             [85791] = true, -- Teleport

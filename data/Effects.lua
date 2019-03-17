@@ -9373,6 +9373,7 @@ E.EffectOverride = {
     [56178] = { hide = true }, -- Gaunt NPC Add Threat
     [56186] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_voice_to_wake_the_dead.dds' }, -- Voice to Wake the Dead (Flame Colossus)
     [86753] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds', name = A.Skill_Flare }, -- Bone Flare (Flame Colossus)
+    [55744] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds', name = A.Skill_Flare }, -- Bone Flare (Flame Colossus)
 
     [56055] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_jagged_claw.dds' }, -- Jagged Claw (Horvantud the Fire Maw)
     [56054] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds' }, -- Fiery Jaws (Horvantud the Fire Maw)
@@ -9506,11 +9507,11 @@ E.EffectOverride = {
     [55574] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fiery_surge.dds', name = A.Skill_Flame_Bolt, hide = true }, -- Meteor Strike (Valkyn Skoria)
     [55575] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fiery_surge.dds', name = A.Skill_Flame_Bolt, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Meteor Strike (Valkyn Skoria)
 
-    [55387] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_meteor_strike.dds' }, -- Meteor Strike (Valkyn Skoria)
+    [55387] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_meteor_strike.dds', name = A.Skill_Meteoric_Strike }, -- Meteor Strike (Valkyn Skoria)
     [55758] = { hide = true }, -- Meteor Strike (Valkyn Skoria)
     [56167] = { hide = true }, -- Meteor Strike (Valkyn Skoria)
-    [55391] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_meteor_strike.dds', hide = true }, -- Meteor Strike (Valkyn Skoria)
-    [55390] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_meteor_strike.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Meteor Strike (Valkyn Skoria)
+    [55391] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_meteor_strike.dds', name = A.Skill_Meteoric_Strike, hide = true }, -- Meteor Strike (Valkyn Skoria)
+    [55390] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_meteor_strike.dds', name = A.Skill_Meteoric_Strike, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Meteor Strike (Valkyn Skoria)
 
     [55506] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_meteor.dds' }, -- Meteor (Valkyn Skoria)
     [55502] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_meteor.dds', name = A.Skill_Meteor, tooltip = T.Generic_Stun }, -- Meteor (Valkyn Skoria)
@@ -9562,6 +9563,8 @@ E.EffectOverride = {
 
     [56548] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_platform_detonation.dds' }, -- Platform Detonation (Valkyn Skoria)
     [56551] = { hide = true, name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Lava Quake (Valkyn Skoria)
+
+    [56563] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_headgrab.dds', name = A.Skill_Wracking_Pain, tooltip = T.Generic_Stun, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Book (Frigid Tome)
 
     -- Tempest Island
     [28012] = { hide = true }, -- Fireball

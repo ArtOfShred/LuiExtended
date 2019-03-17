@@ -1170,6 +1170,7 @@ local strings = {
     SI_LUIE_SKILL_BLOOD_POOL_TP =                        "Taking Physical Damage every |cFFFFFF1|r second. Each tick heals the Vampire.",
     SI_LUIE_SKILL_BLOOD_POOL_1_5_TP =                    "Taking Physical Damage every |cFFFFFF1.5|r seconds. Each tick heals the Vampire.",
     SI_LUIE_SKILL_WRACKING_PAIN =                        "Wracking Pain",
+    SI_LUIE_SKILL_METEORIC_STRIKE =                      "Meteoric Strike",
 }
 
 local pairs = pairs
