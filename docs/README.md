@@ -11,11 +11,11 @@ LuiExtended is an AddOn that adds multiple custom components including
 Initially this [Elder Scrolls Online][1] AddOn was based partially on the [LUI][2] AddOn by LoPony and some features of [Foundry Tactical Combat][3] AddOn.
 
 ## Information
-[Massive spreadsheet tracking for Buff/Debuff issues present here.][4]  
+Massive spreadsheet tracking for Buff/Debuff issues present [here][4].  
 Goal is for this spreadsheet to also serve as a modders resource, and a bug tracker for inconsistencies with abilities in the game to report to Zenimax.
 
 ## Contribute
-LuiExtended code is intended to be open source released under the [MIT License](LICENSE).  
+LuiExtended code is intended to be open source released under the MIT License.  
 Feel free to suggest or make contributions! You are welcome to copy and edit any code and features as long as they are not sections tagged as pulled from another addon.
 
 ## Disclaimer
@@ -26,4 +26,4 @@ All rights reserved.*
   [1]: https://www.elderscrollsonline.com
   [2]: http://www.esoui.com/downloads/info413-LUI.html
   [3]: http://www.esoui.com/downloads/info28-FoundryTacticalCombat.html
-  [4]: https://docs.google.com/spreadsheets/d/1YOCz2ESzmdcs-QZ4whVNtcFDtcglpbiv-VYxUhZHGpk/edit#gid=709796411
+  [4]: https://docs.google.com/spreadsheets/d/1UVpe00hL2lR7wO0Fpo30sFMsc603kJqtEPtvWDHkA74/edit#gid=468027794
