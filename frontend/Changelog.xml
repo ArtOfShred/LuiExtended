@@ -1,13 +1,15 @@
 <GuiXml>
     <Controls>
-        <TopLevelControl name="LUIEChangelog" mouseEnabled="true" movable="true" clampedToScreen="true">
+        <TopLevelControl name="LUIEChangelog" mouseEnabled="true" movable="false" clampedToScreen="true">
             <Dimensions x="900" y="700" />
             <Anchor point="CENTER" relativeTo="GuiRoot" relativePoint="CENTER" />
             <Controls>
                 <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" />
+
                 <Label name="$(parent)WindowTitle" text="LuiExtended Changelog" font="ZoFontWindowTitle" color="CFDCBD" wrapMode="ELLIPSIS" verticalAlignment="TOP">
                     <Anchor relativeTo="$(parent)" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="5" offsetY="5" />
                 </Label>
+
                 <Button name="$(parent)Close" alpha="1">
                     <Textures normal="EsoUI/Art/Buttons/closeButton_up.dds" pressed="EsoUI/Art/Buttons/closeButton_down.dds" mouseOver="EsoUI/Art/Buttons/closeButton_mouseOver.dds" disabled="EsoUI/Art/Buttons/closeButton_disabled.dds" />
                     <Anchor relativeTo="$(parent)" relativePoint="TOPRIGHT" point="TOPRIGHT" offsetX="-3" offsetY="1" />
@@ -17,10 +19,13 @@
                         DO_SOMETHING_HERE()
                     </OnClicked>
                 </Button>
+
                 <Control name="$(parent)Container" inherits="ZO_ScrollContainer">
+                    <Dimensions x="900" y="700" />
                     <Anchor point="TOPLEFT" offsetY="60" />
                     <Anchor point="BOTTOMRIGHT" offsetY="-12" />
                 </Control>
+
             </Controls>
         </TopLevelControl>
     </Controls>
