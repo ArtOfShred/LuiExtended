@@ -1089,9 +1089,13 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck -- This command is always registered since it is also a default command
     SLASH_COMMANDS["/outfit"]       = nil
     SLASH_COMMANDS["/cake"]         = nil
+    SLASH_COMMANDS["/anniversary"]  = nil
     SLASH_COMMANDS["/pie"]          = nil
+    SLASH_COMMANDS["/jester"]       = nil
     SLASH_COMMANDS["/mead"]         = nil
+    SLASH_COMMANDS["/newlife"]      = nil
     SLASH_COMMANDS["/witch"]        = nil
+    SLASH_COMMANDS["/witchfest"]    = nil
     SLASH_COMMANDS["/report"]       = nil
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
 
