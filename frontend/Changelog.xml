@@ -1,0 +1,24 @@
+<GuiXml>
+    <Controls>
+        <TopLevelControl name="LUIE_Welcome_Screen2" mouseEnabled="true" movable="true" clampedToScreen="true" >
+            <Dimensions x="900" y="700" />
+            <Anchor point="CENTER" />
+            <Controls>
+                <Backdrop name="$(parent)Bg" inherits="ZO_DefaultBackdrop" />
+
+                <Backdrop name="$(parent)Text" inherits="ZO_MultiLineEditBackdrop_Keyboard">
+                    <Anchor point="TOPLEFT" offsetY="30" />
+                    <Anchor point="BOTTOMRIGHT" offsetX="-2" offsetY="-40" />
+                    <Controls>
+                        <EditBox name="$(parent)Edit" inherits="ZO_DefaultEditMultiLineForBackdrop" />
+                    </Controls>
+                </Backdrop>
+
+                <Label name="$(parent)NoteIndex" font="ZoFontWinT2" text="Some Test Label">
+                    <Anchor point="TOPLEFT" offsetX="10" offsetY="10" />
+                </Label>
+
+            </Controls>
+        </TopLevelControl>
+    </Controls>
+</GuiXml>

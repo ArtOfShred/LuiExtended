@@ -12413,13 +12413,14 @@ debugAuras = {
             [56318] = true, -- Cooldowns (Ash Titan)
             [56319] = true, -- Cooldown2 (Ash Titan)
 
-            [54366] = true, -- Flame Tornado (Ash Titan)
-            [56312] = true, -- Flame Tornado (Ash Titan)
-            [60683] = true, -- Flame Tornado (Ash Titan)
-            [54367] = true, -- Flame Tornado (Ash Titan)
-            [54370] = true, -- Flame Tornado Snare (Ash Titan)
-            [54790] = true, -- Swipe (Ash Titan)
-            [54791] = true, -- Swipe (Ash Titan)
+            [54366] = true, -- Flame Tornado (Air Atronach)
+            [56312] = true, -- Flame Tornado (Air Atronach)
+            [60683] = true, -- Flame Tornado (Air Atronach)
+            [54367] = true, -- Flame Tornado (Air Atronach)
+            [54370] = true, -- Flame Tornado Snare (Air Atronach)
+            [56313] = true, -- Flame Tornado (Air Atronach)
+            [54790] = true, -- Swipe (Air Atronach)
+            [54791] = true, -- Swipe (Air Atronach)
 
             [55707] = true, -- Fiery Entrance
             [55725] = true, -- Scamps

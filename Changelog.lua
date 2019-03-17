@@ -43,6 +43,10 @@ function LUIE_WelcomeScreen(menu)
     -- Load LibMsgWin library
     local LMW = LibStub:GetLibrary("LibMsgWin-1.0")
 
+
+    -- temp shit
+    luiChangelog2 = LUIE_Welcome_Screen2
+
     -- If saved version number is less than current version number then display the welcome screen.
     if (LUIESV.Default[GetDisplayName()]['$AccountWide'].WelcomeVersion ~= LUIE.version) or menu then
         -- Only create the window if its the first load or the change log is opened - otherwise there's no reason to bother doing so.

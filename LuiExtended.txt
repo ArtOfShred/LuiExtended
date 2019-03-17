@@ -1,4 +1,4 @@
-## Title: |cE12000L|cFFFFB0ui E|rxtended|
+﻿## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, psypanda, SpellBuilder
 ## Version: 5.8.1
 ## APIVersion: 100026
@@ -50,6 +50,7 @@ Settings.lua
 Changelog.lua
 Bindings.xml
 
+frontend/Changelog.xml
 frontend/CombatText.xml
 
 i18n/en.lua
