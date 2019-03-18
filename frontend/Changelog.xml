@@ -4,26 +4,51 @@
             <Dimensions x="900" y="700" />
             <Anchor point="CENTER" relativeTo="GuiRoot" relativePoint="CENTER" />
             <Controls>
-                <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" />
 
-                <Label name="$(parent)WindowTitle" text="LuiExtended Changelog" font="ZoFontWindowTitle" color="CFDCBD" wrapMode="ELLIPSIS" verticalAlignment="TOP">
+                <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop">
+                    <AnchorFill/>
+                </Backdrop>
+
+                <Label name="$(parent)Title" font="ZoFontWindowTitle" wrapMode="ELLIPSIS" verticalAlignment="TOP">
                     <Anchor relativeTo="$(parent)" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="5" offsetY="5" />
                 </Label>
+                <Label name="$(parent)About" font="ZoFontGame" wrapMode="ELLIPSIS">
+                    <Anchor relativeTo="$(parent)" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="10" offsetY="40" />
+                </Label>
 
-                <Button name="$(parent)Close" alpha="1">
-                    <Textures normal="EsoUI/Art/Buttons/closeButton_up.dds" pressed="EsoUI/Art/Buttons/closeButton_down.dds" mouseOver="EsoUI/Art/Buttons/closeButton_mouseOver.dds" disabled="EsoUI/Art/Buttons/closeButton_disabled.dds" />
-                    <Anchor relativeTo="$(parent)" relativePoint="TOPRIGHT" point="TOPRIGHT" offsetX="-3" offsetY="1" />
+                <Button name="$(parent)Close" inherits="ZO_ButtonBehaviorClickSound">
                     <Dimensions x="30" y="30" />
-                    <TextureCoords left="0" top="0" right="0.625" bottom="0.625" />
+                    <Anchor relativeTo="$(parent)" relativePoint="TOPRIGHT" point="TOPRIGHT" offsetX="-3" offsetY="1" />
+                    <Textures
+                        normal    ="/esoui/art/buttons/decline_up.dds"
+                        pressed    ="/esoui/art/buttons/decline_down.dds"
+                        mouseOver  ="/esoui/art/buttons/decline_over.dds"
+                    />
                     <OnClicked>
                         DO_SOMETHING_HERE()
                     </OnClicked>
                 </Button>
 
+
                 <Control name="$(parent)Container" inherits="ZO_ScrollContainer">
-                    <Dimensions x="900" y="700" />
-                    <Anchor point="TOPLEFT" offsetY="60" />
-                    <Anchor point="BOTTOMRIGHT" offsetY="-12" />
+                    <AnchorFill />
+                    <Controls>
+                        <Label name="$(parent)GeneralTitle" font="ZoFontGame" wrapMode="ELLIPSIS">
+                            <Anchor relativeTo="$(parent)" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="5" offsetY="80" />
+                        </Label>
+                        <Label name="$(parent)General" inherits="LUIEChangelogContainerScrollChild" font="ZoFontGame" wrapMode="ELLIPSIS">
+                            <Anchor relativeTo="$(parent)GeneralTitle" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="5" offsetY="25" />
+                        </Label>
+
+                        <Label name="$(parent)BuffsAndDebuffsTitle" font="ZoFontGame" wrapMode="ELLIPSIS">
+                            <Anchor relativeTo="$(parent)General" relativePoint="BOTTOMLEFT" point="BOTTOMLEFT" offsetX="-5" offsetY="25" />
+                        </Label>
+
+                        <Label name="$(parent)BuffsAndDebuffs" font="ZoFontGame" wrapMode="ELLIPSIS">
+                            <Anchor relativeTo="$(parent)BuffsAndDebuffsTitle" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="-5" offsetY="25" />
+                        </Label>
+
+                    </Controls>
                 </Control>
 
             </Controls>
