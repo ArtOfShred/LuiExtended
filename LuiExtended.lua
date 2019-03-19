@@ -181,8 +181,8 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     -- Load saved variables
     LUIE_LoadSavedVars()
 
-    -- Display welcome screen
-    LUIE_WelcomeScreen()
+    -- Display changelog screen
+    LUIE_ChangelogScreen()
 
     LUIE.PlayerNameRaw = GetRawUnitName("player")
     LUIE.PlayerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))

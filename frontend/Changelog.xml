@@ -2,10 +2,10 @@
     <Controls>
         <TopLevelControl name="LUIEChangelog" mouseEnabled="true" movable="false" clampedToScreen="true">
             <Dimensions x="900" y="700" />
-            <Anchor point="CENTER" relativeTo="GuiRoot" relativePoint="CENTER" />
+            <Anchor point="CENTER" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-120" />
             <Controls>
 
-                <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop">
+                <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" alpha="0.85">
                     <AnchorFill/>
                 </Backdrop>
 
@@ -15,34 +15,30 @@
                 <Label name="$(parent)About" font="ZoFontGame" wrapMode="ELLIPSIS">
                     <Anchor relativeTo="$(parent)" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="10" offsetY="40" />
                 </Label>
-				
-				<Button name="$(parent)Close" inherits="ZO_CloseButton">
+
+                <Button name="$(parent)Close" inherits="ZO_CloseButton">
                     <Anchor point="TOPRIGHT" offsetY="3" offsetX = "-3" />
                     <OnClicked>
                         LUIE_ToggleChangelog(true)
                     </OnClicked>
-				</Button>
+                </Button>
 
-				 <Control name="$(parent)Container" inherits="ZO_ScrollContainer">
-					<OnInitialized>
-						ZO_Scroll_Initialize(self)
-					</OnInitialized>
-					<Dimensions x="894" y="620"/>
-					<Anchor point="BOTTOMLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="6" offsetY="690" />
-				</Control>
+                 <Control name="$(parent)Container" inherits="ZO_ScrollContainer">
+                    <OnInitialized>
+                        ZO_Scroll_Initialize(self)
+                    </OnInitialized>
+                    <Dimensions x="895" y="620"/>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="6" offsetY="690" />
+                </Control>
 
-				<Label name="$(parent)Text" font="ZoFontGame" wrapMode="ELLIPSIS">
-					<Dimensions x="894" />
+                <Label name="$(parent)Text" font="ZoFontGame" wrapMode="ELLIPSIS">
+                    <Dimensions x="875" />
+                    <OnInitialized>
+                        self:SetParent(GetControl("LUIEChangelogContainerScrollChild"))
+                        self:SetAnchor(TOPLEFT, LUIEChangelogContainerScrollChild, TOPLEFT, 4, 4)
+                    </OnInitialized>
+                </Label>
 
-					<OnInitialized>
-						self:SetParent(GetControl("LUIEChangelogContainerScrollChild"))
-						self:SetAnchor(TOPLEFT, LUIEChangelogContainerScrollChild, TOPLEFT, 4, 4)
-					</OnInitialized>
-				</Label>
-						
-				
-				
-				
             </Controls>
         </TopLevelControl>
     </Controls>
