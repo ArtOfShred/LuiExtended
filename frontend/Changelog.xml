@@ -33,7 +33,21 @@
                 <Control name="$(parent)Container" inherits="ZO_ScrollContainer">
                     <AnchorFill />
                     <Controls>
-                        <EditBox name="$(parent)ScrollChildBox" inherits="ZO_DefaultEditMultiLineForBackdrop" maxInputCharacters="32000" editEnabled="true" />
+                        <Label name="$(parent)GeneralTitle" font="ZoFontGame" wrapMode="ELLIPSIS">
+                            <Anchor relativeTo="$(parent)" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="5" offsetY="80" />
+                        </Label>
+                        <Label name="$(parent)General" inherits="LUIEChangelogContainerScrollChild" font="ZoFontGame" wrapMode="ELLIPSIS">
+                            <Anchor relativeTo="$(parent)GeneralTitle" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="5" offsetY="25" />
+                        </Label>
+
+                        <Label name="$(parent)BuffsAndDebuffsTitle" font="ZoFontGame" wrapMode="ELLIPSIS">
+                            <Anchor relativeTo="$(parent)General" relativePoint="BOTTOMLEFT" point="BOTTOMLEFT" offsetX="-5" offsetY="25" />
+                        </Label>
+
+                        <Label name="$(parent)BuffsAndDebuffs" font="ZoFontGame" wrapMode="ELLIPSIS">
+                            <Anchor relativeTo="$(parent)BuffsAndDebuffsTitle" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="-5" offsetY="25" />
+                        </Label>
+
                     </Controls>
                 </Control>
 
