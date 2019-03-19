@@ -30,14 +30,27 @@
                 </Button>
 
 
-                <Control name="$(parent)Container" inherits="ZO_ScrollContainer">
-					<Dimensions x="900" y="640" />
-                    <Anchor point="BOTTOMLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="14" offsetY="700" />
-                    <Controls>
-                        <EditBox name="$(parent)ScrollChildBox" inherits="ZO_DefaultEditMultiLineForBackdrop" maxInputCharacters="32000" editEnabled="false">
-						</EditBox>
-                    </Controls>
-                </Control>
+				 <Control name="$(parent)Container" inherits="ZO_ScrollContainer">
+					<OnInitialized>
+						ZO_Scroll_Initialize(self)
+					</OnInitialized>
+					<Dimensions x="850" y="630"/>
+					<Anchor point="BOTTOMLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="50" offsetY="650" />
+				</Control>
+
+				<Label name="$(parent)Text" font="ZoFontGame" wrapMode="ELLIPSIS">
+					<Anchor relativeTo="$(parent)About" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="5" offsetY="25" />
+				
+					<Dimensions x="830" />
+					<OnInitialized>
+						self:SetParent(GetControl("LUIEChangelogContainerScrollChild"))
+						self:SetAnchor(TOPLEFT, LUIEChangelogContainerScrollChild, TOPLEFT, 4, 4)
+					</OnInitialized>
+				</Label>
+						
+				
+				
+				
             </Controls>
         </TopLevelControl>
     </Controls>

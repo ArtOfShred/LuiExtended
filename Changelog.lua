@@ -80,7 +80,7 @@ function LUIE_WelcomeScreen(menu)
 
         --LUIEChangelogContainerBuffsAndDebuffs:SetText(changelogBuffsAndDebuffs)
 
-        LUIEChangelogContainerScrollChildBox:SetText(changelogGeneral)
+        LUIEChangelogText:SetText(changelogGeneral)
     end
 
     -- temp shit
