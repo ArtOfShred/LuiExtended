@@ -1,14 +1,6 @@
 
 local changelogMessages = {
     General = {
-		"|cFFFFFFHi Dad!|r",
-        "this is the a general changelog message. very very long and annoying bla bla bla bla bla need to wrap this at some point later though but not now. im dead inside. bla bla bla bla",
-        "this is the a general changelog message. very very long and annoying bla bla bla bla bla need to wrap this at some point later though but not now. im dead inside. bla bla bla bla",
-        "this is the a general changelog message. very very long and annoying bla bla bla bla bla need to wrap this at some point later though but not now. im dead inside. bla bla bla bla",
-        "this is the a general changelog message. very very long and annoying bla bla bla bla bla need to wrap this at some point later though but not now. im dead inside. bla bla bla bla",
-        "this is the a general changelog message. very very long and annoying bla bla bla bla bla need to wrap this at some point later though but not now. im dead inside. bla bla bla bla",
-        "this is the a general changelog message. very very long and annoying bla bla bla bla bla need to wrap this at some point later though but not now. im dead inside. bla bla bla bla",
-        "this is the a general changelog message. very very long and annoying bla bla bla bla bla need to wrap this at some point later though but not now. im dead inside. bla bla bla bla",
         "this is the a general changelog message. very very long and annoying bla bla bla bla bla need to wrap this at some point later though but not now. im dead inside. bla bla bla bla",
         "this is the a general changelog message. very very long and annoying bla bla bla bla bla need to wrap this at some point later though but not now. im dead inside. bla bla bla bla",
         "this is the a general changelog message. very very long and annoying bla bla bla bla bla need to wrap this at some point later though but not now. im dead inside. bla bla bla bla",
