@@ -55,21 +55,24 @@ function LUIE_WelcomeScreen(menu)
         local changelogGeneral = table.concat(changelogMessages.General, "\n")
         local changelogBuffsAndDebuffs = table.concat(changelogMessages.BuffsAndDebuffs, "\n")
 
+        local testme = table.concat(changelogMessages, "\n")
+
         LUIEChangelogTitle:SetText(zo_strformat("<<1>> Changelog", LUIE.name))
         LUIEChangelogAbout:SetText(zo_strformat("v<<1>> by <<2>>", LUIE.version, LUIE.author))
 
-        LUIEChangelogContainerGeneralTitle:SetText("General")
+        --LUIEChangelogContainerGeneralTitle:SetText("General")
 
-        LUIEChangelogContainerGeneral:SetDimensionConstraints(-1,-1,900,700)
+        --LUIEChangelogContainerGeneral:SetDimensionConstraints(-1,-1,900,700)
 
-        LUIEChangelogContainerGeneral:SetText(changelogGeneral)
+        --LUIEChangelogContainerGeneral:SetText(changelogGeneral)
 
-        LUIEChangelogContainerBuffsAndDebuffsTitle:SetText("Buffs and Debuffs")
+        --LUIEChangelogContainerBuffsAndDebuffsTitle:SetText("Buffs and Debuffs")
 
-        LUIEChangelogContainerBuffsAndDebuffs:SetDimensionConstraints(-1,-1,900,700)
+        --LUIEChangelogContainerBuffsAndDebuffs:SetDimensionConstraints(-1,-1,900,700)
 
-        LUIEChangelogContainerBuffsAndDebuffs:SetText(changelogBuffsAndDebuffs)
+        --LUIEChangelogContainerBuffsAndDebuffs:SetText(changelogBuffsAndDebuffs)
 
+        LUIEChangelogContainerScrollChildBox:SetText(changelogGeneral)
     end
 
     -- temp shit
