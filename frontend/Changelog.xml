@@ -31,12 +31,13 @@
 
 
                 <Control name="$(parent)Container" inherits="ZO_ScrollContainer">
-                    <AnchorFill />
+					<Dimensions x="900" y="640" />
+                    <Anchor point="BOTTOMLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="14" offsetY="700" />
                     <Controls>
-                        <EditBox name="$(parent)ScrollChildBox" inherits="ZO_DefaultEditMultiLineForBackdrop" maxInputCharacters="32000" editEnabled="true" />
+                        <EditBox name="$(parent)ScrollChildBox" inherits="ZO_DefaultEditMultiLineForBackdrop" maxInputCharacters="32000" editEnabled="false">
+						</EditBox>
                     </Controls>
                 </Control>
-
             </Controls>
         </TopLevelControl>
     </Controls>
