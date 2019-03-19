@@ -15,33 +15,25 @@
                 <Label name="$(parent)About" font="ZoFontGame" wrapMode="ELLIPSIS">
                     <Anchor relativeTo="$(parent)" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="10" offsetY="40" />
                 </Label>
-
-                <Button name="$(parent)Close" inherits="ZO_ButtonBehaviorClickSound">
-                    <Dimensions x="30" y="30" />
-                    <Anchor relativeTo="$(parent)" relativePoint="TOPRIGHT" point="TOPRIGHT" offsetX="-3" offsetY="1" />
-                    <Textures
-                        normal    ="/esoui/art/buttons/decline_up.dds"
-                        pressed    ="/esoui/art/buttons/decline_down.dds"
-                        mouseOver  ="/esoui/art/buttons/decline_over.dds"
-                    />
+				
+				<Button name="$(parent)Close" inherits="ZO_CloseButton">
+                    <Anchor point="TOPRIGHT" offsetY="3" offsetX = "-3" />
                     <OnClicked>
-                        DO_SOMETHING_HERE()
+                        LUIE_ToggleChangelog(true)
                     </OnClicked>
-                </Button>
-
+				</Button>
 
 				 <Control name="$(parent)Container" inherits="ZO_ScrollContainer">
 					<OnInitialized>
 						ZO_Scroll_Initialize(self)
 					</OnInitialized>
-					<Dimensions x="850" y="630"/>
-					<Anchor point="BOTTOMLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="50" offsetY="650" />
+					<Dimensions x="894" y="620"/>
+					<Anchor point="BOTTOMLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="6" offsetY="690" />
 				</Control>
 
 				<Label name="$(parent)Text" font="ZoFontGame" wrapMode="ELLIPSIS">
-					<Anchor relativeTo="$(parent)About" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="5" offsetY="25" />
-				
-					<Dimensions x="830" />
+					<Dimensions x="894" />
+
 					<OnInitialized>
 						self:SetParent(GetControl("LUIEChangelogContainerScrollChild"))
 						self:SetAnchor(TOPLEFT, LUIEChangelogContainerScrollChild, TOPLEFT, 4, 4)

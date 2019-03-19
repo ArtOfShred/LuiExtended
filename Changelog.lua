@@ -56,6 +56,12 @@ local changelogMessages = {
     }
 }
 
+function LUIE_ToggleChangelog(hidden)
+
+	LUIEChangelog:SetHidden(hidden)
+
+end
+
 function LUIE_WelcomeScreen(menu)
 
     local function GenerateChangelog()
@@ -86,6 +92,5 @@ function LUIE_WelcomeScreen(menu)
     -- temp shit
     GenerateChangelog()
 
-    luiChangelog2 = LUIEChangelog
 
 end
