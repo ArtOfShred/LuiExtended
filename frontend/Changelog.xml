@@ -1,11 +1,11 @@
 <GuiXml>
     <Controls>
-        <TopLevelControl name="LUIEChangelog" mouseEnabled="true" movable="false" clampedToScreen="true">
+        <TopLevelControl name="LUIEChangelog" mouseEnabled="true" movable="true" clampedToScreen="true" hidden="true" tier="HIGH" layer="CONTROLS">
             <Dimensions x="900" y="700" />
             <Anchor point="CENTER" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-120" />
             <Controls>
 
-                <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" alpha="0.85">
+                <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop">
                     <AnchorFill/>
                 </Backdrop>
 
@@ -32,7 +32,7 @@
                 </Control>
 
                 <Label name="$(parent)Text" font="ZoFontGame" wrapMode="ELLIPSIS">
-                    <Dimensions x="875" />
+                    <Dimensions x="870" />
                     <OnInitialized>
                         self:SetParent(GetControl("LUIEChangelogContainerScrollChild"))
                         self:SetAnchor(TOPLEFT, LUIEChangelogContainerScrollChild, TOPLEFT, 4, 4)

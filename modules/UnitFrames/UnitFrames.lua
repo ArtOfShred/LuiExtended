@@ -2273,9 +2273,9 @@ function UF.MenuUpdatePlayerFrameOptions(option)
             reticleover.debuffs:SetAnchor(TOP, reticleover.buffAnchor, BOTTOM, 0, 2)
         end
     end
-    LUIE.UnitFrames.CustomFramesResetPosition(true)
-    LUIE.UnitFrames.CustomFramesSetupAlternative()
-    LUIE.UnitFrames.CustomFramesApplyLayoutPlayer()
+    UF.CustomFramesResetPosition(true)
+    UF.CustomFramesSetupAlternative()
+    UF.CustomFramesApplyLayoutPlayer()
 end
 
 -- Updates single attribute.
@@ -3118,7 +3118,7 @@ function UF.OnBossesChanged( eventCode )
     end
 end
 
-function LUIE.UnitFrames.ResetCompassBarMenu()
+function UF.ResetCompassBarMenu()
     if UF.SV.DefaultFramesNewBoss == 2 then
         for i = 1, 6 do
             local unitTag = "boss" .. i
