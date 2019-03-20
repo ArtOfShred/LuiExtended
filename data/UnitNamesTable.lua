@@ -45,6 +45,7 @@ local UnitNames = {
     Boss_Shadowrend                       = 'Shadowrend',
     Boss_Angata_the_Clannfear_Handler     = 'Angata the Clannfear Handler',
     Boss_High_Kinlord_Rilis               = 'High Kinlord Rilis',
+    NPC_The_Feast                         = 'The Feast',
 
     -- Banished Cells II
     Boss_Keeper_Areldur                   = 'Keeper Areldur',
