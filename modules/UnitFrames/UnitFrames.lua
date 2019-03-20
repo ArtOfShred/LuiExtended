@@ -560,21 +560,21 @@ local function CreateCustomFrames()
         playerTlw:SetDrawTier(DT_LOW)
         playerTlw:SetDrawLevel(1)
         playerTlw.customPositionAttr = "CustomFramesPlayerFramePos"
-        playerTlw.preview = LUIE.UI.Backdrop( playerTlw, "fill", nil, nil, nil, true )
+        playerTlw.preview = UI.Backdrop( playerTlw, "fill", nil, nil, nil, true )
         local player = UI.Control( playerTlw, {TOPLEFT,TOPLEFT}, nil, false )
         local topInfo = UI.Control( player, {BOTTOM,TOP,0,-3}, nil, false )
         local botInfo = UI.Control( player, {TOP,BOTTOM,0,2}, nil, false )
         local buffAnchor = UI.Control( player, {TOP,BOTTOM,0,2}, nil, false )
-        local phb = LUIE.UI.Backdrop( player, {TOP,TOP,0,0}, nil, nil, nil, false )
+        local phb = UI.Backdrop( player, {TOP,TOP,0,0}, nil, nil, nil, false )
         phb:SetDrawLayer(DL_BACKDROP)
         phb:SetDrawLevel(1)
-        local pmb = LUIE.UI.Backdrop( player, nil, nil, nil, nil, false )
+        local pmb = UI.Backdrop( player, nil, nil, nil, nil, false )
         pmb:SetDrawLayer(DL_BACKDROP)
         pmb:SetDrawLevel(1)
-        local psb = LUIE.UI.Backdrop( player, nil, nil, nil, nil, false )
+        local psb = UI.Backdrop( player, nil, nil, nil, nil, false )
         psb:SetDrawLayer(DL_BACKDROP)
         psb:SetDrawLevel(1)
-        local alt = LUIE.UI.Backdrop( botInfo, {RIGHT,RIGHT}, nil, nil , {0,0,0,1}, false )
+        local alt = UI.Backdrop( botInfo, {RIGHT,RIGHT}, nil, nil , {0,0,0,1}, false )
         local pli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
 
         local fragment = ZO_HUDFadeSceneFragment:New(playerTlw, 0, 0)
@@ -652,13 +652,13 @@ local function CreateCustomFrames()
         targetTlw:SetDrawTier(DT_LOW)
         targetTlw:SetDrawLevel(1)
         targetTlw.customPositionAttr = "CustomFramesTargetFramePos"
-        targetTlw.preview = LUIE.UI.Backdrop( targetTlw, "fill", nil, nil, nil, true )
+        targetTlw.preview = UI.Backdrop( targetTlw, "fill", nil, nil, nil, true )
         targetTlw.previewLabel = UI.Label( targetTlw.preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", "Target Frame", false )
         local target = UI.Control( targetTlw, {TOPLEFT,TOPLEFT}, nil, false )
         local topInfo = UI.Control( target, {BOTTOM,TOP,0,-3}, nil, false )
         local botInfo = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local buffAnchor = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
-        local thb = LUIE.UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
+        local thb = UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
         thb:SetDrawLayer(DL_BACKDROP)
         thb:SetDrawLevel(1)
         local tli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
@@ -724,13 +724,13 @@ local function CreateCustomFrames()
         targetTlw:SetDrawTier(DT_LOW)
         targetTlw:SetDrawLevel(1)
         targetTlw.customPositionAttr = "AvaCustFramesTargetFramePos"
-        targetTlw.preview = LUIE.UI.Backdrop( targetTlw, "fill", nil, nil, nil, true )
+        targetTlw.preview = UI.Backdrop( targetTlw, "fill", nil, nil, nil, true )
         targetTlw.previewLabel = UI.Label( targetTlw.preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", "PvP Player Target Frame", false )
         local target = UI.Control( targetTlw, {TOPLEFT,TOPLEFT}, nil, false )
         local topInfo = UI.Control( target, {BOTTOM,TOP,0,-3}, nil, false )
         local botInfo = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local buffAnchor = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
-        local thb = LUIE.UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
+        local thb = UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
         thb:SetDrawLayer(DL_BACKDROP)
         thb:SetDrawLevel(1)
         local cn = UI.Label( botInfo, {TOP,TOP}, nil, {1,3}, nil, "Class", false )
@@ -788,7 +788,7 @@ local function CreateCustomFrames()
         group:SetDrawTier(DT_LOW)
         group:SetDrawLevel(1)
         group.customPositionAttr = "CustomFramesGroupFramePos"
-        group.preview = LUIE.UI.Backdrop( group, "fill", nil, nil, nil, true )
+        group.preview = UI.Backdrop( group, "fill", nil, nil, nil, true )
         group.previewLabel = UI.Label( group.preview, {BOTTOM,TOP,0,-1,group}, nil, nil, "ZoFontGameMedium", "Small Group", false )
 
         local fragment = ZO_HUDFadeSceneFragment:New(group, 0, 0)
@@ -803,7 +803,7 @@ local function CreateCustomFrames()
             local unitTag = "SmallGroup" .. i
             local control = UI.Control( group, nil, nil, false )
             local topInfo = UI.Control( control, {BOTTOMRIGHT,TOPRIGHT,0,-3}, nil, false )
-            local ghb = LUIE.UI.Backdrop( control, {TOPLEFT,TOPLEFT}, nil, nil, nil, false )
+            local ghb = UI.Backdrop( control, {TOPLEFT,TOPLEFT}, nil, nil, nil, false )
             ghb:SetDrawLayer(DL_BACKDROP)
             ghb:SetDrawLevel(1)
             local gli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
@@ -846,8 +846,8 @@ local function CreateCustomFrames()
         raid:SetDrawTier(DT_LOW)
         raid:SetDrawLevel(1)
         raid.customPositionAttr = "CustomFramesRaidFramePos"
-        raid.preview = LUIE.UI.Backdrop( raid, {TOPLEFT,TOPLEFT}, nil, nil, nil, true )
-        raid.preview2 = LUIE.UI.Backdrop( raid.preview, nil, nil, nil, nil, false )
+        raid.preview = UI.Backdrop( raid, {TOPLEFT,TOPLEFT}, nil, nil, nil, true )
+        raid.preview2 = UI.Backdrop( raid.preview, nil, nil, nil, nil, false )
         raid.previewLabel = UI.Label( raid.preview, {BOTTOM,TOP,0,-1,raid}, nil, nil, "ZoFontGameMedium", "Raid Group", false )
 
         local fragment = ZO_HUDFadeSceneFragment:New(raid, 0, 0)
@@ -861,7 +861,7 @@ local function CreateCustomFrames()
         for i = 1, 24 do
             local unitTag = "RaidGroup" .. i
             local control = UI.Control( raid, nil, nil, false )
-            local rhb = LUIE.UI.Backdrop( control, "fill", nil, nil, nil, false )
+            local rhb = UI.Backdrop( control, "fill", nil, nil, nil, false )
             rhb:SetDrawLayer(DL_BACKDROP)
             rhb:SetDrawLevel(1)
 
@@ -898,7 +898,7 @@ local function CreateCustomFrames()
         bosses:SetDrawTier(DT_LOW)
         bosses:SetDrawLevel(1)
         bosses.customPositionAttr = "CustomFramesBossesFramePos"
-        bosses.preview = LUIE.UI.Backdrop( bosses, "fill", nil, nil, nil, true )
+        bosses.preview = UI.Backdrop( bosses, "fill", nil, nil, nil, true )
         bosses.previewLabel = UI.Label( bosses.preview, {BOTTOM,TOP,0,-1,bosses}, nil, nil, "ZoFontGameMedium", "Bosses Group", false )
 
         local fragment = ZO_HUDFadeSceneFragment:New(bosses, 0, 0)
@@ -912,7 +912,7 @@ local function CreateCustomFrames()
         for i = 1, 6 do
             local unitTag = "boss" .. i
             local control = UI.Control( bosses, nil, nil, false )
-            local bhb = LUIE.UI.Backdrop( control, "fill", nil, nil, nil, false )
+            local bhb = UI.Backdrop( control, "fill", nil, nil, nil, false )
             bhb:SetDrawLayer(DL_BACKDROP)
             bhb:SetDrawLevel(1)
 
@@ -991,7 +991,7 @@ local function CreateCustomFrames()
                                 powerBar.shield:SetAnchor( BOTTOMRIGHT, powerBar.backdrop, BOTTOMRIGHT, -1, -1 )
                             else
                                 -- In non-overlay mode we need to create separate backdrop for shield
-                                powerBar.shieldbackdrop = LUIE.UI.Backdrop( UF.CustomFrames[unitTag].control, nil, nil, nil, nil, true )
+                                powerBar.shieldbackdrop = UI.Backdrop( UF.CustomFrames[unitTag].control, nil, nil, nil, nil, true )
                                 powerBar.shield:SetAnchor( TOPLEFT, powerBar.shieldbackdrop, TOPLEFT, 1, 1 )
                                 powerBar.shield:SetAnchor( BOTTOMRIGHT, powerBar.shieldbackdrop, BOTTOMRIGHT, -1, -1 )
                             end
@@ -2273,9 +2273,9 @@ function UF.MenuUpdatePlayerFrameOptions(option)
             reticleover.debuffs:SetAnchor(TOP, reticleover.buffAnchor, BOTTOM, 0, 2)
         end
     end
-    LUIE.UnitFrames.CustomFramesResetPosition(true)
-    LUIE.UnitFrames.CustomFramesSetupAlternative()
-    LUIE.UnitFrames.CustomFramesApplyLayoutPlayer()
+    UF.CustomFramesResetPosition(true)
+    UF.CustomFramesSetupAlternative()
+    UF.CustomFramesApplyLayoutPlayer()
 end
 
 -- Updates single attribute.
@@ -3118,7 +3118,7 @@ function UF.OnBossesChanged( eventCode )
     end
 end
 
-function LUIE.UnitFrames.ResetCompassBarMenu()
+function UF.ResetCompassBarMenu()
     if UF.SV.DefaultFramesNewBoss == 2 then
         for i = 1, 6 do
             local unitTag = "boss" .. i
