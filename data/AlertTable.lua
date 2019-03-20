@@ -1,10 +1,13 @@
+------------------
+-- AlertTable namespace
+LUIE.AlertTable = {}
+
 -- Performance Enhancement
 local U = LUIE.UnitNames
 local A = LUIE.GetAbility()
 
-LUIE.AlertTable = {
-
--- PRIORITY NOTES:
+local AlertTable = {
+    -- PRIORITY NOTES:
     -- 1 = VMA/Trial/Dungeon
     -- 2 = ELITE NPC/QUEST BOSS
     -- 3 = Normal NPC
@@ -559,8 +562,8 @@ LUIE.AlertTable = {
     --------------------------------------------------
 
     -- MSQ Tutorial (Soul Shriven in Coldharbour)
-   -- [61748] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 1}, -- Heavy Attack (Tutorial) -- Default game tutorials display regardless
-   -- [61916] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 1}, -- Heat Wave (Tutorial) -- Default game tutorials display regardless
+    -- [61748] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 1}, -- Heavy Attack (Tutorial) -- Default game tutorials display regardless
+    -- [61916] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 1}, -- Heat Wave (Tutorial) -- Default game tutorials display regardless
     [63269] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Heat Wave (Tutorial)
     [63737] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Tutorial)
     [63684] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Uppercut (Tutorial)
@@ -937,24 +940,20 @@ LUIE.AlertTable = {
     [109837] = { interrupt = true, priority = 1,  result = ACTION_RESULT_BEGIN, eventdetect = true, notDirect = true }, -- Frenzied Pummeling (Icestalker)
     [109806] = { block = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Frozen Aura (Icestalker)
     [83430] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Skeletal Smash (Ice Wraith)
-
 }
-
 
 --[[
 
 -- Add IF needed for custom exploit messages
-
 E.CombatAlertExploit = {
-
-[45902] = true
-
+    [45902] = true
 }
 ]]--
 
 --[[ NOTES
-
 63269 - Remove block + add avoid if ever corrected!
 
-
 ]]--
+
+-- Export string data to global namespace
+LUIE.AlertTable = AlertTable

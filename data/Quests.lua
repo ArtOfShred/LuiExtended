@@ -7,8 +7,7 @@ local Q = LUIE.Quests
 
 -- List of Quest Items to ignore when Looted (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
 Q.QuestItemHideLoot = {
-
-        -- Seasonal Quests
+     -- Seasonal Quests
     [6013] = true, -- Soiled Napkin (Stonetooth Bash)
     [5918] = true, -- Crow Caller (The Witchmother's Bargain)
 
@@ -62,12 +61,10 @@ Q.QuestItemHideLoot = {
     [4442] = true, -- Sigil Geode (Eyes of Azura)
     [3597] = true, -- Rahkaz's Blade (The Enemy Within)
     [4577] = true, -- Dull Crystal Shard (Light in the Darkness)
-
 }
 
 -- List of Quest Items to ignore when Removed (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
 Q.QuestItemHideRemove = {
-
     -- Seasonal Quests
     [6012] = true, -- Soiled Napkin (Stonetooth Bash)
 
@@ -131,14 +128,11 @@ Q.QuestItemHideRemove = {
     [3597] = true, -- Rahkaz's Blade (The Enemy Within)
     [3596] = true, -- Knife (The Enemy Within)
     [4576] = true, -- Dull Crystal Shard (Light in the Darkness)
-
 }
 
 -- Limit the maximum number of quantity of a quest item that can be added.
 Q.QuestItemMaxQuantityAdd = {
-
     [3518] = 1, -- Welkynd Stone (Eye of the Ancients)
-
 }
 
 -- Call specific functions to add/remove table entries for funky quest items. This will trigger when a certain quest item is added.
@@ -166,7 +160,5 @@ Q.QuestItemModifyOnRemove = {
 -- TODO: Find a way to extend this to the quest log text
 -- Replace the objective update text of a certain quest. Used to fix capitalization/punctuation errors. Matches string. Only works for EN.
 Q.QuestAdvancedOverride = {
-
     ['Tell Chief Dushkul that Gargak is dead'] = 'Tell Chief Dushkul that Gargak is Dead',
-
 }

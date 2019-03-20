@@ -1,4 +1,8 @@
-LUIE.CombatTextConstants = {
+------------------
+-- CombatTextConstants namespace
+LUIE.CombatTextConstants = {}
+
+local CombatTextConstants = {
     -- Damage & Healing
     isDamage = {
         [ACTION_RESULT_DAMAGE]              = true,
@@ -72,7 +76,7 @@ LUIE.CombatTextConstants = {
         [ACTION_RESULT_INTERRUPT]           = true,
     },
     -- Crowd Control
-    -- WHAT IS ACTION RESULT FOR SNARE AND IMMOBILIZE?? ROOTED DOES NOT WORK
+    -- TODO: WHAT IS ACTION RESULT FOR SNARE AND IMMOBILIZE?? ROOTED DOES NOT WORK
     isDisoriented = {
         [ACTION_RESULT_DISORIENTED]         = true,
     },
@@ -166,3 +170,6 @@ LUIE.CombatTextConstants = {
     directionType                   = { "up", "down" },
     iconSide                        = { "none", "left", "right"},
 }
+
+-- Export string data to global namespace
+LUIE.CombatTextConstants = CombatTextConstants
