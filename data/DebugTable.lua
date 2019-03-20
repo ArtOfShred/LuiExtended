@@ -12097,6 +12097,9 @@ debugAuras = {
             [49138] = true, -- Oblivion Portal
             [49137] = true, -- Oblivion Portal
 
+            [85237] = true, -- Notes (Scroll of Glorious Battle)
+            [70113] = true, -- Soul Scream (Scroll of Glorious Battle)
+
             -- City of Ash II
             [85930] = true, -- Teleport
             [56243] = true, -- Jump

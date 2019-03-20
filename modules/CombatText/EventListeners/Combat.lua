@@ -209,6 +209,9 @@ function CTL:OnCombatIn(...)
             if E.MapDataOverride[abilityId][index].name then
                 abilityName = E.MapDataOverride[abilityId][index].name
             end
+            if E.MapDataOverride[abilityId][index].icon then
+                formattedIcon = zo_iconFormat(E.MapDataOverride[abilityId][index].icon, 32, 32)
+            end
         end
     end
 

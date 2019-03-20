@@ -1051,6 +1051,7 @@ local AbilityTables = {
     Skill_Palolels_Rage               = 39577,
     Skill_Prismatic_Light             = 25981,
     Skill_Quick_Strike                = 10618,
+    Skill_Quick_Shot                  = 12437,
     Skill_Flame_Blossom               = GetString(SI_LUIE_SKILL_FLAME_BLOSSOM),
 
     -- Mages Guild
@@ -1126,7 +1127,8 @@ local AbilityTables = {
     Skill_Levitate                    = 28570,
 
     -- Elden Hollow I
-    Skill_Executioners_Strike         = 16834,
+    Skill_Crushing_Blow               = 33189,
+    Skill_Measured_Uppercut           = 34607,
     Skill_Heal_Spores                 = GetString(SI_LUIE_SKILL_HEAL_SPORES),
     Skill_Summon_Saplings             = GetString(SI_LUIE_SKILL_SUMMON_STRANGLER_SAPLINGS),
 

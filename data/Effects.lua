@@ -9036,7 +9036,7 @@ E.EffectOverride = {
     [19027] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_dead_zone.dds', tooltip = T.Generic_AOE_Magic_1_5_Sec, groundLabel = true }, -- Dead Zone (Skeletal Destroyer)
 
     [18961] = { hide = true }, -- Ghostly Summon (Generic Invisible Target)
-    [18798] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Slash (High Kinlord Rilis)
+    [18798] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Slash (High Kinlord Rilis)
     [33189] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds' }, -- Crushing Blow (High Kinlord Rilis)
     [33190] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds', hide = true }, -- Crushing Blow (High Kinlord Rilis)
     [33191] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Crushing Blow (High Kinlord Rilis)
@@ -9066,7 +9066,7 @@ E.EffectOverride = {
     [28904] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_gtaoe.dds', name = A.Skill_Pool_of_Fire, groundLabel = true, tooltip = T.Generic_AOE_Fire_1_5_Sec }, -- Immolating Bite (Maw of the Infernal)
     [47127] = { hide = true }, -- Nocom
 
-    [48281] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Slash (Keeper Voranil)
+    [48281] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Slash (Keeper Voranil)
     [27826] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds' }, -- Crushing Blow (Keeper Voranil)
     [27827] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds', hide = true }, -- Crushing Blow (Keeper Voranil)
     [27828] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds', tooltip = T.Generic_Knockback }, -- Crushing Blow (Keeper Voranil)
@@ -9084,7 +9084,7 @@ E.EffectOverride = {
     [36631] = { hide = true }, -- ExitPortal (Keeper Imiril)
 
     [31727] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_daedric_chaos.dds', groundLabel = true, tooltip = T.Generic_AOE_Magic_1_Sec }, -- Corruption (Daedric Chaos)
-    [28916] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Slash (Keeper Imiril)
+    [28916] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Slash (Keeper Imiril)
     [29143] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_magic_aoe.dds' }, -- Daedric Blast (Keeper Imiril)
 
     [64526] = { hide = true }, -- Shatter
@@ -9118,10 +9118,10 @@ E.EffectOverride = {
     [36030] = { hide = true }, -- Red Sigil (High Kinlord Rilis)
 
     -- Elden Hollow I
-    [14905] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Hacking Strike (Akash gra-Mal)
-    [16834] = { icon = 'esoui/art/icons/ability_warrior_016.dds' }, -- Executioner's Strike (Akash gra-Mal)
-    [25309] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Executioners_Strike, hide = true }, -- Fire Backlash (Akash gra-Mal)
-    [25310] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Executioners_Strike, tooltip = T.Generic_Knockback }, -- CON_Knockback&Knockdown (Akash gra-Mal)
+    [14905] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Hacking Strike (Akash gra-Mal)
+    [16834] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Crushing_Blow }, -- Executioner's Strike (Akash gra-Mal)
+    [25309] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Crushing_Blow, hide = true }, -- Fire Backlash (Akash gra-Mal)
+    [25310] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Crushing_Blow, tooltip = T.Generic_Knockback }, -- CON_Knockback&Knockdown (Akash gra-Mal)
     [16003] = { icon = 'esoui/art/icons/ability_warrior_004.dds' }, -- Leaping Strike (Akash gra-Mal)
     [9936] = { icon = 'esoui/art/icons/ability_warrior_031.dds' }, -- Battlecry (Akash gra-Mal)
     [44093] = { name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Battlecry (Akash gra-Mal)
@@ -9221,7 +9221,7 @@ E.EffectOverride = {
     -- City of Ash I
     [34245] = { hide = true }, -- Fireball (Invis)
 
-    [29501] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Jab (Golor the Banekin Handler)
+    [29501] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Jab (Golor the Banekin Handler)
     [31101] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_brands_cleave.dds', name = A.Skill_Steel_Cyclone }, -- Cleave (Golor the Banekin Handler)
     [25034] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds' }, -- Crushing Blow (Golor the Banekin Handler)
     [25035] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds' }, -- Crushing Blow (Golor the Banekin Handler)
@@ -9230,10 +9230,10 @@ E.EffectOverride = {
     [33612] = { hide = true }, -- Scampintro (Banekin)
 
     [34956] = { hide = true }, -- Intro (Warden of the Shrine)
-    [34589] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Light Swing (Warden of the Shrine)
-    [34607] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy_dw.dds' }, -- Measured Uppercut (Warden of the Shrine)
-    [34608] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy_dw.dds', hide = true }, -- Measured Uppercut (Warden of the Shrine)
-    [34609] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy_dw.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Measured Uppercut (Warden of the Shrine)
+    [34589] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Light Swing (Warden of the Shrine)
+    [34607] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds' }, -- Measured Uppercut (Warden of the Shrine)
+    [34608] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', hide = true }, -- Measured Uppercut (Warden of the Shrine)
+    [34609] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Measured Uppercut (Warden of the Shrine)
     [46568] = { icon = 'esoui/art/icons/ability_nightblade_008.dds', tooltip = T.Generic_Stun }, -- Teleport Strike (Warden of the Shrine)
     [34654] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_fan_of_flames.dds' }, -- Fan of Flames (Warden of the Shrine)
     [34620] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_fan_of_flames.dds' }, -- Fan of Flames (Warden of the Shrine)
@@ -9270,7 +9270,7 @@ E.EffectOverride = {
     [49138] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Oblivion_Gate, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Oblivion Portal
     [49137] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_stun_generic.dds', name = A.Skill_Oblivion_Gate }, -- Oblivion Portal
 
-    [34788] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds' }, -- Quick Dark (Razor Master Erthas)
+    [34788] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds', name = A.Skill_Quick_Shot }, -- Quick Dark (Razor Master Erthas)
     [34805] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_blazing_embers.dds', name = A.Skill_Blazing_Embers }, -- Release Flame (Razor Master Erthas)
     [34901] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_blazing_arrow.dds' }, -- Burning Embers (Razor Master Erthas)
     [34948] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_blazing_arrow.dds', name = A.Skill_Blazing_Arrow, unbreakable = 1, tooltip = T.Skill_Blazing_Arrow, internalStack = 0 }, -- Burning Embers (Razor Master Erthas)
@@ -9283,13 +9283,15 @@ E.EffectOverride = {
     [35379] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds' }, -- Flare (Flame Atronach)
     [34780] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_daedra_fa_red.dds', name = A.Skill_Summon_Flame_Atronach, hide = true }, -- Summon Flame Atranach (Razor Master Erthas)
 
+    [70113] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_headgrab.dds', name = A.Skill_Wracking_Pain, tooltip = T.Generic_Stun, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Soul Scream (Scroll of Glorious Battle)
+
     -- City of Ash II
     [53999] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_daedra_fa_red.dds', name = A.Skill_Summon_Flame_Atronach }, -- Summon (Flame Atronach)
     [54126] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_minor_wound.dds', hide = true }, -- Minor Wound (Akezel)
     [54025] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_spell_absorption.dds', tooltip = T.Skill_Spell_Absorption }, -- Spell Absorption (Spirit Mage), -- Spell Absorption (Akezel)
     [53994] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds' }, -- Focused Healing (Akezel)
     [53996] = { hide = true }, -- Health Boon (Akezel)
-    [53988] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds' }, -- Quick Draw (Marruz)
+    [53988] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds', name = A.Skill_Quick_Shot }, -- Quick Draw (Marruz)
     [54021] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_blazing_embers.dds', name = A.Skill_Blazing_Embers }, -- Release Flame (Marruz)
     [54139] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_blazing_embers.dds', unbreakable = 1, tooltip = T.Generic_Burn_1_Sec }, -- Blazing Embers (Marruz)
     [54133] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_blazing_embers.dds' }, -- Blazing Embers (Marruz)
@@ -9541,7 +9543,7 @@ E.EffectOverride = {
     [26604] = { hide = true }, -- Storm (Sudden Storm)
     [26619] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_thunderstrikes.dds', name = A.Skill_Sudden_Storm, groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Shock (Sudden Storm)
 
-    [26332] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Slash (Valaran Stormcaller)
+    [26332] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Slash (Valaran Stormcaller)
     [26370] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds' }, -- Crushing Blow (Valaran Stormcaller)
     [26371] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds', hide = true }, -- Crushing Blow (Valaran Stormcaller)
     [26372] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Crushing Blow (Valaran Stormcaller)
@@ -9615,7 +9617,7 @@ E.EffectOverride = {
     [31086] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', name = A.Skill_Bear_Trap }, -- Trap (Longclaw)
 
     [30781] = { icon = 'esoui/art/icons/ability_healer_022.dds', tooltip = T.Skill_Mirror_Ward }, -- Mirror Ward (Longclaw)
-    [30785] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds' }, -- Quick Shot (Longclaw)
+    [30785] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds', name = A.Skill_Quick_Shot }, -- Quick Shot (Longclaw)
     [30772] = { icon = 'esoui/art/icons/ability_bow_003.dds', name = A.Skill_Volley }, -- Arrow Rain (Longclaw)
     [30773] = { icon = 'esoui/art/icons/ability_bow_003.dds', name = A.Skill_Volley, groundLabel = true, tooltip = T.Generic_AOE_Physical_0_5_Sec }, -- Arrow Rain (Longclaw)
 
@@ -9688,7 +9690,7 @@ E.EffectOverride = {
     [30970] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_maul.dds', name = A.Skill_Primal_Maul, hide = true }, -- Summon Primal Spirit (Selene)
     [30969] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_maul.dds', name = A.Skill_Primal_Maul, tooltip = T.Generic_Knockback, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Summon Primal Spirit (Selene)
 
-    [30968] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Bash (Selene)
+    [30968] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Bash (Selene)
 
     [30896] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_primal_leap.dds', name = A.Skill_Primal_Leap, hide = true }, -- Summon Senche Spirit (Selene)
 
@@ -10085,7 +10087,7 @@ E.FakeExternalDebuffs = {
     [28774] = { duration = 5000 }, -- Stun (High Kinlord Rilis)
 
     -- Elden Hollow I
-    [25310] = { name = A.Skill_Executioners_Strike, duration = 2500 }, -- Leaping Strike (Akash gra-Mal)
+    [25310] = { name = A.Skill_Crushing_Blow, duration = 2500 }, -- Executioners Strike (Akash gra-Mal)
     [25348] = { duration = 6000, refreshOnly = true }, -- Necrotic Circle (Canonreeve Oraneth)
     [46800] = { duration = 1200 }, -- Necrotic Circle (Canonreeve Oraneth)
 
@@ -10650,9 +10652,19 @@ E.MapDataOverride = {
                 },
 
     [9039] =    {  -- Snare (Selene's Rose)
-                    [7] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = A.Skill_Lash, tooltip = T.Generic_Snare_35 }, -- Snare (Selene's Rose)
+                    [7] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = A.Skill_Lash, tooltip = T.Generic_Snare_35 }, -- Selene's Web
                 },
-    [33097] =   { -- Scary Immunities
-                    [576] = { hide = true }, -- Scary Immunities (Flesh Atronach)
-                }
+    [33097] =   { -- Scary Immunities (Flesh Atronach)
+                    [576] = { hide = true }, -- Spindleclutch II
+                },
+    [27826] =   { -- Crushing Blow (Yalorasse the Speaker)
+                    [11] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut }, -- Tempest Island
+                },
+    [27827] =   { -- Crushing Blow (Yalorasse the Speaker)
+                    [11] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut  }, -- Tempest Island
+                },
+    [27828] =   { -- Crushing Blow  (Yalorasse the Speaker)
+                    [11] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut }, -- Tempest Island
+                },
+
 }
