@@ -1,3 +1,5 @@
+------------------
+-- Changelog
 
 local changelogMessages = {
     "|cFFA5005.8 (Wrathstone)|r",
@@ -35,22 +37,21 @@ end
 -- Called on initialize
 function LUIE_ChangelogScreen()
     -- concat messages into one string
-    local changelogGeneral = table.concat(changelogMessages, "\n")
+    local changelog = table.concat(changelogMessages, "\n")
     -- If text start with '*' replace it with bullet texture
-    changelogGeneral = changelogGeneral:gsub("*", "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t")
+    changelog = changelog:gsub("*", "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t")
     -- Set the window title
     LUIEChangelogTitle:SetText(zo_strformat("<<1>> Changelog", LUIE.name))
     -- Set the about string
     LUIEChangelogAbout:SetText(zo_strformat("v<<1>> by <<2>>", LUIE.version, LUIE.author))
     -- Set the changelog text
-    LUIEChangelogText:SetText(changelogGeneral)
+    LUIEChangelogText:SetText(changelog)
 
-    -- Display the changelog if version number < current version.
+    -- Display the changelog if version number < current version
     if (LUIESV.Default[GetDisplayName()]['$AccountWide'].WelcomeVersion ~= LUIE.version) then
         LUIEChangelog:SetHidden(false)
     end
 
-    -- Set version to current version.
+    -- Set version to current version
     LUIESV.Default[GetDisplayName()]['$AccountWide'].WelcomeVersion = LUIE.version
-
 end
