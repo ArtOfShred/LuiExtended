@@ -626,6 +626,7 @@ local g_stopDisplaySpam             = false         -- Toggled on to stop spam d
 local g_questIndex                  = { }           -- Index of all current quests. Allows us to read the index so that all quest notifications can use the difficulty icon.
 local g_questItemAdded              = { }           -- Hold index of Quest items that are added - Prevents pointless and annoying messages from appearing when the same quest item is immediately added and removed when quest updates.
 local g_questItemRemoved            = { }           -- Hold index of Quest items that are removed - Prevents pointless and annoying messages from appearing when the same quest item is immediately added and removed when quest updates.
+local g_loginHideQuestLoot          = true          -- Set to true onPlayerActivated and toggled after 1 sec
 
 -- Trade
 local g_tradeTarget                 = ""            -- Saves name of target player being traded with.
@@ -3276,7 +3277,7 @@ function CA.ResolveQuestItemChange()
                 g_questItemRemoved[itemId] = true
                 callLater(function() g_questItemRemoved[itemId] = false end, 100)
 
-                if not Q.QuestItemHideRemove[itemId] then
+                if not Q.QuestItemHideRemove[itemId] and not g_loginHideQuestLoot then
                     if CA.SV.Inventory.LootQuestRemove then
                         if CA.SV.Currency.CurrencyContextColor then
                             color = CurrencyDownColorize:ToHex()
@@ -3321,7 +3322,7 @@ function CA.ResolveQuestItemChange()
                 g_questItemAdded[itemId] = true
                 callLater(function() g_questItemAdded[itemId] = false end, 100)
 
-                if not Q.QuestItemHideLoot[itemId] then
+                if not Q.QuestItemHideLoot[itemId] and not g_loginHideQuestLoot then
                     if CA.SV.Inventory.LootQuestAdd then
                         if CA.SV.Currency.CurrencyContextColor then
                             color = CurrencyUpColorize:ToHex()
@@ -5205,6 +5206,8 @@ function CA.OnPlayerActivated(eventCode, initial)
         local tradeName = CA.ResolveNameLink(characterName, displayName)
         g_tradeTarget = ZO_SELECTED_TEXT:Colorize(strformat(SI_UNIT_NAME, tradeName))
     end
+
+    callLater(function() g_loginHideQuestLoot = false end, 1000)
 
     if CA.SV.Notify.DisguiseCA or CA.SV.Notify.DisguiseCSA or CA.SV.Notify.DisguiseAlert or CA.SV.Notify.DisguiseWarnCA or CA.SV.Notify.DisguiseWarnCSA or CA.SV.Notify.DisguiseWarnAlert then
         if g_disguiseState == 0 then
