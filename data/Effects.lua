@@ -23,7 +23,6 @@ E.IsWeaponAttack = {
 -- List of abilities flagged as a Toggle. For the purpose of adding a "T" label to the buff icon.
 --------------------------------------------------------------------------------------------------------------------------------
 E.IsToggle = {
-
     -- Innate
     [20299] = true, -- Sneak (Innate) -- Used for hidden
     [20301] = true, -- Crouch (Innate) -- Used for invisibility
@@ -139,7 +138,6 @@ E.IsBoon = {
 
 -- Cyrodiil passives
 E.IsCyrodiil = {
-
     [39671] = true, -- Emperorship Alliance Bonus
     [11346] = true, -- Home Keep Bonus -- CONFIRM
     [11341] = true, -- Enemy Keep Bonus I
@@ -294,7 +292,6 @@ E.IsGrimFocusOverride = {
 -- Ground Mine Auras tracking
 --------------------------------------------------------------------------------------------------------------------------------
 E.IsGroundMineAura = {
-
     -- Nightblade
     [37475] = true, -- Manifestation of Terror (Nightblade)
 
@@ -313,14 +310,12 @@ E.IsGroundMineAura = {
     [31632] = true, -- Fire Rune (Fire Rune)
     [40470] = true, -- Volcanic Rune (Volcanic Rune)
     [40465] = true, -- Scalding Rune (Scalding Rune)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Abilities flagged as Ground Mines that need a stack counter, when an EFFECT_RESULT_FADED event occurs for these buffs decrement by 1 instead of being removed
 --------------------------------------------------------------------------------------------------------------------------------
 E.IsGroundMineStack = {
-
     -- Sets
     [75930] = true, -- Deadric Mines (Eternal Hunt)
 
@@ -328,14 +323,12 @@ E.IsGroundMineStack = {
     [86175] = true, -- Frozen Gate (Frozen Gate)
     [86179] = true, -- Frozen Device (Frozen Device)
     [86183] = true, -- Frozen Retreat (Frozen Retreat)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Linked id's for tracking ground mine explosions - These id's all all merged into one and considered for the purpose of reducing the stack count of certain mine abilities
 --------------------------------------------------------------------------------------------------------------------------------
 E.LinkedGroundMine = {
-
     [76631] = 37475, -- Manifestation of Terror (Nightblade)
 
     [24832] = 24830, -- Daedric Mines (Daedric Mines)
@@ -348,14 +341,12 @@ E.LinkedGroundMine = {
     [25159] = 25158, -- Daedric Mines (Daedric Minefield)
     [25160] = 25158, -- Daedric Mines (Daedric Minefield)
     [25162] = 25158, -- Daedric Mines (Daedric Minefield)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - useful for some odd effects that get applied by the player or a player pet but aren't actually sourced from them on the API
 --------------------------------------------------------------------------------------------------------------------------------
 E.DebuffDisplayOverrideId = {
-
     ----------------------------------------------------------------
     -- INNATE / SHARED ---------------------------------------------
     ----------------------------------------------------------------
@@ -408,7 +399,6 @@ E.DebuffDisplayOverrideId = {
     [89127] = true, -- Summon Beast (Spriggan)
     [42794] = true, -- Strangler: (Strangler)
     [48294] = true, -- Consuming Omen (Troll - Ranged)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -445,7 +435,6 @@ E.EffectHideWhenDead = {
 -- Adds this aura to a list of fake Ground auras to display when the player casts them
 --------------------------------------------------------------------------------------------------------------------------------
 E.EffectGroundDisplay = {
-
     -- Required:
         -- buff, debuff, ground = true/false -- Choose whether this effect shows up in any of these containers
     -- Optional:
@@ -655,7 +644,6 @@ E.EffectGroundDisplay = {
 -- This will create an effect on the player or target when X skill is detected as active. SCB creates the buff by the name listed here, this way if 3 or 4 effects all need to display for 1 ability, it will only show the one aura.
 --------------------------------------------------------------------------------------------------------------------------------
 E.EffectCreateSkillAura = {
-
     -- Required:
         -- abilityId = #
     -- Optional:
@@ -786,7 +774,6 @@ E.EffectCreateSkillAura = {
     [50187] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enrage (Mantikora)
     [56689] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enraged (Mantikora)
     [72725] = { alwaysShow = true, removeOnEnd = true, abilityId = 28301 }, -- Fool Me Once (Sentinel) (TG DLC)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -846,7 +833,6 @@ end
 -- Replaces the tracking ID on an ability bar ability with a different id for the purpose of tracking effect duration on Bar Highlight tracker.
 --------------------------------------------------------------------------------------------------------------------------------
 E.BarHighlightOverride = {
-
     -- Optional
         -- newId = # -- Replace ID
         -- showFakeAura = true -- USE EVENT_COMBAT_EVENT instead - allows auras to display even if they weren't applied. Should be used with major/minor effects.
@@ -1256,14 +1242,12 @@ E.BarHighlightOverride = {
     [61519] = { newId = 61522 }, -- Lingering Flare --> Nova
     [61524] = { newId = 61528 }, -- Scorching Flare
     [40237] = { newId = 40238 }, -- Reviving Barrier --> Reviving Barrier Heal
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Data for icon & description to show for the fake Disguise buff applied to the player.
 --------------------------------------------------------------------------------------------------------------------------------
 E.DisguiseIcons = {
-
     -- Required:
         -- icon = '' -- Icon to use
         -- description = '' -- String to use for description when equipped (used by Chat Announcements)
@@ -1321,7 +1305,6 @@ E.AssistantIcons = {
 -- When a target name matches a string here, add id's in the table with the name and icon specified. We use this primarily to add CC Immunity buffs for bosses.
 --------------------------------------------------------------------------------------------------------------------------------
 E.AddNameAura = {
-
     -- World Bosses
     ['Norendo'] = { [1] = { id = 33097 } }, -- Auridon (Soulfire Plateau)
     ['Eraman'] = { [1] = { id = 33097 } }, -- Auridon (Soulfire Plateau)
@@ -1350,7 +1333,6 @@ E.AddNameAura = {
     ['Neiral'] = { [1] = { id = 33097 } }, -- Greenshade (Maormer Camp View)
     ['Hetsha'] = { [1] = { id = 33097 } }, -- Greenshade (Maormer Camp View)
     ['Jahlasri'] = { [1] = { id = 33097 } }, -- Greenshade (Maormer Camp View)
-
 
     -- Public Dungeon
     ['Nitch'] = { [1] = { id = 33097 } }, -- Auridon (Toothmaul Gully)
@@ -1551,7 +1533,6 @@ E.AddNameAura = {
     -- Frostvault
     [U.NPC_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
     [U.Boss_Icestalker] = { [1] = { id = 33097 } }, -- Icestalker
-
 }
 
 
@@ -1576,7 +1557,6 @@ E.SynergyNameOverride = {
 -- When a bar ability proc with a matching id appears, change the icon.
 --------------------------------------------------------------------------------------------------------------------------------
 E.BarIdOverride = {
-
     -- Dragonknight
     [20824] = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', -- Power Lash (Flame Lash)
 
@@ -1594,19 +1574,16 @@ E.BarIdOverride = {
     [78338] = 'esoui/art/icons/ability_ava_guard.dds', -- Guard (Guard)
     [81415] = 'esoui/art/icons/ability_ava_mystic_guard.dds', -- Mystic Guard (Mystic Guard)
     [81420] = 'esoui/art/icons/ability_ava_stalwart_guard.dds', -- Stalwart Guard (Stalwart Guard)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- When a bar ability proc with a matching id appears, display the toggle highlight
 --------------------------------------------------------------------------------------------------------------------------------
 E.IsAbilityActiveHighlight = {
-
     -- Support
     [78338] = true, -- Guard (Guard)
     [81415] = true, -- Mystic Guard (Mystic Guard)
     [81420] = true, -- Stalwart Guard (Stalwart Guard)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1860,7 +1837,6 @@ E.EffectOverrideByName = {
 -- removePlayer = true -- If for some reason a damage effect is sourced from the player, set it to not be flagged as isPlayer == true in order to stop AVA rank, etc from showing.
 --------------------------------------------------------------------------------------------------------------------------------
 E.EffectSourceOverride = {
-
     -- PLAYER ABILITIES
     [71678] = { pet = 'Morkuldin' }, -- Light Attack {Morkuldin} -- TODO: Localize
     [71679] = { pet = 'Morkuldin' }, -- Cleave {Morkuldin} -- TODO: Localize
@@ -1932,29 +1908,24 @@ E.EffectSourceOverride = {
 -- If one of these ability Names is applied then we set the buffSlot for ON_EFFECT_CHANGED to be a single name identifier to prevent more than one aura from appearing. Only works with unlimited duration or equal duration effects.
 --------------------------------------------------------------------------------------------------------------------------------
 E.EffectMergeName = {
-
     [A.Skill_Overcharge] = "MERGED_EFFECT_OVERCHARGE",
     [A.Skill_Minor_Slayer] = "MERGED_EFFECT_SLAYER",
     [A.Skill_Minor_Aegis] = "MERGED_EFFECT_AEGIS",
     [A.Skill_Boulder_Toss] = "MERGED_EFFECT_BOULDER_TOSS",
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- If one of these id's is applied then we set the buffSlot for ON_EFFECT_CHANGED to be a single name identifier to prevent more than one aura from appearing. Only works with unlimited duration or equal duration effects.
 --------------------------------------------------------------------------------------------------------------------------------
 E.EffectMergeId = {
-
     [21314] = "MERGED_EFFECT_SPIKE_TRAP_QUEST", -- Trap Sprung! (Auridon - An Act of Kindness)
     [47768] = "MERGED_EFFECT_CC_IMMUNITY_QUEST", -- RobS Immunities 6 Sec (Grahtwood - A Lasting Winter)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Hide this ID from appearing in any way on Combat Cloud Text - Useful for spammy ids.
 --------------------------------------------------------------------------------------------------------------------------------
 E.EffectHideSCT = {
-
     -- Player - Basic
     [20301] = true, -- Crouch Drain
     [15356] = true, -- Sprint Drain
@@ -2197,14 +2168,12 @@ E.EffectHideSCT = {
 
     -- Tempest Island
     [6107] = true, -- Lightning Storm (Yalorasse the Speaker)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Hide this ID from displaying a cleanse notification on Combat Text - used to stop some spammy abilities, or abilities that cannot be cleansed from displaying a cleanse alert.
 --------------------------------------------------------------------------------------------------------------------------------
 E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMBAT CLOUD ONLY!!!)
-
     -- Insects
     [69392] = true, -- Vile Bite Poison (Necrotic Hoarvor)
 
@@ -2231,7 +2200,6 @@ E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMB
 
     -- Frostvault
     [117286] = true, -- Rending Bleed (Coldsnap Goblin - Shared)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2247,7 +2215,6 @@ E.ArtificialEffectOverride = {
 -- Table of NAME or ID's to add a third line to the tooltip. Any ability listed here should use its source ability as the tooltip, and this added 3 line will describe the effect. Used for major/minor effects & potions/poison primarily.
 --------------------------------------------------------------------------------------------------------------------------------
 E.TooltipNameOverride = {
-
     -- Major/Minor Buffs
     [A.Skill_Minor_Resolve]         = T.Skill_Minor_Resolve,
     [A.Skill_Major_Resolve]         = T.Skill_Major_Resolve,
@@ -2385,7 +2352,6 @@ E.TooltipNameOverride = {
 
     -- NPC Abilities
     [85362]                         = T.Skill_Major_Fracture_NPC, -- Major Fracture (Peasant)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2393,21 +2359,19 @@ E.TooltipNameOverride = {
 -- The most noteworthy case of this is Mundus Boons, where there is a tooltip but no description. We want to display a generic tooltip describing the effect if mousing over another player - but display the default value with accurate number for self.
 --------------------------------------------------------------------------------------------------------------------------------
 E.TooltipUseDefault = {
-
-[13940] = true, -- Boon: The Warrior
-[13943] = true, -- Boon: The Mage
-[13974] = true, -- Boon: The Serpent
-[13975] = true, -- Boon: The Thief
-[13976] = true, -- Boon: The Lady
-[13977] = true, -- Boon: The Steed
-[13978] = true, -- Boon: The Lord
-[13979] = true, -- Boon: The Apprentice
-[13980] = true, -- Boon: The Ritual
-[13981] = true, -- Boon: The Lover
-[13982] = true, -- Boon: The Atronach
-[13984] = true, -- Boon: The Shadow
-[13985] = true, -- Boon: The Tower
-
+    [13940] = true, -- Boon: The Warrior
+    [13943] = true, -- Boon: The Mage
+    [13974] = true, -- Boon: The Serpent
+    [13975] = true, -- Boon: The Thief
+    [13976] = true, -- Boon: The Lady
+    [13977] = true, -- Boon: The Steed
+    [13978] = true, -- Boon: The Lord
+    [13979] = true, -- Boon: The Apprentice
+    [13980] = true, -- Boon: The Ritual
+    [13981] = true, -- Boon: The Lover
+    [13982] = true, -- Boon: The Atronach
+    [13984] = true, -- Boon: The Shadow
+    [13985] = true, -- Boon: The Tower
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -9918,17 +9882,14 @@ E.EffectOverride = {
     [83453] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds', tooltip = T.Generic_Knockback }, -- Skeletal Smash (Ice Wraith)
 
     [116683] = { hide = true }, -- U23-DUN1 B N Intro (Skeevaton)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- If this abilityId is up, then pull the duration from another active ability Id to set its duration
 --------------------------------------------------------------------------------------------------------------------------------
 E.EffectPullDuration = {
-
     [107632] = 107629, -- Major Resolve --> Mend Spirit (Mend Spirit)
     [107631] = 107629, -- Major Ward --> Mend Spirit (Mend Spirit)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -9948,7 +9909,6 @@ E.EffectPullDuration = {
 -- Fake Buffs applied onto the player by NPCs or Events (Friendly)
 --------------------------------------------------------------------------------------------------------------------------------
 E.FakeExternalBuffs = {
-
     -- Nightblade
     [64006] = { duration = 2000, overrideDuration = true }, -- Refreshing Path (Refreshing Path)
 
@@ -9965,14 +9925,12 @@ E.FakeExternalBuffs = {
     -- Elden Root II
     [32655] = { duration = 0 }, -- Fortification (Fortified Guardian)
     [32614] = { duration = 0 }, -- Empowered (Mystic Guardian)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
  -- Fake Debuffs applied onto the player by NPCs or Events (Hostile)
 --------------------------------------------------------------------------------------------------------------------------------
 E.FakeExternalDebuffs = {
-
     -- Nightblade
     [36964] = { duration = 1500 }, -- Crippling Grasp (Crippling Grasp)
 
@@ -10184,7 +10142,6 @@ E.FakeExternalDebuffs = {
     -- Frostvault
     [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
     [109808] = { duration = 0 }, -- Frostbite (Icestalker)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -10303,9 +10260,7 @@ E.FakePlayerBuffs = {
 -- TODO: Fake buffs applied onto a target by the player
 --------------------------------------------------------------------------------------------------------------------------------
 E.FakePlayerExternalBuffs = {
-
-
-
+    -- TODO
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -10431,7 +10386,6 @@ E.FakeStagger = {
 -- Fake Ground Damaging Effect Auras - We use EffectOverride to pull information for these unlike the other tables above.
 --------------------------------------------------------------------------------------------------------------------------------
 E.AddGroundDamageAura = {
-
     --------------------
     -- PLAYER
     --------------------
@@ -10694,7 +10648,6 @@ E.AddGroundDamageAura = {
 -- When GetCurrentMapZoneIndex() matches this filter, customize the ability based off this criteria.
 --------------------------------------------------------------------------------------------------------------------------------
 E.MapDataOverride = {
-
     [11338] =   { -- In Lava
                     [608] = { name = A.Skill_Fire, icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds' }, -- Vvardenfell Tutorial Area
                 },
@@ -10705,5 +10658,4 @@ E.MapDataOverride = {
     [33097] =   { -- Scary Immunities
                     [576] = { hide = true }, -- Scary Immunities (Flesh Atronach)
                 }
-
 }
