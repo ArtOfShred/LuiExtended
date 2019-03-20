@@ -1,3 +1,28 @@
+### Version 5.8.1
+
+General
+- Added updated auras for more dungeons - Elden Hollow II, COA I & II, Tempest Island, Selene's Web, and Spindleclutch I & II and updated a few various icons for enemy abilities.
+- Fixed a bug where LUIE was causing Guild Trade search history to not display correctly, thanks to scorpius2k1 for discovering the source of the issue.
+- Updated the Changelog to no longer use LibMsgWin, it now uses much simpler and clean xml code to generate the log, thanks to psypanda.
+
+Buffs & Debuffs
+- Buff sorting updated - Now buffs will sort Toggle > Ground/Unlimited Duration > others and those will all sort alphabetically relative to their categories.
+- Lots of various table cleanup and minor optimization.
+
+Chat Announcements
+- Fixed an error that could occur when crafting items when switching between crafting tabs with items queued in Multicraft or with other addons like Dolgubon's Lazy Writ Crafter. Note the chat log output may not be correct when this happens - but it should no longer cause a UI error.
+- Fixed an issue where the Quest Items in your inventory would display [Received] messages when you log into a character for the first time. While the UI does send the events for this, LUIE just ignores it on login now.
+
+Combat Text
+- Updated filtering for combat alerts, there should no longer be duplicate alerts displayed from the same ability.
+- Added a new option for Alerts to display Unmitigatable Effects - was prompted to do this by a few dungeon abilities that you can't avoid.
+
+Slash Commands
+- Added new commands for /cake (/anniverary), /pie (/jester), /mead (/newlife), and /witch (/witchfest) to use the Event XP Boost mementos.
+- Added the /report 'name' command - which open the "Report a Player" window and autofills it with useful information.
+
+---
+
 ### Version 5.8.0
 
 General
