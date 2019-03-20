@@ -11,31 +11,26 @@ local CBT = LUIE.CastBarTable
 -- When a hard CC effect is successfully applied to the player, instantly stop any in progress Casts
 --------------------------------------------------------------------------------------------------------------------------------
 CBT.CastBreakingStatus = {
-
     [ACTION_RESULT_STAGGERED] = true,
     [ACTION_RESULT_STUNNED] = true,
     [ACTION_RESULT_KNOCKBACK] = true,
     [ACTION_RESULT_LEVITATED] = true,
     [ACTION_RESULT_FEARED] = true,
     [ACTION_RESULT_DISORIENTED] = true,
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- List of abilityId's that should immediately cancel the Cast Bar if detected
 --------------------------------------------------------------------------------------------------------------------------------
 CBT.CastBreakingActions = {
-
     [28549] = true, -- Roll Dodge
     [14890] = true, -- Block
     --[20309] = true, -- Hidden
     [973] = true, -- Sprint
     [33439] = true, -- Mount Sprint
-
 }
 
 CBT.BreakCastOnMove = {
-
     -- Innate
     [6811] = true, -- Recall
     [69293] = true, -- Sigil of Imperial Retreat
@@ -125,20 +120,16 @@ CBT.BreakCastOnMove = {
     [21409] = true, -- Reading... (The Serpent's Beacon)
     [21393] = true, -- Q4220 PC Chooses to Rescue
     [22931] = true, -- Freeing Spirit... (An Act of Kindness)
-
 }
 
 CBT.IgnoreCastBreakingActions = {
-
     --[21112] = true, -- Q4220 PC Forced to L0
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 --  List of abilities flagged for CombatInfo to show as a Channel on the Cast Bar
 --------------------------------------------------------------------------------------------------------------------------------
 CBT.CastChannelOverride = {
-
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
@@ -237,14 +228,12 @@ CBT.CastChannelOverride = {
     [84528] = true, -- Flame Juggling (Castle Charm Challenge)
     [84506] = true, -- Dagger Juggling (Castle Charm Challenge)
     [84533] = true, -- Sword Swallowing (Castle Charm Challenge)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 --  Duration update for any effects that are converted to casts (A lot of stun effects in PVE Quests with casting animations)
 --------------------------------------------------------------------------------------------------------------------------------
 CBT.CastDurationFix = {
-
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
@@ -356,14 +345,12 @@ CBT.CastDurationFix = {
     [84506] = 12000, -- Dagger Juggling (Castle Charm Challenge)
     [84533] = 12000, -- Sword Swallowing (Castle Charm Challenge)
     [83775] = 2000, -- Event - Q5742 WitchFest Intro (The Witchmother's Bargain)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 --  List of abilities flagged for CombatInfo to show on the Cast Bar
 --------------------------------------------------------------------------------------------------------------------------------
 CBT.IsCast = {
-
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
@@ -689,14 +676,12 @@ CBT.IsCast = {
     ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------
     ----------------------------------------------------------------
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fix for a few goofy events that channel onto the player (or just where we need it)
 --------------------------------------------------------------------------------------------------------------------------------
 CBT.CastOverride = {
-
     [4197] = true, -- Recovering (NPC Duel)
     [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
 }
@@ -713,7 +698,6 @@ CBT.MultiCast = {
 -- If one of these abilities stuns the player - we ignore the standard effect of breaking the cast bar. In some cases a cast event is also applied with a stun for certain quest events, etc.
 --------------------------------------------------------------------------------------------------------------------------------
 CBT.IgnoreCastBarStun = {
-
     -- Player
     [36434] = true, -- Mount Stun
     [74232] = true, -- Stun (Malacath's Wrathful Flame)
@@ -723,14 +707,12 @@ CBT.IgnoreCastBarStun = {
     [68938] = true, -- Phoenix (of the Phoenix)
 
     -- Quests
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Abilities flagged to break when EFFECT_RESULT_FADED is detected with the source as the player
 --------------------------------------------------------------------------------------------------------------------------------
 CBT.CastBreakOnRemoveEffect = {
-
     -- Werewolf
     [33208] = true, -- Devour (Werewolf)
 
@@ -743,10 +725,8 @@ CBT.CastBreakOnRemoveEffect = {
     [38963] = true, -- Elusive Mist (Vampire)
     [38965] = true, -- Baleful Mist (Vampire)
 
-
     -- Quests
     [39692] = true, -- Feed (Scion of the Blood Matron)
-
 }
 
 --[[
@@ -759,12 +739,10 @@ CBT.CastBreakOnRemoveEvent = {
 -- Convert a cast time ability to channeled, since our function detects Casts/Channels automatically and tries to sort them, we need to add a forced override for certain things we want to show as a channel when it makes sense
 --------------------------------------------------------------------------------------------------------------------------------
 CBT.CastChannelConvert = {
-
     -- Cyrodiil
     [12256] = true, -- Pack Siege (Siege Weapons)
 
     -- Memementos
     [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
     [92862] = true, -- Ringing Bell (Dreamer's Chime)
-
 }
