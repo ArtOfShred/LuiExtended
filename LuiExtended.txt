@@ -41,9 +41,6 @@
 # http://www.esoui.com/downloads/info56-LibMediaProvider.html
 libs/LibMediaProvider-1.0/LibMediaProvider-1.0.lua
 
-# http://www.esoui.com/downloads/info802-LibMsgWin.html
-libs/LibMsgWin-1.0/LibMsgWin-1.0.lua
-
 LuiExtended.lua
 UI.lua
 Settings.lua
