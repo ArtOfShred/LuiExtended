@@ -43,7 +43,7 @@ function CTL:OnPlayerActivated()
     end
 end
 
-function CTL.ProcessAlert(self, abilityId, unitName)
+function CTL:ProcessAlert(abilityId, unitName)
 	local S = LUIE.CombatText.SV
 	
 		-- Just in case
@@ -180,7 +180,6 @@ function CTL.ProcessAlert(self, abilityId, unitName)
 		end
 
 end
-
 
 function CTL:EffectChanged(...)
     local changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer = ...
