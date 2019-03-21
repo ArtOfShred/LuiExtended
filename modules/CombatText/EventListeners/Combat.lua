@@ -44,26 +44,26 @@ function CTL:OnPlayerActivated()
 end
 
 function CTL:ProcessAlert(abilityId, unitName)
-	local S = LUIE.CombatText.SV
-	
-		-- Just in case
-		if not AlertT[abilityId] then return end
-		-- Ignore this event if we are on refire delay (whether from delay input in the table or from a "bad" event processing)
-		if refireDelay[abilityId] then return end
-		
-		-- Setup refire delay
-		if AlertT[abilityId].refire then
+    local S = LUIE.CombatText.SV
+
+        -- Just in case
+        if not AlertT[abilityId] then return end
+        -- Ignore this event if we are on refire delay (whether from delay input in the table or from a "bad" event processing)
+        if refireDelay[abilityId] then return end
+
+        -- Setup refire delay
+        if AlertT[abilityId].refire then
             refireDelay[abilityId] = true
             callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
         end
 
-		-- Get Ability Name & Icon
-		local abilityName = GetAbilityName(abilityId)
-		local abilityIcon = GetAbilityIcon(abilityId)
-		local formattedIcon
-		unitName = zo_strformat("<<t:1>>", unitName)
+        -- Get Ability Name & Icon
+        local abilityName = GetAbilityName(abilityId)
+        local abilityIcon = GetAbilityIcon(abilityId)
+        local formattedIcon
+        unitName = zo_strformat("<<t:1>>", unitName)
 
-		-- Handle effects that override by UnitName
+        -- Handle effects that override by UnitName
         if E.EffectOverrideByName[abilityId] then
             if E.EffectOverrideByName[abilityId][unitName] then
                 if E.EffectOverrideByName[abilityId][unitName].icon then
@@ -74,22 +74,22 @@ function CTL:ProcessAlert(abilityId, unitName)
                 end
             end
         end
-		
-		-- Handle effects that override by ZoneId
-		if E.MapDataOverride[abilityId] then
-			local index = GetCurrentMapZoneIndex()
-			if E.MapDataOverride[abilityId][index] then
-				if E.MapDataOverride[abilityId][index].name then
-					abilityName = E.MapDataOverride[abilityId][index].name
-				end
-				if E.MapDataOverride[abilityId][index].icon then
-					abilityIcon = E.MapDataOverride[abilityId][index].icon
-				end
-			end
-		end
-		
-		-- Override unitName here if we utilize a fakeName / bossName
-		if AlertT[abilityId].fakeName then
+
+        -- Handle effects that override by ZoneId
+        if E.MapDataOverride[abilityId] then
+            local index = GetCurrentMapZoneIndex()
+            if E.MapDataOverride[abilityId][index] then
+                if E.MapDataOverride[abilityId][index].name then
+                    abilityName = E.MapDataOverride[abilityId][index].name
+                end
+                if E.MapDataOverride[abilityId][index].icon then
+                    abilityIcon = E.MapDataOverride[abilityId][index].icon
+                end
+            end
+        end
+
+        -- Override unitName here if we utilize a fakeName / bossName
+        if AlertT[abilityId].fakeName then
             unitName = AlertT[abilityId].fakeName
         else
             if AlertT[abilityId].bossName and DoesUnitExist('boss1') then
@@ -98,86 +98,86 @@ function CTL:ProcessAlert(abilityId, unitName)
                 unitName = zo_strformat("<<t:1>>", unitName)
             end
         end
-		
-		formattedIcon = zo_iconFormat(abilityIcon, 32, 32)
-		
-		local isDirect
-		local block
-		local blockstagger
-		local dodge
-		local avoid
-		local interrupt
-		local power
-		local destroy
-		local summon
-		local unmit
 
-		if AlertT[abilityId].notDirect then
-			isDirect = false
-		else
-			isDirect = true
-		end
+        formattedIcon = zo_iconFormat(abilityIcon, 32, 32)
 
-		if AlertT[abilityId].block and (S.toggles.showAlertBlock) == true then
-			if AlertT[abilityId].bs then
-				blockstagger = true
-			else
-				block = true
-			end
-		end
-		if AlertT[abilityId].dodge and (S.toggles.showAlertDodge) == true then
-			dodge = true
-		end
-		if AlertT[abilityId].avoid and (S.toggles.showAlertDodge) == true then
-			avoid = true
-		end
-		if AlertT[abilityId].interrupt and (S.toggles.showAlertInterrupt) == true then
-			interrupt = true
-		end
-		if AlertT[abilityId].unmit and (S.toggles.showAlertUnmit) == true then
-			unmit = true
-		end
-		if AlertT[abilityId].power and (S.toggles.showAlertPower) == true then
-			power = true
-		end
-		if AlertT[abilityId].destroy and (S.toggles.showAlertDestroy) == true then
-			destroy = true
-		end
-		if AlertT[abilityId].summon and (S.toggles.showAlertSummon) == true then
-			summon = true
-		end
+        local isDirect
+        local block
+        local blockstagger
+        local dodge
+        local avoid
+        local interrupt
+        local power
+        local destroy
+        local summon
+        local unmit
 
-		if S.toggles.mitigationType == "Single Line" and not (power == true or destroy == true or summon == true or unmit == true) then
-			self:TriggerEvent(C.eventType.ALERT, C.alertType.SHARED, abilityName, formattedIcon, unitName, isDirect, block, blockstagger, dodge, avoid, interrupt)
-		elseif S.toggles.mitigationType == "Multiple Lines" or (power == true or destroy == true or summon == true or unmit == true) then
-			if block and not blockstagger then
-				self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, abilityName, formattedIcon, unitName, isDirect)
-			end
-			if blockstagger then
-				self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCKSTAGGER, abilityName, formattedIcon, unitName, isDirect)
-			end
-			if dodge then
-				self:TriggerEvent(C.eventType.ALERT, C.alertType.DODGE, abilityName, formattedIcon, unitName, isDirect)
-			end
-			if avoid then
-				self:TriggerEvent(C.eventType.ALERT, C.alertType.AVOID, abilityName, formattedIcon, unitName, isDirect)
-			end
-			if interrupt then
-				self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, abilityName, formattedIcon, unitName, isDirect)
-			end
-			if unmit then
-				self:TriggerEvent(C.eventType.ALERT, C.alertType.UNMIT, abilityName, formattedIcon, unitName, isDirect)
-			end
-			if power then
-				self:TriggerEvent(C.eventType.ALERT, C.alertType.POWER, abilityName, formattedIcon, unitName, isDirect)
-			end
-			if destroy then
-				self:TriggerEvent(C.eventType.ALERT, C.alertType.DESTROY, abilityName, formattedIcon, unitName, isDirect)
-			end
-			if summon then
-				self:TriggerEvent(C.eventType.ALERT, C.alertType.SUMMON, abilityName, formattedIcon, unitName, isDirect)
-			end
-		end
+        if AlertT[abilityId].notDirect then
+            isDirect = false
+        else
+            isDirect = true
+        end
+
+        if AlertT[abilityId].block and (S.toggles.showAlertBlock) == true then
+            if AlertT[abilityId].bs then
+                blockstagger = true
+            else
+                block = true
+            end
+        end
+        if AlertT[abilityId].dodge and (S.toggles.showAlertDodge) == true then
+            dodge = true
+        end
+        if AlertT[abilityId].avoid and (S.toggles.showAlertDodge) == true then
+            avoid = true
+        end
+        if AlertT[abilityId].interrupt and (S.toggles.showAlertInterrupt) == true then
+            interrupt = true
+        end
+        if AlertT[abilityId].unmit and (S.toggles.showAlertUnmit) == true then
+            unmit = true
+        end
+        if AlertT[abilityId].power and (S.toggles.showAlertPower) == true then
+            power = true
+        end
+        if AlertT[abilityId].destroy and (S.toggles.showAlertDestroy) == true then
+            destroy = true
+        end
+        if AlertT[abilityId].summon and (S.toggles.showAlertSummon) == true then
+            summon = true
+        end
+
+        if S.toggles.mitigationType == "Single Line" and not (power == true or destroy == true or summon == true or unmit == true) then
+            self:TriggerEvent(C.eventType.ALERT, C.alertType.SHARED, abilityName, formattedIcon, unitName, isDirect, block, blockstagger, dodge, avoid, interrupt)
+        elseif S.toggles.mitigationType == "Multiple Lines" or (power == true or destroy == true or summon == true or unmit == true) then
+            if block and not blockstagger then
+                self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, abilityName, formattedIcon, unitName, isDirect)
+            end
+            if blockstagger then
+                self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCKSTAGGER, abilityName, formattedIcon, unitName, isDirect)
+            end
+            if dodge then
+                self:TriggerEvent(C.eventType.ALERT, C.alertType.DODGE, abilityName, formattedIcon, unitName, isDirect)
+            end
+            if avoid then
+                self:TriggerEvent(C.eventType.ALERT, C.alertType.AVOID, abilityName, formattedIcon, unitName, isDirect)
+            end
+            if interrupt then
+                self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, abilityName, formattedIcon, unitName, isDirect)
+            end
+            if unmit then
+                self:TriggerEvent(C.eventType.ALERT, C.alertType.UNMIT, abilityName, formattedIcon, unitName, isDirect)
+            end
+            if power then
+                self:TriggerEvent(C.eventType.ALERT, C.alertType.POWER, abilityName, formattedIcon, unitName, isDirect)
+            end
+            if destroy then
+                self:TriggerEvent(C.eventType.ALERT, C.alertType.DESTROY, abilityName, formattedIcon, unitName, isDirect)
+            end
+            if summon then
+                self:TriggerEvent(C.eventType.ALERT, C.alertType.SUMMON, abilityName, formattedIcon, unitName, isDirect)
+            end
+        end
 
 end
 
@@ -194,11 +194,11 @@ function CTL:EffectChanged(...)
         -- Don't duplicate events if the target is reticleover, we already find all named targets w/o this.
         if unitTag == 'reticleover' or unitTag == 'reticleoverplayer' then return end
         if AlertT[abilityId].noSelf and unitName == LUIE.PlayerNameFormatted then return end
-		
-		if changeType == EFFECT_RESULT_UPDATED and AlertT[abilityId].ignoreRefresh then return end
 
-		callLater(function() self:ProcessAlert(abilityId, unitName) end, 50)
-		
+        if changeType == EFFECT_RESULT_UPDATED and AlertT[abilityId].ignoreRefresh then return end
+
+        callLater(function() self:ProcessAlert(abilityId, unitName) end, 50)
+
     end
 end
 
@@ -354,12 +354,12 @@ function CTL:OnCombatIn(...)
                     if AlertT[abilityId].priority == 2 and not S.toggles.mitigationRank2 then return end
                     if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
                 end
-				
-				callLater(function() self:ProcessAlert(abilityId, sourceName) end, 50)
-				
-			end
-			
-		end
+
+                callLater(function() self:ProcessAlert(abilityId, sourceName) end, 50)
+
+            end
+
+        end
 
     end
     --[[ EXPLOIT ALERT (IF WE NEED TO ADD TO ANY OFF-BALANCE)
@@ -526,8 +526,8 @@ function CTL:OnCombatAlert(...)
                     if AlertT[abilityId].priority == 2 and not S.toggles.mitigationRank2 then return end
                     if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
                 end
-				
-				callLater(function() self:ProcessAlert(abilityId, sourceName) end, 50)
+
+                callLater(function() self:ProcessAlert(abilityId, sourceName) end, 50)
 
             end
         end
