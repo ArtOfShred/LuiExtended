@@ -1,6 +1,6 @@
 -- List of all abilityId's that have been processed so far
 -- These id's don't show up on the debug event for EVENT_COMBAT_EVENT or EVENT_EFFECT_CHANGED
-debugAuras = {
+LUIE.DebugAuras = {
 
             -------------------------------------
             -- POTIONS --------------------------
@@ -11919,11 +11919,20 @@ debugAuras = {
             [68522] = true, -- Delay Daedric Flame
             [33494] = true, -- Pulverize (Bogdan the Nightflame)
             [68523] = true, -- Delay Daedric Flame
+            [34255] = true, -- Shadow (Bogdan the Nightflame)
+            [34260] = true, -- Shadow (Bogdan the Nightflame)
+            [34263] = true, -- Summon Despair White (Bogdan the Nightflame)
+            [34367] = true, -- Shadow (Bogdan the Nightflame)
+            [48898] = true, -- Focused Healing (Bogdan the Nightflame)
+            [48901] = true, -- Incite Fear (Bogdan the Nightflame)
             [61115] = true, -- DUN-EH-Screen Shake
             [35777] = true, -- Portal Closing
             [32514] = true, -- Q4675-Portal
             [33471] = true, -- Flare
             [82789] = true, -- Flare
+
+            [34348] = true, -- Dummy (The Opus of Torment)
+            [30455] = true, -- Arachnophobia (The Opus of Torment)
 
             -- City of Ash I
             [85743] = true, -- Teleport

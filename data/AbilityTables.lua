@@ -1138,6 +1138,7 @@ local AbilityTables = {
     Skill_Siphon_Magicka              = GetString(SI_LUIE_SKILL_SIPHON_MAGICKA),
     Skill_Siphon_Stamina              = GetString(SI_LUIE_SKILL_SIPHON_STAMINA),
     Skill_Shadow_Tendril              = GetString(SI_LUIE_SKILL_SHADOW_TENDRIL),
+    Skill_Nova_Tendril                = GetString(SI_LUIE_SKILL_NOVA_TENDRIL),
 
     -- City of Ash I
     Skill_Steel_Cyclone               = 5843,

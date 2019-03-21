@@ -72,6 +72,7 @@ local UnitNames = {
     Boss_Murklight                        = 'Murklight',
     Boss_The_Shadow_Guard                 = 'The Shadow Guard',
     Boss_Bogdan_the_Nightflame            = 'Bogdan the Nightflame',
+    Boss_Nova_Tendril                     = 'Nova Tendril',
 
     -- City of Ash I
     Boss_Golor_the_Banekin_Handler        = 'Golor the Banekin Handler',

@@ -1127,6 +1127,7 @@ local strings = {
     SI_LUIE_SKILL_DARK_ROOT_STAMINA_TP =                 "Dramatically increase Max Stamina and Stamina Recovery.",
     SI_LUIE_SKILL_DARK_ROOT_MAGICKA_TP =                 "Dramatically increase Max Magicka and Magicka Recovery.",
     SI_LUIE_SKILL_SHADOW_TENDRIL =                       "Shadow Tendril",
+    SI_LUIE_SKILL_NOVA_TENDRIL =                         "Nova Tendril",
     SI_LUIE_SKILL_BLAZING_ARROW_TP =                     "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nPut out the flames by jumping in the water.",
     SI_LUIE_SKILL_BLAZING_EMBERS_TP =                    "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF5|r seconds.\n\nPut out the flames by jumping in the water.",
     SI_LUIE_SKILL_OBLIVION_GATE =                        "Oblivion Gate",

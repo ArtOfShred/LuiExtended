@@ -607,7 +607,7 @@ local resultTable = {
 -- Debug Display for Combat Events
 function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     -- Don't display if this aura is already added to the filter
-    if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then return end
+    if LUIE.DebugAuras[abilityId] and SCB.SV.ShowDebugFilter then return end
 
     local iconFormatted = iconFormat(GetAbilityIcon(abilityId), 16, 16)
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
@@ -643,7 +643,7 @@ end
 
 -- Debug Display for Effect Events
 function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then
+    if LUIE.DebugAuras[abilityId] and SCB.SV.ShowDebugFilter then
         return
     end
 

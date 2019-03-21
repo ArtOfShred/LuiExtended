@@ -1470,6 +1470,7 @@ E.AddNameAura = {
     [U.Boss_Murklight] = { [1] = { id = 33097 } }, -- Murklight
     [U.Boss_The_Shadow_Guard] = { [1] = { id = 33097 } }, -- The Shadow Guard
     [U.Boss_Bogdan_the_Nightflame] = { [1] = { id = 33097 } }, -- Bogdan the Nightflame
+    [U.Boss_Nova_Tendril] = { [1] = { id = 33097 } }, -- Nova Tendril
 
     -- City of Ash I
     [U.Boss_Golor_the_Banekin_Handler] = { [1] = { id = 33097 } }, -- Golor the Banekin Handler
@@ -9119,9 +9120,9 @@ E.EffectOverride = {
 
     -- Elden Hollow I
     [14905] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Hacking Strike (Akash gra-Mal)
-    [16834] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Crushing_Blow }, -- Executioner's Strike (Akash gra-Mal)
-    [25309] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Crushing_Blow, hide = true }, -- Fire Backlash (Akash gra-Mal)
-    [25310] = { icon = 'esoui/art/icons/ability_warrior_016.dds', name = A.Skill_Crushing_Blow, tooltip = T.Generic_Knockback }, -- CON_Knockback&Knockdown (Akash gra-Mal)
+    [16834] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds', name = A.Skill_Crushing_Blow }, -- Executioner's Strike (Akash gra-Mal)
+    [25309] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds', name = A.Skill_Crushing_Blow, hide = true }, -- Fire Backlash (Akash gra-Mal)
+    [25310] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds', name = A.Skill_Crushing_Blow, tooltip = T.Generic_Knockback }, -- CON_Knockback&Knockdown (Akash gra-Mal)
     [16003] = { icon = 'esoui/art/icons/ability_warrior_004.dds' }, -- Leaping Strike (Akash gra-Mal)
     [9936] = { icon = 'esoui/art/icons/ability_warrior_031.dds' }, -- Battlecry (Akash gra-Mal)
     [44093] = { name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Battlecry (Akash gra-Mal)
@@ -9172,7 +9173,7 @@ E.EffectOverride = {
     [34378] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds', tooltip = T.Generic_Fear }, -- Flame Geyser (Dubroze the Infestor)
 
     [40753] = { hide = true }, -- PortalIntro (Portal)
-    [32709] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_lacerate.dds' }, -- Lacerate (Dark Root)
+    [32709] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_lacerate_dark.dds' }, -- Lacerate (Dark Root)
     [32569] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vestment_of_olirime.dds', hide = true }, -- Hammering Light (Dark Root)
     [32583] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vestment_of_olirime.dds', hide = true }, -- Hammering Light (Dark Root)
     [32587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vestment_of_olirime.dds', hide = true }, -- Hammering Light (Dark Root)
@@ -9188,15 +9189,15 @@ E.EffectOverride = {
     [33533] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_gleaming_light.dds', hide = true }, -- Glaring Light (Dark Root)
     [33535] = { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_gleaming_light.dds' }, -- Brightening Light (Dark Root)
 
-    [33170] = { hide = true, icon = 'esoui/art/icons/achievement_update16_033.dds', name = A.Skill_Shadow_Tendril }, -- Hate (Shadow Tendril)
+    [33170] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_dungeon_shadow_tendril.dds', name = A.Skill_Shadow_Tendril }, -- Hate (Shadow Tendril)
     [33164] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', tooltip = T.Generic_Fear }, -- Incite Fear (Shadow Tendril)
     [47087] = { hide = true }, -- Incite Fear (Shadow Tendril)
 
     [33499] = { hide = true }, -- EHH_Boss_02_Shadow_Effect
 
-    [32811] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw.dds' }, -- Double Slam (Murklight)
-    [32817] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw.dds' }, -- Double Slam (Murklight)
-    [33052] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize.dds' }, -- Shadow Stomp (Murklight)
+    [32811] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_dark.dds' }, -- Double Slam (Murklight)
+    [32817] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_dark.dds' }, -- Double Slam (Murklight)
+    [33052] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_dark.dds' }, -- Shadow Stomp (Murklight)
     [32832] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_consuming_shadow.dds' }, -- Consuming Shadow (Murklight)
     [32972] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_consuming_shadow.dds', tooltip = T.Generic_AOE_Magic_0_5_Sec, groundLabel = true }, -- Consuming Shadow (Murklight)
     [33049] = { hide = true }, -- Eclipse (Murklight)
@@ -9217,6 +9218,10 @@ E.EffectOverride = {
     [33480] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Pulverize (Bogdan the Nightflame)
     [33492] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Pulverize (Bogdan the Nightflame)
     [33494] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_pulverize_bogdan.dds' }, -- Pulverize (Bogdan the Nightflame)
+    [34260] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_nova_tendril.dds', name = A.Skill_Nova_Tendril }, -- Shadow (Nova Tendril)
+
+    [34348] = { hide = true }, -- Dummy (The Opus of Torment)
+    [30455] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_headgrab.dds', name = A.Skill_Wracking_Pain, tooltip = T.Generic_Stun, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Arachnophobia (The Opus of Torment)
 
     -- City of Ash I
     [34245] = { hide = true }, -- Fireball (Invis)
