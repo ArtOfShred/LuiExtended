@@ -710,6 +710,7 @@ local AlertTable = {
     --------------------------------------------------
 
     -- Banished Cells I
+    [19028] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 1500 }, -- Drain Essence (Cell Haunter)
     [47587] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Tail Smite (Shadowrend)
     [21886] = { summon = true, priority = 1, auradetect = true }, -- Summon Dark Proxy (Shadowrend)
     [18772] = { interrupt = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, notDirect = true, bossName = true }, -- Feeding (Shadowrend)
