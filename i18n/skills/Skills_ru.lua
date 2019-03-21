@@ -271,7 +271,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Помечен на |cFFFFFF<<1>>|r секунд. Вы видны для противника, который пометил вас, даже если уходите в скрытность.",
     SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Обнаружен на |cFFFFFF<<1>>|r секунд. Вы не можете уйти в невидимость.",
     SI_LUIE_SKILL_GENERIC_REVEAL_NO_DUR_TP =             "Revealed. You are unable to stealth.", -- TODO: Translate
-    SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Невидим на |cFFFFFF<<1>>|r секунд. Вы сокрыты от чужих глаз.",
+    SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Invisible for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP =          "Stealth Detection increased by |cffffff20|r meters for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_GENERIC_DETECTION_NPC_TP =             "Revealing nearby stealthed and invisible enemies.", -- TODO: Translate
 
@@ -373,7 +373,7 @@ local strings = {
     SI_LUIE_SKILL_LOTUS_FAN_TP =                         "Afflicted with Magic Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.", -- TODO: Translate
     SI_LUIE_SKILL_DEATH_STROKE_DEBUFF =                  "Увеличивает урон, получаемый от Клинка ночи на |cFFFFFF20|r% в течение |cFFFFFF6|r секунд.",
     SI_LUIE_SKILL_INCAPACITATING_STRIKE =                "Increase damage taken from the Nightblade by |cFFFFFF20|r% for |cFFFFFF6|r seconds.\n\nStunned for |cFFFFFF4.5|r seconds.", -- TODO: Translate
-    SI_LUIE_SKILL_SHADOWY_DISGUISE_TP =                  "Ваша следующая атака с прямым уроном, проведённая в течение |cFFFFFF3|r секунд всегда будет Критическим ударом.",
+    SI_LUIE_SKILL_SHADOWY_DISGUISE_TP =                  "Invisible for |cFFFFFF<<2>>|r seconds.\n\nYour next direct damage attack used within |cFFFFFF<<1>>|r seconds will always be a Critical Strike.", -- TODO: Translate
     SI_LUIE_SKILL_GRIM_FOCUS_TP =                        "В течение |cFFFFFF<<1>>|r секунд, |cFFFFFF5|r ударов обычной или силовой атакой по противнику заряжают эту способность для нанесения Assassin's Will, позволяющей вам поразить одного противника из призрачного лука Магическим уроном за половину стоимости способности.",
     SI_LUIE_SKILL_RELENTLESS_FOCUS_TP =                  "В течение |cFFFFFF<<1>>|r секунд, |cFFFFFF5|r ударов обычной или силовой атакой по противнику заряжают эту способность для нанесения Assassin's Scourge, позволяющей вам поразить одного противника из призрачного лука уроном от Болезни за половину стоимости способности.",
     SI_LUIE_SKILL_PATH_OF_DARKNESS_TP =                  "You and allies in the corridor of shadows gain Major Expedition for |cFFFFFF2|r seconds every |cFFFFFF1|r second.", -- TODO: Translate

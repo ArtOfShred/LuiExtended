@@ -1571,8 +1571,15 @@ function SCB.Buff_OnMouseEnter(control)
         else
             duration = 0
         end
-        local value2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue2Mod) and (duration + E.EffectOverride[control.effectId].tooltipValue2Mod) or 0
-        value2 = math.floor((value2 * 10) + 0.5) / 10
+
+        local value2
+        if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue2Mod then
+            value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Mod * 10) + 0.5) / 10
+        elseif E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue2Id then
+            value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
+        else
+            value2 = 0
+        end
         duration = math.floor((duration * 10) + 0.5) / 10
 
         local tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2) or ""

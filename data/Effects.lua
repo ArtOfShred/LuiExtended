@@ -3969,8 +3969,8 @@ E.EffectOverride = {
     [25375] = { hide = true }, -- Shadow Cloak (Shadow Cloak)
     [25376] = { tooltip = T.Generic_Invisibility }, -- Shadow Cloak (Shadow Cloak)
     [25380] = { hide = true }, -- Shadowy Disguise (Shadowy Disguise)
-    [25381] = { tooltip = T.Generic_Invisibility }, -- Shadowy Disguise (Shadowy Disguise)
-    [62141] = { tooltip = T.Skill_Shadowy_Disguise }, -- Shadowy Disguise (Shadowy Disguise)
+    [25381] = { hide = true }, -- Shadowy Disguise (Shadowy Disguise)
+    [62141] = { tooltip = T.Skill_Shadowy_Disguise, tooltipValue2Id = 25381 }, -- Shadowy Disguise (Shadowy Disguise)
     [25377] = { tooltip = T.Generic_HoT_1Sec }, -- Dark Cloak (Dark Cloak)
     [108913] = { consolidate = true, tooltip = A.Skill_Dark_Cloak }, -- Minor Protection (Dark Cloak)
 

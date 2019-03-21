@@ -271,7 +271,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Marked for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are visible to the enemy that marked you even when in stealth.",
     SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Revealed for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are unable to stealth.",
     SI_LUIE_SKILL_GENERIC_REVEAL_NO_DUR_TP =             "Revealed. You are unable to stealth.",
-    SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Invisible for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are concealed from sight.",
+    SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Invisible for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP =          "Stealth Detection increased by |cffffff20|r meters for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DETECTION_NPC_TP =             "Revealing nearby stealthed and invisible enemies.",
 
@@ -373,7 +373,7 @@ local strings = {
     SI_LUIE_SKILL_LOTUS_FAN_TP =                         "Afflicted with Magic Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_DEATH_STROKE_DEBUFF =                  "Increase damage taken from the Nightblade by |cFFFFFF20|r% for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_INCAPACITATING_STRIKE =                "Increase damage taken from the Nightblade by |cFFFFFF20|r% for |cFFFFFF6|r seconds.\n\nStunned for |cFFFFFF4.5|r seconds.",
-    SI_LUIE_SKILL_SHADOWY_DISGUISE_TP =                  "Your next direct damage attack used within |cFFFFFF3|r seconds will always be a Critical Strike.",
+    SI_LUIE_SKILL_SHADOWY_DISGUISE_TP =                  "Invisible for |cFFFFFF<<2>>|r seconds.\n\nYour next direct damage attack used within |cFFFFFF<<1>>|r seconds will always be a Critical Strike.",
     SI_LUIE_SKILL_GRIM_FOCUS_TP =                        "For |cFFFFFF<<1>>|r seconds, hitting an enemy with |cFFFFFF5|r Light or Heavy Attacks changes this ability into Assassin's Will, allowing you to fire a single shot from a spectral bow for half cost at an enemy to deal Magic Damage.",
     SI_LUIE_SKILL_RELENTLESS_FOCUS_TP =                  "For |cFFFFFF<<1>>|r seconds, hitting an enemy with |cFFFFFF5|r Light or Heavy Attacks changes this ability into Assassin's Scourge, allowing you to fire a single shot from a spectral bow for half cost at an enemy to deal Disease Damage.",
     SI_LUIE_SKILL_PATH_OF_DARKNESS_TP =                  "You and allies in the corridor of shadows gain Major Expedition for |cFFFFFF2|r seconds every |cFFFFFF1|r second.",
