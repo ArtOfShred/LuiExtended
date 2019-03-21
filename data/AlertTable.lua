@@ -729,6 +729,8 @@ local AlertTable = {
     [28962] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Sister's Love (Sister Sihna / Sister Vera)
     [48799] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, bossName = true }, -- Daedric Tempest (High Kinlord Rilis)
     [48814] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, bossName = true }, -- Daedric Tempest (High Kinlord Rilis)
+    [28570] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Levitate (High Kinlord Rilis)
+    [28462] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Levitate (High Kinlord Rilis)
 
     -- Elden Hollow I
     [16834] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Executioner's Strike (Akash gra-Mal)

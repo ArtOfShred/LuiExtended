@@ -9094,6 +9094,9 @@ E.EffectOverride = {
 
     [35847] = { hide = true }, -- Shatter
 
+    [28570] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds' }, -- Levitate (High Kinlord Rilis)
+    [28462] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds' }, -- Levitate (High Kinlord Rilis)
+
     [28715] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_ranged.dds' }, -- Daedric Bolt (High Kinlord Rilis)
     [28772] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds', name = A.Skill_Levitate, unbreakable = 1, tooltip = T.Generic_Levitate }, -- Stun (High Kinlord Rilis)
     [28774] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds', name = A.Skill_Levitate, unbreakable = 1, tooltip = T.Generic_Levitate }, -- Stun (High Kinlord Rilis)

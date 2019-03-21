@@ -11618,6 +11618,7 @@ LUIE.DebugAuras = {
             [49191] = true, -- Dummy
             [70633] = true, -- Dummy
             [70632] = true, -- Dummy
+            [34408] = true, -- Stun
 
             [28902] = true, -- Swipe (Maw of the Infernal)
             [48271] = true, -- Dummy (Maw of the Infernal)
