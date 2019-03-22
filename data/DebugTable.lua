@@ -11436,6 +11436,108 @@ LUIE.DebugAuras = {
             -- ARENAS ---------------------------
             -------------------------------------
 
+            -- Dragonstar Arena (Shared)
+            [56970] = true, -- CLDA - Normal Arena Normalize
+            [56972] = true, -- CLDA - Normal Arena Normalize
+
+            [15686] = true, -- Generic Spawn Apply Portal
+            [56786] = true, -- CLDA - Arena 2 Bonus
+            [81744] = true, -- Portal Spawn Bonus 3.5s
+            [15687] = true, -- Generic Spawn Apply Portal
+            [15688] = true, -- Generic Spawn Apply Portal
+            [56788] = true, -- CLDA - Arena 2 Bonus
+            -- Stage 1
+            [58382] = true, -- Speedboost (Fighters Guild Swordmaster)
+            [52733] = true, -- Silver Shards (Fighters Guild Swordmaster)
+            [52735] = true, -- Silver Shards (Fighters Guild Swordmaster)
+            [75845] = true, -- Silver Shards (Fighters Guild Swordmaster)
+            [52729] = true, -- Expert Hunter (Fighters Guild Swordmaster)
+            [52731] = true, -- Expert Hunter (Fighters Guild Swordmaster)
+
+            [52738] = true, -- Ring of Preservation (Fighters Guild Gladiator)
+            [52739] = true, -- Ring of Preservation (Fighters Guild Gladiator)
+            [53236] = true, -- Ring of Preservation (Fighters Guild Gladiator)
+            [83839] = true, -- Ring of Preservation (Fighters Guild Gladiator)
+            [52744] = true, -- Ring of Preservation (Fighters Guild Gladiator)
+            [52745] = true, -- Ring of Preservation (Fighters Guild Gladiator)
+    
+            [53166] = true, -- Spike Trap (Spike Trap)
+            [53169] = true, -- Spike Trap (Spike Trap)
+            [53167] = true, -- Spike Trap Snare (Spike Trap)
+            [53168] = true, -- Trap Sprung! (Spike Trap)
+            [53172] = true, -- Spike Trap (Spike Trap)
+
+            [52746] = true, -- Flawless Dawnbreaker (Champion Marcauld)
+            [52747] = true, -- Flawless Dawnbreaker (Champion Marcauld)
+
+            [53329] = true, -- Warming Aura
+            [53328] = true, -- Warming Aura
+            [56789] = true, -- CLDA - Arena 3 Bonus
+            [56791] = true, -- CLDA - Arena 3 Bonus
+
+            [56755] = true, -- Pierce Armor (Sovngarde Brawler)
+            [56757] = true, -- Puncture (Sovngarde Brawler)
+            [56758] = true, -- Deep Slash (Sovngarde Brawler)
+            [56759] = true, -- Deep Slash (Sovngarde Brawler)
+            [56760] = true, -- Deep Slash (Sovngarde Brawler)
+
+            [53239] = true, -- CLDA - Blizzard
+            --[60421] = true, -- Biting Cold
+            [53341] = true, -- Biting Cold
+            [53342] = true, -- Biting Cold
+            [60505] = true, -- Biting Cold Fx
+
+            [53313] = true, -- Volley (Sovngarde Ranger)
+            [53340] = true, -- CLDA - Volley (Sovngarde Ranger)
+            [53314] = true, -- Flame Volley (Sovngarde Ranger)
+
+            [53264] = true, -- Rally (Sovngarde Slayer)
+            [53265] = true, -- Rally (Sovngarde Slayer)
+            [53266] = true, -- Rally (Sovngarde Slayer)
+
+            [53260] = true, -- Assassinate Bonus (Sovngarde Slayer)
+            [53259] = true, -- Reverse Slice (Sovngarde Slayer)
+            [53262] = true, -- Reverse Slice (Sovngarde Slayer)
+            [53261] = true, -- Reverse Slice (Sovngarde Slayer)
+
+            [53286] = true, -- Crushing Shock (Sovngarde Icemage)
+            [53288] = true, -- Crushing Shock (Sovngarde Icemage)
+            [53287] = true, -- Crushing Shock (Sovngarde Icemage)
+            [53289] = true, -- Force Shock (Destruction) (Sovngarde Icemage)
+            [53290] = true, -- Stagger (Sovngarde Icemage)
+            [53291] = true, -- Uber Attack (Sovngarde Icemage)
+
+            [53270] = true, -- Frost Clench (Sovngarde Icemage)
+            [53272] = true, -- Frost Clench (Sovngarde Icemage)
+            [53271] = true, -- Deep Freeze (Sovngarde Icemage)
+
+            [53274] = true, -- Unstable Wall of Frost (Sovngard Icemage)
+            [53277] = true, -- Unstable Wall (Sovngard Icemage)
+            [53276] = true, -- Unstable Wall of Frost (Sovngard Icemage)
+            [53279] = true, -- Unstable Wall of Frost (Sovngard Icemage)
+            [53280] = true, -- Unstable Wall of Frost (Sovngard Icemage)
+            [53278] = true, -- Unstable Wall of Frost (Sovngard Icemage)
+            [53275] = true, -- Unstable Wall of Frost (Sovngard Icemage)
+
+            [57022] = true, -- CLDA - Normal Arena Duo Power
+            [53240] = true, -- Brawler (Yavni Frost-Skin)
+            [53241] = true, -- Brawler (Yavni Frost-Skin)
+            [53242] = true, -- Brawler (Yavni Frost-Skin)
+            [53245] = true, -- Brawler (Yavni Frost-Skin)
+            [53243] = true, -- Brawler (Yavni Frost-Skin)
+
+            [53250] = true, -- Wrecking Blow (Yavni Frost-Skin)
+            [53251] = true, -- Wrecking Blow (Yavni Frost-Skin)
+            [53252] = true, -- Wrecking Blow (Yavni Frost-Skin)
+            [53253] = true, -- Wrecking Blow (Yavni Frost-Skin)
+            [53255] = true, -- Wrecking Blow (Yavni Frost-Skin)
+            [53256] = true, -- Wrecking Blow (Yavni Frost-Skin)
+
+            [53292] = true, -- Elemental Susceptibility (Katti Ice-Turner)
+            [53293] = true, -- Elemental Susceptibility (Katti Ice-Turner)
+            [53301] = true, -- Icy Pulsar (Katti Ice-Turner)
+            [53302] = true, -- Icy Pulsar (Katti Ice-Turner)
+
             -- Maelstrom Arena (Shared)
             [43882] = true, -- CON_Portal 3 Seconds
             [72057] = true, -- Portal Spawn

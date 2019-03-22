@@ -2469,6 +2469,20 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if SCB.SV.GroundDamageAura and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].hideGround then
             return
         end
+
+        -- Stack handling
+        if g_effectsList.player2[ abilityId ] and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
+            if E.EffectOverride[abilityId].stackMax then
+                if not (g_effectsList.player2[ abilityId ].stack == E.EffectOverride[abilityId].stackMax) then
+                    stack = g_effectsList.player2[ abilityId ].stack + E.EffectOverride[abilityId].stackAdd
+                else
+                    stack = g_effectsList.player2[ abilityId ].stack
+                end
+            else
+                stack = g_effectsList.player2[ abilityId ].stack + E.EffectOverride[abilityId].stackAdd
+            end
+        end
+
         if internalStack then
             if not InternalStackCounter[abilityId] then InternalStackCounter[abilityId] = 0 end -- Create stack if it doesn't exist
             if result == ACTION_RESULT_EFFECT_FADED then
@@ -2525,6 +2539,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
                 restart=true, iconNum=0,
                 unbreakable=unbreakable,
                 groundLabel = groundLabel,
+                stack = stack,
             }
         end
     end

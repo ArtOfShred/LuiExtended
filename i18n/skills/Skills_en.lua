@@ -1172,6 +1172,18 @@ local strings = {
     SI_LUIE_SKILL_BLOOD_POOL_1_5_TP =                    "Taking Physical Damage every |cFFFFFF1.5|r seconds. Each tick heals the Vampire.",
     SI_LUIE_SKILL_WRACKING_PAIN =                        "Wracking Pain",
     SI_LUIE_SKILL_METEORIC_STRIKE =                      "Meteoric Strike",
+
+    SI_LUIE_SKILL_EXPERT_HUNTER_NPC_TP =                 "|cFFFFFF20|r% chance on hit to deal additional Magic Damage to Undead and Daedric enemies for |cFFFFFF<<1>>|r seconds.\n\nKilling an Undead or Daedric enemy increases the duration by |cFFFFFF15|r seconds.",
+    SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_NPC_TP =          "Reduce damage taken by |cFFFFFF55|r%.",
+    
+    SI_LUIE_SKILL_PIERCE_ARMOR_NPC_TP =                  "Reduce Physical and Spell Resistance by |cFFFFFF43|r% for |cFFFFFF<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_BITING_COLD_TP =                       "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF10|r%.\n\nThis effect stacks up to |cFFFFFF8|r times, to a maximum of |cFFFFFF80|r% Movement Speed reduction.",
+
+    SI_LUIE_SKILL_FROST_CLENCH_NPC_TP =                  "Stunned for |cFFFFFF0.5|r seconds.\n\nImmobilized for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_UWOF_NPC_TP =                          "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF60|r%.\n\nThe wall explodes when it expires, dealing additional Frost Damage.",
+    SI_LUIE_SKILL_ELEMENTAL_SUSCEPTIBILITY_NPC_TP =      "Reduce Spell Resistance by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.",
+
 }
 
 local pairs = pairs

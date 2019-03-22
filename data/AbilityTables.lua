@@ -1109,6 +1109,11 @@ local AbilityTables = {
     -- ARENA EFFECTS -----------------------------------
     -- ---------------------------------------------------
 
+    -- Dragonstar Area
+    Skill_Dawnbreaker                 = 35713,
+    Skill_Flame_Volley                = 53314,
+
+    -- Maelstrom Arena
     Skill_Sigil_of_Healing            = 66920,
     Skill_Defiled_Grave               = 70893,
 

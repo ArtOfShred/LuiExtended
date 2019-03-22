@@ -1052,6 +1052,15 @@ local Tooltips = {
     -- ARENAS ------------------------------------------------------
     ----------------------------------------------------------------
 
+    -- Dragonstar Arena
+    Skill_Expert_Hunter_NPC               = GetString(SI_LUIE_SKILL_EXPERT_HUNTER_NPC_TP),
+    Skill_Circle_of_Protection_NPC        = GetString(SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_NPC_TP),
+    Skill_Pierce_Armor_NPC                = GetString(SI_LUIE_SKILL_PIERCE_ARMOR_NPC_TP),
+    Skill_Biting_Cold                     = GetString(SI_LUIE_SKILL_BITING_COLD_TP),
+    Skill_Frost_Clench_NPC                = GetString(SI_LUIE_SKILL_FROST_CLENCH_NPC_TP),
+    Skill_U_Wall_of_Frost_NPC             = GetString(SI_LUIE_SKILL_UWOF_NPC_TP),
+    Skill_Elemental_Susceptibility_NPC    = GetString(SI_LUIE_SKILL_ELEMENTAL_SUSCEPTIBILITY_NPC_TP),
+
     -- Maelstrom Arena
     Skill_Sigil_of_Haste                  = GetString(SI_LUIE_SKILL_SIGIL_OF_HASTE_TP),
     Skill_Sigil_of_Power                  = zo_strformat(GetString(SI_LUIE_SKILL_SIGIL_OF_POWER_TP), 990),

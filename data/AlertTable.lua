@@ -696,6 +696,23 @@ local AlertTable = {
     -- ARENAS ----------------------------------------
     --------------------------------------------------
 
+    -- Dragonstar Arena
+
+    -- Stage 1
+    [52729] = { power = true, priority = 1, auradetect = true }, -- Expert Hunter (Fighters Guild Swordmaster)
+    [52738] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.NPC_Fighters_Guild_Gladiator, bossName = true }, -- Ring of Preservation (Fighters Guild Gladiator)
+    [52746] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Flawless Dawnbreaker (Champion Marcauld)
+
+    -- Stage 2 - The Frozen Ring
+    [53264] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.NPC_Sovngarde_Slayer, bossMatch = U.Boss_Yavni_Frost_Skin }, -- Rally (Sovngarde Slayer)
+    [53313] = { avoid = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, fakeName = U.NPC_Sovngarde_Ranger }, -- Volley (Sovngarde Slayer)
+
+    [53286] = { interrupt = true, block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crushing Shock (Sovngarde Icemage)
+    [53274] = { avoid = true, priority = 1, auradetect = true, fakeName = U.NPC_Sovngarde_Icemage, bossMatch = U.Boss_Katti_Ice_Turner }, -- Unstable Wall of Frost (Sovngarde Icemage)
+
+    [53250] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Wrecking Blow (Yavni Frost-Skin)
+    [53301] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = U.Boss_Katti_Ice_Turner }, -- Icy Pulsar (Katti Ice-Turner)
+
     -- Maelstrom Arena
 
     [70892] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Bone Cage (Maxus the Many)

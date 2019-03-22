@@ -34,6 +34,16 @@ local UnitNames = {
     -- ARENAS ------------------------------------------------------
     ----------------------------------------------------------------
 
+    -- Dragonstar Arena
+    NPC_Fighters_Guild_Gladiator          = 'Fighters Guild Gladiator',
+    Boss_Champion_Marcauld                = 'Champion Marcauld',
+    NPC_Sovngarde_Slayer                  = 'Sovngarde Slayer',
+    NPC_Sovngarde_Icemage                 = 'Sovngarde Icemage',
+    NPC_Sovngarde_Ranger                  = 'Sovngarde Ranger',
+    Boss_Yavni_Frost_Skin                 = 'Yavni Frost-Skin',
+    Boss_Katti_Ice_Turner                 = 'Katti Ice-Turner',
+
+    -- Maelstrom Arena
     Boss_Maxus_the_Many                   = 'Maxus the Many',
 
     ----------------------------------------------------------------

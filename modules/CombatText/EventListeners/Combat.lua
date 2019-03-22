@@ -89,13 +89,22 @@ function CTL:ProcessAlert(abilityId, unitName)
     end
 
     -- Override unitName here if we utilize a fakeName / bossName
+
+    unitName = zo_strformat("<<t:1>>", unitName)
+
     if AlertT[abilityId].fakeName then
         unitName = AlertT[abilityId].fakeName
-    else
-        if AlertT[abilityId].bossName and DoesUnitExist('boss1') then
-            unitName = zo_strformat("<<t:1>>", GetUnitName('boss1'))
-        else
-            unitName = zo_strformat("<<t:1>>", unitName)
+    end
+    if AlertT[abilityId].bossName and DoesUnitExist('boss1') then
+        unitName = zo_strformat("<<t:1>>", GetUnitName('boss1'))
+    end
+
+    if AlertT[abilityId].bossMatch then
+        for i = 1, 4 do
+            local bossName = DoesUnitExist('boss' .. i) and zo_strformat("<<t:1>>", GetUnitName('boss' .. i)) or ""
+            if bossName == AlertT[abilityId].bossMatch then
+                unitName = AlertT[abilityId].bossMatch
+            end
         end
     end
 

@@ -774,6 +774,7 @@ E.EffectCreateSkillAura = {
     [50187] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enrage (Mantikora)
     [56689] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enraged (Mantikora)
     [72725] = { alwaysShow = true, removeOnEnd = true, abilityId = 28301 }, -- Fool Me Once (Sentinel) (TG DLC)
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1434,6 +1435,11 @@ E.AddNameAura = {
     --------------------------------------------
     -- ARENAS ----------------------------------
     --------------------------------------------
+
+    -- Dragonstar Arena
+    [U.Boss_Champion_Marcauld] =  { [1] = { id = 33097 } }, -- Champion Marcauld
+    [U.Boss_Yavni_Frost_Skin] =  { [1] = { id = 33097 } }, -- Yavni Frost-Skin
+    [U.Boss_Katti_Ice_Turner] =  { [1] = { id = 33097 } }, -- Katti Ice-Turner
 
     -- Maelstrom Arena
     [U.Boss_Maxus_the_Many] = { [1] = { id = 33097 } }, -- Maxus the Many
@@ -2153,6 +2159,9 @@ E.EffectHideSCT = {
     ----------------------------
     -- Arenas
     ----------------------------
+
+    -- Dragonstar Arena
+    [53252] = true, -- Wrecking Blow (Yavni Frost-Skin)
 
     -- Maelstrom Arena
     [71729] = true, -- Sigil of Defense (Sigil of Defense)
@@ -3985,9 +3994,9 @@ E.EffectOverride = {
     [64006] = { groundLabel = true, tooltip = T.Skill_Refreshing_Path_Ground }, -- Refreshing Path (Refreshing Path)
 
     -- Aspect of Terror / Mass Hysteria / Manifestation of Terror
-    [25352] = { tooltip = T.Generic_Fear_No_Dur }, -- Aspect of Terror (Aspect of Terror)
+    [25352] = { tooltip = T.Generic_Fear }, -- Aspect of Terror (Aspect of Terror)
     [76683] = { name = A.Skill_Aspect_of_Terror, tooltip = T.Generic_Snare_50 }, -- Mass Hysteria (Aspect of Terror)
-    [37470] = { tooltip = T.Generic_Fear_No_Dur }, -- Mass Hysteria (Mass Hysteria)
+    [37470] = { tooltip = T.Generic_Fear }, -- Mass Hysteria (Mass Hysteria)
     [37473] = { tooltip = T.Generic_Snare_50 }, -- Mass Hysteria (Mass Hysteria)
     [37472] = { tooltip = A.Skill_Mass_Hysteria }, -- Minor Maim (Mass Hysteria)
     [37475] = { tooltip = T.Skill_Manifestation_of_Terror }, -- Manifestation of Terror (Manifestation of Terror)
@@ -8956,6 +8965,79 @@ E.EffectOverride = {
     -- ARENA    ----------------------------------------------------
     ----------------------------------------------------------------
 
+    -- Dragonstar Arena (Stage 1)
+    [52733] = { icon = 'esoui/art/icons/ability_fightersguild_003_a.dds', hide = true }, -- Silver Shards (Fighters Guild Swordmaster) 
+    [52735] = { icon = 'esoui/art/icons/ability_fightersguild_003_a.dds', tooltip = T.Generic_Knockdown }, -- Silver Shards (Fighters Guild Swordmaster)
+    [75845] = { icon = 'esoui/art/icons/ability_fightersguild_003_a.dds' }, -- Silver Shards (Fighters Guild Swordmaster)
+
+    [52729] = { tooltip = T.Skill_Expert_Hunter_NPC }, -- Expert Hunter (Fighters Guild Swordmaster)
+
+    [52738] = { name = Skill_Circle_of_Protection }, -- Circle of Protection (Fighters Guild Gladiator)
+    [52744] = { name = Skill_Circle_of_Protection, duration = 0, groundLabel = true, tooltip = T.Skill_Circle_of_Protection_NPC }, -- Circle of Protection (Fighters Guild Gladiator)
+
+    [53166] = { hide = true }, -- Spike Trap (Spike Trap)
+    [53169] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', hide = true }, -- Spike Trap (Spike Trap)
+    [53167] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Spike_Trap }, -- Spike Trap Snare (Spike Trap)
+    [53168] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Spike_Trap, hideReduce = true }, -- Trap Sprung (Spike Trap)
+    [53172] = { hide = true }, -- Spike Trap (Spike Trap)
+
+    [52746] = { name = A.Skill_Dawnbreaker }, -- Flawless Dawnbreaker (Champion Marcauld)
+
+    -- Dragonstar Arena (Stage 2) - The Frozen Ring
+    [53329] = { hide = true }, -- Warming Aura
+
+    [56755] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds' }, -- Pierce Armor (Sovngarde Brawler)
+    [56757] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds', name = A.Skill_Pierce_Armor, tooltip = T.Skill_Pierce_Armor_NPC }, -- Puncture (Sovngarde Brawler)
+
+    [56758] = { icon = 'esoui/art/icons/ability_1handed_001_b.dds' }, -- Deep Slash (Sovngarde Brawler)
+    [56759] = { icon = 'esoui/art/icons/ability_debuff_minor_maim.dds', name = A.Skill_Minor_Maim, tooltip = A.Skill_Deep_Slash }, -- Deep Slash (Sovngarde Brawler)
+    [56760] = { icon = 'esoui/art/icons/ability_1handed_001_b.dds', tooltip = T.Generic_Snare_60 }, -- Deep Slash (Sovngarde Brawler)
+
+    [53341] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds' }, -- Biting Cold (Biting Cold)
+    [53342] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', unbreakable = 1, stackAdd = 1, stackMax = 8, tooltip = T.Skill_Biting_Cold }, -- Biting Cold (Biting Cold)
+
+    [53264] = { icon = 'esoui/art/icons/ability_2handed_005_b.dds' }, -- Rally (Sovngarde Slayer)
+    [53259] = { icon = 'esoui/art/icons/ability_2handed_004_b.dds' }, -- Reverse Slice (Sovngarde Slayer)
+    [53262] = { hide = true }, -- Reverse Slice (Sovngarde Slayer)
+    [53261] = { icon = 'esoui/art/icons/ability_2handed_004_b.dds' }, -- Reverse Slice (Sovngarde Slayer)
+
+    [53313] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bombard.dds', name = A.Skill_Flame_Volley }, -- Volley (Sovngarde Ranger)
+    [53340] = { hide = true }, -- CLDA - Volley (Sovngarde Ranger)
+    [53314] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bombard.dds', groundLabel = true, tooltip = T.Generic_AOE_Physical_1_Sec }, -- Flame Volley (Sovngarde Ranger)
+
+    [53286] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds' }, -- Crushing Shock (Sovngarde Icemage)
+    [53288] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds' }, -- Crushing Shock (Sovngarde Icemage)
+    [53287] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds' }, -- Crushing Shock (Sovngarde Icemage)
+
+    [53289] = { icon = '' }, -- Force Shock (Destruction (Sovngarde Icemage)
+    [53290] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds', name = A.Skill_Crushing_Shock, tooltip = T.Generic_Stagger }, -- Stagger (Sovngarde Icemage)
+    [53291] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds', name = A.Skill_Crushing_Shock, tooltip = T.Generic_Stun }, -- Uber Attack (Sovngarde Icemage)
+
+    [53270] = { icon = 'esoui/art/icons/ability_destructionstaff_005_a.dds', hide = true }, -- Frost Clench (Sovngarde Icemage)
+    [53272] = { icon = 'esoui/art/icons/ability_destructionstaff_005_a.dds' }, -- Frost Clench (Sovngarde Icemage)
+    [53271] = { icon = 'esoui/art/icons/ability_destructionstaff_005_a.dds', name = A.Skill_Frost_Clench, tooltip = T.Skill_Frost_Clench_NPC }, -- Deep Freeze (Sovngarde Icemage)
+
+    [53274] = { icon = 'esoui/art/icons/ability_destructionstaff_002a.dds' }, -- Unstable Wall of Frost (Sovngarde Icemage)
+    [53280] = { icon = 'esoui/art/icons/ability_destructionstaff_002a.dds', groundLabel = true, tooltip = T.Skill_U_Wall_of_Frost_NPC }, -- Unstable Wall of Frost (Sovngarde Icemage)
+    [53278] = { icon = 'esoui/art/icons/ability_destructionstaff_002a.dds', duration = 0, groundLabel = true, hideGround = true, tooltip = T.Skill_U_Wall_of_Frost_NPC }, -- Unstable Wall of Frost (Sovngarde Icemage)
+    [53275] = { icon = 'esoui/art/icons/ability_destructionstaff_002a.dds' }, -- Unstable Wall of Frost (Sovngarde Icemage)
+
+    [57022] = { hide = true }, -- CLDA - Normal Arena Duo Power
+    [53240] = { icon = 'esoui/art/icons/ability_2handed_002_b.dds' }, -- Brawler (Yavni Frost-Skin)
+    [53241] = { icon = 'esoui/art/icons/ability_2handed_002_b.dds', tooltip = T.Generic_Bleed_2_Sec }, -- Brawler (Yavni Frost-Skin)
+    [53243] = { icon = 'esoui/art/icons/ability_2handed_002_b.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Brawler (Yavni Frost-Skin)
+
+    [53250] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing }, -- Wrecking Blow (Yavni Frost-Skin)
+    [53252] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing }, -- Wrecking Blow (Yavni Frost-Skin)
+    [53253] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing, tooltip = T.Generic_Knockback }, -- Wrecking Blow (Yavni Frost-Skin)
+    [53255] = { hide = true }, -- Wrecking Blow (Yavni Frost-Skin)
+    [53256] = { hide = true }, -- Wrecking Blow (Yavni Frost-Skin)
+
+    [53292] = { name = A.Skill_Weakness_to_Elements, tooltip = T.Skill_Elemental_Susceptibility_NPC }, -- Elemental Susceptibility (Katti Ice-Turner)
+
+    [53301] = { icon = 'esoui/art/icons/ability_destructionstaff_008_b.dds', name = A.Skill_Frost_Pulsar }, -- Icy Pulsar (Katti Ice-Turner)
+    [53302] = { icon = 'esoui/art/icons/ability_debuff_minor_mangle.dds', name = A.Skill_Minor_Mangle, tooltip = A.Skill_Frost_Pulsar }, -- Icy Pulsar (Katti Ice-Turner)
+
     -- Maelstrom Arena (Shared)
     [43882] = { hide = true }, -- CON_Portal 3 Seconds
     [72059] = { hide = true }, -- Portal Spawn
@@ -10085,6 +10167,14 @@ E.FakeExternalDebuffs = {
     [89756] = { duration = 2000 }, -- Guardian Shockwave (Mzanchend Guardian -- Vvardenfell -- The Magister Makes a Move)
 
     ----------------------------------------------------------------
+    -- ARENAS ----------------------------------------------------
+    ----------------------------------------------------------------
+
+    -- Dragonstar Arena
+    [53342] = { duration = 0 }, -- Biting Cold (Biting Cold)
+
+
+    ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------
     ----------------------------------------------------------------
 
@@ -10347,7 +10437,6 @@ E.FakeStagger = {
     [52878] = {icon = 'esoui/art/icons/ability_dragonknight_005_b.dds', name = 'Empowering Chains', duration = 433}, -- Pull (Empowering Chains) (Rkindaleft - Sharga the Firestarter)
     [64322] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Glacial Spikes', duration = 1000}, -- Glacial Spikes (For King and Glory - Urfon Ice-Heart) - TEMP FIX
     [72479] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Glacial Spikes', duration = 1000}, -- Glacial Spikes (For King and Glory - Urfon Ice-Heart) - TEMP FIX
-    [53290] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Stagger (The Anger of a King - Talviah Aliaria)
     [75463] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Magma Diver (The King's Gambit - Shield-Wife Razbela)
     [67156] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Kindlepitch Slick', duration = 550}, -- Kindlepitch Slick (Blood on a King's Hands) (Can't be dispelled so best option)
     [70543] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Oil Fire', duration = 550}, -- Kindlepitch Slick (Blood on a King's Hands) (Can't be dispelled so best option)
@@ -10360,6 +10449,9 @@ E.FakeStagger = {
     -- On Target
     [86310] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500 }, -- Stagger (Player Blocks charged NPC attack)
     [21972] = { duration = 500 }, -- Stagger (Player interrupts NPC cast)
+
+    -- Maelstrom Arena
+    [53290] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Stagger (Sovngarde Icemage)
 
     -----------------
     -- Dungeons -----
@@ -10601,6 +10693,11 @@ E.AddGroundDamageAura = {
     -- ARENAS --------
     ------------------
 
+    -- Dragonstar Arena
+    [53314] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Flame Volley (Sovngarde Ranger)
+    [53280] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Unstable Wall of Frost (Sovngarde Icemage)
+
+    -- Maelstrom Arena
     [68197] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Necrotic Essence (Necrotic Orb)
     [70901] = { duration = 1200, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Defiled Grave (Maxus the Many)
     [72149] = { duration = 1200, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Defiled Grave (Maxus the Many)
