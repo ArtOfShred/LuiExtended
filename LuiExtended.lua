@@ -133,7 +133,7 @@ local function LUIE_LoadMedia()
         end
     end
 
-    for _, a in pairs (LMP:List(LMP.MediaType.SOUND)) do
+    for _, a in pairs(LMP:List(LMP.MediaType.SOUND)) do
         if not LUIE.StatusbarTextures[a] then
             LUIE.Sounds[a] = LMP:Fetch(LMP.MediaType.SOUND, a)
         end
@@ -734,7 +734,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     local function GetKeepBonusString(campaignId)
         local _, enemyKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
-        return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_INFO, enemyKeepsHeld)
+        return strformat(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_INFO, enemyKeepsHeld)
     end
 
     local function GetKeepBonusScore(campaignId)
@@ -747,12 +747,12 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     end
 
     local function GetEdgeKeepBonusString(campaignId)
-        return zo_strformat(SI_CAMPAIGN_BONUSES_EDGE_KEEP_INFO, GetEdgeKeepBonusScore(campaignId))
+        return strformat(SI_CAMPAIGN_BONUSES_EDGE_KEEP_INFO, GetEdgeKeepBonusScore(campaignId))
     end
 
     local function GetDefensiveBonusString(campaignId)
         local _, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE)
-        return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
+        return strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
     end
 
     local function GetDefensiveBonusCount()
@@ -770,7 +770,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     local function GetOffensiveBonusString(campaignId)
         local _, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE)
-        return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
+        return strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
     end
 
     local function GetOffensiveBonusCount()
@@ -913,7 +913,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     typeIcon = info.typeIcon,
                     typeIconGamepad = info.typeIconGamepad,
                     countText = countText,
-                    name = zo_strformat(SI_CAMPAIGN_BONUSES_ENTRY_ROW_FORMATTER, name),
+                    name = strformat(SI_CAMPAIGN_BONUSES_ENTRY_ROW_FORMATTER, name),
                     icon = icon,
                     active = score and score >= scoreIndex,
                     bonusType = bonusType,
@@ -1069,7 +1069,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                 local nextSkillProgressionData = skillData:GetRankData(rank + 1)
 
                 local id = skillProgressionData:GetAbilityId()
-                dialog.desc:SetText(zo_strformat(SI_SKILLS_UPGRADE_DESCRIPTION, GetAbilityName(id)))
+                dialog.desc:SetText(strformat(SI_SKILLS_UPGRADE_DESCRIPTION, GetAbilityName(id)))
 
                 local baseAbility = dialog.baseAbility
                 baseAbility.skillProgressionData = skillProgressionData

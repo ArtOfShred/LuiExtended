@@ -1247,7 +1247,6 @@ local AbilityTables = {
 
 
 -- Replace ability IDs with names
-local pairs = pairs
 for k, v in pairs(AbilityTables) do
     if type(v) == "number" then
         AbilityTables[k] = zo_strformat("<<C:1>>", GetAbilityName(v))
