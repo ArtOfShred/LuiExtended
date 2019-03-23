@@ -3572,6 +3572,7 @@ E.EffectOverride = {
     [15356] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', name = A.Innate_Sprint }, -- Sprint Drain
 
     -- Misc
+    [15594] = { hide = true }, -- Bonus vs off Balance
     [10950] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds', name = A.Innate_Fall_Damage }, -- Fall Snare
     [6811] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', tooltip = T.Innate_Recall_Penalty }, -- Recall
     [69293] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', name = A.Innate_Recall }, -- Recall
