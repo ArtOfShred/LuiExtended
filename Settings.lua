@@ -675,8 +675,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Display Info Panel on World Map Screen", -- TODO: Localize
-                tooltip = "Display the Info Panel when you are viewing the world map. This option can be toggled if your Info Panel position clips with any important elements on the World Map screen.", -- TODO: Localize
+                name = GetString(SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP),
+                tooltip = GetString(SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP_TP),
                 getFunc = function() return LUIE.InfoPanel.SV.DisplayOnWorldMap end,
                 setFunc = function(value) LUIE.InfoPanel.SV.DisplayOnWorldMap = value LUIE.InfoPanel.SetDisplayOnMap() end,
                 width = "full",
