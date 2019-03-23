@@ -22,9 +22,6 @@ local strformat     = zo_strformat
 
 local eventManager  = EVENT_MANAGER
 
-local colorDef       = ZO_ColorDef
-
--- Local
 local TimeStampColorize
 
 -- Default Settings
@@ -48,7 +45,7 @@ LUIE.D = {
 }
 
 -- Global fonts table to use in other parts of this addon
-    LUIE.Fonts = {
+LUIE.Fonts = {
     ["ProseAntique"]            = ZoFontBookPaper:GetFontInfo(),
     ["Consolas"]                = "/EsoUI/Common/Fonts/consola.ttf",
     ["Futura Condensed"]        = "/EsoUI/Common/Fonts/FTN57.otf",
@@ -1125,7 +1122,7 @@ end
 
 -- Called from the menu and on initialization to update timestamp color when changed.
 function LUIE.UpdateTimeStampColor()
-    TimeStampColorize = colorDef:New(unpack(LUIE.ChatAnnouncements.SV.TimeStampColor)):ToHex()
+    TimeStampColorize = ZO_ColorDef:New(unpack(LUIE.ChatAnnouncements.SV.TimeStampColor)):ToHex()
 end
 
 -- Return a formatted time
