@@ -11446,6 +11446,7 @@ LUIE.DebugAuras = {
             [15687] = true, -- Generic Spawn Apply Portal
             [15688] = true, -- Generic Spawn Apply Portal
             [56788] = true, -- CLDA - Arena 2 Bonus
+
             -- Stage 1
             [58382] = true, -- Speedboost (Fighters Guild Swordmaster)
             [52733] = true, -- Silver Shards (Fighters Guild Swordmaster)
@@ -11470,6 +11471,7 @@ LUIE.DebugAuras = {
             [52746] = true, -- Flawless Dawnbreaker (Champion Marcauld)
             [52747] = true, -- Flawless Dawnbreaker (Champion Marcauld)
 
+            -- Stage 2 - The Frozen Ring
             [53329] = true, -- Warming Aura
             [53328] = true, -- Warming Aura
             [56789] = true, -- CLDA - Arena 3 Bonus
@@ -11537,6 +11539,67 @@ LUIE.DebugAuras = {
             [53293] = true, -- Elemental Susceptibility (Katti Ice-Turner)
             [53301] = true, -- Icy Pulsar (Katti Ice-Turner)
             [53302] = true, -- Icy Pulsar (Katti Ice-Turner)
+
+            -- Stage 3 - The Marsh
+            [56803] = true, -- CLDA - Arena 4 Bonus
+            [56805] = true, -- CLDA - Arena 4 Bonus
+
+            [8243] = true, -- Strike (Corprus Husk)
+            [8244] = true, -- Devastate (Corprus Husk)
+            [8247] = true, -- Vomit (Corprus Husk)
+            [30616] = true, -- Vomit (Corprus Husk)
+            [30615] = true, -- Wither (Corprus Husk)
+            [22107] = true, -- Contaminate (Corprus Husk)
+            [22109] = true, -- Contaminate (Corprus Husk)
+            [22108] = true, -- Contaminate (Corprus Husk)
+
+            [56798] = true, -- Explosive Curse (Dragonclaw Conjurer)
+            [56800] = true, -- Daedric Curse (Dragonclaw Conjurer)
+            [34966] = true, -- Daedric Curse Hack (Dragonclaw Conjurer)
+            [56802] = true, -- Explosive Curse (Dragonclaw Conjurer)
+            [56799] = true, -- Explosive Curse (Dragonclaw Conjurer)
+
+            [83493] = true, -- CLST - Poison Cloud (Poison Cloud)
+            [83495] = true, -- False (Poison Cloud)
+            [83498] = true, -- Poisonous Cloud (Poison Cloud)
+            [83496] = true, -- Poisonous Cloud (Poison Cloud)
+
+            [56796] = true, -- Bound Aegis (Dragonclaw Hedge Wizard)
+
+            [53701] = true, -- Ember Explosion (Shilia)
+            [75609] = true, -- Ember Explosion (Shilia)
+            [75608] = true, -- Ember Explosion (Shilia)
+            [53703] = true, -- Flying Blade (Shilia)
+            [53704] = true, -- Flying Blade (Shilia)
+            [53699] = true, -- Steel Tornado (Shilia)
+            [53698] = true, -- Steel Tornado (Shilia)
+            [53700] = true, -- Whirlwind (Shilia)
+            [53692] = true, -- Rapid Strikes (Shilia)
+            [53693] = true, -- Rapid Strikes (Shilia)
+            [53694] = true, -- Rapid Strikes (Shilia)
+
+            [53654] = true, -- Streak (Nak'tah)
+            [53656] = true, -- Streak (Nak'tah)
+            [53613] = true, -- Thundering Presence (Nak'tah)
+            [53614] = true, -- Thundering Presence (Nak'tah)
+            [53624] = true, -- Lightning Flood (Nak'tah)
+            [53625] = true, -- Lightning Flood (Nak'tah)
+            [53659] = true, -- Power Overload Heavy Attack (Nak'tah)
+            [53660] = true, -- Power Overload Heavy Attack (Nak'tah)
+            [53675] = true, -- Power Overload Heavy Attack (Nak'tah)
+
+            [53607] = true, -- Mages' Wrath (Nak'tah)
+            [53611] = true, -- Mages' Fury
+            [53610] = true, -- Mages' Wrath Explosion
+            [53609] = true, -- Mages' Wrath Explosion
+
+            -- Stage 4 - The Slave Pit
+            [56868] = true, -- CLDA - Arena 5 Bonus
+            [56870] = true, -- CLDA - Arena 5 Bonus
+
+            [56838] = true, -- Mark Target (House Dres Nightblade)
+            [56844] = true, -- Summon Shade (House Dres Nightblade)
+            --[56843] = true, -- Mark Target (House Dres Nightblade)
 
             -- Maelstrom Arena (Shared)
             [43882] = true, -- CON_Portal 3 Seconds

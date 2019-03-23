@@ -42,6 +42,8 @@ local UnitNames = {
     NPC_Sovngarde_Ranger                  = 'Sovngarde Ranger',
     Boss_Yavni_Frost_Skin                 = 'Yavni Frost-Skin',
     Boss_Katti_Ice_Turner                 = 'Katti Ice-Turner',
+    Boss_Shilia                           = 'Shilia',
+    Boss_Nak_tah                          = 'Nak\'tah',
 
     -- Maelstrom Arena
     Boss_Maxus_the_Many                   = 'Maxus the Many',

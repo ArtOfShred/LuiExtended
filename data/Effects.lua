@@ -1440,6 +1440,8 @@ E.AddNameAura = {
     [U.Boss_Champion_Marcauld] =  { [1] = { id = 33097 } }, -- Champion Marcauld
     [U.Boss_Yavni_Frost_Skin] =  { [1] = { id = 33097 } }, -- Yavni Frost-Skin
     [U.Boss_Katti_Ice_Turner] =  { [1] = { id = 33097 } }, -- Katti Ice-Turner
+    [U.Boss_Shilia] =  { [1] = { id = 33097 } }, -- Shilia
+    [U.Boss_Nak_tah] =  { [1] = { id = 33097 } }, -- Nak'tah
 
     -- Maelstrom Arena
     [U.Boss_Maxus_the_Many] = { [1] = { id = 33097 } }, -- Maxus the Many
@@ -2162,6 +2164,7 @@ E.EffectHideSCT = {
 
     -- Dragonstar Arena
     [53252] = true, -- Wrecking Blow (Yavni Frost-Skin)
+    [53675] = true, -- Power Overload Heavy Attack (Nak'tah)
 
     -- Maelstrom Arena
     [71729] = true, -- Sigil of Defense (Sigil of Defense)
@@ -2186,6 +2189,13 @@ E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMB
 
     -- Main Story Quest
     [27776] = true, -- Feeding (Daughter of Giants)
+
+    --------------
+    -- ARENAS --
+    --------------
+
+    -- Dragonstar Arena
+    [53692] = true, -- Rapid Strikes (Shilia)
 
     --------------
     -- DUNGEONS --
@@ -9038,6 +9048,47 @@ E.EffectOverride = {
     [53301] = { icon = 'esoui/art/icons/ability_destructionstaff_008_b.dds', name = A.Skill_Frost_Pulsar }, -- Icy Pulsar (Katti Ice-Turner)
     [53302] = { icon = 'esoui/art/icons/ability_debuff_minor_mangle.dds', name = A.Skill_Minor_Mangle, tooltip = A.Skill_Frost_Pulsar }, -- Icy Pulsar (Katti Ice-Turner)
 
+    [8243] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_swipe.dds' }, -- Strike (Corprus Husk)
+    [8244] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds' }, -- Devastate (Corprus Husk)
+    [8247] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Corprus Husk)
+    [30616] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Corprus Husk)
+    [30615] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_wither.dds', tooltip = T.Skill_Wither }, -- Wither (Corprus Husk)
+    [22109] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds' }, -- Contaminate (Corprus Husk)
+    [22108] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds' }, -- Contaminate (Corprus Husk)
+
+    [56798] = { icon = 'esoui/art/icons/ability_sorcerer_daedric_curse.dds', name = A.Skill_Daedric_Curse, tooltip = T.Skill_Daedric_Curse }, -- Explosive Curse (Dragonclaw Conjurer)
+    [34966] = { hide = true }, -- Daedric Curse Hack (Dragonclaw Conjurer)
+    [56802] = { icon = 'esoui/art/icons/ability_sorcerer_daedric_curse.dds', name = A.Skill_Daedric_Curse }, -- Explosive Curse (Dragonclaw Conjurer)
+    [56799] = { icon = 'esoui/art/icons/ability_sorcerer_daedric_curse.dds', name = A.Skill_Daedric_Curse }, -- Explosive Curse (Dragonclaw Conjurer)
+
+    [83493] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_cloud.dds', name = A.Skill_Poison_Cloud }, -- Poisonous Cloud (Poison Cloud)
+    [83495] = { hide = true }, -- False (Poison Cloud)
+    [83498] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_cloud.dds', name = A.Skill_Poison_Cloud, groundLabel = true, tooltip = T.Generic_AOE_Poison_0_5_Sec }, -- Poisonous Cloud (Poison Cloud)
+    [83496] = { hide = true }, -- Poisonous Cloud (Poison Cloud)
+
+    [56796] = { tooltip = T.Skill_Bound_Aegis_NPC }, -- Bound Aegis (Dragonclaw Hedge Wizard)
+
+    [75609] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heated_blades.dds' }, -- Ember Explosion (Shilia)
+    [75608] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heated_blades.dds', tooltip = T.Skill_Ember_Explosion }, -- Ember Explosion (Shilia)
+    [53703] = { name = A.Skill_Hidden_Blade }, -- Flying Blade (Shilia)
+    [53704] = { name = A.Skill_Hidden_Blade, tooltip = T.Generic_Snare_40 }, -- Flying Blade (Shilia)
+    [53698] = { icon = 'esoui/art/icons/ability_dualwield_005_b.dds' }, -- Steel Tornado (Shilia)
+    [53692] = { name = A.Skill_Flurry }, -- Rapid Strikes (Shilia)
+    [53693] = { name = A.Skill_Flurry, icon = 'esoui/art/icons/ability_dualwield_002.dds' }, -- Rapid Strikes (Shilia)
+    [53694] = { hide = true }, -- Rapid Strikes (Shilia)
+
+    [53613] = { icon = 'esoui/art/icons/ability_sorcerer_lightning_form.dds', name = A.Skill_Lightning_Form, tooltip = T.Skill_Thundering_Presence_NPC }, -- Thundering Presence (Nak'tah)
+    [53614] = { icon = 'esoui/art/icons/ability_sorcerer_lightning_form.dds', name = A.Skill_Lightning_Form }, -- Thundering Presence (Nak'tah)
+    [53625] = { groundLabel = true, tooltip = T.Generic_AOE_Shock_0_5_Sec }, -- Lightning Flood (Nak'tah)
+    [53659] = { hide = true }, -- Power Overload Heavy Attack (Nak'tah)
+    [53675] = { icon = 'esoui/art/icons/ability_sorcerer_power_overload.dds', tooltip = T.Generic_Stun }, -- Power Overload Heavy Attack (Nak'tah)
+    [53610] = { name = A.Skill_Mages_Wrath }, -- Mages' Wrath Explosion (Nak'tah)
+    [53609] = { name = A.Skill_Mages_Wrath }, -- Mages' Wrath Explosion (Nak'tah)
+
+    -- Dragonstar Arena (Stage 4) - The Slave Pit
+    [56838] = { tooltip = T.Skill_Mark_Target_NPC }, -- Mark Target (House Dres Nightblade)
+    [56843] = { hide = true }, -- Mark Target (House Dres Nightblade)
+
     -- Maelstrom Arena (Shared)
     [43882] = { hide = true }, -- CON_Portal 3 Seconds
     [72059] = { hide = true }, -- Portal Spawn
@@ -10696,6 +10747,8 @@ E.AddGroundDamageAura = {
     -- Dragonstar Arena
     [53314] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Flame Volley (Sovngarde Ranger)
     [53280] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Unstable Wall of Frost (Sovngarde Icemage)
+    [83498] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Poisonous Cloud (Poison Cloud)
+    [53625] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Lightning Flood (Nak'tah)
 
     -- Maelstrom Arena
     [68197] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Necrotic Essence (Necrotic Orb)

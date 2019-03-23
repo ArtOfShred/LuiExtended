@@ -713,6 +713,18 @@ local AlertTable = {
     [53250] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Wrecking Blow (Yavni Frost-Skin)
     [53301] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = U.Boss_Katti_Ice_Turner }, -- Icy Pulsar (Katti Ice-Turner)
 
+    [8244] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Devastate (Corprus Husk)
+    [8247] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 1750 }, -- Vomit (Corprus Husk)
+    [22109] = { avoid = true, priority = 3, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, refire = 250 }, -- Contaminate (Corprus Husk)
+
+    [83493] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1000 }, -- CLST - Poison Cloud (Poison Cloud)
+
+    [56796] = { power = true, priority = 1, auradetect = true }, -- Bound Aegis (Dragonclaw Hedge Wizard)
+
+    [53613] = { power = true, priority = 1, auradetect = true }, -- Thundering Presence (Nak'tah)
+    [53624] = { avoid = true, priority = 1, auradetect = true, bossMatch = U.Boss_Nak_tah }, -- Lightning Flood (Nak'tah)
+    [53659] = { block = true, avoid = true, interrupt = true, priority = 1, auradetect = true }, -- Power Overload Heavy Attack (Nak'tah)
+
     -- Maelstrom Arena
 
     [70892] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Bone Cage (Maxus the Many)

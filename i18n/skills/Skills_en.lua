@@ -1183,6 +1183,11 @@ local strings = {
     SI_LUIE_SKILL_FROST_CLENCH_NPC_TP =                  "Stunned for |cFFFFFF0.5|r seconds.\n\nImmobilized for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_UWOF_NPC_TP =                          "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF60|r%.\n\nThe wall explodes when it expires, dealing additional Frost Damage.",
     SI_LUIE_SKILL_ELEMENTAL_SUSCEPTIBILITY_NPC_TP =      "Reduce Spell Resistance by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_WITHER_TP =                            "Increase damage taken by |cffffff15|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_EMBER_EXPLOSION_TP =                   "|cFFFFFF40|r% chance to miss all attacks for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_THUNDERING_PRESENCE_NPC_TP =           "Increase Physical and Spell Resistance by |cFFFFFF23100|r and enemies within |cFFFFFF5|r meters take Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BOUND_AEGIS_NPC_TP =                   "Increase Physical and Spell Resistance.",
+    SI_LUIE_SKILL_MARK_TARGET_NPC_TP =                   "Reduce Physical and Spell Resistance by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.\n\nThe Nightblade heals for |cFFFFFF40|r% of their Max Health if you die under this effect.",
 
 }
 

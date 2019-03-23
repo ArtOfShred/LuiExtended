@@ -1060,6 +1060,11 @@ local Tooltips = {
     Skill_Frost_Clench_NPC                = GetString(SI_LUIE_SKILL_FROST_CLENCH_NPC_TP),
     Skill_U_Wall_of_Frost_NPC             = GetString(SI_LUIE_SKILL_UWOF_NPC_TP),
     Skill_Elemental_Susceptibility_NPC    = GetString(SI_LUIE_SKILL_ELEMENTAL_SUSCEPTIBILITY_NPC_TP),
+    Skill_Wither                          = GetString(SI_LUIE_SKILL_WITHER_TP),
+    Skill_Ember_Explosion                 = GetString(SI_LUIE_SKILL_EMBER_EXPLOSION_TP),
+    Skill_Thundering_Presence_NPC         = GetString(SI_LUIE_SKILL_THUNDERING_PRESENCE_NPC_TP),
+    Skill_Bound_Aegis_NPC                 = GetString(SI_LUIE_SKILL_BOUND_AEGIS_NPC_TP),
+    Skill_Mark_Target_NPC                 = GetString(SI_LUIE_SKILL_MARK_TARGET_NPC_TP),
 
     -- Maelstrom Arena
     Skill_Sigil_of_Haste                  = GetString(SI_LUIE_SKILL_SIGIL_OF_HASTE_TP),
