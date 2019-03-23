@@ -1017,7 +1017,7 @@ local strings = {
     SI_LUIE_LAM_PNL_UNLOCKPANEL =                        "Разблокировать панель",
     SI_LUIE_LAM_PNL_UNLOCKPANEL_TP =                     "Позволяет мышью перемещать Инфо-панель.",
     SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP =                  "Display Info Panel on World Map Screen",
-    SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP_TP =               "Display the Info Panel when you are viewing the world map. This option can be toggled if your Info Panel position clips with any important elements on the World Map screen."
+    SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP_TP =               "Display the Info Panel when you are viewing the world map. This option can be toggled if your Info Panel position clips with any important elements on the World Map screen.",
 
     -- Module: Unitframes
     SI_LUIE_LAM_UF_ENABLE =                              "Модуль фреймов",
