@@ -1,8 +1,6 @@
 LUIE.CombatTextResourcesPowerEventListener = LUIE.CombatTextEventListener:Subclass()
 local CTL = LUIE.CombatTextResourcesPowerEventListener
 
-local pairs = pairs
-
 function CTL:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_POWER_UPDATE, function(...) self:OnEvent(...) end)

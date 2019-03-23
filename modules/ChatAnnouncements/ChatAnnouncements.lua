@@ -9,13 +9,6 @@ local Q              = LUIE.Quests
 local printToChat    = LUIE.PrintToChat
 local strfmt         = string.format
 local strformat      = zo_strformat
-local strmatch       = string.match
-local tableinsert    = table.insert
-local tableconcat    = table.concat
-local mathfloor      = math.floor
-local gsub           = gsub
-local unpack         = unpack
-local pairs          = pairs
 
 local eventManager   = EVENT_MANAGER
 local windowManager  = WINDOW_MANAGER
@@ -2890,7 +2883,7 @@ function CA.OnAchievementUpdated(eventCode, id)
         for i = 1, numCriteria do
             local name, numCompleted, numRequired = GetAchievementCriterion(id, i)
 
-            tableinsert(cmpInfo, { strformat(name), numCompleted, numRequired })
+            table.insert(cmpInfo, { strformat(name), numCompleted, numRequired })
 
             -- Collect the numbers to calculate the correct percentage
             totalCmp = totalCmp + numCompleted
@@ -2910,7 +2903,7 @@ function CA.OnAchievementUpdated(eventCode, id)
                 showInfo = true
             else
                 -- Achievement step hit
-                local percentage = mathfloor( 100 / totalReq * totalCmp )
+                local percentage = math.floor( 100 / totalReq * totalCmp )
 
                 if percentage > 0 and percentage % CA.SV.Achievement.AchievementStep == 0 and g_achievementLastPercentage[id] ~= percentage then
                     showInfo = true
@@ -2935,7 +2928,7 @@ function CA.OnAchievementUpdated(eventCode, id)
 
             local stringpart1 = AchievementColorize1:Colorize(strfmt("%s%s%s %s%s", bracket1[CA.SV.Achievement.AchievementBracketOptions], CA.SV.Achievement.AchievementProgressMsg, bracket2[CA.SV.Achievement.AchievementBracketOptions], icon, link))
 
-            local stringpart2 = CA.SV.Achievement.AchievementColorProgress and strfmt(" %s|c%s%d%%|r", AchievementColorize2:Colorize("("), AchievementPctToColour(totalCmp/totalReq), mathfloor(100*totalCmp/totalReq)) or AchievementColorize2:Colorize(strfmt("%d%%", mathfloor(100*totalCmp/totalReq)))
+            local stringpart2 = CA.SV.Achievement.AchievementColorProgress and strfmt(" %s|c%s%d%%|r", AchievementColorize2:Colorize("("), AchievementPctToColour(totalCmp/totalReq), math.floor(100*totalCmp/totalReq)) or AchievementColorize2:Colorize(strfmt("%d%%", math.floor(100*totalCmp/totalReq)))
 
             local stringpart3
             if CA.SV.Achievement.AchievementCategory and CA.SV.Achievement.AchievementSubcategory then
@@ -2964,7 +2957,7 @@ function CA.OnAchievementUpdated(eventCode, id)
                             cmpInfo[i] = CA.SV.Achievement.AchievementColorProgress and strfmt( "%s %s|c%s%d|r%s|c71DE73%d|r%s", AchievementColorize2:Colorize(cmpInfo[i][1]), AchievementColorize2:Colorize("("), AchievementPctToColour(pct), cmpInfo[i][2], AchievementColorize2:Colorize("/"), cmpInfo[i][3], AchievementColorize2:Colorize(")") ) or AchievementColorize2:Colorize(strfmt( "%s (%d/%d)", cmpInfo[i][1], cmpInfo[i][2], cmpInfo[i][3] ))
                         end
                     end
-                    stringpart4 = " " .. tableconcat(cmpInfo, AchievementColorize2:Colorize(", ")) .. ""
+                    stringpart4 = " " .. table.concat(cmpInfo, AchievementColorize2:Colorize(", ")) .. ""
                 end
             end
             local finalString = strfmt("%s%s%s%s", stringpart1, stringpart2, stringpart3, stringpart4)
@@ -4850,7 +4843,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
 
                     local parts = {ZO_LinkHandler_ParseLink(itemLink)}
                     parts[22] = "1"
-                    parts = tableconcat(parts, ":"):sub(2, -1)
+                    parts = table.concat(parts, ":"):sub(2, -1)
                     itemLink = strformat("|H<<1>>|h|h", parts)
 
                     local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -4897,7 +4890,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
 
                     local parts = {ZO_LinkHandler_ParseLink(itemLink)}
                     parts[22] = "1"
-                    parts = tableconcat(parts, ":"):sub(2, -1)
+                    parts = table.concat(parts, ":"):sub(2, -1)
                     itemLink = strformat("|H<<1>>|h|h", parts)
 
                     local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -4950,7 +4943,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
 
             local parts = {ZO_LinkHandler_ParseLink(itemLink)}
             parts[22] = "1"
-            parts = tableconcat(parts, ":"):sub(2, -1)
+            parts = table.concat(parts, ":"):sub(2, -1)
             itemLink = strformat("|H<<1>>|h|h", parts)
 
             local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -9140,7 +9133,7 @@ function CA.HookFunction()
         end
 
         local nameLink
-        if strmatch(to, "@") == "@" then
+        if string.match(to, "@") == "@" then
             if CA.SV.BracketOptionCharacter == 1 then
                 nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(to, nil, DISPLAY_NAME_LINK_TYPE, to)
             else
@@ -9179,7 +9172,7 @@ function CA.HookFunction()
             local mailTarget = self.to:GetText()
             local nameLink
             -- Here we look for @ character in the sent mail, if the player send to an account then we want the link to be an account name link, otherwise, it's a character name link.
-            if strmatch(mailTarget, "@") == "@" then
+            if string.match(mailTarget, "@") == "@" then
                 if CA.SV.BracketOptionCharacter == 1 then
                     nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(mailTarget, nil, DISPLAY_NAME_LINK_TYPE, mailTarget)
                 else
@@ -9206,7 +9199,7 @@ function CA.HookFunction()
         if not inventory.slots[questIndex] then
             inventory.slots[questIndex] = {}
         end
-        tableinsert(inventory.slots[questIndex], questItem)
+        table.insert(inventory.slots[questIndex], questItem)
 
         local index = #inventory.slots[questIndex]
 

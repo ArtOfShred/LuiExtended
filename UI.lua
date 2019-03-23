@@ -2,8 +2,6 @@
 -- UI namespace
 LUIE.UI = {}
 
-local unpack = unpack
-
 local windowManager = WINDOW_MANAGER
 
 -- A handy chaining function for quickly setting up UI elements

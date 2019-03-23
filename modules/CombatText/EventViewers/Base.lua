@@ -4,10 +4,8 @@ local CTV = LUIE.CombatTextEventViewer
 local C = LUIE.CombatTextConstants
 local E = LUIE.Effects
 local strfmt = string.format
+
 local callbackManager = CALLBACK_MANAGER
-local gsub = string.gsub
-local unpack = unpack
-local pairs = pairs
 
 CTV.resourceNames = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_COMBATMECHANICTYPE', k); return t[k] end})
 CTV.damageTypes = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_DAMAGETYPE', k); return t[k] end})
@@ -20,7 +18,7 @@ function CTV:New(poolManager, LMP)
 end
 
 function CTV:FormatString(inputFormat, params)
-    return gsub(inputFormat, '%%.', function(x)
+    return string.gsub(inputFormat, '%%.', function(x)
         if (x == '%t') then
             return params.text or ''
         elseif (x == '%a') then
@@ -36,7 +34,7 @@ function CTV:FormatString(inputFormat, params)
 end
 
 function CTV:FormatAlertString(inputFormat, params)
-    return gsub(inputFormat, '%%.', function(x)
+    return string.gsub(inputFormat, '%%.', function(x)
         if (x == '%n') then
             return params.source or ''
         elseif (x == '%t') then

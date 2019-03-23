@@ -1,9 +1,5 @@
 -- Performance Enhancement
 local strformat     = zo_strformat
-local tableinsert   = table.insert
-local mathrandom    = math.random
-local unpack        = unpack
-local pairs         = pairs
 
 local iconFormat    = zo_iconFormat
 
@@ -21,13 +17,13 @@ function LUIE_CreateSettings()
 
     -- Get Fonts
     for f in pairs(LUIE.Fonts) do
-        tableinsert(FontsList, f)
+        table.insert(FontsList, f)
     end
     for key, _ in pairs(LUIE.StatusbarTextures) do
-        tableinsert(StatusbarTexturesList, key)
+        table.insert(StatusbarTexturesList, key)
     end
     for sound, _ in pairs(LUIE.Sounds) do
-        tableinsert(SoundsList, sound)
+        table.insert(SoundsList, sound)
     end
 
     local nameDisplayOptions            = { "@UserID", "Character Name", "Character Name @UserID" }
@@ -12077,7 +12073,7 @@ function LUIE_CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_FONT_TEST),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_TEST_TP),
                 func = function()
-                    CALLBACK_MANAGER:FireCallbacks(LUIE.CombatTextConstants.eventType.COMBAT, LUIE.CombatTextConstants.combatType.INCOMING, POWERTYPE_STAMINA, mathrandom(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    CALLBACK_MANAGER:FireCallbacks(LUIE.CombatTextConstants.eventType.COMBAT, LUIE.CombatTextConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                 end,
             },
         },
@@ -12144,8 +12140,8 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST_TP),
                 func = function()
-                    CALLBACK_MANAGER:FireCallbacks(LUIE.CombatTextConstants.eventType.COMBAT, LUIE.CombatTextConstants.combatType.INCOMING, POWERTYPE_STAMINA, mathrandom(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
-                    CALLBACK_MANAGER:FireCallbacks(LUIE.CombatTextConstants.eventType.COMBAT, LUIE.CombatTextConstants.combatType.OUTGOING, POWERTYPE_STAMINA, mathrandom(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    CALLBACK_MANAGER:FireCallbacks(LUIE.CombatTextConstants.eventType.COMBAT, LUIE.CombatTextConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    CALLBACK_MANAGER:FireCallbacks(LUIE.CombatTextConstants.eventType.COMBAT, LUIE.CombatTextConstants.combatType.OUTGOING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                 end,
             },
         },

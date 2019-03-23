@@ -1,6 +1,8 @@
 ------------------
 -- Changelog
 
+local strformat = zo_strformat
+
 local changelogMessages = {
     "|cFFFF00General:|r",
     "[*] Added updated auras for more dungeons - Elden Hollow II, COA I & II, Tempest Island, Selene's Web, and Spindleclutch I & II and updated a few various icons for enemy abilities.",
@@ -34,9 +36,9 @@ function LUIE_ChangelogScreen()
     -- If text start with '*' replace it with bullet texture
     changelog = string.gsub(changelog, "%[%*%]", "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t")
     -- Set the window title
-    LUIEChangelogTitle:SetText(zo_strformat("<<1>> Changelog", LUIE.name))
+    LUIEChangelogTitle:SetText(strformat("<<1>> Changelog", LUIE.name))
     -- Set the about string
-    LUIEChangelogAbout:SetText(zo_strformat("v<<1>> by <<2>>", LUIE.version, LUIE.author))
+    LUIEChangelogAbout:SetText(strformat("v<<1>> by <<2>>", LUIE.version, LUIE.author))
     -- Set the changelog text
     LUIEChangelogText:SetText(changelog)
 

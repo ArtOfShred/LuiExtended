@@ -14,15 +14,7 @@ LUIE.SVName      = "LUIESV"
 
 -- Performance Enhancement
 local strfmt        = string.format
-local strmatch      = string.match
 local strformat     = zo_strformat
-local tableinsert   = table.insert
-local tablesort     = table.sort
-local gsub          = gsub
-local reverse       = reverse
-local mathfloor     = math.floor
-local tostring      = tostring
-local pairs, ipairs = pairs, ipairs
 
 local eventManager  = EVENT_MANAGER
 
@@ -418,7 +410,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                         effectsRow.time.endTime = endTime
                         effectsRow.isArtificial = false -- Sort with normal buffs
                     end
-                    tableinsert(effectsRows, effectsRow)
+                    table.insert(effectsRows, effectsRow)
                 end
 
                 local counter = 1
@@ -497,7 +489,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     end
 
                     if tooltipText ~= "" then
-                        tooltipText = strmatch(tooltipText, ".*%S")
+                        tooltipText = string.match(tooltipText, ".*%S")
                     end
                     local thirdLine
                     local timer2 = (endTime - startTime)
@@ -529,12 +521,12 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                             effectsRow.buffSlot = buffSlot
                             effectsRow.isArtificial = false
 
-                            tableinsert(effectsRows, effectsRow)
+                            table.insert(effectsRows, effectsRow)
                         end
                     end
                 end
 
-                tablesort(effectsRows, EffectsRowComparator)
+                table.sort(effectsRows, EffectsRowComparator)
                 local prevRow
                 for i, effectsRow in ipairs(effectsRows) do
                     if(prevRow) then

@@ -6,7 +6,6 @@ local E = LUIE.Effects
 local AlertT = LUIE.AlertTable
 local AbbreviateNumber = LUIE.AbbreviateNumber
 local callLater = zo_callLater
-local pairs = pairs
 local refireDelay = { }
 
 local isWarned = {

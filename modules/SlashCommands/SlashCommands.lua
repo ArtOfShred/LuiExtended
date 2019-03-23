@@ -5,10 +5,6 @@ LUIE.SlashCommands = {}
 local SC            = LUIE.SlashCommands
 local printToChat   = LUIE.PrintToChat
 local strformat     = zo_strformat
-local strgsub       = string.gsub
-local strlower      = string.lower
-local strmatch      = string.match
-local pairs         = pairs
 
 local callLater     = zo_callLater
 local callAlert     = ZO_Alert
@@ -337,9 +333,9 @@ local function SlashGroupKick(option)
     local g_partyKick = { }
     local kickedMemberName
     local kickedAccountName
-    local compareName = strlower(option)
-    local comparePlayerName = strlower(LUIE.PlayerNameFormatted)
-    local comparePlayerAccount = strlower(PlayerDisplayName)
+    local compareName = string.lower(option)
+    local comparePlayerName = string.lower(LUIE.PlayerNameFormatted)
+    local comparePlayerAccount = string.lower(PlayerDisplayName)
     local unitToKick
 
     for i = 1,24 do
@@ -348,8 +344,8 @@ local function SlashGroupKick(option)
         if memberTag == nil then
             break
         end
-        kickedMemberName = strlower(GetUnitName(memberTag))
-        kickedAccountName = strlower(GetUnitDisplayName(memberTag))
+        kickedMemberName = string.lower(GetUnitName(memberTag))
+        kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
         g_partyKick[i] = { memberTag=memberTag, kickedMemberName=kickedMemberName, kickedAccountName=kickedAccountName }
     end
 
@@ -397,7 +393,7 @@ local function SlashGuildInvite(option)
 
     -- Parse input
     local options = {}
-    local searchResult = { strmatch(option,"^(%S*)%s*(.-)$") }
+    local searchResult = { string.match(option,"^(%S*)%s*(.-)$") }
     for i,v in pairs(searchResult) do
         if (v ~= nil and v ~= "") then
             options[i] = v
@@ -489,7 +485,7 @@ local function SlashGuildKick(option)
 
     -- Parse input
     local options = {}
-    local searchResult = { strmatch(option,"^(%S*)%s*(.-)$") }
+    local searchResult = { string.match(option,"^(%S*)%s*(.-)$") }
     for i,v in pairs(searchResult) do
         if (v ~= nil and v ~= "") then
             options[i] = v
@@ -540,17 +536,17 @@ local function SlashGuildKick(option)
 
     -- Index guild members so we can use character name as a kick option
     local guildNumbers = GetNumGuildMembers(guildnumber)
-    local compareChar = strlower(name)
+    local compareChar = string.lower(name)
 
     g_guildNamesTable = { }
 
     for i = 1,guildNumbers do
         local displayName = GetGuildMemberInfo(guildnumber, i)
         local _, characterName = GetGuildMemberCharacterInfo(guildnumber, i)
-        local compareDisplay = strlower(displayName)
-        local compareCharacter = strlower(characterName)
+        local compareDisplay = string.lower(displayName)
+        local compareCharacter = string.lower(characterName)
 
-        compareCharacter = strgsub(compareCharacter,"%^%a+","")
+        compareCharacter = string.gsub(compareCharacter,"%^%a+","")
 
         g_guildNamesTable[i] = { displayName=displayName, characterName=characterName, compareDisplay=compareDisplay, compareCharacter=compareCharacter}
         --d(compareDisplay .. compareCharacter)
@@ -644,15 +640,15 @@ local function SlashRemoveFriend(option)
         return
     end
 
-    local compareChar = strlower(option)
+    local compareChar = string.lower(option)
     local friends = GetNumFriends()
     local g_friendIndex = {}
     for i = 1,friends do
         local displayName = GetFriendInfo(i)
         local _, characterName = GetFriendCharacterInfo(i)
-        local compareDisplay = strlower(displayName)
-        local compareCharacter = strlower(characterName)
-        compareCharacter = strgsub(compareCharacter,"%^%a+","")
+        local compareDisplay = string.lower(displayName)
+        local compareCharacter = string.lower(characterName)
+        compareCharacter = string.gsub(compareCharacter,"%^%a+","")
         g_friendIndex[i] = {displayName=displayName, characterName=characterName, compareDisplay=compareDisplay, compareCharacter=compareCharacter}
     end
 
@@ -688,12 +684,12 @@ local function SlashRemoveIgnore(option)
         return
     end
 
-    local compareChar = strlower(option)
+    local compareChar = string.lower(option)
     local ignore = GetNumIgnored()
     local g_ignoreIndex = {}
     for i = 1,ignore do
         local displayName = GetIgnoredInfo(i)
-        displayName = strlower(displayName)
+        displayName = string.lower(displayName)
         g_ignoreIndex[i] = {displayName=displayName}
     end
 
@@ -776,9 +772,9 @@ local function SlashVoteKick(option)
     local g_partyKick = { }
     local kickedMemberName
     local kickedAccountName
-    local compareName = strlower(option)
-    local comparePlayerName = strlower(playerName)
-    local comparePlayerAccount = strlower(PlayerDisplayName)
+    local compareName = string.lower(option)
+    local comparePlayerName = string.lower(playerName)
+    local comparePlayerAccount = string.lower(PlayerDisplayName)
     local unitToKick = ""
 
     for i = 1,24 do
@@ -787,8 +783,8 @@ local function SlashVoteKick(option)
         if memberTag == nil then
             break
         end
-        kickedMemberName = strlower(GetUnitName(memberTag))
-        kickedAccountName = strlower(GetUnitDisplayName(memberTag))
+        kickedMemberName = string.lower(GetUnitName(memberTag))
+        kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
         g_partyKick[i] = { memberTag=memberTag, kickedMemberName=kickedMemberName, kickedAccountName=kickedAccountName }
     end
 
@@ -842,8 +838,8 @@ local function SlashCampaignQ(option)
 
     -- Compare names to campaigns available, join the campaign and bail out of the function if it is available.
     for i = 1, 100 do
-        local compareName = strlower(GetCampaignName(i))
-        local option = strlower(option)
+        local compareName = string.lower(GetCampaignName(i))
+        local option = string.lower(option)
         if compareName == option then
             local campaignName
             campaignName = GetCampaignName(i)
