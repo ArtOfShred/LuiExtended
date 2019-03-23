@@ -1186,8 +1186,12 @@ local strings = {
     SI_LUIE_SKILL_WITHER_TP =                            "Increase damage taken by |cffffff15|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_EMBER_EXPLOSION_TP =                   "|cFFFFFF40|r% chance to miss all attacks for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_THUNDERING_PRESENCE_NPC_TP =           "Increase Physical and Spell Resistance by |cFFFFFF23100|r and enemies within |cFFFFFF5|r meters take Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_BOUND_AEGIS_NPC_TP =                   "Increase Physical and Spell Resistance.",
+    SI_LUIE_SKILL_BOUND_AEGIS_NPC_TP =                   "Reduce damage taken by |cffffff20|r%.",
     SI_LUIE_SKILL_MARK_TARGET_NPC_TP =                   "Reduce Physical and Spell Resistance by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.\n\nThe Nightblade heals for |cFFFFFF40|r% of their Max Health if you die under this effect.",
+    SI_LUIE_SKILL_EMPOWERING_CHAINS_NPC_TP =             "Increase damage done by |cffffff5|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_PETRIFY_NPC_TP =                       "Stunned and absorbing damage for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_CELESTIAL_WARD_TP =                    "While standing in the ward you are protected from Celestial Blast.\n\nHealing every |cffffff0.25|r seconds.",
+    SI_LUIE_SKILL_CELESTIAL_BLAST_TP =                   "The Anka-Ra Shadowcaster is aligning the orbitial GDI Ion Cannon to your position, enter the lit Celestial Rune to protect yourself.",
 
 }
 

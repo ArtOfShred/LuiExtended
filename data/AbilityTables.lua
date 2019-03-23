@@ -1116,6 +1116,7 @@ local AbilityTables = {
     Skill_Poison_Cloud                = 21411,
     Skill_Flurry                      = 28607,
     Skill_Mages_Wrath                 = 19123,
+    Skill_Celestial_Ward              = 54315,
 
     -- Maelstrom Arena
     Skill_Sigil_of_Healing            = 66920,

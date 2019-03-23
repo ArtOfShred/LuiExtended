@@ -9089,6 +9089,30 @@ E.EffectOverride = {
     [56838] = { tooltip = T.Skill_Mark_Target_NPC }, -- Mark Target (House Dres Nightblade)
     [56843] = { hide = true }, -- Mark Target (House Dres Nightblade)
 
+    [56827] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds' }, -- Puncturing Sweep (House Dres Templar)
+    [27920] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = A.Skill_Puncturing_Sweep, tooltip = T.Generic_Knockback }, -- Generic Knockback Stun (House Dres Templar)
+
+
+
+
+    -- Dragonstar Arena (Stage 5) - The Celestial Ring
+    [52879] = { tooltip = T.Skill_Empowering_Chains_NPC }, -- Empowering Chains (Anka-Ra Blademaster)
+    [52878] = { name = A.Skill_Empowering_Chains }, -- Pull (Anka-Ra Blademaster)
+
+    [51352] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrify.dds', hide = true }, -- Petrify (Gargoyle)
+    [51365] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrify.dds', tooltip = T.Skill_Petrify_NPC }, -- Petrify (Gargoyle)
+    [51353] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrify.dds' }, -- Petrify (Gargoyle)
+    [51354] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrify.dds', tooltip = T.Generic_Stun }, -- Petrify (Gargoyle)
+
+    [54411] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_celestial_blast.dds', hide = true }, -- Celestial Blast (Anka-Ra Shadowcaster)
+    [54415] = { hide = true }, -- Celestial Blast (Anka-Ra Shadowcaster)
+    [54404] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_celestial_blast.dds', tooltip = T.Skill_Celestial_Blast, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Celestial Blast (Anka-Ra Shadowcaster)
+    [54314] = { hide = true }, -- Celestial Ward (Tile Ward)
+
+    [54315] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_celestial_ward.dds', tooltip = T.Skill_Celestial_Ward, duration = 0, forcedContainer = 'short', groundLabel = true }, -- Celestial Ward (Tile Ward)
+    [56255] = { hide = true }, -- CLDA - Tile Ward Buff (Tile Ward)
+    [54403] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_celestial_ward.dds', name = A.Skill_Celestial_Ward }, -- Healing Ward (Tile Ward)
+
     -- Maelstrom Arena (Shared)
     [43882] = { hide = true }, -- CON_Portal 3 Seconds
     [72059] = { hide = true }, -- Portal Spawn
@@ -10223,7 +10247,8 @@ E.FakeExternalDebuffs = {
 
     -- Dragonstar Arena
     [53342] = { duration = 0 }, -- Biting Cold (Biting Cold)
-
+    [27920] = { duration = 1800 }, -- Generic Knockback Stun (House Dres Templar)
+    [51354] = { duration = 500 }, -- Petrify (Gargoyle)
 
     ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------
@@ -10485,7 +10510,6 @@ E.FakeStagger = {
     [83141] = { duration = 433 }, -- Ground Shock (Thodundor of the Hill)
 
     --[[
-    [52878] = {icon = 'esoui/art/icons/ability_dragonknight_005_b.dds', name = 'Empowering Chains', duration = 433}, -- Pull (Empowering Chains) (Rkindaleft - Sharga the Firestarter)
     [64322] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Glacial Spikes', duration = 1000}, -- Glacial Spikes (For King and Glory - Urfon Ice-Heart) - TEMP FIX
     [72479] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Glacial Spikes', duration = 1000}, -- Glacial Spikes (For King and Glory - Urfon Ice-Heart) - TEMP FIX
     [75463] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Magma Diver (The King's Gambit - Shield-Wife Razbela)

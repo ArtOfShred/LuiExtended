@@ -1065,6 +1065,10 @@ local Tooltips = {
     Skill_Thundering_Presence_NPC         = GetString(SI_LUIE_SKILL_THUNDERING_PRESENCE_NPC_TP),
     Skill_Bound_Aegis_NPC                 = GetString(SI_LUIE_SKILL_BOUND_AEGIS_NPC_TP),
     Skill_Mark_Target_NPC                 = GetString(SI_LUIE_SKILL_MARK_TARGET_NPC_TP),
+    Skill_Empowering_Chains_NPC           = GetString(SI_LUIE_SKILL_EMPOWERING_CHAINS_NPC_TP),
+    Skill_Petrify_NPC                     = GetString(SI_LUIE_SKILL_PETRIFY_NPC_TP),
+    Skill_Celestial_Ward                  = GetString(SI_LUIE_SKILL_CELESTIAL_WARD_TP),
+    Skill_Celestial_Blast                 = GetString(SI_LUIE_SKILL_CELESTIAL_BLAST_TP),
 
     -- Maelstrom Arena
     Skill_Sigil_of_Haste                  = GetString(SI_LUIE_SKILL_SIGIL_OF_HASTE_TP),

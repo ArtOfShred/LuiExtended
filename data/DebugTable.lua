@@ -11599,7 +11599,36 @@ LUIE.DebugAuras = {
 
             [56838] = true, -- Mark Target (House Dres Nightblade)
             [56844] = true, -- Summon Shade (House Dres Nightblade)
-            --[56843] = true, -- Mark Target (House Dres Nightblade)
+            [56843] = true, -- Mark Target (House Dres Nightblade)
+
+            [56822] = true, -- Puncturing Sweep (House Dres Templar)
+            [56823] = true, -- Puncturing Sweep (House Dres Templar)
+            [56824] = true, -- Puncturing Sweep (House Dres Templar)
+            [56825] = true, -- Puncturing Sweep (House Dres Templar)
+            [56827] = true, -- Puncturing Sweep (House Dres Templar)
+            [27920] = true, -- Generic Knockback Stun (House Dres Templar)
+
+            -- Stage 5 - The Celestial Ring
+            [56910] = true, -- CLDA - Arena 6 Bonus
+            [56912] = true, -- CLDA - Arena 6 Bonus
+
+            [52876] = true, -- Empowering Chains (Anka-Ra Blademaster)
+            [52879] = true, -- Empowering Chains (Anka-Ra Blademaster)
+            [52878] = true, -- Pull (Anka-Ra Blademaster)
+
+            [25720] = true, -- Vampiric Touch (Gargoyle)
+            [51352] = true, -- Petrify (Gargoyle)
+            [51365] = true, -- Petrify (Gargoyle)
+            [51353] = true, -- Petrify (Gargoyle)
+            [51354] = true, -- Petrify (Gargoyle)
+
+            [54411] = true, -- Celestial Blast (Anka-Ra Shadowcaster)
+            [54415] = true, -- Celestial Blast (Anka-Ra Shadowcaster)
+            [54404] = true, -- Celestial Blast (Anka-Ra Shadowcaster)
+            [54314] = true, -- Celestial Ward (Tile Ward)
+            [54315] = true, -- Celestial Ward (Tile Ward)
+            [56255] = true, -- CDLA - Tile Ward Buff (Tile Ward)
+            [54403] = true, -- Healing Ward (Tile Ward)
 
             -- Maelstrom Arena (Shared)
             [43882] = true, -- CON_Portal 3 Seconds

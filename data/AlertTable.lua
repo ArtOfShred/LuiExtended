@@ -725,6 +725,8 @@ local AlertTable = {
     [53624] = { avoid = true, priority = 1, auradetect = true, bossMatch = U.Boss_Nak_tah }, -- Lightning Flood (Nak'tah)
     [53659] = { block = true, avoid = true, interrupt = true, priority = 1, auradetect = true }, -- Power Overload Heavy Attack (Nak'tah)
 
+    [51352] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Petrify (Gargoyle)
+
     -- Maelstrom Arena
 
     [70892] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Bone Cage (Maxus the Many)
