@@ -1,6 +1,10 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- Addon Settings Menu localization
 -- Translation by: <default>
-
 local strings = {
 
     -- Settings.lua

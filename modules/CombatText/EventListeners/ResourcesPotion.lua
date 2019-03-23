@@ -1,3 +1,8 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextResourcesPotionEventListener = LUIE.CombatTextEventListener:Subclass()
 local CTL = LUIE.CombatTextResourcesPotionEventListener
 

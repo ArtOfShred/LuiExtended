@@ -1,4 +1,8 @@
-------------------
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- UI namespace
 LUIE.UI = {}
 

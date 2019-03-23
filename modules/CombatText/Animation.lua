@@ -1,3 +1,8 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextAnimation = ZO_Object:Subclass()
 
 local CTA = LUIE.CombatTextAnimation

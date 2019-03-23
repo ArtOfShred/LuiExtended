@@ -1,6 +1,10 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- Main LUI Extended localization
 -- Translation by: <default>
-
 local strings = {
 
     -- LuiExtended.lua

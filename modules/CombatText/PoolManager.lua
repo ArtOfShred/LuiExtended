@@ -1,3 +1,8 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextPoolManager = ZO_Object:Subclass()
 
 local CTPM = LUIE.CombatTextPoolManager

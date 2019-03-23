@@ -1,3 +1,8 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- SlashCommands namespace
 LUIE.SlashCommands = {}
 

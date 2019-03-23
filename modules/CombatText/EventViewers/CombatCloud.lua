@@ -1,3 +1,8 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextCombatCloudEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextCombatCloudEventViewer
 

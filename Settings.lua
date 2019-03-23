@@ -1,6 +1,10 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- Performance Enhancement
 local strformat     = zo_strformat
-
 local iconFormat    = zo_iconFormat
 
 -- Create Settings Menu

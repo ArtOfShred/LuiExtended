@@ -1,4 +1,8 @@
-------------------
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- LUIE namespace
 LUIE             = {}
 LUIE.name        = "LuiExtended"

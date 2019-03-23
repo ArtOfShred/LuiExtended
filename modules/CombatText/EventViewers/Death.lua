@@ -1,3 +1,8 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextDeathViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextDeathViewer
 

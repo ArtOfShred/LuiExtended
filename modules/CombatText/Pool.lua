@@ -1,3 +1,8 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextPool = ZO_ObjectPool:Subclass()
 
 local CTP = LUIE.CombatTextPool

@@ -1,4 +1,8 @@
-------------------
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- Effects namespace
 LUIE.Effects = {}
 
@@ -8977,7 +8981,7 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Dragonstar Arena (Stage 1)
-    [52733] = { icon = 'esoui/art/icons/ability_fightersguild_003_a.dds', hide = true }, -- Silver Shards (Fighters Guild Swordmaster) 
+    [52733] = { icon = 'esoui/art/icons/ability_fightersguild_003_a.dds', hide = true }, -- Silver Shards (Fighters Guild Swordmaster)
     [52735] = { icon = 'esoui/art/icons/ability_fightersguild_003_a.dds', tooltip = T.Generic_Knockdown }, -- Silver Shards (Fighters Guild Swordmaster)
     [75845] = { icon = 'esoui/art/icons/ability_fightersguild_003_a.dds' }, -- Silver Shards (Fighters Guild Swordmaster)
 

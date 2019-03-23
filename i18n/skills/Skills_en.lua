@@ -1,6 +1,10 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- Skill names & Tooltips localization
 -- Translation by: <default>
-
 local strings = {
 
     ----------------------------------------------------------------
@@ -1175,7 +1179,7 @@ local strings = {
 
     SI_LUIE_SKILL_EXPERT_HUNTER_NPC_TP =                 "|cFFFFFF20|r% chance on hit to deal additional Magic Damage to Undead and Daedric enemies for |cFFFFFF<<1>>|r seconds.\n\nKilling an Undead or Daedric enemy increases the duration by |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_NPC_TP =          "Reduce damage taken by |cFFFFFF55|r%.",
-    
+
     SI_LUIE_SKILL_PIERCE_ARMOR_NPC_TP =                  "Reduce Physical and Spell Resistance by |cFFFFFF43|r% for |cFFFFFF<<1>>|r seconds.",
 
     SI_LUIE_SKILL_BITING_COLD_TP =                       "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF10|r%.\n\nThis effect stacks up to |cFFFFFF8|r times, to a maximum of |cFFFFFF80|r% Movement Speed reduction.",

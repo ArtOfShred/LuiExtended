@@ -1,5 +1,9 @@
-------------------
--- Default Unit Frames namespace
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
+-- Unit Frames namespace
 LUIE.UnitFrames = {}
 
 -- Performance Enhancement

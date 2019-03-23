@@ -1,4 +1,8 @@
-------------------
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- Cast Bar Table namespace
 LUIE.CastBarTable = {}
 

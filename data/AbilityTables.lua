@@ -1,6 +1,9 @@
-------------------
--- AbilityTables namespace
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
 
+-- AbilityTables namespace
 local AbilityTables = {
     -- ---------------------------------------------------
     -- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------

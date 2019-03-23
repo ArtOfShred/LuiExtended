@@ -1,3 +1,8 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextResourcesUltimateEventListener = LUIE.CombatTextEventListener:Subclass()
 local CTL = LUIE.CombatTextResourcesUltimateEventListener
 

@@ -1,4 +1,8 @@
-------------------
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- ChatAnnouncements namespace
 LUIE.ChatAnnouncements = {}
 

@@ -1,3 +1,8 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextEventViewer = ZO_Object:Subclass()
 local CTV = LUIE.CombatTextEventViewer
 

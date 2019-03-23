@@ -1,5 +1,7 @@
-------------------
--- Changelog
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
 
 local strformat = zo_strformat
 

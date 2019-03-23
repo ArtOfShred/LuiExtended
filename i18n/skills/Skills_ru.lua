@@ -1,6 +1,10 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- Skill names & Tooltips localization
 -- Translation by: KiriX
-
 local strings = {
 
     ----------------------------------------------------------------
