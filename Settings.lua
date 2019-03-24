@@ -172,17 +172,17 @@ function LUIE_CreateSettings()
     GenerateCharacterProfiles()
 
     local formatOptions = {
-        GetString(SI_LUIE_LAM_UF_SHARED_LABEL_NOTHING),
-        GetString(SI_LUIE_LAM_UF_SHARED_LABEL_CURRENT),
-        GetString(SI_LUIE_LAM_UF_SHARED_LABEL_CURRSHIELD),
-        GetString(SI_LUIE_LAM_UF_SHARED_LABEL_MAX),
-        GetString(SI_LUIE_LAM_UF_SHARED_LABEL_PERCENT),
-        GetString(SI_LUIE_LAM_UF_SHARED_LABEL_CURRMAX),
-        GetString(SI_LUIE_LAM_UF_SHARED_LABEL_CURRSHIELDMAX),
-        GetString(SI_LUIE_LAM_UF_SHARED_LABEL_CURRMAXPERCENT),
-        GetString(SI_LUIE_LAM_UF_SHARED_LABEL_CURRSHIELDMAXPERCENT),
-        GetString(SI_LUIE_LAM_UF_SHARED_LABEL_CURRPERCENT),
-        GetString(SI_LUIE_LAM_UF_SHARED_LABEL_CURRSHIELDPERCENT)
+        "Nothing",
+        "Current",
+        "Current + Shield",
+        "Max",
+        "Percentage%",
+        "Current / Max",
+        "Current + Shield / Max",
+        "Current / Max (Percentage%)",
+        "Current + Shield / Max (Percentage%)",
+        "Current (Percentage%)",
+        "Current + Shield (Percentage%)"
     }
 
     local panelData = {
