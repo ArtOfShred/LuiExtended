@@ -1119,7 +1119,17 @@ local AbilityTables = {
     Skill_Poison_Cloud                = 21411,
     Skill_Flurry                      = 28607,
     Skill_Mages_Wrath                 = 19123,
+    Skill_Enslavement                 = 83774,
+    Skill_Cinder_Storm                = 20779,
+    Skill_Petrify                     = 29037,
     Skill_Celestial_Ward              = 54315,
+    Skill_Draining_Poison             = 60442,
+    Skill_Natures_Blessing            = GetString(SI_LUIE_SKILL_NATURES_BLESSING),
+    Skill_Reflective_Scale            = 21007,
+    Skill_Summon_Scamp                = 39555,
+    Skill_Summon_Harvester            = 58054,
+    Skill_Summon_Daedric_Titan        = GetString(SI_LUIE_SKILL_SUMMON_DAEDRIC_TITAN),
+    Skill_Suppression_Field           = 28341,
 
     -- Maelstrom Arena
     Skill_Sigil_of_Healing            = 66920,

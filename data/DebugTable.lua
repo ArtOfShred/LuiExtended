@@ -11613,6 +11613,41 @@ LUIE.DebugAuras = {
     [56827] = true, -- Puncturing Sweep (House Dres Templar)
     [27920] = true, -- Generic Knockback Stun (House Dres Templar)
 
+    [54156] = true, -- Quick Strike (House Dres Slaver)
+    [54160] = true, -- Berserker Frenzy (House Dres Slaver)
+    [54161] = true, -- Berserker Frenzy (House Dres Slaver)
+    [54162] = true, -- Berserker Frenzy Snare (House Dres Slaver)
+
+    [54122] = true, -- Enslavement Chk (House Dres Slaver)
+    [83774] = true, -- Enslavement (House Dres Slaver)
+    [54123] = true, -- Lingering Death (House Dres Slaver)
+    [54124] = true, -- Lingering Death (House Dres Slaver)
+    [58287] = true, -- (16095) CLDA - Enslavement (House Dres Slaver)
+
+    [54057] = true, -- Molten Weapons (Earthen Heart Knight)
+    [54056] = true, -- Molten Armaments (Earthen Heart Knight)
+
+    [54066] = true, -- Obsidian Shield (Earthen Heart Knight)
+    [54065] = true, -- Igneous Shield (Earthen Heart Knight)
+
+    [54077] = true, -- Cinder Storm (Earthen Heart Knight)
+    [54079] = true, -- Ash Storm Remover (Earthen Heart Knight)
+    [54081] = true, -- Cinder Storm (Earthen Heart Knight)
+    [54078] = true, -- Eruption Snare (Earthen Heart Knight)
+    [54080] = true, -- Cinder Storm (Earthen Heart Knight)
+
+    [54053] = true, -- Stone Giant (Earthen Heart Knight)
+    [54054] = true, -- Stone Giant (Earthen Heart Knight)
+    [54055] = true, -- Stone Giant (Earthen Heart Knight)
+
+    [54083] = true, -- Corrosive Armor (Earthen Heart Knight)
+    [54085] = true, -- Corrosive Armor (Earthen Heart Knight)
+    [54084] = true, -- Corrosive Armor (Earthen Heart Knight)
+
+    [54067] = true, -- Fossilize (Earthen Heart Knight)
+    [54069] = true, -- Fossilize (Earthen Heart Knight)
+    [54068] = true, -- Fossilize (Earthen Heart Knight)
+
     -- Stage 5 - The Celestial Ring
     [56910] = true, -- CLDA - Arena 6 Bonus
     [56912] = true, -- CLDA - Arena 6 Bonus
@@ -11630,10 +11665,155 @@ LUIE.DebugAuras = {
     [54411] = true, -- Celestial Blast (Anka-Ra Shadowcaster)
     [54415] = true, -- Celestial Blast (Anka-Ra Shadowcaster)
     [54404] = true, -- Celestial Blast (Anka-Ra Shadowcaster)
+    [54405] = true, -- Celestial Blast (Anka-Ra Shadowcaster)
+    [83441] = true, -- Celestial Blast (Anka-Ra Shadowcaster)
     [54314] = true, -- Celestial Ward (Tile Ward)
     [54315] = true, -- Celestial Ward (Tile Ward)
     [56255] = true, -- CDLA - Tile Ward Buff (Tile Ward)
     [54403] = true, -- Healing Ward (Tile Ward)
+
+    [52885] = true, -- Engulfing Flames (Anal'a Tu'wha)
+    [52887] = true, -- Engulfing Flames (Anal'a Tu'wha)
+
+    [52882] = true, -- Unstable Flame (Anal'a Tu'wha)
+    [52884] = true, -- Unstable Flame (Anal'a Tu'wha)
+    [52883] = true, -- Unstable Flame (Anal'a Tu'wha)
+
+    [52897] = true, -- Standard of Might (Anal'a Tu'wha)
+    [52901] = true, -- Standard of Might (Anal'a Tu'wha)
+    [52898] = true, -- Standard of Might (Anal'a Tu'wha)
+    [52903] = true, -- Standard of Might (Anal'a Tu'wha)
+    [52899] = true, -- Standard of Might (Anal'a Tu'wha)
+
+    [52891] = true, -- Flames of Oblivion (Anal'a Tu'wha)
+    [52892] = true, -- Flames of Oblivion (Anal'a Tu'wha)
+
+    -- Stage 6 - The Grove
+    [56943] = true, -- CLDA - Arena 7 Bonus
+    [56945] = true, -- CLDA - Arena 7 Bonus
+
+    [54608] = true, -- Drain Resource (Pacthunter Ranger)
+    [54609] = true, -- Drain Resource (Pacthunter Ranger)
+    [54610] = true, -- Drain Resource (Pacthunter Ranger)
+    [60442] = true, -- Draining Poison (Pacthunter Ranger)
+
+    [54512] = true, -- Regeneration Aura (Nature's Blessing)
+    [54513] = true, -- Restore Stamina (Nature's Blessing)
+    [54514] = true, -- Restore Magicka (Nature's Blessing)
+    [56575] = true, -- Nature's Grasp (Nature's Blessing)
+    [83468] = true, -- Restoring Nature (Nature's Blessing)
+
+    [52820] = true, -- Acid Spray (Pishna Longshot)
+    [52823] = true, -- Acid Spray (Pishna Longshot)
+    [52821] = true, -- Acid Spray (Pishna Longshot)
+    [52822] = true, -- Acid Spray (Pishna Longshot)
+
+    [52803] = true, -- Poison Injection (Pishna Longshot)
+    [52804] = true, -- Poison (Pishna Longshot)
+    [52805] = true, -- Poison Injection (Pishna Longshot)
+
+    [52825] = true, -- Lethal Arrow (Pishna Longshot)
+    [52826] = true, -- Lethal Arrow (Pishna Longshot)
+
+    -- Stage 7 - Circle of Rituals
+    [56963] = true, -- CLDA - Arena 8 Bonus
+    [56965] = true, -- CLDA - Arena 8 Bonus
+
+    [56946] = true, -- Dragon Fire Scale (Bloodwraith Kynval)
+    [56947] = true, -- Dragon Fire Scale (Bloodwraith Kynval)
+
+    [56599] = true, -- CLDA - Captured Animation (Daedric Sacrifice)
+    [54611] = true, -- CLDA - Sacrifice (Daedric Sacrifice)
+    [55635] = true, -- CLDA - Daedric Sac Check (Daedric Sacrifice)
+    [54634] = true, -- CLDA - Sacrifice (Daedric Sacrifice)
+    [54635] = true, -- CLDA - Sacrifice (Daedric Sacrifice)
+    [55355] = true, -- CLDA 7 - Summon Harvester (Daedric Sacrifice)
+    [55353] = true, -- CLDA 7 - Summon Scamp (Daedric Sacrifice)
+    [55354] = true, -- Q3868 Rise Knockback (Daedric Sacrifice)
+    [54612] = true, -- CLDA - Sacrifice (Daedric Sacrifice)
+    [55356] = true, -- Intro (Daedric Sacrifice)
+    [55357] = true, -- Untargetable (Daedric Sacrifice)
+
+    [52907] = true, -- Dark Flare (Shadow Knight)
+    [52908] = true, -- Dark Flare Dummy (Shadow Knight)
+    [52909] = true, -- Dark Flare (Shadow Knight)
+    [52910] = true, -- Dark Flare Trauma (Shadow Knight)
+    [22094] = true, -- Solar Flare Weaken (Shadow Knight)
+    [52911] = true, -- Solar Flare (Shadow Knight)
+
+    [52904] = true, -- Vampire's Bane (Shadow Knight)
+    [52906] = true, -- Vampire's Bane (Shadow Knight)
+    [52905] = true, -- Vampire's Bane (Shadow Knight)
+
+    [52912] = true, -- Purifying Light (Shadow Knight)
+    [52914] = true, -- Purifying Light (Shadow Knight)
+    [52917] = true, -- Purifying Light (Shadow Knight)
+    [52919] = true, -- Purifying Light (Shadow Knight)
+    [52915] = true, -- Purifying Light (Shadow Knight)
+
+    [52920] = true, -- Unstable Core (Shadow Knight)
+    [52921] = true, -- Unstable Core (Shadow Knight)
+
+    [52922] = true, -- Searing Light (Shadow Knight)
+    [52924] = true, -- Searing Light (Shadow Knight)
+    [52962] = true, -- Searing Light (Shadow Knight)
+
+    [52927] = true, -- Solar Disturbance (Shadow Knight)
+    [52929] = true, -- Solar Disturbance (Shadow Knight)
+    [52931] = true, -- Solar Disturbance (Shadow Knight)
+    [52933] = true, -- Solar Disturbance (Shadow Knight)
+    [52928] = true, -- Solar Disturbance (Shadow Knight)
+    [52932] = true, -- Solar Disturbance Snare (Shadow Knight)
+
+    [54792] = true, -- Crystal Blast (Dark Mage)
+    [54794] = true, -- Crystal Shard Stun (Dark Mage)
+    [54793] = true, -- Crystal Blast (Dark Mage)
+
+    [54795] = true, -- Shattering Prison (Dark Mage)
+    [54798] = true, -- Encase (Dark Mage)
+    [54799] = true, -- Encase (Dark Mage)
+    [54797] = true, -- Encase (Dark Mage)
+    [54796] = true, -- Shattering Prison (Dark Mage)
+
+    [54829] = true, -- Suppression Field (Dark Mage)
+    [54833] = true, -- Negate Magic (Dark Mage)
+    [54831] = true, -- Suppresion Field (Dark Mage)
+
+    [54819] = true, -- Daedric Minefield (Dark Mage)
+    [54820] = true, -- Daedric Mines (Dark Mage)
+    [54821] = true, -- Daedric Mines (Dark Mage)
+    [54823] = true, -- Daedric Mines (Dark Mage)
+    [54826] = true, -- Daedric Mines (Dark Mage)
+    [54828] = true, -- Daedric Mines (Dark Mage)
+    [54827] = true, -- Daedric Mines (Dark Mage)
+    [54825] = true, -- Daedric Minefield (Dark Mage)
+    [54824] = true, -- Daedric Minefield (Dark Mage)
+
+    [54809] = true, -- Dark Deal (Dark Mage)
+    [54812] = true, -- Dark Exchange Heal (Dark Mage)
+
+    -- Stage 8 - Steamworks
+    [56966] = true, -- CLDA - Arena 9 Bonus
+    [56968] = true, -- CLDA - Arena 9 Bonus
+
+    [25216] = true, -- Red (Dwarven Fire Centurion)
+    [25211] = true, -- Whirlwind Function (Dwarven Fire Centurion)
+    [25214] = true, -- Whirlwind Function (Dwarven Fire Centurion)
+    [25213] = true, -- Whirlwind Function (Dwarven Fire Centurion)
+    [25617] = true, -- Whirlwind Function (Dwarven Fire Centurion)
+
+    [72180] = true, -- Electric Wave (Dwarven Sphere)
+    [72181] = true, -- Electric Wave (Dwarven Sphere)
+
+    [25220] = true, -- Blue (Dwarven Ice Centurion)
+    [54841] = true, -- Ice Charge (Dwarven Ice Centurion)
+    [55022] = true, -- Ice Charge (Dwarven Ice Centurion)
+    [58900] = true, -- Ice Charge (Dwarven Ice Centurion)
+
+    [56065] = true, -- Ice Charge (Dwarven Ice Centurion)
+    [55981] = true, -- Ice Charge (Dwarven Ice Centurion)
+    [56628] = true, -- Ice Charge (Dwarven Ice Centurion)
+    [55982] = true, -- Ice Charge (Dwarven Ice Centurion)
 
     -- Maelstrom Arena (Shared)
     [43882] = true, -- CON_Portal 3 Seconds

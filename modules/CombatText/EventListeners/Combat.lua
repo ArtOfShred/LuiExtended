@@ -205,7 +205,7 @@ function CTL:EffectChanged(...)
         if GetGroupSize() > 1 and unitTag == 'player' then return end
         -- Don't duplicate events if the target is reticleover, we already find all named targets w/o this.
         if unitTag == 'reticleover' or unitTag == 'reticleoverplayer' then return end
-        if AlertT[abilityId].noSelf and unitName == LUIE.PlayerNameFormatted then return end
+        if AlertT[abilityId].noSelf and unitName == LUIE.PlayerNameRaw then return end
 
         if changeType == EFFECT_RESULT_UPDATED and AlertT[abilityId].ignoreRefresh then return end
 

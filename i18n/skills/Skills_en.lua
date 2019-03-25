@@ -270,6 +270,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Restoring Stamina every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP =      "Absorbing damage.",
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP =             "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_SPELL_RESIST_NO_DUR_TP =               "Increase Spell Resistance.",
 
     -- Stealth / Detection
     SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Marked for |cFFFFFF<<1>>|r <<1[second/seconds]>>. You are visible to the enemy that marked you even when in stealth.",
@@ -1192,10 +1193,37 @@ local strings = {
     SI_LUIE_SKILL_THUNDERING_PRESENCE_NPC_TP =           "Increase Physical and Spell Resistance by |cFFFFFF23100|r and enemies within |cFFFFFF5|r meters take Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BOUND_AEGIS_NPC_TP =                   "Reduce damage taken by |cffffff20|r%.",
     SI_LUIE_SKILL_MARK_TARGET_NPC_TP =                   "Reduce Physical and Spell Resistance by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.\n\nThe Nightblade heals for |cFFFFFF40|r% of their Max Health if you die under this effect.",
+
+    SI_LUIE_SKILL_ENSLAVEMENT_TP =                       "Afflicted with Magic Damage every |cFFFFFF1|r second and Movement Speed gradually reduced over time by up to |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_MOLTEN_ARMAMENTS_NPC_TP =              "Increase Weapon and Spell Damage for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_CINDER_STORM_NPC_TP =                  "Taking Flame Damage every |cffffff1|r second, |cFFFFFF30|r% chance to miss all attacks, and Movement Speed reduced by |cffffff70|r%.",
+    SI_LUIE_SKILL_STONE_GIANT_NPC_TP =                   "Increase Physical Resistance for |cFFFFFF<<1>>|r seconds.",
+
+    SI_LUIE_SKILL_CORROSIVE_ARMOR_NPC_TP =               "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies suffer |cFFFFFF34|r% reduced Weapon Damage and take Flame Damage and every |cffffff1|r second for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_CORROSIVE_ARMOR_NPC_DEBUFF_TP =        "Taking Flame Damage every |cffffff1|r second and Weapon Damage reduced by |cFFFFFF34|r%.",
+
     SI_LUIE_SKILL_EMPOWERING_CHAINS_NPC_TP =             "Increase damage done by |cffffff5|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_PETRIFY_NPC_TP =                       "Stunned and absorbing damage for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_PETRIFY_NPC_TP =                       "Stunned and absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nThe stun breaks after taking enough damage.",
     SI_LUIE_SKILL_CELESTIAL_WARD_TP =                    "While standing in the ward you are protected from Celestial Blast.\n\nHealing every |cffffff0.25|r seconds.",
-    SI_LUIE_SKILL_CELESTIAL_BLAST_TP =                   "The Anka-Ra Shadowcaster is aligning the orbitial GDI Ion Cannon to your position, enter the lit Celestial Rune to protect yourself.",
+    SI_LUIE_SKILL_CELESTIAL_BLAST_TP =                   "Targeted by Celestial Blast, after |cFFFFFF<<1>>|r seconds you will take a massive amount of Physical Damage and be stunned for |cFFFFFF4|r seconds.\n\nEnter the lit Celestial Rune to protect yourself.",
+    SI_LUIE_SKILL_STANDARD_OF_MIGHT_NPC_TP =             "Increase damage done and reduce damage taken by |cFFFFFF35|r% while standing within the radius of the standard.",
+    SI_LUIE_SKILL_STANDARD_OF_MIGHT_NPC_GROUND_TP =      "Taking Flame Damage every |cFFFFFF1|r second and healing received reduced by |cFFFFFF50|r%.",
+
+    SI_LUIE_SKILL_DRAINING_POISON_TP =                   "Afflicted with Poison Damage every |cFFFFFF1|r second and Magicka and Stamina Recovery reduced for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_NATURES_BLESSING =                     "Nature's Blessing",
+    SI_LUIE_SKILL_NATURES_BLESSING_TP =                  "Nature's Blessing deals increased Physical Damage for each stack for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_NATURES_BLESSING_GROUND_TP =           "Restoring |cFFFFFF13|r% of your Max Stamina and Magicka every |cFFFFFF1|r second.\n\nTaking stacking Physical Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_ACID_SPRAY_NPC_TP =                    "Afflicted with Poison Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SUMMON_DAEDRIC_TITAN =                 "Summon Daedric Titan",
+
+    SI_LUIE_SKILL_DARK_FLARE_NPC_TP =                    "Reduce healing received by |cFFFFFF40%|r.",
+    SI_LUIE_SKILL_PURIFYING_LIGHT_NPC_TP =               "|cFFFFFF33|r% of all damage taken for the next |cFFFFFF<<1>>|r seconds will be copied and released as Magic Damage when the effect ends.\n\nWhen the effect ends, a pool of sunlight remains on the ground, healing the Templar and their allies if they are nearby every |cFFFFFF2|r seconds for |cFFFFFF6|r seconds.",
+    SI_LUIE_SKILL_UNSTABLE_CORE_NPC_TP =                 "Your single target ranged abilities are reflected back on you for |cFFFFFF<<1>>|r seconds.\n\nThe core explodes when this effect ends, dealing Magic Damage to you and nearby allies.",
+    SI_LUIE_SKILL_SEARING_LIGHT_TP =                     "|cFFFFFF50|r% chance to miss all attacks for |cFFFFFF4|r seconds.\n\nStunned for |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_SOLAR_DISTURBANCE_NPC_TP =             "Enemies in the nova take Magic Damage every |cFFFFFF1|r second, have their damage reduced by |cFFFFFF25|r%, and have their Movement Speed reduced by |cffffff60|r%.",
+    SI_LUIE_SKILL_DARK_DEAL_NPC_TP =                     "Increase Physical and Spell Resistance and heal every |cFFFFFF1|r second after |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_ICE_CHARGE_TP =                        "Afflicted with Frost Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF90|r% for |cFFFFFF<<1>>|r seconds.",
 
 }
 

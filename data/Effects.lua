@@ -1443,11 +1443,19 @@ E.AddNameAura = {
     --------------------------------------------
 
     -- Dragonstar Arena
-    [U.Boss_Champion_Marcauld] =  { [1] = { id = 33097 } }, -- Champion Marcauld
-    [U.Boss_Yavni_Frost_Skin] =  { [1] = { id = 33097 } }, -- Yavni Frost-Skin
-    [U.Boss_Katti_Ice_Turner] =  { [1] = { id = 33097 } }, -- Katti Ice-Turner
-    [U.Boss_Shilia] =  { [1] = { id = 33097 } }, -- Shilia
-    [U.Boss_Nak_tah] =  { [1] = { id = 33097 } }, -- Nak'tah
+    [U.Boss_Champion_Marcauld] = { [1] = { id = 33097 } }, -- Champion Marcauld
+    [U.Boss_Yavni_Frost_Skin] = { [1] = { id = 33097 } }, -- Yavni Frost-Skin
+    [U.Boss_Katti_Ice_Turner] = { [1] = { id = 33097 } }, -- Katti Ice-Turner
+    [U.Boss_Shilia] = { [1] = { id = 33097 } }, -- Shilia
+    [U.Boss_Nak_tah] = { [1] = { id = 33097 } }, -- Nak'tah
+    [U.Boss_Earthen_Heart_Knight] = { [1] = { id = 33097 } }, -- Earthen Heart Knight
+    [U.NPC_Anka_Ra_Shadowcaster] = { [1] = { id = 33097 } }, -- Anka-Ra Shadowcaster
+    [U.Boss_Anala_tuwha] = { [1] = { id = 33097 } }, -- Anal'a Tu'wha
+    [U.NPC_Pacthunter_Ranger] = { [1] = { id = 33097 } }, -- Pacthunter Ranger
+    [U.Boss_Pishna_Longshot] = { [1] = { id = 33097 } }, -- Pishna Longshot
+    [U.Boss_Shadow_Knight] = { [1] = { id = 33097, zone = 363 } }, -- Shadow Knight
+    [U.Boss_Dark_Mage] = { [1] = { id = 33097, zone = 363 } }, -- Dark Mage
+    [U.NPC_Dwarven_Fire_Centurion] = { [1] = { id = 33097, zone = 363 } }, -- Dwarven Fire Centurion
 
     -- Maelstrom Arena
     [U.Boss_Maxus_the_Many] = { [1] = { id = 33097 } }, -- Maxus the Many
@@ -2170,7 +2178,9 @@ E.EffectHideSCT = {
 
     -- Dragonstar Arena
     [53252] = true, -- Wrecking Blow (Yavni Frost-Skin)
-    [53675] = true, -- Power Overload Heavy Attack (Nak'tah)
+    [54123] = true, -- Lingering Death (House Dres Slaver)
+    [54078] = true, -- Eruption Snare (Earthen Heart Knight)
+    [52932] = true, -- Solar Disturbance Snare (Shadow Knight)
 
     -- Maelstrom Arena
     [71729] = true, -- Sigil of Defense (Sigil of Defense)
@@ -4134,7 +4144,7 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Crystal Shard / Crystal Blast / Crystal Fragments
-    [46332] = { tooltip = T.Generic_Stun }, -- Crystal Blast (Crystal Blast)
+    [46332] = { tooltip = T.Generic_Knockdown }, -- Crystal Blast (Crystal Blast)
     [46327] = { name = A.Skill_Crystal_Fragments, tooltip = T.Skill_Crystal_Fragments }, -- Crystal Fragments Proc (Crystal Fragments)
 
     -- Encase / Shattering Prison / Restraining Prison
@@ -6526,7 +6536,7 @@ E.EffectOverride = {
     [46819] = { icon = 'esoui/art/icons/ability_mage_068.dds', name = A.Skill_Lasting_Storm, groundLabel = true, tooltip = T.Generic_AOE_Shock_1_Sec }, -- Storm Damage (Cyrodiil Mage T2)
     [46704] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds' }, -- Crystal Blast (Cyrodiil Mage T2)
     [46705] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds' }, -- Crystal Blast (Cyrodiil Mage T2)
-    [46706] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds', name = A.Skill_Crystal_Blast, tooltip = T.Generic_Stun }, -- Crystal Shard Stun (Cyrodiil Mage T2)
+    [46706] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds', name = A.Skill_Crystal_Blast, tooltip = T.Generic_Knockdown }, -- Crystal Shard Stun (Cyrodiil Mage T2)
     [46716] = { icon = 'esoui/art/icons/ability_mage_008.dds', name = A.Skill_Steal_Essence }, -- Stolen Essence (Cyrodiil Mage T2)
     [46719] = { hide = true }, -- Stolen Essence (Cryodiil Mage T2) (Pointless aura)
     [52806] = { tooltip = T.Skill_Unstable_Core_Cyrodiil }, -- Unstable Core (Cyrodiil Mage T2)
@@ -9099,8 +9109,32 @@ E.EffectOverride = {
     [56827] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds' }, -- Puncturing Sweep (House Dres Templar)
     [27920] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = A.Skill_Puncturing_Sweep, tooltip = T.Generic_Knockback }, -- Generic Knockback Stun (House Dres Templar)
 
+    [54156] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (House Dres Slaver)
+    [54160] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (House Dres Slaver)
+    [54161] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_swordstorm.dds' }, -- Berserker Frenzy (House Dres Slaver)
 
+    [54122] = { hide = true }, -- Enslavement Chk (House Dres Slaver)
+    [83774] = { icon = 'esoui/art/icons/achievement_manacles.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Enslavement }, -- Enslavement (House Dres Slaver)
+    [54123] = { icon = 'esoui/art/icons/achievement_manacles.dds', name = A.Skill_Enslavement }, -- Lingering Death (House Dres Slaver)
+    [54124] = { icon = 'esoui/art/icons/achievement_manacles.dds', name = A.Skill_Enslavement }, -- Lingering Death (House Dres Slaver)
 
+    [54056] = { icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = A.Skill_Molten_Weapons, tooltip = T.Skill_Molten_Armaments_NPC }, -- Molten Armaments (Earthen Heart Knight)
+    [54065] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Igneous Shield (Earth Heart Knight)
+
+    [54081] = { duration = 0, groundLabel = true, hideGround = true, tooltip = T.Skill_Cinder_Storm_NPC }, -- Cinder Storm (Earthen Heart Knight)
+    [54078] = { name = A.Skill_Cinder_Storm, hide = true }, -- Eruption Snare (Earthen Heart Knight)
+    [54080] = { groundLabel = true, tooltip = T.Skill_Cinder_Storm_NPC }, -- Cinder Storm (Earthen Heart Knight)
+
+    [54054] = { tooltip = T.Skill_Stone_Giant_NPC }, -- Stone Giant (Earthen Heart Knight)
+    [54055] = { tooltip = T.Generic_Knockdown }, -- Stone Giant (Earthen Heart Knight)
+
+    [54083] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_corrosive_armor_npc.dds', tooltip = T.Skill_Corrosive_Armor_NPC },
+    [54085] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_corrosive_armor_npc.dds', duration = 0, groundLabel = true, tooltip = T.Skill_Corrosive_Armor_Debuff_NPC, type = BUFF_EFFECT_TYPE_DEBUFF },
+    [54084] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_corrosive_armor_npc.dds' },
+
+    [54067] = { icon = 'esoui/art/icons/ability_dragonknight_014.dds', name = A.Skill_Petrify, tooltip = T.Skill_Petrify_NPC }, -- Fossilize (Earthen Heart Knight)
+    [54069] = { icon = 'esoui/art/icons/ability_dragonknight_014.dds', name = A.Skill_Petrify }, -- Fossilize (Earthen Heart Knight)
+    [54068] = { icon = 'esoui/art/icons/ability_dragonknight_014.dds', name = A.Skill_Petrify, tooltip = T.Generic_Stun }, -- Fossilize (Earthen Heart Knight)
 
     -- Dragonstar Arena (Stage 5) - The Celestial Ring
     [52879] = { tooltip = T.Skill_Empowering_Chains_NPC }, -- Empowering Chains (Anka-Ra Blademaster)
@@ -9111,14 +9145,104 @@ E.EffectOverride = {
     [51353] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrify.dds' }, -- Petrify (Gargoyle)
     [51354] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrify.dds', tooltip = T.Generic_Stun }, -- Petrify (Gargoyle)
 
-    [54411] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_celestial_blast.dds', hide = true }, -- Celestial Blast (Anka-Ra Shadowcaster)
+    [54411] = { icon = 'esoui/art/icons/ability_mage_013.dds', hide = true }, -- Celestial Blast (Anka-Ra Shadowcaster)
     [54415] = { hide = true }, -- Celestial Blast (Anka-Ra Shadowcaster)
-    [54404] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_celestial_blast.dds', tooltip = T.Skill_Celestial_Blast, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Celestial Blast (Anka-Ra Shadowcaster)
+    [54404] = { icon = 'esoui/art/icons/ability_mage_013.dds', tooltip = T.Skill_Celestial_Blast, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Celestial Blast (Anka-Ra Shadowcaster)
     [54314] = { hide = true }, -- Celestial Ward (Tile Ward)
+
+    [54405] = { icon = 'esoui/art/icons/ability_mage_013.dds', unbreakable = 1, tooltip = T.Generic_Stun }, -- Celestial Blast (Anka-Ra Shadowcaster)
+    [83441] = { icon = 'esoui/art/icons/ability_mage_013.dds', hide = true }, -- Celestial Blast (Anka-Ra Shadowcaster)
 
     [54315] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_celestial_ward.dds', tooltip = T.Skill_Celestial_Ward, duration = 0, forcedContainer = 'short', groundLabel = true }, -- Celestial Ward (Tile Ward)
     [56255] = { hide = true }, -- CLDA - Tile Ward Buff (Tile Ward)
     [54403] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_celestial_ward.dds', name = A.Skill_Celestial_Ward }, -- Healing Ward (Tile Ward)
+
+    [52887] = { tooltip = T.Skill_Engulfing_Flames }, -- Engulfing Flames (Anal'a Tu'wha)
+    [52882] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_unstable_flame.dds', }, -- Unstable Flame (Anal'a Tu'wha)
+    [52884] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_unstable_flame.dds', tooltip = T.Generic_Burn_2_Sec }, -- Unstable Flame (Anal'a Tu'wha)
+
+    [52901] = { icon = 'esoui/art/icons/ability_dragonknight_006_b.dds', tooltip = T.Skill_Standard_of_Might_NPC, duration = 0, groundLabel = true }, -- Standard of Might (Anal'a Tu'wha)
+    [52903] = { tooltip = T.Skill_Standard_of_Might_NPC_Ground, groundLabel = true }, -- Standard of Might (Anal'a Tu'wha)
+
+    [52891] = { icon = 'esoui/art/icons/ability_dragonknight_002.dds', name = A.Skill_Inferno }, -- Flames of Oblivion (Anal'a Tu'wha)
+    [52892] = { icon = 'esoui/art/icons/ability_dragonknight_002.dds', name = A.Skill_Inferno, hide = true }, -- Flames of Oblivion (Anal'a Tu'wha)
+
+    -- Stage 6 - The Grove
+    [54608] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_poison_shot.dds', name = A.Skill_Draining_Poison, hide = true }, -- Drain Resource (Pacthunter Ranger)
+    [60442] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_poison_shot.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Draining_Poison }, -- Draining Poison (Pacthunter Ranger)
+
+    --[54512] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_natures_blessing.dds', name = A.Skill_Natures_Blessing }, -- Regeneration Aura (Nature's Blessing)
+    [54513] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_natures_blessing.dds', name = A.Skill_Natures_Blessing }, -- Restore Stamina (Nature's Blessing)
+    [54514] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_natures_blessing.dds', name = A.Skill_Natures_Blessing }, -- Restore Magicka (Nature's Blessing)
+    [56575] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_natures_blessing.dds', name = A.Skill_Natures_Blessing, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Natures_Blessing }, -- Nature's Grasp (Nature's Blessing)
+    [83468] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_natures_blessing.dds', name = A.Skill_Natures_Blessing, tooltip = T.Skill_Natures_Blessing_Ground, groundLabel = true }, -- Restoring Nature (Nature's Blessing)
+
+    [52820] = { icon = 'esoui/art/icons/ability_bow_005_b.dds' }, -- Acid Spray (Pishna Longshot)
+    [52823] = { icon = 'esoui/art/icons/ability_bow_005_b.dds' }, -- Acid Spray (Pishna Longshot)
+    [52821] = { icon = 'esoui/art/icons/ability_bow_005_b.dds', tooltip = T.Skill_Acid_Spray_NPC, hideReduce = true }, -- Acid Spray (Pishna Longshot)
+    [52822] = { icon = 'esoui/art/icons/ability_bow_005_b.dds', tooltip = T.Skill_Acid_Spray_NPC }, -- Acid Spray (Pishna Longshot)
+
+    [52803] = { icon = 'esoui/art/icons/ability_bow_002_b.dds' }, -- Poison Injection (Pishna Longshot)
+    [52805] = { icon = 'esoui/art/icons/ability_bow_002_b.dds', tooltip = T.Skill_Poison_Injection }, -- Poison Injection (Pishna Longshot)
+
+    [52825] = { icon = 'esoui/art/icons/ability_bow_001_a.dds' }, -- Lethal Arrow (Pishna Longshot)
+    [52826] = { icon = 'esoui/art/icons/ability_bow_001_a.dds', tooltip = T.Skill_Lethal_Arrow_Cyrodiil }, -- Lethal Arrow (Pishna Longshot)
+
+    -- Stage 7 - Circle of Rituals
+    [56946] = { icon = 'esoui/art/icons/ability_dragonknight_008.dds', name = A.Skill_Reflective_Scale, tooltip = T.Skill_Reflective_Shadows }, -- Dragon Fire Scale (Bloodwraith Kynval)
+
+    [56599] = { hide = true }, -- CLDA - Captured Animation (Daedric Sacrifice)
+
+    [55635] = { hide = true }, -- CLDA - Daedric Sac Check (Daedric Sacrifice)
+    [54634] = { hide = true,  icon = 'esoui/art/icons/achievement_ic_018.dds', name = A.Skill_Summon_Harvester }, -- CLDA - Sacrifice (Daedric Sacrifice)
+    [54635] = { hide = true, icon = 'esoui/art/icons/achievement_ic_telvarscamp.dds', name = A.Skill_Summon_Scamp }, -- CLDA - Sacrifice (Daedric Sacrifice)
+    [54612] = { hide = true, icon = 'esoui/art/icons/achievement_wrothgar_001.dds', name = A.Skill_Summon_Daedric_Titan }, -- CLDA - Sacrifice (Daedric Sacrifice)
+    [55356] = { hide = true }, -- Intro (Daedric Sacrifice)
+
+    [52910] = { name = A.Skill_Dark_Flare, tooltip = T.Skill_Dark_Flare_NPC, unbreakable = 1 }, -- Dark Flare Trauma (Shadow Knight)
+    [52909] = { icon = 'esoui/art/icons/ability_templar_dark_flare.dds' }, -- Dark Flare (Shadow Knight)
+    [22094] = { icon = 'esoui/art/icons/ability_templar_dark_flare.dds', name = A.Skill_Dark_Flare, hide = true }, -- Solar Flare Weaken (Shadow Knight)
+
+    [52922] = { tooltip = T.Skill_Searing_Light }, -- Searing Light (Shadow Knight)
+    [52962] = { tooltip = T.Skill_Searing_Light, hideReduce = true }, -- Searing Light (Shadow Knight)
+
+    [52906] = { tooltip = T.Skill_Sun_Fire, tooltipValue2Id = 52905 }, -- Vampire's Bane (Shadow Knight)
+    [52905] = { icon = 'esoui/art/icons/ability_templar_vampire_bane.dds' }, -- Vampire's Bane (Shadow Knight)
+
+    [52912] = { tooltip = T.Skill_Purifying_Light_NPC }, -- Purifying Light (Shadow Knight)
+
+    [52920] = { tooltip = T.Skill_Unstable_Core_NPC }, -- Unstable Core (Shadow Knight)
+
+    [52933] = { groundLabel = true, tooltip = T.Skill_Solar_Disturbance_NPC }, -- Solar Disturbance (Shadow Knight)
+    [52932] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance }, -- Solar Disturbance Snare (Shadow Knight)
+
+    [34405] = { hide = true }, -- Swallowing Souls (Daedric Titan)
+
+    [54792] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds' }, -- Crystal Blast (Dark Mage)
+    [54794] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds', name = A.Skill_Crystal_Blast, tooltip = T.Generic_Knockdown }, -- Crystal Shard Stun (Dark Mage)
+    [54793] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds' }, -- Crystal Blast (Dark Mage)
+
+    [54795] = { tooltip = T.Skill_Shattering_Prison }, -- Shattering Prison (Dark Mage)
+
+    [54833] = { icon = 'esoui/art/icons/ability_sorcerer_crushing_monsoon.dds', name = A.Skill_Suppression_Field, duration = 0, groundLabel = true, tooltip = T.Generic_Silence_No_Dur }, -- Negate Magic (Dark Mage)
+    [54831] = { icon = 'esoui/art/icons/ability_sorcerer_crushing_monsoon.dds', name = A.Skill_Suppression_Field, duration = 0, groundLabel = true, tooltip = T.Generic_Increase_Spell_Resist_No_Dur }, -- Supression Field (Dark Mage)
+
+    [54824] = { tooltip = T.Generic_Immobilize }, -- Daedric Minefield (Dark Mage)
+
+    [54809] = { tooltip = T.Skill_Dark_Dark_NPC }, -- Dark Deal (Dark Mage)
+
+    -- Stage 8 - Steamworks
+    [25211] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_whirlwind_function.dds' }, -- Whirlwind Function (Dwarven Fire Centurion)
+    [25213] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_whirlwind_function.dds' }, -- Whirlwind Function (Dwarven Fire Centurion)
+
+    [54841] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_ice_charge.dds' }, -- Ice Charge (Dwarven Ice Centurion)
+    [55022] = { hide = true }, -- Ice Charge (Dwarven Ice Centurion)
+    [58900] = { hide = true }, -- Ice Charge (Dwarven Ice Centurion)
+    [55981] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds' }, -- Ice Charge (Dwarven Ice Centurion)
+    [55982] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', tooltip = T.Skill_Ice_Charge }, -- Ice Charge (Dwarven Ice Centurion)
+
+    [72180] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_split_bolt.dds' }, -- Electric Wave (Dwarven Sphere)
+    [72181] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_split_bolt.dds' }, -- Electric Wave (Dwarven Sphere)
 
     -- Maelstrom Arena (Shared)
     [43882] = { hide = true }, -- CON_Portal 3 Seconds
@@ -10255,7 +10379,10 @@ E.FakeExternalDebuffs = {
     -- Dragonstar Arena
     [53342] = { duration = 0 }, -- Biting Cold (Biting Cold)
     [27920] = { duration = 1800 }, -- Generic Knockback Stun (House Dres Templar)
+    [54068] = { duration = 500 }, -- Fossilize (Earthen Heart Knight)
     [51354] = { duration = 500 }, -- Petrify (Gargoyle)
+    [54405] = { duration = 4000 }, -- Celestial Blast (Anka-Ra Shadowcaster)
+    [52910] = { duration = 6000 }, -- Dark Flare Trauma (Shadow Knight)
 
     ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------
@@ -10780,6 +10907,10 @@ E.AddGroundDamageAura = {
     [53280] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Unstable Wall of Frost (Sovngarde Icemage)
     [83498] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Poisonous Cloud (Poison Cloud)
     [53625] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Lightning Flood (Nak'tah)
+    [54080] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Cinder Storm (Earthen Heart Knight)
+    [52903] = { duration = 1200, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Standard of Might (Anal'a Tu'wha)
+    [83468] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Restoring Nature (Nature's Blessing)
+    [52933] = { duration = 1200, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Solar Disturbance (Shadow Knight)
 
     -- Maelstrom Arena
     [68197] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Necrotic Essence (Necrotic Orb)
