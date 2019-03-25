@@ -1222,7 +1222,7 @@ local strings = {
     SI_LUIE_SKILL_UNSTABLE_CORE_NPC_TP =                 "Your single target ranged abilities are reflected back on you for |cFFFFFF<<1>>|r seconds.\n\nThe core explodes when this effect ends, dealing Magic Damage to you and nearby allies.",
     SI_LUIE_SKILL_SEARING_LIGHT_TP =                     "|cFFFFFF50|r% chance to miss all attacks for |cFFFFFF4|r seconds.\n\nStunned for |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_SOLAR_DISTURBANCE_NPC_TP =             "Enemies in the nova take Magic Damage every |cFFFFFF1|r second, have their damage reduced by |cFFFFFF25|r%, and have their Movement Speed reduced by |cffffff60|r%.",
-    SI_LUIE_SKILL_DARK_DEAL_NPC_TP =                     "Increase Physical and Spell Resistance and heal every |cFFFFFF1|r second after |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_DARK_DEAL_NPC_TP =                     "Increase Physical and Spell Resistance, and heal every |cFFFFFF1|r second after |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_ICE_CHARGE_TP =                        "Afflicted with Frost Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF90|r% for |cFFFFFF<<1>>|r seconds.",
 
 }
