@@ -1625,9 +1625,24 @@ E.EffectOverrideByName = {
 
     [15164] =   { -- Heat Wave (Fire Mage)
                     [U.Boss_Akezel] =               { icon = 'LuiExtended/media/icons/abilities/ability_templar_heat_wave.dds', name = A.Skill_Trail_of_Flames }, -- Akezel (City of Ash II)
+                    [U.NPC_Anka_Ra_Pyromancer] =    { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Wall_of_Flames }, -- Anka-Ra Pyromancer (Dragonstar Arena)
+                    [U.NPC_Bloodwraith_Kyngald] =   { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Wall_of_Flames }, -- Bloodwraith Kyngald (Dragonstar Arena)
                 },
     [16588] =   { -- Heat Wave (Fire Mage)
                     [U.Boss_Akezel] =               { icon = 'LuiExtended/media/icons/abilities/ability_templar_heat_wave.dds', name = A.Skill_Trail_of_Flames }, -- Akezel (City of Ash II)
+                    [U.NPC_Anka_Ra_Pyromancer] =    { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Wall_of_Flames }, -- Anka-Ra Pyromancer (Dragonstar Arena)
+                    [U.NPC_Bloodwraith_Kyngald] =   { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Wall_of_Flames }, -- Bloodwraith Kyngald (Dragonstar Arena)
+                },
+    [47095] =   { -- Fire Rune (Fire Mage)
+                    [U.NPC_Anka_Ra_Pyromancer] =    { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Anka-Ra Pyromancer (Dragonstar Arena)
+                    [U.NPC_Bloodwraith_Kyngald] =   { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Bloodwraith Kyngald (Dragonstar Arena)
+                },
+    [47102] =   { -- Fire Rune (Fire Mage)
+                    [U.NPC_Anka_Ra_Pyromancer] =    { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Anka-Ra Pyromancer (Dragonstar Arena)
+                    [U.NPC_Bloodwraith_Kyngald] =   { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Bloodwraith Kyngald (Dragonstar Arena)
+                },
+    [12456] =   { -- Ice Arrow (Shared - Frost Mage & Spirit Mage)
+                    [U.NPC_Dragonclaw_Conjurer] =   { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_ice_arrow.dds' }, -- Dragonclaw Conjurer (Dragonstar Arena)
                 },
 
     [88947] =   { -- Lightning Grasp (Xivilai)
@@ -6339,9 +6354,9 @@ E.EffectOverride = {
     [44216] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds' }, -- Negate Magic (Battlemage)
     [50108] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0, tooltip = T.Generic_Silence_No_Dur, groundLabel = true }, -- Negate Magic (Battlemage)
     [50107] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0, tooltip = T.Generic_Stun_No_Dur, groundLabel = true }, -- Negate Magic (Battlemage)
-    [37126] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_magic_ranged.dds' }, -- Entropic Flare (Timb Bomb Mage)
-    [36986] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_magic_aoe.dds' }, -- Void (Time Bomb Mage)
-    [14370] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_magic_aoe.dds' }, -- Void (Time Bomb Mage)
+    [37126] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_magic_ranged.dds' }, -- Entropic Flare (Timb Bomb Mage)
+    [36986] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_magic_aoe.dds' }, -- Void (Time Bomb Mage)
+    [14370] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_magic_aoe.dds' }, -- Void (Time Bomb Mage)
     [56828] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_fright_force_p.dds', hide = true }, -- Fright Force (Fear Mage)
     [14350] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_aspect_of_terror_p.dds', hide = true }, -- Aspect of Terror (Fear Mage)
     [37084] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_aspect_of_terror_p.dds', tooltip = T.Generic_Fear }, -- Aspect of Terror (Fear Mage)
@@ -9236,10 +9251,11 @@ E.EffectOverride = {
     [25213] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_whirlwind_function.dds' }, -- Whirlwind Function (Dwarven Fire Centurion)
 
     [54841] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_ice_charge.dds' }, -- Ice Charge (Dwarven Ice Centurion)
-    [55022] = { hide = true }, -- Ice Charge (Dwarven Ice Centurion)
+    [55022] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_ice_charge.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Ice Charge (Dwarven Ice Centurion)
     [58900] = { hide = true }, -- Ice Charge (Dwarven Ice Centurion)
+    [56065] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', unbreakable = 1, tooltip = T.Skill_Ice_Charge }, -- Ice Charge (Dwarven Ice Centurion)
     [55981] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds' }, -- Ice Charge (Dwarven Ice Centurion)
-    [55982] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', tooltip = T.Skill_Ice_Charge }, -- Ice Charge (Dwarven Ice Centurion)
+    [55982] = { hide = true }, -- Ice Charge (Dwarven Ice Centurion)
 
     [72180] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_split_bolt.dds' }, -- Electric Wave (Dwarven Sphere)
     [72181] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_split_bolt.dds' }, -- Electric Wave (Dwarven Sphere)
@@ -10383,6 +10399,7 @@ E.FakeExternalDebuffs = {
     [51354] = { duration = 500 }, -- Petrify (Gargoyle)
     [54405] = { duration = 4000 }, -- Celestial Blast (Anka-Ra Shadowcaster)
     [52910] = { duration = 6000 }, -- Dark Flare Trauma (Shadow Knight)
+    [56065] = { duration = 12000 }, -- Ice Charge (Dwarven Ice Centurion)
 
     ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------
@@ -10985,6 +11002,28 @@ E.MapDataOverride = {
                 },
     [27828] =   { -- Crushing Blow  (Yalorasse the Speaker)
                     [11] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut }, -- Tempest Island
+                },
+
+    [35151] =   { -- Spell Absorption (Spirit Mage)
+                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_spell_absorption.dds' }, -- Dragonstar Arena
+                },
+    [14472] =   { -- Burdening Eye (Spirit Mage)
+                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_burdening_eye.dds' }, -- Dragonstar Arena
+                },
+    [37200] =   { -- Burden (Spirit Mage)
+                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_burdening_eye.dds' }, -- Dragonstar Arena
+                },
+    [35142] =   { -- Burden (Spirit Mage)
+                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_burdening_eye.dds' }, -- Dragonstar Arena
+                },
+    [14524] =   { -- Shock (Storm Mage)
+                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_ranged.dds' }, -- Dragonstar Arena
+                },
+    [29471] =   { -- Thunder Thrall (Storm Mage)
+                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Dragonstar Arena
+                },
+    [29470] =   { -- Thunder Thrall (Storm Mage)
+                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Dragonstar Arena
                 },
 
 }

@@ -704,18 +704,19 @@ local AlertTable = {
 
     -- Stage 1
     [52729] = { power = true, priority = 1, auradetect = true }, -- Expert Hunter (Fighters Guild Swordmaster)
-    [52738] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.NPC_Fighters_Guild_Gladiator, bossName = true }, -- Ring of Preservation (Fighters Guild Gladiator)
-    [52746] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Flawless Dawnbreaker (Champion Marcauld)
+    [52738] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Ring of Preservation (Fighters Guild Gladiator)
+
+    [52746] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossMatch = U.Boss_Champion_Marcauld }, -- Flawless Dawnbreaker (Champion Marcauld)
 
     -- Stage 2 - The Frozen Ring
-    [53264] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.NPC_Sovngarde_Slayer, bossMatch = U.Boss_Yavni_Frost_Skin }, -- Rally (Sovngarde Slayer)
-    [53313] = { avoid = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, fakeName = U.NPC_Sovngarde_Ranger }, -- Volley (Sovngarde Slayer)
+    [53264] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true }, -- Rally (Sovngarde Slayer)
+    [53313] = { avoid = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500 }, -- Volley (Sovngarde Slayer)
 
     [53286] = { interrupt = true, block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crushing Shock (Sovngarde Icemage)
-    [53274] = { avoid = true, priority = 1, auradetect = true, fakeName = U.NPC_Sovngarde_Icemage, bossMatch = U.Boss_Katti_Ice_Turner }, -- Unstable Wall of Frost (Sovngarde Icemage)
+    [53274] = { avoid = true, priority = 1, auradetect = true, bossMatch = U.Boss_Katti_Ice_Turner }, -- Unstable Wall of Frost (Sovngarde Icemage)
 
     [53250] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Wrecking Blow (Yavni Frost-Skin)
-    [53301] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = U.Boss_Katti_Ice_Turner }, -- Icy Pulsar (Katti Ice-Turner)
+    [53301] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossMatch = U.Boss_Katti_Ice_Turner }, -- Icy Pulsar (Katti Ice-Turner)
 
     -- Stage 3 - The Marsh
     [8244] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Devastate (Corprus Husk)
@@ -731,7 +732,7 @@ local AlertTable = {
     [53659] = { block = true, avoid = true, interrupt = true, priority = 1, auradetect = true }, -- Power Overload Heavy Attack (Nak'tah)
 
     -- Stage 4 - The Slave Pit
-    [54160] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 750, eventdetect = true }, -- Berserker Frenzy (House Dres Slaver)
+    [54160] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 750, eventdetect = true, fakeName = U.NPC_House_Dres_Slaver }, -- Berserker Frenzy (House Dres Slaver)
     [83774] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 750 }, -- Enslavement (House Dres Slaver)
 
     [54056] = { power = true, priority = 1, auradetect = true, refire = 500 }, -- Molten Armaments (Earthen Heart Knight)
@@ -746,7 +747,7 @@ local AlertTable = {
     [54411] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.NPC_Anka_Ra_Shadowcaster }, -- Celestial Blast (Anka-Ra Shadowcaster)
     [54404] = { unmit = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.NPC_Anka_Ra_Shadowcaster }, -- Celestial Blast (Anka-Ra Shadowcaster)
     [52897] = { avoid = true, priority = 1, auradetect = true, bossName = true }, -- Standard of Might (Anal'a Tu'wha)
-    [52891] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossName = true }, -- Flames of Oblivion (Anal'a Tu'wha)
+    [52891] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossMatch = U.Boss_Anala_tuwha }, -- Flames of Oblivion (Anal'a Tu'wha)
 
     -- Stage 6 - The Grove
     [54608] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Drain Resource (Pacthunter Ranger)
@@ -772,7 +773,7 @@ local AlertTable = {
     -- Stage 8 - Steamworks
     [25211] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind Function (Dwarven Fire Centurion)
     [54841] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Ice Charge (Dwarven Ice Centurion)
-    [72180] = { avoid = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Electric Wave (Dwarven Sphere)
+    [72180] = { avoid = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.NPC_Dwarven_Sphere }, -- Electric Wave (Dwarven Sphere)
 
     -- Maelstrom Arena
 

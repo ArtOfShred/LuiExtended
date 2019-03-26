@@ -48,6 +48,7 @@ local UnitNames = {
     Boss_Katti_Ice_Turner                 = 'Katti Ice-Turner',
     Boss_Shilia                           = 'Shilia',
     Boss_Nak_tah                          = 'Nak\'tah',
+    NPC_House_Dres_Slaver                 = 'House Dres Slaver',
     Boss_Earthen_Heart_Knight             = 'Earthen Heart Knight',
     NPC_Anka_Ra_Shadowcaster              = 'Anka-Ra Shadowcaster',
     Boss_Anala_tuwha                      = 'Anal\'a Tu\'wha',
@@ -56,6 +57,11 @@ local UnitNames = {
     Boss_Shadow_Knight                    = 'Shadow Knight',
     Boss_Dark_Mage                        = 'Dark Mage',
     NPC_Dwarven_Fire_Centurion            = 'Dwarven Fire Centurion',
+    NPC_Dwarven_Sphere                    = 'Dwarven Sphere',
+
+    NPC_Anka_Ra_Pyromancer                = 'Anka-Ra Pyromancer',
+    NPC_Bloodwraith_Kyngald               = 'Bloodwraith Kyngald',
+    NPC_Dragonclaw_Conjurer               = 'Dragonclaw Conjurer',
 
     -- Maelstrom Arena
     Boss_Maxus_the_Many                   = 'Maxus the Many',
