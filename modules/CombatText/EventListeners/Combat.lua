@@ -331,19 +331,7 @@ function CTL:OnCombatIn(...)
     if S.toggles.showAlertMitigation and AlertT[abilityId] then
         if sourceName ~= nil and sourceName ~= "" then
 
-            -- Stop spam when enemy is out of line of sight and trying to cast
-            if resultType == ACTION_RESULT_CANT_SEE_TARGET or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE or resultType == ACTION_RESULT_TARGET_TOO_CLOSE or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW or resultType == ACTION_RESULT_TARGET_DEAD or resultType == ACTION_RESULT_BAD_TARGET then
-                refireDelay[abilityId] = true
-                callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
-                return
-            end
-
-            -- Filter when only a certain event type should fire this
-            if AlertT[abilityId].result and resultType ~= AlertT[abilityId].result then return end
-            if AlertT[abilityId].eventdetect or AlertT[abilityId].auradetect then return end -- Don't create a duplicate warning if event/aura detection already handles this.
-            if AlertT[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
-
-            -- Return if any results occur which we absolutely don't want to display alerts for
+            -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
             if resultType == ACTION_RESULT_EFFECT_FADED
                or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN
                or resultType == ACTION_RESULT_BAD_TARGET
@@ -355,8 +343,16 @@ function CTL:OnCombatIn(...)
                or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE
                or resultType == ACTION_RESULT_TARGET_TOO_CLOSE
                or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW
-            then return end
+            then
+                refireDelay[abilityId] = true
+                callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
+                return
+            end
 
+            -- Filter when only a certain event type should fire this
+            if AlertT[abilityId].result and resultType ~= AlertT[abilityId].result then return end
+            if AlertT[abilityId].eventdetect or AlertT[abilityId].auradetect then return end -- Don't create a duplicate warning if event/aura detection already handles this.
+            if AlertT[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
 
             if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].unmit or AlertT[abilityId].power or AlertT[abilityId].destroy or AlertT[abilityId].summon then
 
@@ -504,19 +500,7 @@ function CTL:OnCombatAlert(...)
     if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) then
         if not refireDelay[abilityId] then
 
-            -- Stop spam when enemy is out of line of sight and trying to cast
-            if resultType == ACTION_RESULT_CANT_SEE_TARGET or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE or resultType == ACTION_RESULT_TARGET_TOO_CLOSE or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW or resultType == ACTION_RESULT_TARGET_DEAD or resultType == ACTION_RESULT_BAD_TARGET then
-                refireDelay[abilityId] = true
-                callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
-                return
-            end
-
-            -- Filter when only a certain event type should fire this
-            if AlertT[abilityId].result and resultType ~= AlertT[abilityId].result then return end
-            if AlertT[abilityId].auradetect then return end -- Don't create a duplicate warning if aura detection already handles this.
-            if AlertT[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
-
-            -- Return if any results occur which we absolutely don't want to display alerts for
+            -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
             if resultType == ACTION_RESULT_EFFECT_FADED
                or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN
                or resultType == ACTION_RESULT_BAD_TARGET
@@ -528,7 +512,16 @@ function CTL:OnCombatAlert(...)
                or resultType == ACTION_RESULT_TARGET_OUT_OF_RANGE
                or resultType == ACTION_RESULT_TARGET_TOO_CLOSE
                or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW
-            then return end
+            then
+                refireDelay[abilityId] = true
+                callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
+                return
+            end
+
+            -- Filter when only a certain event type should fire this
+            if AlertT[abilityId].result and resultType ~= AlertT[abilityId].result then return end
+            if AlertT[abilityId].auradetect then return end -- Don't create a duplicate warning if aura detection already handles this.
+            if AlertT[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
 
 
             if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].unmit or AlertT[abilityId].power or AlertT[abilityId].destroy or AlertT[abilityId].summon then
