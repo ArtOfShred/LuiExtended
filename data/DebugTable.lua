@@ -6814,6 +6814,8 @@ LUIE.DebugAuras = {
     [59100] = true, -- AI Range (Ranged Brute EXC)
     [29535] = true, -- Call to Ranged
     [36845] = true, -- Shadow Cloak Stun Remover
+    [28931] = true, -- Set Surround Hide Run Away Abi
+    [61933] = true, -- Remove
 
     -- SHARED NPC PASSIVES
     [67950] = true, -- CC Immunity Plus -- Various NPC's
