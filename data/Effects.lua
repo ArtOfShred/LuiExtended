@@ -1456,6 +1456,11 @@ E.AddNameAura = {
     [U.Boss_Shadow_Knight] = { [1] = { id = 33097, zone = 363 } }, -- Shadow Knight
     [U.Boss_Dark_Mage] = { [1] = { id = 33097, zone = 363 } }, -- Dark Mage
     [U.NPC_Dwarven_Fire_Centurion] = { [1] = { id = 33097, zone = 363 } }, -- Dwarven Fire Centurion
+    [U.Boss_Mavus_Talnarith] =  { [1] = { id = 33097, zone = 363 } }, -- Mavus Talnarith
+    [U.Boss_Zackael_Jonnicent] =  { [1] = { id = 33097, zone = 363 } }, -- Zackael Jonnicent
+    [U.Boss_Rubyn_Jonnicent] =  { [1] = { id = 33097, zone = 363 } }, -- Rubyn Jonnicent
+    [U.Boss_Vampire_Lord_Thisa] =  { [1] = { id = 33097, zone = 363 } }, -- Vampire Lord Thisa
+    [U.Boss_Hiath_the_Battlemaster] =  { [1] = { id = 33097, zone = 363 } }, -- Hiath the Battlemaster
 
     -- Maelstrom Arena
     [U.Boss_Maxus_the_Many] = { [1] = { id = 33097 } }, -- Maxus the Many
@@ -1625,22 +1630,18 @@ E.EffectOverrideByName = {
 
     [15164] =   { -- Heat Wave (Fire Mage)
                     [U.Boss_Akezel] =               { icon = 'LuiExtended/media/icons/abilities/ability_templar_heat_wave.dds', name = A.Skill_Trail_of_Flames }, -- Akezel (City of Ash II)
-                    [U.NPC_Anka_Ra_Pyromancer] =    { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Wall_of_Flames }, -- Anka-Ra Pyromancer (Dragonstar Arena)
-                    [U.NPC_Bloodwraith_Kyngald] =   { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Wall_of_Flames }, -- Bloodwraith Kyngald (Dragonstar Arena)
                 },
     [16588] =   { -- Heat Wave (Fire Mage)
                     [U.Boss_Akezel] =               { icon = 'LuiExtended/media/icons/abilities/ability_templar_heat_wave.dds', name = A.Skill_Trail_of_Flames }, -- Akezel (City of Ash II)
-                    [U.NPC_Anka_Ra_Pyromancer] =    { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Wall_of_Flames }, -- Anka-Ra Pyromancer (Dragonstar Arena)
-                    [U.NPC_Bloodwraith_Kyngald] =   { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = A.Skill_Wall_of_Flames }, -- Bloodwraith Kyngald (Dragonstar Arena)
                 },
-    [47095] =   { -- Fire Rune (Fire Mage)
+    --[[ [47095] =   { -- Fire Rune (Fire Mage)
                     [U.NPC_Anka_Ra_Pyromancer] =    { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Anka-Ra Pyromancer (Dragonstar Arena)
                     [U.NPC_Bloodwraith_Kyngald] =   { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Bloodwraith Kyngald (Dragonstar Arena)
                 },
     [47102] =   { -- Fire Rune (Fire Mage)
                     [U.NPC_Anka_Ra_Pyromancer] =    { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Anka-Ra Pyromancer (Dragonstar Arena)
                     [U.NPC_Bloodwraith_Kyngald] =   { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Bloodwraith Kyngald (Dragonstar Arena)
-                },
+                }, ]]--
     [12456] =   { -- Ice Arrow (Shared - Frost Mage & Spirit Mage)
                     [U.NPC_Dragonclaw_Conjurer] =   { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_ice_arrow.dds' }, -- Dragonclaw Conjurer (Dragonstar Arena)
                 },
@@ -1798,12 +1799,14 @@ E.EffectOverrideByName = {
     [8569] =    { -- Devastating Leap (Bloodfiend)
                     ['Skaafin Miscreal'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_devastating_leap.dds' }, -- Devastating Leap (Skaafin Miscreal)
                     ['Skeleton'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_devastating_leap.dds' }, -- Devastating Leap (Skeleton)
+                    [U.NPC_Graveoath_Ravener] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_devastating_leap.dds' }, -- Devastating Leap (Graveoath Ravener)
                 },
     [8550] =    { -- Slash (Bloodfiend)
                     [U.NPC_Venomous_Skeleton] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Venomous Skeleton) -- City of Ash II
                     ['Skeleton'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Skeleton)
                     ['Bone Flayer'] =               { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Bone Flayer)
                     ['Risen Dead'] =                { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Risen Dead)
+                    [U.NPC_Graveoath_Ravener] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Graveoath Ravener)
                     ['Skaafin Wretch'] =            { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_slash.dds' }, -- Slash (Skaafin Wretch)
                     ['Skaafin Miscreal'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_slash.dds' }, -- Slash (Skaafin Miscreal)
                 },
@@ -1812,18 +1815,21 @@ E.EffectOverrideByName = {
                     ['Skeleton'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Skeleton)
                     ['Bone Flayer'] =               { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Bone Flayer)
                     ['Risen Dead'] =                { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Risen Dead)
+                    [U.NPC_Graveoath_Ravener] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Graveoath Ravener)
                     ['Skaafin Wretch'] =            { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_slash.dds' }, -- Slash (Skaafin Wretch)
                     ['Skaafin Miscreal'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_slash.dds' }, -- Slash (Skaafin Miscreal)
                 },
     [8564] =    { -- Rending Slash (Bloodfiend)
                     ['Skeleton'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_rending_slash.dds' }, -- Rending Slash (Skeleton)
                     ['Bone Flayer'] =               { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_rending_slash.dds' }, -- Rending Slash (Bone Flayer)
+                    [U.NPC_Graveoath_Ravener] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_rending_slash.dds' }, -- Rending Slash (Graveoath Ravener)
                     ['Skaafin Wretch'] =            { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_rending_slash.dds' }, -- Rending Slash (Skaafin Wretch)
                     ['Skaafin Miscreal'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_rending_slash.dds' }, -- Rending Slash (Skaafin Miscreal)
                 },
     [9194] =    { -- Flurry (Bloodfiend)
                     ['Skeleton'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Skeleton)
                     ['Bone Flayer'] =               { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Bone Flayer)
+                    [U.NPC_Graveoath_Ravener] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Graveoath Ravener)
                     ['Skaafin Wretch'] =            { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_flurry.dds' }, -- Flurry (Skaafin Wretch)
                     ['Skaafin Miscreal'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_flurry.dds' }, -- Flurry (Skaafin Miscreal)
                 },
@@ -1913,6 +1919,13 @@ E.EffectSourceOverride = {
 
     -- Sidequests
     [89282] = {source = 'Exploding Spider'}, -- Spider Explosion {A Web of Trouble}
+
+    -----------------------------------------------
+    -- ARENAS
+    -----------------------------------------------
+
+    -- Dragonstar Arena
+    [55182] = { source = U.Boss_Hiath_the_Battlemaster }, -- Marked for Death (Hiath the Battlemaster)
 
     -----------------------------------------------
     -- DUNGEONS
@@ -2196,6 +2209,8 @@ E.EffectHideSCT = {
     [54123] = true, -- Lingering Death (House Dres Slaver)
     [54078] = true, -- Eruption Snare (Earthen Heart Knight)
     [52932] = true, -- Solar Disturbance Snare (Shadow Knight)
+    [52762] = true, -- Degeneration (Mavus Talnarith)
+    [55486] = true, -- Cripple (Hiath the Battlemaster)
 
     -- Maelstrom Arena
     [71729] = true, -- Sigil of Defense (Sigil of Defense)
@@ -5560,7 +5575,7 @@ E.EffectOverride = {
     [31633] = { hide = true }, -- Fire Rune (Fire Rune)
     [40470] = { tooltip = T.Skill_Volcanic_Rune }, -- Volcanic Rune (Volcanic Rune)
     [40477] = { icon = 'esoui/art/icons/ability_mageguild_001_a.dds', hide = true }, -- Volcanic Rune (Volcanic Rune)
-    [40476] = { tooltip = T.Generic_Stun }, -- Volcanic Rune (Volcanic Rune)
+    [40476] = { tooltip = T.Generic_Knockback }, -- Volcanic Rune (Volcanic Rune)
     [40472] = { hide = true}, -- Volcanic Rune (Volcanic Rune)
     [40465] = { tooltip = T.Skill_Scalding_Rune }, -- Scaling Rune (Scalding Rune)
     [40468] = { tooltip = T.Generic_Burn_2_Sec }, -- Scalding Rune (Scalding Rune)
@@ -6876,6 +6891,8 @@ E.EffectOverride = {
     [35280] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_soul_flame.dds', tooltip = T.Generic_Stun }, -- Soul Flame (Daedric Titan)
     [73437] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_gtaoe.dds', tooltip = T.Skill_Soul_Flame, groundLabel = true }, -- Soul Flame (Daedric Titan)
     [35278] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_gtaoe.dds', tooltip = T.Skill_Soul_Flame, hideGround = true, duration = 0, groundLabel = true }, -- Soul Flame (Daedric Titan)
+    [34405] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_swallowing_souls.dds' }, -- Swallowing Souls (Daedric Titan)
+    [34406] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_swallowing_souls.dds' }, -- Swallowing Souls (Daedric Titan)
     [26554] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', tooltip = T.Generic_Knockback }, -- Wing Gust (Daedric Titan)
     [33085] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', tooltip = T.Generic_Snare }, -- Wing Gust (Daedric Titan)
     [33086] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds' }, -- Wing Gust (Daedric Titan)
@@ -8070,6 +8087,9 @@ E.EffectOverride = {
     [56277] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds' }, -- Lava (City of Ash II)
     [55925] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', tooltip = T.Skill_Lava_Stack, unbreakable = 1, groundLabel = true }, -- Lava (City of Ash II)
 
+    [5139] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', tooltip = T.Skill_Lava_No_Snare, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, groundLabel = true }, -- Lava (Dragonstar Arena)
+    [5140] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds' }, -- Lava (Dragonstar Arena)
+
     -- Hiding Spot
     [72711] = { hide = true }, -- Hidden (Hiding Spot)
     [77335] = { hide = true }, -- Threat Drop (Hiding Spot)
@@ -9036,7 +9056,7 @@ E.EffectOverride = {
     [56760] = { icon = 'esoui/art/icons/ability_1handed_001_b.dds', tooltip = T.Generic_Snare_60 }, -- Deep Slash (Sovngarde Brawler)
 
     [53341] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds' }, -- Biting Cold (Biting Cold)
-    [53342] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', unbreakable = 1, stackAdd = 1, stackMax = 8, tooltip = T.Skill_Biting_Cold }, -- Biting Cold (Biting Cold)
+    [53342] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', unbreakable = 1, stackAdd = 1, stackMax = 8, tooltip = T.Skill_Biting_Cold, groundLabel = true }, -- Biting Cold (Biting Cold)
 
     [53264] = { icon = 'esoui/art/icons/ability_2handed_005_b.dds' }, -- Rally (Sovngarde Slayer)
     [53259] = { icon = 'esoui/art/icons/ability_2handed_004_b.dds' }, -- Reverse Slice (Sovngarde Slayer)
@@ -9143,9 +9163,9 @@ E.EffectOverride = {
     [54054] = { tooltip = T.Skill_Stone_Giant_NPC }, -- Stone Giant (Earthen Heart Knight)
     [54055] = { tooltip = T.Generic_Knockdown }, -- Stone Giant (Earthen Heart Knight)
 
-    [54083] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_corrosive_armor_npc.dds', tooltip = T.Skill_Corrosive_Armor_NPC },
-    [54085] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_corrosive_armor_npc.dds', duration = 0, groundLabel = true, tooltip = T.Skill_Corrosive_Armor_Debuff_NPC, type = BUFF_EFFECT_TYPE_DEBUFF },
-    [54084] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_corrosive_armor_npc.dds' },
+    [54083] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_corrosive_armor_npc.dds', name = A.Skill_Caustic_Armor, tooltip = T.Skill_Corrosive_Armor_NPC },
+    [54085] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_corrosive_armor_npc.dds', name = A.Skill_Caustic_Armor, duration = 0, groundLabel = true, tooltip = T.Skill_Corrosive_Armor_Debuff_NPC, type = BUFF_EFFECT_TYPE_DEBUFF },
+    [54084] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_corrosive_armor_npc.dds', name = A.Skill_Caustic_Armor },
 
     [54067] = { icon = 'esoui/art/icons/ability_dragonknight_014.dds', name = A.Skill_Petrify, tooltip = T.Skill_Petrify_NPC }, -- Fossilize (Earthen Heart Knight)
     [54069] = { icon = 'esoui/art/icons/ability_dragonknight_014.dds', name = A.Skill_Petrify }, -- Fossilize (Earthen Heart Knight)
@@ -9231,8 +9251,6 @@ E.EffectOverride = {
     [52933] = { groundLabel = true, tooltip = T.Skill_Solar_Disturbance_NPC }, -- Solar Disturbance (Shadow Knight)
     [52932] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance }, -- Solar Disturbance Snare (Shadow Knight)
 
-    [34405] = { hide = true }, -- Swallowing Souls (Daedric Titan)
-
     [54792] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds' }, -- Crystal Blast (Dark Mage)
     [54794] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds', name = A.Skill_Crystal_Blast, tooltip = T.Generic_Knockdown }, -- Crystal Shard Stun (Dark Mage)
     [54793] = { icon = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds' }, -- Crystal Blast (Dark Mage)
@@ -9255,10 +9273,78 @@ E.EffectOverride = {
     [58900] = { hide = true }, -- Ice Charge (Dwarven Ice Centurion)
     [56065] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', unbreakable = 1, tooltip = T.Skill_Ice_Charge }, -- Ice Charge (Dwarven Ice Centurion)
     [55981] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds' }, -- Ice Charge (Dwarven Ice Centurion)
-    [55982] = { hide = true }, -- Ice Charge (Dwarven Ice Centurion)
+    [55982] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', hide = true }, -- Ice Charge (Dwarven Ice Centurion)
 
     [72180] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_split_bolt.dds' }, -- Electric Wave (Dwarven Sphere)
     [72181] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_split_bolt.dds' }, -- Electric Wave (Dwarven Sphere)
+
+    [52758] = { hide = true, name = A.Skill_Entropy, icon = 'esoui/art/icons/ability_mageguild_004.dds' }, -- Degeneration (Mavus Talnarith)
+    [52761] = { name = A.Skill_Entropy, icon = 'esoui/art/icons/ability_mageguild_004.dds', tooltip = T.Skill_Entropy }, -- Degeneration (Mavus Talnarith)
+
+    [83491] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds' }, -- Ice Comet (Mavus Talnarith)
+    [18032] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', name = A.Skill_Ice_Comet, tooltip = T.Generic_Knockdown }, -- Stun (Mavus Talnarith)
+    [83489] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', name = A.Skill_Ice_Comet }, -- Ice Comet Knockback (Mavus Talnarith)
+    [83490] = { tooltip = T.Generic_Snare_50 }, -- Ice Comet (Mavus Talnarith)
+
+    [52765] = { icon = 'esoui/art/icons/ability_mageguild_001_a.dds' }, -- Volcanic Rune (Mavus Talnarith)
+    [83480] = { icon = 'esoui/art/icons/ability_mageguild_001_a.dds' }, -- Volcanic Rune (Mavus Talnarith)
+    [83477] = { tooltip = T.Generic_Knockback }, -- Volcanic Rune (Mavus Talnarith)
+
+    -- Stage 9 - Crypts of the Lost
+    [55034] = { hide = true }, -- CLDA - Sucked Under (CLDA - Sucked Under)
+    [55221] = { hide = true }, -- Sucked Under (CLDA - Sucked Under)
+    [56739] = { hide = true }, -- Damage Shield (CLDA - Sucked Under)
+    [55228] = { hide = true }, -- Sucked Under (CLDA - Sucked Under)
+    [55915] = { hide = true }, -- Sucked Under Fall Bonus (CLDA - Sucked Under)
+    [55035] = { hide = true }, -- Sucked Under (CLDA - Sucked Under)
+    [55311] = { hide = true }, -- Sucked Under (CLDA - Sucked Under)
+    [58426] = { hide = true }, -- CLDA - Drop Hate (CLDA - Sucked Under)
+
+    [56985] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_bone_hurricane.dds', hide = true }, -- Spirit Shield (Zackael/Rubyn Jonnicent)
+    [56990] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_bone_hurricane.dds', name = A.Skill_Spirit_Shield }, -- Spirit Shield (Zackael/Rubyn Jonnicent)
+
+    [55085] = { hide = true }, -- Poison Mist (Vampire Lord Thisa)
+    [55089] = { tooltip = T.Skill_Poison_Mist }, -- Poison Mist (Vampire Lord Thisa)
+    [55086] = { groundLabel = true, tooltip = T.Generic_AOE_Poison_1_5_Sec }, -- Poison Mist (Vampire Lord Thisa)
+
+    [55081] = { tooltip = T.Skill_Drain_Essence_Vamp_NPC }, -- Drain Essence (Vampire Lord Thisa)
+    [21911] = { hide = true }, -- Stun (Vampire Lord Thisa)
+
+    [55090] = { tooltip = T.Skill_Devouring_Swarm }, -- Devouring Swarm (Vampire Lord Thisa)
+    [55092] = { groundLabel = true, tooltip = T.Skill_Devouring_Swarm_Ground }, -- Devouring Swarm (Vampire Lord Thisa)
+
+    -- Stage 10 - The Champion's Arena
+    [55478] = { icon = 'esoui/art/icons/ability_nightblade_012.dds', tooltip = T.Generic_HoT_2Sec }, -- Strife (Hiath the Battlemaster)
+
+    [55479] = { tooltip = T.Skill_Malefic_Wreath }, -- Malefic Wreath (Hiath the Battlemaster)
+
+    [55493] = { name = A.Skill_Crippling_Grasp, tooltip = T.Skill_Crippling_Grasp_NPC }, -- Cripple (Hiath the Battlemaster)
+    [55486] = { name = A.Skill_Crippling_Grasp }, -- Cripple (Hiath the Battlemaster)
+    [55487] = { hide = true }, -- Cripple (Hiath the Battlemaster)
+    [55488] = { name = A.Skill_Crippling_Grasp }, -- Cripple (Hiath the Battlemaster)
+    [55491] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds' }, -- Crippling Grasp (Hiath the Battlemaster)
+
+    [55494] = { hide = true }, -- Power Extraction (Hiath the Battlemaster)
+    [55496] = { tooltip = T.Skill_Power_Extraction_NPC }, -- Power Extraction (Hiath the Battlemaster)
+
+    [58196] = { hide = true }, -- Hiath's Fury (Hiath the Battlemaster)
+    [55099] = { hide = true }, -- Marked for Death (Hiath the Battlemaster)
+    [55174]  = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_fire_generic.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, refreshOnly = true, tooltip = T.Skill_Marked_for_Death }, -- Marked for Death (Hiath the Battlemaster)
+    [55104]  = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_fire_generic.dds' }, -- Marked for Death (Hiath the Battlemaster)
+    [58459]  = { hide = true }, -- Marked for Death (Hiath the Battlemaster)
+    [55181]  = { hide = true }, -- Marked for Death (Hiath the Battlemaster)
+    [55182]  = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_ignite.dds', name = A.Skill_Blazing_Fire, tooltip = T.Generic_AOE_Fire_1_Sec, groundLabel = true }, -- Marked for Death (Hiath the Battlemaster)
+
+    [59803] = { hide = true }, -- CLDA - Hiath Summon Tracker (Hiath the Battlemaster)
+    [55592] = { hide = true }, -- CLDA - Swap Actions 75 (Hiath the Battlemaster)
+    [55617] = { hide = true }, -- CLDA - Swap Actions 50 (Hiath the Battlemaster)
+    [55621] = { hide = true }, -- CLDA - Swap Actions 25 (Hiath the Battlemaster)
+    [55602] = { hide = true }, -- CLDA10 - Spawn West (Hiath the Battlemaster)
+    [55615] = { hide = true }, -- CLDA10 - Spawn East (Hiath the Battlemaster)
+    [55616] = { hide = true }, -- CLDA10 - Spawn North (Hiath the Battlemaster)
+
+    [55670] = { hide = true }, -- Levitate Speak 1 (Light of Boethia)
+    [55649] = { hide = true }, -- CLDA - Boethia Levitate (Light of Boethia)
 
     -- Maelstrom Arena (Shared)
     [43882] = { hide = true }, -- CON_Portal 3 Seconds
@@ -10400,6 +10486,7 @@ E.FakeExternalDebuffs = {
     [54405] = { duration = 4000 }, -- Celestial Blast (Anka-Ra Shadowcaster)
     [52910] = { duration = 6000 }, -- Dark Flare Trauma (Shadow Knight)
     [56065] = { duration = 12000 }, -- Ice Charge (Dwarven Ice Centurion)
+    [83477] = { duration = 4000 }, -- Volcanic Rune (Mavus Talnarith)
 
     ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------
@@ -10928,6 +11015,9 @@ E.AddGroundDamageAura = {
     [52903] = { duration = 1200, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Standard of Might (Anal'a Tu'wha)
     [83468] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Restoring Nature (Nature's Blessing)
     [52933] = { duration = 1200, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Solar Disturbance (Shadow Knight)
+    [55086] = { duration = 1700, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Poison Mist (Vampire Lord Thisa)
+    [55092] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Devouring Swarm (Vampire Lord Thisa)
+    [55182]  = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Marked for Death (Hiath the Battlemaster)
 
     -- Maelstrom Arena
     [68197] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Necrotic Essence (Necrotic Orb)

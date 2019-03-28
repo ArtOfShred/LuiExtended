@@ -61,6 +61,12 @@ function CTL:ProcessAlert(abilityId, unitName)
         callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
     end
 
+    -- Auto refire for auras to stop events when both reticleover and the unit exist
+    if AlertT[abilityId].auradetect then
+        refireDelay[abilityId] = true
+        callLater(function() refireDelay[abilityId] = nil end, 250) --buffer by X time
+    end
+
     -- Get Ability Name & Icon
     local abilityName = GetAbilityName(abilityId)
     local abilityIcon = GetAbilityIcon(abilityId)
@@ -93,7 +99,6 @@ function CTL:ProcessAlert(abilityId, unitName)
     end
 
     -- Override unitName here if we utilize a fakeName / bossName
-
     unitName = zo_strformat("<<t:1>>", unitName)
 
     if AlertT[abilityId].fakeName then
@@ -203,8 +208,6 @@ function CTL:EffectChanged(...)
 
         -- Don't duplicate events if unitTag is player and in a group.
         if GetGroupSize() > 1 and unitTag == 'player' then return end
-        -- Don't duplicate events if the target is reticleover, we already find all named targets w/o this.
-        if unitTag == 'reticleover' or unitTag == 'reticleoverplayer' then return end
         if AlertT[abilityId].noSelf and unitName == LUIE.PlayerNameRaw then return end
 
         if changeType == EFFECT_RESULT_UPDATED and AlertT[abilityId].ignoreRefresh then return end
@@ -220,7 +223,38 @@ function CTL:OnCombatIn(...)
     local S = LUIE.CombatText.SV
     local combatType, togglesInOut = C.combatType.INCOMING, S.toggles.incoming
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
-    local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
+    local abilityIcon = GetAbilityIcon(abilityId)
+
+    -- TODO: Fix this so we only process this information once when also sending to the alert printer.
+
+    local sourceNameCheck = zo_strformat("<<t:1>>", sourceName)
+
+    -- Handle effects that override by UnitName
+    if E.EffectOverrideByName[abilityId] then
+        if E.EffectOverrideByName[abilityId][sourceNameCheck] then
+            if E.EffectOverrideByName[abilityId][sourceNameCheck].icon then
+                abilityIcon = E.EffectOverrideByName[abilityId][sourceNameCheck].icon
+            end
+            if E.EffectOverrideByName[abilityId][sourceNameCheck].name then
+                abilityName = E.EffectOverrideByName[abilityId][sourceNameCheck].name
+            end
+        end
+    end
+
+    -- Handle effects that override by ZoneId
+    if E.MapDataOverride[abilityId] then
+        local index = GetCurrentMapZoneIndex()
+        if E.MapDataOverride[abilityId][index] then
+            if E.MapDataOverride[abilityId][index].name then
+                abilityName = E.MapDataOverride[abilityId][index].name
+            end
+            if E.MapDataOverride[abilityId][index].icon then
+                abilityIcon = E.MapDataOverride[abilityId][index].icon
+            end
+        end
+    end
+
+    local formattedIcon = zo_iconFormat(abilityIcon, 32, 32)
 
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//RESULTS//--

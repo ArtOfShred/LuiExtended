@@ -341,7 +341,8 @@ local AlertTable = {
     [4799] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Tail Spike (Clannfear)
     [93745] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Rending Leap (Clannfear)
 
-    [26641] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Soul Flame (Daedric Titan)
+    [26641] = { avoid = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Soul Flame (Daedric Titan)
+    [34405] = { block = true, avoid = true, priority = 2, auradetect = true }, -- Swallowing Souls (Daedric Titan)
     [26554] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Wing Gust (Daedric Titan)
 
     [4771] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 1250, result = ACTION_RESULT_BEGIN },-- Fiery Breath (Daedroth)
@@ -494,7 +495,7 @@ local AlertTable = {
 
     [9346] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Strangle (Strangler)
     [9322] = { avoid = true, priority = 3, auradetect = true }, -- Poisoned Ground (Strangler)
-    [9321] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Grapple (Strangler)
+    [9321] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 500 }, -- Grapple (Strangler)
 
     [44736] = { block = true, dodge = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN }, -- Swinging Cleave (Troll)
     [9009] = { avoid = true, priority = 2, eventdetect = true, refire = 300, result = ACTION_RESULT_BEGIN }, -- Tremor (Troll)
@@ -706,7 +707,7 @@ local AlertTable = {
     [52729] = { power = true, priority = 1, auradetect = true }, -- Expert Hunter (Fighters Guild Swordmaster)
     [52738] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Ring of Preservation (Fighters Guild Gladiator)
 
-    [52746] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossMatch = U.Boss_Champion_Marcauld }, -- Flawless Dawnbreaker (Champion Marcauld)
+    [52746] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Champion_Marcauld }, -- Flawless Dawnbreaker (Champion Marcauld)
 
     -- Stage 2 - The Frozen Ring
     [53264] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true }, -- Rally (Sovngarde Slayer)
@@ -756,24 +757,38 @@ local AlertTable = {
     [52825] = { block = true, dodge = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Lethal Arrow (Pishna Longshot)
 
     -- Stage 7 - Circle of Rituals
-    [56946] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true }, -- Dragon Fire Scale (Bloodwraith Kynval)
+    [56946] = { power = true, priority = 1, auradetect = true }, -- Dragon Fire Scale (Bloodwraith Kynval)
     [54634] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true }, -- CLDA - Sacrifice (Daedric Sacrifice)
     [54635] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true }, -- CLDA - Sacrifice (Daedric Sacrifice)
     [54612] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true }, -- CLDA - Sacrifice (Daedric Sacrifice)
 
     [52907] = { block = true, dodge = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Dark Flare (Shadow Knight)
     [52912] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Purifying Light (Shadow Knight)
-    [52927] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.Boss_Shadow_Knight }, -- Solar Disturbance (Shadow Knight)
+    [52927] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.Boss_Shadow_Knight, bossMatch = U.Boss_Hiath_the_Battlemaster }, -- Solar Disturbance (Shadow Knight)
 
     [54792] = { block = true, dodge = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crystal Blast (Dark Mage)
-    [54819] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.Boss_Dark_Mage }, -- Daedric Minefield (Dark Mage)
-    [54829] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.Boss_Dark_Mage }, -- Suppression Field (Dark Mage)
+    [54819] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossMatch = U.Boss_Dark_Mage }, -- Daedric Minefield (Dark Mage)
+    [54829] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.Boss_Dark_Mage, bossMatch = U.Boss_Hiath_the_Battlemaster }, -- Suppression Field (Dark Mage)
     [54809] = { interrupt = true, priority = 1, auradetect = true }, -- Dark Deal (Dark Mage)
 
     -- Stage 8 - Steamworks
     [25211] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind Function (Dwarven Fire Centurion)
     [54841] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Ice Charge (Dwarven Ice Centurion)
+    [56065] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, noSelf = true }, -- Ice Charge (Dwarven Ice Centurion)
     [72180] = { avoid = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.NPC_Dwarven_Sphere }, -- Electric Wave (Dwarven Sphere)
+
+    [52773] = { block = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED }, -- Ice Comet (Mavus Talnarith)
+    [52765] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.Boss_Mavus_Talnarith }, -- Volcanic Rune (Mavus Talnarith)
+
+    -- Stage 9 - Crypts of the Lost
+    [56985] = { power = true, priority = 1, auradetect = true }, -- Spirit Shield (Zakael/Rubyn Jonnicent)
+    [55089] = { avoid = true, priority = 1, auradetect = true}, -- Poison Mist (Vampire Lord Thisa)
+    [55090] = { avoid = true, priority = 1, auradetect = true}, -- Devouring Swarm (Vampire Lord Thisa)
+    [55081] = { interrupt = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, noSelf = true, fakeName = U.Boss_Vampire_Lord_Thisa }, -- Vampire Lord Thisa
+
+    [55479] = { block = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Malefic Wreath (Hiath the Battlemaster)
+    [55496] = { power = true, priority = 1, auradetect = true }, -- Power Extraction (Hiath the Battlemaster)
+    [55174] = { unmit = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED }, -- Marked for Death (Hiath the Battlemaster)
 
     -- Maelstrom Arena
 

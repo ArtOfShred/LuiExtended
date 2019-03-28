@@ -895,6 +895,7 @@ local Tooltips = {
 
     Skill_Lava                            = GetString(SI_LUIE_SKILL_LAVA_SNARE_TP),
     Skill_Lava_Stack                      = GetString(SI_LUIE_SKILL_LAVA_STACK_TP),
+    Skill_Lava_No_Snare                   = GetString(SI_LUIE_SKILL_LAVA_TP),
     Skill_Slaughterfish_Attack            = GetString(SI_LUIE_SKILL_SLAUGHTERFISH_ATTACK_TP),
 
     Skill_Spike_Trap                      = GetString(SI_LUIE_SKILL_SPIKE_TRAP_TP),
@@ -1097,6 +1098,12 @@ local Tooltips = {
     Skill_Solar_Disturbance_NPC           = GetString(SI_LUIE_SKILL_SOLAR_DISTURBANCE_NPC_TP),
     Skill_Dark_Dark_NPC                   = GetString(SI_LUIE_SKILL_DARK_DEAL_NPC_TP),
     Skill_Ice_Charge                      = GetString(SI_LUIE_SKILL_ICE_CHARGE_TP),
+    Skill_Poison_Mist                     = GetString(SI_LUIE_SKILL_POISON_MIST_TP),
+    Skill_Drain_Essence_Vamp_NPC          = GetString(SI_LUIE_SKILL_DRAIN_ESSENCE_VAMP_NPC_TP),
+    Skill_Malefic_Wreath                  = GetString(SI_LUIE_SKILL_MALEFIC_WREATH_TP),
+    Skill_Crippling_Grasp_NPC             = GetString(SI_LUIE_SKILL_CRIPPLING_GRASP_NPC_TP),
+    Skill_Power_Extraction_NPC            = GetString(SI_LUIE_SKILLPOWER_EXTRACTION_NPC_TP),
+    Skill_Marked_for_Death                = GetString(SI_LUIE_SKILL_MARKED_FOR_DEATH_TP),
 
     -- Maelstrom Arena
     Skill_Sigil_of_Haste                  = GetString(SI_LUIE_SKILL_SIGIL_OF_HASTE_TP),
@@ -1176,6 +1183,7 @@ local Tooltips = {
     Generic_AOE_Poison_0_5_Sec            = GetString(SI_LUIE_SKILL_GENERIC_AOE_POISON_0_5_SEC),
     Generic_AOE_Poison_0_66_Sec           = GetString(SI_LUIE_SKILL_GENERIC_AOE_POISON_0_66_SEC),
     Generic_AOE_Poison_1_Sec              = GetString(SI_LUIE_SKILL_GENERIC_AOE_POISON_1_SEC),
+    Generic_AOE_Poison_1_5_Sec            = GetString(SI_LUIE_SKILL_GENERIC_AOE_POISON_1_5_SEC),
 
     Generic_AOE_Disease_0_5_Sec           = GetString(SI_LUIE_SKILL_GENERIC_AOE_DISEASE_0_5_SEC),
     Generic_AOE_Disease_1_Sec             = GetString(SI_LUIE_SKILL_GENERIC_AOE_DISEASE_1_SEC),

@@ -1119,6 +1119,7 @@ local AbilityTables = {
     Skill_Poison_Cloud                = 21411,
     Skill_Flurry                      = 28607,
     Skill_Mages_Wrath                 = 19123,
+    Skill_Caustic_Armor               = GetString(SI_LUIE_SKILL_CAUSTIC_ARMOR),
     Skill_Enslavement                 = 83774,
     Skill_Cinder_Storm                = 20779,
     Skill_Petrify                     = 29037,
@@ -1130,6 +1131,9 @@ local AbilityTables = {
     Skill_Summon_Harvester            = 58054,
     Skill_Summon_Daedric_Titan        = GetString(SI_LUIE_SKILL_SUMMON_DAEDRIC_TITAN),
     Skill_Suppression_Field           = 28341,
+    Skill_Sucked_Under                = 55221,
+    Skill_Spirit_Shield               = 56985,
+    Skill_Blazing_Fire                = 34959,
 
     -- Maelstrom Arena
     Skill_Sigil_of_Healing            = 66920,

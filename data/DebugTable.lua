@@ -6809,10 +6809,10 @@ LUIE.DebugAuras = {
     [15160] = true, -- Monster Heavy Attack
     [31373] = true, -- Modify Shared CD Ability
     [46858] = true, -- Second Wind
-    --[29535] = true, -- Call to Ranged
     --[82686] = true, -- AD (Area Denial) Shared Cool
     --[28528] = true, -- Modify Clearing Move Cooldown
-    --[59100] = true, -- AI Range (Ranged Brute EXC)
+    [59100] = true, -- AI Range (Ranged Brute EXC)
+    [29535] = true, -- Call to Ranged
     [36845] = true, -- Shadow Cloak Stun Remover
 
     -- SHARED NPC PASSIVES
@@ -7032,6 +7032,7 @@ LUIE.DebugAuras = {
     [80539] = true, -- Alarm (Estate Marshal - DB)
     [67567] = true, -- Generic Self Stun (Estate Marshal - DB)
     [78266] = true, -- Alarm (Estate Marshal - DB)
+    [78910] = true, -- Alarm (Estate Marshal - DB)
 
     --[52471] = true, -- Nullify (Estate Spellbreaker - DB)
     [52473] = true, -- Nullify (Estate Spellbreaker - DB)
@@ -7131,6 +7132,9 @@ LUIE.DebugAuras = {
     [55923] = true, -- Lava (Lava - City of Ash II)
     [56277] = true, -- Lava (Lava - City of Ash II)
     [55925] = true, -- Lava (Lava - City of Ash II)
+
+    [5139] = true, -- Lava (Dragonstar Arena)
+    [5140] = true, -- Lava (Dragonstar Arena)
 
     [72711] = true, -- Hidden (Hiding Spot)
     [72712] = true, -- Hiding Spot (Hiding Spot)
@@ -8209,6 +8213,10 @@ LUIE.DebugAuras = {
     [35277] = true, -- Soul Flame -- Daedric Titan
     [73437] = true, -- Soul Flame -- Daedric Titan
     [35278] = true, -- Soul Flame -- Daedric Titan
+    [35524] = true, -- Close -- Daedric Titan
+    [34405] = true, -- Swallowing Souls -- Daedric Titan
+    [34406] = true, -- Swallowing Souls -- Daedric Titan
+    [34407] = true, -- Swallowing Souls -- Daedric Titan
     [26554] = true, -- Wing Gust -- Daedric Titan
     [33085] = true, -- Wing Gust -- Daedric Titan
     [33086] = true, -- Wing Gust -- Daedric Titan
@@ -11696,6 +11704,8 @@ LUIE.DebugAuras = {
     [54609] = true, -- Drain Resource (Pacthunter Ranger)
     [54610] = true, -- Drain Resource (Pacthunter Ranger)
     [60442] = true, -- Draining Poison (Pacthunter Ranger)
+    [54602] = true, -- Drain Resource (Pacthunter Ranger)
+    [54603] = true, -- Drain Resource (Pacthunter Ranger)
 
     [54512] = true, -- Regeneration Aura (Nature's Blessing)
     [54513] = true, -- Restore Stamina (Nature's Blessing)
@@ -11814,6 +11824,99 @@ LUIE.DebugAuras = {
     [55981] = true, -- Ice Charge (Dwarven Ice Centurion)
     [56628] = true, -- Ice Charge (Dwarven Ice Centurion)
     [55982] = true, -- Ice Charge (Dwarven Ice Centurion)
+
+    [52758] = true, -- Degeneration (Mavus Talnarith)
+    [52761] = true, -- Degeneration (Mavus Talnarith)
+    [52763] = true, -- Degeneration (Mavus Talnarith)
+    [52759] = true, -- Degeneration (Mavus Talnarith)
+    [52762] = true, -- Degeneration (Mavus Talnarith)
+
+    [52773] = true, -- Ice Comet (Mavus Talnarith)
+    [83491] = true, -- Ice Comet (Mavus Talnarith)
+    [18032] = true, -- Stun (Mavus Talnarith)
+    [83489] = true, -- Ice Comet Knockback (Mavus Talnarith)
+    [83490] = true, -- Ice Comet (Mavus Talnarith)
+
+    [52765] = true, -- Volcanic Rune (Mavus Talnarith)
+    [83479] = true, -- Volcanic Rune (Mavus Talnarith)
+    [83482] = true, -- Volcanic Rune (Mavus Talnarith)
+    [83480] = true, -- Volcanic Rune (Mavus Talnarith)
+    [83477] = true, -- Volcanic Rune (Mavus Talnarith)
+    [83478] = true, -- Volcanic Rune (Mavus Talnarith)
+
+    -- Stage 9 - Crypts of the Lost
+    [55034] = true, -- CLDA - Sucked Under
+    [55221] = true, -- Sucked Under
+    [56739] = true, -- Damage Shield
+    [55228] = true, -- Sucked Under
+    [55915] = true, -- Sucked Under Fall Bonus
+    [55035] = true, -- Sucked Under
+    [55311] = true, -- Sucked Under
+    [58426] = true, -- CLDA - Drop Hate
+
+    [56985] = true, -- Spirit Shield (Zackael/Rubyn Jonnicent)
+    [56990] = true, -- CLDA Arena9 - Zackael Shield (Zackael/Rubyn Jonnicent)
+    [56992] = true, -- CLDA Arena9 - Zackael Shield (Zackael/Rubyn Jonnicent)
+    [50928] = true, -- Self (Zackael Jonnicent)
+
+    [55085] = true, -- Poison Mist (Vampire Lord Thisa)
+    [55089] = true, -- Poison Mist (Vampire Lord Thisa)
+    [55086] = true, -- Poison Mist (Vampire Lord Thisa)
+
+    [55081] = true, -- Drain Essence (Vampire Lord Thisa)
+    [55084] = true, -- Drain Essence (Vampire Lord Thisa)
+    [55082] = true, -- Drain Essence (Vampire Lord Thisa)
+    [55081] = true, -- Drain Essence (Vampire Lord Thisa)
+    [21911] = true, -- Stun (Vampire Lord Thisa)
+
+    [55090] = true, -- Devouring Swarm (Vampire Lord Thisa)
+    [55092] = true, -- Devouring Swarm (Vampire Lord Thisa)
+    [55091] = true, -- Devouring Swarm (Vampire Lord Thisa)
+
+    -- Stage 10 - The Champion's Arena
+    [55477] = true, -- Strife (Hiath the Battlemaster)
+    [55478] = true, -- Strife (Hiath the Battlemaster)
+
+    [55479] = true, -- Malefic Wreath (Hiath the Battlemaster)
+    [55483] = true, -- Malefic Wreath (Hiath the Battlemaster)
+    [55482] = true, -- Malefic Wreath (Hiath the Battlemaster)
+    [55480] = true, -- Malefic Wreath (Hiath the Battlemaster)
+
+    [55485] = true, -- Crippling Grasp (Hiath the Battlemaster)
+    [55493] = true, -- Cripple (Hiath the Battlemaster)
+    [55486] = true, -- Cripple (Hiath the Battlemaster)
+    [55487] = true, -- Cripple (Hiath the Battlemaster)
+    [55488] = true, -- Cripple (Hiath the Battlemaster)
+    [55489] = true, -- Summon Shade (Hiath the Battlemaster)
+    [55490] = true, -- Cripple (Hiath the Battlemaster)
+    [55491] = true, -- Crippling Grasp (Hiath the Battlemaster)
+    [55492] = true, -- Crippling Grasp (Hiath the Battlemaster)
+
+    [55494] = true, -- Power Extraction (Hiath the Battlemaster)
+    [55496] = true, -- Power Extraction (Hiath the Battlemaster)
+
+    [58196] = true, -- Hiath's Fury (Hiath the Battlemaster)
+    [55099] = true, -- Marked for Death (Hiath the Battlemaster)
+    [55174] = true, -- Marked for Death (Hiath the Battlemaster)
+    [55104] = true, -- Marked for Death (Hiath the Battlemaster)
+    [58459] = true, -- Marked for Death (Hiath the Battlemaster)
+    [55181] = true, -- Marked for Death (Hiath the Battlemaster)
+    [55182] = true, -- Marked for Death (Hiath the Battlemaster)
+    [59803] = true, -- CLDA - Hiath Summon Tracker (Hiath the Battlemaster)
+    [55592] = true, -- CLDA - Swap Actions 75 (Hiath the Battlemaster)
+    [55617] = true, -- CLDA - Swap Actions 50 (Hiath the Battlemaster)
+    [55621] = true, -- CLDA - Swap Actions 25 (Hiath the Battlemaster)
+    [55602] = true, -- CLDA10 - Spawn West (Hiath the Battlemaster)
+    [55615] = true, -- CLDA10 - Spawn East (Hiath the Battlemaster)
+    [55616] = true, -- CLDA10 - Spawn North (Hiath the Battlemaster)
+
+    -- End Event
+    [55670] = true, -- Levitate Speak 1
+    [55639] = true, -- Levitate
+    [55641] = true, -- Stun
+    [55642] = true, -- Nocom
+    [55643] = true, -- CLDA - Boethia Levitate
+    [55649] = true, -- CLDA - Boethia Levitate
 
     -- Maelstrom Arena (Shared)
     [43882] = true, -- CON_Portal 3 Seconds
