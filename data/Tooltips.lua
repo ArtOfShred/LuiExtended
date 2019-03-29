@@ -131,6 +131,7 @@ local Tooltips = {
     Generic_Magic                         = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", MagicDamage),
     Generic_HoT                           = GetString(SI_LUIE_SKILL_GENERIC_HOT_TP),
     Generic_HoT_Potion                    = GetString(SI_LUIE_SKILL_GENERIC_HOT_POTION_TP),
+    Generic_HoT_Channel                   = GetString(SI_LUIE_SKILL_GENERIC_HOT_CHANNEL_TP),
 
     Generic_AOE_Physical                  = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", PhysicalDamage),
     Generic_AOE_Poison                    = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", PoisonDamage),
@@ -919,7 +920,6 @@ local Tooltips = {
     Skill_Uncanny_Dodge                   = GetString(SI_LUIE_SKILL_UNCANNY_DODGE_TP),
     Skill_Block_NPC                       = GetString(SI_LUIE_SKILL_BLOCK_NPC_TP),
     Skill_Call_Ally                       = GetString(SI_LUIE_SKILL_CALL_ALLY_TP),
-    Skill_Empower_Atronach                = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_TP),
     Skill_Feral_Guardian_NPC              = GetString(SI_LUIE_SKILL_FERAL_GUARDIAN_NPC_TP),
     Skill_Basilisk_Powder                 = GetString(SI_LUIE_SKILL_BASILISK_POWDER_TP),
     Skill_Shadowy_Duplicate               = GetString(SI_LUIE_SKILL_SHADOWY_DUPLICATE_TP),
@@ -978,13 +978,11 @@ local Tooltips = {
     Skill_Aura_of_Protection_Other        = GetString(SI_LUIE_SKILL_AURA_OF_PROTECTION_OTHER_TP),
     Skill_Devour_Hunger                   = GetString(SI_LUIE_SKILL_DEVOUR_HUNGER_TP),
     Skill_Torpor                          = GetString(SI_LUIE_SKILL_TORPOR_TP),
-    Skill_Regeneration_Ogrim              = GetString(SI_LUIE_SKILL_REGENERATION_OGRIM_TP),
     Skill_Summon_Spiderling               = GetString(SI_LUIE_SKILL_SUMMON_SPIDERLING_TP),
     Skill_Unyielding_Mace                 = GetString(SI_LUIE_SKILL_UNYIELDING_MACE_TP),
 
     -- Undead
     Skill_Vampiric_Drain                  = GetString(SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP),
-    Skill_Devour_NPC                      = GetString(SI_LUIE_SKILL_DEVOUR_NPC_TP),
 
     -- Dwemer
     Skill_Static_Field                    = GetString(SI_LUIE_SKILL_STATIC_FIELD_TP),
@@ -1097,9 +1095,6 @@ local Tooltips = {
     Skill_Curse_of_Suffering              = GetString(SI_LUIE_SKILL_CURSE_OF_SUFFERING_TP),
     Skill_Curse_of_Dominance              = GetString(SI_LUIE_SKILL_CURSE_OF_DOMINANCE_TP),
 
-    -- Elden Hollow I
-    Skill_Heal_Spores                     = GetString(SI_LUIE_SKILL_HEAL_SPORES_TP),
-
     -- Elden Hollow II
     Skill_Siphon_Magicka                  = GetString(SI_LUIE_SKILL_SIPHON_MAGICKA_TP),
     Skill_Siphon_Stamina                  = GetString(SI_LUIE_SKILL_SIPHON_STAMINA_TP),
@@ -1137,7 +1132,6 @@ local Tooltips = {
     -- Spindleclutch II
     Skill_Enervating_Seal                 = GetString(SI_LUIE_SKILL_ENERVATING_SEAL_TP),
     Skill_Blood_Pool                      = GetString(SI_LUIE_SKILL_BLOOD_POOL_TP),
-    Skill_Blood_Pool_1_5                  = GetString(SI_LUIE_SKILL_BLOOD_POOL_1_5_TP),
 
     -- Frostvault
     Skill_Maim                            = GetString(SI_LUIE_SKILL_MAIM_NPC_TP),

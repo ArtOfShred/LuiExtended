@@ -6684,7 +6684,7 @@ E.EffectOverride = {
     [30214] = { icon = 'LuiExtended/media/icons/abilities/ability_snake_lash.dds' }, -- Lash (Giant Snake)
     [5242] = { icon = 'LuiExtended/media/icons/abilities/ability_snake_kiss_of_poison.dds' }, -- Kiss of Poison (Giant Snake)
     [21826] = { icon = 'LuiExtended/media/icons/abilities/ability_snake_kiss_of_poison.dds', tooltip = T.Generic_Poison, tooltipValue2 = 0.5 }, -- Kiss of Poison (Giant Snake)
-    [5244] = { icon = 'LuiExtended/media/icons/abilities/ability_snake_shed_skin.dds', tooltip = T.Skill_Regeneration_Ogrim }, -- Shed Skin (Giant Snake)
+    [5244] = { icon = 'LuiExtended/media/icons/abilities/ability_snake_shed_skin.dds', tooltip = T.Generic_HoT_Channel, tooltipValue2 = 0.5 }, -- Shed Skin (Giant Snake)
 
     -- Guar
     [5440] = { icon = 'LuiExtended/media/icons/abilities/ability_guar_bite.dds' }, -- Bite (Guar)
@@ -6984,7 +6984,7 @@ E.EffectOverride = {
     [26018] = { hide = true }, -- Creeping Doom (The Feast)
     [88070] = { hide = true }, -- Creeping Doom (The Feast)
     [8204] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_strike.dds' }, -- Strike (Ogrim)
-    [8205] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_regeneration.dds', tooltip = T.Skill_Regeneration_Ogrim }, -- Regeneration (Ogrim)
+    [8205] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_regeneration.dds', tooltip = T.Generic_HoT_Channel, tooltipValue2 = 0.5 }, -- Regeneration (Ogrim)
     [24690] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds' }, -- Body Slam (Ogrim)
     [48553] = { hide = true },  -- Focused Charge (Ogrim)
     [24693] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds', hide = true }, -- Body Slam (Ogrim)
@@ -7675,7 +7675,7 @@ E.EffectOverride = {
     [13950] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', tooltip = T.Generic_Knockdown }, -- Flurry (Werewolf)
     [9467] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Flurry (Werewolf)
     [60636] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Flurry (Werewolf)
-    [44055] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', tooltip = T.Skill_Devour_NPC }, -- Devour (Werewolf)
+    [44055] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', tooltip = T.Generic_HoT_Channel, tooltipValue2 = 1 }, -- Devour (Werewolf)
     --[5785] = { icon = 'esoui/art/icons/mos_dagrund_upheavel.dds' }, -- Blood Scent (Werewolf)
 
     -- Wraith
@@ -7800,7 +7800,7 @@ E.EffectOverride = {
     [87069] = { icon = 'esoui/art/icons/ability_mage_006.dds', hide = true }, -- Volcanic Debris (Fire-Binder)
     [87068] = { icon = 'esoui/art/icons/ability_mage_006.dds', tooltip = T.Generic_Knockback }, -- Volcanic Debris (Fire-Binder)
     [87066] = { icon = 'esoui/art/icons/ability_mage_006.dds' }, -- Volcanic Debris (Fire-Binder)
-    [88845] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_empower_atronach.dds', tooltip = T.Skill_Empower_Atronach }, -- Empower Atronach (Fire-Binder)
+    [88845] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_empower_atronach.dds', tooltip = T.Generic_HoT_Channel, tooltipValue2 = 1 }, -- Empower Atronach (Fire-Binder)
 
     ----------------------------------------------------------------
     -- EVENT QUESTS ---------------------------------------------
@@ -8120,7 +8120,7 @@ E.EffectOverride = {
     [63755] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds' }, -- Heat Wave (Skeletal Pyromancer)
     [63756] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds', hide = true }, -- Heat Wave - Used by Skeletal Pyromancer in Tutorial }, -- Heat Wave (Skeletal Pyromancer)
     [64072] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1, tooltip = T.Generic_Stun_No_Dur, stack = 0 }, -- Eye of the Sentinel (CH Tutorial)
-    [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds', tooltip = T.Skill_Regeneration_Ogrim }, -- Focused Healing (The Prophet)
+    [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds', tooltip = T.Generic_HoT_Channel, tooltipValue2 = 0.5 }, -- Focused Healing (The Prophet)
     [48346] = { hide = true }, -- Minor Wound (The Prophet)
     [63521] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds', name = A.Skill_Stomp }, -- Bone Crush (Child of Bones)
     [63522] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds', name = A.Skill_Stomp }, -- Bone Saw (Child of Bones)
@@ -9536,7 +9536,7 @@ E.EffectOverride = {
     [25528] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_grapple.dds', tooltip = T.Generic_Stun }, -- Pulling Grasp (Chokethorn)
 
     [9910] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', name = A.Skill_Summon_Saplings }, -- Summon Saplings (Chokethorn)
-    [9930] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', name = A.Skill_Heal_Spores, tooltip = T.Skill_Heal_Spores }, -- Heal Spores (Chokethorn)
+    [9930] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', name = A.Skill_Heal_Spores, tooltip = T.Generic_HoT_Channel, tooltipValue2 = 1.5 }, -- Heal Spores (Chokethorn)
     [9875] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds' }, -- Fungal Burst (Chokethorn)
     [44092] = { name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Generic Stagger Enemy (Chokethorn)
 
@@ -10198,7 +10198,7 @@ E.EffectOverride = {
     [27437] = { tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 125 }, -- Monstrous Growth (Flesh Atronach)
 
     [27600] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', hide = true }, -- Blood Pool (Urvan Veleth)
-    [27603] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', groundLabel = true, tooltip = T.Skill_Blood_Pool }, -- Blood Pool (Urvan Veleth)
+    [27603] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', groundLabel = true, tooltip = T.Skill_Blood_Pool, tooltipValue2 = 1 }, -- Blood Pool (Urvan Veleth)
 
     [32100] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_headgrab.dds', name = A.Skill_Wracking_Pain, tooltip = T.Generic_Stun, unbreakable = 1 }, -- Arachnophobia (Vorenor Winterbourne)
     [28632] = { hide = true }, -- Intro (Vorenor Winterbourne)
@@ -10206,7 +10206,7 @@ E.EffectOverride = {
     [27660] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_drain.dds' }, -- Blood Drain (Vorenor Winterbourne)
 
     [27905] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', hide = true }, -- Blood Pool (Vorenor Winterbourne)
-    [27906] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', groundLabel = true, tooltip = T.Skill_Blood_Pool_1_5 }, -- Blood Pool (Vorenor Winterbourne)
+    [27906] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', groundLabel = true, tooltip = T.Skill_Blood_Pool, tooltipValue2 = 1.5 }, -- Blood Pool (Vorenor Winterbourne)
 
     [27897] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_open_wounds.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Magic, tooltipValue2 = 2, stack = 0 }, -- Open Wounds (Vorenor Winterbourne)
     [27898] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_open_wounds.dds' }, -- Open Wounds (Vorenor Winterbourne)
