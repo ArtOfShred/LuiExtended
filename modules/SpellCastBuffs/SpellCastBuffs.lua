@@ -2347,7 +2347,6 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         end
 
         local iconName = GetAbilityIcon(abilityId)
-        local stack = 0
         local effectName
         local unbreakable
         local duration = E.AddGroundDamageAura[abilityId].duration
@@ -2359,9 +2358,11 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if E.EffectOverride[abilityId] then
             effectName = E.EffectOverride[abilityId].name or abilityName
             unbreakable = E.EffectOverride[abilityId].unbreakable or 0
+            stack = E.EffectOverride[abilityId].stack or 0
         else
             effectName = abilityName
             unbreakable = 0
+            stack = 0
         end
 
         if E.AddGroundDamageAura[abilityId].merge then
@@ -2374,6 +2375,19 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local endTime = beginTime + duration
         local context = "player" .. effectType
 
+        -- Stack Resolution
+        if g_effectsList[context][ buffSlot ] and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].stackAdd then
+            if E.EffectOverride[abilityId].stackMax then
+                if not (g_effectsList[context][ buffSlot ].stack == E.EffectOverride[abilityId].stackMax) then
+                    stack = g_effectsList[context][ buffSlot ].stack + E.EffectOverride[abilityId].stackAdd
+                else
+                    stack = g_effectsList[context][ buffSlot ].stack
+                end
+            else
+                stack = g_effectsList[context][ buffSlot ].stack + E.EffectOverride[abilityId].stackAdd
+            end
+        end
+
         g_effectsList[context][ buffSlot ] = {
             type=effectType,
             id=abilityId, name=effectName, icon=iconName,
@@ -2384,6 +2398,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             fakeDuration= true,
             groundLabel = groundLabel,
             toggle = toggle,
+            stack = stack,
         }
     end
 

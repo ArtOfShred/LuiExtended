@@ -269,6 +269,9 @@ local strings = {
     SI_LUIE_SKILL_SET_GENERIC_SPELL_RESIST_TIME_TP     = "Increase Spell Resistance for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_TP     = "Increase Magicka Recovery for |cffffff<<1>>|r seconds.",
 
+    SI_LUIE_SKILL_GENERIC_ENRAGE =                       "Increase damage done by |cFFFFFF<<2>>|r% for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_ENRAGE_NO_DUR =                "Increase damage done by |cFFFFFF<<2>>|r%.",
+
     ----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------
     ----------------------------------------------------------------
@@ -1066,7 +1069,7 @@ local strings = {
     SI_LUIE_SKILL_FLAME_TSUNAMI_TP =                     "Afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF2|r seconds.\n\nStunned for |cFFFFFF1.5|r seconds.",
     SI_LUIE_SKILL_FLAME_TORNADO_SHIELD_TP =              "Absorbing |cFFFFFF35|r% of damage taken for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_IGNORE_PAIN =                          "Ignore Pain",
-    SI_LUIE_SKILL_IGNORE_PAIN_TP =                       "Damage taken reduced by |cFFFFFF95|r%.",
+    SI_LUIE_SKILL_IGNORE_PAIN_TP =                       "Reduce damage taken by |cFFFFFF95|r%.",
     SI_LUIE_SKILL_MAGMA_PRISON_TP =                      "Stunned and afflicted with Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_VOLCANIC_SHIELD =                      "Volcanic Shield",
     SI_LUIE_SKILL_VOLCANIC_SHIELD_TP =                   "Absorbing damage and launching bolts of fire at all nearby enemies every |cFFFFFF1|r second while the shield holds.",
@@ -1103,9 +1106,10 @@ local strings = {
     SI_LUIE_SKILL_METEORIC_STRIKE =                      "Meteoric Strike",
 
     SI_LUIE_SKILL_EXPERT_HUNTER_NPC_TP =                 "|cFFFFFF20|r% chance on hit to deal additional Magic Damage to Undead and Daedric enemies for |cFFFFFF<<1>>|r seconds.\n\nKilling an Undead or Daedric enemy increases the duration by |cFFFFFF15|r seconds.",
-    SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_NPC_TP =          "Reduce damage taken by |cFFFFFF55|r%.",
+    SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_NPC_TP =          "Healing every |cFFFFFF1|r second and damage taken reduced by |cFFFFFF55|r%.",
     SI_LUIE_SKILL_PIERCE_ARMOR_NPC_TP =                  "Reduce Physical and Spell Resistance by |cFFFFFF43|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BITING_COLD_TP =                       "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF10|r%.\n\nThis effect stacks up to |cFFFFFF8|r times, to a maximum of |cFFFFFF80|r% Movement Speed reduction.",
+    SI_LUIE_SKILL_BITING_COLD_VET_TP =                   "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF10|r%.\n\nDamage taken increased by |cFFFFFF22|r% per stack.\n\nThe snare stacks up to |cFFFFFF8|r times, to a maximum of |cFFFFFF80|r% Movement Speed reduction.",
     SI_LUIE_SKILL_FROST_CLENCH_NPC_TP =                  "Stunned for |cFFFFFF0.5|r seconds.\n\nImmobilized for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_UWOF_NPC_TP =                          "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF60|r%.\n\nThe wall explodes when it expires, dealing additional Frost Damage.",
     SI_LUIE_SKILL_ELEMENTAL_SUSCEPTIBILITY_NPC_TP =      "Reduce Spell Resistance by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.",
@@ -1146,6 +1150,11 @@ local strings = {
     SI_LUIE_SKILL_CRIPPLING_GRASP_NPC_TP =               "Afflicted with Magic Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF20|r% for |cFFFFFF8|r seconds.\n\nImmobilized for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILLPOWER_EXTRACTION_NPC_TP =               "Increase damage done by |cFFFFFF10|r% for each enemy hit by Power Extraction.",
     SI_LUIE_SKILL_MARKED_FOR_DEATH_TP =                  "You and nearby allies take Flame Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nWhen the effect ends, a deadly pool of fire will drop on the ground beneath your feet.",
+    SI_LUIE_SKILL_ENRAGE_FG_GLADIATOR_TP =               "Increase damage done by |cFFFFFF100|r% and increase damage taken by |cFFFFFF20|r% per stack.",
+    SI_LUIE_SKILL_EMPOWERED_BY_THE_LIGHT =               "Empowered by the Light",
+    SI_LUIE_SKILL_ARENA_TORCH =                          "Arena Torch",
+    SI_LUIE_SKILL_TORCH_GRAB_TP =                        "Carrying a torch and silenced for |cFFFFFF<<1>>|r seconds, you can use the torch to reignite a bonfire.",
+    SI_LUIE_SKILL_WARMING_AURA_TP =                      "Protected from Biting Cold by the warmth of a bonfire.",
 }
 
 local pairs = pairs

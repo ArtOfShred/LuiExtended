@@ -706,6 +706,7 @@ local AlertTable = {
     -- Stage 1
     [52729] = { power = true, priority = 1, auradetect = true }, -- Expert Hunter (Fighters Guild Swordmaster)
     [52738] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Ring of Preservation (Fighters Guild Gladiator)
+    [82996] = { power = true, priority = 1, auradetect = true }, -- Enrage (Fighters Guild Gladiator)
 
     [52746] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Champion_Marcauld }, -- Flawless Dawnbreaker (Champion Marcauld)
 

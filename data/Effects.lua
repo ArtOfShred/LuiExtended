@@ -9037,6 +9037,9 @@ E.EffectOverride = {
     [52738] = { name = Skill_Circle_of_Protection }, -- Circle of Protection (Fighters Guild Gladiator)
     [52744] = { name = Skill_Circle_of_Protection, duration = 0, groundLabel = true, tooltip = T.Skill_Circle_of_Protection_NPC }, -- Circle of Protection (Fighters Guild Gladiator)
 
+    [60417] = { name = A.Skill_Empowered_by_the_Light, tooltip = T.Generic_Enrage, tooltipValue2 = 50 }, -- Empowered By the Light (Fighter's Guild Gladiator)
+    [82996] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = T.Skill_Enrage_FG_Gladiator, duration = 0 }, -- Enrage (Fighter's Guild Gladiator)
+
     [53166] = { hide = true }, -- Spike Trap (Spike Trap)
     [53169] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', hide = true }, -- Spike Trap (Spike Trap)
     [53167] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Spike_Trap }, -- Spike Trap Snare (Spike Trap)
@@ -9046,7 +9049,7 @@ E.EffectOverride = {
     [52746] = { name = A.Skill_Dawnbreaker }, -- Flawless Dawnbreaker (Champion Marcauld)
 
     -- Dragonstar Arena (Stage 2) - The Frozen Ring
-    [53329] = { hide = true }, -- Warming Aura
+    [53329] = { icon = 'LuiExtended/media/icons/abilities/ability_event_warm.dds', name = A.Skill_Warmth, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = T.Skill_Warming_Aura }, -- Warming Aura
 
     [56755] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds' }, -- Pierce Armor (Sovngarde Brawler)
     [56757] = { icon = 'esoui/art/icons/ability_1handed_002_b.dds', name = A.Skill_Pierce_Armor, tooltip = T.Skill_Pierce_Armor_NPC }, -- Puncture (Sovngarde Brawler)
@@ -9056,7 +9059,10 @@ E.EffectOverride = {
     [56760] = { icon = 'esoui/art/icons/ability_1handed_001_b.dds', tooltip = T.Generic_Snare, tooltipValue2 = 60 }, -- Deep Slash (Sovngarde Brawler)
 
     [53341] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds' }, -- Biting Cold (Biting Cold)
-    [53342] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', unbreakable = 1, stackAdd = 1, stackMax = 8, tooltip = T.Skill_Biting_Cold, groundLabel = true }, -- Biting Cold (Biting Cold)
+    [53342] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds' }, -- Biting Cold (Biting Cold)
+    [53341] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', unbreakable = 1, stack = 1, stackAdd = 1, stackMax = 8, tooltip = T.Skill_Biting_Cold, groundLabel = true }, -- Biting Cold (Biting Cold)
+    [60421] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', unbreakable = 1, stack = 1, stackAdd = 1, tooltip = T.Skill_Biting_Cold_Vet, groundLabel = true }, -- Biting Cold (Biting Cold)
+    [53832] = { icon = 'LuiExtended/media/icons/abilities/ability_event_torch_juggling.dds', name = A.Skill_Arena_Torch, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Torch_Grab }, -- Torch Grab (Player)
 
     [53264] = { icon = 'esoui/art/icons/ability_2handed_005_b.dds' }, -- Rally (Sovngarde Slayer)
     [53259] = { icon = 'esoui/art/icons/ability_2handed_004_b.dds' }, -- Reverse Slice (Sovngarde Slayer)
@@ -10479,7 +10485,6 @@ E.FakeExternalDebuffs = {
     ----------------------------------------------------------------
 
     -- Dragonstar Arena
-    [53342] = { duration = 0 }, -- Biting Cold (Biting Cold)
     [27920] = { duration = 1800 }, -- Generic Knockback Stun (House Dres Templar)
     [54068] = { duration = 500 }, -- Fossilize (Earthen Heart Knight)
     [51354] = { duration = 500 }, -- Petrify (Gargoyle)
@@ -11009,6 +11014,10 @@ E.AddGroundDamageAura = {
     -- Dragonstar Arena
     [53314] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Flame Volley (Sovngarde Ranger)
     [53280] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Unstable Wall of Frost (Sovngarde Icemage)
+
+    [53341] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Biting Cold (Biting Cold)
+    [60421] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Biting Cold (Biting Cold)
+
     [83498] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Poisonous Cloud (Poison Cloud)
     [53625] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Lightning Flood (Nak'tah)
     [54080] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Cinder Storm (Earthen Heart Knight)

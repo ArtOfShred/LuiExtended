@@ -11477,6 +11477,12 @@ LUIE.DebugAuras = {
     [52744] = true, -- Ring of Preservation (Fighters Guild Gladiator)
     [52745] = true, -- Ring of Preservation (Fighters Guild Gladiator)
 
+    [52752] = true, -- Ring of Preservation (Fighters Guild Gladiator)
+    [60417] = true, -- Empowered By the Light (Fighters Guild Gladiator)
+    [53191] = true, -- Enrage (Fighters Guild Gladiator)
+    [57605] = true, -- Enrage (Fighters Guild Gladiator)
+    [82996] = true, -- Enrage (Fighters Guild Gladiator)
+
     [53166] = true, -- Spike Trap (Spike Trap)
     [53169] = true, -- Spike Trap (Spike Trap)
     [53167] = true, -- Spike Trap Snare (Spike Trap)
@@ -11499,10 +11505,12 @@ LUIE.DebugAuras = {
     [56760] = true, -- Deep Slash (Sovngarde Brawler)
 
     [53239] = true, -- CLDA - Blizzard
-    --[60421] = true, -- Biting Cold
     [53341] = true, -- Biting Cold
     [53342] = true, -- Biting Cold
     [60505] = true, -- Biting Cold Fx
+    [60421] = true, -- Biting Cold
+    [83466] = true, -- Biting Cold
+    [53832] = true, -- Torch Grab
 
     [53313] = true, -- Volley (Sovngarde Ranger)
     [53340] = true, -- CLDA - Volley (Sovngarde Ranger)

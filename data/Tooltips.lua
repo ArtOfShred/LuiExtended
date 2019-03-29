@@ -115,6 +115,8 @@ local Tooltips = {
     Generic_Stamina_Regen                 = GetString(SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP),
     Generic_Health_Recovery               = GetString(SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP),
 
+    Generic_Enrage                        = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE),
+    Generic_Enrage_No_Dur                 = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_NO_DUR),
 
     Generic_Test                          = GetString(SI_LUIE_SKILL_TEST_TP),
 
@@ -1042,6 +1044,7 @@ local Tooltips = {
     Skill_Circle_of_Protection_NPC        = GetString(SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_NPC_TP),
     Skill_Pierce_Armor_NPC                = GetString(SI_LUIE_SKILL_PIERCE_ARMOR_NPC_TP),
     Skill_Biting_Cold                     = GetString(SI_LUIE_SKILL_BITING_COLD_TP),
+    Skill_Biting_Cold_Vet                 = GetString(SI_LUIE_SKILL_BITING_COLD_VET_TP),
     Skill_Frost_Clench_NPC                = GetString(SI_LUIE_SKILL_FROST_CLENCH_NPC_TP),
     Skill_U_Wall_of_Frost_NPC             = GetString(SI_LUIE_SKILL_UWOF_NPC_TP),
     Skill_Elemental_Susceptibility_NPC    = GetString(SI_LUIE_SKILL_ELEMENTAL_SUSCEPTIBILITY_NPC_TP),
@@ -1081,6 +1084,10 @@ local Tooltips = {
     Skill_Crippling_Grasp_NPC             = GetString(SI_LUIE_SKILL_CRIPPLING_GRASP_NPC_TP),
     Skill_Power_Extraction_NPC            = GetString(SI_LUIE_SKILLPOWER_EXTRACTION_NPC_TP),
     Skill_Marked_for_Death                = GetString(SI_LUIE_SKILL_MARKED_FOR_DEATH_TP),
+
+    Skill_Enrage_FG_Gladiator             = GetString(SI_LUIE_SKILL_ENRAGE_FG_GLADIATOR_TP),
+    Skill_Torch_Grab                      = GetString(SI_LUIE_SKILL_TORCH_GRAB_TP),
+    Skill_Warming_Aura                    = GetString(SI_LUIE_SKILL_WARMING_AURA_TP),
 
     -- Maelstrom Arena
     Skill_Sigil_of_Haste                  = GetString(SI_LUIE_SKILL_SIGIL_OF_HASTE_TP),

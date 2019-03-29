@@ -1134,6 +1134,9 @@ local AbilityTables = {
     Skill_Sucked_Under                = 55221,
     Skill_Spirit_Shield               = 56985,
     Skill_Blazing_Fire                = 34959,
+    Skill_Empowered_by_the_Light      = GetString(SI_LUIE_SKILL_EMPOWERED_BY_THE_LIGHT),
+    Skill_Warmth                      = 29430,
+    Skill_Arena_Torch                 = GetString(SI_LUIE_SKILL_ARENA_TORCH),
 
     -- Maelstrom Arena
     Skill_Sigil_of_Healing            = 66920,
