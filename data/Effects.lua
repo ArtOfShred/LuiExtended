@@ -9123,7 +9123,7 @@ E.EffectOverride = {
     [75609] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heated_blades.dds' }, -- Ember Explosion (Shilia)
     [75608] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heated_blades.dds', tooltip = T.Skill_Ember_Explosion }, -- Ember Explosion (Shilia)
     [53703] = { name = A.Skill_Hidden_Blade }, -- Flying Blade (Shilia)
-    [53704] = { name = A.Skill_Hidden_Blade, tooltip = T.Generic_Snare_40 }, -- Flying Blade (Shilia)
+    [53704] = { name = A.Skill_Hidden_Blade, tooltip = T.Generic_Snare_50 }, -- Flying Blade (Shilia)
     [53698] = { icon = 'esoui/art/icons/ability_dualwield_005_b.dds' }, -- Steel Tornado (Shilia)
     [53692] = { name = A.Skill_Flurry }, -- Rapid Strikes (Shilia)
     [53693] = { name = A.Skill_Flurry, icon = 'esoui/art/icons/ability_dualwield_002.dds' }, -- Rapid Strikes (Shilia)
