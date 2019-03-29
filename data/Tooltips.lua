@@ -9,15 +9,15 @@ LUIE.Tooltips = {}
 local strformat = zo_strformat
 
 -- Local Damagetypes for easy use
-local PhysicalDamage = GetString(SI_DAMAGETYPE2)
-local FlameDamage = GetString(SI_DAMAGETYPE3)
-local ShockDamage = GetString(SI_DAMAGETYPE4)
-local FrostDamage = GetString(SI_DAMAGETYPE6)
-local MagicDamage = GetString(SI_DAMAGETYPE8)
-local DiseaseDamage = GetString(SI_DAMAGETYPE10)
-local PoisonDamage = GetString(SI_DAMAGETYPE11)
-local BleedDamage = "Bleeding" -- TODO: Localize
-local OblivionDamage = "Oblivion" -- TODO: Localize
+local PhysicalDamage = GetString(SI_DAMAGETYPE2) .. " Damage" -- TODO: Localize
+local FlameDamage = GetString(SI_DAMAGETYPE3) .. " Damage" -- TODO: Localize
+local ShockDamage = GetString(SI_DAMAGETYPE4) .. " Damage" -- TODO: Localize
+local FrostDamage = GetString(SI_DAMAGETYPE6) .. " Damage" -- TODO: Localize
+local MagicDamage = GetString(SI_DAMAGETYPE8) .. " Damage" -- TODO: Localize
+local DiseaseDamage = GetString(SI_DAMAGETYPE10) .. " Damage" -- TODO: Localize
+local PoisonDamage = GetString(SI_DAMAGETYPE11) .. " Damage" -- TODO: Localize
+local BleedDamage = "Bleeding Damage" -- TODO: Localize
+local OblivionDamage = "Oblivion Damage" -- TODO: Localize
 
 local Tooltips = {
     ----------------------------------------------------------------
@@ -96,32 +96,10 @@ local Tooltips = {
     ----------------------------------------------------------------
 
     Generic_Immunity                      = GetString(SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP),
-    Generic_Snare_15                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 15),
-    Generic_Snare_15_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 15),
-    Generic_Snare_20                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 20),
-    Generic_Snare_20_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 20),
-    Generic_Snare_25                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 25),
-    Generic_Snare_25_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 25),
-    Generic_Snare_30                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 30),
-    Generic_Snare_30_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 30),
-    Generic_Snare_35                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 35),
-    Generic_Snare_35_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 35),
-    Generic_Snare_40                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 40),
-    Generic_Snare_40_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 40),
-    Generic_Snare_45                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 45),
-    Generic_Snare_45_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 45),
-    Generic_Snare_50                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 50),
-    Generic_Snare_50_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 50),
-    Generic_Snare_55                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 55),
-    Generic_Snare_55_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 55),
-    Generic_Snare_60                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 60),
-    Generic_Snare_60_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 60),
-    Generic_Snare_70                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 70),
-    Generic_Snare_70_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 70),
-    Generic_Snare_75                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 75),
-    Generic_Snare_75_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 75),
-    Generic_Snare_80                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP), "MOVESPEED", 80),
-    Generic_Snare_80_No_Dur               = strformat(GetString(SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP), 80),
+
+    Generic_Snare                         = GetString(SI_LUIE_SKILL_GENERIC_SNARE_TP),
+    Generic_Snare_No_Dur                  = GetString(SI_LUIE_SKILL_GENERIC_SNARE_NO_DUR_TP),
+
     Generic_Damage_Shield_No_Duration     = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP),
     Generic_Damage_Shield_Duration        = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP),
     Generic_Weapon_Damage_Duration        = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_TIME_TP),
@@ -132,51 +110,39 @@ local Tooltips = {
     Generic_Weapon_Spell_Damage_Duration  = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_TP),
     Generic_Increase_Spell_Resist_No_Dur  = GetString(SI_LUIE_SKILL_SPELL_RESIST_NO_DUR_TP),
 
-    -- Generic_HoT                           = GetString(SI_LUIE_SKILL_GENERIC_HOT_TP),
     Generic_Magicka_Regen                 = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP),
     Generic_Magicka_Regen_2_Sec           = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_2_SEC_TP),
     Generic_Stamina_Regen                 = GetString(SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP),
     Generic_Health_Recovery               = GetString(SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP),
-    Generic_HoT_05Sec                     = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_05SEC_TP),
-    Generic_HoT_1Sec                      = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP),
-    Generic_HoT_1_5_Sec                   = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_1_5_SEC_TP),
-    Generic_HoT_08Sec                     = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_08SEC_TP),
-    Generic_HoT_2Sec                      = GetString(SI_LUIE_SKILL_GENERIC_HOT_TIME_2SEC_TP),
+
 
     Generic_Test                          = GetString(SI_LUIE_SKILL_TEST_TP),
 
-    Generic_Bleed                         = string.gsub(GetString(SI_LUIE_SKILL_DOT_TP), "DAMAGETYPE", BleedDamage),
-    Generic_Bleed_0_2_Sec                 = string.gsub(GetString(SI_LUIE_SKILL_DOT_0_2_SEC_TP), "DAMAGETYPE", BleedDamage),
-    Generic_Bleed_0_5_Sec                 = string.gsub(GetString(SI_LUIE_SKILL_DOT_0_5_SEC_TP), "DAMAGETYPE", BleedDamage),
-    Generic_Bleed_1_Sec                   = string.gsub(GetString(SI_LUIE_SKILL_DOT_1_SEC_TP), "DAMAGETYPE", BleedDamage),
-    Generic_Bleed_2_Sec                   = string.gsub(GetString(SI_LUIE_SKILL_DOT_2_SEC_TP), "DAMAGETYPE", BleedDamage),
-    Generic_Disease                       = string.gsub(GetString(SI_LUIE_SKILL_DOT_TP), "DAMAGETYPE", DiseaseDamage),
-    Generic_Disease_2_Sec                 = string.gsub(GetString(SI_LUIE_SKILL_DOT_2_SEC_TP), "DAMAGETYPE", DiseaseDamage),
-    Generic_Poison                        = string.gsub(GetString(SI_LUIE_SKILL_DOT_TP), "DAMAGETYPE", PoisonDamage),
-    Generic_Poison_0_5_Sec                = string.gsub(GetString(SI_LUIE_SKILL_DOT_0_5_SEC_TP), "DAMAGETYPE", PoisonDamage),
-    Generic_Poison_1_Sec                  = string.gsub(GetString(SI_LUIE_SKILL_DOT_1_SEC_TP), "DAMAGETYPE", PoisonDamage),
-    Generic_Poison_1_5_Sec                = string.gsub(GetString(SI_LUIE_SKILL_DOT_1_5_SEC_TP), "DAMAGETYPE", PoisonDamage),
-    Generic_Poison_2_Sec                  = string.gsub(GetString(SI_LUIE_SKILL_DOT_2_SEC_TP), "DAMAGETYPE", PoisonDamage),
-    Generic_Burn                          = string.gsub(GetString(SI_LUIE_SKILL_DOT_TP), "DAMAGETYPE", FlameDamage),
-    Generic_Burn_1_Sec                    = string.gsub(GetString(SI_LUIE_SKILL_DOT_1_SEC_TP), "DAMAGETYPE", FlameDamage),
-    Generic_Burn_1_5_Sec                  =  string.gsub(GetString(SI_LUIE_SKILL_DOT_1_5_SEC_TP), "DAMAGETYPE", FlameDamage),
-    Generic_Burn_2_Sec                    = string.gsub(GetString(SI_LUIE_SKILL_DOT_2_SEC_TP), "DAMAGETYPE", FlameDamage),
-    Generic_Freeze                        = string.gsub(GetString(SI_LUIE_SKILL_DOT_TP), "DAMAGETYPE", FrostDamage),
-    Generic_Freeze_1_Sec                  = string.gsub(GetString(SI_LUIE_SKILL_DOT_1_SEC_TP), "DAMAGETYPE", FrostDamage),
-    Generic_Freeze_2_Sec                  = string.gsub(GetString(SI_LUIE_SKILL_DOT_2_SEC_TP), "DAMAGETYPE", FrostDamage),
-    Generic_Shock                         = string.gsub(GetString(SI_LUIE_SKILL_DOT_TP), "DAMAGETYPE", ShockDamage),
-    Generic_Shock_1_Sec                   = string.gsub(GetString(SI_LUIE_SKILL_DOT_1_SEC_TP), "DAMAGETYPE", ShockDamage),
-    Generic_Shock_2_Sec                   = string.gsub(GetString(SI_LUIE_SKILL_DOT_2_SEC_TP), "DAMAGETYPE", ShockDamage),
-    Generic_Oblivion                      = string.gsub(GetString(SI_LUIE_SKILL_DOT_TP), "DAMAGETYPE", OblivionDamage),
-    Generic_Oblivion_1_Sec                = string.gsub(GetString(SI_LUIE_SKILL_DOT_1_SEC_TP), "DAMAGETYPE", OblivionDamage),
-    Generic_Magic                         = string.gsub(GetString(SI_LUIE_SKILL_DOT_TP), "DAMAGETYPE", MagicDamage),
-    Generic_Magic_1_Sec                   = string.gsub(GetString(SI_LUIE_SKILL_DOT_1_SEC_TP), "DAMAGETYPE", MagicDamage),
-    Generic_Magic_2_Sec                   = string.gsub(GetString(SI_LUIE_SKILL_DOT_2_SEC_TP), "DAMAGETYPE", MagicDamage),
+    Generic_Bleed                         = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", BleedDamage),
+    Generic_Disease                       = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", DiseaseDamage),
+    Generic_Poison                        = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", PoisonDamage),
+    Generic_Burn                          = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", FlameDamage),
+    Generic_Freeze                        = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", FrostDamage),
+    Generic_Shock                         = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", ShockDamage),
+    Generic_Oblivion                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", OblivionDamage),
+    Generic_Magic_No_Tick                 = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_NO_TICK_TP), "SUBSTRING", MagicDamage),
+    Generic_Magic                         = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", MagicDamage),
+    Generic_HoT                           = GetString(SI_LUIE_SKILL_GENERIC_HOT_TP),
+    Generic_HoT_Potion                    = GetString(SI_LUIE_SKILL_GENERIC_HOT_POTION_TP),
+
+    Generic_AOE_Physical                  = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "DAMAGETYPE", PhysicalDamage),
+    Generic_AOE_Poison                    = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "DAMAGETYPE", PoisonDamage),
+    Generic_AOE_Disease                   = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "DAMAGETYPE", DiseaseDamage),
+    Generic_AOE_Fire                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "DAMAGETYPE", FlameDamage),
+    Generic_AOE_Frost                     = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "DAMAGETYPE", FrostDamage),
+    Generic_AOE_Shock                     = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "DAMAGETYPE", ShockDamage),
+    Generic_AOE_Magic                     = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "DAMAGETYPE", MagicDamage),
+
+    Generic_AOE_Heal                      = GetString(SI_LUIE_SKILL_GENERIC_GROUND_HEAL_TP),
+
 
     Generic_Off_Balance                   = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP),
     Generic_Off_Balance_Immunity          = GetString(SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP),
-    Generic_Snare                         = GetString(SI_LUIE_SKILL_GENERIC_SNARE_TP),
-    Generic_Snare_No_Dur                  = GetString(SI_LUIE_SKILL_GENERIC_SNARE_NO_DUR_TP),
     Generic_Immobilize                    = GetString(SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP),
     Generic_Immobilize_No_Dur             = GetString(SI_LUIE_SKILL_GENERIC_IMMOBILIZE_NO_DUR_TP),
     Generic_Stagger                       = GetString(SI_LUIE_SKILL_GENERIC_STAGGER_TP),
@@ -1186,36 +1152,6 @@ local Tooltips = {
     Skill_Maim                            = GetString(SI_LUIE_SKILL_MAIM_NPC_TP),
 
     -- TODO: MOVE LATER
-    Generic_AOE_Physical_0_5_Sec          = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 0.5), "DAMAGETYPE", PhysicalDamage),
-    Generic_AOE_Physical_1_Sec            = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 1), "DAMAGETYPE", PhysicalDamage),
-
-    Generic_AOE_Poison_0_5_Sec            = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 0.5), "DAMAGETYPE", PoisonDamage),
-    Generic_AOE_Poison_0_66_Sec           = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 0.7), "DAMAGETYPE", PoisonDamage),
-    Generic_AOE_Poison_1_Sec              = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 1), "DAMAGETYPE", PoisonDamage),
-    Generic_AOE_Poison_1_5_Sec            = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 1.5), "DAMAGETYPE", PoisonDamage),
-
-    Generic_AOE_Disease_0_5_Sec           = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 0.5), "DAMAGETYPE", DiseaseDamage),
-    Generic_AOE_Disease_1_Sec             = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 1), "DAMAGETYPE", DiseaseDamage),
-
-    Generic_AOE_Fire_0_5_Sec              = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 0.5), "DAMAGETYPE", FlameDamage),
-    Generic_AOE_Fire_0_66_Sec             = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 0.7), "DAMAGETYPE", FlameDamage),
-    Generic_AOE_Fire_0_9_Sec              = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 0.9), "DAMAGETYPE", FlameDamage),
-    Generic_AOE_Fire_1_Sec                = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 1), "DAMAGETYPE", FlameDamage),
-    Generic_AOE_Fire_1_5_Sec              = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 1.5), "DAMAGETYPE", FlameDamage),
-    Generic_AOE_Frost_0_5_Sec             = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 0.5), "DAMAGETYPE", FrostDamage),
-    Generic_AOE_Frost_1_Sec               = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 1), "DAMAGETYPE", FrostDamage),
-    Generic_AOE_Shock_0_5_Sec             = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 0.5), "DAMAGETYPE", ShockDamage),
-    Generic_AOE_Shock_0_7_Sec             = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 0.75), "DAMAGETYPE", ShockDamage),
-    Generic_AOE_Shock_1_Sec               = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 1), "DAMAGETYPE", ShockDamage),
-    Generic_AOE_Magic_0_5_Sec             = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 0.5), "DAMAGETYPE", MagicDamage),
-    Generic_AOE_Magic_0_66_Sec            = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 0.7), "DAMAGETYPE", MagicDamage),
-    Generic_AOE_Magic_1_Sec               = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 1), "DAMAGETYPE", MagicDamage),
-    Generic_AOE_Magic_1_5_Sec             = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 1.5), "DAMAGETYPE", MagicDamage),
-    Generic_AOE_Magic_2_Sec               = string.gsub(strformat(GetString(SI_LUIE_SKILL_GROUND_AOE_TP), 2), "DAMAGETYPE", MagicDamage),
-
-    Generic_AOE_Heal_0_5_Sec              = strformat(GetString(SI_LUIE_SKILL_GROUND_HEAL_TP), 0.5),
-    Generic_AOE_Heal_1_Sec                = strformat(GetString(SI_LUIE_SKILL_GROUND_HEAL_TP), 1),
-    Generic_AOE_Heal_2_Sec                = strformat(GetString(SI_LUIE_SKILL_GROUND_HEAL_TP), 2),
 
     Skill_Spawn_of_Mephala_Ground         = GetString(SI_LUIE_SKILL_SPAWN_OF_MEPHALA_GROUND_TP),
     Skill_Bahrahas_Curse_Ground           = GetString(SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP),

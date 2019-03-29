@@ -465,16 +465,28 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
                     local timer = endTime - startTime
                     local value2
-                    if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltipValue2Mod then
-                        value2 =  math.floor(GetAbilityDuration(LUIE.Effects.EffectOverride[abilityId].tooltipValue2Mod * 10) + 0.5) / 10
-                    elseif LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltipValue2Id then
-                        value2 =  math.floor(GetAbilityDuration(LUIE.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                    local value3
+                    if LUIE.Effects.EffectOverride[abilityId] then
+                        if LUIE.Effects.EffectOverride[abilityId].tooltipValue2 then
+                            value2 = LUIE.Effects.EffectOverride[abilityId].tooltipValue2
+                        elseif LUIE.Effects.EffectOverride[abilityId].tooltipValue2Mod then
+                            value2 =  math.floor(GetAbilityDuration(LUIE.Effects.EffectOverride[abilityId].tooltipValue2Mod * 10) + 0.5) / 10
+                        elseif LUIE.Effects.EffectOverride[abilityId].tooltipValue2Id then
+                            value2 =  math.floor(GetAbilityDuration(LUIE.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
+                        else
+                            value2 = 0
+                        end
                     else
                         value2 = 0
                     end
+                    if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltipValue3 then
+                        value3 = LUIE.Effects.EffectOverride[abilityId].tooltipValue3
+                    else
+                        value3 = 0
+                    end
                     timer = math.floor((timer * 10) + 0.5) / 10
 
-                    local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, timer, value2) or GetAbilityDescription(abilityId)
+                    local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, timer, value2, value3) or GetAbilityDescription(abilityId)
 
                     -- Use default tooltip - temp if needed (TODO: Remove when all base ability/set tooltips are updated)
                     if tooltipText == "" or tooltipText == nil then

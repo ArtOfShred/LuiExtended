@@ -201,26 +201,19 @@ local strings = {
     -- Test Effect
     SI_LUIE_SKILL_TEST_TP =                              "This is a test effect.",
 
-    -- Damage over Time
-    SI_LUIE_SKILL_DOT_TP =                               "Afflicted with DAMAGETYPE Damage over time for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_DOT_0_2_SEC_TP =                       "Afflicted with DAMAGETYPE Damage every |cFFFFFF0.2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_DOT_0_5_SEC_TP =                       "Afflicted with DAMAGETYPE Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_DOT_1_SEC_TP =                         "Afflicted with DAMAGETYPE Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_DOT_1_5_SEC_TP =                       "Afflicted with DAMAGETYPE Damage every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_DOT_2_SEC_TP =                         "Afflicted with DAMAGETYPE Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    -- Damage over Time / Heal over Time
+    SI_LUIE_SKILL_GENERIC_DOT_NO_TICK_TP =               "Afflicted with SUBSTRING over time for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_DOT_TP =                       "Afflicted with SUBSTRING every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Healing every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_HOT_POTION_TP =                "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     -- Ground over Time
-    SI_LUIE_SKILL_GROUND_AOE_TP =                        "Taking DAMAGETYPE Damage every |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GROUND_HEAL_TP =                       "Healing every |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP =                "Taking SUBSTRING every |cFFFFFF<<2>>|r <<2[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_GROUND_HEAL_TP =               "Healing every |cFFFFFF<<2>>|r <<2[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_GROUND_AOE_SNARE_TP =          "Taking SUBSTRING every |cFFFFFF<<2>>|r <<2[second/seconds]>> and Movement Speed reduced by |cFFFFFF<<3>>|r%.",
 
-    -- Heal over Time, Resource Regeneration, Shields
-    -- SI_LUIE_SKILL_GENERIC_HOT_TP =                       "Healing over time for |cFFFFFF<<1>>|r seconds.",
+    -- Resource Regeneration, Shields
     SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP =           "Increase Health Recovery for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_HOT_TIME_05SEC_TP =            "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_HOT_TIME_1SEC_TP =             "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_HOT_TIME_1_5_SEC_TP =          "Healing every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_HOT_TIME_08SEC_TP =            "Healing every |cFFFFFF0.8|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_HOT_TIME_2SEC_TP =             "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Restoring Magicka every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_MGK_REGEN_2_SEC_TP =           "Restoring Magicka every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Restoring Stamina every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -239,11 +232,8 @@ local strings = {
     -- Crowd Control / Immunity
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP =      "Immune to effects that exploit off balance targets.",
     SI_LUIE_SKILL_GENERIC_OFF_BALANCE_TP =               "Off Balance for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_SNARE_TP =                     "Movement Speed reduced for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_SNARE_NO_DUR_TP =              "Movement Speed reduced.",
-    SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_TP =          "Movement Speed reduced by |cFFFFFFMOVESPEED|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    SI_LUIE_SKILL_GENERIC_SNARE_PERCENTAGE_NO_DUR_TP =   "Movement Speed reduced by |cFFFFFF<<1>>|r%.",
-
+    SI_LUIE_SKILL_GENERIC_SNARE_TP =                     "Movement Speed reduced by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_SNARE_NO_DUR_TP =              "Movement Speed reduced by |cFFFFFF<<2>>|r%.",
     SI_LUIE_SKILL_GENERIC_IMMOBILIZE_TP =                "Immobilized for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_IMMOBILIZE_NO_DUR_TP =         "Immobilized.",
     SI_LUIE_SKILL_GENERIC_STAGGER_TP =                   "Staggered.",
