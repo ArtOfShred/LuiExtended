@@ -298,7 +298,6 @@ local strings = {
     SI_LUIE_SKILL_ERUPTION_TP =                          "Enemies in the ash cloud have their Movement Speed reduced by |cffffff70|r% and take Flame Damage every |cffffff1|r second.",
     SI_LUIE_SKILL_MAGMA_ARMOR_TP =                       "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies take Flame Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_CORROSIVE_ARMOR_TP =                   "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies take Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nWhile active, your attacks ignore all Physical Resistance.",
-    SI_LUIE_SKILL_ERUPTION_GROUND_TP =                   "Taking Flame Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.",
 
     -- Nightblade Skills
     SI_LUIE_SKILL_LOTUS_FAN_TP =                         "Afflicted with Magic Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -323,7 +322,6 @@ local strings = {
     SI_LUIE_SKILL_SIPHONING_ATTACKS_TP =                 "Your Light and Heavy Attacks heal you and restore Magicka for |cFFFFFF20|r seconds. Fully charged Heavy Attacks restore twice the value.\n\nYou restore up to |cFFFFFF4270|r additional Magicka when the effect ends, based on the length of time Siphoning Attacks was active.",
     SI_LUIE_SKILL_SOUL_TETHER_TP =                       "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF8.5|r seconds.\n\nStunned for |cFFFFFF4.5|r seconds.",
     SI_LUIE_SKILL_REFRESHING_PATH_GROUND =               "Healing every |cFFFFFF1|r second.\n\nThe effect persists for |cFFFFFF2|r seconds after leaving the path.",
-    SI_LUIE_SKILL_VEIL_OF_BLADES_GROUND =                "Taking Magic Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.",
 
     -- Sorcerer
     SI_LUIE_SKILL_PERSISTENCE =                          "Reduce the cost of your next Magicka or Stamina ability used within |cFFFFFF4|r seconds by |cFFFFFF<<1>>|r%.",
@@ -393,7 +391,6 @@ local strings = {
     SI_LUIE_SKILL_CLEANSING_RITUAL_RETRIBUTION_TP =      "You and allies in the area are healed every |cFFFFFF2|r seconds, while enemies take Magic Damage every |cFFFFFF2|r seconds.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
     SI_LUIE_SKILL_RUNE_FOCUS_BONUS_TP =                  "Increase Physical and Spell Resistance by |cFFFFFF2640|r.",
     SI_LUIE_SKILL_RITE_OF_PASSAGE_TP =                   "Healing you and allies within |cFFFFFF20|r meters every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_SOLAR_DISTURBANCE_GROUND_TP =          "Taking Magic Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.",
 
     -- Warden
     SI_LUIE_SKILL_BOND_WITH_NATURE =                     "Bond with Nature",
@@ -432,8 +429,6 @@ local strings = {
     SI_LUIE_SKILL_FROZEN_RETREAT_TP =                    "Detonates when a enemy comes close, dealing Frost Damage, teleporting the enemy to you, and immobilizing them for |cFFFFFF3|r seconds.\n\nAn ally in the portal can activate the |cFFFFFFIcy Escape|r synergy.",
     SI_LUIE_SKILL_SLEET_STORM_TP =                       "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_PERMAFROST_TP =                        "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second.\n\nDamaging an enemy three times with the storm will stun them for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_IMPALING_SHARDS_GROUND_TP =            "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF30|r%.",
-    SI_LUIE_SKILL_SLEET_STORM_GROUND_TP =                "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.",
     SI_LUIE_SKILL_PERMAFROST_GROUND_TP =                 "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.\n\nIf you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.",
 
     ----------------------------------------------------------------
@@ -625,7 +620,6 @@ local strings = {
     SI_LUIE_SKILL_CHARGING_MANEUVER_TP =                 "Gain Major Expedition and Major Gallop for |cFFFFFF<<1>>|r seconds.\n\nThe effect ends if you cast any spell on an enemy or ally, but you gain Minor Expedition for |cFFFFFF8|r seconds.",
     SI_LUIE_SKILL_CALTROPS_TP =                          "Enemies standing in the caltrops take Physical Damage every |cFFFFFF1|r second and have their Movement Speed reduced by |cFFFFFF30|r%.",
     SI_LUIE_SKILL_ANTI_CAVALRY_CALTROPS_TP =             "Enemies standing in the caltrops take Physical Damage every |cFFFFFF1|r second and have their Movement Speed reduced by |cFFFFFF30|r%.\n\nThe caltrops rapidly drain the Mount Stamina of any enemy in the area.",
-    SI_LUIE_SKILL_CALTROPS_DEBUFF_TP =                   "Taking Physical Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF30|r%.",
     SI_LUIE_SKILL_ANTI_CAVALRY_CALTROPS_DEBUFF_TP =      "Taking Physical Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF30|r%.\n\nThe caltrops rapidly drain Mount Stamina.",
     SI_LUIE_SKILL_MAGICKA_DETONATION_TP =                "Cursed with a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to you and any allies within |cFFFFFF8|r meters.\n\nEach ally within the bomb's radius increases the damage by |cFFFFFF25|r%, up to a maximum of |cFFFFFF250|r% increased damage.",
     SI_LUIE_SKILL_INEVITABLE_DETONATION_TP =             "Cursed with a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to you and any allies within |cFFFFFF8|r meters.\n\nEach ally within the bomb's radius increases the damage by |cFFFFFF25|r%, up to a maximum of |cFFFFFF250|r% increased damage.\n\nIf the bomb is dispelled or removed early, the explosion is triggered immediately.",
@@ -698,14 +692,11 @@ local strings = {
     -- TRAPS -------------------------------------------------------
     ----------------------------------------------------------------
 
-    SI_LUIE_SKILL_LAVA_SNARE_TP =                        "Taking Flame Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF30|r%.",
     SI_LUIE_SKILL_LAVA_STACK_TP =                        "Taking increasing Flame Damage every |cFFFFFF0.75|r seconds.",
     SI_LUIE_SKILL_LAVA_TP =                              "Taking Flame Damage every |cFFFFFF0.75|r seconds.",
     SI_LUIE_SKILL_LAVA_TRAP =                            "Lava Trap",
     SI_LUIE_SKILL_LIGHTNING_TRAP =                       "Lightning Trap",
     SI_LUIE_SKILL_SPIKE_TRAP_TP =                        "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF5|r seconds.\n\nImmobilized for |cFFFFFF0.8|r seconds.",
-    SI_LUIE_SKILL_FIRE_TRAP_TP =                         "Taking Flame Damage every |cFFFFFF0.75|r seconds and Movement Speed reduced by |cFFFFFF50|r%.",
-    SI_LUIE_SKILL_FIRE_TRAP_CELLS_TP =                   "Taking Flame Damage every |cFFFFFF1.5|r seconds and Movement Speed reduced by |cFFFFFF50|r%.",
     SI_LUIE_SKILL_SPIKE_TRAP_AURIDON_TP =                "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF10|r seconds.\n\nThis effect stacks up to |cFFFFFF3|r times, to a maximum of |cFFFFFF75|r% Movement Speed reduction.\n\nStunned for |cFFFFFF1|r second.",
 
     ----------------------------------------------------------------
@@ -756,8 +747,6 @@ local strings = {
     SI_LUIE_SKILL_SET_SHADOWREND_TP =                    "A shadowy Clannfear fights at your side. The clannfear remains for |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_SET_SLIMECRAW =                        "Slimecraw",
     SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_TP =              "Enemies within |cffffff4|r meters of the web take Poison Damage every |cffffff1|r second and have their Movement Speed reduced by |cffffff50|r% for |cffffff10|r seconds.",
-    SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_SNARE_TP =        "Taking Poison Damage every |cffffff1|r second and Movement Speed reduced by |cffffff50|r%.",
-    SI_LUIE_SKILL_SPAWN_OF_MEPHALA_GROUND_TP =           "Taking Poison Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF50|r%.",
     SI_LUIE_SKILL_SET_STORMFIST_TP =                     "Enemies within |cffffff4|r meters of the thunderfist take Shock Damage every |cffffff1|r second.\n\nAfter |cffffff3|r seconds the fist closes, dealing Physical Damage.",
     SI_LUIE_SKILL_STORMFIST_GROUND_TP =                  "Taking Shock Damage every |cFFFFFF1|r second.\n\nAfter |cffffff3|r seconds the fist closes, dealing Physical Damage.",
     SI_LUIE_SKILL_SET_ENGINE_GUARDIAN =                  "Restoring <<1>> every |cffffff0.5|r seconds for |cffffff6.5|r seconds.",
@@ -980,9 +969,6 @@ local strings = {
     SI_LUIE_SKILL_BLOCK_NPC_TP =                         "Brace for attack, reducing damage taken and granting immunity to Stun and Knockback effects.\n\nIncoming melee Heavy Attacks will be counterattacked while active.",
     SI_LUIE_SKILL_CALL_ALLY_TP =                         "A summoned beast ally fights at your side. The beast remains for |cFFFFFF2|r minutes or until killed.",
     SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP =                    "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEach tick heals the vampire.",
-    SI_LUIE_SKILL_ICE_CAGE_TP =                          "Taking Frost Damage every |cFFFFFF0.7|r seconds and Movement Speed reduced by |cFFFFFF60|r%.",
-    SI_LUIE_SKILL_FROZEN_GROUND_TP =                     "Taking Frost Damage every |cFFFFFF0.5|r seconds and Movement Speed reduced by |cFFFFFF70|r%.",
-    SI_LUIE_SKILL_HURRICANE_GROUND_TP =                  "Taking Frost Damage every |cFFFFFF0.7|r seconds and Movement Speed reduced by |cFFFFFF60|r%.",
     SI_LUIE_SKILL_EMPOWER_ATRONACH_TP =                  "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
     SI_LUIE_SKILL_DEVOUR_HUNGER_TP =                     "Stunned and afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends you will be knocked back for |cFFFFFF1.5|r seconds.",
     SI_LUIE_SKILL_TORPOR_TP =                            "You are hallucinating.",
@@ -993,12 +979,10 @@ local strings = {
     SI_LUIE_SKILL_SHADOWY_BARRIER_TP =                   "Absorbing damage for |cFFFFFF5|r seconds.",
     SI_LUIE_SKILL_FIENDISH_HEALING_TP =                  "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.\n\nHealing doubles in power after |cFFFFFF2|r seconds.\n\nEach tick enrages the Skaafin, increasing damage done by |cFFFFFF20|r%.",
     SI_LUIE_SKILL_SLASH_CLIFF_STRIDER_TP =               "Afflicted with Bleeding Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_CALTROPS_NPC_TP =                      "Taking Physical Damage every |cFFFFFF0.5|r seconds and Movement Speed reduced by |cFFFFFF60|r%.",
     SI_LUIE_SKILL_WAR_HORN_NPC_TP =                      "Increase Max Health by |cFFFFFF15|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_RADIANT_MAGELIGHT_NPC_TP =             "Revealing nearby stealthed and invisible enemies.\n\nReduce damage taken from stealth attacks by |cFFFFFF50|r%.",
     SI_LUIE_SKILL_REGENERATION_OGRIM_TP =                "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
     SI_LUIE_SKILL_SUMMON_SPIDERLING_TP =                 "A spiderling fights at your side. The spiderling remains for |cFFFFFF2|r minutes or until killed.",
-    SI_LUIE_SKILL_SOUL_FLAME_TP =                        "Taking Fire Damage every |cFFFFFF1|r second and Movement Speed reduced.", -- TODO: Add duration of snare here when I can find an area I can track it.
     SI_LUIE_SKILL_UNYIELDING_MACE_TP =                   "Afflicted with Bleeding Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF8|r seconds.\n\nStunned for |cFFFFFF1.5|r seconds.",
     SI_LUIE_SKILL_REFLECTIVE_SHADOWS_TP =                "Reflecting projectiles for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_STEAL_ESSENCE_TP =                     "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals additional Magic Damage if the channel is finished.",
@@ -1016,13 +1000,11 @@ local strings = {
     SI_LUIE_SKILL_DUTIFUL_FURY_TP =                      "When a nearby ally takes damage, you enrage, causing your next attack to deal |cFFFFFF5|r% additional damage.",
     SI_LUIE_SKILL_DUTIFUL_FURY_PROC_TP =                 "Your next attack deals |cFFFFFF5|r% additional damage.",
     SI_LUIE_SKILL_ELEMENTAL_WEAPON_NPC_TP =              "Augment your next |cFFFFFF3|r uses of Chop or Cleave for |cFFFFFF<<1>>|r seconds.\n\nChop creates an elemental pool on the ground that deals Flame Damage every |cFFFFFF0.7|r seconds for |cFFFFFF5.5|r seconds.\n\nCleave fires 3 elemental waves, dealing Flame Damage to enemies in the path.",
-    SI_LUIE_SKILL_BRIMSTONE_HAILFIRE_TP =                "Taking Flame Damage every |cFFFFFF0.7|r seconds and Movement Speed reduced by |cFFFFFF60|r%.",
     SI_LUIE_SKILL_BALEFUL_CALL_TP =                      "Increase Max Health and damage done by |cFFFFFF33|r%.",
     SI_LUIE_SKILL_REGENERATION_TROLL_TP =                "Regenerating Health every |cFFFFFF2.5|r seconds.",
     SI_LUIE_SKILL_CONSUMING_OMEN_TP =                    "Dealing Magic Damage to nearby allies every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_CONSUMING_OMEN_SNARE_TP =              "Movement speed reduced by |cFFFFFF50|r% for |cFFFFFF1.5|r seconds.",
     SI_LUIE_SKILL_CLOSE_WOUNDS_TP =                      "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained, leading into a stronger burst heal at the end of the channel.",
-    SI_LUIE_SKILL_DESECRATED_GROUND_TP =                 "Taking Magic Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF85|r%",
     SI_LUIE_SKILL_DEVOUR_NPC_TP =                        "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
     SI_LUIE_SKILL_STATIC_FIELD_TP =                      "Enemies in the field take Shock Damage every |cFFFFFF1|r second while allied Dwemer can draw power from the field to |cFFFFFFOvercharge|r, increasing their damage done by |cFFFFFF25|r%.",
     SI_LUIE_SKILL_SHOCK_BARRAGE_TP =                     "Being targeted and bombarded by Shock Barrage, taking Shock Damage every |cFFFFFF0.75|r seconds for |cFFFFFF<<1>>|r seconds.",

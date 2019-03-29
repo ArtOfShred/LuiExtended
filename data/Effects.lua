@@ -3112,8 +3112,8 @@ E.EffectOverride = {
     [81034] = { tooltip = A.Set_Shadowrend }, -- Minor Maim (Shadowrend)
     [80481] = { tooltip = A.Set_Slimecraw }, -- Minor Berserk (Slimecraw)
     [59497] = { tooltip = T.Set_Spawn_of_Mephala }, -- Spawn of Mephala (Spawn of Mephala)
-    [59498] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = A.Set_Spawn_of_Mephala, groundLabel = true, tooltip = T.Skill_Spawn_of_Mephala_Ground }, -- Mephala's Web (Spawn of Mephala)
-    [59499] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = A.Set_Spawn_of_Mephala, duration = 0, groundLabel = true, tooltip = T.Skill_Spawn_of_Mephala_Ground, hideGround = true }, -- Mephala's Web (Spawn of Mephala)
+    [59498] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = A.Set_Spawn_of_Mephala, groundLabel = true, tooltip = T.Generic_AOE_Snare_Poison, tooltipValue2 = 1, tooltipValue3 = 50 }, -- Mephala's Web (Spawn of Mephala)
+    [59499] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = A.Set_Spawn_of_Mephala, duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Poison, tooltipValue2 = 1, tooltipValue3 = 50, hideGround = true }, -- Mephala's Web (Spawn of Mephala)
     [80523] = { tooltip = T.Set_Stormfist }, -- Stormfist (Stormfist)
     [80522] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', groundLabel = true, tooltip = T.Skill_Stormfist_Ground }, -- Stormfist (Stormfist)
     [80521] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds' }, -- Stormfist (Stormfist)
@@ -3900,11 +3900,11 @@ E.EffectOverride = {
     [20779] = { tooltip = T.Skill_Ash_Cloud }, -- Cinder Storm (Cinder Storm)
     [20780] = { duration = 0, groundLabel = true, tooltip = T.Generic_Snare_No_Dur, tooltipValue2 = 70 }, -- Cinder Storm (Cinder Storm)
     [32710] = { tooltip = T.Skill_Eruption }, -- Eruption (Eruption)
-    [32712] = { duration = 0, groundLabel = true, tooltip = T.Skill_Eruption_Ground, hideGround = true }, -- Eruption (Eruption)
+    [32712] = { duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 70, hideGround = true }, -- Eruption (Eruption)
 
     [61772] = { groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Ash Cloud (Ash Cloud)
     [34791] = { groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Cinder Storm (Cinder Storm)
-    [32711] = { groundLabel = true, tooltip = T.Skill_Eruption_Ground }, -- Eruption (Eruption)
+    [32711] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Eruption (Eruption)
 
     -- Magma Armor / Magma Shell / Corrosive Armor
     [15957] = { tooltip = T.Skill_Magma_Armor }, -- Magma Armor (Magma Armor)
@@ -4091,8 +4091,8 @@ E.EffectOverride = {
     [36495] = { tooltip = T.Generic_Snare_No_Dur, tooltipValue2 = 70, groundLabel = true }, -- Bolstering Darkness (Bolstering Darkness)
     [36485] = { tooltip = T.Skill_Veil_of_Blades }, -- Veil of Blades (Veil of Blades)
     [44854] = { forcedContainer = 'short', tooltip = A.Skill_Veil_of_Blades, groundLabel = true }, -- Major Protection (Veil of Blades)
-    [36490] = { groundLabel = true, tooltip = T.Skill_Veil_of_Blades_Ground }, -- Veil of Blades (Veil of Blades)
-    [36487] = { tooltip = T.Skill_Veil_of_Blades_Ground, groundLabel = true, hideGround = true }, -- Veil of Blades (Veil of Blades)
+    [36490] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Veil of Blades (Veil of Blades)
+    [36487] = { tooltip = T.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70, groundLabel = true, hideGround = true }, -- Veil of Blades (Veil of Blades)
 
     -- Strife / Funnel Health / Swallow Soul
     [33292] = { tooltip = T.Generic_HoT, tooltipValue2 = 2 }, -- Strife (Strife)
@@ -4504,11 +4504,11 @@ E.EffectOverride = {
     [21757] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
     [22001] = { tooltip = T.Skill_Solar_Disturbance, tooltipValue2Mod = -4.8 }, -- Solar Disturbance (Solar Disturbance)
     [21760] = { name = A.Skill_Major_Maim, tooltip = A.Skill_Solar_Disturbance }, -- Solar Disturbance (Solar Disturbance)
-    [24307] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance, internalStack = 0, groundLabel = true, tooltip = T.Skill_Solar_Disturbance_Ground, hideGround = true }, -- Solar Disturbance Snare (Solar Disturbance)
+    [24307] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance, internalStack = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70, hideGround = true }, -- Solar Disturbance Snare (Solar Disturbance)
 
     [21753] = { groundLabel = true, tooltip = T.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Nova
     [21756] = { groundLabel = true, tooltip = T.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Solar Prison
-    [21759] = { groundLabel = true, tooltip = T.Skill_Solar_Disturbance_Ground }, -- Solar Disturbance
+    [21759] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Solar Disturbance
 
     -- Restoring Light
     [35632] = { tooltip = T.Generic_Magicka_Regen_2_Sec }, -- Honor the Dead (Honor the Dead)
@@ -4725,16 +4725,16 @@ E.EffectOverride = {
 
     -- Impaling Shards / Gripping Shards / Winter's Revenge
     [86161] = { tooltip = T.Skill_Impaling_Shards }, -- Impaling Shards (Impaling Shards)
-    [86238] = { tooltip = T.Skill_Impaling_Shards_Ground, duration = 0, groundLabel = true, hideGround = true }, -- Impaling Shards (Impaling Shards)
+    [86238] = { tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30, duration = 0, groundLabel = true, hideGround = true }, -- Impaling Shards (Impaling Shards)
     [86165] = { tooltip = T.Skill_Impaling_Shards }, -- Gripping Shards (Gripping Shards)
     [87443] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_root_frost.dds', name = A.Skill_Frozen, tooltip = T.Generic_Immobilize }, -- Gripping Shards (Gripping Shards)
-    [87448] = { tooltip = T.Skill_Impaling_Shards_Ground, duration = 0, groundLabel = true, hideGround = true }, -- Gripping Shards (Gripping Shards)
+    [87448] = { tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30, duration = 0, groundLabel = true, hideGround = true }, -- Gripping Shards (Gripping Shards)
     [86169] = { tooltip = T.Skill_Impaling_Shards }, -- Winter's Revenge (Winter's Revenge)
-    [88801] = { tooltip = T.Skill_Impaling_Shards_Ground, duration = 0, groundLabel = true, hideGround = true }, -- Winter's Revenge (Winter's Revenge)
+    [88801] = { tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30, duration = 0, groundLabel = true, hideGround = true }, -- Winter's Revenge (Winter's Revenge)
 
-    [88783] = { groundLabel = true, tooltip = T.Skill_Impaling_Shards_Ground }, -- Impaling Shards (Impaling Shards)
-    [88791] = { groundLabel = true, tooltip = T.Skill_Impaling_Shards_Ground }, -- Gripping Shards (Gripping Shards)
-    [88802] = { groundLabel = true, tooltip = T.Skill_Impaling_Shards_Ground }, -- Winter's Revenge (Winter's Revenge)
+    [88783] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Impaling Shards (Impaling Shards)
+    [88791] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Gripping Shards (Gripping Shards)
+    [88802] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Winter's Revenge (Winter's Revenge)
 
     -- Arctic Wind / Polar Wind / Arctic Blast
     [90833] = { tooltip = T.Skill_Arctic_Wind }, -- Arctic Wind (Arctic Wind)
@@ -4769,17 +4769,17 @@ E.EffectOverride = {
     -- Sleet Storm / Northern Storm / Permafrost
     [86109] = { tooltip = T.Skill_Sleet_Storm }, -- Sleet Storm (Sleet Storm)
     [86249] = { forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Sleet_Storm }, -- Major Protection (Sleet Storm)
-    [86250] = { duration = 0, groundLabel = true, tooltip = T.Skill_Sleet_Storm_Ground, hideGround = true }, -- Sleet Storm (Sleet Storm)
+    [86250] = { duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 70, hideGround = true }, -- Sleet Storm (Sleet Storm)
     [86113] = { tooltip = T.Skill_Sleet_Storm }, -- Northern Storm (Northern Storm)
     [88859] = { forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Northern_Storm }, -- Major Protection (Northern Storm)
-    [88858] = { duration = 0, groundLabel = true, tooltip = T.Skill_Sleet_Storm_Ground, hideGround = true }, -- Northern Storm (Northern Storm)
+    [88858] = { duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 70, hideGround = true }, -- Northern Storm (Northern Storm)
     [86117] = { tooltip = T.Skill_Permafrost }, -- Permafrost (Permafrost)
     [88862] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Permafrost }, -- Major Protection (Permafrost)
     [88861] = { duration = 0, groundLabel = true, tooltip = T.Skill_Permafrost_Ground, hideGround = true }, -- Permafrost (Permafrost)
     [90943] = { icon = 'esoui/art/icons/ability_warden_006_b.dds', tooltip = T.Generic_Stun }, -- Permafrost (Permafrost)
 
-    [86247] = { groundLabel = true, tooltip = T.Skill_Sleet_Storm_Ground }, -- Sleet Storm (Sleet Storm)
-    [88860] = { groundLabel = true, tooltip = T.Skill_Sleet_Storm_Ground }, -- Northern Storm (Northern Storm)
+    [86247] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Sleet Storm (Sleet Storm)
+    [88860] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Northern Storm (Northern Storm)
     [88863] = { groundLabel = true, tooltip = T.Skill_Permafrost_Ground }, -- Permafrost (Permafrost)
 
     ----------------------------------------------------------------
@@ -5800,14 +5800,14 @@ E.EffectOverride = {
 
     -- Caltrops / Anti-Cavalry Caltrops / Razor Caltrops
     [38549] = { tooltip = T.Skill_Caltrops }, -- Caltrops (Caltrops)
-    [38561] = { groundLabel = true, tooltip = T.Skill_Caltrops_Debuff }, -- Caltrops (Caltrops)
-    [113769] = { tooltip = T.Skill_Caltrops_Debuff, groundLabel = true, hideGround = true }, -- Caltrops (Caltrops)
+    [38561] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Physical, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Caltrops (Caltrops)
+    [113769] = { tooltip = T.Generic_AOE_Snare_Physical, tooltipValue2 = 1, tooltipValue3 = 30, groundLabel = true, hideGround = true }, -- Caltrops (Caltrops)
     [40265] = { tooltip = T.Skill_Anti_Cavalry_Caltrops }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [40267] = { groundLabel = true, tooltip = T.Skill_Anti_Cavalry_Caltrops_Debuff }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [113770] = { tooltip = T.Skill_Anti_Cavalry_Caltrops_Debuff, groundLabel = true, hideGround = true }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [40251] = { tooltip = T.Skill_Caltrops }, -- Caltrops (Razor Caltrops)
-    [113771] = { tooltip = T.Skill_Caltrops_Debuff, groundLabel = true, hideGround = true }, -- Razor Caltrops (Razor Caltrops)
-    [40252] = { groundLabel = true, tooltip = T.Skill_Caltrops_Debuff }, -- Razor Caltrops (Razor Caltrops)
+    [113771] = { tooltip = T.Generic_AOE_Snare_Physical, tooltipValue2 = 1, tooltipValue3 = 30, groundLabel = true, hideGround = true }, -- Razor Caltrops (Razor Caltrops)
+    [40252] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Physical, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Razor Caltrops (Razor Caltrops)
     [40253] = { name = A.Skill_Razor_Caltrops, tooltip = T.Generic_Snare, tooltipValue2 = 70 }, -- Hindered (Razor Caltrops)
 
     -- Magicka Detonation/ Inevitable Detonation / Proximity Detonation
@@ -6364,8 +6364,8 @@ E.EffectOverride = {
     [37087] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_lightning_onslaught.dds' }, -- Lightning Onslaught (Battlemage)
     [37156] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_lightning_onslaught.dds' }, -- Lightning Onslaught (Battlemage)
     [37129] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds' }, -- Ice Cage (Battlemage)
-    [37131] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds', groundLabel = true, tooltip = T.Skill_Ice_Cage }, -- Ice Cage (Battlemage)
-    [37132] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds', duration = 0, groundLabel = true, tooltip = T.Skill_Ice_Cage, hideGround = true }, -- Ice Cage (Battlemage)
+    [37131] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds', groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 0.7, tooltipValue3 = 60 }, -- Ice Cage (Battlemage)
+    [37132] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds', duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 0.7, tooltipValue3 = 60, hideGround = true }, -- Ice Cage (Battlemage)
     [44216] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds' }, -- Negate Magic (Battlemage)
     [50108] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0, tooltip = T.Generic_Silence_No_Dur, groundLabel = true }, -- Negate Magic (Battlemage)
     [50107] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0, tooltip = T.Generic_Stun_No_Dur, groundLabel = true }, -- Negate Magic (Battlemage)
@@ -6458,8 +6458,8 @@ E.EffectOverride = {
     [43644] = { hide = true, icon = 'esoui/art/icons/ability_ava_001.dds', name = A.Skill_Caltrops }, -- Barrier [monster synergy]  (Faction NPCs)
     [43645] = { hide = true, icon = 'esoui/art/icons/ability_ava_001.dds', name = A.Skill_Caltrops }, -- Barrier [monster synergy]  (Faction NPCs)
     [43646] = { hide = true, icon = 'esoui/art/icons/ability_ava_001.dds', name = A.Skill_Caltrops }, -- Barrier [monster synergy]  (Faction NPCs)
-    [38119] = { icon = 'esoui/art/icons/ability_ava_001.dds', duration = 0, groundLabel = true, tooltip = T.Skill_Caltrops_NPC, hideGround = true }, -- Caltrops  (Faction NPCs)
-    [38125] = { icon = 'esoui/art/icons/ability_ava_001.dds', groundLabel = true, tooltip = T.Skill_Caltrops_NPC }, -- Caltrops  (Faction NPCs)
+    [38119] = { icon = 'esoui/art/icons/ability_ava_001.dds', duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Physical, tooltipValue2 = 0.5, tooltipValue3 = 60, hideGround = true }, -- Caltrops  (Faction NPCs)
+    [38125] = { icon = 'esoui/art/icons/ability_ava_001.dds', groundLabel = true, tooltip = T.Generic_AOE_Snare_Physical, tooltipValue2 = 0.5, tooltipValue3 = 60 }, -- Caltrops  (Faction NPCs)
     [65033] = { icon = 'esoui/art/icons/ability_warrior_014.dds', hide = true }, -- Retaliation (Winterborn Warrior)
     [69158] = { icon = 'esoui/art/icons/ability_warrior_014.dds', tooltip = T.Skill_Retaliation_NPC }, -- Retaliation (Winterborn Warrior)
     [67114] = { icon = 'esoui/art/icons/ability_warrior_014.dds' }, -- Retaliation (Winterborn Warrior)
@@ -6889,8 +6889,8 @@ E.EffectOverride = {
     [26641] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_soul_flame.dds' }, -- Soul Flame (Daedric Titan)
     [32696] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_soul_flame.dds' }, -- Soul Flame (Daedric Titan)
     [35280] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_soul_flame.dds', tooltip = T.Generic_Stun }, -- Soul Flame (Daedric Titan)
-    [73437] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_gtaoe.dds', tooltip = T.Skill_Soul_Flame, groundLabel = true }, -- Soul Flame (Daedric Titan)
-    [35278] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_gtaoe.dds', tooltip = T.Skill_Soul_Flame, hideGround = true, duration = 0, groundLabel = true }, -- Soul Flame (Daedric Titan)
+    [73437] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_gtaoe.dds', tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 50, groundLabel = true }, -- Soul Flame (Daedric Titan)
+    [35278] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_gtaoe.dds', tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 50, hideGround = true, duration = 0, groundLabel = true }, -- Soul Flame (Daedric Titan)
     [34405] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_swallowing_souls.dds' }, -- Swallowing Souls (Daedric Titan)
     [34406] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_swallowing_souls.dds' }, -- Swallowing Souls (Daedric Titan)
     [26554] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', tooltip = T.Generic_Knockback }, -- Wing Gust (Daedric Titan)
@@ -6964,8 +6964,8 @@ E.EffectOverride = {
     [44907] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds', hide = true }, -- Hoarfrost Fist (Frost Atronach)
     [44908] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds', tooltip = T.Generic_Knockback }, -- Hoarfrost Fist (Frost Atronach)
     [33502] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds' }, -- Frozen Ground (Frost Atronach)
-    [51645] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', groundLabel = true, tooltip = T.Skill_Frozen_Ground }, -- Frozen Ground (Frost Atronach)
-    [51646] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', internalStack = 0, hide = true, groundLabel = true, tooltip = T.Skill_Frozen_Ground, hideGround = true }, -- Frozen Ground (Frost Atronach)
+    [51645] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 0.5, tooltipValue3 = 70 }, -- Frozen Ground (Frost Atronach)
+    [51646] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', internalStack = 0, hide = true, groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 0.5, tooltipValue3 = 70, hideGround = true }, -- Frozen Ground (Frost Atronach)
     [65926] = { icon = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_slash.dds' }, -- Slash (Grevious Twilight)
     [65845] = { icon = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_rend.dds' }, -- Rend (Grevious Twilight)
     [66643] = { icon = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_rend.dds' }, -- Rend (Grevious Twilight)
@@ -7426,8 +7426,8 @@ E.EffectOverride = {
     [5559] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds' }, -- Icy Geyser (Nereid)
     [11024] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_water_geyser.dds' }, -- Icy Geyser (Nereid)
     [5540] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', hide = true }, -- Hurricane (Nereid)
-    [16040] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', groundLabel = true, tooltip = T.Skill_Hurricane_Ground }, -- Hurricane (Nereid)
-    [33459] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', duration = 0, groundLabel = true, tooltip = T.Skill_Hurricane_Ground, hideGround = true  }, -- Hurricane (Nereid)
+    [16040] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 0.7, tooltipValue3 = 60 }, -- Hurricane (Nereid)
+    [33459] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 0.7, tooltipValue3 = 60, hideGround = true  }, -- Hurricane (Nereid)
 
     [5254] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_punch.dds' }, -- Punch (Ogre)
     [5257] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_backhand.dds' }, -- Backhand (Ogre)
@@ -7561,8 +7561,8 @@ E.EffectOverride = {
     [75949] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fiery_surge.dds', hide = true }, -- Fiery Surge (Minotaur Shaman)
     [77989] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fiery_surge.dds', hide = true }, -- Flame Wave (Minotaur Shaman)
     [75951] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_snare_fire.dds' }, -- Brimstone Hailfire (Minotaur Shaman)
-    [75953] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_snare_fire.dds', hide = true, groundLabel = true, tooltip = T.Skill_Brimstone_Hailfire }, -- Brimstone Hailfire (Minotaur Shaman)
-    [75954] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_snare_fire.dds', duration = 0, groundLabel = true, tooltip = T.Skill_Brimstone_Hailfire, hideGround = true }, -- Brimstone Hailfire (Minotaur Shaman)
+    [75953] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_snare_fire.dds', hide = true, groundLabel = true, tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 0.7, tooltipValue3 = 60 }, -- Brimstone Hailfire (Minotaur Shaman)
+    [75954] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_snare_fire.dds', duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 0.7, tooltipValue3 = 60, hideGround = true }, -- Brimstone Hailfire (Minotaur Shaman)
     [75955] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_pillar_of_nirn.dds' }, -- Pillars of Nirn (Minotaur Shaman)
     [75980] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_pillar_of_nirn.dds', name = A.Skill_Pillars_of_Nirn }, -- Pillars Eruption (Minotaur Shaman)
     [75976] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_pillar_of_nirn.dds', name = A.Skill_Pillars_of_Nirn, hide = true, groundLabel = true, tooltip = T.Generic_AOE_Fire, tooltipValue2 = 0.7 }, -- Pillar of Nirn (Minotaur Shaman)
@@ -7617,8 +7617,8 @@ E.EffectOverride = {
 
     -- Undead
     [38829] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_desecrated_ground_bonus.dds', name = A.Skill_Desecrated_Ground, duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 2 }, -- Desecrated Ground Bonus
-    [38834] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_desecrated_ground_snare.dds', name = A.Skill_Desecrated_Ground, groundLabel = true, tooltip = T.Skill_Desecrated_Ground, hideGround = true }, -- Desecrated Ground Snare (Desecrated Ground - Undead Synergy)
-    [69950] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_desecrated_ground_snare.dds', groundLabel = true, tooltip = T.Skill_Desecrated_Ground }, -- Desecrated Ground (Desecrated Ground - Undead Synergy)
+    [38834] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_desecrated_ground_snare.dds', name = A.Skill_Desecrated_Ground, groundLabel = true, tooltip = T.Generic_AOE_Snare_Magic, tooltipValue2 = 2, tooltipValue3 = 85, hideGround = true }, -- Desecrated Ground Snare (Desecrated Ground - Undead Synergy)
+    [69950] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_desecrated_ground_snare.dds', groundLabel = true, tooltip = T.Generic_AOE_Snare_Magic, tooltipValue2 = 2, tooltipValue3 = 85 }, -- Desecrated Ground (Desecrated Ground - Undead Synergy)
     [8550] = { icon = 'LuiExtended/media/icons/abilities/ability_bloodfiend_slash.dds' }, -- Slash (Bloodfiend)
     [8551] = { icon = 'LuiExtended/media/icons/abilities/ability_bloodfiend_slash.dds' }, -- Slash (Bloodfiend)
     [8564] = { icon = 'LuiExtended/media/icons/abilities/ability_bloodfiend_rending_slash.dds' }, -- Rending Slash (Bloodfiend)
@@ -7647,8 +7647,8 @@ E.EffectOverride = {
     [19138] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_haunting_spectre.dds' }, -- Haunting Spectre (Ghost)
     [19140] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_haunting_spectre.dds', tooltip = T.Generic_Fear }, -- Haunting Spectre (Ghost)
     [9541] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_spear.dds' }, -- Necrotic Spear (Lich)
-    [20812] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_defiled_ground.dds', groundLabel = true, tooltip = T.Skill_Veil_of_Blades_Ground }, -- Defiled Ground (Lich)
-    [22525] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_defiled_ground.dds', groundLabel = true, tooltip = T.Skill_Veil_of_Blades_Ground, hideGround = true }, -- Defiled Ground (Lich)
+    [20812] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_defiled_ground.dds', groundLabel = true, tooltip = T.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Defiled Ground (Lich)
+    [22525] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_defiled_ground.dds', groundLabel = true, tooltip = T.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70, hideGround = true }, -- Defiled Ground (Lich)
     [73925] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds', hide = true }, -- Soul Cage (Lich)
     [73929] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds', hide = true, groundLabel = true, tooltip = T.Generic_AOE_Magic, tooltipValue2 = 0.5 }, -- Soul Cage (Lich)
     [73931] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds' }, -- Soul Rupture (Lich)
@@ -8046,12 +8046,12 @@ E.EffectOverride = {
     [29602] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds' }, -- Falling Rocks (Cave-In)
 
     [17198] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds' }, -- Fire Trap (Player)
-    [31606] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', groundLabel = true, unbreakable = 1, tooltip = T.Skill_Fire_Trap, hideGround = true }, -- Fire Trap (Player)
-    [17314] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', groundLabel = true, unbreakable = 1, tooltip = T.Skill_Fire_Trap }, -- Fire Trap (Player)
+    [31606] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', groundLabel = true, unbreakable = 1, tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 0.75, tooltipValue3 = 50, hideGround = true }, -- Fire Trap (Player)
+    [17314] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', groundLabel = true, unbreakable = 1, tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 0.75, tooltipValue3 = 50 }, -- Fire Trap (Player)
 
-    [72888] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, hide = true, groundLabel = true, unbreakable = 1, tooltip = T.Skill_Fire_Trap_Cells }, -- Fire Attack 1 (Fire) -- Banished Cells II
-    [72889] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, groundLabel = true, unbreakable = 1, tooltip = T.Skill_Fire_Trap_Cells }, -- Fire Attack 2 (Fire) -- Banished Cells II
-    [72890] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, tooltip = T.Skill_Fire_Trap_Cells, groundLabel = true, unbreakable = 1, hideGround = true }, -- Laser Snare (Fire) -- Banished Cells II
+    [72888] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, hide = true, groundLabel = true, unbreakable = 1, tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 1.5, tooltipValue3 = 50 }, -- Fire Attack 1 (Fire) -- Banished Cells II
+    [72889] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, groundLabel = true, unbreakable = 1, tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 1.5, tooltipValue3 = 50 }, -- Fire Attack 2 (Fire) -- Banished Cells II
+    [72890] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = A.Trap_Fire_Trap, tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 1.5, tooltipValue3 = 50, groundLabel = true, unbreakable = 1, hideGround = true }, -- Laser Snare (Fire) -- Banished Cells II
 
     [26530] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Bear Trap (Bear Trap)
     [26531] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds' }, -- Bear Trap (Bear Trap)
@@ -8082,7 +8082,7 @@ E.EffectOverride = {
     [113082] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds' }, -- Slaughterfish Attack (Slaughterfish)
 
     [19224] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava }, -- In Lava (Lava - Halls of Torment)
-    [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava, tooltip = T.Skill_Lava, unbreakable = 1, groundLabel = true }, -- In Lava (Lava - The Earth Forge)
+    [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava,  T.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 30, unbreakable = 1, groundLabel = true }, -- In Lava (Lava - The Earth Forge)
 
     [56277] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds' }, -- Lava (City of Ash II)
     [55925] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', tooltip = T.Skill_Lava_Stack, unbreakable = 1, groundLabel = true }, -- Lava (City of Ash II)
