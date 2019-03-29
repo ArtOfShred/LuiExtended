@@ -411,7 +411,6 @@ local Tooltips = {
     Set_Hircines_Veneer                   = GetString(SI_LUIE_SKILL_SET_HIRCINES_VENEER_TP),
     Set_Plague_Slinger                    = GetString(SI_LUIE_SKILL_PLAGUE_SLINGER_TP),
     Set_Storm_Master                      = GetString(SI_LUIE_SKILL_SET_STORM_MASTER_TP),
-    Set_Essence_Thief                     = GetString(SI_LUIE_SKILL_SET_ESSENCE_THIEF_TP),
     Set_Blood_Moon_Scent                  = GetString(SI_LUIE_SKILL_SET_BLOOD_SCENT),
     Set_Blood_Moon_Frenzied               = GetString(SI_LUIE_SKILL_SET_FRENIZED),
     Set_Ebon_Armory                       = GetString(SI_LUIE_SKILL_SET_EBON_ARMORY),
@@ -894,11 +893,9 @@ local Tooltips = {
 
     -- Animals
     Skill_Ferocity                        = GetString(SI_LUIE_SKILL_BEAR_FEROCITY_TP),
-    Skill_Wamasu_Static                   = GetString(SI_LUIE_SKILL_WAMASU_STATIC_TP),
     Skill_Ancient_Skin                    = strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 9),
     Skill_Weakness_Lion                   = GetString(SI_LUIE_SKILL_WEAKNESS_LION_TP),
     Skill_Hardened_Shell                  = GetString(SI_LUIE_SKILL_HARDENED_SHELL_TP),
-    Skill_Enrage_Nix_Ox                   = GetString(SI_LUIE_SKILL_ENRAGE_NIX_OX_TP),
     Skill_Slash_Cliff_Strider             = GetString(SI_LUIE_SKILL_SLASH_CLIFF_STRIDER_TP),
     Skill_Baleful_Call                    = GetString(SI_LUIE_SKILL_BALEFUL_CALL_TP),
 
@@ -916,9 +913,7 @@ local Tooltips = {
     Skill_Grasping_Vines                  = GetString(SI_LUIE_SKILL_GRASPING_VINES_TP),
     Skill_Retaliation_NPC                 = GetString(SI_LUIE_SKILL_RETALIATION_NPC_TP),
     Skill_Briarheart_Resurrection         = GetString(SI_LUIE_SKILL_BRIARHEART_RESURRECTION_TP),
-    Skill_Inspire                         = GetString(SI_LUIE_SKILL_INSPIRE_TP),
     Skill_Enrage_Devoted                  = GetString(SI_LUIE_SKILL_ENRAGE_DEVOTED_TP),
-    Skill_Enraged_Sentinel                = GetString(SI_LUIE_SKILL_ENRAGE_SENTINEL_TP),
     Skill_Uncanny_Dodge                   = GetString(SI_LUIE_SKILL_UNCANNY_DODGE_TP),
     Skill_Block_NPC                       = GetString(SI_LUIE_SKILL_BLOCK_NPC_TP),
     Skill_Call_Ally                       = GetString(SI_LUIE_SKILL_CALL_ALLY_TP),
@@ -950,11 +945,9 @@ local Tooltips = {
     Skill_Colonize                        = GetString(SI_LUIE_SKILL_COLONIZE_TP),
 
     -- Monsters
-    Skill_Mantikora_Enrage                = GetString(SI_LUIE_SKILL_MANTIKORA_ENRAGE_TP),
     Skill_Harmony                         = GetString(SI_LUIE_SKILL_HARMONY_TP),
     Skill_Summon_Spectral_Lamia           = GetString(SI_LUIE_SKILL_SUMMON_SPECTRAL_LAMIA_TP),
     Skill_Weakness_NPC_Summon             = GetString(SI_LUIE_SKILL_WEAKNESS_NPC_SUMMON_TP),
-    Skill_Enrage_Ogre                     = GetString(SI_LUIE_SKILL_ENRAGE_OGRE_TP),
     Skill_Ice_Pillar                      = GetString(SI_LUIE_SKILL_ICE_PILLAR_TP),
     Skill_Summon_Beast                    = GetString(SI_LUIE_SKILL_SUMMON_BEAST_TP),
     Skill_Control_Beast                   = GetString(SI_LUIE_SKILL_CONTROL_BEAST_TP),
@@ -999,7 +992,6 @@ local Tooltips = {
     Skill_Devour_NPC                      = GetString(SI_LUIE_SKILL_DEVOUR_NPC_TP),
 
     -- Dwemer
-    Skill_Overcharge                      = GetString(SI_LUIE_SKILL_OVERCHARGE_TP),
     Skill_Static_Field                    = GetString(SI_LUIE_SKILL_STATIC_FIELD_TP),
     Skill_Shock_Barrage                   = GetString(SI_LUIE_SKILL_SHOCK_BARRAGE_TP),
     Skill_Polarizing_Field                = GetString(SI_LUIE_SKILL_POLARIZING_FIELD_TP),
@@ -1061,7 +1053,6 @@ local Tooltips = {
     Skill_Corrosive_Armor_NPC             = GetString(SI_LUIE_SKILL_CORROSIVE_ARMOR_NPC_TP),
     Skill_Corrosive_Armor_Debuff_NPC      = GetString(SI_LUIE_SKILL_CORROSIVE_ARMOR_NPC_DEBUFF_TP),
 
-    Skill_Empowering_Chains_NPC           = GetString(SI_LUIE_SKILL_EMPOWERING_CHAINS_NPC_TP),
     Skill_Petrify_NPC                     = GetString(SI_LUIE_SKILL_PETRIFY_NPC_TP),
     Skill_Celestial_Ward                  = GetString(SI_LUIE_SKILL_CELESTIAL_WARD_TP),
     Skill_Celestial_Blast                 = GetString(SI_LUIE_SKILL_CELESTIAL_BLAST_TP),
@@ -1150,8 +1141,6 @@ local Tooltips = {
 
     -- Spindleclutch II
     Skill_Enervating_Seal                 = GetString(SI_LUIE_SKILL_ENERVATING_SEAL_TP),
-    Skill_Monstrous_Growth_1              = strformat(GetString(SI_LUIE_SKILL_MONSTROUS_GROWTH_TP), 40),
-    Skill_Monstrous_Growth_2              = strformat(GetString(SI_LUIE_SKILL_MONSTROUS_GROWTH_TP), 125),
     Skill_Blood_Pool                      = GetString(SI_LUIE_SKILL_BLOOD_POOL_TP),
     Skill_Blood_Pool_1_5                  = GetString(SI_LUIE_SKILL_BLOOD_POOL_1_5_TP),
 

@@ -3335,7 +3335,7 @@ E.EffectOverride = {
     [60416] = { tooltip = A.Set_Sunderflame }, -- Minor Fracture (Sunderflame)
     [108825] = { tooltip = A.Set_Sunderflame }, -- Minor Breach (Sunderflame)
     [49220] = { hide = true }, -- Extra dodge (of the Crusader)
-    [67334] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds', tooltip = T.Set_Essence_Thief }, -- Essence Thief (of the Essence Thief)
+    [67334] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds', tooltip = T.Generic_Enrage, tooltipValue2 = 12 }, -- Essence Thief (of the Essence Thief)
     [70284] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds' }, -- Essence Thief (of the Essence Thief)
     [70290] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds' }, -- Essence Thief (of the Essence Thief)
     [59667] = { icon = 'LuiExtended/media/icons/abilities/ability_set_undaunted_infiltrator.dds', tooltip = T.Generic_LA_HA_Damage_Duration }, -- Undaunted Infiltrator (of the Undaunted Infiltrator)
@@ -6479,7 +6479,7 @@ E.EffectOverride = {
     [64711] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_flames.dds', hide = true }, -- Flames (Winterborn Mage)
     [54184] = { hide = true }, -- Revenge 2 (Vosh Rakh Devoted)
     [54397] = { hide = true }, -- Rally (Vosh Rakh Devoted)
-    [53987] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_inspire.dds', name = A.Skill_Inspire, tooltip = T.Skill_Inspire }, -- Rally (Vosh Rakh Devoted)
+    [53987] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_inspire.dds', name = A.Skill_Inspire, tooltip = T.Generic_Enrage, tooltipValue2 = 5 }, -- Rally (Vosh Rakh Devoted)
     [65235] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = T.Skill_Enrage_Devoted }, -- Enrage (Vosh Rakh Devoted)
     [54027] = { icon = 'esoui/art/icons/ability_warrior_032.dds' }, -- Divine Leap (Vosh Rakh Devoted)
     [67272] = { hide = true }, -- Invisible No Target (Vosh Rakh Devoted)
@@ -6497,7 +6497,7 @@ E.EffectOverride = {
     [74487] = { tooltip = T.Generic_Snare, tooltipValue2 = 60 }, -- Low Slash (Sentinel) (TG DLC)
     [74480] = { icon = 'esoui/art/icons/ability_dragonknight_005.dds', hide = true }, -- Fiery Grip (Sentinel) (TG DLC)
     [74483] = { icon = 'esoui/art/icons/ability_dragonknight_005.dds', tooltip = T.Generic_Stun }, -- Fiery Grip (Sentinel) (TG DLC)
-    [72725] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Enrage, tooltip = T.Skill_Enraged_Sentinel }, -- Fool Me Once (Sentinel) (TG DLC)
+    [72725] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Enrage, tooltip = T.Generic_Enrage, tooltipValue2 = 25 }, -- Fool Me Once (Sentinel) (TG DLC)
     [72723] = { hide = true }, -- Fool Me Once (Sentinel) (TG DLC)
     [77468] = { hide = true }, -- Fool Me Once (Sentinel) (TG DLC)
 
@@ -6750,7 +6750,7 @@ E.EffectOverride = {
     [37178] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds', tooltip = T.Generic_Knockdown }, -- Sweep (Wamasu)
     [21951] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_repulsion_shock.dds', hide = true }, -- Repulsion Shock (Wamasu)
     [21952] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_repulsion_shock.dds' }, -- Repulsion Shock (Wamasu)
-    [22045] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_static.dds', tooltip = T.Skill_Wamasu_Static }, -- Static (Wamasu)
+    [22045] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_static.dds', tooltip = T.Generic_Enrage, tooltipValue2 = 20 }, -- Static (Wamasu)
     [21957] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_charge.dds', name = A.Skill_Barreling_Charge }, -- Charge (Wamasu)
     [48556] = { hide = true }, -- Focused Charge (Wamasu)
     [21961] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_charge.dds', name = A.Skill_Barreling_Charge }, -- Charge (Wamasu)
@@ -6824,7 +6824,7 @@ E.EffectOverride = {
     [85173] = { icon = 'LuiExtended/media/icons/abilities/ability_nixox_winnow.dds' }, -- Winnow (Nix-Ox)
     [85203] = { icon = 'esoui/art/icons/ability_warrior_025.dds', hide = true, name = A.Skill_Enrage }, -- Nix-Call (Nix-Ox)
     [95389] = { hide = true }, -- Nix-Call (Nix-Ox)
-    [90187] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Enrage, tooltip = T.Skill_Enrage_Nix_Ox }, -- Nix-Call (Nix-Ox)
+    [90187] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Enrage, tooltip = T.Generic_Enrage, tooltipValue2 = 10 }, -- Nix-Call (Nix-Ox)
     [90190] = { hide = true }, -- Nix-Call (Nix-Ox)
     [89940] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds', name = A.Skill_Bile_Spit }, -- Turret (Nix Hound)
     [85387] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_snap.dds' }, -- Snap (Cliff Strider)
@@ -7153,10 +7153,10 @@ E.EffectOverride = {
     [19970] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_static_field.dds', tooltip = T.Skill_Static_Field }, -- Static Field (Dwemer Spider)
     [19997] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_static_field.dds', hide = true, groundLabel = true, tooltip = T.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Static Field (Dwemer Spider)
     [20506] = { hide = true }, -- Overcharge Trigger (Dwemer Spider - Overcharge Synergy)
-    [27333] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds', tooltip = T.Skill_Overcharge }, -- Overcharge Trigger (Dwemer Spider - Overcharge Synergy)
+    [27333] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds', tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 25 }, -- Overcharge Trigger (Dwemer Spider - Overcharge Synergy)
     [27458] = { hide = true }, -- tell others (Dwemer Spider - Overcharge Synergy)
     --[20207] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds' }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
-    [20206] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds', tooltip = T.Skill_Overcharge }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    [20206] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds', tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 25 }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
     [20221] = { hide = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
 
     [20505] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds', hide = true }, -- Overcharge (Overcharge)
@@ -7441,7 +7441,7 @@ E.EffectOverride = {
     [5349] = { hide = true, tooltip = T.Generic_Stagger }, -- Stagger (Ogre - Shockwave)
     [6150] = { tooltip = A.Skill_Shockwave }, -- Off Balance (Ogre)
     [8069] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds', tooltip = T.Generic_Fear }, -- Intimidating Roar (Ogre)
-    [24985] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Enrage, tooltip = T.Skill_Enrage_Ogre }, -- Intimidating Roar (Ogre)
+    [24985] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Enrage, tooltip = T.Generic_Enrage, tooltipValue2 = 30 }, -- Intimidating Roar (Ogre)
 
     [53136] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
     [65434] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_frost_bolt.dds' }, -- Frost Bolt (Ogre Shaman)
@@ -7583,11 +7583,11 @@ E.EffectOverride = {
     [49402] = { icon = 'LuiExtended/media/icons/abilities/ability_mantikora_tail_whip.dds' }, -- Tail Whip (Mantikora)
     [49403] = { icon = 'LuiExtended/media/icons/abilities/ability_mantikora_tail_whip.dds' }, -- Tail Whip (Mantikora)
     [51242] = { hide = true }, -- Enrage (Mantikora)
-    [50187] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = T.Skill_Mantikora_Enrage }, -- Enrage (Mantikora)
+    [50187] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 20 }, -- Enrage (Mantikora)
     [56687] = { hide = true }, -- Enrage (Mantikora)
     [56688] = { hide = true }, -- Enrage (Mantikora)
     [87712] = { hide = true }, -- Enraged (Mantikora)
-    [56689] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Enrage, tooltip = T.Skill_Mantikora_Enrage }, -- Enraged (Mantikora)
+    [56689] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Enrage, tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 20 }, -- Enraged (Mantikora)
 
     -- Yaghra Strider
     [103777] = { icon = 'LuiExtended/media/icons/abilities/ability_yaghra_lacerate.dds' }, -- Lacerate (Yaghra Strider)
@@ -9178,7 +9178,7 @@ E.EffectOverride = {
     [54068] = { icon = 'esoui/art/icons/ability_dragonknight_014.dds', name = A.Skill_Petrify, tooltip = T.Generic_Stun }, -- Fossilize (Earthen Heart Knight)
 
     -- Dragonstar Arena (Stage 5) - The Celestial Ring
-    [52879] = { tooltip = T.Skill_Empowering_Chains_NPC }, -- Empowering Chains (Anka-Ra Blademaster)
+    [52879] = { tooltip = T.Skill_Generic_Enrage, tooltipValue2 = 5 }, -- Empowering Chains (Anka-Ra Blademaster)
     [52878] = { name = A.Skill_Empowering_Chains }, -- Pull (Anka-Ra Blademaster)
 
     [51352] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrify.dds', hide = true }, -- Petrify (Gargoyle)
@@ -10194,8 +10194,8 @@ E.EffectOverride = {
     [61444] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_harrowing_ring.dds', name = A.Skill_Harrowing_Ring, unbreakable = 1, tooltip = T.Generic_Stun }, -- Shocked (Blood Essence)
     [43173] = { hide = true }, -- DUN_SCH_RingBurst (Blood Essence)
 
-    [27435] = { tooltip = T.Skill_Monstrous_Growth_1 }, -- Monstrous Growth (Flesh Atronach)
-    [27437] = { tooltip = T.Skill_Monstrous_Growth_2 }, -- Monstrous Growth (Flesh Atronach)
+    [27435] = { tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 40 }, -- Monstrous Growth (Flesh Atronach)
+    [27437] = { tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 125 }, -- Monstrous Growth (Flesh Atronach)
 
     [27600] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', hide = true }, -- Blood Pool (Urvan Veleth)
     [27603] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', groundLabel = true, tooltip = T.Skill_Blood_Pool }, -- Blood Pool (Urvan Veleth)
