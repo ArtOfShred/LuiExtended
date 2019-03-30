@@ -452,6 +452,7 @@ local Tooltips           = {
     Set_Galerions_Revenge                           = GetString(SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP),
     Set_Meritorius_Service                          = GetString(SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP),
     Set_Phoenix                                     = GetString(SI_LUIE_SKILL_SET_PHOENIX_TP),
+    Set_Vicecanon_of_Venom                          = GetString(SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP),
 
     -- Cyrodiil Sets
     Set_Soldier_of_Anguish                          = GetString(SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP),

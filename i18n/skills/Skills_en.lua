@@ -834,6 +834,7 @@ local strings = {
     SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP =             "Marked for |cffffff15|r seconds.\n\nIf |cffffff6|r Marks of Revenge are applied they detonate for Magic Damage.",
     SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP =            "Increase Physical and Spell Resistance for |cffffff2|r minutes.",
     SI_LUIE_SKILL_SET_PHOENIX_TP =                       "You have recently been reborn as a phoenix, and cannot avoid death this way again.",
+    SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP =            "Afflicted with Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nEach tick heals your attacker.",
 
     -- Alliance War Sets
     SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Negating healing received for |cffffff4|r seconds.",
