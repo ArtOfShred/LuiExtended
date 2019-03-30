@@ -886,7 +886,6 @@ LUIE.DebugAuras = {
     [61381] = true, -- Imperial Prison Item Set
 
     [81068] = true, -- Chokethorn
-    --[25458] = true, -- Init Self Stun
     [81069] = true, -- Chokethorn
     [81077] = true, -- Chokethorn
 
@@ -968,7 +967,7 @@ LUIE.DebugAuras = {
     [85637] = true, -- Pirate Skeleton
 
     [80599] = true, -- Selene
-    --[11317] = true, -- Generic Self PermaStun
+    [11317] = true, -- Generic Self PermaStun
     [80607] = true, -- Dummy
     [80600] = true, -- Selene
     [80604] = true, -- Selene
@@ -2346,7 +2345,7 @@ LUIE.DebugAuras = {
 
     -- BASIC ATTACKS
     --[16593] = true, -- Melee Snare
-    --[64842] = true, -- Critter Smash
+    [64842] = true, -- Critter Smash
     [48532] = true, -- Charge Snare
     --[61737] = true, -- Empower
     [41952] = true, -- Generic Fear Snare
@@ -3037,7 +3036,7 @@ LUIE.DebugAuras = {
     [76634] = true, -- Manifestation of Terror (Manifestation of Terror)
     [76637] = true, -- Manifestation of Terror (Manifestation of Terror)
     [76639] = true, -- Manifestation of Terror (Manifestation of Terror)
-    --[108907] = true, -- Generic Fear Snare (Manifestation of Terror)
+    [108907] = true, -- Generic Fear Snare (Manifestation of Terror)
     [38208] = true, -- Birth Manifestation of Terror (Manifestation of Terror)
     [76632] = true, -- Manifestation of Terror (Manifestation of Terror)
     [76638] = true, -- Mass Hysteria (Manifestation of Terror)
@@ -3939,12 +3938,12 @@ LUIE.DebugAuras = {
     [34366] = true, -- Repentance (Repentance)
     [26823] = true, -- Repentance (Repentance)
     [26824] = true, -- Repentance (Repentance)
-    --[63020] = true, -- Repentance Remover (Repentance)
+    [63020] = true, -- Repentance Remover (Repentance)
 
     [108824] = true, -- Synergy Damage Bonus (Cleansing Ritual - Purify Synergy)
     [22270] = true, -- Purify (Cleansing Ritual - Purify Synergy)
     [44013] = true, -- Purify (Cleansing Ritual - Purify Synergy)
-    --[22269] = true, -- Purify (Cleansing Ritual - Purify Synergy)
+    [22269] = true, -- Purify (Cleansing Ritual - Purify Synergy)
     [22265] = true, -- Cleansing Ritual (Cleansing Ritual)
     [26286] = true, -- Healing Ritual (Cleansing Ritual)
     [26290] = true, -- Clensing Ritual Dummy (Cleansing Ritual)
@@ -6842,7 +6841,7 @@ LUIE.DebugAuras = {
     [8239] = true, -- Hamstrung -- Various NPC's
     [10845] = true, -- Run Away! -- Humanoid NPC's
     [31813] = true, -- Run Away! -- Humanoid NPC's
-    --[82703] = true, -- Run Away! -- Humanoid NPC's
+    [82703] = true, -- Run Away! -- Humanoid NPC's
     [18386] = true, -- Run Away! -- NPC (Mostly Creatures)
     [14249] = true, -- Surround -- NPC (Mostly Animals)
 
@@ -7401,7 +7400,7 @@ LUIE.DebugAuras = {
     [35850] = true, -- Shadow Cloak -- Fear Mage
 
     [44247] = true, -- Dark Shade -- Dreadweaver
-    --[89005] = true, -- Dark Shade -- Dreadweaver
+    [89005] = true, -- Dark Shade -- Dreadweaver
     [89006] = true, -- Dark Shade -- Dreadweaver
     [89008] = true, -- Dark Shade -- Dreadweaver
     [39729] = true, -- TargetPriorityException -- Dreadweaver
@@ -7666,7 +7665,7 @@ LUIE.DebugAuras = {
     [92158] = true, -- Raise the Earth (Beastcaller)
     [92157] = true, -- Raise the Earth (Beastcaller)
     [92159] = true, -- Raise the Earth (Beastcaller)
-    --[92156] = true, -- Summon the Dead (Beastcaller)
+    [92156] = true, -- Summon the Dead (Beastcaller)
 
     [87854] = true, -- Quick Shot (Arbalest)
     [87855] = true, -- Arrow Stab (Arbalest)
