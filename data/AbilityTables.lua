@@ -545,6 +545,7 @@ local AbilityTables = {
     Skill_Empowered_Ward              = 29482,
     Skill_Charged_Lightning           = 102310,
     Skill_Atronach_Zap                = 23428,
+    Skill_Bound_Aegis                 = 24163,
     Skill_Lightning_Form              = 23210,
     Skill_Hurricane                   = 23231,
     Skill_Boundless_Storm             = 23213,

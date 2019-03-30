@@ -323,6 +323,7 @@ local strings = {
     SI_LUIE_SKILL_VEIL_OF_BLADES_TP =                    "Enemies in the ring of shadow have their Movement Speed reduced by |cFFFFFF70|r% and take Magic Damage every |cFFFFFF1|r second, while you and allies gain Major Protection.\n\nAllies in the area can activate the |cFFFFFFHidden Refresh|r synergy.", -- TODO: Translate
     SI_LUIE_SKILL_MALEVOLENT_OFFERING_TP =               "Высасывает здоровье каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_SKILL_CRIPPLE_TP =                           "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF8|r seconds.\n\nMovement Speed reduced by |cFFFFFF40|r% for |cFFFFFF4|r seconds.", -- TODO: Translate
+    SI_LUIE_SKILL_CRIPPLING_GRASP_TP =                   "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF8|r seconds.\n\nMovement Speed reduced by |cFFFFFF40|r% for |cFFFFFF4|r seconds.\n\nImmobilized for |cFFFFFF1.5|r seconds.",
     SI_LUIE_SKILL_SIPHONING_STRIKES_TP =                 "Ваши обычные и силовые атаки исцеляют вас в течение |cFFFFFF20|r секунд. Полностью заряженная силовая атака исцеляет в два раза больше.",
     SI_LUIE_SKILL_LEECHING_STRIKES_TP =                  "Ваши обычные и силовые атаки исцеляют вас и восстанавливают Запас сил в течение |cFFFFFF20|r секунд. Полностью заряженная силовая атака восстанавливает в два раза больше ресурсов.\n\nВы восстанавливаете дополнительно до |cFFFFFF4270|r Запаса сил по истечению эффекта, в зависимости от времени действия Leeching Strikes.",
     SI_LUIE_SKILL_SIPHONING_ATTACKS_TP =                 "Ваши обычные и силовые атаки исцеляют вас и восстанавливают Магию в течение |cFFFFFF20|r секунд. Полностью заряженная силовая атака восстанавливает в два раза больше ресурсов.\n\nВы восстанавливаете дополнительно до |cFFFFFF4270|r Магии по истечению эффекта, в зависимости от времени действия Siphoning Attacks.",
@@ -697,7 +698,7 @@ local strings = {
     -- TRAPS -------------------------------------------------------
     ----------------------------------------------------------------
 
-    SI_LUIE_SKILL_LAVA_STACK_TP =                        "Taking increasing Flame Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_LAVA_STACK_TP =                        "Taking increasing Flame Damage every |cFFFFFF0.75|r seconds.\n\nDamage taken increased by |cFFFFFF75|r% per additional stack.",
     SI_LUIE_SKILL_LAVA_TP =                              "Taking Flame Damage every |cFFFFFF0.75|r seconds.",
     SI_LUIE_SKILL_LAVA_TRAP =                            "Lava Trap",
     SI_LUIE_SKILL_LIGHTNING_TRAP =                       "Lightning Trap",
@@ -1052,7 +1053,7 @@ local strings = {
     SI_LUIE_SKILL_SIGIL_OF_DEFENSE_TP =                  "Reduce damage taken by |cffffff50|r% and reflect all projectiles cast at you for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_DEFILED_GRAVE_TP =                     "Immobilized and taking Magic Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SUDDEN_STORM =                         "Sudden Storm",
-    SI_LUIE_SKILL_BACKSTAB_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BACKSTAB_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF60|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_CALL_STORM_ATRONACH =                  "Call Storm Atronachs",
     SI_LUIE_SKILL_ENERVATING_STONE_TP =                  "Stunned and taking Shock Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_ETHEREAL_CHAIN_TP =                    "Levitated and afflicted with Magic Damage every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds.",
@@ -1080,7 +1081,7 @@ local strings = {
     SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_NPC_TP =          "Healing every |cFFFFFF1|r second and damage taken reduced by |cFFFFFF55|r%.",
     SI_LUIE_SKILL_PIERCE_ARMOR_NPC_TP =                  "Reduce Physical and Spell Resistance by |cFFFFFF43|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BITING_COLD_TP =                       "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF10|r%.\n\nThis effect stacks up to |cFFFFFF8|r times, to a maximum of |cFFFFFF80|r% Movement Speed reduction.",
-    SI_LUIE_SKILL_BITING_COLD_VET_TP =                   "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF10|r%.\n\nDamage taken increased by |cFFFFFF22|r% per stack.\n\nThe snare stacks up to |cFFFFFF8|r times, to a maximum of |cFFFFFF80|r% Movement Speed reduction.",
+    SI_LUIE_SKILL_BITING_COLD_VET_TP =                   "Taking increasing Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF10|r%.\n\nDamage taken increased by |cFFFFFF22|r% per additional stack.\n\nThe snare stacks up to |cFFFFFF8|r times, to a maximum of |cFFFFFF80|r% Movement Speed reduction.",
     SI_LUIE_SKILL_FROST_CLENCH_NPC_TP =                  "Stunned for |cFFFFFF0.5|r seconds.\n\nImmobilized for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_UWOF_NPC_TP =                          "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF60|r%.\n\nThe wall explodes when it expires, dealing additional Frost Damage.",
     SI_LUIE_SKILL_ELEMENTAL_SUSCEPTIBILITY_NPC_TP =      "Reduce Spell Resistance by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.",

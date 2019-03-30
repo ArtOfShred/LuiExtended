@@ -95,9 +95,9 @@ local AlertTable = {
     [44227] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dragonknight Standard (Dragonknight - Elite)
     [52041] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN }, -- Blink Strike (Dragonknight - Elite)
 
-    [88251] = { summon = true, priority = 2, auradetect = true }, -- Call Ally (Pet Ranger)
-    [88248] = { summon = true, priority = 2, auradetect = true }, -- Call Ally (Pet Ranger)
-    [89425] = { summon = true, priority = 2, auradetect = true }, -- Call Ally (Pet Ranger)
+    [88251] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Pet Ranger)
+    [88248] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Pet Ranger)
+    [89425] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Pet Ranger)
     [44301] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true , ignoreRefresh = true }, -- Trap Beast (Pet Ranger)
 
     [15164] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Heat Wave (Fire Mage)
@@ -108,7 +108,7 @@ local AlertTable = {
     [12459] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Winter's Reach (Frost Mage)
 
     [35151] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true }, -- Spell Absorption (Spirit Mage)
-    [14472] = { summon = true, priority = 2, auradetect = true }, -- Burdening Eye (Spirit Mage)
+    [14472] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Burdening Eye (Spirit Mage)
 
     [14370] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, auradetect = true }, -- Void (Time Bomb Mage)
 
@@ -116,18 +116,21 @@ local AlertTable = {
     [37129] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Ice Cage (Battlemage)
     [44216] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Negate Magic (Battlemage - Elite)
 
-    [88554] = { summon = true, priority = 2, auradetect = true }, -- Summon the Dead (Necromancer)
-    [88555] = { summon = true, priority = 2, auradetect = true }, -- Summon the Dead (Necromancer)
-    [88556] = { summon = true, priority = 2, auradetect = true }, -- Summon the Dead (Necromancer)
+    [88554] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
+    [88555] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
+    [88556] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
     [13397] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true, result = ACTION_RESULT_BEGIN, refire = 1000 }, -- Empower Undead (Necromancer)
 
     [14350] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Aspect of Terror (Fear Mage)
 
-    [44250] = { summon = true, priority = 2, auradetect = true }, -- Dark Shade (Dreadweaver)
+    [44250] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Dark Shade (Dreadweaver)
+
+    [44323] = { power = true, priority = 3, auradetect = true }, -- Dampen Magic (Soulbrander)
+    [44258] = { power = true, priority = 3, auradetect = true }, -- Radiant Magelight (Soulbrander)
 
     [35387] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Defiled Grave (Bonelord)
-    [88506] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Summon Abomination (Bonelord)
-    [88507] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Summon Abomination (Bonelord)
+    [88506] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Abomination (Bonelord)
+    [88507] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Abomination (Bonelord)
 
     [50966] = { power = true, auradetect = true, priority = 2 }, -- Healer Immune (Healer - Craglorn/DLC)
     [44328] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2, auradetect = true, notDirect = true }, -- Rite of Passage (Healer)
@@ -169,7 +172,7 @@ local AlertTable = {
 
     [88371] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Dive (Beastcaller) (Morrowind)
     [88394] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Gore (Beastcaller) (Morrowind)
-    [88409] = { summon = true, priority = 2, auradetect = true }, -- Raise the Earth (Beastcaller)
+    [88409] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Raise the Earth (Beastcaller)
 
     [87901] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Bombard (Arbalest) (Morrowind)
     [87422] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Chilled Ground (Arbalest) (Morrowind)
@@ -253,8 +256,8 @@ local AlertTable = {
 
     [42844] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Rotbone (Wolf)
     [14523] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Helljoint (Wolf)
-    [14272] = { summon = true, auradetect = true, priority = 2 }, -- Call of the Pack (Wolf)
-    [26658] = { summon = true, auradetect = true, priority = 2 }, -- Call of the Pack (Jackal)
+    [14272] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Call of the Pack (Wolf)
+    [26658] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Call of the Pack (Jackal)
 
     [72793] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Toxic Mucus (Haj Mota)
     [72796] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bog Burst (Haj Mota)
@@ -382,7 +385,7 @@ local AlertTable = {
     [8779] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Lightning Onslaught (Spider Daedra)
     [89306] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Web (Spiderling)
     [8782] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Storm (Spider Daedra)
-    [8773] = { summon = true, priority = 2, auradetect = true }, -- Summon Spiderling (Spider Daedra)
+    [8773] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Spiderling (Spider Daedra)
 
     [35220] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Impending Storm (Storm Atronach)
     [4864] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 2, result = ACTION_RESULT_EFFECT_GAINED, refire = 100 }, -- Storm Bound (Storm Atronach)
@@ -390,7 +393,7 @@ local AlertTable = {
     [7095] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Xivilai)
     [88947] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Grasp (Xivilai)
     [7100] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Hand of Flame (Xivilai)
-    [25726] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Summon Daedra (Xivilai)
+    [25726] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Daedra (Xivilai)
 
     [4653] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true }, -- Shockwave (Watcher)
     [9219] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true, refire = 1750 }, -- Doom-Truth's Gaze (Watcher)
@@ -413,7 +416,7 @@ local AlertTable = {
     [8569] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Devastating Leap (Bloodfiend)
 
     [5050] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bone Saw (Bone Colossus)
-    [5030] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Voice to Wake the Dead (Bone Colossus)
+    [5030] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = "" }, -- Voice to Wake the Dead (Bone Colossus)
     [17207] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true }, -- Necromantic Implosion (Risen Dead)
 
     [18514] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Chill Touch (Ghost)
@@ -470,7 +473,7 @@ local AlertTable = {
     [9674] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Resonate (Lamia)
     [7835] = { interrupt = true, notDirect = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Convalescence (Lamia)
     [7831] = { interrupt = true, notDirect = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500 }, -- Harmony (Lamia)
-    [9680] = { summon = true, auradetect = true, priority = 2 }, -- Summon Spectral Lamia
+    [9680] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Summon Spectral Lamia
 
     [3860] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Pulverize (Lurcher)
     [3855] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Crushing Limbs (Lurcher)
@@ -490,8 +493,8 @@ local AlertTable = {
     [21582] = { block = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Nature's Swarm (Spriggan)
     [13475] = { interrupt = true, priority = 3, auradetect = true, notDirect = true }, -- Healing Salve (Spriggan)
     [13477] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Control Beast (Spriggan)
-    [89119] = { summon = true, priority = 2, auradetect = true }, -- Summon Beast (Spriggan)
-    [89102] = { summon = true, priority = 2, auradetect = true }, -- Summon Beast (Spriggan)
+    [89119] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Beast (Spriggan)
+    [89102] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Beast (Spriggan)
 
     [9346] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Strangle (Strangler)
     [9322] = { avoid = true, priority = 3, auradetect = true }, -- Poisoned Ground (Strangler)

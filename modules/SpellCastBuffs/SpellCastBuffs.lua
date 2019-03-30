@@ -453,6 +453,12 @@ function SCB.Initialize( enabled )
     -- Werewolf
     SCB.RegisterWerewolfEvents()
 
+    -- Enable Bar function for Bound Armor if the player is a Sorcerer
+    if GetUnitClassId('player') == 2 then
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, SCB.DrawBoundArmorBuffs)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED, SCB.DrawBoundArmorBuffs)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED, SCB.DrawBoundArmorBuffs)
+    end
     -- Debug
     SCB.RegisterDebugEvents()
 end
@@ -3660,6 +3666,10 @@ function SCB.OnPlayerActivated(eventCode)
     SCB.LoadCyrodiilPlayerBuffs()
     -- Checks for Artificial effects on the player just in case they have no buffs/debuffs present to trigger OnEffectUpdate
     SCB.ArtificialEffectUpdate()
+    -- Add Bound Aegis buffs if player has it slotted
+    if GetUnitClassId('player') == 2 then
+        SCB.DrawBoundArmorBuffs()
+    end
 
     -- Sets the player to dead if reloading UI or loading in while dead.
     if IsUnitDead("player") then
@@ -3778,6 +3788,33 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
         -- This event does not seem to have anything to do with player self-resurrection
         g_playerResurrectStage = nil
     end
+end
+
+function SCB.DrawBoundArmorBuffs()
+
+    g_effectsList["player1"][999008] = nil
+    g_effectsList["player1"][999098] = nil
+
+    for slotNum = 3, 8 do
+        local abilityId = GetSlotBoundId(slotNum)
+        if abilityId == 24163 then
+            g_effectsList["player1"][999008] = {
+                target ="player", type=1,
+                id=999008, icon = 'esoui/art/icons/ability_buff_minor_resolve.dds', name = A.Skill_Minor_Resolve,
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "long",
+                restart=true, iconNum=0,
+            }
+            g_effectsList["player1"][999098] = {
+                target ="player", type=1,
+                id=999008, icon = 'esoui/art/icons/ability_buff_minor_ward.dds', name = A.Skill_Minor_Ward,
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "long",
+                restart=true, iconNum=0,
+            }
+        end
+    end
+
 end
 
 -- Called from the menu and on initialize to build the table of hidden effects.

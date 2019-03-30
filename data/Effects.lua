@@ -435,6 +435,7 @@ E.DebuffDisplayOverrideName = {
 E.EffectHideWhenDead = {
     [33097] = true, -- Scary Immunities (Various NPC's)
     [44176] = true, -- Flying Immunities (Various NPC's)
+    [53329] = true, -- Warming Aura (Dragonstar Arena - Stage 2 - The Frozen Ring)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1628,12 +1629,6 @@ E.EffectOverrideByName = {
                     ['Aura of Protection'] =        { hide = true } -- Aura of Protection (Aura of Protection) -- Hides this buff only on the Goblin Aura of Protection to prevent duplicate display
                 },
 
-    [15164] =   { -- Heat Wave (Fire Mage)
-                    [U.Boss_Akezel] =               { icon = 'LuiExtended/media/icons/abilities/ability_templar_heat_wave.dds', name = A.Skill_Trail_of_Flames }, -- Akezel (City of Ash II)
-                },
-    [16588] =   { -- Heat Wave (Fire Mage)
-                    [U.Boss_Akezel] =               { icon = 'LuiExtended/media/icons/abilities/ability_templar_heat_wave.dds', name = A.Skill_Trail_of_Flames }, -- Akezel (City of Ash II)
-                },
     --[[ [47095] =   { -- Fire Rune (Fire Mage)
                     [U.NPC_Anka_Ra_Pyromancer] =    { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Anka-Ra Pyromancer (Dragonstar Arena)
                     [U.NPC_Bloodwraith_Kyngald] =   { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Bloodwraith Kyngald (Dragonstar Arena)
@@ -2071,6 +2066,7 @@ E.EffectHideSCT = {
     [86250] = true, -- Sleet Storm (Sleet Storm)
     [88858] = true, -- Northern Storm (Northern Storm)
     [88861] = true, -- Permafrost (Permafrost)
+    [90943] = true, -- Permafrost (Permafrost)
 
     ----------------------------
     -- One Hand and Shield
@@ -4116,11 +4112,10 @@ E.EffectOverride = {
     [36945] = { icon = 'esoui/art/icons/ability_nightblade_006_a.dds', tooltip = T.Skill_Cripple, hideReduce = true }, -- Debilitate (Debilitate)
     [36946] = { tooltip = A.Skill_Debilitate }, -- Major Expedition (Debilitate)
     [62196] = { icon = 'esoui/art/icons/ability_nightblade_006_a.dds' }, -- Debilitate (Debilitate)
-    [36965] = { tooltip = T.Skill_Cripple }, -- Crippling Grasp (Crippling Grasp)
-    [36958] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds', tooltip = T.Skill_Cripple, hideReduce = true }, -- Crippling Grasp (Crippling Grasp)
+    [36965] = { tooltip = T.Skill_Crippling_Grasp }, -- Crippling Grasp (Crippling Grasp)
+    [36958] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds', tooltip = T.Skill_Crippling_Grasp, hideReduce = true }, -- Crippling Grasp (Crippling Grasp)
     [36959] = { tooltip = A.Skill_Crippling_Grasp }, -- Major Expedition (Crippling Grasp)
     [36963] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds' }, -- Crippling Grasp (Crippling Grasp)
-    [36964] = { tooltip = T.Generic_Immobilize }, -- Crippling Grasp (Crippling Grasp)
 
     -- Siphoning Strikes / Leeching Strikes / Siphoning Attacks
     [33319] = { tooltip = T.Skill_Siphoning_Strikes }, -- Siphoning Strikes (Siphoning Strikes)
@@ -4284,6 +4279,9 @@ E.EffectOverride = {
     [24158] = { tooltip = T.Skill_Bound_Armor }, -- Bound Armor (Bound Armor)
     [24165] = { tooltip = T.Skill_Bound_Armor }, -- Bound Armaments (Bound Armaments)
     [24163] = { tooltip = T.Skill_Bound_Armor }, -- Bound Aegis (Bound Aegis)
+
+    [999008] = { icon = 'esoui/art/icons/ability_buff_minor_resolve.dds', name = A.Skill_Minor_Ward, tooltip = A.Skill_Bound_Aegis }, -- Bound Aegis FAKE ID
+    [900009] = { icon = 'esoui/art/icons/ability_buff_minor_ward.dds', name = A.Skill_Minor_Resolve, tooltip = A.Skill_Bound_Aegis  }, -- Bound Aegis FAKE ID
 
     -- Summon Storm Atronach / Greater Storm Atronach / Summon Charged Atronach
     [48078] = { tooltip = A.Skill_Charged_Lightning }, -- Major Berserk (Charged Lightning Synergy)
@@ -4780,7 +4778,7 @@ E.EffectOverride = {
 
     [86247] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Sleet Storm (Sleet Storm)
     [88860] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Northern Storm (Northern Storm)
-    [88863] = { groundLabel = true, tooltip = T.Skill_Permafrost_Ground }, -- Permafrost (Permafrost)
+    [88863] = { groundLabel = true, tooltip = T.Skill_Permafrost_Ground, stack = 1, stackAdd = 1, stackMax = 3 }, -- Permafrost (Permafrost)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
@@ -5593,18 +5591,18 @@ E.EffectOverride = {
     [63430] = { tooltip = T.Skill_Meteor }, -- Meteor
     [16538] = { icon = 'esoui/art/icons/ability_mageguild_005.dds', name = A.Skill_Meteor }, -- Meteor Knockback (Meteor)
     [63429] = { tooltip = T.Generic_AOE_Fire, tooltipValue2 = 1, groundLabel = true }, -- Meteor (Meteor)
-    [114701] = { name = A.Skill_Meteor, tooltip = T.Generic_Knockback }, -- Stun (Meteor)
+    [114701] = { name = A.Skill_Meteor, tooltip = T.Generic_Knockdown }, -- Stun (Meteor)
     [63456] = { tooltip = T.Skill_Ice_Comet }, -- Ice Comet
     [40492] = { tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Ice Comet
     [63457] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds' }, -- Ice Comet (Ice Comet)
     [63455] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', name = A.Skill_Ice_Comet }, -- Ice Comet Knockback (Ice Comet)
     [63454] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Ice Comet (Ice Comet)
-    [114714] = { name = A.Skill_Ice_Comet, tooltip = T.Generic_Knockback }, -- Stun (Ice Comet)
+    [114714] = { name = A.Skill_Ice_Comet, tooltip = T.Generic_Knockdown }, -- Stun (Ice Comet)
     [63473] = { tooltip = T.Skill_Meteor }, -- Shooting Star
     [63472] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds' }, -- Shooting Star (Shooting Star)
     [40495] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds' }, -- Shooting Star (Shooting Star)
     [63471] = { tooltip = T.Generic_AOE_Fire, tooltipValue2 = 1, groundLabel = true }, -- Shooting Star (Shooting Star)
-    [114715] = { name = A.Skill_Shooting_Star, tooltip = T.Generic_Knockback }, -- Shooting Star (Shooting Star)
+    [114715] = { name = A.Skill_Shooting_Star, tooltip = T.Generic_Knockdown }, -- Shooting Star (Shooting Star)
 
     ----------------------------------------------------------------
     -- PSIJIC ORDER PASSIVES ---------------------------------------
@@ -8085,7 +8083,7 @@ E.EffectOverride = {
     [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava,  T.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 30, unbreakable = 1, groundLabel = true }, -- In Lava (Lava - The Earth Forge)
 
     [56277] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds' }, -- Lava (City of Ash II)
-    [55925] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', tooltip = T.Skill_Lava_Stack, unbreakable = 1, groundLabel = true }, -- Lava (City of Ash II)
+    [55925] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', tooltip = T.Skill_Lava_Stack, unbreakable = 1, groundLabel = true, stackAdd = 1 }, -- Lava (City of Ash II)
 
     [5139] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', tooltip = T.Skill_Lava_No_Snare, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, groundLabel = true }, -- Lava (Dragonstar Arena)
     [5140] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds' }, -- Lava (Dragonstar Arena)
@@ -9692,7 +9690,7 @@ E.EffectOverride = {
     -- City of Ash II
     [53999] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_daedra_fa_red.dds', name = A.Skill_Summon_Flame_Atronach }, -- Summon (Flame Atronach)
     [54126] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_minor_wound.dds', hide = true }, -- Minor Wound (Akezel)
-    [54025] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_spell_absorption.dds', tooltip = T.Skill_Spell_Absorption }, -- Spell Absorption (Spirit Mage), -- Spell Absorption (Akezel)
+    [54025] = { icon = 'esoui/art/icons/ability_mage_064.dds', tooltip = T.Skill_Spell_Absorption }, -- Spell Absorption (Akezel)
     [53994] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds' }, -- Focused Healing (Akezel)
     [53996] = { hide = true }, -- Health Boon (Akezel)
     [53988] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds', name = A.Skill_Quick_Shot }, -- Quick Draw (Marruz)
@@ -9818,10 +9816,10 @@ E.EffectOverride = {
     [54873] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = A.Skill_Wing_Gust, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Heavy Slash
 
     [54856] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = A.Skill_Wing_Gust, hide = true }, -- Wing Burst (Ash Titan)
-    [54855] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = A.Skill_Wing_Gust, tooltip = T.Generic_Snare, tooltipValue2 = 40 }, -- Shockwave (Ash Titan)
+    [54855] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = A.Skill_Wing_Gust, tooltip = T.Generic_Snare, tooltipValue2 = 35 }, -- Shockwave (Ash Titan)
 
     [54859] = { hide = true, tooltip = T.Generic_Stagger }, -- Stagger (Ash Titan)
-    [54874] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = A.Skill_Wing_Gust, tooltip = T.Generic_Snare, tooltipValue2 = 40 }, -- Shockwave (Ash Titan)
+    [54874] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = A.Skill_Wing_Gust, tooltip = T.Generic_Snare, tooltipValue2 = 35 }, -- Shockwave (Ash Titan)
 
     [56145] = { hide = true }, -- Shockwave (Ash Titan)
     [56144] = { hide = true }, -- Shockwave (Ash Titan)
@@ -9963,7 +9961,7 @@ E.EffectOverride = {
     [5697] = { icon = 'esoui/art/icons/ability_rogue_038.dds', name = A.Skill_Shadowstep }, -- Backstab (Yalorasse the Speaker)
     [6106] = { icon = 'LuiExtended/media/icons/abilities/ability_rogue_lightning_strike.dds' }, -- Lightning Storm (Yalorasse the Speaker)
     [6108] = { icon = 'LuiExtended/media/icons/abilities/ability_rogue_lightning_strike.dds', groundLabel = true, tooltip = T.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Lightning Storm (Yalorasse the Speaker)
-    [6107] = { icon = 'LuiExtended/media/icons/abilities/ability_rogue_snare_shock.dds', tooltip = T.Generic_Snare, tooltipValue2 = 35 }, -- Lightning Storm (Yalorasse the Speaker)
+    [6107] = { icon = 'LuiExtended/media/icons/abilities/ability_rogue_snare_shock.dds', tooltip = T.Generic_Snare, tooltipValue2 = 25 }, -- Lightning Storm (Yalorasse the Speaker)
     [29063] = { icon = 'esoui/art/icons/ability_rogue_016.dds', hide = true }, -- Poisoned Blade (Yalorasse the Speaker)
     [29064] = { icon = 'esoui/art/icons/ability_rogue_016.dds', name = A.Skill_Poisoned_Blade, tooltip = T.Generic_Poison, tooltipValue2 = 1.5, stack = 0 }, -- Crimson Web Poison (Yalorasse the Speaker)
 
@@ -10046,7 +10044,7 @@ E.EffectOverride = {
 
     [31002] = { hide = true, icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', name = A.Skill_Selenes_Rose }, -- Intro (Selene's Rose)
     [31003] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = A.Skill_Lash }, -- Lunge (Selene's Rose)
-    [9039] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = A.Skill_Grappling_Web, tooltip = T.Generic_Snare, tooltipValue2 = 35 }, -- Snare (Selene's Rose)
+    [9039] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = A.Skill_Grappling_Web, tooltip = T.Generic_Snare, tooltipValue2 = 40 }, -- Snare (Selene's Rose)
 
     [30996] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Vicious_Maul }, -- Vicious Maul (Foulhide)
     [46879] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Vicious_Maul, hide = true }, -- Fire Backlash (Foulhide)
@@ -10115,7 +10113,7 @@ E.EffectOverride = {
     [22086] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_corrosive_bite.dds' }, -- Inject Poison (Swarm Mother)
 
     [17964] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', hide = true }, -- Impeding Webs (Swarm Mother)
-    [17965] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_No_Dur, tooltipValue2 = 50 }, -- Impeding Webs (Swarm Mother)
+    [17965] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare_No_Dur, tooltipValue2 = 60 }, -- Impeding Webs (Swarm Mother)
 
     [17960] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_arachnid_leap.dds' }, -- Arachnid Leap (Swarm Mother)
     [20642] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_arachnid_leap.dds', name = A.Skill_Arachnid_Leap }, -- Poisoned Fang (Swarm Mother)
@@ -10334,8 +10332,6 @@ E.FakeExternalBuffs = {
  -- Fake Debuffs applied onto the player by NPCs or Events (Hostile)
 --------------------------------------------------------------------------------------------------------------------------------
 E.FakeExternalDebuffs = {
-    -- Nightblade
-    [36964] = { duration = 1500 }, -- Crippling Grasp (Crippling Grasp)
 
     -- Templar
     [24307] = { duration = 0 }, -- Solar Disturbance Snare (Solar Disturbance)
@@ -10693,9 +10689,6 @@ E.FakePlayerDebuffs = {
 
     [86309] = { duration = 3000 }, -- Stun (Player blocks NPC charged attack)
     [86312] = { duration = 3000 }, -- Stun (Player blocks Ogrim Body Slam)
-
-    -- Nightblade
-    [36964] = { duration = 1500 }, -- Crippling Grasp (Crippling Grasp)
 
     -- Destruction Staff
     [38946] = { duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
@@ -11088,7 +11081,7 @@ E.MapDataOverride = {
                 },
 
     [9039] =    {  -- Snare (Selene's Rose)
-                    [7] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = A.Skill_Lash, tooltip = T.Generic_Snare, tooltipValue2 = 35 }, -- Selene's Web
+                    [7] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = A.Skill_Lash }, -- Selene's Web
                 },
     [33097] =   { -- Scary Immunities (Flesh Atronach)
                     [576] = { hide = true }, -- Spindleclutch II

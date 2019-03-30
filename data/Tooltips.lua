@@ -519,6 +519,7 @@ local Tooltips           = {
     Skill_Veil_of_Blades                            = GetString(SI_LUIE_SKILL_VEIL_OF_BLADES_TP),
     Skill_Malevolent_Offering                       = GetString(SI_LUIE_SKILL_MALEVOLENT_OFFERING_TP),
     Skill_Cripple                                   = GetString(SI_LUIE_SKILL_CRIPPLE_TP),
+    Skill_Crippling_Grasp                           = GetString(SI_LUIE_SKILL_CRIPPLING_GRASP_TP),
     Skill_Siphoning_Strikes                         = GetString(SI_LUIE_SKILL_SIPHONING_STRIKES_TP),
     Skill_Leeching_Strikes                          = GetString(SI_LUIE_SKILL_LEECHING_STRIKES_TP),
     Skill_Siphoning_Attacks                         = GetString(SI_LUIE_SKILL_SIPHONING_ATTACKS_TP),
