@@ -66,10 +66,6 @@ local UnitNames = {
     Boss_Vampire_Lord_Thisa               = 'Vampire Lord Thisa',
     Boss_Hiath_the_Battlemaster           = 'Hiath the Battlemaster',
 
-    NPC_Anka_Ra_Pyromancer                = 'Anka-Ra Pyromancer',
-    NPC_Bloodwraith_Kyngald               = 'Bloodwraith Kyngald',
-    NPC_Dragonclaw_Conjurer               = 'Dragonclaw Conjurer',
-
     -- Maelstrom Arena
     Boss_Maxus_the_Many                   = 'Maxus the Many',
 

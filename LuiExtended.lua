@@ -270,6 +270,21 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             attackIcon = LUIE.Effects.EffectOverride[abilityId].icon or attackIcon
         end
 
+        if LUIE.Effects.MapDataOverride[abilityId] then
+            local index = GetCurrentMapZoneIndex()
+            if LUIE.Effects.MapDataOverride[abilityId][index] then
+                if LUIE.Effects.MapDataOverride[abilityId][index].icon then
+                    attackIcon = LUIE.Effects.MapDataOverride[abilityId][index].icon
+                end
+                if LUIE.Effects.MapDataOverride[abilityId][index].name then
+                    attackName = LUIE.Effects.MapDataOverride[abilityId][index].name
+                end
+                if LUIE.Effects.MapDataOverride[abilityId][index].hide then
+                    return
+                end
+            end
+        end
+
         if LUIE.Effects.EffectOverrideByName[abilityId] then
             local unitName = strformat("<<t:1>>", attackerRawName)
             local petName = strformat("<<t:1>>", minionName)

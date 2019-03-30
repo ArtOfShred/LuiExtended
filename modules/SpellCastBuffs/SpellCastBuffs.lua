@@ -1618,14 +1618,32 @@ function SCB.Buff_OnMouseEnter(control)
             local duration
             if type(control.effectId) == "number" then
                 duration = control.duration / 1000
-                local value2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue2Mod) and (duration + E.EffectOverride[control.effectId].tooltipValue2Mod) or 0
-                value2 = math.floor((value2 * 10) + 0.5) / 10
+                local value2
+                local value3
+                if E.EffectOverride[control.effectId] then
+                    if E.EffectOverride[control.effectId].tooltipValue2 then
+                        value2 = E.EffectOverride[control.effectId].tooltipValue2
+                    elseif E.EffectOverride[control.effectId].tooltipValue2Mod then
+                        value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Mod * 10) + 0.5) / 10
+                    elseif E.EffectOverride[control.effectId].tooltipValue2Id then
+                        value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
+                    else
+                        value2 = 0
+                    end
+                else
+                    value2 = 0
+                end
+                if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue3 then
+                    value3 = E.EffectOverride[control.effectId].tooltipValue3
+                else
+                    value3 = 0
+                end
                 duration = math.floor((duration * 10) + 0.5) / 10
 
                 if control.buffSlot then
-                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2) or GetAbilityDescription(abilityId)
+                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or GetAbilityDescription(abilityId)
                 else
-                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2) or ""
+                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
                 end
 
                 -- Use default tooltip - temp if needed (TODO: Remove when all base ability/set tooltips are updated)

@@ -1628,19 +1628,6 @@ E.EffectOverrideByName = {
     [29521] =   { -- Aura of Protection (Shaman)
                     ['Aura of Protection'] =        { hide = true } -- Aura of Protection (Aura of Protection) -- Hides this buff only on the Goblin Aura of Protection to prevent duplicate display
                 },
-
-    --[[ [47095] =   { -- Fire Rune (Fire Mage)
-                    [U.NPC_Anka_Ra_Pyromancer] =    { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Anka-Ra Pyromancer (Dragonstar Arena)
-                    [U.NPC_Bloodwraith_Kyngald] =   { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Bloodwraith Kyngald (Dragonstar Arena)
-                },
-    [47102] =   { -- Fire Rune (Fire Mage)
-                    [U.NPC_Anka_Ra_Pyromancer] =    { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Anka-Ra Pyromancer (Dragonstar Arena)
-                    [U.NPC_Bloodwraith_Kyngald] =   { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_fire_rune.dds' }, -- Bloodwraith Kyngald (Dragonstar Arena)
-                }, ]]--
-    [12456] =   { -- Ice Arrow (Shared - Frost Mage & Spirit Mage)
-                    [U.NPC_Dragonclaw_Conjurer] =   { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_ice_arrow.dds' }, -- Dragonclaw Conjurer (Dragonstar Arena)
-                },
-
     [88947] =   { -- Lightning Grasp (Xivilai)
                     [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Fulminator (City of Ash II)
                     [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Boltaic (City of Ash II)
@@ -1657,7 +1644,6 @@ E.EffectOverrideByName = {
                     [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Fulminator (City of Ash II)
                     [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Boltaic (City of Ash II)
                 },
-
     [14524] =   { -- Shock (Storm Mage)
                     [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_ranged.dds' }, -- Xivilai Fulminator (City of Ash II)
                 },
@@ -1669,7 +1655,6 @@ E.EffectOverrideByName = {
                     [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Fulminator (City of Ash II)
                     [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Boltaic (City of Ash II)
                 },
-
     [86704] =   { -- Chop (Peasant)
                     ['Hleran Noble'] =              { icon = 'LuiExtended/media/icons/abilities/ability_weapon_peasant_dagger_light.dds' }, -- Chop (Hleran Noble)
                 },
@@ -6059,7 +6044,6 @@ E.EffectOverride = {
 
     --[[
     [88480] = { hide = true }, -- Trap Triggerer (Various)
-    [26530] = { type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bear Trap (Bear Trap)
     [65854] = { icon = 'esoui/art/icons/death_recap_environmental.dds', name = 'Spike Trap', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spike Trap Snare (Spike Trap) (Orsinium - To Save a Chief)
     [65855] = { icon = 'esoui/art/icons/death_recap_environmental.dds', name = 'Spike Trap', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Trap Sprung (Spike Trap) (Orsinium - To Save a Chief)
     [65856] = { hide = true }, -- Spike Trap (Spike Trap) (Orsinium - To Save a Chief)
@@ -8026,6 +8010,8 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Traps & World Hazards
+
+    -- Coldharbour Flames (Flame Trap) (Coldharbor)
     [62230] = { hide = true }, -- Coldharbour Flames (Flame Trap)
     [62771] = { hide = true }, -- Coldharbour Flames (Flame Trap)
     [62769] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_coldharbour_flames.dds', name = A.Trap_Cold_Fire_Trap, tooltip = T.Generic_Burn, tooltipValue2 = 2 }, -- Coldharbour Flames (Flame Trap)
@@ -8038,6 +8024,13 @@ E.EffectOverride = {
     [21943] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', hide = true }, -- Spike Trap (Spike Trap)
     [21941] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Spike_Trap }, -- Spike Trap Snare (Spike Trap)
     [21942] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Spike_Trap, hideReduce = true }, -- Trap Sprung (Spike Trap)
+
+    -- Spike Trap (Dragonstar Arena)
+    [53166] = { hide = true }, -- Spike Trap (Spike Trap)
+    [53169] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', hide = true }, -- Spike Trap (Spike Trap)
+    [53167] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Spike_Trap }, -- Spike Trap Snare (Spike Trap)
+    [53168] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Spike_Trap, hideReduce = true }, -- Trap Sprung (Spike Trap)
+    [53172] = { hide = true }, -- Spike Trap (Spike Trap)
 
     [20482] = { hide = true }, -- Mistwatch Collapse (Cave-In)
     [20483] = { icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds' }, -- Falling Rocks (Cave-In)
@@ -8053,6 +8046,9 @@ E.EffectOverride = {
 
     [26530] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Bear Trap (Bear Trap)
     [26531] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds' }, -- Bear Trap (Bear Trap)
+
+    [31085] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', name = A.Skill_Bear_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Immobilize }, -- Trap (Longclaw)
+    [31086] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', name = A.Skill_Bear_Trap }, -- Trap (Longclaw)
 
     [20260] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_sigil_of_frost.dds', name = A.Trap_Sigil_of_Frost }, -- Rune Burst
     [20259] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_sigil_of_frost.dds', name = A.Trap_Sigil_of_Frost, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Sigil of Frost Snare
@@ -8080,7 +8076,7 @@ E.EffectOverride = {
     [113082] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_slaughterfish.dds' }, -- Slaughterfish Attack (Slaughterfish)
 
     [19224] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava }, -- In Lava (Lava - Halls of Torment)
-    [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava,  T.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 30, unbreakable = 1, groundLabel = true }, -- In Lava (Lava - The Earth Forge)
+    [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = A.Trap_Lava,  tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 30, unbreakable = 1, groundLabel = true }, -- In Lava (Lava - The Earth Forge)
 
     [56277] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds' }, -- Lava (City of Ash II)
     [55925] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', tooltip = T.Skill_Lava_Stack, unbreakable = 1, groundLabel = true, stackAdd = 1 }, -- Lava (City of Ash II)
@@ -9037,12 +9033,6 @@ E.EffectOverride = {
 
     [60417] = { name = A.Skill_Empowered_by_the_Light, tooltip = T.Generic_Enrage, tooltipValue2 = 50 }, -- Empowered By the Light (Fighter's Guild Gladiator)
     [82996] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = T.Skill_Enrage_FG_Gladiator, duration = 0 }, -- Enrage (Fighter's Guild Gladiator)
-
-    [53166] = { hide = true }, -- Spike Trap (Spike Trap)
-    [53169] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', hide = true }, -- Spike Trap (Spike Trap)
-    [53167] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Spike_Trap }, -- Spike Trap Snare (Spike Trap)
-    [53168] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_spike_trap.dds', name = A.Trap_Spike_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Spike_Trap, hideReduce = true }, -- Trap Sprung (Spike Trap)
-    [53172] = { hide = true }, -- Spike Trap (Spike Trap)
 
     [52746] = { name = A.Skill_Dawnbreaker }, -- Flawless Dawnbreaker (Champion Marcauld)
 
@@ -10014,9 +10004,6 @@ E.EffectOverride = {
     [64171] = { hide = true }, -- SW_Boss3_WebGrip (Treethane Kerninn)
     [30907] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_summon_primal_swarm.dds', name = A.Skill_Primal_Swarm, hide = true }, -- Summon Primal Swarm (Treethane Kerninn)
     [30908] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_summon_primal_swarm.dds', name = A.Skill_Primal_Swarm, groundLabel = true, tooltip = T.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Summon Primal Swarm (Treethane Kerninn)
-
-    [31085] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', name = A.Skill_Bear_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Immobilize }, -- Trap (Longclaw)
-    [31086] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', name = A.Skill_Bear_Trap }, -- Trap (Longclaw)
 
     [30781] = { icon = 'esoui/art/icons/ability_healer_022.dds', tooltip = T.Skill_Mirror_Ward }, -- Mirror Ward (Longclaw)
     [30785] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds', name = A.Skill_Quick_Shot }, -- Quick Shot (Longclaw)

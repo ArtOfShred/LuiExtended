@@ -8921,6 +8921,7 @@ LUIE.DebugAuras = {
     [24869] = true, -- Blood in the Water -- Ice Wraith
     [46565] = true, -- Rubble -- Ice Wraith
     [46563] = true, -- Blood in the Water -- Ice Wraith
+    [24867] = true, -- Blood in the Water -- Ice Wraith
 
     [14801] = true, -- Flare -- Imp (Fire)
     [14802] = true, -- Fireball -- Imp (Fire)
@@ -10940,6 +10941,8 @@ LUIE.DebugAuras = {
     [92100] = true, -- Slaver Clothes
     [92106] = true, -- Slaver Clothes
     [92108] = true, -- Slaver Clothes
+    [92089] = true, -- Slaver Clothes
+    [92105] = true, -- Slaver Clothes
     [89096] = true, -- Slaver Clothes
     [88444] = true, -- Sit
     [93489] = true, -- Sit
