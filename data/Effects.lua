@@ -2373,16 +2373,16 @@ E.TooltipNameOverride = {
     [79025]                         = T.Generic_Poison, -- ... of Ravage Health (2 Traits)
     [78922]                         = T.Generic_Poison, -- ... of Ravage Health (3 Traits)
     [79137]                         = T.Generic_Ravage_Magicka_Poison, -- of Drain Magicka (2 Traits)
-    [79138]                         = T.Generic_Magicka_Regen, -- of Drain Magicka (2 Traits)
+    [79138]                         = T.Generic_Magicka_Regen_Potion, -- of Drain Magicka (2 Traits)
     [79037]                         = T.Generic_Ravage_Magicka_Poison, -- of Damage Magicka (2 Traits)
     [79139]                         = T.Generic_Ravage_Magicka_Poison, -- of Drain Magicka (3 Traits)
-    [79140]                         = T.Generic_Magicka_Regen, -- of Drain Magicka (3 Traits)
+    [79140]                         = T.Generic_Magicka_Regen_Potion, -- of Drain Magicka (3 Traits)
     [79044]                         = T.Generic_Ravage_Magicka_Poison, -- of Damage Magicka (3 Traits)
     [79141]                         = T.Generic_Ravage_Stamina_Poison, -- of Drain Stamina (2 Traits)
-    [79142]                         = T.Generic_Stamina_Regen, -- of Drain Stamina (2 Traits)
+    [79142]                         = T.Generic_Stamina_Regen_Potion, -- of Drain Stamina (2 Traits)
     [79045]                         = T.Generic_Ravage_Stamina_Poison, -- of Damage Stamina (2 Traits)
     [79143]                         = T.Generic_Ravage_Stamina_Poison, -- of Drain Stamina (3 Traits)
-    [79144]                         = T.Generic_Stamina_Regen, -- of Drain Stamina (3 Traits)
+    [79144]                         = T.Generic_Stamina_Regen_Potion, -- of Drain Stamina (3 Traits)
     [79046]                         = T.Generic_Ravage_Stamina_Poison, -- of Damage Stamina (3 Traits)
     [79457]                         = T.Generic_Immobilize, -- Escapist's Poison (2 Traits)
     [79458]                         = T.Generic_CC_Immunity, -- Escapist's Poison (2 Traits)
@@ -2403,8 +2403,8 @@ E.TooltipNameOverride = {
     [88476]                         = T.Generic_Poison, -- Crown Debilitating Poison
     [88471]                         = T.Generic_Ravage_Magicka_Poison, -- Crown Draining Poison
     [88475]                         = T.Generic_Ravage_Stamina_Poison, -- Crown Draining Poison
-    [88473]                         = T.Generic_Magicka_Regen, -- Crown Draining Poison
-    [88474]                         = T.Generic_Stamina_Regen, -- Crown Draining Poison
+    [88473]                         = T.Generic_Magicka_Regen_Potion, -- Crown Draining Poison
+    [88474]                         = T.Generic_Stamina_Regen_Potion, -- Crown Draining Poison
     [88462]                         = T.Generic_Immobilize, -- Crown Trapping Poison
     [81274]                         = T.Generic_Poison, -- Crown Lethal Poison
     [81275]                         = T.Generic_Poison, -- Crown Lethal Poison
@@ -2956,7 +2956,7 @@ E.EffectOverride = {
     [46744] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_magicka.dds' }, -- Absorb Magicka (Glyph of Absorb Magicka)
     [46746] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds' }, -- Absorb Stamina (Glyph of Absorb Stamina)
     [46747] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds' }, -- Absorb Stamina (Glyph of Absorb Stamina)
-    [17906] = { icon = 'LuiExtended/media/icons/glyphs/glyph_crushing.dds', name = A.Item_Glyph_of_Crushing, tooltip = T.Item_Glyph_of_Crushing }, -- Crusher (Glyph of Crushing)
+    [17906] = { icon = 'LuiExtended/media/icons/glyphs/glyph_crushing.dds', name = A.Item_Glyph_of_Crushing, tooltip = T.Generic_Reduce_Physical_Spell_Resist }, -- Crusher (Glyph of Crushing)
     [46749] = { icon = 'LuiExtended/media/icons/glyphs/glyph_decrease_health.dds', name = A.Item_Glyph_of_Decrease_Health }, -- Damage Health (Glyph of Decrease Health)
     [17895] = { icon = 'LuiExtended/media/icons/glyphs/glyph_flame.dds' }, -- Fiery Weapon (Glyph of Flame)
     [17904] = { icon = 'LuiExtended/media/icons/glyphs/glyph_foulness.dds' }, -- Befouled Weapon (Glyph of Foulness)
@@ -3049,7 +3049,7 @@ E.EffectOverride = {
 
     -- Monster Sets
     [111505] = { icon = 'esoui/art/icons/vmh_killhulks.dds', tooltip = T.Set_Balorgh }, -- Balorgh (Balorgh)
-    [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds', tooltip = T.Generic_Phy_Spell_Resist_Duration }, -- Blood Spawn (Blood Spawn)
+    [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds', tooltip = T.Generic_Physical_Spell_Resist }, -- Blood Spawn (Blood Spawn)
     [61274] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds' }, -- Blood Spawn (Blood Spawn)
     [59590] = { tooltip = T.Set_Bogdan_the_Nightflame }, -- Imperial Prison Item Set (Bogdan the Nightflame)
     [59591] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = A.Set_Bogdan_the_Nightflame, groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Bogdan Totem (Bogdan the Nightflame)
@@ -3075,7 +3075,7 @@ E.EffectOverride = {
     [83409] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_infernal_guardian.dds' }, -- Infernal Guardian (Infernal Guardian)
     [80566] = { hide = true }, -- Kra'gh (Kra'gh)
     [80565] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_kragh.dds' }, -- Kra'gh (Kra'gh)
-    [59586] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = A.Set_Lord_Warden_Dusk, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = T.Set_Lord_Warden_Ground }, -- Lord Warden (Lord Warden)
+    [59586] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = A.Set_Lord_Warden_Dusk, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = T.Generic_Physical_Spell_Resist_No_Dur }, -- Lord Warden (Lord Warden)
     [59587] = { tooltip = T.Set_Lord_Warden_Buff }, -- Lord Warden (Lord Warden)
     [59568] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = A.Set_Malubeth_the_Scourger, tooltip = T.Set_Malubeth }, -- Scourge Harvest (Malubeth)
     [59573] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = A.Set_Malubeth_the_Scourger }, -- Scourge Harvest (Malubeth)
@@ -3172,7 +3172,7 @@ E.EffectOverride = {
     [49126] = { icon = 'esoui/art/icons/achievement_update15_036.dds' }, -- Shalidor's Curse
     [75726] = { icon = 'LuiExtended/media/icons/abilities/ability_set_tavas_favor.dds', tooltip = T.Set_Tavas_Favor }, -- Tava's Favor
     [61851] = { hide = true }, -- Armor Master
-    [61870] = { icon = 'esoui/art/icons/ava_siege_hookpoint_005.dds', tooltip = T.Generic_Phy_Spell_Resist_Duration }, -- Armor Master
+    [61870] = { icon = 'esoui/art/icons/ava_siege_hookpoint_005.dds', tooltip = T.Generic_Physical_Spell_Resist }, -- Armor Master
     [34386] = { tooltip = A.Skill_Night_Mothers_Gaze }, -- Major Fracture (Night Mother's Gaze)
     [61781] = { icon = 'LuiExtended/media/icons/abilities/ability_set_nobles_conquest.dds' }, -- Noble's Conquest
     [61782] = { tooltip = A.Skill_Nobles_Conquest }, -- Minor Vulnerability (Noble's Conquest)
@@ -3307,7 +3307,7 @@ E.EffectOverride = {
     [85613] = { tooltip = A.Set_Treasure_Hunter }, -- Major Prophecy (Treasure Hunter's)
     [111377] = { tooltip = A.Set_Hanus_Compassion }, -- Major Heroism (Hanu's Compassion)
     [111380] = { tooltip = A.Set_Hanus_Compassion }, -- Major Heroism (Hanu's Compassion)
-    [111204] = { icon = 'esoui/art/icons/achievement_thievesguild_003.dds', tooltip = T.Set_Moon_Hunter }, -- Moon Hunter (Moon Hunter)
+    [111204] = { icon = 'esoui/art/icons/achievement_thievesguild_003.dds', tooltip = T.Generic_Spell_Damage_Duration }, -- Moon Hunter (Moon Hunter)
 
     [117666] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds', hide = true }, -- Icy Conjuror
     [116727] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds', tooltip = T.Generic_Freeze, tooltipValue2 = 1 }, -- Icy Conjuror (Icy Conjuror)
@@ -3385,7 +3385,7 @@ E.EffectOverride = {
     [34511] = { tooltip = A.Set_Dreugh_King_Slayer }, -- Major Expedition (Dreugh King Slayer)
     [66887] = { icon = 'LuiExtended/media/icons/abilities/ability_set_imperium.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Brands of the Imperium (of the Imperium)
     [33512] = { tooltip = A.Set_Knightmare }, -- Minor Maim (of the Knightmare)
-    [67283] = { icon = 'esoui/art/icons/achievement_ic_025_heroic.dds', name = A.Set_Tormentor, tooltip = T.Generic_Phy_Spell_Resist_Duration }, -- Tormentor Resistance (of the Tormentor)
+    [67283] = { icon = 'esoui/art/icons/achievement_ic_025_heroic.dds', name = A.Set_Tormentor, tooltip = T.Generic_Physical_Spell_Resist }, -- Tormentor Resistance (of the Tormentor)
     [61200] = { icon = 'esoui/art/icons/achievement_undaunteddailies_003.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Undaunted Bastion (of the Undaunted Bastion)
     [86070] = { icon = 'esoui/art/icons/achievement_thievesguild_034.dds', tooltip = T.Generic_Weapon_Damage_Duration }, -- Armor of Truth (of Truth)
     [112414] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
@@ -3430,7 +3430,7 @@ E.EffectOverride = {
     [75804] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_shadow.dds', tooltip = T.Generic_Spell_Damage_Duration }, -- Shadow Blessing (Moondancer)
     [98102] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = T.Skill_Minor_Slayer }, -- Minor Slayer (of Alkosh)
     [75752] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Roar of Alkosh (of Alkosh)
-    [75753] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', tooltip = T.Set_Alkosh }, -- Line Breaker (of Alkosh)
+    [75753] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', tooltip = T.Generic_Reduce_Physical_Spell_Resist }, -- Line Breaker (of Alkosh)
     [76667] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', tooltip = T.Generic_Bleed, tooltipValue2 = 1 }, -- Roar of Alkosh (of Alkosh)
     [75815] = { icon = 'LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds', duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = T.Set_Lunar_Bastion }, -- Lunar Bastion (of the Lunar Bastion)
     [75770] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds', tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Twilight Remedy (of Twilight Remedy)
@@ -4195,13 +4195,13 @@ E.EffectOverride = {
     -- Dark Exchange / Dark Deal / Dark Conversion
     [24585] = { icon = 'esoui/art/icons/ability_sorcerer_dark_exchange.dds' }, -- Dark Exchange (Dark Exchange)
     [24587] = { icon = 'esoui/art/icons/ability_sorcerer_dark_exchange.dds', name = A.Skill_Dark_Exchange }, -- Dark Exchange Heal (Dark Exchange)
-    [114903] = { tooltip = T.Generic_Magicka_Regen }, -- Dark Exchange (Dark Exchange)
+    [114903] = { tooltip = T.Generic_Magicka_Regen, tooltipValue2 = 1 }, -- Dark Exchange (Dark Exchange)
     [24596] = { icon = 'esoui/art/icons/ability_sorcerer_dark_deal.dds', name = A.Skill_Dark_Deal }, -- Dark Exchange (Dark Deal)
     [24597] = { icon = 'esoui/art/icons/ability_sorcerer_dark_deal.dds', name = A.Skill_Dark_Deal }, -- Dark Exchange Heal (Dark Deal)
-    [114908] = { tooltip = T.Generic_Stamina_Regen }, -- Dark Deal (Dark Deal)
+    [114908] = { tooltip = T.Generic_Stamina_Regen, tooltipValue2 = 1 }, -- Dark Deal (Dark Deal)
     [24591] = { icon = 'esoui/art/icons/ability_sorcerer_dark_conversion.dds', name = A.Skill_Dark_Conversion }, -- Dark Exchange (Dark Conversion)
     [24592] = { icon = 'esoui/art/icons/ability_sorcerer_dark_conversion.dds', name = A.Skill_Dark_Conversion }, -- Dark Exchange Heal (Dark Conversion)
-    [114909] = { icon = 'esoui/art/icons/ability_sorcerer_dark_conversion.dds', name = A.Skill_Dark_Conversion, tooltip = T.Generic_Magicka_Regen }, -- Dark Exchange (Dark Exchange)
+    [114909] = { icon = 'esoui/art/icons/ability_sorcerer_dark_conversion.dds', name = A.Skill_Dark_Conversion, tooltip = T.Generic_Magicka_Regen, tooltipValue2 = 1 }, -- Dark Exchange (Dark Exchange)
 
     -- Daedric Mines / Daedric Tomb / Daedric Minefield
     [24830] = { tooltip = T.Skill_Daedric_Mines }, -- Daedric Mines (Daedric Mines)
@@ -4511,7 +4511,7 @@ E.EffectOverride = {
     [21759] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Solar Disturbance
 
     -- Restoring Light
-    [35632] = { tooltip = T.Generic_Magicka_Regen_2_Sec }, -- Honor the Dead (Honor the Dead)
+    [35632] = { tooltip = T.Generic_Magicka_Regen, tooltipValue2 = 2 }, -- Honor the Dead (Honor the Dead)
     [44391] = { icon = 'esoui/art/icons/ability_templar_breath_of_life.dds' }, -- Breath of Life (Breath of Life)
 
     -- Healing Ritual
@@ -4545,15 +4545,15 @@ E.EffectOverride = {
     -- Rune Focus / Channeled Focus / Restoring Focus
     [22236] = { consolidate = true, tooltip = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus)
     [44820] = { consolidate = true, tooltip = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus)
-    [112145] = { name = A.Skill_Rune_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Rune Focus)
+    [112145] = { name = A.Skill_Rune_Focus, tooltip = T.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Rune Focus)
     [44828] = { consolidate = true, tooltip = A.Skill_Channeled_Focus }, -- Major Resolve (Channeled Focus)
     [44827] = { consolidate = true, tooltip = A.Skill_Channeled_Focus }, -- Major Ward (Channeled Focus)
-    [37009] = { tooltip = T.Generic_Magicka_Regen },  -- Channeled Focus (Channeled Focus)
-    [112166] = { name = A.Skill_Channeled_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Channeled Focus)
+    [37009] = { tooltip = T.Generic_Magicka_Regen, tooltipValue2 = 1 },  -- Channeled Focus (Channeled Focus)
+    [112166] = { name = A.Skill_Channeled_Focus, tooltip = T.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Channeled Focus)
     [44836] = { consolidate = true, tooltip = A.Skill_Restoring_Focus }, -- Major Resolve (Restoring Focus)
     [44835] = { consolidate = true, tooltip = A.Skill_Restoring_Focus }, -- Major Ward (Restoring Focus)
-    [114842] = { tooltip = T.Generic_Stamina_Regen },  -- Restoring Focus (Restoring Focus)
-    [112167] = { name = A.Skill_Restoring_Focus, tooltip = T.Skill_Rune_Focus_Bonus, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Restoring Focus)
+    [114842] = { tooltip = T.Generic_Stamina_Regen, tooltipValue2 = 1 },  -- Restoring Focus (Restoring Focus)
+    [112167] = { name = A.Skill_Restoring_Focus, tooltip = T.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Restoring Focus)
 
     -- Rite of Passage / Remembrance / Practiced Incantation
     [22223] = { tooltip = T.Skill_Rite_of_Passage }, -- Rite of Passage (Rite of Passage)
@@ -9166,7 +9166,7 @@ E.EffectOverride = {
     [54078] = { name = A.Skill_Cinder_Storm, hide = true }, -- Eruption Snare (Earthen Heart Knight)
     [54080] = { groundLabel = true, tooltip = T.Skill_Cinder_Storm_NPC }, -- Cinder Storm (Earthen Heart Knight)
 
-    [54054] = { tooltip = T.Skill_Stone_Giant_NPC }, -- Stone Giant (Earthen Heart Knight)
+    [54054] = { tooltip = T.Generic_Physical_Resist }, -- Stone Giant (Earthen Heart Knight)
     [54055] = { tooltip = T.Generic_Knockdown }, -- Stone Giant (Earthen Heart Knight)
 
     [54083] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_corrosive_armor_npc.dds', name = A.Skill_Caustic_Armor, tooltip = T.Skill_Corrosive_Armor_NPC },
@@ -9264,7 +9264,7 @@ E.EffectOverride = {
     [54795] = { tooltip = T.Skill_Shattering_Prison }, -- Shattering Prison (Dark Mage)
 
     [54833] = { icon = 'esoui/art/icons/ability_sorcerer_crushing_monsoon.dds', name = A.Skill_Suppression_Field, duration = 0, groundLabel = true, tooltip = T.Generic_Silence_No_Dur }, -- Negate Magic (Dark Mage)
-    [54831] = { icon = 'esoui/art/icons/ability_sorcerer_crushing_monsoon.dds', name = A.Skill_Suppression_Field, duration = 0, groundLabel = true, tooltip = T.Generic_Increase_Spell_Resist_No_Dur }, -- Supression Field (Dark Mage)
+    [54831] = { icon = 'esoui/art/icons/ability_sorcerer_crushing_monsoon.dds', name = A.Skill_Suppression_Field, duration = 0, groundLabel = true, tooltip = T.Generic_Spell_Resist_No_Dur }, -- Supression Field (Dark Mage)
 
     [54824] = { tooltip = T.Generic_Immobilize }, -- Daedric Minefield (Dark Mage)
 

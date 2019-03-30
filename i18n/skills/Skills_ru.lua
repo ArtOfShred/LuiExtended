@@ -65,7 +65,6 @@ local strings = {
     SI_LUIE_SKILL_GLYPH_HARDENING =                      "Hardening (Зачарование)",
     SI_LUIE_SKILL_GLYPH_WEAKENING =                      "Weakening (Зачарование)",
     SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE =                  "Урон от оружия (Зачарование)",
-    SI_LUIE_SKILL_GLYPH_CRUSHING_TP =                    "Reduce Physical and Spell Resistance for |cFFFFFF5|r seconds.", -- TODO: Translate this block
     SI_LUIE_SKILL_GLYPH_HARDENING_TP =                   "Absorbing damage for |cFFFFFF7|r seconds.",
     SI_LUIE_SKILL_GLYPH_WEAKENING_TP =                   "Reduce Weapon and Spell Damage for |cFFFFFF5|r seconds.",
     SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE_TP =               "Increase Weapon and Spell Damage for |cFFFFFF5|r seconds.", -- TODO: Translate this block
@@ -213,11 +212,21 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_GROUND_HEAL_TP =               "Healing every |cFFFFFF<<2>>|r <<2[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_GROUND_AOE_SNARE_TP =          "Taking SUBSTRING every |cFFFFFF<<2>>|r <<2[second/seconds]>> and Movement Speed reduced by |cFFFFFF<<3>>|r%.",
 
+    -- Resistances
+    SI_LUIE_SKILL_GENERIC_PHYSICAL_RESIST_TP =                   "Increase Physical Resistance for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_SPELL_RESIST_NO_DUR_TP =               "Increase Spell Resistance.",
+    SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST =                     "Повышает Физическую и Магическую сопротивляемости на |cffffff<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_NO_DUR_TP =           "Increase Physical and Spell Resistance.",
+    SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_NO_DUR_VALUE_TP =     "Increase Physical and Spell Resistance by |cFFFFFF<<2>>|r.",
+
+    SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_TP =           "Reduce Physical and Spell Resistance for |cFFFFFF<<1>>|r seconds.",
+
     -- Resource Regeneration, Shields
     SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP =           "Increase Health Recovery for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Восстанавливает Магию каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
-    SI_LUIE_SKILL_GENERIC_MGK_REGEN_2_SEC_TP =           "Восстанавливает Магию каждые |cFFFFFF2|r секунды в течение |cFFFFFF<<1>>|r секунд.",
-    SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Восстанавливает Запас сил каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP =                 "Restoring Magicka every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_MGK_REGEN_POTION_TP =          "Restoring Magicka every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP =                "Restoring Stamina every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_STAM_REGEN_POTION_TP =         "Restoring Stamina every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP =      "Поглощение урона.",
     SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP =             "Поглощение урона в течение |cFFFFFF<<1>>|r секунд.", -- TODO: End - Translate this Block
 
@@ -260,13 +269,10 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP =     "Увеличивает стоимость способностей, расходующих Запас сил на |cffffff10|r.%",
 
     -- Generic Stat Buffs
-    SI_LUIE_SKILL_GENERIC_SPELL_DAMAGE_DURATION =        "Увеличивает урон от заклинаний на |cffffff<<1>>|r секунд.",
-    SI_LUIE_SKILL_SET_GENERIC_ARMOR_SPELL_RESIST =       "Повышает Физическую и Магическую сопротивляемости на |cffffff<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_TP = "Увеличивает урон от Оружия и Заклинаний на |cffffff<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_TIME_TP       = "Увеличивает урон от Оружия на |cffffff<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_GENERIC_SPELL_DAMAGE_TIME_TP     = "Увеличивает урон от Заклинаний на |cffffff<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_GENERIC_LA_HA_DAMAGE =             "Ваши обычные и силовые атаки наносят дополнительный урон в течение |cffffff<<1>>|r секунд.",
-    SI_LUIE_SKILL_SET_GENERIC_SPELL_RESIST_TIME_TP     = "Повышает Магическую сопротивляемость на |cffffff<<1>>|r секунд.",
     SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_TP     = "Увеличивает восстановление Магии на |cffffff<<1>>|r секунд.",
 
     SI_LUIE_SKILL_GENERIC_ENRAGE =                       "Increase damage done by |cFFFFFF<<2>>|r% for |cffffff<<1>>|r seconds.",
@@ -389,7 +395,6 @@ local strings = {
     SI_LUIE_SKILL_SOLAR_DISTURBANCE_TP =                 "Enemies in the nova take Magic Damage every |cFFFFFF1|r second, have their Movement Speed reduced by |cffffff70|r%, and have Major Maim applied to them.\n\nMajor Maim persists on enemies who leave the area for |cFFFFFF<<2>>|r seconds.\n\nAn ally near the fragment can activate the |cFFFFFFSupernova|r synergy.",
     SI_LUIE_SKILL_CLEANSING_RITUAL_TP =                  "You and allies in the area are healed every |cFFFFFF2|r seconds.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
     SI_LUIE_SKILL_CLEANSING_RITUAL_RETRIBUTION_TP =      "You and allies in the area are healed every |cFFFFFF2|r seconds, while enemies take Magic Damage every |cFFFFFF2|r seconds.\n\nAllies in the area can activate the |cFFFFFFPurify|r synergy.",
-    SI_LUIE_SKILL_RUNE_FOCUS_BONUS_TP =                  "Increase Physical and Spell Resistance by |cFFFFFF2640|r.",
     SI_LUIE_SKILL_RITE_OF_PASSAGE_TP =                   "Healing you and allies within |cFFFFFF20|r meters every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
 
     -- Warden
@@ -735,7 +740,6 @@ local strings = {
     SI_LUIE_SKILL_SET_GROTHDARR =                        "Enemies within |cFFFFFF8|r meters take Flame Damage every |cFFFFFF1|r секунду в течение |cFFFFFF5|r секунд.",
     SI_LUIE_SKILL_SET_ICEHEART =                         "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nEnemies within |cFFFFFF5|r meters take Frost Damage every |cFFFFFF1|r second while the damage shield holds.", -- TODO: Translate
     SI_LUIE_SKILL_SET_ILAMBRIS =                         "Enemies within |cffffff4|r meters of the meteor shower take <<1>> Damage every |cFFFFFF1|r second.", -- TODO: Translate
-    SI_LUIE_SKILL_SET_LORD_WARDEN_GROUND =               "Increase Physical and Spell Resistance.", -- TODO: Translate
     SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF =                 "You and allies within |cFFFFFF8|r meters of the shadow orb have increased Physical and Spell Resistance.", -- TODO: Translate
     SI_LUIE_SKILL_SET_MALUBETH =                         "Высасывает здоровье каждые |cFFFFFF0.5|r секунды в течение |cFFFFFF4|r секунд, пока луч активен.",
     SI_LUIE_SKILL_SET_MAW_OF_THE_INFERNAL =              "A fire breathing Daedroth fights at your side. The daedroth remains for |cFFFFFF15|r seconds or until killed.", -- TODO: Translate
@@ -815,7 +819,6 @@ local strings = {
     SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "Когда другой игрок поразит эту же цель полностью заряженной Силовой атакой, бомба взорвётся, нанося Магический урон всем противникам в радиусе |cffffff8|r метров.",
     SI_LUIE_SKILL_SET_HEALING_MAGE_TP =                  "Снижает урон от Оружия на |cffffff3|r секунды.",
     SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Повышает Физическое пробитие на |cffffff3|r секунды, суммируется до |cffffff5|r раз.",
-    SI_LUIE_SKILL_SET_ALKOSH_TP =                        "Снижает Физическую и Магическую сопротивляемости на |cffffff10|r секунд.",
     SI_LUIE_SKILL_SET_LUNAR_BASTION_TP =                 "Absorb damage every |cffffff2|r seconds while standing in the lunar blessing.", -- TODO: Translate
     SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP =           "You and allies standing in the circle of might gain Major Courage for |cffffff30|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP =             "Standing in the ring grants you a stack of Siroria's Boon every |cffffff1|r second.", -- TODO: Translate
@@ -828,7 +831,7 @@ local strings = {
 
     -- Imperial City Sets
     SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP =             "Marked for |cffffff15|r seconds.\n\nIf |cffffff6|r Marks of Revenge are applied they detonate for Magic Damage.", -- TODO: Translate
-    SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP =            "Физическая и Магическая сопротивляемости повышены на |cffffff2|r минуты.",
+    SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP =            "Increase Physical and Spell Resistance for |cffffff2|r minutes.", -- TODO: Translate
     SI_LUIE_SKILL_SET_PHOENIX_TP =                       "Вы недавно возродились как феникс и не можете избежать смерти этим способом снова.",
 
     -- Alliance War Sets
@@ -1089,7 +1092,6 @@ local strings = {
     SI_LUIE_SKILL_ENSLAVEMENT_TP =                       "Afflicted with Magic Damage every |cFFFFFF1|r second and Movement Speed gradually reduced over time by up to |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_MOLTEN_ARMAMENTS_NPC_TP =              "Increase Weapon and Spell Damage for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_CINDER_STORM_NPC_TP =                  "Taking Flame Damage every |cffffff1|r second, |cFFFFFF30|r% chance to miss all attacks, and Movement Speed reduced by |cffffff70|r%.",
-    SI_LUIE_SKILL_STONE_GIANT_NPC_TP =                   "Increase Physical Resistance for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_CAUSTIC_ARMOR =                        "Caustic Armor",
     SI_LUIE_SKILL_CORROSIVE_ARMOR_NPC_TP =               "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies suffer |cFFFFFF34|r% reduced Weapon Damage and take Flame Damage and every |cffffff1|r second for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_CORROSIVE_ARMOR_NPC_DEBUFF_TP =        "Taking Flame Damage every |cffffff1|r second and Weapon Damage reduced by |cFFFFFF34|r%.",
