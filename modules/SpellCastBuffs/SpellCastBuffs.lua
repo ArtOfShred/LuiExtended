@@ -3063,16 +3063,18 @@ function SCB.ReloadEffects(unitTag)
                         name = A.Skill_Edge_Keep_Bonus_3
                         stack = 3
                     end
-                    g_effectsList.reticleover1[ A.Skill_Edge_Keep_Bonus_1 ] = {
-                        type=1,
-                        id=id, name=name, icon = icon,
-                        dur=0, starts=1, ends=nil,
-                        forced = "short",
-                        restart=true, iconNum=0,
-                        stack = stack,
-                    }
+                    if not (SCB.SV.BlacklistTable[id] or SCB.SV.BlacklistTable[name]) then
+                        g_effectsList.reticleover1[ A.Skill_Edge_Keep_Bonus_1 ] = {
+                            type=1,
+                            id=id, name=name, icon = icon,
+                            dur=0, starts=1, ends=nil,
+                            forced = "short",
+                            restart=true, iconNum=0,
+                            stack = stack,
+                        }
+                    end
                 end
-                if homeKeep then
+                if homeKeep and not (SCB.SV.BlacklistTable[11346] or SCB.SV.BlacklistTable[A.Skill_Home_Keep_Bonus]) then
                     g_effectsList.reticleover1[ A.Skill_Home_Keep_Bonus ] = {
                     type=1,
                     id=11346, name=A.Skill_Home_Keep_Bonus, icon = "LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds",
@@ -3705,16 +3707,18 @@ function SCB.LoadCyrodiilPlayerBuffs()
                 name = A.Skill_Edge_Keep_Bonus_3
                 stack = 3
             end
-            g_effectsList["player1"][ A.Skill_Edge_Keep_Bonus_1 ] = {
-                target="player", type=1,
-                id=id, name=name, icon = icon,
-                dur=0, starts=1, ends=nil,
-                forced = "long",
-                restart=true, iconNum=0,
-                stack = stack,
-            }
+            if not (SCB.SV.BlacklistTable[id] or SCB.SV.BlacklistTable[name]) then
+                g_effectsList["player1"][ A.Skill_Edge_Keep_Bonus_1 ] = {
+                    target="player", type=1,
+                    id=id, name=name, icon = icon,
+                    dur=0, starts=1, ends=nil,
+                    forced = "long",
+                    restart=true, iconNum=0,
+                    stack = stack,
+                }
+            end
         end
-        if homeKeep then
+        if homeKeep and not (SCB.SV.BlacklistTable[11346] or SCB.SV.BlacklistTable[A.Skill_Home_Keep_Bonus]) then
             g_effectsList["player1"][ A.Skill_Home_Keep_Bonus ] = {
             target = "player", type=1,
             id=11346, name=A.Skill_Home_Keep_Bonus, icon = "LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds",
