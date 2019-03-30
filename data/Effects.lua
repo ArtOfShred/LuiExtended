@@ -32,7 +32,6 @@ E.IsToggle = {
     -- Innate
     [20299] = true, -- Sneak (Innate) -- Used for hidden
     [20301] = true, -- Crouch (Innate) -- Used for invisibility
-    [A.Innate_Disguised] = true, -- Disguised (Innate) -- NOTE: We use this name as the fake ID for the player disguise buff
     [14890] = true, -- Block (Player)
     [40165] = true, -- Scene Choreo Brace (Monster Fight))
     [29761] = true, -- Brace (Guard)

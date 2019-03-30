@@ -3115,7 +3115,7 @@ function SCB.ReloadEffects(unitTag)
             --d("Disguise State: " .. disguiseState )
             if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
                 -- Trigger a buff
-                g_effectsList.reticleover1[ A.Innate_Disguised ] = {
+                g_effectsList.reticleover1[50602] = {
                     type=1,
                     id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                     dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -3124,7 +3124,7 @@ function SCB.ReloadEffects(unitTag)
                 }
             -- Else remove buff
             else
-                g_effectsList.reticleover1[ A.Innate_Disguised ] = nil
+                g_effectsList.reticleover1[50602] = nil
             end
         end
     end
@@ -3559,7 +3559,7 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
     if SCB.SV.DisguiseStatePlayer and unitTag == "player" and not SCB.SV.HidePlayerBuffs then
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             -- Trigger a buff
-            g_effectsList.player1[ A.Innate_Disguised ] = {
+            g_effectsList.player1[50602] = {
                 target ="player", type=1,
                 id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -3569,14 +3569,14 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
 
         -- Else remove buff
         else
-            g_effectsList.player1[ A.Innate_Disguised ] = nil
+            g_effectsList.player1[50602] = nil
         end
     end
 
     if SCB.SV.DisguiseStatePlayer and unitTag == "reticleover" and not SCB.SV.HideTargetBuffs then
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             -- Trigger a buff
-            g_effectsList.reticleover1[ A.Innate_Disguised ] = {
+            g_effectsList.reticleover1[50602] = {
                 type=1,
                 id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -3585,7 +3585,7 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
             }
         -- Else remove buff
         else
-            g_effectsList.reticleover1[ A.Innate_Disguised ] = nil
+            g_effectsList.reticleover1[50602] = nil
         end
     end
 end
@@ -3627,7 +3627,7 @@ function SCB.OnPlayerActivated(eventCode)
         local disguiseState = GetUnitDisguiseState ("player")
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             -- Trigger a buff
-            g_effectsList.player1[ A.Innate_Disguised ] = {
+            g_effectsList.player1[50602] = {
                 target ="player", type=1,
                 id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -3636,7 +3636,7 @@ function SCB.OnPlayerActivated(eventCode)
             }
         -- Else remove buff
         else
-            g_effectsList.player1[ A.Innate_Disguised ] = nil
+            g_effectsList.player1[50602] = nil
         end
     end
 
