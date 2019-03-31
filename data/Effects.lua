@@ -9380,8 +9380,8 @@ E.EffectOverride = {
     [70885] = { hide = true }, -- Miasma
 
     [68195] = { hide = true }, -- Necrotic Orb (Necrotic Orb)
-    [68197] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_necrotic_essence.dds', groundLabel = true, tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1 }, -- Necrotic Essence (Necrotic Orb)
-    [68198] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_necrotic_essence.dds' }, -- Necrotic Explosion (Necrotic Orb)
+    [68197] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_essence.dds', groundLabel = true, tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1 }, -- Necrotic Essence (Necrotic Orb)
+    [68198] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_essence.dds' }, -- Necrotic Explosion (Necrotic Orb)
 
     [44622] = { hide = true }, -- Break Free (Clones)
 
