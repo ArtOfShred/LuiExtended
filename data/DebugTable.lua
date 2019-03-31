@@ -5469,7 +5469,7 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [35658] = true, -- Lycanthrophy
-    --[31068] = true, -- Sanies Lupinus (NPC Bite)
+    [31068] = true, -- Sanies Lupinus (NPC Bite)
     [40521] = true, -- Sanies Lupinus (Player Bite)
 
     [32464] = true, -- Light Attack
@@ -13470,6 +13470,108 @@ LUIE.DebugAuras = {
     [31689] = true, -- Thrall Feast (Vorenor Winterbourne)
     [47120] = true, -- Death of the Suffering (Captive)
     [47118] = true, -- Death of the Suffering (Captive)
+
+    -- Wayrest Sewers I
+    [85732] = true, -- Teleport
+
+    [34846] = true, -- Primal Sweep (Slimecraw)
+    [34847] = true, -- Primal Sweep (Slimecraw)
+    [34848] = true, -- Primal Sweep (Slimecraw)
+    [34849] = true, -- Primal Sweep (Slimecraw)
+
+    [14927] = true, -- Desecrate Soul (Investigator Garron)
+    [14946] = true, -- Tormented summoning (WRBoss3 Invisible Man)
+
+    [11712] = true, -- Death's Embrace (Investigator Garron)
+    [9441] = true, -- Dark Lance (Investigator Garron)
+    [48933] = true, -- Backlash (Investigator Garron)
+    [48932] = true, -- Backlash (Investigator Garron)
+    [25593] = true, -- Summon Necrotic Orb (Investigator Garron)
+    [25585] = true, -- WS_Boss1_Orb (Necrotic Orb)
+    [25586] = true, -- Seeking Orb (Necrotic Orb)
+    [25620] = true, -- Dummy (Necrotic Orb)
+    [25591] = true, -- Necrotic Essence (Necrotic Orb)
+    [25616] = true, -- Necrotic Explosion (Necrotic Orb)
+
+    [9463] = true, -- Summon Restless Souls (Investigator Garron)
+    [35146] = true, -- Dummy (Investigator Garron)
+    [9740] = true, -- Tormented Summoning (Restless Soul)
+    [48208] = true, -- CON_MagicExplosionLarge (Restless Soul)
+    [9481] = true, -- Growing Torment (Restless Soul)
+
+    [12247] = true, -- Terrifying Roar (Uulgarg the Hungry)
+    [58528] = true, -- Terrifying Roar (Uulgarg the Hungry)
+    [35647] = true, -- Nocom (Uulgarg the Hungry)
+
+    [14969] = true, -- Slash (Varaine Pellingare)
+    [25548] = true, -- Smite (Varaine Pellingare)
+    [25550] = true, -- CON_Knockback&Knockdown (Varaine Pellingare)
+    [25549] = true, -- Fire Backlash (Varaine Pellingare)
+
+    [9648] = true, -- Spinning Clave (Varaine Pellingare)
+    [9651] = true, -- Spinning Clave (Varaine Pellingare)
+
+    [36436] = true, -- Dummy (Varaine Pellingare)
+    [25523] = true, -- Tidal Slash (Varaine Pellingare)
+    [36435] = true, -- Tidal Slash (Varaine Pellingare)
+    [25531] = true, -- Tidal Slash (Varaine Pellingare)
+    [25530] = true, -- Tidal Slash (Varaine Pellingare)
+    [36442] = true, -- Tidal Slash (Varaine Pellingare)
+    [36444] = true, -- Tidal Slash (Varaine Pellingare)
+    [9656] = true, -- Poisoned Blade (Varaine Pellingare)
+
+    [11739] = true, -- Strike (Allene Pellingare)
+    [11752] = true, -- Penetrating Daggers (Allene Pellingare)
+    [35051] = true, -- Penetrating Daggers (Allene Pellingare)
+    [35050] = true, -- Penetrating Daggers (Allene Pellingare)
+    [11747] = true, -- Razor Flourish (Allene Pellingare)
+
+    [34991] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35006] = true, -- Hallucinogenic Fumes (Allene Pellingare)
+    [34992] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35012] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [34994] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [34993] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35333] = true, -- CON_SmokeBurst (Fiendish Hallucination)
+    [35003] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35004] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35005] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [34995] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [73034] = true, -- Mind-Bending Mist (Allene Pellingare)
+
+    [35015] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35021] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35025] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35320] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35017] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35020] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35016] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35018] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35019] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35026] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35027] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35022] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [73035] = true, -- Mind-Bending Mist (Allene Pellingare)
+
+    [35028] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35041] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35033] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35322] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35029] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35034] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35035] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35036] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35037] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35038] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35039] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35040] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35042] = true, -- Mind-Bending Mist (Fiendish Hallucination)
+    [35030] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [73036] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35043] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35044] = true, -- Mind-Bending Mist (Allene Pellingare)
+    [35075] = true, -- Ghost Burst (Allene Pellingare)
+    [35107] = true, -- Ghost Burst (Allene Pellingare)
 
     -- Frostvault
     [115316] = true, -- Weatherman

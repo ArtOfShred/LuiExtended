@@ -1137,6 +1137,9 @@ local Tooltips           = {
     Skill_Enervating_Seal                           = GetString(SI_LUIE_SKILL_ENERVATING_SEAL_TP),
     Skill_Blood_Pool                                = GetString(SI_LUIE_SKILL_BLOOD_POOL_TP),
 
+    -- Wayrest Sewers I
+    Skill_Growing_Torment                           = GetString(SI_LUIE_SKILL_GROWING_TORMENT_TP),
+
     -- Frostvault
     Skill_Maim                                      = GetString(SI_LUIE_SKILL_MAIM_NPC_TP),
 

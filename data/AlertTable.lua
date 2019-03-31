@@ -1028,6 +1028,23 @@ local AlertTable = {
 
     [31672] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, refire = 2500 }, -- Thrall Feast (Vorenor Winterbourne)
 
+    -- Wayrest Sewers I
+    [34846] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Primal Sweep (Slimecraw)
+
+    [9441] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Dark Lance (Investigator Garron)
+    [25593] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Summon Necrotic Orb (Investigator Garron)
+    [9740] = { summon = true, priority = 1, auradetect = true, bossName = true }, -- Tormented Summoning (Restless Soul)
+
+    [25548] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Smite (Varaine Pellingare)
+    [9648] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Spinning Cleave (Varaine Pellingare)
+    [36435] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Tidal Slash (Varaine Pellingare)
+    [9656] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Poisoned Blade (Varaine Pellingare)
+
+    [11752] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Penetrating Daggers (Allene Pellingare)
+    [35006] = { power = true, priority = 1, auradetect = true }, -- Hallucinogenic Fumes (Allene Pellingare)
+    [35021] = { power = true, priority = 1, auradetect = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35041] = { power = true, priority = 1, auradetect = true }, -- Mind-Bending Mist (Allene Pellingare)
+
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)
     [117352] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind (Coldsnap Snowstalker)

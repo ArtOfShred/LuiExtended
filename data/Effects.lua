@@ -1557,7 +1557,15 @@ E.AddNameAura = {
 
     [U.NPC_Flesh_Atronach] = { [1] = { id = 33097, zone = 576 } }, -- Flesh Atronach (Spindleclutch II)
     [U.Boss_Urvan_Veleth] = { [1] = { id = 33097 } }, -- Urvan Veleth
-    [U.Boss_Vorenor_Winterbourne] = { [1] = { id = 33097 } }, -- Vorenor_Winterborne
+    [U.Boss_Vorenor_Winterbourne] = { [1] = { id = 33097 } }, -- Vorenor Winterborne
+
+    -- Wayrest Sewers I
+    [U.Boss_Slimecraw] = { [1] = { id = 33097 } }, -- Slimecraw
+    [U.Boss_Investigator_Garron] = { [1] = { id = 33097 } }, -- Investigator Garron
+    [U.Boss_Uulgarg_the_Hungry] = { [1] = { id = 33097 } }, -- Uulgarg the Hungry
+    [U.Boss_the_Rat_Whisperer] = { [1] = { id = 33097 } }, -- The Rat Whisperer
+    [U.Boss_Varaine_Pellingare] = { [1] = { id = 33097 } }, -- Varaine Pellingare
+    [U.Boss_Allene_Pellingare] = { [1] = { id = 33097 } }, -- Allene Pellingare
 
     -- Frostvault
     [U.NPC_Coldsnap_Ogre] = { [1] = { id = 33097 } }, -- Coldsnap Ogre
@@ -6351,9 +6359,9 @@ E.EffectOverride = {
     [44216] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds' }, -- Negate Magic (Battlemage)
     [50108] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0, tooltip = T.Generic_Silence_No_Dur, groundLabel = true }, -- Negate Magic (Battlemage)
     [50107] = { icon = 'esoui/art/icons/ability_sorcerer_monsoon.dds', duration = 0, tooltip = T.Generic_Stun_No_Dur, groundLabel = true }, -- Negate Magic (Battlemage)
-    [37126] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_magic_ranged.dds' }, -- Entropic Flare (Timb Bomb Mage)
-    [36986] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_magic_aoe.dds' }, -- Void (Time Bomb Mage)
-    [14370] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_magic_aoe.dds' }, -- Void (Time Bomb Mage)
+    [37126] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_magic_ranged.dds' }, -- Entropic Flare (Timb Bomb Mage)
+    [36986] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_magic_aoe.dds' }, -- Void (Time Bomb Mage)
+    [14370] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_magic_aoe.dds' }, -- Void (Time Bomb Mage)
     [56828] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_fright_force_p.dds', hide = true }, -- Fright Force (Fear Mage)
     [14350] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_aspect_of_terror_p.dds', hide = true }, -- Aspect of Terror (Fear Mage)
     [37084] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_aspect_of_terror_p.dds', tooltip = T.Generic_Fear }, -- Aspect of Terror (Fear Mage)
@@ -10201,6 +10209,94 @@ E.EffectOverride = {
 
     [31672] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Thrall Feast (Vorenor Winterbourne)
 
+    -- Wayrest Sewers I
+    [34846] = { icon = 'LuiExtended/media/icons/abilities/ability_crocodile_primal_sweep.dds' }, -- Primal Sweep (Slimecraw)
+    [34847] = { icon = 'LuiExtended/media/icons/abilities/ability_crocodile_primal_sweep.dds' }, -- Primal Sweep (Slimecraw)
+    [34848] = { icon = 'LuiExtended/media/icons/abilities/ability_crocodile_primal_sweep.dds', tooltip = T.Generic_Knockback }, -- Primal Sweep (Slimecraw)
+    [34849] = { icon = 'LuiExtended/media/icons/abilities/ability_crocodile_primal_sweep.dds' }, -- Primal Sweep (Slimecraw)
+
+    [14946] = { hide = true }, -- Tormented summoning (WRBoss3 Invisible Man)
+
+    [11712] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_deaths_embrace.dds' }, -- Death's Embrace (Investigator Garron)
+
+    [9441] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_death_bolt.dds' }, -- Dark Lance (Investigator Garron)
+    [48933] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_death_bolt.dds', name = A.Skill_Dark_Lance, hide = true }, -- Backlash (Investigator Garron)
+    [48932] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_death_bolt.dds', name = A.Skill_Dark_Lance, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Backlash (Investigator Garron)
+
+    [25593] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_essence.dds' }, -- Necrotic Essence (Investigator Garron)
+    [25586] = { hide = true }, -- Seeking Orb (Necrotic Orb)
+    [25591] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_essence.dds', groundLabel = true, tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1 }, -- Necrotic Essence (Necrotic Orb)
+    [25616] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_essence.dds' }, -- Necrotic Explosion (Necrotic Orb)
+
+    [9740] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_summon_restless_souls.dds', name = A.Skill_Summon_Restless_Souls, hide = true }, -- Summon Restless Souls (Investigator Garron)
+    [9481] = { icon = 'esoui/art/icons/ability_mage_003.dds', tooltip = T.Skill_Growing_Torment }, -- Growing Torment (Restless Soul)
+
+    [12247] = { hide = true }, -- Terrifying Roar (Uulgarg the Hungry)
+    [58528] = { icon = 'esoui/art/icons/ability_warrior_031.dds', tooltip = T.Generic_Fear }, -- Terrifying Roar (Uulgarg the Hungry)
+
+    [14969] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Slash (Varaine Pellingare)
+
+    [25548] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds', name = A.Skill_Crushing_Blow }, -- Smite (Varaine Pellingare)
+    [25550] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds', name = A.Skill_Crushing_Blow, tooltip = T.Generic_Knockback }, -- CON_Knockback&Knockdown (Varaine Pellingare)
+    [25549] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds', name = A.Skill_Crushing_Blow, hide = true }, -- Fire Backlash (Varaine Pellingare)
+
+    [9648] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_brands_cleave.dds' }, -- Spinning Cleave (Varaine Pellingare)
+    [9651] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_brands_cleave.dds', tooltip = T.Generic_Knockdown }, -- Spinning Cleave (Varaine Pellingare)
+
+    [36435] = { icon = 'esoui/art/icons/ability_warrior_004.dds' }, -- Tidal Slash (Varaine Pellingare)
+    [25531] = { icon = 'esoui/art/icons/ability_warrior_004.dds', unbreakable = 1, tooltip = T.Generic_Knockback }, -- Tidal Slash (Varaine Pellingare)
+    [25530] = { icon = 'esoui/art/icons/ability_warrior_004.dds' }, -- Tidal Slash (Varaine Pellingare)
+    [36442] = { icon = 'esoui/art/icons/ability_warrior_004.dds' }, -- Tidal Slash (Varaine Pellingare)
+    [36444] = { icon = 'esoui/art/icons/ability_warrior_004.dds' }, -- Tidal Slash (Varaine Pellingare)
+
+    [9656] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_poisoned_blade.dds', hide = true }, -- Poisoned Blade (Varaine Pellingare)
+
+    [11739] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Strike (Allene Pellingare)
+
+    [11752] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut }, -- Penetrating Daggers (Allene Pellingare)
+    [35051] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut, tooltip = T.Generic_Knockback, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Penetrating Daggers (Allene Pellingare)
+    [35050] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut, hide = true }, -- Penetrating Daggers (Allene Pellingare)
+
+    [11747] = { icon = 'esoui/art/icons/ability_rogue_051.dds' }, -- Razor Flourish
+
+    [34991] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35006] = { hide = true, icon = 'esoui/art/icons/ability_rogue_054.dds' }, -- Hallucinogenic Fumes (Allene Pellingare)
+    [34992] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35012] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [34994] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [34995] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [73034] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+
+    [35015] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35021] = { hide = true, icon = 'esoui/art/icons/ability_rogue_054.dds', name = A.Skill_Hallucinogenic_Fumes }, -- Mind-Bending Mist (Allene Pellingare)
+    [35025] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35320] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35017] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35022] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [73035] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+
+    [35028] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35041] = { hide = true, icon = 'esoui/art/icons/ability_rogue_054.dds', name = A.Skill_Hallucinogenic_Fumes }, -- Mind-Bending Mist (Allene Pellingare)
+    [35033] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35322] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35029] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35030] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [73036] = { hide = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35107] = { icon = 'esoui/art/icons/ability_rogue_053.dds' }, -- Ghost Burst (Allene Pellingare)
+
+
+
+
+
+
+    -- temporary gap here just for ease of editing
+    -- temporary gap here just for ease of editing
+    -- temporary gap here just for ease of editing
+    -- temporary gap here just for ease of editing
+    -- temporary gap here just for ease of editing
+
+
+
     -- Frostvault
     [117286] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', hide = true }, -- Rending Bleed (Coldsnap Goblin - Shared)
     [117486] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = A.Skill_Rending_Bleed, unbreakable = 1, tooltip = T.Generic_Bleed, tooltipValue2 = 2 }, -- Bleed (Coldsnap Goblin - Shared)
@@ -10537,6 +10633,10 @@ E.FakeExternalDebuffs = {
     [43176] = { duration = 1200 }, -- Shocked (Blood Essence)
     [61444] = { duration = 1200 }, -- Shocked (Blood Essence)
     [32100] = { duration = 3500 }, -- Arachnophobia (Vorenor Winterbourne)
+
+    -- Wayrest Sewers I
+    [34848] = { duration = 2000 }, -- Primal Sweep (Slimecraw)
+    [25531] = { duration = 2000 }, -- Tidal Slash (Varaine Pellingare)
 
     -- Frostvault
     [117486] = { duration = 18000 }, -- Bleed (Coldsnap Goblin - Shared)
@@ -11057,6 +11157,9 @@ E.AddGroundDamageAura = {
     -- Spindleclutch II
     [27603] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Blood Pool (Urvan Veleth)
     [27906] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Blood Pool (Vorenor Winterbourne)
+
+    -- Wayrest Sewers I
+    [25591] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Necrotic Essence (Necrotic Orb)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

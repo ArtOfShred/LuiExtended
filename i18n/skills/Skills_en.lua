@@ -1126,6 +1126,7 @@ local strings = {
     SI_LUIE_SKILL_ARENA_TORCH =                          "Arena Torch",
     SI_LUIE_SKILL_TORCH_GRAB_TP =                        "Carrying a torch and silenced for |cFFFFFF<<1>>|r seconds, you can use the torch to reignite a bonfire.",
     SI_LUIE_SKILL_WARMING_AURA_TP =                      "Protected from Biting Cold by the warmth of a bonfire.",
+    SI_LUIE_SKILL_GROWING_TORMENT_TP =                   "Increase damage done by |cFFFFFF6|r% per stack.",
 }
 
 local pairs = pairs

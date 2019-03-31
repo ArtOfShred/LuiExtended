@@ -1240,6 +1240,11 @@ local AbilityTables = {
     Skill_Harrowing_Ring              = 27703,
     Skill_Wracking_Pain               = GetString(SI_LUIE_SKILL_WRACKING_PAIN),
 
+    -- Wayrest Sewers I
+    Skill_Dark_Lance                  = 9441,
+    Skill_Summon_Restless_Souls       = 9463,
+    Skill_Hallucinogenic_Fumes        = 35006,
+
     -- Frostvault
     Skill_Rending_Bleed               = 117286,
     Skill_Leaping_Crush               = 109801,

@@ -167,6 +167,14 @@ local UnitNames = {
     Boss_Urvan_Veleth                     = 'Urvan Veleth',
     Boss_Vorenor_Winterbourne             = 'Vorenor Winterbourne',
 
+    -- Wayrest Sewers I
+    Boss_Slimecraw                        = 'Slimecraw',
+    Boss_Investigator_Garron              = 'Investigator Garron',
+    Boss_Uulgarg_the_Hungry               = 'Uulgarg the Hungry',
+    Boss_the_Rat_Whisperer                = 'The Rat Whisperer',
+    Boss_Varaine_Pellingare               = 'Varaine Pellingare',
+    Boss_Allene_Pellingare                = 'Allene Pellingare',
+
     -- Frostvault
     NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre',
     Boss_Icestalker                       = 'Icestalker',
