@@ -277,6 +277,8 @@ local strings = {
 
     SI_LUIE_SKILL_GENERIC_ENRAGE =                       "Increase damage done by |cFFFFFF<<2>>|r% for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_ENRAGE_NO_DUR =                "Increase damage done by |cFFFFFF<<2>>|r%.",
+    SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_TAKEN_NO_DUR =   "Increase damage done by |cFFFFFF<<2>>|r% and increase damage taken by |cFFFFFF<<3>>|r%.",
+    SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_REDUCE_NO_DUR =  "Increase damage done by cFFFFFF<<2>>|r% and reduce damage taken by |cFFFFFF<<3>>|r%.",
 
     ----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------
@@ -677,7 +679,7 @@ local strings = {
     SI_LUIE_SKILL_GUARD_DETECTION_TP =                   "Guards are particularly vigilant and can see nearby players that are hiding in stealth.",
     SI_LUIE_SKILL_BLESSING_OF_WAR_TP =                   "Increase Alliance Points earned by |cFFFFFF20|r% for |cFFFFFF1|r hour.\n\nOnly active while in Cyrodiil or Cyrodiil delves.",
     SI_LUIE_SKILL_PUNCTURE_CYRODIIL_TP =                 "Increase damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_RAZOR_ARMOR_TP =                       "Decrease damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.\n\nWhile active the armor returns Physical Damage to attackers.",
+    SI_LUIE_SKILL_RAZOR_ARMOR_TP =                       "Reduce damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.\n\nWhile active the armor returns Physical Damage to attackers.",
     SI_LUIE_SKILL_PUNCTURING_CHAINS_TP =                 "Increase damage taken by |cFFFFFF21.5|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP =            "Your single target ranged abilities are reflected back on you for |cFFFFFF<<1>>|r seconds.\n\nThe core explodes when this effect ends, dealing Magic Damage.",
     SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP =        "Disoriented for |cffffff<<1>>|r <<1[second/seconds]>>.\n\nThe prison shatters when this effect ends, dealing Magic Damage.",
@@ -1127,6 +1129,12 @@ local strings = {
     SI_LUIE_SKILL_TORCH_GRAB_TP =                        "Carrying a torch and silenced for |cFFFFFF<<1>>|r seconds, you can use the torch to reignite a bonfire.",
     SI_LUIE_SKILL_WARMING_AURA_TP =                      "Protected from Biting Cold by the warmth of a bonfire.",
     SI_LUIE_SKILL_GROWING_TORMENT_TP =                   "Increase damage done by |cFFFFFF6|r% per stack.",
+    SI_LUIE_SKILL_DEFENSIVE_PROTOCOL =                   "Defensive Protocol",
+    SI_LUIE_SKILL_DEFENSIVE_PROTOCOL_TP =                "Absorbing damage and unable to take any action, while nearby enemies take Shock Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_OVERCHARGED_DWEMER_TP =                "Striking distant enemies with boltsm dealing Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_OVERHEATED_DWEMER_TP =                 "Venting flames, dealing Flame Damage to nearby enemies every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_VENTING_FLAMES =                       "Venting Flames",
+    SI_LUIE_SKILL_STATIC_CHARGE_TP =                     "Nearby enemies take Shock Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds."
 }
 
 local pairs = pairs

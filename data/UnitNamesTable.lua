@@ -68,6 +68,14 @@ local UnitNames = {
 
     -- Maelstrom Arena
     Boss_Maxus_the_Many                   = 'Maxus the Many',
+    NPC_Clockwork_Sentry                  = 'Clockwork Sentry',
+    NPC_Queens_Pet                        = 'Queen\'s Pet',
+    NPC_Queens_Champion                   = 'Queen\'s Champion',
+    NPC_Queens_Advisor                    = 'Queen\'s Advisor',
+    Boss_Lamia_Queen                      = 'Lamia Queen',
+    NPC_Dwarven_Spider                    = 'Dwarven Spider',
+    Boss_The_Control_Guardian             = 'The Control Guardian',
+    NPC_Scavenger_Thunder_Smith           = 'Scavenger Thunder-Smith',
 
     ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------

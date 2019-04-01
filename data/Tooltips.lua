@@ -116,6 +116,8 @@ local Tooltips           = {
 
     Generic_Enrage                                  = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE),
     Generic_Enrage_No_Dur                           = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_NO_DUR),
+    Generic_Enrage_Damage_Taken_No_Dur              = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_TAKEN_NO_DUR),
+    Generic_Enrage_Damage_Reduce_No_Dur             = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_REDUCE_NO_DUR),
 
     -- Resistances
     Generic_Physical_Resist                         = GetString(SI_LUIE_SKILL_GENERIC_PHYSICAL_RESIST_TP),
@@ -1085,6 +1087,10 @@ local Tooltips           = {
     Skill_Sigil_of_Defense                          = GetString(SI_LUIE_SKILL_SIGIL_OF_DEFENSE_TP),
 
     Skill_Defiled_Grave                             = GetString(SI_LUIE_SKILL_DEFILED_GRAVE_TP),
+    Skill_Defensive_Protocol                        = GetString(SI_LUIE_SKILL_DEFENSIVE_PROTOCOL_TP),
+    Skill_Overcharged                               = GetString(SI_LUIE_SKILL_OVERCHARGED_DWEMER_TP),
+    Skill_Overheated                                = GetString(SI_LUIE_SKILL_OVERHEATED_DWEMER_TP),
+    Skill_Static_Charge                             = GetString(SI_LUIE_SKILL_STATIC_CHARGE_TP),
 
     ----------------------------------------------------------------
     -- DUNGEONS ------------------------------------------------------

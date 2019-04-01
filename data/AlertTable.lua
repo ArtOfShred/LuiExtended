@@ -796,12 +796,41 @@ local AlertTable = {
 
     -- Maelstrom Arena
 
+    -- Stage 1 - Vale of the Surreal
     [70892] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Bone Cage (Maxus the Many)
     [72148] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Bone Cage (Maxus the Many)
     [67765] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Multiply (Maxus the Many)
     [67656] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Multiply (Maxus the Many)
     [69515] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Multiply (Maxus the Many)
     [67691] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Reunite (Maxus the Many)
+
+    -- Stage 2 - Seht's Balcony
+    --[71047] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunderbolt (Clockwork Sentry)
+    [72067] = { power = true, priority = 2, auradetect = true }, -- Energizing (Clockwork Sentry)
+    [69364] = { avoid = true, priority = 1, auradetect = true }, -- Barrage Function (Centurion Champion)
+    [66904] = { power = true, priority = 1, auradetect = true }, -- Full Defense (Centurion Champion)
+
+    -- Stage 3 - The Drome of Toxic Shock
+    [67635] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Shock Water (Lamia Queen)
+    [67757] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Queen's Poison (Lamia Queen)
+    [68357] = { power = true, priority = 1, auradetect = true }, -- Queen's Radiance (Lamia Queen)
+    [73876] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1000 }, -- Piercing Shriek (Lamia Queen)
+
+    -- Stage 4 - Seht's Flywheel
+    [71045] = { power = true, priority = 1, auradetect = true }, -- Turret Mode (Clockwork Sentry)
+    [71050] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Static Shield (Clockwork Sentry)
+    [69268] = { power = true, priority = 1, auradetect = true }, -- Enrage (Achelir)
+
+    [72157] = { power = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.NPC_Dwarven_Spider }, -- Static Field (Dwarven Spider)
+    [72166] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Overcharge (Dwarven Spider)
+    [72174] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Overcharge (Dwarven Spider)
+
+    [68524] = { power = true, priority = 1, auradetect = true }, -- Overcharged (The Control Guardian)
+    [68539] = { power = true, priority = 1, auradetect = true }, -- Overheated (The Control Guardian)
+
+    [72195] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Thunder Hammer (Scavenger Thunder-Smith)
+    [72198] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Wrecking Blow (Scavenger Thunder-Smith)
+    [72202] = { avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = U.NPC_Scavenger_Thunder_Smith }, -- Overcharge (Scavenger Thunder-Smith)
 
     --------------------------------------------------
     -- DUNGEONS --------------------------------------

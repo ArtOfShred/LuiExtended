@@ -12042,6 +12042,149 @@ LUIE.DebugAuras = {
     [67739] = true, -- Shadow Heal (Maxus the Many)
     [72086] = true, -- Shadow Strength (Maxus the Many)
 
+    -- Round 2 - Seht's Balcony
+    --[69018] = true, -- Generator (Generator)
+    [69020] = true, -- Attack (Generator)
+    [72722] = true, -- Knock Back (Generator)
+    [69101] = true, -- Shock (Generator)
+    [72688] = true, -- Knock Back FX (Generator)
+    [72690] = true, -- Overload (Generator)
+    [72686] = true, -- Overload (Generator)
+    [72736] = true, -- Overload 2 (Generator)
+
+    [66793] = true, -- Blade Trap (Blade Trap)
+    [71198] = true, -- Stun (Blade Trap)
+    [73871] = true, -- Generic NPC 115% Speed (Blade Trap)
+    [66797] = true, -- Spinning Blade (Blade Trap)
+    [72414] = true, -- Serrated Blade (Blade Trap)
+    [72413] = true, -- Serrated Blade (Blade Trap)
+
+    [72489] = true, -- Heal (Generator)
+    [72036] = true, -- Stopped Blades (Blade Trap)
+    [72419] = true, -- Stopped Blades (Blade Trap)
+    [69102] = true, -- Heal (Generator)
+    [69149] = true, -- Reset Switches (Generator)
+
+    [73119] = true, -- NPC 50% Speed (Clockwork Sentry)
+    [73116] = true, -- Sentry Snare (Clockwork Sentry)
+    [71047] = true, -- Thunderbolt (Clockwork Sentry)
+    [71048] = true, -- Thunderbolt (Clockwork Sentry)
+    [72067] = true, -- Energizing (Clockwork Sentry)
+
+    [67182] = true, -- Silver (Centurion Champion)
+    [72589] = true, -- Portal Spawn (Centurion Champion)
+    [72591] = true, -- Portal Spawn (Centurion Champion)
+    [72592] = true, -- Portal Spawn (Centurion Champion)
+    [72590] = true, -- Portal Spawn (Centurion Champion)
+    [67203] = true, -- Gold (Centurion Champion)
+    [72599] = true, -- Portal Spawn (Centurion Champion)
+    [72602] = true, -- Portal Spawn (Centurion Champion)
+    [72601] = true, -- Portal Spawn (Centurion Champion)
+    [72603] = true, -- Portal Spawn (Centurion Champion)
+    [67207] = true, -- Copper (Centurion Champion)
+    [72600] = true, -- Portal Spawn (Centurion Champion)
+    [72605] = true, -- Portal Spawn (Centurion Champion)
+    [72604] = true, -- Portal Spawn (Centurion Champion)
+    [72606] = true, -- Portal Spawn (Centurion Champion)
+
+    [69364] = true, -- Barrage Function (Centurion Champion)
+    [69369] = true, -- Barrage Function (Centurion Champion)
+    [69367] = true, -- Barrage Function (Centurion Champion)
+    [69368] = true, -- Barrage Function (Centurion Champion)
+    [69371] = true, -- Barrage Function (Centurion Champion)
+    [69366] = true, -- Barrage Function (Centurion Champion)
+
+    [67030] = true, -- Defense Mode (Centurion Champion)
+    [66904] = true, -- Full Defense (Centurion Champion)
+    [69317] = true, -- Sheild (Centurion Champion)
+    [66905] = true, -- Full Defense (Centurion Champion)
+    [69316] = true, -- Electric Shield (Centurion Champion)
+    [68819] = true, -- Full Defense (Centurion Champion)
+
+    [67625] = true, -- Lamia Queen (Lamia Queen)
+    [67574] = true, -- Shock (Water)
+    [67869] = true, -- Electric Water (Water)
+    [67635] = true, -- Shock Water (Lamia Queen)
+    [67871] = true, -- Shock (Water)
+
+    [73882] = true, -- Lightning g (Lamia Queen)
+    [67757] = true, -- Queen's Poison (Lamia Queen)
+    [67760] = true, -- CON_AOE_Template (Lamia Queen)
+    [67759] = true, -- CON_AOE_Template (Lamia Queen)
+    [67758] = true, -- Queen's Poison (Lamia Queen)
+
+    [68357] = true, -- Queen's Radiance (Lamia Queen)
+    [68358] = true, -- Queen's Radiance (Lamia Queen)
+    [68382] = true, -- Grand Healing Fx (Lamia Queen)
+
+    [76094] = true, -- Spit (Strangler)
+    [76147] = true, -- Snared (Stangler)
+
+    [21646] = true, -- Clawed Swipe (Lamia Queen)
+    [73876] = true, -- Piercing Shriek (Lamia Queen)
+    [73878] = true, -- Piercing Shriek (Lamia Queen)
+    [73877] = true, -- Piercing Shriek (Lamia Queen)
+    [73987] = true, -- No Scream Knockdown (Lamia Queen)
+
+    -- Stage 4 - Seht's Flywheel
+    [71044] = true, -- Turret Occupied
+    [71045] = true, -- Turret Mode (Clockwork Sentry)
+    [71050] = true, -- Static Shield (Clockwork Sentry)
+    [71052] = true, -- Static Shield Explosion (Clockwork Sentry)
+    [71053] = true, -- Static Shield (Clockwork Sentry)
+
+    [69268] = true, -- Enrage (Achelir)
+    [69269] = true, -- Enrage (Achelir)
+
+    [72157] = true, -- Static Field (Dwarven Spider)
+    [72159] = true, -- Static Field (Dwarven Spider)
+    [72164] = true, -- tell others (Dwarven Spider)
+    [72160] = true, -- Static Field (Dwarven Spider)
+    [72165] = true, -- Overcharge Trigger (Dwarven Spider)
+    [72163] = true, -- Overcharge (Dwarven Spider)
+    [72178] = true, -- Overcharge (Dwarven Spider)
+    [72171] = true, -- Overcharge (Dwarven Spider)
+    [72179] = true, -- Overcharge (Dwarven Spider)
+    [72172] = true, -- Overcharge Trigger (Dwarven Spider)
+    [72169] = true, -- Overcharge (Dwarven Spider)
+
+    [72166] = true, -- Overcharge (Dwarven Spider)
+    [72174] = true, -- Overcharge (Dwarven Spider)
+    [72167] = true, -- Overcharge (Dwarven Spider)
+    [72175] = true, -- Overcharge (Dwarven Spider)
+    [72176] = true, -- Overcharge (Dwarven Spider)
+
+    [59858] = true, -- Generic Sphere Drop to Combat
+
+    [68662] = true, -- Intro Stun (The Control Guardian)
+    [68665] = true, -- Recovery (The Control Guardian)
+
+    [68524] = true, -- Overcharged (The Control Guardian)
+    [69088] = true, -- Overcharge (The Control Guardian)
+    [69087] = true, -- Static Field (The Control Guardian)
+    [69086] = true, -- Overcharge (The Control Guardian)
+    [69098] = true, -- Overcharge Trigger (The Control Guardian)
+    [68538] = true, -- Overchaged Bolt (The Control Guardian)
+    [68537] = true, -- Overchaged Bolt (The Control Guardian)
+
+    [70829] = true, -- Overcharged Cooldown (The Control Guardian)
+    [68539] = true, -- Overheated (The Control Guardian)
+    [70861] = true, -- Overheating (The Control Guardian)
+    [71109] = true, -- Fire FX (The Control Guardian)
+    [72208] = true, -- Rooted (The Control Guardian)
+    [70860] = true, -- Overheated Flame (The Control Guardian)
+
+    [72197] = true, -- Quick Strike (Scavenger Thunder-Smith)
+    [72195] = true, -- Thunder Hammer (Scavenger Thunder-Smith)
+    [72196] = true, -- Thunder Hammer (Scavenger Thunder-Smith)
+    [72198] = true, -- Wrecking Blow (Scavenger Thunder-Smith)
+    [72200] = true, -- Wrecking Blow (Scavenger Thunder-Smith)
+    [72201] = true, -- Wrecking Blow (Scavenger Thunder-Smith)
+    [72204] = true, -- Streak (Scavenger Thunder-Smith)
+    [72206] = true, -- Streak (Scavenger Thunder-Smith)
+    [72202] = true, -- Overcharge (Scavenger Thunder-Smith)
+    [72203] = true, -- Overcharge (Scavenger Thunder-Smith)
+
     -------------------------------------
     -- DUNGEONS -------------------------
     -------------------------------------

@@ -1454,17 +1454,23 @@ E.AddNameAura = {
     [U.Boss_Anala_tuwha] = { [1] = { id = 33097 } }, -- Anal'a Tu'wha
     [U.NPC_Pacthunter_Ranger] = { [1] = { id = 33097 } }, -- Pacthunter Ranger
     [U.Boss_Pishna_Longshot] = { [1] = { id = 33097 } }, -- Pishna Longshot
-    [U.Boss_Shadow_Knight] = { [1] = { id = 33097, zone = 363 } }, -- Shadow Knight
-    [U.Boss_Dark_Mage] = { [1] = { id = 33097, zone = 363 } }, -- Dark Mage
-    [U.NPC_Dwarven_Fire_Centurion] = { [1] = { id = 33097, zone = 363 } }, -- Dwarven Fire Centurion
-    [U.Boss_Mavus_Talnarith] =  { [1] = { id = 33097, zone = 363 } }, -- Mavus Talnarith
-    [U.Boss_Zackael_Jonnicent] =  { [1] = { id = 33097, zone = 363 } }, -- Zackael Jonnicent
-    [U.Boss_Rubyn_Jonnicent] =  { [1] = { id = 33097, zone = 363 } }, -- Rubyn Jonnicent
-    [U.Boss_Vampire_Lord_Thisa] =  { [1] = { id = 33097, zone = 363 } }, -- Vampire Lord Thisa
-    [U.Boss_Hiath_the_Battlemaster] =  { [1] = { id = 33097, zone = 363 } }, -- Hiath the Battlemaster
+    [U.Boss_Shadow_Knight] = { [1] = { id = 33097, zone = 363 } }, -- Shadow Knight (Dragonstar Arena)
+    [U.Boss_Dark_Mage] = { [1] = { id = 33097, zone = 363 } }, -- Dark Mage (Dragonstar Arena)
+    [U.NPC_Dwarven_Fire_Centurion] = { [1] = { id = 33097, zone = 363 } }, -- Dwarven Fire Centurion (Dragonstar Arena)
+    [U.Boss_Mavus_Talnarith] =  { [1] = { id = 33097 } }, -- Mavus Talnarith
+    [U.Boss_Zackael_Jonnicent] =  { [1] = { id = 33097 } }, -- Zackael Jonnicent
+    [U.Boss_Rubyn_Jonnicent] =  { [1] = { id = 33097 } }, -- Rubyn Jonnicent
+    [U.Boss_Vampire_Lord_Thisa] =  { [1] = { id = 33097 } }, -- Vampire Lord Thisa
+    [U.Boss_Hiath_the_Battlemaster] =  { [1] = { id = 33097 } }, -- Hiath the Battlemaster
 
     -- Maelstrom Arena
     [U.Boss_Maxus_the_Many] = { [1] = { id = 33097 } }, -- Maxus the Many
+    [U.NPC_Clockwork_Sentry] = { [1] = { id = 33097, zone = 4294967296 } }, -- Clockwork Sentry (Maelstrom Arena)
+    [U.NPC_Queens_Pet] = { [1] = { id = 33097, zone = 4294967296 } }, -- Queen's Pet (Maelstrom Arena)
+    [U.NPC_Queens_Champion] = { [1] = { id = 33097, zone = 4294967296 } }, -- Queen's Champion (Maelstrom Arena)
+    [U.NPC_Queens_Advisor] = { [1] = { id = 33097, zone = 4294967296 } }, -- Queen's Advisor (Maelstrom Arena)
+    [U.Boss_Lamia_Queen] = { [1] = { id = 33097, zone = 4294967296 } }, -- Lamia Queen (Maelstrom Arena)
+    [U.Boss_The_Control_Guardian] = { [1] = { id = 33097 } }, -- The Control Guardian
 
     --------------------------------------------
     -- DUNGEONS --------------------------------
@@ -1915,6 +1921,9 @@ E.EffectSourceOverride = {
     -- Dragonstar Arena
     [55182] = { source = U.Boss_Hiath_the_Battlemaster }, -- Marked for Death (Hiath the Battlemaster)
 
+    -- Maelstrom Arena
+    [67871] = { source = U.Boss_Lamia_Queen }, -- Shock (Water)
+
     -----------------------------------------------
     -- DUNGEONS
     -----------------------------------------------
@@ -2203,6 +2212,7 @@ E.EffectHideSCT = {
 
     -- Maelstrom Arena
     [71729] = true, -- Sigil of Defense (Sigil of Defense)
+    [72200] = true, -- Wrecking Blow (Scavenger Thunder-Smith)
 
     ----------------------------
     -- Dungeons
@@ -2437,7 +2447,7 @@ E.EffectOverride = {
     -- hide = true -- Hide this aura from appearing
     -- type = 1 or BUFF_EFFECT_TYPE_DEBUFF -- Adjust this effect to be a debuff or not a debuff to fix API errors (Commonly used as most undispellable debuffs show as a buff)
     -- duration = # modify the duration display of this effect. Option 1 - Set a negative value - to subtract x seconds from the duration of the effect. Option 2 - Set to 0 to display the buff for an unlimited amount of time until an action result of fade occurs.
-    -- unbreakable = true -- flag this aura as unremoveable and change border color to grey for debuffs or cyan for buffs
+    -- unbreakable = 1 -- flag this aura as unremoveable and change border color to grey for debuffs or cyan for buffs
     -- forcedContainer = 'short' or 'long' - Forces a buff to appear in one of these containers
     -- consolidate = true -- If the menu option to consolidate buffs is enabled, this auras will be hidden.
     -- consolidateExtra = true -- If the menu option to consolidate buffs for Single Auras as well is enabled, this auras will be hidden
@@ -9405,6 +9415,103 @@ E.EffectOverride = {
 
     [72086] = { hide = true }, -- Shadow Strength (Maxus the Many)
 
+    -- Round 2 - Seht's Balcony
+    [69018] = { hide = true }, -- Generator (Generator)
+
+    [69101] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe_alt.dds', groundLabel = true, tooltip = T.Generic_AOE_Shock, tooltipValue2 = 0.5 }, -- Shock (Generator)
+    [72690] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_overcharge.dds' }, -- Overload (Generator)
+    [72686] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_overcharge.dds', hide = true }, -- Overload (Generator)
+    [72736] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_overcharge.dds', name = A.Skill_Overload, tooltip = T.Generic_Knockback }, -- Overload 2 (Generator)
+
+    [71198] = { hide = true }, -- Stun (Blade Trap)
+    [66797] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Blade_Trap, hide = true, groundLabel = true, tooltip = T.Generic_AOE_Physical, tooltipValue2 = 0.25 }, -- Spinning Blade (Blade Trap)
+    [72414] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Blade_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, stack = 0, tooltip = T.Generic_Bleed, tooltipValue2 = 1 }, -- Serrated Blade (Blade Trap)
+    [72413] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Blade_Trap }, -- Serrated Blade (Blade Trap)
+
+    [72489] = { hide = true }, -- Heal (Generator)
+    [69149] = { hide = true }, -- Reset Switches (Generator)
+    [69102] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_generator_heal.dds', groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 0.5 }, -- Heal (Generator)
+
+    [73119] = { hide = true }, -- NPC 50% Speed (Clockwork Sentry)
+    --[71047] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds' }, -- Thunderbolt (Clockwork Sentry)
+    [71048] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds' }, -- Thunderbolt (Clockwork Sentry)
+    [72067] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_energizing.dds', name = A.Skill_Energized, stack = 0, tooltip = T.Generic_Enrage_No_Dur, tooltipValue2 = 75 }, -- Energizing (Clockwork Sentry)
+
+    [72591] = { hide = true }, -- Portal Spawn
+    [72602] = { hide = true }, -- Portal Spawn
+    [72605] = { hide = true }, -- Portal Spawn
+    [69364] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_barrage_function.dds', hide = true }, -- Barrage Function (Centurion Champion)
+    [69366] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_barrage_function.dds' }, -- Barrage Function (Centurion Champion)
+
+    [66904] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', name = A.Skill_Defensive_Protocol, tooltip = T.Skill_Defensive_Protocol }, -- Full Defense (Centurion Champion)
+    [69317] = { hide = true }, -- Sheild (Centurion Champion)
+    [66905] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', name = A.Skill_Defensive_Protocol }, -- Full Defense (Centurion Champion)
+    [69316] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', name = A.Skill_Defensive_Protocol, groundLabel = true, tooltip = T.Generic_AOE_Shock, tooltipValue2 = 0.5 }, -- Electric Shield (Centurion Champion)
+    [68819] = { hide = true }, -- Full Defense (Centurion Champion)
+
+    -- Stage 3 - The Drome of Toxic Shock
+    [67625] = { hide = true }, -- Lamia Spawn (Lamia Queen)
+    [67635] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_electrified_water.dds', name = A.Skill_Electrified_Water }, -- Shock Water (Lamia Queen)
+    [67871] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_electrified_water.dds', name = A.Skill_Electrified_Water, groundLabel = true, tooltip = T.Generic_AOE_Shock, tooltipValue2 = 0.5 }, -- Shock (Water)
+
+    [73882] = { hide = true }, -- Lightning g (Lamia Queen)
+    [67757] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds' }, -- Queen's Poison (Lamia Queen)
+    [67758] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', groundLabel = true, tooltip = T.Generic_AOE_Poison, tooltipValue2 = 0.5 }, -- Queen's Poison (Lamia Queen)
+
+    [76094] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds' }, -- Spit (Strangler)
+    [76147] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_slime_alt.dds', name = A.Skill_Spit, tooltip = T.Generic_Snare, tooltipValue2 = 70 }, -- Snared (Srangler)
+
+    [68357] = { icon = 'esoui/art/icons/ability_healer_015.dds' }, -- Queen's Radiance (Lamia Queen)
+    [68358] = { groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Queen's Radiance (Lamia Queen)
+
+    [21646] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_strike.dds' }, -- Clawed Swipe (Lamia Queen)
+    [73876] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_sonic_scream.dds' }, -- Piercing Shriek (Lamia Queen)
+    [73878] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_sonic_scream.dds' }, -- Piercing Shriek (Lamia Queen)
+    [73877] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_sonic_scream.dds', tooltip = T.Generic_Stun }, -- Piercing Shriek (Lamia Queen)
+
+    [71044] = { hide = true }, -- Turret Occupied (Sentry Base)
+    [71045] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_turret_mode.dds', duration = 0, tooltip = T.Skill_Turret_Mode }, -- Turret Mode (Clockwork Sentry)
+    [71050] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', tooltip = T.Skill_Static_Shield }, -- Static Shield (Clockwork Sentry)
+    [71052] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', name = A.Skill_Static_Shield }, -- Static Shield Explosion (Clockwork Sentry)
+
+    [69268] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = T.Generic_Enrage_Damage_Taken_No_Dur, tooltipValue2 = 100, tooltipValue3 = 20 }, -- Enrage (Achelir)
+
+    [72157] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_static_field.dds' }, -- Static Field (Dwarven Spider)
+    [72159] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_static_field.dds', groundLabel = true, tooltip = T.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Static Field (Dwarven Spider)
+
+    [72163] = { hide = true }, -- Overcharge (Dwarven Spider)
+    [72178] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds', tooltip = T.Generic_Enrage_Damage_Reduce_No_Dur, tooltipValue2 = 125, tooltipValue3 = 50 }, -- Overcharge (Dwarven Spider)
+    [72179] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds', tooltip = T.Generic_Enrage_Damage_Reduce_No_Dur, tooltipValue2 = 125, tooltipValue3 = 50 }, -- Overcharge (Dwarven Spider)
+
+    [72166] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Overcharge)
+    [72174] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Overcharge)
+    [72167] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Overcharge)
+    [72175] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Overcharge)
+    [72176] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds' }, -- Overcharge (Overcharge)
+
+    [68662] = { hide = true }, -- Intro Stun (The Control Guardian)
+    [68665] = { hide = true }, -- Recovery (The Control Guardian)
+
+    [68524] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharged.dds', tooltip = T.Skill_Overcharged }, -- Overcharged (The Control Guardian)
+    [68537] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_shocking_touch.dds' }, -- Overcharged Bolt (The Control Guardian)
+
+    [70829] = { hide = true }, -- Overcharged Cooldown (The Control Guardian)
+    [68539] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overheated.dds', tooltip = T.Skill_Overheated, duration = 4 }, -- Overheated (The Control Guardian)
+    [71109] = { hide = true }, -- Fire FX (The Control Guardian)
+    [72208] = { hide = true }, -- Rooted (The Control Guardian)
+    [70860] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overheated.dds', name = A.Skill_Venting_Flames, groundLabel = true, tooltip = T.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Overheated Flame (The Control Guardian)
+
+    [72197] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Scavenger Thunder-Smith)
+    [72195] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_hammer.dds' }, -- Thunder Hammer (Scavenger Thunder-Smith)
+    [72196] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_hammer.dds' }, -- Thunder Hammer (Scavenger Thunder-Smith)
+
+    [72198] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing }, -- Wrecking Blow (Scavenger Thunder-Smith)
+    [72200] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing }, -- Wrecking Blow (Scavenger Thunder-Smith)
+    [72201] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing, tooltip = T.Generic_Knockback }, -- Wrecking Blow (Scavenger Thunder-Smith)
+
+    [72202] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_overcharge.dds', name = A.Skill_Static_Charge, tooltip = T.Skill_Static_Charge }, -- Overcharge (Scavenger Thunder-Smith)
+    [72203] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_overcharge.dds', name = A.Skill_Static_Charge }, -- Overcharge (Scavenger Thunder-Smith)
+
     ----------------------------------------------------------------
     -- DUNGEONS    -------------------------------------------------
     ----------------------------------------------------------------
@@ -10572,6 +10679,9 @@ E.FakeExternalDebuffs = {
     [56065] = { duration = 12000 }, -- Ice Charge (Dwarven Ice Centurion)
     [83477] = { duration = 4000 }, -- Volcanic Rune (Mavus Talnarith)
 
+    -- Maelstrom Arena
+    [73877] = { duration = 2000 }, -- Piercing Shriek (Lamia Queen)
+
     ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------
     ----------------------------------------------------------------
@@ -10848,7 +10958,7 @@ E.FakeStagger = {
     [86310] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 500 }, -- Stagger (Player Blocks charged NPC attack)
     [21972] = { duration = 500 }, -- Stagger (Player interrupts NPC cast)
 
-    -- Maelstrom Arena
+    -- Dragonstar Arena
     [53290] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Stagger (Sovngarde Icemage)
 
     -----------------
@@ -11112,6 +11222,17 @@ E.AddGroundDamageAura = {
     [68197] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Necrotic Essence (Necrotic Orb)
     [70901] = { duration = 1200, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Defiled Grave (Maxus the Many)
     [72149] = { duration = 1200, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Defiled Grave (Maxus the Many)
+
+    [69101] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shock (Generator)
+    [66797] = { duration = 333, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spinning Blade (Blade Trap)
+    [69102] = { duration = 600, type = BUFF_EFFECT_TYPE_BUFF }, -- Heal (Generator)
+    [69316] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Electric Shield (Centurion Champion)
+
+    [67871] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shock (Water)
+    [67758] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Queen's Poison (Lamia Queen)
+    [68358] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Queen's Radiance (Lamia Queen)
+    [72159] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Static Field (Dwarven Spider)
+    [70860] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Overheated Flame (The Control Guardian)
 
     ------------------
     -- DUNGEONS ------
