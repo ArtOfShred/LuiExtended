@@ -8,6 +8,7 @@ local strformat     = zo_strformat
 
 function LUIE.InitializeHooks()
 
+        -- Hook for Icon/Name changes
         local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
         GetSkillAbilityInfo = function(skillType, skillIndex, abilityIndex)
             local name, texture, earnedRank, passive, ultimate, purchased, progressionIndex, rankIndex = zos_GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
@@ -21,6 +22,7 @@ function LUIE.InitializeHooks()
             return name, texture, earnedRank, passive, ultimate, purchased, progressionIndex, rankIndex
         end
 
+        -- Hook for Icon/Name changes
         local zos_GetSkillAbilityNextUpgradeInfo = GetSkillAbilityNextUpgradeInfo
         GetSkillAbilityNextUpgradeInfo = function(skillType, skillIndex, abilityIndex)
             local name, texture, earnedRank = zos_GetSkillAbilityNextUpgradeInfo(skillType, skillIndex, abilityIndex)
@@ -34,6 +36,7 @@ function LUIE.InitializeHooks()
             return name, texture, earnedRank
         end
 
+        -- Hook for Icon/Name changes
         local zos_GetUnitBuffInfo = GetUnitBuffInfo
         GetUnitBuffInfo = function(unitTag, buffIndex)
             local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = zos_GetUnitBuffInfo(unitTag, buffIndex)
@@ -47,7 +50,8 @@ function LUIE.InitializeHooks()
             return buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer
         end
 
-        -- Death Recap enhancements
+        -- Hook GetKillingAttackerInfo - Change Source Name, Pet Name, or toggle damage that is sourced from the Player on/off
+        -- Hook GetKillingAttackInfo - Change Icon or Name (additional support for Zone based changes, and source attacker/pet changes)
         local zos_GetKillingAttackerInfo = GetKillingAttackerInfo
         local zos_GetKillingAttackInfo = GetKillingAttackInfo
 
@@ -116,7 +120,7 @@ function LUIE.InitializeHooks()
             return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
         end
 
-        -- Hook support for other addons (Icon)
+        -- Hook support for Custom Ability Icons (Helps normalize with other addons)
         LUIE.GetAbilityIcon = GetAbilityIcon -- Used only for PTS testing
         zos_GetAbilityIcon = GetAbilityIcon
         GetAbilityIcon = function(abilityId)
@@ -127,7 +131,7 @@ function LUIE.InitializeHooks()
             return(icon)
         end
 
-        -- Hook support for other addons (Name)
+        -- Hook support for Custom Ability Names (Helps normalize with other addons)
         LUIE.GetAbilityName = GetAbilityName -- Used only for PTS testing
         zos_GetAbilityName = GetAbilityName
         GetAbilityName = function(abilityId)
@@ -138,7 +142,7 @@ function LUIE.InitializeHooks()
             return(abilityName)
         end
 
-        -- Hook support for other addons (Artificial effect ids)
+        -- Hook support for ArtificialffectId's
         LUIE.GetArtificialEffectInfo = GetArtificialEffectInfo -- Used only for PTS testing
         zos_GetArtificialEffectInfo = GetArtificialEffectInfo
         GetArtificialEffectInfo = function(artificialEffectId)
@@ -152,6 +156,7 @@ function LUIE.InitializeHooks()
             return displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding
         end
 
+        -- Hook support to pull custom tooltips for ArtificialEffectId's
         zos_GetArtificialEffectTooltipText = GetArtificialEffectTooltipText
         GetArtificialEffectTooltipText = function(artificialEffectId)
             local tooltip
@@ -164,6 +169,7 @@ function LUIE.InitializeHooks()
             end
         end
 
+        -- Hook synergy popup Icon/Name (to fix inconsistencies and add custom icons for some Quest/Encounter based Synergies)
         ZO_Synergy.OnSynergyAbilityChanged = function(self)
             local synergyName, iconFilename = GetSynergyInfo()
 
@@ -192,6 +198,7 @@ function LUIE.InitializeHooks()
             self.lastSynergyName = synergyName
         end
 
+        -- Hook STATS Screen Buffs & Debuffs to hide buffs not needed, update icons, names, durations, and tooltips
         local function EffectsRowComparator(left, right)
             local leftIsArtificial, rightIsArtificial = left.isArtificial, right.isArtificial
             if leftIsArtificial ~= rightIsArtificial then
@@ -390,6 +397,7 @@ function LUIE.InitializeHooks()
             container:SetHandler("OnEffectivelyShown", UpdateEffects)
         end
 
+        -- Hook Tooltip Generation for STATS Screen Buffs & Debuffs
         ZO_StatsActiveEffect_OnMouseEnter = function(control)
             InitializeTooltip(GameTooltip, control, RIGHT, -15)
 
@@ -418,7 +426,7 @@ function LUIE.InitializeHooks()
             control.animation:PlayForward()
         end
 
-        -- Hook skills advisor and use this variable to refresh the abilityData on time one initialization. We don't want to reload any more after that.
+        -- Hook skills advisor and use this variable to refresh the abilityData one time on initialization. We don't want to reload any more after that.
         ZO_SkillsAdvisor_Suggestions_Keyboard.SetupAbilityEntry = function(self, ability, skillProgressionData)
             local skillData = skillProgressionData:GetSkillData()
             local isPassive = skillData:IsPassive()
@@ -504,7 +512,7 @@ function LUIE.InitializeHooks()
             [ACTION_TYPE_NOTHING]       = SetupEmptyActionSlot,
         }
 
-        -- Hook to make Activation Highlight play indefinitely
+        -- Hook to make Activation Highlight Effect play indefinitely instead of animation only once
         ActionButton.UpdateActivationHighlight = function(self)
             local slotnum = self:GetSlot()
             local slotType = GetSlotType(slotnum)
