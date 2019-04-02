@@ -3,6 +3,9 @@
     License: The MIT License (MIT)
 --]]
 
+-- Performance Enhancement
+local strformat     = zo_strformat
+
 function LUIE.Hooks()
 
         local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
