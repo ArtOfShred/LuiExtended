@@ -6,7 +6,7 @@
 -- Performance Enhancement
 local strformat     = zo_strformat
 
-function LUIE.Hooks()
+function LUIE.InitializeHooks()
 
         local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
         GetSkillAbilityInfo = function(skillType, skillIndex, abilityIndex)
