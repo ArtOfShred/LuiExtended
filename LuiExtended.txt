@@ -46,9 +46,10 @@ Hooks.lua
 Functions.lua
 Initialize.lua
 UI.lua
-Settings.lua
 Changelog.lua
 Bindings.xml
+
+settings/Settings.lua
 
 frontend/Changelog.xml
 frontend/CombatText.xml
