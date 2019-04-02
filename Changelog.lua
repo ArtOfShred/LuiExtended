@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+-- Performance Enhancement
 local strformat = zo_strformat
 
 local changelogMessages = {

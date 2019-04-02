@@ -4,8 +4,8 @@
 --]]
 
 -- Performance Enhancement
-local strformat     = zo_strformat
-local iconFormat    = zo_iconFormat
+local strformat = zo_strformat
+local iconFormat = zo_iconFormat
 
 -- Create Settings Menu
 function LUIE.CreateSettings()

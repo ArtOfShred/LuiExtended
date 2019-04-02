@@ -4,7 +4,7 @@
 --]]
 
 -- Performance Enhancement
-local strformat     = zo_strformat
+local strformat = zo_strformat
 
 function LUIE.InitializeHooks()
 

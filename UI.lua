@@ -6,6 +6,7 @@
 -- UI namespace
 LUIE.UI = {}
 
+-- Performance Enhancement
 local windowManager = WINDOW_MANAGER
 
 -- A handy chaining function for quickly setting up UI elements

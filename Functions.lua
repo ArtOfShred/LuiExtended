@@ -4,12 +4,10 @@
 --]]
 
 -- Performance Enhancement
-local strfmt        = string.format
-
--- Local Variables
-local TimeStampColorize
+local strfmt = string.format
 
 -- Called from the menu and on initialization to update timestamp color when changed.
+local TimeStampColorize
 function LUIE.UpdateTimeStampColor()
     TimeStampColorize = ZO_ColorDef:New(unpack(LUIE.ChatAnnouncements.SV.TimeStampColor)):ToHex()
 end

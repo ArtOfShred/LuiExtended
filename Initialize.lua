@@ -4,10 +4,8 @@
 --]]
 
 -- Performance Enhancement
-local strfmt        = string.format
-local strformat     = zo_strformat
-
-local eventManager   = EVENT_MANAGER
+local strformat = zo_strformat
+local eventManager = EVENT_MANAGER
 
 -- Load saved settings
 local function LoadSavedVars()
@@ -52,7 +50,7 @@ local function LoadScreen()
     eventManager:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
     if not LUIE.SV.StartupInfo then
-        LUIE.PrintToChat(strfmt("|cFEFEFE%s by|r |c00C000%s|r |cFEFEFEv%s|r", LUIE.name, LUIE.author, LUIE.version), true)
+        LUIE.PrintToChat(strformat("|cFEFEFE<<1>> by|r |c00C000<<2>>|r |cFEFEFEv<<3>>|r", LUIE.name, LUIE.author, LUIE.version), true)
     end
 end
 
