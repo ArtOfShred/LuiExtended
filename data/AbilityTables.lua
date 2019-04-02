@@ -1143,13 +1143,17 @@ local AbilityTables = {
     Skill_Sigil_of_Healing            = 66920,
     Skill_Defiled_Grave               = 70893,
     Skill_Overload                    = 72690,
-    Skill_Energized                   = 31421,
+    Skill_Energize                    = GetString(SI_LUIE_SKILL_ENERGIZE),
     Skill_Defensive_Protocol          = GetString(SI_LUIE_SKILL_DEFENSIVE_PROTOCOL),
 
     Skill_Electrified_Water           = 69913,
+    Skill_Call_Lightning              = 73881,
     Skill_Spit                        = 76094,
     Skill_Venting_Flames              = GetString(SI_LUIE_SKILL_VENTING_FLAMES),
-    Skill_Static_Charge               = 95805,
+    Skill_Voltaic_Overload            = 109059,
+    Skill_Cold_Snap                   = 72705,
+    Skill_Summon_Deathless_Wolf       = GetString(SI_LUIE_SKILL_SUMMON_DEATHLESS_WOLF),
+    Skill_Iceberg_Calving             = 71702,
 
     -- ---------------------------------------------------
     -- DUNGEON EFFECTS -----------------------------------

@@ -1090,7 +1090,11 @@ local Tooltips           = {
     Skill_Defensive_Protocol                        = GetString(SI_LUIE_SKILL_DEFENSIVE_PROTOCOL_TP),
     Skill_Overcharged                               = GetString(SI_LUIE_SKILL_OVERCHARGED_DWEMER_TP),
     Skill_Overheated                                = GetString(SI_LUIE_SKILL_OVERHEATED_DWEMER_TP),
-    Skill_Static_Charge                             = GetString(SI_LUIE_SKILL_STATIC_CHARGE_TP),
+    Skill_Overheated_VET                            = GetString(SI_LUIE_SKILL_OVERHEATED_DWEMER_VET_TP),
+    Skill_Voltaic_Overload                          = GetString(SI_LUIE_SKILL_VOLTAIC_OVERLOAD_TP),
+    Skill_Frigid_Waters                             = GetString(SI_LUIE_SKILL_FRIGID_WATERS_TP),
+    Skill_Cold_Snap                                 = GetString(SI_LUIE_SKILL_COLD_SNAP_TP),
+    Skill_Blade_Trap_VMA                            = GetString(SI_LUIE_SKILL_BLADE_TRAP_VMA),
 
     ----------------------------------------------------------------
     -- DUNGEONS ------------------------------------------------------

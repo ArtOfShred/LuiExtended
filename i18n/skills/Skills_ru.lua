@@ -700,7 +700,7 @@ local strings = {
     -- TRAPS -------------------------------------------------------
     ----------------------------------------------------------------
 
-    SI_LUIE_SKILL_LAVA_STACK_TP =                        "Taking increasing Flame Damage every |cFFFFFF0.75|r seconds.\n\nDamage taken increased by |cFFFFFF75|r% per additional stack.",
+    SI_LUIE_SKILL_LAVA_STACK_TP =                        "Taking increasing Flame Damage every |cFFFFFF0.75|r seconds.\n\nDamage taken increased by |cFFFFFF75|r% per stack.",
     SI_LUIE_SKILL_LAVA_TP =                              "Taking Flame Damage every |cFFFFFF0.75|r seconds.",
     SI_LUIE_SKILL_LAVA_TRAP =                            "Lava Trap",
     SI_LUIE_SKILL_LIGHTNING_TRAP =                       "Lightning Trap",
@@ -1084,7 +1084,7 @@ local strings = {
     SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_NPC_TP =          "Healing every |cFFFFFF1|r second and damage taken reduced by |cFFFFFF55|r%.",
     SI_LUIE_SKILL_PIERCE_ARMOR_NPC_TP =                  "Reduce Physical and Spell Resistance by |cFFFFFF43|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BITING_COLD_TP =                       "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF10|r%.\n\nThis effect stacks up to |cFFFFFF8|r times, to a maximum of |cFFFFFF80|r% Movement Speed reduction.",
-    SI_LUIE_SKILL_BITING_COLD_VET_TP =                   "Taking increasing Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF10|r%.\n\nDamage taken increased by |cFFFFFF22|r% per additional stack.\n\nThe snare stacks up to |cFFFFFF8|r times, to a maximum of |cFFFFFF80|r% Movement Speed reduction.",
+    SI_LUIE_SKILL_BITING_COLD_VET_TP =                   "Taking increasing Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF10|r%.\n\nDamage taken increased by |cFFFFFF22|r% per stack.\n\nThe snare stacks up to |cFFFFFF8|r times, to a maximum of |cFFFFFF80|r% Movement Speed reduction.",
     SI_LUIE_SKILL_FROST_CLENCH_NPC_TP =                  "Stunned for |cFFFFFF0.5|r seconds.\n\nImmobilized for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_UWOF_NPC_TP =                          "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF60|r%.\n\nThe wall explodes when it expires, dealing additional Frost Damage.",
     SI_LUIE_SKILL_ELEMENTAL_SUSCEPTIBILITY_NPC_TP =      "Reduce Spell Resistance by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.",
@@ -1133,8 +1133,14 @@ local strings = {
     SI_LUIE_SKILL_DEFENSIVE_PROTOCOL_TP =                "Absorbing damage and unable to take any action, while nearby enemies take Shock Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_OVERCHARGED_DWEMER_TP =                "Striking distant enemies with bolts, dealing Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_OVERHEATED_DWEMER_TP =                 "Venting flames, dealing Flame Damage to nearby enemies every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_OVERHEATED_DWEMER_VET_TP =             "Venting flames, dealing Flame Damage to nearby enemies every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDistant enemies will be bombarbed with a volley of flames every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_VENTING_FLAMES =                       "Venting Flames",
-    SI_LUIE_SKILL_STATIC_CHARGE_TP =                     "Nearby enemies take Shock Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds."
+    SI_LUIE_SKILL_VOLTAIC_OVERLOAD_TP =                  "Nearby enemies take Shock Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_FRIGID_WATERS_TP =                     "Taking increasing Frost Damage every |cFFFFFF1|r second.\n\nDamage taken increased by |cFFFFFF100|r% per stack.",
+    SI_LUIE_SKILL_COLD_SNAP_TP =                         "Increase damage taken from Cold Snap by |cFFFFFF<<2>>|r% per stack.",
+    SI_LUIE_SKILL_SUMMON_DEATHLESS_WOLF =                "Summon Deathless Wolf",
+    SI_LUIE_SKILL_BLADE_TRAP_VMA =                       "Afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThis effect stacks up to |cFFFFFF25|r times, dealing |cFFFFFF5|r% increased damage per stack.",
+    SI_LUIE_SKILL_ENERGIZE =                             "Energize"
 }
 
 local pairs = pairs

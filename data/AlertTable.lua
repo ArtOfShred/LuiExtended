@@ -812,6 +812,7 @@ local AlertTable = {
 
     -- Stage 3 - The Drome of Toxic Shock
     [67635] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Shock Water (Lamia Queen)
+    [73879] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED }, -- Lightning X (Lamia Queen)
     [67757] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Queen's Poison (Lamia Queen)
     [68357] = { power = true, priority = 1, auradetect = true }, -- Queen's Radiance (Lamia Queen)
     [73876] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1000 }, -- Piercing Shriek (Lamia Queen)
@@ -819,6 +820,7 @@ local AlertTable = {
     -- Stage 4 - Seht's Flywheel
     [71045] = { power = true, priority = 1, auradetect = true }, -- Turret Mode (Clockwork Sentry)
     [71050] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Static Shield (Clockwork Sentry)
+    [73850] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Static Shield (Clockwork Sentry)
     [69268] = { power = true, priority = 1, auradetect = true }, -- Enrage (Achelir)
 
     [72157] = { power = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.NPC_Dwarven_Spider }, -- Static Field (Dwarven Spider)
@@ -827,10 +829,30 @@ local AlertTable = {
 
     [68524] = { power = true, priority = 1, auradetect = true }, -- Overcharged (The Control Guardian)
     [68539] = { power = true, priority = 1, auradetect = true }, -- Overheated (The Control Guardian)
+    [68558] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, refire = 20000 }, -- Overheated Volley (The Control Guardian)
 
     [72195] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Thunder Hammer (Scavenger Thunder-Smith)
     [72198] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Wrecking Blow (Scavenger Thunder-Smith)
     [72202] = { avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = U.NPC_Scavenger_Thunder_Smith }, -- Overcharge (Scavenger Thunder-Smith)
+
+    -- Stage 5 - Rink of Frozen Blood
+
+    [70898] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Huntsman Chillbane)
+    [71939] = { block = true, avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Frost Breath (Huntsman Chillbane)
+    [71937] = { block = true, avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Frost Nova (Huntsman Chillbane)
+
+    [72446] = { interrupt = true, priority = 1, auradetect = true }, -- Smash Iceberg (Troll Breaker)
+    [71926] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Frenzy of Blows (Angirgoth)
+
+    [72438] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Shatter (Giant)
+    [68439] = { power = true, priority = 1, auradetect = true }, -- Enrage (Aki/Vigi)
+    [74130] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Intimidating Roar (Aki/Vigi)
+
+    [66378] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Sweep (Matriarch Runa)
+    [72749] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Freezing Stomp (Matriarch Runa)
+    [67088] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Intimidating Roar (Matriarch Runa)
+    [66325] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Shatter (Matriarch Runa)
+    [72409] = { avoid = true, priority = 1, auradetect = true }, -- Taunt (Matriarch Runa)
 
     --------------------------------------------------
     -- DUNGEONS --------------------------------------
@@ -999,7 +1021,7 @@ local AlertTable = {
 
     [30781] = { power = true, priority = 1, auradetect = true }, -- Mirror Ward (Longclaw)
     [30772] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, refire = 1250 }, -- Arrow Rain (Longclaw)
-    [30779] = { summon = true, priority = 1, auradetect = true, refire = 500, fakeName = '' }, -- Spirit Form (Senche Spirit)
+    [30779] = { summon = true, priority = 1, auradetect = true, refire = 500, fakeName = "" }, -- Spirit Form (Senche Spirit)
     [31096] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Poison Burst (Longclaw)
 
     [31202] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Venomous Burst (Queen Aklayah)
@@ -1007,7 +1029,7 @@ local AlertTable = {
 
     [30996] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Vicious Maul (Foulhide)
     [30812] = { avoid = true, block = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Trampling Charge (Foulhide)
-    [31002] = { summon = true, priority = 1, auradetect = true, fakeName = '', refire = 5000 }, -- Intro (Selene's Rose)
+    [31002] = { summon = true, priority = 1, auradetect = true, fakeName = "", refire = 5000 }, -- Intro (Selene's Rose)
 
     [31241] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossName = true }, -- Summon Spiders (Mennir Many-Legs)
 
@@ -1036,7 +1058,7 @@ local AlertTable = {
     [28093] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Vicious Smash (Blood Spawn)
     [27995] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Cave-In (Blood Spawn)
     [47331] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, refire = 60000 }, -- Cave-In (Blood Spawn)
-    [47198] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, auradetect = true, refire = 5000, fakeName = '' }, -- Falling Rocks (Cave In)
+    [47198] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, auradetect = true, refire = 5000, fakeName = "" }, -- Falling Rocks (Cave In)
 
     [28438] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Dummy (Praxin Douare)
     [18036] = { block = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.NPC_The_Whisperer_Nightmare, refire = 2500 }, -- Grappling Web (The Whisperer Nightmare)

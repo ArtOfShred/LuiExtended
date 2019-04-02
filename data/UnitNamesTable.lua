@@ -76,6 +76,9 @@ local UnitNames = {
     NPC_Dwarven_Spider                    = 'Dwarven Spider',
     Boss_The_Control_Guardian             = 'The Control Guardian',
     NPC_Scavenger_Thunder_Smith           = 'Scavenger Thunder-Smith',
+    NPC_Troll_Breaker                     = 'Troll Breaker',
+    NPC_Ogre_Elder                        = 'Ogre Elder',
+    Boss_Matriarch_Runa                   = 'Matriarch Runa',
 
     ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------

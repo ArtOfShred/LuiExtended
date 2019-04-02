@@ -12043,9 +12043,10 @@ LUIE.DebugAuras = {
     [72086] = true, -- Shadow Strength (Maxus the Many)
 
     -- Round 2 - Seht's Balcony
-    --[69018] = true, -- Generator (Generator)
+    [69018] = true, -- Generator (Generator)
     [69020] = true, -- Attack (Generator)
     [72722] = true, -- Knock Back (Generator)
+    [72687] = true, -- Knock Back (Generator)
     [69101] = true, -- Shock (Generator)
     [72688] = true, -- Knock Back FX (Generator)
     [72690] = true, -- Overload (Generator)
@@ -12055,17 +12056,23 @@ LUIE.DebugAuras = {
     [66793] = true, -- Blade Trap (Blade Trap)
     [71198] = true, -- Stun (Blade Trap)
     [73871] = true, -- Generic NPC 115% Speed (Blade Trap)
+    [74021] = true, -- Generic NPC 115% Speed (Blade Trap)
+    [66865] = true, -- NPC 200% Run (Blade Trap)
     [66797] = true, -- Spinning Blade (Blade Trap)
     [72414] = true, -- Serrated Blade (Blade Trap)
     [72413] = true, -- Serrated Blade (Blade Trap)
+    [72194] = true, -- Serrated Blade (Blade Trap)
+    [72199] = true, -- Serrated Blade (Blade Trap)
 
     [72489] = true, -- Heal (Generator)
+    [69022] = true, -- Heal (Generator)
     [72036] = true, -- Stopped Blades (Blade Trap)
     [72419] = true, -- Stopped Blades (Blade Trap)
     [69102] = true, -- Heal (Generator)
     [69149] = true, -- Reset Switches (Generator)
 
     [73119] = true, -- NPC 50% Speed (Clockwork Sentry)
+    [73118] = true, -- NPC 75% Speed (Clockwork Sentry)
     [73116] = true, -- Sentry Snare (Clockwork Sentry)
     [71047] = true, -- Thunderbolt (Clockwork Sentry)
     [71048] = true, -- Thunderbolt (Clockwork Sentry)
@@ -12107,6 +12114,10 @@ LUIE.DebugAuras = {
     [67635] = true, -- Shock Water (Lamia Queen)
     [67871] = true, -- Shock (Water)
 
+    [73879] = true, -- Lightning X (Lamia Queen)
+    [73881] = true, -- Call Lightning (Lamia Queen)
+    [73880] = true, -- Call Lightning (Lamia Queen)
+
     [73882] = true, -- Lightning g (Lamia Queen)
     [67757] = true, -- Queen's Poison (Lamia Queen)
     [67760] = true, -- CON_AOE_Template (Lamia Queen)
@@ -12132,6 +12143,11 @@ LUIE.DebugAuras = {
     [71050] = true, -- Static Shield (Clockwork Sentry)
     [71052] = true, -- Static Shield Explosion (Clockwork Sentry)
     [71053] = true, -- Static Shield (Clockwork Sentry)
+
+    [73847] = true, -- Charged (Clockwork Sentry)
+    [73850] = true, -- Static Shield (Clockwork Sentry)
+    [73852] = true, -- Static Shield Explosion (Clockwork Sentry)
+    [73851] = true, -- Static Shield (Clockwork Sentry)
 
     [69268] = true, -- Enrage (Achelir)
     [69269] = true, -- Enrage (Achelir)
@@ -12174,6 +12190,12 @@ LUIE.DebugAuras = {
     [72208] = true, -- Rooted (The Control Guardian)
     [70860] = true, -- Overheated Flame (The Control Guardian)
 
+    [68558] = true, -- Overheated Volley (The Control Guardian)
+    [68548] = true, -- Overheated Volley (The Control Guardian)
+    [68547] = true, -- Overheated Volley (The Control Guardian)
+    [68546] = true, -- Overheated Volley (The Control Guardian)
+    [68543] = true, -- Overheated Volley (The Control Guardian)
+
     [72197] = true, -- Quick Strike (Scavenger Thunder-Smith)
     [72195] = true, -- Thunder Hammer (Scavenger Thunder-Smith)
     [72196] = true, -- Thunder Hammer (Scavenger Thunder-Smith)
@@ -12184,6 +12206,119 @@ LUIE.DebugAuras = {
     [72206] = true, -- Streak (Scavenger Thunder-Smith)
     [72202] = true, -- Overcharge (Scavenger Thunder-Smith)
     [72203] = true, -- Overcharge (Scavenger Thunder-Smith)
+
+    -- Stage 5 - Rink of Frozen Blood
+    [67805] = true, -- Frigid Waters
+    [67811] = true, -- Frigid Waters
+    [67810] = true, -- Frigid Waters
+    [72525] = true, -- Frigid Waters
+    [67808] = true, -- Frigid Waters
+    [67814] = true, -- Frigid Waters
+    [67812] = true, -- Frigid Waters
+    [67809] = true, -- Frigid Waters
+
+    [72417] = true, -- Poison Arrow (Huntsman Heartfinder)
+    [72418] = true, -- Poison Arrow (Huntsman Heartfinder)
+
+    [70897] = true, -- Call Ally (Huntsman Chillbane)
+    [70898] = true, -- Call Ally (Huntsman Chillbane)
+    [71939] = true, -- Frost Breath (Huntsman Chillbane)
+    [98062] = true, -- Frost Breath (Huntsman Chillbane)
+    [71940] = true, -- Frost Breath (Huntsman Chillbane)
+    [71937] = true, -- Frost Nova (Huntsman Chillbane)
+    [71938] = true, -- Frost Nova (Huntsman Chillbane)
+
+    [71692] = true, -- Ready to Smash (Troll Breaker)
+    [72446] = true, -- Smash Iceberg (Troll Breaker)
+    [72450] = true, -- Interrupted (Troll Breaker)
+    [72494] = true, -- Go To Closests Iceberg (Troll Breaker)
+    [72011] = true, -- Stagger (Iceberg)
+    [72013] = true, -- Stagger (Iceberg)
+    [20746] = true, -- Emerge (Leimenid Oracle)
+    [72012] = true, -- Stagger (Iceberg)
+
+    [72703] = true, -- Cold Snap Bolt (Leimenid Oracle)
+    [72704] = true, -- Cold Snap Snare (Leimenid Oracle)
+    [72705] = true, -- Cold Snap (Leimenid Oracle)
+
+    [71994] = true, -- Cold Snap Bolt (Leimenid Oracle)
+    [71996] = true, -- Cold Snap Snare (Leimenid Oracle)
+    [71997] = true, -- Cold Snap (Leimenid Oracle)
+
+    [71926] = true, -- Frenzy of Blows (Angirgoth)
+    [71930] = true, -- Frenzy of Blows (Angirgoth)
+    [71929] = true, -- Frenzy of Blows (Angirgoth)
+
+    [71931] = true, -- Rapid Strikes (Angirgoth)
+    [71932] = true, -- Rapid Strikes (Angirgoth)
+    [71933] = true, -- Rapid Strikes (Angirgoth)
+
+    [71935] = true, -- Steel Tornado (Angirgoth)
+    [71934] = true, -- Steel Tornado (Angirgoth)
+    [71936] = true, -- Whirlwind (Angirgoth)
+
+    [71914] = true, -- Speedboost (Ogre)
+
+    [71630] = true, -- Emerge (Leimenid)
+    [71897] = true, -- Frost Bolt (Leimenid)
+
+    [71915] = true, -- Uppercut (Frost Atronach)
+
+    [72438] = true, -- Shatter (Giant)
+    [72440] = true, -- Shatter (Giant)
+    [72441] = true, -- Shatter (Giant)
+    [72442] = true, -- Shatter (Giant)
+    [72439] = true, -- Shatter (Giant)
+
+    [68439] = true, -- Enrage (Aki/Vigi)
+    [68440] = true, -- Enrage (Aki/Vigi)
+    [68441] = true, -- Enrage (Aki/Vigi)
+
+    [74130] = true, -- Intimidating Roar (Aki/Vigi)
+    [74131] = true, -- Intimidating Roar (Aki/Vigi)
+    [74132] = true, -- Intimidating Roar (Aki/Vigi)
+
+    [72044] = true, -- Boss Speedboost (Matriarch Runa)
+    [66378] = true, -- Sweep (Matriarch Runa)
+    [66379] = true, -- Sweep (Matriarch Runa)
+    [66381] = true, -- Obliterate (Matriarch Runa)
+    [66380] = true, -- Obliterate (Matriarch Runa)
+
+    [72749] = true, -- Freezing Stomp (Matriarch Runa)
+    [72751] = true, -- Freezing Stomp (Matriarch Runa)
+    [72750] = true, -- Freezing Stomp (Matriarch Runa)
+
+    [67088] = true, -- Intimidating Roar (Matriarch Runa)
+    [67091] = true, -- Intimidating Roar (Matriarch Runa)
+    [67092] = true, -- Intimidating Roar (Matriarch Runa)
+
+    [66325] = true, -- Shatter (Matriarch Runa)
+    [72752] = true, -- Shatter (Matriarch Runa)
+    [66328] = true, -- Shatter (Matriarch Runa)
+    [66330] = true, -- Shatter (Matriarch Runa)
+    [66327] = true, -- Shatter (Matriarch Runa)
+    [66331] = true, -- Shatter (Matriarch Runa)
+    [66329] = true, -- Shatter (Matriarch Runa)
+    [66326] = true, -- Shatter (Matriarch Runa)
+
+    [71696] = true, -- Enrage (Matriarch Runa)
+    [71700] = true, -- Charge (Matriarch Runa)
+    [72409] = true, -- Taunt (Matriarch Runa)
+    [71701] = true, -- Can Quake (Matriarch Runa)
+    [71702] = true, -- Iceberg Calving (Matriarch Runa)
+    [71710] = true, -- Iceberg Calving (Matriarch Runa)
+    [71705] = true, -- Iceberg Calving (Matriarch Runa)
+    [72037] = true, -- Stagger (Matriarch Runa)
+    [71706] = true, -- Iceberg Calving (Matriarch Runa)
+    [72707] = true, -- Iceberg Calving (Matriarch Runa)
+    [71721] = true, -- Knockback (Matriarch Runa)
+    [71720] = true, -- Stun (Matriarch Runa)
+
+    [72005] = true, -- DUN-MA GM Stop Slam Trolls (Troll Breaker)
+
+    [71613] = true, -- Transform (Huntsman NPCs)
+    [71616] = true, -- Regeneration (Huntsman NPCs)
+    [71614] = true, -- Stun (Huntsman NPCs)
 
     -------------------------------------
     -- DUNGEONS -------------------------

@@ -404,6 +404,14 @@ E.DebuffDisplayOverrideId = {
     [89127] = true, -- Summon Beast (Spriggan)
     [42794] = true, -- Strangler: (Strangler)
     [48294] = true, -- Consuming Omen (Troll - Ranged)
+
+    ----------------------------------------------------------------
+    -- ARENAS ------------------------------------------------------
+    ----------------------------------------------------------------
+
+    -- Maelstrom Arena
+    [72450] = true, -- Interrupted (Troll Breaker)
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1471,6 +1479,9 @@ E.AddNameAura = {
     [U.NPC_Queens_Advisor] = { [1] = { id = 33097, zone = 4294967296 } }, -- Queen's Advisor (Maelstrom Arena)
     [U.Boss_Lamia_Queen] = { [1] = { id = 33097, zone = 4294967296 } }, -- Lamia Queen (Maelstrom Arena)
     [U.Boss_The_Control_Guardian] = { [1] = { id = 33097 } }, -- The Control Guardian
+    [U.NPC_Troll_Breaker] = { [1] = { id = 33097 } }, -- Troll Breaker
+    [U.NPC_Ogre_Elder] = { [1] = { id = 33097, zone = 4294967296 } }, -- Ogre Elder (Maelstrom Arena)
+    [U.Boss_Matriarch_Runa] = { [1] = { id = 33097 } }, -- Matriarch Runa
 
     --------------------------------------------
     -- DUNGEONS --------------------------------
@@ -2213,6 +2224,8 @@ E.EffectHideSCT = {
     -- Maelstrom Arena
     [71729] = true, -- Sigil of Defense (Sigil of Defense)
     [72200] = true, -- Wrecking Blow (Scavenger Thunder-Smith)
+    [67810] = true, -- Frigid Waters
+    [66381] = true, -- Obliterate (Matriach Runa)
 
     ----------------------------
     -- Dungeons
@@ -2241,6 +2254,9 @@ E.EffectCleanseOverride = { -- Force hide display of cleanse alert (USED BY COMB
 
     -- Dragonstar Arena
     [53692] = true, -- Rapid Strikes (Shilia)
+
+    -- Maelstrom Arena
+    [71931] = true, -- Rapid Strikes (Angirgoth)
 
     --------------
     -- DUNGEONS --
@@ -7153,10 +7169,10 @@ E.EffectOverride = {
     [19970] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_static_field.dds', tooltip = T.Skill_Static_Field }, -- Static Field (Dwemer Spider)
     [19997] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_static_field.dds', hide = true, groundLabel = true, tooltip = T.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Static Field (Dwemer Spider)
     [20506] = { hide = true }, -- Overcharge Trigger (Dwemer Spider - Overcharge Synergy)
-    [27333] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds', tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 25 }, -- Overcharge Trigger (Dwemer Spider - Overcharge Synergy)
+    [27333] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds', tooltip = T.Generic_Enrage_No_Dur, tooltipValue2 = 25 }, -- Overcharge Trigger (Dwemer Spider - Overcharge Synergy)
     [27458] = { hide = true }, -- tell others (Dwemer Spider - Overcharge Synergy)
     --[20207] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds' }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
-    [20206] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds', tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 25 }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    [20206] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overcharge.dds', tooltip = T.Generic_Enrage_No_Dur, tooltipValue2 = 25 }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
     [20221] = { hide = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
 
     [20505] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_aoe.dds', hide = true }, -- Overcharge (Overcharge)
@@ -7583,11 +7599,11 @@ E.EffectOverride = {
     [49402] = { icon = 'LuiExtended/media/icons/abilities/ability_mantikora_tail_whip.dds' }, -- Tail Whip (Mantikora)
     [49403] = { icon = 'LuiExtended/media/icons/abilities/ability_mantikora_tail_whip.dds' }, -- Tail Whip (Mantikora)
     [51242] = { hide = true }, -- Enrage (Mantikora)
-    [50187] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 20 }, -- Enrage (Mantikora)
+    [50187] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = T.Generic_Enrage_No_Dur, tooltipValue2 = 20 }, -- Enrage (Mantikora)
     [56687] = { hide = true }, -- Enrage (Mantikora)
     [56688] = { hide = true }, -- Enrage (Mantikora)
     [87712] = { hide = true }, -- Enraged (Mantikora)
-    [56689] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Enrage, tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 20 }, -- Enraged (Mantikora)
+    [56689] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = A.Skill_Enrage, tooltip = T.Generic_Enrage_No_Dur, tooltipValue2 = 20 }, -- Enraged (Mantikora)
 
     -- Yaghra Strider
     [103777] = { icon = 'LuiExtended/media/icons/abilities/ability_yaghra_lacerate.dds' }, -- Lacerate (Yaghra Strider)
@@ -9428,6 +9444,9 @@ E.EffectOverride = {
     [72414] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Blade_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, stack = 0, tooltip = T.Generic_Bleed, tooltipValue2 = 1 }, -- Serrated Blade (Blade Trap)
     [72413] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Blade_Trap }, -- Serrated Blade (Blade Trap)
 
+    [72194] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Blade_Trap, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Blade_Trap_VMA }, -- Serrated Blade (Blade Trap)
+    [72199] = { icon = 'esoui/art/icons/achievement_vvardenfel_047.dds', name = A.Trap_Blade_Trap }, -- Serrated Blade (Blade Trap)
+
     [72489] = { hide = true }, -- Heal (Generator)
     [69149] = { hide = true }, -- Reset Switches (Generator)
     [69102] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_generator_heal.dds', groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 0.5 }, -- Heal (Generator)
@@ -9435,7 +9454,7 @@ E.EffectOverride = {
     [73119] = { hide = true }, -- NPC 50% Speed (Clockwork Sentry)
     --[71047] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds' }, -- Thunderbolt (Clockwork Sentry)
     [71048] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds' }, -- Thunderbolt (Clockwork Sentry)
-    [72067] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_energizing.dds', name = A.Skill_Energized, stack = 0, tooltip = T.Generic_Enrage_No_Dur, tooltipValue2 = 75 }, -- Energizing (Clockwork Sentry)
+    [72067] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_energizing.dds', name = A.Skill_Energize, stack = 0, tooltip = T.Generic_Enrage_No_Dur, tooltipValue2 = 75 }, -- Energizing (Clockwork Sentry)
 
     [72591] = { hide = true }, -- Portal Spawn
     [72602] = { hide = true }, -- Portal Spawn
@@ -9443,16 +9462,19 @@ E.EffectOverride = {
     [69364] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_barrage_function.dds', hide = true }, -- Barrage Function (Centurion Champion)
     [69366] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_barrage_function.dds' }, -- Barrage Function (Centurion Champion)
 
-    [66904] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', name = A.Skill_Defensive_Protocol, tooltip = T.Skill_Defensive_Protocol }, -- Full Defense (Centurion Champion)
+    [66904] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_defensive_protocol.dds', name = A.Skill_Defensive_Protocol, tooltip = T.Skill_Defensive_Protocol }, -- Full Defense (Centurion Champion)
     [69317] = { hide = true }, -- Sheild (Centurion Champion)
-    [66905] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', name = A.Skill_Defensive_Protocol }, -- Full Defense (Centurion Champion)
-    [69316] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', name = A.Skill_Defensive_Protocol, groundLabel = true, tooltip = T.Generic_AOE_Shock, tooltipValue2 = 0.5 }, -- Electric Shield (Centurion Champion)
+    [66905] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_defensive_protocol.dds', name = A.Skill_Defensive_Protocol }, -- Full Defense (Centurion Champion)
+    [69316] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvencenturion_defensive_protocol.dds', name = A.Skill_Defensive_Protocol, groundLabel = true, tooltip = T.Generic_AOE_Shock, tooltipValue2 = 0.5 }, -- Electric Shield (Centurion Champion)
     [68819] = { hide = true }, -- Full Defense (Centurion Champion)
 
     -- Stage 3 - The Drome of Toxic Shock
     [67625] = { hide = true }, -- Lamia Spawn (Lamia Queen)
     [67635] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_electrified_water.dds', name = A.Skill_Electrified_Water }, -- Shock Water (Lamia Queen)
     [67871] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_electrified_water.dds', name = A.Skill_Electrified_Water, groundLabel = true, tooltip = T.Generic_AOE_Shock, tooltipValue2 = 0.5 }, -- Shock (Water)
+
+    [73879] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = A.Skill_Call_Lightning }, -- Call Lightning (Lamia Queen)
+    [73880] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds' }, -- Call Lightning (Lamia Queen)
 
     [73882] = { hide = true }, -- Lightning g (Lamia Queen)
     [67757] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds' }, -- Queen's Poison (Lamia Queen)
@@ -9461,8 +9483,8 @@ E.EffectOverride = {
     [76094] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds' }, -- Spit (Strangler)
     [76147] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_slime_alt.dds', name = A.Skill_Spit, tooltip = T.Generic_Snare, tooltipValue2 = 70 }, -- Snared (Srangler)
 
-    [68357] = { icon = 'esoui/art/icons/ability_healer_015.dds' }, -- Queen's Radiance (Lamia Queen)
-    [68358] = { groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Queen's Radiance (Lamia Queen)
+    [68357] = { icon = 'LuiExtended/media/icons/abilities/ability_set_almalexias_mercy.dds' }, -- Queen's Radiance (Lamia Queen)
+    [68358] = { icon = 'LuiExtended/media/icons/abilities/ability_set_almalexias_mercy.dds', groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Queen's Radiance (Lamia Queen)
 
     [21646] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_strike.dds' }, -- Clawed Swipe (Lamia Queen)
     [73876] = { icon = 'LuiExtended/media/icons/abilities/ability_lamia_sonic_scream.dds' }, -- Piercing Shriek (Lamia Queen)
@@ -9473,6 +9495,10 @@ E.EffectOverride = {
     [71045] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_turret_mode.dds', duration = 0, tooltip = T.Skill_Turret_Mode }, -- Turret Mode (Clockwork Sentry)
     [71050] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', tooltip = T.Skill_Static_Shield }, -- Static Shield (Clockwork Sentry)
     [71052] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', name = A.Skill_Static_Shield }, -- Static Shield Explosion (Clockwork Sentry)
+
+    [73847] = { hide = true }, -- Charged (Clockwork Sentry)
+    [73850] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', tooltip = T.Skill_Static_Shield }, -- Static Shield (Clockwork Sentry)
+    [73851] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvensentry_static_shield.dds', name = A.Skill_Static_Shield }, -- Static Shield Explosion (Clockwork Sentry)
 
     [69268] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = T.Generic_Enrage_Damage_Taken_No_Dur, tooltipValue2 = 100, tooltipValue3 = 20 }, -- Enrage (Achelir)
 
@@ -9496,10 +9522,12 @@ E.EffectOverride = {
     [68537] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_shocking_touch.dds' }, -- Overcharged Bolt (The Control Guardian)
 
     [70829] = { hide = true }, -- Overcharged Cooldown (The Control Guardian)
-    [68539] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overheated.dds', tooltip = T.Skill_Overheated, duration = 4 }, -- Overheated (The Control Guardian)
+    [68539] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overheated.dds', tooltip = T.Skill_Overheated, tooltipVet = T.Skill_Overheated_VET, duration = 4 }, -- Overheated (The Control Guardian)
     [71109] = { hide = true }, -- Fire FX (The Control Guardian)
     [72208] = { hide = true }, -- Rooted (The Control Guardian)
     [70860] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_overheated.dds', name = A.Skill_Venting_Flames, groundLabel = true, tooltip = T.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Overheated Flame (The Control Guardian)
+    [68558] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_infernal_guardian.dds' }, -- Overheated Volley
+    [68543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_infernal_guardian.dds' }, -- Overheated Volley
 
     [72197] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Scavenger Thunder-Smith)
     [72195] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_hammer.dds' }, -- Thunder Hammer (Scavenger Thunder-Smith)
@@ -9509,8 +9537,87 @@ E.EffectOverride = {
     [72200] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing }, -- Wrecking Blow (Scavenger Thunder-Smith)
     [72201] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = A.Skill_Dizzying_Swing, tooltip = T.Generic_Knockback }, -- Wrecking Blow (Scavenger Thunder-Smith)
 
-    [72202] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_overcharge.dds', name = A.Skill_Static_Charge, tooltip = T.Skill_Static_Charge }, -- Overcharge (Scavenger Thunder-Smith)
-    [72203] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_overcharge.dds', name = A.Skill_Static_Charge }, -- Overcharge (Scavenger Thunder-Smith)
+    [72202] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_overcharge.dds', name = A.Skill_Voltaic_Overload, tooltip = T.Skill_Voltaic_Overload }, -- Overcharge (Scavenger Thunder-Smith)
+    [72203] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_overcharge.dds', name = A.Skill_Voltaic_Overload }, -- Overcharge (Scavenger Thunder-Smith)
+
+    -- Stage 5 - Rink of Frozen Blood
+    [72525] = { icon = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds', hide = true, groundLabel = true, tooltip = T.Skill_Frigid_Waters, stack = 1, stackAdd = 1 }, -- Frigid Waters (Player)
+    [67808] = { icon = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds', groundLabel = true, tooltip = T.Skill_Frigid_Waters, stack = 1, stackAdd = 1 }, -- Frigid Waters (Player)
+
+    [72418] = { tooltip = T.Generic_Poison, tooltipValue2 = 2 }, -- Poison Arrow (Huntsman Heartfinder)
+
+    [70898] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_deathless_wolf.dds', name = A.Skill_Summon_Deathless_Wolf, hide = true }, -- Call Ally (Huntsman Chillbane)
+
+    [71939] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_frost_breath.dds' }, -- Frost Breath (Huntsman Chillbane)
+    [98062] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_frost_breath.dds' }, -- Frost Breath (Huntsman Chillbane)
+    [71940] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_frost_breath.dds', tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Frost Breath (Huntsman Chillbane)
+
+    [71937] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_frost_nova.dds' }, -- Frost Nova (Huntsman Chillbane)
+    [71938] = { name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Frost Nova (Huntsman Chillbane)
+
+    [71692] = { hide = true }, -- Ready to Smash (Troll Breaker)
+    [72446] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_tremor.dds', hide = true }, -- Smash Iceberg (Troll Breaker)
+    [72450] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Bash_Stun, tooltip = T.Generic_Stun, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Interrupted (Troll Breaker)
+    [72494] = { hide = true }, -- Go To Closests Iceberg (Troll Breaker)
+    [72011] = { hide = true }, -- Stagger (Iceberg)
+    [72013] = { hide = true }, -- Stagger (Iceberg)
+    [72012] = { tooltip = T.Generic_Stagger }, -- Stagger (Iceberg)
+
+    [72703] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_frost_ranged.dds', name = A.Skill_Cold_Snap, hide = true }, -- Cold Snap Bolt (Leimenid Oracle)
+    [72705] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_frost_ranged.dds', unbreakable = 1, tooltip = T.Skill_Cold_Snap, tooltipValue2 = 7, stackAdd = 1 }, -- Cold Snap (Leimenid Oracle)
+
+    [71994] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_frost_ranged.dds', name = A.Skill_Cold_Snap, hide = true }, -- Cold Snap Bolt (Leimenid Oracle)
+    [71997] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_frost_ranged.dds', unbreakable = 1, tooltip = T.Skill_Cold_Snap, tooltipValue2 = 27, stackAdd = 1 }, -- Cold Snap (Leimenid Oracle)
+
+    [71926] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Frenzy of Blows (Angirgoth)
+    [71930] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Frenzy of Blows (Angirgoth)
+    [71929] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Frenzy of Blows (Angirgoth)
+
+    [71931] = { name = A.Skill_Flurry, hide = true }, -- Rapid Strikes (Angirgoth)
+    [71932] = { name = A.Skill_Flurry }, -- Rapid Strikes (Angirgoth)
+    [71933] = { hide = true }, -- Rapid Strikes (Angirgoth)
+
+    [71935] = { hide = true }, -- Steel Tornado (Angirgoth)
+    [71934] = { icon = 'esoui/art/icons/ability_dualwield_005_b.dds' }, -- Steel Tornado (Angirgoth)
+
+    [71897] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_frost_ranged.dds', hide = true }, -- Frost Bolt (Leimenid)
+    [71915] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_ice_shards.dds' }, -- Uppercut (Frost Atronach)
+
+    [72438] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_shatter.dds' }, -- Shatter (Giant)
+    [72439] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_shatter.dds', hide = true }, -- Shatter (Giant)
+
+    [68439] = { tooltip = T.Generic_Enrage_Damage_Reduce_No_Dur, tooltipValue2 = 25, tooltipValue3 = 20 }, -- Enrage (Aki/Vigi)
+    [74130] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds' }, -- Intimidating Roar (Aki/Vigi)
+    [74131] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds', tooltip = T.Generic_Fear }, -- Intimidating Roar (Aki/Vigi)
+
+    [66378] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_obliterate.dds' }, -- Sweep (Matriarch Runa)
+    [66379] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_obliterate.dds' }, -- Sweep (Matriarch Runa)
+    [66381] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_obliterate.dds', name = A.Skill_Sweep }, -- Obliterate (Matriach Runa)
+    [66380] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_obliterate.dds', name = A.Skill_Sweep, tooltip = T.Generic_Knockback }, -- Obliterate (Matriach Runa)
+
+    [72749] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_freezing_stomp.dds' }, -- Freezing Stomp (Matriarch Runa)
+    [72751] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_freezing_stomp.dds' }, -- Freezing Stomp (Matriarch Runa)
+    [72750] = { name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Freezing Stomp (Matriarch Runa)
+
+    [67088] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds' }, -- Intimidating Roar (Matriarch Runa)
+    [67091] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds', tooltip = T.Generic_Fear }, -- Intimidating Roar (Matriarch Runa)
+
+    [66325] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_shatter.dds' }, -- Shatter (Matriarch Runa)
+    [66326] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_shatter.dds', hide = true }, -- Shatter (Matriarch Runa)
+
+    [71696] = { hide = true }, -- Enerage (Matriarch Runa)
+    [72409] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', name = A.Skill_Iceberg_Calving, hide = true }, -- Taunt (Matriarch Runa)
+    [71701] = { hide = true }, -- Can Quake (Matriarch Runa)
+    [71702] = { hide = true }, -- Iceberg Calving (Matriarch Runa)
+    [71710] = { hide = true }, -- Iceberg Calving (Matriarch Runa)
+    [71705] = { hide = true }, -- Iceberg Calving (Matriarch Runa)
+
+    [71706] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds' }, -- Iceberg Calving (Matriarch Runa)
+    [72707] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', hide = true }, -- Iceberg Calving (Matriarch Runa)
+    [71721] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', name = A.Skill_Iceberg_Calving, hide = true }, -- Knockback (Matriarch Runa)
+    [71720] = { icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', name = A.Skill_Iceberg_Calving, unbreakable = 1, tooltip = T.Generic_Knockback }, -- Stun (Matriarch Runa)
+
+    [72005] = { hide = true }, -- DUN-MA GM Stop Slam Trolls (Troll Breaker)
 
     ----------------------------------------------------------------
     -- DUNGEONS    -------------------------------------------------
@@ -10294,8 +10401,8 @@ E.EffectOverride = {
     [61444] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_harrowing_ring.dds', name = A.Skill_Harrowing_Ring, unbreakable = 1, tooltip = T.Generic_Stun }, -- Shocked (Blood Essence)
     [43173] = { hide = true }, -- DUN_SCH_RingBurst (Blood Essence)
 
-    [27435] = { tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 40 }, -- Monstrous Growth (Flesh Atronach)
-    [27437] = { tooltip = T.Generic_Generic_Enrage_No_Dur, tooltipValue2 = 125 }, -- Monstrous Growth (Flesh Atronach)
+    [27435] = { tooltip = T.Generic_Enrage_No_Dur, tooltipValue2 = 40 }, -- Monstrous Growth (Flesh Atronach)
+    [27437] = { tooltip = T.Generic_Enrage_No_Dur, tooltipValue2 = 125 }, -- Monstrous Growth (Flesh Atronach)
 
     [27600] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', hide = true }, -- Blood Pool (Urvan Veleth)
     [27603] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_pool.dds', groundLabel = true, tooltip = T.Skill_Blood_Pool, tooltipValue2 = 1 }, -- Blood Pool (Urvan Veleth)
@@ -10681,6 +10788,10 @@ E.FakeExternalDebuffs = {
 
     -- Maelstrom Arena
     [73877] = { duration = 2000 }, -- Piercing Shriek (Lamia Queen)
+    [72705] = { duration = 10000 }, -- Cold Snap (Leimenid Oracle)
+    [71997] = { duration = 10000 }, -- Cold Snap (Leimenid Oracle)
+    [71940] = { duration = 8000 }, -- Frost Breath (Huntsman Chillbane)
+    [71720] = { duration = 2000 }, -- Stun (Matriarch Runa)
 
     ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------
@@ -10961,6 +11072,11 @@ E.FakeStagger = {
     -- Dragonstar Arena
     [53290] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433 }, -- Stagger (Sovngarde Icemage)
 
+    -- Maelstrom Arena
+    [72012] = { duration = 700 }, -- Stagger (Iceberg)
+    [71938] = { duration = 600 }, -- Frost Nova (Huntsman Chillbane)
+    [72750] = { duration = 433 }, -- Freezing Stomp (Matriarch Runa)
+
     -----------------
     -- Dungeons -----
     -----------------
@@ -11233,6 +11349,9 @@ E.AddGroundDamageAura = {
     [68358] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Queen's Radiance (Lamia Queen)
     [72159] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Static Field (Dwarven Spider)
     [70860] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Overheated Flame (The Control Guardian)
+
+    [72525] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Frigid Waters (Player)
+    [67808] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Frigid Waters (Player)
 
     ------------------
     -- DUNGEONS ------

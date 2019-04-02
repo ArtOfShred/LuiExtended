@@ -1596,7 +1596,12 @@ function SCB.Buff_OnMouseEnter(control)
         end
         duration = math.floor((duration * 10) + 0.5) / 10
 
-        local tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+        local tooltipText2
+        if LUIE.ResolveVeteranDifficulty() == true and E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipVet then
+            tooltipText2 = strformat(E.EffectOverride[control.effectId].tooltipVet, timer, value2, value3)
+        else
+             tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+        end
         if tooltipText2 ~= "" then
             tooltipText2 = "|cEE992AOverride TP:|r " .. tooltipText2
         end
@@ -1640,10 +1645,14 @@ function SCB.Buff_OnMouseEnter(control)
                 end
                 duration = math.floor((duration * 10) + 0.5) / 10
 
+                local tooltipText
                 if control.buffSlot then
                     tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or GetAbilityDescription(abilityId)
                 else
                     tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+                end
+                if LUIE.ResolveVeteranDifficulty() == true and E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipVet then
+                    tooltipText = strformat(E.EffectOverride[control.effectId].tooltipVet, timer, value2, value3)
                 end
 
                 -- Use default tooltip - temp if needed (TODO: Remove when all base ability/set tooltips are updated)

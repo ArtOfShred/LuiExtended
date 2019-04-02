@@ -501,7 +501,12 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     end
                     timer = math.floor((timer * 10) + 0.5) / 10
 
-                    local tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, timer, value2, value3) or GetAbilityDescription(abilityId)
+                    local tooltipText
+                    if LUIE.ResolveVeteranDifficulty() == true and LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltipVet then
+                        tooltipText = strformat(LUIE.Effects.EffectOverride[abilityId].tooltipVet, timer, value2, value3)
+                    else
+                        tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, timer, value2, value3) or GetAbilityDescription(abilityId)
+                    end
 
                     -- Use default tooltip - temp if needed (TODO: Remove when all base ability/set tooltips are updated)
                     if tooltipText == "" or tooltipText == nil then
@@ -1289,6 +1294,17 @@ function LUIE.UpdateGuildData()
         local name = GetGuildName(id)
         local guildAlliance = GetGuildAlliance(id)
         LUIE.GuildIndexData[i] = {id=id, name=name, guildAlliance=guildAlliance}
+    end
+end
+
+-- Simple function to check veteran difficult (VMA isn't considered being in a Veteran Dungeon so we have to do some filtering)
+function LUIE.ResolveVeteranDifficulty()
+    if GetGroupSize() <= 1 and IsUnitUsingVeteranDifficulty('player') then
+        return true
+    elseif GetCurrentZoneDungeonDifficulty() == 2 or IsGroupUsingVeteranDifficulty() == true then
+        return true
+    else
+        return false
     end
 end
 
