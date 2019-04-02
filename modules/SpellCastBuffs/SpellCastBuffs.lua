@@ -175,34 +175,11 @@ local g_werewolfQuest = 0 -- Counter for Werewolf transformation events (Quest)
 local g_lastWerewolfPower = 0 -- Tracker for last amount of werewolf power - used to freeze counter when using Devour or entering a Werewolf Shrine
 local g_ignoreAbilityId = {} -- Ignored abilityId's on EVENT_COMBAT_EVENT, some events fire twice and we need to ignore every other one.
 
---[[
--- Simple linear tweening - no easing, no acceleration
-local function LinearTween(t, b, c, d)
-    return c*t/d + b
-end
-
--- Quadratic easing in - accelerating from zero velocity
-local function EaseInQuad(t, b, c, d)
-    t = t / d
-    return c*t*t + b
-end
-]]
-
--- Quadratic easing out - decelerating to zero velocity
+-- Quadratic easing out - decelerating to zero velocity (For buff fade)
 local function EaseOutQuad(t, b, c, d)
     t = t / d
     return -c * t*(t-2) + b
 end
-
---[[
--- Quadratic easing in/out - acceleration until halfway, then deceleration
-local function EaseInOutQuad(t, b, c, d)
-    t = t / (d/2);
-    if (t < 1) then return c/2*t*t + b end
-    t = t - 1
-    return -c/2 * (t*(t-2) - 1) + b
-end
-]]--
 
 -- Initialization
 function SCB.Initialize( enabled )
@@ -229,8 +206,10 @@ function SCB.Initialize( enabled )
     SCB.ApplyFont()
 
     -- Create controls
+    -- Create temporary table to store references to scenes locally
+    local fragments = { }
 
-    -- We will not create TopLevelWindows when frames are locked to CustomFrames
+    -- We will not create TopLevelWindows when buff frames are locked to Custom Unit Frames
     if SCB.SV.lockPositionToUnitFrames and LUIE.UnitFrames.CustomFrames.player and LUIE.UnitFrames.CustomFrames.player.buffs and LUIE.UnitFrames.CustomFrames.player.debuffs then
         uiTlw.player1 = LUIE.UnitFrames.CustomFrames.player.buffs
         uiTlw.player2 = LUIE.UnitFrames.CustomFrames.player.debuffs
@@ -252,17 +231,12 @@ function SCB.Initialize( enabled )
 
         local fragment1 = ZO_HUDFadeSceneFragment:New(uiTlw.playerb, 0, 0)
         local fragment2 = ZO_HUDFadeSceneFragment:New(uiTlw.playerd, 0, 0)
+        table.insert(fragments, fragment1)
+        table.insert(fragments, fragment2)
 
-        sceneManager:GetScene("hud"):AddFragment( fragment1 )
-        sceneManager:GetScene("hud"):AddFragment( fragment2 )
-        sceneManager:GetScene("hudui"):AddFragment( fragment1 )
-        sceneManager:GetScene("hudui"):AddFragment( fragment2 )
-        sceneManager:GetScene("siegeBar"):AddFragment( fragment1 )
-        sceneManager:GetScene("siegeBar"):AddFragment( fragment2 )
-        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment1 )
-        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment2 )
     end
 
+    -- Create TopLevelWindows for buff frames when NOT locked to Custom Unit Frames
     if SCB.SV.lockPositionToUnitFrames and LUIE.UnitFrames.CustomFrames.reticleover and LUIE.UnitFrames.CustomFrames.reticleover.buffs and LUIE.UnitFrames.CustomFrames.reticleover.debuffs then
         uiTlw.target1 = LUIE.UnitFrames.CustomFrames.reticleover.buffs
         uiTlw.target2 = LUIE.UnitFrames.CustomFrames.reticleover.debuffs
@@ -286,18 +260,12 @@ function SCB.Initialize( enabled )
 
         local fragment1 = ZO_HUDFadeSceneFragment:New(uiTlw.targetb, 0, 0)
         local fragment2 = ZO_HUDFadeSceneFragment:New(uiTlw.targetd, 0, 0)
+        table.insert(fragments, fragment1)
+        table.insert(fragments, fragment2)
 
-        sceneManager:GetScene("hud"):AddFragment( fragment1 )
-        sceneManager:GetScene("hud"):AddFragment( fragment2 )
-        sceneManager:GetScene("hudui"):AddFragment( fragment1 )
-        sceneManager:GetScene("hudui"):AddFragment( fragment2 )
-        sceneManager:GetScene("siegeBar"):AddFragment( fragment1 )
-        sceneManager:GetScene("siegeBar"):AddFragment( fragment2 )
-        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment1 )
-        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment2 )
     end
 
-    -- Setup Prominent Buffs
+    -- Create TopLevelWindows for Prominent Buffs
     uiTlw.prominentbuffs = UI.TopLevel( nil, nil )
     uiTlw.prominentbuffs:SetHandler( "OnMoveStop", function(self)
             SCB.SV.prominentbOffsetX = self:GetLeft()
@@ -321,17 +289,10 @@ function SCB.Initialize( enabled )
 
     local fragmentP1 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentbuffs, 0, 0)
     local fragmentP2 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentdebuffs, 0, 0)
+    table.insert(fragments, fragmentP1)
+    table.insert(fragments, fragmentP2)
 
-    sceneManager:GetScene("hud"):AddFragment( fragmentP1 )
-    sceneManager:GetScene("hud"):AddFragment( fragmentP2 )
-    sceneManager:GetScene("hudui"):AddFragment( fragmentP1 )
-    sceneManager:GetScene("hudui"):AddFragment( fragmentP2 )
-    sceneManager:GetScene("siegeBar"):AddFragment( fragmentP1 )
-    sceneManager:GetScene("siegeBar"):AddFragment( fragmentP2 )
-    sceneManager:GetScene("siegeBarUI"):AddFragment( fragmentP1 )
-    sceneManager:GetScene("siegeBarUI"):AddFragment( fragmentP2 )
-
-    -- Separate container for players long buffs
+    -- Separate container for players long term buffs
     if true then
         uiTlw.player_long = UI.TopLevel( nil, nil )
         uiTlw.player_long:SetHandler( "OnMoveStop", function(self)
@@ -353,19 +314,25 @@ function SCB.Initialize( enabled )
         containerRouting.player_long = "player_long"
 
         local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.player_long, 0, 0)
-
-        sceneManager:GetScene("hud"):AddFragment( fragment )
-        sceneManager:GetScene("hudui"):AddFragment( fragment )
-        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
-        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
+        table.insert(fragments, fragment)
     else
         containerRouting.player_long = containerRouting.player1
     end
 
+    -- Loop over table of fragments to add them to relevant UI Scenes
+    for _,v in pairs(fragments) do
+        sceneManager:GetScene("hud"):AddFragment( v )
+        sceneManager:GetScene("hudui"):AddFragment( v )
+        sceneManager:GetScene("siegeBar"):AddFragment( v )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( v )
+    end
+
+    -- Set Buff Container Positions
     SCB.SetTlwPosition()
 
     -- Loop over created controls to...
     for _, v in pairs(containerRouting) do
+        -- Set Draw Priority
         uiTlw[v]:SetDrawLayer(DL_BACKDROP)
         uiTlw[v]:SetDrawTier(DT_LOW)
         uiTlw[v]:SetDrawLevel(1)
@@ -375,7 +342,7 @@ function SCB.Initialize( enabled )
             uiTlw[v].preview = UI.Texture( uiTlw[v], "fill", nil, "/esoui/art/miscellaneous/inset_bg.dds", DL_BACKGROUND, true )
             uiTlw[v].previewLabel = UI.Label( uiTlw[v].preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", windowTitles[v] .. (SCB.SV.lockPositionToUnitFrames and (v ~= "player_long" and v ~= "prominentbuffs" and v ~= "prominentdebuffs") and " (locked)" or ""), false )
 
-            -- create control that will hold the icons
+            -- Create control that will hold the icons
             uiTlw[v].prevIconsCount = 0
             -- We need this container only for icons that are aligned in one row/column automatically.
             -- Thus we do not create containers for player and target buffs/debuffs on custom frames
@@ -400,16 +367,13 @@ function SCB.Initialize( enabled )
     -- Buff Events
     eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
 
+    -- Combat Events
     eventManager:RegisterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, SCB.OnCombatEventIn )
     eventManager:RegisterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, SCB.OnCombatEventOut )
     eventManager:RegisterForEvent("LUIE_Event3", EVENT_COMBAT_EVENT, SCB.OnCombatEventOut )
     eventManager:AddFilterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Target -> Player
     eventManager:AddFilterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Player -> Target
     eventManager:AddFilterForEvent("LUIE_Event3", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER_PET, REGISTER_FILTER_IS_ERROR, false) -- Player Pet -> Target
-    --eventManager:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
-    --eventManager:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, false )
-
-    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  SCB.OnDeath )
 
     -- Stealth Events
     eventManager:RegisterForEvent(moduleName .. "player",          EVENT_STEALTH_STATE_CHANGED, SCB.StealthStateChanged )
@@ -427,12 +391,13 @@ function SCB.Initialize( enabled )
     eventManager:RegisterForEvent(moduleName, EVENT_ARTIFICIAL_EFFECT_ADDED, SCB.ArtificialEffectUpdate)
     eventManager:RegisterForEvent(moduleName, EVENT_ARTIFICIAL_EFFECT_REMOVED, SCB.ArtificialEffectUpdate)
 
-    -- Activate, Deactivate player, death, alive
+    -- Activate/Deactivate Player, Player Dead/Alive, Vibration, and Unit Death
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED,   SCB.OnPlayerActivated )
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_DEACTIVATED, SCB.OnPlayerDeactivated )
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ALIVE, SCB.OnPlayerAlive )
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_DEAD,  SCB.OnPlayerDead )
     eventManager:RegisterForEvent(moduleName, EVENT_VIBRATION,    SCB.OnVibration )
+    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  SCB.OnDeath )
 
     -- Mount Events
     eventManager:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED, SCB.MountStatus)
@@ -443,15 +408,18 @@ function SCB.Initialize( enabled )
     eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, SCB.DisguiseItem)
     eventManager:AddFilterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN )
 
-    -- Duel (For resolving Target battle spirit status)
+    -- Duel (For resolving Target Battle Spirit Status)
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, SCB.DuelStart)
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, SCB.DuelEnd)
 
-    -- Combat Events
+    -- Combat State
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE, SCB.PlayerCombatState)
 
     -- Werewolf
     SCB.RegisterWerewolfEvents()
+
+    -- Debug
+    SCB.RegisterDebugEvents()
 
     -- Enable Bar function for Bound Armor if the player is a Sorcerer
     if GetUnitClassId('player') == 2 then
@@ -459,8 +427,6 @@ function SCB.Initialize( enabled )
         eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED, SCB.DrawBoundArmorBuffs)
         eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED, SCB.DrawBoundArmorBuffs)
     end
-    -- Debug
-    SCB.RegisterDebugEvents()
 end
 
 function SCB.RegisterWerewolfEvents()
@@ -485,126 +451,6 @@ function SCB.RegisterDebugEvents()
         eventManager:RegisterForEvent(moduleName .. "LUIE_DEBUG_EFFECT", EVENT_EFFECT_CHANGED, SCB.EventEffectDebug)
     end
 end
-
--- For debug function - convert result reason codes to string value
-local resultTable = {
-    [2080] = "ON CD",
-    [2120] = "ABSORB",
-    [2040] = "BAD TARGET",
-    [3180] = "STANDARD ALREADY EXISTS",
-    [3160] = "STANDARD LIMIT",
-    [3200] = "STANDARD NO PERMISSION",
-    [3170] = "STANDARD MISMATCH",
-    [3190] = "STANDARD TOO CLOSE",
-    [3210] = "STANDARDS DISABLED",
-    [2210] = "BEGIN CHAN",
-    [2200] = "BEGIN",
-    [2360] = "BLADETURN",
-    [2151] = "BLOCK DMG",
-    [2150] = "BLOCK",
-    [2030] = "BUSY",
-    [2290] = "CAN'T USE",
-    [2330] = "OUT OF LOS",
-    [3410] = "CAN'T SWAP",
-    [2060] = "CASTER DEAD",
-    [2] = "CRIT",
-    [32] = "CRIT HEAL",
-    [2460] = "SHIELD",
-    [1] = "DMG",
-    [2190] = "DEFEND",
-    [2262] = "DIED XP",
-    [2260] = "DIED",
-    [2430] = "DISARMED",
-    [2340] = "DISORIENT",
-    [2140] = "DODGE",
-    [1073741826] = "DOT CRIT",
-    [1073741825] = "DOT",
-    [2250] = "FADED",
-    [2245] = "GAINED DUR",
-    [2240] = "GAINED",
-    [2310] = "FAILED REQ",
-    [3100] = "FAILED SEIGE REQ",
-    [2110] = "FAILED",
-    [2420] = "FALL DMG",
-    [2500] = "FALLING",
-    [2320] = "FEAR",
-    [3230] = "CAMP EXISTS",
-    [3240] = "CAMP NO PERMISSION",
-    [3220] = "CAMP TABARD MISMATCH",
-    [3080] = "GRAVEYARD DISALLOWED IN INSTANCE",
-    [3030] = "GRAVEYARD TOO CLOSE",
-    [16] = "HEAL",
-    [1073741856] = "HOT CRIT",
-    [1073741840] = "HOT",
-    [2000] = "IMMUNE",
-    [2510] = "IN AIR",
-    [2300] = "IN COMBAT",
-    [2610] = "IN ENEMY KEEP",
-    [2613] = "IN ENEMY OUTPOST",
-    [2612] = "IN ENEMY RESOURCE",
-    [2611] = "IN ENEMY TOWN",
-    [3440] = "IN HIDEYHOLE",
-    [2090] = "OUT OF RESOURCE",
-    [2410] = "INTERCEPT",
-    [2230] = "INTERRUPT",
-    [2810] = "INVALID FIXTURE",
-    [3420] = "INVALID JUSTICE TARGET",
-    [2800] = "INVALID TERRAIN",
-    [-1] = "INVALID",
-    [3130] = "KILLED BY SUBZONE",
-    [2265] = "KB",
-    [2475] = "KNOCKBCK",
-    [2400] = "LEVITATE",
-    [2392] = "LINKED CAST",
-    [3140] = "MERC LIMIT",
-    [2180] = "MISS",
-    [3040] = "NO EMPTY SOUL GEM",
-    [3060] = "NO FILLED SOUL GEM",
-    [3150] = "MOBILE GRAVEYARD LIMIT",
-    [3070] = "MOUNTED",
-    [2630] = "MUST BE IN OWN KEEP",
-    [2700] = "NO LOACATION",
-    [2910] = "NO RAM TARGET WITHIN RANGE",
-    [3400] = "NO WEP SWAP",
-    [3050] = "NOT ENOUGH SPACE SOUL GEM",
-    [3430] = "NOT ENOUGH SPACE",
-    [3090] = "NOT ENOUG SPACE SIEGE",
-    [2640] = "TOO CLOSE",
-    [2440] = "OFF BALANCE",
-    [2390] = "PACIFY",
-    [2130] = "PARRY",
-    [2170] = "PART RESIST",
-    [64] = "-POWER",
-    [128] = "+POWER",
-    [4] = "PRECISE DAMAGE",
-    [2350] = "QUEUED",
-    [3120] = "ALL TARGETS DESTROYED",
-    [3110] = "ALL TARGETS OCCUPIED",
-    [2520] = "RECALL",
-    [2111] = "REFLECT",
-    [3020] = "REINCARNATE",
-    [2160] = "RESIST",
-    [2490] = "RESURRECT",
-    [2480] = "ROOT",
-    [2620] = "SIEGE LIMIT",
-    [2605] = "SIEGE NOT ALLOWED IN ZONE",
-    [2600] = "SIEGE TOO CLOSE",
-    [2010] = "SILENCE",
-    [2025] = "SNARE",
-    [3000] = "SPRINT",
-    [2470] = "STAGGER",
-    [2020] = "STUN",
-    [3010] = "SWIMMING",
-    [2050] = "TARGET DEAD",
-    [2070] = "TARGET NOT IN VIEW",
-    [2391] = "TARGET NOT PVP FLAGGED",
-    [2100] = "TARGET OUT OF RANGE",
-    [2370] = "TARGET TOO CLOSE",
-    [2900] = "UNEVEN TERRAIN",
-    [2450] = "WEAPON SWAP",
-    [8] = "WRECKING DAMAGE",
-    [2380 ] = "WRONG WEAPON",
-}
 
 -- Debug Display for Combat Events
 function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
@@ -638,7 +484,7 @@ function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGr
         target = "NIL"
     end
 
-    local formattedResult = resultTable[result]
+    local formattedResult = LUIE.DebugResults[result]
 
     d(iconFormatted .. " ["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
 end
@@ -686,6 +532,7 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     end
 end
 
+-- List Handling (Add) for Prominent Auras & Blacklist
 function SCB.AddToCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.BlacklistTable and "Aura Blacklist." or ""
@@ -710,6 +557,7 @@ function SCB.AddToCustomList(list, input)
     SCB.Reset()
 end
 
+-- List Handling (Remove) for Prominent Auras & Blacklist
 function SCB.RemoveFromCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.BlacklistTable and "Aura Blacklist." or ""
@@ -734,12 +582,14 @@ function SCB.RemoveFromCustomList(list, input)
     SCB.Reset()
 end
 
+-- Function to pull Werewolf Cast Bar / Buff Aura Icon based off the players morph choice
 local function SetWerewolfIcon()
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
     g_werewolfName, g_werewolfIcon = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
     g_werewolfId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
 end
 
+-- Setup Werewolf Timer Icon (Active)
 local function SetWerewolfIconTimer(currentTime)
     SetWerewolfIcon()
     local currentPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
@@ -757,6 +607,7 @@ local function SetWerewolfIconTimer(currentTime)
     }
 end
 
+-- Setup Werewolf Timr Icon (Frozen)
 local function SetWerewolfIconFrozen()
     SetWerewolfIcon()
     g_effectsList.player1["Werewolf Indicator"] = {
@@ -768,6 +619,7 @@ local function SetWerewolfIconFrozen()
     }
 end
 
+-- Get Werewolf State for Werewolf Buff Tracker
 function SCB.WerewolfState(eventCode, werewolf, onActivation)
     if werewolf then
         for i = 1, 4 do
@@ -802,11 +654,13 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
     end
 end
 
+-- Power Trailer for Werewolf Buff - Sets the icon to frozen if power drain stops for 1.1 seconds (Werewolf drains power every 1 second)
 function SCB.PowerTrailer()
     SetWerewolfIconFrozen()
     eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
 end
 
+-- EVENT_POWER_UPDATE handler for Werewolf Buff Tracker
 function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
     if g_lastWerewolfPower > powerValue then
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
@@ -840,6 +694,7 @@ function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue
     end
 end
 
+-- EVENT_DUEL_STARTED handler for creating Battle Spirit Icon on Target
 function SCB.DuelStart()
     local duelState, characterName = GetDuelInfo()
     if duelState == 3 and not SCB.SV.IgnoreBattleSpiritTarget then
@@ -848,11 +703,13 @@ function SCB.DuelStart()
     end
 end
 
+-- EVENT_DUEL_FINISHED handler for removing Battle Spirit Icon on Target
 function SCB.DuelEnd()
     g_currentDuelTarget = nil
     SCB.ReloadEffects("reticleover")
 end
 
+-- Create a buff icon for Disguise if we are wearing one (on load) -- TODO: Simplify with function below!
 function SCB.InitializeDisguise()
     if SCB.SV.HidePlayerBuffs then
         return
@@ -877,6 +734,7 @@ function SCB.InitializeDisguise()
     end
 end
 
+-- TODO: Simplify
 function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     if slotId == 10 then
         if SCB.SV.HidePlayerBuffs then
@@ -915,6 +773,8 @@ function SCB.AbilityListChange(eventCode)
     end
 end
 
+
+-- EVENT_MOUNTED_STATE_CHANGED handler to create Mount Buff icon for player
 function SCB.MountStatus(eventCode, mounted)
     -- Remove icon first
     g_effectsList.player1["Mount"] = nil
@@ -942,12 +802,15 @@ function SCB.MountStatus(eventCode, mounted)
     end
 end
 
+-- EVENT_COLLECTIBLE_USE_RESULT handler - Waits 100 ms + latency for the delay in activating collectibles before checking
 function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
     local latency = GetLatency()
     latency = latency + 100
     callLater(SCB.CollectibleBuff, latency)
 end
 
+-- Handles delayed call from SCB.CollectibleUsed() -- TODO: Check how events are handled when ENTERING CYRODIIL to better remove these
+-- TODO: Check for BG Status too since I think AVA returns false there?
 function SCB.CollectibleBuff()
     if SCB.SV.HidePlayerBuffs then
         return
@@ -1023,6 +886,7 @@ function SCB.SetIconsAlignment( value )
     end
 end
 
+-- Sets vertical alignment of Prominent Buff icons
 function SCB.SetIconsAlignmentProminentBuff( value )
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.ProminentBuffAlignment
@@ -1045,6 +909,7 @@ function SCB.SetIconsAlignmentProminentBuff( value )
     end
 end
 
+-- Sets vertical alignment of Prominent Debuff icons
 function SCB.SetIconsAlignmentProminentDebuff( value )
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.ProminentDebuffAlignment
@@ -1067,6 +932,7 @@ function SCB.SetIconsAlignmentProminentDebuff( value )
     end
 end
 
+-- Set PLAYER LONG Container Vertical Alignment
 function SCB.SetIconsAlignmentLongVert( value )
     -- Check correctness of argument value
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
@@ -1097,6 +963,7 @@ function SCB.SetIconsAlignmentLongVert( value )
     end
 end
 
+-- Set PLAYER LONG Container Horizontal Alignment
 function SCB.SetIconsAlignmentLongHorz( value )
     -- Check correctness of argument value
     if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
@@ -1290,6 +1157,7 @@ function SCB.SetMovingState(state)
     end
 end
 
+-- Reset all buff containers
 function SCB.Reset()
     if not SCB.Enabled then
         return
@@ -1369,6 +1237,7 @@ function SCB.Reset()
     end
 end
 
+-- Reset only a single icon
 function SCB.ResetSingleIcon( container, buff, AnchorItem )
     local buffSize = SCB.SV.IconSize
     local frameSize = 2 * buffSize + 4
@@ -1507,8 +1376,7 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
             end
         end
 
-        -- For container without holder we will reanchor first icon all the time
-
+    -- For container without holder we will reanchor first icon all the time
     -- Rest icons go one after another.
     else
         if uiTlw[container].alignVertical then
@@ -1519,18 +1387,20 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
     end
 end
 
+-- Right Click Cancel Buff function
 function SCB.Buff_OnMouseUp(self, button, upInside)
     if upInside and button == MOUSE_BUTTON_INDEX_RIGHT and self.buffSlot and not self.isArtificial then
         CancelBuff(self.buffSlot)
     end
 end
 
--- TEMP
+-- TODO - add as option - StickyTooltip removal function
 local function ClearStickyTooltip()
     ClearTooltip(GameTooltip)
     eventManager:UnregisterForUpdate(moduleName .. "StickyTooltip")
 end
 
+-- OnMouseEnter for Buff Tooltips
 function SCB.Buff_OnMouseEnter(control)
 
     -- TEMP
@@ -1705,6 +1575,7 @@ function SCB.Buff_OnMouseEnter(control)
     end
 end
 
+-- OnMouseExit for Buff Tooltips
 function SCB.Buff_OnMouseExit(control)
     local displayName = GetDisplayName()
     if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
@@ -1716,6 +1587,7 @@ function SCB.Buff_OnMouseExit(control)
     -- TODO: Add Sticky Tooltips
 end
 
+-- Create a Single Buff Icon
 function SCB.CreateSingleIcon(container, AnchorItem, effectType)
     local buff = UI.Backdrop( uiTlw[container], nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
 
@@ -1791,7 +1663,7 @@ function SCB.CreateSingleIcon(container, AnchorItem, effectType)
     return buff
 end
 
- -- Set proper colour of border and text on single buff element
+ -- Set proper color of border and text on single buff element
 function SCB.SetSingleIconBuffType(buff, buffType, unbreakable)
     local contextType
     local colour
@@ -1879,8 +1751,8 @@ function SCB.ApplyFont()
 end
 
 --[[
- * Runs on the EVENT_EFFECT_CHANGED listener.
- * This handler fires every long-term effect added or removed:
+    * Runs on the EVENT_EFFECT_CHANGED listener.
+    * This handler fires every long-term effect added or removed:
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and (E.EffectGroundDisplay[abilityId] or E.LinkedGroundMine[abilityId]) and not SCB.SV.HideGroundEffects then
@@ -2313,6 +2185,10 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
 end
 
+--[[
+    * Runs on the EVENT_ARTIFICIAL_EFFECT_ADDED / EVENT_ARTIFICIAL_EFFECT_REMOVED listener.
+    * This handler fires whenever an ArtificialEffectId is added or removed:
+]]--
 function SCB.ArtificialEffectUpdate(eventCode, effectId)
     if SCB.SV.HidePlayerBuffs then
         return
@@ -2359,6 +2235,8 @@ end
  * As well as create fake buffs/debuffs for events with no active effect present.
  ]]--
 
+-- Counter variable for ACTION_RESULT_EFFECT_GAINED / ACTION_RESULT_EFFECT_FADED tracking for some buffs that are broken
+-- Handles buffs that rather than refreshing on reapplication create an individual instance and therefore have GAINED/FADED events every single time the effect ticks.
 local InternalStackCounter = { }
 
  -- Combat Event (Target = Player)
@@ -2953,7 +2831,7 @@ function SCB.OnReticleTargetChanged(eventCode)
     SCB.ReloadEffects("reticleover")
 end
 
--- Used to clear existing LET.effectsList.unitTag and to request game API to fill it again
+-- Used to clear existing .effectsList.unitTag and to request game API to fill it again
 function SCB.ReloadEffects(unitTag)
     -- If unitTag was not provided, consider it as Player
     local unitTag = unitTag or "player"
@@ -2986,6 +2864,7 @@ function SCB.ReloadEffects(unitTag)
         end
     end
 
+    -- TODO: Streamline (Move this out)
     if not SCB.SV.HideTargetBuffs then
         local unitName = GetUnitName(unitTag)
         -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
@@ -3010,7 +2889,7 @@ function SCB.ReloadEffects(unitTag)
         SCB.ArtificialEffectUpdate()
     end
 
-    -- create custom buff icon for Recall Cooldown effect
+    -- create custom buff icon for Recall Cooldown effect -- TODO: Streamline (Move this out)
     if SCB.SV.ShowRecall and unitTag == "player" and not (SCB.SV.HidePlayerBuffs or SCB.SV.HidePlayerDebuffs) then
         local recallRemain, _ = GetRecallCooldown()
         if recallRemain > 0 then
@@ -3053,6 +2932,7 @@ function SCB.ReloadEffects(unitTag)
             return
         end
 
+        -- TODO: Streamline
         if not SCB.SV.IgnoreBattleSpiritTarget then
             if ( ( IsInAvAZone() or IsActiveWorldBattleground() ) and IsUnitPlayer("reticleover") and (GetUnitReaction("reticleover") == UNIT_REACTION_PLAYER_ALLY) ) or GetUnitName(unitTag) == g_currentDuelTarget then
                 g_effectsList.reticleover1[ A.Skill_Battle_Spirit ] = {
@@ -3065,6 +2945,7 @@ function SCB.ReloadEffects(unitTag)
             end
         end
 
+        -- TODO: Streamline
         if not SCB.SV.IgnoreCyrodiilTarget then
             if IsInAvAZone() and IsUnitPlayer("reticleover") and (GetUnitReaction("reticleover") == UNIT_REACTION_PLAYER_ALLY) then
                 local campaignId = GetCurrentCampaignId()
@@ -3113,6 +2994,7 @@ function SCB.ReloadEffects(unitTag)
             end
         end
 
+        -- TODO: Streamline
         if SCB.SV.StealthStateTarget and not SCB.SV.HideTargetBuffs then
             local stealthState = GetUnitStealthState ("reticleover")
             if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
@@ -3136,6 +3018,7 @@ function SCB.ReloadEffects(unitTag)
             end
         end
 
+        -- TODO: Streamline
         if SCB.SV.DisguiseStateTarget and not SCB.SV.HideTargetBuffs then
             --d("checking for disguise")
             local disguiseState = GetUnitDisguiseState ("reticleover")
@@ -3157,6 +3040,7 @@ function SCB.ReloadEffects(unitTag)
     end
 end
 
+-- TODO: Streamline / combine with code embedded above to reduce redundant code
 function SCB.PlayerCombatState(eventCode, inCombat)
     if not SCB.SV.HideTargetBuffs then
         local unitName = GetUnitName('reticleover')
@@ -3532,6 +3416,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
     uiTlw[container].prevIconsCount = iconsNum
 end
 
+-- TODO: Streamline all this with the other Stealth code
 -- Runs on the EVENT_STEALTH_STATE_CHANGED listener.
 -- Watches for changes in a stealth state to display custom buff icon
 function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
@@ -3582,6 +3467,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
     end
 end
 
+-- TODO: Streamline this with all the other Disguise Code
 function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
     if SCB.SV.DisguiseStatePlayer and unitTag == "player" and not SCB.SV.HidePlayerBuffs then
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
@@ -3617,6 +3503,8 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
     end
 end
 
+-- Runs on EVENT_PLAYER_ACTIVATED listener
+-- TODO: Move out Disguise code here
 function SCB.OnPlayerActivated(eventCode)
     g_playerActive = true
     g_playerResurrectStage = nil
@@ -3706,6 +3594,7 @@ function SCB.OnPlayerActivated(eventCode)
     end
 end
 
+-- TODO: Streamline with ReticleOver code above
 function SCB.LoadCyrodiilPlayerBuffs()
     if SCB.SV.HidePlayerBuffs then
         return
@@ -3757,11 +3646,13 @@ function SCB.LoadCyrodiilPlayerBuffs()
     end
 end
 
+-- Runs on the EVENT_PLAYER_DEACTIVATED listener
 function SCB.OnPlayerDeactivated(eventCode)
     g_playerActive = false
     g_playerResurrectStage = nil
 end
 
+-- Runs on the EVENT_PLAYER_ALIVE listener
 function SCB.OnPlayerAlive(eventCode)
     --[[-- If player clicks "Resurrect at Wayshrine", then player is first deactivated, then he is transferred to new position, then he becomes alive (this event) then player is activated again.
     To register resurrection we need to work in this function if player is already active. --]]--
@@ -3787,6 +3678,7 @@ function SCB.OnPlayerAlive(eventCode)
     So now we'll listen in the vibration event and progress g_playerResurrectStage with first 2 events and then on correct third event we'll create a buff. --]]
 end
 
+-- Runs on the EVENT_PLAYER_DEAD listener
 function SCB.OnPlayerDead(eventCode)
     if not g_playerActive then
         return
@@ -3794,6 +3686,7 @@ function SCB.OnPlayerDead(eventCode)
     g_playerDead = true
 end
 
+-- Runs on the EVENT_VIBRATION listener (detects player resurrection stage)
 function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTriggerMotor, rightTriggerMotor)
     if not g_playerResurrectStage then
         return
@@ -3821,10 +3714,13 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
     end
 end
 
+-- Runs on TODO: Insert names of bar slot handler events here
+-- TODO: Change function namme
+-- Creates Minor Ward/Minor Resolve buffs for Bound Aegis
 function SCB.DrawBoundArmorBuffs()
 
     g_effectsList["player1"][999008] = nil
-    g_effectsList["player1"][999098] = nil
+    g_effectsList["player1"][999009] = nil
 
     for slotNum = 3, 8 do
         local abilityId = GetSlotBoundId(slotNum)
@@ -3836,9 +3732,9 @@ function SCB.DrawBoundArmorBuffs()
                 forced = "long",
                 restart=true, iconNum=0,
             }
-            g_effectsList["player1"][999098] = {
+            g_effectsList["player1"][999009] = {
                 target ="player", type=1,
-                id=999008, icon = 'esoui/art/icons/ability_buff_minor_ward.dds', name = A.Skill_Minor_Ward,
+                id=999009, icon = 'esoui/art/icons/ability_buff_minor_ward.dds', name = A.Skill_Minor_Ward,
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "long",
                 restart=true, iconNum=0,
