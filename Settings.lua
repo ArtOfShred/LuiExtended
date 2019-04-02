@@ -8,7 +8,7 @@ local strformat     = zo_strformat
 local iconFormat    = zo_iconFormat
 
 -- Create Settings Menu
-function LUIE_CreateSettings()
+function LUIE.CreateSettings()
     -- Load LibAddonMenu
     local LAM2  = LibStub("LibAddonMenu-2.0")
     -- Load LibMediaProvider

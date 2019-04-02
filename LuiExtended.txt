@@ -42,6 +42,7 @@
 libs/LibMediaProvider-1.0/LibMediaProvider-1.0.lua
 
 LuiExtended.lua
+Hooks.lua
 UI.lua
 Settings.lua
 Changelog.lua
