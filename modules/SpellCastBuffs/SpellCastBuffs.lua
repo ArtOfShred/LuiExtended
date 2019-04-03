@@ -151,7 +151,6 @@ LUIE.EffectsList                     = { player1 = {}, player2 = {}, reticleover
 
 local uiTlw                          = {} -- GUI
 local containerRouting               = {} -- Routing for Auras
-local g_currentDuelTarget            = nil -- Saved Duel Target for generating Battle Spirit icon when enabled
 local g_playerActive                 = false -- Player Active State
 local g_playerDead                   = false -- Player Dead State
 local g_playerResurrectStage         = nil -- Player resurrection sequence state
@@ -935,7 +934,7 @@ function SCB.Reset()
     end
 
     if g_playerActive then
-        SCB.ReloadEffects()
+        SCB.ReloadEffects("player")
     end
 end
 
@@ -2514,8 +2513,9 @@ end
 
 -- Used to clear existing .effectsList.unitTag and to request game API to fill it again
 function SCB.ReloadEffects(unitTag)
-    -- If unitTag was not provided, consider it as Player
-    local unitTag = unitTag or "player"
+
+    -- Bail if this isn't reticleover or player
+    if unitTag ~= "player" and unitTag ~= "reticleover" then return end
 
     -- Clear Existing
     LUIE.EffectsList[unitTag .. 1] = {}
@@ -2529,6 +2529,9 @@ function SCB.ReloadEffects(unitTag)
         LUIE.EffectsList["promb_target"] = {}
         LUIE.EffectsList["promd_target"] = {}
     end
+
+    -- Stop doing anything else if we moused off a target
+    if GetUnitName(unitTag) == "" then return end
 
     -- Fill it again
     for i = 1, GetNumBuffs(unitTag) do
@@ -2587,6 +2590,8 @@ function SCB.ReloadEffects(unitTag)
         end
     end
 
+    SCB.LoadCyrodiilBuffs(unitTag)
+
     if unitTag == "reticleover" then
         for _, effectsList in pairs( {LUIE.EffectsList.ground, LUIE.EffectsList.saved} ) do
             --local container = containerRouting[context]
@@ -2609,71 +2614,7 @@ function SCB.ReloadEffects(unitTag)
             end
         end
 
-        if SCB.SV.HideTargetBuffs then
-            return
-        end
-
-        -- TODO: Streamline
-        if not SCB.SV.IgnoreBattleSpiritTarget then
-            if ( LUIE.ResolvePVPZone() and IsUnitPlayer("reticleover") and (GetUnitReaction("reticleover") == UNIT_REACTION_PLAYER_ALLY) ) or GetUnitName(unitTag) == g_currentDuelTarget then
-                LUIE.EffectsList.reticleover1[ A.Skill_Battle_Spirit ] = {
-                    type=1,
-                    id=85701, name=A.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
-                    dur=0, starts=1, ends=nil,
-                    forced = "short",
-                    restart=true, iconNum=0,
-                }
-            end
-        end
-
-        -- TODO: Streamline
-        if not SCB.SV.IgnoreCyrodiilTarget then
-            if IsPlayerInAvAWorld() and IsUnitPlayer("reticleover") and (GetUnitReaction("reticleover") == UNIT_REACTION_PLAYER_ALLY) then
-                local campaignId = GetCurrentCampaignId()
-                local homeKeep, _, _, _, edgeKeepCount = GetAvAKeepScore(campaignId, GetUnitAlliance("reticleover"))
-                local id
-                local icon
-                local name
-                local stack
-                if edgeKeepCount >= 1 then
-                    if edgeKeepCount == 1 then
-                        id = 111549
-                        icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_1.dds"
-                        name = A.Skill_Edge_Keep_Bonus_1
-                        stack = 1
-                    elseif edgeKeepCount == 2 then
-                        id = 111552
-                        icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_2.dds"
-                        name = A.Skill_Edge_Keep_Bonus_2
-                        stack = 2
-                    elseif edgeKeepCount == 3 then
-                        id = 111553
-                        icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_3.dds"
-                        name = A.Skill_Edge_Keep_Bonus_3
-                        stack = 3
-                    end
-                    if not (SCB.SV.BlacklistTable[id] or SCB.SV.BlacklistTable[name]) then
-                        LUIE.EffectsList.reticleover1[ A.Skill_Edge_Keep_Bonus_1 ] = {
-                            type=1,
-                            id=id, name=name, icon = icon,
-                            dur=0, starts=1, ends=nil,
-                            forced = "short",
-                            restart=true, iconNum=0,
-                            stack = stack,
-                        }
-                    end
-                end
-                if homeKeep and not (SCB.SV.BlacklistTable[11346] or SCB.SV.BlacklistTable[A.Skill_Home_Keep_Bonus]) then
-                    LUIE.EffectsList.reticleover1[ A.Skill_Home_Keep_Bonus ] = {
-                    type=1,
-                    id=11346, name=A.Skill_Home_Keep_Bonus, icon = "LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds",
-                    dur=0, starts=1, ends=nil,
-                    forced = "short",
-                    restart=true, iconNum=0,
-                    }
-                end
-            end
-        end
+        SCB.LoadBattleSpiritTarget()
 
         -- TODO: Streamline
         if SCB.SV.StealthStateTarget and not SCB.SV.HideTargetBuffs then
@@ -3261,69 +3202,17 @@ function SCB.OnPlayerActivated(eventCode)
     end
 
     -- Load Cyrodiil Buffs
-    SCB.LoadCyrodiilPlayerBuffs()
+    SCB.LoadCyrodiilBuffs("player")
     -- Checks for Artificial effects on the player just in case they have no buffs/debuffs present to trigger OnEffectUpdate
     SCB.ArtificialEffectUpdate()
     -- Add Bound Aegis buffs if player has it slotted
-    if GetUnitClassId('player') == 2 then
+    if GetUnitClassId("player") == 2 then
         SCB.DrawBoundAegisBuffs()
     end
 
     -- Sets the player to dead if reloading UI or loading in while dead.
     if IsUnitDead("player") then
         g_playerDead = true
-    end
-end
-
--- TODO: Streamline with ReticleOver code above
-function SCB.LoadCyrodiilPlayerBuffs()
-    if SCB.SV.HidePlayerBuffs then
-        return
-    end
-    if not SCB.SV.IgnoreCyrodiilPlayer and LUIE.ResolvePVPZone() then
-        local campaignId = GetCurrentCampaignId()
-        local homeKeep, _, _, _, edgeKeepCount = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
-        local id
-        local icon
-        local name
-        local stack
-        if edgeKeepCount >= 1 then
-            if edgeKeepCount == 1 then
-                id = 111549
-                icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_1.dds"
-                name = A.Skill_Edge_Keep_Bonus_1
-                stack = 1
-            elseif edgeKeepCount == 2 then
-                id = 111552
-                icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_2.dds"
-                name = A.Skill_Edge_Keep_Bonus_2
-                stack = 2
-            elseif edgeKeepCount == 3 then
-                id = 111553
-                icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_3.dds"
-                name = A.Skill_Edge_Keep_Bonus_3
-                stack = 3
-            end
-            if not (SCB.SV.BlacklistTable[id] or SCB.SV.BlacklistTable[name]) then
-                LUIE.EffectsList["player1"][ A.Skill_Edge_Keep_Bonus_1 ] = {
-                    target="player", type=1,
-                    id=id, name=name, icon = icon,
-                    dur=0, starts=1, ends=nil,
-                    forced = "long",
-                    restart=true, iconNum=0,
-                    stack = stack,
-                }
-            end
-        end
-        if homeKeep and not (SCB.SV.BlacklistTable[11346] or SCB.SV.BlacklistTable[A.Skill_Home_Keep_Bonus]) then
-            LUIE.EffectsList["player1"][ A.Skill_Home_Keep_Bonus ] = {
-            target = "player", type=1,
-            id=11346, name=A.Skill_Home_Keep_Bonus, icon = "LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds",
-            dur=0, starts=1, ends=nil,
-            forced = "long",
-            restart=true, iconNum=0,
-            }
-        end
     end
 end
 

@@ -114,7 +114,7 @@ function SCB.TempSlashGround()
         d("LUIE --- Ground Damage Auras Enabled ---")
     end
 
-    LUIE.SpellCastBuffs.ReloadEffects()
+    LUIE.SpellCastBuffs.ReloadEffects("player")
 end
 -- TODO: maybe only register this for @ArtOfShred
 SLASH_COMMANDS["/ground"] = SCB.TempSlashGround
