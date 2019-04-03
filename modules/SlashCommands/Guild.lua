@@ -9,7 +9,7 @@ local printToChat = LUIE.PrintToChat
 local strformat = zo_strformat
 
 -- Slash Command to invite someone to a guild
-function LUIE.SlashGuildInvite(option)
+function SC.SlashGuildInvite(option)
     -- If no input was entered, display an error and end.
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV), true)
@@ -66,7 +66,7 @@ function LUIE.SlashGuildInvite(option)
 end
 
 -- Slash Command to leave a guild
-function LUIE.SlashGuildQuit(guildnumber)
+function SC.SlashGuildQuit(guildnumber)
     if guildnumber == "1" and LUIE.GuildIndexData[1] then
         guildnumber = LUIE.GuildIndexData[1].id
     elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
@@ -101,7 +101,7 @@ function LUIE.SlashGuildQuit(guildnumber)
 end
 
 -- Slash Command to kick someone from a guild
-function LUIE.SlashGuildKick(option)
+function SC.SlashGuildKick(option)
     -- If no input was entered, display an error and end.
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK), true)

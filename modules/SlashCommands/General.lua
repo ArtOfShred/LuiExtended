@@ -9,7 +9,7 @@ local printToChat = LUIE.PrintToChat
 local strformat = zo_strformat
 
 -- Slash Command to port to primary home
-function LUIE.SlashHome()
+function SC.SlashHome()
     local primaryHouse = GetHousingPrimaryHouse()
     -- Check if we are in combat
     if IsUnitInCombat("player") then
@@ -57,7 +57,7 @@ function LUIE.SlashHome()
 end
 
 -- Slash Command to initiate a trade dialogue
-function LUIE.SlashTrade(option)
+function SC.SlashTrade(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Notify.NotificationTradeAlert then
@@ -70,7 +70,7 @@ function LUIE.SlashTrade(option)
 end
 
 -- Slash Command to queue for a campaign
-function LUIE.SlashCampaignQ(option)
+function SC.SlashCampaignQ(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME), true)
         if LUIE.SV.TempAlertCampaign then
@@ -123,7 +123,7 @@ function LUIE.SlashCampaignQ(option)
 end
 
 -- Slash Command to use collectibles based on their collectible id
-function LUIE.SlashCollectible(id)
+function SC.SlashCollectible(id)
     local collectibleid = id
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
@@ -157,7 +157,7 @@ function LUIE.SlashCollectible(id)
 end
 
 -- Slash Command to equip a chosen outfit by number
-function LUIE.SlashOutfit(option)
+function SC.SlashOutfit(option)
     if option == "" or option == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
         if LUIE.SV.TempAlertOutfit then
@@ -201,7 +201,7 @@ function LUIE.SlashOutfit(option)
 end
 
 -- Slash Command to report a player by given name and attach useful information
-function LUIE.SlashReport(player)
+function SC.SlashReport(player)
     local name = player
     local location = GetPlayerLocationName()
     local currenttime = GetTimeString()

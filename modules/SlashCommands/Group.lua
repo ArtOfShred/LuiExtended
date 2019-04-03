@@ -12,7 +12,7 @@ local callLater = zo_callLater
 -- Slash Command to perform a group regroup
 local g_regroupStacks = {} -- Character stack for Regroup reinvites
 local g_pendingRegroup = false -- Toggled when a regroup is in progress to prevent additional regroup attempts from firing
-function LUIE.SlashRegroup()
+function SC.SlashRegroup()
     local function RegroupInvite()
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG), true)
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
@@ -131,7 +131,7 @@ function LUIE.SlashRegroup()
 end
 
 -- Slash Command to disband the current group
-function LUIE.SlashDisband()
+function SC.SlashDisband()
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
     if groupSize <= 1 then
@@ -174,13 +174,13 @@ function LUIE.SlashDisband()
 end
 
 -- Slash Command to leave a group
-function LUIE.SlashGroupLeave()
+function SC.SlashGroupLeave()
     -- EVENT_GROUP_NOTIFICATION_MESSAGE hook handles response to this.
     GroupLeave()
 end
 
 -- Slash Command to kick someone from a group
-function LUIE.SlashGroupKick(option)
+function SC.SlashGroupKick(option)
     local groupSize = GetGroupSize()
     -- Rather then error out, let the player use /kick and /remove as a substitute for /votekick and /voteremove in LFG
     if IsInLFGGroup() then
@@ -193,7 +193,7 @@ function LUIE.SlashGroupKick(option)
             return
         else
             if SC.SV.SlashVoteKick then
-                LUIE.SlashVoteKick(option)
+                SC.SlashVoteKick(option)
             else
                 printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_LFG), true)
                 if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
@@ -274,16 +274,16 @@ function LUIE.SlashGroupKick(option)
 end
 
 -- If the player uses /kick with no option then we need to play the kick emote, otherwise handle everything with the SlashGroupKick function.
-function LUIE.SlashKick(option)
+function SC.SlashKick(option)
     if option == "" or not SC.SV.SlashGroupKick then
         PlayEmoteByIndex(109)
     else
-        LUIE.SlashGroupKick(option)
+        SC.SlashGroupKick(option)
     end
 end
 
 -- Slash Command to initiate a votekick
-function LUIE.SlashVoteKick(option)
+function SC.SlashVoteKick(option)
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
     if groupSize <= 1 then
@@ -371,7 +371,7 @@ function LUIE.SlashVoteKick(option)
 end
 
 -- Slash Command to initiate a group ready check
-function LUIE.SlashReadyCheck()
+function SC.SlashReadyCheck()
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
     if groupSize <= 1 then
@@ -387,7 +387,7 @@ function LUIE.SlashReadyCheck()
 end
 
 -- Slash Command to send a group invite to a player
-function LUIE.SlashInvite(option)
+function SC.SlashInvite(option)
     local groupSize = GetGroupSize()
 
     if groupSize > 1 and not IsUnitGroupLeader("player") then

@@ -99,7 +99,7 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/disband"]      = nil
     SLASH_COMMANDS["/leave"]        = nil
     SLASH_COMMANDS["/leavegroup"]   = nil
-    SLASH_COMMANDS["/kick"]         = LUIE.SlashKick -- This command is always registered since it is also a default emote
+    SLASH_COMMANDS["/kick"]         = SC.SlashKick -- This command is always registered since it is also a default emote
     SLASH_COMMANDS["/remove"]       = nil
     SLASH_COMMANDS["/groupkick"]    = nil
     SLASH_COMMANDS["/groupremove"]  = nil
@@ -123,7 +123,7 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/unignore"]     = nil
     SLASH_COMMANDS["/removeignore"] = nil
     SLASH_COMMANDS["/campaign"]     = nil
-    SLASH_COMMANDS["/invite"]       = LUIE.SlashInvite -- This command is always registered since it is also a default command
+    SLASH_COMMANDS["/invite"]       = SC.SlashInvite -- This command is always registered since it is also a default command
     SLASH_COMMANDS["/bank"]         = nil
     SLASH_COMMANDS["/banker"]       = nil
     SLASH_COMMANDS["/sell"]         = nil
@@ -132,7 +132,7 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/smuggler"]     = nil
     SLASH_COMMANDS["/fence"]        = nil
     SLASH_COMMANDS["/ready"]        = nil
-    SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck -- This command is always registered since it is also a default command
+    SLASH_COMMANDS["/readycheck"]   = SC.SlashReadyCheck -- This command is always registered since it is also a default command
     SLASH_COMMANDS["/outfit"]       = nil
     SLASH_COMMANDS["/cake"]         = nil
     SLASH_COMMANDS["/anniversary"]  = nil
@@ -147,100 +147,100 @@ function SC.RegisterSlashCommands()
 
     -- Add commands based off menu options
     if SC.SV.SlashHome then
-        SLASH_COMMANDS["/home"]         = LUIE.SlashHome
+        SLASH_COMMANDS["/home"]         = SC.SlashHome
     end
     if SC.SV.SlashTrade then
-        SLASH_COMMANDS["/trade"]        = LUIE.SlashTrade
+        SLASH_COMMANDS["/trade"]        = SC.SlashTrade
     end
     if SC.SV.SlashCampaignQ then
-        SLASH_COMMANDS["/campaign"]     = LUIE.SlashCampaignQ
+        SLASH_COMMANDS["/campaign"]     = SC.SlashCampaignQ
     end
     if SC.SV.SlashOutfit then
-        SLASH_COMMANDS["/outfit"]       = LUIE.SlashOutfit
+        SLASH_COMMANDS["/outfit"]       = SC.SlashOutfit
     end
     if SC.SV.SlashReport then
-        SLASH_COMMANDS["/report"]       = LUIE.SlashReport
+        SLASH_COMMANDS["/report"]       = SC.SlashReport
     end
     if SC.SV.SlashRegroup then
-        SLASH_COMMANDS["/regroup"]      = LUIE.SlashRegroup
+        SLASH_COMMANDS["/regroup"]      = SC.SlashRegroup
     end
     if SC.SV.SlashDisband then
-        SLASH_COMMANDS["/disband"]      = LUIE.SlashDisband
+        SLASH_COMMANDS["/disband"]      = SC.SlashDisband
     end
     if SC.SV.SlashGroupLeave then
-        SLASH_COMMANDS["/leave"]        = LUIE.SlashGroupLeave
-        SLASH_COMMANDS["/leavegroup"]   = LUIE.SlashGroupLeave
+        SLASH_COMMANDS["/leave"]        = SC.SlashGroupLeave
+        SLASH_COMMANDS["/leavegroup"]   = SC.SlashGroupLeave
     end
     if SC.SV.SlashGroupKick then
-        SLASH_COMMANDS["/remove"]       = LUIE.SlashGroupKick
-        SLASH_COMMANDS["/groupkick"]    = LUIE.SlashGroupKick
-        SLASH_COMMANDS["/groupremove"]  = LUIE.SlashGroupKick
+        SLASH_COMMANDS["/remove"]       = SC.SlashGroupKick
+        SLASH_COMMANDS["/groupkick"]    = SC.SlashGroupKick
+        SLASH_COMMANDS["/groupremove"]  = SC.SlashGroupKick
     end
     if SC.SV.SlashVoteKick then
-        SLASH_COMMANDS["/votekick"]     = LUIE.SlashVoteKick
-        SLASH_COMMANDS["/voteremove"]   = LUIE.SlashVoteKick
+        SLASH_COMMANDS["/votekick"]     = SC.SlashVoteKick
+        SLASH_COMMANDS["/voteremove"]   = SC.SlashVoteKick
     end
     if SC.SV.SlashReadyCheck then
-        SLASH_COMMANDS["/ready"]        = LUIE.SlashReadyCheck
+        SLASH_COMMANDS["/ready"]        = SC.SlashReadyCheck
     end
     if SC.SV.SlashGuildInvite then
-        SLASH_COMMANDS["/guildinvite"]  = LUIE.SlashGuildInvite
-        SLASH_COMMANDS["/ginvite"]      = LUIE.SlashGuildInvite
+        SLASH_COMMANDS["/guildinvite"]  = SC.SlashGuildInvite
+        SLASH_COMMANDS["/ginvite"]      = SC.SlashGuildInvite
     end
     if SC.SV.SlashGuildKick then
-        SLASH_COMMANDS["/guildkick"]    = LUIE.SlashGuildKick
-        SLASH_COMMANDS["/gkick"]        = LUIE.SlashGuildKick
+        SLASH_COMMANDS["/guildkick"]    = SC.SlashGuildKick
+        SLASH_COMMANDS["/gkick"]        = SC.SlashGuildKick
     end
     if SC.SV.SlashGuildQuit then
-        SLASH_COMMANDS["/guildquit"]    = LUIE.SlashGuildQuit
-        SLASH_COMMANDS["/gquit"]        = LUIE.SlashGuildQuit
-        SLASH_COMMANDS["/guildleave"]   = LUIE.SlashGuildQuit
-        SLASH_COMMANDS["/gleave"]       = LUIE.SlashGuildQuit
+        SLASH_COMMANDS["/guildquit"]    = SC.SlashGuildQuit
+        SLASH_COMMANDS["/gquit"]        = SC.SlashGuildQuit
+        SLASH_COMMANDS["/guildleave"]   = SC.SlashGuildQuit
+        SLASH_COMMANDS["/gleave"]       = SC.SlashGuildQuit
     end
     if SC.SV.SlashFriend then
-        SLASH_COMMANDS["/addfriend"]    = LUIE.SlashFriend
-        SLASH_COMMANDS["/friend"]       = LUIE.SlashFriend
+        SLASH_COMMANDS["/addfriend"]    = SC.SlashFriend
+        SLASH_COMMANDS["/friend"]       = SC.SlashFriend
     end
     if SC.SV.SlashIgnore then
-        SLASH_COMMANDS["/addignore"]    = LUIE.SlashIgnore
-        SLASH_COMMANDS["/ignore"]       = LUIE.SlashIgnore
+        SLASH_COMMANDS["/addignore"]    = SC.SlashIgnore
+        SLASH_COMMANDS["/ignore"]       = SC.SlashIgnore
     end
     if SC.SV.SlashRemoveFriend then
-        SLASH_COMMANDS["/unfriend"]     = LUIE.SlashRemoveFriend
-        SLASH_COMMANDS["/removefriend"] = LUIE.SlashRemoveFriend
+        SLASH_COMMANDS["/unfriend"]     = SC.SlashRemoveFriend
+        SLASH_COMMANDS["/removefriend"] = SC.SlashRemoveFriend
     end
     if SC.SV.SlashRemoveIgnore then
-        SLASH_COMMANDS["/unignore"]     = LUIE.SlashRemoveIgnore
-        SLASH_COMMANDS["/removeignore"] = LUIE.SlashRemoveIgnore
+        SLASH_COMMANDS["/unignore"]     = SC.SlashRemoveIgnore
+        SLASH_COMMANDS["/removeignore"] = SC.SlashRemoveIgnore
     end
     if SC.SV.SlashBanker then
-        SLASH_COMMANDS["/bank"]         = function(...) LUIE.SlashCollectible(267) end
-        SLASH_COMMANDS["/banker"]       = function(...) LUIE.SlashCollectible(267) end
+        SLASH_COMMANDS["/bank"]         = function(...) SC.SlashCollectible(267) end
+        SLASH_COMMANDS["/banker"]       = function(...) SC.SlashCollectible(267) end
     end
     if SC.SV.SlashMerchant then
-        SLASH_COMMANDS["/sell"]         = function(...) LUIE.SlashCollectible(301) end
-        SLASH_COMMANDS["/merchant"]     = function(...) LUIE.SlashCollectible(301) end
-        SLASH_COMMANDS["/vendor"]       = function(...) LUIE.SlashCollectible(301) end
+        SLASH_COMMANDS["/sell"]         = function(...) SC.SlashCollectible(301) end
+        SLASH_COMMANDS["/merchant"]     = function(...) SC.SlashCollectible(301) end
+        SLASH_COMMANDS["/vendor"]       = function(...) SC.SlashCollectible(301) end
     end
     if SC.SV.SlashFence then
-        SLASH_COMMANDS["/smuggler"]     = function(...) LUIE.SlashCollectible(300) end
-        SLASH_COMMANDS["/fence"]        = function(...) LUIE.SlashCollectible(300) end
+        SLASH_COMMANDS["/smuggler"]     = function(...) SC.SlashCollectible(300) end
+        SLASH_COMMANDS["/fence"]        = function(...) SC.SlashCollectible(300) end
     end
     if SC.SV.SlashCake then
-        SLASH_COMMANDS["/cake"]         = function(...) LUIE.SlashCollectible(5886) end
-        SLASH_COMMANDS["/anniversary"]  = function(...) LUIE.SlashCollectible(5886) end
+        SLASH_COMMANDS["/cake"]         = function(...) SC.SlashCollectible(5886) end
+        SLASH_COMMANDS["/anniversary"]  = function(...) SC.SlashCollectible(5886) end
     end
     if SC.SV.SlashPie then
-        SLASH_COMMANDS["/pie"]          = function(...) LUIE.SlashCollectible(1167) end
-        SLASH_COMMANDS["/jester"]       = function(...) LUIE.SlashCollectible(1167) end
+        SLASH_COMMANDS["/pie"]          = function(...) SC.SlashCollectible(1167) end
+        SLASH_COMMANDS["/jester"]       = function(...) SC.SlashCollectible(1167) end
     end
     if SC.SV.SlashMead then
-        SLASH_COMMANDS["/mead"]         = function(...) LUIE.SlashCollectible(1168) end
-        SLASH_COMMANDS["/newlife"]      = function(...) LUIE.SlashCollectible(1168) end
+        SLASH_COMMANDS["/mead"]         = function(...) SC.SlashCollectible(1168) end
+        SLASH_COMMANDS["/newlife"]      = function(...) SC.SlashCollectible(1168) end
     end
     if SC.SV.SlashWitch then
-        SLASH_COMMANDS["/witch"]        = function(...) LUIE.SlashCollectible(479) end
-        SLASH_COMMANDS["/witchfest"]    = function(...) LUIE.SlashCollectible(479) end
+        SLASH_COMMANDS["/witch"]        = function(...) SC.SlashCollectible(479) end
+        SLASH_COMMANDS["/witchfest"]    = function(...) SC.SlashCollectible(479) end
     end
 
     -- TODO: DEBUG REMOVE or move to SCB Debug.lua
