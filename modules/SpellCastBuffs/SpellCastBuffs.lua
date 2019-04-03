@@ -2561,31 +2561,8 @@ function SCB.ReloadEffects(unitTag)
         SCB.LoadBattleSpiritTarget()
 
         SCB.DisguiseStateChanged(nil, "reticleover", GetUnitDisguiseState("reticleover"))
-        -- STEALTH CODE HERE
 
-        -- TODO: Streamline
-        if SCB.SV.StealthStateTarget and not SCB.SV.HideTargetBuffs then
-            local stealthState = GetUnitStealthState ("reticleover")
-            if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
-                LUIE.EffectsList.reticleover1[ A.Innate_Hidden ] = {
-                    type=1,
-                    id =20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
-                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                    forced = "short",
-                    restart=true, iconNum=0
-                }
-            elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-                LUIE.EffectsList.reticleover1[ A.Innate_Hidden ] = {
-                    type=1,
-                    id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
-                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                    forced = "short",
-                    restart=true, iconNum=0
-                }
-            else
-                LUIE.EffectsList.reticleover1[ A.Innate_Hidden ] = nil
-            end
-        end
+        SCB.StealthStateChanged(nil, "reticleover", GetUnitStealthState("reticleover"))
 
     end
 end
@@ -2966,57 +2943,6 @@ function SCB.updateIcons( currentTime, sortedList, container )
     uiTlw[container].prevIconsCount = iconsNum
 end
 
--- TODO: Streamline all this with the other Stealth code
--- Runs on the EVENT_STEALTH_STATE_CHANGED listener.
--- Watches for changes in a stealth state to display custom buff icon
-function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
-    if SCB.SV.StealthStatePlayer and unitTag == "player" and not SCB.SV.HidePlayerBuffs then
-        if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
-            LUIE.EffectsList.player1[ A.Innate_Hidden ] = {
-                type=1,
-                id = 20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-
-        elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-            LUIE.EffectsList.player1[ A.Innate_Hidden ] = {
-                type=1,
-                id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-        else
-            LUIE.EffectsList.player1[ A.Innate_Hidden ] = nil
-        end
-    end
-
-    if SCB.SV.StealthStateTarget and unitTag == "reticleover" and not SCB.SV.HideTargetBuffs then
-        if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
-            LUIE.EffectsList.reticleover1[ A.Innate_Hidden ] = {
-                type=1,
-                id = 20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-
-        elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-            LUIE.EffectsList.reticleover1[ A.Innate_Hidden ] = {
-                type=1,
-                id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-        else
-            LUIE.EffectsList.reticleover1[ A.Innate_Hidden ] = nil
-        end
-    end
-end
-
 -- Runs on EVENT_PLAYER_ACTIVATED listener
 function SCB.OnPlayerActivated(eventCode)
     g_playerActive = true
@@ -3054,30 +2980,8 @@ function SCB.OnPlayerActivated(eventCode)
     if SCB.SV.DisguiseStatePlayer then
         SCB.DisguiseStateChanged(nil, "player", GetUnitDisguiseState("player"))
     end
-    -- STEALTH HERE
-
-    if SCB.SV.StealthStatePlayer and not SCB.SV.HidePlayerBuffs then
-        local stealthState = GetUnitStealthState ("player")
-        if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
-            LUIE.EffectsList.player1[ A.Innate_Hidden ] = {
-                type=1,
-                id = 20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-
-        elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-            LUIE.EffectsList.player1[ A.Innate_Hidden ] = {
-                type=1,
-                id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-        else
-            LUIE.EffectsList.player1[ A.Innate_Hidden ] = nil
-        end
+    if SCB.SV.StealthStatePlayer then
+        SCB.StealthStateChanged(nil, "player", GetUnitStealthState("player"))
     end
 
     -- Load Cyrodiil Buffs

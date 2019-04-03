@@ -81,11 +81,54 @@ function SCB.DisguiseStateChanged ( eventCode, unitTag, disguiseState )
     -- Remove buff first
     LUIE.EffectsList[context][50602] = nil
 
+    -- Add disguise icon if we are in any state of disguise
     if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
-        -- Trigger a buff
         LUIE.EffectsList[context][50602] = {
-            target =unitTag, type=1,
+            target=unitTag, type=1,
             id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            forced = "short",
+            restart=true, iconNum=0
+        }
+    end
+
+end
+
+-- Handles stealth state changes for player/reticleover
+function SCB.StealthStateChanged(eventCode, unitTag, stealthState)
+
+    -- Bail out if we don't have stealth or unitTag buffs enabled
+    if unitTag == "player" and ( not SCB.SV.StealthStatePlayer or SCB.SV.HidePlayerBuffs) then
+        return
+    elseif unitTag == "reticleover" and ( not SCB.SV.StealthStateTarget or SCB.SV.HideTargetBuffs) then
+        return
+    end
+
+    -- Bail out if for some reason we have no value for stealthState
+    if stealthState == nil then
+        return
+    end
+
+    -- Get context
+    local context = unitTag .. "1"
+
+    -- Remove buff first
+    LUIE.EffectsList[context][20299] = nil
+
+    -- Add hidden icon if we are hidden
+    if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
+        LUIE.EffectsList[context][20299] = {
+            target=unitTag, type=1,
+            id = 20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            forced = "short",
+            restart=true, iconNum=0
+        }
+    -- Add invisible icon if we are invisible
+    elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
+        LUIE.EffectsList[context][20299] = {
+            target=unitTag, type=1,
+            id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
             forced = "short",
             restart=true, iconNum=0
