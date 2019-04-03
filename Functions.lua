@@ -162,3 +162,12 @@ function LUIE.ResolveVeteranDifficulty()
         return false
     end
 end
+
+-- Simple function that checks for AvA / IC / BG Status and returns true if the player is in any of these
+function LUIE.ResolvePVPZone()
+    if IsPlayerInAvAWorld() == true or IsActiveWorldBattleground() == true or IsInImperialCity() == true then
+        return true
+    else
+        return false
+    end
+end

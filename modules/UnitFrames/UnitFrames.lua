@@ -1412,7 +1412,6 @@ function UF.Initialize( enabled )
         eventManager:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL,         UF.OnSiege )
         eventManager:RegisterForEvent(moduleName, EVENT_LEAVE_RAM_ESCORT,          UF.OnSiege )
         eventManager:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED,     UF.OnMount )
-        eventManager:RegisterForEvent(moduleName, EVENT_ABILITY_LIST_CHANGED,      UF.AbilityListChange ) -- TODO: Temporary fix
         eventManager:RegisterForEvent(moduleName, EVENT_EXPERIENCE_UPDATE,         UF.OnXPUpdate )
         eventManager:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_GAINED,     UF.OnChampionPointGained )
         eventManager:RegisterForEvent(moduleName, EVENT_GROUP_SUPPORT_RANGE_UPDATE,    UF.OnGroupSupportRangeUpdate )
@@ -2507,11 +2506,6 @@ end
 -- Runs on the EVENT_MOUNTED_STATE_CHANGED listener.
 function UF.OnMount(eventCode, mounted)
     UF.CustomFramesSetupAlternative( IsWerewolf(), false, mounted )
-end
-
--- TODO: Temporarily listener for EVENT_ABILITY_LIST_CHANGED to fix issue where no EVENT_MOUNTED_STATE_CHANGED is triggering when Hard Dismounting or Crouching.
-function UF.AbilityListChange(eventCode)
-    UF.CustomFramesSetupAlternative( IsWerewolf(), ( IsPlayerControllingSiegeWeapon() or IsPlayerEscortingRam() ), IsMounted() )
 end
 
 -- Runs on the EVENT_EXPERIENCE_UPDATE listener.
@@ -4240,12 +4234,12 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
                 end
             end
             if UF.SV.RaidIconOptions == 4 then -- Class PVP, Role PVE
-                if IsPlayerInAvAWorld() or IsActiveWorldBattleground() then
+                if LUIE.ResolvePVPZone() then
                     unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (true)
                     unitFrame.classIcon:SetHidden (false)
-                elseif not ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() ) and role then
+                elseif not LUIE.ResolvePVPZone() and role then
                     unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
@@ -4259,12 +4253,12 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
                 end
             end
             if UF.SV.RaidIconOptions == 5 then -- Class PVE, Role PVP
-                if ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() )  and role then
+                if LUIE.ResolvePVPZone() and role then
                     unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
                     unitFrame.classIcon:SetHidden (true)
-                elseif not ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() ) then
+                elseif not LUIE.ResolvePVPZone() then
                     unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (true)
@@ -4283,19 +4277,6 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
             unitFrame.roleIcon:SetHidden (true)
             unitFrame.classIcon:SetHidden (true)
         end
-
-        -- Old Function preserved here just in case
-        --[[
-        if (UF.SV.RoleIconRaid and role and not IsPlayerInAvAWorld() ) or (UF.SV.ClassIconRaid and IsUnitOnline(unitTag) ) then
-            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
-            unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
-        else
-            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip, UF.SV.RaidBarHeight-2 )
-            unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
-        end
-        unitFrame.roleIcon:SetHidden (not UF.SV.RoleIconRaid or IsPlayerInAvAWorld() )
-        unitFrame.classIcon:SetHidden (not UF.SV.ClassIconRaid)
-        ]]--
 
         if IsUnitGroupLeader(unitTag) then
             unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
