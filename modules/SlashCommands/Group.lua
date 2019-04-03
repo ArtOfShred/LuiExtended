@@ -386,3 +386,32 @@ function LUIE.SlashReadyCheck()
     -- Send a ready check to group members
     ZO_SendReadyCheck()
 end
+
+-- Slash Command to send a group invite to a player
+function LUIE.SlashInvite(option)
+    local groupSize = GetGroupSize()
+
+    if groupSize > 1 and not IsUnitGroupLeader("player") then
+        printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)), true)
+        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
+
+    if option == "" then
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_NONAME), true)
+        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_CA_GROUP_INVITE_NONAME))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
+
+    GroupInviteByName(option)
+    printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option), true)
+    if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+        callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option))
+    end
+end

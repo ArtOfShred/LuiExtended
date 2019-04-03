@@ -111,201 +111,6 @@ function LUIE.SlashHome()
     end
 end
 
--- Slash Command to invite someone to a guild
-local function SlashGuildInvite(option)
-    -- If no input was entered, display an error and end.
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV), true)
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    -- Parse input
-    local options = {}
-    local searchResult = { string.match(option,"^(%S*)%s*(.-)$") }
-    for i,v in pairs(searchResult) do
-        if (v ~= nil and v ~= "") then
-            options[i] = v
-        end
-    end
-
-    local guildnumber = options[1]
-    local name = options[2]
-
-    -- If no name was entered, display an error and end.
-    if guildnumber == nil or name == nil then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV), true)
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    if guildnumber == "1" and LUIE.GuildIndexData[1] then
-        guildnumber = LUIE.GuildIndexData[1].id
-    elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
-        guildnumber = LUIE.GuildIndexData[2].id
-    elseif guildnumber == "3" and LUIE.GuildIndexData[3] then
-        guildnumber = LUIE.GuildIndexData[3].id
-    elseif guildnumber == "4" and LUIE.GuildIndexData[4] then
-        guildnumber = LUIE.GuildIndexData[4].id
-    elseif guildnumber == "5" and LUIE.GuildIndexData[5] then
-        guildnumber = LUIE.GuildIndexData[5].id
-    else -- If we enter anything outside of the range of 1-5, display an error and end.
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV), true)
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
-        end
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    --GuildInvite(guildnumber, name)
-    ZO_TryGuildInvite(guildnumber, name, true)
-end
-
--- Slash Command to leave a guild
-local function SlashGuildQuit(guildnumber)
-    if guildnumber == "1" and LUIE.GuildIndexData[1] then
-        guildnumber = LUIE.GuildIndexData[1].id
-    elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
-        guildnumber = LUIE.GuildIndexData[2].id
-    elseif guildnumber == "3" and LUIE.GuildIndexData[3] then
-        guildnumber = LUIE.GuildIndexData[3].id
-    elseif guildnumber == "4" and LUIE.GuildIndexData[4] then
-        guildnumber = LUIE.GuildIndexData[4].id
-    elseif guildnumber == "5" and LUIE.GuildIndexData[5] then
-        guildnumber = LUIE.GuildIndexData[5].id
-    else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE), true)
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    -- If we try to leave a guild we don't have display an error and end.
-    if guildnumber == nil then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE), true)
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    -- If neither of the above errors were triggered, leave the guild number.
-    GuildLeave(guildnumber)
-end
-
--- Slash Command to kick someone from a guild
-local function SlashGuildKick(option)
-    -- If no input was entered, display an error and end.
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK), true)
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    -- Parse input
-    local options = {}
-    local searchResult = { string.match(option,"^(%S*)%s*(.-)$") }
-    for i,v in pairs(searchResult) do
-        if (v ~= nil and v ~= "") then
-            options[i] = v
-        end
-    end
-
-    local guildnumber = options[1]
-    local name = options[2]
-
-    -- If no name was entered, display an error and end.
-    if guildnumber == nil or name == nil then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK), true)
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    if guildnumber == "1" and LUIE.GuildIndexData[1] then
-        guildnumber = LUIE.GuildIndexData[1].id
-    elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
-        guildnumber = LUIE.GuildIndexData[2].id
-    elseif guildnumber == "3" and LUIE.GuildIndexData[3] then
-        guildnumber = LUIE.GuildIndexData[3].id
-    elseif guildnumber == "4" and LUIE.GuildIndexData[4] then
-        guildnumber = LUIE.GuildIndexData[4].id
-    elseif guildnumber == "5" and LUIE.GuildIndexData[5] then
-        guildnumber = LUIE.GuildIndexData[5].id
-    -- If we enter anything outside of the range of 1-5, display an error and end.
-    else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK), true)
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    if not DoesPlayerHaveGuildPermission (guildnumber, GUILD_PERMISSION_REMOVE) then
-        printToChat (GetString(SI_SOCIALACTIONRESULT18), true)
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_SOCIALACTIONRESULT18)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    -- Index guild members so we can use character name as a kick option
-    local guildNumbers = GetNumGuildMembers(guildnumber)
-    local compareChar = string.lower(name)
-
-    g_guildNamesTable = { }
-
-    for i = 1,guildNumbers do
-        local displayName = GetGuildMemberInfo(guildnumber, i)
-        local _, characterName = GetGuildMemberCharacterInfo(guildnumber, i)
-        local compareDisplay = string.lower(displayName)
-        local compareCharacter = string.lower(characterName)
-
-        compareCharacter = string.gsub(compareCharacter,"%^%a+","")
-
-        g_guildNamesTable[i] = { displayName=displayName, characterName=characterName, compareDisplay=compareDisplay, compareCharacter=compareCharacter}
-        --d(compareDisplay .. compareCharacter)
-        --d("comparing vs... " .. compareChar)
-    end
-
-    local finalName = ""
-
-    for i = 1, #g_guildNamesTable do
-        local comparing = g_guildNamesTable[i]
-        if comparing.compareDisplay == compareChar or comparing.compareCharacter == compareChar then
-            finalName = comparing.displayName
-            break
-        end
-    end
-
-    if finalName ~= "" then
-        GuildRemove(guildnumber, finalName)
-    else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME_GUILD), true)
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME_GUILD)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-    end
-end
-
 -- Slash Command to add someone to the friendslist
 local function SlashFriend(option)
     if option == "" then
@@ -321,6 +126,7 @@ end
 
 -- Hook for request friend so menu option also displays invite message
 -- Menu is true if this request is sent from the Player to Player interaction menu
+-- TODO: move this to Hooks.lua maybe?
 local zos_RequestFriend = RequestFriend
 RequestFriend = function(option1, option2, menu)
     zos_RequestFriend(option1, option2)
@@ -334,6 +140,7 @@ RequestFriend = function(option1, option2, menu)
 end
 
 -- Hook for request ignore to handle error message if account name is already ignored
+-- TODO: move this to Hooks.lua maybe?
 local zos_AddIgnore = AddIgnore
 AddIgnore = function(option)
     zos_AddIgnore(option)
@@ -513,35 +320,6 @@ local function SlashCampaignQ(option)
     PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 end
 
--- Slash Command to send a group invite to a player
-local function SlashInvite(option)
-    local groupSize = GetGroupSize()
-
-    if groupSize > 1 and not IsUnitGroupLeader("player") then
-        printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)), true)
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    if option == "" then
-        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_NONAME), true)
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_CA_GROUP_INVITE_NONAME))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    GroupInviteByName(option)
-    printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option), true)
-    if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-        callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option))
-    end
-end
-
 -- Slash Command to use collectibles based on their collectible id
 function LUIE.SlashCollectible(id)
     local collectibleid = id
@@ -673,7 +451,7 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/unignore"]     = nil
     SLASH_COMMANDS["/removeignore"] = nil
     SLASH_COMMANDS["/campaign"]     = nil
-    SLASH_COMMANDS["/invite"]       = SlashInvite -- This command is always registered since it is also a default command
+    SLASH_COMMANDS["/invite"]       = LUIE.SlashInvite -- This command is always registered since it is also a default command
     SLASH_COMMANDS["/bank"]         = nil
     SLASH_COMMANDS["/banker"]       = nil
     SLASH_COMMANDS["/sell"]         = nil
@@ -699,6 +477,9 @@ function SC.RegisterSlashCommands()
     if SC.SV.SlashHome then
         SLASH_COMMANDS["/home"]         = LUIE.SlashHome
     end
+    if SC.SV.SlashTrade then
+        SLASH_COMMANDS["/trade"]        = SlashTrade
+    end
     if SC.SV.SlashRegroup then
         SLASH_COMMANDS["/regroup"]      = LUIE.SlashRegroup
     end
@@ -721,22 +502,19 @@ function SC.RegisterSlashCommands()
     if SC.SV.SlashReadyCheck then
         SLASH_COMMANDS["/ready"]        = LUIE.SlashReadyCheck
     end
-    if SC.SV.SlashTrade then
-        SLASH_COMMANDS["/trade"]        = SlashTrade
-    end
     if SC.SV.SlashGuildInvite then
-        SLASH_COMMANDS["/guildinvite"]  = SlashGuildInvite
-        SLASH_COMMANDS["/ginvite"]      = SlashGuildInvite
+        SLASH_COMMANDS["/guildinvite"]  = LUIE.SlashGuildInvite
+        SLASH_COMMANDS["/ginvite"]      = LUIE.SlashGuildInvite
     end
     if SC.SV.SlashGuildKick then
-        SLASH_COMMANDS["/guildkick"]    = SlashGuildKick
-        SLASH_COMMANDS["/gkick"]        = SlashGuildKick
+        SLASH_COMMANDS["/guildkick"]    = LUIE.SlashGuildKick
+        SLASH_COMMANDS["/gkick"]        = LUIE.SlashGuildKick
     end
     if SC.SV.SlashGuildQuit then
-        SLASH_COMMANDS["/guildquit"]    = SlashGuildQuit
-        SLASH_COMMANDS["/gquit"]        = SlashGuildQuit
-        SLASH_COMMANDS["/guildleave"]   = SlashGuildQuit
-        SLASH_COMMANDS["/gleave"]       = SlashGuildQuit
+        SLASH_COMMANDS["/guildquit"]    = LUIE.SlashGuildQuit
+        SLASH_COMMANDS["/gquit"]        = LUIE.SlashGuildQuit
+        SLASH_COMMANDS["/guildleave"]   = LUIE.SlashGuildQuit
+        SLASH_COMMANDS["/gleave"]       = LUIE.SlashGuildQuit
     end
     if SC.SV.SlashFriend then
         SLASH_COMMANDS["/addfriend"]    = SlashFriend
@@ -793,7 +571,7 @@ function SC.RegisterSlashCommands()
         SLASH_COMMANDS["/report"]       = SlashReport
     end
 
-    -- TODO: DEBUG, REMOVE
+    -- TODO: DEBUG REMOVE or move to SCB Debug.lua
     SLASH_COMMANDS["/filter"]           = LUIE.TempSlashFilter
     SLASH_COMMANDS["/ground"]           = LUIE.TempSlashGround
 end
