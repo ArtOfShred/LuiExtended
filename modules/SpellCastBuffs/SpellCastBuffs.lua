@@ -2941,6 +2941,12 @@ function SCB.OnPlayerActivated(eventCode)
     g_playerActive = true
     g_playerResurrectStage = nil
 
+    -- Reload Effects
+    SCB.ReloadEffects("player")
+
+    -- Resolve Duel Target
+    SCB.DuelStart()
+
     -- Resolve Mounted icon
     if not SCB.SV.IgnoreMount and IsMounted() then
         callLater(function() SCB.MountStatus(eventCode, true) end, 50)
@@ -2956,11 +2962,6 @@ function SCB.OnPlayerActivated(eventCode)
         callLater(function() SCB.CollectibleBuff( eventCode, 0, true) end, 50)
     end
 
-    SCB.ReloadEffects( "player" )
-
-    -- Resolve Duel Target
-    SCB.DuelStart()
-
     -- Resolve Werewolf
     if SCB.SV.ShowWerewolf and IsWerewolf() then
         SCB.WerewolfState(nil, true, true)
@@ -2970,17 +2971,6 @@ function SCB.OnPlayerActivated(eventCode)
         end
     end
 
-    if SCB.SV.DisguiseStatePlayer then
-        SCB.DisguiseStateChanged(nil, "player", GetUnitDisguiseState("player"))
-    end
-    if SCB.SV.StealthStatePlayer then
-        SCB.StealthStateChanged(nil, "player", GetUnitStealthState("player"))
-    end
-
-    -- Load Cyrodiil Buffs
-    SCB.LoadCyrodiilBuffs("player")
-    -- Checks for Artificial effects on the player just in case they have no buffs/debuffs present to trigger OnEffectUpdate
-    SCB.ArtificialEffectUpdate()
     -- Add Bound Aegis buffs if player has it slotted
     if GetUnitClassId("player") == 2 then
         SCB.DrawBoundAegisBuffs()
@@ -3063,7 +3053,6 @@ end
 -- Runs on EVENT_ACTION_SLOT_UPDATED / EVENT_ACTION_SLOTS_ALLHOTBARS_UPDATED / EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED
 -- Creates Minor Ward/Minor Resolve buffs for Bound Aegis
 function SCB.DrawBoundAegisBuffs()
-
     LUIE.EffectsList["player1"][999008] = nil
     LUIE.EffectsList["player1"][999009] = nil
 
@@ -3086,7 +3075,6 @@ function SCB.DrawBoundAegisBuffs()
             }
         end
     end
-
 end
 
 -- Called from the menu and on initialize to build the table of hidden effects.
