@@ -109,7 +109,6 @@ modules/SpellCastBuffs/Debug.lua
 modules/SpellCastBuffs/Werewolf.lua
 
 modules/SlashCommands/SlashCommands.lua
-modules/SlashCommands/Debug.lua
 modules/SlashCommands/General.lua
 modules/SlashCommands/Group.lua
 modules/SlashCommands/Guild.lua

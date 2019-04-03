@@ -242,8 +242,4 @@ function SC.RegisterSlashCommands()
         SLASH_COMMANDS["/witch"]        = function(...) SC.SlashCollectible(479) end
         SLASH_COMMANDS["/witchfest"]    = function(...) SC.SlashCollectible(479) end
     end
-
-    -- TODO: DEBUG REMOVE or move to SCB Debug.lua
-    SLASH_COMMANDS["/filter"]           = LUIE.TempSlashFilter
-    SLASH_COMMANDS["/ground"]           = LUIE.TempSlashGround
 end
