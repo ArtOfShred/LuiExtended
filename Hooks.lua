@@ -397,6 +397,35 @@ function LUIE.InitializeHooks()
             container:SetHandler("OnEffectivelyShown", UpdateEffects)
         end
 
+        -- Hook for request friend so menu option also displays invite message
+        -- Menu is true if this request is sent from the Player to Player interaction menu
+        local zos_RequestFriend = RequestFriend
+        RequestFriend = function(option1, option2, menu)
+            zos_RequestFriend(option1, option2)
+            if not menu then
+                local message = strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
+                printToChat(message, true)
+                if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, message)
+                end
+            end
+        end
+
+        -- Hook for request ignore to handle error message if account name is already ignored
+        local zos_AddIgnore = AddIgnore
+        AddIgnore = function(option)
+            zos_AddIgnore(option)
+
+            if IsIgnored(option) then -- Only lists account names, unfortunately
+                printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE), true)
+                if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
+                end
+                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+                return
+            end
+        end
+
         -- Hook Tooltip Generation for STATS Screen Buffs & Debuffs
         ZO_StatsActiveEffect_OnMouseEnter = function(control)
             InitializeTooltip(GameTooltip, control, RIGHT, -15)
