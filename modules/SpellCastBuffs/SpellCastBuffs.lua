@@ -164,7 +164,6 @@ local g_prominentVertBuffAlign       = BOTTOM -- Alignment for Prominent Buffs
 local g_prominentVertDebuffAlign     = BOTTOM -- Alignment for Prominent Debuffs
 local g_horizSortInvert              = false -- Invert sort order on buff container
 local g_protectAbilityRemoval        = {} -- AbilityId's set to a timestamp here to prevent removal of ground effects when refreshing ground auras from causing the aura to fade.
-local g_currentDisguise              = GetItemId(0, 10) or 0 -- Currently equipped disguise for Disguise Buff Tracker
 local g_grimFocusCount               = 0 -- Tracker for Grim Focus Stacks
 local g_ignoreAbilityId              = {} -- Ignored abilityId's on EVENT_COMBAT_EVENT, some events fire twice and we need to ignore every other one.
 
@@ -498,61 +497,6 @@ function SCB.RemoveFromCustomList(list, input)
         end
     end
     SCB.Reset()
-end
-
--- Create a buff icon for Disguise if we are wearing one (on load) -- TODO: Simplify with function below!
-function SCB.InitializeDisguise()
-    if SCB.SV.HidePlayerBuffs then
-        return
-    end
-    LUIE.EffectsList.player1["DisguiseType"] = nil
-    if g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
-        -- Don't show Monk's Disguise since it already has an aura, and don't show Guild Tabard
-        if g_currentDisguise == 79332 or g_currentDisguise == 55262 then
-            return
-        end
-
-        local name = GetItemName(0, 10)
-        local icon = E.DisguiseIcons[g_currentDisguise].icon
-        local id = E.DisguiseIcons[g_currentDisguise].id or "Fake"
-        LUIE.EffectsList.player1["DisguiseType"] = {
-            target="player", type=1,
-            id=id, name=name, icon=icon,
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-            forced = "long",
-            restart=true, iconNum=0
-        }
-    end
-end
-
--- TODO: Simplify
-function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    if slotId == 10 then
-        if SCB.SV.HidePlayerBuffs then
-            return
-        end
-        LUIE.EffectsList.player1["DisguiseType"] = nil
-        g_currentDisguise = GetItemId(0, 10) or 0
-        if g_currentDisguise == 0 then
-            return
-        elseif g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
-            -- Don't show Monk's Disguise since it already has an aura, and don't show Guild Tabard
-            if g_currentDisguise == 79332 or g_currentDisguise == 55262 then
-                return
-            end
-
-            local name = GetItemName(0, 10)
-            local icon = E.DisguiseIcons[g_currentDisguise].icon
-            local id = E.DisguiseIcons[g_currentDisguise].id or "Fake"
-            LUIE.EffectsList.player1["DisguiseType"] = {
-                target="player", type=1,
-                id=id, name=name, icon=icon,
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "long",
-                restart=true, iconNum=0
-            }
-        end
-    end
 end
 
 -- Sets horizontal alignment of icon. Called from Settings Menu.
@@ -1630,7 +1574,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         if E.EffectOverride[abilityId].hideReduce == true and SCB.SV.HideReduce then
             return
         end
-        if E.EffectOverride[abilityId].isDisguise and SCB.SV.IgnoreDisguise then
+        if E.EffectOverride[abilityId].isDisguise and SCB.SV.IgnoreDisguise then -- For Monk's Disguise / other buff based Disguise hiding
             return
         end
         iconName = E.EffectOverride[abilityId].icon or iconName
@@ -2616,6 +2560,9 @@ function SCB.ReloadEffects(unitTag)
 
         SCB.LoadBattleSpiritTarget()
 
+        SCB.DisguiseStateChanged(nil, "reticleover", GetUnitDisguiseState("reticleover"))
+        -- STEALTH CODE HERE
+
         -- TODO: Streamline
         if SCB.SV.StealthStateTarget and not SCB.SV.HideTargetBuffs then
             local stealthState = GetUnitStealthState ("reticleover")
@@ -2640,25 +2587,6 @@ function SCB.ReloadEffects(unitTag)
             end
         end
 
-        -- TODO: Streamline
-        if SCB.SV.DisguiseStateTarget and not SCB.SV.HideTargetBuffs then
-            --d("checking for disguise")
-            local disguiseState = GetUnitDisguiseState ("reticleover")
-            --d("Disguise State: " .. disguiseState )
-            if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
-                -- Trigger a buff
-                LUIE.EffectsList.reticleover1[50602] = {
-                    type=1,
-                    id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
-                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                    forced = "short",
-                    restart=true, iconNum=0
-                }
-            -- Else remove buff
-            else
-                LUIE.EffectsList.reticleover1[50602] = nil
-            end
-        end
     end
 end
 
@@ -3089,56 +3017,19 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
     end
 end
 
--- TODO: Streamline this with all the other Disguise Code
-function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
-    if SCB.SV.DisguiseStatePlayer and unitTag == "player" and not SCB.SV.HidePlayerBuffs then
-        if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
-            -- Trigger a buff
-            LUIE.EffectsList.player1[50602] = {
-                target ="player", type=1,
-                id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-
-        -- Else remove buff
-        else
-            LUIE.EffectsList.player1[50602] = nil
-        end
-    end
-
-    if SCB.SV.DisguiseStatePlayer and unitTag == "reticleover" and not SCB.SV.HideTargetBuffs then
-        if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
-            -- Trigger a buff
-            LUIE.EffectsList.reticleover1[50602] = {
-                type=1,
-                id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-        -- Else remove buff
-        else
-            LUIE.EffectsList.reticleover1[50602] = nil
-        end
-    end
-end
-
 -- Runs on EVENT_PLAYER_ACTIVATED listener
--- TODO: Move out Disguise code here
 function SCB.OnPlayerActivated(eventCode)
     g_playerActive = true
     g_playerResurrectStage = nil
 
     -- Resolve Mounted icon
     if not SCB.SV.IgnoreMount and IsMounted() then
-        callLater(function() SCB.MountStatus(eventCode, true) end , 50)
+        callLater(function() SCB.MountStatus(eventCode, true) end, 50)
     end
 
     -- Resolve Disguise Icon
     if not SCB.SV.IgnoreDisguise then
-        callLater(SCB.InitializeDisguise, 50)
+        callLater(function() SCB.DisguiseItem(nil, BAG_WORN, 10) end, 50)
     end
 
     -- Resolve Assistant Icon
@@ -3160,22 +3051,10 @@ function SCB.OnPlayerActivated(eventCode)
         end
     end
 
-    if SCB.SV.DisguiseStatePlayer and not SCB.SV.HidePlayerBuffs then
-        local disguiseState = GetUnitDisguiseState ("player")
-        if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
-            -- Trigger a buff
-            LUIE.EffectsList.player1[50602] = {
-                target ="player", type=1,
-                id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-        -- Else remove buff
-        else
-            LUIE.EffectsList.player1[50602] = nil
-        end
+    if SCB.SV.DisguiseStatePlayer then
+        SCB.DisguiseStateChanged(nil, "player", GetUnitDisguiseState("player"))
     end
+    -- STEALTH HERE
 
     if SCB.SV.StealthStatePlayer and not SCB.SV.HidePlayerBuffs then
         local stealthState = GetUnitStealthState ("player")

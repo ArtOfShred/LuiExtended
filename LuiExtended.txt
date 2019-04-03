@@ -105,6 +105,7 @@ modules/InfoPanel/InfoPanel.lua
 modules/SpellCastBuffs/SpellCastBuffs.lua
 modules/SpellCastBuffs/Collectibles.lua
 modules/SpellCastBuffs/Cyrodiil.lua
+modules/SpellCastBuffs/Stealth.lua
 modules/SpellCastBuffs/Debug.lua
 modules/SpellCastBuffs/Werewolf.lua
 
