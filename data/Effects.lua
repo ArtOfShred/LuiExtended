@@ -4299,8 +4299,8 @@ E.EffectOverride = {
     [24165] = { tooltip = T.Skill_Bound_Armor }, -- Bound Armaments (Bound Armaments)
     [24163] = { tooltip = T.Skill_Bound_Armor }, -- Bound Aegis (Bound Aegis)
 
-    [999008] = { icon = 'esoui/art/icons/ability_buff_minor_resolve.dds', name = A.Skill_Minor_Ward, tooltip = A.Skill_Bound_Aegis }, -- Bound Aegis FAKE ID
-    [900009] = { icon = 'esoui/art/icons/ability_buff_minor_ward.dds', name = A.Skill_Minor_Resolve, tooltip = A.Skill_Bound_Aegis  }, -- Bound Aegis FAKE ID
+    [999008] = { icon = 'esoui/art/icons/ability_buff_minor_resolve.dds', name = A.Skill_Minor_Resolve, tooltip = A.Skill_Bound_Aegis }, -- Bound Aegis FAKE ID
+    [999009] = { icon = 'esoui/art/icons/ability_buff_minor_ward.dds', name = A.Skill_Minor_Ward, tooltip = A.Skill_Bound_Aegis }, -- Bound Aegis FAKE ID
 
     -- Summon Storm Atronach / Greater Storm Atronach / Summon Charged Atronach
     [48078] = { tooltip = A.Skill_Charged_Lightning }, -- Major Berserk (Charged Lightning Synergy)
