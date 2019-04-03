@@ -7,14 +7,12 @@
 LUIE.SlashCommands = {}
 
 -- Performance Enhancement
-local SC            = LUIE.SlashCommands
-local printToChat   = LUIE.PrintToChat
-local strformat     = zo_strformat
+local SC = LUIE.SlashCommands
+local printToChat = LUIE.PrintToChat
 
-local callLater     = zo_callLater
-local callAlert     = ZO_Alert
+local strformat = zo_strformat
 
-local moduleName    = LUIE.name .. "_SlashCommands"
+local moduleName = LUIE.name .. "_SlashCommands"
 
 SC.Enabled  = false
 SC.D = {
@@ -44,7 +42,7 @@ SC.D = {
     SlashWitch          = true,
     SlashReport         = true,
 }
-SC.SV       = nil
+SC.SV = nil
 
 function SC.Initialize( enabled )
     -- Load Settings
@@ -73,7 +71,7 @@ RequestFriend = function(option1, option2, menu)
         local message = strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
         printToChat(message, true)
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, message)
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, message)
         end
     end
 end
@@ -87,7 +85,7 @@ AddIgnore = function(option)
     if IsIgnored(option) then -- Only lists account names, unfortunately
         printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE), true)
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
