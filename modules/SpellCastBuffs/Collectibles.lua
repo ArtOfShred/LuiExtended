@@ -5,21 +5,8 @@
 
 -- Performance Enhancement
 local SCB           = LUIE.SpellCastBuffs
+local strformat     = zo_strformat
 local callLater     = zo_callLater
-
-local windowTitles = {
-    playerb             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
-    playerd             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
-    player1             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
-    player2             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
-    player_long         = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS),
-    targetb             = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
-    targetd             = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
-    target1             = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
-    target2             = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
-    prominentbuffs      = GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS),
-    prominentdebuffs    = GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS),
-}
 
 -- EVENT_MOUNTED_STATE_CHANGED handler to create Mount Buff icon for player
 function SCB.MountStatus(eventCode, mounted)

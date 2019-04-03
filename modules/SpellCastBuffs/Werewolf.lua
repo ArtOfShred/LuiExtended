@@ -9,20 +9,6 @@ local eventManager  = EVENT_MANAGER
 local callLater     = zo_callLater
 local moduleName    = LUIE.name .. "_SpellCastBuffs"
 
-local windowTitles = {
-    playerb             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
-    playerd             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
-    player1             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
-    player2             = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
-    player_long         = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS),
-    targetb             = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
-    targetd             = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
-    target1             = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
-    target2             = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
-    prominentbuffs      = GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS),
-    prominentdebuffs    = GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS),
-}
-
 local g_werewolfName = "" -- Name for current Werewolf Transformation morph
 local g_werewolfIcon = "" -- Icon for current Werewolf Transformation morph
 local g_werewolfId = "" -- AbilityId for Werewolf Transformation morph
@@ -31,6 +17,21 @@ local g_werewolfCounter = 0 -- Counter for Werewolf transformation events
 local g_werewolfQuest = 0 -- Counter for Werewolf transformation events (Quest)
 local g_lastWerewolfPower = 0 -- Tracker for last amount of werewolf power - used to freeze counter when using Devour or entering a Werewolf Shrine
 
+-- Function to determine what container to put the icon in (if we have it set to prominent or not)
+local function ResolveContainerContext(abilityId, effectName)
+
+    local context
+    if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
+        context = "promd_player"
+    elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
+        context = "promb_player"
+    else
+        context = "player1"
+    end
+
+    return context
+
+end
 
 -- Function to pull Werewolf Cast Bar / Buff Aura Icon based off the players morph choice
 local function SetWerewolfIcon()
@@ -48,7 +49,8 @@ local function SetWerewolfIconTimer(currentTime)
     local durationFormatted = math.floor(duration + 0.999) * 1000
     local currentTime = GetGameTimeMilliseconds()
     local endTime = currentTime + durationFormatted
-    LUIE.EffectsList.player1["Werewolf Indicator"] = {
+    local context = ResolveContainerContext(g_werewolfId, g_werewolfName)
+    LUIE.EffectsList[context]["Werewolf Indicator"] = {
         target="player", type=1,
         id = g_werewolfId, name=g_werewolfName, icon=g_werewolfIcon,
         dur=38000, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
@@ -60,7 +62,8 @@ end
 -- Setup Werewolf Timr Icon (Frozen)
 local function SetWerewolfIconFrozen()
     SetWerewolfIcon()
-    LUIE.EffectsList.player1["Werewolf Indicator"] = {
+    local context = ResolveContainerContext(g_werewolfId, g_werewolfName)
+    LUIE.EffectsList[context]["Werewolf Indicator"] = {
         type=1,
         id = g_werewolfId, name=g_werewolfName, icon=g_werewolfIcon,
         dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -95,7 +98,8 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
             g_werewolfCounter = 0
         end
     else
-        LUIE.EffectsList.player1["Werewolf Indicator"] = nil
+        local context = ResolveContainerContext(g_werewolfId, g_werewolfName)
+        LUIE.EffectsList[context]["Werewolf Indicator"] = nil
         eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0
@@ -117,7 +121,8 @@ function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue
     end
 
     -- Ignore gain from Blood Rage when hit while devouring
-    if LUIE.EffectsList.player1["Werewolf Indicator"] and LUIE.EffectsList.player1["Werewolf Indicator"].ends == nil then
+    local context = ResolveContainerContext(g_werewolfId, g_werewolfName)
+    if LUIE.EffectsList[context]["Werewolf Indicator"] and LUIE.EffectsList[context]["Werewolf Indicator"].ends == nil then
         --if (powerValue == g_lastWerewolfPower + 99) or g_werewolfDevour then
         if g_werewolfDevour then
             return
@@ -129,13 +134,15 @@ function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue
     if powerValue > 0 then
         SetWerewolfIconTimer(currentTime)
     else
-        LUIE.EffectsList.player1["Werewolf Indicator"] = nil
+        local context = ResolveContainerContext(g_werewolfId, g_werewolfName)
+        LUIE.EffectsList[context]["Werewolf Indicator"] = nil
     end
     eventManager:RegisterForUpdate(moduleName .. "WerewolfTicker", 1100, SCB.PowerTrailer)
 
     -- Remove indicator if power reaches 0 - Needed for when the player is in WW form but dead/reincarnating
     if powerValue == 0 then
-        LUIE.EffectsList.player1["Werewolf Indicator"] = nil
+        local context = ResolveContainerContext(g_werewolfId, g_werewolfName)
+        LUIE.EffectsList[context]["Werewolf Indicator"] = nil
         eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0
@@ -146,8 +153,6 @@ end
 
 -- EVENT_EFFECT_CHANGED Listener for Werewolf Devour/De-Werewolf Tracking
 function SCB.DevourEffectListener(eventCode, changeType, _, _, unitTag, _, _, _, _, _, _, _, _,_,_, abilityId, castByPlayer)
-
-    d(abilityId)
 
     -- Update WW icon while devouring
     if abilityId == 33208 then
@@ -163,7 +168,8 @@ function SCB.DevourEffectListener(eventCode, changeType, _, _, unitTag, _, _, _,
 
     -- Remove form icon if player cancels early
     if abilityId == 39477 and changeType == EFFECT_RESULT_GAINED then
-        LUIE.EffectsList.player1["Werewolf Indicator"] = nil
+        local context = ResolveContainerContext(g_werewolfId, g_werewolfName)
+        LUIE.EffectsList[context]["Werewolf Indicator"] = nil
         eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0

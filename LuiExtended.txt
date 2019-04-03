@@ -100,6 +100,7 @@ modules/CombatText/EventViewers/Resources.lua
 modules/InfoPanel/InfoPanel.lua
 modules/SpellCastBuffs/SpellCastBuffs.lua
 modules/SpellCastBuffs/Collectibles.lua
+modules/SpellCastBuffs/Cyrodiil.lua
 modules/SpellCastBuffs/Debug.lua
 modules/SpellCastBuffs/Werewolf.lua
 modules/SlashCommands/SlashCommands.lua

@@ -416,9 +416,9 @@ function SCB.Initialize( enabled )
 
     -- Enable Bar function for Bound Armor if the player is a Sorcerer
     if GetUnitClassId('player') == 2 then
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, SCB.DrawBoundArmorBuffs)
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED, SCB.DrawBoundArmorBuffs)
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED, SCB.DrawBoundArmorBuffs)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, SCB.DrawBoundAegisBuffs)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED, SCB.DrawBoundAegisBuffs)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED, SCB.DrawBoundAegisBuffs)
     end
 end
 
@@ -501,21 +501,6 @@ function SCB.RemoveFromCustomList(list, input)
     SCB.Reset()
 end
 
--- EVENT_DUEL_STARTED handler for creating Battle Spirit Icon on Target
-function SCB.DuelStart()
-    local duelState, characterName = GetDuelInfo()
-    if duelState == 3 and not SCB.SV.IgnoreBattleSpiritTarget then
-        g_currentDuelTarget = strformat(SI_UNIT_NAME, characterName)
-        SCB.ReloadEffects("reticleover")
-    end
-end
-
--- EVENT_DUEL_FINISHED handler for removing Battle Spirit Icon on Target
-function SCB.DuelEnd()
-    g_currentDuelTarget = nil
-    SCB.ReloadEffects("reticleover")
-end
-
 -- Create a buff icon for Disguise if we are wearing one (on load) -- TODO: Simplify with function below!
 function SCB.InitializeDisguise()
     if SCB.SV.HidePlayerBuffs then
@@ -549,7 +534,6 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
         end
         LUIE.EffectsList.player1["DisguiseType"] = nil
         g_currentDisguise = GetItemId(0, 10) or 0
-        SCB.CollectibleBuff()
         if g_currentDisguise == 0 then
             return
         elseif g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
@@ -3223,12 +3207,10 @@ function SCB.OnPlayerActivated(eventCode)
 
     SCB.ReloadEffects( "player" )
 
-    local duelState, characterName = GetDuelInfo()
-    if duelState == 3 and not SCB.SV.IgnoreBattleSpiritTarget then
-        g_currentDuelTarget = strformat(SI_UNIT_NAME, characterName)
-        SCB.ReloadEffects("reticleover")
-    end
+    -- Resolve Duel Target
+    SCB.DuelStart()
 
+    -- Resolve Werewolf
     if SCB.SV.ShowWerewolf and IsWerewolf() then
         SCB.WerewolfState(nil, true, true)
         -- If player is dead, add unlimited duration Werewolf indicator buff
@@ -3284,7 +3266,7 @@ function SCB.OnPlayerActivated(eventCode)
     SCB.ArtificialEffectUpdate()
     -- Add Bound Aegis buffs if player has it slotted
     if GetUnitClassId('player') == 2 then
-        SCB.DrawBoundArmorBuffs()
+        SCB.DrawBoundAegisBuffs()
     end
 
     -- Sets the player to dead if reloading UI or loading in while dead.
@@ -3413,10 +3395,9 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
     end
 end
 
--- Runs on TODO: Insert names of bar slot handler events here
--- TODO: Change function namme
+-- Runs on EVENT_ACTION_SLOT_UPDATED / EVENT_ACTION_SLOTS_ALLHOTBARS_UPDATED / EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED
 -- Creates Minor Ward/Minor Resolve buffs for Bound Aegis
-function SCB.DrawBoundArmorBuffs()
+function SCB.DrawBoundAegisBuffs()
 
     LUIE.EffectsList["player1"][999008] = nil
     LUIE.EffectsList["player1"][999009] = nil
