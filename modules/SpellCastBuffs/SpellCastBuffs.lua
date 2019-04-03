@@ -403,9 +403,6 @@ function SCB.Initialize( enabled )
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, SCB.DuelStart)
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, SCB.DuelEnd)
 
-    -- Combat State
-    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE, SCB.PlayerCombatState)
-
     -- Werewolf
     SCB.RegisterWerewolfEvents()
 
@@ -2459,7 +2456,9 @@ end
 function SCB.ReloadEffects(unitTag)
 
     -- Bail if this isn't reticleover or player
-    if unitTag ~= "player" and unitTag ~= "reticleover" then return end
+    if unitTag ~= "player" and unitTag ~= "reticleover" then
+        return
+    end
 
     -- Clear Existing
     LUIE.EffectsList[unitTag .. 1] = {}
@@ -2475,7 +2474,9 @@ function SCB.ReloadEffects(unitTag)
     end
 
     -- Stop doing anything else if we moused off a target
-    if GetUnitName(unitTag) == "" then return end
+    if GetUnitName(unitTag) == "" then
+        return
+    end
 
     -- Fill it again
     for i = 1, GetNumBuffs(unitTag) do
@@ -2492,100 +2493,92 @@ function SCB.ReloadEffects(unitTag)
         end
     end
 
-    -- TODO: Streamline (Move this out)
-    if not SCB.SV.HideTargetBuffs then
-        local unitName = GetUnitName(unitTag)
-        -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
-        if E.AddNameAura[unitName] and GetUnitReaction(unitTag) == UNIT_REACTION_HOSTILE and IsUnitInCombat(unitTag) and not IsUnitPlayer(unitTag) and not IsUnitDead(unitTag) then
-            for k, v in ipairs(E.AddNameAura[unitName]) do
-                if not (v.zone) or (v.zone and GetCurrentMapZoneIndex() == v.zone) then
-                    local abilityName = GetAbilityName(v.id)
-                    local abilityIcon = GetAbilityIcon(v.id)
-                    LUIE.EffectsList.reticleover1[ "Name Specific Buff" .. k ] = {
-                        type=1,
-                        id= v.id, name= abilityName, icon= abilityIcon,
-                        dur=0, starts=1, ends=nil,
-                        forced = "short",
-                        restart=true, iconNum=0
-                    }
-                end
-            end
-        end
-    end
-
-    if unitTag == "player" then
-        SCB.ArtificialEffectUpdate()
-    end
-
-    -- create custom buff icon for Recall Cooldown effect -- TODO: Streamline (Move this out)
-    if SCB.SV.ShowRecall and unitTag == "player" and not (SCB.SV.HidePlayerBuffs or SCB.SV.HidePlayerDebuffs) then
-        local recallRemain, _ = GetRecallCooldown()
-        if recallRemain > 0 then
-            local currentTime = GetGameTimeMilliseconds()
-            LUIE.EffectsList["player1"][ A.Innate_Recall_Penalty ] = {
-                target="player", type=1,
-                id=6811, name=A.Innate_Recall_Penalty, icon='LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds',
-                dur=600000, starts=currentTime, ends=currentTime+recallRemain,
-                forced = "long",
-                restart=true, iconNum=0,
-                unbreakable=1,
-                overrideDur = 600000
-            }
-        end
-    end
-
+    -- Load Cyrodiil Buffs
     SCB.LoadCyrodiilBuffs(unitTag)
+    -- Display Disguise State
+    SCB.DisguiseStateChanged(nil, unitTag, GetUnitDisguiseState(unitTag))
+    -- Display Stealth State
+    SCB.StealthStateChanged(nil, unitTag, GetUnitStealthState(unitTag))
 
-    if unitTag == "reticleover" then
-        for _, effectsList in pairs( {LUIE.EffectsList.ground, LUIE.EffectsList.saved} ) do
-            --local container = containerRouting[context]
-            for k, v in pairs(effectsList) do
-                if v.savedName ~= nil then
-                    local UnitName = strformat(SI_UNIT_NAME, GetUnitName(unitTag))
-                    if UnitName == v.savedName then
-                        if LUIE.EffectsList.saved[k] then
-                            LUIE.EffectsList.ground[k] = LUIE.EffectsList.saved[k]
-                            LUIE.EffectsList.ground[k].iconNum = 0
-                            LUIE.EffectsList.saved[k] = nil
-                        end
-                    else
-                        if LUIE.EffectsList.ground[k] then
-                            LUIE.EffectsList.saved[k] = LUIE.EffectsList.ground[k]
-                            LUIE.EffectsList.ground[k] = nil
-                        end
+    -- PLAYER SPECIFIC
+    if unitTag == "player" and not SCB.SV.HidePlayerBuffs then
+        -- Update Artificial Effects
+        SCB.ArtificialEffectUpdate()
+        -- Display Recall Cooldown
+        if SCB.SV.ShowRecall and not SCB.SV.HidePlayerDebuffs then
+            SCB.ShowRecallCooldown()
+        end
+    end
+
+    -- TARGET SPECIFIC
+    if unitTag == "reticleover" and not SCB.SV.HideTargetBuffs then
+        -- Handle FAKE DEBUFFS between targets
+        SCB.RestoreSavedFakeEffects()
+        -- Add Name Auras
+        SCB.AddNameAura()
+        -- Display Battle Spirit
+        SCB.LoadBattleSpiritTarget()
+    end
+
+end
+
+-- Called by EVENT_RETICLE_TARGET_CHANGED listener - Displays recall cooldown
+function SCB.ShowRecallCooldown()
+    local recallRemain, _ = GetRecallCooldown()
+    if recallRemain > 0 then
+        local currentTime = GetGameTimeMilliseconds()
+        LUIE.EffectsList["player1"][ A.Innate_Recall_Penalty ] = {
+            target="player", type=1,
+            id=6811, name=A.Innate_Recall_Penalty, icon='LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds',
+            dur=600000, starts=currentTime, ends=currentTime+recallRemain,
+            forced = "long",
+            restart=true, iconNum=0,
+            unbreakable=1,
+            overrideDur = 600000
+        }
+    end
+end
+
+-- Called by EVENT_RETICLE_TARGET_CHANGED listener - Saves active FAKE debuffs on enemies and moves them back and forth between the active container or hidden.
+function SCB.RestoreSavedFakeEffects()
+    -- Restore Ground Effects
+    for _, effectsList in pairs( {LUIE.EffectsList.ground, LUIE.EffectsList.saved} ) do
+        --local container = containerRouting[context]
+        for k, v in pairs(effectsList) do
+            if v.savedName ~= nil then
+                local unitName = strformat(SI_UNIT_NAME, GetUnitName('reticleover'))
+                if unitName == v.savedName then
+                    if LUIE.EffectsList.saved[k] then
+                        LUIE.EffectsList.ground[k] = LUIE.EffectsList.saved[k]
+                        LUIE.EffectsList.ground[k].iconNum = 0
+                        LUIE.EffectsList.saved[k] = nil
+                    end
+                else
+                    if LUIE.EffectsList.ground[k] then
+                        LUIE.EffectsList.saved[k] = LUIE.EffectsList.ground[k]
+                        LUIE.EffectsList.ground[k] = nil
                     end
                 end
             end
         end
-
-        SCB.LoadBattleSpiritTarget()
-
-        SCB.DisguiseStateChanged(nil, "reticleover", GetUnitDisguiseState("reticleover"))
-
-        SCB.StealthStateChanged(nil, "reticleover", GetUnitStealthState("reticleover"))
-
     end
 end
 
--- TODO: Streamline / combine with code embedded above to reduce redundant code
-function SCB.PlayerCombatState(eventCode, inCombat)
-    if not SCB.SV.HideTargetBuffs then
-        local unitName = GetUnitName('reticleover')
-        if unitName == nil or unitName == "" then return end
-
-        -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
-        if E.AddNameAura[unitName] and GetUnitReaction('reticleover') == UNIT_REACTION_HOSTILE and IsUnitInCombat('reticleover') and not IsUnitPlayer('reticleover') and not IsUnitDead('reticleover') then
-            for k, v in ipairs(E.AddNameAura[unitName]) do
-                local abilityName = GetAbilityName(v.id)
-                local abilityIcon = GetAbilityIcon(v.id)
-                LUIE.EffectsList.reticleover1[ "Name Specific Buff" .. k ] = {
-                    type=1,
-                    id= v.id, name= abilityName, icon= abilityIcon,
-                    dur=0, starts=1, ends=nil,
-                    forced = "short",
-                    restart=true, iconNum=0
-                }
-            end
+-- Called by EVENT_RETICLE_TARGET_CHANGED listener - Displays fake buffs based off unitName (primarily for displaying Boss Immunities)
+function SCB.AddNameAura()
+    local unitName = GetUnitName('reticleover')
+    -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
+    if E.AddNameAura[unitName] and GetUnitReaction('reticleover') == UNIT_REACTION_HOSTILE and not IsUnitPlayer('reticleover') and not IsUnitDead('reticleover') then
+        for k, v in ipairs(E.AddNameAura[unitName]) do
+            local abilityName = GetAbilityName(v.id)
+            local abilityIcon = GetAbilityIcon(v.id)
+            LUIE.EffectsList.reticleover1[ "Name Specific Buff" .. k ] = {
+                type=1,
+                id= v.id, name= abilityName, icon= abilityIcon,
+                dur=0, starts=1, ends=nil,
+                forced = "short",
+                restart=true, iconNum=0
+            }
         end
     end
 end
