@@ -104,4 +104,6 @@ modules/SpellCastBuffs/Cyrodiil.lua
 modules/SpellCastBuffs/Debug.lua
 modules/SpellCastBuffs/Werewolf.lua
 modules/SlashCommands/SlashCommands.lua
+modules/SlashCommands/Debug.lua
+modules/SlashCommands/Group.lua
 modules/UnitFrames/UnitFrames.lua
