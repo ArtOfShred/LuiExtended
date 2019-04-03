@@ -111,19 +111,6 @@ function LUIE.SlashHome()
     end
 end
 
--- Slash Command to add someone to the friendslist
-local function SlashFriend(option)
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME), true)
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    RequestFriend(option)
-end
-
 -- Hook for request friend so menu option also displays invite message
 -- Menu is true if this request is sent from the Player to Player interaction menu
 -- TODO: move this to Hooks.lua maybe?
@@ -149,105 +136,6 @@ AddIgnore = function(option)
         printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE), true)
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
             callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-end
-
--- Slash Command to add someone to ignore list
-local function SlashIgnore(option)
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME), true)
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    AddIgnore(option)
-end
-
--- Slash Command to remove someone from friends list
-local function SlashRemoveFriend(option)
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME), true)
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    local compareChar = string.lower(option)
-    local friends = GetNumFriends()
-    local g_friendIndex = {}
-    for i = 1,friends do
-        local displayName = GetFriendInfo(i)
-        local _, characterName = GetFriendCharacterInfo(i)
-        local compareDisplay = string.lower(displayName)
-        local compareCharacter = string.lower(characterName)
-        compareCharacter = string.gsub(compareCharacter,"%^%a+","")
-        g_friendIndex[i] = {displayName=displayName, characterName=characterName, compareDisplay=compareDisplay, compareCharacter=compareCharacter}
-    end
-
-    local finalName = ""
-
-    for i = 1, #g_friendIndex do
-        local comparing = g_friendIndex[i]
-        if comparing.compareDisplay == compareChar or comparing.compareCharacter == compareChar then
-            finalName = comparing.displayName
-            break
-        end
-    end
-
-    if finalName ~= "" then
-        RemoveFriend(finalName)
-    else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME), true)
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-    end
-end
-
--- Slash Command to remove a given name from the ignore list
-local function SlashRemoveIgnore(option)
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE), true)
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    local compareChar = string.lower(option)
-    local ignore = GetNumIgnored()
-    local g_ignoreIndex = {}
-    for i = 1,ignore do
-        local displayName = GetIgnoredInfo(i)
-        displayName = string.lower(displayName)
-        g_ignoreIndex[i] = {displayName=displayName}
-    end
-
-    local finalName = ""
-
-    for i = 1,#g_ignoreIndex do
-        local comparing = g_ignoreIndex[i]
-        if comparing.displayName == compareChar then
-            finalName = comparing.displayName
-            break
-        end
-    end
-
-    if finalName ~= "" then
-        RemoveIgnore(option)
-    else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE), true)
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -480,6 +368,15 @@ function SC.RegisterSlashCommands()
     if SC.SV.SlashTrade then
         SLASH_COMMANDS["/trade"]        = SlashTrade
     end
+    if SC.SV.SlashCampaignQ then
+        SLASH_COMMANDS["/campaign"]     = SlashCampaignQ
+    end
+    if SC.SV.SlashOutfit then
+        SLASH_COMMANDS["/outfit"]       = LUIE.SlashOutfit
+    end
+    if SC.SV.SlashReport then
+        SLASH_COMMANDS["/report"]       = SlashReport
+    end
     if SC.SV.SlashRegroup then
         SLASH_COMMANDS["/regroup"]      = LUIE.SlashRegroup
     end
@@ -517,23 +414,20 @@ function SC.RegisterSlashCommands()
         SLASH_COMMANDS["/gleave"]       = LUIE.SlashGuildQuit
     end
     if SC.SV.SlashFriend then
-        SLASH_COMMANDS["/addfriend"]    = SlashFriend
-        SLASH_COMMANDS["/friend"]       = SlashFriend
+        SLASH_COMMANDS["/addfriend"]    = LUIE.SlashFriend
+        SLASH_COMMANDS["/friend"]       = LUIE.SlashFriend
     end
     if SC.SV.SlashIgnore then
-        SLASH_COMMANDS["/addignore"]    = SlashIgnore
-        SLASH_COMMANDS["/ignore"]       = SlashIgnore
+        SLASH_COMMANDS["/addignore"]    = LUIE.SlashIgnore
+        SLASH_COMMANDS["/ignore"]       = LUIE.SlashIgnore
     end
     if SC.SV.SlashRemoveFriend then
-        SLASH_COMMANDS["/unfriend"]     = SlashRemoveFriend
-        SLASH_COMMANDS["/removefriend"] = SlashRemoveFriend
+        SLASH_COMMANDS["/unfriend"]     = LUIE.SlashRemoveFriend
+        SLASH_COMMANDS["/removefriend"] = LUIE.SlashRemoveFriend
     end
     if SC.SV.SlashRemoveIgnore then
-        SLASH_COMMANDS["/unignore"]     = SlashRemoveIgnore
-        SLASH_COMMANDS["/removeignore"] = SlashRemoveIgnore
-    end
-    if SC.SV.SlashCampaignQ then
-        SLASH_COMMANDS["/campaign"]     = SlashCampaignQ
+        SLASH_COMMANDS["/unignore"]     = LUIE.SlashRemoveIgnore
+        SLASH_COMMANDS["/removeignore"] = LUIE.SlashRemoveIgnore
     end
     if SC.SV.SlashBanker then
         SLASH_COMMANDS["/bank"]         = function(...) LUIE.SlashCollectible(267) end
@@ -563,12 +457,6 @@ function SC.RegisterSlashCommands()
     if SC.SV.SlashWitch then
         SLASH_COMMANDS["/witch"]        = function(...) LUIE.SlashCollectible(479) end
         SLASH_COMMANDS["/witchfest"]    = function(...) LUIE.SlashCollectible(479) end
-    end
-    if SC.SV.SlashOutfit then
-        SLASH_COMMANDS["/outfit"]       = LUIE.SlashOutfit
-    end
-    if SC.SV.SlashReport then
-        SLASH_COMMANDS["/report"]       = SlashReport
     end
 
     -- TODO: DEBUG REMOVE or move to SCB Debug.lua

@@ -106,4 +106,5 @@ modules/SpellCastBuffs/Werewolf.lua
 modules/SlashCommands/SlashCommands.lua
 modules/SlashCommands/Debug.lua
 modules/SlashCommands/Group.lua
+modules/SlashCommands/Social.lua
 modules/UnitFrames/UnitFrames.lua
