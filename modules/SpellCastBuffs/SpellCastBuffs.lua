@@ -1174,7 +1174,7 @@ function SCB.Buff_OnMouseEnter(control)
                     tooltipText = strformat(E.EffectOverride[control.effectId].tooltipVet, timer, value2, value3)
                 end
 
-                -- Use default tooltip - temp if needed (TODO: Remove when all base ability/set tooltips are updated)
+                -- Display Default Tooltip Description if no custom tooltip is present
                 if tooltipText == "" or tooltipText == nil then
                     if GetAbilityEffectDescription(control.buffSlot) ~= "" then
                         tooltipText = GetAbilityEffectDescription(control.buffSlot)
