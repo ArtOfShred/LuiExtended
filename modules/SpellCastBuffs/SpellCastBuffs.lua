@@ -356,7 +356,20 @@ function SCB.Initialize(enabled)
     eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED,    SCB.OnReticleTargetChanged )
 
     -- Buff Events
-    eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
+    eventManager:RegisterForEvent(moduleName .. "Player", EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
+    eventManager:RegisterForEvent(moduleName .. "Target", EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
+    eventManager:AddFilterForEvent(moduleName .. "Player", EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+    eventManager:AddFilterForEvent(moduleName .. "Target", EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
+
+    -- GROUND & MINE EFFECTS - add a filtered event for each AbilityId
+    for k, v in pairs (E.EffectGroundDisplay) do
+        eventManager:RegisterForEvent(moduleName .. "Ground" .. k, EVENT_EFFECT_CHANGED, SCB.OnEffectChangedGround )
+        eventManager:AddFilterForEvent(moduleName .. "Ground" .. k, EVENT_EFFECT_CHANGED, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_ABILITY_ID, k )
+    end
+    for k, v in pairs (E.LinkedGroundMine) do
+        eventManager:RegisterForEvent(moduleName .. "Ground" .. k, EVENT_EFFECT_CHANGED, SCB.OnEffectChangedGround )
+        eventManager:AddFilterForEvent(moduleName .. "Ground" .. k, EVENT_EFFECT_CHANGED, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_ABILITY_ID, k )
+    end
 
     -- Combat Events
     eventManager:RegisterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, SCB.OnCombatEventIn )
@@ -1392,70 +1405,30 @@ function SCB.ApplyFont()
     end
 end
 
--- Runs on the EVENT_EFFECT_CHANGED listener.
--- This handler fires every long-term effect added or removed
-function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and (E.EffectGroundDisplay[abilityId] or E.LinkedGroundMine[abilityId]) and not SCB.SV.HideGroundEffects then
-        -- Mines with multiple auras have to be linked into one id for the purpose of tracking stacks
-        if E.LinkedGroundMine[abilityId] then
-            abilityId = E.LinkedGroundMine[abilityId]
-        end
+function SCB.OnEffectChangedGround(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
 
-        -- Bail out if this ability is blacklisted
-        if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then
-            return
-        end
+    if SCB.SV.HideGroundEffects then return end
 
-        -- Create fake ground aura
-        local groundType = { }
-        groundType[1] = { info = E.EffectGroundDisplay[abilityId].buff, context = "player1", promB = "promb_player", promD = "promd_player", type = 1 }
-        groundType[2] = { info = E.EffectGroundDisplay[abilityId].debuff, context = "player2", promB = "promb_target", promD = "promd_target", type = BUFF_EFFECT_TYPE_DEBUFF }
-        groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
+    -- Mines with multiple auras have to be linked into one id for the purpose of tracking stacks
+    if E.LinkedGroundMine[abilityId] then
+        abilityId = E.LinkedGroundMine[abilityId]
+    end
 
-        if changeType == EFFECT_RESULT_FADED then
-            if E.EffectGroundDisplay[abilityId] and E.EffectGroundDisplay[abilityId].noRemove then return end -- Ignore some abilities
-            local currentTime = GetGameTimeMilliseconds()
-            if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
-                for i = 1, 3 do
-                    if groundType[i].info == true then
-                        -- Set container context
-                        local context
-                        if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
-                            context = groundType[i].promD
-                        elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
-                            context = groundType[i].promB
-                        else
-                            context = groundType[i].context
-                        end
-                        if (E.IsGroundMineAura[abilityId] or E.IsGroundMineStack[abilityId]) then
-                            -- Check to make sure aura exists in case of reloadUI
-                            if LUIE.EffectsList[context][ abilityId ] then
-                                LUIE.EffectsList[context][ abilityId ].stack = LUIE.EffectsList[context][ abilityId ].stack - E.EffectGroundDisplay[abilityId].stackRemove
-                                if LUIE.EffectsList[context][ abilityId ].stack == 0 then LUIE.EffectsList[context][ abilityId ] = nil end
-                            end
-                        else
-                            LUIE.EffectsList[context][ abilityId ] = nil
-                        end
-                    end
-                end
-            end
-        elseif changeType == EFFECT_RESULT_GAINED then
-            -- Special condition to remove 2nd Rearming Trap aura if it is recast before the 2nd trap triggers
-            if abilityId == 40382 then
-                LUIE.EffectsList.ground[40388] = nil
-                LUIE.EffectsList.promb_ground[40388] = nil
-                LUIE.EffectsList.promd_ground[40388] = nil
-            end
+    -- Bail out if this ability is blacklisted
+    if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then
+        return
+    end
 
-            local currentTime = GetGameTimeMilliseconds()
-            g_protectAbilityRemoval[abilityId] = currentTime + 150
+    -- Create fake ground aura
+    local groundType = { }
+    groundType[1] = { info = E.EffectGroundDisplay[abilityId].buff, context = "player1", promB = "promb_player", promD = "promd_player", type = 1 }
+    groundType[2] = { info = E.EffectGroundDisplay[abilityId].debuff, context = "player2", promB = "promb_target", promD = "promd_target", type = BUFF_EFFECT_TYPE_DEBUFF }
+    groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
 
-            local duration = endTime - beginTime
-            local groundLabel = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].groundLabel or false
-            local toggle = E.IsToggle[abilityId] or false
-            iconName = E.EffectGroundDisplay[abilityId].icon or iconName
-            effectName = E.EffectGroundDisplay[abilityId].name or effectName
-
+    if changeType == EFFECT_RESULT_FADED then
+        if E.EffectGroundDisplay[abilityId] and E.EffectGroundDisplay[abilityId].noRemove then return end -- Ignore some abilities
+        local currentTime = GetGameTimeMilliseconds()
+        if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
             for i = 1, 3 do
                 if groundType[i].info == true then
                     -- Set container context
@@ -1467,34 +1440,80 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     else
                         context = groundType[i].context
                     end
-                    if E.IsGroundMineAura[abilityId] then
-                        stackCount = E.EffectGroundDisplay[abilityId].stackReset
-                    elseif E.IsGroundMineStack[abilityId] then
+                    if (E.IsGroundMineAura[abilityId] or E.IsGroundMineStack[abilityId]) then
+                        -- Check to make sure aura exists in case of reloadUI
                         if LUIE.EffectsList[context][ abilityId ] then
-                            stackCount = LUIE.EffectsList[context][ abilityId ].stack + E.EffectGroundDisplay[abilityId].stackRemove
-                        else
-                            stackCount = 1
+                            LUIE.EffectsList[context][ abilityId ].stack = LUIE.EffectsList[context][ abilityId ].stack - E.EffectGroundDisplay[abilityId].stackRemove
+                            if LUIE.EffectsList[context][ abilityId ].stack == 0 then LUIE.EffectsList[context][ abilityId ] = nil end
                         end
-                        if stackCount > E.EffectGroundDisplay[abilityId].stackReset then stackCount = E.EffectGroundDisplay[abilityId].stackReset end
+                    else
+                        LUIE.EffectsList[context][ abilityId ] = nil
                     end
-
-                    LUIE.EffectsList[context][ abilityId ] = {
-                        type=groundType[i].type,
-                        id=abilityId, name=effectName, icon=iconName,
-                        dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                        forced=nil,
-                        restart=true, iconNum=0,
-                        unbreakable=0,
-                        stack = stackCount,
-                        buffSlot = effectSlot,
-                        groundLabel = groundLabel,
-                        toggle = toggle,
-                    }
                 end
+            end
+        end
+    elseif changeType == EFFECT_RESULT_GAINED then
+        -- Special condition to remove 2nd Rearming Trap aura if it is recast before the 2nd trap triggers
+        if abilityId == 40382 then
+            LUIE.EffectsList.ground[40388] = nil
+            LUIE.EffectsList.promb_ground[40388] = nil
+            LUIE.EffectsList.promd_ground[40388] = nil
+        end
+
+        local currentTime = GetGameTimeMilliseconds()
+        g_protectAbilityRemoval[abilityId] = currentTime + 150
+
+        local duration = endTime - beginTime
+        local groundLabel = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].groundLabel or false
+        local toggle = E.IsToggle[abilityId] or false
+        iconName = E.EffectGroundDisplay[abilityId].icon or iconName
+        effectName = E.EffectGroundDisplay[abilityId].name or effectName
+
+        for i = 1, 3 do
+            if groundType[i].info == true then
+                -- Set container context
+                local context
+                if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
+                    context = groundType[i].promD
+                elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
+                    context = groundType[i].promB
+                else
+                    context = groundType[i].context
+                end
+                if E.IsGroundMineAura[abilityId] then
+                    stackCount = E.EffectGroundDisplay[abilityId].stackReset
+                elseif E.IsGroundMineStack[abilityId] then
+                    if LUIE.EffectsList[context][ abilityId ] then
+                        stackCount = LUIE.EffectsList[context][ abilityId ].stack + E.EffectGroundDisplay[abilityId].stackRemove
+                    else
+                        stackCount = 1
+                    end
+                    if stackCount > E.EffectGroundDisplay[abilityId].stackReset then stackCount = E.EffectGroundDisplay[abilityId].stackReset end
+                end
+
+                LUIE.EffectsList[context][ abilityId ] = {
+                    type=groundType[i].type,
+                    id=abilityId, name=effectName, icon=iconName,
+                    dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                    forced=nil,
+                    restart=true, iconNum=0,
+                    unbreakable=0,
+                    stack = stackCount,
+                    buffSlot = effectSlot,
+                    groundLabel = groundLabel,
+                    toggle = toggle,
+                }
             end
         end
     end
 
+end
+
+-- Runs on the EVENT_EFFECT_CHANGED listener.
+-- This handler fires every long-term effect added or removed
+function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+
+    -- Change the effect type before we determine if we want to filter anything else.
     if E.EffectOverride[abilityId] then
         effectType = E.EffectOverride[abilityId].type or effectType
         -- Bail out now if we hide ground snares and other effects because we are showing Damaging Auras (Only do this for the player, we don't want effects on targets to stop showing up).
@@ -1503,8 +1522,29 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
-    -- Track only effects on self or target debuffs
-    if unitTag ~= "player" and unitTag ~= "reticleover" then
+    -- Bail out if the abilityId is on the Blacklist Table
+    if SCB.SV.BlacklistTable[abilityId] then
+        return
+    end
+
+    -- Hide effects if chosen in the options menu
+    if hidePlayerEffects[abilityId] and unitTag == "player" then
+        return
+    end
+
+    if hideTargetEffects[abilityId] and unitTag == "reticleover" then
+        return
+    end
+
+    -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
+    if unitTag ~= "player" then
+        if effectType == 2 and not (castByPlayer == 1) and not (E.DebuffDisplayOverrideId[abilityId] or E.DebuffDisplayOverrideName[effectName]) then
+            return
+        end
+    end
+
+    -- Ignore Siphoner on non-player targets
+    if abilityId == 92428 and unitTag == "reticleover" and not IsUnitPlayer('reticleover') then
         return
     end
 
@@ -1523,7 +1563,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             return
         end
     end
-    --d(strfmt("OnEffectChanged %d: %s[%s] / %d/%d/%d [%s-%d] %d", changeType, effectName, unitTag, effectType, abilityType, statusEffectType, unitName, unitId, abilityId ))
 
     local unbreakable = 0
 
@@ -1562,6 +1601,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
+    -- Set Override data from Effects.lua
     if E.EffectOverride[abilityId] then
         if E.EffectOverride[abilityId].hide == true then
             return
@@ -1595,6 +1635,12 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
+    -- Bail out if the effectName is hidden in the Blacklist Table
+    if SCB.SV.BlacklistTable[effectName] then
+        return
+    end
+
+    -- Override name, icon, or hide based on MapZoneIndex
     if E.MapDataOverride[abilityId] then
         local index = GetCurrentMapZoneIndex()
         if E.MapDataOverride[abilityId][index] then
@@ -1610,6 +1656,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
+    -- Override name or icon based off unitName
     if E.EffectOverrideByName[abilityId] then
         unitName = strformat("<<t:1>>", unitName)
         if E.EffectOverrideByName[abilityId][unitName] then
@@ -1621,33 +1668,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
-    if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then
-        return
-    end
-
-    -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
-    if unitTag ~= "player" then
-        if effectType == 2 and not (castByPlayer == 1) and not (E.DebuffDisplayOverrideId[abilityId] or E.DebuffDisplayOverrideName[effectName]) then
-            return
-        end
-    end
-
-    -- Hide effects if chosen in the options menu
-    if hidePlayerEffects[abilityId] and unitTag == "player" then
-        return
-    end
-
-    if hideTargetEffects[abilityId] and unitTag == "reticleover" then
-        return
-    end
-
     local forcedType = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].forcedContainer or nil
     local savedEffectSlot = effectSlot
     effectSlot = E.EffectMergeId[abilityId] or E.EffectMergeName[effectName] or effectSlot
-
-    if unitTag == "reticleover" and abilityId == 92428 and not IsUnitPlayer('reticleover') then
-        return
-    end
 
     -- Where the new icon will go into
     local context = unitTag .. effectType
