@@ -6,10 +6,9 @@
 -- SlashCommands namespace
 LUIE.SlashCommands = {}
 
--- Performance Enhancement
 local SC = LUIE.SlashCommands
-local printToChat = LUIE.PrintToChat
 
+local printToChat = LUIE.PrintToChat
 local strformat = zo_strformat
 
 local moduleName = LUIE.name .. "_SlashCommands"
@@ -44,13 +43,13 @@ SC.D = {
 }
 SC.SV = nil
 
-function SC.Initialize( enabled )
+function SC.Initialize(enabled)
     -- Load Settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
     if isCharacterSpecific then
-        SC.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "SlashCommands", SC.D )
+        SC.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, "SlashCommands", SC.D)
     else
-        SC.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "SlashCommands", SC.D )
+        SC.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, "SlashCommands", SC.D)
     end
 
     if not enabled then

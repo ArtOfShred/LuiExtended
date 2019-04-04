@@ -3,11 +3,12 @@
     License: The MIT License (MIT)
 --]]
 
--- Performance Enhancement
-local SCB           = LUIE.SpellCastBuffs
-local eventManager  = EVENT_MANAGER
-local callLater     = zo_callLater
-local moduleName    = LUIE.name .. "_SpellCastBuffs"
+local SCB = LUIE.SpellCastBuffs
+
+local callLater = zo_callLater
+local eventManager = EVENT_MANAGER
+
+local moduleName = LUIE.name .. "_SpellCastBuffs"
 
 local g_werewolfName = "" -- Name for current Werewolf Transformation morph
 local g_werewolfIcon = "" -- Icon for current Werewolf Transformation morph
@@ -19,7 +20,6 @@ local g_lastWerewolfPower = 0 -- Tracker for last amount of werewolf power - use
 
 -- Function to determine what container to put the icon in (if we have it set to prominent or not)
 local function ResolveContainerContext(abilityId, effectName)
-
     local context
     if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
         context = "promd_player"
@@ -30,7 +30,6 @@ local function ResolveContainerContext(abilityId, effectName)
     end
 
     return context
-
 end
 
 -- Function to pull Werewolf Cast Bar / Buff Aura Icon based off the players morph choice
@@ -153,7 +152,6 @@ end
 
 -- EVENT_EFFECT_CHANGED Listener for Werewolf Devour/De-Werewolf Tracking
 function SCB.DevourEffectListener(eventCode, changeType, _, _, unitTag, _, _, _, _, _, _, _, _,_,_, abilityId, castByPlayer)
-
     -- Update WW icon while devouring
     if abilityId == 33208 then
         if changeType ~= EFFECT_RESULT_FADED then
@@ -174,5 +172,4 @@ function SCB.DevourEffectListener(eventCode, changeType, _, _, unitTag, _, _, _,
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0
     end
-
 end

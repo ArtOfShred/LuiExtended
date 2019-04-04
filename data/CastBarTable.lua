@@ -6,7 +6,6 @@
 -- Cast Bar Table namespace
 LUIE.CastBarTable = {}
 
--- Performance Enhancement
 local CBT = LUIE.CastBarTable
 --local T = LUIE.Tooltips
 --local A = LUIE.GetAbility()

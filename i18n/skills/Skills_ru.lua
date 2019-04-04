@@ -1143,7 +1143,6 @@ local strings = {
     SI_LUIE_SKILL_ENERGIZE =                             "Energize"
 }
 
-local pairs = pairs
 for stringId, stringValue in pairs(strings) do
     ZO_CreateStringId(stringId, stringValue)
     SafeAddVersion(stringId, 1)

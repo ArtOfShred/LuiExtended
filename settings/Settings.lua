@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
--- Performance Enhancement
 local strformat = zo_strformat
 local iconFormat = zo_iconFormat
 
@@ -295,7 +294,7 @@ function LUIE.CreateSettings()
         type = "button",
         name = GetString(SI_LUIE_LAM_CHANGELOG),
         tooltip = GetString(SI_LUIE_LAM_CHANGELOG_TP),
-        func = function() LUIE_ToggleChangelog(false) SCENE_MANAGER:ShowBaseScene() end,
+        func = function() LUIE.ToggleChangelog(false) SCENE_MANAGER:ShowBaseScene() end,
         width = "half",
     }
 

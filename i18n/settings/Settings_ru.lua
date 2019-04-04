@@ -1634,7 +1634,6 @@ local strings = {
     SI_LUIE_LAM_CT_DEATH_COLOR_TP =                      "Цвет предупреждения о смерти члена группы.",
 }
 
-local pairs = pairs
 for stringId, stringValue in pairs(strings) do
     ZO_CreateStringId(stringId, stringValue)
     SafeAddVersion(stringId, 1)

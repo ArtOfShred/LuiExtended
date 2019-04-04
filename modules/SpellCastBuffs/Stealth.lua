@@ -4,15 +4,13 @@
 --]]
 
 -- Performance Enhancement
-local SCB           = LUIE.SpellCastBuffs
-local E             = LUIE.Effects
-local A             = LUIE.GetAbility()
-
-local g_currentDisguise -- Tracks the currently equipped disguise
+local SCB = LUIE.SpellCastBuffs
+local E = LUIE.Effects
+local A = LUIE.GetAbility()
 
 -- Handles long term Disguise Item Icon (appears when wearing a disguise even if not in a disguised state)
+local g_currentDisguise -- Tracks the currently equipped disguise
 function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
     -- Remove buff first
     LUIE.EffectsList.player1["DisguiseType"] = nil
 
@@ -39,12 +37,10 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
         forced = "long",
         restart=true, iconNum=0
     }
-
 end
 
 -- Handles disguise changes for player/reticleover
 function SCB.DisguiseStateChanged ( eventCode, unitTag, disguiseState )
-
     -- Bail out if we don't have disguise or unitTag buffs enabled
     if unitTag == "player" and ( not SCB.SV.DisguiseStatePlayer or SCB.SV.HidePlayerBuffs) then
         return
@@ -73,12 +69,10 @@ function SCB.DisguiseStateChanged ( eventCode, unitTag, disguiseState )
             restart=true, iconNum=0
         }
     end
-
 end
 
 -- Handles stealth state changes for player/reticleover
 function SCB.StealthStateChanged(eventCode, unitTag, stealthState)
-
     -- Bail out if we don't have stealth or unitTag buffs enabled
     if unitTag == "player" and ( not SCB.SV.StealthStatePlayer or SCB.SV.HidePlayerBuffs) then
         return
@@ -116,5 +110,4 @@ function SCB.StealthStateChanged(eventCode, unitTag, stealthState)
             restart=true, iconNum=0
         }
     end
-
 end

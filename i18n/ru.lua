@@ -7,7 +7,7 @@
 -- Translation by: KiriX
 local strings = {
 
-    -- LuiExtended.lua
+    -- LuiExtended
     SI_LUIE_ERROR_FONT =                                 "LUI Extended: Возникла проблема с выбором шрифта. Возвращение к настройкам по умолчанию.",
     SI_LUIE_ERROR_SOUND =                                "LUI Extended: Возникла проблема с выбором звука. Возвращение к настройкам по умолчанию.",
 
@@ -20,7 +20,7 @@ local strings = {
     SI_LUIE_CUSTOM_LIST_REMOVED_FAILED =                 "Could not remove [<<1>>] to <<2>>. That abilityId does not exist.",
     SI_LUIE_CUSTOM_LIST_REMOVED_NAME =                   "<<1>> removed from <<2>>.",
 
-    -- Bindings.xml
+    -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Призвать Банкира",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Призвать Торговца",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Призвать Воровку",
@@ -38,7 +38,7 @@ local strings = {
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_9 =              "Экипировать наряд из ячейки 9",
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_10 =             "Экипировать наряд из ячейки 10",
 
-    -- SlashCommands.lua
+    -- SlashCommands
     SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE =                   "В очереди в кампанию <<1>>...",
     SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG =               "Вы не вставь в очередь в кампанию, находясь на Поле сражения.",
     SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED =      "Введённой вами название кампании не является названием вашей домашней или гостевой кампании.",
@@ -91,11 +91,11 @@ local strings = {
     SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED =              "У вас не разблокирована ячейка нарядов <<1>>.",
     SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION =              "Вы переключили свой наряд на: <<1>>.",
 
-    -- InfoPanel.lua
+    -- InfoPanel
     SI_LUIE_PNL_TRAINNOW =                               "Покормить",
     SI_LUIE_PNL_MAXED =                                  "Макс.",
 
-    -- SpellCastBuffs.lua
+    -- SpellCastBuffs
     SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS =                "Баффы игрока",
     SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS =              "Дебаффы игрока",
     SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS =      "Длительные эффекты игрока",
@@ -104,7 +104,7 @@ local strings = {
     SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS =             "Особые баффы",
     SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS =           "Особые дебаффы",
 
-    -- ChatAnnouncements.lua
+    -- ChatAnnouncements
     SI_LUIE_CA_CURRENCY_GOLD =                           " <<1[Золотой/Золота]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_ALLIANCE_POINT =                 " <<1[Очко Альянса/Очков Альянса]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_TELVAR_STONE =                   " <<1[Камень Тель-Вар/Камней Тель-Вар]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
@@ -474,7 +474,7 @@ local strings = {
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC11 =          "Генерал Назенечар использует павших жителей Имперского города.",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC12 =          "Беспокойные духи мёртвых движимы силами невидимых.",
 
-    -- CombatText.lua
+    -- CombatText
     SI_LUIE_CT_COMBAT_IN_DEFAULT =                       "В бою",
     SI_LUIE_CT_COMBAT_OUT_DEFAULT =                      "Выход из боя",
     SI_LUIE_CT_DEATH_DEFAULT =                           "%t мертв!",
@@ -509,14 +509,13 @@ local strings = {
     SI_LUIE_CT_PANEL_ALERT =                             "Предупреждения",
     SI_LUIE_CT_PANEL_RESOURCE =                          "Ресурсы",
 
-    -- UnitFrames.lua
+    -- UnitFrames
     SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Энергия (<<3>>%)",
     SI_LUIE_UF_WEREWOLF_TP =                             "Вы останетесь в форме оборотня в течение |cFFFFFF<<1>>|r секунд.",
     SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Запас сил езд. животного (<<3>>%)",
     SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Состояние (<<3>>%)",
 }
 
-local pairs = pairs
 for stringId, stringValue in pairs(strings) do
     ZO_CreateStringId(stringId, stringValue)
     SafeAddVersion(stringId, 1)

@@ -3,11 +3,9 @@
     License: The MIT License (MIT)
 --]]
 
--- Performance Enhancement
 local strformat = zo_strformat
 
 function LUIE.InitializeHooks()
-
         -- Hook for Icon/Name changes
         local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
         GetSkillAbilityInfo = function(skillType, skillIndex, abilityIndex)

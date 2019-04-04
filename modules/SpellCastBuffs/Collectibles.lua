@@ -3,17 +3,16 @@
     License: The MIT License (MIT)
 --]]
 
--- Performance Enhancement
-local SCB           = LUIE.SpellCastBuffs
-local strformat     = zo_strformat
-local callLater     = zo_callLater
+local SCB = LUIE.SpellCastBuffs
+
+local strformat = zo_strformat
+local callLater = zo_callLater
 
 -- EVENT_MOUNTED_STATE_CHANGED handler to create Mount Buff icon for player
 function SCB.MountStatus(eventCode, mounted)
     -- Remove icon first
     LUIE.EffectsList.player1["Mount"] = nil
     if mounted and not (SCB.SV.IgnoreMount or SCB.SV.HidePlayerBuffs) then
-
         local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_MOUNT)
         local nickname = GetCollectibleNickname(collectible)
         local name, description, icon = GetCollectibleInfo(collectible)
@@ -47,7 +46,6 @@ end
 
 -- Handles delayed call from SCB.CollectibleUsed()
 function SCB.CollectibleBuff()
-
     -- Remove Icon First
     LUIE.EffectsList.player1["PetType"] = nil
     LUIE.EffectsList.player1["AssistantType"] = nil
@@ -96,5 +94,4 @@ function SCB.CollectibleBuff()
             restart=true, iconNum=0
         }
     end
-
 end

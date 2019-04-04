@@ -3,11 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
--- Performance Enhancement
-local SCB           = LUIE.SpellCastBuffs
-local E             = LUIE.Effects
-local strformat     = zo_strformat
-local iconFormat    = zo_iconFormat
+local SCB = LUIE.SpellCastBuffs
+local E = LUIE.Effects
+
+local strformat = zo_strformat
+local iconFormat = zo_iconFormat
 
 -- Debug Display for Combat Events
 function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
@@ -100,8 +100,7 @@ function SCB.TempSlashFilter()
         d("LUIE --- Ability Debug Filter Enabled ---")
     end
 end
--- TODO: maybe only register this for @ArtOfShred
-SLASH_COMMANDS["/filter"] = SCB.TempSlashFilter
+SLASH_COMMANDS["/filter"] = SCB.TempSlashFilter -- TODO: maybe only register this for @ArtOfShred
 
 function SCB.TempSlashGround()
     local ground = LUIE.SpellCastBuffs.SV.GroundDamageAura
@@ -116,5 +115,4 @@ function SCB.TempSlashGround()
 
     LUIE.SpellCastBuffs.ReloadEffects("player")
 end
--- TODO: maybe only register this for @ArtOfShred
-SLASH_COMMANDS["/ground"] = SCB.TempSlashGround
+SLASH_COMMANDS["/ground"] = SCB.TempSlashGround -- TODO: maybe only register this for @ArtOfShred

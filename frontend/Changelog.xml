@@ -24,7 +24,7 @@
                 <Button name="$(parent)Close" inherits="ZO_CloseButton">
                     <Anchor point="TOPRIGHT" offsetY="3" offsetX = "-3" />
                     <OnClicked>
-                        LUIE_ToggleChangelog(true)
+                        LUIE.ToggleChangelog(true)
                     </OnClicked>
                 </Button>
 

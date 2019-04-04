@@ -3,12 +3,12 @@
     License: The MIT License (MIT)
 --]]
 
--- Performance Enhancement
-local SCB           = LUIE.SpellCastBuffs
-local A             = LUIE.GetAbility()
-local strformat     = zo_strformat
+local SCB = LUIE.SpellCastBuffs
+local A = LUIE.GetAbility()
 
-local g_currentDuelTarget            = nil -- Saved Duel Target for generating Battle Spirit icon when enabled
+local strformat = zo_strformat
+
+local g_currentDuelTarget = nil -- Saved Duel Target for generating Battle Spirit icon when enabled
 
 -- EVENT_DUEL_STARTED handler for creating Battle Spirit Icon on Target
 function SCB.DuelStart()
@@ -26,7 +26,6 @@ function SCB.DuelEnd()
 end
 
 function SCB.LoadBattleSpiritTarget()
-
     -- Return if we don't have Battle Spirit enabled for Target
     if SCB.SV.HideTargetBuffs or SCB.SV.IgnoreBattleSpiritTarget then
         return
@@ -42,11 +41,9 @@ function SCB.LoadBattleSpiritTarget()
             restart=true, iconNum=0,
         }
     end
-
 end
 
 function SCB.LoadCyrodiilBuffs(unitTag)
-
     -- If we aren't in the AvA World then return (needs to check for Cyrodiil only - we don't want this displaying in BG's)
     if not IsPlayerInAvAWorld() then
         return
@@ -111,12 +108,11 @@ function SCB.LoadCyrodiilBuffs(unitTag)
     end
     if homeKeep and not (SCB.SV.BlacklistTable[11346] or SCB.SV.BlacklistTable[A.Skill_Home_Keep_Bonus]) then
         LUIE.EffectsList[context][ A.Skill_Home_Keep_Bonus ] = {
-        target = unitTag, type=1,
-        id=11346, name=A.Skill_Home_Keep_Bonus, icon = "LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds",
-        dur=0, starts=1, ends=nil,
-        forced = forced,
-        restart=true, iconNum=0,
+            target = unitTag, type=1,
+            id=11346, name=A.Skill_Home_Keep_Bonus, icon = "LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds",
+            dur=0, starts=1, ends=nil,
+            forced = forced,
+            restart=true, iconNum=0,
         }
     end
-
 end

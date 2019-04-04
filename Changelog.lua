@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
--- Performance Enhancement
 local strformat = zo_strformat
 
 local changelogMessages = {
@@ -26,14 +25,14 @@ local changelogMessages = {
 }
 
 -- Hide toggle called by the menu or xml button
-function LUIE_ToggleChangelog(option)
+function LUIE.ToggleChangelog(option)
     LUIEChangelog:ClearAnchors()
     LUIEChangelog:SetAnchor(CENTER, GuiRoot, CENTER, 0, -120 )
     LUIEChangelog:SetHidden(option)
 end
 
 -- Called on initialize
-function LUIE_ChangelogScreen()
+function LUIE.ChangelogScreen()
     -- concat messages into one string
     local changelog = table.concat(changelogMessages, "\n")
     -- If text start with '*' replace it with bullet texture

@@ -6,7 +6,6 @@
 -- AlertTable namespace
 LUIE.AlertTable = {}
 
--- Performance Enhancement
 local U = LUIE.UnitNames
 local A = LUIE.GetAbility()
 

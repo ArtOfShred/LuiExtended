@@ -4,22 +4,22 @@
 --]]
 
 -- Tooltips namespace
-LUIE.Tooltips           = {}
+LUIE.Tooltips = {}
 
-local strformat           = zo_strformat
+local strformat = zo_strformat
 
 -- Local Damagetypes for easy use
-local PhysicalDamage           = GetString(SI_DAMAGETYPE2) .. " Damage" -- TODO: Localize
-local FlameDamage           = GetString(SI_DAMAGETYPE3) .. " Damage" -- TODO: Localize
-local ShockDamage           = GetString(SI_DAMAGETYPE4) .. " Damage" -- TODO: Localize
-local FrostDamage           = GetString(SI_DAMAGETYPE6) .. " Damage" -- TODO: Localize
-local MagicDamage           = GetString(SI_DAMAGETYPE8) .. " Damage" -- TODO: Localize
-local DiseaseDamage           = GetString(SI_DAMAGETYPE10) .. " Damage" -- TODO: Localize
-local PoisonDamage           = GetString(SI_DAMAGETYPE11) .. " Damage" -- TODO: Localize
-local BleedDamage           = "Bleeding Damage" -- TODO: Localize
-local OblivionDamage           = "Oblivion Damage" -- TODO: Localize
+local PhysicalDamage = GetString(SI_DAMAGETYPE2) .. " Damage" -- TODO: Localize
+local FlameDamage = GetString(SI_DAMAGETYPE3) .. " Damage" -- TODO: Localize
+local ShockDamage = GetString(SI_DAMAGETYPE4) .. " Damage" -- TODO: Localize
+local FrostDamage = GetString(SI_DAMAGETYPE6) .. " Damage" -- TODO: Localize
+local MagicDamage = GetString(SI_DAMAGETYPE8) .. " Damage" -- TODO: Localize
+local DiseaseDamage = GetString(SI_DAMAGETYPE10) .. " Damage" -- TODO: Localize
+local PoisonDamage = GetString(SI_DAMAGETYPE11) .. " Damage" -- TODO: Localize
+local BleedDamage = "Bleeding Damage" -- TODO: Localize
+local OblivionDamage = "Oblivion Damage" -- TODO: Localize
 
-local Tooltips           = {
+local Tooltips = {
     ----------------------------------------------------------------
     -- MAJOR / MINOR BUFFS & DEBUFFS -------------------------------
     ----------------------------------------------------------------
@@ -1186,7 +1186,7 @@ local Tooltips           = {
 }
 
 -- Export string data to global namespace
-LUIE.Tooltips           = Tooltips
+LUIE.Tooltips = Tooltips
 
 --[[ Possibly use these at some point
 

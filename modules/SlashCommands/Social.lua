@@ -4,8 +4,8 @@
 --]]
 
 local SC = LUIE.SlashCommands
-local printToChat = LUIE.PrintToChat
 
+local printToChat = LUIE.PrintToChat
 local strformat = zo_strformat
 
 -- Slash Command to add someone to the friendslist

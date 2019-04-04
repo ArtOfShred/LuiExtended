@@ -4,8 +4,8 @@
 --]]
 
 local SC = LUIE.SlashCommands
-local printToChat = LUIE.PrintToChat
 
+local printToChat = LUIE.PrintToChat
 local strformat = zo_strformat
 
 -- Slash Command to port to primary home
@@ -74,7 +74,7 @@ function SC.SlashCampaignQ(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME), true)
         if LUIE.SV.TempAlertCampaign then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME) )
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -83,7 +83,7 @@ function SC.SlashCampaignQ(option)
     if IsActiveWorldBattleground() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG), true)
         if LUIE.SV.TempAlertCampaign then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG) )
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -101,13 +101,13 @@ function SC.SlashCampaignQ(option)
                 QueueForCampaign (i)
                 printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName), true)
                 if LUIE.SV.TempAlertCampaign then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName) )
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))
                 end
                 return
             else
                 printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED), true)
                 if LUIE.SV.TempAlertCampaign then
-                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED) )
+                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED))
                 end
                 PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
                 return
@@ -117,7 +117,7 @@ function SC.SlashCampaignQ(option)
 
     printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN), true)
     if LUIE.SV.TempAlertCampaign then
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN) )
+        ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN))
     end
     PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 end
@@ -161,7 +161,7 @@ function SC.SlashOutfit(option)
     if option == "" or option == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
         if LUIE.SV.TempAlertOutfit then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID) )
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -171,7 +171,7 @@ function SC.SlashOutfit(option)
     if not valid or valid > 10 then
         printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
         if LUIE.SV.TempAlertOutfit then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID) )
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -180,9 +180,9 @@ function SC.SlashOutfit(option)
     local numOutfits = GetNumUnlockedOutfits()
 
     if valid > numOutfits then
-        printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
+        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid))
         if LUIE.SV.TempAlertOutfit then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid) )
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -194,9 +194,9 @@ function SC.SlashOutfit(option)
     if name == "" then
         name = strformat("<<1>> <<2>>", GetString(SI_CROWN_STORE_SEARCH_ADDITIONAL_OUTFITS), valid)
     end
-    printToChat( strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
+    printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name))
     if LUIE.SV.TempAlertOutfit then
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name) )
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name))
     end
 end
 

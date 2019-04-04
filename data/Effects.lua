@@ -6,7 +6,6 @@
 -- Effects namespace
 LUIE.Effects = {}
 
--- Performance Enhancement
 local E = LUIE.Effects
 local T = LUIE.Tooltips
 local U = LUIE.UnitNames

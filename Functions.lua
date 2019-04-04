@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
--- Performance Enhancement
 local strfmt = string.format
 
 -- Called from the menu and on initialization to update timestamp color when changed.

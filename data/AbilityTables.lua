@@ -1280,7 +1280,6 @@ local AbilityTables = {
     Effect_Curse_Duration             = 25000,
 }
 
-
 -- Replace ability IDs with names
 for k, v in pairs(AbilityTables) do
     if type(v) == "number" then

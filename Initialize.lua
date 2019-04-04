@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
--- Performance Enhancement
 local strformat = zo_strformat
 local eventManager = EVENT_MANAGER
 
@@ -80,20 +79,20 @@ local function OnAddonOnLoaded(eventCode, addonName)
     LoadSavedVars()
 
     -- Display changelog screen
-    LUIE_ChangelogScreen()
+    LUIE.ChangelogScreen()
 
     LUIE.PlayerNameRaw = GetRawUnitName("player")
     LUIE.PlayerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
     LUIE.PlayerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
 
     -- Initialize this addon modules according to user preferences
-    LUIE.ChatAnnouncements.Initialize( LUIE.SV.ChatAnnouncements_Enable )
-    LUIE.CombatInfo.Initialize( LUIE.SV.CombatInfo_Enabled )
-    LUIE.CombatText.Initialize ( LUIE.SV.CombatText_Enabled )
-    LUIE.InfoPanel.Initialize( LUIE.SV.InfoPanel_Enabled )
-    LUIE.UnitFrames.Initialize( LUIE.SV.UnitFrames_Enabled )
-    LUIE.SpellCastBuffs.Initialize( LUIE.SV.SpellCastBuff_Enable )
-    LUIE.SlashCommands.Initialize( LUIE.SV.SlashCommands_Enable )
+    LUIE.ChatAnnouncements.Initialize(LUIE.SV.ChatAnnouncements_Enable)
+    LUIE.CombatInfo.Initialize(LUIE.SV.CombatInfo_Enabled)
+    LUIE.CombatText.Initialize(LUIE.SV.CombatText_Enabled)
+    LUIE.InfoPanel.Initialize(LUIE.SV.InfoPanel_Enabled)
+    LUIE.UnitFrames.Initialize(LUIE.SV.UnitFrames_Enabled)
+    LUIE.SpellCastBuffs.Initialize(LUIE.SV.SpellCastBuff_Enable)
+    LUIE.SlashCommands.Initialize(LUIE.SV.SlashCommands_Enable)
 
     -- Load Timetamp Color
     LUIE.UpdateTimeStampColor()
@@ -106,7 +105,6 @@ local function OnAddonOnLoaded(eventCode, addonName)
 
     -- Hooks
     LUIE.InitializeHooks()
-
 end
 
 -- Hook initialization

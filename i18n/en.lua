@@ -7,7 +7,7 @@
 -- Translation by: <default>
 local strings = {
 
-    -- LuiExtended.lua
+    -- LuiExtended
     SI_LUIE_ERROR_FONT =                                 "LUI Extended: There was a problem with selecting required font. Falling back to default.",
     SI_LUIE_ERROR_SOUND =                                "LUI Extended: There was a problem with selecting required sound. Falling back to default.",
 
@@ -20,7 +20,7 @@ local strings = {
     SI_LUIE_CUSTOM_LIST_REMOVED_FAILED =                 "Could not remove [<<1>>] to <<2>>. That abilityId does not exist.",
     SI_LUIE_CUSTOM_LIST_REMOVED_NAME =                   "<<1>> removed from <<2>>.",
 
-    -- Bindings.xml
+    -- Bindings
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Summon Banker",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Summon Merchant",
     SI_BINDING_NAME_LUIE_COMMAND_FENCE =                 "Summon Fence",
@@ -38,7 +38,7 @@ local strings = {
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_9 =              "Equip Outfit in Slot 9",
     SI_BINDING_NAME_LUIE_COMMAND_OUTFIT_10 =             "Equip Outfit in Slot 10",
 
-    -- SlashCommands.lua
+    -- SlashCommands
     SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE =                   "Queueing for <<1>>...",
     SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG =               "You cannot queue for a campaign while in a battleground.",
     SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED =      "The campaign name you entered is not your home or guest campaign.",
@@ -91,11 +91,11 @@ local strings = {
     SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED =              "You have not unlocked Outfit Slot <<1>>.",
     SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION =              "You switch your outfit to: <<1>>.",
 
-    -- InfoPanel.lua
+    -- InfoPanel
     SI_LUIE_PNL_TRAINNOW =                               "Train Now",
     SI_LUIE_PNL_MAXED =                                  "Maxed",
 
-    -- SpellCastBuffs.lua
+    -- SpellCastBuffs
     SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS =                "Player Buffs",
     SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS =              "Player Debuffs",
     SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS =      "Player Long Term Effects",
@@ -104,7 +104,7 @@ local strings = {
     SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS =             "Prominent Buffs",
     SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS =           "Prominent Debuffs",
 
-    -- ChatAnnouncements.lua
+    -- ChatAnnouncements
     SI_LUIE_CA_CURRENCY_GOLD =                           " <<1[Gold/Gold]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_ALLIANCE_POINT =                 " <<1[Alliance Point/Alliance Points]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     SI_LUIE_CA_CURRENCY_TELVAR_STONE =                   " <<1[Tel Var Stone/Tel Var Stones]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
@@ -474,7 +474,7 @@ local strings = {
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC11 =          "General Nazenaechar makes use of fallen Imperial citizens.",
     SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC12 =          "Restless spirits of the dead are driven by forces unseen.",
 
-    -- CombatText.lua
+    -- CombatText
     SI_LUIE_CT_COMBAT_IN_DEFAULT =                       "Entered Combat",
     SI_LUIE_CT_COMBAT_OUT_DEFAULT =                      "Left Combat",
     SI_LUIE_CT_DEATH_DEFAULT =                           "%t died!",
@@ -509,14 +509,13 @@ local strings = {
     SI_LUIE_CT_PANEL_ALERT =                             "Alerts",
     SI_LUIE_CT_PANEL_RESOURCE =                          "Resources",
 
-    -- UnitFrames.lua
+    -- UnitFrames
     SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Power (<<3>>%)",
     SI_LUIE_UF_WEREWOLF_TP =                             "You will remain in Werewolf Form for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_UF_MOUNT_POWER =                             "<<1>>/<<2>> Mount Stamina (<<3>>%)",
     SI_LUIE_UF_SIEGE_POWER =                             "<<1>>/<<2>> Condition (<<3>>%)",
 }
 
-local pairs = pairs
 for stringId, stringValue in pairs(strings) do
     ZO_CreateStringId(stringId, stringValue)
     SafeAddVersion(stringId, 1)
