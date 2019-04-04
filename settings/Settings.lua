@@ -160,7 +160,7 @@ function LUIE.CreateSettings()
         end
 
         if not sourceCharacter or not targetCharacter then
-            d("LUIE - Unable to copy Character Profile Data.")
+            d("LUIE - Unable to copy Character Profile Data.") -- TODO: localization
             return
         else
             CopyTable(sourceCharacter, targetCharacter)

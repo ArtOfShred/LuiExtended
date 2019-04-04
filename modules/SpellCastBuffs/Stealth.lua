@@ -40,7 +40,7 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
 end
 
 -- Handles disguise changes for player/reticleover
-function SCB.DisguiseStateChanged ( eventCode, unitTag, disguiseState )
+function SCB.DisguiseStateChanged(eventCode, unitTag, disguiseState)
     -- Bail out if we don't have disguise or unitTag buffs enabled
     if unitTag == "player" and ( not SCB.SV.DisguiseStatePlayer or SCB.SV.HidePlayerBuffs) then
         return

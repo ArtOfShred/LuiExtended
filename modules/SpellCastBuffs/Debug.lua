@@ -100,7 +100,6 @@ function SCB.TempSlashFilter()
         d("LUIE --- Ability Debug Filter Enabled ---")
     end
 end
-SLASH_COMMANDS["/filter"] = SCB.TempSlashFilter -- TODO: maybe only register this for @ArtOfShred
 
 function SCB.TempSlashGround()
     local ground = LUIE.SpellCastBuffs.SV.GroundDamageAura
@@ -115,4 +114,9 @@ function SCB.TempSlashGround()
 
     LUIE.SpellCastBuffs.ReloadEffects("player")
 end
-SLASH_COMMANDS["/ground"] = SCB.TempSlashGround -- TODO: maybe only register this for @ArtOfShred
+
+local displayName = GetDisplayName()
+if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+    SLASH_COMMANDS["/filter"] = SCB.TempSlashFilter
+    SLASH_COMMANDS["/ground"] = SCB.TempSlashGround
+end

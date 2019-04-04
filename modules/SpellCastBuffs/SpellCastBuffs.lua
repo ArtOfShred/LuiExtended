@@ -175,13 +175,13 @@ local function EaseOutQuad(t, b, c, d)
 end
 
 -- Initialization
-function SCB.Initialize( enabled )
+function SCB.Initialize(enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
     if isCharacterSpecific then
-        SCB.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "SpellCastBuffs", SCB.D )
+        SCB.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, "SpellCastBuffs", SCB.D)
     else
-        SCB.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "SpellCastBuffs", SCB.D )
+        SCB.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, "SpellCastBuffs", SCB.D)
     end
 
     -- Correct read values
@@ -226,7 +226,6 @@ function SCB.Initialize( enabled )
         local fragment2 = ZO_HUDFadeSceneFragment:New(uiTlw.playerd, 0, 0)
         table.insert(fragments, fragment1)
         table.insert(fragments, fragment2)
-
     end
 
     -- Create TopLevelWindows for buff frames when NOT locked to Custom Unit Frames
@@ -255,7 +254,6 @@ function SCB.Initialize( enabled )
         local fragment2 = ZO_HUDFadeSceneFragment:New(uiTlw.targetd, 0, 0)
         table.insert(fragments, fragment1)
         table.insert(fragments, fragment2)
-
     end
 
     -- Create TopLevelWindows for Prominent Buffs
@@ -499,7 +497,7 @@ end
 
 -- Sets horizontal alignment of icon. Called from Settings Menu.
 -- This is done simply by setting of iconHolder anchor.
-function SCB.SetIconsAlignment( value )
+function SCB.SetIconsAlignment(value)
     -- Check correctness of argument value
     if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
         value = SCB.D.Alignment
@@ -516,7 +514,7 @@ function SCB.SetIconsAlignment( value )
         if uiTlw[v].iconHolder then
             uiTlw[v].iconHolder:ClearAnchors()
             if uiTlw[v].alignVertical then
-                -- Might need to consolidate these two functions somehow, possibly consolidate all options so that Left = Top, Middle = Center, Right = Bottom
+                -- TODO: Might need to consolidate these two functions somehow, possibly consolidate all options so that Left = Top, Middle = Center, Right = Bottom
                 uiTlw[v].iconHolder:SetAnchor( g_longVertAlign )
             else
                 if v == "player_long" then
@@ -530,7 +528,7 @@ function SCB.SetIconsAlignment( value )
 end
 
 -- Sets vertical alignment of Prominent Buff icons
-function SCB.SetIconsAlignmentProminentBuff( value )
+function SCB.SetIconsAlignmentProminentBuff(value)
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.ProminentBuffAlignment
     end
@@ -553,7 +551,7 @@ function SCB.SetIconsAlignmentProminentBuff( value )
 end
 
 -- Sets vertical alignment of Prominent Debuff icons
-function SCB.SetIconsAlignmentProminentDebuff( value )
+function SCB.SetIconsAlignmentProminentDebuff(value)
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.ProminentDebuffAlignment
     end
@@ -576,7 +574,7 @@ function SCB.SetIconsAlignmentProminentDebuff( value )
 end
 
 -- Set PLAYER LONG Container Vertical Alignment
-function SCB.SetIconsAlignmentLongVert( value )
+function SCB.SetIconsAlignmentLongVert(value)
     -- Check correctness of argument value
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.AlignmentLongVert
@@ -607,7 +605,7 @@ function SCB.SetIconsAlignmentLongVert( value )
 end
 
 -- Set PLAYER LONG Container Horizontal Alignment
-function SCB.SetIconsAlignmentLongHorz( value )
+function SCB.SetIconsAlignmentLongHorz(value)
     -- Check correctness of argument value
     if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
         value = SCB.D.AlignmentLongHorz
@@ -638,7 +636,7 @@ function SCB.SetIconsAlignmentLongHorz( value )
 end
 
 -- Sets horizontal sort direction. Called from Settings Menu.
-function SCB.SetSortDirection( value )
+function SCB.SetSortDirection(value)
     -- Check correctness of argument value
     if value ~= "Left to Right" and value ~= "Right to Left" then
         value = SCB.D.SortDirection
@@ -1044,7 +1042,6 @@ end
 
 -- OnMouseEnter for Buff Tooltips
 function SCB.Buff_OnMouseEnter(control)
-
     eventManager:UnregisterForUpdate(moduleName .. "StickyTooltip")
 
     InitializeTooltip(GameTooltip, control, BOTTOM, 0, -5, TOP)
@@ -1395,10 +1392,8 @@ function SCB.ApplyFont()
     end
 end
 
---[[
-    * Runs on the EVENT_EFFECT_CHANGED listener.
-    * This handler fires every long-term effect added or removed:
- ]]--
+-- Runs on the EVENT_EFFECT_CHANGED listener.
+-- This handler fires every long-term effect added or removed
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and (E.EffectGroundDisplay[abilityId] or E.LinkedGroundMine[abilityId]) and not SCB.SV.HideGroundEffects then
         -- Mines with multiple auras have to be linked into one id for the purpose of tracking stacks
@@ -1809,10 +1804,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
 end
 
---[[
-    * Runs on the EVENT_ARTIFICIAL_EFFECT_ADDED / EVENT_ARTIFICIAL_EFFECT_REMOVED listener.
-    * This handler fires whenever an ArtificialEffectId is added or removed:
-]]--
+-- Runs on the EVENT_ARTIFICIAL_EFFECT_ADDED / EVENT_ARTIFICIAL_EFFECT_REMOVED listener.
+-- This handler fires whenever an ArtificialEffectId is added or removed
 function SCB.ArtificialEffectUpdate(eventCode, effectId)
     if SCB.SV.HidePlayerBuffs then
         return
@@ -2183,7 +2176,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         end
     end
 
-        -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
+    -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
     if E.FakeStagger[abilityId] then
         -- Bail out if we ignore begin events
         if E.FakeStagger[abilityId].ignoreBegin and (result == ACTION_RESULT_BEGIN) then
@@ -2526,7 +2519,6 @@ function SCB.ReloadEffects(unitTag)
         -- Display Battle Spirit
         SCB.LoadBattleSpiritTarget()
     end
-
 end
 
 -- Called by EVENT_RETICLE_TARGET_CHANGED listener - Displays recall cooldown
@@ -2715,7 +2707,7 @@ function SCB.OnUpdate(currentTime)
 
 end
 
-function SCB.updateBar( currentTime, sortedList, container )
+function SCB.updateBar(currentTime, sortedList, container)
     local iconsNum = #sortedList
     local istart, iend, istep
 
@@ -2749,7 +2741,7 @@ function SCB.updateBar( currentTime, sortedList, container )
     end
 end
 
-function SCB.updateIcons( currentTime, sortedList, container )
+function SCB.updateIcons(currentTime, sortedList, container)
     -- Special workaround for container with player long buffs. We do not need to update it every 100ms, but rather 3 times less often
     if uiTlw[container].skipUpdate then
         uiTlw[container].skipUpdate = uiTlw[container].skipUpdate + 1
