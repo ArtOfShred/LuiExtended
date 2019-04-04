@@ -11,6 +11,15 @@ local strings = {
     SI_LUIE_ERROR_FONT =                                 "LUI Extended: Возникла проблема с выбором шрифта. Возвращение к настройкам по умолчанию.",
     SI_LUIE_ERROR_SOUND =                                "LUI Extended: Возникла проблема с выбором звука. Возвращение к настройкам по умолчанию.",
 
+    -- Shared
+    SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST =                 "Aura Blacklist",
+    SI_LUIE_CUSTOM_LIST_ADDED_ID =                       "<<1>> [<<2>>] <<3>> added to <<4>>.",
+    SI_LUIE_CUSTOM_LIST_ADDED_FAILED =                   "Could not add [<<1>>] to <<2>>. That abiilityId does not exist.",
+    SI_LUIE_CUSTOM_LIST_ADDED_NAME =                     "<<1>> added to <<2>>.",
+    SI_LUIE_CUSTOM_LIST_REMOVED_ID =                     "<<1>> [<<2>>] <<3>> removed from <<4>>.",
+    SI_LUIE_CUSTOM_LIST_REMOVED_FAILED =                 "Could not remove [<<1>>] to <<2>>. That abilityId does not exist.",
+    SI_LUIE_CUSTOM_LIST_REMOVED_NAME =                   "<<1>> removed from <<2>>.",
+
     -- Bindings.xml
     SI_BINDING_NAME_LUIE_COMMAND_BANKER =                "Призвать Банкира",
     SI_BINDING_NAME_LUIE_COMMAND_MERCHANT =              "Призвать Торговца",
