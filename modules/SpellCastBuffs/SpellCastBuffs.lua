@@ -144,6 +144,8 @@ SCB.D = {
     PromBuffTable                    = {},
     PromDebuffTable                  = {},
     BlacklistTable                   = {},
+    TooltipEnable                    = true,
+    TooltipSticky                    = 0,
 }
 SCB.SV = nil
 
@@ -1036,7 +1038,6 @@ function SCB.Buff_OnMouseUp(self, button, upInside)
     end
 end
 
--- TODO - add as option - StickyTooltip removal function
 local function ClearStickyTooltip()
     ClearTooltip(GameTooltip)
     eventManager:UnregisterForUpdate(moduleName .. "StickyTooltip")
@@ -1045,7 +1046,6 @@ end
 -- OnMouseEnter for Buff Tooltips
 function SCB.Buff_OnMouseEnter(control)
 
-    -- TEMP
     eventManager:UnregisterForUpdate(moduleName .. "StickyTooltip")
 
     InitializeTooltip(GameTooltip, control, BOTTOM, 0, -5, TOP)
@@ -1056,8 +1056,15 @@ function SCB.Buff_OnMouseEnter(control)
     if control.isArtificial then
         tooltipText = GetArtificialEffectTooltipText(control.effectId)
         GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
-        GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
+        if SCB.SV.TooltipEnable then
+            GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
+        end
     else
+
+    if not SCB.SV.TooltipEnable then
+        GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
+        return
+    end
 
 
     -- BEGIN TEMPORARY DEBUF FUNCTION HERE
@@ -1219,14 +1226,11 @@ end
 
 -- OnMouseExit for Buff Tooltips
 function SCB.Buff_OnMouseExit(control)
-    local displayName = GetDisplayName()
-    if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
-        -- Temp - Sticky tooltip so I can edit things easier
-        eventManager:RegisterForUpdate(moduleName .. "StickyTooltip", 4000, ClearStickyTooltip )
+    if SCB.SV.TooltipSticky > 0 then
+        eventManager:RegisterForUpdate(moduleName .. "StickyTooltip", SCB.SV.TooltipSticky, ClearStickyTooltip )
     else
         ClearTooltip(GameTooltip)
     end
-    -- TODO: Add Sticky Tooltips
 end
 
 -- Create a Single Buff Icon

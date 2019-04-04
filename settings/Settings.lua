@@ -1952,6 +1952,38 @@ function LUIE.CreateSettings()
         },
     }
 
+    -- Buffs&Debuffs - Tooltip Options Submenu
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_HEADER),
+        controls = {
+            {
+                -- Tooltip Enable
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.TooltipEnable end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.TooltipEnable = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.TooltipEnable,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                -- Sticky Tooltip Slider
+                type = "slider",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_TOOLTIP_STICKY)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_STICKY_TP),
+                min = 0, max = 5000, step = 100,
+                getFunc = function() return LUIE.SpellCastBuffs.SV.TooltipSticky end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.TooltipSticky = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.TooltipSticky,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+
+        },
+    }
+
     -- Buffs&Debuffs - Long Term Effects Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
