@@ -437,15 +437,6 @@ E.DebuffDisplayOverrideName = {
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
--- Hide these effects on a target that is dead - only shows up when the player is able to target dead bodies, which, seems to be really inconsistent outside of being in Werewolf form.
---------------------------------------------------------------------------------------------------------------------------------
-E.EffectHideWhenDead = {
-    [33097] = true, -- Scary Immunities (Various NPC's)
-    [44176] = true, -- Flying Immunities (Various NPC's)
-    [53329] = true, -- Warming Aura (Dragonstar Arena - Stage 2 - The Frozen Ring)
-}
-
---------------------------------------------------------------------------------------------------------------------------------
 -- Adds this aura to a list of fake Ground auras to display when the player casts them
 --------------------------------------------------------------------------------------------------------------------------------
 E.EffectGroundDisplay = {

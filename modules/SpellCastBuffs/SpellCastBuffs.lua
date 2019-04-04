@@ -2416,6 +2416,7 @@ function SCB.OnDeath(eventCode, unitTag, isDead)
     -- Wipe buffs
     if isDead then
         if unitTag == "player" then
+            -- Clear all player/ground/prominent containers
             LUIE.EffectsList.player1 = {}
             LUIE.EffectsList.player2 = {}
             LUIE.EffectsList.ground = {}
@@ -2461,8 +2462,9 @@ function SCB.ReloadEffects(unitTag)
     end
 
     -- Clear Existing
-    LUIE.EffectsList[unitTag .. 1] = {}
-    LUIE.EffectsList[unitTag .. 2] = {}
+    for effectType = 1, 2 do
+        LUIE.EffectsList[ unitTag .. effectType ] = {}
+    end
     if unitTag == "player" then
         LUIE.EffectsList["promb_player"] = {}
         LUIE.EffectsList["promb_ground"] = {}
@@ -2478,19 +2480,21 @@ function SCB.ReloadEffects(unitTag)
         return
     end
 
+    -- Bail out if the target is dead
+    if IsUnitDead(unitTag) then return end
+
+    -- Get unitName to pass to OnEffectChanged
+    local unitName = GetRawUnitName(unitTag)
     -- Fill it again
     for i = 1, GetNumBuffs(unitTag) do
-        local unitName = GetRawUnitName(unitTag)
         local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
         -- Fudge this value to send to SCB.OnEffectChanged if this is a debuff
         if castByPlayer == true then
-        castByPlayer = 1
+            castByPlayer = 1
         else
             castByPlayer = 5
         end
-        if not (IsUnitDead(unitTag) and E.EffectHideWhenDead[abilityId]) then
-            SCB.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
-        end
+        SCB.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
     end
 
     -- Load Cyrodiil Buffs
