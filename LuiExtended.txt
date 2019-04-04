@@ -102,6 +102,7 @@ modules/CombatText/EventViewers/Points.lua
 modules/CombatText/EventViewers/Resources.lua
 
 modules/InfoPanel/InfoPanel.lua
+modules/InfoPanel/Functions.lua
 
 modules/SpellCastBuffs/SpellCastBuffs.lua
 modules/SpellCastBuffs/Collectibles.lua

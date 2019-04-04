@@ -6,13 +6,13 @@
 <GuiXml>
     <Controls>
         <TopLevelControl name="LUIE_InfoPanel" mouseEnabled="true" movable="true" clampedToScreen="true" hidden="false">
-            <Dimensions x="173" y="70" />
+            <Dimensions x="215" y="70" />
             <ClampedToScreenInsets top="20" bottom="-20" left="20" right="-20"/>
-            <Anchor point="CENTER" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-120" />
+            <Anchor point="CENTER" relativeTo="GuiRoot" relativePoint="CENTER" offsetX="0" offsetY="0" />
             <Controls>
 
                 <Texture name="$(parent)Bg" textureFile="EsoUI/Art/Performance/StatusMeterMunge.dds">
-                    <Dimensions x="256" y="256"/>
+                    <Dimensions x="345" y="256"/>
                     <Anchor point="CENTER" relativeTo="$(parent)" relativePoint="CENTER"/>
                 </Texture>
 
