@@ -53,6 +53,7 @@ settings/Settings.lua
 
 frontend/Changelog.xml
 frontend/CombatText.xml
+frontend/InfoPanel.xml
 
 i18n/en.lua
 i18n/$(language).lua
