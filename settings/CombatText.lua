@@ -4,6 +4,7 @@
 --]]
 
 local CT = LUIE.CombatText
+local CTC = LUIE.CombatTextConstants
 
 local strformat = zo_strformat
 
@@ -2095,7 +2096,7 @@ function CT.CreateSettings()
                 type    = "dropdown",
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP),
-                choices = CTConstants.mitigationType,
+                choices = CTC.mitigationType,
                 getFunc = function() return CT.SV.toggles.mitigationType end,
                 setFunc = function(v) CT.SV.toggles.mitigationType = v end,
                 disabled = function() return not CT.SV.toggles.showAlertMitigation end,
@@ -2573,7 +2574,7 @@ function CT.CreateSettings()
                 type    = "dropdown",
                 name    = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE_TP),
-                choices = CTConstants.outlineType,
+                choices = CTC.outlineType,
                 getFunc = function() return CT.SV.fontOutline end,
                 setFunc = function(outline)
                     CT.SV.fontOutline = outline
@@ -2589,7 +2590,7 @@ function CT.CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_FONT_TEST),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_TEST_TP),
                 func = function()
-                    CALLBACK_MANAGER:FireCallbacks(CTConstants.eventType.COMBAT, CTConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    CALLBACK_MANAGER:FireCallbacks(CTC.eventType.COMBAT, CTC.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                 end,
             },
         },
@@ -2605,7 +2606,7 @@ function CT.CreateSettings()
                 type    = "dropdown",
                 name    = GetString(SI_LUIE_LAM_CT_ANIMATION_TYPE),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_TYPE_TP),
-                choices = CTConstants.animationType,
+                choices = CTC.animationType,
                 getFunc = function() return CT.SV.animation.animationType end,
                 setFunc = function(v) CT.SV.animation.animationType = v end,
                 default = CT.D.animation.animationType,
@@ -2615,7 +2616,7 @@ function CT.CreateSettings()
                 type    = "dropdown",
                 name    = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN_TP),
-                choices = CTConstants.directionType,
+                choices = CTC.directionType,
                 getFunc = function() return CT.SV.animation.incoming.directionType end,
                 setFunc = function(v) CT.SV.animation.incoming.directionType = v end,
                 default = CT.D.animation.incoming.directionType,
@@ -2625,7 +2626,7 @@ function CT.CreateSettings()
                 type    = "dropdown",
                 name    = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_IN),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_IN_TP),
-                choices = CTConstants.iconSide,
+                choices = CTC.iconSide,
                 getFunc = function() return CT.SV.animation.incomingIcon end,
                 setFunc = function(v) CT.SV.animation.incomingIcon = v end,
                 default = CT.D.animation.incomingIcon,
@@ -2635,7 +2636,7 @@ function CT.CreateSettings()
                 type    = "dropdown",
                 name    = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT_TP),
-                choices = CTConstants.directionType,
+                choices = CTC.directionType,
                 getFunc = function() return CT.SV.animation.outgoing.directionType end,
                 setFunc = function(v) CT.SV.animation.outgoing.directionType = v end,
                 default = CT.D.animation.outgoing.directionType,
@@ -2645,7 +2646,7 @@ function CT.CreateSettings()
                 type    = "dropdown",
                 name    = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_OUT),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_OUT_TP),
-                choices = CTConstants.iconSide,
+                choices = CTC.iconSide,
                 getFunc = function() return CT.SV.animation.outgoingIcon end,
                 setFunc = function(v) CT.SV.animation.outgoingIcon = v end,
                 default = CT.D.animation.outgoingIcon,
@@ -2656,8 +2657,8 @@ function CT.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST_TP),
                 func = function()
-                    CALLBACK_MANAGER:FireCallbacks(CTConstants.eventType.COMBAT, CTConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
-                    CALLBACK_MANAGER:FireCallbacks(CTConstants.eventType.COMBAT, CTConstants.combatType.OUTGOING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    CALLBACK_MANAGER:FireCallbacks(CTC.eventType.COMBAT, CTC.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    CALLBACK_MANAGER:FireCallbacks(CTC.eventType.COMBAT, CTC.combatType.OUTGOING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                 end,
             },
         },

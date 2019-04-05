@@ -78,8 +78,8 @@ local function OnAddonOnLoaded(eventCode, addonName)
     -- Load saved variables
     LoadSavedVars()
 
-    -- Display changelog screen
-    LUIE.ChangelogScreen()
+    -- Initialize Hooks
+    LUIE.InitializeHooks()
 
     LUIE.PlayerNameRaw = GetRawUnitName("player")
     LUIE.PlayerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
@@ -99,19 +99,19 @@ local function OnAddonOnLoaded(eventCode, addonName)
 
     -- Create settings menus for our addon
     LUIE.CreateSettings()
-    LUIE.InfoPanel.CreateSettings()
-    LUIE.SlashCommands.CreateSettings()
-    LUIE.SpellCastBuffs.CreateSettings()
     LUIE.ChatAnnouncements.CreateSettings()
-    LUIE.UnitFrames.CreateSettings()
-    LUIE.CombatText.CreateSettings()
     LUIE.CombatInfo.CreateSettings()
+    LUIE.CombatText.CreateSettings()
+    LUIE.InfoPanel.CreateSettings()
+    LUIE.UnitFrames.CreateSettings()
+    LUIE.SpellCastBuffs.CreateSettings()
+    LUIE.SlashCommands.CreateSettings()
+
+    -- Display changelog screen
+    LUIE.ChangelogScreen()
 
     -- Register global event listeners
     RegisterEvents()
-
-    -- Hooks
-    LUIE.InitializeHooks()
 end
 
 -- Hook initialization
