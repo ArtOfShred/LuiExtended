@@ -49,8 +49,6 @@ UI.lua
 Changelog.lua
 Bindings.xml
 
-settings/Settings.lua
-
 frontend/Changelog.xml
 frontend/CombatText.xml
 
@@ -116,3 +114,12 @@ modules/SlashCommands/Guild.lua
 modules/SlashCommands/Social.lua
 
 modules/UnitFrames/UnitFrames.lua
+
+settings/Settings.lua
+settings/ChatAnnouncements.lua
+settings/CombatInfo.lua
+settings/CombatText.lua
+settings/InfoPanel.lua
+settings/SlashCommands.lua
+settings/SpellCastBuffs.lua
+settings/UnitFrames.lua
