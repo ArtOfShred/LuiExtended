@@ -12,8 +12,8 @@ function LUIE.CreateSettings()
 
     local optionsData = {}
 
-    profileCharacters = {} -- List of character profiles
-    profileQueuedCopy = nil -- Currently queued character copy name for copy button
+    local profileCharacters = {} -- List of character profiles
+    local profileQueuedCopy = nil -- Currently queued character copy name for copy button
 
     -- Generate list of character profiles for Menu function
     local function GenerateCharacterProfiles()

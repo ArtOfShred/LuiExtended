@@ -23,8 +23,8 @@ for key, _ in pairs(LUIE.StatusbarTextures) do
     table.insert(StatusbarTexturesList, key)
 end
 
-local rotationOptions               = { "Horizontal", "Vertical" }
-local rotationOptionsKeys           = { ["Horizontal"] = 1, ["Vertical"] = 2 }
+local rotationOptions     = { "Horizontal", "Vertical" }
+local rotationOptionsKeys = { ["Horizontal"] = 1, ["Vertical"] = 2 }
 
 -- Variables for custom generated tables
 local PromBuffs, PromBuffsValues = {}

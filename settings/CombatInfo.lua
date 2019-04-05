@@ -27,8 +27,8 @@ for key, _ in pairs(LUIE.StatusbarTextures) do
     table.insert(StatusbarTexturesList, key)
 end
 
-local globalMethodOptions           = { "Ascending", "Descending", "Radial" }
-local globalMethodOptionsKeys       = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
+local globalMethodOptions     = { "Ascending", "Descending", "Radial" }
+local globalMethodOptionsKeys = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
 
 function CI.CreateSettings()
     -- Load LibAddonMenu

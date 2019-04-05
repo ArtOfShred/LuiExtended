@@ -21,15 +21,15 @@ for key, _ in pairs(LUIE.StatusbarTextures) do
     table.insert(StatusbarTexturesList, key)
 end
 
-local nameDisplayOptions            = { "@UserID", "Character Name", "Character Name @UserID" }
-local nameDisplayOptionsKeys        = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
-local raidIconOptions               = { "No Icons", "Class Icons Only", "Role Icons Only", "Class Icon in PVP, Role in PVE", "Class Icon in PVE, Role in PVP" }
-local raidIconOptionsKeys           = { ["No Icons"] = 1 , ["Class Icons Only"] = 2, ["Role Icons Only"] = 3, ["Class Icon in PVP, Role in PVE"] = 4, ["Class Icon in PVE, Role in PVP"] = 5 }
-local playerFrameOptions            = { "Vertical Stacked Frames", "Separated Horizontal Frames", "Pyramid" }
-local playerFrameOptionsKeys        = { ["Vertical Stacked Frames"] = 1, ["Separated Horizontal Frames"] = 2, ["Pyramid"] = 3 }
-local championOptions               = { "Show Above Cap", "Limit to Cap" }
-local resolutionOptions             = { "1080p", "1440p", "4K" }
-local resolutionOptionsKeys         = { ["1080p"] = 1, ["1440p"] = 2, ["4K"] = 3 }
+local nameDisplayOptions     = { "@UserID", "Character Name", "Character Name @UserID" }
+local nameDisplayOptionsKeys = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
+local raidIconOptions        = { "No Icons", "Class Icons Only", "Role Icons Only", "Class Icon in PVP, Role in PVE", "Class Icon in PVE, Role in PVP" }
+local raidIconOptionsKeys    = { ["No Icons"] = 1 , ["Class Icons Only"] = 2, ["Role Icons Only"] = 3, ["Class Icon in PVP, Role in PVE"] = 4, ["Class Icon in PVE, Role in PVP"] = 5 }
+local playerFrameOptions     = { "Vertical Stacked Frames", "Separated Horizontal Frames", "Pyramid" }
+local playerFrameOptionsKeys = { ["Vertical Stacked Frames"] = 1, ["Separated Horizontal Frames"] = 2, ["Pyramid"] = 3 }
+local championOptions        = { "Show Above Cap", "Limit to Cap" }
+local resolutionOptions      = { "1080p", "1440p", "4K" }
+local resolutionOptionsKeys  = { ["1080p"] = 1, ["1440p"] = 2, ["4K"] = 3 }
 
 local formatOptions = {
     "Nothing",

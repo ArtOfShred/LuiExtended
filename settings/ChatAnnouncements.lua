@@ -9,7 +9,6 @@ local strformat = zo_strformat
 
 local optionsDataChatAnnouncements = {}
 
-local nameDisplayOptionsKeys        = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
 local chatNameDisplayOptions        = { "@UserID", "Character Name", "Character Name @UserID" }
 local chatNameDisplayOptionsKeys    = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
 local linkBracketDisplayOptions     = { "No Brackets", "Display Brackets" }
