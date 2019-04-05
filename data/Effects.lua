@@ -244,7 +244,6 @@ E.IsFoodBuff = {
     [92476] = true, -- Crown Vigorous Tincture
 }
 
-
 -- Experience Buffs
 E.IsExperienceBuff = {
     -- Consumable
@@ -272,7 +271,6 @@ E.IsBlock = {
     [29761] = true, -- Brace
     [40165] = true, -- Scene Choreo Brace
 }
-
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Grim Focus Id's - Used by SCB to track the id's for Grim Focus & its morphs - These id's are merged with the Override for stack tracking
@@ -410,7 +408,6 @@ E.DebuffDisplayOverrideId = {
 
     -- Maelstrom Arena
     [72450] = true, -- Interrupted (Troll Breaker)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -778,7 +775,6 @@ E.EffectCreateSkillAura = {
     [50187] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enrage (Mantikora)
     [56689] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enraged (Mantikora)
     [72725] = { alwaysShow = true, removeOnEnd = true, abilityId = 28301 }, -- Fool Me Once (Sentinel) (TG DLC)
-
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1579,9 +1575,6 @@ E.AddNameAura = {
     [U.Boss_Icestalker] = { [1] = { id = 33097 } }, -- Icestalker
 }
 
-
-
-
 --------------------------------------------------------------------------------------------------------------------------------
 -- Synergy Icon Overrides - When a synergy with a matching ability name appears, change the icon or name.
 --------------------------------------------------------------------------------------------------------------------------------
@@ -1635,235 +1628,234 @@ E.IsAbilityActiveHighlight = {
 --------------------------------------------------------------------------------------------------------------------------------
 E.EffectOverrideByName = {
     -- TUTORIAL
-    [1718] =    { -- Attack (CH + Vvardenfell Tutorial)
-                    ['Naryu Virian'] =              { icon = 'LuiExtended/media/icons/abilities/ability_unarmed_attacklight.dds' } -- Attack (Tutorial)
-                },
+    [1718] = { -- Attack (CH + Vvardenfell Tutorial)
+        ['Naryu Virian'] =            { icon = 'LuiExtended/media/icons/abilities/ability_unarmed_attacklight.dds' } -- Attack (Tutorial)
+    },
 
     -- HUMAN NPCS
-    [29521] =   { -- Aura of Protection (Shaman)
-                    ['Aura of Protection'] =        { hide = true } -- Aura of Protection (Aura of Protection) -- Hides this buff only on the Goblin Aura of Protection to prevent duplicate display
-                },
-    [88947] =   { -- Lightning Grasp (Xivilai)
-                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Fulminator (City of Ash II)
-                    [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Boltaic (City of Ash II)
-                },
-    [88949] =   { -- Lightning Grasp (Xivilai)
-                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Fulminator (City of Ash II)
-                    [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Boltaic (City of Ash II)
-                },
-    [37087] =   { -- Lightning Onslaught (Battlemage)
-                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Fulminator (City of Ash II)
-                    [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Boltaic (City of Ash II)
-                },
-    [37156] =   { -- Lightning Onslaught (Battlemage)
-                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Fulminator (City of Ash II)
-                    [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Boltaic (City of Ash II)
-                },
-    [14524] =   { -- Shock (Storm Mage)
-                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_ranged.dds' }, -- Xivilai Fulminator (City of Ash II)
-                },
-    [29471] =   { -- Thunder Thrall (Storm Mage)
-                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Fulminator (City of Ash II)
-                    [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Boltaic (City of Ash II)
-                },
-    [29470] =   { -- Thunder Thrall (Storm Mage)
-                    [U.NPC_Xivilai_Fulminator] =    { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Fulminator (City of Ash II)
-                    [U.NPC_Xivilai_Boltaic] =       { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Boltaic (City of Ash II)
-                },
-    [86704] =   { -- Chop (Peasant)
-                    ['Hleran Noble'] =              { icon = 'LuiExtended/media/icons/abilities/ability_weapon_peasant_dagger_light.dds' }, -- Chop (Hleran Noble)
-                },
-    [86705] =   { -- Lop (Peasant)
-                    ['Hleran Noble'] =              { icon = 'LuiExtended/media/icons/abilities/ability_weapon_peasant_dagger_light.dds' }, -- Lop (Hleran Noble)\
-                },
+    [29521] = { -- Aura of Protection (Shaman)
+        ['Aura of Protection'] =      { hide = true } -- Aura of Protection (Aura of Protection) -- Hides this buff only on the Goblin Aura of Protection to prevent duplicate display
+    },
+    [88947] = { -- Lightning Grasp (Xivilai)
+        [U.NPC_Xivilai_Fulminator] =  { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Fulminator (City of Ash II)
+        [U.NPC_Xivilai_Boltaic] =     { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Boltaic (City of Ash II)
+    },
+    [88949] = { -- Lightning Grasp (Xivilai)
+        [U.NPC_Xivilai_Fulminator] =  { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Fulminator (City of Ash II)
+        [U.NPC_Xivilai_Boltaic] =     { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_bolt.dds' }, -- Xivilai Boltaic (City of Ash II)
+    },
+    [37087] = { -- Lightning Onslaught (Battlemage)
+        [U.NPC_Xivilai_Fulminator] =  { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Fulminator (City of Ash II)
+        [U.NPC_Xivilai_Boltaic] =     { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Boltaic (City of Ash II)
+    },
+    [37156] = { -- Lightning Onslaught (Battlemage)
+        [U.NPC_Xivilai_Fulminator] =  { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Fulminator (City of Ash II)
+        [U.NPC_Xivilai_Boltaic] =     { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Xivilai Boltaic (City of Ash II)
+    },
+    [14524] = { -- Shock (Storm Mage)
+        [U.NPC_Xivilai_Fulminator] =  { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_ranged.dds' }, -- Xivilai Fulminator (City of Ash II)
+    },
+    [29471] = { -- Thunder Thrall (Storm Mage)
+        [U.NPC_Xivilai_Fulminator] =  { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Fulminator (City of Ash II)
+        [U.NPC_Xivilai_Boltaic] =     { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Boltaic (City of Ash II)
+    },
+    [29470] = { -- Thunder Thrall (Storm Mage)
+        [U.NPC_Xivilai_Fulminator] =  { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Fulminator (City of Ash II)
+        [U.NPC_Xivilai_Boltaic] =     { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Xivilai Boltaic (City of Ash II)
+    },
+    [86704] = { -- Chop (Peasant)
+        ['Hleran Noble'] =            { icon = 'LuiExtended/media/icons/abilities/ability_weapon_peasant_dagger_light.dds' }, -- Chop (Hleran Noble)
+    },
+    [86705] = { -- Lop (Peasant)
+        ['Hleran Noble'] =            { icon = 'LuiExtended/media/icons/abilities/ability_weapon_peasant_dagger_light.dds' }, -- Lop (Hleran Noble)
+    },
 
-    [88251] =   {
-                    ['Great Bear'] =                { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_bear.dds' }, -- Call Ally (Pet Ranger)
-                    ['Spider'] =                    { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_spider.dds' }, -- Call Ally (Pet Ranger)
-                    ['Senche-Tiger'] =              { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_tiger.dds' }, -- Call Ally (Pet Ranger)
-                },
+    [88251] = {
+        ['Great Bear'] =              { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_bear.dds' }, -- Call Ally (Pet Ranger)
+        ['Spider'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_spider.dds' }, -- Call Ally (Pet Ranger)
+        ['Senche-Tiger'] =            { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_tiger.dds' }, -- Call Ally (Pet Ranger)
+    },
 
-    [88248] =   {
-                    ['Spider'] =                    { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_spider.dds' }, -- Call Ally (Pet Ranger)
-                    ['Venomspit Spider'] =          { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_spider.dds' }, -- Call Ally (Pet Ranger)
-                    ['Websnare Spider'] =           { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_spider.dds' }, -- Call Ally (Pet Ranger)
-                },
+    [88248] = {
+        ['Spider'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_spider.dds' }, -- Call Ally (Pet Ranger)
+        ['Venomspit Spider'] =        { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_spider.dds' }, -- Call Ally (Pet Ranger)
+        ['Websnare Spider'] =         { icon = 'LuiExtended/media/icons/abilities/ability_warrior_call_ally_spider.dds' }, -- Call Ally (Pet Ranger)
+    },
 
     -- ANIMALS
-    [7170] =    { -- Rend (Lion)
-                    ['Lion'] =                      { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
-                    ['Lioness'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_lioness_rend.dds' }, -- Rend (Lion)
-                    ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_rend.dds' }, -- Rend (Sabre Cat)
-                    ['Senche-Tiger'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['Nindaeril the Monsoon'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['The Tiger'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['Spectral Senche-Tiger'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['Senche-Panther'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-                    ['Silentpaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-                    ['Heartstalker'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-                    ['Nighteyes'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-                    ['Shadowhiskers'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-                    ['Senche Spirit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite_ghost.dds' }, -- Rend (Senche Spirit)
-                },
-    [60630] =   { -- Rend (Lion)
-                    ['Lion'] =                      { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
-                    ['Lioness'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_lioness_rend.dds' }, -- Rend (Lion)
-                    ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_rend.dds' }, -- Rend (Sabre Cat)
-                    ['Senche-Tiger'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['Nindaeril the Monsoon'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['The Tiger'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['Spectral Senche-Tiger'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
-                    ['Senche-Panther'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-                    ['Silentpaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-                    ['Heartstalker'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-                    ['Nighteyes'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-                    ['Shadowhiskers'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
-                    ['Senche Spirit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite_ghost.dds' }, -- Rend (Senche Spirit)
-                },
-    [60641] =   { -- Claw (Lion)
-                    ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_claw.dds' }, -- Claw (Sabre Cat)
-                    ['Senche-Tiger'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
-                    ['Nindaeril the Monsoon'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
-                    ['The Tiger'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
-                    ['Spectral Senche-Tiger'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
-                    ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
-                    ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
-                    ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
-                },
-    [7158] =    { -- Bite (Lion)
-                    ['Lion'] =                      { icon = 'LuiExtended/media/icons/abilities/ability_lion_bite.dds' }, -- Bite (Lion)
-                    ['Lioness'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_lioness_bite.dds' }, -- Bite (Lion)
-                    ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_bite.dds' }, -- Bite (Sabre Cat)
-                    ['Senche-Tiger'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
-                    ['Nindaeril the Monsoon'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
-                    ['The Tiger'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
-                    ['Spectral Senche-Tiger'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
-                    ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
-                    ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
-                    ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
-                    ['Senche-Panther'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
-                    ['Silentpaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
-                    ['Heartstalker'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
-                    ['Nighteyes'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
-                    ['Shadowhiskers'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
-                    ['Senche Spirit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite_ghost.dds' }, -- Bite (Senche Spirit)
-                },
-    [7161] =    { -- Double Strike (Lion)
-                    ['Sabre Cat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_double_strike.dds' }, -- Double Strike (Sabre Cat)
-                    ['Senche-Tiger'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
-                    ['Nindaeril the Monsoon'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
-                    ['The Tiger'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
-                    ['Spectral Senche-Tiger'] =     { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
-                    ['Esh\'tabe'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
-                    ['Raakhet'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
-                    ['Razorclaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
-                    ['Senche-Panther'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
-                    ['Silentpaw'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
-                    ['Heartstalker'] =              { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
-                    ['Nighteyes'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
-                    ['Shadowhiskers'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
-                    ['Senche Spirit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike_ghost.dds' }, -- Double Strike (Senche Spirit)
-                },
-    [5362] =    { -- Slam (Skeever / Kagouti)
-                    ['Kagouti'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_slam.dds' }, -- Slam (Kagouti)
-                    ['Bull Kagouti'] =              { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_slam.dds' }, -- Slam (Kagouti)
-
-                    ['Daedrat'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_daedrat_slam.dds' }, -- Slam (Daedrat)
-                },
-    [21904] =   { -- Rend (Skeever)
-                    ['Daedrat'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_daedrat_rend.dds' }, -- Rend (Daedrat)
-                },
-    [4022] =    { -- Bite (Wolf)
-                    ['Jackal'] =                    { icon = 'LuiExtended/media/icons/abilities/ability_jackal_bite.dds' }, -- Bite (Jackal)
-                },
-    [42844] =   { -- Rotbone (Wolf)
-                    ['Jackal'] =                    { icon = 'LuiExtended/media/icons/abilities/ability_jackal_rotbone.dds' }, -- Rotbone (Wolf)
-                },
-    [14523] =   { -- Helljoint (Wolf)
-                    ['Jackal'] =                    { icon = 'LuiExtended/media/icons/abilities/ability_jackal_helljoint.dds' }, -- Helljoint (Wolf)
-                },
-    [75818] =   { -- Helljoint (Wolf)
-                    ['Jackal'] =                    { icon = 'LuiExtended/media/icons/abilities/ability_jackal_helljoint.dds' }, -- Helljoint (Wolf)
-                },
-    [8569] =    { -- Devastating Leap (Bloodfiend)
-                    ['Skaafin Miscreal'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_devastating_leap.dds' }, -- Devastating Leap (Skaafin Miscreal)
-                    ['Skeleton'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_devastating_leap.dds' }, -- Devastating Leap (Skeleton)
-                    [U.NPC_Graveoath_Ravener] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_devastating_leap.dds' }, -- Devastating Leap (Graveoath Ravener)
-                },
-    [8550] =    { -- Slash (Bloodfiend)
-                    [U.NPC_Venomous_Skeleton] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Venomous Skeleton) -- City of Ash II
-                    ['Skeleton'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Skeleton)
-                    ['Bone Flayer'] =               { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Bone Flayer)
-                    ['Risen Dead'] =                { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Risen Dead)
-                    [U.NPC_Graveoath_Ravener] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Graveoath Ravener)
-                    ['Skaafin Wretch'] =            { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_slash.dds' }, -- Slash (Skaafin Wretch)
-                    ['Skaafin Miscreal'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_slash.dds' }, -- Slash (Skaafin Miscreal)
-                },
-    [8551] =    { -- Slash (Bloodfiend)
-                    [U.NPC_Venomous_Skeleton] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Venomous Skeleton) -- City of Ash II
-                    ['Skeleton'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Skeleton)
-                    ['Bone Flayer'] =               { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Bone Flayer)
-                    ['Risen Dead'] =                { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Risen Dead)
-                    [U.NPC_Graveoath_Ravener] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Graveoath Ravener)
-                    ['Skaafin Wretch'] =            { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_slash.dds' }, -- Slash (Skaafin Wretch)
-                    ['Skaafin Miscreal'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_slash.dds' }, -- Slash (Skaafin Miscreal)
-                },
-    [8564] =    { -- Rending Slash (Bloodfiend)
-                    ['Skeleton'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_rending_slash.dds' }, -- Rending Slash (Skeleton)
-                    ['Bone Flayer'] =               { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_rending_slash.dds' }, -- Rending Slash (Bone Flayer)
-                    [U.NPC_Graveoath_Ravener] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_rending_slash.dds' }, -- Rending Slash (Graveoath Ravener)
-                    ['Skaafin Wretch'] =            { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_rending_slash.dds' }, -- Rending Slash (Skaafin Wretch)
-                    ['Skaafin Miscreal'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_rending_slash.dds' }, -- Rending Slash (Skaafin Miscreal)
-                },
-    [9194] =    { -- Flurry (Bloodfiend)
-                    ['Skeleton'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Skeleton)
-                    ['Bone Flayer'] =               { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Bone Flayer)
-                    [U.NPC_Graveoath_Ravener] =     { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Graveoath Ravener)
-                    ['Skaafin Wretch'] =            { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_flurry.dds' }, -- Flurry (Skaafin Wretch)
-                    ['Skaafin Miscreal'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_flurry.dds' }, -- Flurry (Skaafin Miscreal)
-                },
+    [7170] = { -- Rend (Lion)
+        ['Lion'] =                    { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
+        ['Lioness'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_lioness_rend.dds' }, -- Rend (Lion)
+        ['Sabre Cat'] =               { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_rend.dds' }, -- Rend (Sabre Cat)
+        ['Senche-Tiger'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['Nindaeril the Monsoon'] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['The Tiger'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['Spectral Senche-Tiger'] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['Esh\'tabe'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['Raakhet'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['Razorclaw'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['Senche-Panther'] =          { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+        ['Silentpaw'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+        ['Heartstalker'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+        ['Nighteyes'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+        ['Shadowhiskers'] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+        ['Senche Spirit'] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite_ghost.dds' }, -- Rend (Senche Spirit)
+    },
+    [60630] = { -- Rend (Lion)
+        ['Lion'] =                    { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
+        ['Lioness'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_lioness_rend.dds' }, -- Rend (Lion)
+        ['Sabre Cat'] =               { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_rend.dds' }, -- Rend (Sabre Cat)
+        ['Senche-Tiger'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['Nindaeril the Monsoon'] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['The Tiger'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['Spectral Senche-Tiger'] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['Esh\'tabe'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['Raakhet'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['Razorclaw'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
+        ['Senche-Panther'] =          { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+        ['Silentpaw'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+        ['Heartstalker'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+        ['Nighteyes'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+        ['Shadowhiskers'] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_rend.dds' }, -- Rend (Senche-Panther)
+        ['Senche Spirit'] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite_ghost.dds' }, -- Rend (Senche Spirit)
+    },
+    [60641] = { -- Claw (Lion)
+        ['Sabre Cat'] =               { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_claw.dds' }, -- Claw (Sabre Cat)
+        ['Senche-Tiger'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
+        ['Nindaeril the Monsoon'] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
+        ['The Tiger'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
+        ['Spectral Senche-Tiger'] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
+        ['Esh\'tabe'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
+        ['Raakhet'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
+        ['Razorclaw'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
+    },
+    [7158] = { -- Bite (Lion)
+        ['Lion'] =                    { icon = 'LuiExtended/media/icons/abilities/ability_lion_bite.dds' }, -- Bite (Lion)
+        ['Lioness'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_lioness_bite.dds' }, -- Bite (Lion)
+        ['Sabre Cat'] =               { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_bite.dds' }, -- Bite (Sabre Cat)
+        ['Senche-Tiger'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
+        ['Nindaeril the Monsoon'] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
+        ['The Tiger'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
+        ['Spectral Senche-Tiger'] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
+        ['Esh\'tabe'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
+        ['Raakhet'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
+        ['Razorclaw'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
+        ['Senche-Panther'] =          { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
+        ['Silentpaw'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
+        ['Heartstalker'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
+        ['Nighteyes'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
+        ['Shadowhiskers'] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite.dds' }, -- Bite (Senche-Panther)
+        ['Senche Spirit'] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_bite_ghost.dds' }, -- Bite (Senche Spirit)
+    },
+    [7161] = { -- Double Strike (Lion)
+        ['Sabre Cat'] =               { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_double_strike.dds' }, -- Double Strike (Sabre Cat)
+        ['Senche-Tiger'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
+        ['Nindaeril the Monsoon'] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
+        ['The Tiger'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
+        ['Spectral Senche-Tiger'] =   { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
+        ['Esh\'tabe'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
+        ['Raakhet'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
+        ['Razorclaw'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
+        ['Senche-Panther'] =          { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
+        ['Silentpaw'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
+        ['Heartstalker'] =            { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
+        ['Nighteyes'] =               { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
+        ['Shadowhiskers'] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike.dds' }, -- Double Strike (Senche-Panther)
+        ['Senche Spirit'] =           { icon = 'LuiExtended/media/icons/abilities/ability_senchepanther_double_strike_ghost.dds' }, -- Double Strike (Senche Spirit)
+    },
+    [5362] = { -- Slam (Skeever / Kagouti)
+        ['Kagouti'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_slam.dds' }, -- Slam (Kagouti)
+        ['Bull Kagouti'] =            { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_slam.dds' }, -- Slam (Kagouti)
+        ['Daedrat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_daedrat_slam.dds' }, -- Slam (Daedrat)
+    },
+    [21904] = { -- Rend (Skeever)
+        ['Daedrat'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_daedrat_rend.dds' }, -- Rend (Daedrat)
+    },
+    [4022] = { -- Bite (Wolf)
+        ['Jackal'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_jackal_bite.dds' }, -- Bite (Jackal)
+    },
+    [42844] = { -- Rotbone (Wolf)
+        ['Jackal'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_jackal_rotbone.dds' }, -- Rotbone (Wolf)
+    },
+    [14523] = { -- Helljoint (Wolf)
+        ['Jackal'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_jackal_helljoint.dds' }, -- Helljoint (Wolf)
+    },
+    [75818] = { -- Helljoint (Wolf)
+        ['Jackal'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_jackal_helljoint.dds' }, -- Helljoint (Wolf)
+    },
+    [8569] = { -- Devastating Leap (Bloodfiend)
+        ['Skaafin Miscreal'] =        { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_devastating_leap.dds' }, -- Devastating Leap (Skaafin Miscreal)
+        ['Skeleton'] =                { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_devastating_leap.dds' }, -- Devastating Leap (Skeleton)
+        [U.NPC_Graveoath_Ravener] =   { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_devastating_leap.dds' }, -- Devastating Leap (Graveoath Ravener)
+    },
+    [8550] = { -- Slash (Bloodfiend)
+        [U.NPC_Venomous_Skeleton] =   { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Venomous Skeleton) -- City of Ash II
+        ['Skeleton'] =                { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Skeleton)
+        ['Bone Flayer'] =             { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Bone Flayer)
+        ['Risen Dead'] =              { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Risen Dead)
+        [U.NPC_Graveoath_Ravener] =   { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Graveoath Ravener)
+        ['Skaafin Wretch'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_slash.dds' }, -- Slash (Skaafin Wretch)
+        ['Skaafin Miscreal'] =        { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_slash.dds' }, -- Slash (Skaafin Miscreal)
+    },
+    [8551] = { -- Slash (Bloodfiend)
+        [U.NPC_Venomous_Skeleton] =   { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Venomous Skeleton) -- City of Ash II
+        ['Skeleton'] =                { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Skeleton)
+        ['Bone Flayer'] =             { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Bone Flayer)
+        ['Risen Dead'] =              { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Risen Dead)
+        [U.NPC_Graveoath_Ravener] =   { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds' }, -- Slash (Graveoath Ravener)
+        ['Skaafin Wretch'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_slash.dds' }, -- Slash (Skaafin Wretch)
+        ['Skaafin Miscreal'] =        { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_slash.dds' }, -- Slash (Skaafin Miscreal)
+    },
+    [8564] = { -- Rending Slash (Bloodfiend)
+        ['Skeleton'] =                { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_rending_slash.dds' }, -- Rending Slash (Skeleton)
+        ['Bone Flayer'] =             { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_rending_slash.dds' }, -- Rending Slash (Bone Flayer)
+        [U.NPC_Graveoath_Ravener] =   { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_rending_slash.dds' }, -- Rending Slash (Graveoath Ravener)
+        ['Skaafin Wretch'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_rending_slash.dds' }, -- Rending Slash (Skaafin Wretch)
+        ['Skaafin Miscreal'] =        { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_rending_slash.dds' }, -- Rending Slash (Skaafin Miscreal)
+    },
+    [9194] = { -- Flurry (Bloodfiend)
+        ['Skeleton'] =                { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Skeleton)
+        ['Bone Flayer'] =             { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Bone Flayer)
+        [U.NPC_Graveoath_Ravener] =   { icon = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds' }, -- Flurry (Graveoath Ravener)
+        ['Skaafin Wretch'] =          { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_flurry.dds' }, -- Flurry (Skaafin Wretch)
+        ['Skaafin Miscreal'] =        { icon = 'LuiExtended/media/icons/abilities/ability_skaafin_flurry.dds' }, -- Flurry (Skaafin Miscreal)
+    },
 
     -- MONSTERS
-    [9670] =    {
-                    ['Spectral Lamia'] =            { icon = 'LuiExtended/media/icons/abilities/ability_lamia_strike_spectral.dds' }, -- Strike (Lamia)
-                },
+    [9670] = {
+        ['Spectral Lamia'] =          { icon = 'LuiExtended/media/icons/abilities/ability_lamia_strike_spectral.dds' }, -- Strike (Lamia)
+    },
 
-    [89119] =   {
-                    ['Dire Wolf'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_wolf.dds' }, -- Summon Beast (Spriggan)
-                    ['Websnare Spider'] =           { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
-                    ['Spider'] =                    { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
-                    ['Venomspit Spider'] =          { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
-                },
-    [89102] =   {
-                    ['Thunderbug'] =                { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_thunderbug.dds' }, -- Summon Beast (Spriggan)
-                    ['Thunderbug Lord'] =           { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_thunderbug.dds' }, -- Summon Beast (Spriggan)
-                    ['Hoarvor'] =                   { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_hoarvor.dds' }, -- Summon Beast (Spriggan)
-                },
+    [89119] = {
+        ['Dire Wolf'] =               { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_wolf.dds' }, -- Summon Beast (Spriggan)
+        ['Websnare Spider'] =         { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
+        ['Spider'] =                  { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
+        ['Venomspit Spider'] =        { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
+    },
+    [89102] = {
+        ['Thunderbug'] =              { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_thunderbug.dds' }, -- Summon Beast (Spriggan)
+        ['Thunderbug Lord'] =         { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_thunderbug.dds' }, -- Summon Beast (Spriggan)
+        ['Hoarvor'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_hoarvor.dds' }, -- Summon Beast (Spriggan)
+    },
 
     -- QUESTS
-    [37028] =   {
-                    ['Auroran Battlemage'] =        { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
-                },
-    [37029] =   {
-                    ['Auroran Battlemage'] =        { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
-                },
-    [37030] =   {
-                    ['Auroran Battlemage'] =        { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
-                },
+    [37028] = {
+        ['Auroran Battlemage'] =      { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
+    },
+    [37029] = {
+        ['Auroran Battlemage'] =      { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
+    },
+    [37030] = {
+        ['Auroran Battlemage'] =      { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = A.Skill_Quick_Strike }, -- Quick Strike (Auroran Battlemage)
+    },
 
     -- GENERIC
-    [44176] =   { -- Flying Immunities
-                   [U.Boss_Cell_Haunter] = { hide = true }, -- Cell Haunter
-                   [U.NPC_The_Feast] = { hide = true }, -- The Feast
-                   [U.Boss_Azara_the_Frightener] = { hide = true }, -- Azara the Frightener
-                   [U.Boss_Dark_Ember] = { hide = true }, -- Azara the Frightener
-                },
+    [44176] = { -- Flying Immunities
+       [U.Boss_Cell_Haunter] = { hide = true }, -- Cell Haunter
+       [U.NPC_The_Feast] = { hide = true }, -- The Feast
+       [U.Boss_Azara_the_Frightener] = { hide = true }, -- Azara the Frightener
+       [U.Boss_Dark_Ember] = { hide = true }, -- Azara the Frightener
+    },
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -2933,7 +2925,6 @@ E.EffectOverride = {
     [110482] = { icon = 'LuiExtended/media/icons/mementos/memento_rind_renewing_pumpkin.dds', unbreakable = 1 }, -- Rind-Renewing Pumpkin (Rind-Renewing Pumpkin)
     [110481] = { icon = 'LuiExtended/media/icons/mementos/memento_gourd_gallows_stump.dds', unbreakable = 1 }, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [110483] = { icon = 'LuiExtended/media/icons/mementos/memento_ghost_lantern.dds', name = A.Memento_Ghost_Lantern, unbreakable = 1, tooltip = T.Memento_Ghost_Lantern }, -- Ghost Lantern (Ghost Lantern)
-
     [113288] = { icon = 'LuiExtended/media/icons/mementos/memento_mire_drum.dds', name = A.Memento_Mire_Drum, unbreakable = 1 }, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = { icon = 'LuiExtended/media/icons/mementos/memento_vossa_satl.dds', name = A.Memento_Vossa_Satl, unbreakable = 1 }, -- U20 Crown Memento 2 (Vossa-satl)
 
@@ -5856,7 +5847,6 @@ E.EffectOverride = {
     [40226] = { tooltip = T.Skill_Propelling_Shield_Ground }, -- Propelling Shield (Siege Weapon Shield)
     [40227] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = T.Skill_Propelling_Shield }, -- Propelling Shield (Siege Weapon Shield)
 
-
     -- Purge / Efficient Purge / Cleanse
     [38571] = { tooltip = T.Skill_Purge }, -- Purge (Purge)
     [40232] = { tooltip = T.Skill_Purge }, -- Purge (Efficient Purge)
@@ -6353,7 +6343,6 @@ E.EffectOverride = {
     [14550] = { icon = 'esoui/art/icons/ability_mage_037.dds', tooltip = T.Generic_Immobilize }, -- Winter's Reach (Frost Mage)
     [14194] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_barrier.dds', tooltip = T.Skill_Ice_Barrier }, -- Ice Barrier (Frost Mage)
     [7145] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_ice_barrier.dds', name = A.Proc_Chill, stack = 0, tooltip = T.Generic_Snare, tooltipValue2 = 20 }, -- Ice Barrier (Frost Mage)
-
     [35151] = { icon = 'esoui/art/icons/ability_mage_064.dds', tooltip = T.Skill_Spell_Absorption }, -- Spell Absorption (Spirit Mage)
     [14472] = { icon = 'esoui/art/icons/ability_mage_004.dds', tooltip = T.Skill_Burdening_Eye }, -- Burdening Eye (Spirit Mage)
     [37200] = { icon = 'esoui/art/icons/ability_mage_004.dds' }, -- Burden (Spirit Mage)
@@ -7819,7 +7808,6 @@ E.EffectOverride = {
     [88123] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_2.dds', name = A.Event_Burst_Dazzler }, -- Illusion Dazzler - Royal Revelry
     [88124] = { icon = 'LuiExtended/media/icons/abilities/ability_event_dazzler_1.dds', name = A.Event_Flash_Dazzler }, -- Illusion Dazzler - Royal Revelry
 
-
     -- New Life Festival
     [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_event_celebratory_belch.dds', name = A.Skill_Celebratory_Belch, unbreakable = 1 }, -- Celebratory Belch (Stonetooth Bash)
     [83523] = { icon = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Event_Freezing }, -- Freezing (Snow Bear Plunge)
@@ -8260,7 +8248,6 @@ E.EffectOverride = {
 
     -- The Weight of Three Crowns
     [47186] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_close_unstable_rift.dds', name = A.Skill_Close_Unstable_Rift }, -- CHT Portal Killer
-
 
     ----------------------------------------------------------------
     -- QUESTS - FIGHTERS GUILD -------------------------------------
@@ -9039,7 +9026,6 @@ E.EffectOverride = {
     [105889] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_gtaoe.dds' }, -- Pustulant Eruption (Yaghra Nightmare)
     [105912] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_slime_alt.dds', duration = 0, groundLabel = true, tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Pustulant Eruption (Yaghra Nightmare)
     [105893] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_gtaoe.dds', name = A.Skill_Pustulant_Eruption }, -- Pustulant Film (Yaghra Nightmare)
-
 
     ----------------------------------------------------------------
     -- ARENA    ----------------------------------------------------
@@ -10619,7 +10605,6 @@ E.FakeExternalBuffs = {
  -- Fake Debuffs applied onto the player by NPCs or Events (Hostile)
 --------------------------------------------------------------------------------------------------------------------------------
 E.FakeExternalDebuffs = {
-
     -- Templar
     [24307] = { duration = 0 }, -- Solar Disturbance Snare (Solar Disturbance)
 
@@ -11396,46 +11381,45 @@ E.AddGroundDamageAura = {
 -- When GetCurrentMapZoneIndex() matches this filter, customize the ability based off this criteria.
 --------------------------------------------------------------------------------------------------------------------------------
 E.MapDataOverride = {
-    [11338] =   { -- In Lava
-                    [608] = { name = A.Skill_Fire, icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds' }, -- Vvardenfell Tutorial Area
-                },
+    [11338] = { -- In Lava
+        [608] = { name = A.Skill_Fire, icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds' }, -- Vvardenfell Tutorial Area
+    },
 
-    [9039] =    {  -- Snare (Selene's Rose)
-                    [7] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = A.Skill_Lash }, -- Selene's Web
-                },
-    [33097] =   { -- Scary Immunities (Flesh Atronach)
-                    [576] = { hide = true }, -- Spindleclutch II
-                },
-    [27826] =   { -- Crushing Blow (Yalorasse the Speaker)
-                    [11] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut }, -- Tempest Island
-                },
-    [27827] =   { -- Crushing Blow (Yalorasse the Speaker)
-                    [11] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut  }, -- Tempest Island
-                },
-    [27828] =   { -- Crushing Blow  (Yalorasse the Speaker)
-                    [11] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut }, -- Tempest Island
-                },
+    [9039] = {  -- Snare (Selene's Rose)
+        [7] = {     icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = A.Skill_Lash }, -- Selene's Web
+    },
+    [33097] = { -- Scary Immunities (Flesh Atronach)
+        [576] = {   hide = true }, -- Spindleclutch II
+    },
+    [27826] = { -- Crushing Blow (Yalorasse the Speaker)
+        [11] = {    icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut }, -- Tempest Island
+    },
+    [27827] = { -- Crushing Blow (Yalorasse the Speaker)
+        [11] = {    icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut  }, -- Tempest Island
+    },
+    [27828] = { -- Crushing Blow  (Yalorasse the Speaker)
+        [11] = {    icon = 'LuiExtended/media/icons/abilities/ability_weapon_measured_uppercut.dds', name = A.Skill_Measured_Uppercut }, -- Tempest Island
+    },
 
-    [35151] =   { -- Spell Absorption (Spirit Mage)
-                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_spell_absorption.dds' }, -- Dragonstar Arena
-                },
-    [14472] =   { -- Burdening Eye (Spirit Mage)
-                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_burdening_eye.dds' }, -- Dragonstar Arena
-                },
-    [37200] =   { -- Burden (Spirit Mage)
-                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_burdening_eye.dds' }, -- Dragonstar Arena
-                },
-    [35142] =   { -- Burden (Spirit Mage)
-                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_burdening_eye.dds' }, -- Dragonstar Arena
-                },
-    [14524] =   { -- Shock (Storm Mage)
-                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_ranged.dds' }, -- Dragonstar Arena
-                },
-    [29471] =   { -- Thunder Thrall (Storm Mage)
-                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Dragonstar Arena
-                },
-    [29470] =   { -- Thunder Thrall (Storm Mage)
-                    [363] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Dragonstar Arena
-                },
-
+    [35151] = { -- Spell Absorption (Spirit Mage)
+        [363] = {   icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_spell_absorption.dds' }, -- Dragonstar Arena
+    },
+    [14472] = { -- Burdening Eye (Spirit Mage)
+        [363] = {   icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_burdening_eye.dds' }, -- Dragonstar Arena
+    },
+    [37200] = { -- Burden (Spirit Mage)
+        [363] = {   icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_burdening_eye.dds' }, -- Dragonstar Arena
+    },
+    [35142] = { -- Burden (Spirit Mage)
+        [363] = {   icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_burdening_eye.dds' }, -- Dragonstar Arena
+    },
+    [14524] = { -- Shock (Storm Mage)
+        [363] = {   icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_ranged.dds' }, -- Dragonstar Arena
+    },
+    [29471] = { -- Thunder Thrall (Storm Mage)
+        [363] = {   icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Dragonstar Arena
+    },
+    [29470] = { -- Thunder Thrall (Storm Mage)
+        [363] = {   icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds' }, -- Dragonstar Arena
+    },
 }
