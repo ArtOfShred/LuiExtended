@@ -50,6 +50,13 @@ Changelog.lua
 Bindings.xml
 
 settings/Settings.lua
+settings/ChatAnnouncements.lua
+settings/CombatInfo.lua
+settings/CombatText.lua
+settings/InfoPanel.lua
+settings/SlashCommands.lua
+settings/SpellCastBuffs.lua
+setttings/UnitFrames.lua
 
 frontend/Changelog.xml
 frontend/CombatText.xml

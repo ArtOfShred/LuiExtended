@@ -97,8 +97,15 @@ local function OnAddonOnLoaded(eventCode, addonName)
     -- Load Timetamp Color
     LUIE.UpdateTimeStampColor()
 
-    -- Create settings menu for our addon
+    -- Create settings menus for our addon
     LUIE.CreateSettings()
+    LUIE.InfoPanel.CreateSettings()
+    LUIE.SlashCommands.CreateSettings()
+    LUIE.SpellCastBuffs.CreateSettings()
+    LUIE.ChatAnnouncements.CreateSettings()
+    LUIE.UnitFrames.CreateSettings()
+    LUIE.CombatText.CreateSettings()
+    LUIE.CombatInfo.CreateSettings()
 
     -- Register global event listeners
     RegisterEvents()
