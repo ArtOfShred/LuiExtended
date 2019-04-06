@@ -9,8 +9,8 @@ local strformat = zo_strformat
 
 function PNL.GetFramesPerSecond()
     local framerate = GetFramerate()
-    local lowFPS = 30
-    local medFPS = 60
+    local lowFPS = 20
+    local medFPS = 45
 
     if framerate > lowFPS and framerate <= medFPS then
         -- bad fps (orange)
@@ -87,9 +87,6 @@ function PNL.GetSoulgemsAmount()
     -- "/esoui/art/icons/soulgem_006_empty.dds"
     -- "/esoui/art/icons/soulgem_006_filled.dds"
 
-    local name = ""
-    local emptySoulgems = 0
-    local fullSoulgems = 0
     local playerLvl = GetUnitEffectiveLevel("player")
     local emptyName, iconEmpty, emptySoulgems = GetSoulGemInfo(SOUL_GEM_TYPE_EMPTY, playerLvl)
     local fullName, iconFull, fullSoulgems = GetSoulGemInfo(SOUL_GEM_TYPE_FILLED, playerLvl)
@@ -135,6 +132,7 @@ function PNL.GetBankSpace()
 end
 
 function PNL.GetPlayerXP()
+    --"/esoui/art/icons/icon_experience.dds"
     if IsUnitChampion("player") then
         local playerRank = GetPlayerChampionPointsEarned()
         local playerXP = GetPlayerChampionXP()
@@ -224,4 +222,19 @@ CRAFTING_TYPE_JEWELRYCRAFTING = "/esoui/art/icons/icon_jewelrycrafting_symbol.dd
 ]]--
 function PNL.GetResearchStatus(craftingType)
     local numMaxSlots = GetMaxSimultaneousSmithingResearch(craftingType)
+end
+
+function PNL.GetWeaponCharge()
+    local equipSlot = {
+        EQUIP_SLOT_MAIN_HAND,
+        EQUIP_SLOT_OFF_HAND,
+        EQUIP_SLOT_BACKUP_MAIN,
+        EQUIP_SLOT_BACKUP_OFF
+    }
+    for i, slot in pairs(equipSlot) do
+        if IsItemChargeable(BAG_WORN, slot) then
+            local charges, maxCharges = GetChargeInfoForItem(BAG_WORN, slot)
+            d(slot .. "  " .. charges .. "/" .. maxCharges)
+        end
+    end
 end
