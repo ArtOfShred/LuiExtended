@@ -291,6 +291,8 @@ function CI.Initialize( enabled )
     CI.CreateCastBar()
     CI.UpdateCastBar()
     CI.SetCastBarPosition()
+
+    CI.CreateAlertFrame()
 end
 
 -- Helper function to get override ability duration.

@@ -193,12 +193,13 @@ function LUIE.UI.StatusBar( parent, anchors, dims, color, hidden )
 end
 
 -- Creates CT_STATUSBAR UI control element
-function LUIE.UI.Label( parent, anchors, dims, align, font, text, hidden )
+function LUIE.UI.Label( parent, anchors, dims, align, font, text, hidden, name )
     if not parent then return end
 
     local align = ( align ~= nil and #align == 2 ) and align or { TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER }
 
-    local label = windowManager:CreateControl(nil, parent, CT_LABEL)
+    local name = name or nil
+    local label = windowManager:CreateControl(name, parent, CT_LABEL)
 
     label:SetFont( font or 'ZoFontGame' )
     label:SetHorizontalAlignment( align[1] )

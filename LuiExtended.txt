@@ -71,8 +71,6 @@ data/Quests.lua
 
 modules/ChatAnnouncements/ChatAnnouncements.lua
 
-modules/CombatInfo/CombatInfo.lua
-
 modules/CombatText/CombatText.lua
 modules/CombatText/Animation.lua
 modules/CombatText/Pool.lua
@@ -97,6 +95,9 @@ modules/CombatText/EventViewers/CrowdControl.lua
 modules/CombatText/EventViewers/Death.lua
 modules/CombatText/EventViewers/Points.lua
 modules/CombatText/EventViewers/Resources.lua
+
+modules/CombatInfo/CombatInfo.lua
+modules/CombatInfo/AbilityAlerts.lua
 
 modules/InfoPanel/InfoPanel.lua
 
