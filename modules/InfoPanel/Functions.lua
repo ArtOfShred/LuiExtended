@@ -58,9 +58,9 @@ function PNL.GetPlayerClass()
 end
 
 function PNL.GetCurrentZone()
-    local zone = GetPlayerLocationName()
+    local zoneName = GetPlayerLocationName()
 
-    return strformat("Zone: <<1>>", zone)
+    return strformat("Zone: <<1>>", zoneName)
 end
 
 function PNL.GetPlayerLevel()
@@ -75,12 +75,12 @@ end
 
 function PNL.GetMountTraining()
     local timeUntilMountFeed, totalTime = GetTimeUntilCanBeTrained()
+    --local speedBonus, _, staminaBonus, _, inventoryBonus = STABLE_MANAGER:GetStats()
+    --local ridingSkillMaxedOut = STABLE_MANAGER:IsRidingSkillMaxedOut()
 
-    if timeUntilMountFeed == nil or totalTime == nil then
-        -- none to train
-    else
-        return strformat("Mount: <<1>> <<2>>", timeUntilMountFeed, totalTime)
-    end
+    local carry, carryMax, stamina, staminaMax, speed, speedMax = GetRidingStats()
+
+    return strformat("Mount: <<1>> <<2>>", timeUntilMountFeed, totalTime)
 end
 
 function PNL.GetSoulgemsAmount()
@@ -95,6 +95,10 @@ function PNL.GetSoulgemsAmount()
 end
 
 function PNL.GetCurrentTime()
+    -- https://wiki.esoui.com/FormatTimeMilliseconds
+    --ZO_FormatTime
+    --TIME_FORMAT_PRECISION_TWELVE_HOUR,
+    --TIME_FORMAT_PRECISION_TWENTY_FOUR_HOUR
     local time = GetTimeString()
 
     return strformat("Time: <<1>>", time)
@@ -107,9 +111,10 @@ function PNL.GetBagSpace()
     local bagFree = tonumber(GetNumBagFreeSlots(bagId))
     local bagUsed = tonumber(GetNumBagUsedSlots(bagId))
 
-    local bagPercentage = ( bagUsed / bagSize ) * 100
+    local bagPercentageUsed = math.floor((bagUsed / bagSize) * 100)
+    local bagPercentageFree = math.floor(((bagSize - bagUsed) / bagSize) * 100)
 
-    return strformat("Bag Space: <<1>>/<<2>> <<3>>% Full", bagUsed, bagSize, bagPercentage)
+    return strformat("Bag Space: <<1>>/<<2>>", bagUsed, bagSize)
 end
 
 function PNL.GetBankSpace()
@@ -126,9 +131,10 @@ function PNL.GetBankSpace()
         bankUsed = tonumber(bankUsed + GetNumBagUsedSlots(bankSubId))
     end
 
-    local bankPercentage = ( bankUsed / bankSize ) * 100
+    local bankPercentageUsed = math.floor((bankUsed / bankSize ) * 100)
+    local bankPercentageFree = math.floor(((bankSize - bankUsed) / bankSize) * 100)
 
-    return strformat("Bank Space: <<1>>/<<2>> <<3>>% Full", bankUsed, bankSize, bankPercentage)
+    return strformat("Bank Space: <<1>>/<<2>>", bankUsed, bankSize)
 end
 
 function PNL.GetPlayerXP()
@@ -237,4 +243,21 @@ function PNL.GetWeaponCharge()
             d(slot .. "  " .. charges .. "/" .. maxCharges)
         end
     end
+end
+
+function PNL.GetSkyshardInfo()
+    local unspentSkillpoints = GetAvailableSkillPoints()
+    local skyshards = GetNumSkyShards()
+
+    return strformat("Unspent Skillpoints: <<1>> Skyshards: <<2>>/3", unspentSkillpoints, skyshards)
+end
+
+function PNL.GetEnlightenment()
+    local enlightenmentAmount = 0
+
+    if IsEnlightenedAvailableForCharacter() then
+        enlightenmentAmount = GetEnlightenedPool()
+    end
+
+    return enlightenmentAmount
 end
