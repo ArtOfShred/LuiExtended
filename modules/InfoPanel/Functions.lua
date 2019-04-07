@@ -84,8 +84,7 @@ function PNL.GetMountTraining()
 end
 
 function PNL.GetSoulgemsAmount()
-    -- "/esoui/art/icons/soulgem_006_empty.dds"
-    -- "/esoui/art/icons/soulgem_006_filled.dds"
+    local icon = "/esoui/art/icons/soulgem_006_filled.dds"
 
     local playerLvl = GetUnitEffectiveLevel("player")
     local emptyName, iconEmpty, emptySoulgems = GetSoulGemInfo(SOUL_GEM_TYPE_EMPTY, playerLvl)
@@ -107,9 +106,9 @@ end
 function PNL.GetBagSpace()
     local bagId = BAG_BACKPACK
 
-    local bagSize = tonumber(GetBagSize(bagId))
-    local bagFree = tonumber(GetNumBagFreeSlots(bagId))
-    local bagUsed = tonumber(GetNumBagUsedSlots(bagId))
+    local bagSize = GetBagSize(bagId)
+    local bagFree = GetNumBagFreeSlots(bagId)
+    local bagUsed = GetNumBagUsedSlots(bagId)
 
     local bagPercentageUsed = math.floor((bagUsed / bagSize) * 100)
     local bagPercentageFree = math.floor(((bagSize - bagUsed) / bagSize) * 100)
@@ -126,19 +125,20 @@ function PNL.GetBankSpace()
     local bankUsed = GetNumBagUsedSlots(bankId)
 
     if IsESOPlusSubscriber() then
-        bankSize = tonumber(bankSize + GetBagSize(bankSubId))
-        bankFree = tonumber(bankFree + GetNumBagFreeSlots(bankSubId))
-        bankUsed = tonumber(bankUsed + GetNumBagUsedSlots(bankSubId))
+        bankSize = bankSize + GetBagSize(bankSubId)
+        bankFree = bankFree + GetNumBagFreeSlots(bankSubId)
+        bankUsed = bankUsed + GetNumBagUsedSlots(bankSubId)
     end
 
-    local bankPercentageUsed = math.floor((bankUsed / bankSize ) * 100)
+    local bankPercentageUsed = math.floor((bankUsed / bankSize) * 100)
     local bankPercentageFree = math.floor(((bankSize - bankUsed) / bankSize) * 100)
 
     return strformat("Bank Space: <<1>>/<<2>>", bankUsed, bankSize)
 end
 
 function PNL.GetPlayerXP()
-    --"/esoui/art/icons/icon_experience.dds"
+    local icon = "/esoui/art/icons/icon_experience.dds"
+
     if IsUnitChampion("player") then
         local playerRank = GetPlayerChampionPointsEarned()
         local playerXP = GetPlayerChampionXP()
@@ -183,11 +183,13 @@ function PNL.GetCurrency(currencyType, currencyLocation, currencyTitle, currency
 end
 
 function PNL.GetAchievementPoints()
-    -- "/esoui/art/tutorial/gamepad/gp_playermenu_icon_achievements.dds"
+    local icon = "/esoui/art/tutorial/gamepad/gp_playermenu_icon_achievements.dds"
 
     local earnedPoints = GetEarnedAchievementPoints()
     local totalPoints = GetTotalAchievementPoints()
-	-- local percent = math.floor(earnedPoints / totalPoints *100)
+
+    local percentageDone = math.floor((earnedPoints / totalPoints) * 100)
+    local percentageMissing = math.floor(((totalPoints - earnedPoints) / totalPoints) * 100)
 
     return strformat("Achievement Points: <<1>>/<<2>>", earnedPoints, totalPoints)
 end
@@ -203,7 +205,7 @@ function PNL.GetFenceInfo()
 end
 
 function PNL.GetGearRepairCost()
-    -- "/esoui/art/progression/progression_indexicon_armor_up.dds"
+    local icon = "/esoui/art/progression/progression_indexicon_armor_up.dds"
     local repairCost = 0
     local bagSlots = GetBagSize(BAG_WORN)
     for slotIndex=0, bagSlots - 1 do
@@ -253,11 +255,15 @@ function PNL.GetSkyshardInfo()
 end
 
 function PNL.GetEnlightenment()
-    local enlightenmentAmount = 0
-
+    local boosted = 0
     if IsEnlightenedAvailableForCharacter() then
-        enlightenmentAmount = GetEnlightenedPool()
+        local enlightenmentPool = GetEnlightenedPool()
+        local enlightenmentMultiplier = 1 + GetEnlightenedMultiplier() -- the multiplier is zero-indexed
+
+        if enlightenmentPool > 0 then
+            boosted = enlightenmentPool * enlightenmentMultiplier
+        end
     end
 
-    return enlightenmentAmount
+    return boosted
 end
