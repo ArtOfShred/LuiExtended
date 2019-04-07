@@ -14,7 +14,6 @@ function CTL:New()
         [POWERTYPE_STAMINA] = { wasWarned = false, resourceType = LUIE.CombatTextConstants.resourceType.LOW_STAMINA },
         [POWERTYPE_MAGICKA] = { wasWarned = false, resourceType = LUIE.CombatTextConstants.resourceType.LOW_MAGICKA }
     }
-    self.executeAlerts = {}
     return obj
 end
 
@@ -44,28 +43,6 @@ function CTL:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
             self.powerInfo[powerType].wasWarned = true
         elseif (percent > threshold + 10) then -- Add 10 to create some sort of buffer, else the warning can fire more than once depending on the power regen of the player
             self.powerInfo[powerType].wasWarned = false
-        end
-    --EXECUTE ALERT
-    elseif (LUIE.CombatText.SV.toggles.showAlertExecute and unit == 'reticleover' and powerType == POWERTYPE_HEALTH and IsUnitAttackable('reticleover') and GetUnitReaction('reticleover') ~= UNIT_REACTION_NEUTRAL and not IsUnitDead('reticleover')) then
-        local threshold = LUIE.CombatText.SV.executeThreshold or 20
-        local alertFrequency = LUIE.CombatText.SV.executeFrequency or 8
-        local unitName = GetRawUnitName('reticleover')
-
-        local percent = power / powerMax * 100
-        local now = GetFrameTimeSeconds()
-        local alertTime = self.executeAlerts[unitName] or 0
-
-        if percent <= threshold then
-            if now - alertTime > alertFrequency then
-                self:TriggerEvent(LUIE.CombatTextConstants.eventType.ALERT, LUIE.CombatTextConstants.alertType.EXECUTE, zo_round(percent))
-                self.executeAlerts[unitName] = now
-            end
-        else
-            for name, alertTime in pairs(self.executeAlerts) do
-                if now - alertTime > alertFrequency then
-                    self.executeAlerts[name] = nil
-                end
-            end
         end
     end
 end

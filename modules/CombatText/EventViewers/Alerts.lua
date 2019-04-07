@@ -29,20 +29,8 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
 	local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
     local mitigationSuffix = (isDirect and S.toggles.mitigationDefaultSuffix ~= "") and zo_strformat(" <<1>>", S.toggles.mitigationDefaultSuffix) or ""
 
-    -- First we handle Cleanse/Execute/Exploit because these messages are always individual
-
-    --Cleanse
-    if (alertType == alertTypes.CLEANSE) then
-        labelColor = S.colors.alertCleanse
-        size = S.fontSizes.alert
-        text = zo_strformat("<<1>> <<2>> - <<3>>", abilityIcon, abilityName, S.formats.alertCleanse)
-    --EXECUTE
-    elseif (alertType == alertTypes.EXECUTE) then
-        labelColor = S.colors.alertExecute
-        size = S.fontSizes.alert
-        text = S.formats.alertExecute
-    --EXPLOIT
-    elseif (alertType == alertTypes.EXPLOIT) then
+    -- Handle Exploit because these messages are always individual
+    if (alertType == alertTypes.EXPLOIT) then
         labelColor = S.colors.alertExploit
         size = S.fontSizes.alert
         text = S.formats.alertExploit

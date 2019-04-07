@@ -171,9 +171,7 @@ CT.D = {
         showAlertDestroy            = true,
         showAlertSummon             = true,
 
-        showAlertCleanse            = true,
         showAlertExploit            = true,
-        showAlertExecute            = false,
         hideIngameTips              = true,
 
         -- Points
@@ -199,8 +197,6 @@ CT.D = {
     healthThreshold                 = 35,
     magickaThreshold                = 35,
     staminaThreshold                = 35,
-    executeThreshold                = 20,
-    executeFrequency                = 8,
 
     -- Font defaults
     fontFace                        = [[Univers 67]],
@@ -279,14 +275,12 @@ CT.D = {
 
         -- Alerts
         alertShared                 = { 1, 1, 1, 1 },
-        alertCleanse                = { 1, 1, 1, 1 },
         alertBlockA                 = { 1, 0, 0, 1 },
         alertExploit                = { 1, 1, 1, 1 },
         alertInterruptB             = { 0, 0.50, 1, 1 },
 		alertUnmit					= { 1, 0, 0, 1 },
         alertDodgeA                 = { 1, 1, 50/255, 1 },
         alertAvoidB                 = { 1, 127/255, 0, 1 },
-        alertExecute                = { 1, 1, 1, 1 },
         alertPower                  = { 1, 1, 1, 1 },
         alertDestroy                = { 1, 1, 1, 1 },
         alertSummon                 = { 1, 1, 1, 1 },
@@ -341,7 +335,6 @@ CT.D = {
         death                       = GetString(SI_LUIE_CT_DEATH_DEFAULT),
 
         -- Alerts
-        alertCleanse                = GetString(SI_LUIE_CT_CLEANSE_DEFAULT),
         alertBlock                  = GetString(SI_LUIE_CT_BLOCK_DEFAULT),
         alertBlockStagger           = GetString(SI_LUIE_CT_BLOCKSTAGGER_DEFAULT),
         alertExploit                = GetString(SI_LUIE_CT_EXPLOIT_DEFAULT),
@@ -349,7 +342,6 @@ CT.D = {
 		alertUnmit					= GetString(SI_LUIE_CT_UNMIT_DEFAULT),
         alertDodge                  = GetString(SI_LUIE_CT_DODGE_DEFAULT),
         alertAvoid                  = GetString(SI_LUIE_CT_AVOID_DEFAULT),
-        alertExecute                = GetString(SI_LUIE_CT_EXECUTE_DEFAULT),
         alertPower                  = GetString(SI_LUIE_CT_POWER_DEFAULT),
         alertDestroy                = GetString(SI_LUIE_CT_DESTROY_DEFAULT),
         alertSummon                 = GetString(SI_LUIE_CT_SUMMON_DEFAULT),

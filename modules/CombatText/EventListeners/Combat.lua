@@ -14,7 +14,6 @@ local refireDelay = { }
 
 local isWarned = {
     combat          = false,
-    cleanse         = false,
     disoriented     = false,
     feared          = false,
     offBalanced     = false,
@@ -303,16 +302,9 @@ function CTL:OnCombatIn(...)
        end
     end
 ---------------------------------------------------------------------------------------------------------------------------------------
-    --//CROWD CONTROL & CLEANSE TRIGGERS//--
+    --//CROWD CONTROL TRIGGERS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
     if (isWarned.combat) then --Only show CC/Debuff events when in combat
-        --Cleanse
-        if (isDot and S.toggles.showAlertCleanse and not isWarned.cleanse and not C.isPlayer[sourceType]) and not E.EffectCleanseOverride[abilityId] then
-            if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].unbreakable then return end -- Don't display a cleanse alert if this ability is flagged as unbreakable
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.CLEANSE, abilityName, formattedIcon)
-            isWarned.cleanse = true
-            callLater(function() isWarned.cleanse = false end, 5000) --5 second buffer
-        end
         --Disoriented
         if (isDisoriented and togglesInOut.showDisoriented) then
             if (isWarned.disoriented) then
@@ -471,7 +463,7 @@ function CTL:OnCombatOut(...)
        end
     end
 ---------------------------------------------------------------------------------------------------------------------------------------
-    --//CROWD CONTROL & CLEANSE TRIGGERS//--
+    --//CROWD CONTROL TRIGGERS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
     if (isWarned.combat) then --Only show CC/Debuff events when in combat
         --Disoriented
