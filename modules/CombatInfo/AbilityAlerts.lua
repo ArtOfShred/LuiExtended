@@ -76,10 +76,6 @@ function CI.CreateAlertFrame()
 
 end
 
-local isWarned = {
-    cleanse         = false,
-}
-
 -- Update ticker for Alerts
 function CI.AlertUpdate()
     for i = 1, 3 do
@@ -352,14 +348,6 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
 
     local formattedIcon = zo_iconFormat(abilityIcon, 32, 32)
 
-    -- TODO - make sure player is in combat here
-    if (isDot and S.toggles.showAlertCleanse and not isWarned.cleanse and not C.isPlayer[sourceType]) and not E.EffectCleanseOverride[abilityId] then
-        if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].unbreakable then return end -- Don't display a cleanse alert if this ability is flagged as unbreakable
-        self:TriggerEvent(C.eventType.ALERT, C.alertType.CLEANSE, abilityName, formattedIcon)
-        isWarned.cleanse = true
-        callLater(function() isWarned.cleanse = false end, 5000) --5 second buffer
-    end
-
     -- NEW ALERTS
     if S.toggles.showAlertMitigation and AlertT[abilityId] then
         if sourceName ~= nil and sourceName ~= "" then
@@ -483,20 +471,8 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, d
 	local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
     local mitigationSuffix = (isDirect and S.toggles.mitigationDefaultSuffix ~= "") and zo_strformat(" <<1>>", S.toggles.mitigationDefaultSuffix) or ""
 
-    -- First we handle Cleanse/Execute/Exploit because these messages are always individual
-
-    --Cleanse
-    if (alertType == alertTypes.CLEANSE) then
-        labelColor = S.colors.alertCleanse
-        size = S.fontSizes.alert
-        text = zo_strformat("<<1>> <<2>> - <<3>>", abilityIcon, abilityName, S.formats.alertCleanse)
-    --EXECUTE
-    elseif (alertType == alertTypes.EXECUTE) then
-        labelColor = S.colors.alertExecute
-        size = S.fontSizes.alert
-        text = S.formats.alertExecute
-    --EXPLOIT
-    elseif (alertType == alertTypes.EXPLOIT) then
+    -- First we handle Exploit because these messages are always individual
+    if (alertType == alertTypes.EXPLOIT) then
         labelColor = S.colors.alertExploit
         size = S.fontSizes.alert
         text = S.formats.alertExploit

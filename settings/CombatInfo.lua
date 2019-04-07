@@ -658,39 +658,6 @@ function CI.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE),
-                width = "full",
-            },
-            {
-                -- Cleanse Enable
-                type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_CLEANSE_TP),
-                getFunc = function() return CT.SV.toggles.showAlertCleanse end,
-                setFunc = function(v) CT.SV.toggles.showAlertCleanse = v end,
-                default = CT.D.toggles.showAlertCleanse,
-            },
-            {
-                -- Cleanse Format
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CLEANSE_TP),
-                getFunc = function() return CT.SV.formats.alertCleanse end,
-                setFunc = function(v) CT.SV.formats.alertCleanse = v end,
-                isMultiline = false,
-                default = CT.D.formats.alertCleanse,
-            },
-            {
-                -- Cleanse Color
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CLEANSE_TP),
-                getFunc = function() return unpack(CT.SV.colors.alertCleanse) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.alertCleanse = { r, g, b, a } CT.SetAlertColors() end,
-                default = {r=CT.D.colors.alertCleanse[1], g=CT.D.colors.alertCleanse[2], b=CT.D.colors.alertCleanse[3]}
-            },
-            {
-                type = "header",
                 name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT),
                 width = "full",
             },
@@ -721,65 +688,6 @@ function CI.CreateSettings()
                 getFunc = function() return unpack(CT.SV.colors.alertExploit) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.alertExploit = { r, g, b, a } CT.SetAlertColors() end,
                 default = {r=CT.D.colors.alertExploit[1], g=CT.D.colors.alertExploit[2], b=CT.D.colors.alertExploit[3]}
-            },
-            {
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE),
-                width = "full",
-            },
-            {
-                -- Execute Enable
-                type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXECUTE_TP),
-                getFunc = function() return CT.SV.toggles.showAlertExecute end,
-                setFunc = function(v) CT.SV.toggles.showAlertExecute = v end,
-                default = CT.D.toggles.showAlertExecute,
-            },
-            {
-                -- Execute Threshold Slider
-                type    = "slider",
-                width   = "half",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD_TP),
-                min     = 10,
-                max     = 50,
-                getFunc = function() return CT.SV.executeThreshold end,
-                setFunc = function(v) CT.SV.executeThreshold = v end,
-                disabled = function() return not CT.SV.toggles.showAlertExecute end,
-                default = CT.D.executeThreshold,
-            },
-            {
-                -- Execute Frequency Slider
-                type    = "slider",
-                width   = "half",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY_TP),
-                min     = 1,
-                max     = 20,
-                getFunc = function() return CT.SV.executeFrequency end,
-                setFunc = function(v) CT.SV.executeFrequency = v end,
-                disabled = function() return not CT.SV.toggles.showAlertExecute end,
-                default = CT.D.executeFrequency,
-            },
-            {
-                -- Execute Format
-                type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
-                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXECUTE_TP),
-                getFunc = function() return CT.SV.formats.alertExecute end,
-                setFunc = function(v) CT.SV.formats.alertExecute = v end,
-                isMultiline = false,
-                default = CT.D.formats.alertExecute,
-            },
-            {
-                -- Execute Color
-                type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
-                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP),
-                getFunc = function() return unpack(CT.SV.colors.alertExecute) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.alertExecute = { r, g, b, a } CT.SetAlertColors() end,
-                default = {r=CT.D.colors.alertExecute[1], g=CT.D.colors.alertExecute[2], b=CT.D.colors.alertExecute[3]}
             },
             {
                 type = "header",
