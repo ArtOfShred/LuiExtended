@@ -1340,7 +1340,9 @@ local strings = {
     SI_LUIE_LAM_CT_HEADER_CROWD_CONTROL =                "Эффекты контроля",
     SI_LUIE_LAM_CT_HEADER_NOTIFICATION =                 "Предупреждения",
     SI_LUIE_LAM_CT_HEADER_LOW_RESOURCE =                 "Предупреждение о низком запасе ресурса",
-    SI_LUIE_LAM_CT_HEADER_ACTIVE_COMBAT_ALERT =          "Боевые предупреждения",
+
+    SI_LUIE_LAM_CI_HEADER_ACTIVE_COMBAT_ALERT =          "Боевые предупреждения Опционально",
+
     SI_LUIE_LAM_CT_HEADER_DAMAGE_COLOR =                 "Настройки цвета урона",
     SI_LUIE_LAM_CT_HEADER_HEALING_COLOR =                "Настройки цвета исцеления",
     SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE =             "Общий размер шрифта",
@@ -1387,7 +1389,9 @@ local strings = {
     SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP =                "Показать когда вы обезмолвили цель.",
     SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP =                 "Показать когда вы оглушили цель.",
     SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE =           "Статус боя",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERTS_DESC =            "Включите настройку Активные подсказки в бою -> Показывать всегда в настройках интерфейса, чтобы предупреждения выводили корректно.",
+
+    SI_LUIE_LAM_CI_NOTIFICATION_ALERTS_DESC =            "Display alerts when an enemy ability is incoming. The options below allow you to significantly customize which alert to display, choose a sound to play, and show a border color on the icon based off the type of crowd control the ability applies (if any).",
+
     SI_LUIE_LAM_CT_NOTIFICATION_POINTS =                 "Очки",
     SI_LUIE_LAM_CT_NOTIFICATION_RESOURCES =              "Ресурсы",
     SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP =           "Показывать оповещение в входе в бой.",
@@ -1475,7 +1479,9 @@ local strings = {
     SI_LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP =           "Размер шрифта поглощённого урон.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP =        "Размер шрифта контроля.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP =   "Размер шрифта оповещений о входе в бой или выходе из него.\nПо умолчанию: 24",
-    SI_LUIE_LAM_CT_FONT_NOTIFICATION_ALERT_TP =          "Размер шрифта активных боевых подсказок.\nПо умолчанию: 32",
+
+    SI_LUIE_LAM_CI_FONT_NOTIFICATION_ALERT_TP =          "Размер шрифта активных боевых подсказок.\nПо умолчанию: 32",
+
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP =         "Размер шрифта получения очков\nПо умолчанию: 24",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP =       "Размер шрифта предупреждений о ресурсах.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE =            "Цвет шрифта (Без типа)",

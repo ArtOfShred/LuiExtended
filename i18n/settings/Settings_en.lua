@@ -1341,7 +1341,9 @@ local strings = {
     SI_LUIE_LAM_CT_HEADER_CROWD_CONTROL =                "Crowd Control",
     SI_LUIE_LAM_CT_HEADER_NOTIFICATION =                 "Notification",
     SI_LUIE_LAM_CT_HEADER_LOW_RESOURCE =                 "Low Resource Warning",
-    SI_LUIE_LAM_CT_HEADER_ACTIVE_COMBAT_ALERT =          "Active Combat Alert",
+
+    SI_LUIE_LAM_CI_HEADER_ACTIVE_COMBAT_ALERT =          "Active Combat Alert Options",
+
     SI_LUIE_LAM_CT_HEADER_DAMAGE_COLOR =                 "Damage Color Options",
     SI_LUIE_LAM_CT_HEADER_HEALING_COLOR =                "Healing Color Options",
     SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE =             "Shared Font Size",
@@ -1388,7 +1390,9 @@ local strings = {
     SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP =                "Show when you silence an enemy.",
     SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP =                 "Show when you stun an enemy.",
     SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE =           "Combat State",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERTS_DESC =            "Set Active Combat Tips to Always Show in the Interface options to display Alerts correctly.",
+
+    SI_LUIE_LAM_CI_NOTIFICATION_ALERTS_DESC =            "Display alerts when an enemy ability is incoming. The options below allow you to significantly customize which alert to display, choose a sound to play, and show a border color on the icon based off the type of crowd control the ability applies (if any).",
+
     SI_LUIE_LAM_CT_NOTIFICATION_POINTS =                 "Points",
     SI_LUIE_LAM_CT_NOTIFICATION_RESOURCES =              "Resources",
     SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP =           "Display a notification when engaging in combat.",
@@ -1476,7 +1480,9 @@ local strings = {
     SI_LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP =           "Font size for mitigated damage.\nDefault: 32",
     SI_LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP =        "Font size for crowd control warnings.\nDefault: 32",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP =   "Font size of message displayed when entering or exiting combat.\nDefault: 24",
-    SI_LUIE_LAM_CT_FONT_NOTIFICATION_ALERT_TP =          "Font size of active combat alerts.\nDefault: 32",
+
+    SI_LUIE_LAM_CI_FONT_NOTIFICATION_ALERT_TP =          "Font size of active combat alerts.\nDefault: 32",
+
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP =         "Font size of points earned\nDefault: 24",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP =       "Font size of resource warnings.\nDefault: 32",
     SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE =            "Font Color (No Type)",

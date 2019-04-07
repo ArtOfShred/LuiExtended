@@ -9,6 +9,10 @@ local strformat = zo_strformat
 
 local optionsDataCombatInfo = {}
 
+-- TEMP -- TODO: REMOVE
+local CT = LUIE.CombatText
+local CTC = LUIE.CombatTextConstants
+
 -- Get fonts
 local FontsList = {}
 for f in pairs(LUIE.Fonts) do
@@ -627,6 +631,636 @@ function CI.CreateSettings()
                 width = "half",
                 default = {r=CI.SV.CastBarGradientC2[1], g=CI.SV.CastBarGradientC2[2], b=CI.SV.CastBarGradientC2[3]},
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and CI.SV.CastBarEnable ) end,
+            },
+        },
+    }
+
+    -- Active Combat Alerts
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_CI_HEADER_ACTIVE_COMBAT_ALERT),
+        controls = {
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_CI_NOTIFICATION_ALERTS_DESC),
+            },
+            {
+                -- Alerts Font
+                type     = "slider",
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
+                tooltip = GetString(SI_LUIE_LAM_CI_FONT_NOTIFICATION_ALERT_TP),
+                min     = 8,
+                max     = 72,
+                step    = 1,
+                getFunc = function() return CT.SV.fontSizes.alert end,
+                setFunc = function(size) CT.SV.fontSizes.alert = size end,
+                default = CT.D.fontSizes.alert,
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE),
+                width = "full",
+            },
+            {
+                -- Cleanse Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_CLEANSE_TP),
+                getFunc = function() return CT.SV.toggles.showAlertCleanse end,
+                setFunc = function(v) CT.SV.toggles.showAlertCleanse = v end,
+                default = CT.D.toggles.showAlertCleanse,
+            },
+            {
+                -- Cleanse Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CLEANSE_TP),
+                getFunc = function() return CT.SV.formats.alertCleanse end,
+                setFunc = function(v) CT.SV.formats.alertCleanse = v end,
+                isMultiline = false,
+                default = CT.D.formats.alertCleanse,
+            },
+            {
+                -- Cleanse Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CLEANSE_TP),
+                getFunc = function() return unpack(CT.SV.colors.alertCleanse) end,
+                setFunc = function(r, g, b, a) CT.SV.colors.alertCleanse = { r, g, b, a } CT.SetAlertColors() end,
+                default = {r=CT.D.colors.alertCleanse[1], g=CT.D.colors.alertCleanse[2], b=CT.D.colors.alertCleanse[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT),
+                width = "full",
+            },
+            {
+                -- Exploit Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXPLOIT_TP),
+                getFunc = function() return CT.SV.toggles.showAlertExploit end,
+                setFunc = function(v) CT.SV.toggles.showAlertExploit = v end,
+                default = CT.D.toggles.showAlertExploit,
+            },
+            {
+                -- Exploit  Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPLOIT_TP),
+                getFunc = function() return CT.SV.formats.alertExploit end,
+                setFunc = function(v) CT.SV.formats.alertExploit = v end,
+                isMultiline = false,
+                default = CT.D.formats.alertExploit,
+            },
+            {
+                -- Exploit Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPLOIT_TP),
+                getFunc = function() return unpack(CT.SV.colors.alertExploit) end,
+                setFunc = function(r, g, b, a) CT.SV.colors.alertExploit = { r, g, b, a } CT.SetAlertColors() end,
+                default = {r=CT.D.colors.alertExploit[1], g=CT.D.colors.alertExploit[2], b=CT.D.colors.alertExploit[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE),
+                width = "full",
+            },
+            {
+                -- Execute Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXECUTE_TP),
+                getFunc = function() return CT.SV.toggles.showAlertExecute end,
+                setFunc = function(v) CT.SV.toggles.showAlertExecute = v end,
+                default = CT.D.toggles.showAlertExecute,
+            },
+            {
+                -- Execute Threshold Slider
+                type    = "slider",
+                width   = "half",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD_TP),
+                min     = 10,
+                max     = 50,
+                getFunc = function() return CT.SV.executeThreshold end,
+                setFunc = function(v) CT.SV.executeThreshold = v end,
+                disabled = function() return not CT.SV.toggles.showAlertExecute end,
+                default = CT.D.executeThreshold,
+            },
+            {
+                -- Execute Frequency Slider
+                type    = "slider",
+                width   = "half",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY_TP),
+                min     = 1,
+                max     = 20,
+                getFunc = function() return CT.SV.executeFrequency end,
+                setFunc = function(v) CT.SV.executeFrequency = v end,
+                disabled = function() return not CT.SV.toggles.showAlertExecute end,
+                default = CT.D.executeFrequency,
+            },
+            {
+                -- Execute Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXECUTE_TP),
+                getFunc = function() return CT.SV.formats.alertExecute end,
+                setFunc = function(v) CT.SV.formats.alertExecute = v end,
+                isMultiline = false,
+                default = CT.D.formats.alertExecute,
+            },
+            {
+                -- Execute Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP),
+                getFunc = function() return unpack(CT.SV.colors.alertExecute) end,
+                setFunc = function(r, g, b, a) CT.SV.colors.alertExecute = { r, g, b, a } CT.SetAlertColors() end,
+                default = {r=CT.D.colors.alertExecute[1], g=CT.D.colors.alertExecute[2], b=CT.D.colors.alertExecute[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_INCOMING_ABILITY_ALERTS),
+                width = "full",
+            },
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION),
+            },
+            {
+                -- Hide Ingame Tips
+                type    = "checkbox",
+                name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS_TP),
+                getFunc = function() return CT.SV.toggles.hideIngameTips end,
+                setFunc = function(v) CT.SV.toggles.hideIngameTips = v; ZO_ActiveCombatTips:SetHidden(v) end,
+                default = CT.D.toggles.hideIngameTips,
+            },
+            {
+                -- Mitigation Alerts
+                type    = "checkbox",
+                name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP),
+                getFunc = function() return CT.SV.toggles.showAlertMitigation end,
+                setFunc = function(v) CT.SV.toggles.showAlertMitigation = v end,
+                default = CT.D.toggles.showAlertMitigation,
+            },
+            {
+                -- Mitigation Method
+                type    = "dropdown",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP),
+                choices = CTC.mitigationType,
+                getFunc = function() return CT.SV.toggles.mitigationType end,
+                setFunc = function(v) CT.SV.toggles.mitigationType = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.mitigationType,
+            },
+            {
+                -- Hide Mitigation Grouped Alerts
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP),
+                getFunc = function() return CT.SV.toggles.hideMitigation end,
+                setFunc = function(v) CT.SV.toggles.hideMitigation = v end,
+                disabled = function() return not (CT.SV.toggles.showAlertMitigation and CT.SV.toggles.mitigationType == "Single Line") end,
+                default = CT.D.toggles.hideMitigation,
+            },
+            {
+                -- Mitigation Prefix (No Name)
+                type    = "editbox",
+                name    = strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
+                getFunc = function() return CT.SV.toggles.mitigationPrefix end,
+                setFunc = function(v) CT.SV.toggles.mitigationPrefix = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.mitigationPrefix,
+            },
+            {
+                -- Mitigation Prefix (Name)
+                type    = "editbox",
+                name    = strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
+                getFunc = function() return CT.SV.toggles.mitigationPrefixN end,
+                setFunc = function(v) CT.SV.toggles.mitigationPrefixN = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.mitigationPrefixN,
+            },
+            {
+                -- Mitigation Suffix
+                type    = "editbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP),
+                getFunc = function() return CT.SV.toggles.mitigationDefaultSuffix end,
+                setFunc = function(v) CT.SV.toggles.mitigationDefaultSuffix = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.mitigationDefaultSuffix,
+            },
+            {
+                -- Mitigation Aura
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_AURA)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_AURA_TP),
+                getFunc = function() return CT.SV.toggles.mitigationAura end,
+                setFunc = function(v) CT.SV.toggles.mitigationAura = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.mitigationAura,
+            },
+            {
+                -- Mitigation Rank 3
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK3)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK3_TP),
+                getFunc = function() return CT.SV.toggles.mitigationRank3 end,
+                setFunc = function(v) CT.SV.toggles.mitigationRank3 = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.mitigationRank3,
+            },
+            {
+                -- Mitigation Rank 2
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK2)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK2_TP),
+                getFunc = function() return CT.SV.toggles.mitigationRank2 end,
+                setFunc = function(v) CT.SV.toggles.mitigationRank2 = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.mitigationRank2,
+            },
+            {
+                -- Mitigation Rank 1
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK1)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK1_TP),
+                getFunc = function() return CT.SV.toggles.mitigationRank1 end,
+                setFunc = function(v) CT.SV.toggles.mitigationRank1 = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.mitigationRank1,
+            },
+            {
+                -- Mitigation Dungeon
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON_TP),
+                getFunc = function() return CT.SV.toggles.mitigationDungeon end,
+                setFunc = function(v) CT.SV.toggles.mitigationDungeon = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.mitigationDungeon,
+            },
+            {
+                -- Shared Label Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BASE),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BASE_TP),
+                getFunc = function() return unpack(CT.SV.colors.alertShared) end,
+                setFunc = function(r, g, b, a) CT.SV.colors.alertShared = { r, g, b, a } CT.SetAlertColors() end,
+                default = {r=CT.D.colors.alertShared[1], g=CT.D.colors.alertShared[2], b=CT.D.colors.alertShared[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK),
+                width = "full",
+            },
+            {
+                -- Block Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_BLOCK_TP),
+                getFunc = function() return CT.SV.toggles.showAlertBlock end,
+                setFunc = function(v) CT.SV.toggles.showAlertBlock = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.showAlertBlock,
+            },
+            {
+                -- Block Format
+                type    = "editbox",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK)),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_TP),
+                getFunc = function() return CT.SV.formats.alertBlock end,
+                setFunc = function(v) CT.SV.formats.alertBlock = v end,
+                isMultiline = false,
+                default = CT.D.formats.alertBlock,
+            },
+            {
+                -- Block Stagger Format
+                type    = "editbox",
+                width   = "half",
+                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK_S)),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_S_TP),
+                getFunc = function() return CT.SV.formats.alertBlockStagger end,
+                setFunc = function(v) CT.SV.formats.alertBlockStagger = v end,
+                isMultiline = false,
+                default = CT.D.formats.alertBlockStagger,
+            },
+            {
+                -- Block Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP),
+                getFunc = function() return unpack(CT.SV.colors.alertBlockA) end,
+                setFunc = function(r, g, b, a) CT.SV.colors.alertBlockA = { r, g, b, a } CT.SetAlertColors() end,
+                default = {r=CT.D.colors.alertBlockA[1], g=CT.D.colors.alertBlockA[2], b=CT.D.colors.alertBlockA[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DODGE),
+                width = "full",
+            },
+            {
+                -- Dodge Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DODGE)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DODGE_TP),
+                getFunc = function() return CT.SV.toggles.showAlertDodge end,
+                setFunc = function(v) CT.SV.toggles.showAlertDodge = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.showAlertDodge,
+            },
+            {
+                -- Dodge  Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DODGE_TP),
+                getFunc = function() return CT.SV.formats.alertDodge end,
+                setFunc = function(v) CT.SV.formats.alertDodge = v end,
+                isMultiline = false,
+                default = CT.D.formats.alertDodge,
+            },
+            {
+                -- Dodge Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP),
+                getFunc = function() return unpack(CT.SV.colors.alertDodgeA) end,
+                setFunc = function(r, g, b, a) CT.SV.colors.alertDodgeA = { r, g, b, a } CT.SetAlertColors() end,
+                default = {r=CT.D.colors.alertDodgeA[1], g=CT.D.colors.alertDodgeA[2], b=CT.D.colors.alertDodgeA[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_AVOID),
+                width = "full",
+            },
+            {
+                -- Avoid Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_AVOID)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_AVOID_TP),
+                getFunc = function() return CT.SV.toggles.showAlertAvoid end,
+                setFunc = function(v) CT.SV.toggles.showAlertAvoid = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.showAlertAvoid,
+            },
+            {
+                -- Avoid Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_AVOID_TP),
+                getFunc = function() return CT.SV.formats.alertAvoid end,
+                setFunc = function(v) CT.SV.formats.alertAvoid = v end,
+                isMultiline = false,
+                default = CT.D.formats.alertAvoid,
+            },
+            {
+                -- Avoid Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP),
+                getFunc = function() return unpack(CT.SV.colors.alertAvoidB) end,
+                setFunc = function(r, g, b, a) CT.SV.colors.alertAvoidB = { r, g, b, a } CT.SetAlertColors() end,
+                default = {r=CT.D.colors.alertAvoidB[1], g=CT.D.colors.alertAvoidB[2], b=CT.D.colors.alertAvoidB[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT),
+                width = "full",
+            },
+            {
+                -- Interrupt Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_UNMIT_TP),
+                getFunc = function() return CT.SV.toggles.showAlertInterrupt end,
+                setFunc = function(v) CT.SV.toggles.showAlertInterrupt = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.showAlertInterrupt,
+            },
+            {
+                -- Interrupt Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_INTERRUPT_TP),
+                getFunc = function() return CT.SV.formats.alertInterrupt end,
+                setFunc = function(v) CT.SV.formats.alertInterrupt = v end,
+                isMultiline = false,
+                default = CT.D.formats.alertInterrupt,
+            },
+            {
+                -- Interrupt Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP),
+                getFunc = function() return unpack(CT.SV.colors.alertInterruptB) end,
+                setFunc = function(r, g, b, a) CT.SV.colors.alertInterruptB = { r, g, b, a } CT.SetAlertColors() end,
+                default = {r=CT.D.colors.alertInterruptB[1], g=CT.D.colors.alertInterruptB[2], b=CT.D.colors.alertInterruptB[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT),
+                width = "full",
+            },
+            {
+                -- Unmit Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_UNMIT_TP),
+                getFunc = function() return CT.SV.toggles.showAlertUnmit end,
+                setFunc = function(v) CT.SV.toggles.showAlertUnmit = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.showAlertUnmit,
+            },
+            {
+                -- Unmit Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_UNMIT_TP),
+                getFunc = function() return CT.SV.formats.alertUnmit end,
+                setFunc = function(v) CT.SV.formats.alertUnmit = v end,
+                isMultiline = false,
+                default = CT.D.formats.alertUnmit,
+            },
+            {
+                -- Unmit Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_UNMIT_TP),
+                getFunc = function() return unpack(CT.SV.colors.alertUnmit) end,
+                setFunc = function(r, g, b, a) CT.SV.colors.alertUnmit = { r, g, b, a } CT.SetAlertColors() end,
+                default = {r=CT.D.colors.alertUnmit[1], g=CT.D.colors.alertUnmit[2], b=CT.D.colors.alertUnmit[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER),
+                width = "full",
+            },
+            {
+                -- Power Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP),
+                getFunc = function() return CT.SV.toggles.showAlertPower end,
+                setFunc = function(v) CT.SV.toggles.showAlertPower = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.showAlertPower,
+            },
+            {
+                -- Power Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POWER_TP),
+                getFunc = function() return CT.SV.formats.alertPower end,
+                setFunc = function(v) CT.SV.formats.alertPower = v end,
+                isMultiline = false,
+                default = CT.D.formats.alertPower,
+            },
+            {
+                -- Prefix Power (No Name)
+                type    = "editbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
+                getFunc = function() return CT.SV.toggles.mitigationPowerPrefix end,
+                setFunc = function(v) CT.SV.toggles.mitigationPowerPrefix = v end,
+                disabled = function() return not (CT.SV.toggles.showAlertMitigation and CT.SV.toggles.showAlertPower) end,
+                default = CT.D.toggles.mitigationPowerPrefix,
+            },
+            {
+                -- Prefix Power (Name)
+                type    = "editbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
+                getFunc = function() return CT.SV.toggles.mitigationPowerPrefixN end,
+                setFunc = function(v) CT.SV.toggles.mitigationPowerPrefixN = v end,
+                disabled = function() return not (CT.SV.toggles.showAlertMitigation and CT.SV.toggles.showAlertPower) end,
+                default = CT.D.toggles.mitigationPowerPrefixN,
+            },
+            {
+                -- Power Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP),
+                getFunc = function() return unpack(CT.SV.colors.alertPower) end,
+                setFunc = function(r, g, b, a) CT.SV.colors.alertPower = { r, g, b, a } CT.SetAlertColors() end,
+                default = {r=CT.D.colors.alertPower[1], g=CT.D.colors.alertPower[2], b=CT.D.colors.alertPower[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY),
+                width = "full",
+            },
+            {
+                -- Destroy Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP),
+                getFunc = function() return CT.SV.toggles.showAlertDestroy end,
+                setFunc = function(v) CT.SV.toggles.showAlertDestroy = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.showAlertDestroy,
+            },
+            {
+                -- Destroy Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DESTROY_TP),
+                getFunc = function() return CT.SV.formats.alertDestroy end,
+                setFunc = function(v) CT.SV.formats.alertDestroy = v end,
+                isMultiline = false,
+                default = CT.D.formats.alertDestroy,
+            },
+            {
+                -- Prefix Destroy (No Name)
+                type    = "editbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
+                getFunc = function() return CT.SV.toggles.mitigationDestroyPrefix end,
+                setFunc = function(v) CT.SV.toggles.mitigationDestroyPrefix = v end,
+                disabled = function() return not (CT.SV.toggles.showAlertMitigation and CT.SV.toggles.showAlertDestroy) end,
+                default = CT.D.toggles.mitigationDestroyPrefix,
+            },
+            {
+                -- Prefix Destroy (Name)
+                type    = "editbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
+                getFunc = function() return CT.SV.toggles.mitigationDestroyPrefixN end,
+                setFunc = function(v) CT.SV.toggles.mitigationDestroyPrefixN = v end,
+                disabled = function() return not (CT.SV.toggles.showAlertMitigation and CT.SV.toggles.showAlertDestroy) end,
+                default = CT.D.toggles.mitigationDestroyPrefixN,
+            },
+            {
+                -- Destroy Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP),
+                getFunc = function() return unpack(CT.SV.colors.alertDestroy) end,
+                setFunc = function(r, g, b, a) CT.SV.colors.alertDestroy = { r, g, b, a } CT.SetAlertColors() end,
+                default = {r=CT.D.colors.alertDestroy[1], g=CT.D.colors.alertDestroy[2], b=CT.D.colors.alertDestroy[3]}
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON),
+                width = "full",
+            },
+            {
+                -- Summon Enable
+                type    = "checkbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON)),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_SUMMON_TP),
+                getFunc = function() return CT.SV.toggles.showAlertSummon end,
+                setFunc = function(v) CT.SV.toggles.showAlertSummon = v end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
+                default = CT.D.toggles.showAlertSummon,
+            },
+            {
+                -- Summon Format
+                type    = "editbox",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SUMMON_TP),
+                getFunc = function() return CT.SV.formats.alertSummon end,
+                setFunc = function(v) CT.SV.formats.alertSummon = v end,
+                isMultiline = false,
+                default = CT.D.formats.alertSummon,
+            },
+            {
+                -- Prefix Summon (No Name)
+                type    = "editbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
+                getFunc = function() return CT.SV.toggles.mitigationSummonPrefix end,
+                setFunc = function(v) CT.SV.toggles.mitigationSummonPrefix = v end,
+                disabled = function() return not (CT.SV.toggles.showAlertMitigation and CT.SV.toggles.showAlertSummon) end,
+                default = CT.D.toggles.mitigationSummonPrefix,
+            },
+            {
+                -- Prefix Summon (Name)
+                type    = "editbox",
+                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
+                getFunc = function() return CT.SV.toggles.mitigationSummonPrefixN end,
+                setFunc = function(v) CT.SV.toggles.mitigationSummonPrefixN = v end,
+                disabled = function() return not (CT.SV.toggles.showAlertMitigation and CT.SV.toggles.showAlertSummon) end,
+                default = CT.D.toggles.mitigationSummonPrefixN,
+            },
+            {
+                -- Summon Color
+                type    = "colorpicker",
+                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_SUMMON_TP),
+                getFunc = function() return unpack(CT.SV.colors.alertSummon) end,
+                setFunc = function(r, g, b, a) CT.SV.colors.alertSummon = { r, g, b, a } CT.SetAlertColors() end,
+                default = {r=CT.D.colors.alertSummon[1], g=CT.D.colors.alertSummon[2], b=CT.D.colors.alertSummon[3]}
             },
         },
     }
