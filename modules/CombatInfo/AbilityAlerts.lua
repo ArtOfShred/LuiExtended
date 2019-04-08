@@ -266,8 +266,6 @@ end
 
 function CI.CrowdControlColorSetup(crowdControl)
 
-    d(crowdControl)
-
     if crowdControl == ccTypes.STUN then
         return CI.SV.alerts.colors.stunColor
     elseif crowdControl == ccTypes.DISORIENT then
