@@ -48,7 +48,7 @@ function LUIE.CreateTimestamp(timeStr, formatStr)
 end
 
 -- FormatMessage helper function
-function LUIE.FormatMessage(msg, doTimestamp)
+local function FormatMessage(msg, doTimestamp)
     local msg = msg or ""
     if doTimestamp then
         local timestring = GetTimeString()
@@ -62,7 +62,7 @@ end
 function LUIE.PrintToChat(msg, isSystem)
     if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
         if not LUIE.ChatAnnouncements.SV.ChatBypass and CHAT_SYSTEM.primaryContainer then
-            local msg = LUIE.FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+            local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
             -- Add timestamps if bypass is not enabled
             CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
         else
@@ -73,7 +73,7 @@ function LUIE.PrintToChat(msg, isSystem)
         -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
         if CHAT_SYSTEM.primaryContainer then
             if isSystem and LUIE.ChatAnnouncements.SV.ChatSystemAll then
-                local msg = LUIE.FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+                local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
                 -- Post as a System message so that it can appear in multiple tabs.
                 CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
             else
@@ -81,7 +81,7 @@ function LUIE.PrintToChat(msg, isSystem)
                 for i = 1, #chatContainer.windows do
                     if LUIE.ChatAnnouncements.SV.ChatTab[i] == true then
                         local chatWindow = CHAT_SYSTEM.primaryContainer["windows"][i]
-                        local msg = LUIE.FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+                        local msg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
                         chatContainer:AddEventMessageToWindow(chatWindow, msg, CHAT_CATEGORY_SYSTEM)
                     end
                 end
