@@ -47,9 +47,59 @@ function CI.CreateAlertFrame()
     local anchor = { CENTER, CENTER, 0, 0, uiTlw.AlertFrame }
     local height = (barFontSize * 2)
     for i = 1, 3 do
-        local alert = UI.Label( uiTlw.AlertFrame, anchor, { 1400, height }, nil, g_barFont, "", false, "LUIE_Alert" .. i )
-        alert.available = true
+        local alert = UI.Control( uiTlw.AlertFrame, anchor, { nil, height }, false, "LUIE_Alert" .. i )
+
+        alert.data = {
+            ["available"] = true,
+            ["textName"] = "TEST NAME",
+            ["textMitigation"] = "TEST MITIGATION MESSAGE",
+            ["duration"] = 0,
+            ["showDuration"] = false,
+            ["ccType"] = nil,
+        }
+
+        alert.name = UI.Label( alert, nil, nil, nil, g_barFont, alert.data.textName, false )
+        alert.name:SetAnchor(LEFT, alert, LEFT, 0, 0 )
+
+        local nameWidth = alert.name:GetTextWidth()
+
+        alert.icon = UI.Backdrop( alert.name, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
+        alert.icon:SetDimensions(40, 40)
+        alert.icon:SetAnchor(LEFT, alert.name, RIGHT, 6, 0 )
+
+        alert.icon.back = UI.Texture( alert.icon, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false )
+        alert.icon.back:SetAnchor(TOPLEFT, alert.icon, TOPLEFT)
+        alert.icon.back:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT)
+
+        alert.icon.iconbg = UI.Texture( alert.icon, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false )
+        alert.icon.iconbg = UI.Backdrop( alert.icon, nil, nil, {0,0,0,0.9}, {0,0,0,0.9}, false )
+        alert.icon.iconbg:SetDrawLevel(DL_CONTROLS)
+        alert.icon.iconbg:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 3, 3)
+        alert.icon.iconbg:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
+
+        alert.icon.cd = windowManager:CreateControl(nil, alert.icon, CT_COOLDOWN)
+        alert.icon.cd:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 1, 1 )
+        alert.icon.cd:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -1, -1 )
+        alert.icon.cd:SetFillColor( 0,1,0,1 )
+        alert.icon.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false )
+        alert.icon.cd:SetDrawLayer(DL_BACKGROUND)
+
+        alert.icon.icon = UI.Texture( alert.icon, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false )
+        alert.icon.icon:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 3, 3 )
+        alert.icon.icon:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3 )
+
+        alert.mitigation = UI.Label( alert.icon, nil, nil, nil, g_barFont, alert.data.textMitigation, false )
+        alert.mitigation:SetAnchor(LEFT, alert.icon, RIGHT, 6, 0 )
+
+        local mitigationWidth = alert.name:GetTextWidth()
+
+        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth(), 40 )
+        --alert:SetAnchor(CENTER, uiTlw.AlertFrame, CENTER, 0 , 0)
+        alert:SetHidden(false)
+        alert.icon:SetHidden(false)
+
         anchor = { TOP, BOTTOM, 0, 0, alert }
+
     end
 
     local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.AlertFrame, 0, 0)
@@ -81,29 +131,29 @@ function CI.AlertUpdate()
     for i = 1, 3 do
         if _G["LUIE_Alert" .. i].duration then
 
-            if i > 1 and _G["LUIE_Alert" .. i - 1].available == true then
-                _G["LUIE_Alert" .. i - 1].duration = _G["LUIE_Alert" .. i].duration
-                _G["LUIE_Alert" .. i - 1].showDuration = _G["LUIE_Alert" .. i].showDuration
-                _G["LUIE_Alert" .. i - 1].text = _G["LUIE_Alert" .. i].text
-                _G["LUIE_Alert" .. i - 1].available = false
+            if i > 1 and _G["LUIE_Alert" .. i - 1].data.available == true then
+                _G["LUIE_Alert" .. i - 1].data.duration = _G["LUIE_Alert" .. i].data.duration
+                _G["LUIE_Alert" .. i - 1].data.showDuration = _G["LUIE_Alert" .. i].data.showDuration
+                _G["LUIE_Alert" .. i - 1].data.textMitigation = _G["LUIE_Alert" .. i].data.textMitigation
+                _G["LUIE_Alert" .. i - 1].data.available = false
                 _G["LUIE_Alert" .. i - 1]:SetHidden(false)
-                _G["LUIE_Alert" .. i].available = true
+                _G["LUIE_Alert" .. i].data.available = true
                 _G["LUIE_Alert" .. i]:SetHidden(true)
-                _G["LUIE_Alert" .. i].text = nil
-                _G["LUIE_Alert" .. i].duration = nil
-                _G["LUIE_Alert" .. i].showDuration = nil
+                _G["LUIE_Alert" .. i].data.textMitigation = nil
+                _G["LUIE_Alert" .. i].data.duration = nil
+                _G["LUIE_Alert" .. i].data.showDuration = nil
                 i = i - 1
             end
 
-            _G["LUIE_Alert" .. i].duration = _G["LUIE_Alert" .. i].duration - 100
-            if _G["LUIE_Alert" .. i].showDuration then
-                _G["LUIE_Alert" .. i]:SetText(_G["LUIE_Alert" .. i].text .. " " .. strfmt("%.1f", _G["LUIE_Alert" .. i].duration/1000) )
+            _G["LUIE_Alert" .. i].data.duration = _G["LUIE_Alert" .. i].data.duration - 100
+            if _G["LUIE_Alert" .. i].data.showDuration then
+                _G["LUIE_Alert" .. i].mitigation:SetText(_G["LUIE_Alert" .. i].textMitigation .. " " .. strfmt("%.1f", _G["LUIE_Alert" .. i].data.duration/1000) )
             end
-            if _G["LUIE_Alert" .. i].duration <= 0 then
+            if _G["LUIE_Alert" .. i].data.duration <= 0 then
                 _G["LUIE_Alert" .. i]:SetHidden(true)
-                _G["LUIE_Alert" .. i].text = nil
-                _G["LUIE_Alert" .. i].duration = nil
-                _G["LUIE_Alert" .. i].available = true
+                _G["LUIE_Alert" .. i].data.textMitigation = nil
+                _G["LUIE_Alert" .. i].data.duration = nil
+                _G["LUIE_Alert" .. i].data.available = true
             end
         end
     end
@@ -111,26 +161,32 @@ end
 
 local drawLocation = 1
 
-function CI.SetupSingleAlertFrame(text, duration, showDuration)
+function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration)
     for i = 1, 3 do
-        if _G["LUIE_Alert" .. i].available then
-            _G["LUIE_Alert" .. i].text = text
-            _G["LUIE_Alert" .. i].duration = duration
-            _G["LUIE_Alert" .. i].showDuration = showDuration
-            _G["LUIE_Alert" .. i]:SetText(showDuration and (text .. " " .. strfmt("%.1f", duration/1000)) or text)
+        if _G["LUIE_Alert" .. i].data.available then
+            _G["LUIE_Alert" .. i].data.textMitigation =  textMitigation
+            _G["LUIE_Alert" .. i].data.textName =  textName
+            _G["LUIE_Alert" .. i].icon.icon:SetTexture(abilityIcon)
+            _G["LUIE_Alert" .. i].data.duration = duration
+            _G["LUIE_Alert" .. i].data.showDuration = showDuration
+            _G["LUIE_Alert" .. i].name:SetText(textName)
+            _G["LUIE_Alert" .. i].mitigation:SetText(showDuration and (textMitigation .. " " .. strfmt("%.1f", duration/1000)) or textMitigation)
             _G["LUIE_Alert" .. i]:SetHidden(false)
-            _G["LUIE_Alert" .. i].available = false
+            _G["LUIE_Alert" .. i].data.available = false
             drawLocation = 1 -- As long as this text is filling an available spot, we reset the draw over location to slot 1. If all slots are filled then the draw over code below will cycle and handle abilities.
             return
         end
     end
     -- If no alert frame is available, then draw over in the first spot
-    _G["LUIE_Alert" .. drawLocation].text = text
-    _G["LUIE_Alert" .. drawLocation].duration = duration
-    _G["LUIE_Alert" .. drawLocation].showDuration = showDuration
-    _G["LUIE_Alert" .. drawLocation]:SetText(showDuration and (text .. " " .. strfmt("%.1f", duration/1000)) or text)
+    _G["LUIE_Alert" .. drawLocation].data.textMitigation = textMitigation
+    _G["LUIE_Alert" .. drawLocation].data.textName = textName
+    _G["LUIE_Alert" .. drawLocation].icon.icon:SetTexture(abilityIcon)
+    _G["LUIE_Alert" .. drawLocation].data.duration = duration
+    _G["LUIE_Alert" .. drawLocation].data.showDuration = showDuration
+    _G["LUIE_Alert" .. drawLocation].name:SetText(textName)
+    _G["LUIE_Alert" .. drawLocation].mitigation:SetText(showDuration and (textMitigation .. " " .. strfmt("%.1f", duration/1000)) or textMitigation)
     _G["LUIE_Alert" .. drawLocation]:SetHidden(false)
-    _G["LUIE_Alert" .. drawLocation].available = false
+    _G["LUIE_Alert" .. drawLocation].data.available = false
     drawLocation = drawLocation +1
     if drawLocation > 3 then
         drawLocation = 1
@@ -160,7 +216,6 @@ function CI.ProcessAlert(abilityId, unitName)
     -- Get Ability Name & Icon
     local abilityName = GetAbilityName(abilityId)
     local abilityIcon = GetAbilityIcon(abilityId)
-    local formattedIcon
     unitName = zo_strformat("<<t:1>>", unitName)
 
     -- Handle effects that override by UnitName
@@ -207,8 +262,6 @@ function CI.ProcessAlert(abilityId, unitName)
         end
     end
 
-    formattedIcon = zo_iconFormat(abilityIcon, 32, 32)
-
     local isDirect
     local block
     local blockstagger
@@ -227,22 +280,25 @@ function CI.ProcessAlert(abilityId, unitName)
         isDirect = true
     end
 
-    if AlertT[abilityId].block and (S.toggles.showAlertBlock) == true then
-        if AlertT[abilityId].bs then
-            blockstagger = true
-        else
-            block = true
+    if (S.toggles.showAlertMitigate) == true then
+        if AlertT[abilityId].block == true then
+            if AlertT[abilityId].bs then
+                blockstagger = true
+            else
+                block = true
+            end
+        end
+        if AlertT[abilityId].dodge == true then
+            dodge = true
+        end
+        if AlertT[abilityId].avoid == true then
+            avoid = true
+        end
+        if AlertT[abilityId].interrupt == true then
+            interrupt = true
         end
     end
-    if AlertT[abilityId].dodge and (S.toggles.showAlertDodge) == true then
-        dodge = true
-    end
-    if AlertT[abilityId].avoid and (S.toggles.showAlertDodge) == true then
-        avoid = true
-    end
-    if AlertT[abilityId].interrupt and (S.toggles.showAlertInterrupt) == true then
-        interrupt = true
-    end
+
     if AlertT[abilityId].unmit and (S.toggles.showAlertUnmit) == true then
         unmit = true
     end
@@ -259,36 +315,8 @@ function CI.ProcessAlert(abilityId, unitName)
         duration = AlertT[abilityId].duration
     end
 
-    if S.toggles.mitigationType == "Single Line" and not (power == true or destroy == true or summon == true or unmit == true) then
-        CI.OnEvent(C.alertType.SHARED, abilityName, formattedIcon, unitName, isDirect, duration, block, blockstagger, dodge, avoid, interrupt)
-    elseif S.toggles.mitigationType == "Multiple Lines" or (power == true or destroy == true or summon == true or unmit == true) then
-        if block and not blockstagger then
-            CI.OnEvent(C.alertType.BLOCK, abilityName, formattedIcon, unitName, isDirect, duration)
-        end
-        if blockstagger then
-            CI.OnEvent(C.alertType.BLOCKSTAGGER, abilityName, formattedIcon, unitName, isDirect, duration)
-        end
-        if dodge then
-            CI.OnEvent(C.alertType.DODGE, abilityName, formattedIcon, unitName, isDirect, duration)
-        end
-        if avoid then
-            CI.OnEvent(C.alertType.AVOID, abilityName, formattedIcon, unitName, isDirect, duration)
-        end
-        if interrupt then
-            CI.OnEvent(C.alertType.INTERRUPT, abilityName, formattedIcon, unitName, isDirect, duration)
-        end
-        if unmit then
-            CI.OnEvent(C.alertType.UNMIT, abilityName, formattedIcon, unitName, isDirect, duration)
-        end
-        if power then
-            CI.OnEvent(C.alertType.POWER, abilityName, formattedIcon, unitName, isDirect, duration)
-        end
-        if destroy then
-            CI.OnEvent(C.alertType.DESTROY, abilityName, formattedIcon, unitName, isDirect, duration)
-        end
-        if summon then
-            CI.OnEvent(C.alertType.SUMMON, abilityName, formattedIcon, unitName, isDirect, duration)
-        end
+    if not (power == true or destroy == true or summon == true or unmit == true) then
+        CI.OnEvent(C.alertType.SHARED, abilityName, abilityIcon, unitName, isDirect, duration, block, blockstagger, dodge, avoid, interrupt)
     end
 end
 
@@ -346,8 +374,6 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
         end
     end
 
-    local formattedIcon = zo_iconFormat(abilityIcon, 32, 32)
-
     -- NEW ALERTS
     if S.toggles.showAlertMitigation and AlertT[abilityId] then
         if sourceName ~= nil and sourceName ~= "" then
@@ -391,13 +417,6 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
         end
 
     end
-    --[[ EXPLOIT ALERT (IF WE NEED TO ADD TO ANY OFF-BALANCE)
-    if E.CombatAlertExploit[abilityId] and targetName ~= nil and targetName ~= "" and (C.isPlayer[sourceType]) and resultType == ACTION_RESULT_OFFBALANCE then
-        if (S.toggles.showAlertExploit) then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.EXPLOIT, nil)
-        end
-    end
-    ]]--
 end
 
 function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
@@ -454,8 +473,6 @@ function CI.FormatAlertString(inputFormat, params)
             return params.source or ''
         elseif (x == '%t') then
             return params.ability or ''
-        elseif (x == '%i') then
-            return params.icon or ''
         else
             return x
         end
@@ -528,92 +545,46 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, d
 			end
 		end
 
-        local stringPart1 = zo_strformat("|cffffff<<1>>|r", CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon }))
-        local stringPart2 = mitigationSuffix
-        local stringPart3 = S.toggles.hideMitigation and "" or zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt)
+        textName = zo_strformat("|cffffff<<1>>|r", CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName }))
+        textMitigation = S.toggles.hideMitigation and "" or zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt)
 
         text = zo_strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
-    --BLOCK
-    elseif (alertType == alertTypes.BLOCK) then
-        local color = CT.AlertColors.alertColorBlock
-        size = S.fontSizes.alert
-        local stringPart1 = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = mitigationSuffix
-        local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertBlock)
-        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
-    -- BLOCK STAGGER
-    elseif (alertType == alertTypes.BLOCKSTAGGER) then
-        local color = CT.AlertColors.alertColorBlock
-        size = S.fontSizes.alert
-        local stringPart1 = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = mitigationSuffix
-        local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertBlockStagger)
-        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
-    --INTERRUPT
-    elseif (alertType == alertTypes.INTERRUPT) then
-        local color = CT.AlertColors.alertColorInterrupt
-        size = S.fontSizes.alert
-        local stringPart1 = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = mitigationSuffix
-        local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertInterrupt)
-        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
-    --DODGE
-    elseif (alertType == alertTypes.DODGE) then
-        local color = CT.AlertColors.alertColorDodge
-        size = S.fontSizes.alert
-        local stringPart1 = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = mitigationSuffix
-        local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertDodge)
-        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
-    -- AVOID
-    elseif (alertType == alertTypes.AVOID) then
-        local color = CT.AlertColors.alertColorAvoid
-        size = S.fontSizes.alert
-        local stringPart1 = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = mitigationSuffix
-        local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertAvoid)
-        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
 	-- UNMIT
 	elseif (alertType == alertTypes.UNMIT) then
 		local color = CT.AlertColors.alertColorUnmit
 		size = S.fontSizes.alert
-		local stringPart1 = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = mitigationSuffix
-        local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertUnmit)
-		if S.toggles.mitigationType == "Single Line" then
-			text = zo_strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
-		else
-			text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
-		end
+		textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
+        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertUnmit)
+		text = zo_strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
     -- POWER
     elseif (alertType == alertTypes.POWER) then
         local color = CT.AlertColors.alertColorPower
 		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPowerPrefixN or S.toggles.mitigationPowerPrefix
         size = S.fontSizes.alert
-        local stringPart1 = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertPower)
+        textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
+        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertPower)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- DESTROY
     elseif (alertType == alertTypes.DESTROY) then
         local color = CT.AlertColors.alertColorDestroy
 		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationDestroyPrefixN or S.toggles.mitigationDestroyPrefix
         size = S.fontSizes.alert
-        local stringPart1 = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertDestroy)
+        textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
+        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertDestroy)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- SUMMON
     elseif (alertType == alertTypes.SUMMON) then
         local color = CT.AlertColors.alertColorSummon
 		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationSummonPrefixN or S.toggles.mitigationSummonPrefix
         size = S.fontSizes.alert
-        local stringPart1 = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertSummon)
+        textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
+        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertSummon)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     end
 
     local showDuration = duration and true or false
     if not duration then duration = 4000 end
 
-    CI.SetupSingleAlertFrame(text, duration, showDuration)
+    CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, ccType)
 
 end

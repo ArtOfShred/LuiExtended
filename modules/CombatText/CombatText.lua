@@ -142,7 +142,6 @@ CT.D = {
 
         --Alerts
         showAlertMitigation         = true,
-        mitigationType              = "Single Line",
         hideMitigation              = true,
         mitigationPrefix            = "%t %i",
         mitigationPrefixN           = "%n - %t %i",
@@ -162,10 +161,8 @@ CT.D = {
         mitigationRank1             = true,
         mitigationDungeon           = true,
 
-        showAlertBlock              = true,
-        showAlertInterrupt          = true,
-        showAlertDodge              = true,
-        showAlertAvoid              = true,
+        showAlertMitigate           = true, -- TODO -- Replaces Block/Interrupt/Dodge
+
 		showAlertUnmit				= true,
         showAlertPower              = true,
         showAlertDestroy            = true,

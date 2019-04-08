@@ -91,46 +91,6 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
         local stringPart3 = S.toggles.hideMitigation and "" or zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt)
 
         text = zo_strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
-    --BLOCK
-    elseif (alertType == alertTypes.BLOCK) then
-        local color = CT.AlertColors.alertColorBlock
-        size = S.fontSizes.alert
-        local stringPart1 = self:FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = mitigationSuffix
-        local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertBlock)
-        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
-    -- BLOCK STAGGER
-    elseif (alertType == alertTypes.BLOCKSTAGGER) then
-        local color = CT.AlertColors.alertColorBlock
-        size = S.fontSizes.alert
-        local stringPart1 = self:FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = mitigationSuffix
-        local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertBlockStagger)
-        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
-    --INTERRUPT
-    elseif (alertType == alertTypes.INTERRUPT) then
-        local color = CT.AlertColors.alertColorInterrupt
-        size = S.fontSizes.alert
-        local stringPart1 = self:FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = mitigationSuffix
-        local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertInterrupt)
-        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
-    --DODGE
-    elseif (alertType == alertTypes.DODGE) then
-        local color = CT.AlertColors.alertColorDodge
-        size = S.fontSizes.alert
-        local stringPart1 = self:FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = mitigationSuffix
-        local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertDodge)
-        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
-    -- AVOID
-    elseif (alertType == alertTypes.AVOID) then
-        local color = CT.AlertColors.alertColorAvoid
-        size = S.fontSizes.alert
-        local stringPart1 = self:FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
-        local stringPart2 = mitigationSuffix
-        local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertAvoid)
-        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
 	-- UNMIT
 	elseif (alertType == alertTypes.UNMIT) then
 		local color = CT.AlertColors.alertColorUnmit
@@ -138,11 +98,7 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
 		local stringPart1 = self:FormatAlertString(prefix, { source = sourceName, ability = abilityName, icon = abilityIcon })
         local stringPart2 = mitigationSuffix
         local stringPart3 = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertUnmit)
-		if S.toggles.mitigationType == "Single Line" then
-			text = zo_strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
-		else
-			text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
-		end
+		text = zo_strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
     -- POWER
     elseif (alertType == alertTypes.POWER) then
         local color = CT.AlertColors.alertColorPower

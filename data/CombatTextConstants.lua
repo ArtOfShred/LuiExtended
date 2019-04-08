@@ -54,7 +54,6 @@ local CombatTextConstants = {
         [DAMAGE_TYPE_POISON]                = true,
     },
     -- Mitigation
-    mitigationType                          = { "Single Line", "Multiple Lines" },
     isMiss = {
         [ACTION_RESULT_MISS]                = true,
     },

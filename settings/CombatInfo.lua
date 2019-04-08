@@ -717,24 +717,13 @@ function CI.CreateSettings()
                 default = CT.D.toggles.showAlertMitigation,
             },
             {
-                -- Mitigation Method
-                type    = "dropdown",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP),
-                choices = CTC.mitigationType,
-                getFunc = function() return CT.SV.toggles.mitigationType end,
-                setFunc = function(v) CT.SV.toggles.mitigationType = v end,
-                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
-                default = CT.D.toggles.mitigationType,
-            },
-            {
                 -- Hide Mitigation Grouped Alerts
                 type    = "checkbox",
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP),
                 getFunc = function() return CT.SV.toggles.hideMitigation end,
                 setFunc = function(v) CT.SV.toggles.hideMitigation = v end,
-                disabled = function() return not (CT.SV.toggles.showAlertMitigation and CT.SV.toggles.mitigationType == "Single Line") end,
+                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
                 default = CT.D.toggles.hideMitigation,
             },
             {
@@ -828,18 +817,24 @@ function CI.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK),
+                name = "MITGATION ALERTS",
                 width = "full",
             },
+
             {
                 -- Block Enable
                 type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_BLOCK_TP),
-                getFunc = function() return CT.SV.toggles.showAlertBlock end,
-                setFunc = function(v) CT.SV.toggles.showAlertBlock = v end,
+                name    = "ENABLE MITIGATION ALERTS (TODO)",
+                tooltip = "TODO ADD A TP",
+                getFunc = function() return CT.SV.toggles.showAlertMitigate end,
+                setFunc = function(v) CT.SV.toggles.showAlertMitigate = v end,
                 disabled = function() return not CT.SV.toggles.showAlertMitigation end,
-                default = CT.D.toggles.showAlertBlock,
+                default = CT.D.toggles.showAlertMitigate,
+            },
+            {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK),
+                width = "full",
             },
             {
                 -- Block Format
@@ -878,16 +873,6 @@ function CI.CreateSettings()
                 width = "full",
             },
             {
-                -- Dodge Enable
-                type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DODGE)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DODGE_TP),
-                getFunc = function() return CT.SV.toggles.showAlertDodge end,
-                setFunc = function(v) CT.SV.toggles.showAlertDodge = v end,
-                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
-                default = CT.D.toggles.showAlertDodge,
-            },
-            {
                 -- Dodge  Format
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
@@ -912,16 +897,6 @@ function CI.CreateSettings()
                 width = "full",
             },
             {
-                -- Avoid Enable
-                type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_AVOID)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_AVOID_TP),
-                getFunc = function() return CT.SV.toggles.showAlertAvoid end,
-                setFunc = function(v) CT.SV.toggles.showAlertAvoid = v end,
-                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
-                default = CT.D.toggles.showAlertAvoid,
-            },
-            {
                 -- Avoid Format
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
@@ -944,16 +919,6 @@ function CI.CreateSettings()
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT),
                 width = "full",
-            },
-            {
-                -- Interrupt Enable
-                type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_UNMIT_TP),
-                getFunc = function() return CT.SV.toggles.showAlertInterrupt end,
-                setFunc = function(v) CT.SV.toggles.showAlertInterrupt = v end,
-                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
-                default = CT.D.toggles.showAlertInterrupt,
             },
             {
                 -- Interrupt Format

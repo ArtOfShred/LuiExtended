@@ -134,22 +134,25 @@ function CTL:ProcessAlert(abilityId, unitName)
         isDirect = true
     end
 
-    if AlertT[abilityId].block and (S.toggles.showAlertBlock) == true then
-        if AlertT[abilityId].bs then
-            blockstagger = true
-        else
-            block = true
+    if (S.toggles.showAlertMitigate) == true then
+        if AlertT[abilityId].block == true then
+            if AlertT[abilityId].bs then
+                blockstagger = true
+            else
+                block = true
+            end
+        end
+        if AlertT[abilityId].dodge == true then
+            dodge = true
+        end
+        if AlertT[abilityId].avoid == true then
+            avoid = true
+        end
+        if AlertT[abilityId].interrupt == true then
+            interrupt = true
         end
     end
-    if AlertT[abilityId].dodge and (S.toggles.showAlertDodge) == true then
-        dodge = true
-    end
-    if AlertT[abilityId].avoid and (S.toggles.showAlertDodge) == true then
-        avoid = true
-    end
-    if AlertT[abilityId].interrupt and (S.toggles.showAlertInterrupt) == true then
-        interrupt = true
-    end
+
     if AlertT[abilityId].unmit and (S.toggles.showAlertUnmit) == true then
         unmit = true
     end
@@ -163,36 +166,8 @@ function CTL:ProcessAlert(abilityId, unitName)
         summon = true
     end
 
-    if S.toggles.mitigationType == "Single Line" and not (power == true or destroy == true or summon == true or unmit == true) then
+    if not (power == true or destroy == true or summon == true or unmit == true) then
         self:TriggerEvent(C.eventType.ALERT, C.alertType.SHARED, abilityName, formattedIcon, unitName, isDirect, block, blockstagger, dodge, avoid, interrupt)
-    elseif S.toggles.mitigationType == "Multiple Lines" or (power == true or destroy == true or summon == true or unmit == true) then
-        if block and not blockstagger then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, abilityName, formattedIcon, unitName, isDirect)
-        end
-        if blockstagger then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCKSTAGGER, abilityName, formattedIcon, unitName, isDirect)
-        end
-        if dodge then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.DODGE, abilityName, formattedIcon, unitName, isDirect)
-        end
-        if avoid then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.AVOID, abilityName, formattedIcon, unitName, isDirect)
-        end
-        if interrupt then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, abilityName, formattedIcon, unitName, isDirect)
-        end
-        if unmit then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.UNMIT, abilityName, formattedIcon, unitName, isDirect)
-        end
-        if power then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.POWER, abilityName, formattedIcon, unitName, isDirect)
-        end
-        if destroy then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.DESTROY, abilityName, formattedIcon, unitName, isDirect)
-        end
-        if summon then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.SUMMON, abilityName, formattedIcon, unitName, isDirect)
-        end
     end
 end
 
