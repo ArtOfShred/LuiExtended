@@ -17,7 +17,6 @@ local printToChat   = LUIE.PrintToChat
 local strfmt        = string.format
 local strformat     = zo_strformat
 local callLater     = zo_callLater
-local iconFormat    = zo_iconFormat
 
 local eventManager  = EVENT_MANAGER
 local sceneManager  = SCENE_MANAGER
@@ -465,7 +464,7 @@ function SCB.AddToCustomList(list, input)
     if id and id > 0 then
         local name = strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil and name ~= "" then
-            local icon = iconFormat(GetAbilityIcon(id), 16, 16)
+            local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
             printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_ID), icon, id, name, listRef), true)
@@ -490,7 +489,7 @@ function SCB.RemoveFromCustomList(list, input)
     if id and id > 0 then
         local name = strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil and name ~= "" then
-            local icon = iconFormat(GetAbilityIcon(id), 16, 16)
+            local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
             printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)

@@ -6,11 +6,12 @@
 LUIE.CombatTextCombatEllipseEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextCombatEllipseEventViewer
 
-local strfmt     = string.format
-
-local AbbreviateNumber = LUIE.AbbreviateNumber
-local callLater = zo_callLater
 local C = LUIE.CombatTextConstants
+local AbbreviateNumber = LUIE.AbbreviateNumber
+
+local strfmt = string.format
+local callLater = zo_callLater
+
 local poolTypes = C.poolType
 
 function CTV:New(...)

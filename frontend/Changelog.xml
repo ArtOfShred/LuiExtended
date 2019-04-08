@@ -5,7 +5,7 @@
 
 <GuiXml>
     <Controls>
-        <TopLevelControl name="LUIEChangelog" mouseEnabled="true" movable="true" clampedToScreen="true" hidden="true" tier="HIGH" layer="CONTROLS">
+        <TopLevelControl name="LUIE_Changelog" mouseEnabled="true" movable="true" clampedToScreen="true" hidden="true" tier="HIGH" layer="CONTROLS">
             <Dimensions x="900" y="700" />
             <Anchor point="CENTER" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-120" />
             <Controls>
@@ -39,8 +39,8 @@
                 <Label name="$(parent)Text" font="ZoFontGame" wrapMode="ELLIPSIS">
                     <Dimensions x="870" />
                     <OnInitialized>
-                        self:SetParent(GetControl("LUIEChangelogContainerScrollChild"))
-                        self:SetAnchor(TOPLEFT, LUIEChangelogContainerScrollChild, TOPLEFT, 4, 4)
+                        self:SetParent(GetControl("LUIE_ChangelogContainerScrollChild"))
+                        self:SetAnchor(TOPLEFT, LUIE_ChangelogContainerScrollChild, TOPLEFT, 4, 4)
                     </OnInitialized>
                 </Label>
 

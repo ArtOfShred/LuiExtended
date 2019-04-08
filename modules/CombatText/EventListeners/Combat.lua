@@ -9,6 +9,7 @@ local CTL = LUIE.CombatTextCombatEventListener
 local C = LUIE.CombatTextConstants
 local E = LUIE.Effects
 local AlertT = LUIE.AlertTable
+
 local callLater = zo_callLater
 
 local isWarned = {

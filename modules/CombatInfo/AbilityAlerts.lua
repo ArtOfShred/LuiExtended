@@ -3,30 +3,32 @@
     License: The MIT License (MIT)
 --]]
 
-local CI            = LUIE.CombatInfo
-local UI            = LUIE.UI
-local E             = LUIE.Effects
-local AlertT        = LUIE.AlertTable
+local CI        = LUIE.CombatInfo
+local UI        = LUIE.UI
+local E         = LUIE.Effects
+local AlertT    = LUIE.AlertTable
+
+local strfmt = string.format
+local strformat = zo_strformat
+
 local callLater = zo_callLater
-local refireDelay = { }
 
 local eventManager  = EVENT_MANAGER
 local sceneManager  = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
-local strfmt = string.format
-local strformat = zo_strformat
 
 local moduleName    = LUIE.name .. "_CombatInfo"
 
-uiTlw         = {} -- GUI
+local uiTlw = {} -- GUI
+local refireDelay = {}
 local g_alertFont -- Font for Alerts
 
 local alertTypes = {
-    UNMIT                       = "LUIE_ALERT_TYPE_UNMIT",
-    DESTROY                     = "LUIE_ALERT_TYPE_DESTROY",
-    POWER                       = "LUIE_ALERT_TYPE_POWER",
-    SUMMON                      = "LUIE_ALERT_TYPE_SUMMON",
-    SHARED                      = "LUIE_ALERT_TYPE_SHARED",
+    UNMIT    = "LUIE_ALERT_TYPE_UNMIT",
+    DESTROY  = "LUIE_ALERT_TYPE_DESTROY",
+    POWER    = "LUIE_ALERT_TYPE_POWER",
+    SUMMON   = "LUIE_ALERT_TYPE_SUMMON",
+    SHARED   = "LUIE_ALERT_TYPE_SHARED",
 }
 
 local ccTypes = {
@@ -56,7 +58,7 @@ end
 
 -- Create Alert Frame - basic setup for now
 function CI.CreateAlertFrame()
-
+    -- Apply font for alerts
     CI.ApplyFontAlert()
 
     -- Create Top Level Controls
@@ -113,7 +115,6 @@ function CI.CreateAlertFrame()
         alert.icon:SetHidden(false)
 
         anchor = { TOP, BOTTOM, 0, 0, alert }
-
     end
 
     uiTlw.alertFrame:SetDimensions(500, height * 3)
@@ -128,6 +129,7 @@ function CI.CreateAlertFrame()
             self.preview.anchorLabel:SetText(strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
         end)
     end
+
     -- Callback used to save new position of frames
     local tlwOnMoveStop = function(self)
         eventManager:UnregisterForUpdate( moduleName .. "previewMove" )
@@ -170,7 +172,6 @@ function CI.CreateAlertFrame()
     end
 
     eventManager:RegisterForUpdate(moduleName.."CI_ALERT_UPDATE", 100, CI.AlertUpdate )
-
 end
 
 function CI.ResetAlertFramePosition()
@@ -265,7 +266,6 @@ function CI.AlertUpdate()
 end
 
 function CI.CrowdControlColorSetup(crowdControl)
-
     if crowdControl == ccTypes.STUN then
         return CI.SV.alerts.colors.stunColor
     elseif crowdControl == ccTypes.DISORIENT then
@@ -287,7 +287,6 @@ end
 
 local drawLocation = 1
 function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl)
-
     local color = CI.CrowdControlColorSetup(crowdControl)
 
     for i = 1, 3 do
@@ -478,11 +477,9 @@ function CI.ProcessAlert(abilityId, unitName)
 end
 
 function CI.AlertEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-
     local S = CI.SV.alerts
 
     if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and AlertT[abilityId] and AlertT[abilityId].auradetect then
-
         if changeType == EFFECT_RESULT_FADED then return end
 
         -- Don't duplicate events if unitTag is player and in a group.
@@ -491,12 +488,10 @@ function CI.AlertEffectChanged(eventCode, changeType, effectSlot, effectName, un
         if changeType == EFFECT_RESULT_UPDATED and AlertT[abilityId].ignoreRefresh then return end
 
         callLater(function() CI.ProcessAlert(abilityId, unitName) end, 50)
-
     end
 end
 
 function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
-
     local S = CI.SV.alerts
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
     local abilityIcon = GetAbilityIcon(abilityId)
@@ -558,7 +553,6 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
             if AlertT[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
 
             if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].unmit or AlertT[abilityId].power or AlertT[abilityId].destroy or AlertT[abilityId].summon then
-
                 -- Filter by priority
                 if (S.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not S.toggles.mitigationDungeon then
                     if AlertT[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
@@ -567,16 +561,12 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
                 end
 
                 callLater(function() CI.ProcessAlert(abilityId, sourceName) end, 50)
-
             end
-
         end
-
     end
 end
 
 function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
-
     local S = CI.SV.alerts
 
     -- NEW ALERTS
@@ -606,7 +596,6 @@ function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGr
             if AlertT[abilityId].auradetect then return end -- Don't create a duplicate warning if aura detection already handles this.
             if AlertT[abilityId].noSelf and targetName == LUIE.PlayerNameRaw then return end -- Don't create alert for self in cases where this is true.
 
-
             if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].unmit or AlertT[abilityId].power or AlertT[abilityId].destroy or AlertT[abilityId].summon then
                 -- Filter by priority
                 if (S.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not S.toggles.mitigationDungeon then
@@ -616,7 +605,6 @@ function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGr
                 end
 
                 callLater(function() CI.ProcessAlert(abilityId, sourceName) end, 50)
-
             end
         end
     end
@@ -642,7 +630,6 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, c
 	local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
 
     if (alertType == alertTypes.SHARED) then
-
         local spacer = "-"
         local stringBlock
         local stringDodge
@@ -729,7 +716,6 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, c
 
     CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl)
     CI.RealignAlerts()
-
 end
 
 -- Updates local variables with new font

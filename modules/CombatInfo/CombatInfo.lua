@@ -13,14 +13,14 @@ local E             = LUIE.Effects
 local CBT           = LUIE.CastBarTable
 local A             = LUIE.GetAbility()
 local printToChat   = LUIE.PrintToChat
+
 local strfmt        = string.format
 local strformat     = zo_strformat
+local callLater     = zo_callLater
 
 local eventManager  = EVENT_MANAGER
 local sceneManager  = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
-
-local callLater     = zo_callLater
 
 local moduleName    = LUIE.name .. "_CombatInfo"
 
@@ -71,11 +71,9 @@ CI.D = {
     CastBarFontSize                  = 16,
     CastBarGradientC1                = { 0, 47/255, 130/255 },
     CastBarGradientC2                = { 82/255, 215/255, 1 },
-
     AlertFontFace                   = "Univers 67",
     AlertFontStyle                  = "soft-shadow-thick",
     AlertFontSize                   = 32,
-
     alerts = {
         toggles = {
             --Alerts
@@ -83,12 +81,12 @@ CI.D = {
             hideMitigation              = true,
             mitigationPrefix            = "%t",
             mitigationPrefixN           = "%n - %t",
-            mitigationPowerPrefix       = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER),
-            mitigationPowerPrefixN      = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER_N),
-            mitigationDestroyPrefix     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY),
-            mitigationDestroyPrefixN    = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY_N),
-            mitigationSummonPrefix      = GetString(SI_LUIE_CT_MITIGATION_FORMAT_SUMMON),
-            mitigationSummonPrefixN     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_SUMMON_N),
+            mitigationPowerPrefix       = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER),
+            mitigationPowerPrefixN      = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER_N),
+            mitigationDestroyPrefix     = GetString(SI_LUIE_CI_MITIGATION_FORMAT_DESTROY),
+            mitigationDestroyPrefixN    = GetString(SI_LUIE_CI_MITIGATION_FORMAT_DESTROY_N),
+            mitigationSummonPrefix      = GetString(SI_LUIE_CI_MITIGATION_FORMAT_SUMMON),
+            mitigationSummonPrefixN     = GetString(SI_LUIE_CI_MITIGATION_FORMAT_SUMMON_N),
 
             -- Add Name/No Name Variants
             mitigationAura              = false,
@@ -115,7 +113,6 @@ CI.D = {
             alertPower                  = { 1, 1, 1, 1 },
             alertDestroy                = { 1, 1, 1, 1 },
             alertSummon                 = { 1, 1, 1, 1 },
-
             stunColor                   = {0.894118, 0.133333, 0.090196, 1},
             disorientColor              = {0.0313725509,0.6274510026,1, 1},
             fearColor                   = {0.5607843137, 0.0352941176, 0.9254901961, 1},
@@ -125,15 +122,15 @@ CI.D = {
             snareColor                  = {1,.6470, 0, 1},
         },
         formats = {
-            alertBlock                  = GetString(SI_LUIE_CT_BLOCK_DEFAULT),
-            alertBlockStagger           = GetString(SI_LUIE_CT_BLOCKSTAGGER_DEFAULT),
-            alertInterrupt              = GetString(SI_LUIE_CT_INTERRUPT_DEFAULT),
-            alertUnmit					= GetString(SI_LUIE_CT_UNMIT_DEFAULT),
-            alertDodge                  = GetString(SI_LUIE_CT_DODGE_DEFAULT),
-            alertAvoid                  = GetString(SI_LUIE_CT_AVOID_DEFAULT),
-            alertPower                  = GetString(SI_LUIE_CT_POWER_DEFAULT),
-            alertDestroy                = GetString(SI_LUIE_CT_DESTROY_DEFAULT),
-            alertSummon                 = GetString(SI_LUIE_CT_SUMMON_DEFAULT),
+            alertBlock                  = GetString(SI_LUIE_CI_BLOCK_DEFAULT),
+            alertBlockStagger           = GetString(SI_LUIE_CI_BLOCKSTAGGER_DEFAULT),
+            alertInterrupt              = GetString(SI_LUIE_CI_INTERRUPT_DEFAULT),
+            alertUnmit					= GetString(SI_LUIE_CI_UNMIT_DEFAULT),
+            alertDodge                  = GetString(SI_LUIE_CI_DODGE_DEFAULT),
+            alertAvoid                  = GetString(SI_LUIE_CI_AVOID_DEFAULT),
+            alertPower                  = GetString(SI_LUIE_CI_POWER_DEFAULT),
+            alertDestroy                = GetString(SI_LUIE_CI_DESTROY_DEFAULT),
+            alertSummon                 = GetString(SI_LUIE_CI_SUMMON_DEFAULT),
         },
 
         --[[
@@ -144,14 +141,12 @@ CI.D = {
 		[ACTION_RESULT_SILENCED]={0, 1, 1, 1},
 		[ACTION_RESULT_STAGGERED]={1,0.9490196109,0.1294117719,1},
         ]]
-
     },
-
 }
-CI.SV               = nil
-CI.AlertColors      = {}
-CI.CastBarUnlocked  = false
-CI.AlertFrameUnlocked  = false
+CI.SV = nil
+CI.AlertColors = {}
+CI.CastBarUnlocked = false
+CI.AlertFrameUnlocked = false
 
 local uiTlw                   = {} -- GUI
 local castbar                 = {} -- castbar
@@ -728,7 +723,6 @@ function CI.ApplyFont()
     local castbarFontSize = ( CI.SV.CastBarFontSize and CI.SV.CastBarFontSize > 0 ) and CI.SV.CastBarFontSize or 16
 
     g_castbarFont = castbarFontName .. "|" .. castbarFontSize .. "|" .. castbarFontStyle
-
 end
 
 -- Updates Proc Sound - called on initialization and menu changes
@@ -1259,93 +1253,93 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         return
     end
 
-        local icon = GetAbilityIcon(abilityId)
-        local name = strformat("<<C:1>>", GetAbilityName(abilityId))
+    local icon = GetAbilityIcon(abilityId)
+    local name = strformat("<<C:1>>", GetAbilityName(abilityId))
 
-        local duration
-        local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
-        local forceChanneled = false
-        -- Override certain things to display as a channel rather than cast. Note only works for events where we override the duration.
-        if CBT.CastChannelOverride[abilityId] then
-            channeled = true
-        end
-        if channeled then
-            duration = CBT.CastDurationFix[abilityId] or channelTime
-        else
-            duration = CBT.CastDurationFix[abilityId] or castTime
-        end
+    local duration
+    local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
+    local forceChanneled = false
+    -- Override certain things to display as a channel rather than cast. Note only works for events where we override the duration.
+    if CBT.CastChannelOverride[abilityId] then
+        channeled = true
+    end
+    if channeled then
+        duration = CBT.CastDurationFix[abilityId] or channelTime
+    else
+        duration = CBT.CastDurationFix[abilityId] or castTime
+    end
 
-        -- End the cast bar and restart if a new begin event is detected and the effect isn't a channel or fake cast
-        if result == ACTION_RESULT_BEGIN and not channeled and not CBT.CastDurationFix[abilityId] then
-            CI.StopCastBar()
-        elseif result == ACTION_RESULT_EFFECT_GAINED and channeled then
-            CI.StopCastBar()
-        end
+    -- End the cast bar and restart if a new begin event is detected and the effect isn't a channel or fake cast
+    if result == ACTION_RESULT_BEGIN and not channeled and not CBT.CastDurationFix[abilityId] then
+        CI.StopCastBar()
+    elseif result == ACTION_RESULT_EFFECT_GAINED and channeled then
+        CI.StopCastBar()
+    end
 
-        if CBT.CastChannelConvert[abilityId] then
-            channeled = true
-            forceChanneled = true
-            duration = CBT.CastDurationFix[abilityId] or castTime
-        end
+    if CBT.CastChannelConvert[abilityId] then
+        channeled = true
+        forceChanneled = true
+        duration = CBT.CastDurationFix[abilityId] or castTime
+    end
 
-        -- Some abilities cast into a channeled stun effect - we want these abilities to display the cast and channel if flagged.
-        -- Only flags on ACTION_RESULT_BEGIN so this won't interfere with the stun result that is converted to display a channeled cast.
-        if CBT.MultiCast[abilityId] then
-            if result == 2200 then
-                channeled = false
-                duration = castTime or 0
-            elseif result == 2240 then
-                CI.StopCastBar() -- Stop the cast bar when the GAINED event happens so that we can display the channel when the cast ends
+    -- Some abilities cast into a channeled stun effect - we want these abilities to display the cast and channel if flagged.
+    -- Only flags on ACTION_RESULT_BEGIN so this won't interfere with the stun result that is converted to display a channeled cast.
+    if CBT.MultiCast[abilityId] then
+        if result == 2200 then
+            channeled = false
+            duration = castTime or 0
+        elseif result == 2240 then
+            CI.StopCastBar() -- Stop the cast bar when the GAINED event happens so that we can display the channel when the cast ends
+        end
+    end
+
+    if abilityId == 39033 or abilityId == 39477 then
+        local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
+        name, icon = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
+        if abilityId == 39477 then
+            name = strformat("<<1>> <<2>>", A.Skill_Remove, name)
+        end
+    end
+
+    if duration > 0 and not g_casting then
+        -- If action result is BEGIN and not channeled then start, otherwise only use GAINED
+        if ( not forceChanneled and ( ( (result == 2200 or result == 2210) and not channeled ) or (result == 2240 and (CBT.CastDurationFix[abilityId] or channeled) ) ) ) or (forceChanneled and result == 2200) then -- and CI.SV.CastBarCast
+            local currentTime = GetGameTimeMilliseconds()
+            local endTime = currentTime + duration
+            local remain = endTime - currentTime
+
+            castbar.remain = endTime
+            castbar.starts = currentTime
+            castbar.ends = endTime
+            castbar.icon:SetTexture(icon)
+            castbar.id = abilityId
+
+            if channeled then
+                castbar.type = 2 -- CHANNEL
+                castbar.bar.bar:SetValue(1)
+            else
+                castbar.type = 1 -- CAST
+                castbar.bar.bar:SetValue(0)
             end
-        end
-
-        if abilityId == 39033 or abilityId == 39477 then
-            local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
-            name, icon = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
-            if abilityId == 39477 then
-                name = strformat("<<1>> <<2>>", A.Skill_Remove, name)
+            if CI.SV.CastBarLabel then
+                castbar.bar.name:SetText(name)
+                castbar.bar.name:SetHidden(false)
             end
-        end
-
-        if duration > 0 and not g_casting then
-            -- If action result is BEGIN and not channeled then start, otherwise only use GAINED
-            if ( not forceChanneled and ( ( (result == 2200 or result == 2210) and not channeled ) or (result == 2240 and (CBT.CastDurationFix[abilityId] or channeled) ) ) ) or (forceChanneled and result == 2200) then -- and CI.SV.CastBarCast
-                local currentTime = GetGameTimeMilliseconds()
-                local endTime = currentTime + duration
-                local remain = endTime - currentTime
-
-                castbar.remain = endTime
-                castbar.starts = currentTime
-                castbar.ends = endTime
-                castbar.icon:SetTexture(icon)
-                castbar.id = abilityId
-
-                if channeled then
-                    castbar.type = 2 -- CHANNEL
-                    castbar.bar.bar:SetValue(1)
-                else
-                    castbar.type = 1 -- CAST
-                    castbar.bar.bar:SetValue(0)
-                end
-                if CI.SV.CastBarLabel then
-                    castbar.bar.name:SetText(name)
-                    castbar.bar.name:SetHidden(false)
-                end
-                if CI.SV.CastBarTimer then
-                    castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
-                    castbar.bar.timer:SetHidden(false)
-                end
-
-                castbar:SetHidden(false)
-                g_casting = true
-                eventManager:RegisterForUpdate(moduleName.."CI_CASTBAR", 20, CI.OnUpdateCastbar )
+            if CI.SV.CastBarTimer then
+                castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
+                castbar.bar.timer:SetHidden(false)
             end
-        end
 
-        -- Fix to lower the duration of the next cast of Profane Symbol quest ability for Scion of the Blood Matron (Vampire)
-        if abilityId == 39507 then
-            CBT.CastDurationFix[39507] = 19500
+            castbar:SetHidden(false)
+            g_casting = true
+            eventManager:RegisterForUpdate(moduleName.."CI_CASTBAR", 20, CI.OnUpdateCastbar )
         end
+    end
+
+    -- Fix to lower the duration of the next cast of Profane Symbol quest ability for Scion of the Blood Matron (Vampire)
+    if abilityId == 39507 then
+        CBT.CastDurationFix[39507] = 19500
+    end
 end
 
 --[[

@@ -8,6 +8,7 @@ local CTL = LUIE.CombatTextEventListener
 
 local callbackManager = CALLBACK_MANAGER
 local eventManager = EVENT_MANAGER
+
 local eventPostfix = 1 -- Used to create unique name when registering multiple times to the same game event
 
 function CTL:New()

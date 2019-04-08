@@ -26,9 +26,9 @@ local changelogMessages = {
 
 -- Hide toggle called by the menu or xml button
 function LUIE.ToggleChangelog(option)
-    LUIEChangelog:ClearAnchors()
-    LUIEChangelog:SetAnchor(CENTER, GuiRoot, CENTER, 0, -120 )
-    LUIEChangelog:SetHidden(option)
+    LUIE_Changelog:ClearAnchors()
+    LUIE_Changelog:SetAnchor(CENTER, GuiRoot, CENTER, 0, -120 )
+    LUIE_Changelog:SetHidden(option)
 end
 
 -- Called on initialize
@@ -38,15 +38,15 @@ function LUIE.ChangelogScreen()
     -- If text start with '*' replace it with bullet texture
     changelog = string.gsub(changelog, "%[%*%]", "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t")
     -- Set the window title
-    LUIEChangelogTitle:SetText(strformat("<<1>> Changelog", LUIE.name))
+    LUIE_ChangelogTitle:SetText(strformat("<<1>> Changelog", LUIE.name))
     -- Set the about string
-    LUIEChangelogAbout:SetText(strformat("v<<1>> by <<2>>", LUIE.version, LUIE.author))
+    LUIE_ChangelogAbout:SetText(strformat("v<<1>> by <<2>>", LUIE.version, LUIE.author))
     -- Set the changelog text
-    LUIEChangelogText:SetText(changelog)
+    LUIE_ChangelogText:SetText(changelog)
 
     -- Display the changelog if version number < current version
     if (LUIESV.Default[GetDisplayName()]['$AccountWide'].WelcomeVersion ~= LUIE.version) then
-        LUIEChangelog:SetHidden(false)
+        LUIE_Changelog:SetHidden(false)
     end
 
     -- Set version to current version

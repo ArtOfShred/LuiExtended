@@ -8,7 +8,6 @@ local CTV = LUIE.CombatTextEventViewer
 
 local C = LUIE.CombatTextConstants
 local E = LUIE.Effects
-local strfmt = string.format
 
 local callbackManager = CALLBACK_MANAGER
 

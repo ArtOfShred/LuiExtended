@@ -8,8 +8,8 @@ local CTV = LUIE.CombatTextDeathViewer
 
 local callLater = zo_callLater
 local strformat = zo_strformat
-local poolTypes = LUIE.CombatTextConstants.poolType
 
+local poolTypes = LUIE.CombatTextConstants.poolType
 
 function CTV:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)

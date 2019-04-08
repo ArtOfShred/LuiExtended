@@ -4,7 +4,7 @@
 --]]
 
 -- CombatText namespace
-LUIE.CombatText     = {}
+LUIE.CombatText = {}
 
 -- Performance Enhancement
 local CT     = LUIE.CombatText
@@ -13,14 +13,14 @@ local LMP    = LibStub("LibMediaProvider-1.0")
 local moduleName    = LUIE.name .. "_CombatText"
 
 local panelTitles = {
-        LUIE_CombatText_Outgoing                = GetString(SI_LUIE_CT_PANEL_OUTGOING),
-        LUIE_CombatText_Incoming                = GetString(SI_LUIE_CT_PANEL_INCOMING),
-        LUIE_CombatText_Point                   = GetString(SI_LUIE_CT_PANEL_POINT),
-        LUIE_CombatText_Alert                   = GetString(SI_LUIE_CT_PANEL_ALERT),
-        LUIE_CombatText_Resource                = GetString(SI_LUIE_CT_PANEL_RESOURCE),
+    LUIE_CombatText_Outgoing    = GetString(SI_LUIE_CT_PANEL_OUTGOING),
+    LUIE_CombatText_Incoming    = GetString(SI_LUIE_CT_PANEL_INCOMING),
+    LUIE_CombatText_Point       = GetString(SI_LUIE_CT_PANEL_POINT),
+    LUIE_CombatText_Alert       = GetString(SI_LUIE_CT_PANEL_ALERT),
+    LUIE_CombatText_Resource    = GetString(SI_LUIE_CT_PANEL_RESOURCE),
 }
 
-CT.Enabled  = false
+CT.Enabled = false
 CT.D = {
     unlocked = false,
     -- Panel Defaults
@@ -327,7 +327,7 @@ CT.D = {
         hotcritical                 = 200,
     },
 }
-CT.SV       = nil
+CT.SV = nil
 
 local function SavePosition(panel)
     local anchor = { panel:GetAnchor(0) }
@@ -397,5 +397,4 @@ function CT.Initialize( enabled )
     LUIE.CombatTextPointEventViewer:New(poolManager, LMP)
     LUIE.CombatTextResourceEventViewer:New(poolManager, LMP)
     LUIE.CombatTextDeathViewer:New(poolManager, LMP)
-
 end
