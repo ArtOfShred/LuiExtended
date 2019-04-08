@@ -9,6 +9,14 @@ LUIE.AlertTable = {}
 local U = LUIE.UnitNames
 local A = LUIE.GetAbility()
 
+local STUN = 1
+local DISORIENT = 2
+local FEAR = 3
+local SILENCE = 4
+local STAGGER = 5
+local UNNBREAKABLE = 6
+local SNARE = 7
+
 local AlertTable = {
     -- PRIORITY NOTES:
     -- 1 = VMA/Trial/Dungeon
@@ -62,11 +70,11 @@ local AlertTable = {
     [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Ignite (Synergy)
 
     -- Abilities
-    [29378] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1600 }, -- Uppercut (Ravager)
+    [29378] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1600, cc = STUN }, -- Uppercut (Ravager)
 
     [28408] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Whirlwind (Skirmisher)
 
-    [37108] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Arrow Spray (Archer)
+    [37108] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = SNARE, duration = 2000 }, -- Arrow Spray (Archer)
     [28628] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Volley (Archer)
     [74978] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Taking Aim (Archer)
 

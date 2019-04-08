@@ -1128,6 +1128,76 @@ function CI.CreateSettings()
                 setFunc = function(r, g, b, a) CI.SV.alerts.colors.alertSummon = { r, g, b, a } CI.SetAlertColors() end,
                 default = {r=CI.D.alerts.colors.alertSummon[1], g=CI.D.alerts.colors.alertSummon[2], b=CI.D.alerts.colors.alertSummon[3]}
             },
+
+            {
+                type = "header",
+                name = GetString("COMBAT ALERT FRAME COLORS"),
+                width = "full",
+            },
+            {
+                -- Stun
+                type    = "colorpicker",
+                name    = "CC COLOR - STUN",
+                tooltip = "TODO",
+                getFunc = function() return unpack(CI.SV.alerts.colors.stunColor) end,
+                setFunc = function(r, g, b, a) CI.SV.alerts.colors.stunColor = { r, g, b, a } CI.SetAlertColors() end,
+                default = {r=CI.D.alerts.colors.stunColor[1], g=CI.D.alerts.colors.stunColor[2], b=CI.D.alerts.colors.stunColor[3]}
+            },
+            {
+                -- Disorient
+                type    = "colorpicker",
+                name    = "CC COLOR - DISORIENT",
+                tooltip = "TODO",
+                getFunc = function() return unpack(CI.SV.alerts.colors.disorientColor) end,
+                setFunc = function(r, g, b, a) CI.SV.alerts.colors.disorientColor = { r, g, b, a } CI.SetAlertColors() end,
+                default = {r=CI.D.alerts.colors.disorientColor[1], g=CI.D.alerts.colors.disorientColor[2], b=CI.D.alerts.colors.disorientColor[3]}
+            },
+            {
+                -- Fear
+                type    = "colorpicker",
+                name    = "CC COLOR - FEAR",
+                tooltip = "TODO",
+                getFunc = function() return unpack(CI.SV.alerts.colors.fearColor) end,
+                setFunc = function(r, g, b, a) CI.SV.alerts.colors.fearColor = { r, g, b, a } CI.SetAlertColors() end,
+                default = {r=CI.D.alerts.colors.fearColor[1], g=CI.D.alerts.colors.fearColor[2], b=CI.D.alerts.colors.fearColor[3]}
+            },
+            {
+                -- Silence
+                type    = "colorpicker",
+                name    = "CC COLOR - SILENCE",
+                tooltip = "TODO",
+                getFunc = function() return unpack(CI.SV.alerts.colors.silenceColor) end,
+                setFunc = function(r, g, b, a) CI.SV.alerts.colors.silenceColor = { r, g, b, a } CI.SetAlertColors() end,
+                default = {r=CI.D.alerts.colors.silenceColor[1], g=CI.D.alerts.colors.silenceColor[2], b=CI.D.alerts.colors.silenceColor[3]}
+            },
+            {
+                -- Stagger
+                type    = "colorpicker",
+                name    = "CC COLOR - STAGGER",
+                tooltip = "TODO",
+                getFunc = function() return unpack(CI.SV.alerts.colors.staggerColor) end,
+                setFunc = function(r, g, b, a) CI.SV.alerts.colors.sstaggerColor = { r, g, b, a } CI.SetAlertColors() end,
+                default = {r=CI.D.alerts.colors.staggerColor[1], g=CI.D.alerts.colors.staggerColor[2], b=CI.D.alerts.colors.staggerColor[3]}
+            },
+            {
+                -- Unbreakable
+                type    = "colorpicker",
+                name    = "CC COLOR - UNBREAKABLE",
+                tooltip = "TODO",
+                getFunc = function() return unpack(CI.SV.alerts.colors.unbreakableColor) end,
+                setFunc = function(r, g, b, a) CI.SV.alerts.colors.unbreakableColor = { r, g, b, a } CI.SetAlertColors() end,
+                default = {r=CI.D.alerts.colors.unbreakableColor[1], g=CI.D.alerts.colors.unbreakableColor[2], b=CI.D.alerts.colors.unbreakableColor[3]}
+            },
+            {
+                -- Unbreakable
+                type    = "colorpicker",
+                name    = "CC COLOR - SNARE",
+                tooltip = "TODO",
+                getFunc = function() return unpack(CI.SV.alerts.colors.snareColor) end,
+                setFunc = function(r, g, b, a) CI.SV.alerts.snareColor = { r, g, b, a } CI.SetAlertColors() end,
+                default = {r=CI.D.alerts.colors.snareColor[1], g=CI.D.alerts.colors.snareColor[2], b=CI.D.alerts.colors.snareColor[3]}
+            },
+
         },
     }
 

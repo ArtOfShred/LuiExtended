@@ -29,6 +29,16 @@ local alertTypes = {
     SHARED                      = "LUIE_ALERT_TYPE_SHARED",
 }
 
+local ccTypes = {
+    STUN = 1,
+    DISORIENT = 2,
+    FEAR = 3,
+    SILENCE = 4,
+    STAGGER = 5,
+    UNNBREAKABLE = 6,
+    SNARE = 7,
+}
+
 -- Set Alert Colors
 function CI.SetAlertColors()
 	local colors = CI.SV.alerts.colors
@@ -254,9 +264,32 @@ function CI.AlertUpdate()
     end
 end
 
-local drawLocation = 1
+function CI.CrowdControlColorSetup(crowdControl)
 
-function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration)
+    if crowdControl == ccTypes.STUN then
+        return CI.SV.alerts.colors.stunColor
+    elseif crowdControl == ccTypes.DISORIENT then
+        return CI.SV.alerts.colors.disorientColor
+    elseif crowdControl == ccTypes.FEAR then
+        return CI.SV.alerts.colors.fearColor
+    elseif crowdControl == ccTypes.SILENCE then
+        return CI.SV.alerts.colors.silenceColor
+    elseif crowdControl == ccTypes.STAGGER then
+        return CI.SV.alerts.colors.staggerColor
+    elseif crowdControl == ccTypes.UNBREAKABLE then
+        return CI.SV.alerts.colors.unbreakableColor
+    elseif crowdControl == ccTypes.SNARE then
+        return CI.SV.alerts.colors.snareColor
+    else
+        return { 0, 0, 0, 0 }
+    end
+end
+
+local drawLocation = 1
+function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl)
+
+    local color = CI.CrowdControlColorSetup(crowdControl)
+
     for i = 1, 3 do
         if _G["LUIE_Alert" .. i].data.available then
             _G["LUIE_Alert" .. i].data.textMitigation =  textMitigation
@@ -270,6 +303,8 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
             _G["LUIE_Alert" .. i].mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
             _G["LUIE_Alert" .. i]:SetHidden(false)
             _G["LUIE_Alert" .. i].data.available = false
+            _G["LUIE_Alert" .. i].icon.cd:SetFillColor( color[1], color[2], color[3], color[4] )
+            --_G["LUIE_Alert" .. i].icon.cd:SetHidden( not crowdControl)
             drawLocation = 1 -- As long as this text is filling an available spot, we reset the draw over location to slot 1. If all slots are filled then the draw over code below will cycle and handle abilities.
             return
         end
@@ -286,6 +321,8 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
     _G["LUIE_Alert" .. drawLocation].mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
     _G["LUIE_Alert" .. drawLocation]:SetHidden(false)
     _G["LUIE_Alert" .. drawLocation].data.available = false
+    _G["LUIE_Alert" .. drawLocation].icon.cd:SetFillColor( color[1], color[2], color[3], color[4] )
+    --_G["LUIE_Alert" .. drawLocation].icon.cd:SetHidden( not crowdControl)
     drawLocation = drawLocation +1
     if drawLocation > 3 then
         drawLocation = 1
@@ -369,6 +406,13 @@ function CI.ProcessAlert(abilityId, unitName)
         end
     end
 
+    local crowdControl
+
+    -- Set CC Type if applicable
+    if AlertT[abilityId].cc then
+        crowdControl = AlertT[abilityId].cc
+    end
+
     local block
     local blockstagger
     local dodge
@@ -416,7 +460,7 @@ function CI.ProcessAlert(abilityId, unitName)
     end
 
     if not (power == true or destroy == true or summon == true or unmit == true) then
-        CI.OnEvent(alertTypes.SHARED, abilityName, abilityIcon, unitName, duration, block, blockstagger, dodge, avoid, interrupt)
+        CI.OnEvent(alertTypes.SHARED, abilityName, abilityIcon, unitName, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
     elseif (power == true or destroy == true or summon == true or unmit == true) then
         if unmit then
             CI.OnEvent(alertTypes.UNMIT, abilityName, abilityIcon, unitName, duration)
@@ -591,7 +635,7 @@ function CI.FormatAlertString(inputFormat, params)
 end
 
 -- VIEWER
-function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, block, blockstagger, dodge, avoid, interrupt)
+function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
     local S = CI.SV.alerts
 
     local labelColor = S.colors.alertShared
@@ -683,7 +727,7 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, b
     local showDuration = duration and true or false
     if not duration then duration = 4000 end
 
-    CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, ccType)
+    CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl)
     CI.RealignAlerts()
 
 end

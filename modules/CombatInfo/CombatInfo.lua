@@ -115,6 +115,14 @@ CI.D = {
             alertPower                  = { 1, 1, 1, 1 },
             alertDestroy                = { 1, 1, 1, 1 },
             alertSummon                 = { 1, 1, 1, 1 },
+
+            stunColor                   = {0.894118, 0.133333, 0.090196, 1},
+            disorientColor              = {0.0313725509,0.6274510026,1, 1},
+            fearColor                   = {0.5607843137, 0.0352941176, 0.9254901961, 1},
+            silenceColor                = {0, 1, 1, 1},
+            staggerColor                = {1,0.9490196109,0.1294117719,1},
+            unbreakableColor            = {0.88,0.88,1,1},
+            snareColor                  = {1,.6470, 0, 1},
         },
         formats = {
             alertBlock                  = GetString(SI_LUIE_CT_BLOCK_DEFAULT),
