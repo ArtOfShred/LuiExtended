@@ -52,10 +52,11 @@ function UI.TopLevel(anchors, dims)
 end
 
 -- Creates plain CT_CONTROL UI control element
-function UI.Control(parent, anchors, dims, hidden)
+function UI.Control(parent, anchors, dims, hidden, name)
     if not parent then return end
 
-    local c = windowManager:CreateControl(nil, parent, CT_CONTROL)
+    local name = name or nil
+    local c = windowManager:CreateControl(name, parent, CT_CONTROL)
     c:SetHidden(hidden)
 
     if anchors == "fill" then
