@@ -280,7 +280,7 @@ function CI.CrowdControlColorSetup(crowdControl)
     elseif crowdControl == ccTypes.SNARE then
         return CI.SV.alerts.colors.snareColor
     else
-        return { 0, 0, 0, 1 }
+        return { 0, 0, 0, 0 }
     end
 end
 
