@@ -1,4 +1,4 @@
-alertType--[[
+--[[
     LuiExtended
     License: The MIT License (MIT)
 --]]
@@ -21,13 +21,13 @@ local moduleName    = LUIE.name .. "_CombatInfo"
 uiTlw         = {} -- GUI
 local g_alertFont -- Font for Alerts
 
-local alertType = {
+local alertTypes = {
     UNMIT                       = "LUIE_ALERT_TYPE_UNMIT",
     DESTROY                     = "LUIE_ALERT_TYPE_DESTROY",
     POWER                       = "LUIE_ALERT_TYPE_POWER",
     SUMMON                      = "LUIE_ALERT_TYPE_SUMMON",
     SHARED                      = "LUIE_ALERT_TYPE_SHARED",
-},
+}
 
 -- Set Alert Colors
 function CI.SetAlertColors()
@@ -412,19 +412,19 @@ function CI.ProcessAlert(abilityId, unitName)
     end
 
     if not (power == true or destroy == true or summon == true or unmit == true) then
-        CI.OnEvent(alertType.SHARED, abilityName, abilityIcon, unitName, duration, block, blockstagger, dodge, avoid, interrupt)
+        CI.OnEvent(alertTypes.SHARED, abilityName, abilityIcon, unitName, duration, block, blockstagger, dodge, avoid, interrupt)
     elseif (power == true or destroy == true or summon == true or unmit == true) then
         if unmit then
-            CI.OnEvent(alertType.UNMIT, abilityName, abilityIcon, unitName, duration)
+            CI.OnEvent(alertTypes.UNMIT, abilityName, abilityIcon, unitName, duration)
         end
         if power then
-            CI.OnEvent(alertType.POWER, abilityName, abilityIcon, unitName, duration)
+            CI.OnEvent(alertTypes.POWER, abilityName, abilityIcon, unitName, duration)
         end
         if destroy then
-            CI.OnEvent(alertType.DESTROY, abilityName, abilityIcon, unitName, duration)
+            CI.OnEvent(alertTypes.DESTROY, abilityName, abilityIcon, unitName, duration)
         end
         if summon then
-            CI.OnEvent(alertType.SUMMON, abilityName, abilityIcon, unitName, duration)
+            CI.OnEvent(alertTypes.SUMMON, abilityName, abilityIcon, unitName, duration)
         end
     end
 end
@@ -593,7 +593,7 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, b
     local labelColor = S.colors.alertShared
 	local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
 
-    if (alertType == alertType.SHARED) then
+    if (alertType == alertTypes.SHARED) then
 
         local spacer = "-"
         local stringBlock
@@ -648,27 +648,27 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, b
 
         text = zo_strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
 	-- UNMIT
-	elseif (alertType == alertType.UNMIT) then
+	elseif (alertType == alertTypes.UNMIT) then
 		local color = CI.AlertColors.alertColorUnmit
 		textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertUnmit)
 		text = zo_strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
     -- POWER
-    elseif (alertType == alertType.POWER) then
+    elseif (alertType == alertTypes.POWER) then
         local color = CI.AlertColors.alertColorPower
 		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPowerPrefixN or S.toggles.mitigationPowerPrefix
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertPower)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- DESTROY
-    elseif (alertType == alertType.DESTROY) then
+    elseif (alertType == alertTypes.DESTROY) then
         local color = CI.AlertColors.alertColorDestroy
 		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationDestroyPrefixN or S.toggles.mitigationDestroyPrefix
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertDestroy)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- SUMMON
-    elseif (alertType == alertType.SUMMON) then
+    elseif (alertType == alertTypes.SUMMON) then
         local color = CI.AlertColors.alertColorSummon
 		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationSummonPrefixN or S.toggles.mitigationSummonPrefix
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
