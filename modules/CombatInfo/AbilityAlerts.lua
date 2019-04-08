@@ -265,7 +265,9 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
             _G["LUIE_Alert" .. i].data.duration = duration
             _G["LUIE_Alert" .. i].data.showDuration = showDuration
             _G["LUIE_Alert" .. i].name:SetText(textName)
+            _G["LUIE_Alert" .. i].name:SetColor(unpack(CI.SV.alerts.colors.alertShared))
             _G["LUIE_Alert" .. i].mitigation:SetText(showDuration and (textMitigation .. " " .. strfmt("%.1f", duration/1000)) or textMitigation)
+            _G["LUIE_Alert" .. i].mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
             _G["LUIE_Alert" .. i]:SetHidden(false)
             _G["LUIE_Alert" .. i].data.available = false
             drawLocation = 1 -- As long as this text is filling an available spot, we reset the draw over location to slot 1. If all slots are filled then the draw over code below will cycle and handle abilities.
@@ -279,7 +281,9 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
     _G["LUIE_Alert" .. drawLocation].data.duration = duration
     _G["LUIE_Alert" .. drawLocation].data.showDuration = showDuration
     _G["LUIE_Alert" .. drawLocation].name:SetText(textName)
+    _G["LUIE_Alert" .. drawLocation].name:SetColor(unpack(CI.SV.alerts.colors.alertShared))
     _G["LUIE_Alert" .. drawLocation].mitigation:SetText(showDuration and (textMitigation .. " " .. strfmt("%.1f", duration/1000)) or textMitigation)
+    _G["LUIE_Alert" .. drawLocation].mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
     _G["LUIE_Alert" .. drawLocation]:SetHidden(false)
     _G["LUIE_Alert" .. drawLocation].data.available = false
     drawLocation = drawLocation +1
@@ -643,7 +647,7 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, b
 			end
 		end
 
-        textName = zo_strformat("|cffffff<<1>>|r", CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName }))
+        textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = S.toggles.hideMitigation and "" or zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt)
 
         text = zo_strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)

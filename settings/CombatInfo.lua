@@ -711,15 +711,6 @@ function CI.CreateSettings()
                 text = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION),
             },
             {
-                -- Hide Ingame Tips
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS_TP),
-                getFunc = function() return CI.SV.alerts.toggles.hideIngameTips end,
-                setFunc = function(v) CI.SV.alerts.toggles.hideIngameTips = v; ZO_ActiveCombatTips:SetHidden(v) end,
-                default = CI.D.alerts.toggles.hideIngameTips,
-            },
-            {
                 -- Mitigation Alerts
                 type    = "checkbox",
                 name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION),

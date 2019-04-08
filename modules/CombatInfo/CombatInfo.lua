@@ -104,7 +104,6 @@ CI.D = {
             showAlertDestroy            = true,
             showAlertSummon             = true,
 
-            hideIngameTips              = true,
         },
         colors = {
             alertShared                 = { 1, 1, 1, 1 },
