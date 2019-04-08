@@ -75,8 +75,74 @@ CI.D = {
     AlertFontFace                   = "Univers 67",
     AlertFontStyle                  = "soft-shadow-thick",
     AlertFontSize                   = 32,
+
+    alerts = {
+        toggles = {
+            --Alerts
+            showAlertMitigation         = true,
+            hideMitigation              = true,
+            mitigationPrefix            = "%t",
+            mitigationPrefixN           = "%n - %t",
+            mitigationPowerPrefix       = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER),
+            mitigationPowerPrefixN      = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER_N),
+            mitigationDestroyPrefix     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY),
+            mitigationDestroyPrefixN    = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY_N),
+            mitigationSummonPrefix      = GetString(SI_LUIE_CT_MITIGATION_FORMAT_SUMMON),
+            mitigationSummonPrefixN     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_SUMMON_N),
+
+            -- Add Name/No Name Variants
+            mitigationAura              = false,
+            mitigationRank3             = true,
+            mitigationRank2             = true,
+            mitigationRank1             = true,
+            mitigationDungeon           = true,
+
+            showAlertMitigate           = true, -- TODO -- Replaces Block/Interrupt/Dodge
+
+            showAlertUnmit				= true,
+            showAlertPower              = true,
+            showAlertDestroy            = true,
+            showAlertSummon             = true,
+
+            hideIngameTips              = true,
+        },
+        colors = {
+            alertShared                 = { 1, 1, 1, 1 },
+            alertBlockA                 = { 1, 0, 0, 1 },
+            alertInterruptB             = { 0, 0.50, 1, 1 },
+            alertUnmit					= { 1, 0, 0, 1 },
+            alertDodgeA                 = { 1, 1, 50/255, 1 },
+            alertAvoidB                 = { 1, 127/255, 0, 1 },
+            alertPower                  = { 1, 1, 1, 1 },
+            alertDestroy                = { 1, 1, 1, 1 },
+            alertSummon                 = { 1, 1, 1, 1 },
+        },
+        formats = {
+            alertBlock                  = GetString(SI_LUIE_CT_BLOCK_DEFAULT),
+            alertBlockStagger           = GetString(SI_LUIE_CT_BLOCKSTAGGER_DEFAULT),
+            alertInterrupt              = GetString(SI_LUIE_CT_INTERRUPT_DEFAULT),
+            alertUnmit					= GetString(SI_LUIE_CT_UNMIT_DEFAULT),
+            alertDodge                  = GetString(SI_LUIE_CT_DODGE_DEFAULT),
+            alertAvoid                  = GetString(SI_LUIE_CT_AVOID_DEFAULT),
+            alertPower                  = GetString(SI_LUIE_CT_POWER_DEFAULT),
+            alertDestroy                = GetString(SI_LUIE_CT_DESTROY_DEFAULT),
+            alertSummon                 = GetString(SI_LUIE_CT_SUMMON_DEFAULT),
+        },
+
+        --[[
+        -- TODO: CC Type Colors
+        [ACTION_RESULT_STUNNED]={0.894118, 0.133333, 0.090196, 1},
+		[ACTION_RESULT_DISORIENTED]={0.0313725509,0.6274510026,1, 1},
+		[ACTION_RESULT_FEARED]={0.5607843137, 0.0352941176, 0.9254901961, 1},
+		[ACTION_RESULT_SILENCED]={0, 1, 1, 1},
+		[ACTION_RESULT_STAGGERED]={1,0.9490196109,0.1294117719,1},
+        ]]
+
+    },
+
 }
 CI.SV               = nil
+CI.AlertColors      = {}
 CI.CastBarUnlocked  = false
 CI.AlertFrameUnlocked  = false
 
@@ -299,6 +365,7 @@ function CI.Initialize( enabled )
 
     CI.CreateAlertFrame()
     CI.SetAlertFramePosition()
+    CI.SetAlertColors()
 end
 
 -- Helper function to get override ability duration.

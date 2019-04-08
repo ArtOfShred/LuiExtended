@@ -1111,18 +1111,5 @@ local AlertTable = {
     [83430] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Skeletal Smash (Ice Wraith)
 }
 
---[[
-
--- Add IF needed for custom exploit messages
-E.CombatAlertExploit = {
-    [45902] = true
-}
-]]--
-
---[[ NOTES
-63269 - Remove block + add avoid if ever corrected!
-
-]]--
-
 -- Export string data to global namespace
 LUIE.AlertTable = AlertTable

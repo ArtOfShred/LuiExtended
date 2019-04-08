@@ -140,35 +140,6 @@ CT.D = {
         showOutCombat               = true,
         showDeath                   = true,
 
-        --Alerts
-        showAlertMitigation         = true,
-        hideMitigation              = true,
-        mitigationPrefix            = "%t %i",
-        mitigationPrefixN           = "%n - %t %i",
-        mitigationPowerPrefix       = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER),
-        mitigationPowerPrefixN      = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER_N),
-        mitigationDestroyPrefix     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY),
-        mitigationDestroyPrefixN    = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY_N),
-        mitigationSummonPrefix      = GetString(SI_LUIE_CT_MITIGATION_FORMAT_SUMMON),
-        mitigationSummonPrefixN     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_SUMMON_N),
-
-        -- Add Name/No Name Variants
-        mitigationAura              = false,
-        mitigationRank3             = true,
-        mitigationRank2             = true,
-        mitigationRank1             = true,
-        mitigationDungeon           = true,
-
-        showAlertMitigate           = true, -- TODO -- Replaces Block/Interrupt/Dodge
-
-		showAlertUnmit				= true,
-        showAlertPower              = true,
-        showAlertDestroy            = true,
-        showAlertSummon             = true,
-
-        showAlertExploit            = true,
-        hideIngameTips              = true,
-
         -- Points
         showPointsAlliance          = false,
         showPointsExperience        = false,
@@ -210,10 +181,9 @@ CT.D = {
         mitigation                  = 32,
         crowdControl                = 26,
 
-        -- Combat State, Points, Alerts & Resources
+        -- Combat State, Points & Resources
         combatState                 = 24,
         death                       = 32,
-        alert                       = 32,
         point                       = 24,
         resource                    = 32,
         readylabel                  = 32,
@@ -268,18 +238,6 @@ CT.D = {
         outCombat                   = { 1, 1, 1, 1 },
         death                       = { 1, 0, 0, 1 },
 
-        -- Alerts
-        alertShared                 = { 1, 1, 1, 1 },
-        alertBlockA                 = { 1, 0, 0, 1 },
-        alertExploit                = { 1, 1, 1, 1 },
-        alertInterruptB             = { 0, 0.50, 1, 1 },
-		alertUnmit					= { 1, 0, 0, 1 },
-        alertDodgeA                 = { 1, 1, 50/255, 1 },
-        alertAvoidB                 = { 1, 127/255, 0, 1 },
-        alertPower                  = { 1, 1, 1, 1 },
-        alertDestroy                = { 1, 1, 1, 1 },
-        alertSummon                 = { 1, 1, 1, 1 },
-
         -- Points
         pointsAlliance              = { 0.235294, 0.784314, 0.313725, 1 },  --RGB(60, 200, 80)
         pointsExperience            = { 0.588235, 0.705882, 0.862745, 1 },  --RGB(150, 180, 220)
@@ -328,18 +286,6 @@ CT.D = {
         inCombat                    = GetString(SI_LUIE_CT_COMBAT_IN_DEFAULT),
         outCombat                   = GetString(SI_LUIE_CT_COMBAT_OUT_DEFAULT),
         death                       = GetString(SI_LUIE_CT_DEATH_DEFAULT),
-
-        -- Alerts
-        alertBlock                  = GetString(SI_LUIE_CT_BLOCK_DEFAULT),
-        alertBlockStagger           = GetString(SI_LUIE_CT_BLOCKSTAGGER_DEFAULT),
-        alertExploit                = GetString(SI_LUIE_CT_EXPLOIT_DEFAULT),
-        alertInterrupt              = GetString(SI_LUIE_CT_INTERRUPT_DEFAULT),
-		alertUnmit					= GetString(SI_LUIE_CT_UNMIT_DEFAULT),
-        alertDodge                  = GetString(SI_LUIE_CT_DODGE_DEFAULT),
-        alertAvoid                  = GetString(SI_LUIE_CT_AVOID_DEFAULT),
-        alertPower                  = GetString(SI_LUIE_CT_POWER_DEFAULT),
-        alertDestroy                = GetString(SI_LUIE_CT_DESTROY_DEFAULT),
-        alertSummon                 = GetString(SI_LUIE_CT_SUMMON_DEFAULT),
 
         -- Points
         pointsAlliance              = "%a AP",
@@ -394,23 +340,6 @@ local function SavePosition(panel)
     panelSettings.dimensions = dimensions
 end
 
-CT.AlertColors = {}
-
-function CT.SetAlertColors()
-	local colors = CT.SV.colors
-	CT.AlertColors = {
-		alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlockA)):ToHex(),
-		alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodgeA)):ToHex(),
-		alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoidB)):ToHex(),
-		alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterruptB)):ToHex(),
-		alertColorUnmit	= ZO_ColorDef:New(unpack(colors.alertUnmit)):ToHex(),
-		alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
-		alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex(),
-		alertColorSummon = ZO_ColorDef:New(unpack(colors.alertSummon)):ToHex(),
-	}
-end
-
-
 -- Module initialization
 function CT.Initialize( enabled )
     -- Load settings
@@ -424,8 +353,6 @@ function CT.Initialize( enabled )
     -- If User does not want the Combat Text then exit right here
     if not enabled then return end
     CT.Enabled = true
-
-	CT.SetAlertColors()
 
     -- Set panels to player configured settings
     for k, s in pairs (LUIE.CombatText.SV.panels) do
@@ -453,7 +380,6 @@ function CT.Initialize( enabled )
 
     -- Event Listeners
     LUIE.CombatTextCombatEventListener:New()
-    LUIE.CombatTextAlertEventListener:New()
     LUIE.CombatTextPointsAllianceEventListener:New()
     LUIE.CombatTextPointsExperienceEventListener:New()
     LUIE.CombatTextPointsChampionEventListener:New()
@@ -467,16 +393,9 @@ function CT.Initialize( enabled )
     LUIE.CombatTextCombatHybridEventViewer:New(poolManager, LMP)
     LUIE.CombatTextCombatScrollEventViewer:New(poolManager, LMP)
     LUIE.CombatTextCombatEllipseEventViewer:New(poolManager, LMP)
-    LUIE.CombatTextAlertViewer:New(poolManager, LMP)
     LUIE.CombatTextCrowdControlEventViewer:New(poolManager, LMP)
     LUIE.CombatTextPointEventViewer:New(poolManager, LMP)
     LUIE.CombatTextResourceEventViewer:New(poolManager, LMP)
     LUIE.CombatTextDeathViewer:New(poolManager, LMP)
 
-    -- Hide ingame active combat tips
-    ZO_ActiveCombatTips:SetHidden(LUIE.CombatText.SV.toggles.hideIngameTips)
-
-    if LUIE.CombatText.SV.toggles.showAlertMitigation then
-        SetSetting(SETTING_TYPE_ACTIVE_COMBAT_TIP, 0, ACT_SETTING_ALWAYS)
-    end
 end

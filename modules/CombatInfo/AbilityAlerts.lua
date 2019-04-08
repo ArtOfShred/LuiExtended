@@ -1,17 +1,14 @@
---[[
+alertType--[[
     LuiExtended
     License: The MIT License (MIT)
 --]]
 
 local CI            = LUIE.CombatInfo
 local UI            = LUIE.UI
-local C             = LUIE.CombatTextConstants
 local E             = LUIE.Effects
 local AlertT        = LUIE.AlertTable
 local callLater = zo_callLater
 local refireDelay = { }
-local CT     = LUIE.CombatText
-local alertTypes = LUIE.CombatTextConstants.alertType
 
 local eventManager  = EVENT_MANAGER
 local sceneManager  = SCENE_MANAGER
@@ -24,6 +21,28 @@ local moduleName    = LUIE.name .. "_CombatInfo"
 uiTlw         = {} -- GUI
 local g_alertFont -- Font for Alerts
 
+local alertType = {
+    UNMIT                       = "LUIE_ALERT_TYPE_UNMIT",
+    DESTROY                     = "LUIE_ALERT_TYPE_DESTROY",
+    POWER                       = "LUIE_ALERT_TYPE_POWER",
+    SUMMON                      = "LUIE_ALERT_TYPE_SUMMON",
+    SHARED                      = "LUIE_ALERT_TYPE_SHARED",
+},
+
+-- Set Alert Colors
+function CI.SetAlertColors()
+	local colors = CI.SV.alerts.colors
+	CI.AlertColors = {
+		alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlockA)):ToHex(),
+		alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodgeA)):ToHex(),
+		alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoidB)):ToHex(),
+		alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterruptB)):ToHex(),
+		alertColorUnmit	= ZO_ColorDef:New(unpack(colors.alertUnmit)):ToHex(),
+		alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
+		alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex(),
+		alertColorSummon = ZO_ColorDef:New(unpack(colors.alertSummon)):ToHex(),
+	}
+end
 
 -- Create Alert Frame - basic setup for now
 function CI.CreateAlertFrame()
@@ -129,10 +148,9 @@ function CI.CreateAlertFrame()
     sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
 
     -- Register Events
-    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CI.OnPlayerActivated)
-    eventManager:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT, CI.OnCombatIn)
+    eventManager:RegisterForEvent(moduleName .. "Combat", EVENT_COMBAT_EVENT, CI.OnCombatIn)
     eventManager:AddFilterForEvent(moduleName .. "Combat", EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER)
-    eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.EffectChanged)
+    eventManager:RegisterForEvent(moduleName .. "Effect", EVENT_EFFECT_CHANGED, CI.AlertEffectChanged)
 
     for abilityId, data in pairs (AlertT) do
         if data.eventdetect == true then
@@ -279,7 +297,7 @@ function CI.RealignAlerts()
 end
 
 function CI.ProcessAlert(abilityId, unitName)
-    local S = LUIE.CombatText.SV
+    local S = CI.SV.alerts
 
     -- Just in case
     if not AlertT[abilityId] then return end
@@ -347,7 +365,6 @@ function CI.ProcessAlert(abilityId, unitName)
         end
     end
 
-    local isDirect
     local block
     local blockstagger
     local dodge
@@ -358,12 +375,6 @@ function CI.ProcessAlert(abilityId, unitName)
     local summon
     local unmit
     local duration
-
-    if AlertT[abilityId].notDirect then
-        isDirect = false
-    else
-        isDirect = true
-    end
 
     if (S.toggles.showAlertMitigate) == true then
         if AlertT[abilityId].block == true then
@@ -401,19 +412,32 @@ function CI.ProcessAlert(abilityId, unitName)
     end
 
     if not (power == true or destroy == true or summon == true or unmit == true) then
-        CI.OnEvent(C.alertType.SHARED, abilityName, abilityIcon, unitName, isDirect, duration, block, blockstagger, dodge, avoid, interrupt)
+        CI.OnEvent(alertType.SHARED, abilityName, abilityIcon, unitName, duration, block, blockstagger, dodge, avoid, interrupt)
+    elseif (power == true or destroy == true or summon == true or unmit == true) then
+        if unmit then
+            CI.OnEvent(alertType.UNMIT, abilityName, abilityIcon, unitName, duration)
+        end
+        if power then
+            CI.OnEvent(alertType.POWER, abilityName, abilityIcon, unitName, duration)
+        end
+        if destroy then
+            CI.OnEvent(alertType.DESTROY, abilityName, abilityIcon, unitName, duration)
+        end
+        if summon then
+            CI.OnEvent(alertType.SUMMON, abilityName, abilityIcon, unitName, duration)
+        end
     end
 end
 
-function CI.EffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    local S, combatType, togglesInOut = LUIE.CombatText.SV, nil, nil
+function CI.AlertEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+
+    local S = CI.SV.alerts
 
     if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and AlertT[abilityId] and AlertT[abilityId].auradetect then
 
         if changeType == EFFECT_RESULT_FADED then return end
 
         -- Don't duplicate events if unitTag is player and in a group.
-        if GetGroupSize() > 1 and unitTag == 'player' then return end
         if AlertT[abilityId].noSelf and unitName == LUIE.PlayerNameRaw then return end
 
         if changeType == EFFECT_RESULT_UPDATED and AlertT[abilityId].ignoreRefresh then return end
@@ -425,8 +449,7 @@ end
 
 function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
 
-    local S = LUIE.CombatText.SV
-    local combatType, togglesInOut = C.combatType.INCOMING, S.toggles.incoming
+    local S = CI.SV.alerts
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
     local abilityIcon = GetAbilityIcon(abilityId)
 
@@ -506,8 +529,7 @@ end
 
 function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
 
-    local S = LUIE.CombatText.SV
-    local combatType, togglesInOut = C.combatType.INCOMING, S.toggles.incoming
+    local S = CI.SV.alerts
 
     -- NEW ALERTS
     if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) then
@@ -565,28 +587,20 @@ function CI.FormatAlertString(inputFormat, params)
 end
 
 -- VIEWER
-function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, duration, block, blockstagger, dodge, avoid, interrupt)
-    local S = LUIE.CombatText.SV
+function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, block, blockstagger, dodge, avoid, interrupt)
+    local S = CI.SV.alerts
 
-    local size, text
     local labelColor = S.colors.alertShared
 	local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
 
-    -- First we handle Exploit because these messages are always individual
-    if (alertType == alertTypes.EXPLOIT) then
-        labelColor = S.colors.alertExploit
-        size = S.fontSizes.alert
-        text = S.formats.alertExploit
-    elseif (alertType == alertTypes.SHARED) then
-
-        size = S.fontSizes.alert
+    if (alertType == alertType.SHARED) then
 
         local spacer = "-"
         local stringBlock
         local stringDodge
         local stringAvoid
         local stringInterrupt
-        local color = CT.AlertColors.alertColorBlock
+        local color = CI.AlertColors.alertColorBlock
 
         -- Quickly set only one of these to true for priority color formatting.
         -- PRIORITY: INTERRUPT > BLOCK STAGGER > DODGE > BLOCK > AVOID
@@ -594,31 +608,31 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, d
 
 		if not S.toggles.hideMitigation then
 			if avoid then
-				local color = CT.AlertColors.alertColorAvoid
+				local color = CI.AlertColors.alertColorAvoid
 				stringAvoid = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertAvoid, spacer)
 			else
 				stringAvoid = ""
 			end
 
 			if block then
-				local color = CT.AlertColors.alertColorBlock
+				local color = CI.AlertColors.alertColorBlock
 				stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlock, spacer)
 			end
 
 			if dodge then
-				local color = CT.AlertColors.alertColorDodge
+				local color = CI.AlertColors.alertColorDodge
 				stringDodge = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertDodge, spacer)
 			else
 				stringDodge = ""
 			end
 
 			if blockstagger then
-				local color = CT.AlertColors.alertColorBlock
+				local color = CI.AlertColors.alertColorBlock
 				stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlockStagger, spacer)
 			end
 
 			if interrupt then
-				local color = CT.AlertColors.alertColorInterrupt
+				local color = CI.AlertColors.alertColorInterrupt
 				stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertInterrupt, spacer)
 			else
 				stringInterrupt = ""
@@ -634,33 +648,29 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, d
 
         text = zo_strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
 	-- UNMIT
-	elseif (alertType == alertTypes.UNMIT) then
-		local color = CT.AlertColors.alertColorUnmit
-		size = S.fontSizes.alert
+	elseif (alertType == alertType.UNMIT) then
+		local color = CI.AlertColors.alertColorUnmit
 		textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertUnmit)
 		text = zo_strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
     -- POWER
-    elseif (alertType == alertTypes.POWER) then
-        local color = CT.AlertColors.alertColorPower
+    elseif (alertType == alertType.POWER) then
+        local color = CI.AlertColors.alertColorPower
 		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPowerPrefixN or S.toggles.mitigationPowerPrefix
-        size = S.fontSizes.alert
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertPower)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- DESTROY
-    elseif (alertType == alertTypes.DESTROY) then
-        local color = CT.AlertColors.alertColorDestroy
+    elseif (alertType == alertType.DESTROY) then
+        local color = CI.AlertColors.alertColorDestroy
 		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationDestroyPrefixN or S.toggles.mitigationDestroyPrefix
-        size = S.fontSizes.alert
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertDestroy)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- SUMMON
-    elseif (alertType == alertTypes.SUMMON) then
-        local color = CT.AlertColors.alertColorSummon
+    elseif (alertType == alertType.SUMMON) then
+        local color = CI.AlertColors.alertColorSummon
 		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationSummonPrefixN or S.toggles.mitigationSummonPrefix
-        size = S.fontSizes.alert
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertSummon)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
