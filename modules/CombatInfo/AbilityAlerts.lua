@@ -35,7 +35,7 @@ local ccTypes = {
     FEAR = 3,
     SILENCE = 4,
     STAGGER = 5,
-    UNNBREAKABLE = 6,
+    UNBREAKABLE = 6,
     SNARE = 7,
 }
 
@@ -266,6 +266,8 @@ end
 
 function CI.CrowdControlColorSetup(crowdControl)
 
+    d(crowdControl)
+
     if crowdControl == ccTypes.STUN then
         return CI.SV.alerts.colors.stunColor
     elseif crowdControl == ccTypes.DISORIENT then
@@ -281,7 +283,7 @@ function CI.CrowdControlColorSetup(crowdControl)
     elseif crowdControl == ccTypes.SNARE then
         return CI.SV.alerts.colors.snareColor
     else
-        return { 0, 0, 0, 0 }
+        return { 0, 0, 0, 1 }
     end
 end
 
@@ -289,6 +291,7 @@ local drawLocation = 1
 function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl)
 
     local color = CI.CrowdControlColorSetup(crowdControl)
+    d(color)
 
     for i = 1, 3 do
         if _G["LUIE_Alert" .. i].data.available then
