@@ -571,7 +571,6 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, d
     local size, text
     local labelColor = S.colors.alertShared
 	local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
-    local mitigationSuffix = (isDirect and S.toggles.mitigationDefaultSuffix ~= "") and zo_strformat(" <<1>>", S.toggles.mitigationDefaultSuffix) or ""
 
     -- First we handle Exploit because these messages are always individual
     if (alertType == alertTypes.EXPLOIT) then

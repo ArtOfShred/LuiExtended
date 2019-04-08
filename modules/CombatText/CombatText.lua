@@ -153,8 +153,6 @@ CT.D = {
         mitigationSummonPrefixN     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_SUMMON_N),
 
         -- Add Name/No Name Variants
-        mitigationDefaultSuffix     = GetString(SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT),
-
         mitigationAura              = false,
         mitigationRank3             = true,
         mitigationRank2             = true,

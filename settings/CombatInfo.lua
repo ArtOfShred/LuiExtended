@@ -811,16 +811,6 @@ function CI.CreateSettings()
                 default = CT.D.toggles.mitigationPrefixN,
             },
             {
-                -- Mitigation Suffix
-                type    = "editbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP),
-                getFunc = function() return CT.SV.toggles.mitigationDefaultSuffix end,
-                setFunc = function(v) CT.SV.toggles.mitigationDefaultSuffix = v end,
-                disabled = function() return not CT.SV.toggles.showAlertMitigation end,
-                default = CT.D.toggles.mitigationDefaultSuffix,
-            },
-            {
                 -- Mitigation Aura
                 type    = "checkbox",
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_AURA)),
