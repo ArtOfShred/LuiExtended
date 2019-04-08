@@ -265,7 +265,6 @@ function CI.AlertUpdate()
 end
 
 function CI.CrowdControlColorSetup(crowdControl)
-
     if crowdControl == ccTypes.STUN then
         return CI.SV.alerts.colors.stunColor
     elseif crowdControl == ccTypes.DISORIENT then
@@ -289,7 +288,6 @@ local drawLocation = 1
 function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl)
 
     local color = CI.CrowdControlColorSetup(crowdControl)
-    d(color)
 
     for i = 1, 3 do
         if _G["LUIE_Alert" .. i].data.available then
