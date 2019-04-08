@@ -17,11 +17,13 @@ local eventManager  = EVENT_MANAGER
 local sceneManager  = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
 local strfmt = string.format
+local strformat = zo_strformat
 
 local moduleName    = LUIE.name .. "_CombatInfo"
 
-local uiTlw         = {} -- GUI
+uiTlw         = {} -- GUI
 local g_alertFont -- Font for Alerts
+
 
 -- Create Alert Frame - basic setup for now
 function CI.CreateAlertFrame()
@@ -93,17 +95,20 @@ function CI.CreateAlertFrame()
 
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function(self)
-        eventManager:RegisterForUpdate( moduleName .. "previewMoveAlert", 200, function()
+        eventManager:RegisterForUpdate( moduleName .. "previewMove", 200, function()
             self.preview.anchorLabel:SetText(strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
         end)
     end
     -- Callback used to save new position of frames
     local tlwOnMoveStop = function(self)
-        eventManager:UnregisterForUpdate( moduleName .. "previewMoveAlert" )
+        eventManager:UnregisterForUpdate( moduleName .. "previewMove" )
         CI.SV.AlertFrameOffsetX = self:GetLeft()
         CI.SV.AlertFrameOffsetY = self:GetTop()
         CI.SV.AlertFrameCustomPosition = { self:GetLeft(), self:GetTop() }
     end
+
+    uiTlw.alertFrame:SetHandler( "OnMoveStart", tlwOnMoveStart )
+    uiTlw.alertFrame:SetHandler( "OnMoveStop", tlwOnMoveStop )
 
     uiTlw.alertFrame.preview.anchorTexture = UI.Texture( uiTlw.alertFrame.preview, {TOPLEFT,TOPLEFT}, {16,16}, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false )
     uiTlw.alertFrame.preview.anchorTexture:SetColor(1, 1, 0, 0.9)
@@ -115,9 +120,6 @@ function CI.CreateAlertFrame()
     uiTlw.alertFrame.preview.anchorLabelBg = UI.Backdrop(  uiTlw.alertFrame.preview.anchorLabel, "fill", nil, {0,0,0,1}, {0,0,0,1}, false )
     uiTlw.alertFrame.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
     uiTlw.alertFrame.preview.anchorLabelBg:SetDrawTier(0)
-
-    uiTlw.alertFrame:SetHandler( "OnMoveStart", tlwOnMoveStart )
-    uiTlw.alertFrame:SetHandler( "OnMoveStop", tlwOnMoveStop )
 
     local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.alertFrame, 0, 0)
 
@@ -182,7 +184,6 @@ end
 
 -- Called by CI.SetMovingState from the menu as well as by CI.OnUpdateCastbar when preview is enabled
 function CI.GenerateAlertFramePreview(state)
-    -- TODO: ITERATE HERE AND ADD TEST ALERTS
     --[[local previewIcon = 'esoui/art/icons/icon_missing.dds'
     castbar.icon:SetTexture(previewIcon)
     if CI.SV.CastBarLabel then

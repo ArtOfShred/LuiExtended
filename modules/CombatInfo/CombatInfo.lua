@@ -78,6 +78,7 @@ CI.D = {
 }
 CI.SV               = nil
 CI.CastBarUnlocked  = false
+CI.AlertFrameUnlocked  = false
 
 local uiTlw                   = {} -- GUI
 local castbar                 = {} -- castbar
@@ -297,7 +298,7 @@ function CI.Initialize( enabled )
     CI.SetCastBarPosition()
 
     CI.CreateAlertFrame()
-    CI.SetAlertPosition()
+    CI.SetAlertFramePosition()
 end
 
 -- Helper function to get override ability duration.
