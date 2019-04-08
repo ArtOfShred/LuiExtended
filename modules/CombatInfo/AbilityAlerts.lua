@@ -37,7 +37,7 @@ local ccTypes = {
     FEAR = 3,
     SILENCE = 4,
     STAGGER = 5,
-    UNNBREAKABLE = 6,
+    UNBREAKABLE = 6,
     SNARE = 7,
 }
 
