@@ -202,11 +202,10 @@ end
 
 -- Slash Command to report a player by given name and attach useful information
 function SC.SlashReport(player)
-    local name = player
     local location = GetPlayerLocationName()
     local currenttime = GetTimeString()
     local currentdate = GetDateStringFromTimestamp(GetTimeStamp())
-    local server = GetCVar("LastPlatform")
+    local server = GetWorldName()
     local text = "I've encounterd a suspicious player.\n\nName: <<1>>\nLocation: <<2>>\nDate & Time: <<3>> <<4>>\nServer: <<5>>"
 
     -- Set the category to report a player
@@ -215,8 +214,8 @@ function SC.SlashReport(player)
     HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD:SelectSubcategory(4)
 
     -- Populate the reporting window name and description
-    ZO_Help_Ask_For_Help_Keyboard_ControlDetailsTextLineField:SetText(name)
-	ZO_Help_Ask_For_Help_Keyboard_ControlDescriptionBodyField:SetText(strformat(text, name, location, currentdate, currenttime, server))
+    ZO_Help_Ask_For_Help_Keyboard_ControlDetailsTextLineField:SetText(player)
+	ZO_Help_Ask_For_Help_Keyboard_ControlDescriptionBodyField:SetText(strformat(text, player, location, currentdate, currenttime, server))
 
     -- Open the reporting window
     HELP_CUSTOMER_SUPPORT_KEYBOARD:OpenScreen(HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD_FRAGMENT)
