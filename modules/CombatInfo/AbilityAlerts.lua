@@ -21,33 +21,21 @@ local strfmt = string.format
 local moduleName    = LUIE.name .. "_CombatInfo"
 
 local uiTlw         = {} -- GUI
+local g_alertFont -- Font for Alerts
 
 -- Create Alert Frame - basic setup for now
 function CI.CreateAlertFrame()
 
-    -- Temporary font configuration
-    local barFontName = LUIE.Fonts[CI.SV.BarFontFace]
-    if not barFontName or barFontName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
-        barfontName = "$(MEDIUM_FONT)"
-    end
-    local barFontStyle = ( CI.SV.BarFontStyle and CI.SV.BarFontStyle ~= "" ) and CI.SV.BarFontStyle or "outline"
-    local barFontSize = 24
-    local g_barFont = barFontName .. "|" .. barFontSize .. "|" .. barFontStyle
-    --
+    CI.ApplyFontAlert()
 
     -- Create Top Level Controls
-    uiTlw.AlertFrame = UI.TopLevel( { CENTER, CENTER, 0 , -250, GuiRoot }, nil )
-    uiTlw.AlertFrame:SetHandler( "OnMoveStop", function(self)
-            CI.SV.AlertFrameX = self:GetLeft()
-            CI.SV.AlertFrameY = self:GetTop()
-        end )
+    uiTlw.alertFrame = UI.TopLevel( nil, nil )
 
     -- Create 3 alert labels
-    local anchor = { CENTER, CENTER, 0, 0, uiTlw.AlertFrame }
-    local height = (barFontSize * 2)
+    local anchor = { CENTER, CENTER, 0, 0, uiTlw.alertFrame }
+    local height = (CI.SV.AlertFontSize * 2)
     for i = 1, 3 do
-        local alert = UI.Control( uiTlw.AlertFrame, anchor, { nil, height }, false, "LUIE_Alert" .. i )
+        local alert = UI.Control( uiTlw.alertFrame, anchor, { nil, height }, false, "LUIE_Alert" .. i )
 
         alert.data = {
             ["available"] = true,
@@ -58,10 +46,8 @@ function CI.CreateAlertFrame()
             ["ccType"] = nil,
         }
 
-        alert.name = UI.Label( alert, nil, nil, nil, g_barFont, alert.data.textName, false )
+        alert.name = UI.Label( alert, nil, nil, nil, g_alertFont, alert.data.textName, false )
         alert.name:SetAnchor(LEFT, alert, LEFT, 0, 0 )
-
-        local nameWidth = alert.name:GetTextWidth()
 
         alert.icon = UI.Backdrop( alert.name, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
         alert.icon:SetDimensions(40, 40)
@@ -88,13 +74,10 @@ function CI.CreateAlertFrame()
         alert.icon.icon:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 3, 3 )
         alert.icon.icon:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3 )
 
-        alert.mitigation = UI.Label( alert.icon, nil, nil, nil, g_barFont, alert.data.textMitigation, false )
+        alert.mitigation = UI.Label( alert.icon, nil, nil, nil, g_alertFont, alert.data.textMitigation, false )
         alert.mitigation:SetAnchor(LEFT, alert.icon, RIGHT, 6, 0 )
 
-        local mitigationWidth = alert.name:GetTextWidth()
-
-        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth(), 40 )
-        --alert:SetAnchor(CENTER, uiTlw.AlertFrame, CENTER, 0 , 0)
+        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth(), height )
         alert:SetHidden(false)
         alert.icon:SetHidden(false)
 
@@ -102,7 +85,41 @@ function CI.CreateAlertFrame()
 
     end
 
-    local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.AlertFrame, 0, 0)
+    uiTlw.alertFrame:SetDimensions(500, height * 3)
+
+    -- Setup Preview
+    uiTlw.alertFrame.preview = LUIE.UI.Backdrop( uiTlw.alertFrame, "fill", nil, nil, nil, true )
+    uiTlw.alertFrame.previewLabel = UI.Label( uiTlw.alertFrame.preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", "Alerts Frame", false )
+
+    -- Callback used to hide anchor coords preview label on movement start
+    local tlwOnMoveStart = function(self)
+        eventManager:RegisterForUpdate( moduleName .. "previewMoveAlert", 200, function()
+            self.preview.anchorLabel:SetText(strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
+        end)
+    end
+    -- Callback used to save new position of frames
+    local tlwOnMoveStop = function(self)
+        eventManager:UnregisterForUpdate( moduleName .. "previewMoveAlert" )
+        CI.SV.AlertFrameOffsetX = self:GetLeft()
+        CI.SV.AlertFrameOffsetY = self:GetTop()
+        CI.SV.AlertFrameCustomPosition = { self:GetLeft(), self:GetTop() }
+    end
+
+    uiTlw.alertFrame.preview.anchorTexture = UI.Texture( uiTlw.alertFrame.preview, {TOPLEFT,TOPLEFT}, {16,16}, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false )
+    uiTlw.alertFrame.preview.anchorTexture:SetColor(1, 1, 0, 0.9)
+
+    uiTlw.alertFrame.preview.anchorLabel = UI.Label( uiTlw.alertFrame.preview, {BOTTOMLEFT,TOPLEFT,0,-1}, nil, {0,2}, "ZoFontGameSmall", "xxx, yyy", false )
+    uiTlw.alertFrame.preview.anchorLabel:SetColor(1, 1, 0 , 1)
+    uiTlw.alertFrame.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
+    uiTlw.alertFrame.preview.anchorLabel:SetDrawTier(1)
+    uiTlw.alertFrame.preview.anchorLabelBg = UI.Backdrop(  uiTlw.alertFrame.preview.anchorLabel, "fill", nil, {0,0,0,1}, {0,0,0,1}, false )
+    uiTlw.alertFrame.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
+    uiTlw.alertFrame.preview.anchorLabelBg:SetDrawTier(0)
+
+    uiTlw.alertFrame:SetHandler( "OnMoveStart", tlwOnMoveStart )
+    uiTlw.alertFrame:SetHandler( "OnMoveStop", tlwOnMoveStop )
+
+    local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.alertFrame, 0, 0)
 
     sceneManager:GetScene("hud"):AddFragment( fragment )
     sceneManager:GetScene("hudui"):AddFragment( fragment )
@@ -126,11 +143,69 @@ function CI.CreateAlertFrame()
 
 end
 
+function CI.ResetAlertFramePosition()
+    if not CI.Enabled then
+        return
+    end
+    CI.SV.AlertFrameOffsetX = nil
+    CI.SV.AlertFrameOffsetY = nil
+    CI.SV.AlertFrameCustomPosition = nil
+    CI.SetAlertFramePosition()
+end
+
+function CI.SetAlertFramePosition()
+    if uiTlw.alertFrame and uiTlw.alertFrame:GetType() == CT_TOPLEVELCONTROL then
+        uiTlw.alertFrame:ClearAnchors()
+
+        if CI.SV.AlertFrameOffsetX ~= nil and CI.SV.AlertFrameOffsetY ~= nil then
+            uiTlw.alertFrame:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, CI.SV.AlertFrameOffsetX, CI.SV.AlertFrameOffsetY )
+        else
+            uiTlw.alertFrame:SetAnchor( CENTER, GuiRoot, CENTER, 0, -250 )
+        end
+    end
+
+    local savedPos = CI.SV.AlertFrameCustomPosition
+    uiTlw.alertFrame.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default" )
+end
+
+function CI.SetMovingStateAlert(state)
+    if not CI.Enabled then
+        return
+    end
+    CI.AlertFrameUnlocked = state
+    if uiTlw.alertFrame and uiTlw.alertFrame:GetType() == CT_TOPLEVELCONTROL then
+        CI.GenerateAlertFramePreview(state)
+        uiTlw.alertFrame:SetMouseEnabled( state )
+        uiTlw.alertFrame:SetMovable( state )
+    end
+end
+
+-- Called by CI.SetMovingState from the menu as well as by CI.OnUpdateCastbar when preview is enabled
+function CI.GenerateAlertFramePreview(state)
+    -- TODO: ITERATE HERE AND ADD TEST ALERTS
+    --[[local previewIcon = 'esoui/art/icons/icon_missing.dds'
+    castbar.icon:SetTexture(previewIcon)
+    if CI.SV.CastBarLabel then
+        local previewName = "Test"
+        castbar.bar.name:SetText(previewName)
+        castbar.bar.name:SetHidden( not state )
+    end
+    if CI.SV.CastBarTimer then
+        castbar.bar.timer:SetText( strfmt("1.0") )
+        castbar.bar.timer:SetHidden ( not state )
+    end
+    castbar.bar.bar:SetValue( 1 )]]--
+
+    uiTlw.alertFrame.preview:SetHidden( not state )
+    uiTlw.alertFrame:SetHidden( not state )
+end
+
 -- Update ticker for Alerts
 function CI.AlertUpdate()
     for i = 1, 3 do
-        if _G["LUIE_Alert" .. i].duration then
+        if _G["LUIE_Alert" .. i].data.duration then
 
+            --[[
             if i > 1 and _G["LUIE_Alert" .. i - 1].data.available == true then
                 _G["LUIE_Alert" .. i - 1].data.duration = _G["LUIE_Alert" .. i].data.duration
                 _G["LUIE_Alert" .. i - 1].data.showDuration = _G["LUIE_Alert" .. i].data.showDuration
@@ -144,10 +219,11 @@ function CI.AlertUpdate()
                 _G["LUIE_Alert" .. i].data.showDuration = nil
                 i = i - 1
             end
+            ]]--
 
             _G["LUIE_Alert" .. i].data.duration = _G["LUIE_Alert" .. i].data.duration - 100
             if _G["LUIE_Alert" .. i].data.showDuration then
-                _G["LUIE_Alert" .. i].mitigation:SetText(_G["LUIE_Alert" .. i].textMitigation .. " " .. strfmt("%.1f", _G["LUIE_Alert" .. i].data.duration/1000) )
+                _G["LUIE_Alert" .. i].mitigation:SetText(_G["LUIE_Alert" .. i].data.textMitigation .. " " .. strfmt("%.1f", _G["LUIE_Alert" .. i].data.duration/1000) )
             end
             if _G["LUIE_Alert" .. i].data.duration <= 0 then
                 _G["LUIE_Alert" .. i]:SetHidden(true)
@@ -190,6 +266,14 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
     drawLocation = drawLocation +1
     if drawLocation > 3 then
         drawLocation = 1
+    end
+end
+
+function CI.RealignAlerts()
+    local height = (CI.SV.AlertFontSize * 2)
+    for i = 1, 3 do
+        alert = _G["LUIE_Alert" .. i]
+        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth(), height )
     end
 end
 
@@ -586,5 +670,25 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, d
     if not duration then duration = 4000 end
 
     CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, ccType)
+    CI.RealignAlerts()
 
+end
+
+-- Updates local variables with new font
+function CI.ApplyFontAlert()
+    if not CI.Enabled then
+        return
+    end
+
+    -- Setup Alerts Font
+    local alertFontName = LUIE.Fonts[CI.SV.AlertFontFace]
+    if not alertFontName or alertFontName == "" then
+        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
+        alertFontName = "$(MEDIUM_FONT)"
+    end
+
+    local alertFontStyle = ( CI.SV.AlertFontStyle and CI.SV.AlertFontStyle ~= "" ) and CI.SV.AlertFontStyle or "soft-shadow-thin"
+    local alertFontSize = ( CI.SV.AlertFontSize and CI.SV.AlertFontSize > 0 ) and CI.SV.AlertFontSize or 16
+
+    g_alertFont = alertFontName .. "|" .. alertFontSize .. "|" .. alertFontStyle
 end

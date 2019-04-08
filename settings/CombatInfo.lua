@@ -9,6 +9,9 @@ local strformat = zo_strformat
 
 local optionsDataCombatInfo = {}
 
+l_CastBarMovingEnable = false -- Helper local flag
+l_AlertFrameMovingEnabled = false -- Helper local flag
+
 -- TEMP -- TODO: REMOVE
 local CT = LUIE.CombatText
 local CTC = LUIE.CombatTextConstants
@@ -647,7 +650,7 @@ function CI.CreateSettings()
             {
                 -- Alerts Font
                 type     = "slider",
-                name    = GetString(SI_LUIE_LAM_FONT_SIZE),
+                name    = GetString(SI_LUIE_LAM_FONT_SIZE) .. "TODO: REMOVE",
                 tooltip = GetString(SI_LUIE_LAM_CI_FONT_NOTIFICATION_ALERT_TP),
                 min     = 8,
                 max     = 72,
@@ -656,6 +659,67 @@ function CI.CreateSettings()
                 setFunc = function(size) CT.SV.fontSizes.alert = size end,
                 default = CT.D.fontSizes.alert,
             },
+
+            -- Cast Bar Unlock
+            {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE_TP),
+                getFunc = function() return l_AlertFrameMovingEnabled end,
+                setFunc = CI.SetMovingStateAlert,
+                width = "half",
+                default = false,
+                resetFunc = CI.ResetAlertFramePosition,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+            },
+            -- Cast Bar Unlock Reset position
+            {
+                type = "button",
+                name = GetString(SI_LUIE_LAM_RESETPOSITION),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_RESET),
+                func = CI.ResetAlertFramePosition,
+                width = "half",
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+            },
+
+            {
+                type = "dropdown",
+                scrollable = true,
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+                tooltip = "TODO",
+                choices = FontsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.AlertFontFace end,
+                setFunc = function(var) CI.SV.AlertFontFace = var CI.ApplyFontAlert() end,
+                width = "full",
+                default = CI.D.AlertFontFace,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+            },
+            {
+                type = "slider",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+                tooltip = "TODO",
+                min = 16, max = 64, step = 1,
+                getFunc = function() return CI.SV.AlertFontSize end,
+                setFunc = function(value) CI.SV.AlertFontSize = value CI.ApplyFontAlert() end,
+                width = "full",
+                default = CI.D.AlertFontSize,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+            },
+            {
+                type = "dropdown",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+                tooltip = "TODO",
+                choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
+                sort = "name-up",
+                getFunc = function() return CI.SV.AlertFontStyle end,
+                setFunc = function(var) CI.SV.AlertFontStyle = var CI.ApplyFontAlert() end,
+                width = "full",
+                default = CI.D.AlertFontStyle,
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+            },
+
+
             {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT),

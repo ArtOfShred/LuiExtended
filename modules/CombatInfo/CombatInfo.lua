@@ -71,6 +71,10 @@ CI.D = {
     CastBarFontSize                  = 16,
     CastBarGradientC1                = { 0, 47/255, 130/255 },
     CastBarGradientC2                = { 82/255, 215/255, 1 },
+
+    AlertFontFace                   = "Univers 67",
+    AlertFontStyle                  = "soft-shadow-thick",
+    AlertFontSize                   = 32,
 }
 CI.SV               = nil
 CI.CastBarUnlocked  = false
@@ -293,6 +297,7 @@ function CI.Initialize( enabled )
     CI.SetCastBarPosition()
 
     CI.CreateAlertFrame()
+    CI.SetAlertPosition()
 end
 
 -- Helper function to get override ability duration.
@@ -637,6 +642,7 @@ function CI.ApplyFont()
         uiUltimate.LabelPct:SetFont(g_ultimateFont)
     end
 
+    -- Setup Castbar Font
     local castbarFontName = LUIE.Fonts[CI.SV.CastBarFontFace]
     if not castbarFontName or castbarFontName == "" then
         printToChat(GetString(SI_LUIE_ERROR_FONT), true)
@@ -647,6 +653,7 @@ function CI.ApplyFont()
     local castbarFontSize = ( CI.SV.CastBarFontSize and CI.SV.CastBarFontSize > 0 ) and CI.SV.CastBarFontSize or 16
 
     g_castbarFont = castbarFontName .. "|" .. castbarFontSize .. "|" .. castbarFontStyle
+
 end
 
 -- Updates Proc Sound - called on initialization and menu changes
