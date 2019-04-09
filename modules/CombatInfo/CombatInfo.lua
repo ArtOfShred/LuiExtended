@@ -83,6 +83,9 @@ CI.D = {
             showMitigation              = true,
             mitigationPrefix            = "%t",
             mitigationPrefixN           = "%n - %t",
+
+            showCrowdControlBorder      = true,
+
             mitigationPowerPrefix       = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER),
             mitigationPowerPrefixN      = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER_N),
             mitigationDestroyPrefix     = GetString(SI_LUIE_CI_MITIGATION_FORMAT_DESTROY),

@@ -111,7 +111,7 @@ function CI.CreateAlertFrame()
         alert.mitigation:SetAnchor(LEFT, alert.icon, RIGHT, 6, 0 )
 
         alert.timer = UI.Label( alert.icon, nil, nil, nil, g_alertFont, alert.data.duration, false )
-        alert.timer:SetAnchor(LEFT, alert.icon, RIGHT, 0, 0 )
+        alert.timer:SetAnchor(LEFT, alert.mitigation, RIGHT, 0, 0 )
 
         alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height )
         alert:SetHidden(false)
@@ -269,20 +269,24 @@ function CI.AlertUpdate()
 end
 
 function CI.CrowdControlColorSetup(crowdControl)
-    if crowdControl == ccTypes.STUN then
-        return CI.SV.alerts.colors.stunColor
-    elseif crowdControl == ccTypes.DISORIENT then
-        return CI.SV.alerts.colors.disorientColor
-    elseif crowdControl == ccTypes.FEAR then
-        return CI.SV.alerts.colors.fearColor
-    elseif crowdControl == ccTypes.SILENCE then
-        return CI.SV.alerts.colors.silenceColor
-    elseif crowdControl == ccTypes.STAGGER then
-        return CI.SV.alerts.colors.staggerColor
-    elseif crowdControl == ccTypes.UNBREAKABLE then
-        return CI.SV.alerts.colors.unbreakableColor
-    elseif crowdControl == ccTypes.SNARE then
-        return CI.SV.alerts.colors.snareColor
+    if CI.SV.alerts.toggles.showCrowdControlBorder then
+        if crowdControl == ccTypes.STUN then
+            return CI.SV.alerts.colors.stunColor
+        elseif crowdControl == ccTypes.DISORIENT then
+            return CI.SV.alerts.colors.disorientColor
+        elseif crowdControl == ccTypes.FEAR then
+            return CI.SV.alerts.colors.fearColor
+        elseif crowdControl == ccTypes.SILENCE then
+            return CI.SV.alerts.colors.silenceColor
+        elseif crowdControl == ccTypes.STAGGER then
+            return CI.SV.alerts.colors.staggerColor
+        elseif crowdControl == ccTypes.UNBREAKABLE then
+            return CI.SV.alerts.colors.unbreakableColor
+        elseif crowdControl == ccTypes.SNARE then
+            return CI.SV.alerts.colors.snareColor
+        else
+            return { 0, 0, 0, 0 }
+        end
     else
         return { 0, 0, 0, 0 }
     end
@@ -698,7 +702,7 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, c
 		end
 
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = S.toggles.showMitigation and "" or strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt)
+        textMitigation = S.toggles.showMitigation and strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt) or ""
 
         text = strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
 	-- UNMIT

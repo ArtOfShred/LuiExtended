@@ -864,6 +864,17 @@ function CI.CreateSettings()
             },
 
             {
+                -- Show Crowd Control Border
+                type    = "checkbox",
+                name    = "SHOW CROWD CONTROL COLOR BORDER",
+                tooltip = "COLOR THE FRAME OF THE INCOMING ABILITY ICON BASED OFF THE TYPE OF CC INCOMING (IF ANY)",
+                getFunc = function() return CI.SV.alerts.toggles.showCrowdControlBorder end,
+                setFunc = function(v) CI.SV.alerts.toggles.showCrowdControlBorder = v end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.showCrowdControlBorder,
+            },
+
+            {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK),
                 width = "full",
