@@ -53,7 +53,6 @@ function CI.SetAlertColors()
 		alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
 		alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex(),
 		alertColorSummon = ZO_ColorDef:New(unpack(colors.alertSummon)):ToHex(),
-        alertColorTimer = ZO_ColorDef:New(unpack(colors.alertTimer)):ToHex(),
 	}
 end
 
@@ -78,7 +77,6 @@ function CI.CreateAlertFrame()
             ["duration"] = 0,
             ["showDuration"] = false,
             ["ccType"] = nil,
-            ["timerColor"] = nil,
         }
 
         alert.name = UI.Label( alert, nil, nil, nil, g_alertFont, alert.data.textName, false )
@@ -112,7 +110,10 @@ function CI.CreateAlertFrame()
         alert.mitigation = UI.Label( alert.icon, nil, nil, nil, g_alertFont, alert.data.textMitigation, false )
         alert.mitigation:SetAnchor(LEFT, alert.icon, RIGHT, 6, 0 )
 
-        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth(), height )
+        alert.timer = UI.Label( alert.icon, nil, nil, nil, g_alertFont, alert.data.duration, false )
+        alert.timer:SetAnchor(LEFT, alert.icon, RIGHT, 0, 0 )
+
+        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height )
         alert:SetHidden(false)
         alert.icon:SetHidden(false)
 
@@ -254,9 +255,9 @@ function CI.AlertUpdate()
             ]]--
 
             _G["LUIE_Alert" .. i].data.duration = _G["LUIE_Alert" .. i].data.duration - 100
-            if _G["LUIE_Alert" .. i].data.showDuration and _G["LUIE_Alert" .. i].data.timerColor then
-                local timer = strfmt("|c%s%.1f|r", _G["LUIE_Alert" .. i].data.timerColor, _G["LUIE_Alert" .. i].data.duration / 1000)
-                _G["LUIE_Alert" .. i].mitigation:SetText(_G["LUIE_Alert" .. i].data.textMitigation .. " " .. timer )
+            if _G["LUIE_Alert" .. i].data.showDuration then
+                _G["LUIE_Alert" .. i].timer:SetText(_G["LUIE_Alert" .. i].data.showDuration and strfmt(" %.1f", _G["LUIE_Alert" .. i].data.duration / 1000) or "")
+                _G["LUIE_Alert" .. i].timer:SetColor(unpack(CI.SV.alerts.colors.alertTimer))
             end
             if _G["LUIE_Alert" .. i].data.duration <= 0 then
                 _G["LUIE_Alert" .. i]:SetHidden(true)
@@ -302,10 +303,10 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
             _G["LUIE_Alert" .. i].data.showDuration = CI.SV.alerts.toggles.alertTimer and showDuration or false
             _G["LUIE_Alert" .. i].name:SetText(textName)
             _G["LUIE_Alert" .. i].name:SetColor(unpack(CI.SV.alerts.colors.alertShared))
-            _G["LUIE_Alert" .. i].data.timerColor = CI.AlertColors.alertColorTimer
-            local timer = strfmt("|c%s%.1f|r", _G["LUIE_Alert" .. i].data.timerColor, duration / 1000)
-            _G["LUIE_Alert" .. i].mitigation:SetText(_G["LUIE_Alert" .. i].data.showDuration and (textMitigation .. " " .. timer) or textMitigation)
+            _G["LUIE_Alert" .. i].mitigation:SetText(textMitigation)
             _G["LUIE_Alert" .. i].mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
+            _G["LUIE_Alert" .. i].timer:SetText(_G["LUIE_Alert" .. i].data.showDuration and strfmt(" %.1f", duration / 1000) or "")
+            _G["LUIE_Alert" .. i].timer:SetColor(unpack(CI.SV.alerts.colors.alertTimer))
             _G["LUIE_Alert" .. i]:SetHidden(false)
             _G["LUIE_Alert" .. i].data.available = false
             _G["LUIE_Alert" .. i].icon.cd:SetFillColor( color[1], color[2], color[3], color[4] )
@@ -322,10 +323,10 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
     _G["LUIE_Alert" .. drawLocation].data.showDuration = CI.SV.alerts.toggles.alertTimer and showDuration or false
     _G["LUIE_Alert" .. drawLocation].name:SetText(textName)
     _G["LUIE_Alert" .. drawLocation].name:SetColor(unpack(CI.SV.alerts.colors.alertShared))
-    _G["LUIE_Alert" .. drawLocation].data.timerColor = CI.AlertColors.alertColorTimer
-    local timer = strfmt("|c%s%.1f|r", _G["LUIE_Alert" .. i].data.timerColor, duration / 1000)
-    _G["LUIE_Alert" .. drawLocation].mitigation:SetText(_G["LUIE_Alert" .. drawLocation].data.showDuration and (textMitigation .. " " .. timer) or textMitigation)
+    _G["LUIE_Alert" .. drawLocation].mitigation:SetText(textMitigation)
     _G["LUIE_Alert" .. drawLocation].mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
+    _G["LUIE_Alert" .. drawLocation].timer:SetText(_G["LUIE_Alert" .. i].data.showDuration and strfmt(" %.1f", duration / 1000) or "")
+    _G["LUIE_Alert" .. drawLocation].timer:SetColor(unpack(CI.SV.alerts.colors.alertTimer))
     _G["LUIE_Alert" .. drawLocation]:SetHidden(false)
     _G["LUIE_Alert" .. drawLocation].data.available = false
     _G["LUIE_Alert" .. drawLocation].icon.cd:SetFillColor( color[1], color[2], color[3], color[4] )
@@ -340,7 +341,7 @@ function CI.RealignAlerts()
     local height = (CI.SV.alerts.toggles.alertFontSize * 2)
     for i = 1, 3 do
         alert = _G["LUIE_Alert" .. i]
-        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth(), height )
+        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height )
     end
 end
 
