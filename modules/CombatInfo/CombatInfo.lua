@@ -71,14 +71,16 @@ CI.D = {
     CastBarFontSize                  = 16,
     CastBarGradientC1                = { 0, 47/255, 130/255 },
     CastBarGradientC2                = { 82/255, 215/255, 1 },
-    AlertFontFace                   = "Univers 67",
-    AlertFontStyle                  = "soft-shadow-thick",
-    AlertFontSize                   = 32,
     alerts = {
         toggles = {
             --Alerts
-            showAlertMitigation         = true,
-            hideMitigation              = true,
+            alertEnable                 = true,
+            alertFontFace               = "Univers 67",
+            alertFontStyle              = "soft-shadow-thick",
+            alertFontSize               = 32,
+            alertTimer                  = true,
+
+            showMitigation              = true,
             mitigationPrefix            = "%t",
             mitigationPrefixN           = "%n - %t",
             mitigationPowerPrefix       = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER),
@@ -102,9 +104,12 @@ CI.D = {
             showAlertDestroy            = true,
             showAlertSummon             = true,
 
+            alertOptions                = 1,
+
         },
         colors = {
             alertShared                 = { 1, 1, 1, 1 },
+            alertTimer                  = { 1, 1, 1, 1 },
             alertBlockA                 = { 1, 0, 0, 1 },
             alertInterruptB             = { 0, 0.50, 1, 1 },
             alertUnmit					= { 1, 0, 0, 1 },

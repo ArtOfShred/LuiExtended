@@ -35,10 +35,10 @@ local ccTypes = {
     STUN = 1,
     DISORIENT = 2,
     FEAR = 3,
-    SILENCE = 4,
-    STAGGER = 5,
-    UNBREAKABLE = 6,
-    SNARE = 7,
+    STAGGER = 4,
+    SILENCE = 5,
+    SNARE = 6,
+    UNBREAKABLE = 7,
 }
 
 -- Set Alert Colors
@@ -53,6 +53,7 @@ function CI.SetAlertColors()
 		alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
 		alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex(),
 		alertColorSummon = ZO_ColorDef:New(unpack(colors.alertSummon)):ToHex(),
+        alertColorTimer = ZO_ColorDef:New(unpack(colors.alertTimer)):ToHex(),
 	}
 end
 
@@ -66,7 +67,7 @@ function CI.CreateAlertFrame()
 
     -- Create 3 alert labels
     local anchor = { CENTER, CENTER, 0, 0, uiTlw.alertFrame }
-    local height = (CI.SV.AlertFontSize * 2)
+    local height = (CI.SV.alerts.toggles.alertFontSize * 2)
     for i = 1, 3 do
         local alert = UI.Control( uiTlw.alertFrame, anchor, { nil, height }, false, "LUIE_Alert" .. i )
 
@@ -77,6 +78,7 @@ function CI.CreateAlertFrame()
             ["duration"] = 0,
             ["showDuration"] = false,
             ["ccType"] = nil,
+            ["timerColor"] = nil,
         }
 
         alert.name = UI.Label( alert, nil, nil, nil, g_alertFont, alert.data.textName, false )
@@ -252,13 +254,13 @@ function CI.AlertUpdate()
             ]]--
 
             _G["LUIE_Alert" .. i].data.duration = _G["LUIE_Alert" .. i].data.duration - 100
-            if _G["LUIE_Alert" .. i].data.showDuration then
-                _G["LUIE_Alert" .. i].mitigation:SetText(_G["LUIE_Alert" .. i].data.textMitigation .. " " .. strfmt("%.1f", _G["LUIE_Alert" .. i].data.duration/1000) )
+            if _G["LUIE_Alert" .. i].data.showDuration and _G["LUIE_Alert" .. i].data.timerColor then
+                local timer = strfmt("|c%s%.1f|r", _G["LUIE_Alert" .. i].data.timerColor, _G["LUIE_Alert" .. i].data.duration / 1000)
+                _G["LUIE_Alert" .. i].mitigation:SetText(_G["LUIE_Alert" .. i].data.textMitigation .. " " .. timer )
             end
             if _G["LUIE_Alert" .. i].data.duration <= 0 then
                 _G["LUIE_Alert" .. i]:SetHidden(true)
-                _G["LUIE_Alert" .. i].data.textMitigation = nil
-                _G["LUIE_Alert" .. i].data.duration = nil
+                _G["LUIE_Alert" .. i].data = { }
                 _G["LUIE_Alert" .. i].data.available = true
             end
         end
@@ -289,16 +291,20 @@ local drawLocation = 1
 function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl)
     local color = CI.CrowdControlColorSetup(crowdControl)
 
+    -- TODO: FIX SET LABEL COLOR HERE
+
     for i = 1, 3 do
         if _G["LUIE_Alert" .. i].data.available then
             _G["LUIE_Alert" .. i].data.textMitigation =  textMitigation
             _G["LUIE_Alert" .. i].data.textName =  textName
             _G["LUIE_Alert" .. i].icon.icon:SetTexture(abilityIcon)
             _G["LUIE_Alert" .. i].data.duration = duration
-            _G["LUIE_Alert" .. i].data.showDuration = showDuration
+            _G["LUIE_Alert" .. i].data.showDuration = CI.SV.alerts.toggles.alertTimer and showDuration or false
             _G["LUIE_Alert" .. i].name:SetText(textName)
             _G["LUIE_Alert" .. i].name:SetColor(unpack(CI.SV.alerts.colors.alertShared))
-            _G["LUIE_Alert" .. i].mitigation:SetText(showDuration and (textMitigation .. " " .. strfmt("%.1f", duration/1000)) or textMitigation)
+            _G["LUIE_Alert" .. i].data.timerColor = CI.AlertColors.alertColorTimer
+            local timer = strfmt("|c%s%.1f|r", _G["LUIE_Alert" .. i].data.timerColor, duration / 1000)
+            _G["LUIE_Alert" .. i].mitigation:SetText(_G["LUIE_Alert" .. i].data.showDuration and (textMitigation .. " " .. timer) or textMitigation)
             _G["LUIE_Alert" .. i].mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
             _G["LUIE_Alert" .. i]:SetHidden(false)
             _G["LUIE_Alert" .. i].data.available = false
@@ -313,10 +319,12 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
     _G["LUIE_Alert" .. drawLocation].data.textName = textName
     _G["LUIE_Alert" .. drawLocation].icon.icon:SetTexture(abilityIcon)
     _G["LUIE_Alert" .. drawLocation].data.duration = duration
-    _G["LUIE_Alert" .. drawLocation].data.showDuration = showDuration
+    _G["LUIE_Alert" .. drawLocation].data.showDuration = CI.SV.alerts.toggles.alertTimer and showDuration or false
     _G["LUIE_Alert" .. drawLocation].name:SetText(textName)
     _G["LUIE_Alert" .. drawLocation].name:SetColor(unpack(CI.SV.alerts.colors.alertShared))
-    _G["LUIE_Alert" .. drawLocation].mitigation:SetText(showDuration and (textMitigation .. " " .. strfmt("%.1f", duration/1000)) or textMitigation)
+    _G["LUIE_Alert" .. drawLocation].data.timerColor = CI.AlertColors.alertColorTimer
+    local timer = strfmt("|c%s%.1f|r", _G["LUIE_Alert" .. i].data.timerColor, duration / 1000)
+    _G["LUIE_Alert" .. drawLocation].mitigation:SetText(_G["LUIE_Alert" .. drawLocation].data.showDuration and (textMitigation .. " " .. timer) or textMitigation)
     _G["LUIE_Alert" .. drawLocation].mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
     _G["LUIE_Alert" .. drawLocation]:SetHidden(false)
     _G["LUIE_Alert" .. drawLocation].data.available = false
@@ -329,7 +337,7 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
 end
 
 function CI.RealignAlerts()
-    local height = (CI.SV.AlertFontSize * 2)
+    local height = (CI.SV.alerts.toggles.alertFontSize * 2)
     for i = 1, 3 do
         alert = _G["LUIE_Alert" .. i]
         alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth(), height )
@@ -343,6 +351,23 @@ function CI.ProcessAlert(abilityId, unitName)
     if not AlertT[abilityId] then return end
     -- Ignore this event if we are on refire delay (whether from delay input in the table or from a "bad" event processing)
     if refireDelay[abilityId] then return end
+
+    -- Set CC Type if applicable
+    local crowdControl
+    if AlertT[abilityId].cc then
+        crowdControl = AlertT[abilityId].cc
+    end
+
+    -- Get menu setting for filtering and bail out here depending on that setting
+    local option = S.toggles.alertOptions
+    -- Bail out if we only have CC selected and this is not CC
+    if option == 2 and crowdControl ~= ccTypes.STUN and crowdControl ~= ccTypes.DISORIENT and crowdControl ~= ccTypes.FEAR and crowdControl ~= ccTypes.STAGGER and crowdControl ~= ccTypes.UNBREAKABLE then
+        return
+    end
+    -- Bail out if we only have unbreakable selected and this is not unbreakable
+    if option == 3 and crowdControl ~= ccTypes.UNBREAKABLE then
+        return
+    end
 
     -- Setup refire delay
     if AlertT[abilityId].refire then
@@ -359,7 +384,7 @@ function CI.ProcessAlert(abilityId, unitName)
     -- Get Ability Name & Icon
     local abilityName = GetAbilityName(abilityId)
     local abilityIcon = GetAbilityIcon(abilityId)
-    unitName = zo_strformat("<<t:1>>", unitName)
+    unitName = strformat("<<t:1>>", unitName)
 
     -- Handle effects that override by UnitName
     if E.EffectOverrideByName[abilityId] then
@@ -387,29 +412,22 @@ function CI.ProcessAlert(abilityId, unitName)
     end
 
     -- Override unitName here if we utilize a fakeName / bossName
-    unitName = zo_strformat("<<t:1>>", unitName)
+    unitName = strformat("<<t:1>>", unitName)
 
     if AlertT[abilityId].fakeName then
         unitName = AlertT[abilityId].fakeName
     end
     if AlertT[abilityId].bossName and DoesUnitExist('boss1') then
-        unitName = zo_strformat("<<t:1>>", GetUnitName('boss1'))
+        unitName = strformat("<<t:1>>", GetUnitName('boss1'))
     end
 
     if AlertT[abilityId].bossMatch then
         for i = 1, 4 do
-            local bossName = DoesUnitExist('boss' .. i) and zo_strformat("<<t:1>>", GetUnitName('boss' .. i)) or ""
+            local bossName = DoesUnitExist('boss' .. i) and strformat("<<t:1>>", GetUnitName('boss' .. i)) or ""
             if bossName == AlertT[abilityId].bossMatch then
                 unitName = AlertT[abilityId].bossMatch
             end
         end
-    end
-
-    local crowdControl
-
-    -- Set CC Type if applicable
-    if AlertT[abilityId].cc then
-        crowdControl = AlertT[abilityId].cc
     end
 
     local block
@@ -479,7 +497,7 @@ end
 function CI.AlertEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     local S = CI.SV.alerts
 
-    if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and AlertT[abilityId] and AlertT[abilityId].auradetect then
+    if S.toggles.alertEnable and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and AlertT[abilityId] and AlertT[abilityId].auradetect then
         if changeType == EFFECT_RESULT_FADED then return end
 
         -- Don't duplicate events if unitTag is player and in a group.
@@ -493,12 +511,12 @@ end
 
 function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     local S = CI.SV.alerts
-    abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    abilityName = strformat("<<C:1>>", GetAbilityName(abilityId))
     local abilityIcon = GetAbilityIcon(abilityId)
 
     -- TODO: Fix this so we only process this information once when also sending to the alert printer.
 
-    local sourceNameCheck = zo_strformat("<<t:1>>", sourceName)
+    local sourceNameCheck = strformat("<<t:1>>", sourceName)
 
     -- Handle effects that override by UnitName
     if E.EffectOverrideByName[abilityId] then
@@ -526,7 +544,7 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
     end
 
     -- NEW ALERTS
-    if S.toggles.showAlertMitigation and AlertT[abilityId] then
+    if S.toggles.alertEnable and AlertT[abilityId] then
         if sourceName ~= nil and sourceName ~= "" then
 
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
@@ -570,7 +588,7 @@ function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGr
     local S = CI.SV.alerts
 
     -- NEW ALERTS
-    if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) then
+    if S.toggles.alertEnable and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) then
         if not refireDelay[abilityId] then
 
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
@@ -641,34 +659,34 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, c
         -- PRIORITY: INTERRUPT > BLOCK STAGGER > DODGE > BLOCK > AVOID
         if blockstagger then block = false end
 
-		if not S.toggles.hideMitigation then
+		if S.toggles.showMitigation then
 			if avoid then
 				local color = CI.AlertColors.alertColorAvoid
-				stringAvoid = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertAvoid, spacer)
+				stringAvoid = strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertAvoid, spacer)
 			else
 				stringAvoid = ""
 			end
 
 			if block then
 				local color = CI.AlertColors.alertColorBlock
-				stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlock, spacer)
+				stringBlock = strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlock, spacer)
 			end
 
 			if dodge then
 				local color = CI.AlertColors.alertColorDodge
-				stringDodge = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertDodge, spacer)
+				stringDodge = strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertDodge, spacer)
 			else
 				stringDodge = ""
 			end
 
 			if blockstagger then
 				local color = CI.AlertColors.alertColorBlock
-				stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlockStagger, spacer)
+				stringBlock = strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlockStagger, spacer)
 			end
 
 			if interrupt then
 				local color = CI.AlertColors.alertColorInterrupt
-				stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertInterrupt, spacer)
+				stringInterrupt = strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertInterrupt, spacer)
 			else
 				stringInterrupt = ""
 			end
@@ -679,36 +697,36 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, c
 		end
 
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = S.toggles.hideMitigation and "" or zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt)
+        textMitigation = S.toggles.showMitigation and "" or strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt)
 
-        text = zo_strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
+        text = strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
 	-- UNMIT
 	elseif (alertType == alertTypes.UNMIT) then
 		local color = CI.AlertColors.alertColorUnmit
 		textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertUnmit)
-		text = zo_strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
+        textMitigation = strformat("|c<<1>><<2>>|r", color, S.formats.alertUnmit)
+		text = strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
     -- POWER
     elseif (alertType == alertTypes.POWER) then
         local color = CI.AlertColors.alertColorPower
 		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPowerPrefixN or S.toggles.mitigationPowerPrefix
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertPower)
-        text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
+        textMitigation = strformat("|c<<1>><<2>>|r", color, S.formats.alertPower)
+        text = strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- DESTROY
     elseif (alertType == alertTypes.DESTROY) then
         local color = CI.AlertColors.alertColorDestroy
 		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationDestroyPrefixN or S.toggles.mitigationDestroyPrefix
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertDestroy)
-        text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
+        textMitigation = strformat("|c<<1>><<2>>|r", color, S.formats.alertDestroy)
+        text = strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- SUMMON
     elseif (alertType == alertTypes.SUMMON) then
         local color = CI.AlertColors.alertColorSummon
 		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationSummonPrefixN or S.toggles.mitigationSummonPrefix
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertSummon)
-        text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
+        textMitigation = strformat("|c<<1>><<2>>|r", color, S.formats.alertSummon)
+        text = strformat("<<1>> <<2>>", stringPart1, stringPart2)
     end
 
     local showDuration = duration and true or false
@@ -725,14 +743,14 @@ function CI.ApplyFontAlert()
     end
 
     -- Setup Alerts Font
-    local alertFontName = LUIE.Fonts[CI.SV.AlertFontFace]
+    local alertFontName = LUIE.Fonts[CI.SV.alerts.toggles.alertFontFace]
     if not alertFontName or alertFontName == "" then
         printToChat(GetString(SI_LUIE_ERROR_FONT), true)
         alertFontName = "$(MEDIUM_FONT)"
     end
 
-    local alertFontStyle = ( CI.SV.AlertFontStyle and CI.SV.AlertFontStyle ~= "" ) and CI.SV.AlertFontStyle or "soft-shadow-thin"
-    local alertFontSize = ( CI.SV.AlertFontSize and CI.SV.AlertFontSize > 0 ) and CI.SV.AlertFontSize or 16
+    local alertFontStyle = ( CI.SV.alerts.toggles.alertFontStyle and CI.SV.alerts.toggles.alertFontStyle ~= "" ) and CI.SV.alerts.toggles.alertFontStyle or "soft-shadow-thin"
+    local alertFontSize = ( CI.SV.alerts.toggles.alertFontSize and CI.SV.alerts.toggles.alertFontSize > 0 ) and CI.SV.alerts.toggles.alertFontSize or 16
 
     g_alertFont = alertFontName .. "|" .. alertFontSize .. "|" .. alertFontStyle
 end

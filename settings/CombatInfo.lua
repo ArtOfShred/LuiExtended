@@ -32,6 +32,8 @@ end
 
 local globalMethodOptions     = { "Ascending", "Descending", "Radial" }
 local globalMethodOptionsKeys = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
+local globalAlertOptions = { "Show All Incoming Abilities", "Only Show Hard CC Effects", "Only Show Unbreakable CC Effects" }
+local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Show Hard CC Effects"] = 2, ["Only Show Unbreakable CC Effects"] = 3 }
 
 function CI.CreateSettings()
     -- Load LibAddonMenu
@@ -666,16 +668,26 @@ function CI.CreateSettings()
             },
 
             {
+                -- Show Alerts
+                type    = "checkbox",
+                name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION),
+                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP),
+                getFunc = function() return CI.SV.alerts.toggles.alertEnable end,
+                setFunc = function(v) CI.SV.alerts.toggles.alertEnable = v end,
+                default = CI.D.alerts.toggles.alertEnable,
+            },
+
+            {
                 type = "dropdown",
                 scrollable = true,
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
                 tooltip = "TODO",
                 choices = FontsList,
                 sort = "name-up",
-                getFunc = function() return CI.SV.AlertFontFace end,
-                setFunc = function(var) CI.SV.AlertFontFace = var CI.ApplyFontAlert() end,
+                getFunc = function() return CI.SV.alerts.toggles.alertFontFace end,
+                setFunc = function(var) CI.SV.alerts.toggles.alertFontFace = var CI.ApplyFontAlert() end,
                 width = "full",
-                default = CI.D.AlertFontFace,
+                default = CI.D.alerts.toggles.alertFontFace,
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
             },
             {
@@ -683,10 +695,10 @@ function CI.CreateSettings()
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
                 tooltip = "TODO",
                 min = 16, max = 64, step = 1,
-                getFunc = function() return CI.SV.AlertFontSize end,
-                setFunc = function(value) CI.SV.AlertFontSize = value CI.ApplyFontAlert() end,
+                getFunc = function() return CI.SV.alerts.toggles.alertFontSize end,
+                setFunc = function(value) CI.SV.alerts.toggles.alertFontSize = value CI.ApplyFontAlert() end,
                 width = "full",
-                default = CI.D.AlertFontSize,
+                default = CI.D.alerts.toggles.alertFontSize,
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
             },
             {
@@ -695,10 +707,10 @@ function CI.CreateSettings()
                 tooltip = "TODO",
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
-                getFunc = function() return CI.SV.AlertFontStyle end,
-                setFunc = function(var) CI.SV.AlertFontStyle = var CI.ApplyFontAlert() end,
+                getFunc = function() return CI.SV.alerts.toggles.alertFontStyle end,
+                setFunc = function(var) CI.SV.alerts.toggles.alertFontStyle = var CI.ApplyFontAlert() end,
                 width = "full",
-                default = CI.D.AlertFontStyle,
+                default = CI.D.alerts.toggles.alertFontStyle,
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
             },
             {
@@ -711,52 +723,13 @@ function CI.CreateSettings()
                 text = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION),
             },
             {
-                -- Mitigation Alerts
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP),
-                getFunc = function() return CI.SV.alerts.toggles.showAlertMitigation end,
-                setFunc = function(v) CI.SV.alerts.toggles.showAlertMitigation = v end,
-                default = CI.D.alerts.toggles.showAlertMitigation,
-            },
-            {
-                -- Hide Mitigation Grouped Alerts
-                type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE)),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP),
-                getFunc = function() return CI.SV.alerts.toggles.hideMitigation end,
-                setFunc = function(v) CI.SV.alerts.toggles.hideMitigation = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
-                default = CI.D.alerts.toggles.hideMitigation,
-            },
-            {
-                -- Mitigation Prefix (No Name)
-                type    = "editbox",
-                name    = strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME)),
-                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
-                getFunc = function() return CI.SV.alerts.toggles.mitigationPrefix end,
-                setFunc = function(v) CI.SV.alerts.toggles.mitigationPrefix = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
-                default = CI.D.alerts.toggles.mitigationPrefix,
-            },
-            {
-                -- Mitigation Prefix (Name)
-                type    = "editbox",
-                name    = strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME)),
-                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
-                getFunc = function() return CI.SV.alerts.toggles.mitigationPrefixN end,
-                setFunc = function(v) CI.SV.alerts.toggles.mitigationPrefixN = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
-                default = CI.D.alerts.toggles.mitigationPrefixN,
-            },
-            {
                 -- Mitigation Aura
                 type    = "checkbox",
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_AURA)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_AURA_TP),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationAura end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationAura = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
                 default = CI.D.alerts.toggles.mitigationAura,
             },
             {
@@ -766,7 +739,7 @@ function CI.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK3_TP),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationRank3 end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationRank3 = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
                 default = CI.D.alerts.toggles.mitigationRank3,
             },
             {
@@ -776,7 +749,7 @@ function CI.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK2_TP),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationRank2 end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationRank2 = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
                 default = CI.D.alerts.toggles.mitigationRank2,
             },
             {
@@ -786,7 +759,7 @@ function CI.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK1_TP),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationRank1 end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationRank1 = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
                 default = CI.D.alerts.toggles.mitigationRank1,
             },
             {
@@ -796,9 +769,21 @@ function CI.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON_TP),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationDungeon end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationDungeon = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
                 default = CI.D.alerts.toggles.mitigationDungeon,
             },
+
+            {
+                -- Alert Timer
+                type    = "checkbox",
+                name    = "Display countdown TIMER",
+                tooltip = "Display the countdown/cast time of the incoming ability",
+                getFunc = function() return CI.SV.alerts.toggles.alertTimer end,
+                setFunc = function(v) CI.SV.alerts.toggles.alertTimer = v end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.alertTimer,
+            },
+
             {
                 -- Shared Label Color
                 type    = "colorpicker",
@@ -809,21 +794,75 @@ function CI.CreateSettings()
                 default = {r=CI.D.alerts.colors.alertShared[1], g=CI.D.alerts.colors.alertShared[2], b=CI.D.alerts.colors.alertShared[3]}
             },
             {
+                -- Shared Timer Color
+                type    = "colorpicker",
+                name    = "TIMER COLOR",
+                tooltip = "WOW WE CAN EVEN COLOR THE TIMER TOO?! NEAT!",
+                getFunc = function() return unpack(CI.SV.alerts.colors.alertTimer) end,
+                setFunc = function(r, g, b, a) CI.SV.alerts.colors.alertTimer = { r, g, b, a } CI.SetAlertColors() end,
+                default = {r=CI.D.alerts.colors.alertTimer[1], g=CI.D.alerts.colors.alertTimer[2], b=CI.D.alerts.colors.alertTimer[3]}
+            },
+            {
                 type = "header",
                 name = "MITGATION ALERTS",
                 width = "full",
             },
 
             {
-                -- Block Enable
+                -- MITIGATION ENABLE
                 type    = "checkbox",
                 name    = "ENABLE MITIGATION ALERTS (TODO)",
                 tooltip = "TODO ADD A TP",
                 getFunc = function() return CI.SV.alerts.toggles.showAlertMitigate end,
                 setFunc = function(v) CI.SV.alerts.toggles.showAlertMitigate = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
                 default = CI.D.alerts.toggles.showAlertMitigate,
             },
+
+            {
+                -- Incoming Ability Filters
+                type = "dropdown",
+                name = "FILTER INCOMING ABILITIES",
+                tooltip = "TODO: Choose whether to show all incoming abilities, only hard CC effects, or only unbreakable CC effects.",
+                choices = globalAlertOptions,
+                getFunc = function() return globalAlertOptions[CI.SV.alerts.toggles.alertOptions] end,
+                setFunc = function(value) CI.SV.alerts.toggles.alertOptions = globalAlertOptionsKeys[value] end,
+                width = "full",
+                default = CI.D.alerts.toggles.alertOptions,
+                disabled = function() return not (LUIE.SV.CombatInfo_Enabled ) end,
+            },
+
+            {
+                -- Show Mitigation Suffix
+                type    = "checkbox",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_NOTIFICATION_MITIGATION_SUFFIX)),
+                tooltip = GetString(SI_LUIE_LAM_CI_NOTIFICATION_MITIGATION_SUFFIX_TP),
+                getFunc = function() return CI.SV.alerts.toggles.showMitigation end,
+                setFunc = function(v) CI.SV.alerts.toggles.showMitigation = v end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.showMitigation,
+            },
+            {
+                -- Mitigation Prefix (No Name)
+                type    = "editbox",
+                name    = strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
+                getFunc = function() return CI.SV.alerts.toggles.mitigationPrefix end,
+                setFunc = function(v) CI.SV.alerts.toggles.mitigationPrefix = v end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.mitigationPrefix,
+            },
+            {
+                -- Mitigation Prefix (Name)
+                type    = "editbox",
+                name    = strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME)),
+                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
+                getFunc = function() return CI.SV.alerts.toggles.mitigationPrefixN end,
+                setFunc = function(v) CI.SV.alerts.toggles.mitigationPrefixN = v end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.mitigationPrefixN,
+            },
+
             {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK),
@@ -944,7 +983,7 @@ function CI.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_UNMIT_TP),
                 getFunc = function() return CI.SV.alerts.toggles.showAlertUnmit end,
                 setFunc = function(v) CI.SV.alerts.toggles.showAlertUnmit = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
                 default = CI.D.alerts.toggles.showAlertUnmit,
             },
             {
@@ -978,7 +1017,7 @@ function CI.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP),
                 getFunc = function() return CI.SV.alerts.toggles.showAlertPower end,
                 setFunc = function(v) CI.SV.alerts.toggles.showAlertPower = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
                 default = CI.D.alerts.toggles.showAlertPower,
             },
             {
@@ -998,7 +1037,7 @@ function CI.CreateSettings()
                 tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationPowerPrefix end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationPowerPrefix = v end,
-                disabled = function() return not (CI.SV.alerts.toggles.showAlertMitigation and CI.SV.alerts.toggles.showAlertPower) end,
+                disabled = function() return not (CI.SV.alerts.toggles.alertEnable and CI.SV.alerts.toggles.showAlertPower) end,
                 default = CI.D.alerts.toggles.mitigationPowerPrefix,
             },
             {
@@ -1008,7 +1047,7 @@ function CI.CreateSettings()
                 tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationPowerPrefixN end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationPowerPrefixN = v end,
-                disabled = function() return not (CI.SV.alerts.toggles.showAlertMitigation and CI.SV.alerts.toggles.showAlertPower) end,
+                disabled = function() return not (CI.SV.alerts.toggles.alertEnable and CI.SV.alerts.toggles.showAlertPower) end,
                 default = CI.D.alerts.toggles.mitigationPowerPrefixN,
             },
             {
@@ -1032,7 +1071,7 @@ function CI.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP),
                 getFunc = function() return CI.SV.alerts.toggles.showAlertDestroy end,
                 setFunc = function(v) CI.SV.alerts.toggles.showAlertDestroy = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
                 default = CI.D.alerts.toggles.showAlertDestroy,
             },
             {
@@ -1052,7 +1091,7 @@ function CI.CreateSettings()
                 tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationDestroyPrefix end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationDestroyPrefix = v end,
-                disabled = function() return not (CI.SV.alerts.toggles.showAlertMitigation and CI.SV.alerts.toggles.showAlertDestroy) end,
+                disabled = function() return not (CI.SV.alerts.toggles.alertEnable and CI.SV.alerts.toggles.showAlertDestroy) end,
                 default = CI.D.alerts.toggles.mitigationDestroyPrefix,
             },
             {
@@ -1062,7 +1101,7 @@ function CI.CreateSettings()
                 tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationDestroyPrefixN end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationDestroyPrefixN = v end,
-                disabled = function() return not (CI.SV.alerts.toggles.showAlertMitigation and CI.SV.alerts.toggles.showAlertDestroy) end,
+                disabled = function() return not (CI.SV.alerts.toggles.alertEnable and CI.SV.alerts.toggles.showAlertDestroy) end,
                 default = CI.D.alerts.toggles.mitigationDestroyPrefixN,
             },
             {
@@ -1086,7 +1125,7 @@ function CI.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_SUMMON_TP),
                 getFunc = function() return CI.SV.alerts.toggles.showAlertSummon end,
                 setFunc = function(v) CI.SV.alerts.toggles.showAlertSummon = v end,
-                disabled = function() return not CI.SV.alerts.toggles.showAlertMitigation end,
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
                 default = CI.D.alerts.toggles.showAlertSummon,
             },
             {
@@ -1106,7 +1145,7 @@ function CI.CreateSettings()
                 tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationSummonPrefix end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationSummonPrefix = v end,
-                disabled = function() return not (CI.SV.alerts.toggles.showAlertMitigation and CI.SV.alerts.toggles.showAlertSummon) end,
+                disabled = function() return not (CI.SV.alerts.toggles.alertEnable and CI.SV.alerts.toggles.showAlertSummon) end,
                 default = CI.D.alerts.toggles.mitigationSummonPrefix,
             },
             {
@@ -1116,7 +1155,7 @@ function CI.CreateSettings()
                 tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationSummonPrefixN end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationSummonPrefixN = v end,
-                disabled = function() return not (CI.SV.alerts.toggles.showAlertMitigation and CI.SV.alerts.toggles.showAlertSummon) end,
+                disabled = function() return not (CI.SV.alerts.toggles.alertEnable and CI.SV.alerts.toggles.showAlertSummon) end,
                 default = CI.D.alerts.toggles.mitigationSummonPrefixN,
             },
             {
@@ -1189,7 +1228,7 @@ function CI.CreateSettings()
                 default = {r=CI.D.alerts.colors.unbreakableColor[1], g=CI.D.alerts.colors.unbreakableColor[2], b=CI.D.alerts.colors.unbreakableColor[3]}
             },
             {
-                -- Unbreakable
+                -- Snare
                 type    = "colorpicker",
                 name    = "CC COLOR - SNARE",
                 tooltip = "TODO",

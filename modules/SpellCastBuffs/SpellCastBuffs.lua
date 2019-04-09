@@ -1179,7 +1179,7 @@ function SCB.Buff_OnMouseEnter(control)
                     tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
                 end
                 if LUIE.ResolveVeteranDifficulty() == true and E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipVet then
-                    tooltipText = strformat(E.EffectOverride[control.effectId].tooltipVet, timer, value2, value3)
+                    tooltipText = strformat(E.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
                 end
 
                 -- Display Default Tooltip Description if no custom tooltip is present

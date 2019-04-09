@@ -12,10 +12,10 @@ local A = LUIE.GetAbility()
 local STUN = 1
 local DISORIENT = 2
 local FEAR = 3
-local SILENCE = 4
-local STAGGER = 5
-local UNNBREAKABLE = 6
-local SNARE = 7
+local STAGGER = 4
+local SILENCE = 5
+local SNARE = 6
+local UNNBREAKABLE = 7
 
 local AlertTable = {
     -- PRIORITY NOTES:

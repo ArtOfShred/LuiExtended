@@ -1396,8 +1396,10 @@ local strings = {
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION =             "Продвинутые оповещения об атаках",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP =          "Показывает продвинутые оповещения об атаках, которые можно блокировать, увернуться, избежать или прервать.",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION = "\t\t\t\t\tИспользуйте следующий формат, чтобы изменить предупреждения о смягчении:\n\t\t\t\t\t%n Название источника\n\t\t\t\t\t%t Название способности\n\t\t\t\t\t%i Значок способности",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE =        "Не предлагать смягчение",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP =     "Если предупреждение выводится в одну линию, включение этой настройки скроет из предупреждения БЛОКИРУЙ/УВЕРНИСЬ/ИЗБЕГИ/ПРЕРВИ и т.п. и выведет только надвигающуюся способность.",
+
+    SI_LUIE_LAM_CI_NOTIFICATION_MITIGATION_SUFFIX =      "Display Mitigation Suffix",
+    SI_LUIE_LAM_CI_NOTIFICATION_MITIGATION_SUFFIX_TP =   "Enable this option to display the BLOCK/DODGE/AVOID/INTERRUPT suffix on incoming ability alerts.",
+
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT =      "Префикс поглощения",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP =   "Выберите префикс для предупреждений о поглощении",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P =    "Префикс важных баффов",

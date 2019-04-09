@@ -10,6 +10,7 @@ local C = LUIE.CombatTextConstants
 local E = LUIE.Effects
 
 local callbackManager = CALLBACK_MANAGER
+local strfmt = string.format
 
 CTV.resourceNames = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_COMBATMECHANICTYPE', k); return t[k] end})
 CTV.damageTypes = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_DAMAGETYPE', k); return t[k] end})

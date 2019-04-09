@@ -1397,8 +1397,10 @@ local strings = {
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION =             "Display Advanced Notifications for Attacks",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP =          "Display advanced notifications for attacks that can be blocked, dodged, avoided, or interrupted.",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION = "\t\t\t\t\tUse the following formatting characters to modify the mitigation alerts:\n\t\t\t\t\t%n Source Name\n\t\t\t\t\t%t Ability Name\n\t\t\t\t\t%i Ability Icon",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE =        "Don't Display Mitigation Suggestions",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP =     "When using single line alerts - enabling this option will hide the BLOCK/DODGE/AVOID/INTERRUPT etc alerts and only display the incoming ability.",
+
+    SI_LUIE_LAM_CI_NOTIFICATION_MITIGATION_SUFFIX =      "Display Mitigation Suffix",
+    SI_LUIE_LAM_CI_NOTIFICATION_MITIGATION_SUFFIX_TP =   "Enable this option to display the BLOCK/DODGE/AVOID/INTERRUPT suffix on incoming ability alerts.",
+
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT =      "Mitigation Alert Prefix",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP =   "Choose the prefix to display for mitigation alerts",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P =    "Important Buff Prefix",
