@@ -10,17 +10,17 @@ local strformat = zo_strformat
 
 local optionsDataCombatText = {}
 
--- Get fonts
-local FontsList = {}
-for f in pairs(LUIE.Fonts) do
-    table.insert(FontsList, f)
-end
-
 function CT.CreateSettings()
     -- Load LibAddonMenu
     local LAM = LibStub("LibAddonMenu-2.0")
     -- Load LibMediaProvider
     local LMP = LibStub("LibMediaProvider-1.0")
+
+    -- Get fonts
+    local FontsList = {}
+    for f in pairs(LUIE.Fonts) do
+        table.insert(FontsList, f)
+    end
 
     local panelDataCombatText = {
         type = "panel",

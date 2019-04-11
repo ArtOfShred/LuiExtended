@@ -11,18 +11,6 @@ local optionsDataBuffsDebuffs = {}
 
 local g_BuffsMovingEnabled = false -- Helper local flag
 
--- Get fonts
-local FontsList = {}
-for f in pairs(LUIE.Fonts) do
-    table.insert(FontsList, f)
-end
-
--- Get statusbar textures
-local StatusbarTexturesList = {}
-for key, _ in pairs(LUIE.StatusbarTextures) do
-    table.insert(StatusbarTexturesList, key)
-end
-
 local rotationOptions     = { "Horizontal", "Vertical" }
 local rotationOptionsKeys = { ["Horizontal"] = 1, ["Vertical"] = 2 }
 
@@ -52,6 +40,18 @@ end
 function SCB.CreateSettings()
     -- Load LibAddonMenu
     local LAM = LibStub("LibAddonMenu-2.0")
+
+    -- Get fonts
+    local FontsList = {}
+    for f in pairs(LUIE.Fonts) do
+        table.insert(FontsList, f)
+    end
+
+    -- Get statusbar textures
+    local StatusbarTexturesList = {}
+    for key, _ in pairs(LUIE.StatusbarTextures) do
+        table.insert(StatusbarTexturesList, key)
+    end
 
     local panelDataBuffsDebuffs = {
         type = "panel",

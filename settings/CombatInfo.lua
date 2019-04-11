@@ -12,24 +12,6 @@ local optionsDataCombatInfo = {}
 l_CastBarMovingEnable = false -- Helper local flag
 l_AlertFrameMovingEnabled = false -- Helper local flag
 
--- Get fonts
-local FontsList = {}
-for f in pairs(LUIE.Fonts) do
-    table.insert(FontsList, f)
-end
-
--- Get sounds
-local SoundsList = {}
-for sound, _ in pairs(LUIE.Sounds) do
-    table.insert(SoundsList, sound)
-end
-
--- Get statusbar textures
-local StatusbarTexturesList = {}
-for key, _ in pairs(LUIE.StatusbarTextures) do
-    table.insert(StatusbarTexturesList, key)
-end
-
 local globalMethodOptions     = { "Ascending", "Descending", "Radial" }
 local globalMethodOptionsKeys = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
 local globalAlertOptions = { "Show All Incoming Abilities", "Only Show Hard CC Effects", "Only Show Unbreakable CC Effects" }
@@ -38,6 +20,24 @@ local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Sho
 function CI.CreateSettings()
     -- Load LibAddonMenu
     local LAM = LibStub("LibAddonMenu-2.0")
+
+    -- Get fonts
+    local FontsList = {}
+    for f in pairs(LUIE.Fonts) do
+        table.insert(FontsList, f)
+    end
+
+    -- Get sounds
+    local SoundsList = {}
+    for sound, _ in pairs(LUIE.Sounds) do
+        table.insert(SoundsList, sound)
+    end
+
+    -- Get statusbar textures
+    local StatusbarTexturesList = {}
+    for key, _ in pairs(LUIE.StatusbarTextures) do
+        table.insert(StatusbarTexturesList, key)
+    end
 
     local panelDataCombatInfo = {
         type = "panel",
@@ -1434,7 +1434,7 @@ function CI.CreateSettings()
                 scrollable = true,
                 name = "",
                 tooltip = "TODO",
-                choices = SoundsList,
+                choices = LUIE.Sounds,
                 sort = "name-up",
                 getFunc = function() return CI.SV.alerts.sounds.sound1 end,
                 setFunc = function(value) CI.SV.alerts.sounds.sound1 = value end,

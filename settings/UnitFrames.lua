@@ -9,18 +9,6 @@ local strformat = zo_strformat
 
 local optionsDataUnitFrames = {}
 
--- Get fonts
-local FontsList = {}
-for f in pairs(LUIE.Fonts) do
-    table.insert(FontsList, f)
-end
-
--- Get statusbar textures
-local StatusbarTexturesList = {}
-for key, _ in pairs(LUIE.StatusbarTextures) do
-    table.insert(StatusbarTexturesList, key)
-end
-
 local nameDisplayOptions     = { "@UserID", "Character Name", "Character Name @UserID" }
 local nameDisplayOptionsKeys = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
 local raidIconOptions        = { "No Icons", "Class Icons Only", "Role Icons Only", "Class Icon in PVP, Role in PVE", "Class Icon in PVE, Role in PVP" }
@@ -48,6 +36,18 @@ local formatOptions = {
 function UF.CreateSettings()
     -- Load LibAddonMenu
     local LAM = LibStub("LibAddonMenu-2.0")
+
+    -- Get fonts
+    local FontsList = {}
+    for f in pairs(LUIE.Fonts) do
+        table.insert(FontsList, f)
+    end
+
+    -- Get statusbar textures
+    local StatusbarTexturesList = {}
+    for key, _ in pairs(LUIE.StatusbarTextures) do
+        table.insert(StatusbarTexturesList, key)
+    end
 
     local panelDataUnitFrames = {
         type = "panel",
