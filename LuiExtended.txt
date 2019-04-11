@@ -51,6 +51,7 @@ Bindings.xml
 
 frontend/Changelog.xml
 frontend/CombatText.xml
+frontend/StatPanel.xml
 
 i18n/en.lua
 i18n/$(language).lua
@@ -96,6 +97,7 @@ modules/CombatText/EventViewers/Resources.lua
 
 modules/CombatInfo/CombatInfo.lua
 modules/CombatInfo/AbilityAlerts.lua
+modules/CombatInfo/StatPanel.lua
 
 modules/InfoPanel/InfoPanel.lua
 
