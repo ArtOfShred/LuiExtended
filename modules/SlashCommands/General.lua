@@ -124,7 +124,6 @@ end
 
 -- Slash Command to use collectibles based on their collectible id
 function SC.SlashCollectible(id)
-    local collectibleid = id
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_AVA), true)
@@ -144,10 +143,10 @@ function SC.SlashCollectible(id)
         return
     end
     -- Check to make sure that we have the collectible unlocked
-    if IsCollectibleUnlocked(collectibleid) then
-        UseCollectible(collectibleid)
+    if IsCollectibleUnlocked(id) then
+        UseCollectible(id)
     else
-        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(collectibleid)), true)
+        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(id)), true)
         if LUIE.SV.TempAlertHome then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED)))
         end

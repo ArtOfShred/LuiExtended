@@ -5,7 +5,7 @@
 
 <GuiXml>
     <Controls>
-        <TopLevelControl name="LUIE_CombatText" mouseEnabled="false" clampedToScreen="true" movable="false" layer ="0" level="0" tier="0">
+        <TopLevelControl name="LUIE_CombatText" mouseEnabled="false" clampedToScreen="true" movable="false" layer="0" level="0" tier="0">
             <Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="TOPLEFT" offsetX="0" offsetY="0"/>
             <Anchor point="BOTTOMRIGHT" relativeTo="GuiRoot" relativePoint="BOTTOMRIGHT" offsetX="0" offsetY="0"/>
 

@@ -38,11 +38,11 @@ function LUIE.ChangelogScreen()
     -- If text start with '*' replace it with bullet texture
     changelog = string.gsub(changelog, "%[%*%]", "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t")
     -- Set the window title
-    LUIE_ChangelogTitle:SetText(strformat("<<1>> Changelog", LUIE.name))
+    LUIE_Changelog_Title:SetText(strformat("<<1>> Changelog", LUIE.name))
     -- Set the about string
-    LUIE_ChangelogAbout:SetText(strformat("v<<1>> by <<2>>", LUIE.version, LUIE.author))
+    LUIE_Changelog_About:SetText(strformat("v<<1>> by <<2>>", LUIE.version, LUIE.author))
     -- Set the changelog text
-    LUIE_ChangelogText:SetText(changelog)
+    LUIE_Changelog_Text:SetText(changelog)
 
     -- Display the changelog if version number < current version
     if (LUIESV.Default[GetDisplayName()]['$AccountWide'].WelcomeVersion ~= LUIE.version) then
