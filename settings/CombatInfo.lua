@@ -9,8 +9,8 @@ local strformat = zo_strformat
 
 local optionsDataCombatInfo = {}
 
-l_CastBarMovingEnable = false -- Helper local flag
-l_AlertFrameMovingEnabled = false -- Helper local flag
+local castBarMovingEnable = false -- Helper local flag
+local alertFrameMovingEnabled = false -- Helper local flag
 
 local globalMethodOptions     = { "Ascending", "Descending", "Radial" }
 local globalMethodOptionsKeys = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
@@ -476,7 +476,7 @@ function CI.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE_TP),
-                getFunc = function() return l_CastBarMovingEnabled end,
+                getFunc = function() return castBarMovingEnabled end,
                 setFunc = CI.SetMovingState,
                 width = "half",
                 default = false,
@@ -650,7 +650,7 @@ function CI.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE_TP),
-                getFunc = function() return l_AlertFrameMovingEnabled end,
+                getFunc = function() return alertFrameMovingEnabled end,
                 setFunc = CI.SetMovingStateAlert,
                 width = "half",
                 default = false,
