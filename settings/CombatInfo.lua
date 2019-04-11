@@ -1257,7 +1257,7 @@ function CI.CreateSettings()
             {
                 -- Play Sound Priority 3
                 type    = "checkbox",
-                name    = "Enable Sound - Priority 3",
+                name    = "Enable Sound - (No CC) Priority 3",
                 tooltip = "TODO",
                 getFunc = function() return CI.SV.alerts.toggles.soundEnable3 end,
                 setFunc = function(v) CI.SV.alerts.toggles.soundEnable3 = v end,
@@ -1284,7 +1284,7 @@ function CI.CreateSettings()
             {
                 -- Play Sound Priority 3 CC
                 type    = "checkbox",
-                name    = "Unique Sound - (Hard CC) Priority 3",
+                name    = "Enable Sound - (Hard CC) Priority 3",
                 tooltip = "TODO",
                 getFunc = function() return CI.SV.alerts.toggles.soundEnable3CC end,
                 setFunc = function(v) CI.SV.alerts.toggles.soundEnable3CC = v end,
@@ -1311,7 +1311,7 @@ function CI.CreateSettings()
             {
                 -- Play Sound Priority 3 UB
                 type    = "checkbox",
-                name    = "Unique Sound - (Unbreakable CC) Priority 3",
+                name    = "Enable Sound - (Unbreakable CC) Priority 3",
                 tooltip = "TODO",
                 getFunc = function() return CI.SV.alerts.toggles.soundEnable3UB end,
                 setFunc = function(v) CI.SV.alerts.toggles.soundEnable3UB = v end,
@@ -1338,7 +1338,7 @@ function CI.CreateSettings()
             {
                 -- Play Sound Priority 2
                 type    = "checkbox",
-                name    = "Play Sound - Priority 2",
+                name    = "Enable Sound - (No CC) Priority 2",
                 tooltip = "TODO",
                 getFunc = function() return CI.SV.alerts.toggles.soundEnable2 end,
                 setFunc = function(v) CI.SV.alerts.toggles.soundEnable2 = v end,
@@ -1365,7 +1365,7 @@ function CI.CreateSettings()
             {
                 -- Play Sound Priority 2 CC
                 type    = "checkbox",
-                name    = "Unique Sound - (Hard CC) Priority 2",
+                name    = "Enable Sound - (Hard CC) Priority 2",
                 tooltip = "TODO",
                 getFunc = function() return CI.SV.alerts.toggles.soundEnable2CC end,
                 setFunc = function(v) CI.SV.alerts.toggles.soundEnable2CC = v end,
@@ -1392,7 +1392,7 @@ function CI.CreateSettings()
             {
                 -- Play Sound Priority 2 UB
                 type    = "checkbox",
-                name    = "Unique Sound - (Unbreakable CC) Priority 2",
+                name    = "Enable Sound - (Unbreakable CC) Priority 2",
                 tooltip = "TODO",
                 getFunc = function() return CI.SV.alerts.toggles.soundEnable2UB end,
                 setFunc = function(v) CI.SV.alerts.toggles.soundEnable2UB = v end,
@@ -1419,7 +1419,7 @@ function CI.CreateSettings()
             {
                 -- Play Sound Priority 1
                 type    = "checkbox",
-                name    = "Play Sound - Priority 1",
+                name    = "Enable Sound - (No CC) Priority 1",
                 tooltip = "TODO",
                 getFunc = function() return CI.SV.alerts.toggles.soundEnable1 end,
                 setFunc = function(v) CI.SV.alerts.toggles.soundEnable1 = v end,
@@ -1446,7 +1446,7 @@ function CI.CreateSettings()
             {
                 -- Play Sound Priority 1 CC
                 type    = "checkbox",
-                name    = "Unique Sound - (Hard CC) Priority 1",
+                name    = "Enable Sound - (Hard CC) Priority 1",
                 tooltip = "TODO",
                 getFunc = function() return CI.SV.alerts.toggles.soundEnable1CC end,
                 setFunc = function(v) CI.SV.alerts.toggles.soundEnable1CC = v end,
@@ -1473,7 +1473,7 @@ function CI.CreateSettings()
             {
                 -- Play Sound Priority 1 UB
                 type    = "checkbox",
-                name    = "Unique Sound - (Unbreakable CC) Priority 1",
+                name    = "Enable Sound - (Unbreakable CC) Priority 1",
                 tooltip = "TODO",
                 getFunc = function() return CI.SV.alerts.toggles.soundEnable1UB end,
                 setFunc = function(v) CI.SV.alerts.toggles.soundEnable1UB = v end,
