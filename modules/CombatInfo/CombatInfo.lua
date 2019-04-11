@@ -109,6 +109,21 @@ CI.D = {
 
             alertOptions                = 1,
 
+            soundEnable3                = false,
+            soundEnable3CC              = false,
+            soundEnable3UB              = false,
+            soundEnable2                = false,
+            soundEnable2CC              = false,
+            soundEnable2UB              = false,
+            soundEnable1                = false,
+            soundEnable1CC              = true,
+            soundEnable1UB              = true,
+            soundEnableUnmit            = true,
+            soundEnablePower            = false,
+            soundEnableSummon           = false,
+            soundEnableDestroy          = false,
+
+
         },
         colors = {
             alertShared                 = { 1, 1, 1, 1 },
@@ -139,6 +154,21 @@ CI.D = {
             alertPower                  = GetString(SI_LUIE_CI_POWER_DEFAULT),
             alertDestroy                = GetString(SI_LUIE_CI_DESTROY_DEFAULT),
             alertSummon                 = GetString(SI_LUIE_CI_SUMMON_DEFAULT),
+        },
+        sounds = {
+            sound3                      = "Death Recap Killing Blow",
+            sound3CC                    = "Death Recap Killing Blow",
+            sound3UB                    = "Death Recap Killing Blow",
+            sound2                      = "Death Recap Killing Blow",
+            sound2CC                    = "Death Recap Killing Blow",
+            sound2UB                    = "Death Recap Killing Blow",
+            sound1                      = "Death Recap Killing Blow",
+            sound1CC                    = "Death Recap Killing Blow",
+            sound1UB                    = "Death Recap Killing Blow",
+            soundUnmit                  = "Death Recap Killing Blow",
+            soundPower                  = "Death Recap Killing Blow",
+            soundSummon                 = "Death Recap Killing Blow",
+            soundDestroy                = "Death Recap Killing Blow",
         },
 
         --[[

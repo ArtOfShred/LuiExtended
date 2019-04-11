@@ -1248,6 +1248,363 @@ function CI.CreateSettings()
                 default = {r=CI.D.alerts.colors.snareColor[1], g=CI.D.alerts.colors.snareColor[2], b=CI.D.alerts.colors.snareColor[3]}
             },
 
+            {
+                type = "header",
+                name = "ALERT SOUND OPTIONS",
+                width = "full",
+            },
+
+            {
+                -- Play Sound Priority 3
+                type    = "checkbox",
+                name    = "Enable Sound - Priority 3",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnable3 end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnable3 = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnable3,
+            },
+
+            {
+                -- Sound Priority 3
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.sound3 end,
+                setFunc = function(value) CI.SV.alerts.sounds.sound3 = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.sound3,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Play Sound Priority 3 CC
+                type    = "checkbox",
+                name    = "Unique Sound - (Hard CC) Priority 3",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnable3CC end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnable3CC = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnable3CC,
+            },
+
+            {
+                -- Sound Priority 3 CC
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.sound3CC end,
+                setFunc = function(value) CI.SV.alerts.sounds.sound3CC = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.sound3CC,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Play Sound Priority 3 UB
+                type    = "checkbox",
+                name    = "Unique Sound - (Unbreakable CC) Priority 3",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnable3UB end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnable3UB = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnable3UB,
+            },
+
+            {
+                -- Sound Priority 3 UB
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.sound3UB end,
+                setFunc = function(value) CI.SV.alerts.sounds.sound3UB = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.sound3UB,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Play Sound Priority 2
+                type    = "checkbox",
+                name    = "Play Sound - Priority 2",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnable2 end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnable2 = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnable2,
+            },
+
+            {
+                -- Sound Priority 2
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.sound2 end,
+                setFunc = function(value) CI.SV.alerts.sounds.sound2 = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.sound2,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Play Sound Priority 2 CC
+                type    = "checkbox",
+                name    = "Unique Sound - (Hard CC) Priority 2",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnable2CC end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnable2CC = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnable2CC,
+            },
+
+            {
+                -- Sound Priority 2 CC
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.sound2CC end,
+                setFunc = function(value) CI.SV.alerts.sounds.sound2CC = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.sound2CC,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Play Sound Priority 2 UB
+                type    = "checkbox",
+                name    = "Unique Sound - (Unbreakable CC) Priority 2",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnable2UB end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnable2UB = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnable2UB,
+            },
+
+            {
+                -- Sound Priority 2 UB
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.sound2UB end,
+                setFunc = function(value) CI.SV.alerts.sounds.sound2UB = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.sound2UB,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Play Sound Priority 1
+                type    = "checkbox",
+                name    = "Play Sound - Priority 1",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnable1 end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnable1 = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnable1,
+            },
+
+            {
+                -- Sound Priority 1
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.sound1 end,
+                setFunc = function(value) CI.SV.alerts.sounds.sound1 = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.sound1,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Play Sound Priority 1 CC
+                type    = "checkbox",
+                name    = "Unique Sound - (Hard CC) Priority 1",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnable1CC end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnable1CC = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnable1CC,
+            },
+
+            {
+                -- Sound Priority 1 CC
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.sound1CC end,
+                setFunc = function(value) CI.SV.alerts.sounds.sound1CC = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.sound1CC,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Play Sound Priority 1 UB
+                type    = "checkbox",
+                name    = "Unique Sound - (Unbreakable CC) Priority 1",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnable1UB end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnable1UB = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnable1UB,
+            },
+
+            {
+                -- Sound Priority 1 UB
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.sound1UB end,
+                setFunc = function(value) CI.SV.alerts.sounds.sound1UB = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.sound1UB,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Play Sound Unmit
+                type    = "checkbox",
+                name    = "Play Sound - Unmitigable",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnableUnmit end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnableUnmit = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnableUnmit,
+            },
+
+            {
+                -- Sound Unmit
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.soundUnmit end,
+                setFunc = function(value) CI.SV.alerts.sounds.soundUnmit = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.soundUnmit,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Play Sound Power
+                type    = "checkbox",
+                name    = "Play Sound Power",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnablePower end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnablePower = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnablePower,
+            },
+
+            {
+                -- Sound Power
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.soundPower end,
+                setFunc = function(value) CI.SV.alerts.sounds.soundPower = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.soundPower,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Play Sound Summon
+                type    = "checkbox",
+                name    = "Play Sound - Summon",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnableSummon end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnableSummon = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnableSummon,
+            },
+
+            {
+                -- Sound Summon
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.soundSummon end,
+                setFunc = function(value) CI.SV.alerts.sounds.soundSummon = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.soundSummon,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Play Sound Destroy
+                type    = "checkbox",
+                name    = "Play Sound - Destroy",
+                tooltip = "TODO",
+                getFunc = function() return CI.SV.alerts.toggles.soundEnableDestroy end,
+                setFunc = function(v) CI.SV.alerts.toggles.soundEnableDestroy = v end,
+                width = "half",
+                disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
+                default = CI.D.alerts.toggles.soundEnableDestroy,
+            },
+
+            {
+                -- Sound Destroy
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.alerts.sounds.soundDestroy end,
+                setFunc = function(value) CI.SV.alerts.sounds.soundDestroy = value end,
+                width = "half",
+                default = CI.SV.alerts.sounds.soundDestroy,
+                disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
         },
     }
 
