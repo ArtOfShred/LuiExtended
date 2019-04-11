@@ -292,6 +292,36 @@ function CI.CrowdControlColorSetup(crowdControl)
     end
 end
 
+-- Play a sound if the option is enabled and priority is set.
+function CI.PlayAlertSound(abilityId, alertType, crowdControl)
+
+    local S = CI.SV.alerts
+
+    local isPlay
+    if alertType == alertTypes.SHARED then
+        local priority = AlertT[abilityId].priority
+        if crowdControl == ccTypes.STUN or crowdControl == ccTypes.DISORIENT or crowdControl == ccTypes.FEAR or crowdControl == ccTypes.STAGGER then
+            isPlay = (priority == 1 and S.toggles.soundEnable1CC) and S.sounds.sound1CC or (priority == 2 and S.toggles.soundEnable2CC) and S.sounds.sound2CC or (priority == 3 and S.toggles.soundEnable3CC) and S.sounds.sound3CC
+        elseif crowdControl == ccTypes.UNBREAKABLE then
+            isPlay = (priority == 1 and S.toggles.soundEnable1UB) and S.sounds.sound1UB or (priority == 2 and S.toggles.soundEnable2UB) and S.sounds.sound2UB or (priority == 3 and S.toggles.soundEnable3UB) and S.sounds.sound3UB
+        else
+            isPlay = (priority == 1 and S.toggles.soundEnable1) and S.sounds.sound1 or (priority == 2 and S.toggles.soundEnable2) and S.sounds.sound2 or (priority == 3 and S.toggles.soundEnable3) and S.sounds.sound3
+        end
+    elseif alertType == alertTypes.UNMIT then
+        isPlay = S.toggles.soundEnableUnmit and S.sounds.soundUnmit
+    elseif alertType == alertTypes.POWER then
+        isPlay = S.toggles.soundEnablePower and S.sounds.soundPower
+    elseif alertType == alertTypes.DESTROY then
+        isPlay = S.toggles.soundEnableDestroy and S.sounds.soundDestroy
+    elseif alertType == alertTypes.SUMMON then
+        isPlay = S.toggles.soundEnableSummon and S.sounds.soundSummon
+    end
+
+    if isPlay ~= nil then
+        PlaySound(LUIE.Sounds[isPlay])
+    end
+end
+
 local drawLocation = 1
 function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl)
     local color = CI.CrowdControlColorSetup(crowdControl)
@@ -482,19 +512,19 @@ function CI.ProcessAlert(abilityId, unitName)
     end
 
     if not (power == true or destroy == true or summon == true or unmit == true) then
-        CI.OnEvent(alertTypes.SHARED, abilityName, abilityIcon, unitName, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
+        CI.OnEvent(alertTypes.SHARED, abilityId, abilityName, abilityIcon, unitName, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
     elseif (power == true or destroy == true or summon == true or unmit == true) then
         if unmit then
-            CI.OnEvent(alertTypes.UNMIT, abilityName, abilityIcon, unitName, duration)
+            CI.OnEvent(alertTypes.UNMIT, abilityId, abilityName, abilityIcon, unitName, duration)
         end
         if power then
-            CI.OnEvent(alertTypes.POWER, abilityName, abilityIcon, unitName, duration)
+            CI.OnEvent(alertTypes.POWER, abilityId, abilityName, abilityIcon, unitName, duration)
         end
         if destroy then
-            CI.OnEvent(alertTypes.DESTROY, abilityName, abilityIcon, unitName, duration)
+            CI.OnEvent(alertTypes.DESTROY, abilityId, abilityName, abilityIcon, unitName, duration)
         end
         if summon then
-            CI.OnEvent(alertTypes.SUMMON, abilityName, abilityIcon, unitName, duration)
+            CI.OnEvent(alertTypes.SUMMON, abilityId, abilityName, abilityIcon, unitName, duration)
         end
     end
 end
@@ -646,7 +676,7 @@ function CI.FormatAlertString(inputFormat, params)
 end
 
 -- VIEWER
-function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
+function CI.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
     local S = CI.SV.alerts
 
     local labelColor = S.colors.alertShared
@@ -738,6 +768,7 @@ function CI.OnEvent(alertType, abilityName, abilityIcon, sourceName, duration, c
     if not duration then duration = 4000 end
 
     CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl)
+    CI.PlayAlertSound(abilityId, alertType, crowdControl)
     CI.RealignAlerts()
 end
 
