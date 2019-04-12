@@ -3,10 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
--- CombatTextConstants namespace
-LUIE.CombatTextConstants = {}
-
-local CombatTextConstants = {
+LUIE.CombatTextConstants = {
     -- Damage & Healing
     isDamage = {
         [ACTION_RESULT_DAMAGE]              = true,
@@ -158,6 +155,3 @@ local CombatTextConstants = {
     directionType                   = { "up", "down" },
     iconSide                        = { "none", "left", "right"},
 }
-
--- Export string data to global namespace
-LUIE.CombatTextConstants = CombatTextConstants

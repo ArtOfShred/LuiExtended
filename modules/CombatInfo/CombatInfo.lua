@@ -4,25 +4,24 @@
 --]]
 
 -- CombatInfo namespace
-LUIE.CombatInfo     = {}
+LUIE.CombatInfo = {}
+local CI = LUIE.CombatInfo
 
--- Performance Enhancement
-local CI            = LUIE.CombatInfo
-local UI            = LUIE.UI
-local E             = LUIE.Effects
-local CBT           = LUIE.CastBarTable
-local A             = LUIE.GetAbility()
-local printToChat   = LUIE.PrintToChat
+local UI = LUIE.UI
+local E = LUIE.Effects
+local CBT = LUIE.CastBarTable
+local A = LUIE.GetAbility()
 
-local strfmt        = string.format
-local strformat     = zo_strformat
-local callLater     = zo_callLater
+local printToChat = LUIE.PrintToChat
+local strfmt = string.format
+local strformat = zo_strformat
+local callLater = zo_callLater
 
-local eventManager  = EVENT_MANAGER
-local sceneManager  = SCENE_MANAGER
+local eventManager = EVENT_MANAGER
+local sceneManager = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
 
-local moduleName    = LUIE.name .. "_CombatInfo"
+local moduleName = LUIE.name .. "_CombatInfo"
 
 CI.Enabled  = false
 CI.D = {

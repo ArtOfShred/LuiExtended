@@ -5,12 +5,11 @@
 
 -- CombatText namespace
 LUIE.CombatText = {}
+local CT = LUIE.CombatText
 
--- Performance Enhancement
-local CT     = LUIE.CombatText
-local LMP    = LibStub("LibMediaProvider-1.0")
+local LMP = LibStub("LibMediaProvider-1.0")
 
-local moduleName    = LUIE.name .. "_CombatText"
+local moduleName = LUIE.name .. "_CombatText"
 
 local panelTitles = {
     LUIE_CombatText_Outgoing    = GetString(SI_LUIE_CT_PANEL_OUTGOING),

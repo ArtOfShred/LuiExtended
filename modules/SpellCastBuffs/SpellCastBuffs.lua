@@ -5,24 +5,24 @@
 
 -- SpellCastBuffs namespace
 LUIE.SpellCastBuffs = {}
-
 local SCB           = LUIE.SpellCastBuffs
-local CI            = LUIE.CombatInfo
-local UI            = LUIE.UI
-local E             = LUIE.Effects
-local T             = LUIE.Tooltips
-local A             = LUIE.GetAbility()
 
-local printToChat   = LUIE.PrintToChat
-local strfmt        = string.format
-local strformat     = zo_strformat
-local callLater     = zo_callLater
+local CI = LUIE.CombatInfo
+local UI = LUIE.UI
+local E = LUIE.Effects
+local T = LUIE.Tooltips
+local A = LUIE.GetAbility()
 
-local eventManager  = EVENT_MANAGER
-local sceneManager  = SCENE_MANAGER
+local printToChat = LUIE.PrintToChat
+local strfmt = string.format
+local strformat = zo_strformat
+local callLater = zo_callLater
+
+local eventManager = EVENT_MANAGER
+local sceneManager = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
 
-local moduleName    = LUIE.name .. "_SpellCastBuffs"
+local moduleName = LUIE.name .. "_SpellCastBuffs"
 
 local hidePlayerEffects = { } -- Table of Effects to hide on Player - generated on load or updated from Menu
 local hideTargetEffects = { } -- Table of Effects to hide on Target - generated on load or updated from Menu

@@ -4,6 +4,7 @@
 --]]
 
 local SCB = LUIE.SpellCastBuffs
+
 local A = LUIE.GetAbility()
 
 local strformat = zo_strformat

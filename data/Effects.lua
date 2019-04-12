@@ -5,8 +5,8 @@
 
 -- Effects namespace
 LUIE.Effects = {}
-
 local E = LUIE.Effects
+
 local T = LUIE.Tooltips
 local U = LUIE.UnitNames
 local A = LUIE.GetAbility()

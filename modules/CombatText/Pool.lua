@@ -4,7 +4,6 @@
 --]]
 
 LUIE.CombatTextPool = ZO_ObjectPool:Subclass()
-
 local CTP = LUIE.CombatTextPool
 
 local fastSlow = ZO_GenerateCubicBezierEase(.3, .9, .7, 1)

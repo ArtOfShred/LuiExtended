@@ -4,7 +4,6 @@
 --]]
 
 LUIE.CombatTextAnimation = ZO_Object:Subclass()
-
 local CTA = LUIE.CombatTextAnimation
 
 local ANIMATION_MANAGER = ANIMATION_MANAGER

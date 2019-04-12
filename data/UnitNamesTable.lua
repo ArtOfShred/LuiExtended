@@ -3,10 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
--- UnitNames namespace
-LUIE.UnitNames = {}
-
-local UnitNames = {
+LUIE.UnitNames = {
     -- TODO: MAYBE in the future can localize these names, for the time being this table exists for that purpose.
 
     ----------------------------------------------------------------
@@ -190,6 +187,3 @@ local UnitNames = {
     NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre',
     Boss_Icestalker                       = 'Icestalker',
 }
-
--- Export string data to global namespace
-LUIE.UnitNames = UnitNames

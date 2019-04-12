@@ -1,6 +1,11 @@
+<!--
+      LuiExtended
+      License: The MIT License (MIT)
+-->
+
 <GuiXml>
 	<Controls>
-		<TopLevelControl name="LUIE_StatMeter" mouseEnabled="true" movable="true" clampedToScreen="true" hidden="false">
+		<TopLevelControl name="LUIE_StatPanel" mouseEnabled="true" movable="true" clampedToScreen="true" hidden="false" layer="0" level="0" tier="0">
 			<Dimensions x="110" y="200" />
 			<Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="CENTER" />
 			<OnMoveStop>
@@ -8,7 +13,7 @@
 			</OnMoveStop>
 			<Controls>
 
-                <Backdrop name="$(parent)_Background" centerColor="000000" edgeColor="545454" layer="0" level="2" alpha="1" >
+                <Backdrop name="$(parent)_Background" centerColor="000000" edgeColor="545454" alpha="1" >
 		          	<Dimensions x="110" y="200" />
 		          	<Anchor point="CENTER" relativeTo="$(parent)" />
                     <Edge edgeSize="2" />

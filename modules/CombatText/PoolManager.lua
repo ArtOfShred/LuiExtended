@@ -4,7 +4,6 @@
 --]]
 
 LUIE.CombatTextPoolManager = ZO_Object:Subclass()
-
 local CTPM = LUIE.CombatTextPoolManager
 
 function CTPM:New()

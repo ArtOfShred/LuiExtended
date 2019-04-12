@@ -5,7 +5,6 @@
 
 -- SlashCommands namespace
 LUIE.SlashCommands = {}
-
 local SC = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat

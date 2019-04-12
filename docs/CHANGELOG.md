@@ -166,7 +166,7 @@ Unit Frames
 
 ---
 
-### Version 5.6.0
+### Version 5.6.1
 
 Combat Info
 - Fixed an issue where Cast Bar custom position was not saving correctly.

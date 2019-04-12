@@ -3,8 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
--- Performance Enhancement
 local SCB = LUIE.SpellCastBuffs
+
 local E = LUIE.Effects
 local A = LUIE.GetAbility()
 

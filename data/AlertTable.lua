@@ -3,9 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
--- AlertTable namespace
-LUIE.AlertTable = {}
-
 local U = LUIE.UnitNames
 local A = LUIE.GetAbility()
 
@@ -17,7 +14,7 @@ local SILENCE = 5
 local SNARE = 6
 local UNNBREAKABLE = 7
 
-local AlertTable = {
+LUIE.AlertTable = {
     -- PRIORITY NOTES:
     -- 1 = VMA/Trial/Dungeon
     -- 2 = ELITE NPC/QUEST BOSS
@@ -1118,6 +1115,3 @@ local AlertTable = {
     [109806] = { block = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Frozen Aura (Icestalker)
     [83430] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Skeletal Smash (Ice Wraith)
 }
-
--- Export string data to global namespace
-LUIE.AlertTable = AlertTable

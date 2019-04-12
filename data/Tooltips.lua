@@ -3,9 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
--- Tooltips namespace
-LUIE.Tooltips = {}
-
 local strformat = zo_strformat
 
 -- Local Damagetypes for easy use
@@ -19,7 +16,7 @@ local PoisonDamage   = GetString(SI_DAMAGETYPE11) .. " Damage" -- TODO: Localize
 local BleedDamage    = "Bleeding Damage" -- TODO: Localize
 local OblivionDamage = "Oblivion Damage" -- TODO: Localize
 
-local Tooltips = {
+LUIE.Tooltips = {
     ----------------------------------------------------------------
     -- MAJOR / MINOR BUFFS & DEBUFFS -------------------------------
     ----------------------------------------------------------------
@@ -1183,9 +1180,6 @@ local Tooltips = {
     Skill_Meatbag_Catapult_AOE                      = GetString(SI_LUIE_SKILL_MEATBAG_CATAPULT_AOE_TP),
     Skill_Scattershot_Catapult_AOE                  = GetString(SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_AOE_TP),
 }
-
--- Export string data to global namespace
-LUIE.Tooltips = Tooltips
 
 --[[ Possibly use these at some point
 

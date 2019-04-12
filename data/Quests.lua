@@ -5,7 +5,6 @@
 
 -- Quests namespace
 LUIE.Quests = {}
-
 local Q = LUIE.Quests
 
 -- List of Quest Items to ignore when Looted (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)

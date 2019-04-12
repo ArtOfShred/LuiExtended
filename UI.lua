@@ -5,7 +5,6 @@
 
 -- UI namespace
 LUIE.UI = {}
-
 local UI = LUIE.UI
 
 local windowManager = WINDOW_MANAGER
