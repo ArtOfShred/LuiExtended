@@ -500,12 +500,7 @@ local strings = {
     SI_LUIE_CI_POWER_DEFAULT =                           "",
     SI_LUIE_CI_DESTROY_DEFAULT =                         "УНИЧТОЖЬ",
     SI_LUIE_CI_SUMMON_DEFAULT =                          "SUMMON", -- TODO: Translate
-    SI_LUIE_CI_MITIGATION_FORMAT_POWER =                 "%t!",
     SI_LUIE_CI_MITIGATION_FORMAT_POWER_N =               "%t на %n!",
-    SI_LUIE_CI_MITIGATION_FORMAT_DESTROY =               "%t",
-    SI_LUIE_CI_MITIGATION_FORMAT_DESTROY_N =             "%t",
-    SI_LUIE_CI_MITIGATION_FORMAT_SUMMON =                "%t",
-    SI_LUIE_CI_MITIGATION_FORMAT_SUMMON_N =              "%t",
 
     -- UnitFrames
     SI_LUIE_UF_WEREWOLF_POWER =                          "<<1>>/<<2>> Энергия (<<3>>%)",

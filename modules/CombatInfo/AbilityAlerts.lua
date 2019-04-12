@@ -574,6 +574,12 @@ function CI.ProcessAlert(abilityId, unitName)
 end
 
 function CI.AlertEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+
+    -- Bail out if we're not in combat (reduce spam for nearby)
+    if not IsUnitInCombat("player") then
+        return
+    end
+
     local S = CI.SV.alerts
 
     if S.toggles.alertEnable and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and AlertT[abilityId] and AlertT[abilityId].auradetect then
@@ -662,6 +668,12 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
 end
 
 function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+
+    -- Bail out if we're not in combat (reduce spam for nearby)
+    if not IsUnitInCombat("player") then
+        return
+    end
+
     local S = CI.SV.alerts
 
     -- NEW ALERTS

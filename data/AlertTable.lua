@@ -39,19 +39,19 @@ LUIE.AlertTable = {
     -- JUSTICE NPC'S ---------------------------------
     --------------------------------------------------
 
-    [63157] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Blow (Justice Guard 1H)
-    [63261] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Blow (Justice Guard 2H)
-    [63179] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 2, bs = false, result = ACTION_RESULT_BEGIN }, -- Flame Shard (Justice Guard 2H)
+    [63157] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Heavy Blow (Justice Guard 1H)
+    [63261] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250, cc = STUN }, -- Heavy Blow (Justice Guard 2H)
+    [63179] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 2, bs = false, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN }, -- Flame Shard (Justice Guard 2H)
     [78743] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, bs = false, result = ACTION_RESULT_BEGIN }, -- Flare (Justice Guard - Any)
 
     [74862] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, bs = false, result = ACTION_RESULT_BEGIN }, -- Teleport Trap (Mage Guard)
 
-    [62409] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500, result = ACTION_RESULT_BEGIN }, -- Fiery Wind (Justice Mage NPC)
-    [62472] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Stab (Justice Dagger NPC)
+    [62409] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500, result = ACTION_RESULT_BEGIN, duration = 3500 }, -- Fiery Wind (Justice Mage NPC)
+    [62472] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Stab (Justice Dagger NPC)
 
     [78265] = { power = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Alarm (Estate Marshal) (DB DLC)
 
-    [52471] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Nullify (Estate Spellbreaker) (DB DLC)
+    [52471] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2300, cc = SILENCE }, -- Nullify (Estate Spellbreaker) (DB DLC)
 
     [73229] = { power = true, priority = 2, auradetect = true, ignoreRefresh = true }, -- Hurried Ward (Guard - DB Mage)
 
@@ -69,14 +69,14 @@ LUIE.AlertTable = {
     -- Abilities
     [29378] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1600, cc = STUN }, -- Uppercut (Ravager)
 
-    [28408] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Whirlwind (Skirmisher)
+    [28408] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533 }, -- Whirlwind (Skirmisher)
 
-    [37108] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = SNARE, duration = 2000 }, -- Arrow Spray (Archer)
-    [28628] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Volley (Archer)
-    [74978] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Taking Aim (Archer)
+    [37108] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = SNARE }, -- Arrow Spray (Archer)
+    [28628] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 6800 }, -- Volley (Archer)
+    [74978] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 9000, cc = STUN }, -- Taking Aim (Archer)
 
-    [14096] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Footsoldier)
-    [28499] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Throw Dagger (Footsoldier)
+    [14096] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250 }, -- Heavy Attack (Footsoldier)
+    [28499] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Throw Dagger (Footsoldier)
 
     [29400] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Power Bash (Guard)
     [29761] = { power = true, priority = 3, auradetect = true }, -- Brace (Guard)

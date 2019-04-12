@@ -1184,7 +1184,7 @@ function CI.CreateSettings()
 
             {
                 type = "header",
-                name = GetString("COMBAT ALERT FRAME COLORS"),
+                name = "CROWD CONTROL COLOR OPTIONS",
                 width = "full",
             },
             {

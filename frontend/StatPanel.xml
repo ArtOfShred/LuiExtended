@@ -5,7 +5,7 @@
 
 <GuiXml>
 	<Controls>
-		<TopLevelControl name="LUIE_StatPanel" mouseEnabled="true" movable="true" clampedToScreen="true" hidden="false" layer="0" level="0" tier="0">
+		<TopLevelControl name="LUIE_StatPanel" mouseEnabled="true" movable="true" clampedToScreen="true" hidden="true" layer="0" level="0" tier="0">
 			<Dimensions x="110" y="200" />
 			<Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="CENTER" />
 			<OnMoveStop>

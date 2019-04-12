@@ -72,42 +72,32 @@ CI.D = {
     CastBarGradientC2                = { 82/255, 215/255, 1 },
     alerts = {
         toggles = {
-            --Alerts
             alertEnable                 = true,
             alertFontFace               = "Univers 67",
             alertFontStyle              = "soft-shadow-thick",
             alertFontSize               = 32,
             alertTimer                  = true,
-
             showMitigation              = true,
             mitigationPrefix            = "%t",
             mitigationPrefixN           = "%n - %t",
-
             showCrowdControlBorder      = true,
-
-            mitigationPowerPrefix       = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER),
+            mitigationPowerPrefix       = GetString("%t"),
             mitigationPowerPrefixN      = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER_N),
-            mitigationDestroyPrefix     = GetString(SI_LUIE_CI_MITIGATION_FORMAT_DESTROY),
-            mitigationDestroyPrefixN    = GetString(SI_LUIE_CI_MITIGATION_FORMAT_DESTROY_N),
-            mitigationSummonPrefix      = GetString(SI_LUIE_CI_MITIGATION_FORMAT_SUMMON),
-            mitigationSummonPrefixN     = GetString(SI_LUIE_CI_MITIGATION_FORMAT_SUMMON_N),
-
-            -- Add Name/No Name Variants
+            mitigationDestroyPrefix     = GetString("%t"),
+            mitigationDestroyPrefixN    = GetString("%t"),
+            mitigationSummonPrefix      = GetString("%t"),
+            mitigationSummonPrefixN     = GetString("%t"),
             mitigationAura              = false,
             mitigationRank3             = true,
             mitigationRank2             = true,
             mitigationRank1             = true,
             mitigationDungeon           = true,
-
-            showAlertMitigate           = true, -- TODO -- Replaces Block/Interrupt/Dodge
-
+            showAlertMitigate           = true,
             showAlertUnmit				= true,
             showAlertPower              = true,
             showAlertDestroy            = true,
             showAlertSummon             = true,
-
             alertOptions                = 1,
-
             soundEnable3                = false,
             soundEnable3CC              = true,
             soundEnable3UB              = true,
@@ -121,8 +111,6 @@ CI.D = {
             soundEnablePower            = false,
             soundEnableSummon           = false,
             soundEnableDestroy          = true,
-
-
         },
         colors = {
             alertShared                 = { 1, 1, 1, 1 },
@@ -169,15 +157,6 @@ CI.D = {
             soundSummon                 = "Duel Invite Received",
             soundDestroy                = "Duel Invite Received",
         },
-
-        --[[
-        -- TODO: CC Type Colors
-        [ACTION_RESULT_STUNNED]={0.894118, 0.133333, 0.090196, 1},
-		[ACTION_RESULT_DISORIENTED]={0.0313725509,0.6274510026,1, 1},
-		[ACTION_RESULT_FEARED]={0.5607843137, 0.0352941176, 0.9254901961, 1},
-		[ACTION_RESULT_SILENCED]={0, 1, 1, 1},
-		[ACTION_RESULT_STAGGERED]={1,0.9490196109,0.1294117719,1},
-        ]]
     },
 }
 CI.SV = nil
