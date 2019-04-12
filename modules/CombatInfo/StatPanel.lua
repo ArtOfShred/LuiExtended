@@ -22,18 +22,18 @@ end
 ]]--
 
 local statType = {
-    weaponDamage = STAT_POWER
-    spellDamage = STAT_SPELL_POWER
-    weaponCritical = STAT_CRITICAL_STRIKE
-    spellCritical = STAT_SPELL_CRITICAL
-    physicalPenetration = STAT_PHYSICAL_PENETRATION
-    spellPenetration = STAT_SPELL_PENETRATION
-    physicalResistance = STAT_PHYSICAL_RESIST
-    spellResistance = STAT_SPELL_RESIST
-    criticalResistance = STAT_CRITICAL_RESISTANCE
-    healthRecovery = STAT_HEALTH_REGEN_COMBAT
-    staminaRecovery = STAT_STAMINA_REGEN_COMBAT
-    magickaRecovery = STAT_MAGICKA_REGEN_COMBAT
+    weaponDamage = STAT_POWER,
+    spellDamage = STAT_SPELL_POWER,
+    weaponCritical = STAT_CRITICAL_STRIKE,
+    spellCritical = STAT_SPELL_CRITICAL,
+    physicalPenetration = STAT_PHYSICAL_PENETRATION,
+    spellPenetration = STAT_SPELL_PENETRATION,
+    physicalResistance = STAT_PHYSICAL_RESIST,
+    spellResistance = STAT_SPELL_RESIST,
+    criticalResistance = STAT_CRITICAL_RESISTANCE,
+    healthRecovery = STAT_HEALTH_REGEN_COMBAT,
+    staminaRecovery = STAT_STAMINA_REGEN_COMBAT,
+    magickaRecovery = STAT_MAGICKA_REGEN_COMBAT,
 }
 
 function StatPanel.Damage()
