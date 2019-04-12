@@ -20,7 +20,7 @@
 		        </Backdrop>
 
 	          	<Label name="$(parent)_Damage" color="FFFFFF" font="$(BOLD_FONT)|28|thin-outline" inheritAlpha="true" wrapMode="TRUNCATE">
-      				<Anchor point="TOPLEFT" relativeTo="$(parent)BG" offsetX="5" />
+      				<Anchor point="TOPLEFT" relativeTo="$(parent)_Background" offsetX="5" />
     			</Label>
     			<Label name="$(parent)_DamageLabel" color="666666" font="$(BOLD_FONT)|12|thin-outline" inheritAlpha="true" wrapMode="TRUNCATE">
       				<Anchor point="TOPLEFT" relativeTo="$(parent)_Damage" relativePoint="TOPRIGHT" offsetX="2" />
