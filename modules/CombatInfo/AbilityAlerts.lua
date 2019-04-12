@@ -56,6 +56,31 @@ function CI.SetAlertColors()
 	}
 end
 
+-- Called from menu when font size/face, etc is changed
+function CI.ResetAlertSize()
+
+    for i = 1, 3 do
+        local alert = _G["LUIE_Alert" .. i]
+        alert.name:SetFont(g_alertFont)
+        alert.mitigation:SetFont(g_alertFont)
+        alert.timer:SetFont(g_alertFont)
+        alert.icon:SetDimensions(CI.SV.alerts.toggles.alertFontSize + 8, CI.SV.alerts.toggles.alertFontSize + 8)
+        alert.icon.iconbg:ClearAnchors()
+        alert.icon.iconbg:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 3, 3)
+        alert.icon.iconbg:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
+        alert.icon.cd:ClearAnchors()
+        alert.icon.cd:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 1, 1 )
+        alert.icon.cd:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -1, -1 )
+        alert.icon.icon:ClearAnchors()
+        alert.icon.icon:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 3, 3 )
+        alert.icon.icon:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3 )
+        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height )
+    end
+
+    uiTlw.alertFrame:SetDimensions(500, (CI.SV.alerts.toggles.alertFontSize * 2) + 4)
+
+end
+
 -- Create Alert Frame - basic setup for now
 function CI.CreateAlertFrame()
     -- Apply font for alerts
@@ -83,7 +108,7 @@ function CI.CreateAlertFrame()
         alert.name:SetAnchor(LEFT, alert, LEFT, 0, 0 )
 
         alert.icon = UI.Backdrop( alert.name, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
-        alert.icon:SetDimensions(40, 40)
+        alert.icon:SetDimensions(CI.SV.alerts.toggles.alertFontSize + 8, CI.SV.alerts.toggles.alertFontSize + 8)
         alert.icon:SetAnchor(LEFT, alert.name, RIGHT, 6, 0 )
 
         alert.icon.back = UI.Texture( alert.icon, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false )
@@ -114,17 +139,15 @@ function CI.CreateAlertFrame()
         alert.timer:SetAnchor(LEFT, alert.mitigation, RIGHT, 0, 0 )
 
         alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height )
-        alert:SetHidden(false)
-        alert.icon:SetHidden(false)
+        alert:SetHidden(true)
 
         anchor = { TOP, BOTTOM, 0, 0, alert }
     end
 
-    uiTlw.alertFrame:SetDimensions(500, height * 3)
+    uiTlw.alertFrame:SetDimensions(500, height + 4)
 
     -- Setup Preview
     uiTlw.alertFrame.preview = LUIE.UI.Backdrop( uiTlw.alertFrame, "fill", nil, nil, nil, true )
-    uiTlw.alertFrame.previewLabel = UI.Label( uiTlw.alertFrame.preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", "Alerts Frame", false )
 
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function(self)
@@ -185,6 +208,7 @@ function CI.ResetAlertFramePosition()
     CI.SV.AlertFrameOffsetY = nil
     CI.SV.AlertFrameCustomPosition = nil
     CI.SetAlertFramePosition()
+    CI.SetMovingStateAlert(false)
 end
 
 function CI.SetAlertFramePosition()
@@ -216,6 +240,23 @@ end
 
 -- Called by CI.SetMovingState from the menu as well as by CI.OnUpdateCastbar when preview is enabled
 function CI.GenerateAlertFramePreview(state)
+
+    for i = 1, 3 do
+        local alert = _G["LUIE_Alert" .. i]
+            alert.name:SetText("NAME TEST")
+            alert.icon.icon:SetTexture("/esoui/art/icons/icon_missing.dds")
+            alert.mitigation:SetText("MITGATION TEST")
+            alert.timer:SetText(CI.SV.alerts.toggles.alertTimer and " 1.0" or "")
+        if state then
+
+        end
+        alert:SetHidden ( not state )
+    end
+
+    CI.RealignAlerts()
+
+
+
     --[[local previewIcon = 'esoui/art/icons/icon_missing.dds'
     castbar.icon:SetTexture(previewIcon)
     if CI.SV.CastBarLabel then
@@ -292,6 +333,11 @@ function CI.CrowdControlColorSetup(crowdControl)
     end
 end
 
+-- Called from Menu to preview sounds
+function CI.PreviewAlertSound(value)
+    PlaySound(LUIE.Sounds[value])
+end
+
 -- Play a sound if the option is enabled and priority is set.
 function CI.PlayAlertSound(abilityId, alertType, crowdControl)
 
@@ -325,8 +371,6 @@ end
 local drawLocation = 1
 function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl)
     local color = CI.CrowdControlColorSetup(crowdControl)
-
-    -- TODO: FIX SET LABEL COLOR HERE
 
     for i = 1, 3 do
         if _G["LUIE_Alert" .. i].data.available then
@@ -548,8 +592,6 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
     local S = CI.SV.alerts
     abilityName = strformat("<<C:1>>", GetAbilityName(abilityId))
     local abilityIcon = GetAbilityIcon(abilityId)
-
-    -- TODO: Fix this so we only process this information once when also sending to the alert printer.
 
     local sourceNameCheck = strformat("<<t:1>>", sourceName)
 

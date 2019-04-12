@@ -73,6 +73,35 @@ LUIE.Fonts = {
 
 LUIE.Sounds = {
     ["Death Recap Killing Blow"]  = SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN,
+    ["LFG Find Replacement"] = SOUNDS.LFG_FIND_REPLACEMENT,
+    ["LFG Search Started"] = SOUNDS.LFG_SEARCH_STARTED,
+    ["Group Election Requested"] = SOUNDS.GROUP_ELECTION_REQUESTED,
+    ["Group Leave"] = SOUNDS.GROUP_LEAVE,
+    ["Duel Accepted"] = SOUNDS.DUEL_ACCEPTED,
+    ["Duel Boundary Warning"] = SOUNDS.DUEL_BOUNDARY_WARNING,
+    ["Duel Forfeit"] = SOUNDS.DUEL_FORFEIT,
+    ["Duel Invite Received"] = SOUNDS.DUEL_INVITE_RECEIVED,
+    ["Duel Start"] = SOUNDS.DUEL_START,
+    ["Duel Won"] = SOUNDS.DUEL_WON,
+    ["Trial - Scored Added High"] = SOUNDS.RAID_TRIAL_SCORE_ADDED_HIGH,
+    ["Trial - Scored Added Low"] = SOUNDS.RAID_TRIAL_SCORE_ADDED_LOW,
+    ["Trial - Scored Added Normal"] = SOUNDS.RAID_TRIAL_SCORE_ADDED_NORMAL,
+    ["Trial - Scored Added Very High"] = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_HIGH,
+    ["Trial - Scored Added Very Low"] = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_LOW,
+    ["Display Announcement"] = SOUNDS.DISPLAY_ANNOUNCEMENT,
+    ["Tel Var Multiplier Up"] = SOUNDS.TELVAR_MULTIPLIERUP,
+    ["Book Collection Completed"] = SOUNDS.BOOK_COLLECTION_COMPLETED,
+    ["Collectible Unlocked"] = SOUNDS.COLLECTIBLE_UNLOCKED,
+    ["Voice Chat Channel Made Active"] = SOUNDS.VOICE_CHAT_ALERT_CHANNEL_MADE_ACTIVE,
+    ["Console Game Enter"] = SOUNDS.CONSOLE_GAME_ENTER,
+    ["Quest Shared"] = SOUNDS.QUEST_SHARED,
+    ["Ultimate Ready"] = SOUNDS.ABILITY_ULTIMATE_READY,
+    ["Champion Points Committed"] = SOUNDS.CHAMPION_POINTS_COMMITTED,
+    ["Champion Damage Taken"] = SOUNDS.CHAMPION_DAMAGE_TAKEN,
+    ["Champion Respec Accept"] = SOUNDS.CHAMPION_RESPEC_ACCEPT,
+    ["Champion Star Locked"] = SOUNDS.CHAMPION_STAR_LOCKED,
+    ["Champion Cycled"] = SOUNDS.CHAMPION_CYCLED_TO_WARRIOR,
+
 }
 
 LUIE.StatusbarTextures = {

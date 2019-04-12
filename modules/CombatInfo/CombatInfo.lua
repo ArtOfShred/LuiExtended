@@ -1159,6 +1159,7 @@ function CI.ResetCastBarPosition()
     CI.SV.CastbarOffsetY = nil
     CI.SV.CastBarCustomPosition = nil
     CI.SetCastBarPosition()
+    CI.SetMovingState(false)
 end
 
 function CI.SetCastBarPosition()
