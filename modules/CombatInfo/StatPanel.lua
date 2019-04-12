@@ -21,6 +21,21 @@ function StatPanel.ToggleStatPanel(option)
 end
 ]]--
 
+local statType = {
+    weaponDamage = STAT_POWER
+    spellDamage = STAT_SPELL_POWER
+    weaponCritical = STAT_CRITICAL_STRIKE
+    spellCritical = STAT_SPELL_CRITICAL
+    physicalPenetration = STAT_PHYSICAL_PENETRATION
+    spellPenetration = STAT_SPELL_PENETRATION
+    physicalResistance = STAT_PHYSICAL_RESIST
+    spellResistance = STAT_SPELL_RESIST
+    criticalResistance = STAT_CRITICAL_RESISTANCE
+    healthRecovery = STAT_HEALTH_REGEN_COMBAT
+    staminaRecovery = STAT_STAMINA_REGEN_COMBAT
+    magickaRecovery = STAT_MAGICKA_REGEN_COMBAT
+}
+
 function StatPanel.Damage()
     local weaponPower = GetPlayerStat(STAT_POWER)
     local spellPower = GetPlayerStat(STAT_SPELL_POWER)
@@ -75,8 +90,23 @@ function StatPanel.PhysicalResistance()
     LUIE_StatPanel_PhysicalResist:SetText(physicalResistance)
 end
 
+function StatPanel.CriticalResistance()
+    local criticalResistance = GetPlayerStat(STAT_CRITICAL_RESISTANCE)
+
+    LUIE_StatPanel_CriticalResistLabel:SetText("cresist")
+
+    LUIE_StatPanel_CriticalResist:SetText(criticalResistance)
+end
+
+function StatPanel.Recovery(resourceType)
+    local recovery = GetPlayerStat(resourceType)
+
+    return recovery
+end
+
 EVENT_MANAGER:RegisterForUpdate(moduleName .. 'Damage', 450 , StatPanel.Damage)
 EVENT_MANAGER:RegisterForUpdate(moduleName .. 'CriticalDamage', 450 , StatPanel.CriticalDamage)
 EVENT_MANAGER:RegisterForUpdate(moduleName .. 'Penetration', 450 , StatPanel.Penetration)
 EVENT_MANAGER:RegisterForUpdate(moduleName .. 'SpellResistance', 450 , StatPanel.SpellResistance)
 EVENT_MANAGER:RegisterForUpdate(moduleName .. 'PhysicalResistance', 450 , StatPanel.PhysicalResistance)
+EVENT_MANAGER:RegisterForUpdate(moduleName .. 'CriticalResistance', 450 , StatPanel.CriticalResistance)

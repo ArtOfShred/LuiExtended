@@ -3,21 +3,21 @@
     License: The MIT License (MIT)
 --]]
 
-local CI        = LUIE.CombatInfo
-local UI        = LUIE.UI
-local E         = LUIE.Effects
-local AlertT    = LUIE.AlertTable
+local CI = LUIE.CombatInfo
+
+local UI = LUIE.UI
+local E = LUIE.Effects
+local AlertT = LUIE.AlertTable
 
 local strfmt = string.format
 local strformat = zo_strformat
-
 local callLater = zo_callLater
 
 local eventManager  = EVENT_MANAGER
 local sceneManager  = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
 
-local moduleName    = LUIE.name .. "_CombatInfo"
+local moduleName = LUIE.name .. "_CombatInfo"
 
 local uiTlw = {} -- GUI
 local refireDelay = {}
