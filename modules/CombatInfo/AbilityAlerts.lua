@@ -58,7 +58,6 @@ end
 
 -- Called from menu when font size/face, etc is changed
 function CI.ResetAlertSize()
-
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
         alert.name:SetFont(g_alertFont)
@@ -78,7 +77,6 @@ function CI.ResetAlertSize()
     end
 
     uiTlw.alertFrame:SetDimensions(500, (CI.SV.alerts.toggles.alertFontSize * 2) + 4)
-
 end
 
 -- Create Alert Frame - basic setup for now
@@ -240,7 +238,6 @@ end
 
 -- Called by CI.SetMovingState from the menu as well as by CI.OnUpdateCastbar when preview is enabled
 function CI.GenerateAlertFramePreview(state)
-
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
             alert.name:SetText("NAME TEST")
@@ -254,8 +251,6 @@ function CI.GenerateAlertFramePreview(state)
     end
 
     CI.RealignAlerts()
-
-
 
     --[[local previewIcon = 'esoui/art/icons/icon_missing.dds'
     castbar.icon:SetTexture(previewIcon)
@@ -340,7 +335,6 @@ end
 
 -- Play a sound if the option is enabled and priority is set.
 function CI.PlayAlertSound(abilityId, alertType, crowdControl)
-
     local S = CI.SV.alerts
 
     local isPlay
@@ -574,7 +568,6 @@ function CI.ProcessAlert(abilityId, unitName)
 end
 
 function CI.AlertEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-
     -- Bail out if we're not in combat (reduce spam for nearby)
     if not IsUnitInCombat("player") then
         return
@@ -629,7 +622,6 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
     -- NEW ALERTS
     if S.toggles.alertEnable and AlertT[abilityId] then
         if sourceName ~= nil and sourceName ~= "" then
-
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
             if resultType == ACTION_RESULT_EFFECT_FADED
                or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN
@@ -668,7 +660,6 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
 end
 
 function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
-
     -- Bail out if we're not in combat (reduce spam for nearby)
     if not IsUnitInCombat("player") then
         return
@@ -679,7 +670,6 @@ function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGr
     -- NEW ALERTS
     if S.toggles.alertEnable and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) then
         if not refireDelay[abilityId] then
-
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
             if resultType == ACTION_RESULT_EFFECT_FADED
                or resultType == ACTION_RESULT_ABILITY_ON_COOLDOWN

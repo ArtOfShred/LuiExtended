@@ -1140,6 +1140,7 @@ function SCB.Buff_OnMouseEnter(control)
                 end
             end
 
+        -- END TEMPORARY DEBUG FUNCTION HERE
         -- NORMAL BEHAVIOR:
         else
             if control.tooltip then
@@ -1199,7 +1200,6 @@ function SCB.Buff_OnMouseEnter(control)
             end
 
         end
-        -- END TEMPORARY DEBUG FUNCTION HERE
 
         local thirdLine
         local duration = control.duration / 1000
