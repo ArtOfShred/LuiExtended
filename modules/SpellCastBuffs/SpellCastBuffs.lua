@@ -1058,7 +1058,7 @@ function SCB.Buff_OnMouseEnter(control)
 
     InitializeTooltip(GameTooltip, control, BOTTOM, 0, -5, TOP)
     -- Setup Text
-    local tooltipText
+    local tooltipText = ""
     local colorText = ZO_NORMAL_TEXT
     local tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, control.effectName)
     if control.isArtificial then
@@ -1068,140 +1068,138 @@ function SCB.Buff_OnMouseEnter(control)
             GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
         end
     else
-
-    if not SCB.SV.TooltipEnable then
-        GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
-        return
-    end
-
-
-    -- BEGIN TEMPORARY DEBUF FUNCTION HERE
-    -- MY ACCOUNT DEBUG: Temporary conditional to check for my Display Name and do some debug stuff, otherwise use normal function
-    local displayName = GetDisplayName()
-    if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
-
-        tooltipText = ""
-
-        -- Add original TP if present
-        if control.buffSlot then
-            if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                tooltipText = "|cFFFF00Original Tool:|r " .. GetAbilityEffectDescription(control.buffSlot) .. "\n"
-            end
+        if not SCB.SV.TooltipEnable then
+            GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
+            return
         end
 
-        local duration
-        if type(control.effectId) == "number" then
-            -- Add original description if present
-            if GetAbilityDescription(control.effectId) ~= "" then
-                tooltipText = tooltipText .. "|c3A92FFOriginal Desc:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
+        -- BEGIN TEMPORARY DEBUF FUNCTION HERE
+        -- MY ACCOUNT DEBUG: Temporary conditional to check for my Display Name and do some debug stuff, otherwise use normal function
+        local displayName = GetDisplayName()
+        if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+
+            tooltipText = ""
+
+            -- Add original TP if present
+            if control.buffSlot then
+                if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                    tooltipText = "|cFFFF00Original Tool:|r " .. GetAbilityEffectDescription(control.buffSlot) .. "\n"
+                end
             end
 
-            duration = control.duration / 1000
-        else
-            duration = 0
-        end
-
-        local value2
-        local value3
-        if E.EffectOverride[control.effectId] then
-            if E.EffectOverride[control.effectId].tooltipValue2 then
-                value2 = E.EffectOverride[control.effectId].tooltipValue2
-            elseif E.EffectOverride[control.effectId].tooltipValue2Mod then
-                value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Mod * 10) + 0.5) / 10
-            elseif E.EffectOverride[control.effectId].tooltipValue2Id then
-                value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
-            else
-                value2 = 0
-            end
-        else
-            value2 = 0
-        end
-        if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue3 then
-            value3 = E.EffectOverride[control.effectId].tooltipValue3
-        else
-            value3 = 0
-        end
-        duration = math.floor((duration * 10) + 0.5) / 10
-
-        local tooltipText2
-        if LUIE.ResolveVeteranDifficulty() == true and E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipVet then
-            tooltipText2 = strformat(E.EffectOverride[control.effectId].tooltipVet, timer, value2, value3)
-        else
-             tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
-        end
-        if tooltipText2 ~= "" then
-            tooltipText2 = "|cEE992AOverride TP:|r " .. tooltipText2
-        end
-        tooltipText = tooltipText .. tooltipText2
-
-        if control.tooltip then tooltipText = control.tooltip end
-
-        if E.TooltipUseDefault[control.effectId] then
-            if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                tooltipText = tooltipText .. "\n\n|c00FFFFFlagged to show original Tooltip|r"
-            end
-        end
-
-    -- NORMAL BEHAVIOR:
-    else
-        if control.tooltip then
-            tooltipText = control.tooltip
-        else
             local duration
             if type(control.effectId) == "number" then
+                -- Add original description if present
+                if GetAbilityDescription(control.effectId) ~= "" then
+                    tooltipText = tooltipText .. "|c3A92FFOriginal Desc:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
+                end
+
                 duration = control.duration / 1000
-                local value2
-                local value3
-                if E.EffectOverride[control.effectId] then
-                    if E.EffectOverride[control.effectId].tooltipValue2 then
-                        value2 = E.EffectOverride[control.effectId].tooltipValue2
-                    elseif E.EffectOverride[control.effectId].tooltipValue2Mod then
-                        value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Mod * 10) + 0.5) / 10
-                    elseif E.EffectOverride[control.effectId].tooltipValue2Id then
-                        value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
-                    else
-                        value2 = 0
-                    end
-                else
-                    value2 = 0
-                end
-                if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue3 then
-                    value3 = E.EffectOverride[control.effectId].tooltipValue3
-                else
-                    value3 = 0
-                end
-                duration = math.floor((duration * 10) + 0.5) / 10
-
-                local tooltipText
-                if control.buffSlot then
-                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or GetAbilityDescription(abilityId)
-                else
-                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
-                end
-                if LUIE.ResolveVeteranDifficulty() == true and E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipVet then
-                    tooltipText = strformat(E.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
-                end
-
-                -- Display Default Tooltip Description if no custom tooltip is present
-                if tooltipText == "" or tooltipText == nil then
-                    if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                        tooltipText = GetAbilityEffectDescription(control.buffSlot)
-                    end
-                end
-
             else
                 duration = 0
             end
-        end
 
-        if E.TooltipUseDefault[control.effectId] then
-            if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                tooltipText = GetAbilityEffectDescription(control.buffSlot)
+            local value2
+            local value3
+            if E.EffectOverride[control.effectId] then
+                if E.EffectOverride[control.effectId].tooltipValue2 then
+                    value2 = E.EffectOverride[control.effectId].tooltipValue2
+                elseif E.EffectOverride[control.effectId].tooltipValue2Mod then
+                    value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Mod * 10) + 0.5) / 10
+                elseif E.EffectOverride[control.effectId].tooltipValue2Id then
+                    value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
+                else
+                    value2 = 0
+                end
+            else
+                value2 = 0
             end
-        end
+            if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue3 then
+                value3 = E.EffectOverride[control.effectId].tooltipValue3
+            else
+                value3 = 0
+            end
+            duration = math.floor((duration * 10) + 0.5) / 10
 
-    end
-    -- END TEMPORARY DEBUG FUNCTION HERE
+            local tooltipText2
+            if LUIE.ResolveVeteranDifficulty() == true and E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipVet then
+                tooltipText2 = strformat(E.EffectOverride[control.effectId].tooltipVet, timer, value2, value3)
+            else
+                 tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+            end
+            if tooltipText2 ~= "" then
+                tooltipText2 = "|cEE992AOverride TP:|r " .. tooltipText2
+            end
+            tooltipText = tooltipText .. tooltipText2
+
+            if control.tooltip then tooltipText = control.tooltip end
+
+            if E.TooltipUseDefault[control.effectId] then
+                if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                    tooltipText = tooltipText .. "\n\n|c00FFFFFlagged to show original Tooltip|r"
+                end
+            end
+
+        -- NORMAL BEHAVIOR:
+        else
+            if control.tooltip then
+                tooltipText = control.tooltip
+            else
+                local duration
+                if type(control.effectId) == "number" then
+                    duration = control.duration / 1000
+                    local value2
+                    local value3
+                    if E.EffectOverride[control.effectId] then
+                        if E.EffectOverride[control.effectId].tooltipValue2 then
+                            value2 = E.EffectOverride[control.effectId].tooltipValue2
+                        elseif E.EffectOverride[control.effectId].tooltipValue2Mod then
+                            value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Mod * 10) + 0.5) / 10
+                        elseif E.EffectOverride[control.effectId].tooltipValue2Id then
+                            value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
+                        else
+                            value2 = 0
+                        end
+                    else
+                        value2 = 0
+                    end
+                    if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue3 then
+                        value3 = E.EffectOverride[control.effectId].tooltipValue3
+                    else
+                        value3 = 0
+                    end
+                    duration = math.floor((duration * 10) + 0.5) / 10
+
+                    local tooltipText
+                    if control.buffSlot then
+                        tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or GetAbilityDescription(abilityId)
+                    else
+                        tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+                    end
+                    if LUIE.ResolveVeteranDifficulty() == true and E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipVet then
+                        tooltipText = strformat(E.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
+                    end
+
+                    -- Display Default Tooltip Description if no custom tooltip is present
+                    if tooltipText == "" or tooltipText == nil then
+                        if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                            tooltipText = GetAbilityEffectDescription(control.buffSlot)
+                        end
+                    end
+
+                else
+                    duration = 0
+                end
+            end
+
+            if E.TooltipUseDefault[control.effectId] then
+                if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                    tooltipText = GetAbilityEffectDescription(control.buffSlot)
+                end
+            end
+
+        end
+        -- END TEMPORARY DEBUG FUNCTION HERE
 
         local thirdLine
         local duration = control.duration / 1000
