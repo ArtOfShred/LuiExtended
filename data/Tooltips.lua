@@ -476,6 +476,7 @@ LUIE.Tooltips = {
     ----------------------------------------------------------------
 
     -- Dragonknight
+    Skill_Seething_Fury                             = GetString(SI_LUIE_SKILL_SEETHING_FURY_TP),
     Skill_Burning_Embers                            = GetString(SI_LUIE_SKILL_BURNING_EMBERS_TP),
     Skill_Engulfing_Flames                          = GetString(SI_LUIE_SKILL_ENGULFING_FLAMES_TP),
     Skill_Inferno_Base                              = GetAbilityDescription(28967),

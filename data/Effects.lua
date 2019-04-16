@@ -849,7 +849,7 @@ E.BarHighlightOverride = {
 
     -- Ardent Flame
     [23806] = { newId = 23808, secondary = true }, -- Lava Whip --> Off Balance
-    [20805] = { newId = 20806, secondary = true }, -- Molten Whip --> Off Balance
+    [20805] = { newId = 122658 }, -- Molten Whip --> Seething Fury
     [20816] = { newId = 34117, secondary = true }, -- Flame Lash --> Off Balance
     [20657] = { newId = 44363 }, -- Searing Strike
     [20668] = { newId = 44369 }, -- Venomous Claw
@@ -3713,6 +3713,7 @@ E.EffectOverride = {
     -- Lava Whip / Molten Whip / Flame Lash
     [23808] =  { tooltip = A.Skill_Lava_Whip }, -- Off Balance (Lava Whip)
     [20806] = { tooltip = A.Skill_Molten_Whip }, -- Off Balance (Molten Whip)
+    [122658] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_seething_fury.dds', tooltip = T.Skill_Seething_Fury }, -- Seething Fury (Molten Whip)
     [34117] = { tooltip = A.Skill_Flame_Lash }, -- Off Balance (Flame Lash)
     [20824] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds' }, -- Power Lash (Flame Lash)
     [23105] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Power Lash (Flame Lash)

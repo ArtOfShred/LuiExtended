@@ -285,6 +285,7 @@ local strings = {
     ----------------------------------------------------------------
 
     -- Dragonknight Skills
+    SI_LUIE_SKILL_SEETHING_FURY_TP =                     "Increase the damage of your next Molten Whip by |cffffff33|r% and your Weapon and Spell Damage by |cffffff125|r for |cffffff<<1>>|r seconds.\n\nThis effect can stack up to |cffffff3|r times.",
     SI_LUIE_SKILL_BURNING_EMBERS_TP =                    "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cffffff<<1>>|r секунд.\n\nИсцеляет рыцаря-дракона на |cffffff75|r% от нанесённого урона по завершению действия эффекта.",
     SI_LUIE_SKILL_ENGULFING_FLAMES_TP =                  "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cffffff<<1>>|r секунд.\n\nIncrease damage taken from Fire Damage attacks by |cffffff10|r%.",
     SI_LUIE_SKILL_INFERNO_TP =                           "Запускает в ближайшего противника огненный шар, наносящий урон от Огня  каждые |cffffff5|r секунд в течение |cffffff15|r секунд.",

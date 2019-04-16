@@ -2673,41 +2673,42 @@ LUIE.DebugAuras = {
     -- DRAGONKNIGHT ACTIVES -------------
     -------------------------------------
 
-    [23806] = true, -- Lava Whip (Lava Whip - Rank 1)
-    [23808] = true, -- Off Balance (Lava Whip - Rank 1)
+    [23806] = true, -- Lava Whip (Lava Whip)
+    [23808] = true, -- Off Balance (Lava Whip)
 
-    [32842] = true, -- Molten Whip Passive (Molten Whip - Rank 1)
-    [20805] = true, -- Molten Whip (Molten Whip - Rank 1)
-    [20806] = true, -- Off Balance (Molten Whip - Rank 1)
+    [32842] = true, -- Seething Fury (Molten Whip)
+    [20805] = true, -- Molten Whip (Molten Whip)
+    [122658] = true, -- Seething Fury (Molten Whip)
+    [20806] = true, -- Off Balance (Molten Whip)
 
-    [20816] = true, -- Flame Lash (Flame Lash - Rank 1)
-    [34117] = true, -- Off Balance (Flame Lash - Rank 1)
-    [20824] = true, -- Power Lash (Flame Lash - Rank 1)
-    [23105] = true, -- Power Lash (Flame Lash - Rank 1)
-    [105196] = true, -- Power Lash (Flame Lash - Rank 1)
+    [20816] = true, -- Flame Lash (Flame Lash)
+    [34117] = true, -- Off Balance (Flame Lash)
+    [20824] = true, -- Power Lash (Flame Lash)
+    [23105] = true, -- Power Lash (Flame Lash)
+    [105196] = true, -- Power Lash (Flame Lash)
 
-    [20657] = true, -- Searing Strike (Searing Strike - Rank 1)
-    [44363] = true, -- Searing Strike (Searing Strike - Rank 1)
+    [20657] = true, -- Searing Strike (Searing Strike)
+    [44363] = true, -- Searing Strike (Searing Strike)
 
-    [20668] = true, -- Venomous Claw (Venomous Claw - Rank 1)
-    [44369] = true, -- Venomous Claw (Venomous Claw - Rank 1)
-    [31810] = true, -- Venomous Claw (Venomous Claw - Rank 1)
+    [20668] = true, -- Venomous Claw (Venomous Claw)
+    [44369] = true, -- Venomous Claw (Venomous Claw)
+    [31810] = true, -- Venomous Claw (Venomous Claw)
 
-    [32019] = true, -- Burning Embers (Burning Embers - Rank 1)
-    [32018] = true, -- Burning Embers (Burning Embers - Rank 1)
-    [20660] = true, -- Burning Embers (Burning Embers - Rank 1)
-    [44373] = true, -- Burning Embers (Burning Embers - Rank 1)
-    [31815] = true, -- Burning Embers (Burning Embers - Rank 1)
+    [32019] = true, -- Burning Embers (Burning Embers)
+    [32018] = true, -- Burning Embers (Burning Embers)
+    [20660] = true, -- Burning Embers (Burning Embers)
+    [44373] = true, -- Burning Embers (Burning Embers)
+    [31815] = true, -- Burning Embers (Burning Embers)
 
-    [20917] = true, -- Fiery Breath (Fiery Breath - Rank 1)
-    [31102] = true, -- Fiery Breath (Fiery Breath - Rank 1)
+    [20917] = true, -- Fiery Breath (Fiery Breath)
+    [31102] = true, -- Fiery Breath (Fiery Breath)
 
-    [20944] = true, -- Noxious Breath (Noxious Breath - Rank 1)
-    [31103] = true, -- Noxious Breath (Noxious Breath - Rank 1)
-    [48946] = true, -- Major Fracture (Noxious Breath - Rank 1)
+    [20944] = true, -- Noxious Breath (Noxious Breath)
+    [31103] = true, -- Noxious Breath (Noxious Breath)
+    [48946] = true, -- Major Fracture (Noxious Breath)
 
-    [20930] = true, -- Engulfing Flames (Engulfing Flames - Rank 1)
-    [31104] = true, -- Engulfing Flames (Engulfing Flames - Rank 1)
+    [20930] = true, -- Engulfing Flames (Engulfing Flames)
+    [31104] = true, -- Engulfing Flames (Engulfing Flames)
 
     [31290] = true, -- Fiery Reach taunt (Fiery Grip - All Morphs)
     [20492] = true, -- Fiery Grip (Fiery Grip)
@@ -2745,89 +2746,89 @@ LUIE.DebugAuras = {
     [98448] = true, -- Shackle Immune FX (Dragonknight Standard - Shackle Synergy)
     [108805] = true, -- Synergy Damage Bonus (Dragonknight Standard - Shackle Synergy)
 
-    [28988] = true, -- Dragonknight Standard (Dragonknight Standard - Rank 1)
-    [28995] = true, -- Dragonknight Standard (Dragonknight Standard - Rank 1)
-    [29230] = true, -- Major Defile (Dragonknight Standard - Rank 1)
-    [102366] = true, -- Shackle Synergy Anchor (Dragonknight Standard - Rank 1)
-    [32905] = true, -- Shackle (Dragonknight Standard - Rank 1)
+    [28988] = true, -- Dragonknight Standard (Dragonknight Standard)
+    [28995] = true, -- Dragonknight Standard (Dragonknight Standard)
+    [29230] = true, -- Major Defile (Dragonknight Standard)
+    [102366] = true, -- Shackle Synergy Anchor (Dragonknight Standard)
+    [32905] = true, -- Shackle (Dragonknight Standard)
 
-    [32967] = true, -- Shifting Standard (Shifting Standard - Rank 1)
-    [32958] = true, -- Shifting Standard (Shifting Standard - Rank 1)
-    [70735] = true, -- Shifting Standard (Shifting Standard - Rank 1)
-    [32960] = true, -- Shifting Standard (Shifting Standard - Rank 1)
-    [32961] = true, -- Major Defile (Shifting Standard - Rank 1)
-    [102370] = true, -- Shackle Synergy Anchor (Shifting Standard - Rank 1)
-    [32962] = true, -- Shifting Standard (Shifting Standard - Rank 1)
-    [32963] = true, -- Shift Standard (Shifting Standard - Rank 1)
-    [100100] = true, -- Shift Standard (Shifting Standard - Rank 1)
-    [102376] = true, -- Shackle Synergy Anchor (Shifting Standard - Rank 1)
-    [32966] = true, -- Shifting Standard (Shifting Standard - Rank 1)
-    [32964] = true, -- Shifting Standard (Shifting Standard - Rank 1)
-    [32965] = true, -- Major Deflie (Shifting Standard - Rank 1)
+    [32967] = true, -- Shifting Standard (Shifting Standard)
+    [32958] = true, -- Shifting Standard (Shifting Standard)
+    [70735] = true, -- Shifting Standard (Shifting Standard)
+    [32960] = true, -- Shifting Standard (Shifting Standard)
+    [32961] = true, -- Major Defile (Shifting Standard)
+    [102370] = true, -- Shackle Synergy Anchor (Shifting Standard)
+    [32962] = true, -- Shifting Standard (Shifting Standard)
+    [32963] = true, -- Shift Standard (Shifting Standard)
+    [100100] = true, -- Shift Standard (Shifting Standard)
+    [102376] = true, -- Shackle Synergy Anchor (Shifting Standard)
+    [32966] = true, -- Shifting Standard (Shifting Standard)
+    [32964] = true, -- Shifting Standard (Shifting Standard)
+    [32965] = true, -- Major Deflie (Shifting Standard)
 
-    [32956] = true, -- Standard of Might (Standard of Might - Rank 1)
-    [32957] = true, -- Standard of Might (Standard of Might - Rank 1)
-    [32947] = true, -- Standard of Might (Standard of Might - Rank 1)
-    [32948] = true, -- Standard of Might (Standard of Might - Rank 1)
-    [32949] = true, -- Major Defile (Standard of Might - Rank 1)
-    [102413] = true, -- Shackle Synergy Anchor (Standard of Might - Rank 1)
-    [32950] = true, -- Standard of Might (Standard of Might - Rank 1)
+    [32956] = true, -- Standard of Might (Standard of Might)
+    [32957] = true, -- Standard of Might (Standard of Might)
+    [32947] = true, -- Standard of Might (Standard of Might)
+    [32948] = true, -- Standard of Might (Standard of Might)
+    [32949] = true, -- Major Defile (Standard of Might)
+    [102413] = true, -- Shackle Synergy Anchor (Standard of Might)
+    [32950] = true, -- Standard of Might (Standard of Might)
 
-    [20319] = true, -- Spiked Armor (Spiked Armor - Rank 1)
-    [61815] = true, -- Major Resolve (Spiked Armor - Rank 1)
-    [61816] = true, -- Major Ward (Spiked Armor - Rank 1)
-    [20320] = true, -- Spiked Armor (Spiked Armor - Rank 1)
+    [20319] = true, -- Spiked Armor (Spiked Armor)
+    [61815] = true, -- Major Resolve (Spiked Armor)
+    [61816] = true, -- Major Ward (Spiked Armor)
+    [20320] = true, -- Spiked Armor (Spiked Armor)
 
-    [20328] = true, -- Hardened Armor (Hardened Armor - Rank 1)
-    [61827] = true, -- Major Resolve (Hardened Armor - Rank 1)
-    [61828] = true, -- Major Ward (Hardened Armor - Rank 1)
-    [31808] = true, -- Hardened Armor (Hardened Armor - Rank 1)
-    [20329] = true, -- Hardened Armor Damage Return (Hardened Armor - Rank 1)
+    [20328] = true, -- Hardened Armor (Hardened Armor)
+    [61827] = true, -- Major Resolve (Hardened Armor)
+    [61828] = true, -- Major Ward (Hardened Armor)
+    [31808] = true, -- Hardened Armor (Hardened Armor)
+    [20329] = true, -- Hardened Armor Damage Return (Hardened Armor)
 
-    [20323] = true, -- Volatile Armor (Volatile Armor - Rank 1)
-    [61836] = true, -- Major Resolve (Volatile Armor - Rank 1)
-    [61837] = true, -- Major Ward (Volatile Armor - Rank 1)
-    [20324] = true, -- Volatle Armor (Volatile Armor - Rank 1)
-    [20326] = true, -- Volatile Armor (Volatile Armor - Rank 1)
+    [20323] = true, -- Volatile Armor (Volatile Armor)
+    [61836] = true, -- Major Resolve (Volatile Armor)
+    [61837] = true, -- Major Ward (Volatile Armor)
+    [20324] = true, -- Volatle Armor (Volatile Armor)
+    [20326] = true, -- Volatile Armor (Volatile Armor)
 
     [32974] = true, -- Ignite (Dark Talons - Synergy)
     [48040] = true, -- Synergy Dummy (Dark Talons - Ignite Synergy)
     [108807] = true, -- Synergy Damage Bonus (Dark Talons - Ignite Synergy)
 
-    [20245] = true, -- Dark Talons (Dark Talons - Rank 1)
-    [20527] = true, -- Dark Talons (Dark Talons - Rank 1)
-    [102690] = true, -- Ignite Synergy Ticker (Dark Talons - Rank 1)
-    [32976] = true, -- Ignite Grant Ability (Dark Talons - Rank 1)
-    [95174] = true, -- Dark Talons FX (Dark Talons - Rank 1)
+    [20245] = true, -- Dark Talons (Dark Talons)
+    [20527] = true, -- Dark Talons (Dark Talons)
+    [102690] = true, -- Ignite Synergy Ticker (Dark Talons)
+    [32976] = true, -- Ignite Grant Ability (Dark Talons)
+    [95174] = true, -- Dark Talons FX (Dark Talons)
 
-    [20252] = true, -- Burning Talons (Impale Grant Ability - Rank 1)
-    [31898] = true, -- Burning Talons (Burning Talons - Rank 1)
-    [20253] = true, -- Burning Talons (Burning Talons - Rank 1)
-    [102716] = true, -- Ignite Synergy Ticker (Burning Talons - Rank 1)
-    [33244] = true, -- Ignite Grant Ability (Burning Talons - Rank 1)
-    [95178] = true, -- Dark Talons FX (Burning Talons - Rank 1)
+    [20252] = true, -- Burning Talons (Impale Grant Ability)
+    [31898] = true, -- Burning Talons (Burning Talons)
+    [20253] = true, -- Burning Talons (Burning Talons)
+    [102716] = true, -- Ignite Synergy Ticker (Burning Talons)
+    [33244] = true, -- Ignite Grant Ability (Burning Talons)
+    [95178] = true, -- Dark Talons FX (Burning Talons)
 
-    [20251] = true, -- Choking Talons (Choking Talons - Rank 1)
-    [31899] = true, -- Minor Maim (Choking Talons - Rank 1)
-    [20528] = true, -- Choking Talons (Choking Talons - Rank 1)
-    [102720] = true, -- Ignite Synergy Ticker (Choking Talons - Rank 1)
-    [33252] = true, -- Ignite Grant Ability (Choking Talons - Rank 1)
-    [95182] = true, -- Dark Talons FX (Choking Talons - Rank 1)
+    [20251] = true, -- Choking Talons (Choking Talons)
+    [31899] = true, -- Minor Maim (Choking Talons)
+    [20528] = true, -- Choking Talons (Choking Talons)
+    [102720] = true, -- Ignite Synergy Ticker (Choking Talons)
+    [33252] = true, -- Ignite Grant Ability (Choking Talons)
+    [95182] = true, -- Dark Talons FX (Choking Talons)
 
-    [29004] = true, -- Dragon Blood (Dragon Blood - Rank 1)
-    [29010] = true, -- Dragon Blood (Dragon Blood - Rank 1)
-    [29011] = true, -- Major Fortitude (Dragon Blood - Rank 1)
+    [29004] = true, -- Dragon Blood (Dragon Blood)
+    [29010] = true, -- Dragon Blood (Dragon Blood)
+    [29011] = true, -- Major Fortitude (Dragon Blood)
 
-    [32744] = true, -- Green Dragon Blood (Dragon Blood - Rank 1)
-    [32745] = true, -- Green Dragon Blood (Dragon Blood - Rank 1)
-    [32748] = true, -- Major Endurance (Dragon Blood - Rank 1)
-    [61884] = true, -- Major Fortitude (Dragon Blood - Rank 1)
-    [91670] = true, -- Minor Vitality (Dragon Blood - Rank 1)
+    [32744] = true, -- Green Dragon Blood (Dragon Blood)
+    [32745] = true, -- Green Dragon Blood (Dragon Blood)
+    [32748] = true, -- Major Endurance (Dragon Blood)
+    [61884] = true, -- Major Fortitude (Dragon Blood)
+    [91670] = true, -- Minor Vitality (Dragon Blood)
 
-    [32722] = true, -- Coagulating Blood (Coagulating Blood - Rank 1)
-    [61891] = true, -- Coagulating Blood Bonus Heal (Coagulating Blood - Rank 1)
-    [32723] = true, -- Coagulating Blood (Coagulating Blood - Rank 1)
-    [91674] = true, -- Major Fortitude (Coagulating Blood - Rank 1)
+    [32722] = true, -- Coagulating Blood (Coagulating Blood)
+    [61891] = true, -- Coagulating Blood Bonus Heal (Coagulating Blood)
+    [32723] = true, -- Coagulating Blood (Coagulating Blood)
+    [91674] = true, -- Major Fortitude (Coagulating Blood)
 
     [21007] = true, -- Reflective Scale (Reflective Scale)
 
@@ -2874,30 +2875,30 @@ LUIE.DebugAuras = {
     [61814] = true, -- Ferocious Leap (Ferocious Leap)
     [114601] = true, -- Stun (Ferocious Leap)
 
-    [86798] = true, -- Knockdown Bonus Damage (Stonefist - Rank 1)
-    [29032] = true, -- Stonefist (Stonefist - Rank 1)
-    [29034] = true, -- Stonefist (Stonefist - Rank 1)
+    [86798] = true, -- Knockdown Bonus Damage (Stonefist)
+    [29032] = true, -- Stonefist (Stonefist)
+    [29034] = true, -- Stonefist (Stonefist)
 
-    [31820] = true, -- Obsidian Shard (Obsidian Shard - Rank 1)
-    [31821] = true, -- Obsidian Shard (Obsidian Shard - Rank 1)
-    [68763] = true, -- Obsidian Shard (Obsidian Shard - Rank 1)
+    [31820] = true, -- Obsidian Shard (Obsidian Shard)
+    [31821] = true, -- Obsidian Shard (Obsidian Shard)
+    [68763] = true, -- Obsidian Shard (Obsidian Shard)
 
-    [86805] = true, -- Knockdown Bonus Damage (Stone Giant - Rank 1)
-    [31816] = true, -- Stone Giant (Stone Giant - Rank 1)
-    [31817] = true, -- Stone Giant (Stone Giant - Rank 1)
-    [31818] = true, -- Minor Resolve (Stone Giant - Rank 1)
-    [108801] = true, -- Minor Ward (Stone Giant - Rank 1)
+    [86805] = true, -- Knockdown Bonus Damage (Stone Giant)
+    [31816] = true, -- Stone Giant (Stone Giant)
+    [31817] = true, -- Stone Giant (Stone Giant)
+    [31818] = true, -- Minor Resolve (Stone Giant)
+    [108801] = true, -- Minor Ward (Stone Giant)
 
-    [29043] = true, -- Molten Weapons (Molten Weapons - Rank 1)
-    [92507] = true, -- Major Sorcery (Molten Weapons - Rank 1)
+    [29043] = true, -- Molten Weapons (Molten Weapons)
+    [92507] = true, -- Major Sorcery (Molten Weapons)
 
-    [31874] = true, -- Igneous Weapons (Igneous Weapons - Rank 1)
-    [76518] = true, -- Major Brutality (Igneous Weapons - Rank 1)
-    [92503] = true, -- Major Sorcery (Igneous Weapons - Rank 1)
+    [31874] = true, -- Igneous Weapons (Igneous Weapons)
+    [76518] = true, -- Major Brutality (Igneous Weapons)
+    [92503] = true, -- Major Sorcery (Igneous Weapons)
 
-    [31888] = true, -- Molten Armaments (Molten Armaments - Rank 1)
-    [76537] = true, -- Molten Armaments (Molten Armaments - Rank 1)
-    [92512] = true, -- Major Sorcery (Molten Armaments - Rank 1)
+    [31888] = true, -- Molten Armaments (Molten Armaments)
+    [76537] = true, -- Molten Armaments (Molten Armaments)
+    [92512] = true, -- Major Sorcery (Molten Armaments)
 
     [29071] = true, -- Obsidian Shield (Obsidian Shield)
     [108675] = true, -- Major Mending (Obsidian Shield)
@@ -2937,15 +2938,15 @@ LUIE.DebugAuras = {
     [32711] = true, -- Eruption (Eruption)
     [32712] = true, -- Eruption (Eruption)
 
-    [15957] = true, -- Magma Armor (Magma Armor - Rank 1)
-    [15959] = true, -- Magma Armor (Magma Armor - Rank 1)
+    [15957] = true, -- Magma Armor (Magma Armor)
+    [15959] = true, -- Magma Armor (Magma Armor)
 
-    [17874] = true, -- Magma Shell (Magma Shell - Rank 1)
-    [17875] = true, -- Magma Shell (Magma Shell - Rank 1)
-    [76483] = true, -- Magma Shell (Magma Shell - Rank 1)
+    [17874] = true, -- Magma Shell (Magma Shell)
+    [17875] = true, -- Magma Shell (Magma Shell)
+    [76483] = true, -- Magma Shell (Magma Shell)
 
-    [17878] = true, -- Corrosive Armor (Corrosive Armor - Rank 1)
-    [17879] = true, -- Corrosive Armor (Corrosive Armor - Rank 1)
+    [17878] = true, -- Corrosive Armor (Corrosive Armor)
+    [17879] = true, -- Corrosive Armor (Corrosive Armor)
 
     -------------------------------------
     -- NIGHTBLADE PASSIVES --------------
@@ -4117,7 +4118,7 @@ LUIE.DebugAuras = {
 
     [22226] = true, -- Practiced Incantation (Practiced Incantation)
     [22228] = true, -- Practiced Incantation (Practiced Incantation)
-    [26383] = true, -- Practiced Incantation (Practiced Incantation - Rank 1)
+    [26383] = true, -- Practiced Incantation (Practiced Incantation)
 
     -------------------------------------
     -- WARDEN PASSIVES ------------------
@@ -4984,194 +4985,194 @@ LUIE.DebugAuras = {
     -- DESTRUCTION STAFF ACTIVES --------
     -------------------------------------
 
-    [46340] = true, -- Force Shock (Force Shock - Rank 1)
-    [46341] = true, -- Force Shock (Force Shock - Rank 1)
-    [46343] = true, -- Force Shock (Force Shock - Rank 1)
+    [46340] = true, -- Force Shock (Force Shock)
+    [46341] = true, -- Force Shock (Force Shock)
+    [46343] = true, -- Force Shock (Force Shock)
 
-    [46348] = true, -- Crushing Shock (Crushing Shock - Rank 1)
-    [46350] = true, -- Crushing Shock (Crushing Shock - Rank 1)
-    [46351] = true, -- Crushing Shock (Crushing Shock - Rank 1)
-    [48010] = true, -- Force Shock (Destruction) (Crushing Shock - Rank 1)
-    [48009] = true, -- Stagger(Crushing Shock - Rank 1)
-    [48011] = true, -- Uber Attack (Crushing Shock - Rank 1)
+    [46348] = true, -- Crushing Shock (Crushing Shock)
+    [46350] = true, -- Crushing Shock (Crushing Shock)
+    [46351] = true, -- Crushing Shock (Crushing Shock)
+    [48010] = true, -- Force Shock (Destruction) (Crushing Shock)
+    [48009] = true, -- Stagger(Crushing Shock)
+    [48011] = true, -- Uber Attack (Crushing Shock)
 
-    [46356] = true, -- Force Pulse (Force Pulse - Rank 1)
-    [46357] = true, -- Force Pulse (Force Pulse - Rank 1)
-    [46358] = true, -- Force Pulse (Force Pulse - Rank 1)
-    [48019] = true, -- Hit Dummy (Force Pulse - Rank 1)
-    [48017] = true, -- Bounce 1 (Force Pulse - Rank 1)
-    [48023] = true, -- Bounce 2 (Force Pulse - Rank 1)
-    [48016] = true, -- Force Pulse (Force Pulse - Rank 1)
-    [48022] = true, -- Force Pulse (Force Pulse - Rank 1)
+    [46356] = true, -- Force Pulse (Force Pulse)
+    [46357] = true, -- Force Pulse (Force Pulse)
+    [46358] = true, -- Force Pulse (Force Pulse)
+    [48019] = true, -- Hit Dummy (Force Pulse)
+    [48017] = true, -- Bounce 1 (Force Pulse)
+    [48023] = true, -- Bounce 2 (Force Pulse)
+    [48016] = true, -- Force Pulse (Force Pulse)
+    [48022] = true, -- Force Pulse (Force Pulse)
 
-    [68719] = true, -- Frozen (Wall of Elements - All Ranks) -- Frost
+    [68719] = true, -- Frozen (Wall of Elements) -- Frost
     [43192] = true, -- Fire Wall Damage Bonus (Wall of Elements - All Morphs) -- Fire
 
-    [28858] = true, -- Wall of Elements (Wall of Elements - Rank 1)
-    [28807] = true, -- Wall of Fire (Wall of Elements - Rank 1) -- Fire
-    [62898] = true, -- Unstable Wall of Fire (Wall of Elements - Rank 1) -- Fire
-    [62897] = true, -- Unstable Wall of Fire (Wall of Elements - Rank 1) -- Fire
-    [62895] = true, -- Unstable Wall of Fire (Wall of Elements - Rank 1) -- Fire
-    [62896] = true, -- Wall of Fire (Wall of Elements - Rank 1) -- Fire
-    [28854] = true, -- Wall of Storms (Wall of Elements - Rank 1) -- Storm
-    [62969] = true, -- Wall of Storms (Wall of Elements - Rank 1) -- Storm
-    [62970] = true, -- Wall of Storms (Wall of Elements - Rank 1) -- Storm
-    [62967] = true, -- Wall of Storms (Wall of Elements - Rank 1) -- Storm
-    [62971] = true, -- Wall of Storms (Wall of Elements - Rank 1) -- Storm
-    [62968] = true, -- Off Balance (Wall of Elements - Rank 1) -- Storm
-    [28849] = true, -- Wall of Frost (Wall of Elements - Rank 1) -- Frost
-    [62930] = true, -- Unstable Wall of Fire (Wall of Elements - Rank 1) -- Frost
-    [62929] = true, -- Unstable Wall of Frost (Wall of Elements - Rank 1) -- Frost
-    [62927] = true, -- Unstable Wall of Frost (Wall of Elements - Rank 1) -- Frost
-    [62931] = true, -- Wall of Frost (Wall of Elements - Rank 1) -- Frost
-    [62928] = true, -- Wall of Frost (Wall of Elements - Rank 1) -- Frost
+    [28858] = true, -- Wall of Elements (Wall of Elements)
+    [28807] = true, -- Wall of Fire (Wall of Elements) -- Fire
+    [62898] = true, -- Unstable Wall of Fire (Wall of Elements) -- Fire
+    [62897] = true, -- Unstable Wall of Fire (Wall of Elements) -- Fire
+    [62895] = true, -- Unstable Wall of Fire (Wall of Elements) -- Fire
+    [62896] = true, -- Wall of Fire (Wall of Elements) -- Fire
+    [28854] = true, -- Wall of Storms (Wall of Elements) -- Storm
+    [62969] = true, -- Wall of Storms (Wall of Elements) -- Storm
+    [62970] = true, -- Wall of Storms (Wall of Elements) -- Storm
+    [62967] = true, -- Wall of Storms (Wall of Elements) -- Storm
+    [62971] = true, -- Wall of Storms (Wall of Elements) -- Storm
+    [62968] = true, -- Off Balance (Wall of Elements) -- Storm
+    [28849] = true, -- Wall of Frost (Wall of Elements) -- Frost
+    [62930] = true, -- Unstable Wall of Fire (Wall of Elements) -- Frost
+    [62929] = true, -- Unstable Wall of Frost (Wall of Elements) -- Frost
+    [62927] = true, -- Unstable Wall of Frost (Wall of Elements) -- Frost
+    [62931] = true, -- Wall of Frost (Wall of Elements) -- Frost
+    [62928] = true, -- Wall of Frost (Wall of Elements) -- Frost
 
-    [39052] = true, -- Unstable Wall of Elements (Unstable Wall of Elements - Rank 1)
-    [39053] = true, -- Unstable Wall of Fire (Unstable Wall of Elements - Rank 1) -- Fire
-    [62813] = true, -- Unstable Wall of Fire (Unstable Wall of Elements - Rank 1) -- Fire
-    [39057] = true, -- Unstable Wall of Fire (Unstable Wall of Elements - Rank 1) -- Fire
-    [39055] = true, -- Unstable Wall of Fire (Unstable Wall of Elements - Rank 1) -- Fire
-    [45694] = true, -- Unstable Wall (Unstable Wall of Elements - Rank 1) -- Fire
+    [39052] = true, -- Unstable Wall of Elements (Unstable Wall of Elements)
+    [39053] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Fire
+    [62813] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Fire
+    [39057] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Fire
+    [39055] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Fire
+    [45694] = true, -- Unstable Wall (Unstable Wall of Elements) -- Fire
     [114880] = true, -- Summon Shade
-    [39054] = true, -- Unstable Wall of Fire (Unstable Wall of Elements - Rank 1) -- Fire
-    [39056] = true, -- Unstable Wall of Fire (Unstable Wall of Elements - Rank 1) -- Fire
-    [39073] = true, -- Unstable Wall of Storms (Unstable Wall of Elements - Rank 1) -- Shock
-    [62868] = true, -- Unstable Wall of Fire (Unstable Wall of Elements - Rank 1) -- Shock
-    [39081] = true, -- Unstable Wall of Storms (Unstable Wall of Elements - Rank 1) -- Shock
-    [39078] = true, -- Unstable Wall of Storms (Unstable Wall of Elements - Rank 1) -- Shock
-    [62866] = true, -- Unstable Wall (Unstable Wall of Elements - Rank 1) -- Shock
+    [39054] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Fire
+    [39056] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Fire
+    [39073] = true, -- Unstable Wall of Storms (Unstable Wall of Elements) -- Shock
+    [62868] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Shock
+    [39081] = true, -- Unstable Wall of Storms (Unstable Wall of Elements) -- Shock
+    [39078] = true, -- Unstable Wall of Storms (Unstable Wall of Elements) -- Shock
+    [62866] = true, -- Unstable Wall (Unstable Wall of Elements) -- Shock
     [114883] = true, -- Summon Shade
-    [39079] = true, -- Unstable Wall of Storms (Unstable Wall of Elements - Rank 1) -- Shock
-    [39080] = true, -- Unstable Wall of Storms (Unstable Wall of Elements - Rank 1) -- Shock
-    [39077] = true, -- Off Balance (Unstable Wall of Elements - Rank 1) -- Shock
-    [39067] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1) -- Frost
-    [62840] = true, -- Unstable Wall of Fire (Unstable Wall of Elements - Rank 1) -- Frost
-    [39069] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1) -- Frost
-    [39070] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1) -- Frost
-    [62838] = true, -- Unstable Wall (Unstable Wall of Elements - Rank 1) -- Frost
+    [39079] = true, -- Unstable Wall of Storms (Unstable Wall of Elements) -- Shock
+    [39080] = true, -- Unstable Wall of Storms (Unstable Wall of Elements) -- Shock
+    [39077] = true, -- Off Balance (Unstable Wall of Elements) -- Shock
+    [39067] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
+    [62840] = true, -- Unstable Wall of Fire (Unstable Wall of Elements) -- Frost
+    [39069] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
+    [39070] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
+    [62838] = true, -- Unstable Wall (Unstable Wall of Elements) -- Frost
     [114886] = true, -- Summon Shade
-    [39071] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1) -- Frost
-    [39072] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1) -- Frost
-    [39068] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1) -- Frost
+    [39071] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
+    [39072] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
+    [39068] = true, -- Unstable Wall of Frost (Unstable Wall of Elements) -- Frost
 
-    [39011] = true, -- Elemental Blockade (Elemental Blockade - Rank 1)
-    [39012] = true, -- Blockade of Fire (Elemental Blockade - Rank 1) -- Fire
-    [62914] = true, -- Unstable Wall of Fire (Elemental Blockade - Rank 1) -- Fire
-    [62913] = true, -- Unstable Wall of Fire (Elemental Blockade - Rank 1) -- Fire
-    [62911] = true, -- Unstable Wall of Fire (Elemental Blockade - Rank 1) -- Fire
+    [39011] = true, -- Elemental Blockade (Elemental Blockade)
+    [39012] = true, -- Blockade of Fire (Elemental Blockade) -- Fire
+    [62914] = true, -- Unstable Wall of Fire (Elemental Blockade) -- Fire
+    [62913] = true, -- Unstable Wall of Fire (Elemental Blockade) -- Fire
+    [62911] = true, -- Unstable Wall of Fire (Elemental Blockade) -- Fire
     [114881] = true, -- Summon Shade
-    [62912] = true, -- Blockade of Fire (Elemental Blockade - Rank 1) -- Fire
-    [39018] = true, -- Blockade of Storms (Elemental Blockade - Rank 1) -- Storm
-    [62991] = true, -- Blockade of Storms (Elemental Blockade - Rank 1) -- Storm
-    [62989] = true, -- Blockade of Storms (Elemental Blockade - Rank 1) -- Storm
-    [62987] = true, -- Blockade of Storms (Elemental Blockade - Rank 1) -- Storm
+    [62912] = true, -- Blockade of Fire (Elemental Blockade) -- Fire
+    [39018] = true, -- Blockade of Storms (Elemental Blockade) -- Storm
+    [62991] = true, -- Blockade of Storms (Elemental Blockade) -- Storm
+    [62989] = true, -- Blockade of Storms (Elemental Blockade) -- Storm
+    [62987] = true, -- Blockade of Storms (Elemental Blockade) -- Storm
     [114884] = true, -- Summon Shade
-    [62990] = true, -- Blockade of Storms (Elemental Blockade - Rank 1) -- Storm
-    [62988] = true, -- Blockade of Storms (Elemental Blockade - Rank 1) -- Storm
-    [39028] = true, -- Blockade of Frost (Elemental Blockade - Rank 1) -- Frost
-    [62950] = true, -- Unstable Wall of Fire (Elemental Blockade - Rank 1) -- Frost
-    [62949] = true, -- Unstable Wall of Frost (Elemental Blockade - Rank 1) -- Frost
-    [62947] = true, -- Unstable Wall of Frost (Elemental Blockade - Rank 1) -- Frost
+    [62990] = true, -- Blockade of Storms (Elemental Blockade) -- Storm
+    [62988] = true, -- Blockade of Storms (Elemental Blockade) -- Storm
+    [39028] = true, -- Blockade of Frost (Elemental Blockade) -- Frost
+    [62950] = true, -- Unstable Wall of Fire (Elemental Blockade) -- Frost
+    [62949] = true, -- Unstable Wall of Frost (Elemental Blockade) -- Frost
+    [62947] = true, -- Unstable Wall of Frost (Elemental Blockade) -- Frost
     [114885] = true, -- Summon Shade
-    [62951] = true, -- Blockade of Frost (Elemental Blockade - Rank 1) -- Frost
-    [62948] = true, -- Blockade of Frost (Elemental Blockade - Rank 1) -- Frost
+    [62951] = true, -- Blockade of Frost (Elemental Blockade) -- Frost
+    [62948] = true, -- Blockade of Frost (Elemental Blockade) -- Frost
 
-    [29091] = true, -- Destructive Touch (Destructive Touch - Rank 1)
-    [29073] = true, -- Flame Touch (Destructive Touch - Rank 1) -- Fire
-    [62648] = true, -- Fire Touch (Destructive Touch - Rank 1) -- Fire
-    [38172] = true, -- Stun After Knockback Movement (Destructive Touch - Rank 1) -- Fire
-    [29075] = true, -- Fire Touch (destruction) (Destructive Touch - Rank 1) -- Fire
-    [29089] = true, -- Shock Touch (Destructive Touch - Rank 1) -- Shock
-    [62722] = true, -- Shock Touch (Destructive Touch - Rank 1) -- Shock
-    [68536] = true, -- Shock Touch (Destructive Touch - Rank 1) -- Shock
-    [29078] = true, -- Frost Touch (Destructive Touch - Rank 1) -- Frost
-    [62692] = true, -- Frost Touch (Destructive Touch - Rank 1) -- Frost
-    [30450] = true, -- Deep Freeze (Destructive Touch - Rank 1) -- Frost
+    [29091] = true, -- Destructive Touch (Destructive Touch)
+    [29073] = true, -- Flame Touch (Destructive Touch) -- Fire
+    [62648] = true, -- Fire Touch (Destructive Touch) -- Fire
+    [38172] = true, -- Stun After Knockback Movement (Destructive Touch) -- Fire
+    [29075] = true, -- Fire Touch (destruction) (Destructive Touch) -- Fire
+    [29089] = true, -- Shock Touch (Destructive Touch) -- Shock
+    [62722] = true, -- Shock Touch (Destructive Touch) -- Shock
+    [68536] = true, -- Shock Touch (Destructive Touch) -- Shock
+    [29078] = true, -- Frost Touch (Destructive Touch) -- Frost
+    [62692] = true, -- Frost Touch (Destructive Touch) -- Frost
+    [30450] = true, -- Deep Freeze (Destructive Touch) -- Frost
 
-    [38984] = true, -- Destructive Clench (Destructive Clench - Rank 1)
-    [38985] = true, -- Flame Clench (Destructive Clench - Rank 1) -- Fire
-    [62668] = true, -- Fire Clench (Destructive Clench - Rank 1) -- Fire
-    [38987] = true, -- Stun After Knockback Movement (Destructive Clench - Rank 1) -- Fire
-    [38986] = true, -- Fire Touch (destruction) (Destructive Clench - Rank 1) -- Fire
-    [38993] = true, -- Shock Clench (Destructive Clench - Rank 1) -- Shock
-    [62733] = true, -- Shock Clench (Destructive Clench - Rank 1) -- Shock
-    [68635] = true, -- Shock Touch (Destructive Clench - Rank 1) -- Shock
-    [62734] = true, -- Shock Clench Explosion (Destructive Clench - Rank 1) -- Shock
-    [38989] = true, -- Frost Clench (Destructive Clench - Rank 1) -- Frost
-    [62702] = true, -- Frost Clench (Destructive Clench - Rank 1) -- Frost
-    [38990] = true, -- Deep Freeze (Destructive Clench - Rank 1) -- Frost
+    [38984] = true, -- Destructive Clench (Destructive Clench)
+    [38985] = true, -- Flame Clench (Destructive Clench) -- Fire
+    [62668] = true, -- Fire Clench (Destructive Clench) -- Fire
+    [38987] = true, -- Stun After Knockback Movement (Destructive Clench) -- Fire
+    [38986] = true, -- Fire Touch (destruction) (Destructive Clench) -- Fire
+    [38993] = true, -- Shock Clench (Destructive Clench) -- Shock
+    [62733] = true, -- Shock Clench (Destructive Clench) -- Shock
+    [68635] = true, -- Shock Touch (Destructive Clench) -- Shock
+    [62734] = true, -- Shock Clench Explosion (Destructive Clench) -- Shock
+    [38989] = true, -- Frost Clench (Destructive Clench) -- Frost
+    [62702] = true, -- Frost Clench (Destructive Clench) -- Frost
+    [38990] = true, -- Deep Freeze (Destructive Clench) -- Frost
 
-    [38937] = true, -- Destructive Reach (Destructive Reach - Rank 1)
-    [38944] = true, -- Flame Reach (Destructive Reach - Rank 1) -- Fire
-    [62682] = true, -- Flame Reach (Destructive Reach - Rank 1) -- Fire
-    [38946] = true, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
-    [38945] = true, -- Flame Reach (destruction) (Destructive Reach - Rank 1) -- Fire
-    [38978] = true, -- Shock Reach (Destructive Reach - Rank 1) -- Shock
-    [62745] = true, -- Shock Reach (Destructive Reach - Rank 1) -- Shock
-    [68574] = true, -- Shock Touch (Destructive Reach - Rank 1) -- Shock
-    [38970] = true, -- Frost Reach (Destructive Reach - Rank 1) -- Frost
-    [62712] = true, -- Frost Reach (Destructive Reach - Rank 1) -- Frost
-    [38971] = true, -- Frost Grip (Destructive Reach - Rank 1) -- Frost
+    [38937] = true, -- Destructive Reach (Destructive Reach)
+    [38944] = true, -- Flame Reach (Destructive Reach) -- Fire
+    [62682] = true, -- Flame Reach (Destructive Reach) -- Fire
+    [38946] = true, -- Stun After Knockback Movement (Destructive Reach) -- Fire
+    [38945] = true, -- Flame Reach (destruction) (Destructive Reach) -- Fire
+    [38978] = true, -- Shock Reach (Destructive Reach) -- Shock
+    [62745] = true, -- Shock Reach (Destructive Reach) -- Shock
+    [68574] = true, -- Shock Touch (Destructive Reach) -- Shock
+    [38970] = true, -- Frost Reach (Destructive Reach) -- Frost
+    [62712] = true, -- Frost Reach (Destructive Reach) -- Frost
+    [38971] = true, -- Frost Grip (Destructive Reach) -- Frost
 
-    [29173] = true, -- Weakness to Elements (Weakness to Elements - Rank 1)
-    [53881] = true, -- Major Spell Shatter (Weakness to Elements - Rank 1)
+    [29173] = true, -- Weakness to Elements (Weakness to Elements)
+    [53881] = true, -- Major Spell Shatter (Weakness to Elements)
 
-    [39089] = true, -- Elemental Susceptibility (Elemental Susceptibility - Rank 1)
-    [62775] = true, -- Major Breach (Elemental Susceptibility - Rank 1)
+    [39089] = true, -- Elemental Susceptibility (Elemental Susceptibility)
+    [62775] = true, -- Major Breach (Elemental Susceptibility)
 
-    [39095] = true, -- Elemental Drain (Elemental Drain - Rank 1)
-    [39100] = true, -- Minor Magickasteal (Elemental Drain - Rank 1)
-    [62787] = true, -- Major Breach (Elemental Drain - Rank 1)
-    [39099] = true, -- Minor Magickasteal (Elemental Drain - Rank 1)
+    [39095] = true, -- Elemental Drain (Elemental Drain)
+    [39100] = true, -- Minor Magickasteal (Elemental Drain)
+    [62787] = true, -- Major Breach (Elemental Drain)
+    [39099] = true, -- Minor Magickasteal (Elemental Drain)
 
-    [28800] = true, -- Impulse (Impulse - Rank 1)
-    [28794] = true, -- Fire Impulse (Impulse - Rank 1)
-    [28799] = true, -- Shock Impulse (Impulse - Rank 1)
-    [28798] = true, -- Frost Impulse (Impulse - Rank 1)
+    [28800] = true, -- Impulse (Impulse)
+    [28794] = true, -- Fire Impulse (Impulse)
+    [28799] = true, -- Shock Impulse (Impulse)
+    [28798] = true, -- Frost Impulse (Impulse)
 
-    [39143] = true, -- Elemental Ring (Elemental Ring - Rank 1)
-    [39145] = true, -- Elemental Ring (Fire Ring - Rank 1)
-    [39149] = true, -- Elemental Ring (Fire Ring - Rank 1)
-    [39147] = true, -- Elemental Ring (Shock Ring - Rank 1)
-    [39153] = true, -- Elemental Ring (Shock Ring - Rank 1)
-    [39146] = true, -- Elemental Ring (Frost Ring - Rank 1)
-    [39151] = true, -- Elemental Ring (Frost Ring - Rank 1)
+    [39143] = true, -- Elemental Ring (Elemental Ring)
+    [39145] = true, -- Elemental Ring (Fire Ring)
+    [39149] = true, -- Elemental Ring (Fire Ring)
+    [39147] = true, -- Elemental Ring (Shock Ring)
+    [39153] = true, -- Elemental Ring (Shock Ring)
+    [39146] = true, -- Elemental Ring (Frost Ring)
+    [39151] = true, -- Elemental Ring (Frost Ring)
 
-    [39161] = true, -- Pulsar (Pulsar - Rank 1)
-    [39162] = true, -- Flame Pulsar (Pulsar - Rank 1)
+    [39161] = true, -- Pulsar (Pulsar)
+    [39162] = true, -- Flame Pulsar (Pulsar)
     [89837] = true, -- Fiery Pulsar (Pulsar)
-    [39168] = true, -- Minor Mangle (Pulsar - Rank 1)
-    [39167] = true, -- Storm Pulsar (Pulsar - Rank 1)
+    [39168] = true, -- Minor Mangle (Pulsar)
+    [39167] = true, -- Storm Pulsar (Pulsar)
     [89844] = true, -- Shock Pulsar (Pulsar)
-    [39181] = true, -- Minor Mangle (Pulsar - Rank 1)
-    [39163] = true, -- Frost Pulsar (Pulsar - Rank 1)
+    [39181] = true, -- Minor Mangle (Pulsar)
+    [39163] = true, -- Frost Pulsar (Pulsar)
     [89840] = true, -- Frost Pulsar (Pulsar)
-    [39180] = true, -- Minor Mangle (Pulsar - Rank 1)
+    [39180] = true, -- Minor Mangle (Pulsar)
 
-    [83619] = true, -- Elemental Storm (Elemental Storm - Rank 1)
-    [83625] = true, -- Fire Storm (Elemental Storm - Rank 1)
-    [83626] = true, -- Fire Storm (Elemental Storm - Rank 1)
-    [83630] = true, -- Thunder Storm (Elemental Storm - Rank 1)
-    [83631] = true, -- Thunder Storm (Elemental Storm - Rank 1)
-    [83628] = true, -- Ice Storm (Elemental Storm - Rank 1)
-    [83629] = true, -- Ice Storm (Elemental Storm - Rank 1)
+    [83619] = true, -- Elemental Storm (Elemental Storm)
+    [83625] = true, -- Fire Storm (Elemental Storm)
+    [83626] = true, -- Fire Storm (Elemental Storm)
+    [83630] = true, -- Thunder Storm (Elemental Storm)
+    [83631] = true, -- Thunder Storm (Elemental Storm)
+    [83628] = true, -- Ice Storm (Elemental Storm)
+    [83629] = true, -- Ice Storm (Elemental Storm)
 
-    [84434] = true, -- Elemental Rage (Elemental Rage - Rank 1)
-    [85126] = true, -- Fiery Rage (Elemental Rage - Rank 1)
-    [85127] = true, -- Fiery Rage (Elemental Rage - Rank 1)
-    [85130] = true, -- Thunderous Rage (Elemental Rage - Rank 1)
-    [85131] = true, -- Thunderous Rage (Elemental Rage - Rank 1)
-    [85128] = true, -- Icy Rage (Elemental Rage - Rank 1)
-    [85129] = true, -- Icy Rage (Elemental Rage - Rank 1)
-    [104825] = true, -- Icy Rage (Elemental Rage - Rank 1)
+    [84434] = true, -- Elemental Rage (Elemental Rage)
+    [85126] = true, -- Fiery Rage (Elemental Rage)
+    [85127] = true, -- Fiery Rage (Elemental Rage)
+    [85130] = true, -- Thunderous Rage (Elemental Rage)
+    [85131] = true, -- Thunderous Rage (Elemental Rage)
+    [85128] = true, -- Icy Rage (Elemental Rage)
+    [85129] = true, -- Icy Rage (Elemental Rage)
+    [104825] = true, -- Icy Rage (Elemental Rage)
 
-    [83642] = true, -- Eye of the Storm (Eye of the Storm - Rank 1)
-    [83682] = true, -- Eye of Flame (Eye of the Storm - Rank 1)
-    [83683] = true, -- Eye of Flame (Eye of the Storm - Rank 1)
-    [83686] = true, -- Eye of Lightning (Eye of the Storm - Rank 1)
-    [83687] = true, -- Eye of Lightning (Eye of the Storm - Rank 1)
-    [83684] = true, -- Eye of Frost (Eye of the Storm - Rank 1)
-    [83685] = true, -- Eye of Frost (Eye of the Storm - Rank 1)
+    [83642] = true, -- Eye of the Storm (Eye of the Storm)
+    [83682] = true, -- Eye of Flame (Eye of the Storm)
+    [83683] = true, -- Eye of Flame (Eye of the Storm)
+    [83686] = true, -- Eye of Lightning (Eye of the Storm)
+    [83687] = true, -- Eye of Lightning (Eye of the Storm)
+    [83684] = true, -- Eye of Frost (Eye of the Storm)
+    [83685] = true, -- Eye of Frost (Eye of the Storm)
 
     -------------------------------------
     -- RESTORATION STAFF PASSIVES -------
@@ -5208,86 +5209,86 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [52515] = true, -- Grand Healing Fx (Grand Healing - All Morphs)
-    [28385] = true, -- Grand Healing (Grand Healing - Rank 1)
-    [28386] = true, -- Grand Healing (Grand Healing - Rank 1)
+    [28385] = true, -- Grand Healing (Grand Healing)
+    [28386] = true, -- Grand Healing (Grand Healing)
 
-    [40058] = true, -- Illustrious Healing (Illustrious Healing - Rank 1)
-    [40059] = true, -- Illustrious Healing (Illustrious Healing - Rank 1)
+    [40058] = true, -- Illustrious Healing (Illustrious Healing)
+    [40059] = true, -- Illustrious Healing (Illustrious Healing)
 
-    [40060] = true, -- Healing Springs (Healing Springs - Rank 1)
-    [40061] = true, -- Healing Springs (Healing Springs - Rank 1)
-    [40062] = true, -- Healing Springs (Healing Springs - Rank 1)
+    [40060] = true, -- Healing Springs (Healing Springs)
+    [40061] = true, -- Healing Springs (Healing Springs)
+    [40062] = true, -- Healing Springs (Healing Springs)
 
-    [46257] = true, -- Regeneration (Regeneration - Rank 1)
-    [28536] = true, -- Regeneration (Regeneration - Rank 1)
-    [57452] = true, -- Regeneration Dummy (Regeneration - Rank 1)
+    [46257] = true, -- Regeneration (Regeneration)
+    [28536] = true, -- Regeneration (Regeneration)
+    [57452] = true, -- Regeneration Dummy (Regeneration)
 
-    [46262] = true, -- Regeneration (Rapid Regeneration - Rank 1)
-    [40076] = true, -- Rapid Regeneration (Rapid Regeneration - Rank 1)
-    [57466] = true, -- Rapid Regeneration Dummy (Rapid Regeneration - Rank 1)
+    [46262] = true, -- Regeneration (Rapid Regeneration)
+    [40076] = true, -- Rapid Regeneration (Rapid Regeneration)
+    [57466] = true, -- Rapid Regeneration Dummy (Rapid Regeneration)
 
-    [46266] = true, -- Mutagen (Mutagen - Rank 1)
-    [40079] = true, -- Mutagen (Mutagen - Rank 1)
-    [40081] = true, -- Mutagen (Mutagen - Rank 1)
-    [57468] = true, -- Mutagen Dummy (Mutagen - Rank 1)
+    [46266] = true, -- Mutagen (Mutagen)
+    [40079] = true, -- Mutagen (Mutagen)
+    [40081] = true, -- Mutagen (Mutagen)
+    [57468] = true, -- Mutagen Dummy (Mutagen)
 
-    [37243] = true, -- Blessing of Protection (Blessing of Protection - Rank 1)
-    [37247] = true, -- Minor Resolve (Blessing of Protection - Rank 1)
-    [62619] = true, -- Minor Ward (Blessing of Protection - Rank 1)
-    [38300] = true, -- Blessing of Protection (Blessing of Protection - Rank 1)
-    [38299] = true, -- Blessing of Protection (Blessing of Protection - Rank 1)
-    [38298] = true, -- Blessing of Protection (Blessing of Protection - Rank 1)
+    [37243] = true, -- Blessing of Protection (Blessing of Protection)
+    [37247] = true, -- Minor Resolve (Blessing of Protection)
+    [62619] = true, -- Minor Ward (Blessing of Protection)
+    [38300] = true, -- Blessing of Protection (Blessing of Protection)
+    [38299] = true, -- Blessing of Protection (Blessing of Protection)
+    [38298] = true, -- Blessing of Protection (Blessing of Protection)
 
-    [40103] = true, -- Blessing of Restoration (Blessing of Restoration - Rank 1)
-    [62626] = true, -- Minor Resolve (Blessing of Restoration - Rank 1)
-    [62627] = true, -- Minor Ward (Blessing of Restoration - Rank 1)
-    [40106] = true, -- Blessing of Restoration (Blessing of Restoration - Rank 1)
-    [40108] = true, -- Blessing of Restoration (Blessing of Restoration - Rank 1)
-    [40105] = true, -- Blessing of Restoration (Blessing of Restoration - Rank 1)
+    [40103] = true, -- Blessing of Restoration (Blessing of Restoration)
+    [62626] = true, -- Minor Resolve (Blessing of Restoration)
+    [62627] = true, -- Minor Ward (Blessing of Restoration)
+    [40106] = true, -- Blessing of Restoration (Blessing of Restoration)
+    [40108] = true, -- Blessing of Restoration (Blessing of Restoration)
+    [40105] = true, -- Blessing of Restoration (Blessing of Restoration)
 
-    [40094] = true, -- Combat Prayer (Combat Prayer - Rank 1)
-    [62634] = true, -- Minor Resolve (Combat Prayer - Rank 1)
-    [62635] = true, -- Minor Ward (Combat Prayer - Rank 1)
-    [62636] = true, -- Minor Berserk (Combat Prayer - Rank 1)
-    [40097] = true, -- Combat Prayer (Combat Prayer - Rank 1)
-    [40096] = true, -- Combat Prayer (Combat Prayer - Rank 1)
-    [40099] = true, -- Combat Prayer (Combat Prayer - Rank 1)
+    [40094] = true, -- Combat Prayer (Combat Prayer)
+    [62634] = true, -- Minor Resolve (Combat Prayer)
+    [62635] = true, -- Minor Ward (Combat Prayer)
+    [62636] = true, -- Minor Berserk (Combat Prayer)
+    [40097] = true, -- Combat Prayer (Combat Prayer)
+    [40096] = true, -- Combat Prayer (Combat Prayer)
+    [40099] = true, -- Combat Prayer (Combat Prayer)
 
-    [37232] = true, -- Steadfast Ward (Steadfast Ward - Rank 1)
+    [37232] = true, -- Steadfast Ward (Steadfast Ward)
 
-    [40130] = true, -- Ward Ally (Ward Ally - Rank 1)
-    [40132] = true, -- Ward Ally (Ward Ally - Rank 1)
+    [40130] = true, -- Ward Ally (Ward Ally)
+    [40132] = true, -- Ward Ally (Ward Ally)
 
-    [40126] = true, -- Healing Ward (Healing Ward - Rank 1)
-    [49068] = true, -- Healing Ward (Healing Ward - Rank 1)
-    [40128] = true, -- Healing Ward (Healing Ward - Rank 1)
+    [40126] = true, -- Healing Ward (Healing Ward)
+    [49068] = true, -- Healing Ward (Healing Ward)
+    [40128] = true, -- Healing Ward (Healing Ward)
 
-    [31531] = true, -- Force Siphon (Force Siphon - Rank 1)
-    [88565] = true, -- Minor Lifesteal (Force Siphon - Rank 1)
-    [33541] = true, -- Minor Lifesteal (Force Siphon - Rank 1)
+    [31531] = true, -- Force Siphon (Force Siphon)
+    [88565] = true, -- Minor Lifesteal (Force Siphon)
+    [33541] = true, -- Minor Lifesteal (Force Siphon)
 
-    [40109] = true, -- Siphon Spirit (Siphon Spirit - Rank 1)
-    [88575] = true, -- Minor Lifesteal (Siphon Spirit - Rank 1)
-    [88576] = true, -- Minor Lifesteal (Siphon Spirit - Rank 1)
-    [40110] = true, -- Minor Lifesteal (Siphon Spirit - Rank 1)
-    [40114] = true, -- Minor Magickasteal (Siphon Spirit - Rank 1)
+    [40109] = true, -- Siphon Spirit (Siphon Spirit)
+    [88575] = true, -- Minor Lifesteal (Siphon Spirit)
+    [88576] = true, -- Minor Lifesteal (Siphon Spirit)
+    [40110] = true, -- Minor Lifesteal (Siphon Spirit)
+    [40114] = true, -- Minor Magickasteal (Siphon Spirit)
 
-    [40116] = true, -- Quick Siphon (Quick Siphon - Rank 1)
-    [88606] = true, -- Minor Lifesteal (Quick Siphon - Rank 1)
-    [40117] = true, -- Minor Lifesteal (Quick Siphon - Rank 1)
+    [40116] = true, -- Quick Siphon (Quick Siphon)
+    [88606] = true, -- Minor Lifesteal (Quick Siphon)
+    [40117] = true, -- Minor Lifesteal (Quick Siphon)
 
-    [83552] = true, -- Panacea (Panacea - Rank 1)
-    [83844] = true, -- Panacea (Panacea - Rank 1)
+    [83552] = true, -- Panacea (Panacea)
+    [83844] = true, -- Panacea (Panacea)
 
-    [83850] = true, -- Life Giver (Life Giver - Rank 1)
-    [83851] = true, -- Life Giver (Life Giver - Rank 1)
-    [83867] = true, -- Life Giver (Life Giver - Rank 1)
-    [83876] = true, -- Life Giver (Life Giver - Rank 1)
+    [83850] = true, -- Life Giver (Life Giver)
+    [83851] = true, -- Life Giver (Life Giver)
+    [83867] = true, -- Life Giver (Life Giver)
+    [83876] = true, -- Life Giver (Life Giver)
 
-    [85132] = true, -- Light's Champion (Light's Champion - Rank 1)
-    [85133] = true, -- Light's Champion (Light's Champion - Rank 1)
-    [85154] = true, -- Major Force (Light's Champion - Rank 1)
-    [85155] = true, -- Major Protection (Light's Champion - Rank 1)
+    [85132] = true, -- Light's Champion (Light's Champion)
+    [85133] = true, -- Light's Champion (Light's Champion)
+    [85154] = true, -- Major Force (Light's Champion)
+    [85155] = true, -- Major Protection (Light's Champion)
 
     -------------------------------------
     -- ARMOR PASSIVES -------------------
@@ -5352,15 +5353,15 @@ LUIE.DebugAuras = {
     [60968] = true, -- Harness Magicka Counter (Harness Magicka)
 
     -- MEDIUM ARMOR
-    [29556] = true, -- Evasion (Evasion - Rank 1)
-    [63015] = true, -- Major Evasion (Evasion - Rank 1)
+    [29556] = true, -- Evasion (Evasion)
+    [63015] = true, -- Major Evasion (Evasion)
 
-    [39195] = true, -- Shuffle (Shuffle - Rank 1)
-    [63019] = true, -- Major Evasion (Shuffle - Rank 1)
-    [39196] = true, -- Shuffle (Shuffle - Rank 1)
+    [39195] = true, -- Shuffle (Shuffle)
+    [63019] = true, -- Major Evasion (Shuffle)
+    [39196] = true, -- Shuffle (Shuffle)
 
-    [39192] = true, -- Elude (Elude - Rank 1)
-    [63030] = true, -- Major Evasion (Elude - Rank 1)
+    [39192] = true, -- Elude (Elude)
+    [63030] = true, -- Major Evasion (Elude)
 
     -- HEAVY ARMOR
     [29552] = true, -- Immovable (Immovable)
@@ -5617,10 +5618,10 @@ LUIE.DebugAuras = {
     [111925] = true, -- Blood Rage
 
     [32639] = true, -- Bloodmoon (Rank 1)
-    [40514] = true, -- Ally Bite (Bloodmoon - Rank 1)
-    [40515] = true, -- Devour (Bloodmoon - Rank 1)
-    [40520] = true, -- Q3047 - Knockdown (Bloodmoon - Rank 1)
-    [40525] = true, -- Bit an ally (Bloodmoon - Rank 1)
+    [40514] = true, -- Ally Bite (Bloodmoon)
+    [40515] = true, -- Devour (Bloodmoon)
+    [40520] = true, -- Q3047 - Knockdown (Bloodmoon)
+    [40525] = true, -- Bit an ally (Bloodmoon)
 
     [32638] = true, -- Savage Strength (Rank 1)
     [46139] = true, -- Savage Strength (Rank 2)
@@ -5817,88 +5818,88 @@ LUIE.DebugAuras = {
     -- FIGHTERS GUILD ACTIVES -----------
     -------------------------------------
 
-    [35721] = true, -- Silver Bolts (Silver Bolts - Rank 1)
-    [35736] = true, -- Silver Bolts (Silver Bolts - Rank 1)
+    [35721] = true, -- Silver Bolts (Silver Bolts)
+    [35736] = true, -- Silver Bolts (Silver Bolts)
 
-    [40300] = true, -- Silver Shards (Silver Shards - Rank 1)
-    [40302] = true, -- Silver Shards (Silver Shards - Rank 1)
-    [40327] = true, -- Silver Shards (Silver Shards - Rank 1)
+    [40300] = true, -- Silver Shards (Silver Shards)
+    [40302] = true, -- Silver Shards (Silver Shards)
+    [40327] = true, -- Silver Shards (Silver Shards)
 
-    [40336] = true, -- Silver Leash (Silver Leash - Rank 1)
-    [40340] = true, -- Silver Bolts (Silver Leash - Rank 1)
-    [109354] = true, -- Silver Leash (Silver Leash - Rank 1)
-    [42102] = true, -- Silver Leash (Silver Leash - Rank 1)
+    [40336] = true, -- Silver Leash (Silver Leash)
+    [40340] = true, -- Silver Bolts (Silver Leash)
+    [109354] = true, -- Silver Leash (Silver Leash)
+    [42102] = true, -- Silver Leash (Silver Leash)
 
-    [35737] = true, -- Circle of Protection (Circle of Protection - Rank 1)
-    [80271] = true, -- Minor Endurance (Circle of Protection - Rank 1)
-    [35739] = true, -- Minor Protection (Circle of Protection - Rank 1)
-    [35738] = true, -- Circle of Protection (Circle of Protection - Rank 1)
-    [101696] = true, -- Circle of Protection (Circle of Protection - Rank 1)
+    [35737] = true, -- Circle of Protection (Circle of Protection)
+    [80271] = true, -- Minor Endurance (Circle of Protection)
+    [35739] = true, -- Minor Protection (Circle of Protection)
+    [35738] = true, -- Circle of Protection (Circle of Protection)
+    [101696] = true, -- Circle of Protection (Circle of Protection)
 
-    [40181] = true, -- Turn Undead (Turn Undead - Rank 1)
-    [80276] = true, -- Minor Endurance (Turn Undead - Rank 1)
-    [40185] = true, -- Minor Protection (Turn Undead - Rank 1)
-    [40184] = true, -- Turn Undead (Turn Undead - Rank 1)
-    [41947] = true, -- Turn Undead (Turn Undead - Rank 1)
-    [40187] = true, -- Turn Undead (Turn Undead - Rank 1)
-    [101697] = true, -- Turn Undead (Turn Undead - Rank 1)
+    [40181] = true, -- Turn Undead (Turn Undead)
+    [80276] = true, -- Minor Endurance (Turn Undead)
+    [40185] = true, -- Minor Protection (Turn Undead)
+    [40184] = true, -- Turn Undead (Turn Undead)
+    [41947] = true, -- Turn Undead (Turn Undead)
+    [40187] = true, -- Turn Undead (Turn Undead)
+    [101697] = true, -- Turn Undead (Turn Undead)
 
-    [40169] = true, -- Ring of Preservation (Ring of Preservation - Rank 1)
-    [80284] = true, -- Minor Endurance (Ring of Preservation - Rank 1)
-    [40171] = true, -- Minor Protection (Ring of Preservation - Rank 1)
-    [80293] = true, -- Ring of Preservation (Ring of Preservation - Rank 1)
-    [101699] = true, -- Ring of Protection (Ring of Preservation - Rank 1)
-    [40170] = true, -- Ring of Preservation (Ring of Preservation - Rank 1)
+    [40169] = true, -- Ring of Preservation (Ring of Preservation)
+    [80284] = true, -- Minor Endurance (Ring of Preservation)
+    [40171] = true, -- Minor Protection (Ring of Preservation)
+    [80293] = true, -- Ring of Preservation (Ring of Preservation)
+    [101699] = true, -- Ring of Protection (Ring of Preservation)
+    [40170] = true, -- Ring of Preservation (Ring of Preservation)
 
     [35765] = true, -- Sense Evil (Expert Hunter - All Ranks)
     [64509] = true, -- Major Savagery (Expert Hunter - All Ranks)
-    [35762] = true, -- Expert Hunter (Expert Hunter - Rank 1)
-    [80307] = true, -- Expert Hunter (Expert Hunter - Rank 1)
+    [35762] = true, -- Expert Hunter (Expert Hunter)
+    [80307] = true, -- Expert Hunter (Expert Hunter)
 
-    [40194] = true, -- Evil Hunter (Evil Hunter - Rank 1)
-    [80381] = true, -- Evil Hunter (Evil Hunter - Rank 1)
+    [40194] = true, -- Evil Hunter (Evil Hunter)
+    [80381] = true, -- Evil Hunter (Evil Hunter)
 
-    [80469] = true, -- Sense Evil 1 (Camouflaged Hunter - Rank 1)
-    [40195] = true, -- Camouflaged Hunter (Camouflaged Hunter - Rank 1)
-    [80338] = true, -- Camouflaged Hunter (Camouflaged Hunter - Rank 1)
-    [80471] = true, -- Minor Berserk (Camouflaged Hunter - Rank 1)
+    [80469] = true, -- Sense Evil 1 (Camouflaged Hunter)
+    [40195] = true, -- Camouflaged Hunter (Camouflaged Hunter)
+    [80338] = true, -- Camouflaged Hunter (Camouflaged Hunter)
+    [80471] = true, -- Minor Berserk (Camouflaged Hunter)
 
-    [35750] = true, -- Trap Beast (Trap Beast - Rank 1)
-    [35757] = true, -- Trap Beast (Trap Beast - Rank 1)
-    [35754] = true, -- Trap Beast (Trap Beast - Rank 1)
-    [35756] = true, -- Trap Beast (Trap Beast - Rank 1)
-    [35753] = true, -- Trap Beast (Trap Beast - Rank 1)
-    [68595] = true, -- Minor Force (Trap Beast - Rank 1)
+    [35750] = true, -- Trap Beast (Trap Beast)
+    [35757] = true, -- Trap Beast (Trap Beast)
+    [35754] = true, -- Trap Beast (Trap Beast)
+    [35756] = true, -- Trap Beast (Trap Beast)
+    [35753] = true, -- Trap Beast (Trap Beast)
+    [68595] = true, -- Minor Force (Trap Beast)
 
-    [40382] = true, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40386] = true, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40389] = true, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40385] = true, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40384] = true, -- Rearming Trap (Rearming Trap - Rank 1)
-    [68632] = true, -- Minor Force (Rearming Trap - Rank 1)
-    [40388] = true, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40392] = true, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40391] = true, -- Rearming Trap (Rearming Trap - Rank 1)
+    [40382] = true, -- Rearming Trap (Rearming Trap)
+    [40386] = true, -- Rearming Trap (Rearming Trap)
+    [40389] = true, -- Rearming Trap (Rearming Trap)
+    [40385] = true, -- Rearming Trap (Rearming Trap)
+    [40384] = true, -- Rearming Trap (Rearming Trap)
+    [68632] = true, -- Minor Force (Rearming Trap)
+    [40388] = true, -- Rearming Trap (Rearming Trap)
+    [40392] = true, -- Rearming Trap (Rearming Trap)
+    [40391] = true, -- Rearming Trap (Rearming Trap)
 
-    [40372] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
-    [40378] = true, -- Daedric Mines (Lightweight Beast Trap - Rank 1)
-    [40377] = true, -- Summon Shade (Lightweight Beast Trap - Rank 1)
-    [40376] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
-    [40375] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
-    [40374] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
-    [68628] = true, -- Minor Force (Lightweight Beast Trap - Rank 1)
+    [40372] = true, -- Lightweight Beast Trap (Lightweight Beast Trap)
+    [40378] = true, -- Daedric Mines (Lightweight Beast Trap)
+    [40377] = true, -- Summon Shade (Lightweight Beast Trap)
+    [40376] = true, -- Lightweight Beast Trap (Lightweight Beast Trap)
+    [40375] = true, -- Lightweight Beast Trap (Lightweight Beast Trap)
+    [40374] = true, -- Lightweight Beast Trap (Lightweight Beast Trap)
+    [68628] = true, -- Minor Force (Lightweight Beast Trap)
 
-    [35713] = true, -- Dawnbreaker (Dawnbreaker - Rank 1)
-    [62305] = true, -- Dawnbreaker (Dawnbreaker - Rank 1)
+    [35713] = true, -- Dawnbreaker (Dawnbreaker)
+    [62305] = true, -- Dawnbreaker (Dawnbreaker)
 
-    [40163] = true, -- Flawless Dawnbreaker Passive (Flawless Dawnbreaker - Rank 1)
-    [42498] = true, -- Flawless Dawnbreaker Passive (Flawless Dawnbreaker - Rank 1)
-    [40161] = true, -- Flawless Dawnbreaker (Flawless Dawnbreaker - Rank 1)
-    [62310] = true, -- Flawless Dawnbreaker (Flawless Dawnbreaker - Rank 1)
+    [40163] = true, -- Flawless Dawnbreaker Passive (Flawless Dawnbreaker)
+    [42498] = true, -- Flawless Dawnbreaker Passive (Flawless Dawnbreaker)
+    [40161] = true, -- Flawless Dawnbreaker (Flawless Dawnbreaker)
+    [62310] = true, -- Flawless Dawnbreaker (Flawless Dawnbreaker)
 
-    [40158] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
-    [40160] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
-    [62314] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
+    [40158] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting)
+    [40160] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting)
+    [62314] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting)
 
     -------------------------------------
     -- MAGES GUILD PASSIVES -------------
