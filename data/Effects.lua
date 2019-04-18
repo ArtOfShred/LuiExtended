@@ -3753,7 +3753,6 @@ E.EffectOverride = {
     -- Dragonknight Standard / Shifting Standard / Standard of Might
     [98438] = { name = A.Skill_Shackle }, -- Shackle Damage (Dragonknight Standard - Shackle Synergy)
     [98447] = { name = A.Skill_Shackle, tooltip = T.Generic_Immobilize }, -- Shackle Snare (Dragonknight Standard - Shackle Synergy)
-    [108805] = { hide = true }, -- Synergy Damage Bonus (Dragonknight Standard - Shackle Synergy)
     [28988] = { tooltip = T.Skill_Dragonknight_Standard }, -- Dragonknight Standard (Dragonknight Standard)
     [29230] = { duration = 0, groundLabel = true, tooltip = A.Skill_Dragonknight_Standard }, -- Major Defile (Dragonknight Standard)
     [32958] = { tooltip = T.Skill_Dragonknight_Standard }, -- Shifting Standard (Shifting Standard)
@@ -3780,7 +3779,6 @@ E.EffectOverride = {
     [20326] = { tooltip = T.Generic_Magic, tooltipValue2 = 2 }, -- Volatile Armor (Volatile Armor)
 
     -- Dark Talons / Burning Talons / Choking Talons
-    [108807] = { hide = true }, -- Synergy Damage Bonus (Dark Talons - Ignite Synergy)
     [20527] = { tooltip = T.Generic_Immobilize }, -- Dark Talons (Dark Talons)
     [31898] = { tooltip = T.Skill_Burning_Talons }, -- Burning Talons (Burning Talons)
     [20253] = { hideReduce = true, tooltip = T.Skill_Burning_Talons }, -- Burning Talons (Burning Talons)
