@@ -3720,7 +3720,7 @@ E.EffectOverride = {
 
     -- Searing Strike / Venomous Claw /Burning Embers
     [44363] = { tooltip = T.Generic_Burn, tooltipValue2 = 2 }, -- Searing Strike (Searing Strike)
-    [44369] = { tooltip = T.Generic_Poison, tooltipValue2 = 2 }, -- Venomous Claw (Venomous Claw)
+    [44369] = { tooltip = T.Skill_Venomous_Claw }, -- Venomous Claw (Venomous Claw)
     [44373] = { tooltip = T.Skill_Burning_Embers }, -- Burning Embers (Burning Embers)
 
     -- Fiery Breath / Noxious Breath / Engulfing Flames
@@ -3744,11 +3744,11 @@ E.EffectOverride = {
     [28969] = { tooltip = T.Skill_Inferno_Base }, -- Inferno (Inferno)
     [76420] = { consolidate = true, tooltip = A.Skill_Flames_of_Oblivion }, -- Major Prophecy (Flames of Oblivion)
     [76426] = { consolidate = true, tooltip = A.Skill_Flames_of_Oblivion }, -- Major Savagery (Flames of Oblivion)
-    [32853] = { tooltip = T.Skill_Inferno_Active }, -- Inferno (Inferno)
-    [61945] = { tooltip = T.Skill_Flames_of_Oblivion_Base }, -- Inferno (Inferno)
+    [32853] = { tooltip = T.Skill_Flames_of_Oblivion_Active }, -- Flames of Oblivion (Flames of Oblivion)
+    [61945] = { tooltip = T.Skill_Flames_of_Oblivion_Base }, -- Flames of Oblivion (Flames of Oblivion)
     [76433] = { consolidateExtra = true, tooltip = A.Skill_Cauterize }, -- Major Prophecy (Cauterize)
-    [32881] = { tooltip = T.Skill_Cauterize_Active }, -- Inferno (Inferno)
-    [76429] = { tooltip = T.Skill_Cauterize_Base }, -- Inferno (Inferno)
+    [32881] = { tooltip = T.Skill_Cauterize_Active }, -- Cauterize (Cauterize)
+    [76429] = { tooltip = T.Skill_Cauterize_Base }, -- Cauterize (Cauterize)
 
     -- Dragonknight Standard / Shifting Standard / Standard of Might
     [98438] = { name = A.Skill_Shackle }, -- Shackle Damage (Dragonknight Standard - Shackle Synergy)

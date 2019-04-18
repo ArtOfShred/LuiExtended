@@ -286,9 +286,11 @@ local strings = {
 
     -- Dragonknight Skills
     SI_LUIE_SKILL_SEETHING_FURY_TP =                     "Increase the damage of your next Molten Whip by |cffffff33|r% and your Weapon and Spell Damage by |cffffff125|r for |cffffff<<1>>|r seconds.\n\nThis effect can stack up to |cffffff3|r times.",
+    SI_LUIE_SKILL_VENOMOUS_CLAW_TP =                     "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nDeals |cFFFFFF12|r% increased damage every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_BURNING_EMBERS_TP =                    "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nHeals the Dragonknight for |cffffff75|r% of the total damage inflicted when the effect ends.",
     SI_LUIE_SKILL_ENGULFING_FLAMES_TP =                  "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nIncrease damage taken from Fire Damage attacks by |cffffff10|r%.",
     SI_LUIE_SKILL_INFERNO_TP =                           "Launch a fireball at the nearest enemy, dealing Flame Damage every |cffffff5|r seconds for |cffffff15|r seconds.",
+    SI_LUIE_SKILL_FLAMES_OF_OBLIVION_TP =                "Launch a fireball at |cffffff2|r enemies, dealing Flame Damage every |cffffff5|r seconds for |cffffff15|r seconds.",
     SI_LUIE_SKILL_CAUTERIZE_TP =                         "Launch a fireball at an ally to cauterize their wounds every |cffffff5|r seconds for |cffffff15|r seconds.",
     SI_LUIE_SKILL_DRAGONKIGHT_STANDARD_TP =              "Enemies within the radius of the standard take Flame Damage every |cffffff1|r second and have Major Defile applied to them.",
     SI_LUIE_SKILL_STANDARD_OF_MIGHT_TP =                 "Increase damage done and reduce damage taken while standing within the radius of the standard.",

@@ -286,9 +286,11 @@ local strings = {
 
     -- Dragonknight Skills
     SI_LUIE_SKILL_SEETHING_FURY_TP =                     "Increase the damage of your next Molten Whip by |cffffff33|r% and your Weapon and Spell Damage by |cffffff125|r for |cffffff<<1>>|r seconds.\n\nThis effect can stack up to |cffffff3|r times.",
+    SI_LUIE_SKILL_VENOMOUS_CLAW_TP =                     "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nDeals |cFFFFFF12|r% increased damage every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_BURNING_EMBERS_TP =                    "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cffffff<<1>>|r секунд.\n\nИсцеляет рыцаря-дракона на |cffffff75|r% от нанесённого урона по завершению действия эффекта.",
     SI_LUIE_SKILL_ENGULFING_FLAMES_TP =                  "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cffffff<<1>>|r секунд.\n\nIncrease damage taken from Fire Damage attacks by |cffffff10|r%.",
     SI_LUIE_SKILL_INFERNO_TP =                           "Запускает в ближайшего противника огненный шар, наносящий урон от Огня  каждые |cffffff5|r секунд в течение |cffffff15|r секунд.",
+    SI_LUIE_SKILL_FLAMES_OF_OBLIVION_TP =                "Launch a fireball at |cffffff2|r enemies, dealing Flame Damage every |cffffff5|r seconds for |cffffff15|r seconds.",
     SI_LUIE_SKILL_CAUTERIZE_TP =                         "Запускает в ближайшего союзника огненный шар, чтобы прижечь его раны, каждые |cffffff5|r секунды в течение |cffffff15|r секунд.",
     SI_LUIE_SKILL_DRAGONKIGHT_STANDARD_TP =              "Enemies within the radius of the standard take Flame Damage every |cffffff1|r second and have Major Defile applied to them.", -- TODO: Translate
     SI_LUIE_SKILL_STANDARD_OF_MIGHT_TP =                 "Увеличивает наносимый урон и снижает получаемый урон, пока находитесь в радиусе действия штандарта.",

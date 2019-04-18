@@ -477,11 +477,13 @@ LUIE.Tooltips = {
 
     -- Dragonknight
     Skill_Seething_Fury                             = GetString(SI_LUIE_SKILL_SEETHING_FURY_TP),
+    Skill_Venomous_Claw                             = GetString(SI_LUIE_SKILL_VENOMOUS_CLAW_TP),
     Skill_Burning_Embers                            = GetString(SI_LUIE_SKILL_BURNING_EMBERS_TP),
     Skill_Engulfing_Flames                          = GetString(SI_LUIE_SKILL_ENGULFING_FLAMES_TP),
     Skill_Inferno_Base                              = GetAbilityDescription(28967),
     Skill_Inferno_Active                            = GetString(SI_LUIE_SKILL_INFERNO_TP),
     Skill_Flames_of_Oblivion_Base                   = GetAbilityDescription(32853),
+    Skill_Flames_of_Oblivion_Active                 = GetString(SI_LUIE_SKILL_FLAMES_OF_OBLIVION_TP),
     Skill_Cauterize_Base                            = GetAbilityDescription(32881),
     Skill_Cauterize_Active                          = GetString(SI_LUIE_SKILL_CAUTERIZE_TP),
     Skill_Dragonknight_Standard                     = GetString(SI_LUIE_SKILL_DRAGONKIGHT_STANDARD_TP),
