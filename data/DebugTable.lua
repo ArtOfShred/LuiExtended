@@ -2462,6 +2462,8 @@ LUIE.DebugAuras = {
     [55406] = true, -- Resurrect Trigger
     [55400] = true, -- Magicka Restore
     [55401] = true, -- Magicka Restore
+    [123969] = true, -- Lesser Reincarnate
+    [123970] = true, -- Lesser Reincarnate
 
     -- BASIC ATTACKS
     --[16593] = true, -- Melee Snare
@@ -2894,12 +2896,14 @@ LUIE.DebugAuras = {
     [29014] = true, -- Dragon Leap (Dragon Leap)
     [29016] = true, -- Dragon Leap (Dragon Leap)
     [114590] = true, -- Stun (Dragon Leap)
+    [118928] = true, -- Dragon Leap (Dragon Leap)
 
     [48753] = true, -- CC Immunity (Take Flight)
     [32719] = true, -- Take Flight (Take Flight)
     [32720] = true, -- Take Flight (Take Flight)
     [32721] = true, -- Take Flight (Take Flight)
     [114600] = true, -- Stun (Take Flight)
+    [118936] = true, -- Take Flight (Take Flight)
 
     [48760] = true, -- CC Immunity (Ferocious Leap)
     [32715] = true, -- Ferocious Leap (Ferocious Leap)
@@ -2907,6 +2911,7 @@ LUIE.DebugAuras = {
     [32717] = true, -- Ferocious Leap (Ferocious Leap)
     [61814] = true, -- Ferocious Leap (Ferocious Leap)
     [114601] = true, -- Stun (Ferocious Leap)
+    [118938] = true, -- Ferocious Leap (Ferocious Leap)
 
     [86798] = true, -- Knockdown Bonus Damage (Stonefist)
     [29032] = true, -- Stonefist (Stonefist)
@@ -2952,8 +2957,8 @@ LUIE.DebugAuras = {
 
     [32678] = true, -- Shattering Rocks (Shattering Rocks)
     [32684] = true, -- Shattering Rocks (Shattering Rocks)
-    [108813] = true, -- Heal Trigger Shattering Rocks (Shattering Rocks)
-    [108811] = true, -- Shattering Rocks Heal (Shattering Rocks)
+    [108813] = true, -- Shattering Rocks (Shattering Rocks)
+    [108811] = true, -- Shattering Rocks (Shattering Rocks)
 
     [29059] = true, -- Ash Cloud (Ash Cloud)
     [33142] = true, -- Ash Cloud (Ash Cloud)

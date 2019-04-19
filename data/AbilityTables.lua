@@ -481,7 +481,6 @@ local AbilityTables = {
     Skill_Obsidian_Shield             = 29071,
     Skill_Igneous_Shield              = 29224,
     Skill_Fragmented_Shield           = 32673,
-    Skill_Shattering_Rocks            = 32678,
 
     -- Nightblade
     Skill_Hemorrhage                  = 36641,

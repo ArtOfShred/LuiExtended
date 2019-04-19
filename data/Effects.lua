@@ -3629,6 +3629,7 @@ E.EffectOverride = {
     [14646] = { tooltip = T.Innate_Resurrection_Immunity }, -- Recently Revived
     [55400] = { hide = true }, -- Magicka Restore
     [55401] = { hide = true }, -- Magicka Restore
+    [123970] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = A.Innate_Resurrection_Immunity, tooltip = T.Innate_Resurrection_Immunity }, -- Lesser Reincarnate
 
     -- Basic Attacks
     [16593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', tooltip = T.Generic_Snare, tooltipValue2 = 20 }, -- Melee Snare -- TODO: Get Tooltip %
@@ -3835,9 +3836,12 @@ E.EffectOverride = {
     -- Dragon Leap / Take Flight / Ferocious Leap
     [29016] = { icon = 'esoui/art/icons/ability_dragonknight_009.dds' }, -- Dragon Leap (Dragon Leap)
     [114590] = { name = A.Skill_Dragon_Leap, tooltip = T.Generic_Knockback }, -- Stun (Dragon Leap)
+    [118928] = { icon = 'esoui/art/icons/ability_dragonknight_009.dds', hide = true }, -- Dragon Leap (Dragon Leap)
     [114600] = { name = A.Skill_Take_Flight, tooltip = T.Generic_Knockback }, -- Stun (Take Flight)
+    [118936] = { icon = 'esoui/art/icons/ability_dragonknight_009_b.dds', hide = true }, -- Take Flight (Take Flight)
     [61814] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Ferocious Leap (Ferocious Leap)
     [114601] = { name = A.Skill_Ferocious_Leap, tooltip = T.Generic_Knockback }, -- Stun (Ferocious Leap)
+    [118938] = { icon = 'esoui/art/icons/ability_dragonknight_009_a.dds', hide = true }, -- Ferocious Leap (Ferocious Leap)
 
     -- Stonefist / Obsidian Shard / Stone Giant
     [29034] = { tooltip = T.Generic_Stun }, -- Stonefist (Stonefist)
@@ -3867,8 +3871,7 @@ E.EffectOverride = {
     [32685] = { tooltip = T.Skill_Fossilize_Stun }, -- Fossilize (Fossilize)
     [61785] = { tooltip = T.Generic_Immobilize }, -- Fossilize (Fossilize)
     [32678] = { tooltip = T.Skill_Shattering_Rocks_Stun }, -- Shattering Rocks (Shattering Rocks)
-    [108813] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, name = A.Skill_Shattering_Rocks, tooltip = T.Skill_Shattering_Rocks }, -- Heal Trigger Shattering Rocks (Shattering Rocks)
-    [108811] = { icon = 'esoui/art/icons/ability_dragonknight_014b.dds', name = A.Skill_Shattering_Rocks }, -- Shattering Rocks Heal (Shattering Rocks)
+    [108813] = { tooltip = T.Skill_Shattering_Rocks }, -- Shattering Rocks (Shattering Rocks)
 
     -- Ash Cloud / Cinder Storm / Eruption
     [29059] = { tooltip = T.Skill_Ash_Cloud }, -- Ash Cloud (Ash Cloud)
@@ -10873,6 +10876,7 @@ E.FakePlayerBuffs = {
     -- Player (Basic)
     [973] = { duration = 0 }, -- Sprint
     [33439] = { duration = 0 }, -- Mount Sprint (Generic)
+    [123970] = { duration = 3000 }, -- Lesser Reincarnate
     --[32346] = {icon = 'esoui/art/icons/ability_mage_050.dds', name = A.Innate_Absorbing_Skyshard, duration = 5800}, -- Skyshard Collect
     --[14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = A.Innate_Receiving_Boon, duration = 5000}, -- Mundus Use
 
