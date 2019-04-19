@@ -2018,9 +2018,6 @@ E.EffectHideSCT = {
     -- Dragonknight
     ----------------------------
 
-    [21007] = true, -- Reflective Scale
-    [21014] = true, -- Reflective Plate
-    [21017] = true, -- Dragon Fire Scale
     [29126] = true, -- Ash Cloud
     [20780] = true, -- Cinder Storm
     [32712] = true, -- Eruption
@@ -3818,11 +3815,12 @@ E.EffectOverride = {
     [61891] = { hide = true }, -- Coagulating Blood Bonus Heal (Coagulating Blood)
     [91674] = { consolidateExtra = true, tooltip = A.Skill_Coagulating_Blood }, -- Major Fortitude (Coagulating Blood)
 
-    -- Reflective Scales / Reflective Plate / Dragon Fire Scale
-    [21007] = { tooltip = T.Skill_Reflective_Scale }, -- Reflective Scale (Reflective Scale)
-    [21014] = { tooltip = T.Skill_Reflective_Plate }, -- Reflective Plate (Reflective Plate)
-    [108798] = { name = A.Skill_Reflective_Plate, tooltip = T.Skill_Reflective_Plate, hideReduce = true, noDuplicate = true }, -- Snare Removal (Reflective Plate)
+    -- Protective Scale / Protective Plate / Dragon Fire Scale
+    [21007] = { tooltip = T.Skill_Protective_Scale }, -- Protective Scale (Protective Scale)
+    [21014] = { tooltip = T.Skill_Protective_Plate }, -- Protective Plate (Protective Plate)
+    [108798] = { name = A.Skill_Reflective_Plate, tooltip = T.Skill_Protective_Plate, hideReduce = true, noDuplicate = true }, -- Snare Removal (Protective Plate)
     [21017] = { tooltip = T.Skill_Dragon_Fire_Scale }, -- Dragon Fire Scale (Dragon Fire Scale)
+    [32753] = { hide = true }, -- Dragon Fire Scale (Dragon Fire Scale)
 
     -- Inhale / Deep Breath / Draw Essence
     [31841] = { icon = 'esoui/art/icons/ability_dragonknight_012.dds', tooltip = T.Skill_Inhale }, -- Inhale (Inhale)

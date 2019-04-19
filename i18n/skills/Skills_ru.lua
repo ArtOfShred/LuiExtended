@@ -299,9 +299,9 @@ local strings = {
     SI_LUIE_SKILL_SPIKED_ARMOR_TP =                      "Return Magic Damage to any enemy that uses a direct damage attack against you for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_HARDENED_ARMOR_TP =                    "Return Magic Damage to any enemy that uses a direct damage attack against you for |cffffff<<1>>|r seconds.\n\nAbsorbing damage for |cffffff6|r seconds.",
     SI_LUIE_SKILL_BURNING_TALONS_TP =                    "Afflicted with Flame Damage every |cFFFFFF1|r second and immobilized for |cffffff<<1>>|r seconds.",
-    SI_LUIE_SKILL_REFLECTIVE_SCALE =                     "Отражает до |cffffff4|r снарядов в течение |cffffff6|r секунд.",
-    SI_LUIE_SKILL_REFLECTIVE_PLATE =                     "Отражает до |cffffff4|r снарядов в течение |cffffff6|r секунд.\n\nИммунитет к замедляющим и обездвиживающим эффектам на |cffffff2|r секунды.",
-    SI_LUIE_SKILL_DRAGON_FIRE_SCALE =                    "Отражает до |cffffff4|r снарядов в течение |cffffff6|r секунд.\n\nОтражённый снаряд наносит атакующему дополнительный урон.",
+    SI_LUIE_SKILL_PROTECTIVE_SCALE_TP =                  "Reduce damage taken from projectiles by |cffffff50|r% for |cffffff6|r seconds.",
+    SI_LUIE_SKILL_PROTECTIVE_PLATE_TP =                  "Reduce damage taken from projectiles by |cffffff50|r% for |cffffff6|r seconds.\n\nImmune to snare and immobilization effects for |cffffff2|r seconds.",
+    SI_LUIE_SKILL_DRAGON_FIRE_SCALE_TP =                 "Reduce damage taken from projectiles by |cffffff50|r% for |cffffff6|r seconds.\n\nWhen you are hit with a projectile, you retaliate by launching a fiery orb at the attacker that deals Flame Damage. This effect can occur once every half second.",
     SI_LUIE_SKILL_INHALE_TP =                            "After |cffffff2.5|r seconds, you exhale fire, dealing Flame Damage to enemies within |cFFFFFF8|r meters.", -- TODO: Translate
     SI_LUIE_SKILL_DRAW_ESSENCE_TP =                      "After |cffffff2.5|r seconds, you exhale fire, dealing Flame Damage to enemies within |cFFFFFF8|r meters and restoring |cffffff10|r% of the ability's cost for each enemy hit as Magicka.", -- TODO: Translate
     SI_LUIE_SKILL_MOLTEN_ARMAMENTS_TP =                  "Увеличивает урон полностью заряженных Силовых атак  на |cffffff40|r% в течение |cffffff<<1>>|r секунд.",
@@ -1148,7 +1148,8 @@ local strings = {
     SI_LUIE_SKILL_COLD_SNAP_TP =                         "Increase damage taken from Cold Snap by |cFFFFFF<<2>>|r% per stack.",
     SI_LUIE_SKILL_SUMMON_DEATHLESS_WOLF =                "Summon Deathless Wolf",
     SI_LUIE_SKILL_BLADE_TRAP_VMA =                       "Afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThis effect stacks up to |cFFFFFF25|r times, dealing |cFFFFFF5|r% increased damage per stack.",
-    SI_LUIE_SKILL_ENERGIZE =                             "Energize"
+    SI_LUIE_SKILL_ENERGIZE =                             "Energize",
+    SI_LUIE_SKILL_REFLECTIVE_SCALE =                     "Reflective Scale",
 }
 
 for stringId, stringValue in pairs(strings) do
