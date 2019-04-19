@@ -391,6 +391,7 @@ local AbilityTables = {
     Set_Ward_of_Cyrodiil              = 32837,
     Set_Fasallas_Guile                = 76946,
     Set_Sentry                        = 32807,
+    Set_Line_Breaker                  = 75753,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 

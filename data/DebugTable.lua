@@ -2362,6 +2362,7 @@ LUIE.DebugAuras = {
     -- ROLL DODGE
     [28549] = true, -- Roll Dodge
     [29721] = true, -- Immobilize Immunity
+    [119068] = true, -- Immobilize Immunity
     [69143] = true, -- Dodge Fatigue
 
     -- SPRINT
@@ -2526,6 +2527,7 @@ LUIE.DebugAuras = {
 
     -- HOUSING
     [89978] = true, -- Target Skeleton (Target Dummy)
+    [89977] = true, -- Target Skeleton (Target Dummy)
     --[10298] = true, -- Boss (Target Dummy)
     --[15954] = true, -- Boss (Target Dummy)
     [89445] = true, -- Create Blacksmithing Set Stati (Attunable Blacksmithing Station)
@@ -2537,6 +2539,37 @@ LUIE.DebugAuras = {
     [89652] = true, -- Create Woodworking Set Stati (Attunable Woodworking Station)
     [89654] = true, -- 68235 Stun (Attunable Woodworking Station)
     [89338] = true, -- ALL Furniture Plan Book (Crafting Book - PTS Only)
+
+    -- HOUSING TARGET DUMMY
+    [120010] = true, -- Major Breach (Target Iron Atronach, Trial)
+    [120019] = true, -- Minor Breach (Target Iron Atronach, Trial)
+    [120022] = true, -- Major Fracture (Target Iron Atronach, Trial)
+    [120027] = true, -- Minor Fracture (Target Iron Atronach, Trial)
+    [120030] = true, -- Minor Vulnerability (Target Iron Atronach, Trial)
+    [120007] = true, -- Crusher (Target Iron Atronach, Trial)
+    [120016] = true, -- Joe Buff Granter (Target Iron Atronach, Trial)
+    [120011] = true, -- Engulfing Flames (Target Iron Atronach, Trial)
+    [120018] = true, -- Roar of Alkosh (Target Iron Atronach, Trial)
+
+    [120017] = true, -- Minor Sorcery (Target Iron Atronach, Trial)
+    [120023] = true, -- Minor Brutality (Target Iron Atronach, Trial)
+    [120028] = true, -- Minor Prophecy (Target Iron Atronach, Trial)
+    [120029] = true, -- Minor Savagery (Target Iron Atronach, Trial)
+    [120008] = true, -- Minor Berserk (Target Iron Atronach, Trial)
+    [120012] = true, -- Minor Magickasteal (Target Iron Atronach, Trial)
+    [120020] = true, -- Minor Toughness (Target Iron Atronach, Trial)
+    [120021] = true, -- Aggressive Horn (Target Iron Atronach, Trial)
+    [120025] = true, -- Aggressive Horn (Target Iron Atronach, Trial)
+    [120013] = true, -- Major Force (Target Iron Atronach, Trial)
+    [120014] = true, -- Off Balance (Target Iron Atronach, Trial)
+    [120024] = true, -- Worm's Raiment (Target Iron Atronach, Trial)
+    [120026] = true, -- Hircine's Veneer (Target Iron Atronach, Trial)
+    [120015] = true, -- Spell Power Cure (Target Iron Atronach, Trial)
+
+    [121572] = true, -- Spear Shards (Target Iron Atronach, Trial)
+    [121628] = true, -- Spear Shards (Target Iron Atronach, Trial)
+    [121629] = true, -- Spear Shards (Target Iron Atronach, Trial)
+    [121630] = true, -- Spear Shards (Target Iron Atronach, Trial)
 
     -------------------------------------
     -- WORLD EVENTS ---------------------

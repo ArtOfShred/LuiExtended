@@ -42,7 +42,7 @@ local strings = {
     SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED =                "Усиленный Айлейдский колодец",
     SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP =             "Повышение здоровья на |cFFFFFF10|r% в течение |cFFFFFF30|r минут.",
     SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP =               "Иммунитет к замедляющим и обездвиживающим эффектам на |cFFFFFF<<1>>|r секунд.",
-    SI_LUIE_SKILL_DODGE_FATIGUE_TP =                     "Повторный уворот будет расходовать больше Запаса сил в течение следующих |cFFFFFF<<1>>|r <<1[секунду/секунд]>>.", -- TODO: Translate - capitalize Stamina in here if not.
+    SI_LUIE_SKILL_DODGE_FATIGUE_TP =                     "Consecutive roll dodging costs |cFFFFFF33|r% more Stamina per stack for the next |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_HIDDEN_TP =                            "Крадётесь и сокрыты от чужих глаз.\n\nРасходуется Запас сил при движении.",
     SI_LUIE_SKILL_INVISIBLE_TP =                         "Сокрыты от чужих глаз магией или окружающей средой.",
     SI_LUIE_SKILL_SPRINT_TP =                            "Спринт, скорость передвижения увеличена на |cFFFFFF40|r%.\n\nРасходуется Запас сил при движении.",
@@ -220,6 +220,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_NO_DUR_VALUE_TP =     "Increase Physical and Spell Resistance by |cFFFFFF<<2>>|r.",
 
     SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_TP =           "Reduce Physical and Spell Resistance for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP =    "Reduce Physical and Spell Resistance.",
 
     -- Resource Regeneration, Shields
     SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP =           "Increase Health Recovery for |cFFFFFF<<1>>|r seconds.",
@@ -289,11 +290,14 @@ local strings = {
     SI_LUIE_SKILL_VENOMOUS_CLAW_TP =                     "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nDeals |cFFFFFF12|r% increased damage every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_BURNING_EMBERS_TP =                    "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cffffff<<1>>|r секунд.\n\nИсцеляет рыцаря-дракона на |cffffff75|r% от нанесённого урона по завершению действия эффекта.",
     SI_LUIE_SKILL_ENGULFING_FLAMES_TP =                  "Подвержен урону от Огня каждые |cFFFFFF2|r секунды в течение |cffffff<<1>>|r секунд.\n\nIncrease damage taken from Fire Damage attacks by |cffffff10|r%.",
+    SI_LUIE_SKILL_ENGULFING_FLAMES_DUMMY_TP =            "Increase damage taken from Fire Damage attacks by |cffffff10|r%.",
     SI_LUIE_SKILL_INFERNO_TP =                           "Запускает в ближайшего противника огненный шар, наносящий урон от Огня  каждые |cffffff5|r секунд в течение |cffffff15|r секунд.",
     SI_LUIE_SKILL_FLAMES_OF_OBLIVION_TP =                "Launch a fireball at |cffffff2|r enemies, dealing Flame Damage every |cffffff5|r seconds for |cffffff15|r seconds.",
     SI_LUIE_SKILL_CAUTERIZE_TP =                         "Запускает в ближайшего союзника огненный шар, чтобы прижечь его раны, каждые |cffffff5|r секунды в течение |cffffff15|r секунд.",
     SI_LUIE_SKILL_DRAGONKIGHT_STANDARD_TP =              "Enemies within the radius of the standard take Flame Damage every |cffffff1|r second and have Major Defile applied to them.", -- TODO: Translate
     SI_LUIE_SKILL_STANDARD_OF_MIGHT_TP =                 "Увеличивает наносимый урон и снижает получаемый урон, пока находитесь в радиусе действия штандарта.",
+    SI_LUIE_SKILL_SPIKED_ARMOR_TP =                      "Return Magic Damage to any enemy that uses a direct damage attack against you for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_HARDENED_ARMOR_TP =                    "Return Magic Damage to any enemy that uses a direct damage attack against you for |cffffff<<1>>|r seconds.\n\nAbsorbing damage for |cffffff6|r seconds.",
     SI_LUIE_SKILL_BURNING_TALONS_TP =                    "Afflicted with Flame Damage every |cFFFFFF1|r second and immobilized for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_REFLECTIVE_SCALE =                     "Отражает до |cffffff4|r снарядов в течение |cffffff6|r секунд.",
     SI_LUIE_SKILL_REFLECTIVE_PLATE =                     "Отражает до |cffffff4|r снарядов в течение |cffffff6|r секунд.\n\nИммунитет к замедляющим и обездвиживающим эффектам на |cffffff2|r секунды.",
@@ -373,7 +377,7 @@ local strings = {
     SI_LUIE_SKILL_HURRICANE_TP =                         "Enemies within |cFFFFFF5|r meters take Physical Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThe winds grow in damage and size, increasing up to |cFFFFFF150|r% more damage and up to |cFFFFFF9|r meters in size.",
     SI_LUIE_SKILL_LIGHTNING_SPLASH_TP =                  "Enemies standing in the storm energy take Shock Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SURGE_TP =                             "Dealing a Critical Strike heals you. This effect can occur once every |cFFFFFF1|r second.", -- TODO: Translate this Block
-    SI_LUIE_SKILL_BOLT_ESCAPE_FATIGUE_TP =               "Стоимость последующих Bolt Escape возрастает на |cFFFFFF50|r% Магии в течение следующих |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_BOLT_ESCAPE_FATIGUE_TP =               "Consecutive Bolt Escape casts cost |cFFFFFF50|r% more Magicka per stack for the next |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_INTERCEPT_TP =                         "Заклинания, направленные в вас, будут поглощены Ball of Lightning.",
     SI_LUIE_SKILL_OVERLOAD_TP =                          "Обычные атаки заменены шаровыми молниями, наносящими урон от Электричества, а Силовые атаки сжигают противников уроном от Электричества в радиусе от атакуемой цели.\n\nАтаки расходуют очки абсолютной способности, пока они не закончатся или пока способность не будет отключена.",
     SI_LUIE_SKILL_ENERGY_OVERLOAD_TP =                   "Обычные атаки заменены шаровыми молниями, наносящими урон от Электричества, а Силовые атаки сжигают противников уроном от Электричества в радиусе от атакуемой цели.\n\nОбычные и Силовые атаки восстанавливают Магию.\n\nАтаки расходуют очки абсолютной способности, пока они не закончатся или пока способность не будет отключена.",
@@ -636,6 +640,7 @@ local strings = {
     SI_LUIE_SKILL_INEVITABLE_DETONATION_TP =             "Cursed with a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to you and any allies within |cFFFFFF8|r meters.\n\nEach ally within the bomb's radius increases the damage by |cFFFFFF25|r%, up to a maximum of |cFFFFFF250|r% increased damage.\n\nIf the bomb is dispelled or removed early, the explosion is triggered immediately.",
     SI_LUIE_SKILL_PROXIMITY_DETONATION_TP =              "Charging a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to all enemies within |cFFFFFF8|r meters.\n\nEach enemy within the bomb's radius increases the damage by |cFFFFFF25|r%, up to a maximum of |cFFFFFF250|r% increased damage.",
     SI_LUIE_SKILL_WAR_HORN_TP =                          "Increase Max Stamina and Max Magicka by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_WAR_HORN_DUMMY_TP =                    "Increase Max Stamina and Max Magicka.",
 
     -- Support
     SI_LUIE_SKILL_SIEGE_SHIELD_TP =                      "Reduce damage taken from siege weapons by |cFFFFFF50|r%.",

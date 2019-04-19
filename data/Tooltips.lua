@@ -124,6 +124,7 @@ LUIE.Tooltips = {
     Generic_Physical_Spell_Resist_No_Dur_Value      = GetString(SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
 
     Generic_Reduce_Physical_Spell_Resist            = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_TP),
+    Generic_Reduce_Physical_Spell_Resist_No_Dur     = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP),
 
     Generic_Test                                    = GetString(SI_LUIE_SKILL_TEST_TP),
 
@@ -480,6 +481,7 @@ LUIE.Tooltips = {
     Skill_Venomous_Claw                             = GetString(SI_LUIE_SKILL_VENOMOUS_CLAW_TP),
     Skill_Burning_Embers                            = GetString(SI_LUIE_SKILL_BURNING_EMBERS_TP),
     Skill_Engulfing_Flames                          = GetString(SI_LUIE_SKILL_ENGULFING_FLAMES_TP),
+    Skill_Engulfing_Flames_Dummy                    = GetString(SI_LUIE_SKILL_ENGULFING_FLAMES_DUMMY_TP),
     Skill_Inferno_Base                              = GetAbilityDescription(28967),
     Skill_Inferno_Active                            = GetString(SI_LUIE_SKILL_INFERNO_TP),
     Skill_Flames_of_Oblivion_Base                   = GetAbilityDescription(32853),
@@ -488,6 +490,8 @@ LUIE.Tooltips = {
     Skill_Cauterize_Active                          = GetString(SI_LUIE_SKILL_CAUTERIZE_TP),
     Skill_Dragonknight_Standard                     = GetString(SI_LUIE_SKILL_DRAGONKIGHT_STANDARD_TP),
     Skill_Standard_of_Might_Buff                    = GetString(SI_LUIE_SKILL_STANDARD_OF_MIGHT_TP),
+    Skill_Spiked_Armor                              = GetString(SI_LUIE_SKILL_SPIKED_ARMOR_TP),
+    Skill_Hardened_Armor                            = GetString(SI_LUIE_SKILL_HARDENED_ARMOR_TP),
     Skill_Burning_Talons                            = GetString(SI_LUIE_SKILL_BURNING_TALONS_TP),
     Skill_Reflective_Scale                          = GetString(SI_LUIE_SKILL_REFLECTIVE_SCALE),
     Skill_Reflective_Plate                          = GetString(SI_LUIE_SKILL_REFLECTIVE_PLATE),
@@ -821,6 +825,7 @@ LUIE.Tooltips = {
     Skill_Inevitable_Detonation                     = GetString(SI_LUIE_SKILL_INEVITABLE_DETONATION_TP),
     Skill_Proximity_Detonation                      = GetString(SI_LUIE_SKILL_PROXIMITY_DETONATION_TP),
     Skill_War_Horn                                  = GetString(SI_LUIE_SKILL_WAR_HORN_TP),
+    Skill_War_Horn_Dummy                            = GetString(SI_LUIE_SKILL_WAR_HORN_DUMMY_TP),
 
     -- Support
     Skill_Siege_Shield                              = GetString(SI_LUIE_SKILL_SIEGE_SHIELD_TP),

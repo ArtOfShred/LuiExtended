@@ -354,8 +354,15 @@ E.DebuffDisplayOverrideId = {
     ----------------------------------------------------------------
 
     -- Basic (Shared)
-    [2727] = true, -- Off-Balance (Generic)
     [102771] = true, -- Off Balance Immunity
+
+    ----------------------------------------------------------------
+    -- HOUSING TARGET DUMMY ----------------------------------------
+    ----------------------------------------------------------------
+
+    [120007] = true, -- Crusher
+    [120011] = true, -- Engulfing Flames
+    [120018] = true, -- Roar of Alkosh
 
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------
@@ -364,7 +371,7 @@ E.DebuffDisplayOverrideId = {
     -- Item Sets
     [52705] = true, -- Way of Martial Knowledge (... of Martial Knowledge)
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
-    [75753] = true, -- Line Breaker (of Alkosh)
+    [75753] = true, -- Line-Breaker (of Alkosh)
     [93001] = true, -- Mad Tinkerer (Stun from Fabricant)
 
     -- Dragonknight
@@ -430,6 +437,7 @@ E.DebuffDisplayOverrideName = {
     [A.Skill_Minor_Uncertainty]         = true,
     [A.Skill_Minor_Magickasteal]        = true,
     [A.Skill_Minor_Lifesteal]           = true,
+    [A.Skill_Off_Balance]               = true,
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -3249,7 +3257,7 @@ E.EffectOverride = {
     [67136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_overwhelming.dds' }, -- Overwhelming Surge (Overwhelming)
     [34504] = { icon = 'LuiExtended/media/icons/abilities/ability_set_prayer.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Prayer Shawl (of Prayer)
     [32834] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = T.Set_Sanctuary }, -- Sanctuary (of Sanctuary)
-    [66902] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', tooltip = A.Set_Spell_Power_Cure }, -- Spell Power Cure
+    [66902] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', tooltip = A.Set_Spell_Power_Cure }, -- Major Courage (Spell Power Cure)
     [67098] = { icon = 'LuiExtended/media/icons/abilities/ability_set_combat_physician.dds', tooltip = T.Generic_Damage_Shield_Duration }, -- Combat Physician (of the Combat Physician)
     [57164] = { icon = 'esoui/art/icons/achievement_ic_014.dds', tooltip = T.Set_Shroud_of_the_Lich }, -- Shroud of the Lich (of the Lich)
     [34813] = { icon = 'LuiExtended/media/icons/abilities/ability_set_magicka_furnace.dds' }, -- Magicka Furnace (of the Magicka Furnace)
@@ -3558,7 +3566,8 @@ E.EffectOverride = {
 
     -- Roll Dodge
     [29721] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds', tooltip = T.Innate_Immobilize_Immunity }, -- Immobilize Immunity
-    [69143] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_dodge_fatigue.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Innate_Dodge_Fatigue }, -- Dodge Fatigue
+    [119068] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds', tooltip = T.Innate_Immobilize_Immunity }, -- Immobilize Immunity
+    [69143] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_dodge_fatigue.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Innate_Dodge_Fatigue, displayStacks = true, stack = 1, maxStacks = 100 }, -- Dodge Fatigue
 
     -- Crouch
     [20299] = { tooltip = T.Innate_Hidden }, -- Sneak
@@ -3649,6 +3658,19 @@ E.EffectOverride = {
     [89645] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_create_station_clothing.dds', name = A.Innate_Create_Station_Clothing }, -- 68235 Stun
     [105217] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_create_station_jewelry.dds', name = A.Innate_Create_Station_Jewelry }, -- 68235 Stun
     [89654] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_create_station_woodwork.dds', name = A.Innate_Create_Station_Woodwork }, -- 68235 Stun
+
+    -- Housing Target Dummy
+    [89977] = { hide = true }, -- Target Skeleton (Target Dummy)
+    [120007] = { icon = 'LuiExtended/media/icons/glyphs/glyph_crushing.dds', name = A.Item_Glyph_of_Crushing, tooltip = T.Generic_Reduce_Physical_Spell_Resist_No_Dur }, -- Crusher (Target Iron Atronach, Trial)
+    [120011] = { tooltip = T.Skill_Engulfing_Flames_Dummy }, -- Engulfing Flames (Target Iron Atronach, Trial)
+    [120018] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', name = A.Set_Line_Breaker, tooltip = T.Generic_Reduce_Physical_Spell_Resist_No_Dur }, -- Roar of Alkosh (Target Iron Atronach, Trial)
+    [120012] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Target Iron Atronach, Trial)
+    [120020] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds' }, -- Minor Toughness (Target Iron Atronach, Trial)
+    [120021] = { tooltip = T.Skill_War_Horn_Dummy }, -- Aggressive Horn (Target Iron Atronach, Trial)
+    [120024] = { icon = 'LuiExtended/media/icons/abilities/ability_set_worm_cult.dds', tooltip = T.Set_Worms_Raiment }, -- Worm's Raiment (Target Iron Atronach, Trial)
+    [120026] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = T.Set_Hircines_Veneer }, -- Hircine's Veneer (Target Iron Atronach, Trial)
+    [120015] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', name = A.Skill_Major_Courage }, -- Spell Power Cure (Target Iron Atronach, Trial)
+    [121572] = { hide = true }, -- Spear Shards (Target Iron Atronach, Trial)
 
     ----------------------------------------------------------------
     -- WORLD EVENTS  -----------------------------------------------
@@ -3769,11 +3791,14 @@ E.EffectOverride = {
     [32948] = { groundLabel = true, tooltip = T.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Standard of Might
 
     -- Spiked Armor / Hardened Armor / Volatile Armor
+    [20319] = { tooltip = T.Skill_Spiked_Armor }, -- Spiked Armor (Spiked Armor)
     [61815] = { consolidate = true, tooltip = A.Skill_Spiked_Armor }, -- Major Resolve (Spiked Armor)
     [61816] = { consolidate = true, tooltip = A.Skill_Spiked_Armor }, -- Major Ward (Spiked Armor)
+    [20328] = { tooltip = T.Skill_Hardened_Armor }, -- Hardened Armor (Hardened Armor)
     [61827] = { consolidate = true, tooltip = A.Skill_Hardened_Armor }, -- Major Resolve (Hardened Armor)
     [61828] = { consolidate = true, tooltip = A.Skill_Hardened_Armor }, -- Major Ward (Hardened Armor)
-    [31808] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Hardened Armor (Hardened Armor)
+    [31808] = { tooltip = T.Generic_Damage_Shield_Duration, hideReduce = true }, -- Hardened Armor (Hardened Armor)
+    [20323] = { tooltip = T.Skill_Spiked_Armor }, -- Volatile Armor (Volatile Armor)
     [61836] = { consolidate = true, tooltip = A.Skill_Volatile_Armor }, -- Major Resolve (Volatile Armor)
     [61837] = { consolidate = true, tooltip = A.Skill_Volatile_Armor }, -- Major Ward (Volatile Armor)
     [20326] = { tooltip = T.Generic_Magic, tooltipValue2 = 2 }, -- Volatile Armor (Volatile Armor)

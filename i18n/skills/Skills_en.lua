@@ -42,7 +42,7 @@ local strings = {
     SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED =                "Fortified Ayleid Well",
     SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP =             "Increase Max Health by |cFFFFFF10|r% for |cFFFFFF30|r minutes.",
     SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP =               "Immune to snare and immobilization effects for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_DODGE_FATIGUE_TP =                     "Consecutive roll dodging costs increased Stamina for the next |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_DODGE_FATIGUE_TP =                     "Consecutive roll dodging costs |cFFFFFF33|r% more Stamina per stack for the next |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_HIDDEN_TP =                            "Crouched and concealed from sight.\n\nDrains Stamina while moving.",
     SI_LUIE_SKILL_INVISIBLE_TP =                         "Concealed from sight by magical or environmental means.",
     SI_LUIE_SKILL_SPRINT_TP =                            "Sprint, increasing movement speed by |cFFFFFF40|r%.\n\nDrains Stamina while moving.",
@@ -220,6 +220,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_NO_DUR_VALUE_TP =     "Increase Physical and Spell Resistance by |cFFFFFF<<2>>|r.",
 
     SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_TP =           "Reduce Physical and Spell Resistance for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP =    "Reduce Physical and Spell Resistance.",
 
     -- Resource Regeneration, Shields
     SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP =           "Increase Health Recovery for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -289,11 +290,14 @@ local strings = {
     SI_LUIE_SKILL_VENOMOUS_CLAW_TP =                     "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nDeals |cFFFFFF12|r% increased damage every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_BURNING_EMBERS_TP =                    "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nHeals the Dragonknight for |cffffff75|r% of the total damage inflicted when the effect ends.",
     SI_LUIE_SKILL_ENGULFING_FLAMES_TP =                  "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nIncrease damage taken from Fire Damage attacks by |cffffff10|r%.",
+    SI_LUIE_SKILL_ENGULFING_FLAMES_DUMMY_TP =            "Increase damage taken from Fire Damage attacks by |cffffff10|r%.",
     SI_LUIE_SKILL_INFERNO_TP =                           "Launch a fireball at the nearest enemy, dealing Flame Damage every |cffffff5|r seconds for |cffffff15|r seconds.",
     SI_LUIE_SKILL_FLAMES_OF_OBLIVION_TP =                "Launch a fireball at |cffffff2|r enemies, dealing Flame Damage every |cffffff5|r seconds for |cffffff15|r seconds.",
     SI_LUIE_SKILL_CAUTERIZE_TP =                         "Launch a fireball at an ally to cauterize their wounds every |cffffff5|r seconds for |cffffff15|r seconds.",
     SI_LUIE_SKILL_DRAGONKIGHT_STANDARD_TP =              "Enemies within the radius of the standard take Flame Damage every |cffffff1|r second and have Major Defile applied to them.",
     SI_LUIE_SKILL_STANDARD_OF_MIGHT_TP =                 "Increase damage done and reduce damage taken while standing within the radius of the standard.",
+    SI_LUIE_SKILL_SPIKED_ARMOR_TP =                      "Return Magic Damage to any enemy that uses a direct damage attack against you for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_HARDENED_ARMOR_TP =                    "Return Magic Damage to any enemy that uses a direct damage attack against you for |cffffff<<1>>|r seconds.\n\nAbsorbing damage for |cffffff6|r seconds.",
     SI_LUIE_SKILL_BURNING_TALONS_TP =                    "Afflicted with Flame Damage every |cFFFFFF1|r second and immobilized for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_REFLECTIVE_SCALE =                     "Reflecting up to |cffffff4|r projectiles for |cffffff6|r seconds.",
     SI_LUIE_SKILL_REFLECTIVE_PLATE =                     "Reflecting up to |cffffff4|r projectiles for |cffffff6|r seconds.\n\nImmune to snare and immobilization effects for |cffffff2|r seconds.",
@@ -373,7 +377,7 @@ local strings = {
     SI_LUIE_SKILL_HURRICANE_TP =                         "Enemies within |cFFFFFF5|r meters take Physical Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThe winds grow in damage and size, increasing up to |cFFFFFF150|r% more damage and up to |cFFFFFF9|r meters in size.",
     SI_LUIE_SKILL_LIGHTNING_SPLASH_TP =                  "Enemies standing in the storm energy take Shock Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SURGE_TP =                             "Dealing a Critical Strike heals you. This effect can occur once every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_BOLT_ESCAPE_FATIGUE_TP =               "Consecutive Bolt Escape casts cost |cFFFFFF50|r% more Magicka for the next |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BOLT_ESCAPE_FATIGUE_TP =               "Consecutive Bolt Escape casts cost |cFFFFFF50|r% more Magicka per stack for the next |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_INTERCEPT_TP =                         "Spell projectiles directed at you will be absorbed by the Ball of Lightning.",
     SI_LUIE_SKILL_OVERLOAD_TP =                          "Light Attacks are replaced by lightning bolts, dealing Shock Damage, and Heavy Attacks blast enemies in the target area for Shock Damage.\n\nAttacks deplete Ultimate until you run out or the ability is toggled off.",
     SI_LUIE_SKILL_ENERGY_OVERLOAD_TP =                   "Light Attacks are replaced by lightning bolts, dealing Shock Damage, and Heavy Attacks blast enemies in the target area for Shock Damage.\n\nLight and Heavy Attacks restore Magicka.\n\nAttacks deplete Ultimate until you run out or the ability is toggled off.",
@@ -636,6 +640,7 @@ local strings = {
     SI_LUIE_SKILL_INEVITABLE_DETONATION_TP =             "Cursed with a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to you and any allies within |cFFFFFF8|r meters.\n\nEach ally within the bomb's radius increases the damage by |cFFFFFF25|r%, up to a maximum of |cFFFFFF250|r% increased damage.\n\nIf the bomb is dispelled or removed early, the explosion is triggered immediately.",
     SI_LUIE_SKILL_PROXIMITY_DETONATION_TP =              "Charging a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to all enemies within |cFFFFFF8|r meters.\n\nEach enemy within the bomb's radius increases the damage by |cFFFFFF25|r%, up to a maximum of |cFFFFFF250|r% increased damage.",
     SI_LUIE_SKILL_WAR_HORN_TP =                          "Increase Max Stamina and Max Magicka by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_WAR_HORN_DUMMY_TP =                    "Increase Max Stamina and Max Magicka.",
 
     -- Support
     SI_LUIE_SKILL_SIEGE_SHIELD_TP =                      "Reduce damage taken from siege weapons by |cFFFFFF50|r%.",
