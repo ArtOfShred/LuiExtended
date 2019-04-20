@@ -3322,14 +3322,13 @@ LUIE.DebugAuras = {
     [114968] = true, -- Siphoning Attacks (Siphoning Attacks)
 
     [33316] = true, -- Drain Power (Drain Power)
-    [33317] = true, -- Major Brutality (Drain Power)
+    [33317] = true, -- Major Sorcery (Drain Power)
 
     [36901] = true, -- Power Extraction (Power Extraction)
     [36903] = true, -- Major Brutality (Power Extraction)
 
     [36891] = true, -- Sap Essence (Sap Essence)
     [45655] = true, -- Sap Essence (Sap Essence)
-    [36894] = true, -- Major Brutality (Sap Essence)
     [62240] = true, -- Major Sorcery (Sap Essence)
     [36898] = true, -- Sap Will (Sap Essence)
     [36899] = true, -- Sap Will (Sap Essence)
@@ -3355,10 +3354,9 @@ LUIE.DebugAuras = {
     [35613] = true, -- Soul Leech (Soul Siphon)
 
     [35460] = true, -- Soul Tether (Soul Tether)
-    [35465] = true, -- Soul Tether (Soul Tether)
     [35466] = true, -- Soul Tether (Soul Tether)
     [36606] = true, -- Soul Tether (Soul Tether)
-    [35462] = true, -- Soul Tether Leech (Soul Tether)
+    [35462] = true, -- Soul Tether (Soul Tether)
     [35463] = true, -- Soul Tether (Soul Tether)
     [35461] = true, -- Soul Leech (Soul Tether)
 

@@ -686,9 +686,8 @@ E.EffectCreateSkillAura = {
     [61817] = { removeOnEnd = false, consolidate = true, abilityId = 35414 }, -- Minor Resolve --> Mirage
     [68512] = { removeOnEnd = false, consolidate = true, abilityId = 35414 }, -- Minor Ward --> Mirage
     [90620] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 35419 }, -- Major Evasion --> Double Take
-    [33317] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 33316  }, --> Major Brutality --> Drain Power
+    [33317] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 33316  }, --> Major Sorcery --> Drain Power
     [36903] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 36901 }, --> Major Brutality --> Power Extraction
-    [36894] = { removeOnEnd = false, consolidate = true, abilityId = 36891 }, -- Major Brutality --> Sap Essence
     [62240] = { removeOnEnd = false, consolidate = true, abilityId = 36891 }, -- Major Sorcery --> Sap Essence
 
     -- Templar
@@ -934,10 +933,11 @@ E.BarHighlightOverride = {
     [33326] = { newId = 33329 }, -- Cripple
     [36943] = { newId = 36950 }, -- Debilitate
     [36957] = { newId = 36965 }, -- Crippling Grasp
-    [33316] = { newId = 33317, showFakeAura = true, noRemove = true }, -- Drain Power --> Major Brutality
+    [33316] = { newId = 33317, showFakeAura = true, noRemove = true }, -- Drain Power --> Major Sorcery
     [36901] = { newId = 36903, showFakeAura = true, noRemove = true }, -- Power Extraction --> Major Brutality
-    [36891] = { newId = 36894, showFakeAura = true, noRemove = true }, -- Sap Essence --> Major Brutality
+    [36891] = { newId = 62240, showFakeAura = true, noRemove = true }, -- Sap Essence --> Major Sorcery
     [25091] = { newId = 25093 }, -- Soul Shred
+    [35460] = { newId = 35462 }, -- Soul Tether
 
     ---------------------------
     -- Sorcerer ---------------
@@ -4057,7 +4057,6 @@ E.EffectOverride = {
     -- Consuming Darkness / Bolstering Darkness / Veil of Blades
     [37729] = { tooltip = T.Skill_Hidden_Refresh, hideReduce = true }, -- Hidden Refresh (Hidden Refresh)
     [37732] = { tooltip = T.Skill_Hidden_Refresh }, -- Hidden Refresh (Hidden Refresh)
-    [108808] = { hide = true}, -- Synergy Damage Bonus (Consuming Darkness - Hidden Refresh Synergy)
     [25411] = { tooltip = T.Skill_Consuming_Darkness }, -- Consuming Darkness (Consuming Darkness)
     [44871] = { forcedContainer = 'short', tooltip = A.Skill_Consuming_Darkness, groundLabel = true }, -- Major Protection (Consuming Darkness)
     [25412] = { tooltip = T.Generic_Snare_No_Dur, tooltipValue2 = 70, groundLabel = true }, -- Consuming Darkness (Consuming Darkness)
@@ -4073,7 +4072,6 @@ E.EffectOverride = {
     [33292] = { tooltip = T.Generic_HoT, tooltipValue2 = 2 }, -- Strife (Strife)
     [34840] = { tooltip = T.Generic_HoT, tooltipValue2 = 2 }, -- Funnel Health (Funnel Health)
     [34841] = { tooltip = T.Generic_HoT, tooltipValue2 = 2 }, -- Funnel Health (Funnel Health)
-    [35469] = { hide = true }, -- Funnel Health (Funnel Health)
     [34836] = { tooltip = T.Generic_HoT, tooltipValue2 = 2 }, -- Swallow Soul (Swallow Soul)
 
     -- Malevolent Offering / Shrewd Offering / Healthy Offering
@@ -4083,12 +4081,12 @@ E.EffectOverride = {
     [108934] = { tooltip = A.Skill_Healthy_Offering }, -- Minor Mending (Healthy Offering)
 
     -- Cripple / Debilitate / Crippling Grasp
-    [33329] = { tooltip = T.Skill_Cripple }, -- Cripple (Cripple)
-    [33327] = { icon = 'esoui/art/icons/ability_nightblade_006.dds', tooltip = T.Skill_Cripple, hideReduce = true }, -- Cripple (Cripple)
+    [33329] = { tooltip = T.Skill_Cripple, tooltipValue2 = 30 }, -- Cripple (Cripple)
+    [33327] = { icon = 'esoui/art/icons/ability_nightblade_006.dds', tooltip = T.Skill_Cripple, tooltipValue2 = 30, hideReduce = true }, -- Cripple (Cripple)
     [33328] = { tooltip = A.Skill_Cripple }, -- Major Expedition (Cripple)
     [36943] = { hide = true }, -- Debilitate (Debilitate)
-    [36950] = { tooltip = T.Skill_Cripple }, -- Debilitate (Debilitate)
-    [36945] = { icon = 'esoui/art/icons/ability_nightblade_006_a.dds', tooltip = T.Skill_Cripple, hideReduce = true }, -- Debilitate (Debilitate)
+    [36950] = { tooltip = T.Skill_Cripple, tooltipValue2 = 50 }, -- Debilitate (Debilitate)
+    [36945] = { icon = 'esoui/art/icons/ability_nightblade_006_a.dds', tooltip = T.Skill_Cripple, tooltipValue2 = 50, hideReduce = true }, -- Debilitate (Debilitate)
     [36946] = { tooltip = A.Skill_Debilitate }, -- Major Expedition (Debilitate)
     [62196] = { icon = 'esoui/art/icons/ability_nightblade_006_a.dds' }, -- Debilitate (Debilitate)
     [36965] = { tooltip = T.Skill_Crippling_Grasp }, -- Crippling Grasp (Crippling Grasp)
@@ -4104,25 +4102,21 @@ E.EffectOverride = {
     [36935] = { tooltip = T.Skill_Siphoning_Attacks }, -- Siphoning Attacks (Siphoning Attacks)
 
     -- Drain Power / Power Extraction / Sap Essence
-    [33317] = { consolidateExtra = true, tooltip = A.Skill_Drain_Power }, -- Major Brutality (Drain Power)
+    [33317] = { consolidateExtra = true, tooltip = A.Skill_Drain_Power }, -- Major Sorcery (Drain Power)
     [36903] = { consolidateExtra = true, tooltip = A.Skill_Power_Extraction }, -- Major Brutality (Power Extraction)
-    [36894] = { consolidate = true, tooltip = A.Skill_Sap_Essence }, -- Major Brutality (Sap Essence)
     [62240] = { consolidate = true, tooltip = A.Skill_Sap_Essence }, -- Major Sorcery (Sap Essence)
     [36899] = { icon = 'esoui/art/icons/ability_nightblade_013_a.dds', name = A.Skill_Sap_Essence }, -- Sap Will (Sap Essence)
 
     -- Soul Shred / Soul Siphon / Soul Tether
-    [108814] = { hide = true }, -- Synergy Damage Bonus (Synergy - Soul Shred)
     [25171] = { icon = 'esoui/art/icons/ability_nightblade_018.dds' }, -- Soul Leech (Synergy - Soul Shred)
     [25091] = { hide = true }, -- Soul Shred (Soul Shred)
     [25093] = { tooltip = T.Generic_Stun }, -- Soul Shred (Soul Shred)
     [35508] = { tooltip = T.Generic_HoT, tooltipValue2 = 0.5 }, -- Soul Siphon (Soul Siphon)
     [63533] = { tooltip = A.Skill_Soul_Siphon }, -- Major Vitality (Soul Siphon)
-    [106133] = { icon = 'esoui/art/icons/ability_nightblade_018_b.dds' }, -- Soul Siphon (Soul Siphon)
     [35613] = { hide = true }, -- Soul Leech (Soul Siphon)
-    [35460] = { tooltip = T.Skill_Soul_Tether }, -- Soul Tether (Soul Tether)
     [35466] = { tooltip = T.Skill_Soul_Tether, hideReduce = true }, -- Soul Tether (Soul Tether)
     [36606] = { icon = 'esoui/art/icons/ability_nightblade_018_a.dds' }, -- Soul Tether (Soul Tether)
-    [35462] = { name = A.Skill_Soul_Tether }, -- Soul Tether Leech (Soul Tether)
+    [35462] = { tooltip = T.Skill_Soul_Tether }, -- Soul Tether (Soul Tether)
     [35461] = { hide = true }, -- Soul Leech (Soul Tether)
 
     ----------------------------------------------------------------
