@@ -510,11 +510,11 @@ E.EffectGroundDisplay = {
     [32710] = { buff = false, debuff = false, ground = true }, -- Eruption (Eruption)
 
     -- Nightblade
-    [33195] = { buff = false, debuff = false, ground = true }, -- Path of Darkness (Path of Darkness)
+    [33195] = { buff = true, debuff = false, ground = false }, -- Path of Darkness (Path of Darkness)
     [36049] = { buff = false, debuff = false, ground = true }, -- Twisting Path (Twisting Path)
-    [36028] = { buff = false, debuff = false, ground = true }, -- Refreshing Path (Refreshing Path)
+    [36028] = { buff = true, debuff = false, ground = false }, -- Refreshing Path (Refreshing Path)
     [38517] = { buff = true, debuff = false, ground = false }, -- Summon Shade (Summon Shade)
-    [35438] = { name = A.Skill_Dark_Shade, buff = true, debuff = false, ground = false }, -- Dark Shade (Dark Shade)
+    [35438] = { buff = true, debuff = false, ground = false }, -- Dark Shade (Dark Shade)
     [38528] = { name = A.Skill_Shadow_Image, buff = true, debuff = false, ground = false }, -- Shadow (Shadow Image)
     [37475] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 2 }, -- Manifestation of Terror (Nightblade)
     [25411] = { buff = true, debuff = false, ground = false }, -- Consuming Darkness (Consuming Darkness)
@@ -897,9 +897,9 @@ E.BarHighlightOverride = {
     ---------------------------
 
     -- Assassination
-    [18342] = { newId = 25887 }, -- Teleport Strike
+    [18342] = { newId = 124803 }, -- Teleport Strike --> Minor Vulnerability
     [25493] = { newId = 35336 }, -- Lotus Fan
-    [25484] = { newId = 25959 }, -- Ambush
+    [25484] = { newId = 124804 }, -- Ambush --> Minor Vulnerability
     [33375] = { newId = 90587, showFakeAura = true, noRemove = true }, -- Blur --> Major Evasion
     [35414] = { newId = 90593, showFakeAura = true, noRemove = true }, -- Mirage --> Major Evasion
     [35419] = { newId = 90620, showFakeAura = true, noRemove = true }, -- Double Take --> Major Evasion
@@ -3948,10 +3948,10 @@ E.EffectOverride = {
     [34851] = { hide = true }, -- Impale (Impale)
 
     -- Teleport Strike / Lotus Fan / Ambush
-    [25887] = { tooltip = T.Generic_Stun }, -- Teleport Strike (Teleport Strike)
-    [35334] = { icon = 'esoui/art/icons/ability_nightblade_008_a.dds' }, -- Lotus Fan (Lotus Fan)
-    [35336] = { tooltip = T.Skill_Lotus_Fan }, -- Lotus Fan (Lotus Fan)
-    [25959] = { tooltip = T.Generic_Stun }, -- Ambush (Ambush)
+    [124803] = { tooltip = A.Skill_Teleport_Strike }, -- Minor Vulnerability (Teleport Strike)
+    [35336] = { tooltip = T.Generic_Magic, tooltipValue2 = 2 }, -- Lotus Fan (Lotus Fan)
+    [124806] = { tooltip = A.Skill_Lotus_Fan }, -- Minor Vulnerability (Lotus Fan)
+    [124804] = { tooltip = A.Skill_Ambush }, -- Minor Vulnerability (Ambush)
 
     -- Blur / Mirage / Double Take
     [90587] = { consolidateExtra = true, tooltip = A.Skill_Blur }, -- Major Evasion (Blur)
@@ -3964,37 +3964,35 @@ E.EffectOverride = {
     -- Mark Target / Piercing Mark / Reaper's Mark
     [33363] = { consolidate = true, tooltip = A.Skill_Mark_Target }, -- Major Breach (Mark Target)
     [63909] = { consolidate = true, tooltip = A.Skill_Mark_Target }, -- Major Fracture (Mark Target)
-    [33373] = { hide = true, icon = 'esoui/art/icons/ability_nightblade_014.dds' }, -- Mark Target (Mark Target)
+    [33373] = { icon = 'esoui/art/icons/ability_nightblade_014.dds' }, -- Mark Target (Mark Target)
     [36980] = { consolidate = true, tooltip = A.Skill_Piercing_Mark }, -- Major Breach (Piercing Mark)
     [63915] = { consolidate = true, tooltip = A.Skill_Piercing_Mark }, -- Major Fracture (Piercing Mark)
     [36994] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = A.Skill_Marked, tooltip = A.Skill_Piercing_Mark, noDuplicate = true }, -- Piercing Mark (Piercing Mark)
-    [36983] = { hide = true, icon = 'esoui/art/icons/ability_nightblade_014_b.dds', name = A.Skill_Piercing_Mark }, -- Mark Target (Piercing Mark)
+    [36983] = { icon = 'esoui/art/icons/ability_nightblade_014_b.dds' }, -- Mark Target (Piercing Mark)
     [36972] = { consolidate = true, tooltip = A.Skill_Reapers_Mark }, -- Major Breach (Reaper's Mark)
     [63919] = { consolidate = true, tooltip = A.Skill_Reapers_Mark }, -- Major Fracture (Reaper's Mark)
-    [36975] = { hide = true, icon = 'esoui/art/icons/ability_nightblade_014_a.dds' }, -- Reaper's Mark (Reaper's Mark)
+    [36975] = { icon = 'esoui/art/icons/ability_nightblade_014_a.dds' }, -- Reaper's Mark (Reaper's Mark)
     [36973] = { tooltip = A.Skill_Reapers_Mark }, -- Major Berserk (Reaper's Mark)
 
     -- Grim Focus / Relentless Focus / Merciless Resolve
     [61902] = { tooltip = T.Skill_Grim_Focus }, -- Grim Focus (Grim Focus)
     [61907] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Grim Focus)
-    [64047] = { consolidate = true, tooltip = A.Skill_Grim_Focus }, -- Minor Berserk (Grim Focus)
+    [122585] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Grim Focus)
     [61905] = { hide = true }, -- Grim Focus (Grim Focus)
     [61927] = { tooltip = T.Skill_Relentless_Focus }, -- Relentless Focus (Relentless Focus)
     [61932] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Scourge (Relentless Focus)
-    [64051] = { consolidate = true, tooltip = A.Skill_Relentless_Focus }, -- Minor Berserk (Relentless Focus)
-    [62056] = { consolidate = true, tooltip = A.Skill_Relentless_Focus }, -- Minor Endurance (Relentless Focus)
+    [122587] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', name = A.Skill_Assassins_Scourge }, -- Death Scythe
     [61928] = { hide = true}, -- Relentless Focus (Relentless Focus)
     [61919] = { tooltip = T.Skill_Grim_Focus }, -- Merciless Resolve (Merciless Resolve)
     [61930] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Merciless Resolve)
-    [64055] = { consolidate = true, tooltip = A.Skill_Merciless_Resolve }, -- Minor Berserk (Merciless Resolve)
+    [122586] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', name = A.Skill_Assassins_Will }, -- Death Scythe (Merciless Resolve)
     [61920] = { hide = true }, -- Merciless Resolve (Merciless Resolve)
 
     -- Death Stroke / Incapacitating Strike / Soul Harvest
-    [33399] = { tooltip = A.Skill_Death_Stroke }, -- Major Defile (Death Stroke)
     [61389] = { icon = 'esoui/art/icons/ability_nightblade_007.dds', name = A.Skill_Death_Stroke, tooltip = T.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Death Stroke)
     [36509] = { tooltip = A.Skill_Incapacitating_Strike }, -- Major Defile (Incapacitating Strike)
     [61393] = { name = A.Skill_Incapacitating_Strike, tooltip = T.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Incapacitating Strike)
-    [113110] = { tooltip = A.Skill_Incapacitating_Strike }, -- Major Defile (Incapacitating Strike)
+    [113110] = { tooltip = A.Skill_Incapacitating_Strike }, -- Minor Mangle (Incapacitating Strike)
     [113107] = { icon = 'esoui/art/icons/ability_nightblade_007_c.dds', name = A.Skill_Incapacitating_Strike, tooltip = T.Skill_Incapacitating_Strike }, -- Damage Taken Increased (Incapacitating Strike)
     [113109] = { icon = 'esoui/art/icons/ability_nightblade_007_c.dds', tooltip = T.Skill_Incapacitating_Strike, hideReduce = true }, -- Incapacitating Strike (Incapacitating Strike)
     [36515] = { tooltip = A.Skill_Soul_Harvest }, -- Major Defile (Soul Harvest)
@@ -4006,7 +4004,7 @@ E.EffectOverride = {
     [33185] = { tooltip = T.Generic_Stun }, -- Veiled Strike (Veiled Strike)
     [34733] = { tooltip = A.Skill_Surprise_Attack }, -- Off Balance (Surprise Attack)
     [34732] = { tooltip = T.Generic_Stun }, -- Surprise Attack (Surprise Attack)
-    [34734] = { tooltip = A.Skill_Surprise_Attack }, -- Major Fracture (Surprise Attack)
+    [34734] = { name = A.Skill_Surprise_Attack, tooltip = T.Skill_Surprise_Attack }, -- Major Fracture (Surprise Attack)
     [34737] = { tooltip = A.Skill_Concealed_Weapon }, -- Off Balance (Concealed Weapon)
     [34736] = { tooltip = T.Generic_Stun }, -- Concealed Weapon (Concealed Weapon)
 
@@ -4021,46 +4019,44 @@ E.EffectOverride = {
 
     -- Path of Darkness / Twisting Path / Refreshing Path
     [33195] = { tooltip = T.Skill_Path_of_Darkness }, -- Path of Darkness (Path of Darkness)
-    [33210] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Path_of_Darkness }, -- Major Expedition (Path of Darkness)
+    [33210] = { tooltip = A.Skill_Path_of_Darkness }, -- Major Expedition (Path of Darkness)
     [36049] = { tooltip = T.Skill_Twisting_Path }, -- Twisting Path (Twisting Path)
-    [36050] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Twisting_Path }, -- Major Expedition (Twisting Path)
+    [36050] = { tooltip = A.Skill_Twisting_Path }, -- Major Expedition (Twisting Path)
     [36052] = { tooltip = T.Generic_AOE_Magic, tooltipValue2 = 1, groundLabel = true }, -- Twisting Path (Twisting Path)
     [36028] = { tooltip = T.Skill_Refreshing_Path }, -- Refreshing Path (Refreshing Path)
-    [64005] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Refreshing_Path }, -- Major Expedition (Refreshing Path)
+    [64005] = { tooltip = A.Skill_Refreshing_Path }, -- Major Expedition (Refreshing Path)
     [64006] = { groundLabel = true, tooltip = T.Skill_Refreshing_Path_Ground }, -- Refreshing Path (Refreshing Path)
 
     -- Aspect of Terror / Mass Hysteria / Manifestation of Terror
     [25352] = { tooltip = T.Generic_Fear }, -- Aspect of Terror (Aspect of Terror)
-    [76683] = { name = A.Skill_Aspect_of_Terror, tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Mass Hysteria (Aspect of Terror)
     [37470] = { tooltip = T.Generic_Fear }, -- Mass Hysteria (Mass Hysteria)
-    [37473] = { tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Mass Hysteria (Mass Hysteria)
-    [37472] = { tooltip = A.Skill_Mass_Hysteria }, -- Minor Maim (Mass Hysteria)
     [37475] = { tooltip = T.Skill_Manifestation_of_Terror }, -- Manifestation of Terror (Manifestation of Terror)
     [76639] = { tooltip = T.Generic_Fear }, -- Manifestation of Terror (Manifestation of Terror)
     [76629] = { hide = true }, -- Remove Trap (Manifestation of Terror)
     [76635] = { hide = true }, -- Remove Trap (Manifestation of Terror)
     [38208] = { hide = true }, -- Birth Manifestation of Terror (Manifestation of Terror)
     [76632] = { hide = true }, -- Manifestation of Terror (Manifestation of Terror)
-    [76638] = { name = A.Skill_Manifestation_of_Terror, tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Mass Hysteria (Manifestation of Terror)
 
     -- Summon Shade / Dark Shade / Shadow Image
     [65269] = { hide = true }, -- Shade Initialize (Summon Shade - All Morphs)
     [85086] = { hide = true }, -- Boss (Summon Shade - All Morphs)
-    [33219] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds', name = A.Skill_Corrode }, -- Corrode (Shade) (Summon Shade - Summon Shade/Dark Shade)
-    [33228] = { tooltip = A.Skill_Summon_Shade }, -- Minor Maim (Summon Shade)
+    [33219] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds' }, -- Corrosive Strike (Shade) (Summon Shade - Summon Shade/Dark Shade)
+    [33228] = { tooltip = A.Skill_Corrosive_Strike }, -- Minor Maim (Summon Shade)
     [38517] = { hide = true, tooltip = T.Skill_Summon_Shade }, -- Summon Shade (Summon Shade)
 
     [35438] = { hide = true, tooltip = T.Skill_Summon_Shade }, -- Summon Shade (Dark Shade)
-    [108936] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_whirlwind.dds' }, -- Whirlwind (Dark Shade)
-    [108939] = { tooltip = A.Skill_Summon_Shade }, -- Minor Maim (Dark Shade)
+    [123945] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds', name = A.Skill_Corrosive_Strike }, -- Corrosive Flurry (Dark Shade)
+    [123946] = { tooltip = A.Skill_Corrosive_Strike }, -- Minor Maim (Dark Shade)
+    [108936] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_whirlwind.dds', name = A.Skill_Corrosive_Spin }, -- Corrosive Slash (Dark Shade)
+    [108939] = { tooltip = A.Skill_Corrosive_Spin }, -- Minor Maim (Dark Shade)
 
     [38528] = { hide = true, tooltip = T.Skill_Shadow_Image }, -- Shadow (Shadow Image)
-    [51556] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode_ranged.dds' }, -- Corrode (Shadow Image)
-    [51558] = { name = A.Skill_Minor_Maim, tooltip = A.Skill_Shadow_Image }, -- Shade Corrode (Shadow Image)
+    [51556] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode_ranged.dds' }, -- Corrosive Arrow (Shadow Image)
+    [51558] = { tooltip = A.Skill_Corrosive_Arrow }, -- Minor Maim (Shadow Image)
 
     -- Consuming Darkness / Bolstering Darkness / Veil of Blades
-    [37729] = { tooltip = T.Generic_Invisibility }, -- Hidden Refresh (Hidden Refresh)
-    [37732] = { tooltip = T.Generic_HoT, tooltipValue2 = 0.5 }, -- Hidden Refresh (Hidden Refresh)
+    [37729] = { tooltip = T.Skill_Hidden_Refresh, hideReduce = true }, -- Hidden Refresh (Hidden Refresh)
+    [37732] = { tooltip = T.Skill_Hidden_Refresh }, -- Hidden Refresh (Hidden Refresh)
     [108808] = { hide = true}, -- Synergy Damage Bonus (Consuming Darkness - Hidden Refresh Synergy)
     [25411] = { tooltip = T.Skill_Consuming_Darkness }, -- Consuming Darkness (Consuming Darkness)
     [44871] = { forcedContainer = 'short', tooltip = A.Skill_Consuming_Darkness, groundLabel = true }, -- Major Protection (Consuming Darkness)
@@ -6361,8 +6357,8 @@ E.EffectOverride = {
     [39729] = { hide = true }, -- TargetPriorityException (Dreadweaver)
     [44250] = { hide = true, icon = 'esoui/art/icons/ability_nightblade_001.dds', name = A.Skill_Summon_Shade }, -- Dark Shade (Dreadweaver)
     [89017] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = A.Skill_Weakness, duration = -23, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = T.Skill_Weakness_NPC_Summon }, -- Dark Shade (Dreadweaver)
-    [89010] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds' }, -- Corrode (Dreadweaver)
-    [89012] = { icon = 'esoui/art/icons/ability_debuff_minor_maim.dds', tooltip = A.Skill_Corrode }, -- Minor Maim (Dreadweaver)
+    [89010] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds', name = A.Skill_Corrosive_Strike }, -- Corrode (Dreadweaver)
+    [89012] = { icon = 'esoui/art/icons/ability_debuff_minor_maim.dds', tooltip = A.Skill_Corrosive_Strike }, -- Minor Maim (Dreadweaver)
     [44323] = { icon = 'esoui/art/icons/ability_armor_003_a.dds', tooltip = T.Skill_Dampen_Magic }, -- Dampen Magic (Soulbrander)
     [44258] = { icon = 'esoui/art/icons/ability_mageguild_002.dds', name = A.Skill_Magelight, tooltip = T.Skill_Radiant_Magelight_NPC }, -- Radiant Magelight (Soulbrander)
     [44263] = { hide = true }, -- Radiant Magelight (Soulbrander)

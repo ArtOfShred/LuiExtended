@@ -3051,16 +3051,16 @@ LUIE.DebugAuras = {
 
     [18342] = true, -- Teleport Strike (Teleport Strike)
     [18346] = true, -- Teleport Strike (Teleport Strike)
-    [25887] = true, -- Teleport Strike (Teleport Strike)
+    [124803] = true, -- Minor Vulnerability (Teleport Strike)
 
     [25484] = true, -- Ambush (Ambush)
     [25485] = true, -- Ambush (Ambush)
-    [25959] = true, -- Ambush (Ambush)
+    [124804] = true, -- Minor Vulnerability (Lotus Fan)
 
     [25493] = true, -- Lotus Fan (Lotus Fan)
     [25494] = true, -- Lotus Fan (Lotus Fan)
-    [35334] = true, -- Lotus Fan (Lotus Fan)
     [35336] = true, -- Lotus Fan (Lotus Fan)
+    [124806] = true, -- Minor Vulnerability (Lotus Fan)
 
     [33375] = true, -- Blur (Blur)
     [90587] = true, -- Major Evasion (Blur)
@@ -3095,19 +3095,18 @@ LUIE.DebugAuras = {
     [36973] = true, -- Major Berserk (Reaper's Mark)
 
     [61907] = true, -- Assassin's Will (Grim Focus)
+    [122585] = true, -- Assassin's Will (Grim Focus)
     [61902] = true, -- Grim Focus (Grim Focus)
-    [64047] = true, -- Minor Berserk (Grim Focus)
     [61905] = true, -- Grim Focus (Grim Focus)
 
     [61932] = true, -- Assassin's Scourge (Relentless Focus)
+    [122587] = true, -- Death Scythe (Assassin's Scourge)
     [61927] = true, -- Relentless Focus (Relentless Focus)
-    [64051] = true, -- Minor Berserk (Relentless Focus)
-    [62056] = true, -- Minor Endurance (Relentless Focus)
     [61928] = true, -- Relentless Focus (Relentless Focus)
 
     [61930] = true, -- Assassin's Will (Merciless Resolve)
+    [122586] = true, -- Death Scythe (Merciless Resolve)
     [61919] = true, -- Merciless Resolve (Merciless Resolve)
-    [64055] = true, -- Minor Berserk (Merciless Resolve)
     [61920] = true, -- Merciless Resolve (Merciless Resolve)
 
     [33398] = true, -- Death Stroke (Death Stroke)
@@ -3178,11 +3177,10 @@ LUIE.DebugAuras = {
     [64006] = true, -- Refreshing Path (Refreshing Path)
 
     [25352] = true, -- Aspect of Terror (Aspect of Terror)
-    [76683] = true, -- Mass Hysteria (Aspect of Terror)
+    [125025] = true, -- Aspect of Terror (Aspect of Terror)
 
     [37470] = true, -- Mass Hysteria (Mass Hysteria)
-    [37473] = true, -- Mass Hysteria (Mass Hysteria)
-    [37472] = true, -- Minor Maim (Mass Hysteria)
+    [125024] = true, -- Mass Hysteria (Mass Hysteria)
 
     [37475] = true, -- Manifestation of Terror (Manifestation of Terror)
     [76628] = true, -- Manifestation of Terror (Manifestation of Terror)
@@ -3197,7 +3195,6 @@ LUIE.DebugAuras = {
     [108907] = true, -- Generic Fear Snare (Manifestation of Terror)
     [38208] = true, -- Birth Manifestation of Terror (Manifestation of Terror)
     [76632] = true, -- Manifestation of Terror (Manifestation of Terror)
-    [76638] = true, -- Mass Hysteria (Manifestation of Terror)
 
     [65269] = true, -- Shade Initialize (Summon Shade - All Morphs)
     [71904] = true, -- Player Pet Speed
@@ -3205,17 +3202,18 @@ LUIE.DebugAuras = {
     --[85086] = true, -- Boss (Summon Shade - All Morphs)
     --[85087] = true, -- Boss (Summon Shade - All Morphs)
 
-    [33219] = true, -- Corrode (Shade) (Summon Shade - Summon Shade/Dark Shade)
-    [33228] = true, -- Minor Maim (Summon Shade - Summon Shade/Dark Shade)
-
     [33211] = true, -- Summon Shade (Summon Shade)
     [38517] = true, -- Summon Shade (Summon Shade)
     [33290] = true, -- Summon Shade (Summon Shade)
+    [33219] = true, -- Corrosive Strike (Shade) (Summon Shade)
+    [33228] = true, -- Minor Maim (Summon Shade)
 
     [35434] = true, -- Dark Shade (Dark Shade)
     [35438] = true, -- Summon Shade (Dark Shade)
     [108940] = true, -- Summon Shade (Dark Shade)
-    [108936] = true, -- Whirlwind (Dark Shade)
+    [123945] = true, -- Corrosive Flurry (Dark Shade)
+    [123946] = true, -- Minor Maim (Dark Shade)
+    [108936] = true, -- Corrosive Slash (Dark Shade)
     [108939] = true, -- Minor Maim (Dark Shade)
     [108938] = true, -- Whirlwind (Dark Shade)
 
@@ -3223,7 +3221,7 @@ LUIE.DebugAuras = {
     [38528] = true, -- Shadow (Shadow Image)
     [35442] = true, -- Summon Shade (Shadow Image)
     [35451] = true, -- Shadow (Shadow Image)
-    [51556] = true, -- Corrode (Shadow Image)
+    [51556] = true, -- Corrosive Arrow (Shadow Image)
     [51558] = true, -- Shade Corrode (Shadow Image)
     [35445] = true, -- Shadow Image Teleport (Shadow Image)
 
