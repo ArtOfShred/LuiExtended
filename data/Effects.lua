@@ -2030,7 +2030,7 @@ E.EffectHideSCT = {
     [114908] = true, -- Dark Deal
     [114909] = true, -- Dark Conversion
 
-    [26098] = true, -- Zap Snare (Summon Storm Atronach - All Morphs)
+    [26098] = true, -- Atronach Zap Snare (Summon Storm Atronach - All Morphs)
     [29824] = true, -- Negate Magic
     [47147] = true, -- Negate Magic
     [47160] = true, -- Suppression Field
@@ -4161,15 +4161,9 @@ E.EffectOverride = {
     [24576] = { tooltip = T.Generic_Stun }, -- Defensive Rune (Defensive Rune)
 
     -- Dark Exchange / Dark Deal / Dark Conversion
-    [24585] = { icon = 'esoui/art/icons/ability_sorcerer_dark_exchange.dds' }, -- Dark Exchange (Dark Exchange)
-    [24587] = { icon = 'esoui/art/icons/ability_sorcerer_dark_exchange.dds', name = A.Skill_Dark_Exchange }, -- Dark Exchange Heal (Dark Exchange)
     [114903] = { tooltip = T.Generic_Magicka_Regen, tooltipValue2 = 1 }, -- Dark Exchange (Dark Exchange)
-    [24596] = { icon = 'esoui/art/icons/ability_sorcerer_dark_deal.dds', name = A.Skill_Dark_Deal }, -- Dark Exchange (Dark Deal)
-    [24597] = { icon = 'esoui/art/icons/ability_sorcerer_dark_deal.dds', name = A.Skill_Dark_Deal }, -- Dark Exchange Heal (Dark Deal)
     [114908] = { tooltip = T.Generic_Stamina_Regen, tooltipValue2 = 1 }, -- Dark Deal (Dark Deal)
-    [24591] = { icon = 'esoui/art/icons/ability_sorcerer_dark_conversion.dds', name = A.Skill_Dark_Conversion }, -- Dark Exchange (Dark Conversion)
-    [24592] = { icon = 'esoui/art/icons/ability_sorcerer_dark_conversion.dds', name = A.Skill_Dark_Conversion }, -- Dark Exchange Heal (Dark Conversion)
-    [114909] = { icon = 'esoui/art/icons/ability_sorcerer_dark_conversion.dds', name = A.Skill_Dark_Conversion, tooltip = T.Generic_Magicka_Regen, tooltipValue2 = 1 }, -- Dark Exchange (Dark Exchange)
+    [114909] = { tooltip = T.Generic_Magicka_Regen, tooltipValue2 = 1 }, -- Dark Conversion (Dark Conversion)
 
     -- Daedric Mines / Daedric Tomb / Daedric Minefield
     [24830] = { tooltip = T.Skill_Daedric_Mines }, -- Daedric Mines (Daedric Mines)
@@ -4221,18 +4215,16 @@ E.EffectOverride = {
     [28027] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_kick.dds', name = A.Skill_Kick }, -- Kick (Summon Winged Twilight - All Morphs)
     [24613] = { tooltip = T.Skill_Winged_Twilight }, -- Summon Winged Twilight (Summon Winged Twilight)
     [24739] = { hide = true }, -- Summon Winged Twilight (Summon Winged Twilight)
-    [108847] = { name = A.Skill_Winged_Twilight_Restore, icon = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds' }, -- Summon Twilight Matriarch (Summon Winged Twilight)
-    [108846] = { name = A.Skill_Winged_Twilight_Restore, icon = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds' }, -- Summon Twilight Matriarch (Summon Winged Twilight)
+    [108847] = { icon = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds' }, -- Summon Twilight Matriarch (Summon Winged Twilight)
+    [108846] = { icon = 'esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds' }, -- Summon Twilight Matriarch (Summon Winged Twilight)
     [24636] = { tooltip = T.Skill_Twilight_Tormentor }, -- Summon Twilight Tormentor (Summon Twilight Tormentor)
     [24741] = { hide = true }, -- Twilight Tormentor (Summon Twilight Tormentor)
-    [77354] = { name = A.Skill_Tormentor_Damage_Boost, tooltip = T.Skill_Tormentor_Damage_Boost }, -- Summon Twilight Tormentor (Summon Twilight Tormentor)
-    [88937] = { name = A.Skill_Tormentor_Damage_Boost, tooltip = T.Skill_Tormentor_Damage_Boost_Self }, -- Twilight Tormentor (Summon Twilight Tormentor)
+    [77354] = { tooltip = T.Skill_Tormentor_Damage_Boost }, -- Twilight Tormentor Enrage (Summon Twilight Tormentor)
+    [88937] = { tooltip = T.Skill_Tormentor_Damage_Boost_Self }, -- Twilight Tormentor Enrage (Summon Twilight Tormentor)
     [117274] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_zap.dds', name = A.Skill_Zap }, -- Twilight Tormentor Zap (Summon Twilight Tormentor)
     [117273] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_kick.dds', name = A.Skill_Kick }, -- Twilight Tormentor Kick (Summon Twilight Tormentor)
     [24639] = { tooltip = T.Skill_Twilight_Matriarch }, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
     [24742] = { hide = true }, -- Twilight Matriarch (Summon Twilight Matriarch)
-    [77407] = { name = A.Skill_Twilight_Matriarch_Restore }, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
-    [77371] = { name = A.Skill_Twilight_Matriarch_Restore }, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
     [117321] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_zap.dds', name = A.Skill_Zap }, -- Twilight Matriarch Zap (Summon Twilight Matriarch)
     [117320] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_kick.dds', name = A.Skill_Kick }, -- Twilight Matriarch Kick (Summon Twilight Matriarch)
 
@@ -4328,7 +4320,6 @@ E.EffectOverride = {
     [114769] = { icon = 'esoui/art/icons/ability_sorcerer_power_overload.dds' }, -- Power Overload Light Attack (Power Overload)
     [24804] = { tooltip = T.Skill_Energy_Overload }, -- Energy Overload (Energy Overload)
     [114773] = { icon = 'esoui/art/icons/ability_sorcerer_energy_overload.dds' }, -- Energy Overload Light Attack (Energy Overload)
-    [114798] = { icon = 'esoui/art/icons/ability_sorcerer_energy_overload.dds', name = A.Skill_Energy_Overload_Heavy }, -- Power Overload Heavy Attack (Energy Overload)
     [29740] = { icon = 'esoui/art/icons/ability_sorcerer_energy_overload.dds' }, -- Energy Overload (Energy Overload)
 
     ----------------------------------------------------------------

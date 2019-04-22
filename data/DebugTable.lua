@@ -3450,18 +3450,18 @@ LUIE.DebugAuras = {
 
     [24584] = true, -- Dark Exchange (Dark Exchange)
     [24585] = true, -- Dark Exchange (Dark Exchange)
-    [24587] = true, -- Dark Exchange Heal (Dark Exchange)
+    [24587] = true, -- Dark Exchange (Dark Exchange)
     [114903] = true, -- Dark Exchange (Dark Exchange)
 
     [24595] = true, -- Dark Deal (Dark Deal)
-    [24596] = true, -- Dark Exchange (Dark Deal)
-    [24597] = true, -- Dark Exchange Heal (Dark Deal)
+    [24596] = true, -- Dark Deal (Dark Deal)
+    [24597] = true, -- Dark Deal (Dark Deal)
     [114908] = true, -- Dark Deal (Dark Deal)
 
     [24589] = true, -- Dark Conversion (Dark Conversion)
-    [24591] = true, -- Dark Exchange (Dark Conversion)
-    [24592] = true, -- Dark Exchange Heal (Dark Conversion)
-    [114909] = true, -- Dark Deal (Dark Conversion)
+    [24591] = true, -- Dark Conversion (Dark Conversion)
+    [24592] = true, -- Dark Conversion (Dark Conversion)
+    [114909] = true, -- Dark Conversion (Dark Conversion)
 
     [24828] = true, -- Daedric Mines (Daedric Mines)
     [24830] = true, -- Daedric Mines (Daedric Mines)
@@ -3566,8 +3566,8 @@ LUIE.DebugAuras = {
     [24639] = true, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
     [24742] = true, -- Twilight Matriarch (Summon Twilight Matriarch)
     [77369] = true, -- Twilight Matriarch Restore (Summon Twilight Matriarch)
-    [77407] = true, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
-    [77371] = true, -- Summon Twilight Matriarch (Summon Twilight Matriarch)
+    [77407] = true, -- Twilight Matriarch Restore (Summon Twilight Matriarch)
+    [77371] = true, -- Twilight Matriarch Restore (Summon Twilight Matriarch)
     [117320] = true, -- Twilight Matriarch Kick (Summon Twilight Matriarch)
     [117321] = true, -- Twilight Matriarch Zap (Summon Twilight Matriarch)
 
@@ -3575,8 +3575,8 @@ LUIE.DebugAuras = {
     [24741] = true, -- Twilight Tormentor (Summon Twilight Tormentor)
     [36735] = true, -- Resto Twilight (Summon Twilight Tormentor)
     [77140] = true, -- Summon Twilight Tormentor (Summon Twilight Tormentor)
-    [77354] = true, -- Summon Twilight Tormentor (Summon Twilight Tormentor)
-    [88937] = true, -- Twilight Tormentor (Summon Twilight Tormentor)
+    [77354] = true, -- Twilight Tormentor Enrage (Summon Twilight Tormentor)
+    [88937] = true, -- Twilight Tormentor Enrage (Summon Twilight Tormentor)
     [77368] = true, -- Twilight Tormentor Damage Bonu (Summon Twilight Tormentor)
     [117273] = true, -- Twilight Tormentor Kick (Summon Twilight Tormentor)
     [117274] = true, -- Twilight Tormentor Zap (Summon Twilight Tormentor)
@@ -3616,7 +3616,7 @@ LUIE.DebugAuras = {
     [77457] = true, -- Guard CC Break Anim (Summon Storm Atronach - All Morphs)
     [77455] = true, -- Guard CC Immunity (Summon Storm Atronach - All Morphs)
     [23428] = true, -- Atronach Zap (Summon Storm Atronach - All Morphs)
-    [26098] = true, -- Zap Snare (Summon Storm Atronach - All Morphs)
+    [26098] = true, -- Atronach Zap Snare (Summon Storm Atronach - All Morphs)
 
     [23634] = true, -- Summon Storm Atronach (Summon Storm Atronach)
     [23639] = true, -- Summon Storm Atronach (Summon Storm Atronach)
@@ -3765,7 +3765,7 @@ LUIE.DebugAuras = {
     [114773] = true, -- Energy Overload Light Attack (Energy Overload - Light Attack)
     [114797] = true, -- Energy Overload Heavy Attack (Energy Overload - Heavy Attack)
     [114799] = true, -- Controlled Fury Cost (Energy Overload - Heavy Attack)
-    [114798] = true, -- Power Overload Heavy Attack (Energy Overload - Heavy Attack)
+    [114798] = true, -- Energy Overload Heavy Attack (Energy Overload - Heavy Attack)
     [29740] = true, -- Energy Overload (Energy Overload)
 
     -------------------------------------
