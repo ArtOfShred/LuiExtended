@@ -662,6 +662,8 @@ E.EffectCreateSkillAura = {
         -- removeOnEnd = true -- Remove this aura when one of these effects ends.
         -- consolidate = true -- Also use this when consolidated auras is enabled.
         -- extendedDisplay = true -- This will only display if the option to display single effects is enabled as well.
+        -- consolidateNewId = true -- This will consolidate the new aura if consolidate is active (for fake major/minor effects we have to create in some cases) - Basically reverse logic, if Consolidate is enabled - hide
+        -- consolidateNewIdExtended = true -- This will consolidate the new aura if consolidate is active (for fake major/minor effects we have to create in some cases) - Basically reverse logic, if Consolidate Single is enabled - hide
         -- requiredStack = number -- Requires this number of stacks to apply
 
     -- Dragonknight
@@ -685,7 +687,10 @@ E.EffectCreateSkillAura = {
     [90593] = { removeOnEnd = false, consolidate = true, abilityId = 35414 }, -- Major Evasion --> Mirage
     [61817] = { removeOnEnd = false, consolidate = true, abilityId = 35414 }, -- Minor Resolve --> Mirage
     [68512] = { removeOnEnd = false, consolidate = true, abilityId = 35414 }, -- Minor Ward --> Mirage
-    [90620] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 35419 }, -- Major Evasion --> Double Take
+    [90620] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 35419 }, -- Major Evasion --> Phantasmal Escape
+    [25377] = { alwaysShow = true, removeOnEnd = true, abilityId = 108913, consolidateNewIdExtended = true }, -- Dark Cloak --> Minor Protection
+    [36947] = { alwaysShow = true, removeOnEnd = true, abilityId = 125315, consolidateNewIdExtended = true }, -- Debilitate --> Minor Magickasteal
+
     [33317] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 33316  }, --> Major Sorcery --> Drain Power
     [36903] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 36901 }, --> Major Brutality --> Power Extraction
     [62240] = { removeOnEnd = false, consolidate = true, abilityId = 36891 }, -- Major Sorcery --> Sap Essence
@@ -901,7 +906,7 @@ E.BarHighlightOverride = {
     [25484] = { newId = 124804 }, -- Ambush --> Minor Vulnerability
     [33375] = { newId = 90587, showFakeAura = true, noRemove = true }, -- Blur --> Major Evasion
     [35414] = { newId = 90593, showFakeAura = true, noRemove = true }, -- Mirage --> Major Evasion
-    [35419] = { newId = 90620, showFakeAura = true, noRemove = true }, -- Double Take --> Major Evasion
+    [35419] = { newId = 90620, showFakeAura = true, noRemove = true }, -- Phantasmal Escape --> Major Evasion
     [61907] = { newId = 61902 }, -- Grim Focus --> Assassin's Will
     [61932] = { newId = 61927 }, -- Relentless Focus --> Assassin's Scourge
     [61930] = { newId = 61919 }, -- Merciless Resolve --> Assassin's Will
@@ -930,9 +935,9 @@ E.BarHighlightOverride = {
     [33308] = { newId = 108925, secondary = true, noRemove = true }, -- Malevolent Offering
     [34721] = { newId = 108927, secondary = true, noRemove = true }, -- Shrewd Offering
     [34727] = { newId = 108932, secondary = true, noRemove = true }, -- Healthy Offering
-    [33326] = { newId = 33329 }, -- Cripple
-    [36943] = { newId = 36950 }, -- Debilitate
-    [36957] = { newId = 36965 }, -- Crippling Grasp
+    [33326] = { newId = 33333 }, -- Cripple
+    [36943] = { newId = 36947 }, -- Debilitate
+    [36957] = { newId = 36960 }, -- Crippling Grasp
     [33316] = { newId = 33317, showFakeAura = true, noRemove = true }, -- Drain Power --> Major Sorcery
     [36901] = { newId = 36903, showFakeAura = true, noRemove = true }, -- Power Extraction --> Major Brutality
     [36891] = { newId = 62240, showFakeAura = true, noRemove = true }, -- Sap Essence --> Major Sorcery
@@ -3953,13 +3958,13 @@ E.EffectOverride = {
     [124806] = { tooltip = A.Skill_Lotus_Fan }, -- Minor Vulnerability (Lotus Fan)
     [124804] = { tooltip = A.Skill_Ambush }, -- Minor Vulnerability (Ambush)
 
-    -- Blur / Mirage / Double Take
+    -- Blur / Mirage / Phantasmal Escape
     [90587] = { consolidateExtra = true, tooltip = A.Skill_Blur }, -- Major Evasion (Blur)
     [90593] = { consolidate = true, tooltip = A.Skill_Mirage }, -- Major Evasion (Mirage)
     [61817] = { consolidate = true, tooltip = A.Skill_Mirage }, -- Minor Resolve (Mirage)
     [68512] = { consolidate = true, tooltip = A.Skill_Mirage }, -- Minor Ward (Mirage)
-    [90620] = { consolidateExtra = true, tooltip = A.Skill_Double_Take }, -- Major Evasion (Double Take)
-    [61833] = { tooltip = A.Skill_Double_Take }, -- Major Expedition (Double Take)
+    [90620] = { consolidateExtra = true, tooltip = A.Skill_Double_Take }, -- Major Evasion (Phantasmal Escape)
+    [61833] = { tooltip = T.Innate_Immobilize_Immunity }, -- Phantasmal Escape (Phantasmal Escape)
 
     -- Mark Target / Piercing Mark / Reaper's Mark
     [33363] = { consolidate = true, tooltip = A.Skill_Mark_Target }, -- Major Breach (Mark Target)
@@ -3992,7 +3997,7 @@ E.EffectOverride = {
     [61389] = { icon = 'esoui/art/icons/ability_nightblade_007.dds', name = A.Skill_Death_Stroke, tooltip = T.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Death Stroke)
     [36509] = { tooltip = A.Skill_Incapacitating_Strike }, -- Major Defile (Incapacitating Strike)
     [61393] = { name = A.Skill_Incapacitating_Strike, tooltip = T.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Incapacitating Strike)
-    [113110] = { tooltip = A.Skill_Incapacitating_Strike }, -- Minor Mangle (Incapacitating Strike)
+    [113110] = { tooltip = A.Skill_Incapacitating_Strike, consolidateExtra = true }, -- Minor Mangle (Incapacitating Strike)
     [113107] = { icon = 'esoui/art/icons/ability_nightblade_007_c.dds', name = A.Skill_Incapacitating_Strike, tooltip = T.Skill_Incapacitating_Strike }, -- Damage Taken Increased (Incapacitating Strike)
     [113109] = { icon = 'esoui/art/icons/ability_nightblade_007_c.dds', tooltip = T.Skill_Incapacitating_Strike, hideReduce = true }, -- Incapacitating Strike (Incapacitating Strike)
     [36515] = { tooltip = A.Skill_Soul_Harvest }, -- Major Defile (Soul Harvest)
@@ -4015,7 +4020,7 @@ E.EffectOverride = {
     [25381] = { hide = true }, -- Shadowy Disguise (Shadowy Disguise)
     [62141] = { tooltip = T.Skill_Shadowy_Disguise, tooltipValue2Id = 25381 }, -- Shadowy Disguise (Shadowy Disguise)
     [25377] = { tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Dark Cloak (Dark Cloak)
-    [108913] = { consolidate = true, tooltip = A.Skill_Dark_Cloak }, -- Minor Protection (Dark Cloak)
+    [108913] = { tooltip = A.Skill_Dark_Cloak }, -- Minor Protection (Dark Cloak)
 
     -- Path of Darkness / Twisting Path / Refreshing Path
     [33195] = { tooltip = T.Skill_Path_of_Darkness }, -- Path of Darkness (Path of Darkness)
@@ -4081,17 +4086,14 @@ E.EffectOverride = {
     [108934] = { tooltip = A.Skill_Healthy_Offering }, -- Minor Mending (Healthy Offering)
 
     -- Cripple / Debilitate / Crippling Grasp
-    [33329] = { tooltip = T.Skill_Cripple, tooltipValue2 = 30 }, -- Cripple (Cripple)
+    [33333] = { tooltip = T.Skill_Cripple, tooltipValue2 = 30 }, -- Cripple (Cripple)
     [33327] = { icon = 'esoui/art/icons/ability_nightblade_006.dds', tooltip = T.Skill_Cripple, tooltipValue2 = 30, hideReduce = true }, -- Cripple (Cripple)
-    [33328] = { tooltip = A.Skill_Cripple }, -- Major Expedition (Cripple)
     [36943] = { hide = true }, -- Debilitate (Debilitate)
-    [36950] = { tooltip = T.Skill_Cripple, tooltipValue2 = 50 }, -- Debilitate (Debilitate)
+    [36947] = { tooltip = T.Skill_Cripple, tooltipValue2 = 50 }, -- Debilitate (Debilitate)
     [36945] = { icon = 'esoui/art/icons/ability_nightblade_006_a.dds', tooltip = T.Skill_Cripple, tooltipValue2 = 50, hideReduce = true }, -- Debilitate (Debilitate)
-    [36946] = { tooltip = A.Skill_Debilitate }, -- Major Expedition (Debilitate)
-    [62196] = { icon = 'esoui/art/icons/ability_nightblade_006_a.dds' }, -- Debilitate (Debilitate)
-    [36965] = { tooltip = T.Skill_Crippling_Grasp }, -- Crippling Grasp (Crippling Grasp)
+    [125315] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds', tooltip = A.Skill_Debilitate }, -- Minor Magickasteal (Debilitate)
+    [36960] = { tooltip = T.Skill_Crippling_Grasp }, -- Crippling Grasp (Crippling Grasp)
     [36958] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds', tooltip = T.Skill_Crippling_Grasp, hideReduce = true }, -- Crippling Grasp (Crippling Grasp)
-    [36959] = { tooltip = A.Skill_Crippling_Grasp }, -- Major Expedition (Crippling Grasp)
     [36963] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds' }, -- Crippling Grasp (Crippling Grasp)
 
     -- Siphoning Strikes / Leeching Strikes / Siphoning Attacks
@@ -4104,7 +4106,7 @@ E.EffectOverride = {
     -- Drain Power / Power Extraction / Sap Essence
     [33317] = { consolidateExtra = true, tooltip = A.Skill_Drain_Power }, -- Major Sorcery (Drain Power)
     [36903] = { consolidateExtra = true, tooltip = A.Skill_Power_Extraction }, -- Major Brutality (Power Extraction)
-    [62240] = { consolidate = true, tooltip = A.Skill_Sap_Essence }, -- Major Sorcery (Sap Essence)
+    [62240] = { consolidateExtra = true, tooltip = A.Skill_Sap_Essence }, -- Major Sorcery (Sap Essence)
     [36899] = { icon = 'esoui/art/icons/ability_nightblade_013_a.dds', name = A.Skill_Sap_Essence }, -- Sap Will (Sap Essence)
 
     -- Soul Shred / Soul Siphon / Soul Tether

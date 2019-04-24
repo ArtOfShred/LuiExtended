@@ -1768,18 +1768,20 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
                     if ( SCB.SV.ExtraBuffs ) or ( E.EffectCreateSkillAura[abilityId].consolidate and SCB.SV.ExtraConsolidate ) or ( E.EffectCreateSkillAura[abilityId].alwaysShow ) then
                         if ( not E.EffectCreateSkillAura[abilityId].extendedDisplay ) or (E.EffectCreateSkillAura[abilityId].extendedDisplay and SCB.SV.ExtraExpanded) then
-                            local icon = E.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
-                            LUIE.EffectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].abilityId ] = {
-                                target=unitTag, type=effectType,
-                                id=id, name=name, icon=icon,
-                                dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                                forced=forcedType,
-                                restart=true, iconNum=0,
-                                stack = 0,
-                                unbreakable=unbreakable,
-                                groundLabel = groundLabel,
-                                toggle = toggle,
-                            }
+                            if ( ( E.EffectCreateSkillAura[abilityId].consolidateNewIdExtended and not (SCB.SV.ExtraExpanded and SCB.SV.ExtraConsolidate) ) or ( E.EffectCreateSkillAura[abilityId].consolidateNewId and not SCB.SV.ExtraConsolidate) ) or not (E.EffectCreateSkillAura[abilityId].consolidateNewIdExtended or E.EffectCreateSkillAura[abilityId].consolidateNewId) then
+                                local icon = E.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
+                                LUIE.EffectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].abilityId ] = {
+                                    target=unitTag, type=effectType,
+                                    id=id, name=name, icon=icon,
+                                    dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                                    forced=forcedType,
+                                    restart=true, iconNum=0,
+                                    stack = 0,
+                                    unbreakable=unbreakable,
+                                    groundLabel = groundLabel,
+                                    toggle = toggle,
+                                }
+                            end
                         end
                     end
                 end

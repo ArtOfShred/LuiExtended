@@ -516,7 +516,6 @@ local AbilityTables = {
     Skill_Bolstering_Darkness         = 36493,
     Skill_Veil_of_Blades              = 36485,
     Skill_Healthy_Offering            = 34727,
-    Skill_Cripple                     = 33326,
     Skill_Debilitate                  = 36943,
     Skill_Crippling_Grasp             = 36957,
     Skill_Drain_Power                 = 33316,

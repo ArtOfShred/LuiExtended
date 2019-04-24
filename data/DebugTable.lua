@@ -3070,9 +3070,9 @@ LUIE.DebugAuras = {
     [61817] = true, -- Minor Resolve (Mirage)
     [68512] = true, -- Minor Ward (Mirage)
 
-    [35419] = true, -- Double Take (Double Take)
+    [35419] = true, -- Phantasmal Escape (Phantasmal Escape)
     [90620] = true, -- Major Evasion (Double Take)
-    [61833] = true, -- Major Expedition (Double Take)
+    [61833] = true, -- Phantasmal Escape (Phantasmal Escape)
 
     [33357] = true, -- Mark Target (Mark Target)
     [33363] = true, -- Major Breach (Mark Target)
@@ -3277,25 +3277,17 @@ LUIE.DebugAuras = {
     [108934] = true, -- Minor Mending (Healthy Offering)
 
     [33326] = true, -- Cripple (Cripple)
-    [33329] = true, -- Cripple (Cripple)
     [33333] = true, -- Cripple (Cripple)
     [33327] = true, -- Cripple (Cripple)
-    [33328] = true, -- Major Expedition (Cripple)
-    [33339] = true, -- Summon Shade (Cripple)
 
     [36943] = true, -- Debilitate (Debilitate)
-    [36950] = true, -- Debilitate (Debilitate)
     [36947] = true, -- Debilitate (Debilitate)
     [36945] = true, -- Debilitate (Debilitate)
-    [36946] = true, -- Major Expedition (Debilitate)
-    [62196] = true, -- Debilitate (Debilitate)
+    [125315] = true, -- Minor Magickasteal (Debilitate)
 
     [36957] = true, -- Crippling Grasp (Crippling Grasp)
-    [36965] = true, -- Crippling Grasp (Crippling Grasp)
     [36960] = true, -- Crippling Grasp (Crippling Grasp)
     [36958] = true, -- Crippling Grasp (Crippling Grasp)
-    [36959] = true, -- Major Expedition (Crippling Grasp)
-    [36961] = true, -- Crippling Grasp (Crippling Grasp)
     [36963] = true, -- Crippling Grasp (Crippling Grasp)
     [36964] = true, -- Crippling Grasp (Crippling Grasp)
 
