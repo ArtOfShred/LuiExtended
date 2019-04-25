@@ -1105,9 +1105,9 @@ function SCB.Buff_OnMouseEnter(control)
                 if E.EffectOverride[control.effectId].tooltipValue2 then
                     value2 = E.EffectOverride[control.effectId].tooltipValue2
                 elseif E.EffectOverride[control.effectId].tooltipValue2Mod then
-                    value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Mod * 10) + 0.5) / 10
+                    value2 = math.floor( duration + E.EffectOverride[control.effectId].tooltipValue2Mod + 0.5 )
                 elseif E.EffectOverride[control.effectId].tooltipValue2Id then
-                    value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
+                    value2 = math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
                 else
                     value2 = 0
                 end
@@ -1155,9 +1155,9 @@ function SCB.Buff_OnMouseEnter(control)
                         if E.EffectOverride[control.effectId].tooltipValue2 then
                             value2 = E.EffectOverride[control.effectId].tooltipValue2
                         elseif E.EffectOverride[control.effectId].tooltipValue2Mod then
-                            value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Mod * 10) + 0.5) / 10
+                            value2 = math.floor( duration + E.EffectOverride[control.effectId].tooltipValue2Mod + 0.5 )
                         elseif E.EffectOverride[control.effectId].tooltipValue2Id then
-                            value2 =  math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
+                            value2 = math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
                         else
                             value2 = 0
                         end
@@ -2530,6 +2530,10 @@ function SCB.ReloadEffects(unitTag)
         if SCB.SV.ShowRecall and not SCB.SV.HidePlayerDebuffs then
             SCB.ShowRecallCooldown()
         end
+        -- Draw Bound Aegis buffs if player is Sorcerer
+        if GetUnitClassId("player") == 2 then
+            SCB.DrawBoundAegisBuffs()
+        end
     end
 
     -- TARGET SPECIFIC
@@ -3076,6 +3080,9 @@ end
 function SCB.DrawBoundAegisBuffs()
     LUIE.EffectsList["player1"][999008] = nil
     LUIE.EffectsList["player1"][999009] = nil
+
+    -- If we have Consolidate enabled then don't create these auras
+    if SCB.SV.ExtraConsolidate then return end
 
     for slotNum = 3, 8 do
         local abilityId = GetSlotBoundId(slotNum)

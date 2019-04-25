@@ -3866,8 +3866,6 @@ LUIE.DebugAuras = {
     [15544] = true, -- Toppling Charge (Toppling Charge)
     [15546] = true, -- Toppling Charge (Toppling Charge)
     [26518] = true, -- Charge (Toppling Charge)
-    [44422] = true, -- Toppling Charge (Toppling Charge)
-    [115940] = true, -- Toppling Charge (Toppling Charge)
 
     [108924] = true, -- Synergy Damage Bonus (Spear Shards - All Ranks)
     [94973] = true, -- Blessed Shards (Spear Shards - All Ranks)
@@ -3929,10 +3927,10 @@ LUIE.DebugAuras = {
     [62550] = true, -- Radial Sweep (Radial Sweep)
 
     [22144] = true, -- Empowering Sweep (Empowering Sweep)
-    [22146] = true, -- Empowering Sweep (Empowering Sweep)
-    [55214] = true, -- Empowering Sweep (Empowering Sweep)
-    [62599] = true, -- Radial Sweep (Empowering Sweep)
-    [62598] = true, -- Radial Sweep (Empowering Sweep)
+    [122288] = true, -- Empowering Sweep (Empowering Sweep)
+    [55214] = true, -- Empower (Empowering Sweep)
+    [62599] = true, -- Empowering Sweep (Empowering Sweep)
+    [62598] = true, -- Empowering Sweep (Empowering Sweep)
 
     [22139] = true, -- Crescent Sweep (Crescent Sweep)
     [22143] = true, -- Crescent Sweep (Crescent Sweep)
@@ -3976,7 +3974,7 @@ LUIE.DebugAuras = {
     [25802] = true, -- Purifying Light (Purifying Light)
     [89825] = true, -- Purifying Light (Purifying Light)
     [27544] = true, -- Purifying Light (Purifying Light)
-    [68581] = true, -- Purifying Light Tick (Purifying Light)
+    [68581] = true, -- Purifying Light (Purifying Light)
     [69168] = true, -- Purifying Light Heal FX (Purifying Light)
     [21908] = true, -- Purifying Light (Purifying Light)
 
@@ -3995,8 +3993,8 @@ LUIE.DebugAuras = {
     [68729] = true, -- Total Dark (Total Dark)
 
     [22004] = true, -- Unstable Core (Unstable Core)
-    [100211] = true, -- Eclipse Trigger (Unstable Core)
-    [100210] = true, -- Eclipse (Unstable Core)
+    [100211] = true, -- Unstable Core (Unstable Core)
+    [100210] = true, -- Unstable Core (Unstable Core)
     [22005] = true, -- Unstable Core (Unstable Core)
 
     [63029] = true, -- Radiant Destruction (Radiant Destruction)
@@ -4045,7 +4043,6 @@ LUIE.DebugAuras = {
     [22001] = true, -- Solar Disturbance (Solar Disturbance)
     [21759] = true, -- Solar Disturbance (Solar Disturbance)
     [21760] = true, -- Solar Disturbance (Solar Disturbance)
-    [24307] = true, -- Solar Disturbance Snare (Solar Disturbance)
     [102776] = true, -- Supernova Synergy Anchor (Solar Disturbance)
     [31597] = true, -- Super Nova (Solar Disturbance)
 
@@ -4261,16 +4258,13 @@ LUIE.DebugAuras = {
 
     [86037] = true, -- Falcon's Swiftness (Falcon's Swiftness)
     [86267] = true, -- Major Expedition (Falcon's Swiftness)
-    [86268] = true, -- Major Endurance (Falcon's Swiftness)
 
     [86041] = true, -- Deceptive Predator (Deceptive Predator)
     [89076] = true, -- Major Expedition (Deceptive Predator)
-    [89077] = true, -- Major Endurance (Deceptive Predator)
     [114858] = true, -- Minor Evasion (Deceptive Predator)
 
     [86045] = true, -- Bird of Prey (Bird of Prey)
     [89078] = true, -- Major Expedition (Bird of Prey)
-    [89079] = true, -- Major Endurance (Bird of Prey)
     [114862] = true, -- Minor Berserk (Bird of Prey)
 
     [89363] = true, -- Feral Guardian Summon (Feral Guardian - All Morphs)
@@ -4329,13 +4323,13 @@ LUIE.DebugAuras = {
     [85585] = true, -- Healing Seed Dummy (Healing Seed)
     [85584] = true, -- Healing Seed Synergy Tick (Healing Seed)
     [85583] = true, -- Harvest (Healing Seed)
-    [85582] = true, -- Healing Seed Heal (Healing Seed)
+    [85582] = true, -- Healing Seed (Healing Seed)
 
     [85840] = true, -- Budding Seeds (Budding Seeds)
     [85842] = true, -- Budding Seeds Dummy (Budding Seeds)
     [85844] = true, -- Budding Seeds Synergy (Budding Seeds)
     [85843] = true, -- Harvest (Budding Seeds)
-    [85841] = true, -- Budding Seeds Heal (Budding Seeds)
+    [85841] = true, -- Budding Seeds (Budding Seeds)
     [85922] = true, -- Budding Seeds (Budding Seeds)
     [85925] = true, -- Budding Seeds Heal (Budding Seeds)
 
@@ -4343,7 +4337,7 @@ LUIE.DebugAuras = {
     [85847] = true, -- Corrupting Pollen Dummy (Corrupting Pollen)
     [85849] = true, -- Corrupting Pollen Synergy Tick (Corrupting Pollen)
     [85848] = true, -- Harvest (Corrupting Pollen)
-    [85846] = true, -- Corrupting Pollen Heal (Corrupting Pollen)
+    [85846] = true, -- Corrupting Pollen (Corrupting Pollen)
     [85944] = true, -- Major Defile (Corrupting Pollen)
 
     [85552] = true, -- Living Vines (Living Vines)
@@ -4386,16 +4380,16 @@ LUIE.DebugAuras = {
     [108945] = true, -- Nature's Embrace Ultimate Rest (Nature's Embrace)
 
     [85532] = true, -- Secluded Grove (Secluded Grove)
-    [85533] = true, -- Secluded Grove Instant Heal (Secluded Grove)
-    [85534] = true, -- Secluded GroveTick Heal (Secluded Grove)
+    [85533] = true, -- Secluded Grove (Secluded Grove)
+    [85534] = true, -- Secluded Grove (Secluded Grove)
 
     [85804] = true, -- Enchanted Forest (Enchanted Forest)
-    [88748] = true, -- Enchanted Forest Burst (Enchanted Forest)
-    [86357] = true, -- Enchanted Forest Ultimate Rest (Enchanted Forest)
+    [88748] = true, -- Enchanted Forest (Enchanted Forest)
+    [86357] = true, -- Enchanted Forest (Enchanted Forest)
     [88747] = true, -- Enchanted Forest (Enchanted Forest)
 
     [85807] = true, -- Healing Thicket (Healing Thicket)
-    [88750] = true, -- Healing Thicket Instant Heal (Healing Thicket)
+    [88750] = true, -- Healing Thicket (Healing Thicket)
     [91819] = true, -- Healing Thicket (Healing Thicket)
 
     [86122] = true, -- Frost Cloak (Frost Cloak)
@@ -4442,14 +4436,14 @@ LUIE.DebugAuras = {
     [86135] = true, -- Crystallized Shield (Crystallized Shield)
     [92068] = true, -- Crystalized Shield (Crystallized Shield)
     [87227] = true, -- Crystallized Shield (Crystallized Shield)
-    [87224] = true, -- Combat Restore Crystalized Shi (Crystallized Shield)
-    [87226] = true, -- Crystalized Shield Remover (Crystallized Shield)
+    [87224] = true, -- Crystallized Shield (Crystallized Shield)
+    [87226] = true, -- Crystallized Shield (Crystallized Shield)
 
     [86139] = true, -- Crystallized Slab (Crystallized Slab)
     [92168] = true, -- Crystalized Slab (Crystallized Slab)
     [88769] = true, -- Crystalized Slab Stack Counter (Crystallized Slab)
-    [88766] = true, -- Crystalized Slab Restore (Crystallized Slab)
-    [88768] = true, -- Crystalized Slab Remover (Crystallized Slab)
+    [88766] = true, -- Crystalized Slab (Crystallized Slab)
+    [88768] = true, -- Crystalized Slab (Crystallized Slab)
     [93175] = true, -- Crystallized Slab (Crystallized Slab)
 
     [86143] = true, -- Shimmering Shield (Shimmering Shield)
@@ -4460,11 +4454,11 @@ LUIE.DebugAuras = {
     [88773] = true, -- Shimmering Shield Remover (Shimmering Shield)
 
     [86175] = true, -- Frozen Gate (Frozen Gate)
-    [86256] = true, -- Frozen Gate Dummy (Frozen Gate)
-    [86264] = true, -- Frozen Gate Move Position (Frozen Gate)
+    [86256] = true, -- Frozen Gate (Frozen Gate)
+    [86264] = true, -- Frozen Gate (Frozen Gate)
     [108948] = true, -- Frozen Gate (Frozen Gate)
-    [89812] = true, -- Frozen Gate Root (Frozen Gate)
-    [87560] = true, -- Frozen Gate Root (Frozen Gate)
+    [89812] = true, -- Frozen Gate (Frozen Gate)
+    [87560] = true, -- Frozen Gate (Frozen Gate)
 
     [86179] = true, -- Frozen Device (Frozen Device)
     [92031] = true, -- Frozen Gate Dummy (Frozen Device)
@@ -4472,20 +4466,20 @@ LUIE.DebugAuras = {
     [108949] = true, -- Frozen Device (Frozen Device)
     [92038] = true, -- Frozen Gate Root (Frozen Device)
     [92039] = true, -- Frozen Gate Root (Frozen Device)
-    [92041] = true, -- Minor Maim (Frozen Device)
+    [92041] = true, -- Major Maim (Frozen Device)
 
     [88887] = true, -- Icy Escape Move Position (Frozen Retreat - Icy Escape Synergy
     [88892] = true, -- Icy Escape Cooldown (Frozen Retreat - Icy Escape Synergy
     [103321] = true, -- Major Expedition (Frozen Retreat - Icy Escape Synergy
 
     [86183] = true, -- Frozen Retreat (Frozen Retreat)
-    [92052] = true, -- Frozen Retreat Dummy (Frozen Retreat)
-    [92062] = true, -- Frozen Retreat Synergy Tick (Frozen Retreat)
-    [92053] = true, -- Frozen Retreat Move Position (Frozen Retreat)
+    [92052] = true, -- Frozen Retreat (Frozen Retreat)
+    [92062] = true, -- Frozen Retreat (Frozen Retreat)
+    [92053] = true, -- Frozen Retreat (Frozen Retreat)
     [108950] = true, -- Frozen Retreat (Frozen Retreat)
-    [92058] = true, -- Frozen Retreat Root (Frozen Retreat)
-    [92060] = true, -- Frozen Retreat Root (Frozen Retreat)
-    [92061] = true, -- Frozen Retreat Synergy Tick (Frozen Retreat)
+    [92058] = true, -- Frozen Retreat (Frozen Retreat)
+    [92060] = true, -- Frozen Retreat (Frozen Retreat)
+    [92061] = true, -- Frozen Retreat (Frozen Retreat)
 
     [86109] = true, -- Sleet Storm (Sleet Storm)
     [86249] = true, -- Major Protection (Sleet Storm)

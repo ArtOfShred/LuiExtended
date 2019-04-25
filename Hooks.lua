@@ -299,7 +299,7 @@ function LUIE.InitializeHooks()
                             if LUIE.Effects.EffectOverride[abilityId].tooltipValue2 then
                                 value2 = LUIE.Effects.EffectOverride[abilityId].tooltipValue2
                             elseif LUIE.Effects.EffectOverride[abilityId].tooltipValue2Mod then
-                                value2 =  math.floor(GetAbilityDuration(LUIE.Effects.EffectOverride[abilityId].tooltipValue2Mod * 10) + 0.5) / 10
+                                value2 = math.floor( timer + E.EffectOverride[abilityId].tooltipValue2Mod + 0.5 )
                             elseif LUIE.Effects.EffectOverride[abilityId].tooltipValue2Id then
                                 value2 =  math.floor(GetAbilityDuration(LUIE.Effects.EffectOverride[abilityId].tooltipValue2Id) + 0.5) / 1000
                             else

@@ -704,11 +704,8 @@ E.EffectCreateSkillAura = {
 
     -- Warden
     [86267] = { consolidate = true, abilityId = 86037 }, -- Major Expedition --> Falcon's Swiftness
-    [86268] = { consolidate = true, abilityId = 86037 }, -- Major Endurance --> Falcon's Swiftness
     [89076] = { consolidate = true, abilityId = 86041 }, -- Major Expedition --> Deceptive Predator
-    [89077] = { consolidate = true, abilityId = 86041 }, -- Major Endurance --> Deceptive Predator
     [89078] = { consolidate = true, abilityId = 86045 }, -- Major Expedition --> Bird of Prey
-    [89079] = { consolidate = true, abilityId = 86045 }, -- Major Endurance --> Bird of Prey
     [86300] = { consolidate = true, abilityId = 85862 }, -- Minor Intellect (Enchanted Growth)
     [87019] = { consolidate = true, abilityId = 85862 }, -- Minor Endurance (Enchanted Growth)
     [86224] = { consolidate = true, abilityId = 86122 }, -- Major Resolve --> Frost Cloak
@@ -803,7 +800,6 @@ function E.BarHighlightRefresh()
 
         -- Templar
         E.BarHighlightOverride[26792] = { duration = 8000, showFakeAura = true, secondary = true, noRemove = true } -- Biting Jabs --> Major Savagery
-        E.BarHighlightOverride[22144] = { newId = 55214 } -- Empowering Sweep --> Major Protection
 
         -- Restoration Staff
         E.BarHighlightOverride[85132] = { newId = 85154, showFakeAura = true, secondary = true, noRemove = true } -- Light's Champion --> Major Force
@@ -826,7 +822,6 @@ function E.BarHighlightRefresh()
 
         -- Templar
         E.BarHighlightOverride[26792] = { newId = 76912, duration = 2000, showFakeAura = true, noRemove = true } -- Biting Jabs
-        E.BarHighlightOverride[22144] = { newId = 62599 } -- Empowering Sweep
 
         -- Restoration Staff
         E.BarHighlightOverride[85132] = nil -- Light's Champion
@@ -2053,7 +2048,6 @@ E.EffectHideSCT = {
     [80261] = true, -- Sacred Ground (Sacred Ground) - Rite of Passage
 
     -- Actives
-    [24307] = true, -- Solar Disturbance Snare (Solar Disturbance)
     [37009] = true, -- Channeled Focus (Channeled Focus)
     [114842] = true, -- Restoring Focus (Restoring Focus)
     [63020] = true, -- Repentance Remover (Repentance)
@@ -4382,8 +4376,6 @@ E.EffectOverride = {
     [49213] = { icon = 'esoui/art/icons/ability_templar_double_tipped_charge.dds', tooltip = T.Generic_Stun }, -- Explosive Charge (Explosive Charge)
     [15546] = { tooltip = T.Generic_Stun }, -- Toppling Charge (Toppling Charge)
     [26518] = { icon = '' }, -- Charge (Toppling Charge)
-    [44422] = { name = A.Skill_Off_Balance }, -- Toppling Charge (Toppling Charge)
-    [115940] = { tooltip = T.Generic_Stun }, -- Toppling Charge (Toppling Charge)
 
     -- Spear Shards / Luminous Shards / Blazing Spear
     [108924] = { hide = true }, -- Synergy Damage Bonus (Spear Shards - Blessed Shards Synergy)
@@ -4406,23 +4398,21 @@ E.EffectOverride = {
 
     -- Radial Sweep /  Empowering Sweep / Crescent Sweep
     [62593] = { tooltip = T.Skill_Radial_Sweep }, -- Radial Sweep (Radial Sweep)
-    [55214 ] = { name = A.Skill_Major_Protection, tooltip = A.Skill_Empowering_Sweep }, -- Empowering Sweep (Empowering Sweep)
-    [62599] = { name = A.Skill_Empowering_Sweep, tooltip = T.Skill_Radial_Sweep }, -- Radial Sweep (Empowering Sweep)
-    [62598] = { name = A.Skill_Empowering_Sweep }, -- Radial Sweep (Empowering Sweep)
-    [62607] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds', tooltip = T.Skill_Radial_Sweep  }, -- Crescent Sweep (Crescent Sweep)
-    [62606] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds', name = A.Skill_Crescent_Sweep }, -- Radial Sweep (Crescent Sweep)
+    [62599] = { tooltip = T.Skill_Empowering_Sweep }, -- Empowering Sweep (Empowering Sweep)
+    [62607] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds', name = A.Skill_Crescent_Sweep, tooltip = T.Skill_Radial_Sweep  }, -- Crescent Sweep (Crescent Sweep)
+    [62606] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds' }, -- Radial Sweep (Crescent Sweep)
 
     -- Dawn's Wrath
 
     -- Sun Fire / Vampire's Bane / Reflective Light
-    [21727] = { icon = 'esoui/art/icons/ability_templar_sun_fire.dds', tooltip = T.Skill_Sun_Fire_Snare, tooltipValue2Mod = 2.3, hideReduce = true }, -- Sun Fire (Sun Fire)
-    [21728] = { tooltip = T.Skill_Sun_Fire, tooltipValue2Mod = -2.3 }, -- Sun Fire (Sun Fire)
+    [21727] = { icon = 'esoui/art/icons/ability_templar_sun_fire.dds', tooltip = T.Skill_Sun_Fire_Snare, tooltipValue2Mod = 5, hideReduce = true }, -- Sun Fire (Sun Fire)
+    [21728] = { tooltip = T.Skill_Sun_Fire, tooltipValue2Mod = -5 }, -- Sun Fire (Sun Fire)
     [62747] = { tooltip = A.Skill_Sun_Fire }, -- Major Prophecy (Sun Fire)
-    [21730] = { icon = 'esoui/art/icons/ability_templar_vampire_bane.dds', tooltip = T.Skill_Sun_Fire_Snare, tooltipValue2Mod = 4.3, hideReduce = true }, -- Vampire's Bane (Vampire's Bane)
-    [21731] = { tooltip = T.Skill_Sun_Fire, tooltipValue2Mod = -4.3 }, -- Vampire's Bane (Vampire's Bane)
+    [21730] = { icon = 'esoui/art/icons/ability_templar_vampire_bane.dds', tooltip = T.Skill_Sun_Fire_Snare, tooltipValue2Mod = 9, hideReduce = true }, -- Vampire's Bane (Vampire's Bane)
+    [21731] = { tooltip = T.Skill_Sun_Fire, tooltipValue2Mod = -9 }, -- Vampire's Bane (Vampire's Bane)
     [62751] = { tooltip = A.Skill_Vampires_Bane }, -- Major Prophecy (Vampire's Bane)
-    [21733] = { icon = 'esoui/art/icons/ability_templar_reflective_light.dds', tooltip = T.Skill_Sun_Fire_Snare, tooltipValue2Mod = 2.3, hideReduce = true }, -- Reflective Light (Reflective Light)
-    [21734] = { tooltip = T.Skill_Sun_Fire, tooltipValue2Mod = -2.3 }, -- Reflective Light (Reflective Light)
+    [21733] = { icon = 'esoui/art/icons/ability_templar_reflective_light.dds', tooltip = T.Skill_Sun_Fire_Snare, tooltipValue2Mod = 5, hideReduce = true }, -- Reflective Light (Reflective Light)
+    [21734] = { tooltip = T.Skill_Sun_Fire, tooltipValue2Mod = -5 }, -- Reflective Light (Reflective Light)
     [62755] = { tooltip = A.Skill_Reflective_Light }, -- Major Prophecy (Reflective Light)
 
     -- Solar Flare / Dark Flare / Solar Barrage
@@ -4434,11 +4424,11 @@ E.EffectOverride = {
     -- Backlash / Purifying Light / Power of the Light
     [21761] = { tooltip = T.Skill_Backlash }, -- Backlash (Backlash)
     [21765] = { tooltip = T.Skill_Purifying_Light }, -- Purifying Light (Purifying Light)
-    [68581] = { name = A.Skill_Purifying_Light, icon = 'esoui/art/icons/ability_templar_purifying_light.dds', unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = T.Skill_Purifying_Light_HoT }, -- Purifying Light Tick (Purifying Light)
+    [68581] = { tooltip = T.Skill_Purifying_Light_HoT }, -- Purifying Light Tick (Purifying Light)
     [21908] = { icon = 'esoui/art/icons/ability_templar_purifying_light.dds' }, -- Purifying Light (Purifying Light)
     [21763] = { tooltip = T.Skill_Power_of_the_Light }, -- Power of the Light (Power of the Light)
-    [64144] = { consolidate = true, tooltip = A.Skill_Power_of_the_Light }, -- Minor Fracture (Power of the Light)
-    [68588] = { consolidate = true, tooltip = A.Skill_Power_of_the_Light }, -- Minor Breach (Power of the Light)
+    [64144] = { tooltip = A.Skill_Power_of_the_Light }, -- Minor Fracture (Power of the Light)
+    [68588] = { tooltip = A.Skill_Power_of_the_Light }, -- Minor Breach (Power of the Light)
 
     -- Eclipse / Total Dark / Unstable Core
     [21776] = { tooltip = T.Skill_Eclipse }, -- Eclipse (Eclipse)
@@ -4446,8 +4436,7 @@ E.EffectOverride = {
     [63083] = { icon = 'esoui/art/icons/ability_templar_total_dark.dds' }, -- Total Dark (Total Dark)
     [68729] = { icon = 'esoui/art/icons/ability_templar_total_dark.dds' }, -- Total Dark (Total Dark)
     [22004] = { tooltip = T.Skill_Unstable_Core }, -- Unstable Core (Unstable Core)
-    [100211] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds', name = A.Skill_Unstable_Core, tooltip = T.Skill_Eclipse }, -- Eclipse Trigger (Unstable Core)
-    [100210] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds', name = A.Skill_Unstable_Core }, -- Eclipse (Unstable Core)
+    [100210] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds' }, -- Eclipse (Unstable Core)
 
     -- Radiant Destruction / Radiant Glory / Radiant Oppression
     [63029] = { tooltip = T.Skill_Radiant_Destruction }, -- Radiant Destruction (Radiant Destruction)
@@ -4468,11 +4457,10 @@ E.EffectOverride = {
     [21757] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
     [22001] = { tooltip = T.Skill_Solar_Disturbance, tooltipValue2Mod = -4.8 }, -- Solar Disturbance (Solar Disturbance)
     [21760] = { name = A.Skill_Major_Maim, tooltip = A.Skill_Solar_Disturbance }, -- Solar Disturbance (Solar Disturbance)
-    [24307] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance, internalStack = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70, hideGround = true }, -- Solar Disturbance Snare (Solar Disturbance)
 
     [21753] = { groundLabel = true, tooltip = T.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Nova
     [21756] = { groundLabel = true, tooltip = T.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Solar Prison
-    [21759] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Magic, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Solar Disturbance
+    [21759] = { groundLabel = true, tooltip = T.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Solar Disturbance
 
     -- Restoring Light
     [35632] = { tooltip = T.Generic_Magicka_Regen, tooltipValue2 = 2 }, -- Honor the Dead (Honor the Dead)
@@ -4566,7 +4554,7 @@ E.EffectOverride = {
 
     -- Swarm / Fetcher Infection / Growing Swarm
     [101703] = { tooltip = T.Generic_Magic, tooltipValue2 = 2 }, -- Swarm (Swarm)
-    [91416] = { forcedContainer = 'short', name = A.Skill_Fetcher_Infection, tooltip = T.Skill_Fetcher_Infection_Bonus }, -- Fetcher Infection Bonus Damage (Fetcher Infection)
+    [91416] = { forcedContainer = 'short', tooltip = T.Skill_Fetcher_Infection_Bonus }, -- Fetcher Infection Bonus Damage (Fetcher Infection)
     [101904] = { tooltip = T.Generic_Magic, tooltipValue2 = 2 }, -- Fetcher Infection (Fetcher Infection)
     [101944] = { tooltip = T.Skill_Growing_Swarm }, -- Growing Swarm (Growing Swarm)
     [101948] = { tooltip = T.Generic_Magic, tooltipValue2 = 2 }, -- Growing Swarm (Growing Swarm)
@@ -4586,12 +4574,9 @@ E.EffectOverride = {
 
     -- Falcon's Swiftness / Deceptive Predator / Bird of Prey
     [86267] = { consolidate = true, tooltip = A.Skill_Falcons_Swiftness }, -- Major Expedition (Falcon's Swiftness)
-    [86268] = { consolidate = true, tooltip = A.Skill_Falcons_Swiftness }, -- Major Endurance (Falcon's Swiftness)
     [89076] = { consolidate = true, tooltip = A.Skill_Deceptive_Predator }, -- Major Expedition (Deceptive Predator)
-    [89077] = { consolidate = true, tooltip = A.Skill_Deceptive_Predator }, -- Major Endurance (Deceptive Predator)
     [114858] = { tooltip = A.Skill_Deceptive_Predator }, -- Minor Evasion (Deceptive Predator)
     [89078] = { consolidate = true, tooltip = A.Skill_Bird_of_Prey }, -- Major Expedition (Bird of Prey)
-    [89079] = { consolidate = true, tooltip = A.Skill_Bird_of_Prey }, -- Major Endurance (Bird of Prey)
     [114862] = { tooltip = A.Skill_Bird_of_Prey }, -- Minor Berserk (Bird of Prey)
 
     -- Feral Guardian / Eternal Guardian / Wild Guardian
@@ -4628,22 +4613,17 @@ E.EffectOverride = {
     [108826] = { hide = true }, -- Synergy Damage Bonus (Healing Seed - Harvest Synergy)
     [85577] = { tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Harvest (Healing Seed - Harvest Synergy)
     [85578] = { tooltip = T.Skill_Healing_Seed } , -- Healing Seed (Healing Seed)
-    [85582] = { name = A.Skill_Healing_Seed }, -- Healing Seed Heal (Healing Seed)
     [85840] = { tooltip = T.Skill_Budding_Seeds } , -- Budding Seeds (Budding Seeds)
-    [85841] = { name = A.Skill_Budding_Seeds }, -- Budding Seeds (Budding Seeds)
     [85925] = { name = A.Skill_Budding_Seeds }, -- Budding Seeds (Budding Seeds)
     [85845] = { tooltip = T.Skill_Corrupting_Pollen } , -- Corrupting Pollen (Corrupting Pollen)
-    [85846] = { name = A.Skill_Corrupting_Pollen }, -- Corrupting Pollen Heal (Corrupting Pollen)
-    [85944] = { tooltip = A.Skill_Corrupting_Pollen }, -- Major Defile (Corrupting Pollen)
+    [85944] = { duration = 0, groundLabel = true, tooltip = A.Skill_Corrupting_Pollen }, -- Major Defile (Corrupting Pollen)
 
     -- Living Vines / Leeching Vines / Living Trellis
     [85552] = { tooltip = T.Skill_Living_Vines }, -- Living Vines (Living Vines)
-    [85559] = { name = A.Skill_Living_Vines }, -- Living Vines Heal (Living Vines)
     [85850] = { tooltip = T.Skill_Leeching_Vines }, -- Leeching Vines (Leeching Vines)
     [86307] = { tooltip = A.Skill_Leeching_Vines }, -- Minor Lifesteal (Leeching Vines)
     [85851] = { tooltip = T.Skill_Living_Trellis }, -- Living Trellis (Living Trellis)
-    [88721] = { name = A.Skill_Living_Trellis }, -- Living Trellis Heal (Living Trellis)
-    [88723] = { icon = 'esoui/art/icons/ability_warden_010_b.dds', name = A.Skill_Living_Trellis }, -- Living Trellis Heal Burst (Living Trellis)
+    [88723] = { icon = 'esoui/art/icons/ability_warden_010_b.dds' }, -- Living Trellis (Living Trellis)
 
     -- Lotus Flower / Green Lotus / Lotus Blossom
     [85539] = { tooltip = T.Skill_Lotus_Flower }, -- Lotus Flower (Lotus Flower)
@@ -4664,16 +4644,11 @@ E.EffectOverride = {
 
     -- Secluded Grove / Enchanted Forest / Healing Thicket
     [85532] = { tooltip = T.Skill_Secluded_Grove }, -- Secluded Grove (Secluded Grove)
-    [85533] = { name = A.Skill_Secluded_Grove }, -- Secluded Grove Instant Heal (Secluded Grove)
-    [85534] = { name = A.Skill_Secluded_Grove, groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Secluded GroveTick Heal (Secluded Grove)
-
+    [85534] = { groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Secluded Grove (Secluded Grove)
     [85804] = { tooltip = T.Skill_Secluded_Grove }, -- Enchanted Forest (Enchanted Forest)
-    [88748] = { name = A.Skill_Enchanted_Forest }, -- Enchanted Forest Burst (Enchanted Forest)
-    [86357] = { icon = 'esoui/art/icons/ability_warden_012_a.dds', name = A.Skill_Enchanted_Forest }, -- Enchanted Forest Ultimate Rest (Enchanted Forest)
+    [86357] = { icon = 'esoui/art/icons/ability_warden_012_a.dds' }, -- Enchanted Forest (Enchanted Forest)
     [88747] = { groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Enchanted Forest (Enchanted Forest)
-
     [85807] = { tooltip = T.Skill_Healing_Thicket }, -- Healing Thicket (Healing Thicket)
-    [88750] = { name = A.Skill_Healing_Thicket }, -- Healing Thicket Instant Heal (Healing Thicket)
     [91819] = { tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Healing Thicket (Healing Thicket)
 
     -- WINTER'S EMBRACE
@@ -4701,19 +4676,19 @@ E.EffectOverride = {
     [88802] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Winter's Revenge (Winter's Revenge)
 
     -- Arctic Wind / Polar Wind / Arctic Blast
-    [90833] = { tooltip = T.Skill_Arctic_Wind }, -- Arctic Wind (Arctic Wind)
-    [90835] = { tooltip = T.Skill_Arctic_Wind }, -- Polar Wind (Polar Wind)
+    [90833] = { tooltip = T.Generic_HoT, tooltipValue2 = 2 }, -- Arctic Wind (Arctic Wind)
+    [90835] = { tooltip = T.Generic_HoT, tooltipValue2 = 2 }, -- Polar Wind (Polar Wind)
     [86156] = { hide = true }, -- Artic Blast (Arctic Blast)
-    [90834] = { tooltip = T.Skill_Arctic_Wind }, -- Arctic Blast (Arctic Blast)
+    [90834] = { tooltip = T.Generic_HoT, tooltipValue2 = 2 }, -- Arctic Blast (Arctic Blast)
     [114875] = { name = A.Skill_Arctic_Blast, tooltip = T.Generic_Stun }, -- Artic Blast Stun (Artic Blast)
 
     -- Crystallized Shield / Crystallized Slab / Shimmering Shield
     [86135] = { tooltip = T.Skill_Crystallized_Shield }, -- Crystallized Shield (Crystallized Shield)
     [92068] = { icon = 'esoui/art/icons/ability_warden_002.dds', name = A.Skill_Crystallized_Shield }, -- Crystalized Shield (Crystallized Shield)
-    [87224] = { icon = 'esoui/art/icons/ability_warden_002.dds', name = A.Skill_Crystallized_Shield }, -- Combat Restore Crystalized Shi (Crystallized Shield)
+    [87224] = { icon = 'esoui/art/icons/ability_warden_002.dds' }, -- Combat Restore Crystalized Shi (Crystallized Shield)
     [86139] = { tooltip = T.Skill_Crystallized_Slab }, -- Crystallized Slab (Crystallized Slab)
     [92168] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = A.Skill_Crystallized_Slab }, -- Crystalized Slab (Crystallized Slab)
-    [88766] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = A.Skill_Crystallized_Slab }, -- Crystalized Slab Restore (Crystallized Slab)
+    [88766] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = A.Skill_Crystallized_Slab }, -- Crystalized Slab (Crystallized Slab)
     [93175] = { hide = true }, -- Crystallized Slab (Crystallized Slab)
     [86143] = { tooltip = T.Skill_Shimmering_Shield }, -- Shimmering Shield (Shimmering Shield)
     [92170] = { icon = 'esoui/art/icons/ability_warden_002_b.dds' }, -- Shimmering Shield (Shimmering Shield)
@@ -4722,21 +4697,21 @@ E.EffectOverride = {
 
     -- Frozen Gate / Frozen Device / Frozen Retreat
     [86175] = { tooltip = T.Skill_Frozen_Gate }, -- Frozen Gate (Frozen Gate)
-    [87560] = { name = A.Skill_Frozen_Gate, tooltip = T.Generic_Immobilize }, -- Frozen Gate Root (Frozen Gate)
+    [87560] = { tooltip = T.Generic_Immobilize }, -- Frozen Gate (Frozen Gate)
     [86179] = { tooltip = T.Skill_Frozen_Device }, -- Frozen Device (Frozen Device)
     [92039] = { name = A.Skill_Frozen_Device, tooltip = T.Generic_Immobilize }, -- Frozen Gate Root (Frozen Device)
-    [92041] = { tooltip = A.Skill_Frozen_Device }, -- Minor Maim (Frozen Device)
+    [92041] = { tooltip = A.Skill_Frozen_Device }, -- Major Maim (Frozen Device)
     [86183] = { tooltip = T.Skill_Frozen_Retreat }, -- Frozen Retreat (Frozen Retreat)
-    [92060] = { name = A.Skill_Frozen_Retreat, tooltip = T.Generic_Immobilize }, -- Frozen Retreat Root (Frozen Retreat)
+    [92060] = { tooltip = T.Generic_Immobilize }, -- Frozen Retreat (Frozen Retreat)
     [103321] = { tooltip = A.Skill_Icy_Escape }, -- Major Expedition (Frozen Retreat - Icy Escape Synergy)
 
     -- Sleet Storm / Northern Storm / Permafrost
     [86109] = { tooltip = T.Skill_Sleet_Storm }, -- Sleet Storm (Sleet Storm)
     [86249] = { forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Sleet_Storm }, -- Major Protection (Sleet Storm)
-    [86250] = { duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 70, hideGround = true }, -- Sleet Storm (Sleet Storm)
+    [86250] = { duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 40, hideGround = true }, -- Sleet Storm (Sleet Storm)
     [86113] = { tooltip = T.Skill_Sleet_Storm }, -- Northern Storm (Northern Storm)
     [88859] = { forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Northern_Storm }, -- Major Protection (Northern Storm)
-    [88858] = { duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 70, hideGround = true }, -- Northern Storm (Northern Storm)
+    [88858] = { duration = 0, groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 40, hideGround = true }, -- Northern Storm (Northern Storm)
     [86117] = { tooltip = T.Skill_Permafrost }, -- Permafrost (Permafrost)
     [88862] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = A.Skill_Permafrost }, -- Major Protection (Permafrost)
     [88861] = { duration = 0, groundLabel = true, tooltip = T.Skill_Permafrost_Ground, hideGround = true }, -- Permafrost (Permafrost)
@@ -10571,8 +10546,6 @@ E.FakeExternalBuffs = {
  -- Fake Debuffs applied onto the player by NPCs or Events (Hostile)
 --------------------------------------------------------------------------------------------------------------------------------
 E.FakeExternalDebuffs = {
-    -- Templar
-    [24307] = { duration = 0 }, -- Solar Disturbance Snare (Solar Disturbance)
 
     -- Destruction Staff
     [38946] = { duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
