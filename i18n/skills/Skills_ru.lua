@@ -443,8 +443,8 @@ local strings = {
     SI_LUIE_SKILL_FROZEN_GATE_TP =                       "Detonates when a enemy comes close, dealing Frost Damage, teleporting the enemy to you, and immobilizing them for |cFFFFFF3|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_FROZEN_DEVICE_TP =                     "Взрывается при приближении противника, нанося урон от Мороза, перемещая противника к вам и обездвиживая его на |cFFFFFF3|r секунды и накладывая Major Maim на |cFFFFFF4|r секунд.",
     SI_LUIE_SKILL_FROZEN_RETREAT_TP =                    "Detonates when a enemy comes close, dealing Frost Damage, teleporting the enemy to you, and immobilizing them for |cFFFFFF3|r seconds.\n\nAn ally in the portal can activate the |cFFFFFFIcy Escape|r synergy.", -- TODO: Translate
-    SI_LUIE_SKILL_SLEET_STORM_TP =                       "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second.", -- TODO: Translate
-    SI_LUIE_SKILL_PERMAFROST_TP =                        "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF70|r% every |cFFFFFF1|r second.\n\nDamaging an enemy three times with the storm will stun them for |cFFFFFF3|r seconds.", -- TODO: Translate
+    SI_LUIE_SKILL_SLEET_STORM_TP =                       "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF40|r% every |cFFFFFF1|r second.", -- TODO: Translate
+    SI_LUIE_SKILL_PERMAFROST_TP =                        "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF40|r% every |cFFFFFF1|r second.\n\nDamaging an enemy three times with the storm will stun them for |cFFFFFF3|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_PERMAFROST_GROUND_TP =                 "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF40|r%.\n\nIf you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.",
 
     ----------------------------------------------------------------
