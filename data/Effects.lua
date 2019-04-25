@@ -4455,7 +4455,7 @@ E.EffectOverride = {
     [34443] = { tooltip = T.Generic_Stun }, -- Gravity Crush (Solar Prison - Gravity Crush Synergy)
     [22003] = { tooltip = T.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
     [21757] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
-    [22001] = { tooltip = T.Skill_Solar_Disturbance, tooltipValue2Mod = -4.8 }, -- Solar Disturbance (Solar Disturbance)
+    [22001] = { tooltip = T.Skill_Solar_Disturbance, tooltipValue2Id = 21760 }, -- Solar Disturbance (Solar Disturbance)
     [21760] = { name = A.Skill_Major_Maim, tooltip = A.Skill_Solar_Disturbance }, -- Solar Disturbance (Solar Disturbance)
 
     [21753] = { groundLabel = true, tooltip = T.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Nova
