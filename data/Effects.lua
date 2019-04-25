@@ -4717,8 +4717,8 @@ E.EffectOverride = {
     [88861] = { duration = 0, groundLabel = true, tooltip = T.Skill_Permafrost_Ground, hideGround = true }, -- Permafrost (Permafrost)
     [90943] = { icon = 'esoui/art/icons/ability_warden_006_b.dds', tooltip = T.Generic_Stun }, -- Permafrost (Permafrost)
 
-    [86247] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Sleet Storm (Sleet Storm)
-    [88860] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Northern Storm (Northern Storm)
+    [86247] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 40 }, -- Sleet Storm (Sleet Storm)
+    [88860] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 40 }, -- Northern Storm (Northern Storm)
     [88863] = { groundLabel = true, tooltip = T.Skill_Permafrost_Ground, stack = 1, stackAdd = 1, stackMax = 3 }, -- Permafrost (Permafrost)
 
     ----------------------------------------------------------------
