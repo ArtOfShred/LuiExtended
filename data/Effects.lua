@@ -5297,7 +5297,7 @@ E.EffectOverride = {
     [31068] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = T.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from NPC Bite)
     [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = T.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from Player Bite)
     [32464] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Light Attack
-    [89146] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', tooltip = T.Generic_Bleed, tooltipValue2 = 2 }, -- Werewolf Bleed
+    [89146] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', tooltip = T.Generic_Bleed, tooltipValue2 = 1 }, -- Werewolf Bleed
     [32477] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Were)
     [32479] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
     [32480] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack Werewolf
@@ -5346,7 +5346,7 @@ E.EffectOverride = {
     [80190] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
     [39076] = { tooltip = T.Skill_Werewolf_Transformation }, -- Werewolf Berserker (Werewolf Berserker)
     [111844] = { icon = 'esoui/art/icons/ability_werewolf_001_b.dds', tooltip = T.Generic_Fear }, -- Werewolf Berserker
-    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', name = A.Skill_Werewolf_Bleed, tooltip = T.Generic_Bleed, tooltipValue2 = 2 }, -- Werewolf Berserker Bleed (Werewolf Bleed)
+    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', tooltip = T.Generic_Bleed, tooltipValue2 = 1 }, -- Werewolf Berserker Bleed (Werewolf Bleed)
 
     ----------------------------------------------------------------
     -- WEREWOLF QUEST ABILITIES ------------------------------------

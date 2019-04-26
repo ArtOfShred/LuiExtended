@@ -543,8 +543,8 @@ local strings = {
     SI_LUIE_SKILL_BLOOD_MOON_TP =                        "You have bitten another player. You may not do so again for |cFFFFFF7|r days.",
     SI_LUIE_SKILL_FEEDING_FREZNY_TP =                    "Empowered for |cFFFFFF<<1>>|r seconds, increasing the damage of your Light Attacks by |cFFFFFF40|r%.",
     SI_LUIE_SKILL_CLAWS_OF_LIFE_TP =                     "Afflicted with Disease Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage, your attacker heals for |cFFFFFF50|r% of the damage done.",
-    SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP =           "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF8|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.",
-    SI_LUIE_SKILL_PACK_LEADER_TP =                       "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF8|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nSummon two direwolves while transformed. If killed, they return after |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP =           "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.",
+    SI_LUIE_SKILL_PACK_LEADER_TP =                       "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nSummon two direwolves while transformed. If killed, they return after |cFFFFFF10|r seconds.",
 
     -- Vampire
     SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA =       "Noxiphilic Sanguivoria",
