@@ -7,9 +7,12 @@
 LUIE             = {}
 LUIE.name        = "LuiExtended"
 LUIE.author      = "ArtOfShred, psypanda & SpellBuilder"
-LUIE.version     = "5.8.1"
-LUIE.website     = "http://www.esoui.com/downloads/info818-LuiExtended.html"
+LUIE.version     = "5.9.0"
+LUIE.website     = "https://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github      = "https://github.com/ArtOfShred/LuiExtended"
+LUIE.feedback    = "https://github.com/ArtOfShred/LuiExtended/issues"
+LUIE.translation = "https://github.com/ArtOfShred/LuiExtended/tree/develop/i18n"
+LUIE.donation    = "https://www.paypal.me/ArtOfShred"
 
 -- Saved variables options
 LUIE.SV          = nil

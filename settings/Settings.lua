@@ -51,7 +51,6 @@ function LUIE.CreateSettings()
                 if (type(v) == 'table') then
                     CopyTable(v, dest[k])
                 end
-
                 dest[k] = v
             end
         end
@@ -108,10 +107,13 @@ function LUIE.CreateSettings()
     local panelData = {
         type = "panel",
         name = LUIE.name,
-        displayName = strformat(LUIE.name, GetString(SI_GAME_MENU_SETTINGS)),
+        displayName = LUIE.name,
         author = LUIE.author,
         version = LUIE.version,
         website = LUIE.website,
+        feedback = LUIE.feedback,
+        translation = LUIE.translation,
+        donation = LUIE.donation,
         slashCommand = "/luiset",
         registerForRefresh = true,
         registerForDefaults = true,

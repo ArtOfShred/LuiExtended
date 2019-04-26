@@ -1,11 +1,12 @@
 ﻿## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, psypanda, SpellBuilder
-## Version: 5.8.1
-## APIVersion: 100026
-## AddOnVersion: 581
+## Version: 5.9.0
+## APIVersion: 100027
+## AddOnVersion: 590
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
 ## DependsOn: LibStub LibAddonMenu-2.0
 ## OptionalDependsOn: LibMediaProvider-1.0
+## IsLibrary: false
 ## SavedVariables: LUIESV
 
 # This Add-on is not created by, affiliated with or sponsored by ZeniMax Media Inc. or its affiliates.
@@ -51,7 +52,7 @@ Bindings.xml
 
 frontend/Changelog.xml
 frontend/CombatText.xml
-frontend/StatPanel.xml
+# frontend/StatPanel.xml
 
 i18n/en.lua
 i18n/$(language).lua
@@ -97,7 +98,7 @@ modules/CombatText/EventViewers/Resources.lua
 
 modules/CombatInfo/CombatInfo.lua
 modules/CombatInfo/AbilityAlerts.lua
-modules/CombatInfo/StatPanel.lua
+# modules/CombatInfo/StatPanel.lua
 
 modules/InfoPanel/InfoPanel.lua
 
