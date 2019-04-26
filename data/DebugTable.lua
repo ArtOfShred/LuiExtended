@@ -5300,7 +5300,6 @@ LUIE.DebugAuras = {
     [85132] = true, -- Light's Champion (Light's Champion)
     [85133] = true, -- Light's Champion (Light's Champion)
     [85154] = true, -- Major Force (Light's Champion)
-    [85155] = true, -- Major Protection (Light's Champion)
 
     -------------------------------------
     -- ARMOR PASSIVES -------------------

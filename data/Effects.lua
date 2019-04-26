@@ -5141,7 +5141,6 @@ E.EffectOverride = {
     [83850] = { tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Life Giver (Life Giver)
     [85132] = { tooltip = T.Skill_Lights_Champion }, -- Light's Champion (Light's Champion)
     [85154] = { tooltip = A.Skill_Lights_Champion }, -- Major Force (Light's Champion)
-    [85155] = { tooltip = A.Skill_Lights_Champion }, -- Major Protection (Light's Champion)
 
     ----------------------------------------------------------------
     -- ARMOR PASSIVES ----------------------------------------------
