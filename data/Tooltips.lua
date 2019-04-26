@@ -668,11 +668,9 @@ LUIE.Tooltips = {
     -- Bow
     Skill_Hawk_Eye_Rank_1                           = strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 2),
     Skill_Hawk_Eye_Rank_2                           = strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 5),
-    Skill_Focused_Aim                               = GetString(SI_LUIE_SKILL_FOCUSED_AIM_TP),
     Skill_Volley                                    = GetString(SI_LUIE_SKILL_VOLLEY_TP),
     Skill_Endless_Hail                              = GetString(SI_LUIE_SKILL_ENDLESS_HAIL_TP),
     Skill_Draining_Shot                             = GetString(SI_LUIE_SKILL_DRAINING_SHOT_TP),
-    Skill_Acid_Spray                                = GetString(SI_LUIE_SKILL_ACID_SPRAY_TP),
     Skill_Bombard                                   = GetString(SI_LUIE_SKILL_BOMBARD_TP),
     Skill_Poison_Injection                          = GetString(SI_LUIE_SKILL_POISON_INJECTION_TP),
     Skill_Ballista                                  = GetString(SI_LUIE_SKILL_BALLISTA_TP),

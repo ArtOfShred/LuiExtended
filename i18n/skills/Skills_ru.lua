@@ -41,7 +41,7 @@ local strings = {
     SI_LUIE_SKILL_AYLEID_WELL_TP =                       "Повышение здоровья на |cFFFFFF10|r% в течение |cFFFFFF10|r минут.",
     SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED =                "Усиленный Айлейдский колодец",
     SI_LUIE_SKILL_AYLEID_WELL_FORTIFIED_TP =             "Повышение здоровья на |cFFFFFF10|r% в течение |cFFFFFF30|r минут.",
-    SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP =               "Иммунитет к замедляющим и обездвиживающим эффектам на |cFFFFFF<<1>>|r секунд.",
+    SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP =               "Immune to immobilization effects for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_DODGE_FATIGUE_TP =                     "Consecutive roll dodging costs |cFFFFFF33|r% more Stamina per stack for the next |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_HIDDEN_TP =                            "Крадётесь и сокрыты от чужих глаз.\n\nРасходуется Запас сил при движении.",
     SI_LUIE_SKILL_INVISIBLE_TP =                         "Сокрыты от чужих глаз магией или окружающей средой.",
@@ -482,12 +482,10 @@ local strings = {
 
     -- Bow
     SI_LUIE_SKILL_HAWK_EYE_TP =                          "Increase the damage of your Bow abilities by |cFFFFFF<<1>>|r% for |cFFFFFF5|r seconds, stacking up to |cFFFFFF5|r times.",
-    SI_LUIE_SKILL_FOCUSED_AIM_TP =                       "Increase the range from which your attacker can hit you with Bow attacks by |cFFFFFF5|r meters for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_VOLLEY_TP =                            "Arrows rain down from the sky, dealing Physical Damage to enemies in the target area every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_ENDLESS_HAIL_TP =                      "Arrows rain down from the sky, dealing Physical Damage to enemies in the target area every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_DRAINING_SHOT_TP =                     "Stunned for |cFFFFFF<<1>>|r seconds.\n\nWhen the stun ends, your attacker heals.",
-    SI_LUIE_SKILL_BOMBARD_TP =                           "Immobilized for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends, your Movement Speed is reduced by |cFFFFFF40|r% for |cFFFFFF4|r seconds.",
-    SI_LUIE_SKILL_ACID_SPRAY_TP =                        "Afflicted with Poison Damage every |cFFFFFF1|r second for |cFFFFFF6|r seconds.\n\nMovement Speed reduced by |cFFFFFF40|r% for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_BOMBARD_TP =                           "Immobilized and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POISON_INJECTION_TP =                  "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF200|r% more damage in proportion to your missing health under |cFFFFFF50|r%.",
     SI_LUIE_SKILL_BALLISTA_TP =                          "Your ballista turret unleashes a barrage of arrows, dealing Physical Damage over |cFFFFFF<<1>>|r seconds.",
 
@@ -1142,7 +1140,7 @@ local strings = {
     SI_LUIE_SKILL_DEFENSIVE_PROTOCOL_TP =                "Absorbing damage and unable to take any action, while nearby enemies take Shock Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_OVERCHARGED_DWEMER_TP =                "Striking distant enemies with bolts, dealing Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_OVERHEATED_DWEMER_TP =                 "Venting flames, dealing Flame Damage to nearby enemies every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_OVERHEATED_DWEMER_VET_TP =             "Venting flames, dealing Flame Damage to nearby enemies every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDistant enemies will be bombarbed with a volley of flames every |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_OVERHEATED_DWEMER_VET_TP =             "Venting flames, dealing Flame Damage to nearby enemies every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDistant enemies will be bombarded with a volley of flames every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_VENTING_FLAMES =                       "Venting Flames",
     SI_LUIE_SKILL_VOLTAIC_OVERLOAD_TP =                  "Nearby enemies take Shock Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_FRIGID_WATERS_TP =                     "Taking increasing Frost Damage every |cFFFFFF1|r second.\n\nDamage taken increased by |cFFFFFF100|r% per stack.",

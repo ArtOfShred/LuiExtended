@@ -717,9 +717,9 @@ E.EffectCreateSkillAura = {
     [87194] = { consolidate = true, abilityId = 86130 }, -- Minor Protection --> Ice Fortress
 
     -- Dual Wield
-    [28613] = { alwaysShow = true, removeOnEnd = true, abilityId = 999001 }, -- Blade Cloak (Blade Cloak) -- Fake ID for Major Evasion
-    [38901] = { alwaysShow = true, removeOnEnd = true, abilityId = 999002 }, -- Quick Cloak (Quick Cloak) -- Fake ID for Major Evasion
-    [38906] = { alwaysShow = true, removeOnEnd = true, abilityId = 999003 }, -- Deadly Cloak (Deadly Cloak) -- Fake ID for Major Evasion
+    [28613] = { alwaysShow = true, removeOnEnd = true, abilityId = 123651, consolidateNewIdExtended = true }, -- Blade Cloak (Blade Cloak) -- Fake ID for Major Evasion
+    [38901] = { alwaysShow = true, removeOnEnd = true, abilityId = 123652, consolidateNewIdExtended = true }, -- Quick Cloak (Quick Cloak) -- Fake ID for Major Evasion
+    [38906] = { alwaysShow = true, removeOnEnd = true, abilityId = 123653, consolidateNewIdExtended = true }, -- Deadly Cloak (Deadly Cloak) -- Fake ID for Major Evasion
     [68807] = { consolidate = true, extendedDisplay = true, abilityId = 21157 }, -- Major Brutality (Hidden Blade)
     [68859] = { consolidate = true, extendedDisplay = true, abilityId = 38914 }, -- Major Brutality (Shrouded Daggers)
     [68814] = { consolidate = true, extendedDisplay = true, abilityId = 38910 }, -- Major Brutality (Flying Blade)
@@ -1054,9 +1054,8 @@ E.BarHighlightOverride = {
 
     [38814] = { newId = 38816 }, -- Dizzying Swing
     [38788] = { newId = 38791 }, -- Stampede
-    [20919] = { newId = 31059 }, -- Cleave --> Cleave Bleed
     [38745] = { newId = 38747 }, -- Carve --> Carve Bleed
-    [38754] = { newId = 38759 }, -- Brawler --> Brawler Bleed
+    [38754] = { newId = 38763 }, -- Brawler
     [83216] = { newId = 83217 }, -- Berserker Strike
     [83229] = { newId = 83230 }, -- Onslaught
     [83238] = { newId = 83239 }, -- Berserker Rage
@@ -1085,7 +1084,6 @@ E.BarHighlightOverride = {
     [28379] = { newId = 29293 }, -- Twin Slashes --> Twin Slashes Bleed
     [38839] = { newId = 38841 }, -- Rending Slashes --> Rending Slashes Bleed
     [38845] = { newId = 38852 }, -- Blood Craze
-    [38891] = { newId = 68801, showFakeAura = true, noRemove = true }, -- Whirling Blades --> Major Endurance
     [21157] = { newId = 68807, showFakeAura = true, noRemove = true }, -- Hidden Blade --> Major Brutality
     [38914] = { newId = 68859, showFakeAura = true, noRemove = true }, -- Shrouded Daggers --> Major Brutality
     [38910] = { newId = 68814, showFakeAura = true, noRemove = true }, -- Flying Blade --> Major Brutality
@@ -1097,13 +1095,12 @@ E.BarHighlightOverride = {
     -- Bow --------------------
     ---------------------------
 
-    [38685] = { newId = 38686, showFakeAura = true }, -- Lethal Arrow --> Major Defile
-    [38687] = { newId = 38699 }, -- Focused Aim
+    [38685] = { newId = 38686, showFakeAura = true }, -- Lethal Arrow --> Minor Defile
+    [38687] = { newId = 38688 }, -- Focused Aim
     [28879] = { newId = 28887 }, -- Scatter Shot
     [38672] = { newId = 38674 }, -- Magnum Shot
     [38669] = { newId = 38670 }, -- Draining Shot
-    [31271] = { newId = 31272 }, -- Arrow Spray
-    [38705] = { newId = 38707 }, -- Bombard
+    [38705] = { newId = 38706 }, -- Bombard
     [38701] = { newId = 38703 }, -- Acid Spray
     [28869] = { newId = 44540 }, -- Poison Arrow
     [38645] = { newId = 44545 }, -- Venom Arrow
@@ -4852,10 +4849,7 @@ E.EffectOverride = {
     [38791] = { tooltip = T.Generic_Snare, tooltipValue2 = 60 }, -- Stampede (Stampede)
 
     -- Cleave / Carve / Brawler
-    [31059] = { icon = 'esoui/art/icons/ability_2handed_002.dds', name = A.Skill_Cleave, tooltip = T.Generic_Bleed, tooltipValue2 = 2 }, -- Cleave Bleed (Cleave)
     [38747] = { icon = 'esoui/art/icons/ability_2handed_002_a.dds', name = A.Skill_Carve, tooltip = T.Generic_Bleed, tooltipValue2 = 2 }, -- Carve Bleed (Carve)
-    [38746] = { tooltip = A.Skill_Carve }, -- Minor Heroism (Carve)
-    [38759] = { icon = 'esoui/art/icons/ability_2handed_002_b.dds', name = A.Skill_Brawler, tooltip = T.Generic_Bleed, tooltipValue2 = 2 }, -- Brawler Bleed (Brawler)
     [38763] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Brawler (Brawler)
 
     -- Reverse Slash / Reverse Slice / Executioner
@@ -4933,27 +4927,19 @@ E.EffectOverride = {
     [38848] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', name = A.Skill_Blood_Craze, tooltip = T.Skill_Blood_Craze }, -- Blood Craze Bleed (Blood Craze)
     [38852] = { tooltip = T.Skill_Blood_Craze_Heal }, -- Blood Craze (Blood Craze)
 
-    -- Whirlwind / Whirling Blades / Steel Tornado
-    [68801] = { tooltip = A.Skill_Whirling_Blades }, -- Major Endurance (Whirling Blades)
-
     -- Blade Cloak / Quick Cloak / Deadly Cloak
     [28613] = { tooltip = T.Skill_Blade_Cloak }, -- Blade Cloak (Blade Cloak)
-    [999001] = { name = A.Skill_Major_Evasion, icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = A.Skill_Blade_Cloak }, -- Major Evasion fake aura for Blade Cloak
+    [123651] = { icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = A.Skill_Blade_Cloak }, -- Major Evasion (Blade Cloak)
     [38901] = { tooltip = T.Skill_Blade_Cloak }, -- Quick Cloak (Quick Cloak)
-    [999002] = { name = A.Skill_Major_Evasion, icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = A.Skill_Quick_Cloak }, -- Major Evasion fake aura for Quick Cloak
+    [123652] = { icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = A.Skill_Quick_Cloak }, -- Major Evasion (Quick Cloak)
     [62531] = { tooltip = A.Skill_Quick_Cloak }, -- Major Expedition (Quick Cloak)
-    [62529] = { name = A.Skill_Quick_Cloak }, -- Blade Cloak (Quick Cloak)
     [38906] = { tooltip = T.Skill_Blade_Cloak }, -- Deadly Cloak (Deadly Cloak)
-    [999003] = { name = A.Skill_Major_Evasion, icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = A.Skill_Deadly_Cloak }, -- Major Evasion fake aura for Deadly Cloak
-    [62547] = { name = A.Skill_Deadly_Cloak }, -- Blade Cloak (Deadly Cloak)
+    [123653] = { icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = A.Skill_Deadly_Cloak }, -- Major Evasion (Deadly Cloak)
 
     -- Hidden Blade / Shrouded Daggers / Flying Blade
     [68807] = { consolidateExtra = true, tooltip = A.Skill_Hidden_Blade }, -- Major Brutality (Hidden Blade)
-    [28378] = { tooltip = T.Generic_Snare, tooltipValue2 = 40 }, -- Hidden Blade (Hidden Blade)
     [68859] = { consolidateExtra = true, tooltip = A.Skill_Shrouded_Daggers }, -- Major Brutality (Shrouded Daggers)
-    [68861] = { tooltip = T.Generic_Snare, tooltipValue2 = 40 }, -- Shrouded Daggers (Shrouded Daggers)
     [68814] = { consolidateExtra = true, tooltip = A.Skill_Flying_Blade }, -- Major Brutality (Flying Blade)
-    [38912] = { tooltip = T.Generic_Snare, tooltipValue2 = 40 }, -- Flying Blade (Flying Blade)
 
     -- Lacerate / Rend / Thrive in Chaos
     [85156] = { tooltip = T.Skill_Lacerate }, -- Lacerate (Lacerate)
@@ -4966,10 +4952,8 @@ E.EffectOverride = {
     -----------------------------------------
 
     -- Snipe / Lethal Arrow / Focused Aim
-    [38686] = { tooltip = A.Skill_Lethal_Arrow }, -- Major Defile (Lethal Arrow)
-    [38698] = { hide = true }, -- Focused Aim (Focused Aim)
-    [38699] = { tooltip = T.Skill_Focused_Aim }, -- Focused Aim (Focused Aim)
-    [38688] = { consolidateExtra = true, tooltip = A.Skill_Focused_Aim }, -- Minor Fracture (Focused Aim)
+    [38686] = { tooltip = A.Skill_Lethal_Arrow }, -- Minor Defile (Lethal Arrow)
+    [38688] = { tooltip = A.Skill_Focused_Aim }, -- Minor Fracture (Focused Aim)
 
     -- Volley / Endless Hail / Arrow Barrage
     [28876] = { tooltip = T.Skill_Volley }, -- Volley (Volley)
@@ -4990,11 +4974,9 @@ E.EffectOverride = {
     [80764] = { name = A.Skill_Draining_Shot }, -- Draining Shot Heal (Draining Shot)
 
     -- Arrow Spray / Bombarb / Acid Spray
-    [31272] = { icon = 'esoui/art/icons/ability_bow_005.dds', tooltip = T.Generic_Snare, tooltipValue2 = 40 }, -- Arrow Spray (Arrow Spray)
-    [38707] = { tooltip = T.Skill_Bombard }, -- Bombard (Bombard)
-    [38706] = { icon = 'esoui/art/icons/ability_bow_005_a.dds', tooltip = T.Generic_Snare, tooltipValue2 = 40 }, -- Bombard (Bombard)
-    [38702] = { hideReduce = true, tooltip = T.Skill_Acid_Spray, icon = 'esoui/art/icons/ability_bow_005_b.dds'  }, -- Acid Spray (Acid Spray)
-    [38703] = { tooltip = T.Skill_Acid_Spray }, -- Acid Spray (Acid Spray)
+    [38707] = { tooltip = T.Skill_Bombard, hideReduce = true }, -- Bombard (Bombard)
+    [38706] = { icon = 'esoui/art/icons/ability_bow_005_a.dds', tooltip = T.Skill_Bombard }, -- Bombard (Bombard)
+    [38703] = { tooltip = T.Generic_Poison, tooltipValue2 = 1 }, -- Acid Spray (Acid Spray)
 
     -- Poison Arrow / Venom Arrow / Poison Injection
     [44540] = { tooltip = T.Generic_Poison, tooltipValue2 = 2 }, -- Poison Arrow (Venom Arrow)

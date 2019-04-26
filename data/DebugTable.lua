@@ -4574,14 +4574,11 @@ LUIE.DebugAuras = {
     [38782] = true, -- Critical Rush (Critical Rush)
 
     [20919] = true, -- Cleave (Cleave)
-    [31059] = true, -- Cleave Bleed (Cleave)
 
     [38745] = true, -- Carve (Carve)
     [38747] = true, -- Carve Bleed (Carve)
-    [38746] = true, -- Minor Heroism (Carve)
 
     [38754] = true, -- Brawler (Brawler)
-    [38759] = true, -- Brawler Bleed (Brawler)
     [38773] = true, -- Brawler (Brawler)
     [38774] = true, -- Brawler (Brawler)
     [38763] = true, -- Brawler (Brawler)
@@ -4792,7 +4789,6 @@ LUIE.DebugAuras = {
     [39620] = true, -- Whirlwind (Whirlwind)
 
     [38891] = true, -- Whirling Blades (Whirling Blades)
-    [68801] = true, -- Major Endurance (Whirling Blades)
     [39666] = true, -- Whirlwind (Whirling Blades)
 
     [38861] = true, -- Steel Tornado (Steel Tornado)
@@ -4801,22 +4797,23 @@ LUIE.DebugAuras = {
     [64746] = true, -- Blade Cloak AoE Fx (Blade Cloak)
     [28613] = true, -- Blade Cloak (Blade Cloak)
     [62522] = true, -- Blade Cloak (Blade Cloak)
+    [123651] = true, -- Major Evasion (Blade Cloak)
 
     [38901] = true, -- Quick Cloak (Quick Cloak)
     [62531] = true, -- Major Expedition (Quick Cloak)
     [62529] = true, -- Blade Cloak (Quick Cloak)
+    [123652] = true, -- Major Evasion (Quick Cloak)
 
     [38906] = true, -- Deadly Cloak (Deadly Cloak)
     [62547] = true, -- Blade Cloak (Deadly Cloak)
+    [123653] = true, -- Major Evasion (Deadly Cloak)
 
     [21157] = true, -- Hidden Blade (Hidden Blade)
     [68807] = true, -- Major Brutality (Hidden Blade)
-    [28378] = true, -- Hidden Blade (Hidden Blade)
 
     [38914] = true, -- Shrouded Daggers (Shrouded Daggers)
     [68859] = true, -- Major Brutality (Shrouded Daggers)
     [68858] = true, -- Hit Dummy (Shrouded Daggers)
-    [68861] = true, -- Shrouded Daggers (Shrouded Daggers)
     [68860] = true, -- Bounce 1 (Shrouded Daggers)
     [68862] = true, -- Shrouded Daggers (Shrouded Daggers)
     [68863] = true, -- Bounce 2 (Shrouded Daggers)
@@ -4824,7 +4821,6 @@ LUIE.DebugAuras = {
 
     [38910] = true, -- Flying Blade (Flying Blade)
     [68814] = true, -- Major Brutality (Flying Blade)
-    [38912] = true, -- Flying Blade (Flying Blade)
 
     [83600] = true, -- Lacerate (Lacerate)
     [85156] = true, -- Lacerate (Lacerate)
@@ -4885,8 +4881,6 @@ LUIE.DebugAuras = {
     [38686] = true, -- Major Defile (Lethal Arrow)
 
     [38687] = true, -- Focused Aim (Focused Aim)
-    [38699] = true, -- Focused Aim (Focused Aim)
-    [38698] = true, -- Focused Aim (Focused Aim)
     [38688] = true, -- Minor Fracture (Focused Aim)
 
     [28876] = true, -- Volley (Volley)
@@ -4918,7 +4912,6 @@ LUIE.DebugAuras = {
 
     [31271] = true, -- Arrow Spray (Arrow Spray)
     [38722] = true, -- Arrow Spray (Arrow Spray)
-    [31272] = true, -- Arrow Spray (Arrow Spray)
 
     [38705] = true, -- Bombard (Bombard)
     [38723] = true, -- Bombard (Bombard)
@@ -4927,7 +4920,6 @@ LUIE.DebugAuras = {
 
     [38701] = true, -- Acid Spray (Acid Spray)
     [38724] = true, -- Acid Spray (Acid Spray)
-    [38702] = true, -- Acid Spray (Acid Spray)
     [38703] = true, -- Acid Spray (Acid Spray)
 
     [28869] = true, -- Poison Arrow (Poison Arrow)
