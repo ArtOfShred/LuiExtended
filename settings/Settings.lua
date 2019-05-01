@@ -8,7 +8,7 @@ local strformat = zo_strformat
 -- Create Settings Menu
 function LUIE.CreateSettings()
     -- Load LibAddonMenu
-    local LAM = LibStub("LibAddonMenu-2.0")
+    local LAM = LibAddonMenu2
 
     local optionsData = {}
 

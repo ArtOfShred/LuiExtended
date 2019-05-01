@@ -12,7 +12,7 @@ local optionsDataCombatText = {}
 
 function CT.CreateSettings()
     -- Load LibAddonMenu
-    local LAM = LibStub("LibAddonMenu-2.0")
+    local LAM = LibAddonMenu2
     -- Load LibMediaProvider
     local LMP = LibStub("LibMediaProvider-1.0")
 
