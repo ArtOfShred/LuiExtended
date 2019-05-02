@@ -11,8 +11,8 @@ local strformat = zo_strformat
 local optionsDataCombatText = {}
 
 function CT.CreateSettings()
-    -- Load LibAddonMenu
-    local LAM = LibAddonMenu2
+    -- Load LibAddonMenu with backwards compatibility
+    local LAM = _G["LibAddonMenu2"] or LibStub("LibAddonMenu-2.0")
     -- Load LibMediaProvider
     local LMP = LibStub("LibMediaProvider-1.0")
 

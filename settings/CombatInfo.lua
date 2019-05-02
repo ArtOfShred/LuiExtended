@@ -18,8 +18,8 @@ local globalAlertOptions = { "Show All Incoming Abilities", "Only Show Hard CC E
 local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Show Hard CC Effects"] = 2, ["Only Show Unbreakable CC Effects"] = 3 }
 
 function CI.CreateSettings()
-    -- Load LibAddonMenu
-    local LAM = LibAddonMenu2
+    -- Load LibAddonMenu with backwards compatibility
+    local LAM = _G["LibAddonMenu2"] or LibStub("LibAddonMenu-2.0")
 
     -- Get fonts
     local FontsList = {}
