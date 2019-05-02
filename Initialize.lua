@@ -18,7 +18,7 @@ end
 
 -- Load additional fonts and status bar textures from LMP if it is present in environment
 local function LoadMedia()
-    local LMP = LibStub("LibMediaProvider-1.0")
+    local LMP = _G["LibMediaProvider"] or LibStub("LibMediaProvider-1.0")
     if LMP == nil then
         return
     end

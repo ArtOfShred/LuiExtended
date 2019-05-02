@@ -7,7 +7,8 @@
 LUIE.CombatText = {}
 local CT = LUIE.CombatText
 
-local LMP = LibStub("LibMediaProvider-1.0")
+local LMP = _G["LibMediaProvider"] or LibStub("LibMediaProvider-1.0")
+
 
 local moduleName = LUIE.name .. "_CombatText"
 
