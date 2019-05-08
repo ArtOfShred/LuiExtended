@@ -7,10 +7,10 @@
     setFunc = function(var) db.var = var doStuff() end,
     tooltip = "Dropdown's tooltip text.", -- or string id or function returning a string (optional)
     choicesTooltips = {"tooltip 1", "tooltip 2", "tooltip 3"}, -- or array of string ids or array of functions returning a string (optional)
-    sort = "name-up", --or "name-down", "numeric-up", "numeric-down", "value-up", "value-down", "numericvalue-up", "numericvalue-down" (optional) - if not provided, list will not be sorted
-    width = "full", --or "half" (optional)
+    sort = "name-up", -- or "name-down", "numeric-up", "numeric-down", "value-up", "value-down", "numericvalue-up", "numericvalue-down" (optional) - if not provided, list will not be sorted
+    width = "full", -- or "half" (optional)
     scrollable = true, -- boolean or number, if set the dropdown will feature a scroll bar if there are a large amount of choices and limit the visible lines to the specified number or 10 if true is used (optional)
-    disabled = function() return db.someBooleanSetting end, --or boolean (optional)
+    disabled = function() return db.someBooleanSetting end, -- or boolean (optional)
     warning = "May cause permanent awesomeness.", -- or string id or function returning a string (optional)
     requiresReload = false, -- boolean, if set to true, the warning text will contain a notice that changes are only applied after an UI reload and any change to the value will make the "Apply Settings" button appear on the panel which will reload the UI when pressed (optional)
     default = defaults.var, -- default value or function that returns the default value (optional)
@@ -18,11 +18,12 @@
 } ]]
 
 
-local widgetVersion = 19
+local widgetVersion = 20
 local LAM = LibStub("LibAddonMenu-2.0")
 if not LAM:RegisterWidget("dropdown", widgetVersion) then return end
 
 local wm = WINDOW_MANAGER
+local cm = CALLBACK_MANAGER
 local SORT_BY_VALUE         = { ["value"] = {} }
 local SORT_BY_VALUE_NUMERIC = { ["value"] = { isNumeric = true } }
 local SORT_TYPES = {
@@ -174,10 +175,10 @@ function ScrollableDropdownHelper:New(...)
     return object
 end
 
-function ScrollableDropdownHelper:Initialize(parent, control, visibleRows)
+function ScrollableDropdownHelper:Initialize(panel, control, visibleRows)
     local combobox = control.combobox
     local dropdown = control.dropdown
-    self.parent = parent
+    self.panel = panel
     self.control = control
     self.combobox = combobox
     self.dropdown = dropdown
@@ -190,12 +191,14 @@ function ScrollableDropdownHelper:Initialize(parent, control, visibleRows)
     -- handle dropdown or settingsmenu opening/closing
     local function onShow() return self:OnShow() end
     local function onHide() self:OnHide() end
-    local function doHide() self:DoHide() end
+    local function doHide(closedPanel)
+        if closedPanel == panel then self:DoHide() end
+    end
 
     ZO_PreHook(dropdown, "ShowDropdownOnMouseUp", onShow)
     ZO_PreHook(dropdown, "HideDropdownInternal", onHide)
     combobox:SetHandler("OnEffectivelyHidden", onHide)
-    parent:SetHandler("OnEffectivelyHidden", doHide)
+    cm:RegisterCallback("LAM-PanelClosed", doHide)
 
     -- dont fade entries near the edges
     local scrollList = dropdown.m_scroll
@@ -387,7 +390,7 @@ function LAMCreateControl.dropdown(parent, dropdownData, controlName)
 
     if dropdownData.scrollable then
         local visibleRows = type(dropdownData.scrollable) == "number" and dropdownData.scrollable or DEFAULT_VISIBLE_ROWS
-        control.scrollHelper = ScrollableDropdownHelper:New(parent, control, visibleRows)
+        control.scrollHelper = ScrollableDropdownHelper:New(LAM.util.GetTopPanel(parent), control, visibleRows)
     end
 
     ZO_PreHook(dropdown, "UpdateItems", function(self)

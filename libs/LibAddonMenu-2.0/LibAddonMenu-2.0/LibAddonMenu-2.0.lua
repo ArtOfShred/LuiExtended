@@ -4,7 +4,7 @@
 
 
 --Register LAM with LibStub
-local MAJOR, MINOR = "LibAddonMenu-2.0", 28
+local MAJOR, MINOR = "LibAddonMenu-2.0", 29
 local lam, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 if not lam then return end --the same or newer version of this lib is already loaded into memory
 LibAddonMenu2 = lam
@@ -154,7 +154,9 @@ local function RefreshReloadUIButton()
         end
     end
 
-    lam.applyButton:SetHidden(not lam.requiresReload)
+    if lam.applyButton then
+        lam.applyButton:SetHidden(not lam.requiresReload)
+    end
 end
 
 local function RequestRefreshIfNeeded(control)
@@ -323,9 +325,9 @@ local function UpdateWarning(control)
 
     if control.data.requiresReload then
         if not warning then
-            warning = string.format("|cff0000%s", util.L["RELOAD_UI_WARNING"])
+            warning = string.format("%s", util.L["RELOAD_UI_WARNING"])
         else
-            warning = string.format("%s\n\n|cff0000%s", warning, util.L["RELOAD_UI_WARNING"])
+            warning = string.format("%s\n\n%s", warning, util.L["RELOAD_UI_WARNING"])
         end
     end
 
@@ -347,9 +349,9 @@ local localization = {
         TRANSLATION = "Translation",
         DONATION = "Donate",
         PANEL_INFO_FONT = "$(CHAT_FONT)|14|soft-shadow-thin",
-        RELOAD_UI_WARNING = "Changes to this setting require an UI reload in order to take effect.",
-        RELOAD_DIALOG_TITLE = "UI Reload required",
-        RELOAD_DIALOG_TEXT = "Some changes require an UI reload in order to take effect. Do you want to reload now or discard the changes?",
+        RELOAD_UI_WARNING = "Changes to this setting require a UI reload in order to take effect.",
+        RELOAD_DIALOG_TITLE = "UI Reload Required",
+        RELOAD_DIALOG_TEXT = "Some changes require a UI reload in order to take effect. Do you want to reload now or discard the changes?",
         RELOAD_DIALOG_RELOAD_BUTTON = "Reload",
         RELOAD_DIALOG_DISCARD_BUTTON = "Discard",
     },
@@ -872,10 +874,19 @@ end
 
 local CheckSafetyAndInitialize
 local function ShowSetHandlerWarning(panel, handler)
+    local hint
     if(handler == "OnShow" or handler == "OnEffectivelyShown") then
-        PrintLater(("Setting a handler on a panel is not recommended. Use the global callback 'LAM-PanelControlsCreated' or 'LAM-PanelOpened' instead. (%s on %s)"):format(handler, panel:GetName()))
+        hint = "'LAM-PanelControlsCreated' or 'LAM-PanelOpened'"
     elseif(handler == "OnHide" or handler == "OnEffectivelyHidden") then
-        PrintLater(("Setting a handler on a panel is not recommended. Use the global callback 'LAM-PanelClosed' instead. (%s on %s)"):format(handler, panel:GetName()))
+        hint = "'LAM-PanelClosed'"
+    end
+
+    if hint then
+        local message = ("Setting a handler on a panel is not recommended. Use the global callback %s instead. (%s on %s)"):format(hint, handler, panel.data.name)
+        PrintLater(message)
+        if logger then
+            logger:Warn(message)
+        end
     end
 end
 
