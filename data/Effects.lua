@@ -4286,7 +4286,6 @@ E.EffectOverride = {
     [62176] = { consolidate = true, tooltip = A.Skill_Boundless_Storm }, -- Major Ward (Boundless Storm)
 
     -- Lightning Splash / Liquid Lightning / Lightning Flood
-    [108607] = {hide = true }, -- Synergy Damage Bonus (Lightning Splash - Conduit Synergy)
     [23182] = { tooltip = T.Skill_Lightning_Splash }, -- Lightning Splash (Lightning Splash)
     [23200] = { tooltip = T.Skill_Lightning_Splash }, -- Liquid Lightning (Liquid Lightning)
     [23205] = { tooltip = T.Skill_Lightning_Splash }, -- Lightning Flood (Lightning Flood)
@@ -4380,8 +4379,6 @@ E.EffectOverride = {
     [26518] = { icon = '' }, -- Charge (Toppling Charge)
 
     -- Spear Shards / Luminous Shards / Blazing Spear
-    [108924] = { hide = true }, -- Synergy Damage Bonus (Spear Shards - Blessed Shards Synergy)
-    [108821] = { hide = true }, -- Synergy Damage Bonus (Luminous Shards - Holy Shards Synergy)
     [95933] = { tooltip = T.Skill_Spear_Shards }, -- Spear Shards (Spear Shards)
     [95931] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds', groundLabel = true, tooltip = T.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Spear Shards (Spear Shards)
     [95957] = { tooltip = T.Skill_Luminous_Shards }, -- Luminous Shards (Luminous Shards)
@@ -4449,11 +4446,9 @@ E.EffectOverride = {
     [63961] = { icon = 'esoui/art/icons/ability_templar_stendarr_aura.dds'}, -- Radiant Destruction (Radiant Oppression)
 
     -- Nova / Solar Prison / Solar Disturbance
-    [108822] = { hide = true }, -- Synergy Damage Bonus (Nova - Supernova Synergy)
     [31562] = { tooltip = T.Generic_Stun }, -- Supernova (Nova - Supernova Synergy)
     [21976] = { tooltip = T.Skill_Nova }, -- Nova (Nova)
     [21754] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Nova }, -- Nova (Nova)
-    [108823] = { hide = true }, -- Synergy Damage Bonus (Solar Prison - Gravity Crush Synergy)
     [34443] = { tooltip = T.Generic_Stun }, -- Gravity Crush (Solar Prison - Gravity Crush Synergy)
     [22003] = { tooltip = T.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
     [21757] = { name = A.Skill_Major_Maim, duration = 0, groundLabel = true, tooltip = A.Skill_Solar_Prison }, -- Solar Prison (Solar Prison)
@@ -4489,7 +4484,6 @@ E.EffectOverride = {
     [124703] = { consolidate = true, tooltip = A.Skill_Repentance }, -- Minor Endurance (Repentance)
 
     -- Cleansing Ritual / Ritual of Retribution / Extended Ritual
-    [108824] = { hide = true }, -- Synergy Damage Bonus (Cleansing Ritual - Purify Synergy)
     [44013] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds' }, -- Purify (Cleansing Ritual - Purify Synergy)
     [26286] = { name = A.Skill_Cleansing_Ritual, groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 2 }, -- Healing Ritual (Cleansing Ritual)
     [80540] = { tooltip = T.Skill_Cleansing_Ritual }, -- Cleansing Ritual (Cleansing Ritual)
@@ -4615,7 +4609,6 @@ E.EffectOverride = {
     [87019] = { consolidate = true, tooltip = A.Skill_Enchanted_Growth }, -- Minor Endurance (Enchanted Growth)
 
     -- Healing Seed / Budding Seeds / Corrupting Pollen
-    [108826] = { hide = true }, -- Synergy Damage Bonus (Healing Seed - Harvest Synergy)
     [85577] = { tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Harvest (Healing Seed - Harvest Synergy)
     [85578] = { tooltip = T.Skill_Healing_Seed } , -- Healing Seed (Healing Seed)
     [85840] = { tooltip = T.Skill_Budding_Seeds } , -- Budding Seeds (Budding Seeds)
@@ -5178,7 +5171,6 @@ E.EffectOverride = {
     -- LIGHT ARMOR
     [29338] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Annulment (Annulment)
     [39186] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Dampen Magic (Dampen Magic)
-    [39188] = { hide = true }, -- Dampen Magic (Dampen Magic)
     [39182] = { tooltip = T.Skill_Harness_Magicka }, -- Harness Magicka (Harness Magicka)
 
     -- MEDIUM ARMOR
@@ -5585,17 +5577,17 @@ E.EffectOverride = {
     -- Mend Wounds / Mend Spirit / Symbiosis
     [103543] = { tooltip = T.Skill_Mend_Wounds }, -- Mend Wounds (Mend Wounds)
     [107583] = { hide = true }, -- Mend Wounds (Mend Wounds)
-    --[107579] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Mend_Wounds_Channel }, -- Mend Wounds (Mend Wounds)
+    [118617] = { icon = 'esoui/art/icons/ability_psijic_006.dds' }, -- Mend Wounds (Mend Wounds)
     [103747] = { tooltip = T.Skill_Mend_Spirit }, -- Mend Spirit (Mend Spirit)
     [107629] = { hide = true }, -- Mend Spirit (Mend Spirit)
     [107632] = { tooltip = A.Skill_Mend_Spirit }, -- Major Resolve (Mend Spirit)
     [107631] = { tooltip = A.Skill_Mend_Spirit }, -- Major Ward (Mend Spirit)
-    --[107630] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Mend_Wounds_Channel }, -- Mend Spirit (Mend Spirit)
     [103752] = { tooltip = A.Skill_Mend_Spirit }, -- Major Resolve (Mend Spirit)
     [103751] = { tooltip = A.Skill_Mend_Spirit }, -- Major Ward (Mend Spirit)
+    [118638] = { icon = 'esoui/art/icons/ability_psijic_006_a.dds' }, -- Mend Spirit (Mend Spirit)
     [103755] = { tooltip = T.Skill_Symbiosis }, -- Symbiosis (Symbiosis)
     [107636] = { hide = true }, -- Symbiosis (Symbiosis)
-    --[107637] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Mend_Wounds_Channel }, -- Symbiosis (Symbiosis)
+    [118645] = { icon = 'esoui/art/icons/ability_psijic_006_b.dds' }, -- Symbiosis (Symbiosis)
 
     -- Meditate / Deep Thoughts / Introspection
     [103492] = { forcedContainer = 'short', tooltip = T.Skill_Meditate }, -- Meditate (Meditate)
@@ -5631,10 +5623,8 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Blood Altar / Sanguine Altar / Overflowing Altar
-    [108782] = { hide = true }, -- Blood Funnel (Blood Altar - Blood Funnel Synergy)
     [80021] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Blood Altar)
     [39501] = { icon = 'esoui/art/icons/ability_undaunted_001.dds' }, -- Blood Funnel (Blood Altar - Blood Funnel Synergy)
-    [108787] = { hide = true }, -- Blood Feast (Overflowing Altar - Blood Feast Synergy)
     [41964] = { icon = 'esoui/art/icons/ability_undaunted_001_a.dds' }, -- Blood Feast (Overflowing Altar)
     [80020] = { tooltip = A.Skill_Blood_Altar, groundLabel = true }, -- Blood Altar (Blood Altar - Shared - All Morphs)
     [39489] = { tooltip = T.Skill_Blood_Altar }, -- Blood Altar (Blood Altar)
@@ -5642,7 +5632,6 @@ E.EffectOverride = {
     [41958] = { tooltip = T.Skill_Overflowing_Altar }, -- Overflowing Altar (Overflowing Altar)
 
     -- Trapping Webs / Shadow Silk / Tangling Webs
-    [108788] = { hide = true }, -- Synergy Damage Bonus (Trapping Webs - Spawn Broodlings Synergy)
     [39430] = { icon = 'esoui/art/icons/ability_undaunted_003.dds', tooltip = T.Skill_Spawn_Broodlings }, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
     [39432] = { icon = 'esoui/art/icons/ability_undaunted_003.dds', tooltip = T.Skill_Spawn_Broodlings }, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
     [77245] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_bite.dds' }, -- Bite (Trapping Webs - Spawn Broodlings Synergy)
@@ -5667,13 +5656,10 @@ E.EffectOverride = {
     [80129] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, --  Tangling Webs (Tangling Webs)
 
     -- Inner Fire / Inner Rage / Inner Beast
-    [108793] = { hide = true }, -- Synergy Damage Bonus (Inner Fire - Radiate Synergy)
     [41838] = { tooltip = T.Skill_Radiate }, -- Radiate (Inner Fire - Radiate Synergy)
 
     -- Bone Shield / Spiked Bone Shield / Bone Surge
-    [108794] = { hide = true }, -- Synergy Damage Bonus (Bone Shield - Bone Wall Synergy)
     [39379] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Bone Wall (Bone Shield - Bone Wall Synergy)
-    [108797] = { hide = true }, -- Synergy Damage Bonus (Bone Surge - Spinal Surge Synergy)
     [42198] = { tooltip = T.Generic_Damage_Shield_Duration }, -- Spinal Surge (Bone Surge - Spinal Surge Synergy)
     [42197] = { tooltip = A.Skill_Spinal_Surge }, -- Major Vitality (Bone Surge - Spinal Surge Synergy)
     [39369] = { tooltip = T.Skill_Bone_Shield }, -- Bone Shield
@@ -5681,9 +5667,7 @@ E.EffectOverride = {
     [42176] = { tooltip = T.Skill_Bone_Surge }, -- Bone Surge
 
     -- Necrotic Orb / Mystic Orb / Energy Orb
-    [108799] = { hide = true }, -- Synergy Damage Bonus (Necrotic Orb - Combustion Synergy)
     [85432] = { icon = 'esoui/art/icons/ability_undaunted_004.dds' }, -- Combustion (Necrotic Orb - Combustion Synergy)
-    [108802] = { hide = true }, -- Synergy Damage Bonus (Energy Orb - Healing Combustion Synergy)
     [95041] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds', name = A.Skill_Healing_Combustion }, -- Combustion (Energy Orb - Healing Combustion Synergy)
     [95042] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds', name = A.Skill_Healing_Combustion }, -- Combustion (Energy Orb - Healing Combustion Synergy)
     [63511] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds', name = A.Skill_Healing_Combustion }, -- Combustion (Energy Orb - Healing Combustion Synergy)
@@ -5735,7 +5719,6 @@ E.EffectOverride = {
     [40251] = { tooltip = T.Skill_Caltrops }, -- Caltrops (Razor Caltrops)
     [113771] = { tooltip = T.Generic_AOE_Snare_Physical, tooltipValue2 = 1, tooltipValue3 = 30, groundLabel = true, hideGround = true }, -- Razor Caltrops (Razor Caltrops)
     [40252] = { groundLabel = true, tooltip = T.Generic_AOE_Snare_Physical, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Razor Caltrops (Razor Caltrops)
-    [40253] = { name = A.Skill_Razor_Caltrops, tooltip = T.Generic_Snare, tooltipValue2 = 70 }, -- Hindered (Razor Caltrops)
 
     -- Magicka Detonation/ Inevitable Detonation / Proximity Detonation
     [61487] = { tooltip = T.Skill_Magicka_Detonation }, -- Magicka Detonation (Magicka Detonation)
@@ -5789,12 +5772,10 @@ E.EffectOverride = {
     [80947] = { duration = 0, tooltip = T.Skill_Guard_Self }, -- Mystic Guard (Mystic Guard)
     [80953] = { duration = 0, forcedContainer = 'short', consolidate = true, tooltip = A.Skill_Mystic_Guard }, -- Minor Vitality (Mystic Guard)
     [64080] = { duration = 0, consolidate = true, tooltip = A.Skill_Mystic_Guard }, -- Minor Vitality (Mystic Guard)
-    [80945] = { icon = 'esoui/art/icons/ability_ava_mystic_guard.dds' }, -- Mystic Guard (Mystic Guard)
     [61529] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Guard_Other }, -- Stalwart Guard (Stalwart Guard)
     [80983] = { duration = 0, tooltip = T.Skill_Guard_Self }, -- Stalwart Guard (Stalwart Guard)
     [80984] = { duration = 0, forcedContainer = 'short', consolidate = true, tooltip = A.Skill_Stalwart_Guard }, -- Minor Force (Stalwart Guard)
     [80986] = { duration = 0, consolidate = true, tooltip = A.Skill_Stalwart_Guard }, -- Minor Force (Stalwart Guard)
-    [80981] = { icon = 'esoui/art/icons/ability_ava_stalwart_guard.dds' }, -- Stalwart Guard (Stalwart Guard)
 
     -- Revealing Flare / Lingering Flare / Scorching Flare
     [61496] = { tooltip = T.Skill_Revealing_Flare }, -- Revealing Flare (Revealing Flare)

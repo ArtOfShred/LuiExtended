@@ -6121,6 +6121,7 @@ LUIE.DebugAuras = {
     [103543] = true, -- Mend Wounds (Mend Wounds)
     [107583] = true, -- Mend Wounds (Mend Wounds)
     [107579] = true, -- Mend Wounds (Mend Wounds)
+    [118617] = true, -- Mend Wounds (Mend Wounds)
 
     [103747] = true, -- Mend Spirit (Mend Spirit)
     [107629] = true, -- Mend Spirit (Mend Spirit)
@@ -6129,11 +6130,13 @@ LUIE.DebugAuras = {
     [107630] = true, -- Mend Spirit (Mend Spirit)
     [103752] = true, -- Major Resolve (Mend Spirit)
     [103751] = true, -- Major Ward (Mend Spirit)
+    [118638] = true, -- Mend Spirit (Mend Spirit)
 
     [103755] = true, -- Symbiosis (Symbiosis)
     [107636] = true, -- Symbiosis (Symbiosis)
     [107637] = true, -- Symbiosis (Symbiosis)
     [107638] = true, -- Symbiosis (Symbiosis)
+    [118645] = true, -- Symbiosis (Symbiosis)
 
     [103492] = true, -- Meditate (Meditate)
     [103493] = true, -- Snare (Meditate)
@@ -6159,6 +6162,7 @@ LUIE.DebugAuras = {
 
     [103557] = true, -- Precognition (Precognition)
     [108621] = true, -- Precognition (Precognition)
+    [108625] = true, -- Precognition (Precognition)
     [108626] = true, -- Precognition (Precognition)
 
     [103570] = true, -- Minor Protection (Temporal Guard)
@@ -6225,10 +6229,10 @@ LUIE.DebugAuras = {
     [41969] = true, -- Sanguine Altar (Sanguine Altar)
 
     [108787] = true, -- Synergy Damage Bonus (Overflowing Altar - Blood Feast Synergy)
-    [41963] = true, -- Synergy Damage Bonus (Overflowing Altar - Blood Feast Synergy)
-    [41964] = true, -- Synergy Damage Bonus (Overflowing Altar - Blood Feast Synergy)
-    [41965] = true, -- Synergy Damage Bonus (Overflowing Altar - Blood Feast Synergy)
-    [41966] = true, -- Synergy Damage Bonus (Overflowing Altar - Blood Feast Synergy)
+    [41963] = true, -- Blood Feast (Overflowing Altar - Blood Feast Synergy)
+    [41964] = true, -- Blood Feast (Overflowing Altar - Blood Feast Synergy)
+    [41965] = true, -- Blood Feast (Overflowing Altar - Blood Feast Synergy)
+    [41966] = true, -- Blood Feast (Overflowing Altar - Blood Feast Synergy)
 
     [41958] = true, -- Overflowing Altar (Overflowing Altar)
     [41961] = true, -- Overflowing Altar (Overflowing Altar)
@@ -6414,7 +6418,6 @@ LUIE.DebugAuras = {
     [40251] = true, -- Caltrops (Razor Caltrops)
     [40249] = true, -- Spear Shards (Razor Caltrops)
     [40254] = true, -- Razor Caltrops (Razor Caltrops)
-    [40253] = true, -- Hindered (Razor Caltrops)
     [40252] = true, -- Razor Caltrops (Razor Caltrops)
     [113771] = true, -- Razor Caltrops (Razor Caltrops)
 
