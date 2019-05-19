@@ -27,6 +27,7 @@ local classIcons = {
     [2] = "/esoui/art/icons/class/class_sorcerer.dds",
     [3] = "/esoui/art/icons/class/class_nightblade.dds",
     [4] = "/esoui/art/icons/class/class_warden.dds",
+    [5] = "/esoui/art/icons/class/class_necromancer.dds",
     [6] = "/esoui/art/icons/class/class_templar.dds",
 }
 
@@ -93,6 +94,7 @@ UF.D = {
     CustomColourSorcerer             = { 75/255,  83/255,  247/255 },
     CustomColourTemplar              = { 255/255, 240/255, 95/255  },
     CustomColourWarden               = { 136/255, 245/255, 125/255 },
+    CustomColourNecromancer          = { 97/255, 37/255, 201/255 },
     CustomShieldBarSeparate          = false,
     CustomShieldBarHeight            = 10,
     CustomShieldBarFull              = false,
@@ -3255,10 +3257,11 @@ function UF.CustomFramesApplyColours(isMenu)
     local tank      =  { UF.SV.CustomColourTank[1],   UF.SV.CustomColourTank[2],    UF.SV.CustomColourTank[3], 0.9 }
 
     local class1  = { UF.SV.CustomColourDragonknight[1], UF.SV.CustomColourDragonknight[2], UF.SV.CustomColourDragonknight[3], 0.9} -- Dragonkight
-    local class3  = { UF.SV.CustomColourNightblade[1], UF.SV.CustomColourNightblade[2], UF.SV.CustomColourNightblade[3], 0.9} -- Nightblade
     local class2  = { UF.SV.CustomColourSorcerer[1], UF.SV.CustomColourSorcerer[2], UF.SV.CustomColourSorcerer[3], 0.9} -- Sorcerer
-    local class6  = { UF.SV.CustomColourTemplar[1], UF.SV.CustomColourTemplar[2], UF.SV.CustomColourTemplar[3], 0.9} -- Templar
+    local class3  = { UF.SV.CustomColourNightblade[1], UF.SV.CustomColourNightblade[2], UF.SV.CustomColourNightblade[3], 0.9} -- Nightblade
     local class4  = { UF.SV.CustomColourWarden[1], UF.SV.CustomColourWarden[2], UF.SV.CustomColourWarden[3], 0.9} -- Warden
+    local class5  = { UF.SV.CustomColourNecromancer[1], UF.SV.CustomColourNecromancer[2], UF.SV.CustomColourNecromancer[3], 0.9} -- Necromancer
+    local class6  = { UF.SV.CustomColourTemplar[1], UF.SV.CustomColourTemplar[2], UF.SV.CustomColourTemplar[3], 0.9} -- Templar
 
     local health_bg  = { 0.1*UF.SV.CustomColourHealth[1],  0.1*UF.SV.CustomColourHealth[2],  0.1*UF.SV.CustomColourHealth[3], 0.9 }
     local shield_bg  = { 0.1*UF.SV.CustomColourShield[1],  0.1*UF.SV.CustomColourShield[2],  0.1*UF.SV.CustomColourShield[3], 0.9 }
@@ -3270,10 +3273,11 @@ function UF.CustomFramesApplyColours(isMenu)
     local tank_bg   = { 0.1*UF.SV.CustomColourTank[1],   0.1*UF.SV.CustomColourTank[2],   0.1*UF.SV.CustomColourTank[3], 0.9 }
 
     local class1_bg  = { 0.1*UF.SV.CustomColourDragonknight[1], 0.1*UF.SV.CustomColourDragonknight[2], 0.1*UF.SV.CustomColourDragonknight[3], 0.9} -- Dragonkight
-    local class3_bg  = { 0.1*UF.SV.CustomColourNightblade[1], 0.1*UF.SV.CustomColourNightblade[2], 0.1*UF.SV.CustomColourNightblade[3], 0.9} -- Nightblade
     local class2_bg  = { 0.1*UF.SV.CustomColourSorcerer[1], 0.1*UF.SV.CustomColourSorcerer[2], 0.1*UF.SV.CustomColourSorcerer[3], 0.9} -- Sorcerer
-    local class6_bg  = { 0.1*UF.SV.CustomColourTemplar[1], 0.1*UF.SV.CustomColourTemplar[2], 0.1*UF.SV.CustomColourTemplar[3], 0.9} -- Templar
+    local class3_bg  = { 0.1*UF.SV.CustomColourNightblade[1], 0.1*UF.SV.CustomColourNightblade[2], 0.1*UF.SV.CustomColourNightblade[3], 0.9} -- Nightblade
     local class4_bg  = { 0.1*UF.SV.CustomColourWarden[1], 0.1*UF.SV.CustomColourWarden[2], 0.1*UF.SV.CustomColourWarden[3], 0.9} -- Warden
+    local class5_bg  = { 0.1*UF.SV.CustomColourNecromancer[1], 0.1*UF.SV.CustomColourNecromancer[2], 0.1*UF.SV.CustomColourNecromancer[3], 0.9} -- Necromancer
+    local class6_bg  = { 0.1*UF.SV.CustomColourTemplar[1], 0.1*UF.SV.CustomColourTemplar[2], 0.1*UF.SV.CustomColourTemplar[3], 0.9} -- Templar
 
     -- After colour is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs( { "player", "reticleover", "boss", "AvaPlayerTarget" } ) do
@@ -3377,6 +3381,9 @@ function UF.CustomFramesApplyColours(isMenu)
                     elseif class == 4 then
                         class_color = class4
                         class_bg = class4_bg
+                    elseif class == 5 then
+                        class_color = class5
+                        class_bg = class5_bg
                     elseif class == 6 then
                         class_color = class6
                         class_bg = class6_bg
@@ -3463,18 +3470,20 @@ function UF.CustomFramesApplyReactionColor(isPlayer)
     if isPlayer and UF.SV.FrameColorClass then
         local classColor = {
             [1]  = { UF.SV.CustomColourDragonknight[1], UF.SV.CustomColourDragonknight[2], UF.SV.CustomColourDragonknight[3], 0.9}, -- Dragonkight
-            [3]  = { UF.SV.CustomColourNightblade[1], UF.SV.CustomColourNightblade[2], UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
             [2]  = { UF.SV.CustomColourSorcerer[1], UF.SV.CustomColourSorcerer[2], UF.SV.CustomColourSorcerer[3], 0.9}, -- Sorcerer
-            [6]  = { UF.SV.CustomColourTemplar[1], UF.SV.CustomColourTemplar[2], UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
+            [3]  = { UF.SV.CustomColourNightblade[1], UF.SV.CustomColourNightblade[2], UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
             [4]  = { UF.SV.CustomColourWarden[1], UF.SV.CustomColourWarden[2], UF.SV.CustomColourWarden[3], 0.9}, -- Warden
+            [5]  = { UF.SV.CustomColourNecromancer[1], UF.SV.CustomColourNecromancer[2], UF.SV.CustomColourNecromancer[3], 0.9}, -- Necromancer
+            [6]  = { UF.SV.CustomColourTemplar[1], UF.SV.CustomColourTemplar[2], UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
         }
 
         local classBackground = {
             [1]  = { 0.1*UF.SV.CustomColourDragonknight[1], 0.1*UF.SV.CustomColourDragonknight[2], 0.1*UF.SV.CustomColourDragonknight[3], 0.9}, -- Dragonkight
-            [3]  = { 0.1*UF.SV.CustomColourNightblade[1], 0.1*UF.SV.CustomColourNightblade[2], 0.1*UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
             [2]  = { 0.1*UF.SV.CustomColourSorcerer[1], 0.1*UF.SV.CustomColourSorcerer[2], 0.1*UF.SV.CustomColourSorcerer[3], 0.9}, -- Sorcerer
-            [6]  = { 0.1*UF.SV.CustomColourTemplar[1], 0.1*UF.SV.CustomColourTemplar[2], 0.1*UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
+            [3]  = { 0.1*UF.SV.CustomColourNightblade[1], 0.1*UF.SV.CustomColourNightblade[2], 0.1*UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
             [4]  = { 0.1*UF.SV.CustomColourWarden[1], 0.1*UF.SV.CustomColourWarden[2], 0.1*UF.SV.CustomColourWarden[3], 0.9}, -- Warden
+            [5]  = { 0.1*UF.SV.CustomColourNecromancer[1], 0.1*UF.SV.CustomColourNecromancer[2], 0.1*UF.SV.CustomColourNecromancer[3], 0.9}, -- Necromancer
+            [6]  = { 0.1*UF.SV.CustomColourTemplar[1], 0.1*UF.SV.CustomColourTemplar[2], 0.1*UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
         }
 
         if UF.CustomFrames["reticleover"] then

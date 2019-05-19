@@ -1111,6 +1111,7 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_SORC =                  "Цвет Чародеев",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_TEMP =                  "Цвет Храмовников",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_WARD =                  "Цвет Хранителей",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_NECRO =                 "Necromancer Class Color", -- TODO: Translate
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER =         "Цвет реакции - Игрок",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_FRIENDLY =       "Цвет реакции - Дружественный",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE =        "Цвет реакции - Враждебный",

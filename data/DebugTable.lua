@@ -6490,7 +6490,6 @@ LUIE.DebugAuras = {
     [80923] = true, -- Guard (Guard)
     [78338] = true, -- Guard (Guard)
     [80926] = true, -- Guard Saved Damage Value (Guard)
-    [80921] = true, -- Guard (Guard)
 
     [61536] = true, -- Mystic Guard (Mystic Guard)
     [80947] = true, -- Mystic Guard (Mystic Guard)
@@ -6498,7 +6497,6 @@ LUIE.DebugAuras = {
     [64080] = true, -- Minor Vitality (Mystic Guard)
     [81415] = true, -- Guard (Mystic Guard)
     [80950] = true, -- Guard Saved Damage Value (Mystic Guard)
-    [80945] = true, -- Mystic Guard (Mystic Guard)
 
     [61529] = true, -- Stalwart Guard (Stalwart Guard)
     [80983] = true, -- Stalwart Guard (Stalwart Guard)
@@ -6506,7 +6504,6 @@ LUIE.DebugAuras = {
     [80986] = true, -- Minor Force (Stalwart Guard)
     [81420] = true, -- Guard (Stalwart Guard)
     [80988] = true, -- Guard Saved Damage Value (Stalwart Guard)
-    [80981] = true, -- Stalwart Guard (Stalwart Guard)
 
     [61489] = true, -- Revealing Flare (Revealing Flare)
     [61497] = true, -- Nova (Revealing Flare)

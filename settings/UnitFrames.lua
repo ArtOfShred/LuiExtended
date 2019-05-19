@@ -583,6 +583,16 @@ function UF.CreateSettings()
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
             },
             {
+                -- Custom Unit Frames Necromancer Role Color
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_NECRO),
+                getFunc = function() return unpack(UF.SV.CustomColourNecromancer) end,
+                setFunc = function(r,g,b,a) UF.SV.CustomColourNecromancer={r,g,b} UF.CustomFramesApplyColours(true) end,
+                width = "full",
+                default = { r=UF.D.CustomColourNecromancer[1], g=UF.D.CustomColourNecromancer[2], b=UF.D.CustomColourNecromancer[3] },
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
                 -- Custom Unit Reaction color
                 type = "colorpicker",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER),
