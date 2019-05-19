@@ -3113,14 +3113,16 @@ LUIE.DebugAuras = {
     [33399] = true, -- Major Defile (Death Stroke)
     [61389] = true, -- Damage Taken Increased (Death Stroke)
 
+    [125921] = true, -- Reave (Incapacitating Strike)
+    [125922] = true, -- Reave (Incapacitating Strike)
+    [125923] = true, -- Reave (Incapacitating Strike)
     [36508] = true, -- Incapacitating Strike (Incapacitating Strike)
-    [36509] = true, -- Major Defile (Incapacitating Strike)
     [61393] = true, -- Damage Taken Increased (Incapacitating Strike)
     [113108] = true, -- 120 Ultimate Tracker (Incapacitating Strike)
     [113105] = true, -- Incapacitating Strike (Incapacitating Strike)
-    [113110] = true, -- Major Defile (Incapacitating Strike)
     [113107] = true, -- Damage Taken Increased (Incapacitating Strike)
     [113109] = true, -- Incapacitating Strike (Incapacitating Strike)
+    [126444] = true, -- Incapacitating Strike (Incapacitating Strike)
 
     [36518] = true, -- Soul Harvest Passive (Soul Harvest)
     [36514] = true, -- Soul Harvest (Soul Harvest)
@@ -3616,7 +3618,7 @@ LUIE.DebugAuras = {
     [80459] = true, -- Summon Storm Atronach (Summon Storm Atronach)
     [102309] = true, -- Atronach Synergy Anchor (Summon Storm Atronach)
     [102310] = true, -- Charged Lightning (Summon Storm Atronach)
-    [23659] = true, -- Summon Storm Atronach (Summon Storm Atronach)
+    [23659] = true, -- Storm Atronach Impact (Summon Storm Atronach)
     [23658] = true, -- Summon Storm Atronach (Summon Storm Atronach)
 
     [23492] = true, -- Greater Storm Atronach (Greater Storm Atronach)
@@ -3625,7 +3627,7 @@ LUIE.DebugAuras = {
     [80463] = true, -- Greater Storm Atronach (Greater Storm Atronach)
     [102322] = true, -- Atronach Synergy Anchor (Greater Storm Atronach)
     [102321] = true, -- Charged Lightning (Greater Storm Atronach)
-    [23664] = true, -- Greater Storm Atronach (Greater Storm Atronach)
+    [23664] = true, -- Greater Storm Atronach Impact (Greater Storm Atronach)
     [23662] = true, -- Greater Storm Atronach (Greater Storm Atronach)
 
     [23495] = true, -- Summon Charged Atronach (Summon Charged Atronach)
@@ -3634,7 +3636,7 @@ LUIE.DebugAuras = {
     [80468] = true, -- Summon Charged Atronach (Summon Charged Atronach)
     [102330] = true, -- Atronach Synergy Anchor (Summon Charged Atronach)
     [102329] = true, -- Charged Lightning (Summon Charged Atronach)
-    [23667] = true, -- Summon Charged Atronach (Summon Charged Atronach)
+    [23667] = true, -- Charged Atronach Impact (Summon Charged Atronach)
     [23666] = true, -- Summon Charged Atronach (Summon Charged Atronach)
 
     [29806] = true, -- Lightning Strike (Summon Charged Atronach)
@@ -4078,10 +4080,12 @@ LUIE.DebugAuras = {
     [88486] = true, -- Minor Magickasteal (Radiant Aura)
 
     [26821] = true, -- Repentance (Repentance)
-    [34366] = true, -- Repentance (Repentance)
     [26823] = true, -- Repentance (Repentance)
     [26824] = true, -- Repentance (Repentance)
-    [63020] = true, -- Repentance Remover (Repentance)
+    [124700] = true, -- Repentance (Repentance)
+    [124701] = true, -- Minor Fortitude (Repentance)
+    [124702] = true, -- Minor Intellect (Repentance)
+    [124703] = true, -- Minor Endurance (Repentance)
 
     [108824] = true, -- Synergy Damage Bonus (Cleansing Ritual - Purify Synergy)
     [22270] = true, -- Purify (Cleansing Ritual - Purify Synergy)
@@ -5426,10 +5430,8 @@ LUIE.DebugAuras = {
 
     [39266] = true, -- Soul Shatter (Rank 1)
     [39267] = true, -- Soul Shatter
-    [39268] = true, -- Soul Shatter
     [45583] = true, -- Soul Shatter (Rank 2)
     [45584] = true, -- Soul Shatter
-    [45585] = true, -- Soul Shatter
 
     [39269] = true, -- Soul Summons (Rank 1)
     [45590] = true, -- Soul Summons (Rank 2)
@@ -5446,11 +5448,11 @@ LUIE.DebugAuras = {
 
     [26768] = true, -- Soul Trap (Soul Trap)
     [34720] = true, -- Soul Trap (Soul Trap)
-    [26769] = true, -- Soul Trap (Soul Trap)
+    --[26769] = true, -- Soul Trap (Soul Trap)
 
     [40328] = true, -- Soul Splitting Trap (Soul Splitting Trap)
     [40330] = true, -- Soul Splitting Trap (Soul Splitting Trap)
-    [40329] = true, -- Soul Splitting Trap (Soul Splitting Trap)
+    --[40329] = true, -- Soul Splitting Trap (Soul Splitting Trap)
 
     [40317] = true, -- Consuming Trap (Consuming Trap)
     [40320] = true, -- Consuming Trap (Consuming Trap)
@@ -5665,11 +5667,14 @@ LUIE.DebugAuras = {
     [58325] = true, -- Hircine's Fortitude (Hircine's Fortitude)
 
     [32633] = true, -- Roar (Roar)
+    [125004] = true, -- Roar (Roar)
 
     [39113] = true, -- Ferocious Roar (Ferocious Roar)
+    [125007] = true, -- Ferocious Roar (Ferocious Roar)
     [45834] = true, -- Off Balance (Ferocious Roar)
 
     [39114] = true, -- Deafening Roar (Deafening Roar)
+    [125023] = true, -- Deafening Roar (Deafening Roar)
     [111788] = true, -- Major Fracture (Deafening Roar)
 
     [58405] = true, -- Piercing Howl (Piercing Howl)
@@ -5684,14 +5689,14 @@ LUIE.DebugAuras = {
     [58798] = true, -- Howl of Agony (Howl of Agony)
 
     [58855] = true, -- Infectious Claws (Infectious Claws)
-    [58856] = true, -- Infection (Infectious Claws)
+    [58856] = true, -- Infectious Claws (Infectious Claws)
 
     [58864] = true, -- Claws of Anguish (Claws of Anguish)
-    [58865] = true, -- Infection (Claws of Anguish)
+    [58865] = true, -- Claws of Anguish (Claws of Anguish)
     [58869] = true, -- Major Defile (Claws of Anguish)
 
     [58879] = true, -- Claws of Life (Claws of Life)
-    [58880] = true, -- Infection (Claws of Life)
+    [58880] = true, -- Claws of Life (Claws of Life)
     [61378] = true, -- Claws of Life Caused Damage (Claws of Life)
     [61379] = true, -- Claws of Life Saved Damage (Claws of Life)
     [58881] = true, -- Claws of Life (Claws of Life)
@@ -6111,7 +6116,7 @@ LUIE.DebugAuras = {
     [103710] = true, -- Race Against Time (Race Against Time)
     [103711] = true, -- Major Expedition (Race Against Time)
     [103712] = true, -- Minor Force (Race Against Time)
-    [103720] = true, -- Race Against Time (Race Against Time)
+    [122260] = true, -- Race Against Time (Race Against Time)
 
     [103543] = true, -- Mend Wounds (Mend Wounds)
     [107583] = true, -- Mend Wounds (Mend Wounds)

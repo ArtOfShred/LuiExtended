@@ -1731,7 +1731,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             endTime = endTime - E.EffectOverride[abilityId].duration
         end
 
-        -- Specific override for Mend Spirit -- Updates Major Resolve / Major Ward to use the remaining duration of Mend Spirit.
+        -- Outdated and unused - might be useful in the future
+        -- Specific override for old version of Mend Spirit -- Updates Major Resolve / Major Ward to use the remaining duration of Mend Spirit.
+        --[[
         if E.EffectPullDuration[abilityId] then
             local matchId = E.EffectPullDuration[abilityId]
             for i = 1, GetNumBuffs(unitTag) do
@@ -1743,6 +1745,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                 end
             end
         end
+        ]]--
 
         --EffectCreateSkillAura
         if E.EffectCreateSkillAura[abilityId] then
@@ -2161,6 +2164,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         iconName = E.FakePlayerBuffs[abilityId].icon or GetAbilityIcon(abilityId)
         effectName = E.FakePlayerBuffs[abilityId].name or GetAbilityName(abilityId)
         duration = E.FakePlayerBuffs[abilityId].duration
+        if duration == "GET" then duration = GetAbilityDuration(abilityId) end
         local finalId = E.FakePlayerBuffs[abilityId].shiftId or abilityId
         local forcedType = E.FakePlayerBuffs[abilityId].long and "long" or "short"
         local beginTime = GetGameTimeMilliseconds()

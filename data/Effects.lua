@@ -699,6 +699,9 @@ E.EffectCreateSkillAura = {
     [26213] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Fortitude (Restoring Aura)
     [26216] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Intellect (Restoring Aura)
     [26215] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Endurance (Restoring Aura)
+    [124701] = { removeOnEnd = true, consolidate = true, abilityId = 26821 }, -- Minor Fortitude (Repentance)
+    [124702] = { removeOnEnd = true, consolidate = true, abilityId = 26821 }, -- Minor Intellect (Repentance)
+    [124703] = { removeOnEnd = true, consolidate = true, abilityId = 26821 }, -- Minor Endurance (Repentance)
     [22236] = { consolidate = true, abilityId = 22234 }, -- Major Resolve (Rune Focus)
     [44820] = { consolidate = true, abilityId = 22234 }, -- Major Ward (Rune Focus)
 
@@ -1169,9 +1172,9 @@ E.BarHighlightOverride = {
     ---------------------------
 
     [58317] = { newId = 58318 }, -- Hircine's Rage
-    [58855] = { newId = 58856 }, -- Infectious Claws --> Infection
-    [58864] = { newId = 58865 }, -- Claws of Anguish --> Infection
-    [58879] = { newId = 58880 }, -- Claws of Life --> Infection
+    [58855] = { newId = 58856 }, -- Infectious Claws
+    [58864] = { newId = 58865 }, -- Claws of Anguish
+    [58879] = { newId = 58880 }, -- Claws of Life
 
     ---------------------------
     -- Fighters Guild ---------
@@ -2047,7 +2050,6 @@ E.EffectHideSCT = {
     -- Actives
     [37009] = true, -- Channeled Focus (Channeled Focus)
     [114842] = true, -- Restoring Focus (Restoring Focus)
-    [63020] = true, -- Repentance Remover (Repentance)
 
     ----------------------------
     -- Warden
@@ -3817,7 +3819,6 @@ E.EffectOverride = {
     [21014] = { tooltip = T.Skill_Protective_Plate }, -- Protective Plate (Protective Plate)
     [108798] = { name = A.Skill_Reflective_Plate, tooltip = T.Skill_Protective_Plate, hideReduce = true, noDuplicate = true }, -- Snare Removal (Protective Plate)
     [21017] = { tooltip = T.Skill_Dragon_Fire_Scale }, -- Dragon Fire Scale (Dragon Fire Scale)
-    [32753] = { hide = true }, -- Dragon Fire Scale (Dragon Fire Scale)
 
     -- Inhale / Deep Breath / Draw Essence
     [31841] = { icon = 'esoui/art/icons/ability_dragonknight_012.dds', tooltip = T.Skill_Inhale }, -- Inhale (Inhale)
@@ -3955,7 +3956,7 @@ E.EffectOverride = {
     [61817] = { consolidate = true, tooltip = A.Skill_Mirage }, -- Minor Resolve (Mirage)
     [68512] = { consolidate = true, tooltip = A.Skill_Mirage }, -- Minor Ward (Mirage)
     [90620] = { consolidateExtra = true, tooltip = A.Skill_Double_Take }, -- Major Evasion (Phantasmal Escape)
-    [61833] = { tooltip = T.Innate_Immobilize_Immunity }, -- Phantasmal Escape (Phantasmal Escape)
+    [61833] = { tooltip = T.Innate_Snare_Immobilize_Immunity }, -- Phantasmal Escape (Phantasmal Escape)
 
     -- Mark Target / Piercing Mark / Reaper's Mark
     [33363] = { consolidate = true, tooltip = A.Skill_Mark_Target }, -- Major Breach (Mark Target)
@@ -3971,26 +3972,27 @@ E.EffectOverride = {
     [36973] = { tooltip = A.Skill_Reapers_Mark }, -- Major Berserk (Reaper's Mark)
 
     -- Grim Focus / Relentless Focus / Merciless Resolve
-    [61902] = { tooltip = T.Skill_Grim_Focus }, -- Grim Focus (Grim Focus)
+    [61902] = { tooltip = T.Skill_Grim_Focus, tooltipValue2 = strformat("<<C:1>>", GetAbilityName(61902)) }, -- Grim Focus (Grim Focus)
     [61907] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Grim Focus)
     [122585] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Grim Focus)
-    [61905] = { hide = true }, -- Grim Focus (Grim Focus)
-    [61927] = { tooltip = T.Skill_Relentless_Focus }, -- Relentless Focus (Relentless Focus)
+    [61905] = { tooltip = T.Skill_Grim_Focus_Defense }, -- Grim Focus (Grim Focus)
+    [61927] = { tooltip = T.Skill_Relentless_Focus, tooltipValue2 = strformat("<<C:1>>", GetAbilityName(61927)) }, -- Relentless Focus (Relentless Focus)
     [61932] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Scourge (Relentless Focus)
     [122587] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', name = A.Skill_Assassins_Scourge }, -- Death Scythe
-    [61928] = { hide = true}, -- Relentless Focus (Relentless Focus)
-    [61919] = { tooltip = T.Skill_Grim_Focus }, -- Merciless Resolve (Merciless Resolve)
+    [61928] = { tooltip = T.Skill_Grim_Focus_Defense }, -- Relentless Focus (Relentless Focus)
+    [61919] = { tooltip = T.Skill_Grim_Focus, tooltipValue2 = strformat("<<C:1>>", GetAbilityName(61919)) }, -- Merciless Resolve (Merciless Resolve)
     [61930] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Merciless Resolve)
     [122586] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', name = A.Skill_Assassins_Will }, -- Death Scythe (Merciless Resolve)
-    [61920] = { hide = true }, -- Merciless Resolve (Merciless Resolve)
+    [61920] = { tooltip = T.Skill_Grim_Focus_Defense }, -- Merciless Resolve (Merciless Resolve)
 
     -- Death Stroke / Incapacitating Strike / Soul Harvest
     [61389] = { icon = 'esoui/art/icons/ability_nightblade_007.dds', name = A.Skill_Death_Stroke, tooltip = T.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Death Stroke)
-    [36509] = { tooltip = A.Skill_Incapacitating_Strike }, -- Major Defile (Incapacitating Strike)
+    [125922] = { icon = 'esoui/art/icons/ability_nightblade_007_a.dds' }, -- Reave (Incapacitating Strike)
+    [125923] = { icon = 'esoui/art/icons/ability_nightblade_007_a.dds' }, -- Reave (Incapacitating Strike)
     [61393] = { name = A.Skill_Incapacitating_Strike, tooltip = T.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Incapacitating Strike)
-    [113110] = { tooltip = A.Skill_Incapacitating_Strike, consolidateExtra = true }, -- Minor Mangle (Incapacitating Strike)
     [113107] = { icon = 'esoui/art/icons/ability_nightblade_007_c.dds', name = A.Skill_Incapacitating_Strike, tooltip = T.Skill_Incapacitating_Strike }, -- Damage Taken Increased (Incapacitating Strike)
-    [113109] = { icon = 'esoui/art/icons/ability_nightblade_007_c.dds', tooltip = T.Skill_Incapacitating_Strike, hideReduce = true }, -- Incapacitating Strike (Incapacitating Strike)
+    [113109] = { icon = 'esoui/art/icons/ability_nightblade_007_c.dds' }, -- Incapacitating Strike (Incapacitating Strike)
+    [126444] = { icon = 'esoui/art/icons/ability_nightblade_007_c.dds', tooltip = T.Skill_Incapacitating_Strike, hideReduce = true }, -- Incapacitating Strike (Incapacitating Strike)
     [36515] = { tooltip = A.Skill_Soul_Harvest }, -- Major Defile (Soul Harvest)
     [61400] = { name = A.Skill_Soul_Harvest, tooltip = T.Skill_Death_Stroke_Debuff }, -- Damage Taken Increased (Soul Harvest)
     [36519] = { icon = 'esoui/art/icons/ability_nightblade_007_b.dds', name = A.Skill_Soul_Harvest }, -- Rapid Stroke Passive (Soul Harvest)
@@ -4248,12 +4250,15 @@ E.EffectOverride = {
     [26098] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_atronach_zap.dds', name = A.Skill_Atronach_Zap, hide = true }, -- Zap Snare (Summon Storm Atronach - All Morphs)
     [23636] = { tooltip = T.Skill_Storm_Atronach }, -- Summon Storm Atronach (Summon Storm Atronach)
     [80459] = { tooltip = T.Skill_Storm_Atronach }, -- Summon Storm Atronach (Summon Storm Atronach)
+    [23659] = { name = A.Skill_Summon_Storm_Atronach }, -- Storm Atronach Impact (Summon Storm Atronach)
     [23658] = { tooltip = T.Generic_Stun }, -- Summon Storm Atronach (Summon Storm Atronach)
     [23665] = { tooltip = T.Skill_Storm_Atronach }, -- Greater Storm Atronach (Greater Storm Atronach)
     [80463] = { tooltip = T.Skill_Storm_Atronach }, -- Greater Storm Atronach (Greater Storm Atronach)
+    [23664] = { name = A.Skill_Greater_Storm_Atronach }, -- Greater Storm Atronach Impact (Greater Storm Atronach)
     [23662] = { tooltip = T.Generic_Stun }, -- Greater Storm Atronach (Greater Storm Atronach)
     [23668] = { tooltip = T.Skill_Charged_Atronach }, -- Summon Charged Atronach (Summon Charged Atronach)
     [80468] = { tooltip = T.Skill_Charged_Atronach }, -- Summon Charged Atronach (Summon Charged Atronach)
+    [23667] = { name = A.Skill_Summon_Charged_Atronach }, -- Charged Atronach Impact (Summon Charged Atronach)
     [23666] = { tooltip = T.Generic_Stun }, -- Summon Charged Atronach (Summon Charged Atronach)
     [29806] = { hide = true }, -- Lightning Strike (Summon Charged Atronach)
     [43764] = { hide = true }, -- Lightning Strike (Summon Charged Atronach)
@@ -4479,6 +4484,9 @@ E.EffectOverride = {
     [88486] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Radiant Aura)
     [26823] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds' }, -- Repentance Magicka Restore (Repentance)
     [26824] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds' }, -- Repentance Heal (Repentance)
+    [124701] = { consolidate = true, tooltip = A.Skill_Repentance }, -- Minor Fortitude (Repentance)
+    [124702] = { consolidate = true, tooltip = A.Skill_Repentance }, -- Minor Intellect (Repentance)
+    [124703] = { consolidate = true, tooltip = A.Skill_Repentance }, -- Minor Endurance (Repentance)
 
     -- Cleansing Ritual / Ritual of Retribution / Extended Ritual
     [108824] = { hide = true }, -- Synergy Damage Bonus (Cleansing Ritual - Purify Synergy)
@@ -4861,7 +4869,7 @@ E.EffectOverride = {
     [28299] = { icon = 'esoui/art/icons/ability_2handed_005.dds' }, -- Momentum (Momentum)
     [38794] = { tooltip = T.Generic_HoT, tooltipValue2 = 2 }, -- Forward Momentum (Forward Momentum)
     [62387] = { consolidateExtra = true, tooltip = A.Skill_Forward_Momentum }, -- Major Brutality (Forward Momentum)
-    [38797] = { tooltip = T.Innate_Immobilize_Immunity }, -- Forward Momentum (Forward Momentum)
+    [38797] = { tooltip = T.Innate_Snare_Immobilize_Immunity }, -- Forward Momentum (Forward Momentum)
     [62385] = { icon = 'esoui/art/icons/ability_2handed_005_a.dds', name = A.Skill_Forward_Momentum }, -- Momentum (Forward Momentum)
     [38802] = { tooltip = T.Skill_Rally }, -- Rally (Rally)
     [62415] = { consolidateExtra = true, tooltip = A.Skill_Rally }, -- Major Brutality (Rally)
@@ -5176,7 +5184,7 @@ E.EffectOverride = {
     -- MEDIUM ARMOR
     [63015] = { consolidateExtra = true, tooltip = A.Skill_Evasion }, -- Major Evasion (Evasion)
     [63019] = { consolidateExtra = true, tooltip = A.Skill_Shuffle }, -- Major Evasion (Shuffle)
-    [39196] = { noDuplicate = true, tooltip = T.Innate_Immobilize_Immunity }, -- Shuffle (Shuffle)
+    [39196] = { noDuplicate = true, tooltip = T.Innate_Snare_Immobilize_Immunity }, -- Shuffle (Shuffle)
     [63030] = { consolidateExtra = true, tooltip = A.Skill_Elude }, -- Major Evasion (Elude)
 
     -- HEAVY ARMOR
@@ -5196,10 +5204,8 @@ E.EffectOverride = {
 
     [39266] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_shatter.dds' }, -- Soul Shatter (Soul Shatter - Rank 1)
     [39267] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_shatter.dds' }, -- Soul Shatter (Soul Shatter - Rank 1)
-    [39268] = { hide = true }, -- Soul Shatter (Soul Shatter - Rank 1)
     [45583] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_shatter.dds' }, -- Soul Shatter (Soul Shatter - Rank 2)
     [45584] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_shatter.dds' }, -- Soul Shatter (Soul Shatter - Rank 2)
-    [45585] = { hide = true }, -- Soul Shatter (Soul Shatter - Rank 2)
     [39269] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_summons.dds' }, -- Soul Summons
     [45590] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_summons.dds' }, -- Soul Summons
     [43752] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_summons_icd.dds', name = strformat("<<1>> <<2>>", A.Passive_Soul_Summons, A.Set_Cooldown), tooltip = T.Skill_Soul_Summons }, -- Soul Summons
@@ -5327,10 +5333,10 @@ E.EffectOverride = {
     [58775] = { tooltip = T.Skill_Feeding_Frenzy }, -- Feeding Frenzy (Howl of Despair - Feeding Frenzy Synergy)
 
     -- Infectious Claws / Claws of Anguish / Claws of Life
-    [58856] = { name = A.Skill_Infectious_Claws, tooltip = T.Generic_Disease, tooltipValue2 = 2 }, -- Infection (Infectious Claws)
-    [58865] = { name = A.Skill_Claws_of_Anguish, tooltip = T.Generic_Disease, tooltipValue2 = 2 }, -- Infection (Claws of Anguish)
+    [58856] = { tooltip = T.Generic_Disease, tooltipValue2 = 2 }, -- Infection (Infectious Claws)
+    [58865] = { tooltip = T.Generic_Disease, tooltipValue2 = 2 }, -- Infection (Claws of Anguish)
     [58869] = { tooltip = A.Skill_Claws_of_Anguish }, -- Major Defile (Claws of Anguish)
-    [58880] = { name = A.Skill_Claws_of_Life, tooltip = T.Skill_Claws_of_Life }, -- Infection (Claws of Life)
+    [58880] = { tooltip = T.Skill_Claws_of_Life }, -- Infection (Claws of Life)
 
     -- Werewolf Transformation / Pack Leader / Werewolf Berserker
     [39477] = { hide = true }, -- De-Werewolf (Werewolf Transformation - All Morphs)
@@ -5345,7 +5351,7 @@ E.EffectOverride = {
     [80189] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
     [80190] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
     [39076] = { tooltip = T.Skill_Werewolf_Transformation }, -- Werewolf Berserker (Werewolf Berserker)
-    [111844] = { icon = 'esoui/art/icons/ability_werewolf_001_b.dds', tooltip = T.Generic_Fear }, -- Werewolf Berserker
+    [111844] = { tooltip = T.Generic_Fear }, -- Werewolf Berserker
     [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', tooltip = T.Generic_Bleed, tooltipValue2 = 1 }, -- Werewolf Berserker Bleed (Werewolf Bleed)
 
     ----------------------------------------------------------------
@@ -5574,21 +5580,22 @@ E.EffectOverride = {
     [103708] = { consolidateExtra = true, tooltip = A.Skill_Channeled_Acceleration }, -- Minor Force (Channeled Acceleration)
     [103711] = { tooltip = A.Skill_Race_Against_Time }, -- Major Expedition (Race Against Time)
     [103712] = { consolidateExtra = true, tooltip = A.Skill_Race_Against_Time }, -- Minor Force (Race Against Time)
+    [122260] = { icon = 'esoui/art/icons/ability_psijic_005_b.dds', tooltip = T.Innate_Snare_Immobilize_Immunity }, -- Race Against Time (Race Against Time)
 
     -- Mend Wounds / Mend Spirit / Symbiosis
     [103543] = { tooltip = T.Skill_Mend_Wounds }, -- Mend Wounds (Mend Wounds)
-    [107583] = { refreshOnly = true, tooltip = T.Generic_HoT, tooltipValue2 = 2 }, -- Mend Wounds (Mend Wounds)
-    [107579] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Mend_Wounds_Channel }, -- Mend Wounds (Mend Wounds)
+    [107583] = { hide = true }, -- Mend Wounds (Mend Wounds)
+    --[107579] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Mend_Wounds_Channel }, -- Mend Wounds (Mend Wounds)
     [103747] = { tooltip = T.Skill_Mend_Spirit }, -- Mend Spirit (Mend Spirit)
-    [107629] = { refreshOnly = true, tooltip = T.Generic_HoT, tooltipValue2 = 2 }, -- Mend Spirit (Mend Spirit)
-    [107632] = { forcedContainer = 'short', tooltip = A.Skill_Mend_Spirit }, -- Major Resolve (Mend Spirit)
-    [107631] = { forcedContainer = 'short', tooltip = A.Skill_Mend_Spirit }, -- Major Ward (Mend Spirit)
-    [107630] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Mend_Wounds_Channel }, -- Mend Spirit (Mend Spirit)
-    [103752] = { forcedContainer = 'short', tooltip = A.Skill_Mend_Spirit }, -- Major Resolve (Mend Spirit)
-    [103751] = { forcedContainer = 'short', tooltip = A.Skill_Mend_Spirit }, -- Major Ward (Mend Spirit)
+    [107629] = { hide = true }, -- Mend Spirit (Mend Spirit)
+    [107632] = { tooltip = A.Skill_Mend_Spirit }, -- Major Resolve (Mend Spirit)
+    [107631] = { tooltip = A.Skill_Mend_Spirit }, -- Major Ward (Mend Spirit)
+    --[107630] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Mend_Wounds_Channel }, -- Mend Spirit (Mend Spirit)
+    [103752] = { tooltip = A.Skill_Mend_Spirit }, -- Major Resolve (Mend Spirit)
+    [103751] = { tooltip = A.Skill_Mend_Spirit }, -- Major Ward (Mend Spirit)
     [103755] = { tooltip = T.Skill_Symbiosis }, -- Symbiosis (Symbiosis)
-    [107636] = { refreshOnly = true, tooltip = T.Generic_HoT, tooltipValue2 = 2 }, -- Symbiosis (Symbiosis)
-    [107637] = { name = A.Skill_Symbiosis, duration = 0, forcedContainer = 'short', tooltip = T.Skill_Mend_Wounds_Channel }, -- Symbiosis HA (Symbiosis)
+    [107636] = { hide = true }, -- Symbiosis (Symbiosis)
+    --[107637] = { duration = 0, forcedContainer = 'short', tooltip = T.Skill_Mend_Wounds_Channel }, -- Symbiosis (Symbiosis)
 
     -- Meditate / Deep Thoughts / Introspection
     [103492] = { forcedContainer = 'short', tooltip = T.Skill_Meditate }, -- Meditate (Meditate)
@@ -10481,12 +10488,12 @@ E.EffectOverride = {
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
--- If this abilityId is up, then pull the duration from another active ability Id to set its duration
+-- If this abilityId is up, then pull the duration from another active ability Id to set its duration (Unused - Might be useful in the future)
 --------------------------------------------------------------------------------------------------------------------------------
+--[[
 E.EffectPullDuration = {
-    [107632] = 107629, -- Major Resolve --> Mend Spirit (Mend Spirit)
-    [107631] = 107629, -- Major Ward --> Mend Spirit (Mend Spirit)
 }
+]]--
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fake Buffs & Debuffs - Fake auras created by EVENT_COMBAT_EVENT for abilities that lack proper auras. Note tooltips & unbreakable status are determined in E.EffectOverride
@@ -10837,7 +10844,10 @@ E.FakePlayerBuffs = {
     --[33175] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, duration = 6300 }, -- Feed (Vampire - Feed)
 
     -- Mages Guild
-    [40449] = { duration = 5000 }, -- Spell Symmetry (Spell Symmetry)
+    [40449] = { duration = "GET" }, -- Spell Symmetry (Spell Symmetry)
+
+    -- Psijic Order
+    [122260] = { duration = "GET" }, -- Race Against Time (Race Against Time)
 
     -- Seasonal Quests (New Life Festival)
     --[84125] = {icon = 'esoui/art/icons/achievement_newlifefestival_002.dds', name = A.Skill_Lava_Foot_Stomp, duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)

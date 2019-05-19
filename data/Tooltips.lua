@@ -200,6 +200,7 @@ LUIE.Tooltips = {
 
     -- Player Basic
     Innate_Immobilize_Immunity                      = GetString(SI_LUIE_SKILL_IMMOBILIZE_IMMUNITY_TP),
+    Innate_Snare_Immobilize_Immunity                = GetString(SI_LUIE_SKILL_SNARE_IMMOBILIZE_IMMUNITY_TP),
     Innate_Dodge_Fatigue                            = GetString(SI_LUIE_SKILL_DODGE_FATIGUE_TP),
     Innate_Hidden                                   = GetString(SI_LUIE_SKILL_HIDDEN_TP),
     Innate_Invisible                                = GetString(SI_LUIE_SKILL_INVISIBLE_TP),
@@ -514,6 +515,7 @@ LUIE.Tooltips = {
     Skill_Shadowy_Disguise                          = GetString(SI_LUIE_SKILL_SHADOWY_DISGUISE_TP),
     Skill_Grim_Focus                                = GetString(SI_LUIE_SKILL_GRIM_FOCUS_TP),
     Skill_Relentless_Focus                          = GetString(SI_LUIE_SKILL_RELENTLESS_FOCUS_TP),
+    Skill_Grim_Focus_Defense                        = GetString(SI_LUIE_SKILL_GRIM_FOCUS_DEFENSE_TP),
     Skill_Surprise_Attack                           = GetString(SI_LUIE_SKILL_SURPRISE_ATTACK_TP),
     Skill_Path_of_Darkness                          = GetString(SI_LUIE_SKILL_PATH_OF_DARKNESS_TP),
     Skill_Twisting_Path                             = GetString(SI_LUIE_SKILL_TWISTING_PATH_TP),

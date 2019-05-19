@@ -397,7 +397,7 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
     _G["LUIE_Alert" .. drawLocation].name:SetColor(unpack(CI.SV.alerts.colors.alertShared))
     _G["LUIE_Alert" .. drawLocation].mitigation:SetText(textMitigation)
     _G["LUIE_Alert" .. drawLocation].mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
-    _G["LUIE_Alert" .. drawLocation].timer:SetText(_G["LUIE_Alert" .. i].data.showDuration and strfmt(" %.1f", duration / 1000) or "")
+    _G["LUIE_Alert" .. drawLocation].timer:SetText(_G["LUIE_Alert" .. drawLocation].data.showDuration and strfmt(" %.1f", duration / 1000) or "")
     _G["LUIE_Alert" .. drawLocation].timer:SetColor(unpack(CI.SV.alerts.colors.alertTimer))
     _G["LUIE_Alert" .. drawLocation]:SetHidden(false)
     _G["LUIE_Alert" .. drawLocation].data.available = false
