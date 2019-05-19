@@ -1,12 +1,12 @@
 --LibMediaProvider-1.0 is inspired by and borrows from LibSharedMedia-3.0 for World of Warcraft by Elkano
 --LibSharedMedia-3.0 and LibMediaProvider-1.0 are under the LGPL-2.1 license
 
-local MAJOR, MINOR = "LibMediaProvider-1.0", 9 -- remember to increase manually on changes
-local LMP = LibStub:NewLibrary(MAJOR, MINOR)
+local MAJOR, MINOR = "LibMediaProvider-1.0", 10 -- remember to increase manually on changes
+local LMP = LibStub and LibStub:NewLibrary(MAJOR, MINOR)
+LibMediaProvider = LMP or {}
 if not LMP then
     return
 end
-LibMediaProvider = LMP
 
 local cm = CALLBACK_MANAGER
 
