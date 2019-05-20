@@ -651,8 +651,8 @@ function CI.CreateSettings()
             -- Unlock Alert Frame
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE),
-                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_MOVE_TP),
+                name = "Unlock Alerts Frame",
+                tooltip = "Unlock the Combat Alerts frame position.",
                 getFunc = function() return alertFrameMovingEnabled end,
                 setFunc = CI.SetMovingStateAlert,
                 width = "half",

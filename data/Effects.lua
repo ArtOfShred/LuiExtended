@@ -3292,7 +3292,7 @@ E.EffectOverride = {
     [60416] = { tooltip = A.Set_Sunderflame }, -- Minor Fracture (Sunderflame)
     [108825] = { tooltip = A.Set_Sunderflame }, -- Minor Breach (Sunderflame)
     [49220] = { hide = true }, -- Extra dodge (of the Crusader)
-    [67334] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds', tooltip = T.Generic_Enrage, tooltipValue2 = 12 }, -- Essence Thief (of the Essence Thief)
+    [67334] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds', tooltip = T.Generic_Enrage, tooltipValue2 = 10 }, -- Essence Thief (of the Essence Thief)
     [70284] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds' }, -- Essence Thief (of the Essence Thief)
     [70290] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds' }, -- Essence Thief (of the Essence Thief)
     [59667] = { icon = 'LuiExtended/media/icons/abilities/ability_set_undaunted_infiltrator.dds', tooltip = T.Generic_LA_HA_Damage_Duration }, -- Undaunted Infiltrator (of the Undaunted Infiltrator)

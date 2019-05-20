@@ -816,16 +816,16 @@ local strings = {
     SI_LUIE_SKILL_SET_EMBERSHIELD =                      "Increase Spell Resistance.\n\nEnemies within |cffffff5|r meters take Flame Damage every |cffffff1|r second for |cffffff6|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_SET_HAGRAVENS_GARDEN =                 "Any damage you take from enemies outside of the preservation is reduced by |cffffff50|r%.\n\nThe first time an enemy tries to enter the preservation they are knocked back |cffffff5|r meters.", -- TODO: Translate
     SI_LUIE_SKILL_SET_JOLTING_ARMS =                     "Increase Spell Resistance for |cffffff<<1>>|r seconds and your next Bash deals additional Shock Damage.", -- TODO: Translate
-    SI_LUIE_SKILL_SET_LEECHING_PLATE_TP =                "Enemies in the |cffffff4|r meter radius of the poison cloud take Poison Damage every |cffffff1|r second and heal you for |cffffff100|r% of the damage dealt.", -- TODO: Translate
+    SI_LUIE_SKILL_SET_LEECHING_PLATE_TP =                "Enemies in the |cffffff5|r meter radius of the poison cloud take Poison Damage every |cffffff1|r second.\n\nYou heal for |cffffff100|r% of the damage dealt.",
     SI_LUIE_SKILL_SET_MEDUSA =                           "Medusa",
     SI_LUIE_SKILL_SET_HAND_OF_MEPHALA_TP =               "Enemies in the web have their Movement Speed reduced by |cffffff50|r% for |cffffff5|r seconds.\n\nAfter |cffffff5|r seconds the webs burst into venom, dealing Poison Damage and applying Minor Fracture to any enemy hit for |cffffff5|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_SET_RATTLECAGE =                       "Rattlecage",
     SI_LUIE_SKILL_SET_DREUGH_KING_SLAYER =               "Dreugh King Slayer",
-    SI_LUIE_SKILL_LEECHING_PLATE_GROUND_TP =             "Taking Poison Damage every |cFFFFFF1|r second.\n\nEach tick heals your attacker.",
+    SI_LUIE_SKILL_LEECHING_PLATE_GROUND_TP =             "Taking Poison Damage every |cFFFFFF1|r second.\n\nEach tick heals your attacker for |cffffff100|r% of the damage dealt.",
     SI_LUIE_SKILL_HAND_OF_MEPHALA_GROUND_TP =            "Movement Speed reduced by |cffffff50|r%.\n\nAfter |cffffff5|r seconds the webs burst into venom, dealing Poison Damage and applying Minor Fracture for |cffffff5|r seconds.",
 
     -- Trial Sets
-    SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical for |cffffff5|r seconds, stacking up to |cffffff5|r times.", -- TODO: Translate
+    SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical for |cffffff<<1>>|r seconds, stacking up to |cffffff5|r times.", -- TODO: Translate
     SI_LUIE_SKILL_SET_ETERNAL_IMMORTAL_WARRIOR_TP =      "Вы недавно были обращены в статую и не можете избежать смерти этим способом снова.",
     SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "Когда другой игрок поразит эту же цель полностью заряженной Силовой атакой, бомба взорвётся, нанося Магический урон всем противникам в радиусе |cffffff8|r метров.",
     SI_LUIE_SKILL_SET_HEALING_MAGE_TP =                  "Снижает урон от Оружия на |cffffff3|r секунды.",
