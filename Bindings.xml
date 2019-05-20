@@ -1,22 +1,27 @@
+<!--
+      LuiExtended
+      License: The MIT License (MIT)
+-->
+
 <Bindings>
     <Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
         <Category name="|cE12000L|cFFFFB0ui E|rxtended|r">
-            <Action name="LUIE_COMMAND_MERCHANT"><Down>LUIE.SlashCollectible(301)</Down></Action>
-            <Action name="LUIE_COMMAND_FENCE"><Down>LUIE.SlashCollectible(300)</Down></Action>
-            <Action name="LUIE_COMMAND_BANKER"><Down>LUIE.SlashCollectible(267)</Down></Action>
-            <Action name="LUIE_COMMAND_HOME"><Down>LUIE.SlashHome()</Down></Action>
-            <Action name="LUIE_COMMAND_READY_CHECK"><Down>LUIE.SlashReadyCheck()</Down></Action>
-            <Action name="LUIE_COMMAND_REGROUP"><Down>LUIE.SlashRegroup()</Down></Action>
-			<Action name="LUIE_COMMAND_OUTFIT_1"><Down>LUIE.SlashOutfit(1)</Down></Action>
-			<Action name="LUIE_COMMAND_OUTFIT_2"><Down>LUIE.SlashOutfit(2)</Down></Action>
-			<Action name="LUIE_COMMAND_OUTFIT_3"><Down>LUIE.SlashOutfit(3)</Down></Action>
-			<Action name="LUIE_COMMAND_OUTFIT_4"><Down>LUIE.SlashOutfit(4)</Down></Action>
-			<Action name="LUIE_COMMAND_OUTFIT_5"><Down>LUIE.SlashOutfit(5)</Down></Action>
-			<Action name="LUIE_COMMAND_OUTFIT_6"><Down>LUIE.SlashOutfit(6)</Down></Action>
-			<Action name="LUIE_COMMAND_OUTFIT_7"><Down>LUIE.SlashOutfit(7)</Down></Action>
-			<Action name="LUIE_COMMAND_OUTFIT_8"><Down>LUIE.SlashOutfit(8)</Down></Action>
-			<Action name="LUIE_COMMAND_OUTFIT_9"><Down>LUIE.SlashOutfit(9)</Down></Action>
-			<Action name="LUIE_COMMAND_OUTFIT_10"><Down>LUIE.SlashOutfit(10)</Down></Action>
+            <Action name="LUIE_COMMAND_MERCHANT"><Down>LUIE.SlashCommands.SlashCollectible(301)</Down></Action>
+            <Action name="LUIE_COMMAND_FENCE"><Down>LUIE.SlashCommands.SlashCollectible(300)</Down></Action>
+            <Action name="LUIE_COMMAND_BANKER"><Down>LUIE.SlashCommands.SlashCollectible(267)</Down></Action>
+            <Action name="LUIE_COMMAND_HOME"><Down>LUIE.SlashCommands.SlashHome()</Down></Action>
+            <Action name="LUIE_COMMAND_READY_CHECK"><Down>LUIE.SlashCommands.SlashReadyCheck()</Down></Action>
+            <Action name="LUIE_COMMAND_REGROUP"><Down>LUIE.SlashCommands.SlashRegroup()</Down></Action>
+            <Action name="LUIE_COMMAND_OUTFIT_1"><Down>LUIE.SlashCommands.SlashOutfit(1)</Down></Action>
+            <Action name="LUIE_COMMAND_OUTFIT_2"><Down>LUIE.SlashCommands.SlashOutfit(2)</Down></Action>
+            <Action name="LUIE_COMMAND_OUTFIT_3"><Down>LUIE.SlashCommands.SlashOutfit(3)</Down></Action>
+            <Action name="LUIE_COMMAND_OUTFIT_4"><Down>LUIE.SlashCommands.SlashOutfit(4)</Down></Action>
+            <Action name="LUIE_COMMAND_OUTFIT_5"><Down>LUIE.SlashCommands.SlashOutfit(5)</Down></Action>
+            <Action name="LUIE_COMMAND_OUTFIT_6"><Down>LUIE.SlashCommands.SlashOutfit(6)</Down></Action>
+            <Action name="LUIE_COMMAND_OUTFIT_7"><Down>LUIE.SlashCommands.SlashOutfit(7)</Down></Action>
+            <Action name="LUIE_COMMAND_OUTFIT_8"><Down>LUIE.SlashCommands.SlashOutfit(8)</Down></Action>
+            <Action name="LUIE_COMMAND_OUTFIT_9"><Down>LUIE.SlashCommands.SlashOutfit(9)</Down></Action>
+            <Action name="LUIE_COMMAND_OUTFIT_10"><Down>LUIE.SlashCommands.SlashOutfit(10)</Down></Action>
         </Category>
     </Layer>
 </Bindings>

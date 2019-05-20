@@ -1,7 +1,10 @@
-LUIE.CombatTextPoolManager = ZO_Object:Subclass()
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
 
+LUIE.CombatTextPoolManager = ZO_Object:Subclass()
 local CTPM = LUIE.CombatTextPoolManager
-local pairs = pairs
 
 function CTPM:New()
     local obj = ZO_Object:New(self)

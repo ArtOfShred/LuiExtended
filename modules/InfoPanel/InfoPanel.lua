@@ -1,4 +1,8 @@
-------------------
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- InfoPanel namespace
 LUIE.InfoPanel = {}
 
@@ -6,7 +10,6 @@ LUIE.InfoPanel = {}
 local PNL           = LUIE.InfoPanel
 local UI            = LUIE.UI
 local strfmt        = string.format
-local pairs         = pairs
 
 local eventManager  = EVENT_MANAGER
 local sceneManager  = SCENE_MANAGER

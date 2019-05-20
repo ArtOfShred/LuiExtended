@@ -4,9 +4,10 @@
 
 
 --Register LAM with LibStub
-local MAJOR, MINOR = "LibAddonMenu-2.0", 26
+local MAJOR, MINOR = "LibAddonMenu-2.0", 29
 local lam, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 if not lam then return end --the same or newer version of this lib is already loaded into memory
+LibAddonMenu2 = lam
 
 local messages = {}
 local MESSAGE_PREFIX = "[LAM2] "
@@ -23,6 +24,11 @@ local function FlushMessages()
         d(MESSAGE_PREFIX .. messages[i])
     end
     messages = {}
+end
+
+local logger
+if LibDebugLogger then
+    logger = LibDebugLogger(MAJOR)
 end
 
 if LAMSettingsPanelCreated and not LAMCompatibilityWarning then
@@ -70,6 +76,10 @@ local function GetStringFromValue(value)
         return GetString(value)
     end
     return value
+end
+
+local function GetColorForState(disabled)
+    return disabled and ZO_DEFAULT_DISABLED_COLOR or ZO_DEFAULT_ENABLED_COLOR
 end
 
 local function CreateBaseControl(parent, controlData, controlName)
@@ -144,12 +154,14 @@ local function RefreshReloadUIButton()
         end
     end
 
-    lam.applyButton:SetHidden(not lam.requiresReload)
+    if lam.applyButton then
+        lam.applyButton:SetHidden(not lam.requiresReload)
+    end
 end
 
 local function RequestRefreshIfNeeded(control)
     -- if our parent window wants to refresh controls, then fire the callback
-    local panel = GetTopPanel(control.panel)
+    local panel = GetTopPanel(control)
     local panelData = panel.data
     if panelData.registerForRefresh then
         cm:FireCallbacks("LAM-RefreshPanel", control)
@@ -313,9 +325,9 @@ local function UpdateWarning(control)
 
     if control.data.requiresReload then
         if not warning then
-            warning = string.format("|cff0000%s", util.L["RELOAD_UI_WARNING"])
+            warning = string.format("%s", util.L["RELOAD_UI_WARNING"])
         else
-            warning = string.format("%s\n\n|cff0000%s", warning, util.L["RELOAD_UI_WARNING"])
+            warning = string.format("%s\n\n%s", warning, util.L["RELOAD_UI_WARNING"])
         end
     end
 
@@ -333,10 +345,13 @@ local localization = {
         AUTHOR = string.format("%s: <<X:1>>", GetString(SI_ADDON_MANAGER_AUTHOR)), -- "Author: <<X:1>>"
         VERSION = "Version: <<X:1>>",
         WEBSITE = "Visit Website",
+        FEEDBACK = "Feedback",
+        TRANSLATION = "Translation",
+        DONATION = "Donate",
         PANEL_INFO_FONT = "$(CHAT_FONT)|14|soft-shadow-thin",
-        RELOAD_UI_WARNING = "Changes to this setting require an UI reload in order to take effect.",
-        RELOAD_DIALOG_TITLE = "UI Reload required",
-        RELOAD_DIALOG_TEXT = "Some changes require an UI reload in order to take effect. Do you want to reload now or discard the changes?",
+        RELOAD_UI_WARNING = "Changes to this setting require a UI reload in order to take effect.",
+        RELOAD_DIALOG_TITLE = "UI Reload Required",
+        RELOAD_DIALOG_TEXT = "Some changes require a UI reload in order to take effect. Do you want to reload now or discard the changes?",
         RELOAD_DIALOG_RELOAD_BUTTON = "Reload",
         RELOAD_DIALOG_DISCARD_BUTTON = "Discard",
     },
@@ -344,6 +359,9 @@ local localization = {
         PANEL_NAME = "Addon",
         VERSION = "Versione: <<X:1>>",
         WEBSITE = "Visita il Sitoweb",
+        FEEDBACK = "Feedback",
+        TRANSLATION = "Traduzione",
+        DONATION = "Donare",
         RELOAD_UI_WARNING = "Cambiare questa impostazione richiede un Ricarica UI al fine che faccia effetto.",
         RELOAD_DIALOG_TITLE = "Ricarica UI richiesto",
         RELOAD_DIALOG_TEXT = "Alcune modifiche richiedono un Ricarica UI al fine che facciano effetto. Sei sicuro di voler ricaricare ora o di voler annullare le modifiche?",
@@ -353,6 +371,9 @@ local localization = {
     fr = { -- provided by Ayantir
         PANEL_NAME = "Extensions",
         WEBSITE = "Visiter le site Web",
+        FEEDBACK = "Réaction",
+        TRANSLATION = "Traduction",
+        DONATION = "Donner",
         RELOAD_UI_WARNING = "La modification de ce paramètre requiert un rechargement de l'UI pour qu'il soit pris en compte.",
         RELOAD_DIALOG_TITLE = "Reload UI requis",
         RELOAD_DIALOG_TEXT = "Certaines modifications requièrent un rechargement de l'UI pour qu'ils soient pris en compte. Souhaitez-vous recharger l'interface maintenant ou annuler les modifications ?",
@@ -362,6 +383,9 @@ local localization = {
     de = { -- provided by sirinsidiator
         PANEL_NAME = "Erweiterungen",
         WEBSITE = "Webseite besuchen",
+        FEEDBACK = "Feedback",
+        TRANSLATION = "Übersetzung",
+        DONATION = "Spende",
         RELOAD_UI_WARNING = "Änderungen an dieser Option werden erst übernommen nachdem die Benutzeroberfläche neu geladen wird.",
         RELOAD_DIALOG_TITLE = "Neuladen benötigt",
         RELOAD_DIALOG_TEXT = "Einige Änderungen werden erst übernommen nachdem die Benutzeroberfläche neu geladen wird. Wollt Ihr sie jetzt neu laden oder die Änderungen verwerfen?",
@@ -372,6 +396,9 @@ local localization = {
         PANEL_NAME = "Дополнения",
         VERSION = "Версия: <<X:1>>",
         WEBSITE = "Посетить сайт",
+        FEEDBACK = "отзыв",
+        TRANSLATION = "Перевод",
+        DONATION = "жертвовать",
         PANEL_INFO_FONT = "RuESO/fonts/Univers57.otf|14|soft-shadow-thin",
         RELOAD_UI_WARNING = "Для применения этой настройки необходима перезагрузка интерфейса.",
         RELOAD_DIALOG_TITLE = "Необходима перезагрузка интерфейса",
@@ -383,6 +410,9 @@ local localization = {
         PANEL_NAME = "Configuración",
         VERSION = "Versión: <<X:1>>",
         WEBSITE = "Visita la página web",
+        FEEDBACK = "Reaccion",
+        TRANSLATION = "Traducción",
+        DONATION = "Donar",
         RELOAD_UI_WARNING = "Cambiar este ajuste recargará la interfaz del usuario.",
         RELOAD_DIALOG_TITLE = "Requiere recargar la interfaz",
         RELOAD_DIALOG_TEXT = "Algunos cambios requieren recargar la interfaz para poder aplicarse. Quieres aplicar los cambios y recargar la interfaz?",
@@ -392,6 +422,9 @@ local localization = {
     jp = { -- provided by k0ta0uchi
         PANEL_NAME = "アドオン設定",
         WEBSITE = "ウェブサイトを見る",
+        FEEDBACK = "フィードバック",
+        TRANSLATION = "訳書",
+        DONATION = "寄贈する",
     },
     zh = { -- provided by bssthu
         PANEL_NAME = "插件",
@@ -420,16 +453,19 @@ local localization = {
         RELOAD_DIALOG_RELOAD_BUTTON = "苈穜滠遨",
         RELOAD_DIALOG_DISCARD_BUTTON = "绀溽迨莌",
     },
-    br = { -- provided by mlsevero
+    br = { -- provided by mlsevero & FelipeS11
         PANEL_NAME = "Addons",
         AUTHOR = string.format("%s: <<X:1>>", GetString(SI_ADDON_MANAGER_AUTHOR)), -- "Autor: <<X:1>>"
         VERSION = "Versão: <<X:1>>",
         WEBSITE = "Visite o Website",
-        RELOAD_UI_WARNING = "Mudanças nessa configuração requer a releitura da UI para ter efeito.",
-        RELOAD_DIALOG_TITLE = "Releitura da UI requerida",
-        RELOAD_DIALOG_TEXT = "Algumas mudanças requerem a releitura da UI para ter efeito. Você deseja reler agora ou descartar as mudanças?",
-        RELOAD_DIALOG_RELOAD_BUTTON = "Relê",
-        RELOAD_DIALOG_DISCARD_BUTTON = "Descarta",
+        FEEDBACK = "Feedback",
+        TRANSLATION = "Tradução",
+        DONATION = "Doação",
+        RELOAD_UI_WARNING = "Mudanças nessa configuração requerem o recarregamento da UI para ter efeito.",
+        RELOAD_DIALOG_TITLE = "Recarregamento da UI requerida",
+        RELOAD_DIALOG_TEXT = "Algumas mudanças requerem o recarregamento da UI para ter efeito. Você deseja recarregar agora ou descartar as mudanças?",
+        RELOAD_DIALOG_RELOAD_BUTTON = "Recarregar",
+        RELOAD_DIALOG_DISCARD_BUTTON = "Descartar",
     },
 }
 
@@ -437,6 +473,7 @@ util.L = ZO_ShallowTableCopy(localization[GetCVar("Language.2")] or {}, localiza
 util.GetTooltipText = GetStringFromValue -- deprecated, use util.GetStringFromValue instead
 util.GetStringFromValue = GetStringFromValue
 util.GetDefaultValue = GetDefaultValue
+util.GetColorForState = GetColorForState
 util.CreateBaseControl = CreateBaseControl
 util.CreateLabelAndContainerControl = CreateLabelAndContainerControl
 util.RequestRefreshIfNeeded = RequestRefreshIfNeeded
@@ -776,6 +813,9 @@ local function CreateOptionsControls(panel)
                     err, anchorOffset, lastAddedControl, wasHalf = CreateAndAnchorWidget(parent, widgetData, offsetX, anchorOffset, lastAddedControl, wasHalf)
                     if err then
                         PrintLater(("Could not create %s '%s' of %s."):format(widgetData.type, GetStringFromValue(widgetData.name or "unnamed"), addonID))
+                        if logger then
+                            logger:Error(err)
+                        end
                     end
 
                     if isSubmenu then
@@ -833,6 +873,22 @@ local function ToggleAddonPanels(panel) --called in OnShow of newly shown panel
 end
 
 local CheckSafetyAndInitialize
+local function ShowSetHandlerWarning(panel, handler)
+    local hint
+    if(handler == "OnShow" or handler == "OnEffectivelyShown") then
+        hint = "'LAM-PanelControlsCreated' or 'LAM-PanelOpened'"
+    elseif(handler == "OnHide" or handler == "OnEffectivelyHidden") then
+        hint = "'LAM-PanelClosed'"
+    end
+
+    if hint then
+        local message = ("Setting a handler on a panel is not recommended. Use the global callback %s instead. (%s on %s)"):format(hint, handler, panel.data.name)
+        PrintLater(message)
+        if logger then
+            logger:Warn(message)
+        end
+    end
+end
 
 --METHOD: REGISTER ADDON PANEL
 --registers your addon with LibAddonMenu and creates a panel
@@ -845,7 +901,8 @@ function lam:RegisterAddonPanel(addonID, panelData)
     local panel = lamcc.panel(container, panelData, addonID) --addonID==global name of panel
     panel:SetHidden(true)
     panel:SetAnchorFill(container)
-    panel:SetHandler("OnShow", ToggleAddonPanels)
+    panel:SetHandler("OnEffectivelyShown", ToggleAddonPanels)
+    ZO_PreHook(panel, "SetHandler", ShowSetHandlerWarning)
 
     local function stripMarkup(str)
         return str:gsub("|[Cc]%x%x%x%x%x%x", ""):gsub("|[Rr]", "")

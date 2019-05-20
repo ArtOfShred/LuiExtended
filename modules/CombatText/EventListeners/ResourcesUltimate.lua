@@ -1,14 +1,18 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextResourcesUltimateEventListener = LUIE.CombatTextEventListener:Subclass()
 local CTL = LUIE.CombatTextResourcesUltimateEventListener
 
 local C = LUIE.CombatTextConstants
-local GetSlotAbilityCost = GetSlotAbilityCost
 
 function CTL:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_POWER_UPDATE, function(...) self:OnEvent(...) end, REGISTER_FILTER_UNIT_TAG, 'player', REGISTER_FILTER_POWER_TYPE, POWERTYPE_ULTIMATE)
     obj:RegisterForEvent(EVENT_ACTION_SLOTS_FULL_UPDATE, function() self:UpdateMaximum() end)
-    obj:RegisterForEvent(EVENT_ACTION_SLOT_ABILITY_SLOTTED, function() self:UpdateMaximum() end)
+    obj:RegisterForEvent(EVENT_ACTION_SLOT_STATE_UPDATED, function() self:UpdateMaximum() end)
     self.powerInfo = { maximum = 0, wasNotified = false }
     self:UpdateMaximum()
     return obj

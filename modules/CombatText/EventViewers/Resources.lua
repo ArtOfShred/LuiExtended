@@ -1,7 +1,13 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextResourceEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextResourceEventViewer
 
 local callLater = zo_callLater
+
 local poolTypes = LUIE.CombatTextConstants.poolType
 local resourceTypes = LUIE.CombatTextConstants.resourceType
 

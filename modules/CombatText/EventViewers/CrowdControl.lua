@@ -1,8 +1,15 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextCrowdControlEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextCrowdControlEventViewer
 
-local callLater = zo_callLater
 local C = LUIE.CombatTextConstants
+
+local callLater = zo_callLater
+
 local poolTypes = LUIE.CombatTextConstants.poolType
 local crowdControlTypes = LUIE.CombatTextConstants.crowdControlType
 

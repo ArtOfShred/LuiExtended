@@ -1,15 +1,17 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextCombatHybridEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextCombatHybridEventViewer
 
-local strfmt     = string.format
-local mathrandom = math.random
-local mathmin    = math.min
-local mathmax    = math.max
-local tostring   = tostring
-
-local AbbreviateNumber = LUIE.AbbreviateNumber
-local callLater = zo_callLater
 local C = LUIE.CombatTextConstants
+local AbbreviateNumber = LUIE.AbbreviateNumber
+
+local strfmt = string.format
+local callLater = zo_callLater
+
 local poolTypes = C.poolType
 
 function CTV:New(...)
@@ -91,15 +93,15 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     local radiusW, radiusH = w / 4, h / 4
     local offsetX, offsetY = 0, 0
 
-    if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then offsetX = mathrandom(-radiusW, radiusW)
-    elseif (isDot or isHot) then offsetX = mathrandom(-radiusW, radiusW)
-    elseif (isDamage or isHealing or isEnergize or isDrain or isDamageShield or isBlocked) then offsetX = mathrandom(-radiusW, radiusW) end
+    if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then offsetX = math.random(-radiusW, radiusW)
+    elseif (isDot or isHot) then offsetX = math.random(-radiusW, radiusW)
+    elseif (isDamage or isHealing or isEnergize or isDrain or isDamageShield or isBlocked) then offsetX = math.random(-radiusW, radiusW) end
 
     if (point == TOP) then
         if (self.lastControl[combatType] == nil) then
             offsetY = -25
         else
-            offsetY = mathmax(-25, select(6, self.lastControl[combatType]:GetAnchor(0)))
+            offsetY = math.max(-25, select(6, self.lastControl[combatType]:GetAnchor(0)))
         end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
@@ -112,7 +114,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
         if (self.lastControl[combatType] == nil) then
             offsetY = 25
         else
-            offsetY = mathmin(25, select(6, self.lastControl[combatType]:GetAnchor(0)))
+            offsetY = math.min(25, select(6, self.lastControl[combatType]:GetAnchor(0)))
         end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 

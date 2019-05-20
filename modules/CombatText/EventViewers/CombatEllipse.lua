@@ -1,14 +1,17 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextCombatEllipseEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextCombatEllipseEventViewer
 
-local strfmt     = string.format
-local mathmin    = math.min
-local mathmax    = math.max
-local tostring   = tostring
-
-local AbbreviateNumber = LUIE.AbbreviateNumber
-local callLater = zo_callLater
 local C = LUIE.CombatTextConstants
+local AbbreviateNumber = LUIE.AbbreviateNumber
+
+local strfmt = string.format
+local callLater = zo_callLater
+
 local poolTypes = C.poolType
 
 function CTV:New(...)
@@ -122,7 +125,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
         if (self.lastControl[combatType] == nil) then
             offsetY = -25
         else
-            offsetY = mathmax(-25, select(6, self.lastControl[combatType]:GetAnchor(0)))
+            offsetY = math.max(-25, select(6, self.lastControl[combatType]:GetAnchor(0)))
         end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
@@ -135,7 +138,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
         if (self.lastControl[combatType] == nil) then
             offsetY = 25
         else
-            offsetY = mathmin(25, select(6, self.lastControl[combatType]:GetAnchor(0)))
+            offsetY = math.min(25, select(6, self.lastControl[combatType]:GetAnchor(0)))
         end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 

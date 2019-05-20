@@ -1,12 +1,15 @@
-LUIE.CombatTextAnimation = ZO_Object:Subclass()
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
 
+LUIE.CombatTextAnimation = ZO_Object:Subclass()
 local CTA = LUIE.CombatTextAnimation
 
 local ANIMATION_MANAGER = ANIMATION_MANAGER
 local ANIMATION_ALPHA = ANIMATION_ALPHA
 local ANIMATION_SCALE = ANIMATION_SCALE
 local ANIMATION_TRANSLATE = ANIMATION_TRANSLATE
-local linearEase = ZO_LinearEase
 
 function CTA:New()
     local obj = ZO_Object:New(self)
@@ -44,7 +47,7 @@ function CTA:Alpha(stepName, startAlpha, endAlpha, duration, delay, easingFunc)
     local step = self.timeline:InsertAnimation(ANIMATION_ALPHA, nil, delay or 0)
     step:SetAlphaValues(startAlpha, endAlpha)
     step:SetDuration(duration)
-    step:SetEasingFunction(easingFunc or linearEase)
+    step:SetEasingFunction(easingFunc or ZO_LinearEase)
     if (stepName ~= nil and stepName ~= '') then
         self.namedSteps[stepName] = step
     end
@@ -55,7 +58,7 @@ function CTA:Scale(stepName, startScale, endScale, duration, delay, easingFunc)
     local step = self.timeline:InsertAnimation(ANIMATION_SCALE, nil, delay or 0)
     step:SetScaleValues(startScale, endScale)
     step:SetDuration(duration)
-    step:SetEasingFunction(easingFunc or linearEase)
+    step:SetEasingFunction(easingFunc or ZO_LinearEase)
     if (stepName ~= nil and stepName ~= '') then
         self.namedSteps[stepName] = step
     end
@@ -66,7 +69,7 @@ function CTA:Move(stepName, offsetX, offsetY, duration, delay, easingFunc)
     local step = self.timeline:InsertAnimation(ANIMATION_TRANSLATE, nil, delay or 0)
     step:SetTranslateDeltas(offsetX, offsetY)
     step:SetDuration(duration)
-    step:SetEasingFunction(easingFunc or linearEase)
+    step:SetEasingFunction(easingFunc or ZO_LinearEase)
     if (stepName ~= nil and stepName ~= '') then
         self.namedSteps[stepName] = step
     end

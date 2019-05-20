@@ -1,11 +1,11 @@
-------------------
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- Cast Bar Table namespace
 LUIE.CastBarTable = {}
-
--- Performance Enhancement
 local CBT = LUIE.CastBarTable
---local T = LUIE.Tooltips
---local A = LUIE.GetAbility()
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- When a hard CC effect is successfully applied to the player, instantly stop any in progress Casts

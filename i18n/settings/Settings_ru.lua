@@ -1,9 +1,13 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- Addon Settings Menu localization
 -- Translation by: KiriX
-
 local strings = {
 
-    -- Settings.lua
+    -- Settings
     SI_LUIE_LAM_COMPATIBILITY_WARNING =                  "Отключите эту настройку, если у вас наблюдаются проблемы совместимости с другими аддонами.",
     SI_LUIE_LAM_FONT =                                   "Шрифт",
     SI_LUIE_LAM_FONT_SIZE =                              "Размер шрифта",
@@ -155,6 +159,11 @@ local strings = {
     SI_LUIE_LAM_BUFF_SHOWBORDERCOOLDOWN_TP =             "Отображает цветные убывающие края на значках, в зависимости от оставшегося времени действия баффа или дебаффа.",
     SI_LUIE_LAM_BUFF_FADEEXPIREICON =                    "Затухание при истечении",
     SI_LUIE_LAM_BUFF_FADEEXPIREICON_TP =                 "Когда время баффа почти истекло, значок становится прозрачным.",
+    SI_LUIE_LAM_BUFF_TOOLTIP_HEADER =                    "Tooltips",
+    SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE =                    "Display Mouseover Tooltip Description",
+    SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE_TP =                 "Display detailed tooltips when mousing over a buff or debuff icon.",
+    SI_LUIE_LAM_BUFF_TOOLTIP_STICKY =                    "Sticky Tooltip Duration",
+    SI_LUIE_LAM_BUFF_TOOLTIP_STICKY_TP =                 "Set above 0 to delay tooltips from fading for \"x\" seconds.",
     SI_LUIE_LAM_BUFF_LONGTERM_HEADER =                   "Длительные эффекты",
     SI_LUIE_LAM_BUFF_LONGTERM_SELF =                     "Длительные эффекты Игрока",
     SI_LUIE_LAM_BUFF_LONGTERM_SELF_TP =                  "Показывает значки эффектов игрока, длительностью более 2 минут.",
@@ -1012,6 +1021,8 @@ local strings = {
     SI_LUIE_LAM_PNL_SHOWSOULGEMS =                       "Камни душ",
     SI_LUIE_LAM_PNL_UNLOCKPANEL =                        "Разблокировать панель",
     SI_LUIE_LAM_PNL_UNLOCKPANEL_TP =                     "Позволяет мышью перемещать Инфо-панель.",
+    SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP =                  "Display Info Panel on World Map Screen",
+    SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP_TP =               "Display the Info Panel when you are viewing the world map. This option can be toggled if your Info Panel position clips with any important elements on the World Map screen.",
 
     -- Module: Unitframes
     SI_LUIE_LAM_UF_ENABLE =                              "Модуль фреймов",
@@ -1100,6 +1111,7 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_SORC =                  "Цвет Чародеев",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_TEMP =                  "Цвет Храмовников",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_WARD =                  "Цвет Хранителей",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_NECRO =                 "Necromancer Class Color", -- TODO: Translate
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER =         "Цвет реакции - Игрок",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_FRIENDLY =       "Цвет реакции - Дружественный",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE =        "Цвет реакции - Враждебный",
@@ -1294,13 +1306,10 @@ local strings = {
     SI_LUIE_LAM_CT_SHARED_ALERT_DODGE =                  "Увернись",
     SI_LUIE_LAM_CT_SHARED_ALERT_AVOID =                  "Избеги",
     SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT =              "Прерви",
-    SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT =                  "Unmitigatable", -- TODO: Translate
-    SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE =                "Очистись",
-    SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT =                "Воспользуйся",
-    SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE =                "Добей",
+    SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT =                  "не смягчается",
     SI_LUIE_LAM_CT_SHARED_ALERT_POWER =                  "Важный бафф на цели (Сила/Бешенство)",
     SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY =                "Уничтожь (основную цель)",
-    SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON =                 "Enemy NPC Summons", -- TODO: Translate
+    SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON =                 "призванные НПС враги",
     SI_LUIE_LAM_CT_SHARED_POINTS =                       "Очки Опыта, Чемпиона и Альянса",
     SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE =              "Очки Альянса",
     SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE =            "Очки Опыта",
@@ -1329,7 +1338,9 @@ local strings = {
     SI_LUIE_LAM_CT_HEADER_CROWD_CONTROL =                "Эффекты контроля",
     SI_LUIE_LAM_CT_HEADER_NOTIFICATION =                 "Предупреждения",
     SI_LUIE_LAM_CT_HEADER_LOW_RESOURCE =                 "Предупреждение о низком запасе ресурса",
-    SI_LUIE_LAM_CT_HEADER_ACTIVE_COMBAT_ALERT =          "Боевые предупреждения",
+
+    SI_LUIE_LAM_CI_HEADER_ACTIVE_COMBAT_ALERT =          "Боевые предупреждения Опционально",
+
     SI_LUIE_LAM_CT_HEADER_DAMAGE_COLOR =                 "Настройки цвета урона",
     SI_LUIE_LAM_CT_HEADER_HEALING_COLOR =                "Настройки цвета исцеления",
     SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE =             "Общий размер шрифта",
@@ -1376,7 +1387,9 @@ local strings = {
     SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP =                "Показать когда вы обезмолвили цель.",
     SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP =                 "Показать когда вы оглушили цель.",
     SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE =           "Статус боя",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERTS_DESC =            "Включите настройку Активные подсказки в бою -> Показывать всегда в настройках интерфейса, чтобы предупреждения выводили корректно.",
+
+    SI_LUIE_LAM_CI_NOTIFICATION_ALERTS_DESC =            "Display alerts when an enemy ability is incoming. The options below allow you to significantly customize which alert to display, choose a sound to play, and show a border color on the icon based off the type of crowd control the ability applies (if any).",
+
     SI_LUIE_LAM_CT_NOTIFICATION_POINTS =                 "Очки",
     SI_LUIE_LAM_CT_NOTIFICATION_RESOURCES =              "Ресурсы",
     SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP =           "Показывать оповещение в входе в бой.",
@@ -1384,24 +1397,22 @@ local strings = {
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION =             "Продвинутые оповещения об атаках",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP =          "Показывает продвинутые оповещения об атаках, которые можно блокировать, увернуться, избежать или прервать.",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION = "\t\t\t\t\tИспользуйте следующий формат, чтобы изменить предупреждения о смягчении:\n\t\t\t\t\t%n Название источника\n\t\t\t\t\t%t Название способности\n\t\t\t\t\t%i Значок способности",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD =      "Способ предупреждения",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP =   "Выберите, как показывать предупреждение о смягчении, одной строкой или в несколько. Если одной строкой, то оповещение будет использовать цвет наиболее эффективного способа смягчения.",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE =        "Не предлагать смягчение",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP =     "Если предупреждение выводится в одну линию, включение этой настройки скроет из предупреждения БЛОКИРУЙ/УВЕРНИСЬ/ИЗБЕГИ/ПРЕРВИ и т.п. и выведет только надвигающуюся способность.",
+
+    SI_LUIE_LAM_CI_NOTIFICATION_MITIGATION_SUFFIX =      "Display Mitigation Suffix",
+    SI_LUIE_LAM_CI_NOTIFICATION_MITIGATION_SUFFIX_TP =   "Enable this option to display the BLOCK/DODGE/AVOID/INTERRUPT suffix on incoming ability alerts.",
+
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT =      "Префикс поглощения",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP =   "Выберите префикс для предупреждений о поглощении",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P =    "Префикс важных баффов",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P_TP = "Выберите префикс для отображения применения важных баффов ближайшими вражескими целями",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D =    "Префикс приоритетной цели",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D_TP = "Выберите префикс для для отображения, когда рядом обнаруживается приоритетная вражеская цель",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S =    "Summon Prefix", -- TODO: Translate
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S_TP = "Choose the prefix to display when a summon is detected nearby", -- TODO: Translate
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S =    "Вызвать приставку",
+    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_S_TP = "Вызвать приставку для показа, когда призванный враг обнаружен рядом",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME =     "(Без имени)",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP =  "(Префикс, когда имя врага не может быть получено).",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME =        "(С именем)",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP =     "(Префикс, когда имя врага получено корректно).",
-    SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX =                 "Суффикс прямой атаки",
-    SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP =              "Добавляет суффикс к сообщению об атаки ПРЯМОЙ целью которой являетесь вы. Это не будет касаться эффектов урона по площади или исцеляющих способностей противника.",
     SI_LUIE_LAM_CT_NOTIFICATION_AURA =                   "События ближайших NPC",
     SI_LUIE_LAM_CT_NOTIFICATION_AURA_TP =                "Многие способности, прямой целью которых не является игрок, не могут быть обнаружены, чтобы вывести предупреждение (например, когда ближайший NPC кастует целительную способность). Эта настройка позволяет компоненту предупреждений также отслеживать ауры и предоставлять больше информации. Тем не менее, это может привести к тому, что будут появляться предупреждения об NPC, которые далеко от игрока. Помните, что такие события всегда будут отображаться в Подземельях.",
     SI_LUIE_LAM_CT_NOTIFICATION_RANK3 =                  "Способности обычных NPC",
@@ -1412,23 +1423,10 @@ local strings = {
     SI_LUIE_LAM_CT_NOTIFICATION_RANK1_TP =               "Включает оповещения о способностях, используемых Боссами или NPC испытаний (триалов).",
     SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON =                "ВСЕГДА предупреждать в Подземельях",
     SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON_TP =             "Предупреждения всегда выводятся, если вы в подземелье. Эта настройка прекрасно подходит, если вы не хотите видеть предупреждения о способностях обычных NPC вне подземелий, но хотите быть осведомлены о многом, что делают NPC в подземельях или испытаниях (триалах).",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_CLEANSE_TP =       "Показывать предупреждение, когда DoT может быть очищен.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_BLOCK_TP =         "Показывать предупреждение о надвигающихся атаках, которые могут быть смягчены блоком.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXPLOIT_TP =       "Показывать предупреждение, когда цель выведена из равновесия.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_INTERRUPT_TP =     "Показывать предупреждение, когда вы можете прервать способность противника.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_UNMIT_TP =         "Show an alert abilities that can't be mitigated.", -- TODO: Translate
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DODGE_TP =         "Показывать предупреждение о надвигающихся атаках, которые могут быть смягчены уворотом.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_AVOID_TP =         "Показывать предупреждение о надвигающихся атаках, которые должны быть смягчены выходом из зоны поражения.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXECUTE_TP =       "Показывать предупреждение, когда цель можно добить.",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_UNMIT_TP =         "Показать значок для скилов, которые нельзя смягчить.",
     SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP =         "Показывать предупреждение, когда ближайший враждебный NPC кастует важный бафф (такой сильный бафф, как бешенство).",
     SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP =       "Показывать предупреждение, когда ближайшая враждебная цель представляет как приоритетная цель для уничтожения (те, кто уменьшают исходящий или увеличивают получаемый урон, или предоставляют неуязвимость).",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_SUMMON_TP =        "Show an alert when a nearby enemy target summons additional enemies.", -- TODO: Translate
-    SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD =      "Порог добивания",
-    SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD_TP =   "Порог здоровья цели, при котором появится сообщение 'ДОБЕЙ!'.\nПо умолчанию: 20%",
-    SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY =      "Частота добивания",
-    SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY_TP =   "Частота между сообщениями о добивании для одной цели.\nПо умолчанию: 8",
-    SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS =            "Скрыть внутриигровые подсказки",
-    SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS_TP =         "Скрыть встроенные внутриигровые боевые подсказки по умолчанию.",
+    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_SUMMON_TP =        "Показать значок, когда враг поблизости призывает дополнительных врагов.",
     SI_LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP =     "Показывает полученные Очка Альянса.",
     SI_LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP =   "Показывает полученные Очки Опыта.",
     SI_LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP =     "Показывает полученные Очки Чемпиона.",
@@ -1464,7 +1462,7 @@ local strings = {
     SI_LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP =           "Размер шрифта поглощённого урон.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP =        "Размер шрифта контроля.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP =   "Размер шрифта оповещений о входе в бой или выходе из него.\nПо умолчанию: 24",
-    SI_LUIE_LAM_CT_FONT_NOTIFICATION_ALERT_TP =          "Размер шрифта активных боевых подсказок.\nПо умолчанию: 32",
+
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP =         "Размер шрифта получения очков\nПо умолчанию: 24",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP =       "Размер шрифта предупреждений о ресурсах.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE =            "Цвет шрифта (Без типа)",
@@ -1525,19 +1523,16 @@ local strings = {
     SI_LUIE_LAM_CT_COLOR_COMBAT_STUNNED_TP =             "Задаёт цвет для оповещений об оглушении.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP =     "Задаёт цвет для оповещении о входе в бой.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP =    "Задаёт цвет для оповещения о выходе из боя.",
-    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CLEANSE_TP =       "Задаёт цвет для предупреждения об очищении.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BASE =             "Общий цвет надписи",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BASE_TP =          "Задаёт общий цветя для префикса, суффикса и значения надписи.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP =         "Задаёт цвет для предупреждения о блоке.",
-    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPLOIT_TP =       "Задаёт цвет для предупреждения о возможности воспользоваться.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP =     "Задаёт цвет для предупреждения о прерывании.",
-    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_UNMIT_TP =         "Set a color for alerts for abilities that can't be mitigated.", -- TODO: Translate
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_UNMIT_TP =         "Выбрать цвет для значков для скилов, которые нельзя смягчить.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP =         "Задаёт цвет для предупреждения о увороте.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP =         "Задаёт цвет для предупреждения, чтобы выйти из зоны.",
-    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP =       "Задаёт цвет для предупреждения о добивании.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP =         "Задаёт цвет для предупреждения о важных баффах.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP =       "Задаёт цвет для предупреждения о приоритетной цели.",
-    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_SUMMON_TP =        "Set a color for summon alerts.", -- TODO: Translate
+    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_SUMMON_TP =        "Выбрать цвет для значков о призывах.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALLIANCE_TP =      "Задаёт цвет для оповещения о получении Очков Альянса.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPERIENCE_TP =    "Задаёт цвет для оповещения о получении Очков Опыта.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CHAMPION_TP =      "Задаёт цвет для оповещения о получении Очков Чемпиона.",
@@ -1574,18 +1569,15 @@ local strings = {
     SI_LUIE_LAM_CT_FORMAT_POINTS_HEADER =                "Очки",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_IN_TP =    "Формат текста для оповещении о входе в бой.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_OUT_TP =   "Формат текста для оповещения о выходе из боя.",
-    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CLEANSE_TP =      "Формат текста для предупреждения об очищении.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_TP =        "Формат текста для предупреждения о блоке.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_S_TP =      "Формат текста для предупреждения о блоке, когда противник окажется ошеломлён.",
-    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPLOIT_TP =      "Формат текста для предупреждения о возможности воспользоваться.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_INTERRUPT_TP =    "Формат текста для предупреждения о прерывании.",
-    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_UNMIT_TP =        "Text format for alerts for abilities that can't be mitigated.", -- TODO: Translate
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_UNMIT_TP =        "Формат текста для значков для скилов, которые нельзя смягчить.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DODGE_TP =        "Формат текста для предупреждения о увороте.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_AVOID_TP =        "Формат текста для предупреждения, чтобы выйти из зоны.",
-    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXECUTE_TP =      "Формат текста для предупреждения о добивании.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POWER_TP =        "Формат текста для предупреждения о важных баффах.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DESTROY_TP =      "Формат текста для предупреждения о приоритетной цели.",
-    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SUMMON_TP =       "Text format for summon alerts.", -- TODO: Translate
+    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SUMMON_TP =       "Формат текста для значков о призывах.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ALLIANCE_TP =     "Формат текста для оповещения о получении Очков Альянса.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPERIENCE_TP =   "Формат текста для оповещения о получении Очков Опыта.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CHAMPION_TP =     "Формат текста для оповещения о получении Очков Чемпиона.",
@@ -1623,7 +1615,6 @@ local strings = {
     SI_LUIE_LAM_CT_DEATH_COLOR_TP =                      "Цвет предупреждения о смерти члена группы.",
 }
 
-local pairs = pairs
 for stringId, stringValue in pairs(strings) do
     ZO_CreateStringId(stringId, stringValue)
     SafeAddVersion(stringId, 1)

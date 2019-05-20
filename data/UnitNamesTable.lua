@@ -1,8 +1,9 @@
-------------------
--- UnitNames namespace
-LUIE.UnitNames = {}
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
 
-local UnitNames = {
+LUIE.UnitNames = {
     -- TODO: MAYBE in the future can localize these names, for the time being this table exists for that purpose.
 
     ----------------------------------------------------------------
@@ -34,7 +35,47 @@ local UnitNames = {
     -- ARENAS ------------------------------------------------------
     ----------------------------------------------------------------
 
+    -- Dragonstar Arena
+    NPC_Fighters_Guild_Gladiator          = 'Fighters Guild Gladiator',
+    Boss_Champion_Marcauld                = 'Champion Marcauld',
+    NPC_Sovngarde_Slayer                  = 'Sovngarde Slayer',
+    NPC_Sovngarde_Icemage                 = 'Sovngarde Icemage',
+    NPC_Sovngarde_Ranger                  = 'Sovngarde Ranger',
+    Boss_Yavni_Frost_Skin                 = 'Yavni Frost-Skin',
+    Boss_Katti_Ice_Turner                 = 'Katti Ice-Turner',
+    Boss_Shilia                           = 'Shilia',
+    Boss_Nak_tah                          = 'Nak\'tah',
+    NPC_House_Dres_Slaver                 = 'House Dres Slaver',
+    Boss_Earthen_Heart_Knight             = 'Earthen Heart Knight',
+    NPC_Anka_Ra_Shadowcaster              = 'Anka-Ra Shadowcaster',
+    Boss_Anala_tuwha                      = 'Anal\'a Tu\'wha',
+    NPC_Pacthunter_Ranger                 = 'Pacthunter Ranger',
+    Boss_Pishna_Longshot                  = 'Pishna Longshot',
+    NPC_Daedric_Sacrifice                 = 'Daedric Sacrifice',
+    Boss_Shadow_Knight                    = 'Shadow Knight',
+    Boss_Dark_Mage                        = 'Dark Mage',
+    NPC_Dwarven_Fire_Centurion            = 'Dwarven Fire Centurion',
+    NPC_Dwarven_Sphere                    = 'Dwarven Sphere',
+    Boss_Mavus_Talnarith                  = 'Mavus Talnarith',
+    NPC_Graveoath_Ravener                 = 'Graveoath Ravener',
+    Boss_Zackael_Jonnicent                = 'Zackael Jonnicent',
+    Boss_Rubyn_Jonnicent                  = 'Rubyn Jonnicent',
+    Boss_Vampire_Lord_Thisa               = 'Vampire Lord Thisa',
+    Boss_Hiath_the_Battlemaster           = 'Hiath the Battlemaster',
+
+    -- Maelstrom Arena
     Boss_Maxus_the_Many                   = 'Maxus the Many',
+    NPC_Clockwork_Sentry                  = 'Clockwork Sentry',
+    NPC_Queens_Pet                        = 'Queen\'s Pet',
+    NPC_Queens_Champion                   = 'Queen\'s Champion',
+    NPC_Queens_Advisor                    = 'Queen\'s Advisor',
+    Boss_Lamia_Queen                      = 'Lamia Queen',
+    NPC_Dwarven_Spider                    = 'Dwarven Spider',
+    Boss_The_Control_Guardian             = 'The Control Guardian',
+    NPC_Scavenger_Thunder_Smith           = 'Scavenger Thunder-Smith',
+    NPC_Troll_Breaker                     = 'Troll Breaker',
+    NPC_Ogre_Elder                        = 'Ogre Elder',
+    Boss_Matriarch_Runa                   = 'Matriarch Runa',
 
     ----------------------------------------------------------------
     -- DUNGEONS ----------------------------------------------------
@@ -72,6 +113,7 @@ local UnitNames = {
     Boss_Murklight                        = 'Murklight',
     Boss_The_Shadow_Guard                 = 'The Shadow Guard',
     Boss_Bogdan_the_Nightflame            = 'Bogdan the Nightflame',
+    Boss_Nova_Tendril                     = 'Nova Tendril',
 
     -- City of Ash I
     Boss_Golor_the_Banekin_Handler        = 'Golor the Banekin Handler',
@@ -133,10 +175,15 @@ local UnitNames = {
     Boss_Urvan_Veleth                     = 'Urvan Veleth',
     Boss_Vorenor_Winterbourne             = 'Vorenor Winterbourne',
 
+    -- Wayrest Sewers I
+    Boss_Slimecraw                        = 'Slimecraw',
+    Boss_Investigator_Garron              = 'Investigator Garron',
+    Boss_Uulgarg_the_Hungry               = 'Uulgarg the Hungry',
+    Boss_the_Rat_Whisperer                = 'The Rat Whisperer',
+    Boss_Varaine_Pellingare               = 'Varaine Pellingare',
+    Boss_Allene_Pellingare                = 'Allene Pellingare',
+
     -- Frostvault
     NPC_Coldsnap_Ogre                     = 'Coldsnap Ogre',
     Boss_Icestalker                       = 'Icestalker',
 }
-
--- Export string data to global namespace
-LUIE.UnitNames = UnitNames

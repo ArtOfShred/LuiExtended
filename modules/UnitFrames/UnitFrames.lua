@@ -1,30 +1,25 @@
-------------------
--- Default Unit Frames namespace
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
+-- Unit Frames namespace
 LUIE.UnitFrames = {}
+local UF = LUIE.UnitFrames
 
--- Performance Enhancement
-local UF                = LUIE.UnitFrames
-local UI                = LUIE.UI
-local AbbreviateNumber  = LUIE.AbbreviateNumber
-local printToChat       = LUIE.PrintToChat
-local strfmt            = string.format
-local strformat         = zo_strformat
-local strsub            = string.sub
-local tableinsert       = table.insert
-local tablesort         = table.sort
-local tableremove       = table.remove
-local mathfloor         = math.floor
-local mathmin           = math.min
-local mathceil          = math.ceil
-local unpack            = unpack
-local pairs, ipairs     = pairs, ipairs
+local UI = LUIE.UI
 
-local eventManager      = EVENT_MANAGER
-local sceneManager      = SCENE_MANAGER
+local AbbreviateNumber = LUIE.AbbreviateNumber
+local printToChat = LUIE.PrintToChat
 
-local callLater         = zo_callLater
+local strfmt = string.format
+local strformat = zo_strformat
+local callLater = zo_callLater
 
-local moduleName        = LUIE.name .. "_UnitFrames"
+local eventManager = EVENT_MANAGER
+local sceneManager = SCENE_MANAGER
+
+local moduleName = LUIE.name .. "_UnitFrames"
 
 local classIcons = {
     [0] = "/esoui/art/contacts/social_status_offline.dds",
@@ -32,6 +27,7 @@ local classIcons = {
     [2] = "/esoui/art/icons/class/class_sorcerer.dds",
     [3] = "/esoui/art/icons/class/class_nightblade.dds",
     [4] = "/esoui/art/icons/class/class_warden.dds",
+    [5] = "/esoui/art/icons/class/class_necromancer.dds",
     [6] = "/esoui/art/icons/class/class_templar.dds",
 }
 
@@ -98,6 +94,7 @@ UF.D = {
     CustomColourSorcerer             = { 75/255,  83/255,  247/255 },
     CustomColourTemplar              = { 255/255, 240/255, 95/255  },
     CustomColourWarden               = { 136/255, 245/255, 125/255 },
+    CustomColourNecromancer          = { 97/255, 37/255, 201/255 },
     CustomShieldBarSeparate          = false,
     CustomShieldBarHeight            = 10,
     CustomShieldBarFull              = false,
@@ -323,7 +320,7 @@ function UF.GetDefaultFramesOptions(frame)
     local retval = {}
     for k,v in pairs(g_DefaultFramesOptions) do
         if not (frame == "Boss" and k == 3) then
-            tableinsert( retval, v )
+            table.insert( retval, v )
         end
     end
     return retval
@@ -431,7 +428,7 @@ function UF.AltBar_OnMouseEnterWerewolf(control)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
         local duration = ( currentPower / 27 )
         -- Round up by 1 from any decimal number
-        local durationFormatted = mathfloor(duration + 0.999)
+        local durationFormatted = math.floor(duration + 0.999)
 
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
         SetTooltipText(InformationTooltip, strformat(SI_MONSTERSOCIALCLASS45))
@@ -516,7 +513,7 @@ local function CreateDefaultFrames()
     -- When default Target frame is enabled set the threshold value to change colour of label and add label to default fade list
     if g_DefaultFrames.reticleover[POWERTYPE_HEALTH] then
         g_DefaultFrames.reticleover[POWERTYPE_HEALTH].threshold = g_targetThreshold
-        tableinsert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover[POWERTYPE_HEALTH].label )
+        table.insert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover[POWERTYPE_HEALTH].label )
     end
 
     -- Create classIcon and friendIcon: they should work even when default unit frames extender is disabled
@@ -524,8 +521,8 @@ local function CreateDefaultFrames()
     g_DefaultFrames.reticleover.friendIcon = UI.Texture(g_targetUnitFrame.frame, nil, {32,32}, nil, nil, true)
     g_DefaultFrames.reticleover.friendIcon:SetAnchor(TOPLEFT, ZO_TargetUnitFramereticleoverTextArea, TOPRIGHT, 30, -4)
     -- add those 2 icons to automatic fade list, so fading will be done automatically by game
-    tableinsert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.classIcon )
-    tableinsert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.friendIcon )
+    table.insert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.classIcon )
+    table.insert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.friendIcon )
 
     -- When default Group frame in use, then create dummy boolean field, so this setting remain constant between /reloadui calls
     if UF.SV.DefaultFramesNewGroup == 3 then
@@ -1417,7 +1414,6 @@ function UF.Initialize( enabled )
         eventManager:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL,         UF.OnSiege )
         eventManager:RegisterForEvent(moduleName, EVENT_LEAVE_RAM_ESCORT,          UF.OnSiege )
         eventManager:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED,     UF.OnMount )
-        eventManager:RegisterForEvent(moduleName, EVENT_ABILITY_LIST_CHANGED,      UF.AbilityListChange ) -- TODO: Temporary fix
         eventManager:RegisterForEvent(moduleName, EVENT_EXPERIENCE_UPDATE,         UF.OnXPUpdate )
         eventManager:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_GAINED,     UF.OnChampionPointGained )
         eventManager:RegisterForEvent(moduleName, EVENT_GROUP_SUPPORT_RANGE_UPDATE,    UF.OnGroupSupportRangeUpdate )
@@ -1678,7 +1674,7 @@ function UF.OnUnitCreated(eventCode, unitTag)
     -- If CustomFrames are used then values for unitTag will be reloaded in delayed full group update
     if UF.CustomFrames.SmallGroup1 ~= nil or UF.CustomFrames.RaidGroup1 ~= nil then
         -- Make sure we do not try to update bars on this unitTag before full group update is complete
-        if "group" == strsub(unitTag, 0, 5) then
+        if "group" == string.sub(unitTag, 0, 5) then
             UF.CustomFrames[unitTag] = nil
         end
         -- We should avoid calling full update on CustomFrames too often
@@ -1697,7 +1693,7 @@ end
 function UF.OnUnitDestroyed(eventCode, unitTag)
     --d( strfmt("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
     -- Make sure we do not try to update bars on this unitTag before full group update is complete
-    if "group" == strsub(unitTag, 0, 5) then
+    if "group" == string.sub(unitTag, 0, 5) then
         UF.CustomFrames[unitTag] = nil
     end
     -- We should avoid calling full update on CustomFrames too often
@@ -1711,8 +1707,8 @@ end
 function UF.DefaultFramesCreateUnitGroupControls(unitTag)
     -- First make preparation for "groupN" unitTag labels
     if g_DefaultFrames[unitTag] == nil then -- If unitTag is already in our list, then skip this
-        if "group" == strsub(unitTag, 0, 5) then -- If it is really a group member unitTag
-            local i = strsub(unitTag, 6)
+        if "group" == string.sub(unitTag, 0, 5) then -- If it is really a group member unitTag
+            local i = string.sub(unitTag, 6)
             if _G["ZO_GroupUnitFramegroup" .. i] then
                 local parentBar     = _G["ZO_GroupUnitFramegroup" .. i .. "Hp"]
                 local parentName    = _G["ZO_GroupUnitFramegroup" .. i .. "Name"]
@@ -2253,7 +2249,7 @@ function UF.UpdateStaticControls( unitFrame )
 
     end
     -- Finally set transparency for group frames that has .control field
-    if "group" == strsub(unitFrame.unitTag, 0, 5) and unitFrame.control then
+    if "group" == string.sub(unitFrame.unitTag, 0, 5) and unitFrame.control then
         unitFrame.control:SetAlpha( IsUnitInGroupSupportRange(unitFrame.unitTag) and ( UF.SV.GroupAlpha * 0.01) or ( UF.SV.GroupAlpha * 0.01) / 2 )
     end
 end
@@ -2285,7 +2281,7 @@ function UF.UpdateAttribute( attributeFrame, powerValue, powerEffectiveMax, shie
         return
     end
 
-    local pct = mathfloor(100*powerValue/powerEffectiveMax)
+    local pct = math.floor(100*powerValue/powerEffectiveMax)
 
     -- Update text values for this attribute. can be on up to 3 different labels
     local shield = ( shield and shield > 0 ) and shield or nil
@@ -2455,10 +2451,10 @@ function UF.UpdateStat(unitTag, statType, attributeType, powerType )
     local statControls = {}
 
     if ( UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag][powerType] and UF.CustomFrames[unitTag][powerType].stat and UF.CustomFrames[unitTag][powerType].stat[statType] ) then
-        tableinsert(statControls, UF.CustomFrames[unitTag][powerType].stat[statType])
+        table.insert(statControls, UF.CustomFrames[unitTag][powerType].stat[statType])
     end
     if ( g_AvaCustFrames[unitTag] and g_AvaCustFrames[unitTag][powerType] and g_AvaCustFrames[unitTag][powerType].stat and g_AvaCustFrames[unitTag][powerType].stat[statType] ) then
-        tableinsert(statControls, g_AvaCustFrames[unitTag][powerType].stat[statType])
+        table.insert(statControls, g_AvaCustFrames[unitTag][powerType].stat[statType])
     end
 
     -- If we have a control, proceed next
@@ -2512,11 +2508,6 @@ end
 -- Runs on the EVENT_MOUNTED_STATE_CHANGED listener.
 function UF.OnMount(eventCode, mounted)
     UF.CustomFramesSetupAlternative( IsWerewolf(), false, mounted )
-end
-
--- TODO: Temporarily listener for EVENT_ABILITY_LIST_CHANGED to fix issue where no EVENT_MOUNTED_STATE_CHANGED is triggering when Hard Dismounting or Crouching.
-function UF.AbilityListChange(eventCode)
-    UF.CustomFramesSetupAlternative( IsWerewolf(), ( IsPlayerControllingSiegeWeapon() or IsPlayerEscortingRam() ), IsMounted() )
 end
 
 -- Runs on the EVENT_EXPERIENCE_UPDATE listener.
@@ -2792,7 +2783,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.alternative.icon:SetTexture( icon )
     end
 
-    local altW = mathceil(UF.SV.PlayerBarWidth * 2/3)
+    local altW = math.ceil(UF.SV.PlayerBarWidth * 2/3)
     local padding = alt.icon:GetWidth()
     -- Hide bar and reanchor buffs
     UF.CustomFrames.player.botInfo:SetHidden( hidden )
@@ -2999,7 +2990,7 @@ function UF.CustomFramesGroupUpdate()
         local unitTag = "group" .. i
         if DoesUnitExist(unitTag) then
             -- Save this member for later sorting
-            tableinsert(groupList, { ["unitTag"] = unitTag, ["unitName"] = GetUnitName(unitTag) } )
+            table.insert(groupList, { ["unitTag"] = unitTag, ["unitName"] = GetUnitName(unitTag) } )
             -- CustomFrames
             n = n + 1
         else
@@ -3045,7 +3036,7 @@ function UF.CustomFramesGroupUpdate()
                 -- Dereference game unitTag from CustomFrames table
                 UF.CustomFrames[groupList[i].unitTag] = nil
                 -- Remove element from saved table
-                tableremove(groupList, i)
+                table.remove(groupList, i)
                 -- Also remove last used (not removed on previous step) SmallGroup unitTag
                 -- Variable 'n' is still holding total number of group members
                 -- Thus we need to remove n-th one
@@ -3060,7 +3051,7 @@ function UF.CustomFramesGroupUpdate()
     -- Now we have local list with valid units and we are ready to sort it
     -- FIXME: Sorting is again hardcoded to be done always
     --if not raid or UF.SV.RaidSort then
-        tablesort( groupList, function(x,y) return x.unitName < y.unitName end )
+        table.sort( groupList, function(x,y) return x.unitName < y.unitName end )
     --end
 
     -- Loop through sorted list and put unitTag references into CustomFrames table
@@ -3266,10 +3257,11 @@ function UF.CustomFramesApplyColours(isMenu)
     local tank      =  { UF.SV.CustomColourTank[1],   UF.SV.CustomColourTank[2],    UF.SV.CustomColourTank[3], 0.9 }
 
     local class1  = { UF.SV.CustomColourDragonknight[1], UF.SV.CustomColourDragonknight[2], UF.SV.CustomColourDragonknight[3], 0.9} -- Dragonkight
-    local class3  = { UF.SV.CustomColourNightblade[1], UF.SV.CustomColourNightblade[2], UF.SV.CustomColourNightblade[3], 0.9} -- Nightblade
     local class2  = { UF.SV.CustomColourSorcerer[1], UF.SV.CustomColourSorcerer[2], UF.SV.CustomColourSorcerer[3], 0.9} -- Sorcerer
-    local class6  = { UF.SV.CustomColourTemplar[1], UF.SV.CustomColourTemplar[2], UF.SV.CustomColourTemplar[3], 0.9} -- Templar
+    local class3  = { UF.SV.CustomColourNightblade[1], UF.SV.CustomColourNightblade[2], UF.SV.CustomColourNightblade[3], 0.9} -- Nightblade
     local class4  = { UF.SV.CustomColourWarden[1], UF.SV.CustomColourWarden[2], UF.SV.CustomColourWarden[3], 0.9} -- Warden
+    local class5  = { UF.SV.CustomColourNecromancer[1], UF.SV.CustomColourNecromancer[2], UF.SV.CustomColourNecromancer[3], 0.9} -- Necromancer
+    local class6  = { UF.SV.CustomColourTemplar[1], UF.SV.CustomColourTemplar[2], UF.SV.CustomColourTemplar[3], 0.9} -- Templar
 
     local health_bg  = { 0.1*UF.SV.CustomColourHealth[1],  0.1*UF.SV.CustomColourHealth[2],  0.1*UF.SV.CustomColourHealth[3], 0.9 }
     local shield_bg  = { 0.1*UF.SV.CustomColourShield[1],  0.1*UF.SV.CustomColourShield[2],  0.1*UF.SV.CustomColourShield[3], 0.9 }
@@ -3281,10 +3273,11 @@ function UF.CustomFramesApplyColours(isMenu)
     local tank_bg   = { 0.1*UF.SV.CustomColourTank[1],   0.1*UF.SV.CustomColourTank[2],   0.1*UF.SV.CustomColourTank[3], 0.9 }
 
     local class1_bg  = { 0.1*UF.SV.CustomColourDragonknight[1], 0.1*UF.SV.CustomColourDragonknight[2], 0.1*UF.SV.CustomColourDragonknight[3], 0.9} -- Dragonkight
-    local class3_bg  = { 0.1*UF.SV.CustomColourNightblade[1], 0.1*UF.SV.CustomColourNightblade[2], 0.1*UF.SV.CustomColourNightblade[3], 0.9} -- Nightblade
     local class2_bg  = { 0.1*UF.SV.CustomColourSorcerer[1], 0.1*UF.SV.CustomColourSorcerer[2], 0.1*UF.SV.CustomColourSorcerer[3], 0.9} -- Sorcerer
-    local class6_bg  = { 0.1*UF.SV.CustomColourTemplar[1], 0.1*UF.SV.CustomColourTemplar[2], 0.1*UF.SV.CustomColourTemplar[3], 0.9} -- Templar
+    local class3_bg  = { 0.1*UF.SV.CustomColourNightblade[1], 0.1*UF.SV.CustomColourNightblade[2], 0.1*UF.SV.CustomColourNightblade[3], 0.9} -- Nightblade
     local class4_bg  = { 0.1*UF.SV.CustomColourWarden[1], 0.1*UF.SV.CustomColourWarden[2], 0.1*UF.SV.CustomColourWarden[3], 0.9} -- Warden
+    local class5_bg  = { 0.1*UF.SV.CustomColourNecromancer[1], 0.1*UF.SV.CustomColourNecromancer[2], 0.1*UF.SV.CustomColourNecromancer[3], 0.9} -- Necromancer
+    local class6_bg  = { 0.1*UF.SV.CustomColourTemplar[1], 0.1*UF.SV.CustomColourTemplar[2], 0.1*UF.SV.CustomColourTemplar[3], 0.9} -- Templar
 
     -- After colour is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs( { "player", "reticleover", "boss", "AvaPlayerTarget" } ) do
@@ -3388,6 +3381,9 @@ function UF.CustomFramesApplyColours(isMenu)
                     elseif class == 4 then
                         class_color = class4
                         class_bg = class4_bg
+                    elseif class == 5 then
+                        class_color = class5
+                        class_bg = class5_bg
                     elseif class == 6 then
                         class_color = class6
                         class_bg = class6_bg
@@ -3474,18 +3470,20 @@ function UF.CustomFramesApplyReactionColor(isPlayer)
     if isPlayer and UF.SV.FrameColorClass then
         local classColor = {
             [1]  = { UF.SV.CustomColourDragonknight[1], UF.SV.CustomColourDragonknight[2], UF.SV.CustomColourDragonknight[3], 0.9}, -- Dragonkight
-            [3]  = { UF.SV.CustomColourNightblade[1], UF.SV.CustomColourNightblade[2], UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
             [2]  = { UF.SV.CustomColourSorcerer[1], UF.SV.CustomColourSorcerer[2], UF.SV.CustomColourSorcerer[3], 0.9}, -- Sorcerer
-            [6]  = { UF.SV.CustomColourTemplar[1], UF.SV.CustomColourTemplar[2], UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
+            [3]  = { UF.SV.CustomColourNightblade[1], UF.SV.CustomColourNightblade[2], UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
             [4]  = { UF.SV.CustomColourWarden[1], UF.SV.CustomColourWarden[2], UF.SV.CustomColourWarden[3], 0.9}, -- Warden
+            [5]  = { UF.SV.CustomColourNecromancer[1], UF.SV.CustomColourNecromancer[2], UF.SV.CustomColourNecromancer[3], 0.9}, -- Necromancer
+            [6]  = { UF.SV.CustomColourTemplar[1], UF.SV.CustomColourTemplar[2], UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
         }
 
         local classBackground = {
             [1]  = { 0.1*UF.SV.CustomColourDragonknight[1], 0.1*UF.SV.CustomColourDragonknight[2], 0.1*UF.SV.CustomColourDragonknight[3], 0.9}, -- Dragonkight
-            [3]  = { 0.1*UF.SV.CustomColourNightblade[1], 0.1*UF.SV.CustomColourNightblade[2], 0.1*UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
             [2]  = { 0.1*UF.SV.CustomColourSorcerer[1], 0.1*UF.SV.CustomColourSorcerer[2], 0.1*UF.SV.CustomColourSorcerer[3], 0.9}, -- Sorcerer
-            [6]  = { 0.1*UF.SV.CustomColourTemplar[1], 0.1*UF.SV.CustomColourTemplar[2], 0.1*UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
+            [3]  = { 0.1*UF.SV.CustomColourNightblade[1], 0.1*UF.SV.CustomColourNightblade[2], 0.1*UF.SV.CustomColourNightblade[3], 0.9}, -- Nightblade
             [4]  = { 0.1*UF.SV.CustomColourWarden[1], 0.1*UF.SV.CustomColourWarden[2], 0.1*UF.SV.CustomColourWarden[3], 0.9}, -- Warden
+            [5]  = { 0.1*UF.SV.CustomColourNecromancer[1], 0.1*UF.SV.CustomColourNecromancer[2], 0.1*UF.SV.CustomColourNecromancer[3], 0.9}, -- Necromancer
+            [6]  = { 0.1*UF.SV.CustomColourTemplar[1], 0.1*UF.SV.CustomColourTemplar[2], 0.1*UF.SV.CustomColourTemplar[3], 0.9}, -- Templar
         }
 
         if UF.CustomFrames["reticleover"] then
@@ -3769,7 +3767,7 @@ function UF.CustomFramesApplyFont()
                     unitFrame.botInfo:SetHeight( nameHeight )
                     -- Alternative bar present on Player
                     if unitFrame.alternative then
-                        unitFrame.alternative.backdrop:SetHeight( mathceil( nameHeight / 3 )+2 )
+                        unitFrame.alternative.backdrop:SetHeight( math.ceil( nameHeight / 3 )+2 )
                         unitFrame.alternative.icon:SetDimensions( nameHeight, nameHeight )
                     end
                     -- Title present only on Target
@@ -3827,7 +3825,7 @@ function UF.CustomFramesApplyLayoutPlayer(unhide)
             player.levelIcon:SetHidden( not UF.SV.PlayerEnableYourname )
             player.classIcon:SetHidden( not UF.SV.PlayerEnableYourname )
 
-            local altW = mathceil(UF.SV.PlayerBarWidth * 2/3)
+            local altW = math.ceil(UF.SV.PlayerBarWidth * 2/3)
 
             phb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth )
 
@@ -3895,7 +3893,7 @@ function UF.CustomFramesApplyLayoutPlayer(unhide)
             player.levelIcon:SetHidden( not UF.SV.PlayerEnableYourname )
             player.classIcon:SetHidden( not UF.SV.PlayerEnableYourname )
 
-            local altW = mathceil(UF.SV.PlayerBarWidth * 2/3)
+            local altW = math.ceil(UF.SV.PlayerBarWidth * 2/3)
 
             phb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth )
 
@@ -3953,7 +3951,7 @@ function UF.CustomFramesApplyLayoutPlayer(unhide)
             player.levelIcon:SetHidden( not UF.SV.PlayerEnableYourname )
             player.classIcon:SetHidden( not UF.SV.PlayerEnableYourname )
 
-            local altW = mathceil(UF.SV.PlayerBarWidth * 2/3)
+            local altW = math.ceil(UF.SV.PlayerBarWidth * 2/3)
 
             phb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth )
 
@@ -4200,14 +4198,14 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
 
     -- For preview let us consider that large raid consists of 2 groups of 12 players, and display 2 independent preview backdrops
     -- They do not overlap, except for the case of '3 x 8' layout
-    local groupWidth = UF.SV.RaidBarWidth * ( itemsPerColumn == 24 and 1 or mathfloor(0.5 + 12/itemsPerColumn) )
-    local groupHeight = UF.SV.RaidBarHeight * mathmin(12,itemsPerColumn)
+    local groupWidth = UF.SV.RaidBarWidth * ( itemsPerColumn == 24 and 1 or math.floor(0.5 + 12/itemsPerColumn) )
+    local groupHeight = UF.SV.RaidBarHeight * math.min(12,itemsPerColumn)
 
     raid.preview:SetDimensions( groupWidth, groupHeight )
     raid.preview2:SetDimensions( groupWidth, groupHeight )
     -- raid.preview is already anchored to TOPLEFT,TOPLEFT,0,0
     raid.preview2:ClearAnchors()
-    raid.preview2:SetAnchor(TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*mathfloor(12/itemsPerColumn), UF.SV.RaidBarHeight*( itemsPerColumn == 24 and 12 or 0 ) )
+    raid.preview2:SetAnchor(TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*math.floor(12/itemsPerColumn), UF.SV.RaidBarHeight*( itemsPerColumn == 24 and 12 or 0 ) )
 
     local column = 0    -- 0,1,2,3,4,5
     local row = 0       -- 1,2,3,...,24
@@ -4223,7 +4221,7 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
         local unitTag = GetGroupUnitTagByIndex(i)
 
         unitFrame.control:ClearAnchors()
-        unitFrame.control:SetAnchor( TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*column, UF.SV.RaidBarHeight*(row-1) + (UF.SV.RaidSpacers and spacerHeight*(mathfloor((i-1)/4)-mathfloor(column*itemsPerColumn/4)) or 0) )
+        unitFrame.control:SetAnchor( TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*column, UF.SV.RaidBarHeight*(row-1) + (UF.SV.RaidSpacers and spacerHeight*(math.floor((i-1)/4)-math.floor(column*itemsPerColumn/4)) or 0) )
         unitFrame.control:SetDimensions( UF.SV.RaidBarWidth, UF.SV.RaidBarHeight )
 
         local role = GetGroupMemberSelectedRole(unitTag)
@@ -4245,12 +4243,12 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
                 end
             end
             if UF.SV.RaidIconOptions == 4 then -- Class PVP, Role PVE
-                if IsPlayerInAvAWorld() or IsActiveWorldBattleground() then
+                if LUIE.ResolvePVPZone() then
                     unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (true)
                     unitFrame.classIcon:SetHidden (false)
-                elseif not ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() ) and role then
+                elseif not LUIE.ResolvePVPZone() and role then
                     unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
@@ -4264,12 +4262,12 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
                 end
             end
             if UF.SV.RaidIconOptions == 5 then -- Class PVE, Role PVP
-                if ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() )  and role then
+                if LUIE.ResolvePVPZone() and role then
                     unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (false)
                     unitFrame.classIcon:SetHidden (true)
-                elseif not ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() ) then
+                elseif not LUIE.ResolvePVPZone() then
                     unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
                     unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
                     unitFrame.roleIcon:SetHidden (true)
@@ -4288,19 +4286,6 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
             unitFrame.roleIcon:SetHidden (true)
             unitFrame.classIcon:SetHidden (true)
         end
-
-        -- Old Function preserved here just in case
-        --[[
-        if (UF.SV.RoleIconRaid and role and not IsPlayerInAvAWorld() ) or (UF.SV.ClassIconRaid and IsUnitOnline(unitTag) ) then
-            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
-            unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
-        else
-            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip, UF.SV.RaidBarHeight-2 )
-            unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
-        end
-        unitFrame.roleIcon:SetHidden (not UF.SV.RoleIconRaid or IsPlayerInAvAWorld() )
-        unitFrame.classIcon:SetHidden (not UF.SV.ClassIconRaid)
-        ]]--
 
         if IsUnitGroupLeader(unitTag) then
             unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )

@@ -1,12 +1,20 @@
-------------------
--- AlertTable namespace
-LUIE.AlertTable = {}
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
 
--- Performance Enhancement
 local U = LUIE.UnitNames
 local A = LUIE.GetAbility()
 
-local AlertTable = {
+local STUN = 1
+local DISORIENT = 2
+local FEAR = 3
+local STAGGER = 4
+local SILENCE = 5
+local SNARE = 6
+local UNNBREAKABLE = 7
+
+LUIE.AlertTable = {
     -- PRIORITY NOTES:
     -- 1 = VMA/Trial/Dungeon
     -- 2 = ELITE NPC/QUEST BOSS
@@ -31,19 +39,19 @@ local AlertTable = {
     -- JUSTICE NPC'S ---------------------------------
     --------------------------------------------------
 
-    [63157] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Blow (Justice Guard 1H)
-    [63261] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Blow (Justice Guard 2H)
-    [63179] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 2, bs = false, result = ACTION_RESULT_BEGIN }, -- Flame Shard (Justice Guard 2H)
+    [63157] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Heavy Blow (Justice Guard 1H)
+    [63261] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250, cc = STUN }, -- Heavy Blow (Justice Guard 2H)
+    [63179] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 2, bs = false, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN }, -- Flame Shard (Justice Guard 2H)
     [78743] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, bs = false, result = ACTION_RESULT_BEGIN }, -- Flare (Justice Guard - Any)
 
     [74862] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, bs = false, result = ACTION_RESULT_BEGIN }, -- Teleport Trap (Mage Guard)
 
-    [62409] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500, result = ACTION_RESULT_BEGIN }, -- Fiery Wind (Justice Mage NPC)
-    [62472] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Stab (Justice Dagger NPC)
+    [62409] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500, result = ACTION_RESULT_BEGIN, duration = 3500 }, -- Fiery Wind (Justice Mage NPC)
+    [62472] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Stab (Justice Dagger NPC)
 
     [78265] = { power = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Alarm (Estate Marshal) (DB DLC)
 
-    [52471] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Nullify (Estate Spellbreaker) (DB DLC)
+    [52471] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2300, cc = SILENCE }, -- Nullify (Estate Spellbreaker) (DB DLC)
 
     [73229] = { power = true, priority = 2, auradetect = true, ignoreRefresh = true }, -- Hurried Ward (Guard - DB Mage)
 
@@ -52,23 +60,23 @@ local AlertTable = {
     --------------------------------------------------
 
     -- Shared
-    [39058] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, notDirect = true }, -- Bear Trap (Bear Trap)
+    [39058] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bear Trap (Bear Trap)
 
     -- Synergy
     [12439] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Burning Arrow (Synergy)
     [10805] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Ignite (Synergy)
 
     -- Abilities
-    [29378] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Uppercut (Ravager)
+    [29378] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1600, cc = STUN }, -- Uppercut (Ravager)
 
-    [28408] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Whirlwind (Skirmisher)
+    [28408] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533 }, -- Whirlwind (Skirmisher)
 
-    [37108] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Arrow Spray (Archer)
-    [28628] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Volley (Archer)
-    [74978] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Taking Aim (Archer)
+    [37108] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = SNARE }, -- Arrow Spray (Archer)
+    [28628] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 6800 }, -- Volley (Archer)
+    [74978] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 9000, cc = STUN }, -- Taking Aim (Archer)
 
-    [14096] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Footsoldier)
-    [28499] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Throw Dagger (Footsoldier)
+    [14096] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250 }, -- Heavy Attack (Footsoldier)
+    [28499] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Throw Dagger (Footsoldier)
 
     [29400] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Power Bash (Guard)
     [29761] = { power = true, priority = 3, auradetect = true }, -- Brace (Guard)
@@ -80,7 +88,7 @@ local AlertTable = {
     [29510] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunder Hammer (Thundermaul)
     [17867] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Shock Aura (Thundermaul)
     [81215] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Shock Aura (Thundermaul - Boss)
-    [81195] = { avoid = true, priority = 2, auradetect = true, notDirect = true }, -- Agonizing Fury (Thundermaul - Boss)
+    [81195] = { avoid = true, priority = 2, auradetect = true }, -- Agonizing Fury (Thundermaul - Boss)
     [81217] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Thunder Hammer (Thundermaul - Boss)
 
     [36470] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Veiled Strike (Nightblade)
@@ -91,9 +99,9 @@ local AlertTable = {
     [44227] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dragonknight Standard (Dragonknight - Elite)
     [52041] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, bs = true, result = ACTION_RESULT_BEGIN }, -- Blink Strike (Dragonknight - Elite)
 
-    [88251] = { summon = true, priority = 2, auradetect = true }, -- Call Ally (Pet Ranger)
-    [88248] = { summon = true, priority = 2, auradetect = true }, -- Call Ally (Pet Ranger)
-    [89425] = { summon = true, priority = 2, auradetect = true }, -- Call Ally (Pet Ranger)
+    [88251] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Pet Ranger)
+    [88248] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Pet Ranger)
+    [89425] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Pet Ranger)
     [44301] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true , ignoreRefresh = true }, -- Trap Beast (Pet Ranger)
 
     [15164] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Heat Wave (Fire Mage)
@@ -103,8 +111,8 @@ local AlertTable = {
 
     [12459] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Winter's Reach (Frost Mage)
 
-    [35151] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true }, -- Spell Absorption (Spirit Mage)
-    [14472] = { summon = true, priority = 2, auradetect = true }, -- Burdening Eye (Spirit Mage)
+    [35151] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true }, -- Spell Absorption (Spirit Mage)
+    [14472] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Burdening Eye (Spirit Mage)
 
     [14370] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, auradetect = true }, -- Void (Time Bomb Mage)
 
@@ -112,21 +120,24 @@ local AlertTable = {
     [37129] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Ice Cage (Battlemage)
     [44216] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Negate Magic (Battlemage - Elite)
 
-    [88554] = { summon = true, priority = 2, auradetect = true }, -- Summon the Dead (Necromancer)
-    [88555] = { summon = true, priority = 2, auradetect = true }, -- Summon the Dead (Necromancer)
-    [88556] = { summon = true, priority = 2, auradetect = true }, -- Summon the Dead (Necromancer)
-    [13397] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true, result = ACTION_RESULT_BEGIN, refire = 1000 }, -- Empower Undead (Necromancer)
+    [88554] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
+    [88555] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
+    [88556] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
+    [13397] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1000 }, -- Empower Undead (Necromancer)
 
     [14350] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Aspect of Terror (Fear Mage)
 
-    [44250] = { summon = true, priority = 2, auradetect = true }, -- Dark Shade (Dreadweaver)
+    [44250] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Dark Shade (Dreadweaver)
+
+    [44323] = { power = true, priority = 3, auradetect = true }, -- Dampen Magic (Soulbrander)
+    [44258] = { power = true, priority = 3, auradetect = true }, -- Radiant Magelight (Soulbrander)
 
     [35387] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Defiled Grave (Bonelord)
-    [88506] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Summon Abomination (Bonelord)
-    [88507] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Summon Abomination (Bonelord)
+    [88506] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Abomination (Bonelord)
+    [88507] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Abomination (Bonelord)
 
     [50966] = { power = true, auradetect = true, priority = 2 }, -- Healer Immune (Healer - Craglorn/DLC)
-    [44328] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2, auradetect = true, notDirect = true }, -- Rite of Passage (Healer)
+    [44328] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2, auradetect = true }, -- Rite of Passage (Healer)
 
     [29520] = { destroy = true, auradetect = true, priority = 2 }, -- Aura of Protection (Shaman)
 
@@ -143,7 +154,7 @@ local AlertTable = {
     [64704] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500, result = ACTION_RESULT_BEGIN }, -- Flames (Winterborn Mage)
 
     [65235] = { power = true, auradetect = true, priority = 2 }, -- Enrage (Vosh Rakh Devoted)
-    [53987] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true, result = ACTION_RESULT_BEGIN }, -- Rally (Vosh Rakh Devoted)
+    [53987] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Rally (Vosh Rakh Devoted)
     [54027] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, refire = 1600, result = ACTION_RESULT_BEGIN }, -- Divine Leap (Vosh Rakh Devoted)
 
     [51000] = { power = true, auradetect = true, priority = 2 }, -- Cleave Stance (Dremora Caitiff) (Craglorn)
@@ -155,7 +166,7 @@ local AlertTable = {
     [72222] = { power = true, auradetect = true, priority = 2 }, -- Shadow Cloak (Archer) (TG DLC)
 
     [77472] = { power = true, auradetect = true, priority = 2 }, -- Til Death (Bodyguard) (DB DLC)
-    [77554] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true, result = ACTION_RESULT_BEGIN }, -- Shard Shield (Bodyguard) (DB DLC)
+    [77554] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Shard Shield (Bodyguard) (DB DLC)
     [77473] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Shield Charge (Bodyguard) (DB DLC)
 
     [77089] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Basilisk Powder (Tracker) (Morrowind)
@@ -165,7 +176,7 @@ local AlertTable = {
 
     [88371] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Dive (Beastcaller) (Morrowind)
     [88394] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Gore (Beastcaller) (Morrowind)
-    [88409] = { summon = true, priority = 2, auradetect = true }, -- Raise the Earth (Beastcaller)
+    [88409] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Raise the Earth (Beastcaller)
 
     [87901] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Bombard (Arbalest) (Morrowind)
     [87422] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Chilled Ground (Arbalest) (Morrowind)
@@ -174,7 +185,7 @@ local AlertTable = {
     [85359] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Reverse Slash (Drudge)
 
     [87064] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Volcanic Debris (Fire-Binder) (Morrowind)
-    [88845] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, notDirect = true, auradetect = true }, -- Empower Atronach (Fire-Binder) (Morrowind)
+    [88845] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true }, -- Empower Atronach (Fire-Binder) (Morrowind)
 
     [76621] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Shadeway (Voidbringer) (Morrowind)
     [76619] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Pool of Shadow (Voidbringer) (Morrowind)
@@ -184,7 +195,7 @@ local AlertTable = {
     [88325] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Pool of Shadow (Skaafin Masquer) (Morrowind)
     [88348] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true }, -- Shadowy Duplicate (Skaafin Masquer) (Morrowind)
 
-    [84818] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, notDirect = true, auradetect = true }, -- Fiendish Healing (Skaafin Witchling) (Morrowind)
+    [84818] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true }, -- Fiendish Healing (Skaafin Witchling) (Morrowind)
 
     [84835] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true }, -- Broken Pact (Skaafin) (Morrowind)
 
@@ -214,7 +225,7 @@ local AlertTable = {
 
     [5240] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lash (Giant Snake)
     [5242] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Kiss of Poison (Giant Snake)
-    [5244] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true }, -- Shed Skin (Giant Snake)
+    [5244] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true }, -- Shed Skin (Giant Snake)
 
     [5441] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dive (Guar)
 
@@ -249,8 +260,8 @@ local AlertTable = {
 
     [42844] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Rotbone (Wolf)
     [14523] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Helljoint (Wolf)
-    [14272] = { summon = true, auradetect = true, priority = 2 }, -- Call of the Pack (Wolf)
-    [26658] = { summon = true, auradetect = true, priority = 2 }, -- Call of the Pack (Jackal)
+    [14272] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Call of the Pack (Wolf)
+    [26658] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Call of the Pack (Jackal)
 
     [72793] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Toxic Mucus (Haj Mota)
     [72796] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bog Burst (Haj Mota)
@@ -282,7 +293,7 @@ local AlertTable = {
     [5685] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Corrosive Bite (Giant Spider)
     [8087] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 1200, result = ACTION_RESULT_BEGIN }, -- Poison Spray (Giant Spider)
     [4737] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Encase (Giant Spider)
-    [13382] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, notDirect = true }, -- Devour (Giant Spider)
+    [13382] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Devour (Giant Spider)
 
     [9226] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Sting (Wasp)
     [25110] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Focused Charge (Giant Wasp)
@@ -301,7 +312,7 @@ local AlertTable = {
 
     [5260] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 750, result = ACTION_RESULT_BEGIN }, -- Flamethrower (Shalk)
     [5252] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Fire Bite (Shalk)
-    [5262] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, notDirect = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Burning Ground (Shalk)
+    [5262] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Burning Ground (Shalk)
 
     [8429] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 750, result = ACTION_RESULT_BEGIN }, -- Zap (Thunderbug)
     [26412] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunderstrikes (Thunderbug)
@@ -337,7 +348,8 @@ local AlertTable = {
     [4799] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Tail Spike (Clannfear)
     [93745] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Rending Leap (Clannfear)
 
-    [26641] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Soul Flame (Daedric Titan)
+    [26641] = { avoid = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Soul Flame (Daedric Titan)
+    [34405] = { block = true, avoid = true, priority = 2, auradetect = true }, -- Swallowing Souls (Daedric Titan)
     [26554] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 2, result = ACTION_RESULT_BEGIN }, -- Wing Gust (Daedric Titan)
 
     [4771] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 1250, result = ACTION_RESULT_BEGIN },-- Fiery Breath (Daedroth)
@@ -366,7 +378,7 @@ local AlertTable = {
 
     [11079] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Black Winter (Harvester)
 
-    [8205] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true }, -- Regeneration (Ogrim)
+    [8205] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true }, -- Regeneration (Ogrim)
     [24690] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Focused Charge (Ogrim)
     [91848] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Stomp (Ogrim)
     [91855] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Boulder Toss (Ogrim)
@@ -377,7 +389,7 @@ local AlertTable = {
     [8779] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Lightning Onslaught (Spider Daedra)
     [89306] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Web (Spiderling)
     [8782] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Storm (Spider Daedra)
-    [8773] = { summon = true, priority = 2, auradetect = true }, -- Summon Spiderling (Spider Daedra)
+    [8773] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Spiderling (Spider Daedra)
 
     [35220] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Impending Storm (Storm Atronach)
     [4864] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 2, result = ACTION_RESULT_EFFECT_GAINED, refire = 100 }, -- Storm Bound (Storm Atronach)
@@ -385,7 +397,7 @@ local AlertTable = {
     [7095] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Xivilai)
     [88947] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Grasp (Xivilai)
     [7100] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Hand of Flame (Xivilai)
-    [25726] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Summon Daedra (Xivilai)
+    [25726] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Daedra (Xivilai)
 
     [4653] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true }, -- Shockwave (Watcher)
     [9219] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true, refire = 1750 }, -- Doom-Truth's Gaze (Watcher)
@@ -408,7 +420,7 @@ local AlertTable = {
     [8569] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Devastating Leap (Bloodfiend)
 
     [5050] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bone Saw (Bone Colossus)
-    [5030] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Voice to Wake the Dead (Bone Colossus)
+    [5030] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = "" }, -- Voice to Wake the Dead (Bone Colossus)
     [17207] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true }, -- Necromantic Implosion (Risen Dead)
 
     [18514] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Chill Touch (Ghost)
@@ -422,7 +434,7 @@ local AlertTable = {
 
     [2867] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Crushing Leap (Werewolf)
     [3415] = { block = true, dodge = true, priority = 3, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN }, -- Flurry (Werewolf)
-    [44055] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true, result = ACTION_RESULT_BEGIN }, -- Devour (Werewolf)
+    [44055] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Devour (Werewolf)
     --[5785] = { power = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Blood Scent (Werewolf)
 
     [4337] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Winter's Reach (Wraith)
@@ -463,9 +475,9 @@ local AlertTable = {
 
     [9671] = { block = true, bs = true, eventdetect = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Howling Strike (Lamia)
     [9674] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Resonate (Lamia)
-    [7835] = { interrupt = true, notDirect = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Convalescence (Lamia)
-    [7831] = { interrupt = true, notDirect = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500 }, -- Harmony (Lamia)
-    [9680] = { summon = true, auradetect = true, priority = 2 }, -- Summon Spectral Lamia
+    [7835] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Convalescence (Lamia)
+    [7831] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500 }, -- Harmony (Lamia)
+    [9680] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Summon Spectral Lamia
 
     [3860] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Pulverize (Lurcher)
     [3855] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Crushing Limbs (Lurcher)
@@ -479,24 +491,24 @@ local AlertTable = {
     [5256] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Shockwave (Ogre)
 
     [53142] = { destroy = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Ice Pillar (Ogre Shaman)
-    [64540] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true, result = ACTION_RESULT_BEGIN }, -- Freeze Wounds (Ogre Shaman)
-    [53137] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true, result = ACTION_RESULT_BEGIN }, -- Freeze Wounds (Ogre Shaman)
+    [64540] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Freeze Wounds (Ogre Shaman)
+    [53137] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Freeze Wounds (Ogre Shaman)
 
     [21582] = { block = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Nature's Swarm (Spriggan)
-    [13475] = { interrupt = true, priority = 3, auradetect = true, notDirect = true }, -- Healing Salve (Spriggan)
-    [13477] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Control Beast (Spriggan)
-    [89119] = { summon = true, priority = 2, auradetect = true }, -- Summon Beast (Spriggan)
-    [89102] = { summon = true, priority = 2, auradetect = true }, -- Summon Beast (Spriggan)
+    [13475] = { interrupt = true, priority = 3, auradetect = true }, -- Healing Salve (Spriggan)
+    [13477] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Control Beast (Spriggan)
+    [89119] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Beast (Spriggan)
+    [89102] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Beast (Spriggan)
 
     [9346] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Strangle (Strangler)
     [9322] = { avoid = true, priority = 3, auradetect = true }, -- Poisoned Ground (Strangler)
-    [9321] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Grapple (Strangler)
+    [9321] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 500 }, -- Grapple (Strangler)
 
     [44736] = { block = true, dodge = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN }, -- Swinging Cleave (Troll)
     [9009] = { avoid = true, priority = 2, eventdetect = true, refire = 300, result = ACTION_RESULT_BEGIN }, -- Tremor (Troll)
 
     [76268] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Lope (River Troll)
-    [76277] = { interrupt = true, notDirect = true, priority = 2, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Close Wounds (River Troll)
+    [76277] = { interrupt = true, priority = 2, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Close Wounds (River Troll)
     [76295] = { block = true, avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Crab Toss (River Troll)
 
     [48256] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Boulder Toss (Troll - Ranged)
@@ -524,7 +536,7 @@ local AlertTable = {
 
     [104479] = { block = true, bs = true, dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Reave (Yaghra Strider)
     [105214] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Lunge (Yaghra Strider)
-    [105330] = { interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, notDirect = true }, -- Frenzy (Yaghra Strider)
+    [105330] = { interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Frenzy (Yaghra Strider)
 
     [103804] = { interrupt = true, avoid = true, eventdetect = true, priority = 2, result = ACTION_RESULT_BEGIN, refire = 800 }, -- Deluge (Yaghra Strider)
     [103931] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Luminescent Mark (Yaghra Spewer)
@@ -540,7 +552,7 @@ local AlertTable = {
     [20507] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Double Strike (Dwemer Spider)
     [7717] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Detonation (Dwemer Spider)
     [19970] = { power = true, priority = 3, auradetect = true }, -- Static Field (Dwemer Spider - Overcharge Synergy)
-    --[20207] = { interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    --[20207] = { interrupt = true, priority = 3, eventdetect = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
     [20505] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
     [20222] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
 
@@ -549,7 +561,7 @@ local AlertTable = {
     [88668] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Impulse Mine (Dwemer Arquebus)
     [85270] = { interrupt = true, priority = 3, refire = 1500, result = ACTION_RESULT_BEGIN }, -- Shock Barrage (Dwemer Arquebus)
     [85319] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Siege Ballista (Dwemer Arquebus)
-    [85326] = { interrupt = true, priority = 3, eventdetect = true, refire = 1000, notDirect = true, result = ACTION_RESULT_BEGIN }, -- Polarizing Field (Dwemer Arquebus)
+    [85326] = { interrupt = true, priority = 3, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Polarizing Field (Dwemer Arquebus)
 
     --------------------------------------------------
     -- FRIENDLY NPC ----------------------------------
@@ -582,11 +594,11 @@ local AlertTable = {
 
     -- MSQ 6 (Halls of Torment)
     [36858] = { interrupt = true, avoid = true, priority = 2, eventdetect = true, refire = 1500 }, -- Swordstorm (Tharn Doppleganger)
-    [37173] = { interrupt = true, priority = 2, eventdetect = true, notDirect = true }, -- Flame Shield (Duchess of Anguish)
+    [37173] = { interrupt = true, priority = 2, eventdetect = true }, -- Flame Shield (Duchess of Anguish)
     [38729] = { block = true, interrupt = true, priority = 2, refire = 500 }, -- Royal Strike (Duchess of Anguish)
 
     -- MSQ 7 (Shadow of Sancre Tor)
-    [39302] = { interrupt = true, priority = 2, eventdetect = true, notDirect = true, refire = 1000 }, -- Necromantic Revival
+    [39302] = { interrupt = true, priority = 2, eventdetect = true, refire = 1000 }, -- Necromantic Revival
     [38215] = { interrupt = true, priority = 2, refire = 1000 }, -- Death's Gaze (Mannimarco)
     [40425] = { avoid = true, priority = 2 }, -- Impending Doom (Mannimarco)
     [40973] = { power = true, priority = 2, eventdetect = true }, -- Portal Spawn (Mannimarco)
@@ -696,8 +708,99 @@ local AlertTable = {
     -- ARENAS ----------------------------------------
     --------------------------------------------------
 
+    -- Dragonstar Arena
+
+    -- Stage 1
+    [52729] = { power = true, priority = 1, auradetect = true }, -- Expert Hunter (Fighters Guild Swordmaster)
+    [52738] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Ring of Preservation (Fighters Guild Gladiator)
+    [82996] = { power = true, priority = 1, auradetect = true }, -- Enrage (Fighters Guild Gladiator)
+
+    [52746] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Champion_Marcauld }, -- Flawless Dawnbreaker (Champion Marcauld)
+
+    -- Stage 2 - The Frozen Ring
+    [53264] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true }, -- Rally (Sovngarde Slayer)
+    [53313] = { avoid = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500 }, -- Volley (Sovngarde Slayer)
+
+    [53286] = { interrupt = true, block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crushing Shock (Sovngarde Icemage)
+    [53274] = { avoid = true, priority = 1, auradetect = true, bossMatch = U.Boss_Katti_Ice_Turner }, -- Unstable Wall of Frost (Sovngarde Icemage)
+
+    [53250] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Wrecking Blow (Yavni Frost-Skin)
+    [53301] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossMatch = U.Boss_Katti_Ice_Turner }, -- Icy Pulsar (Katti Ice-Turner)
+
+    -- Stage 3 - The Marsh
+    [8244] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Devastate (Corprus Husk)
+    [8247] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 1750 }, -- Vomit (Corprus Husk)
+    [22109] = { avoid = true, priority = 3, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, refire = 250 }, -- Contaminate (Corprus Husk)
+
+    [83493] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1000 }, -- CLST - Poison Cloud (Poison Cloud)
+
+    [56796] = { power = true, priority = 1, auradetect = true }, -- Bound Aegis (Dragonclaw Hedge Wizard)
+
+    [53613] = { power = true, priority = 1, auradetect = true }, -- Thundering Presence (Nak'tah)
+    [53624] = { avoid = true, priority = 1, auradetect = true, bossMatch = U.Boss_Nak_tah }, -- Lightning Flood (Nak'tah)
+    [53659] = { block = true, avoid = true, interrupt = true, priority = 1, auradetect = true }, -- Power Overload Heavy Attack (Nak'tah)
+
+    -- Stage 4 - The Slave Pit
+    [54160] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 750, eventdetect = true, fakeName = U.NPC_House_Dres_Slaver }, -- Berserker Frenzy (House Dres Slaver)
+    [83774] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 750 }, -- Enslavement (House Dres Slaver)
+
+    [54056] = { power = true, priority = 1, auradetect = true, refire = 500 }, -- Molten Armaments (Earthen Heart Knight)
+    [54065] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Igneous Shield (Earthen Heart Knight)
+    [54077] = { avoid = true, priority = 1, auradetect = true, bossMatch = U.Boss_Earthen_Heart_Knight }, -- Cinder Storm (Earthen Heart Knight)
+    [54053] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Stone Giant (Earthen Heart Knight)
+    [54083] = { power = true, priority = 1, auradetect = true }, -- Corrosive Armor (Earthen Heart Knight)
+    [54067] = { block = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Fossilize (Earth Heart Knight)
+
+    -- Stage 5 - The Celestial Ring
+    [51352] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Petrify (Gargoyle)
+    [54411] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.NPC_Anka_Ra_Shadowcaster }, -- Celestial Blast (Anka-Ra Shadowcaster)
+    [54404] = { unmit = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.NPC_Anka_Ra_Shadowcaster }, -- Celestial Blast (Anka-Ra Shadowcaster)
+    [52897] = { avoid = true, priority = 1, auradetect = true, bossName = true }, -- Standard of Might (Anal'a Tu'wha)
+    [52891] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossMatch = U.Boss_Anala_tuwha }, -- Flames of Oblivion (Anal'a Tu'wha)
+
+    -- Stage 6 - The Grove
+    [54608] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Drain Resource (Pacthunter Ranger)
+    --[54512] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true }, -- Regeneration Aura (Nature's Blessing)
+    [52820] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Acid Spray (Pishna Longshot)
+    [52825] = { block = true, dodge = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Lethal Arrow (Pishna Longshot)
+
+    -- Stage 7 - Circle of Rituals
+    [56946] = { power = true, priority = 1, auradetect = true }, -- Dragon Fire Scale (Bloodwraith Kynval)
+    [54634] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true }, -- CLDA - Sacrifice (Daedric Sacrifice)
+    [54635] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true }, -- CLDA - Sacrifice (Daedric Sacrifice)
+    [54612] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true }, -- CLDA - Sacrifice (Daedric Sacrifice)
+
+    [52907] = { block = true, dodge = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Dark Flare (Shadow Knight)
+    [52912] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Purifying Light (Shadow Knight)
+    [52927] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.Boss_Shadow_Knight, bossMatch = U.Boss_Hiath_the_Battlemaster }, -- Solar Disturbance (Shadow Knight)
+
+    [54792] = { block = true, dodge = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crystal Blast (Dark Mage)
+    [54819] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossMatch = U.Boss_Dark_Mage }, -- Daedric Minefield (Dark Mage)
+    [54829] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.Boss_Dark_Mage, bossMatch = U.Boss_Hiath_the_Battlemaster }, -- Suppression Field (Dark Mage)
+    [54809] = { interrupt = true, priority = 1, auradetect = true }, -- Dark Deal (Dark Mage)
+
+    -- Stage 8 - Steamworks
+    [25211] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind Function (Dwarven Fire Centurion)
+    [54841] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Ice Charge (Dwarven Ice Centurion)
+    [56065] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, noSelf = true }, -- Ice Charge (Dwarven Ice Centurion)
+    [72180] = { avoid = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.NPC_Dwarven_Sphere }, -- Electric Wave (Dwarven Sphere)
+
+    [52773] = { block = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED }, -- Ice Comet (Mavus Talnarith)
+    [52765] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, fakeName = U.Boss_Mavus_Talnarith }, -- Volcanic Rune (Mavus Talnarith)
+
+    -- Stage 9 - Crypts of the Lost
+    [56985] = { power = true, priority = 1, auradetect = true }, -- Spirit Shield (Zakael/Rubyn Jonnicent)
+    [55089] = { avoid = true, priority = 1, auradetect = true}, -- Poison Mist (Vampire Lord Thisa)
+    [55090] = { avoid = true, priority = 1, auradetect = true}, -- Devouring Swarm (Vampire Lord Thisa)
+    [55081] = { interrupt = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, noSelf = true, fakeName = U.Boss_Vampire_Lord_Thisa }, -- Vampire Lord Thisa
+
+    [55479] = { block = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Malefic Wreath (Hiath the Battlemaster)
+    [55496] = { power = true, priority = 1, auradetect = true }, -- Power Extraction (Hiath the Battlemaster)
+    [55174] = { unmit = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED }, -- Marked for Death (Hiath the Battlemaster)
+
     -- Maelstrom Arena
 
+    -- Stage 1 - Vale of the Surreal
     [70892] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Bone Cage (Maxus the Many)
     [72148] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Bone Cage (Maxus the Many)
     [67765] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Multiply (Maxus the Many)
@@ -705,14 +808,65 @@ local AlertTable = {
     [69515] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Multiply (Maxus the Many)
     [67691] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Reunite (Maxus the Many)
 
+    -- Stage 2 - Seht's Balcony
+    --[71047] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunderbolt (Clockwork Sentry)
+    [72067] = { power = true, priority = 2, auradetect = true }, -- Energizing (Clockwork Sentry)
+    [69364] = { avoid = true, priority = 1, auradetect = true }, -- Barrage Function (Centurion Champion)
+    [66904] = { power = true, priority = 1, auradetect = true }, -- Full Defense (Centurion Champion)
+
+    -- Stage 3 - The Drome of Toxic Shock
+    [67635] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Shock Water (Lamia Queen)
+    [73879] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED }, -- Lightning X (Lamia Queen)
+    [67757] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Queen's Poison (Lamia Queen)
+    [68357] = { power = true, priority = 1, auradetect = true }, -- Queen's Radiance (Lamia Queen)
+    [73876] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1000 }, -- Piercing Shriek (Lamia Queen)
+
+    -- Stage 4 - Seht's Flywheel
+    [71045] = { power = true, priority = 1, auradetect = true }, -- Turret Mode (Clockwork Sentry)
+    [71050] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Static Shield (Clockwork Sentry)
+    [73850] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Static Shield (Clockwork Sentry)
+    [69268] = { power = true, priority = 1, auradetect = true }, -- Enrage (Achelir)
+
+    [72157] = { power = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.NPC_Dwarven_Spider }, -- Static Field (Dwarven Spider)
+    [72166] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Overcharge (Dwarven Spider)
+    [72174] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Overcharge (Dwarven Spider)
+
+    [68524] = { power = true, priority = 1, auradetect = true }, -- Overcharged (The Control Guardian)
+    [68539] = { power = true, priority = 1, auradetect = true }, -- Overheated (The Control Guardian)
+    [68558] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, refire = 20000 }, -- Overheated Volley (The Control Guardian)
+
+    [72195] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Thunder Hammer (Scavenger Thunder-Smith)
+    [72198] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Wrecking Blow (Scavenger Thunder-Smith)
+    [72202] = { avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = U.NPC_Scavenger_Thunder_Smith }, -- Overcharge (Scavenger Thunder-Smith)
+
+    -- Stage 5 - Rink of Frozen Blood
+
+    [70898] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Huntsman Chillbane)
+    [71939] = { block = true, avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Frost Breath (Huntsman Chillbane)
+    [71937] = { block = true, avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Frost Nova (Huntsman Chillbane)
+
+    [72446] = { interrupt = true, priority = 1, auradetect = true }, -- Smash Iceberg (Troll Breaker)
+    [71926] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Frenzy of Blows (Angirgoth)
+
+    [72438] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Shatter (Giant)
+    [68439] = { power = true, priority = 1, auradetect = true }, -- Enrage (Aki/Vigi)
+    [74130] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Intimidating Roar (Aki/Vigi)
+
+    [66378] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Sweep (Matriarch Runa)
+    [72749] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Freezing Stomp (Matriarch Runa)
+    [67088] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Intimidating Roar (Matriarch Runa)
+    [66325] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Shatter (Matriarch Runa)
+    [72409] = { avoid = true, priority = 1, auradetect = true }, -- Taunt (Matriarch Runa)
+
     --------------------------------------------------
     -- DUNGEONS --------------------------------------
     --------------------------------------------------
 
     -- Banished Cells I
+    [19028] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 1500 }, -- Drain Essence (Cell Haunter)
     [47587] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Tail Smite (Shadowrend)
     [21886] = { summon = true, priority = 1, auradetect = true }, -- Summon Dark Proxy (Shadowrend)
-    [18772] = { interrupt = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, notDirect = true, bossName = true }, -- Feeding (Shadowrend)
+    [18772] = { interrupt = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Feeding (Shadowrend)
     [18708] = { summon = true, priority = 1, auradetect = true }, -- Summon Clannfear (Angata the Clannfear Handler)
     [19025] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Dead Zone (Skeletal Destroyer)
 
@@ -729,6 +883,8 @@ local AlertTable = {
     [28962] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Sister's Love (Sister Sihna / Sister Vera)
     [48799] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, bossName = true }, -- Daedric Tempest (High Kinlord Rilis)
     [48814] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, bossName = true }, -- Daedric Tempest (High Kinlord Rilis)
+    [28570] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Levitate (High Kinlord Rilis)
+    [28462] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Levitate (High Kinlord Rilis)
 
     -- Elden Hollow I
     [16834] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Executioner's Strike (Akash gra-Mal)
@@ -736,7 +892,7 @@ local AlertTable = {
     [16016] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Berserker Frenzy (Akash gra-Mal)
 
     [9910] = { destroy = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Summon Saplings (Chokethorn)
-    [9930] = { interrupt = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, notDirect = true, refire = 1000, fakeName = U.NPC_Strangler_Saplings }, -- Heal Spores (Chokethorn)
+    [9930] = { interrupt = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1000, fakeName = U.NPC_Strangler_Saplings }, -- Heal Spores (Chokethorn)
     [9875] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Fungal Burst (Chokethorn)
 
     [44223] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Leafseether }, -- Inhale (Leafseether)
@@ -764,9 +920,10 @@ local AlertTable = {
     [33102] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1250, bossName = true }, -- Spout Shadow (The Shadow Guard)
 
     [33432] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Daedric Flame (Bogdan the Nightflame)
-    [33480] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = '' }, -- Pulverize (Bogdan the Nightflame)
-    [33492] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = '' }, -- Pulverize (Bogdan the Nightflame)
-    [33494] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = '' }, -- Pulverize (Bogdan the Nightflame)
+    [33480] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Pulverize (Bogdan the Nightflame)
+    [33492] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Pulverize (Bogdan the Nightflame)
+    [33494] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Pulverize (Bogdan the Nightflame)
+    [34260] = { destroy = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = U.Boss_Nova_Tendril, refire = 1000 }, -- Shadow (Nova Tendril)
 
     -- City of Ash I
     [31101] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Cleave (Golor the Banekin Handler)
@@ -796,8 +953,8 @@ local AlertTable = {
     [53999] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = A.Skill_Oblivion_Gate }, -- Summon (Flame Atronach)
     [54021] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Release Flame (Marruz)
     [53976] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Blazing Arrow (Marruz)
-    [54025] = { interrupt = true, priority = 1, auradetect = true, notDirect = true, fakeName = U.Boss_Akezel }, -- Spell Absorption (Akezel)
-    [53994] = { interrupt = true, priority = 1, eventdetect = true, notDirect = true, fakeName = U.Boss_Akezel, result = ACTION_RESULT_BEGIN }, -- Focused Healing (Akezel)
+    [54025] = { interrupt = true, priority = 1, auradetect = true, fakeName = U.Boss_Akezel }, -- Spell Absorption (Akezel)
+    [53994] = { interrupt = true, priority = 1, eventdetect = true, fakeName = U.Boss_Akezel, result = ACTION_RESULT_BEGIN }, -- Focused Healing (Akezel)
     [54096] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.Boss_Rukhan }, -- Pyrocasm (Rukhan)
 
     [56811] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.NPC_Xivilai_Ravager }, -- Pyrocasm (Xivilai Ravager)
@@ -868,7 +1025,7 @@ local AlertTable = {
 
     [30781] = { power = true, priority = 1, auradetect = true }, -- Mirror Ward (Longclaw)
     [30772] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, refire = 1250 }, -- Arrow Rain (Longclaw)
-    [30779] = { summon = true, priority = 1, auradetect = true, refire = 500, fakeName = '' }, -- Spirit Form (Senche Spirit)
+    [30779] = { summon = true, priority = 1, auradetect = true, refire = 500, fakeName = "" }, -- Spirit Form (Senche Spirit)
     [31096] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Poison Burst (Longclaw)
 
     [31202] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Venomous Burst (Queen Aklayah)
@@ -876,7 +1033,7 @@ local AlertTable = {
 
     [30996] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Vicious Maul (Foulhide)
     [30812] = { avoid = true, block = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Trampling Charge (Foulhide)
-    [31002] = { summon = true, priority = 1, auradetect = true, fakeName = '', refire = 5000 }, -- Intro (Selene's Rose)
+    [31002] = { summon = true, priority = 1, auradetect = true, fakeName = "", refire = 5000 }, -- Intro (Selene's Rose)
 
     [31241] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossName = true }, -- Summon Spiders (Mennir Many-Legs)
 
@@ -905,7 +1062,7 @@ local AlertTable = {
     [28093] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Vicious Smash (Blood Spawn)
     [27995] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Cave-In (Blood Spawn)
     [47331] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, refire = 60000 }, -- Cave-In (Blood Spawn)
-    [47198] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, auradetect = true, refire = 5000, fakeName = '' }, -- Falling Rocks (Cave In)
+    [47198] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, auradetect = true, refire = 5000, fakeName = "" }, -- Falling Rocks (Cave In)
 
     [28438] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Dummy (Praxin Douare)
     [18036] = { block = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = U.NPC_The_Whisperer_Nightmare, refire = 2500 }, -- Grappling Web (The Whisperer Nightmare)
@@ -926,6 +1083,23 @@ local AlertTable = {
 
     [31672] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, refire = 2500 }, -- Thrall Feast (Vorenor Winterbourne)
 
+    -- Wayrest Sewers I
+    [34846] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Primal Sweep (Slimecraw)
+
+    [9441] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Dark Lance (Investigator Garron)
+    [25593] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Summon Necrotic Orb (Investigator Garron)
+    [9740] = { summon = true, priority = 1, auradetect = true, bossName = true }, -- Tormented Summoning (Restless Soul)
+
+    [25548] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Smite (Varaine Pellingare)
+    [9648] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Spinning Cleave (Varaine Pellingare)
+    [36435] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Tidal Slash (Varaine Pellingare)
+    [9656] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Poisoned Blade (Varaine Pellingare)
+
+    [11752] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Penetrating Daggers (Allene Pellingare)
+    [35006] = { power = true, priority = 1, auradetect = true }, -- Hallucinogenic Fumes (Allene Pellingare)
+    [35021] = { power = true, priority = 1, auradetect = true }, -- Mind-Bending Mist (Allene Pellingare)
+    [35041] = { power = true, priority = 1, auradetect = true }, -- Mind-Bending Mist (Allene Pellingare)
+
     -- Frostvault
     [109574] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 3250 }, -- Fire Power (Coldsnap Harrier)
     [117352] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Whirlwind (Coldsnap Snowstalker)
@@ -937,23 +1111,7 @@ local AlertTable = {
 
     [109827] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Boulder Toss (Icestalker)
     [109811] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Ground Slam (Icestalker)
-    [109837] = { interrupt = true, priority = 1,  result = ACTION_RESULT_BEGIN, eventdetect = true, notDirect = true }, -- Frenzied Pummeling (Icestalker)
+    [109837] = { interrupt = true, priority = 1,  result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Frenzied Pummeling (Icestalker)
     [109806] = { block = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Frozen Aura (Icestalker)
     [83430] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Skeletal Smash (Ice Wraith)
 }
-
---[[
-
--- Add IF needed for custom exploit messages
-E.CombatAlertExploit = {
-    [45902] = true
-}
-]]--
-
---[[ NOTES
-63269 - Remove block + add avoid if ever corrected!
-
-]]--
-
--- Export string data to global namespace
-LUIE.AlertTable = AlertTable

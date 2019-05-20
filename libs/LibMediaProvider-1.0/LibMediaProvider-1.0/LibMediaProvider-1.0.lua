@@ -1,14 +1,14 @@
 --LibMediaProvider-1.0 is inspired by and borrows from LibSharedMedia-3.0 for World of Warcraft by Elkano
 --LibSharedMedia-3.0 and LibMediaProvider-1.0 are under the LGPL-2.1 license
 
-local MAJOR, MINOR = "LibMediaProvider-1.0", 8 -- remember to increase manually on changes
-local LMP = LibStub:NewLibrary(MAJOR, MINOR)
-if not LMP then return end
+local MAJOR, MINOR = "LibMediaProvider-1.0", 10 -- remember to increase manually on changes
+local LMP = LibStub and LibStub:NewLibrary(MAJOR, MINOR)
+LibMediaProvider = LMP or {}
+if not LMP then
+    return
+end
 
 local cm = CALLBACK_MANAGER
-local tinsert = table.insert
-local tsort = table.sort
-local pairs = pairs
 
 LMP.DefaultMedia = LMP.DefaultMedia or {}
 LMP.MediaList = LMP.MediaList or {}
@@ -99,7 +99,7 @@ local function rebuildMediaList(mediatype)
 		i = i + 1
 		mlist[i] = k
 	end
-	tsort(mlist)
+	table.sort(mlist)
 end
 
 function LMP:Register(mediatype, key, data)
@@ -113,7 +113,7 @@ function LMP:Register(mediatype, key, data)
 	if not mediaTable[mediatype] then
 		mediaTable[mediatype] = {}
 	end
-	
+
 	local mtable = mediaTable[mediatype]
 	if mtable[key] then
 		return false

@@ -1,8 +1,9 @@
-------------------
--- CombatTextConstants namespace
-LUIE.CombatTextConstants = {}
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
 
-local CombatTextConstants = {
+LUIE.CombatTextConstants = {
     -- Damage & Healing
     isDamage = {
         [ACTION_RESULT_DAMAGE]              = true,
@@ -50,7 +51,6 @@ local CombatTextConstants = {
         [DAMAGE_TYPE_POISON]                = true,
     },
     -- Mitigation
-    mitigationType                          = { "Single Line", "Multiple Lines" },
     isMiss = {
         [ACTION_RESULT_MISS]                = true,
     },
@@ -106,21 +106,6 @@ local CombatTextConstants = {
         RESOURCE                    = "LUIE_CombatText_EVENT_RESOURCE",
         DEATH                       = "LUIE_CombatText_EVENT_DEATH",
     },
-    alertType = {
-        BLOCK                       = "LUIE_LUIE_CombatText_Alert_TYPE_BLOCK",
-        BLOCKSTAGGER                = "LUIE_LUIE_CombatText_Alert_TYPE_BLOCKSTAGGER",
-        DODGE                       = "LUIE_LUIE_CombatText_Alert_TYPE_DODGE",
-        AVOID                       = "LUIE_LUIE_CombatText_Alert_TYPE_AVOID",
-        INTERRUPT                   = "LUIE_LUIE_CombatText_Alert_TYPE_INTERRUPT",
-        UNMIT                       = "LUIE_LUIE_CombatText_Alert_TYPE_UNMIT",
-        CLEANSE                     = "LUIE_LUIE_CombatText_Alert_TYPE_CLEANSE",
-        EXPLOIT                     = "LUIE_LUIE_CombatText_Alert_TYPE_EXPLOIT",
-        EXECUTE                     = "LUIE_LUIE_CombatText_Alert_TYPE_EXECUTE",
-        DESTROY                     = "LUIE_LUIE_CombatText_Alert_TYPE_DESTROY",
-        POWER                       = "LUIE_LUIE_CombatText_Alert_TYPE_POWER",
-        SUMMON                      = "LUIE_LUIE_CombatText_Alert_TYPE_SUMMON",
-        SHARED                      = "LUIE_LUIE_CombatText_Alert_TYPE_SHARED",
-    },
     combatType = {
         INCOMING                    = "LUIE_CombatText_COMBAT_TYPE_INCOMING",
         OUTGOING                    = "LUIE_CombatText_COMBAT_TYPE_OUTGOING",
@@ -133,18 +118,18 @@ local CombatTextConstants = {
         STUNNED                     = "LUIE_CombatText_CROWDCONTROL_TYPE_STUNNED",
     },
     pointType = {
-        ALLIANCE_POINTS             = "LUIE_LUIE_CombatText_Point_TYPE_ALLIANCE_POINTS",
-        EXPERIENCE_POINTS           = "LUIE_LUIE_CombatText_Point_TYPE_EXPERIENCE_POINTS",
-        CHAMPION_POINTS             = "LUIE_LUIE_CombatText_Point_TYPE_CHAMPION_POINTS",
-        IN_COMBAT                   = "LUIE_LUIE_CombatText_Point_TYPE_IN_COMBAT",
-        OUT_COMBAT                  = "LUIE_LUIE_CombatText_Point_TYPE_OUT_COMBAT",
+        ALLIANCE_POINTS             = "LUIE_CombatText_Point_TYPE_ALLIANCE_POINTS",
+        EXPERIENCE_POINTS           = "LUIE_CombatText_Point_TYPE_EXPERIENCE_POINTS",
+        CHAMPION_POINTS             = "LUIE_CombatText_Point_TYPE_CHAMPION_POINTS",
+        IN_COMBAT                   = "LUIE_CombatText_Point_TYPE_IN_COMBAT",
+        OUT_COMBAT                  = "LUIE_CombatText_Point_TYPE_OUT_COMBAT",
     },
     resourceType = {
-        LOW_HEALTH                  = "LUIE_LUIE_CombatText_Resource_TYPE_LOW_HEALTH",
-        LOW_MAGICKA                 = "LUIE_LUIE_CombatText_Resource_TYPE_LOW_MAGICKA",
-        LOW_STAMINA                 = "LUIE_LUIE_CombatText_Resource_TYPE_LOW_STAMINA",
-        ULTIMATE                    = "LUIE_LUIE_CombatText_Resource_TYPE_ULTIMATE",
-        POTION                      = "LUIE_LUIE_CombatText_Resource_TYPE_POTION",
+        LOW_HEALTH                  = "LUIE_CombatText_Resource_TYPE_LOW_HEALTH",
+        LOW_MAGICKA                 = "LUIE_CombatText_Resource_TYPE_LOW_MAGICKA",
+        LOW_STAMINA                 = "LUIE_CombatText_Resource_TYPE_LOW_STAMINA",
+        ULTIMATE                    = "LUIE_CombatText_Resource_TYPE_ULTIMATE",
+        POTION                      = "LUIE_CombatText_Resource_TYPE_POTION",
     },
     poolType = {
         CONTROL                     = "LUIE_CombatText_POOL_TYPE_CONTROL",
@@ -170,6 +155,3 @@ local CombatTextConstants = {
     directionType                   = { "up", "down" },
     iconSide                        = { "none", "left", "right"},
 }
-
--- Export string data to global namespace
-LUIE.CombatTextConstants = CombatTextConstants

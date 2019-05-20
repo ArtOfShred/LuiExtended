@@ -1,9 +1,11 @@
-## APIVersion: 100022 100023
+## APIVersion: 100026 100027
 ## Title: LibAddonMenu-2.0
-## Version: 2.0 r26
-## AddOnVersion: 26
+## Version: 2.0 r29
+## AddOnVersion: 29
+## IsLibrary: true
+## OptionalDependsOn: LibStub LibDebugLogger
 ## Author: Seerah, sirinsidiator, et al.
-## Contributors: votan, merlight, Garkin, Randactyl, KuroiLight, silvereyes333, Baertram, kyoma
+## Contributors: votan, merlight, Garkin, Randactyl, KuroiLight, silvereyes333, Baertram, kyoma, klingo, phuein
 ## Description: A library to aid in the creation of option panels.
 ##
 ## This Add-on is not created by, affiliated with or sponsored by ZeniMax Media Inc. or its affiliates. 

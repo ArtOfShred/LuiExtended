@@ -5,13 +5,14 @@
     setFunc = function(value) db.var = value doStuff() end,
     min = 0,
     max = 20,
-    step = 1, --(optional)
+    step = 1, -- (optional)
     clampInput = true, -- boolean, if set to false the input won't clamp to min and max and allow any number instead (optional)
+    clampFunction = function(value, min, max) return math.max(math.min(value, max), min) end, -- function that is called to clamp the value (optional)
     decimals = 0, -- when specified the input value is rounded to the specified number of decimals (optional)
     autoSelect = false, -- boolean, automatically select everything in the text input field when it gains focus (optional)
     inputLocation = "below", -- or "right", determines where the input field is shown. This should not be used within the addon menu and is for custom sliders (optional) 
     tooltip = "Slider's tooltip text.", -- or string id or function returning a string (optional)
-    width = "full", --or "half" (optional)
+    width = "full", -- or "half" (optional)
     disabled = function() return db.someBooleanSetting end, --or boolean (optional)
     warning = "May cause permanent awesomeness.", -- or string id or function returning a string (optional)
     requiresReload = false, -- boolean, if set to true, the warning text will contain a notice that changes are only applied after an UI reload and any change to the value will make the "Apply Settings" button appear on the panel which will reload the UI when pressed (optional)
@@ -19,7 +20,7 @@
     reference = "MyAddonSlider" -- unique global reference to control (optional)
 } ]]
 
-local widgetVersion = 12
+local widgetVersion = 13
 local LAM = LibStub("LibAddonMenu-2.0")
 if not LAM:RegisterWidget("slider", widgetVersion) then return end
 
@@ -28,6 +29,10 @@ local strformat = string.format
 
 local function RoundDecimalToPlace(d, place)
     return tonumber(strformat("%." .. tostring(place) .. "f", d))
+end
+
+local function ClampValue(value, min, max)
+    return math.max(math.min(value, max), min)
 end
 
 local function UpdateDisabled(control)
@@ -62,7 +67,8 @@ local function UpdateValue(control, forceDefault, value)
             value = RoundDecimalToPlace(value, control.data.decimals)
         end
         if control.data.clampInput ~= false then
-            value = math.max(math.min(value, control.data.max), control.data.min)
+            local clamp = control.data.clampFunction or ClampValue
+            value = clamp(value, control.data.min, control.data.max)
         end
         control.data.setFunc(value)
         --after setting this value, let's refresh the others to see if any should be disabled or have their settings changed
@@ -182,7 +188,9 @@ function LAMCreateControl.slider(parent, sliderData, controlName)
         HandleValueChanged(value)
     end)
     slider:SetHandler("OnSliderReleased", function(self, value)
-        control:UpdateValue(false, value)
+        if self:GetEnabled() then
+            control:UpdateValue(false, value)
+        end
     end)
     slider:SetHandler("OnMouseWheel", function(self, value)
         if(not self:GetEnabled()) then return end

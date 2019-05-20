@@ -1,9 +1,13 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- Addon Settings Menu localization
 -- Translation by: <default>
-
 local strings = {
 
-    -- Settings.lua
+    -- Settings
     SI_LUIE_LAM_COMPATIBILITY_WARNING =                  "Disable this option if you are having compatibility issues with other addons.",
     SI_LUIE_LAM_FONT =                                   "Font",
     SI_LUIE_LAM_FONT_SIZE =                              "Font Size",
@@ -155,6 +159,11 @@ local strings = {
     SI_LUIE_LAM_BUFF_SHOWBORDERCOOLDOWN_TP =             "Display a context colored radial countdown border as the buff or debuff progresses in duration.",
     SI_LUIE_LAM_BUFF_FADEEXPIREICON =                    "Fade Out Expiring Icons",
     SI_LUIE_LAM_BUFF_FADEEXPIREICON_TP =                 "When a buff/debuff is about to expire, make the icon transparent.",
+    SI_LUIE_LAM_BUFF_TOOLTIP_HEADER =                    "Tooltips",
+    SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE =                    "Display Mouseover Tooltip Description",
+    SI_LUIE_LAM_BUFF_TOOLTIP_ENABLE_TP =                 "Display detailed tooltips when mousing over a buff or debuff icon.",
+    SI_LUIE_LAM_BUFF_TOOLTIP_STICKY =                    "Sticky Tooltip Duration",
+    SI_LUIE_LAM_BUFF_TOOLTIP_STICKY_TP =                 "Set above 0 to delay tooltips from fading for \"x\" seconds.",
     SI_LUIE_LAM_BUFF_LONGTERM_HEADER =                   "Long-Term Effects",
     SI_LUIE_LAM_BUFF_LONGTERM_SELF =                     "Show Long-term Effects for Player",
     SI_LUIE_LAM_BUFF_LONGTERM_SELF_TP =                  "Show Player icons for effects with duration greater then 2 minutes.",
@@ -1012,6 +1021,8 @@ local strings = {
     SI_LUIE_LAM_PNL_SHOWSOULGEMS =                       "Show Soul Gems",
     SI_LUIE_LAM_PNL_UNLOCKPANEL =                        "Unlock panel",
     SI_LUIE_LAM_PNL_UNLOCKPANEL_TP =                     "Allow mouse dragging for Info Panel.",
+    SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP =                  "Display Info Panel on World Map Screen",
+    SI_LUIE_LAM_PNL_DISPLAYONWORLDMAP_TP =               "Display the Info Panel when you are viewing the world map. This option can be toggled if your Info Panel position clips with any important elements on the World Map screen.",
 
     -- Module: Unitframes
     SI_LUIE_LAM_UF_ENABLE =                              "Unit Frames Module",
@@ -1100,6 +1111,7 @@ local strings = {
     SI_LUIE_LAM_UF_CFRAMES_COLOR_SORC =                  "Sorcerer Class Color",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_TEMP =                  "Templar Class Color",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_WARD =                  "Warden Class Color",
+    SI_LUIE_LAM_UF_CFRAMES_COLOR_NECRO =                 "Necromancer Class Color",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER =         "Reaction Color - Player",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_FRIENDLY =       "Reaction Color - Friendly",
     SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE =        "Reaction Color - Hostile",
@@ -1294,10 +1306,7 @@ local strings = {
     SI_LUIE_LAM_CT_SHARED_ALERT_DODGE =                  "Dodge",
     SI_LUIE_LAM_CT_SHARED_ALERT_AVOID =                  "Avoid",
     SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT =              "Interrupt",
-    SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT =                  "Unmitigatable",
-    SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE =                "Cleanse",
-    SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT =                "Off-Balance Exploit",
-    SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE =                "Execute",
+    SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT =                  "Unmitigable",
     SI_LUIE_LAM_CT_SHARED_ALERT_POWER =                  "Important Enemy Buffs (Power/Enrage)",
     SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY =                "Destroy (Priority Target)",
     SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON =                 "Enemy NPC Summons",
@@ -1330,7 +1339,9 @@ local strings = {
     SI_LUIE_LAM_CT_HEADER_CROWD_CONTROL =                "Crowd Control",
     SI_LUIE_LAM_CT_HEADER_NOTIFICATION =                 "Notification",
     SI_LUIE_LAM_CT_HEADER_LOW_RESOURCE =                 "Low Resource Warning",
-    SI_LUIE_LAM_CT_HEADER_ACTIVE_COMBAT_ALERT =          "Active Combat Alert",
+
+    SI_LUIE_LAM_CI_HEADER_ACTIVE_COMBAT_ALERT =          "Active Combat Alert Options",
+
     SI_LUIE_LAM_CT_HEADER_DAMAGE_COLOR =                 "Damage Color Options",
     SI_LUIE_LAM_CT_HEADER_HEALING_COLOR =                "Healing Color Options",
     SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE =             "Shared Font Size",
@@ -1377,7 +1388,9 @@ local strings = {
     SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP =                "Show when you silence an enemy.",
     SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP =                 "Show when you stun an enemy.",
     SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE =           "Combat State",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERTS_DESC =            "Set Active Combat Tips to Always Show in the Interface options to display Alerts correctly.",
+
+    SI_LUIE_LAM_CI_NOTIFICATION_ALERTS_DESC =            "Display alerts when an enemy ability is incoming. The options below allow you to significantly customize which alert to display, choose a sound to play, and show a border color on the icon based off the type of crowd control the ability applies (if any).",
+
     SI_LUIE_LAM_CT_NOTIFICATION_POINTS =                 "Points",
     SI_LUIE_LAM_CT_NOTIFICATION_RESOURCES =              "Resources",
     SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP =           "Display a notification when engaging in combat.",
@@ -1385,10 +1398,10 @@ local strings = {
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION =             "Display Advanced Notifications for Attacks",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP =          "Display advanced notifications for attacks that can be blocked, dodged, avoided, or interrupted.",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION = "\t\t\t\t\tUse the following formatting characters to modify the mitigation alerts:\n\t\t\t\t\t%n Source Name\n\t\t\t\t\t%t Ability Name\n\t\t\t\t\t%i Ability Icon",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD =      "Alert Method",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP =   "Choose whether to display mitigation alerts as a single line or in multiple lines. If using the single line option notifications will be colored based on the most effective form of mitigation.",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE =        "Don't Display Mitigation Suggestions",
-    SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP =     "When using single line alerts - enabling this option will hide the BLOCK/DODGE/AVOID/INTERRUPT etc alerts and only display the incoming ability.",
+
+    SI_LUIE_LAM_CI_NOTIFICATION_MITIGATION_SUFFIX =      "Display Mitigation Suffix",
+    SI_LUIE_LAM_CI_NOTIFICATION_MITIGATION_SUFFIX_TP =   "Enable this option to display the BLOCK/DODGE/AVOID/INTERRUPT suffix on incoming ability alerts.",
+
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT =      "Mitigation Alert Prefix",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP =   "Choose the prefix to display for mitigation alerts",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P =    "Important Buff Prefix",
@@ -1401,8 +1414,6 @@ local strings = {
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NO_NAME_TP =  "(Prefix when enemy name cannot be resolved).",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME =        "(With Name)",
     SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_NAME_TP =     "(Prefix when enemy name is correctly resolved).",
-    SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX =                 "Add Suffix for Direct Attacks",
-    SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP =              "Add the following suffix onto the message for attacks that are DIRECTLY targeting you. This will not display for static area of effect attacks or enemy healing abilites.",
     SI_LUIE_LAM_CT_NOTIFICATION_AURA =                   "Display Alerts for Nearby NPC Events",
     SI_LUIE_LAM_CT_NOTIFICATION_AURA_TP =                "Many abilities that don't directly target the player can't be detected to provide a warning (such as a nearby NPC casting a healing ability). This option allows the Alert component to also detect auras and provide more information. However this can result in alerts being displayed for NPCs that are out of range of the player. Note that these events will still always be displayed in Dungeons.",
     SI_LUIE_LAM_CT_NOTIFICATION_RANK3 =                  "Display Alerts for Normal NPC Abilities",
@@ -1413,23 +1424,10 @@ local strings = {
     SI_LUIE_LAM_CT_NOTIFICATION_RANK1_TP =               "Enable to display alerts specific to boss and trial NPCs.",
     SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON =                "ALWAYS Display Alerts in Dungeons",
     SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON_TP =             "Enable to always display alerts if you are in a dungeon. This option is ideal if you don't want to see normal NPC abilities outside of dungeons, but you want to be aware of significantly scaled up variants cast by NPC's inside a dungeon or trial.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_CLEANSE_TP =       "Show an alert when a damage over time effect can be cleansed.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_BLOCK_TP =         "Show an alert for incoming attacks that can be mitigated by blocking.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXPLOIT_TP =       "Show an alert when a target is off-balance.",
     SI_LUIE_LAM_CT_NOTIFICATION_ALERT_INTERRUPT_TP =     "Show an alert when you can interrupt an enemy ability.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_UNMIT_TP =         "Show an alert abilities that can't be mitigated.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DODGE_TP =         "Show an alert for incoming attacks that can be mitigated by dodging.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_AVOID_TP =         "Show an alert for incoming attacks that should be mitigating by avoidance.",
-    SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXECUTE_TP =       "Show an alert when a target is in execute range.",
     SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP =         "Show an alert when a nearby hostile NPC casts an important buff (significant power buffs like enrages).",
     SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP =       "Show an alert when a nearby enemy target appears that is a priority target to destroy (spawns that reduce damage done/taken, or apply invulnerabilty).",
     SI_LUIE_LAM_CT_NOTIFICATION_ALERT_SUMMON_TP =        "Show an alert when a nearby enemy target summons additional enemies.",
-    SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD =      "Execute Threshold",
-    SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD_TP =   "The threshold at which the execute alert will trigger.\nDefault: 20%",
-    SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY =      "Execute Frequency",
-    SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY_TP =   "The frequency between execute alerts triggered for the same target.\nDefault: 8",
-    SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS =            "Hide Ingame Tips",
-    SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS_TP =         "Hide the default Active Combat Tips window.",
     SI_LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP =     "Show Alliance Points earned.",
     SI_LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP =   "Show Experience Points earned.",
     SI_LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP =     "Show Champion Experience earned.",
@@ -1465,7 +1463,7 @@ local strings = {
     SI_LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP =           "Font size for mitigated damage.\nDefault: 32",
     SI_LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP =        "Font size for crowd control warnings.\nDefault: 32",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP =   "Font size of message displayed when entering or exiting combat.\nDefault: 24",
-    SI_LUIE_LAM_CT_FONT_NOTIFICATION_ALERT_TP =          "Font size of active combat alerts.\nDefault: 32",
+
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP =         "Font size of points earned\nDefault: 24",
     SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP =       "Font size of resource warnings.\nDefault: 32",
     SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE =            "Font Color (No Type)",
@@ -1528,14 +1526,11 @@ local strings = {
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP =    "Set a color for notifications when exiting combat.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BASE =             "Shared Label Color",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BASE_TP =          "Set a color for label prefix, suffix, and spacers.",
-    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CLEANSE_TP =       "Set a color for cleanse alerts.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP =         "Set a color for block alerts.",
-    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPLOIT_TP =       "Set a color for exploit alerts.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP =     "Set a color for interrupt alerts.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_UNMIT_TP =         "Set a color for alerts for abilities that can't be mitigated.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP =         "Set a color for dodge alerts.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP =         "Set a color for avoidance alerts.",
-    SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP =       "Set a color for execute alerts.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP =         "Set a color for important buff alerts.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP =       "Set a color for priority target alerts.",
     SI_LUIE_LAM_CT_COLOR_NOTIFICATION_SUMMON_TP =        "Set a color for summon alerts.",
@@ -1575,15 +1570,12 @@ local strings = {
     SI_LUIE_LAM_CT_FORMAT_POINTS_HEADER =                "Points",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_IN_TP =    "Text format for notifications when engaging in combat.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_OUT_TP =   "Text format for notifications when exiting combat.",
-    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CLEANSE_TP =      "Text format for cleanse alerts.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_TP =        "Text format for block alerts.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_S_TP =      "Text format for block alerts when an enemy will be staggered.",
-    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPLOIT_TP =      "Text format for exploit alerts.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_INTERRUPT_TP =    "Text format for interrupt alerts.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_UNMIT_TP =        "Text format for alerts for abilities that can't be mitigated.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DODGE_TP =        "Text format for dodge alerts.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_AVOID_TP =        "Text format for avoidance alerts.",
-    SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXECUTE_TP =      "Text format for execute alerts.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POWER_TP =        "Text format for important buff alerts.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DESTROY_TP =      "Text format for priority target alerts.",
     SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SUMMON_TP =       "Text format for summon alerts.",
@@ -1624,7 +1616,6 @@ local strings = {
     SI_LUIE_LAM_CT_DEATH_COLOR_TP =                      "Set a color for notifications when a group member dies.",
 }
 
-local pairs = pairs
 for stringId, stringValue in pairs(strings) do
     ZO_CreateStringId(stringId, stringValue)
     SafeAddVersion(stringId, 1)

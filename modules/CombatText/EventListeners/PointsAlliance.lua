@@ -1,3 +1,8 @@
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 LUIE.CombatTextPointsAllianceEventListener = LUIE.CombatTextEventListener:Subclass()
 local CTL = LUIE.CombatTextPointsAllianceEventListener
 

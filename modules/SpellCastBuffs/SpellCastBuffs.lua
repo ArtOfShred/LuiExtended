@@ -1,34 +1,28 @@
-------------------
+--[[
+    LuiExtended
+    License: The MIT License (MIT)
+--]]
+
 -- SpellCastBuffs namespace
 LUIE.SpellCastBuffs = {}
-
--- Performance Enhancement
 local SCB           = LUIE.SpellCastBuffs
-local CI            = LUIE.CombatInfo
-local UI            = LUIE.UI
-local E             = LUIE.Effects
-local T             = LUIE.Tooltips
-local A             = LUIE.GetAbility()
-local printToChat   = LUIE.PrintToChat
-local strfmt        = string.format
-local strmatch      = string.match
-local strformat     = zo_strformat
-local mathfloor     = math.floor
-local mathmin       = math.min
-local tableinsert   = table.insert
-local tablesort     = table.sort
-local unpack        = unpack
-local tonumber      = tonumber
-local pairs, ipairs = pairs, ipairs
 
-local eventManager  = EVENT_MANAGER
-local sceneManager  = SCENE_MANAGER
+local CI = LUIE.CombatInfo
+local UI = LUIE.UI
+local E = LUIE.Effects
+local T = LUIE.Tooltips
+local A = LUIE.GetAbility()
+
+local printToChat = LUIE.PrintToChat
+local strfmt = string.format
+local strformat = zo_strformat
+local callLater = zo_callLater
+
+local eventManager = EVENT_MANAGER
+local sceneManager = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
 
-local callLater     = zo_callLater
-local iconFormat    = zo_iconFormat
-
-local moduleName    = LUIE.name .. "_SpellCastBuffs"
+local moduleName = LUIE.name .. "_SpellCastBuffs"
 
 local hidePlayerEffects = { } -- Table of Effects to hide on Player - generated on load or updated from Menu
 local hideTargetEffects = { } -- Table of Effects to hide on Target - generated on load or updated from Menu
@@ -148,74 +142,45 @@ SCB.D = {
     PromBuffTable                    = {},
     PromDebuffTable                  = {},
     BlacklistTable                   = {},
+    TooltipEnable                    = true,
+    TooltipSticky                    = 0,
 }
 SCB.SV = nil
 
-local uiTlw                  = {} -- GUI
-local containerRouting       = {} -- Routing for Auras
-local g_currentDuelTarget    = nil -- Saved Duel Target for generating Battle Spirit icon when enabled
-local g_effectsList          = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {}, saved = {}, promb_ground = {}, promb_target = {}, promb_player = {}, promd_ground = {}, promd_target = {}, promd_player = {} } -- Saved Effects
-local g_playerActive = false -- Player Active State
-local g_playerDead   = false -- Player Dead State
-local g_playerResurrectStage = nil -- Player resurrection sequence state
-local g_buffsFont -- Buff font
-local g_prominentFont -- Prominent buffs label font
-local g_padding = 0 -- Padding between icons
-local g_horizAlign = CENTER -- Alignment for standard buff containers
-local g_longHorizAlign = CENTER -- Alignment for Long Term Buffs (Horizontal)
-local g_longVertAlign = MIDDLE -- Alignment for Long Term Buffs (Vertical)
-local g_prominentVertBuffAlign = BOTTOM -- Alignment for Prominent Buffs
-local g_prominentVertDebuffAlign = BOTTOM -- Alignment for Prominent Debuffs
-local g_horizSortInvert = false -- Invert sort order on buff container
-local g_protectAbilityRemoval = {} -- AbilityId's set to a timestamp here to prevent removal of ground effects when refreshing ground auras from causing the aura to fade.
-local g_currentDisguise = GetItemId(0, 10) or 0 -- Currently equipped disguise for Disguise Buff Tracker
-local g_grimFocusCount = 0 -- Tracker for Grim Focus Stacks
-local g_werewolfName = "" -- Name for current Werewolf Transformation morph
-local g_werewolfIcon = "" -- Icon for current Werewolf Transformation morph
-local g_werewolfId = "" -- AbilityId for Werewolf Transformation morph
-local g_werewolfDevour = false -- Flag set when Devouring corpses as WW - toggled on/off by EVENT_EFFECT_CHANGED
-local g_werewolfCounter = 0 -- Counter for Werewolf transformation events
-local g_werewolfQuest = 0 -- Counter for Werewolf transformation events (Quest)
-local g_lastWerewolfPower = 0 -- Tracker for last amount of werewolf power - used to freeze counter when using Devour or entering a Werewolf Shrine
-local g_ignoreAbilityId = {} -- Ignored abilityId's on EVENT_COMBAT_EVENT, some events fire twice and we need to ignore every other one.
+LUIE.EffectsList                     = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {}, saved = {}, promb_ground = {}, promb_target = {}, promb_player = {}, promd_ground = {}, promd_target = {}, promd_player = {} } -- Saved Effects
 
---[[
--- Simple linear tweening - no easing, no acceleration
-local function LinearTween(t, b, c, d)
-    return c*t/d + b
-end
+local uiTlw                          = {} -- GUI
+local containerRouting               = {} -- Routing for Auras
+local g_playerActive                 = false -- Player Active State
+local g_playerDead                   = false -- Player Dead State
+local g_playerResurrectStage         = nil -- Player resurrection sequence state
+local g_buffsFont                    -- Buff font
+local g_prominentFont                -- Prominent buffs label font
+local g_padding                      = 0 -- Padding between icons
+local g_horizAlign                   = CENTER -- Alignment for standard buff containers
+local g_longHorizAlign               = CENTER -- Alignment for Long Term Buffs (Horizontal)
+local g_longVertAlign                = MIDDLE -- Alignment for Long Term Buffs (Vertical)
+local g_prominentVertBuffAlign       = BOTTOM -- Alignment for Prominent Buffs
+local g_prominentVertDebuffAlign     = BOTTOM -- Alignment for Prominent Debuffs
+local g_horizSortInvert              = false -- Invert sort order on buff container
+local g_protectAbilityRemoval        = {} -- AbilityId's set to a timestamp here to prevent removal of ground effects when refreshing ground auras from causing the aura to fade.
+local g_grimFocusCount               = 0 -- Tracker for Grim Focus Stacks
+local g_ignoreAbilityId              = {} -- Ignored abilityId's on EVENT_COMBAT_EVENT, some events fire twice and we need to ignore every other one.
 
--- Quadratic easing in - accelerating from zero velocity
-local function EaseInQuad(t, b, c, d)
-    t = t / d
-    return c*t*t + b
-end
-]]
-
--- Quadratic easing out - decelerating to zero velocity
+-- Quadratic easing out - decelerating to zero velocity (For buff fade)
 local function EaseOutQuad(t, b, c, d)
     t = t / d
     return -c * t*(t-2) + b
 end
 
---[[
--- Quadratic easing in/out - acceleration until halfway, then deceleration
-local function EaseInOutQuad(t, b, c, d)
-    t = t / (d/2);
-    if (t < 1) then return c/2*t*t + b end
-    t = t - 1
-    return -c/2 * (t*(t-2) - 1) + b
-end
-]]--
-
 -- Initialization
-function SCB.Initialize( enabled )
+function SCB.Initialize(enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
     if isCharacterSpecific then
-        SCB.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "SpellCastBuffs", SCB.D )
+        SCB.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, "SpellCastBuffs", SCB.D)
     else
-        SCB.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "SpellCastBuffs", SCB.D )
+        SCB.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, "SpellCastBuffs", SCB.D)
     end
 
     -- Correct read values
@@ -233,8 +198,10 @@ function SCB.Initialize( enabled )
     SCB.ApplyFont()
 
     -- Create controls
+    -- Create temporary table to store references to scenes locally
+    local fragments = { }
 
-    -- We will not create TopLevelWindows when frames are locked to CustomFrames
+    -- We will not create TopLevelWindows when buff frames are locked to Custom Unit Frames
     if SCB.SV.lockPositionToUnitFrames and LUIE.UnitFrames.CustomFrames.player and LUIE.UnitFrames.CustomFrames.player.buffs and LUIE.UnitFrames.CustomFrames.player.debuffs then
         uiTlw.player1 = LUIE.UnitFrames.CustomFrames.player.buffs
         uiTlw.player2 = LUIE.UnitFrames.CustomFrames.player.debuffs
@@ -256,17 +223,11 @@ function SCB.Initialize( enabled )
 
         local fragment1 = ZO_HUDFadeSceneFragment:New(uiTlw.playerb, 0, 0)
         local fragment2 = ZO_HUDFadeSceneFragment:New(uiTlw.playerd, 0, 0)
-
-        sceneManager:GetScene("hud"):AddFragment( fragment1 )
-        sceneManager:GetScene("hud"):AddFragment( fragment2 )
-        sceneManager:GetScene("hudui"):AddFragment( fragment1 )
-        sceneManager:GetScene("hudui"):AddFragment( fragment2 )
-        sceneManager:GetScene("siegeBar"):AddFragment( fragment1 )
-        sceneManager:GetScene("siegeBar"):AddFragment( fragment2 )
-        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment1 )
-        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment2 )
+        table.insert(fragments, fragment1)
+        table.insert(fragments, fragment2)
     end
 
+    -- Create TopLevelWindows for buff frames when NOT locked to Custom Unit Frames
     if SCB.SV.lockPositionToUnitFrames and LUIE.UnitFrames.CustomFrames.reticleover and LUIE.UnitFrames.CustomFrames.reticleover.buffs and LUIE.UnitFrames.CustomFrames.reticleover.debuffs then
         uiTlw.target1 = LUIE.UnitFrames.CustomFrames.reticleover.buffs
         uiTlw.target2 = LUIE.UnitFrames.CustomFrames.reticleover.debuffs
@@ -290,18 +251,11 @@ function SCB.Initialize( enabled )
 
         local fragment1 = ZO_HUDFadeSceneFragment:New(uiTlw.targetb, 0, 0)
         local fragment2 = ZO_HUDFadeSceneFragment:New(uiTlw.targetd, 0, 0)
-
-        sceneManager:GetScene("hud"):AddFragment( fragment1 )
-        sceneManager:GetScene("hud"):AddFragment( fragment2 )
-        sceneManager:GetScene("hudui"):AddFragment( fragment1 )
-        sceneManager:GetScene("hudui"):AddFragment( fragment2 )
-        sceneManager:GetScene("siegeBar"):AddFragment( fragment1 )
-        sceneManager:GetScene("siegeBar"):AddFragment( fragment2 )
-        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment1 )
-        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment2 )
+        table.insert(fragments, fragment1)
+        table.insert(fragments, fragment2)
     end
 
-    -- Setup Prominent Buffs
+    -- Create TopLevelWindows for Prominent Buffs
     uiTlw.prominentbuffs = UI.TopLevel( nil, nil )
     uiTlw.prominentbuffs:SetHandler( "OnMoveStop", function(self)
             SCB.SV.prominentbOffsetX = self:GetLeft()
@@ -325,17 +279,10 @@ function SCB.Initialize( enabled )
 
     local fragmentP1 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentbuffs, 0, 0)
     local fragmentP2 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentdebuffs, 0, 0)
+    table.insert(fragments, fragmentP1)
+    table.insert(fragments, fragmentP2)
 
-    sceneManager:GetScene("hud"):AddFragment( fragmentP1 )
-    sceneManager:GetScene("hud"):AddFragment( fragmentP2 )
-    sceneManager:GetScene("hudui"):AddFragment( fragmentP1 )
-    sceneManager:GetScene("hudui"):AddFragment( fragmentP2 )
-    sceneManager:GetScene("siegeBar"):AddFragment( fragmentP1 )
-    sceneManager:GetScene("siegeBar"):AddFragment( fragmentP2 )
-    sceneManager:GetScene("siegeBarUI"):AddFragment( fragmentP1 )
-    sceneManager:GetScene("siegeBarUI"):AddFragment( fragmentP2 )
-
-    -- Separate container for players long buffs
+    -- Separate container for players long term buffs
     if true then
         uiTlw.player_long = UI.TopLevel( nil, nil )
         uiTlw.player_long:SetHandler( "OnMoveStop", function(self)
@@ -357,19 +304,25 @@ function SCB.Initialize( enabled )
         containerRouting.player_long = "player_long"
 
         local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.player_long, 0, 0)
-
-        sceneManager:GetScene("hud"):AddFragment( fragment )
-        sceneManager:GetScene("hudui"):AddFragment( fragment )
-        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
-        sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
+        table.insert(fragments, fragment)
     else
         containerRouting.player_long = containerRouting.player1
     end
 
+    -- Loop over table of fragments to add them to relevant UI Scenes
+    for _,v in pairs(fragments) do
+        sceneManager:GetScene("hud"):AddFragment( v )
+        sceneManager:GetScene("hudui"):AddFragment( v )
+        sceneManager:GetScene("siegeBar"):AddFragment( v )
+        sceneManager:GetScene("siegeBarUI"):AddFragment( v )
+    end
+
+    -- Set Buff Container Positions
     SCB.SetTlwPosition()
 
     -- Loop over created controls to...
     for _, v in pairs(containerRouting) do
+        -- Set Draw Priority
         uiTlw[v]:SetDrawLayer(DL_BACKDROP)
         uiTlw[v]:SetDrawTier(DT_LOW)
         uiTlw[v]:SetDrawLevel(1)
@@ -379,7 +332,7 @@ function SCB.Initialize( enabled )
             uiTlw[v].preview = UI.Texture( uiTlw[v], "fill", nil, "/esoui/art/miscellaneous/inset_bg.dds", DL_BACKGROUND, true )
             uiTlw[v].previewLabel = UI.Label( uiTlw[v].preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", windowTitles[v] .. (SCB.SV.lockPositionToUnitFrames and (v ~= "player_long" and v ~= "prominentbuffs" and v ~= "prominentdebuffs") and " (locked)" or ""), false )
 
-            -- create control that will hold the icons
+            -- Create control that will hold the icons
             uiTlw[v].prevIconsCount = 0
             -- We need this container only for icons that are aligned in one row/column automatically.
             -- Thus we do not create containers for player and target buffs/debuffs on custom frames
@@ -402,18 +355,28 @@ function SCB.Initialize( enabled )
     eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED,    SCB.OnReticleTargetChanged )
 
     -- Buff Events
-    eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
+    eventManager:RegisterForEvent(moduleName .. "Player", EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
+    eventManager:RegisterForEvent(moduleName .. "Target", EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
+    eventManager:AddFilterForEvent(moduleName .. "Player", EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+    eventManager:AddFilterForEvent(moduleName .. "Target", EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
 
+    -- GROUND & MINE EFFECTS - add a filtered event for each AbilityId
+    for k, v in pairs (E.EffectGroundDisplay) do
+        eventManager:RegisterForEvent(moduleName .. "Ground" .. k, EVENT_EFFECT_CHANGED, SCB.OnEffectChangedGround )
+        eventManager:AddFilterForEvent(moduleName .. "Ground" .. k, EVENT_EFFECT_CHANGED, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_ABILITY_ID, k )
+    end
+    for k, v in pairs (E.LinkedGroundMine) do
+        eventManager:RegisterForEvent(moduleName .. "Ground" .. k, EVENT_EFFECT_CHANGED, SCB.OnEffectChangedGround )
+        eventManager:AddFilterForEvent(moduleName .. "Ground" .. k, EVENT_EFFECT_CHANGED, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_ABILITY_ID, k )
+    end
+
+    -- Combat Events
     eventManager:RegisterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, SCB.OnCombatEventIn )
     eventManager:RegisterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, SCB.OnCombatEventOut )
     eventManager:RegisterForEvent("LUIE_Event3", EVENT_COMBAT_EVENT, SCB.OnCombatEventOut )
     eventManager:AddFilterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Target -> Player
     eventManager:AddFilterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Player -> Target
     eventManager:AddFilterForEvent("LUIE_Event3", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER_PET, REGISTER_FILTER_IS_ERROR, false) -- Player Pet -> Target
-    --eventManager:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
-    --eventManager:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, false )
-
-    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  SCB.OnDeath )
 
     -- Stealth Events
     eventManager:RegisterForEvent(moduleName .. "player",          EVENT_STEALTH_STATE_CHANGED, SCB.StealthStateChanged )
@@ -431,42 +394,52 @@ function SCB.Initialize( enabled )
     eventManager:RegisterForEvent(moduleName, EVENT_ARTIFICIAL_EFFECT_ADDED, SCB.ArtificialEffectUpdate)
     eventManager:RegisterForEvent(moduleName, EVENT_ARTIFICIAL_EFFECT_REMOVED, SCB.ArtificialEffectUpdate)
 
-    -- Activate, Deactivate player, death, alive
+    -- Activate/Deactivate Player, Player Dead/Alive, Vibration, and Unit Death
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED,   SCB.OnPlayerActivated )
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_DEACTIVATED, SCB.OnPlayerDeactivated )
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ALIVE, SCB.OnPlayerAlive )
     eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_DEAD,  SCB.OnPlayerDead )
     eventManager:RegisterForEvent(moduleName, EVENT_VIBRATION,    SCB.OnVibration )
+    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  SCB.OnDeath )
 
     -- Mount Events
     eventManager:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED, SCB.MountStatus)
-    eventManager:RegisterForEvent(moduleName, EVENT_ABILITY_LIST_CHANGED, SCB.AbilityListChange ) -- TODO: Temporary fix
     eventManager:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_USE_RESULT, SCB.CollectibleUsed)
 
     -- Inventory Events
     eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, SCB.DisguiseItem)
     eventManager:AddFilterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN )
 
-    -- Duel (For resolving Target battle spirit status)
+    -- Duel (For resolving Target Battle Spirit Status)
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, SCB.DuelStart)
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, SCB.DuelEnd)
-
-    -- Combat Events
-    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE, SCB.PlayerCombatState)
 
     -- Werewolf
     SCB.RegisterWerewolfEvents()
 
     -- Debug
     SCB.RegisterDebugEvents()
+
+    -- Enable Bar function for Bound Armor if the player is a Sorcerer
+    if GetUnitClassId('player') == 2 then
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, SCB.DrawBoundAegisBuffs)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED, SCB.DrawBoundAegisBuffs)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED, SCB.DrawBoundAegisBuffs)
+    end
 end
 
 function SCB.RegisterWerewolfEvents()
     eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
     eventManager:UnregisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED)
     eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
+    eventManager:UnregisterForEvent(moduleName .. "Werewolf1", EVENT_EFFECT_CHANGED)
+    eventManager:UnregisterForEvent(moduleName .. "Werewolf2", EVENT_EFFECT_CHANGED)
     if SCB.SV.ShowWerewolf then
         eventManager:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED, SCB.WerewolfState)
+        eventManager:RegisterForEvent(moduleName .. "Werewolf1", EVENT_EFFECT_CHANGED, SCB.DevourEffectListener )
+        eventManager:RegisterForEvent(moduleName .. "Werewolf2", EVENT_EFFECT_CHANGED, SCB.DevourEffectListener )
+        eventManager:AddFilterForEvent(moduleName .. "Werewolf1", EVENT_EFFECT_CHANGED, REGISTER_FILTER_ABILITY_ID , 33208, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER ) -- Target -> Player
+        eventManager:AddFilterForEvent(moduleName .. "Werewolf2", EVENT_EFFECT_CHANGED, REGISTER_FILTER_ABILITY_ID , 39477, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_UNIT_TAG, 'player' ) -- Target -> Player
         if IsWerewolf() then
             SCB.WerewolfState(nil, true, true)
         end
@@ -484,514 +457,59 @@ function SCB.RegisterDebugEvents()
     end
 end
 
--- For debug function - convert result reason codes to string value
-local resultTable = {
-    [2080] = "ON CD",
-    [2120] = "ABSORB",
-    [2040] = "BAD TARGET",
-    [3180] = "STANDARD ALREADY EXISTS",
-    [3160] = "STANDARD LIMIT",
-    [3200] = "STANDARD NO PERMISSION",
-    [3170] = "STANDARD MISMATCH",
-    [3190] = "STANDARD TOO CLOSE",
-    [3210] = "STANDARDS DISABLED",
-    [2210] = "BEGIN CHAN",
-    [2200] = "BEGIN",
-    [2360] = "BLADETURN",
-    [2151] = "BLOCK DMG",
-    [2150] = "BLOCK",
-    [2030] = "BUSY",
-    [2290] = "CAN'T USE",
-    [2330] = "OUT OF LOS",
-    [3410] = "CAN'T SWAP",
-    [2060] = "CASTER DEAD",
-    [2] = "CRIT",
-    [32] = "CRIT HEAL",
-    [2460] = "SHIELD",
-    [1] = "DMG",
-    [2190] = "DEFEND",
-    [2262] = "DIED XP",
-    [2260] = "DIED",
-    [2430] = "DISARMED",
-    [2340] = "DISORIENT",
-    [2140] = "DODGE",
-    [1073741826] = "DOT CRIT",
-    [1073741825] = "DOT",
-    [2250] = "FADED",
-    [2245] = "GAINED DUR",
-    [2240] = "GAINED",
-    [2310] = "FAILED REQ",
-    [3100] = "FAILED SEIGE REQ",
-    [2110] = "FAILED",
-    [2420] = "FALL DMG",
-    [2500] = "FALLING",
-    [2320] = "FEAR",
-    [3230] = "CAMP EXISTS",
-    [3240] = "CAMP NO PERMISSION",
-    [3220] = "CAMP TABARD MISMATCH",
-    [3080] = "GRAVEYARD DISALLOWED IN INSTANCE",
-    [3030] = "GRAVEYARD TOO CLOSE",
-    [16] = "HEAL",
-    [1073741856] = "HOT CRIT",
-    [1073741840] = "HOT",
-    [2000] = "IMMUNE",
-    [2510] = "IN AIR",
-    [2300] = "IN COMBAT",
-    [2610] = "IN ENEMY KEEP",
-    [2613] = "IN ENEMY OUTPOST",
-    [2612] = "IN ENEMY RESOURCE",
-    [2611] = "IN ENEMY TOWN",
-    [3440] = "IN HIDEYHOLE",
-    [2090] = "OUT OF RESOURCE",
-    [2410] = "INTERCEPT",
-    [2230] = "INTERRUPT",
-    [2810] = "INVALID FIXTURE",
-    [3420] = "INVALID JUSTICE TARGET",
-    [2800] = "INVALID TERRAIN",
-    [-1] = "INVALID",
-    [3130] = "KILLED BY SUBZONE",
-    [2265] = "KB",
-    [2475] = "KNOCKBCK",
-    [2400] = "LEVITATE",
-    [2392] = "LINKED CAST",
-    [3140] = "MERC LIMIT",
-    [2180] = "MISS",
-    [3040] = "NO EMPTY SOUL GEM",
-    [3060] = "NO FILLED SOUL GEM",
-    [3150] = "MOBILE GRAVEYARD LIMIT",
-    [3070] = "MOUNTED",
-    [2630] = "MUST BE IN OWN KEEP",
-    [2700] = "NO LOACATION",
-    [2910] = "NO RAM TARGET WITHIN RANGE",
-    [3400] = "NO WEP SWAP",
-    [3050] = "NOT ENOUGH SPACE SOUL GEM",
-    [3430] = "NOT ENOUGH SPACE",
-    [3090] = "NOT ENOUG SPACE SIEGE",
-    [2640] = "TOO CLOSE",
-    [2440] = "OFF BALANCE",
-    [2390] = "PACIFY",
-    [2130] = "PARRY",
-    [2170] = "PART RESIST",
-    [64] = "-POWER",
-    [128] = "+POWER",
-    [4] = "PRECISE DAMAGE",
-    [2350] = "QUEUED",
-    [3120] = "ALL TARGETS DESTROYED",
-    [3110] = "ALL TARGETS OCCUPIED",
-    [2520] = "RECALL",
-    [2111] = "REFLECT",
-    [3020] = "REINCARNATE",
-    [2160] = "RESIST",
-    [2490] = "RESURRECT",
-    [2480] = "ROOT",
-    [2620] = "SIEGE LIMIT",
-    [2605] = "SIEGE NOT ALLOWED IN ZONE",
-    [2600] = "SIEGE TOO CLOSE",
-    [2010] = "SILENCE",
-    [2025] = "SNARE",
-    [3000] = "SPRINT",
-    [2470] = "STAGGER",
-    [2020] = "STUN",
-    [3010] = "SWIMMING",
-    [2050] = "TARGET DEAD",
-    [2070] = "TARGET NOT IN VIEW",
-    [2391] = "TARGET NOT PVP FLAGGED",
-    [2100] = "TARGET OUT OF RANGE",
-    [2370] = "TARGET TOO CLOSE",
-    [2900] = "UNEVEN TERRAIN",
-    [2450] = "WEAPON SWAP",
-    [8] = "WRECKING DAMAGE",
-    [2380 ] = "WRONG WEAPON",
-}
-
--- Debug Display for Combat Events
-function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
-    -- Don't display if this aura is already added to the filter
-    if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then return end
-
-    local iconFormatted = iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
-
-    local source = strformat("<<t:1>>", sourceName)
-    local target = strformat("<<t:1>>", targetName)
-    local ability = strformat("<<t:1>>", nameFormatted)
-    local duration = GetAbilityDuration(abilityId)
-    local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
-    local showacasttime = ""
-    local showachantime = ""
-    if channeled then
-        showachantime = (" [Chan] " .. channelTime)
-    end
-    if castTime ~= 0 then
-        showacasttime = (" [Cast] " .. castTime)
-    end
-    if source == LUIE.PlayerNameFormatted then
-        source = "Player"
-    end
-    if target == LUIE.PlayerNameFormatted then
-        target = "Player"
-    end
-    if source == "" and target == "" then
-        source = "NIL"
-        target = "NIL"
-    end
-
-    local formattedResult = resultTable[result]
-
-    d(iconFormatted .. " ["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
-end
-
--- Debug Display for Effect Events
-function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then
-        return
-    end
-
-    local iconFormatted = iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
-
-    unitName = strformat("<<t:1>>", unitName)
-    if unitName == LUIE.PlayerNameFormatted then
-        unitName = "Player"
-    end
-    unitName = unitName .. " (" .. unitTag .. ")"
-
-    local cmxHIDE
-    if CMX and CMX.CustomAbilityHide and CMX.CustomAbilityHide[abilityId] then
-        cmxHIDE = " + HIDDEN CMX"
-    else
-        cmxHIDE = ""
-    end
-
-    if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].hide then
-        d(iconFormatted .. "|c00E200 [" ..abilityId .. "] " .. nameFormatted.. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] ".. unitName .. "|r")
-        return
-    end
-
-    local duration = (endTime - beginTime) * 1000
-
-    local refreshOnly = ""
-    if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].refreshOnly then
-        refreshOnly = " |c00E200(Hidden)|r "
-    end
-
-    if changeType == 1 then
-        d("|c00E200Gained:|r " .. refreshOnly .. iconFormatted .. " [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
-    elseif changeType == 2 then
-        d("|c00E200Faded:|r " .. iconFormatted .. " [" .. abilityId .. "] " .. nameFormatted .. ": [Tag] " .. unitName)
-    else
-        d("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " ..nameFormatted .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
-    end
-end
-
+-- List Handling (Add) for Prominent Auras & Blacklist
 function SCB.AddToCustomList(list, input)
     local id = tonumber(input)
-    local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.BlacklistTable and "Aura Blacklist." or ""
+    local listRef = list == SCB.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SCB.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SCB.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
-        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
-        if name ~= nil then
-            local icon = iconFormat(GetAbilityIcon(id), 16, 16)
+        local name = strformat("<<C:1>>", GetAbilityName(id))
+        if name ~= nil and name ~= "" then
+            local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat("<<1>> [<<2>>] <<3>> added to <<4>>", icon, id, name, listRef), true) -- TODO: localization
+            printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_ID), icon, id, name, listRef), true)
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat("Could not add [<<1>>] to <<2>>. That abiilityId does not exist.", input, listRef), true) -- TODO: localization
+            printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_FAILED), input, listRef), true)
         end
     else
         if input ~= "" then
             list[input] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat("<<1>> added to <<2>>", input, listRef), true) -- TODO: localization
+            printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
         end
     end
     SCB.Reset()
 end
 
+-- List Handling (Remove) for Prominent Auras & Blacklist
 function SCB.RemoveFromCustomList(list, input)
     local id = tonumber(input)
-    local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.BlacklistTable and "Aura Blacklist." or ""
+    local listRef = list == SCB.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SCB.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SCB.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
-        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
-        if name ~= nil then
-            local icon = iconFormat(GetAbilityIcon(id), 16, 16)
+        local name = strformat("<<C:1>>", GetAbilityName(id))
+        if name ~= nil and name ~= "" then
+            local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat("<<1>> [<<2>>] <<3>> removed from <<4>>", icon, id, name, listRef), true) -- TODO: localization
+            printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat("Could not remove [<<1>>] to <<2>>. That abilityId does not exist.", input, listRef), true) -- TODO: localization
+            printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_FAILED), input, listRef), true)
         end
     else
         if input ~= "" then
             list[input] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat("<<1>> removed from <<2>>", input, listRef), true) -- TODO: localization
+            printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
         end
     end
     SCB.Reset()
 end
 
-local function SetWerewolfIcon()
-    local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
-    g_werewolfName, g_werewolfIcon = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
-    g_werewolfId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
-end
-
-local function SetWerewolfIconTimer(currentTime)
-    SetWerewolfIcon()
-    local currentPower = GetUnitPower("player", POWERTYPE_WEREWOLF)
-    local duration = ( currentPower / 27 )
-    -- Round up by 1 from any decimal number
-    local durationFormatted = mathfloor(duration + 0.999) * 1000
-    local currentTime = GetGameTimeMilliseconds()
-    local endTime = currentTime + durationFormatted
-    g_effectsList.player1["Werewolf Indicator"] = {
-        target="player", type=1,
-        id = g_werewolfId, name=g_werewolfName, icon=g_werewolfIcon,
-        dur=38000, starts=currentTime, ends=endTime, -- ends=nil : last buff in sorting
-        forced = "short",
-        restart=true, iconNum=0, overrideDur = 38000
-    }
-end
-
-local function SetWerewolfIconFrozen()
-    SetWerewolfIcon()
-    g_effectsList.player1["Werewolf Indicator"] = {
-        type=1,
-        id = g_werewolfId, name=g_werewolfName, icon=g_werewolfIcon,
-        dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-        forced = "short",
-        restart=true, iconNum=0
-    }
-end
-
-function SCB.WerewolfState(eventCode, werewolf, onActivation)
-    if werewolf then
-        for i = 1, 4 do
-            name, _, discovered, skillLineId = GetSkillLineInfo(SKILL_TYPE_WORLD, i)
-            if skillLineId == 50 and discovered then
-                g_werewolfCounter = g_werewolfCounter + 1
-                if g_werewolfCounter == 3 or onActivation then
-                    local currentTime = GetGameTimeMilliseconds()
-                    SetWerewolfIconTimer(currentTime)
-                    eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE, SCB.OnPowerUpdate)
-                    eventManager:AddFilterForEvent(moduleName, EVENT_POWER_UPDATE, REGISTER_FILTER_POWER_TYPE, POWERTYPE_WEREWOLF, REGISTER_FILTER_UNIT_TAG, "player")
-                    eventManager:RegisterForUpdate(moduleName .. "WerewolfTicker", 2000, SCB.PowerTrailer) -- Register power throttle trailer (in case player transforms into Werewolf in a shrine and no power change event occurs)
-                    g_werewolfCounter = 0
-                end
-                return
-            end
-        end
-
-        g_werewolfQuest = g_werewolfQuest + 1
-        -- If we didn't return from the above statement this must be quest based werewolf transformation - so just display an unlimited duration passive as the counter.
-        if g_werewolfQuest == 2 or onActivation then
-            SetWerewolfIconFrozen()
-            g_werewolfCounter = 0
-        end
-    else
-        g_effectsList.player1["Werewolf Indicator"] = nil
-        eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
-        eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
-        g_werewolfCounter = 0
-        -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
-        callLater(function() g_werewolfQuest = 0 end, 5000)
-    end
-end
-
-function SCB.PowerTrailer()
-    SetWerewolfIconFrozen()
-    eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
-end
-
-function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
-    if g_lastWerewolfPower > powerValue then
-        eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
-    end
-
-    -- Ignore gain from Blood Rage when hit while devouring
-    if g_effectsList.player1["Werewolf Indicator"] and g_effectsList.player1["Werewolf Indicator"].ends == nil then
-        --if (powerValue == g_lastWerewolfPower + 99) or g_werewolfDevour then
-        if g_werewolfDevour then
-            return
-        end
-    end
-    g_lastWerewolfPower = powerValue
-
-    local currentTime = GetGameTimeMilliseconds()
-    if powerValue > 0 then
-        SetWerewolfIconTimer(currentTime)
-    else
-        g_effectsList.player1["Werewolf Indicator"] = nil
-    end
-    eventManager:RegisterForUpdate(moduleName .. "WerewolfTicker", 1100, SCB.PowerTrailer)
-
-    -- Remove indicator if power reaches 0 - Needed for when the player is in WW form but dead/reincarnating
-    if powerValue == 0 then
-        g_effectsList.player1["Werewolf Indicator"] = nil
-        eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
-        eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
-        g_werewolfCounter = 0
-        -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
-        callLater(function() g_werewolfQuest = 0 end, 5000)
-    end
-end
-
-function SCB.DuelStart()
-    local duelState, characterName = GetDuelInfo()
-    if duelState == 3 and not SCB.SV.IgnoreBattleSpiritTarget then
-        g_currentDuelTarget = strformat(SI_UNIT_NAME, characterName)
-        SCB.ReloadEffects("reticleover")
-    end
-end
-
-function SCB.DuelEnd()
-    g_currentDuelTarget = nil
-    SCB.ReloadEffects("reticleover")
-end
-
-function SCB.InitializeDisguise()
-    if SCB.SV.HidePlayerBuffs then
-        return
-    end
-    g_effectsList.player1["DisguiseType"] = nil
-    if g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
-        -- Don't show Monk's Disguise since it already has an aura, and don't show Guild Tabard
-        if g_currentDisguise == 79332 or g_currentDisguise == 55262 then
-            return
-        end
-
-        local name = GetItemName(0, 10)
-        local icon = E.DisguiseIcons[g_currentDisguise].icon
-        local id = E.DisguiseIcons[g_currentDisguise].id or "Fake"
-        g_effectsList.player1["DisguiseType"] = {
-            target="player", type=1,
-            id=id, name=name, icon=icon,
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-            forced = "long",
-            restart=true, iconNum=0
-        }
-    end
-end
-
-function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    if slotId == 10 then
-        if SCB.SV.HidePlayerBuffs then
-            return
-        end
-        g_effectsList.player1["DisguiseType"] = nil
-        g_currentDisguise = GetItemId(0, 10) or 0
-        SCB.CollectibleBuff()
-        if g_currentDisguise == 0 then
-            return
-        elseif g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
-            -- Don't show Monk's Disguise since it already has an aura, and don't show Guild Tabard
-            if g_currentDisguise == 79332 or g_currentDisguise == 55262 then
-                return
-            end
-
-            local name = GetItemName(0, 10)
-            local icon = E.DisguiseIcons[g_currentDisguise].icon
-            local id = E.DisguiseIcons[g_currentDisguise].id or "Fake"
-            g_effectsList.player1["DisguiseType"] = {
-                target="player", type=1,
-                id=id, name=name, icon=icon,
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "long",
-                restart=true, iconNum=0
-            }
-        end
-    end
-end
-
--- TODO: Temporarily listener for EVENT_ABILITY_LIST_CHANGED to fix issue where no EVENT_MOUNTED_STATE_CHANGED is triggering when Hard Dismounting or Crouching.
-function SCB.AbilityListChange(eventCode)
-    local isMounted = IsMounted()
-    if not isMounted then
-        SCB.MountStatus(false)
-    end
-end
-
-function SCB.MountStatus(eventCode, mounted)
-    -- Remove icon first
-    g_effectsList.player1["Mount"] = nil
-    if mounted and not (SCB.SV.IgnoreMount or SCB.SV.HidePlayerBuffs) then
-
-        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_MOUNT)
-        local nickname = GetCollectibleNickname(Collectible)
-        local name, description, icon = GetCollectibleInfo(Collectible)
-
-        if (nickname ~= "" and nickname ~= nil) then
-            name = strformat('<<1>> "<<2>>"', name, nickname)
-        end
-
-        if SCB.SV.MountGenericIcon then
-            icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds'
-        end
-
-        g_effectsList.player1["Mount"] = {
-            target="player", type=1,
-            id =37059, name=name, icon=icon, backdrop=true, tooltip = description,
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-            forced = "long",
-            restart=true, iconNum=0
-        }
-    end
-end
-
-function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
-    local latency = GetLatency()
-    latency = latency + 100
-    callLater(SCB.CollectibleBuff, latency)
-end
-
-function SCB.CollectibleBuff()
-    if SCB.SV.HidePlayerBuffs then
-        return
-    end
-
-    -- Pets
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SCB.SV.IgnorePet and not IsPlayerInAvAWorld() then
-        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
-        local nickname = GetCollectibleNickname(Collectible)
-        local name, description, icon = GetCollectibleInfo(Collectible)
-
-        if (nickname ~= "" and nickname ~= nil) then
-            name = strformat('<<1>> "<<2>>"', name, nickname)
-        end
-
-        g_effectsList.player1["PetType"] = {
-            target="player", type=1,
-            id = "Fake", name=name, icon=icon, backdrop=true, tooltip = description,
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-            forced = "long",
-            restart=true, iconNum=0
-        }
-    else
-        g_effectsList.player1["PetType"] = nil
-    end
-
-    -- Assistants
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 and not SCB.SV.IgnoreAssistant and not IsPlayerInAvAWorld() then
-        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
-        local name, description = GetCollectibleInfo(Collectible)
-        local iconAssistant = E.AssistantIcons[name] ~= nil and E.AssistantIcons[name] or ''
-        g_effectsList.player1["AssistantType"] = {
-            target="player", type=1,
-            id = "Fake", name=name, icon=iconAssistant, tooltip = description,
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-            forced = "long",
-            restart=true, iconNum=0
-        }
-    else
-        g_effectsList.player1["AssistantType"] = nil
-    end
-end
-
 -- Sets horizontal alignment of icon. Called from Settings Menu.
 -- This is done simply by setting of iconHolder anchor.
-function SCB.SetIconsAlignment( value )
+function SCB.SetIconsAlignment(value)
     -- Check correctness of argument value
     if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
         value = SCB.D.Alignment
@@ -1008,7 +526,7 @@ function SCB.SetIconsAlignment( value )
         if uiTlw[v].iconHolder then
             uiTlw[v].iconHolder:ClearAnchors()
             if uiTlw[v].alignVertical then
-                -- Might need to consolidate these two functions somehow, possibly consolidate all options so that Left = Top, Middle = Center, Right = Bottom
+                -- TODO: Might need to consolidate these two functions somehow, possibly consolidate all options so that Left = Top, Middle = Center, Right = Bottom
                 uiTlw[v].iconHolder:SetAnchor( g_longVertAlign )
             else
                 if v == "player_long" then
@@ -1021,7 +539,8 @@ function SCB.SetIconsAlignment( value )
     end
 end
 
-function SCB.SetIconsAlignmentProminentBuff( value )
+-- Sets vertical alignment of Prominent Buff icons
+function SCB.SetIconsAlignmentProminentBuff(value)
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.ProminentBuffAlignment
     end
@@ -1043,7 +562,8 @@ function SCB.SetIconsAlignmentProminentBuff( value )
     end
 end
 
-function SCB.SetIconsAlignmentProminentDebuff( value )
+-- Sets vertical alignment of Prominent Debuff icons
+function SCB.SetIconsAlignmentProminentDebuff(value)
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.ProminentDebuffAlignment
     end
@@ -1065,7 +585,8 @@ function SCB.SetIconsAlignmentProminentDebuff( value )
     end
 end
 
-function SCB.SetIconsAlignmentLongVert( value )
+-- Set PLAYER LONG Container Vertical Alignment
+function SCB.SetIconsAlignmentLongVert(value)
     -- Check correctness of argument value
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.AlignmentLongVert
@@ -1095,7 +616,8 @@ function SCB.SetIconsAlignmentLongVert( value )
     end
 end
 
-function SCB.SetIconsAlignmentLongHorz( value )
+-- Set PLAYER LONG Container Horizontal Alignment
+function SCB.SetIconsAlignmentLongHorz(value)
     -- Check correctness of argument value
     if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
         value = SCB.D.AlignmentLongHorz
@@ -1126,7 +648,7 @@ function SCB.SetIconsAlignmentLongHorz( value )
 end
 
 -- Sets horizontal sort direction. Called from Settings Menu.
-function SCB.SetSortDirection( value )
+function SCB.SetSortDirection(value)
     -- Check correctness of argument value
     if value ~= "Left to Right" and value ~= "Right to Left" then
         value = SCB.D.SortDirection
@@ -1288,13 +810,14 @@ function SCB.SetMovingState(state)
     end
 end
 
+-- Reset all buff containers
 function SCB.Reset()
     if not SCB.Enabled then
         return
     end
 
     -- Update padding between icons
-    g_padding = mathfloor(0.5 + SCB.SV.IconSize / 13)
+    g_padding = math.floor(0.5 + SCB.SV.IconSize / 13)
 
     -- Set size of top level window
     -- Player
@@ -1304,11 +827,11 @@ function SCB.Reset()
     else
         uiTlw.player2:SetHeight( SCB.SV.IconSize )
         uiTlw.player2.firstAnchor = { TOPLEFT, TOP }
-        uiTlw.player2.maxIcons = mathfloor(  (uiTlw.player2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
+        uiTlw.player2.maxIcons = math.floor(  (uiTlw.player2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
 
         uiTlw.player1:SetHeight( SCB.SV.IconSize)
         uiTlw.player1.firstAnchor = { TOPLEFT, TOP }
-        uiTlw.player1.maxIcons = mathfloor(  (uiTlw.player1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
+        uiTlw.player1.maxIcons = math.floor(  (uiTlw.player1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
     end
 
     -- Target
@@ -1318,11 +841,11 @@ function SCB.Reset()
     else
         uiTlw.target2:SetHeight( SCB.SV.IconSize )
         uiTlw.target2.firstAnchor = { TOPLEFT, TOP }
-        uiTlw.target2.maxIcons = mathfloor(  (uiTlw.target2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
+        uiTlw.target2.maxIcons = math.floor(  (uiTlw.target2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
 
         uiTlw.target1:SetHeight( SCB.SV.IconSize)
         uiTlw.target1.firstAnchor = { TOPLEFT, TOP }
-        uiTlw.target1.maxIcons = mathfloor(  (uiTlw.target1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
+        uiTlw.target1.maxIcons = math.floor(  (uiTlw.target1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
     end
 
     -- Player long buffs
@@ -1363,10 +886,11 @@ function SCB.Reset()
     end
 
     if g_playerActive then
-        SCB.ReloadEffects()
+        SCB.ReloadEffects("player")
     end
 end
 
+-- Reset only a single icon
 function SCB.ResetSingleIcon( container, buff, AnchorItem )
     local buffSize = SCB.SV.IconSize
     local frameSize = 2 * buffSize + 4
@@ -1505,8 +1029,7 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
             end
         end
 
-        -- For container without holder we will reanchor first icon all the time
-
+    -- For container without holder we will reanchor first icon all the time
     -- Rest icons go one after another.
     else
         if uiTlw[container].alignVertical then
@@ -1517,116 +1040,166 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
     end
 end
 
+-- Right Click Cancel Buff function
 function SCB.Buff_OnMouseUp(self, button, upInside)
     if upInside and button == MOUSE_BUTTON_INDEX_RIGHT and self.buffSlot and not self.isArtificial then
         CancelBuff(self.buffSlot)
     end
 end
 
--- TEMP
 local function ClearStickyTooltip()
     ClearTooltip(GameTooltip)
     eventManager:UnregisterForUpdate(moduleName .. "StickyTooltip")
 end
 
+-- OnMouseEnter for Buff Tooltips
 function SCB.Buff_OnMouseEnter(control)
-
-    -- TEMP
     eventManager:UnregisterForUpdate(moduleName .. "StickyTooltip")
 
     InitializeTooltip(GameTooltip, control, BOTTOM, 0, -5, TOP)
     -- Setup Text
-    local tooltipText
+    local tooltipText = ""
     local colorText = ZO_NORMAL_TEXT
     local tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, control.effectName)
     if control.isArtificial then
         tooltipText = GetArtificialEffectTooltipText(control.effectId)
         GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
-        GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
+        if SCB.SV.TooltipEnable then
+            GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
+        end
     else
-
-
-    -- BEGIN TEMPORARY DEBUF FUNCTION HERE
-    -- MY ACCOUNT DEBUG: Temporary conditional to check for my Display Name and do some debug stuff, otherwise use normal function
-    local displayName = GetDisplayName()
-    if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
-
-        tooltipText = ""
-
-        -- Add original TP if present
-        if control.buffSlot then
-            if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                tooltipText = "|cFFFF00Original Tool:|r " .. GetAbilityEffectDescription(control.buffSlot) .. "\n"
-            end
+        if not SCB.SV.TooltipEnable then
+            GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
+            return
         end
 
-        local duration
-        if type(control.effectId) == "number" then
-            -- Add original description if present
-            if GetAbilityDescription(control.effectId) ~= "" then
-                tooltipText = tooltipText .. "|c3A92FFOriginal Desc:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
+        -- BEGIN TEMPORARY DEBUF FUNCTION HERE
+        -- MY ACCOUNT DEBUG: Temporary conditional to check for my Display Name and do some debug stuff, otherwise use normal function
+        local displayName = GetDisplayName()
+        if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
+
+            tooltipText = ""
+
+            -- Add original TP if present
+            if control.buffSlot then
+                if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                    tooltipText = "|cFFFF00Original Tool:|r " .. GetAbilityEffectDescription(control.buffSlot) .. "\n"
+                end
             end
 
-            duration = control.duration / 1000
-        else
-            duration = 0
-        end
-        local value2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue2Mod) and (duration + E.EffectOverride[control.effectId].tooltipValue2Mod) or 0
-        value2 = math.floor((value2 * 10) + 0.5) / 10
-        duration = math.floor((duration * 10) + 0.5) / 10
-
-        local tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2) or ""
-        if tooltipText2 ~= "" then
-            tooltipText2 = "|cEE992AOverride TP:|r " .. tooltipText2
-        end
-        tooltipText = tooltipText .. tooltipText2
-
-        if control.tooltip then tooltipText = control.tooltip end
-
-        if E.TooltipUseDefault[control.effectId] then
-            if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                tooltipText = tooltipText .. "\n\n|c00FFFFFlagged to show original Tooltip|r"
-            end
-        end
-
-    -- NORMAL BEHAVIOR:
-    else
-        if control.tooltip then
-            tooltipText = control.tooltip
-        else
             local duration
             if type(control.effectId) == "number" then
+                -- Add original description if present
+                if GetAbilityDescription(control.effectId) ~= "" then
+                    tooltipText = tooltipText .. "|c3A92FFOriginal Desc:|r " .. GetAbilityDescription(control.effectId) .. "\n\n"
+                end
+
                 duration = control.duration / 1000
-                local value2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue2Mod) and (duration + E.EffectOverride[control.effectId].tooltipValue2Mod) or 0
-                value2 = math.floor((value2 * 10) + 0.5) / 10
-                duration = math.floor((duration * 10) + 0.5) / 10
-
-                if control.buffSlot then
-                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2) or GetAbilityDescription(abilityId)
-                else
-                    tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2) or ""
-                end
-
-                -- Use default tooltip - temp if needed (TODO: Remove when all base ability/set tooltips are updated)
-                if tooltipText == "" or tooltipText == nil then
-                    if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                        tooltipText = GetAbilityEffectDescription(control.buffSlot)
-                    end
-                end
-
             else
                 duration = 0
             end
-        end
 
-        if E.TooltipUseDefault[control.effectId] then
-            if GetAbilityEffectDescription(control.buffSlot) ~= "" then
-                tooltipText = GetAbilityEffectDescription(control.buffSlot)
+            local value2
+            local value3
+            if E.EffectOverride[control.effectId] then
+                if E.EffectOverride[control.effectId].tooltipValue2 then
+                    value2 = E.EffectOverride[control.effectId].tooltipValue2
+                elseif E.EffectOverride[control.effectId].tooltipValue2Mod then
+                    value2 = math.floor( duration + E.EffectOverride[control.effectId].tooltipValue2Mod + 0.5 )
+                elseif E.EffectOverride[control.effectId].tooltipValue2Id then
+                    value2 = math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
+                else
+                    value2 = 0
+                end
+            else
+                value2 = 0
             end
-        end
+            if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue3 then
+                value3 = E.EffectOverride[control.effectId].tooltipValue3
+            else
+                value3 = 0
+            end
+            duration = math.floor((duration * 10) + 0.5) / 10
 
-    end
-    -- END TEMPORARY DEBUG FUNCTION HERE
+            local tooltipText2
+            if LUIE.ResolveVeteranDifficulty() == true and E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipVet then
+                tooltipText2 = strformat(E.EffectOverride[control.effectId].tooltipVet, timer, value2, value3)
+            else
+                 tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+            end
+            if tooltipText2 ~= "" then
+                tooltipText2 = "|cEE992AOverride TP:|r " .. tooltipText2
+            end
+            tooltipText = tooltipText .. tooltipText2
+
+            if control.tooltip then tooltipText = control.tooltip end
+
+            if E.TooltipUseDefault[control.effectId] then
+                if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                    tooltipText = tooltipText .. "\n\n|c00FFFFFlagged to show original Tooltip|r"
+                end
+            end
+
+        -- END TEMPORARY DEBUG FUNCTION HERE
+        -- NORMAL BEHAVIOR:
+        else
+            if control.tooltip then
+                tooltipText = control.tooltip
+            else
+                local duration
+                if type(control.effectId) == "number" then
+                    duration = control.duration / 1000
+                    local value2
+                    local value3
+                    if E.EffectOverride[control.effectId] then
+                        if E.EffectOverride[control.effectId].tooltipValue2 then
+                            value2 = E.EffectOverride[control.effectId].tooltipValue2
+                        elseif E.EffectOverride[control.effectId].tooltipValue2Mod then
+                            value2 = math.floor( duration + E.EffectOverride[control.effectId].tooltipValue2Mod + 0.5 )
+                        elseif E.EffectOverride[control.effectId].tooltipValue2Id then
+                            value2 = math.floor(GetAbilityDuration(E.EffectOverride[control.effectId].tooltipValue2Id) + 0.5) / 1000
+                        else
+                            value2 = 0
+                        end
+                    else
+                        value2 = 0
+                    end
+                    if E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipValue3 then
+                        value3 = E.EffectOverride[control.effectId].tooltipValue3
+                    else
+                        value3 = 0
+                    end
+                    duration = math.floor((duration * 10) + 0.5) / 10
+
+                    local tooltipText
+                    if control.buffSlot then
+                        tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or GetAbilityDescription(abilityId)
+                    else
+                        tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+                    end
+                    if LUIE.ResolveVeteranDifficulty() == true and E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipVet then
+                        tooltipText = strformat(E.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
+                    end
+
+                    -- Display Default Tooltip Description if no custom tooltip is present
+                    if tooltipText == "" or tooltipText == nil then
+                        if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                            tooltipText = GetAbilityEffectDescription(control.buffSlot)
+                        end
+                    end
+
+                else
+                    duration = 0
+                end
+            end
+
+            if E.TooltipUseDefault[control.effectId] then
+                if GetAbilityEffectDescription(control.buffSlot) ~= "" then
+                    tooltipText = GetAbilityEffectDescription(control.buffSlot)
+                end
+            end
+
+        end
 
         local thirdLine
         local duration = control.duration / 1000
@@ -1641,7 +1214,7 @@ function SCB.Buff_OnMouseEnter(control)
         end
         -- Have to trim trailing spaces on the end of tooltips
         if tooltipText ~= "" then
-            tooltipText = strmatch(tooltipText, ".*%S")
+            tooltipText = string.match(tooltipText, ".*%S")
         end
         if thirdLine ~="" and thirdLine ~= nil then
             colorText = control.buffType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
@@ -1657,17 +1230,16 @@ function SCB.Buff_OnMouseEnter(control)
     end
 end
 
+-- OnMouseExit for Buff Tooltips
 function SCB.Buff_OnMouseExit(control)
-    local displayName = GetDisplayName()
-    if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
-        -- Temp - Sticky tooltip so I can edit things easier
-        eventManager:RegisterForUpdate(moduleName .. "StickyTooltip", 4000, ClearStickyTooltip )
+    if SCB.SV.TooltipSticky > 0 then
+        eventManager:RegisterForUpdate(moduleName .. "StickyTooltip", SCB.SV.TooltipSticky, ClearStickyTooltip )
     else
         ClearTooltip(GameTooltip)
     end
-    -- TODO: Add Sticky Tooltips
 end
 
+-- Create a Single Buff Icon
 function SCB.CreateSingleIcon(container, AnchorItem, effectType)
     local buff = UI.Backdrop( uiTlw[container], nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
 
@@ -1743,7 +1315,7 @@ function SCB.CreateSingleIcon(container, AnchorItem, effectType)
     return buff
 end
 
- -- Set proper colour of border and text on single buff element
+ -- Set proper color of border and text on single buff element
 function SCB.SetSingleIconBuffType(buff, buffType, unbreakable)
     local contextType
     local colour
@@ -1830,72 +1402,30 @@ function SCB.ApplyFont()
     end
 end
 
---[[
- * Runs on the EVENT_EFFECT_CHANGED listener.
- * This handler fires every long-term effect added or removed:
- ]]--
-function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and (E.EffectGroundDisplay[abilityId] or E.LinkedGroundMine[abilityId]) and not SCB.SV.HideGroundEffects then
-        -- Mines with multiple auras have to be linked into one id for the purpose of tracking stacks
-        if E.LinkedGroundMine[abilityId] then
-            abilityId = E.LinkedGroundMine[abilityId]
-        end
+function SCB.OnEffectChangedGround(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
 
-        -- Bail out if this ability is blacklisted
-        if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then
-            return
-        end
+    if SCB.SV.HideGroundEffects then return end
 
-        -- Create fake ground aura
-        local groundType = { }
-        groundType[1] = { info = E.EffectGroundDisplay[abilityId].buff, context = "player1", promB = "promb_player", promD = "promd_player", type = 1 }
-        groundType[2] = { info = E.EffectGroundDisplay[abilityId].debuff, context = "player2", promB = "promb_target", promD = "promd_target", type = BUFF_EFFECT_TYPE_DEBUFF }
-        groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
+    -- Mines with multiple auras have to be linked into one id for the purpose of tracking stacks
+    if E.LinkedGroundMine[abilityId] then
+        abilityId = E.LinkedGroundMine[abilityId]
+    end
 
-        if changeType == EFFECT_RESULT_FADED then
-            if E.EffectGroundDisplay[abilityId] and E.EffectGroundDisplay[abilityId].noRemove then return end -- Ignore some abilities
-            local currentTime = GetGameTimeMilliseconds()
-            if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
-                for i = 1, 3 do
-                    if groundType[i].info == true then
-                        -- Set container context
-                        local context
-                        if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
-                            context = groundType[i].promD
-                        elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
-                            context = groundType[i].promB
-                        else
-                            context = groundType[i].context
-                        end
-                        if (E.IsGroundMineAura[abilityId] or E.IsGroundMineStack[abilityId]) then
-                            -- Check to make sure aura exists in case of reloadUI
-                            if g_effectsList[context][ abilityId ] then
-                                g_effectsList[context][ abilityId ].stack = g_effectsList[context][ abilityId ].stack - E.EffectGroundDisplay[abilityId].stackRemove
-                                if g_effectsList[context][ abilityId ].stack == 0 then g_effectsList[context][ abilityId ] = nil end
-                            end
-                        else
-                            g_effectsList[context][ abilityId ] = nil
-                        end
-                    end
-                end
-            end
-        elseif changeType == EFFECT_RESULT_GAINED then
-            -- Special condition to remove 2nd Rearming Trap aura if it is recast before the 2nd trap triggers
-            if abilityId == 40382 then
-                g_effectsList.ground[40388] = nil
-                g_effectsList.promb_ground[40388] = nil
-                g_effectsList.promd_ground[40388] = nil
-            end
+    -- Bail out if this ability is blacklisted
+    if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then
+        return
+    end
 
-            local currentTime = GetGameTimeMilliseconds()
-            g_protectAbilityRemoval[abilityId] = currentTime + 150
+    -- Create fake ground aura
+    local groundType = { }
+    groundType[1] = { info = E.EffectGroundDisplay[abilityId].buff, context = "player1", promB = "promb_player", promD = "promd_player", type = 1 }
+    groundType[2] = { info = E.EffectGroundDisplay[abilityId].debuff, context = "player2", promB = "promb_target", promD = "promd_target", type = BUFF_EFFECT_TYPE_DEBUFF }
+    groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
 
-            local duration = endTime - beginTime
-            local groundLabel = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].groundLabel or false
-            local toggle = E.IsToggle[abilityId] or false
-            iconName = E.EffectGroundDisplay[abilityId].icon or iconName
-            effectName = E.EffectGroundDisplay[abilityId].name or effectName
-
+    if changeType == EFFECT_RESULT_FADED then
+        if E.EffectGroundDisplay[abilityId] and E.EffectGroundDisplay[abilityId].noRemove then return end -- Ignore some abilities
+        local currentTime = GetGameTimeMilliseconds()
+        if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
             for i = 1, 3 do
                 if groundType[i].info == true then
                     -- Set container context
@@ -1907,34 +1437,80 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     else
                         context = groundType[i].context
                     end
-                    if E.IsGroundMineAura[abilityId] then
-                        stackCount = E.EffectGroundDisplay[abilityId].stackReset
-                    elseif E.IsGroundMineStack[abilityId] then
-                        if g_effectsList[context][ abilityId ] then
-                            stackCount = g_effectsList[context][ abilityId ].stack + E.EffectGroundDisplay[abilityId].stackRemove
-                        else
-                            stackCount = 1
+                    if (E.IsGroundMineAura[abilityId] or E.IsGroundMineStack[abilityId]) then
+                        -- Check to make sure aura exists in case of reloadUI
+                        if LUIE.EffectsList[context][ abilityId ] then
+                            LUIE.EffectsList[context][ abilityId ].stack = LUIE.EffectsList[context][ abilityId ].stack - E.EffectGroundDisplay[abilityId].stackRemove
+                            if LUIE.EffectsList[context][ abilityId ].stack == 0 then LUIE.EffectsList[context][ abilityId ] = nil end
                         end
-                        if stackCount > E.EffectGroundDisplay[abilityId].stackReset then stackCount = E.EffectGroundDisplay[abilityId].stackReset end
+                    else
+                        LUIE.EffectsList[context][ abilityId ] = nil
                     end
-
-                    g_effectsList[context][ abilityId ] = {
-                        type=groundType[i].type,
-                        id=abilityId, name=effectName, icon=iconName,
-                        dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                        forced=nil,
-                        restart=true, iconNum=0,
-                        unbreakable=0,
-                        stack = stackCount,
-                        buffSlot = effectSlot,
-                        groundLabel = groundLabel,
-                        toggle = toggle,
-                    }
                 end
+            end
+        end
+    elseif changeType == EFFECT_RESULT_GAINED then
+        -- Special condition to remove 2nd Rearming Trap aura if it is recast before the 2nd trap triggers
+        if abilityId == 40382 then
+            LUIE.EffectsList.ground[40388] = nil
+            LUIE.EffectsList.promb_ground[40388] = nil
+            LUIE.EffectsList.promd_ground[40388] = nil
+        end
+
+        local currentTime = GetGameTimeMilliseconds()
+        g_protectAbilityRemoval[abilityId] = currentTime + 150
+
+        local duration = endTime - beginTime
+        local groundLabel = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].groundLabel or false
+        local toggle = E.IsToggle[abilityId] or false
+        iconName = E.EffectGroundDisplay[abilityId].icon or iconName
+        effectName = E.EffectGroundDisplay[abilityId].name or effectName
+
+        for i = 1, 3 do
+            if groundType[i].info == true then
+                -- Set container context
+                local context
+                if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
+                    context = groundType[i].promD
+                elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
+                    context = groundType[i].promB
+                else
+                    context = groundType[i].context
+                end
+                if E.IsGroundMineAura[abilityId] then
+                    stackCount = E.EffectGroundDisplay[abilityId].stackReset
+                elseif E.IsGroundMineStack[abilityId] then
+                    if LUIE.EffectsList[context][ abilityId ] then
+                        stackCount = LUIE.EffectsList[context][ abilityId ].stack + E.EffectGroundDisplay[abilityId].stackRemove
+                    else
+                        stackCount = 1
+                    end
+                    if stackCount > E.EffectGroundDisplay[abilityId].stackReset then stackCount = E.EffectGroundDisplay[abilityId].stackReset end
+                end
+
+                LUIE.EffectsList[context][ abilityId ] = {
+                    type=groundType[i].type,
+                    id=abilityId, name=effectName, icon=iconName,
+                    dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                    forced=nil,
+                    restart=true, iconNum=0,
+                    unbreakable=0,
+                    stack = stackCount,
+                    buffSlot = effectSlot,
+                    groundLabel = groundLabel,
+                    toggle = toggle,
+                }
             end
         end
     end
 
+end
+
+-- Runs on the EVENT_EFFECT_CHANGED listener.
+-- This handler fires every long-term effect added or removed
+function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+
+    -- Change the effect type before we determine if we want to filter anything else.
     if E.EffectOverride[abilityId] then
         effectType = E.EffectOverride[abilityId].type or effectType
         -- Bail out now if we hide ground snares and other effects because we are showing Damaging Auras (Only do this for the player, we don't want effects on targets to stop showing up).
@@ -1943,29 +1519,29 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
-    if SCB.SV.ShowWerewolf then
-        -- Update WW icon while devouring
-        if abilityId == 33208 and castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
-            if changeType ~= EFFECT_RESULT_FADED then
-                SetWerewolfIconFrozen()
-                g_werewolfDevour = true
-            else
-                local currentTime = GetGameTimeMilliseconds()
-                SetWerewolfIconTimer(currentTime)
-                g_werewolfDevour = false
-            end
-        end
-        -- Remove form icon if player cancels early
-        if abilityId == 39477 and castByPlayer == COMBAT_UNIT_TYPE_PLAYER and changeType == EFFECT_RESULT_GAINED then
-            g_effectsList.player1["Werewolf Indicator"] = nil
-            eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
-            eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
-            g_werewolfCounter = 0
+    -- Bail out if the abilityId is on the Blacklist Table
+    if SCB.SV.BlacklistTable[abilityId] then
+        return
+    end
+
+    -- Hide effects if chosen in the options menu
+    if hidePlayerEffects[abilityId] and unitTag == "player" then
+        return
+    end
+
+    if hideTargetEffects[abilityId] and unitTag == "reticleover" then
+        return
+    end
+
+    -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
+    if unitTag ~= "player" then
+        if effectType == 2 and not (castByPlayer == 1) and not (E.DebuffDisplayOverrideId[abilityId] or E.DebuffDisplayOverrideName[effectName]) then
+            return
         end
     end
 
-    -- Track only effects on self or target debuffs
-    if unitTag ~= "player" and unitTag ~= "reticleover" then
+    -- Ignore Siphoner on non-player targets
+    if abilityId == 92428 and unitTag == "reticleover" and not IsUnitPlayer('reticleover') then
         return
     end
 
@@ -1984,7 +1560,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             return
         end
     end
-    --d(strfmt("OnEffectChanged %d: %s[%s] / %d/%d/%d [%s-%d] %d", changeType, effectName, unitTag, effectType, abilityType, statusEffectType, unitName, unitId, abilityId ))
 
     local unbreakable = 0
 
@@ -1992,9 +1567,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     if E.IsGrimFocus[abilityId] or E.IsGrimFocusOverride[abilityId] then
         local context
         if unitTag == "player" then
-            context = { g_effectsList.player1, g_effectsList.promb_player, g_effectsList.promd_player }
+            context = { LUIE.EffectsList.player1, LUIE.EffectsList.promb_player, LUIE.EffectsList.promd_player }
         else
-            context = { g_effectsList.reticleover1 }
+            context = { LUIE.EffectsList.reticleover1 }
         end
 
         -- Set stack count when Grim Focus counter changes
@@ -2023,6 +1598,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
+    -- Set Override data from Effects.lua
     if E.EffectOverride[abilityId] then
         if E.EffectOverride[abilityId].hide == true then
             return
@@ -2030,7 +1606,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         if E.EffectOverride[abilityId].hideReduce == true and SCB.SV.HideReduce then
             return
         end
-        if E.EffectOverride[abilityId].isDisguise and SCB.SV.IgnoreDisguise then
+        if E.EffectOverride[abilityId].isDisguise and SCB.SV.IgnoreDisguise then -- For Monk's Disguise / other buff based Disguise hiding
             return
         end
         iconName = E.EffectOverride[abilityId].icon or iconName
@@ -2039,11 +1615,11 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         stackCount = E.EffectOverride[abilityId].stack or stackCount
         -- Destroy other effects of the same type if we don't want to show duplicates at all.
         if E.EffectOverride[abilityId].noDuplicate then
-            for context, effectsList in pairs( g_effectsList ) do
+            for context, effectsList in pairs( LUIE.EffectsList ) do
                 for k, v in pairs(effectsList) do
                     -- Only remove the lower duration effects that were cast previously.
                     if v.id == abilityId and v.ends < (1000*endTime) then
-                        g_effectsList[context][ k ] = nil
+                        LUIE.EffectsList[context][ k ] = nil
                     end
                 end
             end
@@ -2056,6 +1632,12 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
+    -- Bail out if the effectName is hidden in the Blacklist Table
+    if SCB.SV.BlacklistTable[effectName] then
+        return
+    end
+
+    -- Override name, icon, or hide based on MapZoneIndex
     if E.MapDataOverride[abilityId] then
         local index = GetCurrentMapZoneIndex()
         if E.MapDataOverride[abilityId][index] then
@@ -2071,6 +1653,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
+    -- Override name or icon based off unitName
     if E.EffectOverrideByName[abilityId] then
         unitName = strformat("<<t:1>>", unitName)
         if E.EffectOverrideByName[abilityId][unitName] then
@@ -2082,33 +1665,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
     end
 
-    if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then
-        return
-    end
-
-    -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
-    if unitTag ~= "player" then
-        if effectType == 2 and not (castByPlayer == 1) and not (E.DebuffDisplayOverrideId[abilityId] or E.DebuffDisplayOverrideName[effectName]) then
-            return
-        end
-    end
-
-    -- Hide effects if chosen in the options menu
-    if hidePlayerEffects[abilityId] and unitTag == "player" then
-        return
-    end
-
-    if hideTargetEffects[abilityId] and unitTag == "reticleover" then
-        return
-    end
-
     local forcedType = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].forcedContainer or nil
     local savedEffectSlot = effectSlot
     effectSlot = E.EffectMergeId[abilityId] or E.EffectMergeName[effectName] or effectSlot
-
-    if unitTag == "reticleover" and abilityId == 92428 and not IsUnitPlayer('reticleover') then
-        return
-    end
 
     -- Where the new icon will go into
     local context = unitTag .. effectType
@@ -2133,9 +1692,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
 
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
-        g_effectsList[context][effectSlot] = nil
+        LUIE.EffectsList[context][effectSlot] = nil
         if E.EffectCreateSkillAura[ abilityId ] and E.EffectCreateSkillAura [ abilityId ].removeOnEnd then
-            local name = zo_strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))
+            local name = strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))
             local id = E.EffectCreateSkillAura[abilityId].abilityId
             if not (SCB.SV.BlacklistTable[name] or SCB.SV.BlacklistTable[id]) then
                 local simulatedContext = unitTag .. effectType
@@ -2153,7 +1712,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                         simulatedContext = "promb_target"
                     end
                 end
-                g_effectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].abilityId ] = nil
+                LUIE.EffectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].abilityId ] = nil
             end
         end
 
@@ -2172,7 +1731,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             endTime = endTime - E.EffectOverride[abilityId].duration
         end
 
-        -- Specific override for Mend Spirit -- Updates Major Resolve / Major Ward to use the remaining duration of Mend Spirit.
+        -- Outdated and unused - might be useful in the future
+        -- Specific override for old version of Mend Spirit -- Updates Major Resolve / Major Ward to use the remaining duration of Mend Spirit.
+        --[[
         if E.EffectPullDuration[abilityId] then
             local matchId = E.EffectPullDuration[abilityId]
             for i = 1, GetNumBuffs(unitTag) do
@@ -2184,11 +1745,12 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                 end
             end
         end
+        ]]--
 
         --EffectCreateSkillAura
         if E.EffectCreateSkillAura[abilityId] then
             if (not E.EffectCreateSkillAura[abilityId].requiredStack) or (E.EffectCreateSkillAura[abilityId].requiredStack and stackCount == E.EffectCreateSkillAura[abilityId].requiredStack) then
-                local name = zo_strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))
+                local name = strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))
                 local id = E.EffectCreateSkillAura[abilityId].abilityId
                 if not (SCB.SV.BlacklistTable[name] or SCB.SV.BlacklistTable[id]) then
                     local simulatedContext = unitTag .. effectType
@@ -2209,18 +1771,20 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
                     if ( SCB.SV.ExtraBuffs ) or ( E.EffectCreateSkillAura[abilityId].consolidate and SCB.SV.ExtraConsolidate ) or ( E.EffectCreateSkillAura[abilityId].alwaysShow ) then
                         if ( not E.EffectCreateSkillAura[abilityId].extendedDisplay ) or (E.EffectCreateSkillAura[abilityId].extendedDisplay and SCB.SV.ExtraExpanded) then
-                            local icon = E.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
-                            g_effectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].abilityId ] = {
-                                target=unitTag, type=effectType,
-                                id=id, name=name, icon=icon,
-                                dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                                forced=forcedType,
-                                restart=true, iconNum=0,
-                                stack = 0,
-                                unbreakable=unbreakable,
-                                groundLabel = groundLabel,
-                                toggle = toggle,
-                            }
+                            if ( ( E.EffectCreateSkillAura[abilityId].consolidateNewIdExtended and not (SCB.SV.ExtraExpanded and SCB.SV.ExtraConsolidate) ) or ( E.EffectCreateSkillAura[abilityId].consolidateNewId and not SCB.SV.ExtraConsolidate) ) or not (E.EffectCreateSkillAura[abilityId].consolidateNewIdExtended or E.EffectCreateSkillAura[abilityId].consolidateNewId) then
+                                local icon = E.EffectCreateSkillAura[abilityId].icon or GetAbilityIcon(id)
+                                LUIE.EffectsList[simulatedContext][ E.EffectCreateSkillAura[abilityId].abilityId ] = {
+                                    target=unitTag, type=effectType,
+                                    id=id, name=name, icon=icon,
+                                    dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                                    forced=forcedType,
+                                    restart=true, iconNum=0,
+                                    stack = 0,
+                                    unbreakable=unbreakable,
+                                    groundLabel = groundLabel,
+                                    toggle = toggle,
+                                }
+                            end
                         end
                     end
                 end
@@ -2235,7 +1799,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
         -- If this effect doesn't properly display stacks - then add them.
         if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].displayStacks then
-            for context, effectsList in pairs( g_effectsList ) do
+            for context, effectsList in pairs( LUIE.EffectsList ) do
                 for k, v in pairs(effectsList) do
                     -- Add stacks
                     if v.id == abilityId then
@@ -2250,7 +1814,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
 
         -- Buffs are created based on their effectSlot, this allows multiple buffs/debuffs of the same type to appear.
-        g_effectsList[context][ effectSlot ] = {
+        LUIE.EffectsList[context][ effectSlot ] = {
             target=unitTag, type=effectType,
             id=abilityId, name=effectName, icon=iconName,
             dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
@@ -2265,13 +1829,15 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
 end
 
+-- Runs on the EVENT_ARTIFICIAL_EFFECT_ADDED / EVENT_ARTIFICIAL_EFFECT_REMOVED listener.
+-- This handler fires whenever an ArtificialEffectId is added or removed
 function SCB.ArtificialEffectUpdate(eventCode, effectId)
     if SCB.SV.HidePlayerBuffs then
         return
     end
 
     if effectId then
-        g_effectsList.player1[effectId] = nil
+        LUIE.EffectsList.player1[effectId] = nil
     end
 
     for effectId in ZO_GetNextActiveArtificialEffectIdIter do
@@ -2293,7 +1859,7 @@ function SCB.ArtificialEffectUpdate(eventCode, effectId)
             effectType = BUFF_EFFECT_TYPE_BUFF -- Set to buff so it shows in long duration effects
         end
 
-        g_effectsList.player1[ effectId ] = {
+        LUIE.EffectsList.player1[ effectId ] = {
             target="player", type=effectType,
             id=effectId, name = displayName, icon = iconFile,
             dur=duration, starts=startTime, ends=endTime,
@@ -2311,6 +1877,8 @@ end
  * As well as create fake buffs/debuffs for events with no active effect present.
  ]]--
 
+-- Counter variable for ACTION_RESULT_EFFECT_GAINED / ACTION_RESULT_EFFECT_FADED tracking for some buffs that are broken
+-- Handles buffs that rather than refreshing on reapplication create an individual instance and therefore have GAINED/FADED events every single time the effect ticks.
 local InternalStackCounter = { }
 
  -- Combat Event (Target = Player)
@@ -2332,7 +1900,6 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         end
 
         local iconName = GetAbilityIcon(abilityId)
-        local stack = 0
         local effectName
         local unbreakable
         local duration = E.AddGroundDamageAura[abilityId].duration
@@ -2344,9 +1911,11 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if E.EffectOverride[abilityId] then
             effectName = E.EffectOverride[abilityId].name or abilityName
             unbreakable = E.EffectOverride[abilityId].unbreakable or 0
+            stack = E.EffectOverride[abilityId].stack or 0
         else
             effectName = abilityName
             unbreakable = 0
+            stack = 0
         end
 
         if E.AddGroundDamageAura[abilityId].merge then
@@ -2359,7 +1928,20 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local endTime = beginTime + duration
         local context = "player" .. effectType
 
-        g_effectsList[context][ buffSlot ] = {
+        -- Stack Resolution
+        if LUIE.EffectsList[context][ buffSlot ] and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].stackAdd then
+            if E.EffectOverride[abilityId].stackMax then
+                if not (LUIE.EffectsList[context][ buffSlot ].stack == E.EffectOverride[abilityId].stackMax) then
+                    stack = LUIE.EffectsList[context][ buffSlot ].stack + E.EffectOverride[abilityId].stackAdd
+                else
+                    stack = LUIE.EffectsList[context][ buffSlot ].stack
+                end
+            else
+                stack = LUIE.EffectsList[context][ buffSlot ].stack + E.EffectOverride[abilityId].stackAdd
+            end
+        end
+
+        LUIE.EffectsList[context][ buffSlot ] = {
             type=effectType,
             id=abilityId, name=effectName, icon=iconName,
             dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
@@ -2369,6 +1951,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             fakeDuration= true,
             groundLabel = groundLabel,
             toggle = toggle,
+            stack = stack,
         }
     end
 
@@ -2420,7 +2003,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             return
         end
 
-        g_effectsList.player1[ abilityId ] = nil
+        LUIE.EffectsList.player1[ abilityId ] = nil
         iconName = E.FakeExternalBuffs[abilityId].icon or GetAbilityIcon(abilityId)
         effectName = E.FakeExternalBuffs[abilityId].name or GetAbilityName(abilityId)
         overrideDuration = E.FakeExternalBuffs[abilityId].overrideDuration
@@ -2430,7 +2013,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local source = strformat("<<t:1>>",sourceName)
         local target = strformat("<<t:1>>",targetName)
         if source ~= "" and target == LUIE.PlayerNameFormatted then
-            g_effectsList.player1[ abilityId ] = {
+            LUIE.EffectsList.player1[ abilityId ] = {
                 type=1,
                 id=abilityId, name=effectName, icon=iconName,
                 dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
@@ -2462,6 +2045,20 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if SCB.SV.GroundDamageAura and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].hideGround then
             return
         end
+
+        -- Stack handling
+        if LUIE.EffectsList.player2[ abilityId ] and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
+            if E.EffectOverride[abilityId].stackMax then
+                if not (LUIE.EffectsList.player2[ abilityId ].stack == E.EffectOverride[abilityId].stackMax) then
+                    stack = LUIE.EffectsList.player2[ abilityId ].stack + E.EffectOverride[abilityId].stackAdd
+                else
+                    stack = LUIE.EffectsList.player2[ abilityId ].stack
+                end
+            else
+                stack = LUIE.EffectsList.player2[ abilityId ].stack + E.EffectOverride[abilityId].stackAdd
+            end
+        end
+
         if internalStack then
             if not InternalStackCounter[abilityId] then InternalStackCounter[abilityId] = 0 end -- Create stack if it doesn't exist
             if result == ACTION_RESULT_EFFECT_FADED then
@@ -2469,14 +2066,14 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             elseif result == ACTION_RESULT_EFFECT_GAINED_DURATION then
                 InternalStackCounter[abilityId] = InternalStackCounter[abilityId] + 1
             end
-            if g_effectsList.player2[abilityId] then
+            if LUIE.EffectsList.player2[abilityId] then
                 if InternalStackCounter[abilityId] <= 0 then
-                    g_effectsList.player2[abilityId] = nil
+                    LUIE.EffectsList.player2[abilityId] = nil
                     InternalStackCounter[abilityId] = nil
                 end
             end
         else
-            g_effectsList.player2[ abilityId ] = nil
+            LUIE.EffectsList.player2[ abilityId ] = nil
         end
 
         iconName = E.FakeExternalDebuffs[abilityId].icon or GetAbilityIcon(abilityId)
@@ -2510,7 +2107,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         end
 
         if source ~= "" and target == LUIE.PlayerNameFormatted then
-            g_effectsList.player2[ abilityId ] = {
+            LUIE.EffectsList.player2[ abilityId ] = {
                 type=BUFF_EFFECT_TYPE_DEBUFF,
                 id=abilityId, name=effectName, icon=iconName,
                 dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
@@ -2518,6 +2115,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
                 restart=true, iconNum=0,
                 unbreakable=unbreakable,
                 groundLabel = groundLabel,
+                stack = stack,
             }
         end
     end
@@ -2548,12 +2146,12 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             context = "player1"
         end
 
-        if g_effectsList[context][ abilityId ] and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
-            stack = g_effectsList[context][ abilityId ].stack + E.EffectOverride[abilityId].stackAdd
+        if LUIE.EffectsList[context][ abilityId ] and E.EffectOverride[abilityId] and E.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
+            stack = LUIE.EffectsList[context][ abilityId ].stack + E.EffectOverride[abilityId].stackAdd
         end
         if abilityId == 26406 then g_ignoreAbilityId[abilityId] = true end
-        g_effectsList[context][ abilityId ] = nil
-        g_effectsList.player2[ abilityId ] = nil
+        LUIE.EffectsList[context][ abilityId ] = nil
+        LUIE.EffectsList.player2[ abilityId ] = nil
         if abilityId == 973 and not SCB.SV.ShowSprint then
             return
         end
@@ -2566,6 +2164,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         iconName = E.FakePlayerBuffs[abilityId].icon or GetAbilityIcon(abilityId)
         effectName = E.FakePlayerBuffs[abilityId].name or GetAbilityName(abilityId)
         duration = E.FakePlayerBuffs[abilityId].duration
+        if duration == "GET" then duration = GetAbilityDuration(abilityId) end
         local finalId = E.FakePlayerBuffs[abilityId].shiftId or abilityId
         local forcedType = E.FakePlayerBuffs[abilityId].long and "long" or "short"
         local beginTime = GetGameTimeMilliseconds()
@@ -2575,7 +2174,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if source == LUIE.PlayerNameFormatted and target == LUIE.PlayerNameFormatted then
             -- If the "buff" is flagged as a debuff, then display it here instead
             if E.FakePlayerBuffs[abilityId].debuff == true then
-                g_effectsList.player2[ finalId ] = {
+                LUIE.EffectsList.player2[ finalId ] = {
                     type=BUFF_EFFECT_TYPE_DEBUFF,
                     id=finalId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
@@ -2588,7 +2187,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
                 }
             -- Otherwise, display as a normal buff
             else
-                g_effectsList[context][ finalId ] = {
+                LUIE.EffectsList[context][ finalId ] = {
                     target="player", type=1,
                     id=finalId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
@@ -2603,7 +2202,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         end
     end
 
-        -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
+    -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
     if E.FakeStagger[abilityId] then
         -- Bail out if we ignore begin events
         if E.FakeStagger[abilityId].ignoreBegin and (result == ACTION_RESULT_BEGIN) then
@@ -2627,7 +2226,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local target = strformat("<<t:1>>",targetName)
         local unitName = strformat("<<t:1>>", GetUnitName("reticleover") )
         if source ~= "" and target == LUIE.PlayerNameFormatted then
-            g_effectsList.player2[ abilityId ] = {
+            LUIE.EffectsList.player2[ abilityId ] = {
                 type=BUFF_EFFECT_TYPE_DEBUFF,
                 id=abilityId, name=effectName, icon=iconName,
                 dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
@@ -2687,7 +2286,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         if SCB.SV.HideTargetBuffs then
             return
         end
-        g_effectsList.reticleover1[ abilityId ] = nil
+        LUIE.EffectsList.reticleover1[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then return end
         if GetUnitReaction("reticleover") == UNIT_REACTION_HOSTILE then return end
         if IsUnitDead(unitTag) then return end
@@ -2705,7 +2304,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
             if SCB.SV.HideTargetBuffs then
                 return
             end
-            g_effectsList.reticleover1[ abilityId ] = {
+            LUIE.EffectsList.reticleover1[ abilityId ] = {
                 type=effectType,
                 id=abilityId, name=effectName, icon=iconName,
                 dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
@@ -2732,7 +2331,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         if SCB.SV.HideTargetDebuffs then
             return
         end
-        g_effectsList.reticleover2[ abilityId ] = nil
+        LUIE.EffectsList.reticleover2[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then end
         --if GetUnitReaction("reticleover") ~= UNIT_REACTION_HOSTILE then return end
         if IsUnitDead(unitTag) then return end
@@ -2752,7 +2351,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                 return
             end
             if unitName == target then
-                g_effectsList.ground[ abilityId ] = {
+                LUIE.EffectsList.ground[ abilityId ] = {
                     type=effectType,
                     id=abilityId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
@@ -2764,7 +2363,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                     groundLabel = groundLabel,
                 }
             else
-                g_effectsList.saved[ abilityId ] = {
+                LUIE.EffectsList.saved[ abilityId ] = {
                     type=effectType,
                     id=abilityId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
@@ -2807,7 +2406,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                 return
             end
             if unitName == target then
-                g_effectsList.ground[ abilityId ] = {
+                LUIE.EffectsList.ground[ abilityId ] = {
                     type=BUFF_EFFECT_TYPE_DEBUFF,
                     id=abilityId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
@@ -2818,7 +2417,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                     groundLabel = groundLabel,
                 }
             else
-                g_effectsList.saved[ abilityId ] = {
+                LUIE.EffectsList.saved[ abilityId ] = {
                     type=BUFF_EFFECT_TYPE_DEBUFF,
                     id=abilityId, name=effectName, icon=iconName,
                     dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
@@ -2839,13 +2438,14 @@ function SCB.OnDeath(eventCode, unitTag, isDead)
     -- Wipe buffs
     if isDead then
         if unitTag == "player" then
-            g_effectsList.player1 = {}
-            g_effectsList.player2 = {}
-            g_effectsList.ground = {}
-            g_effectsList.promb_ground = {}
-            g_effectsList.promd_ground = {}
-            g_effectsList.promb_player = {}
-            g_effectsList.promd_player = {}
+            -- Clear all player/ground/prominent containers
+            LUIE.EffectsList.player1 = {}
+            LUIE.EffectsList.player2 = {}
+            LUIE.EffectsList.ground = {}
+            LUIE.EffectsList.promb_ground = {}
+            LUIE.EffectsList.promd_ground = {}
+            LUIE.EffectsList.promb_player = {}
+            LUIE.EffectsList.promd_player = {}
 
             -- If werewolf is active, reset the icon so it's not removed (otherwise it flashes off for about a second until the trailer function picks up on the fact that no power drain has occurred.
             if SCB.SV.ShowWerewolf and IsWerewolf() then
@@ -2853,7 +2453,7 @@ function SCB.OnDeath(eventCode, unitTag, isDead)
             end
         else
             for effectType = 1, 2 do
-                g_effectsList[ unitTag .. effectType ] = {}
+                LUIE.EffectsList[ unitTag .. effectType ] = {}
             end
         end
     end
@@ -2875,226 +2475,139 @@ function SCB.OnReticleTargetChanged(eventCode)
     SCB.ReloadEffects("reticleover")
 end
 
--- Used to clear existing LET.effectsList.unitTag and to request game API to fill it again
+-- Used to clear existing .effectsList.unitTag and to request game API to fill it again
 function SCB.ReloadEffects(unitTag)
-    -- If unitTag was not provided, consider it as Player
-    local unitTag = unitTag or "player"
 
-    -- Clear Existing
-    g_effectsList[unitTag .. 1] = {}
-    g_effectsList[unitTag .. 2] = {}
-    if unitTag == "player" then
-        g_effectsList["promb_player"] = {}
-        g_effectsList["promb_ground"] = {}
-        g_effectsList["promd_player"] = {}
-        g_effectsList["promd_ground"] = {}
-    else
-        g_effectsList["promb_target"] = {}
-        g_effectsList["promd_target"] = {}
+    -- Bail if this isn't reticleover or player
+    if unitTag ~= "player" and unitTag ~= "reticleover" then
+        return
     end
 
+    -- Clear Existing
+    for effectType = 1, 2 do
+        LUIE.EffectsList[ unitTag .. effectType ] = {}
+    end
+    if unitTag == "player" then
+        LUIE.EffectsList["promb_player"] = {}
+        LUIE.EffectsList["promb_ground"] = {}
+        LUIE.EffectsList["promd_player"] = {}
+        LUIE.EffectsList["promd_ground"] = {}
+    else
+        LUIE.EffectsList["promb_target"] = {}
+        LUIE.EffectsList["promd_target"] = {}
+    end
+
+    -- Stop doing anything else if we moused off a target
+    if GetUnitName(unitTag) == "" then
+        return
+    end
+
+    -- Bail out if the target is dead
+    if IsUnitDead(unitTag) then return end
+
+    -- Get unitName to pass to OnEffectChanged
+    local unitName = GetRawUnitName(unitTag)
     -- Fill it again
     for i = 1, GetNumBuffs(unitTag) do
-        local unitName = GetRawUnitName(unitTag)
         local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
         -- Fudge this value to send to SCB.OnEffectChanged if this is a debuff
         if castByPlayer == true then
-        castByPlayer = 1
+            castByPlayer = 1
         else
             castByPlayer = 5
         end
-        if not (IsUnitDead(unitTag) and E.EffectHideWhenDead[abilityId]) then
-            SCB.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
-        end
+        SCB.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
     end
 
-    if not SCB.SV.HideTargetBuffs then
-        local unitName = GetUnitName(unitTag)
-        -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
-        if E.AddNameAura[unitName] and GetUnitReaction(unitTag) == UNIT_REACTION_HOSTILE and IsUnitInCombat(unitTag) and not IsUnitPlayer(unitTag) and not IsUnitDead(unitTag) then
-            for k, v in ipairs(E.AddNameAura[unitName]) do
-                if not (v.zone) or (v.zone and GetCurrentMapZoneIndex() == v.zone) then
-                    local abilityName = GetAbilityName(v.id)
-                    local abilityIcon = GetAbilityIcon(v.id)
-                    g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
-                        type=1,
-                        id= v.id, name= abilityName, icon= abilityIcon,
-                        dur=0, starts=1, ends=nil,
-                        forced = "short",
-                        restart=true, iconNum=0
-                    }
-                end
-            end
-        end
-    end
+    -- Load Cyrodiil Buffs
+    SCB.LoadCyrodiilBuffs(unitTag)
+    -- Display Disguise State
+    SCB.DisguiseStateChanged(nil, unitTag, GetUnitDisguiseState(unitTag))
+    -- Display Stealth State
+    SCB.StealthStateChanged(nil, unitTag, GetUnitStealthState(unitTag))
 
-    if unitTag == "player" then
+    -- PLAYER SPECIFIC
+    if unitTag == "player" and not SCB.SV.HidePlayerBuffs then
+        -- Update Artificial Effects
         SCB.ArtificialEffectUpdate()
-    end
-
-    -- create custom buff icon for Recall Cooldown effect
-    if SCB.SV.ShowRecall and unitTag == "player" and not (SCB.SV.HidePlayerBuffs or SCB.SV.HidePlayerDebuffs) then
-        local recallRemain, _ = GetRecallCooldown()
-        if recallRemain > 0 then
-            local currentTime = GetGameTimeMilliseconds()
-            g_effectsList["player1"][ A.Innate_Recall_Penalty ] = {
-                target="player", type=1,
-                id=6811, name=A.Innate_Recall_Penalty, icon='LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds',
-                dur=600000, starts=currentTime, ends=currentTime+recallRemain,
-                forced = "long",
-                restart=true, iconNum=0,
-                unbreakable=1,
-                overrideDur = 600000
-            }
+        -- Display Recall Cooldown
+        if SCB.SV.ShowRecall and not SCB.SV.HidePlayerDebuffs then
+            SCB.ShowRecallCooldown()
+        end
+        -- Draw Bound Aegis buffs if player is Sorcerer
+        if GetUnitClassId("player") == 2 then
+            SCB.DrawBoundAegisBuffs()
         end
     end
 
-    if unitTag == "reticleover" then
-        for _, effectsList in pairs( {g_effectsList.ground, g_effectsList.saved} ) do
-            --local container = containerRouting[context]
-            for k, v in pairs(effectsList) do
-                if v.savedName ~= nil then
-                    local UnitName = strformat(SI_UNIT_NAME, GetUnitName(unitTag))
-                    if UnitName == v.savedName then
-                        if g_effectsList.saved[k] then
-                            g_effectsList.ground[k] = g_effectsList.saved[k]
-                            g_effectsList.ground[k].iconNum = 0
-                            g_effectsList.saved[k] = nil
-                        end
-                    else
-                        if g_effectsList.ground[k] then
-                            g_effectsList.saved[k] = g_effectsList.ground[k]
-                            g_effectsList.ground[k] = nil
-                        end
+    -- TARGET SPECIFIC
+    if unitTag == "reticleover" and not SCB.SV.HideTargetBuffs then
+        -- Handle FAKE DEBUFFS between targets
+        SCB.RestoreSavedFakeEffects()
+        -- Add Name Auras
+        SCB.AddNameAura()
+        -- Display Battle Spirit
+        SCB.LoadBattleSpiritTarget()
+    end
+end
+
+-- Called by EVENT_RETICLE_TARGET_CHANGED listener - Displays recall cooldown
+function SCB.ShowRecallCooldown()
+    local recallRemain, _ = GetRecallCooldown()
+    if recallRemain > 0 then
+        local currentTime = GetGameTimeMilliseconds()
+        LUIE.EffectsList["player1"][ A.Innate_Recall_Penalty ] = {
+            target="player", type=1,
+            id=6811, name=A.Innate_Recall_Penalty, icon='LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds',
+            dur=600000, starts=currentTime, ends=currentTime+recallRemain,
+            forced = "long",
+            restart=true, iconNum=0,
+            unbreakable=1,
+            overrideDur = 600000
+        }
+    end
+end
+
+-- Called by EVENT_RETICLE_TARGET_CHANGED listener - Saves active FAKE debuffs on enemies and moves them back and forth between the active container or hidden.
+function SCB.RestoreSavedFakeEffects()
+    -- Restore Ground Effects
+    for _, effectsList in pairs( {LUIE.EffectsList.ground, LUIE.EffectsList.saved} ) do
+        --local container = containerRouting[context]
+        for k, v in pairs(effectsList) do
+            if v.savedName ~= nil then
+                local unitName = strformat(SI_UNIT_NAME, GetUnitName('reticleover'))
+                if unitName == v.savedName then
+                    if LUIE.EffectsList.saved[k] then
+                        LUIE.EffectsList.ground[k] = LUIE.EffectsList.saved[k]
+                        LUIE.EffectsList.ground[k].iconNum = 0
+                        LUIE.EffectsList.saved[k] = nil
+                    end
+                else
+                    if LUIE.EffectsList.ground[k] then
+                        LUIE.EffectsList.saved[k] = LUIE.EffectsList.ground[k]
+                        LUIE.EffectsList.ground[k] = nil
                     end
                 end
-            end
-        end
-
-        if SCB.SV.HideTargetBuffs then
-            return
-        end
-
-        if not SCB.SV.IgnoreBattleSpiritTarget then
-            if ( ( IsInAvAZone() or IsActiveWorldBattleground() ) and IsUnitPlayer("reticleover") and (GetUnitReaction("reticleover") == UNIT_REACTION_PLAYER_ALLY) ) or GetUnitName(unitTag) == g_currentDuelTarget then
-                g_effectsList.reticleover1[ A.Skill_Battle_Spirit ] = {
-                    type=1,
-                    id=85701, name=A.Skill_Battle_Spirit, icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
-                    dur=0, starts=1, ends=nil,
-                    forced = "short",
-                    restart=true, iconNum=0,
-                }
-            end
-        end
-
-        if not SCB.SV.IgnoreCyrodiilTarget then
-            if IsInAvAZone() and IsUnitPlayer("reticleover") and (GetUnitReaction("reticleover") == UNIT_REACTION_PLAYER_ALLY) then
-                local campaignId = GetCurrentCampaignId()
-                local homeKeep, _, _, _, edgeKeepCount = GetAvAKeepScore(campaignId, GetUnitAlliance("reticleover"))
-                local id
-                local icon
-                local name
-                local stack
-                if edgeKeepCount >= 1 then
-                    if edgeKeepCount == 1 then
-                        id = 111549
-                        icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_1.dds"
-                        name = A.Skill_Edge_Keep_Bonus_1
-                        stack = 1
-                    elseif edgeKeepCount == 2 then
-                        id = 111552
-                        icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_2.dds"
-                        name = A.Skill_Edge_Keep_Bonus_2
-                        stack = 2
-                    elseif edgeKeepCount == 3 then
-                        id = 111553
-                        icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_3.dds"
-                        name = A.Skill_Edge_Keep_Bonus_3
-                        stack = 3
-                    end
-                    g_effectsList.reticleover1[ A.Skill_Edge_Keep_Bonus_1 ] = {
-                        type=1,
-                        id=id, name=name, icon = icon,
-                        dur=0, starts=1, ends=nil,
-                        forced = "short",
-                        restart=true, iconNum=0,
-                        stack = stack,
-                    }
-                end
-                if homeKeep then
-                    g_effectsList.reticleover1[ A.Skill_Home_Keep_Bonus ] = {
-                    type=1,
-                    id=11346, name=A.Skill_Home_Keep_Bonus, icon = "LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds",
-                    dur=0, starts=1, ends=nil,
-                    forced = "short",
-                    restart=true, iconNum=0,
-                    }
-                end
-            end
-        end
-
-        if SCB.SV.StealthStateTarget and not SCB.SV.HideTargetBuffs then
-            local stealthState = GetUnitStealthState ("reticleover")
-            if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
-                g_effectsList.reticleover1[ A.Innate_Hidden ] = {
-                    type=1,
-                    id =20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
-                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                    forced = "short",
-                    restart=true, iconNum=0
-                }
-            elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-                g_effectsList.reticleover1[ A.Innate_Hidden ] = {
-                    type=1,
-                    id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
-                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                    forced = "short",
-                    restart=true, iconNum=0
-                }
-            else
-                g_effectsList.reticleover1[ A.Innate_Hidden ] = nil
-            end
-        end
-
-        if SCB.SV.DisguiseStateTarget and not SCB.SV.HideTargetBuffs then
-            --d("checking for disguise")
-            local disguiseState = GetUnitDisguiseState ("reticleover")
-            --d("Disguise State: " .. disguiseState )
-            if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
-                -- Trigger a buff
-                g_effectsList.reticleover1[ A.Innate_Disguised ] = {
-                    type=1,
-                    id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
-                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                    forced = "short",
-                    restart=true, iconNum=0
-                }
-            -- Else remove buff
-            else
-                g_effectsList.reticleover1[ A.Innate_Disguised ] = nil
             end
         end
     end
 end
 
-function SCB.PlayerCombatState(eventCode, inCombat)
-    if not SCB.SV.HideTargetBuffs then
-        local unitName = GetUnitName('reticleover')
-        if unitName == nil or unitName == "" then return end
-
-        -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
-        if E.AddNameAura[unitName] and GetUnitReaction('reticleover') == UNIT_REACTION_HOSTILE and IsUnitInCombat('reticleover') and not IsUnitPlayer('reticleover') and not IsUnitDead('reticleover') then
-            for k, v in ipairs(E.AddNameAura[unitName]) do
-                local abilityName = GetAbilityName(v.id)
-                local abilityIcon = GetAbilityIcon(v.id)
-                g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
-                    type=1,
-                    id= v.id, name= abilityName, icon= abilityIcon,
-                    dur=0, starts=1, ends=nil,
-                    forced = "short",
-                    restart=true, iconNum=0
-                }
-            end
+-- Called by EVENT_RETICLE_TARGET_CHANGED listener - Displays fake buffs based off unitName (primarily for displaying Boss Immunities)
+function SCB.AddNameAura()
+    local unitName = GetUnitName('reticleover')
+    -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
+    if E.AddNameAura[unitName] and GetUnitReaction('reticleover') == UNIT_REACTION_HOSTILE and not IsUnitPlayer('reticleover') and not IsUnitDead('reticleover') then
+        for k, v in ipairs(E.AddNameAura[unitName]) do
+            local abilityName = GetAbilityName(v.id)
+            local abilityIcon = GetAbilityIcon(v.id)
+            LUIE.EffectsList.reticleover1[ "Name Specific Buff" .. k ] = {
+                type=1,
+                id= v.id, name= abilityName, icon= abilityIcon,
+                dur=0, starts=1, ends=nil,
+                forced = "short",
+                restart=true, iconNum=0
+            }
         end
     end
 end
@@ -3113,7 +2626,7 @@ function SCB.MenuPreview()
             local type = c < 4 and 1 or 2
             local name = ("Test Effect: " .. i )
             local duration = testEffectDurationList[i]
-            g_effectsList[context][ abilityId ] = {
+            LUIE.EffectsList[context][ abilityId ] = {
                 target = context, type=type,
                 id=16415, name=name, icon=icon,
                 dur = duration * 1000,
@@ -3175,7 +2688,7 @@ function SCB.OnUpdate(currentTime)
     end
 
     -- Filter expired events. and build array for sorting
-    for context, effectsList in pairs(g_effectsList) do
+    for context, effectsList in pairs(LUIE.EffectsList) do
         local container = containerRouting[context]
         for k, v in pairs(effectsList) do
             -- Remove effect (that is not permanent and has duration)
@@ -3188,19 +2701,19 @@ function SCB.OnUpdate(currentTime)
                     -- Filter Long-Term effects:
                     -- Always show debuffs and short-term buffs
                     if v.type == 2 or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0 or v.ends-currentTime > 120000) then
-                        tableinsert(buffsSorted[container], v)
+                        table.insert(buffsSorted[container], v)
 
                     -- Show long-term target buffs in same container
                     elseif v.target == "reticleover" and SCB.SV.LongTermEffects_Target then
-                        tableinsert(buffsSorted[container], v)
+                        table.insert(buffsSorted[container], v)
 
                     -- Show long-term player buffs
                     elseif v.target == "player" and SCB.SV.LongTermEffects_Player then
                         -- Choose container for long-term player buffs
                         if SCB.SV.LongTermEffectsSeparate and not (container == "prominentbuffs" or container == "prominentdebuffs") then
-                            tableinsert(buffsSorted.player_long, v)
+                            table.insert(buffsSorted.player_long, v)
                         else
-                            tableinsert(buffsSorted[container], v)
+                            table.insert(buffsSorted[container], v)
                         end
                     end
                 end
@@ -3211,7 +2724,7 @@ function SCB.OnUpdate(currentTime)
     -- Sort effects in container and draw them on screen
     for _, container in pairs(containerRouting) do
         if needs_update[container] then
-            tablesort(buffsSorted[container], buffSort)
+            table.sort(buffsSorted[container], buffSort)
             SCB.updateIcons( currentTime, buffsSorted[container], container )
         end
         needs_update[container] = false
@@ -3224,7 +2737,7 @@ function SCB.OnUpdate(currentTime)
 
 end
 
-function SCB.updateBar( currentTime, sortedList, container )
+function SCB.updateBar(currentTime, sortedList, container)
     local iconsNum = #sortedList
     local istart, iend, istep
 
@@ -3258,7 +2771,7 @@ function SCB.updateBar( currentTime, sortedList, container )
     end
 end
 
-function SCB.updateIcons( currentTime, sortedList, container )
+function SCB.updateIcons(currentTime, sortedList, container)
     -- Special workaround for container with player long buffs. We do not need to update it every 100ms, but rather 3 times less often
     if uiTlw[container].skipUpdate then
         uiTlw[container].skipUpdate = uiTlw[container].skipUpdate + 1
@@ -3335,10 +2848,10 @@ function SCB.updateIcons( currentTime, sortedList, container )
                     leftPadding = g_padding
                 elseif g_horizAlign == RIGHT then
                     anchor = TOPRIGHT
-                    leftPadding = - mathmin(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding
+                    leftPadding = - math.min(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding
                 else
                     anchor = TOP
-                    leftPadding = - 0.5 * ( mathmin(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding )
+                    leftPadding = - 0.5 * ( math.min(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding )
                 end
 
                 buff:ClearAnchors()
@@ -3395,7 +2908,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
             end
 
             if buff.name then
-                buff.name:SetText(zo_strformat("<<C:1>>", effect.name))
+                buff.name:SetText(strformat("<<C:1>>", effect.name))
             end
 
         end
@@ -3410,13 +2923,13 @@ function SCB.updateIcons( currentTime, sortedList, container )
         -- For update remaining text. For temporary effects this is not very efficient, but we have not much such effects
         if remain and not effect.fakeDuration then
             if remain > 86400000 then -- more then 1 day
-                buff.label:SetText( strfmt("%d d", mathfloor( remain/86400000 )) )
+                buff.label:SetText( strfmt("%d d", math.floor( remain/86400000 )) )
             elseif remain > 6000000 then -- over 100 minutes - display XXh
-                buff.label:SetText( strfmt("%dh", mathfloor( remain/3600000 )) )
+                buff.label:SetText( strfmt("%dh", math.floor( remain/3600000 )) )
             elseif remain > 600000 then -- over 10 minutes - display XXm
-                buff.label:SetText( strfmt("%dm", mathfloor( remain/60000 )) )
+                buff.label:SetText( strfmt("%dm", math.floor( remain/60000 )) )
             elseif remain > 60000 or container == "player_long" then
-                local m = mathfloor( remain/60000 )
+                local m = math.floor( remain/60000 )
                 local s = remain/1000 - 60*m
                 buff.label:SetText( strfmt("%d:%.2d", m, s) )
             else
@@ -3452,169 +2965,45 @@ function SCB.updateIcons( currentTime, sortedList, container )
     uiTlw[container].prevIconsCount = iconsNum
 end
 
--- Runs on the EVENT_STEALTH_STATE_CHANGED listener.
--- Watches for changes in a stealth state to display custom buff icon
-function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
-    if SCB.SV.StealthStatePlayer and unitTag == "player" and not SCB.SV.HidePlayerBuffs then
-        if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
-            g_effectsList.player1[ A.Innate_Hidden ] = {
-                type=1,
-                id = 20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-
-        elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-            g_effectsList.player1[ A.Innate_Hidden ] = {
-                type=1,
-                id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-        else
-            g_effectsList.player1[ A.Innate_Hidden ] = nil
-        end
-    end
-
-    if SCB.SV.StealthStateTarget and unitTag == "reticleover" and not SCB.SV.HideTargetBuffs then
-        if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
-            g_effectsList.reticleover1[ A.Innate_Hidden ] = {
-                type=1,
-                id = 20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-
-        elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-            g_effectsList.reticleover1[ A.Innate_Hidden ] = {
-                type=1,
-                id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-        else
-            g_effectsList.reticleover1[ A.Innate_Hidden ] = nil
-        end
-    end
-end
-
-function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
-    if SCB.SV.DisguiseStatePlayer and unitTag == "player" and not SCB.SV.HidePlayerBuffs then
-        if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
-            -- Trigger a buff
-            g_effectsList.player1[ A.Innate_Disguised ] = {
-                target ="player", type=1,
-                id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-
-        -- Else remove buff
-        else
-            g_effectsList.player1[ A.Innate_Disguised ] = nil
-        end
-    end
-
-    if SCB.SV.DisguiseStatePlayer and unitTag == "reticleover" and not SCB.SV.HideTargetBuffs then
-        if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
-            -- Trigger a buff
-            g_effectsList.reticleover1[ A.Innate_Disguised ] = {
-                type=1,
-                id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-        -- Else remove buff
-        else
-            g_effectsList.reticleover1[ A.Innate_Disguised ] = nil
-        end
-    end
-end
-
+-- Runs on EVENT_PLAYER_ACTIVATED listener
 function SCB.OnPlayerActivated(eventCode)
     g_playerActive = true
     g_playerResurrectStage = nil
 
+    -- Reload Effects
+    SCB.ReloadEffects("player")
+
+    -- Resolve Duel Target
+    SCB.DuelStart()
+
+    -- Resolve Mounted icon
     if not SCB.SV.IgnoreMount and IsMounted() then
-        callLater(function() SCB.MountStatus(eventCode, true) end , 50)
-    end
-    if not SCB.SV.IgnoreDisguise then
-        callLater(SCB.InitializeDisguise, 50)
+        callLater(function() SCB.MountStatus(eventCode, true) end, 50)
     end
 
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0
-    or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 then
+    -- Resolve Disguise Icon
+    if not SCB.SV.IgnoreDisguise then
+        callLater(function() SCB.DisguiseItem(nil, BAG_WORN, 10) end, 50)
+    end
+
+    -- Resolve Assistant Icon
+    if not SCB.SV.IgnorePet or not SCB.SV.IgnoreAssistant then
         callLater(function() SCB.CollectibleBuff( eventCode, 0, true) end, 50)
     end
 
-    SCB.ReloadEffects( "player" )
-
-    local duelState, characterName = GetDuelInfo()
-    if duelState == 3 and not SCB.SV.IgnoreBattleSpiritTarget then
-        g_currentDuelTarget = strformat(SI_UNIT_NAME, characterName)
-        SCB.ReloadEffects("reticleover")
-    end
-
+    -- Resolve Werewolf
     if SCB.SV.ShowWerewolf and IsWerewolf() then
         SCB.WerewolfState(nil, true, true)
         -- If player is dead, add unlimited duration Werewolf indicator buff
         if IsUnitDead("player") then
-            SCB.WerewolfState(nil, true, true)
             SetWerewolfIconFrozen()
         end
     end
 
-    if SCB.SV.DisguiseStatePlayer and not SCB.SV.HidePlayerBuffs then
-        local disguiseState = GetUnitDisguiseState ("player")
-        if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
-            -- Trigger a buff
-            g_effectsList.player1[ A.Innate_Disguised ] = {
-                target ="player", type=1,
-                id=50602, name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-        -- Else remove buff
-        else
-            g_effectsList.player1[ A.Innate_Disguised ] = nil
-        end
+    -- Add Bound Aegis buffs if player has it slotted
+    if GetUnitClassId("player") == 2 then
+        SCB.DrawBoundAegisBuffs()
     end
-
-    if SCB.SV.StealthStatePlayer and not SCB.SV.HidePlayerBuffs then
-        local stealthState = GetUnitStealthState ("player")
-        if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
-            g_effectsList.player1[ A.Innate_Hidden ] = {
-                type=1,
-                id = 20299, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-
-        elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-            g_effectsList.player1[ A.Innate_Hidden ] = {
-                type=1,
-                id = 20309, name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-        else
-            g_effectsList.player1[ A.Innate_Hidden ] = nil
-        end
-    end
-
-    -- Load Cyrodiil Buffs
-    SCB.LoadCyrodiilPlayerBuffs()
-    -- Checks for Artificial effects on the player just in case they have no buffs/debuffs present to trigger OnEffectUpdate
-    SCB.ArtificialEffectUpdate()
 
     -- Sets the player to dead if reloading UI or loading in while dead.
     if IsUnitDead("player") then
@@ -3622,60 +3011,13 @@ function SCB.OnPlayerActivated(eventCode)
     end
 end
 
-function SCB.LoadCyrodiilPlayerBuffs()
-    if SCB.SV.HidePlayerBuffs then
-        return
-    end
-    if not SCB.SV.IgnoreCyrodiilPlayer and IsInAvAZone() then
-        local campaignId = GetCurrentCampaignId()
-        local homeKeep, _, _, _, edgeKeepCount = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
-        local id
-        local icon
-        local name
-        local stack
-        if edgeKeepCount >= 1 then
-            if edgeKeepCount == 1 then
-                id = 111549
-                icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_1.dds"
-                name = A.Skill_Edge_Keep_Bonus_1
-                stack = 1
-            elseif edgeKeepCount == 2 then
-                id = 111552
-                icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_2.dds"
-                name = A.Skill_Edge_Keep_Bonus_2
-                stack = 2
-            elseif edgeKeepCount == 3 then
-                id = 111553
-                icon = "LuiExtended/media/icons/abilities/ability_cryodiil_edge_keep_bonus_3.dds"
-                name = A.Skill_Edge_Keep_Bonus_3
-                stack = 3
-            end
-            g_effectsList["player1"][ A.Skill_Edge_Keep_Bonus_1 ] = {
-                target="player", type=1,
-                id=id, name=name, icon = icon,
-                dur=0, starts=1, ends=nil,
-                forced = "long",
-                restart=true, iconNum=0,
-                stack = stack,
-            }
-        end
-        if homeKeep then
-            g_effectsList["player1"][ A.Skill_Home_Keep_Bonus ] = {
-            target = "player", type=1,
-            id=11346, name=A.Skill_Home_Keep_Bonus, icon = "LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds",
-            dur=0, starts=1, ends=nil,
-            forced = "long",
-            restart=true, iconNum=0,
-            }
-        end
-    end
-end
-
+-- Runs on the EVENT_PLAYER_DEACTIVATED listener
 function SCB.OnPlayerDeactivated(eventCode)
     g_playerActive = false
     g_playerResurrectStage = nil
 end
 
+-- Runs on the EVENT_PLAYER_ALIVE listener
 function SCB.OnPlayerAlive(eventCode)
     --[[-- If player clicks "Resurrect at Wayshrine", then player is first deactivated, then he is transferred to new position, then he becomes alive (this event) then player is activated again.
     To register resurrection we need to work in this function if player is already active. --]]--
@@ -3701,6 +3043,7 @@ function SCB.OnPlayerAlive(eventCode)
     So now we'll listen in the vibration event and progress g_playerResurrectStage with first 2 events and then on correct third event we'll create a buff. --]]
 end
 
+-- Runs on the EVENT_PLAYER_DEAD listener
 function SCB.OnPlayerDead(eventCode)
     if not g_playerActive then
         return
@@ -3708,6 +3051,7 @@ function SCB.OnPlayerDead(eventCode)
     g_playerDead = true
 end
 
+-- Runs on the EVENT_VIBRATION listener (detects player resurrection stage)
 function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTriggerMotor, rightTriggerMotor)
     if not g_playerResurrectStage then
         return
@@ -3723,7 +3067,7 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
         -- We got correct sequence, so let us create a buff and reset the g_playerResurrectStage
         g_playerResurrectStage = nil
         local currentTime = GetGameTimeMilliseconds()
-        g_effectsList["player1"]["Resurrection Immunity"] = {
+        LUIE.EffectsList["player1"]["Resurrection Immunity"] = {
             target="player", type=1,
             id=14646, name = A.Innate_Resurrection_Immunity, icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds',
             dur = 10000, starts= currentTime, ends = currentTime + 10000,
@@ -3732,6 +3076,36 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
     else
         -- This event does not seem to have anything to do with player self-resurrection
         g_playerResurrectStage = nil
+    end
+end
+
+-- Runs on EVENT_ACTION_SLOT_UPDATED / EVENT_ACTION_SLOTS_ALLHOTBARS_UPDATED / EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED
+-- Creates Minor Ward/Minor Resolve buffs for Bound Aegis
+function SCB.DrawBoundAegisBuffs()
+    LUIE.EffectsList["player1"][999008] = nil
+    LUIE.EffectsList["player1"][999009] = nil
+
+    -- If we have Consolidate enabled then don't create these auras
+    if SCB.SV.ExtraConsolidate then return end
+
+    for slotNum = 3, 8 do
+        local abilityId = GetSlotBoundId(slotNum)
+        if abilityId == 24163 then
+            LUIE.EffectsList["player1"][999008] = {
+                target ="player", type=1,
+                id=999008, icon = 'esoui/art/icons/ability_buff_minor_resolve.dds', name = A.Skill_Minor_Resolve,
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "long",
+                restart=true, iconNum=0,
+            }
+            LUIE.EffectsList["player1"][999009] = {
+                target ="player", type=1,
+                id=999009, icon = 'esoui/art/icons/ability_buff_minor_ward.dds', name = A.Skill_Minor_Ward,
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "long",
+                restart=true, iconNum=0,
+            }
+        end
     end
 end
 

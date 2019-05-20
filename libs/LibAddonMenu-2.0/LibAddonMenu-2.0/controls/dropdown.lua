@@ -7,10 +7,10 @@
     setFunc = function(var) db.var = var doStuff() end,
     tooltip = "Dropdown's tooltip text.", -- or string id or function returning a string (optional)
     choicesTooltips = {"tooltip 1", "tooltip 2", "tooltip 3"}, -- or array of string ids or array of functions returning a string (optional)
-    sort = "name-up", --or "name-down", "numeric-up", "numeric-down", "value-up", "value-down", "numericvalue-up", "numericvalue-down" (optional) - if not provided, list will not be sorted
-    width = "full", --or "half" (optional)
+    sort = "name-up", -- or "name-down", "numeric-up", "numeric-down", "value-up", "value-down", "numericvalue-up", "numericvalue-down" (optional) - if not provided, list will not be sorted
+    width = "full", -- or "half" (optional)
     scrollable = true, -- boolean or number, if set the dropdown will feature a scroll bar if there are a large amount of choices and limit the visible lines to the specified number or 10 if true is used (optional)
-    disabled = function() return db.someBooleanSetting end, --or boolean (optional)
+    disabled = function() return db.someBooleanSetting end, -- or boolean (optional)
     warning = "May cause permanent awesomeness.", -- or string id or function returning a string (optional)
     requiresReload = false, -- boolean, if set to true, the warning text will contain a notice that changes are only applied after an UI reload and any change to the value will make the "Apply Settings" button appear on the panel which will reload the UI when pressed (optional)
     default = defaults.var, -- default value or function that returns the default value (optional)
@@ -18,12 +18,13 @@
 } ]]
 
 
-local widgetVersion = 18
+local widgetVersion = 20
 local LAM = LibStub("LibAddonMenu-2.0")
 if not LAM:RegisterWidget("dropdown", widgetVersion) then return end
 
 local wm = WINDOW_MANAGER
-local SORT_BY_VALUE         = { ["value"] = {} } 
+local cm = CALLBACK_MANAGER
+local SORT_BY_VALUE         = { ["value"] = {} }
 local SORT_BY_VALUE_NUMERIC = { ["value"] = { isNumeric = true } }
 local SORT_TYPES = {
     name = ZO_SORT_BY_NAME,
@@ -155,11 +156,16 @@ local function GrabSortingInfo(sortInfo)
     return t
 end
 
+local ENTRY_ID = 1
+local LAST_ENTRY_ID = 2
+local OFFSET_X_INDEX = 4
 local DEFAULT_VISIBLE_ROWS = 10
-local SCROLLABLE_ENTRY_TEMPLATE_HEIGHT = 25 -- same as in zo_combobox.lua
-local CONTENT_PADDING = 24
-local SCROLLBAR_PADDING = 16
-local PADDING = GetMenuPadding() / 2 -- half the amount looks closer to the regular dropdown
+local SCROLLABLE_ENTRY_TEMPLATE_HEIGHT = ZO_SCROLLABLE_ENTRY_TEMPLATE_HEIGHT
+local SCROLLBAR_PADDING = ZO_SCROLL_BAR_WIDTH
+local PADDING_X = GetMenuPadding()
+local PADDING_Y = ZO_SCROLLABLE_COMBO_BOX_LIST_PADDING_Y
+local LABEL_OFFSET_X = 2
+local CONTENT_PADDING = PADDING_X * 4
 local ROUNDING_MARGIN = 0.01 -- needed to avoid rare issue with too many anchors processed
 local ScrollableDropdownHelper = ZO_Object:Subclass()
 
@@ -169,10 +175,10 @@ function ScrollableDropdownHelper:New(...)
     return object
 end
 
-function ScrollableDropdownHelper:Initialize(parent, control, visibleRows)
+function ScrollableDropdownHelper:Initialize(panel, control, visibleRows)
     local combobox = control.combobox
     local dropdown = control.dropdown
-    self.parent = parent
+    self.panel = panel
     self.control = control
     self.combobox = combobox
     self.dropdown = dropdown
@@ -183,14 +189,16 @@ function ScrollableDropdownHelper:Initialize(parent, control, visibleRows)
     dropdown.m_dropdown:SetAnchor(TOPLEFT, combobox, BOTTOMLEFT)
 
     -- handle dropdown or settingsmenu opening/closing
-    local function onShow() self:OnShow() end
+    local function onShow() return self:OnShow() end
     local function onHide() self:OnHide() end
-    local function doHide() self:DoHide() end
+    local function doHide(closedPanel)
+        if closedPanel == panel then self:DoHide() end
+    end
 
     ZO_PreHook(dropdown, "ShowDropdownOnMouseUp", onShow)
     ZO_PreHook(dropdown, "HideDropdownInternal", onHide)
     combobox:SetHandler("OnEffectivelyHidden", onHide)
-    parent:SetHandler("OnEffectivelyHidden", doHide)
+    cm:RegisterCallback("LAM-PanelClosed", doHide)
 
     -- dont fade entries near the edges
     local scrollList = dropdown.m_scroll
@@ -202,32 +210,32 @@ function ScrollableDropdownHelper:Initialize(parent, control, visibleRows)
 
     -- adjust scroll content anchor to mimic menu padding
     local scroll = dropdown.m_dropdown:GetNamedChild("Scroll")
-    local anchor1 = {scroll:GetAnchor(0)}
-    local anchor2 = {scroll:GetAnchor(1)}
+    local anchor1 = {select(2, scroll:GetAnchor(0))}
+    local anchor2 = {select(2, scroll:GetAnchor(1))}
+    anchor1[OFFSET_X_INDEX] = PADDING_X - LABEL_OFFSET_X
+    anchor2[OFFSET_X_INDEX] = -anchor1[OFFSET_X_INDEX]
     scroll:ClearAnchors()
-    scroll:SetAnchor(anchor1[2], anchor1[3], anchor1[4], anchor1[5] + PADDING, anchor1[6] + PADDING)
-    scroll:SetAnchor(anchor2[2], anchor2[3], anchor2[4], anchor2[5] - PADDING, anchor2[6] - PADDING)
+    scroll:SetAnchor(unpack(anchor1))
+    scroll:SetAnchor(unpack(anchor2))
     ZO_ScrollList_Commit(scrollList)
-    
+
     -- hook mouse enter/exit
     local function onMouseEnter(control) self:OnMouseEnter(control) end
     local function onMouseExit(control) self:OnMouseExit(control) end
 
     -- adjust row setup to mimic the highlight padding
-    local dataType1 = ZO_ScrollList_GetDataTypeTable(dropdown.m_scroll, 1)
-    local dataType2 = ZO_ScrollList_GetDataTypeTable(dropdown.m_scroll, 2)
+    local dataType1 = ZO_ScrollList_GetDataTypeTable(dropdown.m_scroll, ENTRY_ID)
+    local dataType2 = ZO_ScrollList_GetDataTypeTable(dropdown.m_scroll, LAST_ENTRY_ID)
     local oSetup = dataType1.setupCallback -- both types have the same setup function
     local function SetupEntry(control, data, list)
         oSetup(control, data, list)
-        control.m_label:SetAnchor(LEFT, nil, nil, 2)
+        control.m_label:SetAnchor(LEFT, nil, nil, LABEL_OFFSET_X)
+        control.m_label:SetAnchor(RIGHT, nil, nil, -LABEL_OFFSET_X)
         -- no need to store old ones since we have full ownership of our dropdown controls
         if not control.hookedMouseHandlers then --only do it once per control
             control.hookedMouseHandlers = true
             ZO_PreHookHandler(control, "OnMouseEnter", onMouseEnter)
             ZO_PreHookHandler(control, "OnMouseExit", onMouseExit)
-            -- we could also just replace the handlers
-            --control:SetHandler("OnMouseEnter", onMouseEnter)
-            --control:SetHandler("OnMouseExit", onMouseExit)
         end
     end
     dataType1.setupCallback = SetupEntry
@@ -235,24 +243,61 @@ function ScrollableDropdownHelper:Initialize(parent, control, visibleRows)
 
     -- adjust dimensions based on entries
     local scrollContent = scroll:GetNamedChild("Contents")
-    ZO_PreHook(dropdown, "AddMenuItems", function()
-        local width = PADDING * 2 + zo_max(self:GetMaxWidth(), combobox:GetWidth())
+    dropdown.AddMenuItems = ScrollableDropdownHelper.AddMenuItems
+
+    dropdown.AdjustDimensions = function()
         local numItems = #dropdown.m_sortedItems
+        local contentWidth = self:CalculateContentWidth() + CONTENT_PADDING
         local anchorOffset = 0
         if(numItems > self.visibleRows) then
-            width = width + CONTENT_PADDING + SCROLLBAR_PADDING
-            anchorOffset = -SCROLLBAR_PADDING
             numItems = self.visibleRows
+            contentWidth = contentWidth + SCROLLBAR_PADDING
+            anchorOffset = -SCROLLBAR_PADDING
         end
-        scrollContent:SetAnchor(BOTTOMRIGHT, nil, nil, anchorOffset)
-        local height = PADDING * 2 + numItems * (SCROLLABLE_ENTRY_TEMPLATE_HEIGHT + dropdown.m_spacing) - dropdown.m_spacing + ROUNDING_MARGIN
+
+        local width = zo_max(contentWidth, dropdown.m_container:GetWidth())
+        local height = dropdown:GetEntryTemplateHeightWithSpacing() * numItems - dropdown.m_spacing + (PADDING_Y * 2) + ROUNDING_MARGIN
+
         dropdown.m_dropdown:SetWidth(width)
         dropdown.m_dropdown:SetHeight(height)
-    end)
+        ZO_ScrollList_SetHeight(dropdown.m_scroll, height)
+
+        scrollContent:SetAnchor(BOTTOMRIGHT, nil, nil, anchorOffset)
+    end
+end
+
+local function CreateScrollableComboBoxEntry(self, item, index, isLast)
+    item.m_index = index
+    item.m_owner = self
+    local entryType = isLast and LAST_ENTRY_ID or ENTRY_ID
+    local entry = ZO_ScrollList_CreateDataEntry(entryType, item)
+
+    return entry
+end
+
+function ScrollableDropdownHelper.AddMenuItems(self) -- self refers to the ZO_ScrollableComboBox here
+    ZO_ScrollList_Clear(self.m_scroll)
+
+    local numItems = #self.m_sortedItems
+    local dataList = ZO_ScrollList_GetDataList(self.m_scroll)
+
+    for i = 1, numItems do
+        local item = self.m_sortedItems[i]
+        local entry = CreateScrollableComboBoxEntry(self, item, i, i == numItems)
+        table.insert(dataList, entry)
+    end
+
+    self:AdjustDimensions()
+
+    ZO_ScrollList_Commit(self.m_scroll)
 end
 
 function ScrollableDropdownHelper:OnShow()
     local dropdown = self.dropdown
+
+    -- don't show if there are no entries
+    if #dropdown.m_sortedItems == 0 then return true end
+
     if dropdown.m_lastParent ~= ZO_Menus then
         dropdown.m_lastParent = dropdown.m_dropdown:GetParent()
         dropdown.m_dropdown:SetParent(ZO_Menus)
@@ -262,7 +307,7 @@ end
 
 function ScrollableDropdownHelper:OnHide()
     local dropdown = self.dropdown
-    if dropdown.m_lastParent then 
+    if dropdown.m_lastParent then
         dropdown.m_dropdown:SetParent(dropdown.m_lastParent)
         dropdown.m_lastParent = nil
     end
@@ -275,9 +320,9 @@ function ScrollableDropdownHelper:DoHide()
     end
 end
 
-function ScrollableDropdownHelper:GetMaxWidth()
+function ScrollableDropdownHelper:CalculateContentWidth()
     local dropdown = self.dropdown
-    local dataType = ZO_ScrollList_GetDataTypeTable(dropdown.m_scroll, 1) 
+    local dataType = ZO_ScrollList_GetDataTypeTable(dropdown.m_scroll, 1)
 
     local dummy = dataType.pool:AcquireObject()
     dataType.setupCallback(dummy, {
@@ -344,8 +389,8 @@ function LAMCreateControl.dropdown(parent, dropdownData, controlName)
     dropdown:SetSortsItems(false) -- need to sort ourselves in order to be able to sort by value
 
     if dropdownData.scrollable then
-        local visibleRows = type(dropdownData.scrollable) == "number" and dropdownData.scrollable or DEFAULT_VISIBLE_ROWS 
-        control.scrollHelper = ScrollableDropdownHelper:New(parent, control, visibleRows)
+        local visibleRows = type(dropdownData.scrollable) == "number" and dropdownData.scrollable or DEFAULT_VISIBLE_ROWS
+        control.scrollHelper = ScrollableDropdownHelper:New(LAM.util.GetTopPanel(parent), control, visibleRows)
     end
 
     ZO_PreHook(dropdown, "UpdateItems", function(self)
