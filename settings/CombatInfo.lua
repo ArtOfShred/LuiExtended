@@ -673,8 +673,8 @@ function CI.CreateSettings()
             {
                 -- Show Alerts
                 type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION),
-                tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP),
+                name    = "Display Active Combat Alerts",
+                tooltip = "Enable Active Combat Alerts.",
                 getFunc = function() return CI.SV.alerts.toggles.alertEnable end,
                 setFunc = function(v) CI.SV.alerts.toggles.alertEnable = v end,
                 default = CI.D.alerts.toggles.alertEnable,
@@ -726,7 +726,7 @@ function CI.CreateSettings()
             },
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION),
+                text = "Use the following formatting characters to modify the mitigation alerts:\n%n Source Name\n%t Ability Name",
             },
             {
                 -- Mitigation Aura
@@ -782,8 +782,8 @@ function CI.CreateSettings()
             {
                 -- Alert Timer
                 type    = "checkbox",
-                name    = "Display countdown TIMER",
-                tooltip = "Display the countdown/cast time of the incoming ability",
+                name    = "Display Countdown Timer",
+                tooltip = "Display the countdown/cast time of the incoming ability.",
                 getFunc = function() return CI.SV.alerts.toggles.alertTimer end,
                 setFunc = function(v) CI.SV.alerts.toggles.alertTimer = v end,
                 disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
@@ -802,8 +802,8 @@ function CI.CreateSettings()
             {
                 -- Shared Timer Color
                 type    = "colorpicker",
-                name    = "TIMER COLOR",
-                tooltip = "WOW WE CAN EVEN COLOR THE TIMER TOO?! NEAT!",
+                name    = "Timer Color",
+                tooltip = "Set the color for the Combat Alerts timer.",
                 getFunc = function() return unpack(CI.SV.alerts.colors.alertTimer) end,
                 setFunc = function(r, g, b, a) CI.SV.alerts.colors.alertTimer = { r, g, b, a } CI.SetAlertColors() end,
                 default = {r=CI.D.alerts.colors.alertTimer[1], g=CI.D.alerts.colors.alertTimer[2], b=CI.D.alerts.colors.alertTimer[3]}
@@ -817,8 +817,8 @@ function CI.CreateSettings()
             {
                 -- MITIGATION ENABLE
                 type    = "checkbox",
-                name    = "ENABLE MITIGATION ALERTS (TODO)",
-                tooltip = "TODO ADD A TP",
+                name    = "Enable Mitigation Alerts",
+                tooltip = "Display alerts for abilities that can be mitigated by Block/Dodge/Avoid/Interrupt.",
                 getFunc = function() return CI.SV.alerts.toggles.showAlertMitigate end,
                 setFunc = function(v) CI.SV.alerts.toggles.showAlertMitigate = v end,
                 disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
@@ -828,8 +828,8 @@ function CI.CreateSettings()
             {
                 -- Incoming Ability Filters
                 type = "dropdown",
-                name = "FILTER INCOMING ABILITIES",
-                tooltip = "TODO: Choose whether to show all incoming abilities, only hard CC effects, or only unbreakable CC effects.",
+                name = "Filter Incoming Abilities (WIP)",
+                tooltip = "Choose whether to show all incoming abilities, only hard CC effects, or only unbreakable CC effects.",
                 choices = globalAlertOptions,
                 getFunc = function() return globalAlertOptions[CI.SV.alerts.toggles.alertOptions] end,
                 setFunc = function(value) CI.SV.alerts.toggles.alertOptions = globalAlertOptionsKeys[value] end,
@@ -872,8 +872,8 @@ function CI.CreateSettings()
             {
                 -- Show Crowd Control Border
                 type    = "checkbox",
-                name    = "SHOW CROWD CONTROL COLOR BORDER",
-                tooltip = "COLOR THE FRAME OF THE INCOMING ABILITY ICON BASED OFF THE TYPE OF CC INCOMING (IF ANY)",
+                name    = "Show Color Border for Crowd Control Type (WIP)",
+                tooltip = "Color the Frame of the Incoming Ability Icon based off the type of Crowd Control Incoming (if any).",
                 getFunc = function() return CI.SV.alerts.toggles.showCrowdControlBorder end,
                 setFunc = function(v) CI.SV.alerts.toggles.showCrowdControlBorder = v end,
                 disabled = function() return not CI.SV.alerts.toggles.alertEnable end,
