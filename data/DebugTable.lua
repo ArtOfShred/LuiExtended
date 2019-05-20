@@ -1561,6 +1561,10 @@ LUIE.DebugAuras = {
     [113284] = true, -- Champion of the Hist (Champion of the Hist)
     [113286] = true, -- Minor Heroism (Champion of the Hist)
 
+    [121633] = true, -- Call of the Undertaker (Undertaker's)
+    [121634] = true, -- Lifesteal (Undertaker's)
+    [121635] = true, -- Call of the Undertaker (Undertaker's)
+
     -- Dungeon Sets (Light)
 
     [60418] = true, -- Burning Spellweave

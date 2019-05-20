@@ -3237,6 +3237,9 @@ E.EffectOverride = {
     [113284] = { name = A.Skill_Minor_Heroism, tooltip = A.Set_Champion_of_the_Hist }, -- Champion of the Hist (Champion of the Hist)
     [113286] = { icon = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- Minor Heroism (Champion of the Hist)
 
+    [121634] = { name = A.Skill_Minor_Lifesteal, tooltip = A.Set_Call_of_the_Undertaker }, -- Lifesteal (Undertaker's)
+    [121635] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds', name = A.Skill_Minor_Lifesteal }, -- Call of the Undertaker (Undertaker's)
+
     -- Dungeon Sets (Light)
     [61459] = { icon = 'LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds', tooltip = T.Generic_Spell_Damage_Duration }, -- Burning Spellweave
     [102027] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds', hide = true }, -- Caluurion's Legacy (Fire)
