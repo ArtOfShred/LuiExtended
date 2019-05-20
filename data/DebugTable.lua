@@ -1387,9 +1387,8 @@ LUIE.DebugAuras = {
     [29095] = true, -- Silks of the Sun (of the Sun)
 
     [29101] = true, -- Robes of the Withered Hand (of the Withered Hand)
-    [57172] = true, -- Robes of the Withered Hand (of the Withered Hand)
-    [57173] = true, -- Robes of the Withered Hand (of the Withered Hand)
-    [57175] = true, -- Robes of the Withered Hand (of the Withered Hand)
+    [122755] = true, -- Robes of the Withered Hand (of the Withered Hand)
+    [122756] = true, -- Robes of the Withered Hand (of the Withered Hand)
 
     [71656] = true, -- Trinimac's Valor (of Trinimac's Valor)
     [71664] = true, -- Trinimac's Valor (of Trinimac's Valor)
@@ -2032,7 +2031,6 @@ LUIE.DebugAuras = {
     [69567] = true, -- Reactive Armor Effects (Reactive)
 
     [68973] = true, -- Shield Breaker (of the Shield Breaker)
-    [68974] = true, -- Shield Breaker (of the Shield Breaker)
 
     [79362] = true, -- Thews of the Harbinger (of the Harbinger)
     [79363] = true, -- Thews of the Harbinger (of the Harbinger)
@@ -2104,6 +2102,7 @@ LUIE.DebugAuras = {
 
     [32824] = true, -- Affliction (Afflicted)
     [34787] = true, -- Affliction (Afflicted)
+    [121489] = true, -- Minor Defile (Afflicted)
 
     [117344] = true, -- Beckoning Steel (of Beckoning Steel)
     [29122] = true, -- Beckoning Steel (of Beckoning Steel)

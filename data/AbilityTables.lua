@@ -389,6 +389,7 @@ local AbilityTables = {
     Set_Steadfast_Hero                = 113508,
     Set_Healers_Habit                 = GetString(SI_LUIE_SKILL_SET_HEALERS_HABIT),
     Set_Ward_of_Cyrodiil              = 32837,
+    Set_Affliction                    = 34787,
     Set_Fasallas_Guile                = 76946,
     Set_Sentry                        = 32807,
     Set_Line_Breaker                  = 75753,

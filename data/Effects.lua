@@ -3174,8 +3174,8 @@ E.EffectOverride = {
     [79200] = { tooltip = A.Set_Sithis_Touch }, -- Major Berserk (Sithis' Touch)
     [85592] = { tooltip = A.Set_Skooma_Smuggler }, -- Major Expedition (Skooma Smuggler)
     [34506] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syrabane.dds' }, -- Syrabane's Grip (of Syrabane)
-    [57173] = { icon = 'LuiExtended/media/icons/abilities/ability_set_withered_hand.dds' }, -- Withered Hand
-    [57175] = { icon = 'LuiExtended/media/icons/abilities/ability_set_withered_hand.dds', hide = true }, -- Withered Hand
+    [122755] = { icon = 'LuiExtended/media/icons/abilities/ability_set_withered_hand.dds' }, -- Robes of the Withered Hand
+    [122756] = { icon = 'LuiExtended/media/icons/abilities/ability_set_withered_hand.dds' }, -- Robes of the Withered Hand
     [71657] = { icon = 'LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds' }, -- Trinimac's Valor
     [71658] = { icon = 'LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds' }, -- Trinimac's Valor
     [93026] = { hide = true }, -- Mad Tinkerer (Mad Tinkerer's)
@@ -3432,7 +3432,6 @@ E.EffectOverride = {
     [68940] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds' }, -- Phoenix (of the Phoenix)
     [70405] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds' }, -- Phoenix (of the Phoenix)
     [61771] = { icon = 'LuiExtended/media/icons/abilities/ability_set_powerful_assault.dds', tooltip = T.Generic_Weapon_Spell_Damage_Duration }, -- Powerful Assault (of the Powerful Assault)
-    [68974] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_oblivion.dds' }, -- Shield Breaker (of the Shield Breaker)
     [79363] = { icon = 'esoui/art/icons/achievement_029.dds' }, -- Thews of the Harbinger (of the Harbinger)
     [79469] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon.dds', name = A.Set_Vicecannon_of_Venom, tooltip = T.Set_Vicecanon_of_Venom }, -- Deadly Venom (the Vicecanon's)
     [79471] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon.dds', name = A.Set_Vicecannon_of_Venom }, -- Deadly Venom (the Vicecanon's)
@@ -3464,6 +3463,7 @@ E.EffectOverride = {
 
     -- Cyrodiil Sets (Heavy)
     [34787] = { icon = 'LuiExtended/media/icons/abilities/ability_set_affliction.dds' }, -- Affliction (Afflicted)
+    [121489] = { tooltip = A.Set_Affliction }, -- Minor Defile (Afflicted)
     [29122] = { icon = 'LuiExtended/media/icons/abilities/ability_set_beckoning_steel.dds', tooltip = T.Set_Beckoning_Steel }, -- Beckoning Steel (Beckoning Steel)
 
     [111575] = { icon = 'LuiExtended/media/icons/abilities/ability_set_crest_of_cyrodiil.dds' }, -- Crest of Cyrodiil (Cyrodiil's Crest)
