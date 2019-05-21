@@ -1,3 +1,14 @@
+### Version 5.9.1
+
+General
+- emoved embedded libaries, you will now need to download LibAddonMenu and LibMediaProvider separately.
+- Fixed an issue where LUIE wasn't dependent on LibStub which could cause the addon not to load correctly.
+Buffs & Debuffs
+- Fixed an issue where a missing variable was causing the "Show Icon for Active Assistant" option to throw UI errors.
+- Added custom icons for a few sets added in Elsweyr.
+
+---
+
 ### Version 5.9.0
 
 General
