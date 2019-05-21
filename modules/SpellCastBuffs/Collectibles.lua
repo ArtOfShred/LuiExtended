@@ -5,6 +5,8 @@
 
 local SCB = LUIE.SpellCastBuffs
 
+local E = LUIE.Effects
+
 local strformat = zo_strformat
 local callLater = zo_callLater
 
@@ -84,7 +86,7 @@ function SCB.CollectibleBuff()
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 and not SCB.SV.IgnoreAssistant then
         local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
         local name, description = GetCollectibleInfo(collectible)
-        local iconAssistant = E.AssistantIcons[name] ~= nil and E.AssistantIcons[name] or ''
+        local iconAssistant = E.AssistantIcons[name] or ''
 
         LUIE.EffectsList.player1["AssistantType"] = {
             target="player", type=1,

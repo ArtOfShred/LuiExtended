@@ -3159,6 +3159,8 @@ E.EffectOverride = {
     [113306] = { tooltip = A.Set_Naga_Shaman }, -- Minor Vitality (Naga Shaman)
     [113307] = { tooltip = A.Set_Naga_Shaman }, -- Minor Mending (Naga Shaman)
 
+    [124303] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senche_rahts_grit.dds', tooltip = T.Set_Senche_Rahts_Grit }, -- Senche-Raht's Grit (Senche-Raht's)
+
     -- Overland Sets (Light)
     [75691] = { tooltip = T.Set_Bahrahas_Curse }, -- Bahraha's Curse
     [75707] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds' }, -- Bahraha's Curse
@@ -3209,6 +3211,8 @@ E.EffectOverride = {
     [106860] = { tooltip = A.Set_Gyphons_Ferocity }, -- Minor Expedition (Gyphon's Ferocity)
     [106861] = { tooltip = A.Set_Gyphons_Ferocity }, -- Minor Force (Gyphon's Ferocity)
     [114977] = { icon = 'esoui/art/icons/achievement_murkmire_friend_dead_water.dds' }, -- Dead-Water's Guile (Dead-Water's Guile)
+    [121615] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
+    [121618] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
 
     -- Overland Sets (Heavy)
     [34711] = { icon = 'LuiExtended/media/icons/abilities/ability_set_meridia.dds', tooltip = T.Generic_Blind }, -- Meridia's Blessed Armor (Blessed)
@@ -10800,6 +10804,7 @@ E.FakePlayerBuffs = {
     [83287] = { duration = 12000 }, -- Pirate Skeleton
     [71107] = { duration = 10000 }, -- Briarheart
     [97627] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = A.Set_Ironblood, duration = 10000, debuff = true, shiftId = 97626 }, -- Ironblood
+    [124303] = { duration = 3000 }, -- Senche-Raht's Grit (Senche-Raht's)
 
     -- Player (Basic)
     [973] = { duration = 0 }, -- Sprint

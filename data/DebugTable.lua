@@ -1336,6 +1336,9 @@ LUIE.DebugAuras = {
     [113306] = true, -- Minor Vitality (Naga Shaman)
     [113307] = true, -- Minor Mending (Naga Shaman)
 
+    [121638] = true, -- Senche-Raht's Grit (Senche-Raht's)
+    [124303] = true, -- Senche-Raht's Grit (Senche-Raht's)
+
     -- Overland Sets (All Types)
     [85541] = true, -- Armor of the Trainee (of the Trainee)
 
@@ -1491,6 +1494,10 @@ LUIE.DebugAuras = {
     [113165] = true, -- Dead-Water's Guile (Dead-Water's Guile)
     [113170] = true, -- Dead-Water's Guile (Dead-Water's Guile)
     [114977] = true, -- Dead-Water's Guile (Dead-Water's Guile)
+
+    [121596] = true, -- Vesture of Darloc Brae (Darloc Brae's)
+    [121615] = true, -- Vesture of Darloc Brae (Darloc Brae's)
+    [121618] = true, -- Vesture of Darloc Brae (Darloc Brae's)
 
     -- Overland Sets (Heavy)
 

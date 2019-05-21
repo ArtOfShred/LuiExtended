@@ -785,6 +785,7 @@ local strings = {
     SI_LUIE_SKILL_SET_VARENS_LEGACY =                    "Your next direct damage area of effect attack used within |cFFFFFF<<1>>|r seconds deals additional damage.", -- TODO: Translate
     SI_LUIE_SKILL_SET_MECHANICAL_ACUITY =                "Повышает шанс критического удара Заклинанием и Оружием до |cFFFFFF100|r% в течение |cffffff5|r секунд.",
     SI_LUIE_SKILL_SET_ADEPT_RIDER =                      "Enemies in the dust cloud take Physical Damage every |cffffff1|r second.", -- TODO: Translate
+    SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT =                "Increase healing received by |cffffff6|r% and Physical and Spell Resistance for |cffffff<<1>>|r seconds.",
 
     -- Light / Medium / Heavy Armor Sets
     SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP =                "Enemies in the desecrated ground take Magic Damage every |cffffff1|r second and have their Movement Speed reduced by |cffffff70|r%.\n\nYou heal for |cffffff100|r% of the damage done.", -- TODO: Translate
