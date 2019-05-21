@@ -3159,6 +3159,11 @@ E.EffectOverride = {
     [113306] = { tooltip = A.Set_Naga_Shaman }, -- Minor Vitality (Naga Shaman)
     [113307] = { tooltip = A.Set_Naga_Shaman }, -- Minor Mending (Naga Shaman)
 
+    [124303] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senche_rahts_grit.dds', tooltip = T.Set_Senche_Rahts_Grit }, -- Senche-Raht's Grit (Senche-Raht's)
+
+    [121917] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Magic, tooltipValue2 = 1 }, -- Honor's Scorn (Coldharbour's Favorite)
+    [121913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_love.dds', tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Honor's Love (Coldharbour's Favorite)
+
     -- Overland Sets (Light)
     [75691] = { tooltip = T.Set_Bahrahas_Curse }, -- Bahraha's Curse
     [75707] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds' }, -- Bahraha's Curse
@@ -3209,6 +3214,8 @@ E.EffectOverride = {
     [106860] = { tooltip = A.Set_Gyphons_Ferocity }, -- Minor Expedition (Gyphon's Ferocity)
     [106861] = { tooltip = A.Set_Gyphons_Ferocity }, -- Minor Force (Gyphon's Ferocity)
     [114977] = { icon = 'esoui/art/icons/achievement_murkmire_friend_dead_water.dds' }, -- Dead-Water's Guile (Dead-Water's Guile)
+    [121615] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
+    [121618] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
 
     -- Overland Sets (Heavy)
     [34711] = { icon = 'LuiExtended/media/icons/abilities/ability_set_meridia.dds', tooltip = T.Generic_Blind }, -- Meridia's Blessed Armor (Blessed)
@@ -3236,6 +3243,9 @@ E.EffectOverride = {
     [106868] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds' }, -- Grace of Gloom (Gloom-Graced)
     [113284] = { name = A.Skill_Minor_Heroism, tooltip = A.Set_Champion_of_the_Hist }, -- Champion of the Hist (Champion of the Hist)
     [113286] = { icon = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- Minor Heroism (Champion of the Hist)
+
+    [121634] = { name = A.Skill_Minor_Lifesteal, tooltip = A.Set_Call_of_the_Undertaker }, -- Lifesteal (Undertaker's)
+    [121635] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds', name = A.Skill_Minor_Lifesteal }, -- Call of the Undertaker (Undertaker's)
 
     -- Dungeon Sets (Light)
     [61459] = { icon = 'LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds', tooltip = T.Generic_Spell_Damage_Duration }, -- Burning Spellweave
@@ -10797,6 +10807,7 @@ E.FakePlayerBuffs = {
     [83287] = { duration = 12000 }, -- Pirate Skeleton
     [71107] = { duration = 10000 }, -- Briarheart
     [97627] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = A.Set_Ironblood, duration = 10000, debuff = true, shiftId = 97626 }, -- Ironblood
+    [124303] = { duration = 3000 }, -- Senche-Raht's Grit (Senche-Raht's)
 
     -- Player (Basic)
     [973] = { duration = 0 }, -- Sprint

@@ -393,6 +393,7 @@ local AbilityTables = {
     Set_Fasallas_Guile                = 76946,
     Set_Sentry                        = 32807,
     Set_Line_Breaker                  = 75753,
+    Set_Call_of_the_Undertaker        = 121633,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 

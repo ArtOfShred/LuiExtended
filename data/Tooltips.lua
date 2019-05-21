@@ -407,6 +407,7 @@ LUIE.Tooltips = {
     Set_Varens_Legacy                               = GetString(SI_LUIE_SKILL_SET_VARENS_LEGACY),
     Set_Mechanical_Acuity                           = GetString(SI_LUIE_SKILL_SET_MECHANICAL_ACUITY),
     Set_Adept_Rider                                 = GetString(SI_LUIE_SKILL_SET_ADEPT_RIDER),
+    Set_Senche_Rahts_Grit                           = GetString(SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT),
 
     -- Light / Medium / Heavy Sets
     Set_Bahrahas_Curse                              = GetString(SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP),

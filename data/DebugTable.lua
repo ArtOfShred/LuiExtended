@@ -1336,6 +1336,16 @@ LUIE.DebugAuras = {
     [113306] = true, -- Minor Vitality (Naga Shaman)
     [113307] = true, -- Minor Mending (Naga Shaman)
 
+    [121638] = true, -- Senche-Raht's Grit (Senche-Raht's)
+    [124303] = true, -- Senche-Raht's Grit (Senche-Raht's)
+
+    [121911] = true, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121914] = true, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121915] = true, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121917] = true, -- Honor's Scorn (Coldharbour's Favorite)
+    [121912] = true, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121913] = true, -- Honor's Love (Coldharbour's Favorite)
+
     -- Overland Sets (All Types)
     [85541] = true, -- Armor of the Trainee (of the Trainee)
 
@@ -1492,6 +1502,10 @@ LUIE.DebugAuras = {
     [113170] = true, -- Dead-Water's Guile (Dead-Water's Guile)
     [114977] = true, -- Dead-Water's Guile (Dead-Water's Guile)
 
+    [121596] = true, -- Vesture of Darloc Brae (Darloc Brae's)
+    [121615] = true, -- Vesture of Darloc Brae (Darloc Brae's)
+    [121618] = true, -- Vesture of Darloc Brae (Darloc Brae's)
+
     -- Overland Sets (Heavy)
 
     [32815] = true, -- Meridia's Blessed Armor (Blessed)
@@ -1560,6 +1574,10 @@ LUIE.DebugAuras = {
 
     [113284] = true, -- Champion of the Hist (Champion of the Hist)
     [113286] = true, -- Minor Heroism (Champion of the Hist)
+
+    [121633] = true, -- Call of the Undertaker (Undertaker's)
+    [121634] = true, -- Lifesteal (Undertaker's)
+    [121635] = true, -- Call of the Undertaker (Undertaker's)
 
     -- Dungeon Sets (Light)
 
