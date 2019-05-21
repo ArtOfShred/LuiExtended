@@ -3161,6 +3161,9 @@ E.EffectOverride = {
 
     [124303] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senche_rahts_grit.dds', tooltip = T.Set_Senche_Rahts_Grit }, -- Senche-Raht's Grit (Senche-Raht's)
 
+    [121917] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Magic, tooltipValue2 = 1 }, -- Honor's Scorn (Coldharbour's Favorite)
+    [121913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_love.dds', tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Honor's Love (Coldharbour's Favorite)
+
     -- Overland Sets (Light)
     [75691] = { tooltip = T.Set_Bahrahas_Curse }, -- Bahraha's Curse
     [75707] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds' }, -- Bahraha's Curse

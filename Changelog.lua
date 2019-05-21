@@ -6,8 +6,15 @@
 local strformat = zo_strformat
 
 local changelogMessages = {
+    "|cFFA500LuiExtended Version 5.9.1|r\n",
     "|cFFFF00General:|r",
-    "[*] Updated packaged libraries and removed dependency on LibStub. It is still included for compatibility.",
+    "[*] Removed embedded libaries, you will now need to download LibAddonMenu and LibMediaProvider separately.",
+    "[*] Fixed an issue where LUIE wasn't dependent on LibStub which could cause the addon not to load correctly.",
+    "\n|cFFFF00Buffs & Debuffs:|r",
+    "[*] Fixed an issue where a missing variable was causing the \"Show Icon for Active Assistant\" option to throw UI errors.",
+    "[*] Added custom icons for a few sets added in Elsweyr.",
+    "\n|cFFA500LuiExtended Version 5.9.0|r\n",
+    "|cFFFF00General:|r",
     "[*] Streamlined and updated some code present in modules, which probably won't be noticeable at all but may cause a slight performance increase.",
     "[*] Russian translation updated thanks to @amanozako.",
     "\n|cFFFF00Buffs & Debuffs:|r",

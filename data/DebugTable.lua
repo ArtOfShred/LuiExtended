@@ -1339,6 +1339,13 @@ LUIE.DebugAuras = {
     [121638] = true, -- Senche-Raht's Grit (Senche-Raht's)
     [124303] = true, -- Senche-Raht's Grit (Senche-Raht's)
 
+    [121911] = true, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121914] = true, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121915] = true, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121917] = true, -- Honor's Scorn (Coldharbour's Favorite)
+    [121912] = true, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121913] = true, -- Honor's Love (Coldharbour's Favorite)
+
     -- Overland Sets (All Types)
     [85541] = true, -- Armor of the Trainee (of the Trainee)
 
