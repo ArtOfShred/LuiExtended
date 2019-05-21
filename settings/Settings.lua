@@ -8,7 +8,7 @@ local strformat = zo_strformat
 -- Create Settings Menu
 function LUIE.CreateSettings()
     -- Load LibAddonMenu with backwards compatibility
-    local LAM = _G["LibAddonMenu2"] or LibStub("LibAddonMenu-2.0")
+    local LAM = LibStub("LibAddonMenu-2.0")
 
     local optionsData = {}
 

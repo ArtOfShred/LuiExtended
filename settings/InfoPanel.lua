@@ -12,7 +12,7 @@ local optionsDataInfoPanel = {}
 -- Create Settings Menu
 function PNL.CreateSettings()
     -- Load LibAddonMenu with backwards compatibility
-    local LAM = _G["LibAddonMenu2"] or LibStub("LibAddonMenu-2.0")
+    local LAM = LibStub("LibAddonMenu-2.0")
 
     local panelDataInfoPanel = {
         type = "panel",

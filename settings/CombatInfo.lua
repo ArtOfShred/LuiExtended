@@ -19,7 +19,7 @@ local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Sho
 
 function CI.CreateSettings()
     -- Load LibAddonMenu with backwards compatibility
-    local LAM = _G["LibAddonMenu2"] or LibStub("LibAddonMenu-2.0")
+    local LAM = LibStub("LibAddonMenu-2.0")
 
     -- Get fonts
     local FontsList = {}
