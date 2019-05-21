@@ -1215,6 +1215,18 @@ function UF.CreateSettings()
                 warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and UF.SV.CustomFramesPlayer and UF.SV.HideLabelStamina ) end,
             },
+            {
+                -- Reverse Player Magicka and Stamina
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_REVERSE_RES),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_REVERSE_RES_TP),
+                getFunc = function() return UF.SV.ReverseResourceBars end,
+                setFunc = function(value) UF.SV.ReverseResourceBars = value end,
+                width = "full",
+                default = UF.D.ReverseResourceBars,
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and UF.SV.CustomFramesPlayer ) end,
+            },
         },
     }
 
