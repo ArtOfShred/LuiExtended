@@ -59,7 +59,7 @@ local function SetWerewolfIconTimer(currentTime)
 end
 
 -- Setup Werewolf Timr Icon (Frozen)
-local function SetWerewolfIconFrozen()
+function SCB.SetWerewolfIconFrozen()
     SetWerewolfIcon()
     local context = ResolveContainerContext(g_werewolfId, g_werewolfName)
     LUIE.EffectsList[context]["Werewolf Indicator"] = {
@@ -93,7 +93,7 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
         g_werewolfQuest = g_werewolfQuest + 1
         -- If we didn't return from the above statement this must be quest based werewolf transformation - so just display an unlimited duration passive as the counter.
         if g_werewolfQuest == 2 or onActivation then
-            SetWerewolfIconFrozen()
+            SCB.SetWerewolfIconFrozen()
             g_werewolfCounter = 0
         end
     else
@@ -109,7 +109,7 @@ end
 
 -- Power Trailer for Werewolf Buff - Sets the icon to frozen if power drain stops for 1.1 seconds (Werewolf drains power every 1 second)
 function SCB.PowerTrailer()
-    SetWerewolfIconFrozen()
+    SCB.SetWerewolfIconFrozen()
     eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
 end
 
@@ -155,7 +155,7 @@ function SCB.DevourEffectListener(eventCode, changeType, _, _, unitTag, _, _, _,
     -- Update WW icon while devouring
     if abilityId == 33208 then
         if changeType ~= EFFECT_RESULT_FADED then
-            SetWerewolfIconFrozen()
+            SCB.SetWerewolfIconFrozen()
             g_werewolfDevour = true
         else
             local currentTime = GetGameTimeMilliseconds()

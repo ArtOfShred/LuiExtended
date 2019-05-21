@@ -2449,7 +2449,7 @@ function SCB.OnDeath(eventCode, unitTag, isDead)
 
             -- If werewolf is active, reset the icon so it's not removed (otherwise it flashes off for about a second until the trailer function picks up on the fact that no power drain has occurred.
             if SCB.SV.ShowWerewolf and IsWerewolf() then
-                SetWerewolfIconFrozen()
+                SCB.SetWerewolfIconFrozen()
             end
         else
             for effectType = 1, 2 do
@@ -2996,7 +2996,7 @@ function SCB.OnPlayerActivated(eventCode)
         SCB.WerewolfState(nil, true, true)
         -- If player is dead, add unlimited duration Werewolf indicator buff
         if IsUnitDead("player") then
-            SetWerewolfIconFrozen()
+            SCB.SetWerewolfIconFrozen()
         end
     end
 
@@ -3033,7 +3033,7 @@ function SCB.OnPlayerAlive(eventCode)
     -- Reload werewolf effects
     if SCB.SV.ShowWerewolf and IsWerewolf() then
         SCB.WerewolfState(nil, true, true)
-        SetWerewolfIconFrozen()
+        SCB.SetWerewolfIconFrozen()
     end
 
     -- Start Resurrection Sequence

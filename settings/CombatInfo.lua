@@ -490,7 +490,7 @@ function CI.CreateSettings()
             {
                 type = "button",
                 name = GetString(SI_LUIE_LAM_RESETPOSITION),
-                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_RESET),
+                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_RESET_TP),
                 func = CI.ResetCastBarPosition,
                 width = "half",
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and CI.SV.CastBarEnable ) end,
@@ -646,13 +646,13 @@ function CI.CreateSettings()
         controls = {
             {
                 type = "description",
-                text = GetString(SI_LUIE_LAM_CI_NOTIFICATION_ALERTS_DESC),
+                text = GetString(SI_LUIE_LAM_CI_ALERT_DESCRIPTION),
             },
             -- Unlock Alert Frame
             {
                 type = "checkbox",
-                name = "Unlock Alerts Frame",
-                tooltip = "Unlock the Combat Alerts frame position.",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_UNLOCK),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_UNLOCK_TP),
                 getFunc = function() return alertFrameMovingEnabled end,
                 setFunc = CI.SetMovingStateAlert,
                 width = "half",
@@ -664,7 +664,7 @@ function CI.CreateSettings()
             {
                 type = "button",
                 name = GetString(SI_LUIE_LAM_RESETPOSITION),
-                tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_RESET),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RESET_TP),
                 func = CI.ResetAlertFramePosition,
                 width = "half",
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
@@ -673,8 +673,8 @@ function CI.CreateSettings()
             {
                 -- Show Alerts
                 type    = "checkbox",
-                name    = "Display Active Combat Alerts",
-                tooltip = "Enable Active Combat Alerts.",
+                name    = GetString(SI_LUIE_LAM_CI_ALERT_TOGGLE),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_TOGGLE_TP),
                 getFunc = function() return CI.SV.alerts.toggles.alertEnable end,
                 setFunc = function(v) CI.SV.alerts.toggles.alertEnable = v end,
                 default = CI.D.alerts.toggles.alertEnable,
@@ -685,7 +685,7 @@ function CI.CreateSettings()
                 type = "dropdown",
                 scrollable = true,
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
-                tooltip = "TODO",
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_FONTFACE_TP),
                 choices = FontsList,
                 sort = "name-up",
                 getFunc = function() return CI.SV.alerts.toggles.alertFontFace end,
@@ -698,7 +698,7 @@ function CI.CreateSettings()
                     -- Alert Font Size
                 type = "slider",
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
-                tooltip = "TODO",
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_FONTSIZE_TP),
                 min = 16, max = 64, step = 1,
                 getFunc = function() return CI.SV.alerts.toggles.alertFontSize end,
                 setFunc = function(value) CI.SV.alerts.toggles.alertFontSize = value CI.ApplyFontAlert() CI.ResetAlertSize() end,
@@ -710,7 +710,7 @@ function CI.CreateSettings()
                 -- Alert Font Style
                 type = "dropdown",
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
-                tooltip = "TODO",
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
                 getFunc = function() return CI.SV.alerts.toggles.alertFontStyle end,
@@ -721,7 +721,7 @@ function CI.CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_CT_SHARED_INCOMING_ABILITY_ALERTS),
+                name = GetString(SI_LUIE_LAM_CI_ALERT_HEADER_SHARED),
                 width = "full",
             },
             {
