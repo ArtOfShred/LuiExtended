@@ -6,7 +6,15 @@
 local strformat = zo_strformat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 5.9.1|r\n",
+    "|cFFA500LuiExtended Version 5.9.2|r\n",
+    "|cFFFF00General:|r",
+    "[*] Removed LibStub dependency since it is embedded in both libraries LuiExtended depends on.",
+    "[*] Fixed an issue with the function that loaded LMP that could cause UI Errors.",
+    "\n|cFFFF00Buffs & Debuffs:|r",
+    "[*] Fixed an issue with the Werewolf Buff Icon Option that would cause UI errors when you died in Werewolf form.",
+    "\n|cFFFF00Combat Info:|r",
+    "[*] Added localization and updated tooltips for some of the menu options for Combat Info Alerts.",
+    "\n|cFFA500LuiExtended Version 5.9.1|r\n",
     "|cFFFF00General:|r",
     "[*] Removed embedded libaries, you will now need to download LibAddonMenu and LibMediaProvider separately.",
     "[*] Fixed an issue where LUIE wasn't dependent on LibStub which could cause the addon not to load correctly.",

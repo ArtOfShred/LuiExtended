@@ -1,3 +1,15 @@
+### Version 5.9.2
+
+General
+- Removed LibStub dependency since it is embedded in both libraries LuiExtended depends on.
+- Fixed an issue with the function that loaded LMP that could cause UI Errors.
+Buffs & Debuffs
+- Fixed an issue with the Werewolf Buff Icon Option that would cause UI errors when you died in Werewolf form.
+Combat Info
+- Added localization and updated tooltips for some of the menu options for Combat Info Alerts.
+
+---
+
 ### Version 5.9.1
 
 General
@@ -134,7 +146,7 @@ Buffs & Debuffs
 
 Chat Announcements
 - Occasionally "Champion Point Gained" Center Screen Announcements can trigger at the same time, causing the output to display the wrong Champion Points gained. Added a small throttle to prevent this.
-    
+
 Combat Info
 - Added a redundant check in Combat Info to stop possible duplicate controls for Bar Highlight from being created and throwing UI errors.
 
@@ -461,7 +473,7 @@ Buffs and Debuffs
 
 ### Version 5.3
 
-General 
+General
 - Did a pass on custom override tables for Templar Skills, Destruction Staff, Restoration Staff, Fighter's Guild, and Medium Armor. Many effects are now fixed to show the proper names and icons for Buffs and Debuffs and Combat Text. Additionally many erroneous auras that displayed now longer show up - such as pointless placeholder effects when the healing effect from Healing Ward fading triggered. Bar Highlight tracking for Combat Info has been updated to track many more abilities both offensive and defensive in these ability categories.
 - The above support extends to additional addons if they use GetAbilityName() or GetAbilityIcon() functions - For example Combat Metrics will show the correct icon/name for incoming healing tracked from Templar/Restoration Staff skills with LUI Extended enabled. Previously many healing abilities were named incorrectly, a good example being the initial heal from Healing Ward being named "Grand Healing."
 - General cleanup - Removed some un-needed hooks and a few lines of outdated code from various components.
@@ -1088,5 +1100,5 @@ Chat Announcements
 Unit Frames
 - Added the ability to individually control the size of custom Magic and Stamina bar.
 - Added the ability to hide the Magicka or Stamina bar labels, or hide the bars entirely.
-- Updated the icons on unit frames to be more consistent, as well as replaced the execute skull texture. 
+- Updated the icons on unit frames to be more consistent, as well as replaced the execute skull texture.
 - Added option to choose method of name display for player targets - Character Name, Display Name, or both.
