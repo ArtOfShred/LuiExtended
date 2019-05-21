@@ -12,9 +12,9 @@ local optionsDataCombatText = {}
 
 function CT.CreateSettings()
     -- Load LibAddonMenu with backwards compatibility
-    local LAM = _G["LibAddonMenu2"] or LibStub("LibAddonMenu-2.0")
+    local LAM = LibStub("LibAddonMenu-2.0")
     -- Load LibMediaProvider with backwards compatibility
-    local LMP = _G["LibMediaProvider"] or LibStub("LibMediaProvider-1.0")
+    local LMP = LibStub("LibMediaProvider-1.0")
 
     -- Get fonts
     local FontsList = {}

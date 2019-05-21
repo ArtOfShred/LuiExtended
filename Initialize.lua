@@ -16,12 +16,9 @@ local function LoadSavedVars()
     end
 end
 
--- Load additional fonts and status bar textures from LMP if it is present in environment
+-- Load additional fonts and status bar textures from LMP
 local function LoadMedia()
-    local LMP = _G["LibMediaProvider"] or LibStub("LibMediaProvider-1.0")
-    if LMP == nil then
-        return
-    end
+    local LMP = LibStub("LibMediaProvider-1.0")
 
     -- Update Fonts
     for _, f in pairs(LMP:List(LMP.MediaType.FONT)) do
