@@ -1346,6 +1346,12 @@ LUIE.DebugAuras = {
     [121912] = true, -- Coldharbour's Favorite (Coldharbour's Favorite)
     [121913] = true, -- Honor's Love (Coldharbour's Favorite)
 
+    [121729] = true, -- Vastarie's Tutelage (Vastarie's Tutelage)
+    [123717] = true, -- Vastarie's Tutelage (Vastarie's Tutelage)
+    [124242] = true, -- Vastarie's Tutelage (Vastarie's Tutelage)
+    [123715] = true, -- Vastarie's Tutelage (Vastarie's Tutelage)
+    [124574] = true, -- Vastarie's Tutelage (Vastarie's Tutelage)
+
     -- Overland Sets (All Types)
     [85541] = true, -- Armor of the Trainee (of the Trainee)
 
@@ -2001,6 +2007,27 @@ LUIE.DebugAuras = {
 
     [109088] = true, -- Ideal Aegis of Galenwe (Galenwe's)
     [109989] = true, -- Empower (Galenwe's)
+
+    -- Trial Sets (Sunspire)
+    [121823] = true, -- False God's Devotion (False God's Devotion)
+    [121827] = true, -- Major Expedition (False God's Devotion)
+    [121829] = true, -- False God's Devotion (False God's Devotion)
+
+    [124799] = true, -- Perfected False God's Devotion (Perfected False God's Devotion)
+    [124801] = true, -- Major Expedition (Perfected False God's Devotion)
+    [124800] = true, -- Perfected False God's Devotion (Perfected False God's Devotion)
+
+    [121894] = true, -- Eye of Nahviintaas (Nahviintaas')
+    [121895] = true, -- Eye of Nahviintaas (Nahviintaas')
+    [121898] = true, -- Eye of Nahviintaas (Nahviintaas')
+    [124795] = true, -- Tracking Buff (Nahviintaas')
+    [122812] = true, -- Eye of Nahviintaas (Nahviintaas')
+
+    [121867] = true, -- Tooth of Lokkestiiz (Lokkestiiz's)
+    [121871] = true, -- Major Slayer (Lokkestiiz's)
+
+    [121875] = true, -- Claw of Yolnakhriin (Yolnakriin's)
+    [121878] = true, -- Minor Courage (Yolnakriin's)
 
     -- Battleground Sets
     [92908] = true, -- Major Expedition (Coward's Gear)

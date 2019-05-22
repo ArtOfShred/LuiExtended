@@ -58,6 +58,7 @@ LUIE.Tooltips = {
     Skill_Minor_Heroism                             = GetString(SI_LUIE_SKILL_MINOR_HEROISM_TP),
     Skill_Major_Heroism                             = GetString(SI_LUIE_SKILL_MAJOR_HEROISM_TP),
     Skill_Minor_Toughness                           = GetString(SI_LUIE_SKILL_MINOR_TOUGHNESS_TP),
+    Skill_Minor_Courage                             = GetString(SI_LUIE_SKILL_MINOR_COURAGE_TP),
     Skill_Major_Courage                             = GetString(SI_LUIE_SKILL_MAJOR_COURAGE_TP),
 
     -- Major/Minor Debuffs
@@ -408,6 +409,8 @@ LUIE.Tooltips = {
     Set_Mechanical_Acuity                           = GetString(SI_LUIE_SKILL_SET_MECHANICAL_ACUITY),
     Set_Adept_Rider                                 = GetString(SI_LUIE_SKILL_SET_ADEPT_RIDER),
     Set_Senche_Rahts_Grit                           = GetString(SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT),
+    Set_Vastaries_Tutelage                          = GetString(SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE),
+    Set_Eye_of_Nahviintaas                          = GetString(SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS),
 
     -- Light / Medium / Heavy Sets
     Set_Bahrahas_Curse                              = GetString(SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP),

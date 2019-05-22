@@ -151,6 +151,7 @@ local strings = {
     SI_LUIE_SKILL_MINOR_HEROISM_TP =                     "Gain |cffffff1|r Ultimate every |cffffff1.5|r seconds.",
     SI_LUIE_SKILL_MAJOR_HEROISM_TP =                     "Gain |cffffff3|r Ultimate every |cffffff1.5|r seconds.",
     SI_LUIE_SKILL_MINOR_TOUGHNESS_TP =                   "Increase Max Health by |cffffff10|r%.",
+    SI_LUIE_SKILL_MINOR_COURAGE_TP =                     "Increase Weapon and Spell Damage by |cffffff129|r.",
     SI_LUIE_SKILL_MAJOR_COURAGE_TP =                     "Increase Weapon and Spell Damage by |cffffff258|r.",
 
     -- Major / Minor Debuffs
@@ -786,6 +787,7 @@ local strings = {
     SI_LUIE_SKILL_SET_MECHANICAL_ACUITY =                "Increase Weapon and Spell Critical by |cFFFFFF100|r% for |cffffff5|r seconds.",
     SI_LUIE_SKILL_SET_ADEPT_RIDER =                      "Enemies in the dust cloud take Physical Damage every |cffffff1|r second.",
     SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT =                "Increase healing received by |cffffff6|r% and Physical and Spell Resistance for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE =               "Increase Weapon and Spell Damage and reduce the Magicka, Stamina, and Health cost of abilities by |cffffff10|r% for |cffffff<<1>>|r seconds.",
 
     -- Light / Medium / Heavy Armor Sets
     SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP =                "Enemies in the desecrated ground take Magic Damage every |cffffff1|r second and have their Movement Speed reduced by |cffffff70|r%.\n\nYou heal for |cffffff100|r% of the damage done.",
@@ -836,6 +838,7 @@ local strings = {
     SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP =             "Standing in the ring grants you a stack of Siroria's Boon every |cffffff1|r second.",
     SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Increase Spell Damage by |cffffff30|r for |cffffff5|r seconds, stacking up to |cffffff20|r times.",
     SI_LUIE_SKILL_SET_RELEQUENS_TP =                     "Afflicted with Physical damage every |cffffff1|r second for |cffffff5|r seconds.",
+    SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS =               "Reduce the Magicka, Stamina, and Health cost of abilities by |cffffff12|r% for |cffffff<<1>>|r seconds.",
 
     -- Battleground Sets
     SI_LUIE_SKILL_SET_COWARDS_GEAR =                     "Coward's Gear",

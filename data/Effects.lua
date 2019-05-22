@@ -2273,6 +2273,7 @@ E.TooltipNameOverride = {
     [A.Skill_Minor_Heroism]         = T.Skill_Minor_Heroism,
     [A.Skill_Major_Heroism]         = T.Skill_Major_Heroism,
     [A.Skill_Minor_Toughness]       = T.Skill_Minor_Toughness,
+    [A.Skill_Minor_Courage]         = T.Skill_Minor_Courage,
     [A.Skill_Major_Courage]         = T.Skill_Major_Courage,
 
     -- Major/Minor Debuffs
@@ -3160,9 +3161,11 @@ E.EffectOverride = {
     [113307] = { tooltip = A.Set_Naga_Shaman }, -- Minor Mending (Naga Shaman)
 
     [124303] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senche_rahts_grit.dds', tooltip = T.Set_Senche_Rahts_Grit }, -- Senche-Raht's Grit (Senche-Raht's)
-
     [121917] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Generic_Magic, tooltipValue2 = 1 }, -- Honor's Scorn (Coldharbour's Favorite)
     [121913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_love.dds', tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Honor's Love (Coldharbour's Favorite)
+
+    [123717] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = T.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
+    [123715] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = T.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
 
     -- Overland Sets (Light)
     [75691] = { tooltip = T.Set_Bahrahas_Curse }, -- Bahraha's Curse
@@ -3424,6 +3427,19 @@ E.EffectOverride = {
     [109086] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = A.Set_Arms_of_Relequen }, -- Ideal Arms of Relequen (Relequen's)
     [109976] = { tooltip = A.Set_Aegis_of_Galenwe }, -- Empower (Aegis of Galenwe)
     [109989] = { tooltip = A.Set_Aegis_of_Galenwe }, -- Empower (Ideal Aegis of Galenwe)
+
+    -- Trial Sets (Sunspire)
+    [121827] = { tooltip = A.Set_False_Gods_Devotion }, -- Major Expedition (False God's Devotion)
+    [121829] = { icon = 'esoui/art/icons/achievement_els_sunspire_veteran.dds' }, -- False God's Devotion (False God's Devotion)
+    [124801] = { tooltip = A.Set_False_Gods_Devotion }, -- Major Expedition (Perfected False God's Devotion)
+    [124800] = { icon = 'esoui/art/icons/achievement_els_sunspire_veteran.dds', name = A.Set_False_Gods_Devotion }, -- False God's Devotion (Perfected False God's Devotion)
+
+    [121898] = { icon = 'esoui/art/icons/achievement_els_sunspire_flavor_3.dds', tooltip = T.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
+    [122812] = { icon = 'esoui/art/icons/achievement_els_sunspire_flavor_3.dds', tooltip = T.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
+
+    [121871] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds', tooltip = T.Skill_Major_Slayer }, -- Major Slayer (Lokkestiiz's)
+
+    [121878] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', tooltip = A.Set_Claw_of_Yolnakhriin }, -- Minor Courage (Yolnakriin's)
 
     -- Battleground Sets
     [92908] = { tooltip = A.Set_Cowards_Gear }, -- Major Expedition (Coward's Gear)

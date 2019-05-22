@@ -47,6 +47,7 @@ local AbilityTables = {
     Skill_Minor_Heroism               = 38746,
     Skill_Major_Heroism               = 61709,
     Skill_Minor_Toughness             = 46542,
+    Skill_Minor_Courage               = 121878,
     Skill_Major_Courage               = 66902,
 
     -- Major/Minor Debuffs
@@ -394,6 +395,8 @@ local AbilityTables = {
     Set_Sentry                        = 32807,
     Set_Line_Breaker                  = 75753,
     Set_Call_of_the_Undertaker        = 121633,
+    Set_False_Gods_Devotion           = 121823,
+    Set_Claw_of_Yolnakhriin           = 121875,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 
