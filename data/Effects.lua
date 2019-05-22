@@ -781,6 +781,11 @@ E.EffectCreateSkillAura = {
     [106867] = { alwaysShow = true, abilityId = 106865 }, -- Major Evasion --> Grace of Gloom
     [116742] = { alwaysShow = true, abilityId = 116775, requiredStack = 10 }, -- Precision --> Minor Force (Tzogvin's Warband)
 
+    -- Cyrodiil Artifacts (Volendrung)
+    [116374] = { removeOnEnd = false, consolidate = true, abilityId = 116095 }, -- Major Expedition -> Pariah's Resolve
+    [116371] = { removeOnEnd = false, consolidate = true, abilityId = 116095 }, -- Major Brutality -> Pariah's Resolve
+    [116385] = { removeOnEnd = false, consolidate = true, abilityId = 116095 }, -- Major Endurance -> Pariah's Resolve
+
     -- NPC's
     -- Always Show = show regardless of menu setting
     [65235] = { alwaysShow = true, removeOnEnd = true, abilityId = 33097 }, -- Enrage (Vosh Rakh Devoted)
@@ -1251,6 +1256,14 @@ E.BarHighlightOverride = {
     [61519] = { newId = 61522 }, -- Lingering Flare --> Nova
     [61524] = { newId = 61528 }, -- Scorching Flare
     [40237] = { newId = 40238 }, -- Reviving Barrier --> Reviving Barrier Heal
+
+    ---------------------------
+    -- Volendrung -------------
+    ---------------------------
+
+    [116095] = { showFakeAura = true, noRemove = true }, -- Pariah's Resolve
+
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -7925,6 +7938,14 @@ E.EffectOverride = {
     [19039] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_forward_camp_ep.dds', name = A.Skill_Pact_Forward_Camp }, -- Ebonheart Forward Camp
     [19040] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_forward_camp_ad.dds', name = A.Skill_Dominion_Forward_Camp }, -- Aldmeri Forward Camp
     [19041] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_forward_camp_dc.dds', name = A.Skill_Covenant_Forward_Camp }, -- Daggerfall Forward Camp
+
+    -- Volendrung
+    [118500] = { icon = 'esoui/art/icons/achievement_ava_artifact_kill_someone_with_volumdrum.dds' }, -- Volendrung (Volendrung)
+
+    [116374] = { tooltip = A.Skill_Pariahs_Resolve, consolidate = true }, -- Major Expedition (Pariah's Resolve)
+    [116371] = { tooltip = A.Skill_Pariahs_Resolve, consolidate = true }, -- Major Brutality (Pariah's Resolve)
+    [116385] = { tooltip = A.Skill_Pariahs_Resolve, consolidate = true }, -- Major Endurance (Pariah's Resolve)
+    [116366] = { tooltip = T.Innate_Snare_Immobilize_Immunity }, -- Major Endurance (Pariah's Resolve)
 
     -- Siege Warfare
     [35106] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_firepot_trebuchet.dds' , name = A.Skill_Firepot_Trebuchet }, -- Fire (Firepot Trebuchet)

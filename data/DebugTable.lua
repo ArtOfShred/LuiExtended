@@ -14309,6 +14309,17 @@ LUIE.DebugAuras = {
     [19040] = true, -- Aldmeri Forward Camp
     [19041] = true, -- Daggerfall Forward Camp
 
+    -- Volendrung
+    [118500] = true, -- Volendrung (Volendrung)
+    [118507] = true, -- Volendrung Passive (Volendrung)
+    [118509] = true, -- Set Volendrung Stats (Volendrung)
+
+    [116095] = true, -- Pariah's Resolve (Pariah's Resolve)
+    [116374] = true, -- Major Expedition (Pariah's Resolve)
+    [116371] = true, -- Major Brutality (Pariah's Resolve)
+    [116385] = true, -- Major Endurance (Pariah's Resolve)
+    [116366] = true, -- Pariah's Resolve (Pariah's Resolve)
+
     -- Siege Warfare
     [35106] = true, -- Fire (Firepot Trebuchet)
     [35099] = true, -- Ice Damage (Iceball Trebuchet)
@@ -14320,6 +14331,9 @@ LUIE.DebugAuras = {
     [35136] = true, -- Meatbag (Meatbag Catapult)
     [35132] = true, -- Oil Pot (Oil Catapult)
     [33348] = true, -- Practice Siege Repair Kit (Practice Siege Repair Kit)
+
+    -- Chaos Magic
+    [70362] = true, -- Remove
 
     -------------------------------------
     -- BATTLEGROUNDS --------------------
