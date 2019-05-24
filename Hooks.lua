@@ -4,6 +4,7 @@
 --]]
 
 local strformat = zo_strformat
+local printToChat = LUIE.PrintToChat
 
 function LUIE.InitializeHooks()
         -- Hook for Icon/Name changes
