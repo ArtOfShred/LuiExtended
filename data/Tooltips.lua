@@ -885,6 +885,8 @@ LUIE.Tooltips = {
     Skill_Elder_Scroll_Ni_Mohk                      = strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22297)),
     Skill_Elder_Scroll_Alma_Ruma                    = strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22299)),
 
+    Skill_Ruinous_Cyclone                           = GetString(SI_LUIE_SKILL_RUINOUS_CYCLONE),
+
     -- ---------------------------------------------------
     -- BATTLEGROUNDS -------------------------------------
     -- ---------------------------------------------------

@@ -1261,6 +1261,7 @@ E.BarHighlightOverride = {
     -- Volendrung -------------
     ---------------------------
 
+    [116093] = { newId = 116364 }, -- Rourken's Rebuke
     [116095] = { showFakeAura = true, noRemove = true }, -- Pariah's Resolve
 
 
@@ -2138,6 +2139,14 @@ E.EffectHideSCT = {
     [113769] = true, -- Caltrops (Caltrops)
     [113770] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [113771] = true, -- Razor Caltrops (Razor Caltrops)
+
+    ----------------------------
+    -- Artifacts
+    ----------------------------
+
+    -- Volendrung
+    [116763] = true, -- Volendrung Heavy Attack (2H) (Volendrung)
+    [116680] = true, -- Ebony Cyclone (Ruinous Cyclone)
 
     -- NPC Basic
     [36845] = true, -- Shadow Cloak Stun Remover
@@ -7940,12 +7949,26 @@ E.EffectOverride = {
     [19041] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_forward_camp_dc.dds', name = A.Skill_Covenant_Forward_Camp }, -- Daggerfall Forward Camp
 
     -- Volendrung
-    [118500] = { icon = 'esoui/art/icons/achievement_ava_artifact_kill_someone_with_volumdrum.dds' }, -- Volendrung (Volendrung)
+    [118500] = { icon = 'LuiExtended/media/icons/abilities/ability_volendrung_passive.dds' }, -- Volendrung (Volendrung)
+
+    [116762] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_light.dds', name = A.Skill_Light_Attack }, -- Volendrung Light Attack (Volendrung)
+    [116765] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_medium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack Partial (Volendrung)
+    [116767] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_heavy.dds' }, -- Heavy Attack (Volendrung)
+    [116766] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_volendrung_attack_restore.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (2H) (Volendrung)
+    [118501] = { icon = 'LuiExtended/media/icons/abilities/ability_volendrung_damage_shield.dds', name = A.Skill_Consume_Lifeforce }, -- Damage Shield (Volendrung)
+    [118504] = { icon = 'LuiExtended/media/icons/abilities/ability_volendrung_damage_shield.dds', name = A.Skill_Consume_Lifeforce, tooltip = T.Generic_Damage_Shield_Duration }, -- Damage Shield (Volendrung)
 
     [116374] = { tooltip = A.Skill_Pariahs_Resolve, consolidate = true }, -- Major Expedition (Pariah's Resolve)
     [116371] = { tooltip = A.Skill_Pariahs_Resolve, consolidate = true }, -- Major Brutality (Pariah's Resolve)
     [116385] = { tooltip = A.Skill_Pariahs_Resolve, consolidate = true }, -- Major Endurance (Pariah's Resolve)
     [116366] = { tooltip = T.Innate_Snare_Immobilize_Immunity }, -- Major Endurance (Pariah's Resolve)
+
+    [116365] = { icon = 'esoui/art/icons/ability_artifact_volendrung_001.dds' }, -- Rourken's Rebuke (Rourken's Rebuke)
+    [116364] = { tooltip = T.Generic_Knockback }, -- Rourken's Rebuke (Rourken's Rebuke)
+
+    [116096] = { tooltip = T.Skill_Ruinous_Cyclone }, -- Ruinous Cyclone (Ruinous Cyclone)
+    [116669] = { icon = 'esoui/art/icons/ability_artifact_volendrung_006.dds', name = A.Skill_Ruinous_Cyclone, tooltip = T.Generic_AOE_Physical, tooltipValue2 = 0.5, groundLabel = true }, -- Ebony Cyclone (Ruinous Cyclone)
+    [116680] = { icon = 'esoui/art/icons/ability_artifact_volendrung_006.dds', name = A.Skill_Ruinous_Cyclone }, -- Ebony Cyclone (Ruinous Cyclone)
 
     -- Siege Warfare
     [35106] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_firepot_trebuchet.dds' , name = A.Skill_Firepot_Trebuchet }, -- Fire (Firepot Trebuchet)
@@ -11167,6 +11190,9 @@ E.AddGroundDamageAura = {
     [38561] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Caltrops (Caltrops)
     [40267] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [40252] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Razor Caltrops (Razor Caltrops)
+
+    -- Volendrung
+    [116669] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ebony Cyclone (Ruinous Cyclone)
 
     --------------------
     -- TRAPS

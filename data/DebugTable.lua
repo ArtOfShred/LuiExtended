@@ -14314,11 +14314,33 @@ LUIE.DebugAuras = {
     [118507] = true, -- Volendrung Passive (Volendrung)
     [118509] = true, -- Set Volendrung Stats (Volendrung)
 
+    [116762] = true, -- Volendrung Light Attack (Volendrung)
+    [116763] = true, -- Volendrung Heavy Attack (2H) (Volendrung)
+    [116765] = true, -- Heavy Attack Partial (Volendrung)
+    [116767] = true, -- Heavy Attack (Volendrung)
+    [116766] = true, -- Heavy Attack (2H) (Volendrung)
+
+    [118501] = true, -- Heal Self (Volendrung)
+    [118504] = true, -- Damage Shield (Volendrung)
+
+    [116093] = true, -- Rourken's Rebuke (Rourken's Rebuke)
+    [116365] = true, -- Rourken's Rebuke (Rourken's Rebuke)
+    [116364] = true, -- Rourken's Rebuke (Rourken's Rebuke)
+
+    [116094] = true, -- Malacath's Vengeance (Malacath's Vengeance)
+
+    [117979] = true, -- Accursed Charge (Accursed Charge)
+    [117980] = true, -- Accursed Charge (Accursed Charge)
+
     [116095] = true, -- Pariah's Resolve (Pariah's Resolve)
     [116374] = true, -- Major Expedition (Pariah's Resolve)
     [116371] = true, -- Major Brutality (Pariah's Resolve)
     [116385] = true, -- Major Endurance (Pariah's Resolve)
     [116366] = true, -- Pariah's Resolve (Pariah's Resolve)
+
+    [116096] = true, -- Ruinous Cyclone (Ruinous Cyclone)
+    [116669] = true, -- Ebony Cyclone (Ruinous Cyclone)
+    [116680] = true, -- Ebony Cyclone (Ruinous Cyclone)
 
     -- Siege Warfare
     [35106] = true, -- Fire (Firepot Trebuchet)
@@ -14334,6 +14356,8 @@ LUIE.DebugAuras = {
 
     -- Chaos Magic
     [70362] = true, -- Remove
+    [70365] = true, -- Remove
+    [27239] = true, -- Explosion
 
     -------------------------------------
     -- BATTLEGROUNDS --------------------
