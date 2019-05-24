@@ -640,6 +640,12 @@ LUIE.Tooltips = {
     Skill_Sleet_Storm                               = GetString(SI_LUIE_SKILL_SLEET_STORM_TP),
     Skill_Permafrost                                = GetString(SI_LUIE_SKILL_PERMAFROST_TP),
 
+    -- Necromancer
+    Skill_Flame_Skull                               = GetString(SI_LUIE_SKILL_FLAME_SKULL_TP),
+    Skill_Ricochet_Skull                            = GetString(SI_LUIE_SKILL_RICOCHET_SKULL_TP),
+
+    Skill_Blastbones                                = GetString(SI_LUIE_SKILL_BLASTBONES_TP),
+
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------
     ----------------------------------------------------------------

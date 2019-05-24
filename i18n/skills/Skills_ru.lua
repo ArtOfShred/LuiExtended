@@ -450,6 +450,12 @@ local strings = {
     SI_LUIE_SKILL_PERMAFROST_TP =                        "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF40|r% every |cFFFFFF1|r second.\n\nDamaging an enemy three times with the storm will stun them for |cFFFFFF3|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_PERMAFROST_GROUND_TP =                 "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF40|r%.\n\nIf you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.",
 
+    -- Necromancer
+    SI_LUIE_SKILL_FLAME_SKULL_TP =                       "Every third cast of <<2>> deals |cFFFFFF20|r% increased damage.",
+    SI_LUIE_SKILL_RICOCHET_SKULL_TP =                    "Every third cast of Ricochet Skull deals |cFFFFFF20|r% increased damage and will bounce up to |cFFFFFF2|r times to other nearby enemies.",
+
+    SI_LUIE_SKILL_BLASTBONES_TP =                        "A flaming skeleton runs toward your target and explodes when it gets close to them, dealing Flame Damage to all enemies within |cFFFFFF6|r meters.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.",
+
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------
     ----------------------------------------------------------------

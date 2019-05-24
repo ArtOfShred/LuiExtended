@@ -4772,6 +4772,19 @@ E.EffectOverride = {
     [88863] = { groundLabel = true, tooltip = T.Skill_Permafrost_Ground, stack = 1, stackAdd = 1, stackMax = 3 }, -- Permafrost (Permafrost)
 
     ----------------------------------------------------------------
+    -- NECROMANCER ACTIVE ABILITIES --------------------------------
+    ----------------------------------------------------------------
+
+    -- Flame Skull / Venom Skull / Ricochet Skull
+    [114131] = { tooltip = T.Skill_Flame_Skull, tooltipValue2 = GetAbilityName(114108) }, -- Flame Skull (Flame Skull)
+    [117625] = { tooltip = T.Skill_Flame_Skull, tooltipValue2 = GetAbilityName(117629) }, -- Venom Skull (Venom Skull)
+    [117638] = { tooltip = T.Skill_Ricochet_Skull }, -- Ricochet Skull (Ricochet Skull)
+
+    -- Blastbones
+    [114862] = { tooltip = T.Skill_Blastbones }, -- Blastbones (Blastbones)
+    [114863] = { icon = 'esoui/art/icons/ability_necromancer_002.dds', tooltip = T.Skill_Blastbones }, -- Blastbones (Blastbones)
+
+    ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
     ----------------------------------------------------------------
 

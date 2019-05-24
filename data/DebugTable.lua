@@ -4549,6 +4549,39 @@ LUIE.DebugAuras = {
     [90943] = true, -- Permafrost (Permafrost)
 
     -------------------------------------
+    -- NECROMANCER ACTIVES --------------
+    -------------------------------------
+
+    [114108] = true, -- Flame Skull (Flame Skull)
+    [114131] = true, -- Flame Skull (Flame Skull)
+    [123683] = true, -- Flame Skull (Flame Skull)
+    [123685] = true, -- Flame Skull (Flame Skull)
+    [123687] = true, -- Flame Skull (Flame Skull)
+
+    [117629] = true, -- Venom Skull (Venom Skull)
+    [117624] = true, -- Venom Skull (Venom Skull)
+    [117625] = true, -- Venom Skull (Venom Skull)
+    [123699] = true, -- Venom Skull (Venom Skull)
+    [123704] = true, -- Venom Skull (Venom Skull)
+    [123706] = true, -- Venom Skull (Venom Skull)
+
+    [117637] = true, -- Ricochet Skull (Ricochet Skull)
+    [117638] = true, -- Ricochet Skull (Ricochet Skull)
+    [123718] = true, -- Ricochet Skull (Ricochet Skull)
+    [123719] = true, -- Ricochet Skull (Ricochet Skull)
+    [123724] = true, -- Ricochet Skull (Ricochet Skull)
+    [123728] = true, -- Ricochet Skull (Ricochet Skull)
+    [123725] = true, -- Ricochet Skull (Ricochet Skull)
+
+    [123729] = true, -- Ricochet Skull (Ricochet Skull)
+    [123727] = true, -- Ricochet Skull (Ricochet Skull)
+    [123722] = true, -- Ricochet Skull (Ricochet Skull)
+
+    [114860] = true, -- Blastbones (Blastbones)
+    [114873] = true, -- Blastbones Spawn Stun (Blastbones)
+    [116149] = true, -- Blastbones Model FX (Blastbones)
+
+    -------------------------------------
     -- UNARMED PASSIVES -----------------
     -------------------------------------
 
