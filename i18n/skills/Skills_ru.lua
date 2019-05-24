@@ -700,7 +700,7 @@ local strings = {
     SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_AOE_TP =          "Taking Physical Damage every |cFFFFFF1|r second.\n\nIncrease damage taken from all sources by |cFFFFFF20|r% for |cFFFFFF6|r seconds whenever you take damage from this effect.",
 
     SI_LUIE_SKILL_CONSUME_LIFEFORCE =                    "Consume Lifeforce",
-    SI_LUIE_SKILL_RUINOUS_CYCLONE =                      "After |cFFFFFF2|r seconds, enemies within |cFFFFFF8|r meters take Physical Damage every |cFFFFFF0.5|r seconds for |cFFFFFF7|r seconds as long as the channel is maintained.\n\nEnemies within |cFFFFFF15|r meters are pulled closer to you.",
+    SI_LUIE_SKILL_RUINOUS_CYCLONE =                      "After |cFFFFFF2|r seconds, enemies within |cFFFFFF8|r meters take Physical Damage every |cFFFFFF0.5|r seconds for |cFFFFFF7|r seconds as long as the channel is maintained.\n\nEnemies within |cFFFFFF15|r meters are pulled closer to you while channeling.",
 
     ----------------------------------------------------------------
     -- BATTLEGROUNDS -----------------------------------------------

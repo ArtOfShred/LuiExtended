@@ -368,6 +368,10 @@ E.DebuffDisplayOverrideId = {
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
 
+    -- Glyphs
+    [17906] = true, -- Crusher (Glyph of Crushing)
+    [17945] = true, -- Weakining (Glyph of Weakening)
+
     -- Item Sets
     [52705] = true, -- Way of Martial Knowledge (... of Martial Knowledge)
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
