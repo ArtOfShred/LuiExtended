@@ -2662,7 +2662,11 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.OnPowerUpdate(nil, "player", nil, POWERTYPE_WEREWOLF, GetUnitPower("player", POWERTYPE_WEREWOLF))
 
         if UF.SV.PlayerFrameOptions ~= 1 then
-            left = true
+            if UF.SV.ReverseResourceBars then
+                right = true
+            else
+                left = true
+            end
         else
             recenter = true
         end
@@ -2704,7 +2708,11 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.OnPowerUpdate(nil, "player", nil, POWERTYPE_MOUNT_STAMINA, GetUnitPower("player", POWERTYPE_MOUNT_STAMINA))
 
         if UF.SV.PlayerFrameOptions ~= 1 then
-            right = true
+            if UF.SV.ReverseResourceBars then
+                left = true
+            else
+                right = true
+            end
         else
             recenter = true
         end
