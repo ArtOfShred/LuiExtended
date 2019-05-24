@@ -188,6 +188,7 @@ UF.D = {
     LowResourceMagicka               = 25,
     ShieldAlpha                      = 50,
     ResolutionOptions                = 1,
+    ReverseResourceBars              = false,
 }
 UF.SV = nil
 
@@ -3829,37 +3830,72 @@ function UF.CustomFramesApplyLayoutPlayer(unhide)
 
             phb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth )
 
-            pmb.backdrop:ClearAnchors()
-            if not UF.SV.HideBarMagicka then
-                if phb.shieldbackdrop then
-                    phb.shieldbackdrop:ClearAnchors()
-                    phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
-                    phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
-                    pmb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
-                else
-                    pmb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
-                end
-                pmb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightMagicka )
-            else
-                if phb.shieldbackdrop then
-                    phb.shieldbackdrop:ClearAnchors()
-                    phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
-                    phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
-                end
-            end
-
-            psb.backdrop:ClearAnchors()
-            if not UF.SV.HideBarStamina then
+            if not UF.SV.ReverseResourceBars then
+                pmb.backdrop:ClearAnchors()
                 if not UF.SV.HideBarMagicka then
-                    psb.backdrop:SetAnchor( TOP, pmb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+                    if phb.shieldbackdrop then
+                        phb.shieldbackdrop:ClearAnchors()
+                        phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+                        phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
+                        pmb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+                    else
+                        pmb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+                    end
+                    pmb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightMagicka )
                 else
                     if phb.shieldbackdrop then
+                        phb.shieldbackdrop:ClearAnchors()
+                        phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+                        phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
+                    end
+                end
+
+                psb.backdrop:ClearAnchors()
+                if not UF.SV.HideBarStamina then
+                    if not UF.SV.HideBarMagicka then
+                        psb.backdrop:SetAnchor( TOP, pmb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+                    else
+                        if phb.shieldbackdrop then
+                            psb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+                        else
+                            psb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+                       end
+                    end
+                    psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
+                end
+            else
+                psb.backdrop:ClearAnchors()
+                if not UF.SV.HideBarStamina then
+                    if phb.shieldbackdrop then
+                        phb.shieldbackdrop:ClearAnchors()
+                        phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+                        phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
                         psb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
                     else
                         psb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
                     end
+                    psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
+                else
+                    if phb.shieldbackdrop then
+                        phb.shieldbackdrop:ClearAnchors()
+                        phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+                        phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
+                    end
                 end
-                psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
+
+                pmb.backdrop:ClearAnchors()
+                if not UF.SV.HideBarMagicka then
+                    if not UF.SV.HideBarStamina then
+                        pmb.backdrop:SetAnchor( TOP, psb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+                    else
+                        if phb.shieldbackdrop then
+                            pmb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+                        else
+                            pmb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+                       end
+                    end
+                    pmb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightMagicka )
+                end
             end
             alt.backdrop:SetWidth( altW )
 
@@ -3897,27 +3933,36 @@ function UF.CustomFramesApplyLayoutPlayer(unhide)
 
             phb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth )
 
-            pmb.backdrop:ClearAnchors()
-            if not UF.SV.HideBarMagicka then
-                if phb.shieldbackdrop then
-                    phb.shieldbackdrop:ClearAnchors()
-                    phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
-                    phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
-                end
-                pmb.backdrop:SetAnchor( RIGHT, phb.backdrop, LEFT, -UF.SV.AdjustMagickaHPos,  UF.SV.AdjustMagickaVPos )
-                pmb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightMagicka )
-            else
-                if phb.shieldbackdrop then
-                    phb.shieldbackdrop:ClearAnchors()
-                    phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
-                    phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
-                end
+            if phb.shieldbackdrop then
+                phb.shieldbackdrop:ClearAnchors()
+                phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+                phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
             end
 
-            psb.backdrop:ClearAnchors()
-            if not UF.SV.HideBarStamina then
-                psb.backdrop:SetAnchor( LEFT, phb.backdrop, RIGHT, UF.SV.AdjustStaminaHPos,  UF.SV.AdjustStaminaVPos )
-                psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
+            if not UF.SV.ReverseResourceBars then
+                pmb.backdrop:ClearAnchors()
+                if not UF.SV.HideBarMagicka then
+                    pmb.backdrop:SetAnchor( RIGHT, phb.backdrop, LEFT, -UF.SV.AdjustMagickaHPos,  UF.SV.AdjustMagickaVPos )
+                    pmb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightMagicka )
+                end
+
+                psb.backdrop:ClearAnchors()
+                if not UF.SV.HideBarStamina then
+                    psb.backdrop:SetAnchor( LEFT, phb.backdrop, RIGHT, UF.SV.AdjustStaminaHPos,  UF.SV.AdjustStaminaVPos )
+                    psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
+                end
+            else
+                psb.backdrop:ClearAnchors()
+                if not UF.SV.HideBarStamina then
+                    psb.backdrop:SetAnchor( RIGHT, phb.backdrop, LEFT, -UF.SV.AdjustStaminaHPos,  UF.SV.AdjustStaminaVPos )
+                    psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
+                end
+
+                pmb.backdrop:ClearAnchors()
+                if not UF.SV.HideBarMagicka then
+                    pmb.backdrop:SetAnchor( LEFT, phb.backdrop, RIGHT, UF.SV.AdjustMagickaHPos,  UF.SV.AdjustMagickaVPos )
+                    pmb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightMagicka )
+                end
             end
             alt.backdrop:SetWidth( altW )
 
@@ -3955,33 +4000,64 @@ function UF.CustomFramesApplyLayoutPlayer(unhide)
 
             phb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth )
 
-            pmb.backdrop:ClearAnchors()
-            if not UF.SV.HideBarMagicka then
-                if phb.shieldbackdrop then
-                    phb.shieldbackdrop:ClearAnchors()
-                    phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
-                    phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
-                    pmb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOMLEFT, 0, UF.SV.PlayerBarSpacing )
+            if not UF.SV.ReverseResourceBars then
+                pmb.backdrop:ClearAnchors()
+                if not UF.SV.HideBarMagicka then
+                    if phb.shieldbackdrop then
+                        phb.shieldbackdrop:ClearAnchors()
+                        phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+                        phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
+                        pmb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOMLEFT, 0, UF.SV.PlayerBarSpacing )
+                    else
+                        pmb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOMLEFT, 0, UF.SV.PlayerBarSpacing )
+                    end
+                    pmb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightMagicka )
                 else
-                    pmb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOMLEFT, 0, UF.SV.PlayerBarSpacing )
+                    if phb.shieldbackdrop then
+                        phb.shieldbackdrop:ClearAnchors()
+                        phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+                        phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
+                    end
                 end
-                pmb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightMagicka )
-            else
-                if phb.shieldbackdrop then
-                    phb.shieldbackdrop:ClearAnchors()
-                    phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
-                    phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
-                end
-            end
 
-            psb.backdrop:ClearAnchors()
-            if not UF.SV.HideBarStamina then
-                if phb.shieldbackdrop then
-                    psb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOMRIGHT, 0, UF.SV.PlayerBarSpacing )
-                else
-                    psb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOMRIGHT, 0, UF.SV.PlayerBarSpacing )
+                psb.backdrop:ClearAnchors()
+                if not UF.SV.HideBarStamina then
+                    if phb.shieldbackdrop then
+                        psb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOMRIGHT, 0, UF.SV.PlayerBarSpacing )
+                    else
+                        psb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOMRIGHT, 0, UF.SV.PlayerBarSpacing )
+                    end
+                    psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
                 end
-                psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
+            else
+                psb.backdrop:ClearAnchors()
+                if not UF.SV.HideBarStamina then
+                    if phb.shieldbackdrop then
+                        phb.shieldbackdrop:ClearAnchors()
+                        phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+                        phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
+                        psb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOMLEFT, 0, UF.SV.PlayerBarSpacing )
+                    else
+                        psb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOMLEFT, 0, UF.SV.PlayerBarSpacing )
+                    end
+                    psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
+                else
+                    if phb.shieldbackdrop then
+                        phb.shieldbackdrop:ClearAnchors()
+                        phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+                        phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
+                    end
+                end
+
+                pmb.backdrop:ClearAnchors()
+                if not UF.SV.HideBarMagicka then
+                    if phb.shieldbackdrop then
+                        pmb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOMRIGHT, 0, UF.SV.PlayerBarSpacing )
+                    else
+                        pmb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOMRIGHT, 0, UF.SV.PlayerBarSpacing )
+                    end
+                    pmb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightMagicka )
+                end
             end
 
             player.botInfo:SetWidth( UF.SV.PlayerBarWidth )
