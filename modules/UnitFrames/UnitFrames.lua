@@ -2816,7 +2816,11 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
             alt.icon:ClearAnchors()
             alt.icon:SetAnchor (RIGHT, alt.backdrop, LEFT,-2,0)
         else
-            UF.CustomFrames.player.botInfo:SetAnchor(TOP, psb.backdrop, BOTTOM, 0, 2 )
+            if UF.SV.ReverseResourceBars then
+                UF.CustomFrames.player.botInfo:SetAnchor(TOP, pmb.backdrop, BOTTOM, 0, 2 )
+            else
+                UF.CustomFrames.player.botInfo:SetAnchor(TOP, psb.backdrop, BOTTOM, 0, 2 )
+            end
             alt.backdrop:ClearAnchors()
             alt.backdrop:SetAnchor( LEFT, UF.CustomFrames.player.botInfo, LEFT, padding + 5, 0)
             alt.backdrop:SetWidth(altW)
@@ -2832,7 +2836,11 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
             alt.icon:ClearAnchors()
             alt.icon:SetAnchor (RIGHT, alt.backdrop, LEFT,-2,0)
         else
-            UF.CustomFrames.player.botInfo:SetAnchor(TOP, pmb.backdrop, BOTTOM, 0, 2 )
+            if UF.SV.ReverseResourceBars then
+                UF.CustomFrames.player.botInfo:SetAnchor(TOP, psb.backdrop, BOTTOM, 0, 2 )
+            else
+                UF.CustomFrames.player.botInfo:SetAnchor(TOP, pmb.backdrop, BOTTOM, 0, 2 )
+            end
             alt.backdrop:ClearAnchors()
             alt.backdrop:SetAnchor( RIGHT, UF.CustomFrames.player.botInfo, RIGHT, -padding - 5, 0)
             alt.backdrop:SetWidth(altW)
@@ -2859,9 +2867,17 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
             if UF.SV.HideBarStamina and UF.SV.HideBarMagicka then
                 UF.CustomFrames.player.botInfo:SetAnchor(TOP, playerTlw, BOTTOM, 0, 2 )
             elseif UF.SV.HideBarStamina and not UF.SV.HideBarMagicka then
-                UF.CustomFrames.player.botInfo:SetAnchor(TOP, pmb.backdrop, BOTTOMRIGHT, 0, 2 )
+                if UF.SV.ReverseResourceBars then
+                    UF.CustomFrames.player.botInfo:SetAnchor(TOP, pmb.backdrop, BOTTOMLEFT, 0, 2 )
+                else
+                    UF.CustomFrames.player.botInfo:SetAnchor(TOP, pmb.backdrop, BOTTOMRIGHT, 0, 2 )
+                end
             else
-                UF.CustomFrames.player.botInfo:SetAnchor(TOP, psb.backdrop, BOTTOMLEFT, 0, 2 )
+                if UF.SV.ReverseResourceBars then
+                    UF.CustomFrames.player.botInfo:SetAnchor(TOP, psb.backdrop, BOTTOMRIGHT, 0, 2 )
+                else
+                    UF.CustomFrames.player.botInfo:SetAnchor(TOP, psb.backdrop, BOTTOMLEFT, 0, 2 )
+                end
             end
             alt.backdrop:ClearAnchors()
             alt.backdrop:SetAnchor( CENTER, UF.CustomFrames.player.botInfo, CENTER, padding * .5 +1, 0)
