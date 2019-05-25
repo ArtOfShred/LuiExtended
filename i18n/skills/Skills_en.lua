@@ -161,6 +161,7 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_FRACTURE_TP =                    "Reduce Physical Resistance |cffffff5280|r.",
     SI_LUIE_SKILL_MAJOR_FRACTURE_NPC_TP =                "Reduce Physical Resistance |cffffff4000|r.",
     SI_LUIE_SKILL_MINOR_VULNERABILITY_TP =               "Increase damage taken by |cffffff8|r%.",
+    SI_LUIE_SKILL_MAJOR_VULNERABILITY_TP =               "Increase damage taken by |cffffff30|r%.",
     SI_LUIE_SKILL_MINOR_MAIM_TP =                        "Reduce damage done by |cffffff15|r%.",
     SI_LUIE_SKILL_MAJOR_MAIM_TP =                        "Reduce damage done by |cffffff30|r%.",
     SI_LUIE_SKILL_MINOR_DEFILE_TP =                      "Reduce healing received and Health Recovery by |cffffff15|r%.",
@@ -455,6 +456,21 @@ local strings = {
     SI_LUIE_SKILL_RICOCHET_SKULL_TP =                    "Every third cast of Ricochet Skull deals |cFFFFFF20|r% increased damage and will bounce up to |cFFFFFF2|r times to other nearby enemies.",
 
     SI_LUIE_SKILL_BLASTBONES_TP =                        "A flaming skeleton runs toward your target and explodes when it gets close to them, dealing Flame Damage to all enemies within |cFFFFFF6|r meters.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.",
+    SI_LUIE_SKILL_BLIGHTED_BLASTBONES_TP =               "A decaying skeleton runs toward your target and explodes when it gets close to them, dealing Disease Damage to all enemies within |cFFFFFF6|r meters and applying Major Defile to them for |cFFFFFF4|r seconds.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.",
+    SI_LUIE_SKILL_STALKING_BLASTBONES_TP =               "A flaming skeleton runs toward your target and explodes when it gets close to them, dealing Flame Damage to all enemies within |cFFFFFF6|r meters.\n\nEvery second the skeleton spends chasing its target increases the damage of the explosion by |cFFFFFF10|r% up to a maximum of |cFFFFFF50|r% more damage.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.",
+
+    SI_LUIE_SKILL_BONEYARD_TP =                          "Enemies in the |cFFFFFF6|r meter radius of the graveyard take Frost Damage every |cFFFFFF1|r second.\n\nAn ally standing in the graveyard can activate the |cFFFFFFGrave Robber|r synergy.",
+    SI_LUIE_SKILL_UNNERVING_BONEYARD_TP =                "Enemies in the |cFFFFFF6|r meter radius of the graveyard take Frost Damage every |cFFFFFF1|r second and have Major Breach and Major Fracture applied to them.\n\nAn ally standing in the graveyard can activate the |cFFFFFFGrave Robber|r synergy.",
+    SI_LUIE_SKILL_AVID_BONEYARD_TP =                     "Enemies in the |cFFFFFF6|r meter radius of the graveyard take Frost Damage every |cFFFFFF1|r second.\n\nYou or an ally standing in the graveyard can activate the |cFFFFFFGrave Robber|r synergy.",
+
+    SI_LUIE_SKILL_SKELETAL_MAGE_TP =                     "A skeletal mage fights at your side. The skeletal mage remains for |cFFFFFF<<1>>|r seconds.\n\nThe mage attacks the closest enemy every |cFFFFFF2|r seconds, dealing Shock Damage.",
+    SI_LUIE_SKILL_SKELETAL_ARCHER_TP =                   "A skeletal archer fights at your side. The skeletal archer remains for |cFFFFFF<<1>>|r seconds.\n\nThe archer attacks the closest enemy every |cFFFFFF2|r seconds, dealing Physical Damage.\n\nEach time the archer deals damage, its next attack will do |cFFFFFF10|r% more damage than the previous attack.",
+    SI_LUIE_SKILL_SKELETAL_ARCANIST_TP =                 "A skeletal arcanist fights at your side. The skeletal arcanist remains for |cFFFFFF<<1>>|r seconds.\n\nThe arcanist attacks the closest enemy every |cFFFFFF2|r seconds, dealing Shock Damage to them and enemies with |cFFFFFF4|r meters.",
+
+    SI_LUIE_SKILL_SHOCKING_SIPHON_TP =                   "Enemies within |cFFFFFF5|r meters of the corpse and between you and the corpse take Shock Damage over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SHOCKING_SIPHON_GROUND_TP =            "Taking rapidly ticking Shock Damage.",
+
+    SI_LUIE_SKILL_FROZEN_COLOSSUS_TP =                   "A Frozen Colossus smashes the ground three times over |cFFFFFF3|r seconds, dealing Frost Damage to enemies within |cFFFFFF8|r meters.\n\nEach smash applies Major Vulnerability for any enemy hit for |cFFFFFF3|r seconds.",
 
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------

@@ -68,6 +68,7 @@ LUIE.Tooltips = {
     Skill_Major_Fracture                            = GetString(SI_LUIE_SKILL_MAJOR_FRACTURE_TP),
     Skill_Major_Fracture_NPC                        = GetString(SI_LUIE_SKILL_MAJOR_FRACTURE_NPC_TP),
     Skill_Minor_Vulnerability                       = GetString(SI_LUIE_SKILL_MINOR_VULNERABILITY_TP),
+    Skill_Major_Vulnerability                       = GetString(SI_LUIE_SKILL_MAJOR_VULNERABILITY_TP),
     Skill_Minor_Maim                                = GetString(SI_LUIE_SKILL_MINOR_MAIM_TP),
     Skill_Major_Maim                                = GetString(SI_LUIE_SKILL_MAJOR_MAIM_TP),
     Skill_Minor_Defile                              = GetString(SI_LUIE_SKILL_MINOR_DEFILE_TP),
@@ -645,6 +646,21 @@ LUIE.Tooltips = {
     Skill_Ricochet_Skull                            = GetString(SI_LUIE_SKILL_RICOCHET_SKULL_TP),
 
     Skill_Blastbones                                = GetString(SI_LUIE_SKILL_BLASTBONES_TP),
+    Skill_Blighted_Blastbones                       = GetString(SI_LUIE_SKILL_BLIGHTED_BLASTBONES_TP),
+    Skill_Stalking_Blastbones                       = GetString(SI_LUIE_SKILL_STALKING_BLASTBONES_TP),
+
+    Skill_Boneyard                                  = GetString(SI_LUIE_SKILL_BONEYARD_TP),
+    Skill_Unnerving_Boneyard                        = GetString(SI_LUIE_SKILL_UNNERVING_BONEYARD_TP),
+    Skill_Avid_Boneyard                             = GetString(SI_LUIE_SKILL_AVID_BONEYARD_TP),
+
+    Skill_Skeletal_Mage                             = GetString(SI_LUIE_SKILL_SKELETAL_MAGE_TP),
+    Skill_Skeletal_Archer                           = GetString(SI_LUIE_SKILL_SKELETAL_ARCHER_TP),
+    Skill_Skeletal_Arcanist                         = GetString(SI_LUIE_SKILL_SKELETAL_ARCANIST_TP),
+
+    Skill_Shocking_Siphon                           = GetString(SI_LUIE_SKILL_SHOCKING_SIPHON_TP),
+    Skill_Shocking_Siphon_Ground                    = GetString(SI_LUIE_SKILL_SHOCKING_SIPHON_GROUND_TP),
+
+    Skill_Frozen_Colossus                           = GetString(SI_LUIE_SKILL_FROZEN_COLOSSUS_TP),
 
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------

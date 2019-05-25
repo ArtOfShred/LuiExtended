@@ -550,7 +550,7 @@ E.EffectGroundDisplay = {
     --[22240] = { buff = true, debuff = false, ground = false }, -- Channeled Focus (Channeled Focus)
     --[22237] = { buff = true, debuff = false, ground = false }, -- Restoring Focus (Restoring Focus)
 
-    -- Warden Actives
+    -- Warden
     [86161] = { buff = false, debuff = false, ground = true }, -- Impaling Shards (Impaling Shards)
     [86165] = { buff = false, debuff = false, ground = true }, -- Gripping Shards (Gripping Shards)
     [86169] = { buff = false, debuff = false, ground = true }, -- Winter's Revenge (Winter's Revenge)
@@ -563,6 +563,15 @@ E.EffectGroundDisplay = {
     [86175] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3 }, -- Frozen Gate (Frozen Gate)
     [86179] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3 }, -- Frozen Device (Frozen Device)
     [86183] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3 }, -- Frozen Retreat (Frozen Retreat)
+
+    -- Necromancer
+    [115252] = { buff = false, debuff = false, ground = true }, -- Boneyard (Boneyard)
+    [117805] = { buff = false, debuff = false, ground = true }, -- Unnerving Boneyard (Unnerving Boneyard)
+    [117850] = { buff = false, debuff = false, ground = true }, -- Avid Boneyard (Avid Boneyard)
+
+    [116445] = { buff = false, debuff = false, ground = true  }, -- Shocking Siphon (Shocking Siphon)
+
+    [122174] = { buff = false, debuff = false, ground = true }, -- Frozen Colossus (Frozen Colossus)
 
     ---------------------------
     -- Bow --------------------
@@ -1059,6 +1068,19 @@ E.BarHighlightOverride = {
     [86148] = { newId = 90833 }, -- Arctic Wind
     [86152] = { newId = 90835 }, -- Polar Wind
     [86156] = { newId = 90834 }, -- Arctic Blast
+
+    ---------------------------
+    -- Necromancer ------------
+    ---------------------------
+
+    [114860] = { newId = 114863 }, -- Blastbones
+    [117330] = { newId = 114863 }, -- Blastbones
+    [117690] = { newId = 117691 }, -- Blighted Blastbones
+    [117693] = { newId = 117691 }, -- Blighted Blastbones
+    [117749] = { newId = 117750 }, -- Stalking Blastbones
+    [117773] = { newId = 117750 }, -- Relentless Blastbones --> Stalking Blastbones
+
+    [115924] = { newId = 116445  }, -- Shocking Siphon
 
     ---------------------------
     -- Two Handed -------------
@@ -2308,6 +2330,7 @@ E.TooltipNameOverride = {
     [A.Skill_Minor_Fracture]        = T.Skill_Minor_Fracture,
     [A.Skill_Major_Fracture]        = T.Skill_Major_Fracture,
     [A.Skill_Minor_Vulnerability]   = T.Skill_Minor_Vulnerability,
+    [A.Skill_Major_Vulnerability]   = T.Skill_Major_Vulnerability,
     [A.Skill_Minor_Maim]            = T.Skill_Minor_Maim,
     [A.Skill_Major_Maim]            = T.Skill_Major_Maim,
     [A.Skill_Minor_Defile]          = T.Skill_Minor_Defile,
@@ -4776,13 +4799,60 @@ E.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Flame Skull / Venom Skull / Ricochet Skull
-    [114131] = { tooltip = T.Skill_Flame_Skull, tooltipValue2 = GetAbilityName(114108) }, -- Flame Skull (Flame Skull)
-    [117625] = { tooltip = T.Skill_Flame_Skull, tooltipValue2 = GetAbilityName(117629) }, -- Venom Skull (Venom Skull)
-    [117638] = { tooltip = T.Skill_Ricochet_Skull }, -- Ricochet Skull (Ricochet Skull)
+    [114131] = { tooltip = T.Skill_Flame_Skull, tooltipValue2 = GetAbilityName(114108), forcedContainer = 'short' }, -- Flame Skull (Flame Skull)
+    [117625] = { tooltip = T.Skill_Flame_Skull, tooltipValue2 = GetAbilityName(117629), forcedContainer = 'short' }, -- Venom Skull (Venom Skull)
+    [117638] = { tooltip = T.Skill_Ricochet_Skull, forcedContainer = 'short' }, -- Ricochet Skull (Ricochet Skull)
 
-    -- Blastbones
-    [114862] = { tooltip = T.Skill_Blastbones }, -- Blastbones (Blastbones)
-    [114863] = { icon = 'esoui/art/icons/ability_necromancer_002.dds', tooltip = T.Skill_Blastbones }, -- Blastbones (Blastbones)
+    -- Blastbones / Blighted Blastbones / Stalking Blastbones
+    [116149] = { hide = true }, -- Blastbones Model FX (Blastbones)
+    [114861] = { icon = 'esoui/art/icons/ability_necromancer_002.dds', tooltip = T.Skill_Blastbones }, -- Blastbones (Blastbones)
+    [114863] = { tooltip = T.Skill_Blastbones }, -- Blastbones (Blastbones)
+    [124849] = { hide = true }, -- Blastbones ActionList (Blastbones)
+    [117718] = { hide = true }, -- Blighted Blastbones Model FX (Blighted Blastbones)
+    [117692] = { icon = 'esoui/art/icons/ability_necromancer_002_a.dds', tooltip = T.Skill_Blighted_Blastbones }, -- Blighted Blastbones (Blighted Blastbones)
+    [117691] = { tooltip = T.Skill_Blighted_Blastbones }, -- Blighted Blastbones (Blighted Blastbones)
+    [117727] = { tooltip = A.Skill_Blighted_Blastbones }, -- Major Defile (Blighted Blastbones)
+    [124851] = { hide = true }, -- Blighted Blastbones ActionList (Blighted  Blastbones)
+    [117759] = { hide = true }, -- Stalking Blastbones (Stalking Blastbones)
+    [117751] = { icon = 'esoui/art/icons/ability_necromancer_002_b.dds', tooltip = T.Skill_Stalking_Blastbones }, -- Stalking Blastbones (Stalking Blastbones)
+    [117750] = { tooltip = T.Skill_Stalking_Blastbones }, -- Stalking Blastbones (Stalking Blastbones)
+    [124853] = { hide = true }, -- Stalking Blastbones ActionList (Stalking Blastbones)
+
+    -- Boneyard / Unnerving Boneyard / Avid Boneyard
+    [115252] = { tooltip = T.Skill_Boneyard }, -- Boneyard (Boneyard)
+    [115254] = { tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Boneyard (Boneyard)
+
+    [117805] = { tooltip = T.Skill_Unnerving_Boneyard }, -- Unnerving Boneyard (Unnerving Boneyard)
+    [117809] = { tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Unnerving Boneyard (Unnerving Boneyard)
+    [117818] = { tooltip = A.Skill_Unnerving_Boneyard, groundLabel = true }, -- Major Breach (Unnerving Boneyard)
+    [117819] = { tooltip = A.Skill_Unnerving_Boneyard, groundLabel = true }, -- Major Fracture (Unnerving Boneyard)
+
+    [117850] = { tooltip = T.Skill_Avid_Boneyard }, -- Avid Boneyard (Avid Boneyard)
+    [117854] = { tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Avid Boneyard (Avid Boneyard)
+
+    -- Skeletal Mage / Skeletal Archer / Skeletal Arcanist
+    [114317] = { tooltip = T.Skill_Skeletal_Mage }, -- Skeletal Mage (Skeletal Mage)
+    [114322] = { icon = 'esoui/art/icons/ability_necromancer_003.dds', name = A.Skill_Skeletal_Mage, tooltip = T.Skill_Skeletal_Mage }, -- Skeletal Mage Summon (Skeletal Mage)
+    [114461] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_deathbolt.dds' }, -- Deathbolt (Skeletal Mage)
+
+    [118680] = { tooltip = T.Skill_Skeletal_Archer }, -- Skeletal Archer (Skeletal Archer)
+    [118681] = { icon = 'esoui/art/icons/ability_necromancer_003_a.dds', tooltip = T.Skill_Skeletal_Archer }, -- Skeletal Archer (Skeletal Archer)
+    [122774] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_deathbolt_archer.dds' }, -- Deathbolt (Skeletal Archer)
+
+    [118726] = { tooltip = T.Skill_Skeletal_Arcanist }, -- Skeletal Arcanist (Skeletal Arcanist)
+    [118738] = { icon = 'esoui/art/icons/ability_necromancer_003_b.dds', name = A.Skill_Skeletal_Arcanist, tooltip = T.Skill_Skeletal_Arcanist }, -- Exploding Mage (Skeletal Arcanist)
+    [118746] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_deathbolt.dds' }, -- Deathbolt (Skeletal Arcanist)
+    [124468] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_deathbolt.dds' }, -- Deathbolt (Skeletal Arcanist)
+
+    -- Shocking Siphon / Detonating Siphon /
+    [115924] = { hide = true }, -- Shocking Siphon (Shocking Siphon)
+    [116445] = { hide = true, tooltip = T.Skill_Shocking_Siphon  }, -- Shocking Siphon (Shocking Siphon)
+    [116410] = { groundLabel = true, tooltip = T.Skill_Shocking_Siphon_Ground }, -- Shocking Siphon (Shocking Siphon)
+
+    -- Frozen Colossus / Detonating Siphon /
+    [122174] = { tooltip = T.Skill_Frozen_Colossus }, -- Frozen Colossus (Frozen Colossus)
+    [122178] = { tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Frozen Colossus (Frozen Colossus)
+    [122177] = { tooltip = A.Skill_Frozen_Colossus }, -- Major Vulnerability (Frozen Colossus)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
@@ -11158,6 +11228,15 @@ E.AddGroundDamageAura = {
     [86247] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Sleet Storm (Sleet Storm)
     [88860] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Northern Storm (Northern Storm)
     [88863] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Permafrost (Permafrost)
+
+    -- Necromancer GROUND
+    [115254] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Boneyard (Boneyard)
+    [117809] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Unnerving Boneyard (Unnerving Boneyard)
+    [117854] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Avid Boneyard (Avid Boneyard)
+
+    [116410] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shocking Siphon (Shocking Siphon)
+
+    [122178] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Frozen Colossus (Frozen Colossus)
 
     -- Bow
     [28877] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Volley (Volley)

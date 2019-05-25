@@ -620,6 +620,14 @@ local AbilityTables = {
     Skill_Northern_Storm              = 87542,
     Skill_Permafrost                  = 86117,
 
+    -- Necromancer
+    Skill_Blighted_Blastbones         = 117690,
+    Skill_Unnerving_Boneyard          = 117809,
+    Skill_Skeletal_Mage               = 114317,
+    Skill_Skeletal_Arcanist           = 118726,
+
+    Skill_Frozen_Colossus             = 122174,
+
     -- ---------------------------------------------------
     -- WEAPON SKILLS -------------------------------------
     -- ---------------------------------------------------
