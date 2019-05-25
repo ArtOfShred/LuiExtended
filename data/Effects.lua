@@ -570,8 +570,11 @@ E.EffectGroundDisplay = {
     [117850] = { buff = false, debuff = false, ground = true }, -- Avid Boneyard (Avid Boneyard)
 
     [116445] = { buff = false, debuff = false, ground = true  }, -- Shocking Siphon (Shocking Siphon)
+    [118764] = { buff = false, debuff = false, ground = true  }, -- Detonating Siphon (Detonating Siphon)
+    [118009] = { buff = false, debuff = false, ground = true  }, -- Mystic Siphon (Mystic Siphon)
 
     [122174] = { buff = false, debuff = false, ground = true }, -- Frozen Colossus (Frozen Colossus)
+    [122395] = { buff = false, debuff = false, ground = true }, -- Pestilent Colossus (Pestilent Colossus)
 
     ---------------------------
     -- Bow --------------------
@@ -1080,7 +1083,9 @@ E.BarHighlightOverride = {
     [117749] = { newId = 117750 }, -- Stalking Blastbones
     [117773] = { newId = 117750 }, -- Relentless Blastbones --> Stalking Blastbones
 
-    [115924] = { newId = 116445  }, -- Shocking Siphon
+    [115924] = { newId = 116445 }, -- Shocking Siphon
+    [118763] = { newId = 118764 }, -- Detonating Siphon
+    [118008] = { newId = 118009 }, -- Mystic Siphon
 
     ---------------------------
     -- Two Handed -------------
@@ -2105,6 +2110,12 @@ E.EffectHideSCT = {
     [88858] = true, -- Northern Storm (Northern Storm)
     [88861] = true, -- Permafrost (Permafrost)
     [90943] = true, -- Permafrost (Permafrost)
+
+    ----------------------------
+    -- Necromancer
+    ----------------------------
+
+    [118014] = true, -- Mystic Siphon (Mystic Siphon)
 
     ----------------------------
     -- One Hand and Shield
@@ -4844,15 +4855,29 @@ E.EffectOverride = {
     [118746] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_deathbolt.dds' }, -- Deathbolt (Skeletal Arcanist)
     [124468] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_deathbolt.dds' }, -- Deathbolt (Skeletal Arcanist)
 
-    -- Shocking Siphon / Detonating Siphon /
+    -- Shocking Siphon / Detonating Siphon / Mystic Siphon
     [115924] = { hide = true }, -- Shocking Siphon (Shocking Siphon)
     [116445] = { hide = true, tooltip = T.Skill_Shocking_Siphon  }, -- Shocking Siphon (Shocking Siphon)
     [116410] = { groundLabel = true, tooltip = T.Skill_Shocking_Siphon_Ground }, -- Shocking Siphon (Shocking Siphon)
 
-    -- Frozen Colossus / Detonating Siphon /
+    [118763] = { hide = true }, -- Detonating Siphon (Detonating Siphon)
+    [118764] = { hide = true, tooltip = T.Skill_Detonating_Siphon }, -- Detonating Siphon (Detonating Siphon)
+    [118766] = { groundLabel = true, tooltip = T.Skill_Detonating_Siphon_Ground }, -- Detonating Siphon (Detonating Siphon)
+
+    [118008] = { hide = true }, -- Mystic Siphon (Mystic Siphon)
+    [118009] = { hide = true, tooltip = T.Skill_Mystic_Siphon }, -- Mystic (Mystic Siphon)
+    [118011] = { groundLabel = true, tooltip = T.Skill_Shocking_Siphon_Ground }, -- Mystic Siphon (Mystic Siphon)
+
+    -- Frozen Colossus / Pestilent Colossus
     [122174] = { tooltip = T.Skill_Frozen_Colossus }, -- Frozen Colossus (Frozen Colossus)
     [122178] = { tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Frozen Colossus (Frozen Colossus)
     [122177] = { tooltip = A.Skill_Frozen_Colossus }, -- Major Vulnerability (Frozen Colossus)
+
+    [122395] = { tooltip = T.Skill_Pestilent_Colossus }, -- Pestilent Colossus (Pestilent Colossus)
+    [122399] = { tooltip = T.Generic_AOE_Disease, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
+    [122400] = { tooltip = T.Generic_AOE_Disease, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
+    [122401] = { tooltip = T.Generic_AOE_Disease, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
+    [122397] = { tooltip = A.Skill_Pestilent_Colossus }, -- Major Vulnerability (Pestilent Colossus)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
@@ -11235,8 +11260,14 @@ E.AddGroundDamageAura = {
     [117854] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Avid Boneyard (Avid Boneyard)
 
     [116410] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shocking Siphon (Shocking Siphon)
+    [118766] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Detonating Siphon (Detonating Siphon)
+    [118011] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Mystic Siphon (Mystic Siphon)
 
     [122178] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Frozen Colossus (Frozen Colossus)
+
+    [122399] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 2 }, -- Pestilent Colossus (Pestilent Colossus)
+    [122400] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 2 }, -- Pestilent Colossus (Pestilent Colossus)
+    [122401] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 2 }, -- Pestilent Colossus (Pestilent Colossus)
 
     -- Bow
     [28877] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Volley (Volley)

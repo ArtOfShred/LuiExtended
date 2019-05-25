@@ -659,8 +659,12 @@ LUIE.Tooltips = {
 
     Skill_Shocking_Siphon                           = GetString(SI_LUIE_SKILL_SHOCKING_SIPHON_TP),
     Skill_Shocking_Siphon_Ground                    = GetString(SI_LUIE_SKILL_SHOCKING_SIPHON_GROUND_TP),
+    Skill_Detonating_Siphon                         = GetString(SI_LUIE_SKILL_DETONATING_SIPHON_TP),
+    Skill_Detonating_Siphon_Ground                  = GetString(SI_LUIE_SKILL_DETONATING_SIPHON_GROUND_TP),
+    Skill_Mystic_Siphon                             = GetString(SI_LUIE_SKILL_MYSTIC_SIPHON_TP),
 
     Skill_Frozen_Colossus                           = GetString(SI_LUIE_SKILL_FROZEN_COLOSSUS_TP),
+    Skill_Pestilent_Colossus                        = GetString(SI_LUIE_SKILL_PESTILENT_COLOSSUS_TP),
 
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------

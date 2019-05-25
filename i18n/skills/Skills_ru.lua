@@ -469,8 +469,12 @@ local strings = {
 
     SI_LUIE_SKILL_SHOCKING_SIPHON_TP =                   "Enemies within |cFFFFFF5|r meters of the corpse and between you and the corpse take Shock Damage over |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SHOCKING_SIPHON_GROUND_TP =            "Taking rapidly ticking Shock Damage.",
+    SI_LUIE_SKILL_DETONATING_SIPHON_TP =                 "Enemies within |cFFFFFF5|r meters of the corpse and between you and the corpse take Disease Damage over |cFFFFFF<<1>>|r seconds.\n\nIf the siphon lasts its full duration it causes the corpse to explode, dealing additional Disease Damage to all enemies around the corpse.",
+    SI_LUIE_SKILL_DETONATING_SIPHON_GROUND_TP =          "Taking rapidly ticking Disease Damage.\n\nIf the siphon lasts its full |cFFFFFF12|r second duration the corpse explodes, dealing Disease Damage to you and nearby allies.",
+    SI_LUIE_SKILL_MYSTIC_SIPHON_TP =                     "Enemies within |cFFFFFF5|r meters of the corpse and between you and the corpse take Shock Damage over |cFFFFFF<<1>>|r seconds.\n\nYou also restore Magicka over |cFFFFFF<<1>>|r seconds while siphoning the corpse.",
 
-    SI_LUIE_SKILL_FROZEN_COLOSSUS_TP =                   "A Frozen Colossus smashes the ground three times over |cFFFFFF3|r seconds, dealing Frost Damage to enemies within |cFFFFFF8|r meters.\n\nEach smash applies Major Vulnerability for any enemy hit for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_FROZEN_COLOSSUS_TP =                   "A frostbitten Flesh Colossus smashes the ground three times over |cFFFFFF3|r seconds, dealing Frost Damage to enemies within |cFFFFFF8|r meters.\n\nEach smash applies Major Vulnerability to any enemy hit for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_PESTILENT_COLOSSUS_TP =                "A pestilent Flesh Colossus smashes the ground three times over |cFFFFFF3|r seconds, dealing increasing Disease Damage to enemies within |cFFFFFF8|r meters.\n\nEach smash applies Major Vulnerability to any enemy hit for |cFFFFFF3|r seconds.",
 
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------

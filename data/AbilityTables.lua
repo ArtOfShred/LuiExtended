@@ -627,6 +627,7 @@ local AbilityTables = {
     Skill_Skeletal_Arcanist           = 118726,
 
     Skill_Frozen_Colossus             = 122174,
+    Skill_Pestilent_Colossus          = 122397,
 
     -- ---------------------------------------------------
     -- WEAPON SKILLS -------------------------------------

@@ -4664,12 +4664,30 @@ LUIE.DebugAuras = {
     [116445] = true, -- Shocking Siphon (Shocking Siphon)
     [116410] = true, -- Shocking Siphon (Shocking Siphon)
 
+    [118763] = true, -- Detonating Siphon (Detonating Siphon)
+    [118764] = true, -- Detonating Siphon (Detonating Siphon)
+    [118766] = true, -- Detonating Siphon (Detonating Siphon)
+    [123088] = true, -- Detonating Siphon (Detonating Siphon)
+    [123082] = true, -- Detonating Siphon (Detonating Siphon)
+
+    [118008] = true, -- Mystic Siphon (Mystic Siphon)
+    [118009] = true, -- Mystic Siphon (Mystic Siphon)
+    [118011] = true, -- Mystic Siphon (Mystic Siphon)
+    [118014] = true, -- Mystic Siphon (Mystic Siphon)
+
     [122174] = true, -- Frozen Colossus (Frozen Colossus)
     [122380] = true, -- Frozen Colossus (Frozen Colossus)
     [122184] = true, -- Frozen Colossus (Frozen Colossus)
     [122178] = true, -- Frozen Colossus (Frozen Colossus)
     [122177] = true, -- Major Vulnerability (Frozen Colossus)
 
+    [122395] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122398] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122396] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122399] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122400] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122401] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122397] = true, -- Major Vulnerability (Pestilent Colossus)
 
 
     -------------------------------------
