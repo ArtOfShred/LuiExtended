@@ -68,6 +68,8 @@ CT.D = {
     },
     common = {
         transparencyValue           = 100,
+        overkill                    = true,
+        overheal                    = true,
         abbreviateNumbers           = false,
     },
     -- Toggle Defaults
