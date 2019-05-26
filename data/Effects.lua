@@ -346,6 +346,19 @@ E.LinkedGroundMine = {
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
+-- Tracking for CC triggered from blocking/bashing enemies, we filter this out in Combat Alerts so they don't erroneously interrupt casts.
+--------------------------------------------------------------------------------------------------------------------------------
+E.BlockAndBashCC = {
+    [21972] = true, -- Stagger
+    [21971] = true, -- Bash Stun
+    [48416] = true, -- Uber Attack
+    [45982] = true, -- Bash Stun
+    [86310] = true, -- Stagger
+    [86309] = true, -- Stun
+    [86312] = true, -- Stun
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - useful for some odd effects that get applied by the player or a player pet but aren't actually sourced from them on the API
 --------------------------------------------------------------------------------------------------------------------------------
 E.DebuffDisplayOverrideId = {

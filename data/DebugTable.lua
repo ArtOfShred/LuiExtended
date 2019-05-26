@@ -7178,6 +7178,7 @@ LUIE.DebugAuras = {
     [79555] = true, -- Mischievous Dodge -- Nixad
     [79601] = true, -- Mischievous Dodge -- Nixad
     [79602] = true, -- Mischievous Dodge -- Nixad
+    [79545] = true, -- Mischievous Dodge -- Nixad
 
     -- MONSTER FIGHT ABILITIES
     [9363] = true, -- Generic 1 Dmg Monster No Push -- Monster Fight

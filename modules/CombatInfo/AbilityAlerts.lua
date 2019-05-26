@@ -100,6 +100,7 @@ function CI.CreateAlertFrame()
             ["duration"] = 0,
             ["showDuration"] = false,
             ["ccType"] = nil,
+            ["sourceUnitId"] = nil,
         }
 
         alert.name = UI.Label( alert, nil, nil, nil, g_alertFont, alert.data.textName, false )
@@ -193,6 +194,24 @@ function CI.CreateAlertFrame()
             eventManager:RegisterForEvent(moduleName .. abilityId, EVENT_COMBAT_EVENT, CI.OnCombatAlert)
             eventManager:AddFilterForEvent(moduleName .. abilityId, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false)
         end
+    end
+
+    local ccResults = {
+        [ACTION_RESULT_STAGGERED] = true,
+        [ACTION_RESULT_STUNNED] = true,
+        [ACTION_RESULT_KNOCKBACK] = true,
+        [ACTION_RESULT_LEVITATED] = true,
+        [ACTION_RESULT_FEARED] = true,
+        [ACTION_RESULT_DISORIENTED] = true,
+        [ACTION_RESULT_INTERRUPT] = true,
+        [ACTION_RESULT_KILLING_BLOW] = true,
+        [ACTION_RESULT_DIED] = true,
+        [ACTION_RESULT_DIED_XP] = true,
+    }
+
+    for result, _ in pairs (ccResults) do
+        eventManager:RegisterForEvent(moduleName .. result, EVENT_COMBAT_EVENT, CI.AlertInterrupt)
+        eventManager:AddFilterForEvent(moduleName .. result, EVENT_COMBAT_EVENT, REGISTER_FILTER_COMBAT_RESULT, result, REGISTER_FILTER_IS_ERROR, false)
     end
 
     eventManager:RegisterForUpdate(moduleName.."CI_ALERT_UPDATE", 100, CI.AlertUpdate )
@@ -304,6 +323,37 @@ function CI.AlertUpdate()
     end
 end
 
+function CI.AlertInterrupt(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+
+    if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET or targetType == COMBAT_UNIT_TYPE_GROUP then return end
+    if E.BlockAndBashCC[abilityId] then return end
+
+    for i = 1, 3 do
+        if _G["LUIE_Alert" .. i].data.sourceUnitId then
+            targetName = strformat("<<t:1>>", targetName)
+
+            if (_G["LUIE_Alert" .. i].data.sourceUnitId == targetUnitId or _G["LUIE_Alert" .. i].data.sourceUnitId == targetName) and not (_G["LUIE_Alert" .. i].data.showDuration == false) then
+                _G["LUIE_Alert" .. i].data = { }
+                _G["LUIE_Alert" .. i].data.available = true
+
+                _G["LUIE_Alert" .. i].data.textMitigation =  ""
+                _G["LUIE_Alert" .. i].data.textName = "INTERRUPTED!"
+                _G["LUIE_Alert" .. i].data.sourceUnitId = ""
+                _G["LUIE_Alert" .. i].icon:SetHidden(true)
+                _G["LUIE_Alert" .. i].data.duration = 1500
+                _G["LUIE_Alert" .. i].data.showDuration = false
+                _G["LUIE_Alert" .. i].name:SetText(_G["LUIE_Alert" .. i].data.textName)
+                _G["LUIE_Alert" .. i].name:SetColor(unpack(CI.SV.alerts.colors.alertShared))
+                _G["LUIE_Alert" .. i].mitigation:SetText("")
+                _G["LUIE_Alert" .. i].timer:SetText("")
+                _G["LUIE_Alert" .. i]:SetHidden(false)
+
+                CI.RealignAlerts()
+            end
+        end
+    end
+end
+
 function CI.CrowdControlColorSetup(crowdControl)
     if CI.SV.alerts.toggles.showCrowdControlBorder then
         if crowdControl == ccTypes.STUN then
@@ -363,13 +413,14 @@ function CI.PlayAlertSound(abilityId, alertType, crowdControl)
 end
 
 local drawLocation = 1
-function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl)
+function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl, sourceUnitId)
     local color = CI.CrowdControlColorSetup(crowdControl)
 
     for i = 1, 3 do
         if _G["LUIE_Alert" .. i].data.available then
             _G["LUIE_Alert" .. i].data.textMitigation =  textMitigation
             _G["LUIE_Alert" .. i].data.textName =  textName
+            _G["LUIE_Alert" .. i].data.sourceUnitId = sourceUnitId
             _G["LUIE_Alert" .. i].icon.icon:SetTexture(abilityIcon)
             _G["LUIE_Alert" .. i].data.duration = duration
             _G["LUIE_Alert" .. i].data.showDuration = CI.SV.alerts.toggles.alertTimer and showDuration or false
@@ -379,6 +430,7 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
             _G["LUIE_Alert" .. i].mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
             _G["LUIE_Alert" .. i].timer:SetText(_G["LUIE_Alert" .. i].data.showDuration and strfmt(" %.1f", duration / 1000) or "")
             _G["LUIE_Alert" .. i].timer:SetColor(unpack(CI.SV.alerts.colors.alertTimer))
+            _G["LUIE_Alert" .. i].icon:SetHidden(false)
             _G["LUIE_Alert" .. i]:SetHidden(false)
             _G["LUIE_Alert" .. i].data.available = false
             _G["LUIE_Alert" .. i].icon.cd:SetFillColor( color[1], color[2], color[3], color[4] )
@@ -390,6 +442,7 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
     -- If no alert frame is available, then draw over in the first spot
     _G["LUIE_Alert" .. drawLocation].data.textMitigation = textMitigation
     _G["LUIE_Alert" .. drawLocation].data.textName = textName
+    _G["LUIE_Alert" .. drawLocation].data.sourceUnitId = sourceUnitId
     _G["LUIE_Alert" .. drawLocation].icon.icon:SetTexture(abilityIcon)
     _G["LUIE_Alert" .. drawLocation].data.duration = duration
     _G["LUIE_Alert" .. drawLocation].data.showDuration = CI.SV.alerts.toggles.alertTimer and showDuration or false
@@ -399,6 +452,7 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duratio
     _G["LUIE_Alert" .. drawLocation].mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
     _G["LUIE_Alert" .. drawLocation].timer:SetText(_G["LUIE_Alert" .. drawLocation].data.showDuration and strfmt(" %.1f", duration / 1000) or "")
     _G["LUIE_Alert" .. drawLocation].timer:SetColor(unpack(CI.SV.alerts.colors.alertTimer))
+    _G["LUIE_Alert" .. drawLocation].icon:SetHidden(false)
     _G["LUIE_Alert" .. drawLocation]:SetHidden(false)
     _G["LUIE_Alert" .. drawLocation].data.available = false
     _G["LUIE_Alert" .. drawLocation].icon.cd:SetFillColor( color[1], color[2], color[3], color[4] )
@@ -417,7 +471,7 @@ function CI.RealignAlerts()
     end
 end
 
-function CI.ProcessAlert(abilityId, unitName)
+function CI.ProcessAlert(abilityId, unitName, sourceUnitId)
     local S = CI.SV.alerts
 
     -- Just in case
@@ -503,6 +557,10 @@ function CI.ProcessAlert(abilityId, unitName)
         end
     end
 
+    if sourceUnitId == 0 then
+        sourceUnitId = unitName
+    end
+
     local block
     local blockstagger
     local dodge
@@ -550,19 +608,19 @@ function CI.ProcessAlert(abilityId, unitName)
     end
 
     if not (power == true or destroy == true or summon == true or unmit == true) then
-        CI.OnEvent(alertTypes.SHARED, abilityId, abilityName, abilityIcon, unitName, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
+        CI.OnEvent(alertTypes.SHARED, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
     elseif (power == true or destroy == true or summon == true or unmit == true) then
         if unmit then
-            CI.OnEvent(alertTypes.UNMIT, abilityId, abilityName, abilityIcon, unitName, duration)
+            CI.OnEvent(alertTypes.UNMIT, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, duration)
         end
         if power then
-            CI.OnEvent(alertTypes.POWER, abilityId, abilityName, abilityIcon, unitName, duration)
+            CI.OnEvent(alertTypes.POWER, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, duration)
         end
         if destroy then
-            CI.OnEvent(alertTypes.DESTROY, abilityId, abilityName, abilityIcon, unitName, duration)
+            CI.OnEvent(alertTypes.DESTROY, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, duration)
         end
         if summon then
-            CI.OnEvent(alertTypes.SUMMON, abilityId, abilityName, abilityIcon, unitName, duration)
+            CI.OnEvent(alertTypes.SUMMON, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, duration)
         end
     end
 end
@@ -583,7 +641,7 @@ function CI.AlertEffectChanged(eventCode, changeType, effectSlot, effectName, un
 
         if changeType == EFFECT_RESULT_UPDATED and AlertT[abilityId].ignoreRefresh then return end
 
-        callLater(function() CI.ProcessAlert(abilityId, unitName) end, 50)
+        callLater(function() CI.ProcessAlert(abilityId, unitName, unitId) end, 50)
     end
 end
 
@@ -653,7 +711,7 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
                     if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
                 end
 
-                callLater(function() CI.ProcessAlert(abilityId, sourceName) end, 50)
+                callLater(function() CI.ProcessAlert(abilityId, sourceName, sourceUnitId) end, 50)
             end
         end
     end
@@ -701,7 +759,7 @@ function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGr
                     if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
                 end
 
-                callLater(function() CI.ProcessAlert(abilityId, sourceName) end, 50)
+                callLater(function() CI.ProcessAlert(abilityId, sourceName, sourceUnitId) end, 50)
             end
         end
     end
@@ -720,7 +778,7 @@ function CI.FormatAlertString(inputFormat, params)
 end
 
 -- VIEWER
-function CI.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
+function CI.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, sourceUnitId, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
     local S = CI.SV.alerts
 
     local labelColor = S.colors.alertShared
@@ -811,7 +869,7 @@ function CI.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, 
     local showDuration = duration and true or false
     if not duration then duration = 4000 end
 
-    CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl)
+    CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, duration, showDuration, crowdControl, sourceUnitId)
     CI.PlayAlertSound(abilityId, alertType, crowdControl)
     CI.RealignAlerts()
 end
