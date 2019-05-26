@@ -73,7 +73,7 @@ function SCB.LoadCyrodiilBuffs(unitTag)
     if alliance == ALLIANCE_NONE then
         return
     end
-    local homeKeep, _, _, _, edgeKeepCount = GetAvAKeepScore(campaignId, alliance)
+    local _, _, _, _, edgeKeepCount = GetAvAKeepScore(campaignId, alliance)
     local id
     local icon
     local name
@@ -106,14 +106,5 @@ function SCB.LoadCyrodiilBuffs(unitTag)
                 stack = stack,
             }
         end
-    end
-    if homeKeep and not (SCB.SV.BlacklistTable[11346] or SCB.SV.BlacklistTable[A.Skill_Home_Keep_Bonus]) then
-        LUIE.EffectsList[context][ A.Skill_Home_Keep_Bonus ] = {
-            target = unitTag, type=1,
-            id=11346, name=A.Skill_Home_Keep_Bonus, icon = "LuiExtended/media/icons/abilities/ability_cyrodiil_home_keep_bonus.dds",
-            dur=0, starts=1, ends=nil,
-            forced = forced,
-            restart=true, iconNum=0,
-        }
     end
 end

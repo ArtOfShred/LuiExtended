@@ -79,7 +79,7 @@ function CI.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_GCD_SHOW),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_SHOW_TP),
                 getFunc = function() return CI.SV.GlobalShowGCD end,
-                setFunc = function(value) CI.SV.GlobalShowGCD = value end,
+                setFunc = function(value) CI.SV.GlobalShowGCD = value CI.HookGCD() end,
                 width = "full",
                 warning = GetString(SI_LUIE_LAM_CI_GCD_SHOW_WARN),
                 default = CI.D.GlobalShowGCD,

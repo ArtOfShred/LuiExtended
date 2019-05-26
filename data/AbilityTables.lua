@@ -818,7 +818,6 @@ local AbilityTables = {
 
     Skill_Battle_Spirit               = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT),
     Skill_Imperial_City               = GetCollectibleName(154),
-    Skill_Home_Keep_Bonus             = 11346,
     Skill_Edge_Keep_Bonus_1           = 111549,
     Skill_Edge_Keep_Bonus_2           = 111552,
     Skill_Edge_Keep_Bonus_3           = 111553,

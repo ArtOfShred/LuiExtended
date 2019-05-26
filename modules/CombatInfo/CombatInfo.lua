@@ -259,6 +259,22 @@ function CI.Initialize( enabled )
 
     CI.RegisterCombatInfo()
 
+    if CI.SV.GlobalShowGCD then
+        CI.HookGCD()
+    end
+
+    -- Create and update Cast Bar
+    CI.CreateCastBar()
+    CI.UpdateCastBar()
+    CI.SetCastBarPosition()
+
+    CI.CreateAlertFrame()
+    CI.SetAlertFramePosition()
+    CI.SetAlertColors()
+end
+
+function CI.HookGCD()
+
     -- Hook to update GCD support
     ActionButton.UpdateUsable = function(self)
         local slotnum = self:GetSlot()
@@ -376,14 +392,6 @@ function CI.Initialize( enabled )
         self:UpdateUsable()
     end
 
-    -- Create and update Cast Bar
-    CI.CreateCastBar()
-    CI.UpdateCastBar()
-    CI.SetCastBarPosition()
-
-    CI.CreateAlertFrame()
-    CI.SetAlertFramePosition()
-    CI.SetAlertColors()
 end
 
 -- Helper function to get override ability duration.
