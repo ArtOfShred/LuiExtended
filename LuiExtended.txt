@@ -40,8 +40,8 @@
 # THE SOFTWARE.
 
 LuiExtended.lua
-Hooks.lua
 Functions.lua
+Hooks.lua
 Initialize.lua
 UI.lua
 Changelog.lua
