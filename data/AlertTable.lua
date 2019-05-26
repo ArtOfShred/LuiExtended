@@ -35,7 +35,7 @@ LUIE.AlertTable = {
     --------------------------------------------------
 
     [63157] = { block = true, dodge = true, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Heavy Blow (Justice Guard 1H)
-    [63261] = { block = true, dodge = true, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250, cc = STUN }, -- Heavy Blow (Justice Guard 2H)
+    [63261] = { block = true, dodge = true, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1200, cc = STUN }, -- Heavy Blow (Justice Guard 2H) (-50 duration)
     [63179] = { block = true, dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN }, -- Flame Shard (Justice Guard 2H)
     [78743] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Flare (Justice Guard - Any)
 
@@ -55,7 +55,7 @@ LUIE.AlertTable = {
     --------------------------------------------------
 
     -- Shared
-    [39058] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bear Trap (Bear Trap)
+    [39058] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Bear Trap (Bear Trap)
 
     -- Synergy
     [12439] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Burning Arrow (Synergy)
@@ -64,75 +64,75 @@ LUIE.AlertTable = {
     -- Abilities
     [29378] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1600, cc = STUN }, -- Uppercut (Ravager)
 
-    [28408] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533 }, -- Whirlwind (Skirmisher)
+    [28408] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Whirlwind (Skirmisher) (-33 duration)
 
     [37108] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = SNARE }, -- Arrow Spray (Archer)
     [28628] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 6800 }, -- Volley (Archer)
     [74978] = { block = true, dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 9000, cc = STUN }, -- Taking Aim (Archer)
 
-    [14096] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250 }, -- Heavy Attack (Footsoldier)
+    [14096] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Heavy Attack (Footsoldier) (-50 duration)
     [28499] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = SNARE }, -- Throw Dagger (Footsoldier)
 
     [29400] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1400, cc = DISORIENT }, -- Power Bash (Guard)
     [29761] = { power = true, priority = 3, auradetect = true, alwaysShowInterrupt = true }, -- Brace (Guard)
 
-    [13701] = { block = true, dodge = true, priority = 3, eventdetect = true, bs = true, result = ACTION_RESULT_BEGIN }, -- Focused Charge (Brute)
+    [13701] = { block = true, dodge = true, priority = 3, eventdetect = true, bs = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Focused Charge (Brute)
 
-    [35164] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Agony (Berserker)
+    [35164] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300, cc = STUN }, -- Agony (Berserker) (-33 duration)
 
-    [29510] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunder Hammer (Thundermaul)
-    [17867] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Shock Aura (Thundermaul)
-    [81215] = { block = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Shock Aura (Thundermaul - Boss)
-    [81195] = { avoid = true, priority = 2, auradetect = true }, -- Agonizing Fury (Thundermaul - Boss)
-    [81217] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Thunder Hammer (Thundermaul - Boss)
+    [29510] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Thunder Hammer (Thundermaul)
+    [17867] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Shock Aura (Thundermaul)
+    [81215] = { block = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN }, -- Shock Aura (Thundermaul - Boss)
+    [81195] = { avoid = true, priority = 2, auradetect = true, cc = SNARE }, -- Agonizing Fury (Thundermaul - Boss)
+    [81217] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Thunder Hammer (Thundermaul - Boss) (-33 duration)
 
-    [36470] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Veiled Strike (Nightblade)
-    [44345] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Soul Tether (Nightblade)
+    [36470] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2500, cc = STUN }, -- Veiled Strike (Nightblade)
+    --[44345] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Soul Tether (Nightblade)
 
-    [34742] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Fiery Breath (Dragonknight)
-    [34646] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Lava Whip (Dragonknight)
+    [34742] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Fiery Breath (Dragonknight)
+    [34646] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Lava Whip (Dragonknight)
     [44227] = { avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dragonknight Standard (Dragonknight - Elite)
-    [52041] = { block = true, dodge = true, priority = 2, bs = true, result = ACTION_RESULT_BEGIN }, -- Blink Strike (Dragonknight - Elite)
+    [52041] = { block = true, dodge = true, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1700, cc = STUN }, -- Blink Strike (Dragonknight - Elite) (+33 duration)
 
     [88251] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Pet Ranger)
     [88248] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Pet Ranger)
     [89425] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Pet Ranger)
-    [44301] = { dodge = true, priority = 3, auradetect = true , ignoreRefresh = true }, -- Trap Beast (Pet Ranger)
+    [44301] = { dodge = true, priority = 3, auradetect = true , ignoreRefresh = true, cc = SNARE }, -- Trap Beast (Pet Ranger)
 
-    [15164] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Heat Wave (Fire Mage)
+    [15164] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Heat Wave (Fire Mage)
     [47095] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Fire Rune (Fire Mage)
 
-    [29471] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunder Thrall (Storm Mage)
+    [29471] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Thunder Thrall (Storm Mage)
 
-    [12459] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Winter's Reach (Frost Mage)
+    [12459] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = SNARE }, -- Winter's Reach (Frost Mage)
 
-    [35151] = { interrupt = true, priority = 3, auradetect = true }, -- Spell Absorption (Spirit Mage)
+    [35151] = { interrupt = true, priority = 3, auradetect = true, duration = 8000 }, -- Spell Absorption (Spirit Mage)
     [14472] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Burdening Eye (Spirit Mage)
 
-    [14370] = { avoid = true, interrupt = true, priority = 3, auradetect = true }, -- Void (Time Bomb Mage)
+    [14370] = { avoid = true, interrupt = true, priority = 3, auradetect = true, duration = 2000 }, -- Void (Time Bomb Mage)
 
-    [37087] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Onslaught (Battlemage)
-    [37129] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Ice Cage (Battlemage)
-    [44216] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Negate Magic (Battlemage - Elite)
+    [37087] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Lightning Onslaught (Battlemage)
+    [37129] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Ice Cage (Battlemage)
+    [44216] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = SILENCE }, -- Negate Magic (Battlemage - Elite)
 
     [88554] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
     [88555] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
     [88556] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
-    [13397] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1000 }, -- Empower Undead (Necromancer)
+    [13397] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1000, duration = 5000 }, -- Empower Undead (Necromancer)
 
-    [14350] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Aspect of Terror (Fear Mage)
+    [14350] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1600, cc = FEAR }, -- Aspect of Terror (Fear Mage) (-67 duration)
 
     [44250] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Dark Shade (Dreadweaver)
 
     [44323] = { power = true, priority = 3, auradetect = true }, -- Dampen Magic (Soulbrander)
     [44258] = { power = true, priority = 3, auradetect = true }, -- Radiant Magelight (Soulbrander)
 
-    [35387] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Defiled Grave (Bonelord)
+    [35387] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Defiled Grave (Bonelord)
     [88506] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Abomination (Bonelord)
     [88507] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Abomination (Bonelord)
 
-    [50966] = { power = true, auradetect = true, priority = 2 }, -- Healer Immune (Healer - Craglorn/DLC)
-    [44328] = { interrupt = true, priority = 2, auradetect = true }, -- Rite of Passage (Healer)
+    [50966] = { power = true, auradetect = true, priority = 2, alwaysShowInterrupt = true }, -- Healer Immune (Healer - Craglorn/DLC)
+    [44328] = { interrupt = true, priority = 2, auradetect = true, duration = 4500 }, -- Rite of Passage (Healer)
 
     [29520] = { destroy = true, auradetect = true, priority = 2 }, -- Aura of Protection (Shaman)
 
@@ -141,16 +141,16 @@ LUIE.AlertTable = {
     [43645] = { avoid = true, priority = 3, auradetect = true }, -- Barrier [monster synergy]  (Faction NPCs)
     [43646] = { avoid = true, priority = 3, auradetect = true }, -- Barrier [monster synergy]  (Faction NPCs)
 
-    [70070] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Strike (Winterborn Warrior)
-    [64980] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Javelin (Winterborn Warrior)
-    [65033] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Retaliation (Winterborn Warrior)
+    [70070] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Heavy Strike (Winterborn Warrior) (-50 duration)
+    [64980] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = STAGGER }, -- Javelin (Winterborn Warrior)
+    [65033] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 1000, cc = STAGGER }, -- Retaliation (Winterborn Warrior)
 
-    [55909] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Grasping Vines (Winterborn Mage)
-    [64704] = { block = true, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500, result = ACTION_RESULT_BEGIN }, -- Flames (Winterborn Mage)
+    [55909] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = SNARE }, -- Grasping Vines (Winterborn Mage)
+    [64704] = { block = true, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500, result = ACTION_RESULT_BEGIN, duration = 4500 }, -- Flames (Winterborn Mage)
 
     [65235] = { power = true, auradetect = true, priority = 2 }, -- Enrage (Vosh Rakh Devoted)
-    [53987] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Rally (Vosh Rakh Devoted)
-    [54027] = { block = true, dodge = true, priority = 3, refire = 1600, result = ACTION_RESULT_BEGIN }, -- Divine Leap (Vosh Rakh Devoted)
+    [53987] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 3000 }, -- Rally (Vosh Rakh Devoted)
+    [54027] = { block = true, dodge = true, priority = 3, refire = 1600, result = ACTION_RESULT_BEGIN, duration = 3700, cc = STUN }, -- Divine Leap (Vosh Rakh Devoted)
 
     [51000] = { power = true, auradetect = true, priority = 2 }, -- Cleave Stance (Dremora Caitiff) (Craglorn)
 
