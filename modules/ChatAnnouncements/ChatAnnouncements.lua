@@ -68,6 +68,7 @@ CA.D = {
         AchievementCategory21         = true,
         AchievementCategory22         = true,
         AchievementCategory23         = true,
+        AchievementCategory24         = true,
         AchievementProgressMsg        = GetString(SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG),
         AchievementCompleteMsg        = GetString(SI_ACHIEVEMENT_AWARDED_CENTER_SCREEN),
         AchievementColorProgress      = true,
@@ -2875,6 +2876,7 @@ function CA.OnAchievementUpdated(eventCode, id)
     if topLevelIndex == 21 and not CA.SV.Achievement.AchievementCategory21 then return end
     if topLevelIndex == 22 and not CA.SV.Achievement.AchievementCategory22 then return end
     if topLevelIndex == 23 and not CA.SV.Achievement.AchievementCategory23 then return end
+    if topLevelIndex == 24 and not CA.SV.Achievement.AchievementCategory24 then return end
 
     if CA.SV.Achievement.AchievementUpdateCA or CA.SV.Achievement.AchievementUpdateAlert then
         local totalCmp = 0
@@ -8529,6 +8531,7 @@ function CA.HookFunction()
         if topLevelIndex == 21 and not CA.SV.Achievement.AchievementCategory21 then return true end
         if topLevelIndex == 22 and not CA.SV.Achievement.AchievementCategory22 then return true end
         if topLevelIndex == 23 and not CA.SV.Achievement.AchievementCategory23 then return true end
+        if topLevelIndex == 24 and not CA.SV.Achievement.AchievementCategory24 then return true end
 
         if CA.SV.Achievement.AchievementCompleteCA then
             link = strformat(GetAchievementLink(id, linkBrackets[CA.SV.BracketOptionAchievement]))

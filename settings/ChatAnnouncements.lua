@@ -3397,6 +3397,17 @@ function CA.CreateSettings()
                 default = CA.D.Achievement.AchievementCategory23,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
+            {
+                -- Enables achievements tracking in %s category
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(24)),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(24)),
+                getFunc = function() return CA.SV.Achievement.AchievementCategory24 end,
+                setFunc = function(value) CA.SV.Achievement.AchievementCategory24 = value end,
+                width = "full",
+                default = CA.D.Achievement.AchievementCategory24,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+            },
         },
     }
 

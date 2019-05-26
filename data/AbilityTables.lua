@@ -1011,6 +1011,7 @@ local AbilityTables = {
     Trap_Lightning_Trap               = GetString(SI_LUIE_SKILL_LIGHTNING_TRAP),
     Trap_Blade_Trap                   = 66793,
 
+    Trap_Slaughterfish                = zo_strformat("<<C:1>>", GetItemLinkName("|H0:item:42861:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
     Trap_Lava                         = 5139,
 
     -- ---------------------------------------------------
@@ -1133,6 +1134,7 @@ local AbilityTables = {
     Skill_Empowered_by_the_Light      = GetString(SI_LUIE_SKILL_EMPOWERED_BY_THE_LIGHT),
     Skill_Warmth                      = 29430,
     Skill_Arena_Torch                 = GetString(SI_LUIE_SKILL_ARENA_TORCH),
+    Skill_Biting_Cold                 = 53341,
 
     -- Maelstrom Arena
     Skill_Sigil_of_Healing            = 66920,
@@ -1149,6 +1151,7 @@ local AbilityTables = {
     Skill_Cold_Snap                   = 72705,
     Skill_Summon_Deathless_Wolf       = GetString(SI_LUIE_SKILL_SUMMON_DEATHLESS_WOLF),
     Skill_Iceberg_Calving             = 71702,
+    Skill_Frigid_Waters               = 67805,
 
     -- ---------------------------------------------------
     -- DUNGEON EFFECTS -----------------------------------

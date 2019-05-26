@@ -1927,10 +1927,19 @@ E.EffectSourceOverride = {
     -- TRAPS
     [62769] = { source = A.Trap_Cold_Fire_Trap }, -- Coldharbour Flames {MQ Tutorial}
     [62770] = { source = A.Trap_Cold_Fire_Trap }, -- Coldharbour Flames {MQ Tutorial}
-    [17314] = { source = A.Trap_Fire_Trap }, -- Fire Trap (Fire Trap)
+    [17314] = { source = A.Trap_Fire_Trap, addSource = true }, -- Fire Trap (Fire Trap)
 
     [72888] = { source = A.Trap_Fire_Trap }, -- Fire Attack 1 (Fire) -- Banished Cells II
     [72889] = { source = A.Trap_Fire_Trap }, -- Fire Attack 2 (Fire) -- Banished Cells II
+
+    -- ENVIRONMENTAL
+    [44034] = { source = A.Trap_Slaughterfish, addSource = true }, -- Slaughterfish Attack
+    [113082] = { source = A.Trap_Slaughterfish, addSource = true }, -- Slaughterfish Attack
+
+    [19224] = { source = A.Trap_Lava, addSource = true }, -- In Lava (Halls of Torment)
+    [11338] = { source = A.Trap_Lava, addSource = true }, -- In Lava (Earth Forge)
+    [56277] = { source = A.Trap_Lava, addSource = true }, -- In Lava (City of Ash II)
+    [5140] = { source = A.Trap_Lava, addSource = true }, -- Dragonstar Arena (City of Ash II)
 
     -- TRAPS (Go back over these)
     [92150] = {source = 'Dwarven Furnace'}, -- Fire Trap {Vvardenfell}
@@ -1965,10 +1974,15 @@ E.EffectSourceOverride = {
     -----------------------------------------------
 
     -- Dragonstar Arena
+    [55341] = { source = A.Skill_Biting_Cold, addSource = true }, -- Biting Cold (Player)
+    [60421] = { source = A.Skill_Biting_Cold, addSource = true }, -- Biting Cold (Player)
+    [83441] = { source = U.NPC_Anka_Ra_Shadowcaster, addSource = true }, -- Celestial Blast (Player)
     [55182] = { source = U.Boss_Hiath_the_Battlemaster }, -- Marked for Death (Hiath the Battlemaster)
 
     -- Maelstrom Arena
     [67871] = { source = U.Boss_Lamia_Queen }, -- Shock (Water)
+    [72525] = { source = A.Skill_Frigid_Waters, addSource = true }, -- Frigid Waters (Player)
+    [67808] = { source = A.Skill_Frigid_Waters, addSource = true }, -- Frigid Waters (Player)
 
     -----------------------------------------------
     -- DUNGEONS

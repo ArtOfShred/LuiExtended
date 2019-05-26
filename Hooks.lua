@@ -53,6 +53,21 @@ function LUIE.InitializeHooks()
         -- Hook GetKillingAttackInfo - Change Icon or Name (additional support for Zone based changes, and source attacker/pet changes)
         local zos_GetKillingAttackerInfo = GetKillingAttackerInfo
         local zos_GetKillingAttackInfo = GetKillingAttackInfo
+        local zos_DoesKillingAttackHaveAttacker = DoesKillingAttackHaveAttacker
+
+        DoesKillingAttackHaveAttacker = function(index)
+            local hasAttacker = zos_DoesKillingAttackHaveAttacker
+            local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
+
+            if LUIE.Effects.EffectSourceOverride[abilityId] then
+                if LUIE.Effects.EffectSourceOverride[abilityId].addSource then
+                    hasAttacker = true
+                end
+            end
+
+            return hasAttacker
+        end
+
 
         GetKillingAttackerInfo = function(index)
             local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
