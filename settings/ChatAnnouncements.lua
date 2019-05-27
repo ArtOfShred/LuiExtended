@@ -23,8 +23,8 @@ local duelStartOptions              = { "Message + Icon", "Message Only", "Icon 
 local duelStartOptionsKeys          = { ["Message + Icon"] = 1, ["Message Only"] = 2, ["Icon Only"] = 3 }
 
 function CA.CreateSettings()
-    -- Load LibAddonMenu with backwards compatibility
-    local LAM = LibStub("LibAddonMenu-2.0")
+    -- Load LibAddonMenu
+    local LAM = _G["LibAddonMenu2"]
 
     local panelDataChatAnnouncements = {
         type = "panel",

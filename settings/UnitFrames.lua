@@ -34,8 +34,8 @@ local formatOptions = {
 }
 
 function UF.CreateSettings()
-    -- Load LibAddonMenu with backwards compatibility
-    local LAM = LibStub("LibAddonMenu-2.0")
+    -- Load LibAddonMenu
+    local LAM = _G["LibAddonMenu2"]
 
     -- Get fonts
     local FontsList = {}
