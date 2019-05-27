@@ -131,7 +131,7 @@ LUIE.AlertTable = {
     [88506] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Abomination (Bonelord)
     [88507] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Abomination (Bonelord)
 
-    [50966] = { power = true, auradetect = true, priority = 2, alwaysShowInterrupt = true }, -- Healer Immune (Healer - Craglorn/DLC)
+    [50966] = { power = true, auradetect = true, priority = 2, alwaysShowInterrupt = true, duration = 5000 }, -- Healer Immune (Healer - Craglorn/DLC)
     [44328] = { interrupt = true, priority = 2, auradetect = true, duration = 4500 }, -- Rite of Passage (Healer)
 
     [29520] = { destroy = true, auradetect = true, priority = 2 }, -- Aura of Protection (Shaman)
@@ -150,7 +150,7 @@ LUIE.AlertTable = {
 
     [65235] = { power = true, auradetect = true, priority = 2 }, -- Enrage (Vosh Rakh Devoted)
     [53987] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 3000 }, -- Rally (Vosh Rakh Devoted)
-    [54027] = { block = true, dodge = true, priority = 3, refire = 1600, result = ACTION_RESULT_BEGIN, duration = 3700, cc = STUN }, -- Divine Leap (Vosh Rakh Devoted)
+    [54027] = { block = true, dodge = true, priority = 3, refire = 1600, result = ACTION_RESULT_BEGIN, duration = 4000, cc = STUN, neverShowInterrupt = true }, -- Divine Leap (Vosh Rakh Devoted)
 
     [51000] = { power = true, auradetect = true, priority = 2 }, -- Cleave Stance (Dremora Caitiff) (Craglorn)
 
@@ -195,55 +195,55 @@ LUIE.AlertTable = {
     [84835] = { avoid = true, priority = 2, eventdetect = true }, -- Broken Pact (Skaafin) (Morrowind)
 
     -- ANIMALS
-    [5452] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Lacerate (Alit)
+    [5452] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STAGGER }, -- Lacerate (Alit)
 
-    [4415] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Crushing Swipe (Bear)
-    [4416] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Savage Blows (Bear)
+    [4415] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1600, cc = STUN }, -- Crushing Swipe (Bear)
+    [4416] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STAGGER }, -- Savage Blows (Bear)
 
-    [70366] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Slam (Great Bear)
+    [70366] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2167, cc = STUN }, -- Slam (Great Bear)
 
-    [4591] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Sweep (Crocodile)
+    [4591] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 970 }, -- Sweep (Crocodile)
     [4594] = { power = true, auradetect = true, priority = 2, ignoreRefresh = true, refire = 500 }, -- Ancient Skin (Crocodile)
 
-    [8977] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Sweep (Duneripper)
+    [8977] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1721 }, -- Sweep (Duneripper)
 
-    [7227] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Rotbone (Durzog)
+    [7227] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1100 }, -- Rotbone (Durzog)
 
-    [6308] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Shocking Touch (Dreugh)
-    [6328] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2000 }, -- Shocking Rake (Dreugh)
+    [6308] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2500, cc = STAGGER }, -- Shocking Touch (Dreugh)
+    [6328] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2000, duration = 3600 }, -- Shocking Rake (Dreugh)
 
-    [54375] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Shockwave (Echatere)
-    [54380] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Headbutt (Echatere)
+    [54375] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300, cc = STAGGER }, -- Shockwave (Echatere)
+    [54380] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1300, cc = STUN }, -- Headbutt (Echatere)
 
-    [4632] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Screech (Giant Bat)
-    [4630] = { dodge = true, interrupt = true, priority = 3, refire = 1500, result = ACTION_RESULT_BEGIN }, -- Draining Bite (Giant Bat)
+    [4632] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = STUN }, -- Screech (Giant Bat)
+    [4630] = { dodge = true, interrupt = true, priority = 3, refire = 1500, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Draining Bite (Giant Bat)
 
-    [5240] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lash (Giant Snake)
-    [5242] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Kiss of Poison (Giant Snake)
-    [5244] = { interrupt = true, priority = 3, auradetect = true }, -- Shed Skin (Giant Snake)
+    [5240] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2600, cc = STAGGER }, -- Lash (Giant Snake)
+    [5242] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Kiss of Poison (Giant Snake)
+    [5244] = { interrupt = true, priority = 3, auradetect = true, duration = 5000 }, -- Shed Skin (Giant Snake)
 
-    [5441] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dive (Guar)
+    [5441] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STAGGER }, -- Dive (Guar)
 
-    [14196] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Charge (Kagouti)
-    [5363] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Chomp (Kagouti)
-    [5926] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Toss (Kagouti)
-    [87276] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Chomp (Kagouti Whelp)
+    [14196] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Charge (Kagouti)
+    [5363] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STAGGER }, -- Chomp (Kagouti)
+    [5926] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Toss (Kagouti)
+    [87276] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STAGGER }, -- Chomp (Kagouti Whelp)
 
-    [7161] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Double Strike (Lion)
+    [7161] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Double Strike (Lion)
 
-    [8601] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 600 }, -- Vigorous Swipe (Mammoth)
-    [8600] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_EFFECT_GAINED }, -- Stomp (Mammoth)
-    [23230] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Charge (Mammoth)
+    [8601] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 600, duration = 6000 }, -- Vigorous Swipe (Mammoth)
+    [8600] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_EFFECT_GAINED, duration = 3000, cc = STAGGER }, -- Stomp (Mammoth)
+    [23230] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Charge (Mammoth)
 
-    [4200] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Unforgiving Claws (Mudcrab)
+    [4200] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Unforgiving Claws (Mudcrab)
 
-    [16690] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Thrust (Netch)
-    [16697] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1800 }, -- Poisonbloom (Netch)
+    [16690] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STAGGER }, -- Thrust (Netch)
+    [16697] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1800, duration = 7500 }, -- Poisonbloom (Netch)
 
-    [7268] = { interrupt = true, priority = 3, refire = 500, result = ACTION_RESULT_BEGIN }, -- Leech
-    [7273] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dampworm (Nix-Hound)
+    [7268] = { interrupt = true, priority = 3, refire = 500, result = ACTION_RESULT_BEGIN, duration = 5650 }, -- Leech
+    [7273] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = SNARE }, -- Dampworm (Nix-Hound)
 
-    [21904] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Rend (Skeever)
+    [21904] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Rend (Skeever)
 
     [21951] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Repulsion Shock (Wamasu)
     [21949] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Sweep (Wamasu)
@@ -266,10 +266,10 @@ LUIE.AlertTable = {
     [76324] = { power = true, auradetect = true, priority = 2, refire = 1000 }, -- Baleful Call (Dire Wolf)
 
     [85201] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1167, cc = STAGGER }, -- Bite (Nix-Ox)
-    [85084] = { block = true, avoid = true, priority = 3, eventdetect = true, refire = 750, result = ACTION_RESULT_BEGIN, duration = 700, cc = STAGGER }, -- Shriek (Nix-Ox)
+    [85084] = { block = true, avoid = true, priority = 3, eventdetect = true, refire = 750, result = ACTION_RESULT_BEGIN, duration = 500, cc = STAGGER }, -- Shriek (Nix-Ox)
     [90765] = { avoid = true, priority = 3, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Acid Spray (Nix-Ox)
     [90809] = { avoid = true, priority = 3, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Acid Spray (Nix-Ox)
-    [85172] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Winnow (Nix-Ox)
+    [85172] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 500, cc = STUN }, -- Winnow (Nix-Ox)
     [85203] = { power = true, auradetect = true, priority = 2, refire = 1000 }, -- Nix-Call (Nix-Ox)
 
     [85395] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = STUN, duration = 1333 }, -- Dive (Cliff Strider)
@@ -430,7 +430,7 @@ LUIE.AlertTable = {
 
     [2867] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Crushing Leap (Werewolf)
     [3415] = { block = true, dodge = true, priority = 3, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN }, -- Flurry (Werewolf)
-    [44055] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Devour (Werewolf)
+    [44055] = { interrupt = true, priority = 3, auradetect = true, duration = 4000 }, -- Devour (Werewolf)
     --[5785] = { power = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Blood Scent (Werewolf)
 
     [4337] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Winter's Reach (Wraith)

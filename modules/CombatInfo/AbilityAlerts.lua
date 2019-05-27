@@ -329,7 +329,7 @@ function CI.AlertUpdate(currentTime)
 
             local remain = alert.data.duration - currentTime
 
-            --[[
+
             -- DEBUG
             if remain <= 100 and remain > 0 then
                 d(remain)
@@ -337,7 +337,6 @@ function CI.AlertUpdate(currentTime)
             if remain <= 0 and remain > -100 then
                 d(remain)
             end
-            --]]
 
             if alert.data.showDuration then
                 alert.timer:SetText(alert.data.showDuration and strfmt(" %.1f", remain / 1000) or "")
