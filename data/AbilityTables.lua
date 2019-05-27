@@ -957,6 +957,7 @@ local AbilityTables = {
     Skill_Zap                         = 8429,
     Skill_Leeching_Bite               = GetString(SI_LUIE_SKILL_LEECHING_BITE),
     Skill_Fetcherfly_Colony           = GetString(SI_LUIE_SKILL_FETCHERFLY_COLONY),
+    Skill_Fetcherfly_Swarm            = GetString(SI_LUIE_SKILL_FETCHERFLY_SWARM),
 
     -- Daedra
     Skill_Summon_Daedric_Arch         = 65404,

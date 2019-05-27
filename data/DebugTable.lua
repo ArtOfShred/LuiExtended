@@ -9696,6 +9696,7 @@ LUIE.DebugAuras = {
     [87385] = true, -- Devour
     [87386] = true, -- Devour
     [87987] = true, -- Devour
+    [87250] = true, -- Devour
     [84944] = true, -- Hollow
     [91440] = true, -- Hollow
     [91439] = true, -- Hollow

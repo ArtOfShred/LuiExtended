@@ -1183,6 +1183,7 @@ local strings = {
     SI_LUIE_SKILL_BLADE_TRAP_VMA =                       "Afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThis effect stacks up to |cFFFFFF25|r times, dealing |cFFFFFF5|r% increased damage per stack.",
     SI_LUIE_SKILL_ENERGIZE =                             "Energize",
     SI_LUIE_SKILL_REFLECTIVE_SCALE =                     "Reflective Scale",
+    SI_LUIE_SKILL_FETCHERFLY_SWARM =                     "Fetcherfly Swarm",
 }
 
 for stringId, stringValue in pairs(strings) do
