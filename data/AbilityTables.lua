@@ -938,6 +938,7 @@ local AbilityTables = {
     Skill_Rush                        = 14380,
     Skill_Vigorus_Swipes              = 75634,
     Skill_Barreling_Charge            = GetString(SI_LUIE_SKILL_BARRELING_CHARGE),
+    Skill_Storm_Bound                 = 55864,
     Skill_Swipe                       = 2850,
     Skill_Blitz                       = GetString(SI_LUIE_SKILL_BLITZ),
     Skill_Toxic_Mucus                 = 72793,

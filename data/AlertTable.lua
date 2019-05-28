@@ -245,24 +245,29 @@ LUIE.AlertTable = {
 
     [21904] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Rend (Skeever)
 
-    [21951] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Repulsion Shock (Wamasu)
-    [21949] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Sweep (Wamasu)
-    [21957] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Charge (Wamasu)
+    [21951] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 4900, neverShowInterrupt = true }, -- Repulsion Shock (Wamasu)
+    [21949] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1400, cc = STUN, neverShowInterrupt = true }, -- Sweep (Wamasu)
+    [21957] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Charge (Wamasu)
     [22045] = { power = true, auradetect = true, priority = 2 }, --- Static (Wamasu)
 
-    [44791] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Rear Kick (Welwa)
-    [50714] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true }, -- Charge (Welwa)
+    [55866] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 4900, neverShowInterrupt = true }, -- Repulsion Shock (Wamasu - Boss)
+    [55868] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1200, cc = STUN, neverShowInterrupt = true }, -- Sweep (Wamasu - Boss)
+    [55850] = { avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Impending Storm (Wamasu - Boss)
+    [55860] = { dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1700, cc = SNARE }, -- Storm Bound (Storm Atronach)
 
-    [42844] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Rotbone (Wolf)
-    [14523] = { dodge = true, interrupt = true, priority = 3, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Helljoint (Wolf)
+    [44791] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Rear Kick (Welwa)
+    [50714] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, cc = STUN }, -- Charge (Welwa)
+
+    [42844] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1100 }, -- Rotbone (Wolf)
+    [14523] = { dodge = true, interrupt = true, priority = 3, refire = 1000, result = ACTION_RESULT_BEGIN, duration = 6800, cc = SNARE }, -- Helljoint (Wolf)
     [14272] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Call of the Pack (Wolf)
     [26658] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Call of the Pack (Jackal)
 
-    [72793] = { dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Toxic Mucus (Haj Mota)
-    [72796] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bog Burst (Haj Mota)
-    [72789] = { avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Shockwave (Haj Mota)
+    [72793] = { dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1767, cc = SNARE }, -- Toxic Mucus (Haj Mota)
+    [72796] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Bog Burst (Haj Mota)
+    [72789] = { avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1667, cc = STAGGER }, -- Shockwave (Haj Mota)
 
-    [76307] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Lunge (Dire Wolf)
+    [76307] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1467 }, -- Lunge (Dire Wolf)
     [76324] = { power = true, auradetect = true, priority = 2, refire = 1000 }, -- Baleful Call (Dire Wolf)
 
     [85201] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1167, cc = STAGGER }, -- Bite (Nix-Ox)
@@ -312,8 +317,8 @@ LUIE.AlertTable = {
     [8429] = { interrupt = true, priority = 3, refire = 750, result = ACTION_RESULT_BEGIN }, -- Zap (Thunderbug)
     [26412] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunderstrikes (Thunderbug)
 
-    [73172] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN  }, -- Swarm (Kotu Gava Broodmother)
-    [73199] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Swarmburst (Kotu Gava Broodmother)
+    [73172] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 3667, cc = SNARE }, -- Swarm (Kotu Gava Broodmother)
+    [73199] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, cc = SNARE }, -- Swarmburst (Kotu Gava Broodmother)
 
     [87022] = { summon = true, auradetect = true, priority = 3, fakeName = "" }, -- Summon Swarm (Fetcherfly Nest)
     [85645] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Bombard (Fetcherfly Nest)

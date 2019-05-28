@@ -6832,6 +6832,8 @@ E.EffectOverride = {
     [16690] = { icon = 'LuiExtended/media/icons/abilities/ability_netch_thrust.dds' }, -- Thrust (Netch)
     [16697] = { icon = 'LuiExtended/media/icons/abilities/ability_netch_poisonbloom.dds' }, -- Poisonbloom (Netch)
     [16698] = { icon = 'LuiExtended/media/icons/abilities/ability_netch_poisonbloom.dds', groundLabel = true, tooltip = T.Generic_AOE_Poison, tooltipValue2 = 1 }, -- Poisonbloom (Netch)
+
+    -- Nix-Hound
     [7266] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_strike.dds' }, -- Strike (Nix-Hound)
     [13416] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_strike.dds' }, -- Strike (Nix-Hound)
     [7268] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_leech.dds' }, -- Leech (Nix-Hound)
@@ -6840,8 +6842,12 @@ E.EffectOverride = {
     [7273] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_dampworm.dds' }, -- Dampworm (Nix-Hound)
     [38635] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_dampworm.dds' }, -- Dampworm (Nix-Hound)
     [38640] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_dampworm.dds', tooltip = T.Generic_Snare, tooltipValue2 = 45 }, -- Dampworm (Nix-Hound)
+
+    -- Skeever
     [5362] = { icon = 'LuiExtended/media/icons/abilities/ability_skeever_slam.dds' }, -- Slam (Skeever)
     [21904] = { icon = 'LuiExtended/media/icons/abilities/ability_skeever_rend.dds' }, -- Rend (Skeever)
+
+    -- Wamasu
     [21947] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_bite.dds' }, -- Bite (Wamasu)
     [21949] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds' }, -- Sweep (Wamasu)
     [46833] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds' }, -- Sweep (Wamasu)
@@ -6854,6 +6860,24 @@ E.EffectOverride = {
     [21961] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_charge.dds', name = A.Skill_Barreling_Charge }, -- Charge (Wamasu)
     [21967] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_charge.dds', name = A.Skill_Barreling_Charge, tooltip = T.Generic_Knockdown }, -- Charge (Wamasu)
     [21963] = { hide = true }, -- Charge (Wamasu) (Pointless aura that does nothing)
+
+    -- Wamasu (Boss)
+    [55868] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds' }, -- Sweep (Wamasu)
+    [55870] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds' }, -- Sweep (Wamasu)
+    [55869] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds', tooltip = T.Generic_Knockdown }, -- Sweep (Wamasu)
+    [55866] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_repulsion_shock.dds', hide = true }, -- Repulsion Shock (Wamasu)
+    [55867] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_repulsion_shock.dds' }, -- Repulsion Shock (Wamasu)
+
+    [55850] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_impending_storm.dds' }, -- Impending Storm (Wamasu - Boss)
+    [55856] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_impending_storm.dds' }, -- Impending Storm (Wamasu - Boss)
+
+    [55860] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', name = A.Skill_Storm_Bound }, -- Ball Lightning (Wamasu - Boss)
+    [55864] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', internalStack = 0 }, -- Storm Bound (Wamasu - Boss)
+    [55862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', tooltip = T.Skill_Storm_Bound, internalStack = 0 }, -- Storm Bound (Wamasu - Boss)
+    [55863] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', hideReduce = true, tooltip = T.Skill_Storm_Bound }, -- Storm Bound (Wamasu - Boss)
+    [55861] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds' }, -- Storm Bound (Wamasu - Boss)
+
+    -- Welwa
     [44781] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_swipe.dds', name = A.Skill_Bite }, -- Swipe (Welwa)
     [45937] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_cleave.dds', name = A.Skill_Swipe }, -- Cleave (Welwa)
     [44791] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_rear_kick.dds' }, -- Rear Kick (Welwa)
@@ -7398,7 +7422,7 @@ E.EffectOverride = {
     [73196] = { hide = true }, -- Swarmburst (Kotu Gava Spawn)
     [73197] = { hide = true }, -- Swarmburst (Kotu Gava Spawn)
     [73194] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_slime_alt.dds',  tooltip = T.Generic_Snare, tooltipValue2 = 40 }, -- Swarmburst (Kotu Gava Broodmother)
-    [73198] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarmburst.dds', tooltip = T.Skill_Kotu_Gava_Swarm, tooltipValue2Mod = -1 }, -- Swarmburst (Kotu Gava Broodmother)
+    [73198] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarmburst.dds', tooltip = T.Skill_Kotu_Gava_Swarm, tooltipValue2 = 1 }, -- Swarmburst (Kotu Gava Broodmother)
     [87022] = { icon = 'LuiExtended/media/icons/abilities/ability_fetcherflynest_ashen_wind.dds', name = A.Skill_Fetcherfly_Swarm, hide = true }, -- Summon Swarm (Fetcherfly Nest)
     [85524] = { hide = true }, -- Ashen Wind (Fetcherfly Swarm)
     [85525] = { icon = 'LuiExtended/media/icons/abilities/ability_fetcherflynest_ashen_wind.dds' }, -- Ashen Wind (Fetcherfly Swarm)
@@ -10773,6 +10797,8 @@ E.FakeExternalDebuffs = {
     [74336] = { duration = 2000 }, -- Bog Burst (Haj Mota)
     [14523] = { duration = 6000, ignoreBegin = true }, -- Helljoint (Wolf)
     [85394] = { duration = 8000 }, -- Slash (Cliff Strider Matriach)
+    [55862] = { duration = 8000 }, --Storm Bound (Wamasu - Boss) (DOT)
+    [55863] = { duration = 8000 }, --Storm Bound (Wamasu - Boss) (SNARE)
 
     -- Daedra
     [50023] = { duration = 4000, ignoreBegin = true }, -- Lightning Rod (Air Atronach)
@@ -10803,10 +10829,6 @@ E.FakeExternalDebuffs = {
 
     -- Cyrodiil
     [72641] = { duration = 2000 }, -- Power Bash (Cryodiil Guard T2)
-
-    -- Craglorn: TODO
-    --[55862] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = A.Skill_Storm_Bound, duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (DOT)
-    --[55863] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = A.Skill_Storm_Bound, duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (Snare)
 
     -- Traps
     [11338] = { duration = 0 }, -- Lava -- In Lava

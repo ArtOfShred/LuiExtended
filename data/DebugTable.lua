@@ -8421,6 +8421,28 @@ LUIE.DebugAuras = {
     [21962] = true, -- Charge -- Wamasu
     [21959] = true, -- Charge -- Wamasu
 
+    [55868] = true, -- Sweep (Wamasu - Boss)
+    [55870] = true, -- Sweep (Wamasu - Boss)
+    [55869] = true, -- Sweep (Wamasu - Boss)
+    [55866] = true, -- Repulsion Shock (Wamasu - Boss)
+    [55867] = true, -- Repulsion Shock (Wamasu - Boss)
+
+    [55850] = true, -- Impending Storm (Wamasu - Boss)
+    [55851] = true, -- Impending Storm (Wamasu - Boss)
+    [55852] = true, -- Impending Storm (Wamasu - Boss)
+    [55853] = true, -- Impending Storm (Wamasu - Boss)
+    [55854] = true, -- Impending Storm (Wamasu - Boss)
+    [55855] = true, -- Impending Storm (Wamasu - Boss)
+    [55857] = true, -- Impending Storm (Wamasu - Boss)
+    [55856] = true, -- Impending Storm (Wamasu - Boss)
+
+    [55860] = true, -- Ball Lightning (Wamasu - Boss)
+    [55864] = true, -- Storm Bound (Wamasu - Boss)
+    [55862] = true, -- Storm Bound (Wamasu - Boss)
+    [55863] = true, -- Storm Bound (Wamasu - Boss)
+    [55861] = true, -- Storm Bound (Wamasu - Boss)
+    [64277] = true, -- Storm Bound Fx (Wamasu - Boss)
+
     [44781] = true, -- Swipe -- Welwa
     [45937] = true, -- Cleave -- Welwa
     [44791] = true, -- Rear Kick -- Welwa
