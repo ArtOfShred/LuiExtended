@@ -588,6 +588,7 @@ E.EffectGroundDisplay = {
 
     [122174] = { buff = false, debuff = false, ground = true }, -- Frozen Colossus (Frozen Colossus)
     [122395] = { buff = false, debuff = false, ground = true }, -- Pestilent Colossus (Pestilent Colossus)
+    [122388] = { buff = false, debuff = false, ground = true }, -- Glacial Colossus (Glacial Colossus)
 
     ---------------------------
     -- Bow --------------------
@@ -4905,6 +4906,11 @@ E.EffectOverride = {
     [122400] = { tooltip = T.Generic_AOE_Disease, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
     [122401] = { tooltip = T.Generic_AOE_Disease, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
     [122397] = { tooltip = A.Skill_Pestilent_Colossus }, -- Major Vulnerability (Pestilent Colossus)
+
+    [122388] = { tooltip = T.Skill_Glacial_Colossus, tooltipValue2Id = 122394 }, -- Glacial Colossus (Glacial Colossus)
+    [122392] = { tooltip = T.Skill_Glacial_Colossus_Ground, groundLabel = true }, -- Glacial Colossus (Glacial Colossus)
+    [122389] = { tooltip = A.Skill_Glacial_Colossus }, -- Major Vulnerability (Glacial Colossus)
+    [122394] = { tooltip = T.Generic_Stun }, -- Glacial Colossus (Glacial Colossus)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
@@ -11290,10 +11296,10 @@ E.AddGroundDamageAura = {
     [118011] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Mystic Siphon (Mystic Siphon)
 
     [122178] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Frozen Colossus (Frozen Colossus)
-
     [122399] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 2 }, -- Pestilent Colossus (Pestilent Colossus)
     [122400] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 2 }, -- Pestilent Colossus (Pestilent Colossus)
     [122401] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 2 }, -- Pestilent Colossus (Pestilent Colossus)
+    [122392] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Glacial Colossus (Glacial Colossus)
 
     -- Bow
     [28877] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Volley (Volley)

@@ -628,6 +628,7 @@ local AbilityTables = {
 
     Skill_Frozen_Colossus             = 122174,
     Skill_Pestilent_Colossus          = 122397,
+    Skill_Glacial_Colossus            = 122388,
 
     -- ---------------------------------------------------
     -- WEAPON SKILLS -------------------------------------

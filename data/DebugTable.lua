@@ -4689,6 +4689,13 @@ LUIE.DebugAuras = {
     [122401] = true, -- Pestilent Colossus (Pestilent Colossus)
     [122397] = true, -- Major Vulnerability (Pestilent Colossus)
 
+    [122388] = true, -- Glacial Colossus (Glacial Colossus)
+    [122391] = true, -- Glacial Colossus (Glacial Colossus)
+    [122390] = true, -- Glacial Colossus (Glacial Colossus)
+    [122392] = true, -- Glacial Colossus (Glacial Colossus)
+    [122389] = true, -- Major Vulnerability (Glacial Colossus)
+    [122394] = true, -- Glacial Colossus (Glacial Colossus)
+
 
     -------------------------------------
     -- UNARMED PASSIVES -----------------
