@@ -47,6 +47,7 @@ local AbilityTables = {
     Skill_Minor_Heroism               = 38746,
     Skill_Major_Heroism               = 61709,
     Skill_Minor_Toughness             = 46542,
+    Skill_Minor_Courage               = 121878,
     Skill_Major_Courage               = 66902,
 
     -- Major/Minor Debuffs
@@ -394,6 +395,8 @@ local AbilityTables = {
     Set_Sentry                        = 32807,
     Set_Line_Breaker                  = 75753,
     Set_Call_of_the_Undertaker        = 121633,
+    Set_False_Gods_Devotion           = 121823,
+    Set_Claw_of_Yolnakhriin           = 121875,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 
@@ -617,6 +620,16 @@ local AbilityTables = {
     Skill_Northern_Storm              = 87542,
     Skill_Permafrost                  = 86117,
 
+    -- Necromancer
+    Skill_Blighted_Blastbones         = 117690,
+    Skill_Unnerving_Boneyard          = 117809,
+    Skill_Skeletal_Mage               = 114317,
+    Skill_Skeletal_Arcanist           = 118726,
+
+    Skill_Frozen_Colossus             = 122174,
+    Skill_Pestilent_Colossus          = 122397,
+    Skill_Glacial_Colossus            = 122388,
+
     -- ---------------------------------------------------
     -- WEAPON SKILLS -------------------------------------
     -- ---------------------------------------------------
@@ -806,7 +819,6 @@ local AbilityTables = {
 
     Skill_Battle_Spirit               = GetString(SI_LUIE_SKILL_BATTLE_SPIRIT),
     Skill_Imperial_City               = GetCollectibleName(154),
-    Skill_Home_Keep_Bonus             = 11346,
     Skill_Edge_Keep_Bonus_1           = 111549,
     Skill_Edge_Keep_Bonus_2           = 111552,
     Skill_Edge_Keep_Bonus_3           = 111553,
@@ -850,6 +862,10 @@ local AbilityTables = {
     Skill_Covenant_Forward_Camp       = GetItemLinkName("|H0:item:29535:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Covenant Forward Camp
 
     Skill_Razor_Armor                 = 36304,
+
+    Skill_Pariahs_Resolve             = 116095,
+    Skill_Ruinous_Cyclone             = 116096,
+    Skill_Consume_Lifeforce           = GetString(SI_LUIE_SKILL_CONSUME_LIFEFORCE),
 
     -- ---------------------------------------------------
     -- BATTLEGROUNDS -------------------------------------
@@ -922,6 +938,7 @@ local AbilityTables = {
     Skill_Rush                        = 14380,
     Skill_Vigorus_Swipes              = 75634,
     Skill_Barreling_Charge            = GetString(SI_LUIE_SKILL_BARRELING_CHARGE),
+    Skill_Storm_Bound                 = 55864,
     Skill_Swipe                       = 2850,
     Skill_Blitz                       = GetString(SI_LUIE_SKILL_BLITZ),
     Skill_Toxic_Mucus                 = 72793,
@@ -942,6 +959,7 @@ local AbilityTables = {
     Skill_Zap                         = 8429,
     Skill_Leeching_Bite               = GetString(SI_LUIE_SKILL_LEECHING_BITE),
     Skill_Fetcherfly_Colony           = GetString(SI_LUIE_SKILL_FETCHERFLY_COLONY),
+    Skill_Fetcherfly_Swarm            = GetString(SI_LUIE_SKILL_FETCHERFLY_SWARM),
 
     -- Daedra
     Skill_Summon_Daedric_Arch         = 65404,
@@ -996,6 +1014,7 @@ local AbilityTables = {
     Trap_Lightning_Trap               = GetString(SI_LUIE_SKILL_LIGHTNING_TRAP),
     Trap_Blade_Trap                   = 66793,
 
+    Trap_Slaughterfish                = zo_strformat("<<C:1>>", GetItemLinkName("|H0:item:42861:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
     Trap_Lava                         = 5139,
 
     -- ---------------------------------------------------
@@ -1118,6 +1137,7 @@ local AbilityTables = {
     Skill_Empowered_by_the_Light      = GetString(SI_LUIE_SKILL_EMPOWERED_BY_THE_LIGHT),
     Skill_Warmth                      = 29430,
     Skill_Arena_Torch                 = GetString(SI_LUIE_SKILL_ARENA_TORCH),
+    Skill_Biting_Cold                 = 53341,
 
     -- Maelstrom Arena
     Skill_Sigil_of_Healing            = 66920,
@@ -1134,6 +1154,7 @@ local AbilityTables = {
     Skill_Cold_Snap                   = 72705,
     Skill_Summon_Deathless_Wolf       = GetString(SI_LUIE_SKILL_SUMMON_DEATHLESS_WOLF),
     Skill_Iceberg_Calving             = 71702,
+    Skill_Frigid_Waters               = 67805,
 
     -- ---------------------------------------------------
     -- DUNGEON EFFECTS -----------------------------------

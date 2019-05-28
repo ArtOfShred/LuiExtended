@@ -1346,6 +1346,12 @@ LUIE.DebugAuras = {
     [121912] = true, -- Coldharbour's Favorite (Coldharbour's Favorite)
     [121913] = true, -- Honor's Love (Coldharbour's Favorite)
 
+    [121729] = true, -- Vastarie's Tutelage (Vastarie's Tutelage)
+    [123717] = true, -- Vastarie's Tutelage (Vastarie's Tutelage)
+    [124242] = true, -- Vastarie's Tutelage (Vastarie's Tutelage)
+    [123715] = true, -- Vastarie's Tutelage (Vastarie's Tutelage)
+    [124574] = true, -- Vastarie's Tutelage (Vastarie's Tutelage)
+
     -- Overland Sets (All Types)
     [85541] = true, -- Armor of the Trainee (of the Trainee)
 
@@ -2001,6 +2007,27 @@ LUIE.DebugAuras = {
 
     [109088] = true, -- Ideal Aegis of Galenwe (Galenwe's)
     [109989] = true, -- Empower (Galenwe's)
+
+    -- Trial Sets (Sunspire)
+    [121823] = true, -- False God's Devotion (False God's Devotion)
+    [121827] = true, -- Major Expedition (False God's Devotion)
+    [121829] = true, -- False God's Devotion (False God's Devotion)
+
+    [124799] = true, -- Perfected False God's Devotion (Perfected False God's Devotion)
+    [124801] = true, -- Major Expedition (Perfected False God's Devotion)
+    [124800] = true, -- Perfected False God's Devotion (Perfected False God's Devotion)
+
+    [121894] = true, -- Eye of Nahviintaas (Nahviintaas')
+    [121895] = true, -- Eye of Nahviintaas (Nahviintaas')
+    [121898] = true, -- Eye of Nahviintaas (Nahviintaas')
+    [124795] = true, -- Tracking Buff (Nahviintaas')
+    [122812] = true, -- Eye of Nahviintaas (Nahviintaas')
+
+    [121867] = true, -- Tooth of Lokkestiiz (Lokkestiiz's)
+    [121871] = true, -- Major Slayer (Lokkestiiz's)
+
+    [121875] = true, -- Claw of Yolnakhriin (Yolnakriin's)
+    [121878] = true, -- Minor Courage (Yolnakriin's)
 
     -- Battleground Sets
     [92908] = true, -- Major Expedition (Coward's Gear)
@@ -4522,6 +4549,155 @@ LUIE.DebugAuras = {
     [90943] = true, -- Permafrost (Permafrost)
 
     -------------------------------------
+    -- NECROMANCER ACTIVES --------------
+    -------------------------------------
+
+    [114108] = true, -- Flame Skull (Flame Skull)
+    [114131] = true, -- Flame Skull (Flame Skull)
+    [123683] = true, -- Flame Skull (Flame Skull)
+    [123685] = true, -- Flame Skull (Flame Skull)
+    [123687] = true, -- Flame Skull (Flame Skull)
+
+    [117629] = true, -- Venom Skull (Venom Skull)
+    [117624] = true, -- Venom Skull (Venom Skull)
+    [117625] = true, -- Venom Skull (Venom Skull)
+    [123699] = true, -- Venom Skull (Venom Skull)
+    [123704] = true, -- Venom Skull (Venom Skull)
+    [123706] = true, -- Venom Skull (Venom Skull)
+
+    [117637] = true, -- Ricochet Skull (Ricochet Skull)
+    [117638] = true, -- Ricochet Skull (Ricochet Skull)
+    [123718] = true, -- Ricochet Skull (Ricochet Skull)
+    [123719] = true, -- Ricochet Skull (Ricochet Skull)
+    [123724] = true, -- Ricochet Skull (Ricochet Skull)
+    [123728] = true, -- Ricochet Skull (Ricochet Skull)
+    [123725] = true, -- Ricochet Skull (Ricochet Skull)
+
+    [123729] = true, -- Ricochet Skull (Ricochet Skull)
+    [123727] = true, -- Ricochet Skull (Ricochet Skull)
+    [123722] = true, -- Ricochet Skull (Ricochet Skull)
+
+    [114860] = true, -- Blastbones (Blastbones)
+    [117330] = true, -- Blastbones (Blastbones)
+    [114873] = true, -- Blastbones Spawn Stun (Blastbones)
+    [116149] = true, -- Blastbones Model FX (Blastbones)
+    [114861] = true, -- Blastbones (Blastbones)
+    [114863] = true, -- Blastbones (Blastbones)
+    [115608] = true, -- Blastbones (Blastbones)
+    [124849] = true, -- Blastbones ActionList (Blastbones)
+
+    [117690] = true, -- Blighted Blastbones (Blighted Blastones)
+    [117693] = true, -- Blighted Blastbones (Blighted Blastones)
+    [117717] = true, -- Blighted Blastbones Spawn Stun (Blighted Blastbones)
+    [117718] = true, -- Blighted Blastbones Model FX (Blighted Blastbones)
+    [117692] = true, -- Blighted Blastbones (Blighted Blastones)
+    [117691] = true, -- Blighted Blastbones (Blighted Blastones)
+    [117715] = true, -- Blighted Blastbones (Blighted Blastones)
+    [117727] = true, -- Major Defile (Blighted Blastbones)
+    [124851] = true, -- Blighted Blastbones ActionList (Blighted Blastbones)
+
+    [117749] = true, -- Stalking Blastbones (Stalking Blastbones)
+    [117773] = true, -- Relentless Blastbones (Stalking Blastbones)
+    [117758] = true, -- Stalking Blastbones Spawn St (Stalking Blastbones)
+    [117759] = true, -- Stalking Blastbones Model FX (Stalking Blastbones)
+    [117751] = true, -- Stalking Blastbones (Stalking Blastbones)
+    [117750] = true, -- Stalking Blastbones (Stalking Blastbones)
+    [124626] = true, -- Stalking Blastbones (Stalking Blastbones)
+    [124627] = true, -- Stalking Blastbones (Stalking Blastbones)
+    [117757] = true, -- Stalking Blastbones (Stalking Blastbones)
+    [124853] = true, -- Stalking Blastbones ActionList (Stalking Blastbones)
+
+    [125219] = true, -- Synergy Damage Bonus (Boneyard - Grave Robber Synergy)
+    [115567] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
+    [115571] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
+    [115572] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
+    [115573] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
+    [118945] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
+    [118946] = true, -- Grave Robber (Boneyard - Grave Robber Synergy)
+
+    [115252] = true, -- Boneyard (Boneyard)
+    [115255] = true, -- Boneyard (Boneyard)
+    [115542] = true, -- Boneyard (Boneyard)
+    [115279] = true, -- Boneyard (Boneyard)
+    [117089] = true, -- Boneyard (Boneyard)
+    [115254] = true, -- Boneyard (Boneyard)
+    [115544] = true, -- Boneyard (Boneyard)
+
+    [117805] = true, -- Unnerving Boneyard (Unnerving Boneyard)
+    [117807] = true, -- Unnerving Boneyard (Unnerving Boneyard)
+    [117814] = true, -- Unnerving Boneyard (Unnerving Boneyard)
+    [117808] = true, -- Unnerving Boneyard (Unnerving Boneyard)
+    [117810] = true, -- Unnerving Boneyard (Unnerving Boneyard)
+    [117809] = true, -- Unnerving Boneyard (Unnerving Boneyard)
+    [117818] = true, -- Major Breach (Unnerving Boneyard)
+    [117819] = true, -- Major Fracture (Unnerving Boneyard)
+    [117815] = true, -- Unnerving Boneyard (Unnerving Boneyard)
+
+    [117850] = true, -- Avid Boneyard (Avid Boneyard)
+    [117852] = true, -- Avid Boneyard (Avid Boneyard)
+    [117859] = true, -- Avid Boneyard (Avid Boneyard)
+    [117853] = true, -- Avid Boneyard (Avid Boneyard)
+    [117855] = true, -- Avid Boneyard (Avid Boneyard)
+    [117854] = true, -- Avid Boneyard (Avid Boneyard)
+    [117860] = true, -- Avid Boneyard (Avid Boneyard)
+
+    [122377] = true, -- Necromancer Pet 12s Tracker (Skeletal Mage - All Morphs)
+    [114317] = true, -- Skeletal Mage (Skeletal Mage)
+    [114395] = true, -- Skeletal Mage Spawn Stun (Skeletal Mage)
+    [114322] = true, -- Skeletal Mage Summon (Skeletal Mage)
+    [114461] = true, -- Deathbolt (Skeletal Mage)
+
+    [118680] = true, -- Skeletal Archer (Skeletal Archer)
+    [122773] = true, -- Skeletal Archer Spawn Stun (Skeletal Archer)
+    [118681] = true, -- Skeletal Archer (Skeletal Archer)
+    [122774] = true, -- Deathbolt (Skeletal Archer)
+    [122775] = true, -- Skeletal Archer (Skeletal Archer)
+
+    [118726] = true, -- Skeletal Arcanist (Skeletal Arcanist)
+    [118744] = true, -- Skeletal Arcanist Spawn Stun (Skeletal Arcanist)
+    [118738] = true, -- Exploding Mage (Skeletal Arcanist)
+    [118746] = true, -- Deathbolt (Skeletal Arcanist)
+    [124468] = true, -- Deathbolt (Skeletal Arcanist)
+
+    [124003] = true, -- Shocking Siphon (Shocking Siphon - All Morphs)
+    [115924] = true, -- Shocking Siphon (Shocking Siphon)
+    [116445] = true, -- Shocking Siphon (Shocking Siphon)
+    [116410] = true, -- Shocking Siphon (Shocking Siphon)
+
+    [118763] = true, -- Detonating Siphon (Detonating Siphon)
+    [118764] = true, -- Detonating Siphon (Detonating Siphon)
+    [118766] = true, -- Detonating Siphon (Detonating Siphon)
+    [123088] = true, -- Detonating Siphon (Detonating Siphon)
+    [123082] = true, -- Detonating Siphon (Detonating Siphon)
+
+    [118008] = true, -- Mystic Siphon (Mystic Siphon)
+    [118009] = true, -- Mystic Siphon (Mystic Siphon)
+    [118011] = true, -- Mystic Siphon (Mystic Siphon)
+    [118014] = true, -- Mystic Siphon (Mystic Siphon)
+
+    [122174] = true, -- Frozen Colossus (Frozen Colossus)
+    [122380] = true, -- Frozen Colossus (Frozen Colossus)
+    [122184] = true, -- Frozen Colossus (Frozen Colossus)
+    [122178] = true, -- Frozen Colossus (Frozen Colossus)
+    [122177] = true, -- Major Vulnerability (Frozen Colossus)
+
+    [122395] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122398] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122396] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122399] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122400] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122401] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122397] = true, -- Major Vulnerability (Pestilent Colossus)
+
+    [122388] = true, -- Glacial Colossus (Glacial Colossus)
+    [122391] = true, -- Glacial Colossus (Glacial Colossus)
+    [122390] = true, -- Glacial Colossus (Glacial Colossus)
+    [122392] = true, -- Glacial Colossus (Glacial Colossus)
+    [122389] = true, -- Major Vulnerability (Glacial Colossus)
+    [122394] = true, -- Glacial Colossus (Glacial Colossus)
+
+
+    -------------------------------------
     -- UNARMED PASSIVES -----------------
     -------------------------------------
 
@@ -7009,6 +7185,7 @@ LUIE.DebugAuras = {
     [79555] = true, -- Mischievous Dodge -- Nixad
     [79601] = true, -- Mischievous Dodge -- Nixad
     [79602] = true, -- Mischievous Dodge -- Nixad
+    [79545] = true, -- Mischievous Dodge -- Nixad
 
     -- MONSTER FIGHT ABILITIES
     [9363] = true, -- Generic 1 Dmg Monster No Push -- Monster Fight
@@ -8243,6 +8420,26 @@ LUIE.DebugAuras = {
     [21967] = true, -- Charge -- Wamasu
     [21962] = true, -- Charge -- Wamasu
     [21959] = true, -- Charge -- Wamasu
+
+    [55868] = true, -- Sweep (Wamasu - Boss)
+    [55870] = true, -- Sweep (Wamasu - Boss)
+    [55869] = true, -- Sweep (Wamasu - Boss)
+    [55866] = true, -- Repulsion Shock (Wamasu - Boss)
+    [55867] = true, -- Repulsion Shock (Wamasu - Boss)
+    [55850] = true, -- Impending Storm (Wamasu - Boss)
+    [55851] = true, -- Impending Storm (Wamasu - Boss)
+    [55852] = true, -- Impending Storm (Wamasu - Boss)
+    [55853] = true, -- Impending Storm (Wamasu - Boss)
+    [55854] = true, -- Impending Storm (Wamasu - Boss)
+    [55855] = true, -- Impending Storm (Wamasu - Boss)
+    [55857] = true, -- Impending Storm (Wamasu - Boss)
+    [55856] = true, -- Impending Storm (Wamasu - Boss)
+    [55860] = true, -- Ball Lightning (Wamasu - Boss)
+    [55864] = true, -- Storm Bound (Wamasu - Boss)
+    [55862] = true, -- Storm Bound (Wamasu - Boss)
+    [55863] = true, -- Storm Bound (Wamasu - Boss)
+    [55861] = true, -- Storm Bound (Wamasu - Boss)
+    [64277] = true, -- Storm Bound Fx (Wamasu - Boss)
 
     [44781] = true, -- Swipe -- Welwa
     [45937] = true, -- Cleave -- Welwa
@@ -9526,6 +9723,7 @@ LUIE.DebugAuras = {
     [87385] = true, -- Devour
     [87386] = true, -- Devour
     [87987] = true, -- Devour
+    [87250] = true, -- Devour
     [84944] = true, -- Hollow
     [91440] = true, -- Hollow
     [91439] = true, -- Hollow
@@ -14282,6 +14480,39 @@ LUIE.DebugAuras = {
     [19040] = true, -- Aldmeri Forward Camp
     [19041] = true, -- Daggerfall Forward Camp
 
+    -- Volendrung
+    [118500] = true, -- Volendrung (Volendrung)
+    [118507] = true, -- Volendrung Passive (Volendrung)
+    [118509] = true, -- Set Volendrung Stats (Volendrung)
+
+    [116762] = true, -- Volendrung Light Attack (Volendrung)
+    [116763] = true, -- Volendrung Heavy Attack (2H) (Volendrung)
+    [116765] = true, -- Heavy Attack Partial (Volendrung)
+    [116767] = true, -- Heavy Attack (Volendrung)
+    [116766] = true, -- Heavy Attack (2H) (Volendrung)
+
+    [118501] = true, -- Heal Self (Volendrung)
+    [118504] = true, -- Damage Shield (Volendrung)
+
+    [116093] = true, -- Rourken's Rebuke (Rourken's Rebuke)
+    [116365] = true, -- Rourken's Rebuke (Rourken's Rebuke)
+    [116364] = true, -- Rourken's Rebuke (Rourken's Rebuke)
+
+    [116094] = true, -- Malacath's Vengeance (Malacath's Vengeance)
+
+    [117979] = true, -- Accursed Charge (Accursed Charge)
+    [117980] = true, -- Accursed Charge (Accursed Charge)
+
+    [116095] = true, -- Pariah's Resolve (Pariah's Resolve)
+    [116374] = true, -- Major Expedition (Pariah's Resolve)
+    [116371] = true, -- Major Brutality (Pariah's Resolve)
+    [116385] = true, -- Major Endurance (Pariah's Resolve)
+    [116366] = true, -- Pariah's Resolve (Pariah's Resolve)
+
+    [116096] = true, -- Ruinous Cyclone (Ruinous Cyclone)
+    [116669] = true, -- Ebony Cyclone (Ruinous Cyclone)
+    [116680] = true, -- Ebony Cyclone (Ruinous Cyclone)
+
     -- Siege Warfare
     [35106] = true, -- Fire (Firepot Trebuchet)
     [35099] = true, -- Ice Damage (Iceball Trebuchet)
@@ -14293,6 +14524,11 @@ LUIE.DebugAuras = {
     [35136] = true, -- Meatbag (Meatbag Catapult)
     [35132] = true, -- Oil Pot (Oil Catapult)
     [33348] = true, -- Practice Siege Repair Kit (Practice Siege Repair Kit)
+
+    -- Chaos Magic
+    [70362] = true, -- Remove
+    [70365] = true, -- Remove
+    [27239] = true, -- Explosion
 
     -------------------------------------
     -- BATTLEGROUNDS --------------------

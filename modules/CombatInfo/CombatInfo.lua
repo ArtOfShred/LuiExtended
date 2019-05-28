@@ -81,12 +81,12 @@ CI.D = {
             mitigationPrefix            = "%t",
             mitigationPrefixN           = "%n - %t",
             showCrowdControlBorder      = true,
-            mitigationPowerPrefix       = GetString("%t"),
-            mitigationPowerPrefixN      = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER_N),
-            mitigationDestroyPrefix     = GetString("%t"),
-            mitigationDestroyPrefixN    = GetString("%t"),
-            mitigationSummonPrefix      = GetString("%t"),
-            mitigationSummonPrefixN     = GetString("%t"),
+            mitigationPowerPrefix2      = "%t",
+            mitigationPowerPrefixN2     = GetString(SI_LUIE_CI_MITIGATION_FORMAT_POWER_N),
+            mitigationDestroyPrefix2    = "%t",
+            mitigationDestroyPrefixN2   = "%t",
+            mitigationSummonPrefix2     = "%t",
+            mitigationSummonPrefixN2    = "%t",
             mitigationAura              = false,
             mitigationRank3             = true,
             mitigationRank2             = true,
@@ -259,6 +259,22 @@ function CI.Initialize( enabled )
 
     CI.RegisterCombatInfo()
 
+    if CI.SV.GlobalShowGCD then
+        CI.HookGCD()
+    end
+
+    -- Create and update Cast Bar
+    CI.CreateCastBar()
+    CI.UpdateCastBar()
+    CI.SetCastBarPosition()
+
+    CI.CreateAlertFrame()
+    CI.SetAlertFramePosition()
+    CI.SetAlertColors()
+end
+
+function CI.HookGCD()
+
     -- Hook to update GCD support
     ActionButton.UpdateUsable = function(self)
         local slotnum = self:GetSlot()
@@ -376,14 +392,6 @@ function CI.Initialize( enabled )
         self:UpdateUsable()
     end
 
-    -- Create and update Cast Bar
-    CI.CreateCastBar()
-    CI.UpdateCastBar()
-    CI.SetCastBarPosition()
-
-    CI.CreateAlertFrame()
-    CI.SetAlertFramePosition()
-    CI.SetAlertColors()
 end
 
 -- Helper function to get override ability duration.

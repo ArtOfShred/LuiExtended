@@ -151,6 +151,7 @@ local strings = {
     SI_LUIE_SKILL_MINOR_HEROISM_TP =                     "Gain |cffffff1|r Ultimate every |cffffff1.5|r seconds.",
     SI_LUIE_SKILL_MAJOR_HEROISM_TP =                     "Gain |cffffff3|r Ultimate every |cffffff1.5|r seconds.",
     SI_LUIE_SKILL_MINOR_TOUGHNESS_TP =                   "Increase Max Health by |cffffff10|r%.",
+    SI_LUIE_SKILL_MINOR_COURAGE_TP =                     "Increase Weapon and Spell Damage by |cffffff129|r.",
     SI_LUIE_SKILL_MAJOR_COURAGE_TP =                     "Increase Weapon and Spell Damage by |cffffff258|r.",
 
     -- Major / Minor Debuffs
@@ -160,6 +161,7 @@ local strings = {
     SI_LUIE_SKILL_MAJOR_FRACTURE_TP =                    "Reduce Physical Resistance |cffffff5280|r.",
     SI_LUIE_SKILL_MAJOR_FRACTURE_NPC_TP =                "Reduce Physical Resistance |cffffff4000|r.",
     SI_LUIE_SKILL_MINOR_VULNERABILITY_TP =               "Increase damage taken by |cffffff8|r%.",
+    SI_LUIE_SKILL_MAJOR_VULNERABILITY_TP =               "Increase damage taken by |cffffff30|r%.",
     SI_LUIE_SKILL_MINOR_MAIM_TP =                        "Reduce damage done by |cffffff15|r%.",
     SI_LUIE_SKILL_MAJOR_MAIM_TP =                        "Reduce damage done by |cffffff30|r%.",
     SI_LUIE_SKILL_MINOR_DEFILE_TP =                      "Reduce healing received and Health Recovery by |cffffff15|r%.",
@@ -319,7 +321,7 @@ local strings = {
     SI_LUIE_SKILL_DEATH_STROKE_DEBUFF =                  "Increase damage taken from the Nightblade by |cFFFFFF20|r% for |cFFFFFF6|r seconds.",
     SI_LUIE_SKILL_INCAPACITATING_STRIKE =                "Increase damage taken from the Nightblade by |cFFFFFF20|r% for |cFFFFFF6|r seconds.\n\nSilenced for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_SURPRISE_ATTACK_TP =                   "Reduce Physical Resistance by |cFFFFFF5|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_SHADOWY_DISGUISE_TP =                  "Invisible for |cFFFFFF<<2>>|r seconds.\n\nYour next direct damage attack used within |cFFFFFF<<1>>|r seconds will always be a Critical Strike.",
+    SI_LUIE_SKILL_SHADOWY_DISGUISE_TP =                  "Invisible for |cFFFFFF<<2>>|r <<2[second/seconds]>>.\n\nYour next direct damage attack used within |cFFFFFF<<1>>|r seconds will always be a Critical Strike.",
     SI_LUIE_SKILL_GRIM_FOCUS_TP =                        "For |cFFFFFF<<1>>|r seconds, hitting an enemy with |cFFFFFF5|r Light or Heavy Attacks changes this ability into Assassin's Will, allowing you to fire a single shot from a spectral bow for half cost at an enemy to deal Magic Damage.\n\nEach stack reduces damage taken by |cFFFFFF3|r%, persisting even after <<2>> fades as long as you remain in combat.\n\nStacks are lost when firing the spectral bow.",
     SI_LUIE_SKILL_RELENTLESS_FOCUS_TP =                  "For |cFFFFFF<<1>>|r seconds, hitting an enemy with |cFFFFFF5|r Light or Heavy Attacks changes this ability into Assassin's Scourge, allowing you to fire a single shot from a spectral bow for half cost at an enemy to deal Disease Damage.\n\nEach stack reduces damage taken by |cFFFFFF3|r%, persisting even after <<2>> fades as long as you remain in combat.\n\nStacks are lost when firing the spectral bow.",
     SI_LUIE_SKILL_GRIM_FOCUS_DEFENSE_TP =                "Reduce damage taken by |cFFFFFF3|r%, stacking up to |cFFFFFF5|r times.\n\nStacks are lost when firing the spectral bow or exiting combat.",
@@ -448,6 +450,33 @@ local strings = {
     SI_LUIE_SKILL_SLEET_STORM_TP =                       "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF40|r% every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_PERMAFROST_TP =                        "Enemies in the storm take Frost Damage and have their movement speed reduced by |cFFFFFF40|r% every |cFFFFFF1|r second.\n\nDamaging an enemy three times with the storm will stun them for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_PERMAFROST_GROUND_TP =                 "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF40|r%.\n\nIf you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.",
+
+    -- Necromancer
+    SI_LUIE_SKILL_FLAME_SKULL_TP =                       "Every third cast of <<2>> deals |cFFFFFF20|r% increased damage.",
+    SI_LUIE_SKILL_RICOCHET_SKULL_TP =                    "Every third cast of Ricochet Skull deals |cFFFFFF20|r% increased damage and will bounce up to |cFFFFFF2|r times to other nearby enemies.",
+
+    SI_LUIE_SKILL_BLASTBONES_TP =                        "A flaming skeleton runs toward your target and explodes when it gets close to them, dealing Flame Damage to all enemies within |cFFFFFF6|r meters.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.",
+    SI_LUIE_SKILL_BLIGHTED_BLASTBONES_TP =               "A decaying skeleton runs toward your target and explodes when it gets close to them, dealing Disease Damage to all enemies within |cFFFFFF6|r meters and applying Major Defile to them for |cFFFFFF4|r seconds.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.",
+    SI_LUIE_SKILL_STALKING_BLASTBONES_TP =               "A flaming skeleton runs toward your target and explodes when it gets close to them, dealing Flame Damage to all enemies within |cFFFFFF6|r meters.\n\nEvery second the skeleton spends chasing its target increases the damage of the explosion by |cFFFFFF10|r% up to a maximum of |cFFFFFF50|r% more damage.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.",
+
+    SI_LUIE_SKILL_BONEYARD_TP =                          "Enemies in the |cFFFFFF6|r meter radius of the graveyard take Frost Damage every |cFFFFFF1|r second.\n\nAn ally standing in the graveyard can activate the |cFFFFFFGrave Robber|r synergy.",
+    SI_LUIE_SKILL_UNNERVING_BONEYARD_TP =                "Enemies in the |cFFFFFF6|r meter radius of the graveyard take Frost Damage every |cFFFFFF1|r second and have Major Breach and Major Fracture applied to them.\n\nAn ally standing in the graveyard can activate the |cFFFFFFGrave Robber|r synergy.",
+    SI_LUIE_SKILL_AVID_BONEYARD_TP =                     "Enemies in the |cFFFFFF6|r meter radius of the graveyard take Frost Damage every |cFFFFFF1|r second.\n\nYou or an ally standing in the graveyard can activate the |cFFFFFFGrave Robber|r synergy.",
+
+    SI_LUIE_SKILL_SKELETAL_MAGE_TP =                     "A skeletal mage fights at your side. The skeletal mage remains for |cFFFFFF<<1>>|r seconds.\n\nThe mage attacks the closest enemy every |cFFFFFF2|r seconds, dealing Shock Damage.",
+    SI_LUIE_SKILL_SKELETAL_ARCHER_TP =                   "A skeletal archer fights at your side. The skeletal archer remains for |cFFFFFF<<1>>|r seconds.\n\nThe archer attacks the closest enemy every |cFFFFFF2|r seconds, dealing Physical Damage.\n\nEach time the archer deals damage, its next attack will do |cFFFFFF10|r% more damage than the previous attack.",
+    SI_LUIE_SKILL_SKELETAL_ARCANIST_TP =                 "A skeletal arcanist fights at your side. The skeletal arcanist remains for |cFFFFFF<<1>>|r seconds.\n\nThe arcanist attacks the closest enemy every |cFFFFFF2|r seconds, dealing Shock Damage to them and enemies with |cFFFFFF4|r meters.",
+
+    SI_LUIE_SKILL_SHOCKING_SIPHON_TP =                   "Enemies within |cFFFFFF5|r meters of the corpse and between you and the corpse take Shock Damage over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_SHOCKING_SIPHON_GROUND_TP =            "Taking rapidly ticking Shock Damage.",
+    SI_LUIE_SKILL_DETONATING_SIPHON_TP =                 "Enemies within |cFFFFFF5|r meters of the corpse and between you and the corpse take Disease Damage over |cFFFFFF<<1>>|r seconds.\n\nIf the siphon lasts its full duration it causes the corpse to explode, dealing additional Disease Damage to all enemies around the corpse.",
+    SI_LUIE_SKILL_DETONATING_SIPHON_GROUND_TP =          "Taking rapidly ticking Disease Damage.\n\nIf the siphon lasts its full |cFFFFFF12|r second duration the corpse explodes, dealing Disease Damage to you and nearby allies.",
+    SI_LUIE_SKILL_MYSTIC_SIPHON_TP =                     "Enemies within |cFFFFFF5|r meters of the corpse and between you and the corpse take Shock Damage over |cFFFFFF<<1>>|r seconds.\n\nYou also restore Magicka over |cFFFFFF<<1>>|r seconds while siphoning the corpse.",
+
+    SI_LUIE_SKILL_FROZEN_COLOSSUS_TP =                   "A frostbitten Flesh Colossus smashes the ground three times over |cFFFFFF3|r seconds, dealing Frost Damage to enemies within |cFFFFFF8|r meters.\n\nEach smash applies Major Vulnerability to any enemy hit for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_PESTILENT_COLOSSUS_TP =                "A pestilent Flesh Colossus smashes the ground three times over |cFFFFFF3|r seconds, dealing increasing Disease Damage to enemies within |cFFFFFF8|r meters.\n\nEach smash applies Major Vulnerability to any enemy hit for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_GLACIAL_COLOSSUS_TP =                  "A frostbitten Flesh Colossus smashes the ground three times over |cFFFFFF3|r seconds, dealing Frost Damage to enemies within |cFFFFFF8|r meters.\n\nThe final smash stuns all enemies hit for |cFFFFFF<<2>>|r seconds.\n\nEach smash applies Major Vulnerability to any enemy hit for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_GLACIAL_COLOSSUS_GROUND_TP =           "Taking Frost Damage every |cFFFFFF1|r second.\n\nThe final hit will knock you down for |cFFFFFF4|r seconds.",
 
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------
@@ -698,6 +727,9 @@ local strings = {
     SI_LUIE_SKILL_MEATBAG_CATAPULT_AOE_TP =              "Taking Disease Damage every |cFFFFFF1|r second.\n\nHealing and Health Recovery reduced by |cFFFFFF50|r% for |cFFFFFF6|r seconds whenever you take damage from this effect.",
     SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_AOE_TP =          "Taking Physical Damage every |cFFFFFF1|r second.\n\nIncrease damage taken from all sources by |cFFFFFF20|r% for |cFFFFFF6|r seconds whenever you take damage from this effect.",
 
+    SI_LUIE_SKILL_CONSUME_LIFEFORCE =                    "Consume Lifeforce",
+    SI_LUIE_SKILL_RUINOUS_CYCLONE =                      "After |cFFFFFF2|r seconds, enemies within |cFFFFFF8|r meters take Physical Damage every |cFFFFFF0.5|r seconds for |cFFFFFF7|r seconds as long as the channel is maintained.\n\nEnemies within |cFFFFFF15|r meters are pulled closer to you while channeling.",
+
     ----------------------------------------------------------------
     -- BATTLEGROUNDS -----------------------------------------------
     ----------------------------------------------------------------
@@ -786,6 +818,7 @@ local strings = {
     SI_LUIE_SKILL_SET_MECHANICAL_ACUITY =                "Increase Weapon and Spell Critical by |cFFFFFF100|r% for |cffffff5|r seconds.",
     SI_LUIE_SKILL_SET_ADEPT_RIDER =                      "Enemies in the dust cloud take Physical Damage every |cffffff1|r second.",
     SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT =                "Increase healing received by |cffffff6|r% and Physical and Spell Resistance for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE =               "Increase Weapon and Spell Damage and reduce the Magicka, Stamina, and Health cost of abilities by |cffffff10|r% for |cffffff<<1>>|r seconds.",
 
     -- Light / Medium / Heavy Armor Sets
     SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP =                "Enemies in the desecrated ground take Magic Damage every |cffffff1|r second and have their Movement Speed reduced by |cffffff70|r%.\n\nYou heal for |cffffff100|r% of the damage done.",
@@ -836,6 +869,7 @@ local strings = {
     SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP =             "Standing in the ring grants you a stack of Siroria's Boon every |cffffff1|r second.",
     SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Increase Spell Damage by |cffffff30|r for |cffffff5|r seconds, stacking up to |cffffff20|r times.",
     SI_LUIE_SKILL_SET_RELEQUENS_TP =                     "Afflicted with Physical damage every |cffffff1|r second for |cffffff5|r seconds.",
+    SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS =               "Reduce the Magicka, Stamina, and Health cost of abilities by |cffffff12|r% for |cffffff<<1>>|r seconds.",
 
     -- Battleground Sets
     SI_LUIE_SKILL_SET_COWARDS_GEAR =                     "Coward's Gear",
@@ -1151,6 +1185,7 @@ local strings = {
     SI_LUIE_SKILL_BLADE_TRAP_VMA =                       "Afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThis effect stacks up to |cFFFFFF25|r times, dealing |cFFFFFF5|r% increased damage per stack.",
     SI_LUIE_SKILL_ENERGIZE =                             "Energize",
     SI_LUIE_SKILL_REFLECTIVE_SCALE =                     "Reflective Scale",
+    SI_LUIE_SKILL_FETCHERFLY_SWARM =                     "Fetcherfly Swarm",
 }
 
 for stringId, stringValue in pairs(strings) do

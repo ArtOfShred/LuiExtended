@@ -39,7 +39,7 @@ function CTL:OnPlayerActivated()
 end
 
 function CTL:OnCombatIn(...)
-    local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId = ...
+    local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow = ...
 
     local S = LUIE.CombatText.SV
     local combatType, togglesInOut = C.combatType.INCOMING, S.toggles.incoming
@@ -84,6 +84,9 @@ function CTL:OnCombatIn(...)
     --Crowd Control
     local isDisoriented, isFeared, isOffBalanced, isSilenced, isStunned
         = C.isDisoriented[resultType], C.isFeared[resultType], C.isOffBalanced[resultType], C.isSilenced[resultType], C.isStunned[resultType]
+    --Overflow
+    local overkill, overheal
+        = (S.common.overkill and overflow > 0 and (isDamage or isDamageCritical or isDot or isDotCritical) ), (S.common.overheal and overflow > 0 and (isHealing or isHealingCritical or isHot or isHotCritical) )
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//COMBAT TRIGGERS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -96,17 +99,20 @@ function CTL:OnCombatIn(...)
        (isParried and togglesInOut.showParried) or
        (isBlocked and togglesInOut.showBlocked) or
        (isInterrupted and togglesInOut.showInterrupted) or
-       (isDot and togglesInOut.showDot and hitValue > 0) or
-       (isDotCritical and togglesInOut.showDot and hitValue > 0) or
-       (isHot and togglesInOut.showHot and hitValue > 0) or
-       (isHotCritical and togglesInOut.showHot and hitValue > 0) or
-       (isHealing and togglesInOut.showHealing and hitValue > 0) or
-       (isHealingCritical and togglesInOut.showHealing and hitValue > 0) or
-       (isDamage and togglesInOut.showDamage and hitValue > 0) or
-       (isDamageCritical and togglesInOut.showDamage and hitValue > 0) or
+       (isDot and togglesInOut.showDot and ( hitValue > 0 or overkill )) or
+       (isDotCritical and togglesInOut.showDot and ( hitValue > 0 or overkill )) or
+       (isHot and togglesInOut.showHot and ( hitValue > 0 or overheal )) or
+       (isHotCritical and togglesInOut.showHot and ( hitValue > 0 or overheal )) or
+       (isHealing and togglesInOut.showHealing and ( hitValue > 0 or overheal )) or
+       (isHealingCritical and togglesInOut.showHealing and ( hitValue > 0 or overheal )) or
+       (isDamage and togglesInOut.showDamage and ( hitValue > 0 or overkill )) or
+       (isDamageCritical and togglesInOut.showDamage and ( hitValue > 0 or overkill )) or
        (isEnergize and togglesInOut.showEnergize and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) or
        (isEnergize and togglesInOut.showUltimateEnergize and powerType == POWERTYPE_ULTIMATE) or
        (isDrain and togglesInOut.showDrain and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) then
+       if overkill or overheal then
+            hitValue = hitValue + overflow
+       end
        if not E.EffectHideSCT[abilityId] then -- Check if ability is on the hide list
             if (S.toggles.inCombatOnly and isWarned.combat) or (not S.toggles.inCombatOnly) then --Check if 'in combat only' is ticked
                 self:TriggerEvent(C.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
@@ -166,7 +172,7 @@ function CTL:OnCombatIn(...)
 end
 
 function CTL:OnCombatOut(...)
-    local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId = ...
+    local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow = ...
 
     -- Don't display duplicate messages for events sourced from the player that target the player
     if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET then return end
@@ -193,9 +199,13 @@ function CTL:OnCombatOut(...)
     --Crowd Control
     local isDisoriented, isFeared, isOffBalanced, isSilenced, isStunned
         = C.isDisoriented[resultType], C.isFeared[resultType], C.isOffBalanced[resultType], C.isSilenced[resultType], C.isStunned[resultType]
+    --Overflow
+    local overkill, overheal
+        = (S.common.overkill and overflow > 0 and (isDamage or isDamageCritical or isDot or isDotCritical) ), (S.common.overheal and overflow > 0 and (isHealing or isHealingCritical or isHot or isHotCritical) )
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//COMBAT TRIGGERS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
+
     if
        (isDodged and togglesInOut.showDodged) or
        (isMiss and togglesInOut.showMiss) or
@@ -205,17 +215,20 @@ function CTL:OnCombatOut(...)
        (isParried and togglesInOut.showParried) or
        (isBlocked and togglesInOut.showBlocked) or
        (isInterrupted and togglesInOut.showInterrupted) or
-       (isDot and togglesInOut.showDot and hitValue > 0) or
-       (isDotCritical and togglesInOut.showDot and hitValue > 0) or
-       (isHot and togglesInOut.showHot and hitValue > 0) or
-       (isHotCritical and togglesInOut.showHot and hitValue > 0) or
-       (isHealing and togglesInOut.showHealing and hitValue > 0) or
-       (isHealingCritical and togglesInOut.showHealing and hitValue > 0) or
-       (isDamage and togglesInOut.showDamage and hitValue > 0) or
-       (isDamageCritical and togglesInOut.showDamage and hitValue > 0) or
+       (isDot and togglesInOut.showDot and ( hitValue > 0 or overkill )) or
+       (isDotCritical and togglesInOut.showDot and ( hitValue > 0 or overkill )) or
+       (isHot and togglesInOut.showHot and ( hitValue > 0 or overheal )) or
+       (isHotCritical and togglesInOut.showHot and ( hitValue > 0 or overheal )) or
+       (isHealing and togglesInOut.showHealing and ( hitValue > 0 or overheal )) or
+       (isHealingCritical and togglesInOut.showHealing and ( hitValue > 0 or overheal )) or
+       (isDamage and togglesInOut.showDamage and ( hitValue > 0 or overkill )) or
+       (isDamageCritical and togglesInOut.showDamage and ( hitValue > 0 or overkill )) or
        (isEnergize and togglesInOut.showEnergize and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) or
        (isEnergize and togglesInOut.showUltimateEnergize and powerType == POWERTYPE_ULTIMATE) or
        (isDrain and togglesInOut.showDrain and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) then
+       if overkill or overheal then
+            hitValue = hitValue + overflow
+       end
        if not E.EffectHideSCT[abilityId] then -- Check if ability is on the hide list
             if (S.toggles.inCombatOnly and isWarned.combat) or (not S.toggles.inCombatOnly) then --Check if 'in combat only' is ticked
                 self:TriggerEvent(C.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)

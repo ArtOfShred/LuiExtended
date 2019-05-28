@@ -23,8 +23,8 @@ local duelStartOptions              = { "Message + Icon", "Message Only", "Icon 
 local duelStartOptionsKeys          = { ["Message + Icon"] = 1, ["Message Only"] = 2, ["Icon Only"] = 3 }
 
 function CA.CreateSettings()
-    -- Load LibAddonMenu with backwards compatibility
-    local LAM = LibStub("LibAddonMenu-2.0")
+    -- Load LibAddonMenu
+    local LAM = _G["LibAddonMenu2"]
 
     local panelDataChatAnnouncements = {
         type = "panel",
@@ -3395,6 +3395,17 @@ function CA.CreateSettings()
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory23 = value end,
                 width = "full",
                 default = CA.D.Achievement.AchievementCategory23,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+            },
+            {
+                -- Enables achievements tracking in %s category
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(24)),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(24)),
+                getFunc = function() return CA.SV.Achievement.AchievementCategory24 end,
+                setFunc = function(value) CA.SV.Achievement.AchievementCategory24 = value end,
+                width = "full",
+                default = CA.D.Achievement.AchievementCategory24,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
         },

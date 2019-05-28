@@ -11,8 +11,8 @@ local optionsDataSlashCommands = {}
 
 -- Create Slash Commands Settings Menu
 function SC.CreateSettings()
-    -- Load LibAddonMenu with backwards compatibility
-    local LAM = LibStub("LibAddonMenu-2.0")
+    -- Load LibAddonMenu
+    local LAM = _G["LibAddonMenu2"]
 
     local panelDataSlashCommands = {
         type = "panel",

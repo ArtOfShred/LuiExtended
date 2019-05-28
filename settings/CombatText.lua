@@ -11,8 +11,8 @@ local strformat = zo_strformat
 local optionsDataCombatText = {}
 
 function CT.CreateSettings()
-    -- Load LibAddonMenu with backwards compatibility
-    local LAM = LibStub("LibAddonMenu-2.0")
+    -- Load LibAddonMenu
+    local LAM = _G["LibAddonMenu2"]
     -- Load LibMediaProvider with backwards compatibility
     local LMP = LibStub("LibMediaProvider-1.0")
 
@@ -96,6 +96,27 @@ function CT.CreateSettings()
                 setFunc = function(v) CT.SV.common.transparencyValue = v end,
                 default = CT.D.common.transparencyValue,
             },
+
+            {
+                -- overkill
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CT_OVERKILL),
+                tooltip = GetString(SI_LUIE_LAM_CT_OVERKILL_TP),
+                getFunc = function() return CT.SV.common.overkill end,
+                setFunc = function(v) CT.SV.common.overkill = v end,
+                default = CT.D.common.overkill,
+            },
+
+            {
+                -- overhealing
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CT_OVERHEAL),
+                tooltip = GetString(SI_LUIE_LAM_CT_OVERHEAL_TP),
+                getFunc = function() return CT.SV.common.overheal end,
+                setFunc = function(v) CT.SV.common.overheal = v end,
+                default = CT.D.common.overheal,
+            },
+
             {
                 -- Abbreviate Numbers
                 type = "checkbox",
