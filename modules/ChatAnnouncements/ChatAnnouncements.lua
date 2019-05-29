@@ -9335,19 +9335,25 @@ function CA.HookFunction()
             local name = GetGuildName(id)
 
             if guildName == name then
-                local guildAlliance = GetGuildAlliance(id)
-                local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-                local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-                local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+                local guildRoster = ZO_GuildRosterManager:New()
+                guildRoster:SetGuildId(id)
+                local playerData = guildRoster:FindDataByDisplayName(displayName)
+                
+                if playerData ~= nil and playerData.inviteeIndex == nil then
+                    local guildAlliance = GetGuildAlliance(id)
+                    local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+                    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+                    local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
-                if CA.SV.Social.GuildCA then
-                    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance), true)
+                    if CA.SV.Social.GuildCA then
+                        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance), true)
+                    end
+                    if CA.SV.Social.GuildAlert then
+                        callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayName, guildNameAllianceAlert))
+                    end
+                    PlaySound(SOUNDS.GUILD_ROSTER_ADDED)
+                    break
                 end
-                if CA.SV.Social.GuildAlert then
-                    callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayName, guildNameAllianceAlert))
-                end
-                PlaySound(SOUNDS.GUILD_ROSTER_ADDED)
-                break
             end
         end
     end
