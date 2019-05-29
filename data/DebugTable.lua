@@ -4696,6 +4696,63 @@ LUIE.DebugAuras = {
     [122389] = true, -- Major Vulnerability (Glacial Colossus)
     [122394] = true, -- Glacial Colossus (Glacial Colossus)
 
+    [115115] = true, -- Death Scythe (Death Scythe)
+    [122595] = true, -- Death Scythe (Death Scythe)
+    [115130] = true, -- Death Scythe (Death Scythe)
+
+    [118226] = true, -- Ruinous Scythe (Ruinous Scythe)
+    [122651] = true, -- Ruinous Scythe (Ruinous Scythe)
+    [118227] = true, -- Ruinous Scythe (Ruinous Scythe)
+    [125749] = true, -- Ruinous Scythe (Ruinous Scythe)
+    [125750] = true, -- Off Balance (Ruinous Scythe)
+
+    [118223] = true, -- Hungry Scythe (Hungry Scythe)
+    [122615] = true, -- Hungry Scythe (Hungry Scythe)
+    [118224] = true, -- Hungry Scythe (Hungry Scythe)
+    [122625] = true, -- Hungry Scythe (Hungry Scythe)
+
+    [115206] = true, -- Bone Armor (Bone Armor)
+    [123903] = true, -- Bone Armor (Bone Armor)
+    [115211] = true, -- Major Resolve (Bone Armor)
+    [115214] = true, -- Major Ward (Bone Armor)
+    [122661] = true, -- Corpse Spawn (Bone Armor)
+    [123911] = true, -- Bone Armor (Bone Armor)
+
+    [118237] = true, -- Beckoning Armor (Beckoning Armor)
+    [123927] = true, -- Beckoning Armor (Beckoning Armor)
+    [118239] = true, -- Major Resolve (Beckoning Armor)
+    [118240] = true, -- Major Ward (Beckoning Armor)
+    [122679] = true, -- Corpse Spawn (Beckoning Armor)
+    [123929] = true, -- Bone Armor (Beckoning Armor)
+    [118241] = true, -- Beckoning Armor (Beckoning Armor)
+    [118242] = true, -- Beckoning Armor (Beckoning Armor)
+
+    [118244] = true, -- Summoner's Armor (Summoner's Armor)
+    [123964] = true, -- Summoner's Armor (Summoner's Armor)
+    [118246] = true, -- Major Resolve (Summoner's Armor)
+    [118247] = true, -- Major Ward (Summoner's Armor)
+    [122680] = true, -- Corpse Spawn (Summoner's Armor)
+    [123965] = true, -- Bone Armor (Summoner's Armor)
+
+    [124006] = true, -- Bitter Harvest (Bitter Harvest - All Morphs)
+    [115238] = true, -- Bitter Harvest (Bitter Harvest)
+    [119372] = true, -- Bitter Harvest (Bitter Harvest)
+    [115244] = true, -- Bitter Harvest (Bitter Harvest)
+    [124136] = true, -- Necrotic Potency (Bitter Harvest)
+    [115240] = true, -- Bitter Harvest (Bitter Harvest)
+
+    [118623] = true, -- Dead Pain (Deaden Pain)
+    [121796] = true, -- Dead Pain (Deaden Pain)
+    [118624] = true, -- Dead Pain (Deaden Pain)
+    [124166] = true, -- Necrotic Potency (Deaden Pain)
+    [124165] = true, -- Dead Pain (Deaden Pain)
+    [118629] = true, -- Major Protection (Deaden Pain)
+
+    [118639] = true, -- Necrotic Potency (Necrotic Potency)
+    [121797] = true, -- Necrotic Potency (Necrotic Potency)
+    [118640] = true, -- Necrotic Potency (Necrotic Potency)
+    [124192] = true, -- Necrotic Potency (Necrotic Potency)
+    [124193] = true, -- Necrotic Potency (Necrotic Potency)
 
     -------------------------------------
     -- UNARMED PASSIVES -----------------

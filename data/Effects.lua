@@ -876,6 +876,18 @@ function E.BarHighlightRefresh()
 end
 
 --------------------------------------------------------------------------------------------------------------------------------
+-- We don't add bar highlights for 0 duration abilities, a few abilities with dynamic durations show as 0 duration so we need this override table.
+--------------------------------------------------------------------------------------------------------------------------------
+E.AddNoDurationBarHighlight = {
+
+    -- Necromancer
+    [115240] = true, -- Bitter Harvest
+    [124165] = true, -- Deaden Pain
+    [124193] = true, -- Necrotic Potency
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
 -- Replaces the tracking ID on an ability bar ability with a different id for the purpose of tracking effect duration on Bar Highlight tracker.
 --------------------------------------------------------------------------------------------------------------------------------
 E.BarHighlightOverride = {
@@ -1100,6 +1112,13 @@ E.BarHighlightOverride = {
     [115924] = { newId = 116445 }, -- Shocking Siphon
     [118763] = { newId = 118764 }, -- Detonating Siphon
     [118008] = { newId = 118009 }, -- Mystic Siphon
+
+    [118226] = { newId = 125750 }, -- Ruinous Scythe --> Off Balance
+    [118223] = { newId = 122625 }, -- Hungry Scythe
+
+    [115238] = { newId = 115240 }, -- Bitter Harvest
+    [118623] = { newId = 124165 }, -- Deaden Pain
+    [118639] = { newId = 124193 }, -- Necrotic Potency
 
     ---------------------------
     -- Two Handed -------------
@@ -4896,21 +4915,52 @@ E.EffectOverride = {
     [118009] = { hide = true, tooltip = T.Skill_Mystic_Siphon }, -- Mystic (Mystic Siphon)
     [118011] = { groundLabel = true, tooltip = T.Skill_Shocking_Siphon_Ground }, -- Mystic Siphon (Mystic Siphon)
 
-    -- Frozen Colossus / Pestilent Colossus
+    -- Frozen Colossus / Pestilent Colossus / Glacial Colossus
     [122174] = { tooltip = T.Skill_Frozen_Colossus }, -- Frozen Colossus (Frozen Colossus)
     [122178] = { tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Frozen Colossus (Frozen Colossus)
     [122177] = { tooltip = A.Skill_Frozen_Colossus }, -- Major Vulnerability (Frozen Colossus)
-
     [122395] = { tooltip = T.Skill_Pestilent_Colossus }, -- Pestilent Colossus (Pestilent Colossus)
     [122399] = { tooltip = T.Generic_AOE_Disease, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
     [122400] = { tooltip = T.Generic_AOE_Disease, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
     [122401] = { tooltip = T.Generic_AOE_Disease, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
     [122397] = { tooltip = A.Skill_Pestilent_Colossus }, -- Major Vulnerability (Pestilent Colossus)
-
     [122388] = { tooltip = T.Skill_Glacial_Colossus, tooltipValue2Id = 122394 }, -- Glacial Colossus (Glacial Colossus)
     [122392] = { tooltip = T.Skill_Glacial_Colossus_Ground, groundLabel = true }, -- Glacial Colossus (Glacial Colossus)
     [122389] = { tooltip = A.Skill_Glacial_Colossus }, -- Major Vulnerability (Glacial Colossus)
     [122394] = { tooltip = T.Generic_Stun }, -- Glacial Colossus (Glacial Colossus)
+
+    -- Death Scythe / Ruinous Scythe / Hungry Scythe
+    [125749] = { tooltip = T.Skill_Ruinous_Scythe, forcedContainer = 'short' }, -- Ruinous Scythe (Ruinous Scythe)
+    [125750] = { tooltip = A.Skill_Ruinous_Scythe }, -- Off Balance (Ruinous Scythe)
+    [122625] = { tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Hungry Scythe (Hungry Scythe)
+
+    -- Bone Armor / Beckoning Armor / Summoner's Armor
+    [115211] = { tooltip = A.Skill_Bone_Armor, consolidate = true }, -- Major Resolve (Bone Armor)
+    [115214] = { tooltip = A.Skill_Bone_Armor, consolidate = true }, -- Major Ward (Bone Armor)
+    [122661] = { hide = true }, -- Corpse Spawn (Bone Armor)
+    [123911] = { hide = true }, -- Bone Armor (Bone Armor
+
+    [118239] = { tooltip = A.Skill_Beckoning_Armor, consolidate = true }, -- Major Resolve (Beckoning Armor)
+    [118240] = { tooltip = A.Skill_Beckoning_Armor, consolidate = true }, -- Major Ward (Beckoning Armor)
+    [122679] = { hide = true }, -- Corpse Spawn (Beckoning Armor)
+    [123929] = { hide = true }, -- Bone Armor (Beckoning Armor
+    [118241] = { icon = 'esoui/art/icons/ability_necromancer_008_a.dds' }, -- Beckoning Armor (Beckoning Armor)
+    [118242] = { icon = 'esoui/art/icons/ability_necromancer_008_a.dds', tooltip = T.Generic_Stun }, -- Beckoning Armor (Beckoning Armor)
+
+    [118246] = { tooltip = A.Skill_Summoners_Armor, consolidate = true }, -- Major Resolve (Summoner's Armor)
+    [118247] = { tooltip = A.Skill_Summoners_Armor, consolidate = true }, -- Major Ward (Summoner's Armor)
+    [122680] = { hide = true }, -- Corpse Spawn (Summoner's Armor)
+    [123965] = { hide = true }, -- Bone Armor (Summoner's Armor
+
+    [124136] = { icon = 'esoui/art/icons/ability_necromancer_011.dds', name = A.Skill_Bitter_Harvest }, -- Necrotic Potency (Bitter Harvest)
+    [115240] = { icon = 'esoui/art/icons/ability_necromancer_011.dds', tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Bitter Harvest (Bitter Harvest)
+
+    [124166] = { icon = 'esoui/art/icons/ability_necromancer_011_a.dds', name = A.Skill_Deaden_Pain }, -- Necrotic Potency (Deaden Pain)
+    [124165] = { tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Deaden Pain (Deaden Pain)
+    [118629] = { tooltip = A.Skill_Deaden_Pain }, -- Major Protection (Deaden Pain)
+
+    [124192] = { icon = 'esoui/art/icons/ability_necromancer_011_b.dds' }, -- Necrotic Potency (Necrotic Potency)
+    [124193] = { tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Necrotic Potency (Necrotic Potency)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
@@ -10754,6 +10804,9 @@ E.FakeExternalBuffs = {
 --------------------------------------------------------------------------------------------------------------------------------
 E.FakeExternalDebuffs = {
 
+    -- Necromancer
+    [118242] = { duration = 1000 }, -- Beckoning Armor (Beckoning Armor)
+
     -- Destruction Staff
     [38946] = { duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
 
@@ -11121,6 +11174,9 @@ E.FakePlayerDebuffs = {
 
     [86309] = { duration = 3000 }, -- Stun (Player blocks NPC charged attack)
     [86312] = { duration = 3000 }, -- Stun (Player blocks Ogrim Body Slam)
+
+    -- Necromancer
+    [118242] = { duration = 1000 }, -- Beckoning Armor (Beckoning Armor)
 
     -- Destruction Staff
     [38946] = { duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire

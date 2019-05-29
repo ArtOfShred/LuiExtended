@@ -478,6 +478,8 @@ local strings = {
     SI_LUIE_SKILL_GLACIAL_COLOSSUS_TP =                  "A frostbitten Flesh Colossus smashes the ground three times over |cFFFFFF3|r seconds, dealing Frost Damage to enemies within |cFFFFFF8|r meters.\n\nThe final smash stuns all enemies hit for |cFFFFFF<<2>>|r seconds.\n\nEach smash applies Major Vulnerability to any enemy hit for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_GLACIAL_COLOSSUS_GROUND_TP =           "Taking Frost Damage every |cFFFFFF1|r second.\n\nThe final hit will knock you down for |cFFFFFF4|r seconds.",
 
+    SI_LUIE_SKILL_RUINOUS_SCYTHE_TP =                    "Every third cast of Ruinous Scythe will set all enemies hit Off Balance.",
+
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------
     ----------------------------------------------------------------

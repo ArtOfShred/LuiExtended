@@ -630,6 +630,13 @@ local AbilityTables = {
     Skill_Pestilent_Colossus          = 122397,
     Skill_Glacial_Colossus            = 122388,
 
+    Skill_Ruinous_Scythe              = 118226,
+    Skill_Bone_Armor                  = 115206,
+    Skill_Beckoning_Armor             = 118237,
+    Skill_Summoners_Armor             = 118244,
+    Skill_Bitter_Harvest              = 115238,
+    Skill_Deaden_Pain                 = 118623,
+
     -- ---------------------------------------------------
     -- WEAPON SKILLS -------------------------------------
     -- ---------------------------------------------------

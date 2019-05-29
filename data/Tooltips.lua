@@ -668,6 +668,8 @@ LUIE.Tooltips = {
     Skill_Glacial_Colossus                          = GetString(SI_LUIE_SKILL_GLACIAL_COLOSSUS_TP),
     Skill_Glacial_Colossus_Ground                   = GetString(SI_LUIE_SKILL_GLACIAL_COLOSSUS_GROUND_TP),
 
+    Skill_Ruinous_Scythe                            = GetString(SI_LUIE_SKILL_RUINOUS_SCYTHE_TP),
+
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------
     ----------------------------------------------------------------
