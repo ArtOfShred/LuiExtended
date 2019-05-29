@@ -8879,7 +8879,7 @@ function CA.HookFunction()
             local groupKickFunction = nil
             if groupKickEnabled then
                 if lfgKick then
-                    groupKickFunction = function() LUIE.SlashVoteKick(currentTargetCharacterName) end
+                    groupKickFunction = function() LUIE.SlashCommands.SlashVoteKick(currentTargetCharacterName) end
                 else
                     groupKickFunction = function() GroupKickByName(currentTargetCharacterNameRaw) end
                 end
@@ -9338,7 +9338,7 @@ function CA.HookFunction()
                 local guildRoster = ZO_GuildRosterManager:New()
                 guildRoster:SetGuildId(id)
                 local playerData = guildRoster:FindDataByDisplayName(displayName)
-                
+
                 if playerData ~= nil and playerData.inviteeIndex == nil then
                     local guildAlliance = GetGuildAlliance(id)
                     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
