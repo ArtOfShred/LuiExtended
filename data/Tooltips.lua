@@ -669,6 +669,14 @@ LUIE.Tooltips = {
     Skill_Glacial_Colossus_Ground                   = GetString(SI_LUIE_SKILL_GLACIAL_COLOSSUS_GROUND_TP),
 
     Skill_Ruinous_Scythe                            = GetString(SI_LUIE_SKILL_RUINOUS_SCYTHE_TP),
+    Skill_Bone_Totem                                = GetString(SI_LUIE_SKILL_BONE_TOTEM_TP),
+    Skill_Agony_Totem                               = GetString(SI_LUIE_SKILL_AGONY_TOTEM_TP),
+
+    Skill_Empowering_Grasp                          = GetString(SI_LUIE_SKILL_EMPOWERING_GRASP_TP),
+    Skill_Bone_Goliath_Transformation               = GetString(SI_LUIE_SKILL_BONE_GOLIATH_TRANSFORMATION_TP),
+    Skill_Pummeling_Goliath                         = GetString(SI_LUIE_SKILL_PUMMELING_GOLIATH_TP),
+    Skill_Ravenous_Goliath                          = GetString(SI_LUIE_SKILL_RAVENOUS_GOLIATH_TP),
+    Skill_Ravenous_Goliath_Ground                   = GetString(SI_LUIE_SKILL_RAVENOUS_GOLIATH_GROUND_TP),
 
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------

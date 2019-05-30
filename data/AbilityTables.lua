@@ -636,6 +636,18 @@ local AbilityTables = {
     Skill_Summoners_Armor             = 118244,
     Skill_Bitter_Harvest              = 115238,
     Skill_Deaden_Pain                 = 118623,
+    Skill_Bone_Totem                  = 115093,
+    Skill_Remote_Totem                = 118380,
+    Skill_Agony_Totem                 = 118404,
+    Skill_Pure_Agony                  = 118618,
+
+    Skill_Grave_Grasp                 = 115177,
+    Skill_Ghostly_Embrace             = 118308,
+    Skill_Empowering_Grasp            = 118359,
+
+    Skill_Bone_Goliath_Transformation = 115001,
+    Skill_Pummeling_Goliath           = 118664,
+    Skill_Ravenous_Goliath            = 118279,
 
     -- ---------------------------------------------------
     -- WEAPON SKILLS -------------------------------------

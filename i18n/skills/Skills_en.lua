@@ -479,6 +479,14 @@ local strings = {
     SI_LUIE_SKILL_GLACIAL_COLOSSUS_GROUND_TP =           "Taking Frost Damage every |cFFFFFF1|r second.\n\nThe final hit will knock you down for |cFFFFFF4|r seconds.",
 
     SI_LUIE_SKILL_RUINOUS_SCYTHE_TP =                    "Every third cast of Ruinous Scythe will set all enemies hit Off Balance.",
+    SI_LUIE_SKILL_BONE_TOTEM_TP =                        "You and allies within the |cFFFFFF6|r meter radius of the totem gain Minor Protection.\n\nAfter |cFFFFFF2|r seconds, the totem instills fear in enemies, holding them in place for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_AGONY_TOTEM_TP =                       "You and allies within the |cFFFFFF6|r meter radius of the totem gain Minor Protection.\n\nAfter |cFFFFFF2|r seconds, the totem instills fear in enemies, holding them in place for |cFFFFFF4|r seconds.\n\nAllies can activate the |cFFFFFFPure Agony|r synergy.",
+
+    SI_LUIE_SKILL_EMPOWERING_GRASP_TP =                  "Increase damage and healing done by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BONE_GOLIATH_TRANSFORMATION_TP =       "Transformed into a Bone Goliath for |cFFFFFF<<1>>|r seconds.\n\nWhile transformed, your Light Attacks and Heavy Attacks restore Health.\n\nYou cannot generate Ultimate while transformed.",
+    SI_LUIE_SKILL_PUMMELING_GOLIATH_TP =                 "Transformed into a Pummeling Goliath for |cFFFFFF<<1>>|r seconds.\n\nWhile transformed, your Light Attacks and Heavy Attacks restore Health.\n\nYour bash attacks hit multiple targets in front of you and deal additional damage.\n\nYou cannot generate Ultimate while transformed.",
+    SI_LUIE_SKILL_RAVENOUS_GOLIATH_TP =                  "Transformed into a Ravenous Goliath for |cFFFFFF<<1>>|r seconds.\n\nWhile transformed, your Light Attacks and Heavy Attacks restore Health.\n\nYou deal Magic Damage to nearby enemies every |cFFFFFF1|r second and heal for |cffffff100|r% of the damage done.\n\nYou cannot generate Ultimate while transformed.",
+    SI_LUIE_SKILL_RAVENOUS_GOLIATH_GROUND_TP =           "Taking Magic Damage every |cFFFFFF1|r second.\n\nEach tick heals the Necromancer for |cffffff100|r% of the damage done.",
 
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------
@@ -576,8 +584,8 @@ local strings = {
     SI_LUIE_SKILL_BLOOD_MOON_TP =                        "You have bitten another player. You may not do so again for |cFFFFFF7|r days.",
     SI_LUIE_SKILL_FEEDING_FREZNY_TP =                    "Empowered for |cFFFFFF<<1>>|r seconds, increasing the damage of your Light Attacks by |cFFFFFF40|r%.",
     SI_LUIE_SKILL_CLAWS_OF_LIFE_TP =                     "Afflicted with Disease Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage, your attacker heals for |cFFFFFF50|r% of the damage done.",
-    SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP =           "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.",
-    SI_LUIE_SKILL_PACK_LEADER_TP =                       "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nSummon two direwolves while transformed. If killed, they return after |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP =           "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nYou cannot generate Ultimate while transformed.",
+    SI_LUIE_SKILL_PACK_LEADER_TP =                       "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nSummon two direwolves while transformed. If killed, they return after |cFFFFFF10|r seconds.\n\nYou cannot generate Ultimate while transformed.",
 
     -- Vampire
     SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA =       "Noxiphilic Sanguivoria",

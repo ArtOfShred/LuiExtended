@@ -238,6 +238,11 @@ CBT.CastDurationFix = {
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
 
+    -- Necromancer
+    [115478] = 1200, -- Bone Goliath Self Snare (Bone Goliath Transformation)
+    [118673] = 1200, -- Pummeling Goliath Self Snare (Pummeling Goliath)
+    [118287] = 1200, -- Ravenous Goliath Self Snare (Ravenous Goliath)
+
     -- Innate
     [37059] = 1165, -- Mount Up
     [14644] = 4000, -- Revive (Death Dialogue)
@@ -460,6 +465,11 @@ CBT.IsCast = {
     [85982] = true, -- Feral Guardian (Warden)
     [85986] = true, -- Eternal Guardian (Warden)
     [85990] = true, -- Wild Guardian (Warden)
+
+    -- Necromancer
+    [115478] = true, -- Bone Goliath Self Snare (Bone Goliath Transformation)
+    [118673] = true, -- Pummeling Goliath Self Snare (Pummeling Goliath)
+    [118287] = true, -- Ravenous Goliath Self Snare (Ravenous Goliath)
 
     -- Two Handed
     [28279] = true, -- Uppercut (Two Handed)

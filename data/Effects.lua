@@ -398,6 +398,9 @@ E.DebuffDisplayOverrideId = {
     [31562] = true, -- Supernova (Nova Synergy)
     [34443] = true, -- Gravity Crush (Solar Prison Synergy)
 
+    -- Necromancer
+    [118618] = true, -- Pure Agony (Agony Totem)
+
     -- Warden
     [87560] = true, -- Frozen Gate Root (Frozen Gate)
     [92039] = true, -- Frozen Gate Root (Frozen Device)
@@ -589,6 +592,10 @@ E.EffectGroundDisplay = {
     [122174] = { buff = false, debuff = false, ground = true }, -- Frozen Colossus (Frozen Colossus)
     [122395] = { buff = false, debuff = false, ground = true }, -- Pestilent Colossus (Pestilent Colossus)
     [122388] = { buff = false, debuff = false, ground = true }, -- Glacial Colossus (Glacial Colossus)
+
+    [115093] = { buff = true, debuff = false, ground = false }, -- Bone Totem (Bone Totem)
+    [118380] = { buff = true, debuff = false, ground = false }, -- Remote Totem (Remote Totem)
+    [118404] = { buff = true, debuff = false, ground = false }, -- Agony Totem (Agony Totem)
 
     ---------------------------
     -- Bow --------------------
@@ -1119,6 +1126,10 @@ E.BarHighlightOverride = {
     [115238] = { newId = 115240 }, -- Bitter Harvest
     [118623] = { newId = 124165 }, -- Deaden Pain
     [118639] = { newId = 124193 }, -- Necrotic Potency
+
+    [115177] = { newId = 121517 }, -- Grave Grasp --> Minor Maim
+    [118308] = { newId = 118313 }, -- Ghostly Embrace --> Minor Maim
+    [118352] = { newId = 118358 }, -- Empowering Grasp --> Minor Maim
 
     ---------------------------
     -- Two Handed -------------
@@ -2163,6 +2174,11 @@ E.EffectHideSCT = {
     ----------------------------
 
     [118014] = true, -- Mystic Siphon (Mystic Siphon)
+
+    [121513] = true, -- Grave Grasp (Grave Grasp)
+    [118309] = true, -- Ghostly Embrace (Ghostly Embrace)
+    [118325] = true, -- Ghostly Embrace (Ghostly Embrace)
+    [118354] = true, -- Empowering Grasp (Empowering Grasp)
 
     ----------------------------
     -- One Hand and Shield
@@ -4961,6 +4977,52 @@ E.EffectOverride = {
 
     [124192] = { icon = 'esoui/art/icons/ability_necromancer_011_b.dds' }, -- Necrotic Potency (Necrotic Potency)
     [124193] = { tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Necrotic Potency (Necrotic Potency)
+
+    [115093] = { tooltip = T.Skill_Bone_Totem }, -- Bone Totem (Bone Totem)
+    [115097] = { tooltip = A.Skill_Bone_Totem, groundLabel = true, forcedContainer = 'short' }, -- Minor Protection (Bone Totem)
+    [115106] = { tooltip = T.Generic_Fear }, -- Bone Totem (Bone Totem)
+
+    [118380] = { tooltip = T.Skill_Bone_Totem }, -- Remote Totem (Remote Totem)
+    [118385] = { tooltip = A.Skill_Remote_Totem, groundLabel = true, forcedContainer = 'short' }, -- Minor Protection (Remote Totem)
+    [118386] = { tooltip = T.Generic_Fear }, -- Remote Totem (Remote Totem)
+
+    [118613] = { tooltip = A.Skill_Pure_Agony }, -- Minor Vulnerability (Agony Totem - Pure Agony Synergy)
+    [118618] = { tooltip = T.Generic_Magic, tooltipValue2 = 1 }, -- Pure Agony (Agony Totem - Pure Agony Synergy)
+
+    [118404] = { tooltip = T.Skill_Agony_Totem }, -- Agony Totem (Agony Totem)
+    [118409] = { tooltip = A.Skill_Agony_Totem, groundLabel = true, forcedContainer = 'short' }, -- Minor Protection (Agony Totem)
+    [118411] = { tooltip = T.Generic_Fear }, -- Agony Totem (Agony Totem)
+
+    [121513] = { tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Grave Grasp (Grave Grasp)
+    [121517] = { tooltip = A.Skill_Grave_Grasp }, -- Minor Maim (Grave Grasp)
+
+    [118309] = { icon = 'esoui/art/icons/ability_necromancer_009_b.dds', tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Ghostly Embrace (Ghostly Embrace)
+    [118313] = { tooltip = A.Skill_Ghostly_Embrace }, -- Minor Maim (Ghostly Embrace)
+    [118325] = { icon = 'esoui/art/icons/ability_necromancer_009_b.dds', tooltip = T.Generic_Immobilize }, -- Ghostly Embrace (Ghostly Embrace)
+
+    [118366] = { tooltip = A.Skill_Empowering_Grasp }, -- Empower (Empowering Grasp)
+    [118369] = { icon = 'esoui/art/icons/ability_necromancer_009_a.dds', tooltip = T.Skill_Empowering_Grasp }, -- Empowering Grasp (Empowering Grasp)
+    [118354] = { icon = 'esoui/art/icons/ability_necromancer_009_a.dds', tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Empowering Grasp (Empowering Grasp)
+    [118358] = { tooltip = A.Skill_Empowering_Grasp }, -- Minor Maim (Empowering Grasp)
+
+    [115001] = { tooltip = T.Skill_Bone_Goliath_Transformation }, -- Bone Goliath Transformation (Bone Goliath Transformation)
+    [115286] = { icon = 'esoui/art/icons/ability_necromancer_012.dds', name = A.Skill_Bone_Goliath_Transformation }, -- Bone Goliath (Bone Goliath Transformation)
+    [115478] = { icon = 'esoui/art/icons/ability_necromancer_012.dds', name = A.Skill_Bone_Goliath_Transformation }, -- Bone Goliath Self Snare (Bone Goliath Transformation)
+
+    [118664] = { tooltip = T.Skill_Pummeling_Goliath }, -- Pummeling Goliath (Pummeling Goliath)
+    [118665] = { icon = 'esoui/art/icons/ability_necromancer_012_a.dds' }, -- Pummeling Goliath (Pummeling Goliath)
+    [118673] = { icon = 'esoui/art/icons/ability_necromancer_012_a.dds', name = A.Skill_Pummeling_Goliath }, -- Pummeling Goliath Self Snare (Pummeling Goliath)
+    [118666] = { icon = 'esoui/art/icons/ability_necromancer_012_a.dds' }, -- Pummeling Goliath (Pummeling Goliath)
+    [118667] = { icon = 'esoui/art/icons/ability_necromancer_012_a.dds' }, -- Pummeling Goliath (Pummeling Goliath)
+    [118720] = { icon = 'esoui/art/icons/ability_necromancer_012_a.dds' }, -- Pummeling Goliath Bash (Pummeling Goliath)
+
+    [118279] = { tooltip = T.Skill_Ravenous_Goliath }, -- Ravenous Goliath (Ravenous Goliath)
+    [118280] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds' }, -- Ravenous Goliath (Ravenous Goliath)
+    [118287] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds', name = A.Skill_Ravenous_Goliath }, -- Ravenous Goliath Self Snare (Ravenous Goliath)
+    [118281] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds' }, -- Ravenous Goliath (Ravenous Goliath)
+    [118282] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds' }, -- Ravenous Goliath (Ravenous Goliath)
+    [118289] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds', groundLabel = true, tooltip = T.Skill_Ravenous_Goliath_Ground }, -- Ravenous Goliath (Ravenous Goliath)
+    [118292] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds' }, -- Ravenous Goliath (Ravenous Goliath)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
@@ -11378,6 +11440,8 @@ E.AddGroundDamageAura = {
     [122400] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 2 }, -- Pestilent Colossus (Pestilent Colossus)
     [122401] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 2 }, -- Pestilent Colossus (Pestilent Colossus)
     [122392] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Glacial Colossus (Glacial Colossus)
+
+    [118289] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ravenous Goliath (Ravenous Goliath)
 
     -- Bow
     [28877] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Volley (Volley)
