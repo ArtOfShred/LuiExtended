@@ -4841,6 +4841,82 @@ LUIE.DebugAuras = {
     [118289] = true, -- Ravenous Goliath (Ravenous Goliath)
     [118292] = true, -- Ravenous Goliath (Ravenous Goliath)
 
+    [114196] = true, -- Render Flesh (Render Flesh)
+    [114206] = true, -- Minor Defile (Render Flesh)
+
+    [117883] = true, -- Resistant Flesh (Resistant Flesh)
+    [117885] = true, -- Minor Defile (Resistant Flesh)
+    [117886] = true, -- Resistant Flesh (Resistant Flesh)
+
+    [117888] = true, -- Blood Sacrifice (Blood Sacrifice)
+    [117890] = true, -- Minor Defile (Blood Sacrifice)
+    [117897] = true, -- Blood Sacrifice (Blood Sacrifice)
+    [117894] = true, -- Blood Sacrifice (Blood Sacrifice)
+
+    [124005] = true, -- Expunge (Expunge - All Morphs)
+    [115307] = true, -- Expunge (Expunge)
+
+    [117940] = true, -- Expunge and Modify (Expunge and Modify)
+    [117947] = true, -- Expunge and Modify (Expunge and Modify)
+    [117941] = true, -- Expunge and Modify (Expunge and Modify)
+    [117942] = true, -- Expunge and Modify (Expunge and Modify)
+
+    [117919] = true, -- Hexproof (Hexproof)
+
+    [115315] = true, -- Life amid Death (Life amid Death)
+    [115318] = true, -- Life amid Death (Life amid Death)
+    [115326] = true, -- Life amid Death (Life amid Death)
+    [115532] = true, -- Life amid Death (Life amid Death)
+    [115385] = true, -- Life amid Death (Life amid Death)
+
+    [118017] = true, -- Renewing Undeath (Renewing Undeath)
+    [118019] = true, -- Renewing Undeath (Renewing Undeath)
+    [118022] = true, -- Renewing Undeath (Renewing Undeath)
+    [118018] = true, -- Renewing Undeath (Renewing Undeath)
+    [118021] = true, -- Renewing Undeath (Renewing Undeath)
+
+    [118809] = true, -- Enduring Undeath (Enduring Undeath)
+    [118811] = true, -- Enduring Undeath (Enduring Undeath)
+    [118817] = true, -- Enduring Undeath (Enduring Undeath)
+    [118814] = true, -- Enduring Undeath (Enduring Undeath)
+    [118810] = true, -- Enduring Undeath (Enduring Undeath)
+    [118813] = true, -- Enduring Undeath (Enduring Undeath)
+
+    [115710] = true, -- Spirit Mender (Spirit Mender)
+    [115720] = true, -- Spirit Mender Spawn Stun (Spirit Mender)
+    [115732] = true, -- Spirit Mender (Spirit Mender)
+    [115721] = true, -- Reconstitute (Spirit Mender)
+
+    [118912] = true, -- Spirit Guardian (Spirit Guardian)
+    [118915] = true, -- Spirit Guardian Spawn Stun (Spirit Guardian)
+    [118916] = true, -- Spirit Guardian (Spirit Guardian)
+    [118913] = true, -- Spirit Guardian (Spirit Guardian)
+    [118914] = true, -- Reconstitute (Spirit Guardian)
+
+    [118840] = true, -- Intensive Mender (Intensive Mender)
+    [118852] = true, -- Intensive Mender Spawn Stun (Intensive Mender)
+    [122379] = true, -- Necromancer Pet 6s Tracker (Intensive Mender)
+    [118843] = true, -- Intensive Mender (Intensive Mender)
+    [118851] = true, -- Reconstitute (Intensive Mender)
+
+    [124004] = true, -- Restoring Tether (Restoring Tether - All Morphs)
+
+    [115926] = true, -- Restoring Tether (Restoring Tether)
+    [116450] = true, -- Restoring Tether (Restoring Tether)
+    [116442] = true, -- Restoring Tether (Restoring Tether)
+    [117871] = true, -- Restoring Tether (Restoring Tether)
+
+    [118070] = true, -- Braided Tether (Braided Tether)
+    [118071] = true, -- Braided Tether (Braided Tether)
+    [118073] = true, -- Braided Tether (Braided Tether)
+    [118074] = true, -- Braided Tether (Braided Tether)
+
+    [118122] = true, -- Mortal Coil (Mortal Coil)
+    [118123] = true, -- Mortal Coil (Mortal Coil)
+    [118125] = true, -- Mortal Coil (Mortal Coil)
+    [118126] = true, -- Mortal Coil (Mortal Coil)
+    [123233] = true, -- Mortal Coil (Mortal Coil)
+
     -------------------------------------
     -- UNARMED PASSIVES -----------------
     -------------------------------------

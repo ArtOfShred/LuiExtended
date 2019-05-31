@@ -488,6 +488,16 @@ local strings = {
     SI_LUIE_SKILL_RAVENOUS_GOLIATH_TP =                  "Transformed into a Ravenous Goliath for |cFFFFFF<<1>>|r seconds.\n\nWhile transformed, your Light Attacks and Heavy Attacks restore Health.\n\nYou deal Magic Damage to nearby enemies every |cFFFFFF1|r second and heal for |cffffff100|r% of the damage done.\n\nYou cannot generate Ultimate while transformed.",
     SI_LUIE_SKILL_RAVENOUS_GOLIATH_GROUND_TP =           "Taking Magic Damage every |cFFFFFF1|r second.\n\nEach tick heals the Necromancer for |cffffff100|r% of the damage done.",
 
+    SI_LUIE_SKILL_RESISTANT_FLESH_TP =                   "Increase Physical and Spell Resistance by |cFFFFFF50|r% of the amount healed by the last cast of Resistant Flesh for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_LIFE_AMID_DEATH_TP =                   "Healing you and allies within |cFFFFFF8|r meters of the consumed corpse every |cFFFFFF1|r second.",
+
+    SI_LUIE_SKILL_SPIRIT_MENDER_TP =                     "A ghostly spirit stays by your side. The ghostly spirit remains for |cFFFFFF<<1>>|r seconds.\n\nThe spirit heals you or the lowest Health ally around you every |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_SPIRIT_GUARDIAN_TP =                   "A ghostly spirit stays by your side. The ghostly spirit remains for |cFFFFFF<<1>>|r seconds.\n\nThe spirit heals you or the lowest Health ally around you every |cFFFFFF2|r seconds.\n\nWhile active, |cFFFFFF10|r% of the damage you take is transferred to the spirit instead.",
+
+    SI_LUIE_SKILL_RESTORING_TETHER_TP =                  "You and all allies between you and the corpse heal over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BRAIDED_TETHER_TP =                    "You, all allies around you, and all allies between you and the corpse heal over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_MORTAL_COIL_TP =                       "You and all allies between you and the corpse heal over |cFFFFFF<<1>>|r seconds.\n\nYou also restore |cFFFFFF2844|r Stamina over |cFFFFFF<<1>>|r seconds while siphoning the corpse.",
+
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------
     ----------------------------------------------------------------

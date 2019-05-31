@@ -597,6 +597,10 @@ E.EffectGroundDisplay = {
     [118380] = { buff = true, debuff = false, ground = false }, -- Remote Totem (Remote Totem)
     [118404] = { buff = true, debuff = false, ground = false }, -- Agony Totem (Agony Totem)
 
+    [115326] = { buff = true, debuff = false, ground = false, icon = 'esoui/art/icons/ability_necromancer_016.dds' }, -- Life amid Death (Life amid Death)
+    [118022] = { buff = true, debuff = false, ground = false, icon = 'esoui/art/icons/ability_necromancer_016_a.dds' }, -- Renewing Undeath (Renewing Undeath)
+    [118814] = { buff = true, debuff = false, ground = false, icon = 'esoui/art/icons/ability_necromancer_016_b.dds' }, -- Enduring Undeath (Enduring Undeath)
+
     ---------------------------
     -- Bow --------------------
     ---------------------------
@@ -891,6 +895,7 @@ E.AddNoDurationBarHighlight = {
     [115240] = true, -- Bitter Harvest
     [124165] = true, -- Deaden Pain
     [124193] = true, -- Necrotic Potency
+    [118814] = true, -- Enduring Undeath
 
 }
 
@@ -1130,6 +1135,16 @@ E.BarHighlightOverride = {
     [115177] = { newId = 121517 }, -- Grave Grasp --> Minor Maim
     [118308] = { newId = 118313 }, -- Ghostly Embrace --> Minor Maim
     [118352] = { newId = 118358 }, -- Empowering Grasp --> Minor Maim
+
+    [117883] = { newId = 117886 }, -- Resistant Flesh
+
+    [115315] = { newId = 115326 }, -- Life amid Death
+    [118017] = { newId = 118022 }, -- Renewing Undeath
+    [118809] = { newId = 118814 }, -- Enduring Undeath
+
+    [115926] = { newId = 116450 }, -- Restoring Tether
+    [118070] = { newId = 118071 }, -- Braided Tether
+    [118122] = { newId = 118123 }, -- Mortal Coil
 
     ---------------------------
     -- Two Handed -------------
@@ -2174,11 +2189,11 @@ E.EffectHideSCT = {
     ----------------------------
 
     [118014] = true, -- Mystic Siphon (Mystic Siphon)
-
     [121513] = true, -- Grave Grasp (Grave Grasp)
     [118309] = true, -- Ghostly Embrace (Ghostly Embrace)
     [118325] = true, -- Ghostly Embrace (Ghostly Embrace)
     [118354] = true, -- Empowering Grasp (Empowering Grasp)
+    [123233] = true, -- Mortal Coil (Mortal Coil)
 
     ----------------------------
     -- One Hand and Shield
@@ -5023,6 +5038,34 @@ E.EffectOverride = {
     [118282] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds' }, -- Ravenous Goliath (Ravenous Goliath)
     [118289] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds', groundLabel = true, tooltip = T.Skill_Ravenous_Goliath_Ground }, -- Ravenous Goliath (Ravenous Goliath)
     [118292] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds' }, -- Ravenous Goliath (Ravenous Goliath)
+
+    [114206] = { tooltip = A.Skill_Render_Flesh }, -- Minor Defile  (Render Flesh)
+    [117885] = { tooltip = A.Skill_Resistant_Flesh }, -- Minor Defile (Resistant Flesh)
+    [117886] = { tooltip = T.Skill_Resistant_Flesh }, -- Resistant Flesh (Resistant Flesh)
+    [117890] = { tooltip = A.Skill_Blood_Sacrifice }, -- Minor Defile (Blood Sacrifice)
+
+    [115326] = { tooltip = T.Skill_Life_amid_Death }, -- Life amid Death (Life amid Death)
+    [115385] = { groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Life amid Death (Life amid Death)
+    [118022] = { tooltip = T.Skill_Life_amid_Death }, -- Renewing Undeath (Renewing Undeath)
+    [118021] = { groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Renewing Undeath (Renewing Undeath)
+    [118814] = { tooltip = T.Skill_Life_amid_Death }, -- Enduring Undeath (Enduring Undeath)
+    [118813] = { groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Enduring Undeath (Enduring Undeath)
+
+    [115710] = { tooltip = T.Skill_Spirit_Mender }, -- Spirit Mender (Spirit Mender)
+    [115732] = { icon = 'esoui/art/icons/ability_necromancer_015.dds', tooltip = T.Skill_Spirit_Mender }, -- Spirit Mender (Spirit Mender)
+
+    [118912] = { tooltip = T.Skill_Spirit_Guardian }, -- Spirit Guardian (Spirit Guardian)
+    [118913] = { icon = 'esoui/art/icons/ability_necromancer_015_a.dds', tooltip = T.Skill_Spirit_Guardian }, -- Spirit Guardian (Spirit Guardian)
+
+    [118840] = { tooltip = T.Skill_Spirit_Mender }, -- Spirit Mender (Spirit Mender)
+    [118843] = { icon = 'esoui/art/icons/ability_necromancer_015_b.dds', tooltip = T.Skill_Spirit_Mender }, -- Intensive Mender (Intensive Mender)
+
+    [115926] = { hide = true }, -- Restoring Tether (Restoring Tether)
+    [116450] = { tooltip = T.Skill_Restoring_Tether }, -- Restoring Tether (Restoring Tether)
+    [118070] = { hide = true }, -- Braided Tether (Braided Tether)
+    [118071] = { tooltip = T.Skill_Braided_Tether }, -- Braided Tether (Braided Tether)
+    [118122] = { hide = true }, -- Mortal Coil (Mortal Coil)
+    [118123] = { tooltip = T.Skill_Mortal_Coil }, -- Mortal Coil (Mortal Coil)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
@@ -11442,6 +11485,10 @@ E.AddGroundDamageAura = {
     [122392] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Glacial Colossus (Glacial Colossus)
 
     [118289] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ravenous Goliath (Ravenous Goliath)
+
+    [115385] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Life amid Death (Life amid Death)
+    [118021] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Renewing Undeath (Renewing Undeath)
+    [118813] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Enduring Undeath (Enduring Undeath)
 
     -- Bow
     [28877] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Volley (Volley)

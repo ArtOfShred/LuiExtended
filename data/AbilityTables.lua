@@ -649,6 +649,10 @@ local AbilityTables = {
     Skill_Pummeling_Goliath           = 118664,
     Skill_Ravenous_Goliath            = 118279,
 
+    Skill_Render_Flesh                = 114196,
+    Skill_Resistant_Flesh             = 117883,
+    Skill_Blood_Sacrifice             = 117888,
+
     -- ---------------------------------------------------
     -- WEAPON SKILLS -------------------------------------
     -- ---------------------------------------------------

@@ -677,6 +677,15 @@ LUIE.Tooltips = {
     Skill_Pummeling_Goliath                         = GetString(SI_LUIE_SKILL_PUMMELING_GOLIATH_TP),
     Skill_Ravenous_Goliath                          = GetString(SI_LUIE_SKILL_RAVENOUS_GOLIATH_TP),
     Skill_Ravenous_Goliath_Ground                   = GetString(SI_LUIE_SKILL_RAVENOUS_GOLIATH_GROUND_TP),
+    Skill_Resistant_Flesh                           = GetString(SI_LUIE_SKILL_RESISTANT_FLESH_TP),
+
+    Skill_Life_amid_Death                           = GetString(SI_LUIE_SKILL_LIFE_AMID_DEATH_TP),
+    Skill_Spirit_Mender                             = GetString(SI_LUIE_SKILL_SPIRIT_MENDER_TP),
+    Skill_Spirit_Guardian                           = GetString(SI_LUIE_SKILL_SPIRIT_GUARDIAN_TP),
+
+    Skill_Restoring_Tether                          = GetString(SI_LUIE_SKILL_RESTORING_TETHER_TP),
+    Skill_Braided_Tether                            = GetString(SI_LUIE_SKILL_BRAIDED_TETHER_TP),
+    Skill_Mortal_Coil                               = GetString(SI_LUIE_SKILL_MORTAL_COIL_TP),
 
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------
