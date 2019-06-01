@@ -997,6 +997,7 @@ local AbilityTables = {
     Skill_Boulder_Toss                = 91855,
     Skill_Shockwave                   = 4653,
     Skill_Doom_Truths_Gaze            = 9219,
+    Skill_The_Feast                   = 11083,
 
     -- Undead
     Skill_Desecrated_Ground           = 38828,

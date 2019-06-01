@@ -1197,6 +1197,8 @@ local strings = {
     SI_LUIE_SKILL_ENERGIZE =                             "Energize",
     SI_LUIE_SKILL_REFLECTIVE_SCALE =                     "Reflective Scale",
     SI_LUIE_SKILL_FETCHERFLY_SWARM =                     "Fetcherfly Swarm",
+    SI_LUIE_SKILL_WING_GUST_STUN =                       "Knocked back for |cFFFFFF<<1>>|r seconds.\n\nMovement speed reduced by |cFFFFFF50|r% for |cFFFFFF<<2>>|r seconds.",
+    SI_LUIE_SKILL_WING_GUST_SNARE =                      "Knocked back for |cFFFFFF<<2>>|r seconds.\n\nMovement speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
 }
 
 for stringId, stringValue in pairs(strings) do

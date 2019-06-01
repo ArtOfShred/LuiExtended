@@ -1040,6 +1040,8 @@ LUIE.Tooltips = {
     Skill_Torpor                                    = GetString(SI_LUIE_SKILL_TORPOR_TP),
     Skill_Summon_Spiderling                         = GetString(SI_LUIE_SKILL_SUMMON_SPIDERLING_TP),
     Skill_Unyielding_Mace                           = GetString(SI_LUIE_SKILL_UNYIELDING_MACE_TP),
+    Skill_Wing_Gust_Snare                           = GetString(SI_LUIE_SKILL_WING_GUST_SNARE),
+    Skill_Wing_Gust_Stun                            = GetString(SI_LUIE_SKILL_WING_GUST_STUN),
 
     -- Undead
     Skill_Vampiric_Drain                            = GetString(SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP),

@@ -7188,8 +7188,8 @@ E.EffectOverride = {
     [35278] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_gtaoe.dds', tooltip = T.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 50, hideGround = true, duration = 0, groundLabel = true }, -- Soul Flame (Daedric Titan)
     [34405] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_swallowing_souls.dds' }, -- Swallowing Souls (Daedric Titan)
     [34406] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_swallowing_souls.dds' }, -- Swallowing Souls (Daedric Titan)
-    [26554] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', tooltip = T.Generic_Knockback }, -- Wing Gust (Daedric Titan)
-    [33085] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Wing Gust (Daedric Titan) -- TODO: Get snare % tooltip value
+    [26554] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', tooltip = T.Skill_Wing_Gust_Stun, tooltipValue2Id = 33085, hideReduce = true }, -- Wing Gust (Daedric Titan)
+    [33085] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', tooltip = T.Skill_Wing_Gust_Snare, tooltipValue2Id = 26554 }, -- Wing Gust (Daedric Titan) -- TODO: Get snare % tooltip value
     [33086] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds' }, -- Wing Gust (Daedric Titan)
     [4750] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_jagged_claw.dds' }, -- Jagged Claw (Daedroth)
     [4778] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds' }, -- Fiery Jaws (Daedroth)
@@ -7275,7 +7275,7 @@ E.EffectOverride = {
     [74794] = { name = A.Innate_Stagger, tooltip = T.Generic_Stagger }, -- Black Winter (Harvester)
     [11083] = { icon = 'LuiExtended/media/icons/abilities/ability_harvester_the_feast.dds' }, -- The Feast (Harvester)
     [26110] = { icon = 'LuiExtended/media/icons/abilities/ability_harvester_the_feast.dds', tooltip = T.Generic_Levitate }, -- The Feast (Harvester)
-    [26017] = { hide = true }, -- Creeping Doom (The Feast)
+    [26017] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_the_feast_heal.dds', name = A.Skill_The_Feast, hide = true }, -- Creeping Doom (The Feast)
     [26018] = { hide = true }, -- Creeping Doom (The Feast)
     [88070] = { hide = true }, -- Creeping Doom (The Feast)
     [8204] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_strike.dds' }, -- Strike (Ogrim)
