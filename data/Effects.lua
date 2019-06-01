@@ -4884,8 +4884,28 @@ E.EffectOverride = {
     [88863] = { groundLabel = true, tooltip = T.Skill_Permafrost_Ground, stack = 1, stackAdd = 1, stackMax = 3 }, -- Permafrost (Permafrost)
 
     ----------------------------------------------------------------
+    -- NECROMANCER PASSIVE ABILITIES -------------------------------
+    ----------------------------------------------------------------
+
+    -- Grave Lord
+    [116187] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds', tooltip = T.Skill_Reusable_Parts_Rank_1 }, -- Reusable Parts (Reusable Parts - Rank 1)
+    [116189] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_reusable_parts.dds', tooltip = T.Skill_Reusable_Parts_Rank_2 }, -- Reusable Parts (Reusable Parts - Rank 2)
+
+    -- Bone Tyrant
+    [119156] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_death_gleaning.dds' }, -- Death Gleaning (Death Gleaning - Rank 1)
+    [119158] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_death_gleaning.dds' }, -- Death Gleaning (Death Gleaning - Rank 1)
+    [119164] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_death_gleaning.dds' }, -- Death Gleaning (Death Gleaning - Rank 2)
+    [119165] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_death_gleaning.dds' }, -- Death Gleaning (Death Gleaning - Rank 2)
+
+    -- Living Death
+    [120611] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_corpse_consumption.dds' }, -- Corpse Consumption (Rank 1)
+    [120612] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_corpse_consumption.dds' }, -- Corpse Consumption (Rank 2)
+
+    ----------------------------------------------------------------
     -- NECROMANCER ACTIVE ABILITIES --------------------------------
     ----------------------------------------------------------------
+
+    -- GRAVE LORD
 
     -- Flame Skull / Venom Skull / Ricochet Skull
     [114131] = { tooltip = T.Skill_Flame_Skull, tooltipValue2 = GetAbilityName(114108), forcedContainer = 'short' }, -- Flame Skull (Flame Skull)
@@ -4910,12 +4930,10 @@ E.EffectOverride = {
     -- Boneyard / Unnerving Boneyard / Avid Boneyard
     [115252] = { tooltip = T.Skill_Boneyard }, -- Boneyard (Boneyard)
     [115254] = { tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Boneyard (Boneyard)
-
     [117805] = { tooltip = T.Skill_Unnerving_Boneyard }, -- Unnerving Boneyard (Unnerving Boneyard)
     [117809] = { tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Unnerving Boneyard (Unnerving Boneyard)
     [117818] = { tooltip = A.Skill_Unnerving_Boneyard, groundLabel = true }, -- Major Breach (Unnerving Boneyard)
     [117819] = { tooltip = A.Skill_Unnerving_Boneyard, groundLabel = true }, -- Major Fracture (Unnerving Boneyard)
-
     [117850] = { tooltip = T.Skill_Avid_Boneyard }, -- Avid Boneyard (Avid Boneyard)
     [117854] = { tooltip = T.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Avid Boneyard (Avid Boneyard)
 
@@ -4923,11 +4941,9 @@ E.EffectOverride = {
     [114317] = { tooltip = T.Skill_Skeletal_Mage }, -- Skeletal Mage (Skeletal Mage)
     [114322] = { icon = 'esoui/art/icons/ability_necromancer_003.dds', name = A.Skill_Skeletal_Mage, tooltip = T.Skill_Skeletal_Mage }, -- Skeletal Mage Summon (Skeletal Mage)
     [114461] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_deathbolt.dds' }, -- Deathbolt (Skeletal Mage)
-
     [118680] = { tooltip = T.Skill_Skeletal_Archer }, -- Skeletal Archer (Skeletal Archer)
     [118681] = { icon = 'esoui/art/icons/ability_necromancer_003_a.dds', tooltip = T.Skill_Skeletal_Archer }, -- Skeletal Archer (Skeletal Archer)
     [122774] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_deathbolt_archer.dds' }, -- Deathbolt (Skeletal Archer)
-
     [118726] = { tooltip = T.Skill_Skeletal_Arcanist }, -- Skeletal Arcanist (Skeletal Arcanist)
     [118738] = { icon = 'esoui/art/icons/ability_necromancer_003_b.dds', name = A.Skill_Skeletal_Arcanist, tooltip = T.Skill_Skeletal_Arcanist }, -- Exploding Mage (Skeletal Arcanist)
     [118746] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_deathbolt.dds' }, -- Deathbolt (Skeletal Arcanist)
@@ -4937,11 +4953,9 @@ E.EffectOverride = {
     [115924] = { hide = true }, -- Shocking Siphon (Shocking Siphon)
     [116445] = { hide = true, tooltip = T.Skill_Shocking_Siphon  }, -- Shocking Siphon (Shocking Siphon)
     [116410] = { groundLabel = true, tooltip = T.Skill_Shocking_Siphon_Ground }, -- Shocking Siphon (Shocking Siphon)
-
     [118763] = { hide = true }, -- Detonating Siphon (Detonating Siphon)
     [118764] = { hide = true, tooltip = T.Skill_Detonating_Siphon }, -- Detonating Siphon (Detonating Siphon)
     [118766] = { groundLabel = true, tooltip = T.Skill_Detonating_Siphon_Ground }, -- Detonating Siphon (Detonating Siphon)
-
     [118008] = { hide = true }, -- Mystic Siphon (Mystic Siphon)
     [118009] = { hide = true, tooltip = T.Skill_Mystic_Siphon }, -- Mystic (Mystic Siphon)
     [118011] = { groundLabel = true, tooltip = T.Skill_Shocking_Siphon_Ground }, -- Mystic Siphon (Mystic Siphon)
@@ -4960,6 +4974,8 @@ E.EffectOverride = {
     [122389] = { tooltip = A.Skill_Glacial_Colossus }, -- Major Vulnerability (Glacial Colossus)
     [122394] = { tooltip = T.Generic_Stun }, -- Glacial Colossus (Glacial Colossus)
 
+    -- BONE TYRANT
+
     -- Death Scythe / Ruinous Scythe / Hungry Scythe
     [125749] = { tooltip = T.Skill_Ruinous_Scythe, forcedContainer = 'short' }, -- Ruinous Scythe (Ruinous Scythe)
     [125750] = { tooltip = A.Skill_Ruinous_Scythe }, -- Off Balance (Ruinous Scythe)
@@ -4970,67 +4986,60 @@ E.EffectOverride = {
     [115214] = { tooltip = A.Skill_Bone_Armor, consolidate = true }, -- Major Ward (Bone Armor)
     [122661] = { hide = true }, -- Corpse Spawn (Bone Armor)
     [123911] = { hide = true }, -- Bone Armor (Bone Armor
-
     [118239] = { tooltip = A.Skill_Beckoning_Armor, consolidate = true }, -- Major Resolve (Beckoning Armor)
     [118240] = { tooltip = A.Skill_Beckoning_Armor, consolidate = true }, -- Major Ward (Beckoning Armor)
     [122679] = { hide = true }, -- Corpse Spawn (Beckoning Armor)
     [123929] = { hide = true }, -- Bone Armor (Beckoning Armor
     [118241] = { icon = 'esoui/art/icons/ability_necromancer_008_a.dds' }, -- Beckoning Armor (Beckoning Armor)
     [118242] = { icon = 'esoui/art/icons/ability_necromancer_008_a.dds', tooltip = T.Generic_Stun }, -- Beckoning Armor (Beckoning Armor)
-
     [118246] = { tooltip = A.Skill_Summoners_Armor, consolidate = true }, -- Major Resolve (Summoner's Armor)
     [118247] = { tooltip = A.Skill_Summoners_Armor, consolidate = true }, -- Major Ward (Summoner's Armor)
     [122680] = { hide = true }, -- Corpse Spawn (Summoner's Armor)
     [123965] = { hide = true }, -- Bone Armor (Summoner's Armor
 
+    -- Bitter Harvest / Deaden Pain / Necrotic Potency
     [124136] = { icon = 'esoui/art/icons/ability_necromancer_011.dds', name = A.Skill_Bitter_Harvest }, -- Necrotic Potency (Bitter Harvest)
     [115240] = { icon = 'esoui/art/icons/ability_necromancer_011.dds', tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Bitter Harvest (Bitter Harvest)
-
     [124166] = { icon = 'esoui/art/icons/ability_necromancer_011_a.dds', name = A.Skill_Deaden_Pain }, -- Necrotic Potency (Deaden Pain)
     [124165] = { tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Deaden Pain (Deaden Pain)
     [118629] = { tooltip = A.Skill_Deaden_Pain }, -- Major Protection (Deaden Pain)
-
     [124192] = { icon = 'esoui/art/icons/ability_necromancer_011_b.dds' }, -- Necrotic Potency (Necrotic Potency)
     [124193] = { tooltip = T.Generic_HoT, tooltipValue2 = 1 }, -- Necrotic Potency (Necrotic Potency)
 
+    -- Bone Totem / Remote Totem / Agony Totem
     [115093] = { tooltip = T.Skill_Bone_Totem }, -- Bone Totem (Bone Totem)
     [115097] = { tooltip = A.Skill_Bone_Totem, groundLabel = true, forcedContainer = 'short' }, -- Minor Protection (Bone Totem)
     [115106] = { tooltip = T.Generic_Fear }, -- Bone Totem (Bone Totem)
-
     [118380] = { tooltip = T.Skill_Bone_Totem }, -- Remote Totem (Remote Totem)
     [118385] = { tooltip = A.Skill_Remote_Totem, groundLabel = true, forcedContainer = 'short' }, -- Minor Protection (Remote Totem)
     [118386] = { tooltip = T.Generic_Fear }, -- Remote Totem (Remote Totem)
-
     [118613] = { tooltip = A.Skill_Pure_Agony }, -- Minor Vulnerability (Agony Totem - Pure Agony Synergy)
     [118618] = { tooltip = T.Generic_Magic, tooltipValue2 = 1 }, -- Pure Agony (Agony Totem - Pure Agony Synergy)
-
     [118404] = { tooltip = T.Skill_Agony_Totem }, -- Agony Totem (Agony Totem)
     [118409] = { tooltip = A.Skill_Agony_Totem, groundLabel = true, forcedContainer = 'short' }, -- Minor Protection (Agony Totem)
     [118411] = { tooltip = T.Generic_Fear }, -- Agony Totem (Agony Totem)
 
+    -- Grave Grasp / Ghostly Embrace / Empowering Grasp
     [121513] = { tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Grave Grasp (Grave Grasp)
     [121517] = { tooltip = A.Skill_Grave_Grasp }, -- Minor Maim (Grave Grasp)
-
     [118309] = { icon = 'esoui/art/icons/ability_necromancer_009_b.dds', tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Ghostly Embrace (Ghostly Embrace)
     [118313] = { tooltip = A.Skill_Ghostly_Embrace }, -- Minor Maim (Ghostly Embrace)
     [118325] = { icon = 'esoui/art/icons/ability_necromancer_009_b.dds', tooltip = T.Generic_Immobilize }, -- Ghostly Embrace (Ghostly Embrace)
-
     [118366] = { tooltip = A.Skill_Empowering_Grasp }, -- Empower (Empowering Grasp)
     [118369] = { icon = 'esoui/art/icons/ability_necromancer_009_a.dds', tooltip = T.Skill_Empowering_Grasp }, -- Empowering Grasp (Empowering Grasp)
     [118354] = { icon = 'esoui/art/icons/ability_necromancer_009_a.dds', tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Empowering Grasp (Empowering Grasp)
     [118358] = { tooltip = A.Skill_Empowering_Grasp }, -- Minor Maim (Empowering Grasp)
 
+    -- Bone Goliath Transformation / Pummeling Goliath / Ravenous Goliath
     [115001] = { tooltip = T.Skill_Bone_Goliath_Transformation }, -- Bone Goliath Transformation (Bone Goliath Transformation)
     [115286] = { icon = 'esoui/art/icons/ability_necromancer_012.dds', name = A.Skill_Bone_Goliath_Transformation }, -- Bone Goliath (Bone Goliath Transformation)
     [115478] = { icon = 'esoui/art/icons/ability_necromancer_012.dds', name = A.Skill_Bone_Goliath_Transformation }, -- Bone Goliath Self Snare (Bone Goliath Transformation)
-
     [118664] = { tooltip = T.Skill_Pummeling_Goliath }, -- Pummeling Goliath (Pummeling Goliath)
     [118665] = { icon = 'esoui/art/icons/ability_necromancer_012_a.dds' }, -- Pummeling Goliath (Pummeling Goliath)
     [118673] = { icon = 'esoui/art/icons/ability_necromancer_012_a.dds', name = A.Skill_Pummeling_Goliath }, -- Pummeling Goliath Self Snare (Pummeling Goliath)
     [118666] = { icon = 'esoui/art/icons/ability_necromancer_012_a.dds' }, -- Pummeling Goliath (Pummeling Goliath)
     [118667] = { icon = 'esoui/art/icons/ability_necromancer_012_a.dds' }, -- Pummeling Goliath (Pummeling Goliath)
     [118720] = { icon = 'esoui/art/icons/ability_necromancer_012_a.dds' }, -- Pummeling Goliath Bash (Pummeling Goliath)
-
     [118279] = { tooltip = T.Skill_Ravenous_Goliath }, -- Ravenous Goliath (Ravenous Goliath)
     [118280] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds' }, -- Ravenous Goliath (Ravenous Goliath)
     [118287] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds', name = A.Skill_Ravenous_Goliath }, -- Ravenous Goliath Self Snare (Ravenous Goliath)
@@ -5039,11 +5048,15 @@ E.EffectOverride = {
     [118289] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds', groundLabel = true, tooltip = T.Skill_Ravenous_Goliath_Ground }, -- Ravenous Goliath (Ravenous Goliath)
     [118292] = { icon = 'esoui/art/icons/ability_necromancer_012_b.dds' }, -- Ravenous Goliath (Ravenous Goliath)
 
+    -- LIVING DEATH
+
+    -- Render Flesh / Resistant Flesh / Blood Sacrifice
     [114206] = { tooltip = A.Skill_Render_Flesh }, -- Minor Defile  (Render Flesh)
     [117885] = { tooltip = A.Skill_Resistant_Flesh }, -- Minor Defile (Resistant Flesh)
     [117886] = { tooltip = T.Skill_Resistant_Flesh }, -- Resistant Flesh (Resistant Flesh)
     [117890] = { tooltip = A.Skill_Blood_Sacrifice }, -- Minor Defile (Blood Sacrifice)
 
+    -- Life amid Death / Renewing Undeath / Enduring Undeath
     [115326] = { tooltip = T.Skill_Life_amid_Death }, -- Life amid Death (Life amid Death)
     [115385] = { groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Life amid Death (Life amid Death)
     [118022] = { tooltip = T.Skill_Life_amid_Death }, -- Renewing Undeath (Renewing Undeath)
@@ -5051,21 +5064,26 @@ E.EffectOverride = {
     [118814] = { tooltip = T.Skill_Life_amid_Death }, -- Enduring Undeath (Enduring Undeath)
     [118813] = { groundLabel = true, tooltip = T.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Enduring Undeath (Enduring Undeath)
 
+    -- Spirit Mender / Spirit Guardian / Intensive Mender
     [115710] = { tooltip = T.Skill_Spirit_Mender }, -- Spirit Mender (Spirit Mender)
     [115732] = { icon = 'esoui/art/icons/ability_necromancer_015.dds', tooltip = T.Skill_Spirit_Mender }, -- Spirit Mender (Spirit Mender)
-
     [118912] = { tooltip = T.Skill_Spirit_Guardian }, -- Spirit Guardian (Spirit Guardian)
     [118913] = { icon = 'esoui/art/icons/ability_necromancer_015_a.dds', tooltip = T.Skill_Spirit_Guardian }, -- Spirit Guardian (Spirit Guardian)
-
     [118840] = { tooltip = T.Skill_Spirit_Mender }, -- Spirit Mender (Spirit Mender)
     [118843] = { icon = 'esoui/art/icons/ability_necromancer_015_b.dds', tooltip = T.Skill_Spirit_Mender }, -- Intensive Mender (Intensive Mender)
 
+    -- Restoring Tether / Braided Tether / Mortal Coil
     [115926] = { hide = true }, -- Restoring Tether (Restoring Tether)
     [116450] = { tooltip = T.Skill_Restoring_Tether }, -- Restoring Tether (Restoring Tether)
     [118070] = { hide = true }, -- Braided Tether (Braided Tether)
     [118071] = { tooltip = T.Skill_Braided_Tether }, -- Braided Tether (Braided Tether)
     [118122] = { hide = true }, -- Mortal Coil (Mortal Coil)
     [118123] = { tooltip = T.Skill_Mortal_Coil }, -- Mortal Coil (Mortal Coil)
+
+    -- Reanimate / Renewing Animation / Animate Blastbones
+    [118397] = { icon = 'esoui/art/icons/ability_necromancer_002.dds', tooltip = T.Skill_Blastbones }, -- Blastbones (Blastbones)
+    [118448] = { icon = 'esoui/art/icons/ability_necromancer_002_a.dds', tooltip = T.Skill_Blighted_Blastbones }, -- Blighted Blastbones (Blighted Blastbones)
+    [118450] = { icon = 'esoui/art/icons/ability_necromancer_002_b.dds', tooltip = T.Skill_Stalking_Blastbones }, -- Stalking Blastbones (Stalking Blastbones)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
@@ -11469,7 +11487,7 @@ E.AddGroundDamageAura = {
     [88860] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Northern Storm (Northern Storm)
     [88863] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Permafrost (Permafrost)
 
-    -- Necromancer GROUND
+    -- Necromancer
     [115254] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Boneyard (Boneyard)
     [117809] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Unnerving Boneyard (Unnerving Boneyard)
     [117854] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Avid Boneyard (Avid Boneyard)

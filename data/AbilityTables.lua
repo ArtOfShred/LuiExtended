@@ -625,11 +625,9 @@ local AbilityTables = {
     Skill_Unnerving_Boneyard          = 117809,
     Skill_Skeletal_Mage               = 114317,
     Skill_Skeletal_Arcanist           = 118726,
-
     Skill_Frozen_Colossus             = 122174,
     Skill_Pestilent_Colossus          = 122397,
     Skill_Glacial_Colossus            = 122388,
-
     Skill_Ruinous_Scythe              = 118226,
     Skill_Bone_Armor                  = 115206,
     Skill_Beckoning_Armor             = 118237,
@@ -640,15 +638,12 @@ local AbilityTables = {
     Skill_Remote_Totem                = 118380,
     Skill_Agony_Totem                 = 118404,
     Skill_Pure_Agony                  = 118618,
-
     Skill_Grave_Grasp                 = 115177,
     Skill_Ghostly_Embrace             = 118308,
     Skill_Empowering_Grasp            = 118359,
-
     Skill_Bone_Goliath_Transformation = 115001,
     Skill_Pummeling_Goliath           = 118664,
     Skill_Ravenous_Goliath            = 118279,
-
     Skill_Render_Flesh                = 114196,
     Skill_Resistant_Flesh             = 117883,
     Skill_Blood_Sacrifice             = 117888,

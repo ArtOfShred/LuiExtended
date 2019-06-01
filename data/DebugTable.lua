@@ -4549,6 +4549,57 @@ LUIE.DebugAuras = {
     [90943] = true, -- Permafrost (Permafrost)
 
     -------------------------------------
+    -- NECROMANCER PASSIVES -------------
+    -------------------------------------
+
+    -- Grave Lord Passives
+    [116186] = true, -- Reusable Parts (Rank 1)
+    [116187] = true, -- Reusable Parts (Rank 1)
+    [116188] = true, -- Reusable Parts (Rank 2)
+    [116189] = true, -- Reusable Parts (Rank 2)
+
+    [116197] = true, -- Death Knell (Rank 1)
+    [116198] = true, -- Death Knell (Rank 2)
+
+    [116192] = true, -- Dismember (Rank 1)
+    [116194] = true, -- Dismember (Rank 2)
+
+    [116199] = true, -- Rapid Rot (Rank 1)
+    [116201] = true, -- Rapid Rot (Rank 2)
+
+    -- Bone Tyrant Passives
+    [116230] = true, -- Death Gleaning (Rank 1)
+    [119156] = true, -- Death Gleaning (Rank 1)
+    [119158] = true, -- Death Gleaning (Rank 1)
+    [116235] = true, -- Death Gleaning (Rank 2)
+    [119164] = true, -- Death Gleaning (Rank 2)
+    [119165] = true, -- Death Gleaning (Rank 2)
+
+    [116239] = true, -- Disdain Harm (Rank 1)
+    [116240] = true, -- Disdain Harm (Rank 2)
+
+    [116269] = true, -- Health Avarice (Rank 1)
+    [116270] = true, -- Health Avarice (Rank 2)
+
+    [116271] = true, -- Last Gasp (Rank 1)
+    [116272] = true, -- Last Gasp (Rank 2)
+
+    -- Living Death Passives
+    [116286] = true, -- Curative Curse (Rank 1)
+    [116287] = true, -- Curative Curse (Rank 1)
+
+    [116273] = true, -- Near-Death Experience (Rank 1)
+    [116275] = true, -- Near-Death Experience (Rank 2)
+
+    [116282] = true, -- Undead Confederate (Rank 1)
+    [116283] = true, -- Undead Confederate (Rank 2)
+
+    [116284] = true, -- Corpse Consumption (Rank 1)
+    [120611] = true, -- Corpse Consumption (Rank 1)
+    [116285] = true, -- Corpse Consumption (Rank 2)
+    [120612] = true, -- Corpse Consumption (Rank 2)
+
+    -------------------------------------
     -- NECROMANCER ACTIVES --------------
     -------------------------------------
 
@@ -4916,6 +4967,22 @@ LUIE.DebugAuras = {
     [118125] = true, -- Mortal Coil (Mortal Coil)
     [118126] = true, -- Mortal Coil (Mortal Coil)
     [123233] = true, -- Mortal Coil (Mortal Coil)
+
+    [115410] = true, -- Reanimate (Reanimate)
+    [115429] = true, -- Reanimate (Reanimate)
+
+    [118367] = true, -- Renewing Animation (Renewing Animation)
+    [118378] = true, -- Renewing Animation (Renewing Animation)
+    [118376] = true, -- Renewing Animation (Renewing Animation)
+    [118377] = true, -- Renewing Animation (Renewing Animation)
+
+    [118379] = true, -- Animate Blastbones (Animate Blastbones)
+    [118391] = true, -- Animate Blastbones (Animate Blastbones)
+    [118447] = true, -- Animate Blastbones (Animate Blastbones)
+    [118397] = true, -- Animate Blastbones (Animate Blastbones)
+    [118448] = true, -- Animate Blastbones (Animate Blastbones)
+    [118450] = true, -- Animate Blastbones (Animate Blastbones)
+    [124999] = true, -- Undead Confederate Tracker (Animate Blastbones)
 
     -------------------------------------
     -- UNARMED PASSIVES -----------------
