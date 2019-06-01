@@ -449,44 +449,44 @@ LUIE.AlertTable = {
     [76180] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Shattered Harmony (Defiled Aegis)
 
     -- MONSTERS
-    [10270] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Quake (Gargoyle)
-    [10256] = { block = true, bs = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Lacerate (Gargoyle)
+    [10270] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN, duration = 2550 }, -- Quake (Gargoyle)
+    [10256] = { block = true, bs = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Lacerate (Gargoyle)
 
-    [26124] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Shatter (Giant)
-    [15715] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Shatter (Giant)
+    [26124] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Shatter (Giant)
+    [15715] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 3000, cc = STUN }, -- Obliterate (Giant)
 
-    [2786] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 1250 }, -- Steal Essence (Hag)
-    [2821] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Luring Snare (Hag)
-    [3349] = { power = true, priority = 2, auradetect = true }, -- Reflective Shadows (Hag)
+    [2786] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 1250, duration = 6100 }, -- Steal Essence (Hag)
+    [2821] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 700, cc = STUN }, -- Luring Snare (Hag)
+    [3349] = { power = true, priority = 2, auradetect = true, duration = 8000 }, -- Reflective Shadows (Hag)
 
-    [10615] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Raven Storm (Hagraven)
-    [10613] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Fire Bomb (Hagraven)
+    [10615] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1800, cc = STAGGER }, -- Raven Storm (Hagraven)
+    [10613] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2050, neverShowInterrupt = true }, -- Fire Bomb (Hagraven)
     [64808] = { power = true, priority = 2, auradetect = true }, -- Briarheart Ressurection (Hagraven)
 
-    [4123] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Wing Slice (Harpy)
-    [13515] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Wind Gust (Harpy)
-    [24604] = { avoid = true, interrupt = true, eventdetect = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Charged Ground (Harpy)
-    [4689] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Gale (Harpy)
+    [4123] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Wing Slice (Harpy)
+    [13515] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1800, cc = STUN }, -- Wind Gust (Harpy)
+    [24604] = { avoid = true, interrupt = true, eventdetect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 8000 }, -- Charged Ground (Harpy)
+    [4689] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300 }, -- Lightning Gale (Harpy)
 
-    [43809] = { avoid = true, priority = 3, auradetect = true }, -- Shard Burst (Ice Wraith)
-    [24866] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Focused Charge (Ice Wraith)
+    [43809] = { avoid = true, priority = 3, auradetect = true, duration = 1750, cc = STUN, neverShowInterrupt = true }, -- Shard Burst (Ice Wraith)
+    [24866] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Focused Charge (Ice Wraith)
 
-    [17703] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 750 }, -- Flame Ray (Imp - Fire)
-    [8884] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 750 }, -- Zap (Imp - Lightning)
-    [81794] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 750 }, -- Frost Ray (Imp - Frost)
+    [17703] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 750, duration = 4550 }, -- Flame Ray (Imp - Fire)
+    [8884] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 750, duration = 4550 }, -- Zap (Imp - Lightning)
+    [81794] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 750, duration = 4600 }, -- Frost Ray (Imp - Frost)
 
-    [9671] = { block = true, bs = true, eventdetect = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Howling Strike (Lamia)
-    [9674] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Resonate (Lamia)
-    [7835] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Convalescence (Lamia)
-    [7831] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500 }, -- Harmony (Lamia)
+    [9671] = { block = true, bs = true, eventdetect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STAGGER }, -- Howling Strike (Lamia)
+    [9674] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STAGGER }, -- Resonate (Lamia)
+    [7835] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Convalescence (Lamia)
+    [7831] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500, duration = 5000 }, -- Harmony (Lamia)
     [9680] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Summon Spectral Lamia
 
-    [3860] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Pulverize (Lurcher)
-    [3855] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Crushing Limbs (Lurcher)
-    [3767] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN }, -- Choking Pollen (Lurcher)
+    [3860] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 500, cc = STAGGER }, -- Pulverize (Lurcher)
+    [3855] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Crushing Limbs (Lurcher)
+    [3767] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN, duration = 5600 }, -- Choking Pollen (Lurcher)
 
-    [5559] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Icy Geyser (Nereid)
-    [5540] = { avoid = true, interrupt = true, priority = 3, auradetect = true }, -- Hurricane (Nereid)
+    [5559] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2200, neverShowInterrupt = true }, -- Icy Geyser (Nereid)
+    [5540] = { avoid = true, interrupt = true, priority = 3, auradetect = true, duration = 8000, cc = SNARE }, -- Hurricane (Nereid)
 
     [24985] = { power = true, auradetect = true, priority = 3 }, -- Intimidating Roar (Ogre)
     [5881] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Smash (Ogre)
