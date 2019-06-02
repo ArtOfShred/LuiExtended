@@ -9,6 +9,7 @@ local UI = LUIE.UI
 local E = LUIE.Effects
 local AlertT = LUIE.AlertTable
 
+local printToChat = LUIE.PrintToChat
 local strfmt = string.format
 local strformat = zo_strformat
 local callLater = zo_callLater
@@ -331,14 +332,14 @@ function CI.AlertUpdate(currentTime)
 
 
             -- DEBUG
-        --    --[[
+            --[[
             if remain <= 100 and remain > 0 then
                 d(remain)
             end
             if remain <= 0 and remain > -100 then
                 d(remain)
             end
-        --    ]]--
+            ]]--
 
             if alert.data.showDuration then
                 alert.timer:SetText(alert.data.showDuration and strfmt(" %.1f", remain / 1000) or "")

@@ -2201,8 +2201,8 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
             g_savedPurchase.messageTotal=messageTotal
             return
         end
-    -- Keep Reward (14), Keep Repair (40), PVP Resurrect (41)
-    elseif reason == 14 or reason == 40 or reason == 41 then
+    -- Keep Reward (14), Keep Repair (40), PVP Resurrect (41), Defensive Keep Reward (75)
+elseif reason == 14 or reason == 40 or reason == 41 or reason == 75 then
         messageChange = CA.SV.ContextMessages.CurrencyMessageEarn
     -- Reward (27)
     elseif reason == 27 then
@@ -8983,7 +8983,7 @@ function CA.HookFunction()
     end
 
     --[[
-    -- Since the Crown Store Gifting functionality was added hooking these functions seems to cause an insecure code issue when receiving gifts via the Player to Player notification system.
+    -- Since the Crown Store Gifting functionality was added, hooking these functions seems to cause an insecure code issue when receiving gifts via the Player to Player notification system.
     -- Not sure how else I can alter these notifications so for the time being support will have to be dropped.
 
     --local INTERACT_TYPE_TRADE_INVITE = 3
