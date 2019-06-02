@@ -115,8 +115,23 @@ function SCB.TempSlashGround()
     LUIE.SpellCastBuffs.ReloadEffects("player")
 end
 
+function SCB.TempSlashConsolidate()
+    local consolidate = LUIE.SpellCastBuffs.SV.ExtraConsolidate
+
+    if consolidate == true then
+        LUIE.SpellCastBuffs.SV.ExtraConsolidate = false
+        d("LUIE --- Consolidate Major/Minor Disabled ---")
+    else
+        LUIE.SpellCastBuffs.SV.ExtraConsolidate = true
+        d("LUIE --- Consolidate Major/Minor Enabled ---")
+    end
+
+    LUIE.SpellCastBuffs.ReloadEffects("player")
+end
+
 local displayName = GetDisplayName()
 if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
     SLASH_COMMANDS["/filter"] = SCB.TempSlashFilter
     SLASH_COMMANDS["/ground"] = SCB.TempSlashGround
+    SLASH_COMMANDS["/consolidate"] = SCB.TempSlashConsolidate
 end

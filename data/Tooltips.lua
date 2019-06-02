@@ -642,31 +642,44 @@ LUIE.Tooltips = {
     Skill_Permafrost                                = GetString(SI_LUIE_SKILL_PERMAFROST_TP),
 
     -- Necromancer
+    Skill_Reusable_Parts_Rank_1                     = strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 12),
+    Skill_Reusable_Parts_Rank_2                     = strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 25),
+
     Skill_Flame_Skull                               = GetString(SI_LUIE_SKILL_FLAME_SKULL_TP),
     Skill_Ricochet_Skull                            = GetString(SI_LUIE_SKILL_RICOCHET_SKULL_TP),
-
     Skill_Blastbones                                = GetString(SI_LUIE_SKILL_BLASTBONES_TP),
     Skill_Blighted_Blastbones                       = GetString(SI_LUIE_SKILL_BLIGHTED_BLASTBONES_TP),
     Skill_Stalking_Blastbones                       = GetString(SI_LUIE_SKILL_STALKING_BLASTBONES_TP),
-
     Skill_Boneyard                                  = GetString(SI_LUIE_SKILL_BONEYARD_TP),
     Skill_Unnerving_Boneyard                        = GetString(SI_LUIE_SKILL_UNNERVING_BONEYARD_TP),
     Skill_Avid_Boneyard                             = GetString(SI_LUIE_SKILL_AVID_BONEYARD_TP),
-
     Skill_Skeletal_Mage                             = GetString(SI_LUIE_SKILL_SKELETAL_MAGE_TP),
     Skill_Skeletal_Archer                           = GetString(SI_LUIE_SKILL_SKELETAL_ARCHER_TP),
     Skill_Skeletal_Arcanist                         = GetString(SI_LUIE_SKILL_SKELETAL_ARCANIST_TP),
-
     Skill_Shocking_Siphon                           = GetString(SI_LUIE_SKILL_SHOCKING_SIPHON_TP),
     Skill_Shocking_Siphon_Ground                    = GetString(SI_LUIE_SKILL_SHOCKING_SIPHON_GROUND_TP),
     Skill_Detonating_Siphon                         = GetString(SI_LUIE_SKILL_DETONATING_SIPHON_TP),
     Skill_Detonating_Siphon_Ground                  = GetString(SI_LUIE_SKILL_DETONATING_SIPHON_GROUND_TP),
     Skill_Mystic_Siphon                             = GetString(SI_LUIE_SKILL_MYSTIC_SIPHON_TP),
-
     Skill_Frozen_Colossus                           = GetString(SI_LUIE_SKILL_FROZEN_COLOSSUS_TP),
     Skill_Pestilent_Colossus                        = GetString(SI_LUIE_SKILL_PESTILENT_COLOSSUS_TP),
     Skill_Glacial_Colossus                          = GetString(SI_LUIE_SKILL_GLACIAL_COLOSSUS_TP),
     Skill_Glacial_Colossus_Ground                   = GetString(SI_LUIE_SKILL_GLACIAL_COLOSSUS_GROUND_TP),
+    Skill_Ruinous_Scythe                            = GetString(SI_LUIE_SKILL_RUINOUS_SCYTHE_TP),
+    Skill_Bone_Totem                                = GetString(SI_LUIE_SKILL_BONE_TOTEM_TP),
+    Skill_Agony_Totem                               = GetString(SI_LUIE_SKILL_AGONY_TOTEM_TP),
+    Skill_Empowering_Grasp                          = GetString(SI_LUIE_SKILL_EMPOWERING_GRASP_TP),
+    Skill_Bone_Goliath_Transformation               = GetString(SI_LUIE_SKILL_BONE_GOLIATH_TRANSFORMATION_TP),
+    Skill_Pummeling_Goliath                         = GetString(SI_LUIE_SKILL_PUMMELING_GOLIATH_TP),
+    Skill_Ravenous_Goliath                          = GetString(SI_LUIE_SKILL_RAVENOUS_GOLIATH_TP),
+    Skill_Ravenous_Goliath_Ground                   = GetString(SI_LUIE_SKILL_RAVENOUS_GOLIATH_GROUND_TP),
+    Skill_Resistant_Flesh                           = GetString(SI_LUIE_SKILL_RESISTANT_FLESH_TP),
+    Skill_Life_amid_Death                           = GetString(SI_LUIE_SKILL_LIFE_AMID_DEATH_TP),
+    Skill_Spirit_Mender                             = GetString(SI_LUIE_SKILL_SPIRIT_MENDER_TP),
+    Skill_Spirit_Guardian                           = GetString(SI_LUIE_SKILL_SPIRIT_GUARDIAN_TP),
+    Skill_Restoring_Tether                          = GetString(SI_LUIE_SKILL_RESTORING_TETHER_TP),
+    Skill_Braided_Tether                            = GetString(SI_LUIE_SKILL_BRAIDED_TETHER_TP),
+    Skill_Mortal_Coil                               = GetString(SI_LUIE_SKILL_MORTAL_COIL_TP),
 
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------
@@ -1027,6 +1040,8 @@ LUIE.Tooltips = {
     Skill_Torpor                                    = GetString(SI_LUIE_SKILL_TORPOR_TP),
     Skill_Summon_Spiderling                         = GetString(SI_LUIE_SKILL_SUMMON_SPIDERLING_TP),
     Skill_Unyielding_Mace                           = GetString(SI_LUIE_SKILL_UNYIELDING_MACE_TP),
+    Skill_Wing_Gust_Snare                           = GetString(SI_LUIE_SKILL_WING_GUST_SNARE),
+    Skill_Wing_Gust_Stun                            = GetString(SI_LUIE_SKILL_WING_GUST_STUN),
 
     -- Undead
     Skill_Vampiric_Drain                            = GetString(SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP),

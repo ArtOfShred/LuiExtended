@@ -12,7 +12,7 @@ local FEAR = 3
 local STAGGER = 4
 local SILENCE = 5
 local SNARE = 6
-local UNNBREAKABLE = 7
+local UNBREAKABLE = 7
 
 LUIE.AlertTable = {
     -- PRIORITY NOTES:
@@ -55,7 +55,7 @@ LUIE.AlertTable = {
     --------------------------------------------------
 
     -- Shared
-    [39058] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Bear Trap (Bear Trap)
+    [39058] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = UNBREAKABLE }, -- Bear Trap (Bear Trap)
 
     -- Synergy
     [12439] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Burning Arrow (Synergy)
@@ -118,7 +118,7 @@ LUIE.AlertTable = {
     [88554] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
     [88555] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
     [88556] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
-    [13397] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1000, duration = 5000 }, -- Empower Undead (Necromancer)
+    [13397] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 5000 }, -- Empower Undead (Necromancer)
 
     [14350] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1667, cc = FEAR }, -- Aspect of Terror (Fear Mage)
 
@@ -282,40 +282,40 @@ LUIE.AlertTable = {
     [85390] = { block = true, dodge = true, priority = 3, eventdetect = true, refire = 750, result = ACTION_RESULT_BEGIN, duration = 1600, cc = SNARE }, -- Slash (Cliff Strider)
 
     -- INSECTS
-    [6137] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Laceration (Assassin Beetle)
-    [5268] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Collywobbles (Assassin Beetle)
+    [6137] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 800 }, -- Laceration (Assassin Beetle)
+    [5268] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = SNARE }, -- Collywobbles (Assassin Beetle)
 
-    [6757] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Blurred Strike (Giant Scorpion)
-    [6756] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Paralyze (Giant Scorpion)
+    [6757] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Blurred Strike (Giant Scorpion)
+    [6756] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = SNARE }, -- Paralyze (Giant Scorpion)
     [6758] = { power = true, auradetect = true, priority = 2, ignoreRefresh = true, refire = 500 }, -- Hardened Carapace (Giant Scorpion)
 
     [44086] = { avoid = true, priority = 3, auradetect = true, ignoreRefresh = true }, -- Fire Runes (Giant Spider)
-    [5685] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Corrosive Bite (Giant Spider)
-    [8087] = { avoid = true, priority = 3, eventdetect = true, refire = 1200, result = ACTION_RESULT_BEGIN }, -- Poison Spray (Giant Spider)
-    [4737] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Encase (Giant Spider)
+    [5685] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Corrosive Bite (Giant Spider)
+    [8087] = { avoid = true, priority = 3, eventdetect = true, refire = 1200, result = ACTION_RESULT_BEGIN, duration = 5100 }, -- Poison Spray (Giant Spider)
+    [4737] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Encase (Giant Spider)
     [13382] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Devour (Giant Spider)
 
-    [9226] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Sting (Wasp)
-    [25110] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Focused Charge (Giant Wasp)
-    [9229] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Inject Larva (Giant Wasp)
+    [9226] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1400 }, -- Sting (Wasp)
+    [25110] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Focused Charge (Giant Wasp)
+    [9229] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = UNBREAKABLE }, -- Inject Larva (Giant Wasp)
 
-    [6800] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Bloodletting (Hoarvor)
-    [6795] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Latch On (Hoarvor)
+    [6800] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Bloodletting (Hoarvor)
+    [6795] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 7850 }, -- Latch On (Hoarvor)
 
-    [61244] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Fevered Retch (Necrotic Hoarvor)
-    [61360] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Infectious Swarm (Necrotic Hoarvor)
-    [61427] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Necrotic Explosion (Necrotic Hoarvor)
+    [61244] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Fevered Retch (Necrotic Hoarvor)
+    [61360] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 5500 }, -- Infectious Swarm (Necrotic Hoarvor)
+    [61427] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 1200, cc = SNARE, neverShowInterrupt = true }, -- Necrotic Explosion (Necrotic Hoarvor)
 
-    [14841] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Focused Charge (Kwama Worker)
+    [14841] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Focused Charge (Kwama Worker)
 
-    [9769] = { block = true, dodge = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Excavation (Kwama Warrior)
+    [9769] = { block = true, dodge = true, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 3267 }, -- Excavation (Kwama Warrior)
 
-    [5260] = { avoid = true, priority = 3, eventdetect = true, refire = 750, result = ACTION_RESULT_BEGIN }, -- Flamethrower (Shalk)
-    [5252] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Fire Bite (Shalk)
-    [5262] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Burning Ground (Shalk)
+    [5260] = { avoid = true, priority = 3, eventdetect = true, refire = 750, result = ACTION_RESULT_BEGIN, duration = 2700 }, -- Flamethrower (Shalk)
+    [5252] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1100 }, -- Fire Bite (Shalk)
+    [5262] = { avoid = true, interrupt = true, priority = 3, auradetect = true, duration = 4000 }, -- Burning Ground (Shalk)
 
-    [8429] = { interrupt = true, priority = 3, refire = 750, result = ACTION_RESULT_BEGIN }, -- Zap (Thunderbug)
-    [26412] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunderstrikes (Thunderbug)
+    [8429] = { interrupt = true, priority = 3, refire = 750, result = ACTION_RESULT_BEGIN, duration = 4600 }, -- Zap (Thunderbug)
+    [26412] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Thunderstrikes (Thunderbug)
 
     [73172] = { dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 3667, cc = SNARE }, -- Swarm (Kotu Gava Broodmother)
     [73199] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, cc = SNARE }, -- Swarmburst (Kotu Gava Broodmother)
@@ -330,82 +330,83 @@ LUIE.AlertTable = {
 
     -- DAEDRA
     [31115] = { destroy = true, refire = 1000, priority = 2, auradetect = true }, -- Summon Dark Anchor (Daedric Synergy)
-    [68449] = { avoid = true, refire = 1000, priority = 3 }, -- Explosive Charge (Daedric Synergy)
+    [68449] = { avoid = true, refire = 1000, priority = 3, duration = 500 }, -- Explosive Charge (Daedric Synergy)
 
-    [48121] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Air Atronach)
-    [48137] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Tornado (Air Atronach)
+    [48121] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Heavy Attack (Air Atronach)
+    [48137] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Tornado (Air Atronach)
 
     [51262] = { power = true, auradetect = true, priority = 2 }, -- Air Atronach Flame (Air Atronach)
     [51271] = { power = true, auradetect = true, priority = 2 }, -- Air Atronach Flame (Air Atronach)
     [51269] = { power = true, auradetect = true, priority = 2 }, -- Air Atronach Flame (Air Atronach)
 
-    [51281] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1500 }, -- Flame Tornado (Air Atronach)
-    [50021] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Ice Vortex (Air Atronach)
-    [50023] = { block = true, interrupt = true, priority = 3, refire = 800, result = ACTION_RESULT_BEGIN }, -- Lightning Rod (Air Atronach)
+    [51281] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1500, duration = 3250 }, -- Flame Tornado (Air Atronach)
+    [50021] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = SNARE }, -- Ice Vortex (Air Atronach)
+    [50023] = { block = true, interrupt = true, priority = 3, refire = 800, result = ACTION_RESULT_BEGIN, duration = 4600 }, -- Lightning Rod (Air Atronach)
 
-    [9747] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Dire Wound (Banekin)
-    [9748] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Envelop (Banekin)
+    [9747] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Dire Wound (Banekin)
+    [9748] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 3000 }, -- Envelop (Banekin)
 
-    [4799] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Tail Spike (Clannfear)
-    [93745] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Rending Leap (Clannfear)
+    [4799] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STAGGER }, -- Tail Spike (Clannfear)
+    [93745] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Rending Leap (Clannfear)
 
-    [26641] = { avoid = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Soul Flame (Daedric Titan)
-    [34405] = { block = true, avoid = true, priority = 2, auradetect = true }, -- Swallowing Souls (Daedric Titan)
-    [26554] = { block = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Wing Gust (Daedric Titan)
+    [26641] = { avoid = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Soul Flame (Daedric Titan)
+    [34405] = { block = true, avoid = true, priority = 2, auradetect = true, duration = 2200 }, -- Swallowing Souls (Daedric Titan)
+    [26554] = { block = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN }, -- Wing Gust (Daedric Titan)
 
-    [4771] = { avoid = true, priority = 3, eventdetect = true, refire = 1250, result = ACTION_RESULT_BEGIN },-- Fiery Breath (Daedroth)
-    [91946] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Ground Tremor (Daedroth)
-    [91937] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Burst of Embers (Daedroth)
+    [4771] = { avoid = true, priority = 3, eventdetect = true, refire = 1250, result = ACTION_RESULT_BEGIN, duration = 3100 },-- Fiery Breath (Daedroth)
+    [91946] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STAGGER }, -- Ground Tremor (Daedroth)
+    [91937] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1767, cc = STUN }, -- Burst of Embers (Daedroth)
 
-    [26324] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lava Geyser (Flame Atronach)
-    [50216] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Combustion (Flame Atronach)
+    [26324] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300 }, -- Lava Geyser (Flame Atronach)
+    [50216] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 2000, neverShowInterrupt = true }, -- Combustion (Flame Atronach)
 
-    [5017] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Hoarfrost Fist (Frost Atronach)
-    [33502] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Frozen Ground (Frost Atronach)
+    [5017] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 2500, cc = STUN }, -- Hoarfrost Fist (Frost Atronach)
+    [33502] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Frozen Ground (Frost Atronach)
 
-    [50626] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Shadow Strike (Grevious Twilight)
-    [65889] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Shadow Strike (Grevious Twilight)
+    [50626] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2750 }, -- Shadow Strike (Grevious Twilight)
+    [65889] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2750 }, -- Shadow Strike (Grevious Twilight)
 
-    [4829] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Fire Brand (Flesh Atronach)
-    [4817] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Unyielding Mace (Flesh Atronach)
+    [4829] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Fire Brand (Flesh Atronach)
+    [4817] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Unyielding Mace (Flesh Atronach)
 
-    [67870] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Tremor AOE (Flesh Colossus)
-    [66869] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Pin (Flesh Colossus)
-    [67872] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Sweep (Flesh Colossus)
-    [76139] = { block = true, dodge = true, priority = 2, auradetect = true }, -- Stumble Forward (Flesh Colossus)
+    [67870] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1700, cc = STAGGER }, -- Tremor AOE (Flesh Colossus)
+    [66869] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Pin (Flesh Colossus)
+    [67872] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1600, cc = STUN }, -- Sweep (Flesh Colossus)
+    [76139] = { block = true, dodge = true, priority = 2, auradetect = true, cc = STUN }, -- Stumble Forward (Flesh Colossus)
     --[67772] = { power = true, priority = 2, auradetect = true }, -- Enraged (Flesh Colossus)
-    [49430] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Smash (Flesh Colossus)
-    [49429] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Claw (Flesh Colossus)
+    [49430] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1750 }, -- Smash (Flesh Colossus)
+    [49429] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1250 }, -- Claw (Flesh Colossus)
 
-    [11079] = { avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Black Winter (Harvester)
+    [11079] = { avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1300, cc = STAGGER }, -- Black Winter (Harvester)
+    [26017] = { summon = true, priority = 2, auradetect = true, fakeName = "", refire = 1000 }, -- Creeping Doom (Harvester)
 
-    [8205] = { interrupt = true, priority = 3, auradetect = true }, -- Regeneration (Ogrim)
-    [24690] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Focused Charge (Ogrim)
-    [91848] = { dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Stomp (Ogrim)
-    [91855] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Boulder Toss (Ogrim)
+    [8205] = { interrupt = true, priority = 3, auradetect = true, duration = 6000 }, -- Regeneration (Ogrim)
+    [24690] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Focused Charge (Ogrim)
+    [91848] = { dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1970, cc = SNARE }, -- Stomp (Ogrim)
+    [91855] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STUN }, -- Boulder Toss (Ogrim)
 
-    [6166] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Heat Wave (Scamp)
-    [6160] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Rain of Fire (Scamp)
+    [6166] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Heat Wave (Scamp)
+    [6160] = { avoid = true, interrupt = true, priority = 3, auradetect = true, duration = 5000 }, -- Rain of Fire (Scamp)
 
-    [8779] = { block = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Lightning Onslaught (Spider Daedra)
-    [89306] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Web (Spiderling)
-    [8782] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Storm (Spider Daedra)
+    [8779] = { block = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Lightning Onslaught (Spider Daedra)
+    [89306] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Web (Spiderling)
+    [8782] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Lightning Storm (Spider Daedra)
     [8773] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Spiderling (Spider Daedra)
 
-    [35220] = { avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Impending Storm (Storm Atronach)
-    [4864] = { dodge = true, priority = 2, result = ACTION_RESULT_EFFECT_GAINED, refire = 100 }, -- Storm Bound (Storm Atronach)
+    [35220] = { avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Impending Storm (Storm Atronach)
+    --[4864] = { dodge = true, priority = 2, result = ACTION_RESULT_EFFECT_GAINED, refire = 100, cc = SNARE }, -- Storm Bound (Storm Atronach)
 
-    [7095] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Heavy Attack (Xivilai)
+    [7095] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1400 }, -- Heavy Attack (Xivilai)
     [88947] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Grasp (Xivilai)
-    [7100] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Hand of Flame (Xivilai)
+    [7100] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1333 }, -- Hand of Flame (Xivilai)
     [25726] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Daedra (Xivilai)
 
-    [4653] = { block = true, avoid = true, priority = 2, eventdetect = true }, -- Shockwave (Watcher)
-    [9219] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1750 }, -- Doom-Truth's Gaze (Watcher)
-    [14425] = { block = true, avoid = true, priority = 2 }, -- Doom-Truth's Gaze (Watcher)
+    [4653] = { block = true, avoid = true, priority = 2, eventdetect = true, cc = SNARE }, -- Shockwave (Watcher)
+    [9219] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1750, cc = STUN }, -- Doom-Truth's Gaze (Watcher)
+    [14425] = { block = true, avoid = true, priority = 2, cc = STUN }, -- Doom-Truth's Gaze (Watcher)
 
-    [6410] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Tail Clip (Winged Twilight)
-    [6412] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Dusk's Howl (Winged Twilight)
+    [6410] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1700 }, -- Tail Clip (Winged Twilight)
+    [6412] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = STUN }, -- Dusk's Howl (Winged Twilight)
 
     [94903] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1200, cc = STAGGER }, -- Spring (Hunger)
     [87237] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 667, cc = STAGGER }, -- Spring (Hunger)
@@ -418,74 +419,74 @@ LUIE.AlertTable = {
     [88297] = { avoid = true, auradetect = true, priority = 2, duration = 6000, effectOnlyInterrupt }, -- Blast Furnace (Iron Atronach)
 
     -- UNDEAD
-    [8569] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN }, -- Devastating Leap (Bloodfiend)
+    [8569] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1300, cc = STAGGER }, -- Devastating Leap (Bloodfiend)
 
-    [5050] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Bone Saw (Bone Colossus)
+    [5050] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STAGGER }, -- Bone Saw (Bone Colossus)
     [5030] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = "" }, -- Voice to Wake the Dead (Bone Colossus)
-    [17207] = { block = true, dodge = true, priority = 3, auradetect = true }, -- Necromantic Implosion (Risen Dead)
+    [17207] = { block = true, dodge = true, priority = 3, auradetect = true, duration = 2500, neverShowInterrupt = true }, -- Necromantic Implosion (Risen Dead)
 
-    [18514] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Chill Touch (Ghost)
-    [19137] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Haunting Spectre (Ghost)
+    [18514] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = SNARE }, -- Chill Touch (Ghost)
+    [19137] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = FEAR }, -- Haunting Spectre (Ghost)
 
-    [73925] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Soul Cage (Lich)
+    [73925] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Soul Cage (Lich)
 
-    [50182] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Consuming Energy (Spellfiend)
+    [50182] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Consuming Energy (Spellfiend)
 
-    [68735] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Vampiric Drain (Vampire)
+    [68735] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 6000 }, -- Vampiric Drain (Vampire)
 
-    [2867] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Crushing Leap (Werewolf)
-    [3415] = { block = true, dodge = true, priority = 3, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN }, -- Flurry (Werewolf)
+    [2867] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1400, cc = STAGGER }, -- Crushing Leap (Werewolf)
+    [3415] = { block = true, dodge = true, priority = 3, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN, duration = 4667, cc = STUN }, -- Flurry (Werewolf)
     [44055] = { interrupt = true, priority = 3, auradetect = true, duration = 4000 }, -- Devour (Werewolf)
-    --[5785] = { power = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Blood Scent (Werewolf)
+    [5785] = { power = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Blood Scent (Werewolf)
 
-    [4337] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Winter's Reach (Wraith)
+    [4337] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = SNARE }, -- Winter's Reach (Wraith)
 
-    [2969] = { block = true, dodge = true, bs = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Pound (Zombie)
-    [2960] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Vomit (Zombie)
+    [2969] = { block = true, dodge = true, bs = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = STAGGER }, -- Pound (Zombie)
+    [2960] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2100 }, -- Vomit (Zombie)
 
-    [72979] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Dissonant Blow (Defiled Aegis)
-    [72995] = { interrupt = true, dodge = true, priority = 2, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN }, -- Symphony of Blades (Defiled Aegis) -- Higher priority because damage is very high
-    [76180] = { power = true, auradetect = true, priority = 2 }, -- Shattered Harmony (Defiled Aegis)
+    [72979] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Dissonant Blow (Defiled Aegis)
+    [72995] = { interrupt = true, dodge = true, priority = 2, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN, duration = 6100 }, -- Symphony of Blades (Defiled Aegis) -- Higher priority because damage is very high
+    [76180] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Shattered Harmony (Defiled Aegis)
 
     -- MONSTERS
-    [10270] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Quake (Gargoyle)
-    [10256] = { block = true, bs = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Lacerate (Gargoyle)
+    [10270] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN, duration = 2550 }, -- Quake (Gargoyle)
+    [10256] = { block = true, bs = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Lacerate (Gargoyle)
 
-    [26124] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Shatter (Giant)
-    [15715] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Shatter (Giant)
+    [26124] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Shatter (Giant)
+    [15715] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 3000, cc = STUN }, -- Obliterate (Giant)
 
-    [2786] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 1250 }, -- Steal Essence (Hag)
-    [2821] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Luring Snare (Hag)
-    [3349] = { power = true, priority = 2, auradetect = true }, -- Reflective Shadows (Hag)
+    [2786] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 1250, duration = 6100 }, -- Steal Essence (Hag)
+    [2821] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 700, cc = STUN }, -- Luring Snare (Hag)
+    [3349] = { power = true, priority = 2, auradetect = true, duration = 8000 }, -- Reflective Shadows (Hag)
 
-    [10615] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Raven Storm (Hagraven)
-    [10613] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Fire Bomb (Hagraven)
+    [10615] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1800, cc = STAGGER }, -- Raven Storm (Hagraven)
+    [10613] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2050, neverShowInterrupt = true }, -- Fire Bomb (Hagraven)
     [64808] = { power = true, priority = 2, auradetect = true }, -- Briarheart Ressurection (Hagraven)
 
-    [4123] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Wing Slice (Harpy)
-    [13515] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Wind Gust (Harpy)
-    [24604] = { avoid = true, interrupt = true, eventdetect = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Charged Ground (Harpy)
-    [4689] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Gale (Harpy)
+    [4123] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Wing Slice (Harpy)
+    [13515] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1800, cc = STUN }, -- Wind Gust (Harpy)
+    [24604] = { avoid = true, interrupt = true, eventdetect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 8000 }, -- Charged Ground (Harpy)
+    [4689] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300 }, -- Lightning Gale (Harpy)
 
-    [43809] = { avoid = true, priority = 3, auradetect = true }, -- Shard Burst (Ice Wraith)
-    [24866] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Focused Charge (Ice Wraith)
+    [43809] = { avoid = true, priority = 3, auradetect = true, duration = 1750, cc = STUN, neverShowInterrupt = true }, -- Shard Burst (Ice Wraith)
+    [24866] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Focused Charge (Ice Wraith)
 
-    [17703] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 750 }, -- Flame Ray (Imp - Fire)
-    [8884] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 750 }, -- Zap (Imp - Lightning)
-    [81794] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 750 }, -- Frost Ray (Imp - Frost)
+    [17703] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 750, duration = 4550 }, -- Flame Ray (Imp - Fire)
+    [8884] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 750, duration = 4550 }, -- Zap (Imp - Lightning)
+    [81794] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 750, duration = 4600 }, -- Frost Ray (Imp - Frost)
 
-    [9671] = { block = true, bs = true, eventdetect = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Howling Strike (Lamia)
-    [9674] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Resonate (Lamia)
-    [7835] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Convalescence (Lamia)
-    [7831] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500 }, -- Harmony (Lamia)
+    [9671] = { block = true, bs = true, eventdetect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STAGGER }, -- Howling Strike (Lamia)
+    [9674] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STAGGER }, -- Resonate (Lamia)
+    [7835] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Convalescence (Lamia)
+    [7831] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500, duration = 5000 }, -- Harmony (Lamia)
     [9680] = { summon = true, auradetect = true, priority = 2, fakeName = "" }, -- Summon Spectral Lamia
 
-    [3860] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Pulverize (Lurcher)
-    [3855] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Crushing Limbs (Lurcher)
-    [3767] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN }, -- Choking Pollen (Lurcher)
+    [3860] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 500, cc = STAGGER }, -- Pulverize (Lurcher)
+    [3855] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Crushing Limbs (Lurcher)
+    [3767] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN, duration = 5600 }, -- Choking Pollen (Lurcher)
 
-    [5559] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Icy Geyser (Nereid)
-    [5540] = { avoid = true, interrupt = true, priority = 3, auradetect = true }, -- Hurricane (Nereid)
+    [5559] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2200, neverShowInterrupt = true }, -- Icy Geyser (Nereid)
+    [5540] = { avoid = true, interrupt = true, priority = 3, auradetect = true, duration = 8000, cc = SNARE }, -- Hurricane (Nereid)
 
     [24985] = { power = true, auradetect = true, priority = 3 }, -- Intimidating Roar (Ogre)
     [5881] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Smash (Ogre)

@@ -4549,6 +4549,57 @@ LUIE.DebugAuras = {
     [90943] = true, -- Permafrost (Permafrost)
 
     -------------------------------------
+    -- NECROMANCER PASSIVES -------------
+    -------------------------------------
+
+    -- Grave Lord Passives
+    [116186] = true, -- Reusable Parts (Rank 1)
+    [116187] = true, -- Reusable Parts (Rank 1)
+    [116188] = true, -- Reusable Parts (Rank 2)
+    [116189] = true, -- Reusable Parts (Rank 2)
+
+    [116197] = true, -- Death Knell (Rank 1)
+    [116198] = true, -- Death Knell (Rank 2)
+
+    [116192] = true, -- Dismember (Rank 1)
+    [116194] = true, -- Dismember (Rank 2)
+
+    [116199] = true, -- Rapid Rot (Rank 1)
+    [116201] = true, -- Rapid Rot (Rank 2)
+
+    -- Bone Tyrant Passives
+    [116230] = true, -- Death Gleaning (Rank 1)
+    [119156] = true, -- Death Gleaning (Rank 1)
+    [119158] = true, -- Death Gleaning (Rank 1)
+    [116235] = true, -- Death Gleaning (Rank 2)
+    [119164] = true, -- Death Gleaning (Rank 2)
+    [119165] = true, -- Death Gleaning (Rank 2)
+
+    [116239] = true, -- Disdain Harm (Rank 1)
+    [116240] = true, -- Disdain Harm (Rank 2)
+
+    [116269] = true, -- Health Avarice (Rank 1)
+    [116270] = true, -- Health Avarice (Rank 2)
+
+    [116271] = true, -- Last Gasp (Rank 1)
+    [116272] = true, -- Last Gasp (Rank 2)
+
+    -- Living Death Passives
+    [116286] = true, -- Curative Curse (Rank 1)
+    [116287] = true, -- Curative Curse (Rank 1)
+
+    [116273] = true, -- Near-Death Experience (Rank 1)
+    [116275] = true, -- Near-Death Experience (Rank 2)
+
+    [116282] = true, -- Undead Confederate (Rank 1)
+    [116283] = true, -- Undead Confederate (Rank 2)
+
+    [116284] = true, -- Corpse Consumption (Rank 1)
+    [120611] = true, -- Corpse Consumption (Rank 1)
+    [116285] = true, -- Corpse Consumption (Rank 2)
+    [120612] = true, -- Corpse Consumption (Rank 2)
+
+    -------------------------------------
     -- NECROMANCER ACTIVES --------------
     -------------------------------------
 
@@ -4696,6 +4747,242 @@ LUIE.DebugAuras = {
     [122389] = true, -- Major Vulnerability (Glacial Colossus)
     [122394] = true, -- Glacial Colossus (Glacial Colossus)
 
+    [115115] = true, -- Death Scythe (Death Scythe)
+    [122595] = true, -- Death Scythe (Death Scythe)
+    [115130] = true, -- Death Scythe (Death Scythe)
+
+    [118226] = true, -- Ruinous Scythe (Ruinous Scythe)
+    [122651] = true, -- Ruinous Scythe (Ruinous Scythe)
+    [118227] = true, -- Ruinous Scythe (Ruinous Scythe)
+    [125749] = true, -- Ruinous Scythe (Ruinous Scythe)
+    [125750] = true, -- Off Balance (Ruinous Scythe)
+
+    [118223] = true, -- Hungry Scythe (Hungry Scythe)
+    [122615] = true, -- Hungry Scythe (Hungry Scythe)
+    [118224] = true, -- Hungry Scythe (Hungry Scythe)
+    [122625] = true, -- Hungry Scythe (Hungry Scythe)
+
+    [115206] = true, -- Bone Armor (Bone Armor)
+    [123903] = true, -- Bone Armor (Bone Armor)
+    [115211] = true, -- Major Resolve (Bone Armor)
+    [115214] = true, -- Major Ward (Bone Armor)
+    [122661] = true, -- Corpse Spawn (Bone Armor)
+    [123911] = true, -- Bone Armor (Bone Armor)
+
+    [118237] = true, -- Beckoning Armor (Beckoning Armor)
+    [123927] = true, -- Beckoning Armor (Beckoning Armor)
+    [118239] = true, -- Major Resolve (Beckoning Armor)
+    [118240] = true, -- Major Ward (Beckoning Armor)
+    [122679] = true, -- Corpse Spawn (Beckoning Armor)
+    [123929] = true, -- Bone Armor (Beckoning Armor)
+    [118241] = true, -- Beckoning Armor (Beckoning Armor)
+    [118242] = true, -- Beckoning Armor (Beckoning Armor)
+
+    [118244] = true, -- Summoner's Armor (Summoner's Armor)
+    [123964] = true, -- Summoner's Armor (Summoner's Armor)
+    [118246] = true, -- Major Resolve (Summoner's Armor)
+    [118247] = true, -- Major Ward (Summoner's Armor)
+    [122680] = true, -- Corpse Spawn (Summoner's Armor)
+    [123965] = true, -- Bone Armor (Summoner's Armor)
+
+    [124006] = true, -- Bitter Harvest (Bitter Harvest - All Morphs)
+    [115238] = true, -- Bitter Harvest (Bitter Harvest)
+    [119372] = true, -- Bitter Harvest (Bitter Harvest)
+    [115244] = true, -- Bitter Harvest (Bitter Harvest)
+    [124136] = true, -- Necrotic Potency (Bitter Harvest)
+    [115240] = true, -- Bitter Harvest (Bitter Harvest)
+
+    [118623] = true, -- Dead Pain (Deaden Pain)
+    [121796] = true, -- Dead Pain (Deaden Pain)
+    [118624] = true, -- Dead Pain (Deaden Pain)
+    [124166] = true, -- Necrotic Potency (Deaden Pain)
+    [124165] = true, -- Dead Pain (Deaden Pain)
+    [118629] = true, -- Major Protection (Deaden Pain)
+
+    [118639] = true, -- Necrotic Potency (Necrotic Potency)
+    [121797] = true, -- Necrotic Potency (Necrotic Potency)
+    [118640] = true, -- Necrotic Potency (Necrotic Potency)
+    [124192] = true, -- Necrotic Potency (Necrotic Potency)
+    [124193] = true, -- Necrotic Potency (Necrotic Potency)
+
+    [115093] = true, -- Bone Totem (Bone Totem)
+    [115095] = true, -- Bone Totem (Bone Totem)
+    [115097] = true, -- Minor Protection (Bone Totem)
+    [115129] = true, -- Bone Totem (Bone Totem)
+    [115107] = true, -- Bone Totem (Bone Totem)
+    [115106] = true, -- Bone Totem (Bone Totem)
+    [115108] = true, -- Bone Totem (Bone Totem)
+
+    [118380] = true, -- Remote Totem (Remote Totem)
+    [118381] = true, -- Remote Totem (Remote Totem)
+    [118385] = true, -- Minor Protection (Remote Totem)
+    [118382] = true, -- Remote Totem (Remote Totem)
+    [118383] = true, -- Remote Totem (Remote Totem)
+    [118386] = true, -- Remote Totem (Remote Totem)
+    [118384] = true, -- Remote Totem (Remote Totem)
+
+    [125220] = true, -- Synergy Damage Bonus (Agony Totem - Pure Agony Synergy)
+    [118610] = true, -- Pure Agony (Agony Totem - Pure Agony Synergy)
+    [118606] = true, -- Pure Agony (Agony Totem - Pure Agony Synergy)
+    [118613] = true, -- Minor Vulnerability (Agony Totem - Pure Agony Synergy)
+    [118618] = true, -- Pure Agony (Agony Totem - Pure Agony Synergy)
+
+    [118404] = true, -- Agony Totem (Agony Totem)
+    [118405] = true, -- Agony Totem (Agony Totem)
+    [118409] = true, -- Minor Protection (Agony Totem)
+    [118406] = true, -- Agony Totem (Agony Totem)
+    [118407] = true, -- Agony Totem (Agony Totem)
+    [118449] = true, -- Agony Totem (Agony Totem)
+    [118411] = true, -- Agony Totem (Agony Totem)
+    [118408] = true, -- Agony Totem (Agony Totem)
+    [118614] = true, -- Agony Totem (Agony Totem)
+
+    [115177] = true, -- Grave Grasp (Grave Grasp)
+    [121515] = true, -- Grave Grasp (Grave Grasp)
+    [121514] = true, -- Grave Grasp (Grave Grasp)
+    [121516] = true, -- Grave Grasp (Grave Grasp)
+    [121518] = true, -- Grave Grasp (Grave Grasp)
+    [121513] = true, -- Grave Grasp (Grave Grasp)
+    [121517] = true, -- Minor Maim (Grave Grasp)
+
+    [118308] = true, -- Ghostly Embrace (Ghostly Embrace)
+    [118311] = true, -- Ghostly Embrace (Ghostly Embrace)
+    [118310] = true, -- Ghostly Embrace (Ghostly Embrace)
+    [118312] = true, -- Ghostly Embrace (Ghostly Embrace)
+    [118314] = true, -- Ghostly Embrace (Ghostly Embrace)
+    [118309] = true, -- Ghostly Embrace (Ghostly Embrace)
+    [118313] = true, -- Minor Maim (Ghostly Embrace)
+    [118325] = true, -- Ghostly Embrace (Ghostly Embrace)
+
+    [118352] = true, -- Empowering Grasp (Empowering Grasp)
+    [118356] = true, -- Empowering Grasp (Empowering Grasp)
+    [118355] = true, -- Empowering Grasp (Empowering Grasp)
+    [118357] = true, -- Empowering Grasp (Empowering Grasp)
+    [118359] = true, -- Empowering Grasp (Empowering Grasp)
+    [118366] = true, -- Empower (Empowering Grasp)
+    [118369] = true, -- Empowering Grasp (Empowering Grasp)
+    [124816] = true, -- Empowering Grasp (Empowering Grasp)
+    [118354] = true, -- Empowering Grasp (Empowering Grasp)
+    [118358] = true, -- Minor Maim (Empowering Grasp)
+
+    [118802] = true, -- Bone Goliath Transform Setup (Bone Goliath Transformation - All Morphs)
+    [123228] = true, -- De-Bone (Bone Goliath Transformation - All Morphs)
+    [115001] = true, -- Bone Goliath Transformation (Bone Goliath Transformation)
+    [115286] = true, -- Bone Goliath (Bone Goliath Transformation)
+    [115478] = true, -- Bone Goliath Self Snare (Bone Goliath Transformation)
+    [115257] = true, -- Bone Goliath (Bone Goliath Transformation)
+    [115281] = true, -- Bone Goliath (Bone Goliath Transformation)
+    [115282] = true, -- Bone Goliath (Bone Goliath Transformation)
+
+    [118664] = true, -- Pummeling Goliath (Pummeling Goliath)
+    [118665] = true, -- Pummeling Goliath (Pummeling Goliath)
+    [118673] = true, -- Pummeling Goliath Self Snare (Pummeling Goliath)
+    [118672] = true, -- Pummeling Goliath (Pummeling Goliath)
+    [118666] = true, -- Pummeling Goliath (Pummeling Goliath)
+    [118667] = true, -- Pummeling Goliath (Pummeling Goliath)
+    [118720] = true, -- Pummeling Goliath Bash (Pummeling Goliath)
+
+    [118279] = true, -- Ravenous Goliath (Ravenous Goliath)
+    [118280] = true, -- Ravenous Goliath (Ravenous Goliath)
+    [118287] = true, -- Ravenous Goliath Self Snare (Ravenous Goliath)
+    [118288] = true, -- Ravenous Goliath (Ravenous Goliath)
+    [118290] = true, -- Ravenous Goliath (Ravenous Goliath)
+    [118281] = true, -- Ravenous Goliath (Ravenous Goliath)
+    [118282] = true, -- Ravenous Goliath (Ravenous Goliath)
+    [118289] = true, -- Ravenous Goliath (Ravenous Goliath)
+    [118292] = true, -- Ravenous Goliath (Ravenous Goliath)
+
+    [114196] = true, -- Render Flesh (Render Flesh)
+    [114206] = true, -- Minor Defile (Render Flesh)
+
+    [117883] = true, -- Resistant Flesh (Resistant Flesh)
+    [117885] = true, -- Minor Defile (Resistant Flesh)
+    [117886] = true, -- Resistant Flesh (Resistant Flesh)
+
+    [117888] = true, -- Blood Sacrifice (Blood Sacrifice)
+    [117890] = true, -- Minor Defile (Blood Sacrifice)
+    [117897] = true, -- Blood Sacrifice (Blood Sacrifice)
+    [117894] = true, -- Blood Sacrifice (Blood Sacrifice)
+
+    [124005] = true, -- Expunge (Expunge - All Morphs)
+    [115307] = true, -- Expunge (Expunge)
+
+    [117940] = true, -- Expunge and Modify (Expunge and Modify)
+    [117947] = true, -- Expunge and Modify (Expunge and Modify)
+    [117941] = true, -- Expunge and Modify (Expunge and Modify)
+    [117942] = true, -- Expunge and Modify (Expunge and Modify)
+
+    [117919] = true, -- Hexproof (Hexproof)
+
+    [115315] = true, -- Life amid Death (Life amid Death)
+    [115318] = true, -- Life amid Death (Life amid Death)
+    [115326] = true, -- Life amid Death (Life amid Death)
+    [115532] = true, -- Life amid Death (Life amid Death)
+    [115385] = true, -- Life amid Death (Life amid Death)
+
+    [118017] = true, -- Renewing Undeath (Renewing Undeath)
+    [118019] = true, -- Renewing Undeath (Renewing Undeath)
+    [118022] = true, -- Renewing Undeath (Renewing Undeath)
+    [118018] = true, -- Renewing Undeath (Renewing Undeath)
+    [118021] = true, -- Renewing Undeath (Renewing Undeath)
+
+    [118809] = true, -- Enduring Undeath (Enduring Undeath)
+    [118811] = true, -- Enduring Undeath (Enduring Undeath)
+    [118817] = true, -- Enduring Undeath (Enduring Undeath)
+    [118814] = true, -- Enduring Undeath (Enduring Undeath)
+    [118810] = true, -- Enduring Undeath (Enduring Undeath)
+    [118813] = true, -- Enduring Undeath (Enduring Undeath)
+
+    [115710] = true, -- Spirit Mender (Spirit Mender)
+    [115720] = true, -- Spirit Mender Spawn Stun (Spirit Mender)
+    [115732] = true, -- Spirit Mender (Spirit Mender)
+    [115721] = true, -- Reconstitute (Spirit Mender)
+
+    [118912] = true, -- Spirit Guardian (Spirit Guardian)
+    [118915] = true, -- Spirit Guardian Spawn Stun (Spirit Guardian)
+    [118916] = true, -- Spirit Guardian (Spirit Guardian)
+    [118913] = true, -- Spirit Guardian (Spirit Guardian)
+    [118914] = true, -- Reconstitute (Spirit Guardian)
+
+    [118840] = true, -- Intensive Mender (Intensive Mender)
+    [118852] = true, -- Intensive Mender Spawn Stun (Intensive Mender)
+    [122379] = true, -- Necromancer Pet 6s Tracker (Intensive Mender)
+    [118843] = true, -- Intensive Mender (Intensive Mender)
+    [118851] = true, -- Reconstitute (Intensive Mender)
+
+    [124004] = true, -- Restoring Tether (Restoring Tether - All Morphs)
+
+    [115926] = true, -- Restoring Tether (Restoring Tether)
+    [116450] = true, -- Restoring Tether (Restoring Tether)
+    [116442] = true, -- Restoring Tether (Restoring Tether)
+    [117871] = true, -- Restoring Tether (Restoring Tether)
+
+    [118070] = true, -- Braided Tether (Braided Tether)
+    [118071] = true, -- Braided Tether (Braided Tether)
+    [118073] = true, -- Braided Tether (Braided Tether)
+    [118074] = true, -- Braided Tether (Braided Tether)
+
+    [118122] = true, -- Mortal Coil (Mortal Coil)
+    [118123] = true, -- Mortal Coil (Mortal Coil)
+    [118125] = true, -- Mortal Coil (Mortal Coil)
+    [118126] = true, -- Mortal Coil (Mortal Coil)
+    [123233] = true, -- Mortal Coil (Mortal Coil)
+
+    [115410] = true, -- Reanimate (Reanimate)
+    [115429] = true, -- Reanimate (Reanimate)
+
+    [118367] = true, -- Renewing Animation (Renewing Animation)
+    [118378] = true, -- Renewing Animation (Renewing Animation)
+    [118376] = true, -- Renewing Animation (Renewing Animation)
+    [118377] = true, -- Renewing Animation (Renewing Animation)
+
+    [118379] = true, -- Animate Blastbones (Animate Blastbones)
+    [118391] = true, -- Animate Blastbones (Animate Blastbones)
+    [118447] = true, -- Animate Blastbones (Animate Blastbones)
+    [118397] = true, -- Animate Blastbones (Animate Blastbones)
+    [118448] = true, -- Animate Blastbones (Animate Blastbones)
+    [118450] = true, -- Animate Blastbones (Animate Blastbones)
+    [124999] = true, -- Undead Confederate Tracker (Animate Blastbones)
 
     -------------------------------------
     -- UNARMED PASSIVES -----------------

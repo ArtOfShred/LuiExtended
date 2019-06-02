@@ -1,3 +1,21 @@
+### Version 5.9.4
+
+General
+- Fixed an issue where initiating a vote kick on a party member in LFG through the Player to Player interaction menu would throw a UI error due to referencing a renamed function.
+- Fixed an issue where recieving Crown Store gifts through the Notifications prompt would cause a Protected Call error. Unfortunately this means accepted/declined response text from sending various invite types to the player will no longer work. I'll have to find another way to handle this in the future.
+
+Buffs & Debuffs
+- Updated the auras/icons/tooltips/bar highlight, etc for all Necromancer skill line active and passive skills.
+
+Chat Announcements:
+- Fixed an issue where inviting a player to the guild would display duplicate Guild Member joined messages (since the player invited is added to the roster). Thanks to Eearslya Sleiarion for this fix!
+- Updated the currency announcements to correctly display "Earn" context message for Defensive Keep Ticks.
+
+Combat Info
+- Updated a significant amount of enemy abilities for Active Combat Alerts (more alerts now show the correct cast time and cc type).
+
+---
+
 ### Version 5.9.3
 
 General

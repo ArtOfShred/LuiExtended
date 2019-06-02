@@ -2201,8 +2201,8 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
             g_savedPurchase.messageTotal=messageTotal
             return
         end
-    -- Keep Reward (14), Keep Repair (40), PVP Resurrect (41)
-    elseif reason == 14 or reason == 40 or reason == 41 then
+    -- Keep Reward (14), Keep Repair (40), PVP Resurrect (41), Defensive Keep Reward (75)
+elseif reason == 14 or reason == 40 or reason == 41 or reason == 75 then
         messageChange = CA.SV.ContextMessages.CurrencyMessageEarn
     -- Reward (27)
     elseif reason == 27 then
@@ -8879,7 +8879,7 @@ function CA.HookFunction()
             local groupKickFunction = nil
             if groupKickEnabled then
                 if lfgKick then
-                    groupKickFunction = function() LUIE.SlashVoteKick(currentTargetCharacterName) end
+                    groupKickFunction = function() LUIE.SlashCommands.SlashVoteKick(currentTargetCharacterName) end
                 else
                     groupKickFunction = function() GroupKickByName(currentTargetCharacterNameRaw) end
                 end
@@ -8982,6 +8982,10 @@ function CA.HookFunction()
         self.isLastRadialMenuGamepad = IsInGamepadPreferredMode()
     end
 
+    --[[
+    -- Since the Crown Store Gifting functionality was added, hooking these functions seems to cause an insecure code issue when receiving gifts via the Player to Player notification system.
+    -- Not sure how else I can alter these notifications so for the time being support will have to be dropped.
+
     --local INTERACT_TYPE_TRADE_INVITE = 3
     local INTERACT_TYPE_GROUP_INVITE = 4
     local INTERACT_TYPE_QUEST_SHARE = 5
@@ -9034,13 +9038,6 @@ function CA.HookFunction()
             else
                 ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
             end
-
-            --[[
-            if data.incomingType == INTERACT_TYPE_TRADE_INVITE then
-                printToChat(strformat(message, typeString))
-                ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
-            end
-            ]]--
         end
     end
 
@@ -9118,6 +9115,8 @@ function CA.HookFunction()
             NotificationDeclined(incomingEntryToRespondTo)
         end
     end
+
+    ]]--
 
     -- Required when hooking ZO_MailSend_Gamepad:IsValid()
     -- Returns whether there is any item attached.
@@ -9335,19 +9334,25 @@ function CA.HookFunction()
             local name = GetGuildName(id)
 
             if guildName == name then
-                local guildAlliance = GetGuildAlliance(id)
-                local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-                local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-                local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+                local guildRoster = ZO_GuildRosterManager:New()
+                guildRoster:SetGuildId(id)
+                local playerData = guildRoster:FindDataByDisplayName(displayName)
 
-                if CA.SV.Social.GuildCA then
-                    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance), true)
+                if playerData ~= nil and playerData.inviteeIndex == nil then
+                    local guildAlliance = GetGuildAlliance(id)
+                    local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+                    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+                    local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+
+                    if CA.SV.Social.GuildCA then
+                        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance), true)
+                    end
+                    if CA.SV.Social.GuildAlert then
+                        callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayName, guildNameAllianceAlert))
+                    end
+                    PlaySound(SOUNDS.GUILD_ROSTER_ADDED)
+                    break
                 end
-                if CA.SV.Social.GuildAlert then
-                    callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayName, guildNameAllianceAlert))
-                end
-                PlaySound(SOUNDS.GUILD_ROSTER_ADDED)
-                break
             end
         end
     end

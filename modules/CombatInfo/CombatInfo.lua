@@ -1513,7 +1513,7 @@ function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
     end
 
     -- Check for active duration to display highlight for abilities on bar swap
-    if duration > 0 then
+    if duration > 0 or E.AddNoDurationBarHighlight[ability_id] then
         g_toggledSlots[ability_id] = slotNum
         if g_toggledSlotsRemain[ability_id] then
             if CI.SV.ShowToggled then

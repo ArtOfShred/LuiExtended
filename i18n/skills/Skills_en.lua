@@ -452,31 +452,42 @@ local strings = {
     SI_LUIE_SKILL_PERMAFROST_GROUND_TP =                 "Taking Frost Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF40|r%.\n\nIf you take damage from the storm three times, you will be stunned for |cFFFFFF3|r seconds.",
 
     -- Necromancer
+    SI_LUIE_SKILL_REUSABLE_PARTS_TP =                    "Reduce the cost of your next Blastbones, Skeletal Mage, or Spirit Mender by |cFFFFFF<<1>>|r%.",
     SI_LUIE_SKILL_FLAME_SKULL_TP =                       "Every third cast of <<2>> deals |cFFFFFF20|r% increased damage.",
     SI_LUIE_SKILL_RICOCHET_SKULL_TP =                    "Every third cast of Ricochet Skull deals |cFFFFFF20|r% increased damage and will bounce up to |cFFFFFF2|r times to other nearby enemies.",
-
-    SI_LUIE_SKILL_BLASTBONES_TP =                        "A flaming skeleton runs toward your target and explodes when it gets close to them, dealing Flame Damage to all enemies within |cFFFFFF6|r meters.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.",
-    SI_LUIE_SKILL_BLIGHTED_BLASTBONES_TP =               "A decaying skeleton runs toward your target and explodes when it gets close to them, dealing Disease Damage to all enemies within |cFFFFFF6|r meters and applying Major Defile to them for |cFFFFFF4|r seconds.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.",
-    SI_LUIE_SKILL_STALKING_BLASTBONES_TP =               "A flaming skeleton runs toward your target and explodes when it gets close to them, dealing Flame Damage to all enemies within |cFFFFFF6|r meters.\n\nEvery second the skeleton spends chasing its target increases the damage of the explosion by |cFFFFFF10|r% up to a maximum of |cFFFFFF50|r% more damage.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.",
-
+    SI_LUIE_SKILL_BLASTBONES_TP =                        "A flaming skeleton runs toward your target and explodes when it gets close to them, dealing Flame Damage to all enemies within |cFFFFFF6|r meters.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.\n\nCreates a corpse on death.",
+    SI_LUIE_SKILL_BLIGHTED_BLASTBONES_TP =               "A decaying skeleton runs toward your target and explodes when it gets close to them, dealing Disease Damage to all enemies within |cFFFFFF6|r meters and applying Major Defile to them for |cFFFFFF4|r seconds.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.\n\nCreates a corpse on death.",
+    SI_LUIE_SKILL_STALKING_BLASTBONES_TP =               "A flaming skeleton runs toward your target and explodes when it gets close to them, dealing Flame Damage to all enemies within |cFFFFFF6|r meters.\n\nEvery second the skeleton spends chasing its target increases the damage of the explosion by |cFFFFFF10|r% up to a maximum of |cFFFFFF50|r% more damage.\n\nThe skeleton remains for |cFFFFFF8|r seconds or until it explodes.\n\nCreates a corpse on death.",
     SI_LUIE_SKILL_BONEYARD_TP =                          "Enemies in the |cFFFFFF6|r meter radius of the graveyard take Frost Damage every |cFFFFFF1|r second.\n\nAn ally standing in the graveyard can activate the |cFFFFFFGrave Robber|r synergy.",
     SI_LUIE_SKILL_UNNERVING_BONEYARD_TP =                "Enemies in the |cFFFFFF6|r meter radius of the graveyard take Frost Damage every |cFFFFFF1|r second and have Major Breach and Major Fracture applied to them.\n\nAn ally standing in the graveyard can activate the |cFFFFFFGrave Robber|r synergy.",
     SI_LUIE_SKILL_AVID_BONEYARD_TP =                     "Enemies in the |cFFFFFF6|r meter radius of the graveyard take Frost Damage every |cFFFFFF1|r second.\n\nYou or an ally standing in the graveyard can activate the |cFFFFFFGrave Robber|r synergy.",
-
-    SI_LUIE_SKILL_SKELETAL_MAGE_TP =                     "A skeletal mage fights at your side. The skeletal mage remains for |cFFFFFF<<1>>|r seconds.\n\nThe mage attacks the closest enemy every |cFFFFFF2|r seconds, dealing Shock Damage.",
-    SI_LUIE_SKILL_SKELETAL_ARCHER_TP =                   "A skeletal archer fights at your side. The skeletal archer remains for |cFFFFFF<<1>>|r seconds.\n\nThe archer attacks the closest enemy every |cFFFFFF2|r seconds, dealing Physical Damage.\n\nEach time the archer deals damage, its next attack will do |cFFFFFF10|r% more damage than the previous attack.",
-    SI_LUIE_SKILL_SKELETAL_ARCANIST_TP =                 "A skeletal arcanist fights at your side. The skeletal arcanist remains for |cFFFFFF<<1>>|r seconds.\n\nThe arcanist attacks the closest enemy every |cFFFFFF2|r seconds, dealing Shock Damage to them and enemies with |cFFFFFF4|r meters.",
-
+    SI_LUIE_SKILL_SKELETAL_MAGE_TP =                     "A skeletal mage fights at your side. The skeletal mage remains for |cFFFFFF<<1>>|r seconds.\n\nThe mage attacks the closest enemy every |cFFFFFF2|r seconds, dealing Shock Damage.\n\nCreates a corpse on death.",
+    SI_LUIE_SKILL_SKELETAL_ARCHER_TP =                   "A skeletal archer fights at your side. The skeletal archer remains for |cFFFFFF<<1>>|r seconds.\n\nThe archer attacks the closest enemy every |cFFFFFF2|r seconds, dealing Physical Damage.\n\nEach time the archer deals damage, its next attack will do |cFFFFFF10|r% more damage than the previous attack.\n\nCreates a corpse on death.",
+    SI_LUIE_SKILL_SKELETAL_ARCANIST_TP =                 "A skeletal arcanist fights at your side. The skeletal arcanist remains for |cFFFFFF<<1>>|r seconds.\n\nThe arcanist attacks the closest enemy every |cFFFFFF2|r seconds, dealing Shock Damage to them and enemies with |cFFFFFF4|r meters.\n\nCreates a corpse on death.",
     SI_LUIE_SKILL_SHOCKING_SIPHON_TP =                   "Enemies within |cFFFFFF5|r meters of the corpse and between you and the corpse take Shock Damage over |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SHOCKING_SIPHON_GROUND_TP =            "Taking rapidly ticking Shock Damage.",
     SI_LUIE_SKILL_DETONATING_SIPHON_TP =                 "Enemies within |cFFFFFF5|r meters of the corpse and between you and the corpse take Disease Damage over |cFFFFFF<<1>>|r seconds.\n\nIf the siphon lasts its full duration it causes the corpse to explode, dealing additional Disease Damage to all enemies around the corpse.",
     SI_LUIE_SKILL_DETONATING_SIPHON_GROUND_TP =          "Taking rapidly ticking Disease Damage.\n\nIf the siphon lasts its full |cFFFFFF12|r second duration the corpse explodes, dealing Disease Damage to you and nearby allies.",
     SI_LUIE_SKILL_MYSTIC_SIPHON_TP =                     "Enemies within |cFFFFFF5|r meters of the corpse and between you and the corpse take Shock Damage over |cFFFFFF<<1>>|r seconds.\n\nYou also restore Magicka over |cFFFFFF<<1>>|r seconds while siphoning the corpse.",
-
     SI_LUIE_SKILL_FROZEN_COLOSSUS_TP =                   "A frostbitten Flesh Colossus smashes the ground three times over |cFFFFFF3|r seconds, dealing Frost Damage to enemies within |cFFFFFF8|r meters.\n\nEach smash applies Major Vulnerability to any enemy hit for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_PESTILENT_COLOSSUS_TP =                "A pestilent Flesh Colossus smashes the ground three times over |cFFFFFF3|r seconds, dealing increasing Disease Damage to enemies within |cFFFFFF8|r meters.\n\nEach smash applies Major Vulnerability to any enemy hit for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_GLACIAL_COLOSSUS_TP =                  "A frostbitten Flesh Colossus smashes the ground three times over |cFFFFFF3|r seconds, dealing Frost Damage to enemies within |cFFFFFF8|r meters.\n\nThe final smash stuns all enemies hit for |cFFFFFF<<2>>|r seconds.\n\nEach smash applies Major Vulnerability to any enemy hit for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILL_GLACIAL_COLOSSUS_GROUND_TP =           "Taking Frost Damage every |cFFFFFF1|r second.\n\nThe final hit will knock you down for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_RUINOUS_SCYTHE_TP =                    "Every third cast of Ruinous Scythe will set all enemies hit Off Balance.",
+    SI_LUIE_SKILL_BONE_TOTEM_TP =                        "You and allies within the |cFFFFFF6|r meter radius of the totem gain Minor Protection.\n\nAfter |cFFFFFF2|r seconds, the totem instills fear in enemies, holding them in place for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_AGONY_TOTEM_TP =                       "You and allies within the |cFFFFFF6|r meter radius of the totem gain Minor Protection.\n\nAfter |cFFFFFF2|r seconds, the totem instills fear in enemies, holding them in place for |cFFFFFF4|r seconds.\n\nAllies can activate the |cFFFFFFPure Agony|r synergy.",
+    SI_LUIE_SKILL_EMPOWERING_GRASP_TP =                  "Increase damage and healing done by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BONE_GOLIATH_TRANSFORMATION_TP =       "Transformed into a Bone Goliath for |cFFFFFF<<1>>|r seconds.\n\nWhile transformed, your Light Attacks and Heavy Attacks restore Health.\n\nYou cannot generate Ultimate while transformed.",
+    SI_LUIE_SKILL_PUMMELING_GOLIATH_TP =                 "Transformed into a Pummeling Goliath for |cFFFFFF<<1>>|r seconds.\n\nWhile transformed, your Light Attacks and Heavy Attacks restore Health.\n\nYour bash attacks hit multiple targets in front of you and deal additional damage.\n\nYou cannot generate Ultimate while transformed.",
+    SI_LUIE_SKILL_RAVENOUS_GOLIATH_TP =                  "Transformed into a Ravenous Goliath for |cFFFFFF<<1>>|r seconds.\n\nWhile transformed, your Light Attacks and Heavy Attacks restore Health.\n\nYou deal Magic Damage to nearby enemies every |cFFFFFF1|r second and heal for |cffffff100|r% of the damage done.\n\nYou cannot generate Ultimate while transformed.",
+    SI_LUIE_SKILL_RAVENOUS_GOLIATH_GROUND_TP =           "Taking Magic Damage every |cFFFFFF1|r second.\n\nEach tick heals the Necromancer for |cffffff100|r% of the damage done.",
+    SI_LUIE_SKILL_RESISTANT_FLESH_TP =                   "Increase Physical and Spell Resistance by |cFFFFFF50|r% of the amount healed by the last cast of Resistant Flesh for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_LIFE_AMID_DEATH_TP =                   "Healing you and allies within |cFFFFFF8|r meters of the consumed corpse every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_SPIRIT_MENDER_TP =                     "A ghostly spirit stays by your side. The ghostly spirit remains for |cFFFFFF<<1>>|r seconds.\n\nThe spirit heals you or the lowest Health ally around you every |cFFFFFF2|r seconds.\n\nCreates a corpse on death.",
+    SI_LUIE_SKILL_SPIRIT_GUARDIAN_TP =                   "A ghostly spirit stays by your side. The ghostly spirit remains for |cFFFFFF<<1>>|r seconds.\n\nThe spirit heals you or the lowest Health ally around you every |cFFFFFF2|r seconds.\n\nWhile active, |cFFFFFF10|r% of the damage you take is transferred to the spirit instead.\n\nCreates a corpse on death.",
+    SI_LUIE_SKILL_RESTORING_TETHER_TP =                  "You and all allies between you and the corpse heal over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BRAIDED_TETHER_TP =                    "You, all allies around you, and all allies between you and the corpse heal over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_MORTAL_COIL_TP =                       "You and all allies between you and the corpse heal over |cFFFFFF<<1>>|r seconds.\n\nYou also restore |cFFFFFF2844|r Stamina over |cFFFFFF<<1>>|r seconds while siphoning the corpse.",
 
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------
@@ -574,8 +585,8 @@ local strings = {
     SI_LUIE_SKILL_BLOOD_MOON_TP =                        "You have bitten another player. You may not do so again for |cFFFFFF7|r days.",
     SI_LUIE_SKILL_FEEDING_FREZNY_TP =                    "Empowered for |cFFFFFF<<1>>|r seconds, increasing the damage of your Light Attacks by |cFFFFFF40|r%.",
     SI_LUIE_SKILL_CLAWS_OF_LIFE_TP =                     "Afflicted with Disease Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage, your attacker heals for |cFFFFFF50|r% of the damage done.",
-    SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP =           "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.",
-    SI_LUIE_SKILL_PACK_LEADER_TP =                       "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nSummon two direwolves while transformed. If killed, they return after |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP =           "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nYou cannot generate Ultimate while transformed.",
+    SI_LUIE_SKILL_PACK_LEADER_TP =                       "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nSummon two direwolves while transformed. If killed, they return after |cFFFFFF10|r seconds.\n\nYou cannot generate Ultimate while transformed.",
 
     -- Vampire
     SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA =       "Noxiphilic Sanguivoria",
@@ -1186,6 +1197,8 @@ local strings = {
     SI_LUIE_SKILL_ENERGIZE =                             "Energize",
     SI_LUIE_SKILL_REFLECTIVE_SCALE =                     "Reflective Scale",
     SI_LUIE_SKILL_FETCHERFLY_SWARM =                     "Fetcherfly Swarm",
+    SI_LUIE_SKILL_WING_GUST_STUN =                       "Knocked back for |cFFFFFF<<1>>|r seconds.\n\nMovement speed reduced by |cFFFFFF50|r% for |cFFFFFF<<2>>|r seconds.",
+    SI_LUIE_SKILL_WING_GUST_SNARE =                      "Knocked back for |cFFFFFF<<2>>|r seconds.\n\nMovement speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
 }
 
 for stringId, stringValue in pairs(strings) do

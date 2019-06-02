@@ -9,6 +9,7 @@ local UI = LUIE.UI
 local E = LUIE.Effects
 local AlertT = LUIE.AlertTable
 
+local printToChat = LUIE.PrintToChat
 local strfmt = string.format
 local strformat = zo_strformat
 local callLater = zo_callLater
@@ -568,7 +569,13 @@ function CI.ProcessAlert(abilityId, unitName, sourceUnitId)
     -- Auto refire for auras to stop events when both reticleover and the unit exist
     if AlertT[abilityId].auradetect then
         refireDelay[abilityId] = true
-        callLater(function() refireDelay[abilityId] = nil end, 250) --buffer by X time
+        local refireTime
+        if AlertT[abilityId].refire then
+            refireTime = AlertT[abilityId].refire
+        else
+            refireTime = 250
+        end
+        callLater(function() refireDelay[abilityId] = nil end, refireTime) --buffer by X time
     end
 
     -- Get Ability Name & Icon
