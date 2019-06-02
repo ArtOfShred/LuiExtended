@@ -8982,6 +8982,10 @@ function CA.HookFunction()
         self.isLastRadialMenuGamepad = IsInGamepadPreferredMode()
     end
 
+    --[[
+    -- Since the Crown Store Gifting functionality was added hooking these functions seems to cause an insecure code issue when receiving gifts via the Player to Player notification system.
+    -- Not sure how else I can alter these notifications so for the time being support will have to be dropped.
+
     --local INTERACT_TYPE_TRADE_INVITE = 3
     local INTERACT_TYPE_GROUP_INVITE = 4
     local INTERACT_TYPE_QUEST_SHARE = 5
@@ -9034,13 +9038,6 @@ function CA.HookFunction()
             else
                 ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
             end
-
-            --[[
-            if data.incomingType == INTERACT_TYPE_TRADE_INVITE then
-                printToChat(strformat(message, typeString))
-                ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
-            end
-            ]]--
         end
     end
 
@@ -9118,6 +9115,8 @@ function CA.HookFunction()
             NotificationDeclined(incomingEntryToRespondTo)
         end
     end
+
+    ]]--
 
     -- Required when hooking ZO_MailSend_Gamepad:IsValid()
     -- Returns whether there is any item attached.
