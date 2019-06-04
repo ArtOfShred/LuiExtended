@@ -5089,14 +5089,18 @@ E.EffectOverride = {
     -- PLAYER WEAPON ATTACKS ---------------------------------------
     ----------------------------------------------------------------
 
+    -- Unarmed
     [23604] = { icon = 'LuiExtended/media/icons/abilities/ability_unarmed_attacklight.dds' }, -- Light Attack
     [18430] = { icon = 'LuiExtended/media/icons/abilities/ability_unarmed_attackmedium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
     [18431] = { icon = 'LuiExtended/media/icons/abilities/ability_unarmed_attackheavy.dds' }, -- Heavy Attack
     [60772] = { icon = 'LuiExtended/media/icons/abilities/ability_unarmed_attackrestore.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (Unarmed)
-    [16037] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Light Attack
-    [17162] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackmedium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
-    [17163] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds' }, -- Heavy Attack
-    [60757] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackrestore.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (2H)
+
+    -- 2H (Two Handed)
+    [16037] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight2h.dds' }, -- Light Attack
+    [17162] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackmedium2h.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
+    [17163] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy2h.dds' }, -- Heavy Attack
+    [60757] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackrestore2h.dds', name = A.Skill_Heavy_Attack }, -- Heavy Attack (2H)
+
     [15435] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Light Attack
     [15282] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackmedium.dds', name = A.Skill_Medium_Attack }, -- Heavy Attack
     [15829] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds' }, -- Heavy Attack

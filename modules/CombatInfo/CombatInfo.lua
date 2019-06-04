@@ -23,6 +23,8 @@ local windowManager = WINDOW_MANAGER
 
 local moduleName = LUIE.name .. "_CombatInfo"
 
+local ACTION_RESULT_AREA_EFFECT = 669966
+
 CI.Enabled  = false
 CI.D = {
     GlobalShowGCD                    = false,
@@ -157,6 +159,49 @@ CI.D = {
             soundSummon                 = "Duel Invite Received",
             soundDestroy                = "Duel Invite Received",
         },
+    },
+    cct = {
+        enabled                      = true,
+    	enabledOnlyInCyro            = false,
+    	unlocked                     = true,
+    	controlScale                 = 1.0,
+    	playAnimation                = true,
+    	playSound                    = true,
+    	useAbilityName               = true,
+    	showStaggered                = true,
+    	showImmune                   = true,
+    	showAoe                      = true,
+        showAoeT1                    = true,
+    	showAoeT2                    = true,
+    	showAoeT3                    = true,
+    	showAoeT4                    = true,
+    	showAoeT5                    = true,
+    	showAoeT6                    = true,
+        PlaySoundAoeT1               = true,
+        PlaySoundAoeT2               = true,
+        PlaySoundAoeT3               = true,
+        PlaySoundAoeT4               = true,
+        PlaySoundAoeT5               = true,
+        PlaySoundAoeT6               = true,
+    	showGCD                      = false,
+    	showImmuneOnlyInCyro         = true,
+    	immuneDisplayTime            = 750,
+    	showOptions                  = "all",
+    	offsetX                      = 0,
+    	offsetY                      = 0,
+    	colors                       = {
+    		[ACTION_RESULT_STUNNED]        = {0.894118, 0.133333, 0.090196, 1},
+    		[ACTION_RESULT_DISORIENTED]    = {0.0313725509,0.6274510026,1, 1},
+    		[ACTION_RESULT_FEARED]         = {0.5607843137, 0.0352941176, 0.9254901961, 1},
+    		[ACTION_RESULT_SILENCED]       = {0, 1, 1, 1},
+    		[ACTION_RESULT_STAGGERED]      = {1,0.9490196109,0.1294117719,1},
+    		[ACTION_RESULT_IMMUNE]         = {1,1,1,1},
+    		[ACTION_RESULT_DODGED]         = {1,1,1,1},
+    		[ACTION_RESULT_BLOCKED]        = {1,1,1,1},
+    		[ACTION_RESULT_BLOCKED_DAMAGE] = {1,1,1,1},
+    		[ACTION_RESULT_AREA_EFFECT]    = {1,0.69,0,1},
+            unbreakable                    = {0.88,0.88,1,1}, -- TODO: MOVE
+    	},
     },
 }
 CI.SV = nil
