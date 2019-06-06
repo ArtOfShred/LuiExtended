@@ -9,9 +9,6 @@ local CTV = LUIE.CombatTextCombatEllipseEventViewer
 local C = LUIE.CombatTextConstants
 local AbbreviateNumber = LUIE.AbbreviateNumber
 
-local strfmt = string.format
-local callLater = zo_callLater
-
 local poolTypes = C.poolType
 
 function CTV:New(...)
@@ -31,7 +28,7 @@ function CTV:OnEvent(combatType, powerType, value, abilityName, abilityId, damag
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) and (not LUIE.CombatText.SV.toggles.throttleCriticals) then
         self:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, 1)
     else
-        local eventKey = strfmt('%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s', combatType, powerType, abilityName, abilityId, damageType, sourceName, tostring(isDamage), tostring(isDamageCritical), tostring(isHealing), tostring(isHealingCritical), tostring(isEnergize), tostring(isDrain), tostring(isDot), tostring(isDotCritical), tostring(isHot), tostring(isHotCritical), tostring(isMiss), tostring(isImmune), tostring(isParried), tostring(isReflected), tostring(isDamageShield), tostring(isDodged), tostring(isBlocked), tostring(isInterrupted))
+        local eventKey = string.format('%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s', combatType, powerType, abilityName, abilityId, damageType, sourceName, tostring(isDamage), tostring(isDamageCritical), tostring(isHealing), tostring(isHealingCritical), tostring(isEnergize), tostring(isDrain), tostring(isDot), tostring(isDotCritical), tostring(isHot), tostring(isHotCritical), tostring(isMiss), tostring(isImmune), tostring(isParried), tostring(isReflected), tostring(isDamageShield), tostring(isDodged), tostring(isBlocked), tostring(isInterrupted))
         if (self.eventBuffer[eventKey] == nil) then
             self.eventBuffer[eventKey] = { value = value, hits = 1 }
             local throttleTime = 0
@@ -43,7 +40,7 @@ function CTV:OnEvent(combatType, powerType, value, abilityName, abilityId, damag
             elseif (isHealingCritical) then throttleTime = T.healingcritical
             elseif (isHot) then throttleTime = T.hot
             elseif (isHotCritical) then throttleTime = T.hotcritical end
-            callLater(function() self:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted) end, throttleTime)
+            zo_callLater(function() self:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted) end, throttleTime)
         else
             self.eventBuffer[eventKey].value = self.eventBuffer[eventKey].value + value
             self.eventBuffer[eventKey].hits = self.eventBuffer[eventKey].hits + 1
@@ -67,7 +64,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
 
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (hits > 1 and S.toggles.showThrottleTrailer) then
-        value = strfmt('%s (%d)', value, hits)
+        value = string.format('%s (%d)', value, hits)
     end
     if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then
         textColor = S.colors.incomingDamageOverride
@@ -177,7 +174,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     animationY:Play()
 
     -- Add items back into pool after use
-    callLater(function()
+    zo_callLater(function()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationXPoolType, animationXPoolKey)
         self.poolManager:ReleasePoolObject(animationYPoolType, animationYPoolKey)

@@ -5,7 +5,7 @@
 
 local CA = LUIE.ChatAnnouncements
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 local optionsDataChatAnnouncements = {}
 
@@ -28,8 +28,8 @@ function CA.CreateSettings()
 
     local panelDataChatAnnouncements = {
         type = "panel",
-        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CA)),
-        displayName = strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CA)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CA)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CA)),
         author = LUIE.author,
         version = LUIE.version,
         website = LUIE.website,
@@ -111,7 +111,7 @@ function CA.CreateSettings()
             {
                 -- Bypass LUIE to use other chat addons
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CHATBYPASS)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CHATBYPASS)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CHATBYPASS_TP),
                 getFunc = function() return CA.SV.ChatBypass end,
                 setFunc = function(value) CA.SV.ChatBypass = value end,
@@ -122,8 +122,8 @@ function CA.CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 1
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "1"),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "1"),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "1"),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "1"),
                 getFunc = function() return CA.SV.ChatTab[1] end,
                 setFunc = function(value) CA.SV.ChatTab[1] = value end,
                 width = "full",
@@ -133,8 +133,8 @@ function CA.CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 2
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "2"),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "2"),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "2"),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "2"),
                 getFunc = function() return CA.SV.ChatTab[2] end,
                 setFunc = function(value) CA.SV.ChatTab[2] = value end,
                 width = "full",
@@ -144,8 +144,8 @@ function CA.CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 3
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "3"),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "3"),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "3"),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "3"),
                 getFunc = function() return CA.SV.ChatTab[3] end,
                 setFunc = function(value) CA.SV.ChatTab[3] = value end,
                 width = "full",
@@ -155,8 +155,8 @@ function CA.CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 4
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "4"),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "4"),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "4"),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "4"),
                 getFunc = function() return CA.SV.ChatTab[4] end,
                 setFunc = function(value) CA.SV.ChatTab[4] = value end,
                 width = "full",
@@ -166,8 +166,8 @@ function CA.CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 5
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "5"),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "5"),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "5"),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "5"),
                 getFunc = function() return CA.SV.ChatTab[5] end,
                 setFunc = function(value) CA.SV.ChatTab[5] = value end,
                 width = "full",
@@ -177,7 +177,7 @@ function CA.CreateSettings()
             {
                 -- Display System & Notifications in all Tabs
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CHATTABSYSTEMALL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CHATTABSYSTEMALL)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CHATTABSYSTEMALL_TP),
                 getFunc = function() return CA.SV.ChatSystemAll end,
                 setFunc = function(value) CA.SV.ChatSystemAll = value end,
@@ -198,7 +198,7 @@ function CA.CreateSettings()
             {
                 -- Timestamp Format
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_TIMESTAMPFORMAT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_TIMESTAMPFORMAT)),
                 tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMPFORMAT_TP),
                 getFunc = function() return CA.SV.TimeStampFormat end,
                 setFunc = function(value) CA.SV.TimeStampFormat = value end,
@@ -209,7 +209,7 @@ function CA.CreateSettings()
             {
                 -- Timestamp Color
                 type    = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_TIMESTAMPCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_TIMESTAMPCOLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMPCOLOR_TP),
                 getFunc = function() return unpack(CA.SV.TimeStampColor) end,
                 setFunc = function(r, g, b, a) CA.SV.TimeStampColor = { r, g, b, a } LUIE.UpdateTimeStampColor() end,
@@ -250,7 +250,7 @@ function CA.CreateSettings()
             {
                 -- Show Gold Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDCOLOR)),
                 getFunc = function() return unpack(CA.SV.Currency.CurrencyGoldColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Currency.CurrencyGoldColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -260,7 +260,7 @@ function CA.CreateSettings()
             {
                 -- Show Gold Name
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDNAME)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDNAME)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDNAME_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyGoldName end,
                 setFunc = function(value) CA.SV.Currency.CurrencyGoldName = value end,
@@ -271,7 +271,7 @@ function CA.CreateSettings()
             {
                 -- Show Gold Total Amount
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyGoldShowTotal end,
                 setFunc = function(value) CA.SV.Currency.CurrencyGoldShowTotal = value end,
@@ -282,7 +282,7 @@ function CA.CreateSettings()
             {
                 -- Total Currency Message (Gold)
                 type = "editbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_MSG)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_MSG)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_MSG_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyMessageTotalGold end,
                 setFunc = function(value) CA.SV.Currency.CurrencyMessageTotalGold = value end,
@@ -293,7 +293,7 @@ function CA.CreateSettings()
             {
                 -- Show Gold Threshold
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTHRESHOLD)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTHRESHOLD)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTHRESHOLD_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyGoldFilter end,
                 setFunc = function(value) CA.SV.Currency.CurrencyGoldFilter = value end,
@@ -307,7 +307,7 @@ function CA.CreateSettings()
             {
                 -- Throttle Gold Looted
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTHROTTLE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTHROTTLE)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_GOLDTHROTTLE_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyGoldThrottle end,
                 setFunc = function(value) CA.SV.Currency.CurrencyGoldThrottle = value end,
@@ -318,8 +318,8 @@ function CA.CreateSettings()
             {
                 -- Hide Gold Spent on AH (Listing)
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHLIST)),
-                tooltip = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHLIST_TP)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHLIST)),
+                tooltip = zo_strformat("<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHLIST_TP)),
                 getFunc = function() return CA.SV.Currency.CurrencyGoldHideListingAH end,
                 setFunc = function(value) CA.SV.Currency.CurrencyGoldHideListingAH = value end,
                 width = "full",
@@ -329,8 +329,8 @@ function CA.CreateSettings()
             {
                 -- Hide Gold Spent on AH (Purchase)
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT)),
-                tooltip = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT)),
+                tooltip = zo_strformat("<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP)),
                 getFunc = function() return CA.SV.Currency.CurrencyGoldHideAH end,
                 setFunc = function(value) CA.SV.Currency.CurrencyGoldHideAH = value end,
                 width = "full",
@@ -351,7 +351,7 @@ function CA.CreateSettings()
             {
                 -- Show Alliance Points Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPCOLOR)),
                 getFunc = function() return unpack(CA.SV.Currency.CurrencyAPColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Currency.CurrencyAPColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -361,7 +361,7 @@ function CA.CreateSettings()
             {
                 -- Show Alliance Points Name
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyAPName end,
                 setFunc = function(value) CA.SV.Currency.CurrencyAPName = value end,
@@ -372,7 +372,7 @@ function CA.CreateSettings()
             {
                 -- Show Alliance Points Total
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyAPShowTotal end,
                 setFunc = function(value) CA.SV.Currency.CurrencyAPShowTotal = value end,
@@ -383,7 +383,7 @@ function CA.CreateSettings()
             {
                 -- Total Currency Message (Alliance Points)
                 type = "editbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_APTOTAL_MSG)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_APTOTAL_MSG)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_APTOTAL_MSG_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyMessageTotalAP end,
                 setFunc = function(value) CA.SV.Currency.CurrencyMessageTotalAP = value end,
@@ -394,7 +394,7 @@ function CA.CreateSettings()
             {
                 -- Show Alliance Points Threshold
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyAPFilter end,
                 setFunc = function(value) CA.SV.Currency.CurrencyAPFilter = value end,
@@ -408,7 +408,7 @@ function CA.CreateSettings()
             {
                 -- Throttle Alliance Points Earned
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyAPThrottle end,
                 setFunc = function(value) CA.SV.Currency.CurrencyAPThrottle = value end,
@@ -433,7 +433,7 @@ function CA.CreateSettings()
             {
                 -- Show Tel Var Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVCOLOR)),
                 getFunc = function() return unpack(CA.SV.Currency.CurrencyTVColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Currency.CurrencyTVColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -443,7 +443,7 @@ function CA.CreateSettings()
             {
                 -- Show Tel Var Name
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyTVName end,
                 setFunc = function(value) CA.SV.Currency.CurrencyTVName = value end,
@@ -454,7 +454,7 @@ function CA.CreateSettings()
             {
                 -- Show Tel Var Total
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyTVShowTotal end,
                 setFunc = function(value) CA.SV.Currency.CurrencyTVShowTotal = value end,
@@ -465,7 +465,7 @@ function CA.CreateSettings()
             {
                 -- Total Currency Message (Tel Var)
                 type = "editbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_TVTOTAL_MSG)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_TVTOTAL_MSG)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_TVTOTAL_MSG_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyMessageTotalTV end,
                 setFunc = function(value) CA.SV.Currency.CurrencyMessageTotalTV = value end,
@@ -476,7 +476,7 @@ function CA.CreateSettings()
             {
                 -- Show Tel Var Stones Threshold
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyTVFilter end,
                 setFunc = function(value) CA.SV.Currency.CurrencyTVFilter = value end,
@@ -490,7 +490,7 @@ function CA.CreateSettings()
             {
                 -- Throttle Tel Var Stones Looted
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyTVThrottle end,
                 setFunc = function(value) CA.SV.Currency.CurrencyTVThrottle = value end,
@@ -515,7 +515,7 @@ function CA.CreateSettings()
             {
                 -- Show Writ Vouchers Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR)),
                 getFunc = function() return unpack(CA.SV.Currency.CurrencyWVColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Currency.CurrencyWVColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -525,7 +525,7 @@ function CA.CreateSettings()
             {
                 -- Show Writ Vouchers Name
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyWVName end,
                 setFunc = function(value) CA.SV.Currency.CurrencyWVName = value end,
@@ -536,7 +536,7 @@ function CA.CreateSettings()
             {
                 -- Show Writ Vouchers Total
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyWVShowTotal end,
                 setFunc = function(value) CA.SV.Currency.CurrencyWVShowTotal = value end,
@@ -547,7 +547,7 @@ function CA.CreateSettings()
             {
                 -- Total Currency Message (Writ Vouchers)
                 type = "editbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyMessageTotalWV end,
                 setFunc = function(value) CA.SV.Currency.CurrencyMessageTotalWV = value end,
@@ -569,7 +569,7 @@ function CA.CreateSettings()
             {
                 -- Show Outfit Tokens Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSCOLOR)),
                 getFunc = function() return unpack(CA.SV.Currency.CurrencyOutfitTokenColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Currency.CurrencyOutfitTokenColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -579,7 +579,7 @@ function CA.CreateSettings()
             {
                 -- Show Outfit Tokens Name
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyOutfitTokenName end,
                 setFunc = function(value) CA.SV.Currency.CurrencyOutfitTokenName = value end,
@@ -590,7 +590,7 @@ function CA.CreateSettings()
             {
                 -- Show Outfit Tokens Total
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyOutfitTokenShowTotal end,
                 setFunc = function(value) CA.SV.Currency.CurrencyOutfitTokenShowTotal = value end,
@@ -601,7 +601,7 @@ function CA.CreateSettings()
             {
                 -- Total Currency Message (Outfit Tokens)
                 type = "editbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyMessageTotalOutfitToken end,
                 setFunc = function(value) CA.SV.Currency.CurrencyMessageTotalOutfitToken = value end,
@@ -623,7 +623,7 @@ function CA.CreateSettings()
             {
                 -- Show Transmute Crystals Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTECOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTECOLOR)),
                 getFunc = function() return unpack(CA.SV.Currency.CurrencyTransmuteColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Currency.CurrencyTransmuteColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -633,7 +633,7 @@ function CA.CreateSettings()
             {
                 -- Show Transmute Crystals Name
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyTransmuteName end,
                 setFunc = function(value) CA.SV.Currency.CurrencyTransmuteName = value end,
@@ -644,7 +644,7 @@ function CA.CreateSettings()
             {
                 -- Show Transmute Crystals Total
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyTransmuteShowTotal end,
                 setFunc = function(value) CA.SV.Currency.CurrencyTransmuteShowTotal = value end,
@@ -655,7 +655,7 @@ function CA.CreateSettings()
             {
                 -- Total Currency Message (Transmute Crystals)
                 type = "editbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyMessageTotalTransmute end,
                 setFunc = function(value) CA.SV.Currency.CurrencyMessageTotalTransmute = value end,
@@ -677,7 +677,7 @@ function CA.CreateSettings()
             {
                 -- Show Event Tickets Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTCOLOR)),
                 getFunc = function() return unpack(CA.SV.Currency.CurrencyEventColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Currency.CurrencyEventColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -687,7 +687,7 @@ function CA.CreateSettings()
             {
                 -- Show Event Tickets Name
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTNAME)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTNAME)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTNAME_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyEventName end,
                 setFunc = function(value) CA.SV.Currency.CurrencyEventName = value end,
@@ -698,7 +698,7 @@ function CA.CreateSettings()
             {
                 -- Show Event Tickets Total
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTTOTAL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTTOTAL)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWEVENTTOTAL_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyEventShowTotal end,
                 setFunc = function(value) CA.SV.Currency.CurrencyEventShowTotal = value end,
@@ -709,7 +709,7 @@ function CA.CreateSettings()
             {
                 -- Total Currency Message (Event Tickets)
                 type = "editbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_EVENTTOTAL_MSG)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_EVENTTOTAL_MSG)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_EVENTTOTAL_MSG_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyMessageTotalEvent end,
                 setFunc = function(value) CA.SV.Currency.CurrencyMessageTotalEvent = value end,
@@ -731,7 +731,7 @@ function CA.CreateSettings()
             {
                 -- Show Crowns Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSCOLOR)),
                 getFunc = function() return unpack(CA.SV.Currency.CurrencyCrownsColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Currency.CurrencyCrownsColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -741,7 +741,7 @@ function CA.CreateSettings()
             {
                 -- Show Crowns Name
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyCrownsName end,
                 setFunc = function(value) CA.SV.Currency.CurrencyCrownsName = value end,
@@ -752,7 +752,7 @@ function CA.CreateSettings()
             {
                 -- Show Crowns Total
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyCrownsShowTotal end,
                 setFunc = function(value) CA.SV.Currency.CurrencyCrownsShowTotal = value end,
@@ -763,7 +763,7 @@ function CA.CreateSettings()
             {
                 -- Total Currency Message (Crowns)
                 type = "editbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyMessageTotalCrowns end,
                 setFunc = function(value) CA.SV.Currency.CurrencyMessageTotalCrowns = value end,
@@ -785,7 +785,7 @@ function CA.CreateSettings()
             {
                 -- Show Crown Gems Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSCOLOR)),
                 getFunc = function() return unpack(CA.SV.Currency.CurrencyCrownGemsColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Currency.CurrencyCrownGemsColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -795,7 +795,7 @@ function CA.CreateSettings()
             {
                 -- Show Crown Gems Name
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyCrownGemsName end,
                 setFunc = function(value) CA.SV.Currency.CurrencyCrownGemsName = value end,
@@ -806,7 +806,7 @@ function CA.CreateSettings()
             {
                 -- Show Crown Gems Total
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyCrownGemsShowTotal end,
                 setFunc = function(value) CA.SV.Currency.CurrencyCrownGemsShowTotal = value end,
@@ -817,7 +817,7 @@ function CA.CreateSettings()
             {
                 -- Total Currency Message (Crown Gems)
                 type = "editbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG)),
                 tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG_TP),
                 getFunc = function() return CA.SV.Currency.CurrencyMessageTotalCrownGems end,
                 setFunc = function(value) CA.SV.Currency.CurrencyMessageTotalCrownGems = value end,
@@ -903,7 +903,7 @@ function CA.CreateSettings()
             {
                 -- Loot total string
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_TOTALSTRING)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_TOTALSTRING)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_TOTALSTRING_TP),
                 getFunc = function() return CA.SV.Inventory.LootTotalString end,
                 setFunc = function(value) CA.SV.Inventory.LootTotalString = value end,
@@ -925,7 +925,7 @@ function CA.CreateSettings()
             {
                 -- Show notable loot
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE_TP),
                 getFunc = function() return CA.SV.Inventory.LootOnlyNotable end,
                 setFunc = function(value) CA.SV.Inventory.LootOnlyNotable = value end,
@@ -936,7 +936,7 @@ function CA.CreateSettings()
             {
                 -- Show group loot
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWGRPLOOT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWGRPLOOT)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWGRPLOOT_TP),
                 getFunc = function() return CA.SV.Inventory.LootGroup end,
                 setFunc = function(value) CA.SV.Inventory.LootGroup = value end,
@@ -947,7 +947,7 @@ function CA.CreateSettings()
             {
                 -- Hide annoying items
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS_TP),
                 getFunc = function() return CA.SV.Inventory.LootBlacklist end,
                 setFunc = function(value) CA.SV.Inventory.LootBlacklist = value end,
@@ -959,7 +959,7 @@ function CA.CreateSettings()
             {
                 -- Hide Trash Quality Items
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_HIDETRASH)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_HIDETRASH)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_HIDETRASH_TP),
                 getFunc = function() return CA.SV.Inventory.LootNotTrash end,
                 setFunc = function(value) CA.SV.Inventory.LootNotTrash = value end,
@@ -970,7 +970,7 @@ function CA.CreateSettings()
             {
                 -- Show Confiscated Items
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTCONFISCATED)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTCONFISCATED)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTCONFISCATED_TP),
                 getFunc = function() return CA.SV.Inventory.LootConfiscate end,
                 setFunc = function(value) CA.SV.Inventory.LootConfiscate = value CA.RegisterLootEvents() end,
@@ -981,7 +981,7 @@ function CA.CreateSettings()
             {
                 -- Show Destroyed Items
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED_TP),
                 getFunc = function() return CA.SV.Inventory.LootShowDestroy end,
                 setFunc = function(value) CA.SV.Inventory.LootShowDestroy = value CA.RegisterLootEvents() end,
@@ -992,7 +992,7 @@ function CA.CreateSettings()
             {
                 -- Show Removed Items
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWREMOVED)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWREMOVED)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWREMOVED_TP),
                 getFunc = function() return CA.SV.Inventory.LootShowRemove end,
                 setFunc = function(value) CA.SV.Inventory.LootShowRemove = value CA.RegisterLootEvents() end,
@@ -1003,7 +1003,7 @@ function CA.CreateSettings()
             {
                 -- Show Lockpick Break
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK_TP),
                 getFunc = function() return CA.SV.Inventory.LootShowLockpick end,
                 setFunc = function(value) CA.SV.Inventory.LootShowLockpick = value CA.RegisterLootEvents() end,
@@ -1047,7 +1047,7 @@ function CA.CreateSettings()
             {
                 -- Merge Currency & Loot Message
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE_TP),
                 getFunc = function() return CA.SV.Inventory.LootVendorCurrency end,
                 setFunc = function(value) CA.SV.Inventory.LootVendorCurrency = value end,
@@ -1058,7 +1058,7 @@ function CA.CreateSettings()
             {
                 -- Loot Vendor Total Items
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS_TP),
                 getFunc = function() return CA.SV.Inventory.LootVendorTotalItems end,
                 setFunc = function(value) CA.SV.Inventory.LootVendorTotalItems = value end,
@@ -1069,7 +1069,7 @@ function CA.CreateSettings()
             {
                 -- Loot Vendor Total Currency
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY_TP),
                 getFunc = function() return CA.SV.Inventory.LootVendorTotalCurrency end,
                 setFunc = function(value) CA.SV.Inventory.LootVendorTotalCurrency = value end,
@@ -1102,7 +1102,7 @@ function CA.CreateSettings()
             {
                 -- Show Materials consumed when crafting
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS_TP),
                 getFunc = function() return CA.SV.Inventory.LootShowCraftUse end,
                 setFunc = function(value) CA.SV.Inventory.LootShowCraftUse = value end,
@@ -1175,7 +1175,7 @@ function CA.CreateSettings()
             {
                 -- Positive Change Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_COLORUP)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_COLORUP)),
                 getFunc = function() return unpack(CA.SV.Currency.CurrencyColorUp) end,
                 setFunc = function(r, g, b, a) CA.SV.Currency.CurrencyColorUp = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -1185,7 +1185,7 @@ function CA.CreateSettings()
             {
                 -- Negative Change Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_COLORDOWN)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_COLORDOWN)),
                 getFunc = function() return unpack(CA.SV.Currency.CurrencyColorDown) end,
                 setFunc = function(r, g, b, a) CA.SV.Currency.CurrencyColorDown = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -1885,8 +1885,8 @@ function CA.CreateSettings()
             {
                 -- Enlightenment (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.XP.ExperienceEnlightenedCA end,
                 setFunc = function(value) CA.SV.XP.ExperienceEnlightenedCA = value CA.RegisterXPEvents() end,
                 width = "full",
@@ -1896,8 +1896,8 @@ function CA.CreateSettings()
             {
                 -- Enlightenment (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.XP.ExperienceEnlightenedCSA end,
                 setFunc = function(value) CA.SV.XP.ExperienceEnlightenedCSA = value CA.RegisterXPEvents() end,
                 width = "full",
@@ -1907,8 +1907,8 @@ function CA.CreateSettings()
             {
                 -- Enlightenment (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.XP.ExperienceEnlightenedAlert end,
                 setFunc = function(value) CA.SV.XP.ExperienceEnlightenedAlert = value CA.RegisterXPEvents() end,
                 width = "full",
@@ -1923,8 +1923,8 @@ function CA.CreateSettings()
             {
                 -- Level Up (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.XP.ExperienceLevelUpCA end,
                 setFunc = function(value) CA.SV.XP.ExperienceLevelUpCA = value CA.RegisterXPEvents() end,
                 width = "full",
@@ -1934,8 +1934,8 @@ function CA.CreateSettings()
             {
                 -- Level Up (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.XP.ExperienceLevelUpCSA end,
                 setFunc = function(value) CA.SV.XP.ExperienceLevelUpCSA = value CA.RegisterXPEvents() end,
                 width = "full",
@@ -1945,7 +1945,7 @@ function CA.CreateSettings()
             {
                 -- Level Up CSA Expanded
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_CSAEXPAND)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_CSAEXPAND)),
                 tooltip = GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_CSAEXPAND_TP),
                 getFunc = function() return CA.SV.XP.ExperienceLevelUpCSAExpand end,
                 setFunc = function(value) CA.SV.XP.ExperienceLevelUpCSAExpand = value CA.RegisterXPEvents() end,
@@ -1956,8 +1956,8 @@ function CA.CreateSettings()
             {
                 -- Level Up (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_LEVELUP_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.XP.ExperienceLevelUpAlert end,
                 setFunc = function(value) CA.SV.XP.ExperienceLevelUpAlert = value CA.RegisterXPEvents() end,
                 width = "full",
@@ -1967,7 +1967,7 @@ function CA.CreateSettings()
             {
                 -- Show Level Icon on Level Up
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON)),
                 tooltip = GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON_TP),
                 getFunc = function() return CA.SV.XP.ExperienceLevelUpIcon end,
                 setFunc = function(value) CA.SV.XP.ExperienceLevelUpIcon = value end,
@@ -1978,7 +1978,7 @@ function CA.CreateSettings()
             {
                 -- Experience Level Up Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_LEVELUP_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_LEVELUP_COLOR)),
                 getFunc = function() return unpack(CA.SV.XP.ExperienceLevelUpColor) end,
                 setFunc = function(r, g, b, a) CA.SV.XP.ExperienceLevelUpColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -1988,7 +1988,7 @@ function CA.CreateSettings()
             {
                 -- Color Level by Context
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT)),
                 tooltip = GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT_TP),
                 getFunc = function() return CA.SV.XP.ExperienceLevelColorByLevel end,
                 setFunc = function(value) CA.SV.XP.ExperienceLevelColorByLevel = value CA.RegisterXPEvents() end,
@@ -2016,7 +2016,7 @@ function CA.CreateSettings()
             {
                 -- Show Experience Icon
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPICON)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPICON)),
                 tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPICON_TP),
                 getFunc = function() return CA.SV.XP.ExperienceIcon end,
                 setFunc = function(value) CA.SV.XP.ExperienceIcon = value end,
@@ -2027,7 +2027,7 @@ function CA.CreateSettings()
             {
                 -- Experience Message Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_COLORMESSAGE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_COLORMESSAGE)),
                 getFunc = function() return unpack(CA.SV.XP.ExperienceColorMessage) end,
                 setFunc = function(r, g, b, a) CA.SV.XP.ExperienceColorMessage = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2037,7 +2037,7 @@ function CA.CreateSettings()
             {
                 -- Experience Name Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_COLORNAME)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_COLORNAME)),
                 getFunc = function() return unpack(CA.SV.XP.ExperienceColorName) end,
                 setFunc = function(r, g, b, a) CA.SV.XP.ExperienceColorName = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2047,7 +2047,7 @@ function CA.CreateSettings()
             {
                 -- Context Name for Experience Gain
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_MESSAGE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_MESSAGE)),
                 tooltip = GetString(SI_LUIE_LAM_CA_EXP_MESSAGE_TP),
                 getFunc = function() return CA.SV.XP.ExperienceMessage end,
                 setFunc = function(value) CA.SV.XP.ExperienceMessage = value end,
@@ -2058,7 +2058,7 @@ function CA.CreateSettings()
             {
                 -- Name for Experience Gain
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_NAME)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_NAME)),
                 tooltip = GetString(SI_LUIE_LAM_CA_EXP_NAME_TP),
                 getFunc = function() return CA.SV.XP.ExperienceName end,
                 setFunc = function(value) CA.SV.XP.ExperienceName = value end,
@@ -2069,7 +2069,7 @@ function CA.CreateSettings()
             {
                 -- Hide Experience from Kills
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS)),
                 tooltip = GetString(SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS_TP),
                 getFunc = function() return CA.SV.XP.ExperienceHideCombat end,
                 setFunc = function(value) CA.SV.XP.ExperienceHideCombat = value CA.RegisterXPEvents() end,
@@ -2080,7 +2080,7 @@ function CA.CreateSettings()
             {
                 -- Combat Experience Gain Filter Threshold
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD)),
                 tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD_TP),
                 getFunc = function() return CA.SV.XP.ExperienceFilter end,
                 setFunc = function(value) CA.SV.XP.ExperienceFilter = value end,
@@ -2094,7 +2094,7 @@ function CA.CreateSettings()
             {
                 -- Throttle Experience gained in combat
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT)),
                 tooltip = GetString(SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TP),
                 getFunc = function() return CA.SV.XP.ExperienceThrottle end,
                 setFunc = function(value) CA.SV.XP.ExperienceThrottle = value end,
@@ -2114,8 +2114,8 @@ function CA.CreateSettings()
             {
                 -- Show Skill Points Updated CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Skills.SkillPointCA end,
                 setFunc = function(value) CA.SV.Skills.SkillPointCA = value CA.RegisterXPEvents() end,
                 width = "full",
@@ -2125,8 +2125,8 @@ function CA.CreateSettings()
             {
                 -- Show Skill Points Updated CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Skills.SkillPointCSA end,
                 setFunc = function(value) CA.SV.Skills.SkillPointCSA = value CA.RegisterXPEvents() end,
                 width = "full",
@@ -2136,8 +2136,8 @@ function CA.CreateSettings()
             {
                 -- Show Skill Points Updated Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Skills.SkillPointAlert end,
                 setFunc = function(value) CA.SV.Skills.SkillPointAlert = value CA.RegisterXPEvents() end,
                 width = "full",
@@ -2147,7 +2147,7 @@ function CA.CreateSettings()
             {
                 -- Skill Point Color 1
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_COLOR1)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_COLOR1)),
                 getFunc = function() return unpack(CA.SV.Skills.SkillPointColor1) end,
                 setFunc = function(r, g, b, a) CA.SV.Skills.SkillPointColor1 = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2157,7 +2157,7 @@ function CA.CreateSettings()
             {
                 -- Skill Point Color 2
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_COLOR2)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_COLOR2)),
                 getFunc = function() return unpack(CA.SV.Skills.SkillPointColor2) end,
                 setFunc = function(r, g, b, a) CA.SV.Skills.SkillPointColor2 = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2167,7 +2167,7 @@ function CA.CreateSettings()
             {
                 -- Skyshard Prefix
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX)),
                 tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX_TP),
                 getFunc = function() return CA.SV.Skills.SkillPointSkyshardMsg end,
                 setFunc = function(value) CA.SV.Skills.SkillPointSkyshardMsg = value CA.RegisterXPEvents() end,
@@ -2178,7 +2178,7 @@ function CA.CreateSettings()
             {
                 -- Skyshard Brackets
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_PARTIALBRACKET)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_PARTIALBRACKET)),
                 tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_PARTIALBRACKET_TP),
                 choices = bracketOptions5,
                 getFunc = function() return bracketOptions5[CA.SV.Skills.SkillPointBracket] end,
@@ -2190,7 +2190,7 @@ function CA.CreateSettings()
             {
                 -- Show Skill Points Updated Partial
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL)),
                 tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL_TP),
                 getFunc = function() return CA.SV.Skills.SkillPointsPartial end,
                 setFunc = function(value) CA.SV.Skills.SkillPointsPartial = value CA.RegisterXPEvents() end,
@@ -2207,8 +2207,8 @@ function CA.CreateSettings()
             {
                 -- Skill Line Unlocked CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Skills.SkillLineUnlockCA end,
                 setFunc = function(value) CA.SV.Skills.SkillLineUnlockCA = value end,
                 width = "full",
@@ -2218,8 +2218,8 @@ function CA.CreateSettings()
             {
                 -- Skill Line Unlocked CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Skills.SkillLineUnlockCSA end,
                 setFunc = function(value) CA.SV.Skills.SkillLineUnlockCSA = value end,
                 width = "full",
@@ -2229,8 +2229,8 @@ function CA.CreateSettings()
             {
                 -- Skill Line Unlocked Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_UNLOCKED_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Skills.SkillLineUnlockAlert end,
                 setFunc = function(value) CA.SV.Skills.SkillLineUnlockAlert = value end,
                 width = "full",
@@ -2240,7 +2240,7 @@ function CA.CreateSettings()
             {
                 -- Skill Line Icon
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILL_LINE_ICON)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILL_LINE_ICON)),
                 tooltip = GetString(SI_LUIE_LAM_CA_SKILL_LINE_ICON_TP),
                 getFunc = function() return CA.SV.Skills.SkillLineIcon end,
                 setFunc = function(value) CA.SV.Skills.SkillLineIcon = value end,
@@ -2255,8 +2255,8 @@ function CA.CreateSettings()
             {
                 -- Skill Line Progression CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Skills.SkillLineCA end,
                 setFunc = function(value) CA.SV.Skills.SkillLineCA = value end,
                 width = "full",
@@ -2266,8 +2266,8 @@ function CA.CreateSettings()
             {
                 -- Skill Line Progression CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Skills.SkillLineCSA end,
                 setFunc = function(value) CA.SV.Skills.SkillLineCSA = value end,
                 width = "full",
@@ -2277,8 +2277,8 @@ function CA.CreateSettings()
             {
                 -- Skill Line Progression Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_PROGRESS_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Skills.SkillLineAlert end,
                 setFunc = function(value) CA.SV.Skills.SkillLineAlert = value end,
                 width = "full",
@@ -2288,8 +2288,8 @@ function CA.CreateSettings()
             {
                 -- Skill Ability Progression CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Skills.SkillAbilityCA end,
                 setFunc = function(value) CA.SV.Skills.SkillAbilityCA = value end,
                 width = "full",
@@ -2299,8 +2299,8 @@ function CA.CreateSettings()
             {
                 -- Skill Ability Progression CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Skills.SkillAbilityCSA end,
                 setFunc = function(value) CA.SV.Skills.SkillAbilityCSA = value end,
                 width = "full",
@@ -2310,8 +2310,8 @@ function CA.CreateSettings()
             {
                 -- Skill Ability Progression Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SKILL_LINE_ABILITY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Skills.SkillAbilityAlert end,
                 setFunc = function(value) CA.SV.Skills.SkillAbilityAlert = value end,
                 width = "full",
@@ -2321,7 +2321,7 @@ function CA.CreateSettings()
             {
                 -- Skill Line Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILL_LINE_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILL_LINE_COLOR)),
                 getFunc = function() return unpack(CA.SV.Skills.SkillLineColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Skills.SkillLineColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2401,7 +2401,7 @@ function CA.CreateSettings()
             {
                 -- Guild Skill Point Color FG
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_FG_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_FG_COLOR)),
                 getFunc = function() return unpack(CA.SV.Skills.SkillGuildColorFG) end,
                 setFunc = function(r, g, b, a) CA.SV.Skills.SkillGuildColorFG = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2411,7 +2411,7 @@ function CA.CreateSettings()
             {
                 -- Fighter's Guild Threshold
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_THRESHOLD)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_THRESHOLD)),
                 tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_THRESHOLD_TP),
                 getFunc = function() return CA.SV.Skills.SkillGuildThreshold end,
                 setFunc = function(value) CA.SV.Skills.SkillGuildThreshold = value end,
@@ -2425,7 +2425,7 @@ function CA.CreateSettings()
             {
                 -- Fighter's Guild Throttle
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_THROTTLE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_THROTTLE)),
                 tooltip = GetString(SI_LUIE_LAM_CA_GUILDREP_THROTTLE_TP),
                 getFunc = function() return CA.SV.Skills.SkillGuildThrottle end,
                 setFunc = function(value) CA.SV.Skills.SkillGuildThrottle = value end,
@@ -2450,7 +2450,7 @@ function CA.CreateSettings()
             {
                 -- Guild Skill Point Color MG
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_MG_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_MG_COLOR)),
                 getFunc = function() return unpack(CA.SV.Skills.SkillGuildColorMG) end,
                 setFunc = function(r, g, b, a) CA.SV.Skills.SkillGuildColorMG = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2471,7 +2471,7 @@ function CA.CreateSettings()
             {
                 -- Guild Skill Point Color UD
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_UD_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_UD_COLOR)),
                 getFunc = function() return unpack(CA.SV.Skills.SkillGuildColorUD) end,
                 setFunc = function(r, g, b, a) CA.SV.Skills.SkillGuildColorUD = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2492,7 +2492,7 @@ function CA.CreateSettings()
             {
                 -- Guild Skill Point Color TG
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_TG_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_TG_COLOR)),
                 getFunc = function() return unpack(CA.SV.Skills.SkillGuildColorTG) end,
                 setFunc = function(r, g, b, a) CA.SV.Skills.SkillGuildColorTG = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2513,7 +2513,7 @@ function CA.CreateSettings()
             {
                 -- Guild Skill Point Color DB
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_DB_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_DB_COLOR)),
                 getFunc = function() return unpack(CA.SV.Skills.SkillGuildColorDB) end,
                 setFunc = function(r, g, b, a) CA.SV.Skills.SkillGuildColorDB = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2534,7 +2534,7 @@ function CA.CreateSettings()
             {
                 -- Guild Skill Point Color PO
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_PO_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_GUILDREP_PO_COLOR)),
                 getFunc = function() return unpack(CA.SV.Skills.SkillGuildColorPO) end,
                 setFunc = function(r, g, b, a) CA.SV.Skills.SkillGuildColorPO = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2569,8 +2569,8 @@ function CA.CreateSettings()
             {
                 -- Show Collectibles Unlocked CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Collectibles.CollectibleCA end,
                 setFunc = function(value) CA.SV.Collectibles.CollectibleCA = value end,
                 width = "full",
@@ -2580,8 +2580,8 @@ function CA.CreateSettings()
             {
                 -- Show Collectibles Unlocked CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Collectibles.CollectibleCSA end,
                 setFunc = function(value) CA.SV.Collectibles.CollectibleCSA = value end,
                 width = "full",
@@ -2591,8 +2591,8 @@ function CA.CreateSettings()
             {
                 -- Show Collectibles Unlocked Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Collectibles.CollectibleAlert end,
                 setFunc = function(value) CA.SV.Collectibles.CollectibleAlert = value end,
                 width = "full",
@@ -2602,7 +2602,7 @@ function CA.CreateSettings()
             {
                 -- Collectible Icon
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ICON)),
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ICON)),
                 tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ICON_TP),
                 getFunc = function() return CA.SV.Collectibles.CollectibleIcon end,
                 setFunc = function(value) CA.SV.Collectibles.CollectibleIcon = value end,
@@ -2625,7 +2625,7 @@ function CA.CreateSettings()
             {
                 -- Collectible Color 1
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE)),
                 getFunc = function() return unpack(CA.SV.Collectibles.CollectibleColor1) end,
                 setFunc = function(r, g, b, a) CA.SV.Collectibles.CollectibleColor1 = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2635,7 +2635,7 @@ function CA.CreateSettings()
             {
                 -- Collectible Color 2
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_TWO)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_TWO)),
                 getFunc = function() return unpack(CA.SV.Collectibles.CollectibleColor2) end,
                 setFunc = function(r, g, b, a) CA.SV.Collectibles.CollectibleColor2 = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2645,7 +2645,7 @@ function CA.CreateSettings()
             {
                 -- Collectible Message Prefix
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX)),
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX)),
                 tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX_TP),
                 getFunc = function() return CA.SV.Collectibles.CollectiblePrefix end,
                 setFunc = function(value) CA.SV.Collectibles.CollectiblePrefix = value end,
@@ -2656,7 +2656,7 @@ function CA.CreateSettings()
             {
                 -- Collectible Bracket Options
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET)),
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET)),
                 tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET_TP),
                 choices = bracketOptions5,
                 getFunc = function() return bracketOptions5[CA.SV.Collectibles.CollectibleBracket] end,
@@ -2668,7 +2668,7 @@ function CA.CreateSettings()
             {
                 -- Collectible Category
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY)),
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY)),
                 tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY_TP),
                 getFunc = function() return CA.SV.Collectibles.CollectibleCategory end,
                 setFunc = function(value) CA.SV.Collectibles.CollectibleCategory = value end,
@@ -2696,8 +2696,8 @@ function CA.CreateSettings()
             {
                 -- Show Lorebooks (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Lorebooks.LorebookCA end,
                 setFunc = function(value) CA.SV.Lorebooks.LorebookCA = value end,
                 width = "full",
@@ -2707,8 +2707,8 @@ function CA.CreateSettings()
             {
                 -- Show Lorebooks (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Lorebooks.LorebookCSA end,
                 setFunc = function(value) CA.SV.Lorebooks.LorebookCSA = value end,
                 width = "full",
@@ -2718,8 +2718,8 @@ function CA.CreateSettings()
             {
                 -- Show Lorebooks (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Lorebooks.LorebookAlert end,
                 setFunc = function(value) CA.SV.Lorebooks.LorebookAlert = value end,
                 width = "full",
@@ -2729,8 +2729,8 @@ function CA.CreateSettings()
             {
                 -- Show Lorebook Collection Complete (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Lorebooks.LorebookCollectionCA end,
                 setFunc = function(value) CA.SV.Lorebooks.LorebookCollectionCA = value end,
                 width = "full",
@@ -2740,8 +2740,8 @@ function CA.CreateSettings()
             {
                 -- Show Lorebook Collection Complete (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Lorebooks.LorebookCollectionCSA end,
                 setFunc = function(value) CA.SV.Lorebooks.LorebookCollectionCSA = value end,
                 width = "full",
@@ -2751,8 +2751,8 @@ function CA.CreateSettings()
             {
                 -- Show Lorebook Collection Complete (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Lorebooks.LorebookCollectionAlert end,
                 setFunc = function(value) CA.SV.Lorebooks.LorebookCollectionAlert = value end,
                 width = "full",
@@ -2762,7 +2762,7 @@ function CA.CreateSettings()
             {
                 -- Lorebooks Icon
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_ICON)),
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_ICON)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_ICON_TP),
                 getFunc = function() return CA.SV.Lorebooks.LorebookIcon end,
                 setFunc = function(value) CA.SV.Lorebooks.LorebookIcon = value end,
@@ -2780,7 +2780,7 @@ function CA.CreateSettings()
             {
                 -- Lorebooks Color 1
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_COLOR1)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_COLOR1)),
                 getFunc = function() return unpack(CA.SV.Lorebooks.LorebookColor1) end,
                 setFunc = function(r, g, b, a) CA.SV.Lorebooks.LorebookColor1 = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2797,7 +2797,7 @@ function CA.CreateSettings()
             {
                 -- Lorebooks Color 2
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_COLOR2)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_COLOR2)),
                 getFunc = function() return unpack(CA.SV.Lorebooks.LorebookColor2) end,
                 setFunc = function(r, g, b, a) CA.SV.Lorebooks.LorebookColor2 = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -2814,7 +2814,7 @@ function CA.CreateSettings()
             {
                 -- Lorebooks Prefix 1
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX1)),
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX1)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX1_TP),
                 getFunc = function() return CA.SV.Lorebooks.LorebookPrefix1 end,
                 setFunc = function(value) CA.SV.Lorebooks.LorebookPrefix1 = value end,
@@ -2832,7 +2832,7 @@ function CA.CreateSettings()
             {
                 -- Lorebooks Prefix 2
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX2)),
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX2)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX2_TP),
                 getFunc = function() return CA.SV.Lorebooks.LorebookPrefix2 end,
                 setFunc = function(value) CA.SV.Lorebooks.LorebookPrefix2 = value end,
@@ -2850,7 +2850,7 @@ function CA.CreateSettings()
             {
                 -- Lorebooks Collection Prefix
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION)),
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION_TP),
                 getFunc = function() return CA.SV.Lorebooks.LorebookCollectionPrefix end,
                 setFunc = function(value) CA.SV.Lorebooks.LorebookCollectionPrefix = value end,
@@ -2868,7 +2868,7 @@ function CA.CreateSettings()
             {
                 -- Lorebooks Bracket Options
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET)),
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET)),
                 choices = bracketOptions5,
                 tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP),
                 getFunc = function() return bracketOptions5[CA.SV.Lorebooks.LorebookBracket] end,
@@ -2887,7 +2887,7 @@ function CA.CreateSettings()
             {
                 -- Lorebooks Category
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY)),
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_TP),
                 getFunc = function() return CA.SV.Lorebooks.LorebookCategory end,
                 setFunc = function(value) CA.SV.Lorebooks.LorebookCategory = value end,
@@ -2905,7 +2905,7 @@ function CA.CreateSettings()
             {
                 -- Show hidden books
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE)),
                 tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP),
                 getFunc = function() return CA.SV.Lorebooks.LorebookShowHidden end,
                 setFunc = function(value) CA.SV.Lorebooks.LorebookShowHidden = value end,
@@ -2931,8 +2931,8 @@ function CA.CreateSettings()
             {
                 -- Show Achievement Update CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Achievement.AchievementUpdateCA end,
                 setFunc = function(value) CA.SV.Achievement.AchievementUpdateCA = value CA.RegisterAchievementsEvent() end,
                 width = "full",
@@ -2942,8 +2942,8 @@ function CA.CreateSettings()
             {
                 -- Show Achievement Update Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Achievement.AchievementUpdateAlert end,
                 setFunc = function(value) CA.SV.Achievement.AchievementUpdateAlert = value CA.RegisterAchievementsEvent() end,
                 width = "full",
@@ -2953,7 +2953,7 @@ function CA.CreateSettings()
             {
                 -- Show Detailed Achievement Info
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO)),
                 tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO_TP),
                 getFunc = function() return CA.SV.Achievement.AchievementDetails end,
                 setFunc = function(value) CA.SV.Achievement.AchievementDetails = value end,
@@ -2964,7 +2964,7 @@ function CA.CreateSettings()
             {
                 -- Achievements Step Size
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE)),
                 tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE_TP),
                 min = 0, max = 50, step = 1,
                 getFunc = function() return CA.SV.Achievement.AchievementStep end,
@@ -2976,8 +2976,8 @@ function CA.CreateSettings()
             {
                 -- Enable Achievement Complete CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Achievement.AchievementCompleteCA end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCompleteCA = value CA.RegisterAchievementsEvent() end,
                 width = "full",
@@ -2987,8 +2987,8 @@ function CA.CreateSettings()
             {
                 -- Enable Achievement Complete CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Achievement.AchievementCompleteCSA end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCompleteCSA = value CA.RegisterAchievementsEvent() end,
                 width = "full",
@@ -2998,8 +2998,8 @@ function CA.CreateSettings()
             {
                 -- Enable Achievement Complete Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Achievement.AchievementCompleteAlert end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCompleteAlert = value CA.RegisterAchievementsEvent() end,
                 width = "full",
@@ -3009,7 +3009,7 @@ function CA.CreateSettings()
             {
                 -- Show 100% Completion on complete event
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT)),
                 tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT_TP),
                 getFunc = function() return CA.SV.Achievement.AchievementCompPercentage end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCompPercentage = value end,
@@ -3147,8 +3147,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(1)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(1)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(1)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(1)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory1 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory1 = value end,
                 width = "full",
@@ -3158,8 +3158,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(2)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(2)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(2)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(2)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory2 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory2 = value end,
                 width = "full",
@@ -3169,8 +3169,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(3)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(3)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(3)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(3)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory3 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory3 = value end,
                 width = "full",
@@ -3180,8 +3180,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(4)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(4)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(4)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(4)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory4 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory4 = value end,
                 width = "full",
@@ -3191,8 +3191,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(5)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(5)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(5)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(5)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory5 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory5 = value end,
                 width = "full",
@@ -3202,8 +3202,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(6)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(6)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(6)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(6)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory6 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory6 = value end,
                 width = "full",
@@ -3213,8 +3213,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(7)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(7)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(7)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(7)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory7 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory7 = value end,
                 width = "full",
@@ -3224,8 +3224,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(8)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(8)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(8)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(8)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory8 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory8 = value end,
                 width = "full",
@@ -3235,8 +3235,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(9)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(9)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(9)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(9)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory9 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory9 = value end,
                 width = "full",
@@ -3246,8 +3246,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(10)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(10)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(10)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(10)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory10 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory10 = value end,
                 width = "full",
@@ -3257,8 +3257,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(11)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(11)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(11)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(11)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory11 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory11 = value end,
                 width = "full",
@@ -3268,8 +3268,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(12)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(12)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(12)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(12)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory12 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory12 = value end,
                 width = "full",
@@ -3279,8 +3279,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(13)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(13)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(13)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(13)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory13 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory13 = value end,
                 width = "full",
@@ -3290,8 +3290,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(14)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(14)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(14)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(14)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory14 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory14 = value end,
                 width = "full",
@@ -3301,8 +3301,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(15)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(15)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(15)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(15)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory15 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory15 = value end,
                 width = "full",
@@ -3312,8 +3312,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(16)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(16)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(16)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(16)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory16 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory16 = value end,
                 width = "full",
@@ -3323,8 +3323,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(17)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(17)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(17)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(17)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory17 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory17 = value end,
                 width = "full",
@@ -3334,8 +3334,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(18)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(18)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(18)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(18)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory18 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory18 = value end,
                 width = "full",
@@ -3345,8 +3345,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(19)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(19)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(19)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(19)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory19 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory19 = value end,
                 width = "full",
@@ -3356,8 +3356,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(20)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(20)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(20)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(20)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory20 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory20 = value end,
                 width = "full",
@@ -3367,8 +3367,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(21)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(21)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(21)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(21)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory21 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory21 = value end,
                 width = "full",
@@ -3378,8 +3378,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(22)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(22)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(22)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(22)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory22 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory22 = value end,
                 width = "full",
@@ -3389,8 +3389,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(23)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(23)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(23)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(23)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory23 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory23 = value end,
                 width = "full",
@@ -3400,8 +3400,8 @@ function CA.CreateSettings()
             {
                 -- Enables achievements tracking in %s category
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(24)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(24)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(24)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(24)),
                 getFunc = function() return CA.SV.Achievement.AchievementCategory24 end,
                 setFunc = function(value) CA.SV.Achievement.AchievementCategory24 = value end,
                 width = "full",
@@ -3419,8 +3419,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Share CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Quests.QuestShareCA end,
                 setFunc = function(value) CA.SV.Quests.QuestShareCA = value end,
                 width = "full",
@@ -3430,8 +3430,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Share Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Quests.QuestShareAlert end,
                 setFunc = function(value) CA.SV.Quests.QuestShareAlert = value end,
                 width = "full",
@@ -3441,8 +3441,8 @@ function CA.CreateSettings()
             {
                 -- Show Location Discovery (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Quests.QuestLocDiscoveryCA end,
                 setFunc = function(value) CA.SV.Quests.QuestLocDiscoveryCA = value end,
                 width = "full",
@@ -3452,8 +3452,8 @@ function CA.CreateSettings()
             {
                 -- Show Location Discovery (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Quests.QuestLocDiscoveryCSA end,
                 setFunc = function(value) CA.SV.Quests.QuestLocDiscoveryCSA = value end,
                 width = "full",
@@ -3463,8 +3463,8 @@ function CA.CreateSettings()
             {
                 -- Show Location Discovery (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Quests.QuestLocDiscoveryAlert end,
                 setFunc = function(value) CA.SV.Quests.QuestLocDiscoveryAlert = value end,
                 width = "full",
@@ -3474,8 +3474,8 @@ function CA.CreateSettings()
             {
                 -- Show Location Objective (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Quests.QuestLocObjectiveCA end,
                 setFunc = function(value) CA.SV.Quests.QuestLocObjectiveCA = value end,
                 width = "full",
@@ -3485,8 +3485,8 @@ function CA.CreateSettings()
             {
                 -- Show Location Objective (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Quests.QuestLocObjectiveCSA end,
                 setFunc = function(value) CA.SV.Quests.QuestLocObjectiveCSA = value end,
                 width = "full",
@@ -3496,8 +3496,8 @@ function CA.CreateSettings()
             {
                 -- Show Location Objective (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Quests.QuestLocObjectiveAlert end,
                 setFunc = function(value) CA.SV.Quests.QuestLocObjectiveAlert = value end,
                 width = "full",
@@ -3507,8 +3507,8 @@ function CA.CreateSettings()
             {
                 -- Show Location Complete (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Quests.QuestLocCompleteCA end,
                 setFunc = function(value) CA.SV.Quests.QuestLocCompleteCA = value end,
                 width = "full",
@@ -3518,8 +3518,8 @@ function CA.CreateSettings()
             {
                 -- Show Location Complete (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Quests.QuestLocCompleteCSA end,
                 setFunc = function(value) CA.SV.Quests.QuestLocCompleteCSA = value end,
                 width = "full",
@@ -3529,8 +3529,8 @@ function CA.CreateSettings()
             {
                 -- Show Location Complete (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Quests.QuestLocCompleteAlert end,
                 setFunc = function(value) CA.SV.Quests.QuestLocCompleteAlert = value end,
                 width = "full",
@@ -3540,8 +3540,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Accept (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Quests.QuestAcceptCA end,
                 setFunc = function(value) CA.SV.Quests.QuestAcceptCA = value end,
                 width = "full",
@@ -3551,8 +3551,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Accept (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Quests.QuestAcceptCSA end,
                 setFunc = function(value) CA.SV.Quests.QuestAcceptCSA = value end,
                 width = "full",
@@ -3562,8 +3562,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Accept (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Quests.QuestAcceptAlert end,
                 setFunc = function(value) CA.SV.Quests.QuestAcceptAlert = value end,
                 width = "full",
@@ -3573,8 +3573,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Complete (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Quests.QuestCompleteCA end,
                 setFunc = function(value) CA.SV.Quests.QuestCompleteCA = value end,
                 width = "full",
@@ -3584,8 +3584,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Complete (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Quests.QuestCompleteCSA end,
                 setFunc = function(value) CA.SV.Quests.QuestCompleteCSA = value end,
                 width = "full",
@@ -3595,8 +3595,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Complete (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Quests.QuestCompleteAlert end,
                 setFunc = function(value) CA.SV.Quests.QuestCompleteAlert = value end,
                 width = "full",
@@ -3606,8 +3606,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Abandon (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Quests.QuestAbandonCA end,
                 setFunc = function(value) CA.SV.Quests.QuestAbandonCA = value end,
                 width = "full",
@@ -3617,8 +3617,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Abandon (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Quests.QuestAbandonCSA end,
                 setFunc = function(value) CA.SV.Quests.QuestAbandonCSA = value end,
                 width = "full",
@@ -3628,8 +3628,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Abandon (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Quests.QuestAbandonAlert end,
                 setFunc = function(value) CA.SV.Quests.QuestAbandonAlert = value end,
                 width = "full",
@@ -3639,8 +3639,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Failure (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Quests.QuestFailCA end,
                 setFunc = function(value) CA.SV.Quests.QuestFailCA = value end,
                 width = "full",
@@ -3650,8 +3650,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Failure (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Quests.QuestFailCSA end,
                 setFunc = function(value) CA.SV.Quests.QuestFailCSA = value end,
                 width = "full",
@@ -3661,8 +3661,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Failure (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Quests.QuestFailAlert end,
                 setFunc = function(value) CA.SV.Quests.QuestFailAlert = value end,
                 width = "full",
@@ -3672,8 +3672,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Objective Updates (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Quests.QuestObjUpdateCA end,
                 setFunc = function(value) CA.SV.Quests.QuestObjUpdateCA = value end,
                 width = "full",
@@ -3683,8 +3683,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Objective Updates (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Quests.QuestObjUpdateCSA end,
                 setFunc = function(value) CA.SV.Quests.QuestObjUpdateCSA = value end,
                 width = "full",
@@ -3694,8 +3694,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Objective Updates (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Quests.QuestObjUpdateAlert end,
                 setFunc = function(value) CA.SV.Quests.QuestObjUpdateAlert = value end,
                 width = "full",
@@ -3705,8 +3705,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Objective Complete (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Quests.QuestObjCompleteCA end,
                 setFunc = function(value) CA.SV.Quests.QuestObjCompleteCA = value end,
                 width = "full",
@@ -3716,8 +3716,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Objective Complete (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Quests.QuestObjCompleteCSA end,
                 setFunc = function(value) CA.SV.Quests.QuestObjCompleteCSA = value end,
                 width = "full",
@@ -3727,8 +3727,8 @@ function CA.CreateSettings()
             {
                 -- Show Quest Objective Complete (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Quests.QuestObjCompleteAlert end,
                 setFunc = function(value) CA.SV.Quests.QuestObjCompleteAlert = value end,
                 width = "full",
@@ -3738,7 +3738,7 @@ function CA.CreateSettings()
             {
                 -- Show Quest Icon
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON)),
                 tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON_TP),
                 getFunc = function() return CA.SV.Quests.QuestIcon end,
                 setFunc = function(value) CA.SV.Quests.QuestIcon = value end,
@@ -3749,7 +3749,7 @@ function CA.CreateSettings()
             {
                 -- Location Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR1)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR1)),
                 getFunc = function() return unpack(CA.SV.Quests.QuestColorLocName) end,
                 setFunc = function(r,g,b,a) CA.SV.Quests.QuestColorLocName={r,g,b} CA.RegisterColorEvents() end,
                 width = "full",
@@ -3759,7 +3759,7 @@ function CA.CreateSettings()
             {
                 -- Location Description Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR2)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR2)),
                 getFunc = function() return unpack(CA.SV.Quests.QuestColorLocDescription) end,
                 setFunc = function(r,g,b,a) CA.SV.Quests.QuestColorLocDescription={r,g,b} CA.RegisterColorEvents() end,
                 width = "full",
@@ -3769,7 +3769,7 @@ function CA.CreateSettings()
             {
                 -- Quest Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR3)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR3)),
                 getFunc = function() return unpack(CA.SV.Quests.QuestColorName) end,
                 setFunc = function(r,g,b,a) CA.SV.Quests.QuestColorName={r,g,b} CA.RegisterColorEvents() end,
                 width = "full",
@@ -3779,7 +3779,7 @@ function CA.CreateSettings()
             {
                 -- Quest Description Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR4)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR4)),
                 getFunc = function() return unpack(CA.SV.Quests.QuestColorDescription) end,
                 setFunc = function(r,g,b,a) CA.SV.Quests.QuestColorDescription={r,g,b} CA.RegisterColorEvents() end,
                 width = "full",
@@ -3789,7 +3789,7 @@ function CA.CreateSettings()
             {
                 -- Show Quest Long String
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG)),
                 tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG_TP),
                 getFunc = function() return CA.SV.Quests.QuestLong end,
                 setFunc = function(value) CA.SV.Quests.QuestLong = value end,
@@ -3800,7 +3800,7 @@ function CA.CreateSettings()
             {
                 -- Show POI Completed Long String
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG)),
                 tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP),
                 getFunc = function() return CA.SV.Quests.QuestLocLong end,
                 setFunc = function(value) CA.SV.Quests.QuestLocLong = value end,
@@ -3824,8 +3824,8 @@ function CA.CreateSettings()
             {
                 -- Show Friend/Ignore Events CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Social.FriendIgnoreCA end,
                 setFunc = function(value) CA.SV.Social.FriendIgnoreCA = value end,
                 width = "full",
@@ -3835,8 +3835,8 @@ function CA.CreateSettings()
             {
                 -- Show Friend/Ignore Events Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Social.FriendIgnoreAlert end,
                 setFunc = function(value) CA.SV.Social.FriendIgnoreAlert = value end,
                 width = "full",
@@ -3846,8 +3846,8 @@ function CA.CreateSettings()
             {
                 -- Friend Online/Offline CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Social.FriendStatusCA end,
                 setFunc = function(value) CA.SV.Social.FriendStatusCA = value end,
                 width = "full",
@@ -3857,8 +3857,8 @@ function CA.CreateSettings()
             {
                 -- Friend Online/Offline Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Social.FriendStatusAlert end,
                 setFunc = function(value) CA.SV.Social.FriendStatusAlert = value end,
                 width = "full",
@@ -3873,8 +3873,8 @@ function CA.CreateSettings()
             {
                 -- Show Guild Events CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Social.GuildCA end,
                 setFunc = function(value) CA.SV.Social.GuildCA = value end,
                 width = "full",
@@ -3884,8 +3884,8 @@ function CA.CreateSettings()
             {
                 -- Show Guild Events Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Social.GuildAlert end,
                 setFunc = function(value) CA.SV.Social.GuildAlert = value end,
                 width = "full",
@@ -3895,8 +3895,8 @@ function CA.CreateSettings()
             {
                 -- Show Guild Rank Events CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Social.GuildRankCA end,
                 setFunc = function(value) CA.SV.Social.GuildRankCA = value end,
                 width = "full",
@@ -3906,8 +3906,8 @@ function CA.CreateSettings()
             {
                 -- Show Guild Rank Events Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Social.GuildRankAlert end,
                 setFunc = function(value) CA.SV.Social.GuildRankAlert = value end,
                 width = "full",
@@ -3917,7 +3917,7 @@ function CA.CreateSettings()
             {
                 -- Show Guild Rank Events Display Options
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS)),
                 tooltip = GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS_TP),
                 choices = guildRankDisplayOptions,
                 getFunc = function() return guildRankDisplayOptions[CA.SV.Social.GuildRankDisplayOptions] end,
@@ -3929,8 +3929,8 @@ function CA.CreateSettings()
             {
                 -- Show Guild Management CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Social.GuildManageCA end,
                 setFunc = function(value) CA.SV.Social.GuildManageCA = value end,
                 width = "full",
@@ -3940,8 +3940,8 @@ function CA.CreateSettings()
             {
                 -- Show Guild Management Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Social.GuildManageAlert end,
                 setFunc = function(value) CA.SV.Social.GuildManageAlert = value end,
                 width = "full",
@@ -3951,7 +3951,7 @@ function CA.CreateSettings()
             {
                 -- Show Guild Icons
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS)),
                 tooltip = GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS_TP),
                 getFunc = function() return CA.SV.Social.GuildIcon end,
                 setFunc = function(value) CA.SV.Social.GuildIcon = value end,
@@ -3969,7 +3969,7 @@ function CA.CreateSettings()
             {
                 -- Guild Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR)),
                 getFunc = function() return unpack(CA.SV.Social.GuildColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Social.GuildColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -3986,7 +3986,7 @@ function CA.CreateSettings()
             {
                 -- Use Alliance Color for Guild
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE)),
                 tooltip = GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE_TP),
                 getFunc = function() return CA.SV.Social.GuildAllianceColor end,
                 setFunc = function(value) CA.SV.Social.GuildAllianceColor = value end,
@@ -4009,8 +4009,8 @@ function CA.CreateSettings()
             {
                 -- Show Trade Events
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Notify.NotificationTradeCA end,
                 setFunc = function(value) CA.SV.Notify.NotificationTradeCA = value end,
                 width = "full",
@@ -4020,8 +4020,8 @@ function CA.CreateSettings()
             {
                 -- Show Trade Events
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Notify.NotificationTradeAlert end,
                 setFunc = function(value) CA.SV.Notify.NotificationTradeAlert = value end,
                 width = "full",
@@ -4036,8 +4036,8 @@ function CA.CreateSettings()
             {
                 -- Show Duel Events (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Social.DuelCA end,
                 setFunc = function(value) CA.SV.Social.DuelCA = value end,
                 width = "full",
@@ -4047,8 +4047,8 @@ function CA.CreateSettings()
             {
                 -- Show Duel Events (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Social.DuelAlert end,
                 setFunc = function(value) CA.SV.Social.DuelAlert = value end,
                 width = "full",
@@ -4058,8 +4058,8 @@ function CA.CreateSettings()
             {
                 -- Duel Start CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Social.DuelStartCA end,
                 setFunc = function(value) CA.SV.Social.DuelStartCA = value end,
                 width = "full",
@@ -4069,8 +4069,8 @@ function CA.CreateSettings()
             {
                 -- Duel Start CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TPCSA), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TPCSA), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Social.DuelStartCSA end,
                 setFunc = function(value) CA.SV.Social.DuelStartCSA = value end,
                 width = "full",
@@ -4080,8 +4080,8 @@ function CA.CreateSettings()
             {
                 -- Duel Start Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Social.DuelStartAlert end,
                 setFunc = function(value) CA.SV.Social.DuelStartAlert = value end,
                 width = "full",
@@ -4091,7 +4091,7 @@ function CA.CreateSettings()
             {
                 -- Duel Start Options
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION)),
                 tooltip = GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION_TP),
                 choices = duelStartOptions,
                 getFunc = function() return duelStartOptions[CA.SV.Social.DuelStartOptions] end,
@@ -4103,8 +4103,8 @@ function CA.CreateSettings()
             {
                 -- Duel Won CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Social.DuelWonCA end,
                 setFunc = function(value) CA.SV.Social.DuelWonCA = value end,
                 width = "full",
@@ -4114,8 +4114,8 @@ function CA.CreateSettings()
             {
                 -- Duel Won CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Social.DuelWonCSA end,
                 setFunc = function(value) CA.SV.Social.DuelWonCSA = value end,
                 width = "full",
@@ -4125,8 +4125,8 @@ function CA.CreateSettings()
             {
                 -- Duel Won Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Social.DuelWonAlert end,
                 setFunc = function(value) CA.SV.Social.DuelWonAlert = value end,
                 width = "full",
@@ -4136,8 +4136,8 @@ function CA.CreateSettings()
             {
                 -- Duel Boundary CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Social.DuelBoundaryCA end,
                 setFunc = function(value) CA.SV.Social.DuelBoundaryCA = value end,
                 width = "full",
@@ -4147,8 +4147,8 @@ function CA.CreateSettings()
             {
                 -- Duel Boundary CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Social.DuelBoundaryCSA end,
                 setFunc = function(value) CA.SV.Social.DuelBoundaryCSA = value end,
                 width = "full",
@@ -4158,8 +4158,8 @@ function CA.CreateSettings()
             {
                 -- Duel Boundary Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Social.DuelBoundaryAlert end,
                 setFunc = function(value) CA.SV.Social.DuelBoundaryAlert = value end,
                 width = "full",
@@ -4174,8 +4174,8 @@ function CA.CreateSettings()
             {
                 -- Show Pledge of Mara CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Social.PledgeOfMaraCA end,
                 setFunc = function(value) CA.SV.Social.PledgeOfMaraCA = value end,
                 width = "full",
@@ -4185,8 +4185,8 @@ function CA.CreateSettings()
             {
                 -- Show Pledge of Mara CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Social.PledgeOfMaraCSA end,
                 setFunc = function(value) CA.SV.Social.PledgeOfMaraCSA = value end,
                 width = "full",
@@ -4196,8 +4196,8 @@ function CA.CreateSettings()
             {
                 -- Show Pledge of Mara Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Social.PledgeOfMaraAlert end,
                 setFunc = function(value) CA.SV.Social.PledgeOfMaraAlert = value end,
                 width = "full",
@@ -4207,7 +4207,7 @@ function CA.CreateSettings()
             {
                 -- Pledge of Mara (Alert Only on Failure)
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_MARA_ALERT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_MARA_ALERT)),
                 tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_ALERT_TP),
                 getFunc = function() return CA.SV.Social.PledgeOfMaraAlertOnlyFail end,
                 setFunc = function(value) CA.SV.Social.PledgeOfMaraAlertOnlyFail = value end,
@@ -4231,8 +4231,8 @@ function CA.CreateSettings()
             {
                 -- Show Group CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Group.GroupCA end,
                 setFunc = function(value) CA.SV.Group.GroupCA = value end,
                 width = "full",
@@ -4242,8 +4242,8 @@ function CA.CreateSettings()
             {
                 -- Show Group Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Group.GroupAlert end,
                 setFunc = function(value) CA.SV.Group.GroupAlert = value end,
                 width = "full",
@@ -4258,8 +4258,8 @@ function CA.CreateSettings()
             {
                 -- Show Group LFG CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Group.GroupLFGCA end,
                 setFunc = function(value) CA.SV.Group.GroupLFGCA = value end,
                 width = "full",
@@ -4269,8 +4269,8 @@ function CA.CreateSettings()
             {
                 -- Show Group LFG Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Group.GroupLFGAlert end,
                 setFunc = function(value) CA.SV.Group.GroupLFGAlert = value end,
                 width = "full",
@@ -4280,8 +4280,8 @@ function CA.CreateSettings()
             {
                 -- Show Group LFG CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Group.GroupLFGQueueCA end,
                 setFunc = function(value) CA.SV.Group.GroupLFGQueueCA = value end,
                 width = "full",
@@ -4291,8 +4291,8 @@ function CA.CreateSettings()
             {
                 -- Show Group LFG Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Group.GroupLFGQueueAlert end,
                 setFunc = function(value) CA.SV.Group.GroupLFGQueueAlert = value end,
                 width = "full",
@@ -4302,8 +4302,8 @@ function CA.CreateSettings()
             {
                 -- Show Group Vote CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Group.GroupVoteCA end,
                 setFunc = function(value) CA.SV.Group.GroupVoteCA = value end,
                 width = "full",
@@ -4313,8 +4313,8 @@ function CA.CreateSettings()
             {
                 -- Show Group Vote Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Group.GroupVoteAlert end,
                 setFunc = function(value) CA.SV.Group.GroupVoteAlert = value end,
                 width = "full",
@@ -4324,8 +4324,8 @@ function CA.CreateSettings()
             {
                 -- Show LFG Activity Completed CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Group.GroupLFGCompleteCA end,
                 setFunc = function(value) CA.SV.Group.GroupLFGCompleteCA = value end,
                 width = "full",
@@ -4335,8 +4335,8 @@ function CA.CreateSettings()
             {
                 -- Show LFG Activity Completed CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Group.GroupLFGCompleteCSA end,
                 setFunc = function(value) CA.SV.Group.GroupLFGCompleteCSA = value end,
                 width = "full",
@@ -4346,8 +4346,8 @@ function CA.CreateSettings()
             {
                 -- Show LFG Activity Completed Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Group.GroupLFGCompleteAlert end,
                 setFunc = function(value) CA.SV.Group.GroupLFGCompleteAlert = value end,
                 width = "full",
@@ -4362,8 +4362,8 @@ function CA.CreateSettings()
             {
                 -- Raid Announcements CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Group.GroupRaidCA end,
                 setFunc = function(value) CA.SV.Group.GroupRaidCA = value end,
                 width = "full",
@@ -4373,8 +4373,8 @@ function CA.CreateSettings()
             {
                 -- Raid Announcements CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Group.GroupRaidCSA end,
                 setFunc = function(value) CA.SV.Group.GroupRaidCSA = value end,
                 width = "full",
@@ -4384,8 +4384,8 @@ function CA.CreateSettings()
             {
                 -- Raid Announcements Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Group.GroupRaidAlert end,
                 setFunc = function(value) CA.SV.Group.GroupRaidAlert = value end,
                 width = "full",
@@ -4395,8 +4395,8 @@ function CA.CreateSettings()
             {
                 -- Raid Score CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Group.GroupRaidScoreCA end,
                 setFunc = function(value) CA.SV.Group.GroupRaidScoreCA = value end,
                 width = "full",
@@ -4406,8 +4406,8 @@ function CA.CreateSettings()
             {
                 -- Raid Score CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Group.GroupRaidScoreCSA end,
                 setFunc = function(value) CA.SV.Group.GroupRaidScoreCSA = value end,
                 width = "full",
@@ -4417,8 +4417,8 @@ function CA.CreateSettings()
             {
                 -- Raid Score Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Group.GroupRaidScoreAlert end,
                 setFunc = function(value) CA.SV.Group.GroupRaidScoreAlert = value end,
                 width = "full",
@@ -4428,8 +4428,8 @@ function CA.CreateSettings()
             {
                 -- Raid Best Score CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Group.GroupRaidBestScoreCA end,
                 setFunc = function(value) CA.SV.Group.GroupRaidBestScoreCA = value end,
                 width = "full",
@@ -4439,8 +4439,8 @@ function CA.CreateSettings()
             {
                 -- Raid Best Score CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Group.GroupRaidBestScoreCSA end,
                 setFunc = function(value) CA.SV.Group.GroupRaidBestScoreCSA = value end,
                 width = "full",
@@ -4450,8 +4450,8 @@ function CA.CreateSettings()
             {
                 -- Raid Best Score Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Group.GroupRaidBestScoreAlert end,
                 setFunc = function(value) CA.SV.Group.GroupRaidBestScoreAlert = value end,
                 width = "full",
@@ -4461,8 +4461,8 @@ function CA.CreateSettings()
             {
                 -- Raid Revive Counter CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Group.GroupRaidReviveCA end,
                 setFunc = function(value) CA.SV.Group.GroupRaidReviveCA = value end,
                 width = "full",
@@ -4472,8 +4472,8 @@ function CA.CreateSettings()
             {
                 -- Raid Revive Counter CSA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Group.GroupRaidReviveCSA end,
                 setFunc = function(value) CA.SV.Group.GroupRaidReviveCSA = value end,
                 width = "full",
@@ -4483,8 +4483,8 @@ function CA.CreateSettings()
             {
                 -- Raid Revive Counter Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Group.GroupRaidReviveAlert end,
                 setFunc = function(value) CA.SV.Group.GroupRaidReviveAlert = value end,
                 width = "full",
@@ -4518,8 +4518,8 @@ function CA.CreateSettings()
             {
                 -- Respec Notification (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Notify.NotificationRespecCA end,
                 setFunc = function(value) CA.SV.Notify.NotificationRespecCA = value end,
                 width = "full",
@@ -4529,8 +4529,8 @@ function CA.CreateSettings()
             {
                 -- Respec Notification (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Notify.NotificationRespecCSA end,
                 setFunc = function(value) CA.SV.Notify.NotificationRespecCSA = value end,
                 width = "full",
@@ -4540,8 +4540,8 @@ function CA.CreateSettings()
             {
                 -- Respec Notification (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Notify.NotificationRespecAlert end,
                 setFunc = function(value) CA.SV.Notify.NotificationRespecAlert = value end,
                 width = "full",
@@ -4551,8 +4551,8 @@ function CA.CreateSettings()
             {
                 -- Display Group Area Message (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Notify.NotificationGroupAreaCA end,
                 setFunc = function(value) CA.SV.Notify.NotificationGroupAreaCA = value end,
                 width = "full",
@@ -4562,8 +4562,8 @@ function CA.CreateSettings()
             {
                 -- Display Group Area Message (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Notify.NotificationGroupAreaCSA end,
                 setFunc = function(value) CA.SV.Notify.NotificationGroupAreaCSA = value end,
                 width = "full",
@@ -4573,8 +4573,8 @@ function CA.CreateSettings()
             {
                 -- Display Group Area Message (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Notify.NotificationGroupAreaAlert end,
                 setFunc = function(value) CA.SV.Notify.NotificationGroupAreaAlert = value end,
                 width = "full",
@@ -4584,8 +4584,8 @@ function CA.CreateSettings()
             {
                 -- Arena Notifications (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Group.GroupRaidArenaCA end,
                 setFunc = function(value) CA.SV.Group.GroupRaidArenaCA = value end,
                 width = "full",
@@ -4595,8 +4595,8 @@ function CA.CreateSettings()
             {
                 -- Arena Notifications (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Group.GroupRaidArenaCSA end,
                 setFunc = function(value) CA.SV.Group.GroupRaidArenaCSA = value end,
                 width = "full",
@@ -4606,8 +4606,8 @@ function CA.CreateSettings()
             {
                 -- Arena Notifications (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Group.GroupRaidArenaAlert end,
                 setFunc = function(value) CA.SV.Group.GroupRaidArenaAlert  = value end,
                 width = "full",
@@ -4617,8 +4617,8 @@ function CA.CreateSettings()
             {
                 -- Arena Round Notifications (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Group.GroupRaidArenaRoundCA end,
                 setFunc = function(value) CA.SV.Group.GroupRaidArenaRoundCA = value end,
                 width = "full",
@@ -4628,8 +4628,8 @@ function CA.CreateSettings()
             {
                 -- Arena Round Notifications (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Group.GroupRaidArenaRoundCSA end,
                 setFunc = function(value) CA.SV.Group.GroupRaidArenaRoundCSA = value end,
                 width = "full",
@@ -4639,8 +4639,8 @@ function CA.CreateSettings()
             {
                 -- Arena Round Notifications (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Group.GroupRaidArenaRoundAlert end,
                 setFunc = function(value) CA.SV.Group.GroupRaidArenaRoundAlert  = value end,
                 width = "full",
@@ -4650,8 +4650,8 @@ function CA.CreateSettings()
             {
                 -- Imperial City Display Announcement (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Quests.QuestICDiscoveryCA end,
                 setFunc = function(value) CA.SV.Quests.QuestICDiscoveryCA = value end,
                 width = "full",
@@ -4661,8 +4661,8 @@ function CA.CreateSettings()
             {
                 -- Imperial City Display Announcement (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Quests.QuestICDiscoveryCSA end,
                 setFunc = function(value) CA.SV.Quests.QuestICDiscoveryCSA = value end,
                 width = "full",
@@ -4672,8 +4672,8 @@ function CA.CreateSettings()
             {
                 -- Imperial City Display Announcement (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Quests.QuestICDiscoveryAlert end,
                 setFunc = function(value) CA.SV.Quests.QuestICDiscoveryAlert = value end,
                 width = "full",
@@ -4683,7 +4683,7 @@ function CA.CreateSettings()
             {
                 -- Imperial City Display Description
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION)),
                 tooltip = GetString(SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP),
                 getFunc = function() return CA.SV.Quests.QuestICDescription end,
                 setFunc = function(value) CA.SV.Quests.QuestICDescription = value end,
@@ -4694,8 +4694,8 @@ function CA.CreateSettings()
             {
                 -- Craglorn Buff (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Quests.QuestCraglornBuffCA end,
                 setFunc = function(value) CA.SV.Quests.QuestCraglornBuffCA = value end,
                 width = "full",
@@ -4705,8 +4705,8 @@ function CA.CreateSettings()
             {
                 -- Craglorn Buff (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Quests.QuestCraglornBuffCSA end,
                 setFunc = function(value) CA.SV.Quests.QuestCraglornBuffCSA = value end,
                 width = "full",
@@ -4716,8 +4716,8 @@ function CA.CreateSettings()
             {
                 -- Craglorn Buff (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Quests.QuestCraglornBuffAlert end,
                 setFunc = function(value) CA.SV.Quests.QuestCraglornBuffAlert = value end,
                 width = "full",
@@ -4735,8 +4735,8 @@ function CA.CreateSettings()
             {
                 -- Mail (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Notify.NotificationMailCA end,
                 setFunc = function(value) CA.SV.Notify.NotificationMailCA = value CA.RegisterMailEvents() end,
                 width = "full",
@@ -4746,8 +4746,8 @@ function CA.CreateSettings()
             {
                 -- Mail (ALERT)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Notify.NotificationMailAlert end,
                 setFunc = function(value) CA.SV.Notify.NotificationMailAlert = value CA.RegisterMailEvents() end,
                 width = "full",
@@ -4757,8 +4757,8 @@ function CA.CreateSettings()
             {
                 -- Show Lockpick Events CA
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Notify.NotificationLockpickCA end,
                 setFunc = function(value) CA.SV.Notify.NotificationLockpickCA = value CA.RegisterLootEvents() end,
                 width = "full",
@@ -4768,8 +4768,8 @@ function CA.CreateSettings()
             {
                 -- Show Lockpick Events Alert
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Notify.NotificationLockpickAlert end,
                 setFunc = function(value) CA.SV.Notify.NotificationLockpickAlert = value CA.RegisterLootEvents() end,
                 width = "full",
@@ -4779,8 +4779,8 @@ function CA.CreateSettings()
             {
                 -- Show Justice Confiscate (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Notify.NotificationConfiscateCA end,
                 setFunc = function(value) CA.SV.Notify.NotificationConfiscateCA = value CA.RegisterLootEvents() end,
                 width = "full",
@@ -4790,8 +4790,8 @@ function CA.CreateSettings()
             {
                 -- Show Justice Confiscate (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Notify.NotificationConfiscateAlert end,
                 setFunc = function(value) CA.SV.Notify.NotificationConfiscateAlert = value CA.RegisterLootEvents() end,
                 width = "full",
@@ -4801,8 +4801,8 @@ function CA.CreateSettings()
             {
                 -- Show Bag/Bank Upgrade (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Notify.StorageBagCA end,
                 setFunc = function(value) CA.SV.Notify.StorageBagCA = value end,
                 width = "full",
@@ -4812,8 +4812,8 @@ function CA.CreateSettings()
             {
                 -- Show Bag/Bank Upgrade (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Notify.StorageBagCSA end,
                 setFunc = function(value) CA.SV.Notify.StorageBagCSA = value end,
                 width = "full",
@@ -4823,8 +4823,8 @@ function CA.CreateSettings()
             {
                 -- Show Bag/Bank Upgrade (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Notify.StorageBagAlert end,
                 setFunc = function(value) CA.SV.Notify.StorageBagAlert = value end,
                 width = "full",
@@ -4834,7 +4834,7 @@ function CA.CreateSettings()
             {
                 -- Bag/Bank Upgrade Message Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_COLOR)),
                 getFunc = function() return unpack(CA.SV.Notify.StorageBagColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Notify.StorageBagColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -4844,8 +4844,8 @@ function CA.CreateSettings()
             {
                 -- Show Mount Upgrade (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Notify.StorageRidingCA end,
                 setFunc = function(value) CA.SV.Notify.StorageRidingCA = value end,
                 width = "full",
@@ -4855,8 +4855,8 @@ function CA.CreateSettings()
             {
                 -- Show Mount Upgrade (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Notify.StorageRidingCSA end,
                 setFunc = function(value) CA.SV.Notify.StorageRidingCSA = value end,
                 width = "full",
@@ -4866,8 +4866,8 @@ function CA.CreateSettings()
             {
                 -- Show Mount Upgrade (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Notify.StorageRidingAlert end,
                 setFunc = function(value) CA.SV.Notify.StorageRidingAlert = value end,
                 width = "full",
@@ -4877,7 +4877,7 @@ function CA.CreateSettings()
             {
                 -- Mount Upgrade Message Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR)),
                 getFunc = function() return unpack(CA.SV.Notify.StorageRidingColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Notify.StorageRidingColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -4887,7 +4887,7 @@ function CA.CreateSettings()
             {
                 -- Mount Upgrade Message Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR_BOOK)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR_BOOK)),
                 getFunc = function() return unpack(CA.SV.Notify.StorageRidingBookColor) end,
                 setFunc = function(r, g, b, a) CA.SV.Notify.StorageRidingBookColor = { r, g, b, a } CA.RegisterColorEvents() end,
                 width = "full",
@@ -4897,8 +4897,8 @@ function CA.CreateSettings()
             {
                 -- Show Disguise Events (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Notify.DisguiseCA end,
                 setFunc = function(value) CA.SV.Notify.DisguiseCA = value CA.RegisterDisguiseEvents() end,
                 width = "full",
@@ -4908,8 +4908,8 @@ function CA.CreateSettings()
             {
                 -- Show Disguise Events (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Notify.DisguiseCSA end,
                 setFunc = function(value) CA.SV.Notify.DisguiseCSA = value CA.RegisterDisguiseEvents() end,
                 width = "full",
@@ -4919,8 +4919,8 @@ function CA.CreateSettings()
             {
                 -- Show Disguise Events (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Notify.DisguiseAlert end,
                 setFunc = function(value) CA.SV.Notify.DisguiseAlert = value CA.RegisterDisguiseEvents() end,
                 width = "full",
@@ -4930,8 +4930,8 @@ function CA.CreateSettings()
             {
                 -- Show Disguise Warning (CA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                 getFunc = function() return CA.SV.Notify.DisguiseWarnCA end,
                 setFunc = function(value) CA.SV.Notify.DisguiseWarnCA = value end,
                 width = "full",
@@ -4941,8 +4941,8 @@ function CA.CreateSettings()
             {
                 -- Show Disguise Warning (CSA)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                 getFunc = function() return CA.SV.Notify.DisguiseWarnCSA end,
                 setFunc = function(value) CA.SV.Notify.DisguiseWarnCSA = value end,
                 width = "full",
@@ -4952,8 +4952,8 @@ function CA.CreateSettings()
             {
                 -- Show Disguise Warning (Alert)
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                 getFunc = function() return CA.SV.Notify.DisguiseWarnAlert end,
                 setFunc = function(value) CA.SV.Notify.DisguiseWarnAlert = value end,
                 width = "full",
@@ -4963,7 +4963,7 @@ function CA.CreateSettings()
             {
                 -- Disguise Alert Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR_TP),
                 getFunc = function() return unpack(CA.SV.Notify.DisguiseAlertColor) end,
                 setFunc = function(r,g,b,a) CA.SV.Notify.DisguiseAlertColor={r,g,b} CA.RegisterColorEvents() end,

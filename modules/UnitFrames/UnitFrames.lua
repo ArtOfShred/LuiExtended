@@ -12,9 +12,7 @@ local UI = LUIE.UI
 local AbbreviateNumber = LUIE.AbbreviateNumber
 local printToChat = LUIE.PrintToChat
 
-local strfmt = string.format
-local strformat = zo_strformat
-local callLater = zo_callLater
+local zo_strformat = zo_strformat
 
 local eventManager = EVENT_MANAGER
 local sceneManager = SCENE_MANAGER
@@ -352,7 +350,7 @@ function UF.GroupFrames_OnMouseUp(self, button, upInside)
         ClearMenu()
         local isPlayer = AreUnitsEqual(unitTag, "player") -- Flag Player
         local isLFG = DoesGroupModificationRequireVote() -- Flag if we're in an LFG Group
-        local accountName = strformat(SI_UNIT_NAME, GetUnitDisplayName(unitTag))
+        local accountName = zo_strformat(SI_UNIT_NAME, GetUnitDisplayName(unitTag))
         local isOnline = IsUnitOnline(unitTag)
 
         if isPlayer then
@@ -416,10 +414,10 @@ function UF.AltBar_OnMouseEnterXP(control)
 
     InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
 
-    SetTooltipText(InformationTooltip, strformat(SI_LEVEL_DISPLAY, label, level))
-    InformationTooltip:AddLine(strformat(SI_EXPERIENCE_CURRENT_MAX_PERCENT, ZO_CommaDelimitNumber(current), ZO_CommaDelimitNumber(levelSize), percentageXP))
+    SetTooltipText(InformationTooltip, zo_strformat(SI_LEVEL_DISPLAY, label, level))
+    InformationTooltip:AddLine(zo_strformat(SI_EXPERIENCE_CURRENT_MAX_PERCENT, ZO_CommaDelimitNumber(current), ZO_CommaDelimitNumber(levelSize), percentageXP))
     if enlightenedPool > 0 then
-        InformationTooltip:AddLine(strformat(SI_EXPERIENCE_CHAMPION_ENLIGHTENED_TOOLTIP, enlightenedValue), nil, ZO_SUCCEEDED_TEXT:UnpackRGB())
+        InformationTooltip:AddLine(zo_strformat(SI_EXPERIENCE_CHAMPION_ENLIGHTENED_TOOLTIP, enlightenedValue), nil, ZO_SUCCEEDED_TEXT:UnpackRGB())
     end
 end
 
@@ -432,9 +430,9 @@ function UF.AltBar_OnMouseEnterWerewolf(control)
         local durationFormatted = math.floor(duration + 0.999)
 
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
-        SetTooltipText(InformationTooltip, strformat(SI_MONSTERSOCIALCLASS45))
-        InformationTooltip:AddLine(strformat(SI_LUIE_UF_WEREWOLF_POWER, currentPower, maxPower, percentagePower))
-        InformationTooltip:AddLine(strformat(SI_LUIE_UF_WEREWOLF_TP, durationFormatted), nil, ZO_NORMAL_TEXT:UnpackRGBA() )
+        SetTooltipText(InformationTooltip, zo_strformat(SI_MONSTERSOCIALCLASS45))
+        InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_WEREWOLF_POWER, currentPower, maxPower, percentagePower))
+        InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_WEREWOLF_TP, durationFormatted), nil, ZO_NORMAL_TEXT:UnpackRGBA() )
     end
     UpdateWerewolfPower()
 
@@ -449,8 +447,8 @@ function UF.AltBar_OnMouseEnterMounted(control)
         local percentagePower = zo_floor(currentPower / maxPower * 100)
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
 
-        SetTooltipText(InformationTooltip, strformat(SI_LUIE_SKILL_MOUNTED))
-        InformationTooltip:AddLine(strformat(SI_LUIE_UF_MOUNT_POWER, currentPower, maxPower, percentagePower))
+        SetTooltipText(InformationTooltip, zo_strformat(SI_LUIE_SKILL_MOUNTED))
+        InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_MOUNT_POWER, currentPower, maxPower, percentagePower))
     end
     UpdateMountPower()
 
@@ -466,8 +464,8 @@ function UF.AltBar_OnMouseEnterSiege(control)
         local siegeName = GetUnitName("controlledsiege")
         InitializeTooltip(InformationTooltip, control, BOTTOM, 0, -10)
 
-        SetTooltipText(InformationTooltip, strformat(SI_UNIT_NAME, siegeName))
-        InformationTooltip:AddLine(strformat(SI_LUIE_UF_SIEGE_POWER, ZO_CommaDelimitNumber(currentPower), ZO_CommaDelimitNumber(maxPower), percentagePower))
+        SetTooltipText(InformationTooltip, zo_strformat(SI_UNIT_NAME, siegeName))
+        InformationTooltip:AddLine(zo_strformat(SI_LUIE_UF_SIEGE_POWER, ZO_CommaDelimitNumber(currentPower), ZO_CommaDelimitNumber(maxPower), percentagePower))
     end
     UpdateSiegePower()
 
@@ -934,7 +932,7 @@ local function CreateCustomFrames()
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function(self)
         eventManager:RegisterForUpdate( moduleName .. "previewMove", 200, function()
-            self.preview.anchorLabel:SetText(strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
+            self.preview.anchorLabel:SetText(zo_strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
         end)
     end
     -- Callback used to save new position of frames
@@ -1667,7 +1665,7 @@ end
 -- Runs on the EVENT_UNIT_CREATED listener.
 -- Used to create DefaultFrames UI controls and request delayed CustomFrames group frame update
 function UF.OnUnitCreated(eventCode, unitTag)
-    --d( strfmt("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
+    --d( string.format("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
     -- Create on-fly UI controls for default UI group member and reread his values
     if g_DefaultFrames.SmallGroup then
         UF.DefaultFramesCreateUnitGroupControls(unitTag)
@@ -1692,7 +1690,7 @@ end
 -- Runs on the EVENT_UNIT_DESTROYED listener.
 -- Used to request delayed CustomFrames group frame update
 function UF.OnUnitDestroyed(eventCode, unitTag)
-    --d( strfmt("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
+    --d( string.format("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
     -- Make sure we do not try to update bars on this unitTag before full group update is complete
     if "group" == string.sub(unitTag, 0, 5) then
         UF.CustomFrames[unitTag] = nil
@@ -2559,7 +2557,7 @@ end
 
 -- Runs on the EVENT_GROUP_MEMBER_CONNECTED_STATUS listener.
 function UF.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
-    --d( strfmt("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
+    --d( string.format("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].dead then
         UF.CustomFramesSetDeadLabel( UF.CustomFrames[unitTag], isOnline and nil or strOffline )
     end
@@ -2580,13 +2578,13 @@ function UF.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tank)
 end
 
 function UF.OnGroupMemberChange(eventCode, memberName)
-    callLater(function() UF.CustomFramesApplyColours(false) end, 200)
+    zo_callLater(function() UF.CustomFramesApplyColours(false) end, 200)
 end
 
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
 -- This handler fires every time a valid unitTag dies or is resurrected
 function UF.OnDeath(eventCode, unitTag, isDead)
-    --d( strfmt("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
+    --d( string.format("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].dead then
         UF.CustomFramesSetDeadLabel( UF.CustomFrames[unitTag], isDead and strDead or nil )
     end
@@ -2985,7 +2983,7 @@ end
 
 -- Repopulate group members, but try to update only those, that require it
 function UF.CustomFramesGroupUpdate()
-    --d( strfmt("[%s] GroupUpdate", GetTimeString()) )
+    --d( string.format("[%s] GroupUpdate", GetTimeString()) )
     -- Unregister update function and clear local flag
     eventManager:UnregisterForUpdate( g_PendingUpdate.Group.name )
     g_PendingUpdate.Group.flag = false
@@ -3207,7 +3205,7 @@ function UF.CustomFramesSetPositions()
             local anchors = ( savedPos ~= nil and #savedPos == 2 ) and { TOPLEFT, TOPLEFT, savedPos[1], savedPos[2] } or default_anchors[unitTag]
             UF.CustomFrames[unitTag].tlw:ClearAnchors()
             UF.CustomFrames[unitTag].tlw:SetAnchor( anchors[1], GuiRoot, anchors[2], anchors[3], anchors[4] )
-            UF.CustomFrames[unitTag].tlw.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default" )
+            UF.CustomFrames[unitTag].tlw.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and zo_strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default" )
         end
     end
 end
@@ -3660,7 +3658,7 @@ function UF.DefaultFramesApplyFont(unitTag)
             local unitFrame = g_DefaultFrames[unitTag]
             for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
                 if unitFrame[powerType] then
-                    unitFrame[powerType].label:SetFont( strformat( "<<1>>|<<2>>|<<3>>", fontName, fontSize, fontStyle ) )
+                    unitFrame[powerType].label:SetFont( zo_strformat( "<<1>>|<<2>>|<<3>>", fontName, fontSize, fontStyle ) )
                 end
             end
         end
@@ -3716,7 +3714,7 @@ function UF.CustomFramesApplyFont()
     local sizeCaption = ( UF.SV.CustomFontOther and UF.SV.CustomFontOther > 0 ) and UF.SV.CustomFontOther or 16
     local sizeBars = ( UF.SV.CustomFontBars and UF.SV.CustomFontBars > 0 ) and UF.SV.CustomFontBars or 14
 
-    local __mkFont = function(size) return strformat( "<<1>>|<<2>>|<<3>>", fontName, size, fontStyle ) end
+    local __mkFont = function(size) return zo_strformat( "<<1>>|<<2>>|<<3>>", fontName, size, fontStyle ) end
 
     -- After fonts is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget" } ) do

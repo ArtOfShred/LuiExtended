@@ -5,7 +5,6 @@
 
 local SCB = LUIE.SpellCastBuffs
 
-local callLater = zo_callLater
 local eventManager = EVENT_MANAGER
 
 local moduleName = LUIE.name .. "_SpellCastBuffs"
@@ -103,7 +102,7 @@ function SCB.WerewolfState(eventCode, werewolf, onActivation)
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0
         -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
-        callLater(function() g_werewolfQuest = 0 end, 5000)
+        zo_callLater(function() g_werewolfQuest = 0 end, 5000)
     end
 end
 
@@ -146,7 +145,7 @@ function SCB.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0
         -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
-        callLater(function() g_werewolfQuest = 0 end, 5000)
+        zo_callLater(function() g_werewolfQuest = 0 end, 5000)
     end
 end
 

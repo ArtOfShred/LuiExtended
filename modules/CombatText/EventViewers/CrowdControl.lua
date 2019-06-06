@@ -8,8 +8,6 @@ local CTV = LUIE.CombatTextCrowdControlEventViewer
 
 local C = LUIE.CombatTextConstants
 
-local callLater = zo_callLater
-
 local poolTypes = LUIE.CombatTextConstants.poolType
 local crowdControlTypes = LUIE.CombatTextConstants.crowdControlType
 
@@ -87,7 +85,7 @@ function CTV:OnEvent(crowdControlType, combatType)
     animation:Play()
 
     --Add items back into pool after animation
-    callLater(function()
+    zo_callLater(function()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activeCrowdControls[combatType] = self.activeCrowdControls[combatType] - 1

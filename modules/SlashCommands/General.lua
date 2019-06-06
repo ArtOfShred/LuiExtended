@@ -6,7 +6,7 @@
 local SC = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 -- Slash Command to port to primary home
 function SC.SlashHome()
@@ -99,9 +99,9 @@ function SC.SlashCampaignQ(option)
 
             if GetAssignedCampaignId() == i or GetGuestCampaignId() == i then
                 QueueForCampaign (i)
-                printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName), true)
+                printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName), true)
                 if LUIE.SV.TempAlertCampaign then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))
                 end
                 return
             else
@@ -146,7 +146,7 @@ function SC.SlashCollectible(id)
     if IsCollectibleUnlocked(id) then
         UseCollectible(id)
     else
-        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(id)), true)
+        printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(id)), true)
         if LUIE.SV.TempAlertHome then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED)))
         end
@@ -179,9 +179,9 @@ function SC.SlashOutfit(option)
     local numOutfits = GetNumUnlockedOutfits()
 
     if valid > numOutfits then
-        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid))
+        printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid))
         if LUIE.SV.TempAlertOutfit then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid))
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_UNLOCKED), valid))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -191,11 +191,11 @@ function SC.SlashOutfit(option)
     -- Display a confirmation message.
     local name = GetOutfitName(valid)
     if name == "" then
-        name = strformat("<<1>> <<2>>", GetString(SI_CROWN_STORE_SEARCH_ADDITIONAL_OUTFITS), valid)
+        name = zo_strformat("<<1>> <<2>>", GetString(SI_CROWN_STORE_SEARCH_ADDITIONAL_OUTFITS), valid)
     end
-    printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name))
+    printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name))
     if LUIE.SV.TempAlertOutfit then
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name))
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_CONFIRMATION), name))
     end
 end
 
@@ -214,7 +214,7 @@ function SC.SlashReport(player)
 
     -- Populate the reporting window name and description
     ZO_Help_Ask_For_Help_Keyboard_ControlDetailsTextLineField:SetText(player)
-	ZO_Help_Ask_For_Help_Keyboard_ControlDescriptionBodyField:SetText(strformat(text, player, location, currentdate, currenttime, server))
+	ZO_Help_Ask_For_Help_Keyboard_ControlDescriptionBodyField:SetText(zo_strformat(text, player, location, currentdate, currenttime, server))
 
     -- Open the reporting window
     HELP_CUSTOMER_SUPPORT_KEYBOARD:OpenScreen(HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD_FRAGMENT)

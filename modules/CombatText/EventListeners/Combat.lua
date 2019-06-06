@@ -10,8 +10,6 @@ local C = LUIE.CombatTextConstants
 local E = LUIE.Effects
 local AlertT = LUIE.AlertTable
 
-local callLater = zo_callLater
-
 local isWarned = {
     combat          = false,
     disoriented     = false,
@@ -130,7 +128,7 @@ function CTL:OnCombatIn(...)
             else
                 self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.DISORIENTED, combatType)
                 isWarned.disoriented = true
-                callLater(function() isWarned.disoriented = false end, 1000) end --1 second buffer
+                zo_callLater(function() isWarned.disoriented = false end, 1000) end --1 second buffer
         end
         --Feared
         if (isFeared and togglesInOut.showFeared) then
@@ -139,7 +137,7 @@ function CTL:OnCombatIn(...)
             else
                 self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.FEARED, combatType)
                 isWarned.feared = true
-                callLater(function() isWarned.feared = false end, 1000) end --1 second buffer
+                zo_callLater(function() isWarned.feared = false end, 1000) end --1 second buffer
         end
         --OffBalanced
         if (isOffBalanced and togglesInOut.showOffBalanced) then
@@ -148,7 +146,7 @@ function CTL:OnCombatIn(...)
             else
                 self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.OFFBALANCED, combatType)
                 isWarned.offBalanced = true
-                callLater(function() isWarned.offBalanced = false end, 1000) end --1 second buffer
+                zo_callLater(function() isWarned.offBalanced = false end, 1000) end --1 second buffer
         end
         --Silenced
         if (isSilenced and togglesInOut.showSilenced) then
@@ -157,7 +155,7 @@ function CTL:OnCombatIn(...)
             else
                 self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.SILENCED, combatType)
                 isWarned.silenced = true
-                callLater(function() isWarned.silenced = false end, 1000) end --1 second buffer
+                zo_callLater(function() isWarned.silenced = false end, 1000) end --1 second buffer
         end
         --Stunned
         if (isStunned and togglesInOut.showStunned) then
@@ -166,7 +164,7 @@ function CTL:OnCombatIn(...)
             else
                 self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.STUNNED, combatType)
                 isWarned.stunned = true
-                callLater(function() isWarned.stunned = false end, 1000) end --1 second buffer
+                zo_callLater(function() isWarned.stunned = false end, 1000) end --1 second buffer
         end
     end
 end
@@ -246,7 +244,7 @@ function CTL:OnCombatOut(...)
             else
                 self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.DISORIENTED, combatType)
                 isWarned.disoriented = true
-                callLater(function() isWarned.disoriented = false end, 1000) end --1 second buffer
+                zo_callLater(function() isWarned.disoriented = false end, 1000) end --1 second buffer
         end
         --Feared
         if (isFeared and togglesInOut.showFeared) then
@@ -255,7 +253,7 @@ function CTL:OnCombatOut(...)
             else
                 self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.FEARED, combatType)
                 isWarned.feared = true
-                callLater(function() isWarned.feared = false end, 1000) end --1 second buffer
+                zo_callLater(function() isWarned.feared = false end, 1000) end --1 second buffer
         end
         --OffBalanced
         if (isOffBalanced and togglesInOut.showOffBalanced) then
@@ -264,7 +262,7 @@ function CTL:OnCombatOut(...)
             else
                 self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.OFFBALANCED, combatType)
                 isWarned.offBalanced = true
-                callLater(function() isWarned.offBalanced = false end, 1000) end --1 second buffer
+                zo_callLater(function() isWarned.offBalanced = false end, 1000) end --1 second buffer
         end
         --Silenced
         if (isSilenced and togglesInOut.showSilenced) then
@@ -273,7 +271,7 @@ function CTL:OnCombatOut(...)
             else
                 self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.SILENCED, combatType)
                 isWarned.silenced = true
-                callLater(function() isWarned.silenced = false end, 1000) end --1 second buffer
+                zo_callLater(function() isWarned.silenced = false end, 1000) end --1 second buffer
         end
         --Stunned
         if (isStunned and togglesInOut.showStunned) then
@@ -282,7 +280,7 @@ function CTL:OnCombatOut(...)
             else
                 self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.STUNNED, combatType)
                 isWarned.stunned = true
-                callLater(function() isWarned.stunned = false end, 1000) end --1 second buffer
+                zo_callLater(function() isWarned.stunned = false end, 1000) end --1 second buffer
         end
     end
 

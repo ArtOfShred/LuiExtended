@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 -- Create Settings Menu
 function LUIE.CreateSettings()

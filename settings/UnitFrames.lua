@@ -5,7 +5,7 @@
 
 local UF = LUIE.UnitFrames
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 local optionsDataUnitFrames = {}
 
@@ -51,8 +51,8 @@ function UF.CreateSettings()
 
     local panelDataUnitFrames = {
         type = "panel",
-        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UF)),
-        displayName = strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UF)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UF)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UF)),
         author = LUIE.author,
         version = LUIE.version,
         website = LUIE.website,
@@ -398,7 +398,7 @@ function UF.CreateSettings()
             {
                 -- Custom Unit Frames Separate Shield Bar Height
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT)),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT_TP),
                 min = 4, max = 12, step = 1,
                 getFunc = function() return UF.SV.CustomShieldBarHeight end,
@@ -837,7 +837,7 @@ function UF.CreateSettings()
             {
                 -- Champion XP Bar Point-Type Color
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR)),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR_TP),
                 getFunc = function() return UF.SV.PlayerChampionColour end,
                 setFunc = function(value) UF.SV.PlayerChampionColour = value UF.OnChampionPointGained() UF.CustomFramesApplyLayoutPlayer(true) end,
@@ -1019,7 +1019,7 @@ function UF.CreateSettings()
             {
                 -- Prioritize Title or AvA Rank
                 type = 'dropdown',
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY)),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY_TP),
                 choices = { "AVA Rank", "Title" },
                 getFunc = function() return UF.SV.TargetTitlePriority end,
@@ -1042,7 +1042,7 @@ function UF.CreateSettings()
             {
                 -- Display Armor stat change
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_PT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_PT)),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_ARMOR_TP),
                 getFunc = function() return UF.SV.PlayerEnableArmor end,
                 setFunc = function(value) UF.SV.PlayerEnableArmor = value end,
@@ -1054,7 +1054,7 @@ function UF.CreateSettings()
             {
                 -- Display Power stat change
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_PT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_PT)),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_POWER_TP),
                 getFunc = function() return UF.SV.PlayerEnablePower end,
                 setFunc = function(value) UF.SV.PlayerEnablePower = value end,
@@ -1066,7 +1066,7 @@ function UF.CreateSettings()
             {
                 -- Custom Unit Frames Display HoT / DoT Animations
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_PT)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_PT)),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_REGEN_TP),
                 getFunc = function() return UF.SV.PlayerEnableRegen end,
                 setFunc = function(value) UF.SV.PlayerEnableRegen = value end,
@@ -1110,7 +1110,7 @@ function UF.CreateSettings()
             {
                 -- Position Adjust Horizontal
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST)),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST_TP),
                 min = 0, max = 500, step = 5,
                 getFunc = function() return UF.SV.AdjustStaminaHPos end,
@@ -1122,7 +1122,7 @@ function UF.CreateSettings()
             {
                 -- Position Adjust Vertical
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST)),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST_TP),
                 min = -250, max = 250, step = 5,
                 getFunc = function() return UF.SV.AdjustStaminaVPos end,
@@ -1134,7 +1134,7 @@ function UF.CreateSettings()
             {
                 -- Position Adjust
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST)),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST_TP),
                 min = 0, max = 500, step = 5,
                 getFunc = function() return UF.SV.AdjustMagickaHPos end,
@@ -1146,7 +1146,7 @@ function UF.CreateSettings()
             {
                 -- Position Adjust
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST)),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST_TP),
                 min = -250, max = 250, step = 5,
                 getFunc = function() return UF.SV.AdjustMagickaVPos end,
@@ -1158,7 +1158,7 @@ function UF.CreateSettings()
             {
                 -- Spacing between Player Bars
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING)),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING_TP),
                 min = -1, max = 4, step = 1,
                 getFunc = function() return UF.SV.PlayerBarSpacing end,
@@ -1182,7 +1182,7 @@ function UF.CreateSettings()
             {
                  -- Hide Player Magicka Bar
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR)),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP),
                 getFunc = function() return UF.SV.HideBarMagicka end,
                 setFunc = function(value) UF.SV.HideBarMagicka = value end,
@@ -1206,7 +1206,7 @@ function UF.CreateSettings()
             {
                 -- Hide Player Stamina Bar
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR)),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP),
                 getFunc = function() return UF.SV.HideBarStamina end,
                 setFunc = function(value) UF.SV.HideBarStamina = value end,
@@ -1375,7 +1375,7 @@ function UF.CreateSettings()
             {
                 -- Display Armor stat change
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_GROUP)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_GROUP)),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_ARMOR_TP),
                 getFunc = function() return UF.SV.GroupEnableArmor end,
                 setFunc = function(value) UF.SV.GroupEnableArmor = value end,
@@ -1387,7 +1387,7 @@ function UF.CreateSettings()
             {
                 -- Display Power stat change
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_GROUP)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_GROUP)),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_POWER_TP),
                 getFunc = function() return UF.SV.GroupEnablePower end,
                 setFunc = function(value) UF.SV.GroupEnablePower = value end,
@@ -1399,7 +1399,7 @@ function UF.CreateSettings()
             {
                 -- Display Regen Arrows
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_GROUP)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_GROUP)),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_REGEN_TP),
                 getFunc = function() return UF.SV.GroupEnableRegen end,
                 setFunc = function(value) UF.SV.GroupEnableRegen = value end,
@@ -1559,7 +1559,7 @@ function UF.CreateSettings()
             {
                 -- Display Armor stat change
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_RAID)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_RAID)),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_ARMOR_TP),
                 getFunc = function() return UF.SV.RaidEnableArmor end,
                 setFunc = function(value) UF.SV.RaidEnableArmor = value end,
@@ -1571,7 +1571,7 @@ function UF.CreateSettings()
             {
                 -- Display Power stat change
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_RAID)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_RAID)),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_POWER_TP),
                 getFunc = function() return UF.SV.RaidEnablePower end,
                 setFunc = function(value) UF.SV.RaidEnablePower = value end,
@@ -1583,7 +1583,7 @@ function UF.CreateSettings()
             {
                 -- Display Regen Arrows
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_RAID)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_RAID)),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_REGEN_TP),
                 getFunc = function() return UF.SV.RaidEnableRegen end,
                 setFunc = function(value) UF.SV.RaidEnableRegen = value end,
@@ -1673,7 +1673,7 @@ function UF.CreateSettings()
             {
                 -- Display Armor stat change
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_BOSS)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_BOSS)),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_ARMOR_TP),
                 getFunc = function() return UF.SV.BossEnableArmor end,
                 setFunc = function(value) UF.SV.BossEnableArmor = value end,
@@ -1685,7 +1685,7 @@ function UF.CreateSettings()
             {
                 -- Display Power stat change
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_BOSS)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_BOSS)),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_POWER_TP),
                 getFunc = function() return UF.SV.BossEnablePower end,
                 setFunc = function(value) UF.SV.BossEnablePower = value end,
@@ -1697,7 +1697,7 @@ function UF.CreateSettings()
             {
                 -- Display Regen Arrows
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_BOSS)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_BOSS)),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHARED_REGEN_TP),
                 getFunc = function() return UF.SV.BossEnableRegen end,
                 setFunc = function(value) UF.SV.BossEnableRegen = value end,
@@ -1821,7 +1821,7 @@ function UF.CreateSettings()
             {
                 -- Interactible Reticle Color
                 type = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT)),
                 getFunc = function() return unpack(UF.SV.ReticleColour_Interact) end,
                 setFunc = function(r,g,b,a) UF.SV.ReticleColour_Interact={r,g,b} end,
                 width = "full",

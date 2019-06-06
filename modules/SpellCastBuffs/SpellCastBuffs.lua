@@ -5,7 +5,7 @@
 
 -- SpellCastBuffs namespace
 LUIE.SpellCastBuffs = {}
-local SCB           = LUIE.SpellCastBuffs
+local SCB = LUIE.SpellCastBuffs
 
 local CI = LUIE.CombatInfo
 local UI = LUIE.UI
@@ -14,9 +14,7 @@ local T = LUIE.Tooltips
 local A = LUIE.GetAbility()
 
 local printToChat = LUIE.PrintToChat
-local strfmt = string.format
-local strformat = zo_strformat
-local callLater = zo_callLater
+local zo_strformat = zo_strformat
 
 local eventManager = EVENT_MANAGER
 local sceneManager = SCENE_MANAGER
@@ -462,21 +460,21 @@ function SCB.AddToCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == SCB.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SCB.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SCB.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
-        local name = strformat("<<C:1>>", GetAbilityName(id))
+        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil and name ~= "" then
             local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_ID), icon, id, name, listRef), true)
+            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_ID), icon, id, name, listRef), true)
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_FAILED), input, listRef), true)
+            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_FAILED), input, listRef), true)
         end
     else
         if input ~= "" then
             list[input] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
+            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_ADDED_NAME), input, listRef), true)
         end
     end
     SCB.Reset()
@@ -487,21 +485,21 @@ function SCB.RemoveFromCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == SCB.SV.PromBuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS) or list == SCB.SV.PromDebuffTable and GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS) or list == SCB.SV.BlacklistTable and GetString(SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST) or ""
     if id and id > 0 then
-        local name = strformat("<<C:1>>", GetAbilityName(id))
+        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil and name ~= "" then
             local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
+            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_ID), icon, id, name, listRef), true)
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_FAILED), input, listRef), true)
+            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_FAILED), input, listRef), true)
         end
     else
         if input ~= "" then
             list[input] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
+            printToChat(zo_strformat(GetString(SI_LUIE_CUSTOM_LIST_REMOVED_NAME), input, listRef), true)
         end
     end
     SCB.Reset()
@@ -1060,7 +1058,7 @@ function SCB.Buff_OnMouseEnter(control)
     -- Setup Text
     local tooltipText = ""
     local colorText = ZO_NORMAL_TEXT
-    local tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, control.effectName)
+    local tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, control.effectName)
     if control.isArtificial then
         tooltipText = GetArtificialEffectTooltipText(control.effectId)
         GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
@@ -1123,9 +1121,9 @@ function SCB.Buff_OnMouseEnter(control)
 
             local tooltipText2
             if LUIE.ResolveVeteranDifficulty() == true and E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipVet then
-                tooltipText2 = strformat(E.EffectOverride[control.effectId].tooltipVet, timer, value2, value3)
+                tooltipText2 = zo_strformat(E.EffectOverride[control.effectId].tooltipVet, timer, value2, value3)
             else
-                 tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+                 tooltipText2 = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and zo_strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
             end
             if tooltipText2 ~= "" then
                 tooltipText2 = "|cEE992AOverride TP:|r " .. tooltipText2
@@ -1173,12 +1171,12 @@ function SCB.Buff_OnMouseEnter(control)
 
                     local tooltipText
                     if control.buffSlot then
-                        tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or GetAbilityDescription(abilityId)
+                        tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and zo_strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or GetAbilityDescription(abilityId)
                     else
-                        tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
+                        tooltipText = (E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltip) and zo_strformat(E.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
                     end
                     if LUIE.ResolveVeteranDifficulty() == true and E.EffectOverride[control.effectId] and E.EffectOverride[control.effectId].tooltipVet then
-                        tooltipText = strformat(E.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
+                        tooltipText = zo_strformat(E.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
                     end
 
                     -- Display Default Tooltip Description if no custom tooltip is present
@@ -1207,10 +1205,10 @@ function SCB.Buff_OnMouseEnter(control)
             duration = duration + E.EffectOverride[control.effectId].tooltipDurFix
         end
         if E.TooltipNameOverride[control.effectName] then
-            thirdLine = strformat(E.TooltipNameOverride[control.effectName], duration)
+            thirdLine = zo_strformat(E.TooltipNameOverride[control.effectName], duration)
         end
         if E.TooltipNameOverride[control.effectId] then
-            thirdLine = strformat(E.TooltipNameOverride[control.effectId], duration)
+            thirdLine = zo_strformat(E.TooltipNameOverride[control.effectId], duration)
         end
         -- Have to trim trailing spaces on the end of tooltips
         if tooltipText ~= "" then
@@ -1655,7 +1653,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
     -- Override name or icon based off unitName
     if E.EffectOverrideByName[abilityId] then
-        unitName = strformat("<<t:1>>", unitName)
+        unitName = zo_strformat("<<t:1>>", unitName)
         if E.EffectOverrideByName[abilityId][unitName] then
             if E.EffectOverrideByName[abilityId][unitName].hide then
                 return
@@ -1694,7 +1692,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
         LUIE.EffectsList[context][effectSlot] = nil
         if E.EffectCreateSkillAura[ abilityId ] and E.EffectCreateSkillAura [ abilityId ].removeOnEnd then
-            local name = strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))
+            local name = zo_strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))
             local id = E.EffectCreateSkillAura[abilityId].abilityId
             if not (SCB.SV.BlacklistTable[name] or SCB.SV.BlacklistTable[id]) then
                 local simulatedContext = unitTag .. effectType
@@ -1750,7 +1748,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         --EffectCreateSkillAura
         if E.EffectCreateSkillAura[abilityId] then
             if (not E.EffectCreateSkillAura[abilityId].requiredStack) or (E.EffectCreateSkillAura[abilityId].requiredStack and stackCount == E.EffectCreateSkillAura[abilityId].requiredStack) then
-                local name = strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))
+                local name = zo_strformat("<<C:1>>", GetAbilityName(E.EffectCreateSkillAura[abilityId].abilityId))
                 local id = E.EffectCreateSkillAura[abilityId].abilityId
                 if not (SCB.SV.BlacklistTable[name] or SCB.SV.BlacklistTable[id]) then
                     local simulatedContext = unitTag .. effectType
@@ -2010,8 +2008,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         duration = E.FakeExternalBuffs[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = strformat("<<t:1>>",sourceName)
-        local target = strformat("<<t:1>>",targetName)
+        local source = zo_strformat("<<t:1>>",sourceName)
+        local target = zo_strformat("<<t:1>>",targetName)
         if source ~= "" and target == LUIE.PlayerNameFormatted then
             LUIE.EffectsList.player1[ abilityId ] = {
                 type=1,
@@ -2081,8 +2079,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         duration = E.FakeExternalDebuffs[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = strformat("<<t:1>>",sourceName)
-        local target = strformat("<<t:1>>",targetName)
+        local source = zo_strformat("<<t:1>>",sourceName)
+        local target = zo_strformat("<<t:1>>",targetName)
 
         if E.MapDataOverride[abilityId] then
             local index = GetCurrentMapZoneIndex()
@@ -2169,8 +2167,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local forcedType = E.FakePlayerBuffs[abilityId].long and "long" or "short"
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = strformat("<<t:1>>",sourceName)
-        local target = strformat("<<t:1>>",targetName)
+        local source = zo_strformat("<<t:1>>",sourceName)
+        local target = zo_strformat("<<t:1>>",targetName)
         if source == LUIE.PlayerNameFormatted and target == LUIE.PlayerNameFormatted then
             -- If the "buff" is flagged as a debuff, then display it here instead
             if E.FakePlayerBuffs[abilityId].debuff == true then
@@ -2222,9 +2220,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         duration = E.FakeStagger[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = strformat("<<t:1>>",sourceName)
-        local target = strformat("<<t:1>>",targetName)
-        local unitName = strformat("<<t:1>>", GetUnitName("reticleover") )
+        local source = zo_strformat("<<t:1>>",sourceName)
+        local target = zo_strformat("<<t:1>>",targetName)
+        local unitName = zo_strformat("<<t:1>>", GetUnitName("reticleover") )
         if source ~= "" and target == LUIE.PlayerNameFormatted then
             LUIE.EffectsList.player2[ abilityId ] = {
                 type=BUFF_EFFECT_TYPE_DEBUFF,
@@ -2296,9 +2294,9 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         effectType = BUFF_EFFECT_TYPE_DEBUFF
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = strformat("<<t:1>>",sourceName)
-        local target = strformat("<<t:1>>",targetName)
-        local unitName = strformat("<<t:1>>", GetUnitName("reticleover") )
+        local source = zo_strformat("<<t:1>>",sourceName)
+        local target = zo_strformat("<<t:1>>",targetName)
+        local unitName = zo_strformat("<<t:1>>", GetUnitName("reticleover") )
         if unitName ~= target then return end
         if source == LUIE.PlayerNameFormatted and target ~= nil then
             if SCB.SV.HideTargetBuffs then
@@ -2342,9 +2340,9 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         effectType = BUFF_EFFECT_TYPE_DEBUFF
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = strformat("<<t:1>>",sourceName)
-        local target = strformat("<<t:1>>",targetName)
-        local unitName = strformat("<<t:1>>", GetUnitName("reticleover") )
+        local source = zo_strformat("<<t:1>>",sourceName)
+        local target = zo_strformat("<<t:1>>",targetName)
+        local unitName = zo_strformat("<<t:1>>", GetUnitName("reticleover") )
         --if unitName ~= target then return end
         if source == LUIE.PlayerNameFormatted and target ~= nil then
             if SCB.SV.HideTargetDebuffs then
@@ -2358,7 +2356,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                     forced = "short",
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
-                    savedName = strformat(SI_UNIT_NAME, targetName),
+                    savedName = zo_strformat(SI_UNIT_NAME, targetName),
                     fakeDuration = overrideDuration,
                     groundLabel = groundLabel,
                 }
@@ -2370,7 +2368,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                     forced = "short",
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
-                    savedName = strformat(SI_UNIT_NAME, targetName),
+                    savedName = zo_strformat(SI_UNIT_NAME, targetName),
                     fakeDuration = overrideDuration,
                     groundLabel = groundLabel,
                 }
@@ -2398,9 +2396,9 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         duration = E.FakeStagger[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = strformat("<<t:1>>",sourceName)
-        local target = strformat("<<t:1>>",targetName)
-        local unitName = strformat("<<t:1>>", GetUnitName("reticleover") )
+        local source = zo_strformat("<<t:1>>",sourceName)
+        local target = zo_strformat("<<t:1>>",targetName)
+        local unitName = zo_strformat("<<t:1>>", GetUnitName("reticleover") )
         if source == LUIE.PlayerNameFormatted and target ~= nil then
             if SCB.SV.HideTargetDebuffs then
                 return
@@ -2413,7 +2411,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                     forced = "short",
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
-                    savedName = strformat(SI_UNIT_NAME, targetName),
+                    savedName = zo_strformat(SI_UNIT_NAME, targetName),
                     groundLabel = groundLabel,
                 }
             else
@@ -2424,7 +2422,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                     forced = "short",
                     restart=true, iconNum=0,
                     unbreakable=unbreakable,
-                    savedName = strformat(SI_UNIT_NAME, targetName),
+                    savedName = zo_strformat(SI_UNIT_NAME, targetName),
                     groundLabel = groundLabel,
                 }
             end
@@ -2575,7 +2573,7 @@ function SCB.RestoreSavedFakeEffects()
         --local container = containerRouting[context]
         for k, v in pairs(effectsList) do
             if v.savedName ~= nil then
-                local unitName = strformat(SI_UNIT_NAME, GetUnitName('reticleover'))
+                local unitName = zo_strformat(SI_UNIT_NAME, GetUnitName('reticleover'))
                 if unitName == v.savedName then
                     if LUIE.EffectsList.saved[k] then
                         LUIE.EffectsList.ground[k] = LUIE.EffectsList.saved[k]
@@ -2908,13 +2906,13 @@ function SCB.updateIcons(currentTime, sortedList, container)
             end
 
             if buff.name then
-                buff.name:SetText(strformat("<<C:1>>", effect.name))
+                buff.name:SetText(zo_strformat("<<C:1>>", effect.name))
             end
 
         end
 
         if effect.stack and effect.stack > 0 then
-            buff.stack:SetText( strfmt("%s", effect.stack) )
+            buff.stack:SetText( string.format("%s", effect.stack) )
             buff.stack:SetHidden(false)
         else
             buff.stack:SetHidden(true)
@@ -2923,17 +2921,17 @@ function SCB.updateIcons(currentTime, sortedList, container)
         -- For update remaining text. For temporary effects this is not very efficient, but we have not much such effects
         if remain and not effect.fakeDuration then
             if remain > 86400000 then -- more then 1 day
-                buff.label:SetText( strfmt("%d d", math.floor( remain/86400000 )) )
+                buff.label:SetText( string.format("%d d", math.floor( remain/86400000 )) )
             elseif remain > 6000000 then -- over 100 minutes - display XXh
-                buff.label:SetText( strfmt("%dh", math.floor( remain/3600000 )) )
+                buff.label:SetText( string.format("%dh", math.floor( remain/3600000 )) )
             elseif remain > 600000 then -- over 10 minutes - display XXm
-                buff.label:SetText( strfmt("%dm", math.floor( remain/60000 )) )
+                buff.label:SetText( string.format("%dm", math.floor( remain/60000 )) )
             elseif remain > 60000 or container == "player_long" then
                 local m = math.floor( remain/60000 )
                 local s = remain/1000 - 60*m
-                buff.label:SetText( strfmt("%d:%.2d", m, s) )
+                buff.label:SetText( string.format("%d:%.2d", m, s) )
             else
-                buff.label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.1d", remain/1000) )
+                buff.label:SetText( string.format(SCB.SV.RemainingTextMillis and "%.1f" or "%.1d", remain/1000) )
             end
         end
         if effect.restart and buff.cd ~= nil then
@@ -2978,17 +2976,17 @@ function SCB.OnPlayerActivated(eventCode)
 
     -- Resolve Mounted icon
     if not SCB.SV.IgnoreMount and IsMounted() then
-        callLater(function() SCB.MountStatus(eventCode, true) end, 50)
+        zo_callLater(function() SCB.MountStatus(eventCode, true) end, 50)
     end
 
     -- Resolve Disguise Icon
     if not SCB.SV.IgnoreDisguise then
-        callLater(function() SCB.DisguiseItem(nil, BAG_WORN, 10) end, 50)
+        zo_callLater(function() SCB.DisguiseItem(nil, BAG_WORN, 10) end, 50)
     end
 
     -- Resolve Assistant Icon
     if not SCB.SV.IgnorePet or not SCB.SV.IgnoreAssistant then
-        callLater(function() SCB.CollectibleBuff( eventCode, 0, true) end, 50)
+        zo_callLater(function() SCB.CollectibleBuff( eventCode, 0, true) end, 50)
     end
 
     -- Resolve Werewolf

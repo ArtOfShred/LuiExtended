@@ -11,7 +11,7 @@ local T = LUIE.Tooltips
 local U = LUIE.UnitNames
 local A = LUIE.GetAbility()
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- List of abilities considered for Ultimate generation - used by CombatInfo to determine when Ultimate is being generated (Uses base abilityName sent to the listener - so we need the default names, not LUIE modified ones)
@@ -2365,7 +2365,7 @@ E.EffectHideSCT = {
 --------------------------------------------------------------------------------------------------------------------------------
 E.ArtificialEffectOverride = {
     --[0] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds' }, -- Battle Spirit (Cyrodiil, Duel)
-    [2] = { name = strformat("<<1>> (<<2>>)", A.Skill_Battle_Spirit, A.Skill_Imperial_City) }, -- Battle Spirit Imperial City
+    [2] = { name = zo_strformat("<<1>> (<<2>>)", A.Skill_Battle_Spirit, A.Skill_Imperial_City) }, -- Battle Spirit Imperial City
     [3] = { tooltip = T.Innate_Battleground_Deserter }, -- Battleground Deserter Penalty
 }
 
@@ -2837,22 +2837,22 @@ E.EffectOverride = {
     [107748] = { icon = 'LuiExtended/media/icons/consumables/consumable_artaeum_pickled_fish_bowl.dds', name = A.Food_Artaeum_Pickled_Fish_Bowl }, -- Lure Allure (Artaeum Pickled Fish Bowl)
 
     -- Crafted Drink
-    [61322] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Recovery), tooltip = T.Drink_Crafted_Health }, -- Health Drink
+    [61322] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Recovery), tooltip = T.Drink_Crafted_Health }, -- Health Drink
     [61323] = { hide = true }, -- Well Fed
-    [61325] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Magicka_Recovery), tooltip = T.Drink_Crafted_Magicka }, -- Magicka Drink
+    [61325] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Magicka_Recovery), tooltip = T.Drink_Crafted_Magicka }, -- Magicka Drink
     [61326] = { hide = true }, -- Well Fed
-    [61328] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Stamina_Recovery), tooltip = T.Drink_Crafted_Stamina }, -- Stamina Drink
+    [61328] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Stamina_Recovery), tooltip = T.Drink_Crafted_Stamina }, -- Stamina Drink
     [61329] = { hide = true }, -- Well Fed
-    [61345] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Magicka_Stamina_Recovery), tooltip = T.Drink_Crafted_Magicka_Stamina }, -- Magicka + Stamina Drink
+    [61345] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Magicka_Stamina_Recovery), tooltip = T.Drink_Crafted_Magicka_Stamina }, -- Magicka + Stamina Drink
     [61346] = { hide = true }, -- Well Fed
     [61348] = { hide = true }, -- Well Fed
-    [61340] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Stamina_Recovery), tooltip = T.Drink_Crafted_Health_Stamina }, -- Health + Stamina Drink
+    [61340] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Stamina_Recovery), tooltip = T.Drink_Crafted_Health_Stamina }, -- Health + Stamina Drink
     [61341] = { hide = true }, -- Well Fed
     [61344] = { hide = true }, -- Well Fed
-    [61335] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Magicka_Recovery), tooltip = T.Drink_Crafted_Health_Magicka }, -- Health + Magicka Drink
+    [61335] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Magicka_Recovery), tooltip = T.Drink_Crafted_Health_Magicka }, -- Health + Magicka Drink
     [61336] = { hide = true }, -- Well Fed
     [61339] = { hide = true }, -- Well Fed
-    [61350] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_purple.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Primary_Stat_Recovery), tooltip = T.Drink_Crafted_Triple }, -- Triple Drink
+    [61350] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_purple.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Primary_Stat_Recovery), tooltip = T.Drink_Crafted_Triple }, -- Triple Drink
     [72816] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_red_frothgar.dds', name = A.Drink_Orzorgas_Red_Frothgar }, -- Orzorga's Red Frothgar
     [61354] = { hide = true }, -- Well Fed: Magicka Regen
     [100488] = { icon = 'LuiExtended/media/icons/consumables/consumable_spring-loaded_infusion.dds' }, -- Spring-Loaded Infusion
@@ -2887,17 +2887,17 @@ E.EffectOverride = {
     [66551] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_white.dds', tooltip = T.Food_Vendor_Health }, -- Vendor Health Food
     [66568] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_white.dds', tooltip = T.Food_Vendor_Magicka }, -- Vendor Magicka Food
     [66576] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_white.dds', tooltip = T.Food_Vendor_Stamina }, -- Vendor Stamina Food
-    [66586] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Recovery), tooltip = T.Drink_Vendor_Health }, -- Vendor Health Drink
-    [66590] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Magicka_Recovery), tooltip = T.Drink_Vendor_Magicka }, -- Vendor Magicka Drink
-    [66594] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Stamina_Recovery), tooltip = T.Drink_Vendor_Stamina }, -- Vendor Stamina Drink
+    [66586] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Recovery), tooltip = T.Drink_Vendor_Health }, -- Vendor Health Drink
+    [66590] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Magicka_Recovery), tooltip = T.Drink_Vendor_Magicka }, -- Vendor Magicka Drink
+    [66594] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Stamina_Recovery), tooltip = T.Drink_Vendor_Stamina }, -- Vendor Stamina Drink
 
     -- AVA Food & Drink
     [72961] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_bar.dds', name = A.Food_Magicka_Stamina_Increase, tooltip = T.Food_Cyrodilic_Field_Bar }, -- Cyrodilic Field Bar
     [72956] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_tack.dds', name = A.Food_Health_Stamina_Increase, tooltip = T.Food_Cyrodilic_Field_Tack }, -- Cyrodilic Field Tack
     [72959] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_treat.dds', name = A.Food_Health_Magicka_Increase, tooltip = T.Food_Cyrodilic_Field_Treat }, -- Cyrodilic Field Treat
-    [72971] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_tonic.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Magicka_Stamina_Recovery), tooltip = T.Drink_Cyrodilic_Field_Tonic }, -- Cyrodilic Field Tonic
-    [72965] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_brew.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Stamina_Recovery), tooltip = T.Drink_Cyrodilic_Field_Brew }, -- Cyrodilic Field Brew
-    [72968] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_tea.dds', name = strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Magicka_Recovery), tooltip = T.Drink_Cyrodilic_Field_Tea }, -- Cyrodilic Field Tea
+    [72971] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_tonic.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Magicka_Stamina_Recovery), tooltip = T.Drink_Cyrodilic_Field_Tonic }, -- Cyrodilic Field Tonic
+    [72965] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_brew.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Stamina_Recovery), tooltip = T.Drink_Cyrodilic_Field_Brew }, -- Cyrodilic Field Brew
+    [72968] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_tea.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Magicka_Recovery), tooltip = T.Drink_Cyrodilic_Field_Tea }, -- Cyrodilic Field Tea
 
     -- Crown Food & Drink
     [85484] = { icon = 'LuiExtended/media/icons/consumables/consumable_crown_crate_food.dds', name = A.Food_Crown_Crate_Meal, tooltip = T.Food_Crown_Crate_Meal }, -- Crown Crate Fortifying Meal
@@ -2919,7 +2919,7 @@ E.EffectOverride = {
     [85503] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds', name = A.Experience_Crown_Crate_Scroll_3, tooltip = T.Experience_Grand_Gold_Coast }, -- Grand Gold Coast Experience Scroll
 
     -- Other
-    [113432] = { icon = 'esoui/art/icons/achievement_su_groupboss_2.dds', name = strformat("<<1>> <<2>>", A.Innate_Summon, A.Innate_Nascent_Indrik) }, -- 68235 Stun (Nascent Indrik)
+    [113432] = { icon = 'esoui/art/icons/achievement_su_groupboss_2.dds', name = zo_strformat("<<1>> <<2>>", A.Innate_Summon, A.Innate_Nascent_Indrik) }, -- 68235 Stun (Nascent Indrik)
     [70582] = { hide = true }, -- Roll 1d1000 (Merethic Restorative Resin)
     [63427] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fillet_fish.dds', name = A.Innate_Fillet_Fish }, -- Clean Fish
     [78052] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_pardon_edict_low.dds', name = A.Innate_Pardon_Edict_Low }, -- Minor Pardon
@@ -3509,13 +3509,13 @@ E.EffectOverride = {
     -- Trial Sets (Hel Ra Citadel)
     [50978] = { icon = 'esoui/art/icons/achievement_update11_dungeons_001.dds', tooltip = T.Set_Berserking_Warrior }, -- Berserking Warrior (Advancing Yokeda)
     [90937] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', unbreakable = 1, tooltip = T.Generic_Immunity }, -- Immortal Warrior (Immortal Yokeda)
-    [90938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = strformat("<<1>> <<2>>", A.Set_Immortal_Warrior, A.Set_Cooldown), tooltip = T.Set_Eternal_Immortal_Warrior }, -- Immortal Warrior (Immortal Yokeda)
+    [90938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Set_Immortal_Warrior, A.Set_Cooldown), tooltip = T.Set_Eternal_Immortal_Warrior }, -- Immortal Warrior (Immortal Yokeda)
     [86907] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
     [50992] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
     [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', tooltip = T.Skill_Minor_Aegis }, -- Minor Aegis (Eternal Yokeda)
     [90940] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', unbreakable = 1, tooltip = T.Generic_Immunity }, -- Eternal Warrior (Eternal Yokeda)
     [61437] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds' }, -- Eternal Warrior (Eternal Yokeda)
-    [90939] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = strformat("<<1>> <<2>>", A.Set_Eternal_Warrior, A.Set_Cooldown), tooltip = T.Set_Eternal_Immortal_Warrior }, -- Eternal Warrior (Eternal Yokeda)
+    [90939] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Set_Eternal_Warrior, A.Set_Cooldown), tooltip = T.Set_Eternal_Immortal_Warrior }, -- Eternal Warrior (Eternal Yokeda)
 
     -- Trial Sets (Aetherian Archive)
     [51315] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Set_Destructive_Mage }, -- Destructive Mage (Aether... of Destruction)
@@ -3592,7 +3592,7 @@ E.EffectOverride = {
     [79420] = { icon = 'LuiExtended/media/icons/abilities/ability_set_galerions_revenge.dds' }, -- Galerion's Revenge (Galerion's)
     [65706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_meritorious_service.dds', tooltip = T.Set_Meritorius_Service }, -- Meritorious Service (of Meritorious Service)
     [90935] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds', unbreakable = 1, tooltip = T.Generic_Immunity }, -- Phoenix (of the Phoenix)
-    [90936] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix_icd.dds', name = strformat("<<1>> <<2>>", A.Set_Phoenix, A.Set_Cooldown), tooltip = T.Set_Phoenix }, -- Phoenix (of the Phoenix)
+    [90936] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Set_Phoenix, A.Set_Cooldown), tooltip = T.Set_Phoenix }, -- Phoenix (of the Phoenix)
     [68940] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds' }, -- Phoenix (of the Phoenix)
     [70405] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds' }, -- Phoenix (of the Phoenix)
     [61771] = { icon = 'LuiExtended/media/icons/abilities/ability_set_powerful_assault.dds', tooltip = T.Generic_Weapon_Spell_Damage_Duration }, -- Powerful Assault (of the Powerful Assault)
@@ -3617,7 +3617,7 @@ E.EffectOverride = {
     [34384] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morag_tong.dds', tooltip = T.Set_Morag_Tong }, -- The Morag Tong (of the Morag Tong)
 
     [117391] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sentry.dds', tooltip = T.Set_Sentry }, -- Sentry (of the Sentry)
-    [117397] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sentry_icd.dds', tooltip = T.Set_Sentry_Cooldown, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, name = strformat("<<1>> <<2>>", A.Set_Sentry, A.Set_Cooldown) }, -- Exhausted Sentry (of the Sentry)
+    [117397] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sentry_icd.dds', tooltip = T.Set_Sentry_Cooldown, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, name = zo_strformat("<<1>> <<2>>", A.Set_Sentry, A.Set_Cooldown) }, -- Exhausted Sentry (of the Sentry)
 
     [57180] = { icon = 'esoui/art/icons/achievement_thievesguild_011.dds' }, -- Shadow Walker (of the Shadow Walker)
     [57181] = { icon = 'esoui/art/icons/achievement_thievesguild_011.dds' }, -- Shadow Walker (of the Shadow Walker)
@@ -4136,15 +4136,15 @@ E.EffectOverride = {
     [36973] = { tooltip = A.Skill_Reapers_Mark }, -- Major Berserk (Reaper's Mark)
 
     -- Grim Focus / Relentless Focus / Merciless Resolve
-    [61902] = { tooltip = T.Skill_Grim_Focus, tooltipValue2 = strformat("<<C:1>>", GetAbilityName(61902)) }, -- Grim Focus (Grim Focus)
+    [61902] = { tooltip = T.Skill_Grim_Focus, tooltipValue2 = zo_strformat("<<C:1>>", GetAbilityName(61902)) }, -- Grim Focus (Grim Focus)
     [61907] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Grim Focus)
     [122585] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Grim Focus)
     [61905] = { tooltip = T.Skill_Grim_Focus_Defense }, -- Grim Focus (Grim Focus)
-    [61927] = { tooltip = T.Skill_Relentless_Focus, tooltipValue2 = strformat("<<C:1>>", GetAbilityName(61927)) }, -- Relentless Focus (Relentless Focus)
+    [61927] = { tooltip = T.Skill_Relentless_Focus, tooltipValue2 = zo_strformat("<<C:1>>", GetAbilityName(61927)) }, -- Relentless Focus (Relentless Focus)
     [61932] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Scourge (Relentless Focus)
     [122587] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', name = A.Skill_Assassins_Scourge }, -- Death Scythe
     [61928] = { tooltip = T.Skill_Grim_Focus_Defense }, -- Relentless Focus (Relentless Focus)
-    [61919] = { tooltip = T.Skill_Grim_Focus, tooltipValue2 = strformat("<<C:1>>", GetAbilityName(61919)) }, -- Merciless Resolve (Merciless Resolve)
+    [61919] = { tooltip = T.Skill_Grim_Focus, tooltipValue2 = zo_strformat("<<C:1>>", GetAbilityName(61919)) }, -- Merciless Resolve (Merciless Resolve)
     [61930] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Merciless Resolve)
     [122586] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', name = A.Skill_Assassins_Will }, -- Death Scythe (Merciless Resolve)
     [61920] = { tooltip = T.Skill_Grim_Focus_Defense }, -- Merciless Resolve (Merciless Resolve)
@@ -4758,7 +4758,7 @@ E.EffectOverride = {
     [94625] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = T.Skill_Guardians_Wrath }, -- Guardian's Wrath (Eternal Guardian)
     [94626] = { hide = true }, -- Guardian's Wrath Trigger (Eternal Guardian)
     [109983] = { hide = true }, -- Eternal Guardian Revive (Eternal Guardian)
-    [110384] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_eternal_guardian_icd.dds', name = strformat("<<1>> <<2>>", A.Skill_Eternal_Guardian, A.Set_Cooldown), tooltip = T.Skill_Eternal_Guardian_Cooldown, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Eternal Guardian (Eternal Guardian)
+    [110384] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_eternal_guardian_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Eternal_Guardian, A.Set_Cooldown), tooltip = T.Skill_Eternal_Guardian_Cooldown, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Eternal Guardian (Eternal Guardian)
     [85990] = { tooltip = T.Skill_Wild_Guardian }, -- Wild Guardian (Wild Guardian)
     [89219] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_swipe.dds', name = A.Skill_Bite }, -- Swipe (Wild Guardian)
     [89220] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_crushing_swipe.dds' }, -- Crushing Swipe (Wild Guardian)
@@ -5570,7 +5570,7 @@ E.EffectOverride = {
     [45584] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_shatter.dds' }, -- Soul Shatter (Soul Shatter - Rank 2)
     [39269] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_summons.dds' }, -- Soul Summons
     [45590] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_summons.dds' }, -- Soul Summons
-    [43752] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_summons_icd.dds', name = strformat("<<1>> <<2>>", A.Passive_Soul_Summons, A.Set_Cooldown), tooltip = T.Skill_Soul_Summons }, -- Soul Summons
+    [43752] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_summons_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Soul_Summons, A.Set_Cooldown), tooltip = T.Skill_Soul_Summons }, -- Soul Summons
     [39263] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_lock.dds' }, -- Soul Lock
     [39264] = { hide = true }, -- Soul Trap (Soul Lock - Rank 1)
     [45580] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_lock.dds' }, -- Soul Lock
@@ -5611,7 +5611,7 @@ E.EffectOverride = {
     [40351] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed (Blood Ritual - Rank 1)
     [40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', unbreakable = 1 }, -- Feed (Blood Ritual - Rank 1)
     [40353] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = A.Skill_Feed, tooltip = T.Generic_Stun }, -- Uber Attack (Blood Ritual - Rank 1)
-    [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = strformat("<<1>> <<2>>", A.Passive_Blood_Ritual, A.Set_Cooldown), tooltip = T.Skill_Blood_Ritual }, -- Fed on ally (Blood Ritual)
+    [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Blood_Ritual, A.Set_Cooldown), tooltip = T.Skill_Blood_Ritual }, -- Fed on ally (Blood Ritual)
 
     ----------------------------------------------------------------
     -- VAMPIRE ACTIVES --------------------------------------------
@@ -5675,7 +5675,7 @@ E.EffectOverride = {
     [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour)
     [40515] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Blood Moon)
     [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = A.Skill_Devour, unbreakable = 1, tooltip = T.Generic_Stun }, -- Q3047 - Knockdown (Blood Moon)
-    [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = strformat("<<1>> <<2>>", A.Passive_Bloodmoon, A.Set_Cooldown), tooltip = T.Skill_Blood_Moon }, -- Bit an Ally (Blood Moon)
+    [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = zo_strformat("<<1>> <<2>>", A.Passive_Bloodmoon, A.Set_Cooldown), tooltip = T.Skill_Blood_Moon }, -- Bit an Ally (Blood Moon)
 
     ----------------------------------------------------------------
     -- WEREWOLF ACTIVES --------------------------------------------
@@ -8182,61 +8182,61 @@ E.EffectOverride = {
 
     [12256] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_pack_siege.dds', name = A.Skill_Stow_Siege_Weapon }, -- Pack Siege (Generic Siege)
 
-    [29673] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
-    [29672] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
-    [29671] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
+    [29673] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
+    [29672] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
+    [29671] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Ballista) }, -- Create Ballista Bolt... (Ballista)
     [7468] = { icon = 'esoui/art/icons/ava_siege_ammo_006.dds' }, -- Ballista Bolt (Ballista)
     [7469] = { icon = 'esoui/art/icons/ava_siege_ammo_006.dds' }, -- Ballista Bolt (Ballista)
     [13043] = { icon = 'esoui/art/icons/ava_siege_ammo_006.dds' }, -- Ballista Bolt (Ballista)
 
-    [30611] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
-    [30607] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
-    [16751] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
+    [30611] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
+    [30607] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
+    [16751] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Fire_Ballista) }, -- Create Ballista Fire Bolt... (Fire Ballista)
     [16775] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_fire_ballista_bolt.dds' }, -- Fire Ballista Bolt (Fire Ballista)
     [28480] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_fire_ballista_bolt.dds', tooltip = T.Generic_Burn, tooltipValue2 = 2 }, -- Fire Ballista Bolt (Fire Ballista)
     [14367] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_fire_ballista_bolt.dds' }, -- Fire Ballista Bolt (Fire Ballista)
 
-    [30612] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Lightning_Ballista) }, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
-    [30608] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Lightning_Ballista) }, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
-    [16752] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Lightning_Ballista) }, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+    [30612] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Lightning_Ballista) }, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+    [30608] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Lightning_Ballista) }, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+    [16752] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Lightning_Ballista) }, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
     [14363] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_lightning_ballista_bolt.dds' }, -- Lightning Ballista Bolt (Lightning Ballista)
     [14364] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_lightning_ballista_bolt.dds', tooltip = T.Skill_Lightning_Ballista_Bolt }, -- Lightning Ballista Bolt (Lightning Ballista)
     [16776] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_lightning_ballista_bolt.dds' }, -- Lightning Ballista Bolt (Lightning Ballista)
     [76103] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_lightning_ballista_bolt.dds', name = A.Skill_Lightning_Ballista_Bolt }, -- Magicka Hit (Lightning Ballista)
     [30454] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_lightning_ballista_bolt.dds' }, -- Lightning Ballista Bolt (Lightning Ballista)
 
-    [39914] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Stone_Trebuchet) }, -- Create Trebuchet... (Stone Trebuchet)
-    [39917] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Stone_Trebuchet) }, -- Create Trebuchet... (Stone Trebuchet)
-    [39910] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Stone_Trebuchet) }, -- Create Trebuchet... (Stone Trebuchet)
+    [39914] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Stone_Trebuchet) }, -- Create Trebuchet... (Stone Trebuchet)
+    [39917] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Stone_Trebuchet) }, -- Create Trebuchet... (Stone Trebuchet)
+    [39910] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Stone_Trebuchet) }, -- Create Trebuchet... (Stone Trebuchet)
 
-    [39913] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Iceball_Trebuchet) }, -- Create Trebuchet... (Iceball Trebuchet)
-    [39916] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Iceball_Trebuchet) }, -- Create Trebuchet... (Iceball Trebuchet)
-    [39909] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Iceball_Trebuchet) }, -- Create Trebuchet... (Iceball Trebuchet)
+    [39913] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Iceball_Trebuchet) }, -- Create Trebuchet... (Iceball Trebuchet)
+    [39916] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Iceball_Trebuchet) }, -- Create Trebuchet... (Iceball Trebuchet)
+    [39909] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Iceball_Trebuchet) }, -- Create Trebuchet... (Iceball Trebuchet)
     [13551] = { icon = 'esoui/art/icons/ava_siege_ammo_002.dds' }, -- Iceball Trebuchet (Iceball Trebuchet)
     [64105] = { icon = 'esoui/art/icons/ava_siege_ammo_002.dds' }, -- Iceball Trebuchet (Iceball Trebuchet)
     [13588] = { icon = 'esoui/art/icons/ava_siege_ammo_002.dds', tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Iceball Trebuchet (Iceball Trebuchet)
     [13552] = { icon = 'esoui/art/icons/ava_siege_ammo_002.dds' }, -- Iceball Trebuchet (Iceball Trebuchet)
 
-    [13665] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Firepot_Trebuchet) }, -- Create Trebuchet... (Firepot Trebuchet)
-    [13664] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Firepot_Trebuchet) }, -- Create Trebuchet... (Firepot Trebuchet)
-    [13663] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Firepot_Trebuchet) }, -- Create Trebuchet... (Firepot Trebuchet)
+    [13665] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Firepot_Trebuchet) }, -- Create Trebuchet... (Firepot Trebuchet)
+    [13664] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Firepot_Trebuchet) }, -- Create Trebuchet... (Firepot Trebuchet)
+    [13663] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Firepot_Trebuchet) }, -- Create Trebuchet... (Firepot Trebuchet)
     [7010] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_firepot_trebuchet.dds' }, -- Firepot Trebuchet (Firepot Trebuchet)
     [7429] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_firepot_trebuchet.dds' }, -- Firepot Trebuchet (Firepot Trebuchet)
     [28483] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_firepot_trebuchet.dds', tooltip = T.Generic_Burn, tooltipValue2 = 2 }, -- Firepot Trebuchet (Firepot Trebuchet)
     [25869] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_firepot_trebuchet.dds', tooltip = T.Generic_Burn, tooltipValue2 = 2 }, -- Firepot Trebuchet (Firepot Trebuchet)
 
-    [30613] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Meatbag_Catapult) }, -- Create Catapult Meatbag (Meatbag Catapult)
-    [30609] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Meatbag_Catapult) }, -- Create Catapult Meatbag (Meatbag Catapult)
-    [16755] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Meatbag_Catapult) }, -- Create Catapult Meatbag (Meatbag Catapult)
+    [30613] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Meatbag_Catapult) }, -- Create Catapult Meatbag (Meatbag Catapult)
+    [30609] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Meatbag_Catapult) }, -- Create Catapult Meatbag (Meatbag Catapult)
+    [16755] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Meatbag_Catapult) }, -- Create Catapult Meatbag (Meatbag Catapult)
     [88714] = { tooltip = T.Skill_Meatbag_Catapult_Ground }, -- Meatbag (Meatbag Catapult)
     [14774] = { icon = 'esoui/art/icons/ava_siege_ammo_003.dds' }, -- Meatbag Catapult (Meatbag Catapult)
     [104693] = { icon = 'esoui/art/icons/ava_siege_ammo_003.dds', tooltip = T.Skill_Meatbag_Catapult_AOE, groundLabel = true }, -- Meatbag Catapult (Meatbag Catapult)
     [32036] = { icon = 'esoui/art/icons/ava_siege_ammo_003.dds', tooltip = T.Skill_Meatbag_Catapult }, -- Meatbag Catapult (Meatbag Catapult)
     [36408] = { icon = 'esoui/art/icons/ava_siege_ammo_003.dds', type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = T.Generic_Disease, tooltipValue2 = 2 }, -- Meatbag Catapult (Meatbag Catapult)
 
-    [30614] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Oil_Catapult) }, -- Create Catapult Oil Jar... (Oil Catapult)
-    [30610] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Oil_Catapult) }, -- Create Catapult Oil Jar... (Oil Catapult)
-    [16754] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Oil_Catapult) }, -- Create Catapult Oil Jar... (Oil Catapult)
+    [30614] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Oil_Catapult) }, -- Create Catapult Oil Jar... (Oil Catapult)
+    [30610] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Oil_Catapult) }, -- Create Catapult Oil Jar... (Oil Catapult)
+    [16754] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Oil_Catapult) }, -- Create Catapult Oil Jar... (Oil Catapult)
     [104700] = { tooltip = T.Skill_Oil_Catapult_Ground }, -- Twisting Path (Oil Catapult)
     [16789] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_oil_catapult.dds' }, -- Oil Catapult (Oil Catapult)
     [104699] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_oil.dds', tooltip = T.Generic_Snare, tooltipValue2 = 50 }, -- Oil Catapult (Oil Catapult)
@@ -8244,43 +8244,43 @@ E.EffectOverride = {
     [76105] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_oil_catapult.dds', name = A.Skill_Oil_Catapult }, -- Stamina Hit (Oil Catapult)
     [16790] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_oil_catapult.dds' }, -- Oil Catapult (Oil Catapult)
 
-    [39915] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Scattershot_Catapult) }, -- Create Catapult Meatbag (Scattershot Catapult)
-    [39918] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Scattershot_Catapult) }, -- Create Catapult Oil Jar... (Scattershot Catapult)
-    [39911] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Scattershot_Catapult) }, -- Create Trebuchet... (Scattershot Catapult)
+    [39915] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Scattershot_Catapult) }, -- Create Catapult Meatbag (Scattershot Catapult)
+    [39918] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Scattershot_Catapult) }, -- Create Catapult Oil Jar... (Scattershot Catapult)
+    [39911] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_catapult.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Scattershot_Catapult) }, -- Create Trebuchet... (Scattershot Catapult)
     [104690] = { tooltip = T.Skill_Scattershot_Catapult_Ground }, -- Twisting Path (Scattershot Catapult)
     [14611] = { icon = 'esoui/art/icons/ava_siege_ammo_005.dds' }, -- Scattershot Catapult (Scattershot Catapult)
     [104695] = { icon = 'esoui/art/icons/ava_siege_ammo_005.dds', tooltip = T.Skill_Scattershot_Catapult_AOE, groundLabel = true }, -- Scattershot Catapult (Scattershot Catapult)
     [104696] = { icon = 'esoui/art/icons/ava_siege_ammo_005.dds', tooltip = T.Skill_Scattershot_Catapult }, -- Scattershot Catapult (Scattershot Catapult)
 
-    [66438] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
-    [66439] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
-    [66440] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
+    [66438] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
+    [66439] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
+    [66440] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Cold_Stone_Trebuchet) }, -- Create Trebuchet... (Cold Stone Trebuchet)
     [66250] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet_shot.dds', name = A.Skill_Cold_Stone_Trebuchet }, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
     [66251] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet_shot.dds', name = A.Skill_Cold_Stone_Trebuchet }, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
     [66252] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_stone_trebuchet_shot.dds', name = A.Skill_Cold_Stone_Trebuchet }, -- Stone Cold Trebuchet (Cold Stone Trebuchet)
 
-    [66434] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Cold_Fire_Trebuchet) }, -- Create Trebuchet... (Cold Fire Trebuchet)
-    [66388] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Cold_Fire_Trebuchet) }, -- Create Trebuchet... (Cold Fire Trebuchet)
-    [66387] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Cold_Fire_Trebuchet) }, -- Create Trebuchet... (Cold Fire Trebuchet)
+    [66434] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Cold_Fire_Trebuchet) }, -- Create Trebuchet... (Cold Fire Trebuchet)
+    [66388] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Cold_Fire_Trebuchet) }, -- Create Trebuchet... (Cold Fire Trebuchet)
+    [66387] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Cold_Fire_Trebuchet) }, -- Create Trebuchet... (Cold Fire Trebuchet)
     [66246] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet_shot.dds', name = A.Skill_Cold_Fire_Trebuchet }, -- Firepot Trebuchet (Cold Fire Trebuchet)
     [66247] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet_shot.dds', name = A.Skill_Cold_Fire_Trebuchet, tooltip = T.Generic_Burn, tooltipValue2 = 2 }, -- Firepot Trebuchet (Cold Fire Trebuchet)
     [66248] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet_shot.dds', name = A.Skill_Cold_Fire_Trebuchet }, -- Firepot Trebuchet (Cold Fire Trebuchet)
     [66245] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_trebuchet_shot.dds', name = A.Skill_Cold_Fire_Trebuchet, tooltip = T.Generic_Burn, tooltipValue2 = 2 }, -- Cold Harbor Trebuchet (Cold Fire Trebuchet)
 
-    [66437] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
-    [66436] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
-    [66435] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
+    [66437] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
+    [66436] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
+    [66435] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Cold_Fire_Ballista) }, -- Create Ballista... (Cold Fire Ballista)
     [66242] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista_bolt.dds', name = A.Skill_Cold_Fire_Ballista_Bolt }, -- Fire Ballista Bolt (Cold Fire Ballista)
     [66244] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista_bolt.dds', name = A.Skill_Cold_Fire_Ballista_Bolt }, -- Fire Ballista Bolt (Cold Fire Ballista)
     [66243] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_cold_fire_ballista_bolt.dds', name = A.Skill_Cold_Fire_Ballista_Bolt, tooltip = T.Generic_Burn, tooltipValue2 = 2 }, -- Cold Harbor Ballista Bolt (Cold Fire Ballista)
 
-    [22570] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_flaming_oil.dds', name = strformat("<<1>> <<2>>", A.Skill_Deploy, A.Skill_Flaming_Oil) }, -- Create Boiling Oil... (Flaming Oil)
+    [22570] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_flaming_oil.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Deploy, A.Skill_Flaming_Oil) }, -- Create Boiling Oil... (Flaming Oil)
     [15775] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_burning_oil.dds', tooltip = T.Generic_Burn, tooltipValue2 = 2 }, -- Flaming oil (Flaming Oil)
     [15776] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_burning_oil.dds', name = A.Skill_Flaming_Oil, tooltip = T.Generic_Burn, tooltipValue2 = 2 }, -- Flaming oil (Flaming Oil)
 
-    [15876] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ram.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Battering_Ram) }, -- Create Large Ram... (Battering Ram)
-    [16171] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ram.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Battering_Ram) }, -- Create Large Ram... (Battering Ram)
-    [16170] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ram.dds', name = strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Battering_Ram) }, -- Create Large Ram... (Battering Ram)
+    [15876] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ram.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Covenant, A.Skill_Battering_Ram) }, -- Create Large Ram... (Battering Ram)
+    [16171] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ram.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Pact, A.Skill_Battering_Ram) }, -- Create Large Ram... (Battering Ram)
+    [16170] = { icon = 'LuiExtended/media/icons/abilities/ability_ava_ram.dds', name = zo_strformat("<<1>> <<2>> <<3>>", A.Skill_Deploy, A.Skill_Dominion, A.Skill_Battering_Ram) }, -- Create Large Ram... (Battering Ram)
 
     [12355] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds' }, -- Destroy Siege Weapon
 
@@ -8486,7 +8486,7 @@ E.EffectOverride = {
     [28746] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_tentacle_whip.dds' }, -- Tentacle Whip (Manifestation of Terror)
 
     -- Castle of the Worm
-    [41852] = { icon = 'LuiExtended/media/icons/abilities/ability_set_oblivion.dds', name = strformat("<<1>> <<2>>", A.Skill_Necrotic, A.Skill_Barrier) }, -- Necrotic
+    [41852] = { icon = 'LuiExtended/media/icons/abilities/ability_set_oblivion.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Necrotic, A.Skill_Barrier) }, -- Necrotic
     [16019] = { hide = true }, -- Bone Pile Explosion
     [33597] = { hide = true }, -- Invisible Underground
     [35794] = { hide = true }, -- Material Effect
@@ -8544,9 +8544,9 @@ E.EffectOverride = {
     [40399] = { hide = true }, -- Daedric Step (Mannimarco)
     [38215] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_deaths_gaze.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Death's Gaze (Mannimarco)
     [38217] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_deaths_gaze.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, duration = 0 }, -- Death's Gaze (Mannimarco)
-    [40425] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_shock_nova.dds', name = strformat("<<1>> <<2>>", A.Skill_Shock, A.Skill_Nova) }, -- Impending Doom (Mannimarco)
-    [40427] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_shock_nova.dds', name = strformat("<<1>> <<2>>", A.Skill_Shock, A.Skill_Nova) }, -- Doom (Mannimarco)
-    [40430] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_shock_nova.dds', name = strformat("<<1>> <<2>>", A.Skill_Shock, A.Skill_Nova) }, -- Doom (Mannimarco)
+    [40425] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_shock_nova.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Shock, A.Skill_Nova) }, -- Impending Doom (Mannimarco)
+    [40427] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_shock_nova.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Shock, A.Skill_Nova) }, -- Doom (Mannimarco)
+    [40430] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_shock_nova.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Shock, A.Skill_Nova) }, -- Doom (Mannimarco)
     [41022] = { hide = true }, -- Nova (Mannimarco)
     [40429] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback, unbreakable = 1 }, -- IntroKB (Mannimarco)
     [40426] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = A.Skill_Knockback }, -- Staggering Roar (Mannimarco)
@@ -8610,8 +8610,8 @@ E.EffectOverride = {
     [26406] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence.dds', name = A.Skill_Essence, stack = 1, stackAdd = 1 }, -- MG2 Captured Essence
     [26634] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence_greater.dds', name = A.Skill_Sahdinas_Essence }, -- MG2 Captured Sahdina Essence
     [26581] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_essence_greater.dds', name = A.Skill_Rashomtas_Essence }, -- MG2 Captured Rashomta Essence
-    [31502] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), unbreakable = 1 }, -- MGQ2 Asakala Sahdina Barrier
-    [31503] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), unbreakable = 1 }, -- MGQ2 Asakala Rashomta Barrier
+    [31502] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), unbreakable = 1 }, -- MGQ2 Asakala Sahdina Barrier
+    [31503] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks_brown.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Rock, A.Skill_Barrier), unbreakable = 1 }, -- MGQ2 Asakala Rashomta Barrier
 
     -- Circus of Cheerful Slaughter
     [29814] = { hide = true }, -- Ansei Ward
@@ -8745,7 +8745,7 @@ E.EffectOverride = {
     [44136] = { hide = true }, -- RobS Stun Perm
 
     -- The Serpent's Beacon
-    [21364] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_maormer_rune.dds', name = strformat("<<1>> <<2>>", A.Skill_Dispel, A.Skill_Barrier) }, -- Casting...
+    [21364] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_maormer_rune.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Dispel, A.Skill_Barrier) }, -- Casting...
     [21409] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_teleport_scroll.dds', name = A.Skill_Teleport_Scroll }, -- Reading...
 
     -- Corruption Stones
@@ -8780,7 +8780,7 @@ E.EffectOverride = {
     [23187] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_bind_hands.dds', name = A.Skill_Unbind }, -- Q4236 PC Untie Palith
 
     -- Preventative Measure
-    [23606] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback_crystal.dds', name = strformat("<<1>> <<2>>", A.Skill_Crystal, A.Skill_Backfire), unbreakable = 1, tooltip = T.Generic_Stun }, -- Q4326 Crystal Backfire
+    [23606] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_feedback_crystal.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Crystal, A.Skill_Backfire), unbreakable = 1, tooltip = T.Generic_Stun }, -- Q4326 Crystal Backfire
     [24535] = { hide = true }, -- Disrupting...
 
     -- Blessings of the Eight
@@ -8832,7 +8832,7 @@ E.EffectOverride = {
     [37465] = { hide = true }, -- Q4842 Despawn Self
     [38942] = { hide = true }, -- Q4868 Rufinus Is Shocked
     [38596] = { hide = true }, -- Q4842 Stun
-    [37583] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_old_scroll.dds', name = strformat("<<1>> <<2>>", A.Skill_Dispel, A.Skill_Barrier) }, -- Q4868 Unlock Chapel
+    [37583] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_old_scroll.dds', name = zo_strformat("<<1>> <<2>>", A.Skill_Dispel, A.Skill_Barrier) }, -- Q4868 Unlock Chapel
     [38744] = { hide = true }, -- Q4868 Sheo Teleports Player
     [38720] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_lightning_fury.dds', tooltip = T.Skill_Lightning_Fury }, -- Lightning Fury
     [47710] = { hide = true }, -- Lightning Fury
@@ -9931,7 +9931,7 @@ E.EffectOverride = {
     [18725] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_headbutt.dds' }, -- Spiked Headbutt (Shadowrend)
     [47587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_tail_spike.dds' }, -- Tail Smite (Shadowrend)
     [47608] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_tail_spike.dds', name = A.Skill_Tail_Smite, tooltip = T.Generic_Knockdown }, -- Knocked Down (Shadowrend)
-    [21886] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_shadow_proxy.dds', name = strformat("<<1>> <<2>>", A.Innate_Summon, A.Skill_Shadow_Proxy), tooltip = T.Skill_Summon_Dark_Proxy }, -- Summon Dark Proxy (Shadowrend)
+    [21886] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_shadow_proxy.dds', name = zo_strformat("<<1>> <<2>>", A.Innate_Summon, A.Skill_Shadow_Proxy), tooltip = T.Skill_Summon_Dark_Proxy }, -- Summon Dark Proxy (Shadowrend)
     [21887] = { hide = true }, -- Forward Charge (Dark Proxy)
     [35625] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_rending_leap_shadowrend.dds' }, -- Pounce (Shadowrend)
     [18772] = { icon = 'LuiExtended/media/icons/abilities/ability_clannfear_devour_shadowrend.dds', name = A.Skill_Devour, hide = true }, -- Feeding (Shadowrend)

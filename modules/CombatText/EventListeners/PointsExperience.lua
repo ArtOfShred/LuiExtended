@@ -6,8 +6,6 @@
 LUIE.CombatTextPointsExperienceEventListener = LUIE.CombatTextEventListener:Subclass()
 local CTL = LUIE.CombatTextPointsExperienceEventListener
 
-local callLater = zo_callLater
-
 function CTL:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_EXPERIENCE_UPDATE, function(...) self:OnEvent(...) end, REGISTER_FILTER_UNIT_TAG, 'player')
@@ -53,7 +51,7 @@ function CTL:OnEvent(unit, currentXp, maxXp)
         -- Trigger custom event (500ms buffer)
         if (self.gain > 0 and not self.timeoutActive) then
             self.timeoutActive = true
-            callLater(function()
+            zo_callLater(function()
                 self:TriggerEvent(LUIE.CombatTextConstants.eventType.POINT, LUIE.CombatTextConstants.pointType.EXPERIENCE_POINTS, self.gain)
                 self.gain = 0
                 self.timeoutActive = false

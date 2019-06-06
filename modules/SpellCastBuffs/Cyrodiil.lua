@@ -7,7 +7,7 @@ local SCB = LUIE.SpellCastBuffs
 
 local A = LUIE.GetAbility()
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 local g_currentDuelTarget = nil -- Saved Duel Target for generating Battle Spirit icon when enabled
 
@@ -15,7 +15,7 @@ local g_currentDuelTarget = nil -- Saved Duel Target for generating Battle Spiri
 function SCB.DuelStart()
     local duelState, characterName = GetDuelInfo()
     if duelState == 3 and not SCB.SV.IgnoreBattleSpiritTarget then
-        g_currentDuelTarget = strformat(SI_UNIT_NAME, characterName)
+        g_currentDuelTarget = zo_strformat(SI_UNIT_NAME, characterName)
         SCB.ReloadEffects("reticleover")
     end
 end

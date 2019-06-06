@@ -3,7 +3,8 @@
     License: The MIT License (MIT)
 --]]
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
+
 local eventManager = EVENT_MANAGER
 
 -- Load saved settings
@@ -46,7 +47,7 @@ local function LoadScreen()
     eventManager:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
     if not LUIE.SV.StartupInfo then
-        LUIE.PrintToChat(strformat("|cFEFEFE<<1>> by|r |c00C000<<2>>|r |cFEFEFEv<<3>>|r", LUIE.name, LUIE.author, LUIE.version), true)
+        LUIE.PrintToChat(zo_strformat("|cFEFEFE<<1>> by|r |c00C000<<2>>|r |cFEFEFEv<<3>>|r", LUIE.name, LUIE.author, LUIE.version), true)
     end
 end
 
@@ -79,8 +80,8 @@ local function OnAddonOnLoaded(eventCode, addonName)
     LUIE.InitializeHooks()
 
     LUIE.PlayerNameRaw = GetRawUnitName("player")
-    LUIE.PlayerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
-    LUIE.PlayerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
+    LUIE.PlayerNameFormatted = zo_strformat(SI_UNIT_NAME, GetUnitName("player"))
+    LUIE.PlayerDisplayName = zo_strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
 
     -- Initialize this addon modules according to user preferences
     LUIE.ChatAnnouncements.Initialize(LUIE.SV.ChatAnnouncements_Enable)

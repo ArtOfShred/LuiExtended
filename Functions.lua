@@ -3,8 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-local strfmt = string.format
-
 -- Called from the menu and on initialization to update timestamp color when changed.
 local TimeStampColorize
 function LUIE.UpdateTimeStampColor()
@@ -54,7 +52,7 @@ local function FormatMessage(msg, doTimestamp)
     if doTimestamp then
         local timestring = GetTimeString()
         -- Color Code to match pChat default
-        msg = strfmt("|c%s[%s]|r %s", TimeStampColorize, LUIE.CreateTimestamp(timestring), msg)
+        msg = string.format("|c%s[%s]|r %s", TimeStampColorize, LUIE.CreateTimestamp(timestring), msg)
     end
     return msg
 end
@@ -120,9 +118,9 @@ function LUIE.AbbreviateNumber(number, shorten, comma)
                 return number
             end
         elseif value >= 100 or suffix == nil then
-            value = strfmt("%d", value)
+            value = string.format("%d", value)
         else
-            value = strfmt("%.1f", value)
+            value = string.format("%.1f", value)
         end
 
         if suffix ~= nil then

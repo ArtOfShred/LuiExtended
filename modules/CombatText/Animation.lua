@@ -6,14 +6,11 @@
 LUIE.CombatTextAnimation = ZO_Object:Subclass()
 local CTA = LUIE.CombatTextAnimation
 
-local ANIMATION_MANAGER = ANIMATION_MANAGER
-local ANIMATION_ALPHA = ANIMATION_ALPHA
-local ANIMATION_SCALE = ANIMATION_SCALE
-local ANIMATION_TRANSLATE = ANIMATION_TRANSLATE
+local animationManager = ANIMATION_MANAGER
 
 function CTA:New()
     local obj = ZO_Object:New(self)
-    obj.timeline = ANIMATION_MANAGER:CreateTimeline()
+    obj.timeline = animationManager:CreateTimeline()
     obj.timeline:SetPlaybackType(0, 0)
     obj.namedSteps = {}
     return obj

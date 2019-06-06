@@ -9,13 +9,11 @@ local CI = LUIE.CombatInfo
 
 local UI = LUIE.UI
 local E = LUIE.Effects
-local CBT = LUIE.CastBarTable
 local A = LUIE.GetAbility()
+local CBT = LUIE.CastBarTable
 
 local printToChat = LUIE.PrintToChat
-local strfmt = string.format
-local strformat = zo_strformat
-local callLater = zo_callLater
+local zo_strformat = zo_strformat
 
 local eventManager = EVENT_MANAGER
 local sceneManager = SCENE_MANAGER
@@ -614,7 +612,7 @@ function CI.OnUpdate(currentTime)
         -- Update Label
         if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] and g_triggeredSlotsRemain[k] then
             if CI.SV.BarShowLabel then
-                g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
             end
         end
     end
@@ -639,7 +637,7 @@ function CI.OnUpdate(currentTime)
                 uiUltimate.LabelPct:SetHidden( true )
             end
             if CI.SV.BarShowLabel then
-                g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                g_uiCustomToggle[g_toggledSlots[k]].label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
             end
         end
     end
@@ -651,7 +649,7 @@ function CI.OnUpdate(currentTime)
         -- Don't show unless potion is used - We have to counter for the GCD lockout from casting a spell here
         if ( duration > 5000 ) then
             uiQuickSlot.label:SetHidden( false )
-            uiQuickSlot.label:SetText( strfmt(CI.SV.PotionTimerMiilis and "%.1f" or "%.1d", 0.001*remain ) )
+            uiQuickSlot.label:SetText( string.format(CI.SV.PotionTimerMiilis and "%.1f" or "%.1d", 0.001*remain ) )
             for i = #(uiQuickSlot.timeColours), 1, -1 do
                 if remain < uiQuickSlot.timeColours[i].remain then
                     if CI.SV.PotionTimerColor then
@@ -716,7 +714,7 @@ function CI.OnUpdateCastbar(currentTime)
         CI.StopCastBar()
     else
         if CI.SV.CastBarTimer then
-            castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
+            castbar.bar.timer:SetText( string.format("%.1f", remain/1000) )
         end
         if castbar.type == 1 then
             castbar.bar.bar:SetValue( (currentTime - castStarts) / (castEnds - castStarts) )
@@ -977,7 +975,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                     end
                     if CI.SV.BarShowLabel then
                         local remain = g_toggledSlotsRemain[abilityId] - currentTime
-                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                     end
                 end
             end
@@ -1025,7 +1023,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                     CI.PlayProcAnimations(g_triggeredSlots[abilityId])
                     if CI.SV.BarShowLabel then
                         local remain = g_triggeredSlotsRemain[abilityId] - currentTime
-                        g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                        g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                     end
                 end
             end
@@ -1040,7 +1038,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                     end
                     if CI.SV.BarShowLabel then
                         local remain = g_toggledSlotsRemain[abilityId] - currentTime
-                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                     end
                 end
             end
@@ -1060,7 +1058,7 @@ function CI.CreateCastBar()
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function(self)
         eventManager:RegisterForUpdate( moduleName .. "previewMove", 200, function()
-            self.preview.anchorLabel:SetText(strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
+            self.preview.anchorLabel:SetText(zo_strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
         end)
     end
     -- Callback used to save new position of frames
@@ -1210,7 +1208,7 @@ function CI.SetCastBarPosition()
     end
 
     local savedPos = CI.SV.CastBarCustomPosition
-    uiTlw.castBar.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default" )
+    uiTlw.castBar.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and zo_strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default" )
 end
 
 function CI.SetMovingState(state)
@@ -1235,7 +1233,7 @@ function CI.GenerateCastbarPreview(state)
         castbar.bar.name:SetHidden( not state )
     end
     if CI.SV.CastBarTimer then
-        castbar.bar.timer:SetText( strfmt("1.0") )
+        castbar.bar.timer:SetText( string.format("1.0") )
         castbar.bar.timer:SetHidden ( not state )
     end
     castbar.bar.bar:SetValue( 1 )
@@ -1270,7 +1268,7 @@ function CI.SoulGemResurrectionStart(eventCode, durationMs)
         castbar.bar.name:SetHidden(false)
     end
     if CI.SV.CastBarTimer then
-        castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
+        castbar.bar.timer:SetText( string.format("%.1f", remain/1000) )
         castbar.bar.timer:SetHidden(false)
     end
 
@@ -1328,7 +1326,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
     end
 
     local icon = GetAbilityIcon(abilityId)
-    local name = strformat("<<C:1>>", GetAbilityName(abilityId))
+    local name = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     local duration
     local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
@@ -1371,7 +1369,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(32455)
         name, icon = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
         if abilityId == 39477 then
-            name = strformat("<<1>> <<2>>", A.Skill_Remove, name)
+            name = zo_strformat("<<1>> <<2>>", A.Skill_Remove, name)
         end
     end
 
@@ -1400,7 +1398,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
                 castbar.bar.name:SetHidden(false)
             end
             if CI.SV.CastBarTimer then
-                castbar.bar.timer:SetText( strfmt("%.1f", remain/1000) )
+                castbar.bar.timer:SetText( string.format("%.1f", remain/1000) )
                 castbar.bar.timer:SetHidden(false)
             end
 
@@ -1445,7 +1443,7 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
                 end
                 if CI.SV.BarShowLabel then
                     local remain = g_toggledSlotsRemain[abilityId] - currentTime
-                    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                 end
             end
         end
@@ -1471,7 +1469,7 @@ function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
     end
 
     -- Handle slot update for action bars
-    --d( strfmt("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum) ) )
+    --d( string.format("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum) ) )
     -- Look only for action bar slots
     if CI.SV.ShowToggledUltimate then
         if slotNum < 3 or slotNum > 8 then
@@ -1555,7 +1553,7 @@ function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
                 CI.PlayProcAnimations(slotNum)
                 if CI.SV.BarShowLabel then
                     local remain = g_triggeredSlotsRemain[proc] - currentTime
-                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                 end
             end
         end
@@ -1572,7 +1570,7 @@ function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
                 end
                 if CI.SV.BarShowLabel then
                     local remain = g_toggledSlotsRemain[ability_id] - currentTime
-                    g_uiCustomToggle[slotNum].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                    g_uiCustomToggle[slotNum].label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                 end
             end
         end
@@ -1603,7 +1601,7 @@ end
 
 function CI.InventoryItemUsed()
     g_potionUsed = true
-    callLater(function() g_potionUsed = false end, 200)
+    zo_callLater(function() g_potionUsed = false end, 200)
 end
 
 function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)

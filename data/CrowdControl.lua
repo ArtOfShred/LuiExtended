@@ -437,7 +437,6 @@ CC.aoeTypesId[25591] = aoeCounter+1 -- Necrotic Essence (Investigator Garron)
 
 -- List of effects sourced by the player that damage self that should be shown
 CC.LavaAlerts = {
-
     -- Player
     [115607] = true, -- Dismount Stun
 
@@ -453,7 +452,7 @@ CC.LavaAlerts = {
     [19224] = true, -- In Lava (Halls of Torment)
     [11338] = true, -- In Lava (The Earth Forge)
     [56277] = true, -- Lava (City of Ash II)
-		[5140] = true, -- Lava (Dragonstar Arena)
+	[5140] = true, -- Lava (Dragonstar Arena)
 
     [17314] = true, -- Fire Trap (Player)
 
@@ -468,18 +467,18 @@ CC.LavaAlerts = {
     [37438] = true, -- Shocked (The Grips of Madness)
     [36766] = true, -- Q4842 Stun Headgrab Knockback (The Unquiet Dead)
 
-		--------------
+	--------------
     -- Arenas ----
     --------------
 
     -- Dragonstar Arena
     [53341] = true, -- Biting Cold (Player)
     [60421] = true, -- Biting Cold (Player)
-		[54405] = true, -- Celestial Blast (Player)
+	[54405] = true, -- Celestial Blast (Player)
 
-		-- Maelstrom Arena
-		[72525] = true, -- Frigid Waters (Player)
-		[67808] = true, -- Frigid Waters (Player)
+	-- Maelstrom Arena
+	[72525] = true, -- Frigid Waters (Player)
+	[67808] = true, -- Frigid Waters (Player)
 
     --------------
     -- Dungeons --
@@ -496,12 +495,10 @@ CC.LavaAlerts = {
 
     -- Selene's Web
     [58521] = true, -- Web (Selene)
-
 }
 
 -- List of CC that can't be removed with Break Free
 CC.UnbreakableList ={
-
     -- Player
     [115607] = true, -- Dismount Stun
     [40520] = true, -- Q3047 - Knockdown (Player Werewolf Bite stun)
@@ -524,15 +521,15 @@ CC.UnbreakableList ={
     [36766] = true, -- Q4842 Stun Headgrab Knockback (The Unquiet Dead)
     [33384] = true, -- Q4586 Aranias Vine Stun (The Witch of Silatar)
 
-		-----------------
+	-----------------
     -- ARENAS
     -----------------
 
-		-- Dragonstar Arena
-		[54405] = true, -- Celestial Blast (Player)
+	-- Dragonstar Arena
+	[54405] = true, -- Celestial Blast (Player)
 
-		-- Maelstrom Arena
-		[71720] = true, -- Stun (Matriarch Runa)
+	-- Maelstrom Arena
+	[71720] = true, -- Stun (Matriarch Runa)
 
     -----------------
     -- DUNGEONS
@@ -597,10 +594,10 @@ CC.UnbreakableList ={
     [61444] = true, -- Shocked (Praxin Douare)
     [32100] = true, -- Arachnophobia (Vorenor Winterbourne)
 
-		-- Wayrest Sewers I
-		[48932] = true, -- Backlash (Investigator Garron)
-		[25531] = true, -- Tidal Slash (Varaine Pellingare)
-		[35051] = true, -- Penetrating Daggers (Allene Pellingare)
+	-- Wayrest Sewers I
+	[48932] = true, -- Backlash (Investigator Garron)
+	[25531] = true, -- Tidal Slash (Varaine Pellingare)
+	[35051] = true, -- Penetrating Daggers (Allene Pellingare)
 
     -- Frostvault
     [116666] = true, -- Skeletal Smash (Icestalker) -- Frostvault
@@ -610,11 +607,9 @@ CC.UnbreakableList ={
     [88467] = true, -- Skyfall (Vvardenfell -- Divine Disaster)
     [89756] = true, -- Guardian Shockwave (Vvardenfell -- The Magister Makes a Move)
     [92671] = true, -- Pyroclast (Vvardenfell -- The Forgotten Wastes)
-
 }
 
 CC.IgnoreList ={
-
     [54363] = true, -- Halt (Guard)
     [4197] = true, -- Recovering (NPC Duel)
 
@@ -632,13 +627,13 @@ CC.IgnoreList ={
     [38108] = true, -- Q4868 Sheo Teleports Player (The Grips of Madness)
     [35645] = true, -- Q4768 PC Tribunal Layer 2 Stun (Scars Never Fade)
 
-		----------------
-		-- Arenas
-		----------------
+	----------------
+	-- Arenas
+	----------------
 
-		-- Dragonstar Arena
-		[55221] = true, -- Sucked Under (Player)
-		[55641] = true, -- Stun (Light of Boethia)
+    -- Dragonstar Arena
+	[55221] = true, -- Sucked Under (Player)
+	[55641] = true, -- Stun (Light of Boethia)
 
     ----------------
     -- Dungeons
@@ -659,12 +654,10 @@ CC.IgnoreList ={
     -- Frostvault
     [109838] = true, -- End Stun (Icestalker) -- Frostvault
     [119461] = true, -- Teleport Failsafe (Border Chk) -- Frostvault
-
 }
 
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
 CC.ReversedLogic = {
-
     [39260] = true, -- Q4917 Push Player Back (Grahtwood - The Blacksap's Hold)
     [83124] = true, -- Ferocious Bellow (Greenshade - World Boss - Thodundor's View)
 
@@ -674,7 +667,5 @@ CC.ReversedLogic = {
 
 -- Use on ACTION_RESULT_EFFECT_GAINED
 CC.SpecialCC = {
-
     [55756] = true, -- Burning (Valkyn Skoria)
-
 }

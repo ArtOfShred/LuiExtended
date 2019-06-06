@@ -5,7 +5,7 @@
 
 local PNL = LUIE.InfoPanel
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 local optionsDataInfoPanel = {}
 
@@ -16,8 +16,8 @@ function PNL.CreateSettings()
 
     local panelDataInfoPanel = {
         type = "panel",
-        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_PNL)),
-        displayName = strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_PNL)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_PNL)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_PNL)),
         author = LUIE.author,
         version = LUIE.version,
         website = LUIE.website,

@@ -6,20 +6,19 @@
 local SCB = LUIE.SpellCastBuffs
 local E = LUIE.Effects
 
-local strformat = zo_strformat
-local iconFormat = zo_iconFormat
+local zo_strformat = zo_strformat
 
 -- Debug Display for Combat Events
 function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     -- Don't display if this aura is already added to the filter
     if LUIE.DebugAuras[abilityId] and SCB.SV.ShowDebugFilter then return end
 
-    local iconFormatted = iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = strformat("<<C:1>>", GetAbilityName(abilityId))
+    local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
+    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
-    local source = strformat("<<t:1>>", sourceName)
-    local target = strformat("<<t:1>>", targetName)
-    local ability = strformat("<<t:1>>", nameFormatted)
+    local source = zo_strformat("<<t:1>>", sourceName)
+    local target = zo_strformat("<<t:1>>", targetName)
+    local ability = zo_strformat("<<t:1>>", nameFormatted)
     local duration = GetAbilityDuration(abilityId)
     local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
     local showacasttime = ""
@@ -52,10 +51,10 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
         return
     end
 
-    local iconFormatted = iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = strformat("<<C:1>>", GetAbilityName(abilityId))
+    local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
+    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
-    unitName = strformat("<<t:1>>", unitName)
+    unitName = zo_strformat("<<t:1>>", unitName)
     if unitName == LUIE.PlayerNameFormatted then
         unitName = "Player"
     end

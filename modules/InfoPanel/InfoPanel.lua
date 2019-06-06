@@ -5,16 +5,14 @@
 
 -- InfoPanel namespace
 LUIE.InfoPanel = {}
+local PNL = LUIE.InfoPanel
 
--- Performance Enhancement
-local PNL           = LUIE.InfoPanel
-local UI            = LUIE.UI
-local strfmt        = string.format
+local UI = LUIE.UI
 
-local eventManager  = EVENT_MANAGER
-local sceneManager  = SCENE_MANAGER
+local eventManager = EVENT_MANAGER
+local sceneManager = SCENE_MANAGER
 
-local moduleName    = LUIE.name .. "_InfoPanel"
+local moduleName = LUIE.name .. "_InfoPanel"
 
 local colors = {
     RED         = { r = 1    , g = 0    , b = 0    },
@@ -28,15 +26,15 @@ local colors = {
 
 --local fakeControl   = {}
 
-PNL.Enabled       = false
-PNL.SV            = nil
+PNL.Enabled = false
+PNL.SV = nil
 PNL.panelUnlocked = false
 
 -- UI elements
 local infoPanelFontFace = "/EsoUI/Common/Fonts/Univers67.otf"
 local infoPanelFontSize = 16
 local infoPanelFontStyle = "soft-shadow-thin"
-local g_infoPanelFont = strfmt( "%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle )
+local g_infoPanelFont = string.format( "%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle )
 
 local uiPanel  = nil
 local uiTopRow = nil
@@ -414,7 +412,7 @@ function PNL.DoBagUpdate()
             end
         end
     end
-    uiBags.label:SetText( strfmt( "%d/%d", bagUsed, bagSize ) )
+    uiBags.label:SetText( string.format( "%d/%d", bagUsed, bagSize ) )
     uiBags.label:SetColor( color.r, color.g, color.b, 1 )
 
     -- Update soulgems
@@ -446,7 +444,7 @@ function PNL.OnUpdate01()
             end
         end
     end
-    uiFps.label:SetText( strfmt( "%d fps", fps ) )
+    uiFps.label:SetText( string.format( "%d fps", fps ) )
     uiFps.label:SetColor( color.r, color.g, color.b, 1 )
 end
 
@@ -463,7 +461,7 @@ function PNL.OnUpdate10()
             end
         end
     end
-    uiLatency.label:SetText( strfmt( "%d ms", lat ) )
+    uiLatency.label:SetText( string.format( "%d ms", lat ) )
     uiLatency.label:SetColor( color.r, color.g, color.b, 1 )
 end
 
@@ -484,7 +482,7 @@ function PNL.OnUpdate60()
             elseif ( mountFeedTimer > 0 ) then
                 local hours   = math.floor( mountFeedTimer / 3600000 )
                 local minutes = math.floor( ( mountFeedTimer - ( hours * 3600000 ) ) / 60000 )
-                mountFeedMessage = strfmt( "%dh %dm", hours, minutes )
+                mountFeedMessage = string.format( "%dh %dm", hours, minutes )
             end
         end
         uiFeedTimer.label:SetText( mountFeedMessage )
@@ -511,7 +509,7 @@ function PNL.OnUpdate60()
                 break
             end
         end
-        uiArmour.label:SetText( strfmt( "%d%%", duraPercentage ) )
+        uiArmour.label:SetText( string.format( "%d%%", duraPercentage ) )
         uiArmour.label:SetColor( color.r, color.g, color.b, 1 )
         uiArmour.icon:SetColor( iconcolour.r, iconcolour.g, iconcolour.b, 1 )
     end

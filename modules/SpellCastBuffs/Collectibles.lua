@@ -7,8 +7,7 @@ local SCB = LUIE.SpellCastBuffs
 
 local E = LUIE.Effects
 
-local strformat = zo_strformat
-local callLater = zo_callLater
+local zo_strformat = zo_strformat
 
 -- EVENT_MOUNTED_STATE_CHANGED handler to create Mount Buff icon for player
 function SCB.MountStatus(eventCode, mounted)
@@ -21,7 +20,7 @@ function SCB.MountStatus(eventCode, mounted)
 
         -- Add the nickname into the name if present
         if (nickname ~= "" and nickname ~= nil) then
-            name = strformat('<<1>> "<<2>>"', name, nickname)
+            name = zo_strformat('<<1>> "<<2>>"', name, nickname)
         end
 
         -- Use Generic Mount Icon if enabled
@@ -43,7 +42,7 @@ end
 function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
     local latency = GetLatency()
     latency = latency + 100
-    callLater(SCB.CollectibleBuff, latency)
+    zo_callLater(SCB.CollectibleBuff, latency)
 end
 
 -- Handles delayed call from SCB.CollectibleUsed()
@@ -70,7 +69,7 @@ function SCB.CollectibleBuff()
 
         -- Add the nickname into the name if present
         if (nickname ~= "" and nickname ~= nil) then
-            name = strformat('<<1>> "<<2>>"', name, nickname)
+            name = zo_strformat('<<1>> "<<2>>"', name, nickname)
         end
 
         LUIE.EffectsList.player1["PetType"] = {

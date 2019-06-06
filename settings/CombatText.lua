@@ -6,7 +6,9 @@
 local CT = LUIE.CombatText
 local CTC = LUIE.CombatTextConstants
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
+
+local callbackManager = CALLBACK_MANAGER
 
 local optionsDataCombatText = {}
 
@@ -24,8 +26,8 @@ function CT.CreateSettings()
 
     local panelDataCombatText = {
         type = "panel",
-        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CT)),
-        displayName = strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CT)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CT)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CT)),
         author = LUIE.author,
         version = LUIE.version,
         website = LUIE.website,
@@ -132,7 +134,7 @@ function CT.CreateSettings()
     -- Combat Text - Damage & Healing Options
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
-        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_DAMAGE_AND_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_DAMAGE_AND_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
@@ -147,7 +149,7 @@ function CT.CreateSettings()
                 -- Damage (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DAMAGE_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showDamage end,
                 setFunc = function(v) CT.SV.toggles.incoming.showDamage = v end,
@@ -157,7 +159,7 @@ function CT.CreateSettings()
                 -- Damage (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DAMAGE_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showDamage end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showDamage = v end,
@@ -178,7 +180,7 @@ function CT.CreateSettings()
                 -- Damage Critical Format
                 type    = "editbox",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_CRITICAL_TP),
                 getFunc = function() return CT.SV.formats.damagecritical end,
                 setFunc = function(v) CT.SV.formats.damagecritical = v end,
@@ -202,7 +204,7 @@ function CT.CreateSettings()
                 -- Damage Critical Font Size
                 type    = "slider",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_CRITICAL_TP),
                 min     = 8,
                 max     = 72,
@@ -220,7 +222,7 @@ function CT.CreateSettings()
                 -- Damage over Time (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DOT_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showDot end,
                 setFunc = function(v) CT.SV.toggles.incoming.showDot = v end,
@@ -230,7 +232,7 @@ function CT.CreateSettings()
                 -- Damage over Time (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DOT_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showDot end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showDot = v end,
@@ -251,7 +253,7 @@ function CT.CreateSettings()
                 -- Damage over Time Critical Format
                 type    = "editbox",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_CRITICAL_TP),
                 getFunc = function() return CT.SV.formats.dotcritical end,
                 setFunc = function(v) CT.SV.formats.dotcritical = v end,
@@ -275,7 +277,7 @@ function CT.CreateSettings()
                 -- Damage over Time Critical Font Size
                 type    = "slider",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_DOT_CRITICAL_TP),
                 min     = 8,
                 max     = 72,
@@ -410,7 +412,7 @@ function CT.CreateSettings()
             {
                 -- Color Critical Damage Override
                 type    = "colorpicker",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR_TP),
                 getFunc = function() return unpack(CT.SV.colors.criticalDamageOverride) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.criticalDamageOverride = { r, g, b, a } end,
@@ -428,7 +430,7 @@ function CT.CreateSettings()
             {
                 -- Color Incoming Damage Override
                 type    = "colorpicker",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR_TP),
                 getFunc = function() return unpack(CT.SV.colors.incomingDamageOverride) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.incomingDamageOverride = { r, g, b, a } end,
@@ -443,7 +445,7 @@ function CT.CreateSettings()
                 -- Healing (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_HEALING_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showHealing end,
                 setFunc = function(v) CT.SV.toggles.incoming.showHealing = v end,
@@ -453,7 +455,7 @@ function CT.CreateSettings()
                 -- Healing (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_HEALING_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showHealing end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showHealing = v end,
@@ -474,7 +476,7 @@ function CT.CreateSettings()
                 -- Healing Critical Format
                 type    = "editbox",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_CRITICAL_TP),
                 getFunc = function() return CT.SV.formats.healingcritical end,
                 setFunc = function(v) CT.SV.formats.healingcritical = v end,
@@ -498,7 +500,7 @@ function CT.CreateSettings()
                 -- Healing Critical Font Size
                 type    = "slider",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_CRITICAL_TP),
                 min     = 8,
                 max     = 72,
@@ -516,7 +518,7 @@ function CT.CreateSettings()
                 -- Healing over Time (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_HOT_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showHot end,
                 setFunc = function(v) CT.SV.toggles.incoming.showHot = v end,
@@ -526,7 +528,7 @@ function CT.CreateSettings()
                 -- Healing over Time (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_HOT_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showHot end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showHot = v end,
@@ -547,7 +549,7 @@ function CT.CreateSettings()
                 -- Healing over Time Critical Format
                 type    = "editbox",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_CRITICAL_TP),
                 getFunc = function() return CT.SV.formats.hotcritical end,
                 setFunc = function(v) CT.SV.formats.hotcritical = v end,
@@ -571,7 +573,7 @@ function CT.CreateSettings()
                 -- Healing over Time Critical Font Size
                 type    = "slider",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_FONT_SIZE), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_COMBAT_HOT_CRITICAL_TP),
                 min     = 8,
                 max     = 72,
@@ -607,7 +609,7 @@ function CT.CreateSettings()
             {
                 -- Color Critical Healing Override
                 type    = "colorpicker",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR_TP),
                 getFunc = function() return unpack(CT.SV.colors.criticalHealingOverride) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.criticalHealingOverride = { r, g, b, a } end,
@@ -619,7 +621,7 @@ function CT.CreateSettings()
     -- Combat Text - Resource Gain & Drain Options
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
-        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_RESOURCE_GAIN_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_RESOURCE_GAIN_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
@@ -651,7 +653,7 @@ function CT.CreateSettings()
                 -- Resource Gain (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_ENERGIZE_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showEnergize end,
                 setFunc = function(v) CT.SV.toggles.incoming.showEnergize = v end,
@@ -661,7 +663,7 @@ function CT.CreateSettings()
                 -- Resource Gain (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showEnergize end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showEnergize = v end,
@@ -681,7 +683,7 @@ function CT.CreateSettings()
                 -- Gain Magicka Color
                 type    = "colorpicker",
                 width   = "half",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_MAGICKA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_MAGICKA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA_TP),
                 getFunc = function() return unpack(CT.SV.colors.energizeMagicka) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.energizeMagicka = { r, g, b, a } end,
@@ -691,7 +693,7 @@ function CT.CreateSettings()
                 -- Gain Stamina Color
                 type    = "colorpicker",
                 width   = "half",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_STAMINA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_STAMINA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA_TP),
                 getFunc = function() return unpack(CT.SV.colors.energizeStamina) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.energizeStamina = { r, g, b, a } end,
@@ -706,7 +708,7 @@ function CT.CreateSettings()
                 -- Ultimate Gain (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_ENERGIZE_ULTIMATE_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showUltimateEnergize end,
                 setFunc = function(v) CT.SV.toggles.incoming.showUltimateEnergize = v end,
@@ -716,7 +718,7 @@ function CT.CreateSettings()
                 -- Ultimate Gain (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_ULTIMATE_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showUltimateEnergize end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showUltimateEnergize = v end,
@@ -735,7 +737,7 @@ function CT.CreateSettings()
             {
                 -- Gain Ultimate Color
                 type    = "colorpicker",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE_TP),
                 getFunc = function() return unpack(CT.SV.colors.energizeUltimate) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.energizeUltimate = { r, g, b, a } end,
@@ -750,7 +752,7 @@ function CT.CreateSettings()
                 -- Resource Drain (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DRAIN_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showDrain end,
                 setFunc = function(v) CT.SV.toggles.incoming.showDrain = v end,
@@ -760,7 +762,7 @@ function CT.CreateSettings()
                 -- Resource Drain (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DRAIN_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showDrain end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showDrain = v end,
@@ -780,7 +782,7 @@ function CT.CreateSettings()
                 -- Drain Magicka Color
                 type    = "colorpicker",
                 width   = "half",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_MAGICKA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_MAGICKA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA_TP),
                 getFunc = function() return unpack(CT.SV.colors.drainMagicka) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.drainMagicka = { r, g, b, a } end,
@@ -790,7 +792,7 @@ function CT.CreateSettings()
                 -- Drain Stamina Color
                 type    = "colorpicker",
                 width   = "half",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_STAMINA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_STAMINA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA_TP),
                 getFunc = function() return unpack(CT.SV.colors.drainStamina) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.drainStamina = { r, g, b, a } end,
@@ -802,7 +804,7 @@ function CT.CreateSettings()
     -- Combat Text - Mitigation Options
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
-        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_MITIGATION), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_MITIGATION), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
@@ -834,7 +836,7 @@ function CT.CreateSettings()
                 -- Missed (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_MISS), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_MISS), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_MISS_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showMiss end,
                 setFunc = function(v) CT.SV.toggles.incoming.showMiss = v end,
@@ -844,7 +846,7 @@ function CT.CreateSettings()
                 -- Missed (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_MISS), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_MISS), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_MISS_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showMiss end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showMiss = v end,
@@ -878,7 +880,7 @@ function CT.CreateSettings()
                 -- Immune (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_IMMUNE_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showImmune end,
                 setFunc = function(v) CT.SV.toggles.incoming.showImmune = v end,
@@ -888,7 +890,7 @@ function CT.CreateSettings()
                 -- Immune (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_IMMUNE_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showImmune end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showImmune = v end,
@@ -922,7 +924,7 @@ function CT.CreateSettings()
                 -- Parried (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_PARRIED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_PARRIED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_PARRIED_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showParried end,
                 setFunc = function(v) CT.SV.toggles.incoming.showParried = v end,
@@ -932,7 +934,7 @@ function CT.CreateSettings()
                 -- Parried (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_PARRIED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_PARRIED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_PARRIED_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showParried end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showParried = v end,
@@ -966,7 +968,7 @@ function CT.CreateSettings()
                 -- Reflected (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_REFLECTED_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showReflected end,
                 setFunc = function(v) CT.SV.toggles.incoming.showReflected = v end,
@@ -976,7 +978,7 @@ function CT.CreateSettings()
                 -- Reflected (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_REFLECTED_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showReflected end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showReflected = v end,
@@ -1010,7 +1012,7 @@ function CT.CreateSettings()
                 -- Damage Shielded (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DAMAGE_SHIELD_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showDamageShield end,
                 setFunc = function(v) CT.SV.toggles.incoming.showDamageShield = v end,
@@ -1020,7 +1022,7 @@ function CT.CreateSettings()
                 -- Damage Shielded (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DAMAGE_SHIELD_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showDamageShield end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showDamageShield = v end,
@@ -1054,7 +1056,7 @@ function CT.CreateSettings()
                 -- Dodged (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DODGED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DODGED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DODGED_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showDodged end,
                 setFunc = function(v) CT.SV.toggles.incoming.showDodged = v end,
@@ -1064,7 +1066,7 @@ function CT.CreateSettings()
                 -- Dodged (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DODGED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DODGED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DODGED_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showDodged end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showDodged = v end,
@@ -1098,7 +1100,7 @@ function CT.CreateSettings()
                 -- Blocked (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_BLOCKED_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showBlocked end,
                 setFunc = function(v) CT.SV.toggles.incoming.showBlocked = v end,
@@ -1108,7 +1110,7 @@ function CT.CreateSettings()
                 -- Blocked (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_BLOCKED_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showBlocked end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showBlocked = v end,
@@ -1142,7 +1144,7 @@ function CT.CreateSettings()
                 -- Interrupted (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_INTERRUPTED_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showInterrupted end,
                 setFunc = function(v) CT.SV.toggles.incoming.showInterrupted = v end,
@@ -1152,7 +1154,7 @@ function CT.CreateSettings()
                 -- Interrupted (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_INTERRUPTED_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showInterrupted end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showInterrupted = v end,
@@ -1183,7 +1185,7 @@ function CT.CreateSettings()
     -- Combat Text - Crowd Control Options
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
-        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_CROWD_CONTROL), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_CROWD_CONTROL), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
@@ -1215,7 +1217,7 @@ function CT.CreateSettings()
                 -- Disoriented (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DISORIENTED_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showDisoriented end,
                 setFunc = function(v) CT.SV.toggles.incoming.showDisoriented = v end,
@@ -1225,7 +1227,7 @@ function CT.CreateSettings()
                 -- Disoriented (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DISORIENTED_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showDisoriented end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showDisoriented = v end,
@@ -1259,7 +1261,7 @@ function CT.CreateSettings()
                 -- Feared (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_FEARED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_FEARED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_FEARED_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showFeared end,
                 setFunc = function(v) CT.SV.toggles.incoming.showFeared = v end,
@@ -1269,7 +1271,7 @@ function CT.CreateSettings()
                 -- Feared (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_FEARED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_FEARED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_FEARED_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showFeared end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showFeared = v end,
@@ -1303,7 +1305,7 @@ function CT.CreateSettings()
                 -- Off-Balance (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_OFF_BALANCE_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showOffBalanced end,
                 setFunc = function(v) CT.SV.toggles.incoming.showOffBalanced = v end,
@@ -1313,7 +1315,7 @@ function CT.CreateSettings()
                 -- Off-Balance (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_OFF_BALANCE_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showOffBalanced end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showOffBalanced = v end,
@@ -1347,7 +1349,7 @@ function CT.CreateSettings()
                 -- Silenced (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_SILENCED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_SILENCED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_SILENCED_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showSilenced end,
                 setFunc = function(v) CT.SV.toggles.incoming.showSilenced = v end,
@@ -1357,7 +1359,7 @@ function CT.CreateSettings()
                 -- Silenced (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_SILENCED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_SILENCED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showSilenced end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showSilenced = v end,
@@ -1391,7 +1393,7 @@ function CT.CreateSettings()
                 -- Stunned (Incoming)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_STUNNED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_STUNNED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_STUNNED_TP),
                 getFunc = function() return CT.SV.toggles.incoming.showStunned end,
                 setFunc = function(v) CT.SV.toggles.incoming.showStunned = v end,
@@ -1401,7 +1403,7 @@ function CT.CreateSettings()
                 -- Stunned (Outgoing)
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_STUNNED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
+                name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_STUNNED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP),
                 getFunc = function() return CT.SV.toggles.outgoing.showStunned end,
                 setFunc = function(v) CT.SV.toggles.outgoing.showStunned = v end,
@@ -1432,7 +1434,7 @@ function CT.CreateSettings()
     -- Combat Text -- Notification Options
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
-        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_NOTIFICATION), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_NOTIFICATION), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
@@ -1447,7 +1449,7 @@ function CT.CreateSettings()
                 -- In Combat
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP),
                 getFunc = function() return CT.SV.toggles.showInCombat end,
                 setFunc = function(v) CT.SV.toggles.showInCombat = v end,
@@ -1457,7 +1459,7 @@ function CT.CreateSettings()
                 -- Out of Combat
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_OUT_TP),
                 getFunc = function() return CT.SV.toggles.showOutCombat end,
                 setFunc = function(v) CT.SV.toggles.showOutCombat = v end,
@@ -1467,7 +1469,7 @@ function CT.CreateSettings()
                 -- In Combat
                 type    = "editbox",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)",GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
+                name    = zo_strformat("<<1>> (<<2>>)",GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_IN_TP),
                 getFunc = function() return CT.SV.formats.inCombat end,
                 setFunc = function(v) CT.SV.formats.inCombat = v end,
@@ -1478,7 +1480,7 @@ function CT.CreateSettings()
                 -- Out Combat
                 type    = "editbox",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)",GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
+                name    = zo_strformat("<<1>> (<<2>>)",GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_OUT_TP),
                 getFunc = function() return CT.SV.formats.outCombat end,
                 setFunc = function(v) CT.SV.formats.outCombat = v end,
@@ -1501,7 +1503,7 @@ function CT.CreateSettings()
                 -- In Combat
                 type    = "colorpicker",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP),
                 getFunc = function() return unpack(CT.SV.colors.inCombat) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.inCombat = { r, g, b, a } end,
@@ -1511,7 +1513,7 @@ function CT.CreateSettings()
                 -- Out Combat
                 type    = "colorpicker",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP),
                 getFunc = function() return unpack(CT.SV.colors.outCombat) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.outCombat = { r, g, b, a } end,
@@ -1564,7 +1566,7 @@ function CT.CreateSettings()
             },
             {
                 type = "header",
-                name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE), GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POINT_HEADER)),
+                name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_SHARED_FONT_SIZE), GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POINT_HEADER)),
                 width = "full",
             },
             {
@@ -1587,7 +1589,7 @@ function CT.CreateSettings()
             {
                 -- Alliance Points
                 type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP),
                 getFunc = function() return CT.SV.toggles.showPointsAlliance end,
                 setFunc = function(v) CT.SV.toggles.showPointsAlliance = v end,
@@ -1620,7 +1622,7 @@ function CT.CreateSettings()
             {
                 -- Experience Points
                 type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP),
                 getFunc = function() return CT.SV.toggles.showPointsExperience end,
                 setFunc = function(v) CT.SV.toggles.showPointsExperience = v end,
@@ -1653,7 +1655,7 @@ function CT.CreateSettings()
             {
                 -- Champion Points
                 type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP),
                 getFunc = function() return CT.SV.toggles.showPointsChampion end,
                 setFunc = function(v) CT.SV.toggles.showPointsChampion = v end,
@@ -1699,7 +1701,7 @@ function CT.CreateSettings()
                 -- Ultimate Ready Enable
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ULTIMATE_READY_TP),
                 getFunc = function() return CT.SV.toggles.showUltimate end,
                 setFunc = function(v) CT.SV.toggles.showUltimate = v end,
@@ -1709,7 +1711,7 @@ function CT.CreateSettings()
                 -- Potion Ready Enable
                 type    = "checkbox",
                 width   = "half",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POTION_READY_TP),
                 getFunc = function() return CT.SV.toggles.showPotionReady end,
                 setFunc = function(v) CT.SV.toggles.showPotionReady = v end,
@@ -1719,7 +1721,7 @@ function CT.CreateSettings()
                 -- Ultimate Ready Format
                 type    = "editbox",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ULTIMATE_TP),
                 getFunc = function() return CT.SV.formats.ultimateReady end,
                 setFunc = function(v) CT.SV.formats.ultimateReady = v end,
@@ -1730,7 +1732,7 @@ function CT.CreateSettings()
                 -- Potion Ready Format
                 type    = "editbox",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POTION_TP),
                 getFunc = function() return CT.SV.formats.potionReady end,
                 setFunc = function(v) CT.SV.formats.potionReady = v end,
@@ -1741,7 +1743,7 @@ function CT.CreateSettings()
                 -- Ultimate Ready Color
                 type    = "colorpicker",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP),
                 getFunc = function() return unpack(CT.SV.colors.ultimateReady) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.ultimateReady = { r, g, b, a } end,
@@ -1751,7 +1753,7 @@ function CT.CreateSettings()
                 -- Potion Ready Color
                 type    = "colorpicker",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POTION_TP),
                 getFunc = function() return unpack(CT.SV.colors.potionReady) end,
                 setFunc = function(r, g, b, a) CT.SV.colors.potionReady = { r, g, b, a } end,
@@ -1763,7 +1765,7 @@ function CT.CreateSettings()
     -- Combat Text - Low Resource Options
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
-        name = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_LOW_RESOURCE), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
+        name = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_HEADER_LOW_RESOURCE), GetString(SI_LUIE_LAM_CT_SHARED_OPTIONS)),
         controls = {
             {
                 type = "description",
@@ -1804,7 +1806,7 @@ function CT.CreateSettings()
             {
                 -- Low Health
                 type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_HEALTH_TP),
                 getFunc = function() return CT.SV.toggles.showLowHealth end,
                 setFunc = function(v) CT.SV.toggles.showLowHealth = v end,
@@ -1813,7 +1815,7 @@ function CT.CreateSettings()
             {
                 -- Low Health Warning Threshold Slider
                 type    = "slider",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH_TP),
                 min     = 15,
                 max     = 50,
@@ -1850,7 +1852,7 @@ function CT.CreateSettings()
             {
                 -- Low Magicka
                 type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_MAGICKA_TP),
                 getFunc = function() return CT.SV.toggles.showLowMagicka end,
                 setFunc = function(v) CT.SV.toggles.showLowMagicka = v end,
@@ -1859,7 +1861,7 @@ function CT.CreateSettings()
             {
                 -- Low Magicka Warning Threshold Slider
                 type    = "slider",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA_TP),
                 min     = 15,
                 max     = 50,
@@ -1896,7 +1898,7 @@ function CT.CreateSettings()
             {
                 -- Low Stamina
                 type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_STAMINA_TP),
                 getFunc = function() return CT.SV.toggles.showLowStamina end,
                 setFunc = function(v) CT.SV.toggles.showLowStamina = v end,
@@ -1905,7 +1907,7 @@ function CT.CreateSettings()
             {
                 -- Low Stamina Warning Threshold Slider
                 type    = "slider",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA_TP),
                 min     = 15,
                 max     = 50,
@@ -1979,7 +1981,7 @@ function CT.CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_FONT_TEST),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_TEST_TP),
                 func = function()
-                    CALLBACK_MANAGER:FireCallbacks(CTC.eventType.COMBAT, CTC.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    callbackManager:FireCallbacks(CTC.eventType.COMBAT, CTC.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                 end,
             },
         },
@@ -2046,8 +2048,8 @@ function CT.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST_TP),
                 func = function()
-                    CALLBACK_MANAGER:FireCallbacks(CTC.eventType.COMBAT, CTC.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
-                    CALLBACK_MANAGER:FireCallbacks(CTC.eventType.COMBAT, CTC.combatType.OUTGOING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    callbackManager:FireCallbacks(CTC.eventType.COMBAT, CTC.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    callbackManager:FireCallbacks(CTC.eventType.COMBAT, CTC.combatType.OUTGOING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                 end,
             },
         },

@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 local printToChat = LUIE.PrintToChat
 
 function LUIE.InitializeHooks()
@@ -113,8 +113,8 @@ function LUIE.InitializeHooks()
             end
 
             if LUIE.Effects.EffectOverrideByName[abilityId] then
-                local unitName = strformat("<<t:1>>", attackerRawName)
-                local petName = strformat("<<t:1>>", minionName)
+                local unitName = zo_strformat("<<t:1>>", attackerRawName)
+                local petName = zo_strformat("<<t:1>>", minionName)
                 if LUIE.Effects.EffectOverrideByName[abilityId][unitName] then
                     if LUIE.Effects.EffectOverrideByName[abilityId][unitName].hide then
                         return
@@ -200,7 +200,7 @@ function LUIE.InitializeHooks()
                 if self.lastSynergyName ~= synergyName then
                     PlaySound(SOUNDS.ABILITY_SYNERGY_READY)
 
-                    self.action:SetText(strformat(SI_USE_SYNERGY, synergyName))
+                    self.action:SetText(zo_strformat(SI_USE_SYNERGY, synergyName))
                 end
 
                 self.icon:SetTexture(iconFilename)
@@ -238,12 +238,12 @@ function LUIE.InitializeHooks()
                     for effectId in ZO_GetNextActiveArtificialEffectIdIter do
                         local displayName, iconFile, effectType, sortOrder = GetArtificialEffectInfo(effectId)
                         local effectsRow = effectsRowPool:AcquireObject()
-                        effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, displayName))
+                        effectsRow.name:SetText(zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName))
                         effectsRow.icon:SetTexture(iconFile)
                         effectsRow.effectType = effectType
                         effectsRow.time:SetHidden(true)
                         effectsRow.sortOrder = sortOrder
-                        effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, displayName)
+                        effectsRow.tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName)
                         effectsRow.effectId = effectId
                         effectsRow.isArtificial = true
                         effectsRow.isArtificialTooltip = true
@@ -333,9 +333,9 @@ function LUIE.InitializeHooks()
 
                         local tooltipText
                         if LUIE.ResolveVeteranDifficulty() == true and LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltipVet then
-                            tooltipText = strformat(LUIE.Effects.EffectOverride[abilityId].tooltipVet, timer, value2, value3)
+                            tooltipText = zo_strformat(LUIE.Effects.EffectOverride[abilityId].tooltipVet, timer, value2, value3)
                         else
-                            tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, timer, value2, value3) or GetAbilityDescription(abilityId)
+                            tooltipText = (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].tooltip) and zo_strformat(LUIE.Effects.EffectOverride[abilityId].tooltip, timer, value2, value3) or GetAbilityDescription(abilityId)
                         end
 
                         -- Use default tooltip - temp if needed (TODO: Remove when all base ability/set tooltips are updated)
@@ -360,10 +360,10 @@ function LUIE.InitializeHooks()
                             timer2 = timer2 + LUIE.Effects.EffectOverride[abilityId].tooltipDurFix
                         end
                         if LUIE.Effects.TooltipNameOverride[buffName] then
-                            thirdLine = strformat(LUIE.Effects.TooltipNameOverride[buffName], timer2)
+                            thirdLine = zo_strformat(LUIE.Effects.TooltipNameOverride[buffName], timer2)
                         end
                         if LUIE.Effects.TooltipNameOverride[abilityId] then
-                            thirdLine = strformat(LUIE.Effects.TooltipNameOverride[abilityId], timer2)
+                            thirdLine = zo_strformat(LUIE.Effects.TooltipNameOverride[abilityId], timer2)
                         end
 
                         -- Change effect type if needed
@@ -372,9 +372,9 @@ function LUIE.InitializeHooks()
                         if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
                             if (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hideReduce and not LUIE.SpellCastBuffs.SV.HideReduce) or not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hideReduce) then
                                 local effectsRow = effectsRowPool:AcquireObject()
-                                effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
+                                effectsRow.name:SetText(zo_strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
                                 effectsRow.icon:SetTexture(iconFile)
-                                effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, buffName)
+                                effectsRow.tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, buffName)
                                 effectsRow.tooltipText = tooltipText
                                 effectsRow.thirdLine = thirdLine
                                 local duration = startTime - endTime
@@ -417,7 +417,7 @@ function LUIE.InitializeHooks()
         RequestFriend = function(option1, option2, menu)
             zos_RequestFriend(option1, option2)
             if not menu then
-                local message = strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
+                local message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
                 printToChat(message, true)
                 if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
                     ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, message)
@@ -626,7 +626,7 @@ function LUIE.InitializeHooks()
 
         local function GetKeepBonusString(campaignId)
             local _, enemyKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
-            return strformat(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_INFO, enemyKeepsHeld)
+            return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_INFO, enemyKeepsHeld)
         end
 
         local function GetKeepBonusScore(campaignId)
@@ -639,12 +639,12 @@ function LUIE.InitializeHooks()
         end
 
         local function GetEdgeKeepBonusString(campaignId)
-            return strformat(SI_CAMPAIGN_BONUSES_EDGE_KEEP_INFO, GetEdgeKeepBonusScore(campaignId))
+            return zo_strformat(SI_CAMPAIGN_BONUSES_EDGE_KEEP_INFO, GetEdgeKeepBonusScore(campaignId))
         end
 
         local function GetDefensiveBonusString(campaignId)
             local _, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE)
-            return strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
+            return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
         end
 
         local function GetDefensiveBonusCount()
@@ -662,7 +662,7 @@ function LUIE.InitializeHooks()
 
         local function GetOffensiveBonusString(campaignId)
             local _, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE)
-            return strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
+            return zo_strformat(SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO, enemyScrollsHeld)
         end
 
         local function GetOffensiveBonusCount()
@@ -805,7 +805,7 @@ function LUIE.InitializeHooks()
                         typeIcon = info.typeIcon,
                         typeIconGamepad = info.typeIconGamepad,
                         countText = countText,
-                        name = strformat(SI_CAMPAIGN_BONUSES_ENTRY_ROW_FORMATTER, name),
+                        name = zo_strformat(SI_CAMPAIGN_BONUSES_ENTRY_ROW_FORMATTER, name),
                         icon = icon,
                         active = score and score >= scoreIndex,
                         bonusType = bonusType,
@@ -961,7 +961,7 @@ function LUIE.InitializeHooks()
                     local nextSkillProgressionData = skillData:GetRankData(rank + 1)
 
                     local id = skillProgressionData:GetAbilityId()
-                    dialog.desc:SetText(strformat(SI_SKILLS_UPGRADE_DESCRIPTION, GetAbilityName(id)))
+                    dialog.desc:SetText(zo_strformat(SI_SKILLS_UPGRADE_DESCRIPTION, GetAbilityName(id)))
 
                     local baseAbility = dialog.baseAbility
                     baseAbility.skillProgressionData = skillProgressionData
