@@ -169,12 +169,13 @@ CI.D = {
         showStaggered                = true,
         showImmune                   = true,
         showAoe                      = true,
-        showAoeT1                    = true,
-        showAoeT2                    = true,
-        showAoeT3                    = true,
-        showAoeT4                    = true,
-        showAoeT5                    = true,
-        showAoeT6                    = true,
+        aoePlayerUltimate            = true,
+        aoePlayerNormal              = true,
+        aoePlayerSet                 = true,
+        aoeTraps                     = true,
+        aoeNPCBoss                   = true,
+        aoeNPCElite                  = true,
+        aoeNPCNormal                 = true,
         PlaySoundAoeT1               = true,
         PlaySoundAoeT2               = true,
         PlaySoundAoeT3               = true,
@@ -317,6 +318,7 @@ function CI.Initialize( enabled )
     CI.SetAlertColors()
 
     -- Setup CCT
+    CI.CrowdControlTracker.UpdateAOEList()
     CI.CrowdControlTracker.Initialize()
 end
 

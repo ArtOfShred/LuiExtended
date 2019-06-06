@@ -1879,66 +1879,77 @@ function CI.CreateSettings()
                 type = "checkbox",
                 name = "Show AOE - Player Ultimates",
                 tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
-                default = CI.D.cct.showAoeT1,
+                default = CI.D.cct.aoePlayerUltimate,
                 disabled = function() return (not CI.SV.cct.enabled) end,
-                getFunc = function() return CI.SV.cct.showAoeT1 end,
-                setFunc = function(newValue) CI.SV.cct.showAoeT1 = newValue
-                    CCT:InitControls()
+                getFunc = function() return CI.SV.cct.aoePlayerUltimate end,
+                setFunc = function(newValue) CI.SV.cct.aoePlayerUltimate = newValue
+                    CCT.UpdateAOEList()
                 end,
             },
             {
                 type = "checkbox",
                 name = "Show AOE - Player Abilities",
                 tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
-                default = CI.D.cct.showAoeT2,
+                default = CI.D.cct.aoePlayerNormal,
                 disabled = function() return (not CI.SV.cct.enabled) end,
-                getFunc = function() return CI.SV.cct.showAoeT2 end,
-                setFunc = function(newValue) CI.SV.cct.showAoeT2 = newValue
-                    CCT:InitControls()
+                getFunc = function() return CI.SV.cct.aoePlayerNormal end,
+                setFunc = function(newValue) CI.SV.cct.aoePlayerNormal = newValue
+                    CCT.UpdateAOEList()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Show AOE - Player Sets",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.aoePlayerSet,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.aoePlayerSet end,
+                setFunc = function(newValue) CI.SV.cct.aoePlayerSet = newValue
+                    CCT.UpdateAOEList()
                 end,
             },
             {
                 type = "checkbox",
                 name = "Show AOE - Traps",
                 tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
-                default = CI.D.cct.showAoeT3,
+                default = CI.D.cct.aoeTraps,
                 disabled = function() return (not CI.SV.cct.enabled) end,
-                getFunc = function() return CI.SV.cct.showAoeT3 end,
-                setFunc = function(newValue) CI.SV.cct.showAoeT3 = newValue
-                    CCT:InitControls()
+                getFunc = function() return CI.SV.cct.aoeTraps end,
+                setFunc = function(newValue) CI.SV.cct.aoeTraps = newValue
+                    CCT.UpdateAOEList()
                 end,
             },
             {
                 type = "checkbox",
                 name = "Show AOE - Dungeon/Trial Boss",
                 tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
-                default = CI.D.cct.showAoeT4,
+                default = CI.D.cct.aoeNPCBoss,
                 disabled = function() return (not CI.SV.cct.enabled) end,
-                getFunc = function() return CI.SV.cct.showAoeT4 end,
-                setFunc = function(newValue) CI.SV.cct.showAoeT4 = newValue
-                    CCT:InitControls()
+                getFunc = function() return CI.SV.cct.aoeNPCBoss end,
+                setFunc = function(newValue) CI.SV.cct.aoeNPCBoss = newValue
+                    CCT.UpdateAOEList()
                 end,
             },
             {
                 type = "checkbox",
                 name = "Show AOE - Quest Boss",
                 tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
-                default = CI.D.cct.showAoeT5,
+                default = CI.D.cct.aoeNPCElite,
                 disabled = function() return (not CI.SV.cct.enabled) end,
-                getFunc = function() return CI.SV.cct.showAoeT5 end,
-                setFunc = function(newValue) CI.SV.cct.showAoeT5 = newValue
-                    CCT:InitControls()
+                getFunc = function() return CI.SV.cct.aoeNPCElite end,
+                setFunc = function(newValue) CI.SV.cct.aoeNPCElite = newValue
+                    CCT.UpdateAOEList()
                 end,
             },
             {
                 type = "checkbox",
                 name = "Show AOE - Normal NPC",
                 tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
-                default = CI.D.cct.showAoeT6,
+                default = CI.D.cct.aoeNPCNormal,
                 disabled = function() return (not CI.SV.cct.enabled) end,
-                getFunc = function() return CI.SV.cct.showAoeT6 end,
-                setFunc = function(newValue) CI.SV.cct.showAoeT6 = newValue
-                    CCT:InitControls()
+                getFunc = function() return CI.SV.cct.aoeNPCNormal end,
+                setFunc = function(newValue) CI.SV.cct.aoeNPCNormal = newValue
+                    CCT.UpdateAOEList()
                 end,
             },
 

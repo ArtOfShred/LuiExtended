@@ -98,7 +98,6 @@ function CCT:OnOff()
             eventManager:RegisterForEvent(self.name, EVENT_PLAYER_STUNNED_STATE_CHANGED, function(...) self:OnStunnedState(...) end)
             eventManager:RegisterForEvent(self.name, EVENT_UNIT_DEATH_STATE_CHANGED, function(eventCode, unitTag, isDead) if isDead then self:FullReset() end end)
             eventManager:AddFilterForEvent(self.name, EVENT_UNIT_DEATH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
-            self:GeneratePriorityTable()
             self.Initialize()
         end
     else
@@ -128,9 +127,63 @@ end
 
 
 
+function CCT.UpdateAOEList()
 
+    local priority = 0 -- Counter for priority, we increment by one for each active category added
+    CCT.aoeTypesId = { }
 
+    if CI.SV.cct.aoePlayerUltimate then
+        for k, v in pairs(CC.aoePlayerUltimate) do
+            CCT.aoeTypesId[k] = priority
+        end
+        priority = priority + 1
+    end
 
+    if CI.SV.cct.aoePlayerNormal then
+        for k, v in pairs(CC.aoePlayerNormal) do
+            CCT.aoeTypesId[k] = priority
+        end
+        priority = priority + 1
+    end
+
+    if CI.SV.cct.aoePlayerUltimate then
+        for k, v in pairs(CC.aoePlayerSet) do
+            CCT.aoeTypesId[k] = priority
+        end
+        priority = priority + 1
+    end
+
+    if CI.SV.cct.aoeTraps then
+        for k, v in pairs(CC.aoeTraps) do
+            CCT.aoeTypesId[k] = priority
+        end
+        priority = priority + 1
+    end
+
+    if CI.SV.cct.aoeNPCBoss then
+        for k, v in pairs(CC.aoeNPCBoss) do
+            CCT.aoeTypesId[k] = priority
+        end
+        priority = priority + 1
+    end
+
+    if CI.SV.cct.aoeNPCElite then
+        for k, v in pairs(CC.aoeNPCElite) do
+            CCT.aoeTypesId[k] = priority
+        end
+        priority = priority + 1
+    end
+
+    if CI.SV.cct.aoeNPCNormal then
+        for k, v in pairs(CC.aoeNPCNormal) do
+            CCT.aoeTypesId[k] = priority
+        end
+        priority = priority + 1
+    end
+
+    CCT.GeneratePriorityTable()
+
+end
 
 
 
@@ -241,10 +294,10 @@ function CCT:OnAnimation(control, animationType, param)
     end
 end
 
-function CCT:GeneratePriorityTable()
-    self.aoeTypes = {}
-    for k,v in pairs (CC.aoeTypesId) do
-        self.aoeTypes[GetAbilityName(k)] = v
+function CCT.GeneratePriorityTable()
+    CCT.aoeTypes = {}
+    for k,v in pairs (CCT.aoeTypesId) do
+        CCT.aoeTypes[GetAbilityName(k)] = v
     end
 end
 
@@ -348,7 +401,7 @@ function CCT:OnCombat(eventCode, result, isError, abilityName, abilityGraphic, a
     end
 
     if CI.SV.cct.showAoe and (self:AoePriority(abilityName, result) or (CC.SpecialCC[abilityId] and result == ACTION_RESULT_EFFECT_GAINED)) then
-        if not CC.aoeTypesId[abilityId] then
+        if not CCT.aoeTypesId[abilityId] then
             return
         end
         if CC.SpecialCC[abilityId] and result ~= ACTION_RESULT_EFFECT_GAINED then
@@ -357,7 +410,7 @@ function CCT:OnCombat(eventCode, result, isError, abilityName, abilityGraphic, a
 
         -- TODO: This entire block needs updated with better criteria (once we separate aoes into the proper categories)
 
-        if CC.aoeTypesId[abilityId] <= 199 then
+        if CCT.aoeTypesId[abilityId] <= 199 then
             if not CI.SV.cct.showAoeT1 then
                 return
             end
@@ -367,7 +420,7 @@ function CCT:OnCombat(eventCode, result, isError, abilityName, abilityGraphic, a
             end
         end
 
-        if CC.aoeTypesId[abilityId] >= 200 and CC.aoeTypesId[abilityId] <= 499 then
+        if CCT.aoeTypesId[abilityId] >= 200 and CCT.aoeTypesId[abilityId] <= 499 then
             if not CI.SV.cct.showAoeT2 then
                 return
             end
@@ -377,7 +430,7 @@ function CCT:OnCombat(eventCode, result, isError, abilityName, abilityGraphic, a
             end
         end
 
-        if CC.aoeTypesId[abilityId] >= 500 and CC.aoeTypesId[abilityId] <= 599 then
+        if CCT.aoeTypesId[abilityId] >= 500 and CCT.aoeTypesId[abilityId] <= 599 then
             if not CI.SV.cct.showAoeT3 then
                 return
             end
@@ -387,7 +440,7 @@ function CCT:OnCombat(eventCode, result, isError, abilityName, abilityGraphic, a
             end
         end
 
-        if CC.aoeTypesId[abilityId] >= 600 and CC.aoeTypesId[abilityId] <= 699 then
+        if CCT.aoeTypesId[abilityId] >= 600 and CCT.aoeTypesId[abilityId] <= 699 then
             if not CI.SV.cct.showAoeT4 then
                 return
             end
@@ -397,7 +450,7 @@ function CCT:OnCombat(eventCode, result, isError, abilityName, abilityGraphic, a
             end
         end
 
-        if CC.aoeTypesId[abilityId] >= 700 and CC.aoeTypesId[abilityId] <= 799 then
+        if CCT.aoeTypesId[abilityId] >= 700 and CCT.aoeTypesId[abilityId] <= 799 then
             if not CI.SV.cct.showAoeT5 then
                 return
             end
@@ -407,7 +460,7 @@ function CCT:OnCombat(eventCode, result, isError, abilityName, abilityGraphic, a
             end
         end
 
-        if CC.aoeTypesId[abilityId] >= 800 then
+        if CCT.aoeTypesId[abilityId] >= 800 then
             if not CI.SV.cct.showAoeT6 then
                 return
             end

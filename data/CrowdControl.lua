@@ -7,433 +7,427 @@
 LUIE.CrowdControl = {}
 local CC = LUIE.CrowdControl
 
-local aoeCounter = 0
-CC.aoeTypesId = { }
-
--- Since there can't be gaps in the Aoe Priority list, we use a Counter to increment each Id added so its placed in the right priority.
--- Not some id's will not increment AoeCounter+1 - this is when Id's should have a shared priority due to the same ability having multiple damage id's.
-
-
--- TODO: Lets use these categories and build a table from them based off the menu settings, this ensures no priority gap
 -- CC.aoePlayerUltimate
 -- CC.aoePlayerNormal
 -- CC.aoePlayerSet
--- CC.aoeNormal
--- CC.aoeElite
--- cc.aoeBoss
 -- CC.aoeTrap
---
--- build into table in CCT file called CCT.aoeTypesId again
-
--- TODO: Lets use these categories and build a table from them based off the menu settings, this ensures no priority gap
--- CC.aoePlayerUltimate
--- CC.aoePlayerNormal
--- CC.aoePlayerSet
--- CC.aoeNormal
--- CC.aoeElite
 -- cc.aoeBoss
--- CC.aoeTrap
---
--- build into table in CCT file called CCT.aoeTypesId again
-local CC_AOE_PLAYER_ULTIMATE    = 1
-local CC_AOE_PLAYER_NORMAL      = 2
-local CC_AOE_PLAYER_SET         = 3
-local CC_AOE_TRAP               = 4
-local CC_AOE_NPC_BOSS           = 5
-local CC_AOE_NPC_ELITE          = 6
-local CC_AOE_NPC_NORMAL         = 7
+-- CC.aoeElite
+-- CC.aoeNormal
+CC.aoePlayerUltimate = {
 
--- TODO: Add this loop to CCT
---[[
-if i = 1, 7 do
-    for k, v in pairs(CC.i) do
-        if v = 1 then counter = counter + 1 else counter = counter end
-        CCT.aoeTypesId[k] = counter
-    end
-end ]]--
+    -- Dragonknight
+    [28995] = true, -- Dragonknight Standard
+    [32960] = true, -- Shifting Standard
+    [32964] = true, -- Shifting Standard
+    [32948] = true, -- Standard of Might
 
-CC.aoeTypesId[104007] = aoeCounter+1 -- Time Stop
-CC.aoeTypesId[104072] = aoeCounter+1 -- Borrowed Time
-CC.aoeTypesId[104082] = aoeCounter+1 -- Time Freeze
+    -- Warden
+    [86247] = true, -- Sleet Storm (Sleet Storm)
+    [88860] = true, -- Northern Storm (Northern Storm)
+    [88863] = true, -- Permafrost (Permafrost)
 
--- PVE PRIORITY GUIDE
--- Player Ultimates
--- Player Abilities
--- Monster Helms
--- Traps/Environmental
--- Dungeon/Trial Bosses
--- ELITES & Quest Bosses
--- Normal NPC's
+    -- Templar
+    [21753] = true, -- Nova
+    [21756] = true, -- Solar Prison
+    [21759] = true, -- Solar Disturbance
 
--- PLAYER ABILITIES
+    -- Nightblade
+    [36490] = true, -- Veil of Blades (Veil of Blades)
 
--- Dragonknight
-CC.aoeTypesId[28995] = aoeCounter -- Dragonknight Standard
-CC.aoeTypesId[32960] = aoeCounter -- Shifting Standard
-CC.aoeTypesId[32964] = aoeCounter -- Shifting Standard
-CC.aoeTypesId[32948] = aoeCounter -- Standard of Might
-CC.aoeTypesId[32711] = aoeCounter+1 -- Eruption (Eruption)
+    -- Necromancer
+    [122178] = true, -- Frozen Colossus (Frozen Colossus)
+    [122399] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122400] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122401] = true, -- Pestilent Colossus (Pestilent Colossus)
+    [122392] = true, -- Glacial Colossus (Glacial Colossus)
+    [118289] = true, -- Ravenous Goliath (Ravenous Goliath)
 
--- Warden
-CC.aoeTypesId[88783] = aoeCounter -- Impaling Shards (Impaling Shards)
-CC.aoeTypesId[88791] = aoeCounter -- Gripping Shards (Gripping Shards)
-CC.aoeTypesId[88802] = aoeCounter -- Winter's Revenge (Winter's Revenge)
-CC.aoeTypesId[86247] = aoeCounter -- Sleet Storm (Sleet Storm)
-CC.aoeTypesId[88860] = aoeCounter -- Northern Storm (Northern Storm)
-CC.aoeTypesId[88863] = aoeCounter -- Permafrost (Permafrost)
+    -- Destruction Staff
+    [85127] = true, --Fiery Rage
+    [85131] = true, --Thunderous Rage
+    [85129] = true, --Icy Rage
+    [83683] = true, --Eye of Flame
+    [83687] = true, --Eye of Lightning
+    [83685] = true, --Eye of Frost
+    [83626] = true, --Fire Storm
+    [83631] = true, --Thunder Storm
+    [83629] = true, --Ice Storm
 
--- Templar
-CC.aoeTypesId[26192] = aoeCounter -- Spear Shards
-CC.aoeTypesId[95931] = aoeCounter -- Spear Shards
-CC.aoeTypesId[26859] = aoeCounter -- Luminous Shards
-CC.aoeTypesId[95955] = aoeCounter -- Luminous Shards
-CC.aoeTypesId[26871] = aoeCounter -- Blazing Spear
-CC.aoeTypesId[26879] = aoeCounter -- Blazing Spear
-CC.aoeTypesId[21753] = aoeCounter -- Nova
-CC.aoeTypesId[21756] = aoeCounter -- Solar Prison
-CC.aoeTypesId[21759] = aoeCounter -- Solar Disturbance
-CC.aoeTypesId[80172] = aoeCounter+1 -- Ritual of Retribution (Ritual of Retribution)
+    -- Mages Guild
+    [63429] = true, -- Meteor
+    [63454] = true, -- Ice Comet
+    [63471] = true, -- Shooting Star
 
--- Sorcerer
-CC.aoeTypesId[23189] = aoeCounter -- Lightning Splash (Lightning Splash)
-CC.aoeTypesId[23202] = aoeCounter -- Liquid Lightning (Liquid Lightning)
-CC.aoeTypesId[23208] = aoeCounter -- Lightning Flood (Lightning Flood)
-CC.aoeTypesId[80435] = aoeCounter+1 -- Suppression Field (Suppression Field)
+    -- Vampire
+    [32625] = true, -- Bat Swarm
+    [38935] = true, -- Clouding Swarm
+    [38934] = true, -- Devouring Swarm
 
--- Nightblade
-CC.aoeTypesId[36052] = aoeCounter+1 -- Twisting Path (Twisting Path)
-CC.aoeTypesId[36490] = aoeCounter+1 -- Veil of Blades (Veil of Blades)
+    -- Volendrung
+    [116669] = true, -- Ebony Cyclone (Ruinous Cyclone)
 
--- Necromancer
-CC.aoeTypesId[115254] = aoeCounter+1 -- Boneyard (Boneyard)
-CC.aoeTypesId[117809] = aoeCounter -- Unnerving Boneyard (Unnerving Boneyard)
-CC.aoeTypesId[117854] = aoeCounter -- Avid Boneyard (Avid Boneyard)
+}
 
-CC.aoeTypesId[116410] = aoeCounter+1 -- Shocking Siphon (Shocking Siphon)
-CC.aoeTypesId[118766] = aoeCounter -- Detonating Siphon (Detonating Siphon)
-CC.aoeTypesId[118011] = aoeCounter -- Mystic Siphon (Mystic Siphon)
+CC.aoePlayerNormal = {
 
-CC.aoeTypesId[122178] = aoeCounter+1 -- Frozen Colossus (Frozen Colossus)
+    -- Psijic Order
+    [104007] = true, -- Time Stop
+    [104072] = true, -- Borrowed Time
+    [104082] = true, -- Time Freeze
 
-CC.aoeTypesId[122399] = aoeCounter+1 -- Pestilent Colossus (Pestilent Colossus)
-CC.aoeTypesId[122400] = aoeCounter+1 -- Pestilent Colossus (Pestilent Colossus)
-CC.aoeTypesId[122401] = aoeCounter+1 -- Pestilent Colossus (Pestilent Colossus)
+    -- Dragonknight
+    [32711] = true, -- Eruption (Eruption)
 
-CC.aoeTypesId[122392] = aoeCounter+1 -- Glacial Colossus (Glacial Colossus)
+    -- Warden
+    [88783] = true, -- Impaling Shards (Impaling Shards)
+    [88791] = true, -- Gripping Shards (Gripping Shards)
+    [88802] = true, -- Winter's Revenge (Winter's Revenge)
 
-CC.aoeTypesId[118289] = aoeCounter+1 -- Ravenous Goliath (Ravenous Goliath)
+    -- Templar
+    [26192] = true, -- Spear Shards
+    [95931] = true, -- Spear Shards
+    [26859] = true, -- Luminous Shards
+    [95955] = true, -- Luminous Shards
+    [26871] = true, -- Blazing Spear
+    [26879] = true, -- Blazing Spear
+    [80172] = true, -- Ritual of Retribution (Ritual of Retribution)
 
-CC.aoeTypesId[85127] = aoeCounter+1 --Fiery Rage
-CC.aoeTypesId[85131] = aoeCounter+1 --Thunderous Rage
-CC.aoeTypesId[85129] = aoeCounter+1 --Icy Rage
-CC.aoeTypesId[83683] = aoeCounter+1 --Eye of Flame
-CC.aoeTypesId[83687] = aoeCounter+1 --Eye of Lightning
-CC.aoeTypesId[83685] = aoeCounter+1 --Eye of Frost
-CC.aoeTypesId[83626] = aoeCounter+1 --Fire Storm
-CC.aoeTypesId[83631] = aoeCounter+1 --Thunder Storm
-CC.aoeTypesId[83629] = aoeCounter+1 --Ice Storm
+    -- Sorcerer
+    [23189] = true, -- Lightning Splash (Lightning Splash)
+    [23202] = true, -- Liquid Lightning (Liquid Lightning)
+    [23208] = true, -- Lightning Flood (Lightning Flood)
+    [80435] = true, -- Suppression Field (Suppression Field)
 
-CC.aoeTypesId[62896] = aoeCounter+1 -- Wall of Fire
-CC.aoeTypesId[62971] = aoeCounter+1 -- Wall of Storms
-CC.aoeTypesId[62931] = aoeCounter+1 -- Wall of Frost
-CC.aoeTypesId[39054] = aoeCounter+1 -- Unstable Wall of Fire
-CC.aoeTypesId[39079] = aoeCounter+1 -- Unstable Wall of Storms
-CC.aoeTypesId[39071] = aoeCounter+1 -- Unstable Wall of Frost
-CC.aoeTypesId[62912] = aoeCounter+1 -- Blockade of Fire
-CC.aoeTypesId[62990] = aoeCounter+1 -- Blockade of Storms
-CC.aoeTypesId[62951] = aoeCounter+1 -- Blockade of Frost
+    -- Nightblade
+    [36052] = true, -- Twisting Path (Twisting Path)
 
-CC.aoeTypesId[63429] = aoeCounter -- Meteor
-CC.aoeTypesId[63454] = aoeCounter -- Ice Comet
-CC.aoeTypesId[63471] = aoeCounter -- Shooting Star
+    -- Necromancer
+    [115254] = true, -- Boneyard (Boneyard)
+    [117809] = true, -- Unnerving Boneyard (Unnerving Boneyard)
+    [117854] = true, -- Avid Boneyard (Avid Boneyard)
 
-CC.aoeTypesId[32625] = aoeCounter+1 -- Bat Swarm
-CC.aoeTypesId[38935] = aoeCounter+1 -- Clouding Swarm
-CC.aoeTypesId[38934] = aoeCounter+1 -- Devouring Swarm
+    [116410] = true, -- Shocking Siphon (Shocking Siphon)
+    [118766] = true, -- Detonating Siphon (Detonating Siphon)
+    [118011] = true, -- Mystic Siphon (Mystic Siphon)
 
-CC.aoeTypesId[28877] = aoeCounter -- Volley
-CC.aoeTypesId[38690] = aoeCounter -- Endless Hail
-CC.aoeTypesId[38696] = aoeCounter -- Arrow Barrage
+    -- Destruction Staff
+    [62896] = true, -- Wall of Fire
+    [62971] = true, -- Wall of Storms
+    [62931] = true, -- Wall of Frost
+    [39054] = true, -- Unstable Wall of Fire
+    [39079] = true, -- Unstable Wall of Storms
+    [39071] = true, -- Unstable Wall of Frost
+    [62912] = true, -- Blockade of Fire
+    [62990] = true, -- Blockade of Storms
+    [62951] = true, -- Blockade of Frost
 
-CC.aoeTypesId[38561] = aoeCounter -- Caltrops (Caltrops)
-CC.aoeTypesId[40267] = aoeCounter -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
-CC.aoeTypesId[40252] = aoeCounter -- Razor Caltrops (Razor Caltrops)
+    -- Bow
+    [28877] = true, -- Volley
+    [38690] = true, -- Endless Hail
+    [38696] = true, -- Arrow Barrage
 
--- Volendrung
-CC.aoeTypesId[116669] = aoeCounter+1 -- Ebony Cyclone (Ruinous Cyclone)
+    -- Assault
+    [38561] = true, -- Caltrops (Caltrops)
+    [40267] = true, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+    [40252] = true, -- Razor Caltrops (Razor Caltrops)
 
--- MONSTER HELMS
-CC.aoeTypesId[102136] = aoeCounter+1 -- Zaan
-CC.aoeTypesId[59568] = aoeCounter+1 -- Malubeth
-CC.aoeTypesId[80522] = aoeCounter+1 -- Stormfist
-CC.aoeTypesId[59498] = aoeCounter+1 -- Mephala's Web (Spawm of Mephala)
-CC.aoeTypesId[60972] = aoeCounter+1 -- Fiery Breath (Maw of the Infernal)
-CC.aoeTypesId[80525] = aoeCounter+1 -- Ilambris
-CC.aoeTypesId[80526] = aoeCounter -- Ilambris
-CC.aoeTypesId[84502] = aoeCounter+1 -- Grothdarr
-CC.aoeTypesId[80561] = aoeCounter+1 -- Iceheart
-CC.aoeTypesId[97883] = aoeCounter+1 -- Domihaus
-CC.aoeTypesId[97899] = aoeCounter -- Domihaus
-CC.aoeTypesId[80565] = aoeCounter+1 -- Kra'gh
+}
 
-CC.aoeTypesId[106783] = aoeCounter+1 -- Dustcloud Damage (Adept Rider's)
-CC.aoeTypesId[75692] = aoeCounter+1 -- Bahraha's Curse (of Bahraha's Curse)
-CC.aoeTypesId[57209] = aoeCounter+1 -- Storm Knight's Plate (of the Storm Knight)
-CC.aoeTypesId[59696] = aoeCounter+1 -- Embershield (Embershield)
-CC.aoeTypesId[67204] = aoeCounter+1 -- Leeching Plate (of Leeching)
-CC.aoeTypesId[102094] = aoeCounter+1 -- Thurvokun (Thurvokun)
+CC.aoePlayerSet = {
 
-CC.aoeTypesId[116920] = aoeCounter+1 -- Auroran's Thunder (Auroran's Thunder)
+    -- Sets
+    [102136] = true, -- Zaan
+    [59568] = true, -- Malubeth
+    [80522] = true, -- Stormfist
+    [59498] = true, -- Mephala's Web (Spawm of Mephala)
+    [60972] = true, -- Fiery Breath (Maw of the Infernal)
+    [80525] = true, -- Ilambris
+    [80526] = true, -- Ilambris
+    [84502] = true, -- Grothdarr
+    [80561] = true, -- Iceheart
+    [97883] = true, -- Domihaus
+    [97899] = true, -- Domihaus
+    [80565] = true, -- Kra'gh
+    [106783] = true, -- Dustcloud Damage (Adept Rider's)
+    [75692] = true, -- Bahraha's Curse (of Bahraha's Curse)
+    [57209] = true, -- Storm Knight's Plate (of the Storm Knight)
+    [59696] = true, -- Embershield (Embershield)
+    [67204] = true, -- Leeching Plate (of Leeching)
+    [102094] = true, -- Thurvokun (Thurvokun)
+    [116920] = true, -- Auroran's Thunder (Auroran's Thunder)
 
--- SIEGE
-CC.aoeTypesId[104693] = aoeCounter+1 -- Meatbag Catapult
-CC.aoeTypesId[104695] = aoeCounter+1 -- Scattershot Catapult
+    -- Siege
+    [104693] = true, -- Meatbag Catapult
+    [104695] = true, -- Scattershot Catapult
 
--- NORMAL
-CC.aoeTypesId[37131] = aoeCounter+1 -- Ice Cage (Battlemage)
-CC.aoeTypesId[10813] = aoeCounter+1 -- Ignite (Synergy - Fire Mage)
-CC.aoeTypesId[38260] = aoeCounter+1 -- Ignite (Synergy - Fire Mage)
-CC.aoeTypesId[28629] = aoeCounter+1 -- Volley (Archer)
-CC.aoeTypesId[47102] = aoeCounter+1 -- Fire Rune (Fire Mage)
-CC.aoeTypesId[14068] = aoeCounter+1 -- Ignite (Synergy - Archer)
-CC.aoeTypesId[70414] = aoeCounter+1 -- Ignite (Synergy - Cyrodiil Archer)
-CC.aoeTypesId[38125] = aoeCounter+1 -- Caltrops  (Faction NPCs)
-CC.aoeTypesId[76730] = aoeCounter+1 -- Pool of Shadow (Voidbringer)
-CC.aoeTypesId[76624] = aoeCounter+1 -- Pool of Shadow (Voidbringer)
-CC.aoeTypesId[76729] = aoeCounter+1 -- Pool of Shadow (Voidbringer)
-CC.aoeTypesId[76728] = aoeCounter+1 -- Pool of Shadow (Voidbringer)
-CC.aoeTypesId[88336] = aoeCounter+1 -- Pool of Shadow (Skaafin Masquer)
-CC.aoeTypesId[88330] = aoeCounter+1 -- Pool of Shadow (Skaafin Masquer)
-CC.aoeTypesId[88335] = aoeCounter+1 -- Pool of Shadow (Skaafin Masquer)
-CC.aoeTypesId[88334] = aoeCounter+1 -- Pool of Shadow (Skaafin Masquer)
-CC.aoeTypesId[84837] = aoeCounter+1 -- Broken Pact (Skaafin)
-CC.aoeTypesId[62502] = aoeCounter+1 -- Fiery Wind (Justice Mage)
-CC.aoeTypesId[46819] = aoeCounter+1 -- Storm Damage (Cyrodiil Mage)
-CC.aoeTypesId[7883] = aoeCounter+1 -- Guardian Storm (Cyrodiil Mage)
-CC.aoeTypesId[8604] = aoeCounter+1 -- Vigorous Swipe (Mammoth)
-CC.aoeTypesId[27100] = aoeCounter+1 -- Shocking Rake (Dreugh)
-CC.aoeTypesId[16698] = aoeCounter+1 -- Poisonbloom (Netch)
-CC.aoeTypesId[90778] = aoeCounter+1 -- Acid Pool (Nix-Ox)
-CC.aoeTypesId[90815] = aoeCounter+1 -- Acid Pool (Nix-Ox)
-CC.aoeTypesId[85421] = aoeCounter+1 -- Retch (Cliff Strider)
-CC.aoeTypesId[85391] = aoeCounter+1 -- Slash (Cliff Strider)
-CC.aoeTypesId[13680] = aoeCounter+1 -- Acid Blood (Assassin Beetle)
-CC.aoeTypesId[10947] = aoeCounter+1 -- Fiery Breath (Shalk)
-CC.aoeTypesId[5265] = aoeCounter+1 -- Burning Ground (Shalk)
-CC.aoeTypesId[8088] = aoeCounter+1 -- Poison Spray (Giant Spider)
-CC.aoeTypesId[87126] = aoeCounter+1 -- Heat Vents (Fetcherfly Nest)
-CC.aoeTypesId[51282] = aoeCounter+1 -- Flame Tornado (Air Atronach - Flame)
-CC.aoeTypesId[9749] = aoeCounter+1 -- Envelop (Banekin)
-CC.aoeTypesId[73437] = aoeCounter+1 -- Soul Flame (Daedric Titan)
-CC.aoeTypesId[4772] = aoeCounter+1 -- Fiery Breath (Daedroth)
-CC.aoeTypesId[91938] = aoeCounter+1 -- Burst of Embers (Daedroth)
-CC.aoeTypesId[51645] = aoeCounter+1 -- Frozen Ground (Frost Atronach)
-CC.aoeTypesId[6162] = aoeCounter+1 -- Rain of Fire (Scamp)
-CC.aoeTypesId[88323] = aoeCounter+1 -- Blast Furnace (Iron Atronach)
-CC.aoeTypesId[69950] = aoeCounter+1 -- Desecrated Ground (Undead Synergy)
-CC.aoeTypesId[73937] = aoeCounter+1 -- Soul Cage (Lich)
-CC.aoeTypesId[73929] = aoeCounter+1 -- Soul Cage (Lich)
-CC.aoeTypesId[20812] = aoeCounter+1 -- Defiled Ground (Lich)
-CC.aoeTypesId[72996] = aoeCounter+1 -- Symphony of Blades (Defiled Aegis)
-CC.aoeTypesId[8628] = aoeCounter+1 -- Charged Ground (Harpy)
-CC.aoeTypesId[4769] = aoeCounter+1 -- Choking Pollen (Lurcher)
-CC.aoeTypesId[16040] = aoeCounter+1 -- Hurricane (Nereid)
-CC.aoeTypesId[19997] = aoeCounter+1 -- Static Field (Dwemer Spider - Synergy)
-CC.aoeTypesId[91094] = aoeCounter -- Split Bolt (Dwemer Arquebus)
-CC.aoeTypesId[91095] = aoeCounter -- Split Bolt (Dwemer Arquebus)
-CC.aoeTypesId[91096] = aoeCounter -- Split Bolt (Dwemer Arquebus)
-CC.aoeTypesId[103862] = aoeCounter+1 -- Deluge (Yaghra Spewer)
-CC.aoeTypesId[103992] = aoeCounter+1 -- Luminescent Burn (Yaghra Spewer)
-CC.aoeTypesId[105889] = aoeCounter+1 -- Pustulant Eruption (Yaghra Nightmare)
+}
 
-CC.aoeTypesId[94936] = aoeCounter+1 -- Tremor (Nchuleftingth - Mud-Tusk)
-CC.aoeTypesId[86566] = aoeCounter+1 -- Fire Runes (Nchuleftingth - Friar Hadelar)
-CC.aoeTypesId[89754] = aoeCounter+1 -- Shocking Rake (Old Rust-Eye - Khartag Point)
+CC.aoeTraps = {
 
--- TRAPS
-CC.aoeTypesId[87949] = aoeCounter -- Lava (Foyada Quarry)
-CC.aoeTypesId[44034] = aoeCounter -- Slaughterfish Attack (Stirk)
-CC.aoeTypesId[113082] = aoeCounter -- Slaughterfish Attack (Cyrodiil)
-CC.aoeTypesId[19224] = aoeCounter -- In Lava (Halls of Torment)
-CC.aoeTypesId[11338] = aoeCounter -- In Lava (The Earth Forge)
-CC.aoeTypesId[16589] = aoeCounter -- Fire (Dummy ID for zone based name override) -- TODO: Maybe do something here
-CC.aoeTypesId[56277] = aoeCounter -- Lava (City of Ash II)
-CC.aoeTypesId[5140] = aoeCounter -- Lava (Dragonstar Arena)
+    -- TODO: Will need to add better categories here eventually
+    [87949] = true, -- Lava (Foyada Quarry)
+    [44034] = true, -- Slaughterfish Attack (Stirk)
+    [113082] = true, -- Slaughterfish Attack (Cyrodiil)
+    [19224] = true, -- In Lava (Halls of Torment)
+    [11338] = true, -- In Lava (The Earth Forge)
+    [16589] = true, -- Fire (Dummy ID for zone based name override) -- TODO: Maybe do something here
+    [56277] = true, -- Lava (City of Ash II)
+    [5140] = true, -- Lava (Dragonstar Arena)
 
-CC.aoeTypesId[62770] = aoeCounter+1 -- Coldharbour Flames (Flame Trap) - Coldharbour Tutorial
-CC.aoeTypesId[21943] = aoeCounter+1 -- Spike Trap (Spike Trap)
-CC.aoeTypesId[53169] = aoeCounter+1 -- Spike Trap (Spike Trap) - Dragonstar Arena
-CC.aoeTypesId[26531] = aoeCounter+1 -- Bear Trap (Bear Trap)
-CC.aoeTypesId[31086] = aoeCounter+1 -- Trap (Trap) - Selene's Web
+    [62770] = true, -- Coldharbour Flames (Flame Trap) - Coldharbour Tutorial
+    [21943] = true, -- Spike Trap (Spike Trap)
+    [53169] = true, -- Spike Trap (Spike Trap) - Dragonstar Arena
+    [26531] = true, -- Bear Trap (Bear Trap)
+    [31086] = true, -- Trap (Trap) - Selene's Web
 
-CC.aoeTypesId[17314] = aoeCounter+1 -- Fire Trap (Player)
-CC.aoeTypesId[72888] = aoeCounter+1 -- Fire Attack 1 (Fire) -- Banished Cells II
-CC.aoeTypesId[72889] = aoeCounter+1 -- Fire Attack 2 (Fire) -- Banished Cells II
+    [17314] = true, -- Fire Trap (Player)
+    [72888] = true, -- Fire Attack 1 (Fire) -- Banished Cells II
+    [72889] = true, -- Fire Attack 2 (Fire) -- Banished Cells II
 
-CC.aoeTypesId[92757] = aoeCounter+1 -- Spinning Blade (Ald Carac)
+    [92757] = true, -- Spinning Blade (Ald Carac)
 
-CC.aoeTypesId[117508] = aoeCounter+1 -- Shock Wall (Lightning Trap - Elinhir Private Arena)
-CC.aoeTypesId[117622] = aoeCounter+1 -- Shock Wall (Lightning Trap - Elinhir Private Arena)
-CC.aoeTypesId[117598] = aoeCounter+1 -- Shock Wall (Lightning Trap - Elinhir Private Arena)
-CC.aoeTypesId[117139] = aoeCounter+1 -- Spinning Blade (Blade Trap - Elinhir Private Arena)
+    [117508] = true, -- Shock Wall (Lightning Trap - Elinhir Private Arena)
+    [117622] = true, -- Shock Wall (Lightning Trap - Elinhir Private Arena)
+    [117598] = true, -- Shock Wall (Lightning Trap - Elinhir Private Arena)
+    [117139] = true, -- Spinning Blade (Blade Trap - Elinhir Private Arena)
 
-CC.aoeTypesId[92150] = aoeCounter+1 -- Fire Trap (Vvardenfell -- Divine Delusions)
-CC.aoeTypesId[87102] = aoeCounter+1 -- Spinning Blade (Vvardenfell -- Divine Restoration)
-CC.aoeTypesId[92284] = aoeCounter+1 -- Planar Shear (Vvardenfell -- Divine Restoration)
-CC.aoeTypesId[86743] = aoeCounter+1 -- Accelerated Transposition (Vvardenfell -- Like Blood from a Stone)
-CC.aoeTypesId[84527] = aoeCounter+1 -- Searing Steam (Vvardenfell - Nchuleftingth)
-CC.aoeTypesId[90271] = aoeCounter+1 -- Charge-Wire Shock (Vvardenfell - Nchuleftingth)
-CC.aoeTypesId[92138] = aoeCounter+1 -- Laser Damage (Vvardenfell - Nchuleftingth)
+    [92150] = true, -- Fire Trap (Vvardenfell -- Divine Delusions)
+    [87102] = true, -- Spinning Blade (Vvardenfell -- Divine Restoration)
+    [92284] = true, -- Planar Shear (Vvardenfell -- Divine Restoration)
+    [86743] = true, -- Accelerated Transposition (Vvardenfell -- Like Blood from a Stone)
+    [84527] = true, -- Searing Steam (Vvardenfell - Nchuleftingth)
+    [90271] = true, -- Charge-Wire Shock (Vvardenfell - Nchuleftingth)
+    [92138] = true, -- Laser Damage (Vvardenfell - Nchuleftingth)
 
--- ELITES
-CC.aoeTypesId[44228] = aoeCounter+1 -- Dragonknight Standard (Dragonknight - Elite)
-CC.aoeTypesId[81197] = aoeCounter+1 -- Agonizing Fury (Thundermaul - Boss)
-CC.aoeTypesId[21952] = aoeCounter+1 -- Repulsion Shock (Wamasu)
-CC.aoeTypesId[55867] = aoeCounter+1 -- Repulsion Shock (Wamasu - Boss)
-CC.aoeTypesId[72794] = aoeCounter+1 -- Toxic Pool (Haj Mota)
-CC.aoeTypesId[53233] = aoeCounter+1 -- Miasma Pool (Flesh Colossus)
-CC.aoeTypesId[52866] = aoeCounter+1 -- Volley (Cyrodiil Archer)
-CC.aoeTypesId[54258] = aoeCounter+1 -- Upgraded Volley (Cyrodiil Archer)
-CC.aoeTypesId[10271] = aoeCounter+1 -- Quake (Gargoyle)
-CC.aoeTypesId[9011] = aoeCounter+1 -- Tremor (Troll)
-CC.aoeTypesId[75928] = aoeCounter+1 -- Elemental Pool (Minotaur)
-CC.aoeTypesId[75953] = aoeCounter+1 -- Brimstone Hailfire (Minotaur Shaman)
-CC.aoeTypesId[75976] = aoeCounter+1 -- Pillar of Nirn (Minotaur Shaman)
-CC.aoeTypesId[75980] = aoeCounter+1 -- Pillar Eruption (Minotaur Shaman)
-CC.aoeTypesId[11282] = aoeCounter+1 -- Steam Breath (Dwemer Centurion)
+    -- Dragonstar Arena
+    [53341] = true, -- Biting Cold (Player)
+    [60421] = true, -- Biting Cold (Player)
+    [83498] = true, -- Poisonous Cloud (Poison Cloud)
+    [83468] = true, -- Restoring Nature (Nature's Blessing)
 
--- BOSSES
-CC.aoeTypesId[84045] = aoeCounter+1 -- Seal of Defilement (Quenyas) - World Boss - Seaside Scarp Camp
-CC.aoeTypesId[84206] = aoeCounter+1 -- Stinging Sputum (Gathongor the Mauler) - World Boss - Gathongor's Mine
+    -- Maelstrom Arena
+    [69101] = true, -- Shock (Generator)
+    [66797] = true, -- Spinning Blade (Blade Trap)
+    [67871] = true, -- Shock (Water)
+    [72525] = true, -- Frigid Waters (Player)
+    [67808] = true, -- Frigid Waters (Player)
 
--- QUESTS
-CC.aoeTypesId[36860] = aoeCounter+1 -- Swordstorm Damage (MSQ - Halls of Torment)
+    -- City of Ash II
+    [56068] = true, -- Slag Geyser (Lava Pool)
 
-CC.aoeTypesId[87959] = aoeCounter+1 -- Ash Storm (Vvardenfell -- Divine Delusions)
+}
 
-CC.aoeTypesId[90148] = aoeCounter+1 -- Sunder's Echo (Vvardenfell -- Divine Intervention)
-CC.aoeTypesId[90146] = aoeCounter+1 -- Sunder's Echo (Vvardenfell -- Divine Intervention)
+CC.aoeNPCBoss = {
 
-CC.aoeTypesId[90182] = aoeCounter+1 -- Oily Smoke (Vvardenfell -- Divine Restoration)
-CC.aoeTypesId[69284] = aoeCounter+1 -- Whirlwind Function (Guardian of Bthark -- Nchuleftingth)
-CC.aoeTypesId[86607] = aoeCounter+1 -- Steam Breath (Guardian of Bthark -- Nchuleftingth) -- Leaving here because it does massive damage
+    -- Summerset
+    [105889] = true, -- Pustulant Eruption (Yaghra Nightmare)
 
---------------------
--- Arenas
---------------------
+    -- Vvardenfell
+    [94936] = true, -- Tremor (Nchuleftingth - Mud-Tusk)
+    [86566] = true, -- Fire Runes (Nchuleftingth - Friar Hadelar)
+    [89754] = true, -- Shocking Rake (Old Rust-Eye - Khartag Point)
+    [90148] = true, -- Sunder's Echo (Vvardenfell -- Divine Intervention)
+    [90146] = true, -- Sunder's Echo (Vvardenfell -- Divine Intervention)
+    [69284] = true, -- Whirlwind Function (Guardian of Bthark -- Nchuleftingth)
+    [86607] = true, -- Steam Breath (Guardian of Bthark -- Nchuleftingth)
 
--- Dragonstar Arena
-CC.aoeTypesId[53341] = aoeCounter+1 -- Biting Cold (Player)
-CC.aoeTypesId[60421] = aoeCounter+1 -- Biting Cold (Player)
-CC.aoeTypesId[53314] = aoeCounter+1 -- Flame Volley (Sovngarde Ranger)
-CC.aoeTypesId[53280] = aoeCounter+1 -- Unstable Wall of Frost (Sovngarde Icemage)
-CC.aoeTypesId[83498] = aoeCounter+1 -- Poisonous Cloud (Poison Cloud)
-CC.aoeTypesId[53614] = aoeCounter+1 -- Thundering Presence (Nak'tah)
-CC.aoeTypesId[53625] = aoeCounter+1 -- Lightning Flood (Nak'tah)
-CC.aoeTypesId[53660] = aoeCounter+1 -- Power Overload Heavy Attack (Nak'tah)
-CC.aoeTypesId[56824] = aoeCounter+1 -- Puncturing Sweep (House Dres Templar)
-CC.aoeTypesId[54161] = aoeCounter+1 -- Berserker Frenzy (House Dres Slaver)
-CC.aoeTypesId[54080] = aoeCounter+1 -- Cinder Storm (Earthen Heart Knight)
-CC.aoeTypesId[54084] = aoeCounter+1 -- Corrosive Armor (Earthen Heart Knight)
-CC.aoeTypesId[52903] = aoeCounter+1 -- Standard of Might (Anal'a Tu'wha0)
-CC.aoeTypesId[52892] = aoeCounter+1 -- Flames of Oblivion (Anal'a Tu'wha)
-CC.aoeTypesId[83468] = aoeCounter+1 -- Restoring Nature (Nature's Blessing)
-CC.aoeTypesId[52933] = aoeCounter+1 -- Solar Disturbance (Shadow Knight)
-CC.aoeTypesId[25213] = aoeCounter+1 -- whirlwind Function (Dwarven Fire Centurion)
-CC.aoeTypesId[55981] = aoeCounter+1 -- Ice Charge (Dwarven Ice Centurion)
-CC.aoeTypesId[55086] = aoeCounter+1 -- Poison Mist (Vampire Lord Thisa)
-CC.aoeTypesId[55092] = aoeCounter+1 -- Devouring Swarm (Vampire Lord Thisa)
-CC.aoeTypesId[55104] = aoeCounter+1 -- Marked for Death (Hiath the Battlemaster)
-CC.aoeTypesId[55182] = aoeCounter+1 -- Marked for Death (Hiath the Battlemaster)
+    -- World Bosses
+    [84045] = true, -- Seal of Defilement (Quenyas) - World Boss - Seaside Scarp Camp
+    [84206] = true, -- Stinging Sputum (Gathongor the Mauler) - World Boss - Gathongor's Mine
 
--- Maelstrom Arena
-CC.aoeTypesId[68197] = aoeCounter+1 -- Necrotic Essence (Necrotic Orb)
-CC.aoeTypesId[70901] = aoeCounter+1 -- Defiled Grave (Maxus the Many) -- NORMAL
-CC.aoeTypesId[72149] = aoeCounter+1 -- Defiled Grave (Maxus the Many) -- VETERAN
-CC.aoeTypesId[69101] = aoeCounter+1 -- Shock (Generator)
-CC.aoeTypesId[66797] = aoeCounter+1 -- Spinning Blade (Blade Trap)
-CC.aoeTypesId[69366] = aoeCounter+1 -- Barrage Function (Centurion Champion)
-CC.aoeTypesId[69316] = aoeCounter+1 -- Electric Shield (Centurion Champion)
-CC.aoeTypesId[67871] = aoeCounter+1 -- Shock (Water)
-CC.aoeTypesId[73880] = aoeCounter+1 -- Call Lightning (Lamia Queen)
-CC.aoeTypesId[67758] = aoeCounter+1 -- Queen's Poison (Lamia Queen)
-CC.aoeTypesId[72159] = aoeCounter+1 -- Static Field (Dwarven Spider)
-CC.aoeTypesId[68537] = aoeCounter+1 -- Overcharged Bolt (The Control Guardian)
-CC.aoeTypesId[70860] = aoeCounter+1 -- Overheated Flame (The Control Guardian)
-CC.aoeTypesId[68543] = aoeCounter+1 -- Overheated Volley (The Control Guardian)
-CC.aoeTypesId[72203] = aoeCounter+1 -- Overcharge (Scavenger Thunder-Smith)
-CC.aoeTypesId[72525] = aoeCounter+1 -- Frigid Waters (Player)
-CC.aoeTypesId[67808] = aoeCounter+1 -- Frigid Waters (Player)
+    -- Quests
+    [36860] = true, -- Swordstorm Damage (MSQ - Halls of Torment)
+    [87959] = true, -- Ash Storm (Vvardenfell -- Divine Delusions)
 
---------------------
--- Dungeons
---------------------
+    -- Dragonstar Arena
+    [53660] = true, -- Power Overload Heavy Attack (Nak'tah)
+    [54084] = true, -- Corrosive Armor (Earthen Heart Knight)
+    [52903] = true, -- Standard of Might (Anal'a Tu'wha0)
+    [52933] = true, -- Solar Disturbance (Shadow Knight)
+    [55086] = true, -- Poison Mist (Vampire Lord Thisa)
+    [55092] = true, -- Devouring Swarm (Vampire Lord Thisa)
+    [55104] = true, -- Marked for Death (Hiath the Battlemaster)
+    [55182] = true, -- Marked for Death (Hiath the Battlemaster)
 
--- Banished Cells I
-CC.aoeTypesId[19027] = aoeCounter+1 -- Dead Zone (Skeletal Destroyer)
-CC.aoeTypesId[33188] = aoeCounter+1 -- Daedric Tempest (High Kinlord Rilis)
+    -- Maelstrom Arena
+    [68197] = true, -- Necrotic Essence (Necrotic Orb)
+    [70901] = true, -- Defiled Grave (Maxus the Many) -- NORMAL
+    [72149] = true, -- Defiled Grave (Maxus the Many) -- VETERAN
+    [69366] = true, -- Barrage Function (Centurion Champion)
+    [69316] = true, -- Electric Shield (Centurion Champion)
+    [73880] = true, -- Call Lightning (Lamia Queen)
+    [67758] = true, -- Queen's Poison (Lamia Queen)
+    [68537] = true, -- Overcharged Bolt (The Control Guardian)
+    [70860] = true, -- Overheated Flame (The Control Guardian)
+    [68543] = true, -- Overheated Volley (The Control Guardian)
 
--- Banished Cells II
-CC.aoeTypesId[28904] = aoeCounter+1 -- Immolating Bite (Maw of the Infernal)
-CC.aoeTypesId[29020] = aoeCounter+1 -- Berserker Frenzy (Keeper Voranil)
-CC.aoeTypesId[31727] = aoeCounter+1 -- Corruption (Keeper Imiril)
-CC.aoeTypesId[48800] = aoeCounter+1 -- Daedric Tempest (High Kinlord Rilis)
-CC.aoeTypesId[48815] = aoeCounter+1 -- Daedric Tempest (High Kinlord Rilis)
+    -- Banished Cells I
+    [19027] = true, -- Dead Zone (Skeletal Destroyer)
+    [33188] = true, -- Daedric Tempest (High Kinlord Rilis)
 
--- Elden Hollow I
-CC.aoeTypesId[16017] = aoeCounter+1 -- Berserker Frenzy (Akasha gra-Mal)
-CC.aoeTypesId[25300] = aoeCounter -- Berserker Frenzy (Akasha gra-Mal)
-CC.aoeTypesId[25301] = aoeCounter -- Berserker Frenzy (Akasha gra-Mal)
-CC.aoeTypesId[25302] = aoeCounter -- Berserker Frenzy (Akasha gra-Mal)
-CC.aoeTypesId[42601] = aoeCounter -- Necrotic Circle (Canonreeve Oraneth)
+    -- Banished Cells II
+    [28904] = true, -- Immolating Bite (Maw of the Infernal)
+    [29020] = true, -- Berserker Frenzy (Keeper Voranil)
+    [31727] = true, -- Corruption (Keeper Imiril)
+    [48800] = true, -- Daedric Tempest (High Kinlord Rilis)
+    [48815] = true, -- Daedric Tempest (High Kinlord Rilis)
 
--- Elden Hollow II
-CC.aoeTypesId[34377] = aoeCounter+1 -- Flame Geyser (Dubroze the Infestor)
-CC.aoeTypesId[32972] = aoeCounter+1 -- Consuming Shadow (Murklight)
-CC.aoeTypesId[33050] = aoeCounter+1 -- Eclipse (Murklight)
-CC.aoeTypesId[33103] = aoeCounter+1 -- Spout Shadow (The Shadow Guard)
-CC.aoeTypesId[33434] = aoeCounter+1 -- Daedric Flame (Bogdan the Nightflame)
+    -- Elden Hollow I
+    [16017] = true, -- Berserker Frenzy (Akasha gra-Mal)
+    [25300] = true, -- Berserker Frenzy (Akasha gra-Mal)
+    [25301] = true, -- Berserker Frenzy (Akasha gra-Mal)
+    [25302] = true, -- Berserker Frenzy (Akasha gra-Mal)
+    [42601] = true, -- Necrotic Circle (Canonreeve Oraneth)
 
--- City of Ash I
-CC.aoeTypesId[34960] = aoeCounter+1 -- Blazing Fire (Warden of the Shrine)
-CC.aoeTypesId[35145] = aoeCounter+1 -- Consuming Fire (Infernal Guardian)
-CC.aoeTypesId[34204] = aoeCounter+1 -- Burning Field (Rothariel Flameheart)
+    -- Elden Hollow II
+    [34377] = true, -- Flame Geyser (Dubroze the Infestor)
+    [32972] = true, -- Consuming Shadow (Murklight)
+    [33050] = true, -- Eclipse (Murklight)
+    [33103] = true, -- Spout Shadow (The Shadow Guard)
+    [33434] = true, -- Daedric Flame (Bogdan the Nightflame)
 
--- City of Ash II
-CC.aoeTypesId[56415] = aoeCounter+1 -- Fire Runes (Urata the Legion)
-CC.aoeTypesId[55314] = aoeCounter+1 -- Slag Breath (Horvantud the Fire Maw)
-CC.aoeTypesId[55334] = aoeCounter+1 -- Fiery Breath (Horvantud the Fire Maw)
-CC.aoeTypesId[55321] = aoeCounter+1 -- Fiery Breath (Horvantud the Fire Maw)
-CC.aoeTypesId[55336] = aoeCounter+1 -- Fiery Breath (Horvantud the Fire Maw)
-CC.aoeTypesId[55327] = aoeCounter+1 -- Fiery Breath (Horvantud the Fire Maw)
-CC.aoeTypesId[55338] = aoeCounter+1 -- Fiery Breath (Horvantud the Fire Maw)
-CC.aoeTypesId[56010] = aoeCounter+1 -- Ground Quake (Horvantud the Fire Maw)
-CC.aoeTypesId[56151] = aoeCounter+1 -- Ethereal Flame (Ash Titan)
-CC.aoeTypesId[55175] = aoeCounter+1 -- Molten Rain (Ash Titan)
-CC.aoeTypesId[54637] = aoeCounter+1 -- Flame Tornado (Air Atronach)
-CC.aoeTypesId[56068] = aoeCounter+1 -- Slag Geyser (Lava Pool)
-CC.aoeTypesId[55756] = aoeCounter+1 -- Burning (Valkyn Skoria)
+    -- City of Ash I
+    [34960] = true, -- Blazing Fire (Warden of the Shrine)
+    [35145] = true, -- Consuming Fire (Infernal Guardian)
+    [34204] = true, -- Burning Field (Rothariel Flameheart)
 
--- Tempest Island
-CC.aoeTypesId[26619] = aoeCounter+1 -- Shock (Sudden Storm)
-CC.aoeTypesId[6108] = aoeCounter+1 -- Lightning Storm (Yalorasse the Speaker)
-CC.aoeTypesId[26752] = aoeCounter+1 -- Enervating Stone (Stormfist)
-CC.aoeTypesId[26517] = aoeCounter+1 -- Electrical Shock (Twister)
+    -- City of Ash II
+    [56415] = true, -- Fire Runes (Urata the Legion)
+    [55314] = true, -- Slag Breath (Horvantud the Fire Maw)
+    [55334] = true, -- Fiery Breath (Horvantud the Fire Maw)
+    [55321] = true, -- Fiery Breath (Horvantud the Fire Maw)
+    [55336] = true, -- Fiery Breath (Horvantud the Fire Maw)
+    [55327] = true, -- Fiery Breath (Horvantud the Fire Maw)
+    [55338] = true, -- Fiery Breath (Horvantud the Fire Maw)
+    [56010] = true, -- Ground Quake (Horvantud the Fire Maw)
+    [56151] = true, -- Ethereal Flame (Ash Titan)
+    [55175] = true, -- Molten Rain (Ash Titan)
+    [54637] = true, -- Flame Tornado (Air Atronach)
+    [55756] = true, -- Burning (Valkyn Skoria)
 
--- Selene's Web
-CC.aoeTypesId[30908] = aoeCounter+1 -- Summon Primal Swarm (Treethane Kerninn)
-CC.aoeTypesId[30773] = aoeCounter+1 -- Arrow Rain (Longclaw)
-CC.aoeTypesId[31150] = aoeCounter+1 -- Poison Burst (Longclaw)
-CC.aoeTypesId[31203] = aoeCounter+1 -- Venomous Burst (Queen Aklayah)
+    -- Tempest Island
+    [26619] = true, -- Shock (Sudden Storm)
+    [6108] = true, -- Lightning Storm (Yalorasse the Speaker)
+    [26752] = true, -- Enervating Stone (Stormfist)
+    [26517] = true, -- Electrical Shock (Twister)
 
--- Spindleclutch II
-CC.aoeTypesId[28006] = aoeCounter+1 -- Cave In (Blood Spawn)
-CC.aoeTypesId[47332] = aoeCounter+1 -- Cave-In (Blood Spawn)
-CC.aoeTypesId[27603] = aoeCounter+1 -- Blood Pool (Urvan Veleth)
-CC.aoeTypesId[27906] = aoeCounter+1 -- Blood Pool (Vorenor Winterbourne)
+    -- Selene's Web
+    [30908] = true, -- Summon Primal Swarm (Treethane Kerninn)
+    [30773] = true, -- Arrow Rain (Longclaw)
+    [31150] = true, -- Poison Burst (Longclaw)
+    [31203] = true, -- Venomous Burst (Queen Aklayah)
 
--- Wayrest Sewers I
-CC.aoeTypesId[25591] = aoeCounter+1 -- Necrotic Essence (Investigator Garron)
+    -- Spindleclutch II
+    [28006] = true, -- Cave In (Blood Spawn)
+    [47332] = true, -- Cave-In (Blood Spawn)
+    [27603] = true, -- Blood Pool (Urvan Veleth)
+    [27906] = true, -- Blood Pool (Vorenor Winterbourne)
+
+    -- Wayrest Sewers I
+    [25591] = true, -- Necrotic Essence (Investigator Garron)
+
+}
+
+CC.aoeNPCElite = {
+
+    -- Overland / Standard NPC's
+    [44228] = true, -- Dragonknight Standard (Dragonknight - Elite)
+    [81197] = true, -- Agonizing Fury (Thundermaul - Boss)
+    [21952] = true, -- Repulsion Shock (Wamasu)
+    [55867] = true, -- Repulsion Shock (Wamasu - Boss)
+    [72794] = true, -- Toxic Pool (Haj Mota)
+    [53233] = true, -- Miasma Pool (Flesh Colossus)
+    [52866] = true, -- Volley (Cyrodiil Archer)
+    [54258] = true, -- Upgraded Volley (Cyrodiil Archer)
+    [10271] = true, -- Quake (Gargoyle)
+    [9011] = true, -- Tremor (Troll)
+    [75928] = true, -- Elemental Pool (Minotaur)
+    [75953] = true, -- Brimstone Hailfire (Minotaur Shaman)
+    [75976] = true, -- Pillar of Nirn (Minotaur Shaman)
+    [75980] = true, -- Pillar Eruption (Minotaur Shaman)
+    [11282] = true, -- Steam Breath (Dwemer Centurion)
+
+    -- Dragonstar Arena
+    [53314] = true, -- Flame Volley (Sovngarde Ranger)
+    [53280] = true, -- Unstable Wall of Frost (Sovngarde Icemage)
+    [53614] = true, -- Thundering Presence (Nak'tah)
+    [53625] = true, -- Lightning Flood (Nak'tah)
+    [56824] = true, -- Puncturing Sweep (House Dres Templar)
+    [54161] = true, -- Berserker Frenzy (House Dres Slaver)
+    [54080] = true, -- Cinder Storm (Earthen Heart Knight)
+    [52892] = true, -- Flames of Oblivion (Anal'a Tu'wha)
+    [25213] = true, -- Whirlwind Function (Dwarven Fire Centurion)
+    [55981] = true, -- Ice Charge (Dwarven Ice Centurion)
+
+    -- Maelstrom Arena
+    [72159] = true, -- Static Field (Dwarven Spider)
+    [72203] = true, -- Overcharge (Scavenger Thunder-Smith)
+
+}
+
+CC.aoeNPCNormal = {
+
+    [37131] = true, -- Ice Cage (Battlemage)
+    [10813] = true, -- Ignite (Synergy - Fire Mage)
+    [38260] = true, -- Ignite (Synergy - Fire Mage)
+    [28629] = true, -- Volley (Archer)
+    [47102] = true, -- Fire Rune (Fire Mage)
+    [14068] = true, -- Ignite (Synergy - Archer)
+    [70414] = true, -- Ignite (Synergy - Cyrodiil Archer)
+    [38125] = true, -- Caltrops  (Faction NPCs)
+    [76730] = true, -- Pool of Shadow (Voidbringer)
+    [76624] = true, -- Pool of Shadow (Voidbringer)
+    [76729] = true, -- Pool of Shadow (Voidbringer)
+    [76728] = true, -- Pool of Shadow (Voidbringer)
+    [88336] = true, -- Pool of Shadow (Skaafin Masquer)
+    [88330] = true, -- Pool of Shadow (Skaafin Masquer)
+    [88335] = true, -- Pool of Shadow (Skaafin Masquer)
+    [88334] = true, -- Pool of Shadow (Skaafin Masquer)
+    [84837] = true, -- Broken Pact (Skaafin)
+    [62502] = true, -- Fiery Wind (Justice Mage)
+    [46819] = true, -- Storm Damage (Cyrodiil Mage)
+    [7883] = true, -- Guardian Storm (Cyrodiil Mage)
+    [8604] = true, -- Vigorous Swipe (Mammoth)
+    [27100] = true, -- Shocking Rake (Dreugh)
+    [16698] = true, -- Poisonbloom (Netch)
+    [90778] = true, -- Acid Pool (Nix-Ox)
+    [90815] = true, -- Acid Pool (Nix-Ox)
+    [85421] = true, -- Retch (Cliff Strider)
+    [85391] = true, -- Slash (Cliff Strider)
+    [13680] = true, -- Acid Blood (Assassin Beetle)
+    [10947] = true, -- Fiery Breath (Shalk)
+    [5265] = true, -- Burning Ground (Shalk)
+    [8088] = true, -- Poison Spray (Giant Spider)
+    [87126] = true, -- Heat Vents (Fetcherfly Nest)
+    [51282] = true, -- Flame Tornado (Air Atronach - Flame)
+    [9749] = true, -- Envelop (Banekin)
+    [73437] = true, -- Soul Flame (Daedric Titan)
+    [4772] = true, -- Fiery Breath (Daedroth)
+    [91938] = true, -- Burst of Embers (Daedroth)
+    [51645] = true, -- Frozen Ground (Frost Atronach)
+    [6162] = true, -- Rain of Fire (Scamp)
+    [88323] = true, -- Blast Furnace (Iron Atronach)
+    [69950] = true, -- Desecrated Ground (Undead Synergy)
+    [73937] = true, -- Soul Cage (Lich)
+    [73929] = true, -- Soul Cage (Lich)
+    [20812] = true, -- Defiled Ground (Lich)
+    [72996] = true, -- Symphony of Blades (Defiled Aegis)
+    [8628] = true, -- Charged Ground (Harpy)
+    [4769] = true, -- Choking Pollen (Lurcher)
+    [16040] = true, -- Hurricane (Nereid)
+    [19997] = true, -- Static Field (Dwemer Spider - Synergy)
+    [91094] = true, -- Split Bolt (Dwemer Arquebus)
+    [91095] = true, -- Split Bolt (Dwemer Arquebus)
+    [91096] = true, -- Split Bolt (Dwemer Arquebus)
+    [103862] = true, -- Deluge (Yaghra Spewer)
+    [103992] = true, -- Luminescent Burn (Yaghra Spewer)
+
+    -- Quests
+    [90182] = true, -- Oily Smoke (Vvardenfell -- Divine Restoration) -- TODO: Check, maybe is elite?
+
+}
+
 
 -- List of effects sourced by the player that damage self that should be shown
 CC.LavaAlerts = {
