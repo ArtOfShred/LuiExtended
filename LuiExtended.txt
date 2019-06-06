@@ -19,6 +19,7 @@
 #
 # Copyright (c) 2017-2019 - LuiExtended - ArtOfShred <esoui.com>
 # Copyright (c) 2015-2016 - LuiExtended - SpellBuilder and Upularity <esoui.com>
+# Copyright (c) 2016-2018 - Miat's CC Tracker - dorrino <esoui.com>
 # Copyright (c) 2014 - CombatCloud - Samantha James
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -49,6 +50,7 @@ Bindings.xml
 
 frontend/Changelog.xml
 frontend/CombatText.xml
+frontend/CrowdControlTracker.xml
 # frontend/StatPanel.xml
 
 i18n/en.lua
@@ -65,6 +67,7 @@ data/Effects.lua
 data/CastBarTable.lua
 data/CombatTextConstants.lua
 data/AlertTable.lua
+data/CrowdControl.lua
 data/DebugTable.lua
 data/Quests.lua
 
@@ -95,6 +98,7 @@ modules/CombatText/EventViewers/Resources.lua
 
 modules/CombatInfo/CombatInfo.lua
 modules/CombatInfo/AbilityAlerts.lua
+modules/CombatInfo/CrowdControlTracker.lua
 # modules/CombatInfo/StatPanel.lua
 
 modules/InfoPanel/InfoPanel.lua

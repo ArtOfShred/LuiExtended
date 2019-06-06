@@ -4,6 +4,7 @@
 --]]
 
 local CI = LUIE.CombatInfo
+local CCT = CI.CrowdControlTracker
 
 local strformat = zo_strformat
 
@@ -16,6 +17,8 @@ local globalMethodOptions     = { "Ascending", "Descending", "Radial" }
 local globalMethodOptionsKeys = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
 local globalAlertOptions = { "Show All Incoming Abilities", "Only Show Hard CC Effects", "Only Show Unbreakable CC Effects" }
 local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Show Hard CC Effects"] = 2, ["Only Show Unbreakable CC Effects"] = 3 }
+
+local ACTION_RESULT_AREA_EFFECT = 669966
 
 function CI.CreateSettings()
     -- Load LibAddonMenu
@@ -1280,7 +1283,7 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.sound3 end,
                 setFunc = function(value) CI.SV.alerts.sounds.sound3 = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.sound3,
+                default = CI.D.alerts.sounds.sound3,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
 
@@ -1307,7 +1310,7 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.sound3CC end,
                 setFunc = function(value) CI.SV.alerts.sounds.sound3CC = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.sound3CC,
+                default = CI.D.alerts.sounds.sound3CC,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
 
@@ -1334,7 +1337,7 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.sound3UB end,
                 setFunc = function(value) CI.SV.alerts.sounds.sound3UB = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.sound3UB,
+                default = CI.D.alerts.sounds.sound3UB,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
 
@@ -1361,7 +1364,7 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.sound2 end,
                 setFunc = function(value) CI.SV.alerts.sounds.sound2 = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.sound2,
+                default = CI.D.alerts.sounds.sound2,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
 
@@ -1388,7 +1391,7 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.sound2CC end,
                 setFunc = function(value) CI.SV.alerts.sounds.sound2CC = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.sound2CC,
+                default = CI.D.alerts.sounds.sound2CC,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
 
@@ -1415,7 +1418,7 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.sound2UB end,
                 setFunc = function(value) CI.SV.alerts.sounds.sound2UB = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.sound2UB,
+                default = CI.D.alerts.sounds.sound2UB,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
 
@@ -1442,7 +1445,7 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.sound1 end,
                 setFunc = function(value) CI.SV.alerts.sounds.sound1 = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.sound1,
+                default = CI.D.alerts.sounds.sound1,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
 
@@ -1469,7 +1472,7 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.sound1CC end,
                 setFunc = function(value) CI.SV.alerts.sounds.sound1CC = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.sound1CC,
+                default = CI.D.alerts.sounds.sound1CC,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
 
@@ -1496,7 +1499,7 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.sound1UB end,
                 setFunc = function(value) CI.SV.alerts.sounds.sound1UB = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.sound1UB,
+                default = CI.D.alerts.sounds.sound1UB,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
 
@@ -1523,7 +1526,7 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.soundUnmit end,
                 setFunc = function(value) CI.SV.alerts.sounds.soundUnmit = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.soundUnmit,
+                default = CI.D.alerts.sounds.soundUnmit,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
 
@@ -1550,7 +1553,7 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.soundPower end,
                 setFunc = function(value) CI.SV.alerts.sounds.soundPower = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.soundPower,
+                default = CI.D.alerts.sounds.soundPower,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
 
@@ -1577,7 +1580,7 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.soundSummon end,
                 setFunc = function(value) CI.SV.alerts.sounds.soundSummon = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.soundSummon,
+                default = CI.D.alerts.sounds.soundSummon,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
 
@@ -1604,10 +1607,432 @@ function CI.CreateSettings()
                 getFunc = function() return CI.SV.alerts.sounds.soundDestroy end,
                 setFunc = function(value) CI.SV.alerts.sounds.soundDestroy = value CI.PreviewAlertSound(value) end,
                 width = "half",
-                default = CI.SV.alerts.sounds.soundDestroy,
+                default = CI.D.alerts.sounds.soundDestroy,
                 disabled = function() return not (CI.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
+        },
+    }
 
+    -- Active Combat Alerts
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "submenu",
+        name = "Crowd Control Tracker",
+        controls = {
+            {
+                type = "description",
+                text = "Position Lock/Unlock",
+            },
+            {
+                type = "checkbox",
+                name = "Turn OFF when satisfied with icon's position",
+                tooltip = "ON - icon can me moved on the screen by left clicking and dragging, OFF - icon is locked in place and can not be moved",
+                default = CI.D.cct.unlocked,
+                disabled = function() return not CI.SV.cct.enabled end,
+                getFunc = function() return CI.SV.cct.unlocked end,
+                setFunc = function(newValue) CI.SV.cct.unlocked = newValue if newValue then CCT:SetupDisplay("draw") end CCT:InitControls() end,
+            },
+            {
+                type = "checkbox",
+                name = "ADDON ENABLED",
+                tooltip = "ON - enabled, OFF - disabled",
+                default = CI.D.cct.enabled,
+                getFunc = function() return CI.SV.cct.enabled end,
+                setFunc = function(newValue) CI.SV.cct.enabled = newValue CCT:OnOff() end,
+            },
+            {
+                type = "checkbox",
+                name = "Enabled only in PVP",
+                tooltip = "ON - enabled in PVP only, OFF - enabled everywhere",
+                default = CI.D.cct.enabledOnlyInCyro,
+                disabled = function() return not CI.SV.cct.enabled end,
+                getFunc = function() return CI.SV.cct.enabledOnlyInCyro end,
+                setFunc = function(newValue) CI.SV.cct.enabledOnlyInCyro = newValue CCT:OnOff() end,
+            },
+            {
+                type = "header",
+                name = "Display options",
+            },
+            {
+                type = "dropdown",
+                name = "Choose display style:",
+                tooltip = '"Icon" to show only the icon, "text" to show just the text and "Both icon and text" to show both icon and text',
+                choices = {"Both icon and text", "Icon only", "Text only"},
+                getFunc = function()
+                    if CI.SV.cct.showOptions=="all" then
+                        return "Both icon and text"
+                    elseif CI.SV.cct.showOptions=="icon" then
+                        return "Icon only"
+                    elseif CI.SV.cct.showOptions=="text" then
+                        return "Text only"
+                    end
+                end,
+                setFunc = function(newValue)
+                    if newValue=="Both icon and text" then
+                        CI.SV.cct.showOptions="all"
+                    elseif newValue=="Icon only" then
+                        CI.SV.cct.showOptions="icon"
+                    elseif newValue=="Text only" then
+                        CI.SV.cct.showOptions="text"
+                    end
+                        CCT:InitControls()
+                end,
+                    default = "Both icon and text",
+                    disabled = function() return not CI.SV.cct.enabled end,
+            },
+            {
+                type = "checkbox",
+                name = "Use ability name as crowd control text",
+                tooltip = 'ON - ability name that produced the crowd control is shown, OFF - Crowd control type ("STUNNED", "FEARED" etc) text is shown',
+                default = CI.D.cct.useAbilityName,
+                disabled = function() return (not CI.SV.cct.enabled) or (CI.SV.cct.showOptions=="icon") end,
+                getFunc = function() return CI.SV.cct.useAbilityName end,
+                setFunc = function(newValue) CI.SV.cct.useAbilityName = newValue CCT:InitControls() end,
+            },
+            {
+                type = "slider",
+                name = "Set icon and text scale (%)",
+                tooltip = "Icon and text scale goes from 20% to 200% of original scale",
+                default = tonumber(string.format("%.0f", 100*CI.D.cct.controlScale)),
+                disabled = function() return not CI.SV.cct.enabled end,
+                min     = 20,
+                max     = 200,
+                step    = 1,
+                getFunc = function() return tonumber(string.format("%.0f", 100*CI.SV.cct.controlScale)) end,
+                setFunc = function(newValue) CI.SV.cct.controlScale = newValue/100 CCT:InitControls() end,
+            },
+            {
+                type = "header",
+                name = "Misc options",
+            },
+            {
+                type = "checkbox",
+                name = "Play sound on crowd control",
+                tooltip = "ON - play sound, OFF - do not play sound",
+                default = CI.D.cct.playSound,
+                disabled = function() return not CI.SV.cct.enabled end,
+                getFunc = function() return CI.SV.cct.playSound end,
+                setFunc = function(newValue) CI.SV.cct.playSound = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Show staggered crowd control (text only)",
+                tooltip = "ON - show staggered crowd control, OFF - do not show staggered crowd control",
+                default = CI.D.cct.showStaggered,
+                disabled = function() return not CI.SV.cct.enabled end,
+                getFunc = function() return CI.SV.cct.showStaggered end,
+                setFunc = function(newValue) CI.SV.cct.showStaggered = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "header",
+                name = "Immuned state options",
+            },
+            {
+                type = "checkbox",
+                name = "Show immuned",
+                tooltip = "ON - show the icon for incoming abilities you had been immuned to , OFF - don't not show immune icon",
+                default = CI.D.cct.showImmune,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.showImmune end,
+                setFunc = function(newValue) CI.SV.cct.showImmune = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Show immuned only in Cyrodiil",
+                tooltip = "ON - show immuned crowd controls only in Cyrodiil , OFF - show immuned everywhere",
+                default = CI.D.cct.showImmuneOnlyInCyro,
+                disabled = function() return (not CI.SV.cct.enabled) or (not CI.SV.cct.showImmune) end,
+                getFunc = function() return CI.SV.cct.showImmuneOnlyInCyro end,
+                setFunc = function(newValue) CI.SV.cct.showImmuneOnlyInCyro = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "slider",
+                name = "Set immuned display time (ms)",
+                tooltip = "Set display time for immuned events. 750ms is the recommended default value.",
+                default = CI.D.cct.immuneDisplayTime,
+                disabled = function() return (not CI.SV.cct.enabled) or (not CI.SV.cct.showImmune) end,
+                min     = 100,
+                max     = 1500,
+                step    = 1,
+                getFunc = function() return CI.SV.cct.immuneDisplayTime end,
+                setFunc = function(newValue) CI.SV.cct.immuneDisplayTime = newValue CCT:InitControls() end,
+            },
+            {
+                type = "header",
+                name = "Colors options",
+            },
+            {
+                type = "colorpicker",
+                name = "Pick color for STUNNED state",
+                tooltip = "Pick color of CC text, timer and icon border for STUNNED crowd control state",
+                default = ZO_ColorDef:New(unpack(CI.D.cct.colors[ACTION_RESULT_STUNNED])),
+                disabled = function() return not CI.SV.cct.enabled end,
+                getFunc = function() return unpack(CI.SV.cct.colors[ACTION_RESULT_STUNNED]) end,
+                setFunc = function(r,g,b,a)
+                    CI.SV.cct.colors[ACTION_RESULT_STUNNED] = {r,g,b,a}
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "colorpicker",
+                name = "Pick color for DISORIENTED state",
+                tooltip = "Pick color of CC text, timer and icon border for DISORIENTED crowd control state",
+                default = ZO_ColorDef:New(unpack(CI.D.cct.colors[ACTION_RESULT_DISORIENTED])),
+                disabled = function() return not CI.SV.cct.enabled end,
+                getFunc = function() return unpack(CI.SV.cct.colors[ACTION_RESULT_DISORIENTED]) end,
+                setFunc = function(r,g,b,a)
+                    CI.SV.cct.colors[ACTION_RESULT_DISORIENTED] = {r,g,b,a}
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "colorpicker",
+                name = "Pick color for SILENCED state",
+                tooltip = "Pick color of CC text and icon border for SILENCED crowd control state",
+                default = ZO_ColorDef:New(unpack(CI.D.cct.colors[ACTION_RESULT_SILENCED])),
+                disabled = function() return not CI.SV.cct.enabled end,
+                getFunc = function() return unpack(CI.SV.cct.colors[ACTION_RESULT_SILENCED]) end,
+                setFunc = function(r,g,b,a)
+                    CI.SV.cct.colors[ACTION_RESULT_SILENCED] = {r,g,b,a}
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "colorpicker",
+                name = "Pick color for FEARED state",
+                tooltip = "Pick color of CC text, timer and icon border for FEARED crowd control",
+                default = ZO_ColorDef:New(unpack(CI.D.cct.colors[ACTION_RESULT_FEARED])),
+                disabled = function() return not CI.SV.cct.enabled end,
+                getFunc = function() return unpack(CI.SV.cct.colors[ACTION_RESULT_FEARED]) end,
+                setFunc = function(r,g,b,a)
+                    CI.SV.cct.colors[ACTION_RESULT_FEARED] = {r,g,b,a}
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "colorpicker",
+                name = "Pick color for STAGGERED state",
+                tooltip = "Pick color of CC text for STAGGERED crowd control",
+                default = ZO_ColorDef:New(unpack(CI.D.cct.colors[ACTION_RESULT_STAGGERED])),
+                disabled = function() return not CI.SV.cct.enabled end,
+                getFunc = function() return unpack(CI.SV.cct.colors[ACTION_RESULT_STAGGERED]) end,
+                setFunc = function(r,g,b,a)
+                    CI.SV.cct.colors[ACTION_RESULT_STAGGERED] = {r,g,b,a}
+                    CCT:InitControls()
+                end,
+            },
+
+
+            {
+                type = "colorpicker",
+                name = "Pick color for UNBREAKABLE cc",
+                tooltip = "Pick color of CC text for UNBREAKABLE crowd control",
+                default = ZO_ColorDef:New(unpack(CI.D.cct.colors.unbreakable)),
+                disabled = function() return not CI.SV.cct.enabled end,
+                getFunc = function() return unpack(CI.SV.cct.colors.unbreakable) end,
+                setFunc = function(r,g,b,a)
+                    CI.SV.cct.colors.unbreakable = {r,g,b,a}
+                    CCT:InitControls() -- TODO: Probably don't need this line?
+                end,
+            },
+
+            {
+                type = "colorpicker",
+                name = "Pick color for IMMUNE state",
+                tooltip = "Pick color of CC text for IMMUNE crowd control",
+                default = ZO_ColorDef:New(unpack(CI.D.cct.colors[ACTION_RESULT_IMMUNE])),
+                disabled = function() return not CI.SV.cct.enabled end,
+                getFunc = function() return unpack(CI.SV.cct.colors[ACTION_RESULT_IMMUNE]) end,
+                setFunc = function(r,g,b,a)
+                    CI.SV.cct.colors[ACTION_RESULT_IMMUNE] = {r,g,b,a}
+                    CI.SV.cct.colors[ACTION_RESULT_DODGED] = {r,g,b,a}
+                    CI.SV.cct.colors[ACTION_RESULT_BLOCKED] = {r,g,b,a}
+                    CI.SV.cct.colors[ACTION_RESULT_BLOCKED_DAMAGE] = {r,g,b,a}
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "header",
+                name = "Beta features",
+            },
+            {
+                type = "checkbox",
+                name = "Show Area Effects",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.showAoe,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.showAoe end,
+                setFunc = function(newValue) CI.SV.cct.showAoe = newValue
+                    CCT:InitControls()
+                end,
+            },
+            -- ArtOfShred addition start
+            -- AOE DISPLAY OPTIONS
+            {
+                type = "checkbox",
+                name = "Show AOE - Player Ultimates",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.showAoeT1,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.showAoeT1 end,
+                setFunc = function(newValue) CI.SV.cct.showAoeT1 = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Show AOE - Player Abilities",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.showAoeT2,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.showAoeT2 end,
+                setFunc = function(newValue) CI.SV.cct.showAoeT2 = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Show AOE - Traps",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.showAoeT3,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.showAoeT3 end,
+                setFunc = function(newValue) CI.SV.cct.showAoeT3 = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Show AOE - Dungeon/Trial Boss",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.showAoeT4,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.showAoeT4 end,
+                setFunc = function(newValue) CI.SV.cct.showAoeT4 = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Show AOE - Quest Boss",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.showAoeT5,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.showAoeT5 end,
+                setFunc = function(newValue) CI.SV.cct.showAoeT5 = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Show AOE - Normal NPC",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.showAoeT6,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.showAoeT6 end,
+                setFunc = function(newValue) CI.SV.cct.showAoeT6 = newValue
+                    CCT:InitControls()
+                end,
+            },
+
+            -- AOE DISPLAY OPTIONS
+            {
+                type = "checkbox",
+                name = "Play Sound - Player Ultimates",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.PlaySoundAoeT1,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.PlaySoundAoeT1 end,
+                setFunc = function(newValue) CI.SV.cct.PlaySoundAoeT1 = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Play Sound - Player Abilities",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.PlaySoundAoeT2,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.PlaySoundAoeT2 end,
+                setFunc = function(newValue) CI.SV.cct.PlaySoundAoeT2 = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Play Sound - Traps",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.PlaySoundAoeT3,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.PlaySoundAoeT3 end,
+                setFunc = function(newValue) CI.SV.cct.PlaySoundAoeT3 = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Play Sound - Dungeon/Trial Boss AOE",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.PlaySoundAoeT4,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.PlaySoundAoeT4 end,
+                setFunc = function(newValue) CI.SV.cct.PlaySoundAoeT4 = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Play Sound - Quest Boss AOE",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.PlaySoundAoeT5,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.PlaySoundAoeT5 end,
+                setFunc = function(newValue) CI.SV.cct.PlaySoundAoeT5 = newValue
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Play Sound - Normal NPC AOE",
+                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                default = CI.D.cct.PlaySoundAoeT6,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.PlaySoundAoeT6 end,
+                setFunc = function(newValue) CI.SV.cct.PlaySoundAoeT6 = newValue
+                    CCT:InitControls()
+                end,
+            },
+            -- ArtOfShred addition end
+            {
+                type = "colorpicker",
+                name = "Pick color for AREA DAMAGE EFFECT state",
+                tooltip = "Pick color of CC text and icon border for AREA DAMAGE EFFECT crowd control state",
+                default = ZO_ColorDef:New(unpack(CI.D.cct.colors[ACTION_RESULT_AREA_EFFECT])),
+                disabled = function() return not CI.SV.cct.enabled end,
+                getFunc = function() return unpack(CI.SV.cct.colors[ACTION_RESULT_AREA_EFFECT]) end,
+                setFunc = function(r,g,b,a)
+                    CI.SV.cct.colors[ACTION_RESULT_AREA_EFFECT] = {r,g,b,a}
+                    CCT:InitControls()
+                end,
+            },
+            {
+                type = "checkbox",
+                name = "Show Global Cooldown",
+                tooltip = "ON - show the cooldown animation if cc-ed while on global cooldown (Cyrodiil only) , OFF - don't not show global cooldown animation",
+                default = CI.D.cct.showGCD,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.showGCD end,
+                setFunc = function(newValue) CI.SV.cct.showGCD = newValue
+                    CCT:InitControls()
+                end,
+            },
         },
     }
 

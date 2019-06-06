@@ -200,7 +200,7 @@ CI.D = {
     		[ACTION_RESULT_BLOCKED]        = {1,1,1,1},
     		[ACTION_RESULT_BLOCKED_DAMAGE] = {1,1,1,1},
     		[ACTION_RESULT_AREA_EFFECT]    = {1,0.69,0,1},
-            unbreakable                    = {0.88,0.88,1,1}, -- TODO: MOVE
+            unbreakable                    = {0.88,0.88,1,1},
     	},
     },
 }
@@ -313,9 +313,13 @@ function CI.Initialize( enabled )
     CI.UpdateCastBar()
     CI.SetCastBarPosition()
 
+    -- Setup Alerts
     CI.CreateAlertFrame()
     CI.SetAlertFramePosition()
     CI.SetAlertColors()
+
+    -- Setup CCT
+    CI.CrowdControlTracker.Initialize()
 end
 
 function CI.HookGCD()
