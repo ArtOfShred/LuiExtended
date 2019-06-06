@@ -1888,6 +1888,33 @@ function CI.CreateSettings()
             },
             {
                 type = "checkbox",
+                name = "SOUND - aoePlayerUltimate",
+                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                width = "half",
+                default = CI.D.cct.aoePlayerUltimateSoundToggle,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.aoePlayerUltimateSoundToggle end,
+                setFunc = function(newValue) CI.SV.cct.aoePlayerUltimateSoundToggle = newValue
+                end,
+            },
+            {
+                -- SOUND - aoePlayerUltimate
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.cct.aoePlayerUltimateSound end,
+                setFunc = function(value) CI.SV.cct.aoePlayerUltimateSound = value CI.PreviewAlertSound(value) end,
+                width = "half",
+                default = CI.SV.cct.aoePlayerUltimateSound,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+            },
+
+
+            {
+                type = "checkbox",
                 name = "Show AOE - Player Abilities",
                 tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
                 default = CI.D.cct.aoePlayerNormal,
@@ -1897,6 +1924,36 @@ function CI.CreateSettings()
                     CCT.UpdateAOEList()
                 end,
             },
+            {
+                type = "checkbox",
+                name = "SOUND - aoePlayerNormal",
+                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                width = "half",
+                default = CI.D.cct.aoePlayerNormalSoundToggle,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.aoePlayerNormalSoundToggle end,
+                setFunc = function(newValue) CI.SV.cct.aoePlayerNormalSoundToggle = newValue
+                end,
+            },
+            {
+                -- SOUND - aoePlayerNormal
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.cct.aoePlayerNormalSound end,
+                setFunc = function(value) CI.SV.cct.aoePlayerNormalSound = value CI.PreviewAlertSound(value) end,
+                width = "half",
+                default = CI.SV.cct.aoePlayerNormalSound,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+            },
+
+
+
+
+
             {
                 type = "checkbox",
                 name = "Show AOE - Player Sets",
@@ -1910,6 +1967,38 @@ function CI.CreateSettings()
             },
             {
                 type = "checkbox",
+                name = "SOUND - aoePlayerSet",
+                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                width = "half",
+                default = CI.D.cct.aoePlayerSetSoundToggle,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.aoePlayerSetSoundToggle end,
+                setFunc = function(newValue) CI.SV.cct.aoePlayerSetSoundToggle = newValue
+                end,
+            },
+            {
+                -- SOUND - aoePlayerSet
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.cct.aoePlayerSetSound end,
+                setFunc = function(value) CI.SV.cct.aoePlayerSetSound = value CI.PreviewAlertSound(value) end,
+                width = "half",
+                default = CI.SV.cct.aoePlayerSetSound,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+            },
+
+
+
+
+
+
+
+            {
+                type = "checkbox",
                 name = "Show AOE - Traps",
                 tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
                 default = CI.D.cct.aoeTraps,
@@ -1919,6 +2008,37 @@ function CI.CreateSettings()
                     CCT.UpdateAOEList()
                 end,
             },
+            {
+                type = "checkbox",
+                name = "SOUND - aoeTraps",
+                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                width = "half",
+                default = CI.D.cct.aoeTrapsSoundToggle,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.aoeTrapsSoundToggle end,
+                setFunc = function(newValue) CI.SV.cct.aoeTrapsSoundToggle = newValue
+                end,
+            },
+            {
+                -- SOUND - aoeTraps
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.cct.aoeTrapsSound end,
+                setFunc = function(value) CI.SV.cct.aoeTrapsSound = value CI.PreviewAlertSound(value) end,
+                width = "half",
+                default = CI.SV.cct.aoeTrapsSound,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+            },
+
+
+
+
+
+
             {
                 type = "checkbox",
                 name = "Show AOE - Dungeon/Trial Boss",
@@ -1932,6 +2052,37 @@ function CI.CreateSettings()
             },
             {
                 type = "checkbox",
+                name = "SOUND - aoeNPCBoss",
+                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                width = "half",
+                default = CI.D.cct.aoeNPCBossSoundToggle,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.aoeNPCBossSoundToggle end,
+                setFunc = function(newValue) CI.SV.cct.aoeNPCBossSoundToggle = newValue
+                end,
+            },
+            {
+                -- SOUND - aoeNPCBoss
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.cct.aoeNPCBossSound end,
+                setFunc = function(value) CI.SV.cct.aoeNPCBossSound = value CI.PreviewAlertSound(value) end,
+                width = "half",
+                default = CI.SV.cct.aoeNPCBossSound,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+            },
+
+
+
+
+
+
+            {
+                type = "checkbox",
                 name = "Show AOE - Quest Boss",
                 tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
                 default = CI.D.cct.aoeNPCElite,
@@ -1943,6 +2094,37 @@ function CI.CreateSettings()
             },
             {
                 type = "checkbox",
+                name = "SOUND - aoeNPCElite",
+                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                width = "half",
+                default = CI.D.cct.aoeNPCEliteSoundToggle,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.aoeNPCEliteSoundToggle end,
+                setFunc = function(newValue) CI.SV.cct.aoeNPCEliteSoundToggle = newValue
+                end,
+            },
+            {
+                -- SOUND - aoeNPCElite
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.cct.aoeNPCEliteSound end,
+                setFunc = function(value) CI.SV.cct.aoeNPCEliteSound = value CI.PreviewAlertSound(value) end,
+                width = "half",
+                default = CI.SV.cct.aoeNPCEliteSound,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+            },
+
+
+
+
+
+
+            {
+                type = "checkbox",
                 name = "Show AOE - Normal NPC",
                 tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
                 default = CI.D.cct.aoeNPCNormal,
@@ -1952,75 +2134,32 @@ function CI.CreateSettings()
                     CCT.UpdateAOEList()
                 end,
             },
+            {
+                type = "checkbox",
+                name = "SOUND - aoeNPCNormal",
+                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                width = "half",
+                default = CI.D.cct.aoeNPCNormalSoundToggle,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+                getFunc = function() return CI.SV.cct.aoeNPCNormalSoundToggle end,
+                setFunc = function(newValue) CI.SV.cct.aoeNPCNormalSoundToggle = newValue
+                end,
+            },
+            {
+                -- SOUND - aoeNPCNormal
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return CI.SV.cct.aoeNPCNormalSound end,
+                setFunc = function(value) CI.SV.cct.aoeNPCNormalSound = value CI.PreviewAlertSound(value) end,
+                width = "half",
+                default = CI.SV.cct.aoeNPCNormalSound,
+                disabled = function() return (not CI.SV.cct.enabled) end,
+            },
 
-            -- AOE DISPLAY OPTIONS
-            {
-                type = "checkbox",
-                name = "Play Sound - Player Ultimates",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
-                default = CI.D.cct.PlaySoundAoeT1,
-                disabled = function() return (not CI.SV.cct.enabled) end,
-                getFunc = function() return CI.SV.cct.PlaySoundAoeT1 end,
-                setFunc = function(newValue) CI.SV.cct.PlaySoundAoeT1 = newValue
-                    CCT:InitControls()
-                end,
-            },
-            {
-                type = "checkbox",
-                name = "Play Sound - Player Abilities",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
-                default = CI.D.cct.PlaySoundAoeT2,
-                disabled = function() return (not CI.SV.cct.enabled) end,
-                getFunc = function() return CI.SV.cct.PlaySoundAoeT2 end,
-                setFunc = function(newValue) CI.SV.cct.PlaySoundAoeT2 = newValue
-                    CCT:InitControls()
-                end,
-            },
-            {
-                type = "checkbox",
-                name = "Play Sound - Traps",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
-                default = CI.D.cct.PlaySoundAoeT3,
-                disabled = function() return (not CI.SV.cct.enabled) end,
-                getFunc = function() return CI.SV.cct.PlaySoundAoeT3 end,
-                setFunc = function(newValue) CI.SV.cct.PlaySoundAoeT3 = newValue
-                    CCT:InitControls()
-                end,
-            },
-            {
-                type = "checkbox",
-                name = "Play Sound - Dungeon/Trial Boss AOE",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
-                default = CI.D.cct.PlaySoundAoeT4,
-                disabled = function() return (not CI.SV.cct.enabled) end,
-                getFunc = function() return CI.SV.cct.PlaySoundAoeT4 end,
-                setFunc = function(newValue) CI.SV.cct.PlaySoundAoeT4 = newValue
-                    CCT:InitControls()
-                end,
-            },
-            {
-                type = "checkbox",
-                name = "Play Sound - Quest Boss AOE",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
-                default = CI.D.cct.PlaySoundAoeT5,
-                disabled = function() return (not CI.SV.cct.enabled) end,
-                getFunc = function() return CI.SV.cct.PlaySoundAoeT5 end,
-                setFunc = function(newValue) CI.SV.cct.PlaySoundAoeT5 = newValue
-                    CCT:InitControls()
-                end,
-            },
-            {
-                type = "checkbox",
-                name = "Play Sound - Normal NPC AOE",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
-                default = CI.D.cct.PlaySoundAoeT6,
-                disabled = function() return (not CI.SV.cct.enabled) end,
-                getFunc = function() return CI.SV.cct.PlaySoundAoeT6 end,
-                setFunc = function(newValue) CI.SV.cct.PlaySoundAoeT6 = newValue
-                    CCT:InitControls()
-                end,
-            },
-            -- ArtOfShred addition end
             {
                 type = "colorpicker",
                 name = "Pick color for AREA DAMAGE EFFECT state",

@@ -189,7 +189,25 @@ end
 
 
 
+function CCT.PlaySoundAoe(abilityId)
+    -- I hope you like inline conditionals, because we've got them for days!
+    -- If we have sound enabled for the type of AOE this ability is then fetch it.
+    local playSound =  ( (CC.aoePlayerUltimate[abilityId] and CI.SV.cct.aoePlayerUltimateSoundToggle) and CI.SV.cct.aoePlayerUltimateSound )
+                    or ( (CC.aoePlayerNormal[abilityId] and CI.SV.cct.aoePlayerNormalSoundToggle) and CI.SV.cct.aoePlayerNormalSound )
+                    or ( (CC.aoePlayerSet[abilityId] and CI.SV.cct.aoePlayerSetSoundToggle) and CI.SV.cct.aoePlayerSetSound )
+                    or ( (CC.aoeTraps[abilityId] and CI.SV.cct.aoeTrapsSoundToggle) and CI.SV.cct.aoeTrapsSound )
+                    or ( (CC.aoeNPCBoss[abilityId] and CI.SV.cct.aoeNPCBossSoundToggle) and CI.SV.cct.aoeNPCBossSound )
+                    or ( (CC.aoeNPCElite[abilityId] and CI.SV.cct.aoeNPCEliteSoundToggle) and CI.SV.cct.aoeNPCEliteSound )
+                    or ( (CC.aoeNPCNormal[abilityId] and CI.SV.cct.aoeNPCNormalSoundToggle) and CI.SV.cct.aoeNPCNormalSound )
 
+    -- If we found a sound, then play it (twice so it's a bit louder)
+    if playSound then
+        PlaySound(LUIE.Sounds[playSound])
+        PlaySound(LUIE.Sounds[playSound])
+    else
+        return
+    end
+end
 
 
 
@@ -410,65 +428,8 @@ function CCT:OnCombat(eventCode, result, isError, abilityName, abilityGraphic, a
 
         -- TODO: This entire block needs updated with better criteria (once we separate aoes into the proper categories)
 
-        if CCT.aoeTypesId[abilityId] <= 199 then
-            if not CI.SV.cct.showAoeT1 then
-                return
-            end
-            if CI.SV.cct.PlaySoundAoeT1 then
-                PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-                PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-            end
-        end
-
-        if CCT.aoeTypesId[abilityId] >= 200 and CCT.aoeTypesId[abilityId] <= 499 then
-            if not CI.SV.cct.showAoeT2 then
-                return
-            end
-            if CI.SV.cct.PlaySoundAoeT2 then
-                PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-                PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-            end
-        end
-
-        if CCT.aoeTypesId[abilityId] >= 500 and CCT.aoeTypesId[abilityId] <= 599 then
-            if not CI.SV.cct.showAoeT3 then
-                return
-            end
-            if CI.SV.cct.PlaySoundAoeT3 then
-                PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-                PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-            end
-        end
-
-        if CCT.aoeTypesId[abilityId] >= 600 and CCT.aoeTypesId[abilityId] <= 699 then
-            if not CI.SV.cct.showAoeT4 then
-                return
-            end
-            if CI.SV.cct.PlaySoundAoeT4 then
-                PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-                PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-            end
-        end
-
-        if CCT.aoeTypesId[abilityId] >= 700 and CCT.aoeTypesId[abilityId] <= 799 then
-            if not CI.SV.cct.showAoeT5 then
-                return
-            end
-            if CI.SV.cct.PlaySoundAoeT5 then
-                PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-                PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-            end
-        end
-
-        if CCT.aoeTypesId[abilityId] >= 800 then
-            if not CI.SV.cct.showAoeT6 then
-                return
-            end
-            if CI.SV.cct.PlaySoundAoeT6 then
-                PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-                PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-            end
-        end
+        -- PlaySoundAoe
+        CCT.PlaySoundAoe(abilityId)
 
         local currentEndTimeArea = GetFrameTimeMilliseconds() + CCT_AREA_DURATION
         PrioritySix = {endTime = currentEndTimeArea, abilityId = abilityId, abilityIcon = abilityIcon, hitValue = hitValue, result = ACTION_RESULT_AREA_EFFECT, abilityName = abilityName}
