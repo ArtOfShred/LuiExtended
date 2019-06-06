@@ -17,7 +17,7 @@ Srendarr: Spellbuilder used inspiration and methods from Srendarr in the initial
 Foundry Tactical Combat (FTC): Spellbuilder used inspiration for the buffs & debuffs and player frames from Atropos' FTC addon in the initial development process of LuiExtended.
 AchievementInfo: Formatting for Achievement Tracking in Chat Announcements borrows some ideas from Asto's AchievementInfo.
 
-##Bug Testing
+## Bug Testing
 scorpius2k1 <esoui.com>
 Tiara Ra <esoui.com>
 Anceane <esoui.com>
