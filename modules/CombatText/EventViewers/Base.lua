@@ -10,7 +10,6 @@ local C = LUIE.CombatTextConstants
 local E = LUIE.Effects
 
 local callbackManager = CALLBACK_MANAGER
-local strfmt = string.format
 
 CTV.resourceNames = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_COMBATMECHANICTYPE', k); return t[k] end})
 CTV.damageTypes = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_DAMAGETYPE', k); return t[k] end})
@@ -226,7 +225,7 @@ end
 function CTV:PrepareLabel(label, fontSize, color, text)
     label:SetText(text)
     label:SetColor(unpack(color))
-    label:SetFont(strfmt('%s|%d|%s', self.LMP:Fetch('font', LUIE.CombatText.SV.fontFace), fontSize, LUIE.CombatText.SV.fontOutline))
+    label:SetFont(string.format('%s|%d|%s', self.LMP:Fetch('font', LUIE.CombatText.SV.fontFace), fontSize, LUIE.CombatText.SV.fontOutline))
     label:SetAlpha(LUIE.CombatText.SV.common.transparencyValue/100)
 end
 

@@ -10,12 +10,10 @@ local E = LUIE.Effects
 local AlertT = LUIE.AlertTable
 
 local printToChat = LUIE.PrintToChat
-local strfmt = string.format
-local strformat = zo_strformat
-local callLater = zo_callLater
+local zo_strformat = zo_strformat
 
-local eventManager  = EVENT_MANAGER
-local sceneManager  = SCENE_MANAGER
+local eventManager = EVENT_MANAGER
+local sceneManager = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
 
 local moduleName = LUIE.name .. "_CombatInfo"
@@ -50,17 +48,17 @@ end
 
 -- Set Alert Colors
 function CI.SetAlertColors()
-	local colors = CI.SV.alerts.colors
-	CI.AlertColors = {
-		alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlockA)):ToHex(),
-		alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodgeA)):ToHex(),
-		alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoidB)):ToHex(),
-		alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterruptB)):ToHex(),
-		alertColorUnmit	= ZO_ColorDef:New(unpack(colors.alertUnmit)):ToHex(),
-		alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
-		alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex(),
-		alertColorSummon = ZO_ColorDef:New(unpack(colors.alertSummon)):ToHex(),
-	}
+    local colors = CI.SV.alerts.colors
+    CI.AlertColors = {
+        alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlockA)):ToHex(),
+        alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodgeA)):ToHex(),
+        alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoidB)):ToHex(),
+        alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterruptB)):ToHex(),
+        alertColorUnmit = ZO_ColorDef:New(unpack(colors.alertUnmit)):ToHex(),
+        alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
+        alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex(),
+        alertColorSummon = ZO_ColorDef:New(unpack(colors.alertSummon)):ToHex(),
+    }
 end
 
 -- Called from menu when font size/face, etc is changed
@@ -72,15 +70,15 @@ function CI.ResetAlertSize()
         alert.timer:SetFont(g_alertFont)
         alert.icon:SetDimensions(CI.SV.alerts.toggles.alertFontSize + 8, CI.SV.alerts.toggles.alertFontSize + 8)
         alert.icon.iconbg:ClearAnchors()
-        alert.icon.iconbg:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 3, 3)
-        alert.icon.iconbg:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
+        alert.icon.iconbg:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 3, 3)
+        alert.icon.iconbg:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
         alert.icon.cd:ClearAnchors()
-        alert.icon.cd:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 1, 1 )
-        alert.icon.cd:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -1, -1 )
+        alert.icon.cd:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 1, 1)
+        alert.icon.cd:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -1, -1)
         alert.icon.icon:ClearAnchors()
-        alert.icon.icon:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 3, 3 )
-        alert.icon.icon:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3 )
-        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height )
+        alert.icon.icon:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 3, 3)
+        alert.icon.icon:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
+        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
     end
 
     uiTlw.alertFrame:SetDimensions(500, (CI.SV.alerts.toggles.alertFontSize * 2) + 4)
@@ -111,13 +109,13 @@ function CI.CreateAlertFrame()
     CI.ApplyFontAlert()
 
     -- Create Top Level Controls
-    uiTlw.alertFrame = UI.TopLevel( nil, nil )
+    uiTlw.alertFrame = UI.TopLevel(nil, nil)
 
     -- Create 3 alert labels
     local anchor = { CENTER, CENTER, 0, 0, uiTlw.alertFrame }
     local height = (CI.SV.alerts.toggles.alertFontSize * 2)
     for i = 1, 3 do
-        local alert = UI.Control( uiTlw.alertFrame, anchor, { nil, height }, false, "LUIE_Alert" .. i )
+        local alert = UI.Control(uiTlw.alertFrame, anchor, { nil, height }, false, "LUIE_Alert" .. i)
 
         alert.data = {
             ["available"] = true,
@@ -132,41 +130,41 @@ function CI.CreateAlertFrame()
             ["effectOnlyInterrupt"] = nil,
         }
 
-        alert.name = UI.Label( alert, nil, nil, nil, g_alertFont, alert.data.textName, false )
-        alert.name:SetAnchor(LEFT, alert, LEFT, 0, 0 )
+        alert.name = UI.Label(alert, nil, nil, nil, g_alertFont, alert.data.textName, false)
+        alert.name:SetAnchor(LEFT, alert, LEFT, 0, 0)
 
-        alert.icon = UI.Backdrop( alert.name, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
+        alert.icon = UI.Backdrop(alert.name, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false)
         alert.icon:SetDimensions(CI.SV.alerts.toggles.alertFontSize + 8, CI.SV.alerts.toggles.alertFontSize + 8)
-        alert.icon:SetAnchor(LEFT, alert.name, RIGHT, 6, 0 )
+        alert.icon:SetAnchor(LEFT, alert.name, RIGHT, 6, 0)
 
-        alert.icon.back = UI.Texture( alert.icon, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false )
+        alert.icon.back = UI.Texture(alert.icon, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false)
         alert.icon.back:SetAnchor(TOPLEFT, alert.icon, TOPLEFT)
         alert.icon.back:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT)
 
-        alert.icon.iconbg = UI.Texture( alert.icon, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false )
-        alert.icon.iconbg = UI.Backdrop( alert.icon, nil, nil, {0,0,0,0.9}, {0,0,0,0.9}, false )
+        alert.icon.iconbg = UI.Texture(alert.icon, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
+        alert.icon.iconbg = UI.Backdrop(alert.icon, nil, nil, {0,0,0,0.9}, {0,0,0,0.9}, false)
         alert.icon.iconbg:SetDrawLevel(DL_CONTROLS)
-        alert.icon.iconbg:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 3, 3)
-        alert.icon.iconbg:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
+        alert.icon.iconbg:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 3, 3)
+        alert.icon.iconbg:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
 
         alert.icon.cd = windowManager:CreateControl(nil, alert.icon, CT_COOLDOWN)
-        alert.icon.cd:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 1, 1 )
-        alert.icon.cd:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -1, -1 )
-        alert.icon.cd:SetFillColor( 0,1,0,1 )
-        alert.icon.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false )
+        alert.icon.cd:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 1, 1)
+        alert.icon.cd:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -1, -1)
+        alert.icon.cd:SetFillColor(0,1,0,1)
+        alert.icon.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false)
         alert.icon.cd:SetDrawLayer(DL_BACKGROUND)
 
-        alert.icon.icon = UI.Texture( alert.icon, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false )
-        alert.icon.icon:SetAnchor( TOPLEFT, alert.icon, TOPLEFT, 3, 3 )
-        alert.icon.icon:SetAnchor( BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3 )
+        alert.icon.icon = UI.Texture(alert.icon, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false)
+        alert.icon.icon:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 3, 3)
+        alert.icon.icon:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
 
-        alert.mitigation = UI.Label( alert.icon, nil, nil, nil, g_alertFont, alert.data.textMitigation, false )
-        alert.mitigation:SetAnchor(LEFT, alert.icon, RIGHT, 6, 0 )
+        alert.mitigation = UI.Label(alert.icon, nil, nil, nil, g_alertFont, alert.data.textMitigation, false)
+        alert.mitigation:SetAnchor(LEFT, alert.icon, RIGHT, 6, 0)
 
-        alert.timer = UI.Label( alert.icon, nil, nil, nil, g_alertFont, alert.data.duration, false )
-        alert.timer:SetAnchor(LEFT, alert.mitigation, RIGHT, 0, 0 )
+        alert.timer = UI.Label(alert.icon, nil, nil, nil, g_alertFont, alert.data.duration, false)
+        alert.timer:SetAnchor(LEFT, alert.mitigation, RIGHT, 0, 0)
 
-        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height )
+        alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
         alert:SetHidden(true)
 
         anchor = { TOP, BOTTOM, 0, 0, alert }
@@ -175,43 +173,43 @@ function CI.CreateAlertFrame()
     uiTlw.alertFrame:SetDimensions(500, height + 4)
 
     -- Setup Preview
-    uiTlw.alertFrame.preview = LUIE.UI.Backdrop( uiTlw.alertFrame, "fill", nil, nil, nil, true )
+    uiTlw.alertFrame.preview = LUIE.UI.Backdrop(uiTlw.alertFrame, "fill", nil, nil, nil, true)
 
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function(self)
-        eventManager:RegisterForUpdate( moduleName .. "previewMove", 200, function()
-            self.preview.anchorLabel:SetText(strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
+        eventManager:RegisterForUpdate(moduleName .. "previewMove", 200, function()
+            self.preview.anchorLabel:SetText(zo_strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
         end)
     end
 
     -- Callback used to save new position of frames
     local tlwOnMoveStop = function(self)
-        eventManager:UnregisterForUpdate( moduleName .. "previewMove" )
+        eventManager:UnregisterForUpdate(moduleName .. "previewMove")
         CI.SV.AlertFrameOffsetX = self:GetLeft()
         CI.SV.AlertFrameOffsetY = self:GetTop()
         CI.SV.AlertFrameCustomPosition = { self:GetLeft(), self:GetTop() }
     end
 
-    uiTlw.alertFrame:SetHandler( "OnMoveStart", tlwOnMoveStart )
-    uiTlw.alertFrame:SetHandler( "OnMoveStop", tlwOnMoveStop )
+    uiTlw.alertFrame:SetHandler("OnMoveStart", tlwOnMoveStart)
+    uiTlw.alertFrame:SetHandler("OnMoveStop", tlwOnMoveStop)
 
-    uiTlw.alertFrame.preview.anchorTexture = UI.Texture( uiTlw.alertFrame.preview, {TOPLEFT,TOPLEFT}, {16,16}, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false )
+    uiTlw.alertFrame.preview.anchorTexture = UI.Texture(uiTlw.alertFrame.preview, {TOPLEFT,TOPLEFT}, {16,16}, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false)
     uiTlw.alertFrame.preview.anchorTexture:SetColor(1, 1, 0, 0.9)
 
-    uiTlw.alertFrame.preview.anchorLabel = UI.Label( uiTlw.alertFrame.preview, {BOTTOMLEFT,TOPLEFT,0,-1}, nil, {0,2}, "ZoFontGameSmall", "xxx, yyy", false )
+    uiTlw.alertFrame.preview.anchorLabel = UI.Label(uiTlw.alertFrame.preview, {BOTTOMLEFT,TOPLEFT,0,-1}, nil, {0,2}, "ZoFontGameSmall", "xxx, yyy", false)
     uiTlw.alertFrame.preview.anchorLabel:SetColor(1, 1, 0 , 1)
     uiTlw.alertFrame.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
     uiTlw.alertFrame.preview.anchorLabel:SetDrawTier(1)
-    uiTlw.alertFrame.preview.anchorLabelBg = UI.Backdrop(  uiTlw.alertFrame.preview.anchorLabel, "fill", nil, {0,0,0,1}, {0,0,0,1}, false )
+    uiTlw.alertFrame.preview.anchorLabelBg = UI.Backdrop(uiTlw.alertFrame.preview.anchorLabel, "fill", nil, {0,0,0,1}, {0,0,0,1}, false)
     uiTlw.alertFrame.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
     uiTlw.alertFrame.preview.anchorLabelBg:SetDrawTier(0)
 
     local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.alertFrame, 0, 0)
 
-    sceneManager:GetScene("hud"):AddFragment( fragment )
-    sceneManager:GetScene("hudui"):AddFragment( fragment )
-    sceneManager:GetScene("siegeBar"):AddFragment( fragment )
-    sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
+    sceneManager:GetScene("hud"):AddFragment(fragment)
+    sceneManager:GetScene("hudui"):AddFragment(fragment)
+    sceneManager:GetScene("siegeBar"):AddFragment(fragment)
+    sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
 
     -- Register Events
     eventManager:RegisterForEvent(moduleName .. "Combat", EVENT_COMBAT_EVENT, CI.OnCombatIn)
@@ -230,7 +228,7 @@ function CI.CreateAlertFrame()
         eventManager:AddFilterForEvent(moduleName .. result, EVENT_COMBAT_EVENT, REGISTER_FILTER_COMBAT_RESULT, result, REGISTER_FILTER_IS_ERROR, false)
     end
 
-    eventManager:RegisterForUpdate(moduleName.."CI_ALERT_UPDATE", 100, CI.AlertUpdate )
+    eventManager:RegisterForUpdate(moduleName.."CI_ALERT_UPDATE", 100, CI.AlertUpdate)
 end
 
 function CI.ResetAlertFramePosition()
@@ -249,14 +247,14 @@ function CI.SetAlertFramePosition()
         uiTlw.alertFrame:ClearAnchors()
 
         if CI.SV.AlertFrameOffsetX ~= nil and CI.SV.AlertFrameOffsetY ~= nil then
-            uiTlw.alertFrame:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, CI.SV.AlertFrameOffsetX, CI.SV.AlertFrameOffsetY )
+            uiTlw.alertFrame:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, CI.SV.AlertFrameOffsetX, CI.SV.AlertFrameOffsetY)
         else
-            uiTlw.alertFrame:SetAnchor( CENTER, GuiRoot, CENTER, 0, -250 )
+            uiTlw.alertFrame:SetAnchor(CENTER, GuiRoot, CENTER, 0, -250)
         end
     end
 
     local savedPos = CI.SV.AlertFrameCustomPosition
-    uiTlw.alertFrame.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default" )
+    uiTlw.alertFrame.preview.anchorLabel:SetText((savedPos ~= nil and #savedPos == 2) and zo_strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default")
 end
 
 function CI.SetMovingStateAlert(state)
@@ -266,8 +264,8 @@ function CI.SetMovingStateAlert(state)
     CI.AlertFrameUnlocked = state
     if uiTlw.alertFrame and uiTlw.alertFrame:GetType() == CT_TOPLEVELCONTROL then
         CI.GenerateAlertFramePreview(state)
-        uiTlw.alertFrame:SetMouseEnabled( state )
-        uiTlw.alertFrame:SetMovable( state )
+        uiTlw.alertFrame:SetMouseEnabled(state)
+        uiTlw.alertFrame:SetMovable(state)
     end
 end
 
@@ -282,7 +280,7 @@ function CI.GenerateAlertFramePreview(state)
         if state then
 
         end
-        alert:SetHidden ( not state )
+        alert:SetHidden(not state)
     end
 
     for i = 1, 3 do
@@ -294,16 +292,16 @@ function CI.GenerateAlertFramePreview(state)
     if CI.SV.CastBarLabel then
         local previewName = "Test"
         castbar.bar.name:SetText(previewName)
-        castbar.bar.name:SetHidden( not state )
+        castbar.bar.name:SetHidden(not state)
     end
     if CI.SV.CastBarTimer then
-        castbar.bar.timer:SetText( strfmt("1.0") )
-        castbar.bar.timer:SetHidden ( not state )
+        castbar.bar.timer:SetText(string.format("1.0"))
+        castbar.bar.timer:SetHidden(not state)
     end
-    castbar.bar.bar:SetValue( 1 )]]--
+    castbar.bar.bar:SetValue(1)]]--
 
-    uiTlw.alertFrame.preview:SetHidden( not state )
-    uiTlw.alertFrame:SetHidden( not state )
+    uiTlw.alertFrame.preview:SetHidden(not state)
+    uiTlw.alertFrame:SetHidden(not state)
 end
 
 -- Update ticker for Alerts
@@ -342,7 +340,7 @@ function CI.AlertUpdate(currentTime)
             ]]--
 
             if alert.data.showDuration then
-                alert.timer:SetText(alert.data.showDuration and strfmt(" %.1f", remain / 1000) or "")
+                alert.timer:SetText(alert.data.showDuration and string.format(" %.1f", remain / 1000) or "")
                 alert.timer:SetColor(unpack(CI.SV.alerts.colors.alertTimer))
             end
             if remain <= -1100 then
@@ -370,12 +368,12 @@ function CI.AlertInterrupt(eventCode, resultType, isError, abilityName, abilityG
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
         if alert.data.sourceUnitId then
-            targetName = strformat("<<t:1>>", targetName)
+            targetName = zo_strformat("<<t:1>>", targetName)
 
             -- DEBUG
             --d("NORMAL INTERRUPT DETECTED")
             --d("abilityId: " .. abilityId)
-            --d("Source Unit Id: " .. alert.data.sourceUnitId )
+            --d("Source Unit Id: " .. alert.data.sourceUnitId)
             --d("targetUnitId: " .. targetUnitId)
             --d("targetName: " .. targetName)
 
@@ -485,14 +483,14 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, current
             alert.name:SetColor(unpack(CI.SV.alerts.colors.alertShared))
             alert.mitigation:SetText(textMitigation)
             alert.mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
-            alert.timer:SetText(alert.data.showDuration and strfmt(" %.1f", remain / 1000) or "")
+            alert.timer:SetText(alert.data.showDuration and string.format(" %.1f", remain / 1000) or "")
             alert.timer:SetColor(unpack(CI.SV.alerts.colors.alertTimer))
             alert.icon:SetHidden(false)
             alert:SetHidden(false)
             alert:SetAlpha(1)
             alert.data.available = false
-            alert.icon.cd:SetFillColor( color[1], color[2], color[3], color[4] )
-            --alert.icon.cd:SetHidden( not crowdControl)
+            alert.icon.cd:SetFillColor(color[1], color[2], color[3], color[4])
+            --alert.icon.cd:SetHidden(not crowdControl)
             drawLocation = 1 -- As long as this text is filling an available spot, we reset the draw over location to slot 1. If all slots are filled then the draw over code below will cycle and handle abilities.
             CI.RealignAlerts(i)
             return
@@ -514,14 +512,14 @@ function CI.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, current
     alert.name:SetColor(unpack(CI.SV.alerts.colors.alertShared))
     alert.mitigation:SetText(textMitigation)
     alert.mitigation:SetColor(unpack(CI.SV.alerts.colors.alertShared))
-    alert.timer:SetText(alert.data.showDuration and strfmt(" %.1f", remain / 1000) or "")
+    alert.timer:SetText(alert.data.showDuration and string.format(" %.1f", remain / 1000) or "")
     alert.timer:SetColor(unpack(CI.SV.alerts.colors.alertTimer))
     alert.icon:SetHidden(false)
     alert:SetHidden(false)
     alert:SetAlpha(1)
     alert.data.available = false
-    alert.icon.cd:SetFillColor( color[1], color[2], color[3], color[4] )
-    --alert.icon.cd:SetHidden( not crowdControl)
+    alert.icon.cd:SetFillColor(color[1], color[2], color[3], color[4])
+    --alert.icon.cd:SetHidden(not crowdControl)
     drawLocation = drawLocation +1
     if drawLocation > 3 then
         drawLocation = 1
@@ -532,7 +530,7 @@ end
 function CI.RealignAlerts(alertNumber)
     local height = (CI.SV.alerts.toggles.alertFontSize * 2)
     local alert = _G["LUIE_Alert" .. alertNumber]
-    alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height )
+    alert:SetDimensions(alert.name:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
 end
 
 function CI.ProcessAlert(abilityId, unitName, sourceUnitId)
@@ -563,7 +561,7 @@ function CI.ProcessAlert(abilityId, unitName, sourceUnitId)
     -- Setup refire delay
     if AlertT[abilityId].refire then
         refireDelay[abilityId] = true
-        callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
+        zo_callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
     end
 
     -- Auto refire for auras to stop events when both reticleover and the unit exist
@@ -575,13 +573,13 @@ function CI.ProcessAlert(abilityId, unitName, sourceUnitId)
         else
             refireTime = 250
         end
-        callLater(function() refireDelay[abilityId] = nil end, refireTime) --buffer by X time
+        zo_callLater(function() refireDelay[abilityId] = nil end, refireTime) --buffer by X time
     end
 
     -- Get Ability Name & Icon
     local abilityName = GetAbilityName(abilityId)
     local abilityIcon = GetAbilityIcon(abilityId)
-    unitName = strformat("<<t:1>>", unitName)
+    unitName = zo_strformat("<<t:1>>", unitName)
 
     -- Handle effects that override by UnitName
     if E.EffectOverrideByName[abilityId] then
@@ -609,18 +607,18 @@ function CI.ProcessAlert(abilityId, unitName, sourceUnitId)
     end
 
     -- Override unitName here if we utilize a fakeName / bossName
-    unitName = strformat("<<t:1>>", unitName)
+    unitName = zo_strformat("<<t:1>>", unitName)
 
     if AlertT[abilityId].fakeName then
         unitName = AlertT[abilityId].fakeName
     end
     if AlertT[abilityId].bossName and DoesUnitExist('boss1') then
-        unitName = strformat("<<t:1>>", GetUnitName('boss1'))
+        unitName = zo_strformat("<<t:1>>", GetUnitName('boss1'))
     end
 
     if AlertT[abilityId].bossMatch then
         for i = 1, 4 do
-            local bossName = DoesUnitExist('boss' .. i) and strformat("<<t:1>>", GetUnitName('boss' .. i)) or ""
+            local bossName = DoesUnitExist('boss' .. i) and zo_strformat("<<t:1>>", GetUnitName('boss' .. i)) or ""
             if bossName == AlertT[abilityId].bossMatch then
                 unitName = AlertT[abilityId].bossMatch
             end
@@ -720,7 +718,7 @@ local function CheckInterruptEvent(unitId)
             --d("EFFECT INTERRUPTED")
             --d("Current Duration: " .. remain)
 
-            if (alert.data.sourceUnitId == unitId and (not alert.data.showDuration == false or alert.data.alwaysShowInterrupt) ) and remain > 0 and (not alert.data.neverShowInterrupt or deathResults[resultType]) then
+            if (alert.data.sourceUnitId == unitId and (not alert.data.showDuration == false or alert.data.alwaysShowInterrupt)) and remain > 0 and (not alert.data.neverShowInterrupt or deathResults[resultType]) then
                 alert.data = { }
                 alert.data.available = true
                 alert.data.textMitigation =  ""
@@ -750,9 +748,9 @@ function CI.AlertEffectChanged(eventCode, changeType, effectSlot, effectName, un
 
     local S = CI.SV.alerts
 
-    if S.toggles.alertEnable and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and AlertT[abilityId] and AlertT[abilityId].auradetect then
+    if S.toggles.alertEnable and (S.toggles.mitigationAura or IsUnitInDungeon("player")) and AlertT[abilityId] and AlertT[abilityId].auradetect then
         if changeType == EFFECT_RESULT_FADED then
-            callLater(function() CheckInterruptEvent(unitId) end, 100 )
+            zo_callLater(function() CheckInterruptEvent(unitId) end, 100)
             return
         end
 
@@ -761,7 +759,7 @@ function CI.AlertEffectChanged(eventCode, changeType, effectSlot, effectName, un
 
         if changeType == EFFECT_RESULT_UPDATED and AlertT[abilityId].ignoreRefresh then return end
 
-        callLater(function() CI.ProcessAlert(abilityId, unitName, unitId) end, 50)
+        zo_callLater(function() CI.ProcessAlert(abilityId, unitName, unitId) end, 50)
     end
 end
 
@@ -770,10 +768,10 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
     if not AlertT[abilityId] then return end
 
     local S = CI.SV.alerts
-    abilityName = strformat("<<C:1>>", GetAbilityName(abilityId))
+    abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
     local abilityIcon = GetAbilityIcon(abilityId)
 
-    local sourceNameCheck = strformat("<<t:1>>", sourceName)
+    local sourceNameCheck = zo_strformat("<<t:1>>", sourceName)
 
     -- Handle effects that override by UnitName
     if E.EffectOverrideByName[abilityId] then
@@ -817,7 +815,7 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
                or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW
             then
                 refireDelay[abilityId] = true
-                callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
+                zo_callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
                 return
             end
 
@@ -834,7 +832,7 @@ function CI.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraph
                     if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
                 end
 
-                callLater(function() CI.ProcessAlert(abilityId, sourceName, sourceUnitId) end, 50)
+                zo_callLater(function() CI.ProcessAlert(abilityId, sourceName, sourceUnitId) end, 50)
             end
         end
     end
@@ -849,7 +847,7 @@ function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGr
     local S = CI.SV.alerts
 
     -- NEW ALERTS
-    if S.toggles.alertEnable and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) then
+    if S.toggles.alertEnable and (S.toggles.mitigationAura or IsUnitInDungeon("player")) then
         if not refireDelay[abilityId] then
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
             if resultType == ACTION_RESULT_EFFECT_FADED
@@ -865,7 +863,7 @@ function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGr
                or resultType == ACTION_RESULT_TARGET_NOT_IN_VIEW
             then
                 refireDelay[abilityId] = true
-                callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
+                zo_callLater(function() refireDelay[abilityId] = nil end, 1000) --buffer by X time
                 return
             end
 
@@ -882,7 +880,7 @@ function CI.OnCombatAlert(eventCode, resultType, isError, abilityName, abilityGr
                     if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
                 end
 
-                callLater(function() CI.ProcessAlert(abilityId, sourceName, sourceUnitId) end, 50)
+                zo_callLater(function() CI.ProcessAlert(abilityId, sourceName, sourceUnitId) end, 50)
             end
         end
     end
@@ -905,7 +903,7 @@ function CI.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, 
     local S = CI.SV.alerts
 
     local labelColor = S.colors.alertShared
-	local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
+    local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
 
     if (alertType == alertTypes.SHARED) then
         local spacer = "-"
@@ -919,74 +917,74 @@ function CI.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, 
         -- PRIORITY: INTERRUPT > BLOCK STAGGER > DODGE > BLOCK > AVOID
         if blockstagger then block = false end
 
-		if S.toggles.showMitigation then
-			if avoid then
-				local color = CI.AlertColors.alertColorAvoid
-				stringAvoid = strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertAvoid, spacer)
-			else
-				stringAvoid = ""
-			end
+        if S.toggles.showMitigation then
+            if avoid then
+                local color = CI.AlertColors.alertColorAvoid
+                stringAvoid = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertAvoid, spacer)
+            else
+                stringAvoid = ""
+            end
 
-			if block then
-				local color = CI.AlertColors.alertColorBlock
-				stringBlock = strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlock, spacer)
-			end
+            if block then
+                local color = CI.AlertColors.alertColorBlock
+                stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlock, spacer)
+            end
 
-			if dodge then
-				local color = CI.AlertColors.alertColorDodge
-				stringDodge = strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertDodge, spacer)
-			else
-				stringDodge = ""
-			end
+            if dodge then
+                local color = CI.AlertColors.alertColorDodge
+                stringDodge = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertDodge, spacer)
+            else
+                stringDodge = ""
+            end
 
-			if blockstagger then
-				local color = CI.AlertColors.alertColorBlock
-				stringBlock = strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlockStagger, spacer)
-			end
+            if blockstagger then
+                local color = CI.AlertColors.alertColorBlock
+                stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlockStagger, spacer)
+            end
 
-			if interrupt then
-				local color = CI.AlertColors.alertColorInterrupt
-				stringInterrupt = strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertInterrupt, spacer)
-			else
-				stringInterrupt = ""
-			end
+            if interrupt then
+                local color = CI.AlertColors.alertColorInterrupt
+                stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertInterrupt, spacer)
+            else
+                stringInterrupt = ""
+            end
 
-			if not block and not blockstagger then
-				stringBlock = ""
-			end
-		end
+            if not block and not blockstagger then
+                stringBlock = ""
+            end
+        end
 
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = S.toggles.showMitigation and strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt) or ""
+        textMitigation = S.toggles.showMitigation and zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt) or ""
 
-        text = strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
-	-- UNMIT
-	elseif (alertType == alertTypes.UNMIT) then
-		local color = CI.AlertColors.alertColorUnmit
-		textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = strformat("|c<<1>><<2>>|r", color, S.formats.alertUnmit)
-		text = strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
+        text = zo_strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
+    -- UNMIT
+    elseif (alertType == alertTypes.UNMIT) then
+        local color = CI.AlertColors.alertColorUnmit
+        textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
+        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertUnmit)
+        text = zo_strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
     -- POWER
     elseif (alertType == alertTypes.POWER) then
         local color = CI.AlertColors.alertColorPower
-		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPowerPrefixN2 or S.toggles.mitigationPowerPrefix2
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPowerPrefixN2 or S.toggles.mitigationPowerPrefix2
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = strformat("|c<<1>><<2>>|r", color, S.formats.alertPower)
-        text = strformat("<<1>> <<2>>", stringPart1, stringPart2)
+        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertPower)
+        text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- DESTROY
     elseif (alertType == alertTypes.DESTROY) then
         local color = CI.AlertColors.alertColorDestroy
-		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationDestroyPrefixN2 or S.toggles.mitigationDestroyPrefix2
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationDestroyPrefixN2 or S.toggles.mitigationDestroyPrefix2
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = strformat("|c<<1>><<2>>|r", color, S.formats.alertDestroy)
-        text = strformat("<<1>> <<2>>", stringPart1, stringPart2)
+        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertDestroy)
+        text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- SUMMON
     elseif (alertType == alertTypes.SUMMON) then
         local color = CI.AlertColors.alertColorSummon
-		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationSummonPrefixN2 or S.toggles.mitigationSummonPrefix2
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationSummonPrefixN2 or S.toggles.mitigationSummonPrefix2
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = strformat("|c<<1>><<2>>|r", color, S.formats.alertSummon)
-        text = strformat("<<1>> <<2>>", stringPart1, stringPart2)
+        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertSummon)
+        text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     end
 
     local showDuration = duration and true or false
@@ -1011,8 +1009,8 @@ function CI.ApplyFontAlert()
         alertFontName = "$(MEDIUM_FONT)"
     end
 
-    local alertFontStyle = ( CI.SV.alerts.toggles.alertFontStyle and CI.SV.alerts.toggles.alertFontStyle ~= "" ) and CI.SV.alerts.toggles.alertFontStyle or "soft-shadow-thin"
-    local alertFontSize = ( CI.SV.alerts.toggles.alertFontSize and CI.SV.alerts.toggles.alertFontSize > 0 ) and CI.SV.alerts.toggles.alertFontSize or 16
+    local alertFontStyle = (CI.SV.alerts.toggles.alertFontStyle and CI.SV.alerts.toggles.alertFontStyle ~= "") and CI.SV.alerts.toggles.alertFontStyle or "soft-shadow-thin"
+    local alertFontSize = (CI.SV.alerts.toggles.alertFontSize and CI.SV.alerts.toggles.alertFontSize > 0) and CI.SV.alerts.toggles.alertFontSize or 16
 
     g_alertFont = alertFontName .. "|" .. alertFontSize .. "|" .. alertFontStyle
 end

@@ -6,7 +6,7 @@
 local SC = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 -- Slash Command to invite someone to a guild
 function SC.SlashGuildInvite(option)

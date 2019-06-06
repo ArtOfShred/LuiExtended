@@ -8,7 +8,7 @@ LUIE.SlashCommands = {}
 local SC = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 local moduleName = LUIE.name .. "_SlashCommands"
 

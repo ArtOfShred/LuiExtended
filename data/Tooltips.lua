@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 -- Local Damagetypes for easy use
 local PhysicalDamage = GetString(SI_DAMAGETYPE2) .. " Damage" -- TODO: Localize
@@ -312,15 +312,15 @@ LUIE.Tooltips = {
     Drink_Crown_Drink                               = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64712:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
 
     -- Experience
-    Experience_Psijic_Ambrosia                      = strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP),"50"),
-    Experience_Aetherial_Ambrosia                   = strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP), "100"),
-    Experience_Mythic_Aetherial_Ambrosia            = strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP), "150"),
-    Experience_Crown                                = strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "50", "2"),
-    Experience_Gold_Coast                           = strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "50", "1"),
-    Experience_Major_Gold_Coast                     = strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "1"),
-    Experience_Grand_Gold_Coast                     = strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "150", "1"),
-    Experience_Seasonal_Event                       = strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "2"),
-    Experience_Seasonal_Pelinal                     = strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_PELINAL), "2"),
+    Experience_Psijic_Ambrosia                      = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP),"50"),
+    Experience_Aetherial_Ambrosia                   = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP), "100"),
+    Experience_Mythic_Aetherial_Ambrosia            = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP), "150"),
+    Experience_Crown                                = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "50", "2"),
+    Experience_Gold_Coast                           = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "50", "1"),
+    Experience_Major_Gold_Coast                     = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "1"),
+    Experience_Grand_Gold_Coast                     = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "150", "1"),
+    Experience_Seasonal_Event                       = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HOUR_TP), "100", "2"),
+    Experience_Seasonal_Pelinal                     = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_PELINAL), "2"),
 
     -- Mementos
     Memento_Almalexias_Lantern                      = select(2, GetCollectibleInfo(341)),
@@ -349,12 +349,12 @@ LUIE.Tooltips = {
     ----------------------------------------------------------------
 
     -- Weapon Sets
-    Set_Asylum_Bow                                  = strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 45),
-    Set_Asylum_Bow_Perfect                          = strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 50),
+    Set_Asylum_Bow                                  = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 45),
+    Set_Asylum_Bow_Perfect                          = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_BOW), 50),
     Set_Asylum_Destruction_Staff                    = GetString(SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF),
     Set_Asylum_Destruction_Staff_P                  = GetString(SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF_PERFECT),
-    Set_Aslyum_Restoration_Staff                    = strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 27),
-    Set_Aslyum_Restoration_Staff_P                  = strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 30),
+    Set_Aslyum_Restoration_Staff                    = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 27),
+    Set_Aslyum_Restoration_Staff_P                  = zo_strformat(GetString(SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF), 30),
     Set_Maelstrom_DW                                = GetString(SI_LUIE_SKILL_SET_MAELSTROM_DW),
     Set_Maelstrom_1H                                = GetString(SI_LUIE_SKILL_SET_MAELSTROM_1H),
     Set_Master_1H                                   = GetString(SI_LUIE_SKILL_SET_MASTER_1H),
@@ -371,8 +371,8 @@ LUIE.Tooltips = {
     Set_Earthgore                                   = GetString(SI_LUIE_SKILL_SET_EARTHGORE),
     Set_Grothdarr                                   = GetString(SI_LUIE_SKILL_SET_GROTHDARR),
     Set_Iceheart                                    = GetString(SI_LUIE_SKILL_SET_ICEHEART),
-    Set_Ilambris_Fire                               = strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE3)),
-    Set_Ilambris_Shock                              = strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE4)),
+    Set_Ilambris_Fire                               = zo_strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE3)),
+    Set_Ilambris_Shock                              = zo_strformat(GetString(SI_LUIE_SKILL_SET_ILAMBRIS), GetString(SI_DAMAGETYPE4)),
     Set_Lord_Warden_Buff                            = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF),
     Set_Malubeth                                    = GetString(SI_LUIE_SKILL_SET_MALUBETH),
     Set_Maw_of_the_Infernal                         = GetString(SI_LUIE_SKILL_SET_MAW_OF_THE_INFERNAL),
@@ -383,9 +383,9 @@ LUIE.Tooltips = {
     Set_Shadowrend                                  = GetString(SI_LUIE_SKILL_SET_SHADOWREND_TP),
     Set_Spawn_of_Mephala                            = GetString(SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_TP),
     Set_Stormfist                                   = GetString(SI_LUIE_SKILL_SET_STORMFIST_TP),
-    Set_Engine_Guardian_Health                      = strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE_2)),
-    Set_Engine_Guardian_Stamina                     = strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE6)),
-    Set_Engine_Guardian_Magicka                     = strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE0)),
+    Set_Engine_Guardian_Health                      = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE_2)),
+    Set_Engine_Guardian_Stamina                     = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE6)),
+    Set_Engine_Guardian_Magicka                     = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE0)),
     Set_The_Troll_King                              = GetString(SI_LUIE_SKILL_SET_THE_TROLL_KING_TP),
     Set_Thurvokun                                   = GetString(SI_LUIE_SKILL_SET_THURVOKUN_TP),
     Set_Zaan                                        = GetString(SI_LUIE_SKILL_SET_ZAAN_TP),
@@ -401,11 +401,11 @@ LUIE.Tooltips = {
     Set_Eternal_Hunt                                = GetString(SI_LUIE_SKILL_SET_ETERNAL_HUNT),
     Set_Morkuldin                                   = GetString(SI_LUIE_SKILL_SET_MORKULDIN),
     Set_Tavas_Favor                                 = GetString(SI_LUIE_SKILL_SET_TAVAS_FAVOR),
-    Set_Trials_Fire                                 = strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE3)),
-    Set_Trials_Shock                                = strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE4)),
-    Set_Trials_Frost                                = strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE6)),
-    Set_Trials_Poison                               = strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE11)),
-    Set_Trials_Disease                              = strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE10)),
+    Set_Trials_Fire                                 = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE3)),
+    Set_Trials_Shock                                = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE4)),
+    Set_Trials_Frost                                = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE6)),
+    Set_Trials_Poison                               = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE11)),
+    Set_Trials_Disease                              = zo_strformat(GetString(SI_LUIE_SKILL_SET_TRIAL_BY_FIRE), GetString(SI_DAMAGETYPE10)),
     Set_Varens_Legacy                               = GetString(SI_LUIE_SKILL_SET_VARENS_LEGACY),
     Set_Mechanical_Acuity                           = GetString(SI_LUIE_SKILL_SET_MECHANICAL_ACUITY),
     Set_Adept_Rider                                 = GetString(SI_LUIE_SKILL_SET_ADEPT_RIDER),
@@ -473,9 +473,9 @@ LUIE.Tooltips = {
     Set_Sentry_Cooldown                             = GetString(SI_LUIE_SKILL_SET_SENTRY_ICD_TP),
 
     -- Arena Sets
-    Set_Succession_Flame                            = strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE3)),
-    Set_Succession_Shock                            = strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE4)),
-    Set_Succession_Frost                            = strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE6)),
+    Set_Succession_Flame                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE3)),
+    Set_Succession_Shock                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE4)),
+    Set_Succession_Frost                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE6)),
     Set_Para_Bellum                                 = GetString(SI_LUIE_SKILL_SET_PARA_BELLUM_TP),
 
     ----------------------------------------------------------------
@@ -541,8 +541,8 @@ LUIE.Tooltips = {
     Skill_Soul_Tether                               = GetString(SI_LUIE_SKILL_SOUL_TETHER_TP),
 
     -- Sorcerer
-    Skill_Persistence_Rank_1                        = strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 7),
-    Skill_Persistence_Rank_2                        = strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 15),
+    Skill_Persistence_Rank_1                        = zo_strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 7),
+    Skill_Persistence_Rank_2                        = zo_strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 15),
     Skill_Crystal_Fragments                         = GetString(SI_LUIE_SKILL_CRYSTAL_FRAGMENTS_TP),
     Skill_Shattering_Prison                         = GetString(SI_LUIE_SKILL_SHATTERING_PRISON_TP),
     Skill_Rune_Cage                                 = GetString(SI_LUIE_SKILL_RUNE_CAGE_TP),
@@ -642,8 +642,8 @@ LUIE.Tooltips = {
     Skill_Permafrost                                = GetString(SI_LUIE_SKILL_PERMAFROST_TP),
 
     -- Necromancer
-    Skill_Reusable_Parts_Rank_1                     = strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 12),
-    Skill_Reusable_Parts_Rank_2                     = strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 25),
+    Skill_Reusable_Parts_Rank_1                     = zo_strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 12),
+    Skill_Reusable_Parts_Rank_2                     = zo_strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 25),
 
     Skill_Flame_Skull                               = GetString(SI_LUIE_SKILL_FLAME_SKULL_TP),
     Skill_Ricochet_Skull                            = GetString(SI_LUIE_SKILL_RICOCHET_SKULL_TP),
@@ -686,10 +686,10 @@ LUIE.Tooltips = {
     ----------------------------------------------------------------
 
     -- Two Handed
-    Skill_Follow_Up_Rank_1                          = strformat(GetString(SI_LUIE_SKILL_FOLLOW_UP_TP), 5),
-    Skill_Follow_Up_Rank_2                          = strformat(GetString(SI_LUIE_SKILL_FOLLOW_UP_TP), 10),
-    Skill_Battle_Rush_Rank_1                        = strformat(GetString(SI_LUIE_SKILL_BATTLE_RUSH_TP), 15),
-    Skill_Battle_Rush_Rank_2                        = strformat(GetString(SI_LUIE_SKILL_BATTLE_RUSH_TP), 30),
+    Skill_Follow_Up_Rank_1                          = zo_strformat(GetString(SI_LUIE_SKILL_FOLLOW_UP_TP), 5),
+    Skill_Follow_Up_Rank_2                          = zo_strformat(GetString(SI_LUIE_SKILL_FOLLOW_UP_TP), 10),
+    Skill_Battle_Rush_Rank_1                        = zo_strformat(GetString(SI_LUIE_SKILL_BATTLE_RUSH_TP), 15),
+    Skill_Battle_Rush_Rank_2                        = zo_strformat(GetString(SI_LUIE_SKILL_BATTLE_RUSH_TP), 30),
     Skill_Rally                                     = GetString(SI_LUIE_SKILL_RALLY_TP),
     Skill_Berserker_Strike                          = GetString(SI_LUIE_SKILL_BERSERKER_STRIKE_TP),
     Skill_Onslaught                                 = GetString(SI_LUIE_SKILL_ONSLAUGHT_TP),
@@ -713,8 +713,8 @@ LUIE.Tooltips = {
     Skill_Thrive_in_Chaos                           = GetString(SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP),
 
     -- Bow
-    Skill_Hawk_Eye_Rank_1                           = strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 2),
-    Skill_Hawk_Eye_Rank_2                           = strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 5),
+    Skill_Hawk_Eye_Rank_1                           = zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 2),
+    Skill_Hawk_Eye_Rank_2                           = zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 5),
     Skill_Volley                                    = GetString(SI_LUIE_SKILL_VOLLEY_TP),
     Skill_Endless_Hail                              = GetString(SI_LUIE_SKILL_ENDLESS_HAIL_TP),
     Skill_Draining_Shot                             = GetString(SI_LUIE_SKILL_DRAINING_SHOT_TP),
@@ -738,14 +738,14 @@ LUIE.Tooltips = {
     Skill_Frost_Touch_Alt                           = GetString(SI_LUIE_SKILL_FROST_TOUCH_ALT_TP),
     Skill_Frost_Clench                              = GetString(SI_LUIE_SKILL_FROST_CLENCH_TP),
     Skill_Frost_Clench_Alt                          = GetString(SI_LUIE_SKILL_FROST_CLENCH_ALT_TP),
-    Skill_Fire_Storm                                = strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE3)),
-    Skill_Thunder_Storm                             = strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE4)),
-    Skill_Ice_Storm                                 = strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE6)),
-    Skill_Fiery_Rage                                = strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE3)),
+    Skill_Fire_Storm                                = zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE3)),
+    Skill_Thunder_Storm                             = zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE4)),
+    Skill_Ice_Storm                                 = zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE6)),
+    Skill_Fiery_Rage                                = zo_strformat(GetString(SI_LUIE_SKILL_ELEMENTAL_STORM_TP), GetString(SI_DAMAGETYPE3)),
     Skill_Icy_Rage                                  = GetString(SI_LUIE_SKILL_ICY_RAGE_TP),
-    Skill_Eye_of_Flame                              = strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE3)),
-    Skill_Eye_of_Lightning                          = strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE4)),
-    Skill_Eye_of_Frost                              = strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE6)),
+    Skill_Eye_of_Flame                              = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE3)),
+    Skill_Eye_of_Lightning                          = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE4)),
+    Skill_Eye_of_Frost                              = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE6)),
 
     -- Restoration Staff
     Skill_Mutagen                                   = GetString(SI_LUIE_SKILL_MUTAGEN),
@@ -892,9 +892,9 @@ LUIE.Tooltips = {
     -- RACIALS ------------------------------------------
     -- ---------------------------------------------------
 
-    Skill_Hunters_Eye_Rank_1                        = strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 3, 400),
-    Skill_Hunters_Eye_Rank_2                        = strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 6, 900),
-    Skill_Hunters_Eye_Rank_3                        = strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 10, 1500),
+    Skill_Hunters_Eye_Rank_1                        = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 3, 400),
+    Skill_Hunters_Eye_Rank_2                        = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 6, 900),
+    Skill_Hunters_Eye_Rank_3                        = zo_strformat(GetString(SI_LUIE_SKILL_HUNTERS_EYE_TP), 10, 1500),
 
     -- ---------------------------------------------------
     -- CYRODIIL ------------------------------------------
@@ -919,12 +919,12 @@ LUIE.Tooltips = {
     Skill_Siege_Shield_Cyrodiil                     = GetString(SI_LUIE_SKILL_SIEGE_SHIELD_CYRODIIL_TP),
     Skill_Power_Bash_Cyrodiil                       = GetString(SI_LUIE_SKILL_POWER_BASH_CYRODIIL_TP),
 
-    Skill_Elder_Scroll_Altadoon                     = strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(15177)),
-    Skill_Elder_Scroll_Mnem                         = strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(15178)),
-    Skill_Elder_Scroll_Ghartok                      = strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22282)),
-    Skill_Elder_Scroll_Chim                         = strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22295)),
-    Skill_Elder_Scroll_Ni_Mohk                      = strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22297)),
-    Skill_Elder_Scroll_Alma_Ruma                    = strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22299)),
+    Skill_Elder_Scroll_Altadoon                     = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(15177)),
+    Skill_Elder_Scroll_Mnem                         = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(15178)),
+    Skill_Elder_Scroll_Ghartok                      = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22282)),
+    Skill_Elder_Scroll_Chim                         = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22295)),
+    Skill_Elder_Scroll_Ni_Mohk                      = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22297)),
+    Skill_Elder_Scroll_Alma_Ruma                    = zo_strformat(GetString(SI_LUIE_SKILL_ELDER_SCROLL_TP), GetAbilityName(22299)),
 
     Skill_Ruinous_Cyclone                           = GetString(SI_LUIE_SKILL_RUINOUS_CYCLONE),
 
@@ -956,7 +956,7 @@ LUIE.Tooltips = {
 
     -- Animals
     Skill_Ferocity                                  = GetString(SI_LUIE_SKILL_BEAR_FEROCITY_TP),
-    Skill_Ancient_Skin                              = strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 9),
+    Skill_Ancient_Skin                              = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 9),
     Skill_Weakness_Lion                             = GetString(SI_LUIE_SKILL_WEAKNESS_LION_TP),
     Skill_Hardened_Shell                            = GetString(SI_LUIE_SKILL_HARDENED_SHELL_TP),
     Skill_Slash_Cliff_Strider                       = GetString(SI_LUIE_SKILL_SLASH_CLIFF_STRIDER_TP),
@@ -998,7 +998,7 @@ LUIE.Tooltips = {
     Skill_Dutiful_Fury_Proc                         = GetString(SI_LUIE_SKILL_DUTIFUL_FURY_PROC_TP),
 
     -- Insects
-    Skill_Hardened_Carapace                         = strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 15),
+    Skill_Hardened_Carapace                         = zo_strformat(GetString(SI_LUIE_SKILL_HARDENED_CARAPACE_TP), 15),
     Skill_Inject_Larva                              = GetString(SI_LUIE_SKILL_INJECT_LARVA_TP),
     Skill_Latch_On                                  = GetString(SI_LUIE_SKILL_LATCH_ON_TP),
     Skill_Kotu_Gava_Swarm                           = GetString(SI_LUIE_SKILL_KOTU_GAVA_SWARM_TP),
@@ -1136,8 +1136,8 @@ LUIE.Tooltips = {
 
     -- Maelstrom Arena
     Skill_Sigil_of_Haste                            = GetString(SI_LUIE_SKILL_SIGIL_OF_HASTE_TP),
-    Skill_Sigil_of_Power                            = strformat(GetString(SI_LUIE_SKILL_SIGIL_OF_POWER_TP), 990),
-    Skill_Sigil_of_Power_Veteran                    = strformat(GetString(SI_LUIE_SKILL_SIGIL_OF_POWER_TP), 1188),
+    Skill_Sigil_of_Power                            = zo_strformat(GetString(SI_LUIE_SKILL_SIGIL_OF_POWER_TP), 990),
+    Skill_Sigil_of_Power_Veteran                    = zo_strformat(GetString(SI_LUIE_SKILL_SIGIL_OF_POWER_TP), 1188),
     Skill_Sigil_of_Healing                          = GetString(SI_LUIE_SKILL_SIGIL_OF_HEALING_TP),
     Skill_Sigil_of_Defense                          = GetString(SI_LUIE_SKILL_SIGIL_OF_DEFENSE_TP),
 
@@ -1257,7 +1257,7 @@ DT[20299]                                     = function()
                                                     duration           = duration + rankIndex
                                                 end
 
-                                                local tooltip           = strformat(GetString(SI_LUIE_SKILL_HIDDEN_TP), duration)
+                                                local tooltip           = zo_strformat(GetString(SI_LUIE_SKILL_HIDDEN_TP), duration)
 
                                                 return tooltip
                                     end
@@ -1283,4 +1283,4 @@ function GLOBALSCRIPT()
 
 en]]--
 
---strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )
+--zo_strformat(GetString(SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST), string.sub( GetAbilityDescription(75745):gsub("[^0-9]", ""), 0, -3) )

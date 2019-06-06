@@ -6,6 +6,7 @@
 -- LUIE namespace
 LUIE             = {}
 LUIE.name        = "LuiExtended"
+LUIE.tag         = "LUIE"
 LUIE.author      = "ArtOfShred, psypanda & SpellBuilder"
 LUIE.version     = "5.9.4"
 LUIE.website     = "https://www.esoui.com/downloads/info818-LuiExtended.html"

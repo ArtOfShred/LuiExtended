@@ -6,14 +6,14 @@
 local CI = LUIE.CombatInfo
 local CCT = CI.CrowdControlTracker
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 local optionsDataCombatInfo = {}
 
 local castBarMovingEnable = false -- Helper local flag
 local alertFrameMovingEnabled = false -- Helper local flag
 
-local globalMethodOptions     = { "Ascending", "Descending", "Radial" }
+local globalMethodOptions = { "Ascending", "Descending", "Radial" }
 local globalMethodOptionsKeys = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
 local globalAlertOptions = { "Show All Incoming Abilities", "Only Show Hard CC Effects", "Only Show Unbreakable CC Effects" }
 local globalAlertOptionsKeys = { ["Show All Incoming Abilities"] = 1, ["Only Show Hard CC Effects"] = 2, ["Only Show Unbreakable CC Effects"] = 3 }
@@ -44,8 +44,8 @@ function CI.CreateSettings()
 
     local panelDataCombatInfo = {
         type = "panel",
-        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CI)),
-        displayName = strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CI)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CI)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CI)),
         author = LUIE.author,
         version = LUIE.version,
         website = LUIE.website,
@@ -90,7 +90,7 @@ function CI.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_QUICK)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_QUICK)),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_QUICK_TP),
                 getFunc = function() return CI.SV.GlobalPotion end,
                 setFunc = function(value) CI.SV.GlobalPotion = value end,
@@ -101,7 +101,7 @@ function CI.CreateSettings()
             {
                 -- Show GCD Ready Flash
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_FLASH)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_FLASH)),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_FLASH_TP),
                 getFunc = function() return CI.SV.GlobalFlash end,
                 setFunc = function(value) CI.SV.GlobalFlash = value end,
@@ -112,7 +112,7 @@ function CI.CreateSettings()
             {
                 -- GCD - Desaturate Icons on GCD
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_DESAT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_DESAT)),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_DESAT_TP),
                 getFunc = function() return CI.SV.GlobalDesat end,
                 setFunc = function(value) CI.SV.GlobalDesat = value end,
@@ -123,7 +123,7 @@ function CI.CreateSettings()
             {
                 -- GCD - Color Slot Label Red
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_COLOR_TP),
                 getFunc = function() return CI.SV.GlobalLabelColor end,
                 setFunc = function(value) CI.SV.GlobalLabelColor = value end,
@@ -134,7 +134,7 @@ function CI.CreateSettings()
             {
                 -- GCD - Animation Method
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_ANIMATION)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_ANIMATION)),
                 tooltip = GetString(SI_LUIE_LAM_CI_GCD_ANIMATION_TP),
                 choices = globalMethodOptions,
                 getFunc = function() return globalMethodOptions[CI.SV.GlobalMethod] end,
@@ -173,7 +173,7 @@ function CI.CreateSettings()
             },
             {
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
                 min = -72, max = 40, step = 2,
                 getFunc = function() return CI.SV.UltimateLabelPosition end,
@@ -185,7 +185,7 @@ function CI.CreateSettings()
             {
                 type = "dropdown",
                 scrollable = true,
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
                 choices = FontsList,
                 sort = "name-up",
@@ -197,7 +197,7 @@ function CI.CreateSettings()
             },
             {
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
                 min = 10, max = 30, step = 1,
                 getFunc = function() return CI.SV.UltimateFontSize end,
@@ -208,7 +208,7 @@ function CI.CreateSettings()
             },
             {
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
@@ -220,7 +220,7 @@ function CI.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL_TP),
                 getFunc = function() return CI.SV.UltimateHideFull end,
                 setFunc = function(value) CI.SV.UltimateHideFull = value CI.OnSlotsFullUpdate() end,
@@ -260,7 +260,7 @@ function CI.CreateSettings()
             {
                 -- Bar Proc Sound
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_PROCSOUND)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_PROCSOUND)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_PROCSOUND_TP),
                 getFunc = function() return CI.SV.ProcEnableSound end,
                 setFunc = function(value) CI.SV.ProcEnableSound = value end,
@@ -272,7 +272,7 @@ function CI.CreateSettings()
                 -- Bar Proc Sound Choice
                 type = "dropdown",
                 scrollable = true,
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE_TP),
                 choices = SoundsList,
                 sort = "name-up",
@@ -296,7 +296,7 @@ function CI.CreateSettings()
             {
                 -- Show Toggled Secondary
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_SECONDARY)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_SECONDARY)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_SECONDARY_TP),
                 getFunc = function() return CI.SV.ShowToggledSecondary end,
                 setFunc = function(value) CI.SV.ShowToggledSecondary = value CI.UpdateBarHighlightTables() CI.OnSlotsFullUpdate() end,
@@ -307,7 +307,7 @@ function CI.CreateSettings()
             {
                 -- Show Toggled Ultimate
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE_TP),
                 getFunc = function() return CI.SV.ShowToggledUltimate end,
                 setFunc = function(value) CI.SV.ShowToggledUltimate = value CI.UpdateBarHighlightTables() CI.OnSlotsFullUpdate() end,
@@ -318,7 +318,7 @@ function CI.CreateSettings()
             {
                 -- Show Label On Bar Highlight
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_LABEL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_LABEL)),
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_LABEL_TP),
                 getFunc = function() return CI.SV.BarShowLabel end,
                 setFunc = function(value) CI.SV.BarShowLabel = value CI.ResetBarLabel() end,
@@ -328,7 +328,7 @@ function CI.CreateSettings()
             },
             {
                 type = "slider",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
                 min = -72, max = 40, step = 2,
                 getFunc = function() return CI.SV.BarLabelPosition end,
@@ -340,7 +340,7 @@ function CI.CreateSettings()
             {
                 type = "dropdown",
                 scrollable = true,
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
                 choices = FontsList,
                 sort = "name-up",
@@ -352,7 +352,7 @@ function CI.CreateSettings()
             },
             {
                 type = "slider",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
                 min = 10, max = 30, step = 1,
                 getFunc = function() return CI.SV.BarFontSize end,
@@ -363,7 +363,7 @@ function CI.CreateSettings()
             },
             {
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
@@ -375,7 +375,7 @@ function CI.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
                 getFunc = function() return CI.SV.BarMiilis end,
                 setFunc = function(value) CI.SV.BarMiilis = value end,
@@ -404,7 +404,7 @@ function CI.CreateSettings()
             },
             {
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
                 min = -72, max = 40, step = 2,
                 getFunc = function() return CI.SV.PotionTimerLabelPosition end,
@@ -416,7 +416,7 @@ function CI.CreateSettings()
             {
                 type = "dropdown",
                 scrollable = true,
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
                 choices = FontsList,
                 sort = "name-up",
@@ -428,7 +428,7 @@ function CI.CreateSettings()
             },
             {
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
                 min = 10, max = 30, step = 1,
                 getFunc = function() return CI.SV.PotionTimerFontSize end,
@@ -439,7 +439,7 @@ function CI.CreateSettings()
             },
             {
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
@@ -451,7 +451,7 @@ function CI.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CI_POTION_COLOR_TP),
                 getFunc = function() return CI.SV.PotionTimerColor end,
                 setFunc = function(value) CI.SV.PotionTimerColor = value end,
@@ -461,7 +461,7 @@ function CI.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
                 getFunc = function() return CI.SV.PotionTimerMillis end,
                 setFunc = function(value) CI.SV.PotionTimerMillis = value end,
@@ -545,7 +545,7 @@ function CI.CreateSettings()
             {
                 -- Display Label
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_LABEL)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_LABEL)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_LABEL_TP),
                 getFunc = function() return CI.SV.CastBarLabel end,
                 setFunc = function(value) CI.SV.CastBarLabel = value end,
@@ -556,7 +556,7 @@ function CI.CreateSettings()
             {
                 -- Display Timer
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_TIMER)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_TIMER)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_TIMER_TP),
                 getFunc = function() return CI.SV.CastBarTimer end,
                 setFunc = function(value) CI.SV.CastBarTimer = value end,
@@ -568,7 +568,7 @@ function CI.CreateSettings()
                 -- Cast Bar Font Face
                 type = "dropdown",
                 scrollable = true,
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_FONTFACE)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_FONTFACE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_FONTFACE_TP),
                 choices = FontsList,
                 sort = "name-up",
@@ -581,7 +581,7 @@ function CI.CreateSettings()
             {
                 -- Cast Bar Font Size
                 type = "slider",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSIZE)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSIZE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSIZE_TP),
                 min = 10, max = 30, step = 1,
                 getFunc = function() return CI.SV.CastBarFontSize end,
@@ -593,7 +593,7 @@ function CI.CreateSettings()
             {
                 -- Cast Bar Font Style
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSTYLE)),
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSTYLE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
@@ -607,7 +607,7 @@ function CI.CreateSettings()
                 -- Cast Bar Texture
                 type = "dropdown",
                 scrollable = true,
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_TEXTURE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_TEXTURE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_TEXTURE_TP),
                 choices = StatusbarTexturesList,
                 sort = "name-up",
@@ -620,7 +620,7 @@ function CI.CreateSettings()
             {
                 -- Cast Bar Gradient Color 1
                 type    = "colorpicker",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC1)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC1)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC1_TP),
                 getFunc = function() return unpack(CI.SV.CastBarGradientC1) end,
                 setFunc = function(r, g, b, a) CI.SV.CastBarGradientC1 = { r, g, b, a } CI.UpdateCastBar() end,
@@ -631,7 +631,7 @@ function CI.CreateSettings()
             {
                 -- Cast Bar Gradient Color 2
                 type    = "colorpicker",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2_TP),
                 getFunc = function() return unpack(CI.SV.CastBarGradientC2) end,
                 setFunc = function(r, g, b, a) CI.SV.CastBarGradientC2 = { r, g, b, a } CI.UpdateCastBar() end,
@@ -687,7 +687,7 @@ function CI.CreateSettings()
                 -- Alert Font Face
                 type = "dropdown",
                 scrollable = true,
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_FONTFACE_TP),
                 choices = FontsList,
                 sort = "name-up",
@@ -700,7 +700,7 @@ function CI.CreateSettings()
             {
                     -- Alert Font Size
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_FONTSIZE_TP),
                 min = 16, max = 64, step = 1,
                 getFunc = function() return CI.SV.alerts.toggles.alertFontSize end,
@@ -712,7 +712,7 @@ function CI.CreateSettings()
             {
                 -- Alert Font Style
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
@@ -725,7 +725,7 @@ function CI.CreateSettings()
             {
                 -- Alert Timer
                 type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_TIMER_TOGGLE)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_TIMER_TOGGLE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_TIMER_TOGGLE_TP),
                 getFunc = function() return CI.SV.alerts.toggles.alertTimer end,
                 setFunc = function(v) CI.SV.alerts.toggles.alertTimer = v end,
@@ -735,7 +735,7 @@ function CI.CreateSettings()
             {
                 -- Shared Timer Color
                 type    = "colorpicker",
-                name    = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_TIMER_COLOR)),
+                name    = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_TIMER_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_TIMER_COLOR_TP),
                 getFunc = function() return unpack(CI.SV.alerts.colors.alertTimer) end,
                 setFunc = function(r, g, b, a) CI.SV.alerts.colors.alertTimer = { r, g, b, a } CI.SetAlertColors() end,
@@ -745,7 +745,7 @@ function CI.CreateSettings()
             {
                 -- Shared Label Color
                 type    = "colorpicker",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_COLOR_BASE)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_COLOR_BASE)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_COLOR_BASE_TP),
                 getFunc = function() return unpack(CI.SV.alerts.colors.alertShared) end,
                 setFunc = function(r, g, b, a) CI.SV.alerts.colors.alertShared = { r, g, b, a } CI.SetAlertColors() end,
@@ -761,7 +761,7 @@ function CI.CreateSettings()
             {
                 -- Mitigation Aura
                 type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_AURA)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_AURA)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_AURA_TP),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationAura end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationAura = v end,
@@ -771,7 +771,7 @@ function CI.CreateSettings()
             {
                 -- Mitigation Rank 3
                 type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_RANK3)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_RANK3)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RANK3_TP),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationRank3 end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationRank3 = v end,
@@ -781,7 +781,7 @@ function CI.CreateSettings()
             {
                 -- Mitigation Rank 2
                 type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_RANK2)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_RANK2)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RANK2_TP),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationRank2 end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationRank2 = v end,
@@ -791,7 +791,7 @@ function CI.CreateSettings()
             {
                 -- Mitigation Rank 1
                 type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_RANK1)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_RANK1)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RANK1_TP),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationRank1 end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationRank1 = v end,
@@ -801,7 +801,7 @@ function CI.CreateSettings()
             {
                 -- Mitigation Dungeon
                 type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_DUNGEON)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_DUNGEON)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_DUNGEON_TP),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationDungeon end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationDungeon = v end,
@@ -842,7 +842,7 @@ function CI.CreateSettings()
             {
                 -- Show Mitigation Suffix
                 type    = "checkbox",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_SUFFIX)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_SUFFIX)),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_SUFFIX_TP),
                 getFunc = function() return CI.SV.alerts.toggles.showMitigation end,
                 setFunc = function(v) CI.SV.alerts.toggles.showMitigation = v end,
@@ -852,8 +852,8 @@ function CI.CreateSettings()
             {
                 -- Mitigation Prefix (No Name)
                 type    = "editbox",
-                name    = strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
-                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
+                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
+                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationPrefix end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationPrefix = v end,
                 disabled = function() return not CI.SV.alerts.toggles.showAlertMitigate end,
@@ -862,8 +862,8 @@ function CI.CreateSettings()
             {
                 -- Mitigation Prefix (Name)
                 type    = "editbox",
-                name    = strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
-                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
+                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
+                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationPrefixN end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationPrefixN = v end,
                 disabled = function() return not CI.SV.alerts.toggles.showAlertMitigate end,
@@ -889,7 +889,7 @@ function CI.CreateSettings()
                 -- Block Format
                 type    = "editbox",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_TP),
                 getFunc = function() return CI.SV.alerts.formats.alertBlock end,
                 setFunc = function(v) CI.SV.alerts.formats.alertBlock = v end,
@@ -900,7 +900,7 @@ function CI.CreateSettings()
                 -- Block Stagger Format
                 type    = "editbox",
                 width   = "half",
-                name    = strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK_S)),
+                name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK_S)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_S_TP),
                 getFunc = function() return CI.SV.alerts.formats.alertBlockStagger end,
                 setFunc = function(v) CI.SV.alerts.formats.alertBlockStagger = v end,
@@ -996,7 +996,7 @@ function CI.CreateSettings()
             {
                 -- Unmit Enable
                 type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_UNMIT_TP),
                 getFunc = function() return CI.SV.alerts.toggles.showAlertUnmit end,
                 setFunc = function(v) CI.SV.alerts.toggles.showAlertUnmit = v end,
@@ -1030,7 +1030,7 @@ function CI.CreateSettings()
             {
                 -- Power Enable
                 type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP),
                 getFunc = function() return CI.SV.alerts.toggles.showAlertPower end,
                 setFunc = function(v) CI.SV.alerts.toggles.showAlertPower = v end,
@@ -1050,8 +1050,8 @@ function CI.CreateSettings()
             {
                 -- Prefix Power (No Name)
                 type    = "editbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
-                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
+                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationPowerPrefix2 end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationPowerPrefix2 = v end,
                 disabled = function() return not (CI.SV.alerts.toggles.alertEnable and CI.SV.alerts.toggles.showAlertPower) end,
@@ -1060,8 +1060,8 @@ function CI.CreateSettings()
             {
                 -- Prefix Power (Name)
                 type    = "editbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
-                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
+                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationPowerPrefixN2 end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationPowerPrefixN2 = v end,
                 disabled = function() return not (CI.SV.alerts.toggles.alertEnable and CI.SV.alerts.toggles.showAlertPower) end,
@@ -1084,7 +1084,7 @@ function CI.CreateSettings()
             {
                 -- Destroy Enable
                 type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP),
                 getFunc = function() return CI.SV.alerts.toggles.showAlertDestroy end,
                 setFunc = function(v) CI.SV.alerts.toggles.showAlertDestroy = v end,
@@ -1104,8 +1104,8 @@ function CI.CreateSettings()
             {
                 -- Prefix Destroy (No Name)
                 type    = "editbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
-                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
+                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationDestroyPrefix2 end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationDestroyPrefix2 = v end,
                 disabled = function() return not (CI.SV.alerts.toggles.alertEnable and CI.SV.alerts.toggles.showAlertDestroy) end,
@@ -1114,8 +1114,8 @@ function CI.CreateSettings()
             {
                 -- Prefix Destroy (Name)
                 type    = "editbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
-                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
+                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationDestroyPrefixN2 end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationDestroyPrefixN2 = v end,
                 disabled = function() return not (CI.SV.alerts.toggles.alertEnable and CI.SV.alerts.toggles.showAlertDestroy) end,
@@ -1138,7 +1138,7 @@ function CI.CreateSettings()
             {
                 -- Summon Enable
                 type    = "checkbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_SUMMON_TP),
                 getFunc = function() return CI.SV.alerts.toggles.showAlertSummon end,
                 setFunc = function(v) CI.SV.alerts.toggles.showAlertSummon = v end,
@@ -1158,8 +1158,8 @@ function CI.CreateSettings()
             {
                 -- Prefix Summon (No Name)
                 type    = "editbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
-                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
+                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationSummonPrefix2 end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationSummonPrefix2 = v end,
                 disabled = function() return not (CI.SV.alerts.toggles.alertEnable and CI.SV.alerts.toggles.showAlertSummon) end,
@@ -1168,8 +1168,8 @@ function CI.CreateSettings()
             {
                 -- Prefix Summon (Name)
                 type    = "editbox",
-                name    = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
-                tooltip = strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
+                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
+                tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
                 getFunc = function() return CI.SV.alerts.toggles.mitigationSummonPrefixN2 end,
                 setFunc = function(v) CI.SV.alerts.toggles.mitigationSummonPrefixN2 = v end,
                 disabled = function() return not (CI.SV.alerts.toggles.alertEnable and CI.SV.alerts.toggles.showAlertSummon) end,

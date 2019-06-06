@@ -6,8 +6,7 @@
 LUIE.CombatTextDeathViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextDeathViewer
 
-local callLater = zo_callLater
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 local poolTypes = LUIE.CombatTextConstants.poolType
 
@@ -23,7 +22,7 @@ function CTV:OnEvent(unitTag)
 
     local S = LUIE.CombatText.SV
 
-	local name = strformat(SI_UNIT_NAME, GetUnitName(unitTag))
+	local name = zo_strformat(SI_UNIT_NAME, GetUnitName(unitTag))
 
     --Label setup
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
@@ -57,7 +56,7 @@ function CTV:OnEvent(unitTag)
     animation:Play()
 
     --Add items back into pool after animation
-    callLater(function()
+    zo_callLater(function()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activePoints = self.activePoints - 1

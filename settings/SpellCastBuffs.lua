@@ -5,7 +5,7 @@
 
 local SCB = LUIE.SpellCastBuffs
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 local optionsDataBuffsDebuffs = {}
 
@@ -27,7 +27,7 @@ local function GenerateCustomList(input)
         counter = counter + 1
         -- If the input is a numeric value then we can pull this abilityId's info.
         if type(id) == "number" then
-            options[counter] = zo_iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. strformat("<<C:1>>", GetAbilityName(id))
+            options[counter] = zo_iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. zo_strformat("<<C:1>>", GetAbilityName(id))
         -- If the input is not numeric then add this as a name only.
         else
             options[counter] = id
@@ -55,8 +55,8 @@ function SCB.CreateSettings()
 
     local panelDataBuffsDebuffs = {
         type = "panel",
-        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_BUFFSDEBUFFS)),
-        displayName = strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_BUFFSDEBUFFS)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_BUFFSDEBUFFS)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_BUFFSDEBUFFS)),
         author = LUIE.author,
         version = LUIE.version,
         website = LUIE.website,
@@ -126,7 +126,7 @@ function SCB.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF_TP),
                 getFunc = function() return SCB.SV.HidePlayerBuffs end,
                 setFunc = function(value) SCB.SV.HidePlayerBuffs = value end,
@@ -136,7 +136,7 @@ function SCB.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF_TP),
                 getFunc = function() return SCB.SV.HidePlayerDebuffs end,
                 setFunc = function(value) SCB.SV.HidePlayerDebuffs = value end,
@@ -146,7 +146,7 @@ function SCB.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF_TP),
                 getFunc = function() return SCB.SV.HideTargetBuffs end,
                 setFunc = function(value) SCB.SV.HideTargetBuffs = value end,
@@ -156,7 +156,7 @@ function SCB.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF_TP),
                 getFunc = function() return SCB.SV.HideTargetDebuffs end,
                 setFunc = function(value) SCB.SV.HideTargetDebuffs = value end,
@@ -166,7 +166,7 @@ function SCB.CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TP),
                 getFunc = function() return SCB.SV.HideGroundEffects end,
                 setFunc = function(value) SCB.SV.HideGroundEffects = value end,
@@ -177,7 +177,7 @@ function SCB.CreateSettings()
             {
                 -- Ground Damage Auras
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOW_GROUND_DAMAGE_TP),
                 getFunc = function() return SCB.SV.GroundDamageAura end,
                 setFunc = function(value) SCB.SV.GroundDamageAura = value SCB.ReloadEffects("player") end,
@@ -188,7 +188,7 @@ function SCB.CreateSettings()
             {
                  -- Add Extra
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS_TP),
                 getFunc = function() return SCB.SV.ExtraBuffs end,
                 setFunc = function(value) SCB.SV.ExtraBuffs = value SCB.ReloadEffects("player") end,
@@ -199,7 +199,7 @@ function SCB.CreateSettings()
             {
                 -- Consolidate
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE_TP),
                 getFunc = function() return SCB.SV.ExtraConsolidate end,
                 setFunc = function(value) SCB.SV.ExtraConsolidate = value SCB.ReloadEffects("player") end,
@@ -210,7 +210,7 @@ function SCB.CreateSettings()
             {
                 -- Extra Expanded
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_EXTEND_EXTRA)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_EXTEND_EXTRA)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_EXTEND_EXTRA_TP),
                 getFunc = function() return SCB.SV.ExtraExpanded end,
                 setFunc = function(value) SCB.SV.ExtraExpanded = value SCB.ReloadEffects("player") end,
@@ -221,7 +221,7 @@ function SCB.CreateSettings()
             {
                 -- Reduce
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_BUFF_REDUCE)),
+                name = zo_strformat(GetString(SI_LUIE_LAM_BUFF_REDUCE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_REDUCE_TP),
                 getFunc = function() return SCB.SV.HideReduce end,
                 setFunc = function(value) SCB.SV.HideReduce = value SCB.ReloadEffects("player") end,
@@ -263,7 +263,7 @@ function SCB.CreateSettings()
             {
                 -- Buff Label Position
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LABEL_POSITION_TP),
                 min = -64, max = 64, step = 2,
                 getFunc = function() return SCB.SV.LabelPosition end,
@@ -276,7 +276,7 @@ function SCB.CreateSettings()
                 -- Buff Label Font
                 type = "dropdown",
                 scrollable = true,
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_FONT_TP),
                 choices = FontsList,
                 sort = "name-up",
@@ -289,7 +289,7 @@ function SCB.CreateSettings()
             {
                 -- Buff Font Size
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_FONTSIZE_TP),
                 min = 10, max = 30, step = 1,
                 getFunc = function() return SCB.SV.BuffFontSize end,
@@ -301,7 +301,7 @@ function SCB.CreateSettings()
             {
                 -- Buff Font Style
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
@@ -314,7 +314,7 @@ function SCB.CreateSettings()
             {
                 -- Buff Colored Label
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LABELCOLOR_TP),
                 getFunc = function() return SCB.SV.RemainingTextColoured end,
                 setFunc = function(value) SCB.SV.RemainingTextColoured = value SCB.Reset() end,
@@ -325,7 +325,7 @@ function SCB.CreateSettings()
             {
                 -- Buff Show Seconds Fractions
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
                 getFunc = function() return SCB.SV.RemainingTextMillis end,
                 setFunc = function(value) SCB.SV.RemainingTextMillis = value end,
@@ -412,7 +412,7 @@ function SCB.CreateSettings()
             {
                 -- Sticky Tooltip Slider
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_TOOLTIP_STICKY)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_TOOLTIP_STICKY)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_TOOLTIP_STICKY_TP),
                 min = 0, max = 5000, step = 100,
                 getFunc = function() return SCB.SV.TooltipSticky end,
@@ -464,7 +464,7 @@ function SCB.CreateSettings()
             {
                 -- Container orientation
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER_TP),
                 choices = rotationOptions,
                 getFunc = function() return rotationOptions[SCB.SV.LongTermEffectsSeparateAlignment] end,
@@ -477,7 +477,7 @@ function SCB.CreateSettings()
             {
                 -- Vertical Long Term Icons Alignment
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERT)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERT)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERT_TP),
                 choices = { "Top", "Middle", "Bottom" },
                 getFunc = function() return SCB.SV.AlignmentLongVert end,
@@ -489,7 +489,7 @@ function SCB.CreateSettings()
             {
                 -- Horizontal Long Term Icons Alignment
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_HORIZ)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_HORIZ)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_HORIZ_TP),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function() return SCB.SV.AlignmentLongHorz end,
@@ -501,7 +501,7 @@ function SCB.CreateSettings()
             {
                 -- Long Term Reverse Sort Order
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_REVERSE_ORDER)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_REVERSE_ORDER)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_REVERSE_ORDER_TP),
                 getFunc = function() return SCB.SV.LongTermEffectsReverse end,
                 setFunc = function(value) SCB.SV.LongTermEffectsReverse = value SCB.Reset() end,
@@ -553,7 +553,7 @@ function SCB.CreateSettings()
             {
                 -- Use Generic Mount Icon
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_ICON_TP),
                 getFunc = function() return SCB.SV.MountGenericIcon end,
                 setFunc = function(value) SCB.SV.MountGenericIcon = value SCB.OnPlayerActivated() end,
@@ -993,7 +993,7 @@ function SCB.CreateSettings()
                 -- Prominent Buffs Label Font Face
                 type = "dropdown",
                 scrollable = true,
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_FONTFACE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_FONTFACE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_FONTFACE_TP),
                 choices = FontsList,
                 sort = "name-up",
@@ -1006,7 +1006,7 @@ function SCB.CreateSettings()
             {
                 -- Prominent Buffs Label Font Size
                 type = "slider",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_FONTSIZE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_FONTSIZE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_FONTSIZE_TP),
                 min = 10, max = 30, step = 1,
                 getFunc = function() return SCB.SV.ProminentLabelFontSize end,
@@ -1018,7 +1018,7 @@ function SCB.CreateSettings()
             {
                 -- Prominent Buffs Label Font Style
                 type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_FONTSTYLE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_FONTSTYLE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
@@ -1043,7 +1043,7 @@ function SCB.CreateSettings()
                 -- Prominent Buffs Progress Bar Texture
                 type = "dropdown",
                 scrollable = true,
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE)),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE_TP),
                 choices = StatusbarTexturesList,
                 sort = "name-up",
@@ -1056,7 +1056,7 @@ function SCB.CreateSettings()
             {
                 -- Prominent Buffs Gradient Color 1
                 type    = "colorpicker",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF1)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF1)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF1_TP),
                 getFunc = function() return unpack(SCB.SV.ProminentProgressBuffC1) end,
                 setFunc = function(r, g, b, a) SCB.SV.ProminentProgressBuffC1 = { r, g, b, a } SCB.Reset() end,
@@ -1067,7 +1067,7 @@ function SCB.CreateSettings()
             {
                 -- Prominent Buffs Gradient Color 2
                 type    = "colorpicker",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF2)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF2)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF2_TP),
                 getFunc = function() return unpack(SCB.SV.ProminentProgressBuffC2) end,
                 setFunc = function(r, g, b, a) SCB.SV.ProminentProgressBuffC2 = { r, g, b, a } SCB.Reset() end,
@@ -1078,7 +1078,7 @@ function SCB.CreateSettings()
             {
                 -- Prominent Debuffs Gradient Color 1
                 type    = "colorpicker",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1_TP),
                 getFunc = function() return unpack(SCB.SV.ProminentProgressDebuffC1) end,
                 setFunc = function(r, g, b, a) SCB.SV.ProminentProgressDebuffC1 = { r, g, b, a } SCB.Reset() end,
@@ -1089,7 +1089,7 @@ function SCB.CreateSettings()
             {
                 -- Prominent Debuffs Gradient Color 2
                 type    = "colorpicker",
-                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2)),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2_TP),
                 getFunc = function() return unpack(SCB.SV.ProminentProgressDebuffC2) end,
                 setFunc = function(r, g, b, a) SCB.SV.ProminentProgressDebuffC2 = { r, g, b, a } SCB.Reset() end,

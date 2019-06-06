@@ -9,7 +9,6 @@ local CT = LUIE.CombatText
 
 local LMP = LibStub("LibMediaProvider-1.0")
 
-
 local moduleName = LUIE.name .. "_CombatText"
 
 local panelTitles = {

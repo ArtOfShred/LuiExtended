@@ -2,10 +2,12 @@
 LuiExtended wouldn't be where it was without the contributions of other users and addon authors!
 
 - Spellbuilder <esoui.com> - The original mastermind behind LuiExtended - we wouldn't be here without him!
-- KiriX <esoui.com> - Vast majority of RU translation effort
-- "@amanozako" - Additional RU translation
 - Eearslya Sleiarion <github.com> - Various component fixes and added options
 - SilverWF <esoui.com> - Updating the role color & icon functions in UnitFrames for LuiExtended 5.6.1 after a API changes
+
+## Translation
+- KiriX <esoui.com> - Vast majority of RU translation effort
+- Amanozako - Additional RU translation
 
 ## Module / Component Contributions
 - Combat Text: This module was originally sourced from Combat Cloud by Samantha James (Sideshow <esoui.com>). The vast majority of the code is written by Sideshow and has been updated with new features and implemented into LuiExtended. Thanks to Sideshow for the incredible Combat Cloud addon!

@@ -6,8 +6,6 @@
 LUIE.CombatTextPointEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextPointEventViewer
 
-local callLater = zo_callLater
-
 local poolTypes = LUIE.CombatTextConstants.poolType
 local pointTypes = LUIE.CombatTextConstants.pointType
 
@@ -74,7 +72,7 @@ function CTV:OnEvent(pointType, value)
     animation:Play()
 
     --Add items back into pool after animation
-    callLater(function()
+    zo_callLater(function()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activePoints = self.activePoints - 1

@@ -5,7 +5,7 @@
 
 local SC = LUIE.SlashCommands
 
-local strformat = zo_strformat
+local zo_strformat = zo_strformat
 
 local optionsDataSlashCommands = {}
 
@@ -16,8 +16,8 @@ function SC.CreateSettings()
 
     local panelDataSlashCommands = {
         type = "panel",
-        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_SLASHCMDS)),
-        displayName = strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_SLASHCMDS)),
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_SLASHCMDS)),
+        displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(SI_LUIE_LAM_SLASHCMDS)),
         author = LUIE.author,
         version = LUIE.version,
         website = LUIE.website,
@@ -83,7 +83,7 @@ function SC.CreateSettings()
                 -- SlashBanker
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER),
-                tooltip = strformat(GetString(SI_LUIE_LAM_SLASHCMDS_BANKER_TP), GetCollectibleName(267)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_BANKER_TP), GetCollectibleName(267)),
                 getFunc = function() return SC.SV.SlashBanker end,
                 setFunc = function(value) SC.SV.SlashBanker = value SC.RegisterSlashCommands() end,
                 width = "full",
@@ -93,7 +93,7 @@ function SC.CreateSettings()
                 -- SlashMerchant
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT),
-                tooltip = strformat(GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP), GetCollectibleName(301)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP), GetCollectibleName(301)),
                 getFunc = function() return SC.SV.SlashMerchant end,
                 setFunc = function(value) SC.SV.SlashMerchant = value SC.RegisterSlashCommands() end,
                 width = "full",
@@ -103,7 +103,7 @@ function SC.CreateSettings()
                 -- SlashFence
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_FENCE),
-                tooltip = strformat(GetString(SI_LUIE_LAM_SLASHCMDS_FENCE_TP), GetCollectibleName(300)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_SLASHCMDS_FENCE_TP), GetCollectibleName(300)),
                 getFunc = function() return SC.SV.SlashFence end,
                 setFunc = function(value) SC.SV.SlashFence = value SC.RegisterSlashCommands() end,
                 width = "full",
