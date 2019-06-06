@@ -452,7 +452,7 @@ CC.LavaAlerts = {
     [19224] = true, -- In Lava (Halls of Torment)
     [11338] = true, -- In Lava (The Earth Forge)
     [56277] = true, -- Lava (City of Ash II)
-	[5140] = true, -- Lava (Dragonstar Arena)
+    [5140] = true, -- Lava (Dragonstar Arena)
 
     [17314] = true, -- Fire Trap (Player)
 
@@ -467,18 +467,18 @@ CC.LavaAlerts = {
     [37438] = true, -- Shocked (The Grips of Madness)
     [36766] = true, -- Q4842 Stun Headgrab Knockback (The Unquiet Dead)
 
-	--------------
+    --------------
     -- Arenas ----
     --------------
 
     -- Dragonstar Arena
     [53341] = true, -- Biting Cold (Player)
     [60421] = true, -- Biting Cold (Player)
-	[54405] = true, -- Celestial Blast (Player)
+    [54405] = true, -- Celestial Blast (Player)
 
-	-- Maelstrom Arena
-	[72525] = true, -- Frigid Waters (Player)
-	[67808] = true, -- Frigid Waters (Player)
+    -- Maelstrom Arena
+    [72525] = true, -- Frigid Waters (Player)
+    [67808] = true, -- Frigid Waters (Player)
 
     --------------
     -- Dungeons --
@@ -521,15 +521,15 @@ CC.UnbreakableList ={
     [36766] = true, -- Q4842 Stun Headgrab Knockback (The Unquiet Dead)
     [33384] = true, -- Q4586 Aranias Vine Stun (The Witch of Silatar)
 
-	-----------------
+    -----------------
     -- ARENAS
     -----------------
 
-	-- Dragonstar Arena
-	[54405] = true, -- Celestial Blast (Player)
+    -- Dragonstar Arena
+    [54405] = true, -- Celestial Blast (Player)
 
-	-- Maelstrom Arena
-	[71720] = true, -- Stun (Matriarch Runa)
+    -- Maelstrom Arena
+    [71720] = true, -- Stun (Matriarch Runa)
 
     -----------------
     -- DUNGEONS
@@ -594,10 +594,10 @@ CC.UnbreakableList ={
     [61444] = true, -- Shocked (Praxin Douare)
     [32100] = true, -- Arachnophobia (Vorenor Winterbourne)
 
-	-- Wayrest Sewers I
-	[48932] = true, -- Backlash (Investigator Garron)
-	[25531] = true, -- Tidal Slash (Varaine Pellingare)
-	[35051] = true, -- Penetrating Daggers (Allene Pellingare)
+    -- Wayrest Sewers I
+    [48932] = true, -- Backlash (Investigator Garron)
+    [25531] = true, -- Tidal Slash (Varaine Pellingare)
+    [35051] = true, -- Penetrating Daggers (Allene Pellingare)
 
     -- Frostvault
     [116666] = true, -- Skeletal Smash (Icestalker) -- Frostvault
@@ -627,13 +627,13 @@ CC.IgnoreList ={
     [38108] = true, -- Q4868 Sheo Teleports Player (The Grips of Madness)
     [35645] = true, -- Q4768 PC Tribunal Layer 2 Stun (Scars Never Fade)
 
-	----------------
-	-- Arenas
-	----------------
+    ----------------
+    -- Arenas
+    ----------------
 
     -- Dragonstar Arena
-	[55221] = true, -- Sucked Under (Player)
-	[55641] = true, -- Stun (Light of Boethia)
+    [55221] = true, -- Sucked Under (Player)
+    [55641] = true, -- Stun (Light of Boethia)
 
     ----------------
     -- Dungeons

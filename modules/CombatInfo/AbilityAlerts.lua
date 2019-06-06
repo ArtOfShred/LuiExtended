@@ -48,17 +48,17 @@ end
 
 -- Set Alert Colors
 function CI.SetAlertColors()
-	local colors = CI.SV.alerts.colors
-	CI.AlertColors = {
-		alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlockA)):ToHex(),
-		alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodgeA)):ToHex(),
-		alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoidB)):ToHex(),
-		alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterruptB)):ToHex(),
-		alertColorUnmit	= ZO_ColorDef:New(unpack(colors.alertUnmit)):ToHex(),
-		alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
-		alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex(),
-		alertColorSummon = ZO_ColorDef:New(unpack(colors.alertSummon)):ToHex(),
-	}
+    local colors = CI.SV.alerts.colors
+    CI.AlertColors = {
+        alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlockA)):ToHex(),
+        alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodgeA)):ToHex(),
+        alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoidB)):ToHex(),
+        alertColorInterrupt = ZO_ColorDef:New(unpack(colors.alertInterruptB)):ToHex(),
+        alertColorUnmit = ZO_ColorDef:New(unpack(colors.alertUnmit)):ToHex(),
+        alertColorPower = ZO_ColorDef:New(unpack(colors.alertPower)):ToHex(),
+        alertColorDestroy = ZO_ColorDef:New(unpack(colors.alertDestroy)):ToHex(),
+        alertColorSummon = ZO_ColorDef:New(unpack(colors.alertSummon)):ToHex(),
+    }
 end
 
 -- Called from menu when font size/face, etc is changed
@@ -903,7 +903,7 @@ function CI.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, 
     local S = CI.SV.alerts
 
     local labelColor = S.colors.alertShared
-	local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
+    local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
 
     if (alertType == alertTypes.SHARED) then
         local spacer = "-"
@@ -917,71 +917,71 @@ function CI.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, 
         -- PRIORITY: INTERRUPT > BLOCK STAGGER > DODGE > BLOCK > AVOID
         if blockstagger then block = false end
 
-		if S.toggles.showMitigation then
-			if avoid then
-				local color = CI.AlertColors.alertColorAvoid
-				stringAvoid = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertAvoid, spacer)
-			else
-				stringAvoid = ""
-			end
+        if S.toggles.showMitigation then
+            if avoid then
+                local color = CI.AlertColors.alertColorAvoid
+                stringAvoid = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertAvoid, spacer)
+            else
+                stringAvoid = ""
+            end
 
-			if block then
-				local color = CI.AlertColors.alertColorBlock
-				stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlock, spacer)
-			end
+            if block then
+                local color = CI.AlertColors.alertColorBlock
+                stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlock, spacer)
+            end
 
-			if dodge then
-				local color = CI.AlertColors.alertColorDodge
-				stringDodge = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertDodge, spacer)
-			else
-				stringDodge = ""
-			end
+            if dodge then
+                local color = CI.AlertColors.alertColorDodge
+                stringDodge = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertDodge, spacer)
+            else
+                stringDodge = ""
+            end
 
-			if blockstagger then
-				local color = CI.AlertColors.alertColorBlock
-				stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlockStagger, spacer)
-			end
+            if blockstagger then
+                local color = CI.AlertColors.alertColorBlock
+                stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlockStagger, spacer)
+            end
 
-			if interrupt then
-				local color = CI.AlertColors.alertColorInterrupt
-				stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertInterrupt, spacer)
-			else
-				stringInterrupt = ""
-			end
+            if interrupt then
+                local color = CI.AlertColors.alertColorInterrupt
+                stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertInterrupt, spacer)
+            else
+                stringInterrupt = ""
+            end
 
-			if not block and not blockstagger then
-				stringBlock = ""
-			end
-		end
+            if not block and not blockstagger then
+                stringBlock = ""
+            end
+        end
 
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = S.toggles.showMitigation and zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt) or ""
 
         text = zo_strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
-	-- UNMIT
-	elseif (alertType == alertTypes.UNMIT) then
-		local color = CI.AlertColors.alertColorUnmit
-		textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
+    -- UNMIT
+    elseif (alertType == alertTypes.UNMIT) then
+        local color = CI.AlertColors.alertColorUnmit
+        textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertUnmit)
-		text = zo_strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
+        text = zo_strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
     -- POWER
     elseif (alertType == alertTypes.POWER) then
         local color = CI.AlertColors.alertColorPower
-		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPowerPrefixN2 or S.toggles.mitigationPowerPrefix2
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPowerPrefixN2 or S.toggles.mitigationPowerPrefix2
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertPower)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- DESTROY
     elseif (alertType == alertTypes.DESTROY) then
         local color = CI.AlertColors.alertColorDestroy
-		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationDestroyPrefixN2 or S.toggles.mitigationDestroyPrefix2
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationDestroyPrefixN2 or S.toggles.mitigationDestroyPrefix2
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertDestroy)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- SUMMON
     elseif (alertType == alertTypes.SUMMON) then
         local color = CI.AlertColors.alertColorSummon
-		prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationSummonPrefixN2 or S.toggles.mitigationSummonPrefix2
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationSummonPrefixN2 or S.toggles.mitigationSummonPrefix2
         textName = CI.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
         textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertSummon)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
