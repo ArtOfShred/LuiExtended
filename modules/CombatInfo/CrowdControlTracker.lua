@@ -122,11 +122,6 @@ function CCT.Initialize()
     end
 end
 
-
-
-
-
-
 function CCT.UpdateAOEList()
 
     local priority = 0 -- Counter for priority, we increment by one for each active category added
@@ -185,20 +180,16 @@ function CCT.UpdateAOEList()
 
 end
 
-
-
-
-
 function CCT.PlaySoundAoe(abilityId)
     -- I hope you like inline conditionals, because we've got them for days!
     -- If we have sound enabled for the type of AOE this ability is then fetch it.
-    local playSound =  ( (CC.aoePlayerUltimate[abilityId] and CI.SV.cct.aoePlayerUltimateSoundToggle) and CI.SV.cct.aoePlayerUltimateSound )
-                    or ( (CC.aoePlayerNormal[abilityId] and CI.SV.cct.aoePlayerNormalSoundToggle) and CI.SV.cct.aoePlayerNormalSound )
-                    or ( (CC.aoePlayerSet[abilityId] and CI.SV.cct.aoePlayerSetSoundToggle) and CI.SV.cct.aoePlayerSetSound )
-                    or ( (CC.aoeTraps[abilityId] and CI.SV.cct.aoeTrapsSoundToggle) and CI.SV.cct.aoeTrapsSound )
-                    or ( (CC.aoeNPCBoss[abilityId] and CI.SV.cct.aoeNPCBossSoundToggle) and CI.SV.cct.aoeNPCBossSound )
-                    or ( (CC.aoeNPCElite[abilityId] and CI.SV.cct.aoeNPCEliteSoundToggle) and CI.SV.cct.aoeNPCEliteSound )
-                    or ( (CC.aoeNPCNormal[abilityId] and CI.SV.cct.aoeNPCNormalSoundToggle) and CI.SV.cct.aoeNPCNormalSound )
+    local playSound =  ((CC.aoePlayerUltimate[abilityId] and CI.SV.cct.aoePlayerUltimateSoundToggle) and CI.SV.cct.aoePlayerUltimateSound)
+                    or ((CC.aoePlayerNormal[abilityId] and CI.SV.cct.aoePlayerNormalSoundToggle) and CI.SV.cct.aoePlayerNormalSound)
+                    or ((CC.aoePlayerSet[abilityId] and CI.SV.cct.aoePlayerSetSoundToggle) and CI.SV.cct.aoePlayerSetSound)
+                    or ((CC.aoeTraps[abilityId] and CI.SV.cct.aoeTrapsSoundToggle) and CI.SV.cct.aoeTrapsSound)
+                    or ((CC.aoeNPCBoss[abilityId] and CI.SV.cct.aoeNPCBossSoundToggle) and CI.SV.cct.aoeNPCBossSound)
+                    or ((CC.aoeNPCElite[abilityId] and CI.SV.cct.aoeNPCEliteSoundToggle) and CI.SV.cct.aoeNPCEliteSound)
+                    or ((CC.aoeNPCNormal[abilityId] and CI.SV.cct.aoeNPCNormalSoundToggle) and CI.SV.cct.aoeNPCNormalSound)
 
     -- If we found a sound, then play it (twice so it's a bit louder)
     if playSound then
@@ -209,53 +200,7 @@ function CCT.PlaySoundAoe(abilityId)
     end
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
--- GAP between INIT and code for now
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function LUIE_CCTracker_SavePosition()
+function CCT.SavePosition()
     local coordX, coordY = LUIE_CCTracker:GetCenter()
     CI.SV.cct.offsetX = coordX - (GuiRoot:GetWidth() / 2)
     CI.SV.cct.offsetY = coordY - (GuiRoot:GetHeight() / 2)
@@ -263,7 +208,7 @@ function LUIE_CCTracker_SavePosition()
     LUIE_CCTracker:SetAnchor(CENTER, GuiRoot, CENTER, CI.SV.cct.offsetX, CI.SV.cct.offsetY)
 end
 
-function LUIE_CCTracker_OnUpdate(control)
+function CCT.OnUpdate(control)
     if CCT.Timer == 0 or not CCT.Timer then
         return
     end

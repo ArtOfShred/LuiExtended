@@ -274,13 +274,13 @@ local CooldownMethod = {
 }
 
 -- Module initialization
-function CI.Initialize( enabled )
+function CI.Initialize(enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
     if isCharacterSpecific then
-        CI.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "CombatInfo", CI.D )
+        CI.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, "CombatInfo", CI.D)
     else
-        CI.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "CombatInfo", CI.D )
+        CI.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, "CombatInfo", CI.D)
     end
 
     -- If User does not want the Combat Info then exit right here
@@ -290,27 +290,27 @@ function CI.Initialize( enabled )
     CI.ApplyFont()
     CI.ApplyProcSound()
 
-    uiQuickSlot.label = UI.Label( ActionButton9, {CENTER,CENTER}, nil, nil, g_potionFont, nil, true )
+    uiQuickSlot.label = UI.Label(ActionButton9, {CENTER,CENTER}, nil, nil, g_potionFont, nil, true)
     uiQuickSlot.label:SetFont(g_potionFont)
     if CI.SV.PotionTimerColor then
         uiQuickSlot.label:SetColor(unpack(uiQuickSlot.colour))
     else
-        uiQuickSlot.label:SetColor( 1, 1, 1, 1 )
+        uiQuickSlot.label:SetColor(1, 1, 1, 1)
     end
-    uiQuickSlot.label:SetDrawLayer( DL_OVERLAY )
-    uiQuickSlot.label:SetDrawTier( DT_HIGH )
+    uiQuickSlot.label:SetDrawLayer(DL_OVERLAY)
+    uiQuickSlot.label:SetDrawTier(DT_HIGH)
     CI.ResetPotionTimerLabel() -- Set the label position
 
     -- Create Ultimate overlay labels
-    uiUltimate.LabelVal = UI.Label( ActionButton8, {BOTTOM,TOP,0,-3}, nil, {1,2}, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true )
-    uiUltimate.LabelPct = UI.Label( ActionButton8, nil, nil, nil, g_ultimateFont, nil, true )
+    uiUltimate.LabelVal = UI.Label(ActionButton8, {BOTTOM,TOP,0,-3}, nil, {1,2}, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true)
+    uiUltimate.LabelPct = UI.Label(ActionButton8, nil, nil, nil, g_ultimateFont, nil, true)
     local actionButton = ZO_ActionBar_GetButton(8)
     uiUltimate.LabelPct:SetAnchor(TOPLEFT, actionButton.slot)
     uiUltimate.LabelPct:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.UltimateLabelPosition)
 
-    uiUltimate.LabelPct:SetColor( unpack(uiUltimate.colour) )
+    uiUltimate.LabelPct:SetColor(unpack(uiUltimate.colour))
     -- And buff texture
-    uiUltimate.Texture = UI.Texture( ActionButton8, {CENTER,CENTER}, {160,160}, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true )
+    uiUltimate.Texture = UI.Texture(ActionButton8, {CENTER,CENTER}, {160,160}, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true)
 
     CI.RegisterCombatInfo()
 
@@ -334,7 +334,6 @@ function CI.Initialize( enabled )
 end
 
 function CI.HookGCD()
-
     -- Hook to update GCD support
     ActionButton.UpdateUsable = function(self)
         local slotnum = self:GetSlot()
@@ -345,7 +344,7 @@ function CI.HookGCD()
         local usable = false
         if not self.useFailure and not isShowingCooldown then
             usable = true
-        elseif ( isKeyboardUltimateSlot and self.costFailureOnly and not isShowingCooldown ) then
+        elseif (isKeyboardUltimateSlot and self.costFailureOnly and not isShowingCooldown) then
             usable = true
         -- Fix to grey out potions
         elseif IsSlotItemConsumable(slotnum) and duration <= 1000 and not self.useFailure then
@@ -356,7 +355,7 @@ function CI.HookGCD()
             self.isGamepad = isGamepad
         end
         -- Have to move this out of conditional to fix desaturation from getting stuck on icons.
-        local useDesaturation = (isShowingCooldown and CI.SV.GlobalDesat )
+        local useDesaturation = (isShowingCooldown and CI.SV.GlobalDesat)
         ZO_ActionSlot_SetUnusable(self.icon, not usable, useDesaturation)
     end
 
@@ -451,7 +450,6 @@ function CI.HookGCD()
         self.isGlobalCooldown = global
         self:UpdateUsable()
     end
-
 end
 
 -- Helper function to get override ability duration.
@@ -476,16 +474,16 @@ function CI.UpdateBarHighlightTables()
     g_barNoRemove          = {}
 
     local counter = 0
-    for abilityId, _ in pairs (g_barOverrideCI) do
+    for abilityId, _ in pairs(g_barOverrideCI) do
         counter = counter + 1
         local eventName = (moduleName .. "LUIE_CI_CombatEventBar" .. counter)
         eventManager:UnregisterForEvent(eventName, EVENT_COMBAT_EVENT, CI.OnCombatEventBar)
     end
 
     if CI.SV.ShowTriggered or CI.SV.ShowToggled then
-        LUIE.Effects.BarHighlightRefresh()
+        E.BarHighlightRefresh()
         -- Grab any aura's from the list that have on EVENT_COMBAT_EVENT AURA support
-        for abilityId, value in pairs (E.BarHighlightOverride) do
+        for abilityId, value in pairs(E.BarHighlightOverride) do
             if value.showFakeAura == true then
                 if value.newId then
                     g_barOverrideCI[value.newId] = true
@@ -523,40 +521,40 @@ function CI.UpdateBarHighlightTables()
             end
         end
         local counter = 0
-        for abilityId, _ in pairs (g_barOverrideCI) do
+        for abilityId, _ in pairs(g_barOverrideCI) do
             counter = counter + 1
             local eventName = (moduleName .. "LUIE_CI_CombatEventBar" .. counter)
             eventManager:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CI.OnCombatEventBar)
             -- Register filter for specific abilityId's in table only, and filter for source = player, no errors
-            eventManager:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false )
+            eventManager:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false)
         end
     end
 end
 
 -- Clear and then (maybe) re-register event listeners for Combat/Power/Slot Updates
 function CI.RegisterCombatInfo()
-    eventManager:RegisterForUpdate(moduleName.."CI_UPDATE", 100, CI.OnUpdate )
-    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CI.OnPlayerActivated )
+    eventManager:RegisterForUpdate(moduleName.."CI_UPDATE", 100, CI.OnUpdate)
+    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CI.OnPlayerActivated)
 
-    eventManager:UnregisterForEvent(moduleName, EVENT_COMBAT_EVENT )
-    eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE )
-    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED )
-    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED )
+    eventManager:UnregisterForEvent(moduleName, EVENT_COMBAT_EVENT)
+    eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED)
     eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED )
     eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
     if CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
-        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
+        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", EVENT_COMBAT_EVENT, CI.OnCombatEvent)
         eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_BLOCKED_DAMAGE)
         eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, CI.OnPowerUpdatePlayer)
-        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player" )
+        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player")
     end
     if CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled or CI.SV.CastBarEnable then
-        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
+        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", EVENT_COMBAT_EVENT, CI.OnCombatEvent)
         eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)
     end
     if CI.SV.CastBarEnable then
         local counter = 0
-        for result, _ in pairs (CBT.CastBreakingStatus) do
+        for result, _ in pairs(CBT.CastBreakingStatus) do
             counter = counter + 1
             local eventName = (moduleName.. "LUIE_CI_CombatEventCC" .. counter)
             eventManager:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CI.OnCombatEventBreakCast)
@@ -579,8 +577,8 @@ function CI.RegisterCombatInfo()
     end
     if CI.SV.ShowTriggered or CI.SV.ShowToggled then
         eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
-        eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, CI.OnTargetChange )
-        eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, CI.OnReticleTargetChanged )
+        eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, CI.OnTargetChange)
+        eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, CI.OnReticleTargetChanged)
 
         eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, CI.InventoryItemUsed)
 
@@ -594,7 +592,7 @@ function CI.RegisterCombatInfo()
 end
 
 -- Used to populate abilities icons after the user has logged on
-function CI.OnPlayerActivated( eventCode )
+function CI.OnPlayerActivated(eventCode)
     -- do not call this function for the second time
     eventManager:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED )
 
@@ -611,7 +609,7 @@ local playerZ = 0
 -- Updates all floating labels. Called every 100ms
 function CI.OnUpdate(currentTime)
     -- Procs
-    for k, v in pairs (g_triggeredSlotsRemain) do
+    for k, v in pairs(g_triggeredSlotsRemain) do
         local remain = g_triggeredSlotsRemain[k] - currentTime
 
         -- If duration reaches 0 then remove effect
@@ -625,20 +623,20 @@ function CI.OnUpdate(currentTime)
         -- Update Label
         if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] and g_triggeredSlotsRemain[k] then
             if CI.SV.BarShowLabel then
-                g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText(string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000))
             end
         end
     end
 
     -- Ability Highlight
-    for k, v in pairs (g_toggledSlotsRemain) do
+    for k, v in pairs(g_toggledSlotsRemain) do
         local remain = g_toggledSlotsRemain[k] - currentTime
         -- If duration reaches 0 then remove effect
         if v < currentTime then
             if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
                 g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
-                if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
-                    uiUltimate.LabelPct:SetHidden( false )
+                if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+                    uiUltimate.LabelPct:SetHidden(false)
                 end
             end
             g_toggledSlotsRemain[k] = nil
@@ -647,35 +645,35 @@ function CI.OnUpdate(currentTime)
         -- Update Label
         if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and g_toggledSlotsRemain[k] then
             if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled then
-                uiUltimate.LabelPct:SetHidden( true )
+                uiUltimate.LabelPct:SetHidden(true)
             end
             if CI.SV.BarShowLabel then
-                g_uiCustomToggle[g_toggledSlots[k]].label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                g_uiCustomToggle[g_toggledSlots[k]].label:SetText(string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
             end
         end
     end
 
     -- Quickslot cooldown
-    if ( CI.SV.PotionTimerShow ) then
+    if CI.SV.PotionTimerShow then
         local slotIndex = GetCurrentQuickslot()
-        local remain, duration, global = GetSlotCooldownInfo( slotIndex )
+        local remain, duration, global = GetSlotCooldownInfo(slotIndex)
         -- Don't show unless potion is used - We have to counter for the GCD lockout from casting a spell here
-        if ( duration > 5000 ) then
-            uiQuickSlot.label:SetHidden( false )
-            uiQuickSlot.label:SetText( string.format(CI.SV.PotionTimerMiilis and "%.1f" or "%.1d", 0.001*remain ) )
+        if (duration > 5000) then
+            uiQuickSlot.label:SetHidden(false)
+            uiQuickSlot.label:SetText(string.format(CI.SV.PotionTimerMiilis and "%.1f" or "%.1d", 0.001 * remain))
             for i = #(uiQuickSlot.timeColours), 1, -1 do
                 if remain < uiQuickSlot.timeColours[i].remain then
                     if CI.SV.PotionTimerColor then
-                        uiQuickSlot.label:SetColor( unpack( uiQuickSlot.timeColours[i].colour ) )
+                        uiQuickSlot.label:SetColor(unpack(uiQuickSlot.timeColours[i].colour))
                     else
-                        uiQuickSlot.label:SetColor( 1, 1, 1, 1 )
+                        uiQuickSlot.label:SetColor(1, 1, 1, 1)
                     end
                     break
                 end
             end
         else
-            uiQuickSlot.label:SetHidden( true )
-            uiQuickSlot.label:SetColor( unpack( uiQuickSlot.colour ) )
+            uiQuickSlot.label:SetHidden(true)
+            uiQuickSlot.label:SetColor(unpack(uiQuickSlot.colour))
         end
     end
 
@@ -727,10 +725,10 @@ function CI.OnUpdateCastbar(currentTime)
         CI.StopCastBar()
     else
         if CI.SV.CastBarTimer then
-            castbar.bar.timer:SetText( string.format("%.1f", remain/1000) )
+            castbar.bar.timer:SetText(string.format("%.1f", remain / 1000))
         end
         if castbar.type == 1 then
-            castbar.bar.bar:SetValue( (currentTime - castStarts) / (castEnds - castStarts) )
+            castbar.bar.bar:SetValue((currentTime - castStarts) / (castEnds - castStarts))
         else
             castbar.bar.bar:SetValue(1 - ((currentTime - castStarts) / (castEnds - castStarts)))
         end
@@ -750,8 +748,8 @@ function CI.ApplyFont()
         barfontName = "$(MEDIUM_FONT)"
     end
 
-    local barFontStyle = ( CI.SV.BarFontStyle and CI.SV.BarFontStyle ~= "" ) and CI.SV.BarFontStyle or "outline"
-    local barFontSize = ( CI.SV.BarFontSize and CI.SV.BarFontSize > 0 ) and CI.SV.BarFontSize or 17
+    local barFontStyle = (CI.SV.BarFontStyle and CI.SV.BarFontStyle ~= "") and CI.SV.BarFontStyle or "outline"
+    local barFontSize = (CI.SV.BarFontSize and CI.SV.BarFontSize > 0) and CI.SV.BarFontSize or 17
 
     g_barFont = barFontName .. "|" .. barFontSize .. "|" .. barFontStyle
 
@@ -770,8 +768,8 @@ function CI.ApplyFont()
         potionFontName = "$(MEDIUM_FONT)"
     end
 
-    local potionFontStyle = ( CI.SV.PotionTimerFontStyle and CI.SV.PotionTimerFontStyle ~= "" ) and CI.SV.PotionTimerFontStyle or "outline"
-    local potionFontSize = ( CI.SV.PotionTimerFontSize and CI.SV.PotionTimerFontSize > 0 ) and CI.SV.PotionTimerFontSize or 17
+    local potionFontStyle = (CI.SV.PotionTimerFontStyle and CI.SV.PotionTimerFontStyle ~= "") and CI.SV.PotionTimerFontStyle or "outline"
+    local potionFontSize = (CI.SV.PotionTimerFontSize and CI.SV.PotionTimerFontSize > 0) and CI.SV.PotionTimerFontSize or 17
 
     g_potionFont = potionFontName .. "|" .. potionFontSize .. "|" .. potionFontStyle
 
@@ -787,8 +785,8 @@ function CI.ApplyFont()
         ultimateFontName = "$(MEDIUM_FONT)"
     end
 
-    local ultimateFontStyle = ( CI.SV.UltimateFontStyle and CI.SV.UltimateFontStyle ~= "" ) and CI.SV.UltimateFontStyle or "outline"
-    local ultimateFontSize = ( CI.SV.UltimateFontSize and CI.SV.UltimateFontSize > 0 ) and CI.SV.UltimateFontSize or 17
+    local ultimateFontStyle = (CI.SV.UltimateFontStyle and CI.SV.UltimateFontStyle ~= "") and CI.SV.UltimateFontStyle or "outline"
+    local ultimateFontSize = (CI.SV.UltimateFontSize and CI.SV.UltimateFontSize > 0) and CI.SV.UltimateFontSize or 17
 
     g_ultimateFont = ultimateFontName .. "|" .. ultimateFontSize .. "|" .. ultimateFontStyle
 
@@ -803,8 +801,8 @@ function CI.ApplyFont()
         castbarFontName = "$(MEDIUM_FONT)"
     end
 
-    local castbarFontStyle = ( CI.SV.CastBarFontStyle and CI.SV.CastBarFontStyle ~= "" ) and CI.SV.CastBarFontStyle or "soft-shadow-thin"
-    local castbarFontSize = ( CI.SV.CastBarFontSize and CI.SV.CastBarFontSize > 0 ) and CI.SV.CastBarFontSize or 16
+    local castbarFontStyle = (CI.SV.CastBarFontStyle and CI.SV.CastBarFontStyle ~= "") and CI.SV.CastBarFontStyle or "soft-shadow-thin"
+    local castbarFontSize = (CI.SV.CastBarFontSize and CI.SV.CastBarFontSize > 0) and CI.SV.CastBarFontSize or 16
 
     g_castbarFont = castbarFontName .. "|" .. castbarFontSize .. "|" .. castbarFontStyle
 end
@@ -812,7 +810,7 @@ end
 -- Updates Proc Sound - called on initialization and menu changes
 function CI.ApplyProcSound(menu)
     local barProcSound = LUIE.Sounds[CI.SV.ProcSoundName]
-        if not barProcSound or barProcSound == "" then
+    if not barProcSound or barProcSound == "" then
         printToChat(GetString(SI_LUIE_ERROR_SOUND), true)
         barProcSound = "DeathRecap_KillingBlowShown"
     end
@@ -879,7 +877,7 @@ end
 function CI.OnReticleTargetChanged(eventCode)
     local unitTag = "reticleover"
 
-    for k, v in pairs (g_toggledSlotsRemain) do
+    for k, v in pairs(g_toggledSlotsRemain) do
         if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and not g_toggledSlotsPlayer[k] then
             g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
             g_toggledSlotsRemain[k] = nil
@@ -938,8 +936,8 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                         if g_toggledSlotsRemain[abilityId] then
                             if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
                                 g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-                                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
-                                    uiUltimate.LabelPct:SetHidden( false )
+                                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+                                    uiUltimate.LabelPct:SetHidden(false)
                                 end
                             end
                         end
@@ -952,8 +950,8 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                     if g_toggledSlotsRemain[abilityId] then
                         if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
                             g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-                            if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
-                                uiUltimate.LabelPct:SetHidden( false )
+                            if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+                                uiUltimate.LabelPct:SetHidden(false)
                             end
                         end
                     end
@@ -981,14 +979,14 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                 g_toggledSlotsPlayer[abilityId] = true
                 local currentTime = GetGameTimeMilliseconds()
                 if g_toggledSlots[abilityId] then
-                    g_toggledSlotsRemain[abilityId] = 1000*endTime
+                    g_toggledSlotsRemain[abilityId] = 1000 * endTime
                     CI.ShowCustomToggle(g_toggledSlots[abilityId])
                     if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
-                        uiUltimate.LabelPct:SetHidden( true )
+                        uiUltimate.LabelPct:SetHidden(true)
                     end
                     if CI.SV.BarShowLabel then
                         local remain = g_toggledSlotsRemain[abilityId] - currentTime
-                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText(string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                     end
                 end
             end
@@ -1014,8 +1012,8 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         if g_toggledSlotsRemain[abilityId] then
             if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
                 g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
-                    uiUltimate.LabelPct:SetHidden( false )
+                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+                    uiUltimate.LabelPct:SetHidden(false)
                 end
             end
             g_toggledSlotsRemain[abilityId] = nil
@@ -1032,11 +1030,11 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                         PlaySound(g_procSound)
                         PlaySound(g_procSound)
                     end
-                    g_triggeredSlotsRemain[abilityId] = 1000*endTime
+                    g_triggeredSlotsRemain[abilityId] = 1000 * endTime
                     CI.PlayProcAnimations(g_triggeredSlots[abilityId])
                     if CI.SV.BarShowLabel then
                         local remain = g_triggeredSlotsRemain[abilityId] - currentTime
-                        g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                        g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText(string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                     end
                 end
             end
@@ -1044,14 +1042,14 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
             if g_toggledSlots[abilityId] then
                 local currentTime = GetGameTimeMilliseconds()
                 if CI.SV.ShowToggled then
-                    g_toggledSlotsRemain[abilityId] = 1000*endTime
+                    g_toggledSlotsRemain[abilityId] = 1000 * endTime
                     CI.ShowCustomToggle(g_toggledSlots[abilityId])
                     if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
-                        uiUltimate.LabelPct:SetHidden( true )
+                        uiUltimate.LabelPct:SetHidden(true)
                     end
                     if CI.SV.BarShowLabel then
                         local remain = g_toggledSlotsRemain[abilityId] - currentTime
-                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText(string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                     end
                 end
             end
@@ -1060,77 +1058,77 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
 end
 
 function CI.CreateCastBar()
-    uiTlw.castBar = UI.TopLevel( nil, nil )
+    uiTlw.castBar = UI.TopLevel(nil, nil)
 
-    uiTlw.castBar:SetDimensions( CI.SV.CastBarSizeW + CI.SV.CastBarIconSize + 4, CI.SV.CastBarSizeH )
+    uiTlw.castBar:SetDimensions(CI.SV.CastBarSizeW + CI.SV.CastBarIconSize + 4, CI.SV.CastBarSizeH)
 
     -- Setup Preview
-    uiTlw.castBar.preview = LUIE.UI.Backdrop( uiTlw.castBar, "fill", nil, nil, nil, true )
-    uiTlw.castBar.previewLabel = UI.Label( uiTlw.castBar.preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", "Cast Bar", false )
+    uiTlw.castBar.preview = UI.Backdrop(uiTlw.castBar, "fill", nil, nil, nil, true)
+    uiTlw.castBar.previewLabel = UI.Label(uiTlw.castBar.preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", "Cast Bar", false)
 
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function(self)
-        eventManager:RegisterForUpdate( moduleName .. "previewMove", 200, function()
+        eventManager:RegisterForUpdate(moduleName .. "previewMove", 200, function()
             self.preview.anchorLabel:SetText(zo_strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
         end)
     end
     -- Callback used to save new position of frames
     local tlwOnMoveStop = function(self)
-        eventManager:UnregisterForUpdate( moduleName .. "previewMove" )
+        eventManager:UnregisterForUpdate(moduleName .. "previewMove" )
         CI.SV.CastbarOffsetX = self:GetLeft()
         CI.SV.CastbarOffsetY = self:GetTop()
         CI.SV.CastBarCustomPosition = { self:GetLeft(), self:GetTop() }
     end
 
-    uiTlw.castBar:SetHandler( "OnMoveStart", tlwOnMoveStart )
-    uiTlw.castBar:SetHandler( "OnMoveStop", tlwOnMoveStop )
+    uiTlw.castBar:SetHandler("OnMoveStart", tlwOnMoveStart)
+    uiTlw.castBar:SetHandler("OnMoveStop", tlwOnMoveStop)
 
-    uiTlw.castBar.preview.anchorTexture = UI.Texture( uiTlw.castBar.preview, {TOPLEFT,TOPLEFT}, {16,16}, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false )
+    uiTlw.castBar.preview.anchorTexture = UI.Texture(uiTlw.castBar.preview, {TOPLEFT,TOPLEFT}, {16,16}, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false)
     uiTlw.castBar.preview.anchorTexture:SetColor(1, 1, 0, 0.9)
 
-    uiTlw.castBar.preview.anchorLabel = UI.Label( uiTlw.castBar.preview, {BOTTOMLEFT,TOPLEFT,0,-1}, nil, {0,2}, "ZoFontGameSmall", "xxx, yyy", false )
+    uiTlw.castBar.preview.anchorLabel = UI.Label(uiTlw.castBar.preview, {BOTTOMLEFT,TOPLEFT,0,-1}, nil, {0,2}, "ZoFontGameSmall", "xxx, yyy", false)
     uiTlw.castBar.preview.anchorLabel:SetColor(1, 1, 0 , 1)
     uiTlw.castBar.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
     uiTlw.castBar.preview.anchorLabel:SetDrawTier(1)
-    uiTlw.castBar.preview.anchorLabelBg = UI.Backdrop(  uiTlw.castBar.preview.anchorLabel, "fill", nil, {0,0,0,1}, {0,0,0,1}, false )
+    uiTlw.castBar.preview.anchorLabelBg = UI.Backdrop(uiTlw.castBar.preview.anchorLabel, "fill", nil, {0,0,0,1}, {0,0,0,1}, false)
     uiTlw.castBar.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
     uiTlw.castBar.preview.anchorLabelBg:SetDrawTier(0)
 
     local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.castBar, 0, 0)
 
-    sceneManager:GetScene("hud"):AddFragment( fragment )
-    sceneManager:GetScene("hudui"):AddFragment( fragment )
-    sceneManager:GetScene("siegeBar"):AddFragment( fragment )
-    sceneManager:GetScene("siegeBarUI"):AddFragment( fragment )
+    sceneManager:GetScene("hud"):AddFragment(fragment)
+    sceneManager:GetScene("hudui"):AddFragment(fragment)
+    sceneManager:GetScene("siegeBar"):AddFragment(fragment)
+    sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
 
-    castbar = UI.Backdrop( uiTlw.castBar, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
+    castbar = UI.Backdrop(uiTlw.castBar, nil, nil, {0,0,0,0.5}, {0,0,0,1}, false)
     castbar:SetAnchor(LEFT, uiTlw.castBar, LEFT)
 
     castbar.starts = 0
     castbar.ends = 0
     castbar.remain = 0
 
-    castbar:SetDimensions( CI.SV.CastBarIconSize, CI.SV.CastBarIconSize )
+    castbar:SetDimensions(CI.SV.CastBarIconSize, CI.SV.CastBarIconSize)
 
-    castbar.back = UI.Texture( castbar, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false )
+    castbar.back = UI.Texture(castbar, nil, nil, "/esoui/art/actionbar/abilityframe64_up.dds", nil, false)
     castbar.back:SetAnchor(TOPLEFT, castbar, TOPLEFT)
     castbar.back:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT)
 
-    castbar.iconbg = UI.Texture( castbar, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false )
-    castbar.iconbg = UI.Backdrop( castbar, nil, nil, {0,0,0,0.9}, {0,0,0,0.9}, false )
+    castbar.iconbg = UI.Texture(castbar, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
+    castbar.iconbg = UI.Backdrop(castbar, nil, nil, {0,0,0,0.9}, {0,0,0,0.9}, false)
     castbar.iconbg:SetDrawLevel(DL_CONTROLS)
-    castbar.iconbg:SetAnchor( TOPLEFT, castbar, TOPLEFT, 3, 3)
-    castbar.iconbg:SetAnchor( BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3)
+    castbar.iconbg:SetAnchor(TOPLEFT, castbar, TOPLEFT, 3, 3)
+    castbar.iconbg:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3)
 
-    castbar.icon = UI.Texture( castbar, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false )
-    castbar.icon:SetAnchor( TOPLEFT, castbar, TOPLEFT, 3, 3 )
-    castbar.icon:SetAnchor( BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3 )
+    castbar.icon = UI.Texture(castbar, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false)
+    castbar.icon:SetAnchor(TOPLEFT, castbar, TOPLEFT, 3, 3)
+    castbar.icon:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3)
 
     castbar.bar = {
-        ["backdrop"] = UI.Backdrop( castbar, nil, {CI.SV.CastBarSizeW, CI.SV.CastBarSizeH}, nil, nil, false ),
-        ["bar"] = UI.StatusBar( castbar, nil, {CI.SV.CastBarSizeW-4, CI.SV.CastBarSizeH-4}, nil, false ),
-        ["name"] = UI.Label( castbar, nil, nil, nil, nil, g_castbarFont, false ),
-        ["timer"] = UI.Label( castbar, nil, nil, nil, nil, g_castbarFont, false ),
+        ["backdrop"] = UI.Backdrop(castbar, nil, {CI.SV.CastBarSizeW, CI.SV.CastBarSizeH}, nil, nil, false),
+        ["bar"] = UI.StatusBar(castbar, nil, {CI.SV.CastBarSizeW-4, CI.SV.CastBarSizeH-4}, nil, false),
+        ["name"] = UI.Label(castbar, nil, nil, nil, nil, g_castbarFont, false),
+        ["timer"] = UI.Label(castbar, nil, nil, nil, nil, g_castbarFont, false),
     }
     castbar.id = 0
 
@@ -1139,19 +1137,19 @@ function CI.CreateCastBar()
     castbar.bar.backdrop:SetDrawLevel(1)
     castbar.bar.bar:SetMinMax(0, 1)
     castbar.bar.backdrop:SetCenterColor((0.1*.50), (0.1*.50), (0.1*.50), 0.75)
-    castbar.bar.bar:SetGradientColors( 0, 47/255, 130/255, 1, 82/255, 215/255, 1, 1)
+    castbar.bar.bar:SetGradientColors(0, 47/255, 130/255, 1, 82/255, 215/255, 1, 1)
     castbar.bar.backdrop:SetCenterColor((0.1*CI.SV.CastBarGradientC1[1]), (0.1*CI.SV.CastBarGradientC1[2]), (0.1*CI.SV.CastBarGradientC1[3]), 0.75)
-    castbar.bar.bar:SetGradientColors( CI.SV.CastBarGradientC1[1], CI.SV.CastBarGradientC1[2], CI.SV.CastBarGradientC1[3], 1, CI.SV.CastBarGradientC2[1], CI.SV.CastBarGradientC2[2], CI.SV.CastBarGradientC2[3], 1)
+    castbar.bar.bar:SetGradientColors(CI.SV.CastBarGradientC1[1], CI.SV.CastBarGradientC1[2], CI.SV.CastBarGradientC1[3], 1, CI.SV.CastBarGradientC2[1], CI.SV.CastBarGradientC2[2], CI.SV.CastBarGradientC2[3], 1)
 
     castbar.bar.backdrop:ClearAnchors()
-    castbar.bar.backdrop:SetAnchor(LEFT, castbar, RIGHT, 4, 0 )
+    castbar.bar.backdrop:SetAnchor(LEFT, castbar, RIGHT, 4, 0)
 
     castbar.bar.timer:ClearAnchors()
-    castbar.bar.timer:SetAnchor(RIGHT, castbar.bar.backdrop, RIGHT, -4, 0 )
+    castbar.bar.timer:SetAnchor(RIGHT, castbar.bar.backdrop, RIGHT, -4, 0)
     castbar.bar.timer:SetHidden(true)
 
     castbar.bar.name:ClearAnchors()
-    castbar.bar.name:SetAnchor(LEFT, castbar.bar.backdrop, LEFT, 4, 0 )
+    castbar.bar.name:SetAnchor(LEFT, castbar.bar.backdrop, LEFT, 4, 0)
     castbar.bar.name:SetHidden(true)
 
     castbar.bar.bar:SetTexture(LUIE.StatusbarTextures[CI.SV.CastBarTexture])
@@ -1166,11 +1164,11 @@ function CI.CreateCastBar()
 end
 
 function CI.ResizeCastBar()
-    uiTlw.castBar:SetDimensions( CI.SV.CastBarSizeW + CI.SV.CastBarIconSize + 4, CI.SV.CastBarSizeH )
+    uiTlw.castBar:SetDimensions(CI.SV.CastBarSizeW + CI.SV.CastBarIconSize + 4, CI.SV.CastBarSizeH)
     castbar:ClearAnchors()
     castbar:SetAnchor(LEFT, uiTlw.castBar, LEFT)
 
-    castbar:SetDimensions( CI.SV.CastBarIconSize, CI.SV.CastBarIconSize )
+    castbar:SetDimensions(CI.SV.CastBarIconSize, CI.SV.CastBarIconSize)
     castbar.bar.backdrop:SetDimensions(CI.SV.CastBarSizeW, CI.SV.CastBarSizeH)
     castbar.bar.bar:SetDimensions(CI.SV.CastBarSizeW-4, CI.SV.CastBarSizeH-4)
 
@@ -1178,10 +1176,10 @@ function CI.ResizeCastBar()
     castbar.bar.backdrop:SetAnchor(LEFT, castbar, RIGHT, 4, 0 )
 
     castbar.bar.timer:ClearAnchors()
-    castbar.bar.timer:SetAnchor(RIGHT, castbar.bar.backdrop, RIGHT, -4, 0 )
+    castbar.bar.timer:SetAnchor(RIGHT, castbar.bar.backdrop, RIGHT, -4, 0)
 
     castbar.bar.name:ClearAnchors()
-    castbar.bar.name:SetAnchor(LEFT, castbar.bar.backdrop, LEFT, 4, 0 )
+    castbar.bar.name:SetAnchor(LEFT, castbar.bar.backdrop, LEFT, 4, 0)
 
     castbar.bar.bar:ClearAnchors()
     castbar.bar.bar:SetAnchor(CENTER, castbar.bar.backdrop, CENTER, 0, 0)
@@ -1195,7 +1193,7 @@ function CI.UpdateCastBar()
     castbar.bar.timer:SetFont(g_castbarFont)
     castbar.bar.bar:SetTexture(LUIE.StatusbarTextures[CI.SV.CastBarTexture])
     castbar.bar.backdrop:SetCenterColor((0.1*CI.SV.CastBarGradientC1[1]), (0.1*CI.SV.CastBarGradientC1[2]), (0.1*CI.SV.CastBarGradientC1[3]), 0.75)
-    castbar.bar.bar:SetGradientColors( CI.SV.CastBarGradientC1[1], CI.SV.CastBarGradientC1[2], CI.SV.CastBarGradientC1[3], 1, CI.SV.CastBarGradientC2[1], CI.SV.CastBarGradientC2[2], CI.SV.CastBarGradientC2[3], 1)
+    castbar.bar.bar:SetGradientColors(CI.SV.CastBarGradientC1[1], CI.SV.CastBarGradientC1[2], CI.SV.CastBarGradientC1[3], 1, CI.SV.CastBarGradientC2[1], CI.SV.CastBarGradientC2[2], CI.SV.CastBarGradientC2[3], 1)
 end
 
 function CI.ResetCastBarPosition()
@@ -1214,14 +1212,14 @@ function CI.SetCastBarPosition()
         uiTlw.castBar:ClearAnchors()
 
         if CI.SV.CastbarOffsetX ~= nil and CI.SV.CastbarOffsetY ~= nil then
-            uiTlw.castBar:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, CI.SV.CastbarOffsetX, CI.SV.CastbarOffsetY )
+            uiTlw.castBar:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, CI.SV.CastbarOffsetX, CI.SV.CastbarOffsetY)
         else
-            uiTlw.castBar:SetAnchor( CENTER, GuiRoot, CENTER, 0, 320 )
+            uiTlw.castBar:SetAnchor(CENTER, GuiRoot, CENTER, 0, 320)
         end
     end
 
     local savedPos = CI.SV.CastBarCustomPosition
-    uiTlw.castBar.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and zo_strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default" )
+    uiTlw.castBar.preview.anchorLabel:SetText((savedPos ~= nil and #savedPos == 2) and zo_strformat("<<1>>, <<2>>", savedPos[1], savedPos[2]) or "default")
 end
 
 function CI.SetMovingState(state)
@@ -1231,8 +1229,8 @@ function CI.SetMovingState(state)
     CI.CastBarUnlocked = state
     if uiTlw.castBar and uiTlw.castBar:GetType() == CT_TOPLEVELCONTROL then
         CI.GenerateCastbarPreview(state)
-        uiTlw.castBar:SetMouseEnabled( state )
-        uiTlw.castBar:SetMovable( state )
+        uiTlw.castBar:SetMouseEnabled(state)
+        uiTlw.castBar:SetMovable(state)
     end
 end
 
@@ -1243,17 +1241,17 @@ function CI.GenerateCastbarPreview(state)
     if CI.SV.CastBarLabel then
         local previewName = "Test"
         castbar.bar.name:SetText(previewName)
-        castbar.bar.name:SetHidden( not state )
+        castbar.bar.name:SetHidden(not state)
     end
     if CI.SV.CastBarTimer then
-        castbar.bar.timer:SetText( string.format("1.0") )
-        castbar.bar.timer:SetHidden ( not state )
+        castbar.bar.timer:SetText(string.format("1.0"))
+        castbar.bar.timer:SetHidden(not state)
     end
-    castbar.bar.bar:SetValue( 1 )
+    castbar.bar.bar:SetValue(1)
 
-    uiTlw.castBar.preview:SetHidden( not state )
-    uiTlw.castBar:SetHidden( not state )
-    castbar:SetHidden( not state )
+    uiTlw.castBar.preview:SetHidden(not state)
+    uiTlw.castBar:SetHidden(not state)
+    castbar:SetHidden(not state)
 end
 
 function CI.SoulGemResurrectionStart(eventCode, durationMs)
@@ -1281,13 +1279,13 @@ function CI.SoulGemResurrectionStart(eventCode, durationMs)
         castbar.bar.name:SetHidden(false)
     end
     if CI.SV.CastBarTimer then
-        castbar.bar.timer:SetText( string.format("%.1f", remain/1000) )
+        castbar.bar.timer:SetText(string.format("%.1f", remain/1000))
         castbar.bar.timer:SetHidden(false)
     end
 
     castbar:SetHidden(false)
     g_casting = true
-    eventManager:RegisterForUpdate(moduleName.."CI_CASTBAR", 20, CI.OnUpdateCastbar )
+    eventManager:RegisterForUpdate(moduleName.."CI_CASTBAR", 20, CI.OnUpdateCastbar)
 end
 
 function CI.SoulGemResurrectionEnd(eventCode)
@@ -1295,11 +1293,15 @@ function CI.SoulGemResurrectionEnd(eventCode)
 end
 
 -- Very basic handler registered to only read CC events on the player
-function CI.OnCombatEventBreakCast( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
+function CI.OnCombatEventBreakCast(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     -- Some cast/channel abilities (or effects we use to simulate this) stun the player - ignore the effects of these ids when this happens.
-    if CBT.IgnoreCastBarStun[abilityId] then return end
+    if CBT.IgnoreCastBarStun[abilityId] then
+        return
+    end
 
-    if CBT.IgnoreCastBreakingActions[castbar.id] then return end
+    if CBT.IgnoreCastBreakingActions[castbar.id] then
+        return
+    end
 
     if not CBT.IsCast[abilityId] then
         CI.StopCastBar()
@@ -1307,7 +1309,7 @@ function CI.OnCombatEventBreakCast( eventCode, result, isError, abilityName, abi
 end
 
 -- Listens to EVENT_COMBAT_EVENT
-function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
+function CI.OnCombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     -- Manually track Ultimate generation -- same as in CI module
     if CI.SV.UltimateGeneration and uiUltimate.NotFull and (
         ( result == ACTION_RESULT_BLOCKED_DAMAGE and targetType == COMBAT_UNIT_TYPE_PLAYER ) or
@@ -1388,7 +1390,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
 
     if duration > 0 and not g_casting then
         -- If action result is BEGIN and not channeled then start, otherwise only use GAINED
-        if ( not forceChanneled and ( ( (result == 2200 or result == 2210) and not channeled ) or (result == 2240 and (CBT.CastDurationFix[abilityId] or channeled) ) ) ) or (forceChanneled and result == 2200) then -- and CI.SV.CastBarCast
+        if (not forceChanneled and (((result == 2200 or result == 2210) and not channeled) or (result == 2240 and (CBT.CastDurationFix[abilityId] or channeled)))) or (forceChanneled and result == 2200) then -- and CI.SV.CastBarCast
             local currentTime = GetGameTimeMilliseconds()
             local endTime = currentTime + duration
             local remain = endTime - currentTime
@@ -1411,13 +1413,13 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
                 castbar.bar.name:SetHidden(false)
             end
             if CI.SV.CastBarTimer then
-                castbar.bar.timer:SetText( string.format("%.1f", remain/1000) )
+                castbar.bar.timer:SetText(string.format("%.1f", remain / 1000))
                 castbar.bar.timer:SetHidden(false)
             end
 
             castbar:SetHidden(false)
             g_casting = true
-            eventManager:RegisterForUpdate(moduleName.."CI_CASTBAR", 20, CI.OnUpdateCastbar )
+            eventManager:RegisterForUpdate(moduleName.."CI_CASTBAR", 20, CI.OnUpdateCastbar)
         end
     end
 
@@ -1428,12 +1430,12 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
 end
 
 --[[
-function CI.OnCombatEventSpecialFilters( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
+function CI.OnCombatEventSpecialFilters(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     CI.StopCastBar()
 end
 ]]--
 
-function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
+function CI.OnCombatEventBar(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     -- If the source/target isn't the player then bail out now.
     if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and targetType ~= COMBAT_UNIT_TYPE_PLAYER then
         return
@@ -1452,11 +1454,11 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
                 g_toggledSlotsRemain[abilityId] = endTime
                 CI.ShowCustomToggle(g_toggledSlots[abilityId])
                 if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
-                    uiUltimate.LabelPct:SetHidden( true )
+                    uiUltimate.LabelPct:SetHidden(true)
                 end
                 if CI.SV.BarShowLabel then
                     local remain = g_toggledSlotsRemain[abilityId] - currentTime
-                    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText(string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                 end
             end
         end
@@ -1467,8 +1469,8 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
         if g_toggledSlotsRemain[abilityId] then
             if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
                 g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
-                    uiUltimate.LabelPct:SetHidden( false )
+                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+                    uiUltimate.LabelPct:SetHidden(false)
                 end
             end
             g_toggledSlotsRemain[abilityId] = nil
@@ -1482,7 +1484,7 @@ function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
     end
 
     -- Handle slot update for action bars
-    --d( string.format("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum) ) )
+    --d(string.format("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum)))
     -- Look only for action bar slots
     if CI.SV.ShowToggledUltimate then
         if slotNum < 3 or slotNum > 8 then
@@ -1544,7 +1546,6 @@ function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
     local abilityName = E.EffectOverride[ability_id] and E.EffectOverride[ability_id].name or GetAbilityName(ability_id) -- GetSlotName(slotNum)
     --local _, _, channel = GetAbilityCastInfo(ability_id)
     local duration = GetUpdatedAbilityDuration(ability_id)
-
     local currentTime = GetGameTimeMilliseconds()
 
     -- Check if currently this ability is in proc state
@@ -1566,7 +1567,7 @@ function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
                 CI.PlayProcAnimations(slotNum)
                 if CI.SV.BarShowLabel then
                     local remain = g_triggeredSlotsRemain[proc] - currentTime
-                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText(string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                 end
             end
         end
@@ -1579,11 +1580,11 @@ function CI.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
             if CI.SV.ShowToggled then
                 CI.ShowCustomToggle(slotNum)
                 if slotNum == 8 and CI.SV.UltimatePctEnabled then
-                    uiUltimate.LabelPct:SetHidden( true )
+                    uiUltimate.LabelPct:SetHidden(true)
                 end
                 if CI.SV.BarShowLabel then
                     local remain = g_toggledSlotsRemain[ability_id] - currentTime
-                    g_uiCustomToggle[slotNum].label:SetText( string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
+                    g_uiCustomToggle[slotNum].label:SetText(string.format(CI.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                 end
             end
         end
@@ -1592,22 +1593,22 @@ end
 
 function CI.UpdateUltimateLabel(eventCode)
     -- Handle ultimate label first
-    local setHiddenLabel = not ( CI.SV.UltimateLabelEnabled and IsSlotUsed( g_ultimateSlot ) )
-    local setHiddenPct = not ( CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) )
+    local setHiddenLabel = not (CI.SV.UltimateLabelEnabled and IsSlotUsed(g_ultimateSlot))
+    local setHiddenPct = not (CI.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot))
 
-    uiUltimate.LabelVal:SetHidden( setHiddenLabel )
+    uiUltimate.LabelVal:SetHidden(setHiddenLabel)
     if setHiddenPct then
-        uiUltimate.LabelPct:SetHidden( true )
+        uiUltimate.LabelPct:SetHidden(true)
     end
 
     -- Get the currently slotted ultimate cost
-    local cost, mechType = GetSlotAbilityCost( g_ultimateSlot )
+    local cost, mechType = GetSlotAbilityCost(g_ultimateSlot)
 
-    g_ultimateCost = ( mechType == POWERTYPE_ULTIMATE ) and cost or 0
+    g_ultimateCost = (mechType == POWERTYPE_ULTIMATE) and cost or 0
 
     -- if this event was caused only by user manually changing the ultimate ability, then
     -- force recalculation of percent value. Otherwise (weapons swap) this will be called by the game
-    if ( (eventCode == EVENT_ACTION_SLOT_UPDATED or EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED or EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED) and not setHidden ) then
+    if ((eventCode == EVENT_ACTION_SLOT_UPDATED or EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED or EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED) and not setHidden) then
         CI.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, g_ultimateCurrent, 0, 0)
     end
 end
@@ -1641,13 +1642,13 @@ function CI.PlayProcAnimations(slotNum)
         procLoopTexture:SetDrawLevel(2)
         procLoopTexture:SetHidden(true)
 
-        procLoopTexture.label = UI.Label (procLoopTexture, nil, nil, nil, g_barFont, nil, false)
+        procLoopTexture.label = UI.Label(procLoopTexture, nil, nil, nil, g_barFont, nil, false)
         procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot)
         procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.BarLabelPosition)
         procLoopTexture.label:SetDrawLayer(DL_COUNT)
         procLoopTexture.label:SetDrawLevel(3)
         procLoopTexture.label:SetDrawTier(3)
-        procLoopTexture.label:SetColor( unpack( CI.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
+        procLoopTexture.label:SetColor(unpack(CI.SV.RemainingTextColoured and colour or {1,1,1,1}))
         procLoopTexture.label:SetHidden(false)
 
         local procLoopTimeline = ANIMATION_MANAGER:CreateTimelineFromVirtual("UltimateReadyLoop", procLoopTexture)
@@ -1674,8 +1675,8 @@ function CI.OnDeath(eventCode, unitTag, isDead)
         for slotNum = 3, 8 do
             if g_uiCustomToggle[slotNum] then
                 g_uiCustomToggle[slotNum]:SetHidden(true)
-                if slotNum == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
-                    uiUltimate.LabelPct:SetHidden( false )
+                if slotNum == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed(g_ultimateSlot) then
+                    uiUltimate.LabelPct:SetHidden(false)
                 end
             end
         end
@@ -1690,7 +1691,7 @@ function CI.ShowCustomToggle(slotNum)
         local window = windowManager:GetControlByName(name) -- Check to see if this frame already exists, don't create it if it does.
         if window == nil then
             local toggleFrame = windowManager:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
-            --toggleFrame.back = UI.Texture( toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
+            --toggleFrame.back = UI.Texture(toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
             toggleFrame:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
             toggleFrame:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
             toggleFrame:SetTexture("/esoui/art/actionbar/actionslot_toggledon.dds")
@@ -1701,13 +1702,13 @@ function CI.ShowCustomToggle(slotNum)
             toggleFrame:SetColor(0.5,1,0.5,1)
             toggleFrame:SetHidden(false)
 
-            toggleFrame.label = UI.Label (toggleFrame, nil, nil, nil, g_barFont, nil, false)
+            toggleFrame.label = UI.Label(toggleFrame, nil, nil, nil, g_barFont, nil, false)
             toggleFrame.label:SetAnchor(TOPLEFT, actionButton.slot)
             toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.BarLabelPosition)
             toggleFrame.label:SetDrawLayer(DL_COUNT)
             toggleFrame.label:SetDrawLevel(1)
             toggleFrame.label:SetDrawTier(3)
-            toggleFrame.label:SetColor( unpack( CI.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
+            toggleFrame.label:SetColor(unpack(CI.SV.RemainingTextColoured and colour or {1,1,1,1}))
             toggleFrame.label:SetHidden(false)
 
             g_uiCustomToggle[slotNum] = toggleFrame
@@ -1718,29 +1719,29 @@ function CI.ShowCustomToggle(slotNum)
     end
 end
 
-function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax )
+function CI.OnPowerUpdatePlayer(eventCode , unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
     if unitTag ~= "player" then return end
     if powerType ~= POWERTYPE_ULTIMATE then return end
 
     -- flag if ultimate is full - we"ll need it for ultimate generation texture
-    uiUltimate.NotFull = ( powerValue < powerMax )
+    uiUltimate.NotFull = (powerValue < powerMax)
     -- Calculate the percentage to activation old one and current
-    local pct = ( g_ultimateCost > 0 ) and math.floor( ( powerValue / g_ultimateCost ) * 100 ) or 0
+    local pct = (g_ultimateCost > 0) and math.floor((powerValue / g_ultimateCost) * 100 ) or 0
     -- Update the tooltip only when corresponding setting is enabled
     if CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
-        if IsSlotUsed( g_ultimateSlot ) then
+        if IsSlotUsed(g_ultimateSlot) then
             -- Values label: Set Value and assign colour
             -- Pct label: show always when less then 100% and possibly if UltimateHideFull is false
             if CI.SV.UltimateLabelEnabled then
-                uiUltimate.LabelVal:SetText( powerValue .. "/" .. g_ultimateCost )
+                uiUltimate.LabelVal:SetText(powerValue .. "/" .. g_ultimateCost)
             end
             if CI.SV.UltimatePctEnabled then
-                uiUltimate.LabelPct:SetText( pct .. "%")
+                uiUltimate.LabelPct:SetText(pct .. "%")
             end
             if pct < 100  then
                 if CI.SV.UltimatePctEnabled then
                     local setHidden = false
-                    if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden() ) then
+                    if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden()) then
                         setHidden = true
                     end
                     uiUltimate.LabelPct:SetHidden(setHidden)
@@ -1748,21 +1749,21 @@ function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, pow
                 if CI.SV.UltimateLabelEnabled then
                     for i = #(uiUltimate.pctColours), 1, -1 do
                         if pct < uiUltimate.pctColours[i].pct then
-                            uiUltimate.LabelVal:SetColor( unpack( uiUltimate.pctColours[i].colour ) )
+                            uiUltimate.LabelVal:SetColor(unpack(uiUltimate.pctColours[i].colour))
                             break
                         end
                     end
                 end
             else
                 local setHidden = false
-                if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden() ) or CI.SV.UltimateHideFull then
+                if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden()) or CI.SV.UltimateHideFull then
                     setHidden = true
                 end
                 if CI.SV.UltimatePctEnabled then
-                    uiUltimate.LabelPct:SetHidden( setHidden )
+                    uiUltimate.LabelPct:SetHidden(setHidden)
                 end
                 if CI.SV.UltimateLabelEnabled then
-                    uiUltimate.LabelVal:SetColor( unpack(uiUltimate.colour) )
+                    uiUltimate.LabelVal:SetColor(unpack(uiUltimate.colour))
                 end
             end
         end
