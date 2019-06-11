@@ -9,6 +9,11 @@ local zo_strformat = zo_strformat
 
 local optionsDataSlashCommands = {}
 
+local bankerOptions     = { "Tythis", "Cat Planet Banker" }
+local bankerOptionsKeys = { ["Tythis"] = 1, ["Cat Planet Banker"] = 2 }
+local merchantOptions   = { "Nuzimeh", "Cat Planet Merchant" }
+local merchantOptionsKeys   = { ["Nuzimeh"] = 1, ["Cat Planet Merchant"] = 2 }
+
 -- Create Slash Commands Settings Menu
 function SC.CreateSettings()
     -- Load LibAddonMenu
@@ -90,6 +95,18 @@ function SC.CreateSettings()
                 default = SC.D.SlashBanker,
             },
             {
+                -- Choose Banker
+                type = "dropdown",
+                name = "\t\t\t\t\tChoose Banker to Summon",
+                choices = bankerOptions,
+                getFunc = function() return bankerOptions[SC.SV.SlashBankerChoice] end,
+                setFunc = function(value) SC.SV.SlashBankerChoice = bankerOptionsKeys[value] end,
+                width = "full",
+                default = SC.D.SlashBankerChoice,
+                disabled = function() return not SC.D.SlashBanker end,
+
+            }
+            {
                 -- SlashMerchant
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT),
@@ -99,6 +116,18 @@ function SC.CreateSettings()
                 width = "full",
                 default = SC.D.SlashMerchant,
             },
+            {
+                -- Choose Merchant
+                type = "dropdown",
+                name = "\t\t\t\t\tChoose Merchant to Summon",
+                choices = merchantOptions,
+                getFunc = function() return merchantOptions[SC.SV.SlashMerchantChoice] end,
+                setFunc = function(value) SC.SV.SlashMerchantChoice = merchantOptionsKeys[value] end,
+                width = "full",
+                default = SC.D.SlashMerchantChoice,
+                disabled = function() return not SC.D.SlashMerchant end,
+
+            }
             {
                 -- SlashFence
                 type = "checkbox",

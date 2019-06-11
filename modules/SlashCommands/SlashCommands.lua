@@ -30,7 +30,9 @@ SC.D = {
     SlashVoteKick       = true,
     SlashCampaignQ      = true,
     SlashBanker         = true,
+    SlashBankerChoice   = 1,
     SlashMerchant       = true,
+    SlashMerchantChoice = 1
     SlashFence          = true,
     SlashReadyCheck     = true,
     SlashOutfit         = true,
@@ -181,13 +183,13 @@ function SC.RegisterSlashCommands()
         SLASH_COMMANDS["/removeignore"] = SC.SlashRemoveIgnore
     end
     if SC.SV.SlashBanker then
-        SLASH_COMMANDS["/bank"]         = function(...) SC.SlashCollectible(267) end
-        SLASH_COMMANDS["/banker"]       = function(...) SC.SlashCollectible(267) end
+        SLASH_COMMANDS["/bank"]         = SC.ResolveMerchantBanker(2)
+        SLASH_COMMANDS["/banker"]       = SC.ResolveMerchantBanker(2)
     end
     if SC.SV.SlashMerchant then
-        SLASH_COMMANDS["/sell"]         = function(...) SC.SlashCollectible(301) end
-        SLASH_COMMANDS["/merchant"]     = function(...) SC.SlashCollectible(301) end
-        SLASH_COMMANDS["/vendor"]       = function(...) SC.SlashCollectible(301) end
+        SLASH_COMMANDS["/sell"]         = SC.ResolveMerchantBanker(1)
+        SLASH_COMMANDS["/merchant"]     = SC.ResolveMerchantBanker(1)
+        SLASH_COMMANDS["/vendor"]       = SC.ResolveMerchantBanker(1)
     end
     if SC.SV.SlashFence then
         SLASH_COMMANDS["/smuggler"]     = function(...) SC.SlashCollectible(300) end

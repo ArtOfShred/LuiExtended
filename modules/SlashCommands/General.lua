@@ -8,6 +8,25 @@ local SC = LUIE.SlashCommands
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 
+-- Resolve the type of Merchant or Banker to summon based off player choice
+function SC.ResolveMerchantBanker(type)
+    -- 1 = Banker
+    -- 2 = Merchant
+    if type == 1 then
+        if SC.SV.SlashMerchantChoice == 1 then
+            SC.SlashCollectible(301) -- Nuzhimeh the Merchant
+        else
+            SC.SlashCollectible(6378) -- Ferez
+        end
+    elseif type == 2 then
+        if SC.SV.SlashBankerChoice == 1 then
+            SC.SlashCollectible(267) -- Tythis
+        else
+            SC.SlashCollectible(6376) -- Ezabi
+        end
+    end
+end
+
 -- Slash Command to port to primary home
 function SC.SlashHome()
     local primaryHouse = GetHousingPrimaryHouse()

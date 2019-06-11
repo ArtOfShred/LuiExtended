@@ -126,7 +126,8 @@ end
 
 
 
-
+-- Called before the rest of CCT is initialized, uses menu settings in order to create the table of abilities to use.
+-- Also called by menu functions to reset this list.
 function CCT.UpdateAOEList()
 
     local priority = 0 -- Counter for priority, we increment by one for each active category added
