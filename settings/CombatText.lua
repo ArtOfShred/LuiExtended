@@ -15,8 +15,11 @@ local optionsDataCombatText = {}
 function CT.CreateSettings()
     -- Load LibAddonMenu
     local LAM = _G["LibAddonMenu2"]
+    if LAM == nil then return end
+
     -- Load LibMediaProvider with backwards compatibility
     local LMP = LibStub("LibMediaProvider-1.0")
+    if LMP == nil then return end
 
     -- Get fonts
     local FontsList = {}

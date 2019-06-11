@@ -4,11 +4,12 @@
 --]]
 
 -- LUIE namespace
-LUIE             = {}
-LUIE.name        = "LuiExtended"
+if LUIE == nil then LUIE = {} end
+
 LUIE.tag         = "LUIE"
-LUIE.author      = "ArtOfShred, psypanda & SpellBuilder"
+LUIE.name        = "LuiExtended"
 LUIE.version     = "5.9.4"
+LUIE.author      = "ArtOfShred, psypanda & SpellBuilder"
 LUIE.website     = "https://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github      = "https://github.com/ArtOfShred/LuiExtended"
 LUIE.feedback    = "https://github.com/ArtOfShred/LuiExtended/issues"

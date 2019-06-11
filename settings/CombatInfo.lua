@@ -23,6 +23,7 @@ local ACTION_RESULT_AREA_EFFECT = 669966
 function CI.CreateSettings()
     -- Load LibAddonMenu
     local LAM = _G["LibAddonMenu2"]
+    if LAM == nil then return end
 
     -- Get fonts
     local FontsList = {}

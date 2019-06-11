@@ -36,6 +36,7 @@ local formatOptions = {
 function UF.CreateSettings()
     -- Load LibAddonMenu
     local LAM = _G["LibAddonMenu2"]
+    if LAM == nil then return end
 
     -- Get fonts
     local FontsList = {}

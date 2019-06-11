@@ -20,6 +20,7 @@ end
 -- Load additional fonts and status bar textures from LMP
 local function LoadMedia()
     local LMP = LibStub("LibMediaProvider-1.0")
+    if LMP == nil then return end
 
     -- Update Fonts
     for _, f in pairs(LMP:List(LMP.MediaType.FONT)) do

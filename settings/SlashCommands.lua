@@ -18,6 +18,7 @@ local merchantOptionsKeys   = { ["Nuzimeh"] = 1, ["Cat Planet Merchant"] = 2 }
 function SC.CreateSettings()
     -- Load LibAddonMenu
     local LAM = _G["LibAddonMenu2"]
+    if LAM == nil then return end
 
     local panelDataSlashCommands = {
         type = "panel",
@@ -105,7 +106,7 @@ function SC.CreateSettings()
                 default = SC.D.SlashBankerChoice,
                 disabled = function() return not SC.D.SlashBanker end,
 
-            }
+            },
             {
                 -- SlashMerchant
                 type = "checkbox",
@@ -127,7 +128,7 @@ function SC.CreateSettings()
                 default = SC.D.SlashMerchantChoice,
                 disabled = function() return not SC.D.SlashMerchant end,
 
-            }
+            },
             {
                 -- SlashFence
                 type = "checkbox",

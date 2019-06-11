@@ -9,6 +9,7 @@ local zo_strformat = zo_strformat
 function LUIE.CreateSettings()
     -- Load LibAddonMenu
     local LAM = _G["LibAddonMenu2"]
+    if LAM == nil then return end
 
     local optionsData = {}
 
