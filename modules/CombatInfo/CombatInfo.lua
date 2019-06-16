@@ -990,6 +990,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                         uiUltimate.LabelPct:SetHidden( true )
                     end
                     if CI.SV.BarShowLabel then
+                        if not g_uiCustomToggle[g_toggledSlots[abilityId]] then return end
                         local remain = g_toggledSlotsRemain[abilityId] - currentTime
                         g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                     end
