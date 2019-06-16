@@ -256,7 +256,7 @@ end
 
 
 
-function LUIE_CCTracker_SavePosition()
+function CCT:SavePosition()
     local coordX, coordY = LUIE_CCTracker:GetCenter()
     CI.SV.cct.offsetX = coordX - (GuiRoot:GetWidth() / 2)
     CI.SV.cct.offsetY = coordY - (GuiRoot:GetHeight() / 2)
@@ -264,7 +264,7 @@ function LUIE_CCTracker_SavePosition()
     LUIE_CCTracker:SetAnchor(CENTER, GuiRoot, CENTER, CI.SV.cct.offsetX, CI.SV.cct.offsetY)
 end
 
-function LUIE_CCTracker_OnUpdate(control)
+function CCT:OnUpdate(control)
     if CCT.Timer == 0 or not CCT.Timer then
         return
     end
