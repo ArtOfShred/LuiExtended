@@ -4,11 +4,11 @@
 --]]
 
 -- Quests namespace
-LUIE.Quests = {}
-local Q = LUIE.Quests
+LUIE.Data.Quests = {}
+local Quests = LUIE.Data.Quests
 
 -- List of Quest Items to ignore when Looted (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
-Q.QuestItemHideLoot = {
+Quests.QuestItemHideLoot = {
      -- Seasonal Quests
     [6013] = true, -- Soiled Napkin (Stonetooth Bash)
     [5918] = true, -- Crow Caller (The Witchmother's Bargain)
@@ -66,7 +66,7 @@ Q.QuestItemHideLoot = {
 }
 
 -- List of Quest Items to ignore when Removed (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
-Q.QuestItemHideRemove = {
+Quests.QuestItemHideRemove = {
     -- Seasonal Quests
     [6012] = true, -- Soiled Napkin (Stonetooth Bash)
 
@@ -133,34 +133,34 @@ Q.QuestItemHideRemove = {
 }
 
 -- Limit the maximum number of quantity of a quest item that can be added.
-Q.QuestItemMaxQuantityAdd = {
+Quests.QuestItemMaxQuantityAdd = {
     [3518] = 1, -- Welkynd Stone (Eye of the Ancients)
 }
 
 -- Call specific functions to add/remove table entries for funky quest items. This will trigger when a certain quest item is added.
-Q.QuestItemModifyOnAdd = {
-    [3278] = function() Q.QuestItemHideLoot[3280] = true end, -- Rune of Xarxes (The Mallari-Mora)
-    [3279] = function() Q.QuestItemHideLoot[3281] = true end, -- Rune of Magnus (The Mallari-Mora)
-    [3532] = function() Q.QuestItemHideLoot[3491] = true end, -- Crystal (Preventative Measure)
-    [3769] = function() Q.QuestItemHideLoot[3415] = true end, -- Teleport Scroll (Depths of Madness)
-    [4485] = function() Q.QuestItemHideRemove[4485] = true end, -- Rajhin's Mantle (A Lasting Winter)
-    [4492] = function() Q.QuestItemHideLoot[4485] = true end, -- Rajhin's Mantle (A Lasting Winter)
-    [3597] = function() Q.QuestItemHideLoot[3596] = true end, -- Rahkaz's Blade (The Enemy Within)
+Quests.QuestItemModifyOnAdd = {
+    [3278] = function() Quests.QuestItemHideLoot[3280] = true end, -- Rune of Xarxes (The Mallari-Mora)
+    [3279] = function() Quests.QuestItemHideLoot[3281] = true end, -- Rune of Magnus (The Mallari-Mora)
+    [3532] = function() Quests.QuestItemHideLoot[3491] = true end, -- Crystal (Preventative Measure)
+    [3769] = function() Quests.QuestItemHideLoot[3415] = true end, -- Teleport Scroll (Depths of Madness)
+    [4485] = function() Quests.QuestItemHideRemove[4485] = true end, -- Rajhin's Mantle (A Lasting Winter)
+    [4492] = function() Quests.QuestItemHideLoot[4485] = true end, -- Rajhin's Mantle (A Lasting Winter)
+    [3597] = function() Quests.QuestItemHideLoot[3596] = true end, -- Rahkaz's Blade (The Enemy Within)
 }
 
 -- Call specific functions to add/remove table entries for funky quest items. This will trigger when a certain quest item is removed.
-Q.QuestItemModifyOnRemove = {
-    [3532] = function() Q.QuestItemHideRemove[3491] = nil end, -- Crystal (Preventative Measure)
-    [4492] = function() zo_callLater(function() Q.QuestItemHideRemove[4485] = nil end, 2000) end, -- Rajhin's Mantle (A Lasting Winter)
-    [4645] = function() zo_callLater(function() Q.QuestItemHideRemove[4596] = nil end, 2000) end, -- Rahjin's Mantle (The Orrery of Elden Root)
-    [4411] = function() Q.QuestItemHideRemove[4411] = nil end, -- Bone Scepter (The Unquiet Dead)
-    [4479] = function() Q.QuestItemHideLoot[4479] = true Q.QuestItemHideRemove[4479] = false end, -- Loriasel Tablet Notes (Eyes of Azura)
-    [4442] = function() Q.QuestItemHideRemove[4433] = nil end, -- Sigil Geode (Eyes of Azura)
-    [3597] = function() Q.QuestItemHideRemove[3596] = nil end, -- Rahkaz's Blade (The Enemy Within)
+Quests.QuestItemModifyOnRemove = {
+    [3532] = function() Quests.QuestItemHideRemove[3491] = nil end, -- Crystal (Preventative Measure)
+    [4492] = function() zo_callLater(function() Quests.QuestItemHideRemove[4485] = nil end, 2000) end, -- Rajhin's Mantle (A Lasting Winter)
+    [4645] = function() zo_callLater(function() Quests.QuestItemHideRemove[4596] = nil end, 2000) end, -- Rahjin's Mantle (The Orrery of Elden Root)
+    [4411] = function() Quests.QuestItemHideRemove[4411] = nil end, -- Bone Scepter (The Unquiet Dead)
+    [4479] = function() Quests.QuestItemHideLoot[4479] = true Quests.QuestItemHideRemove[4479] = false end, -- Loriasel Tablet Notes (Eyes of Azura)
+    [4442] = function() Quests.QuestItemHideRemove[4433] = nil end, -- Sigil Geode (Eyes of Azura)
+    [3597] = function() Quests.QuestItemHideRemove[3596] = nil end, -- Rahkaz's Blade (The Enemy Within)
 }
 
 -- TODO: Find a way to extend this to the quest log text
 -- Replace the objective update text of a certain quest. Used to fix capitalization/punctuation errors. Matches string. Only works for EN.
-Q.QuestAdvancedOverride = {
+Quests.QuestAdvancedOverride = {
     ['Tell Chief Dushkul that Gargak is dead'] = 'Tell Chief Dushkul that Gargak is Dead',
 }

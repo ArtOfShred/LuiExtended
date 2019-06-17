@@ -4,23 +4,24 @@
 --]]
 
 LUIE.CombatTextCombatEllipseEventViewer = LUIE.CombatTextEventViewer:Subclass()
-local CTV = LUIE.CombatTextCombatEllipseEventViewer
+local CombatTextEventViewer = LUIE.CombatTextCombatEllipseEventViewer
 
-local C = LUIE.CombatTextConstants
 local AbbreviateNumber = LUIE.AbbreviateNumber
 
-local poolTypes = C.poolType
+local poolTypes = LUIE.Data.CombatTextConstants.poolType
+local eventType = LUIE.Data.CombatTextConstants.eventType
+local combatType = LUIE.Data.CombatTextConstants.combatType
 
-function CTV:New(...)
+function CombatTextEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(C.eventType.COMBAT, function(...) self:OnEvent(...) end)
+    obj:RegisterCallback(eventType.COMBAT, function(...) self:OnEvent(...) end)
     self.eventBuffer = {}
-    self.activeControls = { [C.combatType.OUTGOING] = {}, [C.combatType.INCOMING] = {} }
+    self.activeControls = { [combatType.OUTGOING] = {}, [combatType.INCOMING] = {} }
     self.lastControl = {}
     return obj
 end
 
-function CTV:OnEvent(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+function CombatTextEventViewer:OnEvent(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (LUIE.CombatText.SV.animation.animationType ~= 'ellipse') then return end
 
     local T = LUIE.CombatText.SV.throttles
@@ -48,7 +49,7 @@ function CTV:OnEvent(combatType, powerType, value, abilityName, abilityId, damag
     end
 end
 
-function CTV:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+function CombatTextEventViewer:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if not self.eventBuffer[eventKey] then return end
     local value = self.eventBuffer[eventKey].value
     local hits = self.eventBuffer[eventKey].hits
@@ -56,7 +57,7 @@ function CTV:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, a
     self:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
 end
 
-function CTV:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
+function CombatTextEventViewer:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
     local S = LUIE.CombatText.SV
     value = AbbreviateNumber(value, S.common.abbreviateNumbers)
 
@@ -66,7 +67,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     if (hits > 1 and S.toggles.showThrottleTrailer) then
         value = string.format('%s (%d)', value, hits)
     end
-    if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then
+    if (combatType == combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then
         textColor = S.colors.incomingDamageOverride
     end
 
@@ -75,7 +76,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
 
     -- Control setup
     local panel, point, relativePoint = LUIE_CombatText_Outgoing, BOTTOMRIGHT, TOPRIGHT
-    if (combatType == C.combatType.INCOMING) then
+    if (combatType == combatType.INCOMING) then
         panel = LUIE_CombatText_Incoming
         if (S.animation.incoming.directionType == 'up') then
             point, relativePoint = TOPRIGHT, BOTTOMRIGHT

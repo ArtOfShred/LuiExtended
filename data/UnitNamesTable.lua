@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.UnitNames = {
+LUIE.Data.UnitNames = {
     -- TODO: MAYBE in the future can localize these names, for the time being this table exists for that purpose.
 
     ----------------------------------------------------------------

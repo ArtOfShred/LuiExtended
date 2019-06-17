@@ -4,20 +4,23 @@
 --]]
 
 LUIE.CombatTextResourcesPowerEventListener = LUIE.CombatTextEventListener:Subclass()
-local CTL = LUIE.CombatTextResourcesPowerEventListener
+local CombatTextEventListener = LUIE.CombatTextResourcesPowerEventListener
 
-function CTL:New()
+local eventType = LUIE.Data.CombatTextConstants.eventType
+local resourceType = LUIE.Data.CombatTextConstants.resourceType
+
+function CombatTextEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_POWER_UPDATE, function(...) self:OnEvent(...) end)
     self.powerInfo = {
-        [POWERTYPE_HEALTH]  = { wasWarned = false, resourceType = LUIE.CombatTextConstants.resourceType.LOW_HEALTH },
-        [POWERTYPE_STAMINA] = { wasWarned = false, resourceType = LUIE.CombatTextConstants.resourceType.LOW_STAMINA },
-        [POWERTYPE_MAGICKA] = { wasWarned = false, resourceType = LUIE.CombatTextConstants.resourceType.LOW_MAGICKA }
+        [POWERTYPE_HEALTH]  = { wasWarned = false, resourceType = resourceType.LOW_HEALTH },
+        [POWERTYPE_STAMINA] = { wasWarned = false, resourceType = resourceType.LOW_STAMINA },
+        [POWERTYPE_MAGICKA] = { wasWarned = false, resourceType = resourceType.LOW_MAGICKA }
     }
     return obj
 end
 
-function CTL:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
+function CombatTextEventListener:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
     if (unit == 'player' and self.powerInfo[powerType] ~= nil) then
         local t = LUIE.CombatText.SV.toggles
         local threshold
@@ -39,7 +42,7 @@ function CTL:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
 
         -- Check if we need to show the warning, else clear the warning
         if (percent < threshold and not self.powerInfo[powerType].wasWarned) then
-            self:TriggerEvent(LUIE.CombatTextConstants.eventType.RESOURCE, self.powerInfo[powerType].resourceType, power)
+            self:TriggerEvent(eventType.RESOURCE, self.powerInfo[powerType].resourceType, power)
             self.powerInfo[powerType].wasWarned = true
         elseif (percent > threshold + 10) then -- Add 10 to create some sort of buffer, else the warning can fire more than once depending on the power regen of the player
             self.powerInfo[powerType].wasWarned = false

@@ -4,7 +4,7 @@
 --]]
 
 -- For debug function - convert result reason codes to string value
-LUIE.DebugResults = {
+LUIE.Data.DebugResults = {
     [2080]          = "ON CD",
     [2120]          = "ABSORB",
     [2040]          = "BAD TARGET",

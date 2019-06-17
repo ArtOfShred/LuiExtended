@@ -4,24 +4,24 @@
 --]]
 
 LUIE.CombatTextEventViewer = ZO_Object:Subclass()
-local CTV = LUIE.CombatTextEventViewer
+local CombatTextEventViewer = LUIE.CombatTextEventViewer
 
-local C = LUIE.CombatTextConstants
-local E = LUIE.Effects
+local Effects = LUIE.Data.Effects
+local combatType = LUIE.Data.CombatTextConstants.combatType
 
 local callbackManager = CALLBACK_MANAGER
 
-CTV.resourceNames = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_COMBATMECHANICTYPE', k); return t[k] end})
-CTV.damageTypes = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_DAMAGETYPE', k); return t[k] end})
+CombatTextEventViewer.resourceNames = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_COMBATMECHANICTYPE', k); return t[k] end})
+CombatTextEventViewer.damageTypes = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_DAMAGETYPE', k); return t[k] end})
 
-function CTV:New(poolManager, LMP)
+function CombatTextEventViewer:New(poolManager, LMP)
     local obj = ZO_Object:New(self)
     self.poolManager = poolManager
     self.LMP = LMP
     return obj
 end
 
-function CTV:FormatString(inputFormat, params)
+function CombatTextEventViewer:FormatString(inputFormat, params)
     return string.gsub(inputFormat, '%%.', function(x)
         if (x == '%t') then
             return params.text or ''
@@ -37,7 +37,7 @@ function CTV:FormatString(inputFormat, params)
     end)
 end
 
-function CTV:FormatAlertString(inputFormat, params)
+function CombatTextEventViewer:FormatAlertString(inputFormat, params)
     return string.gsub(inputFormat, '%%.', function(x)
         if (x == '%n') then
             return params.source or ''
@@ -51,7 +51,7 @@ function CTV:FormatAlertString(inputFormat, params)
     end)
 end
 
-function CTV:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+function CombatTextEventViewer:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     local S = LUIE.CombatText.SV
 
     local textFormat = S.formats.damage
@@ -155,24 +155,24 @@ function CTV:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical,
     return textFormat, fontSize, textColor
 end
 
-function CTV:ControlLayout(control, abilityId, combatType, sourceName)
+function CombatTextEventViewer:ControlLayout(control, abilityId, combatType, sourceName)
     local width, height = control.label:GetTextDimensions()
 
     if abilityId then
-        local iconPath = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].icon or GetAbilityIcon(abilityId)
+        local iconPath = Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].icon or GetAbilityIcon(abilityId)
 
-        if E.EffectOverrideByName[abilityId] then
+        if Effects.EffectOverrideByName[abilityId] then
             sourceName = zo_strformat("<<t:1>>", sourceName)
-            if E.EffectOverrideByName[abilityId][sourceName] and E.EffectOverrideByName[abilityId][sourceName].icon then
-                iconPath = E.EffectOverrideByName[abilityId][sourceName].icon
+            if Effects.EffectOverrideByName[abilityId][sourceName] and Effects.EffectOverrideByName[abilityId][sourceName].icon then
+                iconPath = Effects.EffectOverrideByName[abilityId][sourceName].icon
             end
         end
 
-        if E.MapDataOverride[abilityId] then
+        if Effects.MapDataOverride[abilityId] then
             local index = GetCurrentMapZoneIndex()
-            if E.MapDataOverride[abilityId][index] then
-                if E.MapDataOverride[abilityId][index].icon then
-                    iconPath = E.MapDataOverride[abilityId][index].icon
+            if Effects.MapDataOverride[abilityId][index] then
+                if Effects.MapDataOverride[abilityId][index].icon then
+                    iconPath = Effects.MapDataOverride[abilityId][index].icon
                 end
             end
         end
@@ -180,9 +180,9 @@ function CTV:ControlLayout(control, abilityId, combatType, sourceName)
         if iconPath and iconPath ~= '' then
             local S = LUIE.CombatText.SV
             local iconSide
-            if combatType == C.combatType.INCOMING then
+            if combatType == combatType.INCOMING then
                 iconSide = S.animation.incomingIcon
-            elseif combatType == C.combatType.OUTGOING then
+            elseif combatType == combatType.OUTGOING then
                 iconSide = S.animation.outgoingIcon
             else
                 iconSide = 'none'
@@ -218,18 +218,18 @@ function CTV:ControlLayout(control, abilityId, combatType, sourceName)
     control.icon:SetAlpha(LUIE.CombatText.SV.common.transparencyValue/100)
 end
 
-function CTV:RegisterCallback(eventType, func)
+function CombatTextEventViewer:RegisterCallback(eventType, func)
     callbackManager:RegisterCallback(eventType, function(...) func(...) end)
 end
 
-function CTV:PrepareLabel(label, fontSize, color, text)
+function CombatTextEventViewer:PrepareLabel(label, fontSize, color, text)
     label:SetText(text)
     label:SetColor(unpack(color))
     label:SetFont(string.format('%s|%d|%s', self.LMP:Fetch('font', LUIE.CombatText.SV.fontFace), fontSize, LUIE.CombatText.SV.fontOutline))
     label:SetAlpha(LUIE.CombatText.SV.common.transparencyValue/100)
 end
 
-function CTV:IsOverlapping(control, activeControls)
+function CombatTextEventViewer:IsOverlapping(control, activeControls)
     local p = 5 -- Substract some padding
 
     local left, top, right, bottom = control:GetScreenRect()

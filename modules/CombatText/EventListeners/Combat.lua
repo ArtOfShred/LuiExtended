@@ -4,11 +4,10 @@
 --]]
 
 LUIE.CombatTextCombatEventListener = LUIE.CombatTextEventListener:Subclass()
-local CTL = LUIE.CombatTextCombatEventListener
+local CombatTextEventListener = LUIE.CombatTextCombatEventListener
 
-local C = LUIE.CombatTextConstants
-local E = LUIE.Effects
-local AlertT = LUIE.AlertTable
+local CombatText = LUIE.Data.CombatTextConstants
+local Effects = LUIE.Data.Effects
 
 local isWarned = {
     combat          = false,
@@ -19,7 +18,7 @@ local isWarned = {
     stunned         = false,
 }
 
-function CTL:New()
+function CombatTextEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_PLAYER_ACTIVATED, function () self:OnPlayerActivated() end)
     obj:RegisterForEvent(EVENT_COMBAT_EVENT, function(...) self:OnCombatIn(...) end, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER) -- Target -> Player
@@ -30,36 +29,36 @@ function CTL:New()
     return obj
 end
 
-function CTL:OnPlayerActivated()
+function CombatTextEventListener:OnPlayerActivated()
     if IsUnitInCombat("player") then
         isWarned.combat = true
     end
 end
 
-function CTL:OnCombatIn(...)
+function CombatTextEventListener:OnCombatIn(...)
     local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow = ...
 
     local S = LUIE.CombatText.SV
-    local combatType, togglesInOut = C.combatType.INCOMING, S.toggles.incoming
+    local combatType, togglesInOut = CombatText.combatType.INCOMING, S.toggles.incoming
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     local sourceNameCheck = zo_strformat("<<t:1>>", sourceName)
 
     -- Handle effects that override by UnitName
-    if E.EffectOverrideByName[abilityId] then
-        if E.EffectOverrideByName[abilityId][sourceNameCheck] then
-            if E.EffectOverrideByName[abilityId][sourceNameCheck].name then
-                abilityName = E.EffectOverrideByName[abilityId][sourceNameCheck].name
+    if Effects.EffectOverrideByName[abilityId] then
+        if Effects.EffectOverrideByName[abilityId][sourceNameCheck] then
+            if Effects.EffectOverrideByName[abilityId][sourceNameCheck].name then
+                abilityName = Effects.EffectOverrideByName[abilityId][sourceNameCheck].name
             end
         end
     end
 
     -- Handle effects that override by ZoneId
-    if E.MapDataOverride[abilityId] then
+    if Effects.MapDataOverride[abilityId] then
         local index = GetCurrentMapZoneIndex()
-        if E.MapDataOverride[abilityId][index] then
-            if E.MapDataOverride[abilityId][index].name then
-                abilityName = E.MapDataOverride[abilityId][index].name
+        if Effects.MapDataOverride[abilityId][index] then
+            if Effects.MapDataOverride[abilityId][index].name then
+                abilityName = Effects.MapDataOverride[abilityId][index].name
             end
         end
     end
@@ -69,19 +68,19 @@ function CTL:OnCombatIn(...)
 ---------------------------------------------------------------------------------------------------------------------------------------
     --Damage
     local isDamage, isDamageCritical, isDot, isDotCritical
-        = C.isDamage[resultType], C.isDamageCritical[resultType], C.isDot[resultType], C.isDotCritical[resultType]
+        = CombatText.isDamage[resultType], CombatText.isDamageCritical[resultType], CombatText.isDot[resultType], CombatText.isDotCritical[resultType]
     --Healing
     local isHealing, isHealingCritical, isHot, isHotCritical
-        = C.isHealing[resultType], C.isHealingCritical[resultType], C.isHot[resultType], C.isHotCritical[resultType]
+        = CombatText.isHealing[resultType], CombatText.isHealingCritical[resultType], CombatText.isHot[resultType], CombatText.isHotCritical[resultType]
     --Energize & Drain
     local isEnergize, isDrain
-        = C.isEnergize[resultType], C.isDrain[resultType]
+        = CombatText.isEnergize[resultType], CombatText.isDrain[resultType]
     --Mitigation
     local isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted
-        = C.isMiss[resultType], C.isImmune[resultType], C.isParried[resultType], C.isReflected[resultType], C.isDamageShield[resultType], C.isDodged[resultType], C.isBlocked[resultType], C.isInterrupted[resultType]
+        = CombatText.isMiss[resultType], CombatText.isImmune[resultType], CombatText.isParried[resultType], CombatText.isReflected[resultType], CombatText.isDamageShield[resultType], CombatText.isDodged[resultType], CombatText.isBlocked[resultType], CombatText.isInterrupted[resultType]
     --Crowd Control
     local isDisoriented, isFeared, isOffBalanced, isSilenced, isStunned
-        = C.isDisoriented[resultType], C.isFeared[resultType], C.isOffBalanced[resultType], C.isSilenced[resultType], C.isStunned[resultType]
+        = CombatText.isDisoriented[resultType], CombatText.isFeared[resultType], CombatText.isOffBalanced[resultType], CombatText.isSilenced[resultType], CombatText.isStunned[resultType]
     --Overflow
     local overkill, overheal
         = (S.common.overkill and overflow > 0 and (isDamage or isDamageCritical or isDot or isDotCritical) ), (S.common.overheal and overflow > 0 and (isHealing or isHealingCritical or isHot or isHotCritical) )
@@ -111,9 +110,9 @@ function CTL:OnCombatIn(...)
        if overkill or overheal then
             hitValue = hitValue + overflow
        end
-       if not E.EffectHideSCT[abilityId] then -- Check if ability is on the hide list
+       if not Effects.EffectHideSCT[abilityId] then -- Check if ability is on the hide list
             if (S.toggles.inCombatOnly and isWarned.combat) or (not S.toggles.inCombatOnly) then --Check if 'in combat only' is ticked
-                self:TriggerEvent(C.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+                self:TriggerEvent(CombatText.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
             end
        end
     end
@@ -126,7 +125,7 @@ function CTL:OnCombatIn(...)
             if (isWarned.disoriented) then
                 PlaySound('Ability_Failed') --will play a sound every disoriented event afterwards, as any failed action during a CC retriggers the event, causing text flood if buttons are spammed
             else
-                self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.DISORIENTED, combatType)
+                self:TriggerEvent(CombatText.eventType.CROWDCONTROL, CombatText.crowdControlType.DISORIENTED, combatType)
                 isWarned.disoriented = true
                 zo_callLater(function() isWarned.disoriented = false end, 1000) end --1 second buffer
         end
@@ -135,7 +134,7 @@ function CTL:OnCombatIn(...)
             if (isWarned.feared) then
                 PlaySound('Ability_Failed')
             else
-                self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.FEARED, combatType)
+                self:TriggerEvent(CombatText.eventType.CROWDCONTROL, CombatText.crowdControlType.FEARED, combatType)
                 isWarned.feared = true
                 zo_callLater(function() isWarned.feared = false end, 1000) end --1 second buffer
         end
@@ -144,7 +143,7 @@ function CTL:OnCombatIn(...)
             if (isWarned.offBalanced) then
                 PlaySound('Ability_Failed')
             else
-                self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.OFFBALANCED, combatType)
+                self:TriggerEvent(CombatText.eventType.CROWDCONTROL, CombatText.crowdControlType.OFFBALANCED, combatType)
                 isWarned.offBalanced = true
                 zo_callLater(function() isWarned.offBalanced = false end, 1000) end --1 second buffer
         end
@@ -153,7 +152,7 @@ function CTL:OnCombatIn(...)
             if (isWarned.silenced) then
                 PlaySound('Ability_Failed')
             else
-                self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.SILENCED, combatType)
+                self:TriggerEvent(CombatText.eventType.CROWDCONTROL, CombatText.crowdControlType.SILENCED, combatType)
                 isWarned.silenced = true
                 zo_callLater(function() isWarned.silenced = false end, 1000) end --1 second buffer
         end
@@ -162,21 +161,21 @@ function CTL:OnCombatIn(...)
             if (isWarned.stunned) then
                 PlaySound('Ability_Failed')
             else
-                self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.STUNNED, combatType)
+                self:TriggerEvent(CombatText.eventType.CROWDCONTROL, CombatText.crowdControlType.STUNNED, combatType)
                 isWarned.stunned = true
                 zo_callLater(function() isWarned.stunned = false end, 1000) end --1 second buffer
         end
     end
 end
 
-function CTL:OnCombatOut(...)
+function CombatTextEventListener:OnCombatOut(...)
     local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow = ...
 
     -- Don't display duplicate messages for events sourced from the player that target the player
     if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET then return end
 
     local S = LUIE.CombatText.SV
-    local combatType, togglesInOut = C.combatType.OUTGOING, S.toggles.outgoing
+    local combatType, togglesInOut = CombatText.combatType.OUTGOING, S.toggles.outgoing
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -184,19 +183,19 @@ function CTL:OnCombatOut(...)
 ---------------------------------------------------------------------------------------------------------------------------------------
     --Damage
     local isDamage, isDamageCritical, isDot, isDotCritical
-        = C.isDamage[resultType], C.isDamageCritical[resultType], C.isDot[resultType], C.isDotCritical[resultType]
+        = CombatText.isDamage[resultType], CombatText.isDamageCritical[resultType], CombatText.isDot[resultType], CombatText.isDotCritical[resultType]
     --Healing
     local isHealing, isHealingCritical, isHot, isHotCritical
-        = C.isHealing[resultType], C.isHealingCritical[resultType], C.isHot[resultType], C.isHotCritical[resultType]
+        = CombatText.isHealing[resultType], CombatText.isHealingCritical[resultType], CombatText.isHot[resultType], CombatText.isHotCritical[resultType]
     --Energize & Drain
     local isEnergize, isDrain
-        = C.isEnergize[resultType], C.isDrain[resultType]
+        = CombatText.isEnergize[resultType], CombatText.isDrain[resultType]
     --Mitigation
     local isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted
-        = C.isMiss[resultType], C.isImmune[resultType], C.isParried[resultType], C.isReflected[resultType], C.isDamageShield[resultType], C.isDodged[resultType], C.isBlocked[resultType], C.isInterrupted[resultType]
+        = CombatText.isMiss[resultType], CombatText.isImmune[resultType], CombatText.isParried[resultType], CombatText.isReflected[resultType], CombatText.isDamageShield[resultType], CombatText.isDodged[resultType], CombatText.isBlocked[resultType], CombatText.isInterrupted[resultType]
     --Crowd Control
     local isDisoriented, isFeared, isOffBalanced, isSilenced, isStunned
-        = C.isDisoriented[resultType], C.isFeared[resultType], C.isOffBalanced[resultType], C.isSilenced[resultType], C.isStunned[resultType]
+        = CombatText.isDisoriented[resultType], CombatText.isFeared[resultType], CombatText.isOffBalanced[resultType], CombatText.isSilenced[resultType], CombatText.isStunned[resultType]
     --Overflow
     local overkill, overheal
         = (S.common.overkill and overflow > 0 and (isDamage or isDamageCritical or isDot or isDotCritical) ), (S.common.overheal and overflow > 0 and (isHealing or isHealingCritical or isHot or isHotCritical) )
@@ -227,9 +226,9 @@ function CTL:OnCombatOut(...)
        if overkill or overheal then
             hitValue = hitValue + overflow
        end
-       if not E.EffectHideSCT[abilityId] then -- Check if ability is on the hide list
+       if not Effects.EffectHideSCT[abilityId] then -- Check if ability is on the hide list
             if (S.toggles.inCombatOnly and isWarned.combat) or (not S.toggles.inCombatOnly) then --Check if 'in combat only' is ticked
-                self:TriggerEvent(C.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+                self:TriggerEvent(CombatText.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
             end
        end
     end
@@ -242,7 +241,7 @@ function CTL:OnCombatOut(...)
             if (isWarned.disoriented) then
                 PlaySound('Ability_Failed') --will play a sound every disoriented event afterwards, as any failed action during a CC retriggers the event, causing text flood if buttons are spammed
             else
-                self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.DISORIENTED, combatType)
+                self:TriggerEvent(CombatText.eventType.CROWDCONTROL, CombatText.crowdControlType.DISORIENTED, combatType)
                 isWarned.disoriented = true
                 zo_callLater(function() isWarned.disoriented = false end, 1000) end --1 second buffer
         end
@@ -251,7 +250,7 @@ function CTL:OnCombatOut(...)
             if (isWarned.feared) then
                 PlaySound('Ability_Failed')
             else
-                self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.FEARED, combatType)
+                self:TriggerEvent(CombatText.eventType.CROWDCONTROL, CombatText.crowdControlType.FEARED, combatType)
                 isWarned.feared = true
                 zo_callLater(function() isWarned.feared = false end, 1000) end --1 second buffer
         end
@@ -260,7 +259,7 @@ function CTL:OnCombatOut(...)
             if (isWarned.offBalanced) then
                 PlaySound('Ability_Failed')
             else
-                self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.OFFBALANCED, combatType)
+                self:TriggerEvent(CombatText.eventType.CROWDCONTROL, CombatText.crowdControlType.OFFBALANCED, combatType)
                 isWarned.offBalanced = true
                 zo_callLater(function() isWarned.offBalanced = false end, 1000) end --1 second buffer
         end
@@ -269,7 +268,7 @@ function CTL:OnCombatOut(...)
             if (isWarned.silenced) then
                 PlaySound('Ability_Failed')
             else
-                self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.SILENCED, combatType)
+                self:TriggerEvent(CombatText.eventType.CROWDCONTROL, CombatText.crowdControlType.SILENCED, combatType)
                 isWarned.silenced = true
                 zo_callLater(function() isWarned.silenced = false end, 1000) end --1 second buffer
         end
@@ -278,7 +277,7 @@ function CTL:OnCombatOut(...)
             if (isWarned.stunned) then
                 PlaySound('Ability_Failed')
             else
-                self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.STUNNED, combatType)
+                self:TriggerEvent(CombatText.eventType.CROWDCONTROL, CombatText.crowdControlType.STUNNED, combatType)
                 isWarned.stunned = true
                 zo_callLater(function() isWarned.stunned = false end, 1000) end --1 second buffer
         end
@@ -289,18 +288,18 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//COMBAT STATE EVENTS & TRIGGERS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
-function CTL:CombatState(inCombat)
+function CombatTextEventListener:CombatState(inCombat)
     local S = LUIE.CombatText.SV
 
     if not isWarned.combat then
         isWarned.combat = true
         if S.toggles.showInCombat then
-            self:TriggerEvent(C.eventType.POINT, C.pointType.IN_COMBAT, nil)
+            self:TriggerEvent(CombatText.eventType.POINT, CombatText.pointType.IN_COMBAT, nil)
         end
     else
         isWarned.combat = false
         if S.toggles.showOutCombat then
-            self:TriggerEvent(C.eventType.POINT, C.pointType.OUT_COMBAT, nil)
+            self:TriggerEvent(CombatText.eventType.POINT, CombatText.pointType.OUT_COMBAT, nil)
         end
     end
 end

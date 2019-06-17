@@ -4,17 +4,17 @@
 --]]
 
 -- Effects namespace
-LUIE.CrowdControl = {}
-local CC = LUIE.CrowdControl
+LUIE.Data.CrowdControl = {}
+local CrowdControl = LUIE.Data.CrowdControl
 
--- CC.aoePlayerUltimate
--- CC.aoePlayerNormal
--- CC.aoePlayerSet
--- CC.aoeTrap
+-- CrowdControl.aoePlayerUltimate
+-- CrowdControl.aoePlayerNormal
+-- CrowdControl.aoePlayerSet
+-- CrowdControl.aoeTrap
 -- cc.aoeBoss
--- CC.aoeElite
--- CC.aoeNormal
-CC.aoePlayerUltimate = {
+-- CrowdControl.aoeElite
+-- CrowdControl.aoeNormal
+CrowdControl.aoePlayerUltimate = {
 
     -- Dragonknight
     [28995] = true, -- Dragonknight Standard
@@ -69,7 +69,7 @@ CC.aoePlayerUltimate = {
 
 }
 
-CC.aoePlayerNormal = {
+CrowdControl.aoePlayerNormal = {
 
     -- Psijic Order
     [104007] = true, -- Time Stop
@@ -134,7 +134,7 @@ CC.aoePlayerNormal = {
 
 }
 
-CC.aoePlayerSet = {
+CrowdControl.aoePlayerSet = {
 
     -- Sets
     [102136] = true, -- Zaan
@@ -163,7 +163,7 @@ CC.aoePlayerSet = {
 
 }
 
-CC.aoeTraps = {
+CrowdControl.aoeTraps = {
 
     -- TODO: Will need to add better categories here eventually
     [87949] = true, -- Lava (Foyada Quarry)
@@ -218,7 +218,7 @@ CC.aoeTraps = {
 
 }
 
-CC.aoeNPCBoss = {
+CrowdControl.aoeNPCBoss = {
 
     -- Summerset
     [105889] = true, -- Pustulant Eruption (Yaghra Nightmare)
@@ -329,7 +329,7 @@ CC.aoeNPCBoss = {
 
 }
 
-CC.aoeNPCElite = {
+CrowdControl.aoeNPCElite = {
 
     -- Overland / Standard NPC's
     [44228] = true, -- Dragonknight Standard (Dragonknight - Elite)
@@ -366,7 +366,7 @@ CC.aoeNPCElite = {
 
 }
 
-CC.aoeNPCNormal = {
+CrowdControl.aoeNPCNormal = {
 
     [37131] = true, -- Ice Cage (Battlemage)
     [10813] = true, -- Ignite (Synergy - Fire Mage)
@@ -430,7 +430,7 @@ CC.aoeNPCNormal = {
 
 
 -- List of effects sourced by the player that damage self that should be shown
-CC.LavaAlerts = {
+CrowdControl.LavaAlerts = {
     -- Player
     [115607] = true, -- Dismount Stun
 
@@ -492,7 +492,7 @@ CC.LavaAlerts = {
 }
 
 -- List of CC that can't be removed with Break Free
-CC.UnbreakableList ={
+CrowdControl.UnbreakableList ={
     -- Player
     [115607] = true, -- Dismount Stun
     [40520] = true, -- Q3047 - Knockdown (Player Werewolf Bite stun)
@@ -603,7 +603,7 @@ CC.UnbreakableList ={
     [92671] = true, -- Pyroclast (Vvardenfell -- The Forgotten Wastes)
 }
 
-CC.IgnoreList ={
+CrowdControl.IgnoreList ={
     [54363] = true, -- Halt (Guard)
     [4197] = true, -- Recovering (NPC Duel)
 
@@ -651,7 +651,7 @@ CC.IgnoreList ={
 }
 
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
-CC.ReversedLogic = {
+CrowdControl.ReversedLogic = {
     [39260] = true, -- Q4917 Push Player Back (Grahtwood - The Blacksap's Hold)
     [83124] = true, -- Ferocious Bellow (Greenshade - World Boss - Thodundor's View)
 
@@ -660,6 +660,6 @@ CC.ReversedLogic = {
 }
 
 -- Use on ACTION_RESULT_EFFECT_GAINED
-CC.SpecialCC = {
+CrowdControl.SpecialCC = {
     [55756] = true, -- Burning (Valkyn Skoria)
 }

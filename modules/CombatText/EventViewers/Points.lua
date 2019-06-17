@@ -4,20 +4,21 @@
 --]]
 
 LUIE.CombatTextPointEventViewer = LUIE.CombatTextEventViewer:Subclass()
-local CTV = LUIE.CombatTextPointEventViewer
+local CombatTextEventViewer = LUIE.CombatTextPointEventViewer
 
-local poolTypes = LUIE.CombatTextConstants.poolType
-local pointTypes = LUIE.CombatTextConstants.pointType
+local poolTypes = LUIE.Data.CombatTextConstants.poolType
+local eventType = LUIE.Data.CombatTextConstants.eventType
+local pointTypes = LUIE.Data.CombatTextConstants.pointType
 
-function CTV:New(...)
+function CombatTextEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(LUIE.CombatTextConstants.eventType.POINT, function(...) self:OnEvent(...) end)
+    obj:RegisterCallback(eventType.POINT, function(...) self:OnEvent(...) end)
     self.locationOffset = 0  -- Simple way to avoid overlapping. When number of active notes is back to 0, the offset is also reset
     self.activePoints = 0
     return obj
 end
 
-function CTV:OnEvent(pointType, value)
+function CombatTextEventViewer:OnEvent(pointType, value)
     local S = LUIE.CombatText.SV
 
     --Label setup

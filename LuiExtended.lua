@@ -21,8 +21,10 @@ LUIE.SV          = nil
 LUIE.SVVer       = 2
 LUIE.SVName      = "LUIESV"
 
+LUIE.Data        = {}
+
 -- Default Settings
-LUIE.D = {
+LUIE.Defaults = {
     CharacterSpecificSV         = false,
     StartupInfo                 = false,
     HideXPBar                   = false,

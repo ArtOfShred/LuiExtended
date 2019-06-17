@@ -4,22 +4,22 @@
 --]]
 
 LUIE.CombatTextCrowdControlEventViewer = LUIE.CombatTextEventViewer:Subclass()
-local CTV = LUIE.CombatTextCrowdControlEventViewer
+local CombatTextEventViewer = LUIE.CombatTextCrowdControlEventViewer
 
-local C = LUIE.CombatTextConstants
+local poolTypes = LUIE.Data.CombatTextConstants.poolType
+local eventType = LUIE.Data.CombatTextConstants.eventType
+local combatType = LUIE.Data.CombatTextConstants.combatType
+local crowdControlTypes = LUIE.Data.CombatTextConstants.crowdControlType
 
-local poolTypes = LUIE.CombatTextConstants.poolType
-local crowdControlTypes = LUIE.CombatTextConstants.crowdControlType
-
-function CTV:New(...)
+function CombatTextEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(LUIE.CombatTextConstants.eventType.CROWDCONTROL, function(...) self:OnEvent(...) end)
-    self.locationOffset = { [C.combatType.OUTGOING] = 0, [C.combatType.INCOMING] = 0 }
-    self.activeCrowdControls = { [C.combatType.OUTGOING] = 0, [C.combatType.INCOMING] = 0 }
+    obj:RegisterCallback(eventType.CROWDCONTROL, function(...) self:OnEvent(...) end)
+    self.locationOffset = { [combatType.OUTGOING] = 0, [combatType.INCOMING] = 0 }
+    self.activeCrowdControls = { [combatType.OUTGOING] = 0, [combatType.INCOMING] = 0 }
     return obj
 end
 
-function CTV:OnEvent(crowdControlType, combatType)
+function CombatTextEventViewer:OnEvent(crowdControlType, combatType)
     local S = LUIE.CombatText.SV
 
     --Label setup
@@ -58,7 +58,7 @@ function CTV:OnEvent(crowdControlType, combatType)
 
     --Control setup
     local panel, point, relativePoint = LUIE_CombatText_Outgoing, TOP, BOTTOM
-    if (combatType == C.combatType.INCOMING) then
+    if (combatType == combatType.INCOMING) then
         panel = LUIE_CombatText_Incoming
         if (S.animation.incoming.directionType == 'down') then
             point, relativePoint = BOTTOM, TOP

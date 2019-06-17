@@ -4,21 +4,22 @@
 --]]
 
 LUIE.CombatTextCombatCloudEventViewer = LUIE.CombatTextEventViewer:Subclass()
-local CTV = LUIE.CombatTextCombatCloudEventViewer
+local CombatTextEventViewer = LUIE.CombatTextCombatCloudEventViewer
 
-local C = LUIE.CombatTextConstants
 local AbbreviateNumber = LUIE.AbbreviateNumber
 
-local poolTypes = C.poolType
+local poolTypes = LUIE.Data.CombatTextConstants.poolType
+local combatType = LUIE.Data.CombatTextConstants.combatType
+local eventType = LUIE.Data.CombatTextConstants.eventType
 
-function CTV:New(...)
+function CombatTextEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(C.eventType.COMBAT, function(...) self:OnEvent(...) end)
+    obj:RegisterCallback(eventType.COMBAT, function(...) self:OnEvent(...) end)
     self.eventBuffer = {}
     return obj
 end
 
-function CTV:OnEvent(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+function CombatTextEventViewer:OnEvent(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (LUIE.CombatText.SV.animation.animationType ~= 'cloud') then return end
 
     local T = LUIE.CombatText.SV.throttles
@@ -46,7 +47,7 @@ function CTV:OnEvent(combatType, powerType, value, abilityName, abilityId, damag
     end
 end
 
-function CTV:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+function CombatTextEventViewer:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if not self.eventBuffer[eventKey] then return end
     local value = self.eventBuffer[eventKey].value
     local hits = self.eventBuffer[eventKey].hits
@@ -54,13 +55,13 @@ function CTV:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, a
     self:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
 end
 
-function CTV:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
+function CombatTextEventViewer:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
     local S = LUIE.CombatText.SV
     value = AbbreviateNumber(value, S.common.abbreviateNumbers)
 
     -- Control setup
     local panel = LUIE_CombatText_Outgoing
-    if (combatType == C.combatType.INCOMING) then panel = LUIE_CombatText_Incoming end
+    if (combatType == combatType.INCOMING) then panel = LUIE_CombatText_Incoming end
     local w, h = panel:GetDimensions()
     local radiusW, radiusH = w/2, h*2
     local offsetX, offsetY = nil, nil
@@ -70,7 +71,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     elseif (isDot or isHot) then -- http://www.mathopenref.com/coordgeneralellipse.html
         offsetX = math.random(-radiusW * .95, radiusW * .95) -- Make radiusW a bit smaller to avoid horizontal animations
         offsetY = math.sqrt((radiusH) ^ 2 * (1 - (offsetX ^ 2 / (radiusW) ^ 2)))
-        if (combatType == C.combatType.OUTGOING) then offsetY = -offsetY end
+        if (combatType == combatType.OUTGOING) then offsetY = -offsetY end
     elseif (isDamage or isHealing or isEnergize or isDrain or isDamageShield or isBlocked) then
         offsetX, offsetY = math.random(-radiusW, radiusW), math.random(-radiusH * .5, radiusH)
     end
