@@ -4,14 +4,14 @@
 --]]
 
 LUIE.CombatTextCrowdControlEventViewer = LUIE.CombatTextEventViewer:Subclass()
-local CombatTextEventViewer = LUIE.CombatTextCrowdControlEventViewer
+local CombatTextCrowdControlEventViewer = LUIE.CombatTextCrowdControlEventViewer
 
 local poolTypes = LUIE.Data.CombatTextConstants.poolType
 local eventType = LUIE.Data.CombatTextConstants.eventType
 local combatType = LUIE.Data.CombatTextConstants.combatType
 local crowdControlTypes = LUIE.Data.CombatTextConstants.crowdControlType
 
-function CombatTextEventViewer:New(...)
+function CombatTextCrowdControlEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
     obj:RegisterCallback(eventType.CROWDCONTROL, function(...) self:OnEvent(...) end)
     self.locationOffset = { [combatType.OUTGOING] = 0, [combatType.INCOMING] = 0 }
@@ -19,7 +19,7 @@ function CombatTextEventViewer:New(...)
     return obj
 end
 
-function CombatTextEventViewer:OnEvent(crowdControlType, combatType)
+function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, combatType)
     local S = LUIE.CombatText.SV
 
     --Label setup

@@ -4,12 +4,12 @@
 --]]
 
 LUIE.CombatTextPointsExperienceEventListener = LUIE.CombatTextEventListener:Subclass()
-local CombatTextEventListener = LUIE.CombatTextPointsExperienceEventListener
+local CombatTextPointsExperienceEventListener = LUIE.CombatTextPointsExperienceEventListener
 
 local eventType = LUIE.Data.CombatTextConstants.eventType
 local pointType = LUIE.Data.CombatTextConstants.pointType
 
-function CombatTextEventListener:New()
+function CombatTextPointsExperienceEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_EXPERIENCE_UPDATE, function(...) self:OnEvent(...) end, REGISTER_FILTER_UNIT_TAG, 'player')
     self.gain = 0
@@ -27,7 +27,7 @@ function CombatTextEventListener:New()
     return obj
 end
 
-function CombatTextEventListener:OnEvent(unit, currentXp, maxXp)
+function CombatTextPointsExperienceEventListener:OnEvent(unit, currentXp, maxXp)
     if LUIE.CombatText.SV.toggles.showPointsExperience then
         self.isChampion = IsUnitChampion('player')
         if (self.isChampion) then

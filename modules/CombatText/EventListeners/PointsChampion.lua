@@ -4,12 +4,12 @@
 --]]
 
 LUIE.CombatTextPointsChampionEventListener = LUIE.CombatTextEventListener:Subclass()
-local CombatTextEventListener = LUIE.CombatTextPointsChampionEventListener
+local CombatTextPointsChampionEventListener = LUIE.CombatTextPointsChampionEventListener
 
 local eventType = LUIE.Data.CombatTextConstants.eventType
 local pointType = LUIE.Data.CombatTextConstants.pointType
 
-function CombatTextEventListener:New()
+function CombatTextPointsChampionEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_CHAMPION_POINT_UPDATE, function(...) self:OnEvent(...) end, REGISTER_FILTER_UNIT_TAG, 'player')
     self.gain = 0
@@ -22,7 +22,7 @@ function CombatTextEventListener:New()
     return obj
 end
 
-function CombatTextEventListener:OnEvent(unit, currentPoints, maxPoints, reason)
+function CombatTextPointsChampionEventListener:OnEvent(unit, currentPoints, maxPoints, reason)
     if (LUIE.CombatText.SV.toggles.showPointsChampion and not self.hasMaxCP) then
         local currentVR = GetUnitChampionPoints('player')
 

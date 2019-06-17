@@ -4,20 +4,20 @@
 --]]
 
 LUIE.CombatTextResourcesPotionEventListener = LUIE.CombatTextEventListener:Subclass()
-local CombatTextEventListener = LUIE.CombatTextResourcesPotionEventListener
+local CombatTextResourcesPotionEventListener = LUIE.CombatTextResourcesPotionEventListener
 
 local eventType = LUIE.Data.CombatTextConstants.eventType
 local resourceType = LUIE.Data.CombatTextConstants.resourceType
 
 local inCooldown = false
 
-function CombatTextEventListener:New()
+function CombatTextResourcesPotionEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForUpdate("PotionCooldown", 100, function() self:PotionCooldown() end)
     return obj
 end
 
-function CombatTextEventListener:PotionCooldown()
+function CombatTextResourcesPotionEventListener:PotionCooldown()
     local t = LUIE.CombatText.SV.toggles
     if not t.showPotionReady then return end
 

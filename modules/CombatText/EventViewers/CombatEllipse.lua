@@ -4,24 +4,21 @@
 --]]
 
 LUIE.CombatTextCombatEllipseEventViewer = LUIE.CombatTextEventViewer:Subclass()
-local CombatTextEventViewer = LUIE.CombatTextCombatEllipseEventViewer
+local CombatTextCombatEllipseEventViewer = LUIE.CombatTextCombatEllipseEventViewer
 
+local CombatTextConstants = LUIE.Data.CombatTextConstants
 local AbbreviateNumber = LUIE.AbbreviateNumber
 
-local poolTypes = LUIE.Data.CombatTextConstants.poolType
-local eventType = LUIE.Data.CombatTextConstants.eventType
-local combatType = LUIE.Data.CombatTextConstants.combatType
-
-function CombatTextEventViewer:New(...)
+function CombatTextCombatEllipseEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(eventType.COMBAT, function(...) self:OnEvent(...) end)
+    obj:RegisterCallback(CombatTextConstants.eventType.COMBAT, function(...) self:OnEvent(...) end)
     self.eventBuffer = {}
-    self.activeControls = { [combatType.OUTGOING] = {}, [combatType.INCOMING] = {} }
+    self.activeControls = { [CombatTextConstants.combatType.OUTGOING] = {}, [CombatTextConstants.combatType.INCOMING] = {} }
     self.lastControl = {}
     return obj
 end
 
-function CombatTextEventViewer:OnEvent(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+function CombatTextCombatEllipseEventViewer:OnEvent(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (LUIE.CombatText.SV.animation.animationType ~= 'ellipse') then return end
 
     local T = LUIE.CombatText.SV.throttles
@@ -49,7 +46,7 @@ function CombatTextEventViewer:OnEvent(combatType, powerType, value, abilityName
     end
 end
 
-function CombatTextEventViewer:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+function CombatTextCombatEllipseEventViewer:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if not self.eventBuffer[eventKey] then return end
     local value = self.eventBuffer[eventKey].value
     local hits = self.eventBuffer[eventKey].hits
@@ -57,17 +54,17 @@ function CombatTextEventViewer:ViewFromEventBuffer(combatType, powerType, eventK
     self:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
 end
 
-function CombatTextEventViewer:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
+function CombatTextCombatEllipseEventViewer:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
     local S = LUIE.CombatText.SV
     value = AbbreviateNumber(value, S.common.abbreviateNumbers)
 
-    local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
+    local control, controlPoolKey = self.poolManager:GetPoolObject(CombatTextConstants.poolType.CONTROL)
 
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (hits > 1 and S.toggles.showThrottleTrailer) then
         value = string.format('%s (%d)', value, hits)
     end
-    if (combatType == combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then
+    if (combatType == CombatTextConstants.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then
         textColor = S.colors.incomingDamageOverride
     end
 
@@ -76,7 +73,7 @@ function CombatTextEventViewer:View(combatType, powerType, value, abilityName, a
 
     -- Control setup
     local panel, point, relativePoint = LUIE_CombatText_Outgoing, BOTTOMRIGHT, TOPRIGHT
-    if (combatType == combatType.INCOMING) then
+    if (combatType == CombatTextConstants.combatType.INCOMING) then
         panel = LUIE_CombatText_Incoming
         if (S.animation.incoming.directionType == 'up') then
             point, relativePoint = TOPRIGHT, BOTTOMRIGHT
@@ -153,11 +150,11 @@ function CombatTextEventViewer:View(combatType, powerType, value, abilityName, a
     -- Animation Setup
     local animationXPoolType, animationYPoolType
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then
-        animationXPoolType = poolTypes.ANIMATION_ELLIPSE_X_CRIT
-        animationYPoolType = poolTypes.ANIMATION_ELLIPSE_Y_CRIT
+        animationXPoolType = CombatTextConstants.poolType.ANIMATION_ELLIPSE_X_CRIT
+        animationYPoolType = CombatTextConstants.poolType.ANIMATION_ELLIPSE_Y_CRIT
     else
-        animationXPoolType = poolTypes.ANIMATION_ELLIPSE_X
-        animationYPoolType = poolTypes.ANIMATION_ELLIPSE_Y
+        animationXPoolType = CombatTextConstants.poolType.ANIMATION_ELLIPSE_X
+        animationYPoolType = CombatTextConstants.poolType.ANIMATION_ELLIPSE_Y
     end
 
     local animationX, animationXPoolKey = self.poolManager:GetPoolObject(animationXPoolType)
@@ -176,7 +173,7 @@ function CombatTextEventViewer:View(combatType, powerType, value, abilityName, a
 
     -- Add items back into pool after use
     zo_callLater(function()
-        self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
+        self.poolManager:ReleasePoolObject(CombatTextConstants.poolType.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationXPoolType, animationXPoolKey)
         self.poolManager:ReleasePoolObject(animationYPoolType, animationYPoolKey)
         self.activeControls[combatType][control:GetName()] = nil

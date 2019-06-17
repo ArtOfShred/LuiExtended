@@ -4,23 +4,22 @@
 --]]
 
 LUIE.CombatTextResourcesPowerEventListener = LUIE.CombatTextEventListener:Subclass()
-local CombatTextEventListener = LUIE.CombatTextResourcesPowerEventListener
+local CombatTextResourcesPowerEventListener = LUIE.CombatTextResourcesPowerEventListener
 
 local eventType = LUIE.Data.CombatTextConstants.eventType
-local resourceType = LUIE.Data.CombatTextConstants.resourceType
 
-function CombatTextEventListener:New()
+function CombatTextResourcesPowerEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_POWER_UPDATE, function(...) self:OnEvent(...) end)
     self.powerInfo = {
-        [POWERTYPE_HEALTH]  = { wasWarned = false, resourceType = resourceType.LOW_HEALTH },
-        [POWERTYPE_STAMINA] = { wasWarned = false, resourceType = resourceType.LOW_STAMINA },
-        [POWERTYPE_MAGICKA] = { wasWarned = false, resourceType = resourceType.LOW_MAGICKA }
+        [POWERTYPE_HEALTH]  = { wasWarned = false, resourceType = LUIE.Data.CombatTextConstants.resourceType.LOW_HEALTH },
+        [POWERTYPE_STAMINA] = { wasWarned = false, resourceType = LUIE.Data.CombatTextConstants.resourceType.LOW_STAMINA },
+        [POWERTYPE_MAGICKA] = { wasWarned = false, resourceType = LUIE.Data.CombatTextConstants.resourceType.LOW_MAGICKA }
     }
     return obj
 end
 
-function CombatTextEventListener:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
+function CombatTextResourcesPowerEventListener:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
     if (unit == 'player' and self.powerInfo[powerType] ~= nil) then
         local t = LUIE.CombatText.SV.toggles
         local threshold

@@ -7,11 +7,11 @@
 LUIE.CombatText = {}
 local CombatText = LUIE.CombatText
 
-local poolType = LUIE.Data.CombatTextConstants.poolType
-
-local moduleName = LUIE.name .. "CombatText"
+local CombatTextConstants = LUIE.Data.CombatTextConstants
 
 local LMP = LibStub("LibMediaProvider-1.0")
+
+local moduleName = LUIE.name .. "CombatText"
 
 local panelTitles = {
     LUIE_CombatText_Outgoing    = GetString(SI_LUIE_CT_PANEL_OUTGOING),
@@ -363,7 +363,7 @@ function CombatText.Initialize(enabled)
     for k, s in pairs(LUIE.CombatText.SV.panels) do
         if _G[k] ~= nil then
             _G[k]:ClearAnchors()
-            _G[k]:SetAnchor(s.point, CT, s.relativePoint, s.offsetX, s.offsetY)
+            _G[k]:SetAnchor(s.point, Combattext, s.relativePoint, s.offsetX, s.offsetY)
             _G[k]:SetDimensions(unpack(s.dimensions))
             _G[k]:SetHandler('OnMouseUp', SavePosition)
             _G[k .. '_Label']:SetFont(LMP:Fetch('font', LUIE.CombatText.SV.fontFace) .. '|26|' .. LUIE.CombatText.SV.fontOutline)
@@ -379,7 +379,7 @@ function CombatText.Initialize(enabled)
 
     -- Pool Manager
     local poolManager = LUIE.CombatTextPoolManager:New()
-    for _, v in pairs(poolType) do -- Create a pool for each type
+    for _, v in pairs(CombatTextConstants.poolType) do -- Create a pool for each type
         poolManager:RegisterPool(v, LUIE.CombatTextPool:New(v))
     end
 

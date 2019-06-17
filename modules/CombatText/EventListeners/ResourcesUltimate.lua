@@ -4,12 +4,12 @@
 --]]
 
 LUIE.CombatTextResourcesUltimateEventListener = LUIE.CombatTextEventListener:Subclass()
-local CombatTextEventListener = LUIE.CombatTextResourcesUltimateEventListener
+local CombatTextResourcesUltimateEventListener = LUIE.CombatTextResourcesUltimateEventListener
 
 local eventType = LUIE.Data.CombatTextConstants.eventType
 local resourceType = LUIE.Data.CombatTextConstants.resourceType
 
-function CombatTextEventListener:New()
+function CombatTextResourcesUltimateEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_POWER_UPDATE, function(...) self:OnEvent(...) end, REGISTER_FILTER_UNIT_TAG, 'player', REGISTER_FILTER_POWER_TYPE, POWERTYPE_ULTIMATE)
     obj:RegisterForEvent(EVENT_ACTION_SLOTS_FULL_UPDATE, function() self:UpdateMaximum() end)
@@ -19,7 +19,7 @@ function CombatTextEventListener:New()
     return obj
 end
 
-function CombatTextEventListener:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
+function CombatTextResourcesUltimateEventListener:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
     local S = LUIE.CombatText.SV
     if (power <= 0 or not S.toggles.showUltimate or self.powerInfo.maximum == 0) then
         return
@@ -36,6 +36,6 @@ function CombatTextEventListener:OnEvent(unit, powerPoolIndex, powerType, power,
     end
 end
 
-function CombatTextEventListener:UpdateMaximum()
+function CombatTextResourcesUltimateEventListener:UpdateMaximum()
     self.powerInfo.maximum = GetSlotAbilityCost(ACTION_BAR_ULTIMATE_SLOT_INDEX + 1)
 end

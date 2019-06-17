@@ -7,7 +7,7 @@ LUIE.CombatTextEventViewer = ZO_Object:Subclass()
 local CombatTextEventViewer = LUIE.CombatTextEventViewer
 
 local Effects = LUIE.Data.Effects
-local combatType = LUIE.Data.CombatTextConstants.combatType
+local CombatTextConstants = LUIE.Data.CombatTextConstants
 
 local callbackManager = CALLBACK_MANAGER
 
@@ -180,9 +180,9 @@ function CombatTextEventViewer:ControlLayout(control, abilityId, combatType, sou
         if iconPath and iconPath ~= '' then
             local S = LUIE.CombatText.SV
             local iconSide
-            if combatType == combatType.INCOMING then
+            if combatType == CombatTextConstants.combatType.INCOMING then
                 iconSide = S.animation.incomingIcon
-            elseif combatType == combatType.OUTGOING then
+            elseif combatType == CombatTextConstants.combatType.OUTGOING then
                 iconSide = S.animation.outgoingIcon
             else
                 iconSide = 'none'

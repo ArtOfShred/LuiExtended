@@ -4,14 +4,14 @@
 --]]
 
 LUIE.CombatTextDeathViewer = LUIE.CombatTextEventViewer:Subclass()
-local CombatTextEventViewer = LUIE.CombatTextDeathViewer
+local CombatTextDeathViewer = LUIE.CombatTextDeathViewer
 
 local poolTypes = LUIE.Data.CombatTextConstants.poolType
 local eventType = LUIE.Data.CombatTextConstants.eventType
 
 local zo_strformat = zo_strformat
 
-function CombatTextEventViewer:New(...)
+function CombatTextDeathViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
     obj:RegisterCallback(eventType.DEATH, function(...) self:OnEvent(...) end)
     self.locationOffset = 0  -- Simple way to avoid overlapping. When number of active notes is back to 0, the offset is also reset
@@ -19,7 +19,7 @@ function CombatTextEventViewer:New(...)
     return obj
 end
 
-function CombatTextEventViewer:OnEvent(unitTag)
+function CombatTextDeathViewer:OnEvent(unitTag)
 
     local S = LUIE.CombatText.SV
 
