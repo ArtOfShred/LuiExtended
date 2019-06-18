@@ -7,34 +7,35 @@ LUIE.CombatTextResourcesPowerEventListener = LUIE.CombatTextEventListener:Subcla
 local CombatTextResourcesPowerEventListener = LUIE.CombatTextResourcesPowerEventListener
 
 local eventType = LUIE.Data.CombatTextConstants.eventType
+local resourceType = LUIE.Data.CombatTextConstants.resourceType
 
 function CombatTextResourcesPowerEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_POWER_UPDATE, function(...) self:OnEvent(...) end)
     self.powerInfo = {
-        [POWERTYPE_HEALTH]  = { wasWarned = false, resourceType = LUIE.Data.CombatTextConstants.resourceType.LOW_HEALTH },
-        [POWERTYPE_STAMINA] = { wasWarned = false, resourceType = LUIE.Data.CombatTextConstants.resourceType.LOW_STAMINA },
-        [POWERTYPE_MAGICKA] = { wasWarned = false, resourceType = LUIE.Data.CombatTextConstants.resourceType.LOW_MAGICKA }
+        [POWERTYPE_HEALTH]  = { wasWarned = false, resourceType = resourceType.LOW_HEALTH },
+        [POWERTYPE_STAMINA] = { wasWarned = false, resourceType = resourceType.LOW_STAMINA },
+        [POWERTYPE_MAGICKA] = { wasWarned = false, resourceType = resourceType.LOW_MAGICKA }
     }
     return obj
 end
 
 function CombatTextResourcesPowerEventListener:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
     if (unit == 'player' and self.powerInfo[powerType] ~= nil) then
-        local t = LUIE.CombatText.SV.toggles
+        local Settings = LUIE.CombatText.SV
         local threshold
 
         if power <= 0 then
             return
         elseif powerType == POWERTYPE_HEALTH then
-            if not t.showLowHealth then return end
-            threshold = LUIE.CombatText.SV.healthThreshold or 35
+            if not Settings.toggles.showLowHealth then return end
+            threshold = Settings.healthThreshold or 35
         elseif powerType == POWERTYPE_STAMINA then
-            if not t.showLowStamina then return end
-            threshold = LUIE.CombatText.SV.staminaThreshold or 35
+            if not Settings.toggles.showLowStamina then return end
+            threshold = Settings.staminaThreshold or 35
         elseif powerType == POWERTYPE_MAGICKA then
-            if not t.showLowMagicka then return end
-            threshold = LUIE.CombatText.SV.magickaThreshold or 35
+            if not Settings.toggles.showLowMagicka then return end
+            threshold = Settings.magickaThreshold or 35
         end
 
         local percent = power / powerMax * 100

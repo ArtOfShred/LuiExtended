@@ -379,7 +379,8 @@ function CombatText.Initialize(enabled)
 
     -- Pool Manager
     local poolManager = LUIE.CombatTextPoolManager:New()
-    for _, v in pairs(CombatTextConstants.poolType) do -- Create a pool for each type
+     -- Create a pool for each type
+    for _, v in pairs(CombatTextConstants.poolType) do
         poolManager:RegisterPool(v, LUIE.CombatTextPool:New(v))
     end
 

@@ -6,6 +6,8 @@
 LUIE.CombatTextPool = ZO_ObjectPool:Subclass()
 local CombatTextPool = LUIE.CombatTextPool
 
+local poolTypes = LUIE.Data.CombatTextConstants.poolType
+
 local fastSlow = ZO_GenerateCubicBezierEase(.3, .9, .7, 1)
 local slowFast = ZO_GenerateCubicBezierEase(.63, .1, .83, .69)
 local even = ZO_GenerateCubicBezierEase(.63, 1.2, .83, 1)
@@ -14,8 +16,6 @@ local easeOutIn = function(progress)
     progress = progress < 0.5 and progress * 2 or (1 - progress) * 2
     return zo_sqrt(1 - ((1 - progress) ^ 2))
 end
-
-local poolTypes = LUIE.Data.CombatTextConstants.poolType
 
 function CombatTextPool:New(poolType)
     local obj
@@ -113,7 +113,6 @@ function CombatTextPool:CreateNewAnimation()
         anim:Scale(nil, 1.5, 1, 150, 0, slowFast)
         anim:Move('scrollY', 0, 0, 2500)
         anim:Alpha('fadeOut', 1, 0, 500, 1800, slowFast)
-
     end
 
     return anim

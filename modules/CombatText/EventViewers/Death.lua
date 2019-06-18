@@ -20,8 +20,7 @@ function CombatTextDeathViewer:New(...)
 end
 
 function CombatTextDeathViewer:OnEvent(unitTag)
-
-    local S = LUIE.CombatText.SV
+    local Settings = LUIE.CombatText.SV
 
 	local name = zo_strformat(SI_UNIT_NAME, GetUnitName(unitTag))
 
@@ -32,15 +31,15 @@ function CombatTextDeathViewer:OnEvent(unitTag)
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//POINTS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
-	color = S.colors.death
-	size = S.fontSizes.death
-	text = self:FormatString(S.formats.death, { text = name, value = name })
+	color = Settings.colors.death
+	size = Settings.fontSizes.death
+	text = self:FormatString(Settings.formats.death, { text = name, value = name })
 
     self:PrepareLabel(control.label, size, color, text)
     self:ControlLayout(control)
 
     --Control setup
-    control:SetAnchor(CENTER, LUIE_CombatText_Point, TOP, 0, self.locationOffset * (S.fontSizes.death + 5))
+    control:SetAnchor(CENTER, LUIE_CombatText_Point, TOP, 0, self.locationOffset * (Settings.fontSizes.death + 5))
     self.locationOffset = self.locationOffset + 1
     self.activePoints = self.activePoints + 1
 

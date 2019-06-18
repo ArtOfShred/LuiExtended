@@ -20,8 +20,8 @@ function CombatTextResourcesUltimateEventListener:New()
 end
 
 function CombatTextResourcesUltimateEventListener:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
-    local S = LUIE.CombatText.SV
-    if (power <= 0 or not S.toggles.showUltimate or self.powerInfo.maximum == 0) then
+    local Settings = LUIE.CombatText.SV
+    if (power <= 0 or not Settings.toggles.showUltimate or self.powerInfo.maximum == 0) then
         return
     end
 

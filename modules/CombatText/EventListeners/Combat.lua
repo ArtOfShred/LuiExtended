@@ -38,8 +38,8 @@ end
 function CombatTextCombatEventListener:OnCombatIn(...)
     local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow = ...
 
-    local S = LUIE.CombatText.SV
-    local combatType, togglesInOut = CombatTextConstants.combatType.INCOMING, S.toggles.incoming
+    local Settings = LUIE.CombatText.SV
+    local combatType, togglesInOut = CombatTextConstants.combatType.INCOMING, Settings.toggles.incoming
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     local sourceNameCheck = zo_strformat("<<t:1>>", sourceName)
@@ -83,7 +83,7 @@ function CombatTextCombatEventListener:OnCombatIn(...)
         = CombatTextConstants.isDisoriented[resultType], CombatTextConstants.isFeared[resultType], CombatTextConstants.isOffBalanced[resultType], CombatTextConstants.isSilenced[resultType], CombatTextConstants.isStunned[resultType]
     --Overflow
     local overkill, overheal
-        = (S.common.overkill and overflow > 0 and (isDamage or isDamageCritical or isDot or isDotCritical) ), (S.common.overheal and overflow > 0 and (isHealing or isHealingCritical or isHot or isHotCritical) )
+        = (Settings.common.overkill and overflow > 0 and (isDamage or isDamageCritical or isDot or isDotCritical) ), (Settings.common.overheal and overflow > 0 and (isHealing or isHealingCritical or isHot or isHotCritical) )
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//COMBAT TRIGGERS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ function CombatTextCombatEventListener:OnCombatIn(...)
             hitValue = hitValue + overflow
        end
        if not Effects.EffectHideSCT[abilityId] then -- Check if ability is on the hide list
-            if (S.toggles.inCombatOnly and isWarned.combat) or (not S.toggles.inCombatOnly) then --Check if 'in combat only' is ticked
+            if (Settings.toggles.inCombatOnly and isWarned.combat) or (not Settings.toggles.inCombatOnly) then -- Check if 'in combat only' is ticked
                 self:TriggerEvent(CombatTextConstants.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
             end
        end
@@ -174,8 +174,8 @@ function CombatTextCombatEventListener:OnCombatOut(...)
     -- Don't display duplicate messages for events sourced from the player that target the player
     if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET then return end
 
-    local S = LUIE.CombatText.SV
-    local combatType, togglesInOut = CombatTextConstants.combatType.OUTGOING, S.toggles.outgoing
+    local Settings = LUIE.CombatText.SV
+    local combatType, togglesInOut = CombatTextConstants.combatType.OUTGOING, Settings.toggles.outgoing
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -198,7 +198,7 @@ function CombatTextCombatEventListener:OnCombatOut(...)
         = CombatTextConstants.isDisoriented[resultType], CombatTextConstants.isFeared[resultType], CombatTextConstants.isOffBalanced[resultType], CombatTextConstants.isSilenced[resultType], CombatTextConstants.isStunned[resultType]
     --Overflow
     local overkill, overheal
-        = (S.common.overkill and overflow > 0 and (isDamage or isDamageCritical or isDot or isDotCritical) ), (S.common.overheal and overflow > 0 and (isHealing or isHealingCritical or isHot or isHotCritical) )
+        = (Settings.common.overkill and overflow > 0 and (isDamage or isDamageCritical or isDot or isDotCritical) ), (Settings.common.overheal and overflow > 0 and (isHealing or isHealingCritical or isHot or isHotCritical) )
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//COMBAT TRIGGERS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -227,7 +227,7 @@ function CombatTextCombatEventListener:OnCombatOut(...)
             hitValue = hitValue + overflow
        end
        if not Effects.EffectHideSCT[abilityId] then -- Check if ability is on the hide list
-            if (S.toggles.inCombatOnly and isWarned.combat) or (not S.toggles.inCombatOnly) then --Check if 'in combat only' is ticked
+            if (Settings.toggles.inCombatOnly and isWarned.combat) or (not Settings.toggles.inCombatOnly) then --Check if 'in combat only' is ticked
                 self:TriggerEvent(CombatTextConstants.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
             end
        end
@@ -289,16 +289,16 @@ end
     --//COMBAT STATE EVENTS & TRIGGERS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
 function CombatTextCombatEventListener:CombatState(inCombat)
-    local S = LUIE.CombatText.SV
+    local Settings = LUIE.CombatText.SV
 
     if not isWarned.combat then
         isWarned.combat = true
-        if S.toggles.showInCombat then
+        if Settings.toggles.showInCombat then
             self:TriggerEvent(CombatTextConstants.eventType.POINT, CombatTextConstants.pointType.IN_COMBAT, nil)
         end
     else
         isWarned.combat = false
-        if S.toggles.showOutCombat then
+        if Settings.toggles.showOutCombat then
             self:TriggerEvent(CombatTextConstants.eventType.POINT, CombatTextConstants.pointType.OUT_COMBAT, nil)
         end
     end

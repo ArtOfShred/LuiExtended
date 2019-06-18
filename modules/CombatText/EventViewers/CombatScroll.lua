@@ -19,25 +19,26 @@ function CombatTextCombatScrollEventViewer:New(...)
 end
 
 function CombatTextCombatScrollEventViewer:OnEvent(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
-    if (LUIE.CombatText.SV.animation.animationType ~= 'scroll') then return end
+    local Settings = LUIE.CombatText.SV
+    if (Settings.animation.animationType ~= 'scroll') then
+        return
+    end
 
-    local T = LUIE.CombatText.SV.throttles
-
-    if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) and (not LUIE.CombatText.SV.toggles.throttleCriticals) then
+    if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) and (not Settings.toggles.throttleCriticals) then
         self:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, 1)
     else
         local eventKey = string.format('%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s', combatType, powerType, abilityName, abilityId, damageType, sourceName, tostring(isDamage), tostring(isDamageCritical), tostring(isHealing), tostring(isHealingCritical), tostring(isEnergize), tostring(isDrain), tostring(isDot), tostring(isDotCritical), tostring(isHot), tostring(isHotCritical), tostring(isMiss), tostring(isImmune), tostring(isParried), tostring(isReflected), tostring(isDamageShield), tostring(isDodged), tostring(isBlocked), tostring(isInterrupted))
         if (self.eventBuffer[eventKey] == nil) then
             self.eventBuffer[eventKey] = { value = value, hits = 1 }
             local throttleTime = 0
-            if (isDamage) then throttleTime = T.damage
-            elseif (isDamageCritical) then throttleTime = T.damagecritical
-            elseif (isDot) then throttleTime = T.dot
-            elseif (isDotCritical) then throttleTime = T.dotcritical
-            elseif (isHealing) then throttleTime = T.healing
-            elseif (isHealingCritical) then throttleTime = T.healingcritical
-            elseif (isHot) then throttleTime = T.hot
-            elseif (isHotCritical) then throttleTime = T.hotcritical end
+            if (isDamage) then throttleTime = Settings.throttles.damage
+            elseif (isDamageCritical) then throttleTime = Settings.throttles.damagecritical
+            elseif (isDot) then throttleTime = Settings.throttles.dot
+            elseif (isDotCritical) then throttleTime = Settings.throttles.dotcritical
+            elseif (isHealing) then throttleTime = Settings.throttles.healing
+            elseif (isHealingCritical) then throttleTime = Settings.throttles.healingcritical
+            elseif (isHot) then throttleTime = Settings.throttles.hot
+            elseif (isHotCritical) then throttleTime = Settings.throttles.hotcritical end
             zo_callLater(function() self:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted) end, throttleTime)
         else
             self.eventBuffer[eventKey].value = self.eventBuffer[eventKey].value + value
@@ -47,7 +48,9 @@ function CombatTextCombatScrollEventViewer:OnEvent(combatType, powerType, value,
 end
 
 function CombatTextCombatScrollEventViewer:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
-    if not self.eventBuffer[eventKey] then return end
+    if not self.eventBuffer[eventKey] then
+        return
+    end
     local value = self.eventBuffer[eventKey].value
     local hits = self.eventBuffer[eventKey].hits
     self.eventBuffer[eventKey] = nil
@@ -55,17 +58,17 @@ function CombatTextCombatScrollEventViewer:ViewFromEventBuffer(combatType, power
 end
 
 function CombatTextCombatScrollEventViewer:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
-    local S = LUIE.CombatText.SV
-    value = AbbreviateNumber(value, S.common.abbreviateNumbers)
+    local Settings = LUIE.CombatText.SV
+    value = AbbreviateNumber(value, Settings.common.abbreviateNumbers)
 
     local control, controlPoolKey = self.poolManager:GetPoolObject(CombatTextConstants.poolType.CONTROL)
 
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
-    if (hits > 1 and S.toggles.showThrottleTrailer) then
+    if (hits > 1 and Settings.toggles.showThrottleTrailer) then
         value = string.format('%s (%d)', value, hits)
     end
-    if (combatType == CombatTextConstants.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then
-        textColor = S.colors.incomingDamageOverride
+    if (combatType == CombatTextConstants.combatType.INCOMING) and (Settings.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then
+        textColor = Settings.colors.incomingDamageOverride
     end
 
     self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = abilityName, value = value, powerType = powerType, damageType = damageType }))
@@ -75,11 +78,11 @@ function CombatTextCombatScrollEventViewer:View(combatType, powerType, value, ab
     local panel, point, relativePoint = LUIE_CombatText_Outgoing, TOP, BOTTOM
     if (combatType == CombatTextConstants.combatType.INCOMING) then
         panel = LUIE_CombatText_Incoming
-        if (S.animation.incoming.directionType == 'down') then
+        if (Settings.animation.incoming.directionType == 'down') then
             point, relativePoint = BOTTOM, TOP
         end
     else
-        if (S.animation.outgoing.directionType == 'down') then
+        if (Settings.animation.outgoing.directionType == 'down') then
             point, relativePoint = BOTTOM, TOP
         end
     end
@@ -128,7 +131,9 @@ function CombatTextCombatScrollEventViewer:View(combatType, powerType, value, ab
     local animation, animationPoolKey = self.poolManager:GetPoolObject(animationPoolType)
 
     local targetY = h + 250
-    if (point == TOP) then targetY = -targetY end
+    if (point == TOP) then
+        targetY = -targetY
+    end
     animation:GetStepByName('scroll'):SetDeltaOffsetY(targetY)
 
     animation:Apply(control)

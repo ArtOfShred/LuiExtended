@@ -18,8 +18,10 @@ function CombatTextResourcesPotionEventListener:New()
 end
 
 function CombatTextResourcesPotionEventListener:PotionCooldown()
-    local t = LUIE.CombatText.SV.toggles
-    if not t.showPotionReady then return end
+    local Settings = LUIE.CombatText.SV
+    if not Settings.toggles.showPotionReady then
+        return
+    end
 
     local slotIndex = GetCurrentQuickslot()
     if (GetSlotItemSound(slotIndex) == ITEM_SOUND_CATEGORY_POTION) then

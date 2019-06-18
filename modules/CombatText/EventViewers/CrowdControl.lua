@@ -20,7 +20,7 @@ function CombatTextCrowdControlEventViewer:New(...)
 end
 
 function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, combatType)
-    local S = LUIE.CombatText.SV
+    local Settings = LUIE.CombatText.SV
 
     --Label setup
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
@@ -28,29 +28,29 @@ function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, combatType)
     local size, color, text
     --Disoriented
     if (crowdControlType == crowdControlTypes.DISORIENTED) then
-        color = S.colors.disoriented
-        size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.disoriented, { text = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED) })
+        color = Settings.colors.disoriented
+        size = Settings.fontSizes.crowdControl
+        text = self:FormatString(Settings.formats.disoriented, { text = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED) })
     --Feared
     elseif (crowdControlType == crowdControlTypes.FEARED) then
-        color = S.colors.feared
-        size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.feared, { text = GetString(SI_LUIE_LAM_CT_SHARED_FEARED) })
+        color = Settings.colors.feared
+        size = Settings.fontSizes.crowdControl
+        text = self:FormatString(Settings.formats.feared, { text = GetString(SI_LUIE_LAM_CT_SHARED_FEARED) })
     --Off Balanced
     elseif (crowdControlType == crowdControlTypes.OFFBALANCED) then
-        color = S.colors.offBalanced
-        size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.offBalanced, { text = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE) })
+        color = Settings.colors.offBalanced
+        size = Settings.fontSizes.crowdControl
+        text = self:FormatString(Settings.formats.offBalanced, { text = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE) })
     --Silenced
     elseif (crowdControlType == crowdControlTypes.SILENCED) then
-        color = S.colors.silenced
-        size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.silenced, { text = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED) })
+        color = Settings.colors.silenced
+        size = Settings.fontSizes.crowdControl
+        text = self:FormatString(Settings.formats.silenced, { text = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED) })
     --Stunned
     elseif (crowdControlType == crowdControlTypes.STUNNED) then
-        color = S.colors.stunned
-        size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.stunned, { text = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED) })
+        color = Settings.colors.stunned
+        size = Settings.fontSizes.crowdControl
+        text = self:FormatString(Settings.formats.stunned, { text = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED) })
     end
 
     self:PrepareLabel(control.label, size, color, text)
@@ -60,19 +60,19 @@ function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, combatType)
     local panel, point, relativePoint = LUIE_CombatText_Outgoing, TOP, BOTTOM
     if (combatType == combatType.INCOMING) then
         panel = LUIE_CombatText_Incoming
-        if (S.animation.incoming.directionType == 'down') then
+        if (Settings.animation.incoming.directionType == 'down') then
             point, relativePoint = BOTTOM, TOP
         end
     else
-        if (S.animation.outgoing.directionType == 'down') then
+        if (Settings.animation.outgoing.directionType == 'down') then
             point, relativePoint = BOTTOM, TOP
         end
     end
 
     if (point == TOP) then
-        control:SetAnchor(point, panel, relativePoint, 0, -(self.locationOffset[combatType] * (S.fontSizes.crowdControl + 5)))
+        control:SetAnchor(point, panel, relativePoint, 0, -(self.locationOffset[combatType] * (Settings.fontSizes.crowdControl + 5)))
     else
-        control:SetAnchor(point, panel, relativePoint, 0, self.locationOffset[combatType] * (S.fontSizes.crowdControl + 5))
+        control:SetAnchor(point, panel, relativePoint, 0, self.locationOffset[combatType] * (Settings.fontSizes.crowdControl + 5))
     end
 
     self.locationOffset[combatType] = self.locationOffset[combatType] + 1

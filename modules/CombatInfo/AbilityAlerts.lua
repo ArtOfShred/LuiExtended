@@ -363,9 +363,12 @@ function AbilityAlerts.AlertUpdate(currentTime)
 end
 
 function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
-
-    if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET or targetType == COMBAT_UNIT_TYPE_GROUP then return end
-    if Effects.BlockAndBashCC[abilityId] then return end
+    if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET or targetType == COMBAT_UNIT_TYPE_GROUP then
+        return
+    end
+    if Effects.BlockAndBashCC[abilityId] then
+        return
+    end
 
     for i = 1, 3 do
         local alert = _G["LUIE_Alert" .. i]
@@ -383,7 +386,9 @@ function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityNam
             local remain = alert.data.duration - currentTime
 
             -- If the source isn't a UnitId and the targetName is also nil then bail
-            if alert.data.sourceUnitId == "" and targetName == "" then return end
+            if alert.data.sourceUnitId == "" and targetName == "" then
+                return
+            end
 
             if (alert.data.sourceUnitId == targetUnitId or alert.data.sourceUnitId == targetName) and (not alert.data.showDuration == false or alert.data.alwaysShowInterrupt) and remain > 0 and (not alert.data.neverShowInterrupt or deathResults[resultType]) and not alert.data.effectOnlyInterrupt then
                 alert.data = { }
@@ -437,26 +442,26 @@ end
 
 -- Play a sound if the option is enabled and priority is set.
 function AbilityAlerts.PlayAlertSound(abilityId, alertType, crowdControl)
-    local S = CombatInfo.SV.alerts
+    local Settings = CombatInfo.SV.alerts
 
     local isPlay
     if alertType == alertTypes.SHARED then
         local priority = Alerts[abilityId].priority
         if crowdControl == ccTypes.STUN or crowdControl == ccTypes.DISORIENT or crowdControl == ccTypes.FEAR or crowdControl == ccTypes.STAGGER then
-            isPlay = (priority == 1 and S.toggles.soundEnable1CC) and S.sounds.sound1CC or (priority == 2 and S.toggles.soundEnable2CC) and S.sounds.sound2CC or (priority == 3 and S.toggles.soundEnable3CC) and S.sounds.sound3CC
+            isPlay = (priority == 1 and Settings.toggles.soundEnable1CC) and Settings.sounds.sound1CC or (priority == 2 and Settings.toggles.soundEnable2CC) and Settings.sounds.sound2CC or (priority == 3 and Settings.toggles.soundEnable3CC) and Settings.sounds.sound3CC
         elseif crowdControl == ccTypes.UNBREAKABLE then
-            isPlay = (priority == 1 and S.toggles.soundEnable1UB) and S.sounds.sound1UB or (priority == 2 and S.toggles.soundEnable2UB) and S.sounds.sound2UB or (priority == 3 and S.toggles.soundEnable3UB) and S.sounds.sound3UB
+            isPlay = (priority == 1 and Settings.toggles.soundEnable1UB) and Settings.sounds.sound1UB or (priority == 2 and Settings.toggles.soundEnable2UB) and Settings.sounds.sound2UB or (priority == 3 and Settings.toggles.soundEnable3UB) and Settings.sounds.sound3UB
         else
-            isPlay = (priority == 1 and S.toggles.soundEnable1) and S.sounds.sound1 or (priority == 2 and S.toggles.soundEnable2) and S.sounds.sound2 or (priority == 3 and S.toggles.soundEnable3) and S.sounds.sound3
+            isPlay = (priority == 1 and Settings.toggles.soundEnable1) and Settings.sounds.sound1 or (priority == 2 and Settings.toggles.soundEnable2) and Settings.sounds.sound2 or (priority == 3 and Settings.toggles.soundEnable3) and Settings.sounds.sound3
         end
     elseif alertType == alertTypes.UNMIT then
-        isPlay = S.toggles.soundEnableUnmit and S.sounds.soundUnmit
+        isPlay = Settings.toggles.soundEnableUnmit and Settings.sounds.soundUnmit
     elseif alertType == alertTypes.POWER then
-        isPlay = S.toggles.soundEnablePower and S.sounds.soundPower
+        isPlay = Settings.toggles.soundEnablePower and Settings.sounds.soundPower
     elseif alertType == alertTypes.DESTROY then
-        isPlay = S.toggles.soundEnableDestroy and S.sounds.soundDestroy
+        isPlay = Settings.toggles.soundEnableDestroy and Settings.sounds.soundDestroy
     elseif alertType == alertTypes.SUMMON then
-        isPlay = S.toggles.soundEnableSummon and S.sounds.soundSummon
+        isPlay = Settings.toggles.soundEnableSummon and Settings.sounds.soundSummon
     end
 
     if isPlay ~= nil then
@@ -536,7 +541,7 @@ function AbilityAlerts.RealignAlerts(alertNumber)
 end
 
 function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
-    local S = CombatInfo.SV.alerts
+    local Settings = CombatInfo.SV.alerts
 
     -- Just in case
     if not Alerts[abilityId] then return end
@@ -550,7 +555,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     end
 
     -- Get menu setting for filtering and bail out here depending on that setting
-    local option = S.toggles.alertOptions
+    local option = Settings.toggles.alertOptions
     -- Bail out if we only have CC selected and this is not CC
     if option == 2 and crowdControl ~= ccTypes.STUN and crowdControl ~= ccTypes.DISORIENT and crowdControl ~= ccTypes.FEAR and crowdControl ~= ccTypes.STAGGER and crowdControl ~= ccTypes.UNBREAKABLE then
         return
@@ -655,7 +660,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     local unmit
     local duration
 
-    if (S.toggles.showAlertMitigate) == true then
+    if (Settings.toggles.showAlertMitigate) == true then
         if Alerts[abilityId].block == true then
             if Alerts[abilityId].bs then
                 blockstagger = true
@@ -674,16 +679,16 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         end
     end
 
-    if Alerts[abilityId].unmit and (S.toggles.showAlertUnmit) == true then
+    if Alerts[abilityId].unmit and (Settings.toggles.showAlertUnmit) == true then
         unmit = true
     end
-    if Alerts[abilityId].power and (S.toggles.showAlertPower) == true then
+    if Alerts[abilityId].power and (Settings.toggles.showAlertPower) == true then
         power = true
     end
-    if Alerts[abilityId].destroy and (S.toggles.showAlertDestroy) == true then
+    if Alerts[abilityId].destroy and (Settings.toggles.showAlertDestroy) == true then
         destroy = true
     end
-    if Alerts[abilityId].summon and (S.toggles.showAlertSummon) == true then
+    if Alerts[abilityId].summon and (Settings.toggles.showAlertSummon) == true then
         summon = true
     end
     if Alerts[abilityId].duration then
@@ -748,9 +753,9 @@ function AbilityAlerts.AlertEffectChanged(eventCode, changeType, effectSlot, eff
     end
     if not Alerts[abilityId] then return end
 
-    local S = CombatInfo.SV.alerts
+    local Settings = CombatInfo.SV.alerts
 
-    if S.toggles.alertEnable and (S.toggles.mitigationAura or IsUnitInDungeon("player")) and Alerts[abilityId] and Alerts[abilityId].auradetect then
+    if Settings.toggles.alertEnable and (Settings.toggles.mitigationAura or IsUnitInDungeon("player")) and Alerts[abilityId] and Alerts[abilityId].auradetect then
         if changeType == EFFECT_RESULT_FADED then
             zo_callLater(function() CheckInterruptEvent(unitId) end, 100)
             return
@@ -766,10 +771,9 @@ function AbilityAlerts.AlertEffectChanged(eventCode, changeType, effectSlot, eff
 end
 
 function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
-
     if not Alerts[abilityId] then return end
 
-    local S = CombatInfo.SV.alerts
+    local Settings = CombatInfo.SV.alerts
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
     local abilityIcon = GetAbilityIcon(abilityId)
 
@@ -801,7 +805,7 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
     end
 
     -- NEW ALERTS
-    if S.toggles.alertEnable then
+    if Settings.toggles.alertEnable then
         if sourceName ~= nil and sourceName ~= "" then
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
             if resultType == ACTION_RESULT_EFFECT_FADED
@@ -828,10 +832,10 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
 
             if Alerts[abilityId].block or Alerts[abilityId].dodge or Alerts[abilityId].avoid or Alerts[abilityId].interrupt or Alerts[abilityId].unmit or Alerts[abilityId].power or Alerts[abilityId].destroy or Alerts[abilityId].summon then
                 -- Filter by priority
-                if (S.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not S.toggles.mitigationDungeon then
-                    if Alerts[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
-                    if Alerts[abilityId].priority == 2 and not S.toggles.mitigationRank2 then return end
-                    if Alerts[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
+                if (Settings.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not Settings.toggles.mitigationDungeon then
+                    if Alerts[abilityId].priority == 3 and not Settings.toggles.mitigationRank3 then return end
+                    if Alerts[abilityId].priority == 2 and not Settings.toggles.mitigationRank2 then return end
+                    if Alerts[abilityId].priority == 1 and not Settings.toggles.mitigationRank1 then return end
                 end
 
                 zo_callLater(function() AbilityAlerts.ProcessAlert(abilityId, sourceName, sourceUnitId) end, 50)
@@ -846,10 +850,10 @@ function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName
         return
     end
 
-    local S = CombatInfo.SV.alerts
+    local Settings = CombatInfo.SV.alerts
 
     -- NEW ALERTS
-    if S.toggles.alertEnable and (S.toggles.mitigationAura or IsUnitInDungeon("player")) then
+    if Settings.toggles.alertEnable and (Settings.toggles.mitigationAura or IsUnitInDungeon("player")) then
         if not refireDelay[abilityId] then
             -- Return if any results occur which we absolutely don't want to display alerts for & stop spam when enemy is out of line of sight, etc and trying to cast
             if resultType == ACTION_RESULT_EFFECT_FADED
@@ -876,10 +880,10 @@ function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName
 
             if Alerts[abilityId].block or Alerts[abilityId].dodge or Alerts[abilityId].avoid or Alerts[abilityId].interrupt or Alerts[abilityId].unmit or Alerts[abilityId].power or Alerts[abilityId].destroy or Alerts[abilityId].summon then
                 -- Filter by priority
-                if (S.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not S.toggles.mitigationDungeon then
-                    if Alerts[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
-                    if Alerts[abilityId].priority == 2 and not S.toggles.mitigationRank2 then return end
-                    if Alerts[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
+                if (Settings.toggles.mitigationDungeon and not IsUnitInDungeon("player")) or not Settings.toggles.mitigationDungeon then
+                    if Alerts[abilityId].priority == 3 and not Settings.toggles.mitigationRank3 then return end
+                    if Alerts[abilityId].priority == 2 and not Settings.toggles.mitigationRank2 then return end
+                    if Alerts[abilityId].priority == 1 and not Settings.toggles.mitigationRank1 then return end
                 end
 
                 zo_callLater(function() AbilityAlerts.ProcessAlert(abilityId, sourceName, sourceUnitId) end, 50)
@@ -902,10 +906,10 @@ end
 
 -- VIEWER
 function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, sourceUnitId, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
-    local S = CombatInfo.SV.alerts
+    local Settings = CombatInfo.SV.alerts
 
-    local labelColor = S.colors.alertShared
-    local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPrefixN or S.toggles.mitigationPrefix
+    local labelColor = Settings.colors.alertShared
+    local prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationPrefixN or Settings.toggles.mitigationPrefix
 
     if (alertType == alertTypes.SHARED) then
         local spacer = "-"
@@ -917,36 +921,38 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
 
         -- Quickly set only one of these to true for priority color formatting.
         -- PRIORITY: INTERRUPT > BLOCK STAGGER > DODGE > BLOCK > AVOID
-        if blockstagger then block = false end
+        if blockstagger then
+            block = false
+        end
 
-        if S.toggles.showMitigation then
+        if Settings.toggles.showMitigation then
             if avoid then
                 local color = AbilityAlerts.AlertColors.alertColorAvoid
-                stringAvoid = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertAvoid, spacer)
+                stringAvoid = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertAvoid, spacer)
             else
                 stringAvoid = ""
             end
 
             if block then
                 local color = AbilityAlerts.AlertColors.alertColorBlock
-                stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlock, spacer)
+                stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertBlock, spacer)
             end
 
             if dodge then
                 local color = AbilityAlerts.AlertColors.alertColorDodge
-                stringDodge = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertDodge, spacer)
+                stringDodge = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertDodge, spacer)
             else
                 stringDodge = ""
             end
 
             if blockstagger then
                 local color = AbilityAlerts.AlertColors.alertColorBlock
-                stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertBlockStagger, spacer)
+                stringBlock = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertBlockStagger, spacer)
             end
 
             if interrupt then
                 local color = AbilityAlerts.AlertColors.alertColorInterrupt
-                stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, S.formats.alertInterrupt, spacer)
+                stringInterrupt = zo_strformat("|c<<1>><<2>>|r <<3>> ", color, Settings.formats.alertInterrupt, spacer)
             else
                 stringInterrupt = ""
             end
@@ -957,35 +963,35 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
         end
 
         textName = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = S.toggles.showMitigation and zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt) or ""
+        textMitigation = Settings.toggles.showMitigation and zo_strformat(" <<1>> <<2>><<3>><<4>><<5>>", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt) or ""
 
         text = zo_strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
     -- UNMIT
     elseif (alertType == alertTypes.UNMIT) then
         local color = AbilityAlerts.AlertColors.alertColorUnmit
         textName = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertUnmit)
+        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertUnmit)
         text = zo_strformat("<<1>><<2>> - <<3>> - ", stringPart1, stringPart2, stringPart3)
     -- POWER
     elseif (alertType == alertTypes.POWER) then
         local color = AbilityAlerts.AlertColors.alertColorPower
-        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationPowerPrefixN2 or S.toggles.mitigationPowerPrefix2
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationPowerPrefixN2 or Settings.toggles.mitigationPowerPrefix2
         textName = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertPower)
+        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertPower)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- DESTROY
     elseif (alertType == alertTypes.DESTROY) then
         local color = AbilityAlerts.AlertColors.alertColorDestroy
-        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationDestroyPrefixN2 or S.toggles.mitigationDestroyPrefix2
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationDestroyPrefixN2 or Settings.toggles.mitigationDestroyPrefix2
         textName = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertDestroy)
+        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertDestroy)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     -- SUMMON
     elseif (alertType == alertTypes.SUMMON) then
         local color = AbilityAlerts.AlertColors.alertColorSummon
-        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and S.toggles.mitigationSummonPrefixN2 or S.toggles.mitigationSummonPrefix2
+        prefix = (sourceName ~= "" and sourceName ~= nil and sourceName ~= "Offline") and Settings.toggles.mitigationSummonPrefixN2 or Settings.toggles.mitigationSummonPrefix2
         textName = AbilityAlerts.FormatAlertString(prefix, { source = sourceName, ability = abilityName })
-        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, S.formats.alertSummon)
+        textMitigation = zo_strformat("|c<<1>><<2>>|r", color, Settings.formats.alertSummon)
         text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     end
 
