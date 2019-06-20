@@ -184,13 +184,13 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/removeignore"] = SlashCommands.SlashRemoveIgnore
     end
     if SlashCommands.SV.SlashBanker then
-        SLASH_COMMANDS["/bank"]         = function(...) SlashCommands.ResolveMerchantBanker(2) end
-        SLASH_COMMANDS["/banker"]       = function(...) SlashCommands.ResolveMerchantBanker(2) end
+        SLASH_COMMANDS["/bank"]         = function(...) SlashCommands.SlashCollectible("banker") end
+        SLASH_COMMANDS["/banker"]       = function(...) SlashCommands.SlashCollectible("banker") end
     end
     if SlashCommands.SV.SlashMerchant then
-        SLASH_COMMANDS["/sell"]         = function(...) SlashCommands.ResolveMerchantBanker(1) end
-        SLASH_COMMANDS["/merchant"]     = function(...) SlashCommands.ResolveMerchantBanker(1) end
-        SLASH_COMMANDS["/vendor"]       = function(...) SlashCommands.ResolveMerchantBanker(1) end
+        SLASH_COMMANDS["/sell"]         = function(...) SlashCommands.SlashCollectible("merchant") end
+        SLASH_COMMANDS["/merchant"]     = function(...) SlashCommands.SlashCollectible("merchant") end
+        SLASH_COMMANDS["/vendor"]       = function(...) SlashCommands.SlashCollectible("merchant") end
     end
     if SlashCommands.SV.SlashFence then
         SLASH_COMMANDS["/smuggler"]     = function(...) SlashCommands.SlashCollectible(300) end
