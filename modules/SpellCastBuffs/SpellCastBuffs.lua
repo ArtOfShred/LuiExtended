@@ -1048,6 +1048,15 @@ local function ClearStickyTooltip()
     eventManager:UnregisterForUpdate(moduleName .. "StickyTooltip")
 end
 
+local buffTypes = {
+
+    [1] = "Buff",
+    [2] = "Debuff",
+    [3] = "Unbreakable Buff",
+    [4] = "Unbreakable Debuff",
+
+}
+
 -- OnMouseEnter for Buff Tooltips
 function SpellCastBuffs.Buff_OnMouseEnter(control)
     eventManager:UnregisterForUpdate(moduleName .. "StickyTooltip")
@@ -1059,13 +1068,13 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
     local tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, control.effectName)
     if control.isArtificial then
         tooltipText = GetArtificialEffectTooltipText(control.effectId)
-        GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
+        GameTooltip:AddLine(tooltipTitle, '/EsoUI/Common/Fonts/univers67.otf'..'|18',1,1,1)
         if SpellCastBuffs.SV.TooltipEnable then
             GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
         end
     else
         if not SpellCastBuffs.SV.TooltipEnable then
-            GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
+            GameTooltip:AddLine(tooltipTitle, '/EsoUI/Common/Fonts/univers67.otf'..'|18',1,1,1)
             return
         end
 
@@ -1073,8 +1082,6 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         -- MY ACCOUNT DEBUG: Temporary conditional to check for my Display Name and do some debug stuff, otherwise use normal function
         local displayName = GetDisplayName()
         if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
-
-            tooltipText = ""
 
             -- Add original TP if present
             if control.buffSlot then
@@ -1167,7 +1174,6 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                     end
                     duration = math.floor((duration * 10) + 0.5) / 10
 
-                    local tooltipText
                     if control.buffSlot then
                         tooltipText = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or GetAbilityDescription(abilityId)
                     else
@@ -1216,13 +1222,32 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
             colorText = control.buffType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
         end
 
-        GameTooltip:AddLine(tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
+        GameTooltip:AddLine(tooltipTitle, '/EsoUI/Common/Fonts/univers67.otf'..'|18',1,1,1)
         if tooltipText ~= "" and tooltipText ~= nil then
+            GameTooltip:AddLine("|t325:8:/EsoUI/Art/Miscellaneous/horizontalDivider.dds|t")
             GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
         end
         if thirdLine ~="" and thirdLine ~= nil then
             GameTooltip:AddLine(thirdLine, "", ZO_NORMAL_TEXT:UnpackRGB())
         end
+
+        local lastLines = ""
+        local buffType
+        if control.effectId then
+            lastLines = zo_strformat("\nID: |cFFFFFF<<1>>|r", control.effectId)
+        end
+        if control.buffType then
+            buffType = control.buffType
+            if control.effectId and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].unbreakable then
+                buffType = buffType + 2
+            end
+            lastLines = lastLines .. zo_strformat("\nType: |cFFFFFF<<1>>|r", buffTypes[buffType])
+        end
+
+        lastLines = "|t325:8:/EsoUI/Art/Miscellaneous/horizontalDivider.dds|t" .. lastLines
+
+        GameTooltip:AddLine(lastLines, "", ZO_NORMAL_TEXT:UnpackRGB())
+
     end
 end
 
