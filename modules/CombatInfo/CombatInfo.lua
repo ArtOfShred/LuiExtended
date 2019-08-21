@@ -650,6 +650,7 @@ function CombatInfo.OnUpdate(currentTime)
                 uiUltimate.LabelPct:SetHidden(true)
             end
             if CombatInfo.SV.BarShowLabel then
+                if not g_uiCustomToggle[g_toggledSlots[k]] then return end
                 g_uiCustomToggle[g_toggledSlots[k]].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
             end
         end
@@ -987,6 +988,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                         uiUltimate.LabelPct:SetHidden(true)
                     end
                     if CombatInfo.SV.BarShowLabel then
+                        if not g_uiCustomToggle[g_toggledSlots[abilityId]] then return end
                         local remain = g_toggledSlotsRemain[abilityId] - currentTime
                         g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                     end
@@ -1035,6 +1037,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                     g_triggeredSlotsRemain[abilityId] = 1000 * endTime
                     CombatInfo.PlayProcAnimations(g_triggeredSlots[abilityId])
                     if CombatInfo.SV.BarShowLabel then
+                        if not g_uiProcAnimation[g_triggeredSlots[abilityId]] then return end
                         local remain = g_triggeredSlotsRemain[abilityId] - currentTime
                         g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                     end
@@ -1050,6 +1053,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                         uiUltimate.LabelPct:SetHidden(true)
                     end
                     if CombatInfo.SV.BarShowLabel then
+                        if not g_uiCustomToggle[g_toggledSlots[abilityId]] then return end
                         local remain = g_toggledSlotsRemain[abilityId] - currentTime
                         g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                     end
@@ -1459,6 +1463,7 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
                     uiUltimate.LabelPct:SetHidden(true)
                 end
                 if CombatInfo.SV.BarShowLabel then
+                    if not g_uiCustomToggle[g_toggledSlots[abilityId]] then return end
                     local remain = g_toggledSlotsRemain[abilityId] - currentTime
                     g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                 end
@@ -1568,6 +1573,7 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
             if CombatInfo.SV.ShowTriggered then
                 CombatInfo.PlayProcAnimations(slotNum)
                 if CombatInfo.SV.BarShowLabel then
+                    if not g_uiProcAnimation[slotNum] then return end
                     local remain = g_triggeredSlotsRemain[proc] - currentTime
                     g_uiProcAnimation[slotNum].procLoopTexture.label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                 end
@@ -1585,6 +1591,7 @@ function CombatInfo.OnSlotUpdated(eventCode, slotNum, wasfullUpdate)
                     uiUltimate.LabelPct:SetHidden(true)
                 end
                 if CombatInfo.SV.BarShowLabel then
+                    if not g_uiCustomToggle[slotNum] then return end
                     local remain = g_toggledSlotsRemain[ability_id] - currentTime
                     g_uiCustomToggle[slotNum].label:SetText(string.format(CombatInfo.SV.BarMiilis and "%.1f" or "%.1d", remain / 1000))
                 end
