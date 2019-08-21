@@ -1300,6 +1300,7 @@ local AbilityTables = {
 }
 
 -- Replace ability IDs with names
+local k, v
 for k, v in pairs(AbilityTables) do
     if type(v) == "number" then
         AbilityTables[k] = zo_strformat("<<C:1>>", GetAbilityName(v))
@@ -1307,4 +1308,4 @@ for k, v in pairs(AbilityTables) do
 end
 
 -- Export string data to global namespace
-LUIE.GetAbility = function() return AbilityTables end
+LUIE.Data.Abilities = AbilityTables

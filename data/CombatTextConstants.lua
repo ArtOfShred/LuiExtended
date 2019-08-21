@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
-LUIE.CombatTextConstants = {
+LUIE.Data.CombatTextConstants = {
     -- Damage & Healing
     isDamage = {
         [ACTION_RESULT_DAMAGE]              = true,

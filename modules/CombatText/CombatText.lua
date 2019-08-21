@@ -5,11 +5,13 @@
 
 -- CombatText namespace
 LUIE.CombatText = {}
-local CT = LUIE.CombatText
+local CombatText = LUIE.CombatText
+
+local CombatTextConstants = LUIE.Data.CombatTextConstants
 
 local LMP = LibStub("LibMediaProvider-1.0")
 
-local moduleName = LUIE.name .. "_CombatText"
+local moduleName = LUIE.name .. "CombatText"
 
 local panelTitles = {
     LUIE_CombatText_Outgoing    = GetString(SI_LUIE_CT_PANEL_OUTGOING),
@@ -19,8 +21,8 @@ local panelTitles = {
     LUIE_CombatText_Resource    = GetString(SI_LUIE_CT_PANEL_RESOURCE),
 }
 
-CT.Enabled = false
-CT.D = {
+CombatText.Enabled = false
+CombatText.Defaults = {
     unlocked = false,
     -- Panel Defaults
     panels = {
@@ -328,7 +330,7 @@ CT.D = {
         hotcritical                 = 200,
     },
 }
-CT.SV = nil
+CombatText.SV = nil
 
 local function SavePosition(panel)
     local anchor = { panel:GetAnchor(0) }
@@ -342,24 +344,26 @@ local function SavePosition(panel)
 end
 
 -- Module initialization
-function CT.Initialize( enabled )
+function CombatText.Initialize(enabled)
     -- Load settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
     if isCharacterSpecific then
-        CT.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "CombatText", CT.D )
+        CombatText.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, "CombatText", CombatText.Defaults)
     else
-        CT.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "CombatText", CT.D )
+        CombatText.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, "CombatText", CombatText.Defaults)
     end
 
-    -- If User does not want the Combat Text then exit right here
-    if not enabled then return end
-    CT.Enabled = true
+    -- Disable module if setting not toggled on
+    if not enabled then
+        return
+    end
+    CombatText.Enabled = true
 
     -- Set panels to player configured settings
-    for k, s in pairs (LUIE.CombatText.SV.panels) do
+    for k, s in pairs(LUIE.CombatText.SV.panels) do
         if _G[k] ~= nil then
             _G[k]:ClearAnchors()
-            _G[k]:SetAnchor(s.point, CombatText, s.relativePoint, s.offsetX, s.offsetY)
+            _G[k]:SetAnchor(s.point, Combattext, s.relativePoint, s.offsetX, s.offsetY)
             _G[k]:SetDimensions(unpack(s.dimensions))
             _G[k]:SetHandler('OnMouseUp', SavePosition)
             _G[k .. '_Label']:SetFont(LMP:Fetch('font', LUIE.CombatText.SV.fontFace) .. '|26|' .. LUIE.CombatText.SV.fontOutline)
@@ -375,7 +379,8 @@ function CT.Initialize( enabled )
 
     -- Pool Manager
     local poolManager = LUIE.CombatTextPoolManager:New()
-    for _, v in pairs(LUIE.CombatTextConstants.poolType) do -- Create a pool for each type
+     -- Create a pool for each type
+    for _, v in pairs(CombatTextConstants.poolType) do
         poolManager:RegisterPool(v, LUIE.CombatTextPool:New(v))
     end
 

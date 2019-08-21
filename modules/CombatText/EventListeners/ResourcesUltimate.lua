@@ -4,11 +4,12 @@
 --]]
 
 LUIE.CombatTextResourcesUltimateEventListener = LUIE.CombatTextEventListener:Subclass()
-local CTL = LUIE.CombatTextResourcesUltimateEventListener
+local CombatTextResourcesUltimateEventListener = LUIE.CombatTextResourcesUltimateEventListener
 
-local C = LUIE.CombatTextConstants
+local eventType = LUIE.Data.CombatTextConstants.eventType
+local resourceType = LUIE.Data.CombatTextConstants.resourceType
 
-function CTL:New()
+function CombatTextResourcesUltimateEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_POWER_UPDATE, function(...) self:OnEvent(...) end, REGISTER_FILTER_UNIT_TAG, 'player', REGISTER_FILTER_POWER_TYPE, POWERTYPE_ULTIMATE)
     obj:RegisterForEvent(EVENT_ACTION_SLOTS_FULL_UPDATE, function() self:UpdateMaximum() end)
@@ -18,16 +19,16 @@ function CTL:New()
     return obj
 end
 
-function CTL:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
-    local S = LUIE.CombatText.SV
-    if (power <= 0 or not S.toggles.showUltimate or self.powerInfo.maximum == 0) then
+function CombatTextResourcesUltimateEventListener:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
+    local Settings = LUIE.CombatText.SV
+    if (power <= 0 or not Settings.toggles.showUltimate or self.powerInfo.maximum == 0) then
         return
     end
 
     -- Check if we need to show the notification
     if (power >= self.powerInfo.maximum) then
         if (not self.powerInfo.wasNotified) then
-            self:TriggerEvent(C.eventType.RESOURCE, C.resourceType.ULTIMATE, power)
+            self:TriggerEvent(eventType.RESOURCE, resourceType.ULTIMATE, power)
             self.powerInfo.wasNotified = true
         end
     else
@@ -35,6 +36,6 @@ function CTL:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
     end
 end
 
-function CTL:UpdateMaximum()
+function CombatTextResourcesUltimateEventListener:UpdateMaximum()
     self.powerInfo.maximum = GetSlotAbilityCost(ACTION_BAR_ULTIMATE_SLOT_INDEX + 1)
 end

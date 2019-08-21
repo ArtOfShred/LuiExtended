@@ -4,9 +4,12 @@
 --]]
 
 LUIE.CombatTextPointsChampionEventListener = LUIE.CombatTextEventListener:Subclass()
-local CTL = LUIE.CombatTextPointsChampionEventListener
+local CombatTextPointsChampionEventListener = LUIE.CombatTextPointsChampionEventListener
 
-function CTL:New()
+local eventType = LUIE.Data.CombatTextConstants.eventType
+local pointType = LUIE.Data.CombatTextConstants.pointType
+
+function CombatTextPointsChampionEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_CHAMPION_POINT_UPDATE, function(...) self:OnEvent(...) end, REGISTER_FILTER_UNIT_TAG, 'player')
     self.gain = 0
@@ -19,7 +22,7 @@ function CTL:New()
     return obj
 end
 
-function CTL:OnEvent(unit, currentPoints, maxPoints, reason)
+function CombatTextPointsChampionEventListener:OnEvent(unit, currentPoints, maxPoints, reason)
     if (LUIE.CombatText.SV.toggles.showPointsChampion and not self.hasMaxCP) then
         local currentVR = GetUnitChampionPoints('player')
 
@@ -40,7 +43,7 @@ function CTL:OnEvent(unit, currentPoints, maxPoints, reason)
         if (self.gain > 0 and not self.timeoutActive) then
             self.timeoutActive = true
             zo_callLater(function()
-                self:TriggerEvent(LUIE.CombatTextConstants.eventType.POINT, LUIE.CombatTextConstants.pointType.CHAMPION_POINTS, self.gain)
+                self:TriggerEvent(eventType.POINT, pointType.CHAMPION_POINTS, self.gain)
                 self.gain = 0
                 self.timeoutActive = false
             end, 500)

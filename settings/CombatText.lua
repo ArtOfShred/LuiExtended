@@ -3,16 +3,14 @@
     License: The MIT License (MIT)
 --]]
 
-local CT = LUIE.CombatText
-local CTC = LUIE.CombatTextConstants
+local CombatText = LUIE.CombatText
+local CombatTextConstants = LUIE.Data.CombatTextConstants
 
 local zo_strformat = zo_strformat
 
 local callbackManager = CALLBACK_MANAGER
 
-local optionsDataCombatText = {}
-
-function CT.CreateSettings()
+function CombatText.CreateSettings()
     -- Load LibAddonMenu
     local LAM = _G["LibAddonMenu2"]
     if LAM == nil then return end
@@ -20,6 +18,9 @@ function CT.CreateSettings()
     -- Load LibMediaProvider with backwards compatibility
     local LMP = LibStub("LibMediaProvider-1.0")
     if LMP == nil then return end
+
+    local Defaults = CombatText.Defaults
+    local Settings = CombatText.SV
 
     -- Get fonts
     local FontsList = {}
@@ -42,6 +43,8 @@ function CT.CreateSettings()
         registerForDefaults = true,
     }
 
+    local optionsDataCombatText = {}
+
     -- Combat Text Description
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "description",
@@ -63,15 +66,15 @@ function CT.CreateSettings()
         width = "half",
         name    = GetString(SI_LUIE_LAM_CT_UNLOCK),
         tooltip = GetString(SI_LUIE_LAM_CT_UNLOCK_TP),
-        default = CT.D.unlocked,
-        getFunc = function() return CT.SV.unlocked end,
+        default = Defaults.unlocked,
+        getFunc = function() return Settings.unlocked end,
         setFunc = function()
-            CT.SV.unlocked = not CT.SV.unlocked
-            for k, _ in pairs (CT.SV.panels) do
-                _G[k]:SetMouseEnabled(CT.SV.unlocked)
-                _G[k]:SetMovable(CT.SV.unlocked)
-                _G[k .. '_Backdrop']:SetHidden(not CT.SV.unlocked)
-                _G[k .. '_Label']:SetHidden(not CT.SV.unlocked)
+            Settings.unlocked = not Settings.unlocked
+            for k, _ in pairs (Settings.panels) do
+                _G[k]:SetMouseEnabled(Settings.unlocked)
+                _G[k]:SetMovable(Settings.unlocked)
+                _G[k .. '_Backdrop']:SetHidden(not Settings.unlocked)
+                _G[k .. '_Label']:SetHidden(not Settings.unlocked)
             end
         end,
     }
@@ -86,9 +89,9 @@ function CT.CreateSettings()
                 type    = "checkbox",
                 name    = GetString(SI_LUIE_LAM_CT_IC_ONLY),
                 tooltip = GetString(SI_LUIE_LAM_CT_IC_ONLY_TP),
-                getFunc = function() return CT.SV.toggles.inCombatOnly end,
-                setFunc = function(v) CT.SV.toggles.inCombatOnly = v end,
-                default = CT.D.toggles.inCombatOnly,
+                getFunc = function() return Settings.toggles.inCombatOnly end,
+                setFunc = function(v) Settings.toggles.inCombatOnly = v end,
+                default = Defaults.toggles.inCombatOnly,
             },
             {
                 -- Transparency
@@ -97,9 +100,9 @@ function CT.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_TRANSPARENCY_TP),
                 min = 0,
                 max = 100,
-                getFunc = function() return CT.SV.common.transparencyValue end,
-                setFunc = function(v) CT.SV.common.transparencyValue = v end,
-                default = CT.D.common.transparencyValue,
+                getFunc = function() return Settings.common.transparencyValue end,
+                setFunc = function(v) Settings.common.transparencyValue = v end,
+                default = Defaults.common.transparencyValue,
             },
 
             {
@@ -107,9 +110,9 @@ function CT.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CT_OVERKILL),
                 tooltip = GetString(SI_LUIE_LAM_CT_OVERKILL_TP),
-                getFunc = function() return CT.SV.common.overkill end,
-                setFunc = function(v) CT.SV.common.overkill = v end,
-                default = CT.D.common.overkill,
+                getFunc = function() return Settings.common.overkill end,
+                setFunc = function(v) Settings.common.overkill = v end,
+                default = Defaults.common.overkill,
             },
 
             {
@@ -117,9 +120,9 @@ function CT.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CT_OVERHEAL),
                 tooltip = GetString(SI_LUIE_LAM_CT_OVERHEAL_TP),
-                getFunc = function() return CT.SV.common.overheal end,
-                setFunc = function(v) CT.SV.common.overheal = v end,
-                default = CT.D.common.overheal,
+                getFunc = function() return Settings.common.overheal end,
+                setFunc = function(v) Settings.common.overheal = v end,
+                default = Defaults.common.overheal,
             },
 
             {
@@ -127,9 +130,9 @@ function CT.CreateSettings()
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CT_ABBREVIATE),
                 tooltip = GetString(SI_LUIE_LAM_CT_ABBREVIATE_TP),
-                getFunc = function() return CT.SV.common.abbreviateNumbers end,
-                setFunc = function(v) CT.SV.common.abbreviateNumbers = v end,
-                default = CT.D.common.abbreviateNumbers,
+                getFunc = function() return Settings.common.abbreviateNumbers end,
+                setFunc = function(v) Settings.common.abbreviateNumbers = v end,
+                default = Defaults.common.abbreviateNumbers,
             },
         },
     }
@@ -154,9 +157,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DAMAGE_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showDamage end,
-                setFunc = function(v) CT.SV.toggles.incoming.showDamage = v end,
-                default = CT.D.toggles.incoming.showDamage,
+                getFunc = function() return Settings.toggles.incoming.showDamage end,
+                setFunc = function(v) Settings.toggles.incoming.showDamage = v end,
+                default = Defaults.toggles.incoming.showDamage,
             },
             {
                 -- Damage (Outgoing)
@@ -164,9 +167,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DAMAGE_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showDamage end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showDamage = v end,
-                default = CT.D.toggles.outgoing.showDamage,
+                getFunc = function() return Settings.toggles.outgoing.showDamage end,
+                setFunc = function(v) Settings.toggles.outgoing.showDamage = v end,
+                default = Defaults.toggles.outgoing.showDamage,
             },
             {
                 -- Damage Format
@@ -174,10 +177,10 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_TP),
-                getFunc = function() return CT.SV.formats.damage end,
-                setFunc = function(v) CT.SV.formats.damage = v end,
+                getFunc = function() return Settings.formats.damage end,
+                setFunc = function(v) Settings.formats.damage = v end,
                 isMultiline = false,
-                default = CT.D.formats.damage,
+                default = Defaults.formats.damage,
             },
             {
                 -- Damage Critical Format
@@ -185,10 +188,10 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_CRITICAL_TP),
-                getFunc = function() return CT.SV.formats.damagecritical end,
-                setFunc = function(v) CT.SV.formats.damagecritical = v end,
+                getFunc = function() return Settings.formats.damagecritical end,
+                setFunc = function(v) Settings.formats.damagecritical = v end,
                 isMultiline = false,
-                default = CT.D.formats.damagecritical,
+                default = Defaults.formats.damagecritical,
             },
             {
                 -- Damage Font Size
@@ -199,9 +202,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.damage end,
-                setFunc = function(size) CT.SV.fontSizes.damage = size end,
-                default = CT.D.fontSizes.damage,
+                getFunc = function() return Settings.fontSizes.damage end,
+                setFunc = function(size) Settings.fontSizes.damage = size end,
+                default = Defaults.fontSizes.damage,
             },
             {
                 -- Damage Critical Font Size
@@ -212,9 +215,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.damagecritical end,
-                setFunc = function(size) CT.SV.fontSizes.damagecritical = size end,
-                default = CT.D.fontSizes.damagecritical,
+                getFunc = function() return Settings.fontSizes.damagecritical end,
+                setFunc = function(size) Settings.fontSizes.damagecritical = size end,
+                default = Defaults.fontSizes.damagecritical,
             },
             {
                 type = "header",
@@ -227,9 +230,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DOT_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showDot end,
-                setFunc = function(v) CT.SV.toggles.incoming.showDot = v end,
-                default = CT.D.toggles.incoming.showDot,
+                getFunc = function() return Settings.toggles.incoming.showDot end,
+                setFunc = function(v) Settings.toggles.incoming.showDot = v end,
+                default = Defaults.toggles.incoming.showDot,
             },
             {
                 -- Damage over Time (Outgoing)
@@ -237,9 +240,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DOT_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showDot end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showDot = v end,
-                default = CT.D.toggles.outgoing.showDot,
+                getFunc = function() return Settings.toggles.outgoing.showDot end,
+                setFunc = function(v) Settings.toggles.outgoing.showDot = v end,
+                default = Defaults.toggles.outgoing.showDot,
             },
             {
                 -- Damage over Time Format
@@ -247,10 +250,10 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_TP),
-                getFunc = function() return CT.SV.formats.dot end,
-                setFunc = function(v) CT.SV.formats.dot = v end,
+                getFunc = function() return Settings.formats.dot end,
+                setFunc = function(v) Settings.formats.dot = v end,
                 isMultiline = false,
-                default = CT.D.formats.dot,
+                default = Defaults.formats.dot,
             },
             {
                 -- Damage over Time Critical Format
@@ -258,10 +261,10 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_CRITICAL_TP),
-                getFunc = function() return CT.SV.formats.dotcritical end,
-                setFunc = function(v) CT.SV.formats.dotcritical = v end,
+                getFunc = function() return Settings.formats.dotcritical end,
+                setFunc = function(v) Settings.formats.dotcritical = v end,
                 isMultiline = false,
-                default = CT.D.formats.dotcritical,
+                default = Defaults.formats.dotcritical,
             },
             {
                 -- Damage over Time Font Size
@@ -272,9 +275,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.dot end,
-                setFunc = function(size) CT.SV.fontSizes.dot = size end,
-                default = CT.D.fontSizes.dot,
+                getFunc = function() return Settings.fontSizes.dot end,
+                setFunc = function(size) Settings.fontSizes.dot = size end,
+                default = Defaults.fontSizes.dot,
             },
             {
                 -- Damage over Time Critical Font Size
@@ -285,9 +288,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.dotcritical end,
-                setFunc = function(size) CT.SV.fontSizes.dotcritical = size end,
-                default = CT.D.fontSizes.dotcritical,
+                getFunc = function() return Settings.fontSizes.dotcritical end,
+                setFunc = function(size) Settings.fontSizes.dotcritical = size end,
+                default = Defaults.fontSizes.dotcritical,
             },
             {
                 -- Damage Color Options
@@ -300,144 +303,144 @@ function CT.CreateSettings()
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE_TP),
-                getFunc = function() return unpack(CT.SV.colors.damage[0]) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damage[0] = { r, g, b, a } end,
-                default = {r=CT.D.colors.damage[0][1], g=CT.D.colors.damage[0][2], b=CT.D.colors.damage[0][3]}
+                getFunc = function() return unpack(Settings.colors.damage[0]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[0] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[0][1], g=Defaults.colors.damage[0][2], b=Defaults.colors.damage[0][3]}
             },
             {
                 -- Generic
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC_TP),
-                getFunc = function() return unpack(CT.SV.colors.damage[1]) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damage[1] = { r, g, b, a } end,
-                default = {r=CT.D.colors.damage[1][1], g=CT.D.colors.damage[1][2], b=CT.D.colors.damage[1][3]}
+                getFunc = function() return unpack(Settings.colors.damage[1]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[1] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[1][1], g=Defaults.colors.damage[1][2], b=Defaults.colors.damage[1][3]}
             },
             {
                 -- Physical
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL_TP),
-                getFunc = function() return unpack(CT.SV.colors.damage[2]) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damage[2] = { r, g, b, a } end,
-                default = {r=CT.D.colors.damage[2][1], g=CT.D.colors.damage[2][2], b=CT.D.colors.damage[2][3]}
+                getFunc = function() return unpack(Settings.colors.damage[2]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[2] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[2][1], g=Defaults.colors.damage[2][2], b=Defaults.colors.damage[2][3]}
             },
             {
                 -- Fire
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE_TP),
-                getFunc = function() return unpack(CT.SV.colors.damage[3]) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damage[3] = { r, g, b, a } end,
-                default = {r=CT.D.colors.damage[3][1], g=CT.D.colors.damage[3][2], b=CT.D.colors.damage[3][3]}
+                getFunc = function() return unpack(Settings.colors.damage[3]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[3] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[3][1], g=Defaults.colors.damage[3][2], b=Defaults.colors.damage[3][3]}
             },
             {
                 -- Shock
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK_TP),
-                getFunc = function() return unpack(CT.SV.colors.damage[4]) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damage[4] = { r, g, b, a } end,
-                default = {r=CT.D.colors.damage[4][1], g=CT.D.colors.damage[4][2], b=CT.D.colors.damage[4][3]}
+                getFunc = function() return unpack(Settings.colors.damage[4]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[4] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[4][1], g=Defaults.colors.damage[4][2], b=Defaults.colors.damage[4][3]}
             },
             {
                 -- Oblivion
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION_TP),
-                getFunc = function() return unpack(CT.SV.colors.damage[5]) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damage[5] = { r, g, b, a } end,
-                default = {r=CT.D.colors.damage[5][1], g=CT.D.colors.damage[5][2], b=CT.D.colors.damage[5][3]}
+                getFunc = function() return unpack(Settings.colors.damage[5]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[5] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[5][1], g=Defaults.colors.damage[5][2], b=Defaults.colors.damage[5][3]}
             },
             {
                 -- Cold
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD_TP),
-                getFunc = function() return unpack(CT.SV.colors.damage[6]) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damage[6] = { r, g, b, a } end,
-                default = {r=CT.D.colors.damage[6][1], g=CT.D.colors.damage[6][2], b=CT.D.colors.damage[6][3]}
+                getFunc = function() return unpack(Settings.colors.damage[6]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[6] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[6][1], g=Defaults.colors.damage[6][2], b=Defaults.colors.damage[6][3]}
             },
             {
                 -- Eearth
                 type     = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH_TP),
-                getFunc = function() return unpack(CT.SV.colors.damage[7]) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damage[7] = { r, g, b, a } end,
-                default = {r=CT.D.colors.damage[7][1], g=CT.D.colors.damage[7][2], b=CT.D.colors.damage[7][3]}
+                getFunc = function() return unpack(Settings.colors.damage[7]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[7] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[7][1], g=Defaults.colors.damage[7][2], b=Defaults.colors.damage[7][3]}
             },
             {
                 -- Magic
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC_TP),
-                getFunc = function() return unpack(CT.SV.colors.damage[8]) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damage[8] = { r, g, b, a } end,
-                default = {r=CT.D.colors.damage[8][1], g=CT.D.colors.damage[8][2], b=CT.D.colors.damage[8][3]}
+                getFunc = function() return unpack(Settings.colors.damage[8]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[8] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[8][1], g=Defaults.colors.damage[8][2], b=Defaults.colors.damage[8][3]}
             },
             {
                 -- Drown
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN_TP),
-                getFunc = function() return unpack(CT.SV.colors.damage[9]) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damage[9] = { r, g, b, a } end,
-                default = {r=CT.D.colors.damage[9][1], g=CT.D.colors.damage[9][2], b=CT.D.colors.damage[9][3]}
+                getFunc = function() return unpack(Settings.colors.damage[9]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[9] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[9][1], g=Defaults.colors.damage[9][2], b=Defaults.colors.damage[9][3]}
             },
             {
                 -- Disease
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE_TP),
-                getFunc = function() return unpack(CT.SV.colors.damage[10]) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damage[10] = { r, g, b, a } end,
-                default = {r=CT.D.colors.damage[10][1], g=CT.D.colors.damage[10][2], b=CT.D.colors.damage[10][3]}
+                getFunc = function() return unpack(Settings.colors.damage[10]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[10] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[10][1], g=Defaults.colors.damage[10][2], b=Defaults.colors.damage[10][3]}
             },
             {
                 -- Poison
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON_TP),
-                getFunc = function() return unpack(CT.SV.colors.damage[11]) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damage[11] = { r, g, b, a } end,
-                default = {r=CT.D.colors.damage[11][1], g=CT.D.colors.damage[11][2], b=CT.D.colors.damage[11][3]}
+                getFunc = function() return unpack(Settings.colors.damage[11]) end,
+                setFunc = function(r, g, b, a) Settings.colors.damage[11] = { r, g, b, a } end,
+                default = {r=Defaults.colors.damage[11][1], g=Defaults.colors.damage[11][2], b=Defaults.colors.damage[11][3]}
             },
             {
                 -- Checkbox Critical Damage Override
                 type    = "checkbox",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE_TP),
-                getFunc = function() return CT.SV.toggles.criticalDamageOverride end,
-                setFunc = function(v) CT.SV.toggles.criticalDamageOverride = v end,
-                default = CT.D.toggles.criticalDamageOverride,
+                getFunc = function() return Settings.toggles.criticalDamageOverride end,
+                setFunc = function(v) Settings.toggles.criticalDamageOverride = v end,
+                default = Defaults.toggles.criticalDamageOverride,
             },
             {
                 -- Color Critical Damage Override
                 type    = "colorpicker",
                 name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR_TP),
-                getFunc = function() return unpack(CT.SV.colors.criticalDamageOverride) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.criticalDamageOverride = { r, g, b, a } end,
-                default = {r=CT.D.colors.criticalDamageOverride[1], g=CT.D.colors.criticalDamageOverride[2], b=CT.D.colors.criticalDamageOverride[3]}
+                getFunc = function() return unpack(Settings.colors.criticalDamageOverride) end,
+                setFunc = function(r, g, b, a) Settings.colors.criticalDamageOverride = { r, g, b, a } end,
+                default = {r=Defaults.colors.criticalDamageOverride[1], g=Defaults.colors.criticalDamageOverride[2], b=Defaults.colors.criticalDamageOverride[3]}
             },
             {
                 -- Checkbox Incoming Damage Override
                 type    = "checkbox",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE_TP),
-                getFunc = function() return CT.SV.toggles.incomingDamageOverride end,
-                setFunc = function(v) CT.SV.toggles.incomingDamageOverride = v end,
-                default = CT.D.toggles.incomingDamageOverride
+                getFunc = function() return Settings.toggles.incomingDamageOverride end,
+                setFunc = function(v) Settings.toggles.incomingDamageOverride = v end,
+                default = Defaults.toggles.incomingDamageOverride
             },
             {
                 -- Color Incoming Damage Override
                 type    = "colorpicker",
                 name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR_TP),
-                getFunc = function() return unpack(CT.SV.colors.incomingDamageOverride) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.incomingDamageOverride = { r, g, b, a } end,
-                default = {r=CT.D.colors.incomingDamageOverride[1], g=CT.D.colors.incomingDamageOverride[2], b=CT.D.colors.incomingDamageOverride[3]}
+                getFunc = function() return unpack(Settings.colors.incomingDamageOverride) end,
+                setFunc = function(r, g, b, a) Settings.colors.incomingDamageOverride = { r, g, b, a } end,
+                default = {r=Defaults.colors.incomingDamageOverride[1], g=Defaults.colors.incomingDamageOverride[2], b=Defaults.colors.incomingDamageOverride[3]}
             },
             {
                 type = "header",
@@ -450,9 +453,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_HEALING_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showHealing end,
-                setFunc = function(v) CT.SV.toggles.incoming.showHealing = v end,
-                default = CT.D.toggles.incoming.showHealing,
+                getFunc = function() return Settings.toggles.incoming.showHealing end,
+                setFunc = function(v) Settings.toggles.incoming.showHealing = v end,
+                default = Defaults.toggles.incoming.showHealing,
             },
             {
                 -- Healing (Outgoing)
@@ -460,9 +463,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HEALING), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_HEALING_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showHealing end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showHealing = v end,
-                default = CT.D.toggles.outgoing.showHealing,
+                getFunc = function() return Settings.toggles.outgoing.showHealing end,
+                setFunc = function(v) Settings.toggles.outgoing.showHealing = v end,
+                default = Defaults.toggles.outgoing.showHealing,
             },
             {
                 -- Healing Format
@@ -470,10 +473,10 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_TP),
-                getFunc = function() return CT.SV.formats.healing end,
-                setFunc = function(v) CT.SV.formats.healing = v end,
+                getFunc = function() return Settings.formats.healing end,
+                setFunc = function(v) Settings.formats.healing = v end,
                 isMultiline = false,
-                default = CT.D.formats.healing,
+                default = Defaults.formats.healing,
             },
             {
                 -- Healing Critical Format
@@ -481,10 +484,10 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_CRITICAL_TP),
-                getFunc = function() return CT.SV.formats.healingcritical end,
-                setFunc = function(v) CT.SV.formats.healingcritical = v end,
+                getFunc = function() return Settings.formats.healingcritical end,
+                setFunc = function(v) Settings.formats.healingcritical = v end,
                 isMultiline = false,
-                default = CT.D.formats.healingcritical,
+                default = Defaults.formats.healingcritical,
             },
             {
                 -- Healing Font Size
@@ -495,9 +498,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.healing end,
-                setFunc = function(size) CT.SV.fontSizes.healing = size end,
-                default = CT.D.fontSizes.healing,
+                getFunc = function() return Settings.fontSizes.healing end,
+                setFunc = function(size) Settings.fontSizes.healing = size end,
+                default = Defaults.fontSizes.healing,
             },
             {
                 -- Healing Critical Font Size
@@ -508,9 +511,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.healingcritical end,
-                setFunc = function(size) CT.SV.fontSizes.healingcritical = size end,
-                default = CT.D.fontSizes.healingcritical,
+                getFunc = function() return Settings.fontSizes.healingcritical end,
+                setFunc = function(size) Settings.fontSizes.healingcritical = size end,
+                default = Defaults.fontSizes.healingcritical,
             },
             {
                 type = "header",
@@ -523,9 +526,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_HOT_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showHot end,
-                setFunc = function(v) CT.SV.toggles.incoming.showHot = v end,
-                default = CT.D.toggles.incoming.showHot,
+                getFunc = function() return Settings.toggles.incoming.showHot end,
+                setFunc = function(v) Settings.toggles.incoming.showHot = v end,
+                default = Defaults.toggles.incoming.showHot,
             },
             {
                 -- Healing over Time (Outgoing)
@@ -533,9 +536,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_HOT_ABV), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_HOT_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showHot end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showHot = v end,
-                default = CT.D.toggles.outgoing.showHot,
+                getFunc = function() return Settings.toggles.outgoing.showHot end,
+                setFunc = function(v) Settings.toggles.outgoing.showHot = v end,
+                default = Defaults.toggles.outgoing.showHot,
             },
             {
                 -- Healing over Time Format
@@ -543,10 +546,10 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_TP),
-                getFunc = function() return CT.SV.formats.hot end,
-                setFunc = function(v) CT.SV.formats.hot = v end,
+                getFunc = function() return Settings.formats.hot end,
+                setFunc = function(v) Settings.formats.hot = v end,
                 isMultiline = false,
-                default = CT.D.formats.hot,
+                default = Defaults.formats.hot,
             },
             {
                 -- Healing over Time Critical Format
@@ -554,10 +557,10 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_CRITICAL_TP),
-                getFunc = function() return CT.SV.formats.hotcritical end,
-                setFunc = function(v) CT.SV.formats.hotcritical = v end,
+                getFunc = function() return Settings.formats.hotcritical end,
+                setFunc = function(v) Settings.formats.hotcritical = v end,
                 isMultiline = false,
-                default = CT.D.formats.hotcritical,
+                default = Defaults.formats.hotcritical,
             },
             {
                 -- Healing over Time Font Size
@@ -568,9 +571,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.hot end,
-                setFunc = function(size) CT.SV.fontSizes.hot = size end,
-                default = CT.D.fontSizes.hot,
+                getFunc = function() return Settings.fontSizes.hot end,
+                setFunc = function(size) Settings.fontSizes.hot = size end,
+                default = Defaults.fontSizes.hot,
             },
             {
                 -- Healing over Time Critical Font Size
@@ -581,9 +584,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.hotcritical end,
-                setFunc = function(size) CT.SV.fontSizes.hotcritical = size end,
-                default = CT.D.fontSizes.hotcritical,
+                getFunc = function() return Settings.fontSizes.hotcritical end,
+                setFunc = function(size) Settings.fontSizes.hotcritical = size end,
+                default = Defaults.fontSizes.hotcritical,
             },
             {
                 -- Healing Color Options
@@ -596,27 +599,27 @@ function CT.CreateSettings()
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_TP),
-                getFunc = function() return unpack(CT.SV.colors.healing) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.healing = { r, g, b, a } end,
-                default = {r=CT.D.colors.healing[1], g=CT.D.colors.healing[2], b=CT.D.colors.healing[3]}
+                getFunc = function() return unpack(Settings.colors.healing) end,
+                setFunc = function(r, g, b, a) Settings.colors.healing = { r, g, b, a } end,
+                default = {r=Defaults.colors.healing[1], g=Defaults.colors.healing[2], b=Defaults.colors.healing[3]}
             },
             {
                 -- Checkbox Critical Healing Override
                 type    = "checkbox",
                 name    = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE_TP),
-                getFunc = function() return CT.SV.toggles.criticalHealingOverride end,
-                setFunc = function(v) CT.SV.toggles.criticalHealingOverride = v end,
-                default = CT.D.toggles.criticalHealingOverride
+                getFunc = function() return Settings.toggles.criticalHealingOverride end,
+                setFunc = function(v) Settings.toggles.criticalHealingOverride = v end,
+                default = Defaults.toggles.criticalHealingOverride
             },
             {
                 -- Color Critical Healing Override
                 type    = "colorpicker",
                 name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR_TP),
-                getFunc = function() return unpack(CT.SV.colors.criticalHealingOverride) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.criticalHealingOverride = { r, g, b, a } end,
-                default = {r=CT.D.colors.criticalHealingOverride[1], g=CT.D.colors.criticalHealingOverride[2], b=CT.D.colors.criticalHealingOverride[3]}
+                getFunc = function() return unpack(Settings.colors.criticalHealingOverride) end,
+                setFunc = function(r, g, b, a) Settings.colors.criticalHealingOverride = { r, g, b, a } end,
+                default = {r=Defaults.colors.criticalHealingOverride[1], g=Defaults.colors.criticalHealingOverride[2], b=Defaults.colors.criticalHealingOverride[3]}
             },
         },
     }
@@ -643,9 +646,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.gainLoss end,
-                setFunc = function(size) CT.SV.fontSizes.gainLoss = size end,
-                default = CT.D.fontSizes.gainLoss,
+                getFunc = function() return Settings.fontSizes.gainLoss end,
+                setFunc = function(size) Settings.fontSizes.gainLoss = size end,
+                default = Defaults.fontSizes.gainLoss,
             },
             {
                 type = "header",
@@ -658,9 +661,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_ENERGIZE_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showEnergize end,
-                setFunc = function(v) CT.SV.toggles.incoming.showEnergize = v end,
-                default = CT.D.toggles.incoming.showEnergize,
+                getFunc = function() return Settings.toggles.incoming.showEnergize end,
+                setFunc = function(v) Settings.toggles.incoming.showEnergize = v end,
+                default = Defaults.toggles.incoming.showEnergize,
             },
             {
                 -- Resource Gain (Outgoing)
@@ -668,19 +671,19 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showEnergize end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showEnergize = v end,
-                default = CT.D.toggles.outgoing.showEnergize,
+                getFunc = function() return Settings.toggles.outgoing.showEnergize end,
+                setFunc = function(v) Settings.toggles.outgoing.showEnergize = v end,
+                default = Defaults.toggles.outgoing.showEnergize,
             },
             {
                 -- Resource Gain Format
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_TP),
-                getFunc = function() return CT.SV.formats.energize end,
-                setFunc = function(v) CT.SV.formats.energize = v end,
+                getFunc = function() return Settings.formats.energize end,
+                setFunc = function(v) Settings.formats.energize = v end,
                 isMultiline = false,
-                default = CT.D.formats.energize,
+                default = Defaults.formats.energize,
             },
             {
                 -- Gain Magicka Color
@@ -688,9 +691,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_MAGICKA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA_TP),
-                getFunc = function() return unpack(CT.SV.colors.energizeMagicka) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.energizeMagicka = { r, g, b, a } end,
-                default = {r=CT.D.colors.energizeMagicka[1], g=CT.D.colors.energizeMagicka[2], b=CT.D.colors.energizeMagicka[3]}
+                getFunc = function() return unpack(Settings.colors.energizeMagicka) end,
+                setFunc = function(r, g, b, a) Settings.colors.energizeMagicka = { r, g, b, a } end,
+                default = {r=Defaults.colors.energizeMagicka[1], g=Defaults.colors.energizeMagicka[2], b=Defaults.colors.energizeMagicka[3]}
             },
             {
                 -- Gain Stamina Color
@@ -698,9 +701,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_STAMINA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA_TP),
-                getFunc = function() return unpack(CT.SV.colors.energizeStamina) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.energizeStamina = { r, g, b, a } end,
-                default = {r=CT.D.colors.energizeStamina[1], g=CT.D.colors.energizeStamina[2], b=CT.D.colors.energizeStamina[3]}
+                getFunc = function() return unpack(Settings.colors.energizeStamina) end,
+                setFunc = function(r, g, b, a) Settings.colors.energizeStamina = { r, g, b, a } end,
+                default = {r=Defaults.colors.energizeStamina[1], g=Defaults.colors.energizeStamina[2], b=Defaults.colors.energizeStamina[3]}
             },
             {
                 type = "header",
@@ -713,9 +716,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_ENERGIZE_ULTIMATE_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showUltimateEnergize end,
-                setFunc = function(v) CT.SV.toggles.incoming.showUltimateEnergize = v end,
-                default = CT.D.toggles.incoming.showUltimateEnergize,
+                getFunc = function() return Settings.toggles.incoming.showUltimateEnergize end,
+                setFunc = function(v) Settings.toggles.incoming.showUltimateEnergize = v end,
+                default = Defaults.toggles.incoming.showUltimateEnergize,
             },
             {
                 -- Ultimate Gain (Outgoing)
@@ -723,28 +726,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_ULTIMATE_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showUltimateEnergize end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showUltimateEnergize = v end,
-                default = CT.D.toggles.outgoing.showUltimateEnergize,
+                getFunc = function() return Settings.toggles.outgoing.showUltimateEnergize end,
+                setFunc = function(v) Settings.toggles.outgoing.showUltimateEnergize = v end,
+                default = Defaults.toggles.outgoing.showUltimateEnergize,
             },
             {
                 -- Ultimate Gain Format
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_ULTIMATE_TP),
-                getFunc = function() return CT.SV.formats.ultimateEnergize end,
-                setFunc = function(v) CT.SV.formats.ultimateEnergize = v end,
+                getFunc = function() return Settings.formats.ultimateEnergize end,
+                setFunc = function(v) Settings.formats.ultimateEnergize = v end,
                 isMultiline = false,
-                default = CT.D.formats.ultimateEnergize,
+                default = Defaults.formats.ultimateEnergize,
             },
             {
                 -- Gain Ultimate Color
                 type    = "colorpicker",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE_TP),
-                getFunc = function() return unpack(CT.SV.colors.energizeUltimate) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.energizeUltimate = { r, g, b, a } end,
-                default = {r=CT.D.colors.energizeUltimate[1], g=CT.D.colors.energizeUltimate[2], b=CT.D.colors.energizeUltimate[3]}
+                getFunc = function() return unpack(Settings.colors.energizeUltimate) end,
+                setFunc = function(r, g, b, a) Settings.colors.energizeUltimate = { r, g, b, a } end,
+                default = {r=Defaults.colors.energizeUltimate[1], g=Defaults.colors.energizeUltimate[2], b=Defaults.colors.energizeUltimate[3]}
             },
             {
                 type = "header",
@@ -757,9 +760,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DRAIN_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showDrain end,
-                setFunc = function(v) CT.SV.toggles.incoming.showDrain = v end,
-                default = CT.D.toggles.incoming.showDrain,
+                getFunc = function() return Settings.toggles.incoming.showDrain end,
+                setFunc = function(v) Settings.toggles.incoming.showDrain = v end,
+                default = Defaults.toggles.incoming.showDrain,
             },
             {
                 -- Resource Drain (Outgoing)
@@ -767,19 +770,19 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DRAIN), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DRAIN_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showDrain end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showDrain = v end,
-                default = CT.D.toggles.outgoing.showDrain,
+                getFunc = function() return Settings.toggles.outgoing.showDrain end,
+                setFunc = function(v) Settings.toggles.outgoing.showDrain = v end,
+                default = Defaults.toggles.outgoing.showDrain,
             },
             {
                 -- Resource Damage Format
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DRAIN_TP),
-                getFunc = function() return CT.SV.formats.drain end,
-                setFunc = function(v) CT.SV.formats.drain = v end,
+                getFunc = function() return Settings.formats.drain end,
+                setFunc = function(v) Settings.formats.drain = v end,
                 isMultiline = false,
-                default = CT.D.formats.drain,
+                default = Defaults.formats.drain,
             },
             {
                 -- Drain Magicka Color
@@ -787,9 +790,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_MAGICKA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA_TP),
-                getFunc = function() return unpack(CT.SV.colors.drainMagicka) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.drainMagicka = { r, g, b, a } end,
-                default = {r=CT.D.colors.drainMagicka[1], g=CT.D.colors.drainMagicka[2], b=CT.D.colors.drainMagicka[3]}
+                getFunc = function() return unpack(Settings.colors.drainMagicka) end,
+                setFunc = function(r, g, b, a) Settings.colors.drainMagicka = { r, g, b, a } end,
+                default = {r=Defaults.colors.drainMagicka[1], g=Defaults.colors.drainMagicka[2], b=Defaults.colors.drainMagicka[3]}
             },
             {
                 -- Drain Stamina Color
@@ -797,9 +800,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_STAMINA), GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA_TP),
-                getFunc = function() return unpack(CT.SV.colors.drainStamina) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.drainStamina = { r, g, b, a } end,
-                default = {r=CT.D.colors.drainStamina[1], g=CT.D.colors.drainStamina[2], b=CT.D.colors.drainStamina[3]}
+                getFunc = function() return unpack(Settings.colors.drainStamina) end,
+                setFunc = function(r, g, b, a) Settings.colors.drainStamina = { r, g, b, a } end,
+                default = {r=Defaults.colors.drainStamina[1], g=Defaults.colors.drainStamina[2], b=Defaults.colors.drainStamina[3]}
             },
         },
     }
@@ -826,9 +829,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.mitigation end,
-                setFunc = function(size) CT.SV.fontSizes.mitigation = size end,
-                default = CT.D.fontSizes.mitigation,
+                getFunc = function() return Settings.fontSizes.mitigation end,
+                setFunc = function(size) Settings.fontSizes.mitigation = size end,
+                default = Defaults.fontSizes.mitigation,
             },
             {
                 type = "header",
@@ -841,9 +844,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_MISS), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_MISS_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showMiss end,
-                setFunc = function(v) CT.SV.toggles.incoming.showMiss = v end,
-                default = CT.D.toggles.incoming.showMiss
+                getFunc = function() return Settings.toggles.incoming.showMiss end,
+                setFunc = function(v) Settings.toggles.incoming.showMiss = v end,
+                default = Defaults.toggles.incoming.showMiss
             },
             {
                 -- Missed (Outgoing)
@@ -851,28 +854,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_MISS), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_MISS_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showMiss end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showMiss = v end,
-                default = CT.D.toggles.outgoing.showMiss,
+                getFunc = function() return Settings.toggles.outgoing.showMiss end,
+                setFunc = function(v) Settings.toggles.outgoing.showMiss = v end,
+                default = Defaults.toggles.outgoing.showMiss,
             },
             {
                 -- Missed (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_MISS_TP),
-                getFunc = function() return CT.SV.formats.miss end,
-                setFunc = function(v) CT.SV.formats.miss = v end,
+                getFunc = function() return Settings.formats.miss end,
+                setFunc = function(v) Settings.formats.miss = v end,
                 isMultiline = false,
-                default = CT.D.formats.miss,
+                default = Defaults.formats.miss,
             },
             {
                 -- Missed (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_MISS_TP),
-                getFunc = function() return unpack(CT.SV.colors.miss) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.miss = { r, g, b, a } end,
-                default = {r=CT.D.colors.miss[1], g=CT.D.colors.miss[2], b=CT.D.colors.miss[3]}
+                getFunc = function() return unpack(Settings.colors.miss) end,
+                setFunc = function(r, g, b, a) Settings.colors.miss = { r, g, b, a } end,
+                default = {r=Defaults.colors.miss[1], g=Defaults.colors.miss[2], b=Defaults.colors.miss[3]}
             },
             {
                 type = "header",
@@ -885,9 +888,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_IMMUNE_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showImmune end,
-                setFunc = function(v) CT.SV.toggles.incoming.showImmune = v end,
-                default = CT.D.toggles.incoming.showImmune,
+                getFunc = function() return Settings.toggles.incoming.showImmune end,
+                setFunc = function(v) Settings.toggles.incoming.showImmune = v end,
+                default = Defaults.toggles.incoming.showImmune,
             },
             {
                 -- Immune (Outgoing)
@@ -895,28 +898,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_IMMUNE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_IMMUNE_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showImmune end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showImmune = v end,
-                default = CT.D.toggles.outgoing.showImmune,
+                getFunc = function() return Settings.toggles.outgoing.showImmune end,
+                setFunc = function(v) Settings.toggles.outgoing.showImmune = v end,
+                default = Defaults.toggles.outgoing.showImmune,
             },
             {
                 -- Immune (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_IMMUNE_TP),
-                getFunc = function() return CT.SV.formats.immune end,
-                setFunc = function(v) CT.SV.formats.immune = v end,
+                getFunc = function() return Settings.formats.immune end,
+                setFunc = function(v) Settings.formats.immune = v end,
                 isMultiline = false,
-                default = CT.D.formats.immune,
+                default = Defaults.formats.immune,
             },
             {
                 -- Immune (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_IMMUNE_TP),
-                getFunc = function() return unpack(CT.SV.colors.immune) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.immune = { r, g, b, a } end,
-                default = {r=CT.D.colors.immune[1], g=CT.D.colors.immune[2], b=CT.D.colors.immune[3]}
+                getFunc = function() return unpack(Settings.colors.immune) end,
+                setFunc = function(r, g, b, a) Settings.colors.immune = { r, g, b, a } end,
+                default = {r=Defaults.colors.immune[1], g=Defaults.colors.immune[2], b=Defaults.colors.immune[3]}
             },
             {
                 type = "header",
@@ -929,9 +932,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_PARRIED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_PARRIED_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showParried end,
-                setFunc = function(v) CT.SV.toggles.incoming.showParried = v end,
-                default = CT.D.toggles.incoming.showParried,
+                getFunc = function() return Settings.toggles.incoming.showParried end,
+                setFunc = function(v) Settings.toggles.incoming.showParried = v end,
+                default = Defaults.toggles.incoming.showParried,
             },
             {
                 -- Parried (Outgoing)
@@ -939,28 +942,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_PARRIED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_PARRIED_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showParried end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showParried = v end,
-                default = CT.D.toggles.outgoing.showParried,
+                getFunc = function() return Settings.toggles.outgoing.showParried end,
+                setFunc = function(v) Settings.toggles.outgoing.showParried = v end,
+                default = Defaults.toggles.outgoing.showParried,
             },
             {
                 -- Parried (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_PARRIED_TP),
-                getFunc = function() return CT.SV.formats.parried end,
-                setFunc = function(v) CT.SV.formats.parried = v end,
+                getFunc = function() return Settings.formats.parried end,
+                setFunc = function(v) Settings.formats.parried = v end,
                 isMultiline = false,
-                default = CT.D.formats.parried,
+                default = Defaults.formats.parried,
             },
             {
                 -- Parried (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_PARRIED_TP),
-                getFunc = function() return unpack(CT.SV.colors.parried) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.parried = { r, g, b, a } end,
-                default = {r=CT.D.colors.parried[1], g=CT.D.colors.parried[2], b=CT.D.colors.parried[3]}
+                getFunc = function() return unpack(Settings.colors.parried) end,
+                setFunc = function(r, g, b, a) Settings.colors.parried = { r, g, b, a } end,
+                default = {r=Defaults.colors.parried[1], g=Defaults.colors.parried[2], b=Defaults.colors.parried[3]}
             },
             {
                 type = "header",
@@ -973,9 +976,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_REFLECTED_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showReflected end,
-                setFunc = function(v) CT.SV.toggles.incoming.showReflected = v end,
-                default = CT.D.toggles.incoming.showReflected,
+                getFunc = function() return Settings.toggles.incoming.showReflected end,
+                setFunc = function(v) Settings.toggles.incoming.showReflected = v end,
+                default = Defaults.toggles.incoming.showReflected,
             },
             {
                 -- Reflected (Outgoing)
@@ -983,28 +986,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_REFLECTED_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showReflected end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showReflected = v end,
-                default = CT.D.toggles.outgoing.showReflected,
+                getFunc = function() return Settings.toggles.outgoing.showReflected end,
+                setFunc = function(v) Settings.toggles.outgoing.showReflected = v end,
+                default = Defaults.toggles.outgoing.showReflected,
             },
             {
                 -- Reflected (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_REFLECTED_TP),
-                getFunc = function() return CT.SV.formats.reflected end,
-                setFunc = function(v) CT.SV.formats.reflected = v end,
+                getFunc = function() return Settings.formats.reflected end,
+                setFunc = function(v) Settings.formats.reflected = v end,
                 isMultiline = false,
-                default = CT.D.formats.reflected,
+                default = Defaults.formats.reflected,
             },
             {
                 -- Reflected (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_REFLETCED_TP),
-                getFunc = function() return unpack(CT.SV.colors.reflected) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.reflected = { r, g, b, a } end,
-                default = {r=CT.D.colors.reflected[1], g=CT.D.colors.reflected[2], b=CT.D.colors.reflected[3]}
+                getFunc = function() return unpack(Settings.colors.reflected) end,
+                setFunc = function(r, g, b, a) Settings.colors.reflected = { r, g, b, a } end,
+                default = {r=Defaults.colors.reflected[1], g=Defaults.colors.reflected[2], b=Defaults.colors.reflected[3]}
             },
             {
                 type = "header",
@@ -1017,9 +1020,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DAMAGE_SHIELD_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showDamageShield end,
-                setFunc = function(v) CT.SV.toggles.incoming.showDamageShield = v end,
-                default = CT.D.toggles.incoming.showDamageShield,
+                getFunc = function() return Settings.toggles.incoming.showDamageShield end,
+                setFunc = function(v) Settings.toggles.incoming.showDamageShield = v end,
+                default = Defaults.toggles.incoming.showDamageShield,
             },
             {
                 -- Damage Shielded (Outgoing)
@@ -1027,28 +1030,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DAMAGE_SHIELD_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showDamageShield end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showDamageShield = v end,
-                default = CT.D.toggles.outgoing.showDamageShield,
+                getFunc = function() return Settings.toggles.outgoing.showDamageShield end,
+                setFunc = function(v) Settings.toggles.outgoing.showDamageShield = v end,
+                default = Defaults.toggles.outgoing.showDamageShield,
             },
             {
                 -- Damage Shielded (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_SHIELD_TP),
-                getFunc = function() return CT.SV.formats.damageShield end,
-                setFunc = function(v) CT.SV.formats.damageShield = v end,
+                getFunc = function() return Settings.formats.damageShield end,
+                setFunc = function(v) Settings.formats.damageShield = v end,
                 isMultiline = false,
-                default = CT.D.formats.damageShield,
+                default = Defaults.formats.damageShield,
             },
             {
                 -- Damage Shielded (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHIELD_TP),
-                getFunc = function() return unpack(CT.SV.colors.damageShield) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.damageShield = { r, g, b, a } end,
-                default = {r=CT.D.colors.damageShield[1], g=CT.D.colors.damageShield[2], b=CT.D.colors.damageShield[3]}
+                getFunc = function() return unpack(Settings.colors.damageShield) end,
+                setFunc = function(r, g, b, a) Settings.colors.damageShield = { r, g, b, a } end,
+                default = {r=Defaults.colors.damageShield[1], g=Defaults.colors.damageShield[2], b=Defaults.colors.damageShield[3]}
             },
             {
                 type = "header",
@@ -1061,9 +1064,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DODGED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DODGED_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showDodged end,
-                setFunc = function(v) CT.SV.toggles.incoming.showDodged = v end,
-                default = CT.D.toggles.incoming.showDodged,
+                getFunc = function() return Settings.toggles.incoming.showDodged end,
+                setFunc = function(v) Settings.toggles.incoming.showDodged = v end,
+                default = Defaults.toggles.incoming.showDodged,
             },
             {
                 -- Dodged (Outgoing)
@@ -1071,28 +1074,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DODGED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DODGED_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showDodged end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showDodged = v end,
-                default = CT.D.toggles.outgoing.showDodged,
+                getFunc = function() return Settings.toggles.outgoing.showDodged end,
+                setFunc = function(v) Settings.toggles.outgoing.showDodged = v end,
+                default = Defaults.toggles.outgoing.showDodged,
             },
             {
                 -- Dodged (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DODGED_TP),
-                getFunc = function() return CT.SV.formats.dodged end,
-                setFunc = function(v) CT.SV.formats.dodged = v end,
+                getFunc = function() return Settings.formats.dodged end,
+                setFunc = function(v) Settings.formats.dodged = v end,
                 isMultiline = false,
-                default = CT.D.formats.dodged,
+                default = Defaults.formats.dodged,
             },
             {
                 -- Dodged (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DODGED_TP),
-                getFunc = function() return unpack(CT.SV.colors.dodged) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.dodged = { r, g, b, a } end,
-                default = {r=CT.D.colors.dodged[1], g=CT.D.colors.dodged[2], b=CT.D.colors.dodged[3]}
+                getFunc = function() return unpack(Settings.colors.dodged) end,
+                setFunc = function(r, g, b, a) Settings.colors.dodged = { r, g, b, a } end,
+                default = {r=Defaults.colors.dodged[1], g=Defaults.colors.dodged[2], b=Defaults.colors.dodged[3]}
             },
             {
                 type = "header",
@@ -1105,9 +1108,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_BLOCKED_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showBlocked end,
-                setFunc = function(v) CT.SV.toggles.incoming.showBlocked = v end,
-                default = CT.D.toggles.incoming.showBlocked,
+                getFunc = function() return Settings.toggles.incoming.showBlocked end,
+                setFunc = function(v) Settings.toggles.incoming.showBlocked = v end,
+                default = Defaults.toggles.incoming.showBlocked,
             },
             {
                 -- Blocked (Outgoing)
@@ -1115,28 +1118,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_BLOCKED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_BLOCKED_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showBlocked end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showBlocked = v end,
-                default = CT.D.toggles.outgoing.showBlocked,
+                getFunc = function() return Settings.toggles.outgoing.showBlocked end,
+                setFunc = function(v) Settings.toggles.outgoing.showBlocked = v end,
+                default = Defaults.toggles.outgoing.showBlocked,
             },
             {
                 -- Blocked (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_BLOCKED_TP),
-                getFunc = function() return CT.SV.formats.blocked end,
-                setFunc = function(v) CT.SV.formats.blocked = v end,
+                getFunc = function() return Settings.formats.blocked end,
+                setFunc = function(v) Settings.formats.blocked = v end,
                 isMultiline = false,
-                default = CT.D.formats.blocked,
+                default = Defaults.formats.blocked,
             },
             {
                 -- Blocked (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_BLOCKED_TP),
-                getFunc = function() return unpack(CT.SV.colors.blocked) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.blocked = { r, g, b, a } end,
-                default = {r=CT.D.colors.blocked[1], g=CT.D.colors.blocked[2], b=CT.D.colors.blocked[3]}
+                getFunc = function() return unpack(Settings.colors.blocked) end,
+                setFunc = function(r, g, b, a) Settings.colors.blocked = { r, g, b, a } end,
+                default = {r=Defaults.colors.blocked[1], g=Defaults.colors.blocked[2], b=Defaults.colors.blocked[3]}
             },
             {
                 type = "header",
@@ -1149,9 +1152,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_INTERRUPTED_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showInterrupted end,
-                setFunc = function(v) CT.SV.toggles.incoming.showInterrupted = v end,
-                default = CT.D.toggles.incoming.showInterrupted,
+                getFunc = function() return Settings.toggles.incoming.showInterrupted end,
+                setFunc = function(v) Settings.toggles.incoming.showInterrupted = v end,
+                default = Defaults.toggles.incoming.showInterrupted,
             },
             {
                 -- Interrupted (Outgoing)
@@ -1159,28 +1162,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_INTERRUPTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_INTERRUPTED_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showInterrupted end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showInterrupted = v end,
-                default = CT.D.toggles.outgoing.showInterrupted,
+                getFunc = function() return Settings.toggles.outgoing.showInterrupted end,
+                setFunc = function(v) Settings.toggles.outgoing.showInterrupted = v end,
+                default = Defaults.toggles.outgoing.showInterrupted,
             },
             {
                 -- Interrupted (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_INTERRUPTED_TP),
-                getFunc = function() return CT.SV.formats.interrupted end,
-                setFunc = function(v) CT.SV.formats.interrupted = v end,
+                getFunc = function() return Settings.formats.interrupted end,
+                setFunc = function(v) Settings.formats.interrupted = v end,
                 isMultiline = false,
-                default = CT.D.formats.interrupted,
+                default = Defaults.formats.interrupted,
             },
             {
                 -- Interrupted (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INTERRUPTED_TP),
-                getFunc = function() return unpack(CT.SV.colors.interrupted) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.interrupted = { r, g, b, a } end,
-                default = {r=CT.D.colors.interrupted[1], g=CT.D.colors.interrupted[2], b=CT.D.colors.interrupted[3]}
+                getFunc = function() return unpack(Settings.colors.interrupted) end,
+                setFunc = function(r, g, b, a) Settings.colors.interrupted = { r, g, b, a } end,
+                default = {r=Defaults.colors.interrupted[1], g=Defaults.colors.interrupted[2], b=Defaults.colors.interrupted[3]}
             },
         },
     }
@@ -1207,9 +1210,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.crowdControl end,
-                setFunc = function(size) CT.SV.fontSizes.crowdControl = size end,
-                default = CT.D.fontSizes.crowdControl,
+                getFunc = function() return Settings.fontSizes.crowdControl end,
+                setFunc = function(size) Settings.fontSizes.crowdControl = size end,
+                default = Defaults.fontSizes.crowdControl,
             },
             {
                 type = "header",
@@ -1222,9 +1225,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DISORIENTED_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showDisoriented end,
-                setFunc = function(v) CT.SV.toggles.incoming.showDisoriented = v end,
-                default = CT.D.toggles.incoming.showDisoriented,
+                getFunc = function() return Settings.toggles.incoming.showDisoriented end,
+                setFunc = function(v) Settings.toggles.incoming.showDisoriented = v end,
+                default = Defaults.toggles.incoming.showDisoriented,
             },
             {
                 -- Disoriented (Outgoing)
@@ -1232,28 +1235,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DISORIENTED_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showDisoriented end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showDisoriented = v end,
-                default = CT.D.toggles.outgoing.showDisoriented,
+                getFunc = function() return Settings.toggles.outgoing.showDisoriented end,
+                setFunc = function(v) Settings.toggles.outgoing.showDisoriented = v end,
+                default = Defaults.toggles.outgoing.showDisoriented,
             },
             {
                 -- Disoriented (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_DISORIENTED_TP),
-                getFunc = function() return CT.SV.formats.disoriented end,
-                setFunc = function(v) CT.SV.formats.disoriented = v end,
+                getFunc = function() return Settings.formats.disoriented end,
+                setFunc = function(v) Settings.formats.disoriented = v end,
                 isMultiline = false,
-                default = CT.D.formats.disoriented,
+                default = Defaults.formats.disoriented,
             },
             {
                 -- Disoriented (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DISORIENTED_TP),
-                getFunc = function() return unpack(CT.SV.colors.disoriented) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.disoriented = { r, g, b, a } end,
-                default = {r=CT.D.colors.disoriented[1], g=CT.D.colors.disoriented[2], b=CT.D.colors.disoriented[3]}
+                getFunc = function() return unpack(Settings.colors.disoriented) end,
+                setFunc = function(r, g, b, a) Settings.colors.disoriented = { r, g, b, a } end,
+                default = {r=Defaults.colors.disoriented[1], g=Defaults.colors.disoriented[2], b=Defaults.colors.disoriented[3]}
             },
             {
                 type = "header",
@@ -1266,9 +1269,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_FEARED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_FEARED_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showFeared end,
-                setFunc = function(v) CT.SV.toggles.incoming.showFeared = v end,
-                default = CT.D.toggles.incoming.showFeared,
+                getFunc = function() return Settings.toggles.incoming.showFeared end,
+                setFunc = function(v) Settings.toggles.incoming.showFeared = v end,
+                default = Defaults.toggles.incoming.showFeared,
             },
             {
                 -- Feared (Outgoing)
@@ -1276,28 +1279,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_FEARED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_FEARED_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showFeared end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showFeared = v end,
-                default = CT.D.toggles.outgoing.showFeared,
+                getFunc = function() return Settings.toggles.outgoing.showFeared end,
+                setFunc = function(v) Settings.toggles.outgoing.showFeared = v end,
+                default = Defaults.toggles.outgoing.showFeared,
             },
             {
                 -- Feared (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_FEARED_TP),
-                getFunc = function() return CT.SV.formats.feared end,
-                setFunc = function(v) CT.SV.formats.feared = v end,
+                getFunc = function() return Settings.formats.feared end,
+                setFunc = function(v) Settings.formats.feared = v end,
                 isMultiline = false,
-                default = CT.D.formats.feared,
+                default = Defaults.formats.feared,
             },
             {
                 -- Feared (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_FEARED_TP),
-                getFunc = function() return unpack(CT.SV.colors.feared) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.feared = { r, g, b, a } end,
-                default = {r=CT.D.colors.feared[1], g=CT.D.colors.feared[2], b=CT.D.colors.feared[3]}
+                getFunc = function() return unpack(Settings.colors.feared) end,
+                setFunc = function(r, g, b, a) Settings.colors.feared = { r, g, b, a } end,
+                default = {r=Defaults.colors.feared[1], g=Defaults.colors.feared[2], b=Defaults.colors.feared[3]}
             },
             {
                 type = "header",
@@ -1310,9 +1313,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_OFF_BALANCE_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showOffBalanced end,
-                setFunc = function(v) CT.SV.toggles.incoming.showOffBalanced = v end,
-                default = CT.D.toggles.incoming.showOffBalanced,
+                getFunc = function() return Settings.toggles.incoming.showOffBalanced end,
+                setFunc = function(v) Settings.toggles.incoming.showOffBalanced = v end,
+                default = Defaults.toggles.incoming.showOffBalanced,
             },
             {
                 -- Off-Balance (Outgoing)
@@ -1320,28 +1323,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_OFF_BALANCE_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showOffBalanced end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showOffBalanced = v end,
-                default = CT.D.toggles.outgoing.showOffBalanced,
+                getFunc = function() return Settings.toggles.outgoing.showOffBalanced end,
+                setFunc = function(v) Settings.toggles.outgoing.showOffBalanced = v end,
+                default = Defaults.toggles.outgoing.showOffBalanced,
             },
             {
                 -- Off-Balanced (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_OFF_BALANCE_TP),
-                getFunc = function() return CT.SV.formats.offBalanced end,
-                setFunc = function(v) CT.SV.formats.offBalanced = v end,
+                getFunc = function() return Settings.formats.offBalanced end,
+                setFunc = function(v) Settings.formats.offBalanced = v end,
                 isMultiline = false,
-                default = CT.D.formats.offBalanced,
+                default = Defaults.formats.offBalanced,
             },
             {
                 -- Off-Balanced (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_OFF_BALANCE_TP),
-                getFunc = function() return unpack(CT.SV.colors.offBalanced) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.offBalanced = { r, g, b, a } end,
-                default = {r=CT.D.colors.offBalanced[1], g=CT.D.colors.offBalanced[2], b=CT.D.colors.offBalanced[3]}
+                getFunc = function() return unpack(Settings.colors.offBalanced) end,
+                setFunc = function(r, g, b, a) Settings.colors.offBalanced = { r, g, b, a } end,
+                default = {r=Defaults.colors.offBalanced[1], g=Defaults.colors.offBalanced[2], b=Defaults.colors.offBalanced[3]}
             },
             {
                 type = "header",
@@ -1354,9 +1357,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_SILENCED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_SILENCED_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showSilenced end,
-                setFunc = function(v) CT.SV.toggles.incoming.showSilenced = v end,
-                default = CT.D.toggles.incoming.showSilenced,
+                getFunc = function() return Settings.toggles.incoming.showSilenced end,
+                setFunc = function(v) Settings.toggles.incoming.showSilenced = v end,
+                default = Defaults.toggles.incoming.showSilenced,
             },
             {
                 -- Silenced (Outgoing)
@@ -1364,28 +1367,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_SILENCED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showSilenced end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showSilenced = v end,
-                default = CT.D.toggles.outgoing.showSilenced,
+                getFunc = function() return Settings.toggles.outgoing.showSilenced end,
+                setFunc = function(v) Settings.toggles.outgoing.showSilenced = v end,
+                default = Defaults.toggles.outgoing.showSilenced,
             },
             {
                 -- Silenced (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_SILENCED_TP),
-                getFunc = function() return CT.SV.formats.silenced end,
-                setFunc = function(v) CT.SV.formats.silenced = v end,
+                getFunc = function() return Settings.formats.silenced end,
+                setFunc = function(v) Settings.formats.silenced = v end,
                 isMultiline = false,
-                default = CT.D.formats.silenced,
+                default = Defaults.formats.silenced,
             },
             {
                 -- Silenced (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_SILENCED_TP),
-                getFunc = function() return unpack(CT.SV.colors.silenced) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.silenced = { r, g, b, a } end,
-                default = {r=CT.D.colors.silenced[1], g=CT.D.colors.silenced[2], b=CT.D.colors.silenced[3]}
+                getFunc = function() return unpack(Settings.colors.silenced) end,
+                setFunc = function(r, g, b, a) Settings.colors.silenced = { r, g, b, a } end,
+                default = {r=Defaults.colors.silenced[1], g=Defaults.colors.silenced[2], b=Defaults.colors.silenced[3]}
             },
             {
                 type = "header",
@@ -1398,9 +1401,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_STUNNED), GetString(SI_LUIE_LAM_CT_SHARED_INCOMING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_STUNNED_TP),
-                getFunc = function() return CT.SV.toggles.incoming.showStunned end,
-                setFunc = function(v) CT.SV.toggles.incoming.showStunned = v end,
-                default = CT.D.toggles.incoming.showStunned,
+                getFunc = function() return Settings.toggles.incoming.showStunned end,
+                setFunc = function(v) Settings.toggles.incoming.showStunned = v end,
+                default = Defaults.toggles.incoming.showStunned,
             },
             {
                 -- Stunned (Outgoing)
@@ -1408,28 +1411,28 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>> (<<3>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_STUNNED), GetString(SI_LUIE_LAM_CT_SHARED_OUTGOING)),
                 tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP),
-                getFunc = function() return CT.SV.toggles.outgoing.showStunned end,
-                setFunc = function(v) CT.SV.toggles.outgoing.showStunned = v end,
-                default = CT.D.toggles.outgoing.showStunned,
+                getFunc = function() return Settings.toggles.outgoing.showStunned end,
+                setFunc = function(v) Settings.toggles.outgoing.showStunned = v end,
+                default = Defaults.toggles.outgoing.showStunned,
             },
             {
                 -- Stunned (Format)
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_COMBAT_STUNNED_TP),
-                getFunc = function() return CT.SV.formats.stunned end,
-                setFunc = function(v) CT.SV.formats.stunned = v end,
+                getFunc = function() return Settings.formats.stunned end,
+                setFunc = function(v) Settings.formats.stunned = v end,
                 isMultiline = false,
-                default = CT.D.formats.stunned,
+                default = Defaults.formats.stunned,
             },
             {
                 -- Stunned (Color)
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_STUNNED_TP),
-                getFunc = function() return unpack(CT.SV.colors.stunned) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.stunned = { r, g, b, a } end,
-                default = {r=CT.D.colors.stunned[1], g=CT.D.colors.stunned[2], b=CT.D.colors.stunned[3]}
+                getFunc = function() return unpack(Settings.colors.stunned) end,
+                setFunc = function(r, g, b, a) Settings.colors.stunned = { r, g, b, a } end,
+                default = {r=Defaults.colors.stunned[1], g=Defaults.colors.stunned[2], b=Defaults.colors.stunned[3]}
             },
         },
     }
@@ -1454,9 +1457,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP),
-                getFunc = function() return CT.SV.toggles.showInCombat end,
-                setFunc = function(v) CT.SV.toggles.showInCombat = v end,
-                default = CT.D.toggles.showInCombat,
+                getFunc = function() return Settings.toggles.showInCombat end,
+                setFunc = function(v) Settings.toggles.showInCombat = v end,
+                default = Defaults.toggles.showInCombat,
             },
             {
                 -- Out of Combat
@@ -1464,9 +1467,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_OUT_TP),
-                getFunc = function() return CT.SV.toggles.showOutCombat end,
-                setFunc = function(v) CT.SV.toggles.showOutCombat = v end,
-                default = CT.D.toggles.showOutCombat,
+                getFunc = function() return Settings.toggles.showOutCombat end,
+                setFunc = function(v) Settings.toggles.showOutCombat = v end,
+                default = Defaults.toggles.showOutCombat,
             },
             {
                 -- In Combat
@@ -1474,10 +1477,10 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)",GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_IN_TP),
-                getFunc = function() return CT.SV.formats.inCombat end,
-                setFunc = function(v) CT.SV.formats.inCombat = v end,
+                getFunc = function() return Settings.formats.inCombat end,
+                setFunc = function(v) Settings.formats.inCombat = v end,
                 isMultiline = false,
-                default = CT.D.formats.inCombat,
+                default = Defaults.formats.inCombat,
             },
             {
                 -- Out Combat
@@ -1485,10 +1488,10 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)",GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_OUT_TP),
-                getFunc = function() return CT.SV.formats.outCombat end,
-                setFunc = function(v) CT.SV.formats.outCombat = v end,
+                getFunc = function() return Settings.formats.outCombat end,
+                setFunc = function(v) Settings.formats.outCombat = v end,
                 isMultiline = false,
-                default = CT.D.formats.outCombat,
+                default = Defaults.formats.outCombat,
             },
             {
                 -- Combat State Font Size
@@ -1498,9 +1501,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.combatState end,
-                setFunc = function(size) CT.SV.fontSizes.combatState = size end,
-                default = CT.D.fontSizes.combatState,
+                getFunc = function() return Settings.fontSizes.combatState end,
+                setFunc = function(size) Settings.fontSizes.combatState = size end,
+                default = Defaults.fontSizes.combatState,
             },
             {
                 -- In Combat
@@ -1508,9 +1511,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_IN)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP),
-                getFunc = function() return unpack(CT.SV.colors.inCombat) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.inCombat = { r, g, b, a } end,
-                default = {r=CT.D.colors.inCombat[1], g=CT.D.colors.inCombat[2], b=CT.D.colors.inCombat[3]}
+                getFunc = function() return unpack(Settings.colors.inCombat) end,
+                setFunc = function(r, g, b, a) Settings.colors.inCombat = { r, g, b, a } end,
+                default = {r=Defaults.colors.inCombat[1], g=Defaults.colors.inCombat[2], b=Defaults.colors.inCombat[3]}
             },
             {
                 -- Out Combat
@@ -1518,9 +1521,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_COMBAT_OUT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP),
-                getFunc = function() return unpack(CT.SV.colors.outCombat) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.outCombat = { r, g, b, a } end,
-                default = {r=CT.D.colors.outCombat[1], g=CT.D.colors.outCombat[2], b=CT.D.colors.outCombat[3]}
+                getFunc = function() return unpack(Settings.colors.outCombat) end,
+                setFunc = function(r, g, b, a) Settings.colors.outCombat = { r, g, b, a } end,
+                default = {r=Defaults.colors.outCombat[1], g=Defaults.colors.outCombat[2], b=Defaults.colors.outCombat[3]}
             },
             {
                 type = "header",
@@ -1532,19 +1535,19 @@ function CT.CreateSettings()
                 type    = "checkbox",
                 name    = GetString(SI_LUIE_LAM_CT_DEATH_NOTIFICATION),
                 tooltip = GetString(SI_LUIE_LAM_CT_DEATH_NOTIFICATION_TP),
-                getFunc = function() return CT.SV.toggles.showDeath end,
-                setFunc = function(v) CT.SV.toggles.showDeath = v end,
-                default = CT.D.toggles.showDeath,
+                getFunc = function() return Settings.toggles.showDeath end,
+                setFunc = function(v) Settings.toggles.showDeath = v end,
+                default = Defaults.toggles.showDeath,
             },
             {
                 -- Death Format
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_DEATH_FORMAT_TP),
-                getFunc = function() return CT.SV.formats.death end,
-                setFunc = function(v) CT.SV.formats.death = v end,
+                getFunc = function() return Settings.formats.death end,
+                setFunc = function(v) Settings.formats.death = v end,
                 isMultiline = false,
-                default = CT.D.formats.death,
+                default = Defaults.formats.death,
             },
             {
                 -- Death Font Size
@@ -1554,18 +1557,18 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.death end,
-                setFunc = function(size) CT.SV.fontSizes.death = size end,
-                default = CT.D.fontSizes.death,
+                getFunc = function() return Settings.fontSizes.death end,
+                setFunc = function(size) Settings.fontSizes.death = size end,
+                default = Defaults.fontSizes.death,
             },
             {
                 -- Death Color
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_DEATH_COLOR_TP),
-                getFunc = function() return unpack(CT.SV.colors.death) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.death = { r, g, b, a } end,
-                default = {r=CT.D.colors.death[1], g=CT.D.colors.death[2], b=CT.D.colors.death[3]}
+                getFunc = function() return unpack(Settings.colors.death) end,
+                setFunc = function(r, g, b, a) Settings.colors.death = { r, g, b, a } end,
+                default = {r=Defaults.colors.death[1], g=Defaults.colors.death[2], b=Defaults.colors.death[3]}
             },
             {
                 type = "header",
@@ -1580,9 +1583,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.point end,
-                setFunc = function(size) CT.SV.fontSizes.point = size end,
-                default = CT.D.fontSizes.point,
+                getFunc = function() return Settings.fontSizes.point end,
+                setFunc = function(size) Settings.fontSizes.point = size end,
+                default = Defaults.fontSizes.point,
             },
             {
                 type = "header",
@@ -1594,28 +1597,28 @@ function CT.CreateSettings()
                 type    = "checkbox",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP),
-                getFunc = function() return CT.SV.toggles.showPointsAlliance end,
-                setFunc = function(v) CT.SV.toggles.showPointsAlliance = v end,
-                default = CT.D.toggles.showPointsAlliance,
+                getFunc = function() return Settings.toggles.showPointsAlliance end,
+                setFunc = function(v) Settings.toggles.showPointsAlliance = v end,
+                default = Defaults.toggles.showPointsAlliance,
             },
             {
                 -- Alliance Points
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ALLIANCE_TP),
-                getFunc = function() return CT.SV.formats.pointsAlliance end,
-                setFunc = function(v) CT.SV.formats.pointsAlliance = v end,
+                getFunc = function() return Settings.formats.pointsAlliance end,
+                setFunc = function(v) Settings.formats.pointsAlliance = v end,
                 isMultiline = false,
-                default = CT.D.formats.pointsAlliance,
+                default = Defaults.formats.pointsAlliance,
             },
             {
                 -- Alliance Points Color
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALLIANCE_TP),
-                getFunc = function() return unpack(CT.SV.colors.pointsAlliance) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.pointsAlliance = { r, g, b, a } end,
-                default = {r=CT.D.colors.pointsAlliance[1], g=CT.D.colors.pointsAlliance[2], b=CT.D.colors.pointsAlliance[3]}
+                getFunc = function() return unpack(Settings.colors.pointsAlliance) end,
+                setFunc = function(r, g, b, a) Settings.colors.pointsAlliance = { r, g, b, a } end,
+                default = {r=Defaults.colors.pointsAlliance[1], g=Defaults.colors.pointsAlliance[2], b=Defaults.colors.pointsAlliance[3]}
             },
             {
                 type = "header",
@@ -1627,28 +1630,28 @@ function CT.CreateSettings()
                 type    = "checkbox",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP),
-                getFunc = function() return CT.SV.toggles.showPointsExperience end,
-                setFunc = function(v) CT.SV.toggles.showPointsExperience = v end,
-                default = CT.D.toggles.showPointsExperience,
+                getFunc = function() return Settings.toggles.showPointsExperience end,
+                setFunc = function(v) Settings.toggles.showPointsExperience = v end,
+                default = Defaults.toggles.showPointsExperience,
             },
             {
                 -- Experience Points
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPERIENCE_TP),
-                getFunc = function() return CT.SV.formats.pointsExperience end,
-                setFunc = function(v) CT.SV.formats.pointsExperience = v end,
+                getFunc = function() return Settings.formats.pointsExperience end,
+                setFunc = function(v) Settings.formats.pointsExperience = v end,
                 isMultiline = false,
-                default = CT.D.formats.pointsExperience,
+                default = Defaults.formats.pointsExperience,
             },
             {
                 -- Experience Points Color
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPERIENCE_TP),
-                getFunc = function() return unpack(CT.SV.colors.pointsExperience) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.pointsExperience = { r, g, b, a } end,
-                default = {r=CT.D.colors.pointsExperience[1], g=CT.D.colors.pointsExperience[2], b=CT.D.colors.pointsExperience[3]}
+                getFunc = function() return unpack(Settings.colors.pointsExperience) end,
+                setFunc = function(r, g, b, a) Settings.colors.pointsExperience = { r, g, b, a } end,
+                default = {r=Defaults.colors.pointsExperience[1], g=Defaults.colors.pointsExperience[2], b=Defaults.colors.pointsExperience[3]}
             },
             {
                 type = "header",
@@ -1660,28 +1663,28 @@ function CT.CreateSettings()
                 type    = "checkbox",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP),
-                getFunc = function() return CT.SV.toggles.showPointsChampion end,
-                setFunc = function(v) CT.SV.toggles.showPointsChampion = v end,
-                default = CT.D.toggles.showPointsChampion,
+                getFunc = function() return Settings.toggles.showPointsChampion end,
+                setFunc = function(v) Settings.toggles.showPointsChampion = v end,
+                default = Defaults.toggles.showPointsChampion,
             },
             {
                 -- Champion Points
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CHAMPION_TP),
-                getFunc = function() return CT.SV.formats.pointsChampion end,
-                setFunc = function(v) CT.SV.formats.pointsChampion = v end,
+                getFunc = function() return Settings.formats.pointsChampion end,
+                setFunc = function(v) Settings.formats.pointsChampion = v end,
                 isMultiline = false,
-                default = CT.D.formats.pointsChampion,
+                default = Defaults.formats.pointsChampion,
             },
             {
                 -- Champion Points Color
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CHAMPION_TP),
-                getFunc = function() return unpack(CT.SV.colors.pointsChampion) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.pointsChampion = { r, g, b, a } end,
-                default = {r=CT.D.colors.pointsChampion[1], g=CT.D.colors.pointsChampion[2], b=CT.D.colors.pointsChampion[3]}
+                getFunc = function() return unpack(Settings.colors.pointsChampion) end,
+                setFunc = function(r, g, b, a) Settings.colors.pointsChampion = { r, g, b, a } end,
+                default = {r=Defaults.colors.pointsChampion[1], g=Defaults.colors.pointsChampion[2], b=Defaults.colors.pointsChampion[3]}
             },
             {
                 type = "header",
@@ -1696,9 +1699,9 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.readylabel end,
-                setFunc = function(size) CT.SV.fontSizes.readylabel = size end,
-                default = CT.D.fontSizes.readylabel,
+                getFunc = function() return Settings.fontSizes.readylabel end,
+                setFunc = function(size) Settings.fontSizes.readylabel = size end,
+                default = Defaults.fontSizes.readylabel,
             },
             {
                 -- Ultimate Ready Enable
@@ -1706,9 +1709,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ULTIMATE_READY_TP),
-                getFunc = function() return CT.SV.toggles.showUltimate end,
-                setFunc = function(v) CT.SV.toggles.showUltimate = v end,
-                default = CT.D.toggles.showUltimate,
+                getFunc = function() return Settings.toggles.showUltimate end,
+                setFunc = function(v) Settings.toggles.showUltimate = v end,
+                default = Defaults.toggles.showUltimate,
             },
             {
                 -- Potion Ready Enable
@@ -1716,9 +1719,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POTION_READY_TP),
-                getFunc = function() return CT.SV.toggles.showPotionReady end,
-                setFunc = function(v) CT.SV.toggles.showPotionReady = v end,
-                default = CT.D.toggles.showPotionReady,
+                getFunc = function() return Settings.toggles.showPotionReady end,
+                setFunc = function(v) Settings.toggles.showPotionReady = v end,
+                default = Defaults.toggles.showPotionReady,
             },
             {
                 -- Ultimate Ready Format
@@ -1726,10 +1729,10 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ULTIMATE_TP),
-                getFunc = function() return CT.SV.formats.ultimateReady end,
-                setFunc = function(v) CT.SV.formats.ultimateReady = v end,
+                getFunc = function() return Settings.formats.ultimateReady end,
+                setFunc = function(v) Settings.formats.ultimateReady = v end,
                 isMultiline = false,
-                default = CT.D.formats.ultimateReady,
+                default = Defaults.formats.ultimateReady,
             },
             {
                 -- Potion Ready Format
@@ -1737,10 +1740,10 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POTION_TP),
-                getFunc = function() return CT.SV.formats.potionReady end,
-                setFunc = function(v) CT.SV.formats.potionReady = v end,
+                getFunc = function() return Settings.formats.potionReady end,
+                setFunc = function(v) Settings.formats.potionReady = v end,
                 isMultiline = false,
-                default = CT.D.formats.potionReady,
+                default = Defaults.formats.potionReady,
             },
             {
                 -- Ultimate Ready Color
@@ -1748,9 +1751,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP),
-                getFunc = function() return unpack(CT.SV.colors.ultimateReady) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.ultimateReady = { r, g, b, a } end,
-                default = {r=CT.D.colors.ultimateReady[1], g=CT.D.colors.ultimateReady[2], b=CT.D.colors.ultimateReady[3]}
+                getFunc = function() return unpack(Settings.colors.ultimateReady) end,
+                setFunc = function(r, g, b, a) Settings.colors.ultimateReady = { r, g, b, a } end,
+                default = {r=Defaults.colors.ultimateReady[1], g=Defaults.colors.ultimateReady[2], b=Defaults.colors.ultimateReady[3]}
             },
             {
                 -- Potion Ready Color
@@ -1758,9 +1761,9 @@ function CT.CreateSettings()
                 width   = "half",
                 name    = zo_strformat("<<1>> (<<2>>)", GetString(SI_LUIE_LAM_CT_SHARED_COLOR), GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POTION_TP),
-                getFunc = function() return unpack(CT.SV.colors.potionReady) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.potionReady = { r, g, b, a } end,
-                default = {r=CT.D.colors.potionReady[1], g=CT.D.colors.potionReady[2], b=CT.D.colors.potionReady[3]}
+                getFunc = function() return unpack(Settings.colors.potionReady) end,
+                setFunc = function(r, g, b, a) Settings.colors.potionReady = { r, g, b, a } end,
+                default = {r=Defaults.colors.potionReady[1], g=Defaults.colors.potionReady[2], b=Defaults.colors.potionReady[3]}
             },
         },
     }
@@ -1787,19 +1790,19 @@ function CT.CreateSettings()
                 min     = 8,
                 max     = 72,
                 step    = 1,
-                getFunc = function() return CT.SV.fontSizes.resource end,
-                setFunc = function(size) CT.SV.fontSizes.resource = size end,
-                default = CT.D.fontSizes.resource,
+                getFunc = function() return Settings.fontSizes.resource end,
+                setFunc = function(size) Settings.fontSizes.resource = size end,
+                default = Defaults.fontSizes.resource,
             },
             {
                 -- Low Resource Warning Sound
                 type    = "checkbox",
                 name    = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND_TP),
-                getFunc = function() return CT.SV.toggles.warningSound end,
-                setFunc = function(v) CT.SV.toggles.warningSound = v end,
-                disabled = function() return not (CT.SV.toggles.showLowHealth or CT.SV.toggles.showLowMagicka or CT.SV.toggles.showLowStamina) end,
-                default = CT.D.toggles.warningSound,
+                getFunc = function() return Settings.toggles.warningSound end,
+                setFunc = function(v) Settings.toggles.warningSound = v end,
+                disabled = function() return not (Settings.toggles.showLowHealth or Settings.toggles.showLowMagicka or Settings.toggles.showLowStamina) end,
+                default = Defaults.toggles.warningSound,
             },
             {
                 type = "header",
@@ -1811,9 +1814,9 @@ function CT.CreateSettings()
                 type    = "checkbox",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_HEALTH_TP),
-                getFunc = function() return CT.SV.toggles.showLowHealth end,
-                setFunc = function(v) CT.SV.toggles.showLowHealth = v end,
-                default = CT.D.toggles.showLowHealth,
+                getFunc = function() return Settings.toggles.showLowHealth end,
+                setFunc = function(v) Settings.toggles.showLowHealth = v end,
+                default = Defaults.toggles.showLowHealth,
             },
             {
                 -- Low Health Warning Threshold Slider
@@ -1823,29 +1826,29 @@ function CT.CreateSettings()
                 min     = 15,
                 max     = 50,
                 step    = 1,
-                getFunc = function() return CT.SV.healthThreshold end,
-                setFunc = function(threshold) CT.SV.healthThreshold = threshold end,
-                disabled = function() return not CT.SV.toggles.showLowHealth end,
-                default = CT.D.healthThreshold,
+                getFunc = function() return Settings.healthThreshold end,
+                setFunc = function(threshold) Settings.healthThreshold = threshold end,
+                disabled = function() return not Settings.toggles.showLowHealth end,
+                default = Defaults.healthThreshold,
             },
             {
                 -- Low Health Format
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
-                getFunc = function() return CT.SV.formats.resourceHealth end,
-                setFunc = function(v) CT.SV.formats.resourceHealth = v end,
+                getFunc = function() return Settings.formats.resourceHealth end,
+                setFunc = function(v) Settings.formats.resourceHealth = v end,
                 isMultiline = false,
-                default = CT.D.formats.resourceHealth,
+                default = Defaults.formats.resourceHealth,
             },
             {
                 -- Low Health Color
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_HEALTH_TP),
-                getFunc = function() return unpack(CT.SV.colors.lowHealth) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.lowHealth = { r, g, b, a } end,
-                default = {r=CT.D.colors.lowHealth[1], g=CT.D.colors.lowHealth[2], b=CT.D.colors.lowHealth[3]}
+                getFunc = function() return unpack(Settings.colors.lowHealth) end,
+                setFunc = function(r, g, b, a) Settings.colors.lowHealth = { r, g, b, a } end,
+                default = {r=Defaults.colors.lowHealth[1], g=Defaults.colors.lowHealth[2], b=Defaults.colors.lowHealth[3]}
             },
             {
                 type = "header",
@@ -1857,9 +1860,9 @@ function CT.CreateSettings()
                 type    = "checkbox",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_MAGICKA_TP),
-                getFunc = function() return CT.SV.toggles.showLowMagicka end,
-                setFunc = function(v) CT.SV.toggles.showLowMagicka = v end,
-                default = CT.D.toggles.showLowMagicka,
+                getFunc = function() return Settings.toggles.showLowMagicka end,
+                setFunc = function(v) Settings.toggles.showLowMagicka = v end,
+                default = Defaults.toggles.showLowMagicka,
             },
             {
                 -- Low Magicka Warning Threshold Slider
@@ -1869,29 +1872,29 @@ function CT.CreateSettings()
                 min     = 15,
                 max     = 50,
                 step    = 1,
-                getFunc = function() return CT.SV.magickaThreshold end,
-                setFunc = function(threshold) CT.SV.magickaThreshold = threshold end,
-                disabled = function() return not CT.SV.toggles.showLowMagicka end,
-                default = CT.D.magickaThreshold,
+                getFunc = function() return Settings.magickaThreshold end,
+                setFunc = function(threshold) Settings.magickaThreshold = threshold end,
+                disabled = function() return not Settings.toggles.showLowMagicka end,
+                default = Defaults.magickaThreshold,
             },
             {
                 -- Low Magicka Format
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
-                getFunc = function() return CT.SV.formats.resourceMagicka end,
-                setFunc = function(v) CT.SV.formats.resourceMagicka = v end,
+                getFunc = function() return Settings.formats.resourceMagicka end,
+                setFunc = function(v) Settings.formats.resourceMagicka = v end,
                 isMultiline = false,
-                default = CT.D.formats.resourceMagicka,
+                default = Defaults.formats.resourceMagicka,
             },
             {
                 -- Low Magicka Color
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_MAGICKA_TP),
-                getFunc = function() return unpack(CT.SV.colors.lowMagicka) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.lowMagicka = { r, g, b, a } end,
-                default = {r=CT.D.colors.lowMagicka[1], g=CT.D.colors.lowMagicka[2], b=CT.D.colors.lowMagicka[3]}
+                getFunc = function() return unpack(Settings.colors.lowMagicka) end,
+                setFunc = function(r, g, b, a) Settings.colors.lowMagicka = { r, g, b, a } end,
+                default = {r=Defaults.colors.lowMagicka[1], g=Defaults.colors.lowMagicka[2], b=Defaults.colors.lowMagicka[3]}
             },
             {
                 type = "header",
@@ -1903,9 +1906,9 @@ function CT.CreateSettings()
                 type    = "checkbox",
                 name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_STAMINA_TP),
-                getFunc = function() return CT.SV.toggles.showLowStamina end,
-                setFunc = function(v) CT.SV.toggles.showLowStamina = v end,
-                default = CT.D.toggles.showLowStamina,
+                getFunc = function() return Settings.toggles.showLowStamina end,
+                setFunc = function(v) Settings.toggles.showLowStamina = v end,
+                default = Defaults.toggles.showLowStamina,
             },
             {
                 -- Low Stamina Warning Threshold Slider
@@ -1915,29 +1918,29 @@ function CT.CreateSettings()
                 min     = 15,
                 max     = 50,
                 step    = 1,
-                getFunc = function() return CT.SV.staminaThreshold end,
-                setFunc = function(threshold) CT.SV.staminaThreshold = threshold end,
-                disabled = function() return not CT.SV.toggles.showLowStamina end,
-                default = CT.D.staminaThreshold,
+                getFunc = function() return Settings.staminaThreshold end,
+                setFunc = function(threshold) Settings.staminaThreshold = threshold end,
+                disabled = function() return not Settings.toggles.showLowStamina end,
+                default = Defaults.staminaThreshold,
             },
             {
                 -- Low Stamina Format
                 type    = "editbox",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP),
-                getFunc = function() return CT.SV.formats.resourceStamina end,
-                setFunc = function(v) CT.SV.formats.resourceStamina = v end,
+                getFunc = function() return Settings.formats.resourceStamina end,
+                setFunc = function(v) Settings.formats.resourceStamina = v end,
                 isMultiline = false,
-                default = CT.D.formats.resourceStamina,
+                default = Defaults.formats.resourceStamina,
             },
             {
                 -- Low Stamina Color
                 type    = "colorpicker",
                 name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP),
-                getFunc = function() return unpack(CT.SV.colors.lowStamina) end,
-                setFunc = function(r, g, b, a) CT.SV.colors.lowStamina = { r, g, b, a } end,
-                default = {r=CT.D.colors.lowStamina[1], g=CT.D.colors.lowStamina[2], b=CT.D.colors.lowStamina[3]}
+                getFunc = function() return unpack(Settings.colors.lowStamina) end,
+                setFunc = function(r, g, b, a) Settings.colors.lowStamina = { r, g, b, a } end,
+                default = {r=Defaults.colors.lowStamina[1], g=Defaults.colors.lowStamina[2], b=Defaults.colors.lowStamina[3]}
             },
         },
     }
@@ -1954,29 +1957,29 @@ function CT.CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_FONT_FACE),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_FACE_TP),
                 choices = FontsList,
-                getFunc = function() return CT.SV.fontFace end,
+                getFunc = function() return Settings.fontFace end,
                 setFunc = function(face)
-                    CT.SV.fontFace = face
-                    for k, _ in pairs (CT.SV.panels) do
-                        _G[k .. "_Label"]:SetFont(LMP:Fetch(LMP.MediaType.FONT, CT.SV.fontFace) .. "|26|" .. CT.SV.fontOutline)
+                    Settings.fontFace = face
+                    for k, _ in pairs (Settings.panels) do
+                        _G[k .. "_Label"]:SetFont(LMP:Fetch(LMP.MediaType.FONT, Settings.fontFace) .. "|26|" .. Settings.fontOutline)
                     end
                 end,
-                default = CT.D.fontFace
+                default = Defaults.fontFace
             },
             {
                 -- Font Outline Dropdown
                 type    = "dropdown",
                 name    = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE_TP),
-                choices = CTC.outlineType,
-                getFunc = function() return CT.SV.fontOutline end,
+                choices = CombatTextConstants.outlineType,
+                getFunc = function() return Settings.fontOutline end,
                 setFunc = function(outline)
-                    CT.SV.fontOutline = outline
-                    for k, _ in pairs (CT.SV.panels) do
-                        _G[k .. "_Label"]:SetFont(LMP:Fetch(LMP.MediaType.FONT, CT.SV.fontFace) .. "|26|" .. CT.SV.fontOutline)
+                    Settings.fontOutline = outline
+                    for k, _ in pairs (Settings.panels) do
+                        _G[k .. "_Label"]:SetFont(LMP:Fetch(LMP.MediaType.FONT, Settings.fontFace) .. "|26|" .. Settings.fontOutline)
                     end
                 end,
-                default = CT.D.fontOutline
+                default = Defaults.fontOutline
             },
             {
                 -- Test Font Button
@@ -1984,7 +1987,7 @@ function CT.CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_FONT_TEST),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_TEST_TP),
                 func = function()
-                    callbackManager:FireCallbacks(CTC.eventType.COMBAT, CTC.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                 end,
             },
         },
@@ -2000,50 +2003,50 @@ function CT.CreateSettings()
                 type    = "dropdown",
                 name    = GetString(SI_LUIE_LAM_CT_ANIMATION_TYPE),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_TYPE_TP),
-                choices = CTC.animationType,
-                getFunc = function() return CT.SV.animation.animationType end,
-                setFunc = function(v) CT.SV.animation.animationType = v end,
-                default = CT.D.animation.animationType,
+                choices = CombatTextConstants.animationType,
+                getFunc = function() return Settings.animation.animationType end,
+                setFunc = function(v) Settings.animation.animationType = v end,
+                default = Defaults.animation.animationType,
             },
             {
                 -- Incoming Direction
                 type    = "dropdown",
                 name    = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN_TP),
-                choices = CTC.directionType,
-                getFunc = function() return CT.SV.animation.incoming.directionType end,
-                setFunc = function(v) CT.SV.animation.incoming.directionType = v end,
-                default = CT.D.animation.incoming.directionType,
+                choices = CombatTextConstants.directionType,
+                getFunc = function() return Settings.animation.incoming.directionType end,
+                setFunc = function(v) Settings.animation.incoming.directionType = v end,
+                default = Defaults.animation.incoming.directionType,
             },
             {
                 -- Incoming Icon Position
                 type    = "dropdown",
                 name    = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_IN),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_IN_TP),
-                choices = CTC.iconSide,
-                getFunc = function() return CT.SV.animation.incomingIcon end,
-                setFunc = function(v) CT.SV.animation.incomingIcon = v end,
-                default = CT.D.animation.incomingIcon,
+                choices = CombatTextConstants.iconSide,
+                getFunc = function() return Settings.animation.incomingIcon end,
+                setFunc = function(v) Settings.animation.incomingIcon = v end,
+                default = Defaults.animation.incomingIcon,
             },
             {
                 -- Outgoing Direction
                 type    = "dropdown",
                 name    = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT_TP),
-                choices = CTC.directionType,
-                getFunc = function() return CT.SV.animation.outgoing.directionType end,
-                setFunc = function(v) CT.SV.animation.outgoing.directionType = v end,
-                default = CT.D.animation.outgoing.directionType,
+                choices = CombatTextConstants.directionType,
+                getFunc = function() return Settings.animation.outgoing.directionType end,
+                setFunc = function(v) Settings.animation.outgoing.directionType = v end,
+                default = Defaults.animation.outgoing.directionType,
             },
             {
                 -- Outgoing Icon Position
                 type    = "dropdown",
                 name    = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_OUT),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_OUT_TP),
-                choices = CTC.iconSide,
-                getFunc = function() return CT.SV.animation.outgoingIcon end,
-                setFunc = function(v) CT.SV.animation.outgoingIcon = v end,
-                default = CT.D.animation.outgoingIcon,
+                choices = CombatTextConstants.iconSide,
+                getFunc = function() return Settings.animation.outgoingIcon end,
+                setFunc = function(v) Settings.animation.outgoingIcon = v end,
+                default = Defaults.animation.outgoingIcon,
             },
             {
                 -- Test Button
@@ -2051,8 +2054,8 @@ function CT.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST),
                 tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST_TP),
                 func = function()
-                    callbackManager:FireCallbacks(CTC.eventType.COMBAT, CTC.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
-                    callbackManager:FireCallbacks(CTC.eventType.COMBAT, CTC.combatType.OUTGOING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                    callbackManager:FireCallbacks(CombatTextConstants.eventType.COMBAT, CombatTextConstants.combatType.OUTGOING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                 end,
             },
         },
@@ -2075,9 +2078,9 @@ function CT.CreateSettings()
                 min     = 0,
                 max     = 500,
                 step    = 50,
-                getFunc = function() return CT.SV.throttles.damage end,
-                setFunc = function(v) CT.SV.throttles.damage = v end,
-                default = CT.D.throttles.damage,
+                getFunc = function() return Settings.throttles.damage end,
+                setFunc = function(v) Settings.throttles.damage = v end,
+                default = Defaults.throttles.damage,
             },
             {
                 -- Damage over Time
@@ -2087,9 +2090,9 @@ function CT.CreateSettings()
                 min     = 0,
                 max     = 500,
                 step    = 50,
-                getFunc = function() return CT.SV.throttles.dot end,
-                setFunc = function(v) CT.SV.throttles.dot = v end,
-                default = CT.D.throttles.dot,
+                getFunc = function() return Settings.throttles.dot end,
+                setFunc = function(v) Settings.throttles.dot = v end,
+                default = Defaults.throttles.dot,
             },
             {
                 -- Healing
@@ -2099,9 +2102,9 @@ function CT.CreateSettings()
                 min     = 0,
                 max     = 500,
                 step    = 50,
-                getFunc = function() return CT.SV.throttles.healing end,
-                setFunc = function(v) CT.SV.throttles.healing = v end,
-                default = CT.D.throttles.healing,
+                getFunc = function() return Settings.throttles.healing end,
+                setFunc = function(v) Settings.throttles.healing = v end,
+                default = Defaults.throttles.healing,
             },
             {
                 -- Healing over Time
@@ -2111,34 +2114,34 @@ function CT.CreateSettings()
                 min     = 0,
                 max     = 500,
                 step    = 50,
-                getFunc = function() return CT.SV.throttles.hot end,
-                setFunc = function(v) CT.SV.throttles.hot = v end,
-                default = CT.D.throttles.hot,
+                getFunc = function() return Settings.throttles.hot end,
+                setFunc = function(v) Settings.throttles.hot = v end,
+                default = Defaults.throttles.hot,
             },
             {
                 -- Throttle Trailer
                 type    = "checkbox",
                 name    = GetString(SI_LUIE_LAM_CT_THROTTLE_TRAILER),
                 tooltip = GetString(SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP),
-                getFunc = function() return CT.SV.toggles.showThrottleTrailer end,
-                setFunc = function(v) CT.SV.toggles.showThrottleTrailer = v end,
-                default = CT.D.toggles.showThrottleTrailer,
+                getFunc = function() return Settings.toggles.showThrottleTrailer end,
+                setFunc = function(v) Settings.toggles.showThrottleTrailer = v end,
+                default = Defaults.toggles.showThrottleTrailer,
             },
             {
                 -- Crits
                 type    = "checkbox",
                 name    = GetString(SI_LUIE_LAM_CT_THROTTLE_CRITICAL),
                 tooltip = GetString(SI_LUIE_LAM_CT_THROTTLE_CRITICAL_TP),
-                getFunc = function() return CT.SV.toggles.showThrottleTrailer end,
-                setFunc = function(v) CT.SV.toggles.throttleCriticals = v end,
-                default = CT.D.toggles.throttleCriticals,
+                getFunc = function() return Settings.toggles.showThrottleTrailer end,
+                setFunc = function(v) Settings.toggles.throttleCriticals = v end,
+                default = Defaults.toggles.throttleCriticals,
             },
         },
     }
 
     -- Register the settings panel
     if LUIE.SV.CombatText_Enabled then
-        LAM:RegisterAddonPanel('LUIECombatTextOptions', panelDataCombatText)
-        LAM:RegisterOptionControls('LUIECombatTextOptions', optionsDataCombatText)
+        LAM:RegisterAddonPanel(LUIE.name .. 'CombatTextOptions', panelDataCombatText)
+        LAM:RegisterOptionControls(LUIE.name .. 'CombatTextOptions', optionsDataCombatText)
     end
 end

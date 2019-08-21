@@ -16,7 +16,7 @@ local PoisonDamage   = GetString(SI_DAMAGETYPE11) .. " Damage" -- TODO: Localize
 local BleedDamage    = "Bleeding Damage" -- TODO: Localize
 local OblivionDamage = "Oblivion Damage" -- TODO: Localize
 
-LUIE.Tooltips = {
+LUIE.Data.Tooltips = {
     ----------------------------------------------------------------
     -- MAJOR / MINOR BUFFS & DEBUFFS -------------------------------
     ----------------------------------------------------------------

@@ -10,10 +10,10 @@ local eventManager = EVENT_MANAGER
 -- Load saved settings
 local function LoadSavedVars()
     -- Addon options
-    LUIE.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, nil, LUIE.D)
+    LUIE.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, nil, LUIE.Defaults)
 
     if LUIE.SV.CharacterSpecificSV then
-        LUIE.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, nil, LUIE.D)
+        LUIE.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, nil, LUIE.Defaults)
     end
 end
 

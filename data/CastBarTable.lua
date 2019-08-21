@@ -4,13 +4,13 @@
 --]]
 
 -- Cast Bar Table namespace
-LUIE.CastBarTable = {}
-local CBT = LUIE.CastBarTable
+LUIE.Data.CastBarTable = {}
+local CastBarTable = LUIE.Data.CastBarTable
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- When a hard CC effect is successfully applied to the player, instantly stop any in progress Casts
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastBreakingStatus = {
+CastBarTable.CastBreakingStatus = {
     [ACTION_RESULT_STAGGERED] = true,
     [ACTION_RESULT_STUNNED] = true,
     [ACTION_RESULT_KNOCKBACK] = true,
@@ -22,7 +22,7 @@ CBT.CastBreakingStatus = {
 --------------------------------------------------------------------------------------------------------------------------------
 -- List of abilityId's that should immediately cancel the Cast Bar if detected
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastBreakingActions = {
+CastBarTable.CastBreakingActions = {
     [28549] = true, -- Roll Dodge
     [14890] = true, -- Block
     --[20309] = true, -- Hidden
@@ -30,7 +30,7 @@ CBT.CastBreakingActions = {
     [33439] = true, -- Mount Sprint
 }
 
-CBT.BreakCastOnMove = {
+CastBarTable.BreakCastOnMove = {
     -- Innate
     [6811] = true, -- Recall
     [69293] = true, -- Sigil of Imperial Retreat
@@ -122,14 +122,14 @@ CBT.BreakCastOnMove = {
     [22931] = true, -- Freeing Spirit... (An Act of Kindness)
 }
 
-CBT.IgnoreCastBreakingActions = {
+CastBarTable.IgnoreCastBreakingActions = {
     --[21112] = true, -- Q4220 PC Forced to L0
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
 --  List of abilities flagged for CombatInfo to show as a Channel on the Cast Bar
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastChannelOverride = {
+CastBarTable.CastChannelOverride = {
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
@@ -233,7 +233,7 @@ CBT.CastChannelOverride = {
 --------------------------------------------------------------------------------------------------------------------------------
 --  Duration update for any effects that are converted to casts (A lot of stun effects in PVE Quests with casting animations)
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastDurationFix = {
+CastBarTable.CastDurationFix = {
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
@@ -355,7 +355,7 @@ CBT.CastDurationFix = {
 --------------------------------------------------------------------------------------------------------------------------------
 --  List of abilities flagged for CombatInfo to show on the Cast Bar
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.IsCast = {
+CastBarTable.IsCast = {
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
@@ -691,7 +691,7 @@ CBT.IsCast = {
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fix for a few goofy events that channel onto the player (or just where we need it)
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastOverride = {
+CastBarTable.CastOverride = {
     [4197] = true, -- Recovering (NPC Duel)
     [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
 }
@@ -699,7 +699,7 @@ CBT.CastOverride = {
 --------------------------------------------------------------------------------------------------------------------------------
 -- Some abilities cast into a channeled stun effect - we want these abilities to display the cast and channel if flagged.
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.MultiCast = {
+CastBarTable.MultiCast = {
     [42076] = true, -- Tear (Mezha-dro's Sealing Amulet)
     [42053] = true, -- Yokudan Salute (Yokudan Totem)
 }
@@ -707,7 +707,7 @@ CBT.MultiCast = {
 --------------------------------------------------------------------------------------------------------------------------------
 -- If one of these abilities stuns the player - we ignore the standard effect of breaking the cast bar. In some cases a cast event is also applied with a stun for certain quest events, etc.
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.IgnoreCastBarStun = {
+CastBarTable.IgnoreCastBarStun = {
     -- Player
     [36434] = true, -- Mount Stun
     [74232] = true, -- Stun (Malacath's Wrathful Flame)
@@ -722,7 +722,7 @@ CBT.IgnoreCastBarStun = {
 --------------------------------------------------------------------------------------------------------------------------------
 -- Abilities flagged to break when EFFECT_RESULT_FADED is detected with the source as the player
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastBreakOnRemoveEffect = {
+CastBarTable.CastBreakOnRemoveEffect = {
     -- Werewolf
     [33208] = true, -- Devour (Werewolf)
 
@@ -741,14 +741,14 @@ CBT.CastBreakOnRemoveEffect = {
 
 --[[
 -- Possibly use later if any cast removal events need to rely on EVENT_COMBAT_EVENT
-CBT.CastBreakOnRemoveEvent = {
+CastBarTable.CastBreakOnRemoveEvent = {
 }
 ]]--
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Convert a cast time ability to channeled, since our function detects Casts/Channels automatically and tries to sort them, we need to add a forced override for certain things we want to show as a channel when it makes sense
 --------------------------------------------------------------------------------------------------------------------------------
-CBT.CastChannelConvert = {
+CastBarTable.CastChannelConvert = {
     -- Cyrodiil
     [12256] = true, -- Pack Siege (Siege Weapons)
 

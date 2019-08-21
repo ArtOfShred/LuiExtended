@@ -3,32 +3,13 @@
     License: The MIT License (MIT)
 --]]
 
-local SC = LUIE.SlashCommands
+local SlashCommands = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 
--- Resolve the type of Merchant or Banker to summon based off player choice
-function SC.ResolveMerchantBanker(type)
-    -- 1 = Banker
-    -- 2 = Merchant
-    if type == 1 then
-        if SC.SV.SlashMerchantChoice == 1 then
-            SC.SlashCollectible(301) -- Nuzhimeh the Merchant
-        else
-            SC.SlashCollectible(6378) -- Ferez
-        end
-    elseif type == 2 then
-        if SC.SV.SlashBankerChoice == 1 then
-            SC.SlashCollectible(267) -- Tythis
-        else
-            SC.SlashCollectible(6376) -- Ezabi
-        end
-    end
-end
-
 -- Slash Command to port to primary home
-function SC.SlashHome()
+function SlashCommands.SlashHome()
     local primaryHouse = GetHousingPrimaryHouse()
     -- Check if we are in combat
     if IsUnitInCombat("player") then
@@ -76,7 +57,7 @@ function SC.SlashHome()
 end
 
 -- Slash Command to initiate a trade dialogue
-function SC.SlashTrade(option)
+function SlashCommands.SlashTrade(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME), true)
         if LUIE.ChatAnnouncements.SV.Notify.NotificationTradeAlert then
@@ -89,7 +70,7 @@ function SC.SlashTrade(option)
 end
 
 -- Slash Command to queue for a campaign
-function SC.SlashCampaignQ(option)
+function SlashCommands.SlashCampaignQ(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME), true)
         if LUIE.SV.TempAlertCampaign then
@@ -142,7 +123,7 @@ function SC.SlashCampaignQ(option)
 end
 
 -- Slash Command to use collectibles based on their collectible id
-function SC.SlashCollectible(id)
+function SlashCommands.SlashCollectible(id)
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_AVA), true)
@@ -161,21 +142,71 @@ function SC.SlashCollectible(id)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    -- Check to make sure that we have the collectible unlocked
-    if IsCollectibleUnlocked(id) then
-        UseCollectible(id)
-    else
-        printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(id)), true)
-        if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED)))
+
+    if type(id) == "number" then
+        if IsCollectibleUnlocked(id) then
+            UseCollectible(id)
+        else
+            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(id)), true)
+            if LUIE.SV.TempAlertHome then
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED)))
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+            return
         end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
+    elseif id == "banker" then
+        if SlashCommands.SV.SlashBankerChoice == 1 then
+            if IsCollectibleUnlocked(267) then
+                UseCollectible(267) -- Tythis
+            else
+                printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(267)), true)
+                if LUIE.SV.TempAlertHome then
+                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED)))
+                end
+                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+                return
+            end
+        else
+            if IsCollectibleUnlocked(6376) then
+                UseCollectible(6376) -- Ezabi
+            else
+                printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(6376)), true)
+                if LUIE.SV.TempAlertHome then
+                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED)))
+                end
+                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+                return
+            end
+        end
+    elseif id == "merchant" then
+        if SlashCommands.SV.SlashMerchantChoice == 1 then
+            if IsCollectibleUnlocked(301) then
+                UseCollectible(301) -- Nuzhimeh
+            else
+                printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(301)), true)
+                if LUIE.SV.TempAlertHome then
+                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED)))
+                end
+                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+                return
+            end
+        else
+            if IsCollectibleUnlocked(6378) then
+                UseCollectible(6378) -- Ferez
+            else
+                printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(6378)), true)
+                if LUIE.SV.TempAlertHome then
+                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED)))
+                end
+                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+                return
+            end
+        end
     end
 end
 
 -- Slash Command to equip a chosen outfit by number
-function SC.SlashOutfit(option)
+function SlashCommands.SlashOutfit(option)
     if option == "" or option == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_OUTFIT_NOT_VALID))
         if LUIE.SV.TempAlertOutfit then
@@ -219,7 +250,7 @@ function SC.SlashOutfit(option)
 end
 
 -- Slash Command to report a player by given name and attach useful information
-function SC.SlashReport(player)
+function SlashCommands.SlashReport(player)
     local location = GetPlayerLocationName()
     local currenttime = GetTimeString()
     local currentdate = GetDateStringFromTimestamp(GetTimeStamp())

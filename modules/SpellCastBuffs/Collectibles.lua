@@ -3,17 +3,17 @@
     License: The MIT License (MIT)
 --]]
 
-local SCB = LUIE.SpellCastBuffs
+local SpellCastBuffs = LUIE.SpellCastBuffs
 
-local E = LUIE.Effects
+local AssistantIcons = LUIE.Data.Effects.AssistantIcons
 
 local zo_strformat = zo_strformat
 
 -- EVENT_MOUNTED_STATE_CHANGED handler to create Mount Buff icon for player
-function SCB.MountStatus(eventCode, mounted)
+function SpellCastBuffs.MountStatus(eventCode, mounted)
     -- Remove icon first
-    LUIE.EffectsList.player1["Mount"] = nil
-    if mounted and not (SCB.SV.IgnoreMount or SCB.SV.HidePlayerBuffs) then
+    SpellCastBuffs.EffectsList.player1["Mount"] = nil
+    if mounted and not (SpellCastBuffs.SV.IgnoreMount or SpellCastBuffs.SV.HidePlayerBuffs) then
         local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_MOUNT)
         local nickname = GetCollectibleNickname(collectible)
         local name, description, icon = GetCollectibleInfo(collectible)
@@ -24,35 +24,35 @@ function SCB.MountStatus(eventCode, mounted)
         end
 
         -- Use Generic Mount Icon if enabled
-        if SCB.SV.MountGenericIcon then
+        if SpellCastBuffs.SV.MountGenericIcon then
             icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds'
         end
 
-        LUIE.EffectsList.player1["Mount"] = {
+        SpellCastBuffs.EffectsList.player1["Mount"] = {
             target="player", type=1,
-            id =37059, name=name, icon=icon, backdrop=true, tooltip = description,
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            id = 37059, name = name, icon = icon, backdrop = true, tooltip = description,
+            dur = 0, starts = 1, ends = nil, -- ends=nil : last buff in sorting
             forced = "long",
-            restart=true, iconNum=0
+            restart = true, iconNum = 0
         }
     end
 end
 
 -- EVENT_COLLECTIBLE_USE_RESULT handler - Waits 100 ms + latency for the delay in activating collectibles before checking
-function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
+function SpellCastBuffs.CollectibleUsed(eventCode, result, isAttemptingActivation)
     local latency = GetLatency()
     latency = latency + 100
-    zo_callLater(SCB.CollectibleBuff, latency)
+    zo_callLater(SpellCastBuffs.CollectibleBuff, latency)
 end
 
--- Handles delayed call from SCB.CollectibleUsed()
-function SCB.CollectibleBuff()
+-- Handles delayed call from SpellCastBuffs.CollectibleUsed()
+function SpellCastBuffs.CollectibleBuff()
     -- Remove Icon First
-    LUIE.EffectsList.player1["PetType"] = nil
-    LUIE.EffectsList.player1["AssistantType"] = nil
+    SpellCastBuffs.EffectsList.player1["PetType"] = nil
+    SpellCastBuffs.EffectsList.player1["AssistantType"] = nil
 
     -- Bail out if Player Buffs are hidden
-    if SCB.SV.HidePlayerBuffs then
+    if SpellCastBuffs.SV.HidePlayerBuffs then
         return
     end
 
@@ -62,7 +62,7 @@ function SCB.CollectibleBuff()
     end
 
     -- Pets
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SCB.SV.IgnorePet then
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SpellCastBuffs.SV.IgnorePet then
         local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
         local nickname = GetCollectibleNickname(collectible)
         local name, description, icon = GetCollectibleInfo(collectible)
@@ -72,7 +72,7 @@ function SCB.CollectibleBuff()
             name = zo_strformat('<<1>> "<<2>>"', name, nickname)
         end
 
-        LUIE.EffectsList.player1["PetType"] = {
+        SpellCastBuffs.EffectsList.player1["PetType"] = {
             target="player", type=1,
             id = "Fake", name=name, icon=icon, backdrop=true, tooltip = description,
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -82,12 +82,12 @@ function SCB.CollectibleBuff()
     end
 
     -- Assistants
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 and not SCB.SV.IgnoreAssistant then
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 and not SpellCastBuffs.SV.IgnoreAssistant then
         local collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
         local name, description = GetCollectibleInfo(collectible)
-        local iconAssistant = E.AssistantIcons[name] or ''
+        local iconAssistant = AssistantIcons[name] or ''
 
-        LUIE.EffectsList.player1["AssistantType"] = {
+        SpellCastBuffs.EffectsList.player1["AssistantType"] = {
             target="player", type=1,
             id = "Fake", name=name, icon=iconAssistant, tooltip = description,
             dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting

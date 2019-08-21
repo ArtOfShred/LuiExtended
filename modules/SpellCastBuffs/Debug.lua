@@ -3,15 +3,16 @@
     License: The MIT License (MIT)
 --]]
 
-local SCB = LUIE.SpellCastBuffs
-local E = LUIE.Effects
+local SpellCastBuffs = LUIE.SpellCastBuffs
+
+local Effects = LUIE.Data.Effects
 
 local zo_strformat = zo_strformat
 
 -- Debug Display for Combat Events
-function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     -- Don't display if this aura is already added to the filter
-    if LUIE.DebugAuras[abilityId] and SCB.SV.ShowDebugFilter then return end
+    if LUIE.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then return end
 
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
@@ -46,8 +47,8 @@ function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGr
 end
 
 -- Debug Display for Effect Events
-function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    if LUIE.DebugAuras[abilityId] and SCB.SV.ShowDebugFilter then
+function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+    if LUIE.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
         return
     end
 
@@ -67,7 +68,7 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
         cmxHIDE = ""
     end
 
-    if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].hide then
+    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide then
         d(iconFormatted .. "|c00E200 [" ..abilityId .. "] " .. nameFormatted.. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] ".. unitName .. "|r")
         return
     end
@@ -75,7 +76,7 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     local duration = (endTime - beginTime) * 1000
 
     local refreshOnly = ""
-    if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].refreshOnly then
+    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].refreshOnly then
         refreshOnly = " |c00E200(Hidden)|r "
     end
 
@@ -88,7 +89,7 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     end
 end
 
-function SCB.TempSlashFilter()
+function SpellCastBuffs.TempSlashFilter()
     local filter = LUIE.SpellCastBuffs.SV.ShowDebugFilter
 
     if filter == true then
@@ -100,7 +101,7 @@ function SCB.TempSlashFilter()
     end
 end
 
-function SCB.TempSlashGround()
+function SpellCastBuffs.TempSlashGround()
     local ground = LUIE.SpellCastBuffs.SV.GroundDamageAura
 
     if ground == true then
@@ -114,7 +115,7 @@ function SCB.TempSlashGround()
     LUIE.SpellCastBuffs.ReloadEffects("player")
 end
 
-function SCB.TempSlashConsolidate()
+function SpellCastBuffs.TempSlashConsolidate()
     local consolidate = LUIE.SpellCastBuffs.SV.ExtraConsolidate
 
     if consolidate == true then
@@ -130,7 +131,7 @@ end
 
 local displayName = GetDisplayName()
 if displayName == "@ArtOfShred" or displayName == "@ArtOfShredLegacy" then
-    SLASH_COMMANDS["/filter"] = SCB.TempSlashFilter
-    SLASH_COMMANDS["/ground"] = SCB.TempSlashGround
-    SLASH_COMMANDS["/consolidate"] = SCB.TempSlashConsolidate
+    SLASH_COMMANDS["/filter"] = SpellCastBuffs.TempSlashFilter
+    SLASH_COMMANDS["/ground"] = SpellCastBuffs.TempSlashGround
+    SLASH_COMMANDS["/consolidate"] = SpellCastBuffs.TempSlashConsolidate
 end
