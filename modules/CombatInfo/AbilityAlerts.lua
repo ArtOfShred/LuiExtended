@@ -234,7 +234,7 @@ function AbilityAlerts.CreateAlertFrame()
 end
 
 function AbilityAlerts.ResetAlertFramePosition()
-    if not AbilityAlerts.Enabled then
+    if not CombatInfo.Enabled then
         return
     end
     CombatInfo.SV.AlertFrameOffsetX = nil
@@ -260,7 +260,7 @@ function AbilityAlerts.SetAlertFramePosition()
 end
 
 function AbilityAlerts.SetMovingStateAlert(state)
-    if not AbilityAlerts.Enabled then
+    if not CombatInfo.Enabled then
         return
     end
     AbilityAlerts.AlertFrameUnlocked = state
@@ -1006,7 +1006,7 @@ end
 
 -- Updates local variables with new font
 function AbilityAlerts.ApplyFontAlert()
-    if not AbilityAlerts.Enabled then
+    if not CombatInfo.Enabled then
         return
     end
 

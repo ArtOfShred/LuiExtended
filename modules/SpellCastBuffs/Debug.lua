@@ -41,7 +41,7 @@ function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName
         target = "NIL"
     end
 
-    local formattedResult = LUIE.DebugResults[result]
+    local formattedResult = LUIE.Data.DebugResults[result]
 
     d(iconFormatted .. " ["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
 end
