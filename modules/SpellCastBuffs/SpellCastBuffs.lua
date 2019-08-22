@@ -1068,13 +1068,13 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
     local tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, control.effectName)
     if control.isArtificial then
         tooltipText = GetArtificialEffectTooltipText(control.effectId)
-        GameTooltip:AddLine(tooltipTitle, '/EsoUI/Common/Fonts/univers67.otf'..'|18',1,1,1)
+        GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2",1,1,1, nil)
         if SpellCastBuffs.SV.TooltipEnable then
             GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
         end
     else
         if not SpellCastBuffs.SV.TooltipEnable then
-            GameTooltip:AddLine(tooltipTitle, '/EsoUI/Common/Fonts/univers67.otf'..'|18',1,1,1)
+            GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2",1,1,1, nil)
             return
         end
 
@@ -1222,31 +1222,37 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
             colorText = control.buffType == BUFF_EFFECT_TYPE_DEBUFF and ZO_ERROR_COLOR or ZO_SUCCEEDED_TEXT
         end
 
-        GameTooltip:AddLine(tooltipTitle, '/EsoUI/Common/Fonts/univers67.otf'..'|18',1,1,1)
+        local detailsLine = 3
+
+        GameTooltip:AddLine(tooltipTitle, "ZoFontHeader2",1,1,1, nil)
         if tooltipText ~= "" and tooltipText ~= nil then
-            GameTooltip:AddLine("|t325:8:/EsoUI/Art/Miscellaneous/horizontalDivider.dds|t")
             GameTooltip:AddLine(tooltipText, "", colorText:UnpackRGBA())
         end
         if thirdLine ~="" and thirdLine ~= nil then
+            detailsLine = 5
             GameTooltip:AddLine(thirdLine, "", ZO_NORMAL_TEXT:UnpackRGB())
         end
 
-        local lastLines = ""
-        local buffType
+        GameTooltip:AddLine("|t325:8:/EsoUI/Art/Miscellaneous/horizontalDivider.dds|t")
+
+        -- Add Ability ID Line
         if control.effectId then
-            lastLines = zo_strformat("\nID: |cFFFFFF<<1>>|r", control.effectId)
+            GameTooltip:AddHeaderLine("Ability ID", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
+            GameTooltip:AddHeaderLine(control.effectId, "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
+            detailsLine = detailsLine + 1
         end
+
+        -- Add Buff Type Line
+        local buffType
         if control.buffType then
             buffType = control.buffType
             if control.effectId and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].unbreakable then
                 buffType = buffType + 2
             end
-            lastLines = lastLines .. zo_strformat("\nType: |cFFFFFF<<1>>|r", buffTypes[buffType])
+            GameTooltip:AddHeaderLine("Type", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
+            GameTooltip:AddHeaderLine(buffTypes[buffType], "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
+            detailsLine = detailsLine + 1
         end
-
-        lastLines = "|t325:8:/EsoUI/Art/Miscellaneous/horizontalDivider.dds|t" .. lastLines
-
-        GameTooltip:AddLine(lastLines, "", ZO_NORMAL_TEXT:UnpackRGB())
 
     end
 end
