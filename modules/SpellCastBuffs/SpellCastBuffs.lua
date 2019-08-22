@@ -1233,8 +1233,10 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
             GameTooltip:AddLine(thirdLine, "", ZO_NORMAL_TEXT:UnpackRGB())
         end
 
-        GameTooltip:AddLine("|t325:8:/EsoUI/Art/Miscellaneous/horizontalDivider.dds|t")
+        --GameTooltip:AddLine("|t325:8:/EsoUI/Art/Miscellaneous/horizontalDivider.dds|t")
 
+        -- TODO: Add option to enable this
+        --[[
         -- Add Ability ID Line
         if control.effectId then
             GameTooltip:AddHeaderLine("Ability ID", "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_LEFT, ZO_NORMAL_TEXT:UnpackRGB())
@@ -1253,6 +1255,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
             GameTooltip:AddHeaderLine(buffTypes[buffType], "ZoFontWinT1", detailsLine, TOOLTIP_HEADER_SIDE_RIGHT, 1, 1, 1)
             detailsLine = detailsLine + 1
         end
+        ]]--
 
     end
 end

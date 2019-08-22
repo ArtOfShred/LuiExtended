@@ -3992,7 +3992,7 @@ Effects.EffectOverride = {
     [32797] = { icon = '' }, -- Deep Breath (Deep Breath) -- Hide for Interrupt notification on Combat Text
     [32788] = { icon = 'esoui/art/icons/ability_dragonknight_012_b.dds', tooltip = Tooltips.Skill_Draw_Essence }, -- Draw Essence (Draw Essence)
     [32786] = { icon = 'esoui/art/icons/ability_dragonknight_012_b.dds' }, -- Draw Essence (Draw Essence)
-    [32789] = { hide = true, icon = 'esoui/art/icons/ability_dragonknight_012_b.dds' }, -- Draw Essence (Draw Essence)
+    [32789] = { icon = 'esoui/art/icons/ability_dragonknight_012_b.dds' }, -- Draw Essence (Draw Essence)
 
     -- Dragon Leap / Take Flight / Ferocious Leap
     [29016] = { icon = 'esoui/art/icons/ability_dragonknight_009.dds' }, -- Dragon Leap (Dragon Leap)

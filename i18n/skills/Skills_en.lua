@@ -289,16 +289,16 @@ local strings = {
     ----------------------------------------------------------------
 
     -- Dragonknight Skills
-    SI_LUIE_SKILL_SEETHING_FURY_TP =                     "Increase the damage of your next Molten Whip by |cffffff33|r% and your Weapon and Spell Damage by |cffffff125|r for |cffffff<<1>>|r seconds.\n\nThis effect can stack up to |cffffff3|r times.",
+    SI_LUIE_SKILL_SEETHING_FURY_TP =                     "Increase the damage of your next Molten Whip by |cffffff33|r% and your Weapon and Spell Damage by |cffffff75|r for |cffffff<<1>>|r seconds.\n\nThis effect can stack up to |cffffff3|r times.",
     SI_LUIE_SKILL_VENOMOUS_CLAW_TP =                     "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nDeals |cFFFFFF12|r% increased damage every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_BURNING_EMBERS_TP =                    "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nHeals the Dragonknight for |cffffff75|r% of the total damage inflicted when the effect ends.",
-    SI_LUIE_SKILL_ENGULFING_FLAMES_TP =                  "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nIncrease damage taken from Fire Damage attacks by |cffffff10|r%.",
-    SI_LUIE_SKILL_ENGULFING_FLAMES_DUMMY_TP =            "Increase damage taken from Fire Damage attacks by |cffffff10|r%.",
+    SI_LUIE_SKILL_ENGULFING_FLAMES_TP =                  "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nIncrease damage taken from Flame Damage attacks by |cffffff10|r%.",
+    SI_LUIE_SKILL_ENGULFING_FLAMES_DUMMY_TP =            "Increase damage taken from Flame Damage attacks by |cffffff10|r%.",
     SI_LUIE_SKILL_INFERNO_TP =                           "Launch a fireball at the nearest enemy, dealing Flame Damage every |cffffff5|r seconds for |cffffff15|r seconds.",
     SI_LUIE_SKILL_FLAMES_OF_OBLIVION_TP =                "Launch a fireball at |cffffff2|r enemies, dealing Flame Damage every |cffffff5|r seconds for |cffffff15|r seconds.",
-    SI_LUIE_SKILL_CAUTERIZE_TP =                         "Launch a fireball at an ally to cauterize their wounds every |cffffff5|r seconds for |cffffff15|r seconds.",
-    SI_LUIE_SKILL_DRAGONKIGHT_STANDARD_TP =              "Enemies within the radius of the standard take Flame Damage every |cffffff1|r second and have Major Defile applied to them.",
-    SI_LUIE_SKILL_STANDARD_OF_MIGHT_TP =                 "Increase damage done and reduce damage taken while standing within the radius of the standard.",
+    SI_LUIE_SKILL_CAUTERIZE_TP =                         "Launch a fireball at yourself or an ally to cauterize their wounds every |cffffff5|r seconds for |cffffff15|r seconds.",
+    SI_LUIE_SKILL_DRAGONKIGHT_STANDARD_TP =              "Enemies within the |cffffff8|r meter radius of the standard take Flame Damage every |cffffff1|r second and have Major Defile applied to them.",
+    SI_LUIE_SKILL_STANDARD_OF_MIGHT_TP =                 "Increase damage done and reduce damage taken by |cffffff15|r% while standing within the radius of the standard.",
     SI_LUIE_SKILL_SPIKED_ARMOR_TP =                      "Return Magic Damage to any enemy that uses a direct damage attack against you for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_HARDENED_ARMOR_TP =                    "Return Magic Damage to any enemy that uses a direct damage attack against you for |cffffff<<1>>|r seconds.\n\nAbsorbing damage for |cffffff6|r seconds.",
     SI_LUIE_SKILL_BURNING_TALONS_TP =                    "Afflicted with Flame Damage every |cFFFFFF1|r second and immobilized for |cffffff<<1>>|r seconds.",
@@ -315,7 +315,7 @@ local strings = {
     SI_LUIE_SKILL_ASH_CLOUD_TP =                         "Enemies in the ash cloud have their Movement Speed reduced by |cffffff70|r%, while you and allies are healed every |cffffff1|r second.",
     SI_LUIE_SKILL_ERUPTION_TP =                          "Enemies in the ash cloud have their Movement Speed reduced by |cffffff70|r% and take Flame Damage every |cffffff1|r second.",
     SI_LUIE_SKILL_MAGMA_ARMOR_TP =                       "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies take Flame Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.",
-    SI_LUIE_SKILL_CORROSIVE_ARMOR_TP =                   "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies take Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nWhile active, your attacks ignore all Physical Resistance.",
+    SI_LUIE_SKILL_CORROSIVE_ARMOR_TP =                   "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies take Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nWhile active, this ability and your Direct Damage dealt ignores enemy Physical Resistance.",
 
     -- Nightblade Skills
     SI_LUIE_SKILL_DEATH_STROKE_DEBUFF =                  "Increase damage taken from the Nightblade by |cFFFFFF20|r% for |cFFFFFF6|r seconds.",

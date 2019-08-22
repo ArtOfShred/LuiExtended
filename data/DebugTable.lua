@@ -2788,13 +2788,16 @@ LUIE.DebugAuras = {
 
     [20930] = true, -- Engulfing Flames (Engulfing Flames)
     [31104] = true, -- Engulfing Flames (Engulfing Flames)
+    [32821] = true, -- Engulfing Flames (Engulfing Flames)
 
     [31290] = true, -- Fiery Reach taunt (Fiery Grip - All Morphs)
     [20492] = true, -- Fiery Grip (Fiery Grip)
     [20493] = true, -- Fiery Grip (Fiery Grip)
+    [20494] = true, -- Fiery Grip (Fiery Grip)
     [76498] = true, -- Major Expedition (Fiery Grip)
 
     [20499] = true, -- Empowering Chains (Empowering Chains)
+    [62023] = true, -- Fiery Grip (Empowering Chains)
     [76506] = true, -- Major Expedition (Empowering Chains)
     [108679] = true, -- Empower (Empowering Chains)
     [108678] = true, -- Might of the Guild (Empowering Chains)
@@ -2802,6 +2805,7 @@ LUIE.DebugAuras = {
 
     [20496] = true, -- Unrelenting Grip (Unrelenting Grip)
     [62004] = true, -- Unrelenting Grip (Unrelenting Grip)
+    [62001] = true, -- Unrelenting Grip (Unrelenting Grip)
     [76502] = true, -- Major Expedition (Unrelenting Grip)
     [77105] = true, -- Unrelenting Grip (Unrelenting Grip)
 
