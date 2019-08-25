@@ -577,6 +577,7 @@ LUIE.Data.Tooltips = {
     Skill_Hurricane                                 = GetString(SI_LUIE_SKILL_HURRICANE_TP),
     Skill_Lightning_Splash                          = GetString(SI_LUIE_SKILL_LIGHTNING_SPLASH_TP),
     Skill_Surge                                     = GetString(SI_LUIE_SKILL_SURGE_TP),
+    Skill_Power_Surge                               = GetString(SI_LUIE_SKILL_POWER_SURGE_TP),
     Skill_Bolt_Escape_Fatigue                       = GetString(SI_LUIE_SKILL_BOLT_ESCAPE_FATIGUE_TP),
     Skill_Intercept                                 = GetString(SI_LUIE_SKILL_INTERCEPT_TP),
     Skill_Overload                                  = GetString(SI_LUIE_SKILL_OVERLOAD_TP),

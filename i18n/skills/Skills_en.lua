@@ -348,7 +348,7 @@ local strings = {
 
     -- Sorcerer
     SI_LUIE_SKILL_PERSISTENCE =                          "Reduce the cost of your next Magicka or Stamina ability used within |cFFFFFF4|r seconds by |cFFFFFF<<1>>|r%.",
-    SI_LUIE_SKILL_CRYSTAL_FRAGMENTS_TP =                 "Your next Crystal Fragments cast within |cFFFFFF<<1>>|r seconds is instant, deals |cFFFFFF20|r% more damage, and costs |cFFFFFF50|r% less Magicka.",
+    SI_LUIE_SKILL_CRYSTAL_FRAGMENTS_TP =                 "Your next Crystal Fragments cast within |cFFFFFF<<1>>|r seconds is instant, deals |cFFFFFF33|r% more damage, and costs |cFFFFFF50|r% less Magicka.",
     SI_LUIE_SKILL_SHATTERING_PRISON_TP =                 "Immobilized for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe shards deal Magic Damage when the effect ends.",
     SI_LUIE_SKILL_RUNE_CAGE_TP =                         "Imprisoned in a sphere of dark magic and stunned for |cFFFFFF<<1>>|r seconds.\n\nDeals Magic Damage if the stun lasts the full duration.",
     SI_LUIE_SKILL_DEFENSIVE_RUNE_TP =                    "The next enemy to attack you is imprisoned in a constricting sphere of dark magic, stunning them after a short delay for |cFFFFFF3|r seconds.",
@@ -381,9 +381,10 @@ local strings = {
     SI_LUIE_SKILL_ENDLESS_FURY_TP =                      "Falling below |cFFFFFF20%|r Health causes an explosion, dealing Shock Damage to you and nearby allies.\n\nRestore Magicka to the Sorcerer on death.",
     SI_LUIE_SKILL_LIGHTNING_FORM_TP =                    "Enemies within |cFFFFFF5|r meters take Shock Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_HURRICANE_TP =                         "Enemies within |cFFFFFF5|r meters take Physical Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThe winds grow in damage and size, increasing up to |cFFFFFF150|r% more damage and up to |cFFFFFF9|r meters in size.",
-    SI_LUIE_SKILL_LIGHTNING_SPLASH_TP =                  "Enemies standing in the storm energy take Shock Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_LIGHTNING_SPLASH_TP =                  "Enemies standing in the |cFFFFFF<<2>>|r meter radius of the storm energy take Shock Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SURGE_TP =                             "Dealing a Critical Strike heals you. This effect can occur once every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_BOLT_ESCAPE_FATIGUE_TP =               "Consecutive Bolt Escape casts cost |cFFFFFF50|r% more Magicka per stack for the next |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_POWER_SURGE_TP =                       "Activating a Critical Heal causes the ability to heal you and your allies within |cFFFFFF18|r meters. This effect can occur once every |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_BOLT_ESCAPE_FATIGUE_TP =               "Consecutive Bolt Escape casts cost |cFFFFFF33|r% more Magicka per stack for the next |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_INTERCEPT_TP =                         "Spell projectiles directed at you will be absorbed by the |cFFFFFFBall of Lightning|r.",
     SI_LUIE_SKILL_OVERLOAD_TP =                          "Light Attacks are replaced by lightning bolts, dealing Shock Damage, and Heavy Attacks blast enemies in the target area for Shock Damage.\n\nAttacks deplete Ultimate until you run out or the ability is toggled off.",
     SI_LUIE_SKILL_ENERGY_OVERLOAD_TP =                   "Light Attacks are replaced by lightning bolts, dealing Shock Damage, and Heavy Attacks blast enemies in the target area for Shock Damage.\n\nLight and Heavy Attacks restore Magicka.\n\nAttacks deplete Ultimate until you run out or the ability is toggled off.",

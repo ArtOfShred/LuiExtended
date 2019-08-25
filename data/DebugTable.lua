@@ -2570,6 +2570,7 @@ LUIE.DebugAuras = {
     [63795] = true, -- Taunt
     [63794] = true, -- Taunt
     [112170] = true, -- CC Immunity
+    [126366] = true, -- Pet Battle Spirit
 
     -- HOUSING
     [89978] = true, -- Target Skeleton (Target Dummy)
@@ -3795,6 +3796,8 @@ LUIE.DebugAuras = {
     [24794] = true, -- Overload Heavy Attack (Overload - Heavy Attack)
     [27787] = true, -- Controlled Fury Cost (Overload - Heavy Attack)
     [24798] = true, -- Overload Heavy Attack (Overload - Heavy Attack)
+    [119624] = true, -- Remove Overload (Overload - Heavy Attack)
+
     [24806] = true, -- Power Overload (Power Overload)
     [24808] = true, -- Overload End (Power Overload)
     [114770] = true, -- Shock Dummy (Power Overload - Light Attack)
@@ -3802,6 +3805,8 @@ LUIE.DebugAuras = {
     [24810] = true, -- Power Overload Heavy Attack (Power Overload - Heavy Attack)
     [28433] = true, -- Controlled Fury Cost (Power Overload - Heavy Attack)
     [24811] = true, -- Power Overload Heavy Attack (Power Overload - Heavy Attack)
+    [28434] = true, -- Remove Overload (Power Overload - Heavy Attack)
+
     [24804] = true, -- Energy Overload (Energy Overload)
     [24805] = true, -- Overload End (Energy Overload)
     [114774] = true, -- Shock Dummy (Energy Overload - Light Attack)
@@ -3810,6 +3815,7 @@ LUIE.DebugAuras = {
     [114799] = true, -- Controlled Fury Cost (Energy Overload - Heavy Attack)
     [114798] = true, -- Energy Overload Heavy Attack (Energy Overload - Heavy Attack)
     [29740] = true, -- Energy Overload (Energy Overload)
+    [114800] = true, -- Remove Overload (Energy Overload - Heavy Attack)
 
     -------------------------------------
     -- TEMPLAR PASSIVES -----------------

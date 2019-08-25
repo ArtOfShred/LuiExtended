@@ -4448,9 +4448,9 @@ Effects.EffectOverride = {
     [62176] = { consolidate = true, tooltip = Abilities.Skill_Boundless_Storm }, -- Major Ward (Boundless Storm)
 
     -- Lightning Splash / Liquid Lightning / Lightning Flood
-    [23182] = { tooltip = Tooltips.Skill_Lightning_Splash }, -- Lightning Splash (Lightning Splash)
-    [23200] = { tooltip = Tooltips.Skill_Lightning_Splash }, -- Liquid Lightning (Liquid Lightning)
-    [23205] = { tooltip = Tooltips.Skill_Lightning_Splash }, -- Lightning Flood (Lightning Flood)
+    [23182] = { tooltip = Tooltips.Skill_Lightning_Splash, tooltipValue2 = 4 }, -- Lightning Splash (Lightning Splash)
+    [23200] = { tooltip = Tooltips.Skill_Lightning_Splash, tooltipValue2 = 4 }, -- Liquid Lightning (Liquid Lightning)
+    [23205] = { tooltip = Tooltips.Skill_Lightning_Splash, tooltipValue2 = 6 }, -- Lightning Flood (Lightning Flood)
     [23189] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Lightning Splash (Lightning Splash)
     [23202] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Liquid Lightning (Liquid Lightning)
     [23208] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Lightning Flood (Lightning Flood)
@@ -4458,7 +4458,7 @@ Effects.EffectOverride = {
     -- Surge / Power Surge / Critical Surge
     [23670] = { tooltip = Tooltips.Skill_Surge }, -- Surge (Surge)
     [23673] = { consolidate = true, tooltip = Abilities.Skill_Surge }, -- Major Brutality (Surge)
-    [23674] = { tooltip = Tooltips.Skill_Surge }, -- Power Surge (Power Surge)
+    [23674] = { tooltip = Tooltips.Skill_Power_Surge }, -- Power Surge (Power Surge)
     [62062] = { consolidate = true, tooltip = Abilities.Skill_Power_Surge }, -- Major Sorcery (Power Surge)
     [62060] = { consolidate = true, tooltip = Abilities.Skill_Power_Surge }, -- Major Brutality (Power Surge)
     [23678] = { tooltip = Tooltips.Skill_Surge }, -- Critical Surge (Critical Surge)
@@ -4475,11 +4475,14 @@ Effects.EffectOverride = {
 
     -- Overload / Power Overload / Energy Overload
     [24785] = { tooltip = Tooltips.Skill_Overload }, -- Overload (Overload)
+    [119624] = { hide = true }, -- Remove Overload (Overload - Heavy Attack)
     [24806] = { tooltip = Tooltips.Skill_Overload }, -- Power Overload (Power Overload)
     [114769] = { icon = 'esoui/art/icons/ability_sorcerer_power_overload.dds' }, -- Power Overload Light Attack (Power Overload)
+    [28434] = { hide = true }, -- Remove Overload (Power Overload - Heavy Attack)
     [24804] = { tooltip = Tooltips.Skill_Energy_Overload }, -- Energy Overload (Energy Overload)
     [114773] = { icon = 'esoui/art/icons/ability_sorcerer_energy_overload.dds' }, -- Energy Overload Light Attack (Energy Overload)
     [29740] = { icon = 'esoui/art/icons/ability_sorcerer_energy_overload.dds' }, -- Energy Overload (Energy Overload)
+    [114800] = { hide = true }, -- Remove Overload (Energy Overload - Heavy Attack)
 
     ----------------------------------------------------------------
     -- TEMPLAR PASSIVES --------------------------------------------
@@ -4536,7 +4539,7 @@ Effects.EffectOverride = {
     [49204] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds' }, -- Focused Charge (Focused Charge)
     [49205] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds', tooltip = Tooltips.Generic_Stun }, -- Focused Charge (Focused Charge)
     [26522] = { hide = true, icon = '' }, -- Charge (Explosive Charge)
-    [49213] = { icon = 'esoui/art/icons/ability_templar_double_tipped_charge.dds', tooltip = Tooltips.Generic_Stun }, -- Explosive Charge (Explosive Charge)
+    [49213] = { tooltip = Tooltips.Generic_Stun }, -- Explosive Charge (Explosive Charge)
     [15546] = { tooltip = Tooltips.Generic_Stun }, -- Toppling Charge (Toppling Charge)
     [26518] = { icon = '' }, -- Charge (Toppling Charge)
 
