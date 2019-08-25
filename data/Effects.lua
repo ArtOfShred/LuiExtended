@@ -4106,7 +4106,6 @@ Effects.EffectOverride = {
 
     -- Assassin's Blade / Killer's Blade / Impale
     [61787] = { icon = 'esoui/art/icons/ability_nightblade_017_a.dds' }, -- Killer's Blade (Killer's Blade)
-    [34851] = { hide = true }, -- Impale (Impale)
 
     -- Teleport Strike / Lotus Fan / Ambush
     [124803] = { tooltip = Abilities.Skill_Teleport_Strike }, -- Minor Vulnerability (Teleport Strike)
@@ -4128,7 +4127,7 @@ Effects.EffectOverride = {
     [33373] = { icon = 'esoui/art/icons/ability_nightblade_014.dds' }, -- Mark Target (Mark Target)
     [36980] = { consolidate = true, tooltip = Abilities.Skill_Piercing_Mark }, -- Major Breach (Piercing Mark)
     [63915] = { consolidate = true, tooltip = Abilities.Skill_Piercing_Mark }, -- Major Fracture (Piercing Mark)
-    [36994] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Marked, tooltip = Abilities.Skill_Piercing_Mark, noDuplicate = true }, -- Piercing Mark (Piercing Mark)
+    [36994] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Marked, tooltip = Abilities.Skill_Piercing_Mark }, -- Piercing Mark (Piercing Mark)
     [36983] = { icon = 'esoui/art/icons/ability_nightblade_014_b.dds' }, -- Mark Target (Piercing Mark)
     [36972] = { consolidate = true, tooltip = Abilities.Skill_Reapers_Mark }, -- Major Breach (Reaper's Mark)
     [63919] = { consolidate = true, tooltip = Abilities.Skill_Reapers_Mark }, -- Major Fracture (Reaper's Mark)
@@ -4142,11 +4141,11 @@ Effects.EffectOverride = {
     [61905] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Grim Focus (Grim Focus)
     [61927] = { tooltip = Tooltips.Skill_Relentless_Focus, tooltipValue2 = zo_strformat("<<C:1>>", GetAbilityName(61927)) }, -- Relentless Focus (Relentless Focus)
     [61932] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Scourge (Relentless Focus)
-    [122587] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', name = Abilities.Skill_Assassins_Scourge }, -- Death Scythe
+    [122587] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', name = Abilities.Skill_Assassins_Scourge }, -- Assassin's Will (Relentless Focus)
     [61928] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Relentless Focus (Relentless Focus)
     [61919] = { tooltip = Tooltips.Skill_Grim_Focus, tooltipValue2 = zo_strformat("<<C:1>>", GetAbilityName(61919)) }, -- Merciless Resolve (Merciless Resolve)
     [61930] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Merciless Resolve)
-    [122586] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds', name = Abilities.Skill_Assassins_Will }, -- Death Scythe (Merciless Resolve)
+    [122586] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_assassins_will.dds' }, -- Assassin's Will (Merciless Resolve)
     [61920] = { tooltip = Tooltips.Skill_Grim_Focus_Defense }, -- Merciless Resolve (Merciless Resolve)
 
     -- Death Stroke / Incapacitating Strike / Soul Harvest
@@ -4166,7 +4165,7 @@ Effects.EffectOverride = {
     [33185] = { tooltip = Tooltips.Generic_Stun }, -- Veiled Strike (Veiled Strike)
     [34733] = { tooltip = Abilities.Skill_Surprise_Attack }, -- Off Balance (Surprise Attack)
     [34732] = { tooltip = Tooltips.Generic_Stun }, -- Surprise Attack (Surprise Attack)
-    [34734] = { name = Abilities.Skill_Surprise_Attack, tooltip = Tooltips.Skill_Surprise_Attack }, -- Major Fracture (Surprise Attack)
+    [34734] = { tooltip = Tooltips.Skill_Surprise_Attack }, -- Surprise Attack (Surprise Attack)
     [34737] = { tooltip = Abilities.Skill_Concealed_Weapon }, -- Off Balance (Concealed Weapon)
     [34736] = { tooltip = Tooltips.Generic_Stun }, -- Concealed Weapon (Concealed Weapon)
 
@@ -4175,7 +4174,7 @@ Effects.EffectOverride = {
     [25376] = { tooltip = Tooltips.Generic_Invisibility }, -- Shadow Cloak (Shadow Cloak)
     [25380] = { hide = true }, -- Shadowy Disguise (Shadowy Disguise)
     [25381] = { hide = true }, -- Shadowy Disguise (Shadowy Disguise)
-    [62141] = { tooltip = Tooltips.Skill_Shadowy_Disguise, tooltipValue2Id = 25381 }, -- Shadowy Disguise (Shadowy Disguise)
+    [62141] = { tooltip = Tooltips.Skill_Shadowy_Disguise }, -- Shadowy Disguise (Shadowy Disguise)
     [25377] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Dark Cloak (Dark Cloak)
     [108913] = { tooltip = Abilities.Skill_Dark_Cloak }, -- Minor Protection (Dark Cloak)
 
@@ -4245,7 +4244,6 @@ Effects.EffectOverride = {
     -- Cripple / Debilitate / Crippling Grasp
     [33333] = { tooltip = Tooltips.Skill_Cripple, tooltipValue2 = 30 }, -- Cripple (Cripple)
     [33327] = { icon = 'esoui/art/icons/ability_nightblade_006.dds', tooltip = Tooltips.Skill_Cripple, tooltipValue2 = 30, hideReduce = true }, -- Cripple (Cripple)
-    [36943] = { hide = true }, -- Debilitate (Debilitate)
     [36947] = { tooltip = Tooltips.Skill_Cripple, tooltipValue2 = 50 }, -- Debilitate (Debilitate)
     [36945] = { icon = 'esoui/art/icons/ability_nightblade_006_a.dds', tooltip = Tooltips.Skill_Cripple, tooltipValue2 = 50, hideReduce = true }, -- Debilitate (Debilitate)
     [125315] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds', tooltip = Abilities.Skill_Debilitate }, -- Minor Magickasteal (Debilitate)
@@ -4263,12 +4261,12 @@ Effects.EffectOverride = {
     -- Drain Power / Power Extraction / Sap Essence
     [33317] = { consolidateExtra = true, tooltip = Abilities.Skill_Drain_Power }, -- Major Sorcery (Drain Power)
     [36903] = { consolidateExtra = true, tooltip = Abilities.Skill_Power_Extraction }, -- Major Brutality (Power Extraction)
+    [126675] = { tooltip = Tooltips.Skill_Power_Extraction }, -- Power Extraction (Power Extraction)
     [62240] = { consolidateExtra = true, tooltip = Abilities.Skill_Sap_Essence }, -- Major Sorcery (Sap Essence)
     [36899] = { icon = 'esoui/art/icons/ability_nightblade_013_a.dds', name = Abilities.Skill_Sap_Essence }, -- Sap Will (Sap Essence)
 
     -- Soul Shred / Soul Siphon / Soul Tether
     [25171] = { icon = 'esoui/art/icons/ability_nightblade_018.dds' }, -- Soul Leech (Synergy - Soul Shred)
-    [25091] = { hide = true }, -- Soul Shred (Soul Shred)
     [25093] = { tooltip = Tooltips.Generic_Stun }, -- Soul Shred (Soul Shred)
     [35508] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 0.5 }, -- Soul Siphon (Soul Siphon)
     [63533] = { tooltip = Abilities.Skill_Soul_Siphon }, -- Major Vitality (Soul Siphon)
@@ -10908,8 +10906,6 @@ Effects.EffectPullDuration = {
 -- Fake Buffs applied onto the player by NPCs or Events (Friendly)
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.FakeExternalBuffs = {
-    -- Nightblade
-    [64006] = { duration = 2000, overrideDuration = true }, -- Refreshing Path (Refreshing Path)
 
     -- MSQ
     [48345] = { duration = 4000 }, -- Focused Healing (The Prophet)
@@ -11453,6 +11449,7 @@ Effects.AddGroundDamageAura = {
 
     -- Nightblade
     [36052] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Twisting Path (Twisting Path)
+    [64006] = { duration = 2000, type = BUFF_EFFECT_TYPE_BUFF }, -- Refreshing Path (Refreshing Path)
     [36490] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Veil of Blades (Veil of Blades)
 
     -- Sorcerer

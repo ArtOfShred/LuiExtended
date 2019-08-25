@@ -3132,8 +3132,8 @@ LUIE.DebugAuras = {
     [36980] = true, -- Major Breach (Piercing Mark)
     [63915] = true, -- Major Fracture (Piercing Mark)
     [36994] = true, -- Piercing Mark (Piercing Mark)
-    [36982] = true, -- Summon Shade (Piercing Mark)
-    [36983] = true, -- Mark Target (Piercing Mark)
+    [36982] = true, -- Piercing Mark (Piercing Mark)
+    [36983] = true, -- Piercing Mark (Piercing Mark)
 
     [36967] = true, -- Reaper's Mark (Reaper's Mark)
     [36972] = true, -- Major Breach (Reaper's Mark)
@@ -3148,12 +3148,12 @@ LUIE.DebugAuras = {
     [61905] = true, -- Grim Focus (Grim Focus)
 
     [61932] = true, -- Assassin's Scourge (Relentless Focus)
-    [122587] = true, -- Death Scythe (Assassin's Scourge)
+    [122587] = true, -- Assassin's Will (Assassin's Scourge)
     [61927] = true, -- Relentless Focus (Relentless Focus)
     [61928] = true, -- Relentless Focus (Relentless Focus)
 
     [61930] = true, -- Assassin's Will (Merciless Resolve)
-    [122586] = true, -- Death Scythe (Merciless Resolve)
+    [122586] = true, -- Assassin's Will (Merciless Resolve)
     [61919] = true, -- Merciless Resolve (Merciless Resolve)
     [61920] = true, -- Merciless Resolve (Merciless Resolve)
 
@@ -3185,7 +3185,7 @@ LUIE.DebugAuras = {
     [25260] = true, -- Surprise Attack (Surprise Attack)
     [34733] = true, -- Off Balance (Surprise Attack)
     [34732] = true, -- Surprise Attack (Surprise Attack)
-    [34734] = true, -- Major Fracture (Surprise Attack)
+    [34734] = true, -- Surprise Attack (Surprise Attack)
 
     [34738] = true, -- Concealed Weapon Passive (Concealed Weapon)
     [61155] = true, -- Concealed Weapon (Concealed Weapon)
@@ -3368,6 +3368,7 @@ LUIE.DebugAuras = {
 
     [36901] = true, -- Power Extraction (Power Extraction)
     [36903] = true, -- Major Brutality (Power Extraction)
+    [126675] = true, -- Power Extraction (Power Extraction)
 
     [36891] = true, -- Sap Essence (Sap Essence)
     [45655] = true, -- Sap Essence (Sap Essence)

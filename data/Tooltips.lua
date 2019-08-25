@@ -539,6 +539,7 @@ LUIE.Data.Tooltips = {
     Skill_Leeching_Strikes                          = GetString(SI_LUIE_SKILL_LEECHING_STRIKES_TP),
     Skill_Siphoning_Attacks                         = GetString(SI_LUIE_SKILL_SIPHONING_ATTACKS_TP),
     Skill_Soul_Tether                               = GetString(SI_LUIE_SKILL_SOUL_TETHER_TP),
+    Skill_Power_Extraction                          = GetString(SI_LUIE_SKILL_POWER_EXTRACTION_TP),
 
     -- Sorcerer
     Skill_Persistence_Rank_1                        = zo_strformat(GetString(SI_LUIE_SKILL_PERSISTENCE), 7),

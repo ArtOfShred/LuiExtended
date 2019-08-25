@@ -1920,7 +1920,19 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
     -- Create ground auras for damaging effects if toggled on
     if SpellCastBuffs.SV.GroundDamageAura and Effects.AddGroundDamageAura[abilityId] then
         -- Return if this isn't damage or healing, or blocked, dodged, or shielded.
-        if result ~= ACTION_RESULT_DAMAGE and result ~= ACTION_RESULT_DAMAGE_SHIELDED and result ~= ACTION_RESULT_DODGED and result ~=ACTION_RESULT_CRITICAL_DAMAGE and result ~= ACTION_RESULT_CRITICAL_HEAL and result ~= ACTION_RESULT_HEAL and result ~= ACTION_RESULT_BLOCKED and result ~= ACTION_RESULT_BLOCKED_DAMAGE and not Effects.AddGroundDamageAura[abilityId].exception then
+        if result ~= ACTION_RESULT_DAMAGE and
+           result ~= ACTION_RESULT_DAMAGE_SHIELDED and
+           result ~= ACTION_RESULT_DODGED and
+           result ~=ACTION_RESULT_CRITICAL_DAMAGE and
+           result ~= ACTION_RESULT_CRITICAL_HEAL and
+           result ~= ACTION_RESULT_HEAL and
+           result ~= ACTION_RESULT_BLOCKED and
+           result ~= ACTION_RESULT_BLOCKED_DAMAGE and
+           result ~= ACTION_RESULT_HOT_TICK and
+           result ~= ACTION_RESULT_HOT_TICK_CRITICAL and
+           result ~= ACTION_RESULT_DOT_TICK and
+           result ~= ACTION_RESULT_DOT_TICK_CRITICAL and
+           not Effects.AddGroundDamageAura[abilityId].exception then
             return
         end
 
