@@ -1030,10 +1030,11 @@ local strings = {
     SI_LUIE_LAM_CI_CCT_IMMUNE =                          "Immune",
     SI_LUIE_LAM_CI_CCT_COLOR_TP =                        "Set a color for <<1>> state.",
 
+    SI_LUIE_LAM_CI_CCT_AOE_TOGGLE =                      "Show Area of Effect Damage",
+    SI_LUIE_LAM_CI_CCT_AOE_TOGGLE_TP =                   "Display a notification when standing in the radius of an area of effect attack.",
 
     SI_LUIE_LAM_CI_CCT_AOE_SHOW =                        "Show AOE - <<1>>",
     SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP =                     "Display an notification when hit by (<<1>>) abilities.",
-
     SI_LUIE_LAM_CI_CCT_AOE_SOUND =                       "Sound - <<1>>",
     SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP =                    "Choose whether to play a sound when hit by (<<1>>) abilities.",
 

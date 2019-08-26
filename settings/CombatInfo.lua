@@ -1882,9 +1882,10 @@ function CombatInfo.CreateSettings()
                 name = "Beta features",
             },
             {
+                -- AOE SHOW
                 type = "checkbox",
-                name = "Show Area Effects",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                name = GetString(SI_LUIE_LAM_CI_CCT_AOE_TOGGLE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_AOE_TOGGLE_TP),
                 default = Defaults.cct.showAoe,
                 disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.showAoe end,
@@ -2163,6 +2164,7 @@ function CombatInfo.CreateSettings()
                 disabled = function() return (not Settings.cct.enabled) end,
             },
             {
+                -- AOE Color
                 type = "colorpicker",
                 name = "Pick color for AREA DAMAGE EFFECT state",
                 tooltip = "Pick color of CC text and icon border for AREA DAMAGE EFFECT crowd control state",
@@ -2175,6 +2177,7 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Show Global Cooldown
                 type = "checkbox",
                 name = "Show Global Cooldown",
                 tooltip = "ON - show the cooldown animation if cc-ed while on global cooldown (Cyrodiil only) , OFF - don't not show global cooldown animation",
