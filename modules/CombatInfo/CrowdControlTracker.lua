@@ -129,6 +129,7 @@ function CrowdControlTracker.UpdateAOEList()
 
     if CombatInfo.SV.cct.aoePlayerUltimate then
         for k, v in pairs(CrowdControl.aoePlayerUltimate) do
+            priority = priority + CrowdControlTracker.aoeTypesId[v]
             CrowdControlTracker.aoeTypesId[k] = priority
         end
         priority = priority + 1
@@ -136,6 +137,7 @@ function CrowdControlTracker.UpdateAOEList()
 
     if CombatInfo.SV.cct.aoePlayerNormal then
         for k, v in pairs(CrowdControl.aoePlayerNormal) do
+            priority = priority + CrowdControlTracker.aoeTypesId[v]
             CrowdControlTracker.aoeTypesId[k] = priority
         end
         priority = priority + 1
@@ -143,6 +145,7 @@ function CrowdControlTracker.UpdateAOEList()
 
     if CombatInfo.SV.cct.aoePlayerUltimate then
         for k, v in pairs(CrowdControl.aoePlayerSet) do
+            priority = priority + CrowdControlTracker.aoeTypesId[v]
             CrowdControlTracker.aoeTypesId[k] = priority
         end
         priority = priority + 1
@@ -150,6 +153,7 @@ function CrowdControlTracker.UpdateAOEList()
 
     if CombatInfo.SV.cct.aoeTraps then
         for k, v in pairs(CrowdControl.aoeTraps) do
+            priority = priority + CrowdControlTracker.aoeTypesId[v]
             CrowdControlTracker.aoeTypesId[k] = priority
         end
         priority = priority + 1
@@ -157,6 +161,7 @@ function CrowdControlTracker.UpdateAOEList()
 
     if CombatInfo.SV.cct.aoeNPCBoss then
         for k, v in pairs(CrowdControl.aoeNPCBoss) do
+            priority = priority + CrowdControlTracker.aoeTypesId[v]
             CrowdControlTracker.aoeTypesId[k] = priority
         end
         priority = priority + 1
@@ -164,6 +169,7 @@ function CrowdControlTracker.UpdateAOEList()
 
     if CombatInfo.SV.cct.aoeNPCElite then
         for k, v in pairs(CrowdControl.aoeNPCElite) do
+            priority = priority + CrowdControlTracker.aoeTypesId[v]
             CrowdControlTracker.aoeTypesId[k] = priority
         end
         priority = priority + 1
@@ -171,6 +177,7 @@ function CrowdControlTracker.UpdateAOEList()
 
     if CombatInfo.SV.cct.aoeNPCNormal then
         for k, v in pairs(CrowdControl.aoeNPCNormal) do
+            priority = priority + CrowdControlTracker.aoeTypesId[v]
             CrowdControlTracker.aoeTypesId[k] = priority
         end
         priority = priority + 1

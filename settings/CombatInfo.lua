@@ -1635,30 +1635,34 @@ function CombatInfo.CreateSettings()
                 setFunc = function(newValue) Settings.cct.unlocked = newValue if newValue then CrowdControlTracker:SetupDisplay("draw") end CrowdControlTracker:InitControls() end,
             },
             {
+                -- Enable Crowd Control Tracker
                 type = "checkbox",
-                name = "ADDON ENABLED",
-                tooltip = "ON - enabled, OFF - disabled",
+                name = GetString(SI_LUIE_LAM_CI_CCT_TOGGLE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_TOGGLE_TP),
                 default = Defaults.cct.enabled,
                 getFunc = function() return Settings.cct.enabled end,
                 setFunc = function(newValue) Settings.cct.enabled = newValue CrowdControlTracker:OnOff() end,
             },
             {
+                -- Enable only in PVP
                 type = "checkbox",
-                name = "Enabled only in PVP",
-                tooltip = "ON - enabled in PVP only, OFF - enabled everywhere",
+                name = GetString(SI_LUIE_LAM_CI_CCT_PVP_ONLY),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_PVP_ONLY_TP),
                 default = Defaults.cct.enabledOnlyInCyro,
                 disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return Settings.cct.enabledOnlyInCyro end,
                 setFunc = function(newValue) Settings.cct.enabledOnlyInCyro = newValue CrowdControlTracker:OnOff() end,
             },
             {
+                -- Display Options Header
                 type = "header",
-                name = "Display options",
+                name = GetString(SI_LUIE_LAM_CI_CCT_DISPLAY_HEADER),
             },
             {
+                -- Display Method
                 type = "dropdown",
-                name = "Choose display style:",
-                tooltip = '"Icon" to show only the icon, "text" to show just the text and "Both icon and text" to show both icon and text',
+                name = GetString(SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE),
                 choices = {"Both icon and text", "Icon only", "Text only"},
                 getFunc = function()
                     if Settings.cct.showOptions=="all" then
@@ -1683,18 +1687,20 @@ function CombatInfo.CreateSettings()
                     disabled = function() return not Settings.cct.enabled end,
             },
             {
+                -- Ability Name or CC Type
                 type = "checkbox",
-                name = "Use ability name as crowd control text",
-                tooltip = 'ON - ability name that produced the crowd control is shown, OFF - Crowd control type ("STUNNED", "FEARED" etc) text is shown',
+                name = GetString(SI_LUIE_LAM_CI_CCT_DISPLAY_NAME),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DISPLAY_NAME_TP),
                 default = Defaults.cct.useAbilityName,
                 disabled = function() return (not Settings.cct.enabled) or (Settings.cct.showOptions=="icon") end,
                 getFunc = function() return Settings.cct.useAbilityName end,
                 setFunc = function(newValue) Settings.cct.useAbilityName = newValue CrowdControlTracker:InitControls() end,
             },
             {
+                -- Icon and Text Scale
                 type = "slider",
-                name = "Set icon and text scale (%)",
-                tooltip = "Icon and text scale goes from 20% to 200% of original scale",
+                name = GetString(SI_LUIE_LAM_CI_CCT_SCALE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_SCALE_TP),
                 default = tonumber(string.format("%.0f", 100*Defaults.cct.controlScale)),
                 disabled = function() return not Settings.cct.enabled end,
                 min     = 20,
@@ -1708,9 +1714,10 @@ function CombatInfo.CreateSettings()
                 name = "Misc options",
             },
             {
+                -- Play Sound when CC'ed
                 type = "checkbox",
-                name = "Play sound on crowd control",
-                tooltip = "ON - play sound, OFF - do not play sound",
+                name = GetString(SI_LUIE_LAM_CI_CCT_SOUND),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_SOUND_TP),
                 default = Defaults.cct.playSound,
                 disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return Settings.cct.playSound end,
@@ -1719,9 +1726,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Show Stagger (Text Only)
                 type = "checkbox",
-                name = "Show staggered crowd control (text only)",
-                tooltip = "ON - show staggered crowd control, OFF - do not show staggered crowd control",
+                name = GetString(SI_LUIE_LAM_CI_CCT_STAGGER),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_STAGGER_TP),
                 default = Defaults.cct.showStaggered,
                 disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return Settings.cct.showStaggered end,
@@ -1734,9 +1742,10 @@ function CombatInfo.CreateSettings()
                 name = "Immuned state options",
             },
             {
+                -- Show when Immune
                 type = "checkbox",
-                name = "Show immuned",
-                tooltip = "ON - show the icon for incoming abilities you had been immuned to , OFF - don't not show immune icon",
+                name = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TOGGLE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TOGGLE_TP),
                 default = Defaults.cct.showImmune,
                 disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.showImmune end,
@@ -1745,9 +1754,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Show when Immune only in Cyrodiil
                 type = "checkbox",
-                name = "Show immuned only in Cyrodiil",
-                tooltip = "ON - show immuned crowd controls only in Cyrodiil , OFF - show immuned everywhere",
+                name = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_CYRODIIL),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_CYRODIIL_TP),
                 default = Defaults.cct.showImmuneOnlyInCyro,
                 disabled = function() return (not Settings.cct.enabled) or (not Settings.cct.showImmune) end,
                 getFunc = function() return Settings.cct.showImmuneOnlyInCyro end,
@@ -1756,9 +1766,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Set Immune Display Time (MS)
                 type = "slider",
-                name = "Set immuned display time (ms)",
-                tooltip = "Set display time for immuned events. 750ms is the recommended default value.",
+                name = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TIME),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TIME_TP),
                 default = Defaults.cct.immuneDisplayTime,
                 disabled = function() return (not Settings.cct.enabled) or (not Settings.cct.showImmune) end,
                 min     = 100,
@@ -1768,13 +1779,15 @@ function CombatInfo.CreateSettings()
                 setFunc = function(newValue) Settings.cct.immuneDisplayTime = newValue CrowdControlTracker:InitControls() end,
             },
             {
+                -- Crowd Control Color Options
                 type = "header",
-                name = "Colors options",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_HEADER_CC_COLOR),
             },
             {
+                -- Stun
                 type = "colorpicker",
-                name = "Pick color for STUNNED state",
-                tooltip = "Pick color of CC text, timer and icon border for STUNNED crowd control state",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STUN),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STUN)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_STUNNED])),
                 disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_STUNNED]) end,
@@ -1784,9 +1797,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Disorient
                 type = "colorpicker",
-                name = "Pick color for DISORIENTED state",
-                tooltip = "Pick color of CC text, timer and icon border for DISORIENTED crowd control state",
+                name = zGetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_DISORIENTED])),
                 disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_DISORIENTED]) end,
@@ -1796,9 +1810,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Silence
                 type = "colorpicker",
-                name = "Pick color for SILENCED state",
-                tooltip = "Pick color of CC text and icon border for SILENCED crowd control state",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SILENCE),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SILENCE)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_SILENCED])),
                 disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_SILENCED]) end,
@@ -1808,9 +1823,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Fear
                 type = "colorpicker",
-                name = "Pick color for FEARED state",
-                tooltip = "Pick color of CC text, timer and icon border for FEARED crowd control",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_FEAR),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_FEAR)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_FEARED])),
                 disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_FEARED]) end,
@@ -1820,9 +1836,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Stagger
                 type = "colorpicker",
-                name = "Pick color for STAGGERED state",
-                tooltip = "Pick color of CC text for STAGGERED crowd control",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STAGGER),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STAGGER)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_STAGGERED])),
                 disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_STAGGERED]) end,
@@ -1832,9 +1849,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Unbreakable
                 type = "colorpicker",
-                name = "Pick color for UNBREAKABLE cc",
-                tooltip = "Pick color of CC text for UNBREAKABLE crowd control",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_UNBREAKABLE),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_UNBREAKABLE)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors.unbreakable)),
                 disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return unpack(Settings.cct.colors.unbreakable) end,
@@ -1844,9 +1862,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Immune
                 type = "colorpicker",
-                name = "Pick color for IMMUNE state",
-                tooltip = "Pick color of CC text for IMMUNE crowd control",
+                name = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_CCT_IMMUNE)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_IMMUNE])),
                 disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_IMMUNE]) end,
@@ -1876,9 +1895,10 @@ function CombatInfo.CreateSettings()
             -- ArtOfShred addition start
             -- AOE DISPLAY OPTIONS
             {
+                -- Show AOE - Player Ultimate
                 type = "checkbox",
-                name = "Show AOE - Player Ultimates",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)),
                 default = Defaults.cct.aoePlayerUltimate,
                 disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoePlayerUltimate end,
@@ -1887,9 +1907,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Sound AOE - Player Ultimate
                 type = "checkbox",
-                name = "SOUND - aoePlayerUltimate",
-                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)),
                 width = "half",
                 default = Defaults.cct.aoePlayerUltimateSoundToggle,
                 disabled = function() return (not Settings.cct.enabled) end,
@@ -1912,9 +1933,10 @@ function CombatInfo.CreateSettings()
                 disabled = function() return (not Settings.cct.enabled) end,
             },
             {
+                -- Show AOE - Player Normal
                 type = "checkbox",
-                name = "Show AOE - Player Abilities",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)),
                 default = Defaults.cct.aoePlayerNormal,
                 disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoePlayerNormal end,
@@ -1923,9 +1945,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Sound AOE - Player Normal
                 type = "checkbox",
-                name = "SOUND - aoePlayerNormal",
-                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)),
                 width = "half",
                 default = Defaults.cct.aoePlayerNormalSoundToggle,
                 disabled = function() return (not Settings.cct.enabled) end,
@@ -1948,9 +1971,10 @@ function CombatInfo.CreateSettings()
                 disabled = function() return (not Settings.cct.enabled) end,
             },
             {
+                -- Show AOE - Player Set
                 type = "checkbox",
-                name = "Show AOE - Player Sets",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)),
                 default = Defaults.cct.aoePlayerSet,
                 disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoePlayerSet end,
@@ -1959,9 +1983,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Sound AOE - Player Set
                 type = "checkbox",
-                name = "SOUND - aoePlayerSet",
-                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)),
                 width = "half",
                 default = Defaults.cct.aoePlayerSetSoundToggle,
                 disabled = function() return (not Settings.cct.enabled) end,
@@ -1984,9 +2009,10 @@ function CombatInfo.CreateSettings()
                 disabled = function() return (not Settings.cct.enabled) end,
             },
             {
+                -- Show AOE - Trap
                 type = "checkbox",
-                name = "Show AOE - Traps",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)),
                 default = Defaults.cct.aoeTraps,
                 disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoeTraps end,
@@ -1995,9 +2021,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Sound AOE - Trap
                 type = "checkbox",
-                name = "SOUND - aoeTraps",
-                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)),
                 width = "half",
                 default = Defaults.cct.aoeTrapsSoundToggle,
                 disabled = function() return (not Settings.cct.enabled) end,
@@ -2020,9 +2047,10 @@ function CombatInfo.CreateSettings()
                 disabled = function() return (not Settings.cct.enabled) end,
             },
             {
+                -- Show AOE - NPC Boss
                 type = "checkbox",
-                name = "Show AOE - Dungeon/Trial Boss",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)),
                 default = Defaults.cct.aoeNPCBoss,
                 disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoeNPCBoss end,
@@ -2031,9 +2059,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Sound AOE - NPC Boss
                 type = "checkbox",
-                name = "SOUND - aoeNPCBoss",
-                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)),
                 width = "half",
                 default = Defaults.cct.aoeNPCBossSoundToggle,
                 disabled = function() return (not Settings.cct.enabled) end,
@@ -2056,9 +2085,10 @@ function CombatInfo.CreateSettings()
                 disabled = function() return (not Settings.cct.enabled) end,
             },
             {
+                -- Show AOE - NPC Elite
                 type = "checkbox",
-                name = "Show AOE - Quest Boss",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)),
                 default = Defaults.cct.aoeNPCElite,
                 disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoeNPCElite end,
@@ -2067,8 +2097,10 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Sound AOE - NPC Elite
                 type = "checkbox",
-                name = "SOUND - aoeNPCElite",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)),
                 tooltip = "Play a sound when you get your little boots scooted by some aoe.",
                 width = "half",
                 default = Defaults.cct.aoeNPCEliteSoundToggle,
@@ -2092,9 +2124,10 @@ function CombatInfo.CreateSettings()
                 disabled = function() return (not Settings.cct.enabled) end,
             },
             {
+                -- Show AOE - NPC Normal
                 type = "checkbox",
-                name = "Show AOE - Normal NPC",
-                tooltip = "ON - show the icon when damaged by specific AOE spells , OFF - don't not show AOE icon",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)),
                 default = Defaults.cct.aoeNPCNormal,
                 disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoeNPCNormal end,
@@ -2103,9 +2136,11 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
+                -- Sound AOE - NPC Normal
                 type = "checkbox",
                 name = "SOUND - aoeNPCNormal",
-                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)),
                 width = "half",
                 default = Defaults.cct.aoeNPCNormalSoundToggle,
                 disabled = function() return (not Settings.cct.enabled) end,
