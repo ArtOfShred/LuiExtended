@@ -5165,7 +5165,7 @@ LUIE.DebugAuras = {
 
     [38256] = true, -- Ransack (Ransack)
     [62474] = true, -- Major Fracture (Ransack)
-    [62475] = true, -- Minor Resolve (Ransack)
+    [62475] = true, -- Minor Protection (Ransack)
 
     [38250] = true, -- Pierce Armor (Pierce Armor)
     [62484] = true, -- Major Fracture (Pierce Armor)
@@ -5173,7 +5173,6 @@ LUIE.DebugAuras = {
 
     [28304] = true, -- Low Slash (Low Slash)
     [29308] = true, -- Minor Maim (Low Slash)
-    [28305] = true, -- Low Slash Snare (Low Slash)
 
     [38268] = true, -- Deep Slash (Deep Slash)
     [62495] = true, -- Minor Maim (Deep Slash)
@@ -5182,19 +5181,18 @@ LUIE.DebugAuras = {
 
     [38264] = true, -- Heroic Slash (Heroic Slash)
     [62504] = true, -- Minor Maim (Heroic Slash)
-    [38266] = true, -- Heroic Slash Snare (Heroic Slash)
     [62505] = true, -- Minor Heroism (Heroic Slash)
 
-    [28728] = true, -- Defensive Posture (Defensive Posture - All Morphs)
-    [41347] = true, -- Defensive Posture (Defensive Posture - All Morphs)
     [28727] = true, -- Defensive Posture (Defensive Posture)
+    [126604] = true, -- Defensive Posture (Defensive Posture)
 
+    [41347] = true, -- Defensive Stance (Defensive Stance)
     [38312] = true, -- Defensive Stance (Defensive Stance)
-    [38316] = true, -- Defensive Stance (Defensive Stance)
-    [38315] = true, -- Defensive Stance (Defensive Stance)
+    [126608] = true, -- Defensive Stance (Defensive Stance)
 
-    [38317] = true, -- Absorb Magic (Absorb Magic)
-    [38398] = true, -- Absorb Magic (Absorb Magic)
+    [38317] = true, -- Absorb Missile (Absorb Missile)
+    [38324] = true, -- Absorb Missile (Absorb Missile)
+    [38398] = true, -- Absorb Missile (Absorb Missile)
 
     [28719] = true, -- Shield Charge (Shield Charge)
     [28721] = true, -- Shield Charge (Shield Charge)
@@ -5211,14 +5209,13 @@ LUIE.DebugAuras = {
     [38407] = true, -- Invasion Stun (Invasion)
 
     [28365] = true, -- Power Bash (Power Bash)
-    [83433] = true, -- Power Bash (Power Bash)
 
     [38455] = true, -- Reverberating Bash (Reverberating Bash)
     [83446] = true, -- Reverberating Bash (Reverberating Bash)
-    [38838] = true, -- Major Defile (Reverberating Bash)
+    [125947] = true, -- Reverberating Bash (Reverberating Bash)
 
-    [80624] = true, -- Power Slam (Power Slam)
-    [80625] = true, -- Power Slam (Power Slam)
+    [80624] = true, -- Resentment (Power Slam)
+    [80625] = true, -- Resentment (Power Slam)
     [38452] = true, -- Power Slam (Power Slam)
 
     [83272] = true, -- Shield Wall (Shield Wall)

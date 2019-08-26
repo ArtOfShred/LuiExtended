@@ -700,9 +700,9 @@ LUIE.Data.Tooltips = {
 
     -- Sword and Shield
     Skill_Defensive_Posture                         = GetString(SI_LUIE_SKILL_DEFENSIVE_POSTURE_TP),
-    Skill_Defensive_Stance                          = GetString(SI_LUIE_SKILL_DEFENSIVE_STANCE_TP),
-    Skill_Absorb_Magic                              = GetString(SI_LUIE_SKILL_ABSORB_MAGIC_TP),
-    Skill_Power_Slam                                = GetString(SI_LUIE_SKILL_POWER_SLAM_TP),
+    Skill_Absorb_Missile                            = GetString(SI_LUIE_SKILL_ABSORB_MISSILE_TP),
+    Skill_Reverberating_Bash                        = GetString(SI_LUIE_SKILL_REVEBERATING_BASH_TP),
+    Skill_Resentment                                = GetString(SI_LUIE_SKILL_RESENTMENT_TP),
     Skill_Shield_Wall                               = GetString(SI_LUIE_SKILL_SHIELD_WALL_TP),
     Skill_Spell_Wall                                = GetString(SI_LUIE_SKILL_SPELL_WALL_TP),
     Skill_Shield_Discipline                         = GetString(SI_LUIE_SKILL_SHIELD_DISCIPLINE_TP),

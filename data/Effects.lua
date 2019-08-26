@@ -1186,9 +1186,8 @@ Effects.BarHighlightOverride = {
     [28719] = { newId = 28720 }, -- Shield Charge
     [38401] = { newId = 38404 }, -- Shielded Assault
     [38405] = { newId = 38407 }, -- Invasion
-    [28365] = { newId = 83433 }, -- Power Bash
-    [38455] = { newId = 38838, showFakeAura = true }, -- Reverberating Bash --> Major Defile
-    [38452] = { newId = 80625 }, -- Power Slam
+    [38455] = { newId = 83446 }, -- Reverberating Bash
+    [38452] = { newId = 80625 }, -- Power Slam --> Resentment
 
     ---------------------------
     -- Dual Wield -------------
@@ -2215,8 +2214,8 @@ Effects.EffectHideSCT = {
     -- One Hand and Shield
     ----------------------------
 
-    [28727] = true, -- Defensive Posture (Defensive Posture)
-    [38312] = true, -- Defensive Stance (Defensive Stance)
+    [126604] = true, -- Defensive Posture (Defensive Posture)
+    [126608] = true, -- Defensive Stance (Defensive Stance)
     [83301] = true, -- Spell Wall (Spell Wall)
 
     ----------------------------
@@ -5273,25 +5272,22 @@ Effects.EffectOverride = {
     -- Puncture / Ransack / Pierce Armor
     [28307] = { tooltip = Abilities.Skill_Puncture }, -- Major Fracture (Puncture)
     [62474] = { tooltip = Abilities.Skill_Ransack }, -- Major Fracture (Ransack)
-    [62475] = { tooltip = Abilities.Skill_Ransack }, -- Major Breach (Ransack)
+    [62475] = { tooltip = Abilities.Skill_Ransack }, -- Minor Protection (Ransack)
     [62484] = { tooltip = Abilities.Skill_Pierce_Armor }, -- Major Fracture (Pierce Armor)
     [62485] = { tooltip = Abilities.Skill_Pierce_Armor }, -- Major Breach (Pierce Armor)
 
     -- Low Slash / Deep Slash / Heroic Slash
     [29308] = { tooltip = Abilities.Skill_Low_Slash }, -- Minor Maim (Low Slash)
-    [28305] = { name = Abilities.Skill_Low_Slash, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 60 }, -- Low Slash Snare (Low Slash)
     [62495] = { tooltip = Abilities.Skill_Deep_Slash }, -- Minor Maim (Deep Slash)
-    [38271] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 60 }, -- Deep Slash (Deep Slash)
+    [38271] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Deep Slash (Deep Slash)
     [62504] = { tooltip = Abilities.Skill_Heroic_Slash }, -- Minor Maim (Heroic Slash)
-    [38266] = { name = Abilities.Skill_Heroic_Slash, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 60 }, -- Heroic Slash Snare (Heroic Slash)
     [62505] = { tooltip = Abilities.Skill_Heroic_Slash }, -- Minor Heroism (Heroic Slash)
 
     -- Defensive Posture / Defensive Stance / Absorb Magic
     [28727] = { tooltip = Tooltips.Skill_Defensive_Posture }, -- Defensive Posture (Defensive Posture)
-    [38312] = { tooltip = Tooltips.Skill_Defensive_Stance }, -- Defensive Stance (Defensive Stance)
-    [38315] = { tooltip = Tooltips.Generic_Stun }, -- Defensive Stance (Defensive Stance)
-    [38317] = { tooltip = Tooltips.Skill_Absorb_Magic }, -- Absorb Magic (Absorb Magic)
-    [38398] = { icon = 'esoui/art/icons/ability_1handed_004_b.dds' }, -- Absorb Magic (Absorb Magic)
+    [38312] = { tooltip = Tooltips.Skill_Defensive_Posture }, -- Defensive Stance (Defensive Stance)
+    [38317] = { tooltip = Tooltips.Skill_Absorb_Missile }, -- Absorb Missile (Absorb Missile)
+    [38398] = { icon = 'esoui/art/icons/ability_1handed_004_b.dds' }, -- Absorb Missile (Absorb Missile)
 
     -- Shield Charge / Shielded Assault / Invasion
     [28720] = { tooltip = Tooltips.Generic_Knockdown }, -- Shield Charge (Shield Charge)
@@ -5300,10 +5296,8 @@ Effects.EffectOverride = {
     [38407] = { name = Abilities.Skill_Invasion, tooltip = Tooltips.Generic_Knockdown }, -- Invasion (Invasion)
 
     -- Power Bash / Reverberating Bash / Power Slam
-    [83433] = { tooltip = Tooltips.Generic_Stun }, -- Power Bash (Power Bash)
-    [83446] = { tooltip = Tooltips.Generic_Stun }, -- Reverberating Bash (Reverberating Bash)
-    [38838] = { tooltip = Abilities.Skill_Reverberating_Bash }, -- Major Defile (Reverberating Bash)
-    [80625] = { tooltip = Tooltips.Skill_Power_Slam }, -- Power Slam (Power Slam)
+    [83446] = { tooltip = Tooltips.Skill_Reverberating_Bash }, -- Reverberating Bash (Reverberating Bash)
+    [80625] = { tooltip = Tooltips.Skill_Resentment }, -- Resentment (Power Slam)
 
     -- Shield Wall / Spell Wall / Shield Discipline
     [83272] = { tooltip = Tooltips.Skill_Shield_Wall }, -- Shield Wall (Shield Wall)

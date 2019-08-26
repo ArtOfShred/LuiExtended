@@ -44,7 +44,7 @@ local AbilityTables = {
     Skill_Major_Expedition            = 23216,
     --Skill_Minor_Gallop              =
     Skill_Major_Gallop                = 57472,
-    Skill_Minor_Heroism               = 38746,
+    Skill_Minor_Heroism               = 62505,
     Skill_Major_Heroism               = 61709,
     Skill_Minor_Toughness             = 46542,
     Skill_Minor_Courage               = 121878,
@@ -695,7 +695,6 @@ local AbilityTables = {
     Skill_Shield_Charge               = 28719,
     Skill_Invasion                    = 38405,
     Skill_Power_Bash                  = 28365,
-    Skill_Reverberating_Bash          = 38455,
 
     -- Dual Wield
     Skill_Twin_Slashes                = 28379,

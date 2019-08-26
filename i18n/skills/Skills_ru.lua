@@ -440,8 +440,8 @@ local strings = {
     SI_LUIE_SKILL_LOTUS_FLOWER_TP =                      "Your Light and Heavy Attacks heal you or an ally within |cFFFFFF28|r meters for |cFFFFFF20|r seconds. Fully charged Heavy Attacks restore three times the value.",
     SI_LUIE_SKILL_NATURES_GRASP_TP =                     "Исцеляет каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.\n\nХранитель получает |cFFFFFF3|r очка ульты, когда эффект заканчивается, если находится в бою.",
     SI_LUIE_SKILL_NATURES_GRASP_SELF_TP =                "Исцеляет каждую |cFFFFFF1|r секунду в течение |cFFFFFF<<1>>|r секунд.\n\nВы получаете |cFFFFFF3|r очка ульты, когда эффект заканчивается, если находитесь в бою.",
-    SI_LUIE_SKILL_SECLUDED_GROVE_TP =                    "Healing you and allies in the area every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.", -- TODO: Translate
-    SI_LUIE_SKILL_HEALING_THICKET_TP =                   "Every |cFFFFFF1|r second apply a |cFFFFFF4.1|r second duration heal over time effect on you and allies in the |cFFFFFF8|r meter radius of the healing forest.", -- TODO: Translate
+    SI_LUIE_SKILL_SECLUDED_GROVE_TP =                    "Healing you and allies in the |cFFFFFF8|r meter radius of the healing forest every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_HEALING_THICKET_TP =                   "Every |cFFFFFF1|r second apply a |cFFFFFF4|r second duration heal over time effect on you and allies in the |cFFFFFF8|r meter radius of the healing forest.",
     SI_LUIE_SKILL_IMPALING_SHARDS_TP =                   "Enemies in the area take Frost Damage and have their movement speed reduced by |cFFFFFF30|r% for |cFFFFFF3|r seconds every |cFFFFFF1|r second.\n\nThis ability has a higher chance to apply the Chilled status effect.",
     SI_LUIE_SKILL_CRYSTALLIZED_SHIELD_TP =               "Поглощает урон максимум |cFFFFFF3|r снарядов.\n\nКаждый раз при поглощении снаряда вы восстанавливаете Магии.",
     SI_LUIE_SKILL_CRYSTALLIZED_SLAB_TP =                 "Поглощает урон максимум |cFFFFFF3|r снарядов.\n\nКаждый раз при поглощении снаряда вы восстанавливаете Магии и запускаете обратно во врага ледяной шар, наносящий урон от Мороза.",
@@ -509,10 +509,10 @@ local strings = {
     SI_LUIE_SKILL_BERSERKER_RAGE_TP =                    "Увеличивает в течение |cFFFFFF<<1>>|r секунд Физическую и Магическую сопротивляемости на величину, равную проигнорированному способностью Berserker Rage сопротивлению цели.\n\nВы получаете иммунитет к обездвиживанию, замедлению и обезмолвливанию на время действия эффекта.",
 
     -- One Hand and Shield
-    SI_LUIE_SKILL_DEFENSIVE_POSTURE_TP =                 "Отражает обратной в противника следующий направленный в вас снаряд заклинания, выпущенный в течение |cFFFFFF<<1>>|r секунд.",
-    SI_LUIE_SKILL_DEFENSIVE_STANCE_TP =                  "Отражает обратной в противника следующий направленный в вас снаряд заклинания, выпущенный в течение |cFFFFFF<<1>>|r секунд.\n\nОтражённый снаряд оглушает цель на |cFFFFFF4|r секунды.",
-    SI_LUIE_SKILL_ABSORB_MAGIC_TP =                      "Поглощает урон следующего направленного в вас снаряда заклинания, выпущенный в течение |cFFFFFF<<1>>|r секунд и исцеляет вас на |cFFFFFF15|r% от вашего максимального запаса Здоровья.",
-    SI_LUIE_SKILL_POWER_SLAM_TP =                        "Ваше следующее применение способности Power Slam в течение |cFFFFFF<<1>>|r секунд наносит |cFFFFFF25|r% дополнительного урона.",
+    SI_LUIE_SKILL_DEFENSIVE_POSTURE_TP =                 "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nReflect the next projectile cast at you within |cFFFFFF6|r seconds. This effect can occur once per cast.",
+    SI_LUIE_SKILL_ABSORB_MISSILE_TP =                    "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nWhile the shield persists, you are healed the next time a projectile hits you. This effect can occur once per cast.",
+    SI_LUIE_SKILL_REVEBERATING_BASH_TP =                 "Stunned for |cFFFFFF<<1>>|r seconds. After the stun ends, take Physical Damage.",
+    SI_LUIE_SKILL_RESENTMENT_TP =                        "Increase the damage of your next Power Slam used within |cFFFFFF<<1>>|r seconds by |cFFFFFF5|r%.\n\nThis effect stacks up to |cFFFFFF10|r times and you gain a stack when blocking any attack.",
     SI_LUIE_SKILL_SHIELD_WALL_TP =                       "Автоматически блокирует все атаки в течение |cFFFFFF<<1>>|r секунд, не расходуя ресурсов.",
     SI_LUIE_SKILL_SPELL_WALL_TP =                        "Автоматически блокирует все атаки и отражает снаряды в течение |cFFFFFF<<1>>|r секунд, не расходуя ресурсов.",
     SI_LUIE_SKILL_SHIELD_DISCIPLINE_TP =                 "Автоматически блокирует все атаки в течение |cFFFFFF<<1>>|r секунд, не расходуя ресурсов.\n\nВаши способности из ветки Одноручного оружия и Щита расходуют на |cFFFFFF100|r% меньше ресурсов, пока активно.",
