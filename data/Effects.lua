@@ -4596,11 +4596,15 @@ Effects.EffectOverride = {
 
     -- Eclipse / Total Dark / Unstable Core
     [21776] = { tooltip = Tooltips.Skill_Eclipse }, -- Eclipse (Eclipse)
-    [22006] = { tooltip = Tooltips.Skill_Total_Dark }, -- Total Dark (Total Dark)
-    [63083] = { icon = 'esoui/art/icons/ability_templar_total_dark.dds' }, -- Total Dark (Total Dark)
-    [68729] = { icon = 'esoui/art/icons/ability_templar_total_dark.dds' }, -- Total Dark (Total Dark)
+    [127769] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Eclipse (Eclipse)
+    [127771] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_immobilize.dds', tooltip = Tooltips.Generic_Immobilize }, -- Eclipse (Eclipse)
+    [127772] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_stun.dds', tooltip = Tooltips.Generic_Stun }, -- Eclipse (Eclipse)
+    [22006] = { tooltip = Tooltips.Skill_Living_Dark }, -- Living Dark (Living Dark)
+    [127795] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_immobilize.dds', tooltip = Tooltips.Generic_Immobilize }, -- Living Dark (Living Dark)
     [22004] = { tooltip = Tooltips.Skill_Unstable_Core }, -- Unstable Core (Unstable Core)
-    [100210] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds' }, -- Eclipse (Unstable Core)
+    [127787] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Unstable Core (Unstable Core)
+    [127790] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_immobilize.dds', tooltip = Tooltips.Generic_Immobilize }, -- Unstable Core (Unstable Core)
+    [127788] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_stun.dds', tooltip = Tooltips.Generic_Stun }, -- Unstable Core (Unstable Core)
 
     -- Radiant Destruction / Radiant Glory / Radiant Oppression
     [63029] = { tooltip = Tooltips.Skill_Radiant_Destruction }, -- Radiant Destruction (Radiant Destruction)
