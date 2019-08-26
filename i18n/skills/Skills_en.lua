@@ -521,9 +521,10 @@ local strings = {
     SI_LUIE_SKILL_RENDING_SLASHES_TP =                   "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BLOOD_CRAZE_TP =                       "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF2|r seconds while Blood Craze remains active.",
     SI_LUIE_SKILL_BLOOD_CRAZE_HEAL_TP =                  "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds as long as Blood Craze remains active on your target.",
-    SI_LUIE_SKILL_BLADE_CLOAK_TP =                       "A ring of floating razors surrounds you, dealing Physical Damage to all nearby enemies every |cFFFFFF3|r seconds for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_BLADE_CLOAK_TP =                       "A ring of floating razors surrounds you, dealing Physical Damage to all nearby enemies every |cFFFFFF<<2>>|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_LACERATE_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage, your attacker heals for |cFFFFFF50|r% of the damage done.",
-    SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP =                   "Increase damage done by |cFFFFFF5|r% for each enemy hit by Thrive in Chaos, up to a maximum of |cFFFFFF30|r%.",
+    SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP =                   "Increase damage done by |cFFFFFF6|r% for each enemy hit by Thrive in Chaos, up to a maximum of |cFFFFFF36|r%.",
+    SI_LUIE_SKILL_FLYING_BLADE_TP =                      "Your attacker can jump to you within the next |cFFFFFF<<1>>|r seconds.",
 
     -- Bow
     SI_LUIE_SKILL_HAWK_EYE_TP =                          "Increase the damage of your Bow abilities by |cFFFFFF<<1>>|r% for |cFFFFFF5|r seconds, stacking up to |cFFFFFF5|r times.",

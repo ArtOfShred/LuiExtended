@@ -5317,7 +5317,7 @@ LUIE.DebugAuras = {
     [68807] = true, -- Major Brutality (Hidden Blade)
 
     [38914] = true, -- Shrouded Daggers (Shrouded Daggers)
-    [68859] = true, -- Major Brutality (Shrouded Daggers)
+    [126647] = true, -- Major Brutality (Shrouded Daggers)
     [68858] = true, -- Hit Dummy (Shrouded Daggers)
     [68860] = true, -- Bounce 1 (Shrouded Daggers)
     [68862] = true, -- Shrouded Daggers (Shrouded Daggers)
@@ -5325,7 +5325,10 @@ LUIE.DebugAuras = {
     [68864] = true, -- Shrouded Daggers (Shrouded Daggers)
 
     [38910] = true, -- Flying Blade (Flying Blade)
-    [68814] = true, -- Major Brutality (Flying Blade)
+    [126667] = true, -- Flying Blade (Flying Blade)
+    [126659] = true, -- Flying Blade (Flying Blade)
+    [126666] = true, -- Flying Blade (Flying Blade)
+    [126670] = true, -- Major Brutality (Flying Blade)
 
     [83600] = true, -- Lacerate (Lacerate)
     [85156] = true, -- Lacerate (Lacerate)

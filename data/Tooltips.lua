@@ -714,6 +714,7 @@ LUIE.Data.Tooltips = {
     Skill_Blade_Cloak                               = GetString(SI_LUIE_SKILL_BLADE_CLOAK_TP),
     Skill_Lacerate                                  = GetString(SI_LUIE_SKILL_LACERATE_TP),
     Skill_Thrive_in_Chaos                           = GetString(SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP),
+    Skill_Flying_Blade                              = GetString(SI_LUIE_SKILL_FLYING_BLADE_TP),
 
     -- Bow
     Skill_Hawk_Eye_Rank_1                           = zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 2),
