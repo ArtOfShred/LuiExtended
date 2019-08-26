@@ -602,6 +602,12 @@ Effects.EffectGroundDisplay = {
     [118814] = { buff = true, debuff = false, ground = false, icon = 'esoui/art/icons/ability_necromancer_016_b.dds' }, -- Enduring Undeath (Enduring Undeath)
 
     ---------------------------
+    -- Two-Handed -------------
+    ---------------------------
+
+    [38791] = { buff = false, debuff = false, ground = true }, -- Stampede (Stampede)
+
+    ---------------------------
     -- Bow --------------------
     ---------------------------
 
@@ -759,6 +765,12 @@ Effects.EffectCreateSkillAura = {
     [88761] = { consolidate = true, abilityId = 86130 }, -- Major Resolve --> Ice Fortress
     [88762] = { consolidate = true, abilityId = 86130 }, -- Major Ward --> Ice Fortress
     [87194] = { consolidate = true, abilityId = 86130 }, -- Minor Protection --> Ice Fortress
+
+    -- Two Handed
+    [61670] = { consolidate = true, abilityId = 28297 }, -- Major Brutality --> Momentum
+    [126527] = { consolidate = true, abilityId = 28297 }, -- Minor Endurance --> Momentum
+    [62387] =  { consolidate = true, abilityId = 38794 }, -- Major Brutality --> Forward Momentum
+    [126534] =  { consolidate = true, abilityId = 38794 }, -- Minor Endurance --> Forward Momentum
 
     -- Dual Wield
     [28613] = { alwaysShow = true, removeOnEnd = true, abilityId = 123651, consolidateNewIdExtended = true }, -- Blade Cloak (Blade Cloak) -- Fake ID for Major Evasion
@@ -1150,9 +1162,12 @@ Effects.BarHighlightOverride = {
     -- Two Handed -------------
     ---------------------------
 
+    [28297] = { newId = 61670 }, -- Momentum --> Major Brutality
+    [38794] = { newId = 38797 }, -- Forward Momentum
+
     [38814] = { newId = 38816 }, -- Dizzying Swing
     [38788] = { newId = 38791 }, -- Stampede
-    [38745] = { newId = 38747 }, -- Carve --> Carve Bleed
+    [38745] = { newId = 38747 }, -- Carve
     [38754] = { newId = 38763 }, -- Brawler
     [83216] = { newId = 83217 }, -- Berserker Strike
     [83229] = { newId = 83230 }, -- Onslaught
@@ -5145,9 +5160,9 @@ Effects.EffectOverride = {
     [30821] = { icon = 'LuiExtended/media/icons/abilities/ability_2handed_forceful.dds' }, -- Forceful (Rank 1)
     [45445] = { icon = 'LuiExtended/media/icons/abilities/ability_2handed_forceful.dds' }, -- Forceful (Rank 2)
     [29375] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_heavy_weapons.dds' }, -- Heavy Weapons (Rank 1)
-    [29383] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = Abilities.Passive_Heavy_Weapons, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Heavy Weapons Bleed (Rank 1)
+    [29383] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = Abilities.Passive_Heavy_Weapons, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Heavy Weapons Bleed (Rank 1)
     [45430] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_heavy_weapons.dds' }, -- Heavy Weapons (Rank 2)
-    [45431] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = Abilities.Passive_Heavy_Weapons, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Heavy Weapons Bleed (Rank 2)
+    [45431] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = Abilities.Passive_Heavy_Weapons, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Heavy Weapons Bleed (Rank 2)
     [29388] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_balanced_blade.dds' }, -- Balanced Blade (Rank 1)
     [45443] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_balanced_blade.dds' }, -- Balanced Blade (Rank 2)
     [29389] = { icon = 'LuiExtended/media/icons/abilities/passive_2handed_follow_up.dds' }, -- Follow Up (Follow Up - Rank 1)
@@ -5224,31 +5239,31 @@ Effects.EffectOverride = {
     [38818] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds' }, -- Dizzying Swing (Dizzying Swing)
 
     -- Critical Charge / Stampede / Critical Rush
-    [38791] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 60 }, -- Stampede (Stampede)
+    [38791] = { tooltip = Tooltips.Skill_Stampede }, -- Stampede (Stampede)
+    [126474] = { tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 1, groundLabel = true }, -- Stampede (Stampede)
 
     -- Cleave / Carve / Brawler
-    [38747] = { icon = 'esoui/art/icons/ability_2handed_002_a.dds', name = Abilities.Skill_Carve, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Carve Bleed (Carve)
+    [38747] = { tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Carve Bleed (Carve)
     [38763] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Brawler (Brawler)
 
     -- Reverse Slash / Reverse Slice / Executioner
     [38827] = { icon = 'esoui/art/icons/ability_2handed_004_b.dds' }, -- Reverse Slice (Reverse Slice)
 
     -- Momentum / Forward Momentum / Rally
-    [28297] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Momentum (Momentum)
-    [61670] = { consolidateExtra = true, tooltip = Abilities.Skill_Momentum }, -- Major Brutality (Momentum)
-    [28299] = { icon = 'esoui/art/icons/ability_2handed_005.dds' }, -- Momentum (Momentum)
-    [38794] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Forward Momentum (Forward Momentum)
-    [62387] = { consolidateExtra = true, tooltip = Abilities.Skill_Forward_Momentum }, -- Major Brutality (Forward Momentum)
+    [61670] = { consolidate = true, tooltip = Abilities.Skill_Momentum }, -- Major Brutality (Momentum)
+    [126527] = { consolidate = true, tooltip = Abilities.Skill_Momentum }, -- Minor Endurance (Momentum)
+    [62387] = { consolidate = true, tooltip = Abilities.Skill_Forward_Momentum }, -- Major Brutality (Forward Momentum)
+    [126534] = { consolidate = true, tooltip = Abilities.Skill_Forward_Momentum }, -- Minor Endurance (Forward Momentum)
     [38797] = { tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Forward Momentum (Forward Momentum)
-    [62385] = { icon = 'esoui/art/icons/ability_2handed_005_a.dds', name = Abilities.Skill_Forward_Momentum }, -- Momentum (Forward Momentum)
     [38802] = { tooltip = Tooltips.Skill_Rally }, -- Rally (Rally)
-    [62415] = { consolidateExtra = true, tooltip = Abilities.Skill_Rally }, -- Major Brutality (Rally)
-    [38805] = { icon = 'esoui/art/icons/ability_2handed_005_b.dds' }, -- Rally (Rally)
+    [62415] = { consolidate = true, tooltip = Abilities.Skill_Rally }, -- Major Brutality (Rally)
+    [126537] = { consolidate = true, tooltip = Abilities.Skill_Rally }, -- Minor Endurance (Rally)
 
     -- Berserker Strike / Onslaught / Berserker Rage
     [83217] = { tooltip = Tooltips.Skill_Berserker_Strike }, -- Berserker Strike (Berserker Strike)
+    [126497] = { icon = 'esoui/art/icons/ability_2handed_006_a.dds' }, -- Onslaught (Onslaught)
     [83230] = { tooltip = Tooltips.Skill_Onslaught }, -- Onslaught (Onslaught)
-    [83346] = { icon = 'esoui/art/icons/ability_2handed_006_a.dds' }, -- Onslaught (Onslaught)
+    [126492] = { icon = 'esoui/art/icons/ability_2handed_006_b.dds' }, -- Berserker Rage (Berserker Rage)
     [83239] = { tooltip = Tooltips.Skill_Berserker_Rage }, -- Berserker Rage (Berserker Rage)
 
     -----------------------------------------
@@ -11508,6 +11523,9 @@ Effects.AddGroundDamageAura = {
     [115385] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Life amid Death (Life amid Death)
     [118021] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Renewing Undeath (Renewing Undeath)
     [118813] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Enduring Undeath (Enduring Undeath)
+
+    -- Two-Handed
+    [126474] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Stampede (Stampede)
 
     -- Bow
     [28877] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Volley (Volley)

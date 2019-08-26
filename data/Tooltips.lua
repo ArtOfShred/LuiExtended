@@ -693,6 +693,7 @@ LUIE.Data.Tooltips = {
     Skill_Battle_Rush_Rank_1                        = zo_strformat(GetString(SI_LUIE_SKILL_BATTLE_RUSH_TP), 15),
     Skill_Battle_Rush_Rank_2                        = zo_strformat(GetString(SI_LUIE_SKILL_BATTLE_RUSH_TP), 30),
     Skill_Rally                                     = GetString(SI_LUIE_SKILL_RALLY_TP),
+    Skill_Stampede                                  = GetString(SI_LUIE_SKILL_STAMPEDE_TP),
     Skill_Berserker_Strike                          = GetString(SI_LUIE_SKILL_BERSERKER_STRIKE_TP),
     Skill_Onslaught                                 = GetString(SI_LUIE_SKILL_ONSLAUGHT_TP),
     Skill_Berserker_Rage                            = GetString(SI_LUIE_SKILL_BERSERKER_RAGE_TP),

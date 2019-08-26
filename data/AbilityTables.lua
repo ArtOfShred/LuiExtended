@@ -681,7 +681,6 @@ local AbilityTables = {
     Skill_Dizzying_Swing              = 38814,
     Skill_Stampede                    = 38788,
     Skill_Cleave                      = 20919,
-    Skill_Carve                       = 38745,
     Skill_Momentum                    = 28297,
     Skill_Forward_Momentum            = 38794,
     Skill_Rally                       = 38802,

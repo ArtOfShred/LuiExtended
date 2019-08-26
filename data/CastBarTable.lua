@@ -434,6 +434,12 @@ CastBarTable.IsCast = {
     [74151] = true, -- Stun (Hidden Pressure Vent)
     [92862] = true, -- Ringing Bell (Dreamer's Chime)
 
+    -- Nightblade
+    [33398] = true, -- Death Stroke (Nightblade)
+    [36508] = true, -- Incapacitating Strike (Nightblade)
+    [113105] = true, -- Incapacitating Strike (Nightblade)
+    [36514] = true, -- Soul Harvest (Nightblade)
+
     -- Sorcerer
     [43714] = true, -- Crystal Shard (Sorcerer)
     [46331] = true, -- Crystal Blast (Sorcerer)
@@ -475,6 +481,10 @@ CastBarTable.IsCast = {
     [28279] = true, -- Uppercut (Two Handed)
     [38814] = true, -- Dizzying Swing (Two Handed)
     [38807] = true, -- Wrecking Blow (Two Handed)
+
+    [83216] = true, -- Berserker Strike (Two Handed)
+    [83229] = true, -- Onslaught (Two Handed)
+    [83238] = true, -- Berserker Rage (Two Handed)
 
     -- Dual Wield
     [28607] = true, -- Flurry (Dual Wield)

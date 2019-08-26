@@ -5072,6 +5072,8 @@ LUIE.DebugAuras = {
     [38789] = true, -- Critical Strike (Stampede)
     [38792] = true, -- Stampede (Stampede)
     [38791] = true, -- Stampede (Stampede)
+    [126475] = true, -- Stampede (Stampede)
+    [126474] = true, -- Stampede (Stampede)
 
     [38778] = true, -- Critical Rush (Critical Rush)
     [38781] = true, -- Critical Strike (Critical Rush)
@@ -5098,31 +5100,32 @@ LUIE.DebugAuras = {
 
     [28297] = true, -- Momentum (Momentum)
     [61670] = true, -- Major Brutality (Momentum)
-    [28299] = true, -- Momentum (Momentum)
+    [126527] = true, -- Minor Endurance (Momentum)
 
     [38794] = true, -- Forward Momentum (Forward Momentum)
     [62387] = true, -- Major Brutality (Forward Momentum)
+    [126534] = true, -- Minor Endurance (Forward Momentum)
     [38797] = true, -- Forward Momentum (Forward Momentum)
-    [62385] = true, -- Momentum (Forward Momentum)
 
     [38802] = true, -- Rally (Rally)
     [62415] = true, -- Major Brutality (Rally)
+    [126537] = true, -- Minor Endurance (Rally)
     [60894] = true, -- Heal Buffer (Rally)
     [60895] = true, -- Heal Buff (Rally)
-    [38803] = true, -- Rally (Rally)
     [38805] = true, -- Rally (Rally)
 
     [83216] = true, -- Berserker Strike (Berserker Strike)
+    [126489] = true, -- Berserker Strike (Berserker Strike)
     [83217] = true, -- Berserker Strike (Berserker Strike)
     [83221] = true, -- Berserker Strike (Berserker Strike)
 
-    [83345] = true, -- Onslaught Passive (Onslaught)
-    [83346] = true, -- Onslaught (Onslaught)
     [83229] = true, -- Onslaught (Onslaught)
+    [126497] = true, -- Onslaught (Onslaught)
     [83230] = true, -- Onslaught (Onslaught)
     [83231] = true, -- Onslaught (Onslaught)
 
     [83238] = true, -- Berserker Rage (Berserker Rage)
+    [126492] = true, -- Berserker Rage (Berserker Rage)
     [83239] = true, -- Berserker Rage (Berserker Rage)
     [83240] = true, -- Berserker Rage (Berserker Rage)
     [83241] = true, -- Berserker Rage (Berserker Rage)

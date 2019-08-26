@@ -122,6 +122,9 @@ CrowdControl.aoePlayerNormal = {
     [62990] = true, -- Blockade of Storms
     [62951] = true, -- Blockade of Frost
 
+    -- Two-Handed
+    [126474] = true, -- Stampede
+
     -- Bow
     [28877] = true, -- Volley
     [38690] = true, -- Endless Hail

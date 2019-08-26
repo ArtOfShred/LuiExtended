@@ -502,9 +502,10 @@ local strings = {
     -- Two-Handed
     SI_LUIE_SKILL_FOLLOW_UP_TP =                         "Your next direct damage attack used within |cFFFFFF7|r seconds deals |cFFFFFF<<1>>|r% additional damage.",
     SI_LUIE_SKILL_BATTLE_RUSH_TP =                       "Increase Stamina Recovery by |cFFFFFF<<1>>|r% for |cFFFFFF10|r seconds.",
-    SI_LUIE_SKILL_RALLY_TP =                             "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds, and for additional Health when Rally expires.\n\nThe final heal is increased by up to |cFFFFFF564|r%, in proportion to the length of time Rally has been active.",
+    SI_LUIE_SKILL_RALLY_TP =                             "You heal when Rally ends. The final heal is increased by |cFFFFFF15|r% every |cFFFFFF1|r second, up to a maximum of |cFFFFFF300|r%.",
+    SI_LUIE_SKILL_STAMPEDE_TP =                          "Enemies in the |cFFFFFF5|r meter radius of sundered ground take Physical Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_BERSERKER_STRIKE_TP =                  "Increase Physical and Spell Resistance equal to the amount of the target hit by Berserker Strike for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_ONSLAUGHT_TP =                         "Increase Physical and Spell Resistance equal to the amount of the target hit by Onslaught for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_ONSLAUGHT_TP =                         "Your Direct Damage attacks ignore Physical and Spell Resistance equal to the amount of armor of the target hit by Onslaught for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BERSERKER_RAGE_TP =                    "Increase Physical and Spell Resistance equal to the amount of the target hit by Berserker Rage for |cFFFFFF<<1>>|r seconds.\n\nYou are immune to all disabling, snare, and immobilization effects for the duration.",
 
     -- One Hand and Shield
@@ -552,8 +553,8 @@ local strings = {
     SI_LUIE_SKILL_U_WALL_OF_ELEMENTS_GROUND_SHOCK =      "Taking Shock Damage every |cFFFFFF1|r second.\n\nIf you are Concussed you will be set Off Balance for |cFFFFFF7|r seconds.\n\nThe wall explodes when it expires, dealing additional Shock Damage.",
 
     -- Restoration Staff
-    SI_LUIE_SKILL_GRAND_HEALING =                        "Healing you and allies in the |cFFFFFF<<2>>|r meter area every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_HEALING_SPRINGS =                      "Healing you and allies in the |cFFFFFF<<2>>|r meter area every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nYou restore Magicka every time you or an ally is healed.",
+    SI_LUIE_SKILL_GRAND_HEALING =                        "Healing you and allies in the |cFFFFFF<<2>>|r meter area every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_HEALING_SPRINGS =                      "Healing you and allies in the |cFFFFFF<<2>>|r meter area every |cFFFFFF1|r second.\n\nYou restore Magicka every time you or an ally is healed.",
     SI_LUIE_SKILL_BLESSING_OF_RESTORATION =              "Blessing of Restoration",
     SI_LUIE_SKILL_HEALING_WARD =                         "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nWhile the shield persists, heal for |cFFFFFF33|r% of the shield's remaining strength every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_QUICK_SIPHON =                         "When you are healed by Minor Lifesteal, gain Minor Expedition for |cFFFFFF4|r seconds.",
