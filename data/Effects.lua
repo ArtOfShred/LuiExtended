@@ -785,7 +785,7 @@ Effects.EffectCreateSkillAura = {
     [88565] = { removeOnEnd = true, abilityId = 31531 }, -- Minor Lifesteal (Force Siphon)
     [88575] = { removeOnEnd = true, abilityId = 40109 }, -- Minor Lifesteal (Siphon Spirit)
     [88576] = { removeOnEnd = true, abilityId = 40109 }, -- Minor Lifesteal (Siphon Spirit)
-    [88606] = { removeOnEnd = true, abilityId = 40116 }, -- Minor Lifesteal (Quick Siphon)
+    [88606] = { alwaysShow = true, removeOnEnd = true, abilityId = 40116 }, -- Minor Lifesteal (Quick Siphon)
 
     -- Armor
     [63015] = { consolidate = true, extendedDisplay = true, abilityId = 29556 }, -- Major Evasion --> Evasion
@@ -1214,9 +1214,10 @@ Effects.BarHighlightOverride = {
     [29073] = { newId = 62648 }, -- Flame Touch (Destructive Touch)
     [29089] = { newId = 62722 }, -- Shock Touch (Destructive Touch)
     [29078] = { newId = 62692 }, -- Frost Touch (Destructive Touch)
-    [38985] = { newId = 62668 }, -- Flame Clench (Destructive Clench)
-    [38993] = { newId = 62733 }, -- Shock Clench (Destructive Clench)
-    [38989] = { newId = 62702 }, -- Frost Clench (Destructive Clench)
+
+    [38985] = { newId = 38987 }, -- Flame Clench (Destructive Clench)
+    [38989] = { newId = 38990 }, -- Frost Clench (Destructive Clench)
+
     [38944] = { newId = 62682 }, -- Flame Reach (Destructive Reach)
     [38978] = { newId = 62745 }, -- Shock Reach (Destructive Reach)
     [38970] = { newId = 62712 }, -- Frost Reach (Destructive Reach)
@@ -3378,7 +3379,7 @@ Effects.EffectOverride = {
     [85551] = { tooltip = Abilities.Set_Vampire_Cloak }, -- Minor Protection (Vampire's Cloak)
     [33514] = { icon = 'esoui/art/icons/perks_fighters_guild_003.dds', tooltip = Tooltips.Generic_Weapon_Damage_Duration }, -- Armor of the Veiled Heritance (of the Veiled Heritance)
     [33497] = { icon = 'esoui/art/icons/achievement_vvardenfel_035.dds' }, -- Thunderbug's Carapace (Thunderbug's)
-    [92762] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds', tooltip = Abilities.Set_Warrior_Poet }, -- Minor Toughness (Warrior-Poet's)
+    [92762] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', tooltip = Abilities.Set_Warrior_Poet }, -- Minor Toughness (Warrior-Poet's)
     [106865] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds', tooltip = Tooltips.Set_Grace_of_Gloom }, -- Grace of Gloom (Gloom-Graced)
     [106867] = { tooltip = Abilities.Set_Grace_of_Gloom }, -- Major Evasion (Gloom-Graced)
     [106868] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds' }, -- Grace of Gloom (Gloom-Graced)
@@ -3825,7 +3826,7 @@ Effects.EffectOverride = {
     [120011] = { tooltip = Tooltips.Skill_Engulfing_Flames_Dummy }, -- Engulfing Flames (Target Iron Atronach, Trial)
     [120018] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', name = Abilities.Set_Line_Breaker, tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_No_Dur }, -- Roar of Alkosh (Target Iron Atronach, Trial)
     [120012] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Target Iron Atronach, Trial)
-    [120020] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds' }, -- Minor Toughness (Target Iron Atronach, Trial)
+    [120020] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds' }, -- Minor Toughness (Target Iron Atronach, Trial)
     [120021] = { tooltip = Tooltips.Skill_War_Horn_Dummy }, -- Aggressive Horn (Target Iron Atronach, Trial)
     [120024] = { icon = 'LuiExtended/media/icons/abilities/ability_set_worm_cult.dds', tooltip = Tooltips.Set_Worms_Raiment }, -- Worm's Raiment (Target Iron Atronach, Trial)
     [120026] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = Tooltips.Set_Hircines_Veneer }, -- Hircine's Veneer (Target Iron Atronach, Trial)
@@ -4703,8 +4704,8 @@ Effects.EffectOverride = {
     [93054] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds' }, -- Nature's Gift (Nature's Gift - Rank 1)
     [93072] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds', name = Abilities.Passive_Natures_Gift }, -- Nature's Give (Nature's Gift - Rank 2)
     [93073] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_natures_gift.dds' }, -- Nature's Gift (Nature's Gift - Rank 2)
-    [88492] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds', tooltip = Abilities.Skill_Maturation }, -- Minor Toughness (Maturation - Rank 1)
-    [88509] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds', tooltip = Abilities.Skill_Maturation }, -- Minor Toughness (Maturation - Rank 2)
+    [88492] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', tooltip = Abilities.Skill_Maturation }, -- Minor Toughness (Maturation - Rank 1)
+    [88509] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', tooltip = Abilities.Skill_Maturation }, -- Minor Toughness (Maturation - Rank 2)
 
     ----------------------------------------------------------------
     -- WARDEN ACTIVE ABILITIES ------------------------------------
@@ -4782,6 +4783,7 @@ Effects.EffectOverride = {
     [85578] = { tooltip = Tooltips.Skill_Healing_Seed } , -- Healing Seed (Healing Seed)
     [85840] = { tooltip = Tooltips.Skill_Budding_Seeds } , -- Budding Seeds (Budding Seeds)
     [85925] = { name = Abilities.Skill_Budding_Seeds }, -- Budding Seeds (Budding Seeds)
+    [129434] = { tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, groundLabel = true }, -- Budding Seeds (Budding Seeds)
     [85845] = { tooltip = Tooltips.Skill_Corrupting_Pollen } , -- Corrupting Pollen (Corrupting Pollen)
     [85944] = { duration = 0, groundLabel = true, tooltip = Abilities.Skill_Corrupting_Pollen }, -- Major Defile (Corrupting Pollen)
 
@@ -4843,10 +4845,10 @@ Effects.EffectOverride = {
     [88802] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Winter's Revenge (Winter's Revenge)
 
     -- Arctic Wind / Polar Wind / Arctic Blast
-    [90833] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Arctic Wind (Arctic Wind)
-    [90835] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Polar Wind (Polar Wind)
+    [90833] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Arctic Wind (Arctic Wind)
+    [90835] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Polar Wind (Polar Wind)
     [86156] = { hide = true }, -- Artic Blast (Arctic Blast)
-    [90834] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Arctic Blast (Arctic Blast)
+    [90834] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Arctic Blast (Arctic Blast)
     [114875] = { name = Abilities.Skill_Arctic_Blast, tooltip = Tooltips.Generic_Stun }, -- Artic Blast Stun (Artic Blast)
 
     -- Crystallized Shield / Crystallized Slab / Shimmering Shield
@@ -5406,28 +5408,16 @@ Effects.EffectOverride = {
     [62951] = { groundLabel = true, tooltip = Tooltips.Skill_Wall_of_Elements_Ground_Frost }, -- Blockade of Frost
 
     -- Destructive Touch / Destructive Clench / Destructive Reach
-    [62648] = { name = Abilities.Skill_Flame_Touch, tooltip = Tooltips.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch) -- Fire
-    [38172] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = Abilities.Skill_Flame_Touch, tooltip = Tooltips.Skill_Flame_Touch_Alt, hideReduce = true }, -- Stun After Knockback Movement (Destructive Touch) -- Fire
-    [29075] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = Abilities.Skill_Flame_Touch }, -- Fire Touch (destruction) (Destructive Touch) -- Fire
-    [62722] = { tooltip = Tooltips.Skill_Shock_Touch }, -- Shock Touch (Destructive Touch)
-    [68536] = { tooltip = Tooltips.Skill_Shock_Touch_Alt, hideReduce = true }, -- Shock Touch (Destructive Touch)
-    [62692] = { tooltip = Tooltips.Skill_Frost_Touch }, -- Frost Touch (Destructive Touch)
-    [30450] = { icon = 'esoui/art/icons/ability_destructionstaff_005.dds', name = Abilities.Skill_Frost_Touch, tooltip = Tooltips.Skill_Frost_Touch_Alt, hideReduce = true }, -- Frost Touch (Destructive Touch) -- Frost
-    [62668] = { name = Abilities.Skill_Flame_Clench, tooltip = Tooltips.Skill_Flame_Touch }, -- Fire Clench (Destructive Clench) -- Fire
-    [38987] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = Abilities.Skill_Flame_Clench, tooltip = Tooltips.Skill_Flame_Touch_Alt, hideReduce = true }, -- Stun After Knockback Movement (Destructive Clench) -- Fire
+    [62648] = { name = Abilities.Skill_Flame_Touch, tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Fire Touch (Destructive Touch) -- Fire
+    [62722] = { tooltip = Tooltips.Generic_Shock, tooltipValue2 = 2 }, -- Shock Touch (Destructive Touch)
+    [62692] = { tooltip = Tooltips.Generic_Freeze, tooltipValue2 = 2 }, -- Frost Touch (Destructive Touch)
+    [38987] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = Abilities.Skill_Flame_Clench, tooltip = Tooltips.Generic_Knockback }, -- Stun After Knockback Movement (Destructive Clench) -- Fire
     [38986] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = Abilities.Skill_Flame_Clench }, -- Fire Touch (destruction) (Destructive Clench) -- Fire
-    [62733] = { tooltip = Tooltips.Skill_Shock_Touch }, -- Shock Clench (Destructive Clench) -- Shock
-    [68635] = { name = Abilities.Skill_Shock_Clench, tooltip = Tooltips.Skill_Shock_Touch_Alt, hideReduce = true }, -- Shock Touch (Destructive Clench) -- Shock
-    [62734] = { name = Abilities.Skill_Shock_Clench, hide = true }, -- Shock Clench Explosion (Destructive Clench) -- Shock
-    [62702] = { tooltip = Tooltips.Skill_Frost_Clench }, -- Frost Clench (Destructive Clench)
-    [38990] = { icon = 'esoui/art/icons/ability_destructionstaff_005_a.dds', name = Abilities.Skill_Frost_Clench, tooltip = Tooltips.Skill_Frost_Clench_Alt, hideReduce = true }, -- Deep Freeze (Destructive Clench) -- Frost
-    [62682] = { tooltip = Tooltips.Skill_Flame_Touch }, -- Flame Reach (Destructive Reach)
-    [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = Abilities.Skill_Flame_Reach, tooltip = Tooltips.Skill_Flame_Touch_Alt, hideReduce = true }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
-    [38945] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = Abilities.Skill_Flame_Reach }, -- Flame Reach (destruction) (Destructive Reach) -- Fire
-    [62745] = { tooltip = Tooltips.Skill_Shock_Touch }, -- Shock Reach (Destructive Reach) -- Shock
-    [68574] = { name = Abilities.Skill_Shock_Reach, tooltip = Tooltips.Skill_Shock_Touch_Alt, hideReduce = true }, -- Shock Touch (Destructive Reach) -- Shock
-    [62712] = { tooltip = Tooltips.Skill_Frost_Touch_Alt }, -- Frost Reach (Destructive Reach)
-    [38971] = { icon = 'esoui/art/icons/ability_destructionstaff_005_b.dds', name = Abilities.Skill_Frost_Reach, tooltip = Tooltips.Skill_Frost_Touch_Alt, hideReduce = true }, -- Frost Grip (Destructive Reach) -- Frost
+    [62734] = { name = Abilities.Skill_Shock_Clench }, -- Shock Clench Explosion (Destructive Clench) -- Shock
+    [38990] = { name = Abilities.Skill_Frost_Clench, tooltip = Tooltips.Generic_Immobilize }, -- Deep Freeze (Destructive Clench) -- Frost
+    [62682] = { tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Flame Reach (Destructive Reach)
+    [62745] = { tooltip = Tooltips.Generic_Shock, tooltipValue2 = 2 }, -- Shock Reach (Destructive Reach) -- Shock
+    [62712] = { tooltip = Tooltips.Generic_Freeze, tooltipValue2 = 2 }, -- Frost Reach (Destructive Reach)
 
     -- Weakness to Elements / Elemental Susceptibility / Elemental Drain
     [53881] = { consolidate = true, tooltip = Abilities.Skill_Weakness_to_Elements }, -- Major Breach (Weakness to Elements)
@@ -5470,18 +5460,18 @@ Effects.EffectOverride = {
     -----------------------------------------
 
     -- Grand Healing / Illustrious Healing / Healing Springs
-    [28385] = { tooltip = Tooltips.Skill_Secluded_Grove }, -- Grand Healing (Grand Healing)
+    [28385] = { tooltip = Tooltips.Skill_Grand_Healing, tooltipValue2 = 8 }, -- Grand Healing (Grand Healing)
     [28386] = { icon = 'esoui/art/icons/ability_restorationstaff_004.dds', tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, groundLabel = true }, -- Grand Healing (Grand Healing)
-    [40058] = { tooltip = Tooltips.Skill_Secluded_Grove }, -- Illustrious Healing (Illustrious Healing)
+    [40058] = { tooltip = Tooltips.Skill_Grand_Healing, tooltipValue2 = 8 }, -- Illustrious Healing (Illustrious Healing)
     [40059] = { icon = 'esoui/art/icons/ability_restorationstaff_004b.dds', tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, groundLabel = true }, -- Illustrious Healing (Illustrious Healing)
-    [40060] = { tooltip = Tooltips.Skill_Secluded_Grove }, -- Healing Springs (Healing Springs)
+    [40060] = { tooltip = Tooltips.Skill_Healing_Springs, tooltipValue2 = 8 }, -- Healing Springs (Healing Springs)
     [40061] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds', tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1, groundLabel = true }, -- Healing Springs (Healing Springs)
     [40062] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs)
 
     -- Regeneration / Rapid Regeneration / Mutagen
     [28536] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Regeneration (Regeneration)
-    [40076] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1.5 }, -- Rapid Regeneration (Rapid Regeneration)
-    [40079] = { tooltip = Tooltips.Skill_Mutagen }, -- Mutagen (Mutagen)
+    [40076] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Rapid Regeneration (Rapid Regeneration)
+    [40079] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Radiating Regeneration (Radiating Regeneration)
 
     -- Blessing of Protection / Blessing of Restoration / Combat Prayer
     [37243] = { hide = true }, -- Blessing of Protection (Blessing of Protection)
@@ -5500,7 +5490,6 @@ Effects.EffectOverride = {
     [40130] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ward Ally (Ward Ally)
     [40132] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ward Ally (Ward Ally)
     [40126] = { tooltip = Tooltips.Skill_Healing_Ward }, -- Healing Ward (Healing Ward)
-    [40128] = { hide = true }, -- Healing Ward (Healing Ward)
 
     -- Force Siphon / Siphon Spirit / Quick Siphon
     [88565] = { consolidate = true, tooltip = Abilities.Skill_Force_Siphon }, -- Minor Lifesteal (Force Siphon)
@@ -5509,8 +5498,10 @@ Effects.EffectOverride = {
     [88576] = { consolidate = true, tooltip = Abilities.Skill_Siphon_Spirit }, -- Minor Magickasteal (Siphon Spirit)
     [40110] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Siphon Spirit)
     [40114] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Lifesteal (Siphon Spirit)
+    [40116] = { tooltip = Tooltips.Skill_Quick_Siphon }, -- Quick Siphon (Quick Siphon)
     [88606] = { consolidate = true, tooltip = Abilities.Skill_Quick_Siphon }, -- Minor Lifesteal (Quick Siphon)
     [40117] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds' }, -- Minor Lifesteal (Quick Siphon)
+    [125901] = { tooltip = Abilities.Skill_Quick_Siphon }, -- Minor Expedition (Quick Siphon)
 
     -- Panacea / Life Giver / Light's Champion
     [83552] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Panacea (Panacea)
@@ -11485,6 +11476,8 @@ Effects.AddGroundDamageAura = {
     [21759] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Solar Disturbance
 
     -- Warden
+    [129434] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Budding Seeds (Budding Seeds)
+
     [85534] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Secluded Grove (Secluded Grove)
     [88747] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Enchanted Forest (Enchanted Forest)
     [88783] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Impaling Shards (Impaling Shards)

@@ -750,8 +750,10 @@ LUIE.Data.Tooltips = {
     Skill_Eye_of_Frost                              = zo_strformat(GetString(SI_LUIE_SKILL_EYE_OF_THE_STORM_TP), GetString(SI_DAMAGETYPE6)),
 
     -- Restoration Staff
-    Skill_Mutagen                                   = GetString(SI_LUIE_SKILL_MUTAGEN),
+    Skill_Grand_Healing                             = GetString(SI_LUIE_SKILL_GRAND_HEALING),
+    Skill_Healing_Springs                           = GetString(SI_LUIE_SKILL_HEALING_SPRINGS),
     Skill_Healing_Ward                              = GetString(SI_LUIE_SKILL_HEALING_WARD),
+    Skill_Quick_Siphon                              = GetString(SI_LUIE_SKILL_QUICK_SIPHON),
     Skill_Lights_Champion                           = GetString(SI_LUIE_SKILL_LIGHTS_CHAMPION),
 
     ----------------------------------------------------------------

@@ -488,10 +488,6 @@ CastBarTable.IsCast = {
     [83465] = true, -- Rapid Fire (Bow)
     [85257] = true, -- Toxic Barrage (Bow)
 
-    -- Restoration Staff
-    [31531] = true, -- Force Siphon (Restoration Staff)
-    [40109] = true, -- Siphon Spirit (Restoration Staff)
-
     -- Soul Magic
     [39270] = true, -- Soul Strike (Soul Magic)
     [40420] = true, -- Soul Assault (Soul Magic)

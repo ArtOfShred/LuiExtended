@@ -4400,6 +4400,7 @@ LUIE.DebugAuras = {
     [85841] = true, -- Budding Seeds (Budding Seeds)
     [85922] = true, -- Budding Seeds (Budding Seeds)
     [85925] = true, -- Budding Seeds Heal (Budding Seeds)
+    [129434] = true, -- Budding Seeds (Budding Seeds)
 
     [85845] = true, -- Corrupting Pollen (Corrupting Pollen)
     [85847] = true, -- Corrupting Pollen Dummy (Corrupting Pollen)
@@ -5596,39 +5597,27 @@ LUIE.DebugAuras = {
     [29091] = true, -- Destructive Touch (Destructive Touch)
     [29073] = true, -- Flame Touch (Destructive Touch) -- Fire
     [62648] = true, -- Fire Touch (Destructive Touch) -- Fire
-    [38172] = true, -- Stun After Knockback Movement (Destructive Touch) -- Fire
-    [29075] = true, -- Fire Touch (destruction) (Destructive Touch) -- Fire
     [29089] = true, -- Shock Touch (Destructive Touch) -- Shock
     [62722] = true, -- Shock Touch (Destructive Touch) -- Shock
-    [68536] = true, -- Shock Touch (Destructive Touch) -- Shock
     [29078] = true, -- Frost Touch (Destructive Touch) -- Frost
     [62692] = true, -- Frost Touch (Destructive Touch) -- Frost
-    [30450] = true, -- Deep Freeze (Destructive Touch) -- Frost
 
     [38984] = true, -- Destructive Clench (Destructive Clench)
     [38985] = true, -- Flame Clench (Destructive Clench) -- Fire
-    [62668] = true, -- Fire Clench (Destructive Clench) -- Fire
     [38987] = true, -- Stun After Knockback Movement (Destructive Clench) -- Fire
     [38986] = true, -- Fire Touch (destruction) (Destructive Clench) -- Fire
     [38993] = true, -- Shock Clench (Destructive Clench) -- Shock
-    [62733] = true, -- Shock Clench (Destructive Clench) -- Shock
-    [68635] = true, -- Shock Touch (Destructive Clench) -- Shock
     [62734] = true, -- Shock Clench Explosion (Destructive Clench) -- Shock
     [38989] = true, -- Frost Clench (Destructive Clench) -- Frost
-    [62702] = true, -- Frost Clench (Destructive Clench) -- Frost
     [38990] = true, -- Deep Freeze (Destructive Clench) -- Frost
 
     [38937] = true, -- Destructive Reach (Destructive Reach)
     [38944] = true, -- Flame Reach (Destructive Reach) -- Fire
     [62682] = true, -- Flame Reach (Destructive Reach) -- Fire
-    [38946] = true, -- Stun After Knockback Movement (Destructive Reach) -- Fire
-    [38945] = true, -- Flame Reach (destruction) (Destructive Reach) -- Fire
     [38978] = true, -- Shock Reach (Destructive Reach) -- Shock
     [62745] = true, -- Shock Reach (Destructive Reach) -- Shock
-    [68574] = true, -- Shock Touch (Destructive Reach) -- Shock
     [38970] = true, -- Frost Reach (Destructive Reach) -- Frost
     [62712] = true, -- Frost Reach (Destructive Reach) -- Frost
-    [38971] = true, -- Frost Grip (Destructive Reach) -- Frost
 
     [29173] = true, -- Weakness to Elements (Weakness to Elements)
     [53881] = true, -- Major Spell Shatter (Weakness to Elements)
@@ -5727,13 +5716,17 @@ LUIE.DebugAuras = {
     [52515] = true, -- Grand Healing Fx (Grand Healing - All Morphs)
     [28385] = true, -- Grand Healing (Grand Healing)
     [28386] = true, -- Grand Healing (Grand Healing)
+    [125846] = true, -- Grand Healing (Grand Healing)
 
     [40058] = true, -- Illustrious Healing (Illustrious Healing)
     [40059] = true, -- Illustrious Healing (Illustrious Healing)
+    [125848] = true, -- Illustrious Healing (Illustrious Healing)
 
     [40060] = true, -- Healing Springs (Healing Springs)
     [40061] = true, -- Healing Springs (Healing Springs)
     [40062] = true, -- Healing Springs (Healing Springs)
+    [125851] = true, -- Healing Springs (Healing Springs)
+    [125855] = true, -- Healing Springs (Healing Springs)
 
     [46257] = true, -- Regeneration (Regeneration)
     [28536] = true, -- Regeneration (Regeneration)
@@ -5743,10 +5736,9 @@ LUIE.DebugAuras = {
     [40076] = true, -- Rapid Regeneration (Rapid Regeneration)
     [57466] = true, -- Rapid Regeneration Dummy (Rapid Regeneration)
 
-    [46266] = true, -- Mutagen (Mutagen)
-    [40079] = true, -- Mutagen (Mutagen)
-    [40081] = true, -- Mutagen (Mutagen)
-    [57468] = true, -- Mutagen Dummy (Mutagen)
+    [46266] = true, -- Radiating Regeneration (Radiating Regeneration)
+    [40079] = true, -- Radiating Regeneration (Radiating Regeneration)
+    [57468] = true, -- Medicament (Radiating Regeneration)
 
     [37243] = true, -- Blessing of Protection (Blessing of Protection)
     [37247] = true, -- Minor Resolve (Blessing of Protection)
@@ -5792,6 +5784,7 @@ LUIE.DebugAuras = {
     [40116] = true, -- Quick Siphon (Quick Siphon)
     [88606] = true, -- Minor Lifesteal (Quick Siphon)
     [40117] = true, -- Minor Lifesteal (Quick Siphon)
+    [125901] = true, -- Minor Expedition (Quick Siphon)
 
     [83552] = true, -- Panacea (Panacea)
     [83844] = true, -- Panacea (Panacea)
