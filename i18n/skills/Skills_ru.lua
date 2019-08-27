@@ -528,9 +528,7 @@ local strings = {
 
     -- Bow
     SI_LUIE_SKILL_HAWK_EYE_TP =                          "Increase the damage of your Bow abilities by |cFFFFFF<<1>>|r% for |cFFFFFF5|r seconds, stacking up to |cFFFFFF5|r times.",
-    SI_LUIE_SKILL_VOLLEY_TP =                            "Arrows rain down from the sky, dealing Physical Damage to enemies in the target area every |cFFFFFF0.5|r seconds.",
-    SI_LUIE_SKILL_ENDLESS_HAIL_TP =                      "Arrows rain down from the sky, dealing Physical Damage to enemies in the target area every |cFFFFFF0.5|r seconds.",
-    SI_LUIE_SKILL_DRAINING_SHOT_TP =                     "Stunned for |cFFFFFF<<1>>|r seconds.\n\nWhen the stun ends, your attacker heals.",
+    SI_LUIE_SKILL_VOLLEY_TP =                            "Arrows rain down from the sky, dealing Physical Damage to enemies in the target |cFFFFFF<<1>>|r meter radius every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_BOMBARD_TP =                           "Immobilized and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POISON_INJECTION_TP =                  "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF100|r% more damage in proportion to your missing health under |cFFFFFF50|r%.",
     SI_LUIE_SKILL_BALLISTA_TP =                          "Your ballista turret unleashes a barrage of arrows, dealing Physical Damage over |cFFFFFF<<1>>|r seconds.",
@@ -567,7 +565,15 @@ local strings = {
     ----------------------------------------------------------------
 
     -- Light Armor
-    SI_LUIE_SKILL_HARNESS_MAGICKA =                      "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nWhile active, up to three times when spell damage is absorbed, you restore Magicka.",
+    SI_LUIE_SKILL_HARNESS_MAGICKA =                      "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nWhile active, whenever the shield absorbs damage, you restore Magicka. This effect can occur up to |cFFFFFF3|r times.",
+
+    -- Medium Armor
+    SI_LUIE_SKILL_ELUDE =                                "When you take damage from a direct area of effect attack, you gain Major Expedition for |cFFFFFF1|r second per piece of Medium Armor worn.",
+
+    -- Heavy Armor
+    SI_LUIE_SKILL_UNSTOPPABLE =                          "Immune to knockback and disabling effects for |cFFFFFF<<1>>|r seconds.\n\nMovement Speed reduced by |cFFFFFF65|r% for the duration.",
+    SI_LUIE_SKILL_UNSTOPPABLE_BRUTE =                    "Each piece of Heavy Armor worn decreases the cost of Break Free by |cFFFFFF5|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_IMMOVABLE =                            "Immune to knockback and disabling effects for |cFFFFFF<<1>>|r seconds.\n\nMovement Speed reduced by |cFFFFFF65|r% for the duration.\n\nEach piece of Heavy Armor worn increases the amount of damage you block and the potency of the snare by |cFFFFFF5|r%.",
 
     ----------------------------------------------------------------
     -- WORLD SKILLS ------------------------------------------------

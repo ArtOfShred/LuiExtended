@@ -720,8 +720,6 @@ LUIE.Data.Tooltips = {
     Skill_Hawk_Eye_Rank_1                           = zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 2),
     Skill_Hawk_Eye_Rank_2                           = zo_strformat(GetString(SI_LUIE_SKILL_HAWK_EYE_TP), 5),
     Skill_Volley                                    = GetString(SI_LUIE_SKILL_VOLLEY_TP),
-    Skill_Endless_Hail                              = GetString(SI_LUIE_SKILL_ENDLESS_HAIL_TP),
-    Skill_Draining_Shot                             = GetString(SI_LUIE_SKILL_DRAINING_SHOT_TP),
     Skill_Bombard                                   = GetString(SI_LUIE_SKILL_BOMBARD_TP),
     Skill_Poison_Injection                          = GetString(SI_LUIE_SKILL_POISON_INJECTION_TP),
     Skill_Ballista                                  = GetString(SI_LUIE_SKILL_BALLISTA_TP),
@@ -765,6 +763,14 @@ LUIE.Data.Tooltips = {
 
     -- Light Armor
     Skill_Harness_Magicka                           = GetString(SI_LUIE_SKILL_HARNESS_MAGICKA),
+
+    -- Medium Armor
+    Skill_Elude                                     = GetString(SI_LUIE_SKILL_ELUDE),
+
+    -- Heavy Armor
+    Skill_Unstoppable                               = GetString(SI_LUIE_SKILL_UNSTOPPABLE),
+    Skill_Unstoppable_Brute                         = GetString(SI_LUIE_SKILL_UNSTOPPABLE_BRUTE),
+    Skill_Immovable                                 = GetString(SI_LUIE_SKILL_IMMOVABLE),
 
     ----------------------------------------------------------------
     -- WORLD SKILLS ------------------------------------------------

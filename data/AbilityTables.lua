@@ -709,7 +709,6 @@ local AbilityTables = {
     Skill_Hasty_Retreat               = 30923,
     Skill_Lethal_Arrow                = 38685,
     Skill_Focused_Aim                 = 38687,
-    Skill_Magnum_Shot                 = 38672,
     Skill_Draining_Shot               = 38669,
     Skill_Bombard                     = 38705,
     Skill_Venom_Arrow                 = 38645,
@@ -724,9 +723,9 @@ local AbilityTables = {
     Skill_Elude                       = 39192,
 
     -- Heavy Armor
-    Skill_Immovable                   = 29553,
-    Skill_Immovable_Brute             = 39205,
-    Skill_Unstoppable                 = 63118,
+    Skill_Unstoppable                 = 29553,
+    Skill_Unstoppable_Brute           = 39205,
+    Skill_Immovable                   = 63118,
 
     -- ---------------------------------------------------
     -- VAMPIRE SKILLS ------------------------------------

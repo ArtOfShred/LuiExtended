@@ -5867,7 +5867,6 @@ LUIE.DebugAuras = {
     [39188] = true, -- Dampen Magic (Dampen Magic)
     [39186] = true, -- Dampen Magic (Dampen Magic)
 
-    [66881] = true, -- Harness Magicka Bonus (Harness Magicka)
     [39182] = true, -- Harness Magicka (Harness Magicka)
     [39184] = true, -- Harness Magicka (Harness Magicka)
     [60968] = true, -- Harness Magicka Counter (Harness Magicka)
@@ -5881,24 +5880,28 @@ LUIE.DebugAuras = {
     [39196] = true, -- Shuffle (Shuffle)
 
     [39192] = true, -- Elude (Elude)
+    [126958] = true, -- Elude (Elude)
     [63030] = true, -- Major Evasion (Elude)
+    [126957] = true, -- Major Expedition (Elude)
 
     -- HEAVY ARMOR
-    [29552] = true, -- Immovable (Immovable)
-    [29553] = true, -- Immovable (Immovable)
-    [63084] = true, -- Major Resolve (Immovable)
-    [63085] = true, -- Major Ward (Immovable)
+    [29552] = true, -- Unstoppable (Unstoppable)
+    [63084] = true, -- Major Resolve (Unstoppable)
+    [63085] = true, -- Major Ward (Unstoppable)
+    [29553] = true, -- Unstoppable (Unstoppable)
+    [126581] = true, -- Unstoppable (Unstoppable)
 
-    [63080] = true, -- Immovable Brute (Immovable Brute)
-    [39205] = true, -- Immovable Brute (Immovable Brute)
-    [63133] = true, -- Immovable Brute (Immovable Brute)
-    [63134] = true, -- Major Resolve (Immovable Brute)
-    [63135] = true, -- Major Ward (Immovable Brute)
+    [39205] = true, -- Unstoppable Brute (Unstoppable Brute)
+    [63134] = true, -- Major Resolve (Unstoppable Brute)
+    [63135] = true, -- Major Ward (Unstoppable Brute)
+    [63133] = true, -- Unstoppable Brute (Unstoppable Brute)
+    [126582] = true, -- Unstoppable (Unstoppable)
 
-    [39197] = true, -- Unstoppable (Unstoppable)
-    [63118] = true, -- Unstoppable (Unstoppable)
-    [63119] = true, -- Major Resolve (Unstoppable)
-    [63120] = true, -- Major Ward (Unstoppable)
+    [39197] = true, -- Immovable (Immovable)
+    [63119] = true, -- Major Resolve (Immovable)
+    [63120] = true, -- Major Ward (Immovable)
+    [63118] = true, -- Immovable (Immovable)
+    [126583] = true, -- Immovable (Immovable)
 
     -------------------------------------
     -- LEGERDEMAIN PASSIVES -------------

@@ -802,13 +802,7 @@ Effects.EffectCreateSkillAura = {
     -- Armor
     [63015] = { consolidate = true, extendedDisplay = true, abilityId = 29556 }, -- Major Evasion --> Evasion
     [63019] = { consolidate = true, extendedDisplay = true, abilityId = 39195 }, -- Major Evasion --> Shuffle
-    [63030] = { consolidate = true, extendedDisplay = true, abilityId = 39192 }, -- Major Evasion --> Elude
-    [63084] = { consolidate = true, abilityId = 29552 }, -- Major Resolve --> Immovable
-    [63085] = { consolidate = true, abilityId = 29552 }, -- Major Ward --> Immovable
-    [63134] = { consolidate = true, abilityId = 39205 }, -- Major Resolve --> Immovable Brute
-    [63135] = { consolidate = true, abilityId = 39205 }, -- Major Ward --> Immovable Brute
-    [63119] = { consolidate = true, abilityId = 39197 }, -- Major Resolve --> Unstoppable
-    [63120] = { consolidate = true, abilityId = 39197 }, -- Major Ward --> Unstoppable
+    [63030] = { alwaysShow = true, abilityId = 39192 }, -- Major Evasion --> Elude
 
     -- Fighters Guild
     [64509] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999004 }, -- Major Savagery --> Expert Hunter
@@ -1210,9 +1204,9 @@ Effects.BarHighlightOverride = {
 
     [38685] = { newId = 38686, showFakeAura = true }, -- Lethal Arrow --> Minor Defile
     [38687] = { newId = 38688 }, -- Focused Aim
-    [28879] = { newId = 28887 }, -- Scatter Shot
-    [38672] = { newId = 38674 }, -- Magnum Shot
-    [38669] = { newId = 38670 }, -- Draining Shot
+    [28879] = { newId = 28888 }, -- Scatter Shot
+    [38672] = { newId = 38675 }, -- Magnum Shot
+    [38669] = { newId = 38671 }, -- Draining Shot
     [38705] = { newId = 38706 }, -- Bombard
     [38701] = { newId = 38703 }, -- Acid Spray
     [28869] = { newId = 44540 }, -- Poison Arrow
@@ -1265,10 +1259,10 @@ Effects.BarHighlightOverride = {
 
     [29556] = { newId = 63015, showFakeAura = true, noRemove = true }, -- Evasion --> Major Evasion
     [39195] = { newId = 63019, showFakeAura = true, noRemove = true }, -- Shuffle  --> Major Evasion
-    [39192] = { newId = 63030, showFakeAura = true, noRemove = true }, -- Elude --> Major Evasion
-    [29552] = { showFakeAura = true, noRemove = true }, -- Immovable
-    [39205] = { showFakeAura = true, noRemove = true }, -- Immovable Brute
-    [39197] = { showFakeAura = true, noRemove = true }, -- Unstoppable
+    [39192] = { newId = 126958, showFakeAura = true, noRemove = true }, -- Elude --> Major Evasion
+    [29552] = { newId = 29553 }, -- Immovable
+    [39205] = { newId = 63133 }, -- Immovable Brute
+    [39197] = { newId = 63118 }, -- Unstoppable
 
     ---------------------------
     -- Vampire ----------------
@@ -5395,17 +5389,17 @@ Effects.EffectOverride = {
     [38688] = { tooltip = Abilities.Skill_Focused_Aim }, -- Minor Fracture (Focused Aim)
 
     -- Volley / Endless Hail / Arrow Barrage
-    [28876] = { tooltip = Tooltips.Skill_Volley }, -- Volley (Volley)
-    [28877] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 0.5 }, -- Volley (Volley)
-    [38689] = { tooltip = Tooltips.Skill_Endless_Hail }, -- Endless Hail (Endless Hail)
-    [38690] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 0.5 }, -- Endless Hail (Endless Hail)
-    [38695] = { tooltip = Tooltips.Skill_Volley }, -- Arrow Barrage (Arrow Barrage)
-    [38696] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 0.5 }, -- Arrow Barrage (Arrow Barrage)
+    [28876] = { tooltip = zo_strformat(Tooltips.Skill_Volley, 5) }, -- Volley (Volley)
+    [28877] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 1 }, -- Volley (Volley)
+    [38689] = { tooltip = zo_strformat(Tooltips.Skill_Volley, 5) }, -- Endless Hail (Endless Hail)
+    [38690] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 1 }, -- Endless Hail (Endless Hail)
+    [38695] = { tooltip = zo_strformat(Tooltips.Skill_Volley, 7) }, -- Arrow Barrage (Arrow Barrage)
+    [38696] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 1 }, -- Arrow Barrage (Arrow Barrage)
 
     -- Scatter Shot / Magnum Shot / Draining Shot
-    [28887] = { tooltip = Tooltips.Generic_Stun }, -- Scatter Shot (Scatter Shot)
-    [38674] = { name = Abilities.Skill_Magnum_Shot, tooltip = Tooltips.Generic_Stun }, -- Scatter Shot (Magnum Shot)
-    [38670] = { tooltip = Tooltips.Skill_Draining_Shot }, -- Draining Shot (Draining Shot)
+    [28888] = { tooltip = Tooltips.Generic_Knockback }, -- Scatter Shot (Scatter Shot)
+    [38675] = { tooltip = Tooltips.Generic_Knockback }, -- Magnum Shot (Magnum Shot)
+    [38671] = { tooltip = Tooltips.Generic_Knockback }, -- Draining Shot (Draining Shot)
     [80764] = { name = Abilities.Skill_Draining_Shot }, -- Draining Shot Heal (Draining Shot)
 
     -- Arrow Spray / Bombarb / Acid Spray
@@ -5600,19 +5594,27 @@ Effects.EffectOverride = {
     -- MEDIUM ARMOR
     [63015] = { consolidateExtra = true, tooltip = Abilities.Skill_Evasion }, -- Major Evasion (Evasion)
     [63019] = { consolidateExtra = true, tooltip = Abilities.Skill_Shuffle }, -- Major Evasion (Shuffle)
-    [39196] = { noDuplicate = true, tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Shuffle (Shuffle)
+    [39196] = { tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Shuffle (Shuffle)
+
+    [39192] = { tooltip = Tooltips.Skill_Elude }, -- Elude (Elude)
     [63030] = { consolidateExtra = true, tooltip = Abilities.Skill_Elude }, -- Major Evasion (Elude)
+    [126957] = {  tooltip = Abilities.Skill_Elude }, -- Major Expedition (Elude)
 
     -- HEAVY ARMOR
-    [29553] = { tooltip = Tooltips.Generic_CC_Immunity }, -- Immovable (Immovable)
-    [63084] = { consolidate = true, tooltip = Abilities.Skill_Immovable }, -- Major Resolve (Immovable)
-    [63085] = { consolidate = true, tooltip = Abilities.Skill_Immovable }, -- Major Ward (Immovable)
-    [63133] = { tooltip = Tooltips.Generic_CC_Immunity }, -- Immovable Brute (Immovable Brute)
-    [63134] = { consolidate = true, tooltip = Abilities.Skill_Immovable_Brute }, -- Major Resolve (Immovable Brute)
-    [63135] = { consolidate = true, tooltip = Abilities.Skill_Immovable_Brute }, -- Major Ward (Immovable Brute)
-    [63118] = { tooltip = Tooltips.Generic_CC_Immunity }, -- Unstoppable (Unstoppable)
-    [63119] = { consolidate = true, tooltip = Abilities.Skill_Unstoppable }, -- Major Resolve (Unstoppable)
-    [63120] = { consolidate = true, tooltip = Abilities.Skill_Unstoppable }, -- Major Ward (Unstoppable)
+    [29552] = { hide = true }, -- Unstoppable (Unstoppable)
+    [63084] = { tooltip = Abilities.Skill_Unstoppable }, -- Major Resolve (Unstoppable)
+    [63085] = { tooltip = Abilities.Skill_Unstoppable }, -- Major Ward (Unstoppable)
+    [29553] = { tooltip = Tooltips.Skill_Unstoppable }, -- Unstoppable (Unstoppable)
+
+    [39205] = { tooltip = Tooltips.Skill_Unstoppable_Brute }, -- Unstoppable Brute (Unstoppable Brute)
+    [63134] = { tooltip = Abilities.Skill_Unstoppable_Brute }, -- Major Resolve (Unstoppable Brute)
+    [63135] = { tooltip = Abilities.Skill_Unstoppable_Brute }, -- Major Ward (Unstoppable Brute)
+    [63133] = { tooltip = Tooltips.Skill_Unstoppable }, -- Unstoppable Brute (Unstoppable Brute)
+
+    [39197] = { hide = true }, -- Immovable (Immovable)
+    [63119] = { tooltip = Abilities.Skill_Immovable }, -- Major Resolve (Immovable)
+    [63120] = { tooltip = Abilities.Skill_Immovable }, -- Major Ward (Immovable)
+    [63118] = { tooltip = Tooltips.Skill_Immovable }, -- Immovable (Immovable)
 
     ----------------------------------------------------------------
     -- SOUL MAGIC PASSIVES -----------------------------------------
@@ -11291,6 +11293,14 @@ Effects.FakePlayerBuffs = {
 
     -- Bow
     [55131] = { duration = 4000 }, -- CC Immunity (Rapid Fire / Toxic Barrage)
+
+    -- Heavy Armor
+    [63084] = { duration = 20000 }, -- Major Resolve (Unstoppable)
+    [63085] = { duration = 20000 }, -- Major Ward (Unstoppable)
+    [63134] = { duration = 20000 }, -- Major Resolve (Unstoppable Brute)
+    [63135] = { duration = 20000 }, -- Major Ward (Unstoppable Brute)
+    [63119] = { duration = 20000 }, -- Major Resolve (Immovable)
+    [63120] = { duration = 20000 }, -- Major Ward (Immovable)
 
     -- Vampire
     --[40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = Abilities.Skill_Feed, duration = 5300 }, -- Feed (Blood Ritual)
