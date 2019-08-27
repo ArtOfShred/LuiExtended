@@ -698,8 +698,6 @@ local AbilityTables = {
 
     -- Dual Wield
     Skill_Twin_Slashes                = 28379,
-    Skill_Rending_Slashes             = 38839,
-    Skill_Blood_Craze                 = 38845,
     Skill_Blade_Cloak                 = 28613,
     Skill_Quick_Cloak                 = 38901,
     Skill_Deadly_Cloak                = 38906,

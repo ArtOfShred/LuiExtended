@@ -1199,6 +1199,7 @@ Effects.BarHighlightOverride = {
     [21157] = { newId = 68807, showFakeAura = true, noRemove = true }, -- Hidden Blade --> Major Brutality
     [38914] = { newId = 126647, showFakeAura = true, noRemove = true }, -- Shrouded Daggers --> Major Brutality
     [38910] = { newId = 126670, showFakeAura = true, noRemove = true }, -- Flying Blade --> Major Brutality
+    --[126659] = { newId = 126667 }, -- Flying Blade -- Would be nice if this worked but when you mouse off the target the bar ID seems to reset for some reason.
     [83600] = { newId = 85156 }, -- Lacerate
     [85187] = { newId = 85192 }, -- Rend
     [85179] = { newId = 85184 }, -- Thrive in Chaos
@@ -1431,9 +1432,17 @@ Effects.AssistantIcons = {
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
+-- When a target name matches a string here, add id's in the table as debuff - currently just used for Iron Atronach Target Dummy
+--------------------------------------------------------------------------------------------------------------------------------
+Effects.AddNameAuraAlways = {
+    [Unitnames.NPC_Target_Iron_Atronach] = { [1] = { id = 120012 } }, -- Target Iron Atronach, Trial (Target Dummy)
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
 -- When a target name matches a string here, add id's in the table with the name and icon specified. We use this primarily to add CC Immunity buffs for bosses.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.AddNameAura = {
+
     -- World Bosses
     ['Norendo'] = { [1] = { id = 33097 } }, -- Auridon (Soulfire Plateau)
     ['Eraman'] = { [1] = { id = 33097 } }, -- Auridon (Soulfire Plateau)
@@ -5316,9 +5325,9 @@ Effects.EffectOverride = {
     -----------------------------------------
 
     -- Twin Slashes / Rending Slashes / Blood Craze
-    [29293] = { icon = 'esoui/art/icons/ability_dualwield_001.dds', name = Abilities.Skill_Twin_Slashes, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Twin Slashes Bleed (Twin Slashes)
-    [38841] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', name = Abilities.Skill_Rending_Slashes, tooltip = Tooltips.Skill_Rending_Slashes }, -- Rending Slashes Bleed (Rending Slashes)
-    [38848] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', name = Abilities.Skill_Blood_Craze, tooltip = Tooltips.Skill_Blood_Craze }, -- Blood Craze Bleed (Blood Craze)
+    [29293] = { icon = 'esoui/art/icons/ability_dualwield_001.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Twin Slashes Bleed (Twin Slashes)
+    [38841] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', tooltip = Tooltips.Skill_Rending_Slashes }, -- Rending Slashes Bleed (Rending Slashes)
+    [38848] = { icon = 'esoui/art/icons/ability_dualwield_001_a.dds', tooltip = Tooltips.Skill_Blood_Craze }, -- Blood Craze Bleed (Blood Craze)
     [38852] = { tooltip = Tooltips.Skill_Blood_Craze_Heal }, -- Blood Craze (Blood Craze)
 
     -- Blade Cloak / Quick Cloak / Deadly Cloak
@@ -5332,11 +5341,21 @@ Effects.EffectOverride = {
 
     -- Hidden Blade / Shrouded Daggers / Flying Blade
     [68807] = { consolidateExtra = true, tooltip = Abilities.Skill_Hidden_Blade }, -- Major Brutality (Hidden Blade)
-    [126647] = { consolidateExtra = true, tooltip = Abilities.Skill_Shrouded_Daggers }, -- Major Brutality (Shrouded Daggers)
+    [126641] = { icon = '' }, -- Hidden Blade (Hidden Blade)
+    [126640] = { icon = 'esoui/art/icons/ability_dualwield_003.dds', name = Abilities.Skill_Hidden_Blade, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Hidden Blade)
+    [126639] = { tooltip = Tooltips.Generic_Stun }, -- Hidden Blade (Hidden Blade)
 
-    [126667] = { tooltip = Tooltips.Skill_Flying_Blade }, -- Flying Blade (Flying Blade)
+    [126647] = { consolidateExtra = true, tooltip = Abilities.Skill_Shrouded_Daggers }, -- Major Brutality (Shrouded Daggers)
+    [126649] = { icon = '', name = Abilities.Skill_Shrouded_Daggers }, -- Shrouded Dagger (Shrouded Daggers)
+    [126650] = { icon = 'esoui/art/icons/ability_dualwield_003_b.dds', name = Abilities.Skill_Shrouded_Daggers, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Shrouded Daggers)
+    [126651] = { tooltip = Tooltips.Generic_Stun, name = Abilities.Skill_Shrouded_Daggers }, -- Shrouded Daggers (Shrouded Daggers)
+
+    [126667] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_flying_blade_jump.dds', tooltip = Tooltips.Skill_Flying_Blade }, -- Flying Blade (Flying Blade)
     [126666] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_flying_blade_jump.dds' }, -- Flying Blade (Flying Blade)
     [126670] = { consolidateExtra = true, tooltip = Abilities.Skill_Flying_Blade }, -- Major Brutality (Flying Blade)
+    [126658] = { icon = '' }, -- Flying Blade (Flying Blade)
+    [126655] = { icon = 'esoui/art/icons/ability_dualwield_003_a.dds', name = Abilities.Skill_Flying_Blade, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Flying Blade)
+    [126654] = { icon = 'esoui/art/icons/ability_dualwield_003_a.dds', tooltip = Tooltips.Generic_Stun }, -- Flying Blade (Flying Blade)
 
     -- Lacerate / Rend / Thrive in Chaos
     [85156] = { tooltip = Tooltips.Skill_Lacerate }, -- Lacerate (Lacerate)
@@ -11334,6 +11353,11 @@ Effects.FakePlayerDebuffs = {
 Effects.FakeStagger = {
     -- Player Basic
     [115607] = { duration = 2000 }, -- Dismount Stun
+
+    -- Dual Wield
+    [126640] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Hidden Blade)
+    [126650] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Shrouded Daggers)
+    [126655] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Flying Blade)
 
     -- Bow
     [38649] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = Abilities.Innate_Stagger, duration = 433 }, -- Poison Arrow (Venom Arrow)

@@ -1799,7 +1799,7 @@ function CombatInfo.CreateSettings()
             {
                 -- Disorient
                 type = "colorpicker",
-                name = zGetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT),
+                name = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_COLOR_TP), GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT)),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_DISORIENTED])),
                 disabled = function() return not Settings.cct.enabled end,

@@ -186,7 +186,7 @@ CrowdControl.aoeTraps = {
     [21943] = 0, -- Spike Trap (Spike Trap)
     [53169] = 0, -- Spike Trap (Spike Trap) - Dragonstar Arena
     [26531] = 0, -- Bear Trap (Bear Trap)
-    [31086] = 0 -- Trap (Trap) - Selene's Web
+    [31086] = 0, -- Trap (Trap) - Selene's Web
 
     [17314] = 0, -- Fire Trap (Player)
     [72888] = 0, -- Fire Attack 1 (Fire) -- Banished Cells II

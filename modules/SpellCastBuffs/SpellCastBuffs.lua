@@ -2652,6 +2652,19 @@ function SpellCastBuffs.AddNameAura()
             }
         end
     end
+    if Effects.AddNameAuraAlways[unitName] then
+        for k, v in ipairs(Effects.AddNameAuraAlways[unitName]) do
+            local abilityName = GetAbilityName(v.id)
+            local abilityIcon = GetAbilityIcon(v.id)
+            SpellCastBuffs.EffectsList.reticleover2[ "Name Specific Buff" .. k ] = {
+                type=BUFF_EFFECT_TYPE_DEBUFF,
+                id= v.id, name= abilityName, icon= abilityIcon,
+                dur=0, starts=1, ends=nil,
+                forced = "short",
+                restart=true, iconNum=0
+            }
+        end
+    end
 end
 
 -- Called by menu to preview icon positions. Simply iterates through all containers other than player_long and adds dummy test buffs into them.

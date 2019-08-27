@@ -2559,7 +2559,7 @@ LUIE.DebugAuras = {
     --[105188] = true, -- Grim Focus Combat Trigger
     --[105190] = true, -- Grim Focus Combat Trigger
     --[105192] = true, -- Grim Focus Combat Trigger
-    [105194] = true, -- RF Combat Trigger
+    --[105194] = true, -- RF Combat Trigger
 
     -- PET EFFECTS
     [28609] = true, -- Dummy Target Setter
@@ -5278,16 +5278,16 @@ LUIE.DebugAuras = {
 
     [28379] = true, -- Twin Slashes (Twin Slashes)
     [35312] = true, -- Twin Slashes (Twin Slashes)
-    [29293] = true, -- Twin Slashes Bleed (Twin Slashes)
+    [29293] = true, -- Twin Slashes (Twin Slashes)
 
     [38839] = true, -- Rending Slashes (Rending Slashes)
     [38840] = true, -- Rending Slashes (Rending Slashes)
-    [38841] = true, -- Rending Slashes Bleed (Rending Slashes)
+    [38841] = true, -- Rending Slashes (Rending Slashes)
     [38842] = true, -- Rending Slashes (Rending Slashes)
 
     [38845] = true, -- Blood Craze (Blood Craze)
     [38847] = true, -- Blood Craze (Blood Craze)
-    [38848] = true, -- Blood Craze Bleed (Blood Craze)
+    [38848] = true, -- Blood Craze (Blood Craze)
     [38852] = true, -- Blood Craze (Blood Craze)
 
     [28591] = true, -- Whirlwind (Whirlwind)
@@ -5315,6 +5315,9 @@ LUIE.DebugAuras = {
 
     [21157] = true, -- Hidden Blade (Hidden Blade)
     [68807] = true, -- Major Brutality (Hidden Blade)
+    [126641] = true, -- Hidden Blade (Hidden Blade)
+    [126640] = true, -- Stagger (Hidden Blade)
+    [126639] = true, -- Hidden Blade (Hidden Blade)
 
     [38914] = true, -- Shrouded Daggers (Shrouded Daggers)
     [126647] = true, -- Major Brutality (Shrouded Daggers)
@@ -5323,12 +5326,19 @@ LUIE.DebugAuras = {
     [68862] = true, -- Shrouded Daggers (Shrouded Daggers)
     [68863] = true, -- Bounce 2 (Shrouded Daggers)
     [68864] = true, -- Shrouded Daggers (Shrouded Daggers)
+    [126649] = true, -- Shrouded Dagger (Shrouded Daggers)
+    [126650] = true, -- Stagger (Shrouded Daggers)
+    [126651] = true, -- Shrouded Dagger (Shrouded Daggers)
 
     [38910] = true, -- Flying Blade (Flying Blade)
     [126667] = true, -- Flying Blade (Flying Blade)
     [126659] = true, -- Flying Blade (Flying Blade)
     [126666] = true, -- Flying Blade (Flying Blade)
     [126670] = true, -- Major Brutality (Flying Blade)
+    [126658] = true, -- Flying Blade (Flying Blade)
+    [126655] = true, -- Stagger (Flying Blade)
+    [126654] = true, -- Flying Blade (Flying Blade)
+
 
     [83600] = true, -- Lacerate (Lacerate)
     [85156] = true, -- Lacerate (Lacerate)

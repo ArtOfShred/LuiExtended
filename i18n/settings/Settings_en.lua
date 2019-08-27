@@ -1008,8 +1008,8 @@ local strings = {
     SI_LUIE_LAM_CI_CCT_PVP_ONLY_TP =                     "When toggled, crowd control effects will only be tracked in PVP zones.",
 
     SI_LUIE_LAM_CI_CCT_DISPLAY_HEADER =                  "Display Options",
-    SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE =                   "Choose Display Method"
-    SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE_TP =                "Choose whether to display only an icon, only text, or both."
+    SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE =                   "Choose Display Method",
+    SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE_TP =                "Choose whether to display only an icon, only text, or both.",
     SI_LUIE_LAM_CI_CCT_DISPLAY_NAME =                    "Use Ability Name as CC Text",
     SI_LUIE_LAM_CI_CCT_DISPLAY_NAME_TP =                 "When enabled, the name of the crowd control ability will display, otherwise the type of crowd control will replace the name.",
     SI_LUIE_LAM_CI_CCT_SCALE =                           "Set Icon and Text Scale (%)",

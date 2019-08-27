@@ -573,7 +573,7 @@ function CombatInfo.RegisterCombatInfo()
         end]]--
     end
     if CombatInfo.SV.ShowTriggered or CombatInfo.SV.ShowToggled or CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED, CombatInfo.OnSlotsFullUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED, CombatInfo.OnActiveHotbarUpdate)
         eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED, CombatInfo.OnSlotsFullUpdate)
         eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, CombatInfo.OnSlotUpdated)
     end
@@ -599,7 +599,7 @@ function CombatInfo.OnPlayerActivated(eventCode)
     eventManager:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED )
 
     -- Manually trigger event to update stats
-    CombatInfo.OnSlotsFullUpdate(nil)
+    CombatInfo.OnSlotsFullUpdate()
     CombatInfo.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, GetUnitPower("player", POWERTYPE_ULTIMATE))
 end
 
@@ -1627,7 +1627,13 @@ function CombatInfo.InventoryItemUsed()
     zo_callLater(function() g_potionUsed = false end, 200)
 end
 
-function CombatInfo.OnSlotsFullUpdate(eventCode, isHotbarSwap)
+function CombatInfo.OnActiveHotbarUpdate(eventCode, didActiveHotbarChange, shouldUpdateAbilityAssignments, activeHotbarCategory)
+    if didActiveHotbarChange == true or  shouldUpdateAbilityAssignments == true then
+        CombatInfo.OnSlotsFullUpdate()
+    end
+end
+
+function CombatInfo.OnSlotsFullUpdate(eventCode)
     -- Handle ultimate label first
     CombatInfo.UpdateUltimateLabel(eventCode)
 
