@@ -410,6 +410,9 @@ function SpellCastBuffs.Initialize(enabled)
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, SpellCastBuffs.DuelStart)
     eventManager:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, SpellCastBuffs.DuelEnd)
 
+    -- Register event to update icons/names/tooltips for some abilities where we pull information from the currently learned morph
+    eventManager:RegisterForEvent(moduleName, EVENT_SKILLS_FULL_UPDATE, Effects.UpdateEffectOnSkillUpdate)
+
     -- Werewolf
     SpellCastBuffs.RegisterWerewolfEvents()
 

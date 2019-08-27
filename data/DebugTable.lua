@@ -5418,7 +5418,6 @@ LUIE.DebugAuras = {
     [28887] = true, -- Scatter Shot (Scatter Shot)
 
     [38672] = true, -- Magnum Shot (Magnum Shot)
-    [38676] = true, -- Scatter Shot (Magnum Shot)
     [38675] = true, -- Scatter Shot (Magnum Shot)
     [38674] = true, -- Scatter Shot (Magnum Shot)
 

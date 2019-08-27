@@ -743,9 +743,9 @@ Effects.EffectCreateSkillAura = {
     [62240] = { removeOnEnd = false, consolidate = true, abilityId = 36891 }, -- Major Sorcery --> Sap Essence
 
     -- Templar
-    [26213] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Fortitude (Restoring Aura)
-    [26216] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Intellect (Restoring Aura)
-    [26215] = { removeOnEnd = true, consolidate = true, abilityId = 26209 }, -- Minor Endurance (Restoring Aura)
+    [26213] = { removeOnEnd = true, consolidate = true, abilityId = 26207 }, -- Minor Fortitude (Restoring Aura)
+    [26216] = { removeOnEnd = true, consolidate = true, abilityId = 26207 }, -- Minor Intellect (Restoring Aura)
+    [26215] = { removeOnEnd = true, consolidate = true, abilityId = 26207 }, -- Minor Endurance (Restoring Aura)
     [124701] = { removeOnEnd = true, consolidate = true, abilityId = 26821 }, -- Minor Fortitude (Repentance)
     [124702] = { removeOnEnd = true, consolidate = true, abilityId = 26821 }, -- Minor Intellect (Repentance)
     [124703] = { removeOnEnd = true, consolidate = true, abilityId = 26821 }, -- Minor Endurance (Repentance)
@@ -1218,6 +1218,7 @@ Effects.BarHighlightOverride = {
     [28869] = { newId = 44540 }, -- Poison Arrow
     [38645] = { newId = 44545 }, -- Venom Arrow
     [38660] = { newId = 44549 }, -- Poison Injection
+    [83465] = { newId = 55131, showFakeAura = true, duration = 4000 }, -- Rapid Fire --> CC Immunity
     [85257] = { newId = 85261 }, -- Toxic Barrage
     [85451] = { newId = 85458 }, -- Ballista
 
@@ -2564,6 +2565,27 @@ Effects.TooltipUseDefault = {
     [13984] = true, -- Boon: The Shadow
     [13985] = true, -- Boon: The Tower
 }
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- Override various information displayed for Effect auras
+-- NEVER use a base skill line ability here, ALWAYS use alternate id's as replacements, we don't want to mess with skills in the skill window, ability bar, etc...
+--------------------------------------------------------------------------------------------------------------------------------
+function Effects.UpdateEffectOnSkillUpdate()
+
+    -- Templar
+    Effects.EffectOverride[26207] = { name = LUIE.GetSkillMorphName(26209), icon = LUIE.GetSkillMorphIcon(26209), tooltip = GetAbilityDescription(LUIE.GetSkillMorphAbilityId(26209)) } -- Restoring Aura (Restoring Aura)
+    Effects.EffectOverride[26213] = { consolidate = true, tooltip = LUIE.GetSkillMorphName(26209) } -- Minor Fortitude (Restoring Aura - All Morphs)
+    Effects.EffectOverride[26216] = { consolidate = true, tooltip = LUIE.GetSkillMorphName(26209) } -- Minor Intellect (Restoring Aura - All Morphs)
+    Effects.EffectOverride[26215] = { consolidate = true, tooltip = LUIE.GetSkillMorphName(26209) } -- Minor Endurance (Restoring Aura - All Morphs)
+
+    -- Bow
+    Effects.EffectOverride[55131] = { tooltip = zo_strformat(Tooltips.Skill_Rapid_Fire, LUIE.GetSkillMorphName(83465)), name = LUIE.GetSkillMorphName(83465), icon = LUIE.GetSkillMorphIcon(83465) } -- CC Immunity (Rapid Fire / Toxic Barrage)
+
+    -- Fighter's Guild
+    Effects.EffectOverride[64509] = { consolidateExtra = true, tooltip = LUIE.GetSkillMorphName(35762) } -- Major Savagery
+    Effects.EffectOverride[999004] = { name = LUIE.GetSkillMorphName(35762), icon = LUIE.GetSkillMorphIcon(35762), tooltip = GetAbilityDescription(LUIE.GetSkillMorphAbilityId(35762)) } -- Major Savagery fake aura for Expert Hunter
+
+end
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Override various information displayed for Effect auras
@@ -4670,9 +4692,10 @@ Effects.EffectOverride = {
     [108935] = { icon = 'esoui/art/icons/ability_buff_minor_expedition.dds', tooltip = Abilities.Skill_Hasty_Prayer }, -- Minor Expedition (Hasty Prayer)
 
     -- Restoring Aura / Radiant Aura / Cleansing Ritual
-    [26213] = { consolidate = true, tooltip = Abilities.Skill_Restoring_Aura }, -- Minor Fortitude (Restoring Aura - All Morphs)
-    [26216] = { consolidate = true, tooltip = Abilities.Skill_Restoring_Aura }, -- Minor Intellect (Restoring Aura - All Morphs)
-    [26215] = { consolidate = true, tooltip = Abilities.Skill_Restoring_Aura }, -- Minor Endurance (Restoring Aura - All Morphs)
+    [26207] = { name = LUIE.GetSkillMorphName(26209), icon = LUIE.GetSkillMorphIcon(26209), tooltip = GetAbilityDescription(LUIE.GetSkillMorphAbilityId(26209)) }, -- Restoring Aura (Restoring Aura)
+    [26213] = { consolidate = true, tooltip = LUIE.GetSkillMorphName(26209) }, -- Minor Fortitude (Restoring Aura - All Morphs)
+    [26216] = { consolidate = true, tooltip = LUIE.GetSkillMorphName(26209) }, -- Minor Intellect (Restoring Aura - All Morphs)
+    [26215] = { consolidate = true, tooltip = LUIE.GetSkillMorphName(26209) }, -- Minor Endurance (Restoring Aura - All Morphs)
     [26220] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds', tooltip = Abilities.Skill_Restoring_Aura }, -- Minor Magickasteal (Restoring Aura)
     [88472] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Restoring Aura)
     [26809] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds', tooltip = Abilities.Skill_Radiant_Aura }, -- Minor Magickasteal (Radiant Aura)
@@ -5380,12 +5403,8 @@ Effects.EffectOverride = {
     [38696] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 0.5 }, -- Arrow Barrage (Arrow Barrage)
 
     -- Scatter Shot / Magnum Shot / Draining Shot
-    [28888] = { icon = 'esoui/art/icons/ability_bow_004.dds' }, -- Scatter Shot (Scatter Shot)
     [28887] = { tooltip = Tooltips.Generic_Stun }, -- Scatter Shot (Scatter Shot)
-    [38676] = { icon = 'esoui/art/icons/ability_bow_004_b.dds', name = Abilities.Skill_Magnum_Shot }, -- Scatter Shot (Magnum Shot)
-    [38675] = { icon = 'esoui/art/icons/ability_bow_004_b.dds', name = Abilities.Skill_Magnum_Shot }, -- Scatter Shot (Magnum Shot)
     [38674] = { name = Abilities.Skill_Magnum_Shot, tooltip = Tooltips.Generic_Stun }, -- Scatter Shot (Magnum Shot)
-    [38671] = { icon = 'esoui/art/icons/ability_bow_004_a.dds' }, -- Draining Shot (Draining Shot)
     [38670] = { tooltip = Tooltips.Skill_Draining_Shot }, -- Draining Shot (Draining Shot)
     [80764] = { name = Abilities.Skill_Draining_Shot }, -- Draining Shot Heal (Draining Shot)
 
@@ -5403,6 +5422,7 @@ Effects.EffectOverride = {
     [44549] = { tooltip = Tooltips.Skill_Poison_Injection }, -- Poison Injection (Poison Injection)
 
     -- Rapid Fire / Toxic Barrage / Ballista
+    [55131] = { tooltip = zo_strformat(Tooltips.Skill_Rapid_Fire, LUIE.GetSkillMorphName(83465)), name = LUIE.GetSkillMorphName(83465), icon = LUIE.GetSkillMorphIcon(83465) }, -- CC Immunity (Rapid Fire / Toxic Barrage)
     [85261] = { tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Toxic Barrage (Toxic Barrage)
     [85458] = { tooltip = Tooltips.Skill_Ballista }, -- Ballista (Ballista)
 
@@ -5818,8 +5838,8 @@ Effects.EffectOverride = {
     [80293] = { tooltip = Tooltips.Skill_Ring_of_Preservation_Ground, groundLabel = true, icon = 'esoui/art/icons/ability_fightersguild_001_b.dds' }, -- Ring of Preservation (Ring of Preservation)
 
     -- Expert Hunter / Evil Hunter / Camouflaged Hunter
-    [64509] = { consolidateExtra = true, tooltip = Abilities.Skill_Expert_Hunter }, -- Major Savagery
-    [999004] = { name = Abilities.Skill_Expert_Hunter, icon = 'esoui/art/icons/ability_fightersguild_002.dds', tooltip = Tooltips.Skill_Expert_Hunter_Passive }, -- Major Savagery fake aura for Expert Hunter
+    [64509] = { consolidateExtra = true, tooltip = LUIE.GetSkillMorphName(35762) }, -- Major Savagery
+    [999004] = { name = LUIE.GetSkillMorphName(35762), icon = LUIE.GetSkillMorphIcon(35762), tooltip = GetAbilityDescription(LUIE.GetSkillMorphAbilityId(35762)) }, -- Major Savagery fake aura for Expert Hunter
     [35762] = { tooltip = Tooltips.Skill_Expert_Hunter }, -- Expert Hunter (Expert Hunter)
     [80307] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, tooltip = Abilities.Skill_Expert_Hunter }, -- Expert Hunter (Expert Hunter)
     [40194] = { tooltip = Tooltips.Skill_Evil_Hunter }, -- Evil Hunter (Evil Hunter)
@@ -11268,6 +11288,9 @@ Effects.FakePlayerBuffs = {
     [22223] = { duration = 4000 }, -- Rite of Passage (Rite of Passage)
     [22229] = { duration = 4000 }, -- Remembrance (Remembrance)
     [22226] = { duration = 6000 }, -- Practiced Incantation (Practiced Incantation)
+
+    -- Bow
+    [55131] = { duration = 4000 }, -- CC Immunity (Rapid Fire / Toxic Barrage)
 
     -- Vampire
     --[40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = Abilities.Skill_Feed, duration = 5300 }, -- Feed (Blood Ritual)

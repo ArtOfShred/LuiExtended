@@ -169,3 +169,24 @@ function LUIE.ResolvePVPZone()
         return false
     end
 end
+
+-- Pull the name for the current morph of a skill
+function LUIE.GetSkillMorphName(abilityId)
+    local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
+    local abilityName = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
+    return abilityName
+end
+
+-- Pull the icon for the current morph of a skill
+function LUIE.GetSkillMorphIcon(abilityId)
+        local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
+        local abilityIcon = select(2, GetSkillAbilityInfo(skillType, skillIndex, abilityIndex))
+        return abilityIcon
+end
+
+-- Pull the AbilityId for the current morph of a skill
+function LUIE.GetSkillMorphAbilityId(abilityId)
+    local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
+    local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
+    return abilityId
+end

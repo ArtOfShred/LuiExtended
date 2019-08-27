@@ -532,8 +532,9 @@ local strings = {
     SI_LUIE_SKILL_ENDLESS_HAIL_TP =                      "Arrows rain down from the sky, dealing Physical Damage to enemies in the target area every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_DRAINING_SHOT_TP =                     "Stunned for |cFFFFFF<<1>>|r seconds.\n\nWhen the stun ends, your attacker heals.",
     SI_LUIE_SKILL_BOMBARD_TP =                           "Immobilized and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_POISON_INJECTION_TP =                  "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF200|r% more damage in proportion to your missing health under |cFFFFFF50|r%.",
+    SI_LUIE_SKILL_POISON_INJECTION_TP =                  "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF100|r% more damage in proportion to your missing health under |cFFFFFF50|r%.",
     SI_LUIE_SKILL_BALLISTA_TP =                          "Your ballista turret unleashes a barrage of arrows, dealing Physical Damage over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_RAPID_FIRE_TP =                        "You can move at full speed and are immune to all disabling effects while channeling <<1>>.",
 
     -- Destruction Staff
     SI_LUIE_HEAVY_ATTACK_LIGHTNING_STAFF_TP =            "Afflicted with Shock Damage over time for |cFFFFFF<<1>>|r seconds.\n\nDeals additional Shock Damage if the channel is finished.",

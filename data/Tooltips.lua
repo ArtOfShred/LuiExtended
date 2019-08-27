@@ -725,6 +725,7 @@ LUIE.Data.Tooltips = {
     Skill_Bombard                                   = GetString(SI_LUIE_SKILL_BOMBARD_TP),
     Skill_Poison_Injection                          = GetString(SI_LUIE_SKILL_POISON_INJECTION_TP),
     Skill_Ballista                                  = GetString(SI_LUIE_SKILL_BALLISTA_TP),
+    Skill_Rapid_Fire                                = GetString(SI_LUIE_SKILL_RAPID_FIRE_TP),
 
     -- Destruction Staff
     Skill_Heavy_Attack_Lightning                    = GetString(SI_LUIE_HEAVY_ATTACK_LIGHTNING_STAFF_TP),
@@ -806,7 +807,6 @@ LUIE.Data.Tooltips = {
     Skill_Circle_of_Protection                      = GetString(SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_TP),
     Skill_Ring_of_Preservation                      = GetString(SI_LUIE_SKILL_RING_OF_PRESERVATION_TP),
     Skill_Ring_of_Preservation_Ground               = GetString(SI_LUIE_SKILL_RING_OF_PRESERVATION_GROUND_TP),
-    Skill_Expert_Hunter_Passive                     = GetAbilityDescription(35762),
     Skill_Expert_Hunter                             = GetString(SI_LUIE_SKILL_EXPERT_HUNTER_TP),
     Skill_Evil_Hunter                               = GetString(SI_LUIE_SKILL_EVIL_HUNTER_TP),
     Skill_Trap_Beast                                = GetString(SI_LUIE_SKILL_TRAP_BEAST_TP),
