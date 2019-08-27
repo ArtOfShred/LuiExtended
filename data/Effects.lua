@@ -1212,7 +1212,7 @@ Effects.BarHighlightOverride = {
     [28869] = { newId = 44540 }, -- Poison Arrow
     [38645] = { newId = 44545 }, -- Venom Arrow
     [38660] = { newId = 44549 }, -- Poison Injection
-    [83465] = { newId = 55131, showFakeAura = true, duration = 4000 }, -- Rapid Fire --> CC Immunity
+    --[83465] = { newId = 55131, showFakeAura = true, duration = 4000 }, -- Rapid Fire --> CC Immunity
     [85257] = { newId = 85261 }, -- Toxic Barrage
     [85451] = { newId = 85458 }, -- Ballista
 
@@ -1263,6 +1263,14 @@ Effects.BarHighlightOverride = {
     [29552] = { newId = 29553 }, -- Immovable
     [39205] = { newId = 63133 }, -- Immovable Brute
     [39197] = { newId = 63118 }, -- Unstoppable
+
+    ---------------------------
+    -- Soul Magic -------------
+    ---------------------------
+
+    --[39270] = { newId = 55131, showFakeAura = true, duration = 5000 }, -- Soul Strike --> CC Immunity
+    --[40420] = { newId = 55131, showFakeAura = true, duration = 6000 }, -- Soul Assault --> CC Immunity
+    --[40414] = { newId = 55131, showFakeAura = true, duration = 5000 }, -- Shatter Soul --> CC Immunity
 
     ---------------------------
     -- Vampire ----------------
@@ -2571,9 +2579,6 @@ function Effects.UpdateEffectOnSkillUpdate()
     Effects.EffectOverride[26213] = { consolidate = true, tooltip = LUIE.GetSkillMorphName(26209) } -- Minor Fortitude (Restoring Aura - All Morphs)
     Effects.EffectOverride[26216] = { consolidate = true, tooltip = LUIE.GetSkillMorphName(26209) } -- Minor Intellect (Restoring Aura - All Morphs)
     Effects.EffectOverride[26215] = { consolidate = true, tooltip = LUIE.GetSkillMorphName(26209) } -- Minor Endurance (Restoring Aura - All Morphs)
-
-    -- Bow
-    Effects.EffectOverride[55131] = { tooltip = zo_strformat(Tooltips.Skill_Rapid_Fire, LUIE.GetSkillMorphName(83465)), name = LUIE.GetSkillMorphName(83465), icon = LUIE.GetSkillMorphIcon(83465) } -- CC Immunity (Rapid Fire / Toxic Barrage)
 
     -- Fighter's Guild
     Effects.EffectOverride[64509] = { consolidateExtra = true, tooltip = LUIE.GetSkillMorphName(35762) } -- Major Savagery
@@ -5416,7 +5421,6 @@ Effects.EffectOverride = {
     [44549] = { tooltip = Tooltips.Skill_Poison_Injection }, -- Poison Injection (Poison Injection)
 
     -- Rapid Fire / Toxic Barrage / Ballista
-    [55131] = { tooltip = zo_strformat(Tooltips.Skill_Rapid_Fire, LUIE.GetSkillMorphName(83465)), name = LUIE.GetSkillMorphName(83465), icon = LUIE.GetSkillMorphIcon(83465) }, -- CC Immunity (Rapid Fire / Toxic Barrage)
     [85261] = { tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Toxic Barrage (Toxic Barrage)
     [85458] = { tooltip = Tooltips.Skill_Ballista }, -- Ballista (Ballista)
 
@@ -5636,11 +5640,17 @@ Effects.EffectOverride = {
     -- SOUL MAGIC ACTIVES ------------------------------------------
     ----------------------------------------------------------------
 
-    [26768] = { tooltip = Tooltips.Skill_Soul_Trap }, -- Soul Trap (Soul Trap)
+    [126891] = { tooltip = Tooltips.Skill_Soul_Trap_Physical }, -- Soul Trap (Soul Trap)
+    [126890] = { tooltip = Tooltips.Skill_Soul_Trap_Magic }, -- Soul Trap (Soul Trap)
     [26769] = { hide = true}, -- Soul Trap (Soul Trap)
-    [40328] = { tooltip = Tooltips.Skill_Soul_Trap }, -- Soul Splitting Trap (Soul Splitting Trap)
+
+    [126894] = { icon = 'esoui/art/icons/ability_otherclass_001_a.dds', tooltip = Tooltips.Skill_Soul_Trap_Physical }, -- Soul Splitting Trap (Soul Splitting Trap)
+    [126895] = { icon = 'esoui/art/icons/ability_otherclass_001_a.dds', tooltip = Tooltips.Skill_Soul_Trap_Magic }, -- Soul Splitting Trap (Soul Splitting Trap)
     [40329] = { hide = true}, -- Soul Splitting Trap (Soul Splitting Trap)
-    [40317] = { tooltip = Tooltips.Skill_Consuming_Trap }, -- Consuming Trap (Consuming Trap)
+
+    [126898] = { icon = 'esoui/art/icons/ability_otherclass_001_b.dds', name = Abilities.Skill_Consuming_Trap, tooltip = Tooltips.Skill_Consuming_Trap_Physical }, -- Consuming Trap (Consuming Trap)
+    [126897] = { icon = 'esoui/art/icons/ability_otherclass_001_b.dds', name = Abilities.Skill_Consuming_Trap, tooltip = Tooltips.Skill_Consuming_Trap_Magic }, -- Consuming Trap (Consuming Trap)
+
     [40319] = { hide = true}, -- Consuming Trap (Consuming Trap)
     [40323] = { icon = 'esoui/art/icons/ability_otherclass_001_b.dds' }, -- Consuming Trap (Consuming Trap)
     [40321] = { icon = 'esoui/art/icons/ability_otherclass_001_b.dds' }, -- Consuming Trap (Consuming Trap)
@@ -11290,9 +11300,6 @@ Effects.FakePlayerBuffs = {
     [22223] = { duration = 4000 }, -- Rite of Passage (Rite of Passage)
     [22229] = { duration = 4000 }, -- Remembrance (Remembrance)
     [22226] = { duration = 6000 }, -- Practiced Incantation (Practiced Incantation)
-
-    -- Bow
-    [55131] = { duration = 4000 }, -- CC Immunity (Rapid Fire / Toxic Barrage)
 
     -- Heavy Armor
     [63084] = { duration = 20000 }, -- Major Resolve (Unstoppable)

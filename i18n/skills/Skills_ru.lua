@@ -532,7 +532,6 @@ local strings = {
     SI_LUIE_SKILL_BOMBARD_TP =                           "Immobilized and Movement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POISON_INJECTION_TP =                  "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nDeals up to |cFFFFFF100|r% more damage in proportion to your missing health under |cFFFFFF50|r%.",
     SI_LUIE_SKILL_BALLISTA_TP =                          "Your ballista turret unleashes a barrage of arrows, dealing Physical Damage over |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_RAPID_FIRE_TP =                        "You can move at full speed and are immune to all disabling effects while channeling <<1>>.",
 
     -- Destruction Staff
     SI_LUIE_HEAVY_ATTACK_LIGHTNING_STAFF_TP =            "Afflicted with Shock Damage over time for |cFFFFFF<<1>>|r seconds.\n\nDeals additional Shock Damage if the channel is finished.",
@@ -581,8 +580,8 @@ local strings = {
 
     -- Soul Magic
     SI_LUIE_SKILL_SOUL_SUMMONS_TP =                      "Вы недавно воскресли без затрат Камня душ и не можете воскреснуть сова не потратив камня душ в течение |cFFFFFF<<1>>|r час.", -- TODO: Check Translation
-    SI_LUIE_SKILL_SOUL_TRAP =                            "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker fills a soul gem if you die under this effect.",
-    SI_LUIE_SKILL_CONSUMING_TRAP =                       "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker fills a soul gem and restores Health, Magicka, and Stamina if you die under this effect.",
+    SI_LUIE_SKILL_SOUL_TRAP =                            "Afflicted with SUBSTRING every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker fills a soul gem if you die under this effect.",
+    SI_LUIE_SKILL_CONSUMING_TRAP =                       "Afflicted with SUBSTRING every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker fills a soul gem and restores Health, Magicka, and Stamina if you die under this effect.",
 
     -- Werewolf
     SI_LUIE_SKILL_SANIES_LUPINUS_TP =                    "Вы были укушены Оборотнем и заразились Гнойным люпинусом.",

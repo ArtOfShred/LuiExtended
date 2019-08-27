@@ -723,7 +723,6 @@ LUIE.Data.Tooltips = {
     Skill_Bombard                                   = GetString(SI_LUIE_SKILL_BOMBARD_TP),
     Skill_Poison_Injection                          = GetString(SI_LUIE_SKILL_POISON_INJECTION_TP),
     Skill_Ballista                                  = GetString(SI_LUIE_SKILL_BALLISTA_TP),
-    Skill_Rapid_Fire                                = GetString(SI_LUIE_SKILL_RAPID_FIRE_TP),
 
     -- Destruction Staff
     Skill_Heavy_Attack_Lightning                    = GetString(SI_LUIE_HEAVY_ATTACK_LIGHTNING_STAFF_TP),
@@ -778,8 +777,10 @@ LUIE.Data.Tooltips = {
 
     -- Soul Magic
     Skill_Soul_Summons                              = GetString(SI_LUIE_SKILL_SOUL_SUMMONS_TP),
-    Skill_Soul_Trap                                 = GetString(SI_LUIE_SKILL_SOUL_TRAP),
-    Skill_Consuming_Trap                            = GetString(SI_LUIE_SKILL_CONSUMING_TRAP),
+    Skill_Soul_Trap_Magic                           = string.gsub(GetString(SI_LUIE_SKILL_SOUL_TRAP), "SUBSTRING", MagicDamage),
+    Skill_Soul_Trap_Physical                        = string.gsub(GetString(SI_LUIE_SKILL_SOUL_TRAP), "SUBSTRING", PhysicalDamage),
+    Skill_Consuming_Trap_Magic                      = string.gsub(GetString(SI_LUIE_SKILL_CONSUMING_TRAP), "SUBSTRING", MagicDamage),
+    Skill_Consuming_Trap_Physical                   = string.gsub(GetString(SI_LUIE_SKILL_CONSUMING_TRAP), "SUBSTRING", PhysicalDamage),
 
     -- Vampire
     Skill_Noxiphilic_Sanguivoria                    = GetString(SI_LUIE_SKILL_NOXIPHILIC_SANGUIVORIA_TP),

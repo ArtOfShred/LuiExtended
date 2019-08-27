@@ -5955,15 +5955,18 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [26768] = true, -- Soul Trap (Soul Trap)
-    [34720] = true, -- Soul Trap (Soul Trap)
-    --[26769] = true, -- Soul Trap (Soul Trap)
+    [126891] = true, -- Soul Trap (Soul Trap)
+    [126890] = true, -- Soul Trap (Soul Trap)
+    [26769] = true, -- Soul Trap (Soul Trap)
 
     [40328] = true, -- Soul Splitting Trap (Soul Splitting Trap)
-    [40330] = true, -- Soul Splitting Trap (Soul Splitting Trap)
-    --[40329] = true, -- Soul Splitting Trap (Soul Splitting Trap)
+    [126894] = true, -- Soul Splitting Trap (Soul Splitting Trap)
+    [126895] = true, -- Soul Splitting Trap (Soul Splitting Trap)
+    [40329] = true, -- Soul Splitting Trap (Soul Splitting Trap)
 
     [40317] = true, -- Consuming Trap (Consuming Trap)
-    [40320] = true, -- Consuming Trap (Consuming Trap)
+    [126898] = true, -- Consuming Trap (Consuming Trap)
+    [126897] = true, -- Consuming Trap (Consuming Trap)
     [40319] = true, -- Consuming Trap (Consuming Trap)
     [40323] = true, -- Consuming Trap (Consuming Trap)
     [40321] = true, -- Consuming Trap (Consuming Trap)
