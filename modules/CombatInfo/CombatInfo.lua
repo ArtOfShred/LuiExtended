@@ -924,6 +924,16 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         g_toggledSlotsPlayer[abilityId] = true
     end
 
+    -- Hijack the abilityId here if we have it in the override for extra bar highlights
+    if Effects.BarHighlightExtraId[abilityId] then
+        for k, v in pairs(Effects.BarHighlightExtraId) do
+            if k == abilityId then
+                abilityId = v
+                break
+            end
+        end
+    end
+
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and (Effects.EffectGroundDisplay[abilityId] or Effects.LinkedGroundMine[abilityId]) then
         if Effects.LinkedGroundMine[abilityId] then
             abilityId = Effects.LinkedGroundMine[abilityId]

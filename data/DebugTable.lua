@@ -6117,7 +6117,6 @@ LUIE.DebugAuras = {
     [40521] = true, -- Sanies Lupinus (Player Bite)
 
     [32464] = true, -- Light Attack
-    [89146] = true, -- Werewolf Bleed
     [32477] = true, -- Heavy Attack (Were)
     [32479] = true, -- Heavy Attack
     [32478] = true, -- Heavy Attack Damage Bonus
@@ -6173,7 +6172,7 @@ LUIE.DebugAuras = {
     [58310] = true, -- Hircine's Bounty (Hircine's Bounty)
 
     [58317] = true, -- Hircine's Rage (Hircine's Rage)
-    [58318] = true, -- Hircine's Rage (Hircine's Rage)
+    [58318] = true, -- Major Brutality (Hircine's Rage)
 
     [58325] = true, -- Hircine's Fortitude (Hircine's Fortitude)
 
@@ -6234,17 +6233,16 @@ LUIE.DebugAuras = {
     [39075] = true, -- Pack Leader (Pack Leader)
     [47069] = true, -- Pack Leader (Pack Leader)
     [111843] = true, -- Pack Leader (Pack Leader)
-    [80191] = true, -- Pack Leader (Pack Leader)
     [112144] = true, -- Pack Leader (Pack Leader)
-    [80192] = true, -- Resummon (Pack Leader)
     [80180] = true, -- Birth Direwolf (Pack Leader)
     [80181] = true, -- Familiar Set Target (Pack Leader)
-    [80182] = true, -- Pet Weapon Crit Chance (Pack Leader)
     [80177] = true, -- Pack Leader (Pack Leader)
     [80178] = true, -- Pack Leader (Pack Leader)
     [80184] = true, -- Lunge (Pack Leader)
+    [127161] = true, -- Lunge (Pack Leader)
     [80189] = true, -- Gnash (Pack Leader)
     [80190] = true, -- Gnash (Pack Leader)
+    [127162] = true, -- Minor Maim (Pack Leader)
 
     [39076] = true, -- Werewolf Berserker (Werewolf Berserker)
     [47083] = true, -- Werewolf Berserker (Werewolf Berserker)

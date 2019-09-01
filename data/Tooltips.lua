@@ -795,6 +795,7 @@ LUIE.Data.Tooltips = {
     Skill_Mist_Form                                 = GetString(SI_LUIE_SKILL_MIST_FORM_TP),
     Skill_Baleful_Mist                              = GetString(SI_LUIE_SKILL_BALEFUL_MIST_TP),
     Skill_Bat_Swarm                                 = GetString(SI_LUIE_SKILL_BAT_SWARM_TP),
+    Skill_Clouding_Swarm                            = GetString(SI_LUIE_SKILL_CLOUDING_SWARM_TP),
     Skill_Devouring_Swarm                           = GetString(SI_LUIE_SKILL_DEVOURING_SWARM_TP),
 
     -- Werewolf
@@ -804,6 +805,7 @@ LUIE.Data.Tooltips = {
     Skill_Feeding_Frenzy                            = GetString(SI_LUIE_SKILL_FEEDING_FREZNY_TP),
     Skill_Claws_of_Life                             = GetString(SI_LUIE_SKILL_CLAWS_OF_LIFE_TP),
     Skill_Werewolf_Transformation                   = GetString(SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP),
+    Skill_Werewolf_Berserker                        = GetString(SI_LUIE_SKILL_WEREWOLF_BERSERKER_TP),
     Skill_Pack_Leader                               = GetString(SI_LUIE_SKILL_PACK_LEADER_TP),
 
     ----------------------------------------------------------------
@@ -1169,7 +1171,7 @@ LUIE.Data.Tooltips = {
     ----------------------------------------------------------------
 
     -- Banished Cells I
-    Skill_Drain_Essence                             = GetString(SI_LUIE_SKILL_DRAIN_ESSENCE_NPC_TP),
+    Skill_Drain_Essence_NPC                         = GetString(SI_LUIE_SKILL_DRAIN_ESSENCE_NPC_TP),
     Skill_Summon_Dark_Proxy                         = GetString(SI_LUIE_SKILL_SUMMON_DARK_PROXY_TP),
     Skill_Summon_Clannfear                          = GetString(SI_LUIE_SKILL_SUMMON_CLANNFEAR_TP),
 

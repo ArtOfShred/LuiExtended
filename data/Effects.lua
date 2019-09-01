@@ -383,7 +383,7 @@ Effects.DebuffDisplayOverrideId = {
 
     -- Glyphs
     [17906] = true, -- Crusher (Glyph of Crushing)
-    [17945] = true, -- Weakining (Glyph of Weakening)
+    [17945] = true, -- Weakening (Glyph of Weakening)
 
     -- Item Sets
     [52705] = true, -- Way of Martial Knowledge (... of Martial Knowledge)
@@ -408,6 +408,9 @@ Effects.DebuffDisplayOverrideId = {
 
     -- Undaunted
     [42007] = true, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
+
+    -- Werewolf
+    [127161] = true, -- Lunge (Pack Leader)
 
     ----------------------------------------------------------------
     -- NPC ABILITIES -----------------------------------------------
@@ -819,6 +822,9 @@ Effects.EffectCreateSkillAura = {
     [103708] = { consolidate = true, extendedDisplay = true, abilityId = 103706 }, -- Minor Force --> Channeled Acceleration
     [103712] = { consolidate = true, extendedDisplay = true, abilityId = 103710 }, -- Minor Force --> Race Against Time
 
+    -- Vampire
+    [38963] = { alwaysShow = true, removeOnEnd = true, abilityId = 38967 }, -- Elusive Mist --> Major Expedition
+
     -- Assault
     [57472] = { alwaysShow = true, removeOnEnd = true, abilityId = 38566 }, -- Major Gallop (Rapid Maneuver)
     [57477] = { alwaysShow = true, removeOnEnd = true, abilityId = 40211 }, -- Major Gallop (Retreating Maneuver)
@@ -902,6 +908,19 @@ Effects.AddNoDurationBarHighlight = {
     [124165] = true, -- Deaden Pain
     [124193] = true, -- Necrotic Potency
     [118814] = true, -- Enduring Undeath
+
+}
+
+
+Effects.BarHighlightExtraId = {
+
+    -- Soul Magic
+    [126890] = 126891, -- Soul Trap
+    [126895] = 126894, -- Soul Splitting Trap
+    [126897] = 126898, -- Consuming Trap
+
+    -- Vampire
+    [63558] = 81493, -- Minor Expedition --> Accelerating Drain
 
 }
 
@@ -1268,6 +1287,10 @@ Effects.BarHighlightOverride = {
     -- Soul Magic -------------
     ---------------------------
 
+    [26768] = { newId = 126891 }, -- Soul Trap (Soul Trap)
+    [40328] = { newId = 126894 }, -- Soul Splitting Trap (Soul Splitting Trap)
+    [40317] = { newId = 126898 }, -- Consuming Trap (Consuming Trap)
+
     --[39270] = { newId = 55131, showFakeAura = true, duration = 5000 }, -- Soul Strike --> CC Immunity
     --[40420] = { newId = 55131, showFakeAura = true, duration = 6000 }, -- Soul Assault --> CC Immunity
     --[40414] = { newId = 55131, showFakeAura = true, duration = 5000 }, -- Shatter Soul --> CC Immunity
@@ -1276,16 +1299,16 @@ Effects.BarHighlightOverride = {
     -- Vampire ----------------
     ---------------------------
 
-    [32893] = { newId = 68883 }, -- Drain Essence -- TODO: For some reason these won't show up unless the ID is switched, they don't get added to the table at all
-    [38949] = { newId = 68892 }, -- Invigorating Drain -- TODO: For some reason these won't show up unless the ID is switched, they don't get added to the table at all
-    [38956] = { newId = 81493 }, -- Accelerating Drain -- TODO: For some reason these won't show up unless the ID is switched, they don't get added to the table at all
+    [32893] = { newId = 68883 }, -- Drain Essence
+    [38949] = { newId = 68892 }, -- Invigorating Drain
+    [38956] = { newId = 81493 }, -- Accelerating Drain
     [88158] = { newId = 38932 }, -- Materialize --> Clouding Swarm
 
     ---------------------------
     -- Werewolf ---------------
     ---------------------------
 
-    [58317] = { newId = 58318 }, -- Hircine's Rage
+    [58317] = { newId = 58318 }, -- Hircine's Rage --> Major Brutality
     [58855] = { newId = 58856 }, -- Infectious Claws
     [58864] = { newId = 58865 }, -- Claws of Anguish
     [58879] = { newId = 58880 }, -- Claws of Life
@@ -5684,11 +5707,11 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Drain Essence / Invigorating Drain / Accelerating Drain
-    [32893] = { tooltip = Tooltips.Skill_Drain_Essence }, -- Drain Essence
+    [32893] = { tooltip = Tooltips.Skill_Drain_Essence, tooltipValue2 = 1 }, -- Drain Essence
     [68883] = { tooltip = Tooltips.Generic_Stun }, -- Drain Essence
     [38949] = { tooltip = Tooltips.Skill_Invigorating_Drain }, -- Invigorating Drain
     [68892] = { tooltip = Tooltips.Generic_Stun }, -- Invigorating Drain
-    [38956] = { tooltip = Tooltips.Skill_Drain_Essence }, -- Accelerating Drain
+    [38956] = { tooltip = Tooltips.Skill_Drain_Essence, tooltipValue2 = 0.7 }, -- Accelerating Drain
     [81493] = { tooltip = Tooltips.Generic_Stun }, -- Accelerating Drain
     [63558] = { tooltip = Abilities.Skill_Accelerating_Drain }, -- Minor Expedition (Accelerating Drain)
 
@@ -5700,7 +5723,7 @@ Effects.EffectOverride = {
 
     -- Bat Swarm / Clouding Swarm / Devouring Swarm
     [32624] = { tooltip = Tooltips.Skill_Bat_Swarm }, -- Bat Swarm
-    [38932] = { tooltip = Tooltips.Skill_Bat_Swarm }, -- Clouding Swarm
+    [38932] = { tooltip = Tooltips.Skill_Clouding_Swarm }, -- Clouding Swarm
     [38931] = { tooltip = Tooltips.Skill_Devouring_Swarm }, -- Devouring Swarm
 
     [32625] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Bat Swarm
@@ -5731,7 +5754,6 @@ Effects.EffectOverride = {
     [31068] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = Tooltips.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from NPC Bite)
     [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds', tooltip = Tooltips.Skill_Sanies_Lupinus }, -- Sanies Lupinus (from Player Bite)
     [32464] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds' }, -- Light Attack
-    [89146] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Werewolf Bleed
     [32477] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack (Were)
     [32479] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', name = Abilities.Skill_Medium_Attack }, -- Heavy Attack
     [32480] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', name = Abilities.Skill_Heavy_Attack }, -- Heavy Attack Werewolf
@@ -5748,7 +5770,7 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Hircine's Bounty / Hircine's Rage / Hircine's Fortitude
-    [58318] = { tooltip = Abilities.Skill_Hircines_Rage, name = Abilities.Skill_Major_Brutality }, -- Hircine's Rage (Hircine's Rage)
+    [58318] = { tooltip = Abilities.Skill_Hircines_Rage }, -- Major Brutality (Hircine's Rage)
 
     -- Roar / Ferocious Roar / Defeaning Roar
     [32633] = { tooltip = Tooltips.Generic_Fear }, -- Roar (Roar)
@@ -5776,11 +5798,14 @@ Effects.EffectOverride = {
     [80177] = { hide = true }, -- Pack Leader (Pack Leader)
     [80178] = { hide = true }, -- Pack Leader (Pack Leader)
     [80184] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge_pack_leader.dds' }, -- Lunge (Pack Leader)
+    [127161] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge_pack_leader.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Lunge (Pack Leader)
     [80189] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
     [80190] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Pack Leader)
-    [39076] = { tooltip = Tooltips.Skill_Werewolf_Transformation }, -- Werewolf Berserker (Werewolf Berserker)
+    [127162] = { tooltip = Abilities.Skill_Gnash }, -- Minor Maim (Pack Leader)
+
+    [39076] = { tooltip = Tooltips.Skill_Werewolf_Berserker }, -- Werewolf Berserker (Werewolf Berserker)
     [111844] = { tooltip = Tooltips.Generic_Fear }, -- Werewolf Berserker
-    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Werewolf Berserker Bleed (Werewolf Bleed)
+    [89147] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', name = Abilities.Skill_Werewolf_Blood, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Werewolf Berserker Bleed (Werewolf Bleed)
 
     ----------------------------------------------------------------
     -- WEREWOLF QUEST ABILITIES ------------------------------------
@@ -9991,7 +10016,7 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Banished Cells I
-    [19028] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_drain_essence.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Drain_Essence }, -- Drain Essence (Cell Haunter)
+    [19028] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_drain_essence.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Drain_Essence_NPC }, -- Drain Essence (Cell Haunter)
 
     [46258] = { hide = true }, -- Clannfear Arrives (Shadowrend)
     [18725] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_headbutt.dds' }, -- Spiked Headbutt (Shadowrend)

@@ -747,6 +747,7 @@ local AbilityTables = {
     -- WEREWOLF SKILLS -----------------------------------
     -- ---------------------------------------------------
 
+    Skill_Werewolf_Blood              = 59200,
     Skill_Devour                      = 32634,
     Skill_Hircines_Rage               = 58317,
     Skill_Ferocious_Roar              = 39113,
@@ -754,6 +755,7 @@ local AbilityTables = {
 
     Skill_Werewolf_Fear               = 39045,
     Skill_Remove                      = 31262,
+    Skill_Gnash                       = 80189,
 
     -- ---------------------------------------------------
     -- GUILD SKILLS --------------------------------------
