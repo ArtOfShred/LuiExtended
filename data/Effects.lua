@@ -909,7 +909,14 @@ Effects.AddNoDurationBarHighlight = {
 
 }
 
+-- USE SECONDARY ID HERE
+Effects.BarHighlightIsMine = {
 
+    [40468] = true -- Scaling Rune
+
+}
+
+-- SECONDARY ID = ORIGINAL BAR HIGHLIGHT ID
 Effects.BarHighlightExtraId = {
 
     -- Fighters Guild
@@ -918,6 +925,9 @@ Effects.BarHighlightExtraId = {
     [68595] = 35750, -- Trap Beast
     [68632] = 40382, -- Barbed Trap
     [68628] = 40372, -- Lightweight Beast Trap
+
+    -- Mages Guild
+    [40468] = 40465, -- Scalding Rune
 
     -- Soul Magic
     [126890] = 126891, -- Soul Trap
@@ -1334,6 +1344,8 @@ Effects.BarHighlightOverride = {
     ---------------------------
     -- Mages Guild ------------
     ---------------------------
+
+    [40465] = { noRemove = true }, -- Scaling Rune
 
     [31642] = { newId = 48131, secondary = true }, -- Equilibrium
     [40445] = { newId = 40449, showFakeAura = true }, -- Spell Symmetry (Spell Symmetry)
@@ -2610,6 +2622,9 @@ function Effects.UpdateEffectOnSkillUpdate()
     -- Fighter's Guild
     Effects.EffectOverride[64509] = { consolidateExtra = true, tooltip = LUIE.GetSkillMorphName(35762) } -- Major Savagery
     Effects.EffectOverride[999004] = { name = LUIE.GetSkillMorphName(35762), icon = LUIE.GetSkillMorphIcon(35762), tooltip = GetAbilityDescription(LUIE.GetSkillMorphAbilityId(35762)) } -- Major Savagery fake aura for Expert Hunter
+
+    -- Mages Guild
+    Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(SI_LUIE_SKILL_SCALDING_RUNE_TP), (GetAbilityDuration(40468) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8) )
 
 end
 

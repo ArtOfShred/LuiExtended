@@ -997,6 +997,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         end
     end
 
+    local originalId = abilityId -- TODO
     -- Hijack the abilityId here if we have it in the override for extra bar highlights
     if Effects.BarHighlightExtraId[abilityId] then
         for k, v in pairs(Effects.BarHighlightExtraId) do
