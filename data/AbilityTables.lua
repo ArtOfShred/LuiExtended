@@ -752,7 +752,6 @@ local AbilityTables = {
     Skill_Hircines_Rage               = 58317,
     Skill_Ferocious_Roar              = 39113,
     Skill_Deafening_Roar              = 39114,
-
     Skill_Werewolf_Fear               = 39045,
     Skill_Remove                      = 31262,
     Skill_Gnash                       = 80189,
@@ -775,8 +774,9 @@ local AbilityTables = {
     Skill_Revealed                    = 11717,
     Skill_Marked                      = 103943,
     Skill_Trap_Beast                  = 35750,
-    Skill_Rearming_Trap               = 40382,
+    Skill_Barbed_Trap                 = 40382,
     Skill_Lightweight_Beast_Trap      = 40372,
+    Skill_Flawless_Dawnbreaker        = 40161,
 
     -- Mages Guild
     Skill_Might_of_the_Guild          = 43561,

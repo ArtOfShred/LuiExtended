@@ -304,8 +304,7 @@ Effects.IsGroundMineAura = {
 
     -- Fighters Guild
     [35750] = true, -- Trap Beast (Trap Beast)
-    [40382] = true, -- Rearming Trap (Rearming Trap)
-    [40388] = true, -- Rearming Trap (Rearming Trap)
+    [40382] = true, -- Barbed Trap (Barbed Trap)
     [40372] = true, -- Lightweight Beast Trap (Lightweight Beast Trap)
 
     -- Mages Guild
@@ -652,11 +651,10 @@ Effects.EffectGroundDisplay = {
     ---------------------------
 
     [35737] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection)
-    [40181] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead)
+    [40181] = { buff = true, debuff = false, ground = false }, -- Turn Evil (Turn Evil)
     [40169] = { buff = true, debuff = false, ground = false }, -- Ring of Preservation (Ring of Preservation)
     [35750] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Trap Beast (Trap Beast)
-    [40382] = { buff = false, debuff = false, ground = true, stackAdd = 2, stackRemove = 2, stackReset = 2 }, -- Rearming Trap (Rearming Trap)
-    [40388] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Rearming Trap (Rearming Trap)
+    [40382] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Barbed Trap (Barbed Trap)
     [40372] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap)
 
     ---------------------------
@@ -913,6 +911,13 @@ Effects.AddNoDurationBarHighlight = {
 
 
 Effects.BarHighlightExtraId = {
+
+    -- Fighters Guild
+    [80471] = 40195, -- Camouflaged Hunter
+
+    [68595] = 35750, -- Trap Beast
+    [68632] = 40382, -- Barbed Trap
+    [68628] = 40372, -- Lightweight Beast Trap
 
     -- Soul Magic
     [126890] = 126891, -- Soul Trap
@@ -1317,15 +1322,14 @@ Effects.BarHighlightOverride = {
     -- Fighters Guild ---------
     ---------------------------
 
-    [35721] = { newId = 35736 }, -- Silver Bolts
-    [40300] = { newId = 40302 }, -- Silver Shards
     [40336] = { newId = 40340 }, -- Silver Leash
-    [35750] = { newId = 68595, showFakeAura = true }, -- Trap Beast (Trap Beast)
-    [40382] = { newId = 68632, showFakeAura = true }, -- Rearming Trap (Rearming Trap)
-    [40372] = { newId = 68628, showFakeAura = true }, -- Lightweight Beast Trap (Lightweight Beast Trap)
-    [35713] = { newId = 62305 }, -- Dawnbreaker (Dawnbreaker)
-    [40161] = { newId = 62310 }, -- Flawless Dawnbreaker (Flawless Dawnbreaker)
-    [40158] = { newId = 62314 }, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting)
+    [40195] = { noRemove = true }, -- Camouflaged Hunter
+    [35750] = { noRemove = true }, -- Trap Beast
+    [40382] = { noRemove = true }, -- Barbed Trap
+    [40372] = { noRemove = true }, -- Lightweight Beast Trap
+    [35713] = { newId = 62305 }, -- Dawnbreaker
+    [40161] = { newId = 126312 }, -- Flawless Dawnbreaker
+    [40158] = { newId = 62314 }, -- Dawnbreaker of Smiting
 
     ---------------------------
     -- Mages Guild ------------
@@ -3634,9 +3638,9 @@ Effects.EffectOverride = {
     [110118] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sirorias_boon.dds', tooltip = Tooltips.Set_Sirorias_Boon }, -- Siroria's Boon (Siroria's)
     [109081] = { tooltip = Tooltips.Set_Mantle_of_Siroria }, -- Ideal Mantle of Siroria (Siroria's)
     [110142] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sirorias_boon.dds', tooltip = Tooltips.Set_Sirorias_Boon }, -- Siroria's Boon (Perfect Siroria's)
-    [110504] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', tooltip = Tooltips.Set_Relequens }, -- Arms of Relequen (Perfect Relequen's)
+    [110504] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', tooltip = Tooltips.Generic_Physical, tooltipValue2 = 1 }, -- Arms of Relequen (Perfect Relequen's)
     [107203] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds' }, -- Arms of Relequen (Perfect Relequen's)
-    [110512] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = Abilities.Set_Arms_of_Relequen, tooltip = Tooltips.Set_Relequens }, -- Ideal Arms of Relequen (Relequen's)
+    [110512] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = Abilities.Set_Arms_of_Relequen, tooltip = Tooltips.Generic_Physical, tooltipValue2 = 1 }, -- Ideal Arms of Relequen (Relequen's)
     [109086] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = Abilities.Set_Arms_of_Relequen }, -- Ideal Arms of Relequen (Relequen's)
     [109976] = { tooltip = Abilities.Set_Aegis_of_Galenwe }, -- Empower (Aegis of Galenwe)
     [109989] = { tooltip = Abilities.Set_Aegis_of_Galenwe }, -- Empower (Ideal Aegis of Galenwe)
@@ -5856,23 +5860,21 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Silver Bolts / Silver Shards / Silver Leash
-    [35736] = { icon = 'esoui/art/icons/ability_fightersguild_003.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Silver Bolts (Silver Bolts - Rank 1)
-    [40302] = { icon = 'esoui/art/icons/ability_fightersguild_003_a.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Silver Shards (Silver Shards - Rank 1)
-    [40340] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Silver Leash (Silver Leash - Rank 1)
-    [109354] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds' }, -- Silver Leash (Silver Leash - Rank 1)
+    [40340] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Silver Leash (Silver Leash)
+    [109354] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds' }, -- Silver Leash (Silver Leash
 
-    -- Circle of Protection / Turn Undead / Ring of Preservation
+    -- Circle of Protection / Turn Evil / Ring of Preservation
     [35737] = { tooltip = Tooltips.Skill_Circle_of_Protection }, -- Circle of Protection
     [80271] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Circle_of_Protection }, -- Minor Endurance (Circle of Protection)
     [35739] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Circle_of_Protection }, -- Minor Protection (Circle of Protection)
-    [40181] = { tooltip = Tooltips.Skill_Circle_of_Protection }, -- Turn Undead
-    [80276] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Turn_Undead }, -- Minor Endurance (Turn Undead)
-    [40185] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Turn_Undead }, -- Minor Protection (Turn Undead)
-    [40187] = { tooltip = Tooltips.Generic_Fear }, -- Turn Undead (Turn Undead)
+    [40181] = { tooltip = Tooltips.Skill_Circle_of_Protection }, -- Turn Evil
+    [80276] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Turn_Undead }, -- Minor Endurance (Turn Evil)
+    [40185] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Turn_Undead }, -- Minor Protection (Turn Evil)
+    [40187] = { tooltip = Tooltips.Generic_Fear }, -- Turn Evil (Turn Evil)
     [40169] = { tooltip = Tooltips.Skill_Ring_of_Preservation }, -- Ring of Preservation
     [80284] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Ring_of_Preservation }, -- Minor Endurance (Ring of Preservation)
     [40171] = { forcedContainer = 'short', consolidate = true, groundLabel = true, tooltip = Abilities.Skill_Ring_of_Preservation }, -- Minor Protection (Ring of Preservation)
-    [80293] = { tooltip = Tooltips.Skill_Ring_of_Preservation_Ground, groundLabel = true, icon = 'esoui/art/icons/ability_fightersguild_001_b.dds' }, -- Ring of Preservation (Ring of Preservation)
+    [80293] = { tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 0.5, groundLabel = true }, -- Ring of Preservation (Ring of Preservation)
 
     -- Expert Hunter / Evil Hunter / Camouflaged Hunter
     [64509] = { consolidateExtra = true, tooltip = LUIE.GetSkillMorphName(35762) }, -- Major Savagery
@@ -5885,25 +5887,26 @@ Effects.EffectOverride = {
     [80338] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, tooltip = Abilities.Skill_Camouflaged_Hunter }, -- Camouflaged Hunter (Camouflaged Hunter)
     [80471] = { tooltip = Abilities.Skill_Camouflaged_Hunter }, -- Minor Berserk (Camouflaged Hunter)
 
-    -- Trap Beast / Rearming Trap / Lightweight Beast Trap
+    -- Trap Beast / Barbed Trap / Lightweight Beast Trap
     [35750] = { tooltip = Tooltips.Skill_Trap_Beast }, -- Trap Beast (Trap Beast)
     [35756] = { tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Trap Beast (Trap Beast)
     [35753] = { hideReduce = true, tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Trap Beast (Trap Beast)
     [68595] = { tooltip = Abilities.Skill_Trap_Beast }, -- Minor Force (Trap Beast)
-    [40382] = { tooltip = Tooltips.Skill_Rearming_Trap }, -- Rearming Trap (Rearming Trap)
-    [40388] = { tooltip = Tooltips.Skill_Rearming_Trap }, -- Rearming Trap (Rearming Trap)
-    [40385] = { tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Rearming Trap (Rearming Trap)
-    [40384] = { hideReduce = true, tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Rearming Trap (Rearming Trap)
-    [40391] = { hideReduce = true, tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Rearming Trap (Rearming Trap)
-    [68632] = { tooltip = Abilities.Skill_Rearming_Trap }, -- Minor Force (Rearming Trap)
+
+    [40382] = { tooltip = Tooltips.Skill_Barbed_Trap }, -- Barbed Trap (Barbed Trap)
+    [40385] = { tooltip = Tooltips.Skill_Barbed_Trap_Debuff }, -- Barbed Trap (Barbed Trap)
+    [40384] = { hideReduce = true, tooltip = Tooltips.Skill_Barbed_Trap_Debuff }, -- Barbed Trap (Barbed Trap)
+    [68632] = { tooltip = Abilities.Skill_Barbed_Trap }, -- Minor Force (Barbed Trap)
+
     [40372] = { tooltip = Tooltips.Skill_Trap_Beast }, -- Lightweight Beast Trap (Lightweight Beast Trap)
     [40375] = { tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Lightweight Beast Trap (Lightweight Beast Trap)
     [40374] = { hideReduce = true, tooltip = Tooltips.Skill_Trap_Beast_Debuff }, -- Lightweight Beast Trap (Lightweight Beast Trap)
     [68628] = { tooltip = Abilities.Skill_Lightweight_Beast_Trap }, -- Minor Force (Lightweight Beast Trap)
 
     -- Dawnbreaker / Flawless Dawnbreaker / Dawnbreaker of Smiting
-    [62305] = { tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Dawnbreaker
-    [62310] = { tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Flawless Dawnbreaker
+    [62305] = { tooltip = Tooltips.Generic_Physical, tooltipValue2 = 2 }, -- Dawnbreaker
+    [126312] = { name = Abilities.Skill_Flawless_Dawnbreaker, tooltip = Tooltips.Skill_Flawless_Dawnbreaker }, -- Flawless Dawnbreaker Passive (Flawless Dawnbreaker)
+    [62310] = { tooltip = Tooltips.Generic_Physical, tooltipValue2 = 2 }, -- Flawless Dawnbreaker
     [40160] = { tooltip = Tooltips.Skill_Dawnbreaker_of_Smiting, hideReduce = true }, -- Dawnbreaker of Smiting
     [62314] = { tooltip = Tooltips.Skill_Dawnbreaker_of_Smiting }, -- Dawnbreaker of Smiting
 
@@ -11652,7 +11655,7 @@ Effects.AddGroundDamageAura = {
     [40061] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Healing Springs
 
     -- Fighters Guild
-    [80293] = { duration = 600, type = BUFF_EFFECT_TYPE_BUFF, exception = ACTION_RESULT_EFFECT_GAINED }, -- Ring of Preservation (Ring of Preservation)
+    [80293] = { duration = 600, type = BUFF_EFFECT_TYPE_BUFF }, -- Ring of Preservation (Ring of Preservation)
 
     -- Mages Guild
     [63429] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Meteor (Meteor)

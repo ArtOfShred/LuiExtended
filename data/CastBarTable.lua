@@ -523,6 +523,9 @@ CastBarTable.IsCast = {
     [40124] = true, -- Devour (Werewolf - Quest)
 
     -- Guild
+    [35713] = true, -- Dawnbreaker (Fighter's Guild)
+    [40161] = true, -- Flawless Dawnbreaker (Fighter's Guild)
+    [40158] = true, -- Dawnbreaker of Smiting (Fighter's Guild)
     [103488] = true, -- Time Stop (Psijic Order)
     [104059] = true, -- Borrowed Time (Psijic Order)
     [103706] = true, -- Channeled Acceleration (Psijic Order)

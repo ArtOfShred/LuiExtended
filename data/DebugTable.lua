@@ -6344,14 +6344,12 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [35721] = true, -- Silver Bolts (Silver Bolts)
-    [35736] = true, -- Silver Bolts (Silver Bolts)
 
     [40300] = true, -- Silver Shards (Silver Shards)
-    [40302] = true, -- Silver Shards (Silver Shards)
     [40327] = true, -- Silver Shards (Silver Shards)
 
     [40336] = true, -- Silver Leash (Silver Leash)
-    [40340] = true, -- Silver Bolts (Silver Leash)
+    [40340] = true, -- Silver Leash (Silver Leash)
     [109354] = true, -- Silver Leash (Silver Leash)
     [42102] = true, -- Silver Leash (Silver Leash)
 
@@ -6361,13 +6359,12 @@ LUIE.DebugAuras = {
     [35738] = true, -- Circle of Protection (Circle of Protection)
     [101696] = true, -- Circle of Protection (Circle of Protection)
 
-    [40181] = true, -- Turn Undead (Turn Undead)
-    [80276] = true, -- Minor Endurance (Turn Undead)
-    [40185] = true, -- Minor Protection (Turn Undead)
-    [40184] = true, -- Turn Undead (Turn Undead)
-    [41947] = true, -- Turn Undead (Turn Undead)
-    [40187] = true, -- Turn Undead (Turn Undead)
-    [101697] = true, -- Turn Undead (Turn Undead)
+    [40181] = true, -- Turn Evil (Turn Evil)
+    [80276] = true, -- Minor Endurance (Turn Evil)
+    [40185] = true, -- Minor Protection (Turn Evil)
+    [40184] = true, -- Turn Evil (Turn Evil)
+    [40187] = true, -- Turn Evil (Turn Evil)
+    [101697] = true, -- Turn Evil (Turn Evil)
 
     [40169] = true, -- Ring of Preservation (Ring of Preservation)
     [80284] = true, -- Minor Endurance (Ring of Preservation)
@@ -6396,15 +6393,12 @@ LUIE.DebugAuras = {
     [35753] = true, -- Trap Beast (Trap Beast)
     [68595] = true, -- Minor Force (Trap Beast)
 
-    [40382] = true, -- Rearming Trap (Rearming Trap)
-    [40386] = true, -- Rearming Trap (Rearming Trap)
-    [40389] = true, -- Rearming Trap (Rearming Trap)
-    [40385] = true, -- Rearming Trap (Rearming Trap)
-    [40384] = true, -- Rearming Trap (Rearming Trap)
-    [68632] = true, -- Minor Force (Rearming Trap)
-    [40388] = true, -- Rearming Trap (Rearming Trap)
-    [40392] = true, -- Rearming Trap (Rearming Trap)
-    [40391] = true, -- Rearming Trap (Rearming Trap)
+    [40382] = true, -- Barbed Trap (Barbed Trap)
+    [40386] = true, -- Barbed Trap (Barbed Trap)
+    [40389] = true, -- Barbed Trap (Barbed Trap)
+    [40385] = true, -- Barbed Trap (Barbed Trap)
+    [40384] = true, -- Barbed Trap (Barbed Trap)
+    [68632] = true, -- Minor Force (Barbed Trap)
 
     [40372] = true, -- Lightweight Beast Trap (Lightweight Beast Trap)
     [40378] = true, -- Daedric Mines (Lightweight Beast Trap)
@@ -6417,9 +6411,8 @@ LUIE.DebugAuras = {
     [35713] = true, -- Dawnbreaker (Dawnbreaker)
     [62305] = true, -- Dawnbreaker (Dawnbreaker)
 
-    [40163] = true, -- Flawless Dawnbreaker Passive (Flawless Dawnbreaker)
-    [42498] = true, -- Flawless Dawnbreaker Passive (Flawless Dawnbreaker)
     [40161] = true, -- Flawless Dawnbreaker (Flawless Dawnbreaker)
+    [126312] = true, -- Flawless Dawnbreaker Passive (Flawless Dawnbreaker)
     [62310] = true, -- Flawless Dawnbreaker (Flawless Dawnbreaker)
 
     [40158] = true, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting)

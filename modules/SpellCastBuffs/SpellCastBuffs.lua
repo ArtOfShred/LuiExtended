@@ -1483,12 +1483,6 @@ function SpellCastBuffs.OnEffectChangedGround(eventCode, changeType, effectSlot,
             end
         end
     elseif changeType == EFFECT_RESULT_GAINED then
-        -- Special condition to remove 2nd Rearming Trap aura if it is recast before the 2nd trap triggers
-        if abilityId == 40382 then
-            SpellCastBuffs.EffectsList.ground[40388] = nil
-            SpellCastBuffs.EffectsList.promb_ground[40388] = nil
-            SpellCastBuffs.EffectsList.promd_ground[40388] = nil
-        end
 
         local currentTime = GetGameTimeMilliseconds()
         g_protectAbilityRemoval[abilityId] = currentTime + 150

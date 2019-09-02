@@ -617,15 +617,16 @@ local strings = {
     ----------------------------------------------------------------
 
     -- Fighters Guild
-    SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_TP =              "You and allies in the rune gain Minor Protection and Minor Endurance.",
-    SI_LUIE_SKILL_RING_OF_PRESERVATION_TP =              "You and allies in the rune have the cost of Roll Dodge reduced by |cFFFFFF20|r% and gain Minor Protection and Minor Endurance.",
-    SI_LUIE_SKILL_RING_OF_PRESERVATION_GROUND_TP =       "The cost of Roll Dodge is reduced by |cFFFFFF20|r%.",
+    SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_TP =              "You and allies in the |cFFFFFF5|r meter radius of the rune gain Minor Protection and Minor Endurance.",
+    SI_LUIE_SKILL_RING_OF_PRESERVATION_TP =              "You and allies in the |cFFFFFF5|r meter radius of the rune gain Minor Protection and Minor Endurance and are healed every |cFFFFFF0.5|r seconds.",
     SI_LUIE_SKILL_EXPERT_HUNTER_TP =                     "Revealing stealthed and invisible enemies within |cFFFFFF6|r meters for |cFFFFFF<<1>>|r seconds.\n\nExposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_EVIL_HUNTER_TP =                       "Revealing stealthed and invisible enemies within |cFFFFFF6|r meters for |cFFFFFF<<1>>|r seconds.\n\nExposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.\n\nWhile active the Stamina costs of your Fighters Guild abilities are reduced by |cFFFFFF25|r%.",
-    SI_LUIE_SKILL_TRAP_BEAST_TP =                        "Triggers when an enemy comes close, dealing Physical Damage and afflicting them with Bleeding Damage for |cFFFFFF6|r seconds as well as immobilizing them.\n\nWhen triggered, grants you Minor Force for |cFFFFFF8|r seconds.",
-    SI_LUIE_SKILL_TRAP_BEAST_DEBUFF_TP =                 "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds and immobilized for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_REARMING_TRAP_TP =                     "Triggers when an enemy comes close, dealing Physical Damage and afflicting them with Bleeding Damage for |cFFFFFF6|r seconds as well as immobilizing them.\n\nWhen triggered, grants you Minor Force for |cFFFFFF8|r seconds.\n\nAfter being triggered the trap resets and can be triggered one more time.",
-    SI_LUIE_SKILL_DAWNBREAKER_OF_SMITING_TP =            "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF6|r seconds.\n\nStunned for |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_EVIL_HUNTER_TP =                       "Revealing stealthed and invisible enemies within |cFFFFFF6|r meters for |cFFFFFF<<1>>|r seconds.\n\nExposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.\n\nWhile active, increases the damage of your Stamina costing Fighters Guild abilities by |cFFFFFF25|r%.",
+    SI_LUIE_SKILL_TRAP_BEAST_TP =                        "Triggers when an enemy comes close, dealing Physical Damage and additional Physical Damage over |cFFFFFF10|r seconds, granting you Minor Force for the duration.\n\nEnemies who activate the trap are immobilized for |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_TRAP_BEAST_DEBUFF_TP =                 "Afflicted with Physical Damage every |cFFFFFF2|r seconds for |cFFFFFF10|r seconds and immobilized for |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_BARBED_TRAP_TP =                       "Triggers when an enemy comes close, dealing Physical Damage and additional Physical Damage over |cFFFFFF18|r seconds, granting you Minor Force for the duration.\n\nEnemies who activate the trap are immobilized for |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_BARBED_TRAP_DEBUFF_TP =                "Afflicted with Physical Damage every |cFFFFFF2|r seconds for |cFFFFFF18|r seconds and immobilized for |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_FLAWLESS_DAWNBREAKER_TP =              "Increase Weapon Damage by |cFFFFFF300|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_DAWNBREAKER_OF_SMITING_TP =            "Afflicted with Physical Damage every |cFFFFFF2|r seconds for |cFFFFFF6|r seconds.\n\nStunned for |cFFFFFF2|r seconds.",
 
     -- Mages Guild
     SI_LUIE_SKILL_RADIANT_MAGELIGHT_TP =                 "Revealing stealthed and invisible enemies within |cFFFFFF12|r meters for |cFFFFFF<<1>>|r seconds.\n\nExposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.",
@@ -885,7 +886,6 @@ local strings = {
     SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP =           "You and allies standing in the circle of might gain Major Courage for |cffffff30|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP =             "Standing in the ring grants you a stack of Siroria's Boon every |cffffff1|r second.", -- TODO: Translate
     SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Увеличивает урон от Заклинаний на |cffffff30|r в течение |cffffff5|r секунд, суммируется максимум до |cffffff20|r раз.",
-    SI_LUIE_SKILL_SET_RELEQUENS_TP =                     "Afflicted with Physical damage every |cffffff1|r second for |cffffff5|r seconds.", -- TODO: Translate
     SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS =               "Reduce the Magicka, Stamina, and Health cost of abilities by |cffffff12|r% for |cffffff<<1>>|r seconds.",
 
     -- Battleground Sets

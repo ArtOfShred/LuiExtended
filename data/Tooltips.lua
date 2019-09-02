@@ -131,6 +131,7 @@ LUIE.Data.Tooltips = {
     Generic_Test                                    = GetString(SI_LUIE_SKILL_TEST_TP),
 
     Generic_Bleed                                   = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", BleedDamage),
+    Generic_Physical                                = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", PhysicalDamage),
     Generic_Disease                                 = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", DiseaseDamage),
     Generic_Poison                                  = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", PoisonDamage),
     Generic_Burn                                    = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_DOT_TP), "SUBSTRING", FlameDamage),
@@ -449,7 +450,6 @@ LUIE.Data.Tooltips = {
     Set_Vestment_of_Olorime                         = GetString(SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP),
     Set_Mantle_of_Siroria                           = GetString(SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP),
     Set_Sirorias_Boon                               = GetString(SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP),
-    Set_Relequens                                   = GetString(SI_LUIE_SKILL_SET_RELEQUENS_TP),
 
     -- Battleground Sets
     Set_Vanguards_Challenge                         = GetString(SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP),
@@ -815,12 +815,13 @@ LUIE.Data.Tooltips = {
     -- Fighters Guild
     Skill_Circle_of_Protection                      = GetString(SI_LUIE_SKILL_CIRCLE_OF_PROTECTION_TP),
     Skill_Ring_of_Preservation                      = GetString(SI_LUIE_SKILL_RING_OF_PRESERVATION_TP),
-    Skill_Ring_of_Preservation_Ground               = GetString(SI_LUIE_SKILL_RING_OF_PRESERVATION_GROUND_TP),
     Skill_Expert_Hunter                             = GetString(SI_LUIE_SKILL_EXPERT_HUNTER_TP),
     Skill_Evil_Hunter                               = GetString(SI_LUIE_SKILL_EVIL_HUNTER_TP),
     Skill_Trap_Beast                                = GetString(SI_LUIE_SKILL_TRAP_BEAST_TP),
     Skill_Trap_Beast_Debuff                         = GetString(SI_LUIE_SKILL_TRAP_BEAST_DEBUFF_TP),
-    Skill_Rearming_Trap                             = GetString(SI_LUIE_SKILL_REARMING_TRAP_TP),
+    Skill_Barbed_Trap                               = GetString(SI_LUIE_SKILL_BARBED_TRAP_TP),
+    Skill_Barbed_Trap_Debuff                        = GetString(SI_LUIE_SKILL_BARBED_TRAP_DEBUFF_TP),
+    Skill_Flawless_Dawnbreaker                      = GetString(SI_LUIE_SKILL_FLAWLESS_DAWNBREAKER_TP),
     Skill_Dawnbreaker_of_Smiting                    = GetString(SI_LUIE_SKILL_DAWNBREAKER_OF_SMITING_TP),
 
     -- Mages Guild
