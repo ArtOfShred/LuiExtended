@@ -239,6 +239,7 @@ local g_barDurationOverride   = {} -- Table for storing abilitiyId's that ignore
 local g_barNoRemove           = {} -- Table of abilities we don't remove from bar highlight
 local g_protectAbilityRemoval = {} -- AbilityId's set to a timestamp here to prevent removal of bar highlight when refreshing ground auras from causing the highlight to fade.
 local g_mineStacks            = {} -- Individual AbilityId ground mine stack information
+local g_mineNoTurnOff         = {} -- When this variable is true for an abilityId - don't remove the bar highlight for a mine (We we have reticleover target and the mine effect applies on the enemy)
 local g_barFont -- Font for Ability Highlight Label
 local g_potionFont -- Font for Potion Timer Label
 local g_ultimateFont -- Font for Ultimate Percentage Label
@@ -921,7 +922,11 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
     end
 
     if unitTag == "player" then
-        g_toggledSlotsPlayer[abilityId] = true
+        if changeType ~= EFFECT_RESULT_FADED then
+            g_toggledSlotsPlayer[abilityId] = true
+        else
+            g_toggledSlotsPlayer[abilityId] = nil
+        end
     end
 
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER and (Effects.EffectGroundDisplay[abilityId] or Effects.LinkedGroundMine[abilityId]) then
@@ -935,7 +940,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
             if not g_protectAbilityRemoval[abilityId] or g_protectAbilityRemoval[abilityId] < currentTime then
                 if (Effects.IsGroundMineAura[abilityId] or Effects.IsGroundMineStack[abilityId]) then
                     g_mineStacks[abilityId] = g_mineStacks[abilityId] - Effects.EffectGroundDisplay[abilityId].stackRemove
-                    if g_mineStacks[abilityId] == 0 then
+                    if g_mineStacks[abilityId] == 0 and not g_mineNoTurnOff[abilityId] then
                         if g_toggledSlotsRemain[abilityId] then
                             if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
                                 g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
@@ -962,6 +967,10 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 end
             end
         elseif changeType == EFFECT_RESULT_GAINED then
+
+            if g_mineNoTurnOff[abilityId] then
+                g_mineNoTurnOff[abilityId] = nil
+            end
 
             local currentTime = GetGameTimeMilliseconds()
             g_protectAbilityRemoval[abilityId] = currentTime + 150
@@ -997,12 +1006,17 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         end
     end
 
-    local originalId = abilityId -- TODO
     -- Hijack the abilityId here if we have it in the override for extra bar highlights
     if Effects.BarHighlightExtraId[abilityId] then
         for k, v in pairs(Effects.BarHighlightExtraId) do
             if k == abilityId then
                 abilityId = v
+                if IsGroundMineAura[abilityId] then
+                    g_toggledSlotsPlayer[abilityId] = nil
+                    if unitTag == "reticleover" then
+                        g_mineNoTurnOff[abilityId] = true
+                    end
+                end
                 break
             end
         end

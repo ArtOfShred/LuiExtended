@@ -909,13 +909,6 @@ Effects.AddNoDurationBarHighlight = {
 
 }
 
--- USE SECONDARY ID HERE
-Effects.BarHighlightIsMine = {
-
-    [40468] = true -- Scaling Rune
-
-}
-
 -- SECONDARY ID = ORIGINAL BAR HIGHLIGHT ID
 Effects.BarHighlightExtraId = {
 
@@ -1344,8 +1337,6 @@ Effects.BarHighlightOverride = {
     ---------------------------
     -- Mages Guild ------------
     ---------------------------
-
-    [40465] = { noRemove = true }, -- Scaling Rune
 
     [31642] = { newId = 48131, secondary = true }, -- Equilibrium
     [40445] = { newId = 40449, showFakeAura = true }, -- Spell Symmetry (Spell Symmetry)
