@@ -1927,8 +1927,6 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
            result ~= ACTION_RESULT_BLOCKED_DAMAGE and
            result ~= ACTION_RESULT_HOT_TICK and
            result ~= ACTION_RESULT_HOT_TICK_CRITICAL and
-           result ~= ACTION_RESULT_DOT_TICK and
-           result ~= ACTION_RESULT_DOT_TICK_CRITICAL and
            not Effects.AddGroundDamageAura[abilityId].exception then
             return
         end
