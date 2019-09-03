@@ -237,6 +237,7 @@ local g_barOverrideCI         = {} -- Table for storing abilityId's from Effects
 local g_barFakeAura           = {} -- Table for storing abilityId's that only display a fakeaura
 local g_barDurationOverride   = {} -- Table for storing abilitiyId's that ignore ending event
 local g_barNoRemove           = {} -- Table of abilities we don't remove from bar highlight
+local g_ignoreMouseover       = {}
 local g_protectAbilityRemoval = {} -- AbilityId's set to a timestamp here to prevent removal of bar highlight when refreshing ground auras from causing the highlight to fade.
 local g_mineStacks            = {} -- Individual AbilityId ground mine stack information
 local g_mineNoTurnOff         = {} -- When this variable is true for an abilityId - don't remove the bar highlight for a mine (We we have reticleover target and the mine effect applies on the enemy)
@@ -464,17 +465,18 @@ end
 -- Called on initialization and menu changes
 -- Pull data from Effects.BarHighlightOverride Tables to filter the display of Bar Highlight abilities based off menu settings.
 function CombatInfo.UpdateBarHighlightTables()
-    g_uiProcAnimation      = {}
-    g_uiCustomToggle       = {}
-    g_triggeredSlots       = {}
-    g_triggeredSlotsRemain = {}
-    g_toggledSlots         = {}
-    g_toggledSlotsRemain   = {}
-    g_toggledSlotsPlayer   = {}
-    g_barOverrideCI        = {}
-    g_barFakeAura          = {}
-    g_barDurationOverride  = {}
-    g_barNoRemove          = {}
+    g_uiProcAnimation           = {}
+    g_uiCustomToggle            = {}
+    g_triggeredSlots            = {}
+    g_triggeredSlotsRemain      = {}
+    g_toggledSlots              = {}
+    g_toggledSlotsRemain        = {}
+    g_toggledSlotsPlayer        = {}
+    g_barOverrideCI             = {}
+    g_barFakeAura               = {}
+    g_barDurationOverride       = {}
+    g_barNoRemove               = {}
+    g_ignoreMouseover           = {}
 
     local counter = 0
     for abilityId, _ in pairs(g_barOverrideCI) do
@@ -515,11 +517,11 @@ function CombatInfo.UpdateBarHighlightTables()
                     end
                 end
             end
-            if value.emulateGround == true then
+            if value.ignoreMouseover == true then
                 if value.newId then
-                    g_toggledSlotsPlayer[value.newId] = true
+                    g_ignoreMouseover[value.newId] = true
                 else
-                    g_toggledSlotsPlayer[abilityId] = true
+                    g_ignoreMouseover[abilityId] = true
                 end
             end
         end
@@ -882,7 +884,7 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
     local unitTag = "reticleover"
 
     for k, v in pairs(g_toggledSlotsRemain) do
-        if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and not g_toggledSlotsPlayer[k] then
+        if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and not (g_toggledSlotsPlayer[k] or g_ignoreMouseover[k]) then
             g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
             g_toggledSlotsRemain[k] = nil
         end
@@ -903,6 +905,20 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
             if not IsUnitDead(unitTag) then
                 CombatInfo.OnEffectChanged(0, EFFECT_RESULT_UPDATED, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0, abilityId, castByPlayer)
             end
+        end
+    end
+end
+
+-- Iterate until we find the buff we're looking for, if it's present, then send a dummy event using the duration info from that buff but the id from the original ability.
+function CombatInfo.BarHighlightSwap(abilityId)
+    local id1 = Effects.BarHighlightCheckOnFade[abilityId].id1
+    local id2 = Effects.BarHighlightCheckOnFade[abilityId].id2 or 0
+    local unitTag = Effects.BarHighlightCheckOnFade[abilityId].unitTag
+    for i = 1, GetNumBuffs(unitTag) do
+        local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
+        if id1 == abilityIdNew or id2 == abilityIdNew then
+            CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1)
+            return
         end
     end
 end
@@ -1011,7 +1027,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         for k, v in pairs(Effects.BarHighlightExtraId) do
             if k == abilityId then
                 abilityId = v
-                if IsGroundMineAura[abilityId] then
+                if Effects.IsGroundMineAura[abilityId] then
                     g_toggledSlotsPlayer[abilityId] = nil
                     if unitTag == "reticleover" then
                         g_mineNoTurnOff[abilityId] = true
@@ -1046,6 +1062,10 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 end
             end
             g_toggledSlotsRemain[abilityId] = nil
+        end
+
+        if Effects.BarHighlightCheckOnFade[abilityId] and castByPlayer == 1 then
+            CombatInfo.BarHighlightSwap(abilityId)
         end
     else
         -- Also create visual enhancements from skill bar
@@ -1506,6 +1526,10 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
                 end
             end
             g_toggledSlotsRemain[abilityId] = nil
+        end
+
+        if Effects.BarHighlightCheckOnFade[abilityId] and targetType == COMBAT_UNIT_TYPE_PLAYER then
+            CombatInfo.BarHighlightSwap(abilityId)
         end
     end
 end

@@ -863,10 +863,6 @@ function Effects.BarHighlightRefresh()
         -- Restoration Staff
         Effects.BarHighlightOverride[85132] = { newId = 85154, showFakeAura = true, secondary = true, noRemove = true } -- Light's Champion --> Major Force
 
-        -- Werewolf
-        Effects.BarHighlightOverride[39113] = { newId = 45834, secondary = true } -- Ferocious Roar --> Off Balance
-        Effects.BarHighlightOverride[39114] = { newId = 111788, secondary = true } -- Deafening Roar --> Major Fracture
-
         -- Mages Guild
         Effects.BarHighlightOverride[28567] = { newId = 63223, showFakeAura = true, secondary = true, noRemove = true } -- Entropy --> Major Sorcery
         Effects.BarHighlightOverride[40457] = { newId = 63227, showFakeAura = true, secondary = true, noRemove = true } -- Degeneration --> Major Sorcery
@@ -884,10 +880,6 @@ function Effects.BarHighlightRefresh()
 
         -- Restoration Staff
         Effects.BarHighlightOverride[85132] = nil -- Light's Champion
-
-        -- Werewolf
-        Effects.BarHighlightOverride[39113] = nil -- Ferocious Roar
-        Effects.BarHighlightOverride[39114] = nil -- Deafening Roar
 
         -- Mages Guild
         Effects.BarHighlightOverride[28567] = nil -- Entropy
@@ -909,6 +901,7 @@ Effects.AddNoDurationBarHighlight = {
 
 }
 
+-- Also track this id on bar highlight
 -- SECONDARY ID = ORIGINAL BAR HIGHLIGHT ID
 Effects.BarHighlightExtraId = {
 
@@ -921,14 +914,30 @@ Effects.BarHighlightExtraId = {
 
     -- Mages Guild
     [40468] = 40465, -- Scalding Rune
+    [40476] = 40470, -- Volcanic Rune
 
     -- Soul Magic
     [126890] = 126891, -- Soul Trap
     [126895] = 126894, -- Soul Splitting Trap
     [126897] = 126898, -- Consuming Trap
 
+    -- Werewolf
+    [39113] = 45834, -- Ferocious Roar --> Off Balance
+    [39114] = 111788, -- Deafening Roar --> Major Fracture
+
     -- Vampire
-    [63558] = 81493, -- Minor Expedition --> Accelerating Drain
+    [63558] = 81493, -- Minor Expedition --- Accelerating Drain
+
+
+}
+
+-- When the primary tracked effect fades, do an iteration over player buffs to see if another buff is present, if so trigger bar highlight for it
+-- TRACKED ID = OTHER ID'S TO CHECK FOR
+Effects.BarHighlightCheckOnFade = {
+
+    -- Mages Guild
+    [40449] = { id1 = 48136, unitTag = "player" }, -- Spell Symmetry
+    [48141] = { id1 = 40443 , id2 = 80160, unitTag = "player" }, -- Balance --> Major Ward / Major Resolve
 
 }
 
@@ -942,7 +951,7 @@ Effects.BarHighlightOverride = {
         -- secondary = true -- If the menu option for Secondary effects set to false, hide this ID
         -- noRemove = ture -- don't remove effect on fading -- Doesn't apply to hostile effects. Should be used with major/minor effects.
         -- duration = # -- override duration
-        -- emulateGround = true -- Don't remove this highlight on target change
+        -- ignoreMouseover = true -- Don't remove this highlight on target change
         -- hide = true -- Hide this bar highlight
 
     ---------------------------
@@ -1109,9 +1118,9 @@ Effects.BarHighlightOverride = {
     [22259] = { newId = 80547 }, -- Ritual of Retribution (Ritual of Retribution)
     [22262] = { newId = 80553 }, -- Extended Ritual (Extended Ritual)
 
-    [22234] = { showFakeAura = true, emulateGround = true }, -- Rune Focus --> Major Resolve
-    [22240] = { showFakeAura = true, emulateGround = true }, -- Channeled Focus
-    [22237] = { showFakeAura = true, emulateGround = true }, -- Restoring Focus
+    [22234] = { showFakeAura = true, ignoreMouseover = true }, -- Rune Focus
+    [22240] = { showFakeAura = true, ignoreMouseover = true }, -- Channeled Focus
+    [22237] = { showFakeAura = true, ignoreMouseover = true }, -- Restoring Focus
 
     [22223] = { showFakeAura = true }, -- Rite of Passage
     [22229] = { showFakeAura = true }, -- Remembrance
@@ -1309,14 +1318,16 @@ Effects.BarHighlightOverride = {
 
     [32893] = { newId = 68883 }, -- Drain Essence
     [38949] = { newId = 68892 }, -- Invigorating Drain
-    [38956] = { newId = 81493 }, -- Accelerating Drain
+    [38956] = { newId = 81493, noRemove = true }, -- Accelerating Drain
     [88158] = { newId = 38932 }, -- Materialize --> Clouding Swarm
 
     ---------------------------
     -- Werewolf ---------------
     ---------------------------
 
-    [58317] = { newId = 58318 }, -- Hircine's Rage --> Major Brutality
+    [58317] = { newId = 58318, noRemove = true }, -- Hircine's Rage --> Major Brutality
+    [39113] = { newId = 45834 }, -- Ferocious Roar --> Off Balance
+    [39114] = { newId = 111788 }, -- Deafening Roar --> Major Fracture
     [58855] = { newId = 58856 }, -- Infectious Claws
     [58864] = { newId = 58865 }, -- Claws of Anguish
     [58879] = { newId = 58880 }, -- Claws of Life
@@ -1327,9 +1338,12 @@ Effects.BarHighlightOverride = {
 
     [40336] = { newId = 40340 }, -- Silver Leash
     [40195] = { noRemove = true }, -- Camouflaged Hunter
-    [35750] = { noRemove = true }, -- Trap Beast
-    [40382] = { noRemove = true }, -- Barbed Trap
-    [40372] = { noRemove = true }, -- Lightweight Beast Trap
+
+
+    [35750] = { ignoreMouseover = true }, -- Trap Beast
+    [40382] = { ignoreMouseover = true }, -- Barbed Trap
+    [40372] = { ignoreMouseover = true }, -- Lightweight Beast Trap
+
     [35713] = { newId = 62305 }, -- Dawnbreaker
     [40161] = { newId = 126312 }, -- Flawless Dawnbreaker
     [40158] = { newId = 62314 }, -- Dawnbreaker of Smiting
@@ -1338,9 +1352,9 @@ Effects.BarHighlightOverride = {
     -- Mages Guild ------------
     ---------------------------
 
-    [31642] = { newId = 48131, secondary = true }, -- Equilibrium
+    [31642] = { newId = 48131 }, -- Equilibrium
     [40445] = { newId = 40449, showFakeAura = true }, -- Spell Symmetry (Spell Symmetry)
-    [40441] = { newId = 40443, showFakeAura = true, noRemove = true }, -- Balance --> Major Ward
+    [40441] = { newId = 48141, showFakeAura = true }, -- Balance
     [16536] = { newId = 63430 }, -- Meteor
     [40489] = { newId = 63456 }, -- Ice Comet
     [40493] = { newId = 63473 }, -- Shooting Star
