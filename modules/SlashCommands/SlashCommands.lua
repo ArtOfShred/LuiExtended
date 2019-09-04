@@ -212,4 +212,6 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/witch"]        = function(...) SlashCommands.SlashCollectible(479) end
         SLASH_COMMANDS["/witchfest"]    = function(...) SlashCommands.SlashCollectible(479) end
     end
+
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_USE_RESULT, SlashCommands.CollectibleUsed)
 end

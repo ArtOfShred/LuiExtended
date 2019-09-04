@@ -8,6 +8,81 @@ local SlashCommands = LUIE.SlashCommands
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 
+local currentAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+local currentVanity = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
+local lastCollectibleUsed = 0
+local mementoUsed = 0
+
+function SlashCommands.CollectibleUsed(eventCode, result, isAttemptingActivation)
+    if result ~= COLLECTIBLE_USAGE_BLOCK_REASON_NOT_BLOCKED then return end
+    local latency = GetLatency()
+    latency = latency + 100
+    zo_callLater(SlashCommands.CollectibleResult, latency)
+end
+
+function SlashCommands.CollectibleResult()
+
+    -- Bail out if we are in a PVP Zone (This event shouldn't be called in a PVP zone but this exists as a fallback)
+    if LUIE.ResolvePVPZone() then return end
+
+    if mementoUsed ~= 0 then
+        local name = GetCollectibleLink(mementoUsed, LINK_STYLE_BRACKETS)
+        printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_USED), name))
+        mementoUsed = 0
+    end
+
+	local newAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+	local newVanity = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
+
+	if newAssistant ~= currentAssistant then
+		if newAssistant == 0 then
+			lastCollectibleUsed = currentAssistant
+		else
+			lastCollectibleUsed = newAssistant
+		end
+	end
+	if newVanity ~= currentVanity then
+		if newVanity == 0 then
+			lastCollectibleUsed = currentVanity
+		else
+			lastCollectibleUsed = newVanity
+		end
+	end
+
+	currentAssistant = newAssistant
+	currentVanity = newVanity
+
+	if lastCollectibleUsed == 0 then return end
+	local collectibleType = GetCollectibleCategoryType(lastCollectibleUsed)
+
+    -- Vanity
+    if collectibleType == COLLECTIBLE_CATEGORY_TYPE_VANITY_PET then
+        local nickname = GetCollectibleNickname(lastCollectibleUsed)
+        local name = GetCollectibleLink(lastCollectibleUsed, LINK_STYLE_BRACKETS)
+
+        if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 then
+            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON_NN), name, nickname))
+        else
+            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_UNSUMMON_NN), name, nickname))
+        end
+
+    end
+
+    -- Assistants
+    if collectibleType == COLLECTIBLE_CATEGORY_TYPE_ASSISTANT then
+        local name = GetCollectibleLink(lastCollectibleUsed, LINK_STYLE_BRACKETS)
+
+        if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 then
+            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), name))
+        else
+            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_UNSUMMON), name))
+        end
+
+    end
+
+	lastCollectibleUsed = 0
+end
+
 -- Slash Command to port to primary home
 function SlashCommands.SlashHome()
     local primaryHouse = GetHousingPrimaryHouse()
@@ -124,6 +199,15 @@ end
 
 -- Slash Command to use collectibles based on their collectible id
 function SlashCommands.SlashCollectible(id)
+    -- Check to make sure we're not in Imperial City
+    if IsInImperialCity() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_IC), true)
+        if LUIE.SV.TempAlertHome then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_IC)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_AVA), true)
@@ -146,6 +230,9 @@ function SlashCommands.SlashCollectible(id)
     if type(id) == "number" then
         if IsCollectibleUnlocked(id) then
             UseCollectible(id)
+            if id ~= 267 and id ~= 6376 and id ~= 301 and id ~= 6378 then
+                mementoUsed = id
+            end
         else
             printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(id)), true)
             if LUIE.SV.TempAlertHome then

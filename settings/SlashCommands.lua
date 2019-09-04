@@ -7,10 +7,15 @@ local SlashCommands = LUIE.SlashCommands
 
 local zo_strformat = zo_strformat
 
-local bankerOptions     = { "Tythis", "Cat Planet Banker" }
-local bankerOptionsKeys = { ["Tythis"] = 1, ["Cat Planet Banker"] = 2 }
-local merchantOptions   = { "Nuzimeh", "Cat Planet Merchant" }
-local merchantOptionsKeys   = { ["Nuzimeh"] = 1, ["Cat Planet Merchant"] = 2 }
+local bankerTythis = GetCollectibleName(267)
+local bankerCat = GetCollectibleName(6376)
+local merchantNuzimeh = GetCollectibleName(301)
+local merchantCat =  GetCollectibleName(6378)
+
+local bankerOptions     = { bankerTythis, bankerCat }
+local bankerOptionsKeys = { [bankerTythis] = 1, [bankerCat] = 2 }
+local merchantOptions   = { merchantNuzimeh, merchantCat }
+local merchantOptionsKeys   = { [merchantNuzimeh] = 1, [merchantCat] = 2 }
 
 -- Create Slash Commands Settings Menu
 function SlashCommands.CreateSettings()
