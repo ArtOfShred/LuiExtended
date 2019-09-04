@@ -887,6 +887,9 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
         if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and not (g_toggledSlotsPlayer[k] or g_ignoreMouseover[k]) then
             g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
             g_toggledSlotsRemain[k] = nil
+            if Effects.BarHighlightCheckOnFade[k] then
+                CombatInfo.BarHighlightSwap(k)
+            end
         end
     end
 
@@ -941,6 +944,11 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
         if changeType ~= EFFECT_RESULT_FADED then
             g_toggledSlotsPlayer[abilityId] = true
         else
+            g_toggledSlotsPlayer[abilityId] = nil
+        end
+    end
+    if unitTag ~= "player" then
+        if changeType ~= EFFECT_RESULT_FADED then
             g_toggledSlotsPlayer[abilityId] = nil
         end
     end

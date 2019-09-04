@@ -630,16 +630,15 @@ local strings = {
 
     -- Mages Guild
     SI_LUIE_SKILL_RADIANT_MAGELIGHT_TP =                 "Revealing stealthed and invisible enemies within |cFFFFFF12|r meters for |cFFFFFF<<1>>|r seconds.\n\nExposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_ENTROPY_TP =                           "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF6|r seconds while Entropy remains active.",
-    SI_LUIE_SKILL_STRUCTURED_ENTROPY_TP =                "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF6|r seconds while Structured Entropy remains active.",
-    SI_LUIE_SKILL_DEGENERATION_TP =                      "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF6|r seconds while Degeneration remains active.\n\nLight and Heavy attacks made against you by your attacker have a |cFFFFFF15|r% chance to heal them for |cFFFFFF100|r% of the damage dealt.",
-    SI_LUIE_SKILL_FIRE_RUNE_TP =                         "When triggered, the rune blasts all enemies in the target area for Flame Damage.",
-    SI_LUIE_SKILL_VOLCANIC_RUNE_TP =                     "When triggered, the rune blasts all enemies in the target area for Flame Damage, knocks them into the air, and stuns them for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_SCALDING_RUNE_TP =                     "When triggered, the rune blasts all enemies in the target area for Flame Damage and afflicts them with additional Flame Damage over |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_STRUCTURED_ENTROPY_TP =                "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF2|r seconds while Structured Entropy remains active.",
+    SI_LUIE_SKILL_DEGENERATION_TP =                      "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nWhile active, your attacker restores |cFFFFFF100|r Magicka when they hit you with a Light or Heavy Attack.",
+    SI_LUIE_SKILL_FIRE_RUNE_TP =                         "When triggered, the rune blasts all enemies in the target |cFFFFFF3|r meter area for Flame Damage.",
+    SI_LUIE_SKILL_VOLCANIC_RUNE_TP =                     "When triggered, the rune blasts all enemies in the target |cFFFFFF3|r meter area for Flame Damage, knocks them into the air, and stuns them for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_SCALDING_RUNE_TP =                     "When triggered, the rune blasts all enemies in the target |cFFFFFF3|r meter area for Flame Damage and afflicts them with additional Flame Damage over |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_EQUILIBRIUM_TP =                       "Reduce healing done and damage shield strength by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SPELL_SYMMETRY_TP =                    "Reduce the cost of your next Magicka ability used within |cFFFFFF<<1>>|r seconds by |cFFFFFF33|r%.",
-    SI_LUIE_SKILL_METEOR_TP =                            "Enemies in the impact area take Flame Damage every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_ICE_COMET_TP =                         "Enemies in the impact area take Frost Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_METEOR_TP =                            "Enemies in the |cFFFFFF5|r meter impact area take Flame Damage every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_ICE_COMET_TP =                         "Enemies in the |cFFFFFF5|r meter impact area take Frost Damage every |cFFFFFF1|r second.",
 
     -- Psijic Order
     SI_LUIE_SKILL_SPELL_ORB_TP =                         "When you cast a Psijic Order ability while you are in combat, you generate a spell charge.\n\nWhen you reach |cFFFFFF5|r spell charges, you launch a spell orb at the closest enemy to you dealing Magic Damage or Physical Damage, whichever is higher.",
@@ -1205,6 +1204,7 @@ local strings = {
     SI_LUIE_SKILL_FETCHERFLY_SWARM =                     "Fetcherfly Swarm",
     SI_LUIE_SKILL_WING_GUST_STUN =                       "Knocked back for |cFFFFFF<<1>>|r seconds.\n\nMovement speed reduced by |cFFFFFF50|r% for |cFFFFFF<<2>>|r seconds.",
     SI_LUIE_SKILL_WING_GUST_SNARE =                      "Knocked back for |cFFFFFF<<2>>|r seconds.\n\nMovement speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_ENTROPY_NPC_TP =                       "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF6|r seconds while Entropy remains active.",
 }
 
 for stringId, stringValue in pairs(strings) do

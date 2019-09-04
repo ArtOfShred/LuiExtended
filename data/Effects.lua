@@ -863,10 +863,6 @@ function Effects.BarHighlightRefresh()
         -- Restoration Staff
         Effects.BarHighlightOverride[85132] = { newId = 85154, showFakeAura = true, secondary = true, noRemove = true } -- Light's Champion --> Major Force
 
-        -- Mages Guild
-        Effects.BarHighlightOverride[28567] = { newId = 63223, showFakeAura = true, secondary = true, noRemove = true } -- Entropy --> Major Sorcery
-        Effects.BarHighlightOverride[40457] = { newId = 63227, showFakeAura = true, secondary = true, noRemove = true } -- Degeneration --> Major Sorcery
-        Effects.BarHighlightOverride[40452] = { newId = 63231, showFakeAura = true, secondary = true, noRemove = true } -- Structured Entropy --> Major Sorcery
     else
         -- Dragonknight
         Effects.BarHighlightOverride[31816] = { newId = 31817} -- Stone Giant
@@ -881,10 +877,6 @@ function Effects.BarHighlightRefresh()
         -- Restoration Staff
         Effects.BarHighlightOverride[85132] = nil -- Light's Champion
 
-        -- Mages Guild
-        Effects.BarHighlightOverride[28567] = nil -- Entropy
-        Effects.BarHighlightOverride[40457] = nil -- Degeneration
-        Effects.BarHighlightOverride[40452] = nil -- Structured Entropy
     end
 end
 
@@ -938,6 +930,10 @@ Effects.BarHighlightCheckOnFade = {
     -- Mages Guild
     [40449] = { id1 = 48136, unitTag = "player" }, -- Spell Symmetry
     [48141] = { id1 = 40443 , id2 = 80160, unitTag = "player" }, -- Balance --> Major Ward / Major Resolve
+
+    [126370] = { id1 = 63223, unitTag = "player" }, -- Entropy --> Major Sorcery
+    [126374] = { id1 = 63227, unitTag = "player" }, -- Degeneration --> Major Sorcery
+    [126371] = { id1 = 63231, unitTag = "player" }, -- Structured Entropy --> Major Sorcery
 
 }
 
@@ -1351,6 +1347,10 @@ Effects.BarHighlightOverride = {
     ---------------------------
     -- Mages Guild ------------
     ---------------------------
+
+    [28567] = { newId = 126370 }, -- Entropy
+    [40457] = { newId = 126374 }, -- Degeneration --> Major Sorcery
+    [40452] = { newId = 126371 }, -- Structured Entropy --> Major Sorcery
 
     [31642] = { newId = 48131 }, -- Equilibrium
     [40445] = { newId = 40449, showFakeAura = true }, -- Spell Symmetry (Spell Symmetry)
@@ -5965,11 +5965,13 @@ Effects.EffectOverride = {
     [999007] = { icon = 'esoui/art/icons/ability_mageguild_002_a.dds', name = Abilities.Skill_Radiant_Magelight, tooltip = Tooltips.Skill_Radiant_Magelight_Passive }, -- Radiant Magelight Fake ID for Consolidate
 
     -- Entropy / Degeneration / Structured Entropy
-    [28567] = { tooltip = Tooltips.Skill_Entropy }, -- Entropy
+    [126370] = { tooltip = Tooltips.Generic_Magic, tooltipValue2 = 2 }, -- Entropy
     [63223] = { tooltip = Abilities.Skill_Entropy }, -- Major Sorcery
-    [40457] = { tooltip = Tooltips.Skill_Degeneration }, -- Degeneration
+
+    [126374] = { tooltip = Tooltips.Skill_Degeneration }, -- Degeneration
     [63227] = { tooltip = Abilities.Skill_Degeneration }, -- Major Sorcery (Degeneration)
-    [40452] = { tooltip = Tooltips.Skill_Structured_Entropy }, -- Structured Entropy
+
+    [126371] = { tooltip = Tooltips.Skill_Structured_Entropy }, -- Structured Entropy
     [63231] = { tooltip = Abilities.Skill_Structured_Entropy }, -- Major Sorcery (Structured Entropy)
 
     -- Fire Rune / Volcanic Rune / Scalding Rune
@@ -9722,7 +9724,7 @@ Effects.EffectOverride = {
     [72181] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenarquebus_split_bolt.dds' }, -- Electric Wave (Dwarven Sphere)
 
     [52758] = { hide = true, name = Abilities.Skill_Entropy, icon = 'esoui/art/icons/ability_mageguild_004.dds' }, -- Degeneration (Mavus Talnarith)
-    [52761] = { name = Abilities.Skill_Entropy, icon = 'esoui/art/icons/ability_mageguild_004.dds', tooltip = Tooltips.Skill_Entropy }, -- Degeneration (Mavus Talnarith)
+    [52761] = { name = Abilities.Skill_Entropy, icon = 'esoui/art/icons/ability_mageguild_004.dds', tooltip = Tooltips.Skill_Entropy_NPC }, -- Degeneration (Mavus Talnarith)
 
     [83491] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds' }, -- Ice Comet (Mavus Talnarith)
     [18032] = { icon = 'esoui/art/icons/ability_mageguild_005_b.dds', name = Abilities.Skill_Ice_Comet, tooltip = Tooltips.Generic_Knockdown }, -- Stun (Mavus Talnarith)

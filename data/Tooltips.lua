@@ -829,7 +829,6 @@ LUIE.Data.Tooltips = {
     Skill_Magelight_Passive                         = GetAbilityDescription(30920),
     Skill_Inner_Light_Passive                       = GetAbilityDescription(40478),
     Skill_Radiant_Magelight_Passive                 = GetAbilityDescription(40483),
-    Skill_Entropy                                   = GetString(SI_LUIE_SKILL_ENTROPY_TP),
     Skill_Structured_Entropy                        = GetString(SI_LUIE_SKILL_STRUCTURED_ENTROPY_TP),
     Skill_Degeneration                              = GetString(SI_LUIE_SKILL_DEGENERATION_TP),
     Skill_Fire_Rune                                 = GetString(SI_LUIE_SKILL_FIRE_RUNE_TP),
@@ -1122,7 +1121,7 @@ LUIE.Data.Tooltips = {
     Skill_Cinder_Storm_NPC                          = GetString(SI_LUIE_SKILL_CINDER_STORM_NPC_TP),
     Skill_Corrosive_Armor_NPC                       = GetString(SI_LUIE_SKILL_CORROSIVE_ARMOR_NPC_TP),
     Skill_Corrosive_Armor_Debuff_NPC                = GetString(SI_LUIE_SKILL_CORROSIVE_ARMOR_NPC_DEBUFF_TP),
-
+    Skill_Entropy_NPC                               = GetString(SI_LUIE_SKILL_ENTROPY_NPC_TP),
     Skill_Petrify_NPC                               = GetString(SI_LUIE_SKILL_PETRIFY_NPC_TP),
     Skill_Celestial_Ward                            = GetString(SI_LUIE_SKILL_CELESTIAL_WARD_TP),
     Skill_Celestial_Blast                           = GetString(SI_LUIE_SKILL_CELESTIAL_BLAST_TP),
