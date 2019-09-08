@@ -51,6 +51,7 @@ local strings = {
     SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG =                "Вы пригласили игрока \"<<1>>\" стать вашим другом.",
     SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK =           "Вы пригласили игрока \"|cFEFEFE<<1>>|r\" стать вашим другом.",
     SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA =           "Вы не можете переместить к себе домой, находясь в Сиродиле.",
+    SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IC =            "You cannot teleport to your home while in the Imperial City.",
     SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG =            "Вы не можете переместить к себе домой, находясь на Поле сражения.",
     SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT =     "Вы не можете переместить к себе домой, находясь в бою.",
     SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME =        "У вас не назначен основной дом.",

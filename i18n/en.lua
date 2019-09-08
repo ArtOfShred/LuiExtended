@@ -51,6 +51,7 @@ local strings = {
     SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG =                "You have invited \"|cFEFEFE<<1>>|r\" to be your friend.",
     SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK =           "You have invited |cFEFEFE<<1>>|r to be your friend.",
     SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA =           "You cannot teleport to your home while in Cyrodiil.",
+    SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IC =            "You cannot teleport to your home while in the Imperial City.",
     SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG =            "You cannot teleport to your home while in a battleground.",
     SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT =     "You cannot teleport to your home while in combat.",
     SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME =        "You don't have a primary home set.",

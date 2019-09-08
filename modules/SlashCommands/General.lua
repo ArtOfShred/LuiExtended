@@ -20,7 +20,15 @@ function SlashCommands.SlashHome()
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-
+    -- Check to make sure we're not in Imperial City
+    if IsInImperialCity() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IC), true)
+        if LUIE.SV.TempAlertHome then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IC)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA), true)
