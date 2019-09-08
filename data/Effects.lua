@@ -311,6 +311,16 @@ Effects.IsGroundMineAura = {
     [31632] = true, -- Fire Rune (Fire Rune)
     [40470] = true, -- Volcanic Rune (Volcanic Rune)
     [40465] = true, -- Scalding Rune (Scalding Rune)
+
+    -- Psijic Order
+    [104079] = true, -- Time Freeze (Time Freeze)
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- Effects in this category will not have their stack count for mines display (This is effectively used for creating fake mines) for the purpose of some effects
+--------------------------------------------------------------------------------------------------------------------------------
+Effects.HideGroundMineStacks = {
+    [104079] = true, -- Time Freeze (Time Freeze)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -669,6 +679,12 @@ Effects.EffectGroundDisplay = {
     [63473] = { icon = 'esoui/art/icons/ability_mageguild_005_a.dds', buff = false, debuff = false, ground = true }, -- Shooting Star (Shooting Star)
 
     ---------------------------
+    -- Psijic Order -----------
+    ---------------------------
+
+    [104079] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 }, -- Time Freeze (Time Freeze)
+
+    ---------------------------
     -- Undaunted --------------
     ---------------------------
 
@@ -908,14 +924,18 @@ Effects.BarHighlightExtraId = {
     [40468] = 40465, -- Scalding Rune
     [40476] = 40470, -- Volcanic Rune
 
+    -- Psijic Order
+    [104085] = 104079, -- Time Freeze
+    [103520] = 103521, -- Major Expedition --- Minor Force (Accelerate)
+
     -- Soul Magic
     [126890] = 126891, -- Soul Trap
     [126895] = 126894, -- Soul Splitting Trap
     [126897] = 126898, -- Consuming Trap
 
     -- Werewolf
-    [39113] = 45834, -- Ferocious Roar --> Off Balance
-    [39114] = 111788, -- Deafening Roar --> Major Fracture
+    [39113] = 45834, -- Ferocious Roar --- Off Balance
+    [39114] = 111788, -- Deafening Roar --- Major Fracture
 
     -- Vampire
     [63558] = 81493, -- Minor Expedition --- Accelerating Drain
@@ -925,15 +945,18 @@ Effects.BarHighlightExtraId = {
 
 -- When the primary tracked effect fades, do an iteration over player buffs to see if another buff is present, if so trigger bar highlight for it
 -- TRACKED ID = OTHER ID'S TO CHECK FOR
+-- Priority is ID1 > ID2 if present
 Effects.BarHighlightCheckOnFade = {
 
     -- Mages Guild
-    [40449] = { id1 = 48136, unitTag = "player" }, -- Spell Symmetry
-    [48141] = { id1 = 40443 , id2 = 80160, unitTag = "player" }, -- Balance --> Major Ward / Major Resolve
-
     [126370] = { id1 = 63223, unitTag = "player" }, -- Entropy --> Major Sorcery
     [126374] = { id1 = 63227, unitTag = "player" }, -- Degeneration --> Major Sorcery
     [126371] = { id1 = 63231, unitTag = "player" }, -- Structured Entropy --> Major Sorcery
+    [40449] = { id1 = 48136, unitTag = "player" }, -- Spell Symmetry
+    [48141] = { id1 = 40443 , id2 = 80160, unitTag = "player" }, -- Balance --> Major Ward / Major Resolve
+
+    -- Psijic Order
+    [122260] = { id1 = 103712, id2 = 103711, unitTag = "player" }, -- Race Against Time --> Minor Force / Minor Expedition
 
 }
 
@@ -1365,10 +1388,9 @@ Effects.BarHighlightOverride = {
 
     [103488] = { newId = 104050 }, -- Time Stop
     [104059] = { newId = 104078 }, -- Borrowed Time
-    [104079] = { newId = 104085 }, -- Time Freeze
-    [103503] = { newId = 103521, showFakeAura = true, noRemove = true }, -- Accelerate --> Minor Force
-    [103706] = { newId = 103708, showFakeAura = true, noRemove = true }, -- Channeled Acceleration --> Minor Force
-    [103710] = { newId = 103712, showFakeAura = true, noRemove = true }, -- Race Against Time --> Minor Force
+    [103503] = { newId = 103521, noRemove = true }, -- Accelerate --> Minor Force
+    [103706] = { newId = 103708, noRemove = true }, -- Channeled Acceleration --> Minor Force
+    [103710] = { newId = 122260, showFakeAura = true, noRemove = true }, -- Race Against Time
     [103543] = { hide = true }, -- Mend Wounds
     [103747] = { hide = true }, -- Mend Spirit
     [103755] = { hide = true }, -- Symbiosis
@@ -6037,6 +6059,7 @@ Effects.EffectOverride = {
     [104073] = { tooltip = Tooltips.Skill_Borrowed_Time, groundLabel = true }, -- Borrowed Time (Borrowed Time)
     [104075] = { hideReduce = true, tooltip = Tooltips.Skill_Borrowed_Time_Stun }, -- Borrowed Time (Borrowed Time)
     [104078] = { tooltip = Tooltips.Skill_Borrowed_Time_Stun }, -- Borrowed Time (Borrowed Time)
+    [104079] = { tooltip = Tooltips.Skill_Time_Freeze_Ground }, -- Time Freeze (Time Freeze)
     [104080] = { tooltip = Tooltips.Skill_Time_Freeze, groundLabel = true }, -- Time Freeze (Time Freeze)
     [104081] = { tooltip = Tooltips.Skill_Time_Freeze, groundLabel = true }, -- Time Freeze (Time Freeze)
     [104082] = { tooltip = Tooltips.Skill_Time_Freeze, groundLabel = true }, -- Time Freeze (Time Freeze)

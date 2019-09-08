@@ -846,6 +846,7 @@ LUIE.Data.Tooltips = {
     Skill_Borrowed_Time                             = GetString(SI_LUIE_SKILL_TIME_BORROWED_TIME_TP),
     Skill_Borrowed_Time_Stun                        = GetString(SI_LUIE_SKILL_TIME_BORROWED_TIME_STUN_TP),
     Skill_Time_Freeze                               = GetString(SI_LUIE_SKILL_TIME_FREEZE_TP),
+    Skill_Time_Freeze_Ground                        = GetString(SI_LUIE_SKILL_TIME_FREEZE_GROUND_TP),
     Skill_Imbue_Weapon                              = GetString(SI_LUIE_SKILL_IMBUE_WEAPON_TP),
     Skill_Elemental_Weapon                          = GetString(SI_LUIE_SKILL_ELEMENTAL_WEAPON_TP),
     Skill_Crushing_Weapon                           = GetString(SI_LUIE_SKILL_CRUSHING_WEAPON_TP),

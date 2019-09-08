@@ -529,9 +529,6 @@ CastBarTable.IsCast = {
     [103488] = true, -- Time Stop (Psijic Order)
     [104059] = true, -- Borrowed Time (Psijic Order)
     [103706] = true, -- Channeled Acceleration (Psijic Order)
-    [39489] = true, -- Blood Altar (Undaunted)
-    [41967] = true, -- Sanguine Altar (Undaunted)
-    [41958] = true, -- Overflowing Altar (Undaunted)
 
     -- Alliance War
     [61487] = true, -- Magicka Detonation (Assault)

@@ -1506,6 +1506,9 @@ function SpellCastBuffs.OnEffectChangedGround(eventCode, changeType, effectSlot,
                 end
                 if Effects.IsGroundMineAura[abilityId] then
                     stackCount = Effects.EffectGroundDisplay[abilityId].stackReset
+                    if Effects.HideGroundMineStacks[abilityId] then
+                        stackCount = 0
+                    end
                 elseif Effects.IsGroundMineStack[abilityId] then
                     if SpellCastBuffs.EffectsList[context][ abilityId ] then
                         stackCount = SpellCastBuffs.EffectsList[context][ abilityId ].stack + Effects.EffectGroundDisplay[abilityId].stackRemove

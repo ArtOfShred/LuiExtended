@@ -919,9 +919,19 @@ function CombatInfo.BarHighlightSwap(abilityId)
     local unitTag = Effects.BarHighlightCheckOnFade[abilityId].unitTag
     for i = 1, GetNumBuffs(unitTag) do
         local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
-        if id1 == abilityIdNew or id2 == abilityIdNew then
+        if id1 == abilityIdNew then
             CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1)
             return
+        end
+    end
+    -- Only iterate again if there is a second ID to look for
+    if id2 ~= 0 then
+        for i = 1, GetNumBuffs(unitTag) do
+            local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
+            if id2 == abilityIdNew then
+                CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1)
+                return
+            end
         end
     end
 end
@@ -1523,6 +1533,9 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
             end
         end
     elseif result == ACTION_RESULT_EFFECT_FADED then
+        if Effects.BarHighlightCheckOnFade[abilityId] and targetType == COMBAT_UNIT_TYPE_PLAYER then
+            CombatInfo.BarHighlightSwap(abilityId)
+        end
         -- Ignore fading event if override is true
         if g_barNoRemove[abilityId] then return end
 
@@ -1534,10 +1547,6 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
                 end
             end
             g_toggledSlotsRemain[abilityId] = nil
-        end
-
-        if Effects.BarHighlightCheckOnFade[abilityId] and targetType == COMBAT_UNIT_TYPE_PLAYER then
-            CombatInfo.BarHighlightSwap(abilityId)
         end
     end
 end
