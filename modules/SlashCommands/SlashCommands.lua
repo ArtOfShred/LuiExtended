@@ -44,6 +44,9 @@ SlashCommands.Defaults = {
 }
 SlashCommands.SV = nil
 
+LUIE.LastMementoUsed            = 0 -- Set by the SlashCollectible function, passes this value to CA to display the Memento we used if a slash command is used
+LUIE.SlashCollectibleOverride   = false -- Set by the SlashCollectible function, flags the CA function to display info on the collectible used even if the CA option are DISABLED.
+
 function SlashCommands.Initialize(enabled)
     -- Load Settings
     local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
@@ -212,6 +215,4 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/witch"]        = function(...) SlashCommands.SlashCollectible(479) end
         SLASH_COMMANDS["/witchfest"]    = function(...) SlashCommands.SlashCollectible(479) end
     end
-
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_USE_RESULT, SlashCommands.CollectibleUsed)
 end

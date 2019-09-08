@@ -8,81 +8,6 @@ local SlashCommands = LUIE.SlashCommands
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 
-local currentAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
-local currentVanity = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
-local lastCollectibleUsed = 0
-local mementoUsed = 0
-
-function SlashCommands.CollectibleUsed(eventCode, result, isAttemptingActivation)
-    if result ~= COLLECTIBLE_USAGE_BLOCK_REASON_NOT_BLOCKED then return end
-    local latency = GetLatency()
-    latency = latency + 100
-    zo_callLater(SlashCommands.CollectibleResult, latency)
-end
-
-function SlashCommands.CollectibleResult()
-
-    -- Bail out if we are in a PVP Zone (This event shouldn't be called in a PVP zone but this exists as a fallback)
-    if LUIE.ResolvePVPZone() then return end
-
-    if mementoUsed ~= 0 then
-        local name = GetCollectibleLink(mementoUsed, LINK_STYLE_BRACKETS)
-        printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_USED), name))
-        mementoUsed = 0
-    end
-
-	local newAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
-	local newVanity = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
-
-	if newAssistant ~= currentAssistant then
-		if newAssistant == 0 then
-			lastCollectibleUsed = currentAssistant
-		else
-			lastCollectibleUsed = newAssistant
-		end
-	end
-	if newVanity ~= currentVanity then
-		if newVanity == 0 then
-			lastCollectibleUsed = currentVanity
-		else
-			lastCollectibleUsed = newVanity
-		end
-	end
-
-	currentAssistant = newAssistant
-	currentVanity = newVanity
-
-	if lastCollectibleUsed == 0 then return end
-	local collectibleType = GetCollectibleCategoryType(lastCollectibleUsed)
-
-    -- Vanity
-    if collectibleType == COLLECTIBLE_CATEGORY_TYPE_VANITY_PET then
-        local nickname = GetCollectibleNickname(lastCollectibleUsed)
-        local name = GetCollectibleLink(lastCollectibleUsed, LINK_STYLE_BRACKETS)
-
-        if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 then
-            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON_NN), name, nickname))
-        else
-            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_UNSUMMON_NN), name, nickname))
-        end
-
-    end
-
-    -- Assistants
-    if collectibleType == COLLECTIBLE_CATEGORY_TYPE_ASSISTANT then
-        local name = GetCollectibleLink(lastCollectibleUsed, LINK_STYLE_BRACKETS)
-
-        if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 then
-            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), name))
-        else
-            printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_UNSUMMON), name))
-        end
-
-    end
-
-	lastCollectibleUsed = 0
-end
-
 -- Slash Command to port to primary home
 function SlashCommands.SlashHome()
     local primaryHouse = GetHousingPrimaryHouse()
@@ -230,8 +155,9 @@ function SlashCommands.SlashCollectible(id)
     if type(id) == "number" then
         if IsCollectibleUnlocked(id) then
             UseCollectible(id)
+            LUIE.SlashCollectibleOverride = true
             if id ~= 267 and id ~= 6376 and id ~= 301 and id ~= 6378 then
-                mementoUsed = id
+                LUIE.LastMementoUsed = id
             end
         else
             printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(id)), true)
@@ -245,6 +171,7 @@ function SlashCommands.SlashCollectible(id)
         if SlashCommands.SV.SlashBankerChoice == 1 then
             if IsCollectibleUnlocked(267) then
                 UseCollectible(267) -- Tythis
+                LUIE.SlashCollectibleOverride = true
             else
                 printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(267)), true)
                 if LUIE.SV.TempAlertHome then
@@ -256,6 +183,7 @@ function SlashCommands.SlashCollectible(id)
         else
             if IsCollectibleUnlocked(6376) then
                 UseCollectible(6376) -- Ezabi
+                LUIE.SlashCollectibleOverride = true
             else
                 printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(6376)), true)
                 if LUIE.SV.TempAlertHome then
@@ -269,6 +197,7 @@ function SlashCommands.SlashCollectible(id)
         if SlashCommands.SV.SlashMerchantChoice == 1 then
             if IsCollectibleUnlocked(301) then
                 UseCollectible(301) -- Nuzhimeh
+                LUIE.SlashCollectibleOverride = true
             else
                 printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(301)), true)
                 if LUIE.SV.TempAlertHome then
@@ -280,6 +209,7 @@ function SlashCommands.SlashCollectible(id)
         else
             if IsCollectibleUnlocked(6378) then
                 UseCollectible(6378) -- Ferez
+                LUIE.SlashCollectibleOverride = true
             else
                 printToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_FAILED_NOTUNLOCKED), GetCollectibleName(6378)), true)
                 if LUIE.SV.TempAlertHome then

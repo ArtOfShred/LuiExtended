@@ -30,6 +30,7 @@ ChatAnnouncements.Defaults = {
     BracketOptionItem             = 2,
     BracketOptionLorebook         = 2,
     BracketOptionCollectible      = 2,
+    BracketOptionCollectibleUse   = 2,
     BracketOptionAchievement      = 2,
     ChatMethod                    = "Print to All Tabs",
     ChatBypass                    = true,
@@ -65,6 +66,7 @@ ChatAnnouncements.Defaults = {
         AchievementCategory22         = true,
         AchievementCategory23         = true,
         AchievementCategory24         = true,
+        AchievementCategory25         = true,
         AchievementProgressMsg        = GetString(SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG),
         AchievementCompleteMsg        = GetString(SI_ACHIEVEMENT_AWARDED_CENTER_SCREEN),
         AchievementColorProgress      = true,
@@ -210,6 +212,16 @@ ChatAnnouncements.Defaults = {
         CollectibleColor1             = { .75, .75, .75, 1 },
         CollectibleColor2             = { .75, .75, .75, 1 },
         CollectibleCategory           = true,
+        CollectibleUseCA              = false,
+        CollectibleUseAlert           = false,
+        CollectibleUsePetNickname     = false,
+        CollectibleUseIcon            = true,
+        CollectibleUseColor           = { .75, .75, .75, 1 },
+        CollectibleUseCategory3       = true, -- Appearance
+        CollectibleUseCategory7       = true, -- Assistants
+        --CollectibleUseCategory8       = true, -- Mementos
+        CollectibleUseCategory10      = true, -- Non-Combat Pets
+        CollectibleUseCategory12      = true, -- Special
     },
 
     -- Lorebooks
@@ -610,6 +622,23 @@ local g_guildRankData               = {}            -- Variable to store local p
 -- Achievements
 local g_achievementLastPercentage   = {}            -- Here we will store last displayed percentage for achievement
 
+-- Collectible Usage Tracking
+local currentAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+local currentVanity = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
+local currentSpecial = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN)
+local currentHat = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAT)
+local currentHair = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAIR)
+local currentHeadMark = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HEAD_MARKING)
+local currentFacialHair = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_FACIAL_HAIR_HORNS)
+local currentMajorAdorn = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_FACIAL_ACCESSORY)
+local currentMinorAdorn = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_PIERCING_JEWELRY)
+local currentCostume = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME)
+local currentBodyMarking = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_BODY_MARKING)
+local currentSkin = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN)
+local currentPersonality = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_PERSONALITY)
+local currentPolymorph = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH)
+local lastCollectibleUsed = 0
+
 -- Quest
 local g_stopDisplaySpam             = false         -- Toggled on to stop spam display of EVENT_DISPLAY_ANNOUNCEMENTS from IC zone transitions.
 local g_questIndex                  = { }           -- Index of all current quests. Allows us to read the index so that all quest notifications can use the difficulty icon.
@@ -674,6 +703,7 @@ local SkillGuildColorizeDB
 -- Collectibles
 local CollectibleColorize1
 local CollectibleColorize2
+local CollectibleUseColorize
 
 -- Lorebooks
 local LorebookColorize1
@@ -824,6 +854,11 @@ function ChatAnnouncements.Initialize(enabled)
         ChatAnnouncements.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, "ChatAnnouncements", ChatAnnouncements.Defaults)
     end
 
+    -- Some modules might need to pull some of the color settings from CA so we want these to always be set regardless of CA module being enabled/disabled.
+    ChatAnnouncements.RegisterColorEvents()
+    -- Always register this function for other components to use
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_USE_RESULT, ChatAnnouncements.CollectibleUsed)
+
     -- Disable module if setting not toggled on
     if not enabled then
         return
@@ -863,7 +898,6 @@ function ChatAnnouncements.Initialize(enabled)
     ChatAnnouncements.RegisterGuildEvents()
     ChatAnnouncements.RegisterSocialEvents()
     ChatAnnouncements.RegisterDisguiseEvents()
-    ChatAnnouncements.RegisterColorEvents()
     ChatAnnouncements.RegisterQuestEvents()
 
     ChatAnnouncements.HookFunction()
@@ -884,6 +918,7 @@ function ChatAnnouncements.RegisterColorEvents()
     CurrencyDownColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyColorDown))
     CollectibleColorize1 = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Collectibles.CollectibleColor1))
     CollectibleColorize2 = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Collectibles.CollectibleColor2))
+    CollectibleUseColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Collectibles.CollectibleUseColor))
     CurrencyGoldColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyGoldColor))
     CurrencyAPColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyAPColor))
     CurrencyTVColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyTVColor))
@@ -2872,6 +2907,7 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
     if topLevelIndex == 22 and not ChatAnnouncements.SV.Achievement.AchievementCategory22 then return end
     if topLevelIndex == 23 and not ChatAnnouncements.SV.Achievement.AchievementCategory23 then return end
     if topLevelIndex == 24 and not ChatAnnouncements.SV.Achievement.AchievementCategory24 then return end
+    if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory25 then return end
 
     if ChatAnnouncements.SV.Achievement.AchievementUpdateCA or ChatAnnouncements.SV.Achievement.AchievementUpdateAlert then
         local totalCmp = 0
@@ -8527,6 +8563,7 @@ function ChatAnnouncements.HookFunction()
         if topLevelIndex == 22 and not ChatAnnouncements.SV.Achievement.AchievementCategory22 then return true end
         if topLevelIndex == 23 and not ChatAnnouncements.SV.Achievement.AchievementCategory23 then return true end
         if topLevelIndex == 24 and not ChatAnnouncements.SV.Achievement.AchievementCategory24 then return true end
+        if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory25 then return true end
 
         if ChatAnnouncements.SV.Achievement.AchievementCompleteCA then
             link = zo_strformat(GetAchievementLink(id, linkBrackets[ChatAnnouncements.SV.BracketOptionAchievement]))
@@ -10026,4 +10063,274 @@ function ChatAnnouncements.PrintQueuedMessages()
     g_queuedMessages = { }
     g_queuedMessagesCounter = 1
     eventManager:UnregisterForUpdate(moduleName .. "Printer")
+end
+
+function ChatAnnouncements.CollectibleUsed(eventCode, result, isAttemptingActivation)
+    if result ~= COLLECTIBLE_USAGE_BLOCK_REASON_NOT_BLOCKED then return end
+    local latency = GetLatency()
+    latency = latency + 100
+    zo_callLater(ChatAnnouncements.CollectibleResult, latency)
+end
+
+function ChatAnnouncements.CollectibleResult()
+
+    -- Check if this variable has a value > 0.
+    if LUIE.LastMementoUsed ~= 0 then
+        local link = GetCollectibleLink(LUIE.LastMementoUsed, linkBrackets[ChatAnnouncements.SV.BracketOptionCollectibleUse])
+        local name = GetCollectibleName(LUIE.LastMementoUsed)
+        local icon = GetCollectibleIcon(LUIE.LastMementoUsed)
+        local formattedIcon = ChatAnnouncements.SV.Collectibles.CollectibleUseIcon and ("|t16:16:" .. icon .. "|t ") or ""
+        local string =
+            LUIE.LastMementoUsed == 5886 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_CAKE) or
+            LUIE.LastMementoUsed == 1167 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_PIE) or
+            LUIE.LastMementoUsed == 1168 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_MEAD) or
+            LUIE.LastMementoUsed == 479 and GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_WITCH)
+
+        local message = zo_strformat(string, link, formattedIcon)
+        local alert = zo_strformat(string, name, "")
+
+        if message and ChatAnnouncements.SV.Collectibles.CollectibleUseCA or LUIE.LastMementoUsed > 0 then
+            message = CollectibleUseColorize:Colorize(message)
+            printToChat(message)
+        end
+        if alert and ChatAnnouncements.SV.Collectibles.CollectibleUseAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alert)
+        end
+
+        LUIE.LastMementoUsed = 0
+    end
+
+	local newAssistant = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+	local newVanity = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
+    local newSpecial = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN)
+    local newHat = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAT)
+    local newHair = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAIR)
+    local newHeadMark = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HEAD_MARKING)
+    local newFacialHair = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_FACIAL_HAIR_HORNS)
+    local newMajorAdorn = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_FACIAL_ACCESSORY)
+    local newMinorAdorn = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_PIERCING_JEWELRY)
+    local newCostume = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME)
+    local newBodyMarking = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_BODY_MARKING)
+    local newSkin = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN)
+    local newPersonality = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_PERSONALITY)
+    local newPolymorph = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH)
+
+
+	if newAssistant ~= currentAssistant then
+		if newAssistant == 0 then
+			lastCollectibleUsed = currentAssistant
+		else
+			lastCollectibleUsed = newAssistant
+		end
+	end
+	if newVanity ~= currentVanity then
+		if newVanity == 0 then
+			lastCollectibleUsed = currentVanity
+		else
+			lastCollectibleUsed = newVanity
+		end
+	end
+    if newSpecial ~= currentSpecial then
+        if newSpecial == 0 then
+            lastCollectibleUsed = currentSpecial
+        else
+            lastCollectibleUsed = newSpecial
+        end
+    end
+    if newHat ~= currentHat then
+        if newHat == 0 then
+            lastCollectibleUsed = currentHat
+        else
+            lastCollectibleUsed = newHat
+        end
+    end
+    if newHair ~= currentHair then
+        if newHair == 0 then
+            lastCollectibleUsed = currentHair
+        else
+            lastCollectibleUsed = newHair
+        end
+    end
+    if newHeadMark ~= currentHeadMark then
+        if newHeadMark == 0 then
+            lastCollectibleUsed = currentHeadMark
+        else
+            lastCollectibleUsed = newHeadMark
+        end
+    end
+    if newFacialHair ~= currentFacialHair then
+        if newFacialHair == 0 then
+            lastCollectibleUsed = currentFacialHair
+        else
+            lastCollectibleUsed = newFacialHair
+        end
+    end
+    if newMajorAdorn ~= currentMajorAdorn then
+        if newMajorAdorn == 0 then
+            lastCollectibleUsed = currentMajorAdorn
+        else
+            lastCollectibleUsed = newMajorAdorn
+        end
+    end
+    if newMinorAdorn ~= currentMinorAdorn then
+        if newMinorAdorn == 0 then
+            lastCollectibleUsed = currentMinorAdorn
+        else
+            lastCollectibleUsed = newMinorAdorn
+        end
+    end
+    if newCostume ~= currentCostume then
+        if newCostume == 0 then
+            lastCollectibleUsed = currentCostume
+        else
+            lastCollectibleUsed = newCostume
+        end
+    end
+    if newBodyMarking ~= currentBodyMarking then
+        if newBodyMarking == 0 then
+            lastCollectibleUsed = currentBodyMarking
+        else
+            lastCollectibleUsed = newBodyMarking
+        end
+    end
+    if newSkin ~= currentSkin then
+        if newSkin == 0 then
+            lastCollectibleUsed = currentSkin
+        else
+            lastCollectibleUsed = newSkin
+        end
+    end
+    if newPersonality ~= currentPersonality then
+        if newPersonality == 0 then
+            lastCollectibleUsed = currentPersonality
+        else
+            lastCollectibleUsed = newPersonality
+        end
+    end
+    if newPolymorph ~= currentPolymorph then
+        if newPolymorph == 0 then
+            lastCollectibleUsed = currentPolymorph
+        else
+            lastCollectibleUsed = newPolymorph
+        end
+    end
+
+	currentAssistant = newAssistant
+	currentVanity = newVanity
+	currentSpecial = newSpecial
+	currentHat = newHat
+	currentHair = newHair
+	currentHeadMark = newHeadMark
+	currentFacialHair = newFacialHair
+	currentMajorAdorn = newMajorAdorn
+	currentMinorAdorn = newMinorAdorn
+	currentCostume = newCostume
+	currentBodyMarking = newBodyMarking
+	currentSkin = newSkin
+	currentPersonality = newPersonality
+	currentPolymorph = newPolymorph
+
+    -- If neither menu option is enabled, then bail out here
+    if not (ChatAnnouncements.SV.Collectibles.CollectibleUseCA or ChatAnnouncements.SV.Collectibles.CollectibleUseAlert) then
+        if not LUIE.SlashCollectibleOverride then
+            lastCollectibleUsed = 0
+            return
+        end
+    end
+
+	if lastCollectibleUsed == 0 then
+        LUIE.SlashCollectibleOverride = false
+        return
+    end
+	local collectibleType = GetCollectibleCategoryType(lastCollectibleUsed)
+
+    local message
+    local alert
+    local link = GetCollectibleLink(lastCollectibleUsed, linkBrackets[ChatAnnouncements.SV.BracketOptionCollectibleUse])
+    local name = GetCollectibleName(lastCollectibleUsed)
+    local nickname = GetCollectibleNickname(lastCollectibleUsed)
+    local icon = GetCollectibleIcon(lastCollectibleUsed)
+    local formattedIcon = ChatAnnouncements.SV.Collectibles.CollectibleUseIcon and ("|t16:16:" .. icon .. "|t ") or ""
+
+    -- Vanity
+    if collectibleType == COLLECTIBLE_CATEGORY_TYPE_VANITY_PET and (ChatAnnouncements.SV.Collectibles.CollectibleUseCategory10 or LUIE.SlashCollectibleOverride) then
+        if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 then
+            if ChatAnnouncements.SV.Collectibles.CollectibleUsePetNickname and nickname then
+                message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON_NN), link, nickname, formattedIcon)
+                alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON_NN), name, nickname, "")
+            else
+                message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), link, formattedIcon)
+                alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), name, "")
+            end
+        else
+            if ChatAnnouncements.SV.Collectibles.CollectibleUsePetNickname and nickname then
+                message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_UNSUMMON_NN), link, nickname, formattedIcon)
+                alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_UNSUMMON_NN), name, nickname, "")
+            else
+                message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_UNSUMMON), link, formattedIcon)
+                alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_UNSUMMON), name, "")
+            end
+        end
+    end
+
+    -- Assistants
+    if collectibleType == COLLECTIBLE_CATEGORY_TYPE_ASSISTANT and (ChatAnnouncements.SV.Collectibles.CollectibleUseCategory7 or LUIE.SlashCollectibleOverride) then
+        if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 then
+            message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), link, formattedIcon)
+            alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_SUMMON), name, "")
+        else
+            message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_UNSUMMON), link, formattedIcon)
+            alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_UNSUMMON), name, "")
+        end
+    end
+
+    -- Special / Appearance
+    if collectibleType == COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN
+    or collectibleType == COLLECTIBLE_CATEGORY_TYPE_HAT
+    or collectibleType == COLLECTIBLE_CATEGORY_TYPE_HAIR
+    or collectibleType == COLLECTIBLE_CATEGORY_TYPE_HEAD_MARKING
+    or collectibleType == COLLECTIBLE_CATEGORY_TYPE_FACIAL_HAIR_HORNS
+    or collectibleType == COLLECTIBLE_CATEGORY_TYPE_FACIAL_ACCESSORY
+    or collectibleType == COLLECTIBLE_CATEGORY_TYPE_PIERCING_JEWELRY
+    or collectibleType == COLLECTIBLE_CATEGORY_TYPE_COSTUME
+    or collectibleType == COLLECTIBLE_CATEGORY_TYPE_BODY_MARKING
+    or collectibleType == COLLECTIBLE_CATEGORY_TYPE_SKIN
+    or collectibleType == COLLECTIBLE_CATEGORY_TYPE_PERSONALITY
+    or collectibleType == COLLECTIBLE_CATEGORY_TYPE_POLYMORPH
+    then
+        local categoryString =
+        (collectibleType == COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN) and GetString(SI_COLLECTIBLECATEGORYTYPE23) or
+        (collectibleType == COLLECTIBLE_CATEGORY_TYPE_HAT) and GetString(SI_COLLECTIBLECATEGORYTYPE10) or
+        (collectibleType == COLLECTIBLE_CATEGORY_TYPE_HAIR) and GetString(SI_COLLECTIBLECATEGORYTYPE13) or
+        (collectibleType == COLLECTIBLE_CATEGORY_TYPE_HEAD_MARKING) and GetString(SI_COLLECTIBLECATEGORYTYPE17) or
+        (collectibleType == COLLECTIBLE_CATEGORY_TYPE_FACIAL_HAIR_HORNS) and GetString(SI_COLLECTIBLECATEGORYTYPE14) or
+        (collectibleType == COLLECTIBLE_CATEGORY_TYPE_FACIAL_ACCESSORY) and GetString(SI_COLLECTIBLECATEGORYTYPE15) or
+        (collectibleType == COLLECTIBLE_CATEGORY_TYPE_PIERCING_JEWELRY) and GetString(SI_COLLECTIBLECATEGORYTYPE16) or
+        (collectibleType == COLLECTIBLE_CATEGORY_TYPE_COSTUME) and GetString(SI_COLLECTIBLECATEGORYTYPE4) or
+        (collectibleType == COLLECTIBLE_CATEGORY_TYPE_BODY_MARKING) and GetString(SI_COLLECTIBLECATEGORYTYPE18) or
+        (collectibleType == COLLECTIBLE_CATEGORY_TYPE_SKIN) and GetString(SI_COLLECTIBLECATEGORYTYPE11) or
+        (collectibleType == COLLECTIBLE_CATEGORY_TYPE_PERSONALITY) and GetString(SI_COLLECTIBLECATEGORYTYPE9) or
+        (collectibleType == COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) and GetString(SI_COLLECTIBLECATEGORYTYPE12)
+
+        if collectibleType == (COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN and (ChatAnnouncements.SV.Collectibles.CollectibleUseCategory12 or LUIE.SlashCollectibleOverride) ) or (collectibleType ~= COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN and (ChatAnnouncements.SV.Collectibles.CollectibleUseCategory3 or LUIE.SlashCollectibleOverride) ) then
+            if GetActiveCollectibleByType(GetCollectibleCategoryType(lastCollectibleUsed)) > 0 then
+                message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_USE_CATEGORY), categoryString, link, formattedIcon)
+                alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_USE_CATEGORY), categoryString, name, "")
+            else
+                message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_DISABLE_CATEGORY), categoryString, link, formattedIcon)
+                alert = zo_strformat(GetString(SI_LUIE_SLASHCMDS_COLLECTIBLE_DISABLE_CATEGORY), categoryString, name, "")
+            end
+        end
+    end
+
+    if message and ChatAnnouncements.SV.Collectibles.CollectibleUseCA or LUIE.SlashCollectibleOverride then
+        message = CollectibleUseColorize:Colorize(message)
+        printToChat(message)
+    end
+    if alert and ChatAnnouncements.SV.Collectibles.CollectibleUseAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alert)
+    end
+
+	lastCollectibleUsed = 0
+    LUIE.SlashCollectibleOverride = false
 end

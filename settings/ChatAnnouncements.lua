@@ -2617,7 +2617,7 @@ function ChatAnnouncements.CreateSettings()
             {
                 -- Collectible Bracket
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE)),
                 tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE_TP),
                 choices = linkBracketDisplayOptions,
                 getFunc = function() return linkBracketDisplayOptions[Settings.BracketOptionCollectible] end,
@@ -2679,6 +2679,139 @@ function ChatAnnouncements.CreateSettings()
                 width = "full",
                 disabled = function() return not (Settings.Collectibles.CollectibleCA or Settings.Collectibles.CollectibleCSA or Settings.Collectibles.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = Defaults.Collectibles.CollectibleCategory,
+            },
+            {
+                -- Collectible Usage
+                type = "header",
+                name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_HEADER),
+                width = "full",
+            },
+            {
+                -- Collectible Used CA
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                getFunc = function() return Settings.Collectibles.CollectibleUseCA end,
+                setFunc = function(value) Settings.Collectibles.CollectibleUseCA = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.Collectibles.CollectibleUseCA,
+            },
+            {
+                -- Collectible Used Alert
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                getFunc = function() return Settings.Collectibles.CollectibleUseAlert end,
+                setFunc = function(value) Settings.Collectibles.CollectibleUseAlert = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.Collectibles.CollectibleUseAlert,
+            },
+            {
+                -- Collectible Pet Nickname
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_PET_NICKNAME)),
+                tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_PET_NICKNAME_TP),
+                getFunc = function() return Settings.Collectibles.CollectibleUsePetNickname end,
+                setFunc = function(value) Settings.Collectibles.CollectibleUsePetNickname = value end,
+                width = "full",
+                disabled = function() return not (Settings.Collectibles.CollectibleUseCA or Settings.Collectibles.CollectibleUseAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Collectibles.CollectibleUsePetNickname,
+            },
+            {
+                -- Collectible Icon
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ICON)),
+                tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_ICON_TP),
+                getFunc = function() return Settings.Collectibles.CollectibleUseIcon end,
+                setFunc = function(value) Settings.Collectibles.CollectibleUseIcon = value end,
+                width = "full",
+                disabled = function() return not (Settings.Collectibles.CollectibleUseCA or Settings.Collectibles.CollectibleUseAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Collectibles.CollectibleUseIcon,
+            },
+            {
+                -- Collectible Bracket
+                type = "dropdown",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE)),
+                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE_TP),
+                choices = linkBracketDisplayOptions,
+                getFunc = function() return linkBracketDisplayOptions[Settings.BracketOptionCollectibleUse] end,
+                setFunc = function(value) Settings.BracketOptionCollectibleUse = linkBracketDisplayOptionsKeys[value] end,
+                width = "full",
+                disabled = function() return not (Settings.Collectibles.CollectibleUseCA or Settings.Collectibles.CollectibleUseAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.BracketOptionCollectibleUse,
+            },
+            {
+                -- Collectible Color
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE)),
+                getFunc = function() return unpack(Settings.Collectibles.CollectibleUseColor) end,
+                setFunc = function(r, g, b, a) Settings.Collectibles.CollectibleUseColor = { r, g, b, a } ChatAnnouncements.RegisterColorEvents() end,
+                width = "full",
+                disabled = function() return not (Settings.Collectibles.CollectibleUseCA or Settings.Collectibles.CollectibleUseAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = {r=Defaults.Collectibles.CollectibleUseColor[1], g=Defaults.Collectibles.CollectibleUseColor[2], b=Defaults.Collectibles.CollectibleUseColor[3]}
+            },
+            {
+                type = "divider",
+                width = "full",
+            },
+            {
+                -- Enables collectible tracking in %s category
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(3)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(3)),
+                getFunc = function() return Settings.Collectibles.CollectibleUseCategory3 end,
+                setFunc = function(value) Settings.Collectibles.CollectibleUseCategory3 = value end,
+                width = "full",
+                default = Defaults.Collectibles.CollectibleUseCategory3,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+            },
+            {
+                -- Enables collectible tracking in %s category
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(7)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(7)),
+                getFunc = function() return Settings.Collectibles.CollectibleUseCategory7 end,
+                setFunc = function(value) Settings.Collectibles.CollectibleUseCategory7 = value end,
+                width = "full",
+                default = Defaults.Collectibles.CollectibleUseCategory7,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+            },
+            --[[
+            {
+                -- Enables collectible tracking in %s category
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(8)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(8)),
+                getFunc = function() return Settings.Collectibles.CollectibleUseCategory8 end,
+                setFunc = function(value) Settings.Collectibles.CollectibleUseCategory8 = value end,
+                width = "full",
+                default = Defaults.Collectibles.CollectibleUseCategory8,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+            },
+            ]]--
+            {
+                -- Enables collectible tracking in %s category
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(10)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(10)),
+                getFunc = function() return Settings.Collectibles.CollectibleUseCategory10 end,
+                setFunc = function(value) Settings.Collectibles.CollectibleUseCategory10 = value end,
+                width = "full",
+                default = Defaults.Collectibles.CollectibleUseCategory10,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+            },
+            {
+                -- Enables collectible tracking in %s category
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY), GetCollectibleCategoryInfo(12)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_USE_CATEGORY_TP), GetCollectibleCategoryInfo(12)),
+                getFunc = function() return Settings.Collectibles.CollectibleUseCategory12 end,
+                setFunc = function(value) Settings.Collectibles.CollectibleUseCategory12 = value end,
+                width = "full",
+                default = Defaults.Collectibles.CollectibleUseCategory12,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
             {
                 type = "header",
@@ -3410,6 +3543,17 @@ function ChatAnnouncements.CreateSettings()
                 setFunc = function(value) Settings.Achievement.AchievementCategory24 = value end,
                 width = "full",
                 default = Defaults.Achievement.AchievementCategory24,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+            },
+            {
+                -- Enables achievements tracking in %s category
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(25)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(25)),
+                getFunc = function() return Settings.Achievement.AchievementCategory25 end,
+                setFunc = function(value) Settings.Achievement.AchievementCategory25 = value end,
+                width = "full",
+                default = Defaults.Achievement.AchievementCategory25,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
         },
