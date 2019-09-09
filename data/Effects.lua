@@ -880,6 +880,9 @@ function Effects.BarHighlightRefresh()
         Effects.BarHighlightOverride[25255] = { newId = 25256, secondary = true } -- Veiled Strike --> Off Balance
         Effects.BarHighlightOverride[25267] = { newId = 34737, secondary = true } -- Concealed Weapon --> Off Balance
 
+        -- Necromancer
+        Effects.BarHighlightOverride[117883] = { newId = 117885, secondary = true } -- Resistant Flesh --> Minor Defile
+
         -- Templar
         Effects.BarHighlightOverride[26792] = { duration = 8000, showFakeAura = true, secondary = true, noRemove = true } -- Biting Jabs --> Major Savagery
 
@@ -893,6 +896,9 @@ function Effects.BarHighlightRefresh()
         -- Nightblade
         Effects.BarHighlightOverride[25255] = { newId = 33185 } -- Veiled Strike
         Effects.BarHighlightOverride[25267] = { newId = 34736 } -- Concealed Weapon
+
+        -- Necromancer
+        Effects.BarHighlightOverride[117883] = { newId = 117886 } -- Resistant Flesh --> Minor Defile
 
         -- Templar
         Effects.BarHighlightOverride[26792] = { newId = 76912, duration = 2000, showFakeAura = true, noRemove = true } -- Biting Jabs
@@ -920,6 +926,13 @@ Effects.AddNoDurationBarHighlight = {
 -- SECONDARY ID = ORIGINAL BAR HIGHLIGHT ID
 Effects.BarHighlightExtraId = {
 
+    -- Necromancer
+    --[117727] = 117691, -- Blighted Blastbones -- TODO: Doesn't work, not sure why
+
+    [121513] = 121517, -- Grave Grasp --> Minor Maim
+    [118309] = 118313, -- Ghostly Embrace --> Minor Maim
+    [118354] = 118358, -- Empowering Grasp --> Minor Maim
+
     -- Fighters Guild
     [80471] = 40195, -- Camouflaged Hunter
 
@@ -933,7 +946,7 @@ Effects.BarHighlightExtraId = {
 
     -- Psijic Order
     [104085] = 104079, -- Time Freeze
-    [103520] = 103521, -- Major Expedition --- Minor Force (Accelerate)
+    [103520] = 103521, -- Major Expedition --> Minor Force (Accelerate)
 
     -- Soul Magic
     [126890] = 126891, -- Soul Trap
@@ -941,18 +954,24 @@ Effects.BarHighlightExtraId = {
     [126897] = 126898, -- Consuming Trap
 
     -- Werewolf
-    [39113] = 45834, -- Ferocious Roar --- Off Balance
-    [39114] = 111788, -- Deafening Roar --- Major Fracture
+    [39113] = 45834, -- Ferocious Roar --> Off Balance
+    [39114] = 111788, -- Deafening Roar --> Major Fracture
 
     -- Vampire
-    [63558] = 81493, -- Minor Expedition --- Accelerating Drain
+    [63558] = 81493, -- Minor Expedition --> Accelerating Drain
 
 }
 
 -- When the primary tracked effect fades, do an iteration over player buffs to see if another buff is present, if so trigger bar highlight for it
--- TRACKED ID = OTHER ID'S TO CHECK FOR
+-- ORIGINAL TRACKED ID = OTHER ID'S TO CHECK FOR
 -- Priority is ID1 > ID2 if present
+-- Note that any secondary id's for Bar Highlight in the table above will set their id to the original tracked id here
 Effects.BarHighlightCheckOnFade = {
+
+    -- Necromancer
+    [121517] = { id1 = 121513, unitTag = "player" }, -- Minor Maim --> Grave Grasp
+    [118313] = { id1 = 118309, unitTag = "player" }, -- Minor Maim --> Ghostly Embrace
+    [118358] = { id1 = 118354, unitTag = "player" }, -- Minor Maim --> Empowering Grasp
 
     -- Mages Guild
     [126370] = { id1 = 63223, unitTag = "player" }, -- Entropy --> Major Sorcery
@@ -1206,7 +1225,9 @@ Effects.BarHighlightOverride = {
     [118308] = { newId = 118313 }, -- Ghostly Embrace --> Minor Maim
     [118352] = { newId = 118358 }, -- Empowering Grasp --> Minor Maim
 
-    [117883] = { newId = 117886 }, -- Resistant Flesh
+    [114196] = { newId = 114206, secondary = true }, -- Render Flesh --> Minor Defile
+    [117883] = { newId = 117885, secondary = true }, -- Resistant Flesh --> Minor Defile
+    [117888] = { newId = 117890, secondary = true }, -- Blood Sacrifice --> Minor Defile
 
     [115315] = { newId = 115326 }, -- Life amid Death
     [118017] = { newId = 118022 }, -- Renewing Undeath
@@ -1215,6 +1236,8 @@ Effects.BarHighlightOverride = {
     [115926] = { newId = 116450 }, -- Restoring Tether
     [118070] = { newId = 118071 }, -- Braided Tether
     [118122] = { newId = 118123 }, -- Mortal Coil
+
+    [118379] = { newId = 124999, showFakeAura = true }, -- Animate Blastbones
 
     ---------------------------
     -- Two Handed -------------
@@ -1346,7 +1369,7 @@ Effects.BarHighlightOverride = {
 
     [32893] = { newId = 68883 }, -- Drain Essence
     [38949] = { newId = 68892 }, -- Invigorating Drain
-    [38956] = { newId = 81493, noRemove = true }, -- Accelerating Drain
+    [38956] = { newId = 81493, ignoreMouseover = true }, -- Accelerating Drain
     [88158] = { newId = 38932 }, -- Materialize --> Clouding Swarm
 
     ---------------------------
@@ -5115,16 +5138,19 @@ Effects.EffectOverride = {
     [122625] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Hungry Scythe (Hungry Scythe)
 
     -- Bone Armor / Beckoning Armor / Summoner's Armor
+    [115206] = { tooltip = Tooltips.Skill_Bone_Armor }, -- Bone Armor (Bone Armor)
     [115211] = { tooltip = Abilities.Skill_Bone_Armor, consolidate = true }, -- Major Resolve (Bone Armor)
     [115214] = { tooltip = Abilities.Skill_Bone_Armor, consolidate = true }, -- Major Ward (Bone Armor)
     [122661] = { hide = true }, -- Corpse Spawn (Bone Armor)
     [123911] = { hide = true }, -- Bone Armor (Bone Armor
+    [118237] = { tooltip = Tooltips.Skill_Beckoning_Armor }, -- Beckoning Armor (Beckoning Armor)
     [118239] = { tooltip = Abilities.Skill_Beckoning_Armor, consolidate = true }, -- Major Resolve (Beckoning Armor)
     [118240] = { tooltip = Abilities.Skill_Beckoning_Armor, consolidate = true }, -- Major Ward (Beckoning Armor)
     [122679] = { hide = true }, -- Corpse Spawn (Beckoning Armor)
     [123929] = { hide = true }, -- Bone Armor (Beckoning Armor
     [118241] = { icon = 'esoui/art/icons/ability_necromancer_008_a.dds' }, -- Beckoning Armor (Beckoning Armor)
     [118242] = { icon = 'esoui/art/icons/ability_necromancer_008_a.dds', tooltip = Tooltips.Generic_Stun }, -- Beckoning Armor (Beckoning Armor)
+    [118244] = { tooltip = Tooltips.Skill_Summoners_Armor }, -- Summoner's Armor (Summoner's Armor)
     [118246] = { tooltip = Abilities.Skill_Summoners_Armor, consolidate = true }, -- Major Resolve (Summoner's Armor)
     [118247] = { tooltip = Abilities.Skill_Summoners_Armor, consolidate = true }, -- Major Ward (Summoner's Armor)
     [122680] = { hide = true }, -- Corpse Spawn (Summoner's Armor)
@@ -11664,9 +11690,9 @@ Effects.AddGroundDamageAura = {
     [117809] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Unnerving Boneyard (Unnerving Boneyard)
     [117854] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Avid Boneyard (Avid Boneyard)
 
-    [116410] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shocking Siphon (Shocking Siphon)
-    [118766] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Detonating Siphon (Detonating Siphon)
-    [118011] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Mystic Siphon (Mystic Siphon)
+    --[116410] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shocking Siphon (Shocking Siphon)
+    --[118766] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Detonating Siphon (Detonating Siphon)
+    --[118011] = { duration = 500, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Mystic Siphon (Mystic Siphon)
 
     [122178] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Frozen Colossus (Frozen Colossus)
     [122399] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF, merge = 2 }, -- Pestilent Colossus (Pestilent Colossus)

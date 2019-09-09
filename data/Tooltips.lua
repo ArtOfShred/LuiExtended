@@ -682,6 +682,9 @@ LUIE.Data.Tooltips = {
     Skill_Restoring_Tether                          = GetString(SI_LUIE_SKILL_RESTORING_TETHER_TP),
     Skill_Braided_Tether                            = GetString(SI_LUIE_SKILL_BRAIDED_TETHER_TP),
     Skill_Mortal_Coil                               = GetString(SI_LUIE_SKILL_MORTAL_COIL_TP),
+    Skill_Bone_Armor                                = GetString(SI_LUIE_SKILL_BONE_ARMOR_TP),
+    Skill_Beckoning_Armor                           = GetString(SI_LUIE_SKILL_BECKONING_ARMOR_TP),
+    Skill_Summoners_Armor                           = GetString(SI_LUIE_SKILL_SUMMONERS_ARMOR_TP),
 
     ----------------------------------------------------------------
     -- WEAPON SKILLS -----------------------------------------------

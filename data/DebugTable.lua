@@ -744,6 +744,7 @@ LUIE.DebugAuras = {
     [84367] = true, -- Witchmother's Brew (Witchmother's Whistle)
     [84368] = true, -- Witchmother's Brew (Witchmother's Whistle)
     [84369] = true, -- Witchmother's Brew (Witchmother's Whistle)
+    [91368] = true, -- Jester's Experience Boost Pie (The Pie of Misrule)
     [91369] = true, -- Jester's Experience Boost Pie (The Pie of Misrule)
     [92232] = true, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
     [91446] = true, -- Jester's Experience Boost Pie -- Breda's Bottomless Mead Mug
@@ -4655,6 +4656,7 @@ LUIE.DebugAuras = {
     [114861] = true, -- Blastbones (Blastbones)
     [114863] = true, -- Blastbones (Blastbones)
     [115608] = true, -- Blastbones (Blastbones)
+    [115605] = true, -- Blastbones (Blastbones)
     [124849] = true, -- Blastbones ActionList (Blastbones)
 
     [117690] = true, -- Blighted Blastbones (Blighted Blastones)
@@ -4664,6 +4666,7 @@ LUIE.DebugAuras = {
     [117692] = true, -- Blighted Blastbones (Blighted Blastones)
     [117691] = true, -- Blighted Blastbones (Blighted Blastones)
     [117715] = true, -- Blighted Blastbones (Blighted Blastones)
+    [117714] = true, -- Blighted Blastbones (Blighted Blastones)
     [117727] = true, -- Major Defile (Blighted Blastbones)
     [124851] = true, -- Blighted Blastbones ActionList (Blighted Blastbones)
 
@@ -4676,6 +4679,7 @@ LUIE.DebugAuras = {
     [124626] = true, -- Stalking Blastbones (Stalking Blastbones)
     [124627] = true, -- Stalking Blastbones (Stalking Blastbones)
     [117757] = true, -- Stalking Blastbones (Stalking Blastbones)
+    [117756] = true, -- Stalking Blastbones (Stalking Blastbones)
     [124853] = true, -- Stalking Blastbones ActionList (Stalking Blastbones)
 
     [125219] = true, -- Synergy Damage Bonus (Boneyard - Grave Robber Synergy)
@@ -4796,6 +4800,7 @@ LUIE.DebugAuras = {
     [122679] = true, -- Corpse Spawn (Beckoning Armor)
     [123929] = true, -- Bone Armor (Beckoning Armor)
     [118241] = true, -- Beckoning Armor (Beckoning Armor)
+    [118238] = true, -- Beckoning Armor (Beckoning Armor)
     [118242] = true, -- Beckoning Armor (Beckoning Armor)
 
     [118244] = true, -- Summoner's Armor (Summoner's Armor)

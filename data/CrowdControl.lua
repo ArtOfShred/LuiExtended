@@ -111,9 +111,9 @@ CrowdControl.aoePlayerNormal = {
     [117809] = 0, -- Unnerving Boneyard (Unnerving Boneyard)
     [117854] = 0, -- Avid Boneyard (Avid Boneyard)
 
-    [116410] = 1, -- Shocking Siphon (Shocking Siphon)
-    [118766] = 0, -- Detonating Siphon (Detonating Siphon)
-    [118011] = 0, -- Mystic Siphon (Mystic Siphon)
+    --[116410] = 1, -- Shocking Siphon (Shocking Siphon)
+    --[118766] = 0, -- Detonating Siphon (Detonating Siphon)
+    --[118011] = 0, -- Mystic Siphon (Mystic Siphon)
 
     -- Destruction Staff
     [62896] = 1, -- Wall of Fire
