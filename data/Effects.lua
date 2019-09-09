@@ -928,10 +928,15 @@ Effects.BarHighlightExtraId = {
 
     -- Necromancer
     --[117727] = 117691, -- Blighted Blastbones -- TODO: Doesn't work, not sure why
-
     [121513] = 121517, -- Grave Grasp --> Minor Maim
     [118309] = 118313, -- Ghostly Embrace --> Minor Maim
     [118354] = 118358, -- Empowering Grasp --> Minor Maim
+
+    -- Destruction Staff
+    [39100] = 62787, -- Minor Magickasteal --> Major Breach (Elemental Drain)
+
+    -- Restoration Staff
+    [88576] = 88575, -- Minor Magickasteal --> Minor Lifesteal (Siphon Spirit)
 
     -- Fighters Guild
     [80471] = 40195, -- Camouflaged Hunter
@@ -965,13 +970,34 @@ Effects.BarHighlightExtraId = {
 -- When the primary tracked effect fades, do an iteration over player buffs to see if another buff is present, if so trigger bar highlight for it
 -- ORIGINAL TRACKED ID = OTHER ID'S TO CHECK FOR
 -- Priority is ID1 > ID2 if present
+-- If duration value is set to an ID, the duration will be pulled from this ID
+-- If durationMod value is set to an ID, this value will be subtracted from the final duration
 -- Note that any secondary id's for Bar Highlight in the table above will set their id to the original tracked id here
 Effects.BarHighlightCheckOnFade = {
 
+    -- Destruction Staff
+    [62787] = { id1 = 62787, id2 = 39100, unitTag = "reticleover" }, -- MMajor Breach --> Minor Magickasteal / Major Breach (Elemental Drain)
+
+    -- Restoration Staff
+    [88575] = { id1 = 88576, id2 = 88575, unitTag = "reticleover" }, -- Minor Magickasteal --> Minor Lifesteal (Siphon Spirit)
+
     -- Necromancer
-    [121517] = { id1 = 121513, unitTag = "player" }, -- Minor Maim --> Grave Grasp
-    [118313] = { id1 = 118309, unitTag = "player" }, -- Minor Maim --> Ghostly Embrace
-    [118358] = { id1 = 118354, unitTag = "player" }, -- Minor Maim --> Empowering Grasp
+    [121517] = { id1 = 121513, id2 = 121517, unitTag = "reticleover" }, -- Minor Maim --> Grave Grasp / Minor Maim
+    [118313] = { id1 = 118309, id2 = 118313, unitTag = "reticleover" }, -- Minor Maim --> Ghostly Embrace / Minor Maim
+    [118358] = { id1 = 118354, id2 = 118358, unitTag = "reticleover" }, -- Minor Maim --> Empowering Grasp / Minor Maim
+
+    -- Medium Armor
+    [39196] = { id1 = 63019, unitTag = "player" }, -- Shuffle --> Major Evasion
+
+    -- Heavy Armor
+    [29553] = { duration = 63084, durationMod = 29553, unitTag = "player" }, -- Immovable --> Major Resolve / Major Ward
+    [63133] = { duration = 63084, durationMod = 29553, unitTag = "player" }, -- Immovable Brute --> Major Resolve / Major Ward
+    [63118] = { duration = 63084, durationMod = 29553, unitTag = "player" }, -- Unstoppable --> Major Resolve / Major Ward
+
+
+    -- Werewolf
+    [45834] = { id1 = 39113, id2 = 45834, unitTag = "reticleover" }, -- Off Balance --> Ferocious Roar / Off Balance
+    [111788] = { id1 = 39114, id2 = 111788, unitTag = "reticleover" }, -- Major Fracture --> Deafening Roar / Major Fracture
 
     -- Mages Guild
     [126370] = { id1 = 63223, unitTag = "player" }, -- Entropy --> Major Sorcery
@@ -1277,10 +1303,10 @@ Effects.BarHighlightOverride = {
     [28379] = { newId = 29293 }, -- Twin Slashes --> Twin Slashes Bleed
     [38839] = { newId = 38841 }, -- Rending Slashes --> Rending Slashes Bleed
     [38845] = { newId = 38852 }, -- Blood Craze
-    [21157] = { newId = 68807, showFakeAura = true, noRemove = true }, -- Hidden Blade --> Major Brutality
-    [38914] = { newId = 126647, showFakeAura = true, noRemove = true }, -- Shrouded Daggers --> Major Brutality
-    [38910] = { newId = 126670, showFakeAura = true, noRemove = true }, -- Flying Blade --> Major Brutality
-    --[126659] = { newId = 126667 }, -- Flying Blade -- Would be nice if this worked but when you mouse off the target the bar ID seems to reset for some reason.
+    [21157] = { newId = 68807, noRemove = true }, -- Hidden Blade --> Major Brutality
+    [38914] = { newId = 126647, noRemove = true }, -- Shrouded Daggers --> Major Brutality
+    [38910] = { newId = 126670, noRemove = true }, -- Flying Blade --> Major Brutality
+    --[126659] = { newId = 126670 }, -- Flying Blade -- Would be nice if this worked but when you mouse off the target the bar ID seems to reset for some reason.
     [83600] = { newId = 85156 }, -- Lacerate
     [85187] = { newId = 85192 }, -- Rend
     [85179] = { newId = 85184 }, -- Thrive in Chaos
@@ -1289,7 +1315,7 @@ Effects.BarHighlightOverride = {
     -- Bow --------------------
     ---------------------------
 
-    [38685] = { newId = 38686, showFakeAura = true }, -- Lethal Arrow --> Minor Defile
+    [38685] = { newId = 38686 }, -- Lethal Arrow --> Minor Defile
     [38687] = { newId = 38688 }, -- Focused Aim
     [28879] = { newId = 28888 }, -- Scatter Shot
     [38672] = { newId = 38675 }, -- Magnum Shot
@@ -1329,10 +1355,6 @@ Effects.BarHighlightOverride = {
     -- Restoration Staff ------
     ---------------------------
 
-    [28385] = { noRemove = true }, -- Grand Healing (Grand Healing)
-    [40058] = { noRemove = true }, -- Illustrious Healing (Illustrious Healing)
-    [40060] = { noRemove = true }, -- Healing Springs (Healing Springs)
-
     [37243] = { showFakeAura = true, noRemove = true }, -- Blessing of Protection (Blessing of Protection)
     [40103] = { showFakeAura = true, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration)
     [40094] = { showFakeAura = true, noRemove = true }, -- Combat Prayer (Combat Prayer)
@@ -1344,12 +1366,12 @@ Effects.BarHighlightOverride = {
     -- Armor ------------------
     ---------------------------
 
-    [29556] = { newId = 63015, showFakeAura = true, noRemove = true }, -- Evasion --> Major Evasion
-    [39195] = { newId = 63019, showFakeAura = true, noRemove = true }, -- Shuffle  --> Major Evasion
-    [39192] = { newId = 126958, showFakeAura = true, noRemove = true }, -- Elude --> Major Evasion
-    [29552] = { newId = 29553 }, -- Immovable
-    [39205] = { newId = 63133 }, -- Immovable Brute
-    [39197] = { newId = 63118 }, -- Unstoppable
+    [29556] = { newId = 63015, ignoreMouseover = true }, -- Evasion --> Major Evasion
+    [39195] = { newId = 39196, ignoreMouseover = true }, -- Shuffle
+    [39192] = { newId = 126958, showFakeAura = true }, -- Elude
+    [29552] = { newId = 29553, ignoreMouseover = true }, -- Immovable
+    [39205] = { newId = 63133, ignoreMouseover = true }, -- Immovable Brute
+    [39197] = { newId = 63118, ignoreMouseover = true }, -- Unstoppable
 
     ---------------------------
     -- Soul Magic -------------
@@ -1422,7 +1444,7 @@ Effects.BarHighlightOverride = {
     [104059] = { newId = 104078 }, -- Borrowed Time
     [103503] = { newId = 103521, noRemove = true }, -- Accelerate --> Minor Force
     [103706] = { newId = 103708, noRemove = true }, -- Channeled Acceleration --> Minor Force
-    [103710] = { newId = 122260, showFakeAura = true, noRemove = true }, -- Race Against Time
+    [103710] = { newId = 122260, showFakeAura = true, ignoreMouseover = true }, -- Race Against Time
     [103543] = { hide = true }, -- Mend Wounds
     [103747] = { hide = true }, -- Mend Spirit
     [103755] = { hide = true }, -- Symbiosis
@@ -1465,7 +1487,7 @@ Effects.BarHighlightOverride = {
     ---------------------------
 
     [116093] = { newId = 116364 }, -- Rourken's Rebuke
-    [116095] = { showFakeAura = true, noRemove = true }, -- Pariah's Resolve
+    [116095] = { showFakeAura = true, ignoreMouseover = true }, -- Pariah's Resolve
 
 
 }
@@ -11416,12 +11438,12 @@ Effects.FakePlayerBuffs = {
     [22226] = { duration = 6000 }, -- Practiced Incantation (Practiced Incantation)
 
     -- Heavy Armor
-    [63084] = { duration = 20000 }, -- Major Resolve (Unstoppable)
-    [63085] = { duration = 20000 }, -- Major Ward (Unstoppable)
-    [63134] = { duration = 20000 }, -- Major Resolve (Unstoppable Brute)
-    [63135] = { duration = 20000 }, -- Major Ward (Unstoppable Brute)
-    [63119] = { duration = 20000 }, -- Major Resolve (Immovable)
-    [63120] = { duration = 20000 }, -- Major Ward (Immovable)
+    [63084] = { duration = "GET" }, -- Major Resolve (Unstoppable)
+    [63085] = { duration = "GET" }, -- Major Ward (Unstoppable)
+    [63134] = { duration = "GET" }, -- Major Resolve (Unstoppable Brute)
+    [63135] = { duration = "GET" }, -- Major Ward (Unstoppable Brute)
+    [63119] = { duration = "GET" }, -- Major Resolve (Immovable)
+    [63120] = { duration = "GET" }, -- Major Ward (Immovable)
 
     -- Vampire
     --[40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = Abilities.Skill_Feed, duration = 5300 }, -- Feed (Blood Ritual)

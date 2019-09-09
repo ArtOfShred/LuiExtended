@@ -498,6 +498,10 @@ function CombatInfo.UpdateBarHighlightTables()
                     if value.noRemove then
                         g_barNoRemove[value.newId] = true
                     end
+                    if value.ignoreMouseover then
+                        g_ignoreMouseover[value.newId] = true
+                    end
+                    g_barFakeAura[value.newId] = true
                 else
                     g_barOverrideCI[abilityId] = true
                     if value.duration then
@@ -506,8 +510,11 @@ function CombatInfo.UpdateBarHighlightTables()
                     if value.noRemove then
                         g_barNoRemove[abilityId] = true
                     end
+                    if value.newId then
+                        g_ignoreMouseover[abilityId] = true
+                    end
+                    g_barFakeAura[abilityId] = true
                 end
-                g_barFakeAura[abilityId] = true
             else
                 if value.noRemove then
                     if value.newId then
@@ -516,12 +523,12 @@ function CombatInfo.UpdateBarHighlightTables()
                         g_barNoRemove[abilityId] = true
                     end
                 end
-            end
-            if value.ignoreMouseover == true then
-                if value.newId then
-                    g_ignoreMouseover[value.newId] = true
-                else
-                    g_ignoreMouseover[abilityId] = true
+                if value.ignoreMouseover == true then
+                    if value.newId then
+                        g_ignoreMouseover[value.newId] = true
+                    else
+                        g_ignoreMouseover[abilityId] = true
+                    end
                 end
             end
         end
@@ -884,7 +891,7 @@ function CombatInfo.OnReticleTargetChanged(eventCode)
     local unitTag = "reticleover"
 
     for k, v in pairs(g_toggledSlotsRemain) do
-        if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and not (g_toggledSlotsPlayer[k] or g_ignoreMouseover[k]) then
+        if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and not (g_toggledSlotsPlayer[k] or g_ignoreMouseover[k] or g_barNoRemove[k]) then
             g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
             g_toggledSlotsRemain[k] = nil
             if Effects.BarHighlightCheckOnFade[k] then
@@ -914,14 +921,31 @@ end
 
 -- Iterate until we find the buff we're looking for, if it's present, then send a dummy event using the duration info from that buff but the id from the original ability.
 function CombatInfo.BarHighlightSwap(abilityId)
-    local id1 = Effects.BarHighlightCheckOnFade[abilityId].id1
+    local id1 = Effects.BarHighlightCheckOnFade[abilityId].id1 or 0
     local id2 = Effects.BarHighlightCheckOnFade[abilityId].id2 or 0
     local unitTag = Effects.BarHighlightCheckOnFade[abilityId].unitTag
-    for i = 1, GetNumBuffs(unitTag) do
-        local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
-        if id1 == abilityIdNew then
-            CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1)
-            return
+    local duration = Effects.BarHighlightCheckOnFade[abilityId].duration or 0
+    local durationMod = Effects.BarHighlightCheckOnFade[abilityId].durationMod or 0
+    -- If the unitTag doesn't exist, bail out here
+    if not DoesUnitExist(unitTag) then return end
+
+    -- If we have a fake duration assigned, use that
+    if duration > 0 then
+        duration = (GetAbilityDuration(duration) - GetAbilityDuration(durationMod) )
+        local timeStarted = GetGameTimeSeconds()
+        local timeEnding = timeStarted + ( duration / 1000 )
+        CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, 0, nil, nil, 1, ABILITY_TYPE_BONUS, 0, nil, nil, abilityId, 1, true)
+        return
+    end
+
+    -- Iterate through buffs and look for id1 if it exists
+    if id1 ~= 0 then
+        for i = 1, GetNumBuffs(unitTag) do
+            local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
+            if id1 == abilityIdNew then
+                CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1, true)
+                return
+            end
         end
     end
     -- Only iterate again if there is a second ID to look for
@@ -929,17 +953,17 @@ function CombatInfo.BarHighlightSwap(abilityId)
         for i = 1, GetNumBuffs(unitTag) do
             local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
             if id2 == abilityIdNew then
-                CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1)
+                CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1, true)
                 return
             end
         end
     end
 end
 
-function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer, passThrough)
     -- If we're displaying a fake bar highlight then bail out here (sometimes we need a fake aura that doesn't end to simulate effects that can be overwritten, such as Major/Minor buffs. Technically we don't want to stop the
     -- highlight of the original ability since we can only track one buff per slot and overwriting the buff with a longer duration buff shouldn't throw the player off by making the glow disappear earlier.
-    if g_barFakeAura[abilityId] then
+    if g_barFakeAura[abilityId] and not passThrough then
         return
     end
 
@@ -1533,9 +1557,6 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
             end
         end
     elseif result == ACTION_RESULT_EFFECT_FADED then
-        if Effects.BarHighlightCheckOnFade[abilityId] and targetType == COMBAT_UNIT_TYPE_PLAYER then
-            CombatInfo.BarHighlightSwap(abilityId)
-        end
         -- Ignore fading event if override is true
         if g_barNoRemove[abilityId] then return end
 
@@ -1547,6 +1568,9 @@ function CombatInfo.OnCombatEventBar(eventCode, result, isError, abilityName, ab
                 end
             end
             g_toggledSlotsRemain[abilityId] = nil
+        end
+        if Effects.BarHighlightCheckOnFade[abilityId] and targetType == COMBAT_UNIT_TYPE_PLAYER then
+            CombatInfo.BarHighlightSwap(abilityId)
         end
     end
 end
