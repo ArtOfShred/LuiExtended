@@ -975,6 +975,9 @@ Effects.BarHighlightExtraId = {
 -- Note that any secondary id's for Bar Highlight in the table above will set their id to the original tracked id here
 Effects.BarHighlightCheckOnFade = {
 
+    -- Dual Wield
+    [126667] = { id1 = 126670, unitTag = "player" }, -- Flying Blade --> Major Bruality
+
     -- Destruction Staff
     [62787] = { id1 = 62787, id2 = 39100, unitTag = "reticleover" }, -- MMajor Breach --> Minor Magickasteal / Major Breach (Elemental Drain)
 
@@ -1305,8 +1308,8 @@ Effects.BarHighlightOverride = {
     [38845] = { newId = 38852 }, -- Blood Craze
     [21157] = { newId = 68807, noRemove = true }, -- Hidden Blade --> Major Brutality
     [38914] = { newId = 126647, noRemove = true }, -- Shrouded Daggers --> Major Brutality
-    [38910] = { newId = 126670, noRemove = true }, -- Flying Blade --> Major Brutality
-    --[126659] = { newId = 126670 }, -- Flying Blade -- Would be nice if this worked but when you mouse off the target the bar ID seems to reset for some reason.
+    [38910] = { newId = 126667 }, -- Flying Blade
+    [126659] = { newId = 126667 }, -- Flying Blade
     [83600] = { newId = 85156 }, -- Lacerate
     [85187] = { newId = 85192 }, -- Rend
     [85179] = { newId = 85184 }, -- Thrive in Chaos
