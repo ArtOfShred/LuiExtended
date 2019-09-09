@@ -134,6 +134,10 @@ CrowdControl.aoePlayerNormal = {
     [38690] = 0, -- Endless Hail
     [38696] = 0, -- Arrow Barrage
 
+    -- Undaunted
+    [39299] = 1, -- Necrotic Orb
+    [42029] = 1, -- Mystic Orb
+
     -- Assault
     [38561] = 1, -- Caltrops (Caltrops)
     [40267] = 0, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)

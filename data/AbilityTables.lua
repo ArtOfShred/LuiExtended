@@ -803,9 +803,8 @@ local AbilityTables = {
 
     -- Undaunted
     Skill_Blood_Altar                 = 39489,
-    Skill_Black_Widows                = 41994,
+    Skill_Black_Widow                 = 41994,
     Skill_Arachnophobia               = 42016,
-    Skill_Healing_Combustion          = 63507,
     Skill_Spinal_Surge                = 42198,
 
     -- ---------------------------------------------------
@@ -819,7 +818,6 @@ local AbilityTables = {
     Skill_Caltrops                    = 33376,
     Skill_Razor_Caltrops              = 40242,
     Skill_Aggressive_Horn             = 40223,
-    Skill_Sturdy_Horn                 = 40220,
 
     -- Support
     Skill_Mystic_Guard                = 61536,

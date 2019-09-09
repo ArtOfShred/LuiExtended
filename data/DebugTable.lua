@@ -2514,7 +2514,7 @@ LUIE.DebugAuras = {
     [64842] = true, -- Critter Smash
     [48532] = true, -- Charge Snare
     --[61737] = true, -- Empower
-    [41952] = true, -- Generic Fear Snare
+    [41952] = true, -- Cower
     [55080] = true, -- Pet Hidden
     [16566] = true, -- CC Immunity
     [28301] = true, -- Crowd Control Immunity
@@ -3243,7 +3243,6 @@ LUIE.DebugAuras = {
     [76634] = true, -- Manifestation of Terror (Manifestation of Terror)
     [76637] = true, -- Manifestation of Terror (Manifestation of Terror)
     [76639] = true, -- Manifestation of Terror (Manifestation of Terror)
-    [108907] = true, -- Generic Fear Snare (Manifestation of Terror)
     [38208] = true, -- Birth Manifestation of Terror (Manifestation of Terror)
     [76632] = true, -- Manifestation of Terror (Manifestation of Terror)
 
@@ -6739,11 +6738,10 @@ LUIE.DebugAuras = {
     [41960] = true, -- Overflowing Altar (Overflowing Altar)
 
     [108788] = true, -- Synergy Damage Bonus (Trapping Webs - Spawn Broodlings Synergy)
-    [39429] = true, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
-    [39451] = true, -- Spawn Broodlings Cooldown (Trapping Webs - Spawn Broodlings Synergy)
+    [39429] = true, -- Spawn Broodling (Trapping Webs - Spawn Broodlings Synergy)
+    [39451] = true, -- Spawn Broodling (Trapping Webs - Spawn Broodlings Synergy)
     [41543] = true, -- Summon Spider Spawn (Trapping Webs - Spawn Broodlings Synergy)
-    [39430] = true, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
-    [39432] = true, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
+    [39430] = true, -- Spawn Broodling (Trapping Webs - Spawn Broodlings Synergy)
     [77245] = true, -- Bite (Trapping Webs - Spawn Broodlings Synergy)
 
     [80030] = true, -- Only 1 Trapping Web (Trapping Webs - All Morphs)
@@ -6752,14 +6750,14 @@ LUIE.DebugAuras = {
     [102551] = true, -- Trapping Webs (Trapping Webs)
     [80079] = true, -- Trapping Webs (Trapping Webs)
     [103242] = true, -- Trapping Webs (Trapping Webs)
+    [126718] = true, -- Trapping Webs (Trapping Webs)
     [80083] = true, -- Trapping Webs (Trapping Webs)
     [80078] = true, -- Trapping Webs (Trapping Webs)
 
     [108791] = true, -- Synergy Damage Bonus (Shadow Silk - Black Widows Synergy)
-    [41994] = true, -- Black Widows (Shadow Silk - Black Widows Synergy)
-    [41997] = true, -- Spawn Broodlings Cooldown (Shadow Silk - Black Widows Synergy)
-    [41998] = true, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
-    [41999] = true, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
+    [41994] = true, -- Black Widow (Shadow Silk - Black Widows Synergy)
+    [41997] = true, -- Black Widow (Shadow Silk - Black Widows Synergy)
+    [41998] = true, -- Black Widow (Shadow Silk - Black Widows Synergy)
     [42000] = true, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
     [42007] = true, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
 
@@ -6768,6 +6766,7 @@ LUIE.DebugAuras = {
     [103263] = true, -- Trapping Webs (Shadow Silk)
     [80108] = true, -- Shadow Silk (Shadow Silk)
     [41993] = true, -- Shadow Silk (Shadow Silk)
+    [126720] = true, -- Shadow Silk (Shadow Silk)
     [80107] = true, -- Shadow Silk (Shadow Silk)
     [41991] = true, -- Shadow Silk (Shadow Silk)
 
@@ -6776,13 +6775,13 @@ LUIE.DebugAuras = {
     [42019] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
     [42023] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
     [42020] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
-    [42021] = true,  -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
 
     [42012] = true, -- Tangling Webs (Tangling Webs)
     [80127] = true, -- Tangling Webs (Tangling Webs)
     [103268] = true, -- Trapping Webs (Tangling Webs)
     [80130] = true, -- Tangling Webs (Tangling Webs)
     [42015] = true, -- Tangling Webs (Tangling Webs)
+    [126722] = true, -- Tangling Webs (Tangling Webs)
     [80129] = true, -- Tangling Webs (Tangling Webs)
     [42013] = true, -- Tangling Webs (Tangling Webs)
 
@@ -6837,10 +6836,12 @@ LUIE.DebugAuras = {
     [85432] = true, -- Combustion (Necrotic Orb - Combustion Synergy)
 
     [39298] = true, -- Necrotic Orb (Necrotic Orb)
+    [127329] = true, -- Necrotic Orb (Necrotic Orb)
     [39299] = true, -- Necrotic Orb (Necrotic Orb)
     [39300] = true, -- Necrotic Orb (Necrotic Orb)
 
     [42028] = true, -- Mystic Orb (Mystic Orb)
+    [127331] = true, -- Mystic Orb (Mystic Orb)
     [42029] = true, -- Mystic Orb (Mystic Orb)
     [42030] = true, -- Mystic Orb (Mystic Orb)
 
@@ -6853,6 +6854,7 @@ LUIE.DebugAuras = {
     [63511] = true, -- Combustion (Energy Orb - Healing Combustion Synergy)
 
     [42038] = true, -- Energy Orb (Energy Orb)
+    [127332] = true, -- Energy Orb (Energy Orb)
     [42039] = true, -- Energy Orb (Energy Orb)
     [42040] = true, -- Energy Orb (Energy Orb)
 
@@ -6896,7 +6898,6 @@ LUIE.DebugAuras = {
 
     [61507] = true, -- Resolving Vigor (Resolving Vigor)
     [61509] = true, -- Resolving Vigor (Resolving Vigor)
-    [61508] = true, -- Resolving Vigor (Resolving Vigor)
 
     [33376] = true, -- Caltrops (Caltrops)
     [38548] = true, -- Spear Shards (Caltrops)
@@ -6917,7 +6918,7 @@ LUIE.DebugAuras = {
     [40244] = true, -- Razor Caltrops (Razor Caltrops)
     [40251] = true, -- Caltrops (Razor Caltrops)
     [40249] = true, -- Spear Shards (Razor Caltrops)
-    [40254] = true, -- Razor Caltrops (Razor Caltrops)
+    [40254] = true, -- Major Fracture (Razor Caltrops)
     [40252] = true, -- Razor Caltrops (Razor Caltrops)
     [113771] = true, -- Razor Caltrops (Razor Caltrops)
 
@@ -6947,8 +6948,7 @@ LUIE.DebugAuras = {
 
     [40220] = true, -- Sturdy Horn (Sturdy Horn)
     [40221] = true, -- Sturdy Horn (Sturdy Horn)
-    [63532] = true, -- Minor Resolve (Sturdy Horn)
-    [63571] = true, -- Minor Ward (Sturdy Horn)
+    [63571] = true, -- Sturdy Horn (Sturdy Horn)
     [95094] = true, -- Sturdy (Sturdy Horn)
 
     -------------------------------------

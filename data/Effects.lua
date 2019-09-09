@@ -416,7 +416,7 @@ Effects.DebuffDisplayOverrideId = {
     [92060] = true, -- Frozen Retreat Root (Frozen Retreat)
 
     -- Undaunted
-    [42007] = true, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
+    [42007] = true, -- Black Widow Poison (Shadow Silk - Black Widow Synergy)
 
     -- Werewolf
     [127161] = true, -- Lunge (Pack Leader)
@@ -695,6 +695,10 @@ Effects.EffectGroundDisplay = {
     [41990] = { buff = false, debuff = false, ground = true }, -- Shadow Silk (Shadow Silk)
     [42012] = { buff = false, debuff = false, ground = true }, -- Tangling Webs (Tangling Webs)
 
+    [39298] = { buff = false, debuff = false, ground = true }, -- Necrotic Orb (Necrotic Orb)
+    [42028] = { buff = false, debuff = false, ground = true }, -- Mystic Orb (Mystic Orb)
+    [42038] = { buff = true, debuff = false, ground = false }, -- Energy Orb (Energy Orb)
+
     ---------------------------
     -- Assault ----------------
     ---------------------------
@@ -840,9 +844,9 @@ Effects.EffectCreateSkillAura = {
     [38963] = { alwaysShow = true, removeOnEnd = true, abilityId = 38967 }, -- Elusive Mist --> Major Expedition
 
     -- Assault
-    [57472] = { alwaysShow = true, removeOnEnd = true, abilityId = 38566 }, -- Major Gallop (Rapid Maneuver)
-    [57477] = { alwaysShow = true, removeOnEnd = true, abilityId = 40211 }, -- Major Gallop (Retreating Maneuver)
-    [57481] = { alwaysShow = true, removeOnEnd = true, abilityId = 40215 }, -- Major Gallop (Charging Maneuver)
+    [57472] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 38566 }, -- Major Gallop (Rapid Maneuver)
+    [101169] = { alwaysShow = true, removeOnEnd = true, abilityId = 40211 }, -- Major Expedition (Retreating Maneuver)
+    [57481] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 40215 }, -- Major Gallop (Charging Maneuver)
 
     -- Sets
     [106867] = { alwaysShow = true, abilityId = 106865 }, -- Major Evasion --> Grace of Gloom
@@ -939,7 +943,6 @@ Effects.BarHighlightExtraId = {
 
     -- Vampire
     [63558] = 81493, -- Minor Expedition --- Accelerating Drain
-
 
 }
 
@@ -1399,12 +1402,9 @@ Effects.BarHighlightOverride = {
     -- Undaunted --------------
     ---------------------------
 
-    [39475] = { newId = 41942, showFakeAura = true }, -- Inner Fire
-    [42056] = { newId = 42059, showFakeAura = true }, -- Inner Rage
-    [42060] = { newId = 42062, showFakeAura = true }, -- Inner Beast
-    --[39298] = { hide = true }, -- Necrotic Orb
-    --[42028] = { hide = true }, -- Mystic Orb
-    --[42038] = { hide = true }, -- Energy Orb
+    [39475] = { newId = 41942, newId = 38541 }, -- Inner Fire --> Taunt
+    [42056] = { newId = 42059, newId = 38541 }, -- Inner Rage --> Taunt
+    [42060] = { newId = 42062, newId = 42062 }, -- Inner Beast
 
     ---------------------------
     -- Assault ----------------
@@ -1786,7 +1786,7 @@ Effects.AddNameAura = {
 Effects.SynergyNameOverride = {
     ['Tonal Inverter'] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_tonal_inverter.dds' }, -- Tonal Inverter (Divine Intervention)
     [Abilities.Skill_Blade_of_Woe] = { icon = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds' }, -- Blade of Woe (Dark Brotherhood)
-    [Abilities.Skill_Black_Widows] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Black Widows (Undaunted)
+    [Abilities.Skill_Black_Widow] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Black Widow (Undaunted)
     [Abilities.Skill_Arachnophobia] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Undaunted)
     [Abilities.Skill_Feed] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed (Vampire)
     [Abilities.Skill_Devour] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Werewolf)
@@ -6141,30 +6141,31 @@ Effects.EffectOverride = {
     [41958] = { tooltip = Tooltips.Skill_Overflowing_Altar }, -- Overflowing Altar (Overflowing Altar)
 
     -- Trapping Webs / Shadow Silk / Tangling Webs
-    [39430] = { icon = 'esoui/art/icons/ability_undaunted_003.dds', tooltip = Tooltips.Skill_Spawn_Broodlings }, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
-    [39432] = { icon = 'esoui/art/icons/ability_undaunted_003.dds', tooltip = Tooltips.Skill_Spawn_Broodlings }, -- Spawn Broodlings (Trapping Webs - Spawn Broodlings Synergy)
-    [77245] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_bite.dds' }, -- Bite (Trapping Webs - Spawn Broodlings Synergy)
+    [39430] = { icon = 'esoui/art/icons/ability_undaunted_003.dds', tooltip = Tooltips.Skill_Spawn_Broodling }, -- Spawn Broodling (Trapping Webs - Spawn Broodling Synergy)
+    [77245] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_bite.dds' }, -- Bite (Trapping Webs - Spawn Broodling Synergy)
     [39425] = { tooltip = Tooltips.Skill_Trapping_Webs }, -- Trapping Webs (Trapping Webs)
     [80079] = { duration = 0, tooltip = Tooltips.Skill_Trapping_Webs_Snare, groundLabel = true }, -- Trapping Webs (Trapping Webs)
-    [108791] = { hide = true }, -- Synergy Damage Bonus (Shadow Silk - Black Widows Synergy)
-    [41994] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Black Widows (Shadow Silk - Black Widows Synergy)
-    [41998] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', name = Abilities.Skill_Black_Widows, tooltip = Tooltips.Skill_Spawn_Broodlings }, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
-    [41999] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', name = Abilities.Skill_Black_Widows, tooltip = Tooltips.Skill_Spawn_Broodlings }, -- Spawn Broodlings (Shadow Silk - Black Widows Synergy)
-    [42000] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_undaunted_black_widow_poison.dds' }, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
-    [42007] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_black_widow_poison.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Black Widow Poison (Shadow Silk - Black Widows Synergy)
+    [108791] = { hide = true }, -- Synergy Damage Bonus (Shadow Silk - Black Widow Synergy)
+
+    [41994] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Black Widow (Shadow Silk - Black Widow Synergy)
+    [41998] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', tooltip = Tooltips.Skill_Spawn_Broodling }, -- Spawn Broodling (Shadow Silk - Black Widow Synergy)
+    [42000] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_black_widow_poison.dds' }, -- Black Widow Poison (Shadow Silk - Black Widow Synergy)
+    [42007] = { icon = 'LuiExtended/media/icons/abilities/ability_undaunted_black_widow_poison.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Black Widow Poison (Shadow Silk - Black Widow Synergy)
     [41990] = { tooltip = Tooltips.Skill_Shadow_Silk}, -- Shadow Silk (Shadow Silk)
     [80108] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds', duration = 0, tooltip = Tooltips.Skill_Trapping_Webs_Snare, groundLabel = true }, -- Shadow Silk (Shadow Silk)
+    [126720] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Shadow Silk (Shadow Silk)
     [80107] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Shadow Silk (Shadow Silk)
     [108792] = { hide = true }, -- Synergy Damage Bonus (Tangling Webs - Arachnophobia Synergy)
     [42016] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
     [42023] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds', tooltip = Tooltips.Generic_Fear }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
-    [42020] = { tooltip = Tooltips.Skill_Spawn_Broodlings }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
-    [42021] = { tooltip = Tooltips.Skill_Spawn_Broodlings }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
+    [42020] = { tooltip = Tooltips.Skill_Spawn_Broodling }, -- Arachnophobia (Tangling Webs - Arachnophobia Synergy)
     [42012] = { tooltip = Tooltips.Skill_Tangling_Webs }, -- Tangling Webs (Tangling Webs)
     [80130] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds', duration = 0, tooltip = Tooltips.Skill_Trapping_Webs_Snare, groundLabel = true }, --  Tangling Webs (Tangling Webs)
+    [126722] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, --  Tangling Webs (Tangling Webs)
     [80129] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, --  Tangling Webs (Tangling Webs)
 
     -- Inner Fire / Inner Rage / Inner Beast
+    [42062] = { tooltip = Tooltips.Skill_Inner_Beast }, -- Inner Beast (Inner Beast)
     [41838] = { tooltip = Tooltips.Skill_Radiate }, -- Radiate (Inner Fire - Radiate Synergy)
 
     -- Bone Shield / Spiked Bone Shield / Bone Surge
@@ -6177,9 +6178,16 @@ Effects.EffectOverride = {
 
     -- Necrotic Orb / Mystic Orb / Energy Orb
     [85432] = { icon = 'esoui/art/icons/ability_undaunted_004.dds' }, -- Combustion (Necrotic Orb - Combustion Synergy)
-    [95041] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds', name = Abilities.Skill_Healing_Combustion }, -- Combustion (Energy Orb - Healing Combustion Synergy)
-    [95042] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds', name = Abilities.Skill_Healing_Combustion }, -- Combustion (Energy Orb - Healing Combustion Synergy)
-    [63511] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds', name = Abilities.Skill_Healing_Combustion }, -- Combustion (Energy Orb - Healing Combustion Synergy)
+    [95041] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds' }, -- Combustion (Energy Orb - Healing Combustion Synergy)
+    [95042] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds', }, -- Combustion (Energy Orb - Healing Combustion Synergy)
+    [63511] = { icon = 'esoui/art/icons/ability_undaunted_004b.dds' }, -- Combustion (Energy Orb - Healing Combustion Synergy)
+
+    [39298] = { tooltip = Tooltips.Skill_Necrotic_Orb }, -- Necrotic Orb (Necrotic Orb)
+    [39299] = { tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5, groundLabel = true }, -- Necrotic Orb (Necrotic Orb)
+    [42028] = { tooltip = Tooltips.Skill_Necrotic_Orb }, -- Mystic Orb (Mystic Orb)
+    [42029] = { tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 0.5, groundLabel = true }, -- Mystic Orb (Mystic Orb)
+    [42038] = { tooltip = Tooltips.Skill_Energy_Orb }, -- Energy Orb (Energy Orb)
+    [42039] = { tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 0.5, groundLabel = true }, -- Energy Orb (Energy Orb)
 
     ----------------------------------------------------------------
     -- ASSAULT PASSIVES --------------------------------------------
@@ -6201,33 +6209,33 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Rapid Manuever / Retreating Maneuver / Charging Maneuver
-    [38566] = { tooltip = Tooltips.Skill_Rapid_Maneuver }, -- Rapid Manuever (Rapid Maneuver)
-    [101161] = { consolidate = true, tooltip = Abilities.Skill_Rapid_Manuever }, -- Major Expedition (Rapid Maneuver)
-    [57472] = { consolidate = true, tooltip = Abilities.Skill_Rapid_Manuever }, -- Major Gallop (Rapid Maneuver)
+    [101161] = { tooltip = Abilities.Skill_Rapid_Manuever }, -- Major Expedition (Rapid Maneuver)
+    [57472] = { consolidateExtra = true, tooltip = Abilities.Skill_Rapid_Manuever }, -- Major Gallop (Rapid Maneuver)
     [40211] = { tooltip = Tooltips.Skill_Retreating_Maneuver }, -- Retreating Maneuver (Retreating Maneuver)
-    [101169] = { consolidate = true, tooltip = Abilities.Skill_Retreating_Manuever }, -- Major Expedition (Retreating Maneuver)
-    [57477] = { consolidate = true, tooltip = Abilities.Skill_Retreating_Manuever }, -- Major Gallop (Retreating Maneuver)
-    [40215] = { tooltip = Tooltips.Skill_Charging_Maneuver }, -- Charging Maneuver (Charging Maneuver)
-    [101178] = { consolidate = true, tooltip = Abilities.Skill_Charging_Manuever }, -- Major Expedition (Charging Maneuver)
-    [57481] = { consolidate = true, tooltip = Abilities.Skill_Charging_Manuever }, -- Major Gallop (Charging Maneuver)
+    [101169] = { tooltip = Abilities.Skill_Retreating_Manuever }, -- Major Expedition (Retreating Maneuver)
+    [57477] = { tooltip = Abilities.Skill_Retreating_Manuever }, -- Major Gallop (Retreating Maneuver)
+    [101178] = { tooltip = Abilities.Skill_Charging_Manuever }, -- Major Expedition (Charging Maneuver)
+    [57481] = { consolidateExtra = true, tooltip = Abilities.Skill_Charging_Manuever }, -- Major Gallop (Charging Maneuver)
     [40219] = { tooltip = Abilities.Skill_Charging_Manuever }, -- Minor Expedition (Charging Maneuver)
 
     -- Vigor / Echoing Vigor / Resolving Vigor
-    [61504] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Vigor (Vigor)
-    [61506] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Echoing Vigor (Echoing Vigor)
+    [61504] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Vigor (Vigor)
+    [61506] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Echoing Vigor (Echoing Vigor)
     [61509] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Resolving Vigor (Resolving Vigor)
-    [61508] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Resolving Vigor (Resolving Vigor)
 
     -- Caltrops / Anti-Cavalry Caltrops / Razor Caltrops
     [38549] = { tooltip = Tooltips.Skill_Caltrops }, -- Caltrops (Caltrops)
-    [38561] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Physical, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Caltrops (Caltrops)
-    [113769] = { tooltip = Tooltips.Generic_AOE_Snare_Physical, tooltipValue2 = 1, tooltipValue3 = 30, groundLabel = true, hideGround = true }, -- Caltrops (Caltrops)
+    [38561] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Physical, tooltipValue2 = 1, tooltipValue3 = 50 }, -- Caltrops (Caltrops)
+    [113769] = { tooltip = Tooltips.Generic_AOE_Snare_Physical, tooltipValue2 = 1, tooltipValue3 = 50, groundLabel = true, hideGround = true }, -- Caltrops (Caltrops)
+
     [40265] = { tooltip = Tooltips.Skill_Anti_Cavalry_Caltrops }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [40267] = { groundLabel = true, tooltip = Tooltips.Skill_Anti_Cavalry_Caltrops_Debuff }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
     [113770] = { tooltip = Tooltips.Skill_Anti_Cavalry_Caltrops_Debuff, groundLabel = true, hideGround = true }, -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
-    [40251] = { tooltip = Tooltips.Skill_Caltrops }, -- Caltrops (Razor Caltrops)
-    [113771] = { tooltip = Tooltips.Generic_AOE_Snare_Physical, tooltipValue2 = 1, tooltipValue3 = 30, groundLabel = true, hideGround = true }, -- Razor Caltrops (Razor Caltrops)
-    [40252] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Physical, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Razor Caltrops (Razor Caltrops)
+
+    [40251] = { tooltip = Tooltips.Skill_Razor_Caltrops }, -- Caltrops (Razor Caltrops)
+    [40254] = { tooltip = Abilities.Skill_Razor_Caltrops }, -- Major Fracture (Razor Caltrops)
+    [113771] = { tooltip = Tooltips.Skill_Razor_Caltrops_Debuff, groundLabel = true, hideGround = true }, -- Razor Caltrops (Razor Caltrops)
+    [40252] = { groundLabel = true, tooltip = Tooltips.Skill_Razor_Caltrops_Debuff }, -- Razor Caltrops (Razor Caltrops)
 
     -- Magicka Detonation/ Inevitable Detonation / Proximity Detonation
     [61487] = { tooltip = Tooltips.Skill_Magicka_Detonation }, -- Magicka Detonation (Magicka Detonation)
@@ -6241,9 +6249,8 @@ Effects.EffectOverride = {
     [38564] = { tooltip = Tooltips.Skill_War_Horn }, -- War Horn (War Horn)
     [40224] = { tooltip = Tooltips.Skill_War_Horn }, -- Aggresive Horn (Aggresive Horn)
     [40225] = { tooltip = Abilities.Skill_Aggressive_Horn }, -- Major Force (Aggresive Horn)
-    [40221] = { tooltip = Tooltips.Skill_War_Horn }, -- Sturdy Horn (Sturdy Horn)
-    [63532] = { consolidate = true, tooltip = Abilities.Skill_Sturdy_Horn }, -- Minor Resolve (Sturdy Horn)
-    [63571] = { consolidate = true, tooltip = Abilities.Skill_Sturdy_Horn }, -- Minor Ward (Sturdy Horn)
+    [40221] = { tooltip = Tooltips.Skill_Study_Horn }, -- Sturdy Horn (Sturdy Horn)
+    [63571] = { tooltip = Tooltips.Skill_Study_Horn, icon = 'esoui/art/icons/ability_ava_003_b.dds', hideReduce = true }, -- Sturdy Horn (Sturdy Horn)
 
     ----------------------------------------------------------------
     -- SUPPORT PASSIVES --------------------------------------------
@@ -11707,6 +11714,11 @@ Effects.AddGroundDamageAura = {
     [63454] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ice Comet (Ice Comet)
     [63471] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Shooting Star (Shooting Star)
 
+    -- Undaunted
+    [39299] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Necrotic Orb (Necrotic Orb)
+    [42029] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Mystic Orb (Mystic Orb)
+    [42039] = { duration = 600, type = BUFF_EFFECT_TYPE_BUFF }, -- Energy Orb (Energy Orb)
+
     -- Vampire
     [32625] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bat Swarm
     [38935] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Clouding Swarm
@@ -11724,7 +11736,7 @@ Effects.AddGroundDamageAura = {
     -- TRAPS
     --------------------
 
-    [17314] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF, exception = ACTION_RESULT_DOT_TICK }, -- Fire Trap (Player)
+    [17314] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire Trap (Player)
 
     [72888] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire Attack 1 (Fire) -- Banished Cells II
     [72889] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire Attack 2 (Fire) -- Banished Cells II
@@ -11855,7 +11867,7 @@ Effects.AddGroundDamageAura = {
     [48815] = { duration = 1600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Daedric Tempest (High Kinlord Rilis)
 
     -- Elden Hollow I
-    [42601] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF, exception = ACTION_RESULT_DOT_TICK }, -- Necrotic Circle (Canonreeve Oraneth)
+    [42601] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Necrotic Circle (Canonreeve Oraneth)
 
     -- Elden Hollow II
     [32972] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Consuming Shadow (Murklight)

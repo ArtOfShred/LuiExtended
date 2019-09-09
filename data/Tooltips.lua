@@ -864,11 +864,14 @@ LUIE.Data.Tooltips = {
     Skill_Shadow_Silk                               = GetString(SI_LUIE_SKILL_SHADOW_SILK_TP),
     Skill_Tangling_Webs                             = GetString(SI_LUIE_SKILL_TANGLING_WEBS_TP),
     Skill_Trapping_Webs_Snare                       = GetString(SI_LUIE_SKILL_TRAPPING_WEBS_SNARE_TP),
-    Skill_Spawn_Broodlings                          = GetString(SI_LUIE_SKILL_SPAWN_BROODLINGS_TP),
+    Skill_Spawn_Broodling                           = GetString(SI_LUIE_SKILL_SPAWN_BROODLING_TP),
+    Skill_Inner_Beast                               = GetString(SI_LUIE_SKILL_INNER_BEAST_TP),
     Skill_Radiate                                   = GetString(SI_LUIE_SKILL_RADIATE_TP),
     Skill_Bone_Shield                               = GetString(SI_LUIE_SKILL_BONE_SHIELD_TP),
     Skill_Spiked_Bone_Shield                        = GetString(SI_LUIE_SKILL_SPIKED_BONE_SHIELD_TP),
     Skill_Bone_Surge                                = GetString(SI_LUIE_SKILL_BONE_SURGE_TP),
+    Skill_Necrotic_Orb                              = GetString(SI_LUIE_SKILL_NECROTIC_ORB_TP),
+    Skill_Energy_Orb                                = GetString(SI_LUIE_SKILL_ENERGY_ORB_TP),
 
     ----------------------------------------------------------------
     -- ALLIANCE WAR SKILLS -----------------------------------------
@@ -877,17 +880,18 @@ LUIE.Data.Tooltips = {
     -- Assault
     Skill_Continuous_Attack_Rank_1                  = GetString(SI_LUIE_SKILL_CONTINUOUS_ATTACK_RANK_1_TP),
     Skill_Continuous_Attack_Rank_2                  = GetString(SI_LUIE_SKILL_CONTINUOUS_ATTACK_RANK_2_TP),
-    Skill_Rapid_Maneuver                            = GetString(SI_LUIE_SKILL_RAPID_MANEUVER_TP),
     Skill_Retreating_Maneuver                       = GetString(SI_LUIE_SKILL_RETREATING_MANEUEVER_TP),
-    Skill_Charging_Maneuver                         = GetString(SI_LUIE_SKILL_CHARGING_MANEUVER_TP),
     Skill_Caltrops                                  = GetString(SI_LUIE_SKILL_CALTROPS_TP),
     Skill_Anti_Cavalry_Caltrops                     = GetString(SI_LUIE_SKILL_ANTI_CAVALRY_CALTROPS_TP),
     Skill_Anti_Cavalry_Caltrops_Debuff              = GetString(SI_LUIE_SKILL_ANTI_CAVALRY_CALTROPS_DEBUFF_TP),
+    Skill_Razor_Caltrops                            = GetString(SI_LUIE_SKILL_RAZOR_CALTROPS_TP),
+    Skill_Razor_Caltrops_Debuff                     = GetString(SI_LUIE_SKILL_RAZOR_CALTROPS_DEBUFF_TP),
     Skill_Magicka_Detonation                        = GetString(SI_LUIE_SKILL_MAGICKA_DETONATION_TP),
     Skill_Inevitable_Detonation                     = GetString(SI_LUIE_SKILL_INEVITABLE_DETONATION_TP),
     Skill_Proximity_Detonation                      = GetString(SI_LUIE_SKILL_PROXIMITY_DETONATION_TP),
     Skill_War_Horn                                  = GetString(SI_LUIE_SKILL_WAR_HORN_TP),
     Skill_War_Horn_Dummy                            = GetString(SI_LUIE_SKILL_WAR_HORN_DUMMY_TP),
+    Skill_Study_Horn                                = GetString(SI_LUIE_SKILL_STURDY_HORN_TP),
 
     -- Support
     Skill_Siege_Shield                              = GetString(SI_LUIE_SKILL_SIEGE_SHIELD_TP),
