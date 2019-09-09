@@ -900,13 +900,11 @@ LUIE.Data.Tooltips = {
     Skill_Siege_Weapon_Shield_Ground                = GetString(SI_LUIE_SKILL_SIEGE_WEAPON_SHIELD_GROUND_TP),
     Skill_Propelling_Shield                         = GetString(SI_LUIE_SKILL_PROPELLING_SHIELD_TP),
     Skill_Propelling_Shield_Ground                  = GetString(SI_LUIE_SKILL_PROPELLING_SHIELD_GROUND_TP),
-    Skill_Purge                                     = GetString(SI_LUIE_SKILL_PURGE_TP),
     Skill_Guard_Self                                = GetString(SI_LUIE_SKILL_GUARD_SELF_TP),
     Skill_Guard_Other                               = GetString(SI_LUIE_SKILL_GUARD_OTHER_TP),
     Skill_Revealing_Flare                           = GetString(SI_LUIE_SKILL_REVEALING_FLARE_TP),
-    Skill_Lingering_Flare                           = GetString(SI_LUIE_SKILL_LINGERING_FLARE_TP),
-    Skill_Scorching_Flare                           = GetString(SI_LUIE_SKILL_SCORCHING_FLARE_TP),
-    Skill_Reviving_Barrier                          = GetString(SI_LUIE_SKILL_REVIVING_BARRIER_TP),
+    Skill_Blinding_Flare                            = GetString(SI_LUIE_SKILL_BLINDING_FLARE_TP),
+    Skill_Replenishing_Barrier                      = GetString(SI_LUIE_SKILL_REPLENISHING_BARRIER_TP),
 
     -- ---------------------------------------------------
     -- RACIALS ------------------------------------------

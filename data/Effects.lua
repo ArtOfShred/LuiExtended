@@ -714,7 +714,10 @@ Effects.EffectGroundDisplay = {
     [38570] = { buff = true, debuff = false, ground = false }, -- Siege Shield (Siege Shield)
     [40229] = { buff = true, debuff = false, ground = false }, -- Siege Weapon Shield (Siege Weapon Shield)
     [40226] = { buff = true, debuff = false, ground = false }, -- Propelling Shield (Propelling Shield)
+
+    [61498] = { buff = false, debuff = false, ground = true }, -- Revealing Flare (Revealing Flare)
     [61522] = { name = Abilities.Skill_Lingering_Flare, buff = false, debuff = false, ground = true }, -- Nova (Lingering Flare)
+    [61526] = { buff = false, debuff = false, ground = true }, -- Blinding Flare (Blinding Flare)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -960,6 +963,9 @@ Effects.BarHighlightCheckOnFade = {
 
     -- Psijic Order
     [122260] = { id1 = 103712, id2 = 103711, unitTag = "player" }, -- Race Against Time --> Minor Force / Minor Expedition
+
+    -- Support
+    [40237] = { id1 = 40238, unitTag = "player" }, -- Reviving Barrier --> Reviving Barrier Heal
 
 }
 
@@ -1427,10 +1433,9 @@ Effects.BarHighlightOverride = {
     -- Support ----------------
     ---------------------------
 
-    [61489] = { newId = 61496 }, -- Revealing Flare
-    [61519] = { newId = 61522 }, -- Lingering Flare --> Nova
-    [61524] = { newId = 61528 }, -- Scorching Flare
-    [40237] = { newId = 40238 }, -- Reviving Barrier --> Reviving Barrier Heal
+    [61489] = { newId = 61498 }, -- Revealing Flare
+    [61519] = { newId = 61522 }, -- Lingering Flare
+    [61524] = { newId = 61526 }, -- Blinding Flare
 
     ---------------------------
     -- Volendrung -------------
@@ -6276,10 +6281,7 @@ Effects.EffectOverride = {
     [40227] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Skill_Propelling_Shield }, -- Propelling Shield (Siege Weapon Shield)
 
     -- Purge / Efficient Purge / Cleanse
-    [38571] = { tooltip = Tooltips.Skill_Purge }, -- Purge (Purge)
-    [40232] = { tooltip = Tooltips.Skill_Purge }, -- Purge (Efficient Purge)
-    [40234] = { tooltip = Tooltips.Skill_Purge } , -- Cleanse (Cleanse)
-    [40235] = { hide = true }, -- Cleanse (Cleanse)
+    [40234] = { hide = true }, -- Cleanse (Cleanse)
 
     -- Guard / Mystic Guard / Stalwart Guard
     [61511] = { duration = 0, forcedContainer = 'short', tooltip = Tooltips.Skill_Guard_Other }, -- Guard (Guard)
@@ -6293,18 +6295,24 @@ Effects.EffectOverride = {
     [80984] = { duration = 0, forcedContainer = 'short', consolidate = true, tooltip = Abilities.Skill_Stalwart_Guard }, -- Minor Force (Stalwart Guard)
     [80986] = { duration = 0, consolidate = true, tooltip = Abilities.Skill_Stalwart_Guard }, -- Minor Force (Stalwart Guard)
 
-    -- Revealing Flare / Lingering Flare / Scorching Flare
-    [61496] = { tooltip = Tooltips.Skill_Revealing_Flare }, -- Revealing Flare (Revealing Flare)
-    [61522] = { tooltip = Tooltips.Skill_Lingering_Flare }, -- Nova (Lingering Flare)
-    [61521] = { tooltip = Tooltips.Skill_Revealing_Flare }, -- Lingering Flare (Lingering Flare)
-    [61528] = { name = Abilities.Skill_Scorching_Flare, tooltip = Tooltips.Skill_Scorching_Flare }, -- Scorching Flare Reveal (Scorching Flare)
-    [61552] = { hideReduce = true, tooltip = Tooltips.Skill_Scorching_Flare }, -- Scorching Flare (Scorching Flare)
+    -- Skill_Revealing_Flare
+
+    -- Revealing Flare / Lingering Flare / Blinding Flare
+    [61498] = { tooltip = Tooltips.Skill_Revealing_Flare }, -- Revealing Flare (Revealing Flare)
+    [61496] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, tooltip = Abilities.Skill_Revealing_Flare }, -- Revealing Flare (Revealing Flare)
+
+    [61522] = { tooltip = Tooltips.Skill_Revealing_Flare }, -- Nova (Lingering Flare)
+    [61521] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, tooltip = Abilities.Skill_Lingering_Flare }, -- Lingering Flare (Lingering Flare)
+
+    [61526] = { tooltip = Tooltips.Skill_Blinding_Flare }, -- Blinding Flare (Blinding Flare)
+    [61528] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', name = Abilities.Skill_Revealed, tooltip = Abilities.Skill_Blinding_Flare }, -- Blinding Flare Reveal (Blinding Flare)
+    [77974] = { tooltip = Tooltips.Generic_Stun }, -- Blinding Flare (Blinding Flare)
 
     -- Barrier / Reviving Barrier / Replenishing Barrier
     [38573] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Barrier (Barrier)
-    [40237] = { hideReduce = true, tooltip = Tooltips.Skill_Reviving_Barrier }, -- Reviving Barrier (Reviving Barrier)
-    [40238] = { name = Abilities.Skill_Reviving_Barrier, tooltip = Tooltips.Skill_Reviving_Barrier }, -- Reviving Barrier Heal (Reviving Barrier)
-    [40239] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Replenishing Barrier (Replenishing Barrier)
+    [40237] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Reviving Barrier (Reviving Barrier)
+    [40238] = { name = Abilities.Skill_Reviving_Barrier, tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Reviving Barrier Heal (Reviving Barrier)
+    [40239] = { tooltip = Tooltips.Skill_Replenishing_Barrier }, -- Replenishing Barrier (Replenishing Barrier)
     [40240] = { icon = 'esoui/art/icons/ability_ava_006_a.dds' }, -- Replenishing Barrier (Replenishing Barrier)
     [40241] = { icon = 'esoui/art/icons/ability_ava_006_a.dds' }, -- Replenishing Barrier (Replenishing Barrier)
 
@@ -11436,7 +11444,7 @@ Effects.FakePlayerBuffs = {
 -- TODO: Fake buffs applied onto a target by the player
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.FakePlayerExternalBuffs = {
-    -- TODO
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

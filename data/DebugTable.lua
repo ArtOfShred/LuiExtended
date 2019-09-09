@@ -6982,9 +6982,7 @@ LUIE.DebugAuras = {
     [40232] = true, -- Efficient Purge (Efficient Purge)
 
     [40234] = true, -- Cleanse (Cleanse)
-    [40235] = true, -- Cleanse (Cleanse)
     [40236] = true, -- Cleanse (Cleanse)
-    [64571] = true, -- Cleanse Heal Tracker (Cleanse)
 
     [61511] = true, -- Guard (Guard)
     [80923] = true, -- Guard (Guard)
@@ -7006,23 +7004,20 @@ LUIE.DebugAuras = {
     [80988] = true, -- Guard Saved Damage Value (Stalwart Guard)
 
     [61489] = true, -- Revealing Flare (Revealing Flare)
-    [61497] = true, -- Nova (Revealing Flare)
-    [61498] = true, -- Nova (Revealing Flare)
+    [61497] = true, -- Revealing Flare (Revealing Flare)
+    [61498] = true, -- Revealing Flare (Revealing Flare)
     [61496] = true, -- Revealing Flare (Revealing Flare)
-    [77966] = true, -- Revealing Flare (Revealing Flare)
 
     [61519] = true, -- Lingering Flare (Lingering Flare)
     [61523] = true, -- Nova (Lingering Flare)
     [61522] = true, -- Nova (Lingering Flare)
     [61521] = true, -- Lingering Flare (Lingering Flare)
-    [77970] = true, -- Lingering Flare (Lingering Flare)
 
-    [61524] = true, -- Scorching Flare (Scorching Flare)
-    [61527] = true, -- Nova (Scorching Flare)
-    [61526] = true, -- Nova (Scorching Flare)
-    [61528] = true, -- Scorching Flare (Scorching Flare)
-    [61552] = true, -- Scorching Flare (Scorching Flare)
-    [77974] = true, -- Scorching Flare (Scorching Flare)
+    [61524] = true, -- Blinding Flare (Blinding Flare)
+    [61527] = true, -- Nova (Blinding Flare)
+    [61526] = true, -- Nova (Blinding Flare)
+    [61528] = true, -- Blinding Flare (Blinding Flare)
+    [77974] = true, -- Blinding Flare (Blinding Flare)
 
     [38573] = true, -- Barrier (Barrier)
 

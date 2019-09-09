@@ -394,7 +394,7 @@ local strings = {
     -- Templar
     SI_LUIE_SKILL_SPEAR_SHARDS_TP =                      "Enemies in the radius of the spear take Magic Damage every |cFFFFFF1|r second.\n\nAn ally near the spear can activate the |cFFFFFFBlessed Shards|r synergy.", -- TODO: Translate this Block
     SI_LUIE_SKILL_LUMINOUS_SHARDS_TP =                   "Enemies in the radius of the spear take Magic Damage every |cFFFFFF1|r second.\n\nAn ally near the spear can activate the |cFFFFFFHoly Shards|r synergy.",
-    SI_LUIE_SKILL_BLAZING_SHIELD_TP =                    "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nWhen the shield expires it explodes outward, dealing |cFFFFFF38|r% of the damage it absorbed as Magic Damage to enemies within |cFFFFFF5|r meters.",
+    SI_LUIE_SKILL_BLAZING_SHIELD_TP =                    "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhen the shield expires it explodes outward, dealing |cFFFFFF38|r% of the damage it absorbed as Magic Damage to enemies within |cFFFFFF5|r meters.",
     SI_LUIE_SKILL_RADIAL_SWEEP_TP =                      "Enemies within |cFFFFFF8|r meters take Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_EMPOWERING_SWEEP_TP =                  "Enemies within |cFFFFFF8|r meters take Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nWhile this ability is active you gain |cFFFFFFEmpower|r.",
     SI_LUIE_SKILL_SUN_FIRE_TP =                          "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nMovement Speed reduced by |cFFFFFF40|r% for |cFFFFFF<<2>>|r seconds.",
@@ -509,8 +509,8 @@ local strings = {
     SI_LUIE_SKILL_BERSERKER_RAGE_TP =                    "Увеличивает в течение |cFFFFFF<<1>>|r секунд Физическую и Магическую сопротивляемости на величину, равную проигнорированному способностью Berserker Rage сопротивлению цели.\n\nВы получаете иммунитет к обездвиживанию, замедлению и обезмолвливанию на время действия эффекта.",
 
     -- One Hand and Shield
-    SI_LUIE_SKILL_DEFENSIVE_POSTURE_TP =                 "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nReflect the next projectile cast at you within |cFFFFFF6|r seconds. This effect can occur once per cast.",
-    SI_LUIE_SKILL_ABSORB_MISSILE_TP =                    "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nWhile the shield persists, you are healed the next time a projectile hits you. This effect can occur once per cast.",
+    SI_LUIE_SKILL_DEFENSIVE_POSTURE_TP =                 "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nReflect the next projectile cast at you within |cFFFFFF6|r seconds. This effect can occur once per cast.",
+    SI_LUIE_SKILL_ABSORB_MISSILE_TP =                    "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhile the shield persists, you are healed the next time a projectile hits you. This effect can occur once per cast.",
     SI_LUIE_SKILL_REVEBERATING_BASH_TP =                 "Stunned for |cFFFFFF<<1>>|r seconds. After the stun ends, take Physical Damage.",
     SI_LUIE_SKILL_RESENTMENT_TP =                        "Increase the damage of your next Power Slam used within |cFFFFFF<<1>>|r seconds by |cFFFFFF5|r%.\n\nThis effect stacks up to |cFFFFFF10|r times and you gain a stack when blocking any attack.",
     SI_LUIE_SKILL_SHIELD_WALL_TP =                       "Автоматически блокирует все атаки в течение |cFFFFFF<<1>>|r секунд, не расходуя ресурсов.",
@@ -555,7 +555,7 @@ local strings = {
     SI_LUIE_SKILL_GRAND_HEALING =                        "Healing you and allies in the |cFFFFFF<<2>>|r meter area every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_HEALING_SPRINGS =                      "Healing you and allies in the |cFFFFFF<<2>>|r meter area every |cFFFFFF1|r second.\n\nYou restore Magicka every time you or an ally is healed.",
     SI_LUIE_SKILL_BLESSING_OF_RESTORATION =              "Blessing of Restoration",
-    SI_LUIE_SKILL_HEALING_WARD =                         "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nWhile the shield persists, heal for |cFFFFFF33|r% of the shield's remaining strength every |cFFFFFF1|r second.",
+    SI_LUIE_SKILL_HEALING_WARD =                         "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhile the shield persists, heal for |cFFFFFF33|r% of the shield's remaining strength every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_QUICK_SIPHON =                         "When you are healed by Minor Lifesteal, gain Minor Expedition for |cFFFFFF4|r seconds.",
     SI_LUIE_SKILL_LIGHTS_CHAMPION =                      "Healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nGain Major Force and Major Protection for |cFFFFFF5|r seconds every time this effect heals.",
 
@@ -564,7 +564,7 @@ local strings = {
     ----------------------------------------------------------------
 
     -- Light Armor
-    SI_LUIE_SKILL_HARNESS_MAGICKA =                      "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nWhile active, whenever the shield absorbs damage, you restore Magicka. This effect can occur up to |cFFFFFF3|r times.",
+    SI_LUIE_SKILL_HARNESS_MAGICKA =                      "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhile active, whenever the shield absorbs damage, you restore Magicka. This effect can occur up to |cFFFFFF3|r times.",
 
     -- Medium Armor
     SI_LUIE_SKILL_ELUDE =                                "When you take damage from a direct area of effect attack, you gain Major Expedition for |cFFFFFF1|r second per piece of Medium Armor worn.",
@@ -666,9 +666,9 @@ local strings = {
     SI_LUIE_SKILL_TRAPPING_WEBS_SNARE_TP =               "Movement Speed reduced by |cFFFFFF50|r%.\n\nAfter |cFFFFFF5|r seconds the webs explode, dealing Poison damage.",
     SI_LUIE_SKILL_RADIATE_TP =                           "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends, you and nearby allies take additional Magic Damage.",
     SI_LUIE_SKILL_SPAWN_BROODLING_TP =                  "Attacking nearby enemies. The spider remains for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_BONE_SHIELD_TP =                       "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
-    SI_LUIE_SKILL_SPIKED_BONE_SHIELD_TP =                "Absorbing damage for |cFFFFFF<<1>>|r seconds and returning |cFFFFFF78|r% of any direct damage absorbed back to the enemy.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
-    SI_LUIE_SKILL_BONE_SURGE_TP =                        "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nAn ally near you can activate the |cFFFFFFSpinal Surge|r synergy.",
+    SI_LUIE_SKILL_BONE_SHIELD_TP =                       "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
+    SI_LUIE_SKILL_SPIKED_BONE_SHIELD_TP =                "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>> and returning |cFFFFFF78|r% of any direct damage absorbed back to the enemy.\n\nAn ally near you can activate the |cFFFFFFBone Wall|r synergy.",
+    SI_LUIE_SKILL_BONE_SURGE_TP =                        "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nAn ally near you can activate the |cFFFFFFSpinal Surge|r synergy.",
     SI_LUIE_SKILL_INNER_BEAST_TP =                       "Your attacker deals |cFFFFFF5|r% more damage to you for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_NECROTIC_ORB_TP =                      "A globe of annihilation slowly floats forward, dealing Magic Damage to enemies within |cFFFFFF8|r meters every |cFFFFFF0.5|r seconds.\n\nAn ally near the globe can activate the |cFFFFFFCombustion|r synergy.",
     SI_LUIE_SKILL_ENERGY_ORB_TP =                        "A globe of regeneration slowly floats forward, healing you and nearby allies within |cFFFFFF8|r meters every |cFFFFFF0.5|r seconds.\n\nAn ally near the globe can activate the |cFFFFFFHealing Combustion|r synergy.",
@@ -695,18 +695,16 @@ local strings = {
 
     -- Support
     SI_LUIE_SKILL_SIEGE_SHIELD_TP =                      "Reduce damage taken from siege weapons by |cFFFFFF50|r%.",
-    SI_LUIE_SKILL_SIEGE_SHIELD_GROUND_TP =               "A protective sphere guards you and allies, reducing damage taken from siege weapons while in the bubble by |cFFFFFF50|r%.",
-    SI_LUIE_SKILL_SIEGE_WEAPON_SHIELD_TP =               "Reduce damage taken from siege weapons by |cFFFFFF50|r%.\n\nYour siege weapons take |cFFFFFF90|r% reduced damage from enemy siege weapons.",
-    SI_LUIE_SKILL_SIEGE_WEAPON_SHIELD_GROUND_TP =        "A protective sphere guards you and allies, reducing damage taken from siege weapons while in the bubble by |cFFFFFF50|r%.\n\nYou and allies' siege weapons in the bubble take |cFFFFFF90|r% reduced damage from enemy siege weapons.",
+    SI_LUIE_SKILL_SIEGE_SHIELD_GROUND_TP =               "A protective sphere guards you and your allies, reducing damage taken from siege weapons while in the |cFFFFFF10|r meter radius of the bubble by |cFFFFFF50|r%.",
+    SI_LUIE_SKILL_SIEGE_WEAPON_SHIELD_TP =               "Reduce damage taken from siege weapons by |cFFFFFF50|r%.\n\nYour siege weapons take |cFFFFFF75|r% reduced damage from enemy siege weapons.",
+    SI_LUIE_SKILL_SIEGE_WEAPON_SHIELD_GROUND_TP =        "A protective sphere guards you and your allies, reducing damage taken from siege weapons while in the |cFFFFFF10|r meter radius of the bubble by |cFFFFFF50|r%.\n\nYou and your allies siege weapons in the bubble take |cFFFFFF75|r% reduced damage from enemy siege weapons.",
     SI_LUIE_SKILL_PROPELLING_SHIELD_TP =                 "Reduce damage taken from siege weapons by |cFFFFFF50|r% and increase the range of abilities with a range greater than |cFFFFFF20|r meters by |cFFFFFF7|r meters.\n\nDoes not effect Leap, Move Position, and Pull abilities.",
-    SI_LUIE_SKILL_PROPELLING_SHIELD_GROUND_TP =          "A protective sphere guards you and allies, reducing damage taken from siege weapons while in the bubble by |cFFFFFF50|r%.\n\nIncrease the range of you and allies' abilities with a range greater than |cFFFFFF20|r meters by |cFFFFFF7|r meters in the bubble.\n\nDoes not effect Leap, Move Position, and Pull abilities.",
-    SI_LUIE_SKILL_PURGE_TP =                             "Reduce the duration of new negative effects applied on you by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_PROPELLING_SHIELD_GROUND_TP =          "A protective sphere guards you and your allies, reducing damage taken from siege weapons while in the |cFFFFFF10|r meter radius of the bubble by |cFFFFFF50|r%.\n\nIncrease the range of you and your allies abilities with a range greater than |cFFFFFF20|r meters by |cFFFFFF7|r meters in the bubble.\n\nDoes not effect Leap, Move Position, and Pull abilities.",
     SI_LUIE_SKILL_GUARD_SELF_TP =                        "While the lifebond holds, |cFFFFFF30|r% of the damage your ally takes is redistributed to you.",
     SI_LUIE_SKILL_GUARD_OTHER_TP =                       "While the lifebond holds, |cFFFFFF30|r% of the damage you take is redistributed to your ally.",
-    SI_LUIE_SKILL_REVEALING_FLARE_TP =                   "Revealed. You are unable to stealth.\n\nMovement Speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_LINGERING_FLARE_TP =                   "Enemies in the target area are revealed and have their Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF3|r seconds.",
-    SI_LUIE_SKILL_SCORCHING_FLARE_TP =                   "Revealed. You are unable to stealth.\n\nAfflicted with Flame Damage every |cFFFFFF1.5|r seconds and Movement Speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_REVIVING_BARRIER_TP =                  "Absorbing damage and healing every |cFFFFFF1.5|r seconds for |cFFFFFF30|r seconds.",
+    SI_LUIE_SKILL_REVEALING_FLARE_TP =                   "Stealthed and invisible enemies in the |cFFFFFF10|r meter radius of the flare are revealed.\n\nExposed enemies cannot return to stealth or invisibility for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_BLINDING_FLARE_TP =                    "Stealthed and invisible enemies in the |cFFFFFF10|r meter radius of the flare are revealed.\n\nExposed enemies are stunned for |cFFFFFF4|r seconds, and cannot return to stealth or invisiblity for |cFFFFFF3|r seconds.",
+    SI_LUIE_SKILL_REPLENISHING_BARRIER_TP =              "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhen the ward dissolves, the caster restores |cFFFFFF4|r Ultimate and |cFFFFFF1000|r Magicka.",
 
     ----------------------------------------------------------------
     -- RACIAL SKILLS -----------------------------------------------
@@ -803,7 +801,7 @@ local strings = {
     SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE_MAGICKA =          "Enemies on the edge of the ring take Flame Damage every |cffffff1|r second.\n\nIncrease Spell Damage while standing within the ring.", -- TODO: Translate
     SI_LUIE_SKILL_SET_EARTHGORE =                        "You and allies in the pool of blood are healed every |cFFFFFF1|r second.", -- TODO: Translate
     SI_LUIE_SKILL_SET_GROTHDARR =                        "Enemies within |cFFFFFF8|r meters take Flame Damage every |cFFFFFF1|r секунду в течение |cFFFFFF5|r секунд.",
-    SI_LUIE_SKILL_SET_ICEHEART =                         "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nEnemies within |cFFFFFF5|r meters take Frost Damage every |cFFFFFF1|r second while the damage shield holds.", -- TODO: Translate
+    SI_LUIE_SKILL_SET_ICEHEART =                         "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nEnemies within |cFFFFFF5|r meters take Frost Damage every |cFFFFFF1|r second while the damage shield holds.", -- TODO: Translate
     SI_LUIE_SKILL_SET_ILAMBRIS =                         "Enemies within |cffffff4|r meters of the meteor shower take <<1>> Damage every |cFFFFFF1|r second.", -- TODO: Translate
     SI_LUIE_SKILL_SET_LORD_WARDEN_BUFF =                 "You and allies within |cFFFFFF8|r meters of the shadow orb have increased Physical and Spell Resistance.", -- TODO: Translate
     SI_LUIE_SKILL_SET_MALUBETH =                         "Высасывает здоровье каждые |cFFFFFF0.5|r секунды в течение |cFFFFFF4|r секунд, пока луч активен.",
@@ -1077,7 +1075,7 @@ local strings = {
     SI_LUIE_SKILL_STATIC_FIELD_TP =                      "Enemies in the field take Shock Damage every |cFFFFFF1|r second while allied Dwemer can draw power from the field to |cFFFFFFOvercharge|r, increasing their damage done by |cFFFFFF25|r%.",
     SI_LUIE_SKILL_SHOCK_BARRAGE_TP =                     "Being targeted and bombarded by Shock Barrage, taking Shock Damage every |cFFFFFF0.75|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POLARIZING_FIELD_TP =                  "While active, the Polarizing Field returns Shock Damage to attackers.",
-    SI_LUIE_SKILL_STATIC_SHIELD_TP =                     "Absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nIf the shield is not destroyed it will detonate at the end of the duration, dealing Shock Damage to nearby enemies.",
+    SI_LUIE_SKILL_STATIC_SHIELD_TP =                     "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nIf the shield is not destroyed it will detonate at the end of the duration, dealing Shock Damage to nearby enemies.",
     SI_LUIE_SKILL_TURRET_MODE_TP =                       "Charged by a power conduit, enabling the Sentry to shield itself with |cFFFFFFStatic Shield|r and use the |cFFFFFFThunderbolt|r ability.",
     SI_LUIE_SKILL_STATIC_CHARGE_TP =                     "Residual static energy from the Dolmen is suppressing your Health Recovery and you will be targeted by Static Charge, taking Oblivion damage.\n\nMove to reduce to the static buildup.",
     SI_LUIE_SKILL_INCAPACITATING_TERROR_TP =             "Feared and taking Frost Damage every |cFFFFFF3|r seconds.",
@@ -1163,7 +1161,7 @@ local strings = {
     SI_LUIE_SKILL_CAUSTIC_ARMOR =                        "Caustic Armor",
     SI_LUIE_SKILL_CORROSIVE_ARMOR_NPC_TP =               "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies suffer |cFFFFFF34|r% reduced Weapon Damage and take Flame Damage and every |cffffff1|r second for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_CORROSIVE_ARMOR_NPC_DEBUFF_TP =        "Taking Flame Damage every |cffffff1|r second and Weapon Damage reduced by |cFFFFFF34|r%.",
-    SI_LUIE_SKILL_PETRIFY_NPC_TP =                       "Stunned and absorbing damage for |cFFFFFF<<1>>|r seconds.\n\nThe stun breaks after taking enough damage.",
+    SI_LUIE_SKILL_PETRIFY_NPC_TP =                       "Stunned and absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThe stun breaks after taking enough damage.",
     SI_LUIE_SKILL_CELESTIAL_WARD_TP =                    "While standing in the ward you are protected from Celestial Blast.\n\nHealing every |cffffff0.25|r seconds.",
     SI_LUIE_SKILL_CELESTIAL_BLAST_TP =                   "Targeted by Celestial Blast, after |cFFFFFF<<1>>|r seconds you will take a massive amount of Unmitigable Damage and be stunned for |cFFFFFF4|r seconds.\n\nEnter the lit Celestial Rune to protect yourself.",
     SI_LUIE_SKILL_STANDARD_OF_MIGHT_NPC_TP =             "Increase damage done and reduce damage taken by |cFFFFFF35|r% while standing within the radius of the standard.",
