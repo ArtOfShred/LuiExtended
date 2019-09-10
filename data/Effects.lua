@@ -883,9 +883,6 @@ function Effects.BarHighlightRefresh()
         -- Necromancer
         Effects.BarHighlightOverride[117883] = { newId = 117885, secondary = true } -- Resistant Flesh --> Minor Defile
 
-        -- Templar
-        Effects.BarHighlightOverride[26792] = { duration = 8000, showFakeAura = true, secondary = true, noRemove = true } -- Biting Jabs --> Major Savagery
-
         -- Restoration Staff
         Effects.BarHighlightOverride[85132] = { newId = 85154, showFakeAura = true, secondary = true, noRemove = true } -- Light's Champion --> Major Force
 
@@ -899,9 +896,6 @@ function Effects.BarHighlightRefresh()
 
         -- Necromancer
         Effects.BarHighlightOverride[117883] = { newId = 117886 } -- Resistant Flesh --> Minor Defile
-
-        -- Templar
-        Effects.BarHighlightOverride[26792] = { newId = 76912, duration = 2000, showFakeAura = true, noRemove = true } -- Biting Jabs
 
         -- Restoration Staff
         Effects.BarHighlightOverride[85132] = nil -- Light's Champion
@@ -1187,7 +1181,7 @@ Effects.BarHighlightOverride = {
 
     -- Aedric Spear
     [26114] = { newId = 76908, duration = 2000, showFakeAura = true, noRemove = true }, -- Puncturing Strikes
-    [26792] = { newId = 76912, duration = 2000, showFakeAura = true, noRemove = true }, -- Biting Jabs
+    [26792] = { newId = 26795, noRemove = true }, -- Biting Jabs --> Major Savagery
     [26797] = { newId = 76916, duration = 2000, showFakeAura = true, noRemove = true }, -- Puncturing Sweep
     [26158] = { newId = 37409 }, -- Piercing Javelin
     [26800] = { newId = 37414 }, -- Aurora Javelin
@@ -1209,7 +1203,7 @@ Effects.BarHighlightOverride = {
     [21726] = { newId = 21728 }, -- Sun Fire
     [21729] = { newId = 21731 }, -- Vampire's Bane
     [21732] = { newId = 21734 }, -- Reflective Light (Reflective Light)
-    [22057] = { newId = 109418, secondary = true }, -- Solar Flare --> Empower
+    --[22057] = { newId = 109418, secondary = true }, -- Solar Flare --> Empower
     [22110] = { newId = 24686 }, -- Dark Flare
     [21752] = { newId = 21976 }, -- Nova (Nova)
     [21755] = { newId = 22003 }, -- Solar Prison (Solar Prison)
@@ -1217,7 +1211,7 @@ Effects.BarHighlightOverride = {
 
     -- Restoring Light
     [22253] = { newId = 35632, secondary = true }, -- Honor the Dead
-    [22314] = { newId = 108935, secondary = true, showFakeAura = true, noRemove = true }, -- Hasty Prayer --> Minor Expedition
+    [22314] = { newId = 108935, secondary = true, noRemove = true }, -- Hasty Prayer --> Minor Expedition
     [26209] = { newId = 26220 }, -- Restoring Aura
     [26807] = { newId = 26809 }, -- Radiant Aura
     [22265] = { newId = 80540 }, -- Cleansing Ritual (Cleansing Ritual)
@@ -1225,8 +1219,8 @@ Effects.BarHighlightOverride = {
     [22262] = { newId = 80553 }, -- Extended Ritual (Extended Ritual)
 
     [22234] = { showFakeAura = true, ignoreMouseover = true, noRemove = true }, -- Rune Focus
-    [22240] = { showFakeAura = true, ignoreMouseover = true, noRemove = true }, -- Channeled Focus
-    [22237] = { showFakeAura = true, ignoreMouseover = true, noRemove = true }, -- Restoring Focus
+    [22240] = { newId = 37009 }, -- Channeled Focus
+    [22237] = { newId = 114842 }, -- Restoring Focus
 
     [22223] = { showFakeAura = true }, -- Rite of Passage
     [22229] = { showFakeAura = true }, -- Remembrance
