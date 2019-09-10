@@ -932,6 +932,13 @@ Effects.BarHighlightExtraId = {
     [118309] = 118313, -- Ghostly Embrace --> Minor Maim
     [118354] = 118358, -- Empowering Grasp --> Minor Maim
 
+    -- Two Handed
+    [126527] = 61670, -- Major Endurance --> Major Brutality (Momentum)
+
+    -- One Hand and Shield
+    [62485] = 62484, -- Major Breach --> Major Fracture (Pierce Armor)
+    [38271] = 62495, -- Deep Slash --> Minor Maim
+
     -- Destruction Staff
     [39100] = 62787, -- Minor Magickasteal --> Major Breach (Elemental Drain)
 
@@ -974,6 +981,17 @@ Effects.BarHighlightExtraId = {
 -- If durationMod value is set to an ID, this value will be subtracted from the final duration
 -- Note that any secondary id's for Bar Highlight in the table above will set their id to the original tracked id here
 Effects.BarHighlightCheckOnFade = {
+
+    -- Two Handed
+    [61670] = { id1 = 126527, id2 = 61670, unitTag = "player" }, -- Major Brutality --> Minor Endurance / Major Brutality (Momentum)
+    [38797] = { id1 = 62387, id2 = 126534, unitTag = "player" }, -- Forward Momentum --> Major Brutality / Minor Endurance
+
+    -- One Hand and Shield
+    [62474] = { id1 = 62475, unitTag = "player" }, -- Major Fracture --> Minor Protection (Ransack)
+    [62484] = { id1 = 62485, id2 = 62484, unitTag = "reticleover" }, -- Major Fracture --> Major Breach / Major Fracture (Pierce Armor)
+
+    [62495] = { id1 = 38271, id2 = 62495, unitTag = "reticleover" }, -- Minor Maim --> Deep Slash / Minor Maim
+    [62504] = { id1 = 62505, unitTag = "player" }, -- Minor Heroism --> Minor Maim (Heroic Slash)
 
     -- Dual Wield
     [126667] = { id1 = 126670, unitTag = "player" }, -- Flying Blade --> Major Bruality
@@ -1272,13 +1290,13 @@ Effects.BarHighlightOverride = {
     -- Two Handed -------------
     ---------------------------
 
-    [28297] = { newId = 61670 }, -- Momentum --> Major Brutality
-    [38794] = { newId = 38797 }, -- Forward Momentum
-
+    --[38807] = { newId = 61737, secondary = true }, -- Wrecking Blow --> Empower
     [38814] = { newId = 38816 }, -- Dizzying Swing
     [38788] = { newId = 38791 }, -- Stampede
     [38745] = { newId = 38747 }, -- Carve
     [38754] = { newId = 38763 }, -- Brawler
+    [28297] = { newId = 61670 }, -- Momentum --> Major Brutality
+    [38794] = { newId = 38797 }, -- Forward Momentum
     [83216] = { newId = 83217 }, -- Berserker Strike
     [83229] = { newId = 83230 }, -- Onslaught
     [83238] = { newId = 83239 }, -- Berserker Rage
@@ -1287,12 +1305,12 @@ Effects.BarHighlightOverride = {
     -- One Hand and Shield ----
     ---------------------------
 
-    [28306] = { newId = 28307, showFakeAura = true }, -- Puncture --> Major Fracture
-    [38256] = { newId = 62474, showFakeAura = true }, -- Ransack --> Major Fracture
-    [38250] = { newId = 62484, showFakeAura = true }, -- Pierce Armor --> Major Fracture
-    [28304] = { newId = 29308, showFakeAura = true }, -- Low Slash --> Minor Maim
-    [38268] = { newId = 62495, showFakeAura = true }, -- Deep Slash --> Minor Maim
-    [38264] = { newId = 62504, showFakeAura = true }, -- Heroic Slash --> Minor Maim
+    [28306] = { newId = 28307 }, -- Puncture --> Major Fracture
+    [38256] = { newId = 62474 }, -- Ransack --> Major Fracture
+    [38250] = { newId = 62484 }, -- Pierce Armor --> Major Fracture
+    [28304] = { newId = 29308 }, -- Low Slash --> Minor Maim
+    [38264] = { newId = 62504 }, -- Heroic Slash --> Minor Maim
+    [38268] = { newId = 62495 }, -- Deep Slash --> Minor Maim
     [28719] = { newId = 28720 }, -- Shield Charge
     [38401] = { newId = 38404 }, -- Shielded Assault
     [38405] = { newId = 38407 }, -- Invasion
