@@ -923,6 +923,7 @@ end
 function CombatInfo.BarHighlightSwap(abilityId)
     local id1 = Effects.BarHighlightCheckOnFade[abilityId].id1 or 0
     local id2 = Effects.BarHighlightCheckOnFade[abilityId].id2 or 0
+    local id3 = Effects.BarHighlightCheckOnFade[abilityId].id3 or 0
     local unitTag = Effects.BarHighlightCheckOnFade[abilityId].unitTag
     local duration = Effects.BarHighlightCheckOnFade[abilityId].duration or 0
     local durationMod = Effects.BarHighlightCheckOnFade[abilityId].durationMod or 0
@@ -953,6 +954,16 @@ function CombatInfo.BarHighlightSwap(abilityId)
         for i = 1, GetNumBuffs(unitTag) do
             local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
             if id2 == abilityIdNew then
+                CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1, true)
+                return
+            end
+        end
+    end
+    -- Only iterate again if there is a third ID to look for
+    if id3 ~= 0 then
+        for i = 1, GetNumBuffs(unitTag) do
+            local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityIdNew, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
+            if id3 == abilityIdNew then
                 CombatInfo.OnEffectChanged(nil, EFFECT_RESULT_GAINED, nil, nil, unitTag, timeStarted, timeEnding, stackCount, nil, buffType, effectType, abilityType, statusEffectType, nil, nil, abilityId, 1, true)
                 return
             end

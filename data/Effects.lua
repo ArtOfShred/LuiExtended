@@ -926,6 +926,14 @@ Effects.AddNoDurationBarHighlight = {
 -- SECONDARY ID = ORIGINAL BAR HIGHLIGHT ID
 Effects.BarHighlightExtraId = {
 
+    -- Warden
+    [101948] = 101944, -- Growing Swarm
+    [86300] = 87019, -- Enchanted Growth --> Minor Endurance
+    [86225] = 86224, -- Major Ward --> Major Resolve (Frost Cloak)
+    [88759] = 88758, -- Major Ward --> Major Resolve (Expansive Frost Cloak)
+    [88762] = 88761, -- Major Ward --> Major Resolve (Ice Fortress)
+    [87194] = 88761, -- Minor Protection --> Major Resolve (Ice Fortress)
+
     -- Necromancer
     --[117727] = 117691, -- Blighted Blastbones -- TODO: Doesn't work, not sure why
     [121513] = 121517, -- Grave Grasp --> Minor Maim
@@ -982,8 +990,18 @@ Effects.BarHighlightExtraId = {
 -- Note that any secondary id's for Bar Highlight in the table above will set their id to the original tracked id here
 Effects.BarHighlightCheckOnFade = {
 
+    -- Warden
+    [85552] = { id1 = 85552, unitTag = "player" }, -- Living Vines (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
+    [85850] = { id1 = 85850, unitTag = "player" }, -- Leeching Vines (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
+    [85851] = { id1 = 85851, unitTag = "player" }, -- Living Trellis (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
+    --[85807] = { id1 = 91819, unitTag = "player" }, -- Healing Thicket -- TODO: Doesn't work for some reason
+
+    -- Necromancer
+    [121517] = { id1 = 121513, id2 = 121517, unitTag = "reticleover" }, -- Minor Maim --> Grave Grasp / Minor Maim
+    [118313] = { id1 = 118309, id2 = 118313, unitTag = "reticleover" }, -- Minor Maim --> Ghostly Embrace / Minor Maim
+    [118358] = { id1 = 118354, id2 = 118358, unitTag = "reticleover" }, -- Minor Maim --> Empowering Grasp / Minor Maim
+
     -- Two Handed
-    [61670] = { id1 = 126527, id2 = 61670, unitTag = "player" }, -- Major Brutality --> Minor Endurance / Major Brutality (Momentum)
     [38797] = { id1 = 62387, id2 = 126534, unitTag = "player" }, -- Forward Momentum --> Major Brutality / Minor Endurance
 
     -- One Hand and Shield
@@ -997,15 +1015,10 @@ Effects.BarHighlightCheckOnFade = {
     [126667] = { id1 = 126670, unitTag = "player" }, -- Flying Blade --> Major Bruality
 
     -- Destruction Staff
-    [62787] = { id1 = 62787, id2 = 39100, unitTag = "reticleover" }, -- MMajor Breach --> Minor Magickasteal / Major Breach (Elemental Drain)
+    [62787] = { id1 = 62787, id2 = 39100, unitTag = "reticleover" }, -- Major Breach --> Minor Magickasteal / Major Breach (Elemental Drain)
 
     -- Restoration Staff
     [88575] = { id1 = 88576, id2 = 88575, unitTag = "reticleover" }, -- Minor Magickasteal --> Minor Lifesteal (Siphon Spirit)
-
-    -- Necromancer
-    [121517] = { id1 = 121513, id2 = 121517, unitTag = "reticleover" }, -- Minor Maim --> Grave Grasp / Minor Maim
-    [118313] = { id1 = 118309, id2 = 118313, unitTag = "reticleover" }, -- Minor Maim --> Ghostly Embrace / Minor Maim
-    [118358] = { id1 = 118354, id2 = 118358, unitTag = "reticleover" }, -- Minor Maim --> Empowering Grasp / Minor Maim
 
     -- Medium Armor
     [39196] = { id1 = 63019, unitTag = "player" }, -- Shuffle --> Major Evasion
@@ -1014,7 +1027,6 @@ Effects.BarHighlightCheckOnFade = {
     [29553] = { duration = 63084, durationMod = 29553, unitTag = "player" }, -- Immovable --> Major Resolve / Major Ward
     [63133] = { duration = 63084, durationMod = 29553, unitTag = "player" }, -- Immovable Brute --> Major Resolve / Major Ward
     [63118] = { duration = 63084, durationMod = 29553, unitTag = "player" }, -- Unstoppable --> Major Resolve / Major Ward
-
 
     -- Werewolf
     [45834] = { id1 = 39113, id2 = 45834, unitTag = "reticleover" }, -- Off Balance --> Ferocious Roar / Off Balance
@@ -1228,23 +1240,23 @@ Effects.BarHighlightOverride = {
     [86023] = { newId = 101703 }, -- Swarm
     [86027] = { newId = 101904 }, -- Fetcher Infection
     [86031] = { newId = 101944 }, -- Growing Swarm
-    [86037] = { showFakeAura = true, noRemove = true }, -- Falcon's Swiftness
-    [86041] = { showFakeAura = true, noRemove = true }, -- Deceptive Predator
-    [86045] = { showFakeAura = true, noRemove = true }, -- Bird of Prey
+    [86037] = { showFakeAura = true }, -- Falcon's Swiftness
+    [86041] = { showFakeAura = true }, -- Deceptive Predator
+    [86045] = { showFakeAura = true }, -- Bird of Prey
 
     -- Green Balance
-    [85862] = { newId = 87019, showFakeAura = true, noRemove = true }, -- Enchanted Growth
+    [85862] = { newId = 87019, noRemove = true }, -- Enchanted Growth --> Minor Endurance
     [85922] = { newId = 85840 }, -- Budding Seeds
     [85564] = { newId = 90266 }, -- Nature's Grasp
     [85858] = { newId = 87074 }, -- Nature's Embrace
 
     -- Winter's Embrace
-    [86122] = { newId = 86224, showFakeAura = true, noRemove = true }, -- Frost Cloak --> Major Resolve
-    [86126] = { newId = 88758, showFakeAura = true, noRemove = true }, -- Expansive Frost Cloak --> Major Resolve
-    [86130] = { newId = 88761, showFakeAura = true, noRemove = true }, -- Ice Fortress --> Major Resolve
+    [86122] = { newId = 86224, noRemove = true }, -- Frost Cloak --> Major Resolve
+    [86126] = { newId = 88758, noRemove = true }, -- Expansive Frost Cloak --> Major Resolve
+    [86130] = { newId = 88761, noRemove = true }, -- Ice Fortress --> Major Resolve
     [86148] = { newId = 90833 }, -- Arctic Wind
     [86152] = { newId = 90835 }, -- Polar Wind
-    [86156] = { newId = 90834 }, -- Arctic Blast
+    [86156] = { newId = 90834 }, -- Arctic Blast --> Arctic Blast Stun
 
     ---------------------------
     -- Necromancer ------------
@@ -1295,8 +1307,8 @@ Effects.BarHighlightOverride = {
     [38788] = { newId = 38791 }, -- Stampede
     [38745] = { newId = 38747 }, -- Carve
     [38754] = { newId = 38763 }, -- Brawler
-    [28297] = { newId = 61670 }, -- Momentum --> Major Brutality
-    [38794] = { newId = 38797 }, -- Forward Momentum
+    [28297] = { newId = 61670, noRemove = true }, -- Momentum --> Major Brutality
+    [38794] = { newId = 38797, noRemove = true }, -- Forward Momentum
     [83216] = { newId = 83217 }, -- Berserker Strike
     [83229] = { newId = 83230 }, -- Onslaught
     [83238] = { newId = 83239 }, -- Berserker Rage
@@ -5002,6 +5014,9 @@ Effects.EffectOverride = {
     [88726] = { tooltip = Tooltips.Skill_Natures_Grasp }, -- Nature's Embrace (Nature's Embrace)
     [87074] = { tooltip = Tooltips.Skill_Natures_Grasp_Self }, -- Nature's Embrace (Nature's Embrace)
     [108945] = { icon = 'esoui/art/icons/ability_warden_011_b.dds', name = Abilities.Skill_Natures_Embrace }, -- Nature's Embrace Ultimate Rest (Nature's Embrace)
+    [86356] = { hide = true }, -- Nature's Grasp (Nature's Grasp)
+    [85860] = { hide = true }, -- Bursting Vines (Bursting Vines)
+    [88729] = { hide = true }, -- Nature's Embrace (Nature's Embrace)
 
     -- Secluded Grove / Enchanted Forest / Healing Thicket
     [85532] = { tooltip = Tooltips.Skill_Secluded_Grove }, -- Secluded Grove (Secluded Grove)

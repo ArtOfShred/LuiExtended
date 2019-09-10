@@ -4421,14 +4421,6 @@ LUIE.DebugAuras = {
     [88721] = true, -- Living Trellis Heal (Living Trellis)
     [88723] = true, -- Living Trellis Heal Burst (Living Trellis)
 
-    [85564] = true, -- Nature's Grasp (Nature's Grasp)
-    [90266] = true, -- Nature's Grasp (Nature's Grasp)
-    [108943] = true, -- Nature's Grasp Ultimate Restor (Nature's Grasp)
-
-    [85859] = true, -- Bursting Vines (Bursting Vines)
-    [88739] = true, -- Bursting Vines (Bursting Vines)
-    [108947] = true, -- Bursting Vines Ultimate Rest (Bursting Vines)
-
     [85539] = true, -- Lotus Flower (Lotus Flower)
     [85550] = true, -- Lotus Flower (Lotus Flower)
     [94558] = true, -- Lotus Flower (Lotus Flower)
@@ -4443,10 +4435,21 @@ LUIE.DebugAuras = {
     [88695] = true, -- Lotus Blossom Heal (Lotus Blossom)
     [94590] = true, -- Lotus Blossom Heal (Lotus Blossom)
 
+    [85564] = true, -- Nature's Grasp (Nature's Grasp)
+    [90266] = true, -- Nature's Grasp (Nature's Grasp)
+    [108943] = true, -- Nature's Grasp Ultimate Restor (Nature's Grasp)
+    [86356] = true, -- Nature's Grasp (Nature's Grasp)
+
+    [85859] = true, -- Bursting Vines (Bursting Vines)
+    [88739] = true, -- Bursting Vines (Bursting Vines)
+    [108947] = true, -- Bursting Vines Ultimate Rest (Bursting Vines)
+    [85860] = true, -- Bursting Vines (Bursting Vines)
+
     [85858] = true, -- Nature's Embrace (Nature's Embrace)
     [88726] = true, -- Nature's Embrace (Nature's Embrace)
     [87074] = true, -- Nature's Embrace (Nature's Embrace)
     [108945] = true, -- Nature's Embrace Ultimate Rest (Nature's Embrace)
+    [88729] = true, -- Nature's Embrace (Nature's Embrace)
 
     [85532] = true, -- Secluded Grove (Secluded Grove)
     [85533] = true, -- Secluded Grove (Secluded Grove)
