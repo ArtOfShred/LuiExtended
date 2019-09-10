@@ -981,7 +981,7 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
             g_toggledSlotsPlayer[abilityId] = nil
         end
     end
-    if unitTag ~= "player" then
+    if unitTag == "reticleover" or unitTag == "" then
         if changeType ~= EFFECT_RESULT_FADED then
             g_toggledSlotsPlayer[abilityId] = nil
         end
