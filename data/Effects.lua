@@ -3743,7 +3743,7 @@ Effects.EffectOverride = {
     [98102] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of Alkosh)
     [75752] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Roar of Alkosh (of Alkosh)
     [75753] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist }, -- Line Breaker (of Alkosh)
-    [76667] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Roar of Alkosh (of Alkosh)
+    [76667] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', tooltip = Tooltips.Generic_Physical, tooltipValue2 = 1 }, -- Roar of Alkosh (of Alkosh)
     [75815] = { icon = 'LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds', duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Set_Lunar_Bastion }, -- Lunar Bastion (of the Lunar Bastion)
     [75770] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Twilight Remedy (of Twilight Remedy)
     [76564] = { tooltip = Abilities.Set_Twilight_Remedy }, -- Minor Force (of Twilight Remedy)
@@ -5897,7 +5897,7 @@ Effects.EffectOverride = {
     [33208] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', hide = true }, -- Devour (Devour)
     [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour)
     [40515] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Blood Moon)
-    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = Abilities.Skill_Devour, unbreakable = 1, tooltip = Tooltips.Generic_Stun }, -- Q3047 - Knockdown (Blood Moon)
+    [40520] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', name = Abilities.Skill_Devour, unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Q3047 - Knockdown (Blood Moon)
     [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Bloodmoon, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Blood_Moon }, -- Bit an Ally (Blood Moon)
 
     ----------------------------------------------------------------
