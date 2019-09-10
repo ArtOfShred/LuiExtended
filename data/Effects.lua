@@ -1224,9 +1224,9 @@ Effects.BarHighlightOverride = {
     [22259] = { newId = 80547 }, -- Ritual of Retribution (Ritual of Retribution)
     [22262] = { newId = 80553 }, -- Extended Ritual (Extended Ritual)
 
-    [22234] = { showFakeAura = true, ignoreMouseover = true }, -- Rune Focus
-    [22240] = { showFakeAura = true, ignoreMouseover = true }, -- Channeled Focus
-    [22237] = { showFakeAura = true, ignoreMouseover = true }, -- Restoring Focus
+    [22234] = { showFakeAura = true, ignoreMouseover = true, noRemove = true }, -- Rune Focus
+    [22240] = { showFakeAura = true, ignoreMouseover = true, noRemove = true }, -- Channeled Focus
+    [22237] = { showFakeAura = true, ignoreMouseover = true, noRemove = true }, -- Restoring Focus
 
     [22223] = { showFakeAura = true }, -- Rite of Passage
     [22229] = { showFakeAura = true }, -- Remembrance
