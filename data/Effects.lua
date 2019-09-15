@@ -920,6 +920,10 @@ Effects.AddNoDurationBarHighlight = {
 -- SECONDARY ID = ORIGINAL BAR HIGHLIGHT ID
 Effects.BarHighlightExtraId = {
 
+    -- Sorcerer
+    [24576] = 24574, -- Defensive Rune
+    [89491] = 24330, -- Haunting Curse
+
     -- Warden
     [101948] = 101944, -- Growing Swarm
     [86300] = 87019, -- Enchanted Growth --> Minor Endurance
@@ -1161,7 +1165,6 @@ Effects.BarHighlightOverride = {
     -- Daedric Summoning
     [108840] = { newId = 108843 }, -- Summon Unstable Familiar --> Volatile Familiar
     [77182] = { newId = 88933 }, -- Summon Volatile Familiar --> Volatile Familiar
-    [24330] = { newId = 89491 }, -- Haunting Curse
     [77140] = { newId = 88937 }, -- Summon Twilight Tormentor --> Twilight Tormentor
     [23634] = { newId = 80459 }, -- Summon Storm Atronach
     [23492] = { newId = 80463 }, -- Greater Storm Atronach
