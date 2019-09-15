@@ -1122,10 +1122,9 @@ Effects.BarHighlightOverride = {
     [25260] = { newId = 34734 }, -- Surprise Attack
     [25267] = { newId = 34736 }, -- Concealed Weapon
     [25375] = { newId = 25376 }, -- Shadow Cloak
-    [25380] = { newId = 25381 }, -- Shadowy Disguise
+    [25380] = { newId = 62141 }, -- Shadowy Disguise
     --[25352] = { }, -- Aspect of Terror -- TODO: Disabled because API won't return correct duration for Fear
     --[37470] = { }, -- Mass Hysteria -- TODO: Disabled because API won't return correct duration for Fear
-    [37475] = { newId = 76639 }, -- Manifestation of Terror
     [33211] = { newId = 38517 }, -- Summon Shade
     [35434] = { newId = 35438 }, -- Dark Shade --> Summon Shade
     [35441] = { newId = 38528 }, -- Shadow Image --> Shadow
@@ -1133,7 +1132,7 @@ Effects.BarHighlightOverride = {
 
     -- Siphoning
     [33291] = { newId = 33292 }, -- Strife
-    [34838] = { newId = 34840 }, -- Funnel Health
+    [34838] = { newId = 34841, ignoreMouseover = true }, -- Funnel Health
     [34835] = { newId = 34836 }, -- Swallow Soul
     [33308] = { newId = 108925, secondary = true, noRemove = true }, -- Malevolent Offering
     [34721] = { newId = 108927, secondary = true, noRemove = true }, -- Shrewd Offering
@@ -4432,7 +4431,6 @@ Effects.EffectOverride = {
 
     -- Strife / Funnel Health / Swallow Soul
     [33292] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Strife (Strife)
-    [34840] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Funnel Health (Funnel Health)
     [34841] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Funnel Health (Funnel Health)
     [34836] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 2 }, -- Swallow Soul (Swallow Soul)
 
@@ -4451,6 +4449,7 @@ Effects.EffectOverride = {
     [36960] = { tooltip = Tooltips.Skill_Crippling_Grasp }, -- Crippling Grasp (Crippling Grasp)
     [36958] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds', tooltip = Tooltips.Skill_Crippling_Grasp, hideReduce = true }, -- Crippling Grasp (Crippling Grasp)
     [36963] = { icon = 'esoui/art/icons/ability_nightblade_006_b.dds' }, -- Crippling Grasp (Crippling Grasp)
+    [36964] = { tooltip = Tooltips.Skill_Crippling_Grasp, hideReduce = true }, -- Crippling Grasp (Crippling Grasp)
 
     -- Siphoning Strikes / Leeching Strikes / Siphoning Attacks
     [33319] = { tooltip = Tooltips.Skill_Siphoning_Strikes }, -- Siphoning Strikes (Siphoning Strikes)
