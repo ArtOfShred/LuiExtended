@@ -115,10 +115,8 @@ local strings = {
     ----------------------------------------------------------------
 
     -- Major / Minor Buffs
-    SI_LUIE_SKILL_MINOR_RESOLVE_TP =                     "Increase Physical Resistance by |cffffff1320|r.",
-    SI_LUIE_SKILL_MAJOR_RESOLVE_TP =                     "Increase Physical Resistance by |cffffff5280|r.",
-    SI_LUIE_SKILL_MINOR_WARD_TP =                        "Increase Spell Resistance by |cffffff1320|r.",
-    SI_LUIE_SKILL_MAJOR_WARD_TP =                        "Increase Spell Resistance by |cffffff5280|r.",
+    SI_LUIE_SKILL_MINOR_RESOLVE_TP =                     "Increase Physical and Spell Resistance by |cffffff1320|r.",
+    SI_LUIE_SKILL_MAJOR_RESOLVE_TP =                     "Increase Physical and Spell Resistance by |cffffff5280|r.",
     SI_LUIE_SKILL_MINOR_FORTITUDE_TP =                   "Increase Health Recovery by |cffffff10|r%.",
     SI_LUIE_SKILL_MAJOR_FORTITUDE_TP =                   "Increase Health Recovery by |cffffff20|r%.",
     SI_LUIE_SKILL_MINOR_ENDURANCE_TP =                   "Increase Stamina Recovery by |cffffff10|r%.",
@@ -290,9 +288,9 @@ local strings = {
 
     -- Dragonknight Skills
     SI_LUIE_SKILL_SEETHING_FURY_TP =                     "Increase the damage of your next Molten Whip by |cffffff33|r% and your Weapon and Spell Damage by |cffffff75|r for |cffffff<<1>>|r seconds.\n\nThis effect can stack up to |cffffff3|r times.",
-    SI_LUIE_SKILL_VENOMOUS_CLAW_TP =                     "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nDeals |cFFFFFF12|r% increased damage every |cFFFFFF2|r seconds.",
+    SI_LUIE_SKILL_VENOMOUS_CLAW_TP =                     "Afflicted with Poison Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nDeals |cFFFFFF12|r% more damage every |cFFFFFF2|r seconds.",
     SI_LUIE_SKILL_BURNING_EMBERS_TP =                    "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nHeals the Dragonknight for |cffffff75|r% of the total damage inflicted when the effect ends.",
-    SI_LUIE_SKILL_ENGULFING_FLAMES_TP =                  "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nIncrease damage taken from Flame Damage attacks by |cffffff10|r%.",
+    SI_LUIE_SKILL_ENGULFING_FLAMES_TP =                  "Afflicted with Flame Damage every |cFFFFFF2|r seconds for |cffffff<<1>>|r seconds.\n\nIncrease damage taken from Flame Damage attacks by up to |cffffff10|r%.",
     SI_LUIE_SKILL_ENGULFING_FLAMES_DUMMY_TP =            "Increase damage taken from Flame Damage attacks by |cffffff10|r%.",
     SI_LUIE_SKILL_INFERNO_TP =                           "Launch a fireball at the nearest enemy, dealing Flame Damage every |cffffff5|r seconds for |cffffff15|r seconds.",
     SI_LUIE_SKILL_FLAMES_OF_OBLIVION_TP =                "Launch a fireball at |cffffff2|r enemies, dealing Flame Damage every |cffffff5|r seconds for |cffffff15|r seconds.",
@@ -329,8 +327,9 @@ local strings = {
     SI_LUIE_SKILL_TWISTING_PATH_TP =                     "You and allies in the corridor of shadows gain Major Expedition for |cFFFFFF4|r seconds every |cFFFFFF1|r second, while enemies in the area take Magic Damage every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_REFRESHING_PATH_TP =                   "You and allies in the corridor of shadows gain Major Expedition for |cFFFFFF4|r seconds, and heal every |cFFFFFF1|r second for |cFFFFFF2|r seconds.\n\nThis effect is reapplied every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_MANIFESTATION_OF_TERROR_TP =           "Detonates when a enemy comes within |cFFFFFF6|r meters, summoning a dark spirit to terrify up to |cFFFFFF6|r enemies, causing them to cower in fear for |cFFFFFF4|r seconds.",
-    SI_LUIE_SKILL_SUMMON_SHADE_TP =                      "A shade version of yourself fights at your side for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_SHADOW_IMAGE_TP =                      "A shade version of yourself stays in place and attacks an enemy from range for |cFFFFFF<<1>>|r seconds.\n\nWhile the shade is summoned, you can activate this ability again to teleport to the shade's location.",
+    SI_LUIE_SKILL_SUMMON_SHADE_TP =                      "A shade version of yourself fights at your side for |cFFFFFF<<1>>|r seconds.\n\nThe shade slashes at an enemy, dealing Magic Damage. The shade's attacks inflict Minor Maim for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_DARK_SHADE_TP =                        "A shade version of yourself fights at your side for |cFFFFFF<<1>>|r seconds.\n\nThe shade slashes at an enemy, dealing Magic Damage and occasionally whirlwinds, dealing Magic Damage to enemies within |cFFFFFF6|r meters. The shade's attacks inflict Minor Maim for |cFFFFFF4|r seconds.",
+    SI_LUIE_SKILL_SHADOW_IMAGE_TP =                      "A shade version of yourself stays in place and attacks an enemy from range for |cFFFFFF<<1>>|r seconds.\n\nThe shade shoots at an enemy, dealing Magic Damage. The shade's attacks inflict Minor Maim for |cFFFFFF4|r seconds.\n\n\While the shade is summoned, you can activate this ability again to teleport to the shade's location.",
     SI_LUIE_SKILL_CORROSIVE_SPIN_TP =                    "Corrosive Spin",
     SI_LUIE_SKILL_HIDDEN_REFRESH_TP =                    "Invisible, healing every |cFFFFFF0.5|r seconds, and Movement Speed increased by |cFFFFFF70|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_CONSUMING_DARKNESS_TP =                "Enemies in the ring of shadow have their Movement Speed reduced by |cFFFFFF70|r%, while you and allies gain Major Protection.\n\nAllies in the area can activate the |cFFFFFFHidden Refresh|r synergy.",

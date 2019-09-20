@@ -3135,10 +3135,9 @@ function SpellCastBuffs.OnVibration(eventCode, duration, coarseMotor, fineMotor,
 end
 
 -- Runs on EVENT_ACTION_SLOT_UPDATED / EVENT_ACTION_SLOTS_ALLHOTBARS_UPDATED / EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED
--- Creates Minor Ward/Minor Resolve buffs for Bound Aegis
+-- Creates Minor Resolve buff for Bound Aegis
 function SpellCastBuffs.DrawBoundAegisBuffs()
     SpellCastBuffs.EffectsList["player1"][999008] = nil
-    SpellCastBuffs.EffectsList["player1"][999009] = nil
 
     -- If we have Consolidate enabled then don't create these auras
     if SpellCastBuffs.SV.ExtraConsolidate then return end
@@ -3149,13 +3148,6 @@ function SpellCastBuffs.DrawBoundAegisBuffs()
             SpellCastBuffs.EffectsList["player1"][999008] = {
                 target ="player", type=1,
                 id=999008, icon = 'esoui/art/icons/ability_buff_minor_resolve.dds', name = Abilities.Skill_Minor_Resolve,
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "long",
-                restart=true, iconNum=0,
-            }
-            SpellCastBuffs.EffectsList["player1"][999009] = {
-                target ="player", type=1,
-                id=999009, icon = 'esoui/art/icons/ability_buff_minor_ward.dds', name = Abilities.Skill_Minor_Ward,
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                 forced = "long",
                 restart=true, iconNum=0,

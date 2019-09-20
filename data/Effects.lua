@@ -750,20 +750,21 @@ Effects.EffectCreateSkillAura = {
     [92507] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 29043 }, -- Major Sorcery --> Molten Weapons
     [76518] = { removeOnEnd = false, consolidate = true, abilityId = 31874 }, -- Major Brutality --> Igneous Weapons
     [92503] = { removeOnEnd = false, consolidate = true, abilityId = 31874 }, -- Major Sorcery --> Igneous Weapons
-    [31818] = { removeOnEnd = false, consolidate = true, abilityId = 31816 }, -- Minor Resolve (Stone Giant)
-    [108801] = { removeOnEnd = false, consolidate = true, abilityId = 31816 }, -- Minor Ward (Stone Giant)
+    [31818] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 31816 }, -- Minor Resolve (Stone Giant)
 
     -- Nightblade
     [90587] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 33375 }, -- Major Evasion --> Blur
     [90593] = { removeOnEnd = false, consolidate = true, abilityId = 35414 }, -- Major Evasion --> Mirage
     [61817] = { removeOnEnd = false, consolidate = true, abilityId = 35414 }, -- Minor Resolve --> Mirage
-    [68512] = { removeOnEnd = false, consolidate = true, abilityId = 35414 }, -- Minor Ward --> Mirage
     [90620] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 35419 }, -- Major Evasion --> Phantasmal Escape
     [25377] = { alwaysShow = true, removeOnEnd = true, abilityId = 108913, consolidateNewIdExtended = true }, -- Dark Cloak --> Minor Protection
     [36947] = { alwaysShow = true, removeOnEnd = true, abilityId = 125315, consolidateNewIdExtended = true }, -- Debilitate --> Minor Magickasteal
 
-    [33317] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 33316  }, --> Major Sorcery --> Drain Power
-    [36903] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 36901 }, --> Major Brutality --> Power Extraction
+    [131342] = { removeOnEnd = false, consolidate = true, abilityId = 33316  }, --> Major Brutality --> Drain Power
+    [33317] = { removeOnEnd = false, consolidate = true, abilityId = 33316  }, --> Major Sorcery --> Drain Power
+    [36903] = { removeOnEnd = false, consolidate = true, abilityId = 36901 }, --> Major Brutality --> Power Extraction
+    [131344] = { removeOnEnd = false, consolidate = true, abilityId = 36901 }, --> Major Sorcery --> Power Extraction
+    [131343] = { removeOnEnd = false, consolidate = true, abilityId = 36891 }, -- Major Bruality --> Sap Essence
     [62240] = { removeOnEnd = false, consolidate = true, abilityId = 36891 }, -- Major Sorcery --> Sap Essence
 
     -- Templar
@@ -920,6 +921,18 @@ Effects.AddNoDurationBarHighlight = {
 -- SECONDARY ID = ORIGINAL BAR HIGHLIGHT ID
 Effects.BarHighlightExtraId = {
 
+    -- Dragonknight
+    [109206] = 108679, -- Empower --> Empower (Empowering Chains)
+
+    -- Nightblade
+    [124806] = 35336, -- Minor Vulnerability --> Lotus Fan
+    [36973] = 36967, -- Major Berserk --> Reaper's Mark
+    [61817] = 90593, -- Minor Resolve --> Major Evasion
+
+    [131342] = 33317, -- Major Brutality --> Major Sorcery (Drain Power)
+    [36903] = 131344, -- Major Brutality --> Major Sorcery (Power Extraction)
+    [131343] = 62240, -- Major Brutality --> Major Sorcery (Sap Essence)
+
     -- Sorcerer
     [24576] = 24574, -- Defensive Rune
     [89491] = 24330, -- Haunting Curse
@@ -987,6 +1000,15 @@ Effects.BarHighlightExtraId = {
 -- If durationMod value is set to an ID, this value will be subtracted from the final duration
 -- Note that any secondary id's for Bar Highlight in the table above will set their id to the original tracked id here
 Effects.BarHighlightCheckOnFade = {
+
+    -- Dragonknight
+    [108679] = { id1 = 109206, id2 = 76506, unitTag = "player" }, -- Empower --> Empower / Major Expedition
+
+    -- Nightblade
+    [35336] = { id1 = 124806, id2 = 35336, unitTag = "reticleover" }, -- Lotus Fan --> Minor Vulnerability / Lotus Fan
+    --[124804] = { id1 = 61737, id2 = 124804, unitTag = "player" }, -- Minor Vulnerability --> Empower / Minor Vulnerability
+    [36967] = { id1 = 36973, unitTag = "player" }, -- Reaper's Mark --> Major Berserk
+    [125314] = { id1 = 90620, unitTag = "player" }, -- Phantasmal Escape --> Major Evasion
 
     -- Warden
     [85552] = { id1 = 85552, unitTag = "player" }, -- Living Vines (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
@@ -1072,9 +1094,9 @@ Effects.BarHighlightOverride = {
     [20917] = { newId = 31102 }, -- Fiery Breath
     [20944] = { newId = 31103 }, -- Noxious Breath
     [20930] = { newId = 31104 }, -- Engulfing Flames
-    [20492] = { newId = 76498, showFakeAura = true, secondary = true, noRemove = true }, -- Fiery Grip --> Major Expedition (Note doesn't refresh when longer duration Major Expedition is present)
-    [20499] = { newId = 76506, showFakeAura = true, secondary = true, noRemove = true }, -- Empowering Chains --> Major Expedition (Note doesn't refresh when longer duration Major Expedition is present)
-    [20496] = { newId = 76502, showFakeAura = true, secondary = true, noRemove = true }, -- Unrelenting Grip --> Major Expedition (Note doesn't refresh when longer duration Major Expedition is present)
+    [20492] = { newId = 76498, secondary = true, noRemove = true }, -- Fiery Grip --> Major Expedition
+    [20499] = { newId = 108679 }, -- Empowering Chains --> Empower
+    [20496] = { newId = 76502, secondary = true, noRemove = true }, -- Unrelenting Grip --> Major Expedition
     [32963] = { newId = 32958 }, -- Shifting Standard
 
     -- Draconic Power
@@ -1107,9 +1129,9 @@ Effects.BarHighlightOverride = {
     [18342] = { newId = 124803 }, -- Teleport Strike --> Minor Vulnerability
     [25493] = { newId = 35336 }, -- Lotus Fan
     [25484] = { newId = 124804 }, -- Ambush --> Minor Vulnerability
-    [33375] = { newId = 90587, showFakeAura = true, noRemove = true }, -- Blur --> Major Evasion
-    [35414] = { newId = 90593, showFakeAura = true, noRemove = true }, -- Mirage --> Major Evasion
-    [35419] = { newId = 90620, showFakeAura = true, noRemove = true }, -- Phantasmal Escape --> Major Evasion
+    [33375] = { newId = 90587, noRemove = true }, -- Blur --> Major Evasion
+    [35414] = { newId = 90593, noRemove = true }, -- Mirage --> Major Evasion
+    [35419] = { newId = 125314, ignoreMouseover = true }, -- Phantasmal Escape --> Major Evasion
     [61907] = { newId = 61902 }, -- Grim Focus --> Assassin's Will
     [61932] = { newId = 61927 }, -- Relentless Focus --> Assassin's Scourge
     [61930] = { newId = 61919 }, -- Merciless Resolve --> Assassin's Will
@@ -1140,9 +1162,9 @@ Effects.BarHighlightOverride = {
     [33326] = { newId = 33333 }, -- Cripple
     [36943] = { newId = 36947 }, -- Debilitate
     [36957] = { newId = 36960 }, -- Crippling Grasp
-    [33316] = { newId = 33317, showFakeAura = true, noRemove = true }, -- Drain Power --> Major Sorcery
-    [36901] = { newId = 36903, showFakeAura = true, noRemove = true }, -- Power Extraction --> Major Brutality
-    [36891] = { newId = 62240, showFakeAura = true, noRemove = true }, -- Sap Essence --> Major Sorcery
+    [33316] = { newId = 33317, noRemove = true }, -- Drain Power --> Major Sorcery
+    [36901] = { newId = 131344, noRemove = true }, -- Power Extraction --> Major Sorcery
+    [36891] = { newId = 62240, noRemove = true }, -- Sap Essence --> Major Sorcery
     [25091] = { newId = 25093 }, -- Soul Shred
     [35460] = { newId = 35462 }, -- Soul Tether
 
@@ -1298,7 +1320,7 @@ Effects.BarHighlightOverride = {
     -- Two Handed -------------
     ---------------------------
 
-    --[38807] = { newId = 61737, secondary = true }, -- Wrecking Blow --> Empower
+    [38807] = { newId = 61737, secondary = true }, -- Wrecking Blow --> Empower
     [38814] = { newId = 38816 }, -- Dizzying Swing
     [38788] = { newId = 38791 }, -- Stampede
     [38745] = { newId = 38747 }, -- Carve
@@ -2555,8 +2577,6 @@ Effects.TooltipNameOverride = {
     -- Major/Minor Buffs
     [Abilities.Skill_Minor_Resolve]         = Tooltips.Skill_Minor_Resolve,
     [Abilities.Skill_Major_Resolve]         = Tooltips.Skill_Major_Resolve,
-    [Abilities.Skill_Minor_Ward]            = Tooltips.Skill_Minor_Ward,
-    [Abilities.Skill_Major_Ward]            = Tooltips.Skill_Major_Ward,
     [Abilities.Skill_Minor_Fortitude]       = Tooltips.Skill_Minor_Fortitude,
     [Abilities.Skill_Major_Fortitude]       = Tooltips.Skill_Major_Fortitude,
     [Abilities.Skill_Minor_Endurance]       = Tooltips.Skill_Minor_Endurance,
@@ -3961,7 +3981,7 @@ Effects.EffectOverride = {
 
     -- Mount
     [37059] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mounted.dds' }, -- Mount Up
-    [115607] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', name = Abilities.Innate_Hard_Dismount, unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Dismount Stun
+    [115607] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Hard Dismount
     [33439] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', name = Abilities.Innate_Gallop, tooltip = Tooltips.Innate_Gallop }, -- Mount Sprint (Generic)
 
     -- Block
@@ -4209,8 +4229,7 @@ Effects.EffectOverride = {
     [31821] = { tooltip = Tooltips.Generic_Stun }, -- Obsidian Shard (Obsidian Shard)
     [68763] = { icon = 'esoui/art/icons/ability_dragonknight_013_b.dds' }, -- Obsidian Shard (Obsidian Shard)
     [31817] = { tooltip = Tooltips.Generic_Stun }, -- Stone Giant (Stone Giant)
-    [31818] = { consolidate = true, tooltip = Abilities.Skill_Stone_Giant }, -- Minor Resolve (Stone Giant)
-    [108801] = { consolidate = true, tooltip = Abilities.Skill_Stone_Giant }, -- Minor Ward (Stone Giant)
+    [31818] = { consolidateExtra = true, tooltip = Abilities.Skill_Stone_Giant }, -- Minor Resolve (Stone Giant)
 
     -- Molten Weapons / Igneous Weapons / Molten Armaments
     [92507] = { consolidateExtra = true, tooltip = Abilities.Skill_Molten_Weapons }, -- Major Sorcery (Molten Weapons)
@@ -4276,10 +4295,8 @@ Effects.EffectOverride = {
     [36549] = { icon = 'LuiExtended/media/icons/abilities/passive_nightblade_refreshing_shadows.dds' },
     [45103] = { icon = 'LuiExtended/media/icons/abilities/passive_nightblade_refreshing_shadows.dds' },
     [18866] = { icon = 'LuiExtended/media/icons/abilities/passive_nightblade_shadow_barrier.dds' },
-    [18868] = { tooltip = Abilities.Skill_Shadow_Barrier }, -- Major Ward (Shadow Barrier)
     [66075] = { tooltip = Abilities.Skill_Shadow_Barrier }, -- Major Resolve (Shadow Barrier)
     [45071] = { icon = 'LuiExtended/media/icons/abilities/passive_nightblade_shadow_barrier.dds' },
-    [45076] = { tooltip = Abilities.Skill_Shadow_Barrier }, -- Major Ward (Shadow Barrier)
     [66083] = { tooltip = Abilities.Skill_Shadow_Barrier }, -- Major Resolve (Shadow Barrier)
     [36532] = { icon = 'LuiExtended/media/icons/abilities/passive_nightblade_dark_vigor.dds' },
     [45084] = { icon = 'LuiExtended/media/icons/abilities/passive_nightblade_dark_vigor.dds' },
@@ -4317,9 +4334,8 @@ Effects.EffectOverride = {
     [90587] = { consolidateExtra = true, tooltip = Abilities.Skill_Blur }, -- Major Evasion (Blur)
     [90593] = { consolidate = true, tooltip = Abilities.Skill_Mirage }, -- Major Evasion (Mirage)
     [61817] = { consolidate = true, tooltip = Abilities.Skill_Mirage }, -- Minor Resolve (Mirage)
-    [68512] = { consolidate = true, tooltip = Abilities.Skill_Mirage }, -- Minor Ward (Mirage)
     [90620] = { consolidateExtra = true, tooltip = Abilities.Skill_Double_Take }, -- Major Evasion (Phantasmal Escape)
-    [61833] = { tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Phantasmal Escape (Phantasmal Escape)
+    [125314] = { tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Phantasmal Escape (Phantasmal Escape)
 
     -- Mark Target / Piercing Mark / Reaper's Mark
     [33363] = { consolidate = true, tooltip = Abilities.Skill_Mark_Target }, -- Major Breach (Mark Target)
@@ -4405,7 +4421,7 @@ Effects.EffectOverride = {
     [33228] = { tooltip = Abilities.Skill_Corrosive_Strike }, -- Minor Maim (Summon Shade)
     [38517] = { hide = true, tooltip = Tooltips.Skill_Summon_Shade }, -- Summon Shade (Summon Shade)
 
-    [35438] = { hide = true, tooltip = Tooltips.Skill_Summon_Shade }, -- Summon Shade (Dark Shade)
+    [35438] = { hide = true, tooltip = Tooltips.Skill_Dark_Shade }, -- Summon Shade (Dark Shade)
     [123945] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds', name = Abilities.Skill_Corrosive_Strike }, -- Corrosive Flurry (Dark Shade)
     [123946] = { tooltip = Abilities.Skill_Corrosive_Strike }, -- Minor Maim (Dark Shade)
     [108936] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_whirlwind.dds', name = Abilities.Skill_Corrosive_Spin }, -- Corrosive Slash (Dark Shade)
@@ -4459,10 +4475,13 @@ Effects.EffectOverride = {
     [36935] = { tooltip = Tooltips.Skill_Siphoning_Attacks }, -- Siphoning Attacks (Siphoning Attacks)
 
     -- Drain Power / Power Extraction / Sap Essence
-    [33317] = { consolidateExtra = true, tooltip = Abilities.Skill_Drain_Power }, -- Major Sorcery (Drain Power)
-    [36903] = { consolidateExtra = true, tooltip = Abilities.Skill_Power_Extraction }, -- Major Brutality (Power Extraction)
+    [131342] = { consolidate = true, tooltip = Abilities.Skill_Drain_Power }, -- Major Bruality (Drain Power)
+    [33317] = { consolidate = true, tooltip = Abilities.Skill_Drain_Power }, -- Major Sorcery (Drain Power)
+    [36903] = { consolidate = true, tooltip = Abilities.Skill_Power_Extraction }, -- Major Brutality (Power Extraction)
+    [131344] = { consolidate = true, tooltip = Abilities.Skill_Power_Extraction }, -- Major Sorcery (Power Extraction)
     [126675] = { tooltip = Tooltips.Skill_Power_Extraction }, -- Power Extraction (Power Extraction)
-    [62240] = { consolidateExtra = true, tooltip = Abilities.Skill_Sap_Essence }, -- Major Sorcery (Sap Essence)
+    [131343] = { consolidate = true, tooltip = Abilities.Skill_Sap_Essence }, -- Major Brutality (Sap Essence)
+    [62240] = { consolidate = true, tooltip = Abilities.Skill_Sap_Essence }, -- Major Sorcery (Sap Essence)
     [36899] = { icon = 'esoui/art/icons/ability_nightblade_013_a.dds', name = Abilities.Skill_Sap_Essence }, -- Sap Will (Sap Essence)
 
     -- Soul Shred / Soul Siphon / Soul Tether
@@ -4472,6 +4491,7 @@ Effects.EffectOverride = {
     [63533] = { tooltip = Abilities.Skill_Soul_Siphon }, -- Major Vitality (Soul Siphon)
     [35613] = { hide = true }, -- Soul Leech (Soul Siphon)
     [35466] = { tooltip = Tooltips.Skill_Soul_Tether, hideReduce = true }, -- Soul Tether (Soul Tether)
+    [129384] = { icon = 'esoui/art/icons/ability_nightblade_018_a.dds' }, -- Soul Tether (Soul Tether)
     [36606] = { icon = 'esoui/art/icons/ability_nightblade_018_a.dds' }, -- Soul Tether (Soul Tether)
     [35462] = { tooltip = Tooltips.Skill_Soul_Tether }, -- Soul Tether (Soul Tether)
     [35461] = { hide = true }, -- Soul Leech (Soul Tether)
@@ -4603,7 +4623,6 @@ Effects.EffectOverride = {
     [24163] = { tooltip = Tooltips.Skill_Bound_Armor }, -- Bound Aegis (Bound Aegis)
 
     [999008] = { icon = 'esoui/art/icons/ability_buff_minor_resolve.dds', name = Abilities.Skill_Minor_Resolve, tooltip = Abilities.Skill_Bound_Aegis }, -- Bound Aegis FAKE ID
-    [999009] = { icon = 'esoui/art/icons/ability_buff_minor_ward.dds', name = Abilities.Skill_Minor_Ward, tooltip = Abilities.Skill_Bound_Aegis }, -- Bound Aegis FAKE ID
 
     -- Summon Storm Atronach / Greater Storm Atronach / Summon Charged Atronach
     [48078] = { tooltip = Abilities.Skill_Charged_Lightning }, -- Major Berserk (Charged Lightning Synergy)
@@ -11560,7 +11579,7 @@ Effects.FakePlayerDebuffs = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.FakeStagger = {
     -- Player Basic
-    [115607] = { duration = 2000 }, -- Dismount Stun
+    [115607] = { duration = 2000 }, -- Hard Dismount
 
     -- Dual Wield
     [126640] = { icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Hidden Blade)

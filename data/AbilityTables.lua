@@ -12,8 +12,6 @@ local AbilityTables = {
     -- Major/Minor Buffs
     Skill_Minor_Resolve               = 61693,
     Skill_Major_Resolve               = 22236,
-    Skill_Minor_Ward                  = 61695,
-    Skill_Major_Ward                  = 18868,
     Skill_Minor_Fortitude             = 26213,
     Skill_Major_Fortitude             = 29011,
     Skill_Minor_Endurance             = 26215,
@@ -98,7 +96,6 @@ local AbilityTables = {
     Innate_Bash                       = 21970, -- Bash
     Innate_Bash_Stun                  = 21971, -- Bash Stun
     Innate_Gallop                     = GetString(SI_LUIE_SKILL_MOUNT_SPRINT), -- Gallop
-    Innate_Hard_Dismount              = 42514,
     Innate_Fall_Damage                = GetString(SI_LUIE_SKILL_FALL_DAMAGE), -- Fall Damage
     Innate_Absorbing_Skyshard         = GetString(SI_LUIE_SKILL_ABSORBING_SKYSHARD), -- Absorbing Skyshard
     Innate_Receiving_Boon             = GetString(SI_LUIE_SKILL_RECEIVING_BOON), -- Receiving Boon

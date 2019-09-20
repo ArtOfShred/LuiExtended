@@ -2449,7 +2449,7 @@ LUIE.DebugAuras = {
     [36417] = true, -- Dismount
     [36419] = true, -- Dismount
     [46697] = true, -- Pause Mount Stamina Regen
-    [115607] = true, -- Dismount Stun
+    [115607] = true, -- Hard Dismount
     [43770] = true, -- Boost
     [33439] = true, -- Mount Sprint (Generic)
     [33442] = true, -- Sprint Drain
@@ -2975,7 +2975,6 @@ LUIE.DebugAuras = {
     [31816] = true, -- Stone Giant (Stone Giant)
     [31817] = true, -- Stone Giant (Stone Giant)
     [31818] = true, -- Minor Resolve (Stone Giant)
-    [108801] = true, -- Minor Ward (Stone Giant)
 
     [29043] = true, -- Molten Weapons (Molten Weapons)
     [92507] = true, -- Major Sorcery (Molten Weapons)
@@ -3062,10 +3061,8 @@ LUIE.DebugAuras = {
     [36549] = true, -- Refreshing Shadows (Rank 1)
     [45103] = true, -- Refreshing Shadows (Rank 2)
     [18866] = true, -- Shadow Barrier (Rank 1)
-    [18868] = true, -- Major Ward
     [66075] = true, -- Major Resolve
     [45071] = true, -- Shadow Barrier (Rank 2)
-    [45076] = true, -- Major Ward
     [66083] = true, -- Major Resolve
     [36532] = true, -- Dark Vigor (Rank 1)
     [45084] = true, -- Dark Vigor (Rank 2)
@@ -3118,11 +3115,10 @@ LUIE.DebugAuras = {
     [35414] = true, -- Mirage (Mirage)
     [90593] = true, -- Major Evasion (Mirage)
     [61817] = true, -- Minor Resolve (Mirage)
-    [68512] = true, -- Minor Ward (Mirage)
 
     [35419] = true, -- Phantasmal Escape (Phantasmal Escape)
     [90620] = true, -- Major Evasion (Double Take)
-    [61833] = true, -- Phantasmal Escape (Phantasmal Escape)
+    [125314] = true, -- Phantasmal Escape (Phantasmal Escape)
 
     [33357] = true, -- Mark Target (Mark Target)
     [33363] = true, -- Major Breach (Mark Target)
@@ -3365,14 +3361,17 @@ LUIE.DebugAuras = {
     [114968] = true, -- Siphoning Attacks (Siphoning Attacks)
 
     [33316] = true, -- Drain Power (Drain Power)
+    [131342] = true, -- Major Brutality (Drain Power)
     [33317] = true, -- Major Sorcery (Drain Power)
 
     [36901] = true, -- Power Extraction (Power Extraction)
     [36903] = true, -- Major Brutality (Power Extraction)
+    [131344] = true, -- Major Sorcery (Power Extraction)
     [126675] = true, -- Power Extraction (Power Extraction)
 
-    [36891] = true, -- Sap Essence (Sap Essence)
-    [45655] = true, -- Sap Essence (Sap Essence)
+    --[36891] = true, -- Sap Essence (Sap Essence)
+    --[45655] = true, -- Sap Essence (Sap Essence)
+    [131343] = true, -- Major Brutality (Sap Essence)
     [62240] = true, -- Major Sorcery (Sap Essence)
     [36898] = true, -- Sap Will (Sap Essence)
     [36899] = true, -- Sap Will (Sap Essence)
@@ -3399,6 +3398,7 @@ LUIE.DebugAuras = {
 
     [35460] = true, -- Soul Tether (Soul Tether)
     [35466] = true, -- Soul Tether (Soul Tether)
+    [129384] = true, -- Soul Tether (Soul Tether)
     [36606] = true, -- Soul Tether (Soul Tether)
     [35462] = true, -- Soul Tether (Soul Tether)
     [35463] = true, -- Soul Tether (Soul Tether)

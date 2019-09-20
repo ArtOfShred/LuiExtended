@@ -24,8 +24,6 @@ LUIE.Data.Tooltips = {
     -- Major/Minor Buffs
     Skill_Minor_Resolve                             = GetString(SI_LUIE_SKILL_MINOR_RESOLVE_TP),
     Skill_Major_Resolve                             = GetString(SI_LUIE_SKILL_MAJOR_RESOLVE_TP),
-    Skill_Minor_Ward                                = GetString(SI_LUIE_SKILL_MINOR_WARD_TP),
-    Skill_Major_Ward                                = GetString(SI_LUIE_SKILL_MAJOR_WARD_TP),
     Skill_Minor_Fortitude                           = GetString(SI_LUIE_SKILL_MINOR_FORTITUDE_TP),
     Skill_Major_Fortitude                           = GetString(SI_LUIE_SKILL_MAJOR_FORTITUDE_TP),
     Skill_Minor_Endurance                           = GetString(SI_LUIE_SKILL_MINOR_ENDURANCE_TP),
@@ -527,6 +525,7 @@ LUIE.Data.Tooltips = {
     Skill_Refreshing_Path                           = GetString(SI_LUIE_SKILL_REFRESHING_PATH_TP),
     Skill_Manifestation_of_Terror                   = GetString(SI_LUIE_SKILL_MANIFESTATION_OF_TERROR_TP),
     Skill_Summon_Shade                              = GetString(SI_LUIE_SKILL_SUMMON_SHADE_TP),
+    Skill_Dark_Shade                                = GetString(SI_LUIE_SKILL_DARK_SHADE_TP),
     Skill_Shadow_Image                              = GetString(SI_LUIE_SKILL_SHADOW_IMAGE_TP),
     Skill_Hidden_Refresh                            = GetString(SI_LUIE_SKILL_HIDDEN_REFRESH_TP),
     Skill_Consuming_Darkness                        = GetString(SI_LUIE_SKILL_CONSUMING_DARKNESS_TP),
