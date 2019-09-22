@@ -799,9 +799,6 @@ Effects.EffectCreateSkillAura = {
     [126534] =  { consolidate = true, abilityId = 38794 }, -- Minor Endurance --> Forward Momentum
 
     -- Dual Wield
-    [28613] = { alwaysShow = true, removeOnEnd = true, abilityId = 123651, consolidateNewIdExtended = true }, -- Blade Cloak (Blade Cloak) -- Fake ID for Major Evasion
-    [38901] = { alwaysShow = true, removeOnEnd = true, abilityId = 123652, consolidateNewIdExtended = true }, -- Quick Cloak (Quick Cloak) -- Fake ID for Major Evasion
-    [38906] = { alwaysShow = true, removeOnEnd = true, abilityId = 123653, consolidateNewIdExtended = true }, -- Deadly Cloak (Deadly Cloak) -- Fake ID for Major Evasion
     [68807] = { consolidate = true, extendedDisplay = true, abilityId = 21157 }, -- Major Brutality (Hidden Blade)
     [126647] = { consolidate = true, extendedDisplay = true, abilityId = 38914 }, -- Major Brutality (Shrouded Daggers)
     [126670] = { consolidate = true, extendedDisplay = true, abilityId = 38910 }, -- Major Brutality (Flying Blade)
@@ -1074,9 +1071,7 @@ Effects.BarHighlightCheckOnFade = {
     [111788] = { id1 = 39114, id2 = 111788, unitTag = "reticleover" }, -- Major Fracture --> Deafening Roar / Major Fracture
 
     -- Mages Guild
-    [126370] = { id1 = 63223, unitTag = "player" }, -- Entropy --> Major Sorcery
     [126374] = { id1 = 63227, unitTag = "player" }, -- Degeneration --> Major Sorcery
-    [126371] = { id1 = 63231, unitTag = "player" }, -- Structured Entropy --> Major Sorcery
     [40449] = { id1 = 48136, unitTag = "player" }, -- Spell Symmetry
     [48141] = { id1 = 40443 , id2 = 80160, unitTag = "player" }, -- Balance --> Major Ward / Major Resolve
 
@@ -1347,12 +1342,12 @@ Effects.BarHighlightOverride = {
     ---------------------------
 
     [38807] = { newId = 61737, secondary = true }, -- Wrecking Blow --> Empower
-    [38814] = { newId = 38816 }, -- Dizzying Swing
+    [38814] = { newId = 131562, secondary = true }, -- Dizzying Swing --> Off Balance
     [38788] = { newId = 38791 }, -- Stampede
     [38745] = { newId = 38747 }, -- Carve
     [38754] = { newId = 38763 }, -- Brawler
     [28297] = { newId = 61670, noRemove = true }, -- Momentum --> Major Brutality
-    [38794] = { newId = 38797, noRemove = true }, -- Forward Momentum
+    [38794] = { newId = 38797 }, -- Forward Momentum
     [83216] = { newId = 83217 }, -- Berserker Strike
     [83229] = { newId = 83230 }, -- Onslaught
     [83238] = { newId = 83239 }, -- Berserker Rage
@@ -1396,7 +1391,7 @@ Effects.BarHighlightOverride = {
     [38687] = { newId = 38688 }, -- Focused Aim
     [28879] = { newId = 28888 }, -- Scatter Shot
     [38672] = { newId = 38675 }, -- Magnum Shot
-    [38669] = { newId = 38671 }, -- Draining Shot
+    [38669] = { newId = 131688 }, -- Draining Shot
     [38705] = { newId = 38706 }, -- Bombard
     [38701] = { newId = 38703 }, -- Acid Spray
     [28869] = { newId = 44540 }, -- Poison Arrow
@@ -4044,7 +4039,7 @@ Effects.EffectOverride = {
     -- Basic Attacks
     [16593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 20 }, -- Melee Snare -- TODO: Get Tooltip %
     [48532] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', hide = true }, -- Charge Snare
-    --[61737] = { tooltip = Tooltips.Skill_Empower }, -- Empower
+    [61737] = { tooltip = "" }, -- Empower
     [55080] = { hide = true }, -- Pet Hidden
     [28301] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', tooltip = Tooltips.Generic_CC_Immunity }, -- Crowd Control Immunity
     [38117] = { hide = true }, -- Crowd Control Immunity
@@ -5477,8 +5472,7 @@ Effects.EffectOverride = {
     -----------------------------------------
 
     -- Uppercut / Dizzying Swing / Wrecking Blow
-    [38816] = { tooltip = Tooltips.Generic_Knockback }, -- Dizzying Swing (Dizzying Swing)
-    [38818] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds' }, -- Dizzying Swing (Dizzying Swing)
+    [131562] = { tooltip = Abilities.Skill_Dizzying_Swing }, -- Off Balance (Dizzying Swing)
 
     -- Critical Charge / Stampede / Critical Rush
     [38791] = { tooltip = Tooltips.Skill_Stampede }, -- Stampede (Stampede)
@@ -5559,12 +5553,12 @@ Effects.EffectOverride = {
 
     -- Blade Cloak / Quick Cloak / Deadly Cloak
     [28613] = { tooltip = Tooltips.Skill_Blade_Cloak, tooltipValue2 = 2 }, -- Blade Cloak (Blade Cloak)
-    [123651] = { icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = Abilities.Skill_Blade_Cloak }, -- Major Evasion (Blade Cloak)
+    [123651] = { consolidateExtra = true, icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = Abilities.Skill_Blade_Cloak }, -- Major Evasion (Blade Cloak)
     [38901] = { tooltip = Tooltips.Skill_Blade_Cloak, tooltipValue2 = 2 }, -- Quick Cloak (Quick Cloak)
-    [123652] = { icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = Abilities.Skill_Quick_Cloak }, -- Major Evasion (Quick Cloak)
+    [123652] = { consolidateExtra = true, icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = Abilities.Skill_Quick_Cloak }, -- Major Evasion (Quick Cloak)
     [62531] = { tooltip = Abilities.Skill_Quick_Cloak }, -- Major Expedition (Quick Cloak)
     [38906] = { tooltip = Tooltips.Skill_Blade_Cloak, tooltipValue2 = 1 }, -- Deadly Cloak (Deadly Cloak)
-    [123653] = { icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = Abilities.Skill_Deadly_Cloak }, -- Major Evasion (Deadly Cloak)
+    [123653] = { consolidateExtra = true, icon = 'esoui/art/icons/ability_buff_major_evasion.dds', tooltip = Abilities.Skill_Deadly_Cloak }, -- Major Evasion (Deadly Cloak)
 
     -- Hidden Blade / Shrouded Daggers / Flying Blade
     [68807] = { consolidateExtra = true, tooltip = Abilities.Skill_Hidden_Blade }, -- Major Brutality (Hidden Blade)
@@ -5609,7 +5603,7 @@ Effects.EffectOverride = {
     -- Scatter Shot / Magnum Shot / Draining Shot
     [28888] = { tooltip = Tooltips.Generic_Knockback }, -- Scatter Shot (Scatter Shot)
     [38675] = { tooltip = Tooltips.Generic_Knockback }, -- Magnum Shot (Magnum Shot)
-    [38671] = { tooltip = Tooltips.Generic_Knockback }, -- Draining Shot (Draining Shot)
+    [131688] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 60 }, -- Draining Shot (Draining Shot)
     [80764] = { name = Abilities.Skill_Draining_Shot }, -- Draining Shot Heal (Draining Shot)
 
     -- Arrow Spray / Bombarb / Acid Spray
@@ -6124,13 +6118,11 @@ Effects.EffectOverride = {
 
     -- Entropy / Degeneration / Structured Entropy
     [126370] = { tooltip = Tooltips.Generic_Magic, tooltipValue2 = 2 }, -- Entropy
-    [63223] = { tooltip = Abilities.Skill_Entropy }, -- Major Sorcery
 
     [126374] = { tooltip = Tooltips.Skill_Degeneration }, -- Degeneration
     [63227] = { tooltip = Abilities.Skill_Degeneration }, -- Major Sorcery (Degeneration)
 
     [126371] = { tooltip = Tooltips.Skill_Structured_Entropy }, -- Structured Entropy
-    [63231] = { tooltip = Abilities.Skill_Structured_Entropy }, -- Major Sorcery (Structured Entropy)
 
     -- Fire Rune / Volcanic Rune / Scalding Rune
     [31632] = { tooltip = Tooltips.Skill_Fire_Rune }, -- Fire Rune (Fire Rune)

@@ -44,7 +44,7 @@ local AbilityTables = {
     Skill_Major_Gallop                = 57472,
     Skill_Minor_Heroism               = 62505,
     Skill_Major_Heroism               = 61709,
-    Skill_Minor_Toughness             = 46542,
+    Skill_Minor_Toughness             = 88492,
     Skill_Minor_Courage               = 121878,
     Skill_Major_Courage               = 66902,
 
@@ -786,7 +786,6 @@ local AbilityTables = {
     Skill_Radiant_Magelight           = 77960,
     Skill_Entropy                     = 28567,
     Skill_Degeneration                = 40457,
-    Skill_Structured_Entropy          = 40452,
     Skill_Balance                     = 40441,
     Skill_Meteor                      = 16536,
     Skill_Ice_Comet                   = 40489,

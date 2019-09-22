@@ -5072,8 +5072,7 @@ LUIE.DebugAuras = {
     [28279] = true, -- Uppercut (Uppercut)
 
     [38814] = true, -- Dizzying Swing (Dizzying Swing)
-    [38818] = true, -- Dizzying Swing (Dizzying Swing)
-    [38816] = true, -- Dizzying Swing (Dizzying Swing)
+    [131562] = true, -- Off Balance (Dizzying Swing)
 
     [38807] = true, -- Wrecking Blow (Wrecking Blow)
 
@@ -5435,8 +5434,7 @@ LUIE.DebugAuras = {
     [38674] = true, -- Scatter Shot (Magnum Shot)
 
     [38669] = true, -- Draining Shot (Draining Shot)
-    [38671] = true, -- Draining Shot (Draining Shot)
-    [38670] = true, -- Draining Shot (Draining Shot)
+    [131688] = true, -- Draining Shot (Draining Shot)
     [80767] = true, -- Draining Shot (Draining Shot)
     [80764] = true, -- Draining Shot Heal (Draining Shot)
 
@@ -6226,6 +6224,7 @@ LUIE.DebugAuras = {
 
     [33469] = true, -- Werewolf Stamina Recovery (Werewolf Transformation - All Morphs)
     [39033] = true, -- Werewolf Transform Setup (Werewolf Transformation - All Morphs)
+    [131323] = true, -- Werewolf Transform Setup (Werewolf Transformation - All Morphs)
     [39035] = true, -- Werewolf (Werewolf Transformation - All Morphs)
     [39023] = true, -- Werewolf Resource Bar Setup (Werewolf Transformation - All Morphs)
     [39025] = true, -- Charge Werewolf (Werewolf Transformation - All Morphs)
@@ -6471,17 +6470,14 @@ LUIE.DebugAuras = {
 
     [28567] = true, -- Entropy (Entropy)
     [126370] = true, -- Entropy (Entropy)
-    [63223] = true, -- Major Sorcery (Entropy)
 
     [40457] = true, -- Degeneration (Degeneration)
     [126374] = true, -- Degeneration (Degeneration)
     [63227] = true, -- Major Sorcery (Degeneration)
-    [40464] = true, -- Degeneration (Degeneration)
 
     [40452] = true, -- Structured Entropy (Structured Entropy)
     [126371] = true, -- Structured Entropy (Structured Entropy)
     [40456] = true, -- Structured Entropy (Structured Entropy)
-    [63231] = true, -- Major Sorcery (Structured Entropy)
     [40454] = true, -- Structured Entropy (Structured Entropy)
 
     [31637] = true, -- Only 1 Fire Rune (Fire Rune - All Ranks)
