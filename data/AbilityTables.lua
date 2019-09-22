@@ -540,6 +540,7 @@ local AbilityTables = {
     Skill_Summon_Charged_Atronach     = 23495,
     Skill_Charged_Lightning           = 102310,
     Skill_Atronach_Zap                = 23428,
+    Skill_Bound_Armaments             = 24165,
     Skill_Bound_Aegis                 = 24163,
     Skill_Lightning_Form              = 23210,
     Skill_Hurricane                   = 23231,

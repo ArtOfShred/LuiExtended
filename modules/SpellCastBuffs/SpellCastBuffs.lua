@@ -418,13 +418,6 @@ function SpellCastBuffs.Initialize(enabled)
 
     -- Debug
     SpellCastBuffs.RegisterDebugEvents()
-
-    -- Enable Bar function for Bound Armor if the player is a Sorcerer
-    if GetUnitClassId('player') == 2 then
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, SpellCastBuffs.DrawBoundAegisBuffs)
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED, SpellCastBuffs.DrawBoundAegisBuffs)
-        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED, SpellCastBuffs.DrawBoundAegisBuffs)
-    end
 end
 
 function SpellCastBuffs.RegisterWerewolfEvents()
@@ -2579,10 +2572,6 @@ function SpellCastBuffs.ReloadEffects(unitTag)
         if SpellCastBuffs.SV.ShowRecall and not SpellCastBuffs.SV.HidePlayerDebuffs then
             SpellCastBuffs.ShowRecallCooldown()
         end
-        -- Draw Bound Aegis buffs if player is Sorcerer
-        if GetUnitClassId("player") == 2 then
-            SpellCastBuffs.DrawBoundAegisBuffs()
-        end
     end
 
     -- TARGET SPECIFIC
@@ -3058,11 +3047,6 @@ function SpellCastBuffs.OnPlayerActivated(eventCode)
         end
     end
 
-    -- Add Bound Aegis buffs if player has it slotted
-    if GetUnitClassId("player") == 2 then
-        SpellCastBuffs.DrawBoundAegisBuffs()
-    end
-
     -- Sets the player to dead if reloading UI or loading in while dead.
     if IsUnitDead("player") then
         g_playerDead = true
@@ -3134,28 +3118,6 @@ function SpellCastBuffs.OnVibration(eventCode, duration, coarseMotor, fineMotor,
     else
         -- This event does not seem to have anything to do with player self-resurrection
         g_playerResurrectStage = nil
-    end
-end
-
--- Runs on EVENT_ACTION_SLOT_UPDATED / EVENT_ACTION_SLOTS_ALLHOTBARS_UPDATED / EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED
--- Creates Minor Resolve buff for Bound Aegis
-function SpellCastBuffs.DrawBoundAegisBuffs()
-    SpellCastBuffs.EffectsList["player1"][999008] = nil
-
-    -- If we have Consolidate enabled then don't create these auras
-    if SpellCastBuffs.SV.ExtraConsolidate then return end
-
-    for slotNum = 3, 8 do
-        local abilityId = GetSlotBoundId(slotNum)
-        if abilityId == 24163 then
-            SpellCastBuffs.EffectsList["player1"][999008] = {
-                target ="player", type=1,
-                id=999008, icon = 'esoui/art/icons/ability_buff_minor_resolve.dds', name = Abilities.Skill_Minor_Resolve,
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "long",
-                restart=true, iconNum=0,
-            }
-        end
     end
 end
 

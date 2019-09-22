@@ -571,6 +571,7 @@ LUIE.Data.Tooltips = {
     Skill_Bound_Armor                               = GetString(SI_LUIE_SKILL_BOUND_ARMOR_TP),
     Skill_Bound_Armaments_Skill                     = GetString(SI_LUIE_SKILL_BOUND_ARMAMENTS_SKILL_TP),
     Skill_Bound_Armaments_Stack                     = GetString(SI_LUIE_SKILL_BOUND_ARMAMENTS_STACK_TP),
+    Skill_Bound_Aegis                               = GetAbilityDescription(24163),
     Skill_Atronach_Zap                              = GetString(SI_LUIE_SKILL_ATRONACH_ZAP_TP),
     Skill_Storm_Atronach                            = GetString(SI_LUIE_SKILL_STORM_ATRONACH_TP),
     Skill_Charged_Atronach                          = GetString(SI_LUIE_SKILL_CHARGED_ATRONACH_TP),

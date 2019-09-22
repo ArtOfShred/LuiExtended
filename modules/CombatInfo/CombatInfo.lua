@@ -246,6 +246,7 @@ local g_potionFont -- Font for Potion Timer Label
 local g_ultimateFont -- Font for Ultimate Percentage Label
 local g_castbarFont -- Font for Castbar Label & Timer
 local g_ProcSound -- Proc Sound
+local g_boundArmamentsPlayed  = false -- Specific variable to lockout Bound Armaments from playing a proc sound at 5 stacks to only once per 5 seconds.
 
 -- Quickslot
 local uiQuickSlot   = {
@@ -1129,8 +1130,16 @@ function CombatInfo.OnEffectChanged(eventCode, changeType, effectSlot, effectNam
                 if CombatInfo.SV.ShowTriggered then
                     -- Play sound twice so its a little louder.
                     if CombatInfo.SV.ProcEnableSound and unitTag == "player" then
-                        PlaySound(g_procSound)
-                        PlaySound(g_procSound)
+                        if abilityId == 130293 and stackCount ~= 4 then
+                            g_boundArmamentsPlayed = false
+                        end
+                        if abilityId ~= 130293 or (abilityId == 130293 and stackCount == 4 and not g_boundArmamentsPlayed) then
+                            PlaySound(g_procSound)
+                            PlaySound(g_procSound)
+                            if abilityId == 130293 then
+                                g_boundArmamentsPlayed = true
+                            end
+                        end
                     end
                     g_triggeredSlotsRemain[abilityId] = 1000 * endTime
                     CombatInfo.PlayProcAnimations(g_triggeredSlots[abilityId])

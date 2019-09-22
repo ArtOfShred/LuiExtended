@@ -90,6 +90,7 @@ Effects.IsAbilityProc = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.HasAbilityProc = {
     [Abilities.Skill_Crystal_Fragments]     = 46327,
+    [Abilities.Skill_Bound_Armaments]       = 130293,
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -781,6 +782,9 @@ Effects.EffectCreateSkillAura = {
     [124703] = { removeOnEnd = true, consolidate = true, abilityId = 26821 }, -- Minor Endurance (Repentance)
     [22236] = { consolidate = true, extendedDisplay = true, abilityId = 22234 }, -- Major Resolve (Rune Focus)
 
+    -- Sorcerer
+    [108855] = { removeOnEnd = true, consolidate = true, extendedDisplay = true, abilityId = 999008 }, -- Bound Aegis (Bound Aegis)
+
     -- Warden
     [86267] = { consolidate = true, abilityId = 86037 }, -- Major Expedition --> Falcon's Swiftness
     [89076] = { consolidate = true, abilityId = 86041 }, -- Major Expedition --> Deceptive Predator
@@ -938,7 +942,6 @@ Effects.BarHighlightExtraId = {
     -- Sorcerer
     [24576] = 24574, -- Defensive Rune
     [89491] = 24330, -- Haunting Curse
-    [130293] = 24165, -- Bound Armaments
 
     -- Warden
     [130140] = 130139, -- Cutting Dive --> Off-Balance
@@ -1207,7 +1210,6 @@ Effects.BarHighlightOverride = {
     [23634] = { newId = 80459 }, -- Summon Storm Atronach
     [23492] = { newId = 80463 }, -- Greater Storm Atronach
     [23495] = { newId = 80468 }, -- Summon Charged Atronach
-    [130291] = { newId = 24165 }, -- Bound Armaments
 
     -- Storm Calling
     [18718] = { newId = 18746 }, -- Mages' Fury
@@ -4643,9 +4645,10 @@ Effects.EffectOverride = {
     [24158] = { tooltip = Tooltips.Skill_Bound_Armor }, -- Bound Armor (Bound Armor)
     [24165] = { tooltip = Tooltips.Skill_Bound_Armaments_Skill }, -- Bound Armaments (Bound Armaments)
     [130293] = { icon = 'esoui/art/icons/ability_sorcerer_bound_armaments_proc.dds', tooltip = Tooltips.Skill_Bound_Armaments_Stack }, -- Bound Armaments (Bound Armaments)
+    [108855] = { icon = 'esoui/art/icons/ability_buff_minor_resolve.dds', name = Abilities.Skill_Minor_Resolve, tooltip = Abilities.Skill_Bound_Aegis }, -- Bound Aegis (Bound Aegis)
     [24163] = { tooltip = Tooltips.Skill_Bound_Armor }, -- Bound Aegis (Bound Aegis)
 
-    [999008] = { icon = 'esoui/art/icons/ability_buff_minor_resolve.dds', name = Abilities.Skill_Minor_Resolve, tooltip = Abilities.Skill_Bound_Aegis }, -- Bound Aegis FAKE ID
+    [999008] = { icon = 'esoui/art/icons/ability_sorcerer_bound_aegis.dds', name = Abilities.Skill_Bound_Aegis, tooltip = Tooltips.Skill_Bound_Aegis }, -- Bound Aegis FAKE ID
 
     -- Summon Storm Atronach / Greater Storm Atronach / Summon Charged Atronach
     [48078] = { tooltip = Abilities.Skill_Charged_Lightning }, -- Major Berserk (Charged Lightning Synergy)
