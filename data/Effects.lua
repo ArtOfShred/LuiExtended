@@ -89,7 +89,7 @@ Effects.IsAbilityProc = {
 -- List of abilities flagged to display a Proc highlight / sound notification when an ability with a matching name appears as a buff.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.HasAbilityProc = {
-    [Abilities.Skill_Crystal_Fragments]   = 46327,
+    [Abilities.Skill_Crystal_Fragments]     = 46327,
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -6806,9 +6806,8 @@ Effects.EffectOverride = {
     [14926] = { icon = 'esoui/art/icons/ability_warrior_011.dds', name = Abilities.Skill_Shield_Rush, tooltip = Tooltips.Generic_Knockdown }, -- Charge (Brute)
 
     -- Ravager (2H)
-    [29378] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = Abilities.Skill_Dizzying_Swing }, -- Uppercut (Ravager)
-    [29379] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = Abilities.Skill_Dizzying_Swing, tooltip = Tooltips.Generic_Knockback }, -- Uppercut (Ravager)
-    [29380] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = Abilities.Skill_Dizzying_Swing, hide = true }, -- Uppercut (Ravager)
+    [29379] = { icon = 'esoui/art/icons/ability_2handed_001.dds', tooltip = Tooltips.Generic_Knockback }, -- Uppercut (Ravager)
+    [29380] = { icon = 'esoui/art/icons/ability_2handed_001.dds', hide = true }, -- Uppercut (Ravager)
     [29035] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Rogue/Skirmisher)
     [28408] = { icon = 'esoui/art/icons/ability_dualwield_005.dds' }, -- Whirlwind (Rogue/Skirmisher)
     [12381] = { icon = 'esoui/art/icons/ability_rogue_063.dds' }, -- Assassinate (Rogue/Skirmisher)
@@ -8719,9 +8718,8 @@ Effects.EffectOverride = {
     [63269] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = Abilities.Skill_Wall_of_Flames }, -- Heat Wave
     [63270] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = Abilities.Skill_Wall_of_Flames, hide = true }, -- Heat Wave
     [63737] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds' }, -- Heavy Attack (Dremora Churl)
-    [63684] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = Abilities.Skill_Dizzying_Swing }, -- Uppercut (Dremora Caitiff)
-    [63685] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = Abilities.Skill_Dizzying_Swing, tooltip = Tooltips.Generic_Knockback }, -- Uppercut Stun (Dremora Caitiff)
-    [63686] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = Abilities.Skill_Dizzying_Swing }, -- Uppercut (Dremora Caitiff)
+    [63685] = { icon = 'esoui/art/icons/ability_2handed_001.dds', name = Abilities.Skill_Uppercut, tooltip = Tooltips.Generic_Knockback }, -- Uppercut Stun (Dremora Caitiff)
+    [63686] = { icon = 'esoui/art/icons/ability_2handed_001.dds' }, -- Uppercut (Dremora Caitiff)
     [63761] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds' }, -- Pound (Feral Soul Shriven)
     [63752] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Feral Soul Shriven)
     [63753] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Feral Soul Shriven)
@@ -9695,9 +9693,9 @@ Effects.EffectOverride = {
     [53241] = { icon = 'esoui/art/icons/ability_2handed_002_b.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Brawler (Yavni Frost-Skin)
     [53243] = { icon = 'esoui/art/icons/ability_2handed_002_b.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Brawler (Yavni Frost-Skin)
 
-    [53250] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = Abilities.Skill_Dizzying_Swing }, -- Wrecking Blow (Yavni Frost-Skin)
-    [53252] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = Abilities.Skill_Dizzying_Swing }, -- Wrecking Blow (Yavni Frost-Skin)
-    [53253] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = Abilities.Skill_Dizzying_Swing, tooltip = Tooltips.Generic_Knockback }, -- Wrecking Blow (Yavni Frost-Skin)
+    [53250] = { icon = 'esoui/art/icons/ability_2handed_001_b.dds' }, -- Wrecking Blow (Yavni Frost-Skin)
+    [53252] = { icon = 'esoui/art/icons/ability_2handed_001_b.dds' }, -- Wrecking Blow (Yavni Frost-Skin)
+    [53253] = { icon = 'esoui/art/icons/ability_2handed_001_b.dds', tooltip = Tooltips.Generic_Knockback }, -- Wrecking Blow (Yavni Frost-Skin)
     [53255] = { hide = true }, -- Wrecking Blow (Yavni Frost-Skin)
     [53256] = { hide = true }, -- Wrecking Blow (Yavni Frost-Skin)
 
@@ -10111,9 +10109,9 @@ Effects.EffectOverride = {
     [72195] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_hammer.dds' }, -- Thunder Hammer (Scavenger Thunder-Smith)
     [72196] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_hammer.dds' }, -- Thunder Hammer (Scavenger Thunder-Smith)
 
-    [72198] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = Abilities.Skill_Dizzying_Swing }, -- Wrecking Blow (Scavenger Thunder-Smith)
-    [72200] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = Abilities.Skill_Dizzying_Swing }, -- Wrecking Blow (Scavenger Thunder-Smith)
-    [72201] = { icon = 'esoui/art/icons/ability_2handed_001_a.dds', name = Abilities.Skill_Dizzying_Swing, tooltip = Tooltips.Generic_Knockback }, -- Wrecking Blow (Scavenger Thunder-Smith)
+    [72198] = { icon = 'esoui/art/icons/ability_2handed_001_b.dds' }, -- Wrecking Blow (Scavenger Thunder-Smith)
+    [72200] = { icon = 'esoui/art/icons/ability_2handed_001_b.dds' }, -- Wrecking Blow (Scavenger Thunder-Smith)
+    [72201] = { icon = 'esoui/art/icons/ability_2handed_001_b.dds', tooltip = Tooltips.Generic_Knockback }, -- Wrecking Blow (Scavenger Thunder-Smith)
 
     [72202] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_overcharge.dds', name = Abilities.Skill_Voltaic_Overload, tooltip = Tooltips.Skill_Voltaic_Overload }, -- Overcharge (Scavenger Thunder-Smith)
     [72203] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_overcharge.dds', name = Abilities.Skill_Voltaic_Overload }, -- Overcharge (Scavenger Thunder-Smith)

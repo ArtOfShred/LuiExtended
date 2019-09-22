@@ -679,6 +679,7 @@ local AbilityTables = {
     Skill_Frost_Pulsar                = 39163,
 
     -- Two-Handed
+    Skill_Uppercut                    = 28279,
     Skill_Dizzying_Swing              = 38814,
     Skill_Stampede                    = 38788,
     Skill_Cleave                      = 20919,

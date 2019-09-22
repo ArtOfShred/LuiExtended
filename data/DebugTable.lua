@@ -4318,11 +4318,13 @@ LUIE.DebugAuras = {
     [131346] = true, -- Major Brutality (Betty Netch)
     [87929] = true, -- Major Sorcery (Betty Netch)
     [86106] = true, -- Betty Netch (Betty Netch)
+    [131345] = true, -- Blue Betty (Betty Netch)
 
     [86054] = true, -- Blue Betty (Blue Betty)
     [131350] = true, -- Major Brutality (Blue Betty)
     [89107] = true, -- Major Sorcery (Blue Betty)
     [89106] = true, -- Blue Betty (Blue Betty)
+    [87933] = true, -- Blue Betty (Blue Betty)
     [114854] = true, -- Betty Netch (Blue Betty)
 
     [86058] = true, -- Bull Netch (Bull Netch)
@@ -4330,6 +4332,7 @@ LUIE.DebugAuras = {
     [95125] = true, -- Major Sorcery (Bull Netch)
     [89109] = true, -- Bull Netch (Bull Netch)
     [86103] = true, -- Bull Netch (Bull Netch)
+    [131351] = true, -- Blue Betty (Bull Netch)
     [114853] = true, -- Bull Netch (Bull Netch)
 
     [86037] = true, -- Falcon's Swiftness (Falcon's Swiftness)
@@ -7569,6 +7572,7 @@ LUIE.DebugAuras = {
     [63093] = true, -- Charge
     [63094] = true, -- Shield Charge
     [63198] = true, -- Fiery Chain
+    [63199] = true, -- Fiery Chain
     [63200] = true, -- Firey Chain
     [63911] = true, -- Guard Stacking Damage
     [64134] = true, -- JUST Guard Evade
