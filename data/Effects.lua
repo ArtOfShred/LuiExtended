@@ -407,6 +407,11 @@ Effects.DebuffDisplayOverrideId = {
     [31562] = true, -- Supernova (Nova Synergy)
     [34443] = true, -- Gravity Crush (Solar Prison Synergy)
 
+    -- Warden
+    [89129] = true, -- Crushing Swipe (Feral Guardian)
+    [105908] = true, -- Crushing Swipe (Eternal Guardian)
+    [92666] = true, -- Crushing Swipe (Wild Guardian)
+
     -- Necromancer
     [118618] = true, -- Pure Agony (Agony Totem)
 
@@ -747,10 +752,10 @@ Effects.EffectCreateSkillAura = {
     [61884] = { removeOnEnd = false, consolidate = true, abilityId = 32744 }, -- Major Fortitude --> Green Dragon Blood
     [91670] = { removeOnEnd = false, consolidate = true, abilityId = 32744 }, -- Minor Vitality --> Green Dragon Blood
     [91674] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 32722 }, -- Major Fortitude --> Coagulating Blood
-    [92507] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 29043 }, -- Major Sorcery --> Molten Weapons
+    [131340] = { removeOnEnd = false, consolidate = true, abilityId = 29043 }, -- Major Brutality --> Molten Weapons
+    [92507] = { removeOnEnd = false, consolidate = true, abilityId = 29043 }, -- Major Sorcery --> Molten Weapons
     [76518] = { removeOnEnd = false, consolidate = true, abilityId = 31874 }, -- Major Brutality --> Igneous Weapons
     [92503] = { removeOnEnd = false, consolidate = true, abilityId = 31874 }, -- Major Sorcery --> Igneous Weapons
-    [31818] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 31816 }, -- Minor Resolve (Stone Giant)
 
     -- Nightblade
     [90587] = { removeOnEnd = false, consolidate = true, extendedDisplay = true, abilityId = 33375 }, -- Major Evasion --> Blur
@@ -774,8 +779,7 @@ Effects.EffectCreateSkillAura = {
     [124701] = { removeOnEnd = true, consolidate = true, abilityId = 26821 }, -- Minor Fortitude (Repentance)
     [124702] = { removeOnEnd = true, consolidate = true, abilityId = 26821 }, -- Minor Intellect (Repentance)
     [124703] = { removeOnEnd = true, consolidate = true, abilityId = 26821 }, -- Minor Endurance (Repentance)
-    [22236] = { consolidate = true, abilityId = 22234 }, -- Major Resolve (Rune Focus)
-    [44820] = { consolidate = true, abilityId = 22234 }, -- Major Ward (Rune Focus)
+    [22236] = { consolidate = true, extendedDisplay = true, abilityId = 22234 }, -- Major Resolve (Rune Focus)
 
     -- Warden
     [86267] = { consolidate = true, abilityId = 86037 }, -- Major Expedition --> Falcon's Swiftness
@@ -784,11 +788,8 @@ Effects.EffectCreateSkillAura = {
     [86300] = { consolidate = true, abilityId = 85862 }, -- Minor Intellect (Enchanted Growth)
     [87019] = { consolidate = true, abilityId = 85862 }, -- Minor Endurance (Enchanted Growth)
     [86224] = { consolidate = true, abilityId = 86122 }, -- Major Resolve --> Frost Cloak
-    [86225] = { consolidate = true, abilityId = 86122 }, -- Major Ward --> Frost Cloak
     [88758] = { consolidate = true, abilityId = 86126 }, -- Major Resolve --> Expansive Frost Cloak
-    [88759] = { consolidate = true, abilityId = 86126 }, -- Major Ward --> Expansive Frost Cloak
     [88761] = { consolidate = true, abilityId = 86130 }, -- Major Resolve --> Ice Fortress
-    [88762] = { consolidate = true, abilityId = 86130 }, -- Major Ward --> Ice Fortress
     [87194] = { consolidate = true, abilityId = 86130 }, -- Minor Protection --> Ice Fortress
 
     -- Two Handed
@@ -874,9 +875,6 @@ Effects.EffectCreateSkillAura = {
 --------------------------------------------------------------------------------------------------------------------------------
 function Effects.BarHighlightRefresh()
     if LUIE.CombatInfo.SV.ShowToggledSecondary then
-        -- Dragonknight
-        Effects.BarHighlightOverride[31816] = { newId = 31818, showFakeAura = true, secondary = true, noRemove = true } -- Stone Giant --> Minor Resolve
-
         -- Nightblade
         Effects.BarHighlightOverride[25255] = { newId = 25256, secondary = true } -- Veiled Strike --> Off Balance
         Effects.BarHighlightOverride[25267] = { newId = 34737, secondary = true } -- Concealed Weapon --> Off Balance
@@ -888,9 +886,6 @@ function Effects.BarHighlightRefresh()
         Effects.BarHighlightOverride[85132] = { newId = 85154, showFakeAura = true, secondary = true, noRemove = true } -- Light's Champion --> Major Force
 
     else
-        -- Dragonknight
-        Effects.BarHighlightOverride[31816] = { newId = 31817} -- Stone Giant
-
         -- Nightblade
         Effects.BarHighlightOverride[25255] = { newId = 33185 } -- Veiled Strike
         Effects.BarHighlightOverride[25267] = { newId = 34736 } -- Concealed Weapon
@@ -922,7 +917,17 @@ Effects.AddNoDurationBarHighlight = {
 Effects.BarHighlightExtraId = {
 
     -- Dragonknight
+    [48946] = 31103, -- Major Fracture --> Noxious Breath
     [109206] = 108679, -- Empower --> Empower (Empowering Chains)
+    [20253] = 31898, -- Burning Talons
+    [20528] = 31899, -- Choking Talons --> Minor Maim
+    [131340] = 92507, -- Major Brutality --> Major Sorcery (Molten Weapons)
+    [76518] = 92503, -- Major Brutality --> Major Sorcery (Igneous Weapons)
+    [61785] = 32685, -- Fossilize
+    [108813] = 32678, -- Shattering Rocks
+
+    [130427] = 29034, -- Stonefist
+    [130442] = 31817, -- Stone Giant
 
     -- Nightblade
     [124806] = 35336, -- Minor Vulnerability --> Lotus Fan
@@ -936,13 +941,16 @@ Effects.BarHighlightExtraId = {
     -- Sorcerer
     [24576] = 24574, -- Defensive Rune
     [89491] = 24330, -- Haunting Curse
+    [130293] = 24165, -- Bound Armaments
 
     -- Warden
-    [101948] = 101944, -- Growing Swarm
+    [130140] = 130139, -- Cutting Dive --> Off-Balance
+
+    [130155] = 101703, -- Minor Vulnerability --> Swarm
+    [130168] = 101904, -- Minor Vulnerability --> Fetcher Infection
+    [130173] = 101944, -- Minor Vulnerability --> Growing Swarm
+
     [86300] = 87019, -- Enchanted Growth --> Minor Endurance
-    [86225] = 86224, -- Major Ward --> Major Resolve (Frost Cloak)
-    [88759] = 88758, -- Major Ward --> Major Resolve (Expansive Frost Cloak)
-    [88762] = 88761, -- Major Ward --> Major Resolve (Ice Fortress)
     [87194] = 88761, -- Minor Protection --> Major Resolve (Ice Fortress)
 
     -- Necromancer
@@ -1002,7 +1010,13 @@ Effects.BarHighlightExtraId = {
 Effects.BarHighlightCheckOnFade = {
 
     -- Dragonknight
+    [31103] = { id1 = 48946, id2 = 31103, unitTag = "reticleover"}, -- Noxious Breath --> Major Fracture / Noxious Breath
     [108679] = { id1 = 109206, id2 = 76506, unitTag = "player" }, -- Empower --> Empower / Major Expedition
+    [108798] = { id1 = 21014, unitTag = "player" }, -- Reflective Plate --> Snare Removal
+    [31898] = { id1 = 20253, id2 = 31898, unitTag = "reticleover" }, -- Burning Talons
+    [31899] = { id1 = 20528, id2 = 31899, unitTag = "reticleover" }, -- Minor Maim --> Choking Talons / Minor Maim
+    [29034] = { id1 = 29034, unitTag = "reticleover" }, -- Stonefist
+    [31817] = { id1 = 31817, unitTag = "reticleover" }, -- Stone Giant
 
     -- Nightblade
     [35336] = { id1 = 124806, id2 = 35336, unitTag = "reticleover" }, -- Lotus Fan --> Minor Vulnerability / Lotus Fan
@@ -1010,7 +1024,14 @@ Effects.BarHighlightCheckOnFade = {
     [36967] = { id1 = 36973, unitTag = "player" }, -- Reaper's Mark --> Major Berserk
     [125314] = { id1 = 90620, unitTag = "player" }, -- Phantasmal Escape --> Major Evasion
 
+    -- Sorcerer
+    [24165] = { id1 = 24165, unitTag = "player" }, -- Bound Armaments
+
     -- Warden
+    [130139] = { id1 = 130140, id2 = 130139, unitTag = "reticleover" }, -- Off-Balance --> Cutting Dive / Off-Balance
+    [101703] = { id1 = 130155, id2 = 101703, unitTag = "reticleover" }, -- Swarm --> Minor Vulnerability / Swarm
+    [101904] = { id1 = 130168, id2 = 101904, unitTag = "reticleover" }, -- Fetcher Infection --> Minor Vulnerability / Fetcher Infection
+    [101944] = { id1 = 130173, id2 = 101944, unitTag = "reticleover" }, -- Growing Swarm --> Minor Vulnerability / Growing Swarm
     [85552] = { id1 = 85552, unitTag = "player" }, -- Living Vines (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
     [85850] = { id1 = 85850, unitTag = "player" }, -- Leeching Vines (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
     [85851] = { id1 = 85851, unitTag = "player" }, -- Living Trellis (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
@@ -1088,6 +1109,7 @@ Effects.BarHighlightOverride = {
     [23806] = { newId = 23808, secondary = true }, -- Lava Whip --> Off Balance
     [20805] = { newId = 122658 }, -- Molten Whip --> Seething Fury
     [20816] = { newId = 34117, secondary = true }, -- Flame Lash --> Off Balance
+    [20824] = { newId = 34117, secondary = true }, -- Flame Lash --> Off Balance
     [20657] = { newId = 44363 }, -- Searing Strike
     [20668] = { newId = 44369 }, -- Venomous Claw
     [20660] = { newId = 44373 }, -- Burning Embers
@@ -1102,10 +1124,11 @@ Effects.BarHighlightOverride = {
     -- Draconic Power
     [20245] = { newId = 20527 }, -- Dark Talons
     [20252] = { newId = 31898 }, -- Burning Talons
-    [20251] = { newId = 20528 }, -- Choking Talons
+    [20251] = { newId = 31899 }, -- Choking Talons --> Minor Maim
     [29004] = { showFakeAura = true, noRemove = true }, -- Dragon Blood
     [32744] = { showFakeAura = true, noRemove = true }, -- Green Dragon Blood
     [32722] = { showFakeAura = true, noRemove = true }, -- Coagulating Blood
+    [21014] = { newId = 108798 }, -- Reflective Plate --> Snare Removal
     [31837] = { newId = 31841, showFakeAura = true }, -- Inhale
     [32792] = { newId = 32796, showFakeAura = true }, -- Deep Breath
     [32785] = { newId = 32788, showFakeAura = true }, -- Draw Essence
@@ -1115,10 +1138,9 @@ Effects.BarHighlightOverride = {
 
     -- Earthen Heart
     [29032] = { newId = 29034}, -- Stonefist
-    [31820] = { newId = 31821}, -- Obsidian Shard
     [31816] = { newId = 31817}, -- Stone Giant
-    [29043] = { newId = 92507, showFakeAura = true, noRemove = true }, -- Molten Weapons --> Major Sorcery
-    [31874] = { newId = 92503, showFakeAura = true, noRemove = true }, -- Igneous Weapons --> Major Sorcery
+    [29043] = { newId = 92507, noRemove = true }, -- Molten Weapons --> Major Sorcery
+    [31874] = { newId = 92503, noRemove = true }, -- Igneous Weapons --> Major Sorcery
     [31888] = { newId = 76537 }, -- Molten Armaments
 
     ---------------------------
@@ -1190,6 +1212,7 @@ Effects.BarHighlightOverride = {
     [23634] = { newId = 80459 }, -- Summon Storm Atronach
     [23492] = { newId = 80463 }, -- Greater Storm Atronach
     [23495] = { newId = 80468 }, -- Summon Charged Atronach
+    [130291] = { newId = 24165 }, -- Bound Armaments
 
     -- Storm Calling
     [18718] = { newId = 18746 }, -- Mages' Fury
@@ -1197,16 +1220,14 @@ Effects.BarHighlightOverride = {
     [19109] = { newId = 19118 }, -- Endless Fury
     [23234] = { newId = 23235 }, -- Bolt Escape
     [23236] = { newId = 28482 }, -- Streak
-    [23277] = { newId = 23278 }, -- Ball of Lightning
+    [23277] = { newId = 131383 }, -- Ball of Lightning
 
     ---------------------------
     -- Templar ----------------
     ---------------------------
 
     -- Aedric Spear
-    [26114] = { newId = 76908, duration = 2000, showFakeAura = true, noRemove = true }, -- Puncturing Strikes
     [26792] = { newId = 26795, noRemove = true }, -- Biting Jabs --> Major Savagery
-    [26797] = { newId = 76916, duration = 2000, showFakeAura = true, noRemove = true }, -- Puncturing Sweep
     [26158] = { newId = 37409 }, -- Piercing Javelin
     [26800] = { newId = 37414 }, -- Aurora Javelin
     [26804] = { newId = 32099 }, -- Binding Javelin
@@ -1255,6 +1276,11 @@ Effects.BarHighlightOverride = {
     ---------------------------
 
     -- Animal Companions
+
+    [85995] = { newId = 130129, secondary = true }, -- Dive --> Off-Balance
+    [85999] = { newId = 130139 }, -- Cutting Dive --> Off-Balance
+    [86003] = { newId = 130145, secondary = true }, -- Screaming Cliff Racer --> Off-Balance
+
     [86023] = { newId = 101703 }, -- Swarm
     [86027] = { newId = 101904 }, -- Fetcher Infection
     [86031] = { newId = 101944 }, -- Growing Swarm
@@ -2367,6 +2393,10 @@ Effects.EffectHideSCT = {
     [80261] = true, -- Sacred Ground (Sacred Ground) - Rite of Passage
 
     -- Actives
+    [76908] = true, -- Puncturuing Strikes
+    [76912] = true, -- Biting Jabs
+    [76916] = true, -- Puncturing Sweep
+
     [37009] = true, -- Channeled Focus (Channeled Focus)
     [114842] = true, -- Restoring Focus (Restoring Focus)
 
@@ -2374,7 +2404,6 @@ Effects.EffectHideSCT = {
     -- Warden
     ----------------------------
 
-    [114852] = true, -- Betty Netch (Betty Netch)
     [114854] = true, -- Betty Netch (Blue Betty)
     [114853] = true, -- Bull Netch (Bull Netch)
     [86238] = true, -- Impaling Shards (Impaling Shards)
@@ -2383,7 +2412,6 @@ Effects.EffectHideSCT = {
     [86250] = true, -- Sleet Storm (Sleet Storm)
     [88858] = true, -- Northern Storm (Northern Storm)
     [88861] = true, -- Permafrost (Permafrost)
-    [90943] = true, -- Permafrost (Permafrost)
 
     ----------------------------
     -- Necromancer
@@ -3966,7 +3994,7 @@ Effects.EffectOverride = {
     [69293] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', name = Abilities.Innate_Recall }, -- Recall
     [14644] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = Abilities.Innate_Revive }, -- Revive (Death Dialogue)
     [31221] = { hide = true }, -- Skyshard Collect (Aura on Skyshard when player collects it)
-    [32346] = { icon = 'esoui/art/icons/ability_mage_050.dds', name = Abilities.Innate_Absorbing_Skyshard, unbreakable = 1}, -- Skyshard Collect
+    [32346] = { icon = 'achievement_u24_smallzone_skyshard.dds', name = Abilities.Innate_Absorbing_Skyshard, unbreakable = 1}, -- Skyshard Collect
     [63601] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds', tooltip = Tooltips.Innate_ESO_Plus }, -- ESO Plus Member
     [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', hide = true }, -- Ritual of Mara
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = "" }, -- Off-Balance
@@ -4172,15 +4200,12 @@ Effects.EffectOverride = {
 
     -- Spiked Armor / Hardened Armor / Volatile Armor
     [20319] = { tooltip = Tooltips.Skill_Spiked_Armor }, -- Spiked Armor (Spiked Armor)
-    [61815] = { consolidate = true, tooltip = Abilities.Skill_Spiked_Armor }, -- Major Resolve (Spiked Armor)
-    [61816] = { consolidate = true, tooltip = Abilities.Skill_Spiked_Armor }, -- Major Ward (Spiked Armor)
+    [61815] = { consolidateExtra = true, tooltip = Abilities.Skill_Spiked_Armor }, -- Major Resolve (Spiked Armor)
     [20328] = { tooltip = Tooltips.Skill_Hardened_Armor }, -- Hardened Armor (Hardened Armor)
-    [61827] = { consolidate = true, tooltip = Abilities.Skill_Hardened_Armor }, -- Major Resolve (Hardened Armor)
-    [61828] = { consolidate = true, tooltip = Abilities.Skill_Hardened_Armor }, -- Major Ward (Hardened Armor)
+    [61827] = { consolidateExtra = true, tooltip = Abilities.Skill_Hardened_Armor }, -- Major Resolve (Hardened Armor)
     [31808] = { tooltip = Tooltips.Generic_Damage_Shield_Duration, hideReduce = true }, -- Hardened Armor (Hardened Armor)
     [20323] = { tooltip = Tooltips.Skill_Spiked_Armor }, -- Volatile Armor (Volatile Armor)
-    [61836] = { consolidate = true, tooltip = Abilities.Skill_Volatile_Armor }, -- Major Resolve (Volatile Armor)
-    [61837] = { consolidate = true, tooltip = Abilities.Skill_Volatile_Armor }, -- Major Ward (Volatile Armor)
+    [61836] = { consolidateExtra = true, tooltip = Abilities.Skill_Volatile_Armor }, -- Major Resolve (Volatile Armor)
     [20326] = { tooltip = Tooltips.Generic_Magic, tooltipValue2 = 2 }, -- Volatile Armor (Volatile Armor)
 
     -- Dark Talons / Burning Talons / Choking Talons
@@ -4225,18 +4250,20 @@ Effects.EffectOverride = {
     [118938] = { icon = 'esoui/art/icons/ability_dragonknight_009_a.dds', hide = true }, -- Ferocious Leap (Ferocious Leap)
 
     -- Stonefist / Obsidian Shard / Stone Giant
+    [130427] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Skill_Stonefist }, -- Stonefist (Stonefist)
     [29034] = { tooltip = Tooltips.Generic_Stun }, -- Stonefist (Stonefist)
-    [31821] = { tooltip = Tooltips.Generic_Stun }, -- Obsidian Shard (Obsidian Shard)
     [68763] = { icon = 'esoui/art/icons/ability_dragonknight_013_b.dds' }, -- Obsidian Shard (Obsidian Shard)
+    [130442] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Skill_Stone_Giant }, -- Stonefist (Stone Giant)
     [31817] = { tooltip = Tooltips.Generic_Stun }, -- Stone Giant (Stone Giant)
-    [31818] = { consolidateExtra = true, tooltip = Abilities.Skill_Stone_Giant }, -- Minor Resolve (Stone Giant)
 
     -- Molten Weapons / Igneous Weapons / Molten Armaments
-    [92507] = { consolidateExtra = true, tooltip = Abilities.Skill_Molten_Weapons }, -- Major Sorcery (Molten Weapons)
+    [131340] = { consolidate = true, tooltip = Abilities.Skill_Molten_Weapons }, -- Major Brutality (Molten Weapons)
+    [92507] = { consolidate = true, tooltip = Abilities.Skill_Molten_Weapons }, -- Major Sorcery (Molten Weapons)
     [76518] = { consolidate = true, tooltip = Abilities.Skill_Igneous_Weapons }, -- Major Brutality (Igneous Weapons)
     [92503] = { consolidate = true, tooltip = Abilities.Skill_Igneous_Weapons }, -- Major Sorcery (Igneous Weapons)
     [76537] = { tooltip = Tooltips.Skill_Molten_Armaments }, -- Molten Armaments (Molten Armaments)
-    [92512] = { tooltip = Abilities.Skill_Molten_Armaments }, -- Major Sorcery (Molten Armaments)
+    [131341] = {consolidate = true, tooltip = Abilities.Skill_Molten_Armaments }, -- Major Brutality (Molten Armaments)
+    [92512] = {consolidate = true, tooltip = Abilities.Skill_Molten_Armaments }, -- Major Sorcery (Molten Armaments)
 
     -- Obsidian Shield / Igneous Shield / Fragmented Shield
     [29071] = { tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Obsidian Shield (Obsidian Shield)
@@ -4619,7 +4646,8 @@ Effects.EffectOverride = {
 
     -- Bound Armor / Bound Armaments / Bound Aegis
     [24158] = { tooltip = Tooltips.Skill_Bound_Armor }, -- Bound Armor (Bound Armor)
-    [24165] = { tooltip = Tooltips.Skill_Bound_Armor }, -- Bound Armaments (Bound Armaments)
+    [24165] = { tooltip = Tooltips.Skill_Bound_Armaments_Skill }, -- Bound Armaments (Bound Armaments)
+    [130293] = { icon = 'esoui/art/icons/ability_sorcerer_bound_armaments_proc.dds', tooltip = Tooltips.Skill_Bound_Armaments_Stack }, -- Bound Armaments (Bound Armaments)
     [24163] = { tooltip = Tooltips.Skill_Bound_Armor }, -- Bound Aegis (Bound Aegis)
 
     [999008] = { icon = 'esoui/art/icons/ability_buff_minor_resolve.dds', name = Abilities.Skill_Minor_Resolve, tooltip = Abilities.Skill_Bound_Aegis }, -- Bound Aegis FAKE ID
@@ -4655,16 +4683,13 @@ Effects.EffectOverride = {
 
     -- Lightning Form / Hurricane / Boundless Storm
     [23210] = { tooltip = Tooltips.Skill_Lightning_Form }, -- Lightning Form (Lightning Form)
-    [62159] = { consolidate = true, tooltip = Abilities.Skill_Lightning_Form }, -- Major Resolve (Lightning Form)
-    [62160] = { consolidate = true, tooltip = Abilities.Skill_Lightning_Form }, -- Major Ward (Lightning Form)
+    [62159] = { consolidateExtra = true, tooltip = Abilities.Skill_Lightning_Form }, -- Major Resolve (Lightning Form)
     [23231] = { tooltip = Tooltips.Skill_Hurricane }, -- Hurricane (Hurricane)
-    [62167] = { consolidate = true, tooltip = Abilities.Skill_Hurricane }, -- Major Ward (Hurricane)
     [62168] = { consolidate = true, tooltip = Abilities.Skill_Hurricane }, -- Major Resolve (Hurricane)
     [82797] = { consolidate = true, tooltip = Abilities.Skill_Hurricane }, -- Minor Expedition (Hurricane)
     [23213] = { tooltip = Tooltips.Skill_Lightning_Form }, -- Boundless Storm (Boundless Storm)
     [23216] = { tooltip = Abilities.Skill_Boundless_Storm }, -- Major Expedition (Boundless Storm)
-    [62175] = { consolidate = true, tooltip = Abilities.Skill_Boundless_Storm }, -- Major Resolve (Boundless Storm)
-    [62176] = { consolidate = true, tooltip = Abilities.Skill_Boundless_Storm }, -- Major Ward (Boundless Storm)
+    [62175] = { consolidateExtra = true, tooltip = Abilities.Skill_Boundless_Storm }, -- Major Resolve (Boundless Storm)
 
     -- Lightning Splash / Liquid Lightning / Lightning Flood
     [23182] = { tooltip = Tooltips.Skill_Lightning_Splash, tooltipValue2 = 4 }, -- Lightning Splash (Lightning Splash)
@@ -4676,17 +4701,20 @@ Effects.EffectOverride = {
 
     -- Surge / Power Surge / Critical Surge
     [23670] = { tooltip = Tooltips.Skill_Surge }, -- Surge (Surge)
+    [131310] = { consolidate = true, tooltip = Abilities.Skill_Surge }, -- Major Sorcery (Surge)
     [23673] = { consolidate = true, tooltip = Abilities.Skill_Surge }, -- Major Brutality (Surge)
     [23674] = { tooltip = Tooltips.Skill_Power_Surge }, -- Power Surge (Power Surge)
     [62062] = { consolidate = true, tooltip = Abilities.Skill_Power_Surge }, -- Major Sorcery (Power Surge)
     [62060] = { consolidate = true, tooltip = Abilities.Skill_Power_Surge }, -- Major Brutality (Power Surge)
     [23678] = { tooltip = Tooltips.Skill_Surge }, -- Critical Surge (Critical Surge)
+    [131311] = { consolidate = true, tooltip = Abilities.Skill_Critical_Surge }, -- Major Sorcery (Critical Surge)
     [62147] = { consolidate = true, tooltip = Abilities.Skill_Critical_Surge }, -- Major Brutality (Critical Surge)
 
     -- Bolt Escape
     [51392] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Bolt_Escape_Fatigue }, -- Bolt Escape Fatigue (Bolt Escape - All Morphs)
     [23235] = { tooltip = Tooltips.Generic_Stun }, -- Bolt Escape (Bolt Escape)
     [28482] = { tooltip = Tooltips.Generic_Stun }, -- Streak (Streak)
+    [131383] = { icon = 'esoui/art/icons/ability_sorcerer_ball_of_lightning.dds', tooltip = Tooltips.Innate_Snare_Immobilize_Immunity }, -- Ball of Lightning (Ball of Lightning)
     [23283] = { hide = true }, -- Summoned Ball of Lightning (Ball of Lightning)
     [23284] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds', duration = 0, forcedContainer = 'short', tooltip = Tooltips.Skill_Intercept, groundLabel = true }, -- Intercept (Ball of Lightning)
     [23279] = { hide = true }, -- Ball of Lightning (Ball of Lightning)
@@ -4742,11 +4770,11 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Puncturing Strikes / Biting Jabs / Puncturing Sweep
-    [76908] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 70 }, -- Puncturing Strikes (Puncturing Strikes)
+    [76908] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Puncturing Strikes (Puncturing Strikes)
     [26795] = { tooltip = Abilities.Skill_Biting_Jabs }, -- Major Savagery (Biting Jabs)
-    [76912] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 70 }, -- Biting Jabs (Biting Jabs)
+    [76912] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Biting Jabs (Biting Jabs)
     [55183] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = Abilities.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep)
-    [76916] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 70 }, -- Puncturing Sweep (Puncturing Sweep)
+    [76916] = { tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Puncturing Sweep (Puncturing Sweep)
 
     -- Piercing Javelin / Aurora Javelin / Binding Javelin
     [37409] = { tooltip = Tooltips.Generic_Knockback }, -- Piercing Javelin (Piercing Javelin)
@@ -4807,7 +4835,6 @@ Effects.EffectOverride = {
     -- Backlash / Purifying Light / Power of the Light
     [21761] = { tooltip = Tooltips.Skill_Backlash }, -- Backlash (Backlash)
     [21765] = { tooltip = Tooltips.Skill_Purifying_Light }, -- Purifying Light (Purifying Light)
-    [68581] = { tooltip = Tooltips.Skill_Purifying_Light_HoT }, -- Purifying Light Tick (Purifying Light)
     [21908] = { icon = 'esoui/art/icons/ability_templar_purifying_light.dds' }, -- Purifying Light (Purifying Light)
     [21763] = { tooltip = Tooltips.Skill_Power_of_the_Light }, -- Power of the Light (Power of the Light)
     [64144] = { tooltip = Abilities.Skill_Power_of_the_Light }, -- Minor Fracture (Power of the Light)
@@ -4819,7 +4846,7 @@ Effects.EffectOverride = {
     [127771] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_immobilize.dds', tooltip = Tooltips.Generic_Immobilize }, -- Eclipse (Eclipse)
     [127772] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_stun.dds', tooltip = Tooltips.Generic_Stun }, -- Eclipse (Eclipse)
     [22006] = { tooltip = Tooltips.Skill_Living_Dark }, -- Living Dark (Living Dark)
-    [127795] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_immobilize.dds', tooltip = Tooltips.Generic_Immobilize }, -- Living Dark (Living Dark)
+    [127795] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 60 }, -- Living Dark (Living Dark)
     [22004] = { tooltip = Tooltips.Skill_Unstable_Core }, -- Unstable Core (Unstable Core)
     [127787] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Unstable Core (Unstable Core)
     [127790] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_immobilize.dds', tooltip = Tooltips.Generic_Immobilize }, -- Unstable Core (Unstable Core)
@@ -4883,15 +4910,12 @@ Effects.EffectOverride = {
     [80553] = { tooltip = Tooltips.Skill_Cleansing_Ritual }, -- Extended Ritual (Extended Ritual)
 
     -- Rune Focus / Channeled Focus / Restoring Focus
-    [22236] = { consolidate = true, tooltip = Abilities.Skill_Rune_Focus }, -- Major Resolve (Rune Focus)
-    [44820] = { consolidate = true, tooltip = Abilities.Skill_Rune_Focus }, -- Major Ward (Rune Focus)
+    [22236] = { consolidateExtra = true, tooltip = Abilities.Skill_Rune_Focus }, -- Major Resolve (Rune Focus)
     [112145] = { name = Abilities.Skill_Rune_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Rune Focus)
-    [44828] = { consolidate = true, tooltip = Abilities.Skill_Channeled_Focus }, -- Major Resolve (Channeled Focus)
-    [44827] = { consolidate = true, tooltip = Abilities.Skill_Channeled_Focus }, -- Major Ward (Channeled Focus)
+    [44828] = { consolidateExtra = true, tooltip = Abilities.Skill_Channeled_Focus }, -- Major Resolve (Channeled Focus)
     [37009] = { tooltip = Tooltips.Generic_Magicka_Regen, tooltipValue2 = 1 },  -- Channeled Focus (Channeled Focus)
     [112166] = { name = Abilities.Skill_Channeled_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Channeled Focus)
-    [44836] = { consolidate = true, tooltip = Abilities.Skill_Restoring_Focus }, -- Major Resolve (Restoring Focus)
-    [44835] = { consolidate = true, tooltip = Abilities.Skill_Restoring_Focus }, -- Major Ward (Restoring Focus)
+    [44836] = { consolidateExtra = true, tooltip = Abilities.Skill_Restoring_Focus }, -- Major Resolve (Restoring Focus)
     [114842] = { tooltip = Tooltips.Generic_Stamina_Regen, tooltipValue2 = 1 },  -- Restoring Focus (Restoring Focus)
     [112167] = { name = Abilities.Skill_Restoring_Focus, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 2640, forcedContainer = "short", groundLabel = true }, -- Rune Focus Circle Bonus (Restoring Focus)
 
@@ -4932,6 +4956,12 @@ Effects.EffectOverride = {
 
     -- ANIMAL COMPANIONS
 
+    -- Dive / Cutting Dive / Screaming Cliff Racer
+    [130129] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Dive }, -- Off-Balance (Dive)
+    [130145] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Screaming_Cliff_Racer }, -- Off-Balance (Screaming Cliff Racer)
+    [130139] = { name = Abilities.Skill_Off_Balance, tooltip = Abilities.Skill_Cutting_Dive }, -- Off-Balance (Cutting Dive)
+    [130140] = { tooltip = Tooltips.Skill_Cutting_Dive }, -- Cutting Dive (Cutting Dive)
+
     -- Scorch / Subterranean Assault / Deep Fissure
     [86009] = { tooltip = Tooltips.Skill_Scorch }, -- Scorch (Scorch)
     [86019] = { tooltip = Tooltips.Skill_Subterranean_Assault }, -- Subterranean Assault (Subterranean Assault)
@@ -4942,17 +4972,20 @@ Effects.EffectOverride = {
 
     -- Swarm / Fetcher Infection / Growing Swarm
     [101703] = { tooltip = Tooltips.Generic_Magic, tooltipValue2 = 2 }, -- Swarm (Swarm)
+    [130155] = { tooltip = Abilities.Skill_Swarm }, -- Minor Vulnerability (Swarm)
     [91416] = { forcedContainer = 'short', tooltip = Tooltips.Skill_Fetcher_Infection_Bonus }, -- Fetcher Infection Bonus Damage (Fetcher Infection)
     [101904] = { tooltip = Tooltips.Generic_Magic, tooltipValue2 = 2 }, -- Fetcher Infection (Fetcher Infection)
+    [130168] = { tooltip = Abilities.Skill_Fetcher_Infection }, -- Minor Vulnerability (Fetcher Infection)
     [101944] = { tooltip = Tooltips.Skill_Growing_Swarm }, -- Growing Swarm (Growing Swarm)
-    [101948] = { tooltip = Tooltips.Generic_Magic, tooltipValue2 = 2 }, -- Growing Swarm (Growing Swarm)
+    [130173] = { tooltip = Abilities.Skill_Growing_Swarm }, -- Minor Vulnerability (Growing Swarm)
 
     -- Betty Netch / Blue Betty / Bull Netch
     [86050] = { tooltip = Tooltips.Skill_Betty_Netch }, -- Betty Netch (Betty Netch)
-    [87929] = { consolidateExtra = true, tooltip = Abilities.Skill_Betty_Netch }, -- Major Sorcery (Betty Netch)
-    [114852] = { icon = 'esoui/art/icons/ability_warden_017_a.dds' }, -- Betty Netch (Betty Netch)
+    [131346] = { consolidate = true, tooltip = Abilities.Skill_Betty_Netch }, -- Major Brutality (Betty Netch)
+    [87929] = { consolidate = true, tooltip = Abilities.Skill_Betty_Netch }, -- Major Sorcery (Betty Netch)
     [86054] = { tooltip = Tooltips.Skill_Blue_Betty }, -- Blue Betty (Blue Betty)
-    [89107] = { consolidateExtra = true, tooltip = Abilities.Skill_Blue_Betty }, -- Major Sorcery (Blue Betty)
+    [131350] = { consolidate = true, tooltip = Abilities.Skill_Blue_Betty }, -- Major Brutality (Blue Betty)
+    [89107] = { consolidate = true, tooltip = Abilities.Skill_Blue_Betty }, -- Major Sorcery (Blue Betty)
     [114854] = { name = Abilities.Skill_Blue_Betty, icon = 'esoui/art/icons/ability_warden_017.dds' }, -- Betty Netch (Blue Betty)
     [86058] = { tooltip = Tooltips.Skill_Bull_Netch }, -- Bull Netch (Bull Netch)
     [89110] = { consolidate = true, tooltip = Abilities.Skill_Bull_Netch }, -- Major Brutality (Bull Netch)
@@ -5046,11 +5079,9 @@ Effects.EffectOverride = {
 
     -- Frost cloak / Expansive Frost Cloak / Ice Fortress
     [86224] = { consolidate = true, tooltip = Abilities.Skill_Frost_Cloak }, -- Major Resolve (Frost Cloak)
-    [86225] = { consolidate = true, tooltip = Abilities.Skill_Frost_Cloak  }, -- Major Ward (Frost Cloak)
     [88758] = { consolidate = true, tooltip = Abilities.Skill_Expansive_Frost_Cloak }, -- Major Resolve (Expansive Frost Cloak)
-    [88759] = { consolidate = true, tooltip = Abilities.Skill_Expansive_Frost_Cloak }, -- Major Ward (Expansive Frost Cloak)
     [88761] = { consolidate = true, tooltip = Abilities.Skill_Ice_Fortress }, -- Major Resolve (Ice Fortress)
-    [88762] = { consolidate = true, tooltip = Abilities.Skill_Ice_Fortress }, -- Major Ward (Ice Fortress)
+
     [87194] = { consolidate = true, tooltip = Abilities.Skill_Ice_Fortress }, -- Minor Protection (Ice Fortress)
 
     -- Impaling Shards / Gripping Shards / Winter's Revenge
@@ -5067,11 +5098,13 @@ Effects.EffectOverride = {
     [88802] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 30 }, -- Winter's Revenge (Winter's Revenge)
 
     -- Arctic Wind / Polar Wind / Arctic Blast
-    [90833] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Arctic Wind (Arctic Wind)
-    [90835] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Polar Wind (Polar Wind)
-    [86156] = { hide = true }, -- Artic Blast (Arctic Blast)
-    [90834] = { tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Arctic Blast (Arctic Blast)
-    [114875] = { name = Abilities.Skill_Arctic_Blast, tooltip = Tooltips.Generic_Stun }, -- Artic Blast Stun (Artic Blast)
+    [90833] = { tooltip = Tooltips.Skill_Arctic_Wind }, -- Arctic Wind (Arctic Wind)
+    [130400] = { icon = 'esoui/art/icons/ability_warden_003.dds', tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Arctic Wind (Arctic Wind)
+    [90835] = { tooltip = Tooltips.Skill_Arctic_Wind }, -- Polar Wind (Polar Wind)
+    [130402] = { icon = 'esoui/art/icons/ability_warden_003_a.dds', tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Polar Wind (Polar Wind)
+    [90834] = { tooltip = Tooltips.Skill_Arctic_Blast }, -- Arctic Blast (Arctic Blast)
+    [130406] = { icon = 'esoui/art/icons/ability_warden_003_b.dds', tooltip = Tooltips.Skill_Arctic_Blast_Ground, groundLabel = true }, -- Arctic Blast (Arctic Blast)
+    [130409] = { icon = 'esoui/art/icons/ability_warden_003_b.dds', tooltip = Tooltips.Generic_Stun }, -- Arctic Blast (Arctic Blast)
 
     -- Crystallized Shield / Crystallized Slab / Shimmering Shield
     [86135] = { tooltip = Tooltips.Skill_Crystallized_Shield }, -- Crystallized Shield (Crystallized Shield)
@@ -5106,7 +5139,6 @@ Effects.EffectOverride = {
     [86117] = { tooltip = Tooltips.Skill_Permafrost }, -- Permafrost (Permafrost)
     [88862] = { duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Abilities.Skill_Permafrost }, -- Major Protection (Permafrost)
     [88861] = { duration = 0, groundLabel = true, tooltip = Tooltips.Skill_Permafrost_Ground, hideGround = true }, -- Permafrost (Permafrost)
-    [90943] = { icon = 'esoui/art/icons/ability_warden_006_b.dds', tooltip = Tooltips.Generic_Stun }, -- Permafrost (Permafrost)
 
     [86247] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 40 }, -- Sleet Storm (Sleet Storm)
     [88860] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 40 }, -- Northern Storm (Northern Storm)
@@ -11470,7 +11502,7 @@ Effects.FakePlayerBuffs = {
     [973] = { duration = 0 }, -- Sprint
     [33439] = { duration = 0 }, -- Mount Sprint (Generic)
     [123970] = { duration = 3000 }, -- Lesser Reincarnate
-    --[32346] = {icon = 'esoui/art/icons/ability_mage_050.dds', name = Abilities.Innate_Absorbing_Skyshard, duration = 5800}, -- Skyshard Collect
+    --[32346] = {icon = 'achievement_u24_smallzone_skyshard.dds', name = Abilities.Innate_Absorbing_Skyshard, duration = 5800}, -- Skyshard Collect
     --[14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = Abilities.Innate_Receiving_Boon, duration = 5000}, -- Mundus Use
 
     -----------------
@@ -11746,6 +11778,11 @@ Effects.AddGroundDamageAura = {
     [21759] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Solar Disturbance
 
     -- Warden
+
+    [130400] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arctic Wind (Arctic Wind)
+    [130402] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Polar Wind (Polar Wind)
+    [130406] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arctic Blast (Arctic Blast)
+
     [129434] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Budding Seeds (Budding Seeds)
 
     [85534] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Secluded Grove (Secluded Grove)

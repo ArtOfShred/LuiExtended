@@ -511,6 +511,8 @@ LUIE.Data.Tooltips = {
     Skill_Eruption                                  = GetString(SI_LUIE_SKILL_ERUPTION_TP),
     Skill_Magma_Armor                               = GetString(SI_LUIE_SKILL_MAGMA_ARMOR_TP),
     Skill_Corrosive_Armor                           = GetString(SI_LUIE_SKILL_CORROSIVE_ARMOR_TP),
+    Skill_Stonefist                                 = GetString(SI_LUIE_SKILL_STONEFIST_TP),
+    Skill_Stone_Giant                               = GetString(SI_LUIE_SKILL_STONE_GIANT_TP),
 
     -- Nightblade
     Skill_Death_Stroke_Debuff                       = GetString(SI_LUIE_SKILL_DEATH_STROKE_DEBUFF),
@@ -567,6 +569,8 @@ LUIE.Data.Tooltips = {
     Skill_Tormentor_Damage_Boost                    = GetString(SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST_TP),
     Skill_Tormentor_Damage_Boost_Self               = GetString(SI_LUIE_SKILL_TORMENTOR_DAMAGE_BOOST_SELF_TP),
     Skill_Bound_Armor                               = GetString(SI_LUIE_SKILL_BOUND_ARMOR_TP),
+    Skill_Bound_Armaments_Skill                     = GetString(SI_LUIE_SKILL_BOUND_ARMAMENTS_SKILL_TP),
+    Skill_Bound_Armaments_Stack                     = GetString(SI_LUIE_SKILL_BOUND_ARMAMENTS_STACK_TP),
     Skill_Atronach_Zap                              = GetString(SI_LUIE_SKILL_ATRONACH_ZAP_TP),
     Skill_Storm_Atronach                            = GetString(SI_LUIE_SKILL_STORM_ATRONACH_TP),
     Skill_Charged_Atronach                          = GetString(SI_LUIE_SKILL_CHARGED_ATRONACH_TP),
@@ -593,7 +597,6 @@ LUIE.Data.Tooltips = {
     Skill_Solar_Barrage                             = GetString(SI_LUIE_SKILL_SOLAR_BARRAGE_TP),
     Skill_Backlash                                  = GetString(SI_LUIE_SKILL_BACKLASH_TP),
     Skill_Purifying_Light                           = GetString(SI_LUIE_SKILL_PURIFYING_LIGHT_TP),
-    Skill_Purifying_Light_HoT                       = GetString(SI_LUIE_SKILL_PURIFYING_LIGHT_HOT_TP),
     Skill_Power_of_the_Light                        = GetString(SI_LUIE_SKILL_POWER_OF_THE_LIGHT_TP),
     Skill_Eclipse                                   = GetString(SI_LUIE_SKILL_ECLIPSE_TP),
     Skill_Living_Dark                               = GetString(SI_LUIE_SKILL_LIVING_DARK_TP),
@@ -607,6 +610,7 @@ LUIE.Data.Tooltips = {
     Skill_Rite_of_Passage                           = GetString(SI_LUIE_SKILL_RITE_OF_PASSAGE_TP),
 
     -- Warden
+    Skill_Cutting_Dive                              = GetString(SI_LUIE_SKILL_CUTTING_DIVE_TP),
     Skill_Scorch                                    = GetString(SI_LUIE_SKILL_SCORCH_TP),
     Skill_Subterranean_Assault                      = GetString(SI_LUIE_SKILL_SUB_ASSAULT_TP),
     Skill_Deep_Fissure                              = GetString(SI_LUIE_SKILL_DEEP_FISSURE_TP),
@@ -641,6 +645,9 @@ LUIE.Data.Tooltips = {
     Skill_Frozen_Retreat                            = GetString(SI_LUIE_SKILL_FROZEN_RETREAT_TP),
     Skill_Sleet_Storm                               = GetString(SI_LUIE_SKILL_SLEET_STORM_TP),
     Skill_Permafrost                                = GetString(SI_LUIE_SKILL_PERMAFROST_TP),
+    Skill_Arctic_Wind                               = GetString(SI_LUIE_SKILL_ARCTIC_WIND_TP),
+    Skill_Arctic_Blast                              = GetString(SI_LUIE_SKILL_ARCTIC_BLAST_TP),
+    Skill_Arctic_Blast_Ground                       = GetString(SI_LUIE_SKILL_ARCTIC_BLAST_GROUND_TP),
 
     -- Necromancer
     Skill_Reusable_Parts_Rank_1                     = zo_strformat(GetString(SI_LUIE_SKILL_REUSABLE_PARTS_TP), 12),

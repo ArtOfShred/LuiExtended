@@ -2861,18 +2861,15 @@ LUIE.DebugAuras = {
 
     [20319] = true, -- Spiked Armor (Spiked Armor)
     [61815] = true, -- Major Resolve (Spiked Armor)
-    [61816] = true, -- Major Ward (Spiked Armor)
     [20320] = true, -- Spiked Armor (Spiked Armor)
 
     [20328] = true, -- Hardened Armor (Hardened Armor)
     [61827] = true, -- Major Resolve (Hardened Armor)
-    [61828] = true, -- Major Ward (Hardened Armor)
     [31808] = true, -- Hardened Armor (Hardened Armor)
     [20329] = true, -- Hardened Armor Damage Return (Hardened Armor)
 
     [20323] = true, -- Volatile Armor (Volatile Armor)
     [61836] = true, -- Major Resolve (Volatile Armor)
-    [61837] = true, -- Major Ward (Volatile Armor)
     [20324] = true, -- Volatle Armor (Volatile Armor)
     [20326] = true, -- Volatile Armor (Volatile Armor)
 
@@ -2963,20 +2960,20 @@ LUIE.DebugAuras = {
     [114601] = true, -- Stun (Ferocious Leap)
     [118938] = true, -- Ferocious Leap (Ferocious Leap)
 
-    [86798] = true, -- Knockdown Bonus Damage (Stonefist)
     [29032] = true, -- Stonefist (Stonefist)
+    [130427] = true, -- Stonefist (Stonefist)
     [29034] = true, -- Stonefist (Stonefist)
 
     [31820] = true, -- Obsidian Shard (Obsidian Shard)
-    [31821] = true, -- Obsidian Shard (Obsidian Shard)
     [68763] = true, -- Obsidian Shard (Obsidian Shard)
 
-    [86805] = true, -- Knockdown Bonus Damage (Stone Giant)
     [31816] = true, -- Stone Giant (Stone Giant)
+    [130442] = true, -- Stonefist (Stone Giant)
     [31817] = true, -- Stone Giant (Stone Giant)
-    [31818] = true, -- Minor Resolve (Stone Giant)
+    [31818] = true, -- Stone Giant (Stone Giant)
 
     [29043] = true, -- Molten Weapons (Molten Weapons)
+    [131340] = true, -- Major Brutality (Molten Weapons)
     [92507] = true, -- Major Sorcery (Molten Weapons)
 
     [31874] = true, -- Igneous Weapons (Igneous Weapons)
@@ -2985,6 +2982,7 @@ LUIE.DebugAuras = {
 
     [31888] = true, -- Molten Armaments (Molten Armaments)
     [76537] = true, -- Molten Armaments (Molten Armaments)
+    [131341] = true, -- Major Brutality (Molten Armaments)
     [92512] = true, -- Major Sorcery (Molten Armaments)
 
     [29071] = true, -- Obsidian Shield (Obsidian Shield)
@@ -3644,6 +3642,9 @@ LUIE.DebugAuras = {
 
     [108853] = true, -- Bound Armaments Passive (Bound Armaments)
     [24165] = true, -- Bound Armaments (Bound Armaments)
+    [130293] = true, -- Bound Armaments (Bound Armaments)
+    [130291] = true, -- Bound Armaments (Bound Armaments)
+    [130318] = true, -- Bound Armaments (Bound Armaments)
 
     [108855] = true, -- Bound Aegis Passive (Bound Aegis)
     [24163] = true, -- Bound Aegis (Bound Aegis)
@@ -3721,11 +3722,9 @@ LUIE.DebugAuras = {
 
     [23210] = true, -- Lightning Form (Lightning Form)
     [62159] = true, -- Major Resolve (Lightning Form)
-    [62160] = true, -- Major Ward (Lightning Form)
     [23211] = true, -- Lightning Form (Lightning Form)
 
     [23231] = true, -- Hurricane (Hurricane)
-    [62167] = true, -- Major Ward (Hurricane)
     [62168] = true, -- Major Resolve (Hurricane)
     [82797] = true, -- Minor Expedition (Hurricane)
     [80485] = true, -- Hurricane Bonus Damage Stacks (Hurricane)
@@ -3735,7 +3734,6 @@ LUIE.DebugAuras = {
     [23213] = true, -- Boundless Storm (Boundless Storm)
     [23216] = true, -- Major Expedition (Boundless Storm)
     [62175] = true, -- Major Resolve (Boundless Storm)
-    [62176] = true, -- Major Ward (Boundless Storm)
     [23214] = true, -- Boundless Storm (Boundless Storm)
 
     [23196] = true, -- Conduit (Lightning Splash - Conduit Synergy)
@@ -3759,6 +3757,7 @@ LUIE.DebugAuras = {
     [23208] = true, -- Lightning Flood (Lightning Flood)
 
     [23670] = true, -- Surge (Surge)
+    [131310] = true, -- Major Sorcery (Surge)
     [23673] = true, -- Major Brutality (Surge)
     [64492] = true, -- Surge (Surge)
     [96453] = true, -- Surge (Surge)
@@ -3770,6 +3769,7 @@ LUIE.DebugAuras = {
     [96457] = true, -- Power Surge (Power Surge)
 
     [23678] = true, -- Critical Surge (Critical Surge)
+    [131311] = true, -- Major Sorcery (Critical Surge)
     [62147] = true, -- Major Brutality (Critical Surge)
     [23682] = true, -- Critical Surge (Critical Surge)
     [96461] = true, -- Critical Surge (Critical Surge)
@@ -3783,6 +3783,7 @@ LUIE.DebugAuras = {
     [28482] = true, -- Streak (Streak)
 
     [23277] = true, -- Ball of Lightning (Ball of Lightning)
+    [131383] = true, -- Ball of Lightning (Ball of Lightning)
     [23283] = true, -- Summoned Ball of Lightning (Ball of Lightning)
     [23284] = true, -- Intercept (Ball of Lightning)
     [23279] = true, -- Ball of Lightning (Ball of Lightning)
@@ -4025,11 +4026,13 @@ LUIE.DebugAuras = {
     [21761] = true, -- Backlash (Backlash)
     [22643] = true, -- Backlash D (Backlash)
     [89821] = true, -- Backlash (Backlash)
+    [22645] = true, -- Backlash (Backlash)
     [26411] = true, -- Backlash (Backlash)
 
     [21765] = true, -- Purifying Light (Purifying Light)
     [25802] = true, -- Purifying Light (Purifying Light)
     [89825] = true, -- Purifying Light (Purifying Light)
+    [25800] = true, -- Purifying Light (Purifying Light)
     [27544] = true, -- Purifying Light (Purifying Light)
     [68581] = true, -- Purifying Light (Purifying Light)
     [69168] = true, -- Purifying Light Heal FX (Purifying Light)
@@ -4040,6 +4043,7 @@ LUIE.DebugAuras = {
     [68588] = true, -- Minor Breach (Power of the Light)
     [25799] = true, -- Power of the Light (Power of the Light)
     [89828] = true, -- Power of the Light (Power of the Light)
+    [25797] = true, -- Power of the Light (Power of the Light)
     [27567] = true, -- Power of the Light (Power of the Light)
 
     [21776] = true, -- Eclipse (Eclipse)
@@ -4054,7 +4058,7 @@ LUIE.DebugAuras = {
     [127795] = true, -- Living Dark (Living Dark)
 
     [22004] = true, -- Unstable Core (Unstable Core)
-    [1129879] = true, -- Unstable Core (Unstable Core)
+    [129879] = true, -- Unstable Core (Unstable Core)
     [127786] = true, -- Unstable Core (Unstable Core)
     [127791] = true, -- Unstable Core (Unstable Core)
     [127787] = true, -- Unstable Core (Unstable Core)
@@ -4178,21 +4182,18 @@ LUIE.DebugAuras = {
     [26305] = true, -- Purify (Extended Ritual)
 
     [22236] = true, -- Major Resolve (Rune Focus)
-    [44820] = true, -- Major Ward (Rune Focus)
     [22234] = true, -- Rune Focus (Rune Focus)
     [33516] = true, -- Summon Shade (Rune Focus)
     [101649] = true, -- Rune Focus (Rune Focus)
     [112145] = true, -- Rune Focus Circle Bonus (Rune Focus)
 
     [44828] = true, -- Major Resolve (Channeled Focus)
-    [44827] = true, -- Major Ward (Channeled Focus)
     [22240] = true, -- Channeled Focus (Channeled Focus)
     [33524] = true, -- Summon Shade (Channeled Focus)
     [37009] = true, -- Channeled Focus (Channeled Focus)
     [112166] = true, -- Rune Focus Circle Bonus (Channeled Focus)
 
     [44836] = true, -- Major Resolve (Restoring Focus)
-    [44835] = true, -- Major Ward (Restoring Focus)
     [22237] = true, -- Restoring Focus (Restoring Focus)
     [33528] = true, -- Restoring Focus (Restoring Focus)
     [114842] = true, -- Restoring Focus (Restoring Focus)
@@ -4264,12 +4265,17 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [85995] = true, -- Dive (Dive)
+    [130129] = true, -- Off-Balance (Dive)
 
     [88515] = true, -- Bond With Nature Trigger (Cutting Dive - All Morphs)
     [85999] = true, -- Cutting Dive (Cutting Dive)
+    [130139] = true, -- Off-Balance (Cutting Dive)
+    [131441] = true, -- Arms of Relequen (Cutting Dive)
+    [130140] = true, -- Cutting Dive (Cutting Dive)
 
     [87663] = true, -- Screaming Cliff Racer B (Screaming Cliff Racer)
     [86003] = true, -- Screaming Cliff Racer (Screaming Cliff Racer)
+    [130145] = true, -- Off-Balance (Screaming Cliff Racer)
 
     [86009] = true, -- Scorch (Scorch)
     [94412] = true, -- Scorch (Scorch)
@@ -4293,26 +4299,28 @@ LUIE.DebugAuras = {
 
     [86023] = true, -- Swarm (Swarm)
     [101703] = true, -- Swarm (Swarm)
+    [130155] = true, -- Minor Vulnerability (Swarm)
 
     [86027] = true, -- Fetcher Infection (Fetcher Infection)
     [91416] = true, -- Fetcher Infection Bonus Damage (Fetcher Infection)
     [101904] = true, -- Fetcher Infection (Fetcher Infection)
+    [130168] = true, -- Minor Vulnerability (Fetcher Infection)
     [87687] = true, -- Bonus Damage Fetcher Infection (Fetcher Infection)
 
-    [95130] = true, -- Growing Swarm (Growing Swarm)
     [86031] = true, -- Growing Swarm (Growing Swarm)
     [101944] = true, -- Growing Swarm (Growing Swarm)
-    [89289] = true, -- Growing Swarm (Growing Swarm)
-    [101948] = true, -- Growing Swarm (Growing Swarm)
+    [130173] = true, -- Minor Vulnerability (Growing Swarm)
+    [130170] = true, -- Growing Swarm (Growing Swarm)
 
     [89103] = true, -- Betty Netch Summon (Betty Netch - All Morphs)
     [87875] = true, -- Betty Netch (Betty Netch)
     [86050] = true, -- Betty Netch (Betty Netch)
+    [131346] = true, -- Major Brutality (Betty Netch)
     [87929] = true, -- Major Sorcery (Betty Netch)
     [86106] = true, -- Betty Netch (Betty Netch)
-    [114852] = true, -- Betty Netch (Betty Netch)
 
     [86054] = true, -- Blue Betty (Blue Betty)
+    [131350] = true, -- Major Brutality (Blue Betty)
     [89107] = true, -- Major Sorcery (Blue Betty)
     [89106] = true, -- Blue Betty (Blue Betty)
     [114854] = true, -- Betty Netch (Blue Betty)
@@ -4466,15 +4474,12 @@ LUIE.DebugAuras = {
 
     [86122] = true, -- Frost Cloak (Frost Cloak)
     [86224] = true, -- Major Resolve (Frost Cloak)
-    [86225] = true, -- Major Ward (Frost Cloak)
 
     [86126] = true, -- Expansive Frost Cloak (Expansive Frost Cloak)
     [88758] = true, -- Major Resolve (Expansive Frost Cloak)
-    [88759] = true, -- Major Ward (Expansive Frost Cloak)
 
     [86130] = true, -- Ice Fortress (Ice Fortress)
     [88761] = true, -- Major Resolve (Ice Fortress)
-    [88762] = true, -- Major Ward (Ice Fortress)
     [87194] = true, -- Minor Protection (Ice Fortress)
 
     [86161] = true, -- Impaling Shards (Impaling Shards)
@@ -4495,15 +4500,18 @@ LUIE.DebugAuras = {
 
     [86148] = true, -- Arctic Wind (Arctic Wind)
     [90833] = true, -- Arctic Wind (Arctic Wind)
+    [130400] = true, -- Arctic Wind (Arctic Wind)
 
     [86152] = true, -- Polar Wind (Polar Wind)
     [90835] = true, -- Polar Wind (Polar Wind)
+    [130402] = true, -- Polar Wind (Polar Wind)
     [88776] = true, -- Polar Wind (Polar Wind)
 
     [86156] = true, -- Arctic Blast (Arctic Blast)
     [90834] = true, -- Arctic Blast (Arctic Blast)
-    [105334] = true, -- Arctic Blast (Arctic Blast)
-    [114875] = true, -- Artic Blast Stun (Arctic Blast)
+    [130406] = true, -- Arctic Blast (Arctic Blast)
+    [130410] = true, -- Arctic Blast (Arctic Blast)
+    [130409] = true, -- Arctic Blast (Arctic Blast)
 
     [86135] = true, -- Crystallized Shield (Crystallized Shield)
     [92068] = true, -- Crystalized Shield (Crystallized Shield)
@@ -4569,8 +4577,6 @@ LUIE.DebugAuras = {
     [92969] = true, -- FX Dummy (Permafrost)
     [88863] = true, -- Permafrost (Permafrost)
     [88861] = true, -- Permafrost (Permafrost)
-    [90942] = true, -- Permafrost Stack Counter (Permafrost)
-    [90943] = true, -- Permafrost (Permafrost)
 
     -------------------------------------
     -- NECROMANCER PASSIVES -------------

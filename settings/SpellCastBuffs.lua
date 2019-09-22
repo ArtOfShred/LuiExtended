@@ -848,6 +848,7 @@ function SpellCastBuffs.CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_MISC_HEADER),
         controls = {
+            --[[
             {
                 -- Show Sprint Icon
                 type = "checkbox",
@@ -870,6 +871,7 @@ function SpellCastBuffs.CreateSettings()
                 default = Defaults.ShowGallop,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
+            ]]--
             {
                 -- Show Rezz Immunity Icon
                 type = "checkbox",

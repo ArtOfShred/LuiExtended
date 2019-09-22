@@ -85,6 +85,9 @@ CrowdControl.aoePlayerNormal = {
     [32711] = 1, -- Eruption (Eruption)
 
     -- Warden
+    --[130400] = 1, -- Arctic Wind (Arctic Wind)
+    --[130402] = 0, -- Polar Wind (Polar Wind)
+    --[130406] = 0, -- Arctic Blast (Arctic Blast)
     [88783] = 1, -- Impaling Shards (Impaling Shards)
     [88791] = 0, -- Gripping Shards (Gripping Shards)
     [88802] = 0, -- Winter's Revenge (Winter's Revenge)

@@ -1146,6 +1146,9 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                 end
             end
 
+        --Debug
+        --GameTooltip:SetAbilityId(control.effectId)
+
         -- END TEMPORARY DEBUG FUNCTION HERE
         -- NORMAL BEHAVIOR:
         else
