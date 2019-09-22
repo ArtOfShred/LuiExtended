@@ -1299,6 +1299,10 @@ Effects.BarHighlightOverride = {
     [86152] = { newId = 90835 }, -- Polar Wind
     [86156] = { newId = 90834 }, -- Arctic Blast --> Arctic Blast Stun
 
+    [86135] = { newId = 92068, showFakeAura = true }, -- Crystallized Shield --> Crystalized Shield
+    [86139] = { newId = 92168, showFakeAura = true }, -- Crystallized Slab --> Crystalized Slab
+    [86143] = { newId = 92170, showFakeAura = true }, -- Shimmering Shield --> Shimmering Shield
+
     ---------------------------
     -- Necromancer ------------
     ---------------------------
@@ -3991,7 +3995,7 @@ Effects.EffectOverride = {
     [69293] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_recall.dds', name = Abilities.Innate_Recall }, -- Recall
     [14644] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = Abilities.Innate_Revive }, -- Revive (Death Dialogue)
     [31221] = { hide = true }, -- Skyshard Collect (Aura on Skyshard when player collects it)
-    [32346] = { icon = 'achievement_u24_smallzone_skyshard.dds', name = Abilities.Innate_Absorbing_Skyshard, unbreakable = 1}, -- Skyshard Collect
+    [32346] = { icon = 'esoui/art/icons/achievement_u24_smallzone_skyshard.dds', name = Abilities.Innate_Absorbing_Skyshard, unbreakable = 1}, -- Skyshard Collect
     [63601] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds', tooltip = Tooltips.Innate_ESO_Plus }, -- ESO Plus Member
     [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', hide = true }, -- Ritual of Mara
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = "" }, -- Off-Balance
@@ -5105,15 +5109,15 @@ Effects.EffectOverride = {
     [130409] = { icon = 'esoui/art/icons/ability_warden_003_b.dds', tooltip = Tooltips.Generic_Stun }, -- Arctic Blast (Arctic Blast)
 
     -- Crystallized Shield / Crystallized Slab / Shimmering Shield
-    [86135] = { tooltip = Tooltips.Skill_Crystallized_Shield }, -- Crystallized Shield (Crystallized Shield)
-    [92068] = { icon = 'esoui/art/icons/ability_warden_002.dds', name = Abilities.Skill_Crystallized_Shield }, -- Crystalized Shield (Crystallized Shield)
+    [86135] = { hide = true }, -- Crystallized Shield (Crystallized Shield)
+    [92068] = { icon = 'esoui/art/icons/ability_warden_002.dds', name = Abilities.Skill_Crystallized_Shield, tooltip = Tooltips.Skill_Crystallized_Shield, stack = 3 }, -- Crystalized Shield (Crystallized Shield)
     [87224] = { icon = 'esoui/art/icons/ability_warden_002.dds' }, -- Combat Restore Crystalized Shi (Crystallized Shield)
-    [86139] = { tooltip = Tooltips.Skill_Crystallized_Slab }, -- Crystallized Slab (Crystallized Slab)
-    [92168] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = Abilities.Skill_Crystallized_Slab }, -- Crystalized Slab (Crystallized Slab)
+    [86139] = { hide = true }, -- Crystallized Slab (Crystallized Slab)
+    [92168] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = Abilities.Skill_Crystallized_Slab, tooltip = Tooltips.Skill_Crystallized_Slab, stack = 3 }, -- Crystalized Slab (Crystallized Slab)
     [88766] = { icon = 'esoui/art/icons/ability_warden_002_a.dds', name = Abilities.Skill_Crystallized_Slab }, -- Crystalized Slab (Crystallized Slab)
     [93175] = { hide = true }, -- Crystallized Slab (Crystallized Slab)
-    [86143] = { tooltip = Tooltips.Skill_Shimmering_Shield }, -- Shimmering Shield (Shimmering Shield)
-    [92170] = { icon = 'esoui/art/icons/ability_warden_002_b.dds' }, -- Shimmering Shield (Shimmering Shield)
+    [86143] = { hide = true }, -- Shimmering Shield (Shimmering Shield)
+    [92170] = { icon = 'esoui/art/icons/ability_warden_002_b.dds', tooltip = Tooltips.Skill_Shimmering_Shield, stack = 3 }, -- Shimmering Shield (Shimmering Shield)
     [88771] = { icon = 'esoui/art/icons/ability_warden_002_b.dds', name = Abilities.Skill_Shimmering_Shield }, -- Shimmering Shield Restore (Shimmering Shield)
     [87234] = { tooltip = Abilities.Skill_Shimmering_Shield }, -- Major Heroism (Shimmering Shield)
 
@@ -11495,7 +11499,7 @@ Effects.FakePlayerBuffs = {
     [973] = { duration = 0 }, -- Sprint
     [33439] = { duration = 0 }, -- Mount Sprint (Generic)
     [123970] = { duration = 3000 }, -- Lesser Reincarnate
-    --[32346] = {icon = 'achievement_u24_smallzone_skyshard.dds', name = Abilities.Innate_Absorbing_Skyshard, duration = 5800}, -- Skyshard Collect
+    --[32346] = {icon = 'esoui/art/icons/achievement_u24_smallzone_skyshard.dds', name = Abilities.Innate_Absorbing_Skyshard, duration = 5800}, -- Skyshard Collect
     --[14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = Abilities.Innate_Receiving_Boon, duration = 5000}, -- Mundus Use
 
     -----------------
@@ -11512,6 +11516,11 @@ Effects.FakePlayerBuffs = {
     [22223] = { duration = 4000 }, -- Rite of Passage (Rite of Passage)
     [22229] = { duration = 4000 }, -- Remembrance (Remembrance)
     [22226] = { duration = 6000 }, -- Practiced Incantation (Practiced Incantation)
+
+    -- Warden
+    [92068] = { duration = 6000 }, -- Crystalized Shield (Crystallized Shield)
+    [92168] = { duration = "GET" }, -- Crystalized Slab (Crystallized Slab)
+    [92170] = { duration = "GET" }, -- Shimmering Shield (Shimmering Shield)
 
     -- Heavy Armor
     [63084] = { duration = "GET" }, -- Major Resolve (Unstoppable)

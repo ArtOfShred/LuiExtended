@@ -1993,6 +1993,25 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         }
     end
 
+    if abilityId == 92068 or abilityId == 92168 or abilityId == 92170 then
+        if result == ACTION_RESULT_DAMAGE_SHIELDED then
+            local context
+            if (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName]) then
+                context = "promd_player"
+            elseif (SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName]) then
+                context = "promb_player"
+            else
+                context = "player1"
+            end
+            if SpellCastBuffs.EffectsList[context][ abilityId ] then
+                SpellCastBuffs.EffectsList[context][ abilityId ].stack = SpellCastBuffs.EffectsList[context][ abilityId ].stack - 1
+                if SpellCastBuffs.EffectsList[context][ abilityId ].stack == 0 then
+                    SpellCastBuffs.EffectsList[context][ abilityId ] = nil
+                end
+            end
+        end
+    end
+
     -- If the action result isn't a starting/ending event then we ignore it.
     if result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED then
         return

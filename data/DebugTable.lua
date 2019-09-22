@@ -1680,6 +1680,11 @@ LUIE.DebugAuras = {
     [116884] = true, -- Auroran's Thunder (Auroran's Thunder)
     [116920] = true, -- Auroran's Thunder (Auroran's Thunder)
 
+    [126921] = true, -- Hollowfang Thirst (Hollowfang)
+    [126924] = true, -- Hollowfang Thirst (Hollowfang)
+    [126925] = true, -- Minor Vitality (Hollowfang)
+    [126938] = true, -- Hollowfang Thirst (Hollowfang)
+
     -- Dungeon Sets (Medium)
 
     [85607] = true, -- Strength of the Automaton (Automaton's)
