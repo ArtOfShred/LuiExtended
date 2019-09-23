@@ -1362,6 +1362,11 @@ LUIE.DebugAuras = {
     [123715] = true, -- Vastarie's Tutelage (Vastarie's Tutelage)
     [124574] = true, -- Vastarie's Tutelage (Vastarie's Tutelage)
 
+    [129582] = true, -- New Moon Acolyte (New Moon Acolyte's)
+
+    [129534] = true, -- Daring Corsair (Daring Corsair's)
+    [129536] = true, -- Minor Heroism (Daring Corsair's)
+
     -- Overland Sets (All Types)
     [85541] = true, -- Armor of the Trainee (of the Trainee)
 
@@ -1440,6 +1445,9 @@ LUIE.DebugAuras = {
     [106806] = true, -- Major Mending (Vanus's)
 
     [113139] = true, -- Bright-Throat's Boast (Bright-Throat's Boast)
+
+    [129388] = true, -- Marauder's Haste (Marauder's Haste)
+    [129389] = true, -- Marauder's Haste (Marauder's Haste)
 
     -- Overland Sets (Medium)
 
@@ -1522,6 +1530,9 @@ LUIE.DebugAuras = {
     [121615] = true, -- Vesture of Darloc Brae (Darloc Brae's)
     [121618] = true, -- Vesture of Darloc Brae (Darloc Brae's)
 
+    [129405] = true, -- Dragonguard Elite (Dragonguard Elite's)
+    [129407] = true, -- Dragonguard Tactics (Dragonguard Elite's)
+
     -- Overland Sets (Heavy)
 
     [32815] = true, -- Meridia's Blessed Armor (Blessed)
@@ -1594,6 +1605,12 @@ LUIE.DebugAuras = {
     [121633] = true, -- Call of the Undertaker (Undertaker's)
     [121634] = true, -- Lifesteal (Undertaker's)
     [121635] = true, -- Call of the Undertaker (Undertaker's)
+
+    [129438] = true, -- Senchal Defender (Senchal Defender's)
+    [129442] = true, -- Senchal's Duty (Senchal Defender's)
+    [129616] = true, -- FX Holder (Senchal Defender's)
+    [129509] = true, -- Senchal Defender (Senchal Defender's)
+    [129523] = true, -- Senchal Defender (Senchal Defender's)
 
     -- Dungeon Sets (Light)
 

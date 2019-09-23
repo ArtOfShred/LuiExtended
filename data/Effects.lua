@@ -2207,8 +2207,8 @@ Effects.EffectOverrideByName = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.EffectSourceOverride = {
     -- PLAYER ABILITIES
-    [71678] = { pet = 'Morkuldin' }, -- Light Attack {Morkuldin} -- TODO: Localize
-    [71679] = { pet = 'Morkuldin' }, -- Cleave {Morkuldin} -- TODO: Localize
+    [71678] = { pet = Abilities.Set_Morkuldin }, -- Light Attack {Morkuldin}
+    [71679] = { pet = Abilities.Set_Morkuldin }, -- Cleave {Morkuldin}
 
     -- BATTLEGROUNDS
 
@@ -3554,13 +3554,12 @@ Effects.EffectOverride = {
     [114952] = { stack = 1, tooltip = Abilities.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
     [113306] = { tooltip = Abilities.Set_Naga_Shaman }, -- Minor Vitality (Naga Shaman)
     [113307] = { tooltip = Abilities.Set_Naga_Shaman }, -- Minor Mending (Naga Shaman)
-
     [124303] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senche_rahts_grit.dds', tooltip = Tooltips.Set_Senche_Rahts_Grit }, -- Senche-Raht's Grit (Senche-Raht's)
     [121917] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Magic, tooltipValue2 = 1 }, -- Honor's Scorn (Coldharbour's Favorite)
     [121913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_love.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Honor's Love (Coldharbour's Favorite)
-
     [123717] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
     [123715] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
+    [129536] = { tooltip = Abilities.Set_Daring_Corsair }, -- Minor Heroism (Daring Corsair's)
 
     -- Overland Sets (Light)
     [75691] = { tooltip = Tooltips.Set_Bahrahas_Curse }, -- Bahraha's Curse
@@ -3587,6 +3586,7 @@ Effects.EffectOverride = {
     [93003] = { icon = 'esoui/art/icons/achievement_update16_029.dds', hide = true }, -- Mad Tinkerer (Mad Tinkerer's)
     [93001] = { icon = 'esoui/art/icons/achievement_update16_029.dds', tooltip = Tooltips.Generic_Knockback }, -- Mad Tinkerer (Mad Tinkerer's)
     [106806] = { tooltip = Abilities.Set_Wisdom_of_Vanus }, -- Major Mending (Wisdom of Vanus)
+    [129389] = { icon = 'LuiExtended/media/icons/abilities/ability_set_marauders_haste.dds', tooltip = Tooltips.Generic_Movement_Speed, tooltipValue2 = 20 }, -- Marauder's Haste (Marauder's Haste)
 
     -- Overland Sets (Medium)
     [71106] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Briarheart
@@ -3614,6 +3614,7 @@ Effects.EffectOverride = {
     [114977] = { icon = 'esoui/art/icons/achievement_murkmire_friend_dead_water.dds' }, -- Dead-Water's Guile (Dead-Water's Guile)
     [121615] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
     [121618] = { icon = 'LuiExtended/media/icons/abilities/ability_set_darloc_brae.dds' }, -- Vesture of Darloc Brae (Darloc Brae's)
+    [129407] = { icon = 'esoui/art/icons/achievement_u24_capperquest_meta.dds', tooltip = Tooltips.Set_Dragonguard_Tactics }, -- Dragonguard Tactics (Dragonguard Elite's)
 
     -- Overland Sets (Heavy)
     [34711] = { icon = 'LuiExtended/media/icons/abilities/ability_set_meridia.dds', tooltip = Tooltips.Generic_Blind }, -- Meridia's Blessed Armor (Blessed)
@@ -3641,9 +3642,11 @@ Effects.EffectOverride = {
     [106868] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds' }, -- Grace of Gloom (Gloom-Graced)
     [113284] = { name = Abilities.Skill_Minor_Heroism, tooltip = Abilities.Set_Champion_of_the_Hist }, -- Champion of the Hist (Champion of the Hist)
     [113286] = { icon = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- Minor Heroism (Champion of the Hist)
-
     [121634] = { name = Abilities.Skill_Minor_Lifesteal, tooltip = Abilities.Set_Call_of_the_Undertaker }, -- Lifesteal (Undertaker's)
     [121635] = { icon = 'esoui/art/icons/ability_buff_minor_lifesteal.dds', name = Abilities.Skill_Minor_Lifesteal }, -- Call of the Undertaker (Undertaker's)
+    [129442] = { icon = 'esoui/art/icons/achievement_u24_quests_gbdaily_30.dds', tooltip = Tooltips.Set_Senchals_Duty, forcedContainer = 'short' }, -- Senchal's Duty (Senchal Defender's)
+    [129509] = { icon = 'esoui/art/icons/achievement_u24_quests_gbdaily_30.dds', name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
+    [129523] = { icon = 'esoui/art/icons/achievement_u24_quests_gbdaily_30.dds', name = Abilities.Set_Senchals_Duty }, -- Senchal Defender (Senchal Defender's)
 
     -- Dungeon Sets (Light)
     [61459] = { icon = 'LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration }, -- Burning Spellweave

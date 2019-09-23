@@ -282,6 +282,8 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_TAKEN_NO_DUR =   "Increase damage done by |cFFFFFF<<2>>|r% and increase damage taken by |cFFFFFF<<3>>|r%.",
     SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_REDUCE_NO_DUR =  "Increase damage done by |cFFFFFF<<2>>|r% and reduce damage taken by |cFFFFFF<<3>>|r%.",
 
+    SI_LUIE_SKILL_GENERIC_MOVEMENT_SPEED_TP =            "Increase Movement Speed by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+
     ----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------
     ----------------------------------------------------------------
@@ -836,6 +838,7 @@ local strings = {
     SI_LUIE_SKILL_SET_AURORANS_THUNDER_TP =              "Enemies in a cone in front of you take Shock Damage every |cffffff0.5|r seconds for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_TZOGVINS_WARBAND_TP =              "Increase Weapon Critical for |cffffff10|r seconds, stacking up to |cffffff10|r times.\n\nAt max stacks, you also gain Minor Force.",
     SI_LUIE_SKILL_SET_FROZEN_WATCHER_TP =                "Nearby enemies take Frost Damage every |cffffff1|r second while you are blocking.\n\nYour blizzard has a |cffffff15|r% chance of inflicting Chilled on enemies damaged.",
+    SI_LUIE_SKILL_MAARSELOK_TP =                         "Afflicted with Disease Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals |cffffff5|r% increased damage for each negative effect on you, up to |cffffff150|r% additional damage.",
 
     -- Crafted Sets
     SI_LUIE_SKILL_SET_ALESSIAS_BULWARK =                 "Reduce Weapon Damage by |cffffff10|r% for |cFFFFFF5|r seconds.",
@@ -893,7 +896,8 @@ local strings = {
     SI_LUIE_SKILL_SET_BLIGHT_SEED_TP =                   "When your attacker deals damage with a damage over time effect, you are infected with a stack of Blight Seed for |cffffff<<1>>|r seconds.\n\nAt |cffffff20|r stacks, the Blight Seeds explode, dealing Disease Damage to you and allies within |cffffff6|r meters.",
     SI_LUIE_SKILL_RENALDS_RESOLVE_TP =                   "Increase healing taken by |cffffff1|r% and Physical and Spell Resistance by |cffffff420|r per stack for |cffffff<<1>>|r seconds.\n\nYou can only gain one stack of Resolve every |cffffff1|r second. Stacks up to |cffffff8|r times.",
     SI_LUIE_SKILL_DRAGONS_DEFILEMENT_TP =                "Enemies within |cffffff8|r meters are afflicted with Minor Fracture and Minor Breach.",
-    SI_LUIE_SKILL_MAARSELOK_TP =                         "Afflicted with Disease Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals |cffffff5|r% increased damage for each negative effect on you, up to |cffffff150|r% additional damage.",
+    SI_LUIE_SKILL_DRAGONGUARD_TACTICS_TP =               "Increase Weapon Critical by |cffffff476|r for |cffffff<<1>>|r seconds, stacking up to |cffffff5|r times.\n\nYou can only gain one stack every |cffffff1|r second.",
+    SI_LUIE_SKILL_SENCHALS_DUTY_TP =                     "After dealing damage with a fully-charged Heavy Attack, restore |cffffff535|r Stamina and Magicka for each stack of Senchal's Duty and consume them.\n\nYou can only gain one stack of Senchal's Duty every |cffffff1|r second.",
 
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical for |cffffff<<1>>|r seconds, stacking up to |cffffff5|r times.",

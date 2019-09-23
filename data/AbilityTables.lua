@@ -396,6 +396,9 @@ local AbilityTables = {
     Set_Claw_of_Yolnakhriin           = 121875,
     Set_Hollowfang_Thirst             = 126921,
     Set_Dragons_Defilement            = 126682,
+    Set_Morkuldin                     = 71670,
+    Set_Senchals_Duty                 = 129442,
+    Set_Daring_Corsair                = 129534,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 

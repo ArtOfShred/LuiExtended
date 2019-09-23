@@ -116,6 +116,8 @@ LUIE.Data.Tooltips = {
     Generic_Enrage_Damage_Taken_No_Dur              = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_TAKEN_NO_DUR),
     Generic_Enrage_Damage_Reduce_No_Dur             = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_REDUCE_NO_DUR),
 
+    Generic_Movement_Speed                          = GetString(SI_LUIE_SKILL_GENERIC_MOVEMENT_SPEED_TP),
+
     -- Resistances
     Generic_Physical_Resist                         = GetString(SI_LUIE_SKILL_GENERIC_PHYSICAL_RESIST_TP),
     Generic_Spell_Resist_No_Dur                     = GetString(SI_LUIE_SKILL_GENERIC_SPELL_RESIST_NO_DUR_TP),
@@ -393,6 +395,7 @@ LUIE.Data.Tooltips = {
     Set_Aurorans_Thunder                            = GetString(SI_LUIE_SKILL_SET_AURORANS_THUNDER_TP),
     Set_Tzogvins_Warband                            = GetString(SI_LUIE_SKILL_SET_TZOGVINS_WARBAND_TP),
     Set_Frozen_Watcher                              = GetString(SI_LUIE_SKILL_SET_FROZEN_WATCHER_TP),
+    Set_Maarselok                                   = GetString(SI_LUIE_SKILL_MAARSELOK_TP),
 
     -- Crafted Sets
     Set_Alessias_Bulwark                            = GetString(SI_LUIE_SKILL_SET_ALESSIAS_BULWARK),
@@ -442,7 +445,8 @@ LUIE.Data.Tooltips = {
     Set_Blight_Seed                                 = GetString(SI_LUIE_SKILL_SET_BLIGHT_SEED_TP),
     Set_Renalds_Resolve                             = GetString(SI_LUIE_SKILL_RENALDS_RESOLVE_TP),
     Set_Dragons_Defilement                          = GetString(SI_LUIE_SKILL_DRAGONS_DEFILEMENT_TP),
-    Set_Maarselok                                   = GetString(SI_LUIE_SKILL_MAARSELOK_TP),
+    Set_Dragonguard_Tactics                         = GetString(SI_LUIE_SKILL_DRAGONGUARD_TACTICS_TP),
+    Set_Senchals_Duty                               = GetString(SI_LUIE_SKILL_SENCHALS_DUTY_TP),
 
     -- Trial Sets
     Set_Berserking_Warrior                          = GetString(SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP),
