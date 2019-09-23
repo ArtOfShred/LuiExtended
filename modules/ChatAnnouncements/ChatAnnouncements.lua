@@ -3222,8 +3222,7 @@ function ChatAnnouncements.StoreClose(eventCode)
     if not (ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootShowDisguise) then
         g_inventoryStacks = {}
     end
-    g_weAreInAStore = false
-    g_weAreInAFence = false
+    zo_callLater(function() g_weAreInAStore = false g_weAreInAFence = false end, 1000)
 end
 
 function ChatAnnouncements.FenceSuccess(eventCode, result)
