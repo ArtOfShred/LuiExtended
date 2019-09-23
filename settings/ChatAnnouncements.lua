@@ -3610,6 +3610,17 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.Achievement.AchievementCategory25,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
             },
+            {
+                -- Enables achievements tracking in %s category
+                type = "checkbox",
+                name = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(26)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(26)),
+                getFunc = function() return Settings.Achievement.AchievementCategory26 end,
+                setFunc = function(value) Settings.Achievement.AchievementCategory26 = value end,
+                width = "full",
+                default = Defaults.Achievement.AchievementCategory26,
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+            },
         },
     }
 

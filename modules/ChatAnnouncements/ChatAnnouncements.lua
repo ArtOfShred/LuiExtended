@@ -67,6 +67,7 @@ ChatAnnouncements.Defaults = {
         AchievementCategory23         = true,
         AchievementCategory24         = true,
         AchievementCategory25         = true,
+        AchievementCategory26         = true,
         AchievementProgressMsg        = GetString(SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG),
         AchievementCompleteMsg        = GetString(SI_ACHIEVEMENT_AWARDED_CENTER_SCREEN),
         AchievementColorProgress      = true,
@@ -2923,6 +2924,7 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
     if topLevelIndex == 23 and not ChatAnnouncements.SV.Achievement.AchievementCategory23 then return end
     if topLevelIndex == 24 and not ChatAnnouncements.SV.Achievement.AchievementCategory24 then return end
     if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory25 then return end
+    if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory26 then return end
 
     if ChatAnnouncements.SV.Achievement.AchievementUpdateCA or ChatAnnouncements.SV.Achievement.AchievementUpdateAlert then
         local totalCmp = 0
@@ -8579,6 +8581,7 @@ function ChatAnnouncements.HookFunction()
         if topLevelIndex == 23 and not ChatAnnouncements.SV.Achievement.AchievementCategory23 then return true end
         if topLevelIndex == 24 and not ChatAnnouncements.SV.Achievement.AchievementCategory24 then return true end
         if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory25 then return true end
+        if topLevelIndex == 25 and not ChatAnnouncements.SV.Achievement.AchievementCategory26 then return true end
 
         if ChatAnnouncements.SV.Achievement.AchievementCompleteCA then
             link = zo_strformat(GetAchievementLink(id, linkBrackets[ChatAnnouncements.SV.BracketOptionAchievement]))
