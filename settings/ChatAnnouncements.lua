@@ -560,6 +560,60 @@ function ChatAnnouncements.CreateSettings()
                 default = Defaults.Currency.CurrencyMessageTotalWV,
             },
             {
+                -- Show Undaunted Keys
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTED),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTED_TP),
+                getFunc = function() return Settings.Currency.CurrencyUndauntedChange end,
+                setFunc = function(value) Settings.Currency.CurrencyUndauntedChange = value end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = Defaults.Currency.CurrencyUndauntedChange,
+            },
+            {
+                -- Show Undaunted Keys Color
+                type = "colorpicker",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTEDCOLOR)),
+                getFunc = function() return unpack(Settings.Currency.CurrencyUndauntedColor) end,
+                setFunc = function(r, g, b, a) Settings.Currency.CurrencyUndauntedColor = { r, g, b, a } ChatAnnouncements.RegisterColorEvents() end,
+                width = "full",
+                disabled = function() return not (Settings.Currency.CurrencyUndauntedChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = {r=Defaults.Currency.CurrencyUndauntedColor[1], g=Defaults.Currency.CurrencyUndauntedColor[2], b=Defaults.Currency.CurrencyUndauntedColor[3]}
+            },
+            {
+                -- Show Undaunted Keys Name
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTEDNAME)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTEDNAME_TP),
+                getFunc = function() return Settings.Currency.CurrencyUndauntedName end,
+                setFunc = function(value) Settings.Currency.CurrencyUndauntedName = value end,
+                width = "full",
+                disabled = function() return not (Settings.Currency.CurrencyUndauntedChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Currency.CurrencyUndauntedName,
+            },
+            {
+                -- Show Undaunted Keys Total
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTEDTOTAL)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWUNDAUNTEDTOTAL_TP),
+                getFunc = function() return Settings.Currency.CurrencyUndauntedShowTotal end,
+                setFunc = function(value) Settings.Currency.CurrencyUndauntedShowTotal = value end,
+                width = "full",
+                disabled = function() return not (Settings.Currency.CurrencyUndauntedChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = Defaults.Currency.CurrencyUndauntedShowTotal,
+            },
+            {
+                -- Total Currency Message (Undaunted Keys)
+                type = "editbox",
+                name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_UNDAUNTEDTOTAL_MSG)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_UNDAUNTEDTOTAL_MSG_TP),
+                getFunc = function() return Settings.Currency.CurrencyMessageTotalUndaunted end,
+                setFunc = function(value) Settings.Currency.CurrencyMessageTotalUndaunted = value end,
+                width = "full",
+                disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and Settings.Currency.CurrencyUndauntedChange and Settings.Currency.CurrencyUndauntedShowTotal) end,
+                default = Defaults.Currency.CurrencyMessageTotalUndaunted,
+            },
+            {
                 -- Show Outfit Tokens
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS),

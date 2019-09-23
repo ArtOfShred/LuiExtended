@@ -409,6 +409,10 @@ ChatAnnouncements.Defaults = {
         CurrencyOutfitTokenColor        = { 255/255, 225/255, 125/255, 1 },
         CurrencyOutfitTokenName         = GetString(SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS),
         CurrencyOutfitTokenShowTotal    = false,
+        CurrencyUndauntedChange         = true,
+        CurrencyUndauntedColor          = { 1, 1, 1, 1 },
+        CurrencyUndauntedName           = GetString(SI_LUIE_CA_CURRENCY_UNDAUNTED),
+        CurrencyUndauntedShowTotal      = false,
         CurrencyMessageTotalAP          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP),
         CurrencyMessageTotalGold        = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD),
         CurrencyMessageTotalTV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV),
@@ -418,6 +422,7 @@ ChatAnnouncements.Defaults = {
         CurrencyMessageTotalCrowns      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS),
         CurrencyMessageTotalCrownGems   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS),
         CurrencyMessageTotalOutfitToken = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS),
+        CurrencyMessageTotalUndaunted   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALUNDAUNTED),
     },
 
     -- Loot
@@ -670,6 +675,7 @@ local CurrencyAPColorize
 local CurrencyTVColorize
 local CurrencyWVColorize
 local CurrencyOutfitTokenColorize
+local CurrencyUndauntedColorize
 local CurrencyTransmuteColorize
 local CurrencyEventColorize
 local CurrencyCrownsColorize
@@ -924,6 +930,7 @@ function ChatAnnouncements.RegisterColorEvents()
     CurrencyTVColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyTVColor))
     CurrencyWVColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyWVColor))
     CurrencyOutfitTokenColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyOutfitTokenColor))
+    CurrencyUndauntedColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyUndauntedColor))
     CurrencyTransmuteColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyTransmuteColor))
     CurrencyEventColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyEventColor))
     CurrencyCrownsColorize = ZO_ColorDef:New(unpack(ChatAnnouncements.SV.Currency.CurrencyCrownsColor))
@@ -2054,6 +2061,13 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyEventName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyEventShowTotal
         messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalEvent
+    elseif currency == CURT_UNDAUNTED_KEYS then -- Undaunted Keys
+        if not ChatAnnouncements.SV.Currency.CurrencyUndauntedChange then return end
+        currencyTypeColor = CurrencyUndauntedColorize:ToHex()
+        currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_eventticket.dds|t" or "" -- TODO: Get the right icon here
+        currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyUndauntedName, UpOrDown)
+        currencyTotal = ChatAnnouncements.SV.Currency.CurrencyUndauntedShowTotal
+        messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalUndaunted
     elseif currency == CURT_CROWNS then -- Crowns
         if not ChatAnnouncements.SV.Currency.CurrencyCrownsChange then return end
         currencyTypeColor = CurrencyCrownsColorize:ToHex()
@@ -2326,7 +2340,7 @@ function ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeTy
 
     messageP1 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. changeType .. currencyName .. "|r|c" .. changeColor)
 
-    if currencyTotal and type ~= "LUIE_CURRENCY_HERALDRY" then
+    if (currencyTotal and type ~= "LUIE_CURRENCY_HERALDRY") or (type == "LUIE_CURRENCY_VENDOR" and ChatAnnouncements.SV.Inventory.LootVendorTotalCurrency) then
         messageP2 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. formattedValue .. "|r|c" .. changeColor)
     else
         messageP2 = "|r"
@@ -2383,7 +2397,7 @@ function ChatAnnouncements.CurrencyPrinter(formattedValue, changeColor, changeTy
     else
         formattedMessageP1 = (string.format(messageChange, messageP1))
     end
-    local formattedMessageP2 = (string.format(messageTotal, messageP2))
+    local formattedMessageP2 = (currencyTotal or (type == "LUIE_CURRENCY_VENDOR" and ChatAnnouncements.SV.Inventory.LootVendorTotalCurrency)) and (string.format(messageTotal, messageP2)) or messageP2
     local finalMessage
     if currencyTotal and type ~= "LUIE_CURRENCY_HERALDRY" and type ~= "LUIE_CURRENCY_VENDOR" and type ~= "LUIE_CURRENCY_POSTAGE" or (type == "LUIE_CURRENCY_VENDOR" and ChatAnnouncements.SV.Inventory.LootVendorTotalCurrency) then
         if type == "LUIE_CURRENCY_VENDOR" then
@@ -2535,7 +2549,7 @@ function ChatAnnouncements.OnBuybackItem(eventCode, itemName, quantity, money, i
     end
 
     local carriedItemTotal = ""
-    if ChatAnnouncements.SV.Inventory.LootTotal and ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
+    if ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
@@ -2589,7 +2603,7 @@ function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, m
     end
 
     local carriedItemTotal = ""
-    if ChatAnnouncements.SV.Inventory.LootTotal and ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
+    if ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
@@ -2610,6 +2624,7 @@ function ChatAnnouncements.OnBuyItem(eventCode, itemName, entryType, quantity, m
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages )
     end
+
     g_savedPurchase = { }
 end
 
@@ -2634,7 +2649,7 @@ function ChatAnnouncements.OnSellItem(eventCode, itemName, quantity, money)
     end
 
     local carriedItemTotal = ""
-    if ChatAnnouncements.SV.Inventory.LootTotal and ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
+    if ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
@@ -4886,7 +4901,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                     local itemCount = stack > 1 and (" |cFFFFFFx" .. stack .. "|r") or ""
                     local carriedItem = ( formattedIcon .. itemLink ..  itemCount )
                     local carriedItemTotal = ""
-                    if ChatAnnouncements.SV.Inventory.LootTotal and ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
+                    if ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
                         local total1, total2, total3 = GetItemLinkStacks(itemLink)
                         local total = total1 + total2 + total3
                         if total > 1 then
@@ -4933,7 +4948,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                     local itemCount = stack > 1 and (" |cFFFFFFx" .. stack .. "|r") or ""
                     local carriedItem = ( formattedIcon .. itemLink ..  itemCount )
                     local carriedItemTotal = ""
-                    if ChatAnnouncements.SV.Inventory.LootTotal and ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
+                    if ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
                         local total1, total2, total3 = GetItemLinkStacks(itemLink)
                         local total = total1 + total2 + total3
                         if total > 1 then
@@ -4986,7 +5001,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
             local itemCount = stackCountChange > 1 and (" |cFFFFFFx" .. stackCountChange .. "|r") or ""
             local carriedItem = ( formattedIcon .. itemLink ..  itemCount )
             local carriedItemTotal = ""
-            if ChatAnnouncements.SV.Inventory.LootTotal and ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
+            if ChatAnnouncements.SV.Inventory.LootVendorTotalItems then
                 local total1, total2, total3 = GetItemLinkStacks(itemLink)
                 local total = total1 + total2 + total3
                 if total > 1 then
