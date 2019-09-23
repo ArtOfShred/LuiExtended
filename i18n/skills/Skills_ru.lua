@@ -610,6 +610,7 @@ local strings = {
     SI_LUIE_SKILL_VAMPIRISM_STAGE3_TP =                  "• Reduce Health Recovery by |cFFFFFF50|r%\n• Increase Fire Damage taken by |cFFFFFF20|r%\n• Vampire abilities cost |cFFFFFF14|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
     SI_LUIE_SKILL_VAMPIRISM_STAGE4_TP =                  "• Reduce Health Recovery by |cFFFFFF75|r%\n• Increase Fire Damage taken by |cFFFFFF25|r%\n• Vampire abilities cost |cFFFFFF21|r% less and advance your vampirism stage\n• Feeding reduces your vampirism stage, sneak up behind an enemy humanoid to feed",
     SI_LUIE_SKILL_FEED_TP =                              "A Vampire is draining your life force, healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds and reducing their vampirism Stage when the effect ends.\n\nStunned for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_FEED_QUEST_TP =                        "A Vampire is draining your life force, healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nStunned for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BLOOD_RITUAL_TP =                      "You have fed on another player. You may not do so again for |cFFFFFF7|r days.",
     SI_LUIE_SKILL_PROFANE_SYMBOL =                       "Profane Symbol",
     SI_LUIE_SKILL_DRAIN_ESSENCE_TP =                     "Afflicted with Magic Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r seconds. Each tick heals the vampire for |cFFFFFF15|r% of their missing health.",
@@ -886,6 +887,13 @@ local strings = {
     SI_LUIE_SKILL_SET_DREUGH_KING_SLAYER =               "Dreugh King Slayer",
     SI_LUIE_SKILL_LEECHING_PLATE_GROUND_TP =             "Taking Poison Damage every |cFFFFFF1|r second.\n\nEach tick heals your attacker for |cffffff100|r% of the damage dealt.",
     SI_LUIE_SKILL_HAND_OF_MEPHALA_GROUND_TP =            "Movement Speed reduced by |cffffff50|r%.\n\nAfter |cffffff5|r seconds the webs burst into venom, dealing Poison Damage and applying Minor Fracture for |cffffff5|r seconds.",
+
+    SI_LUIE_SKILL_HOLLOWFANG_THIRST_TP =                 "After |cffffff2|r seconds the ball of Hemoglobin explodes, restoring |cffffff3000|r Magicka and applying Minor Vitality to you and your allies within |cffffff6|r meters of the ball for |cffffff9|r seconds.",
+    SI_LUIE_SKILL_TOUCH_OF_ZEN_TP =                      "Taking |cffffff1|r% more damage for each damage over time effect your attacker has afflicted you with, up to |cffffff5|r%.",
+    SI_LUIE_SKILL_SET_BLIGHT_SEED_TP =                   "When your attacker deals damage with a damage over time effect, you are infected with a stack of Blight Seed for |cffffff<<1>>|r seconds.\n\nAt |cffffff20|r stacks, the Blight Seeds explode, dealing Disease Damage to you and allies within |cffffff6|r meters.",
+    SI_LUIE_SKILL_RENALDS_RESOLVE_TP =                   "Increase healing taken by |cffffff1|r% and Physical and Spell Resistance by |cffffff420|r per stack for |cffffff<<1>>|r seconds.\n\nYou can only gain one stack of Resolve every |cffffff1|r second. Stacks up to |cffffff8|r times.",
+    SI_LUIE_SKILL_DRAGONS_DEFILEMENT_TP =                "Enemies within |cffffff8|r meters are afflicted with Minor Fracture and Minor Breach.",
+    SI_LUIE_SKILL_MAARSELOK_TP =                         "Afflicted with Disease Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nDeals |cffffff5|r% increased damage for each negative effect on you, up to |cffffff150|r% additional damage.",
 
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical for |cffffff<<1>>|r seconds, stacking up to |cffffff5|r times.",

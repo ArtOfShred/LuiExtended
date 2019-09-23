@@ -509,6 +509,7 @@ CrowdControl.LavaAlerts = {
 CrowdControl.UnbreakableList ={
     -- Player
     [115607] = true, -- Dismount Stun
+    [40349] = true, -- Feed (Player Vampire Bite stun)
     [40520] = true, -- Q3047 - Knockdown (Player Werewolf Bite stun)
 
     -- Quests

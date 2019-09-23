@@ -394,6 +394,8 @@ local AbilityTables = {
     Set_Call_of_the_Undertaker        = 121633,
     Set_False_Gods_Devotion           = 121823,
     Set_Claw_of_Yolnakhriin           = 121875,
+    Set_Hollowfang_Thirst             = 126921,
+    Set_Dragons_Defilement            = 126682,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 

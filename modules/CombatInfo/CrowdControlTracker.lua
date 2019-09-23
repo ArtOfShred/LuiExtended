@@ -312,6 +312,9 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
         return End == '' or string.sub(String,-string.len(End)) == End
     end
 
+    -- Adjust duration of Player Vampire bite stun
+    if abilityId == 40349 then hitValue = hitValue - 950 end
+
     local malformedName
 
     if not StringEnd(LUIE.PlayerNameRaw,'^Mx') and not StringEnd(LUIE.PlayerNameRaw,'^Fx') then

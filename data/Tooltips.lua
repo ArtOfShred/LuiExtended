@@ -437,6 +437,12 @@ LUIE.Data.Tooltips = {
     Set_Jolting_Arms                                = GetString(SI_LUIE_SKILL_SET_JOLTING_ARMS),
     Set_Leeching_Plate                              = GetString(SI_LUIE_SKILL_SET_LEECHING_PLATE_TP),
     Set_Hand_of_Mephala                             = GetString(SI_LUIE_SKILL_SET_HAND_OF_MEPHALA_TP),
+    Set_Hollowfang_Thirst                           = GetString(SI_LUIE_SKILL_HOLLOWFANG_THIRST_TP),
+    Set_Touch_of_Zen                                = GetString(SI_LUIE_SKILL_TOUCH_OF_ZEN_TP),
+    Set_Blight_Seed                                 = GetString(SI_LUIE_SKILL_SET_BLIGHT_SEED_TP),
+    Set_Renalds_Resolve                             = GetString(SI_LUIE_SKILL_RENALDS_RESOLVE_TP),
+    Set_Dragons_Defilement                          = GetString(SI_LUIE_SKILL_DRAGONS_DEFILEMENT_TP),
+    Set_Maarselok                                   = GetString(SI_LUIE_SKILL_MAARSELOK_TP),
 
     -- Trial Sets
     Set_Berserking_Warrior                          = GetString(SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP),
@@ -799,6 +805,7 @@ LUIE.Data.Tooltips = {
     Skill_Vampirism_Stage_3                         = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE3_TP),
     Skill_Vampirism_Stage_4                         = GetString(SI_LUIE_SKILL_VAMPIRISM_STAGE4_TP),
     Skill_Feed                                      = GetString(SI_LUIE_SKILL_FEED_TP),
+    Skill_Feed_Quest                                = GetString(SI_LUIE_SKILL_FEED_QUEST_TP),
     Skill_Blood_Ritual                              = GetString(SI_LUIE_SKILL_BLOOD_RITUAL_TP),
     Skill_Drain_Essence                             = GetString(SI_LUIE_SKILL_DRAIN_ESSENCE_TP),
     Skill_Invigorating_Drain                        = GetString(SI_LUIE_SKILL_INVIGORATING_DRAIN_TP),

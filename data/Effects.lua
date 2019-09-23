@@ -528,6 +528,7 @@ Effects.EffectGroundDisplay = {
     [97908] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', buff = true, debuff = false, ground = true }, -- Hagraven's Garden (Hagraven's)
     [67205] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', buff = false, debuff = false, ground = true }, -- Leeching Plate (of Leeching)
     [84354] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Hand of Mephala (of Mephala's Hand)
+    [126924] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hollowfang.dds', buff = true, debuff = false, ground = false }, -- Hollowfang Thirst (Hollowfang Thirst)
 
     -- Trial Sets
     [107141] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vestment_of_olirime.dds', name = Abilities.Set_Vestment_of_Olorime, buff = true, debuff = false, ground = false }, -- Vestment of Olirime (Olirime's)
@@ -3492,6 +3493,13 @@ Effects.EffectOverride = {
     [117118] = { icon = 'esoui/art/icons/achievement_depthsofmalatar_killmonstersb.dds' }, -- Meridia's Favor (Symphony of Blades)
     [117119] = { icon = 'esoui/art/icons/achievement_depthsofmalatar_killmonstersb.dds' }, -- Meridia's Favor (Symphony of Blades)
 
+    [126529] = { icon = 'esoui/art/icons/achievement_u23_dun1_hard_mode.dds' }, -- Grundwulf (Grundwulf)
+    [126687] = { icon = 'esoui/art/icons/achievement_u23_dun1_hard_mode.dds' }, -- Grundwulf (Grundwulf)
+    [126688] = { icon = 'esoui/art/icons/achievement_u23_dun1_hard_mode.dds' }, -- Grundwulf (Grundwulf)
+    [126528] = { icon = 'esoui/art/icons/achievement_u23_dun1_hard_mode.dds' }, -- Grundwulf (Grundwulf)
+
+    [126941] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_maarselok.dds', tooltip = Tooltips.Set_Maarselok }, -- Maarselok (Maarselok)
+
     -- Crafted Sets
     [34502] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ashen_grip.dds' }, -- Ashen Grip
     [34592] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', tooltip = Tooltips.Set_Alessias_Bulwark }, -- Alessia's Bulwark
@@ -3665,12 +3673,14 @@ Effects.EffectOverride = {
     [111377] = { tooltip = Abilities.Set_Hanus_Compassion }, -- Major Heroism (Hanu's Compassion)
     [111380] = { tooltip = Abilities.Set_Hanus_Compassion }, -- Major Heroism (Hanu's Compassion)
     [111204] = { icon = 'esoui/art/icons/achievement_thievesguild_003.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration }, -- Moon Hunter (Moon Hunter)
-
     [117666] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds', hide = true }, -- Icy Conjuror
     [116727] = { icon = 'LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds', tooltip = Tooltips.Generic_Freeze, tooltipValue2 = 1 }, -- Icy Conjuror (Icy Conjuror)
-
     [116884] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aurorans_thunder.dds', tooltip = Tooltips.Set_Aurorans_Thunder }, -- Auroran's Thunder (Auroran's Thunder)
     [116920] = { icon = 'LuiExtended/media/icons/abilities/ability_set_aurorans_thunder.dds' }, -- Auroran's Thunder (Auroran's Thunder)
+    [126924] = { tooltip = Tooltips.Set_Hollowfang_Thirst }, -- Hollowfang Thirst (Hollowfang Thirst)
+    [126925] = { tooltip = Abilities.Set_Hollowfang_Thirst }, -- Minor Vitality (Hollowfang Thirst)
+    [126938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hollowfang.dds' }, -- Hollowfang Thirst (Hollowfang Thirst)
+    [126597] = { icon = 'LuiExtended/media/icons/abilities/ability_set_touch_of_zen.dds', tooltip = Tooltips.Set_Touch_of_Zen }, -- Touch of Z'en (Z'en's)
 
     -- Dungeon Sets (Medium)
     [85977] = { icon = 'LuiExtended/media/icons/abilities/ability_set_barkskin.dds' }, -- Barkskin
@@ -3703,13 +3713,14 @@ Effects.EffectOverride = {
     [111387] = { icon = 'esoui/art/icons/mh_no_rage_cleanse.dds', tooltip = Tooltips.Set_Blood_Moon_Scent }, -- Blood Scent (Blood Moon)
     [111386] = { icon = 'LuiExtended/media/icons/abilities/ability_set_blood_moon.dds', tooltip = Tooltips.Set_Blood_Moon_Frenzied }, -- Frenzied (Blood Moon)
     [111216] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_bleed.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Savage Werewolf (Savage Werewolf)
-
     [116742] = { icon = 'esoui/art/icons/achievement_wrothgar_003.dds', tooltip = Tooltips.Set_Tzogvins_Warband }, -- Precision (Tzogvin's Warband)
     [116775] = { tooltip = Abilities.Set_Tzogvins_Warband, hide = true }, -- Minor Force (Tzogvin's Warband)
-
     [116954] = { hide = true }, -- Stalked (Scavenging Demise)
     [116991] = { icon = 'LuiExtended/media/icons/abilities/ability_set_scavenging_demise.dds', name = Abilities.Set_Scavenging_Demise }, -- Stalked (Scavenging Demise)
     [117025] = { tooltip = Abilities.Set_Scavenging_Demise }, -- Minor Vulnerability (Scavenging Demise)
+
+    [126631] = { icon = 'LuiExtended/media/icons/abilities/ability_set_blight_seed.dds', tooltip = Tooltips.Set_Blight_Seed, unbreakable = 1 }, -- Blight Seed (Azureblight)
+    [126633] = { icon = 'LuiExtended/media/icons/abilities/ability_set_blight_seed.dds', tooltip = Tooltips.Set_Blight_Seed }, -- Blight Seed (Azureblight)
 
     -- Dungeon Sets (Heavy)
     [102023] = { icon = 'LuiExtended/media/icons/abilities/ability_set_curse_of_doylemish.dds' }, -- Curse of Doylemish
@@ -3748,12 +3759,16 @@ Effects.EffectOverride = {
     [112414] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
     [111445] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
     [111221] = { tooltip = Abilities.Set_Jailers_Tenacity }, -- Major Vitality (Jailer's Tenacity)
-
     [116804] = { tooltip = Abilities.Set_Mighty_Glacier }, -- Major Ward (Mighty Glacier)
     [116805] = { tooltip = Abilities.Set_Mighty_Glacier }, -- Major Resolve (Mighty Glacier)
-
     [117082] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', forcedContainer = 'short', tooltip = Tooltips.Set_Frozen_Watcher }, -- Frozen Watcher (Frozen Watcher)
     [117060] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds' }, -- Frozen Watcher (Frozen Watcher)
+
+    [126535] = { icon = 'esoui/art/icons/achievement_u23_dun1_killmonstersa.dds', tooltip = Tooltips.Set_Renalds_Resolve }, -- Resolve (Renald's)
+
+    [126682] = { icon = 'esoui/art/icons/achievement_u24_capperquest_1.dds', tooltip = Tooltips.Set_Dragons_Defilement }, -- Dragon's Defilement (Defiled Dragon's)
+    [126684] = { tooltip = Abilities.Set_Dragons_Defilement, groundLabel = true }, -- Minor Fracture (Defiled Dragon's)
+    [126685] = { tooltip = Abilities.Set_Dragons_Defilement, groundLabel = true }, -- Minor Breach (Defiled Dragon's)
 
     -- Trial Sets (Hel Ra Citadel)
     [50978] = { icon = 'esoui/art/icons/achievement_update11_dungeons_001.dds', tooltip = Tooltips.Set_Berserking_Warrior }, -- Berserking Warrior (Advancing Yokeda)
@@ -5925,7 +5940,7 @@ Effects.EffectOverride = {
     [39509] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', name = Abilities.Skill_Vampirism }, -- VampInit_PC Becomes a Vampire
     [39422] = { hide = true }, -- Mist Form
     [56684] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike
-    [39692] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = -5.2, tooltip = Tooltips.Skill_Feed }, -- Feed
+    [39692] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = -5.2, tooltip = Tooltips.Skill_Feed_Quest }, -- Feed
     [39698] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed
     [39693] = { hide = true }, -- Feed
 
@@ -6739,7 +6754,7 @@ Effects.EffectOverride = {
     -- Shared NPC Passives
     [33097] = { icon = 'esoui/art/icons/achievement_wrothgar_007.dds', name = Abilities.Skill_Boss_CC_Immunity, tooltip = Tooltips.Generic_Scary_Immunities }, -- Scary Immunities
     [44176] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_flying_immunities.dds', tooltip = Tooltips.Generic_Flying_Immunities }, -- Flying Immunities
-    [13739] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_backstabber.dds', tooltip = Tooltips.Skill_Backstabber }, -- Backstabber
+    [13739] = { icon = 'esoui/art/icons/achievement_016.dds', tooltip = Tooltips.Skill_Backstabber }, -- Backstabber
     [73768] = { hide = true }, -- GEN 5 Hits
     [79147] = { hide = true }, -- GEN 3 Hits
     [73916] = { hide = true }, -- GEN 2 Hits
@@ -7373,7 +7388,7 @@ Effects.EffectOverride = {
     [76184] = { hide = true }, -- Bog Burst (Haj Mota)
     [72789] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Shockwave (Haj Mota)
     [73494] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds', hide = true }, -- Shockwave (Haj Mota)
-    [76319] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_backstabber.dds', name = Abilities.Skill_Backstabber, tooltip = Tooltips.Skill_Backstabber }, -- Backstabber (Dire Wolf)
+    [76319] = { icon = 'esoui/art/icons/achievement_016.dds', name = Abilities.Skill_Backstabber, tooltip = Tooltips.Skill_Backstabber }, -- Backstabber (Dire Wolf)
     [80382] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_bite.dds' }, -- Bite (Dire Wolf)
     [80383] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_bite.dds' }, -- Bite (Dire Wolf)
     [76307] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge.dds' }, -- Lunge (Dire Wolf)
@@ -11822,9 +11837,9 @@ Effects.AddGroundDamageAura = {
     [126474] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Stampede (Stampede)
 
     -- Bow
-    [28877] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Volley (Volley)
-    [38690] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Endless Hail (Endless Hail)
-    [38696] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arrow Barrage (Arrow Barrage)
+    [28877] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Volley (Volley)
+    [38690] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Endless Hail (Endless Hail)
+    [38696] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arrow Barrage (Arrow Barrage)
 
     -- Destruction Staff
     [62896] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Wall of Fire

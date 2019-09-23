@@ -1025,6 +1025,12 @@ LUIE.DebugAuras = {
     [84504] = true, -- Grothdarr
     [84502] = true, -- Grothdarr
 
+    [126513] = true, -- Grundwulf
+    [126529] = true, -- Grundwulf
+    [126687] = true, -- Grundwulf
+    [126688] = true, -- Grundwulf
+    [126528] = true, -- Grundwulf
+
     [80560] = true, -- Iceheart
     [80561] = true, -- Iceheart
     [80562] = true, -- Iceheart
@@ -1064,6 +1070,9 @@ LUIE.DebugAuras = {
     [60971] = true, -- Fiery Breath (Maw of the Infernal)
     [60972] = true, -- Fiery Breath (Maw of the Infernal)
     [60973] = true, -- Fiery Jaws (Maw of the Infernal)
+
+    [126940] = true, -- Maarselok (Maarselok)
+    [126941] = true, -- Maarselok (Maarselok)
 
     [80482] = true, -- Major Ward (Mighty Chudan)
     [91983] = true, -- Major Resolve (Mighty Chudan)
@@ -1685,6 +1694,9 @@ LUIE.DebugAuras = {
     [126925] = true, -- Minor Vitality (Hollowfang)
     [126938] = true, -- Hollowfang Thirst (Hollowfang)
 
+    [126593] = true, -- Z'en's Redress (Z'en's)
+    [126597] = true, -- Touch of Z'en (Z'en's)
+
     -- Dungeon Sets (Medium)
 
     [85607] = true, -- Strength of the Automaton (Automaton's)
@@ -1784,6 +1796,14 @@ LUIE.DebugAuras = {
     [116954] = true, -- Stalked (Scavenging Demise)
     [116991] = true, -- Scavenging Maw (Scavenging Demise)
     [117025] = true, -- Minor Vulnerability (Scavenging Demise)
+
+    [126575] = true, -- Dro'Zakar's Claws (Dro'Zakar's)
+    [126584] = true, -- Dro'Zakar FX (Dro'Zakar's)
+
+    [126629] = true, -- Azureblight Reaper (Azureblight)
+    [126631] = true, -- Blight Seed (Azureblight)
+    [126633] = true, -- Blight Seed (Azureblight)
+    [126638] = true, -- Azureblight Reaper Cooldown (Azureblight)
 
     -- Dungeon Sets (Heavy)
 
@@ -1889,6 +1909,14 @@ LUIE.DebugAuras = {
     [117059] = true, -- Frozen Watcher (Frozen Watcher)
     [117082] = true, -- Frozen Watcher (Frozen Watcher)
     [117060] = true, -- Frozen Watcher (Frozen Watcher)
+
+    [126531] = true, -- Renald's Resolve (Renald's)
+    [126535] = true, -- Resolve (Renald's)
+
+    [126680] = true, -- Dragon's Defilement (Defiled Dragon's)
+    [126682] = true, -- Dragon's Defilement (Defiled Dragon's)
+    [126684] = true, -- Minor Fracture (Defiled Dragon's)
+    [126685] = true, -- Minor Breach (Defiled Dragon's)
 
     -- Trial Sets (Hel Ra Citadel)
 
@@ -2562,6 +2590,7 @@ LUIE.DebugAuras = {
     [100862] = true, -- Fortified Ayleid Health Bonus
     [45819] = true, -- Remove Werevamp
     [51064] = true, -- Weakness
+    [39405] = true, -- Weakness
     --[105188] = true, -- Grim Focus Combat Trigger
     --[105190] = true, -- Grim Focus Combat Trigger
     --[105192] = true, -- Grim Focus Combat Trigger

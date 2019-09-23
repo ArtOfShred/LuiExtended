@@ -1538,7 +1538,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     -- Fix to lower the duration of the next cast of Profane Symbol quest ability for Scion of the Blood Matron (Vampire)
     if abilityId == 39507 then
-        Castbar.CastDurationFix[39507] = 19500
+        zo_callLater(function() Castbar.CastDurationFix[39507] = 19500 end, 5000)
     end
 end
 
