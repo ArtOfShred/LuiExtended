@@ -163,6 +163,9 @@ local g_protectAbilityRemoval        = {} -- AbilityId's set to a timestamp here
 local g_grimFocusCount               = 0 -- Tracker for Grim Focus Stacks
 local g_ignoreAbilityId              = {} -- Ignored abilityId's on EVENT_COMBAT_EVENT, some events fire twice and we need to ignore every other one.
 
+-- Add buff containers into LUIE namespace
+LUIE.SpellCastBuffs.BuffContainers = uiTlw
+
 -- Quadratic easing out - decelerating to zero velocity (For buff fade)
 local function EaseOutQuad(t, b, c, d)
     t = t / d

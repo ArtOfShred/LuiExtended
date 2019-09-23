@@ -36,11 +36,14 @@ local infoPanelFontSize = 16
 local infoPanelFontStyle = "soft-shadow-thin"
 local g_infoPanelFont = string.format( "%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle )
 
-local uiPanel  = nil
+local uiTlw = { }
 local uiTopRow = nil
 local uiBotRow = nil
 local uiClock  = {}
 local uiGems   = {}
+
+-- Add info panel into LUIE namespace
+LUIE.InfoPanel.Panel = uiTlw
 
 local uiLatency = {
     color = {
@@ -118,13 +121,13 @@ function InfoPanel.SetDisplayOnMap()
 end
 
 local function CreateUIControls()
-    uiPanel = UI.TopLevel( nil, {240,48})
-    uiPanel:SetDrawLayer(DL_BACKDROP)
-    uiPanel:SetDrawTier(DT_LOW)
-    uiPanel:SetDrawLevel(1)
-    --uiPanel.bg = UI.Backdrop( uiPanel, "fill", nil, nil, nil, false )
+    uiTlw.uiPanel = UI.TopLevel( nil, {240,48})
+    uiTlw.uiPanel:SetDrawLayer(DL_BACKDROP)
+    uiTlw.uiPanel:SetDrawTier(DT_LOW)
+    uiTlw.uiPanel:SetDrawLevel(1)
+    --uiTlw.uiPanel.bg = UI.Backdrop( uiTlw.uiPanel, "fill", nil, nil, nil, false )
 
-    panelFragment = ZO_HUDFadeSceneFragment:New(uiPanel, 0, 0)
+    panelFragment = ZO_HUDFadeSceneFragment:New(uiTlw.uiPanel, 0, 0)
 
     sceneManager:GetScene("hud"):AddFragment( panelFragment )
     sceneManager:GetScene("hudui"):AddFragment( panelFragment )
@@ -133,15 +136,15 @@ local function CreateUIControls()
 
     InfoPanel.SetDisplayOnMap() -- Add to map scene if the option is enabled.
 
-    uiPanel.div = UI.Texture( uiPanel, nil, nil, "/esoui/art/miscellaneous/horizontaldivider.dds", DL_BACKGROUND, false )
-    uiPanel.div:SetAnchor( LEFT, uiPanel, LEFT, -60, 0 )
-    uiPanel.div:SetAnchor( RIGHT, uiPanel, RIGHT, 60, 0 )
-    uiPanel.div:SetHeight(4)
+    uiTlw.uiPanel.div = UI.Texture( uiTlw.uiPanel, nil, nil, "/esoui/art/miscellaneous/horizontaldivider.dds", DL_BACKGROUND, false )
+    uiTlw.uiPanel.div:SetAnchor( LEFT, uiTlw.uiPanel, LEFT, -60, 0 )
+    uiTlw.uiPanel.div:SetAnchor( RIGHT, uiTlw.uiPanel, RIGHT, 60, 0 )
+    uiTlw.uiPanel.div:SetHeight(4)
 
-    uiTopRow = UI.Control( uiPanel, {TOP,TOP,0,2}, {300,20}, false )
+    uiTopRow = UI.Control( uiTlw.uiPanel, {TOP,TOP,0,2}, {300,20}, false )
     --uiTopRow.bg = UI.Backdrop( uiTopRow, "fill", nil, nil, nil, false )
 
-    uiBotRow = UI.Control( uiPanel, {BOTTOM,BOTTOM,0,-2}, {300,20}, false )
+    uiBotRow = UI.Control( uiTlw.uiPanel, {BOTTOM,BOTTOM,0,-2}, {300,20}, false )
     --uiBotRow.bg = UI.Backdrop( uiBotRow, "fill", nil, nil, nil, false )
 
     uiLatency.control = UI.Control( uiTopRow, nil, {75,20}, false )
@@ -190,7 +193,7 @@ function InfoPanel.RearrangePanel()
     if not InfoPanel.Enabled then return end
 
     -- Reset scale of panel
-    uiPanel:SetScale(1)
+    uiTlw.uiPanel:SetScale(1)
 
     -- Top row
     local anchor = nil
@@ -296,11 +299,11 @@ function InfoPanel.RearrangePanel()
     uiBotRow:SetWidth( ( size > 0 ) and size or 10 )
 
     -- Set size of panel
-    uiPanel:SetWidth( math.max( uiTopRow:GetWidth(), uiBotRow:GetWidth(), 39*6 ) )
+    uiTlw.uiPanel:SetWidth( math.max( uiTopRow:GetWidth(), uiBotRow:GetWidth(), 39*6 ) )
 
     -- Set scale of panel again
     InfoPanel.SetScale()
-    uiPanel:SetHidden(false)
+    uiTlw.uiPanel:SetHidden(false)
 end
 
 function InfoPanel.Initialize(enabled)
@@ -323,14 +326,14 @@ function InfoPanel.Initialize(enabled)
 
     -- Panel position
     if InfoPanel.SV.position ~= nil and #InfoPanel.SV.position == 2 then
-        uiPanel:SetAnchor( CENTER, GuiRoot, TOPLEFT, InfoPanel.SV.position[1], InfoPanel.SV.position[2] )
+        uiTlw.uiPanel:SetAnchor( CENTER, GuiRoot, TOPLEFT, InfoPanel.SV.position[1], InfoPanel.SV.position[2] )
     else
-        uiPanel:SetAnchor(TOPRIGHT, GuiRoot, TOPRIGHT, -24, 20)
+        uiTlw.uiPanel:SetAnchor(TOPRIGHT, GuiRoot, TOPRIGHT, -24, 20)
     end
 
     -- Dragging
-    uiPanel.OnMoveStop = function(self) InfoPanel.SV.position = { self:GetCenter() } end
-    uiPanel:SetHandler( "OnMoveStop",  uiPanel.OnMoveStop )
+    uiTlw.uiPanel.OnMoveStop = function(self) InfoPanel.SV.position = { self:GetCenter() } end
+    uiTlw.uiPanel:SetHandler( "OnMoveStop",  uiTlw.uiPanel.OnMoveStop )
 
     -- Set init values
     -- uiWorld.label:SetText( GetWorldName() )
@@ -351,8 +354,8 @@ function InfoPanel.ResetPosition()
     if not InfoPanel.Enabled then
         return
     end
-    uiPanel:ClearAnchors()
-    uiPanel:SetAnchor(TOPRIGHT, GuiRoot, TOPRIGHT, -24, 20)
+    uiTlw.uiPanel:ClearAnchors()
+    uiTlw.uiPanel:SetAnchor(TOPRIGHT, GuiRoot, TOPRIGHT, -24, 20)
 end
 
 -- Unlock panel for moving. Called from Settings Menu.
@@ -361,9 +364,9 @@ function InfoPanel.SetMovingState( state )
         return
     end
     InfoPanel.panelUnlocked = state
-    uiPanel:SetMouseEnabled( state )
-    uiPanel:SetMovable( state )
-    uiPanel:SetHidden ( false )
+    uiTlw.uiPanel:SetMouseEnabled( state )
+    uiTlw.uiPanel:SetMovable( state )
+    uiTlw.uiPanel:SetHidden ( false )
 end
 
 -- Set scale of Info Panel. Called from Settings Menu.
@@ -371,8 +374,8 @@ function InfoPanel.SetScale()
     if not InfoPanel.Enabled then
         return
     end
-    uiPanel:SetScale( InfoPanel.SV.panelScale and InfoPanel.SV.panelScale/100 or 1 )
-    uiPanel:SetHidden(false)
+    uiTlw.uiPanel:SetScale( InfoPanel.SV.panelScale and InfoPanel.SV.panelScale/100 or 1 )
+    uiTlw.uiPanel:SetHidden(false)
 end
 
 -- Fake Component callback function used by main module
