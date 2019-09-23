@@ -190,7 +190,7 @@ UnitFrames.Defaults = {
 }
 UnitFrames.SV = nil
 
-UnitFrames.CustomFrames             = {} -- Custom Unit Frames on contrary are!
+UnitFrames.CustomFrames             = {}
 UnitFrames.CustomFramesMovingState  = false
 
 local g_AvaCustFrames       = {} -- Another set of custom frames. Currently designed only to provide AvA Player Target reticleover frame

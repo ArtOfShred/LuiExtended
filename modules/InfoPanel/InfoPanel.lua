@@ -43,7 +43,7 @@ local uiClock  = {}
 local uiGems   = {}
 
 -- Add info panel into LUIE namespace
-LUIE.InfoPanel.Panel = uiTlw
+InfoPanel.Panel = uiTlw
 
 local uiLatency = {
     color = {
