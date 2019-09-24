@@ -1394,7 +1394,7 @@ LUIE.DebugAuras = {
     [85776] = true, -- Robes of the Hist (of Hist Sap)
 
     [52704] = true, -- Way of Martial Knowledge (of Martial Knowledge)
-    [52705] = true, -- Way of Martial Knowledge (of Martial Knowledge)
+    [127070] = true, -- Way of Martial Knowledge (of Martial Knowledge)
 
     [32820] = true, -- Necropotence (of Necropotence)
 
@@ -1649,6 +1649,8 @@ LUIE.DebugAuras = {
     [67093] = true, -- Overwhelming Surge (Overwhelming)
     [67129] = true, -- Overwhelming Surge (Overwhelming)
     [67136] = true, -- Overwhelming Surge (Overwhelming)
+    [127134] = true, -- Damage Holder (Overwhelming)
+    [127131] = true, -- Overwhelming Surge (Overwhelming)
 
     [29099] = true, -- Prayer Shawl (of Prayer)
     [34504] = true, -- Prayer Shawl (of Prayer)
@@ -2252,10 +2254,9 @@ LUIE.DebugAuras = {
 
     -- Maelstrom Arena Sets
     [71248] = true, -- Elemental Succession (of Succession)
-    [71311] = true, -- Stack Counter (of Succession)
-    [71264] = true, -- Fire Ascendant (of Succession)
-    [71265] = true, -- Lightning Ascendant (of Succession)
-    [71266] = true, -- Frost Ascendant (of Succession)
+    [127081] = true, -- Flame Succession (of Succession)
+    [127084] = true, -- Shock Succession (of Succession)
+    [127088] = true, -- Frost Succession (of Succession)
 
     [71644] = true, -- Winterborn (Winterborn)
     [71647] = true, -- Winterborn (Winterborn)

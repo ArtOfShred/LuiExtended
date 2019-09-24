@@ -396,7 +396,7 @@ Effects.DebuffDisplayOverrideId = {
     [17945] = true, -- Weakening (Glyph of Weakening)
 
     -- Item Sets
-    [52705] = true, -- Way of Martial Knowledge (... of Martial Knowledge)
+    [127070] = true, -- Way of Martial Knowledge (... of Martial Knowledge)
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
     [75753] = true, -- Line-Breaker (of Alkosh)
     [93001] = true, -- Mad Tinkerer (Stun from Fabricant)
@@ -3572,7 +3572,7 @@ Effects.EffectOverride = {
     [48913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds', tooltip = Tooltips.Generic_Knockdown }, -- Dreamer's Mantle (Dreamer's)
     [57133] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds' }, -- Dreamer's Mantle (Dreamer's)
     [85776] = { icon = 'esoui/art/icons/achievement_update11_dungeons_010.dds' }, -- Robes of the Hist (of Hist Sap)
-    [52705] = { icon = 'LuiExtended/media/icons/abilities/ability_set_martial_knowledge.dds', tooltip = Tooltips.Set_Way_of_Martial_Knowledge }, -- Way of Martial Knowledge (of Martial Knowledge)
+    [127070] = { icon = 'LuiExtended/media/icons/abilities/ability_set_martial_knowledge.dds', tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 8 }, -- Way of Martial Knowledge (of Martial Knowledge)
     [85825] = { icon = 'esoui/art/icons/achievement_update16_011.dds' }, -- Prisoner's Rags (Prisoner's)
     [79200] = { tooltip = Abilities.Set_Sithis_Touch }, -- Major Berserk (Sithis' Touch)
     [85592] = { tooltip = Abilities.Set_Skooma_Smuggler }, -- Major Expedition (Skooma Smuggler)
@@ -3662,6 +3662,7 @@ Effects.EffectOverride = {
     [85610] = { icon = 'esoui/art/icons/achievement_021.dds' }, -- Lamia's Song (Lamia's)
     [67129] = { icon = 'LuiExtended/media/icons/abilities/ability_set_overwhelming.dds', tooltip = Tooltips.Set_Overwhelming_Surge }, -- Overwhelming Surge (Overwhelming)
     [67136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_overwhelming.dds' }, -- Overwhelming Surge (Overwhelming)
+    [127131] = { icon = 'LuiExtended/media/icons/abilities/ability_set_overwhelming.dds' }, -- Overwhelming Surge (Overwhelming)
     [34504] = { icon = 'LuiExtended/media/icons/abilities/ability_set_prayer.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Prayer Shawl (of Prayer)
     [32834] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds', tooltip = Tooltips.Set_Sanctuary }, -- Sanctuary (of Sanctuary)
     [66902] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_courage.dds', tooltip = Abilities.Set_Spell_Power_Cure }, -- Major Courage (Spell Power Cure)
@@ -3918,9 +3919,9 @@ Effects.EffectOverride = {
     [76938] = { icon = 'esoui/art/icons/procs_003.dds' }, -- Vicious Death (of Vicious Death)
 
     -- Maelstrom Arena Sets
-    [71264] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_melee_alt.dds', tooltip = Tooltips.Set_Succession_Flame }, -- Fire Ascendant (of Succession)
-    [71265] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee_alt.dds', tooltip = Tooltips.Set_Succession_Shock  }, -- Lightning Ascendant (of Succession)
-    [71266] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cold_melee_alt.dds', tooltip = Tooltips.Set_Succession_Frost }, -- Frost Ascendant (of Succession)
+    [127081] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_melee_alt.dds', tooltip = Tooltips.Set_Succession_Flame }, -- Flame Succession (of Succession)
+    [127084] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee_alt.dds', tooltip = Tooltips.Set_Succession_Shock  }, -- Shock Succession (of Succession)
+    [127088] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cold_melee_alt.dds', tooltip = Tooltips.Set_Succession_Frost }, -- Frost Succession (of Succession)
     [73296] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winterborn.dds', name = Abilities.Set_Winterborn, duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 60 }, -- Winterborn Snare (Winterborn)
     [71646] = { icon = 'LuiExtended/media/icons/abilities/ability_set_winterborn.dds' }, -- Winterborn (Winterborn)
     [71188] = { icon = 'esoui/art/icons/ability_rogue_019.dds', name = Abilities.Set_Glorious_Defender, tooltip = Tooltips.Set_Glorious_Defender }, -- Glorious Defense (of Glory)
@@ -7121,7 +7122,7 @@ Effects.EffectOverride = {
 
     -- Cyrodiil
     [47717] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Cyrodiil Guard T1)
-    [46221] = { tooltip = Tooltips.Skill_Puncture_Cyrodiil }, -- Puncture (Cyrodiil Guard T1 & T2)
+    [46221] = { tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 30 }, -- Puncture (Cyrodiil Guard T1 & T2)
     [46830] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds' }, -- Bleeding Strike (Cyrodiil Guard T2)
     [46832] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = Abilities.Skill_Bleeding_Strike, tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Bleeding (Cyrodiil Guard T2)
     [46831] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', name = Abilities.Skill_Bleeding_Strike }, -- Bleeding (Cyrodiil Guard T2)
@@ -7177,7 +7178,7 @@ Effects.EffectOverride = {
     [47001] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_snare_shock.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50 }, -- Crippling Rage (Cyrodiil Honor Guard T2)
     [47004] = { icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = Abilities.Skill_Dragon_Blood, tooltip = Tooltips.Generic_Health_Recovery }, -- Guardian Heal (Cyrodiil Honor Guard T2)
     [47019] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', hide = true }, -- Puncturing Chains (Cyrodiil Honor Guard T2)
-    [47023] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = Abilities.Skill_Puncturing_Chains, tooltip = Tooltips.Skill_Puncturing_Chains }, -- Puncture (Cyrodiil Honor Guard T2)
+    [47023] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = Abilities.Skill_Puncturing_Chains, tooltip = Tooltips.Generic_Increase_Damage_Taken, tooltipValue2 = 21.5 }, -- Puncture (Cyrodiil Honor Guard T2)
     [47020] = { icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = Abilities.Skill_Puncturing_Chains, hide = true, tooltip = Tooltips.Generic_Stun }, -- Pull (Cyrodiil Honor Guard T2)
     [15783] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Triple Strike (Cyrodiil Honor Guard T1 + T2)
     [15782] = { icon = 'esoui/art/icons/ability_warrior_022.dds' }, -- Triple Strike (Cyrodiil Honor Guard T1 + T2)

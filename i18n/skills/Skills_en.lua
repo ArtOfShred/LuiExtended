@@ -277,6 +277,8 @@ local strings = {
     SI_LUIE_SKILL_SET_GENERIC_LA_HA_DAMAGE =             "Your Light and Heavy Attacks deal additional damage for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_TP     = "Increase Magicka Recovery for |cffffff<<1>>|r seconds.",
 
+    SI_LUIE_SKILL_GENERIC_INCREASE_DAMAGE_TAKEN_TP     = "Increase damage taken by |cffffff<<2>>|r% for |cffffff<<1>>|r <<1[second/seconds]>>.",
+
     SI_LUIE_SKILL_GENERIC_ENRAGE =                       "Increase damage done by |cFFFFFF<<2>>|r% for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_GENERIC_ENRAGE_NO_DUR =                "Increase damage done by |cFFFFFF<<2>>|r%.",
     SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_TAKEN_NO_DUR =   "Increase damage done by |cFFFFFF<<2>>|r% and increase damage taken by |cFFFFFF<<3>>|r%.",
@@ -284,7 +286,7 @@ local strings = {
 
     SI_LUIE_SKILL_GENERIC_MOVEMENT_SPEED_TP =            "Increase Movement Speed by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
-    SI_LUIE_SKILL_SET_GENERIC_ICD_TP =                   "You have recently benefitted from the effects of <<2>> and cannot do so again for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_SET_GENERIC_ICD_TP =                   "You have recently benefitted from the effects of <<2>> and may not do so again for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     ----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------
@@ -749,9 +751,7 @@ local strings = {
     SI_LUIE_SKILL_GUARD_DETECTION =                      "Vigilance",
     SI_LUIE_SKILL_GUARD_DETECTION_TP =                   "Guards are particularly vigilant and can see nearby players that are hiding in stealth.",
     SI_LUIE_SKILL_BLESSING_OF_WAR_TP =                   "Increase Alliance Points earned by |cFFFFFF20|r% for |cFFFFFF1|r hour.\n\nOnly active while in Cyrodiil or Cyrodiil delves.",
-    SI_LUIE_SKILL_PUNCTURE_CYRODIIL_TP =                 "Increase damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_RAZOR_ARMOR_TP =                       "Reduce damage taken by |cFFFFFF30|r% for |cFFFFFF<<1>>|r seconds.\n\nWhile active the armor returns Physical Damage to attackers.",
-    SI_LUIE_SKILL_PUNCTURING_CHAINS_TP =                 "Increase damage taken by |cFFFFFF21.5|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP =            "Your single target ranged abilities are reflected back on you for |cFFFFFF<<1>>|r seconds.\n\nThe core explodes when this effect ends, dealing Magic Damage.",
     SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP =        "Disoriented for |cffffff<<1>>|r <<1[second/seconds]>>.\n\nThe prison shatters when this effect ends, dealing Magic Damage.",
     SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP =             "Reduce healing received by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
@@ -858,7 +858,6 @@ local strings = {
     -- Light / Medium / Heavy Armor Sets
     SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP =                "Enemies in the desecrated ground take Magic Damage every |cffffff1|r second and have their Movement Speed reduced by |cffffff70|r%.\n\nYou heal for |cffffff100|r% of the damage done.",
     SI_LUIE_SKILL_BAHRAHAS_CURSE_GROUND_TP =             "Taking Magic Damage every |cFFFFFF1|r second and Movement Speed reduced by |cFFFFFF70|r%.\n\nEach tick heals your attacker.",
-    SI_LUIE_SKILL_SET_WAY_OF_MARTIAL_KNOWLEDGE_TP =      "Increase damage taken from the next attack by |cffffff10|r%.",
     SI_LUIE_SKILL_SET_BRIARHEART_TP =                    "Your critical strikes heal you for |cffffff10|r seconds.",
     SI_LUIE_SKILL_SET_SENCHE_TP =                        "Increase Weapon Damage and Weapon Critical for |cffffff5|r seconds.",
     SI_LUIE_SKILL_SET_UNFATHOMABLE_DARKNESS_TP =         "Every |cffffff3|r seconds a crow will be sent to peck the closest enemy within |cffffff12|r meters, dealing Physical Damage.",
@@ -869,7 +868,7 @@ local strings = {
     SI_LUIE_SKILL_SET_WARRIOR_POET =                     "Warrior-Poet",
     SI_LUIE_SKILL_SET_GRACE_OF_GLOOM_TP =                "Your Light and Heavy Attacks heal you for the next |cffffff5|r seconds.",
     SI_LUIE_SKILL_SET_DRAUGRS_REST_TP =                  "You and allies within |cffffff5|r meters of the consecrated circle heal every |cffffff1|r second.",
-    SI_LUIE_SKILL_SET_OVERWHELMING_SURGE_TP =            "The closest enemy within |cffffff12|r meters takes Shock Damage every |cffffff1|r second for |cffffff6|r seconds.",
+    SI_LUIE_SKILL_SET_OVERWHELMING_SURGE_TP =            "Enemies within |cffffff8|r meters take Shock Damage every |cffffff1|r second for |cffffff6|r seconds.\n\n|cffffff15|r% of the damage you deal this way is restored to you as Magicka.",
     SI_LUIE_SKILL_SANCTUARY_TP =                         "Increase healing received by |cffffff12|r%.",
     SI_LUIE_SKILL_SHROUD_OF_THE_LICH_TP =                "Increase Magicka Recovery for |cffffff20|r seconds.",
     SI_LUIE_SKILL_SET_NOBLE_DUELIST =                    "Noble Duelist's Silks",
@@ -924,7 +923,7 @@ local strings = {
     -- Alliance War Sets
     SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Negating healing received for |cffffff4|r seconds.",
     SI_LUIE_SKILL_SET_SPELL_STRATEGIST_TP =              "Increase Spell Damage against the target for |cffffff5|r seconds.",
-    SI_LUIE_SKILL_SET_SUCCESSION_TP =                    "Increase Spell Damage done by <<1>> Attacks for |cffffff4|r seconds.",
+    SI_LUIE_SKILL_SET_SUCCESSION_TP =                    "Increase Spell Damage by |cffffff550|r for <<1>> dealing attacks for |cffffff4|r seconds.\n\nThis effect can occur every |cffffff4|r seconds per element.",
     SI_LUIE_SKILL_SET_PARA_BELLUM_TP =                   "Gain a damage shield if you have not taken any damage in the last |cffffff10|r seconds.",
     SI_LUIE_SKILL_SET_GLORIOUS_DEFENDER_TP =             "|cffffff100|r% chance to dodge the next attack.",
     SI_LUIE_SKILL_SET_HEALERS_HABIT =                    "Healer's Habit",
@@ -934,7 +933,7 @@ local strings = {
     SI_LUIE_SKILL_SET_ROBES_OF_TRANSMUTATION_TP =        "Increase Critical Resistance for |cffffff20|r seconds.",
     SI_LUIE_SKILL_SET_BECKONING_STEEL_TP =               "Reduce damage taken from projectiles by |cffffff10|r%.",
     SI_LUIE_SKILL_SET_SENTRY_TP =                        "Dramatically increase Stealth Detection radius for |cffffff<<1>>|r seconds.",
-    SI_LUIE_SKILL_SET_SENTRY_ICD_TP =                    "You have recently crouched to increase detection and cannot do so again.",
+    SI_LUIE_SKILL_SET_SENTRY_ICD_TP =                    "You have recently crouched to increase detection and may not do so again.",
 
     ----------------------------------------------------------------
     -- NPC ABILITY / QUEST TOOLTIPS --------------------------------

@@ -116,6 +116,8 @@ LUIE.Data.Tooltips = {
     Generic_Enrage_Damage_Taken_No_Dur              = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_TAKEN_NO_DUR),
     Generic_Enrage_Damage_Reduce_No_Dur             = GetString(SI_LUIE_SKILL_GENERIC_ENRAGE_DAMAGE_REDUCE_NO_DUR),
 
+    Generic_Increase_Damage_Taken                   = GetString(SI_LUIE_SKILL_GENERIC_INCREASE_DAMAGE_TAKEN_TP),
+
     Generic_Movement_Speed                          = GetString(SI_LUIE_SKILL_GENERIC_MOVEMENT_SPEED_TP),
 
     Generic_Set_ICD                                 = GetString(SI_LUIE_SKILL_SET_GENERIC_ICD_TP),
@@ -419,7 +421,6 @@ LUIE.Data.Tooltips = {
 
     -- Light / Medium / Heavy Sets
     Set_Bahrahas_Curse                              = GetString(SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP),
-    Set_Way_of_Martial_Knowledge                    = GetString(SI_LUIE_SKILL_SET_WAY_OF_MARTIAL_KNOWLEDGE_TP),
     Set_Briarheart                                  = GetString(SI_LUIE_SKILL_SET_BRIARHEART_TP),
     Set_Senche                                      = GetString(SI_LUIE_SKILL_SET_SENCHE_TP),
     Set_Unfathomable_Darknesss                      = GetString(SI_LUIE_SKILL_SET_UNFATHOMABLE_DARKNESS_TP),
@@ -481,9 +482,9 @@ LUIE.Data.Tooltips = {
     Set_Sentry_Cooldown                             = GetString(SI_LUIE_SKILL_SET_SENTRY_ICD_TP),
 
     -- Arena Sets
-    Set_Succession_Flame                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE3)),
-    Set_Succession_Shock                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE4)),
-    Set_Succession_Frost                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), GetString(SI_DAMAGETYPE6)),
+    Set_Succession_Flame                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), FlameDamage),
+    Set_Succession_Shock                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), ShockDamage),
+    Set_Succession_Frost                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), FrostDamage),
     Set_Para_Bellum                                 = GetString(SI_LUIE_SKILL_SET_PARA_BELLUM_TP),
 
     ----------------------------------------------------------------
@@ -949,9 +950,7 @@ LUIE.Data.Tooltips = {
     Skill_Guard_Detection                           = GetString(SI_LUIE_SKILL_GUARD_DETECTION_TP),
     Skill_Blessing_of_War                           = GetString(SI_LUIE_SKILL_BLESSING_OF_WAR_TP),
 
-    Skill_Puncture_Cyrodiil                         = GetString(SI_LUIE_SKILL_PUNCTURE_CYRODIIL_TP),
     Skill_Razor_Armor                               = GetString(SI_LUIE_SKILL_RAZOR_ARMOR_TP),
-    Skill_Puncturing_Chains                         = GetString(SI_LUIE_SKILL_PUNCTURING_CHAINS_TP),
     Skill_Unstable_Core_Cyrodiil                    = GetString(SI_LUIE_SKILL_UNSTABLE_CORE_CYRODIIL_TP),
     Skill_Shattering_Prison_Cyrodiil                = GetString(SI_LUIE_SKILL_SHATTERING_PRISON_CYRODIIL_TP),
     Skill_Lethal_Arrow_Cyrodiil                     = GetString(SI_LUIE_SKILL_LETHAL_ARROW_CYRODIIL_TP),

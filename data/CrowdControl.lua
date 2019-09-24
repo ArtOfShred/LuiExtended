@@ -166,6 +166,7 @@ CrowdControl.aoePlayerSet = {
     [106783] = 1, -- Dustcloud Damage (Adept Rider's)
     [75692] = 1, -- Bahraha's Curse (of Bahraha's Curse)
     [57209] = 1, -- Storm Knight's Plate (of the Storm Knight)
+    [67136] = 1, -- Overwhelming Surge (Overwhelming)
     [59696] = 1, -- Embershield (Embershield)
     [67204] = 1, -- Leeching Plate (of Leeching)
     [102094] = 1, -- Thurvokun (Thurvokun)
