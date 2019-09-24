@@ -901,7 +901,6 @@ local strings = {
 
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical for |cffffff<<1>>|r seconds, stacking up to |cffffff5|r times.",
-    SI_LUIE_SKILL_SET_ETERNAL_IMMORTAL_WARRIOR_TP =      "You have recently been turned into a statue, and cannot avoid death this way again.",
     SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "When another player hits the same enemy with a fully-charged Heavy Attack they detonate the bomb, dealing Magic Damage to all enemies within |cffffff8|r meters.",
     SI_LUIE_SKILL_SET_HEALING_MAGE_TP =                  "Reduce Weapon Damage for |cffffff3|r seconds.",
     SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Increase Physical Penetration for |cffffff3|r seconds, stacking up to |cffffff5|r times.",
@@ -918,7 +917,6 @@ local strings = {
     -- Imperial City Sets
     SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP =             "Marked for |cffffff15|r seconds.\n\nIf |cffffff6|r Marks of Revenge are applied they detonate for Magic Damage.",
     SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP =            "Increase Physical and Spell Resistance for |cffffff2|r minutes.",
-    SI_LUIE_SKILL_SET_PHOENIX_TP =                       "You have recently been reborn as a phoenix, and cannot avoid death this way again.",
     SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP =            "Afflicted with Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nEach tick heals your attacker.",
 
     -- Alliance War Sets

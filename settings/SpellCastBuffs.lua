@@ -818,28 +818,6 @@ function SpellCastBuffs.CreateSettings()
                 default = not Defaults.IgnoreSoulSummonsTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
             },
-            {
-                -- Long Term - Set ICD - Player
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP),
-                getFunc = function() return not Settings.IgnoreSetICDPlayer end,
-                setFunc = function(value) Settings.IgnoreSetICDPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreSetICDPlayer,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
-            {
-                -- Long Term - Set ICD - Target
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDTARGET_TP),
-                getFunc = function() return not Settings.IgnoreSetICDTarget end,
-                setFunc = function(value) Settings.IgnoreSetICDTarget = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
-                width = "full",
-                default = not Defaults.IgnoreSetICDTarget,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
-            },
         },
     }
 

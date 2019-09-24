@@ -175,11 +175,6 @@ CastBarTable.CastChannelOverride = {
     [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
     [79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
 
-    -- Sets
-    [90940] = true, -- Eternal Warrior
-    [90937] = true, -- Immortal Warrior
-    [90935] = true, -- Phoenix
-
     -- Vampire
     [33175] = true, -- Feed (Vampire)
     [40350] = true, -- Feed (Vampire - Bite Player)
@@ -301,11 +296,6 @@ CastBarTable.CastDurationFix = {
     [39033] = 1100, -- Werewolf Transform Setup (Werewolf)
     [39477] = 1500, -- De-Werewolf (Werewolf)
     [75008] = 6500, -- Werewolf Transformation (Werewolf - Quest Transformation)
-
-    -- Sets
-    [90940] = 3000, -- Eternal Warrior
-    [90937] = 3000, -- Immortal Warrior
-    [90935] = 3000, -- Phoenix
 
     ----------------------------------------------------------------
     -- QUEST ABILITIES ---------------------------------------------
@@ -534,11 +524,6 @@ CastBarTable.IsCast = {
     [61487] = true, -- Magicka Detonation (Assault)
     [61491] = true, -- Inevitable Detonation (Assault)
 
-    -- Sets
-    [90940] = true, -- Eternal Warrior
-    [90937] = true, -- Immortal Warrior
-    [90935] = true, -- Phoenix
-
     ----------------------------------------------------------------
     -- NPC ABILITIES -----------------------------------------------
     ----------------------------------------------------------------
@@ -718,9 +703,6 @@ CastBarTable.IgnoreCastBarStun = {
     [36434] = true, -- Mount Stun
     [74232] = true, -- Stun (Malacath's Wrathful Flame)
     [92863] = true, -- Stun (Dreamer's Chime)
-    [51401] = true, -- Immortal Warrior (Immortal Yokeda)
-    [81529] = true, -- Eternal Warrior (Eternal Yokeda)
-    [68938] = true, -- Phoenix (of the Phoenix)
 
     -- Quests
 }

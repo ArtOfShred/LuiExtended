@@ -450,7 +450,6 @@ LUIE.Data.Tooltips = {
 
     -- Trial Sets
     Set_Berserking_Warrior                          = GetString(SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP),
-    Set_Eternal_Immortal_Warrior                    = GetString(SI_LUIE_SKILL_SET_ETERNAL_IMMORTAL_WARRIOR_TP),
     Set_Destructive_Mage                            = GetString(SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP),
     Set_Healing_Mage                                = GetString(SI_LUIE_SKILL_SET_HEALING_MAGE_TP),
     Set_Twice_Fanged_Serpent                        = GetString(SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP),
@@ -465,7 +464,6 @@ LUIE.Data.Tooltips = {
     -- Imperial City Sets
     Set_Galerions_Revenge                           = GetString(SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP),
     Set_Meritorius_Service                          = GetString(SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP),
-    Set_Phoenix                                     = GetString(SI_LUIE_SKILL_SET_PHOENIX_TP),
     Set_Vicecanon_of_Venom                          = GetString(SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP),
 
     -- Cyrodiil Sets

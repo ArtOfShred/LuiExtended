@@ -311,12 +311,9 @@ local AbilityTables = {
     Set_Jolting_Arms                  = 67077,
     Set_Hand_of_Mephala               = 84355,
     Set_Tormentor                     = 67282,
-    Set_Immortal_Warrior              = 90938,
-    Set_Eternal_Warrior               = 90939,
     Set_Destructive_Mage              = 51315,
     Set_Healing_Mage                  = 51442,
     Set_Vicious_Serpent               = 61440,
-    Set_Phoenix                       = 90935,
     Set_Vicecannon_of_Venom           = 79464,
     Set_Ironblood                     = 97626,
     Set_Cooldown                      = GetString(SI_LUIE_SKILL_SET_COOLDOWN),
@@ -399,6 +396,7 @@ local AbilityTables = {
     Set_Morkuldin                     = 71670,
     Set_Senchals_Duty                 = 129442,
     Set_Daring_Corsair                = 129534,
+    Set_Phoenix                       = 68933,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 

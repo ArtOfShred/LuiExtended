@@ -1941,10 +1941,6 @@ LUIE.DebugAuras = {
     [50978] = true, -- Berserking Warrior (Advancing Yokeda)
 
     [51300] = true, -- Immortal Warrior (Immortal Yokeda)
-    [90937] = true, -- Immortal Warrior (Immortal Yokeda)
-    [51302] = true, -- Immortal Warrior (Immortal Yokeda)
-    [51401] = true, -- Immortal Warrior (Immortal Yokeda)
-    [90938] = true, -- Immortal Warrior (Immortal Yokeda)
 
     [50990] = true, -- Defending Warrior (Resilient Yokeda)
     [86907] = true, -- Defending Warrior (Resilient Yokeda)
@@ -1952,11 +1948,6 @@ LUIE.DebugAuras = {
 
     [61436] = true, -- Eternal Warrior (Eternal Yokeda)
     [76618] = true, -- Minor Aegis (Eternal Yokeda)
-    [90940] = true, -- Eternal Warrior (Eternal Yokeda)
-    [81527] = true, -- Eternal Warrior (Eternal Yokeda)
-    [61437] = true, -- Eternal Warrior (Eternal Yokeda)
-    [81529] = true, -- Eternal Warrior (Eternal Yokeda)
-    [90939] = true, -- Eternal Warrior (Eternal Yokeda)
 
     -- Trial Sets (Aetherian Archive)
 
@@ -2111,13 +2102,8 @@ LUIE.DebugAuras = {
     [65707] = true, -- Meritorious Service (of Meritorious Service)
 
     [68933] = true, -- Phoenix (of the Phoenix)
-    [90935] = true, -- Phoenix (of the Phoenix)
-    [68935] = true, -- Phoenix (of the Phoenix)
-    [70406] = true, -- Phoenix (of the Phoenix)
-    [68938] = true, -- Phoenix (of the Phoenix)
-    [90936] = true, -- Phoenix (of the Phoenix)
-    [68940] = true, -- Phoenix (of the Phoenix)
-    [70405] = true, -- Phoenix (of the Phoenix)
+    [127032] = true, -- Phoenix (of the Phoenix)
+    [127036] = true, -- Phoenix's Flame (of the Phoenix)
 
     [61763] = true, -- Powerful Assault Trigger (of the Powerful Assault)
     [61771] = true, -- Powerful Assault (of the Powerful Assault)

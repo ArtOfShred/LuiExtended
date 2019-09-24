@@ -166,13 +166,6 @@ Effects.IsSoulSummons = {
     [43752] = true, -- Soul Summons
 }
 
--- Internal Cooldown for cheat death set procs
-Effects.IsSetICD = {
-    [90936] = true, -- Phoenix
-    [90938] = true, -- Immortal Warrior
-    [90939] = true, -- Eternal Warrior
-}
-
 -- Food & Drink Buffs
 Effects.IsFoodBuff = {
     -- Food Buff
@@ -400,6 +393,7 @@ Effects.DebuffDisplayOverrideId = {
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
     [75753] = true, -- Line-Breaker (of Alkosh)
     [93001] = true, -- Mad Tinkerer (Stun from Fabricant)
+    [126631] = true, -- Blight Seed (Azureblight)
 
     -- Dragonknight
     [98447] = true, -- Shackle Snare (Dragonknight Standard Synergy)
@@ -3775,14 +3769,9 @@ Effects.EffectOverride = {
 
     -- Trial Sets (Hel Ra Citadel)
     [50978] = { icon = 'esoui/art/icons/achievement_update11_dungeons_001.dds', tooltip = Tooltips.Set_Berserking_Warrior }, -- Berserking Warrior (Advancing Yokeda)
-    [90937] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', unbreakable = 1, tooltip = Tooltips.Generic_Immunity }, -- Immortal Warrior (Immortal Yokeda)
-    [90938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Immortal_Warrior, Abilities.Set_Cooldown), tooltip = Tooltips.Set_Eternal_Immortal_Warrior }, -- Immortal Warrior (Immortal Yokeda)
     [86907] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
     [50992] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
     [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', tooltip = Tooltips.Skill_Minor_Aegis }, -- Minor Aegis (Eternal Yokeda)
-    [90940] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', unbreakable = 1, tooltip = Tooltips.Generic_Immunity }, -- Eternal Warrior (Eternal Yokeda)
-    [61437] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds' }, -- Eternal Warrior (Eternal Yokeda)
-    [90939] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Eternal_Warrior, Abilities.Set_Cooldown), tooltip = Tooltips.Set_Eternal_Immortal_Warrior }, -- Eternal Warrior (Eternal Yokeda)
 
     -- Trial Sets (Aetherian Archive)
     [51315] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Set_Destructive_Mage }, -- Destructive Mage (Aether... of Destruction)
@@ -3858,14 +3847,13 @@ Effects.EffectOverride = {
     [79421] = { icon = 'LuiExtended/media/icons/abilities/ability_set_galerions_revenge.dds', tooltip = Tooltips.Set_Galerions_Revenge }, -- Mark of Revenge (Galerion's)
     [79420] = { icon = 'LuiExtended/media/icons/abilities/ability_set_galerions_revenge.dds' }, -- Galerion's Revenge (Galerion's)
     [65706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_meritorious_service.dds', tooltip = Tooltips.Set_Meritorius_Service }, -- Meritorious Service (of Meritorious Service)
-    [90935] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds', unbreakable = 1, tooltip = Tooltips.Generic_Immunity }, -- Phoenix (of the Phoenix)
-    [90936] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Phoenix, Abilities.Set_Cooldown), tooltip = Tooltips.Set_Phoenix }, -- Phoenix (of the Phoenix)
-    [68940] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds' }, -- Phoenix (of the Phoenix)
-    [70405] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds' }, -- Phoenix (of the Phoenix)
     [61771] = { icon = 'LuiExtended/media/icons/abilities/ability_set_powerful_assault.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration }, -- Powerful Assault (of the Powerful Assault)
     [79363] = { icon = 'esoui/art/icons/achievement_029.dds' }, -- Thews of the Harbinger (of the Harbinger)
     [79469] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon.dds', name = Abilities.Set_Vicecannon_of_Venom, tooltip = Tooltips.Set_Vicecanon_of_Venom }, -- Deadly Venom (the Vicecanon's)
     [79471] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon.dds', name = Abilities.Set_Vicecannon_of_Venom }, -- Deadly Venom (the Vicecanon's)
+
+    [127032] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Phoenix (of the Phoenix)
+    [127036] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds', name = Abilities.Set_Phoenix }, -- Phoenix's Flame (of the Phoenix)
 
     -- Cyrodiil Sets (Light)
     [34605] = { icon = 'LuiExtended/media/icons/abilities/ability_set_almalexias_mercy.dds' }, -- Almalexia's Mercy (of Almalexia's Mercy)

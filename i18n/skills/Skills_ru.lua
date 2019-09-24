@@ -901,7 +901,6 @@ local strings = {
 
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical for |cffffff<<1>>|r seconds, stacking up to |cffffff5|r times.",
-    SI_LUIE_SKILL_SET_ETERNAL_IMMORTAL_WARRIOR_TP =      "Вы недавно были обращены в статую и не можете избежать смерти этим способом снова.",
     SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "Когда другой игрок поразит эту же цель полностью заряженной Силовой атакой, бомба взорвётся, нанося Магический урон всем противникам в радиусе |cffffff8|r метров.",
     SI_LUIE_SKILL_SET_HEALING_MAGE_TP =                  "Снижает урон от Оружия на |cffffff3|r секунды.",
     SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Повышает Физическое пробитие на |cffffff3|r секунды, суммируется до |cffffff5|r раз.",
@@ -918,7 +917,6 @@ local strings = {
     -- Imperial City Sets
     SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP =             "Marked for |cffffff15|r seconds.\n\nIf |cffffff6|r Marks of Revenge are applied they detonate for Magic Damage.",
     SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP =            "Increase Physical and Spell Resistance for |cffffff2|r minutes.",
-    SI_LUIE_SKILL_SET_PHOENIX_TP =                       "Вы недавно возродились как феникс и не можете избежать смерти этим способом снова.",
     SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP =            "Afflicted with Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nEach tick heals your attacker.",
 
     -- Alliance War Sets

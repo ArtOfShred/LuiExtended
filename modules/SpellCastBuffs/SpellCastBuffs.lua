@@ -76,8 +76,6 @@ SpellCastBuffs.Defaults = {
     IgnoreEsoPlusTarget              = true,
     IgnoreSoulSummonsPlayer          = false,
     IgnoreSoulSummonsTarget          = false,
-    IgnoreSetICDPlayer               = false,
-    IgnoreSetICDTarget               = false,
     IgnoreFoodPlayer                 = false,
     IgnoreFoodTarget                 = false,
     IgnoreExperiencePlayer           = false,
@@ -3221,16 +3219,6 @@ function SpellCastBuffs.UpdateContextHideList()
     end
     if SpellCastBuffs.SV.IgnoreSoulSummonsTarget then
         for k, v in pairs(Effects.IsSoulSummons) do
-            hideTargetEffects[k] = v
-        end
-    end
-    if SpellCastBuffs.SV.IgnoreSetICDPlayer then
-        for k, v in pairs(Effects.IsSetICD) do
-            hidePlayerEffects[k] = v
-        end
-    end
-    if SpellCastBuffs.SV.IgnoreSetICDTarget then
-        for k, v in pairs(Effects.IsSetICD) do
             hideTargetEffects[k] = v
         end
     end
