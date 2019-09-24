@@ -76,6 +76,7 @@ SpellCastBuffs.Defaults = {
     IgnoreEsoPlusTarget              = true,
     IgnoreSoulSummonsPlayer          = false,
     IgnoreSoulSummonsTarget          = false,
+    IgnoreSetICDPlayer               = false,
     IgnoreFoodPlayer                 = false,
     IgnoreFoodTarget                 = false,
     IgnoreExperiencePlayer           = false,
@@ -2194,6 +2195,9 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
             return
         end
 
+        -- If this is a fake set ICD then don't display if we have Set ICD's disabled.
+        if Effects.IsSetICD[abilityId] and SpellCastBuffs.SV.IgnoreSetICDPlayer then return end
+
         -- Prominent Support
         local context
         if (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName]) then
@@ -2229,6 +2233,8 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         local endTime = beginTime + duration
         local source = zo_strformat("<<t:1>>",sourceName)
         local target = zo_strformat("<<t:1>>",targetName)
+        -- Pull unbreakable info from Shift Id if present
+        unbreakable = Effects.EffectOverride[finalId].unbreakable or unbreakable
         if source == LUIE.PlayerNameFormatted and target == LUIE.PlayerNameFormatted then
             -- If the "buff" is flagged as a debuff, then display it here instead
             if Effects.FakePlayerBuffs[abilityId].debuff == true then

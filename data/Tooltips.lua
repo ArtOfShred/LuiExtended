@@ -118,6 +118,8 @@ LUIE.Data.Tooltips = {
 
     Generic_Movement_Speed                          = GetString(SI_LUIE_SKILL_GENERIC_MOVEMENT_SPEED_TP),
 
+    Generic_Set_ICD                                 = GetString(SI_LUIE_SKILL_SET_GENERIC_ICD_TP),
+
     -- Resistances
     Generic_Physical_Resist                         = GetString(SI_LUIE_SKILL_GENERIC_PHYSICAL_RESIST_TP),
     Generic_Spell_Resist_No_Dur                     = GetString(SI_LUIE_SKILL_GENERIC_SPELL_RESIST_NO_DUR_TP),

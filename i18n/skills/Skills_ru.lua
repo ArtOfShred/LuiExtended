@@ -284,6 +284,8 @@ local strings = {
 
     SI_LUIE_SKILL_GENERIC_MOVEMENT_SPEED_TP =            "Increase Movement Speed by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
+    SI_LUIE_SKILL_SET_GENERIC_ICD_TP =                   "You have recently benefitted from the effects of <<2>> and cannot do so again for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+
     ----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------
     ----------------------------------------------------------------

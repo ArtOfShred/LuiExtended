@@ -397,6 +397,8 @@ local AbilityTables = {
     Set_Senchals_Duty                 = 129442,
     Set_Daring_Corsair                = 129534,
     Set_Phoenix                       = 68933,
+    Set_Immortal_Warrior              = 51300,
+    Set_Eternal_Warrior               = 61436,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 

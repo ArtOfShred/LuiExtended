@@ -577,6 +577,17 @@ function SpellCastBuffs.CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
             },
             {
+                -- Long Term - Set ICD - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP),
+                getFunc = function() return not Settings.IgnoreSetICDPlayer end,
+                setFunc = function(value) Settings.IgnoreSetICDPlayer = not value SpellCastBuffs.UpdateContextHideList() SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not Defaults.IgnoreSetICDPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( Settings.LongTermEffects_Player or Settings.LongTermEffects_Target ) ) end,
+            },
+            {
                 -- Long Term - Mundus - Player
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER),

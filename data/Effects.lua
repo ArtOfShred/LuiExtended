@@ -166,6 +166,13 @@ Effects.IsSoulSummons = {
     [43752] = true, -- Soul Summons
 }
 
+-- Internal Cooldown for cheat death set procs
+Effects.IsSetICD = {
+    [129477] = true, -- Immortal Warrior
+    [127235] = true, -- Eternal Warrior
+    [127032] = true, -- Phoenix
+}
+
 -- Food & Drink Buffs
 Effects.IsFoodBuff = {
     -- Food Buff
@@ -3772,6 +3779,9 @@ Effects.EffectOverride = {
     [86907] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
     [50992] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
     [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds', tooltip = Tooltips.Skill_Minor_Aegis }, -- Minor Aegis (Eternal Yokeda)
+    [129477] = { tooltip = Abilities.Set_Immortal_Warrior }, -- Major Protection (Immortal Yokeda)
+    [127235] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_warrior.dds' }, -- Eternal Warrior (Eternal Yokeda)
+    [127236] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_warrior.dds' }, -- Eternal Warrior (Eternal Yokeda)
 
     -- Trial Sets (Aetherian Archive)
     [51315] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Set_Destructive_Mage }, -- Destructive Mage (Aether... of Destruction)
@@ -3827,13 +3837,15 @@ Effects.EffectOverride = {
     [121829] = { icon = 'esoui/art/icons/achievement_els_sunspire_veteran.dds' }, -- False God's Devotion (False God's Devotion)
     [124801] = { tooltip = Abilities.Set_False_Gods_Devotion }, -- Major Expedition (Perfected False God's Devotion)
     [124800] = { icon = 'esoui/art/icons/achievement_els_sunspire_veteran.dds', name = Abilities.Set_False_Gods_Devotion }, -- False God's Devotion (Perfected False God's Devotion)
-
     [121898] = { icon = 'esoui/art/icons/achievement_els_sunspire_flavor_3.dds', tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
     [122812] = { icon = 'esoui/art/icons/achievement_els_sunspire_flavor_3.dds', tooltip = Tooltips.Set_Eye_of_Nahviintaas }, -- Eye of Nahviintaas (Nahviintaas')
-
     [121871] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds', tooltip = Tooltips.Skill_Major_Slayer }, -- Major Slayer (Lokkestiiz's)
-
     [121878] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_courage.dds', tooltip = Abilities.Set_Claw_of_Yolnakhriin }, -- Minor Courage (Yolnakriin's)
+
+    -- Set ICD's (Fake Id's)
+    [999009] = { tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Immortal_Warrior, unbreakable = 1 }, -- Immortal Warrior (Fake Id)
+    [999010] = { tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Eternal_Warrior, unbreakable = 1 }, -- Eternal Warrior (Fake Id)
+    [999011] = { tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Phoenix, unbreakable = 1 }, -- Phoenix (Fake Id)
 
     -- Battleground Sets
     [92908] = { tooltip = Abilities.Set_Cowards_Gear }, -- Major Expedition (Coward's Gear)
@@ -11501,6 +11513,11 @@ Effects.FakePlayerBuffs = {
     [97627] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = Abilities.Set_Ironblood, duration = 10000, debuff = true, shiftId = 97626 }, -- Ironblood
     [124303] = { duration = 3000 }, -- Senche-Raht's Grit (Senche-Raht's)
 
+    -- Set ICD's
+    [129477] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Immortal_Warrior, Abilities.Set_Cooldown), duration = 35000, shiftId = 999009, debuff = true }, -- Immortal Warrior
+    [127235] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Eternal_Warrior, Abilities.Set_Cooldown), duration = 60000, shiftId = 999010, debuff = true }, -- Eternal Warrior
+    [127032] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Phoenix, Abilities.Set_Cooldown), duration = 60000, shiftId = 999011, debuff = true }, -- Phoenix
+
     -- Player (Basic)
     [973] = { duration = 0 }, -- Sprint
     [33439] = { duration = 0 }, -- Mount Sprint (Generic)
@@ -11720,6 +11737,7 @@ Effects.FakeStagger = {
 -- Fake Ground Damaging Effect Auras - We use EffectOverride to pull information for these unlike the other tables above.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.AddGroundDamageAura = {
+
     --------------------
     -- PLAYER
     --------------------

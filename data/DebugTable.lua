@@ -1941,6 +1941,7 @@ LUIE.DebugAuras = {
     [50978] = true, -- Berserking Warrior (Advancing Yokeda)
 
     [51300] = true, -- Immortal Warrior (Immortal Yokeda)
+    [129477] = true, -- Major Protection (Immortal Yokeda)
 
     [50990] = true, -- Defending Warrior (Resilient Yokeda)
     [86907] = true, -- Defending Warrior (Resilient Yokeda)
@@ -1948,6 +1949,8 @@ LUIE.DebugAuras = {
 
     [61436] = true, -- Eternal Warrior (Eternal Yokeda)
     [76618] = true, -- Minor Aegis (Eternal Yokeda)
+    [127235] = true, -- Eternal Warrior (Eternal Yokeda)
+    [127236] = true, -- Eternal Warrior (Eternal Yokeda)
 
     -- Trial Sets (Aetherian Archive)
 
