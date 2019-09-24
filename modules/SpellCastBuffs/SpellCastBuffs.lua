@@ -1887,6 +1887,11 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         return
     end
 
+    -- If the ability is blacklisted
+    if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[abilityName] then
+        return
+    end
+    
     -- Create ground auras for damaging effects if toggled on
     if SCB.SV.GroundDamageAura and E.AddGroundDamageAura[abilityId] then
         -- Return if this isn't damage or healing, or blocked, dodged, or shielded.
