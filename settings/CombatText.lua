@@ -1957,6 +1957,7 @@ function CombatText.CreateSettings()
                 name    = GetString(SI_LUIE_LAM_CT_FONT_FACE),
                 tooltip = GetString(SI_LUIE_LAM_CT_FONT_FACE_TP),
                 choices = FontsList,
+                sort = "name-up",
                 getFunc = function() return Settings.fontFace end,
                 setFunc = function(face)
                     Settings.fontFace = face
@@ -2130,10 +2131,11 @@ function CombatText.CreateSettings()
             {
                 -- Crits
                 type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_THROTTLE_CRITICAL),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_THROTTLE_CRITICAL)),
                 tooltip = GetString(SI_LUIE_LAM_CT_THROTTLE_CRITICAL_TP),
-                getFunc = function() return Settings.toggles.showThrottleTrailer end,
+                getFunc = function() return Settings.toggles.throttleCriticals end,
                 setFunc = function(v) Settings.toggles.throttleCriticals = v end,
+                disabled = function() return not Settings.toggles.showThrottleTrailer end,
                 default = Defaults.toggles.throttleCriticals,
             },
         },
