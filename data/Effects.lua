@@ -39,6 +39,7 @@ Effects.IsToggle = {
 
     -- Sets
     [117082] = true, -- Frozen Watcher (Frozen Watcher)
+    [86555] = true, -- Major Evasion (Hist Bark)
 
     -- Sorcerer
     [23304] = true, -- Summon Unstable Familiar
@@ -522,6 +523,7 @@ Effects.EffectGroundDisplay = {
 
     -- Overland Sets
     [75691] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', buff = false, debuff = false, ground = true }, -- Bahraha's Curse
+    [71664] = { icon = 'LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds', buff = false, debuff = false, ground = true }, -- Trinimac's Valor
 
     -- Dungeon Sets
     [97538] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', buff = true, debuff = false, ground = false }, -- Draugr's Rest
@@ -3442,7 +3444,7 @@ Effects.EffectOverride = {
     [83288] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
     [83287] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
     [80853] = { tooltip = Abilities.Set_Pirate_Skeleton }, -- Major Protection (Pirate Skeleton)
-    [85637] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Abilities.Set_Pirate_Skeleton }, -- Minor Defile (Pirate Skeleton)
+    [85637] = { icon = 'esoui/art/icons/ability_debuff_major_defile.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Abilities.Set_Pirate_Skeleton }, -- Major Defile (Pirate Skeleton)
     [80606] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_selene.dds' }, -- Selene (Selene)
     [80607] = { hide = true }, -- Dummy (Selene)
     [80609] = { hide = true }, -- Dummy (Selene)
@@ -3515,7 +3517,7 @@ Effects.EffectOverride = {
     [75930] = { tooltip = Tooltips.Set_Eternal_Hunt }, -- Eternal Hunt
     [75929] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds' }, -- Eternal Hunt
     [76533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', tooltip = Tooltips.Generic_Immobilize }, -- Eternal Hunt
-    [86555] = { name = Abilities.Skill_Major_Evasion, tooltip = Abilities.Set_Hist_Bark }, -- Hist Bark
+    [86555] = { name = Abilities.Skill_Major_Evasion, tooltip = Abilities.Set_Hist_Bark, forcedContainer = 'short' }, -- Hist Bark
     [57207] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kagrenacs_hope.dds', hide = true }, -- Kagrenac's Hope
     [34381] = { hide = true }, -- Magnus
     [99204] = { icon = 'esoui/art/icons/achievement_update16_015.dds', tooltip = Tooltips.Set_Mechanical_Acuity }, -- Mechanical Acuity (of Mechanical Acuity)
@@ -3532,6 +3534,7 @@ Effects.EffectOverride = {
     [61782] = { tooltip = Abilities.Skill_Nobles_Conquest }, -- Minor Vulnerability (Noble's Conquest)
     [34587] = { icon = 'esoui/art/icons/achievement_021.dds' }, -- Song of Lamae
     [34588] = { icon = 'esoui/art/icons/achievement_021.dds' }, -- Song of Lamae
+    [69685] = { tooltip = Abilities.Set_Spectres_Eye }, -- Major Evasion (of the Spectre's Eye)
     [71067] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee_alt.dds', tooltip = Tooltips.Set_Trials_Shock }, -- Trial by Shock (Trials)
     [71058] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_melee_alt.dds', tooltip = Tooltips.Set_Trials_Fire }, -- Trial by Fire (Trials)
     [71019] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cold_melee_alt.dds', tooltip = Tooltips.Set_Trials_Frost }, -- Trial by Frost (Trials)
@@ -3580,6 +3583,7 @@ Effects.EffectOverride = {
     [122755] = { icon = 'LuiExtended/media/icons/abilities/ability_set_withered_hand.dds' }, -- Robes of the Withered Hand
     [122756] = { icon = 'LuiExtended/media/icons/abilities/ability_set_withered_hand.dds' }, -- Robes of the Withered Hand
     [71657] = { icon = 'LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds' }, -- Trinimac's Valor
+    [71664] = { tooltip = Tooltips.Set_Trinimacs_Valor }, -- Trinimac's Valor
     [71658] = { icon = 'LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds' }, -- Trinimac's Valor
     [93026] = { hide = true }, -- Mad Tinkerer (Mad Tinkerer's)
     [92982] = { hide = true }, -- Mad Tinkerer (Mad Tinkerer's)
@@ -3598,7 +3602,7 @@ Effects.EffectOverride = {
     [93326] = { hide = true }, -- Defiler
     [100704] = { hide = true }, -- Defiler
     [34875] = { icon = 'LuiExtended/media/icons/abilities/ability_set_night_terror.dds' }, -- Night Terror (of Night Terror)
-    [34611] = { icon = 'esoui/art/icons/perks_fighters_guild_002.dds', tooltip = Tooltips.Set_Senche }, -- Senche's Bite (Senche's)
+    [127192] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senches_bite.dds', tooltip = Tooltips.Generic_Critical_Damage, tooltipValue2 = 12 }, -- Senche's Bite (Senche's)
     [76344] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds', name = Abilities.Set_Syvarras_Scales, hide = true }, -- Serpent's Spirit (Syvarra's Scales)
     [75718] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds', name = Abilities.Set_Syvarras_Scales, tooltip = Tooltips.Generic_Poison, tooltipValue2 = 1 }, -- Serpent's Spirit (Syvarra's Scales)
     [52709] = { icon = 'LuiExtended/media/icons/abilities/ability_set_way_of_air.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration }, -- Way of Air (of the Air)
@@ -3625,8 +3629,7 @@ Effects.EffectOverride = {
     [99286] = { icon = 'esoui/art/icons/achievement_vvardenfel_046.dds' }, -- Livewire
     [79123] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morihaus.dds' }, -- Hide of Morihaus (of Morihaus)
     [79112] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morihaus.dds', tooltip = Tooltips.Generic_Knockdown }, -- Hide of Morihaus (of Morihaus)
-    [34526] = { icon = 'LuiExtended/media/icons/abilities/ability_set_seventh_legion.dds', tooltip = Tooltips.Generic_Weapon_Damage_Duration }, -- Seventh Legion Brute (Seventh Legion)
-    [57186] = { icon = 'LuiExtended/media/icons/abilities/ability_set_seventh_legion.dds' }, -- Seventh Legion Brute (Seventh Legion)
+    [127270] = { icon = 'LuiExtended/media/icons/abilities/ability_set_seventh_legion.dds', tooltip = Tooltips.Set_Seventh_Legion }, -- Seventh Legion Brute (Seventh Legion)
     [85593] = { tooltip = Abilities.Set_Shalk_Exoskeleton }, -- Minor Heroism (Shalk's)
     [85594] = { icon = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- Minor Heroism (Shalk's)
     [52711] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_melee.dds', name = Abilities.Set_Way_of_Fire }, -- Fiery Weapon (Way of Fire)
@@ -3635,7 +3638,7 @@ Effects.EffectOverride = {
     [57210] = { icon = 'LuiExtended/media/icons/abilities/ability_set_storm_knight.dds', tooltip = Tooltips.Set_Storm_Knight }, -- Storm Knight's Plate (of the Storm Knight)
     [57209] = { icon = 'LuiExtended/media/icons/abilities/ability_set_storm_knight.dds' }, -- Storm Knight's Plate (of the Storm Knight)
     [85551] = { tooltip = Abilities.Set_Vampire_Cloak }, -- Minor Protection (Vampire's Cloak)
-    [33514] = { icon = 'esoui/art/icons/perks_fighters_guild_003.dds', tooltip = Tooltips.Generic_Weapon_Damage_Duration }, -- Armor of the Veiled Heritance (of the Veiled Heritance)
+    [127275] = { icon = 'esoui/art/icons/perks_fighters_guild_003.dds', tooltip = Tooltips.Generic_Weapon_Damage_Duration_Value, tooltipValue2 = 400 }, -- Armor of the Veiled Heritance (of the Veiled Heritance)
     [33497] = { icon = 'esoui/art/icons/achievement_vvardenfel_035.dds' }, -- Thunderbug's Carapace (Thunderbug's)
     [92762] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_toughness.dds', tooltip = Abilities.Set_Warrior_Poet }, -- Minor Toughness (Warrior-Poet's)
     [106865] = { icon = 'LuiExtended/media/icons/abilities/ability_set_grace_of_gloom.dds', tooltip = Tooltips.Set_Grace_of_Gloom }, -- Grace of Gloom (Gloom-Graced)
@@ -3900,7 +3903,8 @@ Effects.EffectOverride = {
 
     [111575] = { icon = 'LuiExtended/media/icons/abilities/ability_set_crest_of_cyrodiil.dds' }, -- Crest of Cyrodiil (Cyrodiil's Crest)
 
-    [34872] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_ravager.dds', tooltip = Tooltips.Generic_Weapon_Damage_Duration }, -- The Ravager (Ravaging)
+    [127280] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_ravager.dds', tooltip = Tooltips.Set_Ravager }, -- The Ravager (Ravaging)
+    [127284] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_ravager.dds', tooltip = Tooltips.Set_Ravager }, -- The Ravager (Ravaging)
     [34512] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_juggernaut.dds' }, -- The Juggernaut (of the Juggernaut)
 
     -- Rewards for the Worthy Sets
@@ -11504,13 +11508,12 @@ Effects.FakePlayerBuffs = {
 
     -- Set Items
     --[59573] = { icon = 'esoui/art/icons/ability_buff_major_vitality.dds', name = Abilities.Skill_Major_Vitality, duration = 510 }, -- Major Vitality (Malubeth) TODO: Doesn't work
-    [98421] = { duration = 12000 }, -- Pirate Skeleton
-    [98419] = { duration = 12000 }, -- Pirate Skeleton
-    [98420] = { duration = 12000 }, -- Pirate Skeleton
-    [81675] = { duration = 12000 }, -- Pirate Skeleton
-    [83288] = { duration = 12000 }, -- Pirate Skeleton
-    [83287] = { duration = 12000 }, -- Pirate Skeleton
-    [71107] = { duration = 10000 }, -- Briarheart
+    [98421] = { duration = 10000 }, -- Pirate Skeleton
+    [98419] = { duration = 10000 }, -- Pirate Skeleton
+    [98420] = { duration = 10000 }, -- Pirate Skeleton
+    [81675] = { duration = 10000 }, -- Pirate Skeleton
+    [83288] = { duration = 10000 }, -- Pirate Skeleton
+    [83287] = { duration = 10000 }, -- Pirate Skeleton
     [97627] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = Abilities.Set_Ironblood, duration = 10000, debuff = true, shiftId = 97626 }, -- Ironblood
     [124303] = { duration = 3000 }, -- Senche-Raht's Grit (Senche-Raht's)
 

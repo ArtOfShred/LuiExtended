@@ -1092,8 +1092,8 @@ LUIE.DebugAuras = {
     [81675] = true, -- Pirate Skeleton
     [83288] = true, -- Pirate Skeleton
     [83287] = true, -- Pirate Skeleton
-    [80853] = true, -- Pirate Skeleton
-    [85637] = true, -- Pirate Skeleton
+    [80853] = true, -- Major Protection (Pirate Skeleton)
+    [85637] = true, -- Major Defile (Pirate Skeleton)
 
     [80599] = true, -- Selene
     [11317] = true, -- Generic Self PermaStun
@@ -1251,9 +1251,11 @@ LUIE.DebugAuras = {
     [71679] = true, -- Cleave (Morkuldin)
 
 
-    [79103] = true, -- Pelinal's
+    [79103] = true, -- Pelinal's Aptitude (Pelinal's)
 
-    [32801] = true, -- Orgnum's
+    [32756] = true, -- Oblivion's Foe (of Oblivion's Foe)
+
+    [32801] = true, -- Orgnum's Scales (Orgnum's Scales)
 
     [61783] = true, -- Redistributor (Redistribution)
     [61784] = true, -- Redistributor (Redistribution)
@@ -1286,6 +1288,9 @@ LUIE.DebugAuras = {
     [32784] = true, -- Song of Lamae (the Song of Lamae)
     [34587] = true, -- Song of Lamae (the Song of Lamae)
     [34588] = true, -- Song of Lamae (the Song of Lamae)
+
+    [32757] = true, -- Spectre's Eye (of the Spectre's Eye)
+    [69685] = true, -- Major Evasion (of the Spectre's Eye)
 
     [60457] = true, -- Twice-Born Star (the Twice-Born Star)
     [61584] = true, -- Prep To Remove Mundus (the Twice-Born Star)
@@ -1476,7 +1481,7 @@ LUIE.DebugAuras = {
     [32822] = true, -- Salvation (of Salvation)
 
     [32808] = true, -- Senche's Bite (Senche's)
-    [34611] = true, -- Senche's Bite (Senche's)
+    [127192] = true, -- Senche's Bite (Senche's)
 
     [32750] = true, -- Stygian (Stygian)
 
@@ -1557,8 +1562,8 @@ LUIE.DebugAuras = {
     [79112] = true, -- Hide of Morihaus (of Morihaus)
 
     [32752] = true, -- Seventh Legion Brute (Seventh Legion's)
-    [34526] = true, -- Seventh Legion Brute (Seventh Legion's)
-    [57186] = true, -- Seventh Legion Brute (Seventh Legion's)
+    [127270] = true, -- Seventh Legion Brute (Seventh Legion's)
+    [127271] = true, -- Seventh Legion Brute (Seventh Legion's)
 
     [85593] = true, -- Minor Heroism (Shalk's)
     [85594] = true, -- Minor Heroism (Shalk's)
@@ -1586,7 +1591,7 @@ LUIE.DebugAuras = {
     [85551] = true, -- Minor Protection (of the Vampire's Cloak)
 
     [29118] = true, -- Armor of the Veiled Heritance (of the Veiled Heritance)
-    [33514] = true, -- Armor of the Veiled Heritance (of the Veiled Heritance)
+    [127275] = true, -- Armor of the Veiled Heritance (of the Veiled Heritance)
 
     [32830] = true, -- Wyrd Tree's Blessing (of the Wyrd Tree)
 
@@ -1729,7 +1734,6 @@ LUIE.DebugAuras = {
     [85617] = true, -- Bone Pirate's Tatters (Bone Pirate's)
 
     [84305] = true, -- Heem-Jas' Retribution (Heem-Jas')
-    [84308] = true, -- Heem-Jas' Retribution (Heem-Jas')
     [84310] = true, -- Heem-Jas' Retribution (Heem-Jas')
 
     [88760] = true, -- Hircine's Veneer (Hircine's)
@@ -2200,7 +2204,8 @@ LUIE.DebugAuras = {
     [32800] = true, -- Elf Bane (of Elf Bane)
 
     [32831] = true, -- Ravager (Ravaging)
-    [34872] = true, -- The Ravager (Ravaging)
+    [127280] = true, -- Ravager (Ravaging)
+    [127284] = true, -- Ravager (Ravaging)
 
     [29121] = true, -- Armor of the Alessian Order (of the Alessian Order)
 
