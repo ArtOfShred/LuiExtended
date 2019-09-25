@@ -12,11 +12,11 @@ local callbackManager = CALLBACK_MANAGER
 
 function CombatText.CreateSettings()
     -- Load LibAddonMenu
-    local LAM = _G["LibAddonMenu2"]
+    local LAM = LibAddonMenu2
     if LAM == nil then return end
 
     -- Load LibMediaProvider with backwards compatibility
-    local LMP = _G["LibMediaProvider"]
+    local LMP = LibMediaProvider
     if LMP == nil then return end
 
     local Defaults = CombatText.Defaults
