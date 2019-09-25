@@ -20,7 +20,7 @@ local merchantOptionsKeys   = { [merchantNuzimeh] = 1, [merchantCat] = 2 }
 -- Create Slash Commands Settings Menu
 function SlashCommands.CreateSettings()
     -- Load LibAddonMenu
-    local LAM = _G["LibAddonMenu2"]
+    local LAM = LibAddonMenu2
     if LAM == nil then return end
 
     local Defaults = SlashCommands.Defaults

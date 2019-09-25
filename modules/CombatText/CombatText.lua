@@ -9,7 +9,7 @@ local CombatText = LUIE.CombatText
 
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 
-local LMP = LibStub("LibMediaProvider-1.0")
+local LMP = LibMediaProvider
 
 local moduleName = LUIE.name .. "CombatText"
 

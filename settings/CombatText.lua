@@ -16,7 +16,7 @@ function CombatText.CreateSettings()
     if LAM == nil then return end
 
     -- Load LibMediaProvider with backwards compatibility
-    local LMP = LibStub("LibMediaProvider-1.0")
+    local LMP = _G["LibMediaProvider"]
     if LMP == nil then return end
 
     local Defaults = CombatText.Defaults

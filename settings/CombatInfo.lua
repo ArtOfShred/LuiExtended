@@ -21,7 +21,7 @@ local ACTION_RESULT_AREA_EFFECT = 669966
 
 function CombatInfo.CreateSettings()
     -- Load LibAddonMenu
-    local LAM = _G["LibAddonMenu2"]
+    local LAM = LibAddonMenu2
     if LAM == nil then return end
 
     local Defaults = CombatInfo.Defaults

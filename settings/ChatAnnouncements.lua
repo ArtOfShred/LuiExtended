@@ -22,7 +22,7 @@ local duelStartOptionsKeys          = { ["Message + Icon"] = 1, ["Message Only"]
 
 function ChatAnnouncements.CreateSettings()
     -- Load LibAddonMenu
-    local LAM = _G["LibAddonMenu2"]
+    local LAM = LibAddonMenu2
     if LAM == nil then return end
 
     local Defaults = ChatAnnouncements.Defaults
