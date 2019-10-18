@@ -24,6 +24,7 @@ This is the translation for bla bla bla
 | `Skills_en.lua`   | 100% done  |
 | `Skills_ru.lua`   | 95%  done  |
 | `Skills_fr.lua`   | 0% done    |
+| `Skills_de.lua`   | 5% done    |
 | `Skills_jp.lua`   | 0% done    |
 
 ### Settings  
