@@ -13,7 +13,7 @@ Main addon translation idk what to write
 | `en.lua`   | 100% done  |
 | `ru.lua`   | 95%  done  |
 | `fr.lua`   | 0% done    |
-| `de.lua`   | 0% done    |
+| `de.lua`   | 100% done    |
 | `jp.lua`   | 0% done    |
 
 ### Skills
@@ -24,7 +24,6 @@ This is the translation for bla bla bla
 | `Skills_en.lua`   | 100% done  |
 | `Skills_ru.lua`   | 95%  done  |
 | `Skills_fr.lua`   | 0% done    |
-| `Skills_de.lua`   | 0% done    |
 | `Skills_jp.lua`   | 0% done    |
 
 ### Settings  
