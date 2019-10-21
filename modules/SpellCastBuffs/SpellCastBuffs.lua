@@ -1977,10 +1977,6 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
     end
 	
 	-- If the ability is blacklisted
-    if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[abilityName] then
-        return
-    end
-
     if SpellCastBuffs.SV.BlacklistTable[abilityId] or SpellCastBuffs.SV.BlacklistTable[abilityName] then
       return
     end
