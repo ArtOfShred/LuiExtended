@@ -4,7 +4,7 @@
 --]]
 
 -- Main LUI Extended localization
--- Translation by: <default>
+-- Translation by: AmonFlorian
 local strings = {
 
     -- LuiExtended
