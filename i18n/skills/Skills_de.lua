@@ -4,7 +4,7 @@
 --]]
 
 -- Skill names & Tooltips localization
--- Translation by: <default>
+-- Translation by: AmonFlorian
 local strings = {
 
     ----------------------------------------------------------------
