@@ -333,9 +333,9 @@ function CombatInfo.Initialize(enabled)
     CombatInfo.AbilityAlerts.SetAlertFramePosition()
     CombatInfo.AbilityAlerts.SetAlertColors()
 
-    -- Setup CCT
-    CombatInfo.CrowdControlTracker.UpdateAOEList()
-    CombatInfo.CrowdControlTracker.Initialize()
+    -- Setup CCT -- TODO: ENABLE WHEN READY
+    --CombatInfo.CrowdControlTracker.UpdateAOEList()
+    --CombatInfo.CrowdControlTracker.Initialize()
 end
 
 function CombatInfo.HookGCD()
