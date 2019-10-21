@@ -39,110 +39,110 @@ local windowTitles = {
 
 SpellCastBuffs.Enabled = false
 SpellCastBuffs.Defaults = {
-    IconSize                         	= 40,
-    LabelPosition                    	= 0,
-    BuffFontFace                     	= "Fontin Regular",
-    BuffFontStyle                    	= "outline",
-    BuffFontSize                     	= 16,
-    BuffShowLabel                    	= true,
-    Alignment                        	= "Centered",
-    AlignmentLongVert                	= "Top",
-    AlignmentLongHorz                	= "Centered",
-    SortDirection                    	= "Left to Right",
-    GlowIcons                        	= false,
-    RemainingText                    	= true,
-    RemainingTextColoured            	= false,
-    RemainingTextMillis              	= true,
-    RemainingCooldown                	= true,
-    FadeOutIcons                     	= false,
-    lockPositionToUnitFrames         	= true,
-    LongTermEffects_Player           	= true,
-    LongTermEffects_Target           	= true,
-    IgnoreMundusPlayer               	= false,
-    IgnoreMundusTarget               	= false,
-    IgnoreVampPlayer                 	= false,
-    IgnoreVampTarget                 	= false,
-    IgnoreLycanPlayer                	= false,
-    IgnoreLycanTarget                	= false,
-    IgnoreDiseasePlayer              	= false,
-    IgnoreDiseaseTarget              	= false,
-    IgnoreBitePlayer                 	= false,
-    IgnoreBiteTarget                 	= false,
-    IgnoreCyrodiilPlayer             	= false,
-    IgnoreCyrodiilTarget             	= false,
-    IgnoreBattleSpiritPlayer         	= false,
-    IgnoreBattleSpiritTarget         	= false,
-    IgnoreEsoPlusPlayer              	= true,
-    IgnoreEsoPlusTarget              	= true,
-    IgnoreSoulSummonsPlayer          	= false,
-    IgnoreSoulSummonsTarget          	= false,
-    IgnoreSetICDPlayer               	= false,
-    IgnoreFoodPlayer                 	= false,
-    IgnoreFoodTarget                 	= false,
-    IgnoreExperiencePlayer           	= false,
-    IgnoreExperienceTarget           	= false,
-    IgnoreDisguise                   	= false,
-    IgnoreCostume                    	= true,
-    IgnoreHat                        	= true,
-    IgnoreSkin                       	= true,
-    IgnorePolymorph                  	= true,
-    IgnoreAssistant                  	= true,
-    IgnorePet                        	= true,
-    IgnoreMount                      	= false,
-    MountGenericIcon                 	= false,
-    LongTermEffectsSeparate          	= true,
-    LongTermEffectsReverse           	= true,
-    LongTermEffectsSeparateAlignment 	= 2,
-    ShowBlockPlayer                  	= true,
-    ShowBlockTarget                  	= true,
-    StealthStatePlayer               	= true,
-    StealthStateTarget               	= true,
-    DisguiseStatePlayer              	= true,
-    DisguiseStateTarget              	= true,
-    ShowSprint                       	= true,
-    ShowGallop                       	= true,
-    ShowResurrectionImmunity         	= true,
-    ShowRecall                       	= true,
-    ShowWerewolf                     	= true,
-    HidePlayerBuffs                  	= false,
-    HidePlayerDebuffs                	= false,
-    HideTargetBuffs                  	= false,
-    HideTargetDebuffs                	= false,
-    HideGroundEffects                	= false,
-    ExtraBuffs                       	= true,
-    ExtraConsolidate                 	= false,
-    ExtraExpanded                    	= false,
-    ShowDebugCombat                  	= false,
-    ShowDebugEffect                  	= false,
-    ShowDebugFilter                  	= false,
-    ShowDebugAbilityId               	= false,
-    HideReduce                       	= true,
-    GroundDamageAura                 	= true,
-    ProminentLabel                   	= true,
-    ProminentLabelFontFace           	= "Univers 67",
-    ProminentLabelFontStyle          	= "outline",
-    ProminentLabelFontSize           	= 16,
-    ProminentProgress                	= true,
-    ProminentProgressTexture        	= "Plain",
-    ProminentProgressBuffC1         	= { 0, 1, 0 },
-    ProminentProgressBuffC2         	= { 0, .4, 0 },
-    ProminentProgressDebuffC1       	= { 1, 0, 0 },
-    ProminentProgressDebuffC2        	= { .4, 0, 0 },
-	ProminentBuffContainerAlignment 	= 2,
-	ProminentDebuffContainerAlignment	= 2,
-	ProminentBuffAlignmentVertical  	= "Bottom",
-    ProminentBuffAlignmentHorizontal	= "Centered",
-	ProminentDebuffAlignmentVertical 	= "Bottom",
-    ProminentDebuffAlignmentHorizontal	= "Centered",
-    ProminentBuffReverseSort         	= false,
-    ProminentDebuffReverseSort       	= false,
-    ProminentBuffLabelDirection     	= "Left",
-    ProminentDebuffLabelDirection   	= "Right",
-    PromBuffTable                    	= {},
-    PromDebuffTable                  	= {},
-    BlacklistTable                   	= {},
-    TooltipEnable                    	= true,
-    TooltipSticky                   	= 0,
+    IconSize                            = 40,
+    LabelPosition                       = 0,
+    BuffFontFace                        = "Fontin Regular",
+    BuffFontStyle                       = "outline",
+    BuffFontSize                        = 16,
+    BuffShowLabel                       = true,
+    Alignment                           = "Centered",
+    AlignmentLongVert                   = "Top",
+    AlignmentLongHorz                   = "Centered",
+    SortDirection                       = "Left to Right",
+    GlowIcons                           = false,
+    RemainingText                       = true,
+    RemainingTextColoured               = false,
+    RemainingTextMillis                 = true,
+    RemainingCooldown                   = true,
+    FadeOutIcons                        = false,
+    lockPositionToUnitFrames            = true,
+    LongTermEffects_Player              = true,
+    LongTermEffects_Target              = true,
+    IgnoreMundusPlayer                  = false,
+    IgnoreMundusTarget                  = false,
+    IgnoreVampPlayer                    = false,
+    IgnoreVampTarget                    = false,
+    IgnoreLycanPlayer                   = false,
+    IgnoreLycanTarget                   = false,
+    IgnoreDiseasePlayer                 = false,
+    IgnoreDiseaseTarget                 = false,
+    IgnoreBitePlayer                    = false,
+    IgnoreBiteTarget                    = false,
+    IgnoreCyrodiilPlayer                = false,
+    IgnoreCyrodiilTarget                = false,
+    IgnoreBattleSpiritPlayer            = false,
+    IgnoreBattleSpiritTarget            = false,
+    IgnoreEsoPlusPlayer                 = true,
+    IgnoreEsoPlusTarget                 = true,
+    IgnoreSoulSummonsPlayer             = false,
+    IgnoreSoulSummonsTarget             = false,
+    IgnoreSetICDPlayer                  = false,
+    IgnoreFoodPlayer                    = false,
+    IgnoreFoodTarget                    = false,
+    IgnoreExperiencePlayer              = false,
+    IgnoreExperienceTarget              = false,
+    IgnoreDisguise                      = false,
+    IgnoreCostume                       = true,
+    IgnoreHat                           = true,
+    IgnoreSkin                          = true,
+    IgnorePolymorph                     = true,
+    IgnoreAssistant                     = true,
+    IgnorePet                           = true,
+    IgnoreMount                         = false,
+    MountGenericIcon                    = false,
+    LongTermEffectsSeparate             = true,
+    LongTermEffectsReverse              = true,
+    LongTermEffectsSeparateAlignment    = 2,
+    ShowBlockPlayer                     = true,
+    ShowBlockTarget                     = true,
+    StealthStatePlayer                  = true,
+    StealthStateTarget                  = true,
+    DisguiseStatePlayer                 = true,
+    DisguiseStateTarget                 = true,
+    ShowSprint                          = true,
+    ShowGallop                          = true,
+    ShowResurrectionImmunity            = true,
+    ShowRecall                          = true,
+    ShowWerewolf                        = true,
+    HidePlayerBuffs                     = false,
+    HidePlayerDebuffs                   = false,
+    HideTargetBuffs                     = false,
+    HideTargetDebuffs                   = false,
+    HideGroundEffects                   = false,
+    ExtraBuffs                          = true,
+    ExtraConsolidate                    = false,
+    ExtraExpanded                       = false,
+    ShowDebugCombat                     = false,
+    ShowDebugEffect                     = false,
+    ShowDebugFilter                     = false,
+    ShowDebugAbilityId                  = false,
+    HideReduce                          = true,
+    GroundDamageAura                    = true,
+    ProminentLabel                      = true,
+    ProminentLabelFontFace              = "Univers 67",
+    ProminentLabelFontStyle             = "outline",
+    ProminentLabelFontSize              = 16,
+    ProminentProgress                   = true,
+    ProminentProgressTexture            = "Plain",
+    ProminentProgressBuffC1             = { 0, 1, 0 },
+    ProminentProgressBuffC2             = { 0, .4, 0 },
+    ProminentProgressDebuffC1           = { 1, 0, 0 },
+    ProminentProgressDebuffC2           = { .4, 0, 0 },
+    ProminentBuffContainerAlignment     = 2,
+    ProminentDebuffContainerAlignment   = 2,
+    ProminentBuffAlignmentVertical      = "Bottom",
+    ProminentBuffAlignmentHorizontal    = "Centered",
+    ProminentDebuffAlignmentVertical    = "Bottom",
+    ProminentDebuffAlignmentHorizontal  = "Centered",
+    ProminentBuffReverseSort            = false,
+    ProminentDebuffReverseSort          = false,
+    ProminentBuffLabelDirection         = "Left",
+    ProminentDebuffLabelDirection       = "Right",
+    PromBuffTable                       = {},
+    PromDebuffTable                     = {},
+    BlacklistTable                      = {},
+    TooltipEnable                       = true,
+    TooltipSticky                       = 0,
 }
 SpellCastBuffs.SV = nil
 
@@ -263,35 +263,35 @@ function SpellCastBuffs.Initialize(enabled)
     -- Create TopLevelWindows for Prominent Buffs
     uiTlw.prominentbuffs = UI.TopLevel( nil, nil )
     uiTlw.prominentbuffs:SetHandler( "OnMoveStop", function(self)
-			if self.alignVertical then
-				SpellCastBuffs.SV.prominentbVOffsetX = self:GetLeft()
-				SpellCastBuffs.SV.prominentbVOffsetY = self:GetTop()
-			else
-				SpellCastBuffs.SV.prominentbHOffsetX = self:GetLeft()
-				SpellCastBuffs.SV.prominentbHOffsetY = self:GetTop()
-			end
+            if self.alignVertical then
+                SpellCastBuffs.SV.prominentbVOffsetX = self:GetLeft()
+                SpellCastBuffs.SV.prominentbVOffsetY = self:GetTop()
+            else
+                SpellCastBuffs.SV.prominentbHOffsetX = self:GetLeft()
+                SpellCastBuffs.SV.prominentbHOffsetY = self:GetTop()
+            end
         end )
     uiTlw.prominentdebuffs = UI.TopLevel( nil, nil )
     uiTlw.prominentdebuffs:SetHandler( "OnMoveStop", function(self)
-			if self.alignVertical then
-				SpellCastBuffs.SV.prominentdVOffsetX = self:GetLeft()
-				SpellCastBuffs.SV.prominentdVOffsetY = self:GetTop()
-			else
-				SpellCastBuffs.SV.prominentdHOffsetX = self:GetLeft()
-				SpellCastBuffs.SV.prominentdHOffsetY = self:GetTop()
-			end
+            if self.alignVertical then
+                SpellCastBuffs.SV.prominentdVOffsetX = self:GetLeft()
+                SpellCastBuffs.SV.prominentdVOffsetY = self:GetTop()
+            else
+                SpellCastBuffs.SV.prominentdHOffsetX = self:GetLeft()
+                SpellCastBuffs.SV.prominentdHOffsetY = self:GetTop()
+            end
         end )
 
-	if SpellCastBuffs.SV.ProminentBuffContainerAlignment == 1 then
-		uiTlw.prominentbuffs.alignVertical = false
-	elseif SpellCastBuffs.SV.ProminentBuffContainerAlignment == 2 then
-		uiTlw.prominentbuffs.alignVertical = true
-	end
+    if SpellCastBuffs.SV.ProminentBuffContainerAlignment == 1 then
+        uiTlw.prominentbuffs.alignVertical = false
+    elseif SpellCastBuffs.SV.ProminentBuffContainerAlignment == 2 then
+        uiTlw.prominentbuffs.alignVertical = true
+    end
     if SpellCastBuffs.SV.ProminentDebuffContainerAlignment == 1 then
-		uiTlw.prominentdebuffs.alignVertical = false
-	elseif SpellCastBuffs.SV.ProminentDebuffContainerAlignment == 2 then
-		uiTlw.prominentdebuffs.alignVertical = true
-	end
+        uiTlw.prominentdebuffs.alignVertical = false
+    elseif SpellCastBuffs.SV.ProminentDebuffContainerAlignment == 2 then
+        uiTlw.prominentdebuffs.alignVertical = true
+    end
 
     containerRouting.promb_ground = "prominentbuffs"
     containerRouting.promb_target = "prominentbuffs"
@@ -528,27 +528,27 @@ end
 
 -- Function to loop through alignments
 function SpellCastBuffs.SetAlignment()
-	for _, v in pairs(containerRouting) do
+    for _, v in pairs(containerRouting) do
         if uiTlw[v].iconHolder then
             uiTlw[v].iconHolder:ClearAnchors()
             if uiTlw[v].alignVertical then
                 -- TODO: Might need to consolidate these two functions somehow, possibly consolidate all options so that Left = Top, Middle = Center, Right = Bottom
                 if v == "player_long" then
                     uiTlw[v].iconHolder:SetAnchor( g_longVertAlign )
-				elseif v== "prominentbuffs" then
-					uiTlw[v].iconHolder:SetAnchor( g_prominentVertBuffAlign)
-				elseif v== "prominentdebuffs" then
-					uiTlw[v].iconHolder:SetAnchor( g_prominentVertDebuffAlign)
+                elseif v== "prominentbuffs" then
+                    uiTlw[v].iconHolder:SetAnchor( g_prominentVertBuffAlign)
+                elseif v== "prominentdebuffs" then
+                    uiTlw[v].iconHolder:SetAnchor( g_prominentVertDebuffAlign)
                 else
                     uiTlw[v].iconHolder:SetAnchor( g_longVertAlign )
                 end
             else
                 if v == "player_long" then
                     uiTlw[v].iconHolder:SetAnchor( g_longHorizAlign )
-				elseif v== "prominentbuffs" then
-					uiTlw[v].iconHolder:SetAnchor( g_prominentHorizBuffAlign)
-				elseif v== "prominentdebuffs" then
-					uiTlw[v].iconHolder:SetAnchor( g_prominentHorizDebuffAlign)
+                elseif v== "prominentbuffs" then
+                    uiTlw[v].iconHolder:SetAnchor( g_prominentHorizBuffAlign)
+                elseif v== "prominentdebuffs" then
+                    uiTlw[v].iconHolder:SetAnchor( g_prominentHorizDebuffAlign)
                 else
                     uiTlw[v].iconHolder:SetAnchor( g_horizAlign )
                 end
@@ -570,8 +570,8 @@ function SpellCastBuffs.SetIconsAlignment(value)
     end
 
     g_horizAlign = ( value == "Left" ) and LEFT or ( value == "Right" ) and RIGHT or CENTER
-	
-	SpellCastBuffs.SetAlignment()
+    
+    SpellCastBuffs.SetAlignment()
 end
 
 -- Sets vertical alignment of Prominent Buff icons
@@ -702,11 +702,11 @@ function SpellCastBuffs.ResetTlwPosition()
     SpellCastBuffs.SV.playerHOffsetY = nil
     SpellCastBuffs.SV.prominentbVOffsetX = nil
     SpellCastBuffs.SV.prominentbVOffsetY = nil
-	SpellCastBuffs.SV.prominentbHOffsetX = nil
+    SpellCastBuffs.SV.prominentbHOffsetX = nil
     SpellCastBuffs.SV.prominentbHOffsetY = nil
     SpellCastBuffs.SV.prominentdVOffsetX = nil
     SpellCastBuffs.SV.prominentdVOffsetY = nil
-	SpellCastBuffs.SV.prominentdHOffsetX = nil
+    SpellCastBuffs.SV.prominentdHOffsetX = nil
     SpellCastBuffs.SV.prominentdHOffsetY = nil
     SpellCastBuffs.SetTlwPosition()
 end
@@ -773,36 +773,36 @@ function SpellCastBuffs.SetTlwPosition()
     -- Setup Prominent Buffs Position
     if uiTlw.prominentbuffs then
         uiTlw.prominentbuffs:ClearAnchors()
-		if uiTlw.prominentbuffs.alignVertical then
-			if SpellCastBuffs.SV.prominentbVOffsetX ~= nil and SpellCastBuffs.SV.prominentbVOffsetY ~= nil then
-				uiTlw.prominentbuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SpellCastBuffs.SV.prominentbVOffsetX, SpellCastBuffs.SV.prominentbVOffsetY )
-			else
-				uiTlw.prominentbuffs:SetAnchor( CENTER, GuiRoot, CENTER, -340, -100 )
-			end            
+        if uiTlw.prominentbuffs.alignVertical then
+            if SpellCastBuffs.SV.prominentbVOffsetX ~= nil and SpellCastBuffs.SV.prominentbVOffsetY ~= nil then
+                uiTlw.prominentbuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SpellCastBuffs.SV.prominentbVOffsetX, SpellCastBuffs.SV.prominentbVOffsetY )
+            else
+                uiTlw.prominentbuffs:SetAnchor( CENTER, GuiRoot, CENTER, -340, -100 )
+            end            
         else
-			if SpellCastBuffs.SV.prominentbHOffsetX ~= nil and SpellCastBuffs.SV.prominentbHOffsetY ~= nil then
-				uiTlw.prominentbuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SpellCastBuffs.SV.prominentbHOffsetX, SpellCastBuffs.SV.prominentbHOffsetY )
-			else
-				uiTlw.prominentbuffs:SetAnchor( CENTER, GuiRoot, CENTER, -340, -100 )
-			end              
+            if SpellCastBuffs.SV.prominentbHOffsetX ~= nil and SpellCastBuffs.SV.prominentbHOffsetY ~= nil then
+                uiTlw.prominentbuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SpellCastBuffs.SV.prominentbHOffsetX, SpellCastBuffs.SV.prominentbHOffsetY )
+            else
+                uiTlw.prominentbuffs:SetAnchor( CENTER, GuiRoot, CENTER, -340, -100 )
+            end              
         end
     end
 
     if uiTlw.prominentdebuffs then
         uiTlw.prominentdebuffs:ClearAnchors()
-		if uiTlw.prominentdebuffs.alignVertical then
-			if SpellCastBuffs.SV.prominentdVOffsetX ~= nil and SpellCastBuffs.SV.prominentdVOffsetY ~= nil then
-				uiTlw.prominentdebuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SpellCastBuffs.SV.prominentdVOffsetX, SpellCastBuffs.SV.prominentdVOffsetY )
-			else
-				uiTlw.prominentdebuffs:SetAnchor( CENTER, GuiRoot, CENTER, 340, -100 )
-			end
-		else
-			if SpellCastBuffs.SV.prominentdHOffsetX ~= nil and SpellCastBuffs.SV.prominentdHOffsetY ~= nil then
-				uiTlw.prominentdebuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SpellCastBuffs.SV.prominentdHOffsetX, SpellCastBuffs.SV.prominentdHOffsetY )
-			else
-				uiTlw.prominentdebuffs:SetAnchor( CENTER, GuiRoot, CENTER, 340, -100 )
-			end		
-		end
+        if uiTlw.prominentdebuffs.alignVertical then
+            if SpellCastBuffs.SV.prominentdVOffsetX ~= nil and SpellCastBuffs.SV.prominentdVOffsetY ~= nil then
+                uiTlw.prominentdebuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SpellCastBuffs.SV.prominentdVOffsetX, SpellCastBuffs.SV.prominentdVOffsetY )
+            else
+                uiTlw.prominentdebuffs:SetAnchor( CENTER, GuiRoot, CENTER, 340, -100 )
+            end
+        else
+            if SpellCastBuffs.SV.prominentdHOffsetX ~= nil and SpellCastBuffs.SV.prominentdHOffsetY ~= nil then
+                uiTlw.prominentdebuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SpellCastBuffs.SV.prominentdHOffsetX, SpellCastBuffs.SV.prominentdHOffsetY )
+            else
+                uiTlw.prominentdebuffs:SetAnchor( CENTER, GuiRoot, CENTER, 340, -100 )
+            end        
+        end
     end
 end
 
@@ -904,16 +904,16 @@ function SpellCastBuffs.Reset()
 
     -- Prominent buffs & debuffs
     if uiTlw.prominentbuffs then
-		if uiTlw.prominentbuffs.alignVertical then
-			uiTlw.prominentbuffs:SetDimensions( SpellCastBuffs.SV.IconSize + 6, 400 )
-		else
-			uiTlw.prominentbuffs:SetDimensions( 500, SpellCastBuffs.SV.IconSize + 6 )
-		end
-		if uiTlw.prominentdebuffs.alignVertical then
-			uiTlw.prominentdebuffs:SetDimensions( SpellCastBuffs.SV.IconSize + 6, 400 )
-		else
-			uiTlw.prominentdebuffs:SetDimensions( 500, SpellCastBuffs.SV.IconSize + 6 )
-		end
+        if uiTlw.prominentbuffs.alignVertical then
+            uiTlw.prominentbuffs:SetDimensions( SpellCastBuffs.SV.IconSize + 6, 400 )
+        else
+            uiTlw.prominentbuffs:SetDimensions( 500, SpellCastBuffs.SV.IconSize + 6 )
+        end
+        if uiTlw.prominentdebuffs.alignVertical then
+            uiTlw.prominentdebuffs:SetDimensions( SpellCastBuffs.SV.IconSize + 6, 400 )
+        else
+            uiTlw.prominentdebuffs:SetDimensions( 500, SpellCastBuffs.SV.IconSize + 6 )
+        end
     end
 
     -- Reset alignment and sort
@@ -1975,8 +1975,8 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
     if not (Effects.FakeExternalBuffs[abilityId] or Effects.FakeExternalDebuffs[abilityId] or Effects.FakePlayerBuffs[abilityId] or Effects.FakeStagger[abilityId] or Effects.AddGroundDamageAura[abilityId]) then
         return
     end
-	
-	-- If the ability is blacklisted
+    
+    -- If the ability is blacklisted
     if SpellCastBuffs.SV.BlacklistTable[abilityId] or SpellCastBuffs.SV.BlacklistTable[abilityName] then
       return
     end
