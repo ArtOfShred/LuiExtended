@@ -1915,6 +1915,10 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
         return
     end
 
+    if SpellCastBuffs.SV.BlacklistTable[abilityId] or SpellCastBuffs.SV.BlacklistTable[abilityName] then
+      return
+    end
+
     -- Create ground auras for damaging effects if toggled on
     if SpellCastBuffs.SV.GroundDamageAura and Effects.AddGroundDamageAura[abilityId] then
         -- Return if this isn't damage or healing, or blocked, dodged, or shielded.
@@ -2307,6 +2311,10 @@ end
 function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
     if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET then
         return
+    end
+
+    if SpellCastBuffs.SV.BlacklistTable[abilityId] or SpellCastBuffs.SV.BlacklistTable[abilityName] then
+      return
     end
 
     if not (Effects.FakePlayerExternalBuffs[abilityId] or Effects.FakePlayerDebuffs[abilityId] or Effects.FakeStagger[abilityId]) then
