@@ -323,8 +323,8 @@ local strings = {
     SI_LUIE_SKILL_ERUPTION_TP =                          "Enemies in the ash cloud have their Movement Speed reduced by |cffffff70|r% and take Flame Damage every |cffffff1|r second.",
     SI_LUIE_SKILL_MAGMA_ARMOR_TP =                       "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies take Flame Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_CORROSIVE_ARMOR_TP =                   "Incoming damage is limited to |cffffff3|r% of your Max Health and nearby enemies take Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nWhile active, this ability and your Direct Damage dealt ignores enemy Physical Resistance.",
-    SI_LUIE_SKILL_STONEFIST_TP =                         "If you reach |cffffff5|r stacks of Stagger within |cffffff<<1>>|r seconds then you will be stunned for |cffffff3|r seconds, and have all stacks of Stagger removed.",
-    SI_LUIE_SKILL_STONE_GIANT_TP =                       "Increase damage taken by |cffffff25|r per stack for |cffffff<<1>>|r seconds.\n\nIf you reach |cffffff5|r stacks of Stagger then you will be stunned for |cffffff3|r seconds, and have all stacks of Stagger removed.",
+    SI_LUIE_SKILL_STONEFIST_TP =                         "If you reach |cffffff3|r stacks of Stagger within |cffffff<<1>>|r seconds then you will be stunned for |cffffff3|r seconds, and have all stacks of Stagger removed.",
+    SI_LUIE_SKILL_STONE_GIANT_TP =                       "Increase damage taken by |cffffff45|r per stack for |cffffff<<1>>|r seconds.\n\nIf you reach |cffffff3|r stacks of Stagger then you will be stunned for |cffffff3|r seconds, and have all stacks of Stagger removed.",
 
     -- Nightblade Skills
     SI_LUIE_SKILL_DEATH_STROKE_DEBUFF =                  "Увеличивает урон, получаемый от Клинка ночи на |cFFFFFF20|r% в течение |cFFFFFF6|r секунд.",
