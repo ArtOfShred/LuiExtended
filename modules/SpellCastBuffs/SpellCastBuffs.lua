@@ -1978,7 +1978,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
     
     -- If the ability is blacklisted
     if SpellCastBuffs.SV.BlacklistTable[abilityId] or SpellCastBuffs.SV.BlacklistTable[abilityName] then
-      return
+        return
     end
 
     -- Create ground auras for damaging effects if toggled on
@@ -2375,8 +2375,9 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
         return
     end
 
+    -- If the ability is blacklisted
     if SpellCastBuffs.SV.BlacklistTable[abilityId] or SpellCastBuffs.SV.BlacklistTable[abilityName] then
-      return
+        return
     end
 
     if not (Effects.FakePlayerExternalBuffs[abilityId] or Effects.FakePlayerDebuffs[abilityId] or Effects.FakeStagger[abilityId]) then
