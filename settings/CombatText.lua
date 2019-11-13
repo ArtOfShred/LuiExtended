@@ -2009,6 +2009,19 @@ function CombatText.CreateSettings()
                 setFunc = function(v) Settings.animation.animationType = v end,
                 default = Defaults.animation.animationType,
             },
+			{
+                -- Animation Duration
+                type    = "slider",
+                name    = GetString(SI_LUIE_LAM_CT_ANIMATION_DURATION),
+                tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_DURATION_TP),
+				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                getFunc = function() return Settings.animation.animationDuration end,
+                setFunc = function(v) Settings.animation.animationDuration = v end,
+				min     = 5,
+				max     = 300,
+				step    = 5,
+                default = 100,
+            },
             {
                 -- Incoming Direction
                 type    = "dropdown",
