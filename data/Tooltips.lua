@@ -365,6 +365,7 @@ LUIE.Data.Tooltips = {
     Set_Maelstrom_DW                                = GetString(SI_LUIE_SKILL_SET_MAELSTROM_DW),
     Set_Maelstrom_1H                                = GetString(SI_LUIE_SKILL_SET_MAELSTROM_1H),
     Set_Master_1H                                   = GetString(SI_LUIE_SKILL_SET_MASTER_1H),
+    Set_Master_Resto                                = GetString(SI_LUIE_SKILL_SET_MASTER_RESTO),
     Set_Blackrose_1H                                = GetString(SI_LUIE_SKILL_SET_BLACKROSE_1H_TP),
     Set_Blackrose_Destro_Staff                      = GetString(SI_LUIE_SKILL_SET_BLACKROSE_DESTRO_TP),
 
@@ -387,6 +388,7 @@ LUIE.Data.Tooltips = {
     Set_Molag_Kena                                  = GetString(SI_LUIE_SKILL_SET_MOLAG_KENA_TP),
     Set_Pirate_Skeleton                             = GetString(SI_LUIE_SKILL_SET_PIRATE_SKELETON_TP),
     Set_Sentinel_of_Rkugamz                         = GetString(SI_LUIE_SKILL_SET_SENTINEL_OF_REKUGAMZ_TP),
+    Set_Sentinel_of_Rkugamz_Ground                  = GetString(SI_LUIE_SKILL_SET_SENTINEL_OF_REKUGAMZ_GROUND_TP),
     Set_Shadowrend                                  = GetString(SI_LUIE_SKILL_SET_SHADOWREND_TP),
     Set_Spawn_of_Mephala                            = GetString(SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_TP),
     Set_Stormfist                                   = GetString(SI_LUIE_SKILL_SET_STORMFIST_TP),

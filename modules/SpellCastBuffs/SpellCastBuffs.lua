@@ -570,7 +570,7 @@ function SpellCastBuffs.SetIconsAlignment(value)
     end
 
     g_horizAlign = ( value == "Left" ) and LEFT or ( value == "Right" ) and RIGHT or CENTER
-    
+
     SpellCastBuffs.SetAlignment()
 end
 
@@ -778,13 +778,13 @@ function SpellCastBuffs.SetTlwPosition()
                 uiTlw.prominentbuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SpellCastBuffs.SV.prominentbVOffsetX, SpellCastBuffs.SV.prominentbVOffsetY )
             else
                 uiTlw.prominentbuffs:SetAnchor( CENTER, GuiRoot, CENTER, -340, -100 )
-            end            
+            end
         else
             if SpellCastBuffs.SV.prominentbHOffsetX ~= nil and SpellCastBuffs.SV.prominentbHOffsetY ~= nil then
                 uiTlw.prominentbuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SpellCastBuffs.SV.prominentbHOffsetX, SpellCastBuffs.SV.prominentbHOffsetY )
             else
                 uiTlw.prominentbuffs:SetAnchor( CENTER, GuiRoot, CENTER, -340, -100 )
-            end              
+            end
         end
     end
 
@@ -801,7 +801,7 @@ function SpellCastBuffs.SetTlwPosition()
                 uiTlw.prominentdebuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SpellCastBuffs.SV.prominentdHOffsetX, SpellCastBuffs.SV.prominentdHOffsetY )
             else
                 uiTlw.prominentdebuffs:SetAnchor( CENTER, GuiRoot, CENTER, 340, -100 )
-            end        
+            end
         end
     end
 end
@@ -1942,7 +1942,7 @@ function SpellCastBuffs.ArtificialEffectUpdate(eventCode, effectId)
         end
 
         if (effectId == 3) then
-            duration = 1200000
+            duration = 300000
             startTime = GetGameTimeMilliseconds()
             endTime = startTime + ( GetLFGCooldownTimeRemainingSeconds(LFG_COOLDOWN_BATTLEGROUND_DESERTED) * 1000 )
             effectType = BUFF_EFFECT_TYPE_BUFF -- Set to buff so it shows in long duration effects
@@ -1975,7 +1975,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
     if not (Effects.FakeExternalBuffs[abilityId] or Effects.FakeExternalDebuffs[abilityId] or Effects.FakePlayerBuffs[abilityId] or Effects.FakeStagger[abilityId] or Effects.AddGroundDamageAura[abilityId]) then
         return
     end
-    
+
     -- If the ability is blacklisted
     if SpellCastBuffs.SV.BlacklistTable[abilityId] or SpellCastBuffs.SV.BlacklistTable[abilityName] then
         return

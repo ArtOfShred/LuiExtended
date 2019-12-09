@@ -3070,6 +3070,7 @@ Effects.EffectOverride = {
     ----------------------------------------------------------------
 
     -- Crafted Food
+    [61256] = { hide = true }, -- Magicka Consumable (Health + Stamina Food)
     [61259] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_green.dds', tooltip = Tooltips.Food_Crafted_Health }, -- Health Food
     [61260] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_green.dds', tooltip = Tooltips.Food_Crafted_Magicka }, -- Magicka Food
     [61261] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_green.dds', tooltip = Tooltips.Food_Crafted_Stamina }, -- Stamina Food
@@ -3321,7 +3322,7 @@ Effects.EffectOverride = {
 
     [18084] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_burning.dds', tooltip = Tooltips.Generic_Burn, tooltipValue2 = 2 }, -- Burning (Fire Status Effect)
     [21925] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_diseased.dds' }, -- Diseased (Disease Status Effect)
-    [21927] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_diseased.dds', tooltip = Abilities.Proc_Diseased }, -- Major Defile (Disease Status Effect)
+    [21927] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_diseased.dds', tooltip = Abilities.Proc_Diseased }, -- Minor Defile (Disease Status Effect)
     [21481] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds', name = Abilities.Proc_Chilled }, -- Chill (Frost Status Effect)
     [68368] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds', tooltip = Abilities.Proc_Chilled }, -- Minor Maim (Frost Status Effect)
     [21929] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_poisoned.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Poisoned (Poison Status Effect)
@@ -3378,7 +3379,8 @@ Effects.EffectOverride = {
     -- Master Weapons
     [99761] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_puncturing_remedy.dds' }, -- Puncturing Remedy (Master 1H + shield)
     [100575] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_puncturing_remedy.dds', tooltip = Tooltips.Set_Master_1H }, -- Puncturing Remedy (Master 1H + shield)
-    [99781] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds' }, -- Grand Rejuvenation (Master Restoration Staff)
+    [99781] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds', tooltip = Tooltips.Set_Master_Resto }, -- Grand Rejuvenation (Master Restoration Staff)
+    [131489] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds' }, -- Grand Rejuvenation (Master Restoration Staff)
 
     -- Blackrose Weapons
     [113617] = { name = Abilities.Skill_Major_Protection, tooltip = Abilities.Set_Blackrose_DW }, -- Spectral Cloak (Blackrose DW)
@@ -3423,6 +3425,7 @@ Effects.EffectOverride = {
     [59586] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = Abilities.Set_Lord_Warden_Dusk, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur }, -- Lord Warden (Lord Warden)
     [59587] = { tooltip = Tooltips.Set_Lord_Warden_Buff }, -- Lord Warden (Lord Warden)
     [59568] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = Abilities.Set_Malubeth_the_Scourger, tooltip = Tooltips.Set_Malubeth }, -- Scourge Harvest (Malubeth)
+    [61275] = { tooltip = Abilities.Set_Malubeth_the_Scourger, forcedContainer = 'short' }, -- Major Vitality (Malubeth)
     [59573] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = Abilities.Set_Malubeth_the_Scourger }, -- Scourge Harvest (Malubeth)
     [59508] = { icon = 'esoui/art/icons/achievement_ic_020.dds', name = Abilities.Set_Maw_of_the_Infernal, tooltip = Tooltips.Set_Maw_of_the_Infernal }, -- Banished Cells Item Set (Maw of the Infernal)
     [60974] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_maw_of_the_infernal.dds'}, -- Jagged Claw (Maw of the Infernal)
@@ -3446,8 +3449,9 @@ Effects.EffectOverride = {
     [80544] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds' }, -- Sellistrix (Sellistrix)
     [80549] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds', tooltip = Tooltips.Generic_Stun }, -- Sellistrix (Sellistrix)
     [81036] = { hide = true, tooltip = Tooltips.Set_Sentinel_of_Rkugamz }, -- Sentinel of Rkugamz
-    [81038] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Sentinel of Rkugamz
+    [81038] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds', groundLabel = true, tooltip = Tooltips.Set_Sentinel_of_Rkugamz_Ground }, -- Sentinel of Rkugamz
     [81041] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds' }, -- Sentinel of Rkugamz
+    [133239] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarvenspider_heal.dds' }, -- Sentinel of Rkugamz
     [80955] = { hide = true }, -- Shadowrend (Shadowrend)
     [80954] = { hide = true, tooltip = Tooltips.Set_Shadowrend }, -- Shadowrend Summon (Shadowrend)
     [80980] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_headbutt.dds', name = Abilities.Skill_Headbutt }, -- Shadowrend (Shadowrend)
@@ -3606,7 +3610,7 @@ Effects.EffectOverride = {
     [34870] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wilderqueen.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 30 }, -- Wilderqueen's Arch (of the Wilderqueen)
     [99268] = { icon = 'LuiExtended/media/icons/abilities/ability_set_unfathomable_darkness.dds', tooltip = Tooltips.Set_Unfathomable_Darknesss }, -- Unfathomable Darkness (of Unfathomable Darkness)
     [99267] = { icon = 'LuiExtended/media/icons/abilities/ability_set_unfathomable_darkness.dds', hide = true }, -- Unfathomable Darkness (of Unfathomable Darkness)
-    [34508] = { icon = 'LuiExtended/media/icons/abilities/ability_set_werewolf_hide.dds' }, -- Hide of the Werewolf (Werewolf Hide)
+    [34508] = { icon = 'esoui/art/icons/crownstore_skillline_werewolf.dds' }, -- Hide of the Werewolf (Werewolf Hide)
     [18993] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Witchman Armor (Witchman's)
     [85818] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Witchman Armor (Witchman's)
     [106860] = { tooltip = Abilities.Set_Gyphons_Ferocity }, -- Minor Expedition (Gyphon's Ferocity)
@@ -3713,9 +3717,9 @@ Effects.EffectOverride = {
     [85605] = { tooltip = Abilities.Set_Toothrow }, -- Major Savagery (Toothrow)
     [101970] = { icon = 'LuiExtended/media/icons/abilities/ability_set_invigoration.dds' }, -- Trappings of Invigoration
     [84350] = { icon = 'esoui/art/icons/achievement_update11_dungeons_035.dds' }, -- Widowmaker
-    [111387] = { icon = 'esoui/art/icons/mh_no_rage_cleanse.dds', tooltip = Tooltips.Set_Blood_Moon_Scent }, -- Blood Scent (Blood Moon)
-    [111386] = { icon = 'LuiExtended/media/icons/abilities/ability_set_blood_moon.dds', tooltip = Tooltips.Set_Blood_Moon_Frenzied }, -- Frenzied (Blood Moon)
-    [111216] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_bleed.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 2 }, -- Savage Werewolf (Savage Werewolf)
+    [111387] = { icon = 'esoui/art/icons/mos_dagrund_upheavel.dds', tooltip = Tooltips.Set_Blood_Moon_Scent }, -- Blood Scent (Blood Moon)
+    [111386] = { icon = 'LuiExtended/media/icons/abilities/ability_set_frenzied.dds', tooltip = Tooltips.Set_Blood_Moon_Frenzied }, -- Frenzied (Blood Moon)
+    [111216] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_bleed.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 1 }, -- Savage Werewolf (Savage Werewolf)
     [116742] = { icon = 'esoui/art/icons/achievement_wrothgar_003.dds', tooltip = Tooltips.Set_Tzogvins_Warband }, -- Precision (Tzogvin's Warband)
     [116775] = { tooltip = Abilities.Set_Tzogvins_Warband, hide = true }, -- Minor Force (Tzogvin's Warband)
     [116954] = { hide = true }, -- Stalked (Scavenging Demise)
@@ -3794,6 +3798,7 @@ Effects.EffectOverride = {
     [51176] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_010.dds', tooltip = Tooltips.Set_Twice_Fanged_Serpent }, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
     [98103] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of the Vicious Ophidian)
     [50997] = { tooltip = Abilities.Set_Quick_Serpent }, -- Major Expedition (Ophidian.. of Celerity)
+    [57159] = { icon = 'LuiExtended/media/icons/abilities/ability_set_quick_serpent.dds' }, -- Quick Serpent (Ophidian.. of Celerity)
     [81524] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', name = Abilities.Skill_Major_Expedition, tooltip = Abilities.Set_Vicious_Serpent }, -- Quick Serpent (of the Vicious Ophidian)
     [81522] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicious_serpent.dds', name = Abilities.Set_Vicious_Serpent }, -- Serpent Stamina (of the Vicious Ophidian)
 
@@ -3913,6 +3918,7 @@ Effects.EffectOverride = {
 
     [76947] = { name = Abilities.Skill_Minor_Defile, tooltip = Abilities.Set_Fasallas_Guile }, -- Fasalla's Guile (of Fasalla's Guile)
     [76950] = { icon = 'esoui/art/icons/ability_warrior_025.dds', tooltip = Tooltips.Set_Warriors_Fury }, -- Warrior's Fury (of Fury)
+    [128494] = { tooltip = Tooltips.Set_Warriors_Fury }, -- Warrior's Fury (of Fury)
     [76936] = { icon = 'LuiExtended/media/icons/abilities/ability_set_transmutation.dds', tooltip = Tooltips.Set_Robes_of_Transmutation }, -- Transmutation (of Transmutation)
     [76938] = { icon = 'esoui/art/icons/procs_003.dds' }, -- Vicious Death (of Vicious Death)
 
@@ -11489,7 +11495,6 @@ Effects.FakePlayerBuffs = {
     [110483] = { duration = 6800 }, -- Ghost Lantern (Ghost Lantern)
 
     -- Set Items
-    --[59573] = { icon = 'esoui/art/icons/ability_buff_major_vitality.dds', name = Abilities.Skill_Major_Vitality, duration = 510 }, -- Major Vitality (Malubeth) TODO: Doesn't work
     [98421] = { duration = 10000 }, -- Pirate Skeleton
     [98419] = { duration = 10000 }, -- Pirate Skeleton
     [98420] = { duration = 10000 }, -- Pirate Skeleton

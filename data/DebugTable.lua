@@ -972,6 +972,7 @@ LUIE.DebugAuras = {
     [99774] = true, -- Destructive Impact (Master)
     [99780] = true, -- Grand Rejuvenation (Master)
     [99781] = true, -- Grand Rejuvenation (Master)
+    [131489] = true, -- Grand Rejuvenation (Master)
 
     [113616] = true, -- Spectral Cloak (Blackrose DW)
     [113617] = true, -- Spectral Cloak (Blackrose DW)
@@ -1113,6 +1114,7 @@ LUIE.DebugAuras = {
     [81037] = true, -- Sentinel of Rkugamz
     [81038] = true, -- Sentinel of Rkugamz
     [81041] = true, -- Sentinel of Rkugamz
+    [133239] = true, -- Sentinel of Rkugamz
 
     [80951] = true, -- Shadowrend
     [80955] = true, -- Forward Charge
@@ -1983,6 +1985,7 @@ LUIE.DebugAuras = {
 
     [50995] = true, -- Quick Serpent (Ophidian... of Celerity)
     [50997] = true, -- Major Expedition (Ophidian... of Celerity)
+    [57159] = true, -- Quick Serpent (Ophidian... of Celerity)
 
     [61440] = true, -- Vicious Serpent (of the Vicious Ophidian)
     [98103] = true, -- Minor Slayer (of the Vicious Ophidian)
@@ -2137,8 +2140,6 @@ LUIE.DebugAuras = {
 
     [32779] = true, -- Robes of Alteration Mastery (of Alteration Mastery)
 
-    [47355] = true, -- Grace of the Ancients (of Ancient Grace)
-
     [32819] = true, -- The Arch-Mage (of the Arch-Mage)
     [70392] = true, -- The Arch-Mage (of the Arch-Mage)
 
@@ -2149,6 +2150,8 @@ LUIE.DebugAuras = {
     [32833] = true, -- Light of Cyrodiil (of Cyrodiil's Light)
     [111550] = true, -- Light of Cyrodiil (of Cyrodiil's Light)
     [112750] = true, -- Light of Cyrodiil (of Cyrodiil's Light)
+
+    [129374] = true, -- Wrath of Imperium (of Imperial Wrath)
 
     [29093] = true, -- Desert Rose (of the Desert Rose)
     [33498] = true, -- Desert Rose (of the Desert Rose)
@@ -2214,6 +2217,7 @@ LUIE.DebugAuras = {
     [32737] = true, -- The Juggernaut (of the Juggernaut)
     [34512] = true, -- The Juggernaut (of the Juggernaut)
 
+    [129364] = true, -- Battle Hardened (of the Potentates)
     [47356] = true, -- Blessing of the Potentates (of the Potentates)
 
     -- Rewards for the Worthy Sets
@@ -2243,7 +2247,7 @@ LUIE.DebugAuras = {
 
     [76949] = true, -- Warrior's Fury (of Fury)
     [76950] = true, -- Warrior's Fury (of Fury)
-    [76951] = true, -- 10 Stack Count FX Dummy (of Fury)
+    [128494] = true, -- Warrior's Fury (of Fury)
 
     [76940] = true, -- Leki's Focus (Leki's)
 

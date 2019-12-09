@@ -131,6 +131,12 @@ function LUIE.InitializeHooks()
                 end
             end
 
+            if attackName == GetString(SI_LUIE_SKILL_FALL_DAMAGE) then
+                if LUIE.Data.Effects.EffectOverride[10950] then
+                    attackIcon = LUIE.Data.Effects.EffectOverride[10950].icon
+                end
+            end
+
             return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
         end
 
