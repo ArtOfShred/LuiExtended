@@ -306,6 +306,7 @@ CombatText.Defaults = {
     -- Animation defaults
     animation = {
         animationType               = "ellipse",
+		animationDuration           = 100,
         outgoingIcon                = "left",
         incomingIcon                = "right",
         outgoing = {
