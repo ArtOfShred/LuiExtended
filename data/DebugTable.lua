@@ -1074,8 +1074,8 @@ LUIE.DebugAuras = {
     [126940] = true, -- Maarselok (Maarselok)
     [126941] = true, -- Maarselok (Maarselok)
 
-    [80482] = true, -- Major Ward (Mighty Chudan)
-    [91983] = true, -- Major Resolve (Mighty Chudan)
+    [80482] = true, -- Mighty Chudan (Mighty Chudan)
+    [130633] = true, -- Major Resolve (Mighty Chudan)
 
     [66792] = true, -- Molag Kena (Molag Kena)
     [66808] = true, -- Molag Kena (Molag Kena)
@@ -1926,7 +1926,6 @@ LUIE.DebugAuras = {
 
     [116798] = true, -- Mighty Glacier (Mighty Glacier)
     [117670] = true, -- Mighty Glacier (Mighty Glacier)
-    [116804] = true, -- Major Ward (Mighty Glacier)
     [116805] = true, -- Major Resolve (Mighty Glacier)
 
     [117059] = true, -- Frozen Watcher (Frozen Watcher)
@@ -4847,14 +4846,12 @@ LUIE.DebugAuras = {
     [115206] = true, -- Bone Armor (Bone Armor)
     [123903] = true, -- Bone Armor (Bone Armor)
     [115211] = true, -- Major Resolve (Bone Armor)
-    [115214] = true, -- Major Ward (Bone Armor)
     [122661] = true, -- Corpse Spawn (Bone Armor)
     [123911] = true, -- Bone Armor (Bone Armor)
 
     [118237] = true, -- Beckoning Armor (Beckoning Armor)
     [123927] = true, -- Beckoning Armor (Beckoning Armor)
     [118239] = true, -- Major Resolve (Beckoning Armor)
-    [118240] = true, -- Major Ward (Beckoning Armor)
     [122679] = true, -- Corpse Spawn (Beckoning Armor)
     [123929] = true, -- Bone Armor (Beckoning Armor)
     [118241] = true, -- Beckoning Armor (Beckoning Armor)
@@ -4864,7 +4861,6 @@ LUIE.DebugAuras = {
     [118244] = true, -- Summoner's Armor (Summoner's Armor)
     [123964] = true, -- Summoner's Armor (Summoner's Armor)
     [118246] = true, -- Major Resolve (Summoner's Armor)
-    [118247] = true, -- Major Ward (Summoner's Armor)
     [122680] = true, -- Corpse Spawn (Summoner's Armor)
     [123965] = true, -- Bone Armor (Summoner's Armor)
 
@@ -5814,21 +5810,18 @@ LUIE.DebugAuras = {
 
     [37243] = true, -- Blessing of Protection (Blessing of Protection)
     [37247] = true, -- Minor Resolve (Blessing of Protection)
-    [62619] = true, -- Minor Ward (Blessing of Protection)
     [38300] = true, -- Blessing of Protection (Blessing of Protection)
     [38299] = true, -- Blessing of Protection (Blessing of Protection)
     [38298] = true, -- Blessing of Protection (Blessing of Protection)
 
     [40103] = true, -- Blessing of Restoration (Blessing of Restoration)
     [62626] = true, -- Minor Resolve (Blessing of Restoration)
-    [62627] = true, -- Minor Ward (Blessing of Restoration)
     [40106] = true, -- Blessing of Restoration (Blessing of Restoration)
     [40108] = true, -- Blessing of Restoration (Blessing of Restoration)
     [40105] = true, -- Blessing of Restoration (Blessing of Restoration)
 
     [40094] = true, -- Combat Prayer (Combat Prayer)
     [62634] = true, -- Minor Resolve (Combat Prayer)
-    [62635] = true, -- Minor Ward (Combat Prayer)
     [62636] = true, -- Minor Berserk (Combat Prayer)
     [40097] = true, -- Combat Prayer (Combat Prayer)
     [40096] = true, -- Combat Prayer (Combat Prayer)
@@ -5947,19 +5940,14 @@ LUIE.DebugAuras = {
     -- HEAVY ARMOR
     [29552] = true, -- Unstoppable (Unstoppable)
     [63084] = true, -- Major Resolve (Unstoppable)
-    [63085] = true, -- Major Ward (Unstoppable)
-    [29553] = true, -- Unstoppable (Unstoppable)
     [126581] = true, -- Unstoppable (Unstoppable)
 
     [39205] = true, -- Unstoppable Brute (Unstoppable Brute)
     [63134] = true, -- Major Resolve (Unstoppable Brute)
-    [63135] = true, -- Major Ward (Unstoppable Brute)
-    [63133] = true, -- Unstoppable Brute (Unstoppable Brute)
     [126582] = true, -- Unstoppable (Unstoppable)
 
     [39197] = true, -- Immovable (Immovable)
     [63119] = true, -- Major Resolve (Immovable)
-    [63120] = true, -- Major Ward (Immovable)
     [63118] = true, -- Immovable (Immovable)
     [126583] = true, -- Immovable (Immovable)
 
@@ -6564,7 +6552,6 @@ LUIE.DebugAuras = {
 
     [40441] = true, -- Balance (Balance)
     [40442] = true, -- Balance (Balance)
-    [40443] = true, -- Major Ward (Balance)
     [80160] = true, -- Major Resolve (Balance)
     [48141] = true, -- Balance (Balance)
     [97297] = true, -- Equilibrium (Equilibrium)
@@ -6684,10 +6671,8 @@ LUIE.DebugAuras = {
     [103747] = true, -- Mend Spirit (Mend Spirit)
     [107629] = true, -- Mend Spirit (Mend Spirit)
     [107632] = true, -- Major Resolve (Mend Spirit)
-    [107631] = true, -- Major Ward (Mend Spirit)
     [107630] = true, -- Mend Spirit (Mend Spirit)
     [103752] = true, -- Major Resolve (Mend Spirit)
-    [103751] = true, -- Major Ward (Mend Spirit)
     [118638] = true, -- Mend Spirit (Mend Spirit)
 
     [103755] = true, -- Symbiosis (Symbiosis)

@@ -1760,7 +1760,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
         end
 
         -- Outdated and unused - might be useful in the future
-        -- Specific override for old version of Mend Spirit -- Updates Major Resolve / Major Ward to use the remaining duration of Mend Spirit.
+        -- Specific override for old version of Mend Spirit -- Updates Major Resolve to use the remaining duration of Mend Spirit.
         --[[
         if Effects.EffectPullDuration[abilityId] then
             local matchId = Effects.EffectPullDuration[abilityId]

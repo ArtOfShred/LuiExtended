@@ -818,12 +818,9 @@ Effects.EffectCreateSkillAura = {
     [39100] = { removeOnEnd = true, abilityId = 39095 }, -- Minor Magickasteal (Elemental Drain)
 
     -- Restoration Staff
-    [37247] = { consolidate = true, abilityId = 37243 }, -- Minor Resolve (Blessing of Protection)
-    [62619] = { consolidate = true, abilityId = 37243 }, -- Minor Ward (Blessing of Protection)
-    [62626] = { consolidate = true, abilityId = 40103, name = Abilities.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration)
-    [62627] = { consolidate = true, abilityId = 40103, name = Abilities.Skill_Blessing_of_Restoration }, -- Minor Ward (Blessing of Restoration)
+    [37247] = { consolidate = true, extendedDisplay = true, abilityId = 37243 }, -- Minor Resolve (Blessing of Protection)
+    [62626] = { consolidate = true, extendedDisplay = true, abilityId = 40103, name = Abilities.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration)
     [62634] = { consolidate = true, abilityId = 40094 }, -- Minor Resolve (Combat Prayer)
-    [62635] = { consolidate = true, abilityId = 40094 }, -- Minor Ward (Combat Prayer)
     [62636] = { consolidate = true, abilityId = 40094 }, -- Minor Berserk (Combat Prayer)
     [88565] = { removeOnEnd = true, abilityId = 31531 }, -- Minor Lifesteal (Force Siphon)
     [88575] = { removeOnEnd = true, abilityId = 40109 }, -- Minor Lifesteal (Siphon Spirit)
@@ -842,8 +839,7 @@ Effects.EffectCreateSkillAura = {
     [77928] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999005 }, -- Major Prophecy --> Magelight
     [77945] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999006 }, -- Major Prophecy --> Inner Light
     [77958] = { consolidate = true, extendedDisplay = true, removeOnEnd = true, abilityId = 999007 }, -- Major Prophecy --> Radiant Magelight
-    [40443] = { consolidate = true, abilityId = 40441 }, -- Balance --> Major Ward
-    [80160] = { consolidate = true, abilityId = 40441 }, -- Balance --> Major Resolve
+    [80160] = { consolidate = true, extendedDisplay = true, abilityId = 40441 }, -- Balance --> Major Resolve
 
     -- Psijic Order
     [103521] = { consolidate = true, extendedDisplay = true, abilityId = 103503 }, -- Minor Force --> Accelerate
@@ -1009,7 +1005,7 @@ Effects.BarHighlightExtraId = {
 -- ORIGINAL TRACKED ID = OTHER ID'S TO CHECK FOR
 -- Priority is ID1 > ID2 if present
 -- If duration value is set to an ID, the duration will be pulled from this ID
--- If durationMod value is set to an ID, this value will be subtracted from the final duration
+-- If durationMod value is set to an ID, this value will be subtracted from the final duration (UNUSED)
 -- Note that any secondary id's for Bar Highlight in the table above will set their id to the original tracked id here
 Effects.BarHighlightCheckOnFade = {
 
@@ -1069,9 +1065,9 @@ Effects.BarHighlightCheckOnFade = {
     [39196] = { id1 = 63019, unitTag = "player" }, -- Shuffle --> Major Evasion
 
     -- Heavy Armor
-    [29553] = { duration = 63084, durationMod = 29553, unitTag = "player" }, -- Immovable --> Major Resolve / Major Ward
-    [63133] = { duration = 63084, durationMod = 29553, unitTag = "player" }, -- Immovable Brute --> Major Resolve / Major Ward
-    [63118] = { duration = 63084, durationMod = 29553, unitTag = "player" }, -- Unstoppable --> Major Resolve / Major Ward
+    [126581] = { id1 = 63084, unitTag = "player" }, -- Unstoppable --> Major Resolve
+    [126582] = { id1 = 63134, unitTag = "player" }, -- Immovable Brute --> Major Resolve
+    [63118] = { id1 = 63119, unitTag = "player" }, -- Immovable --> Major Resolve
 
     -- Werewolf
     [45834] = { id1 = 39113, id2 = 45834, unitTag = "reticleover" }, -- Off Balance --> Ferocious Roar / Off Balance
@@ -1080,7 +1076,7 @@ Effects.BarHighlightCheckOnFade = {
     -- Mages Guild
     [126374] = { id1 = 63227, unitTag = "player" }, -- Degeneration --> Major Sorcery
     [40449] = { id1 = 48136, unitTag = "player" }, -- Spell Symmetry
-    [48141] = { id1 = 40443 , id2 = 80160, unitTag = "player" }, -- Balance --> Major Ward / Major Resolve
+    [48141] = { id1 = 80160, unitTag = "player" }, -- Balance --> Major Resolve
 
     -- Psijic Order
     [122260] = { id1 = 103712, id2 = 103711, unitTag = "player" }, -- Race Against Time --> Minor Force / Minor Expedition
@@ -1451,9 +1447,9 @@ Effects.BarHighlightOverride = {
     [29556] = { newId = 63015, ignoreMouseover = true }, -- Evasion --> Major Evasion
     [39195] = { newId = 39196, ignoreMouseover = true }, -- Shuffle
     [39192] = { newId = 126958, showFakeAura = true }, -- Elude
-    [29552] = { newId = 29553, ignoreMouseover = true }, -- Immovable
-    [39205] = { newId = 63133, ignoreMouseover = true }, -- Immovable Brute
-    [39197] = { newId = 63118, ignoreMouseover = true }, -- Unstoppable
+    [29552] = { newId = 126581, ignoreMouseover = true }, -- Unstoppable
+    [39205] = { newId = 126582, ignoreMouseover = true }, -- Immovable Brute
+    [39197] = { newId = 63118, ignoreMouseover = true }, -- Immovable
 
     ---------------------------
     -- Soul Magic -------------
@@ -3432,8 +3428,7 @@ Effects.EffectOverride = {
     [60974] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_maw_of_the_infernal.dds'}, -- Jagged Claw (Maw of the Infernal)
     [60972] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds'}, -- Fiery Breath (Maw of the Infernal)
     [60973] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds'}, -- Fiery Jaws (Maw of the Infernal)
-    [80482] = { tooltip = Abilities.Set_Mighy_Chudan }, -- Major Ward (Mighty Chudan)
-    [91983] = { tooltip = Abilities.Set_Mighy_Chudan }, -- Major Resolve (Mighty Chudan)
+    [130633] = { tooltip = Abilities.Set_Mighty_Chudan }, -- Major Resolve (Mighty Chudan)
     [66808] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds', tooltip = Tooltips.Set_Molag_Kena }, -- Molag Kena (Molag Kena)
     [66812] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds', tooltip = Tooltips.Set_Molag_Kena_Overkill }, -- Overkill (Molag Kena)
     [59593] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_nerieneth.dds', name = Abilities.Set_Nerieneth }, -- Lich Crystal (Nerien'eth)
@@ -3767,7 +3762,6 @@ Effects.EffectOverride = {
     [112414] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
     [111445] = { icon = 'LuiExtended/media/icons/abilities/ability_set_haven_of_ursus.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Ursus's Blessing (Haven of Ursus)
     [111221] = { tooltip = Abilities.Set_Jailers_Tenacity }, -- Major Vitality (Jailer's Tenacity)
-    [116804] = { tooltip = Abilities.Set_Mighty_Glacier }, -- Major Ward (Mighty Glacier)
     [116805] = { tooltip = Abilities.Set_Mighty_Glacier }, -- Major Resolve (Mighty Glacier)
     [117082] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', forcedContainer = 'short', tooltip = Tooltips.Set_Frozen_Watcher }, -- Frozen Watcher (Frozen Watcher)
     [117060] = { icon = 'esoui/art/icons/ability_wrothgar_bitingcold.dds' }, -- Frozen Watcher (Frozen Watcher)
@@ -5270,19 +5264,16 @@ Effects.EffectOverride = {
     -- Bone Armor / Beckoning Armor / Summoner's Armor
     [115206] = { tooltip = Tooltips.Skill_Bone_Armor }, -- Bone Armor (Bone Armor)
     [115211] = { tooltip = Abilities.Skill_Bone_Armor, consolidate = true }, -- Major Resolve (Bone Armor)
-    [115214] = { tooltip = Abilities.Skill_Bone_Armor, consolidate = true }, -- Major Ward (Bone Armor)
     [122661] = { hide = true }, -- Corpse Spawn (Bone Armor)
     [123911] = { hide = true }, -- Bone Armor (Bone Armor
     [118237] = { tooltip = Tooltips.Skill_Beckoning_Armor }, -- Beckoning Armor (Beckoning Armor)
     [118239] = { tooltip = Abilities.Skill_Beckoning_Armor, consolidate = true }, -- Major Resolve (Beckoning Armor)
-    [118240] = { tooltip = Abilities.Skill_Beckoning_Armor, consolidate = true }, -- Major Ward (Beckoning Armor)
     [122679] = { hide = true }, -- Corpse Spawn (Beckoning Armor)
     [123929] = { hide = true }, -- Bone Armor (Beckoning Armor
     [118241] = { icon = 'esoui/art/icons/ability_necromancer_008_a.dds' }, -- Beckoning Armor (Beckoning Armor)
     [118242] = { icon = 'esoui/art/icons/ability_necromancer_008_a.dds', tooltip = Tooltips.Generic_Stun }, -- Beckoning Armor (Beckoning Armor)
     [118244] = { tooltip = Tooltips.Skill_Summoners_Armor }, -- Summoner's Armor (Summoner's Armor)
     [118246] = { tooltip = Abilities.Skill_Summoners_Armor, consolidate = true }, -- Major Resolve (Summoner's Armor)
-    [118247] = { tooltip = Abilities.Skill_Summoners_Armor, consolidate = true }, -- Major Ward (Summoner's Armor)
     [122680] = { hide = true }, -- Corpse Spawn (Summoner's Armor)
     [123965] = { hide = true }, -- Bone Armor (Summoner's Armor
 
@@ -5760,14 +5751,11 @@ Effects.EffectOverride = {
 
     -- Blessing of Protection / Blessing of Restoration / Combat Prayer
     [37243] = { hide = true }, -- Blessing of Protection (Blessing of Protection)
-    [37247] = { consolidate = true, tooltip = Abilities.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection)
-    [62619] = { consolidate = true, tooltip = Abilities.Skill_Blessing_of_Protection }, -- Minor Ward (Blessing of Protection)
+    [37247] = { consolidateExtra = true, tooltip = Abilities.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection)
     [40103] = { hide = true, name = Abilities.Skill_Blessing_of_Restoration }, -- Blessing of Restoration (Blessing of Restoration)
-    [62626] = { consolidate = true, tooltip = Abilities.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration)
-    [62627] = { consolidate = true, tooltip = Abilities.Skill_Blessing_of_Restoration }, -- Minor Ward (Blessing of Restoration)
+    [62626] = { consolidateExtra = true, tooltip = Abilities.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration)
     [40094] = { hide = true }, -- Combat Prayer (Combat Prayer)
     [62634] = { consolidate = true, tooltip = Abilities.Skill_Combat_Prayer }, -- Minor Resolve (Combat Prayer)
-    [62635] = { consolidate = true, tooltip = Abilities.Skill_Combat_Prayer }, -- Minor Ward (Combat Prayer)
     [62636] = { consolidate = true, tooltip = Abilities.Skill_Combat_Prayer }, -- Minor Berserk (Combat Prayer)
 
     -- Steadfast Ward / Ward Ally / Healing Ward
@@ -5836,17 +5824,14 @@ Effects.EffectOverride = {
     -- HEAVY ARMOR
     [29552] = { hide = true }, -- Unstoppable (Unstoppable)
     [63084] = { tooltip = Abilities.Skill_Unstoppable }, -- Major Resolve (Unstoppable)
-    [63085] = { tooltip = Abilities.Skill_Unstoppable }, -- Major Ward (Unstoppable)
-    [29553] = { tooltip = Tooltips.Skill_Unstoppable }, -- Unstoppable (Unstoppable)
+    [126581] = { icon = 'esoui/art/icons/ability_armor_001.dds', tooltip = Tooltips.Skill_Unstoppable }, -- Unstoppable (Unstoppable)
 
-    [39205] = { tooltip = Tooltips.Skill_Unstoppable_Brute }, -- Unstoppable Brute (Unstoppable Brute)
+    [39205] = { hide = true }, -- Unstoppable Brute (Unstoppable Brute)
     [63134] = { tooltip = Abilities.Skill_Unstoppable_Brute }, -- Major Resolve (Unstoppable Brute)
-    [63135] = { tooltip = Abilities.Skill_Unstoppable_Brute }, -- Major Ward (Unstoppable Brute)
-    [63133] = { tooltip = Tooltips.Skill_Unstoppable }, -- Unstoppable Brute (Unstoppable Brute)
+    [126582] = { icon = 'esoui/art/icons/ability_armor_001_a.dds', tooltip = Tooltips.Skill_Unstoppable }, -- Unstoppable Brute (Unstoppable Brute)
 
     [39197] = { hide = true }, -- Immovable (Immovable)
     [63119] = { tooltip = Abilities.Skill_Immovable }, -- Major Resolve (Immovable)
-    [63120] = { tooltip = Abilities.Skill_Immovable }, -- Major Ward (Immovable)
     [63118] = { tooltip = Tooltips.Skill_Immovable }, -- Immovable (Immovable)
 
     ----------------------------------------------------------------
@@ -6169,8 +6154,7 @@ Effects.EffectOverride = {
     [48131] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Equilibrium }, -- Equilibrium (Equilibrium)
     [48136] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Equilibrium }, -- Spell Symmetry (Spell Symmetry)
     [40449] = { tooltip = Tooltips.Skill_Spell_Symmetry }, -- Spell Symmetry (Spell Symmetry)
-    [40443] = { consolidate = true, tooltip = Abilities.Skill_Balance }, -- Major Ward (Balance)
-    [80160] = { consolidate = true, tooltip = Abilities.Skill_Balance }, -- Major Resolve (Balance)
+    [80160] = { consolidateExtra = true, tooltip = Abilities.Skill_Balance }, -- Major Resolve (Balance)
     [48141] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Equilibrium }, -- Balance (Balance)
 
     -- Meteor / Ice Comet / Shooting Star
@@ -6248,9 +6232,7 @@ Effects.EffectOverride = {
     [103747] = { tooltip = Tooltips.Skill_Mend_Spirit }, -- Mend Spirit (Mend Spirit)
     [107629] = { hide = true }, -- Mend Spirit (Mend Spirit)
     [107632] = { tooltip = Abilities.Skill_Mend_Spirit }, -- Major Resolve (Mend Spirit)
-    [107631] = { tooltip = Abilities.Skill_Mend_Spirit }, -- Major Ward (Mend Spirit)
     [103752] = { tooltip = Abilities.Skill_Mend_Spirit }, -- Major Resolve (Mend Spirit)
-    [103751] = { tooltip = Abilities.Skill_Mend_Spirit }, -- Major Ward (Mend Spirit)
     [118638] = { icon = 'esoui/art/icons/ability_psijic_006_a.dds' }, -- Mend Spirit (Mend Spirit)
     [103755] = { tooltip = Tooltips.Skill_Symbiosis }, -- Symbiosis (Symbiosis)
     [107636] = { hide = true }, -- Symbiosis (Symbiosis)
@@ -11548,14 +11530,6 @@ Effects.FakePlayerBuffs = {
     [92068] = { duration = 6000 }, -- Crystalized Shield (Crystallized Shield)
     [92168] = { duration = "GET" }, -- Crystalized Slab (Crystallized Slab)
     [92170] = { duration = "GET" }, -- Shimmering Shield (Shimmering Shield)
-
-    -- Heavy Armor
-    [63084] = { duration = "GET" }, -- Major Resolve (Unstoppable)
-    [63085] = { duration = "GET" }, -- Major Ward (Unstoppable)
-    [63134] = { duration = "GET" }, -- Major Resolve (Unstoppable Brute)
-    [63135] = { duration = "GET" }, -- Major Ward (Unstoppable Brute)
-    [63119] = { duration = "GET" }, -- Major Resolve (Immovable)
-    [63120] = { duration = "GET" }, -- Major Ward (Immovable)
 
     -- Vampire
     --[40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = Abilities.Skill_Feed, duration = 5300 }, -- Feed (Blood Ritual)
