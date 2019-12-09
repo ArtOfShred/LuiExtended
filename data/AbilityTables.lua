@@ -286,7 +286,11 @@ local AbilityTables = {
     -- ITEM SETS -----------------------------------------
     -- ---------------------------------------------------
 
-    Set_Asylum_Destruction_Staff      = 99596, -- Concentrated Force (Perfected)
+    Set_Piercing_Spray                = 100302, -- Piercing Spray (Asylum Bow)
+    Set_Disciplined_Slash             = 100294, -- Disciplined Slash (Asylum 2H)
+    Set_Defensive_Position            = 100462, -- Defensive Position (Asylum 1H + Shield)
+    Set_Concentrated_Force            = 100306, -- Concentrated Force (Asylum Destruction Staff)
+    Set_Timeless_Blessing             = 100308, -- Timeless Blessing (Asylum Restoration Staff)
     Set_Bogdan_the_Nightflame         = GetString(SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME),
     Set_Lord_Warden_Dusk              = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK),
     Set_Malubeth_the_Scourger         = GetString(SI_LUIE_SKILL_SET_MALUBETH_THE_SCOURGER),

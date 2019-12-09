@@ -3360,12 +3360,12 @@ Effects.EffectOverride = {
     [100306] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds', tooltip = Tooltips.Set_Asylum_Destruction_Staff }, -- Concentrated Force (Asylum Destruction Staff)
 
     -- Asylum Weapons (Perfected)
-    [99363] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_piercing_spray.dds', tooltip = Tooltips.Set_Asylum_Bow_Perfect }, -- Piercing Spray (Perfected) (Perfected Asylum Bow)
-    [99361] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_disciplined_slash.dds' }, -- Disciplined Slash (Perfected) (Perfected Asylum 2H)
-    [99920] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds' }, -- Defensive Position (Perfected) (Perfected Asylum 1H + Shield)
-    [99919] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds' }, -- Defensive Position (Perfected) (Perfected Asylum 1H + Shield)
-    [99582] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_timeless_blessing.dds', tooltip = Tooltips.Set_Aslyum_Restoration_Staff_P }, -- Timeless Blessing (Perfected) (Perfected Asylum Restoration Staff)
-    [99989] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds', name = Abilities.Set_Asylum_Destruction_Staff, tooltip = Tooltips.Set_Asylum_Destruction_Staff_P }, -- Concentrated Force (P) (Asylum Destruction Staff)
+    [99363] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_piercing_spray.dds', name = Abilities.Set_Piercing_Spray, tooltip = Tooltips.Set_Asylum_Bow_Perfect }, -- Piercing Spray (Perfected) (Perfected Asylum Bow)
+    [99361] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_disciplined_slash.dds', name = Abilities.Set_Disciplined_Slash }, -- Disciplined Slash (Perfected) (Perfected Asylum 2H)
+    [99920] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds', name = Abilities.Set_Defensive_Position }, -- Defensive Position (Perfected) (Perfected Asylum 1H + Shield)
+    [99919] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds', name = Abilities.Set_Defensive_Position }, -- Defensive Position (Perfected) (Perfected Asylum 1H + Shield)
+    [99582] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_timeless_blessing.dds', name = Abilities.Set_Timeless_Blessing, tooltip = Tooltips.Set_Aslyum_Restoration_Staff_P }, -- Timeless Blessing (Perfected) (Perfected Asylum Restoration Staff)
+    [99989] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds', name = Abilities.Set_Concentrated_Force, tooltip = Tooltips.Set_Asylum_Destruction_Staff_P }, -- Concentrated Force (P) (Asylum Destruction Staff)
 
     -- Maelstrom Weapons
     [99806] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_cruel_flurry.dds', tooltip = Tooltips.Set_Maelstrom_DW }, -- Cruel Flurry (Maelstrom Dual Wield)
@@ -3383,7 +3383,7 @@ Effects.EffectOverride = {
     [131489] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds' }, -- Grand Rejuvenation (Master Restoration Staff)
 
     -- Blackrose Weapons
-    [113617] = { name = Abilities.Skill_Major_Protection, tooltip = Abilities.Set_Blackrose_DW }, -- Spectral Cloak (Blackrose DW)
+    [113617] = { tooltip = Abilities.Set_Blackrose_DW }, -- Spectral Cloak (Blackrose DW)
     [113619] = { hide = true }, -- Virulent Shot (Blackrose Bow) -- SHOWS ONLY ON TARGET PLAYERS
     [113627] = { icon = 'LuiExtended/media/icons/abilities/ability_set_virulent_shot.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Virulent Shot (Blackrose Bow)
     [113553] = { icon = 'LuiExtended/media/icons/abilities/ability_set_radial_uppercut.dds' }, -- Radial Uppercut (Blackrose 2H)
@@ -3396,12 +3396,12 @@ Effects.EffectOverride = {
 
     -- Monster Sets
     [111505] = { icon = 'esoui/art/icons/vmh_killhulks.dds', tooltip = Tooltips.Set_Balorgh }, -- Balorgh (Balorgh)
-    [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist }, -- Blood Spawn (Blood Spawn)
+    [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 6450 }, -- Blood Spawn (Blood Spawn)
     [61274] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds' }, -- Blood Spawn (Blood Spawn)
     [59590] = { tooltip = Tooltips.Set_Bogdan_the_Nightflame }, -- Imperial Prison Item Set (Bogdan the Nightflame)
     [59591] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = Abilities.Set_Bogdan_the_Nightflame, groundLabel = true, tooltip = Tooltips.Generic_AOE_Heal, tooltipValue2 = 1 }, -- Bogdan Totem (Bogdan the Nightflame)
     [81069] = { hide = true }, -- Chokethorn (Chokethorn)
-    [81077] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 0.8 }, -- Chokethorn (Chokethorn)
+    [81077] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Chokethorn (Chokethorn)
     [97901] = { tooltip = Tooltips.Set_Domihaus_Stamina_Damage }, -- Domihaus (Domihaus)
     [97900] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds', forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Set_Domihaus_Stamina_Buff }, -- Domihaus (Domihaus)
     [97899] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 1 }, -- Domihaus (Domihaus)

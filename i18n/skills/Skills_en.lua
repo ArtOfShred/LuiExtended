@@ -214,9 +214,10 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_GROUND_AOE_SNARE_TP =          "Taking SUBSTRING every |cFFFFFF<<2>>|r <<2[second/seconds]>> and Movement Speed reduced by |cFFFFFF<<3>>|r%.",
 
     -- Resistances
-    SI_LUIE_SKILL_GENERIC_PHYSICAL_RESIST_TP =                   "Increase Physical Resistance for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_PHYSICAL_RESIST_TP =                   "Increase Physical Resistance for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_SPELL_RESIST_NO_DUR_TP =               "Increase Spell Resistance.",
-    SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST =                     "Increase Physical and Spell Resistance for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST =                     "Increase Physical and Spell Resistance for |cffffff<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_VALUE_TP =            "Increase Physical and Spell Resistance by |cffffff<<2>>|r for |cffffff<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_NO_DUR_TP =           "Increase Physical and Spell Resistance.",
     SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_NO_DUR_VALUE_TP =     "Increase Physical and Spell Resistance by |cFFFFFF<<2>>|r.",
 
@@ -799,24 +800,24 @@ local strings = {
     SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE =              "Monk\'s Disguise",
 
     -- Weapon Sets
-    SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "Your next Snipe, Scatter Shot, or Poison Arrow used within |cffffff6|r seconds deals |cffffff<<1>>|r% additional damage.",
+    SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "The next Snipe, Scatter Shot, or Poison Arrow cast within |cffffff6|r seconds by your attacker deals |cffffff<<1>>|r% additional damage.",
     SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF =         "Every third cast of Force Shock within |cffffff10|r seconds will always apply the Burning, Concussion, and Chilled status effects.",
     SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF_PERFECT = "Every second cast of Force Shock within |cffffff10|r seconds will always apply the Burning, Concussion, and Chilled status effects.",
     SI_LUIE_SKILL_SET_ASYLUM_RESTORATION_STAFF =         "Reduce the cost of your Magicka and Stamina healing abilities by |cffffff<<1>>|r% for |cffffff3|r seconds.",
-    SI_LUIE_SKILL_SET_MAELSTROM_DW =                     "Your single target damage over time abilities used within |cffffff<<1>>|r seconds gain |cffffff1000|r Weapon and Spell Damage.",
+    SI_LUIE_SKILL_SET_MAELSTROM_DW =                     "Your single target damage over time abilities used within |cffffff<<1>>|r seconds gain |cffffff1000|r Spell and Weapon Damage.",
     SI_LUIE_SKILL_SET_MAELSTROM_1H =                     "Your next fully-charged Heavy Attack used within |cffffff5|r seconds restores an additional |cffffff2000|r Magicka and Stamina.",
     SI_LUIE_SKILL_SET_MASTER_1H =                        "Gain up to |cffffff2500|r Spell and Physical Resistance for |cffffff3|r seconds based off the amount you healed with Puncturing Remedy.",
     SI_LUIE_SKILL_SET_MASTER_RESTO =                     "Restoring |cffffff100|r Magicka and Stamina every |cffffff1|r second for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_BLACKROSE_1H_TP =                  "Reduce the cost of your next non-Shield Charge One Handed and Shield ability by |cffffff100|r%.",
-    SI_LUIE_SKILL_SET_BLACKROSE_DESTRO_TP =              "Afflicted with consecutive Flame, Shock, and Frost Damage every |cffffff2|r seconds for |cffffff8|r seconds.",
+    SI_LUIE_SKILL_SET_BLACKROSE_DESTRO_TP =              "Afflicted with consecutive Flame, Shock, and Frost Damage for |cffffff8|r seconds.",
 
     -- Monster Helms
-    SI_LUIE_SKILL_SET_BALORGH =                          "Increase Weapon and Spell Damage by twice the cost of your last Ultimate used for |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_SET_BALORGH =                          "Increase Weapon and Spell Damage equal to twice the cost of your last Ultimate used for |cFFFFFF10|r seconds.",
     SI_LUIE_SKILL_SET_BOGDAN =                           "You and allies within |cFFFFFF5|r meters of the totem are healed every |cFFFFFF1|r second.",
-    SI_LUIE_SKILL_SET_DOMIHAUS_BUFF_STAMINA =            "Increase Weapon Damage while standing within the ring.",
-    SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE_STAMINA =          "Enemies on the edge of the ring take Physical Damage every |cffffff1|r second.\n\nIncrease Weapon Damage while standing within the ring.",
-    SI_LUIE_SKILL_SET_DOMIHAUS_BUFF_MAGICKA =            "Increase Spell Damage while standing within the ring.",
-    SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE_MAGICKA =          "Enemies on the edge of the ring take Flame Damage every |cffffff1|r second.\n\nIncrease Spell Damage while standing within the ring.",
+    SI_LUIE_SKILL_SET_DOMIHAUS_BUFF_STAMINA =            "Increase Weapon Damage by |cFFFFFF200|r while standing within the ring.",
+    SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE_STAMINA =          "Enemies on the edge of the ring take Physical Damage every |cffffff1|r second.\n\nIncrease Weapon Damage by |cFFFFFF200|r while standing within the ring.",
+    SI_LUIE_SKILL_SET_DOMIHAUS_BUFF_MAGICKA =            "Increase Spell Damage by |cFFFFFF200|r while standing within the ring.",
+    SI_LUIE_SKILL_SET_DOMIHAUS_DAMAGE_MAGICKA =          "Enemies on the edge of the ring take Flame Damage every |cffffff1|r second.\n\nIncrease Spell Damage by |cFFFFFF200|r while standing within the ring.",
     SI_LUIE_SKILL_SET_EARTHGORE =                        "You and allies in the pool of blood are healed every |cFFFFFF1|r second.",
     SI_LUIE_SKILL_SET_GROTHDARR =                        "Enemies within |cFFFFFF8|r meters take Flame Damage every |cFFFFFF1|r second for |cFFFFFF5|r seconds.",
     SI_LUIE_SKILL_SET_ICEHEART =                         "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nEnemies within |cFFFFFF5|r meters take Frost Damage every |cFFFFFF1|r second while the damage shield holds.",

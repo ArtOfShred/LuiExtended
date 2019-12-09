@@ -128,6 +128,7 @@ LUIE.Data.Tooltips = {
     Generic_Physical_Resist                         = GetString(SI_LUIE_SKILL_GENERIC_PHYSICAL_RESIST_TP),
     Generic_Spell_Resist_No_Dur                     = GetString(SI_LUIE_SKILL_GENERIC_SPELL_RESIST_NO_DUR_TP),
     Generic_Physical_Spell_Resist                   = GetString(SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST),
+    Generic_Physical_Spell_Resist_Value             = GetString(SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_VALUE_TP),
     Generic_Physical_Spell_Resist_No_Dur            = GetString(SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_NO_DUR_TP),
     Generic_Physical_Spell_Resist_No_Dur_Value      = GetString(SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
 

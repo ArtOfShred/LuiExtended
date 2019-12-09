@@ -1616,8 +1616,6 @@ function CombatInfo.CreateSettings()
         },
     }
 
-    --[[
-
     -- Crowd Control Tracker
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "submenu",
@@ -2191,7 +2189,7 @@ function CombatInfo.CreateSettings()
                 end,
             },
         },
-    } ]]--
+    }
 
     -- Register the settings panel
     if LUIE.SV.CombatInfo_Enabled then
