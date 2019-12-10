@@ -358,7 +358,7 @@ local strings = {
     SI_LUIE_SKILL_SIPHONING_ATTACKS_TP =                 "Your Light and Heavy Attacks heal you and restore Magicka for |cFFFFFF20|r seconds. Fully charged Heavy Attacks restore twice the value.\n\nYou restore up to |cFFFFFF4270|r additional Magicka when the effect ends, based on the length of time Siphoning Attacks was active.",
     SI_LUIE_SKILL_SOUL_TETHER_TP =                       "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF8|r seconds.\n\nStunned for |cFFFFFF4|r seconds.",
     SI_LUIE_SKILL_REFRESHING_PATH_GROUND =               "Healing every |cFFFFFF1|r second.\n\nThe effect persists for |cFFFFFF2|r seconds after leaving the path.",
-    SI_LUIE_SKILL_POWER_EXTRACTION_TP =                  "Reduce Weapon Damage by |cFFFFFF200|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_POWER_EXTRACTION_TP =                  "Reduce Weapon and Spell Damage by |cFFFFFF200|r for |cFFFFFF<<1>>|r seconds.",
 
     -- Sorcerer
     SI_LUIE_SKILL_PERSISTENCE =                          "Reduce the cost of your next Magicka or Stamina ability used within |cFFFFFF4|r seconds by |cFFFFFF<<1>>|r%.",

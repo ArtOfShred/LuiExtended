@@ -358,7 +358,7 @@ local strings = {
     SI_LUIE_SKILL_SIPHONING_ATTACKS_TP =                 "Ваши обычные и силовые атаки исцеляют вас и восстанавливают Магию в течение |cFFFFFF20|r секунд. Полностью заряженная силовая атака восстанавливает в два раза больше ресурсов.\n\nВы восстанавливаете дополнительно до |cFFFFFF4270|r Магии по истечению эффекта, в зависимости от времени действия Siphoning Attacks.",
     SI_LUIE_SKILL_SOUL_TETHER_TP =                       "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF8|r seconds.\n\nStunned for |cFFFFFF4|r seconds.",
     SI_LUIE_SKILL_REFRESHING_PATH_GROUND =               "Healing every |cFFFFFF1|r second.\n\nThe effect persists for |cFFFFFF2|r seconds after leaving the path.",
-    SI_LUIE_SKILL_POWER_EXTRACTION_TP =                  "Reduce Weapon Damage by |cFFFFFF200|r for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_POWER_EXTRACTION_TP =                  "Reduce Weapon and Spell Damage by |cFFFFFF200|r for |cFFFFFF<<1>>|r seconds.",
 
     -- Sorcerer
     SI_LUIE_SKILL_PERSISTENCE =                          "Reduce the cost of your next Magicka or Stamina ability used within |cFFFFFF4|r seconds by |cFFFFFF<<1>>|r%.",

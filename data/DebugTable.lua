@@ -3416,8 +3416,8 @@ LUIE.DebugAuras = {
     [131344] = true, -- Major Sorcery (Power Extraction)
     [126675] = true, -- Power Extraction (Power Extraction)
 
-    --[36891] = true, -- Sap Essence (Sap Essence)
-    --[45655] = true, -- Sap Essence (Sap Essence)
+    [36891] = true, -- Sap Essence (Sap Essence)
+    [45655] = true, -- Sap Essence (Sap Essence)
     [131343] = true, -- Major Brutality (Sap Essence)
     [62240] = true, -- Major Sorcery (Sap Essence)
     [36898] = true, -- Sap Will (Sap Essence)
