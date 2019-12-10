@@ -172,6 +172,7 @@ Effects.IsSetICD = {
     [129477] = true, -- Immortal Warrior
     [127235] = true, -- Eternal Warrior
     [127032] = true, -- Phoenix
+    --[34512] = true, -- Juggernaut
 }
 
 -- Food & Drink Buffs
@@ -3548,8 +3549,8 @@ Effects.EffectOverride = {
     [106783] = { name = Abilities.Set_Dust_Cloud, groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 1 }, -- Dustcloud Damage (Adept Rider's)
     [106784] = { tooltip = Tooltips.Set_Adept_Rider }, -- Dustcloud (Adept Rider's)
     [106804] = { icon = 'esoui/art/icons/achievement_su_mainquest_6.dds', name = Abilities.Set_Nocturnals_Favor }, -- Nocturnal's Heal (Nocturnal's Favor)
-    [106798] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sloads_semblance.dds', tooltip = Tooltips.Generic_Oblivion, tooltipValue2 = 1 }, -- Sload's Semblance (Sload's)
-    [113092] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sloads_semblance.dds', name = Abilities.Set_Sloads_Semblance, hide = true }, -- Sload's Projectile (Sloads)
+    [106798] = { icon = 'esoui/art/icons/achievement_su_mainquest_2.dds', tooltip = Tooltips.Set_Sloads }, -- Sload's Semblance (Sload's)
+    [113092] = { icon = 'esoui/art/icons/achievement_su_mainquest_2.dds', name = Abilities.Set_Sloads_Semblance }, -- Sload's Projectile (Sloads)
     [113185] = { icon = 'esoui/art/icons/mm_teaser.dds' }, -- Grave-Stake Collector (Grave-Stake Collector)
     [113237] = { icon = 'esoui/art/icons/mm_teaser.dds' }, -- Grave-Stake Collector (Grave-Stake Collector)
     [113312] = { stack = 3, tooltip = Abilities.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
@@ -3803,8 +3804,8 @@ Effects.EffectOverride = {
     [81522] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicious_serpent.dds', name = Abilities.Set_Vicious_Serpent }, -- Serpent Stamina (of the Vicious Ophidian)
 
     -- Trial Sets (Maw of Lorkhaj)
-    [75801] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_lunar.dds', tooltip = Tooltips.Generic_Magicka_Recovery_Duration }, -- Lunar Blessing (Moondancer)
-    [75804] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_shadow.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration }, -- Shadow Blessing (Moondancer)
+    [75801] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_lunar.dds', tooltip = Tooltips.Generic_Magicka_Recovery_Duration_Value, tooltipValue2 = 448 }, -- Lunar Blessing (Moondancer)
+    [75804] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_shadow.dds', tooltip = Tooltips.Generic_Spell_Damage_Duration_Value, tooltipValue2 = 448 }, -- Shadow Blessing (Moondancer)
     [98102] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds', tooltip = Tooltips.Skill_Minor_Slayer }, -- Minor Slayer (of Alkosh)
     [75752] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Roar of Alkosh (of Alkosh)
     [75753] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', tooltip = Tooltips.Generic_Reduce_Physical_Spell_Resist_Value, tooltipValue2 = 3010 }, -- Line Breaker (of Alkosh)
@@ -3829,10 +3830,10 @@ Effects.EffectOverride = {
     [110118] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sirorias_boon.dds', tooltip = Tooltips.Set_Sirorias_Boon }, -- Siroria's Boon (Siroria's)
     [109081] = { tooltip = Tooltips.Set_Mantle_of_Siroria }, -- Ideal Mantle of Siroria (Siroria's)
     [110142] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sirorias_boon.dds', tooltip = Tooltips.Set_Sirorias_Boon }, -- Siroria's Boon (Perfect Siroria's)
-    [110504] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', tooltip = Tooltips.Generic_Physical, tooltipValue2 = 1 }, -- Arms of Relequen (Perfect Relequen's)
-    [107203] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds' }, -- Arms of Relequen (Perfect Relequen's)
-    [110512] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = Abilities.Set_Arms_of_Relequen, tooltip = Tooltips.Generic_Physical, tooltipValue2 = 1 }, -- Ideal Arms of Relequen (Relequen's)
-    [109086] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = Abilities.Set_Arms_of_Relequen }, -- Ideal Arms of Relequen (Relequen's)
+    [110504] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = Abilities.Set_Harmful_Winds, tooltip = Tooltips.Set_Relequen }, -- Arms of Relequen (Perfect Relequen's)
+    [107203] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = Abilities.Set_Harmful_Winds }, -- Arms of Relequen (Perfect Relequen's)
+    [110512] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = Abilities.Set_Harmful_Winds, tooltip = Tooltips.Set_Relequen }, -- Ideal Arms of Relequen (Relequen's)
+    [109086] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arms_of_relequen.dds', name = Abilities.Set_Harmful_Winds }, -- Ideal Arms of Relequen (Relequen's)
     [109976] = { tooltip = Abilities.Set_Aegis_of_Galenwe }, -- Empower (Aegis of Galenwe)
     [109989] = { tooltip = Abilities.Set_Aegis_of_Galenwe }, -- Empower (Ideal Aegis of Galenwe)
 
@@ -3850,11 +3851,12 @@ Effects.EffectOverride = {
     [999009] = { tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Immortal_Warrior, unbreakable = 1 }, -- Immortal Warrior (Fake Id)
     [999010] = { tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Eternal_Warrior, tooltipValue3 = 1, unbreakable = 1 }, -- Eternal Warrior (Fake Id)
     [999011] = { tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Phoenix, unbreakable = 1 }, -- Phoenix (Fake Id)
+    --[999012] = {tooltip = Tooltips.Generic_Set_ICD_Minutes, tooltipValue2 = Abilities.Set_Juggernaut, tooltipValue3 = 1, unbreakable = 1 }, -- Juggernaut (Fake Id)
 
     -- Battleground Sets
     [92908] = { tooltip = Abilities.Set_Cowards_Gear }, -- Major Expedition (Coward's Gear)
     [92909] = { tooltip = Abilities.Set_Cowards_Gear }, -- Major Protection (Coward's Gear)
-    [93104] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_oblivion.dds' }, -- Knight Slayer
+    [93104] = { icon = 'LuiExtended/media/icons/abilities/ability_set_oblivion_purple.dds' }, -- Knight Slayer
     [92916] = { icon = 'esoui/art/icons/achievement_update15_041.dds', tooltip = Tooltips.Set_Vanguards_Challenge }, -- Vanguard's Challenge
     [92921] = { tooltip = Abilities.Set_Wizards_Riposte }, -- Minor Maim (Wizard's Riposte)
 
@@ -3888,7 +3890,7 @@ Effects.EffectOverride = {
     [34384] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morag_tong.dds', tooltip = Tooltips.Set_Morag_Tong }, -- The Morag Tong (of the Morag Tong)
 
     [117391] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sentry.dds', tooltip = Tooltips.Set_Sentry }, -- Sentry (of the Sentry)
-    [117397] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sentry_icd.dds', tooltip = Tooltips.Set_Sentry_Cooldown, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, name = zo_strformat("<<1>> <<2>>", Abilities.Set_Sentry, Abilities.Set_Cooldown) }, -- Exhausted Sentry (of the Sentry)
+    [117397] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sentry_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Sentry, Abilities.Set_Cooldown), tooltip = Tooltips.Generic_Set_ICD, tooltipValue2 = Abilities.Set_Sentry, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Exhausted Sentry (of the Sentry)
 
     [57180] = { icon = 'esoui/art/icons/achievement_thievesguild_011.dds' }, -- Shadow Walker (of the Shadow Walker)
     [57181] = { icon = 'esoui/art/icons/achievement_thievesguild_011.dds' }, -- Shadow Walker (of the Shadow Walker)
@@ -8803,7 +8805,7 @@ Effects.EffectOverride = {
     [34463] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds', name = Abilities.Skill_Soul_Rupture }, -- Soul Cage (Mannimarco)
     [34458] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds' }, -- Soul Cage (Mannimarco)
     [34460] = { icon = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds' }, -- Soul Cage (Mannimarco)
-    [70409] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sloads_semblance.dds' }, -- Necromantic Barrier
+    [70409] = { icon = 'LuiExtended/media/icons/abilities/ability_set_oblivion_purple.dds' }, -- Necromantic Barrier
     [31321] = { hide = true }, -- Disruption
     [31334] = { hide = true }, -- Oblivion
     [31480] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Overwhelming Power
@@ -11509,6 +11511,7 @@ Effects.FakePlayerBuffs = {
     [129477] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Immortal_Warrior, Abilities.Set_Cooldown), duration = 35000, shiftId = 999009, debuff = true }, -- Immortal Warrior
     [127235] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_warrior_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Eternal_Warrior, Abilities.Set_Cooldown), duration = 60000, shiftId = 999010, debuff = true }, -- Eternal Warrior
     [127032] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Phoenix, Abilities.Set_Cooldown), duration = 60000, shiftId = 999011, debuff = true }, -- Phoenix
+    --[34512] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_juggernaut_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Set_Juggernaut, Abilities.Set_Cooldown), duration = 60000, shiftId = 999012, debuff = true }, -- Juggernaut
 
     -- Player (Basic)
     [973] = { duration = 0 }, -- Sprint

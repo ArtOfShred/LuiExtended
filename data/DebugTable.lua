@@ -2217,7 +2217,7 @@ LUIE.DebugAuras = {
     [47350] = true, -- Bastion of the Heartland (of the Heartland)
 
     [32737] = true, -- The Juggernaut (of the Juggernaut)
-    [34512] = true, -- The Juggernaut (of the Juggernaut)
+    --[34512] = true, -- The Juggernaut (of the Juggernaut)
 
     [129364] = true, -- Battle Hardened (of the Potentates)
     [47356] = true, -- Blessing of the Potentates (of the Potentates)

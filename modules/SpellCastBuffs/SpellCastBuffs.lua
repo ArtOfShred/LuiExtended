@@ -2081,7 +2081,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
     end
 
     -- If the action result isn't a starting/ending event then we ignore it.
-    if result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED then
+    if (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED) then
         return
     end
 

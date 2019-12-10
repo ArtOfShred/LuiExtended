@@ -102,8 +102,10 @@ LUIE.Data.Tooltips = {
     Generic_Weapon_Damage_Duration                  = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_TIME_TP),
     Generic_Weapon_Damage_Duration_Value            = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_VALUE_TIME_TP),
     Generic_Spell_Damage_Duration                   = GetString(SI_LUIE_SKILL_SET_GENERIC_SPELL_DAMAGE_TIME_TP),
+    Generic_Spell_Damage_Duration_Value             = GetString(SI_LUIE_SKILL_SET_GENERIC_SPELL_DAMAGE_TIME_VALUE_TP),
     Generic_LA_HA_Damage_Duration                   = GetString(SI_LUIE_SKILL_SET_GENERIC_LA_HA_DAMAGE),
     Generic_Magicka_Recovery_Duration               = GetString(SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_TP),
+    Generic_Magicka_Recovery_Duration_Value         = GetString(SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_VALUE_TP),
     Generic_Weapon_Spell_Damage_Duration            = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_TP),
     Generic_Weapon_Spell_Damage_Duration_Value      = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_VALUE_TP),
 
@@ -429,6 +431,7 @@ LUIE.Data.Tooltips = {
     Set_Vastaries_Tutelage                          = GetString(SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE),
     Set_Eye_of_Nahviintaas                          = GetString(SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS),
     Set_Seventh_Legion                              = GetString(SI_LUIE_SKILL_SET_SEVENTH_LEGION_TP),
+    Set_Sloads                                      = GetString(SI_LUIE_SKILL_SET_SLOADS_TP),
 
     -- Light / Medium / Heavy Sets
     Set_Bahrahas_Curse                              = GetString(SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP),
@@ -472,6 +475,7 @@ LUIE.Data.Tooltips = {
     Set_Vestment_of_Olorime                         = GetString(SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP),
     Set_Mantle_of_Siroria                           = GetString(SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP),
     Set_Sirorias_Boon                               = GetString(SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP),
+    Set_Relequen                                    = GetString(SI_LUIE_SKILL_SET_RELEQUEN_TP),
 
     -- Battleground Sets
     Set_Vanguards_Challenge                         = GetString(SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP),
@@ -491,7 +495,6 @@ LUIE.Data.Tooltips = {
     Set_Robes_of_Transmutation                      = GetString(SI_LUIE_SKILL_SET_ROBES_OF_TRANSMUTATION_TP),
     Set_Beckoning_Steel                             = GetString(SI_LUIE_SKILL_SET_BECKONING_STEEL_TP),
     Set_Sentry                                      = GetString(SI_LUIE_SKILL_SET_SENTRY_TP),
-    Set_Sentry_Cooldown                             = GetString(SI_LUIE_SKILL_SET_SENTRY_ICD_TP),
     Set_Ravager                                     = GetString(SI_LUIE_SKILL_SET_RAVAGER_TP),
 
     -- Arena Sets

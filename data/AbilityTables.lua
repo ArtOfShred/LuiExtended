@@ -329,7 +329,7 @@ local AbilityTables = {
     Set_Nocturnals_Favor              = 106803,
     Set_Vestment_of_Olorime           = 107117,
     Set_Mantle_of_Siroria             = 107093,
-    Set_Arms_of_Relequen              = 107202,
+    Set_Harmful_Winds                 = GetString(SI_LUIE_SKILL_SET_HARMFUL_WINDS),
     Set_Aegis_of_Galenwe              = 107268,
     Set_Hist_Bark                     = 32781,
     Skill_Night_Mothers_Gaze          = 29113,
@@ -404,6 +404,7 @@ local AbilityTables = {
     Set_Immortal_Warrior              = 51300,
     Set_Eternal_Warrior               = 61436,
     Set_Spectres_Eye                  = 32757,
+    Set_Juggernaut                    = 34512,
 
     Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE),
 

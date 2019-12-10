@@ -279,8 +279,10 @@ local strings = {
     SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_TIME_TP       = "Increase Weapon Damage for |cffffff<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_VALUE_TIME_TP = "Increase Weapon Damage by |cffffff<<2>>|r for |cffffff<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_GENERIC_SPELL_DAMAGE_TIME_TP     = "Increase Spell Damage for |cffffff<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_SET_GENERIC_SPELL_DAMAGE_TIME_VALUE_TP     = "Increase Spell Damage by |cffffff<<2>>|r for |cffffff<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_GENERIC_LA_HA_DAMAGE =             "Your Light and Heavy Attacks deal additional damage for |cffffff<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_TP     = "Increase Magicka Recovery for |cffffff<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_VALUE_TP     = "Increase Magicka Recovery by |cffffff<<2>>|r for |cffffff<<1>>|r <<1[second/seconds]>>.",
 
     SI_LUIE_SKILL_SET_GENERIC_CRITICAL_DAMAGE_TP       = "Increase Critical Damage by |cffffff<<2>>|r% for |cffffff<<1>>|r <<1[second/seconds]>>.",
 
@@ -715,7 +717,7 @@ local strings = {
     SI_LUIE_SKILL_PROXIMITY_DETONATION_TP =              "Charging a magical bomb that explodes after |cFFFFFF<<1>>|r seconds, dealing Magic Damage to all enemies within |cFFFFFF8|r meters.\n\nEach enemy within the bomb's radius increases the damage by |cFFFFFF25|r%.",
     SI_LUIE_SKILL_WAR_HORN_TP =                          "Increase Max Stamina and Max Magicka by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_WAR_HORN_DUMMY_TP =                    "Increase Max Stamina and Max Magicka by |cFFFFFF10|r%.",
-    SI_LUIE_SKILL_STURDY_HORN_TP =                       "Increase Max Stamina and Max Magicka by |cFFFFFF10|r% for |cFFFFFF30|r seconds.\n\nIncrease Critical Resistance by |cFFFFFF990|r for |cFFFFFF10|r seconds, reducing incoming critical damage by |cFFFFFF15|r%.",
+    SI_LUIE_SKILL_STURDY_HORN_TP =                       "Increase Max Stamina and Max Magicka by |cFFFFFF10|r% for |cFFFFFF30|r seconds.\n\nIncrease Critical Resistance by |cFFFFFF990|r for |cFFFFFF10|r seconds.",
 
     -- Support
     SI_LUIE_SKILL_SIEGE_SHIELD_TP =                      "Reduce damage taken from siege weapons by |cFFFFFF50|r%.",
@@ -864,6 +866,7 @@ local strings = {
     SI_LUIE_SKILL_SET_ADEPT_RIDER =                      "Enemies in the dust cloud take Physical Damage every |cffffff1|r second, while you and group members gain Major Evasion.",
     SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT =                "Increase healing received by |cffffff6|r% and Physical and Spell Resistance for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE =               "Increase Weapon and Spell Damage and reduce the Magicka, Stamina, and Health cost of abilities by |cffffff10|r% for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_SLOADS_TP =                        "Taking |cffffff3|r% of your Max Health as Oblivion Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThis effect can deal a maximum of |cffffff3000|r Oblivion Damage per tick.",
 
     -- Light / Medium / Heavy Armor Sets
     SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP =                "Enemies in the |cFFFFFF3.5|r meter radius of desecrated ground take Magic Damage every |cffffff1|r second and have their Movement Speed reduced by |cffffff70|r%.\n\nYou heal for |cffffff100|r% of the damage done.",
@@ -909,19 +912,21 @@ local strings = {
     SI_LUIE_SKILL_SENCHALS_DUTY_TP =                     "After dealing damage with a fully-charged Heavy Attack, restore |cffffff535|r Stamina and Magicka for each stack of Senchal's Duty and consume them.\n\nYou can only gain one stack of Senchal's Duty every |cffffff1|r second.",
     SI_LUIE_SKILL_TRINIMACS_VALOR_TP =                   "After |cffffff2|r seconds the fragment of Trinimac explodes, healing you and allies while dealing Magic Damage to enemies in a |cffffff5|r meter radius.",
     SI_LUIE_SKILL_SET_SEVENTH_LEGION_TP =                "Increase Weapon Damage by |cffffff350|r and Health Recovery by |cffffff350|r for |cffffff<<1>>|r seconds.",
-    SI_LUIE_SKILL_SET_RAVAGER_TP =                       "Increase Weapon Damage by |cffffff125|r per stack for |cffffff<<1>>|r seconds, stacking up to |cffffff4|r times when you attempt to reduce a target's Physical or Spell Resistance.\n\nThis effect can occur once every second.\n\nUpon reaching |cffffff4|r stacks, the duration is doubled but can no longer be refreshed.",
+    SI_LUIE_SKILL_SET_RAVAGER_TP =                       "Increase Weapon Damage by |cffffff125|r for |cffffff<<1>>|r seconds, stacking up to |cffffff4|r times when you attempt to reduce a target's Physical or Spell Resistance.\n\nThis effect can occur once every second.\n\nUpon reaching |cffffff4|r stacks, the duration is doubled but can no longer be refreshed.",
 
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical by |cffffff400|r for |cffffff<<1>>|r seconds, stacking up to |cffffff5|r times when you deal melee damage.\n\nThis effect can occur once every half second.",
-    SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "When a different attacker hits you with a fully-charged Heavy Attack they detonate the bomb, dealing Magic Damage to you and allies within |cffffff8|r meters.",
-    SI_LUIE_SKILL_SET_HEALING_MAGE_TP =                  "Снижает урон от Оружия на |cffffff3|r секунды.",
-    SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Повышает Физическое пробитие на |cffffff3|r секунды, суммируется до |cffffff5|r раз.",
+    SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "When a different attacker damages you with a fully-charged Heavy Attack they detonate the bomb, dealing Magic Damage to you and allies within |cffffff8|r meters.",
+    SI_LUIE_SKILL_SET_HEALING_MAGE_TP =                  "Reduce Weapon Damage by |cffffff430|r for |cffffff3|r seconds.",
+    SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Increase Physical Penetration by |cffffff860|r for |cffffff3|r seconds, stacking up to |cffffff5|r times when you deal damage.",
     SI_LUIE_SKILL_SET_LUNAR_BASTION_TP =                 "You and allies within the |cffffff8|r meter radius of the lunar blessing are granted a damage shield every |cffffff2|r seconds.",
     SI_LUIE_SKILL_SET_LUNAR_BASTION_GROUND_TP =          "Absorb damage every |cffffff2|r seconds while standing in the lunar blessing.",
     SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP =           "You and allies standing in the circle of might gain Major Courage for |cffffff30|r seconds.",
     SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP =             "Standing in the ring grants you a stack of Siroria's Boon every |cffffff1|r second.",
-    SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Увеличивает урон от Заклинаний на |cffffff30|r в течение |cffffff5|r секунд, суммируется максимум до |cffffff20|r раз.",
+    SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Increase Spell Damage by |cffffff30|r for |cffffff5|r seconds, stacking up to |cffffff20|r times when standing in the ring of fire.",
     SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS =               "Reduce the Magicka, Stamina, and Health cost of abilities by |cffffff12|r% for |cffffff<<1>>|r seconds.",
+    SI_LUIE_SKILL_SET_HARMFUL_WINDS =                    "Harmful Winds",
+    SI_LUIE_SKILL_SET_RELEQUEN_TP =                      "Afflicted with Physical Damage every |cffffff1|r second for |cffffff<<1>>|r seconds, stacking up to |cffffff20|r times when your attacker damages you with a Light or Heavy Attack.",
 
     -- Battleground Sets
     SI_LUIE_SKILL_SET_COWARDS_GEAR =                     "Coward's Gear",
@@ -933,8 +938,8 @@ local strings = {
     SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP =            "Afflicted with Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nYour attacker heals for |cffffff100|r% of the damage done.",
 
     -- Alliance War Sets
-    SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Нивелирует получаемое исцеление в течение |cffffff4|r секунд.",
-    SI_LUIE_SKILL_SET_SPELL_STRATEGIST_TP =              "Увеличивает урон от Заклинаний против цели в течение |cffffff5|r секунд.",
+    SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Negate the next |cffffff4800|r points of healing done for |cffffff4|r seconds.",
+    SI_LUIE_SKILL_SET_SPELL_STRATEGIST_TP =              "Your attacker gains |cffffff500|r additional Spell Damage against you for |cffffff5|r seconds.",
     SI_LUIE_SKILL_SET_SUCCESSION_TP =                    "Increase Spell Damage by |cffffff550|r for <<1>> dealing attacks for |cffffff4|r seconds.\n\nThis effect can occur once every |cffffff4|r seconds per element.",
     SI_LUIE_SKILL_SET_PARA_BELLUM_TP =                   "Absorbing damage. The shield will replenish if you do not take any damage for |cffffff10|r seconds.",
     SI_LUIE_SKILL_SET_GLORIOUS_DEFENDER_TP =             "|cffffff100|r% chance to dodge the next attack made against you within |cffffff10|r seconds.",
@@ -942,10 +947,9 @@ local strings = {
     SI_LUIE_SKILL_SET_CYRODIILS_LIGHT_TP =               "Ваша следующая способность, расходующая Магию, применённая в течение |cffffff30|r секунд, будет применена бесплатно.",
     SI_LUIE_SKILL_SET_MORAG_TONG_TP =                    "Увеличивает урон, получаемый от способностей с уроном от Яда, на |cffffff10|r% в течение |cffffff5|r секунд.",
     SI_LUIE_SKILL_SET_WARRIORS_FURY_TP =                 "Increase Weapon Damage by |cffffff30|r for |cffffff<<1>>|r seconds, stacking up to |cffffff20|r times when you take damage.\n\nThis effect can occur once every half second.\n\nUpon reaching |cffffff20|r stacks, the duration is doubled but can no longer be refreshed.",
-    SI_LUIE_SKILL_SET_ROBES_OF_TRANSMUTATION_TP =        "Increase Critical Resistance for |cffffff20|r seconds.",
+    SI_LUIE_SKILL_SET_ROBES_OF_TRANSMUTATION_TP =        "Increase Critical Resistance by |cffffff1304|r for |cffffff20|r seconds.",
     SI_LUIE_SKILL_SET_BECKONING_STEEL_TP =               "Reduce damage taken from projectiles by |cffffff10|r%.",
     SI_LUIE_SKILL_SET_SENTRY_TP =                        "Dramatically increase Stealth Detection radius for |cffffff<<1>>|r seconds.",
-    SI_LUIE_SKILL_SET_SENTRY_ICD_TP =                    "You have recently crouched to increase detection and may not do so again.",
 
     ----------------------------------------------------------------
     -- NPC ABILITY / QUEST TOOLTIPS --------------------------------
