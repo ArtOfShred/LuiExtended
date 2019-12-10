@@ -294,6 +294,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_MOVEMENT_SPEED_TP =            "Increase Movement Speed by |cFFFFFF<<2>>|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     SI_LUIE_SKILL_SET_GENERIC_ICD_TP =                   "You have recently benefitted from the effects of <<2>> and may not do so again for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_SET_GENERIC_ICD_MINUTES_TP =           "You have recently benefitted from the effects of <<2>> and may not do so again for |cFFFFFF<<3>>|r <<3[minute/minutes]>>.",
 
     ----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------
@@ -544,7 +545,7 @@ local strings = {
     SI_LUIE_SKILL_BLOOD_CRAZE_TP =                       "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF2|r seconds while Blood Craze remains active.",
     SI_LUIE_SKILL_BLOOD_CRAZE_HEAL_TP =                  "Healing every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds as long as Blood Craze remains active on your target.",
     SI_LUIE_SKILL_BLADE_CLOAK_TP =                       "A ring of floating razors surrounds you, dealing Physical Damage to all enemies within |cFFFFFF5|r meters every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_LACERATE_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage, your attacker heals for |cFFFFFF50|r% of the damage done.",
+    SI_LUIE_SKILL_LACERATE_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals for |cFFFFFF50|r% of the damage done.",
     SI_LUIE_SKILL_THRIVE_IN_CHAOS_TP =                   "Increase damage done by |cFFFFFF6|r% for each enemy hit by Thrive in Chaos, up to a maximum of |cFFFFFF36|r%.",
     SI_LUIE_SKILL_FLYING_BLADE_TP =                      "Your attacker can jump to you within the next |cFFFFFF<<1>>|r seconds.",
 
@@ -610,7 +611,7 @@ local strings = {
     SI_LUIE_SKILL_LYCANTHROPHY_TP =                      "You can transform into a savage Werewolf.\n\nYou take |cFFFFFF25|r% more Poison Damage while transformed into a Werewolf.",
     SI_LUIE_SKILL_BLOOD_MOON_TP =                        "You have bitten another player. You may not do so again for |cFFFFFF7|r days.",
     SI_LUIE_SKILL_FEEDING_FRENZY_TP =                    "Empowered for |cFFFFFF<<1>>|r seconds, increasing the damage of your Light Attacks by |cFFFFFF40|r%.",
-    SI_LUIE_SKILL_CLAWS_OF_LIFE_TP =                     "Afflicted with Disease Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage, your attacker heals for |cFFFFFF100|r% of the damage done.",
+    SI_LUIE_SKILL_CLAWS_OF_LIFE_TP =                     "Afflicted with Disease Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nThe werewolf heals for |cFFFFFF100|r% of the damage done.",
     SI_LUIE_SKILL_WEREWOLF_TRANSFORMATION_TP =           "Transformed into a werewolf.\n\nWhile transformed your Max Stamina is increased by |cFFFFFF30|r%.\n\nYou cannot generate Ultimate while transformed.",
     SI_LUIE_SKILL_WEREWOLF_BERSERKER_TP =                "Transformed into a werewolf.\n\nWhile transformed, your Light Attacks apply a bleed over |cFFFFFF4|r seconds, your Heavy Attacks deal |cFFFFFF50|r% splash damage, and your Max Stamina is increased by |cFFFFFF30|r%.\n\nYou cannot generate Ultimate while transformed.",
     SI_LUIE_SKILL_PACK_LEADER_TP =                       "Transformed into a werewolf.\n\nWhile transformed your Max Stamina is increased by |cFFFFFF30|r% and you summon two direwolves. The direwolves' basic attacks apply Minor Maim for |cFFFFFF4|r seconds. Their special attacks reduce the enemy's movement speed by |cFFFFFF30|r% for |cFFFFFF4|r seconds.\n\nYou cannot generate Ultimate while transformed.",
@@ -908,14 +909,15 @@ local strings = {
     SI_LUIE_SKILL_SENCHALS_DUTY_TP =                     "After dealing damage with a fully-charged Heavy Attack, restore |cffffff535|r Stamina and Magicka for each stack of Senchal's Duty and consume them.\n\nYou can only gain one stack of Senchal's Duty every |cffffff1|r second.",
     SI_LUIE_SKILL_TRINIMACS_VALOR_TP =                   "After |cffffff2|r seconds the fragment of Trinimac explodes, healing you and allies while dealing Magic Damage to enemies in a |cffffff5|r meter radius.",
     SI_LUIE_SKILL_SET_SEVENTH_LEGION_TP =                "Increase Weapon Damage by |cffffff350|r and Health Recovery by |cffffff350|r for |cffffff<<1>>|r seconds.",
-    SI_LUIE_SKILL_SET_RAVAGER_TP =                       "Increase Weapon Damage by |cffffff125|r per stack for |cffffff<<1>>|r seconds.\n\nYou can gain a stack every |cffffff1|r second. At |cffffff4|r stacks, the duration doubles but cannot be refreshed.",
+    SI_LUIE_SKILL_SET_RAVAGER_TP =                       "Increase Weapon Damage by |cffffff125|r per stack for |cffffff<<1>>|r seconds, stacking up to |cffffff4|r times when you attempt to reduce a target's Physical or Spell Resistance.\n\nThis effect can occur once every second.\n\nUpon reaching |cffffff4|r stacks, the duration is doubled but can no longer be refreshed.",
 
     -- Trial Sets
-    SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical for |cffffff<<1>>|r seconds, stacking up to |cffffff5|r times.",
+    SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical by |cffffff400|r for |cffffff<<1>>|r seconds, stacking up to |cffffff5|r times when you deal melee damage.\n\nThis effect can occur once every half second.",
     SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "When a different attacker hits you with a fully-charged Heavy Attack they detonate the bomb, dealing Magic Damage to you and allies within |cffffff8|r meters.",
     SI_LUIE_SKILL_SET_HEALING_MAGE_TP =                  "Reduce Weapon Damage for |cffffff3|r seconds.",
     SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Increase Physical Penetration for |cffffff3|r seconds, stacking up to |cffffff5|r times.",
-    SI_LUIE_SKILL_SET_LUNAR_BASTION_TP =                 "Absorb damage every |cffffff2|r seconds while standing in the lunar blessing.",
+    SI_LUIE_SKILL_SET_LUNAR_BASTION_TP =                 "You and allies within the |cffffff8|r meter radius of the lunar blessing are granted a damage shield every |cffffff2|r seconds.",
+    SI_LUIE_SKILL_SET_LUNAR_BASTION_GROUND_TP =          "Absorb damage every |cffffff2|r seconds while standing in the lunar blessing.",
     SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP =           "You and allies standing in the circle of might gain Major Courage for |cffffff30|r seconds.",
     SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP =             "Standing in the ring grants you a stack of Siroria's Boon every |cffffff1|r second.",
     SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Increase Spell Damage by |cffffff30|r for |cffffff5|r seconds, stacking up to |cffffff20|r times.",
@@ -928,14 +930,14 @@ local strings = {
     -- Imperial City Sets
     SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP =             "Marked for |cffffff15|r seconds, stacking up to |cffffff6|r times when your attacker damages you with a Light or Heavy Attack.\n\nUpon reaching |cffffff6|r Marks of Revenge, they detonate and deal Magic Damage.",
     SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP =            "Increase Physical and Spell Resistance by |cffffff3010|r for |cffffff2|r minutes.",
-    SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP =            "Afflicted with Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nEvery time this effect deals damage it heals your attacker.",
+    SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP =            "Afflicted with Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nYour attacker heals for |cffffff100|r% of the damage done.",
 
     -- Alliance War Sets
     SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Negating healing received for |cffffff4|r seconds.",
     SI_LUIE_SKILL_SET_SPELL_STRATEGIST_TP =              "Increase Spell Damage against the target for |cffffff5|r seconds.",
-    SI_LUIE_SKILL_SET_SUCCESSION_TP =                    "Increase Spell Damage by |cffffff550|r for <<1>> dealing attacks for |cffffff4|r seconds.\n\nThis effect can occur every |cffffff4|r seconds per element.",
-    SI_LUIE_SKILL_SET_PARA_BELLUM_TP =                   "Gain a damage shield if you have not taken any damage in the last |cffffff10|r seconds.",
-    SI_LUIE_SKILL_SET_GLORIOUS_DEFENDER_TP =             "|cffffff100|r% chance to dodge the next attack.",
+    SI_LUIE_SKILL_SET_SUCCESSION_TP =                    "Increase Spell Damage by |cffffff550|r for <<1>> dealing attacks for |cffffff4|r seconds.\n\nThis effect can occur once every |cffffff4|r seconds per element.",
+    SI_LUIE_SKILL_SET_PARA_BELLUM_TP =                   "Absorbing damage. The shield will replenish if you do not take any damage for |cffffff10|r seconds.",
+    SI_LUIE_SKILL_SET_GLORIOUS_DEFENDER_TP =             "|cffffff100|r% chance to dodge the next attack made against you within |cffffff10|r seconds.",
     SI_LUIE_SKILL_SET_HEALERS_HABIT =                    "Healer's Habit",
     SI_LUIE_SKILL_SET_CYRODIILS_LIGHT_TP =               "Your next Magicka ability used within |cffffff30|r seconds will cost no Magicka.",
     SI_LUIE_SKILL_SET_MORAG_TONG_TP =                    "Increase damage taken from Poison Damage abilities by |cffffff10|r% for |cffffff5|r seconds.",

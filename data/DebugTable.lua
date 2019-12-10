@@ -2006,7 +2006,9 @@ LUIE.DebugAuras = {
     [76667] = true, -- Roar of Alkosh (of Alkosh)
 
     [75813] = true, -- Lunar Bastion (of the Lunar Bastion)
+    [75814] = true, -- Lunar Baston (of the Lunar Bastion)
     [75815] = true, -- Lunar Bastion (of the Lunar Bastion)
+    [130744] = true, -- Lunar Bastion (of the Lunar Bastion)
 
     [75766] = true, -- Twilight Remedy (of Twilight Remedy)
     [75768] = true, -- Primal Heal (of Twilight Remedy)

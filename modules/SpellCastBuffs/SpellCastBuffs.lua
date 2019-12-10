@@ -1185,7 +1185,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
 
             local tooltipText2
             if LUIE.ResolveVeteranDifficulty() == true and Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipVet then
-                tooltipText2 = zo_strformat(Effects.EffectOverride[control.effectId].tooltipVet, timer, value2, value3)
+                tooltipText2 = zo_strformat(Effects.EffectOverride[control.effectId].tooltipVet, duration, value2, value3)
             else
                  tooltipText2 = (Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltip) and zo_strformat(Effects.EffectOverride[control.effectId].tooltip, duration, value2, value3) or ""
             end
@@ -2380,7 +2380,7 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
         return
     end
 
-    if not (Effects.FakePlayerExternalBuffs[abilityId] or Effects.FakePlayerDebuffs[abilityId] or Effects.FakeStagger[abilityId]) then
+    if not (Effects.FakePlayerOfflineAura[abilityId] or Effects.FakePlayerDebuffs[abilityId] or Effects.FakeStagger[abilityId]) then
         return
     end
 
@@ -2406,48 +2406,83 @@ function SpellCastBuffs.OnCombatEventOut( eventCode, result, isError, abilityNam
         stack = 0
     end
 
-    -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on target by player)
-    if Effects.FakePlayerExternalBuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
-        -- Bail out if we ignore begin events
-        if Effects.FakePlayerExternalBuffs[abilityId].ignoreBegin and (result == ACTION_RESULT_BEGIN) then
+    -- Fake offline auras created by the player
+    if Effects.FakePlayerOfflineAura[abilityId] and sourceType == COMBAT_UNIT_TYPE_PLAYER then
+         -- Bail out if we ignore begin events
+        if Effects.FakePlayerOfflineAura[abilityId].ignoreBegin and (result == ACTION_RESULT_BEGIN) then
             return
         end
-        if Effects.FakePlayerExternalBuffs[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
+        if Effects.FakePlayerOfflineAura[abilityId].refreshOnly and (result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED) then
             return
         end
-        if Effects.FakePlayerExternalBuffs[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
+        if Effects.FakePlayerOfflineAura[abilityId].ignoreFade and (result == ACTION_RESULT_FADED or result == ACTION_RESULT_EFFECT_FADED) then
             return
         end
-        if SpellCastBuffs.SV.HideTargetBuffs then
+        if SpellCastBuffs.SV.HidePlayerBuffs and not (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName] or SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName] or Effects.FakePlayerOfflineAura[abilityId].ground) then
             return
         end
-        SpellCastBuffs.EffectsList.reticleover1[ abilityId ] = nil
-        if not DoesUnitExist("reticleover") then return end
-        if GetUnitReaction("reticleover") == UNIT_REACTION_HOSTILE then return end
-        if IsUnitDead(unitTag) then return end
-        iconName = Effects.FakePlayerExternalBuffs[abilityId].icon or GetAbilityIcon(abilityId)
-        effectName = Effects.FakePlayerExternalBuffs[abilityId].name or GetAbilityName(abilityId)
-        duration = Effects.FakePlayerExternalBuffs[abilityId].duration
-        effectType = BUFF_EFFECT_TYPE_DEBUFF
+
+        -- Prominent Support
+        local context
+        if Effects.FakePlayerOfflineAura[abilityId].ground then
+            context = "ground"
+        else
+            context = "player1"
+        end
+        if (SpellCastBuffs.SV.PromDebuffTable[abilityId] or SpellCastBuffs.SV.PromDebuffTable[effectName]) then
+            context = "promd_player"
+        elseif (SpellCastBuffs.SV.PromBuffTable[abilityId] or SpellCastBuffs.SV.PromBuffTable[effectName]) then
+            context = "promb_player"
+        end
+
+        if SpellCastBuffs.EffectsList[context][ abilityId ] and Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].stackAdd then -- Before removing old effect, if this effect is currently present and stack is set to increment on event, then add to stack counter
+            stack = SpellCastBuffs.EffectsList[context][ abilityId ].stack + Effects.EffectOverride[abilityId].stackAdd
+        end
+
+        SpellCastBuffs.EffectsList[context][ abilityId ] = nil
+
+        local toggle = Effects.IsToggle[abilityId] or false
+
+        iconName = Effects.FakePlayerOfflineAura[abilityId].icon or GetAbilityIcon(abilityId)
+        effectName = Effects.FakePlayerOfflineAura[abilityId].name or GetAbilityName(abilityId)
+        duration = Effects.FakePlayerOfflineAura[abilityId].duration
+        if duration == "GET" then duration = GetAbilityDuration(abilityId) end
+        local finalId = Effects.FakePlayerOfflineAura[abilityId].shiftId or abilityId
+        local forcedType = Effects.FakePlayerOfflineAura[abilityId].long and "long" or "short"
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
         local source = zo_strformat("<<t:1>>",sourceName)
         local target = zo_strformat("<<t:1>>",targetName)
-        local unitName = zo_strformat("<<t:1>>", GetUnitName("reticleover") )
-        if unitName ~= target then return end
-        if source == LUIE.PlayerNameFormatted and target ~= nil then
-            if SpellCastBuffs.SV.HideTargetBuffs then
-                return
+        -- Pull unbreakable info from Shift Id if present
+        unbreakable = Effects.EffectOverride[finalId].unbreakable or unbreakable
+        if source == LUIE.PlayerNameFormatted then
+            -- If the "buff" is flagged as a debuff, then display it here instead
+            if Effects.FakePlayerOfflineAura[abilityId].ground == true then
+                SpellCastBuffs.EffectsList[context][ finalId ] = {
+                    type=BUFF_EFFECT_TYPE_DEBUFF,
+                    id=finalId, name=effectName, icon=iconName,
+                    dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                    forced = "short",
+                    restart=true, iconNum=0,
+                    unbreakable=unbreakable,
+                    stack = stack,
+                    groundLabel = groundLabel,
+                    toggle = toggle,
+                }
+            -- Otherwise, display as a normal buff
+            else
+                SpellCastBuffs.EffectsList[context][ finalId ] = {
+                    target="player", type=1,
+                    id=finalId, name=effectName, icon=iconName,
+                    dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                    forced = forcedType,
+                    restart=true, iconNum=0,
+                    unbreakable=unbreakable,
+                    stack = stack,
+                    groundLabel = groundLabel,
+                    toggle = toggle,
+                }
             end
-            SpellCastBuffs.EffectsList.reticleover1[ abilityId ] = {
-                type=effectType,
-                id=abilityId, name=effectName, icon=iconName,
-                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-                forced = "short",
-                restart=true, iconNum=0,
-                unbreakable=unbreakable,
-                groundLabel = groundLabel,
-            }
         end
     end
 
