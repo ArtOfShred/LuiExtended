@@ -1621,18 +1621,32 @@ function CombatInfo.CreateSettings()
         type = "submenu",
         name = "Crowd Control Tracker",
         controls = {
+
+            -- CCT Description
             {
                 type = "description",
-                text = "Position Lock/Unlock",
+                text = "Display an animated icon when you are under the effects of crowd control. The options below allow you to customize the color, sound, and naming method for the alerts displayed. Additionally you can display alerts when standing in the radius of damaging area of effect abilities, with the option to enable/disable various categories with different sounds.",
             },
+
             {
+                -- Unlock CCT
                 type = "checkbox",
-                name = "Turn OFF when satisfied with icon's position",
+                name = "Unlock Crowd Control Tracker (Inverse)",
                 tooltip = "ON - icon can me moved on the screen by left clicking and dragging, OFF - icon is locked in place and can not be moved",
                 default = Defaults.cct.unlocked,
+                width = "half",
                 disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return Settings.cct.unlocked end,
                 setFunc = function(newValue) Settings.cct.unlocked = newValue if newValue then CrowdControlTracker:SetupDisplay("draw") end CrowdControlTracker:InitControls() end,
+            },
+            {
+                -- Reset CCT
+                type = "button",
+                name = GetString(SI_LUIE_LAM_RESETPOSITION),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RESET_TP),
+                func = nil,
+                width = "half",
+                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
             },
             {
                 -- Enable Crowd Control Tracker
@@ -1660,9 +1674,10 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Display Method
+                -- TODO: Change theses to displayOptions + better punctuation
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE),
-                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE_TP),
                 choices = {"Both icon and text", "Icon only", "Text only"},
                 getFunc = function()
                     if Settings.cct.showOptions=="all" then
@@ -1719,11 +1734,27 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_SOUND),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_SOUND_TP),
                 default = Defaults.cct.playSound,
+                width = "half",
                 disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return Settings.cct.playSound end,
                 setFunc = function(newValue) Settings.cct.playSound = newValue
                     CrowdControlTracker:InitControls()
                 end,
+            },
+
+            {
+                -- Sound CC
+                type = "dropdown",
+                scrollable = true,
+                name = "",
+                tooltip = "TODO",
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return Settings.cct.playSoundOption end,
+                setFunc = function(value) Settings.cct.playSoundOption = value AbilityAlerts.PreviewAlertSound(value) end,
+                width = "half",
+                default = Settings.cct.playSoundOption,
+                disabled = function() return (not Settings.cct.enabled and Settings.cct.playSound) end,
             },
             {
                 -- Show Stagger (Text Only)
@@ -1738,8 +1769,16 @@ function CombatInfo.CreateSettings()
                 end,
             },
             {
-                type = "header",
-                name = "Immuned state options",
+                -- Show Global Cooldown
+                type = "checkbox",
+                name = "Show Global Cooldown",
+                tooltip = "ON - show the cooldown animation if cc-ed while on global cooldown (Cyrodiil only) , OFF - don't not show global cooldown animation",
+                default = Defaults.cct.showGCD,
+                disabled = function() return (not Settings.cct.enabled) end,
+                getFunc = function() return Settings.cct.showGCD end,
+                setFunc = function(newValue) Settings.cct.showGCD = newValue
+                    CrowdControlTracker:InitControls()
+                end,
             },
             {
                 -- Show when Immune
@@ -1756,7 +1795,7 @@ function CombatInfo.CreateSettings()
             {
                 -- Show when Immune only in Cyrodiil
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_CYRODIIL),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_CYRODIIL)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_CYRODIIL_TP),
                 default = Defaults.cct.showImmuneOnlyInCyro,
                 disabled = function() return (not Settings.cct.enabled) or (not Settings.cct.showImmune) end,
@@ -1768,7 +1807,7 @@ function CombatInfo.CreateSettings()
             {
                 -- Set Immune Display Time (MS)
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TIME),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TIME)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TIME_TP),
                 default = Defaults.cct.immuneDisplayTime,
                 disabled = function() return (not Settings.cct.enabled) or (not Settings.cct.showImmune) end,
@@ -1879,7 +1918,7 @@ function CombatInfo.CreateSettings()
             },
             {
                 type = "header",
-                name = "Beta features",
+                name = "Area of Effect Damage Alerts",
             },
             {
                 -- AOE SHOW
@@ -1893,7 +1932,24 @@ function CombatInfo.CreateSettings()
                     CrowdControlTracker:InitControls()
                 end,
             },
-            -- ArtOfShred addition start
+            {
+                -- AOE Color
+                type = "colorpicker",
+                name = "Pick color for AREA DAMAGE EFFECT state",
+                tooltip = "Pick color of CC text and icon border for AREA DAMAGE EFFECT crowd control state",
+                default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_AREA_EFFECT])),
+                disabled = function() return not Settings.cct.enabled end,
+                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_AREA_EFFECT]) end,
+                setFunc = function(r,g,b,a)
+                    Settings.cct.colors[ACTION_RESULT_AREA_EFFECT] = {r,g,b,a}
+                    CrowdControlTracker:InitControls()
+                end,
+            },
+
+            {
+            type = "divider",
+            },
+
             -- AOE DISPLAY OPTIONS
             {
                 -- Show AOE - Player Ultimate
@@ -1933,6 +1989,11 @@ function CombatInfo.CreateSettings()
                 default = Settings.cct.aoePlayerUltimateSound,
                 disabled = function() return (not Settings.cct.enabled) end,
             },
+
+            {
+            type = "divider",
+            },
+
             {
                 -- Show AOE - Player Normal
                 type = "checkbox",
@@ -1971,6 +2032,11 @@ function CombatInfo.CreateSettings()
                 default = Settings.cct.aoePlayerNormalSound,
                 disabled = function() return (not Settings.cct.enabled) end,
             },
+
+            {
+            type = "divider",
+            },
+
             {
                 -- Show AOE - Player Set
                 type = "checkbox",
@@ -2009,6 +2075,11 @@ function CombatInfo.CreateSettings()
                 default = Settings.cct.aoePlayerSetSound,
                 disabled = function() return (not Settings.cct.enabled) end,
             },
+
+            {
+            type = "divider",
+            },
+
             {
                 -- Show AOE - Trap
                 type = "checkbox",
@@ -2047,6 +2118,11 @@ function CombatInfo.CreateSettings()
                 default = Settings.cct.aoeTrapsSound,
                 disabled = function() return (not Settings.cct.enabled) end,
             },
+
+            {
+            type = "divider",
+            },
+
             {
                 -- Show AOE - NPC Boss
                 type = "checkbox",
@@ -2085,6 +2161,11 @@ function CombatInfo.CreateSettings()
                 default = Settings.cct.aoeNPCBossSound,
                 disabled = function() return (not Settings.cct.enabled) end,
             },
+
+            {
+            type = "divider",
+            },
+
             {
                 -- Show AOE - NPC Elite
                 type = "checkbox",
@@ -2124,6 +2205,11 @@ function CombatInfo.CreateSettings()
                 default = Settings.cct.aoeNPCEliteSound,
                 disabled = function() return (not Settings.cct.enabled) end,
             },
+
+            {
+            type = "divider",
+            },
+
             {
                 -- Show AOE - NPC Normal
                 type = "checkbox",
@@ -2162,31 +2248,6 @@ function CombatInfo.CreateSettings()
                 width = "half",
                 default = Settings.cct.aoeNPCNormalSound,
                 disabled = function() return (not Settings.cct.enabled) end,
-            },
-            {
-                -- AOE Color
-                type = "colorpicker",
-                name = "Pick color for AREA DAMAGE EFFECT state",
-                tooltip = "Pick color of CC text and icon border for AREA DAMAGE EFFECT crowd control state",
-                default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_AREA_EFFECT])),
-                disabled = function() return not Settings.cct.enabled end,
-                getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_AREA_EFFECT]) end,
-                setFunc = function(r,g,b,a)
-                    Settings.cct.colors[ACTION_RESULT_AREA_EFFECT] = {r,g,b,a}
-                    CrowdControlTracker:InitControls()
-                end,
-            },
-            {
-                -- Show Global Cooldown
-                type = "checkbox",
-                name = "Show Global Cooldown",
-                tooltip = "ON - show the cooldown animation if cc-ed while on global cooldown (Cyrodiil only) , OFF - don't not show global cooldown animation",
-                default = Defaults.cct.showGCD,
-                disabled = function() return (not Settings.cct.enabled) end,
-                getFunc = function() return Settings.cct.showGCD end,
-                setFunc = function(newValue) Settings.cct.showGCD = newValue
-                    CrowdControlTracker:InitControls()
-                end,
             },
         },
     }
