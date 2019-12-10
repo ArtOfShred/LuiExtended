@@ -221,8 +221,10 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_NO_DUR_TP =           "Increase Physical and Spell Resistance.",
     SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_NO_DUR_VALUE_TP =     "Increase Physical and Spell Resistance by |cFFFFFF<<2>>|r.",
 
-    SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_TP =           "Reduce Physical and Spell Resistance for |cFFFFFF<<1>>|r seconds.",
+    SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_VALUE_TP =     "Reduce Physical and Spell Resistance by |cFFFFFF<<2>>|r for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_TP =           "Reduce Physical and Spell Resistance for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP =    "Reduce Physical and Spell Resistance.",
+    SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP = "Reduce Physical and Spell Resistance by |cFFFFFF<<2>>|r.",
 
     -- Resource Regeneration, Shields
     SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP =           "Increase Health Recovery for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -273,6 +275,7 @@ local strings = {
 
     -- Generic Stat Buffs
     SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_TP = "Increase Weapon and Spell Damage for |cffffff<<1>>|r <<1[second/seconds]>>.",
+    SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_VALUE_TP = "Increase Weapon and Spell Damage by |cffffff<<2>>|r for |cffffff<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_TIME_TP       = "Increase Weapon Damage for |cffffff<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_VALUE_TIME_TP = "Increase Weapon Damage by |cffffff<<2>>|r for |cffffff<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_GENERIC_SPELL_DAMAGE_TIME_TP     = "Increase Spell Damage for |cffffff<<1>>|r <<1[second/seconds]>>.",
@@ -623,14 +626,14 @@ local strings = {
     SI_LUIE_SKILL_FEED_QUEST_TP =                        "A Vampire is draining your life force, healing every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nStunned for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_BLOOD_RITUAL_TP =                      "You have fed on another player. You may not do so again for |cFFFFFF7|r days.",
     SI_LUIE_SKILL_PROFANE_SYMBOL =                       "Profane Symbol",
-    SI_LUIE_SKILL_DRAIN_ESSENCE_TP =                     "Afflicted with Magic Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r seconds. Every time this effect deals damage, it heals the vampire for |cFFFFFF15|r% of their missing health.",
-    SI_LUIE_SKILL_INVIGORATING_DRAIN_TP =                "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. Every time this effect deals damage, it heals the vampire for |cFFFFFF15|r% of their missing health and generates |cFFFFFF5|r Ultimate.",
+    SI_LUIE_SKILL_DRAIN_ESSENCE_TP =                     "Afflicted with Magic Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>> for |cFFFFFF<<1>>|r seconds. Every time this effect deals damage it heals the vampire for |cFFFFFF15|r% of their missing health.",
+    SI_LUIE_SKILL_INVIGORATING_DRAIN_TP =                "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds. Every time this effect deals damage it heals the vampire for |cFFFFFF15|r% of their missing health and generates |cFFFFFF5|r Ultimate.",
     SI_LUIE_SKILL_MIST_FORM_TP =                         "Reduce damage taken by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds.\n\nImmune to all disabling and immobilization effects while active, but you cannot be healed and your Magicka Recovery is disabled.",
     SI_LUIE_SKILL_BALEFUL_MIST_TP =                      "Reduce damage taken by |cFFFFFF75|r% and enemies within |cFFFFFF5|r meters take Magic Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds.\n\nImmune to all disabling and immobilization effects while active, but you cannot be healed and your Magicka Recovery is disabled.",
     SI_LUIE_SKILL_BAT_SWARM_TP =                         "Enemies within |cFFFFFF10|r meters take Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_CLOUDING_SWARM_TP =                    "Enemies within |cFFFFFF10|r meters take Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nWhile the bats swarm around you this ability changes into Materialize, allowing you to instantly teleport to an enemy and strike them for Magic Damage.",
     SI_LUIE_SKILL_DEVOURING_SWARM_TP =                   "Enemies within |cFFFFFF10|r meters take Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThe bats heal you for each enemy they damage.",
-    SI_LUIE_SKILL_DEVOURING_SWARM_GROUND_TP =            "Taking Magic Damage every |cFFFFFF1|r second.\n\nEvery time this effect deals damage, it heals the Vampire.",
+    SI_LUIE_SKILL_DEVOURING_SWARM_GROUND_TP =            "Taking Magic Damage every |cFFFFFF1|r second.\n\nEvery time this effect deals damage it heals the Vampire.",
 
     ----------------------------------------------------------------
     -- GUILD SKILLS ------------------------------------------------
@@ -909,7 +912,7 @@ local strings = {
 
     -- Trial Sets
     SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP =            "Increase Weapon Critical for |cffffff<<1>>|r seconds, stacking up to |cffffff5|r times.",
-    SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "When another player hits the same enemy with a fully-charged Heavy Attack they detonate the bomb, dealing Magic Damage to all enemies within |cffffff8|r meters.",
+    SI_LUIE_SKILL_SET_DESTRUCTIVE_MAGE_TP =              "When a different attacker hits you with a fully-charged Heavy Attack they detonate the bomb, dealing Magic Damage to you and allies within |cffffff8|r meters.",
     SI_LUIE_SKILL_SET_HEALING_MAGE_TP =                  "Reduce Weapon Damage for |cffffff3|r seconds.",
     SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Increase Physical Penetration for |cffffff3|r seconds, stacking up to |cffffff5|r times.",
     SI_LUIE_SKILL_SET_LUNAR_BASTION_TP =                 "Absorb damage every |cffffff2|r seconds while standing in the lunar blessing.",
@@ -923,9 +926,9 @@ local strings = {
     SI_LUIE_SKILL_SET_VANGUARDS_CHALLENGE_TP =           "Deal |cffffff100|r% more damage to the player that taunted you, but |cffffff50|r% less damage to all other players for |cffffff15|r seconds.",
 
     -- Imperial City Sets
-    SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP =             "Marked for |cffffff15|r seconds.\n\nIf |cffffff6|r Marks of Revenge are applied they detonate for Magic Damage.",
-    SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP =            "Increase Physical and Spell Resistance for |cffffff2|r minutes.",
-    SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP =            "Afflicted with Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nEvery time this effect deals damage, it heals your attacker.",
+    SI_LUIE_SKILL_SET_GALERIONS_REVENGE_TP =             "Marked for |cffffff15|r seconds, stacking up to |cffffff6|r times when your attacker damages you with a Light or Heavy Attack.\n\nUpon reaching |cffffff6|r Marks of Revenge, they detonate and deal Magic Damage.",
+    SI_LUIE_SKILL_SET_MERITORIUS_SERVICE_TP =            "Increase Physical and Spell Resistance by |cffffff3010|r for |cffffff2|r minutes.",
+    SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP =            "Afflicted with Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nEvery time this effect deals damage it heals your attacker.",
 
     -- Alliance War Sets
     SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Negating healing received for |cffffff4|r seconds.",
@@ -1046,7 +1049,7 @@ local strings = {
     SI_LUIE_SKILL_WEAKNESS_NPC_SUMMON_TP =               "Reduce damage done by |cFFFFFF50|r% as long as a summoned creature fights at your side.",
     SI_LUIE_SKILL_WEAKNESS_LION_TP =                     "Reduce damage done by |cFFFFFF15|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_ICE_BARRIER_TP =                       "Intercepting frontal attacks for the caster for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_DEVOUR_CLANNFEAR_TP =                  "Afflicted with Bleeding Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds. \n\nEvery time this effect deals damage, it heals the clannfear.",
+    SI_LUIE_SKILL_DEVOUR_CLANNFEAR_TP =                  "Afflicted with Bleeding Damage every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds. \n\nEvery time this effect deals damage it heals the clannfear.",
     SI_LUIE_SKILL_AURA_OF_PROTECTION_TP =                "The Shaman and allies within the radius of the aura take |cFFFFFF25|r% less damage for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_AURA_OF_PROTECTION_OTHER_TP =          "Reduce damage taken by |cFFFFFF25|r% while in proximity of the Aura of Protection.",
     SI_LUIE_SKILL_AGONIZING_FURY_TP =                    "Movement Speed reduced by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.\n\nThis effect stacks up to |cFFFFFF5|r times, to a maximum of |cFFFFFF50|r% Movement Speed reduction.",
@@ -1058,13 +1061,13 @@ local strings = {
     SI_LUIE_SKILL_SUMMON_BEAST_TP =                      "A beast fights at your side. The beast remains for |cFFFFFF2|r minutes or until killed.",
     SI_LUIE_SKILL_CONTROL_BEAST_TP =                     "Increase damage done by |cFFFFFF83|r% for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
     SI_LUIE_SKILL_HEALING_SALVE_TP =                     "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.\n\nHealing doubles in power after |cFFFFFF2|r seconds, leading into a stronger burst heal at the end of the channel.",
-    SI_LUIE_SKILL_LATCH_ON_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage, it heals the hoarvor.",
+    SI_LUIE_SKILL_LATCH_ON_TP =                          "Afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage it heals the hoarvor.",
     SI_LUIE_SKILL_KOTU_GAVA_SWARM_TP =                   "Afflicted with Poison Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nAfter |cFFFFFF<<2>>|r <<2[second/seconds]>>, a swarm of Kotu Gava will spawn around you.",
     SI_LUIE_SKILL_HARDENED_SHELL_TP =                    "Chance when hit to reduce damage taken by |cFFFFFF50|r%.",
     SI_LUIE_SKILL_UNCANNY_DODGE_TP =                     "Unable to be taken off guard. Will always dodge the initial hit when engaged.",
     SI_LUIE_SKILL_BLOCK_NPC_TP =                         "Brace for attack, reducing damage taken and granting immunity to Stun and Knockback effects.\n\nIncoming melee Heavy Attacks will be counterattacked while active.",
     SI_LUIE_SKILL_CALL_ALLY_TP =                         "A summoned beast ally fights at your side. The beast remains for |cFFFFFF2|r minutes or until killed.",
-    SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP =                    "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage, it heals the vampire.",
+    SI_LUIE_SKILL_VAMPIRIC_DRAIN_TP =                    "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage it heals the vampire.",
     SI_LUIE_SKILL_DEVOUR_HUNGER_TP =                     "Stunned and afflicted with Bleeding Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nWhen this effect ends you will be knocked back for |cFFFFFF1.5|r seconds.",
     SI_LUIE_SKILL_TORPOR_TP =                            "You are hallucinating.",
     SI_LUIE_SKILL_COLONIZE_TP =                          "After |cFFFFFF5|r seconds this Fetcherfly Colony will turn into a nest.",
@@ -1109,7 +1112,7 @@ local strings = {
     SI_LUIE_SKILL_SPIRITUAL_CLOAK_TP =                   "Prevent Soul Thirsters from pulling you into the spirit realm.",
     SI_LUIE_SKILL_BLESSING_GATHWEN_TP =                  "Reduce damage taken by |cFFFFFF3|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_MAIM_NPC_TP =                          "Reduce damage done by |cFFFFFF40|r% for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_DRAIN_ESSENCE_NPC_TP =                 "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage, it heals the caster.",
+    SI_LUIE_SKILL_DRAIN_ESSENCE_NPC_TP =                 "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage it heals the caster.",
     SI_LUIE_SKILL_SUMMON_DARK_PROXY_TP =                 "A shadowy Clannfear fights at your side. The clannfear remains for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_SUMMON_CLANNFEAR_TP =                  "A Clannfear fights at your side. The clannfear remains for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POOL_OF_FIRE =                         "Pool of Fire",
@@ -1165,7 +1168,7 @@ local strings = {
     SI_LUIE_SKILL_SPAWN_HATCHLINGS =                     "Spawn Hatchlings",
     SI_LUIE_SKILL_FIGHTERS_BOON_TP =                     "Increase Armor by |cFFFFFF559|r for |cFFFFFF2|r minutes.",
     SI_LUIE_SKILL_ENERVATING_SEAL_TP =                   "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds. Each tick drains |cFFFFFF15|r% of your Max Stamina and Magicka.",
-    SI_LUIE_SKILL_BLOOD_POOL_TP =                        "Taking Physical Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>>. Every time this effect deals damage, it heals the Vampire.",
+    SI_LUIE_SKILL_BLOOD_POOL_TP =                        "Taking Physical Damage every |cFFFFFF<<2>>|r <<2[second/seconds]>>. Every time this effect deals damage it heals the Vampire.",
     SI_LUIE_SKILL_WRACKING_PAIN =                        "Wracking Pain",
     SI_LUIE_SKILL_METEORIC_STRIKE =                      "Meteoric Strike",
 
@@ -1207,7 +1210,7 @@ local strings = {
     SI_LUIE_SKILL_DARK_DEAL_NPC_TP =                     "Increase Physical and Spell Resistance, and heal every |cFFFFFF1|r second after |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_ICE_CHARGE_TP =                        "You and nearby allies take Frost Damage every |cFFFFFF2|r seconds, and Movement Speed reduced by |cFFFFFF90|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_POISON_MIST_TP =                       "Reduce damage taken by |cFFFFFF75|r% and enemies within |cFFFFFF5|r meters take Poison Damage every |cFFFFFF1.5|r seconds for |cFFFFFF<<1>>|r seconds.",
-    SI_LUIE_SKILL_DRAIN_ESSENCE_VAMP_NPC_TP =            "Stunned and afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage, it heals the vampire.",
+    SI_LUIE_SKILL_DRAIN_ESSENCE_VAMP_NPC_TP =            "Stunned and afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nEvery time this effect deals damage it heals the vampire.",
     SI_LUIE_SKILL_MALEFIC_WREATH_TP =                    "Stunned for |cFFFFFF<<1>>|r seconds.\n\nTake Magic Damage when the effect ends, increased for each second the effect lasts.\n\nThe stun breaks after taking damage.",
     SI_LUIE_SKILL_CRIPPLING_GRASP_NPC_TP =               "Afflicted with Magic Damage every |cFFFFFF2|r seconds and Movement Speed reduced by |cFFFFFF20|r% for |cFFFFFF8|r seconds.\n\nImmobilized for |cFFFFFF3|r seconds.",
     SI_LUIE_SKILLPOWER_EXTRACTION_NPC_TP =               "Increase damage done by |cFFFFFF10|r% for each enemy hit by Power Extraction.",

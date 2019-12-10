@@ -105,6 +105,7 @@ LUIE.Data.Tooltips = {
     Generic_LA_HA_Damage_Duration                   = GetString(SI_LUIE_SKILL_SET_GENERIC_LA_HA_DAMAGE),
     Generic_Magicka_Recovery_Duration               = GetString(SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_TP),
     Generic_Weapon_Spell_Damage_Duration            = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_TP),
+    Generic_Weapon_Spell_Damage_Duration_Value      = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_VALUE_TP),
 
     Generic_Magicka_Regen                           = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP),
     Generic_Magicka_Regen_Potion                    = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_POTION_TP),
@@ -133,7 +134,9 @@ LUIE.Data.Tooltips = {
     Generic_Physical_Spell_Resist_No_Dur_Value      = GetString(SI_LUIE_SKILL_GENERIC_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
 
     Generic_Reduce_Physical_Spell_Resist            = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_TP),
+    Generic_Reduce_Physical_Spell_Resist_Value      = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_VALUE_TP),
     Generic_Reduce_Physical_Spell_Resist_No_Dur     = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_TP),
+    Generic_Reduce_Physical_Spell_Resist_No_Dur_Value = GetString(SI_LUIE_SKILL_GENERIC_REDUCE_PHY_SPELL_RESIST_NO_DUR_VALUE_TP),
 
     Generic_Test                                    = GetString(SI_LUIE_SKILL_TEST_TP),
 
