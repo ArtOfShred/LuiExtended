@@ -398,6 +398,7 @@ LUIE.Data.Tooltips = {
     Set_Engine_Guardian_Magicka                     = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE0)),
     Set_The_Troll_King                              = GetString(SI_LUIE_SKILL_SET_THE_TROLL_KING_TP),
     Set_Thurvokun                                   = GetString(SI_LUIE_SKILL_SET_THURVOKUN_TP),
+    Set_Thurvokun_Ground                            = GetString(SI_LUIE_SKILL_SET_THURVOKUN_GROUND_TP),
     Set_Zaan                                        = GetString(SI_LUIE_SKILL_SET_ZAAN_TP),
     Set_Energy_Charge                               = GetString(SI_LUIE_SKILL_SET_ENERGY_CHARGE_TP),
     Set_Meridias_Favor                              = GetString(SI_LUIE_SKILL_SET_MERIDIAS_FAVOR_TP),

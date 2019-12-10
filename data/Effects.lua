@@ -3472,7 +3472,7 @@ Effects.EffectOverride = {
     [59533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds', name = Abilities.Set_Engine_Guardian, tooltip = Tooltips.Set_Engine_Guardian_Magicka }, -- Engine Guardian Magicka
     [59543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds', name = Abilities.Set_Engine_Guardian, tooltip = Tooltips.Set_Engine_Guardian_Health }, -- Engine Guardian Health
     [80504] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_regeneration.dds', name = Abilities.Set_The_Troll_King, tooltip = Tooltips.Set_The_Troll_King }, -- The Troll King
-    [102094] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Disease, tooltipValue2 = 1 }, -- Thurvokun
+    [102094] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', groundLabel = true, tooltip = Tooltips.Set_Thurvokun_Ground }, -- Thurvokun
     [102097] = { tooltip = Abilities.Set_Thurvokun }, -- Minor Maim (Thurvokun)
     [102100] = { tooltip = Abilities.Set_Thurvokun }, -- Minor Defile (Thurvokun)
     [102093] = { tooltip = Tooltips.Set_Thurvokun }, -- Thurvokun (Thurvokun)
@@ -11482,7 +11482,7 @@ Effects.FakePlayerBuffs = {
     [85349] = { duration = 180000 }, -- Storm Atronach Transform (Atronach Transformation)
     --[85347] = {icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_juggle.dds', name = Abilities.Memento_Storm_Orb_Juggle, duration = 12000}, -- Storm Orb Juggle (Atronach Juggling)
     [86977] = { duration = 180000 }, -- Spriggan Transformation (Wild Hunt Transform)
-    [92868] = { duration= 180000 }, -- Dwarven Transformation (Dwemervamidium Mirage)
+    [92868] = { duration = 180000 }, -- Dwarven Transformation (Dwemervamidium Mirage)
     --[97273] = { icon = 'LuiExtended/media/icons/mementos/memento_crows_calling.dds', name = Abilities.Memento_Crows_Calling, duration = 9000 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
     [97274] = { duration = 180000 }, -- Swarm of Crows (Swarm of Crows)
 
