@@ -515,6 +515,8 @@ Effects.EffectGroundDisplay = {
     [59497] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Spawn of Mephala (Spawn of Mephala)
     [80523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', buff = false, debuff = false, ground = true }, -- Stormfist (Stormfist)
     [102093] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', buff = false, debuff = false, ground = true }, -- Thurvokun
+    [59594] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_nerieneth.dds', name = Abilities.Set_Nerieneth, buff = false, debuff = false, ground = true }, -- Crypt of Hearts Item Set (Nerien'eth)
+    [80545] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds', buff = false, debuff = false, ground = true }, -- Sellistrix (Sellistrix)
     --[102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', buff = true, debuff = false, ground = false }, -- Zaan -- Buff icon for Zaan, may reimplement if I add a way to override tooltips for these.
 
     -- Crafted Sets
@@ -3423,7 +3425,7 @@ Effects.EffectOverride = {
     [83409] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_infernal_guardian.dds' }, -- Infernal Guardian (Infernal Guardian)
     [80566] = { hide = true }, -- Kra'gh (Kra'gh)
     [80565] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_kragh.dds' }, -- Kra'gh (Kra'gh)
-    [59586] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = Abilities.Set_Lord_Warden_Dusk, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur }, -- Lord Warden (Lord Warden)
+    [59586] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = Abilities.Set_Lord_Warden_Dusk, duration = 0, forcedContainer = 'short', groundLabel = true, tooltip = Tooltips.Generic_Physical_Spell_Resist_No_Dur_Value, tooltipValue2 = 3870 }, -- Lord Warden (Lord Warden)
     [59587] = { tooltip = Tooltips.Set_Lord_Warden_Buff }, -- Lord Warden (Lord Warden)
     [59568] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = Abilities.Set_Malubeth_the_Scourger, tooltip = Tooltips.Set_Malubeth }, -- Scourge Harvest (Malubeth)
     [61275] = { tooltip = Abilities.Set_Malubeth_the_Scourger, forcedContainer = 'short' }, -- Major Vitality (Malubeth)
@@ -3435,6 +3437,7 @@ Effects.EffectOverride = {
     [130633] = { tooltip = Abilities.Set_Mighty_Chudan }, -- Major Resolve (Mighty Chudan)
     [66808] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds', tooltip = Tooltips.Set_Molag_Kena }, -- Molag Kena (Molag Kena)
     [66812] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds', tooltip = Tooltips.Set_Molag_Kena_Overkill }, -- Overkill (Molag Kena)
+    [59594] = { tooltip = Tooltips.Set_Nerieneth }, -- Crypt of Hearts Item Set (Nerien'eth)
     [59593] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_nerieneth.dds', name = Abilities.Set_Nerieneth }, -- Lich Crystal (Nerien'eth)
     [98421] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
     [98419] = { icon = 'esoui/art/icons/achievement_housing_038.dds', tooltip = Tooltips.Set_Pirate_Skeleton }, -- Pirate Skeleton
@@ -3447,6 +3450,7 @@ Effects.EffectOverride = {
     [80606] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_selene.dds' }, -- Selene (Selene)
     [80607] = { hide = true }, -- Dummy (Selene)
     [80609] = { hide = true }, -- Dummy (Selene)
+    [80545] = { tooltip = Tooltips.Set_Sellistrix }, -- Sellistrix (Sellistrix)
     [80544] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds' }, -- Sellistrix (Sellistrix)
     [80549] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds', tooltip = Tooltips.Generic_Stun }, -- Sellistrix (Sellistrix)
     [81036] = { hide = true, tooltip = Tooltips.Set_Sentinel_of_Rkugamz }, -- Sentinel of Rkugamz

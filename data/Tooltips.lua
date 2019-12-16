@@ -412,6 +412,8 @@ LUIE.Data.Tooltips = {
     Set_Tzogvins_Warband                            = GetString(SI_LUIE_SKILL_SET_TZOGVINS_WARBAND_TP),
     Set_Frozen_Watcher                              = GetString(SI_LUIE_SKILL_SET_FROZEN_WATCHER_TP),
     Set_Maarselok                                   = GetString(SI_LUIE_SKILL_MAARSELOK_TP),
+    Set_Nerieneth                                   = GetString(SI_LUIE_SKILL_NERIENETH_TP),
+    Set_Sellistrix                                  = GetString(SI_LUIE_SKILL_SELLISTRIX_TP),
 
     -- Crafted Sets
     Set_Alessias_Bulwark                            = GetString(SI_LUIE_SKILL_SET_ALESSIAS_BULWARK),
