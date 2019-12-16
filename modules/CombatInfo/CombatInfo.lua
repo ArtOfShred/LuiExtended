@@ -165,6 +165,7 @@ CombatInfo.Defaults = {
         controlScale                 = 1.0,
         playAnimation                = true,
         playSound                    = true,
+        playSoundOption              = "Death Recap Killing Blow",
         useAbilityName               = true,
         showStaggered                = true,
         showImmune                   = true,

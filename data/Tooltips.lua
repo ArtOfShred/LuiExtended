@@ -523,6 +523,7 @@ LUIE.Data.Tooltips = {
     Skill_Cauterize_Active                          = GetString(SI_LUIE_SKILL_CAUTERIZE_TP),
     Skill_Dragonknight_Standard                     = GetString(SI_LUIE_SKILL_DRAGONKIGHT_STANDARD_TP),
     Skill_Standard_of_Might_Buff                    = GetString(SI_LUIE_SKILL_STANDARD_OF_MIGHT_TP),
+    Skill_Shifting_Standard                         = GetString(SI_LUIE_SKILL_SHIFTING_STANDARD_TP),
     Skill_Spiked_Armor                              = GetString(SI_LUIE_SKILL_SPIKED_ARMOR_TP),
     Skill_Hardened_Armor                            = GetString(SI_LUIE_SKILL_HARDENED_ARMOR_TP),
     Skill_Burning_Talons                            = GetString(SI_LUIE_SKILL_BURNING_TALONS_TP),

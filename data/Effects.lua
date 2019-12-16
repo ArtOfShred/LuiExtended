@@ -4216,7 +4216,7 @@ Effects.EffectOverride = {
     [98447] = { name = Abilities.Skill_Shackle, tooltip = Tooltips.Generic_Immobilize }, -- Shackle Snare (Dragonknight Standard - Shackle Synergy)
     [28988] = { tooltip = Tooltips.Skill_Dragonknight_Standard }, -- Dragonknight Standard (Dragonknight Standard)
     [29230] = { duration = 0, groundLabel = true, tooltip = Abilities.Skill_Dragonknight_Standard }, -- Major Defile (Dragonknight Standard)
-    [32958] = { tooltip = Tooltips.Skill_Dragonknight_Standard }, -- Shifting Standard (Shifting Standard)
+    [32958] = { tooltip = Tooltips.Skill_Shifting_Standard }, -- Shifting Standard (Shifting Standard)
     [70735] = { hide = true }, -- Shifting Standard (Shifting Standard)
     [32961] = { duration = 0, groundLabel = true, tooltip = Abilities.Skill_Shifting_Standard }, -- Major Defile (Shifting Standard)
     [32965] = { duration = 0, name = Abilities.Skill_Major_Defile, groundLabel = true, tooltip = Abilities.Skill_Shifting_Standard }, -- Major Defile (Shifting Standard)

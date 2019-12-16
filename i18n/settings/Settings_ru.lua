@@ -1021,12 +1021,13 @@ local strings = {
     SI_LUIE_LAM_CI_CASTBAR_GRADIENTC1_TP =               "Выберите начальный цвет градиента на кастбаре.",
     SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2 =                  "Цвет градиента (Конец)",
     SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2_TP =               "Выберите конечный цвет градиента на кастбаре.",
+
     -- TODO: Wip adding strings here for CI CCT
 
     SI_LUIE_LAM_CI_CCT_TOGGLE =                          "Enable Crowd Control Tracker",
-    SI_LUIE_LAM_CI_CCT_TOGGLE_TP =                       "Enable to display an icon or text when under the effects of crowd control, play an audio cue if chosen, and also display an alert when standing in enemy AOE effects if chosen.",
+    SI_LUIE_LAM_CI_CCT_TOGGLE_TP =                       "Enable to display an alert when under the effects of crowd control and display alerts when standing in enemy AOE effects if chosen.",
     SI_LUIE_LAM_CI_CCT_PVP_ONLY =                        "Enable only in PVP",
-    SI_LUIE_LAM_CI_CCT_PVP_ONLY_TP =                     "When toggled, crowd control effects will only be tracked in PVP zones.",
+    SI_LUIE_LAM_CI_CCT_PVP_ONLY_TP =                     "When toggled, crowd control effects will only be tracked in PVP enabled areas.",
 
     SI_LUIE_LAM_CI_CCT_DISPLAY_HEADER =                  "Display Options",
     SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE =                   "Choose Display Method",
@@ -1034,7 +1035,7 @@ local strings = {
     SI_LUIE_LAM_CI_CCT_DISPLAY_NAME =                    "Use Ability Name as CC Text",
     SI_LUIE_LAM_CI_CCT_DISPLAY_NAME_TP =                 "When enabled, the name of the crowd control ability will display, otherwise the type of crowd control will replace the name.",
     SI_LUIE_LAM_CI_CCT_SCALE =                           "Set Icon and Text Scale (%)",
-    SI_LUIE_LAM_CI_CCT_SCALE_TP =                        "Set the scale for the icon and text displayed.",
+    SI_LUIE_LAM_CI_CCT_SCALE_TP =                        "Set the scale for the icon and text displayed.\n\nDefault: 100%",
 
     SI_LUIE_LAM_CI_CCT_SOUND =                           "Play Sound on Crowd Control",
     SI_LUIE_LAM_CI_CCT_SOUND_TP =                        "Play sound when effected by Crowd Control.",
@@ -1067,7 +1068,7 @@ local strings = {
     SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE =              "NPC - Elite",
     SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL =             "NPC - Normal",
 
-    -- TODO: End new string BLOCK 
+    -- TODO: End new string BLOCK
     -- Module: Info Panel
     SI_LUIE_LAM_PNL =                                    "Инфо-панель",
     SI_LUIE_LAM_PNL_ENABLE =                             "Инфо-панель",
