@@ -2210,8 +2210,8 @@ Effects.EffectOverrideByName = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.EffectSourceOverride = {
     -- PLAYER ABILITIES
-    --[71678] = { pet = Abilities.Set_Morkuldin }, -- Light Attack {Morkuldin}
-    --[71679] = { pet = Abilities.Set_Morkuldin }, -- Cleave {Morkuldin}
+    [71678] = { pet = Abilities.Set_Morkuldin }, -- Light Attack {Morkuldin}
+    [71679] = { pet = Abilities.Set_Morkuldin }, -- Cleave {Morkuldin}
 
     -- BATTLEGROUNDS
 
