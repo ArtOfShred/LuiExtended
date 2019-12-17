@@ -2209,15 +2209,22 @@ Effects.EffectOverrideByName = {
 -- removePlayer = true -- If for some reason a damage effect is sourced from the player, set it to not be flagged as isPlayer == true in order to stop AVA rank, etc from showing.
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.EffectSourceOverride = {
+
+    -- PLAYER SETS
+    [71678] = { pet = Abilities.Set_Morkuldin }, -- Light Attack (Morkuldin Sword)
+    [71679] = { pet = Abilities.Set_Morkuldin }, -- Cleave (Morkuldin Sword)
+
     -- PLAYER ABILITIES
-    [71678] = { pet = Abilities.Set_Morkuldin }, -- Light Attack {Morkuldin}
-    [71679] = { pet = Abilities.Set_Morkuldin }, -- Cleave {Morkuldin}
+    [33219] = { pet = Abilities.Skill_Shade }, -- Corrosive Strike (Dark Shade)
+    [123945] = { pet = Abilities.Skill_Dark_Shade }, -- Corrosive Flurry (Dark Shade)
+    [108936] = { pet = Abilities.Skill_Dark_Shade }, -- Corrosive Slash (Dark Shade)
+    [51556] = { pet = Abilities.Skill_Shadow_Image }, -- Corrosive Arrow (Shadow Image)
 
     -- BATTLEGROUNDS
 
     -- TRAPS
-    [62769] = { source = Abilities.Trap_Cold_Fire_Trap }, -- Coldharbour Flames {MQ Tutorial}
-    [62770] = { source = Abilities.Trap_Cold_Fire_Trap }, -- Coldharbour Flames {MQ Tutorial}
+    [62769] = { source = Abilities.Trap_Cold_Fire_Trap }, -- Coldharbour Flames (MQ Tutorial)
+    [62770] = { source = Abilities.Trap_Cold_Fire_Trap }, -- Coldharbour Flames (MQ Tutorial)
     [17314] = { source = Abilities.Trap_Fire_Trap, addSource = true }, -- Fire Trap (Fire Trap)
 
     [72888] = { source = Abilities.Trap_Fire_Trap }, -- Fire Attack 1 (Fire) -- Banished Cells II
@@ -3529,11 +3536,11 @@ Effects.EffectOverride = {
     [71671] = { hide = true, tooltip = Tooltips.Set_Morkuldin }, -- Morkuldin (Morkuldin)
     [71678] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds' }, -- Light Attack (Morkuldin)
     [71679] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_cleave.dds' }, -- Cleave (Morkuldin)
-    [61784] = { icon = 'esoui/art/icons/achievement_028.dds', name = Abilities.Set_Redistribution, hide = true }, -- Redistribution
+    [61784] = { icon = 'esoui/art/icons/achievement_028.dds', hide = true }, -- Redistribution
     [49126] = { icon = 'esoui/art/icons/achievement_update15_036.dds' }, -- Shalidor's Curse
     [75726] = { icon = 'LuiExtended/media/icons/abilities/ability_set_tavas_favor.dds', tooltip = Tooltips.Set_Tavas_Favor }, -- Tava's Favor
     [61851] = { hide = true }, -- Armor Master
-    [61870] = { icon = 'esoui/art/icons/ava_siege_hookpoint_005.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist }, -- Armor Master
+    [61870] = { icon = 'esoui/art/icons/ava_siege_hookpoint_005.dds', tooltip = Tooltips.Generic_Physical_Spell_Resist_Value, tooltipValue2 = 5332 }, -- Armor Master
     [34386] = { tooltip = Abilities.Skill_Night_Mothers_Gaze }, -- Major Fracture (Night Mother's Gaze)
     [61781] = { icon = 'LuiExtended/media/icons/abilities/ability_set_nobles_conquest.dds' }, -- Noble's Conquest
     [61782] = { tooltip = Abilities.Skill_Nobles_Conquest }, -- Minor Vulnerability (Noble's Conquest)
@@ -4074,7 +4081,7 @@ Effects.EffectOverride = {
     [123970] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = Abilities.Innate_Resurrection_Immunity, tooltip = Tooltips.Innate_Resurrection_Immunity }, -- Lesser Reincarnate
 
     -- Basic Attacks
-    [16593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 25 },
+    [16593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 25 }, -- Melee Snare
     [48532] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', hide = true }, -- Charge Snare
     [61737] = { tooltip = "" }, -- Empower
     [55080] = { hide = true }, -- Pet Hidden

@@ -1216,6 +1216,7 @@ LUIE.DebugAuras = {
     [75746] = true, -- Clever Alchemist
 
     [92769] = true, -- of Daedric Trickery (of Daedric Trickery)
+    [92772] = true, -- of Daedric Trickery (of Daedric Trickery)
     [92774] = true, -- Major Mending (of Daedric Trickery)
     [92771] = true, -- Major Expedition (of Daedric Trickery)
     [92775] = true, -- Major Heroism (of Daedric Trickery)
