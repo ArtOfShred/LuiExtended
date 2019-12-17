@@ -842,8 +842,8 @@ local strings = {
     SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_TP =              "Противники в радиусе |cffffff4|r метров от паутины получают урон Ядом каждую |cffffff1|r секунду, а их скорость передвижения снижена на  |cffffff50|r% в течение |cffffff10|r секунд.",
     SI_LUIE_SKILL_SET_STORMFIST_TP =                     "Enemies within |cffffff4|r meters of the thunderfist take Shock Damage every |cffffff1|r second.\n\nAfter |cffffff3|r seconds the fist closes, dealing Physical Damage.",
     SI_LUIE_SKILL_STORMFIST_GROUND_TP =                  "Taking Shock Damage every |cFFFFFF1|r second.\n\nAfter |cffffff3|r seconds the fist closes, dealing Physical Damage.",
-    SI_LUIE_SKILL_SET_ENGINE_GUARDIAN =                  "Восстанавливает <<1>> каждые |cffffff0.5|r секунды в течение |cffffff6.5|r секунд.",
-    SI_LUIE_SKILL_SET_THE_TROLL_KING_TP =                "Восстановление Здоровья увеличено в течение |cffffff10|r секунд.",
+    SI_LUIE_SKILL_SET_ENGINE_GUARDIAN =                  "Restoring |cffffff1204|r <<1>> every |cffffff0.5|r seconds for |cffffff6.5|r seconds.",
+    SI_LUIE_SKILL_SET_THE_TROLL_KING_TP =                "Increase Health Recovery by |cffffff1548|r for |cffffff10|r seconds.",
     SI_LUIE_SKILL_SET_THURVOKUN_TP =                     "Enemies in the growing pool of desecrated bile take Disease Damage every |cffffff1|r second and are afflicted with Minor Maim and Minor Defile for |cffffff4|r seconds.",
     SI_LUIE_SKILL_SET_THURVOKUN_GROUND_TP =              "Taking Disease Damage every |cffffff1|r second.\n\nEach time you take damage you are afflicted with Minor Maim and Minor Defile for |cffffff4|r seconds.",
     SI_LUIE_SKILL_SET_ZAAN_TP =                          "Afflicted with Flame Damage every |cffffff1|r second for |cffffff5|r seconds while the beam holds.\n\nDeals |cFFFFFF50|r% increased damage every |cFFFFFF1|r second.",
@@ -859,7 +859,6 @@ local strings = {
 
     -- Crafted Sets
     SI_LUIE_SKILL_SET_ALESSIAS_BULWARK =                 "Урон от Оружия снижен на |cffffff10|r% в течение |cFFFFFF5|r секунд.",
-    SI_LUIE_SKILL_SET_CLEVER_ALCHEMIST =                 "Урон от оружие и Заклинаний увеличен в течение |cFFFFFF15|r секунд.",
     SI_LUIE_SKILL_SET_ETERNAL_HUNT =                     "Detonates when an enemy enters the |cFFFFFF2.5|r meter radius of the rune, dealing Poison Damage and immoblizing them for |cFFFFFF1.5|r seconds.",
     SI_LUIE_SKILL_SET_MORKULDIN =                        "An animated weapon fights at your side. The animated weapon remains for |cFFFFFF15|r seconds.",
     SI_LUIE_SKILL_SET_TAVAS_FAVOR =                      "Generating |cFFFFFF3|r Ultimate every |cFFFFFF1|r second for |cFFFFFF3|r seconds.",

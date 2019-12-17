@@ -380,6 +380,7 @@ Effects.DebuffDisplayOverrideId = {
 
     -- Basic (Shared)
     [102771] = true, -- Off Balance Immunity
+    [16593] = true, -- Melee Snare
 
     ----------------------------------------------------------------
     -- HOUSING TARGET DUMMY ----------------------------------------
@@ -2209,8 +2210,8 @@ Effects.EffectOverrideByName = {
 --------------------------------------------------------------------------------------------------------------------------------
 Effects.EffectSourceOverride = {
     -- PLAYER ABILITIES
-    [71678] = { pet = Abilities.Set_Morkuldin }, -- Light Attack {Morkuldin}
-    [71679] = { pet = Abilities.Set_Morkuldin }, -- Cleave {Morkuldin}
+    --[71678] = { pet = Abilities.Set_Morkuldin }, -- Light Attack {Morkuldin}
+    --[71679] = { pet = Abilities.Set_Morkuldin }, -- Cleave {Morkuldin}
 
     -- BATTLEGROUNDS
 
@@ -3473,9 +3474,9 @@ Effects.EffectOverride = {
     [84419] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = Abilities.Set_Swarm_Mother },
     [80593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = Abilities.Set_Swarm_Mother },
     [59522] = { hide = true }, -- Engine Guardian
-    [59540] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_stamina.dds', name = Abilities.Set_Engine_Guardian, tooltip = Tooltips.Set_Engine_Guardian_Stamina }, -- Engine Guardian Stamina
-    [59533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds', name = Abilities.Set_Engine_Guardian, tooltip = Tooltips.Set_Engine_Guardian_Magicka }, -- Engine Guardian Magicka
-    [59543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds', name = Abilities.Set_Engine_Guardian, tooltip = Tooltips.Set_Engine_Guardian_Health }, -- Engine Guardian Health
+    [59540] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_stamina.dds', name = Abilities.Set_Engine_Guardian, tooltip = Tooltips.Set_Engine_Guardian_Stamina, duration = 0.5 }, -- Engine Guardian Stamina
+    [59533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_magicka.dds', name = Abilities.Set_Engine_Guardian, tooltip = Tooltips.Set_Engine_Guardian_Magicka, duration = 0.5 }, -- Engine Guardian Magicka
+    [59543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds', name = Abilities.Set_Engine_Guardian, tooltip = Tooltips.Generic_HoT, tooltipValue2 = 0.5, duration = 0.5 }, -- Engine Guardian Health
     [80504] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_regeneration.dds', name = Abilities.Set_The_Troll_King, tooltip = Tooltips.Set_The_Troll_King }, -- The Troll King
     [102094] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', groundLabel = true, tooltip = Tooltips.Set_Thurvokun_Ground }, -- Thurvokun
     [102097] = { tooltip = Abilities.Set_Thurvokun }, -- Minor Maim (Thurvokun)
@@ -3510,14 +3511,14 @@ Effects.EffectOverride = {
     -- Crafted Sets
     [34502] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ashen_grip.dds' }, -- Ashen Grip
     [34592] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', tooltip = Tooltips.Set_Alessias_Bulwark }, -- Alessia's Bulwark
-    [75746] = { icon = 'LuiExtended/media/icons/abilities/ability_set_clever_alchemist.dds', tooltip = Tooltips.Set_Clever_Alchemist }, -- Clever Alchemist
+    [75746] = { icon = 'LuiExtended/media/icons/abilities/ability_set_clever_alchemist.dds', tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration_Value, tooltipValue2 = 661 }, -- Clever Alchemist
     [92774] = { tooltip = Abilities.Set_Daedric_Trickery }, -- Major Mending (Daedric Trickery)
     [92771] = { tooltip = Abilities.Set_Daedric_Trickery }, -- Major Expedition (Daedric Trickery)
     [92775] = { tooltip = Abilities.Set_Daedric_Trickery }, -- Major Heroism (Daedric Trickery)
     [92776] = { tooltip = Abilities.Set_Daedric_Trickery }, -- Major Vitality (Daedric Trickery)
     [92773] = { tooltip = Abilities.Set_Daedric_Trickery }, -- Major Protection (Daedric Trickery)
-    [33764] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds', tooltip = Tooltips.Generic_Knockback }, -- Death's Wind
-    [52289] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds', hide = true }, -- Death's Wind
+    [33764] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds' }, -- Death's Wind
+    [52289] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds', tooltip = Tooltips.Generic_Knockback }, -- Death's Wind
     [75930] = { tooltip = Tooltips.Set_Eternal_Hunt }, -- Eternal Hunt
     [75929] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds' }, -- Eternal Hunt
     [76533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', tooltip = Tooltips.Generic_Immobilize }, -- Eternal Hunt
@@ -4073,7 +4074,7 @@ Effects.EffectOverride = {
     [123970] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds', name = Abilities.Innate_Resurrection_Immunity, tooltip = Tooltips.Innate_Resurrection_Immunity }, -- Lesser Reincarnate
 
     -- Basic Attacks
-    [16593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 20 }, -- Melee Snare -- TODO: Get Tooltip %
+    [16593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 25 },
     [48532] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', hide = true }, -- Charge Snare
     [61737] = { tooltip = "" }, -- Empower
     [55080] = { hide = true }, -- Pet Hidden

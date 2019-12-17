@@ -399,7 +399,6 @@ LUIE.Data.Tooltips = {
     Set_Shadowrend                                  = GetString(SI_LUIE_SKILL_SET_SHADOWREND_TP),
     Set_Spawn_of_Mephala                            = GetString(SI_LUIE_SKILL_SET_SPAWN_OF_MEPHALA_TP),
     Set_Stormfist                                   = GetString(SI_LUIE_SKILL_SET_STORMFIST_TP),
-    Set_Engine_Guardian_Health                      = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE_2)),
     Set_Engine_Guardian_Stamina                     = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE6)),
     Set_Engine_Guardian_Magicka                     = zo_strformat(GetString(SI_LUIE_SKILL_SET_ENGINE_GUARDIAN), GetString(SI_COMBATMECHANICTYPE0)),
     Set_The_Troll_King                              = GetString(SI_LUIE_SKILL_SET_THE_TROLL_KING_TP),
