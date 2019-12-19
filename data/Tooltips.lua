@@ -110,8 +110,10 @@ LUIE.Data.Tooltips = {
     Generic_Weapon_Spell_Damage_Duration_Value      = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_VALUE_TP),
 
     Generic_Magicka_Regen                           = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_TP),
+    Generic_Magicka_Regen_Value                     = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_VALUE_TP),
     Generic_Magicka_Regen_Potion                    = GetString(SI_LUIE_SKILL_GENERIC_MGK_REGEN_POTION_TP),
     Generic_Stamina_Regen                           = GetString(SI_LUIE_SKILL_GENERIC_STAM_REGEN_TP),
+    Generic_Stamina_Regen_Value                     = GetString(SI_LUIE_SKILL_GENERIC_STAM_REGEN_VALUE_TP),
     Generic_Stamina_Regen_Potion                    = GetString(SI_LUIE_SKILL_GENERIC_STAM_REGEN_POTION_TP),
     Generic_Health_Recovery                         = GetString(SI_LUIE_SKILL_GENERIC_HEALTH_RECOVERY_TP),
 

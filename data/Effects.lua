@@ -4604,9 +4604,9 @@ Effects.EffectOverride = {
     [24576] = { tooltip = Tooltips.Generic_Stun }, -- Defensive Rune (Defensive Rune)
 
     -- Dark Exchange / Dark Deal / Dark Conversion
-    [114903] = { tooltip = Tooltips.Generic_Magicka_Regen, tooltipValue2 = 1 }, -- Dark Exchange (Dark Exchange)
-    [114908] = { tooltip = Tooltips.Generic_Stamina_Regen, tooltipValue2 = 1 }, -- Dark Deal (Dark Deal)
-    [114909] = { tooltip = Tooltips.Generic_Magicka_Regen, tooltipValue2 = 1 }, -- Dark Conversion (Dark Conversion)
+    [114903] = { tooltip = Tooltips.Generic_Magicka_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 120 }, -- Dark Exchange (Dark Exchange)
+    [114908] = { tooltip = Tooltips.Generic_Stamina_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 120 }, -- Dark Deal (Dark Deal)
+    [114909] = { tooltip = Tooltips.Generic_Magicka_Regen_Value, tooltipValue2 = 1, tooltipValue3 = 120 }, -- Dark Conversion (Dark Conversion)
 
     -- Daedric Mines / Daedric Tomb / Daedric Minefield
     [24830] = { tooltip = Tooltips.Skill_Daedric_Mines }, -- Daedric Mines (Daedric Mines)
