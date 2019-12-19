@@ -524,6 +524,7 @@ Effects.EffectGroundDisplay = {
     [75930] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', name = Abilities.Set_Eternal_Hunt, buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 7 }, -- Daedric Mines (Eternal Hunt)
     [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', buff = true, debuff = false, ground = false }, -- Morkuldin (Morkuldin)
     [106784] = { name = Abilities.Set_Dust_Cloud, buff = false, debuff = false, ground = true }, -- Dustcloud (Adept Rider's)
+    [113181] = { icon = 'esoui/art/icons/mm_teaser.dds', buff = true, debuff = false, ground = false }, -- Grave-Stake Collector (Grave-Stake Collector)
 
     -- Overland Sets
     [75691] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', buff = false, debuff = false, ground = true }, -- Bahraha's Curse
@@ -3563,6 +3564,7 @@ Effects.EffectOverride = {
     [106804] = { icon = 'esoui/art/icons/achievement_su_mainquest_6.dds', name = Abilities.Set_Nocturnals_Favor }, -- Nocturnal's Heal (Nocturnal's Favor)
     [106798] = { icon = 'esoui/art/icons/achievement_su_mainquest_2.dds', tooltip = Tooltips.Set_Sloads }, -- Sload's Semblance (Sload's)
     [113092] = { icon = 'esoui/art/icons/achievement_su_mainquest_2.dds', name = Abilities.Set_Sloads_Semblance }, -- Sload's Projectile (Sloads)
+    [113181] = { tooltip = Tooltips.Set_Grave_Stake_Collector }, -- Grave-Stake Collector (Grave-Stake Collector)
     [113185] = { icon = 'esoui/art/icons/mm_teaser.dds' }, -- Grave-Stake Collector (Grave-Stake Collector)
     [113237] = { icon = 'esoui/art/icons/mm_teaser.dds' }, -- Grave-Stake Collector (Grave-Stake Collector)
     [113312] = { stack = 3, tooltip = Abilities.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)

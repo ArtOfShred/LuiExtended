@@ -435,6 +435,7 @@ LUIE.Data.Tooltips = {
     Set_Eye_of_Nahviintaas                          = GetString(SI_LUIE_SKILL_SET_EYE_OF_NAHVIINTAAS),
     Set_Seventh_Legion                              = GetString(SI_LUIE_SKILL_SET_SEVENTH_LEGION_TP),
     Set_Sloads                                      = GetString(SI_LUIE_SKILL_SET_SLOADS_TP),
+    Set_Grave_Stake_Collector                       = GetString(SI_LUIE_SKILL_SET_GRAVE_STAKE_COLLECTOR_TP),
 
     -- Light / Medium / Heavy Sets
     Set_Bahrahas_Curse                              = GetString(SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP),

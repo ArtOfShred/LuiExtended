@@ -870,6 +870,7 @@ local strings = {
     SI_LUIE_SKILL_SET_SENCHE_RAHTS_GRIT =                "Increase healing received by |cffffff6|r% and Physical and Spell Resistance for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_VASTARIES_TUTELAGE =               "Increase Weapon and Spell Damage and reduce the Magicka, Stamina, and Health cost of abilities by |cffffff10|r% for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_SET_SLOADS_TP =                        "Taking |cffffff3|r% of your Max Health as Oblivion Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds.\n\nThis effect can deal a maximum of |cffffff3000|r Oblivion Damage per tick.",
+    SI_LUIE_SKILL_SET_GRAVE_STAKE_COLLECTOR_TP =         "When you touch the grave-stake, restore |cffffff6500|r Stamina and Magicka.\n\nOnly one grave-stake can appear at a time.",
 
     -- Light / Medium / Heavy Armor Sets
     SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP =                "Enemies in the |cFFFFFF3.5|r meter radius of desecrated ground take Magic Damage every |cffffff1|r second and have their Movement Speed reduced by |cffffff70|r%.\n\nYou heal for |cffffff100|r% of the damage done.",
