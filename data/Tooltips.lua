@@ -103,7 +103,8 @@ LUIE.Data.Tooltips = {
     Generic_Weapon_Damage_Duration_Value            = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_VALUE_TIME_TP),
     Generic_Spell_Damage_Duration                   = GetString(SI_LUIE_SKILL_SET_GENERIC_SPELL_DAMAGE_TIME_TP),
     Generic_Spell_Damage_Duration_Value             = GetString(SI_LUIE_SKILL_SET_GENERIC_SPELL_DAMAGE_TIME_VALUE_TP),
-    Generic_LA_HA_Damage_Duration                   = GetString(SI_LUIE_SKILL_SET_GENERIC_LA_HA_DAMAGE),
+    Generic_LA_HA_Damage_Duration                   = GetString(SI_LUIE_SKILL_SET_GENERIC_LA_HA_DAMAGE_TP),
+    Generic_LA_HA_Damage_Duration_Value             = GetString(SI_LUIE_SKILL_SET_GENERIC_LA_HA_DAMAGE_VALUE_TP),
     Generic_Magicka_Recovery_Duration               = GetString(SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_TP),
     Generic_Magicka_Recovery_Duration_Value         = GetString(SI_LUIE_SKILL_SET_GENERIC_MAG_RECOVERY_TIME_VALUE_TP),
     Generic_Weapon_Spell_Damage_Duration            = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_SPELL_DAMAGE_TIME_TP),
@@ -449,7 +450,6 @@ LUIE.Data.Tooltips = {
     Set_Draugrs_Rest                                = GetString(SI_LUIE_SKILL_SET_DRAUGRS_REST_TP),
     Set_Overwhelming_Surge                          = GetString(SI_LUIE_SKILL_SET_OVERWHELMING_SURGE_TP),
     Set_Sanctuary                                   = GetString(SI_LUIE_SKILL_SANCTUARY_TP),
-    Set_Shroud_of_the_Lich                          = GetString(SI_LUIE_SKILL_SHROUD_OF_THE_LICH_TP),
     Set_Noble_Duelist                               = GetString(SI_LUIE_SKILL_SET_NOBLE_DUELIST_TP),
     Set_Worms_Raiment                               = GetString(SI_LUIE_SKILL_SET_WORMS_RAIMENT_TP),
     Set_Hircines_Veneer                             = GetString(SI_LUIE_SKILL_SET_HIRCINES_VENEER_TP),
@@ -471,6 +471,8 @@ LUIE.Data.Tooltips = {
     Set_Dragonguard_Tactics                         = GetString(SI_LUIE_SKILL_DRAGONGUARD_TACTICS_TP),
     Set_Senchals_Duty                               = GetString(SI_LUIE_SKILL_SENCHALS_DUTY_TP),
     Set_Trinimacs_Valor                             = GetString(SI_LUIE_SKILL_TRINIMACS_VALOR_TP),
+    Set_Hatchlings_Shell                            = GetString(SI_LUIE_SKILL_SET_HATCHLINGS_SHELL_TP),
+    Set_Undaunted_Unweaver                          = GetString(SI_LUIE_SKILL_SET_UNDAUNTED_UNWEAVER_TP),
 
     -- Trial Sets
     Set_Berserking_Warrior                          = GetString(SI_LUIE_SKILL_SET_BERSERKING_WARRIOR_TP),

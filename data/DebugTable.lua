@@ -1534,6 +1534,7 @@ LUIE.DebugAuras = {
 
     [121596] = true, -- Vesture of Darloc Brae (Darloc Brae's)
     [121615] = true, -- Vesture of Darloc Brae (Darloc Brae's)
+    [121602] = true, -- Vesture of Darloc Brae (Darloc Brae's)
     [121618] = true, -- Vesture of Darloc Brae (Darloc Brae's)
 
     [129405] = true, -- Dragonguard Elite (Dragonguard Elite's)
