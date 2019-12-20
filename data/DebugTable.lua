@@ -1370,6 +1370,7 @@ LUIE.DebugAuras = {
 
     [129534] = true, -- Daring Corsair (Daring Corsair's)
     [129536] = true, -- Minor Heroism (Daring Corsair's)
+    [130840] = true, -- Daring Corsair (Daring Corsair's)
 
     -- Overland Sets (All Types)
     [85541] = true, -- Armor of the Trainee (of the Trainee)
@@ -1444,6 +1445,7 @@ LUIE.DebugAuras = {
     [93002] = true, -- Mad Tinkerer (Mad Tinkerer's)
     [93003] = true, -- Mad Tinkerer (Mad Tinkerer's)
     [92998] = true, -- Mad Tinkerer (Mad Tinkerer's)
+    [93000] = true, -- Mad Tinkerer (Mad Tinkerer's)
 
     [106805] = true, -- Wisdom of Vanus (Vanus's)
     [106806] = true, -- Major Mending (Vanus's)

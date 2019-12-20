@@ -71,7 +71,7 @@ LUIE.Data.AlertTable = {
     [74978] = { block = true, dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 9000, cc = STUN }, -- Taking Aim (Archer)
 
     [14096] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1250 }, -- Heavy Attack (Footsoldier)
-    [28499] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = SNARE }, -- Throw Dagger (Footsoldier)
+    [28499] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = SNARE, refire = 250 }, -- Throw Dagger (Footsoldier)
 
     [29400] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1400, cc = DISORIENT }, -- Power Bash (Guard)
     [29761] = { power = true, priority = 3, auradetect = true, alwaysShowInterrupt = true }, -- Brace (Guard)

@@ -400,6 +400,7 @@ Effects.DebuffDisplayOverrideId = {
 
     -- Item Sets
     [127070] = true, -- Way of Martial Knowledge (... of Martial Knowledge)
+    [93305] = true, -- Defiler (Defiler's)
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
     [75753] = true, -- Line-Breaker (of Alkosh)
     [93001] = true, -- Mad Tinkerer (Stun from Fabricant)
@@ -3580,6 +3581,7 @@ Effects.EffectOverride = {
     [123717] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
     [123715] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
     [129536] = { tooltip = Abilities.Set_Daring_Corsair }, -- Minor Heroism (Daring Corsair's)
+    [130840] = { icon = 'esoui/art/icons/ability_buff_minor_heroism.dds', name = Abilities.Skill_Minor_Heroism }, -- Daring Corsair (Daring Corsair's)
 
     -- Overland Sets (Light)
     [75691] = { tooltip = Tooltips.Set_Bahrahas_Curse }, -- Bahraha's Curse
