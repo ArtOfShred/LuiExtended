@@ -1345,10 +1345,6 @@ LUIE.DebugAuras = {
 
     [113311] = true, -- Might of the Lost Legion (Might of the Lost Legion)
     [113312] = true, -- Empower (Might of the Lost Legion)
-    [114947] = true, -- Might of the Lost Legion (Might of the Lost Legion)
-    [114945] = true, -- Empower (Might of the Lost Legion)
-    [114954] = true, -- Might of the Lost Legion (Might of the Lost Legion)
-    [114952] = true, -- Empower (Might of the Lost Legion)
 
     [113287] = true, -- Naga Shaman (Naga Shaman)
     [113306] = true, -- Minor Vitality (Naga Shaman)

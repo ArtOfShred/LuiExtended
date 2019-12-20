@@ -525,6 +525,8 @@ Effects.EffectGroundDisplay = {
     [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', buff = true, debuff = false, ground = false }, -- Morkuldin (Morkuldin)
     [106784] = { name = Abilities.Set_Dust_Cloud, buff = false, debuff = false, ground = true }, -- Dustcloud (Adept Rider's)
     [113181] = { icon = 'esoui/art/icons/mm_teaser.dds', buff = true, debuff = false, ground = false }, -- Grave-Stake Collector (Grave-Stake Collector)
+    [121915] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', name = Abilities.Set_Honors_Scorn, buff = false, debuff = false, ground = true }, -- Coldharbour's Favorite (Coldharbour's Favorite)
+    [121912] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_love.dds', name = Abilities.Set_Honors_Love, buff = true, debuff = false, ground = false }, -- Coldharbour's Favorite (Coldharbour's Favorite)
 
     -- Overland Sets
     [75691] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', buff = false, debuff = false, ground = true }, -- Bahraha's Curse
@@ -3567,13 +3569,13 @@ Effects.EffectOverride = {
     [113181] = { tooltip = Tooltips.Set_Grave_Stake_Collector }, -- Grave-Stake Collector (Grave-Stake Collector)
     [113185] = { icon = 'esoui/art/icons/mm_teaser.dds' }, -- Grave-Stake Collector (Grave-Stake Collector)
     [113237] = { icon = 'esoui/art/icons/mm_teaser.dds' }, -- Grave-Stake Collector (Grave-Stake Collector)
-    [113312] = { stack = 3, tooltip = Abilities.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
-    [114945] = { stack = 2, tooltip = Abilities.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
-    [114952] = { stack = 1, tooltip = Abilities.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
+    [113312] = { icon = 'esoui/art/icons/achievement_depthsofmalatar_killmonstersa.dds', name = Abilities.Set_Might_of_the_Lost_Legion, tooltip = Tooltips.Set_Might_of_the_Lost_Legion }, -- Empower (Might of the Lost Legion)
     [113306] = { tooltip = Abilities.Set_Naga_Shaman }, -- Minor Vitality (Naga Shaman)
     [113307] = { tooltip = Abilities.Set_Naga_Shaman }, -- Minor Mending (Naga Shaman)
-    [124303] = { icon = 'LuiExtended/media/icons/abilities/ability_set_senche_rahts_grit.dds', tooltip = Tooltips.Set_Senche_Rahts_Grit }, -- Senche-Raht's Grit (Senche-Raht's)
+    [124303] = { icon = 'esoui/art/icons/achievement_els_lrgzone_groupboss4.dds', tooltip = Tooltips.Set_Senche_Rahts_Grit }, -- Senche-Raht's Grit (Senche-Raht's)
+    [121915] = { tooltip = Tooltips.Set_Coldharbours_Favorite_Damage }, -- Coldharbour's Favorite (Coldharbour's Favorite)
     [121917] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Magic, tooltipValue2 = 1 }, -- Honor's Scorn (Coldharbour's Favorite)
+    [121912] = { tooltip = Tooltips.Set_Coldharbours_Favorite_Heal }, -- Coldharbour's Favorite (Coldharbour's Favorite)
     [121913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_honors_love.dds', tooltip = Tooltips.Generic_HoT, tooltipValue2 = 1 }, -- Honor's Love (Coldharbour's Favorite)
     [123717] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
     [123715] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vastaries_tutelage.dds', tooltip = Tooltips.Set_Vastaries_Tutelage }, -- Vastarie's Tutelage (Vastarie's Tutelage)
@@ -4851,6 +4853,7 @@ Effects.EffectOverride = {
 
     -- Radial Sweep /  Empowering Sweep / Crescent Sweep
     [62593] = { tooltip = Tooltips.Skill_Radial_Sweep }, -- Radial Sweep (Radial Sweep)
+    [55214] = { hide = true }, -- Empower (Empowering Sweep)
     [62599] = { tooltip = Tooltips.Skill_Empowering_Sweep }, -- Empowering Sweep (Empowering Sweep)
     [62607] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds', name = Abilities.Skill_Crescent_Sweep, tooltip = Tooltips.Skill_Radial_Sweep  }, -- Crescent Sweep (Crescent Sweep)
     [62606] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds' }, -- Radial Sweep (Crescent Sweep)

@@ -436,6 +436,9 @@ LUIE.Data.Tooltips = {
     Set_Seventh_Legion                              = GetString(SI_LUIE_SKILL_SET_SEVENTH_LEGION_TP),
     Set_Sloads                                      = GetString(SI_LUIE_SKILL_SET_SLOADS_TP),
     Set_Grave_Stake_Collector                       = GetString(SI_LUIE_SKILL_SET_GRAVE_STAKE_COLLECTOR_TP),
+    Set_Might_of_the_Lost_Legion                    = GetString(SI_LUIE_SKILL_SET_MIGHT_OF_THE_LOST_LEGION_TP),
+    Set_Coldharbours_Favorite_Heal                  = GetString(SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_HEAL_TP),
+    Set_Coldharbours_Favorite_Damage                = GetString(SI_LUIE_SKILL_SET_COLDHARBOURS_FAVORITE_DAMAGE_TP),
 
     -- Light / Medium / Heavy Sets
     Set_Bahrahas_Curse                              = GetString(SI_LUIE_SKILL_SET_BAHRAHAS_CURSE_TP),
