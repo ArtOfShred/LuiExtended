@@ -2682,6 +2682,7 @@ Effects.TooltipNameOverride = {
     [Abilities.Skill_Off_Balance]           = Tooltips.Generic_Off_Balance,
     [Abilities.Skill_Revealed]              = Tooltips.Generic_Reveal,
     [Abilities.Skill_Marked]                = Tooltips.Generic_Marked,
+    [Abilities.Skill_Trauma]                = Tooltips.Generic_Trauma,
 
     -- Potions
     [45239]                         = Tooltips.Generic_CC_Immunity, -- ... of Immovability (2 Traits)
@@ -2864,6 +2865,7 @@ Effects.EffectOverride = {
     [79844] = { icon = 'LuiExtended/media/icons/potions/potion_001r.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Abilities.Potion }, -- of Vulnerability (Minor Vulnerability)
     [64568] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds', tooltip = Abilities.Potion }, -- of Weapon Critical (Major Savagery)
     [64555] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds', tooltip = Abilities.Potion }, -- of Weapon Power (Major Brutality)
+    [125027] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds', tooltip = Abilities.Potion }, -- of Heroism (Minor Heroism)
 
     -- Crafted Potions (3 Traits)
     [64565] = { icon = 'LuiExtended/media/icons/potions/potion_007.dds', tooltip = Abilities.Potion }, -- of Armor (Major Resolve)
@@ -2896,6 +2898,7 @@ Effects.EffectOverride = {
     [79846] = { icon = 'LuiExtended/media/icons/potions/potion_001r.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Abilities.Potion }, -- of Vulnerability (Minor Vulnerability)
     [64569] = { icon = 'LuiExtended/media/icons/potions/potion_012.dds', tooltip = Abilities.Potion }, -- of Weapon Critical (Major Savagery)
     [64554] = { icon = 'LuiExtended/media/icons/potions/potion_005.dds', tooltip = Abilities.Potion }, -- of Weapon Power (Major Brutality)
+    [125041] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds', tooltip = Abilities.Potion }, -- of Heroism (Minor Heroism)
 
     -- Vendor Potions + AVA Potions + Roguish Draughts
     [63672] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds', tooltip = Abilities.Potion  }, -- of Health (Major Fortitude)
@@ -3014,6 +3017,8 @@ Effects.EffectOverride = {
     [79851] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', tooltip = Abilities.Poison }, -- Minor Defile (Vitality-Draining Poison) DEBUFF
     [79852] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', tooltip = Abilities.Poison }, -- Minor Vitality (Vitality-Draining Poison) BUFF
     [79861] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', tooltip = Abilities.Poison }, -- Minor Defile (Defiling Poison) DEBUFF
+    [125203] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', tooltip = Abilities.Poison }, -- Trauma (Traumatic Poison) DEBUFF
+    [125204] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_g.dds', tooltip = Abilities.Poison }, -- Minor Heroism (Traumatic Poison) BUFF
 
     -- Crafted Poisons (3 Traits)
     [79135] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds', tooltip = Abilities.Poison }, -- Drain Health (Drain Health Poison) DEBUFF
@@ -3061,6 +3066,8 @@ Effects.EffectOverride = {
     [79854] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', tooltip = Abilities.Poison }, -- Minor Defile (Vitality-Draining Poison) DEBUFF
     [79855] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', tooltip = Abilities.Poison }, -- Minor Vitality (Vitality-Draining Poison) BUFF
     [79862] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds', tooltip = Abilities.Poison }, -- Minor Defile (Defiling Poison) DEBUFF
+    [125205] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', name = Abilities.Skill_Trauma, tooltip = Abilities.Poison }, -- Minor Traumatized (Traumatic Poison) DEBUFF
+    [125206] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_g.dds', tooltip = Abilities.Poison }, -- Minor Heroism (Traumatic Poison) BUFF
 
     -- Vendor Poisons
     [81553] = { icon = 'LuiExtended/media/icons/poisons/poison_1_red_r.dds', tooltip = Abilities.Poison }, -- Ravage Health (Cloudy Damage Health Poison) DEBUFF

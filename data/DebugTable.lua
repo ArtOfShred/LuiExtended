@@ -120,7 +120,8 @@ LUIE.Data.DebugResults = {
     [2900]          = "UNEVEN TERRAIN",
     [2450]          = "WEAPON SWAP",
     [8]             = "WRECKING DAMAGE",
-    [2380 ]         = "WRONG WEAPON",
+    [2380]          = "WRONG WEAPON",
+    [3470]          = "HEAL ABSORBED",
 }
 
 -- List of all abilityId's that have been processed so far
@@ -162,6 +163,7 @@ LUIE.DebugAuras = {
     [79844] = true, -- Minor Vulnerability (... of Minor Vulnerability)
     [64568] = true, -- Major Savagery (... of Weapon Critical)
     [64555] = true, -- Major Brutality (... of Weapon Power)
+    [125027] = true, -- Minor Heroism (... of Heroism)
 
     -- Crafted Potions (3 Traits)
     [64565] = true, -- Major Resolve (... of Armor)
@@ -195,6 +197,7 @@ LUIE.DebugAuras = {
     [79846] = true, -- Minor Vulnerability (... of Minor Vulnerability)
     [64569] = true, -- Major Savagery (... of Weapon Critical)
     [64554] = true, -- Major Brutality (... of Weapon Power)
+    [125041] = true, -- Minor Heroism (... of Heroism)
 
     -- Vendor Potions + AVA Potions + Roguish Draughts
     [63672] = true, -- Major Fortitude (... of Health)
@@ -316,6 +319,8 @@ LUIE.DebugAuras = {
     [79851] = true, -- Minor Defile (Vitality-Draining Poison)
     [79852] = true, -- Minor Vitality (Vitality-Draining Poison)
     [79861] = true, -- Minor Defile (Defiling Poison)
+    [125203] = true, -- Trauma (Traumatic Poison)
+    [125204] = true, -- Minor Heroism (Traumatic Poison)
 
     -- Crafted Poisons (3 Traits)
     [79135] = true, -- Drain Health (Drain Health Poison)
@@ -365,6 +370,8 @@ LUIE.DebugAuras = {
     [79854] = true, -- Minor Defile (Vitality-Draining Poison)
     [79855] = true, -- Minor Vitality (Vitality-Draining Poison)
     [79862] = true, -- Minor Defile (Defiling Poison)
+    [125205] = true, -- Minor Traumatizing (Traumatic Poison)
+    [125206] = true, -- Minor Heroism (Traumatic Poison)
 
     -- Vendor Poisons
     [81553] = true, -- Ravage Health (Cloudy Damage Health Poison)

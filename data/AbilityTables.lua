@@ -73,6 +73,7 @@ local AbilityTables = {
     Skill_Empower                     = 61737,
     Skill_Hindrance                   = 46210,
     Skill_Stun                        = 68565,
+    Skill_Trauma                      = 125203,
 
     -- ---------------------------------------------------
     -- INNATE ABILITIES ----------------------------------

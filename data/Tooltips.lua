@@ -209,6 +209,7 @@ LUIE.Data.Tooltips = {
     Generic_Ravage_Stamina_Poison                   = GetString(SI_LUIE_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP),
 
     Generic_Marked                                  = GetString(SI_LUIE_SKILL_GENERIC_MARKED_TP),
+    Generic_Trauma                                  = GetString(SI_LUIE_SKILL_GENERIC_TRAUMA_TP),
     Generic_Reveal                                  = GetString(SI_LUIE_SKILL_GENERIC_REVEAL_TP),
     Generic_Reveal_No_Dur                           = GetString(SI_LUIE_SKILL_GENERIC_REVEAL_NO_DUR_TP),
     Generic_Blind                                   = GetString(SI_LUIE_SKILL_GENERIC_BLIND_TP),

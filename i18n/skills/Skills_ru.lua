@@ -245,6 +245,7 @@ local strings = {
 
     -- Stealth / Detection
     SI_LUIE_SKILL_GENERIC_MARKED_TP =                    "Помечен на |cFFFFFF<<1>>|r секунд. Вы видны для противника, который пометил вас, даже если уходите в скрытность.",
+    SI_LUIE_SKILL_GENERIC_TRAUMA_TP =                    "Negate the next |cffffff2000|r points of healing received for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_REVEAL_TP =                    "Обнаружен на |cFFFFFF<<1>>|r секунд. Вы не можете уйти в невидимость.",
     SI_LUIE_SKILL_GENERIC_REVEAL_NO_DUR_TP =             "Revealed. You are unable to stealth.",
     SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP =              "Invisible for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
@@ -953,7 +954,7 @@ local strings = {
     SI_LUIE_SKILL_SET_VICECANON_OF_VENOM_TP =            "Afflicted with Poison Damage every |cffffff1|r second for |cffffff<<1>>|r seconds.\n\nYour attacker heals for |cffffff100|r% of the damage done.",
 
     -- Alliance War Sets
-    SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Negate the next |cffffff4800|r points of healing done for |cffffff4|r seconds.",
+    SI_LUIE_SKILL_SET_SOLDIER_OF_ANGUISH_TP =            "Negate the next |cffffff4800|r points of healing received for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_SET_SPELL_STRATEGIST_TP =              "Your attacker gains |cffffff500|r additional Spell Damage against you for |cffffff5|r seconds.",
     SI_LUIE_SKILL_SET_SUCCESSION_TP =                    "Increase Spell Damage by |cffffff550|r for <<1>> dealing attacks for |cffffff4|r seconds.\n\nThis effect can occur once every |cffffff4|r seconds per element.",
     SI_LUIE_SKILL_SET_PARA_BELLUM_TP =                   "Absorbing damage. The shield will replenish if you do not take any damage for |cffffff10|r seconds.",
