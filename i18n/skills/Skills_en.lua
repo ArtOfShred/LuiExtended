@@ -66,9 +66,7 @@ local strings = {
     SI_LUIE_SKILL_GLYPH_HARDENING =                      "Hardening Enchantment",
     SI_LUIE_SKILL_GLYPH_WEAKENING =                      "Weakening Enchantment",
     SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE =                  "Weapon Damage Enchantment",
-    SI_LUIE_SKILL_GLYPH_HARDENING_TP =                   "Absorbing damage for |cFFFFFF7|r seconds.",
-    SI_LUIE_SKILL_GLYPH_WEAKENING_TP =                   "Reduce Weapon and Spell Damage for |cFFFFFF5|r seconds.",
-    SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE_TP =               "Increase Weapon and Spell Damage for |cFFFFFF5|r seconds.",
+    SI_LUIE_SKILL_GLYPH_WEAKENING_TP =                   "Reduce Weapon and Spell Damage for |cFFFFFF<<1>>|r seconds.",
 
     -- Crafting Station Creation
     SI_LUIE_SKILL_CRAFTING_STATION_JEWELRY =             "Attune Jewelry Crafting Station",
@@ -186,6 +184,10 @@ local strings = {
 
     -- Empower
     SI_LUIE_SKILL_EMPOWER_TP =                           "Increase the damage of your next Light Attack by |cffffff40|r%.",
+
+    -- Potions
+    SI_LUIE_SKILL_SPELL_RESISTANCE_POTION_TP =           "Increase Spell Resistance by |cffffff5280|r.",
+    SI_LUIE_SKILL_PHYSICAL_RESISTANCE_POTION_TP =        "Increase Physical Resistance by |cffffff5280|r.",
 
     ----------------------------------------------------------------
     -- CHAMPION POINT SKILLS ---------------------------------------
@@ -781,6 +783,7 @@ local strings = {
     SI_LUIE_SKILL_ELDER_SCROLL_TP =                      "Carrying the |cFFFFFF<<1>>|r.",
     SI_LUIE_SKILL_MEATBAG_CATAPULT_AOE_TP =              "Taking Disease Damage every |cFFFFFF1|r second.\n\nHealing and Health Recovery reduced by |cFFFFFF50|r% for |cFFFFFF6|r seconds whenever you take damage from this effect.",
     SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_AOE_TP =          "Taking Physical Damage every |cFFFFFF1|r second.\n\nIncrease damage taken from all sources by |cFFFFFF20|r% for |cFFFFFF6|r seconds whenever you take damage from this effect.",
+    SI_LUIE_SKILL_RUNE_FOCUS_CYRODIIL_TP =               "Absorbing damage every |cffffff0.5|r seconds while standing in the rune focus.",
 
     SI_LUIE_SKILL_CONSUME_LIFEFORCE =                    "Consume Lifeforce",
     SI_LUIE_SKILL_RUINOUS_CYCLONE =                      "After |cFFFFFF2|r seconds, enemies within |cFFFFFF8|r meters take Physical Damage every |cFFFFFF0.5|r seconds for |cFFFFFF7|r seconds as long as the channel is maintained.\n\nEnemies within |cFFFFFF15|r meters are pulled closer to you while channeling.",
@@ -936,7 +939,7 @@ local strings = {
     SI_LUIE_SKILL_SET_HEALING_MAGE_TP =                  "Reduce Weapon Damage by |cffffff430|r for |cffffff3|r seconds.",
     SI_LUIE_SKILL_SET_TWICE_FANGED_SERPENT_TP =          "Increase Physical Penetration by |cffffff860|r for |cffffff3|r seconds, stacking up to |cffffff5|r times when you deal damage.",
     SI_LUIE_SKILL_SET_LUNAR_BASTION_TP =                 "You and allies within the |cffffff8|r meter radius of the lunar blessing are granted a damage shield every |cffffff2|r seconds.",
-    SI_LUIE_SKILL_SET_LUNAR_BASTION_GROUND_TP =          "Absorb damage every |cffffff2|r seconds while standing in the lunar blessing.",
+    SI_LUIE_SKILL_SET_LUNAR_BASTION_GROUND_TP =          "Absorbing damage every |cffffff2|r seconds while standing in the lunar blessing.",
     SI_LUIE_SKILL_SET_VESTMENT_OF_OLORIME_TP =           "You and allies standing in the circle of might gain Major Courage for |cffffff30|r seconds.",
     SI_LUIE_SKILL_SET_MANTLE_OF_SIRORIA_TP =             "Standing in the ring grants you a stack of Siroria's Boon every |cffffff1|r second.",
     SI_LUIE_SKILL_SET_SIRORIAS_BOON_TP =                 "Increase Spell Damage by |cffffff30|r for |cffffff5|r seconds, stacking up to |cffffff20|r times when standing in the ring of fire.",

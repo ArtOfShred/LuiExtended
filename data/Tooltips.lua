@@ -213,6 +213,8 @@ LUIE.Data.Tooltips = {
     Generic_Reveal                                  = GetString(SI_LUIE_SKILL_GENERIC_REVEAL_TP),
     Generic_Reveal_No_Dur                           = GetString(SI_LUIE_SKILL_GENERIC_REVEAL_NO_DUR_TP),
     Generic_Blind                                   = GetString(SI_LUIE_SKILL_GENERIC_BLIND_TP),
+    Skill_Spell_Resistance_Potion                   = GetString(SI_LUIE_SKILL_SPELL_RESISTANCE_POTION_TP),
+    Skill_Physical_Resistance_Potion                = GetString(SI_LUIE_SKILL_PHYSICAL_RESISTANCE_POTION_TP),
 
     ----------------------------------------------------------------
     -- INNATE SKILLS ----------------------------------------------
@@ -281,9 +283,7 @@ LUIE.Data.Tooltips = {
     ----------------------------------------------------------------
 
     -- Glyphs
-    Item_Glyph_of_Hardening                         = GetString(SI_LUIE_SKILL_GLYPH_HARDENING_TP),
     Item_Glyph_of_Weakening                         = GetString(SI_LUIE_SKILL_GLYPH_WEAKENING_TP),
-    Item_Glyph_of_Weapon_Damage                     = GetString(SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE_TP),
 
     -- Crafted Food
     Food_Crafted_Health                             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68235:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
@@ -1337,6 +1337,7 @@ LUIE.Data.Tooltips = {
 
     Skill_Meatbag_Catapult_AOE                      = GetString(SI_LUIE_SKILL_MEATBAG_CATAPULT_AOE_TP),
     Skill_Scattershot_Catapult_AOE                  = GetString(SI_LUIE_SKILL_SCATTERSHOT_CATAPULT_AOE_TP),
+    Skill_Rune_Focus_Cyrodiil                       = GetString(SI_LUIE_SKILL_RUNE_FOCUS_CYRODIIL_TP),
 }
 
 --[[ Possibly use these at some point

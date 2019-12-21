@@ -2685,6 +2685,10 @@ Effects.TooltipNameOverride = {
     [Abilities.Skill_Trauma]                = Tooltips.Generic_Trauma,
 
     -- Potions
+    [64564]                         = Tooltips.Skill_Physical_Resistance_Potion, -- of Armor (2 Traits)
+    [64565]                         = Tooltips.Skill_Physical_Resistance_Potion, -- of Armor (3 Traits)
+    [64562]                         = Tooltips.Skill_Spell_Resistance_Potion, -- of Spell Protection (2 Traits)
+    [64563]                         = Tooltips.Skill_Spell_Resistance_Potion, -- of Spell Protection (3 Traits)
     [45239]                         = Tooltips.Generic_CC_Immunity, -- ... of Immovability (2 Traits)
     [45463]                         = Tooltips.Generic_CC_Immunity, -- ... of Immovability (3 Traits)
     [72930]                         = Tooltips.Generic_CC_Immunity, -- Alliance Health Draught
@@ -3334,13 +3338,13 @@ Effects.EffectOverride = {
     [17904] = { icon = 'LuiExtended/media/icons/glyphs/glyph_foulness.dds' }, -- Befouled Weapon (Glyph of Foulness)
     [17897] = { icon = 'LuiExtended/media/icons/glyphs/glyph_frost.dds' }, -- Frozen Weapon (Glyph of Frost)
     --[17947] = { icon = 'LuiExtended/media/icons/glyphs/glyph_hardening.dds', name = Abilities.Item_Glyph_of_Hardening }, -- Hardening (Glyph of Hardening) (DUMMY EVENT }, HERE JUST IN CASE)
-    [21578] = { icon = 'LuiExtended/media/icons/glyphs/glyph_hardening.dds', name = Abilities.Item_Glyph_of_Hardening, tooltip = Tooltips.Item_Glyph_of_Hardening }, -- Hardening (Glyph of Hardening)
+    [21578] = { icon = 'LuiExtended/media/icons/glyphs/glyph_hardening.dds', name = Abilities.Item_Glyph_of_Hardening, tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Hardening (Glyph of Hardening)
     [17902] = { icon = 'LuiExtended/media/icons/glyphs/glyph_poison.dds' }, -- Poisoned Weapon (Glyph of Poison)
     [40337] = { icon = 'LuiExtended/media/icons/glyphs/glyph_prismatic.dds' }, -- Primatic Weapon (Glyph of Prismatic Onslaught)
     [17899] = { icon = 'LuiExtended/media/icons/glyphs/glyph_shock.dds' }, -- Charged Weapon (Glyph of Shock)
     [17945] = { icon = 'LuiExtended/media/icons/glyphs/glyph_weakening.dds', name = Abilities.Item_Glyph_of_Weakening, type = BUFF_EFFECT_TYPE_DEBUFF, tooltip = Tooltips.Item_Glyph_of_Weakening, }, -- Weakening (Glyph of Weakening)
     --[17910] = { icon = 'LuiExtended/media/icons/glyphs/glyph_weapon_damage.dds', name = Abilities.Item_Glyph_of_Weapon_Damage }, -- Weapon Damage (Glyph of Weapon Damage) (DUMMY EVENT }, HERE JUST IN CASE)
-    [21230] = { icon = 'LuiExtended/media/icons/glyphs/glyph_weapon_damage.dds', name = Abilities.Item_Glyph_of_Weapon_Damage, tooltip = Tooltips.Item_Glyph_of_Weapon_Damage }, -- Berserker (Glyph of Weapon Damage) (Added in case ever needed)
+    [21230] = { icon = 'LuiExtended/media/icons/glyphs/glyph_weapon_damage.dds', name = Abilities.Item_Glyph_of_Weapon_Damage, tooltip = Tooltips.Generic_Weapon_Spell_Damage_Duration }, -- Berserker (Glyph of Weapon Damage) (Added in case ever needed)
 
     ----------------------------------------------------------------
     -- STATUS EFFECT PROCS -----------------------------------------
@@ -7176,10 +7180,10 @@ Effects.EffectOverride = {
     [75397] = { hide = true }, -- Unstable Core (Cryodiil Mage T2) (Pointless aura)
     [75395] = { hide = true }, -- Reflected FX (Cryodiil Mage T2) (Pointless aura)
     [57962] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_minor_wound.dds', hide = true }, -- Minor Wound (Cyrodiil Mender T1)
-    [46272] = { duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Damage_Shield_No_Duration }, -- Rune Focus (Cyrodiil Mender T1)
+    [46272] = { duration = 0, groundLabel = true, tooltip = Tooltips.Skill_Rune_Focus_Cyrodiil }, -- Rune Focus (Cyrodiil Mender T1)
     [21638] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_telekinetic_disorient.dds', name = Abilities.Skill_Telekinetic_Prison, tooltip = Tooltips.Generic_Disorient }, -- Telekinetic Disorient (Cyrodiil Mender T1)
     [46839] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_minor_wound.dds', hide = true }, -- Major Wound (Cyrodiil Mender T2)
-    [46904] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Damage_Shield_No_Duration }, -- Rune Focus (Cyrodiil Mender T2)
+    [46904] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Skill_Rune_Focus_Cyrodiil }, -- Rune Focus (Cyrodiil Mender T2)
     [46906] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_telekinetic_disorient.dds', name = Abilities.Skill_Shattering_Prison, tooltip = Tooltips.Skill_Shattering_Prison_Cyrodiil }, -- Telekinetic Disorient (Cyrodiil Mender T2)
     [46910] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_telekinetic_disorient.dds' }, -- Shattering Prison (Cyrodiil Mender T2)
     [52862] = { hide = true }, -- Health Boon (Cyrodiil Mender T2)

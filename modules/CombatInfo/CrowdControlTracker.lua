@@ -183,7 +183,6 @@ function CrowdControlTracker.UpdateAOEList()
         priority = priority + 1
     end
 
-    CrowdControlTracker.GeneratePriorityTable()
 end
 
 function CrowdControlTracker.PlaySoundAoe(abilityId)
@@ -265,15 +264,8 @@ function CrowdControlTracker:OnAnimation(control, animationType, param)
     end
 end
 
-function CrowdControlTracker.GeneratePriorityTable()
-    CrowdControlTracker.aoeTypes = {}
-    for k,v in pairs (CrowdControlTracker.aoeTypesId) do
-        CrowdControlTracker.aoeTypes[GetAbilityName(k)] = v
-    end
-end
-
-function CrowdControlTracker:AoePriority(abilityName, result)
-    if self.aoeTypes[abilityName] and self.aoeHitTypes[result] and ((not self.aoeTypes[PrioritySix.abilityName]) or (self.aoeTypes[abilityName]<=self.aoeTypes[PrioritySix.abilityName])) then
+function CrowdControlTracker:AoePriority(abilityId, result)
+    if self.aoeTypesId[abilityId] and self.aoeHitTypes[result] and ((not self.aoeTypesId[PrioritySix.abilityId]) or (self.aoeTypesId[abilityId]<=self.aoeTypesId[PrioritySix.abilityId])) then
         return true
     else
         return false
@@ -374,7 +366,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
         end
     end
 
-    if CombatInfo.SV.cct.showAoe and (self:AoePriority(abilityName, result) or (CrowdControl.SpecialCC[abilityId] and result == ACTION_RESULT_EFFECT_GAINED)) then
+    if CombatInfo.SV.cct.showAoe and (self:AoePriority(abilityId, result) or (CrowdControl.SpecialCC[abilityId] and result == ACTION_RESULT_EFFECT_GAINED)) then
         if not CrowdControlTracker.aoeTypesId[abilityId] then
             return
         end

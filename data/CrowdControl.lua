@@ -180,7 +180,6 @@ CrowdControl.aoePlayerSet = {
 
 CrowdControl.aoeTraps = {
 
-    -- TODO: Will need to add better categories here eventually
     [87949] = 0, -- Lava (Foyada Quarry)
     [44034] = 0, -- Slaughterfish Attack (Stirk)
     [113082] = 0, -- Slaughterfish Attack (Cyrodiil)
