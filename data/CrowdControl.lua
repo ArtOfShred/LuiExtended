@@ -356,6 +356,7 @@ CrowdControl.aoeNPCElite = {
     [54258] = 1, -- Upgraded Volley (Cyrodiil Archer)
     [10271] = 1, -- Quake (Gargoyle)
     [9011] = 1, -- Tremor (Troll)
+    [48297] = 1, -- Consuming Omen (Troll - Ranged)
     [75928] = 1, -- Elemental Pool (Minotaur)
     [75953] = 1, -- Brimstone Hailfire (Minotaur Shaman)
     [75976] = 1, -- Pillar of Nirn (Minotaur Shaman)

@@ -489,32 +489,32 @@ LUIE.Data.AlertTable = {
     [5540] = { avoid = true, interrupt = true, priority = 3, auradetect = true, duration = 8000, cc = SNARE }, -- Hurricane (Nereid)
 
     [24985] = { power = true, auradetect = true, priority = 3 }, -- Intimidating Roar (Ogre)
-    [5881] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Smash (Ogre)
-    [5256] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Shockwave (Ogre)
+    [5881] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300, cc = SNARE }, -- Smash (Ogre)
+    [5256] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1800, cc = STAGGER }, -- Shockwave (Ogre)
 
     [53142] = { destroy = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Ice Pillar (Ogre Shaman)
-    [64540] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Freeze Wounds (Ogre Shaman)
-    [53137] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Freeze Wounds (Ogre Shaman)
+    [64540] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 4000 }, -- Freeze Wounds (Ogre Shaman)
+    [53137] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 4000 }, -- Freeze Wounds (Ogre Shaman)
 
-    [21582] = { block = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Nature's Swarm (Spriggan)
-    [13475] = { interrupt = true, priority = 3, auradetect = true }, -- Healing Salve (Spriggan)
-    [13477] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Control Beast (Spriggan)
+    [21582] = { block = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Nature's Swarm (Spriggan)
+    [13475] = { interrupt = true, priority = 3, auradetect = true, duration = 5000 }, -- Healing Salve (Spriggan)
+    [13477] = { interrupt = true, priority = 3, auradetect = truecut, duration = 5000 }, -- Control Beast (Spriggan)
     [89119] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Beast (Spriggan)
     [89102] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Beast (Spriggan)
 
-    [9346] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Strangle (Strangler)
-    [9322] = { avoid = true, priority = 3, auradetect = true }, -- Poisoned Ground (Strangler)
-    [9321] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 500 }, -- Grapple (Strangler)
+    [9346] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 5000 }, -- Strangle (Strangler)
+    [9322] = { avoid = true, priority = 3, auradetect = true, duration = 2000 }, -- Poisoned Ground (Strangler)
+    [9321] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 500, cc = STUN, duration = 700 }, -- Grapple (Strangler)
 
-    [44736] = { block = true, dodge = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN }, -- Swinging Cleave (Troll)
-    [9009] = { avoid = true, priority = 2, eventdetect = true, refire = 300, result = ACTION_RESULT_BEGIN }, -- Tremor (Troll)
+    [44736] = { block = true, dodge = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN, duration = 2150 }, -- Swinging Cleave (Troll)
+    [9009] = { avoid = true, priority = 2, eventdetect = true, refire = 300, result = ACTION_RESULT_BEGIN, duration = 2500 }, -- Tremor (Troll)
 
-    [76268] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Lope (River Troll)
+    [76268] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = STAGGER }, -- Lope (River Troll)
     [76277] = { interrupt = true, priority = 2, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN, duration = 5233 }, -- Close Wounds (River Troll)
-    [76295] = { block = true, avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Crab Toss (River Troll)
+    [76295] = { block = true, avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Crab Toss (River Troll)
 
-    [48256] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Boulder Toss (Troll - Ranged)
-    [48282] = { interrupt = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Consuming Omen (Troll - Ranged)
+    [48256] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STUN }, -- Boulder Toss (Troll - Ranged)
+    [48282] = { interrupt = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = SNARE }, -- Consuming Omen (Troll - Ranged)
 
     [4309] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dying Blast (Wisp)
 

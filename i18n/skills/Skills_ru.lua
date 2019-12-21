@@ -548,7 +548,7 @@ local strings = {
 
     -- One Hand and Shield
     SI_LUIE_SKILL_DEFENSIVE_POSTURE_TP =                 "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nReflect the next projectile cast at you within |cFFFFFF6|r seconds. This effect can occur once per cast.",
-    SI_LUIE_SKILL_ABSORB_MISSILE_TP =                    "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhile the shield persists, you are healed the next time a projectile hits you. This effect can occur once per cast.",
+    SI_LUIE_SKILL_ABSORB_MISSILE_TP =                    "Absorbing damage for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhile the shield persists, you are healed the next time a harmful Direct Damage projectile hits you. This effect can occur once per cast.",
     SI_LUIE_SKILL_REVEBERATING_BASH_TP =                 "Stunned for |cFFFFFF<<1>>|r seconds. After the stun ends, take Physical Damage.",
     SI_LUIE_SKILL_RESENTMENT_TP =                        "Increase the damage of your next Power Slam used within |cFFFFFF<<1>>|r seconds by |cFFFFFF5|r%.\n\nThis effect stacks up to |cFFFFFF10|r times and you gain a stack when blocking any attack.",
     SI_LUIE_SKILL_SHIELD_WALL_TP =                       "Автоматически блокирует все атаки в течение |cFFFFFF<<1>>|r секунд, не расходуя ресурсов.",
