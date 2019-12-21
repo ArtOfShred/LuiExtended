@@ -292,10 +292,29 @@ LUIE.Data.Tooltips = {
     Food_Crafted_Health_Stamina                     = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68247:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
     Food_Crafted_Magicka_Stamina                    = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68250:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
     Food_Crafted_Triple                             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68254:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
+    Food_Crafted_Orzorgas_Tripe                     = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71057:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
+    Food_Crafted_Orzorgas_Blood_Price               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71058:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
+    Food_Crafted_Orzorgas_Smoked_Bear               = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71059:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
+    Food_Crafted_Deregulated_Mushroom_Stew          = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:133554:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
+    Food_Crafted_Clockwork_Citrus_Filet             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:133556:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
+    Food_Crafted_Artaeum_Takeaway_Broth             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:139018:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
+    Food_Crafted_Artaeum_Pickled_Fish_Bowl          = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:139016:6:1:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_ARTAEUM_BOWL), GetString(SI_LUIE_SKILL_ADD_TOOLTIP_ARTAEUM_BOWL)),
+    Food_Crafted_Candied_Jesters_Coins              = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:120762:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Food_Crafted_Lava_Foot_Soup                     = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:112425:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Food_Crafted_Alcaire_Festival_Sword_Pie         = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:112439:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Food_Crafted_Pumpkin_Snack_Skewer               = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87686:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Food_Crafted_Crunchy_Spider_Skewer              = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87691:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Food_Crafted_Frosted_Brains                     = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87696:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Food_Crafted_Jagga_Drenched_Mud_Ball            = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:112434:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Food_Crafted_Jewels_of_Misrule                  = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:120764:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Food_Crafted_Rajhins_Sugar_Claws                = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:112438:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Food_Crafted_Sweet_Sanguine_Apples              = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87685:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Food_Crafted_Bewitched_Sugar_Skulls             = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:153629:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+
 
     -- Vendor / Cyrodiil Food
     Food_Vendor_Health                              = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57637:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
-    Food_Vendor_Magicka                             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57630:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
+    Food_Vendor_Magicka                             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57631:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
     Food_Vendor_Stamina                             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71252:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
     Food_Cyrodilic_Field_Bar                        = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71076:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
     Food_Cyrodilic_Field_Tack                       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71074:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
@@ -304,6 +323,8 @@ LUIE.Data.Tooltips = {
     -- Crown Food
     Food_Crown_Crate_Meal                           = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:94437:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
     Food_Crown_Meal                                 = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64711:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Food_Crown_Vigorous_Ragout                      = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:124676:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Food_Crown_Combat_Mystics_Stew                  = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:124675:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
 
     -- Crafted Drink
     Drink_Crafted_Health                            = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68257:309:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
@@ -313,20 +334,34 @@ LUIE.Data.Tooltips = {
     Drink_Crafted_Health_Stamina                    = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68269:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
     Drink_Crafted_Magicka_Stamina                   = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68272:310:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
     Drink_Crafted_Triple                            = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:68276:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
+    Drink_Crafted_Orzorgas_Red_Frothgar             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71056:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
+    Drink_Crafted_Spring_Loaded_Infusion            = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:133555:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')),
+    Drink_Crafted_Dubious_Camoran_Throne            = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:120763:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Drink_Crafted_Witchmothers_Potent_Brew          = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87697:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Drink_Crafted_Bowl_of_Peeled_Eyeballs           = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87687:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Drink_Crafted_Witchmothers_Party_Punch          = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87690:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Drink_Crafted_Ghastly_Eye_Bowl                  = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87695:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Drink_Crafted_Bergama_Warning_Fire              = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:112426:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Drink_Crafted_Betnikh_Twice_Spiked_Ale          = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:112433:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_TWICE_SPIKED_ALE), ""),
+    Drink_Crafted_Snow_Bear_Glow_Wine               = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:112440:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Drink_Double_Bloody_Mara                        = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87699:6:1:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA), ""),
+    Drink_Hissmir                                   = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:101879:6:1:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_HISSMIR), GetString(SI_LUIE_SKILL_ADD_TOOLTIP_HISSMIR)),
+    Drink_Crafted_Disastrously_Bloody_Mara          = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:153625:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_DISASTROUSLY_BLOODY), ""),
+    Drink_Crafted_Pack_Leaders_Bone_Broth           = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:153627:311:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_PACK_LEADERS_BROTH), GetString(SI_LUIE_SKILL_ADD_TOOLTIP_PACK_LEADERS_BROTH)),
 
-    -- Vendor / Cyroiil Drink
-    Drink_Vendor_Health                             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57642:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
+    -- Vendor / Cyrodiil Drink
+    Drink_Vendor_Health                             = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71249:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
     Drink_Vendor_Magicka                            = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71250:308:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
-    Drink_Vendor_Stamina                            = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:57654:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
+    Drink_Vendor_Stamina                            = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71251:134:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
     Drink_Cyrodilic_Field_Tonic                     = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71079:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
     Drink_Cyrodilic_Field_Brew                      = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71077:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
     Drink_Cyrodilic_Field_Tea                       = select(3, GetItemLinkOnUseAbilityInfo('|H1:item:71078:307:50:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h')),
-    Drink_Double_Bloody_Mara                        = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:87699:6:1:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA), ""),
-    Drink_Hissmir                                   = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:101879:6:1:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_HISSMIR), GetString(SI_LUIE_SKILL_ADD_TOOLTIP_HISSMIR)),
 
     -- Crown Drink
     Drink_Crown_Crate_Drink                         = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:94438:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
     Drink_Crown_Drink                               = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:64712:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Drink_Crown_Stout_Magic_Liqueur                 = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:124677:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
+    Drink_Crown_Vigorous_Tincture                   = string.gsub(select(3, GetItemLinkOnUseAbilityInfo('|H1:item:124678:123:1:0:0:0:0:0:0:0:0:0:0:0:1:0:0:1:0:0:0|h|h')), GetString(SI_LUIE_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL), ""),
 
     -- Experience
     Experience_Psijic_Ambrosia                      = zo_strformat(GetString(SI_LUIE_SKILL_EXPERIENCE_HALF_HOUR_TP),"50"),

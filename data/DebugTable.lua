@@ -505,6 +505,11 @@ LUIE.DebugAuras = {
     [89956] = true, -- Princess' Delight (Green)
     [89921] = true, -- Jesters Food: Butterflies
     [89919] = true, -- Jesters Food: Max M
+    [127596] = true, -- Bewitched Sugar Skulls
+    [127595] = true, -- Witchfest Food: Max All, H Reg
+    [127709] = true, -- Magicka Consumable
+    [127602] = true, -- Increase Health
+    [127708] = true, -- Magicka Consumable
 
     -- Crafted Seasonal Drink
     [84700] = true, -- Bowl of "Peeled Eyeballs" (Blue)
@@ -539,6 +544,14 @@ LUIE.DebugAuras = {
     [89939] = true, -- Jesters Food: Max HS, Reg S
     [89958] = true, -- Increase Stamina
     [89959] = true, -- Increase Health
+    [127531] = true, -- Disastrously Bloody Mara
+    [127530] = true, -- Witchfest Drink: Max MH, Flago
+    [127537] = true, -- Increase Health
+    [127619] = true, -- Increase Health
+    [127572] = true, -- Pack Leader's Bone Broth
+    [127571] = true, -- Witchfest Drink: Max SH, Wolf Time
+    [127736] = true, -- Increase Health
+    [127578] = true, -- Increase Health
 
     -- Vendor Food & Drink
     [66551] = true, -- Vendor Health Food (White)
@@ -1839,6 +1852,7 @@ LUIE.DebugAuras = {
 
     [32754] = true, -- Durok's Bane (of Durok's Bane)
     [34527] = true, -- Durok's Bane Major Defile (of Durok's Bane)
+    [113456] = true, -- Durok's Bane (of Durok's Bane)
 
     [82890] = true, -- Ebon Armory (Ebon)
     [47362] = true, -- Ebon Armory (Ebon)
