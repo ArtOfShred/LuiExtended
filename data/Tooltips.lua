@@ -99,6 +99,7 @@ LUIE.Data.Tooltips = {
 
     Generic_Damage_Shield_No_Duration               = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_NO_DUR_TP),
     Generic_Damage_Shield_Duration                  = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_TP),
+    Generic_Damage_Shield_Percent_Duration          = GetString(SI_LUIE_SKILL_GENERIC_DAMAGE_SHIELD_PERCENT_TP),
     Generic_Weapon_Damage_Duration                  = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_TIME_TP),
     Generic_Weapon_Damage_Duration_Value            = GetString(SI_LUIE_SKILL_SET_GENERIC_WEP_DAMAGE_VALUE_TIME_TP),
     Generic_Spell_Damage_Duration                   = GetString(SI_LUIE_SKILL_SET_GENERIC_SPELL_DAMAGE_TIME_TP),

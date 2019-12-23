@@ -1024,6 +1024,7 @@ local AbilityTables = {
     Skill_Crushing_Limbs              = 3855,
     Skill_Pillars_of_Nirn             = 75955,
     Skill_Claw                        = 27922,
+    Skill_Obliterate                  = 127908,
 
     -- Dwemer
     Skill_Static_Shield               = 64463,

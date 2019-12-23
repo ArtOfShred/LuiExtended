@@ -383,7 +383,7 @@ LUIE.Data.AlertTable = {
     [8205] = { interrupt = true, priority = 3, auradetect = true, duration = 6000 }, -- Regeneration (Ogrim)
     [24690] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Focused Charge (Ogrim)
     [91848] = { dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1970, cc = SNARE }, -- Stomp (Ogrim)
-    [91855] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STUN }, -- Boulder Toss (Ogrim)
+    [91855] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STAGGER }, -- Boulder Toss (Ogrim)
 
     [6166] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Heat Wave (Scamp)
     [6160] = { avoid = true, interrupt = true, priority = 3, auradetect = true, duration = 5000 }, -- Rain of Fire (Scamp)
@@ -394,7 +394,7 @@ LUIE.Data.AlertTable = {
     [8773] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Spiderling (Spider Daedra)
 
     [35220] = { avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Impending Storm (Storm Atronach)
-    --[4864] = { dodge = true, priority = 2, result = ACTION_RESULT_EFFECT_GAINED, refire = 100, cc = SNARE }, -- Storm Bound (Storm Atronach)
+    [4864] = { dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = SNARE, duration = 633 }, -- Storm Bound (Storm Atronach)
 
     [7095] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1400 }, -- Heavy Attack (Xivilai)
     [88947] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Lightning Grasp (Xivilai)
@@ -454,6 +454,7 @@ LUIE.Data.AlertTable = {
 
     [26124] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Shatter (Giant)
     [15715] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 3000, cc = STUN }, -- Obliterate (Giant)
+    [127910] = { block = true, avoid = true, priority = 2, auradetect = true, duration = 3200, cc = STUN }, -- Giant's Maul (Giant)
 
     [2786] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 1250, duration = 6100 }, -- Steal Essence (Hag)
     [2821] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 700, cc = STUN }, -- Luring Snare (Hag)
@@ -516,54 +517,54 @@ LUIE.Data.AlertTable = {
     [48256] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STUN }, -- Boulder Toss (Troll - Ranged)
     [48282] = { interrupt = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = SNARE }, -- Consuming Omen (Troll - Ranged)
 
-    [4309] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dying Blast (Wisp)
+    [4309] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Dying Blast (Wisp)
 
-    [7976] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Rain of Wisps (Wispmother)
+    [7976] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 13500 }, -- Rain of Wisps (Wispmother)
     [18040] = { power = true, priority = 2, auradetect = true }, -- Clone (Wispmother)
 
-    [75867] = { block = true, bs = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Clobber (Minotaur)
-    [75917] = { block = true, dodge = true, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Ram (Minotaur)
+    [75867] = { block = true, bs = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1333, cc = STUN }, -- Clobber (Minotaur)
+    [75917] = { block = true, dodge = true, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Ram (Minotaur)
     [79541] = { block = true, dodge = true, priority = 2, auradetect = true, result = ACTION_RESULT_BEGIN }, -- Flying Leap (Minotaur)
     [75925] = { power = true, auradetect = 2, priority = 2, ignoreRefresh = true }, -- Elemental Weapon (Minotaur)
 
-    [75951] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Brimstone Hailfire (Minotaur Shaman)
-    [75955] = { avoid = true, priority = 2, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Pillars of Nirn (Minotaur Shaman)
+    [75951] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 3100, cc = SNARE }, -- Brimstone Hailfire (Minotaur Shaman)
+    [75955] = { avoid = true, priority = 2, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN, duration = 3800 }, -- Pillars of Nirn (Minotaur Shaman)
     [75994] = { power = true, priority = 2, auradetect = true, ignoreRefresh = true }, -- Molten Armor (Minotaur Shaman)
 
-    [49499] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Spear Throw (Mantikora)
-    [49404] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Rear Up (Mantikora)
-    [49402] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Tail Whip (Mantikora)
+    [49499] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STUN }, -- Spear Throw (Mantikora)
+    [49404] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STAGGER }, -- Rear Up (Mantikora)
+    [49402] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1750 }, -- Tail Whip (Mantikora)
     [50187] = { power = true, priority = 2, auradetect = true }, -- Enrage (Mantikora)
     [56689] = { power = true, priority = 2, auradetect = true }, -- Enraged (Mantikora)
 
-    [104479] = { block = true, bs = true, dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Reave (Yaghra Strider)
-    [105214] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Lunge (Yaghra Strider)
-    [105330] = { interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Frenzy (Yaghra Strider)
+    [104479] = { block = true, bs = true, dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 933, cc = STUN }, -- Reave (Yaghra Strider)
+    [105214] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = STAGGER }, -- Lunge (Yaghra Strider)
+    [105330] = { interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1167 }, -- Frenzy (Yaghra Strider)
 
-    [103804] = { interrupt = true, avoid = true, eventdetect = true, priority = 2, result = ACTION_RESULT_BEGIN, refire = 800 }, -- Deluge (Yaghra Strider)
-    [103931] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN }, -- Luminescent Mark (Yaghra Spewer)
+    [103804] = { interrupt = true, avoid = true, eventdetect = true, priority = 2, result = ACTION_RESULT_BEGIN, refire = 800, cc = SNARE, duration = 1900 }, -- Deluge (Yaghra Strider)
+    [103931] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1333, cc = STUN }, -- Luminescent Mark (Yaghra Spewer)
 
     -- DWEMER
-    [16031] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Ricochet Wave (Dwemer Sphere)
-    [7520] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Steam Wall (Dwemer Sphere)
-    [7544] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Quake (Dwemer Sphere)
+    [16031] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Ricochet Wave (Dwemer Sphere)
+    [7520] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1267 }, -- Steam Wall (Dwemer Sphere)
+    [7544] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Quake (Dwemer Sphere)
 
-    [11247] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Sweeping Spin (Dwemer Centurion)
-    [11246] = { avoid = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN }, -- Steam Breath (Dwemer Centurion)
+    [11247] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STUN }, -- Sweeping Spin (Dwemer Centurion)
+    [11246] = { avoid = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN, duration = 3500 }, -- Steam Breath (Dwemer Centurion)
 
-    [20507] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Double Strike (Dwemer Spider)
-    [7717] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Detonation (Dwemer Spider)
+    [20507] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 800 }, -- Double Strike (Dwemer Spider)
+    [7717] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 1600, neverShowInterrupt = true }, -- Detonation (Dwemer Spider)
     [19970] = { power = true, priority = 3, auradetect = true }, -- Static Field (Dwemer Spider - Overcharge Synergy)
     --[20207] = { interrupt = true, priority = 3, eventdetect = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
-    [20505] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
-    [20222] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    [20505] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 2000, neverShowInterrupt = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    [20222] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 2000, neverShowInterrupt = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
 
-    [64479] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunderbolt (Dwemer Sentry)
+    [64479] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1367 }, -- Thunderbolt (Dwemer Sentry)
 
     [88668] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Impulse Mine (Dwemer Arquebus)
-    [85270] = { interrupt = true, priority = 3, refire = 1500, result = ACTION_RESULT_BEGIN }, -- Shock Barrage (Dwemer Arquebus)
-    [85319] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Siege Ballista (Dwemer Arquebus)
-    [85326] = { interrupt = true, priority = 3, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN }, -- Polarizing Field (Dwemer Arquebus)
+    [85270] = { interrupt = true, priority = 3, refire = 1500, result = ACTION_RESULT_BEGIN, duration = 15800 }, -- Shock Barrage (Dwemer Arquebus)
+    [85319] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Siege Ballista (Dwemer Arquebus)
+    [85326] = { interrupt = true, priority = 3, eventdetect = true, refire = 1000, result = ACTION_RESULT_BEGIN, duration = 10000 }, -- Polarizing Field (Dwemer Arquebus)
 
     --------------------------------------------------
     -- FRIENDLY NPC ----------------------------------
@@ -670,7 +671,7 @@ LUIE.Data.AlertTable = {
     -- Tutorial
     -- [83416] = { block = true, priority = 1}, -- Heavy Attack (Tutorial) -- Default game tutorials display regardless
     -- [92233] = { interrupt = true, priority = 1}, -- Throw Dagger (Tutorial) -- Default game tutorials display regardless
-    [92668] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Whirlwind (Slaver Cutthroat)
+    [92668] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2533 }, -- Whirlwind (Slaver Cutthroat)
 
     -- Main Quest
     [87958] = { avoid = true, interrupt = true, priority = 2 }, -- Ash Storm (Divine Delusions)
@@ -694,13 +695,14 @@ LUIE.Data.AlertTable = {
 
     [89210] = { block = true, avoid = true, priority = 3}, -- Boulder Toss (Nchuleftingth - Mud-Tusk)
 
-    [86570] = { block = true, dodge = true, priority = 3}, -- Shield Charge (Nchuleftingth - Renduril the Hammer)
-    [90597] = { block = true, avoid = true, priority = 2}, -- Overcharge Expulsion
+    [86570] = { block = true, dodge = true, priority = 3 }, -- Shield Charge (Nchuleftingth - Renduril the Hammer)
+    [90597] = { block = true, avoid = true, priority = 2 }, -- Overcharge Expulsion
 
     --------------------------------------------------
     -- SUMMERSET -------------------------------------
     --------------------------------------------------
 
+    -- TODO: Setup these alerts
     [105601] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Explosive Toxins (Yaghra Larva)
 
     [107282] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Impale (Yaghra Nightmare)
@@ -830,8 +832,8 @@ LUIE.Data.AlertTable = {
     [69268] = { power = true, priority = 1, auradetect = true }, -- Enrage (Achelir)
 
     [72157] = { power = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.NPC_Dwarven_Spider }, -- Static Field (Dwarven Spider)
-    [72166] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Overcharge (Dwarven Spider)
-    [72174] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250 }, -- Overcharge (Dwarven Spider)
+    [72166] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, neverShowInterrupt = true }, -- Overcharge (Dwarven Spider)
+    [72174] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, neverShowInterrupt = true }, -- Overcharge (Dwarven Spider)
 
     [68524] = { power = true, priority = 1, auradetect = true }, -- Overcharged (The Control Guardian)
     [68539] = { power = true, priority = 1, auradetect = true }, -- Overheated (The Control Guardian)

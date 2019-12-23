@@ -12,8 +12,6 @@ LUIE.Data.UnitNames = {
 
     NPC_Target_Iron_Atronach              = 'Target Iron Atronach, Trial',
 
-    NPC_Flame_Atronach                    = 'Flame Atronach',
-    NPC_Frost_Atronach                    = 'Frost Atronach',
     NPC_Ice_Barrier                       = 'Ice Barrier',
 
     ----------------------------------------------------------------

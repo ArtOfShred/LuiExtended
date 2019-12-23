@@ -381,6 +381,7 @@ Effects.DebuffDisplayOverrideId = {
     -- Basic (Shared)
     [102771] = true, -- Off Balance Immunity
     [16593] = true, -- Melee Snare
+    [2727] = true, -- Off-Balance
 
     ----------------------------------------------------------------
     -- HOUSING TARGET DUMMY ----------------------------------------
@@ -1731,8 +1732,6 @@ Effects.AddNameAura = {
     ['Anaxes'] = { [1] = { id = 33097 } },
 
     -- NPC's
-    [Unitnames.NPC_Flame_Atronach] = { [1] = { id = 4891 } },
-    [Unitnames.NPC_Frost_Atronach] = { [1] = { id = 33549 } },
     [Unitnames.NPC_Ice_Barrier] = { [1] = { id = 33097 } },
     --['Aura of Protection'] = { [1] = { id = 33097 } }, -- TODO: Not actually CC immune despite CC not doing anything (maybe switch to knockback immunity eventually)
     --['Ice Pillar'] = { [1] = { id = 33097 } }, -- TODO: Not actually CC immune despite CC not doing anything (maybe switch to knockback immunity eventually)
@@ -6848,6 +6847,7 @@ Effects.EffectOverride = {
     [29761] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = Abilities.Innate_Block, duration = 0, tooltip = Tooltips.Skill_Block_NPC }, -- Brace (Guard)
     [29762] = { hide = true }, -- Blocked Stack (Guard)
     [29757] = { hide = true }, -- Remove block (Guard)
+    [84351] = { hide = true }, -- Remove block (Guard)
     [29766] = { hide = true }, -- Blocked Stack (Guard)
     [29765] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, hide = true, tooltip = Tooltips.Generic_Stagger }, -- Uber Attack (Guard)
     [29767] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Guard)
@@ -7547,6 +7547,7 @@ Effects.EffectOverride = {
     [26325] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_lava_geyser.dds' }, -- Lava Geyser (Flame Atronach)
     [4891] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_radiance.dds', tooltip = Tooltips.Skill_Radiance }, -- Radiance (Flame Atronach)
     [4491] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_radiance.dds' }, -- Radiance (Flame Atronach)
+    [26319] = { hide = true }, -- Combustion (Flame Atronach)
     [50216] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_aoe.dds' }, -- Combustion (Flame Atronach)
     [50215] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_aoe.dds' }, -- Combustion (Flame Atronach)
     [67870] = { icon = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_tremor.dds', name = Abilities.Skill_Tremor }, -- Tremor AOE (Flesh Colossus)
@@ -7589,14 +7590,14 @@ Effects.EffectOverride = {
     [17069] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_ice_spear.dds' }, -- Ice Spear (Frost Atronach)
     [5009] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_ice_shards.dds' }, -- Ice Shards (Frost Atronach)
     [33549] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', tooltip = Tooltips.Skill_Chilling_Aura }, -- Chilling Aura (Frost Atronach)
-    [33551] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', internalStack = 0, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 20, groundLabel = true }, -- Chilling Aura (Frost Atronach)
+    [33551] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', duration = 0, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 20, groundLabel = true }, -- Chilling Aura (Frost Atronach)
     [5017] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds' }, -- Hoarfrost Fist (Frost Atronach)
     [44906] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds' }, -- Hoarfrost Fist (Frost Atronach)
     [44907] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds', hide = true }, -- Hoarfrost Fist (Frost Atronach)
     [44908] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds', tooltip = Tooltips.Generic_Knockback }, -- Hoarfrost Fist (Frost Atronach)
     [33502] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds' }, -- Frozen Ground (Frost Atronach)
-    [51645] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 0.5, tooltipValue3 = 70 }, -- Frozen Ground (Frost Atronach)
-    [51646] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', internalStack = 0, hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 0.5, tooltipValue3 = 70, hideGround = true }, -- Frozen Ground (Frost Atronach)
+    [51645] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 70 }, -- Frozen Ground (Frost Atronach)
+    [51646] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', internalStack = 0, hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Frost, tooltipValue2 = 1, tooltipValue3 = 70, hideGround = true }, -- Frozen Ground (Frost Atronach)
     [65926] = { icon = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_slash.dds' }, -- Slash (Grevious Twilight)
     [65845] = { icon = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_rend.dds' }, -- Rend (Grevious Twilight)
     [66643] = { icon = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_rend.dds' }, -- Rend (Grevious Twilight)
@@ -7624,8 +7625,8 @@ Effects.EffectOverride = {
     [91850] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds' }, -- Stomp (Ogrim)
     [91851] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_shattered_ground.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 35 }, -- Stomp (Ogrim)
     [91855] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds' }, -- Boulder Toss (Ogrim)
-    [91874] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds' }, -- Boulder Toss (Ogrim)
-    [91871] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds', tooltip = Tooltips.Generic_Knockdown }, -- Boulder Toss (Ogrim)
+    [127629] = { hide = true }, -- Boulder Toss (Ogrim)
+    [127630] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds' }, -- Boulder Toss (Ogrim)
     [6158] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds' }, -- Flare (Scamp)
     [6166] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds' }, -- Heat Wave (Scamp)
     [6167] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds' }, -- Heat Wave (Scamp)
@@ -7642,6 +7643,8 @@ Effects.EffectOverride = {
     [89307] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 60 }, -- Web (Spider Daedra - Spiderling)
     [8782] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_lightning_storm.dds' }, -- Lightning Storm (Spider Daedra)
     [20530] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_lightning_storm.dds' }, -- Lightning Storm (Spider Daedra)
+
+    -- Storm Atronach
     [4858] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_bash.dds' }, -- Bash (Storm Atronach)
     [13898] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_strike.dds' }, -- Strike (Storm Atronach)
     [35220] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_impending_storm.dds' }, -- Impending Storm (Storm Atronach)
@@ -7651,6 +7654,7 @@ Effects.EffectOverride = {
     [12287] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', tooltip = Tooltips.Skill_Storm_Bound }, -- Storm Bound (Storm Atronach)
     [12288] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', hideReduce = true, tooltip = Tooltips.Skill_Storm_Bound }, -- Storm Bound (Storm Atronach)
     [12286] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds' }, -- Storm Bound (Storm Atronach)
+
     [7095] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds' }, -- Heavy Attack (Xivilai)
     [83072] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_freezing_edge.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 40 }, -- Freezing Edge (Xivilai)
     [49203] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_root_frost.dds', tooltip = Tooltips.Generic_Immobilize }, -- Frozen Weapon (Xivilai)
@@ -7967,6 +7971,11 @@ Effects.EffectOverride = {
     [15715] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_obliterate.dds' }, -- Obliterate (Giant)
     [43743] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_obliterate.dds' }, -- Obliterate (Giant)
     [43742] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_obliterate.dds', tooltip = Tooltips.Generic_Knockback }, -- Obliterate (Giant)
+    [127904] = { hide = true }, -- Crushing Quake (Giant)
+    [127910] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_obliterate.dds', name = Abilities.Skill_Obliterate }, -- Giant's Maul (Giant)
+    [127908] = { icon = 'LuiExtended/media/icons/abilities/ability_giant_obliterate.dds' }, -- Obliterate (Giant)
+
+    -- Hag
     [2901] = { icon = 'LuiExtended/media/icons/abilities/ability_hag_staff_strike.dds' }, -- Staff Strike (Hag)
     [2786] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_steal_essence.dds', tooltip = Tooltips.Skill_Steal_Essence }, -- Steal Essence (Hag)
     [21642] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_steal_essence.dds' }, -- Steal Essence (Hag)
@@ -8167,7 +8176,7 @@ Effects.EffectOverride = {
     [19056] = { hide = true },-- Rain of Wisps (Wispmother)
     [61204] = { hide = true },-- Rain of Wisps Tracker (Wispmother)
     [19061] = { icon = 'LuiExtended/media/icons/abilities/ability_wispmother_rain_of_wisps.dds' }, -- Rain of Wisps (Wispmother)
-    [18040] = { hide = true }, -- Clone (Wispmother)
+    [18040] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_wispmother_clone.dds' }, -- Clone (Wispmother)
     [18049] = { hide = true }, -- Clone (Wispmother)
     [18060] = { hide = true }, -- Clone (Wispmother)
 
@@ -8188,6 +8197,7 @@ Effects.EffectOverride = {
     [75928] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_aoe_alt.dds', hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 0.7 }, -- Elemental Pool (Minotaur)
     [75933] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_heat_wave.dds', hide = true }, -- Elemental Wave (Minotaur)
 
+    -- Minotaur Shaman
     [75949] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fiery_surge.dds', hide = true }, -- Fiery Surge (Minotaur Shaman)
     [77989] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_fiery_surge.dds', hide = true }, -- Flame Wave (Minotaur Shaman)
     [75951] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_snare_fire.dds' }, -- Brimstone Hailfire (Minotaur Shaman)
@@ -8197,7 +8207,7 @@ Effects.EffectOverride = {
     [75980] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_pillar_of_nirn.dds', name = Abilities.Skill_Pillars_of_Nirn }, -- Pillars Eruption (Minotaur Shaman)
     [75976] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_pillar_of_nirn.dds', name = Abilities.Skill_Pillars_of_Nirn, hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 0.7 }, -- Pillar of Nirn (Minotaur Shaman)
     [75978] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_pillar_of_nirn.dds', name = Abilities.Skill_Pillars_of_Nirn }, -- Pillar Explosion (Minotaur Shaman)
-    [75994] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_molten_armor.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Molten Armor (Minotaur Shaman)
+    [75994] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_molten_armor.dds', tooltip = Tooltips.Generic_Damage_Shield_Percent_Duration, tooltipValue2 = 75 }, -- Molten Armor (Minotaur Shaman)
 
     [49395] = { icon = 'LuiExtended/media/icons/abilities/ability_mantikora_punch.dds', name = Abilities.Skill_Claw }, -- Punch (Mantikora)
     [49397] = { icon = 'LuiExtended/media/icons/abilities/ability_mantikora_spear_sweep.dds' }, -- Spear Sweep (Mantikora)
@@ -10691,7 +10701,7 @@ Effects.EffectOverride = {
 
     [54366] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flame_tornado.dds', hide = true }, -- Flame Tornado (Air Atronach)
     [56312] = { hide = true }, -- Flame Tornado (Air Atronach)
-    [60683] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flame_tornado.dds', tooltip = Tooltips.Skill_Flame_Tornado_Shield }, -- Flame Tornado (Air Atronach)
+    [60683] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flame_tornado.dds', tooltip = Tooltips.Generic_Damage_Shield_Percent_Duration, tooltipValue2 = 35 }, -- Flame Tornado (Air Atronach)
     [54367] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flame_tornado.dds' }, -- Flame Tornado (Air Atronach)
     [54370] = { hide = true }, -- Flame Tornado Snare (Air Atronach)
     [54790] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_swipe.dds' }, -- Swipe (Air Atronach)
@@ -11311,12 +11321,9 @@ Effects.FakeExternalDebuffs = {
 
     -- Daedra
     [50023] = { duration = 4000, ignoreBegin = true }, -- Lightning Rod (Air Atronach)
-    [33551] = { duration = 0 }, -- Chilling Aura (Frost Atronach)
     [51646] = { duration = 0 }, -- Frozen Ground (Frost Atronach)
     [24700] = { duration = 2000 }, -- Body Slam (Ogrim)
     [91851] = { duration = 2000 }, -- Stomp (Ogrim)
-    [12287] = { duration = 8000 }, -- Storm Bound (Storm Atronach) (DOT)
-    [12288] = { duration = 8000 }, -- Storm Bound (Storm Atronach) (Snare)
     [6412] = { duration = 2000, ignoreBegin = true }, -- Dusk's Howl (Winged Twilight)
 
     -- Insects
@@ -11988,7 +11995,7 @@ Effects.AddGroundDamageAura = {
     -- Daedra
     [9749] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Envelop (Banekin)
     [91938] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Burst of Embers (Daedroth)
-    [51645] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Frozen Ground (Frost Atronach)
+    [51645] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Frozen Ground (Frost Atronach)
     [6162] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Rain of Fire (Scamp)
     [88323] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Blast Furnace (Iron Atronach)
     [73437] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Soul Flame (Daedric Titan)
