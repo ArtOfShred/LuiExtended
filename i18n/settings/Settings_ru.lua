@@ -1022,13 +1022,12 @@ local strings = {
     SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2 =                  "Цвет градиента (Конец)",
     SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2_TP =               "Выберите конечный цвет градиента на кастбаре.",
 
-    -- TODO: Wip adding strings here for CI CCT
-
+    -- CI CCT
+    SI_LUIE_LAM_CI_CCT_DESCRIPTION =                     "Display an animated icon when you are under the effects of crowd control. The options below allow you to customize the color, sound, and naming method for the alerts displayed. Additionally you can display alerts when standing in the radius of damaging area of effect abilities, with the option to enable/disable various categories with different sounds.",
     SI_LUIE_LAM_CI_CCT_TOGGLE =                          "Enable Crowd Control Tracker",
     SI_LUIE_LAM_CI_CCT_TOGGLE_TP =                       "Enable to display an alert when under the effects of crowd control and display alerts when standing in enemy AOE effects if chosen.",
     SI_LUIE_LAM_CI_CCT_PVP_ONLY =                        "Enable only in PVP",
     SI_LUIE_LAM_CI_CCT_PVP_ONLY_TP =                     "When toggled, crowd control effects will only be tracked in PVP enabled areas.",
-
     SI_LUIE_LAM_CI_CCT_DISPLAY_HEADER =                  "Display Options",
     SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE =                   "Choose Display Method",
     SI_LUIE_LAM_CI_CCT_DISPLAY_STYLE_TP =                "Choose whether to display only an icon, only text, or both.",
@@ -1036,30 +1035,30 @@ local strings = {
     SI_LUIE_LAM_CI_CCT_DISPLAY_NAME_TP =                 "When enabled, the name of the crowd control ability will display, otherwise the type of crowd control will replace the name.",
     SI_LUIE_LAM_CI_CCT_SCALE =                           "Set Icon and Text Scale (%)",
     SI_LUIE_LAM_CI_CCT_SCALE_TP =                        "Set the scale for the icon and text displayed.\n\nDefault: 100%",
-
+    SI_LUIE_LAM_CI_CCT_MISC_OPTIONS_HEADER =             "Misc Options",
     SI_LUIE_LAM_CI_CCT_SOUND =                           "Play Sound on Crowd Control",
     SI_LUIE_LAM_CI_CCT_SOUND_TP =                        "Play sound when effected by Crowd Control.",
     SI_LUIE_LAM_CI_CCT_STAGGER =                         "Show Stagger Crowd Control (Text Only)",
     SI_LUIE_LAM_CI_CCT_STAGGER_TP =                      "Display text alert when staggered.",
-
+    SI_LUIE_LAM_CI_CCT_GCD_TOGGLE =                      "Show Global Cooldown",
+    SI_LUIE_LAM_CI_CCT_GCD_TOGGLE_TP =                   "Show a cooldown animation if crowd controlled while on the global cooldown.",
     SI_LUIE_LAM_CI_CCT_IMMUNE_TOGGLE =                   "Show Immune State",
     SI_LUIE_LAM_CI_CCT_IMMUNE_TOGGLE_TP =                "Show an icon when immune to an ability.",
     SI_LUIE_LAM_CI_CCT_IMMUNE_CYRODIIL =                 "Show Immune State only in PVP",
-    SI_LUIE_LAM_CI_CCT_IMMUNE_CYRODIIL_TP =              "Only show immune state when in a PVP area.",
+    SI_LUIE_LAM_CI_CCT_IMMUNE_CYRODIIL_TP =              "Only show immune state in PVP enabled areas.",
     SI_LUIE_LAM_CI_CCT_IMMUNE_TIME =                     "Immune Display Time (ms)",
     SI_LUIE_LAM_CI_CCT_IMMUNE_TIME_TP =                  "Set the display time for Immune state notifications.\n\nDefault: 750",
-
     SI_LUIE_LAM_CI_CCT_IMMUNE =                          "Immune",
     SI_LUIE_LAM_CI_CCT_COLOR_TP =                        "Set a color for <<1>> state.",
-
-    SI_LUIE_LAM_CI_CCT_AOE_TOGGLE =                      "Show Area of Effect Damage",
+    SI_LUIE_LAM_CI_CCT_AOE_HEADER =                      "Area of Effect Damage Alerts",
+    SI_LUIE_LAM_CI_CCT_AOE_TOGGLE =                      "Show Area of Effect Damage Warning",
     SI_LUIE_LAM_CI_CCT_AOE_TOGGLE_TP =                   "Display a notification when standing in the radius of an area of effect attack.",
-
+    SI_LUIE_LAM_CT_CCT_AOE_COLOR =                       "AOE Color",
+    SI_LUIE_LAM_CT_CCT_AOE_COLOR_TP =                    "Set a color for area of effect damage.",
     SI_LUIE_LAM_CI_CCT_AOE_SHOW =                        "Show AOE - <<1>>",
     SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP =                     "Display an notification when hit by (<<1>>) abilities.",
     SI_LUIE_LAM_CI_CCT_AOE_SOUND =                       "Sound - <<1>>",
     SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP =                    "Choose whether to play a sound when hit by (<<1>>) abilities.",
-
     SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT =             "Player - Ultimate",
     SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM =            "Player - Normal",
     SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET =             "Player - Set",
@@ -1068,7 +1067,6 @@ local strings = {
     SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE =              "NPC - Elite",
     SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL =             "NPC - Normal",
 
-    -- TODO: End new string BLOCK
     -- Module: Info Panel
     SI_LUIE_LAM_PNL =                                    "Инфо-панель",
     SI_LUIE_LAM_PNL_ENABLE =                             "Инфо-панель",

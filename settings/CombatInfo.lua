@@ -269,7 +269,7 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_BAR_PROCSOUND_TP),
                 getFunc = function() return Settings.ProcEnableSound end,
                 setFunc = function(value) Settings.ProcEnableSound = value end,
-                width = "full",
+                width = "half",
                 default = Defaults.ProcEnableSound,
                 disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
             },
@@ -277,15 +277,14 @@ function CombatInfo.CreateSettings()
                 -- Bar Proc Sound Choice
                 type = "dropdown",
                 scrollable = true,
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE)),
-                tooltip = GetString(SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE_TP),
+                name = "",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.ProcSoundName end,
                 setFunc = function(value) Settings.ProcSoundName = value CombatInfo.ApplyProcSound(true) end,
-                width = "full",
+                width = "half",
                 default = Defaults.ProcSoundName,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.ShowTriggered and Settings.ProcEnableSound and LUIE.SV.CombatInfo_Enabled) end,
             },
             {
                 -- Highlight Ability Bar Icon for Active Effects
@@ -698,7 +697,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(var) Settings.alerts.toggles.alertFontFace = var AbilityAlerts.ApplyFontAlert() AbilityAlerts.ResetAlertSize() end,
                 width = "full",
                 default = Defaults.alerts.toggles.alertFontFace,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                     -- Alert Font Size
@@ -710,7 +709,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.toggles.alertFontSize = value AbilityAlerts.ApplyFontAlert() AbilityAlerts.ResetAlertSize() end,
                 width = "full",
                 default = Defaults.alerts.toggles.alertFontSize,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Alert Font Style
@@ -723,7 +722,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(var) Settings.alerts.toggles.alertFontStyle = var AbilityAlerts.ApplyFontAlert() AbilityAlerts.ResetAlertSize() end,
                 width = "full",
                 default = Defaults.alerts.toggles.alertFontStyle,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Alert Timer
@@ -839,8 +838,8 @@ function CombatInfo.CreateSettings()
                 getFunc = function() return globalAlertOptions[Settings.alerts.toggles.alertOptions] end,
                 setFunc = function(value) Settings.alerts.toggles.alertOptions = globalAlertOptionsKeys[value] end,
                 width = "full",
+                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
                 default = Defaults.alerts.toggles.alertOptions,
-                disabled = function() return not Settings.alerts.toggles.showAlertMitigate end,
             },
             {
                 -- Show Mitigation Suffix
@@ -849,7 +848,7 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_SUFFIX_TP),
                 getFunc = function() return Settings.alerts.toggles.showMitigation end,
                 setFunc = function(v) Settings.alerts.toggles.showMitigation = v end,
-                disabled = function() return not Settings.alerts.toggles.showAlertMitigate end,
+                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
                 default = Defaults.alerts.toggles.showMitigation,
             },
             {
@@ -859,7 +858,7 @@ function CombatInfo.CreateSettings()
                 tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
                 getFunc = function() return Settings.alerts.toggles.mitigationPrefix end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationPrefix = v end,
-                disabled = function() return not Settings.alerts.toggles.showAlertMitigate end,
+                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
                 default = Defaults.alerts.toggles.mitigationPrefix,
             },
             {
@@ -869,7 +868,7 @@ function CombatInfo.CreateSettings()
                 tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
                 getFunc = function() return Settings.alerts.toggles.mitigationPrefixN end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationPrefixN = v end,
-                disabled = function() return not Settings.alerts.toggles.showAlertMitigate end,
+                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
                 default = Defaults.alerts.toggles.mitigationPrefixN,
             },
             {
@@ -879,7 +878,7 @@ function CombatInfo.CreateSettings()
                 tooltip = "Color the frame of the incoming ability icon based off the type of Crowd Control incoming (if any).\n\nNote this feature is currently WIP and many abilities are not flagged correctly by their CC type.", -- SI_LUIE_LAM_CI_ALERT_MITIGATION_BORDER_TP
                 getFunc = function() return Settings.alerts.toggles.showCrowdControlBorder end,
                 setFunc = function(v) Settings.alerts.toggles.showCrowdControlBorder = v end,
-                disabled = function() return not Settings.alerts.toggles.showAlertMitigate end,
+                disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
                 default = Defaults.alerts.toggles.showCrowdControlBorder,
             },
 
@@ -898,6 +897,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(v) Settings.alerts.formats.alertBlock = v end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertBlock,
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Block Stagger Format
@@ -909,6 +909,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(v) Settings.alerts.formats.alertBlockStagger = v end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertBlockStagger,
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Block Color
@@ -917,7 +918,8 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.alertBlockA) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.alertBlockA = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertBlockA[1], g=Defaults.alerts.colors.alertBlockA[2], b=Defaults.alerts.colors.alertBlockA[3]}
+                default = {r=Defaults.alerts.colors.alertBlockA[1], g=Defaults.alerts.colors.alertBlockA[2], b=Defaults.alerts.colors.alertBlockA[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 type = "header",
@@ -933,6 +935,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(v) Settings.alerts.formats.alertDodge = v end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertDodge,
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Dodge Color
@@ -941,7 +944,8 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.alertDodgeA) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.alertDodgeA = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertDodgeA[1], g=Defaults.alerts.colors.alertDodgeA[2], b=Defaults.alerts.colors.alertDodgeA[3]}
+                default = {r=Defaults.alerts.colors.alertDodgeA[1], g=Defaults.alerts.colors.alertDodgeA[2], b=Defaults.alerts.colors.alertDodgeA[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 type = "header",
@@ -957,6 +961,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(v) Settings.alerts.formats.alertAvoid = v end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertAvoid,
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Avoid Color
@@ -965,7 +970,8 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.alertAvoidB) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.alertAvoidB = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertAvoidB[1], g=Defaults.alerts.colors.alertAvoidB[2], b=Defaults.alerts.colors.alertAvoidB[3]}
+                default = {r=Defaults.alerts.colors.alertAvoidB[1], g=Defaults.alerts.colors.alertAvoidB[2], b=Defaults.alerts.colors.alertAvoidB[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 type = "header",
@@ -981,6 +987,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(v) Settings.alerts.formats.alertInterrupt = v end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertInterrupt,
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Interrupt Color
@@ -989,7 +996,8 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.alertInterruptB) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.alertInterruptB = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertInterruptB[1], g=Defaults.alerts.colors.alertInterruptB[2], b=Defaults.alerts.colors.alertInterruptB[3]}
+                default = {r=Defaults.alerts.colors.alertInterruptB[1], g=Defaults.alerts.colors.alertInterruptB[2], b=Defaults.alerts.colors.alertInterruptB[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 type = "header",
@@ -1003,27 +1011,29 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_UNMIT_TP),
                 getFunc = function() return Settings.alerts.toggles.showAlertUnmit end,
                 setFunc = function(v) Settings.alerts.toggles.showAlertUnmit = v end,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
                 default = Defaults.alerts.toggles.showAlertUnmit,
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Unmit Format
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_UNMIT_TP),
                 getFunc = function() return Settings.alerts.formats.alertUnmit end,
                 setFunc = function(v) Settings.alerts.formats.alertUnmit = v end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertUnmit,
+                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertUnmit) end,
             },
             {
                 -- Unmit Color
                 type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_UNMIT_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.alertUnmit) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.alertUnmit = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertUnmit[1], g=Defaults.alerts.colors.alertUnmit[2], b=Defaults.alerts.colors.alertUnmit[3]}
+                default = {r=Defaults.alerts.colors.alertUnmit[1], g=Defaults.alerts.colors.alertUnmit[2], b=Defaults.alerts.colors.alertUnmit[3]},
+                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertUnmit) end,
             },
             {
                 type = "header",
@@ -1037,23 +1047,24 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP),
                 getFunc = function() return Settings.alerts.toggles.showAlertPower end,
                 setFunc = function(v) Settings.alerts.toggles.showAlertPower = v end,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
                 default = Defaults.alerts.toggles.showAlertPower,
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Power Format
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POWER_TP),
                 getFunc = function() return Settings.alerts.formats.alertPower end,
                 setFunc = function(v) Settings.alerts.formats.alertPower = v end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertPower,
+                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertPower) end,
             },
             {
                 -- Prefix Power (No Name)
                 type    = "editbox",
-                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
+                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
                 tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
                 getFunc = function() return Settings.alerts.toggles.mitigationPowerPrefix2 end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationPowerPrefix2 = v end,
@@ -1063,7 +1074,7 @@ function CombatInfo.CreateSettings()
             {
                 -- Prefix Power (Name)
                 type    = "editbox",
-                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
+                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
                 tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_P_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
                 getFunc = function() return Settings.alerts.toggles.mitigationPowerPrefixN2 end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationPowerPrefixN2 = v end,
@@ -1073,11 +1084,12 @@ function CombatInfo.CreateSettings()
             {
                 -- Power Color
                 type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.alertPower) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.alertPower = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertPower[1], g=Defaults.alerts.colors.alertPower[2], b=Defaults.alerts.colors.alertPower[3]}
+                default = {r=Defaults.alerts.colors.alertPower[1], g=Defaults.alerts.colors.alertPower[2], b=Defaults.alerts.colors.alertPower[3]},
+                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertPower) end,
             },
             {
                 type = "header",
@@ -1097,17 +1109,18 @@ function CombatInfo.CreateSettings()
             {
                 -- Destroy Format
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DESTROY_TP),
                 getFunc = function() return Settings.alerts.formats.alertDestroy end,
                 setFunc = function(v) Settings.alerts.formats.alertDestroy = v end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertDestroy,
+                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertDestroy) end,
             },
             {
                 -- Prefix Destroy (No Name)
                 type    = "editbox",
-                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
+                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
                 tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
                 getFunc = function() return Settings.alerts.toggles.mitigationDestroyPrefix2 end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationDestroyPrefix2 = v end,
@@ -1117,7 +1130,7 @@ function CombatInfo.CreateSettings()
             {
                 -- Prefix Destroy (Name)
                 type    = "editbox",
-                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
+                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
                 tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_D_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
                 getFunc = function() return Settings.alerts.toggles.mitigationDestroyPrefixN2 end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationDestroyPrefixN2 = v end,
@@ -1127,11 +1140,12 @@ function CombatInfo.CreateSettings()
             {
                 -- Destroy Color
                 type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.alertDestroy) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.alertDestroy = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertDestroy[1], g=Defaults.alerts.colors.alertDestroy[2], b=Defaults.alerts.colors.alertDestroy[3]}
+                default = {r=Defaults.alerts.colors.alertDestroy[1], g=Defaults.alerts.colors.alertDestroy[2], b=Defaults.alerts.colors.alertDestroy[3]},
+                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertDestroy) end,
             },
             {
                 type = "header",
@@ -1141,7 +1155,7 @@ function CombatInfo.CreateSettings()
             {
                 -- Summon Enable
                 type    = "checkbox",
-                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON)),
+                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CT_SHARED_DISPLAY), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_SUMMON)),
                 tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_SUMMON_TP),
                 getFunc = function() return Settings.alerts.toggles.showAlertSummon end,
                 setFunc = function(v) Settings.alerts.toggles.showAlertSummon = v end,
@@ -1151,17 +1165,18 @@ function CombatInfo.CreateSettings()
             {
                 -- Summon Format
                 type    = "editbox",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_FORMAT),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_FORMAT)),
                 tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_SUMMON_TP),
                 getFunc = function() return Settings.alerts.formats.alertSummon end,
                 setFunc = function(v) Settings.alerts.formats.alertSummon = v end,
                 isMultiline = false,
                 default = Defaults.alerts.formats.alertSummon,
+                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon) end,
             },
             {
                 -- Prefix Summon (No Name)
                 type    = "editbox",
-                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
+                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME)),
                 tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NO_NAME_TP)),
                 getFunc = function() return Settings.alerts.toggles.mitigationSummonPrefix2 end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationSummonPrefix2 = v end,
@@ -1171,21 +1186,23 @@ function CombatInfo.CreateSettings()
             {
                 -- Prefix Summon (Name)
                 type    = "editbox",
-                name    = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
+                name    = zo_strformat("\t\t\t\t\t<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME)),
                 tooltip = zo_strformat("<<1>> <<2>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FORMAT_S_TP), GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP)),
                 getFunc = function() return Settings.alerts.toggles.mitigationSummonPrefixN2 end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationSummonPrefixN2 = v end,
                 disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon) end,
                 default = Defaults.alerts.toggles.mitigationSummonPrefixN2,
+                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon) end,
             },
             {
                 -- Summon Color
                 type    = "colorpicker",
-                name    = GetString(SI_LUIE_LAM_CT_SHARED_COLOR),
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_SUMMON_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.alertSummon) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.alertSummon = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.alertSummon[1], g=Defaults.alerts.colors.alertSummon[2], b=Defaults.alerts.colors.alertSummon[3]}
+                default = {r=Defaults.alerts.colors.alertSummon[1], g=Defaults.alerts.colors.alertSummon[2], b=Defaults.alerts.colors.alertSummon[3]},
+                disabled = function() return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.showAlertSummon) end,
             },
 
             {
@@ -1200,7 +1217,8 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STUN_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.stunColor) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.stunColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.stunColor[1], g=Defaults.alerts.colors.stunColor[2], b=Defaults.alerts.colors.stunColor[3]}
+                default = {r=Defaults.alerts.colors.stunColor[1], g=Defaults.alerts.colors.stunColor[2], b=Defaults.alerts.colors.stunColor[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Disorient
@@ -1209,7 +1227,8 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.disorientColor) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.disorientColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.disorientColor[1], g=Defaults.alerts.colors.disorientColor[2], b=Defaults.alerts.colors.disorientColor[3]}
+                default = {r=Defaults.alerts.colors.disorientColor[1], g=Defaults.alerts.colors.disorientColor[2], b=Defaults.alerts.colors.disorientColor[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Fear
@@ -1218,7 +1237,8 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_FEAR_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.fearColor) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.fearColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.fearColor[1], g=Defaults.alerts.colors.fearColor[2], b=Defaults.alerts.colors.fearColor[3]}
+                default = {r=Defaults.alerts.colors.fearColor[1], g=Defaults.alerts.colors.fearColor[2], b=Defaults.alerts.colors.fearColor[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Silence
@@ -1227,7 +1247,8 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SILENCE_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.silenceColor) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.silenceColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.silenceColor[1], g=Defaults.alerts.colors.silenceColor[2], b=Defaults.alerts.colors.silenceColor[3]}
+                default = {r=Defaults.alerts.colors.silenceColor[1], g=Defaults.alerts.colors.silenceColor[2], b=Defaults.alerts.colors.silenceColor[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Stagger
@@ -1236,7 +1257,8 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_STAGGER_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.staggerColor) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.sstaggerColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.staggerColor[1], g=Defaults.alerts.colors.staggerColor[2], b=Defaults.alerts.colors.staggerColor[3]}
+                default = {r=Defaults.alerts.colors.staggerColor[1], g=Defaults.alerts.colors.staggerColor[2], b=Defaults.alerts.colors.staggerColor[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Unbreakable
@@ -1245,7 +1267,8 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_UNBREAKABLE_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.unbreakableColor) end,
                 setFunc = function(r, g, b, a) Settings.alerts.colors.unbreakableColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.unbreakableColor[1], g=Defaults.alerts.colors.unbreakableColor[2], b=Defaults.alerts.colors.unbreakableColor[3]}
+                default = {r=Defaults.alerts.colors.unbreakableColor[1], g=Defaults.alerts.colors.unbreakableColor[2], b=Defaults.alerts.colors.unbreakableColor[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
             {
                 -- Snare
@@ -1254,7 +1277,8 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_CC_COLOR_SNARE_TP),
                 getFunc = function() return unpack(Settings.alerts.colors.snareColor) end,
                 setFunc = function(r, g, b, a) Settings.alerts.snareColor = { r, g, b, a } AbilityAlerts.SetAlertColors() end,
-                default = {r=Defaults.alerts.colors.snareColor[1], g=Defaults.alerts.colors.snareColor[2], b=Defaults.alerts.colors.snareColor[3]}
+                default = {r=Defaults.alerts.colors.snareColor[1], g=Defaults.alerts.colors.snareColor[2], b=Defaults.alerts.colors.snareColor[3]},
+                disabled = function() return not Settings.alerts.toggles.alertEnable end,
             },
 
             {
@@ -1287,7 +1311,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.sound3 = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound3,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnable3 and Settings.alerts.toggles.alertEnable) end,
             },
 
             {
@@ -1314,7 +1338,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.sound3CC = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound3CC,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnable3CC and Settings.alerts.toggles.alertEnable) end,
             },
 
             {
@@ -1341,7 +1365,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.sound3UB = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound3UB,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnable3UB and Settings.alerts.toggles.alertEnable) end,
             },
 
             {
@@ -1368,7 +1392,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.sound2 = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound2,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnable2 and Settings.alerts.toggles.alertEnable) end,
             },
 
             {
@@ -1395,7 +1419,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.sound2CC = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound2CC,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnable2CC and Settings.alerts.toggles.alertEnable) end,
             },
 
             {
@@ -1422,7 +1446,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.sound2UB = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound2UB,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnable2UB and Settings.alerts.toggles.alertEnable) end,
             },
 
             {
@@ -1449,7 +1473,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.sound1 = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound1,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnable1 and Settings.alerts.toggles.alertEnable) end,
             },
 
             {
@@ -1476,7 +1500,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.sound1CC = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound1CC,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnable1CC and Settings.alerts.toggles.alertEnable) end,
             },
 
             {
@@ -1503,7 +1527,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.sound1UB = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.sound1UB,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnable1UB and Settings.alerts.toggles.alertEnable) end,
             },
 
             {
@@ -1530,7 +1554,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.soundUnmit = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.soundUnmit,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnableUnmit and Settings.alerts.toggles.alertEnable) end,
             },
 
             {
@@ -1557,7 +1581,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.soundPower = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.soundPower,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnablePower and Settings.alerts.toggles.alertEnable) end,
             },
 
             {
@@ -1584,7 +1608,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.soundSummon = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.soundSummon,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnableSummon and Settings.alerts.toggles.alertEnable) end,
             },
 
             {
@@ -1611,7 +1635,7 @@ function CombatInfo.CreateSettings()
                 setFunc = function(value) Settings.alerts.sounds.soundDestroy = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Defaults.alerts.sounds.soundDestroy,
-                disabled = function() return not (Settings.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+                disabled = function() return not (Settings.alerts.toggles.soundEnableDestroy and Settings.alerts.toggles.alertEnable) end,
             },
         },
     }
@@ -1625,7 +1649,7 @@ function CombatInfo.CreateSettings()
             -- CCT Description
             {
                 type = "description",
-                text = "Display an animated icon when you are under the effects of crowd control. The options below allow you to customize the color, sound, and naming method for the alerts displayed. Additionally you can display alerts when standing in the radius of damaging area of effect abilities, with the option to enable/disable various categories with different sounds.",
+                text = GetString(SI_LUIE_LAM_CI_CCT_DESCRIPTION)
             },
 
             {
@@ -1635,7 +1659,6 @@ function CombatInfo.CreateSettings()
                 tooltip = "ON - icon can me moved on the screen by left clicking and dragging, OFF - icon is locked in place and can not be moved",
                 default = Defaults.cct.unlocked,
                 width = "half",
-                disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return Settings.cct.unlocked end,
                 setFunc = function(newValue) Settings.cct.unlocked = newValue if newValue then CrowdControlTracker:SetupDisplay("draw") end CrowdControlTracker:InitControls() end,
             },
@@ -1646,7 +1669,6 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RESET_TP),
                 func = nil,
                 width = "half",
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled ) end,
             },
             {
                 -- Enable Crowd Control Tracker
@@ -1660,7 +1682,7 @@ function CombatInfo.CreateSettings()
             {
                 -- Enable only in PVP
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_CCT_PVP_ONLY),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_PVP_ONLY)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_PVP_ONLY_TP),
                 default = Defaults.cct.enabledOnlyInCyro,
                 disabled = function() return not Settings.cct.enabled end,
@@ -1726,7 +1748,7 @@ function CombatInfo.CreateSettings()
             },
             {
                 type = "header",
-                name = "Misc options",
+                name = GetString(SI_LUIE_LAM_CI_CCT_MISC_OPTIONS_HEADER),
             },
             {
                 -- Play Sound when CC'ed
@@ -1735,11 +1757,11 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_SOUND_TP),
                 default = Defaults.cct.playSound,
                 width = "half",
-                disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return Settings.cct.playSound end,
                 setFunc = function(newValue) Settings.cct.playSound = newValue
                     CrowdControlTracker:InitControls()
                 end,
+                disabled = function() return not Settings.cct.enabled end,
             },
 
             {
@@ -1747,14 +1769,13 @@ function CombatInfo.CreateSettings()
                 type = "dropdown",
                 scrollable = true,
                 name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.playSoundOption end,
                 setFunc = function(value) Settings.cct.playSoundOption = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Settings.cct.playSoundOption,
-                disabled = function() return (not Settings.cct.enabled and Settings.cct.playSound) end,
+                disabled = function() return not (Settings.cct.playSound and Settings.cct.enabled) end,
             },
             {
                 -- Show Stagger (Text Only)
@@ -1771,8 +1792,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Show Global Cooldown
                 type = "checkbox",
-                name = "Show Global Cooldown",
-                tooltip = "ON - show the cooldown animation if cc-ed while on global cooldown (Cyrodiil only) , OFF - don't not show global cooldown animation",
+                name = GetString(SI_LUIE_LAM_CI_CCT_GCD_TOGGLE),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_GCD_TOGGLE_TP),
                 default = Defaults.cct.showGCD,
                 disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.showGCD end,
@@ -1786,11 +1807,11 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TOGGLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TOGGLE_TP),
                 default = Defaults.cct.showImmune,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.showImmune end,
                 setFunc = function(newValue) Settings.cct.showImmune = newValue
                     CrowdControlTracker:InitControls()
                 end,
+                disabled = function() return (not Settings.cct.enabled) end,
             },
             {
                 -- Show when Immune only in Cyrodiil
@@ -1798,11 +1819,11 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_CYRODIIL)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_CYRODIIL_TP),
                 default = Defaults.cct.showImmuneOnlyInCyro,
-                disabled = function() return (not Settings.cct.enabled) or (not Settings.cct.showImmune) end,
                 getFunc = function() return Settings.cct.showImmuneOnlyInCyro end,
                 setFunc = function(newValue) Settings.cct.showImmuneOnlyInCyro = newValue
                     CrowdControlTracker:InitControls()
                 end,
+                disabled = function() return not (Settings.cct.showImmune and Settings.cct.enabled) end,
             },
             {
                 -- Set Immune Display Time (MS)
@@ -1810,12 +1831,12 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TIME)),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_IMMUNE_TIME_TP),
                 default = Defaults.cct.immuneDisplayTime,
-                disabled = function() return (not Settings.cct.enabled) or (not Settings.cct.showImmune) end,
                 min     = 100,
                 max     = 1500,
                 step    = 1,
                 getFunc = function() return Settings.cct.immuneDisplayTime end,
                 setFunc = function(newValue) Settings.cct.immuneDisplayTime = newValue CrowdControlTracker:InitControls() end,
+                disabled = function() return not (Settings.cct.showImmune and Settings.cct.enabled) end,
             },
             {
                 -- Crowd Control Color Options
@@ -1918,7 +1939,7 @@ function CombatInfo.CreateSettings()
             },
             {
                 type = "header",
-                name = "Area of Effect Damage Alerts",
+                name = GetString(SI_LUIE_LAM_CI_CCT_AOE_HEADER),
             },
             {
                 -- AOE SHOW
@@ -1926,24 +1947,24 @@ function CombatInfo.CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_CCT_AOE_TOGGLE),
                 tooltip = GetString(SI_LUIE_LAM_CI_CCT_AOE_TOGGLE_TP),
                 default = Defaults.cct.showAoe,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.showAoe end,
                 setFunc = function(newValue) Settings.cct.showAoe = newValue
                     CrowdControlTracker:InitControls()
                 end,
+                disabled = function() return (not Settings.cct.enabled) end,
             },
             {
                 -- AOE Color
                 type = "colorpicker",
-                name = "Pick color for AREA DAMAGE EFFECT state",
-                tooltip = "Pick color of CC text and icon border for AREA DAMAGE EFFECT crowd control state",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_CCT_AOE_COLOR)),
+                tooltip = GetString(SI_LUIE_LAM_CT_CCT_AOE_COLOR_TP),
                 default = ZO_ColorDef:New(unpack(Defaults.cct.colors[ACTION_RESULT_AREA_EFFECT])),
-                disabled = function() return not Settings.cct.enabled end,
                 getFunc = function() return unpack(Settings.cct.colors[ACTION_RESULT_AREA_EFFECT]) end,
                 setFunc = function(r,g,b,a)
                     Settings.cct.colors[ACTION_RESULT_AREA_EFFECT] = {r,g,b,a}
                     CrowdControlTracker:InitControls()
                 end,
+                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
             },
 
             {
@@ -1957,11 +1978,11 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)),
                 default = Defaults.cct.aoePlayerUltimate,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoePlayerUltimate end,
                 setFunc = function(newValue) Settings.cct.aoePlayerUltimate = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
+                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
             },
             {
                 -- Sound AOE - Player Ultimate
@@ -1970,24 +1991,23 @@ function CombatInfo.CreateSettings()
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_ULT)),
                 width = "half",
                 default = Defaults.cct.aoePlayerUltimateSoundToggle,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoePlayerUltimateSoundToggle end,
                 setFunc = function(newValue) Settings.cct.aoePlayerUltimateSoundToggle = newValue
                 end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoePlayerUltimate and Settings.cct.enabled) end,
             },
             {
                 -- SOUND - aoePlayerUltimate
                 type = "dropdown",
                 scrollable = true,
                 name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoePlayerUltimateSound end,
                 setFunc = function(value) Settings.cct.aoePlayerUltimateSound = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Settings.cct.aoePlayerUltimateSound,
-                disabled = function() return (not Settings.cct.enabled) end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoePlayerUltimate and Settings.cct.aoePlayerUltimateSoundToggle and Settings.cct.enabled) end,
             },
 
             {
@@ -2000,11 +2020,11 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)),
                 default = Defaults.cct.aoePlayerNormal,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoePlayerNormal end,
                 setFunc = function(newValue) Settings.cct.aoePlayerNormal = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
+                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
             },
             {
                 -- Sound AOE - Player Normal
@@ -2013,24 +2033,23 @@ function CombatInfo.CreateSettings()
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_NORM)),
                 width = "half",
                 default = Defaults.cct.aoePlayerNormalSoundToggle,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoePlayerNormalSoundToggle end,
                 setFunc = function(newValue) Settings.cct.aoePlayerNormalSoundToggle = newValue
                 end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoePlayerNormal and Settings.cct.enabled) end,
             },
             {
                 -- SOUND - aoePlayerNormal
                 type = "dropdown",
                 scrollable = true,
                 name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoePlayerNormalSound end,
                 setFunc = function(value) Settings.cct.aoePlayerNormalSound = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Settings.cct.aoePlayerNormalSound,
-                disabled = function() return (not Settings.cct.enabled) end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoePlayerNormal and Settings.cct.aoePlayerNormalSoundToggle and Settings.cct.enabled) end,
             },
 
             {
@@ -2043,11 +2062,11 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)),
                 default = Defaults.cct.aoePlayerSet,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoePlayerSet end,
                 setFunc = function(newValue) Settings.cct.aoePlayerSet = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
+                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
             },
             {
                 -- Sound AOE - Player Set
@@ -2056,24 +2075,23 @@ function CombatInfo.CreateSettings()
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_PLAYER_SET)),
                 width = "half",
                 default = Defaults.cct.aoePlayerSetSoundToggle,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoePlayerSetSoundToggle end,
                 setFunc = function(newValue) Settings.cct.aoePlayerSetSoundToggle = newValue
                 end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoePlayerSet and Settings.cct.enabled) end,
             },
             {
                 -- SOUND - aoePlayerSet
                 type = "dropdown",
                 scrollable = true,
                 name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoePlayerSetSound end,
                 setFunc = function(value) Settings.cct.aoePlayerSetSound = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Settings.cct.aoePlayerSetSound,
-                disabled = function() return (not Settings.cct.enabled) end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoePlayerSet and Settings.cct.aoePlayerSetSoundToggle and Settings.cct.enabled) end,
             },
 
             {
@@ -2086,11 +2104,11 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)),
                 default = Defaults.cct.aoeTraps,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoeTraps end,
                 setFunc = function(newValue) Settings.cct.aoeTraps = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
+                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
             },
             {
                 -- Sound AOE - Trap
@@ -2099,24 +2117,23 @@ function CombatInfo.CreateSettings()
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_TRAP)),
                 width = "half",
                 default = Defaults.cct.aoeTrapsSoundToggle,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoeTrapsSoundToggle end,
                 setFunc = function(newValue) Settings.cct.aoeTrapsSoundToggle = newValue
                 end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeTraps and Settings.cct.enabled) end,
             },
             {
                 -- SOUND - aoeTraps
                 type = "dropdown",
                 scrollable = true,
                 name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoeTrapsSound end,
                 setFunc = function(value) Settings.cct.aoeTrapsSound = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Settings.cct.aoeTrapsSound,
-                disabled = function() return (not Settings.cct.enabled) end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeTraps and Settings.cct.aoeTrapsSoundToggle and Settings.cct.enabled) end,
             },
 
             {
@@ -2129,11 +2146,11 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)),
                 default = Defaults.cct.aoeNPCBoss,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoeNPCBoss end,
                 setFunc = function(newValue) Settings.cct.aoeNPCBoss = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
+                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
             },
             {
                 -- Sound AOE - NPC Boss
@@ -2142,24 +2159,23 @@ function CombatInfo.CreateSettings()
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_BOSS)),
                 width = "half",
                 default = Defaults.cct.aoeNPCBossSoundToggle,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoeNPCBossSoundToggle end,
                 setFunc = function(newValue) Settings.cct.aoeNPCBossSoundToggle = newValue
                 end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeNPCBoss and Settings.cct.enabled) end,
             },
             {
                 -- SOUND - aoeNPCBoss
                 type = "dropdown",
                 scrollable = true,
                 name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoeNPCBossSound end,
                 setFunc = function(value) Settings.cct.aoeNPCBossSound = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Settings.cct.aoeNPCBossSound,
-                disabled = function() return (not Settings.cct.enabled) end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeNPCBoss and Settings.cct.aoeNPCBossSoundToggle and Settings.cct.enabled) end,
             },
 
             {
@@ -2172,38 +2188,36 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)),
                 default = Defaults.cct.aoeNPCElite,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoeNPCElite end,
                 setFunc = function(newValue) Settings.cct.aoeNPCElite = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
+                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
             },
             {
                 -- Sound AOE - NPC Elite
                 type = "checkbox",
                 name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_ELITE)),
-                tooltip = "Play a sound when you get your little boots scooted by some aoe.",
                 width = "half",
                 default = Defaults.cct.aoeNPCEliteSoundToggle,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoeNPCEliteSoundToggle end,
                 setFunc = function(newValue) Settings.cct.aoeNPCEliteSoundToggle = newValue
                 end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeNPCElite and Settings.cct.enabled) end,
             },
             {
                 -- SOUND - aoeNPCElite
                 type = "dropdown",
                 scrollable = true,
                 name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoeNPCEliteSound end,
                 setFunc = function(value) Settings.cct.aoeNPCEliteSound = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Settings.cct.aoeNPCEliteSound,
-                disabled = function() return (not Settings.cct.enabled) end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeNPCElite and Settings.cct.aoeNPCEliteSoundToggle and Settings.cct.enabled) end,
             },
 
             {
@@ -2216,38 +2230,36 @@ function CombatInfo.CreateSettings()
                 name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SHOW_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)),
                 default = Defaults.cct.aoeNPCNormal,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoeNPCNormal end,
                 setFunc = function(newValue) Settings.cct.aoeNPCNormal = newValue
                     CrowdControlTracker.UpdateAOEList()
                 end,
+                disabled = function() return not (Settings.cct.showAoe and Settings.cct.enabled) end,
             },
             {
                 -- Sound AOE - NPC Normal
                 type = "checkbox",
-                name = "SOUND - aoeNPCNormal",
                 name = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)),
                 tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_CCT_AOE_SOUND_TP), GetString(SI_LUIE_LAM_CI_CCT_AOE_TIER_NPC_NORMAL)),
                 width = "half",
                 default = Defaults.cct.aoeNPCNormalSoundToggle,
-                disabled = function() return (not Settings.cct.enabled) end,
                 getFunc = function() return Settings.cct.aoeNPCNormalSoundToggle end,
                 setFunc = function(newValue) Settings.cct.aoeNPCNormalSoundToggle = newValue
                 end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeNPCNormal and Settings.cct.enabled) end,
             },
             {
                 -- SOUND - aoeNPCNormal
                 type = "dropdown",
                 scrollable = true,
                 name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoeNPCNormalSound end,
                 setFunc = function(value) Settings.cct.aoeNPCNormalSound = value AbilityAlerts.PreviewAlertSound(value) end,
                 width = "half",
                 default = Settings.cct.aoeNPCNormalSound,
-                disabled = function() return (not Settings.cct.enabled) end,
+                disabled = function() return not ( Settings.cct.showAoe and Settings.cct.aoeNPCNormal and Settings.cct.aoeNPCNormalSoundToggle and Settings.cct.enabled) end,
             },
         },
     }
