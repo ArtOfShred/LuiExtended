@@ -319,7 +319,7 @@ ChatAnnouncements.Defaults = {
         SkillPointCA                    = true,
         SkillPointCSA                   = true,
         SkillPointAlert                 = false,
-        SkillPointSkyshardMsg           = GetString(SI_SKYSHARD_GAINED),
+        SkillPointSkyshard           = GetString(SI_SKYSHARD_GAINED),
         SkillPointBracket               = 4,
         SkillPointsPartial              = true,
         SkillPointColor1                = { .75, .75, .75, 1 },
@@ -6696,7 +6696,7 @@ function ChatAnnouncements.HookFunction()
 	local function SkillPointsChangedHook(oldPoints, newPoints, oldPartialPoints, newPartialPoints, changeReason)
 		local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
 		local numSkillPointsGained = newPoints - oldPoints
-		local stringPrefix = ChatAnnouncements.SV.Skills.SkillPointSkyshardMsg
+		local stringPrefix = ChatAnnouncements.SV.Skills.SkillPointSkyshard
 		local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_SKYSHARD_GAINED)
 
 		local stringPart1 -- CA

@@ -2227,11 +2227,11 @@ function ChatAnnouncements.CreateSettings()
                 type = "editbox",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX)),
                 tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX_TP),
-                getFunc = function() return Settings.Skills.SkillPointSkyshardMsg end,
-                setFunc = function(value) Settings.Skills.SkillPointSkyshardMsg = value ChatAnnouncements.RegisterXPEvents() end,
+                getFunc = function() return Settings.Skills.SkillPointSkyshard end,
+                setFunc = function(value) Settings.Skills.SkillPointSkyshard = value ChatAnnouncements.RegisterXPEvents() end,
                 width = "full",
                 disabled = function() return not ( Settings.Skills.SkillPointCA or Settings.Skills.SkillPointCSA or Settings.Skills.SkillPointAlert and LUIE.SV.ChatAnnouncements_Enable) end,
-                default = Defaults.Skills.SkillPointSkyshardMsg,
+                default = Defaults.Skills.SkillPointSkyshard,
             },
             {
                 -- Skyshard Brackets

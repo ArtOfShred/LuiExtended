@@ -229,8 +229,11 @@ end
 function CrowdControlTracker:OnProc(ccDuration, interval)
     self:OnAnimation(LUIE_CCTracker, "proc")
     if CombatInfo.SV.cct.playSound then
-        PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-        PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
+        local playSound = CombatInfo.SV.cct.playSoundOption
+        if playSound then
+            PlaySound(LUIE.Sounds[playSound])
+            PlaySound(LUIE.Sounds[playSound])
+        end
     end
     self.Timer = GetFrameTimeSeconds() + (interval / 1000)
 
