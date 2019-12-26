@@ -63,6 +63,11 @@ function CombatTextCombatEventListener:OnCombatIn(...)
         end
     end
 
+    -- Bail out if the abilityId is on the Blacklist Table
+    if Settings.blacklist[abilityId] or Settings.blacklist[abilityName] then
+        return
+    end
+
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//RESULTS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -177,6 +182,11 @@ function CombatTextCombatEventListener:OnCombatOut(...)
     local Settings = LUIE.CombatText.SV
     local combatType, togglesInOut = CombatTextConstants.combatType.OUTGOING, Settings.toggles.outgoing
     abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+
+    -- Bail out if the abilityId is on the Blacklist Table
+    if Settings.blacklist[abilityId] or Settings.blacklist[abilityName] then
+        return
+    end
 
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//RESULTS//--

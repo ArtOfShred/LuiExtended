@@ -310,12 +310,12 @@ local strings = {
     SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST_TP =            "Добавляет abilityId или abilityName в список особых Баффов.",
     SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST =               "Убрать особый Дебафф",
     SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST_TP =            "Убирает abilityId или abilityName из списка особых Дебаффов.",
-    SI_LUIE_LAM_BUFF_BLACKLIST_HEADER =                  "Чёрный список Баффов & Дебаффов",
-    SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT =                "Добавляет особый бафф или дебафф в Чёрный список по введённому AbilityId (ID способности) или AbilityName (названию способности) в поле ввода и нажатию Enter. Убирает особый бафф или дебафф из Чёрного списка по клику на AbilityId (ID способности) или AbilityName (названию способности) из ниспадающего списка.",
-    SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST =                 "Добавить Бафф/Дебафф в чёрный список",
-    SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP =              "Добавляет abilityId или abilityName в чёрный список аур.",
-    SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST =                 "Убрать Бафф/Дебафф из чёрного списка",
-    SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP =              "Убирает abilityId или abilityName в чёрного списка аур.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_HEADER =                  "Buff & Debuff Blacklisting",
+    SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT =                "Add abilities to the Blacklist by entering an AbilityId or AbilityName into the input field and pressing enter. Remove abilities from the Blacklist by clicking the AbilityId or AbilityName from the dropdown list.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST =                 "Add Ability to Blacklist",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP =              "Add an abilityId or abilityName to the blacklist.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST =                 "Remove Ability from Blacklist",
+    SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP =              "Remove an abilityId or abilityName from the blacklist.",
 
     -- Module: Chat Announcements
     SI_LUIE_LAM_CA_ENABLE =                              "Оповещения чата",
@@ -1723,6 +1723,9 @@ local strings = {
     SI_LUIE_LAM_CT_DEATH_FORMAT_TP =                     "Формат текста предупреждения о смерти.",
     SI_LUIE_LAM_CT_DEATH_FONT_SIZE_TP =                  "Размер шрифта сообщения о смерти.\nПо умолчанию: 32",
     SI_LUIE_LAM_CT_DEATH_COLOR_TP =                      "Цвет предупреждения о смерти члена группы.",
+
+    SI_LUIE_LAM_CT_BLACKLIST_HEADER =                    "Ability Blacklisting",
+
 }
 
 for stringId, stringValue in pairs(strings) do

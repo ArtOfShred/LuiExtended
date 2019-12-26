@@ -10,6 +10,26 @@ local zo_strformat = zo_strformat
 
 local callbackManager = CALLBACK_MANAGER
 
+local Blacklist, BlackListValues = {}
+
+-- Create a list of abilityId's / abilityName's to use for Blacklist
+local function GenerateCustomList(input)
+    local options, values = {}, {}
+    local counter = 0
+    for id in pairs(input) do
+        counter = counter + 1
+        -- If the input is a numeric value then we can pull this abilityId's info.
+        if type(id) == "number" then
+            options[counter] = zo_iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. zo_strformat("<<C:1>>", GetAbilityName(id))
+        -- If the input is not numeric then add this as a name only.
+        else
+            options[counter] = id
+        end
+        values[counter] = id
+    end
+    return options, values
+end
+
 function CombatText.CreateSettings()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2
@@ -133,6 +153,39 @@ function CombatText.CreateSettings()
                 getFunc = function() return Settings.common.abbreviateNumbers end,
                 setFunc = function(v) Settings.common.abbreviateNumbers = v end,
                 default = Defaults.common.abbreviateNumbers,
+            },
+        },
+    }
+
+    optionsDataCombatText[#optionsDataCombatText +1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_CT_BLACKLIST_HEADER),
+        controls = {
+            {
+                -- Combat Text Blacklist Description
+                type = "description",
+                text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
+            },
+            {
+                -- Combat Text Blacklist (Add)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP),
+                getFunc = function() end,
+                setFunc = function(value) CombatText.AddToCustomList(Settings.blacklist, value) LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+            },
+            {
+                -- Combat Text Blacklist (Remove)
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP),
+                choices = Blacklist,
+                choicesValues = BlacklistValues,
+                scrollable = true,
+                sort = "name-up",
+                getFunc = function() LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                setFunc = function(value) CombatText.RemoveFromCustomList(Settings.blacklist, value) LUIE_BlacklistCT:UpdateChoices(GenerateCustomList(Settings.blacklist)) end,
+                reference = "LUIE_BlacklistCT"
             },
         },
     }

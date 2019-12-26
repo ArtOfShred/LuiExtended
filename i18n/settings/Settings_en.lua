@@ -311,11 +311,11 @@ local strings = {
     SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST =               "Remove Prominent Debuff",
     SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST_TP =            "Remove an abilityId or abilityName from the Prominent Debuffs list.",
     SI_LUIE_LAM_BUFF_BLACKLIST_HEADER =                  "Buff & Debuff Blacklisting",
-    SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT =                "Add buffs or debuffs to the Blacklist by entering an AbilityId or AbilityName into the input field and pressing enter. Remove buffs or debuffs from the Blacklist, by clicking the AbilityId or AbilityName from the dropdown list.",
-    SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST =                 "Add Buff or Debuff to Blacklist",
-    SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP =              "Add an abilityId or abilityName to the aura blacklist.",
-    SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST =                 "Remove Buff or Debuff from Blacklist",
-    SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP =              "Remove an abilityId or abilityName from the aura blacklist.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT =                "Add abilities to the Blacklist by entering an AbilityId or AbilityName into the input field and pressing enter. Remove abilities from the Blacklist by clicking the AbilityId or AbilityName from the dropdown list.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST =                 "Add Ability to Blacklist",
+    SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP =              "Add an abilityId or abilityName to the blacklist.",
+    SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST =                 "Remove Ability from Blacklist",
+    SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP =              "Remove an abilityId or abilityName from the blacklist.",
 
     -- Module: Chat Announcements
     SI_LUIE_LAM_CA_ENABLE =                              "Chat Announcements Module",
@@ -1725,6 +1725,9 @@ local strings = {
     SI_LUIE_LAM_CT_DEATH_FORMAT_TP =                     "Text format for group member death notifications.",
     SI_LUIE_LAM_CT_DEATH_FONT_SIZE_TP =                  "Font size of message displayed when a group member dies.\nDefault: 32",
     SI_LUIE_LAM_CT_DEATH_COLOR_TP =                      "Set a color for notifications when a group member dies.",
+
+    SI_LUIE_LAM_CT_BLACKLIST_HEADER =                    "Ability Blacklisting",
+
 }
 
 for stringId, stringValue in pairs(strings) do

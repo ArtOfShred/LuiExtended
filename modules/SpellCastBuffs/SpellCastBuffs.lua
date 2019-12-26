@@ -364,6 +364,9 @@ function SpellCastBuffs.Initialize(enabled)
             end
             -- Create table to store created contols for icons
             uiTlw[v].icons = {}
+
+            -- add this top level window to global controls list, so it can be hidden
+            if uiTlw[v]:GetType() == CT_TOPLEVELCONTROL then LUIE.Components[ moduleName .. v ] = uiTlw[v] end
         end
     end
 

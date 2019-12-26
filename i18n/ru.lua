@@ -13,6 +13,7 @@ local strings = {
 
     -- Shared
     SI_LUIE_CUSTOM_LIST_AURA_BLACKLIST =                 "аура в черный список",
+    SI_LUIE_CUSTOM_LIST_CT_BLACKLIST =                   "Combat Text Blacklist",
     SI_LUIE_CUSTOM_LIST_ADDED_ID =                       "<<1>> [<<2>>] <<3>> добавлены к <<4>>.",
     SI_LUIE_CUSTOM_LIST_ADDED_FAILED =                   "не возможно добавить [<<1>>] к <<2>>. Этот abilityID не существует.",
     SI_LUIE_CUSTOM_LIST_ADDED_NAME =                     "<<1>> добавлен к <<2>>.",

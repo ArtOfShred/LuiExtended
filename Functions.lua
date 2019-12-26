@@ -57,6 +57,13 @@ local function FormatMessage(msg, doTimestamp)
     return msg
 end
 
+-- Hide all controls if needed
+function LUIE.ToggleVisibility(hidden)
+	for _, control in pairs( LUIE.Components ) do
+		control:SetHidden( hidden )
+	end
+end
+
 -- Easy Print to Chat
 function LUIE.PrintToChat(msg, isSystem)
     if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then

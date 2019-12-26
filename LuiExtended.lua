@@ -22,6 +22,7 @@ LUIE.SVVer       = 2
 LUIE.SVName      = "LUIESV"
 
 LUIE.Data        = {}
+LUIE.Components  = {}
 
 -- Default Settings
 LUIE.Defaults = {
