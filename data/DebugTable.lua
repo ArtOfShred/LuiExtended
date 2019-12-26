@@ -2623,6 +2623,7 @@ LUIE.DebugAuras = {
     [85701] = true, -- Dueling Flag
     --[2727] = true, -- Off-Balance
     [102771] = true, -- Off Balance Immunity
+    [132831] = true, -- Major Vulnerability Invulnerability
     [21263] = true, -- Ayleid Health Bonus
     [100862] = true, -- Fortified Ayleid Health Bonus
     [45819] = true, -- Remove Werevamp

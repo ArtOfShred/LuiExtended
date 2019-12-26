@@ -380,6 +380,7 @@ Effects.DebuffDisplayOverrideId = {
 
     -- Basic (Shared)
     [102771] = true, -- Off Balance Immunity
+    [132831] = true, -- Major Vulnerability Invulnerability
     [16593] = true, -- Melee Snare
     [2727] = true, -- Off-Balance
 
@@ -1924,7 +1925,7 @@ Effects.SynergyNameOverride = {
     [Abilities.Skill_Blade_of_Woe] = { icon = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds' }, -- Blade of Woe (Dark Brotherhood)
     [Abilities.Skill_Black_Widow] = { icon = 'esoui/art/icons/ability_undaunted_003_a.dds' }, -- Black Widow (Undaunted)
     [Abilities.Skill_Arachnophobia] = { icon = 'esoui/art/icons/ability_undaunted_003_b.dds' }, -- Arachnophobia (Undaunted)
-    [Abilities.Skill_Feed] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed (Vampire)
+    [Abilities.Skill_Feed] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed (Vampire)
     [Abilities.Skill_Devour] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Werewolf)
     [Abilities.Set_Shield_of_Ursus] = { icon = 'esoui/art/icons/achievement_u23_natureswrath_blue.dds', name = Abilities.Set_Ursus_Blessing }, -- Ursus's Blessing (Haven of Ursus)
     -- Dungeons
@@ -4059,6 +4060,7 @@ Effects.EffectOverride = {
     [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', hide = true }, -- Ritual of Mara
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = "" }, -- Off-Balance
     [102771] = { stack = 0, type = 1, tooltip = Tooltips.Generic_Off_Balance_Immunity }, -- Off Balance Immunity
+    [132831] = { type = 1, icon = 'esoui/art/icons/achievement_031.dds', name = Abilities.Skill_Major_Vulnerability_Immunity, tooltip = Tooltips.Generic_Major_Vulnerability_Immunity }, -- Major Vulnerability Invulnerability
     [85701] = { hide = true, tooltip = Tooltips.Innate_Battle_Spirit }, -- Dueling Flag
     [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well, tooltip = Tooltips.Innate_Ayleid_Well }, -- Ayleid Health Bonus
     [100862] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = Abilities.Innate_Ayleid_Well_Fortified, tooltip = Tooltips.Innate_Ayleid_Well_Fortified }, -- Ayleid Health Bonus
@@ -4253,10 +4255,10 @@ Effects.EffectOverride = {
     [32956] = { icon = 'esoui/art/icons/ability_dragonknight_006_b.dds', tooltip = Tooltips.Skill_Standard_of_Might_Buff, groundLabel = true}, -- Standard of Might (Standard of Might)
     [32949] = { duration = 0, groundLabel = true, tooltip = Abilities.Skill_Standard_of_Might }, -- Major Defile (Standard of Might)
 
-    [28995] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Dragonknight Standard
-    [32960] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Shifting Standard
-    [32964] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Shifting Standard
-    [32948] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 }, -- Standard of Might
+    [28995] = { groundLabel = true, tooltip = Tooltips.Skill_Dragonknight_Standard_Ground, tooltipValue2 = 1 }, -- Dragonknight Standard
+    [32960] = { groundLabel = true, tooltip = Tooltips.Skill_Dragonknight_Standard_Ground, tooltipValue2 = 1 }, -- Shifting Standard
+    [32964] = { groundLabel = true, tooltip = Tooltips.Skill_Dragonknight_Standard_Ground, tooltipValue2 = 1 }, -- Shifting Standard
+    [32948] = { groundLabel = true, tooltip = Tooltips.Skill_Dragonknight_Standard_Ground, tooltipValue2 = 1 }, -- Standard of Might
 
     -- Spiked Armor / Hardened Armor / Volatile Armor
     [20319] = { tooltip = Tooltips.Skill_Spiked_Armor }, -- Spiked Armor (Spiked Armor)
@@ -4932,9 +4934,9 @@ Effects.EffectOverride = {
     [22001] = { tooltip = Tooltips.Skill_Solar_Disturbance, tooltipValue2Id = 21760 }, -- Solar Disturbance (Solar Disturbance)
     [21760] = { name = Abilities.Skill_Major_Maim, tooltip = Abilities.Skill_Solar_Disturbance }, -- Solar Disturbance (Solar Disturbance)
 
-    [21753] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Nova
-    [21756] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Solar Prison
-    [21759] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Magic, tooltipValue2 = 1 }, -- Solar Disturbance
+    [21753] = { groundLabel = true, tooltip = Tooltips.Skill_Nova_Ground }, -- Nova
+    [21756] = { groundLabel = true, tooltip = Tooltips.Skill_Nova_Ground }, -- Solar Prison
+    [21759] = { groundLabel = true, tooltip = Tooltips.Skill_Solar_Disturbance_Ground }, -- Solar Disturbance
 
     -- Restoring Light
     [35632] = { tooltip = Tooltips.Generic_Magicka_Regen, tooltipValue2 = 2 }, -- Honor the Dead (Honor the Dead)
@@ -5254,7 +5256,7 @@ Effects.EffectOverride = {
     [115252] = { tooltip = Tooltips.Skill_Boneyard }, -- Boneyard (Boneyard)
     [115254] = { tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Boneyard (Boneyard)
     [117805] = { tooltip = Tooltips.Skill_Unnerving_Boneyard }, -- Unnerving Boneyard (Unnerving Boneyard)
-    [117809] = { tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Unnerving Boneyard (Unnerving Boneyard)
+    [117809] = { tooltip = Tooltips.Skill_Unnerving_Boneyard_Ground, tooltipValue2 = 1, groundLabel = true }, -- Unnerving Boneyard (Unnerving Boneyard)
     [117818] = { tooltip = Abilities.Skill_Unnerving_Boneyard, groundLabel = true }, -- Major Breach (Unnerving Boneyard)
     [117819] = { tooltip = Abilities.Skill_Unnerving_Boneyard, groundLabel = true }, -- Major Fracture (Unnerving Boneyard)
     [117850] = { tooltip = Tooltips.Skill_Avid_Boneyard }, -- Avid Boneyard (Avid Boneyard)
@@ -5285,12 +5287,12 @@ Effects.EffectOverride = {
 
     -- Frozen Colossus / Pestilent Colossus / Glacial Colossus
     [122174] = { tooltip = Tooltips.Skill_Frozen_Colossus }, -- Frozen Colossus (Frozen Colossus)
-    [122178] = { tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1, groundLabel = true }, -- Frozen Colossus (Frozen Colossus)
+    [122178] = { tooltip = Tooltips.Skill_Frozen_Colossus_Ground, tooltipValue2 = 1, groundLabel = true }, -- Frozen Colossus (Frozen Colossus)
     [122177] = { tooltip = Abilities.Skill_Frozen_Colossus }, -- Major Vulnerability (Frozen Colossus)
     [122395] = { tooltip = Tooltips.Skill_Pestilent_Colossus }, -- Pestilent Colossus (Pestilent Colossus)
-    [122399] = { tooltip = Tooltips.Generic_AOE_Disease, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
-    [122400] = { tooltip = Tooltips.Generic_AOE_Disease, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
-    [122401] = { tooltip = Tooltips.Generic_AOE_Disease, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
+    [122399] = { tooltip = Tooltips.Skill_Pestilent_Colossus_Ground, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
+    [122400] = { tooltip = Tooltips.Skill_Pestilent_Colossus_Ground, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
+    [122401] = { tooltip = Tooltips.Skill_Pestilent_Colossus_Ground, tooltipValue2 = 1, groundLabel = true }, -- Pestilent Colossus (Pestilent Colossus)
     [122397] = { tooltip = Abilities.Skill_Pestilent_Colossus }, -- Major Vulnerability (Pestilent Colossus)
     [122388] = { tooltip = Tooltips.Skill_Glacial_Colossus, tooltipValue2Id = 122394 }, -- Glacial Colossus (Glacial Colossus)
     [122392] = { tooltip = Tooltips.Skill_Glacial_Colossus_Ground, groundLabel = true }, -- Glacial Colossus (Glacial Colossus)
@@ -5923,17 +5925,17 @@ Effects.EffectOverride = {
     [35776] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_2.dds', stack = 2, tooltip = Tooltips.Skill_Vampirism_Stage_2 }, -- Stage 2 Vampirism (Vampire General)
     [35783] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_3.dds', stack = 3, tooltip = Tooltips.Skill_Vampirism_Stage_3 }, -- Stage 3 Vampirism (Vampire General)
     [35792] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', stack = 4, tooltip = Tooltips.Skill_Vampirism_Stage_4 }, -- Stage 4 Vampirism (Vampire General)
-    [33152] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', tooltip = Tooltips.Skill_Feed }, -- Feed
-    [33177] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed
-    [33175] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', unbreakable = 1 }, -- Feed (Vampire - Feed)
+    [33152] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', tooltip = Tooltips.Skill_Feed }, -- Feed
+    [33177] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed
+    [33175] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', unbreakable = 1 }, -- Feed (Vampire - Feed)
     [33182] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = Abilities.Passive_Savage_Feeding, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Savage Feeding - Rank 1)
     [33183] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Passive_Savage_Feeding }, -- Off-Balance Self (Savage Feeding - Rank 1)
     [46047] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = Abilities.Passive_Savage_Feeding, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Savage Feeding - Rank 2)
     [46046] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = Abilities.Skill_Off_Balance, tooltip = Abilities.Passive_Savage_Feeding }, -- Off-Balance Self (Savage Feeding - Rank 2)
-    [40349] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, duration = .95, tooltip = Tooltips.Generic_Stun }, -- Feed (Blood Ritual - Rank 1)
-    [40351] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed (Blood Ritual - Rank 1)
-    [40350] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', unbreakable = 1 }, -- Feed (Blood Ritual - Rank 1)
-    [40353] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = Abilities.Skill_Feed, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Blood Ritual - Rank 1)
+    [40349] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, duration = .95, tooltip = Tooltips.Generic_Stun }, -- Feed (Blood Ritual - Rank 1)
+    [40351] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed (Blood Ritual - Rank 1)
+    [40350] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', unbreakable = 1 }, -- Feed (Blood Ritual - Rank 1)
+    [40353] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', name = Abilities.Skill_Feed, tooltip = Tooltips.Generic_Stun }, -- Uber Attack (Blood Ritual - Rank 1)
     [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Passive_Blood_Ritual, Abilities.Set_Cooldown), tooltip = Tooltips.Skill_Blood_Ritual }, -- Fed on ally (Blood Ritual)
 
     ----------------------------------------------------------------
@@ -5972,12 +5974,12 @@ Effects.EffectOverride = {
     [44676] = { hide = true }, -- SELF SNARE
     [39507] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_profane_symbol.dds', name = Abilities.Skill_Profane_Symbol }, -- VampInitStun_Profane
     [44222] = { hide = true }, -- VampireInitiation_Lamae
-    [39728] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', name = Abilities.Skill_Feed }, -- VampInit_TheaterFeed
+    [39728] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', name = Abilities.Skill_Feed }, -- VampInit_TheaterFeed
     [39509] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', name = Abilities.Skill_Vampirism }, -- VampInit_PC Becomes a Vampire
     [39422] = { hide = true }, -- Mist Form
     [56684] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike
-    [39692] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = -5.2, tooltip = Tooltips.Skill_Feed_Quest }, -- Feed
-    [39698] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_feed.dds' }, -- Feed
+    [39692] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = -5.2, tooltip = Tooltips.Skill_Feed_Quest }, -- Feed
+    [39698] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed
     [39693] = { hide = true }, -- Feed
 
     ----------------------------------------------------------------
