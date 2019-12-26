@@ -774,6 +774,8 @@ LUIE.DebugAuras = {
     [91453] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
     [91449] = true, -- Breda's Magnificent Mead -- Breda's Bottomless Mead Mug
     [86075] = true, -- Breda's Magnificent Mead -- Breda's Magnificent Mead
+    [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
+    [125832] = true, -- Marionette Summon (Skeletal Marionette)
 
     [26829] = true, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
     [26736] = true, -- Bear Trap (Battered Bear Trap)
@@ -815,6 +817,14 @@ LUIE.DebugAuras = {
     [74151] = true, -- Stun (Hidden Pressure Vent)
     [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
     [74232] = true, -- Stun (Malacath's Wrathful Flame)
+
+    [119099] = true, -- Brittle Burial Urn (Brittle Burial Urn)
+    [125053] = true, -- Brittle Burial Urn (Brittle Burial Urn)
+    [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [125822] = true, -- Mount Block (Corruption of Maarselok)
+    [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
+    [119107] = true, -- Stun (Winnowing Plague Decoction)
+    [119108] = true, -- NAME ME Infect Brew (Winnowing Plague Decoction)
 
     -- Crown Mementos
     [85344] = true, -- Atronach Aura (Storm Atronach Aura)

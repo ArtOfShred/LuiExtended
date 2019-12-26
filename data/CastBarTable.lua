@@ -147,6 +147,7 @@ CastBarTable.CastChannelOverride = {
     [85354] = true, -- Dagger Juggling (Consumable Verison)
     [85353] = true, -- Sword Swallowing (Consumable Version)
     [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
+    [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
 
     -- Memento (Crown)
     [85347] = true, -- Storm Orb Juggle (Atronach Juggling)
@@ -174,6 +175,9 @@ CastBarTable.CastChannelOverride = {
     -- Memento (DLC)
     [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
     [79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
+    [119099] = true, -- Brittle Burial Urn (Brittle Burial Urn)
+    [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
     -- Vampire
     [33175] = true, -- Feed (Vampire)
@@ -261,6 +265,7 @@ CastBarTable.CastDurationFix = {
     [85353] = 12000, -- Sword Swallowing (Consumable Version)
     [102077] = 2000, -- Jester's Festival Scintillator (Jester's Scintillator)
     [81575] = 2000, -- Event - WitchFest Cauldron (Witchmother's Whistle)
+    [125820] = 7500, -- Witches Festival 2019 Marionette (Skeletal Marionette)
 
     -- Memento (Crown)
     [85347] = 12000, -- Storm Orb Juggle (Atronach Juggling)
@@ -289,7 +294,11 @@ CastBarTable.CastDurationFix = {
     [79510] = 6500, -- TROPHY Blood Oath (Blade of the Blood Oath)
     [74151] = 2500, -- Stun (Hidden Pressure Vent)
     [92862] = 4500, -- Ringing Bell (Dreamer's Chime)
+    [119099] = 4000, -- Brittle Burial Urn (Brittle Burial Urn)
+    [125816] = 10000, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [125817] = 5000, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
+    -- Vampire / Werewolf
     [33175] = 6300, -- Feed (Vampire)
     [40350] = 5300, -- Feed (Vampire - Bite Player)
     [33208] = 3000, -- Devour (Werewolf)
@@ -393,6 +402,7 @@ CastBarTable.IsCast = {
     [110481] = true, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
     [113288] = true, -- U20 Crown Memento 1 (Mire Drum)
     [113291] = true, --  U20 Crown Memento 2 (Vossa-satl)
+    [125820] = true, -- Witches Festival 2019 Marionette (Skeletal Marionette)
 
     -- Memento (Crown)
     [85347] = true, -- Storm Orb Juggle (Atronach Juggling)
@@ -423,6 +433,10 @@ CastBarTable.IsCast = {
     [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
     [74151] = true, -- Stun (Hidden Pressure Vent)
     [92862] = true, -- Ringing Bell (Dreamer's Chime)
+    [119099] = true, -- Brittle Burial Urn (Brittle Burial Urn)
+    [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [125817] = true, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
+    [119107] = true, -- NAME ME Infect Brew (Winnowing Plague Decoction)
 
     -- Nightblade
     [33398] = true, -- Death Stroke (Nightblade)

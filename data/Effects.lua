@@ -3242,6 +3242,7 @@ Effects.EffectOverride = {
     [92232] = { icon = 'LuiExtended/media/icons/abilities/ability_event_pelinals_ferocity.dds', tooltip = Tooltips.Experience_Seasonal_Pelinal }, -- Pelinal's Ferocity (Scroll of Pelinal's Ferocity)
     [91449] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
     [86075] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds', tooltip = Tooltips.Experience_Seasonal_Event }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
+    [125820] = { icon = 'LuiExtended/media/icons/mementos/memento_skeletal_marionette.dds', name = Abilities.Memento_Skeletal_Marionette }, -- Witches Festival 2019 Marionette (Skeletal Marionette)
 
     -- Base Mementos
     [26829] = { icon = 'LuiExtended/media/icons/mementos/memento_almalexias_enchanted_lantern.dds', name = Abilities.Memento_Almalexias_Lantern, unbreakable = 1, tooltip = Tooltips.Memento_Almalexias_Lantern }, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
@@ -3279,6 +3280,11 @@ Effects.EffectOverride = {
     [73685] = { hide = true }, -- Rkindaleft Trophy (Hidden Pressure Vent)
     [73686] = { hide = true, icon = 'LuiExtended/media/icons/mementos/memento_malacaths_wrathful_flame.dds', name = Abilities.Memento_Malacaths_Wrathful_Flame }, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
     [74232] = { hide = true }, -- Stun (Malacath's Wrathful Flame)
+
+    [119099] = { icon = 'LuiExtended/media/icons/mementos/memento_brittle_burial_urn.dds' }, -- Brittle Burial Urn (Brittle Burial Urn)
+    [125816] = { icon = 'LuiExtended/media/icons/mementos/memento_corruption_of_maarselok.dds', name = Abilities.Memento_Corruption_of_Maarselok }, -- Maarselok Corruption Memento (Corruption of Maarselok)
+    [125817] = { icon = 'LuiExtended/media/icons/mementos/memento_dragonhorn_curio.dds', name = Abilities.Memento_Dragonhorn_Curio }, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
+    [119107] = { icon = 'LuiExtended/media/icons/mementos/memento_winnowing_plague_decoction.dds', hide = true, name = Abilities.Memento_Winnowing_Plague_Decoction }, -- NAME ME Infect Brew (Winnowing Plague Decoction)
 
     -- Crown Store Mementos
     [85344] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_aura.dds', name = Abilities.Memento_Storm_Atronach_Aura, forcedContainer = 'short', tooltip = Tooltips.Memento_Storm_Atronach_Aura, unbreakable = 1 }, -- Atronach Aura (Storm Atronach Aura)

@@ -283,6 +283,10 @@ local AbilityTables = {
     Memento_Ghost_Lantern             = GetCollectibleName(5212),
     Memento_Mire_Drum                 = GetCollectibleName(5734),
     Memento_Vossa_Satl                = GetCollectibleName(5735),
+    Memento_Corruption_of_Maarselok   = GetCollectibleName(6642),
+    Memento_Dragonhorn_Curio          = GetCollectibleName(6641),
+    Memento_Winnowing_Plague_Decoction = GetCollectibleName(6368),
+    Memento_Skeletal_Marionette       = GetCollectibleName(6643),
 
     -- ---------------------------------------------------
     -- ITEM SETS -----------------------------------------
