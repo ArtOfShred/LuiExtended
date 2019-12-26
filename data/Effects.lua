@@ -1637,6 +1637,8 @@ Effects.AssistantIcons = {
     [GetCollectibleName(301)] = 'LuiExtended/media/icons/abilities/ability_innate_assistant_nuzhimeh.dds',
     [GetCollectibleName(300)] = 'LuiExtended/media/icons/abilities/ability_innate_assistant_pirharri.dds',
     [GetCollectibleName(267)] = 'LuiExtended/media/icons/abilities/ability_innate_assistant_tythis.dds',
+    [GetCollectibleName(6376)] = 'LuiExtended/media/icons/abilities/ability_innate_assistant_ezabi.dds',
+    [GetCollectibleName(6378)] = 'LuiExtended/media/icons/abilities/ability_innate_assistant_fezez.dds',
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

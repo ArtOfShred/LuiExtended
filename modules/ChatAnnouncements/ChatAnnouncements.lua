@@ -2065,7 +2065,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     elseif currency == CURT_UNDAUNTED_KEYS then -- Undaunted Keys
         if not ChatAnnouncements.SV.Currency.CurrencyUndauntedChange then return end
         currencyTypeColor = CurrencyUndauntedColorize:ToHex()
-        currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_eventticket.dds|t" or "" -- TODO: Get the right icon here
+        currencyIcon = ChatAnnouncements.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/undauntedkey.dds|t" or ""
         currencyName = zo_strformat(ChatAnnouncements.SV.Currency.CurrencyUndauntedName, UpOrDown)
         currencyTotal = ChatAnnouncements.SV.Currency.CurrencyUndauntedShowTotal
         messageTotal = ChatAnnouncements.SV.Currency.CurrencyMessageTotalUndaunted
@@ -2161,8 +2161,8 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
     elseif reason == 3 and UpOrDown < 0 then
         messageChange = g_tradeTarget ~="" and ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeOut or ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeOutNoName
         if g_tradeTarget ~="" then type = "LUIE_CURRENCY_TRADE" end
-    -- Receive from Quest Reward (4), Medal (21), AH Refund (32)
-    elseif reason == 4 or reason == 21 or reason == 32 then
+    -- Receive from Quest Reward (4), Medal (21), AH Refund (32), Jump Failure Refund (54)
+    elseif reason == 4 or reason == 21 or reason == 32 or reason == 54 then
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
     -- Sell to Fence (63)
     elseif reason == 63 then
@@ -2321,7 +2321,6 @@ elseif reason == 14 or reason == 40 or reason == 41 or reason == 75 then
     elseif reason == 39 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 46 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 53 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 54 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 58 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 66 then messageChange = zo_strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     -- END DEBUG EVENTS
@@ -6706,7 +6705,7 @@ function ChatAnnouncements.HookFunction()
 		local finalText -- Alert
 		local sound -- All
 		local flagDisplay -- Flag to display a message
-		
+
 		-- check if the skill point change was due to skyshards
 		if oldPartialPoints ~= newPartialPoints or changeReason == SKILL_POINT_CHANGE_REASON_SKYSHARD_INSTANT_UNLOCK then
 			flagDisplay = true
@@ -6722,7 +6721,7 @@ function ChatAnnouncements.HookFunction()
 				messageParams:SetText(largeText, zo_strformat(SI_SKYSHARD_GAINED_POINTS, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL))
 				textPart1 = (stringPrefix .. ": ")
 				finalText = zo_strformat("<<1>> (<<2>>/<<3>>)", largeText, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL)
-				
+
 				if stringPrefix ~= "" then
 					if ChatAnnouncements.SV.Skills.SkillPointsPartial then
 						stringPart1 = SkillPointColorize1:Colorize(zo_strformat("<<1>><<2>><<3>> ", bracket1[ChatAnnouncements.SV.Skills.SkillPointBracket], largeText, bracket2[ChatAnnouncements.SV.Skills.SkillPointBracket]))
@@ -6738,7 +6737,7 @@ function ChatAnnouncements.HookFunction()
 					stringPart2 = ""
 				end
 				finalMessage = zo_strformat("<<1>><<2>>", stringPart1, stringPart2)
-				
+
 			else
 				local messageText
 				-- if there are no leftover skyshard pieces, don't include them in the message
@@ -6746,7 +6745,7 @@ function ChatAnnouncements.HookFunction()
 					messageText = zo_strformat(SI_SKILL_POINT_GAINED, numSkillPointsGained)
 				else
 					messageText = zo_strformat(SI_SKILL_POINT_AND_SKYSHARD_PIECES_GAINED, numSkillPointsGained, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL)
-				end			
+				end
 				messageParams:SetText(largeText, messageText)
 				messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
 				finalText = messageText
