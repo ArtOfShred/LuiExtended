@@ -1534,7 +1534,6 @@ local strings = {
     SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1 =              "Boss",
     SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2 =              "Elite",
     SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3 =              "Normal",
-
     SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC =             "Enable Sound - <<1>>",
     SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC_TP =          "Enable to play a sound for <<1>> abilities.",
     SI_LUIE_LAM_CI_ALERT_SOUND_POWER =                   "Power",
