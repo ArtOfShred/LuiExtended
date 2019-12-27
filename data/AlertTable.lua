@@ -15,20 +15,43 @@ local SNARE = 6
 local UNBREAKABLE = 7
 
 LUIE.Data.AlertTable = {
-    -- PRIORITY NOTES:
-    -- 1 = VMA/Trial/Dungeon
-    -- 2 = ELITE NPC/QUEST BOSS
-    -- 3 = Normal NPC
 
+    -- SET A PRIORITY
+    -- priority = 1-3: (1 = ARENA/DUNGEON/TRIAL, 2 = ELITE NPC/QUEST BOSS, 3 = NORMAL NPC)
+
+    -- MITIGATION ALERTS
+    -- block = true -- Show a Block Alert
     -- bs = true -- Add indicator for Block Stagger to effect
-    -- auradetect = true -- Detect aura application rather than using targeting info
-    -- eventdetect = true -- Detect combat event application rather than using targeting info
-    -- refire = "x" -- refire duration
+    -- dodge = true -- Show a Dodge Alert
+    -- avoid = true -- Show an Avoid Alert
+    -- interrupt = true -- Show an Interrupt Alert
+    -- unmit = true -- Show an unmitigable alert
+
+    -- MISC ALERTS
+    -- power = true -- Show a power alert
+    -- summon = true -- Show a summon alert
+    -- destroy = true -- Show a destroy alert
+
+    -- RESULT / FILTERING
+    -- result = ACTION_RESULT_TYPE -- The action result for combat events to detect
+    -- eventdetect = true -- Detect combat events without a source or target for abilities not directly targeting the player
+    -- auradetect = true -- Detect aura application rather than using targeting info - can omit result field if this is true
+
+    -- SOURCE NAME MODIFICATION
     -- fakeName = string -- Set this name for the source
-    -- skipcheck = true -- display on any event fired rather than just event started
-    -- skipcheck -- DEPRICATE
-    -- eventDetect -- doesn't need a result, ignoreRefresh = ignores refresh event here
-    -- result = ONLY ON THIS ACTION RESULT!!!!
+    -- bossName = true -- Use the name of the current BOSS target frame for this ability source if possible
+    -- bossMatch = NAME -- If there are multiple bosses, look for this name and use it as the source if possible
+
+    -- CC TYPE
+    -- cc = STUN/DISORIENT/FEAR/STAGGER/SILENCE/SNARE/UNBREAKABLE -- If applicable set the CC type of this effect here
+
+    -- DURATION
+    -- duration = timeMs -- Set the duration in MS here for the cast IF applicable, power/summon/destroy alerts shouldn't use durations, and very long events can omit duration as well (long ground effects are a good case for this)
+
+    -- OTHER MODIFIERS
+    -- refire = "x" -- refire duration
+    -- skipcheck = true -- display on any event fired rather than just event started -- TODO: DEPRICATE THIS
+    -- ignoreRefresh = ignores refresh event here
 
     --------------------------------------------------
     -- JUSTICE NPC'S ---------------------------------

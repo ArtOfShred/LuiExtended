@@ -277,7 +277,6 @@ function CombatInfo.CreateSettings()
                 -- Bar Proc Sound Choice
                 type = "dropdown",
                 scrollable = true,
-                name = "",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.ProcSoundName end,
@@ -1290,8 +1289,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Priority 3
                 type    = "checkbox",
-                name    = "Enable Sound - (No CC) Priority 3",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC)),
                 getFunc = function() return Settings.alerts.toggles.soundEnable3 end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnable3 = v end,
                 width = "half",
@@ -1303,8 +1302,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Priority 3
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.sound3 end,
@@ -1317,8 +1314,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Priority 3 CC
                 type    = "checkbox",
-                name    = "Enable Sound - (Hard CC) Priority 3",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HARD_CC)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HARD_CC)),
                 getFunc = function() return Settings.alerts.toggles.soundEnable3CC end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnable3CC = v end,
                 width = "half",
@@ -1330,8 +1327,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Priority 3 CC
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.sound3CC end,
@@ -1344,8 +1339,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Priority 3 UB
                 type    = "checkbox",
-                name    = "Enable Sound - (Unbreakable CC) Priority 3",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNBREAKABLE_CC)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_3), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNBREAKABLE_CC)),
                 getFunc = function() return Settings.alerts.toggles.soundEnable3UB end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnable3UB = v end,
                 width = "half",
@@ -1357,8 +1352,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Priority 3 UB
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.sound3UB end,
@@ -1371,8 +1364,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Priority 2
                 type    = "checkbox",
-                name    = "Enable Sound - (No CC) Priority 2",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC)),
                 getFunc = function() return Settings.alerts.toggles.soundEnable2 end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnable2 = v end,
                 width = "half",
@@ -1384,8 +1377,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Priority 2
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.sound2 end,
@@ -1398,8 +1389,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Priority 2 CC
                 type    = "checkbox",
-                name    = "Enable Sound - (Hard CC) Priority 2",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HARD_CC)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HARD_CC)),
                 getFunc = function() return Settings.alerts.toggles.soundEnable2CC end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnable2CC = v end,
                 width = "half",
@@ -1411,8 +1402,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Priority 2 CC
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.sound2CC end,
@@ -1425,8 +1414,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Priority 2 UB
                 type    = "checkbox",
-                name    = "Enable Sound - (Unbreakable CC) Priority 2",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNBREAKABLE_CC)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_2), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNBREAKABLE_CC)),
                 getFunc = function() return Settings.alerts.toggles.soundEnable2UB end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnable2UB = v end,
                 width = "half",
@@ -1438,8 +1427,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Priority 2 UB
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.sound2UB end,
@@ -1452,8 +1439,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Priority 1
                 type    = "checkbox",
-                name    = "Enable Sound - (No CC) Priority 1",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC)),
                 getFunc = function() return Settings.alerts.toggles.soundEnable1 end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnable1 = v end,
                 width = "half",
@@ -1465,8 +1452,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Priority 1
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.sound1 end,
@@ -1479,8 +1464,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Priority 1 CC
                 type    = "checkbox",
-                name    = "Enable Sound - (Hard CC) Priority 1",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HARD_CC)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HARD_CC)),
                 getFunc = function() return Settings.alerts.toggles.soundEnable1CC end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnable1CC = v end,
                 width = "half",
@@ -1492,8 +1477,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Priority 1 CC
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.sound1CC end,
@@ -1506,8 +1489,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Priority 1 UB
                 type    = "checkbox",
-                name    = "Enable Sound - (Unbreakable CC) Priority 1",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNBREAKABLE_CC)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_PRIORITY_1), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_UNBREAKABLE_CC)),
                 getFunc = function() return Settings.alerts.toggles.soundEnable1UB end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnable1UB = v end,
                 width = "half",
@@ -1519,8 +1502,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Priority 1 UB
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.sound1UB end,
@@ -1533,8 +1514,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Unmit
                 type    = "checkbox",
-                name    = "Play Sound - Unmitigable",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC_TP), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_UNMIT)),
                 getFunc = function() return Settings.alerts.toggles.soundEnableUnmit end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnableUnmit = v end,
                 width = "half",
@@ -1546,8 +1527,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Unmit
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.soundUnmit end,
@@ -1560,8 +1539,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Power
                 type    = "checkbox",
-                name    = "Play Sound Power",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_POWER)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC_TP), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER)),
                 getFunc = function() return Settings.alerts.toggles.soundEnablePower end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnablePower = v end,
                 width = "half",
@@ -1573,8 +1552,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Power
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.soundPower end,
@@ -1587,8 +1564,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Summon
                 type    = "checkbox",
-                name    = "Play Sound - Summon",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_SUMMON)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC_TP), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_SUMMON)),
                 getFunc = function() return Settings.alerts.toggles.soundEnableSummon end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnableSummon = v end,
                 width = "half",
@@ -1600,8 +1577,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Summon
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.soundSummon end,
@@ -1614,8 +1589,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Play Sound Destroy
                 type    = "checkbox",
-                name    = "Play Sound - Destroy",
-                tooltip = "TODO",
+                name    = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC), GetString(SI_LUIE_LAM_CI_ALERT_SOUND_DESTROY)),
+                tooltip = zo_strformat(GetString(SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_MISC_TP), GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY)),
                 getFunc = function() return Settings.alerts.toggles.soundEnableDestroy end,
                 setFunc = function(v) Settings.alerts.toggles.soundEnableDestroy = v end,
                 width = "half",
@@ -1627,8 +1602,6 @@ function CombatInfo.CreateSettings()
                 -- Sound Destroy
                 type = "dropdown",
                 scrollable = true,
-                name = "",
-                tooltip = "TODO",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.alerts.sounds.soundDestroy end,
@@ -1768,7 +1741,6 @@ function CombatInfo.CreateSettings()
                 -- Sound CC
                 type = "dropdown",
                 scrollable = true,
-                name = "",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.playSoundOption end,
@@ -2000,7 +1972,6 @@ function CombatInfo.CreateSettings()
                 -- SOUND - aoePlayerUltimate
                 type = "dropdown",
                 scrollable = true,
-                name = "",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoePlayerUltimateSound end,
@@ -2042,7 +2013,6 @@ function CombatInfo.CreateSettings()
                 -- SOUND - aoePlayerNormal
                 type = "dropdown",
                 scrollable = true,
-                name = "",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoePlayerNormalSound end,
@@ -2084,7 +2054,6 @@ function CombatInfo.CreateSettings()
                 -- SOUND - aoePlayerSet
                 type = "dropdown",
                 scrollable = true,
-                name = "",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoePlayerSetSound end,
@@ -2126,7 +2095,6 @@ function CombatInfo.CreateSettings()
                 -- SOUND - aoeTraps
                 type = "dropdown",
                 scrollable = true,
-                name = "",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoeTrapsSound end,
@@ -2168,7 +2136,6 @@ function CombatInfo.CreateSettings()
                 -- SOUND - aoeNPCBoss
                 type = "dropdown",
                 scrollable = true,
-                name = "",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoeNPCBossSound end,
@@ -2210,7 +2177,6 @@ function CombatInfo.CreateSettings()
                 -- SOUND - aoeNPCElite
                 type = "dropdown",
                 scrollable = true,
-                name = "",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoeNPCEliteSound end,
@@ -2252,7 +2218,6 @@ function CombatInfo.CreateSettings()
                 -- SOUND - aoeNPCNormal
                 type = "dropdown",
                 scrollable = true,
-                name = "",
                 choices = SoundsList,
                 sort = "name-up",
                 getFunc = function() return Settings.cct.aoeNPCNormalSound end,
