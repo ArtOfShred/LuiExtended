@@ -1025,6 +1025,9 @@ local strings = {
     -- CI CCT
     SI_LUIE_LAM_CI_CCT_HEADER =                          "Crowd Control Tracker",
     SI_LUIE_LAM_CI_CCT_DESCRIPTION =                     "Display an animated icon when you are under the effects of crowd control. The options below allow you to customize the color, sound, and naming method for the alerts displayed. Additionally you can display alerts when standing in the radius of damaging area of effect abilities, with the option to enable/disable various categories with different sounds.",
+    SI_LUIE_LAM_CI_CCT_UNLOCK =                          "Unlock Crowd Control Tracker",
+    SI_LUIE_LAM_CI_CCT_UNLOCK_TP =                       "Unlock to drag the Crowd Control Tracker frame.",
+    SI_LUIE_LAM_CI_CCT_RESET_TP =                        "This will reset the position of the Crowd Control Tracker frame.",
     SI_LUIE_LAM_CI_CCT_TOGGLE =                          "Enable Crowd Control Tracker",
     SI_LUIE_LAM_CI_CCT_TOGGLE_TP =                       "Enable to display an alert when under the effects of crowd control and display alerts when standing in enemy AOE effects if chosen.",
     SI_LUIE_LAM_CI_CCT_PVP_ONLY =                        "Enable only in PVP",

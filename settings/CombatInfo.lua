@@ -1628,19 +1628,19 @@ function CombatInfo.CreateSettings()
             {
                 -- Unlock CCT
                 type = "checkbox",
-                name = "Unlock Crowd Control Tracker (Inverse)",
-                tooltip = "ON - icon can me moved on the screen by left clicking and dragging, OFF - icon is locked in place and can not be moved",
-                default = Defaults.cct.unlocked,
+                name = GetString(SI_LUIE_LAM_CI_CCT_UNLOCK),
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_UNLOCK_TP),
+                default = Defaults.cct.unlock,
                 width = "half",
-                getFunc = function() return Settings.cct.unlocked end,
-                setFunc = function(newValue) Settings.cct.unlocked = newValue if newValue then CrowdControlTracker:SetupDisplay("draw") end CrowdControlTracker:InitControls() end,
+                getFunc = function() return Settings.cct.unlock end,
+                setFunc = function(newValue) Settings.cct.unlock = newValue if newValue then CrowdControlTracker:SetupDisplay("draw") end CrowdControlTracker:InitControls() end,
             },
             {
                 -- Reset CCT
                 type = "button",
                 name = GetString(SI_LUIE_LAM_RESETPOSITION),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RESET_TP),
-                func = nil,
+                tooltip = GetString(SI_LUIE_LAM_CI_CCT_RESET_TP),
+                func = CrowdControlTracker.ResetPosition,
                 width = "half",
             },
             {

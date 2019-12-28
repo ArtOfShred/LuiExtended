@@ -215,6 +215,13 @@ function CrowdControlTracker:SavePosition()
     LUIE_CCTracker:SetAnchor(CENTER, GuiRoot, CENTER, CombatInfo.SV.cct.offsetX, CombatInfo.SV.cct.offsetY)
 end
 
+function CrowdControlTracker.ResetPosition()
+    CombatInfo.SV.cct.offsetX = 0
+    CombatInfo.SV.cct.offsetY = 0
+    LUIE_CCTracker:ClearAnchors()
+    LUIE_CCTracker:SetAnchor(CENTER, GuiRoot, CENTER, 0, 0)
+end
+
 function CrowdControlTracker:OnUpdate(control)
     if CrowdControlTracker.Timer == 0 or not CrowdControlTracker.Timer then
         return
@@ -263,7 +270,7 @@ function CrowdControlTracker:OnAnimation(control, animationType, param)
             self.currentlyPlaying = self:StartAnimation(control, animationType)
         end
     elseif param then
-        LUIE_CCTracker:SetHidden(not CombatInfo.SV.cct.unlocked)
+        LUIE_CCTracker:SetHidden(not CombatInfo.SV.cct.unlock)
     end
 end
 
@@ -1085,7 +1092,7 @@ function CrowdControlTracker:InitControls()
     LUIE_CCTracker:SetAnchor(CENTER, GuiRoot, CENTER, CombatInfo.SV.cct.offsetX, CombatInfo.SV.cct.offsetY)
     LUIE_CCTracker:SetScale(CombatInfo.SV.cct.controlScale)
     LUIE_CCTracker_TextFrame_Label:SetFont(iconFont)
-    if CombatInfo.SV.cct.unlocked then
+    if CombatInfo.SV.cct.unlock then
         LUIE_CCTracker_TextFrame_Label:SetText("Unlocked")
     else
         LUIE_CCTracker_TextFrame_Label:SetText("")
@@ -1108,8 +1115,8 @@ function CrowdControlTracker:InitControls()
     LUIE_CCTracker_IconFrame_IconBorderHighlight:SetColor(1,1,1)
     LUIE_CCTracker_TextFrame_Label:SetColor(1,1,1)
 
-    LUIE_CCTracker:SetMouseEnabled(CombatInfo.SV.cct.unlocked)
-    LUIE_CCTracker:SetMovable(CombatInfo.SV.cct.unlocked)
+    LUIE_CCTracker:SetMouseEnabled(CombatInfo.SV.cct.unlock)
+    LUIE_CCTracker:SetMovable(CombatInfo.SV.cct.unlock)
     LUIE_CCTracker:SetAlpha(1)
 
     LUIE_CCTracker_BreakFreeFrame_Left_IconBorder:SetTexture(iconBorder)
@@ -1125,10 +1132,10 @@ function CrowdControlTracker:InitControls()
     LUIE_CCTracker_BreakFreeFrame_Right_Icon:SetTexture(defaultDisorientIcon)
     LUIE_CCTracker_BreakFreeFrame_Right_Icon:SetTextureCoords(0.5,1,0,1)
     self:BreakFreeHidden(true)
-    self:TimerHidden(not CombatInfo.SV.cct.unlocked)
+    self:TimerHidden(not CombatInfo.SV.cct.unlock)
     LUIE_CCTracker_Timer_Label:SetText("69")
     LUIE_CCTracker_Timer_Label:SetColor(1,1,1,1)
-    LUIE_CCTracker:SetHidden(not CombatInfo.SV.cct.unlocked)
+    LUIE_CCTracker:SetHidden(not CombatInfo.SV.cct.unlock)
 end
 
 function CrowdControlTracker:FullReset()
