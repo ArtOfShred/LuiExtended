@@ -395,7 +395,7 @@ function CombatInfo.CreateSettings()
         name = GetString(SI_LUIE_LAM_CI_HEADER_POTION),
         controls = {
             {
-                -- Show Cooldowns (Potion Only when I get finished) -- TODO
+                -- Show Quickslot Cooldown
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_POTION),
                 tooltip = GetString(SI_LUIE_LAM_CI_POTION_TP),
@@ -760,19 +760,9 @@ function CombatInfo.CreateSettings()
                 width = "full",
             },
             {
-                -- Mitigation Aura
-                type    = "checkbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_AURA)),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_AURA_TP),
-                getFunc = function() return Settings.alerts.toggles.mitigationAura end,
-                setFunc = function(v) Settings.alerts.toggles.mitigationAura = v end,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
-                default = Defaults.alerts.toggles.mitigationAura,
-            },
-            {
                 -- Mitigation Rank 3
                 type    = "checkbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_RANK3)),
+                name    = GetString(SI_LUIE_LAM_CI_ALERT_RANK3),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RANK3_TP),
                 getFunc = function() return Settings.alerts.toggles.mitigationRank3 end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationRank3 = v end,
@@ -782,7 +772,7 @@ function CombatInfo.CreateSettings()
             {
                 -- Mitigation Rank 2
                 type    = "checkbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_RANK2)),
+                name    = GetString(SI_LUIE_LAM_CI_ALERT_RANK2),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RANK2_TP),
                 getFunc = function() return Settings.alerts.toggles.mitigationRank2 end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationRank2 = v end,
@@ -792,12 +782,22 @@ function CombatInfo.CreateSettings()
             {
                 -- Mitigation Rank 1
                 type    = "checkbox",
-                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_RANK1)),
+                name    = GetString(SI_LUIE_LAM_CI_ALERT_RANK1),
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_RANK1_TP),
                 getFunc = function() return Settings.alerts.toggles.mitigationRank1 end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationRank1 = v end,
                 disabled = function() return not Settings.alerts.toggles.alertEnable end,
                 default = Defaults.alerts.toggles.mitigationRank1,
+            },
+            {
+                -- Mitigation Aura
+                type    = "checkbox",
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_AURA)),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_AURA_TP),
+                getFunc = function() return Settings.alerts.toggles.mitigationAura end,
+                setFunc = function(v) Settings.alerts.toggles.mitigationAura = v end,
+                disabled = function() return not (Settings.alerts.toggles.alertEnable) or not (Settings.alerts.toggles.mitigationRank1 or Settings.alerts.toggles.mitigationRank2 or Settings.alerts.toggles.mitigationRank3) end,
+                default = Defaults.alerts.toggles.mitigationAura,
             },
             {
                 -- Mitigation Dungeon
@@ -806,7 +806,7 @@ function CombatInfo.CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_CI_ALERT_DUNGEON_TP),
                 getFunc = function() return Settings.alerts.toggles.mitigationDungeon end,
                 setFunc = function(v) Settings.alerts.toggles.mitigationDungeon = v end,
-                disabled = function() return not Settings.alerts.toggles.alertEnable end,
+                disabled = function() return not (Settings.alerts.toggles.alertEnable) or not (Settings.alerts.toggles.mitigationRank1 or Settings.alerts.toggles.mitigationRank2 or Settings.alerts.toggles.mitigationRank3) end,
                 default = Defaults.alerts.toggles.mitigationDungeon,
             },
             {
@@ -831,8 +831,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Incoming Ability Filters
                 type = "dropdown",
-                name = "\t\t\t\t\tFilter Incoming Abilities (WIP)", -- TODO (when table is more complete) -- SI_LUIE_LAM_CI_ALERT_MITIGATION_FILTER
-                tooltip = "Choose whether to show all incoming abilities, only hard CC effects, or only unbreakable CC effects.\n\nNote this feature is currently WIP and many abilities are not flagged correctly by their CC type.", -- SI_LUIE_LAM_CI_ALERT_MITIGATION_FILTER_TP
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FILTER)),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_FILTER_TP),
                 choices = globalAlertOptions,
                 getFunc = function() return globalAlertOptions[Settings.alerts.toggles.alertOptions] end,
                 setFunc = function(value) Settings.alerts.toggles.alertOptions = globalAlertOptionsKeys[value] end,
@@ -873,8 +873,8 @@ function CombatInfo.CreateSettings()
             {
                 -- Show Crowd Control Border
                 type    = "checkbox",
-                name    = "\t\t\t\t\tShow Color Border for Crowd Control Type (WIP)", -- TODO (when table is more complete) -- SI_LUIE_LAM_CI_ALERT_MITIGATION_BORDER
-                tooltip = "Color the frame of the incoming ability icon based off the type of Crowd Control incoming (if any).\n\nNote this feature is currently WIP and many abilities are not flagged correctly by their CC type.", -- SI_LUIE_LAM_CI_ALERT_MITIGATION_BORDER_TP
+                name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_BORDER)),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERT_MITIGATION_BORDER_TP),
                 getFunc = function() return Settings.alerts.toggles.showCrowdControlBorder end,
                 setFunc = function(v) Settings.alerts.toggles.showCrowdControlBorder = v end,
                 disabled = function() return not ( Settings.alerts.toggles.showAlertMitigate and Settings.alerts.toggles.alertEnable) end,
@@ -1282,7 +1282,7 @@ function CombatInfo.CreateSettings()
 
             {
                 type = "header",
-                name = "ALERT SOUND OPTIONS",
+                name = GetString(SI_LUIE_LAM_CI_ALERT_SOUND_HEADER),
                 width = "full",
             },
 
@@ -1616,7 +1616,7 @@ function CombatInfo.CreateSettings()
     -- Crowd Control Tracker
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "submenu",
-        name = "Crowd Control Tracker",
+        name = GetString(SI_LUIE_LAM_CI_CCT_HEADER),
         controls = {
 
             -- CCT Description
@@ -1890,7 +1890,7 @@ function CombatInfo.CreateSettings()
                 getFunc = function() return unpack(Settings.cct.colors.unbreakable) end,
                 setFunc = function(r,g,b,a)
                     Settings.cct.colors.unbreakable = {r,g,b,a}
-                    CrowdControlTracker:InitControls() -- TODO: Probably don't need this line?
+                    CrowdControlTracker:InitControls()
                 end,
             },
             {

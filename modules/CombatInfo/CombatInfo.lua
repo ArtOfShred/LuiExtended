@@ -603,6 +603,11 @@ function CombatInfo.RegisterCombatInfo()
     if CombatInfo.SV.ShowTriggered or CombatInfo.SV.ShowToggled or CombatInfo.SV.CastBarEnable then
         eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CombatInfo.OnEffectChanged)
     end
+
+    -- Display default UI ultimate text if the LUIE option is enabled.
+    if CombatInfo.SV.UltimateLabelEnabled or CombatInfo.SV.UltimatePctEnabled then
+        SetSetting(SETTING_TYPE_UI, UI_SETTING_ULTIMATE_NUMBER, 0)
+    end
 end
 
 -- Used to populate abilities icons after the user has logged on

@@ -1023,6 +1023,7 @@ local strings = {
     SI_LUIE_LAM_CI_CASTBAR_GRADIENTC2_TP =               "Выберите конечный цвет градиента на кастбаре.",
 
     -- CI CCT
+    SI_LUIE_LAM_CI_CCT_HEADER =                          "Crowd Control Tracker",
     SI_LUIE_LAM_CI_CCT_DESCRIPTION =                     "Display an animated icon when you are under the effects of crowd control. The options below allow you to customize the color, sound, and naming method for the alerts displayed. Additionally you can display alerts when standing in the radius of damaging area of effect abilities, with the option to enable/disable various categories with different sounds.",
     SI_LUIE_LAM_CI_CCT_TOGGLE =                          "Enable Crowd Control Tracker",
     SI_LUIE_LAM_CI_CCT_TOGGLE_TP =                       "Enable to display an alert when under the effects of crowd control and display alerts when standing in enemy AOE effects if chosen.",
@@ -1488,7 +1489,7 @@ local strings = {
     SI_LUIE_LAM_CI_ALERT_COLOR_BASE =                    "Shared Label Color",
     SI_LUIE_LAM_CI_ALERT_COLOR_BASE_TP =                 "Set a color for label prefix and suffix.",
     SI_LUIE_LAM_CI_ALERT_MITIGATION_HEADER =             "Mitigation Alerts",
-    SI_LUIE_LAM_CI_ALERT_MITIGATION_DESCRIPTION =        "\t\t\t\t\tUse the following formatting characters to modify the mitigation alerts:\n\t\t\t\t\t%n Source Name\n\t\t\t\t\t%t Ability Name",
+    SI_LUIE_LAM_CI_ALERT_MITIGATION_DESCRIPTION =        "Use the following formatting characters to modify the mitigation alerts:\n\t\t\t\t\t%n Source Name\n\t\t\t\t\t%t Ability Name",
     SI_LUIE_LAM_CI_ALERT_MITIGATION_ENABLE =             "Enable Mitigation Alerts",
     SI_LUIE_LAM_CI_ALERT_MITIGATION_ENABLE_TP =          "Display alerts for abilities that can be mitigated by Block/Dodge/Avoid/Interrupt and abilities that are unmitigable.",
     SI_LUIE_LAM_CI_ALERT_MITIGATION_FILTER =             "Filter Incoming Abilities",
@@ -1510,7 +1511,6 @@ local strings = {
     SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME =               "(С именем)",
     SI_LUIE_LAM_CI_ALERT_MITIGATION_NAME_TP =            "(Префикс, когда имя врага получено корректно).",
     SI_LUIE_LAM_CI_ALERT_HEADER_CC_COLOR =               "Crowd Control Color Options",
-
     SI_LUIE_LAM_CI_ALERT_CC_COLOR_STUN =                 "Stun/Knockback/Knockdown",
     SI_LUIE_LAM_CI_ALERT_CC_COLOR_STUN_TP =              "Set an icon border color for incoming stun/knockback/knockdown effects.",
     SI_LUIE_LAM_CI_ALERT_CC_COLOR_DISORIENT =            "Disorient",
@@ -1525,7 +1525,7 @@ local strings = {
     SI_LUIE_LAM_CI_ALERT_CC_COLOR_UNBREAKABLE_TP =       "Set an icon border color for incoming unbreakable crowd control.",
     SI_LUIE_LAM_CI_ALERT_CC_COLOR_SNARE =                "Snare/Immobilize",
     SI_LUIE_LAM_CI_ALERT_CC_COLOR_SNARE_TP =             "Set an icon border color for incoming snare/immobilization effects.",
-
+    SI_LUIE_LAM_CI_ALERT_SOUND_HEADER =                  "Alert Sound Options",
     SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE =                  "Enable Sound - <<1>> (<<2>>)",
     SI_LUIE_LAM_CI_ALERT_SOUND_ENABLE_TP =               "Enable to play a sound for <<1>> (<<2>>) abilities.",
     SI_LUIE_LAM_CI_ALERT_SOUND_NO_CC =                   "No CC",
@@ -1544,7 +1544,6 @@ local strings = {
     SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP =         "Показывать предупреждение, когда ближайший враждебный NPC кастует важный бафф (такой сильный бафф, как бешенство).",
     SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP =       "Показывать предупреждение, когда ближайшая враждебная цель представляет как приоритетная цель для уничтожения (те, кто уменьшают исходящий или увеличивают получаемый урон, или предоставляют неуязвимость).",
     SI_LUIE_LAM_CT_NOTIFICATION_ALERT_SUMMON_TP =        "Показать значок, когда враг поблизости призывает дополнительных врагов.",
-
     SI_LUIE_LAM_CT_NOTIFICATION_POINTS =                 "Очки",
     SI_LUIE_LAM_CT_NOTIFICATION_RESOURCES =              "Ресурсы",
     SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP =           "Показывать оповещение в входе в бой.",

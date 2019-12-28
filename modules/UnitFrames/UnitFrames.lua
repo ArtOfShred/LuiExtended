@@ -328,6 +328,7 @@ end
 function UnitFrames.SetDefaultFramesSetting(frame, value)
     local key = "DefaultFramesNew" .. tostring(frame)
     if value == g_DefaultFramesOptions[3] then
+        SetSetting(SETTING_TYPE_UI, UI_SETTING_RESOURCE_NUMBERS, 0)
         UnitFrames.SV[key] = 3
     elseif value == g_DefaultFramesOptions[2] then
         UnitFrames.SV[key] = 2
