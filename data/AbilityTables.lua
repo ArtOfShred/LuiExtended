@@ -996,6 +996,7 @@ local AbilityTables = {
     Skill_Leeching_Bite               = GetString(SI_LUIE_SKILL_LEECHING_BITE),
     Skill_Fetcherfly_Colony           = GetString(SI_LUIE_SKILL_FETCHERFLY_COLONY),
     Skill_Fetcherfly_Swarm            = GetString(SI_LUIE_SKILL_FETCHERFLY_SWARM),
+    Skill_Call_Scribs                 = 38545,
 
     -- Daedra
     Skill_Summon_Daedric_Arch         = 65404,
@@ -1056,6 +1057,15 @@ local AbilityTables = {
     Trap_Lava                         = 5139,
 
     -- ---------------------------------------------------
+    -- WORLD BOSSES --------------------------------------
+    -- ---------------------------------------------------
+
+    Skill_Ferocious_Charge            = 83033,
+    Skill_Stone_Crusher               = 83160,
+    Skill_Molten_Impact               = 83203,
+    Skill_Molten_Pillar_Incalescence  = GetString(SI_LUIE_SKILL_MOLTEN_PILLAR_INCALESCENCE),
+
+    -- ---------------------------------------------------
     -- QUEST ABILITIES -----------------------------------
     -- ---------------------------------------------------
 
@@ -1107,15 +1117,18 @@ local AbilityTables = {
     -- Aldmeri Dominion
     Skill_Drain_Energy                = GetString(SI_LUIE_SKILL_DRAIN_ENERGY),
     Skill_Blessing                    = 33029,
+    Skill_Beckon_Gathwen              = GetString(SI_LUIE_SKILL_BECKON_GATHWEN),
+    Skill_Summon                      = 29585,
+    Skill_Ancestral_Spirit            = 48921,
+    Skill_Drinking                    = 23527,
     Skill_Disruption                  = 31321,
+    Skill_Voice_to_Wake_the_Dead      = 5030,
     Skill_Barrier_Rebuke              = GetString(SI_LUIE_SKILL_BARRIER_REBUKE),
     Skill_Dispel                      = 8490,
     Skill_Teleport_Scroll             = GetString(SI_LUIE_SKILL_TELEPORT_SCROLL),
     Skill_Purify                      = 22260,
     Skill_Bind_Hands                  = GetString(SI_LUIE_SKILL_BIND_HANDS),
     Skill_Bind_Bear                   = GetString(SI_LUIE_SKILL_BIND_BEAR),
-    Skill_Ferocious_Charge            = 83033,
-    Skill_Daedric_Explosion           = 83017,
     Skill_Aetherial_Shift             = GetString(SI_LUIE_SKILL_AETHERIAL_SHIFT),
     Skill_Free_Spirit                 = GetString(SI_LUIE_SKILL_FREE_SPIRIT),
     Skill_Unbind                      = GetString(SI_LUIE_SKILL_UNBIND),

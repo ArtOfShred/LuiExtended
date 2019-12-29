@@ -8145,7 +8145,7 @@ LUIE.DebugAuras = {
     --[88600] = true, -- Summon the Dead -- Necromancer
     [88602] = true, -- Summon the Dead -- Necromancer
     --[88618] = true, -- Summon the Dead -- Necromancer
-    --[88611] = true, -- Summon the Dead -- Necromancer
+    [88611] = true, -- Summon the Dead -- Necromancer
     [88607] = true, -- Summon the Dead -- Necromancer
     [88613] = true, -- Summon the Dead -- Necromancer
     [88621] = true, -- Summon the Dead -- Necromancer
@@ -8160,7 +8160,10 @@ LUIE.DebugAuras = {
     --[88601] = true, -- Summon the Dead -- Necromancer
     [88593] = true, -- Summon the Dead -- Necromancer
     --[88617] = true, -- Summon the Dead -- Necromancer
+    [88594] = true, -- Summon the Dead -- Necromancer
+    --[88595] = true, -- Summon the Dead -- Necromancer
     --[88596] = true, -- Summon the Dead -- Necromancer
+    [88612] = true, -- Summon the Dead -- Necromancer
     [88597] = true, -- Summon the Dead -- Necromancer
     [88598] = true, -- Summon the Dead -- Necromancer
     [88566] = true, -- Summon the Dead -- Necromancer
@@ -8888,7 +8891,7 @@ LUIE.DebugAuras = {
     -------------------------------------
 
     [51256] = true, -- Siphon (Shared Daedra)
-    --[31115] = true, -- Summon Dark Anchor (Daedric Synergy)
+    [31115] = true, -- Summon Dark Anchor (Daedric Synergy)
     [59129] = true, -- Generic Status Immune (Daedric Synergy)
     [94481] = true, -- Summon Dark Anchor (Daedric Synergy)
     [31129] = true, -- Anchor Summon Minions (Daedric Synergy)
@@ -10168,6 +10171,56 @@ LUIE.DebugAuras = {
     [88318] = true, -- Blast Furnace
 
     -------------------------------------
+    -- WORLD BOSSES ---------------------
+    -------------------------------------
+
+    -- World Boss - Windshriek Strand
+    [87283] = true, -- Regeneration (Skullbreaker)
+    [87284] = true, -- Regeneration (Skullbreaker)
+    [52024] = true, -- Rock Toss (Skullbreaker)
+    [84066] = true, -- Ground Shock (Skullbreaker)
+    [84072] = true, -- Ground Shock (Skullbreaker)
+    [84069] = true, -- Ground Shock (Skullbreaker)
+    [84068] = true, -- Ground Shock (Skullbreaker)
+    [84070] = true, -- Ground Shock (Skullbreaker)
+    [84074] = true, -- Ground Shock (Skullbreaker)
+    [84071] = true, -- Ground Shock (Skullbreaker)
+    [84073] = true, -- Ground Shock (Skullbreaker)
+    [84075] = true, -- Ground Shock (Skullbreaker)
+    [84067] = true, -- Effected (Skullbreaker)
+    [83651] = true, -- Feral Impact (Skullbreaker)
+    [83670] = true, -- Feral Impact (Skullbreaker)
+    [83980] = true, -- Feral Impact (Skullbreaker)
+    [83997] = true, -- Feral Impact (Skullbreaker)
+    [83668] = true, -- Feral Impact (Skullbreaker)
+    [83671] = true, -- Feral Impact (Skullbreaker)
+    [84076] = true, -- Carrion Call (Skullbreaker)
+    [84338] = true, -- Swoop (Harpy)
+
+    -- World Boss - Reaper's Henge
+    [58966] = true, -- RM-GB1 Flesh Atronach Boss (Varien)
+
+    -- World Boss - Deathsong Cleft
+    [32882] = true, -- V7369 Lurcher FX
+
+    -- World Boss - Big Ozur's Valley
+    [85070] = true, -- Blazing Bolt (Big Ozur)
+    [85071] = true, -- Blazing Bolt (Big Ozur)
+    [83180] = true, -- Molten Pillar (Big Ozur)
+    [83182] = true, -- Molten Pillar (Big Ozur)
+    [83183] = true, -- Molten Shackles (Big Ozur)
+    [83185] = true, -- Molten Shackles (Big Ozur)
+    [83186] = true, -- Molten Shackles (Big Ozur)
+    [83184] = true, -- Molten Shackles (Big Ozur)
+    [83206] = true, -- Molten Shackles (Big Ozur)
+    [83203] = true, -- Molten Impact (Big Ozur)
+    [83191] = true, -- Shaman Smash (Big Ozur)
+    [83196] = true, -- Shaman Smash (Big Ozur)
+    [83192] = true, -- Shaman Smash (Big Ozur)
+    [83193] = true, -- Shaman Smash (Big Ozur)
+    [83194] = true, -- Shaman Smash (Big Ozur)
+
+    -------------------------------------
     -- MAIN QUEST -----------------------
     -------------------------------------
 
@@ -10832,6 +10885,7 @@ LUIE.DebugAuras = {
     [83169] = true, -- Devour -- Snapjaw
     [83049] = true, -- Charge -- Clannfear
     [83038] = true, -- Charge -- Clannfear
+    [83036] = true, -- Ferocious Charge -- Clannfear
     [83033] = true, -- Ferocious Charge -- Clannfear
     [83039] = true, -- Ferocious Charge -- Clannfear
     [83040] = true, -- Focused Charge -- Clannfear

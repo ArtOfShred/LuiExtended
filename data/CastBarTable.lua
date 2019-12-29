@@ -193,9 +193,13 @@ CastBarTable.CastChannelOverride = {
     -- MSQ
     [39367] = true, -- Altar Use (Shadow of Sancre Tor)
     [36421] = true, -- Drink with Lyris (Council of the Five Companions)
+
+    -- Aldemeri Dominion
     [35192] = true, -- Q4620 Use Lodestone (Cast Adrift)
     [34567] = true, -- Q4621 PC Storm Drain (The Tempest Unleashed)
     [34701] = true, -- Q4621 Destory Horn (The Tempest Unleashed)
+    [23540] = true, -- Teleport (Lifting the Veil)
+    [46762] = true, -- Drinking Contest (The Great Tree)
     [21364] = true, -- Casting... (The Serpent's Beacon)
     [22889] = true, -- Purifying... (Corruption Stones)
     [21968] = true, -- Binding Bear... (Silent Village)
@@ -318,7 +322,10 @@ CastBarTable.CastDurationFix = {
     [36421] = 3000, -- Drink with Lyris (Council of the Five Companions)
 
     -- Aldmeri Quests
+    [33233] = 2000, -- 4625 Stun for Beckon 1.5s (Tears of the Two Moons)
     [34701] = 1950, -- Q4621 Destory Horn (The Tempest Unleashed)
+    [23540] = 3000, -- Teleport (Lifting the Veil)
+    [46762] = 4500, -- Drinking Contest (The Great Tree)
     [22448] = 3000, -- Q4266 Tie up Hendil (The First Patient)
     [21393] = 2500, -- Q4220 PC Chooses to Rescue (The Mallari-Mora)
     --[21112] = 1500, -- Q4220 PC Forced to L0
@@ -630,9 +637,14 @@ CastBarTable.IsCast = {
     [37827] = true, -- Stendarr's Protection (Shadow of Sancre Tor)
     [36421] = true, -- Drink with Lyris (Council of the Five Companions)
     [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
+
+    -- Aldmeri Dominion
     [35192] = true, -- Q4620 Use Lodestone (Cast Adrift)
+    [33233] = true, -- 4625 Stun for Beckon 1.5s (Tears of the Two Moons)
     [34567] = true, -- Q4621 PC Storm Drain (The Tempest Unleashed)
     [34701] = true, -- Q4621 Destory Horn (The Tempest Unleashed)
+    [23540] = true, -- Teleport (Lifting the Veil)
+    [46762] = true, -- Drinking Contest (The Great Tree)
     [21364] = true, -- Casting... (The Serpent's Beacon)
     [21409] = true, -- Reading... (The Serpent's Beacon)
     [22889] = true, -- Purifying... (Corruption Stones)

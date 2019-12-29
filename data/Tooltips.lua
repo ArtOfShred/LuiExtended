@@ -1069,6 +1069,7 @@ LUIE.Data.Tooltips = {
     Skill_Hardened_Shell                            = GetString(SI_LUIE_SKILL_HARDENED_SHELL_TP),
     Skill_Slash_Cliff_Strider                       = GetString(SI_LUIE_SKILL_SLASH_CLIFF_STRIDER_TP),
     Skill_Baleful_Call                              = GetString(SI_LUIE_SKILL_BALEFUL_CALL_TP),
+    Skill_Draining_Bite                             = GetString(SI_LUIE_SKILL_DRAINING_BITE_TP),
 
     -- Human NPCs
     Skill_Cleave_Stance                             = GetString(SI_LUIE_SKILL_CLEAVE_STANCE_TP),
@@ -1162,10 +1163,16 @@ LUIE.Data.Tooltips = {
     Skill_Turret_Mode                               = GetString(SI_LUIE_SKILL_TURRET_MODE_TP),
 
     ----------------------------------------------------------------
-    -- WORLD ------------------------------------------------------
+    -- WORLD -------------------------------------------------------
     ----------------------------------------------------------------
 
     Skill_Static_Charge                             = GetString(SI_LUIE_SKILL_STATIC_CHARGE_TP),
+
+    ----------------------------------------------------------------
+    -- WORLD BOSSES ------------------------------------------------
+    ----------------------------------------------------------------
+
+    Skill_Molten_Pillar                             = GetString(SI_LUIE_SKILL_MOLTEN_PILLAR_TP),
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------
@@ -1176,6 +1183,7 @@ LUIE.Data.Tooltips = {
 
     -- Aldmeri Quests
     Skill_Blessing_Gathwen                          = GetString(SI_LUIE_SKILL_BLESSING_GATHWEN_TP),
+    Skill_Disguise_Altmer_Glamour                   = GetString(SI_LUIE_SKILL_DISGUISE_ALTMER_GLAMOUR_TP),
     Skill_Spiritual_Cloak                           = GetString(SI_LUIE_SKILL_SPIRITUAL_CLOAK_TP),
     Skill_Divine_Speed                              = GetString(SI_LUIE_SKILL_DIVINE_SPEED_TP),
     Skill_Lightning_Fury                            = GetString(SI_LUIE_SKILL_QUEST_LIGHTNING_FURY_TP),

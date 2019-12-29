@@ -1091,7 +1091,7 @@ local strings = {
     SI_LUIE_SKILL_RETALIATION_NPC_TP =                   "Blocking and counterattacking any incoming hits for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_BRIARHEART_RESURRECTION_TP =           "A Hagraven has restarted the beating briarheart of this enemy, restoring them to life.",
     SI_LUIE_SKILL_ENRAGE_DEVOTED_TP =                    "Increase damage done by |cFFFFFF20|r% for |cFFFFFF2|r minutes.",
-    SI_LUIE_SKILL_ICE_PILLAR_TP =                        "Nearby enemies are chilled, reducing their Movement Speed by |cFFFFFF60|r%.\n\nThe Ogre Shaman's Frost Bolts will apply a |cFFFFFF4|r second immobilize on any chilled targets.",
+    SI_LUIE_SKILL_ICE_PILLAR_TP =                        "Enemies within |cFFFFFF3|r meters of the pillar are chilled, reducing their Movement Speed by |cFFFFFF60|r%.\n\nThe Ogre Shaman's Frost Bolts will freeze any chilled targets, inflicting them with a |cFFFFFF4|r second immobilize.",
     SI_LUIE_SKILL_SUMMON_BEAST_TP =                      "A beast fights at your side. The beast remains for |cFFFFFF2|r minutes or until killed.",
     SI_LUIE_SKILL_CONTROL_BEAST_TP =                     "Increase damage done by |cFFFFFF83|r% for |cFFFFFF<<1>>|r seconds while the channel is maintained.",
     SI_LUIE_SKILL_HEALING_SALVE_TP =                     "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.\n\nHealing doubles in power after |cFFFFFF2|r seconds, leading into a stronger burst heal at the end of the channel.",
@@ -1271,6 +1271,14 @@ local strings = {
     SI_LUIE_SKILL_WING_GUST_STUN =                       "Knocked back for |cFFFFFF<<1>>|r seconds.\n\nMovement speed reduced by |cFFFFFF50|r% for |cFFFFFF<<2>>|r seconds.",
     SI_LUIE_SKILL_WING_GUST_SNARE =                      "Knocked back for |cFFFFFF<<2>>|r seconds.\n\nMovement speed reduced by |cFFFFFF50|r% for |cFFFFFF<<1>>|r seconds.",
     SI_LUIE_SKILL_ENTROPY_NPC_TP =                       "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF6|r seconds while Entropy remains active.",
+
+    SI_LUIE_SKILL_BECKON_GATHWEN =                       "Beckon Gathwen",
+    SI_LUIE_SKILL_DRAINING_BITE_TP =                     "Afflicted with Bleeding Damage every |cFFFFFF0.2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nYour attacker heals at the end of this duration.",
+    SI_LUIE_SKILL_MOLTEN_PILLAR_INCALESCENCE =           "Molten Pillar Incalescence",
+    SI_LUIE_SKILL_MOLTEN_PILLAR_TP =                     "Enemies within |cFFFFFF3|r meters of the pillar are hindered by sweltering heat, reducing their Movement Speed by |cFFFFFF60|r%.\n\nThe Ogre Shaman's Blazing Bolts will shackle any hindered targets, inflicting them with a |cFFFFFF4|r second immobilize.",
+
+    SI_LUIE_SKILL_DISGUISE_ALTMER_GLAMOUR_TP =          "Disguise yourself as an Altmer Noble."
+
 }
 
 for stringId, stringValue in pairs(strings) do

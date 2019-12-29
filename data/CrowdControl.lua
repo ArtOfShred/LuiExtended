@@ -249,6 +249,8 @@ CrowdControl.aoeNPCBoss = {
     -- World Bosses
     [84045] = 1, -- Seal of Defilement (Quenyas) - World Boss - Seaside Scarp Camp
     [84206] = 1, -- Stinging Sputum (Gathongor the Mauler) - World Boss - Gathongor's Mine
+    [83668] = 1, -- Feral Impact (Skullbreaker - World Boss - Windshriek Strand
+    [83671] = 1, -- Feral Impact (Skullbreaker - World Boss - Windshriek Strand
 
     -- Quests
     [36860] = 1, -- Swordstorm Damage (MSQ - Halls of Torment)
@@ -440,6 +442,8 @@ CrowdControl.aoeNPCNormal = {
     [103992] = 1, -- Luminescent Burn (Yaghra Spewer)
 
     -- Quests
+    [31970] = 1, -- Wrath (Tears of the Two Moons)
+    [33404] = 0, -- Wrath (Tears of the Two Moons)
     [90182] = 1, -- Oily Smoke (Vvardenfell -- Divine Restoration) -- TODO: Check, maybe is elite?
 
 }
@@ -670,7 +674,6 @@ CrowdControl.IgnoreList ={
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
 CrowdControl.ReversedLogic = {
     [39260] = true, -- Q4917 Push Player Back (Grahtwood - The Blacksap's Hold)
-    [83124] = true, -- Ferocious Bellow (Greenshade - World Boss - Thodundor's View)
 
     -- Dungeons
     [26716] = true, -- Skyward Slam (Stormfist) -- Tempest Island

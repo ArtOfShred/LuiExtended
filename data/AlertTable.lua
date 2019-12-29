@@ -51,7 +51,8 @@ LUIE.Data.AlertTable = {
     -- OTHER MODIFIERS
     -- refire = "x" -- refire duration
     -- skipcheck = true -- display on any event fired rather than just event started -- TODO: DEPRICATE THIS
-    -- ignoreRefresh = ignores refresh event here
+    -- ignoreRefresh = true -- gnores refresh event here
+    -- neverShowInterrupt = true -- Never show an interrupt event here
 
     --------------------------------------------------
     -- JUSTICE NPC'S ---------------------------------
@@ -105,6 +106,7 @@ LUIE.Data.AlertTable = {
 
     [29510] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Thunder Hammer (Thundermaul)
     [17867] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Shock Aura (Thundermaul)
+    [44407] = { power = true, priority = 2, auradetect = true }, -- Lightning Form (Thundermaul)
     [81215] = { block = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN }, -- Shock Aura (Thundermaul - Boss)
     [81195] = { avoid = true, priority = 2, auradetect = true, cc = SNARE }, -- Agonizing Fury (Thundermaul - Boss)
     [81217] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1533 }, -- Thunder Hammer (Thundermaul - Boss)
@@ -157,7 +159,7 @@ LUIE.Data.AlertTable = {
     [50966] = { power = true, auradetect = true, priority = 2, alwaysShowInterrupt = true, duration = 5000 }, -- Healer Immune (Healer - Craglorn/DLC)
     [44328] = { interrupt = true, priority = 2, auradetect = true, duration = 4500 }, -- Rite of Passage (Healer)
 
-    [29520] = { destroy = true, auradetect = true, priority = 2 }, -- Aura of Protection (Shaman)
+    [29520] = { destroy = true, auradetect = true, priority = 2, fakeName = "" }, -- Aura of Protection (Shaman)
 
     [68866] = { power = true, auradetect = true, refire = 1000, priority = 2 }, -- War Horn (Faction NPC)
     [43644] = { avoid = true, priority = 3, auradetect = true }, -- Barrier [monster synergy]  (Faction NPCs)
@@ -331,7 +333,8 @@ LUIE.Data.AlertTable = {
 
     [14841] = { block = true, dodge = true, priority = 3, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Focused Charge (Kwama Worker)
 
-    [9769] = { block = true, dodge = true, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 3267 }, -- Excavation (Kwama Warrior)
+    [9769] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 3267 }, -- Excavation (Kwama Warrior)
+    [49192] = { summon = true, priority = 3, auradetect = true, fakeName = "" }, -- Excavation (Kwama Warrior)
 
     [5260] = { avoid = true, priority = 3, eventdetect = true, refire = 750, result = ACTION_RESULT_BEGIN, duration = 2700 }, -- Flamethrower (Shalk)
     [5252] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1100 }, -- Fire Bite (Shalk)
@@ -352,7 +355,7 @@ LUIE.Data.AlertTable = {
     [87030] = { block = true, avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 867 }, -- Focused Swarm (Fetcherfly Hive Golem)
 
     -- DAEDRA
-    [31115] = { destroy = true, refire = 1000, priority = 2, auradetect = true }, -- Summon Dark Anchor (Daedric Synergy)
+    [31115] = { destroy = true, refire = 1000, priority = 2, auradetect = true, fakeName = "" }, -- Summon Dark Anchor (Daedric Synergy)
     [68449] = { avoid = true, refire = 1000, priority = 3, duration = 500 }, -- Explosive Charge (Daedric Synergy)
 
     [48121] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Heavy Attack (Air Atronach)
@@ -451,7 +454,8 @@ LUIE.Data.AlertTable = {
     [18514] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = SNARE }, -- Chill Touch (Ghost)
     [19137] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = FEAR }, -- Haunting Spectre (Ghost)
 
-    [73925] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Soul Cage (Lich)
+    [22521] = { avoid = true, priority = 2, auradetect = true, cc = SNARE }, -- Defiled Ground (Lich)
+    [73925] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, cc = STUN, duration = 7450, refire = 2000 }, -- Soul Cage (Lich)
 
     [50182] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Consuming Energy (Spellfiend)
 
@@ -522,7 +526,7 @@ LUIE.Data.AlertTable = {
 
     [21582] = { block = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Nature's Swarm (Spriggan)
     [13475] = { interrupt = true, priority = 3, auradetect = true, duration = 5000 }, -- Healing Salve (Spriggan)
-    [13477] = { interrupt = true, priority = 3, auradetect = truecut, duration = 5000 }, -- Control Beast (Spriggan)
+    [13477] = { interrupt = true, priority = 3, auradetect = true, duration = 5000, effectOnlyInterrupt = true, fakeName = "" }, -- Control Beast (Spriggan)
     [89119] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Beast (Spriggan)
     [89102] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Beast (Spriggan)
 
@@ -596,6 +600,48 @@ LUIE.Data.AlertTable = {
     [42905] = { power = true, priority = 1, auradetect = true }, -- Recover (Friendly NPC)
 
     --------------------------------------------------
+    -- WORLD BOSSES ----------------------------------
+    --------------------------------------------------
+
+    -- World Boss - Seaside Scarp Camp
+    [84048] = { avoid = true, priority = 1, auradetect = true, cc = SNARE, fakeName = Unitnames.Boss_Quenyas }, -- Quenyas (Lich)
+    [84283] = { block = true, dodge = true, priority = 1, eventdetect = true, fakeName = Unitnames.Boss_Oskana, cc = STAGGER }, -- Coursing Bones (Oskana)
+    [84286] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Oskana }, -- -- Wake the Dead (Oskana)
+
+    -- World Boss - Heretic's Summons
+    [82934] = { summon = true, priority = 1, auradetect = true, neverShowInterrupt = true }, -- Shrieking Summons (Snapjaw)
+    [83150] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Tail Whip (Snapjaw)
+    [83009] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Rending Leap (Snapjaw)
+    [83040] = { block = true, dodge = true, bs = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.NPC_Clannfear, refire = 250 }, -- Focused Charge (Clannfear - Snapjaw)
+    [83016] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 1000, effectOnlyInterrupt = true, fakeName = Unitnames.NPC_Clannfear }, -- Necrotic Explosion (Clannfear - Snapjaw)
+
+    -- World Boss - Nindaeril's Perch
+    [83515] = { block = true, bs = true, dodge = true, priority = 1, cc = STUN, duration = 2000, result = ACTION_RESULT_BEGIN }, -- Hunter's Pounce (Bavura the Blizzard)
+    [83832] = { block = true, dodge = true, priority = 1, eventdetect = true, cc = STUN, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Nindaeril_the_Monsoon }, -- Frenzied Charge (Nindaeril the Monsoon)
+    [83548] = { interrupt = true, priority = 1, eventdetect = true, cc = FEAR, duration = 1000, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Nindaeril_the_Monsoon }, -- Mighty Roar (Nindaeril the Monsoon)
+
+    -- World Boss - Gathongor's Mine
+    [84205] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Stinging Sputum (Gathongor the Mauler)
+    [84196] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1100, eventdetect = true, bossName = true, cc = STAGGER }, -- Marsh Masher (Gathongor the Mauler)
+    [84209] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 600, cc = STUN }, -- Wrecking Jaws (Gathongor the Mauler)
+    [84212] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 2100, cc = STUN, eventdetect = true, bossName = true }, -- Bog Slam (Gathongor the Mauler)
+
+    -- World Boss - Thodundor's View
+    [83155] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1300 }, -- Thunderous Smash (Thodundor of the Hill)
+    [83160] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1800, cc = STAGGER, eventdetect = true, bossName = true }, -- Stone Crusher (Thodundor of the Hill)
+    [83136] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 800, cc = SNARE, eventdetect = true, bossName = true }, -- Ground Shock (Thodundor of the Hill)
+
+    -- World Boss - Windshriek Strand
+    [84066] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Ground Shock (Skullbreaker)
+    [83651] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 500, bossName = true }, -- Feral Impact (Skullbreaker)
+    [84076] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Carrion Call (Skullbreaker)
+
+    -- World Boss - Big Ozur's Valley
+    [83180] = { destroy = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Molten Pillar (Big Ozur)
+    [83206] = { block = true, avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 1000, bossName = true }, -- Molten Shackles (Ice Pillar)
+    [83191] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, cc = STUN, duration = 3800 }, -- Shaman Smash (Big Ozur)
+
+    --------------------------------------------------
     -- MAIN QUEST ------------------------------------
     --------------------------------------------------
 
@@ -651,22 +697,13 @@ LUIE.Data.AlertTable = {
     -- AD QUESTS -------------------------------------
     --------------------------------------------------
 
-    -- World Boss - Seaside Scarp Camp
-    [84283] = { block = true, dodge = true, priority = 1, eventdetect = true }, -- Coursing Bones (Oskana)
-
-    -- World Boss - Heretic's Summons
-    [83150] = { block = true, dodge = true, priority = 1 }, -- Tail Whip (Snapjaw)
-    [83009] = { block = true, dodge = true, priority = 1 }, -- Rending Leap (Snapjaw)
-    [83040] = { block = true, dodge = true, bs = true, priority = 1, eventdetect = true, skipcheck = true }, -- Focused Charge (Clannfear - Snapjaw)
-    [83016] = { block = true, priority = 1, refire = 1000, eventdetect = true, skipcheck = true }, -- Necrotic Explosion (Clannfear - Snapjaw)
+    -- Rites of the Queen
+    [48921] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Norion }, -- Ancestral Spirit
+    [48924] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Norion }, -- Ancestral Spirit
+    [48927] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Norion }, -- Ancestral Spirit
 
     -- Sever All Ties
-    [44138] = { interrupt = true, avoid = true, priority = 2, eventdetect = true }, -- Q4261 Estre Knockback (High Kinlady Estre)
-
-    -- World Boss - Nindaeril's Perch
-    [83515] = { block = true, bs = true, dodge = true, priority = 1 }, -- Hunter's Pounce (Bavura the Blizzard)
-    [83832] = { block = true, dodge = true, priority = 1, eventdetect = true }, -- Frenzied Charge (Nindaeril the Monsoon)
-    [83548] = { interrupt = true, avoid = true, priority = 1, eventdetect = true }, -- Mighty Roar (Nindaeril the Monsoon)
+    [44138] = { interrupt = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, bossName = true, cc = UNBREAKABLE }, -- Q4261 Estre Knockback (High Kinlady Estre)
 
     -- The Grips of Madness
     [38748] = { block = true, interrupt = true, priority = 2 }, -- Aulus's Tongue (Mayor Aulus)
@@ -675,17 +712,6 @@ LUIE.Data.AlertTable = {
     -- The Orrery of Elden Root
     [43820] = { dodge = true, avoid = true, priority = 2, eventdetect = true }, -- Quaking Stomp (Prince Naemon)
     [43827] = { avoid = true, priority = 2, auradetect = true }, -- Projectile Vomit (Prince Naemon)
-
-    -- World Boss - Gathongor's Mine
-    [84205] = { avoid = true, priority = 1 }, -- Stinging Sputum (Gathongor the Mauler)
-    [84196] = { avoid = true, priority = 1 }, -- Marsh Masher (Gathongor the Mauler)
-    [84209] = { block = true, dodge = true, priority = 1 }, -- Wrecking Jaws (Gathongor the Mauler)
-    [84212] = { avoid = true, priority = 1 }, -- Bog Slam (Gathongor the Mauler)
-
-    -- World Boss - Thodundor's View
-    [83155] = { block = true, bs = true, dodge = true, priority = 1 }, -- Thunderous Smash (Thodundor of the Hill)
-    [83160] = { block = true, avoid = true, priority = 1 }, -- Stone Crusher (Thodundor of the Hill)
-    [83136] = { block = true, avoid = true, priority = 1 }, -- Ground Shock (Thodundor of the Hill)
 
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------
