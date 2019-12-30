@@ -40,6 +40,7 @@ LUIE.Data.UnitNames = {
     NPC_Thunderbug_Lord                   = 'Thunderbug Lord',
     NPC_Hoarvor                           = 'Hoarvor',
     NPC_Auroran_Battlemage                = 'Auroran Battlemage',
+    NPC_Watcher                           = 'Watcher',
 
     NPC_Aura_of_Protection                = 'Aura of Protection',
 

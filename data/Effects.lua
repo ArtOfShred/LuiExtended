@@ -2243,6 +2243,7 @@ Effects.EffectOverrideByName = {
        [Unitnames.Boss_Valanir_the_Restless] = { hide = true }, -- Grahtwood (Valanir's Rest)
        [Unitnames.Boss_Tallatta_the_Lustrous] = { hide = true }, -- Malabal Tor (Vulkwasten)
        [Unitnames.Boss_Queen_of_Three_Mercies] = { hide = true }, -- Reaper's March (Waterdancer Falls)
+       [Unitnames.NPC_Watcher] = { hide = true }, -- Watcher
     },
 }
 
@@ -2274,6 +2275,8 @@ Effects.EffectSourceOverride = {
     [72888] = { source = Abilities.Trap_Fire_Trap }, -- Fire Attack 1 (Fire) -- Banished Cells II
     [72889] = { source = Abilities.Trap_Fire_Trap }, -- Fire Attack 2 (Fire) -- Banished Cells II
 
+    [33594] = { source = Abilities.Skill_Flames }, -- Fire (Fire) -- Throne of the Wilderking
+
     -- ENVIRONMENTAL
     [44034] = { source = Abilities.Trap_Slaughterfish, addSource = true }, -- Slaughterfish Attack
     [113082] = { source = Abilities.Trap_Slaughterfish, addSource = true }, -- Slaughterfish Attack
@@ -2297,6 +2300,10 @@ Effects.EffectSourceOverride = {
     [91659] = {source = Abilities.Trap_Falling_Rocks}, -- Falling Rocks {Vvardenfell}
     [92672] = {source = 'Red Mountain'}, -- Pyroclast  {Vvardenfell}
     [84527] = {source = 'Steam Vent'}, -- Searing Steam {Vvardenfell}
+
+    -----------------------------------------------
+    -- QUESTS
+    -----------------------------------------------
 
     -----------------------------------------------
     -- VVARDENFELL
@@ -4026,6 +4033,9 @@ Effects.EffectOverride = {
     [29096] = { tooltip = Abilities.Set_Healers_Habit }, -- Minor Mending (of the Healer)
 
     -- DISGUISES
+    [30879] = { tooltip = Tooltips.Disguise_Kollopi_Essence }, -- Shimmering Glow (Kollopi Essence)
+    [33534] = { tooltip = Tooltips.Disguise_Sea_Viper_Armor }, -- Seaside Disguise (Sea Viper Armor)
+    [43722] = { tooltip = Tooltips.Disguise_Vulkhel_Guard }, -- First Auridon Marine Disguise (Vulkhel Guard Marcine Disguise)
     [82631] = { icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', name = Abilities.Disguise_Monks_Disguise }, -- Monk Disguise Timer (Monk's Disguise)
 
     ----------------------------------------------------------------
@@ -6727,7 +6737,6 @@ Effects.EffectOverride = {
     [65854] = { icon = 'esoui/art/icons/death_recap_environmental.dds', name = 'Spike Trap', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spike Trap Snare (Spike Trap) (Orsinium - To Save a Chief)
     [65855] = { icon = 'esoui/art/icons/death_recap_environmental.dds', name = 'Spike Trap', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Trap Sprung (Spike Trap) (Orsinium - To Save a Chief)
     [65856] = { hide = true }, -- Spike Trap (Spike Trap) (Orsinium - To Save a Chief)
-    [20259] = { name = 'Sigil of Frost', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Sigil of Frost Snare (Sigil of Frost - Wrothgar - Coldwind's Den)
     [73103] = { hide = true }, -- Lava (Orsinium - The Hand of Morkul) (Lava)
     ]]--
 
@@ -7724,16 +7733,16 @@ Effects.EffectOverride = {
     -- Watcher
     [4652] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_gaze.dds' }, -- Gaze (Watcher)
     [4653] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds' }, -- Shockwave (Watcher)
-    [43817] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds', name = Abilities.Skill_Shockwave }, -- Shockwave Snare (Watcher)
-    [95855] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds' }, -- Shockwave (Watcher)
+    [43817] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave_snare.dds', name = Abilities.Skill_Shockwave, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 45 }, -- Shockwave Snare (Watcher)
+    [95855] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds', tooltip = Tooltips.Generic_Knockback }, -- Shockwave (Watcher)
     [95856] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds', hide = true }, -- Shockwave (Watcher)
     [53880] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds' }, -- Shockwave (Watcher)
     [9219] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds', hide = true }, -- Doom-Truth's Gaze (Watcher)
     [9220] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds' }, -- Doom-Truth's Gaze (Watcher)
-    [14518] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds' }, -- Doom-Truth's Gaze (Watcher)
+    [14518] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds', tooltip = Tooltips.Generic_Stun }, -- Doom-Truth's Gaze (Watcher)
     [14425] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds', hide = true }, -- Doom-Truth's Gaze (Watcher)
     [14426] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds' }, -- Doom-Truth's Gaze (Watcher)
-    [14546] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds' }, -- Doom-Truth's Gaze (Watcher)
+    [14546] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds', tooltip = Tooltips.Generic_Stun }, -- Doom-Truth's Gaze (Watcher)
     [12062] = { icon = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_kick.dds' }, -- Kick (Winged Twilight)
     [13690] = { icon = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_kick.dds' }, -- Kick (Winged Twilight)
     [6410] = { icon = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_tail_clip.dds' }, -- Tail Clip (Winged Twilight)
@@ -8788,7 +8797,10 @@ Effects.EffectOverride = {
     [31086] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', name = Abilities.Skill_Bear_Trap }, -- Trap (Longclaw)
 
     [20260] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_sigil_of_frost.dds', name = Abilities.Trap_Sigil_of_Frost }, -- Rune Burst
-    [20259] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_sigil_of_frost.dds', name = Abilities.Trap_Sigil_of_Frost, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Sigil of Frost Snare
+    [20259] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_sigil_of_frost.dds', name = Abilities.Trap_Sigil_of_Frost, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 75 }, -- Sigil of Frost Snare
+
+    [33594] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = Abilities.Skill_Flames, unbreakable = 1, hide = true, groundLabel = true, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.66, tooltipValue3 = 50 }, -- Fire (Fire) -- Throne of the Wilderking
+    [49897] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', name = Abilities.Skill_Flames, unbreakable = 1, groundLabel = true, hideGround = true, tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 0.66, tooltipValue3 = 50 }, -- Fire (Fire) -- Throne of the Wilderking
 
     -- Elinhir Private Arena
     [117428] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava_trap.dds', name = Abilities.Trap_Lava_Trap }, -- Lava Eruption (Lava Trap)
@@ -9176,13 +9188,13 @@ Effects.EffectOverride = {
     [91627] = { hide = true }, -- Root Sunder's Favor
 
     -- The Grips of Madness
-    --[37276] = { hide = true }, -- Q4868 Beast Person
+    [37276] = { hide = true }, -- Q4868 Beast Person
     [37296] = { hide = true }, -- Q4868 Change Beast Person
     [37297] = { hide = true }, -- Q4868 Change Beast Person
     [37295] = { hide = true }, -- Q4868 Change Beast Person
     [38499] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = Abilities.Skill_Lightning_Strike }, -- Wrath
     [38500] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = Abilities.Skill_Lightning_Strike }, -- Wrath
-    [37438] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = Abilities.Skill_Lightning_Strike, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Stun }, -- Shocked
+    [37438] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_lightning_strike.dds', name = Abilities.Skill_Lightning_Strike, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Generic_Knockdown }, -- Shocked
     [38516] = { hide = true }, -- Q4868 Rufinus Is Lightning
     [47720] = { hide = true }, -- RobS Stun 1 Sec
     [37463] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', name = Abilities.Skill_Push }, -- Q4868 Push NPC
@@ -9201,8 +9213,8 @@ Effects.EffectOverride = {
 
     -- A Lasting Winter
     [38394] = { hide = true }, -- Shatter
-    [47762] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = Abilities.Innate_CC_Immunity, duration = 3, tooltip = Tooltips.Generic_CC_Immunity }, -- Spawn Clone (General Endare)
-    [47768] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = Abilities.Innate_CC_Immunity, tooltip = Tooltips.Generic_CC_Immunity }, -- RobS Immunities 6 Sec (General Endare)
+    [47762] = { icon = 'esoui/art/icons/achievement_wrothgar_007.dds', name = Abilities.Skill_Boss_CC_Immunity, tooltip = Tooltips.Generic_Scary_Immunities_Duration, duration = 3 }, -- Spawn Clone (General Endare)
+    [47768] = { icon = 'esoui/art/icons/achievement_wrothgar_007.dds', name = Abilities.Skill_Boss_CC_Immunity, tooltip = Tooltips.Generic_Scary_Immunities_Duration }, -- RobS Immunities 6 Sec (General Endare)
     [38441] = { hide = true }, -- Become
     [47783] = { hide = true }, -- Become
 
@@ -9211,7 +9223,7 @@ Effects.EffectOverride = {
     [46188] = { hide = true }, -- Q4386 Ukaezai Faints
     [45998] = { hide = true }, -- Q4386 Ukaezai Book Summon
     [40849] = { icon = 'LuiExtended/media/icons/abilities/ability_set_oblivion.dds' }, -- Annihilation
-    [39956] = { hide = true }, -- Heart of Anumaril
+    [39956] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_heart_of_anumaril.dds', name = zo_strformat("<<1>> <<2>>", Abilities.Skill_Absorb, Abilities.Skill_Essence), hide = true }, -- Heart of Anumaril
     [46036] = { hide = true }, -- Q4386 Ukaezai Split 2
     [46037] = { hide = true }, -- Q4386 Ukaezai Split 1
 
@@ -9296,27 +9308,27 @@ Effects.EffectOverride = {
     [33581] = { hide = true }, -- DUN-RF_Event_Blue_Fire
 
     -- Audience with the Wilderking
-    [37759] = { icon = 'esoui/art/icons/achievement_030.dds', tooltip = Tooltips.Skill_Spirit_Armor }, -- Spirit Armor
+    [37759] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_spirit_armor.dds', tooltip = Tooltips.Skill_Spirit_Armor }, -- Spirit Armor
 
     -- The Witch of Silatar
     [33384] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_grasping_vines.dds', name = Abilities.Skill_Restricting_Vines, unbreakable = 1, tooltip = Tooltips.Generic_Stun }, -- Q4586 Aranias Vine Stun
     [33066] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_change_clothes.dds', name = Abilities.Skill_Change_Clothes, tooltip = Tooltips.Skill_Fancy_Clothing }, -- Q4586_ChangeClothes
+    [34842] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_change_clothes.dds', name = Abilities.Skill_Change_Clothes, tooltip = Tooltips.Skill_Fancy_Clothing }, -- Q4586_ChangeClothesFEMALE
     [49116] = { hide = true }, -- Q4586_HugeTree
 
     -- Throne of the Wilderking
-    [35014] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wilderkings_protection.dds' }, -- Wilderking's Protection
-    [33594] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', hide = true }, -- Fire
-    [49897] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds', unbreakable = 1 }, -- Fire
+    [35014] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_wilderkings_protection.dds', tooltip = Tooltips.Skill_Wilderkings_Protection }, -- Wilderking's Protection
     [33701] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = Abilities.Skill_Burrow, hide = true }, -- BurrowEND
+    [33727] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = Abilities.Skill_Emerge, hide = true }, -- BurrowEND
     [33829] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds', name = Abilities.Skill_Burrow, tooltip = Tooltips.Skill_Burrow }, -- Burrowing
     [37506] = { hide = true }, -- Stealth
-    [33727] = { hide = true }, -- BurrowEND
 
     -- Pelidil's End
     [33577] = { icon = 'LuiExtended/media/icons/abilities/ability_ironatronach_blast_furnace.dds' }, -- Maormer Fire
     [48049] = { hide = true }, -- Q4765 Block Dummy Fire
     [48054] = { hide = true }, -- Q475 Impact Increment
-    [50765] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_gtaoe.dds', name = Abilities.Skill_Serpent_Spit }, -- CON_AOE_Template1
+    [50765] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_gtaoe.dds', name = Abilities.Skill_Serpent_Spit }, -- CON_AOE_Template1
+    [35697] = { icon = 'LuiExtended/media/icons/abilities/ability_serpent_chomp.dds' }, -- Serpent Chomp (Maormer Serpent)
 
     -- Retaking the Pass
     [45650] = { hide = true }, -- Indaenir's Spell
@@ -11454,6 +11466,7 @@ Effects.FakeExternalDebuffs = {
     [72641] = { duration = 2000 }, -- Power Bash (Cryodiil Guard T2)
 
     -- Traps
+    [49897] = { duration = 0 }, -- Fire (Fire) -- Throne of the Wilderking
     [11338] = { duration = 0 }, -- Lava -- In Lava
     [55925] = { duration = 0 }, -- Lava (City of Ash II)
 
@@ -11486,7 +11499,6 @@ Effects.FakeExternalDebuffs = {
     [43823] = { duration = 2150 }, -- IntroKB (Prince Naemon)
     [36766] = { duration = 5000 }, -- Q4842 Stun Headgrab Knockback (The Unquiet Dead)
     [33384] = { duration = 4000 }, -- Q4586 Aranias Vine Stun
-    [49897] = { duration = 2000 }, -- Fire
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------
@@ -11723,6 +11735,7 @@ Effects.FakePlayerBuffs = {
 
     -- Aldmeri Dominion
     [33066] = { icon = 'LuiExtended/media/icons/disguises/disguise_fancy_clothing.dds', name = Abilities.Skill_Fancy_Clothing, duration = 0, long = true, ignoreBegin = true }, -- Q4586_ChangeClothes
+    [34842] = { icon = 'LuiExtended/media/icons/disguises/disguise_fancy_clothing_female.dds', name = Abilities.Skill_Fancy_Clothing, duration = 0, long = true, ignoreBegin = true }, -- Q4586_ChangeClothesFEMALE
     [29504] = { duration = 0, long = true }, -- Q4546 Shade Layer
 
     -- Quest related (Craglorn)
@@ -12050,6 +12063,8 @@ Effects.AddGroundDamageAura = {
     [72888] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire Attack 1 (Fire) -- Banished Cells II
     [72889] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire Attack 2 (Fire) -- Banished Cells II
 
+    [33594] = { duration = 2000, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire (Fire) -- Throne of the Wilderking
+
     --------------------
     -- NPC
     --------------------
@@ -12130,6 +12145,10 @@ Effects.AddGroundDamageAura = {
 
     -- Greenshade
     [84206] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Stinging Sputum (Gathongor the Mauler)
+
+    ------------------
+    -- QUESTS --------
+    ------------------
 
     ------------------
     -- ARENAS --------
@@ -12228,7 +12247,7 @@ Effects.MapDataOverride = {
     -- TUTORIAL AREAS
 
     [11338] = { -- In Lava
-        [608] = { name = Abilities.Skill_Fire, icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds' }, -- Vvardenfell Tutorial Area
+        [608] = { name = Abilities.Skill_Flames, icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_generic.dds' }, -- Vvardenfell Tutorial Area
     },
 
     -- ALDMERI DOMINION

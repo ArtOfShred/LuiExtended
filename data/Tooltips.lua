@@ -200,6 +200,7 @@ LUIE.Data.Tooltips = {
 
     Generic_CC_Immunity                             = GetString(SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP),
     Generic_Scary_Immunities                        = GetString(SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_TP),
+    Generic_Scary_Immunities_Duration               = GetString(SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_DUR_TP),
     Generic_Flying_Immunities                       = GetString(SI_LUIE_SKILL_GENERIC_FLYING_IMMUNITIES_TP),
     Generic_Invisibility                            = GetString(SI_LUIE_SKILL_GENERIC_INVISIBILITY_TP),
     Generic_Detection_Potion                        = GetString(SI_LUIE_SKILL_GENERIC_DETECTION_POTION_TP),
@@ -549,6 +550,11 @@ LUIE.Data.Tooltips = {
     Set_Succession_Shock                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), ShockDamage),
     Set_Succession_Frost                            = zo_strformat(GetString(SI_LUIE_SKILL_SET_SUCCESSION_TP), FrostDamage),
     Set_Para_Bellum                                 = GetString(SI_LUIE_SKILL_SET_PARA_BELLUM_TP),
+
+    -- Disguises
+    Disguise_Kollopi_Essence                        = GetString(SI_LUIE_SKILL_DISGUISE_KOLLOPI_ESSENCE_TP),
+    Disguise_Sea_Viper_Armor                        = GetString(SI_LUIE_SKILL_DISGUISE_SEA_VIPER_ARMOR_TP),
+    Disguise_Vulkhel_Guard                          = GetString(SI_LUIE_SKILL_DISGUISE_VULKHEL_GUARD_TP),
 
     ----------------------------------------------------------------
     -- CLASS SKILLS ------------------------------------------------
@@ -1195,6 +1201,7 @@ LUIE.Data.Tooltips = {
     Skill_Soul_Binding                              = GetString(SI_LUIE_SKILL_SOUL_BINDING_TP),
     Skill_Spirit_Armor                              = GetString(SI_LUIE_SKILL_SPIRIT_ARMOR_TP),
     Skill_Fancy_Clothing                            = GetString(SI_LUIE_SKILL_FANCY_CLOTHING_TP),
+    Skill_Wilderkings_Protection                    = GetString(SI_LUIE_SKILL_WILDERKINGS_PROTECTION_TP),
     Skill_Burrow                                    = GetString(SI_LUIE_SKILL_BURROW_TP),
     Skill_Shadow_Wood                               = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP),
 

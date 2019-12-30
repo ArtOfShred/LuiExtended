@@ -185,6 +185,7 @@ CastBarTable.CastChannelOverride = {
 
     ----------------------------------------------------------------
     -- QUEST ABILITIES ---------------------------------------------
+    -- QUEST ABILITIES ---------------------------------------------
     ----------------------------------------------------------------
 
     -- Vampire Quest
@@ -338,6 +339,7 @@ CastBarTable.CastDurationFix = {
     [36841] = 4000, -- Q4833 Apply Wolf Buff (Bosmer Insight)
     [36824] = 4000, -- Q4833 Apply Tiger Buff (Bosmer Insight)
     [33701] = 1000, -- BurrowEND (Throne of the Wilderking)
+    [33727] = 500, -- BurrowEND (Throne of the Wilderking)
 
     ----------------------------------------------------------------
     -- SEASONAL QUEST ----------------------------------------------
@@ -658,6 +660,7 @@ CastBarTable.IsCast = {
     [47301] = true, -- Stunned (Passage Denied)
     [37463] = true, -- The Grips of Madness
     [37583] = true, -- Q4868 Unlock Chapel
+    [39956] = true, -- Heart of Anumaril
     [40504] = true, -- Q4922 Use Mantle on Device (The Orrery of Elden Root)
     [40557] = true, -- (12127) CFX_4922 Mantle Cast S (The Orrery of Elden Root)
     [35984] = true, -- Q4436 Summon Pirate (Luck of the Albatross)
@@ -672,7 +675,9 @@ CastBarTable.IsCast = {
     [38246] = true, -- Animus Geode (Eyes of Azura)
     [41325] = true, -- Blacksap's Brew (The Blacksap's Hold)
     [33066] = true, -- Q4586_ChangeClothes (The Witcher of Silatar)
+    [34842] = true, -- Q4586_ChangeClothesFEMALE (The Witcher of Silatar)
     [33701] = true, -- BurrowEND (Throne of the Wilderking)
+    [33727] = true, -- BurrowEND (Throne of the Wilderking)
 
     ----------------------------------------------------------------
     -- SEASONAL QUEST ----------------------------------------------

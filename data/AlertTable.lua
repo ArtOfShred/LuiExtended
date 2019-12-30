@@ -427,9 +427,9 @@ LUIE.Data.AlertTable = {
     [7100] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1333 }, -- Hand of Flame (Xivilai)
     [25726] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Daedra (Xivilai)
 
-    [4653] = { block = true, avoid = true, priority = 2, eventdetect = true, cc = SNARE }, -- Shockwave (Watcher)
-    [9219] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1750, cc = STUN }, -- Doom-Truth's Gaze (Watcher)
-    [14425] = { block = true, avoid = true, priority = 2, cc = STUN }, -- Doom-Truth's Gaze (Watcher)
+    [4653] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN, duration = 1000 }, -- Shockwave (Watcher)
+    [9219] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1750, result = ACTION_RESULT_BEGIN, cc = STUN, duration = 4000 }, -- Doom-Truth's Gaze (Watcher)
+    [14425] = { block = true, avoid = true, priority = 2, eventdetect = true, refire = 1750, result = ACTION_RESULT_BEGIN, cc = STUN, duration = 3500 }, -- Doom-Truth's Gaze (Watcher)
 
     [6410] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1700 }, -- Tail Clip (Winged Twilight)
     [6412] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = STUN }, -- Dusk's Howl (Winged Twilight)
@@ -706,12 +706,12 @@ LUIE.Data.AlertTable = {
     [44138] = { interrupt = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, bossName = true, cc = UNBREAKABLE }, -- Q4261 Estre Knockback (High Kinlady Estre)
 
     -- The Grips of Madness
-    [38748] = { block = true, interrupt = true, priority = 2 }, -- Aulus's Tongue (Mayor Aulus)
-    [40702] = { avoid = true, priority = 2, eventdetect = true }, -- Q4868 Aulus Knockback (Mayor Aulus)
+    [38748] = { block = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 3000, cc = STUN }, -- Aulus's Tongue (Mayor Aulus)
+    [40702] = { avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, cc = UNBREAKABLE }, -- Q4868 Aulus Knockback (Mayor Aulus)
 
     -- The Orrery of Elden Root
-    [43820] = { dodge = true, avoid = true, priority = 2, eventdetect = true }, -- Quaking Stomp (Prince Naemon)
-    [43827] = { avoid = true, priority = 2, auradetect = true }, -- Projectile Vomit (Prince Naemon)
+    [43820] = { dodge = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1970, cc = UNBREAKABLE }, -- Quaking Stomp (Prince Naemon)
+    [43827] = { avoid = true, priority = 2, auradetect = true, duration = 2916 }, -- Projectile Vomit (Prince Naemon)
 
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------

@@ -7799,6 +7799,10 @@ LUIE.DebugAuras = {
     [20260] = true, -- Rune Burst (Sigil of Frost)
     [20259] = true, -- Sigil of Frost Snare (Sigil of Frost)
 
+    [33591] = true, -- Fire (Fire)
+    [33594] = true, -- Fire (Fire)
+    [49897] = true, -- Fire (Fire)
+
     -- Elinhir Private Arena
     [117429] = true, -- Lava Eruption (Lava Trap)
     [117430] = true, -- Projectile (Lava Trap)
@@ -9203,7 +9207,6 @@ LUIE.DebugAuras = {
     [95855] = true, -- Shockwave -- Watcher
     [95856] = true, -- Shockwave -- Watcher
     [53880] = true, -- Shockwave -- Watcher
-
     [9219] = true, -- Doom-Truth's Gaze -- Watcher
     [95915] = true, -- Doom-Truth's Gaze -- Watcher
     [95916] = true, -- Doom-Truth's Gaze -- Watcher
@@ -11651,6 +11654,7 @@ LUIE.DebugAuras = {
     [33384] = true, -- Q4586 Aranias Vine Stun
     [46925] = true, -- Q4586 TP to Scene 1
     [33066] = true, -- Q4586_ChangeClothes
+    [34842] = true, -- Q4586_ChangeClothesFEMALE
     [33069] = true, -- Q4586_Ara02_TreeSpell
     [33456] = true, -- Q4586_HugeTree
     [49116] = true, -- Q4586_HugeTree
@@ -11658,12 +11662,9 @@ LUIE.DebugAuras = {
     [46929] = true, -- Q485 TP out of Silatar
 
     -- Throne of the Wilderking
-    [33591] = true, -- Fire
     [35014] = true, -- Wilderking's Protection
     [49878] = true, -- SW Invisible Man
     [34411] = true, -- Q4750 Screen Shake
-    [33594] = true, -- Fire
-    [49897] = true, -- Fire
     [49823] = true, -- Q4750 BurrowFX
     [33701] = true, -- BurrowEND
     [33829] = true, -- Burrowing
@@ -11710,6 +11711,7 @@ LUIE.DebugAuras = {
     [42042] = true, -- GS SS Serpent DIE
     [51303] = true, -- Q4765 Maomer TP In
     [42068] = true, -- CFX_4765 Mage Hold Open Portal
+    [35697] = true, -- Serpent Chomp (Maormer Serpent)
 
     -- Retaking the Pass
     [31645] = true, -- Q4546 05 Skull Talk

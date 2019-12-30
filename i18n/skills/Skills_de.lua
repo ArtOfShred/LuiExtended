@@ -277,6 +277,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_BLIND_TP =                     "Blinded for |cFFFFFF<<1>>|r <<1[second/seconds]>>. |cffffff100|r% chance to miss all attacks.",
     SI_LUIE_SKILL_GENERIC_CC_IMMUNITY_TP =               "Immune to knockback and disabling effects for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_TP =          "Immune to all crowd control and movement impairing effects.",
+    SI_LUIE_SKILL_GENERIC_SCARY_IMMUNITIES_DUR_TP =      "Immune to all crowd control and movement impairing effects for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_FLYING_IMMUNITIES_TP =         "Immune to movement imparing effects.",
     SI_LUIE_SKILL_SET_GENERIC_IMMUNITY_TP =              "Immune to damage and all negative effects for |cffffff<<1>>|r <<1[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_DISORIENT_TP =                 "Disoriented for |cffffff<<1>>|r <<1[second/seconds]>>.",
@@ -827,6 +828,11 @@ local strings = {
     SI_LUIE_SKILL_SET_COOLDOWN =                         "Cooldown", -- Used as suffix for certain abilities internal cooldown
     SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE =              "Monk\'s Disguise",
 
+    -- Disguises
+    SI_LUIE_SKILL_DISGUISE_KOLLOPI_ESSENCE_TP =          "Cloaked in a haze of forest moths, preventing Wood Orcs from detecting you.\n\nWill not work in PvP enabled areas.",
+    SI_LUIE_SKILL_DISGUISE_SEA_VIPER_ARMOR_TP =          "Disguised as a Maormer Soldier.",
+    SI_LUIE_SKILL_DISGUISE_VULKHEL_GUARD_TP =            "Disguised as a First Auridon Marine.",
+
     -- Weapon Sets
     SI_LUIE_SKILL_SET_ASYLUM_BOW =                       "The next Snipe, Scatter Shot, or Poison Arrow cast within |cffffff6|r seconds by your attacker deals |cffffff<<1>>|r% additional damage.",
     SI_LUIE_SKILL_SET_ASYLUM_DESTRUCTION_STAFF =         "Every third cast of Force Shock within |cffffff10|r seconds will always apply the Burning, Concussion, and Chilled status effects.",
@@ -1053,12 +1059,12 @@ local strings = {
     SI_LUIE_SKILL_SOUL_BINDING_TP =                      "Claim a weakened Daedra Soul, charging the Sigil Geode.",
     SI_LUIE_SKILL_EMPOWER_TWILIT_HEART =                 "Empower Twilit Heart",
     SI_LUIE_SKILL_BLACKSAPS_BREW_TP =                    "Increase Movement Speed by |cffffff4|r% and reduce damage taken by |cffffff10|r% for |cffffff30|r minutes.",
-    SI_LUIE_SKILL_SPIRIT_ARMOR_TP =                      "Increase Armor by |cffffff5|r%.",
+    SI_LUIE_SKILL_SPIRIT_ARMOR_TP =                      "Increase Armor by |cffffff5|r% for |cffffff15|r minutes.",
     SI_LUIE_SKILL_RESTRICTING_VINES =                    "Restricting Vines",
     SI_LUIE_SKILL_CHANGE_CLOTHES =                       "Change Clothes",
     SI_LUIE_SKILL_FANCY_CLOTHING =                       "Fancy Clothing",
     SI_LUIE_SKILL_FANCY_CLOTHING_TP =                    "Dressed to impress!",
-    SI_LUIE_SKILL_BURROW_TP =                            "You are protected from harm and concealed by burrowing underground.",
+    SI_LUIE_SKILL_BURROW_TP =                            "Burrowing underground, protecting you from harm and concealing you.",
     SI_LUIE_SKILL_SERPENT_SPIT =                         "Serpent Spit",
     SI_LUIE_SKILL_SHADOW_WOOD =                          "Shadow Wood",
     SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "A servant of the shade of Prince Naemon has dragged you into the Shadow Wood.",
@@ -1277,7 +1283,8 @@ local strings = {
     SI_LUIE_SKILL_MOLTEN_PILLAR_INCALESCENCE =           "Molten Pillar Incalescence",
     SI_LUIE_SKILL_MOLTEN_PILLAR_TP =                     "Enemies within |cFFFFFF3|r meters of the pillar are hindered by sweltering heat, reducing their Movement Speed by |cFFFFFF60|r%.\n\nThe Ogre Shaman's Blazing Bolts will shackle any hindered targets, inflicting them with a |cFFFFFF4|r second immobilize.",
 
-    SI_LUIE_SKILL_DISGUISE_ALTMER_GLAMOUR_TP =          "Disguise yourself as an Altmer Noble."
+    SI_LUIE_SKILL_DISGUISE_ALTMER_GLAMOUR_TP =           "Disguise yourself as an Altmer Noble.",
+    SI_LUIE_SKILL_WILDERKINGS_PROTECTION_TP =            "The blessing of the Wilderking makes you appear less threatening to the creatures in Greenheart, preventing some of them from attacking you.",
 
 }
 

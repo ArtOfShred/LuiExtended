@@ -185,7 +185,6 @@ CrowdControl.aoeTraps = {
     [113082] = 0, -- Slaughterfish Attack (Cyrodiil)
     [19224] = 0, -- In Lava (Halls of Torment)
     [11338] = 0, -- In Lava (The Earth Forge)
-    [16589] = 0, -- Fire (Dummy ID for zone based name override) -- TODO: Maybe do something here
     [56277] = 0, -- Lava (City of Ash II)
     [5140] = 0, -- Lava (Dragonstar Arena)
 
@@ -194,6 +193,8 @@ CrowdControl.aoeTraps = {
     [53169] = 0, -- Spike Trap (Spike Trap) - Dragonstar Arena
     [26531] = 0, -- Bear Trap (Bear Trap)
     [31086] = 0, -- Trap (Trap) - Selene's Web
+    [20260] = 0, -- Rune Burst (Sigil of Frost)
+    [33594] = 0, -- Fire (Fire) -- Greenshade - Throne of the Wilderking
 
     [17314] = 0, -- Fire Trap (Player)
     [72888] = 0, -- Fire Attack 1 (Fire) -- Banished Cells II
@@ -213,6 +214,12 @@ CrowdControl.aoeTraps = {
     [84527] = 0, -- Searing Steam (Vvardenfell - Nchuleftingth)
     [90271] = 0, -- Charge-Wire Shock (Vvardenfell - Nchuleftingth)
     [92138] = 0, -- Laser Damage (Vvardenfell - Nchuleftingth)
+
+    -- Quests
+    [31970] = 1, -- Wrath (Tears of the Two Moons)
+    [33404] = 0, -- Wrath (Tears of the Two Moons)
+    [38499] = 1, -- Wrath (The Grips of Madness)
+    [33577] = 1, -- Maormer Fire (Pelidil's End)
 
     -- Dragonstar Arena
     [53341] = 0, -- Biting Cold (Player)
@@ -366,6 +373,9 @@ CrowdControl.aoeNPCElite = {
     [75980] = 1, -- Pillar Eruption (Minotaur Shaman)
     [11282] = 1, -- Steam Breath (Dwemer Centurion)
 
+    -- Quests
+    [50765] = 1, -- CON_AOE_Template1 (Pelidil's End)
+
     -- Dragonstar Arena
     [53314] = 1, -- Flame Volley (Sovngarde Ranger)
     [53280] = 1, -- Unstable Wall of Frost (Sovngarde Icemage)
@@ -441,9 +451,6 @@ CrowdControl.aoeNPCNormal = {
     [103862] = 1, -- Deluge (Yaghra Spewer)
     [103992] = 1, -- Luminescent Burn (Yaghra Spewer)
 
-    -- Quests
-    [31970] = 1, -- Wrath (Tears of the Two Moons)
-    [33404] = 0, -- Wrath (Tears of the Two Moons)
     [90182] = 1, -- Oily Smoke (Vvardenfell -- Divine Restoration) -- TODO: Check, maybe is elite?
 
 }
@@ -517,6 +524,11 @@ CrowdControl.UnbreakableList ={
     [115607] = true, -- Dismount Stun
     [40349] = true, -- Feed (Player Vampire Bite stun)
     [40520] = true, -- Q3047 - Knockdown (Player Werewolf Bite stun)
+
+    -- Traps
+    -- TODO: Do we have traps that apply unbreakable snares/etc show as UB color on ticks?
+    --[20260] = true, -- Rune Burst (Sigil of Frost)
+    --[33594] = true, -- Fire (Fire) -- Greenshade - Throne of the Wilderking
 
     -- Quests
     [14972] = true, -- CON_Knockback&Knockdown (Castle of the Worm)
