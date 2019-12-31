@@ -1158,6 +1158,7 @@ local AbilityTables = {
     Skill_Emerge                      = 20746,
     Skill_Serpent_Spit                = GetString(SI_LUIE_SKILL_SERPENT_SPIT),
     Skill_Shadow_Wood                 = GetString(SI_LUIE_SKILL_SHADOW_WOOD),
+    Skill_Disperse_Corruption         = GetString(SI_LUIE_SKILL_DISPERSE_CORRUPTION),
 
     -- Summerset
     Skill_Pustulant_Eruption          = 105867,

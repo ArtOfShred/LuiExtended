@@ -641,6 +641,7 @@ CrowdControl.IgnoreList ={
     [4197] = true, -- Recovering (NPC Duel)
 
     -- Quests
+    [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
 
     -- Vampire
     [44670] = true, -- Vamp Theater Head Grab Stun (Scion of the Blood Matron)

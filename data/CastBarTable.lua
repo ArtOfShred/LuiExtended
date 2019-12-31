@@ -215,6 +215,7 @@ CastBarTable.CastChannelOverride = {
     [37205] = true, -- Animus Geode (Eyes of Azura)
     [37211] = true, -- Q4854 Empower Heart (Eyes of Azura)
     [38246] = true, -- Animus Geode (Eyes of Azura)
+    [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
 
     ----------------------------------------------------------------
     -- SEASONAL QUEST ----------------------------------------------
@@ -232,6 +233,7 @@ CastBarTable.CastChannelOverride = {
     [84528] = true, -- Flame Juggling (Castle Charm Challenge)
     [84506] = true, -- Dagger Juggling (Castle Charm Challenge)
     [84533] = true, -- Sword Swallowing (Castle Charm Challenge)
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -340,6 +342,7 @@ CastBarTable.CastDurationFix = {
     [36824] = 4000, -- Q4833 Apply Tiger Buff (Bosmer Insight)
     [33701] = 1000, -- BurrowEND (Throne of the Wilderking)
     [33727] = 500, -- BurrowEND (Throne of the Wilderking)
+    [34499] = 3000, -- Corruption Beam (The Blight of the Bosmer)
 
     ----------------------------------------------------------------
     -- SEASONAL QUEST ----------------------------------------------
@@ -678,6 +681,7 @@ CastBarTable.IsCast = {
     [34842] = true, -- Q4586_ChangeClothesFEMALE (The Witcher of Silatar)
     [33701] = true, -- BurrowEND (Throne of the Wilderking)
     [33727] = true, -- BurrowEND (Throne of the Wilderking)
+    [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
 
     ----------------------------------------------------------------
     -- SEASONAL QUEST ----------------------------------------------
@@ -716,6 +720,7 @@ CastBarTable.IsCast = {
 CastBarTable.CastOverride = {
     [4197] = true, -- Recovering (NPC Duel)
     [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
+    [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
 }
 
 --------------------------------------------------------------------------------------------------------------------------------

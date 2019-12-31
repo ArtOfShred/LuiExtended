@@ -289,19 +289,6 @@ function AbilityAlerts.GenerateAlertFramePreview(state)
         AbilityAlerts.RealignAlerts(i)
     end
 
-    --[[local previewIcon = 'esoui/art/icons/icon_missing.dds'
-    castbar.icon:SetTexture(previewIcon)
-    if CombatInfo.SV.CastBarLabel then
-        local previewName = "Test"
-        castbar.bar.name:SetText(previewName)
-        castbar.bar.name:SetHidden(not state)
-    end
-    if CombatInfo.SV.CastBarTimer then
-        castbar.bar.timer:SetText(string.format("1.0"))
-        castbar.bar.timer:SetHidden(not state)
-    end
-    castbar.bar.bar:SetValue(1)]]--
-
     uiTlw.alertFrame.preview:SetHidden(not state)
     uiTlw.alertFrame:SetHidden(not state)
 end
@@ -329,7 +316,7 @@ function AbilityAlerts.AlertUpdate(currentTime)
             ]]--
 
             local remain = alert.data.duration - currentTime
-
+            local postCast = alert.data.postCast + remain
 
             -- DEBUG
             --[[
@@ -345,17 +332,20 @@ function AbilityAlerts.AlertUpdate(currentTime)
                 alert.timer:SetText(alert.data.showDuration and string.format(" %.1f", remain / 1000) or "")
                 alert.timer:SetColor(unpack(CombatInfo.SV.alerts.colors.alertTimer))
             end
-            if remain <= -1100 then
+            if (postCast) <= -1100 then
                 alert:SetAlpha(1)
                 alert:SetHidden(true)
                 alert.data = { }
                 alert.data.duration = nil
+                alert.data.postCast = nil
                 alert.data.available = true
             elseif remain <= 0 then
                 --alert:SetHidden(true)
                 --alert.data = { }
-                local duration = 1000 - (remain * -1)
-                alert:SetAlpha(EaseOutQuad(duration, 0, 1, 1000))
+                if postCast <= 0 then
+                    local duration = 1000 - (postCast * -1)
+                    alert:SetAlpha(EaseOutQuad(duration, 0, 1, 1000))
+                end
                 alert.timer:SetText("")
             end
         end
@@ -398,6 +388,7 @@ function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityNam
                 alert.data.sourceUnitId = ""
                 alert.icon:SetHidden(true)
                 alert.data.duration = currentTime + 1500
+                alert.data.postCast = 0
                 alert.data.showDuration = false
                 alert.name:SetText(alert.data.textName)
                 alert.name:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
@@ -470,7 +461,7 @@ function AbilityAlerts.PlayAlertSound(abilityId, alertType, crowdControl)
 end
 
 local drawLocation = 1
-function AbilityAlerts.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
+function AbilityAlerts.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
     local color = AbilityAlerts.CrowdControlColorSetup(crowdControl)
 
     for i = 1, 3 do
@@ -481,6 +472,7 @@ function AbilityAlerts.SetupSingleAlertFrame(textName, textMitigation, abilityIc
             alert.data.sourceUnitId = sourceUnitId
             alert.icon.icon:SetTexture(abilityIcon)
             alert.data.duration = endTime
+            alert.data.postCast = postCast
             local remain = endTime - currentTime
             alert.data.showDuration = CombatInfo.SV.alerts.toggles.alertTimer and showDuration or false
             alert.data.alwaysShowInterrupt = alwaysShowInterrupt
@@ -510,6 +502,7 @@ function AbilityAlerts.SetupSingleAlertFrame(textName, textMitigation, abilityIc
     alert.data.sourceUnitId = sourceUnitId
     alert.icon.icon:SetTexture(abilityIcon)
     alert.data.duration = endTime
+    alert.data.postCast = postCast
     local remain = endTime - currentTime
     alert.data.showDuration = CombatInfo.SV.alerts.toggles.alertTimer and showDuration or false
     alert.data.alwaysShowInterrupt = alwaysShowInterrupt
@@ -659,6 +652,8 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     local summon
     local unmit
     local duration
+    local hiddenDuration
+    local postCast
 
     if (Settings.toggles.showAlertMitigate) == true then
         if Alerts[abilityId].block == true then
@@ -694,21 +689,29 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     if Alerts[abilityId].duration then
         duration = Alerts[abilityId].duration
     end
+    if Alerts[abilityId].hiddenDuration then
+        hiddenDuration = Alerts[abilityId].hiddenDuration
+    end
+    if Alerts[abilityId].postCast then
+        postCast = Alerts[abilityId].postCast
+    else
+        postCast = 0
+    end
 
     if not (power == true or destroy == true or summon == true or unmit == true) then
-        AbilityAlerts.OnEvent(alertTypes.SHARED, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
+        AbilityAlerts.OnEvent(alertTypes.SHARED, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
     elseif (power == true or destroy == true or summon == true or unmit == true) then
         if unmit then
-            AbilityAlerts.OnEvent(alertTypes.UNMIT, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, crowdControl)
+            AbilityAlerts.OnEvent(alertTypes.UNMIT, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl)
         end
         if power then
-            AbilityAlerts.OnEvent(alertTypes.POWER, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, crowdControl)
+            AbilityAlerts.OnEvent(alertTypes.POWER, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl)
         end
         if destroy then
-            AbilityAlerts.OnEvent(alertTypes.DESTROY, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, crowdControl)
+            AbilityAlerts.OnEvent(alertTypes.DESTROY, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl)
         end
         if summon then
-            AbilityAlerts.OnEvent(alertTypes.SUMMON, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, crowdControl)
+            AbilityAlerts.OnEvent(alertTypes.SUMMON, abilityId, abilityName, abilityIcon, unitName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl)
         end
     end
 end
@@ -733,6 +736,7 @@ local function CheckInterruptEvent(unitId)
                 alert.data.sourceUnitId = ""
                 alert.icon:SetHidden(true)
                 alert.data.duration = currentTime + 1500
+                alert.data.postCast = 0
                 alert.data.showDuration = false
                 alert.name:SetText(alert.data.textName)
                 alert.name:SetColor(unpack(CombatInfo.SV.alerts.colors.alertShared))
@@ -905,7 +909,7 @@ function AbilityAlerts.FormatAlertString(inputFormat, params)
 end
 
 -- VIEWER
-function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, sourceUnitId, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
+function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, sourceName, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt, duration, hiddenDuration, crowdControl, block, blockstagger, dodge, avoid, interrupt)
     local Settings = CombatInfo.SV.alerts
 
     local labelColor = Settings.colors.alertShared
@@ -996,11 +1000,17 @@ function AbilityAlerts.OnEvent(alertType, abilityId, abilityName, abilityIcon, s
     end
 
     local showDuration = duration and true or false
-    if not duration then duration = 4000 end
+    if not duration then
+        if hiddenDuration then
+            duration = hiddenDuration
+        else
+            duration = 4000
+        end
+    end
     local currentTime = GetGameTimeMilliseconds()
     local endTime = currentTime + duration
 
-    AbilityAlerts.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
+    AbilityAlerts.SetupSingleAlertFrame(textName, textMitigation, abilityIcon, currentTime, endTime, showDuration, crowdControl, sourceUnitId, postCast, alwaysShowInterrupt, neverShowInterrupt, effectOnlyInterrupt)
     AbilityAlerts.PlayAlertSound(abilityId, alertType, crowdControl)
 end
 

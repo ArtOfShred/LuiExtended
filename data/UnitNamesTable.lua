@@ -67,6 +67,7 @@ LUIE.Data.UnitNames = {
     Boss_Mayor_Aulus = 'Mayor Aulus',
     Boss_Prince_Naemon = 'Prince Naemon',
     Boss_Vicereeve_Pelidil = 'Vicereeve Pelidil',
+    Boss_Shade_of_Naemon = 'Shade of Naemon',
 
     ----------------------------------------------------------------
     -- WORLD BOSSES ------------------------------------------------

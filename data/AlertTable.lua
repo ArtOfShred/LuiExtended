@@ -53,6 +53,7 @@ LUIE.Data.AlertTable = {
     -- skipcheck = true -- display on any event fired rather than just event started -- TODO: DEPRICATE THIS
     -- ignoreRefresh = true -- gnores refresh event here
     -- neverShowInterrupt = true -- Never show an interrupt event here
+    -- effectOnlyInterrupt = true --
 
     --------------------------------------------------
     -- JUSTICE NPC'S ---------------------------------
@@ -713,6 +714,9 @@ LUIE.Data.AlertTable = {
     [43820] = { dodge = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1970, cc = UNBREAKABLE }, -- Quaking Stomp (Prince Naemon)
     [43827] = { avoid = true, priority = 2, auradetect = true, duration = 2916 }, -- Projectile Vomit (Prince Naemon)
 
+    -- Striking at the Heart
+    [48491] = { power = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.Boss_Shade_of_Naemon }, -- Q4960 Naemon Shield Shade
+
     --------------------------------------------------
     -- VVARDENFELL -----------------------------------
     --------------------------------------------------
@@ -916,15 +920,15 @@ LUIE.Data.AlertTable = {
     --------------------------------------------------
 
     -- Banished Cells I
-    [19028] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 1500 }, -- Drain Essence (Cell Haunter)
-    [47587] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Tail Smite (Shadowrend)
-    [21886] = { summon = true, priority = 1, auradetect = true }, -- Summon Dark Proxy (Shadowrend)
-    [18772] = { interrupt = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Feeding (Shadowrend)
-    [18708] = { summon = true, priority = 1, auradetect = true }, -- Summon Clannfear (Angata the Clannfear Handler)
-    [19025] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true }, -- Dead Zone (Skeletal Destroyer)
+    [19028] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 1500, duration = 5050 }, -- Drain Essence (Cell Haunter)
+    [47587] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 3000, cc = STUN }, -- Tail Smite (Shadowrend)
+    [21886] = { summon = true, priority = 1, auradetect = true, bossName = true }, -- Summon Dark Proxy (Shadowrend)
+    [18772] = { interrupt = true, priority = 1, auradetect = true, fakeName = "", duration = 3000, effectOnlyInterrupt = true }, -- Feeding (Shadowrend)
+    [18708] = { summon = true, priority = 1, auradetect = true, bossName = true }, -- Summon Clannfear (Angata the Clannfear Handler)
+    [19025] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Dead Zone (Skeletal Destroyer)
 
-    [33189] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crushing Blow (High Kinlord Rilis)
-    [18840] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Soul Blast (High Kinlord Rilis)
+    [33189] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = UNBREAKABLE, duration = 2000 }, -- Crushing Blow (High Kinlord Rilis)
+    [18840] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = UNBREAKABLE, hiddenDuration = 750 }, -- Soul Blast (High Kinlord Rilis)
     [18875] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Daedric Tempest (High Kinlord Rilis)
 
     -- Banished Cells II

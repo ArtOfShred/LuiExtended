@@ -1067,7 +1067,7 @@ local strings = {
     SI_LUIE_SKILL_BURROW_TP =                            "Burrowing underground, protecting you from harm and concealing you.",
     SI_LUIE_SKILL_SERPENT_SPIT =                         "Serpent Spit",
     SI_LUIE_SKILL_SHADOW_WOOD =                          "Shadow Wood",
-    SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "A servant of the shade of Prince Naemon has dragged you into the Shadow Wood.",
+    SI_LUIE_SKILL_SHADOW_WOOD_TP =                       "The Shade of Naemon has dragged you into the Shadow Wood.\n\nWhile in the Shadow Wood, deal |cffffff95|r% less damage to the Shade of Naemon.",
     SI_LUIE_SKILL_BEAR_FEROCITY_TP =                     "Immune to all crowd control and movement impairing effects for |cffffff<<1>>|r seconds.",
     SI_LUIE_SKILL_BOSS_CC_IMMUNITY =                     "Boss Immunities",
     SI_LUIE_SKILL_SLAUGHTERFISH_ATTACK_TP =              "You are being devoured by a swarm of Slaughterfish, turn back before it's too late!",
@@ -1285,6 +1285,9 @@ local strings = {
 
     SI_LUIE_SKILL_DISGUISE_ALTMER_GLAMOUR_TP =           "Disguise yourself as an Altmer Noble.",
     SI_LUIE_SKILL_WILDERKINGS_PROTECTION_TP =            "The blessing of the Wilderking makes you appear less threatening to the creatures in Greenheart, preventing some of them from attacking you.",
+
+    SI_LUIE_SKILL_DISPERSE_CORRUPTION =                  "Disperse Corruption",
+    SI_LUIE_SKILL_ANCIENT_WRATH_TP =                     "Enemies that deal damage to you suffer Flame Damage.",
 
 }
 

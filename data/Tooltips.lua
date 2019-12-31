@@ -1204,6 +1204,7 @@ LUIE.Data.Tooltips = {
     Skill_Wilderkings_Protection                    = GetString(SI_LUIE_SKILL_WILDERKINGS_PROTECTION_TP),
     Skill_Burrow                                    = GetString(SI_LUIE_SKILL_BURROW_TP),
     Skill_Shadow_Wood                               = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP),
+    Skill_Ancient_Wrath                             = GetString(SI_LUIE_SKILL_ANCIENT_WRATH_TP),
 
     ----------------------------------------------------------------
     -- ARENAS ------------------------------------------------------

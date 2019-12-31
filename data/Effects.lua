@@ -2214,12 +2214,14 @@ Effects.EffectOverrideByName = {
         [Unitnames.NPC_Dire_Wolf] =               { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_wolf.dds' }, -- Summon Beast (Spriggan)
         [Unitnames.NPC_Websnare_Spider] =         { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
         [Unitnames.NPC_Spider] =                  { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
-        [Unitnames.NPC_Venomspit_Spider ] =        { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
+        [Unitnames.NPC_Venomspit_Spider] =        { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_spider.dds' }, -- Summon Beast (Spriggan)
     },
     [89102] = {
         [Unitnames.NPC_Thunderbug] =              { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_thunderbug.dds' }, -- Summon Beast (Spriggan)
         [Unitnames.NPC_Thunderbug_Lord] =         { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_thunderbug.dds' }, -- Summon Beast (Spriggan)
         [Unitnames.NPC_Hoarvor] =                 { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_hoarvor.dds' }, -- Summon Beast (Spriggan)
+        [Unitnames.NPC_Lion] =                    { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_lion.dds' }, -- Summon Beast (Spriggan)
+        [Unitnames.NPC_Lioness] =                 { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_lioness.dds' }, -- Summon Beast (Spriggan)
     },
 
     -- QUESTS
@@ -2241,6 +2243,7 @@ Effects.EffectOverrideByName = {
        [Unitnames.Boss_Dark_Ember] = { hide = true }, -- Azara the Frightener
        [Unitnames.Boss_Lady_Solace] = { hide = true}, -- Grahtwood (Lady Solace's Fen)
        [Unitnames.Boss_Valanir_the_Restless] = { hide = true }, -- Grahtwood (Valanir's Rest)
+       [Unitnames.Boss_Shade_of_Naemon] = { hide = true }, -- Greenshade (Striking at the Heart)
        [Unitnames.Boss_Tallatta_the_Lustrous] = { hide = true }, -- Malabal Tor (Vulkwasten)
        [Unitnames.Boss_Queen_of_Three_Mercies] = { hide = true }, -- Reaper's March (Waterdancer Falls)
        [Unitnames.NPC_Watcher] = { hide = true }, -- Watcher
@@ -9332,7 +9335,19 @@ Effects.EffectOverride = {
 
     -- Retaking the Pass
     [45650] = { hide = true }, -- Indaenir's Spell
-    [29504] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = Abilities.Skill_Shadow_Wood, tooltip = Tooltips.Skill_Shadow_Wood }, -- Q4546 Shade Layer
+    --[29504] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = Abilities.Skill_Shadow_Wood, tooltip = Tooltips.Skill_Shadow_Wood }, -- Q4546 Shade Layer
+
+    -- The Blight of the Bosmer
+    [34499] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_absorb_corruption.dds', name = Abilities.Skill_Disperse_Corruption }, -- Corruption Beam (Generic Invisible Target)
+
+    -- Right of Theft
+    [34346] = { icon = 'esoui/art/icons/achievement_u23_dun1_killmonstersa.dds', tooltip = Tooltips.Skill_Ancient_Wrath, stack = 0 }, -- Ancient Wrath (Player)
+    [34824] = { icon = 'esoui/art/icons/achievement_u23_dun1_killmonstersa.dds' }, -- Ancient Wrath (Player)
+
+    -- Striking at the Heart
+    --[34597] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = Abilities.Skill_Shadow_Wood, tooltip = Tooltips.Skill_Shadow_Wood }, -- Q4690 Forest Spirit Layer
+    [48491] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = Abilities.Skill_Shadow_Wood }, -- Q4960 Naemon Shield Shade
+    [48490] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = Abilities.Skill_Shadow_Wood, tooltip = Tooltips.Skill_Shadow_Wood, unbreakable = 1 }, -- Q4960 Boss Shade World
 
     ----------------------------------------------------------------
     -- IC QUEST RELATED & QUEST BOSS HIDDEN ------------------------
@@ -11499,6 +11514,7 @@ Effects.FakeExternalDebuffs = {
     [43823] = { duration = 2150 }, -- IntroKB (Prince Naemon)
     [36766] = { duration = 5000 }, -- Q4842 Stun Headgrab Knockback (The Unquiet Dead)
     [33384] = { duration = 4000 }, -- Q4586 Aranias Vine Stun
+    [48490] = { duration = 0 }, -- Q4960 Boss Shade World
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------
@@ -11736,7 +11752,8 @@ Effects.FakePlayerBuffs = {
     -- Aldmeri Dominion
     [33066] = { icon = 'LuiExtended/media/icons/disguises/disguise_fancy_clothing.dds', name = Abilities.Skill_Fancy_Clothing, duration = 0, long = true, ignoreBegin = true }, -- Q4586_ChangeClothes
     [34842] = { icon = 'LuiExtended/media/icons/disguises/disguise_fancy_clothing_female.dds', name = Abilities.Skill_Fancy_Clothing, duration = 0, long = true, ignoreBegin = true }, -- Q4586_ChangeClothesFEMALE
-    [29504] = { duration = 0, long = true }, -- Q4546 Shade Layer
+    --[29504] = { duration = 0, long = true }, -- Q4546 Shade Layer
+    --[34597] = { duration = 0, long = true }, -- Q4690 Forest Spirit Layer
 
     -- Quest related (Craglorn)
     --[81807] = {icon = 'esoui/art/icons/achievement_104.dds', name = 'Power of the Stars', duration = 22000}, -- Power of the Stars (The Star-Gazers)

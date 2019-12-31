@@ -11402,7 +11402,7 @@ LUIE.DebugAuras = {
     [30750] = true, -- Generic Fade To Black 2.5s
     [32693] = true, -- 4625 Stun for Teleport 2.5s
     [39199] = true, -- Q4917 Thane Theater
-    --[39247] = true, -- RobS Stun .5 Sec
+    [39247] = true, -- RobS Stun .5 Sec
     [39244] = true, -- Q4917 Push Player Back
     [39260] = true, -- Q4917 Push Player Back
     [41342] = true, -- 10 Second Timer
@@ -11434,7 +11434,7 @@ LUIE.DebugAuras = {
     [35968] = true, -- Q4768 Bestowal Theatre Check
     [39542] = true, -- Q4768 Bestowal Theatre Block
     [35606] = true, -- Q4768 Duel Start Stun
-    --[41339] = true, -- RobS Stun 3 Sec
+    [41339] = true, -- RobS Stun 3 Sec
     [43151] = true, -- Q4768 Use Bucket
     [34867] = true, -- Q4768 No-Fingers Wet
     [35645] = true, -- Q4768 PC Tribunal Layer 2 Stun
@@ -11730,7 +11730,32 @@ LUIE.DebugAuras = {
     [47427] = true, -- Q4546 Shade Death Delay
 
     -- The Blight of the Bosmer
-    --[34499] = true, -- Corruption Beam
+    [34499] = true, -- Corruption Beam
+    [47425] = true, -- Q4608 Shade Death Delay
+
+    -- Right of Theft
+    [34344] = true, -- Q4601 Ghost Despawn
+    [34345] = true, -- Q4601 GS PC Can Spawn
+    [34346] = true, -- Ancient Wrath
+    [34824] = true, -- Ancient Wrath
+    [47430] = true, -- Q4601 Shade Death Delay
+
+    -- Striking at the Heart
+    [35496] = true, -- Q4690 Shade Layer
+    [34597] = true, -- Q4690 Forest Spirit Layer
+    [35619] = true, -- Q4690 CV VH Barrier (Perm)
+    [35556] = true, -- Q4690
+    [35529] = true, -- Shield
+    [35611] = true, -- Q4690 CV VH Barrier (Timed)
+    [34435] = true, -- Q4690
+
+    [48491] = true, -- Q4960 Naemon Shield Shade
+    [48537] = true, -- Q3868 Restore Player
+    [48490] = true, -- Q4960 Boss Shade World
+    [48498] = true, -- Q4960 Necor Skele Rise
+    [34455] = true, -- Purify
+    [34493] = true, -- Q4690
+    [48486] = true, -- Q4960 Inda Revived
 
     -------------------------------------
     -- VVARDENFELL QUESTS/EVENTS --------
