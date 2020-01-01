@@ -169,6 +169,8 @@ LUIE.Data.Tooltips = {
     Generic_AOE_Shock                               = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", ShockDamage),
     Generic_AOE_Magic                               = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP), "SUBSTRING", MagicDamage),
 
+    Generic_AOE_Fire_Stacking                       = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_STACK_TP), "SUBSTRING", FlameDamage),
+
     Generic_AOE_Snare_Physical                      = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_SNARE_TP), "SUBSTRING", PhysicalDamage),
     Generic_AOE_Snare_Poison                        = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_SNARE_TP), "SUBSTRING", PoisonDamage),
     Generic_AOE_Snare_Disease                       = string.gsub(GetString(SI_LUIE_SKILL_GENERIC_GROUND_AOE_SNARE_TP), "SUBSTRING", DiseaseDamage),
@@ -1052,8 +1054,6 @@ LUIE.Data.Tooltips = {
     -- TRAPS ---------------------------------------------
     -- ---------------------------------------------------
 
-    Skill_Lava_Stack                                = GetString(SI_LUIE_SKILL_LAVA_STACK_TP),
-    Skill_Lava_No_Snare                             = GetString(SI_LUIE_SKILL_LAVA_TP),
     Skill_Slaughterfish_Attack                      = GetString(SI_LUIE_SKILL_SLAUGHTERFISH_ATTACK_TP),
 
     Skill_Spike_Trap                                = GetString(SI_LUIE_SKILL_SPIKE_TRAP_TP),
@@ -1205,6 +1205,7 @@ LUIE.Data.Tooltips = {
     Skill_Burrow                                    = GetString(SI_LUIE_SKILL_BURROW_TP),
     Skill_Shadow_Wood                               = GetString(SI_LUIE_SKILL_SHADOW_WOOD_TP),
     Skill_Ancient_Wrath                             = GetString(SI_LUIE_SKILL_ANCIENT_WRATH_TP),
+    Skill_Necrotic_Circle_Stun                      = GetString(SI_LUIE_SKILL_NECROTIC_CIRCLE_STUN_TP),
 
     ----------------------------------------------------------------
     -- ARENAS ------------------------------------------------------

@@ -1883,13 +1883,13 @@ Effects.AddNameAura = {
     [Unitnames.Boss_Rukhan] = { [1] = { id = 33097 } }, -- Rukhan
     [Unitnames.Boss_Marruz] = { [1] = { id = 33097 } }, -- Marruz
     [Unitnames.NPC_Xivilai_Immolator] = { [1] = { id = 33097 } }, -- Xivilai Immolator
-    [Unitnames.NPC_Xivilai_Ravager] = { [1] = { id = 33097 } }, -- Xivilai Immolator
+    [Unitnames.NPC_Xivilai_Ravager] = { [1] = { id = 33097 } }, -- Xivilai Ravager
     [Unitnames.Boss_Urata_the_Legion] = { [1] = { id = 33097 } }, -- Urata the Legion
     [Unitnames.NPC_Flame_Colossus] = { [1] = { id = 33097 } }, -- Flame Colossus
     [Unitnames.Boss_Horvantud_the_Fire_Maw] = { [1] = { id = 33097 } }, -- Horvantud the Fire Maw
     [Unitnames.Boss_Ash_Titan] = { [1] = { id = 33097 } }, -- Ash Titan
-    [Unitnames.NPC_Air_Atronach] = { [1] = { id = 33097, zone = 376 } }, -- Air Atronach (City of Ash II)
-    [Unitnames.NPC_Dremora_Hauzkyn] = { [1] = { id = 33097, zone = 376 } }, -- Dremora Hauzkyn (City of Ash II)
+    [Unitnames.NPC_Air_Atronach] = { [1] = { id = 33097, zone = 378 } }, -- Air Atronach (City of Ash II)
+    [Unitnames.NPC_Dremora_Hauzkyn] = { [1] = { id = 33097, zone = 378 } }, -- Dremora Hauzkyn (City of Ash II)
     [Unitnames.NPC_Fire_Ravager] = { [1] = { id = 33097 } }, -- Fire Ravager
     [Unitnames.NPC_Xivilai_Fulminator] = { [1] = { id = 33097 } }, -- Xivilai Fulminator
     [Unitnames.NPC_Xivilai_Boltaic] = { [1] = { id = 33097 } }, -- Xivilai Fulminator
@@ -2654,6 +2654,9 @@ Effects.EffectHideSCT = {
     ----------------------------
     -- Dungeons
     ----------------------------
+
+    -- Elden Hollow
+    [8398] = true, -- Bleeding (Infernal Guardian)
 
     -- Elden Hollow II
     [34378] = true, -- Flame Geyser (Dubroze the Infestor)
@@ -8831,9 +8834,9 @@ Effects.EffectOverride = {
     [11338] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = Abilities.Trap_Lava,  tooltip = Tooltips.Generic_AOE_Snare_Fire, tooltipValue2 = 1, tooltipValue3 = 30, unbreakable = 1, groundLabel = true }, -- In Lava (Lava - The Earth Forge)
 
     [56277] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds' }, -- Lava (City of Ash II)
-    [55925] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', tooltip = Tooltips.Skill_Lava_Stack, unbreakable = 1, groundLabel = true, stackAdd = 1 }, -- Lava (City of Ash II)
+    [55925] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', tooltip = Tooltips.Generic_AOE_Fire_Stacking, tooltipValue2 = 0.75, tooltipValue3 = 75, unbreakable = 1, groundLabel = true }, -- Lava (City of Ash II)
 
-    [5139] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', tooltip = Tooltips.Skill_Lava_No_Snare, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, groundLabel = true }, -- Lava (Dragonstar Arena)
+    [5139] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 0.75, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, groundLabel = true }, -- Lava (Dragonstar Arena)
     [5140] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds' }, -- Lava (Dragonstar Arena)
 
     -- Hiding Spot
@@ -10443,10 +10446,10 @@ Effects.EffectOverride = {
     [46715] = { hide = true }, -- DUN_BCH Cruelty One Shot
 
     [28902] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_jagged_claw.dds' }, -- Swipe (Maw of the Infernal)
-    [49150] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds', name = Abilities.Skill_Breath_of_Flame }, -- Cone of Rot (Maw of the Infernal)
+    [48271] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds' }, -- Breath of Flame (Maw of the Infernal)
     [49149] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds' }, -- Breath of Flame (Maw of the Infernal)
     [35680] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds', unbreakable = 1, tooltip = Tooltips.Generic_Stun }, -- Immolating Bite (Maw of the Infernal)
-    [28904] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_gtaoe.dds', name = Abilities.Skill_Pool_of_Fire, groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1.5 }, -- Immolating Bite (Maw of the Infernal)
+    [28904] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_gtaoe.dds', name = Abilities.Skill_Pool_of_Fire, groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire_Stacking, tooltipValue2 = 1.5, tooltipValue3 = 10, stack = 1, stackAdd = 1 }, -- Immolating Bite (Maw of the Infernal)
     [47127] = { hide = true }, -- Nocom
 
     [48281] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = Abilities.Skill_Quick_Strike }, -- Slash (Keeper Voranil)
@@ -10523,7 +10526,7 @@ Effects.EffectOverride = {
 
     [9910] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', name = Abilities.Skill_Summon_Saplings }, -- Summon Saplings (Chokethorn)
     [9930] = { icon = 'esoui/art/icons/mh_hedgeguardian_strang.dds', name = Abilities.Skill_Heal_Spores, tooltip = Tooltips.Generic_HoT_Channel, tooltipValue2 = 1.5 }, -- Heal Spores (Chokethorn)
-    [9875] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds' }, -- Fungal Burst (Chokethorn)
+    [9875] = { icon = 'LuiExtended/media/icons/abilities/ability_strangler_fungal_burst.dds' }, -- Fungal Burst (Chokethorn)
     [44092] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger }, -- Generic Stagger Enemy (Chokethorn)
 
     [44223] = { icon = 'LuiExtended/media/icons/abilities/ability_alit_inhale.dds' }, -- Inhale (Leafseether)
@@ -10534,7 +10537,7 @@ Effects.EffectOverride = {
     [9852] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_poison_ranged.dds', tooltip = Tooltips.Generic_Poison, tooltipValue2 = 2 }, -- Rotting Bolt (Canonreeve Oraneth)
 
     [16262] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_circle_ground.dds' }, -- Necrotic Circle (Canonreeve Oraneth)
-    [25348] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_circle.dds', tooltip = Tooltips.Generic_Stun }, -- Necrotic Circle (Canonreeve Oraneth)
+    [25348] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_circle.dds', tooltip = Tooltips.Skill_Necrotic_Circle_Stun }, -- Necrotic Circle (Canonreeve Oraneth)
     [42601] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_circle_ground.dds', tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 0.5, groundLabel = true }, -- Necrotic Circle (Canonreeve Oraneth)
     [25370] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_circle.dds' }, -- Necrotic Circle (Canonreeve Oraneth)
     [46800] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_necrotic_circle.dds', tooltip = Tooltips.Generic_Stun, unbreakable = 1 }, -- Necrotic Circle (Canonreeve Oraneth)
@@ -10545,7 +10548,7 @@ Effects.EffectOverride = {
 
     [9839] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_bone_hurricane.dds', tooltip = Tooltips.Generic_Damage_Shield_Duration }, -- Bone Hurricane (Canonreeve Oraneth)
 
-    [27891] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_darkness_below.dds', tooltip = Tooltips.Generic_Stun }, -- Darkness Below (Elden Hollow)
+    [27891] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_darkness_below.dds', tooltip = Tooltips.Skill_Necrotic_Circle_Stun }, -- Darkness Below (Elden Hollow)
     [27892] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_darkness_below.dds' }, -- Darkness Below (Elden Hollow)
     [27890] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_darkness_below.dds', tooltip = Tooltips.Generic_Stun, unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Darkness Below (Elden Hollow)
     [28886] = { hide = true }, -- Darkness Below
@@ -10798,21 +10801,21 @@ Effects.EffectOverride = {
     [55128] = { hide = true }, -- Molten Rain (Ash Titan)
     [55175] = { icon = 'esoui/art/icons/ava_siege_ui_002.dds' }, -- Molten Rain (Ash Titan)
 
-    [54698] = { hide = true }, -- Fire Swarm (Ash Titan)
+    [54698] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_flame_tsunami.dds', name = Abilities.Skill_Flame_Tsunami, hide = true }, -- Fire Swarm (Ash Titan)
     [54857] = { hide = true }, -- Random Target (Ash Titan)
     [54858] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = Abilities.Skill_Wing_Gust, hide = true }, -- Knockback
     [54873] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = Abilities.Skill_Wing_Gust, unbreakable = 1, tooltip = Tooltips.Generic_Knockback }, -- Heavy Slash
 
     [54856] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = Abilities.Skill_Wing_Gust, hide = true }, -- Wing Burst (Ash Titan)
-    [54855] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = Abilities.Skill_Wing_Gust, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 35 }, -- Shockwave (Ash Titan)
+    [54855] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = Abilities.Skill_Wing_Gust, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 20 }, -- Shockwave (Ash Titan)
 
     [54859] = { hide = true, tooltip = Tooltips.Generic_Stagger }, -- Stagger (Ash Titan)
-    [54874] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = Abilities.Skill_Wing_Gust, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 35 }, -- Shockwave (Ash Titan)
+    [54874] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_backdraft.dds', name = Abilities.Skill_Wing_Gust, tooltip = Tooltips.Generic_Snare, tooltipValue2 = 20 }, -- Shockwave (Ash Titan)
 
     [56145] = { hide = true }, -- Shockwave (Ash Titan)
     [56144] = { hide = true }, -- Shockwave (Ash Titan)
 
-    [54699] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_flame_tsunami.dds', name = Abilities.Skill_Flame_Tsunami }, -- Fire Swarm (Ash Titan)
+    [54699] = { hide = true }, -- Fire Swarm (Ash Titan)
     [54648] = { hide = true }, -- Fire Swarm (Ash Titan)
     [54861] = { hide = true }, -- Fire Swarm (Ash Titan)
 
@@ -10833,7 +10836,7 @@ Effects.EffectOverride = {
     [56318] = { hide = true }, -- Cooldowns (Ash Titan)
     [56319] = { hide = true }, -- Cooldowns2 (Ash Titan)
 
-    [54366] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flame_tornado.dds', hide = true }, -- Flame Tornado (Air Atronach)
+    [54366] = { hide = true }, -- Flame Tornado (Air Atronach)
     [56312] = { hide = true }, -- Flame Tornado (Air Atronach)
     [60683] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flame_tornado.dds', tooltip = Tooltips.Generic_Damage_Shield_Percent_Duration, tooltipValue2 = 35 }, -- Flame Tornado (Air Atronach)
     [54367] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flame_tornado.dds' }, -- Flame Tornado (Air Atronach)
@@ -12277,6 +12280,25 @@ Effects.MapDataOverride = {
     },
 
     -- DUNGEONS
+
+    [3757] = { -- Claw (Lurcher)
+        [541] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Elden Hollow II
+    },
+    [3860] = { -- Pulverize (Lurcher)
+        [541] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Elden Hollow II
+    },
+    [3855] = { -- Crushing Limbs (Lurcher)
+        [541] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Elden Hollow II
+    },
+    [38554] = { -- Crushing Limbs (Lurcher)
+        [541] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Elden Hollow II
+    },
+    [3767] = { -- Choking Pollen (Lurcher)
+        [541] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Elden Hollow II
+    },
+    [4769] = { -- Choking Pollen (Lurcher)
+        [541] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Elden Hollow II
+    },
 
     [9039] = {  -- Snare (Selene's Rose)
         [7] = {     icon = 'LuiExtended/media/icons/abilities/ability_strangler_lash.dds', name = Abilities.Skill_Lash }, -- Selene's Web

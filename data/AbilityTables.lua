@@ -1220,7 +1220,6 @@ local AbilityTables = {
     Skill_Shadow_Proxy                = 114655,
 
     -- Banished Cells II
-    Skill_Breath_of_Flame             = 49149,
     Skill_Pool_of_Fire                = GetString(SI_LUIE_SKILL_POOL_OF_FIRE),
     Skill_Sisters_Bond                = GetString(SI_LUIE_SKILL_SISTERS_BOND),
     Skill_Levitate                    = 28570,

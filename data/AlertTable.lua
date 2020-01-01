@@ -53,7 +53,10 @@ LUIE.Data.AlertTable = {
     -- skipcheck = true -- display on any event fired rather than just event started -- TODO: DEPRICATE THIS
     -- ignoreRefresh = true -- gnores refresh event here
     -- neverShowInterrupt = true -- Never show an interrupt event here
-    -- effectOnlyInterrupt = true --
+    -- effectOnlyInterrupt = true -- Show an interrupt only when this effect fades early off a unit. Used for abilities that a target casts on another target.
+    -- alwaysShowInterrupt = true -- Show an interrupt even if this effect doesn't display a duration.
+    -- noSelf = true -- Do not show this alert if you are the target/source of it. This is used for warning party members of attacks they have to help you deal with.
+    -- durationOnlyIfTarget = true -- Only show a duration timer if the player is the target, this makes some events we can't detect interrupts for less annoying for other players if they get interrupted early.
 
     --------------------------------------------------
     -- JUSTICE NPC'S ---------------------------------
@@ -106,9 +109,9 @@ LUIE.Data.AlertTable = {
     [35164] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1333, cc = STUN }, -- Agony (Berserker)
 
     [29510] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Thunder Hammer (Thundermaul)
-    [17867] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Shock Aura (Thundermaul)
+    [17867] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Shock Aura (Thundermaul)
     [44407] = { power = true, priority = 2, auradetect = true }, -- Lightning Form (Thundermaul)
-    [81215] = { block = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN }, -- Shock Aura (Thundermaul - Boss)
+    [81215] = { block = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN }, -- Shock Aura (Thundermaul - Boss)
     [81195] = { avoid = true, priority = 2, auradetect = true, cc = SNARE }, -- Agonizing Fury (Thundermaul - Boss)
     [81217] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1533 }, -- Thunder Hammer (Thundermaul - Boss)
 
@@ -128,7 +131,7 @@ LUIE.Data.AlertTable = {
     [15164] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Heat Wave (Fire Mage)
     [47095] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Fire Rune (Fire Mage)
 
-    [29471] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Thunder Thrall (Storm Mage)
+    [29471] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Thunder Thrall (Storm Mage)
 
     [12459] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = SNARE }, -- Winter's Reach (Frost Mage)
 
@@ -374,7 +377,7 @@ LUIE.Data.AlertTable = {
     [9748] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 3000 }, -- Envelop (Banekin)
 
     [4799] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STAGGER }, -- Tail Spike (Clannfear)
-    [93745] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Rending Leap (Clannfear)
+    [93745] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, cc = STUN, duration = 1000 }, -- Rending Leap (Clannfear)
 
     [26641] = { avoid = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Soul Flame (Daedric Titan)
     [34405] = { block = true, avoid = true, priority = 2, auradetect = true, duration = 2200 }, -- Swallowing Souls (Daedric Titan)
@@ -606,13 +609,13 @@ LUIE.Data.AlertTable = {
 
     -- World Boss - Seaside Scarp Camp
     [84048] = { avoid = true, priority = 1, auradetect = true, cc = SNARE, fakeName = Unitnames.Boss_Quenyas }, -- Quenyas (Lich)
-    [84283] = { block = true, dodge = true, priority = 1, eventdetect = true, fakeName = Unitnames.Boss_Oskana, cc = STAGGER }, -- Coursing Bones (Oskana)
+    [84283] = { block = true, dodge = true, priority = 1, eventdetect = true, fakeName = Unitnames.Boss_Oskana, cc = STAGGER, duration = 1500 }, -- Coursing Bones (Oskana)
     [84286] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Oskana }, -- -- Wake the Dead (Oskana)
 
     -- World Boss - Heretic's Summons
     [82934] = { summon = true, priority = 1, auradetect = true, neverShowInterrupt = true }, -- Shrieking Summons (Snapjaw)
     [83150] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Tail Whip (Snapjaw)
-    [83009] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Rending Leap (Snapjaw)
+    [83009] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = STUN, duration = 1500 }, -- Rending Leap (Snapjaw)
     [83040] = { block = true, dodge = true, bs = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.NPC_Clannfear, refire = 250 }, -- Focused Charge (Clannfear - Snapjaw)
     [83016] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 1000, effectOnlyInterrupt = true, fakeName = Unitnames.NPC_Clannfear }, -- Necrotic Explosion (Clannfear - Snapjaw)
 
@@ -622,19 +625,19 @@ LUIE.Data.AlertTable = {
     [83548] = { interrupt = true, priority = 1, eventdetect = true, cc = FEAR, duration = 1000, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Nindaeril_the_Monsoon }, -- Mighty Roar (Nindaeril the Monsoon)
 
     -- World Boss - Gathongor's Mine
-    [84205] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Stinging Sputum (Gathongor the Mauler)
-    [84196] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1100, eventdetect = true, bossName = true, cc = STAGGER }, -- Marsh Masher (Gathongor the Mauler)
+    [84205] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 1000, postCast = 4000 }, -- Stinging Sputum (Gathongor the Mauler)
+    [84196] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1100, eventdetect = true, bossName = true, cc = STAGGER, postCast = 2500 }, -- Marsh Masher (Gathongor the Mauler)
     [84209] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 600, cc = STUN }, -- Wrecking Jaws (Gathongor the Mauler)
     [84212] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 2100, cc = STUN, eventdetect = true, bossName = true }, -- Bog Slam (Gathongor the Mauler)
 
     -- World Boss - Thodundor's View
     [83155] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1300 }, -- Thunderous Smash (Thodundor of the Hill)
     [83160] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1800, cc = STAGGER, eventdetect = true, bossName = true }, -- Stone Crusher (Thodundor of the Hill)
-    [83136] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 800, cc = SNARE, eventdetect = true, bossName = true }, -- Ground Shock (Thodundor of the Hill)
+    [83136] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 800, cc = SNARE, eventdetect = true, bossName = true, postCast = 1500 }, -- Ground Shock (Thodundor of the Hill)
 
     -- World Boss - Windshriek Strand
-    [84066] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Ground Shock (Skullbreaker)
-    [83651] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 500, bossName = true }, -- Feral Impact (Skullbreaker)
+    [84066] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, duration = 2500, postCast = 2500 }, -- Ground Shock (Skullbreaker)
+    [83651] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 500, bossName = true, duration = 4500 }, -- Feral Impact (Skullbreaker)
     [84076] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Carrion Call (Skullbreaker)
 
     -- World Boss - Big Ozur's Valley
@@ -686,7 +689,7 @@ LUIE.Data.AlertTable = {
     [39577] = { block = true, interrupt = true, priority = 2 }, -- Palolel's Rage (Queen Palolel)
 
     -- Will of the Council
-    [28939] = { avoid = true, priority = 2, eventdetect = true, refire = 2000 }, -- Heat Wave (Sees-All-Colors)
+    [28939] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2200, bossName = true, duration = 1500, postCast = 5000 }, -- Heat Wave (Sees-All-Colors)
 
     -- The Mad God's Bargain
     [39555] = { interrupt = true, priority = 2, eventdetect = true, refire = 1500 }, -- Summon Scamp (Haskill)
@@ -923,85 +926,85 @@ LUIE.Data.AlertTable = {
     [19028] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 1500, duration = 5050 }, -- Drain Essence (Cell Haunter)
     [47587] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 3000, cc = STUN }, -- Tail Smite (Shadowrend)
     [21886] = { summon = true, priority = 1, auradetect = true, bossName = true }, -- Summon Dark Proxy (Shadowrend)
-    [18772] = { interrupt = true, priority = 1, auradetect = true, fakeName = "", duration = 3000, effectOnlyInterrupt = true }, -- Feeding (Shadowrend)
+    [18772] = { interrupt = true, priority = 1, auradetect = true, fakeName = "", duration = 3000, effectOnlyInterrupt = true, noSelf = true }, -- Feeding (Shadowrend)
     [18708] = { summon = true, priority = 1, auradetect = true, bossName = true }, -- Summon Clannfear (Angata the Clannfear Handler)
-    [19025] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Dead Zone (Skeletal Destroyer)
+    [19025] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 1500, postCast = 4000 }, -- Dead Zone (Skeletal Destroyer)
 
     [33189] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = UNBREAKABLE, duration = 2000 }, -- Crushing Blow (High Kinlord Rilis)
     [18840] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = UNBREAKABLE, hiddenDuration = 750 }, -- Soul Blast (High Kinlord Rilis)
-    [18875] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Daedric Tempest (High Kinlord Rilis)
+    [18875] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 1500, eventdetect = true, bossName = true, duration = 2600, postCast = 4000 }, -- Daedric Tempest (High Kinlord Rilis)
 
     -- Banished Cells II
-    [49150] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, bossName = true }, -- Cone of Rot (Maw of the Infernal)
-    [27826] = { block = true, bs = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crushing Blow (Keeper Voranil)
-    [29018] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 750, eventdetect = true, bossName = true }, -- Berserker Frenzy (Keeper Voranil)
-    [28750] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Essence Siphon (Keeper Voranil)
-    [29143] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Daedric Blast (Keeper Imiril)
+    [48271] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 2500, bossName = true, duration = 4000 }, -- Breath of Flame (Maw of the Infernal)
+    [27826] = { block = true, bs = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STUN }, -- Crushing Blow (Keeper Voranil)
+    [29018] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 750, eventdetect = true, bossName = true, duration = 3550 }, -- Berserker Frenzy (Keeper Voranil)
+    [28750] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1750 }, -- Essence Siphon (Keeper Voranil)
+    [29143] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 2000 }, -- Daedric Blast (Keeper Imiril)
     [28962] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED }, -- Sister's Love (Sister Sihna / Sister Vera)
-    [48799] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, bossName = true }, -- Daedric Tempest (High Kinlord Rilis)
-    [48814] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, bossName = true }, -- Daedric Tempest (High Kinlord Rilis)
-    [28570] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Levitate (High Kinlord Rilis)
-    [28462] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Levitate (High Kinlord Rilis)
+    [48799] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, bossName = true, duration = 1000, postCast = 4000 }, -- Daedric Tempest (High Kinlord Rilis)
+    [48814] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500, bossName = true, duration = 1000, postCast = 4000 }, -- Daedric Tempest (High Kinlord Rilis)
+    [28570] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Levitate (High Kinlord Rilis)
+    [28462] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Levitate (High Kinlord Rilis)
 
     -- Elden Hollow I
-    [16834] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Executioner's Strike (Akash gra-Mal)
-    [15999] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Leaping Strike (Akash gra-Mal)
-    [16016] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Berserker Frenzy (Akash gra-Mal)
+    [16834] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STUN }, -- Executioner's Strike (Akash gra-Mal)
+    [15999] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 750 }, -- Leaping Strike (Akash gra-Mal)
+    [16016] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 3550 }, -- Berserker Frenzy (Akash gra-Mal)
 
     [9910] = { destroy = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Summon Saplings (Chokethorn)
-    [9930] = { interrupt = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1000, fakeName = Unitnames.NPC_Strangler_Saplings }, -- Heal Spores (Chokethorn)
-    [9875] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Fungal Burst (Chokethorn)
+    [9930] = { interrupt = true, priority = 1, auradetect = true, fakeName = Unitnames.NPC_Strangler_Saplings, effectOnlyInterrupt = true, alwaysShowInterrupt = true }, -- Heal Spores (Chokethorn)
+    [9875] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, duration = 2000, cc = STAGGER, neverShowInterrupt = true }, -- Fungal Burst (Chokethorn)
 
-    [44223] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.Boss_Leafseether }, -- Inhale (Leafseether)
+    [44223] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.Boss_Leafseether, cc = STAGGER, duration = 1750 }, -- Inhale (Leafseether)
 
-    [9845] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Rotting Bolt (Canonreeve Oraneth)
-    [16262] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Necrotic Circle (Canonreeve Oraneth)
-    [9944] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Necrotic Burst (Canonreeve Oraneth)
+    [9845] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 2000, neverShowInterrupt = true }, -- Rotting Bolt (Canonreeve Oraneth)
+    [16262] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, cc = STUN, duration = 2000, postCast = 6000 }, -- Necrotic Circle (Canonreeve Oraneth)
+    [9944] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 3000, cc = STUN }, -- Necrotic Burst (Canonreeve Oraneth)
     [9839] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Bone Hurricane (Canonreeve Oraneth)
 
     -- Elden Hollow II
-    [34376] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, refire = 1500 }, -- Flame Geyser (Dubroze the Infestor)
+    [34376] = { avoid = true, priority = 1, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN, duration = 3300, bossName = true, cc = FEAR }, -- Flame Geyser (Dubroze the Infestor)
     [32707] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Summon Guardians (Dark Root)
-    [33334] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Frenzied_Guardian }, -- Latch On Stamina (Frenzied Guardian)
-    [33337] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Mystic_Guardian }, -- Latch On Magicka (Mystic Guardian)
+    [33334] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Frenzied_Guardian, duration = 7850, durationOnlyIfTarget = true }, -- Latch On Stamina (Frenzied Guardian)
+    [33337] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Mystic_Guardian, duration = 7850, durationOnlyIfTarget = true }, -- Latch On Magicka (Mystic Guardian)
     [32890] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Gleaming Light (Dark Root)
     [33533] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Glaring Light (Dark Root)
     [33535] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Brightening Light (Dark Root)
 
-    [33170] = { destroy = true, priority = 1, auradetect = true }, -- Hate (Shadow Tendril)
+    [33170] = { destroy = true, priority = 1, auradetect = true, bossName = true }, -- Hate (Shadow Tendril)
 
-    [33052] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Shadow Stomp (Murklight)
-    [32832] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1750, bossName = true }, -- Consuming Shadow (Murklight)
+    [33052] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 900 }, -- Shadow Stomp (Murklight)
+    [32832] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1750, bossName = true, duration = 3000, postCast = 4000 }, -- Consuming Shadow (Murklight)
     [32975] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Eclipse (Murklight)
 
-    [33102] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1250, bossName = true }, -- Spout Shadow (The Shadow Guard)
+    [33102] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1250, bossName = true, duration = 5000, postCast = 4000 }, -- Spout Shadow (The Shadow Guard)
 
-    [33432] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Daedric Flame (Bogdan the Nightflame)
-    [33480] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Pulverize (Bogdan the Nightflame)
-    [33492] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Pulverize (Bogdan the Nightflame)
-    [33494] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Pulverize (Bogdan the Nightflame)
-    [34260] = { destroy = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.Boss_Nova_Tendril, refire = 1000 }, -- Shadow (Nova Tendril)
+    [33432] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 4300, postCast = 4000 }, -- Daedric Flame (Bogdan the Nightflame)
+    [33480] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 1500 }, -- Pulverize (Bogdan the Nightflame)
+    [33492] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 1500 }, -- Pulverize (Bogdan the Nightflame)
+    [33494] = { unmit = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 1500 }, -- Pulverize (Bogdan the Nightflame)
+    [34260] = { destroy = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossName = true, refire = 1000 }, -- Shadow (Nova Tendril)
 
     -- City of Ash I
-    [31101] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Cleave (Golor the Banekin Handler)
-    [25034] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crushing Blow (Golor the Banekin Handler)
+    [31101] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 1200 }, -- Cleave (Golor the Banekin Handler)
+    [25034] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 2000, cc = UNBREAKABLE }, -- Crushing Blow (Golor the Banekin Handler)
     [33604] = { summon = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Summon Banekin (Golor the Banekin Handler)
 
-    [34607] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Measured Uppercut (Warden of the Shrine)
+    [34607] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1500, cc = UNBREAKABLE }, -- Measured Uppercut (Warden of the Shrine)
     [34654] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true, bossName = true }, -- Fan of Flames (Warden of the Shrine)
     [34620] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true, bossName = true }, -- Fan of Flames (Warden of the Shrine)
 
-    [34190] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Thorny Backhand (Infernal Guardian)
-    [34189] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Ground Slam (Infernal Guardian)
-    [35061] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Consuming Fire (Infernal Guardian)
-    [34183] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Tunneling Roots (Infernal Guardian)
+    [34190] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 550, cc = STAGGER }, -- Thorny Backhand (Infernal Guardian)
+    [34189] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 2000, cc = STAGGER }, -- Ground Slam (Infernal Guardian)
+    [35061] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 8000 }, -- Consuming Fire (Infernal Guardian)
+    [34183] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 800, cc = STAGGER, postCast = 2000 }, -- Tunneling Roots (Infernal Guardian)
 
-    [44278] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED }, -- Lava Geyser (Dark Ember)
+    [44278] = { block = true, avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, duration = 2000 }, -- Lava Geyser (Dark Ember)
 
-    [34198] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true}, -- Burning Field (Rothariel Flameheart)
+    [34198] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Burning Field (Rothariel Flameheart)
     [34205] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, auradetect = true }, -- Deception (Rothariel Flameheart)
 
-    [34901] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Blazing Arrow (Razor Master Erthas)
+    [34901] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Blazing Arrow (Razor Master Erthas)
     [34805] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Release Flame (Razor Master Erthas)
     [34623] = { summon = true, priority = 1, auradetect = true, bossName = true }, -- Summon Flame Atronach (Razor Master Erthas)
     [34780] = { summon = true, priority = 1, auradetect = true, bossName = true }, -- Summon Flame Atranach (Razor Master Erthas)
@@ -1009,12 +1012,12 @@ LUIE.Data.AlertTable = {
     -- City of Ash II
     [53999] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Abilities.Skill_Oblivion_Gate }, -- Summon (Flame Atronach)
     [54021] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Release Flame (Marruz)
-    [53976] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Blazing Arrow (Marruz)
-    [54025] = { interrupt = true, priority = 1, auradetect = true, fakeName = Unitnames.Boss_Akezel }, -- Spell Absorption (Akezel)
-    [53994] = { interrupt = true, priority = 1, eventdetect = true, fakeName = Unitnames.Boss_Akezel, result = ACTION_RESULT_BEGIN }, -- Focused Healing (Akezel)
-    [54096] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.Boss_Rukhan }, -- Pyrocasm (Rukhan)
+    [53976] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Blazing Arrow (Marruz)
+    [54025] = { interrupt = true, priority = 1, auradetect = true, fakeName = Unitnames.Boss_Akezel, duration = 7000, effectOnlyInterrupt = true }, -- Spell Absorption (Akezel)
+    [53994] = { interrupt = true, priority = 1, eventdetect = true, fakeName = Unitnames.Boss_Akezel, result = ACTION_RESULT_BEGIN, hiddenDuration = 3000 }, -- Focused Healing (Akezel)
+    [54096] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.Boss_Rukhan, duration = 2500, cc = STUN }, -- Pyrocasm (Rukhan)
 
-    [56811] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Xivilai_Ravager }, -- Pyrocasm (Xivilai Ravager)
+    [56811] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 2500, cc = STUN }, -- Pyrocasm (Xivilai Ravager)
 
     [56414] = { avoid = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, bossName = true }, -- Fire Runes (Urata the Legion)
     [54225] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Multiply (Urata the Legion)
@@ -1024,36 +1027,35 @@ LUIE.Data.AlertTable = {
 
     [56186] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.NPC_Flame_Colossus }, -- Voice to Wake the Dead (Bone Colossus)
 
-    [55203] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Seismic Tremor (Horvantud the Fire Maw)
-    [56002] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Seismic Tremor (Horvantud the Fire Maw)
-    [55312] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Slag Breath (Horvantud the Fire Maw)
-    [55333] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Fiery Breath (Horvantud the Fire Maw)
-    [55320] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Fiery Breath (Horvantud the Fire Maw)
-    [55335] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Fiery Breath (Horvantud the Fire Maw)
-    [55326] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Fiery Breath (Horvantud the Fire Maw)
-    [55337] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Fiery Breath (Horvantud the Fire Maw)
+    [55203] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 850, cc = STAGGER, neverShowInterrupt = true }, -- Seismic Tremor (Horvantud the Fire Maw)
+    [56002] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 1100, postCast = 12500, neverShowInterrupt = true }, -- Ground Quake (Horvantud the Fire Maw)
+    [55312] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 4200, neverShowInterrupt = true }, -- Slag Breath (Horvantud the Fire Maw)
+    [55333] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 3000, neverShowInterrupt = true }, -- Fiery Breath (Horvantud the Fire Maw)
+    [55320] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 4200, neverShowInterrupt = true }, -- Fiery Breath (Horvantud the Fire Maw)
+    [55335] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 3000, neverShowInterrupt = true }, -- Fiery Breath (Horvantud the Fire Maw)
+    [55326] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 4200, neverShowInterrupt = true }, -- Fiery Breath (Horvantud the Fire Maw)
+    [55337] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 3000, neverShowInterrupt = true }, -- Fiery Breath (Horvantud the Fire Maw)
     [57618] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Damage Shield (Horvantud the Fire Maw)
-
     [55315] = { power = true, priority = 1, auradetect = true }, -- Slag Breath (Horvantud the Fire Maw)
     [55324] = { power = true, priority = 1, auradetect = true }, -- Enrage 2 (Horvantud the Fire Maw)
     [55329] = { power = true, priority = 1, auradetect = true }, -- Enrage 3 (Horvantud the Fire Maw)
 
-    [54218] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Monstrous Cleave (Ash Titan)
-    [54895] = { block = true, avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Molten Rain (Ash Titan)
-    [54699] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossName = true }, -- Fire Swarm (Ash Titan)
+    [54218] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, duration = 1500, cc = UNBREAKABLE, neverShowInterrupt = true }, -- Monstrous Cleave (Ash Titan)
+    [54895] = { block = true, avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, duration = 7700, neverShowInterrupt = true }, -- Molten Rain (Ash Titan)
+    [54698] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, duration = 3000, cc = STUN, postCast = 4000, neverShowInterrupt = true }, -- Fire Swarm (Ash Titan)
 
     [58468] = { power = true, auradetect = true, priority = 1 }, -- Shadow Cloak (Ash Titan)
     [54783] = { power = true, auradetect = true, priority = 1 }, -- Air Atronach Flame (Air Atronach)
-    [54366] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 1500, fakeName = Unitnames.NPC_Air_Atronach }, -- Flame Tornado (Air Atronach)
+    [60683] = { avoid = true, priority = 1, auradetect = true, fakeName = Unitnames.NPC_Air_Atronach, duration = 15000, effectOnlyInterrupt = true, ignoreRefresh = true }, -- Flame Tornado (Air Atronach)
 
     [58280] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossName = true }, -- Scary Summon 1 (Xivilai Fulminator / Boltaic)
     [56601] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossName = true }, -- Scary Summon 2 (Xivilai Fulminator / Boltaic)
 
-    [55513] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Flame Bolt (Valkyn Skoria)
-    [55387] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Meteor Strike (Valkyn Skoria)
-    [55514] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Call the Flames (Valkyn Skoria)
-    [55426] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Magma Prison (Valkyn Skoria)
-    [55024] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Lava Quake (Valkyn Skoria)
+    [55513] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1500, cc = UNBREAKABLE }, -- Flame Bolt (Valkyn Skoria)
+    [55387] = { block = true, bs = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 1600, cc = UNBREAKABLE }, -- Meteor Strike (Valkyn Skoria)
+    [55514] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 1250, postCast = 4000 }, -- Call the Flames (Valkyn Skoria)
+    [55426] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STUN }, -- Magma Prison (Valkyn Skoria)
+    [55024] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true, duration = 3000, cc = STAGGER }, -- Lava Quake (Valkyn Skoria)
     [55500] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Rock Shield (Valkyn Skoria)
 
     -- Tempest Island

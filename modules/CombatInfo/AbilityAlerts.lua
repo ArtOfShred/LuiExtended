@@ -607,8 +607,6 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     end
 
     -- Override unitName here if we utilize a fakeName / bossName
-    unitName = zo_strformat("<<t:1>>", unitName)
-
     if Alerts[abilityId].fakeName then
         unitName = Alerts[abilityId].fakeName
     end
@@ -623,6 +621,11 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
                 unitName = Alerts[abilityId].bossMatch
             end
         end
+    end
+
+    local notTheTarget
+    if Alerts[abilityId].durationOnlyIfTarget and sourceUnitId == 0 then
+        notTheTarget = true
     end
 
     if sourceUnitId == 0 then
@@ -686,7 +689,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     if Alerts[abilityId].summon and (Settings.toggles.showAlertSummon) == true then
         summon = true
     end
-    if Alerts[abilityId].duration then
+    if Alerts[abilityId].duration and not (notTheTarget) then
         duration = Alerts[abilityId].duration
     end
     if Alerts[abilityId].hiddenDuration then

@@ -2027,6 +2027,34 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
             stack = 0
         end
 
+        -- Override name, icon, or hide based on MapZoneIndex
+        if Effects.MapDataOverride[abilityId] then
+            local index = GetCurrentMapZoneIndex()
+            if Effects.MapDataOverride[abilityId][index] then
+                if Effects.MapDataOverride[abilityId][index].icon then
+                    iconName = Effects.MapDataOverride[abilityId][index].icon
+                end
+                if Effects.MapDataOverride[abilityId][index].name then
+                    effectName = Effects.MapDataOverride[abilityId][index].name
+                end
+                if Effects.MapDataOverride[abilityId][index].hide then
+                    return
+                end
+            end
+        end
+
+        -- Override name or icon based off unitName
+        if Effects.EffectOverrideByName[abilityId] then
+            unitName = zo_strformat("<<t:1>>", unitName)
+            if Effects.EffectOverrideByName[abilityId][unitName] then
+                if Effects.EffectOverrideByName[abilityId][unitName].hide then
+                    return
+                end
+                iconName = Effects.EffectOverrideByName[abilityId][unitName].icon or iconName
+                effectName = Effects.EffectOverrideByName[abilityId][unitName].name or effectName
+            end
+        end
+
         if Effects.AddGroundDamageAura[abilityId].merge then
             buffSlot = "GroundDamageAura" .. tostring(Effects.AddGroundDamageAura[abilityId].merge)
         else
@@ -2770,6 +2798,10 @@ function SpellCastBuffs.AddNameAura()
         for k, v in ipairs(Effects.AddNameAura[unitName]) do
             local abilityName = GetAbilityName(v.id)
             local abilityIcon = GetAbilityIcon(v.id)
+            local zone = v.zone
+            if zone and GetCurrentMapZoneIndex() ~= zone then
+                return
+            end
             SpellCastBuffs.EffectsList.reticleover1[ "Name Specific Buff" .. k ] = {
                 type=1,
                 id= v.id, name= abilityName, icon= abilityIcon,
@@ -2783,6 +2815,10 @@ function SpellCastBuffs.AddNameAura()
         for k, v in ipairs(Effects.AddNameAuraAlways[unitName]) do
             local abilityName = GetAbilityName(v.id)
             local abilityIcon = GetAbilityIcon(v.id)
+            local zone = v.zone
+            if zone and GetCurrentMapZoneIndex() ~= zone then
+                return
+            end
             SpellCastBuffs.EffectsList.reticleover2[ "Name Specific Buff" .. k ] = {
                 type=BUFF_EFFECT_TYPE_DEBUFF,
                 id= v.id, name= abilityName, icon= abilityIcon,

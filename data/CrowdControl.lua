@@ -291,6 +291,7 @@ CrowdControl.aoeNPCBoss = {
 
     -- Banished Cells II
     [28904] = 1, -- Immolating Bite (Maw of the Infernal)
+    [49149] = 1, -- Breath of Flame (Maw of the Infernal)
     [29020] = 1, -- Berserker Frenzy (Keeper Voranil)
     [31727] = 1, -- Corruption (Keeper Imiril)
     [48800] = 1, -- Daedric Tempest (High Kinlord Rilis)
@@ -304,7 +305,7 @@ CrowdControl.aoeNPCBoss = {
     [42601] = 1, -- Necrotic Circle (Canonreeve Oraneth)
 
     -- Elden Hollow II
-    [34377] = 1, -- Flame Geyser (Dubroze the Infestor)
+    --[34377] = 1, -- Flame Geyser (Dubroze the Infestor)
     [32972] = 1, -- Consuming Shadow (Murklight)
     [33050] = 1, -- Eclipse (Murklight)
     [33103] = 1, -- Spout Shadow (The Shadow Guard)

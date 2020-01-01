@@ -220,6 +220,7 @@ local strings = {
     SI_LUIE_SKILL_GENERIC_GROUND_AOE_TP =                "Taking SUBSTRING every |cFFFFFF<<2>>|r <<2[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_GROUND_HEAL_TP =               "Healing every |cFFFFFF<<2>>|r <<2[second/seconds]>>.",
     SI_LUIE_SKILL_GENERIC_GROUND_AOE_SNARE_TP =          "Taking SUBSTRING every |cFFFFFF<<2>>|r <<2[second/seconds]>> and Movement Speed reduced by |cFFFFFF<<3>>|r%.",
+    SI_LUIE_SKILL_GENERIC_GROUND_AOE_STACK_TP =          "Taking increasing SUBSTRING every |cFFFFFF<<2>>|r <<2[second/seconds]>>.\n\nDamage taken increased by |cFFFFFF<<3>>|r% per stack.",
 
     -- Resistances
     SI_LUIE_SKILL_GENERIC_PHYSICAL_RESIST_TP =                   "Increase Physical Resistance for |cFFFFFF<<1>>|r seconds.",
@@ -808,8 +809,6 @@ local strings = {
     -- TRAPS -------------------------------------------------------
     ----------------------------------------------------------------
 
-    SI_LUIE_SKILL_LAVA_STACK_TP =                        "Taking increasing Flame Damage every |cFFFFFF0.75|r seconds.\n\nDamage taken increased by |cFFFFFF75|r% per stack.",
-    SI_LUIE_SKILL_LAVA_TP =                              "Taking Flame Damage every |cFFFFFF0.75|r seconds.",
     SI_LUIE_SKILL_LAVA_TRAP =                            "Lava Trap",
     SI_LUIE_SKILL_LIGHTNING_TRAP =                       "Lightning Trap",
     SI_LUIE_SKILL_SPIKE_TRAP_TP =                        "Movement Speed reduced by |cFFFFFF25|r% for |cFFFFFF5|r seconds.\n\nImmobilized for |cFFFFFF0.8|r seconds.",

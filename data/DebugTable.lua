@@ -13219,8 +13219,7 @@ LUIE.DebugAuras = {
     [34408] = true, -- Stun
 
     [28902] = true, -- Swipe (Maw of the Infernal)
-    [48271] = true, -- Dummy (Maw of the Infernal)
-    [49150] = true, -- Cone of Rot (Maw of the Infernal)
+    [48271] = true, -- Breath of Flame (Maw of the Infernal)
     [49149] = true, -- Breath of Flame (Maw of the Infernal)
     [28903] = true, -- Immolating Bite (Maw of the Infernal)
     [35680] = true, -- Immolating Bite (Maw of the Infernal)
