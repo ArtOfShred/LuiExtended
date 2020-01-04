@@ -256,8 +256,12 @@ CrowdControl.aoeNPCBoss = {
     -- World Bosses
     [84045] = 1, -- Seal of Defilement (Quenyas) - World Boss - Seaside Scarp Camp
     [84206] = 1, -- Stinging Sputum (Gathongor the Mauler) - World Boss - Gathongor's Mine
-    [83668] = 1, -- Feral Impact (Skullbreaker - World Boss - Windshriek Strand
-    [83671] = 1, -- Feral Impact (Skullbreaker - World Boss - Windshriek Strand
+    [83668] = 1, -- Feral Impact (Skullbreaker) - World Boss - Windshriek Strand
+    [83671] = 1, -- Feral Impact (Skullbreaker) - World Boss - Windshriek Strand
+    [84160] = 1, -- Spit Poison (Old Widow Silk) - World Boss - Spider Nest
+    [84549] = 1, -- Venom Spray (Old Widow Silk) - World Boss - Spider Nest
+    [83000] = 1, -- Crabuchet (Titanclaw) - World Boss - Mudcrab Beach
+    [83021] = 1, -- Crabuchet (Titanclaw) - World Boss - Mudcrab Beach
 
     -- Quests
     [36860] = 1, -- Swordstorm Damage (MSQ - Halls of Torment)

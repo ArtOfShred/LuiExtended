@@ -456,6 +456,12 @@ Effects.DebuffDisplayOverrideId = {
     [48294] = true, -- Consuming Omen (Troll - Ranged)
 
     ----------------------------------------------------------------
+    -- WORLD BOSSES ------------------------------------------------
+    ----------------------------------------------------------------
+
+    [84172] = true, -- Charge (Trapjaw)
+
+    ----------------------------------------------------------------
     -- ARENAS ------------------------------------------------------
     ----------------------------------------------------------------
 
@@ -1705,6 +1711,25 @@ Effects.AddNameAura = {
     [Unitnames.Boss_Overlord_Nur_dro] = { [1] = { id = 33097 } }, -- Reaper's March (Ushmal's Rest)
     [Unitnames.Boss_Big_Ozur] = { [1] = { id = 33097 } }, -- Reaper's March (Big Ozur's Valley)
 
+    -- Glenumbra
+    [Unitnames.Boss_Limbscather] = { [1] = { id = 33097 } }, -- Western Overlook (Glenumbra)
+    [Unitnames.Boss_Salazar_the_Wolf] = { [1] = { id = 33097 } }, -- The Wolf's Camp (Glenumbra)
+    [Unitnames.Boss_Lieutenant_Bran] = { [1] = { id = 33097 } }, -- The Wolf's Camp (Glenumbra)
+    [Unitnames.Boss_Annyce] = { [1] = { id = 33097 } }, -- The Wolf's Camp (Glenumbra)
+    [Unitnames.Boss_Asard_the_Putrid] = { [1] = { id = 33097 } }, -- The Wolf's Camp (Glenumbra)
+    [Unitnames.Boss_Graufang] = { [1] = { id = 33097 } }, -- Seaview Point (Glenumbra)
+    [Unitnames.Boss_Grivier_Bloodcaller] = { [1] = { id = 33097 } }, -- Balefire Island (Glenumbra)
+
+    -- Stormhaven
+    [Unitnames.Boss_Old_Widow_Silk] = { [1] = { id = 33097 } }, -- Spider Nest (Stormhaven)
+    [Unitnames.Boss_Titanclaw] = { [1] = { id = 33097 } }, -- Mudcrab Beach (Stormhaven)
+    [Unitnames.Boss_Brood_Queen] = { [1] = { id = 33097 } }, -- Dreugh Waters (Stormhaven)
+    [Unitnames.Boss_Cousin_Scrag] = { [1] = { id = 33097 } }, -- Scrag's Larder (Stormhaven)
+
+    -- Rivenspire
+    [Unitnames.Boss_Aesar_the_Hatespinner] = { [1] = { id = 33097 } }, -- Aesar's Web (Rivenspire)
+    [Unitnames.Boss_Magdelena] = { [1] = { id = 33097 } }, -- Magdelena's Haunt (Rivenspire)
+
     -- Public Dungeon
     [Unitnames.Boss_Nitch] = { [1] = { id = 33097 } }, -- Auridon (Toothmaul Gully)
     [Unitnames.Boss_Thek_Elf_Stabber] = { [1] = { id = 33097 } }, -- Auridon (Toothmaul Gully)
@@ -1953,6 +1978,8 @@ Effects.SynergyNameOverride = {
     [Abilities.Skill_Feed] = { icon = 'esoui/art/icons/crownstore_skillline_vampire.dds' }, -- Feed (Vampire)
     [Abilities.Skill_Devour] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Werewolf)
     [Abilities.Set_Shield_of_Ursus] = { icon = 'esoui/art/icons/achievement_u23_natureswrath_blue.dds', name = Abilities.Set_Ursus_Blessing }, -- Ursus's Blessing (Haven of Ursus)
+    -- World Bosses
+    [Abilities.Skill_Remove_Bolt] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_trapping_bolt.dds' }, -- Remove Bolt (Trapjaw)
     -- Dungeons
     [Abilities.Skill_Free_Ally] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds' }, -- Free Ally (Selene) -- Selene's Web
 }
@@ -2222,6 +2249,25 @@ Effects.EffectOverrideByName = {
         [Unitnames.NPC_Hoarvor] =                 { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_hoarvor.dds' }, -- Summon Beast (Spriggan)
         [Unitnames.NPC_Lion] =                    { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_lion.dds' }, -- Summon Beast (Spriggan)
         [Unitnames.NPC_Lioness] =                 { icon = 'LuiExtended/media/icons/abilities/ability_spriggan_summon_beast_lioness.dds' }, -- Summon Beast (Spriggan)
+    },
+
+    [3757] = { -- Claw (Lurcher)
+        [Unitnames.Boss_Limbscather] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Limbscather (Glenumbra)
+    },
+    [3860] = { -- Pulverize (Lurcher)
+        [Unitnames.Boss_Limbscather] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Limbscather (Glenumbra)
+    },
+    [3855] = { -- Crushing Limbs (Lurcher)
+        [Unitnames.Boss_Limbscather] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Limbscather (Glenumbra)
+    },
+    [38554] = { -- Crushing Limbs (Lurcher)
+        [Unitnames.Boss_Limbscather] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Limbscather (Glenumbra)
+    },
+    [3767] = { -- Choking Pollen (Lurcher)
+        [Unitnames.Boss_Limbscather] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Limbscather (Glenumbra)
+    },
+    [4769] = { -- Choking Pollen (Lurcher)
+        [Unitnames.Boss_Limbscather] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Limbscather (Glenumbra)
     },
 
     -- QUESTS
@@ -8389,7 +8435,7 @@ Effects.EffectOverride = {
     [9467] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Flurry (Werewolf)
     [60636] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Flurry (Werewolf)
     [44055] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', tooltip = Tooltips.Generic_HoT_Channel, tooltipValue2 = 1 }, -- Devour (Werewolf)
-    --[5785] = { icon = 'esoui/art/icons/mos_dagrund_upheavel.dds' }, -- Blood Scent (Werewolf)
+    [5785] = { icon = 'esoui/art/icons/mos_dagrund_upheavel.dds' }, -- Blood Scent (Werewolf)
 
     -- Wraith
     [4323] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_frost_ranged.dds' }, -- Ice Bolt (Wraith)
@@ -10281,7 +10327,7 @@ Effects.EffectOverride = {
 
     [83782] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_staff_strike.dds' }, -- Staff Strike (Quenyas)
     [83783] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_staff_strike.dds' }, -- Bash (Quenyas)
-    [83776] = { hide = true }, -- Dark Summons (Quenyas)
+    [83776] = { icon = 'LuiExtended/media/icons/abilities/ability_necromancer_summon_the_dead.dds', hide = true }, -- Dark Summons (Quenyas)
     [84283] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw.dds', name = Abilities.Skill_Colossal_Stomp }, -- Coursing Bones (Oskana)
     [84285] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw.dds', name = Abilities.Skill_Colossal_Stomp }, -- Coursing Bones (Oskana)
     [84284] = { name = Abilities.Innate_Stagger, hide = true, tooltip = Tooltips.Generic_Stagger }, -- Coursing Bones (Oskana)
@@ -10397,6 +10443,70 @@ Effects.EffectOverride = {
     [83192] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds' }, -- Shaman Smash (Big Ozur)
     [83193] = { icon = 'LuiExtended/media/icons/abilities/ability_ogre_smash.dds', tooltip = Tooltips.Generic_Knockdown }, -- Shaman Smash (Big Ozur)
     [83194] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_shattered_ground.dds', tooltip = Tooltips.Generic_Snare, tooltipValue2 = 50 }, -- Shaman Smash (Big Ozur)
+
+    -- World Boss - The Wolf's Camp
+    [10149] = { icon = 'esoui/art/icons/ability_werewolf_001.dds', name = Abilities.Skill_Werewolf_Transformation }, -- Guards Transform (Lieutenant Bran, Annyce)
+
+    -- World Boss - Trapjaw's Cove
+    [83945] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds' }, -- Tail Sweep (Trapjaw)
+    [83947] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds' }, -- Tail Sweep (Trapjaw)
+    [83948] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds', hide = true }, -- Tail Sweep (Trapjaw)
+    [83951] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds', tooltip = Tooltips.Generic_Knockback }, -- Tail Sweep (Trapjaw)
+    [84028] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_impending_storm.dds' }, -- Impending Storm (Trapjaw)
+    [84030] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_impending_storm.dds' }, -- Impending Storm (Trapjaw)
+    [84175] = { hide = true }, -- Focused Charge (Trapjaw)
+    [84177] = { hide = true }, -- Charge (Trapjaw)
+    [84169] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_charge.dds' }, -- Rolling Thunder (Wamasu)
+    [84179] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_charge.dds' }, -- Rolling Thunder (Wamasu)
+    [84173] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_charge.dds', tooltip = Tooltips.Generic_Knockdown }, -- Rolling Thunder (Wamasu)
+    [84172] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = Abilities.Innate_Block_Stun, tooltip = Tooltips.Generic_Stun, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Charge (Trapjaw)
+    [83925] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_trapping_bolt.dds', hide = true }, -- Trapping Bolt (Trapjaw)
+    [83930] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_trapping_bolt.dds', tooltip = Tooltips.Skill_Trapping_Bolt }, -- Trapping Bolt (Trapjaw)
+    [83928] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_root_shock.dds', name = Abilities.Skill_Trapping_Bolt, tooltip = Tooltips.Generic_Immobilize, unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Arx_boss2_KDrecover
+    [25763] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_trapping_bolt.dds' }, -- Remove Bolt (Trapjaw)
+
+    -- World Boss - Spider Nest
+    [84150] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_summon_brood.dds', hide = true }, -- Call of the Brood (Old Widow Silk)
+    [84564] = { hide = true }, -- Summon Swarm (Old Widow Silk)
+    [84563] = { hide = true }, -- Summon Swarm (Old Widow Silk)
+    [84151] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds', hide = true }, -- Constricting Webs (Old Widow Silk)
+    [84155] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_web_wrap.dds', tooltip = Tooltips.Generic_Stun }, -- Constricting Webs (Old Widow Silk)
+    [84608] = { hide = true }, -- Web Wrap
+    [84548] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_poison_spray.dds' }, -- Venom Spray (Old Widow Silk)
+    [84549] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_poison_spray.dds' }, -- Venom Spray (Old Widow Silk)
+    [84159] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_spit_poison.dds', name = Abilities.Skill_Poison_Spit, hide = true }, -- Spit Poison (Old Widow Silk)
+    [84162] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_spit_poison.dds', name = Abilities.Skill_Poison_Spit, tooltip = Tooltips.Skill_Poison_Spit, unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spit Poison (Old Widow Silk)
+    [84161] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_gtaoe_fumes.dds', name = Abilities.Skill_Poison_Spit }, -- Spit Poison (Old Widow Silk)
+    [84160] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_gtaoe_fumes.dds', name = Abilities.Skill_Poison_Spit, groundLabel = true, tooltip = Tooltips.Generic_AOE_Poison, tooltipValue2 = 2 }, -- Spit Poison (Old Widow Silk)
+
+    -- World Boss - Mudcrab Beach
+    [82965] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_crab_toss.dds', hide = true }, -- Crabuchet (Titanclaw)
+    [82983] = { hide = true }, -- Crabuchet (Titanclaw)
+    [83000] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ground_dust.dds', groundLabel = true, tooltip = Tooltips.Generic_AOE_Physical, tooltipValue2 = 0.5 }, -- Crabuchet (Titanclaw)
+    [83021] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_crab_toss.dds' }, -- Crabuchet (Titanclaw)
+
+    -- World Boss - Valewatch Tower
+    [84039] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_stone_swipe.dds' }, -- Stone Swipe (Menhir Stoneskin)
+    [84040] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_stone_swipe.dds' }, -- Stone Swipe (Menhir Stoneskin)
+    [84041] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_stone_swipe.dds', tooltip = Tooltips.Generic_Bleed, tooltipValue2 = 0.5 }, -- Stone Swipe (Menhir Stoneskin)
+    [84037] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrifying_bellow.dds' }, -- Petrifying Bellow (Menhir Stoneskin)
+    [84038] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_petrifying_bellow.dds', tooltip = Tooltips.Generic_Stun, noDuplicate = true }, -- Petrifying Bellow (Menhir Stoneskin)
+    [84580] = { hide = true }, -- Petrifing Bellow (Menhir Stoneskin)
+    [84292] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_lacerate.dds' }, -- Graven Slash (Menhir Stoneskin)
+    [84293] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_lacerate.dds', name = Abilities.Skill_Graven_Slash, tooltip = Tooltips.Skill_Graven_Slash, hideReduce = true }, -- Graven Slash (Menhir Stoneskin)
+    [84294] = { icon = 'LuiExtended/media/icons/abilities/ability_gargoyle_lacerate.dds', tooltip = Tooltips.Skill_Graven_Slash }, -- Graven Slash (Menhir Stoneskin)
+    [84014] = { icon = 'esoui/art/icons/achievement_els_pubdun1_groupevent.dds' }, -- Awaken (Menhir Stoneskin)
+    [84029] = { icon = 'esoui/art/icons/achievement_els_pubdun1_groupevent.dds' }, -- Awaken (Menhir Stoneskin)
+    [84417] = { icon = 'esoui/art/icons/achievement_els_pubdun1_groupevent.dds' }, -- Awaken (Menhir Stoneskin)
+    [85461] = { hide = true }, -- Awaken (Menhir Stoneskin)
+
+    -- World Boss - Magdelena's Haunt
+    [83924] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_shadow_bolt.dds' }, -- Shadow Bolt (Magdelena)
+    [83922] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_curse_of_terror.dds' }, -- Curse of Terror (Magdelena)
+    [83923] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_curse_of_terror.dds', tooltip = Tooltips.Generic_Fear }, -- Curse of Terror (Magdelena)
+
+    [83880] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_reflective_shadows.dds', tooltip = Tooltips.Skill_Reflective_Shadows }, -- Reflective Shadows (Magdelena)
+    [83227] = { icon = 'LuiExtended/media/icons/abilities/ability_healer_dark_resurrection.dds' }, -- Dark Resurrection (Magdelena)
 
     ----------------------------------------------------------------
     -- DUNGEONS    -------------------------------------------------
@@ -12166,6 +12276,10 @@ Effects.AddGroundDamageAura = {
     -- Greenshade
     [84206] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Stinging Sputum (Gathongor the Mauler)
 
+    -- Stormhaven
+    [84160] = { duration = 2100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Spit Poison (Old Widow Silk)
+    [83000] = { duration = 600, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Crabuchet (Titanclaw)
+
     ------------------
     -- QUESTS --------
     ------------------
@@ -12283,21 +12397,27 @@ Effects.MapDataOverride = {
 
     [3757] = { -- Claw (Lurcher)
         [541] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_red.dds' }, -- Elden Hollow II
+        [18] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_claw_green.dds' }, -- Greenshade
     },
     [3860] = { -- Pulverize (Lurcher)
         [541] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_red.dds' }, -- Elden Hollow II
+        [18] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_pulverize_green.dds' }, -- Greenshade
     },
     [3855] = { -- Crushing Limbs (Lurcher)
         [541] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Elden Hollow II
+        [18] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_green.dds' }, -- Greenshade
     },
     [38554] = { -- Crushing Limbs (Lurcher)
         [541] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_red.dds' }, -- Elden Hollow II
+        [18] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_crushing_limbs_green.dds' }, -- Greenshade
     },
     [3767] = { -- Choking Pollen (Lurcher)
         [541] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Elden Hollow II
+        [18] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_green.dds' }, -- Greenshade
     },
     [4769] = { -- Choking Pollen (Lurcher)
         [541] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_red.dds' }, -- Elden Hollow II
+        [18] = { icon = 'LuiExtended/media/icons/abilities/ability_lurcher_choking_pollen_green.dds' }, -- Greenshade
     },
 
     [9039] = {  -- Snare (Selene's Rose)

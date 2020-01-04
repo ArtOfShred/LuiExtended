@@ -1288,6 +1288,10 @@ local strings = {
     SI_LUIE_SKILL_DISPERSE_CORRUPTION =                  "Disperse Corruption",
     SI_LUIE_SKILL_ANCIENT_WRATH_TP =                     "Enemies that deal damage to you suffer Flame Damage.",
     SI_LUIE_SKILL_NECROTIC_CIRCLE_STUN_TP =              "Stunned for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nWhen this effect ends or you break free, you are afflicted with a |cFFFFFF1.2|r second unbreakable stun.",
+    SI_LUIE_SKILL_TRAPPING_BOLT_WORLD_TP =               "Pinned to the ground for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nAn ally near you can activate the |cFFFFFFRemove Bolt|r synergy to free you.\n\nWhen this effect ends or you break free, you are afflicted with a |cFFFFFF1.3|r second unbreakable immobilize.",
+
+    SI_LUIE_SKILL_POISON_SPIT_TP =                       "Targeted by poison spit for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nEvery |cFFFFFF3.33|r seconds a volley of poison will be lauched at you, creating a |cFFFFFF4|r meter pool of poison on the ground for |cFFFFFF10|r seconds.",
+    SI_LUIE_SKILL_GRAVEN_SLASH_TP =                      "Afflicted with Bleeding Damage every |cFFFFFF2.5|r seconds for |cFFFFFF15|r seconds.\n\nStunned for |cFFFFFF2|r seconds.",
 
 }
 

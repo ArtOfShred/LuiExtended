@@ -96,6 +96,7 @@ LUIE.Data.UnitNames = {
     Boss_Thugrub_the_Reformed = 'Thugrub the Reformed', -- Grahtwood (Thugrub's Cave)
 
     -- Greenshade
+    Boss_Zymel_Etitan = 'Zymel Etitan', -- Greenshade (Pelda Tarn)
     Boss_Gathongor_the_Mauler = 'Gathongor the Mauler', -- Greenshade (Gathongor's Mine)
     Boss_Smiles_With_Knife = 'Smiles-With-Knife', -- Greenshade (Reconnaissance Camp)
     Boss_Maheelius = 'Maheelius', -- Greenshade (Reconnaissance Camp)
@@ -124,6 +125,29 @@ LUIE.Data.UnitNames = {
     Boss_Queen_of_Three_Mercies = 'Queen of Three Mercies', -- Reaper's March (Waterdancer Falls)
     Boss_Overlord_Nur_dro = 'Overlord Nur-dro', -- Reaper's March (Ushmal's Rest)
     Boss_Big_Ozur = 'Big Ozur', -- Reaper's March (Big Ozur's Valley)
+    Boss_Ysolmarr_the_Roving_Pyre = 'Ysolmarr the Roving Pyre', -- Reaper's March (Old S'ren-ja Docks)
+
+    -- Glenumbra
+    Boss_Limbscather = 'Limbscather', -- Western Overlook (Glenumbra)
+    Boss_Salazar_the_Wolf = 'Salazar the Wolf', -- The Wolf's Camp (Glenumbra)
+    Boss_Lieutenant_Bran = 'Lieutenant Bran', -- The Wolf's Camp (Glenumbra)
+    Boss_Annyce = 'Annyce', -- The Wolf's Camp (Glenumbra)
+    Boss_Asard_the_Putrid = 'Asard the Putrid', -- North Shore Point (Glenumbra)
+    Boss_Graufang = 'Graufang', -- Seaview Point (Glenumbra)
+    Boss_Grivier_Bloodcaller = 'Grivier Bloodcaller', -- Balefire Island (Glenumbra)
+    Boss_Griviers_Monstrosity = 'Grivier\'s Monstrosity', -- Balefire Island (Glenumbra)
+
+    -- Stormhaven
+    Boss_Old_Widow_Silk = 'Old Widow Silk', -- Spider Nest (Stormhaven)
+    Boss_Titanclaw = 'Titanclaw', -- Mudcrab Beach (Stormhaven)
+    Boss_Brood_Queen = 'Brood Queen', -- Dreugh Waters (Stormhaven)
+    Boss_Gar_Xuu_Gar = 'Gar Xuu Gar', -- Abandoned Farm (Stormhaven)
+    Boss_Cousin_Scrag = 'Cousin Scrag', -- Scrag's Larder (Stormhaven)
+    Boss_Zymel_Kruz = 'Zymel Kruz', -- Ancient Altar (Stormhaven)
+
+    -- Rivenspire
+    Boss_Aesar_the_Hatespinner = 'Aesar the Hatespinner', -- Aesar's Web (Rivenspire)
+    Boss_Magdelena = 'Magdelena', -- Magdelena's Haunt (Rivenspire)
 
     -- Dolmen Bosses
     NPC_Dread_Xivkyn_Cauterizer = 'Dread Xivkyn Cauterizer',

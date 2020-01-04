@@ -770,6 +770,7 @@ local AbilityTables = {
     -- WEREWOLF SKILLS -----------------------------------
     -- ---------------------------------------------------
 
+    Skill_Werewolf_Transformation     = 32455,
     Skill_Werewolf_Blood              = 59200,
     Skill_Devour                      = 32634,
     Skill_Hircines_Rage               = 58317,
@@ -1064,6 +1065,10 @@ local AbilityTables = {
     Skill_Stone_Crusher               = 83160,
     Skill_Molten_Impact               = 83203,
     Skill_Molten_Pillar_Incalescence  = GetString(SI_LUIE_SKILL_MOLTEN_PILLAR_INCALESCENCE),
+    Skill_Trapping_Bolt               = 83925,
+    Skill_Remove_Bolt                 = 25763,
+    Skill_Poison_Spit                 = 21708,
+    Skill_Graven_Slash                = 84292,
 
     -- ---------------------------------------------------
     -- QUEST ABILITIES -----------------------------------

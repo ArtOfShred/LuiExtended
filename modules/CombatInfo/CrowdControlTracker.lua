@@ -282,32 +282,55 @@ function CrowdControlTracker:AoePriority(abilityId, result)
     end
 end
 
-local function ResolveAbilityName(abilityId)
+local function ResolveAbilityName(abilityId, sourceName)
+
     local abilityName = GetAbilityName(abilityId)
+
+
+    if Effects.EffectOverrideByName[abilityId] then
+        sourceName = zo_strformat("<<t:1>>", sourceName)
+        if Effects.EffectOverrideByName[abilityId][sourceName] then
+            abilityName = Effects.EffectOverrideByName[abilityId][sourceName].name or abilityName
+        end
+    end
+
     if Effects.MapDataOverride[abilityId] then
         local index = GetCurrentMapZoneIndex()
         if Effects.MapDataOverride[abilityId][index] then
             abilityName = Effects.MapDataOverride[abilityId][index].name
         end
     end
+
     return abilityName
+
 end
 
-local function ResolveAbilityIcon(abilityId)
+local function ResolveAbilityIcon(abilityId, sourceName)
+
     local abilityIcon = GetAbilityIcon(abilityId)
+
+    if Effects.EffectOverrideByName[abilityId] then
+        sourceName = zo_strformat("<<t:1>>", sourceName)
+        if Effects.EffectOverrideByName[abilityId][sourceName] then
+            abilityIcon = Effects.EffectOverrideByName[abilityId][sourceName].icon or abilityIcon
+        end
+    end
+
     if Effects.MapDataOverride[abilityId] then
         local index = GetCurrentMapZoneIndex()
         if Effects.MapDataOverride[abilityId][index] then
             abilityIcon = Effects.MapDataOverride[abilityId][index].icon
         end
     end
+
     return abilityIcon
+
 end
 
 function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, combat_log, sourceUnitId, targetUnitId, abilityId)
     -- LuiExtended Addition
-    abilityName = ResolveAbilityName(abilityId)
-    local abilityIcon = ResolveAbilityIcon(abilityId)
+    abilityName = ResolveAbilityName(abilityId, sourceName)
+    local abilityIcon = ResolveAbilityIcon(abilityId, sourceName)
 
     if CrowdControl.IgnoreList[abilityId] then return end
     local function StringEnd(String,End)

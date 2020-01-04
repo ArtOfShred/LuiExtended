@@ -1179,6 +1179,9 @@ LUIE.Data.Tooltips = {
     ----------------------------------------------------------------
 
     Skill_Molten_Pillar                             = GetString(SI_LUIE_SKILL_MOLTEN_PILLAR_TP),
+    Skill_Trapping_Bolt                             = GetString(SI_LUIE_SKILL_TRAPPING_BOLT_WORLD_TP),
+    Skill_Poison_Spit                               = GetString(SI_LUIE_SKILL_POISON_SPIT_TP),
+    Skill_Graven_Slash                              = GetString(SI_LUIE_SKILL_GRAVEN_SLASH_TP),
 
     ----------------------------------------------------------------
     -- QUESTS ------------------------------------------------------

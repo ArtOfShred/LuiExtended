@@ -92,7 +92,7 @@ LUIE.Data.AlertTable = {
     -- Abilities
     [29378] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1600, cc = STUN }, -- Uppercut (Ravager)
 
-    [28408] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533 }, -- Whirlwind (Skirmisher)
+    [28408] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1533, bossMatch = { Unitnames.Boss_Smiles_With_Knife } }, -- Whirlwind (Skirmisher)
 
     [37108] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, cc = SNARE }, -- Arrow Spray (Archer)
     [28628] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 6800 }, -- Volley (Archer)
@@ -108,20 +108,20 @@ LUIE.Data.AlertTable = {
 
     [35164] = { block = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1333, cc = STUN }, -- Agony (Berserker)
 
-    [29510] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Thunder Hammer (Thundermaul)
-    [17867] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Shock Aura (Thundermaul)
+    [29510] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, bossMatch = { Unitnames.Boss_Anarume, Unitnames.Boss_Fangoz } }, -- Thunder Hammer (Thundermaul)
+    [17867] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, bossMatch = { Unitnames.Boss_Anarume, Unitnames.Boss_Fangoz } }, -- Shock Aura (Thundermaul)
     [44407] = { power = true, priority = 2, auradetect = true }, -- Lightning Form (Thundermaul)
-    [81215] = { block = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN }, -- Shock Aura (Thundermaul - Boss)
-    [81195] = { avoid = true, priority = 2, auradetect = true, cc = SNARE }, -- Agonizing Fury (Thundermaul - Boss)
-    [81217] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1533 }, -- Thunder Hammer (Thundermaul - Boss)
+    [81215] = { block = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN, bossMatch = { Unitnames.Boss_Captain_Blanchete } }, -- Shock Aura (Thundermaul - Boss)
+    [81195] = { avoid = true, priority = 2, auradetect = true, cc = SNARE, bossMatch = { Unitnames.Boss_Captain_Blanchete } }, -- Agonizing Fury (Thundermaul - Boss)
+    [81217] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, duration = 1533, bossMatch = { Unitnames.Boss_Captain_Blanchete } }, -- Thunder Hammer (Thundermaul - Boss)
 
     [36470] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2500, cc = STUN }, -- Veiled Strike (Nightblade)
     --[44345] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN }, -- Soul Tether (Nightblade)
 
     [34742] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Fiery Breath (Dragonknight)
     [34646] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Lava Whip (Dragonknight)
-    [44227] = { avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Dragonknight Standard (Dragonknight - Elite)
-    [52041] = { block = true, dodge = true, priority = 2, bs = true, result = ACTION_RESULT_BEGIN, duration = 1667, cc = STUN }, -- Blink Strike (Dragonknight - Elite)
+    [44227] = { avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, bossMatch = { Unitnames.Boss_Jahlasri, Unitnames.Boss_Dugan_the_Red } }, -- Dragonknight Standard (Dragonknight - Elite)
+    [52041] = { block = true, dodge = true, priority = 2, bs = true, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1667, cc = STUN, bossMatch = { Unitnames.Boss_Jahlasri } }, -- Blink Strike (Dragonknight - Elite)
 
     [88251] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Pet Ranger)
     [88248] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Call Ally (Pet Ranger)
@@ -135,19 +135,19 @@ LUIE.Data.AlertTable = {
 
     [12459] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = SNARE }, -- Winter's Reach (Frost Mage)
 
-    [35151] = { interrupt = true, priority = 3, auradetect = true, duration = 8000, effectOnlyInterrupt = true }, -- Spell Absorption (Spirit Mage)
-    [14472] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Burdening Eye (Spirit Mage)
+    [35151] = { interrupt = true, priority = 3, auradetect = true, duration = 8000, effectOnlyInterrupt = true, fakeName = "", bossMatch = { Unitnames.Boss_Shagura } }, -- Spell Absorption (Spirit Mage)
+    [14472] = { summon = true, priority = 2, auradetect = true, fakeName = "", bossMatch = { Unitnames.Boss_Shagura } }, -- Burdening Eye (Spirit Mage)
 
     [36985] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Void (Time Bomb Mage)
 
-    [37087] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500 }, -- Lightning Onslaught (Battlemage)
-    [37129] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Ice Cage (Battlemage)
-    [44216] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = SILENCE }, -- Negate Magic (Battlemage - Elite)
+    [37087] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, eventdetect = true, postCast = 1250, bossMatch = { Unitnames.Boss_Thjormar_the_Drowned } }, -- Lightning Onslaught (Battlemage)
+    [37129] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = SNARE, eventdetect = true, bossMatch = { Unitnames.Boss_Thjormar_the_Drowned } }, -- Ice Cage (Battlemage)
+    [44216] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = SILENCE, eventdetect = true, bossMatch = { Unitnames.Boss_Thjormar_the_Drowned } }, -- Negate Magic (Battlemage - Elite)
 
     [88554] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
-    [88555] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
+    [88555] = { summon = true, priority = 2, auradetect = true, fakeName = "", bossMatch = { Unitnames.Boss_Gravecaller_Niramo, Unitnames.Boss_Grivier_Bloodcaller  } }, -- Summon the Dead (Necromancer)
     [88556] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon the Dead (Necromancer)
-    [13397] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 5000 }, -- Empower Undead (Necromancer)
+    [13397] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 5000, bossMatch = { Unitnames.Boss_Gravecaller_Niramo, Unitnames.Boss_Grivier_Bloodcaller } }, -- Empower Undead (Necromancer)
 
     [14350] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1667, cc = FEAR }, -- Aspect of Terror (Fear Mage)
 
@@ -156,14 +156,14 @@ LUIE.Data.AlertTable = {
     [44323] = { power = true, priority = 3, auradetect = true }, -- Dampen Magic (Soulbrander)
     [44258] = { power = true, priority = 3, auradetect = true }, -- Radiant Magelight (Soulbrander)
 
-    [35387] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Defiled Grave (Bonelord)
+    [35387] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = SNARE, duration = 1000, postCast = 4000 }, -- Defiled Grave (Bonelord)
     [88506] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Abomination (Bonelord)
-    [88507] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "" }, -- Summon Abomination (Bonelord)
+    [88507] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = "", bossMatch = { Unitnames.Boss_Overlord_Nur_dro } }, -- Summon Abomination (Bonelord)
 
     [50966] = { power = true, auradetect = true, priority = 2, alwaysShowInterrupt = true, duration = 5000 }, -- Healer Immune (Healer - Craglorn/DLC)
     [44328] = { interrupt = true, priority = 2, auradetect = true, duration = 4500 }, -- Rite of Passage (Healer)
 
-    [29520] = { destroy = true, auradetect = true, priority = 2, fakeName = "" }, -- Aura of Protection (Shaman)
+    [29520] = { destroy = true, auradetect = true, priority = 2, fakeName = "", bossMatch = { Unitnames.Boss_Bagul } }, -- Aura of Protection (Shaman)
 
     [68866] = { power = true, auradetect = true, refire = 1000, priority = 2 }, -- War Horn (Faction NPC)
     [43644] = { avoid = true, priority = 3, auradetect = true }, -- Barrier [monster synergy]  (Faction NPCs)
@@ -229,7 +229,7 @@ LUIE.Data.AlertTable = {
     [4415] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1600, cc = STUN }, -- Crushing Swipe (Bear)
     [4416] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2000, cc = STAGGER }, -- Savage Blows (Bear)
 
-    [70366] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2167, cc = STUN }, -- Slam (Great Bear)
+    [70366] = { block = true, dodge = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2167, cc = STUN, bossMatch = { Unitnames.Boss_Gurgozu, Unitnames.Boss_Graufang } }, -- Slam (Great Bear)
 
     [4591] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 970 }, -- Sweep (Crocodile)
     [4594] = { power = true, auradetect = true, priority = 2, ignoreRefresh = true, refire = 500 }, -- Ancient Skin (Crocodile)
@@ -282,7 +282,7 @@ LUIE.Data.AlertTable = {
     [55866] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 4900, neverShowInterrupt = true }, -- Repulsion Shock (Wamasu - Boss)
     [55868] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1200, cc = STUN, neverShowInterrupt = true }, -- Sweep (Wamasu - Boss)
     [55850] = { avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Impending Storm (Wamasu - Boss)
-    [55860] = { dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1700, cc = SNARE }, -- Storm Bound (Storm Atronach)
+    [55860] = { dodge = true, interrupt = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1700, cc = SNARE }, -- Storm Bound (Wamasu - Boss)
 
     [44791] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1800 }, -- Rear Kick (Welwa)
     [50714] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, cc = STUN }, -- Charge (Welwa)
@@ -320,7 +320,7 @@ LUIE.Data.AlertTable = {
 
     [44086] = { avoid = true, priority = 3, auradetect = true, ignoreRefresh = true }, -- Fire Runes (Giant Spider)
     [5685] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Corrosive Bite (Giant Spider)
-    [8087] = { avoid = true, priority = 3, eventdetect = true, refire = 1200, result = ACTION_RESULT_BEGIN, duration = 5100 }, -- Poison Spray (Giant Spider)
+    [8087] = { block = true, avoid = true, priority = 3, eventdetect = true, refire = 1200, result = ACTION_RESULT_BEGIN, duration = 5100 }, -- Poison Spray (Giant Spider)
     [4737] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = SNARE }, -- Encase (Giant Spider)
     [13382] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN }, -- Devour (Giant Spider)
 
@@ -383,9 +383,9 @@ LUIE.Data.AlertTable = {
     [34405] = { block = true, avoid = true, priority = 2, auradetect = true, duration = 2200 }, -- Swallowing Souls (Daedric Titan)
     [26554] = { block = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STUN }, -- Wing Gust (Daedric Titan)
 
-    [4771] = { avoid = true, priority = 3, eventdetect = true, refire = 1250, result = ACTION_RESULT_BEGIN, duration = 3100 },-- Fiery Breath (Daedroth)
-    [91946] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STAGGER }, -- Ground Tremor (Daedroth)
-    [91937] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1767, cc = STUN }, -- Burst of Embers (Daedroth)
+    [4771] = { avoid = true, priority = 2, eventdetect = true, refire = 1250, result = ACTION_RESULT_BEGIN, duration = 3100, bossMatch = { Unitnames.Boss_Ysolmarr_the_Roving_Pyre, Unitnames.Boss_Gar_Xuu_Gar } },-- Fiery Breath (Daedroth)
+    [91946] = { avoid = true, interrupt = true, eventdetect = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = STAGGER, postCast = 750, bossMatch = { Unitnames.Boss_Ysolmarr_the_Roving_Pyre, Unitnames.Boss_Gar_Xuu_Gar } }, -- Ground Tremor (Daedroth)
+    [91937] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1767, cc = STUN }, -- Burst of Embers (Daedroth)
 
     [26324] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1300 }, -- Lava Geyser (Flame Atronach)
     [50216] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 2000, neverShowInterrupt = true }, -- Combustion (Flame Atronach)
@@ -396,7 +396,7 @@ LUIE.Data.AlertTable = {
     [50626] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2750 }, -- Shadow Strike (Grevious Twilight)
     [65889] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 2750 }, -- Shadow Strike (Grevious Twilight)
 
-    [4829] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Fire Brand (Flesh Atronach)
+    [4829] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, eventdetect = true, bossMatch = { Unitnames.Boss_Thugrub_the_Reformed, Unitnames.Boss_Varien } }, -- Fire Brand (Flesh Atronach)
     [4817] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Unyielding Mace (Flesh Atronach)
 
     [67870] = { block = true, dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1700, cc = STAGGER }, -- Tremor AOE (Flesh Colossus)
@@ -423,7 +423,7 @@ LUIE.Data.AlertTable = {
     [8782] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000 }, -- Lightning Storm (Spider Daedra)
     [8773] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Spiderling (Spider Daedra)
 
-    [35220] = { avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1200 }, -- Impending Storm (Storm Atronach)
+    [35220] = { avoid = true, interrupt = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1200, postCast = 4000, bossMatch = { Unitnames.Boss_Zymel_Etitan, Unitnames.Boss_Zymel_Kruz } }, -- Impending Storm (Storm Atronach)
     [4864] = { dodge = true, priority = 2, result = ACTION_RESULT_BEGIN, cc = SNARE, duration = 633 }, -- Storm Bound (Storm Atronach)
 
     [7095] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1400 }, -- Heavy Attack (Xivilai)
@@ -451,15 +451,15 @@ LUIE.Data.AlertTable = {
     -- UNDEAD
     [8569] = { block = true, dodge = true, priority = 3, bs = true, result = ACTION_RESULT_BEGIN, duration = 1300, cc = STAGGER }, -- Devastating Leap (Bloodfiend)
 
-    [5050] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STAGGER }, -- Bone Saw (Bone Colossus)
-    [5030] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = "" }, -- Voice to Wake the Dead (Bone Colossus)
+    [5050] = { block = true, dodge = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STAGGER, bossMatch = { Unitnames.Boss_Griviers_Monstrosity } }, -- Bone Saw (Bone Colossus)
+    [5030] = { summon = true, priority = 2, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = "", bossMatch = { Unitnames.Boss_Griviers_Monstrosity, Unitnames.Boss_Oskana } }, -- Voice to Wake the Dead (Bone Colossus)
     [17207] = { block = true, dodge = true, priority = 3, auradetect = true, duration = 2500, neverShowInterrupt = true }, -- Necromantic Implosion (Risen Dead)
 
     [18514] = { block = true, dodge = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1200, cc = SNARE }, -- Chill Touch (Ghost)
     [19137] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, cc = FEAR }, -- Haunting Spectre (Ghost)
 
-    [22521] = { avoid = true, priority = 2, auradetect = true, cc = SNARE }, -- Defiled Ground (Lich)
-    [73925] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, cc = STUN, duration = 7450, refire = 2000 }, -- Soul Cage (Lich)
+    [22521] = { avoid = true, priority = 2, auradetect = true, cc = SNARE, bossMatch = { Unitnames.Boss_Valanir_the_Restless } }, -- Defiled Ground (Lich)
+    [73925] = { avoid = true, priority = 2, result = ACTION_RESULT_BEGIN, eventdetect = true, cc = STUN, duration = 7450, refire = 2000, bossMatch = { Unitnames.Boss_Valanir_the_Restless } }, -- Soul Cage (Lich)
 
     [50182] = { avoid = true, interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Consuming Energy (Spellfiend)
 
@@ -515,7 +515,7 @@ LUIE.Data.AlertTable = {
 
     [3860] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 500, cc = STAGGER }, -- Pulverize (Lurcher)
     [3855] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1500, cc = STUN }, -- Crushing Limbs (Lurcher)
-    [3767] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN, duration = 5600 }, -- Choking Pollen (Lurcher)
+    [3767] = { avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1100, result = ACTION_RESULT_BEGIN, duration = 5600, bossMatch = { Unitnames.Boss_Limbscather, Unitnames.Boss_Heart_of_Rootwater, Unitnames.Boss_Ravenous_Loam } }, -- Choking Pollen (Lurcher)
 
     [5559] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2200, neverShowInterrupt = true }, -- Icy Geyser (Nereid)
     [5540] = { avoid = true, interrupt = true, priority = 3, auradetect = true, duration = 8000, cc = SNARE }, -- Hurricane (Nereid)
@@ -535,7 +535,7 @@ LUIE.Data.AlertTable = {
     [89102] = { summon = true, priority = 2, auradetect = true, fakeName = "" }, -- Summon Beast (Spriggan)
 
     [9346] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 5000 }, -- Strangle (Strangler)
-    [9322] = { avoid = true, priority = 3, auradetect = true, duration = 2000 }, -- Poisoned Ground (Strangler)
+    [9322] = { avoid = true, priority = 3, auradetect = true, duration = 2000, bossMatch = { Unitnames.Boss_Bone_Grappler, Unitnames.Boss_Dirge_of_Thorns } }, -- Poisoned Ground (Strangler)
     [9321] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 500, cc = STUN, duration = 700 }, -- Grapple (Strangler)
 
     [44736] = { block = true, dodge = true, priority = 2, eventdetect = true, refire = 2000, result = ACTION_RESULT_BEGIN, duration = 2150 }, -- Swinging Cleave (Troll)
@@ -608,7 +608,8 @@ LUIE.Data.AlertTable = {
     --------------------------------------------------
 
     -- World Boss - Seaside Scarp Camp
-    [84048] = { avoid = true, priority = 1, auradetect = true, cc = SNARE, fakeName = Unitnames.Boss_Quenyas }, -- Quenyas (Lich)
+    [84048] = { avoid = true, priority = 1, auradetect = true, cc = SNARE, fakeName = Unitnames.Boss_Quenyas }, -- Defiled Ground (Quenyas)
+    [83776] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.Boss_Quenyas, refire = 1000 }, -- Dark Summons (Quenyas)
     [84283] = { block = true, dodge = true, priority = 1, eventdetect = true, fakeName = Unitnames.Boss_Oskana, cc = STAGGER, duration = 1500 }, -- Coursing Bones (Oskana)
     [84286] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, fakeName = Unitnames.Boss_Oskana }, -- -- Wake the Dead (Oskana)
 
@@ -644,6 +645,40 @@ LUIE.Data.AlertTable = {
     [83180] = { destroy = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Molten Pillar (Big Ozur)
     [83206] = { block = true, avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 1000, bossName = true }, -- Molten Shackles (Ice Pillar)
     [83191] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true, cc = STUN, duration = 3800 }, -- Shaman Smash (Big Ozur)
+
+    -- World Boss - The Wolf's Camp
+    [10149] = { power = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 5000 }, -- Guards Transform (Lieutenant Bran, Annyce)
+
+    -- World Boss - Trapjaw's Cove
+    [83945] = { block = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 1200, cc = STUN, bossName = true }, -- Tail Sweep (Trapjaw)
+    [84028] = { interrupt = true, avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 2000, bossName = true, postCast = 4000 }, -- Impending Storm (Trapjaw)
+    [84169] = { block = true, bs = true, dodge = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = STUN, bossName = true }, -- Rolling Thunder (Trapjaw)
+    [83925] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = STUN, duration = 1700 }, -- Trapping Bolt (Trapjaw)
+    [83930] = { power = true, priority = 1, auradetect = true, noSelf = true }, -- Trapping Bolt (Trapjaw)
+
+    -- World Boss - Spider Nest
+    [84150] = { summon = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossName = true }, -- Call of the Brood (Old Widow Silk)
+    [84151] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, cc = STUN, duration = 400 }, -- Constricting Webs (Old Widow Silk)
+    [84548] = { block = true, avoid = true, priority = 1, eventdetect = true, refire = 1200, result = ACTION_RESULT_BEGIN, duration = 5100, bossName = true }, -- Venom Spray (Old Widow Silk)
+    --[84159] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 100, postCast = 500 }, -- Spit Poison (Old Widow Silk)
+    [84161] = { avoid = true, priority = 1, auradetect = true, refire = 10000, bossName = true, hiddenDuration = 10000 }, -- Spit Poison (Old Widow Silk)
+
+    -- World Boss - Mudcrab Beach
+    [82965] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 7233, bossName = true }, -- Crabuchet (Titanclaw)
+
+    -- World Boss - Valeguard Tower
+    [84037] = { block = true, avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 700, bossName = true, cc = STUN }, -- Petrifying Bellow (Menhir Stoneskin)
+    [84292] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 500, cc = STUN }, -- Graven Slash (Menhir Stoneskin)
+    [84014] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Awaken (Menhir Stoneskin)
+    [84029] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Awaken (Menhir Stoneskin)
+    [84417] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Awaken (Menhir Stoneskin)
+
+    -- World Boss - Magdelena's Haunt
+    --[2786] = { interrupt = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 1250, duration = 6100 }, -- Steal Essence (Hag)
+    --[2821] = { block = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 700, cc = STUN }, -- Luring Snare (Hag)
+    [83922] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 500, postCast = 1500 }, -- Curse of Terror (Magdelena)
+    [83880] = { power = true, priority = 1, auradetect = true, duration = 8000 }, -- Reflective Shadows (Magdelena)
+    [83227] = { summon = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true }, -- Dark Resurrection (Magdelena)
 
     --------------------------------------------------
     -- MAIN QUEST ------------------------------------
@@ -782,10 +817,10 @@ LUIE.Data.AlertTable = {
     [53313] = { avoid = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1500 }, -- Volley (Sovngarde Slayer)
 
     [53286] = { interrupt = true, block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crushing Shock (Sovngarde Icemage)
-    [53274] = { avoid = true, priority = 1, auradetect = true, bossMatch = Unitnames.Boss_Katti_Ice_Turner }, -- Unstable Wall of Frost (Sovngarde Icemage)
+    [53274] = { avoid = true, priority = 1, auradetect = true, bossMatch = { Unitnames.Boss_Katti_Ice_Turner } }, -- Unstable Wall of Frost (Sovngarde Icemage)
 
     [53250] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Wrecking Blow (Yavni Frost-Skin)
-    [53301] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossMatch = Unitnames.Boss_Katti_Ice_Turner }, -- Icy Pulsar (Katti Ice-Turner)
+    [53301] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_BEGIN, bossMatch = { Unitnames.Boss_Katti_Ice_Turner } }, -- Icy Pulsar (Katti Ice-Turner)
 
     -- Stage 3 - The Marsh
     [8244] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Devastate (Corprus Husk)
@@ -797,7 +832,7 @@ LUIE.Data.AlertTable = {
     [56796] = { power = true, priority = 1, auradetect = true }, -- Bound Aegis (Dragonclaw Hedge Wizard)
 
     [53613] = { power = true, priority = 1, auradetect = true }, -- Thundering Presence (Nak'tah)
-    [53624] = { avoid = true, priority = 1, auradetect = true, bossMatch = Unitnames.Boss_Nak_tah }, -- Lightning Flood (Nak'tah)
+    [53624] = { avoid = true, priority = 1, auradetect = true, bossMatch = { Unitnames.Boss_Nak_tah } }, -- Lightning Flood (Nak'tah)
     [53659] = { block = true, avoid = true, interrupt = true, priority = 1, auradetect = true }, -- Power Overload Heavy Attack (Nak'tah)
 
     -- Stage 4 - The Slave Pit
@@ -806,7 +841,7 @@ LUIE.Data.AlertTable = {
 
     [54056] = { power = true, priority = 1, auradetect = true, refire = 500 }, -- Molten Armaments (Earthen Heart Knight)
     [54065] = { power = true, priority = 1, auradetect = true, ignoreRefresh = true }, -- Igneous Shield (Earthen Heart Knight)
-    [54077] = { avoid = true, priority = 1, auradetect = true, bossMatch = Unitnames.Boss_Earthen_Heart_Knight }, -- Cinder Storm (Earthen Heart Knight)
+    [54077] = { avoid = true, priority = 1, auradetect = true, bossMatch = { Unitnames.Boss_Earthen_Heart_Knight } }, -- Cinder Storm (Earthen Heart Knight)
     [54053] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Stone Giant (Earthen Heart Knight)
     [54083] = { power = true, priority = 1, auradetect = true }, -- Corrosive Armor (Earthen Heart Knight)
     [54067] = { block = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Fossilize (Earth Heart Knight)
@@ -816,7 +851,7 @@ LUIE.Data.AlertTable = {
     [54411] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Anka_Ra_Shadowcaster }, -- Celestial Blast (Anka-Ra Shadowcaster)
     [54404] = { unmit = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.NPC_Anka_Ra_Shadowcaster }, -- Celestial Blast (Anka-Ra Shadowcaster)
     [52897] = { avoid = true, priority = 1, auradetect = true, bossName = true }, -- Standard of Might (Anal'a Tu'wha)
-    [52891] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossMatch = Unitnames.Boss_Anala_tuwha }, -- Flames of Oblivion (Anal'a Tu'wha)
+    [52891] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossMatch = { Unitnames.Boss_Anala_tuwha } }, -- Flames of Oblivion (Anal'a Tu'wha)
 
     -- Stage 6 - The Grove
     [54608] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Drain Resource (Pacthunter Ranger)
@@ -832,11 +867,11 @@ LUIE.Data.AlertTable = {
 
     [52907] = { block = true, dodge = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Dark Flare (Shadow Knight)
     [52912] = { interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Purifying Light (Shadow Knight)
-    [52927] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.Boss_Shadow_Knight, bossMatch = Unitnames.Boss_Hiath_the_Battlemaster }, -- Solar Disturbance (Shadow Knight)
+    [52927] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.Boss_Shadow_Knight, bossMatch = { Unitnames.Boss_Hiath_the_Battlemaster } }, -- Solar Disturbance (Shadow Knight)
 
     [54792] = { block = true, dodge = true, interrupt = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Crystal Blast (Dark Mage)
-    [54819] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossMatch = Unitnames.Boss_Dark_Mage }, -- Daedric Minefield (Dark Mage)
-    [54829] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.Boss_Dark_Mage, bossMatch = Unitnames.Boss_Hiath_the_Battlemaster }, -- Suppression Field (Dark Mage)
+    [54819] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, bossMatch = { Unitnames.Boss_Dark_Mage } }, -- Daedric Minefield (Dark Mage)
+    [54829] = { avoid = true, priority = 1, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, fakeName = Unitnames.Boss_Dark_Mage, bossMatch = { Unitnames.Boss_Hiath_the_Battlemaster } }, -- Suppression Field (Dark Mage)
     [54809] = { interrupt = true, priority = 1, auradetect = true }, -- Dark Deal (Dark Mage)
 
     -- Stage 8 - Steamworks

@@ -1206,7 +1206,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
             end
 
         --Debug
-        --GameTooltip:SetAbilityId(53966)
+        --GameTooltip:SetAbilityId(84160)
 
         -- END TEMPORARY DEBUG FUNCTION HERE
         -- NORMAL BEHAVIOR:
@@ -2045,7 +2045,7 @@ function SpellCastBuffs.OnCombatEventIn( eventCode, result, isError, abilityName
 
         -- Override name or icon based off unitName
         if Effects.EffectOverrideByName[abilityId] then
-            unitName = zo_strformat("<<t:1>>", unitName)
+            local unitName = zo_strformat("<<t:1>>", sourceName)
             if Effects.EffectOverrideByName[abilityId][unitName] then
                 if Effects.EffectOverrideByName[abilityId][unitName].hide then
                     return

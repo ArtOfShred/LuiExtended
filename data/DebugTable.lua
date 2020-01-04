@@ -8165,7 +8165,7 @@ LUIE.DebugAuras = {
     [88593] = true, -- Summon the Dead -- Necromancer
     --[88617] = true, -- Summon the Dead -- Necromancer
     [88594] = true, -- Summon the Dead -- Necromancer
-    --[88595] = true, -- Summon the Dead -- Necromancer
+    [88595] = true, -- Summon the Dead -- Necromancer
     --[88596] = true, -- Summon the Dead -- Necromancer
     [88612] = true, -- Summon the Dead -- Necromancer
     [88597] = true, -- Summon the Dead -- Necromancer
@@ -9456,6 +9456,7 @@ LUIE.DebugAuras = {
     [13382] = true, -- Devour -- Giant Spider
     [20541] = true, -- Devour -- Giant Spider
     [13381] = true, -- Devour -- Giant Spider
+    [13380] = true, -- Devour -- Giant Spider
 
     [9225] = true, -- Bite -- Giant Wasp
     [9226] = true, -- Sting -- Giant Wasp
@@ -10222,6 +10223,103 @@ LUIE.DebugAuras = {
     [83192] = true, -- Shaman Smash (Big Ozur)
     [83193] = true, -- Shaman Smash (Big Ozur)
     [83194] = true, -- Shaman Smash (Big Ozur)
+
+    -- World Boss - The Wolf's Camp
+    [10149] = true, -- Guards Transform (Lieutenant Bran, Annyce)
+    [38331] = true, -- Werewolf Regen (Lieutenant Bran, Annyce)
+    [38330] = true, -- Houndsman Stun (Lieutenant Bran, Annyce)
+    [38334] = true, -- Houndsman Delay (Lieutenant Bran, Annyce)
+    [26260] = true, -- Salazar Transform! (Salazar the Wolf)
+    [38326] = true, -- Werewolf Regen (Salazar the Wolf)
+    [38325] = true, -- Houndsman Stun (Salazar the Wolf)
+    [38328] = true, -- Houndsman Delay (Salazar the Wolf)
+
+    -- World Boss - Balefire Island
+    [49294] = true, -- Rise (Grivier's Monstrosity)
+
+    -- World Boss - Trapjaw's Cove
+    [83945] = true, -- Tail Sweep (Trapjaw)
+    [83947] = true, -- Tail Sweep (Trapjaw)
+    [83948] = true, -- Tail Sweep (Trapjaw)
+    [83951] = true, -- Tail Sweep (Trapjaw)
+    [84028] = true, -- Impending Storm (Trapjaw)
+    [84031] = true, -- Impending Storm (Trapjaw)
+    [84032] = true, -- Impending Storm (Trapjaw)
+    [84033] = true, -- Impending Storm (Trapjaw)
+    [84034] = true, -- Impending Storm (Trapjaw)
+    [84035] = true, -- Impending Storm (Trapjaw)
+    [84036] = true, -- Impending Storm (Trapjaw)
+    [84030] = true, -- Impending Storm (Trapjaw)
+    [84168] = true, -- Rolling Thunder (Trapjaw)
+    [84169] = true, -- Rolling Thunder (Trapjaw)
+    [84175] = true, -- Focused Charge (Trapjaw)
+    [84176] = true, -- Focused Charge (Trapjaw)
+    [84182] = true, -- Charge (Trapjaw)
+    [84177] = true, -- Charge (Trapjaw)
+    [84179] = true, -- Rolling Thunder (Trapjaw)
+    [84173] = true, -- Rolling Thunder (Trapjaw)
+    [84172] = true, -- Charge (Trapjaw)
+    [84171] = true, -- Charge (Trapjaw)
+    [83925] = true, -- Trapping Bolt (Trapjaw)
+    [83930] = true, -- Trapping Bolt (Trapjaw)
+    [83932] = true, -- Remove Bolt (Trapjaw)
+    [83926] = true, -- Remove Bolt (Trapjaw)
+    [83928] = true, -- Arx_boss2_KDrecover (Trapjaw)
+    [83929] = true, -- Dummy (Trapjaw)
+    [25763] = true, -- Remove Bolt (Trapjaw)
+
+    -- World Boss - Spider Nest
+    [84150] = true, -- Call of the Brood (Old Widow Silk)
+    [84564] = true, -- Summon Swarm (Old Widow Silk)
+    [84563] = true, -- Summon Swarm (Old Widow Silk)
+    [84151] = true, -- Constricting Webs (Old Widow Silk)
+    [84155] = true, -- Constricting Webs (Old Widow Silk)
+    [84608] = true, -- Web Wrap (Old Widow Silk)
+    [84548] = true, -- Venom Spray (Old Widow Silk)
+    [84549] = true, -- Venom Spray (Old Widow Silk)
+    [84159] = true, -- Spit Poison (Old Widow Silk)
+    [84162] = true, -- Spit Poison (Old Widow Silk)
+    [84161] = true, -- Spit Poison (Old Widow Silk)
+    [84160] = true, -- Spit Poison (Old Widow Silk)
+
+    -- World Boss - Mudcrab Beach
+    [82965] = true, -- Crabuchet (Titanclaw)
+    [82969] = true, -- Crabuchet (Titanclaw)
+    [83003] = true, -- Crabuchet (Titanclaw)
+    [83475] = true, -- Crabuchet (Titanclaw)
+    [82980] = true, -- Crabuchet (Titanclaw)
+    [82997] = true, -- Crabuchet (Titanclaw)
+    [82981] = true, -- Crabuchet (Titanclaw)
+    [82983] = true, -- Crabuchet (Titanclaw)
+    [82970] = true, -- Crabuchet (Titanclaw)
+    [83000] = true, -- Crabuchet (Titanclaw)
+    [83021] = true, -- Crabuchet (Titanclaw)
+
+    -- World Boss - Abandoned Farm
+    [27971] = true, -- Burn the House (Scamp)
+    [27933] = true, -- Burn the House (Scamp)
+
+    -- World Boss - Valeguard Tower
+    [84039] = true, -- Stone Swipe (Menhir Stoneskin)
+    [84040] = true, -- Stone Swipe (Menhir Stoneskin)
+    [84041] = true, -- Stone Swipe (Menhir Stoneskin)
+    [84037] = true, -- Petrifying Bellow (Menhir Stoneskin)
+    [84038] = true, -- Petrifying Bellow (Menhir Stoneskin)
+    [84580] = true, -- Petrifing Bellow (Menhir Stoneskin)
+    [84292] = true, -- Graven Slash (Menhir Stoneskin)
+    [84293] = true, -- Stun (Menhir Stoneskin)
+    [84294] = true, -- Graven Slash (Menhir Stoneskin)
+    [84014] = true, -- Awaken (Menhir Stoneskin)
+    [84029] = true, -- Awaken (Menhir Stoneskin)
+    [84417] = true, -- Awaken (Menhir Stoneskin)
+    [85461] = true, -- Awaken (Menhir Stoneskin)
+
+    -- World Boss - Magdelena's Haunt
+    [83924] = true, -- Shadow Bolt (Magdelena)
+    [83922] = true, -- Curse of Terror (Magdelena)
+    [83923] = true, -- Curse of Terror (Magdelena)
+    [83880] = true, -- Reflective Shadows (Magdelena)
+    [83227] = true, -- Dark Resurrection (Magdelena)
 
     -------------------------------------
     -- MAIN QUEST -----------------------

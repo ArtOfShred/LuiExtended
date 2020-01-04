@@ -581,6 +581,25 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
     local abilityIcon = GetAbilityIcon(abilityId)
     unitName = zo_strformat("<<t:1>>", unitName)
 
+    -- Override unitName here if we utilize a fakeName / bossName
+    if Alerts[abilityId].fakeName then
+        unitName = Alerts[abilityId].fakeName
+    end
+    if Alerts[abilityId].bossName and DoesUnitExist('boss1') then
+        unitName = zo_strformat("<<t:1>>", GetUnitName('boss1'))
+    end
+
+    if Alerts[abilityId].bossMatch then
+        for x = 1, #Alerts[abilityId].bossMatch do
+            for i = 1, 4 do
+                local bossName = DoesUnitExist('boss' .. i) and zo_strformat("<<t:1>>", GetUnitName('boss' .. i)) or ""
+                if bossName == Alerts[abilityId].bossMatch[x] then
+                    unitName = Alerts[abilityId].bossMatch[x]
+                end
+            end
+        end
+    end
+
     -- Handle effects that override by UnitName
     if Effects.EffectOverrideByName[abilityId] then
         if Effects.EffectOverrideByName[abilityId][unitName] then
@@ -602,23 +621,6 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
             end
             if Effects.MapDataOverride[abilityId][index].icon then
                 abilityIcon = Effects.MapDataOverride[abilityId][index].icon
-            end
-        end
-    end
-
-    -- Override unitName here if we utilize a fakeName / bossName
-    if Alerts[abilityId].fakeName then
-        unitName = Alerts[abilityId].fakeName
-    end
-    if Alerts[abilityId].bossName and DoesUnitExist('boss1') then
-        unitName = zo_strformat("<<t:1>>", GetUnitName('boss1'))
-    end
-
-    if Alerts[abilityId].bossMatch then
-        for i = 1, 4 do
-            local bossName = DoesUnitExist('boss' .. i) and zo_strformat("<<t:1>>", GetUnitName('boss' .. i)) or ""
-            if bossName == Alerts[abilityId].bossMatch then
-                unitName = Alerts[abilityId].bossMatch
             end
         end
     end
